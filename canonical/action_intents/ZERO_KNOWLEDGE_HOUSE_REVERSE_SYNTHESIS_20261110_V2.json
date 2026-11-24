@@ -1,0 +1,160 @@
+{
+  "action_id": "ZERO_KNOWLEDGE_HOUSE_REVERSE_SYNTHESIS_20261110_V2",
+  "action_intent_id": "ZERO_KNOWLEDGE_HOUSE_REVERSE_SYNTHESIS_20261110_V2",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE walked first: witness inversion selects existing values (0/16), repo-native mining widens alphabet but still selects, CEGIS bound capabilities exist but do not propagate backward through call chains from expected output, Petri-net composition does not exist as unified typed graph, tomography snapshot/diff exists only as file restore not as Mealy inference. SYNTHESIZE_NEW_PRIMITIVE is the minimal new mechanism reusing all organs unchanged.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/reverse_execution_synthesis_v1.py",
+      "canonical/tests/test_reverse_execution_synthesis_v1.py",
+      "ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V2.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::SELECTION_CANNOT_CREATE_NEW_DISTINCTIONS_WITNESS_INVERSION_REFUSES_ALL_16_REAL_ATTEMPTS_BECAUSE_REQUIRED_VALUE_IS_NEW_CONTENT",
+  "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "SELECTION_CANNOT_CREATE_NEW_DISTINCTIONS_WITNESS_INVERSION_REFUSES_ALL_16_REAL_ATTEMPTS_BECAUSE_REQUIRED_VALUE_IS_NEW_CONTENT",
+  "date": "2026-11-10",
+  "deleted_or_bypassed_paths": [
+    "forward enumeration over mined vocabulary which is exponential",
+    "LLM token guessing which is forbidden K3",
+    "per-bug backward rules which are rule accumulation",
+    "full SMT solver dependency which is heavy and unnecessary",
+    "full Petri net over all modalities which is over-engineering",
+    "full a11y DOM IPC tomography which needs VM browser"
+  ],
+  "expected_parent_change": "canonical/swe_kernel/reverse_execution_synthesis_v1.py (backward propagation + call-chain recursion + CEGIS(T) lite + Petri net + tomography + delta-debug) + canonical/tests/test_reverse_execution_synthesis_v1.py (16 tests) + ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V2.md (iteration report)",
+  "expected_parent_frontier_change": "BACKWARD_SYNTHESIS_COMPUTES_MISSING_BODY_DIRECTLY__CEGIS_GENERALIZES_COUNTEREXAMPLES_INTO_CONSTRAINTS__PETRI_NET_CHAINS_GUI_SQL_PY_CLI_IN_ONE_SOLVE__TOMOGRAPHY_INFERS_MEALY_MACHINE_FROM_DIFFS__DELTA_DEBUG_MINIMIZES_FAILURES",
+  "explicit_user_authorization": [
+    "Build our own model with own weights architecture and agent that fully solves computer use",
+    "Zero model calls at runtime, zero-knowledge house, instant knowledge from project source",
+    "Hardest open tests only, honest baseline, single-experience and ablation tests",
+    "Never stop, never ask, research project first then web, ultimate minimal solution"
+  ],
+  "falsification_condition": "FALSIFIED if any of the 16 tests fails, if backward computes a wrong value on exact arithmetic, if CEGIS solves with concrete-only feedback, if Petri net picks the expensive direct edge, if tomography misses a SQLite change, if a file is left modified, or if the report claims a benchmark score the receipt does not contain",
+  "generic_repair_from_single_probe": true,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. Backward synthesis covers single-return arithmetic/comparison/call chains; forecast stays at 1/100 until measured against real multi-function commits and live Harbor/SWE runs on external VM.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "16 tests pass: backward inverts add/mul exactly, refuses non-exact/two-unknowns, propagates through call chain, repairs multi-function bug end-to-end with file restored; CEGIS synthesizes c0=7 with generalized constraints in <=8 iters and refuses unsatisfiable; Petri net chains GUI->SQL->PY->CLI at cost 5 beating direct 10; tomography detects SQLite change and infers deterministic Mealy table; delta-debug minimizes 20->[7,13]; self-play admission roundtrip ADMITs backward fix. Combined 54 passed with mining/witness/consistency.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "next_step": "MULTI_FUNCTION_DATA_FLOW_GRAPHS_PLUS_SEMANTIC_IR_EQUIVALENCE_PLUS_EXECUTABLE_MENTAL_MODELS__TRACE_ENTRY_TO_ROOT_CAUSE_ACROSS_FILES__UNIFY_FOR_LOOP_AND_POINTER_WALK__SIMULATE_OS_NETWORK_DB_MEMORY_BEFORE_EXECUTING__THEN_CONFINEMENT_QUALIFICATION_FOR_LIVE_HARBOR_SWE_RUNS",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/reverse_execution_synthesis_v1.py",
+    "canonical/tests/test_reverse_execution_synthesis_v1.py",
+    "ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V2.md",
+    "canonical/action_intents/ZERO_KNOWLEDGE_HOUSE_REVERSE_SYNTHESIS_20261110_V2.json"
+  ],
+  "prior_work_reused": "witness_inversion_v1 (checker discipline, 0/16 refusals); repo_native_mining_v1 (vocabulary, splice, admission gate, CoW rollouts); incremental_semantic_graph_v1 (call sites, 0.35s warm); finite_capability_diagnosis.select_probe via rule_scope_learning_v1 (now wired via crystallizer narrow_rule_scope); operand_invention_v1 (vocabulary from environment); effect_contract_composition_v1 (P/O/A/V/F no-op refusal); causal_trace_to_skill_compiler_v1 (layer elevator, anti-unification)",
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "forward enumeration",
+      "LLM token guessing",
+      "per-bug backward rules",
+      "full SMT solver",
+      "full Petri net",
+      "full a11y tomography"
+    ],
+    "expected_parent_frontier_change": "BACKWARD_SYNTHESIS_COMPUTES_MISSING_BODY_DIRECTLY__CEGIS_GENERALIZES_COUNTEREXAMPLES_INTO_CONSTRAINTS__PETRI_NET_CHAINS_GUI_SQL_PY_CLI_IN_ONE_SOLVE__TOMOGRAPHY_INFERS_MEALY_MACHINE_FROM_DIFFS__DELTA_DEBUG_MINIMIZES_FAILURES",
+    "expected_parent_level_state_change": "BACKWARD_SYNTHESIS_COMPUTES_MISSING_BODY_DIRECTLY__CEGIS_GENERALIZES_COUNTEREXAMPLES_INTO_CONSTRAINTS__PETRI_NET_CHAINS_GUI_SQL_PY_CLI_IN_ONE_SOLVE__TOMOGRAPHY_INFERS_MEALY_MACHINE_FROM_DIFFS__DELTA_DEBUG_MINIMIZES_FAILURES",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete forward enumeration as synthesis method",
+        "bypass search with backward computation",
+        "substitute generalized constraints for concrete-only feedback"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: what a set of observations determines is a fact about the action and the observations, not about the learner. Either backward inversion determines the missing operand or it does not.",
+      "surviving_causal_blocker": "Selection over existing values cannot create new content; witness inversion correctly refuses when required value is new. Backward computation is needed to create it."
+    },
+    "obs_capability": {
+      "capability_id": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+      "capability_name": "Reverse execution synthesis + CEGIS(T) lite + Petri net + tomography"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "selected": "SYNTHESIZE_NEW_PRIMITIVE"
+    }
+  },
+  "route_id": "COMPUTE_MISSING_BODY_BY_BACKWARD_PROPAGATION",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "BACKWARD_CONSTRAINT_PROPAGATION_THROUGH_SEMANTIC_IR_PLUS_CEGIS_GENERALIZED_CONSTRAINTS_PLUS_PETRI_NET_COMPOSITION",
+  "status": "PRODUCED",
+  "stop_condition": "BACKWARD_COMPUTES_MISSING_OPERAND_AND_CEGIS_SOLVES_NONTRIVIAL_CONSTANT_AND_PETRI_NET_CHAINS_FOUR_MODALITIES_OR_THE_GAP_IS_COUNTED_WITH_EVERY_ATTEMPT_IN_DENOMINATOR",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "false": [
+      "selection creates new distinctions",
+      "concrete-only feedback suffices for constants",
+      "modalities need separate planners"
+    ],
+    "p_correct": 0.2978,
+    "true": [
+      "backward inversion computes missing operands",
+      "generalized constraints converge faster than concrete blocking",
+      "unified typed graph chains modalities in one solve"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "verification": "python3 -m pytest canonical/tests/test_reverse_execution_synthesis_v1.py -v; python3 -m pytest canonical/tests/test_reverse_execution_synthesis_v1.py canonical/tests/test_repo_native_mining_v1.py canonical/tests/test_witness_inversion_v1.py canonical/tests/test_consistency_vs_equivalence_v1.py -q; python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/ZERO_KNOWLEDGE_HOUSE_REVERSE_SYNTHESIS_20261110_V2.json; python3 execution_guard/repo_integrity_guard_v1.py",
+  "weakens_existing_guard": false,
+  "action_summary": "Builds reverse execution synthesis (backward propagation + call-chain recursion), CEGIS(T) lite (generalized constraints), cross-modal Petri net (GUI/CLI/SQL/PY unified), tomography (snapshot diff + Mealy inference), delta-debug self-play. 16 tests pass; combined 54 passed. No benchmark score claimed; live runs need external VM."
+}
