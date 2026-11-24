@@ -60,8 +60,15 @@ jobs:
               trace = read(src_dir / 'agent' / 'brain_epistemic_trace.json')
               replay = read(dst_dir / 'agent' / 'replay.json')
               patch = (src_dir / 'agent' / 'model.patch').read_bytes()
+              events = trace.get('trace') or []
+              last = events[-1] if events and isinstance(events[-1], dict) else {}
               row = {
                   'task': task,
+                  'stop_reason': last.get('stop_reason'),
+                  'model_status': last.get('model_status'),
+                  'model_reason': last.get('model_reason'),
+                  'model_pass': last.get('model_pass'),
+                  'proposed_actions': last.get('proposed_actions'),
                   'producer_exception': src.get('exception_info'),
                   'regrade_exception': dst.get('exception_info'),
                   'trace_status': trace.get('status'),
