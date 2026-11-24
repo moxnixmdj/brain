@@ -1,0 +1,171 @@
+{
+  "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FINITE_CONTRACT_REPLAY__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "benchmark_score_authority": false,
+  "capability_credit_delta": 0,
+  "cli_decision": "K1_QUERY_REQUIRED__ASK_ONLY_THE_DECIDING_QUESTION",
+  "cli_packet_hash": "e2573b25b01866888dc73d4e36a3f2f569e0718dad2c6ba1f5171ac396f84b6b",
+  "date": "2026-11-24",
+  "event_name": "push",
+  "execution_authority": false,
+  "family_credit_delta": 0,
+  "github_actor": "moxnixmdj",
+  "github_repository": "moxnixmdj/brain",
+  "head_sha": "4a488af98d3daafb316f5c19ae3a53b2f0af1eb0",
+  "incremental_spend_usd": 0,
+  "independent_verified": true,
+  "measurement_checks": {
+    "cli_decision": true,
+    "cli_distinct_verifier": true,
+    "cli_exact_evpi_basis": true,
+    "cli_irrelevant_scan_deleted": true,
+    "cli_minimal_query_count": true,
+    "cli_question_derived": true,
+    "cli_zero_model_calls": true,
+    "cli_zero_network_calls": true,
+    "cli_zero_parameters": true,
+    "no_benchmark_score_authority": true,
+    "no_execution_authority": true,
+    "section_6_not_met": true,
+    "store_add_no_parameter_writes": true,
+    "store_add_removes_question": true,
+    "store_removal_restores_question": true,
+    "test_count": true
+  },
+  "new_reality_units_consumed": 0,
+  "not_verified": [
+    "OSWorld 2.1 tasks",
+    "SWE-bench Pro V2 or HARD-51 tasks",
+    "Terminal-Bench 4.1 tasks",
+    "WebArena-Verified, DeepSearchQA, WideSearch or ClosureBench tasks",
+    "arbitrary natural-language purpose understanding",
+    "authored repair content",
+    "GUI or browser computer use",
+    "shipped-agent integration",
+    "section 6 terminal capability"
+  ],
+  "numeric_measurements": {
+    "contract_tests": 16,
+    "environment_actions_executed": 0,
+    "hard_benchmark_tasks_consumed": 0,
+    "knowledge_written_to_weights": 0,
+    "measurement_checks": 16,
+    "model_calls": 0,
+    "parameters_written": 0,
+    "pinned_blobs": 3,
+    "runtime_network_calls": 0,
+    "selected_queries": 1
+  },
+  "oidc_claims": {
+    "actor": "moxnixmdj",
+    "actor_id": "217246470",
+    "aud": "https://github.com/moxnixmdj/brain",
+    "event_name": "push",
+    "head_ref": "",
+    "iss": "https://token.actions.githubusercontent.com",
+    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml@refs/heads/arena/6f8ac9ce-brain",
+    "jti": "1a8b7197-7788-4765-9c5e-043e913e0b06",
+    "ref": "refs/heads/arena/6f8ac9ce-brain",
+    "repository": "moxnixmdj/brain",
+    "repository_id": "1364778274",
+    "run_attempt": "1",
+    "run_id": "45408866721",
+    "runner_environment": "github-hosted",
+    "sha": "4a488af98d3daafb316f5c19ae3a53b2f0af1eb0",
+    "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml@refs/heads/arena/6f8ac9ce-brain"
+  },
+  "oidc_jti": "1a8b7197-7788-4765-9c5e-043e913e0b06",
+  "pinned_blob_binding": {
+    "equal": true,
+    "expected_git_blob": {
+      "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
+      "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "e64204cffb1a7ae5043a77c1be153687fd63371e",
+      "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "03d195285cc60ec470566c993b6635410ea1a063"
+    },
+    "expected_sha256": {
+      "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "939f8a433f1f94c94b4be24cbb05f1baef3c0736728bf64fab30dde50c6fc2e4",
+      "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f",
+      "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "cd7978af65309a4ba9e562f2d7fbb8345b62e71d1de1e8bf22e408afc1269804"
+    },
+    "observed_git_blob": {
+      "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
+      "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "e64204cffb1a7ae5043a77c1be153687fd63371e",
+      "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "03d195285cc60ec470566c993b6635410ea1a063"
+    },
+    "observed_sha256": {
+      "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "939f8a433f1f94c94b4be24cbb05f1baef3c0736728bf64fab30dde50c6fc2e4",
+      "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f",
+      "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "cd7978af65309a4ba9e562f2d7fbb8345b62e71d1de1e8bf22e408afc1269804"
+    }
+  },
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "promotion_authority": false,
+  "rule": "VERIFICATION_APPLIES_ONLY_TO_EXACT_LISTED_BLOBS_AND_MEASUREMENTS__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+  "run_reference": {
+    "oidc_jti": "1a8b7197-7788-4765-9c5e-043e913e0b06",
+    "runner_attestation": "github-actions-oidc-token",
+    "workflow_run_attempt": 1,
+    "workflow_run_id": 45408866721,
+    "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45408866721"
+  },
+  "runner_arch": "X64",
+  "runner_environment": "github-hosted",
+  "runner_os": "Linux",
+  "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1",
+  "scope": "GOAL_DIRECTED_SUFFICIENT_KNOWING_V1_FINITE_CONTRACT_ONLY",
+  "section_6_verifications": 0,
+  "static_audit": {
+    "audits": {
+      "canonical/runtime/goal_directed_sufficient_knowing_v1.py": {
+        "imports": [
+          "__future__",
+          "argparse",
+          "hashlib",
+          "json",
+          "pathlib",
+          "typing"
+        ],
+        "marked": []
+      },
+      "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": {
+        "imports": [
+          "__future__",
+          "ast",
+          "canonical",
+          "json",
+          "pathlib"
+        ],
+        "marked": []
+      }
+    },
+    "distinct_verifier_guard_present": true,
+    "exact_evpi_present": true,
+    "marked": [],
+    "store_empty": true
+  },
+  "status": "RUNNER_OWNED_OIDC_ATTESTED_GOAL_DIRECTED_SUFFICIENT_KNOWING_CONTRACT_REPLAY__ZERO_CREDIT",
+  "terminal_credit_delta": 0,
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "verified": [
+    "EXACT_PINNED_BLOBS_BOUND",
+    "ZERO_MODEL_ZERO_NETWORK_STDLIB_IMPORT_SURFACE",
+    "EXTERNAL_STORE_EMPTY_AND_EDITABLE_WITHOUT_RETRAINING",
+    "SIXTEEN_FROZEN_CONTRACT_TESTS_PASS",
+    "EXACT_EVPI_MINIMAL_QUESTION_SELECTION",
+    "QUESTION_DERIVED_FROM_ACTION_PARTITION",
+    "IRRELEVANT_SCAN_DELETED",
+    "DISTINCT_VERIFIER_REQUIRED",
+    "OIDC_RUN_REFERENCE_BOUND",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45408866721",
+  "workflow_job": "contract_replay",
+  "workflow_name": "Zero-model goal-directed sufficient-knowing runner",
+  "workflow_path": ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml",
+  "workflow_ref": "refs/heads/arena/6f8ac9ce-brain",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 45408866721,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45408866721"
+}
