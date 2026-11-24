@@ -1,0 +1,338 @@
+{
+  "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_HARNESS_ATTEMPT__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "benchmark_score_authority": false,
+  "borrowed_outputs": false,
+  "capability_credit_delta": 0,
+  "date": "2026-11-24",
+  "event_name": "push",
+  "execution_authority": false,
+  "failed": [],
+  "family_credit_delta": 0,
+  "github_actor": "moxnixmdj",
+  "github_repository": "moxnixmdj/brain",
+  "harbor_exit_code": 0,
+  "harness_verified_trials": [
+    "terminal-bench/fin-saccr-rwa",
+    "terminal-bench/hof-topology-interpenetration",
+    "terminal-bench/takens-embedding-lean"
+  ],
+  "head_sha": "c5a486ed7bda57cfab4d116ba0f02588a93c9f37",
+  "hidden_test_reading": false,
+  "incremental_spend_usd": 0,
+  "new_reality_units_consumed": 3,
+  "numeric_measurements": {
+    "failed_trials": 0,
+    "hard_benchmark_tasks_consumed": 3,
+    "harness_verified_trials": 3,
+    "marked_import_groups": 0,
+    "model_calls": 0,
+    "pinned_images_pulled": 6,
+    "runtime_network_calls": 0,
+    "source_bindings": 4,
+    "task_reward_vectors_present": 3,
+    "tasks_selected": 3,
+    "trial_results_present": 3,
+    "unverified_trials": 0
+  },
+  "oidc_checks": {
+    "audience": true,
+    "event_name": true,
+    "github_hosted": true,
+    "issuer": true,
+    "ref": true,
+    "repository": true,
+    "run_attempt": true,
+    "run_id": true,
+    "sha": true,
+    "workflow_path": true
+  },
+  "oidc_claims": {
+    "actor": "moxnixmdj",
+    "actor_id": "217246470",
+    "aud": "https://github.com/moxnixmdj/brain",
+    "event_name": "push",
+    "head_ref": "",
+    "iss": "https://token.actions.githubusercontent.com",
+    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-tb41-cpu-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain",
+    "jti": "ad1a6e74-5e0f-42bf-9ac1-4be3f61d03d1",
+    "ref": "refs/heads/arena/6f8ac9ce-brain",
+    "repository": "moxnixmdj/brain",
+    "repository_id": "1364778274",
+    "run_attempt": "1",
+    "run_id": "45306545636",
+    "runner_environment": "github-hosted",
+    "sha": "c5a486ed7bda57cfab4d116ba0f02588a93c9f37",
+    "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-tb41-cpu-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain"
+  },
+  "pinned_substrates": {
+    "agent_import_path": "canonical.harbor.brain_zero_model_agent_v1:ZeroModelBrainAgent",
+    "harbor_version": "0.27.0",
+    "model_cli_args": 0,
+    "prebuilt_manifest_sha256": "49a2b9ce70dbbb957f3eaf74c737ccb8c6d68b3167d4ccfb5c58762a9726b289",
+    "prebuilt_tar_sha256": "c8bc0fea10af116061069248595c820d6da927652df1049ec834c6d98a6c12aa",
+    "python_version": "3.12.16",
+    "terminal_bench_release_tag": "v4.1.0",
+    "terminal_bench_source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+    "workflow_git_blob_sha": "43e02c131591ff4bb7b8a4d1f23b56bf893f3767"
+  },
+  "producer_cognition_model_dependency_count": 0,
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+  "promotion_authority": false,
+  "pulled_images": {
+    "count": 6,
+    "refs": [
+      "harborframework/terminal-bench:takens-embedding-lean-environment-fcb45ec9f5e257fc@sha256:ae08a40268fac519bbf81be7e38424ae3d8e8949c76c3430c8b68eec93a92a29",
+      "harborframework/terminal-bench:takens-embedding-lean-verifier-5d73d07a692427e4@sha256:fe1b774eee23bfca24aaa1686c2e9b662ad6690d698a7bbcd054e59ed4e2beb4",
+      "harborframework/terminal-bench:fin-saccr-rwa-environment-2b3426a115c87bef@sha256:99da0ead996b32412b132ecc59fee12d065d61c7d54738e1613cbd0b63f7e066",
+      "harborframework/terminal-bench:fin-saccr-rwa-verifier-a716a60312503fbd@sha256:57ef298bc312a6b0e2f8aaf31b27fee1b73912c3c04f9eaaa856088ffd0b75ec",
+      "harborframework/terminal-bench:hof-topology-interpenetration-environment-7f2225f69353e548@sha256:a758f32e5d39c06c65819d54622e0212c65f7a00191e32176612377cc3b97c1d",
+      "harborframework/terminal-bench:hof-topology-interpenetration-verifier-19ef14306303fb31@sha256:cc54700dda4c50c330cc714b49143a8ee0e2f58999e5c24348f74f6582bf1b65"
+    ],
+    "schema": "BRAIN_TB41_PINNED_IMAGE_PULLS_V1"
+  },
+  "reward_log": {
+    "benchmark_score_authority": false,
+    "date": "2026-11-24",
+    "harbor_exit_code": 0,
+    "harbor_version": "0.27.0",
+    "job_name": "brain-no-inference-tb41-cpu",
+    "job_result_path": "/tmp/harbor_jobs/brain-no-inference-tb41-cpu/result.json",
+    "job_result_sha256": "b18af8b7e17101d2a17d0339d1d9cfcd238035766a410e155872bd2ae6cef492",
+    "note": "Per-trial reward vectors are harness diagnostics, not a benchmark score and not capability credit.",
+    "release_tag": "v4.1.0",
+    "rows": [
+      {
+        "agent_name": "brain-no-inference-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "aa515b7a95bab95f8cf439f1bc4f7be1686ec88c2e0cd30ba49f9c4114cadac6",
+        "task_name": "terminal-bench/fin-saccr-rwa",
+        "trial_name": "fin-saccr-rwa__TAWJvNK"
+      },
+      {
+        "agent_name": "brain-no-inference-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "352dabcdd3d0a65f36e3c924cf02691d67cbf5bef31d5d650f9a5864aefc89f7",
+        "task_name": "terminal-bench/hof-topology-interpenetration",
+        "trial_name": "hof-topology-interpenetration__KNnWUX9"
+      },
+      {
+        "agent_name": "brain-no-inference-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "5681141d4faa384999a80df7e244a2386a4936001fd14de6616c71e02e0ce769",
+        "task_name": "terminal-bench/takens-embedding-lean",
+        "trial_name": "takens-embedding-lean__igtnfjB"
+      }
+    ],
+    "schema": "BRAIN_TB41_CPU_REWARD_LOG_20261124_V1",
+    "source": "HARBOR_RESULT_JSON",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+    "task_selected_count": 3,
+    "trial_results_present": 3
+  },
+  "reward_log_git_blob_sha": "dc63bfbe631a0f848161497fd64eb355a91f8252",
+  "reward_log_sha256": "877a17a3611d8cc467df33a65a9c45e4abb58c30e0c327804482701882f66899",
+  "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_AND_SELECTED_TASK_SET__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+  "run_reference": {
+    "oidc_jti": "ad1a6e74-5e0f-42bf-9ac1-4be3f61d03d1",
+    "runner_attestation": "github-actions-oidc-token",
+    "workflow_run_attempt": 1,
+    "workflow_run_id": 45306545636,
+    "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45306545636"
+  },
+  "runner_arch": "X64",
+  "runner_environment": "github-hosted",
+  "runner_os": "Linux",
+  "runner_owned": true,
+  "runtime_network_calls": 0,
+  "schema": "BRAIN_TB41_CPU_ZERO_MODEL_RUNNER_RECEIPT_20261124_V1",
+  "scope": "TERMINAL_BENCH_4_1_CPU_FRESH_SEEDED_SUBSET_ZERO_MODEL_HARNESS_ATTEMPT_ONLY",
+  "selected_task_names": [
+    "takens-embedding-lean",
+    "fin-saccr-rwa",
+    "hof-topology-interpenetration"
+  ],
+  "selection": {
+    "cpu_candidates": 58,
+    "eligible_pinned_no_sidecar_tasks": 47,
+    "excluded_seen_instruction_task_names": [
+      "batched-eval-parity",
+      "bun-sourcemap-leak",
+      "data-anonymization",
+      "html-js-filter",
+      "layout-config-recreation",
+      "math-eval-grader"
+    ],
+    "release_tag": "v4.1.0",
+    "run_id": "45306545636",
+    "schema": "BRAIN_TB41_CPU_FRESH_SELECTION_V1",
+    "selected_task_count": 3,
+    "selection_seed": "sha256(run_id:task_name)",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+    "tasks": [
+      {
+        "environment_digest": "sha256:ae08a40268fac519bbf81be7e38424ae3d8e8949c76c3430c8b68eec93a92a29",
+        "environment_image": "harborframework/terminal-bench:takens-embedding-lean-environment-fcb45ec9f5e257fc@sha256:ae08a40268fac519bbf81be7e38424ae3d8e8949c76c3430c8b68eec93a92a29",
+        "name": "takens-embedding-lean",
+        "selection_hash": "182c561f1a90bf38409ba380511acd80769fcc6a6cb3bdfd2aac5b6628b7bdba",
+        "task_checksum": "sha256:056774ee95c4d4b6ae1c2ede0a22aa30ecfbb56dcc8837b8d15c27f6f79d4b69",
+        "verifier_digest": "sha256:fe1b774eee23bfca24aaa1686c2e9b662ad6690d698a7bbcd054e59ed4e2beb4",
+        "verifier_image": "harborframework/terminal-bench:takens-embedding-lean-verifier-5d73d07a692427e4@sha256:fe1b774eee23bfca24aaa1686c2e9b662ad6690d698a7bbcd054e59ed4e2beb4"
+      },
+      {
+        "environment_digest": "sha256:99da0ead996b32412b132ecc59fee12d065d61c7d54738e1613cbd0b63f7e066",
+        "environment_image": "harborframework/terminal-bench:fin-saccr-rwa-environment-2b3426a115c87bef@sha256:99da0ead996b32412b132ecc59fee12d065d61c7d54738e1613cbd0b63f7e066",
+        "name": "fin-saccr-rwa",
+        "selection_hash": "18744c00f519e8b02ed02b2c934aef4ac7efafaa009c7eb6810e5fa8935a681f",
+        "task_checksum": "sha256:5b2103ac785d4a915207a2535fabf3815fea2c75cf4de01c79747a679facc2ad",
+        "verifier_digest": "sha256:57ef298bc312a6b0e2f8aaf31b27fee1b73912c3c04f9eaaa856088ffd0b75ec",
+        "verifier_image": "harborframework/terminal-bench:fin-saccr-rwa-verifier-a716a60312503fbd@sha256:57ef298bc312a6b0e2f8aaf31b27fee1b73912c3c04f9eaaa856088ffd0b75ec"
+      },
+      {
+        "environment_digest": "sha256:a758f32e5d39c06c65819d54622e0212c65f7a00191e32176612377cc3b97c1d",
+        "environment_image": "harborframework/terminal-bench:hof-topology-interpenetration-environment-7f2225f69353e548@sha256:a758f32e5d39c06c65819d54622e0212c65f7a00191e32176612377cc3b97c1d",
+        "name": "hof-topology-interpenetration",
+        "selection_hash": "18f4e41f3827cd9c0aab1e2a41031575c38b569013b3dbb7b1b2e980a6265468",
+        "task_checksum": "sha256:f8307547a260e56572e02e1d876c0b94af44be980aa7028ff1512c787d65e95a",
+        "verifier_digest": "sha256:cc54700dda4c50c330cc714b49143a8ee0e2f58999e5c24348f74f6582bf1b65",
+        "verifier_image": "harborframework/terminal-bench:hof-topology-interpenetration-verifier-19ef14306303fb31@sha256:cc54700dda4c50c330cc714b49143a8ee0e2f58999e5c24348f74f6582bf1b65"
+      }
+    ]
+  },
+  "selection_check": {
+    "environment_pinned": true,
+    "no_seen_instruction_task": true,
+    "selected_count": true,
+    "selection_seed": true,
+    "source_sha": true,
+    "verifier_pinned": true
+  },
+  "source_binding": {
+    "equal": true,
+    "expected": {
+      "canonical/harbor/brain_zero_model_agent_v1.py": "a827260e8651cda88c97c434bccee76c415ff970c60973defe376cc9b9ef461c",
+      "canonical/harbor/brain_zero_model_policy_v1.py": "8512119103ffbf3823954155e8dd65daf88eb7f9bc9e2da7074234e46422946c",
+      "canonical/harbor/select_tb41_cpu_tasks_v1.py": "190a5786c41b3f6470228013e57943fcc4984a2205c8f71296ca9e66d176f4c9",
+      "canonical/tests/test_brain_zero_model_harbor_integration_v1.py": "13849ed7418733bc6574fb97a7e58fc067de385d2e786bf6370cab09682292f7"
+    },
+    "observed": {
+      "canonical/harbor/brain_zero_model_agent_v1.py": "a827260e8651cda88c97c434bccee76c415ff970c60973defe376cc9b9ef461c",
+      "canonical/harbor/brain_zero_model_policy_v1.py": "8512119103ffbf3823954155e8dd65daf88eb7f9bc9e2da7074234e46422946c",
+      "canonical/harbor/select_tb41_cpu_tasks_v1.py": "190a5786c41b3f6470228013e57943fcc4984a2205c8f71296ca9e66d176f4c9",
+      "canonical/tests/test_brain_zero_model_harbor_integration_v1.py": "13849ed7418733bc6574fb97a7e58fc067de385d2e786bf6370cab09682292f7"
+    },
+    "schema": "BRAIN_NO_INFERENCE_SOURCE_BINDING_V1"
+  },
+  "source_verification": {
+    "checks": {
+      "image_count": true,
+      "release_tag": true,
+      "schema_version": true,
+      "source_sha": true,
+      "task_count": true,
+      "tasks_present": true
+    },
+    "prebuilt_manifest_sha256": "49a2b9ce70dbbb957f3eaf74c737ccb8c6d68b3167d4ccfb5c58762a9726b289",
+    "prebuilt_tar_sha256": "c8bc0fea10af116061069248595c820d6da927652df1049ec834c6d98a6c12aa",
+    "release_tag": "v4.1.0",
+    "schema": "BRAIN_TB41_SOURCE_VERIFICATION_V1",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440"
+  },
+  "static_audit": {
+    "generic_plan_is_safe": true,
+    "imports": {
+      "canonical/harbor/brain_zero_model_agent_v1.py": [
+        "__future__",
+        "canonical",
+        "harbor",
+        "hashlib",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "canonical/harbor/brain_zero_model_policy_v1.py": [
+        "__future__",
+        "hashlib",
+        "pathlib",
+        "re",
+        "shlex",
+        "typing"
+      ],
+      "canonical/harbor/select_tb41_cpu_tasks_v1.py": [
+        "__future__",
+        "argparse",
+        "hashlib",
+        "json",
+        "pathlib",
+        "shutil",
+        "tomllib",
+        "typing"
+      ],
+      "canonical/tests/test_brain_zero_model_harbor_integration_v1.py": [
+        "__future__",
+        "ast",
+        "asyncio",
+        "hashlib",
+        "importlib",
+        "json",
+        "pathlib",
+        "sys",
+        "tempfile",
+        "types",
+        "unittest"
+      ]
+    },
+    "known_task_names_absent_from_agent_and_policy": true,
+    "marked_imports": [],
+    "scan_is_safe": true,
+    "schema": "BRAIN_NO_INFERENCE_STATIC_AUDIT_V1",
+    "selector_reads_hidden_task_content": false,
+    "unresolved_purpose_refused": true
+  },
+  "status": "RUNNER_OWNED_HARD_BENCHMARK_ATTEMPT_RECORDED__ZERO_CREDIT__SECTION_6_NOT_MET",
+  "task_specific_answers_in_repo": false,
+  "terminal_credit_delta": 0,
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "unverified": [
+    "OSWorld 2.1 tasks",
+    "SWE-bench Pro V2 / HARD-51 tasks",
+    "remaining Terminal-Bench 4.1 CPU and GPU tasks",
+    "arbitrary natural-language purpose understanding",
+    "authored repair content",
+    "GUI or browser computer use"
+  ],
+  "verified": [
+    "EXACT_SOURCE_SHA256_BINDINGS",
+    "NO_MODEL_NETWORK_OR_SUBPROCESS_IMPORTS_IN_BRAIN_AGENT_SURFACE",
+    "UNRESOLVED_PURPOSE_FAILS_CLOSED",
+    "TERMINAL_BENCH_4_1_SOURCE_AND_PREBUILT_MANIFEST_DIGESTS",
+    "FRESH_SEEDED_CPU_SUBSET_SELECTED",
+    "DIGEST_PINNED_ENVIRONMENT_AND_VERIFIER_IMAGES_PULLED",
+    "OFFICIAL_HARBOR_RESULT_JSON_REWARD_LOG_BOUND",
+    "OIDC_RUN_REFERENCE_BOUND",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-tb41-cpu-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45306545636",
+  "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-tb41-cpu-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45306545636",
+  "workflow_job": "hard_benchmark_attempt",
+  "workflow_name": "Zero-model Terminal-Bench 4.1 CPU runner",
+  "workflow_ref": "refs/heads/arena/6f8ac9ce-brain",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 45306545636,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45306545636"
+}

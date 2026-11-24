@@ -1,0 +1,51 @@
+{
+  "benchmark_score_authority": false,
+  "date": "2026-11-24",
+  "harbor_exit_code": 0,
+  "harbor_version": "0.27.0",
+  "job_name": "brain-no-inference-tb41-cpu",
+  "job_result_path": "/tmp/harbor_jobs/brain-no-inference-tb41-cpu/result.json",
+  "job_result_sha256": "b18af8b7e17101d2a17d0339d1d9cfcd238035766a410e155872bd2ae6cef492",
+  "note": "Per-trial reward vectors are harness diagnostics, not a benchmark score and not capability credit.",
+  "release_tag": "v4.1.0",
+  "rows": [
+    {
+      "agent_name": "brain-no-inference-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "aa515b7a95bab95f8cf439f1bc4f7be1686ec88c2e0cd30ba49f9c4114cadac6",
+      "task_name": "terminal-bench/fin-saccr-rwa",
+      "trial_name": "fin-saccr-rwa__TAWJvNK"
+    },
+    {
+      "agent_name": "brain-no-inference-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "352dabcdd3d0a65f36e3c924cf02691d67cbf5bef31d5d650f9a5864aefc89f7",
+      "task_name": "terminal-bench/hof-topology-interpenetration",
+      "trial_name": "hof-topology-interpenetration__KNnWUX9"
+    },
+    {
+      "agent_name": "brain-no-inference-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "5681141d4faa384999a80df7e244a2386a4936001fd14de6616c71e02e0ce769",
+      "task_name": "terminal-bench/takens-embedding-lean",
+      "trial_name": "takens-embedding-lean__igtnfjB"
+    }
+  ],
+  "schema": "BRAIN_TB41_CPU_REWARD_LOG_20261124_V1",
+  "source": "HARBOR_RESULT_JSON",
+  "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+  "task_selected_count": 3,
+  "trial_results_present": 3
+}
