@@ -1,0 +1,2662 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "canonical_payload": {
+    "authority": "NONE__PRODUCER_RUN_SANDBOX",
+    "case_bundle": [
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "button.save"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "A1_READ_ONLY",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "button.save"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "button.save"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Click the \"Save\" button.",
+        "observation": {
+          "elements": [
+            {
+              "index": 0,
+              "label": "Save",
+              "tag": "button",
+              "text": "Save",
+              "value": "Save"
+            }
+          ]
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "button.save"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "A2_CONFLICT_ASK",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked",
+          "authority.source"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "latest_email",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "latest_email",
+              "q1|authority|which_source": "latest_email",
+              "q2|freshness|which_version": "v2",
+              "q3|user|clarification": "latest_email"
+            },
+            "regime_id": "latest_email_authoritative"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "original_table",
+              "q1|authority|which_source": "original_table",
+              "q2|freshness|which_version": "v1",
+              "q3|user|clarification": "original_table"
+            },
+            "regime_id": "original_table_authoritative"
+          }
+        ],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "A3_SAVE_ABSTRACT",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N1_CALLER_AUTHORITY",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "force_learn": true,
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": {
+          "argv": [
+            "click",
+            "save"
+          ],
+          "content": "exact bytes from the experience",
+          "path": "/tmp/purchase_order.xlsx",
+          "reward": 1
+        },
+        "case_id": "N2_RAW_RECORDING",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.expense",
+            "source.email"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N3_SAME_STATE_HIDDEN_PRECONDITION",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.expense",
+              "source.email"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.expense",
+              "source.email"
+            ],
+            "outcome": false,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.expense",
+          "authority.latest_email"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.expense",
+          "source.email"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "shared.fact"
+          ],
+          [
+            "shared.fact",
+            "decoy.b"
+          ],
+          [
+            "shared.fact",
+            "decoy.c"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N4_SEPARATION_IMPOSSIBLE",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "shared.fact"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "shared.fact",
+              "decoy.b"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "shared.fact",
+              "decoy.c"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "shared.fact"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "shared.fact"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N5_DYNAMIC_STALE_UPDATE",
+        "current_version": 2,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked",
+          "dynamic.fresh_update"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N6_OUTSIDE_HYPOTHESIS_SPACE",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked",
+          "authority.source"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "outside_space",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "latest_email",
+              "q1|authority|which_source": "latest_email",
+              "q2|freshness|which_version": "v2",
+              "q3|user|clarification": "latest_email"
+            },
+            "regime_id": "latest_email_authoritative"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "original_table",
+              "q1|authority|which_source": "original_table",
+              "q2|freshness|which_version": "v1",
+              "q3|user|clarification": "original_table"
+            },
+            "regime_id": "original_table_authoritative"
+          }
+        ],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N7_OPEN_HYPOTHESIS_SPACE",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked",
+          "authority.source"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "open",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_00",
+              "q1|authority|which_source": "regime_00",
+              "q2|freshness|which_version": "regime_00",
+              "q3|user|clarification": "regime_00"
+            },
+            "regime_id": "regime_00"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_01",
+              "q1|authority|which_source": "regime_01",
+              "q2|freshness|which_version": "regime_01",
+              "q3|user|clarification": "regime_01"
+            },
+            "regime_id": "regime_01"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_02",
+              "q1|authority|which_source": "regime_02",
+              "q2|freshness|which_version": "regime_02",
+              "q3|user|clarification": "regime_02"
+            },
+            "regime_id": "regime_02"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_03",
+              "q1|authority|which_source": "regime_03",
+              "q2|freshness|which_version": "regime_03",
+              "q3|user|clarification": "regime_03"
+            },
+            "regime_id": "regime_03"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_04",
+              "q1|authority|which_source": "regime_04",
+              "q2|freshness|which_version": "regime_04",
+              "q3|user|clarification": "regime_04"
+            },
+            "regime_id": "regime_04"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_05",
+              "q1|authority|which_source": "regime_05",
+              "q2|freshness|which_version": "regime_05",
+              "q3|user|clarification": "regime_05"
+            },
+            "regime_id": "regime_05"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_06",
+              "q1|authority|which_source": "regime_06",
+              "q2|freshness|which_version": "regime_06",
+              "q3|user|clarification": "regime_06"
+            },
+            "regime_id": "regime_06"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_07",
+              "q1|authority|which_source": "regime_07",
+              "q2|freshness|which_version": "regime_07",
+              "q3|user|clarification": "regime_07"
+            },
+            "regime_id": "regime_07"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_08",
+              "q1|authority|which_source": "regime_08",
+              "q2|freshness|which_version": "regime_08",
+              "q3|user|clarification": "regime_08"
+            },
+            "regime_id": "regime_08"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_09",
+              "q1|authority|which_source": "regime_09",
+              "q2|freshness|which_version": "regime_09",
+              "q3|user|clarification": "regime_09"
+            },
+            "regime_id": "regime_09"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_10",
+              "q1|authority|which_source": "regime_10",
+              "q2|freshness|which_version": "regime_10",
+              "q3|user|clarification": "regime_10"
+            },
+            "regime_id": "regime_10"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_11",
+              "q1|authority|which_source": "regime_11",
+              "q2|freshness|which_version": "regime_11",
+              "q3|user|clarification": "regime_11"
+            },
+            "regime_id": "regime_11"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_12",
+              "q1|authority|which_source": "regime_12",
+              "q2|freshness|which_version": "regime_12",
+              "q3|user|clarification": "regime_12"
+            },
+            "regime_id": "regime_12"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_13",
+              "q1|authority|which_source": "regime_13",
+              "q2|freshness|which_version": "regime_13",
+              "q3|user|clarification": "regime_13"
+            },
+            "regime_id": "regime_13"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_14",
+              "q1|authority|which_source": "regime_14",
+              "q2|freshness|which_version": "regime_14",
+              "q3|user|clarification": "regime_14"
+            },
+            "regime_id": "regime_14"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_15",
+              "q1|authority|which_source": "regime_15",
+              "q2|freshness|which_version": "regime_15",
+              "q3|user|clarification": "regime_15"
+            },
+            "regime_id": "regime_15"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_16",
+              "q1|authority|which_source": "regime_16",
+              "q2|freshness|which_version": "regime_16",
+              "q3|user|clarification": "regime_16"
+            },
+            "regime_id": "regime_16"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_17",
+              "q1|authority|which_source": "regime_17",
+              "q2|freshness|which_version": "regime_17",
+              "q3|user|clarification": "regime_17"
+            },
+            "regime_id": "regime_17"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_18",
+              "q1|authority|which_source": "regime_18",
+              "q2|freshness|which_version": "regime_18",
+              "q3|user|clarification": "regime_18"
+            },
+            "regime_id": "regime_18"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_19",
+              "q1|authority|which_source": "regime_19",
+              "q2|freshness|which_version": "regime_19",
+              "q3|user|clarification": "regime_19"
+            },
+            "regime_id": "regime_19"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_20",
+              "q1|authority|which_source": "regime_20",
+              "q2|freshness|which_version": "regime_20",
+              "q3|user|clarification": "regime_20"
+            },
+            "regime_id": "regime_20"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_21",
+              "q1|authority|which_source": "regime_21",
+              "q2|freshness|which_version": "regime_21",
+              "q3|user|clarification": "regime_21"
+            },
+            "regime_id": "regime_21"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_22",
+              "q1|authority|which_source": "regime_22",
+              "q2|freshness|which_version": "regime_22",
+              "q3|user|clarification": "regime_22"
+            },
+            "regime_id": "regime_22"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_23",
+              "q1|authority|which_source": "regime_23",
+              "q2|freshness|which_version": "regime_23",
+              "q3|user|clarification": "regime_23"
+            },
+            "regime_id": "regime_23"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "regime_24",
+              "q1|authority|which_source": "regime_24",
+              "q2|freshness|which_version": "regime_24",
+              "q3|user|clarification": "regime_24"
+            },
+            "regime_id": "regime_24"
+          }
+        ],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N8_INSTRUMENT_BLIND",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-b"
+          },
+          {
+            "expected_plan": [
+              "READ_GOAL",
+              "ASK_NAMED_GAP",
+              "VERIFY_FINAL_STATE",
+              "SAVE_ABSTRACT_RULE"
+            ],
+            "instance_id": "fresh-c"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked",
+          "authority.source"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "blind",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "same",
+              "q1|authority|which_source": "same",
+              "q2|freshness|which_version": "same",
+              "q3|user|clarification": "same"
+            },
+            "regime_id": "regime_a"
+          },
+          {
+            "outcomes": {
+              "g1|decision|choose_source": "same",
+              "q1|authority|which_source": "same",
+              "q2|freshness|which_version": "same",
+              "q3|user|clarification": "same"
+            },
+            "regime_id": "regime_b"
+          }
+        ],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      },
+      {
+        "artifact_span": [
+          "multi_item_state",
+          "final_state"
+        ],
+        "candidate_states": [
+          [
+            "goal.purchase_order"
+          ],
+          [
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked"
+          ],
+          [
+            "goal.purchase_order",
+            "relation.checked",
+            "fresh.instance"
+          ]
+        ],
+        "candidate_store_payload": null,
+        "case_id": "N9_UNADMITTED_FRESH_INSTANCES",
+        "current_version": 1,
+        "env_kind": "stateful_workflow",
+        "evidence": [
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked"
+            ],
+            "outcome": true,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order"
+            ],
+            "outcome": false,
+            "version": 1
+          },
+          {
+            "facts": [
+              "goal.purchase_order",
+              "relation.checked",
+              "fresh.instance"
+            ],
+            "outcome": true,
+            "version": 1
+          }
+        ],
+        "experience_trace": [
+          {
+            "phase": "observe",
+            "relation": "source_authority"
+          },
+          {
+            "phase": "ask",
+            "relation": "named_gap"
+          },
+          {
+            "phase": "verify",
+            "relation": "final_state"
+          }
+        ],
+        "fresh_instances": [
+          {
+            "expected_plan": [
+              "WRONG_PLAN"
+            ],
+            "instance_id": "fresh-a"
+          },
+          {
+            "expected_plan": [
+              "WRONG_PLAN"
+            ],
+            "instance_id": "fresh-b"
+          }
+        ],
+        "goal_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ],
+        "goal_family": "conflict_disambiguation",
+        "goal_probes": [
+          [
+            "g1",
+            "decision",
+            "choose_source"
+          ]
+        ],
+        "instruction": "Reconcile the purchase-order workflow from the authoritative source.",
+        "observation": {
+          "elements": []
+        },
+        "oracle_name": "none",
+        "plan_sketch": [
+          "READ_GOAL",
+          "ASK_NAMED_GAP",
+          "VERIFY_FINAL_STATE",
+          "SAVE_ABSTRACT_RULE"
+        ],
+        "probes": [
+          [
+            "q1",
+            "authority",
+            "which_source"
+          ],
+          [
+            "q2",
+            "freshness",
+            "which_version"
+          ],
+          [
+            "q3",
+            "user",
+            "clarification"
+          ]
+        ],
+        "regime_rows": [],
+        "scan_facts": [
+          "goal.purchase_order",
+          "relation.checked"
+        ]
+      }
+    ],
+    "counts": {
+      "admitted_arms": 3,
+      "case_count": 12,
+      "expected_decision_matches": 12,
+      "forbidden_store_fields": [],
+      "negative_arms": 9,
+      "negative_refusals": 9,
+      "parameters_written": 0,
+      "question_probes": 2,
+      "runtime_model_calls": 0,
+      "runtime_network_calls": 0,
+      "store_write_count": 1,
+      "verifier_processes": 1
+    },
+    "decisions": [
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "A1_READ_ONLY",
+        "decision": "READ_ONLY__NO_STORE_WRITE",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 1,
+          "gap": "",
+          "learning_forbidden": true,
+          "outcome": "READ__THE_INSTRUCTION_DETERMINES_THE_ACTION_SO_LEARNING_IS_FORBIDDEN",
+          "reason": "EVERY_ACT_THE_SENTENCE_REQUIRES_COMPILED_WITH_NOTHING_LEFT_NAMED",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "THE_LIVE_READING_DETERMINES_THE_ACTION",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "A2_CONFLICT_ASK",
+        "decision": "ASK__SETTLED_NAMED_GAP",
+        "missing_goal_facts": [
+          "authority.source"
+        ],
+        "parameters_written": 0,
+        "prediction": "latest_email",
+        "probes_executed": 1,
+        "question": {
+          "asked": [
+            {
+              "outcome": "latest_email",
+              "probe": "q1|authority|which_source"
+            }
+          ],
+          "gains": {
+            "q1|authority|which_source": 1.0,
+            "q2|freshness|which_version": 1.0,
+            "q3|user|clarification": 1.0
+          },
+          "policy": "EIG",
+          "posterior": {
+            "latest_email_authoritative": 0.999001,
+            "original_table_authoritative": 0.000999
+          },
+          "probes": [
+            [
+              "q1",
+              "authority",
+              "which_source"
+            ],
+            [
+              "q2",
+              "freshness",
+              "which_version"
+            ],
+            [
+              "q3",
+              "user",
+              "clarification"
+            ]
+          ],
+          "reason": "a closed version space with positive-gain probes",
+          "schema": "BRAIN_ACTIVE_QUESTION_V1",
+          "settled": true,
+          "settlement": {
+            "confidence": 0.999001,
+            "domain_disagreement": 0.000999,
+            "information_bits": 1.0,
+            "posterior": {
+              "latest_email_authoritative": 0.999001,
+              "original_table_authoritative": 0.000999
+            },
+            "probe_space_size": 3,
+            "queries_used": 1,
+            "reason": "posterior concentrated after querying",
+            "status": "SETTLED",
+            "threshold": 0.99,
+            "winner": "latest_email_authoritative"
+          },
+          "winner": "latest_email_authoritative"
+        },
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "ONE_NAMED_GAP_WAS_SETTLED_BY_A_CLOSED_EIG_QUESTION",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "admission": {
+          "authority": "NONE",
+          "instance_count": 3,
+          "reached": 3,
+          "reason": null,
+          "rows": [
+            {
+              "instance_id": 0,
+              "verdict": "REACHED"
+            },
+            {
+              "instance_id": 1,
+              "verdict": "REACHED"
+            },
+            {
+              "instance_id": 2,
+              "verdict": "REACHED"
+            }
+          ],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "verdict": "ADMIT"
+        },
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "A3_SAVE_ABSTRACT",
+        "contrast": {
+          "discriminating_facts": [
+            "goal.purchase_order"
+          ],
+          "gain_log_terms": {
+            "2": "1"
+          },
+          "guaranteed_elimination": 1,
+          "reason": "MOST_EVEN_SPLIT_OF_THE_SURVIVING_REQUIREMENTS",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": [
+            "relation.checked"
+          ],
+          "status": "SELECTED__A_REACHABLE_STATE_SPLITS_THE_SURVIVORS",
+          "survivors_before": 2,
+          "worst_case_survivors_after": 1
+        },
+        "decision": "SAVE__ABSTRACTION_ADMITTED",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "CONTRAST_AND_FRESH_INSTANCES_ADMITTED",
+        "rule": {
+          "admission_counts": {
+            "contrast_guaranteed_elimination": 1,
+            "fresh_instances": 3,
+            "fresh_instances_reached": 3
+          },
+          "artifact_span": [
+            "final_state",
+            "multi_item_state"
+          ],
+          "authority": "NONE__PRODUCER_RUN_SANDBOX",
+          "env_kind": "stateful_workflow",
+          "evidence_digest": "3b91b2ff1cfc99f8246ce1fe3321ec8b15a15725a2db0e9ffc75826e74f6ca1d",
+          "goal_family": "conflict_disambiguation",
+          "mechanism_role_count": 4,
+          "mechanism_signature": "1796a8d99add516137c7b704a38f1087fbae315ba806e221167b6ca120b9d320",
+          "plan_length": 4,
+          "relation_signature": [
+            "goal.purchase_order"
+          ],
+          "rule_id": "ga-a8091a97c25feec3",
+          "schema": "BRAIN_GOAL_DIRECTED_ABSTRACT_RULE_V1",
+          "scope": {
+            "env_kind": "stateful_workflow",
+            "goal_family": "conflict_disambiguation"
+          }
+        },
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "caller_authority_claims": [
+          "force_learn"
+        ],
+        "case_id": "N1_CALLER_AUTHORITY",
+        "decision": "REFUSED__CALLER_AUTHORITY_DENIED",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reason": "CALLER_CANNOT_GRANT_LEARNING_OR_VERIFICATION_AUTHORITY",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N2_RAW_RECORDING",
+        "decision": "REFUSED__RAW_EXPERIENCE_IS_NOT_A_RULE",
+        "forbidden_fields": [
+          "argv",
+          "content",
+          "path",
+          "reward"
+        ],
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reason": "A_RAW_RECORDING_IS_NOT_A_GENERALIZATION",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N3_SAME_STATE_HIDDEN_PRECONDITION",
+        "decision": "REFUSED__OBSERVABLE_VOCABULARY_INSUFFICIENT",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "MORE_RUNS_CANNOT_REPAIR_THE_OBSERVABLE_VOCABULARY",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "witness": {
+          "facts": [
+            "goal.expense",
+            "source.email"
+          ],
+          "failures": 1,
+          "kind": "SAME_OBSERVED_STATE_OPPOSITE_OUTCOMES",
+          "reason": "AN_UNOBSERVED_PRECONDITION_DIFFERS_BETWEEN_THESE_WORLDS",
+          "schema": "PROJECT_BRAIN_APPLICABILITY_V1",
+          "shared_facts": [
+            "goal.expense",
+            "source.email"
+          ],
+          "successes": 1,
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+          "witness_failure_indices": [
+            0
+          ]
+        },
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N4_SEPARATION_IMPOSSIBLE",
+        "decision": "REFUSED__OBSERVABLE_VOCABULARY_INSUFFICIENT",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "MORE_RUNS_CANNOT_REPAIR_THE_OBSERVABLE_VOCABULARY",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "witness": {
+          "failures": 1,
+          "kind": "SEPARATION_IMPOSSIBLE__EVERY_FACT_ALL_SUCCESSES_SHARE_A_FAILURE_ALSO_HAS",
+          "reason": "THE_FACTS_ALL_SUCCESSES_AGREE_ON_ARE_FACTS_A_FAILURE_ALSO_HAS",
+          "schema": "PROJECT_BRAIN_APPLICABILITY_V1",
+          "shared_facts": [
+            "shared.fact"
+          ],
+          "successes": 2,
+          "unrepairable_by_repetition": true,
+          "what_would_repair_it": "A_NEW_OBSERVABLE__MORE_RUNS_REPORT_THE_SAME_FACT_VECTOR",
+          "witness_failure_indices": [
+            0
+          ]
+        },
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N5_DYNAMIC_STALE_UPDATE",
+        "current_version": 2,
+        "decision": "REFUSED__DYNAMIC_UPDATE_REQUIRES_FRESH_OBSERVATION",
+        "max_evidence_version": 1,
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "THE_ENVIRONMENT_CHANGED_AFTER_ALL_STORED_EVIDENCE",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N6_OUTSIDE_HYPOTHESIS_SPACE",
+        "decision": "REFUSED__EVIDENCE_OUTSIDE_HYPOTHESIS_SPACE",
+        "missing_goal_facts": [
+          "authority.source"
+        ],
+        "parameters_written": 0,
+        "probes_executed": 1,
+        "question": {
+          "asked": [
+            {
+              "outcome": "OUTSIDE_SPACE",
+              "probe": "q1|authority|which_source"
+            }
+          ],
+          "gains": {
+            "q1|authority|which_source": 1.0,
+            "q2|freshness|which_version": 1.0,
+            "q3|user|clarification": 1.0
+          },
+          "policy": "EIG",
+          "posterior": {
+            "latest_email_authoritative": 0.5,
+            "original_table_authoritative": 0.5
+          },
+          "probes": [
+            [
+              "q1",
+              "authority",
+              "which_source"
+            ],
+            [
+              "q2",
+              "freshness",
+              "which_version"
+            ],
+            [
+              "q3",
+              "user",
+              "clarification"
+            ]
+          ],
+          "reason": "a closed version space with positive-gain probes",
+          "schema": "BRAIN_ACTIVE_QUESTION_V1",
+          "settled": false,
+          "settlement": {
+            "confidence": 0.5,
+            "domain_disagreement": 0.5,
+            "information_bits": 1.0,
+            "posterior": {
+              "latest_email_authoritative": 0.5,
+              "original_table_authoritative": 0.5
+            },
+            "probe_space_size": 3,
+            "queries_used": 1,
+            "reason": "no hypothesis in the space explains the last observation",
+            "status": "EVIDENCE_OUTSIDE_HYPOTHESIS_SPACE",
+            "threshold": 0.99,
+            "winner": null
+          },
+          "winner": null
+        },
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "NO_HYPOTHESIS_EXPLAINS_THE_ENVIRONMENT_ANSWER",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N7_OPEN_HYPOTHESIS_SPACE",
+        "closed_space_cap": 24,
+        "decision": "REFUSED__OPEN_HYPOTHESIS_SPACE",
+        "hypothesis_count": 25,
+        "missing_goal_facts": [
+          "authority.source"
+        ],
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "EIG_REFUSED_OVER_AN_OPEN_PROPOSAL_SPACE",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N8_INSTRUMENT_BLIND",
+        "decision": "REFUSED__INSTRUMENT_BLIND",
+        "missing_goal_facts": [
+          "authority.source"
+        ],
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "question": {
+          "asked": [],
+          "gains": {
+            "q1|authority|which_source": 0.0,
+            "q2|freshness|which_version": 0.0,
+            "q3|user|clarification": 0.0
+          },
+          "policy": "REFUSED__INSTRUMENT_BLIND",
+          "posterior": {
+            "regime_a": 0.5,
+            "regime_b": 0.5
+          },
+          "probes": [],
+          "reason": "no reachable probe splits the surviving regimes",
+          "schema": "BRAIN_ACTIVE_QUESTION_V1",
+          "settlement": {
+            "information_bits": 0.0,
+            "queries_used": 0,
+            "status": "REFUSED__INSTRUMENT_BLIND"
+          }
+        },
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "NO_REACHABLE_PROBE_SPLITS_THE_SURVIVING_REGIMES",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      },
+      {
+        "admission": {
+          "authority": "NONE",
+          "instance_count": 2,
+          "reached": 0,
+          "reason": "NO_FRESH_INSTANCE_REACHED_GOAL",
+          "rows": [
+            {
+              "instance_id": 0,
+              "verdict": "NOT_REACHED"
+            },
+            {
+              "instance_id": 1,
+              "verdict": "NOT_REACHED"
+            }
+          ],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "verdict": "REFINE"
+        },
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "case_id": "N9_UNADMITTED_FRESH_INSTANCES",
+        "contrast": {
+          "discriminating_facts": [
+            "goal.purchase_order"
+          ],
+          "gain_log_terms": {
+            "2": "1"
+          },
+          "guaranteed_elimination": 1,
+          "reason": "MOST_EVEN_SPLIT_OF_THE_SURVIVING_REQUIREMENTS",
+          "schema": "PROJECT_BRAIN_CONTRAST_SELECTION_V1",
+          "state": [
+            "relation.checked"
+          ],
+          "status": "SELECTED__A_REACHABLE_STATE_SPLITS_THE_SURVIVORS",
+          "survivors_before": 2,
+          "worst_case_survivors_after": 1
+        },
+        "decision": "REFUSED__ADMISSION_NOT_REACHED_ON_FRESH_INSTANCES",
+        "parameters_written": 0,
+        "probes_executed": 0,
+        "raw_fields": [],
+        "reading": {
+          "clauses": 0,
+          "gap": "REFUSED__NO_CLAUSE_UNDERSTOOD",
+          "learning_forbidden": false,
+          "outcome": "LEARN__THE_READING_NAMED_A_GAP_A_POLICY_MAY_BE_ACQUIRED_FOR",
+          "reason": "THE_READING_REFUSED_AND_NAMED_WHY",
+          "schema": "PROJECT_BRAIN_LEARN_OR_READ_V1"
+        },
+        "reason": "FRESH_INSTANCES_DID_NOT_ALL_REACH_GOAL",
+        "runtime_model_calls": 0,
+        "runtime_network_calls": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1",
+        "store_write": false,
+        "written_to_weights": false
+      }
+    ],
+    "external_sources_build_time_only": true,
+    "frontier_score_claim": false,
+    "generated_at_utc": "2026-11-24T17:39:13.638994+00:00",
+    "physical_cost_blockers_logged_once": [
+      "Docker/Podman/Harbor unavailable",
+      "Python 3.12 unavailable",
+      "disposable independent VM unavailable",
+      "OSWorld 2.1 assets unavailable",
+      "GPU/torch/open-weight training substrate unavailable",
+      "paid multi-run benchmark infrastructure not attempted"
+    ],
+    "prereg_sha256": "d171ae40ca52e0b249e4058174c546b7dd8969f35647ed81f015943aa1d670dc",
+    "run_refs": {
+      "decision_run_ref": "181750f546e977e5",
+      "producer_run_ref": "6c4ffc093d471a17",
+      "restart_run_ref": "d07b3fe20e8aa79a",
+      "run_refs_distinct": true,
+      "store_run_ref": "a7e64022d9f7fdaf"
+    },
+    "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1__RECEIPT",
+    "store_action": {
+      "decision": "SAVE__ABSTRACTION_ADMITTED",
+      "reason": "CONTRAST_AND_FRESH_INSTANCES_ADMITTED",
+      "rule": {
+        "admission_counts": {
+          "contrast_guaranteed_elimination": 1,
+          "fresh_instances": 3,
+          "fresh_instances_reached": 3
+        },
+        "artifact_span": [
+          "final_state",
+          "multi_item_state"
+        ],
+        "authority": "NONE__PRODUCER_RUN_SANDBOX",
+        "env_kind": "stateful_workflow",
+        "evidence_digest": "3b91b2ff1cfc99f8246ce1fe3321ec8b15a15725a2db0e9ffc75826e74f6ca1d",
+        "goal_family": "conflict_disambiguation",
+        "mechanism_role_count": 4,
+        "mechanism_signature": "1796a8d99add516137c7b704a38f1087fbae315ba806e221167b6ca120b9d320",
+        "plan_length": 4,
+        "relation_signature": [
+          "goal.purchase_order"
+        ],
+        "rule_id": "ga-a8091a97c25feec3",
+        "schema": "BRAIN_GOAL_DIRECTED_ABSTRACT_RULE_V1",
+        "scope": {
+          "env_kind": "stateful_workflow",
+          "goal_family": "conflict_disambiguation"
+        }
+      },
+      "store": {
+        "digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+        "path_is_external_json": true,
+        "rule": {
+          "admission_counts": {
+            "contrast_guaranteed_elimination": 1,
+            "fresh_instances": 3,
+            "fresh_instances_reached": 3
+          },
+          "artifact_span": [
+            "final_state",
+            "multi_item_state"
+          ],
+          "authority": "NONE__PRODUCER_RUN_SANDBOX",
+          "env_kind": "stateful_workflow",
+          "evidence_digest": "3b91b2ff1cfc99f8246ce1fe3321ec8b15a15725a2db0e9ffc75826e74f6ca1d",
+          "goal_family": "conflict_disambiguation",
+          "mechanism_role_count": 4,
+          "mechanism_signature": "1796a8d99add516137c7b704a38f1087fbae315ba806e221167b6ca120b9d320",
+          "plan_length": 4,
+          "relation_signature": [
+            "goal.purchase_order"
+          ],
+          "rule_id": "ga-a8091a97c25feec3",
+          "schema": "BRAIN_GOAL_DIRECTED_ABSTRACT_RULE_V1",
+          "scope": {
+            "env_kind": "stateful_workflow",
+            "goal_family": "conflict_disambiguation"
+          }
+        },
+        "rule_count": 1,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_STORE_V1",
+        "status": "PASS__STORE_VERIFIED",
+        "store_write": true
+      },
+      "store_write": true
+    },
+    "store_editability": {
+      "after": {
+        "declared_digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+        "digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+        "rule_count": 1,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_STORE_V1",
+        "status": "PASS__STORE_VERIFIED"
+      },
+      "before": {
+        "declared_digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+        "digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+        "rule_count": 1,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_STORE_V1",
+        "status": "PASS__STORE_VERIFIED"
+      },
+      "missing": {
+        "digest": null,
+        "rule_count": 0,
+        "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_STORE_V1",
+        "status": "STORE_MISSING__REFUSE"
+      },
+      "removal_refused": true,
+      "restart_digest_matches": true,
+      "restore_verified": true
+    },
+    "truth": {
+      "acceptance_credit_delta": 0,
+      "carrier_qualified": false,
+      "completion_claim": false,
+      "execution_authorized": false,
+      "gui_dom_oracle": false,
+      "hardest_open_nov_2026_score": "NO_SCORE",
+      "independent_attestation": false,
+      "independent_cloud_verifier": false,
+      "own_weights": false,
+      "parameters_written": 0,
+      "patch_published": false,
+      "runtime_model_calls": 0,
+      "runtime_network_calls": 0,
+      "section_6": "NOT_DONE",
+      "truth_achieved": false,
+      "written_to_weights": false
+    },
+    "verifier_script_sha256": "4032be4bb304d9c6dd7a54103e6d64bcad3af96bcf56133c9088a3c09b650adc"
+  },
+  "independent_attestation": false,
+  "receipt_sha256": "6434fa31f82a41e504360b1d56b2bb105be823acd1b828828cca9e1345e1db4b",
+  "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_GATE_V1__RECEIPT",
+  "separate_local_recheck": {
+    "authority": "NONE__DIFFERENT_CODE_LOCAL_PROCESS",
+    "benchmark_score_verified": false,
+    "checked_decisions": 12,
+    "checks": {
+      "counts_match": true,
+      "decision_classes_match": true,
+      "prereg_digest_match": true,
+      "receipt_digest_match": true,
+      "run_refs_distinct": true,
+      "script_digest_match": true,
+      "store_clean": true,
+      "store_digest_match": true,
+      "store_editability_match": true,
+      "truth_fields_false": true
+    },
+    "completion_claim": false,
+    "generated_at_utc": "2026-11-24T17:39:13.681172+00:00",
+    "gui_dom_oracle": false,
+    "independent_attestation": false,
+    "independent_cloud_verifier": false,
+    "prereg_sha256": "d171ae40ca52e0b249e4058174c546b7dd8969f35647ed81f015943aa1d670dc",
+    "python_version": "3.11.2",
+    "receipt_sha256": "6434fa31f82a41e504360b1d56b2bb105be823acd1b828828cca9e1345e1db4b",
+    "recomputed_decision_classes": {
+      "A1_READ_ONLY": "READ_ONLY__NO_STORE_WRITE",
+      "A2_CONFLICT_ASK": "ASK__SETTLED_NAMED_GAP",
+      "A3_SAVE_ABSTRACT": "SAVE__ABSTRACTION_ADMITTED",
+      "N1_CALLER_AUTHORITY": "REFUSED__CALLER_AUTHORITY_DENIED",
+      "N2_RAW_RECORDING": "REFUSED__RAW_EXPERIENCE_IS_NOT_A_RULE",
+      "N3_SAME_STATE_HIDDEN_PRECONDITION": "REFUSED__OBSERVABLE_VOCABULARY_INSUFFICIENT",
+      "N4_SEPARATION_IMPOSSIBLE": "REFUSED__OBSERVABLE_VOCABULARY_INSUFFICIENT",
+      "N5_DYNAMIC_STALE_UPDATE": "REFUSED__DYNAMIC_UPDATE_REQUIRES_FRESH_OBSERVATION",
+      "N6_OUTSIDE_HYPOTHESIS_SPACE": "REFUSED__EVIDENCE_OUTSIDE_HYPOTHESIS_SPACE",
+      "N7_OPEN_HYPOTHESIS_SPACE": "REFUSED__OPEN_HYPOTHESIS_SPACE",
+      "N8_INSTRUMENT_BLIND": "REFUSED__INSTRUMENT_BLIND",
+      "N9_UNADMITTED_FRESH_INSTANCES": "REFUSED__ADMISSION_NOT_REACHED_ON_FRESH_INSTANCES"
+    },
+    "recomputed_receipt_sha256": "6434fa31f82a41e504360b1d56b2bb105be823acd1b828828cca9e1345e1db4b",
+    "run_ref": "6c8ea82e35f98d86",
+    "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_LOCAL_RECHECK_V1",
+    "section_6": "NOT_DONE",
+    "status": "LOCAL_DIFFERENT_CODE_RECHECK_PASS__NOT_INDEPENDENT_ATTESTATION",
+    "store_digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+    "store_forbidden_fields": [],
+    "verifier_script_sha256": "4032be4bb304d9c6dd7a54103e6d64bcad3af96bcf56133c9088a3c09b650adc",
+    "wall_seconds": 0.003304
+  },
+  "verifier_run_refs": [
+    "6c8ea82e35f98d86"
+  ]
+}

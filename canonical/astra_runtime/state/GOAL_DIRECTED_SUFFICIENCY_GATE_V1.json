@@ -1,0 +1,34 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "digest": "d6d5df74a24e58b96190e22cc8a364b6565882593db6b3c9b2e486f896307b92",
+  "rules": [
+    {
+      "admission_counts": {
+        "contrast_guaranteed_elimination": 1,
+        "fresh_instances": 3,
+        "fresh_instances_reached": 3
+      },
+      "artifact_span": [
+        "final_state",
+        "multi_item_state"
+      ],
+      "authority": "NONE__PRODUCER_RUN_SANDBOX",
+      "env_kind": "stateful_workflow",
+      "evidence_digest": "3b91b2ff1cfc99f8246ce1fe3321ec8b15a15725a2db0e9ffc75826e74f6ca1d",
+      "goal_family": "conflict_disambiguation",
+      "mechanism_role_count": 4,
+      "mechanism_signature": "1796a8d99add516137c7b704a38f1087fbae315ba806e221167b6ca120b9d320",
+      "plan_length": 4,
+      "relation_signature": [
+        "goal.purchase_order"
+      ],
+      "rule_id": "ga-a8091a97c25feec3",
+      "schema": "BRAIN_GOAL_DIRECTED_ABSTRACT_RULE_V1",
+      "scope": {
+        "env_kind": "stateful_workflow",
+        "goal_family": "conflict_disambiguation"
+      }
+    }
+  ],
+  "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENCY_STORE_V1"
+}
