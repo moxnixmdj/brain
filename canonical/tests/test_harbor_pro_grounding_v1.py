@@ -83,38 +83,36 @@ class ProGroundingTests(unittest.TestCase):
         self.assertEqual(grounder.ground('Issue', '/')['reason'], 'WORKSPACE_INVALID')
         self.assertEqual(grounder.ground('Issue', str(self.root / 'missing'))['reason'], 'WORKSPACE_UNAVAILABLE')
 
-    def test_worker_threads_hints_into_existing_route_and_refusal_trace(self):
+    def test_first_cycle_uses_imported_engines_instead_of_open_model(self):
         issue = 'src/user/picture.js: call User.removeCoverPicture(uid).'
         request = {'goal': 'goal', 'mode': 'EPISTEMIC', 'inputs': {
             'harbor_suite': 'pro-v2', 'harbor_task': issue,
             'harbor_repo': str(self.root), 'observations': []}}
         token = base64.b64encode(json.dumps(request).encode()).decode()
-        calls = []
 
-        class MockModel:
+        class BombModel:
             def solve(self, goal, **kwargs):
-                calls.append((goal, kwargs))
-                return {'pass': False, 'status': 'FAIL_CLOSED', 'reason': 'NO_ACCEPTED_ROUTE'}
+                raise AssertionError('ordinary open_model route must not run first')
 
         stdout = io.StringIO()
         with patch.object(worker.sys, 'argv', ['worker', token]), \
-             patch.object(brain, 'open_model', return_value=MockModel()), redirect_stdout(stdout):
+             patch.object(brain, 'open_model', return_value=BombModel()), redirect_stdout(stdout):
             self.assertEqual(worker.main(), 0)
         response = json.loads(stdout.getvalue().removeprefix(worker.MARKER))
-        self.assertFalse(response['pass'])
-        self.assertEqual(response['harbor_grounding']['authority'], 'NONE__ADVISORY_ONLY')
-        self.assertEqual(calls[0][1]['inputs']['harbor_grounding'], response['harbor_grounding'])
-        self.assertEqual(agent.extract_actions(response), [])
-        self.assertFalse(response['harbor_grounding']['tests_run'])
+        self.assertTrue(response['pass'])
+        self.assertEqual([a['type'] for a in response['actions']], ['finish'])
+        self.assertEqual(response['proposal_source'], 'DETERMINISTIC_IMPORTED_ENGINES_V1')
+        self.assertTrue(response['official_verifier_expected'])
+        self.assertFalse(response['task_completion_claimed'])
 
         class MockEnvironment:
             async def exec(self, command, **kwargs):
-                return SimpleNamespace(return_code=0, stdout=worker.MARKER + json.dumps(response), stderr='')
+                return SimpleNamespace(returncode=0, stdout=worker.MARKER + json.dumps(response), stderr='')
 
         trace = asyncio.run(agent.run_epistemic_goal(issue, MockEnvironment(), suite='pro-v2', repo=str(self.root)))
-        self.assertEqual(trace['status'], 'BLOCKED_NO_MODEL_PROPOSAL')
-        self.assertEqual(trace['trace'][0]['harbor_grounding'], response['harbor_grounding'])
-        self.assertEqual(trace['trace'][0]['proposed_actions'], [])
+        self.assertEqual(trace['status'], 'FINISHED__DETERMINISTIC_PROPOSAL__VERIFIER_DECIDES')
+        self.assertEqual(trace['trace'][0]['proposed_actions'], ['finish'])
+        self.assertEqual(trace['trace'][0]['imported_engine']['language'], 'javascript_typescript')
         self.assertFalse(trace['task_completion_claimed'])
 
 

@@ -1,4 +1,4 @@
-name: Frontier Pro V2 smoke evaluation
+name: Frontier 2x2 Docker smoke evaluation
 
 # The push trigger is confined to the current session branch and this file;
 # manual dispatch remains available from the default branch.
@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
     inputs:
       task_limit:
-        description: Number of HARD-51 tasks to run in file order (1-51)
+        description: Number of HARD-51 tasks to run in file order (1-51); release launch uses 2
         required: true
         default: '2'
         type: string
@@ -18,14 +18,14 @@ permissions:
   contents: read
 
 jobs:
-  pro-smoke:
+  two-by-two-smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 330
     env:
       PIP_DISABLE_PIP_VERSION_CHECK: '1'
       GIT_TERMINAL_PROMPT: '0'
     steps:
-      - name: Validate task limit
+      - name: Validate inputs and record metadata
         shell: bash
         env:
           TASK_LIMIT: ${{ inputs.task_limit || '2' }}
@@ -37,12 +37,18 @@ jobs:
           fi
           echo "TASK_LIMIT=$TASK_LIMIT" >> "$GITHUB_ENV"
           mkdir -p "$GITHUB_WORKSPACE/runs/jobs"
+          cat > "$GITHUB_WORKSPACE/runs/jobs/selected_terminal_bench4_ids.txt" <<'TASKS'
+          interleaved-vigenere
+          session-window-debug
+          TASKS
           {
-            echo 'Brain revision: e974b5a0366bf6096623818e0448ab825d84b794'
+            echo 'Brain revision: ${{ github.sha }}'
             echo 'Harbor revision: 39c2219a41b3caa7a689cef1882263b5a93ae93f'
             echo 'SWE-bench Pro revision: 66f92766bba642462d4bbe5479e83f91f9211862'
-            echo "Selected task count: $TASK_LIMIT"
-            echo 'First task: public verifier test names previously disclosed.'
+            echo 'Terminal-Bench dataset: terminal-bench/terminal-bench@4.0.0'
+            echo 'Selected Terminal-Bench 4 tasks: interleaved-vigenere, session-window-debug'
+            echo "Selected Pro task count: $TASK_LIMIT"
+            echo 'First Pro task: public verifier test names previously disclosed.'
             echo 'Producer and replay results are not independently reviewed.'
           } > "$GITHUB_WORKSPACE/runs/jobs/smoke_metadata.txt"
           echo 'The first HARD-51 task has disclosed public verifier test names; it is not blind.' >> "$GITHUB_STEP_SUMMARY"
@@ -51,7 +57,7 @@ jobs:
       - name: Check out requested Brain revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: e974b5a0366bf6096623818e0448ab825d84b794
+          ref: ${{ github.sha }}
           path: brain
           persist-credentials: false
 
@@ -88,8 +94,8 @@ jobs:
           echo "BRAIN=$GITHUB_WORKSPACE/brain" >> "$GITHUB_ENV"
           echo "PYTHONPATH=$GITHUB_WORKSPACE/brain:$GITHUB_WORKSPACE/swe-pro/v2/tooling" >> "$GITHUB_ENV"
 
-      - name: Run experimental Brain producer
-        id: producer
+      - name: Run experimental Brain Pro producer
+        id: producer-pro
         working-directory: runs
         shell: bash
         env:
@@ -104,8 +110,27 @@ jobs:
             --extra-docker-compose "$GITHUB_WORKSPACE/brain-no-network-compose.yaml" \
             --disable-verification --job-name brain-pro-smoke
 
-      - name: Replay captured patches in pristine task images
-        if: ${{ !cancelled() && steps.prepare.outcome == 'success' && (steps.producer.outcome == 'success' || steps.producer.outcome == 'failure') }}
+      - name: Run experimental Brain Terminal-Bench 4 producer
+        id: producer-terminal-bench-4
+        working-directory: runs
+        shell: bash
+        env:
+          BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL: '1'
+        run: |
+          set -euo pipefail
+          BRAIN_MOUNTS="$(python -c 'import json,os; print(json.dumps([{"type":"bind","source":os.environ["BRAIN"],"target":"/opt/brain-ro","read_only":True}]))')"
+          harbor run -d terminal-bench/terminal-bench@4.0.0 -e docker -n 1 \
+            -i terminal-bench/interleaved-vigenere \
+            -i terminal-bench/session-window-debug \
+            -l 2 \
+            -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
+            --ak suite=terminal-bench-4 --ak repo_root=/app --ak "brain_source=$BRAIN" \
+            --mounts "$BRAIN_MOUNTS" \
+            --extra-docker-compose "$GITHUB_WORKSPACE/brain-no-network-compose.yaml" \
+            --job-name brain-tb4-smoke
+
+      - name: Replay captured Pro patches in pristine task images
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' && (steps.producer-pro.outcome == 'success' || steps.producer-pro.outcome == 'failure') }}
         working-directory: runs
         shell: bash
         run: |
@@ -131,7 +156,7 @@ jobs:
             exit 1
           fi
 
-      - name: Audit trial and replay artifacts
+      - name: Audit trial, replay, and verifier artifacts
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' && steps.artifact_safety.outcome == 'success' }}
         working-directory: runs
         shell: bash
@@ -143,9 +168,11 @@ jobs:
           import sys
 
           jobs = Path('jobs').resolve()
-          ids = (jobs / 'selected_hard51_ids.txt').read_text().splitlines()
+          pro_ids = (jobs / 'selected_hard51_ids.txt').read_text().splitlines()
+          tb_ids = (jobs / 'selected_terminal_bench4_ids.txt').read_text().splitlines()
           issues = []
           rows = []
+
           def trials(job):
               out = {}
               for path in sorted((jobs / job).glob('instance_*/result.json')):
@@ -158,24 +185,54 @@ jobs:
                   except (OSError, ValueError, TypeError, KeyError, AttributeError):
                       issues.append(f'{job}:invalid_result:{path.parent.name}')
               return out
-          producers = trials('brain-pro-smoke')
-          replays = trials('brain-pro-smoke-regrade')
-          for task in ids:
-              row = {'task': task, 'producer_present': task in producers, 'replay_present': task in replays}
+
+          def read_trace(src_dir):
+              trace_path = src_dir / 'agent' / 'brain_epistemic_trace.json'
+              return json.loads(trace_path.read_text())
+
+          def last_envelope(trace):
+              entries = trace.get('trace') if isinstance(trace.get('trace'), list) else []
+              return entries[-1] if entries else {}
+
+          def trace_actions(trace):
+              envelope = last_envelope(trace)
+              actions = envelope.get('proposed_actions')
+              if not isinstance(actions, list) and isinstance(trace.get('proposed_actions'), list):
+                  actions = trace['proposed_actions']
+              return actions
+
+          def imported_diag(trace):
+              envelope = last_envelope(trace)
+              diag = envelope.get('imported_engine')
+              return diag if isinstance(diag, dict) else {}
+
+          def verifier_rewards(result):
+              verifier = result.get('verifier_result')
+              if isinstance(verifier, dict) and isinstance(verifier.get('rewards'), dict):
+                  return verifier['rewards']
+              return None
+
+          pro_producers = trials('brain-pro-smoke')
+          pro_replays = trials('brain-pro-smoke-regrade')
+          for task in pro_ids:
+              row = {'suite': 'pro-v2', 'task': task,
+                     'producer_present': task in pro_producers,
+                     'replay_present': task in pro_replays}
               rows.append(row)
-              if task not in producers or task not in replays:
+              if task not in pro_producers or task not in pro_replays:
                   issues.append(f'{task}:missing_trial')
                   continue
-              src_dir, src = producers[task]
-              dst_dir, dst = replays[task]
+              src_dir, src = pro_producers[task]
+              dst_dir, dst = pro_replays[task]
               if src.get('exception_info') is not None or dst.get('exception_info') is not None:
                   issues.append(f'{task}:trial_exception')
               patch = src_dir / 'agent' / 'model.patch'
-              trace_path = src_dir / 'agent' / 'brain_epistemic_trace.json'
               replay_path = dst_dir / 'agent' / 'replay.json'
               try:
-                  trace = json.loads(trace_path.read_text())
+                  trace = read_trace(src_dir)
                   replay = json.loads(replay_path.read_text())
+                  row['proposed_actions'] = trace_actions(trace)
+                  row['imported_engine'] = imported_diag(trace)
                   row['patch_bytes'] = patch.stat().st_size
                   if trace.get('patch_emitted') is not True or trace.get('external_harbor_vm_eval_status') != 'EXPERIMENTAL_DISPATCH__UNVERIFIED':
                       issues.append(f'{task}:producer_did_not_publish_patch')
@@ -186,14 +243,48 @@ jobs:
                       issues.append(f'{task}:empty_patch_replay_mismatch')
               except (OSError, ValueError, TypeError, AttributeError):
                   issues.append(f'{task}:missing_or_invalid_agent_artifact')
-              verifier = dst.get('verifier_result')
-              if not isinstance(verifier, dict) or not isinstance(verifier.get('rewards'), dict) or not verifier['rewards']:
+              row['verifier_rewards'] = verifier_rewards(dst)
+              if not row['verifier_rewards']:
                   issues.append(f'{task}:verifier_result_missing')
-          report = {'selected_count': len(ids), 'rows': rows, 'issues': issues,
+
+          tb_producers = trials('brain-tb4-smoke')
+          for task in tb_ids:
+              row = {'suite': 'terminal-bench-4', 'task': task,
+                     'producer_present': task in tb_producers}
+              rows.append(row)
+              if task not in tb_producers:
+                  issues.append(f'{task}:missing_trial')
+                  continue
+              src_dir, src = tb_producers[task]
+              if src.get('exception_info') is not None:
+                  issues.append(f'{task}:trial_exception')
+              try:
+                  trace = read_trace(src_dir)
+                  diag = imported_diag(trace)
+                  row['proposed_actions'] = trace_actions(trace)
+                  row['model_status'] = last_envelope(trace).get('model_status')
+                  row['imported_engine'] = diag
+                  row['engine_status'] = diag.get('engine_status')
+                  row['doc_compiler'] = diag.get('doc_compiler')
+                  row['world_model'] = diag.get('world_model')
+                  row['diff_bytes'] = diag.get('diff_bytes')
+                  if trace.get('task_completion_claimed') is not False:
+                      issues.append(f'{task}:invalid_completion_claim')
+              except (OSError, ValueError, TypeError, AttributeError):
+                  issues.append(f'{task}:missing_or_invalid_agent_artifact')
+              row['verifier_rewards'] = verifier_rewards(src)
+              if not row['verifier_rewards']:
+                  issues.append(f'{task}:verifier_result_missing')
+
+          report = {'selected_pro_count': len(pro_ids),
+                    'selected_terminal_bench4_count': len(tb_ids),
+                    'rows': rows, 'issues': issues,
                     'note': 'Artifact completeness only; no capability or benchmark success claim.'}
           (jobs / 'smoke_audit.json').write_text(json.dumps(report, indent=2) + '\n')
           print(json.dumps(report, indent=2))
-          if issues or len(ids) != int(__import__('os').environ['TASK_LIMIT']):
+          for row in rows:
+              print('::notice title=' + row['suite'] + ' ' + row['task'] + '::' + json.dumps(row, sort_keys=True, default=str))
+          if issues or len(pro_ids) != 2 or len(tb_ids) != 2:
               sys.exit(1)
           PY
 
@@ -201,7 +292,7 @@ jobs:
         if: ${{ always() && steps.artifact_safety.outcome == 'success' }}
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: frontier-pro-smoke-${{ github.run_id }}-${{ github.run_attempt }}
+          name: frontier-two-by-two-smoke-${{ github.run_id }}-${{ github.run_attempt }}
           path: runs/jobs/
           if-no-files-found: warn
           retention-days: 1

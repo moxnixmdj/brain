@@ -140,6 +140,19 @@
     "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
     "route_order": "Delete host solver; bypass nested namespaces; reuse Harbor exec, Compose diagnostic, candidate diff handoff and official verifier. Adapt for owner-explicit experimental opt-in; no identity or egress guarantees inferred from an inspect sample."
   },
+  "owner_opted_imported_engines_20261124": {
+    "implementation_20261124": "Wired pro-v2 first cycle to bounded no-follow staging, language selection, imported Python/JS/C zero-call repair engines, all-or-nothing regular-file application of returned winner maps, and deterministic finish fallback. Wired terminal-bench-4 first cycle to the imported multi-step doc compiler, optional allowlisted HTTP world-model planner only when a URL is present, and deterministic finish. Pro candidates are regraded by separate pristine PatchReplayAgent; Terminal-Bench verifier runs in Harbor.",
+    "incremental_spend_usd": 0,
+    "limitations": "Local fixtures validate plumbing only. Engine-local verification is not independent. Staging is not a sandbox; detached processes and arbitrary /app mutations by imported engines are possible. Docker identity/network and quiescence are unverified. New-module scaffolding is not generally implemented; only engine winner maps are applied. World planner is skipped without a URL. No capability claim.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Real local subprocess fixtures for plumbing; official Pro pristine PatchReplayAgent and Terminal-Bench verifier for scores. Local self-reported verification is not independent.",
+    "owner_accepted_residual": "Task subprocesses in staging can read or mutate /app by absolute path; cleanup is best effort and detached process quiescence is unverified. This does not establish Docker identity or network enforcement.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "request": "Owner accepts shared task-container filesystem access, requests imported engines in disposable Harbor tasks and pristine Pro replay plus Terminal-Bench verifier.",
+    "route_order": "Imported deterministic engines first in the disposable task container; then existing ordinary model route only outside these suites. Capture uses existing untrusted Pro git capture. Terminal-copy proposal may precede the imported engines for compatible tasks.",
+    "workflow": "Workflow checks out github.sha, runs two Pro HARD-51 producers, two Terminal-Bench 4.0 tasks from terminal-bench/terminal-bench@4.0.0 (interleaved-vigenere and session-window-debug), Pro pristine replay, audits and uploads one-day artifacts."
+  },
   "pr_check_reconciliation_20261124": {
     "follow_up": "A local full-suite collection identified a new asyncio subprocess site outside the Root3 two-chokepoint inventory. Use the existing subprocess.run choke point in a worker thread with a kill-and-reap timeout; this remains an unverified Docker diagnostic, not an isolation claim. Local collection additionally exposed legacy site mappings and missing libGL; the exact main CI log is inaccessible from this sandbox.",
     "incremental_spend_usd": 0,

@@ -279,6 +279,17 @@ async def run_epistemic_goal(
             # Container-supplied observations are advisory, never action or
             # verification authority. Preserve them even when routing refuses.
             envelope["harbor_grounding"] = grounding
+        diagnostic = {}
+        for key in ("engine_status", "language", "engine", "engine_result",
+                    "staging", "test_targets_count", "candidate_applied",
+                    "apply", "diff_bytes", "doc_compiler", "world_model",
+                    "workspace", "language_counts", "markers", "marker_errors"):
+            if key in result:
+                diagnostic[key] = result[key]
+        if diagnostic:
+            # These fields are bounded, untrusted worker diagnostics; official
+            # verification remains external.
+            envelope["imported_engine"] = diagnostic
         actions = extract_actions(result)
         envelope["proposed_actions"] = [str(a.get("type") or "") for a in actions]
         if not envelope["model_pass"] or not actions:
@@ -319,7 +330,8 @@ async def run_epistemic_goal(
                 "schema": SCHEMA,
                 **_transport_contract(),
                 "status": ("FINISHED__DETERMINISTIC_PROPOSAL__VERIFIER_DECIDES"
-                           if envelope['proposal_source'] == 'DETERMINISTIC_TERMINAL_COPY_V1'
+                           if envelope['proposal_source'] in {'DETERMINISTIC_TERMINAL_COPY_V1',
+                                                              'DETERMINISTIC_IMPORTED_ENGINES_V1'}
                            else "FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES"),
                 "task_completion_claimed": False,
                 "summary": args["summary"],
