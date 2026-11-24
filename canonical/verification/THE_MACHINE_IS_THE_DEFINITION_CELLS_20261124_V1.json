@@ -1,0 +1,214 @@
+{
+ "schema": "BRAIN_THE_MACHINE_IS_THE_DEFINITION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "geometry": "TERM=dumb;24x80;stdin=/dev/null;cwd=throwaway-room",
+ "cells": {
+  "OPTION_TABLE": {
+   "pygmentize": {
+    "index_tokens": 11,
+    "confirmed": 10,
+    "argv": [
+     "-l",
+     "-f",
+     "-v",
+     "-s",
+     "-x",
+     "-N",
+     "-C",
+     "-H"
+    ],
+    "prompt": [],
+    "verdict": "OPTION_TABLE",
+    "problems": []
+   },
+   "corepack": {
+    "index_tokens": 8,
+    "confirmed": 8,
+    "argv": [
+     "cache clean",
+     "disable",
+     "enable",
+     "install",
+     "install <-g,--global>",
+     "pack",
+     "up",
+     "use <pattern>"
+    ],
+    "prompt": [],
+    "verdict": "OPTION_TABLE",
+    "problems": []
+   }
+  },
+  "KEY_TABLE": {
+   "less": {
+    "index_tokens": 81,
+    "confirmed": 2,
+    "argv": [],
+    "prompt": [
+     "h",
+     "one"
+    ],
+    "verdict": "KEY_TABLE",
+    "problems": []
+   },
+   "more": {
+    "index_tokens": 1,
+    "confirmed": 0,
+    "argv": [],
+    "prompt": [],
+    "verdict": "UNPROVEN",
+    "problems": []
+   }
+  },
+  "TOKEN_TABLE": {
+   "nodejs": {
+    "index_tokens": 4,
+    "confirmed": 1,
+    "argv": [
+     "-"
+    ],
+    "prompt": [],
+    "verdict": "OPTION_TABLE",
+    "problems": [
+     "the page proposed TOKEN_TABLE and the run produced OPTION_TABLE",
+     "more than a third of the candidates were unobservable"
+    ]
+   }
+  },
+  "BUILTIN_SET": {
+   "bash": {
+    "index_tokens": 64,
+    "confirmed": 6,
+    "argv": [
+     "-ilrsD",
+     ".",
+     "kill",
+     "[",
+     "printf",
+     "pwd"
+    ],
+    "prompt": [],
+    "verdict": "OPTION_TABLE",
+    "problems": [
+     "the page proposed BUILTIN_SET and the run produced OPTION_TABLE"
+    ]
+   },
+   "sh": {
+    "index_tokens": 0,
+    "confirmed": 0,
+    "argv": [],
+    "prompt": [],
+    "verdict": "UNPROVEN",
+    "problems": [
+     "the index found nothing and the prompt defined nothing: this program publishes no alphabet in any form tried"
+    ]
+   }
+  }
+ },
+ "transfer": [
+  {
+   "cell": "OPTION_TABLE",
+   "taught_by": "pygmentize",
+   "held_out": "corepack",
+   "plan": {
+    "way_that_produced_definitions": "argv",
+    "predicted_way_for_the_held_out_program": "argv",
+    "held_out_way_that_produced_definitions": "argv",
+    "verdict_matched": true,
+    "order": [
+     "page",
+     "learned_form",
+     "argv",
+     "prompt"
+    ],
+    "stopping_rule": "stop when a candidate reproduces and differs from its controls"
+   },
+   "correct": true
+  },
+  {
+   "cell": "KEY_TABLE",
+   "taught_by": "less",
+   "held_out": "more",
+   "plan": {
+    "way_that_produced_definitions": "prompt",
+    "predicted_way_for_the_held_out_program": "prompt",
+    "held_out_way_that_produced_definitions": "none",
+    "verdict_matched": false,
+    "order": [
+     "page",
+     "learned_form",
+     "argv",
+     "prompt"
+    ],
+    "stopping_rule": "stop when a candidate reproduces and differs from its controls"
+   },
+   "correct": false
+  },
+  {
+   "cell": "BUILTIN_SET",
+   "taught_by": "bash",
+   "held_out": "sh",
+   "plan": {
+    "way_that_produced_definitions": "argv",
+    "predicted_way_for_the_held_out_program": "argv",
+    "held_out_way_that_produced_definitions": "none",
+    "verdict_matched": false,
+    "order": [
+     "page",
+     "learned_form",
+     "argv",
+     "prompt"
+    ],
+    "stopping_rule": "stop when a candidate reproduces and differs from its controls"
+   },
+   "correct": false
+  }
+ ],
+ "kept_frozen_for_the_next_round": [
+  {
+   "program": "tar",
+   "cell": "OPTION_TABLE",
+   "declared": "a page of options"
+  },
+  {
+   "program": "grep",
+   "cell": "OPTION_TABLE",
+   "declared": "a page of options"
+  },
+  {
+   "program": "find",
+   "cell": "OPTION_TABLE",
+   "declared": "a page of options"
+  },
+  {
+   "program": "openssl",
+   "cell": "SUBCOMMAND_TREE",
+   "declared": "a page of subcommands"
+  },
+  {
+   "program": "git",
+   "cell": "SUBCOMMAND_TREE",
+   "declared": "a page of subcommands"
+  },
+  {
+   "program": "python3",
+   "cell": "TOKEN_TABLE",
+   "declared": "a named command table one level down"
+  },
+  {
+   "program": "vim",
+   "cell": "KEY_TABLE",
+   "declared": "a page of keystrokes"
+  }
+ ],
+ "measured": {
+  "seconds": 42.3,
+  "cells": 4,
+  "transfer_attempts": 3,
+  "transfer_correct": 1
+ },
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "network_calls_at_run_time": 0
+}
