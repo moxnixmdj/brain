@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 602,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7254,
+  "research_index_records": 7256,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 458,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "17cab77cae410736a5124e4567516d707479855421ab1c08bb9872b269ff9be4"
+  "value": "2a6aadb3661c759a8bdc80f86d298416dc33098f8862368806c088967a2433c6"
  },
  "engines": [
   {
@@ -225995,6 +225995,25 @@
    }
   },
   {
+   "action_id": "WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_WHERE_THE_SWE_BENCH_LOSS_IS_V1",
+   "sha256": "e6855c0fa2a7b63d8716bd581db049cd6c48875bdf5c4cfeaac43200052559c6",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "bench": 1,
+    "loss": 1,
+    "swe": 1,
+    "v1": 1,
+    "where_the_swe_bench_loss_is_20261124_v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "",
@@ -265342,6 +265361,51 @@
     "v1": 1,
     "verdict": 1,
     "where_the_observable_was_missing_20261116_v1": 1
+   }
+  },
+  {
+   "action_id": "WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4fe8e85fe024a898c39f7089adaae604905ddcd0004bbda7f139d70e929de707",
+   "status": "SHIPPED",
+   "terms": {
+    "20261124": 1,
+    "actual": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "bench": 1,
+    "benchmark": 1,
+    "better": 2,
+    "break": 1,
+    "build": 1,
+    "candidate": 1,
+    "candidates": 1,
+    "cost": 1,
+    "every": 1,
+    "file": 1,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "judge": 1,
+    "layer": 2,
+    "loss": 2,
+    "measuring": 1,
+    "mostly": 1,
+    "natural": 1,
+    "neighbour": 1,
+    "next": 1,
+    "not": 3,
+    "optimised": 1,
+    "ordering": 1,
+    "prior": 1,
+    "produce": 1,
+    "ranker": 1,
+    "reaches": 1,
+    "right": 1,
+    "round": 1
    }
   },
   {
