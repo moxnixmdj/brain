@@ -1314,3 +1314,49 @@ now complete in both shapes: single-page (§36) and multi-page redirect (§37),
 fresh process replays of the disk-loaded priors, same-content walk reaches the
 goal, different-content honestly refuses and re-scans. §6 remains OPEN; this is
 honest §3 evidence, not a §6 claim.
+
+## 38. §6 — SWE-bench Pro V2 reachability verification (2026-11-23)
+
+The §6 gate requires the system (own weights + instant-knowledge store, zero
+model calls) to perform on the hardest open computer-use/SWE benchmarks. The
+project's own notes (ADMISSION_REFUTES_LIVE_RULES_AND_COUNTS_REAL_PROBES,
+AGREEMENT_IS_NOT_EQUIVALENCE) retire SWE-bench Verified (Feb 2026,
+"saturated and highly contaminated", ~24% leakage) and name SWE-bench Pro /
+OSWorld 2.x the current hardest open benchmarks. This section records exactly
+what is and is not reachable in this sandbox, verified live.
+
+What is reachable:
+  - SWE-bench Pro V2 task definitions, fetched whole via git clone
+    (scaleapi/SWE-bench_Pro-os, main @ 9/2026): 642 tasks x self-contained
+    Harbor task directory (instruction.md, environment/Dockerfile,
+    solution/gold_patch.diff, tests/{config.json, parser.py, test.sh,
+    run_script.sh, test_patch.patch}, v2/hard51_ids.txt, v2/tooling/).
+    The task-definition protocol (git-based test-space reset, apply
+    test_patch.patch, run the selected tests, parser.py extracts
+    FAIL_TO_PASS/PASS_TO_PASS) is real and portable.
+  - 12 repos (ansible/ansible 82, internetarchive__openlibrary 82,
+    future-architect__vuls 58, qutebrowser__qutebrowser 73,
+    gravitational__teleport 68, protonmail__webclients 55,
+    navidrome__navidrome 52, element 52, NodeBB__NodeBB 38,
+    tutao__tutanota 4, flipt 78).
+
+What is NOT reachable, verified live:
+  - The environment (all 642 Dockerfiles are `FROM ghcr.io/scaleapi/
+    swe-bench_pro-v2:<instance_id>` — no other FROM line): ghcr.io is not an
+    outbound host; this sandbox has no Docker daemon; the task images cannot
+    be pulled, built, or reconstructed honestly.
+  - The toolchain the tasks need: ansible (needs python3.12 — only 3.11
+    present), NodeBB (needs redis-server — absent), teleport/vuls/navidrome
+    (Go — absent), qutebrowser (PyQt + display — absent), protonmail/element
+    (web clients — docker/node-native), tutao (undocumented).
+  - Harbor itself (harbor run -p v2/tasks -e modal …): modal.com unreachable.
+
+Honest conclusion: NOT §6. No task in SWE-bench Pro V2 (the current
+ hardest open benchmark) can be run honestly in this sandbox, and §6 stays
+ OPEN. This record is the honest §6 status, not a box-tick.
+
+What this measurement DOES establish: the benchmark is real, public, and
+fetchable as definitions; the protocol is portable; the environment is the
+sole blocker. The honest remaining gap is environment fidelity (the ghcr.io
+images), not agent capability — our own loop has never had the access to
+test itself on these tasks.
