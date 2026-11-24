@@ -474,7 +474,16 @@ jobs:
           if probe_path.is_file():
               try:
                   probe = json.loads(probe_path.read_text(encoding="utf-8"))
-                  probe_ok = bool(probe.get("compose_config_json_parsed")) and int(probe.get("compose_config_exit_code") or 1) == 0
+                  probe_ok = (
+                      bool(probe.get("compose_config_json_parsed"))
+                      and bool(probe.get("compose_config_command_is_config_only"))
+                      and int(probe.get("compose_config_exit_code", 1)) == 0
+                      and int(probe.get("compose_json_command_exit_code", 1)) == 0
+                      and int(probe.get("compose_service_count") or 0) >= 40
+                      and str(probe.get("website_tag_commit") or "") == os.environ["OSW_WEBSITE_TAG_COMMIT"]
+                      and bool(probe.get("static_source_binding_pass"))
+                      and bool(probe.get("source_verification_all_true"))
+                  )
               except Exception:
                   probe_ok = False
           if not source_ok:
