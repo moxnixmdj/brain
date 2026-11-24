@@ -1477,6 +1477,7 @@ def _check_semantic_postconditions(
     Prevents false positives (such as running `sort` on raw `.gz` binary bytes and claiming
     success merely because an output file has >0 bytes!).
     """
+    predicates_checked = 0
     goal_low = (goal or "").lower()
     in_files = list(boundary.get("input_files") or [])
     in_path = (workspace / in_files[0]) if in_files else None
@@ -1494,11 +1495,13 @@ def _check_semantic_postconditions(
 
     if out_bytes is None or len(out_bytes) == 0:
         return False, "empty_output_bytes"
+    predicates_checked = 0
 
     # 2. Decompression invariant: output must NOT still carry compressed archive magic
     if re.search(r"\b(decompress|uncompress|gunzip|bunzip2|unxz|inflate)\b", goal_low) or (
         in_magic in ("gzip", "bzip2", "xz") and re.search(r"\b(extract|decode)\b", goal_low)
     ):
+        predicates_checked += 1
         if out_bytes.startswith((b"\x1f\x8b", b"BZh", b"\xfd7zXZ\x00", b"PK\x03\x04")):
             return False, "postcondition_failed:output_still_compressed"
         if in_path is not None and in_path.is_file():
@@ -1530,6 +1533,7 @@ def _check_semantic_postconditions(
         # 3a. Pattern filter invariant (`containing X` / `matching X`)
         unq_pats = list(boundary.get("unquoted_patterns") or [])
         if unq_pats and re.search(r"\b(containing|contains|matching|matches)\b", goal_low):
+            predicates_checked += 1
             pat = unq_pats[0]
             ign_case = bool(re.search(r"\b(case[- ]?insensitive|ignore[- ]?case)\b", goal_low))
             for ln in lines:
@@ -1554,11 +1558,13 @@ def _check_semantic_postconditions(
 
         # 3b. Unique / deduplicate invariant
         if re.search(r"\b(unique|dedup|deduplicate|deduplicated)\b", goal_low):
+            predicates_checked += 1
             if len(lines) != len(set(lines)):
                 return False, "postcondition_failed:duplicate_lines_remain"
 
         # 3c. Sort order invariant (when explicitly sorting without numeric-only custom key)
         if re.search(r"\b(sort|sorted)\b", goal_low) and not re.search(r"\b(numeric|number|frequency|count|column|field|key)\b", goal_low):
+            predicates_checked += 1
             rev = bool(re.search(r"\b(reverse|descending|desc)\b", goal_low))
             # Check monotonic order under standard ASCII or case-insensitive locale collation
             if lines != sorted(lines, reverse=rev) and [l.lower() for l in lines] != sorted([l.lower() for l in lines], reverse=rev):
@@ -1567,6 +1573,7 @@ def _check_semantic_postconditions(
         # 3d. Top-N / First-N / Last-N line count invariant
         num_slots = dict(boundary.get("numeric_slots") or {})
         if "lines" in num_slots and re.search(r"\b(first|top|head|last|tail|limit)\s+\d+\b", goal_low):
+            predicates_checked += 1
             try:
                 max_n = int(num_slots["lines"])
                 if not (1 <= len(lines) <= max_n):
@@ -1576,23 +1583,29 @@ def _check_semantic_postconditions(
 
         # 3e. Checksum / hash digest format invariant
         if re.search(r"\b(sha256|sha-256)\b", goal_low):
+            predicates_checked += 1
             if not re.search(r"\b[0-9a-fA-F]{64}\b", out_text):
                 return False, "postcondition_failed:missing_64hex_sha256_digest"
         elif re.search(r"\b(sha1|sha-1)\b", goal_low):
+            predicates_checked += 1
             if not re.search(r"\b[0-9a-fA-F]{40}\b", out_text):
                 return False, "postcondition_failed:missing_40hex_sha1_digest"
         elif re.search(r"\bmd5\b", goal_low):
+            predicates_checked += 1
             if not re.search(r"\b[0-9a-fA-F]{32}\b", out_text):
                 return False, "postcondition_failed:missing_32hex_md5_digest"
 
         # 3f. JSON syntax check if output file is `.json`
         if out_path is not None and out_path.suffix.lower() == ".json":
+            predicates_checked += 1
             try:
                 json.loads(out_text)
             except Exception as exc:
                 return False, f"invalid_json_output:{exc}"
 
-    return True, "semantic_postconditions_verified"
+    if predicates_checked:
+        return True, f"semantic_postconditions_verified:predicates={predicates_checked}"
+    return True, "no_invariant_applicable__UNVERIFIED_CLAIM"
 
 
 def _independent_cli_verify(
