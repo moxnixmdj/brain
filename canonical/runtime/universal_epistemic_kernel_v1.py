@@ -2352,8 +2352,16 @@ def _extract_web_field_values(instruction: str) -> dict[str, str]:
     ):
         k = m.group(1).strip().lower()
         v = (m.group(2) or m.group(3) or m.group(4) or "").strip().rstrip(".,;")
-        if k in ("the", "a", "an", "to", "at", "on", "in", "for", "of", "from", "http", "https",
-                 "find", "search", "select", "open", "click", "buy", "add", "go", "visit", "navigate", "complete", "submit", "choose", "pick"):
+        if k in (
+            "the", "a", "an", "to", "at", "on", "in", "for", "of", "from", "http", "https",
+            "and", "or", "but", "then", "with", "using", "into", "onto", "after", "before",
+            "find", "search", "select", "open", "click", "buy", "add", "go", "visit",
+            "navigate", "complete", "submit", "choose", "pick", "create", "make", "update",
+            "edit", "save", "write", "store", "extract", "get", "set", "check", "verify",
+            "confirm", "ensure", "fill", "enter", "log", "sign", "delete", "remove",
+        ):
+            continue
+        if "=" in v or ":" in v:
             continue
         if k not in vals and v and not v.startswith("http"):
             vals[k] = v
@@ -3151,6 +3159,45 @@ def solve_live_http_web_ui(
     recalled_law: dict[str, Any] | None = None
     had_hidden_replay = False
     last_form_desc: dict[str, Any] | None = None
+    submitted_supplied_keys: set[str] = set()
+    visited_nav_urls: set[str] = {url}
+    _runtime_meta_keys = {
+        "workspace", "repo_root", "root", "url", "target_url",
+        "timeout_s", "allow_destructive", "max_rounds", "cwd", "workdir", "mode",
+        "memory", "spec_docs", "docs", "files",
+    }
+
+    def _pick_next_goal_link(page_html: str, page_url: str, rem_fields: list[str]) -> dict[str, str] | None:
+        scan_p = _scan_web_page_epistemic(page_html, page_url, allow_destructive=allow_destructive)
+        goal_toks = set(
+            t for t in re.findall(r"[a-z0-9]+", (instruction + " " + " ".join(rem_fields)).lower())
+            if len(t) >= 3 and t not in {
+                "http", "https", "with", "from", "into", "that", "this", "then",
+                "and", "the", "for", "log", "login", "sign", "navigate", "open",
+                "create", "submit", "page", "url",
+            }
+        )
+        best_lk: dict[str, str] | None = None
+        best_sc = (-1, -1)
+        for lk in scan_p.get("safe_links") or []:
+            u = str(lk.get("url") or "")
+            if not u or u in visited_nav_urls:
+                continue
+            lk_toks = set(
+                t for t in re.findall(r"[a-z0-9]+", (str(lk.get("text") or "") + " " + str(lk.get("href") or "")).lower())
+                if len(t) >= 3
+            )
+            ov = len(goal_toks & lk_toks)
+            # Also reward prefix/stem match (e.g. key <-> keys)
+            stem_ov = sum(
+                1 for gt in goal_toks
+                if any(lt.startswith(gt[:4]) or gt.startswith(lt[:4]) for lt in lk_toks if len(lt) >= 3 and len(gt) >= 3)
+            )
+            sc = (ov * 3 + stem_ov, len(lk_toks))
+            if sc > best_sc:
+                best_sc = sc
+                best_lk = lk
+        return best_lk
 
     current_url = url
     for round_idx in range(1, max(1, max_rounds) + 1):
@@ -3223,6 +3270,23 @@ def solve_live_http_web_ui(
                         max_steps=max(16, max_rounds * 3),
                         timeout_s=timeout_s,
                     )
+            else:
+                _rem_nav = [k for k in supplied if k not in submitted_supplied_keys and k not in _runtime_meta_keys]
+                if _rem_nav and round_idx < max_rounds:
+                    _next_lk = _pick_next_goal_link(html, resolved_url, _rem_nav)
+                    if _next_lk is not None:
+                        visited_nav_urls.add(_next_lk["url"])
+                        trace.append({
+                            "round": round_idx,
+                            "action": _next_lk["href"],
+                            "method": "NAVIGATE",
+                            "http_status": status_get,
+                            "submitted_keys": [],
+                            "blocked_destructive": list(blocked_destructive_forms),
+                            "response_excerpt": f"follow_link:{_next_lk['text']}",
+                        })
+                        current_url = _next_lk["url"]
+                        continue
             return {
                 "schema": SCHEMA,
                 "authority": AUTHORITY,
@@ -3303,12 +3367,44 @@ def solve_live_http_web_ui(
         })
 
         if 200 <= st_sub < 300:
+            for _pk in payload:
+                submitted_supplied_keys.add(str(_pk).lower())
+            _remaining_supplied = [k for k in supplied if k not in submitted_supplied_keys and k not in _runtime_meta_keys]
+
             # Check if response leads to a follow-up safe form (multi-step wizard)
             next_desc = HTMLFORM.describe(HTMLFORM.read_forms(body_sub))
             next_safe = [f for f in (next_desc.get("forms") or []) if allow_destructive or not _is_form_destructive(f)]
-            if next_safe and round_idx < max_rounds and final_url != resolved_url:
+            _next_has_rem = any(
+                str(fn).lower() in _remaining_supplied
+                for nf in next_safe
+                for fn in ((nf.get("required_input") or []) + (nf.get("optional_input") or []))
+            )
+            if next_safe and round_idx < max_rounds and (final_url != resolved_url or _next_has_rem):
                 current_url = final_url
                 continue
+
+            # Honest goal-completion check: if user-supplied goal fields were NEVER
+            # submitted yet, navigate via goal-relevant links on the resulting page
+            # (e.g. Login -> Dashboard -> API Keys -> Create Key) instead of falsely
+            # declaring VERIFIED on an intermediate 200 OK page!
+            if _remaining_supplied:
+                if round_idx < max_rounds:
+                    _next_lk = _pick_next_goal_link(body_sub, final_url, _remaining_supplied)
+                    if _next_lk is not None:
+                        visited_nav_urls.add(_next_lk["url"])
+                        trace.append({
+                            "round": round_idx,
+                            "action": _next_lk["href"],
+                            "method": "NAVIGATE",
+                            "http_status": st_sub,
+                            "submitted_keys": [],
+                            "blocked_destructive": list(blocked_destructive_forms),
+                            "response_excerpt": f"follow_link:{_next_lk['text']}",
+                        })
+                        current_url = _next_lk["url"]
+                        continue
+                # Escalate to multi-screen world-model planner rather than falsely claiming VERIFIED
+                break
 
             law_saved = _distill_web_workflow_law(
                 memory,

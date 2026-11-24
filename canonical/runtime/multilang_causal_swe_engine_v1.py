@@ -2840,6 +2840,92 @@ def synthesize_js_candidates(
         for _scad, ln_0ad, desc_0ad, psrc_0ad in _0ad_hits[:4]:
             add_cand(rel, ln_0ad, "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY", desc_0ad, psrc_0ad)
 
+        # Op 0ae (Iter 64 — Early-Return Sibling Wrapper Consistency law):
+        # `JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY`:
+        # When a function already contains a canonical wrapper return `return WRAP(baseVar);`
+        # (e.g. `return formatter(encoder && !encodeValuesOnly ? encoder(prefix, ...) : prefix);`)
+        # and a sibling early return emits a raw `return derivedVar + suffix;` (where `derivedVar`
+        # shares stem with `baseVar` or equals `baseVar`), wrap `derivedVar` using the function's
+        # own sibling wrapper template.
+        _wrap_ret_re = re.compile(
+            r"^\s*return\s+\[?\s*([A-Za-z_$]\w*\([^;\n]*?\b([A-Za-z_$]\w*)\b[^;\n]*?:\s*\2\s*\))"
+        )
+        _raw_ret_re = re.compile(
+            r"^(\s*return\s+)([A-Za-z_$]\w*)(\s*\+\s*['\"][^'\"]+['\"]\s*;\s*)$"
+        )
+        _wrap_templates: list[tuple[int, str, str]] = []
+        for wi_ae, raw_w in enumerate(lines):
+            m_w = _wrap_ret_re.match(raw_w)
+            if m_w:
+                _wrap_templates.append((wi_ae, m_w.group(1), m_w.group(2)))
+        if _wrap_templates:
+            _0ae_hits: list[tuple[int, int, str, str]] = []
+            for ri_ae, raw_r in enumerate(lines):
+                m_r = _raw_ret_re.match(raw_r)
+                if not m_r:
+                    continue
+                ret_pfx, rvar, ret_sfx = m_r.group(1), m_r.group(2), m_r.group(3)
+                for w_idx, w_expr, base_var in _wrap_templates:
+                    if abs(ri_ae - w_idx) > 120:
+                        continue
+                    if base_var.lower() not in rvar.lower() and rvar.lower() not in base_var.lower():
+                        continue
+                    # Replace whole-word occurrences of `base_var` with `rvar` in the sibling wrapper
+                    wrapped = re.sub(rf"\b{re.escape(base_var)}\b", rvar, w_expr)
+                    nl_ae = list(lines)
+                    nl_ae[ri_ae] = f"{ret_pfx}{wrapped}{ret_sfx}"
+                    in_loc_ae = 1 if (ri_ae + 1) in lns else 0
+                    _0ae_hits.append((in_loc_ae, ri_ae + 1, f"sibling_wrap({rvar} via {base_var})", "".join(nl_ae)))
+                    break
+            _0ae_hits.sort(key=lambda t: (-t[0], t[1]))
+            for _ilae, ln_0ae, desc_0ae, psrc_0ae in _0ae_hits[:4]:
+                add_cand(rel, ln_0ae, "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY", desc_0ae, psrc_0ae)
+
+        # Op 0af (Iter 64 — ECMA-262 §10.1.9 / CWE-1321 `__proto__` Own-Property Law):
+        # `JS_PROTO_SAFE_DEFINE_PROPERTY`:
+        # In JS, `target[key] = val` invokes `Object.prototype.__proto__` setter when `key === '__proto__'`,
+        # mutating the prototype chain instead of storing an own enumerable data property.
+        # When failing tests mention `__proto__`, rewrite dynamic bracket writes inside object-copy loops
+        # to use `Object.defineProperty` for `'__proto__'`, preserving fast assignment for all other keys.
+        if "__proto__" in _fail_blob_0y or "prototype" in _fail_blob_0y:
+            _br_assign_re = re.compile(
+                r"^(\s*)([A-Za-z_$]\w*)\[((?:[^\[\]\n]+|\[[^\]\n]+\])+)\]\s*=\s*([^;\n]+);\s*$"
+            )
+            _loop_groups: dict[int, list[tuple[int, str, str, str, str]]] = {}
+            for ri_af, raw_af in enumerate(lines):
+                m_af = _br_assign_re.match(raw_af)
+                if not m_af:
+                    continue
+                ind_af, tgt_af, key_af, val_af = m_af.group(1), m_af.group(2), m_af.group(3).strip(), m_af.group(4).strip()
+                if tgt_af in ("queue", "stack", "list", "results", "values", "arr", "items"):
+                    continue
+                if key_af.endswith(".length") or key_af.isdigit():
+                    continue
+                # Find enclosing `for` loop within 25 lines above
+                loop_hdr = -1
+                for bk in range(ri_af - 1, max(-1, ri_af - 26), -1):
+                    if re.match(r"^\s*for\s*\(", lines[bk]):
+                        loop_hdr = bk
+                        break
+                if loop_hdr >= 0:
+                    _loop_groups.setdefault(loop_hdr, []).append((ri_af, ind_af, tgt_af, key_af, val_af))
+            _0af_hits: list[tuple[int, int, str, str]] = []
+            for loop_hdr, items_af in _loop_groups.items():
+                nl_af = list(lines)
+                hit_loc = 0
+                for ri_af, ind_af, tgt_af, key_af, val_af in items_af:
+                    if (ri_af + 1) in lns:
+                        hit_loc = 1
+                    nl_af[ri_af] = (
+                        f"{ind_af}if ({key_af} === '__proto__') {{ "
+                        f"Object.defineProperty({tgt_af}, {key_af}, {{ value: {val_af}, writable: true, enumerable: true, configurable: true }}); "
+                        f"}} else {{ {tgt_af}[{key_af}] = {val_af}; }}\n"
+                    )
+                _0af_hits.append((hit_loc + len(items_af), items_af[0][0] + 1, f"proto_define_property({items_af[0][2]}, {len(items_af)} writes)", "".join(nl_af)))
+            _0af_hits.sort(key=lambda t: (-t[0], t[1]))
+            for _scaf, ln_0af, desc_0af, psrc_0af in _0af_hits[:4]:
+                add_cand(rel, ln_0af, "JS_PROTO_SAFE_DEFINE_PROPERTY", desc_0af, psrc_0af)
+
         # Op 0l (high-precision JS implicit-string-coercion guard hardening):
         # `JS_COERCE_STRICT_STRING_GUARD`:
         # When a guard checks strict equality against string literals (`if (k === 'a' || k === 'b' ...)`),
@@ -3358,6 +3444,8 @@ def synthesize_js_candidates(
         "JS_NULLISH_BOOL_DEFAULT_STRICT_UNDEFINED": 0,
         "JS_THROW_LIMIT_NONZERO_LOWER_BOUND": 0,
         "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY": 0,
+        "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY": 0,
+        "JS_PROTO_SAFE_DEFINE_PROPERTY": 0,
         "JS_S3_BRANCH_STRENGTHEN": 1,
         "JS_NULLISH_TYPEOF_GUARD": 2,
         "JS_FALSY_ZERO_NUMERIC_COERCION_FIX": 2,
@@ -3883,6 +3971,8 @@ def solve_js_repository(
                     "JS_NULLISH_BOOL_DEFAULT_STRICT_UNDEFINED",
                     "JS_THROW_LIMIT_NONZERO_LOWER_BOUND",
                     "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY",
+                    "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY",
+                    "JS_PROTO_SAFE_DEFINE_PROPERTY",
                 }
                 _p0 = [c for c in cands if c.tier in _p0_tiers]
                 _rest = [c for c in cands if c.tier not in _p0_tiers]

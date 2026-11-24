@@ -9423,6 +9423,87 @@ def synthesize_candidates(
                                             )
                                         )
 
+            # Iter 64 Law 12j (CWE-176 / RFC 3986 / SPDX Non-ASCII Validation Before Normalization):
+            # When a test fails with `DID NOT RAISE <DomainExc>` and a localized function already
+            # raises `<DomainExc>` while normalizing a string token (`if v.lower().startswith(...)`),
+            # guard `if not v.isascii(): raise <DomainExc>(...)` at branch entry so non-ASCII
+            # inputs cannot slip past case-folding/normalization.
+            _exc_blob_12j = " ".join(
+                [str(getattr(loc, "exceptions", "") or "")]
+                + [str(m) for s_j in loc.sites[:8] for m in (getattr(s_j, "exception_messages", ()) or ())]
+            )
+            _m_dnr = re.search(r"DID NOT RAISE\s+<class\s+'[^']*\.([A-Za-z_]\w*)'", _exc_blob_12j)
+            if not _m_dnr:
+                _m_dnr = re.search(r"DID NOT RAISE\s+([A-Za-z_]\w*)", _exc_blob_12j)
+            if _m_dnr:
+                _exc_cls_12j = _m_dnr.group(1)
+                for fn_node in ast.walk(tree):
+                    if not isinstance(fn_node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        continue
+                    _raises_target = any(
+                        isinstance(rn, ast.Raise)
+                        and isinstance(rn.exc, ast.Call)
+                        and isinstance(rn.exc.func, ast.Name)
+                        and rn.exc.func.id == _exc_cls_12j
+                        for rn in ast.walk(fn_node)
+                    )
+                    if not _raises_target:
+                        continue
+                    _seen_12j_stmts: set[int] = set()
+                    for sub_n in ast.walk(fn_node):
+                        _vname_12j: str | None = None
+                        _anchor_st: ast.stmt | None = None
+                        if (
+                            isinstance(sub_n, ast.If)
+                            and sub_n.body
+                            and isinstance(sub_n.test, ast.Call)
+                            and isinstance(sub_n.test.func, ast.Attribute)
+                            and sub_n.test.func.attr == "startswith"
+                            and isinstance(sub_n.test.func.value, ast.Call)
+                            and isinstance(sub_n.test.func.value.func, ast.Attribute)
+                            and sub_n.test.func.value.func.attr in ("lower", "casefold")
+                            and isinstance(sub_n.test.func.value.func.value, ast.Name)
+                        ):
+                            _vname_12j = sub_n.test.func.value.func.value.id
+                            _anchor_st = sub_n.body[0]
+                        elif (
+                            isinstance(sub_n, ast.Assign)
+                            and isinstance(sub_n.value, ast.Call)
+                            and isinstance(sub_n.value.func, ast.Attribute)
+                            and sub_n.value.func.attr in ("lower", "casefold")
+                            and isinstance(sub_n.value.func.value, ast.Name)
+                        ):
+                            _vname_12j = sub_n.value.func.value.id
+                            _anchor_st = sub_n
+                        if not _vname_12j or _anchor_st is None:
+                            continue
+                        _aln = int(getattr(_anchor_st, "lineno", 0) or 0)
+                        if _aln <= 0 or _aln in _seen_12j_stmts:
+                            continue
+                        _seen_12j_stmts.add(_aln)
+                        _guard_st = ast.parse(
+                            f"if not {_vname_12j}.isascii():\n"
+                            f"    raise {_exc_cls_12j}(f'Invalid non-ASCII value: {{{_vname_12j}!r}}')\n"
+                        ).body[0]
+                        _code_12j = _replace_stmt_in_tree(
+                            tree,
+                            _aln,
+                            ast.unparse(_anchor_st),
+                            [_guard_st, copy.deepcopy(_anchor_st)],
+                        )
+                        if _code_12j:
+                            push(
+                                PatchCandidate(
+                                    file=site.file,
+                                    lineno=_aln,
+                                    tier="TIER3_NON_ASCII_VALIDATION_GUARD",
+                                    description=f"reject_non_ascii({_vname_12j} -> {_exc_cls_12j})",
+                                    patched_source=_code_12j,
+                                    ast_position="stmt",
+                                    hole_traits=traits,
+                                )
+                            )
+
         # Guards & hoists on localized lines (even if angelic global flip wasn't tested)
         for node in ast.walk(tree):
             if isinstance(node, (ast.If, ast.While)) and getattr(node, "lineno", None) == site.lineno:

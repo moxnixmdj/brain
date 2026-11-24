@@ -3281,6 +3281,94 @@ class TestMultiLangCausalSWEEngineV1(unittest.TestCase):
                 self.assertEqual(res["winner"]["tier"], "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY")
                 self.assertEqual(res["model_calls"], 0)
 
+    def test_28_iter64_js_early_return_sibling_wrapper_and_proto_safe_define_property(self) -> None:
+        """Iter 64 universal JS SWE laws:
+        1. Op 0ae (`JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY`): wrap raw variable in early
+           return with the exact encoder/formatter pipeline used by sibling returns in the same function.
+        2. Op 0af (`JS_PROTO_SAFE_DEFINE_PROPERTY`, ECMA-262 §10.1.9 / CWE-1321): replace
+           `obj[key] = val` with `__proto__`-guarded `Object.defineProperty(...)` across coupled writes.
+        """
+        # 1. Op 0ae: early return missing sibling formatter/encoder pipeline
+        with self.subTest(case="js_early_return_sibling_wrapper_consistency"):
+            with tempfile.TemporaryDirectory(prefix="brain_js_iter64_0ae_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "fmt.js": (
+                            "function serialize(val, key, encoder, formatter, encodeValuesOnly) {\n"
+                            "  if (typeof val === 'string') {\n"
+                            "    return formatter(encoder && !encodeValuesOnly ? encoder(key) : key) + '=' + formatter(val);\n"
+                            "  }\n"
+                            "  if (Array.isArray(val) && val.length === 0) {\n"
+                            "    return key + '[]';\n"
+                            "  }\n"
+                            "  return '';\n"
+                            "}\n"
+                            "module.exports = { serialize };\n"
+                        ),
+                        "test_fmt.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { serialize } = require('./fmt.js');\n"
+                            "test('empty array early return encodes and formats key', () => {\n"
+                            "  const enc = s => s.replace(/\\s/g, '%20');\n"
+                            "  const fmt = s => s.toUpperCase();\n"
+                            "  assert.strictEqual(serialize([], 'my key', enc, fmt, false), 'MY%20KEY[]');\n"
+                            "  assert.strictEqual(serialize([], 'my key', enc, fmt, true), 'MY KEY[]');\n"
+                            "  assert.strictEqual(serialize('v', 'my key', enc, fmt, false), 'MY%20KEY=V');\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                res = ML_SWE.solve_js_repository(root, ["test_fmt.js"], timeout_s=20.0)
+                self.assertTrue(res["verified"], res)
+                self.assertEqual(res["winner"]["tier"], "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY")
+                self.assertEqual(res["model_calls"], 0)
+
+        # 2. Op 0af: ECMA-262 __proto__ own data-property preservation
+        with self.subTest(case="js_proto_safe_define_property"):
+            with tempfile.TemporaryDirectory(prefix="brain_js_iter64_0af_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "clone.js": (
+                            "function cloneRecord(src) {\n"
+                            "  var target = {};\n"
+                            "  var keys = Object.keys(src);\n"
+                            "  for (var j = 0; j < keys.length; j += 1) {\n"
+                            "    var val = src[keys[j]];\n"
+                            "    if (val && typeof val === 'object') {\n"
+                            "      target[keys[j]] = cloneRecord(val);\n"
+                            "    } else {\n"
+                            "      target[keys[j]] = val;\n"
+                            "    }\n"
+                            "  }\n"
+                            "  return target;\n"
+                            "}\n"
+                            "module.exports = { cloneRecord };\n"
+                        ),
+                        "test_clone.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { cloneRecord } = require('./clone.js');\n"
+                            "test('__proto__ key does not mutate prototype of clone', () => {\n"
+                            "  const src = JSON.parse('{\"__proto__\":{\"polluted\":true},\"ok\":1}');\n"
+                            "  const out = cloneRecord(src);\n"
+                            "  assert.strictEqual(out.polluted, undefined);\n"
+                            "  assert.strictEqual(Object.getPrototypeOf(out), Object.prototype);\n"
+                            "  assert.strictEqual(Object.prototype.hasOwnProperty.call(out, '__proto__'), true);\n"
+                            "  assert.strictEqual(out.ok, 1);\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                res = ML_SWE.solve_js_repository(root, ["test_clone.js"], timeout_s=20.0)
+                self.assertTrue(res["verified"], res)
+                self.assertEqual(res["winner"]["tier"], "JS_PROTO_SAFE_DEFINE_PROPERTY")
+                self.assertEqual(res["model_calls"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

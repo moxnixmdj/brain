@@ -2090,6 +2090,121 @@ class UniversalEpistemicKernelTests(unittest.TestCase):
         self.assertTrue(app_b.vals["in_cb"].startswith("https://"))
         self.assertGreaterEqual(len(app_b.vals["in_tok"]), 14)
 
+    def test_iter64_live_multipage_auth_link_navigation_and_honest_field_completion(self) -> None:
+        """Iter 64: After an authenticated login POST redirects to a form-less Dashboard,
+        UEK MUST NOT falsely declare VERIFIED while user-supplied goal fields remain unsubmitted;
+        it must follow goal-relevant safe `<a href>` links (skipping destructive traps), replay
+        fresh hidden CSRF tokens, submit the target form, AND fail closed when no target exists.
+        """
+        import http.server
+        import socketserver
+        import threading
+        import urllib.parse
+        from canonical.runtime import brain_unified_model_v1 as UM
+
+        keys_created: list[str] = []
+        mode = {"with_keys": True}
+
+        class _PortalHandler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args: object) -> None:
+                pass
+
+            def _authed(self) -> bool:
+                return "sid=ok_sess" in (self.headers.get("Cookie") or "")
+
+            def do_GET(self) -> None:
+                if self.path == "/":
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html")
+                    self.end_headers()
+                    if not self._authed():
+                        self.wfile.write(
+                            b'<html><body><h1>Portal Login</h1>'
+                            b'<form method="POST" action="/login">'
+                            b'<input type="hidden" name="csrf" value="tok-77">'
+                            b'<input name="username"><input name="password" type="password">'
+                            b'<button type="submit">Sign In</button></form></body></html>'
+                        )
+                    elif mode["with_keys"]:
+                        self.wfile.write(
+                            b'<html><body><h1>Dashboard</h1>'
+                            b'<a href="/profile">Profile</a> '
+                            b'<a href="/settings/keys">API Keys</a> '
+                            b'<a href="/delete-account">Delete Account</a></body></html>'
+                        )
+                    else:
+                        self.wfile.write(b"<html><body><h1>Dashboard</h1><p>Read-only.</p></body></html>")
+                elif self.path == "/settings/keys":
+                    if not self._authed():
+                        self.send_response(302)
+                        self.send_header("Location", "/")
+                        self.end_headers()
+                        return
+                    self.send_response(200)
+                    self.send_header("Content-Type", "text/html")
+                    self.end_headers()
+                    self.wfile.write(
+                        b'<html><body><h1>API Keys</h1>'
+                        b'<form method="POST" action="/settings/keys">'
+                        b'<input type="hidden" name="csrf" value="tok-88">'
+                        b'<input name="key_name">'
+                        b'<button type="submit">Create Key</button></form></body></html>'
+                    )
+                else:
+                    self.send_response(404)
+                    self.end_headers()
+
+            def do_POST(self) -> None:
+                ln = int(self.headers.get("Content-Length", "0"))
+                form = urllib.parse.parse_qs(self.rfile.read(ln).decode())
+                if self.path == "/login":
+                    if form.get("csrf") == ["tok-77"] and form.get("username") == ["admin"] and form.get("password") == ["s3cr3t"]:
+                        self.send_response(302)
+                        self.send_header("Set-Cookie", "sid=ok_sess; Path=/")
+                        self.send_header("Location", "/")
+                        self.end_headers()
+                    else:
+                        self.send_response(401)
+                        self.end_headers()
+                elif self.path == "/settings/keys":
+                    if self._authed() and form.get("csrf") == ["tok-88"] and form.get("key_name"):
+                        keys_created.append(form["key_name"][0])
+                        self.send_response(200)
+                        self.send_header("Content-Type", "text/html")
+                        self.end_headers()
+                        self.wfile.write(b"<html><body><h1>Key Created</h1><code>sk-live-9001</code></body></html>")
+                    else:
+                        self.send_response(403)
+                        self.end_headers()
+
+        srv = socketserver.TCPServer(("127.0.0.1", 0), _PortalHandler)
+        port = srv.server_address[1]
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            with tempfile.TemporaryDirectory(prefix="uek_iter64_web_") as td:
+                goal = (
+                    f"Log in to http://127.0.0.1:{port} with username=admin password=s3cr3t, "
+                    "navigate to API Keys, and create key key_name=prod-sync"
+                )
+                # 1. Positive multi-page Login -> Dashboard -> API Keys -> Create Key
+                r1 = UM.open_model().solve(goal, inputs={"workspace": td}, mode="EPISTEMIC")
+                self.assertTrue(r1.get("pass"), r1)
+                self.assertEqual(keys_created, ["prod-sync"])
+                ep1 = r1.get("epistemic_result") or {}
+                self.assertEqual(ep1.get("model_calls"), 0)
+                self.assertEqual(ep1.get("parameters_stored"), 0)
+                self.assertIn("/settings/keys", [t.get("action") for t in (ep1.get("trace") or [])])
+
+                # 2. Honest fail-closed when Dashboard has NO target link/form
+                mode["with_keys"] = False
+                keys_created.clear()
+                r2 = UM.open_model().solve(goal, inputs={"workspace": td}, mode="EPISTEMIC")
+                self.assertFalse(r2.get("pass"), r2)
+                self.assertEqual(keys_created, [])
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()

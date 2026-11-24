@@ -2734,6 +2734,46 @@ def test_31_iter63_normalized_local_substitution_law12i() -> None:
         assert res["model_calls"] == 0 and res["parameters_stored"] == 0
 
 
+def test_32_iter64_non_ascii_validation_guard_law12j() -> None:
+    """Iter 64 Law 12j (`TIER3_NON_ASCII_VALIDATION_GUARD`, CWE-176):
+    When a validator calls `.lower()` / `.casefold()` on a string input before checking
+    an ASCII-only regex/alphabet, Unicode confusables like Kelvin sign `'\\u212a'` (`'\\u212a'.lower() == 'k'`)
+    bypass validation unless guarded with `if not s.isascii(): raise <DomainError>(...)`.
+    """
+    with tempfile.TemporaryDirectory(prefix="brain_py_iter64_ascii_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/expr.py": (
+                    "import re\n\n"
+                    "class InvalidTag(ValueError):\n"
+                    "    pass\n\n"
+                    "def canonicalize_tag(raw: str) -> str:\n"
+                    "    low = raw.lower()\n"
+                    "    if not re.fullmatch(r'[a-z0-9\\-]+', low):\n"
+                    "        raise InvalidTag(f'bad tag: {raw}')\n"
+                    "    return low\n"
+                ),
+                "tests/test_expr.py": (
+                    "import pytest\n"
+                    "from pkg.expr import InvalidTag, canonicalize_tag\n\n"
+                    "def test_rejects_kelvin_sign_confusable():\n"
+                    "    assert canonicalize_tag('Custom-1') == 'custom-1'\n"
+                    "    with pytest.raises(InvalidTag):\n"
+                    "        canonicalize_tag('Tag-\\u212austom')\n"
+                    "    with pytest.raises(InvalidTag):\n"
+                    "        canonicalize_tag('bad!tag')\n"
+                ),
+            },
+        )
+        res = ENGINE.solve_repository(root, ["tests/test_expr.py"], python_exe=sys.executable)
+        assert res["verified"] is True, res
+        assert res["winner"]["tier"] == "TIER3_NON_ASCII_VALIDATION_GUARD", res["winner"]
+        assert res["model_calls"] == 0 and res["parameters_stored"] == 0
+
+
 
 
 

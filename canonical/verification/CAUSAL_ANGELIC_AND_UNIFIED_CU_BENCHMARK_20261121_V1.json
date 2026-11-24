@@ -4815,5 +4815,60 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter64_swe_security_early_return_and_honest_multipage_web": {
+    "description": "Iter 64: (A) Added universal JS SWE laws Op 0ae (`JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY`) and Op 0af (`JS_PROTO_SAFE_DEFINE_PROPERTY`, ECMA-262 §10.1.9 / CWE-1321 own-property preservation across nested bracket assignments) to `multilang_causal_swe_engine_v1.py`, plus Python SWE Law 12j (`TIER3_NON_ASCII_VALIDATION_GUARD`, CWE-176 Unicode case-fold confusable guard before `.lower()/.casefold()`) to `causal_angelic_swe_engine_v1.py`, verifying 3 fresh Oct-Nov 2026 real OSS commits (`ljharb/qs@ad445aa`, `ljharb/qs@a2667af`, `pypa/packaging@8c37b04`) to reach 210 cumulative unique verified OSS commits with `model_calls == 0` and `parameters_stored == 0`. (B) Fixed a false-positive premature-VERIFIED bug in `universal_epistemic_kernel_v1.py` live HTTP web automation: after authenticated login redirects to a form-less page, UEK now checks whether all user-supplied goal fields were submitted, follows goal-relevant safe `<a href>` links (avoiding destructive traps) to complete downstream CSRF-protected forms, excludes English conjunctions/verbs in `_extract_web_field_values`, and fails closed when no target exists.",
+    "cumulative_unique_verified_oss_commits": 210,
+    "verified_commits": [
+      {
+        "repo": "ljharb/qs",
+        "commit": "ad445aa",
+        "date": "2026-10-27",
+        "language": "javascript",
+        "file": "lib/stringify.js",
+        "lineno": 162,
+        "tier": "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY",
+        "mechanism": "wrap_early_return(adjustedPrefix -> formatter(encoder && !encodeValuesOnly ? encoder(adjustedPrefix, defaults.encoder, charset, 'key', format) : adjustedPrefix))",
+        "elapsed_s": 2.12,
+        "independent_full_suite": "node test/{empty-keys-cases,parse,stringify,utils}.js: 1028/1028 pass (rc=0); exact character-for-character upstream diff",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ljharb/qs",
+        "commit": "a2667af",
+        "date": "2026-10-22",
+        "language": "javascript",
+        "file": "lib/parse.js",
+        "lineno": 48,
+        "tier": "JS_PROTO_SAFE_DEFINE_PROPERTY",
+        "mechanism": "proto_define_property(target, 2 writes) [ECMA-262 §10.1.9 / CWE-1321]",
+        "elapsed_s": 3.05,
+        "independent_full_suite": "node test/{empty-keys-cases,parse,stringify,utils}.js: 1670/1670 pass (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pypa/packaging",
+        "commit": "8c37b04",
+        "date": "2026-11-11",
+        "language": "python",
+        "file": "src/packaging/licenses/__init__.py",
+        "lineno": 118,
+        "tier": "TIER3_NON_ASCII_VALIDATION_GUARD",
+        "mechanism": "reject_non_ascii(ref -> InvalidLicenseExpression) [CWE-176 Kelvin sign \\u212a]",
+        "elapsed_s": 9.08,
+        "independent_full_suite": "pytest tests/test_licenses.py: 21 passed in 0.04s (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "tests_added": [
+      "canonical/tests/test_multilang_causal_swe_engine_v1.py::TestMultiLangCausalSWEEngineV1::test_28_iter64_js_early_return_sibling_wrapper_and_proto_safe_define_property",
+      "canonical/tests/test_causal_angelic_swe_engine_v1.py::test_32_iter64_non_ascii_validation_guard_law12j",
+      "canonical/tests/test_universal_epistemic_kernel_v1.py::TestUniversalEpistemicKernelV1::test_iter64_live_multipage_auth_link_navigation_and_honest_field_completion"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

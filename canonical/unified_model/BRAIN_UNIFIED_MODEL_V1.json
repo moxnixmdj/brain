@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "196cbf03871ae3ad4ba7c4df5f00be1166a9a34acff9320242e095c555fef21e"
+  "value": "bacf0951304c02655f49cdb309ad301d9681989ae1ac55dbd678f8a32e00c9af"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "d74b1d9ee9e7090ba09feaa66305b1b32799d2b5561c841121eb758b75ae4139",
+   "sha256": "80911d42cd5c7859308943397cf6de6d3361cb6679e7e8dcf8f8c7da3b3f428d",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "08e3e4f142de8a2f42145fa3490872bb403f08dc9cf86f40e68e36b3c9cf8ee0",
+   "sha256": "968e2a64b23deafe89cda879a76fe56c9c63cd61cbf85d8a49480609b93cac80",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 43,
    "symbols": [
@@ -305882,7 +305882,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/multilang_causal_swe_engine_v1.py",
-   "sha256": "54d2cb4acb6c07de11d75d517e79d84f32b47017f62b7365b2a8c1e763cf5e37",
+   "sha256": "2e1fcc3ed41e2e2cdbf56b72cfd94d07f18391e4d5506d67c26af80ab8ca0f93",
    "summary": "Multi-Language Causal Angelic SWE Engine v1 (JavaScript / TypeScript / Node.js).",
    "symbol_count": 53,
    "symbols": [
@@ -338571,7 +338571,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "fceec53ec6ab08113f8cc044ae1ddf1d16070406363ef7ecd049e4403673251e",
+   "sha256": "ca300d6009f9d0002137deba3bec7be6aab6a8258916ed7c4cd7bcf50906e2c4",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
