@@ -43,7 +43,7 @@
   },
   "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the judge set was hand-typed, so adding a kind required writing a validator; nothing tested whether a candidate judge actually discriminated, and a lazy reader that accepts everything looks identical to a real one by name",
-  "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
+  "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": {
     "judges_earned": "7 of 8",
@@ -96,7 +96,7 @@
   ],
   "real_outcome": "the eighth judge is a probe pair rather than a new validator, and the environment's own verdict is what admits it",
   "recursive_obs": {
-    "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
+    "canonical_base_commit": "cc8dd71702fc20502793a622addcd474e6524075",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "DEFAULT_MAX_SUBCOMMANDS=24 (an underived cap, removed after measuring its cost at 0.7 s)",
@@ -461,5 +461,10 @@
   },
   "verification": "9 tests: probe pairs made by producers, the decoy illegal for every kind, the cat-shaped candidate refused, every admitted judge separated its pair, earned set == typed set, no admission without evidence, an unavailable program is not a refutation, the scan uses earned judges and agrees with the typed ones, and earning makes no external call",
   "weakens_existing_guard": false,
-  "selective_note": "the probe pair is written by the program that defines the kind; the candidate table grants no authority"
+  "selective_note": "the probe pair is written by the program that defines the kind; the candidate table grants no authority",
+  "rebased_onto": {
+    "previous_base": "62223e4080c062fed080ba84df973954ae732b12",
+    "new_base": "cc8dd71702fc20502793a622addcd474e6524075",
+    "reason": "a concurrent round landed THE_GUIDE_IS_AN_ACTION_GRAMMAR on main; the artifact must be recompiled and the intent rebased before merge"
+  }
 }
