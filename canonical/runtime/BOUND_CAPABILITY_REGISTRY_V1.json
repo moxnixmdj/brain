@@ -3505,14 +3505,14 @@
    "action_template": {
     "args": {
      "capability_id": "git.repository.operate.v1",
-     "limit": "${input.limit}",
-     "message": "${input.message}",
-     "message_source": "${input.message_source}",
+     "limit": "${input.limit | 20}",
+     "message": "${input.message | }",
+     "message_source": "${input.message_source | }",
      "op": "${input.op}",
-     "repo_root": "${input.repo_root}",
-     "rev": "${input.rev}",
-     "staged": "${input.staged}",
-     "target": "${input.target}"
+     "repo_root": "${input.repo_root | .}",
+     "rev": "${input.rev | HEAD}",
+     "staged": "${input.staged | true}",
+     "target": "${input.target | }"
     },
     "expect": {
      "field": "output_verified",

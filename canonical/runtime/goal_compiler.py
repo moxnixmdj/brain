@@ -2849,6 +2849,23 @@ def _compile_single_goal(
             isinstance(survivor_provenance,dict)
             and (survivor_provenance.get("filled_from_world_not_goal") or {})
         )
+        # TRIED AND WITHDRAWN THE SAME DAY (2026-11-23, A140): a rule that refused a survivor whose `provides`
+        # omitted an operation named in the sentence. It fixed the case it was written for -- "Generate a QR
+        # code image from a text string." reaching a QR DECODER one point ahead of the generator -- and broke
+        # two others immediately, both caught by existing suites:
+        #
+        #   "Verify a tar.gz archive against its manifest."   refused `archive.verify.tar_gz.gnu`, the right
+        #        capability, because its provides is `archive.tar_gz.verify_manifest_members` and splitting on
+        #        dots alone does not expose "verify"; splitting on underscores as well then let the rule through
+        #        but the ordering changed underneath it.
+        #   "Extract text from a scanned image with OCR."     refused `image.extract.ocr.tesseract` because
+        #        "extract" is provided by other rows. OCR on a scanned image is exactly the ordinary task this
+        #        capability exists for.
+        #
+        # The lesson is the one this repository recorded at §A134 and relearned here: a verb is not an
+        # operation, and matching one word of the sentence against capability metadata measures vocabulary,
+        # not fit. The git defect that motivated it was genuinely fixed -- but by SOURCING the operation from
+        # `composer_route_v1.git_argv` in `world_binding_v1`, not by scoring here. This block stays as it was.
         if best_unbindable[0] > ranked[0][0] and (survivor_vacuous or survivor_unjustified):
             raise GoalCompilationFailure(
                 "GOAL_COMPILATION_BEST_MATCH_UNBINDABLE",

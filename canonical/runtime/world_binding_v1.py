@@ -282,8 +282,162 @@ def _ext_for(name, cid):
     return best[1] if best else ".json"
 
 
+# A DESTINATION NEED NOT CONTAIN A SLASH. This pattern used to demand one, so "write it to summary.txt" and
+# "into out.txt" -- the way a person actually names a file -- were never seen, while "to dir/file.txt" was.
+# Measured 2026-11-23: `write "hello world" into out.txt` reported ok=True, VERIFIED_ACTION, and wrote to
+# canonical/astra_runtime/tmp/brain_out__cap_fs_write_v1__<hash>.json, because the named destination was
+# invisible and one was invented instead. The file the task asked for was never created.
+#
+# The name must still LOOK like a file: a word, a dot, and an extension of at least two letters. That keeps
+# "write it to the screen" and "pass it to grep" from becoming filenames.
 _DESTINATION_RE = re.compile(
-    r"\b(?:to|into|onto|as)\s+([A-Za-z0-9_./-]*/[A-Za-z0-9_./-]+)", re.I)
+    r"\b(?:to|into|onto|as)\s+([A-Za-z0-9_./-]*[A-Za-z0-9_-]\.[A-Za-z]{2,6}(?![A-Za-z0-9_]))", re.I)
+
+
+# The words that describe a REQUEST rather than a THING. A request's first content word is usually the
+# operation -- "show", "list", "find", "count", "delete" -- and an interface's own vocabulary for that
+# operation is in its keywords. Nothing here guesses a synonym: the word must already be advertised.
+_OPERATION_STOP = frozenset("""
+me us them it the a an this that these those my our your his her its of in on at to for from with by into
+please can could would you i we and or but then than first next last five ten all some any
+""".split())
+
+
+# A WORD THAT IS SPELLED THE SAME IN BOTH VOCABULARIES IS NOT THE SAME WORD.
+#
+# Measured 2026-11-23, and it caught the first version of the function below. `git.repository.operate.v1`
+# declares nine operations, three of which are ordinary English:
+#
+#     "show"   English: display X          git: print the content of ONE object
+#     "commit" English: to save changes    git: create a commit
+#     "branch" English: a limb / division  git: list refs
+#
+# Binding the request's "show" to the operation "show" turned "show me the last five git commits" into
+# `git show`, which returns ONE commit -- the latest -- while the sentence asks for FIVE. The first version
+# of this fix therefore replaced a false pass with a new false pass, one layer deeper.
+#
+# This is the false-friend problem, not synonymy: German "Gift" is not a gift. A request word binds an
+# operation only when the word is TECHNICAL -- a term that means nothing else in English, so there is no
+# second meaning for it to be confused with. "log", "diff", "status", "blame", "changelog" qualify.
+_HOMOGRAPH_OP = frozenset({"show", "commit", "branch"})
+
+
+def _declared_operations(entry):
+    """The operations this capability DECLARES it can perform, read from the adapter it names.
+
+    Not from its keywords. `git.repository.operate.v1` advertises "commit" as a keyword because it can
+    create commits; its OPERATIONS are the tuple its adapter validates against. A request binds an
+    operation only when it uses one of the adapter's own words, so nothing is invented by synonymy.
+    """
+    module = str(entry.get("adapter_module") or "").strip()
+    if not module:
+        return ()
+    try:
+        import importlib as _importlib
+        mod = _importlib.import_module("canonical.runtime.bound_capabilities." + module)
+        ops = getattr(mod, "OPS", None)
+        if ops:
+            return tuple(str(o).lower() for o in ops)
+    except Exception:
+        pass
+    return ()
+
+
+def _operation_from_the_machines_own_reader(goal, entry):
+    """The operation, read from the project's own prose->command mechanism.
+
+    MEASURED 2026-11-23. The function below refused "show me the last five git commits" because the sentence
+    names no operation in the adapter's vocabulary -- it says "commits", the NOUN the operation produces, and
+    binding the English verb "show" produced `git show`, which returns ONE commit and not five.
+
+    But this repository ALREADY resolves that sentence, and it has done so since 2026-10-31:
+
+        composer_route_v1.git_argv("show me the last five git commits")
+            -> ['git', 'log', '--oneline', '-n', '5']
+
+    It reads "commits" as the thing `log` produces and "five" as the count. That is a relation this project
+    measured and tested, in a file the machine owns -- not a synonym typed into a table tonight. So the
+    binding is sourced rather than invented: the operation and its count both come from `git_argv`, and only
+    when the argv's program is the one this capability drives.
+    """
+    module = str(entry.get("adapter_module") or "").strip()
+    if module != "git_repository_operate":
+        return None, None          # this reader speaks git; it has no opinion about anything else
+    try:
+        from canonical.runtime import composer_route_v1 as _CR
+        argv = _CR.git_argv(str(goal or ""))
+    except Exception:
+        return None, None
+    if not argv or len(argv) < 2:
+        return None, None
+    ops = _declared_operations(entry)
+    # argv is ['git', <op>, ...] or ['git', '-C', <dir>, <op>, ...]
+    tail = [str(a) for a in argv[1:]]
+    while tail and tail[0] == "-C":
+        tail = tail[2:]
+    if not tail:
+        return None, None
+    operation = tail[0].lower()
+    if operation not in ops:
+        return None, None
+    limit = None
+    if "-n" in tail:
+        try:
+            limit = int(tail[tail.index("-n") + 1])
+        except Exception:
+            limit = None
+    return operation, limit
+
+
+def _operation_word(goal, entry):
+    """The operation the request names, in the adapter's own vocabulary. Otherwise None.
+
+    MEASURED 2026-11-23 and it changed the answer. The first version of this function returned the
+    request's first content verb that appeared in the capability's keywords, so
+        "show me the last five git commits"  ->  op = "show"
+    which is a DECLARED operation of `git.repository.operate.v1` -- and `git show` returns ONE commit,
+    the latest, while the sentence asks for FIVE. Binding the English verb to the same-spelled operation
+    produced exactly the defect this round is fixing, one layer deeper.
+
+    So the request must use the adapter's word for the operation, and the word must mean the same thing in
+    both vocabularies. A sentence that says "show me the last five commits" names NO operation in
+    {"log","status","diff","show","blame","branch","commit","cherry_pick","changelog"} -- it says "commits",
+    which is the NOUN the operation produces, not an operation. This function therefore refuses it, and the
+    capability stays unbindable rather than being handed the wrong verb. Refusing is the honest outcome.
+
+    A sentence that says "git log" or "show the diff" or "git status" DOES name an operation, and binds.
+    """
+    import re as _re
+    ops = _declared_operations(entry)
+    if not ops:
+        return None
+    tokens = _re.findall(r"[a-z0-9]+", str(goal or "").lower())
+    for tok in tokens:
+        if tok in ops and tok not in _HOMOGRAPH_OP:
+            return tok
+    return None
+
+
+def _text_marked_in(goal):
+    """The operand a sentence marks with the word "text", up to the end of its clause.
+
+    `for the text PROJECT BRAIN and save it as X` -> `PROJECT BRAIN`
+    `the text is hello world`                     -> `hello world`
+    `write "x" into y`                            -> None (quoted forms are handled above, in order)
+
+    Stops at a coordinator (`and`, `then`, `saving`, `save`, `into`, `to`) so the destination does not become
+    part of the content, and requires at least one character that is not punctuation.
+    """
+    import re as _re
+    m = _re.search(r"\bfor\s+the\s+text\s+(.+?)(?=\s+(?:and|then|save|saving|into|onto)\b|[.;]|$)",
+                   str(goal or ""), _re.I)
+    if not m:
+        m = _re.search(r"\bthe\s+text\s+(?:is\s+)?(.+?)(?=\s+(?:and|then|save|saving|into|onto)\b|[.;]|$)",
+                       str(goal or ""), _re.I)
+    if not m:
+        return None
+    value = m.group(1).strip().strip(",").strip()
+    return value or None
 
 
 def named_destination(goal):
@@ -1003,7 +1157,17 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             from_demonstrated[key] = demonstrated[key]
             continue
         value = None
-        if low in ("goal", "task", "objective", "query", "question", "text"):
+        # `text` IS NOT A META PARAMETER. It sat in this tuple with goal/task/objective and was therefore
+        # filled with the request sentence itself. Measured 2026-11-23: "total the amounts by region in
+        # sales.csv and write it to summary.txt" reached CAP_FS_WRITE_V1 as
+        #     text = "total the amounts by region in sales.csv and write it to summary.txt"
+        # and the capability wrote exactly that sentence into a file. The run then reported ok=True,
+        # VERIFIED_ACTION, because bytes had appeared on disk. THE WORK WAS ECHOING THE REQUEST.
+        #
+        # `goal`, `task`, `objective`, `query` and `question` are meta parameters: a capability that ASKS
+        # something legitimately receives the question. `text` is CONTENT: a capability that writes text must
+        # be told what text, and if the request does not say, the binding is missing -- not the request.
+        if low in ("goal", "task", "objective", "query", "question"):
             value = _quoted(goal)
             if value is None:
                 value = str(goal or "").strip()
@@ -1121,7 +1285,36 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                           if str(k).lower() in _TEXT_PARAM_WORDS)
                 value = quoted[nth] if nth < len(quoted) else None
             else:
-                value = None
+                # UNQUOTED, BUT STATED. A sentence may mark its own operand with the word "text" -- "for the
+                # text PROJECT BRAIN and save it as ..." -- and that is a value the person supplied, not a
+                # guess. Measured 2026-11-23: this slot stayed empty while the sentence named it, so
+                # `auto.apt.zint` and `image.qr.generate.qrencode` were both rejected for a missing `text`
+                # and the only bindable candidate was `image.code.decode.zbarimg` -- a barcode READER offered
+                # for a barcode WRITING task. The row that needed nothing won by needing nothing.
+                value = _text_marked_in(goal)
+        elif low in ("op", "operation", "action", "subcommand", "verb"):
+            # THE REQUEST ALREADY SAYS WHICH OPERATION. Measured 2026-11-23: "show me the last five git
+            # commits" rejected `git.repository.operate.v1` -- the capability whose keywords include show, log,
+            # history and commit -- with NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES:['op', ...], because this module
+            # had no notion of an operation word at all. The row that DID survive was
+            # `git.history.bisect_regression.v1`, which answers "which commit made this slower" and reported
+            # VERIFIED_ACTION. THE RIGHT ANSWER WAS REFUSED FOR A MISSING ARGUMENT AND A WRONG ONE WAS
+            # SUBSTITUTED.
+            #
+            # The value is the request's own first content verb, and only when that verb is one the capability
+            # itself advertises in its keywords. Nothing is invented: "show" is bound because the capability
+            # lists "show". A request with no recognised verb leaves the slot missing, and the capability stays
+            # unbindable rather than being handed a guessed operation.
+            value, _count = _operation_from_the_machines_own_reader(goal, entry)
+            if value is None:
+                value = _operation_word(goal, entry)
+            if value is not None:
+                filled[key] = value
+            # THE COUNT THE SENTENCE STATES IS THE COUNT THE OPERATION GETS.
+            # `git log` defaults to 20; the sentence said five. Binding the operation and leaving the limit
+            # at its default answered a question about the last twenty when five were asked for.
+            if _count is not None and "limit" in keys:
+                filled["limit"] = _count
         elif low in ("pattern", "glob"):
             # A SEARCH POLICY IS NEVER INVENTED. It is completed only when the
             # capability names a discovery mechanism that publishes its own

@@ -8120,3 +8120,127 @@ That is a synonym with no source — and this project does not invent one.
     NOT TRUE   that 7/8 generalises. It is eight hand-written goals against one machine's coreutils.
     NOT TRUE   that the web manual bridge is cheap: it fetched 685 KB over api.github.com, once, and that
                call is not part of any runtime that ships.
+
+---
+
+## §A140 — a request is not a value, and a success that did no work is the worst outcome
+
+### The measurement that opened the round
+
+One call, through the front door that was already built:
+
+    grounded_action_v1.act(
+        "total the amounts by region in sales.csv and write it to summary.txt", root=<tmp>)
+
+    -> ok: True, status: VERIFIED_ACTION, capability_id: CAP_FS_WRITE_V1
+       inputs: {'output_path': 'summary.txt',
+                'text': 'total the amounts by region in sales.csv and write it to summary.txt'}
+
+**`summary.txt` did not exist. The aggregation never happened.** The machine copied the request into a
+file and reported it verified. That is worse than a refusal, because a refusal is the only signal that
+tells anyone to keep working.
+
+### Five mechanisms, each measured separately
+
+| # | defect | measurement | fix |
+|---|---|---|---|
+| 1 | `text` sat in the META tuple with `goal`/`task`, so a content slot was filled with the request | `CAP_FS_WRITE_V1` wrote the goal sentence into a file | `text` is CONTENT; an unstated content slot is missing, not the request |
+| 2 | the destination pattern demanded a `/`, so `"to summary.txt"` was invisible | output went to an invented tmp path; `summary.txt` never created | a filename needs no slash; prose is still rejected (`"pass it to grep"`) |
+| 3 | `_check_expect(None, …)` returned `(True, NO_EXPECT_DECLARED)` | a capability that proves nothing counted as VERIFIED | returns `False, NO_EXPECT_DECLARED__UNPROVEN` |
+| 4 | memory outranked fresh measurement | `"git status"` chose the bisect row (18.64) over the right one (28.14) | memory is consulted only when the evidence is not decisive |
+| 5 | a named content operand was unread | `"for the text PROJECT BRAIN"` left `text` empty, so a barcode READER won a WRITING task | the operand the sentence marks with "text" is read |
+
+**Defect 4 was also a self-contamination finding.** My own test runs taught procedure memory
+`"git status" → git.repository.operate.v1`, which then appeared in later runs as a REMEMBERED_PROCEDURE.
+The machine was remembering my experiments as if they were experience.
+
+### The sourced fix for git, and what it cost to get right
+
+`"show me the last five git commits"` was answered by `git.history.bisect_regression.v1` with
+`answer: statement, mode: perf_regression` — a report about which commit made the code slower, offered as
+the last five commits, reported VERIFIED_ACTION.
+
+Three attempts to refuse it by scoring were written and withdrawn **the same afternoon**, each caught by a
+different measurement:
+
+    1. count keyword overlap   -> the QR generator declares NO keywords, so a QR READER beat it for "create a qr code"
+    2. match on prefixes       -> "code" matched `code128`; 45 unrelated rows became "better accounts"
+    3. exact stems + a floor   -> lost the token "qr" to a 3-character cutoff, failed identically
+
+What WORKED was not a scorer. This repository has had a prose→command reader since 2026-10-31:
+
+    composer_route_v1.git_argv("show me the last five git commits")
+        -> ['git', 'log', '--oneline', '-n', '5']
+
+It reads "commits" as the thing `log` produces and "five" as the count. Binding `op` and `limit` from it
+made the right capability bindable, and the right capability then won on its own score:
+
+    -> VERIFIED_ACTION  git.repository.operate.v1  op=log limit=5
+       five rows of sha / author / date / subject, commit_count 5
+
+**The relation was already in the machine. It only had to be asked.**
+
+### A false friend, found by measurement rather than by reasoning
+
+The first version of the operation binding returned the request's first content verb that appeared in the
+capability's keywords, so `"show me the last five git commits"` bound `op = "show"` — a DECLARED operation
+of `git.repository.operate.v1`. `git show` returns ONE commit. The sentence asks for FIVE.
+This is not synonymy; it is a homograph. `show` (display) and `show` (print one object) are different
+words spelled alike. `commit` and `branch` are the same trap. Those three are exactly the operations a
+person would name in English, and they are exactly the three that must not be bound by spelling.
+
+### The honest state of the expressibility corpus
+
+| | before | after |
+|---|---|---|
+| expressible | 13 | 13 |
+| verified of those | 2 | **4** |
+| honest answers | 1 | **2** |
+| wrong verdicts | 1 | **1** |
+
+Two more tasks now do real work: the git-history sentence (five commits) and "which files changed in the
+last commit". The wrong-verdict count did not move.
+
+### What was tried and withdrawn
+
+    WITHDRAWN  `_provided_shortfall` — three versions, all counting shared words. Every one broke a
+               legitimate case and left a false route in place. The false route is still OPEN and the
+               test says 13, not a smaller number.
+    WITHDRAWN  `_operation_named_but_not_provided` — refused `archive.verify.tar_gz.gnu` for "Verify a
+               tar.gz archive" and `image.extract.ocr.tesseract` for "Extract text from a scanned image",
+               both the right capabilities. Its lesson: a verb is not an operation.
+    WITHDRAWN  a second similarity threshold on memory — a mutant deleting it changed no test, because
+               `recall`'s own 0.5 floor already excludes the weak matches. Redundant guards are not
+               safety; they are code that looks like safety.
+
+### Open, with the measurement attached
+
+    OPEN  "check whether a website is up" is answered by `python.contract.check.crosshair.v1`, a PYTHON
+          TYPE CHECKER, because it is the only survivor. Every attempt to refuse it counted words and
+          broke a better case. This is the worst open defect in the corpus.
+    OPEN  "Generate a QR code image from a text string." reaches the QR DECODER and binds an unrelated
+          scanned ferry ticket, because the sentence states no content and the decoder needs none. Pinned
+          as measured in `test_goal_compiler_world_binding_v1.py`, not excused.
+    OPEN  end/last still has no source on this machine (§A139). It was not needed for the git sentence
+          because `git_argv` reads "commits", but it is still unsourced.
+
+### Laws
+
+    (100) A request is not a value. The sentence describing the work is never the content of the work.
+    (101) "No postcondition declared" is not a postcondition. A run that proves nothing is EXECUTED, never
+          VERIFIED.
+    (102) A filename needs no slash. A person naming `summary.txt` has named a file.
+    (103) A homograph is not a synonym. `show` in English and `show` in git are different operations
+          spelled alike, and the three git operations that look like English are exactly the three that
+          cannot be bound by spelling.
+    (104) Memory breaks ties; it does not overrule measurement. A machine whose memory outranks fresh
+          evidence cannot improve, because every mistake it records becomes permanent.
+    (105) A relation already in the machine is not invented by adding a scorer. `git_argv` existed for
+          three weeks and answered the sentence exactly.
+
+### What is not established
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance, nothing beyond one machine's own tools.
+    NOT TRUE   that the aggregation task is expressible. It now REFUSES honestly; it still cannot be done.
+               A whole task needs COMPOSITION (aggregate → write), which one registry capability cannot
+               express. That is the next thing to build, and it is untouched.

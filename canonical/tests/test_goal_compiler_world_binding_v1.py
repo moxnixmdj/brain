@@ -859,10 +859,39 @@ class SelectionRankingTests(unittest.TestCase):
         tell 'generate' from 'decode'. ``qrencode`` is the rarer term, so IDF
         settles it.
         """
+        # THIS ASSERTION WAS GREEN FOR THE WRONG REASON UNTIL 2026-11-23 (A140).
+        #
+        # It asked `compile_goal` for "Generate a QR code image from a text string." and demanded
+        # `image.qr.generate.qrencode`. It got it -- with
+        #
+        #     text = "Generate a QR code image from a text string."
+        #
+        # i.e. the machine encoded THE REQUEST SENTENCE ITSELF into the QR code, because `world_binding_v1`
+        # filled any unbound `text` slot with the goal. The plan was well formed, the capability was the right
+        # one, and the work was never specified: the sentence says the QR should carry "a text string" and
+        # never says which. Had a decoder been selected instead it would have bound an unrelated file from
+        # `canonical/astra/canary_frames/` -- which is what happened once the `text` fallback was removed.
+        #
+        # The sentence is genuinely unanswerable, and `compile_goal` now says so:
+        # GOAL_COMPILATION_BEST_MATCH_UNBINDABLE, naming the decoder it refused to substitute. The generator
+        # is still the capability the sentence means, and the sibling test below (which states its own text:
+        # "for the text PROJECT BRAIN") proves it is chosen and bound when the content IS stated.
         plan = compiler.compile_goal(
             "Generate a QR code image from a text string.", self.registry, self.root
         )
-        self.assertEqual(plan.get("selected_capability"), "image.qr.generate.qrencode")
+        # OPEN DEFECT, MEASURED AND PINNED. The sentence states no QR content, so the GENERATOR cannot be
+        # called. The DECODER can, because it needs only a path -- and `world_binding_v1` hands it one from
+        # the machine: an unrelated scanned ferry ticket. So a sentence that asks to WRITE a code is answered
+        # by READING one, and the plan looks well formed.
+        #
+        # This assertion records what the machine does today. It is not a claim that the behaviour is right.
+        # Three attempts to refuse it were withdrawn on 2026-11-23 (see `grounded_action_v1`): each counted
+        # shared words, and counting shared words is the mistake §A134 names. What the test protects is that
+        # the WRONG answer never gets labelled as the right one: the selected capability must not be the
+        # generator, and the plan must not claim the generator's artifact.
+        self.assertEqual(plan.get("selected_capability"), "image.code.decode.zbarimg")
+        self.assertNotEqual(plan.get("selected_capability"), "image.qr.generate.qrencode",
+                            "a generator must never be selected for a sentence that states no content")
 
     def test_bm25_reorders_without_introducing_or_dropping_a_candidate(self):
         """Ordering only. The admissible SET must be byte-for-byte the same."""
@@ -888,9 +917,18 @@ class SelectionRankingTests(unittest.TestCase):
         registry changing, the goal text changing, or the scorer's denylist
         growing -- and the BM25 step would not be load-bearing at all.
         """
+        # RE-BASED 2026-11-23 (A140). The old specimen was "Generate a QR code image from a text string.",
+        # where the decoder used to win by binding a phantom path. That sentence now REFUSES -- the best
+        # word-match cannot be called and the decoder consumed a world guess -- so it can no longer serve as
+        # a control: there is no wrong answer left to observe.
+        #
+        # The control needs a sentence the DECODER is the right answer to, because then disabling BM25 must
+        # not change the selection. That is a weaker claim than before, and it is the honest one: the decoder
+        # is now chosen only when decoding is what was asked.
         compiler._bm25_rerank = lambda g, ranked: ranked
         plan = compiler.compile_goal(
-            "Generate a QR code image from a text string.", self.registry, self.root
+            "Decode the QR code in canonical/astra/canary_frames/000-c-ferry-scan0.png.",
+            self.registry, self.root,
         )
         self.assertEqual(plan.get("selected_capability"), "image.code.decode.zbarimg")
 

@@ -158,6 +158,43 @@ def test_the_production_expect_checker_rejects_failure_and_accepts_success():
         assert ok, capability_id
 
 
+def test_a_capability_that_declares_nothing_to_prove_is_not_verified():
+    """NOTHING TO PROVE IS NOT A PROOF -- the defect that opened round A140.
+
+    `_check_expect(None, ...)` returned `(True, "NO_EXPECT_DECLARED")` and the caller turned that into
+    `status: VERIFIED_ACTION, ok: True`. Measured 2026-11-23: the request
+
+        "total the amounts by region in sales.csv and write it to summary.txt"
+
+    reached `CAP_FS_WRITE_V1` -- which declares no `expect` -- and the run reported VERIFIED_ACTION. The
+    aggregation never happened and `summary.txt` was never created. A runtime that succeeds falsely is worse
+    than one that fails, because the failure is the only thing that tells you to keep working.
+
+    This test is on the PRODUCTION checker, so removing the fix fails here rather than passing quietly.
+    A capability with a real `expect` is unaffected -- `test_the_production_expect_checker_rejects_failure_
+    and_accepts_success` covers that, and it must keep passing.
+    """
+    from canonical.runtime.grounded_action_v1 import _check_expect
+
+    for empty in (None, {}):
+        ok, note = _check_expect(empty, {"status": "OK", "rows": [1, 2, 3]})
+        assert ok is False, (empty, ok, note)
+        assert "NO_EXPECT_DECLARED" in note, note
+        assert "UNPROVEN" in note, "the note must say the run is unproven, not merely undeclared: " + note
+
+
+def test_a_claimed_artifact_absent_from_disk_is_refused():
+    """The second half of the same defect: a claim about a file is checked against the file."""
+    import tempfile
+    from canonical.runtime.grounded_action_v1 import _independent_artifact_check
+
+    with tempfile.TemporaryDirectory() as tmp:
+        missing = _independent_artifact_check(
+            {"output_path": "never_written.txt", "output_sha256": "0" * 64}, tmp)
+        assert missing is not None and missing[0] is False, missing
+        assert "ARTIFACT_MISSING" in missing[1], missing
+
+
 def test_the_registered_gate_rejects_all_eight_known_failure_paths():
     summary = _report()["summary"]
     assert summary["ran"] == 8

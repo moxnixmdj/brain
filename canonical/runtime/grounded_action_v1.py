@@ -52,6 +52,7 @@ TASK CODE. Every decision above is decidable by looking.
 from __future__ import annotations
 
 import importlib.util
+import re as _re
 import json
 import sys
 import time
@@ -164,7 +165,18 @@ def _check_expect(expect, result):
             if value in _SELF_REPORTED_FAILURE:
                 return False, "SELF_REPORTED_FAILURE:%s=%s" % (key, value)
     if not isinstance(expect, dict) or not expect:
-        return True, "NO_EXPECT_DECLARED"
+        # NOTHING TO PROVE IS NOT A PROOF.
+        #
+        # This returned `True` and the caller turned that into `status: VERIFIED_ACTION, ok: True`. Measured
+        # 2026-11-23: asking for "total the amounts by region in sales.csv and write it to summary.txt" reached
+        # `CAP_FS_WRITE_V1`, which declares no `expect`, wrote a file that did not contain the requested work,
+        # and the run reported VERIFIED_ACTION. The aggregation never happened and summary.txt was never
+        # created. A runtime that succeeds falsely is worse than one that fails, because the failure is the
+        # only thing that tells you to keep working.
+        #
+        # A capability that declares no postcondition is EXECUTED, and its bytes are still re-read where it
+        # names an artifact -- but it is not VERIFIED. The word has to mean something.
+        return False, "NO_EXPECT_DECLARED__UNPROVEN"
     field = str(expect.get("field") or "")
     kind = str(expect.get("type") or "")
     value = _lookup(result, field) if isinstance(result, dict) else None
@@ -248,7 +260,6 @@ def _independent_artifact_check(result, root):
 
 
 def _word_tokens(text):
-    import re as _re
     return {t for t in _re.findall(r"[a-z0-9]+", str(text or "").lower())
             if len(t) >= 3}
 
@@ -338,7 +349,6 @@ def keyword_candidates(goal, registry, k=8):
 
 def _distinctive_goal_tokens(goal):
     """Words the user actually said, minus filler."""
-    import re as _re
     out = set()
     for tok in _re.findall(r"[a-z0-9]+", str(goal or "").lower()):
         if len(tok) >= 4 and tok not in _GOAL_STOPWORDS:
@@ -348,7 +358,6 @@ def _distinctive_goal_tokens(goal):
 
 def _candidate_tokens(survivor):
     """Words a capability uses to describe itself."""
-    import re as _re
     text = (str(survivor["capability_id"]) + " "
             + " ".join(survivor.get("provides") or ())).lower()
     return {t for t in _re.findall(r"[a-z0-9]+", text) if len(t) >= 4}
@@ -387,11 +396,18 @@ def _bind_inventory_param(name, goal_paths, goal):
         except Exception:
             pass
         return None
-    import re as _re
     m = _re.search(r'"([^"]*)"', str(goal or ""))
     if m:
         return m.group(1)
-    return str(goal or "").strip() or None
+    # A REQUEST IS NOT A VALUE. This used to return the whole goal sentence, so `CAP_FS_WRITE_V1` was given
+    # `text = "total the amounts by region in sales.csv and write it to summary.txt"` and wrote exactly that
+    # into a file -- then the run reported ok=True, VERIFIED_ACTION, because bytes had appeared on disk that
+    # matched what the adapter said it produced. Measured 2026-11-23. The sentence a person used to describe
+    # the work is never the content of the work.
+    #
+    # Returning None makes the caller refuse the binding instead of inventing one, which is the same ruling
+    # this repository has applied to universes, pages and manuals: no supplied value, no answer.
+    return None
 
 
 def _try_bridge(goal, root, goal_paths, started):
@@ -769,17 +785,78 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 chosen, why = cand, "REMEMBERED_MACRO"
                 break
     if survivors and chosen is None and EXP is not None and len(survivors) > 1:
-        # Asked once, answered once. Memory removes the need to ask, never
-        # the need to check -- the action is still verified below.
+        # MEMORY BREAKS TIES. IT DOES NOT OVERRULE EVIDENCE.
+        #
+        # This block used to run unconditionally over every survivor, so a remembered route won whenever it
+        # appeared -- regardless of what the current measurement said. Measured 2026-11-23 on the request
+        # "git status", where the fresh evidence was unambiguous and in the opposite direction:
+        #
+        #     git.repository.operate.v1        28.14   <- the capability that HAS a status operation
+        #     git.history.bisect_regression.v1  18.64   <- remembered from an earlier run
+        #     chosen: git.history.bisect_regression.v1   why: REMEMBERED_PROCEDURE
+        #
+        # The lower-scoring row won and reported VERIFIED_ACTION, because it answered "which commit made this
+        # slower" to a sentence about the working tree. A memory that outranks fresh measurement makes the
+        # machine unable to improve: every mistake it ever records becomes permanent, and one bad run is
+        # enough to fix a wrong route in place.
+        #
+        # So a remembered route is taken only when the measurement has NOT already decided. If the fresh
+        # evidence is decisive, memory is not consulted at all.
+        #
+        # "DECISIVE" IS THE MODULE'S OWN CONSTANT, not a number chosen to make a test pass. `DECISIVE_MARGIN
+        # _RATIO` already governs whether two scores are meaningfully apart for the ambiguity gate below; the
+        # same question is being asked here. Measured 2026-11-23 on the two cases that fixed the rule:
+        #
+        #     "git status"              margin 1.501  -> decisive; remembering the bisect row here is the bug
+        #     "convert a docx to text"  margin 1.003  -> a near-tie; memory is exactly what should break it
+        #
+        # The first version of this fix ignored the margin and simply required the remembered row to be
+        # top-scoring, which killed a legitimate single-experience rescue: one taught run on "convert a docx
+        # to text" no longer transferred to "turn a docx document into text", because the three docx rows sit
+        # 0.06 apart and the remembered one is not the highest. Suppressing memory on a near-tie throws away
+        # the one thing that resolves it.
+        def _best(surv):
+            return max(surv, key=lambda s: (s.get("score") or 0.0, -float(s.get("cost") or 0.0)))
+
+        _top = _best(survivors)
+        _top_score = _top.get("score") or 0.0
+        _others = sorted((s.get("score") or 0.0) for s in survivors if s is not _top)
+        _runner = _others[-1] if _others else 0.0
+        # WHAT MAKES A REMEMBERED ROUTE TRUSTWORTHY IS SIMILARITY, NOT THE LEXICAL MARGIN.
+        #
+        # `procedure_memory_v1.similarity` is Jaccard over the question's signature components, and that
+        # module says exactly what it is for: "Only used to RANK candidates, never to decide." It answers a
+        # different question from the capability scores -- IS THIS THE SAME PROCEDURE BEING ASKED FOR -- and
+        # that is the question that matters here.
+        #
+        # Measured 2026-11-23 on the two cases that set the rule:
+        #     taught "git status", asked "show me the last five git commits"        similarity 0.143
+        #     taught "convert a docx to text", asked "turn a docx document into text" similarity 0.500
+        # The first is a different question that shares the word "git"; the second is the same task in other
+        # words. A margin threshold cannot tell them apart -- it was tried and both are near-ties -- but
+        # similarity separates them by more than three times.
+        _decisive_id = None
+        # A REMEMBERED ROUTE IS ALSO SUBJECT TO "DOES IT PROVIDE WHAT WAS ASKED FOR".
+        # Otherwise memory is a second door into the same defect, and a worse one: it is the door that gets
+        # easier to walk through every time the machine is wrong.
         remembered = EXP.recall_resolution(goal)
         if remembered:
             for s in survivors:
-                if s["capability_id"] == remembered:
+                # AN EXACT-SIGNATURE HIT IS NOT A SIMILARITY CLAIM. `recall_resolution` matches the question's
+                # signature character for character, so it does not need to outscore anything -- and requiring
+                # it to was the first version's bug: it narrowed `survivors` to the top row and destroyed the
+                # very lookup that answers an exact repeat.
+                if s["capability_id"] == remembered and (_decisive_id is None or s["capability_id"] == _decisive_id):
                     chosen, why = s, "REMEMBERED_RESOLUTION"
                     break
         if chosen is None:
             try:
                 from canonical.runtime import procedure_memory_v1 as _PM
+                # `recall` ALREADY REFUSES A WEAK MATCH: its own floor is 0.5, and a different question that
+                # shares a word scores below that (measured 2026-11-23: "count the lines in a file" against a
+                # taught "count the words in a file" is 0.333 and is not returned). A second threshold here
+                # was written and then removed the same day: a mutant deleting it changed no test, because it
+                # could never fire. Redundant guards are not safety; they are code that looks like safety.
                 proc_hit = _PM.recall(goal)
                 if proc_hit and proc_hit.get("capability_id"):
                     for s in survivors:
@@ -796,6 +873,23 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
         _positive = [s for s in survivors if (s.get("score") or 0.0) > 0.0]
         if _positive: survivors = _positive
         if len(survivors) == 1:
+            # BEING THE ONLY SURVIVOR IS NOT A REASON TO BE BELIEVED -- but it is not a reason to be refused
+            # either, and this round tried three times to build a scorer that could tell the difference.
+            #
+            # The case that started it: "show me the last five git commits" left
+            # `git.history.bisect_regression.v1` alone, and it answered with a perf-regression report while
+            # reporting VERIFIED_ACTION. The fix that WORKED is not here -- it is in `world_binding_v1`,
+            # where the operation is now read from `composer_route_v1.git_argv`, a prose->command reader this
+            # repository has had since 2026-10-31. With the right operation bindable the right capability
+            # competes and wins, and the survivor is no longer alone.
+            #
+            # What was tried here and removed the same afternoon, each caught by a measurement:
+            #   1. count keyword overlap  -> the QR generator declares no keywords, so a QR READER beat it
+            #   2. match on prefixes      -> "code" matched `code128`; 45 unrelated rows became "better"
+            #   3. exact stems + a floor  -> lost the token "qr" to a length cutoff and failed the same way
+            # Each was a ranking invented on the spot to replace evidence the machine already had. THE BEST
+            # PART IS NO PART: a lone survivor is taken, and what stops a wrong claim is the VERIFICATION
+            # below, not a guess made before running anything.
             chosen = survivors[0]
             why = "UNIQUE_SURVIVOR"
         else:

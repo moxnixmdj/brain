@@ -127,7 +127,18 @@ def test_p8_front_door_fate_shift_for_the_true_premises() -> None:
 
     # Premises now True: past the premise gate, into binding/execution fates.
     for cid, allowed in (
-        ("git.repository.operate.v1", {"ACTION_FAILED"}),
+        # 2026-11-23 (A140): this asserted {"ACTION_FAILED"} and now the capability SUCCEEDS -- because the
+        # defect it was recording has been fixed, not because the test was relaxed. The old failure was
+        # `NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES:['op', ...]`: `world_binding_v1` had no notion of an operation
+        # slot at all, so every git request either refused this row or was handed to the bisect row instead.
+        # An operation is now bound from the adapter's own OPS vocabulary (and, where the sentence states one,
+        # from `composer_route_v1.git_argv`), so the capability runs: `op: diff`, its artifact is re-read from
+        # disk, and `output_verified=True` comes from a declared `expect` rather than from nothing.
+        #
+        # The reproduction that proves it is real -- and not a claim -- is in
+        # `test_expressibility_of_ordinary_computer_tasks_v1.py`, which prints the five sha/author/date/subject
+        # rows returned for "show me the last five git commits".
+        ("git.repository.operate.v1", {"VERIFIED_ACTION"}),
         ("pypi.provenance.audit_live_artifact", {"ACTION_FAILED"}),
         ("web.release.verify.independent_http", {"AMBIGUOUS", "ACTION_FAILED"}),
     ):

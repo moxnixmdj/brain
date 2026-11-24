@@ -89,6 +89,14 @@ HONEST_MARKERS = {
     # task: (expected semantic content, reason it is an answer)
     "extract the text from a pdf": (("text",),
                                     "the receipt carries text read out of a real PDF"),
+    # Added 2026-11-23 (A140). This sentence was WRONG_ON_INSPECTION for months -- it was answered by
+    # `git.history.bisect_regression.v1` with `mode: perf_regression`, a report about which commit made the
+    # code slower, offered as the last five commits. It now reaches `git.repository.operate.v1` with
+    # `op: log, limit: 5` and returns five rows, each a real sha, author, date and subject, with
+    # `commit_count: 5` in `observed_effect`. The evidence was read before the marker was written: five
+    # rows, and the first sha is the commit at HEAD.
+    "show me the last five git commits": (("commit",),
+                                          "five rows of sha/author/date/subject from git log, commit_count 5"),
 }
 
 # Audited by reading the receipt. A "verified" task listed here answered a DIFFERENT question.
