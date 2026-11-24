@@ -57,6 +57,7 @@ import pathlib
 import re
 import shutil
 import sys
+import subprocess
 import tempfile
 import time
 from collections import deque
@@ -541,6 +542,84 @@ def _importable(name: str) -> bool:
         return False
 
 
+_SHELL_FENCE = re.compile(r"```(?:console|shell|bash|sh|text)?[ \t]*\r?\n(.*?)```", re.S)
+
+
+def _shell_sessions(text: str) -> list[dict[str, Any]]:
+    """Every `$ command` in a document, with the output the author printed under it.
+
+    The prompt is the author's own marker that this line is a command; the lines after it, up to
+    the next prompt or the end of the block, are what the author says it printed. A fenced block
+    that declares a shell language is read first, and an unfenced `$` line is read too: a README
+    that says `$ tar -cf out.tar in.txt` has stated a test either way.
+    """
+    blocks = [match.group(1) for match in _SHELL_FENCE.finditer(text)]
+    if not blocks:
+        blocks = [text]
+    sessions: list[dict[str, Any]] = []
+    for block in blocks:
+        current: dict[str, Any] | None = None
+        for line in block.splitlines():
+            stripped = line.strip()
+            if stripped.startswith("$ "):
+                if current:
+                    sessions.append(current)
+                current = {"command": stripped[2:].strip(), "expected": []}
+            elif current is not None and stripped and not stripped.startswith("#"):
+                current["expected"].append(line)
+        if current:
+            sessions.append(current)
+    return [session for session in sessions if session["command"]]
+
+
+def _plan_from_shell_sessions(sessions: Sequence[Mapping[str, Any]], actions: Sequence[Any],
+                              goal: str) -> dict[str, Any]:
+    """The four gates, for a shell transcript: replayed, matched, and in the caller's vocabulary."""
+    from canonical.tools.the_guide_is_a_test_suite_v1 import compare
+    offered = {str(action).split()[0] for action in actions if str(action).strip()}
+    matched: list[dict[str, Any]] = []
+    seen: list[str] = []
+    replayed = 0
+    with tempfile.TemporaryDirectory(prefix="shell-document-room-") as where:
+        room = pathlib.Path(where)
+        for session in sessions:
+            command = str(session["command"])
+            program = command.split()[0] if command.split() else ""
+            if program not in offered:
+                seen.append(command[:120])
+                continue
+            try:
+                done = subprocess.run(command, shell=True, cwd=str(room),
+                                      capture_output=True, text=True, timeout=10)
+            except (OSError, subprocess.SubprocessError):
+                continue
+            replayed += 1
+            verdict = compare(done.stdout.splitlines(), [str(x) for x in session["expected"]])
+            if not verdict["matches"]:
+                continue
+            matched.append({"statement": command[:200],
+                            "expected": [str(x) for x in list(session["expected"])[:2]],
+                            "check": verdict["verdict"]})
+    # THE ORDER OF THESE TWO REFUSALS IS THE GATE. A document whose every command is outside
+    # the caller's action space has said what EXISTS on the machine; reporting it as "nothing
+    # ran" would hide the one fact that matters -- that it was seen and not permitted.
+    if not replayed and not seen:
+        return {"status": "REFUSED__NO_TRANSCRIPT_RAN", "gate": "REPLAYED",
+                "examples": len(sessions), "replayed": 0}
+    if not matched:
+        return {"status": ("REFUSED__COMMAND_SEEN_NOT_PERMITTED" if seen
+                           else "REFUSED__NO_EXAMPLE_MATCHED"),
+                "gate": "IN_VOCABULARY" if seen else "MATCHED",
+                "examples": len(sessions), "replayed": replayed,
+                "seen_not_permitted": seen[:5]}
+    plan = [row["statement"] for row in matched]
+    return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
+            "examples": len(sessions), "replayed": replayed,
+            "matched": matched[:8], "plan": plan, "goal": goal,
+            "authority": "EXTERNAL_DOCUMENT_COMPILED_TO_A_COMMAND",
+            "pass": False}
+
+
 def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[str, Any]:
     """Turn fetched documentation into a plan, using only what the document itself vouches for.
 
@@ -556,7 +635,7 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
     """
     if isinstance(text, (list, tuple)):
         text = "\n\n".join(str(x) for x in text)
-    if not isinstance(text, str) or ">>>" not in text:
+    if not isinstance(text, str):
         return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
                 "gate": "EXTRACTED", "examples": 0}
     import tempfile as _tempfile
@@ -566,6 +645,13 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
             _python_example_ok, as_sessions, compare, transcripts)
     except Exception as error:  # noqa: BLE001
         return {"status": "REFUSED__EXTRACTOR_UNAVAILABLE", "error": str(error)[:200]}
+    # A DOCUMENT IS A TEST SUITE IN TWO DIALECTS. The pycon reader below was the only one, and
+    # it refused every shell guide at the first gate (`">>>" not in text`), which is most of the
+    # documentation on a computer. A `$ command` with the output the author printed under it is
+    # the same thing in the other dialect, so it gets the same four gates.
+    shell = _shell_sessions(text)
+    if shell:
+        return _plan_from_shell_sessions(shell, actions, goal)
     block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
     sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
     if not sessions:
@@ -842,8 +928,16 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         # The guide is EXTERNAL knowledge and stays labelled so: every plan row carries the
         # authority of the document it came from, and none of this is counted as capability.
         receipts["steps"]["instant_knowledge"] = instant
-        retrieved = (instant.get("text") or instant.get("documents")
-                     or instant.get("body") or "")
+        # THE DOCUMENTS ARE UNDER `local_guide`, AND THEY CARRY THEIR OWN TEXT NOW. Reading a
+        # top-level key that nothing ever set handed the extractor an empty string, so a README
+        # whose transcript replays perfectly still ended in OPEN__NO_PLAN_AFTER_SCAN. The
+        # fetcher returns snippets for ranking and text for reading; this reads the text.
+        local_docs = list((instant.get("local_guide") or {}).get("documents") or [])
+        retrieved = "\n\n".join(
+            str(doc.get("text") or "") for doc in local_docs if doc.get("text"))
+        if not retrieved:
+            retrieved = (instant.get("text") or instant.get("body") or "")
+        instant["documents_with_text"] = sum(1 for doc in local_docs if doc.get("text"))
         closed = _plan_from_document(retrieved, actions, goal)
         receipts["steps"]["document_as_test_suite"] = closed
         if closed.get("status") == "PASS__PLAN_FROM_A_DOCUMENT":
