@@ -4895,6 +4895,7 @@ def solve_arbitrary_environment(
     db_path: str | pathlib.Path | None = None,
     verifier: Any | None = None,
     field_values: Mapping[str, str] | None = None,
+    knowledge_source: Callable[[str], list[dict[str, str]]] | None = None,
     python_exe: str | None = None,
     allow_web: bool = True,
     timeout_s: float = 20.0,
@@ -5470,6 +5471,36 @@ def solve_arbitrary_environment(
                 "epistemic_diff": epistemic_diff,
                 "zero_prior_result": zp_res,
                 "gaps_queried": list(zp_res.get("gaps_queried") or []),
+                "web_queries_made": 0,
+                "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        # Goal-directed zero-LLM Doc-Compiler & Active-Inference Agent (unseen CLIs, pipelines, doc-backed APIs)
+        from canonical.runtime import epistemic_doc_compiler_agent_v1 as EDC
+
+        _edc_mem = EDC.EpistemicMemoryStore()
+        _edc_ver = (lambda _st: postcondition_fn(ws)) if postcondition_fn is not None else verifier
+        edc_res = EDC.solve_multi_step_with_instant_knowledge(
+            instruction,
+            workspace=ws,
+            memory=_edc_mem,
+            knowledge_source=knowledge_source,
+            base_url=detected_url,
+            verifier=_edc_ver,
+            timeout_s=timeout_s,
+        )
+        if edc_res.get("status") == "VERIFIED":
+            return {
+                "schema": SCHEMA,
+                "authority": AUTHORITY,
+                "modality": "epistemic_doc_compiler",
+                "status": "VERIFIED",
+                "mode": str(edc_res.get("mode") or "DOC_COMPILED_ACTIVE_INFERENCE"),
+                "frontier_sense_ms": frontier["sense_ms"],
+                "epistemic_diff": epistemic_diff,
+                "doc_compiler_result": edc_res,
+                "gaps_queried": list(edc_res.get("gaps_queried") or []),
                 "web_queries_made": 0,
                 "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
                 "model_calls": 0,
