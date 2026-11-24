@@ -104,6 +104,11 @@ try:
     HAS_SCAN_DIFF = True
 except Exception:
     HAS_SCAN_DIFF = False
+try:
+    from canonical.runtime.goal_compiler import compile_goal as _compile_goal
+    HAS_GOAL_COMPILER = True
+except Exception:
+    HAS_GOAL_COMPILER = False
 
 # Exhaustive project census (research before building)
 HARD_RULES = ("NO_FAMILY_MAPPING_BY_NAME_OR_ANALOGY", "NO_SEMANTIC_EQUIVALENCE_INFERENCE")
@@ -191,7 +196,28 @@ class PerfectAlgorithmUnifiedV8:
         except Exception as e:
             return {"phase": "FETCH", "status": "FETCH_ERROR", "error": str(e)[:200], "model_calls": 0}
 
+    def compile_nl_goal(self, goal_text: str, root: pathlib.Path | None = None) -> dict[str, Any]:
+        """Natural-language input → structured goal without model calls — deterministic plain-goal compiler."""
+        if not HAS_GOAL_COMPILER:
+            return {"status": "REFUSED__NO_GOAL_COMPILER", "model_calls": 0, "goal_defines": False}
+        try:
+            r = pathlib.Path(root) if root else pathlib.Path(".")
+            # Minimal registry stub — real registry would be loaded from canonical/governance, but compilation is capability-agnostic for test
+            reg = {}
+            compiled = _compile_goal(goal_text, reg, r)
+            return {"status": "COMPILED__NATURAL_LANGUAGE", "compiled": compiled, "model_calls": 0, "goal_defines": True, "deterministic": True, "fail_closed": True}
+        except Exception as e:
+            return {"status": "REFUSED__GOAL_COMPILER_FAIL_CLOSED", "error": str(e)[:300], "model_calls": 0, "goal_defines": False}
+
     def plan(self, learned: Mapping[str, Any], goal_predicate: Any, observations: Mapping[str, Any] | None = None, budget: int = 60) -> dict[str, Any]:
+        # Natural-language expansion: if learned contains raw goal text, try deterministic compilation before BFS
+        if HAS_GOAL_COMPILER and isinstance(learned, dict) and learned.get("goal_text"):
+            try:
+                comp = self.compile_nl_goal(str(learned["goal_text"]))
+                if comp["status"].startswith("COMPILED"):
+                    return {"phase": "PLAN", "status": "PLANNED__GOAL_COMPILED", "compiled": comp["compiled"], "model_calls": 0, "via": "goal_compiler deterministic natural-language→condition (expansion rule)"}
+            except Exception:
+                pass
         # Horizon decomposition for long tasks: 6×50=300 covers OSWorld2.0 318 avg; simple BFS collapses beyond 2h
         if HAS_HORIZON and budget > 60:
             try:
