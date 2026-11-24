@@ -405,6 +405,38 @@ any action that accepts them (actions that do not are called exactly as before),
 and the same lesson transfers. A contract that binds a source and then lets the
 action choose its own is not a contract.
 
+## 5f. The store knows a format under a name it was never taught
+
+A stored contract used to fire only when the goal looked familiar -- the same
+plan, or the same family. Ask for a format it can produce, under a name it was
+never taught, and the loop fell into a full scan, re-deriving by execution what it
+already knew. One layer was also an arbitrary gap in the composition code: it
+handled two or more and refused exactly one.
+
+Now a single contract serves an unknown output name, bound to the new roles and
+verified by the oracle, and the run happens **before the scan**.
+
+Receipt (`STORE_KNOWS_THE_FORMAT_RECEIPT_20261124_V1.json`): teach `out.gz` once,
+then ask for `backup.gz` with the source renamed `report.txt` in a different
+directory and a different verb (`pack`, not `compress`):
+
+| store | result | time | scanned |
+|---|---|---|---|
+| full (contract + raw trace) | `PASS__REPLAY_FROM_MEMORY` | **0.009 s** | no |
+| contracts only, raw trace removed | `PASS__THE_STORE_KNEW_THE_FORMAT` | **0.060 s** | no |
+| empty | `PASS__PERFECT_ALGORITHM_RUN` | 0.141 s | **7 states** |
+
+That is the ablation the brief asks for, and it says something specific: the
+**generalized entry alone carries the capability** -- 2.4x faster than an agent
+with no store, and no scan at all. The raw trace is faster still, but it is not
+what makes transfer possible.
+
+**The ablation was wrong the first time, and the wrongness is instructive.** The
+filtered store was written as `{"rules": [...]}` without its schema key, so it
+loaded as an EMPTY store and the table said "contracts only give no benefit". The
+fix was one line; the lesson is that a memory ablation must prove it is
+differential, not merely different -- otherwise the table measures a typo.
+
 ## 6. The next bottleneck (one)
 
 **Composition: the loop cannot yet invent a missing action.** The compound

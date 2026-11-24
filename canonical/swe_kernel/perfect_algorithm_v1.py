@@ -677,7 +677,11 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     composed = _compose_from_store(memory, env, goal, contract=effect_contract)
     receipts["steps"]["composition"] = composed
     if composed.get("status") == "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT":
-        receipts["status"] = "PASS__COMPOSED_A_NEW_FORMAT"
+        # one layer is not a composition: the store simply already knew how to
+        # produce this format, under a name it was never taught
+        receipts["status"] = ("PASS__COMPOSED_A_NEW_FORMAT"
+                              if len(composed.get("layers") or []) > 1
+                              else "PASS__THE_STORE_KNEW_THE_FORMAT")
         receipts["pass"] = True
         receipts["outcome"] = "COMPOSED_FROM_TWO_LEARNED_CONTRACTS"
         receipts["plan"] = composed.get("runs")
@@ -1061,8 +1065,8 @@ def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
     if not output:
         return {"status": "NOT_ATTEMPTED__THE_GOAL_NAMES_NO_OUTPUT"}
     layers = _components(output)
-    if len(layers) < 2:
-        return {"status": "NOT_ATTEMPTED__THE_OUTPUT_DECLARES_ONE_LAYER"}
+    if not layers:
+        return {"status": "NOT_ATTEMPTED__THE_OUTPUT_DECLARES_NO_FORMAT"}
     operators = [r for r in (memory.get("rules") or []) if str(r.get("kind")) == "operator"]
 
     # The match is by PROOF, not by name. A name like `zpack` that really is
@@ -1104,7 +1108,7 @@ def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
 
     parts = output.split(".")
     intermediates = [".".join(parts[: len(parts) - len(layers) + index])
-                     for index in range(1, len(layers))]
+                     for index in range(1, len(layers))] if len(layers) > 1 else []
     bound = None
     if callable(contract):
         try:

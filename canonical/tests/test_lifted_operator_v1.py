@@ -16,6 +16,7 @@ import unittest
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
+from canonical.runtime import effect_oracle_v1 as oracle
 from canonical.runtime import lifted_operator_v1 as lifted
 
 HAS_GZIP = shutil.which("gzip") is not None
@@ -262,3 +263,47 @@ class ChainCompositionTests(unittest.TestCase):
         self.assertEqual(result["status"], lifted.COMPOSE_NO_SHAPES)
         self.assertFalse((self.root / "out.tar").exists(),
                          "nothing may run when a layer has no shape")
+
+
+class TheStoreSatisfiesANewNameTests(unittest.TestCase):
+    """A stored contract is not tied to the file name it was taught with."""
+
+    class Env:
+        def __init__(self, root):
+            self.root = pathlib.Path(root)
+
+        def reset(self):
+            pass
+
+    def setUp(self):
+        if not HAS_GZIP:
+            self.skipTest("gzip is needed")
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix="new-name-"))
+        (self.root / "report.txt").write_bytes(b"a name never taught\n")
+
+    def _store(self):
+        operator = lifted.lift(goal="compress the input into out.gz",
+                               goal_family="compress", env_kind="posix_dir",
+                               action="run_gzip", program="gzip", observation={},
+                               source_name="input.txt", output_name="out.gz",
+                               argv=["gzip", "-c", "{source}"])
+        return {"rules": [operator]}
+
+    def test_a_single_contract_serves_an_output_name_it_never_saw(self):
+        from canonical.swe_kernel import perfect_algorithm_v1 as pa
+
+        result = pa._compose_from_store(
+            self._store(), self.Env(self.root), "pack the input into backup.gz",
+            contract=lambda env: {"source": "report.txt", "output": "backup.gz"})
+        self.assertTrue(result.get("applied"), result)
+        self.assertEqual(result["layers"], ["gzip"])
+        self.assertEqual(result["runs"][0]["argv"], ["gzip", "-c", "report.txt"])
+
+    def test_the_effect_is_verified_under_the_new_name(self):
+        from canonical.swe_kernel import perfect_algorithm_v1 as pa
+
+        pa._compose_from_store(
+            self._store(), self.Env(self.root), "pack the input into backup.gz",
+            contract=lambda env: {"source": "report.txt", "output": "backup.gz"})
+        verdict = oracle.verify_roundtrip(self.root, "backup.gz", "report.txt")
+        self.assertEqual(verdict["verdict"], oracle.EFFECT_VERIFIED, verdict)
