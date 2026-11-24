@@ -9653,3 +9653,23 @@ the next bottleneck, and the reason the census split 16/52 instead of being one 
     (158) Synthesis solves the shape the specification states outright (a missing member) and
           fails the shape that requires composing several behaviours (an edit). Report which,
           because the difference is the next piece of work.
+
+### The search, tested
+
+§A154 shipped the search exercised only by two live instance runs, which says nothing about the
+other points in its space. `test_the_search_must_find_or_say_it_cannot_v1.py` closes that: 11
+tests, 4 mutants killed.
+
+| mutant | killed by |
+|---|---|
+| report `found` without asking the tests | 4 tests |
+| leave the last failed candidate installed | restore test |
+| always emit the helper | "only when used" test |
+| pick the filter token alphabetically | replay-derivation test |
+
+The most useful of the eleven compiles **every** candidate *where it will be installed* — inside a
+class, at eight spaces. Compiling at module level passes for the wrong reason, and that is exactly
+defect 2 from the list above: the code was right and the test of it was wrong.
+
+    (159) A mechanism exercised only against the cases it was built from is untested. The other
+          points in its space are where it fails, and they are the ones nobody looked at.
