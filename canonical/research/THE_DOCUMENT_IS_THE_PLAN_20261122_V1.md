@@ -9805,3 +9805,35 @@ deleted at fetch time, and `find … -name "*gold_patch*"` over the run director
     * 13.3 % is not comparable to the published frontier: different subset, no scaffolding, no
       model calls at all. It is a within-project measurement, repeated, with the same harness.
     * **§6 NOT MET.** No OSWorld task, no full-benchmark run.
+
+### The measurement, tested
+
+`canonical/tests/test_the_measurement_must_not_flatter_itself_v1.py` — **13 tests, 7 mutants, 7
+killed**, modules restored byte-identical after every one.
+
+What it pins, and why each case exists:
+
+| test | the defect it would have caught |
+|---|---|
+| the leak guard matches the name on disk | the guard that could never fire over the answer sheet |
+| the flat name is caught independently | a guard that only survives on its other branch |
+| a contract stored as a string is read completely | the truncating `literal_eval` |
+| an id containing a quote does not truncate | sixteen ids silently becoming two |
+| the refused operator selects `__ror__` | deriving the reflected method, not guessing it |
+| the reflected side follows operand order | `int + Thing` is not `Thing + int` |
+| a non-operator failure returns nothing | reading a diagnosis out of an unrelated error |
+| parameterised ids grade at function level | `[foo ]` answering "not found" for a real test |
+| a room that could not run is not a capability failure | seven rooms folded into the denominator |
+| the report separates broken from unsolved | a score of the harness |
+| resolved requires every named test to be seen | a pass on an empty collection |
+| the solver never reads a gold patch (AST) | a word-match test that punished the comment |
+
+Two of these survived their first mutant and the tests were rewritten, not the mutant. The
+first version of the leak test asserted `"gold" not in run_one` — and FAILED on the comment
+explaining that the leak had been fixed. A test that punishes documentation of a repair is
+testing the word, not the property; it now walks the AST and checks what is actually opened.
+
+    (165) A guard is tested against the name the file has, not the name the specification has.
+    (166) A test that fails on the comment explaining a repair is testing the wrong artifact.
+    (167) The number is only as good as the plumbing: three of the seven harness defects
+          returned a plausible result and raised nothing.
