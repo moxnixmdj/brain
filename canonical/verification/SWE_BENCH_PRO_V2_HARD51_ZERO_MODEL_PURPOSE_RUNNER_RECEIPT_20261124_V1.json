@@ -1,0 +1,498 @@
+{
+  "aggregate_benchmark_score": null,
+  "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FRESH_CONTAINER_PATCH_REPLAY_ATTEMPT__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "benchmark_score_authority": false,
+  "borrowed_outputs": false,
+  "capability_credit_delta": 0,
+  "date": "2026-11-24",
+  "event_name": "push",
+  "execution_authority": false,
+  "failed": [],
+  "family_credit_delta": 0,
+  "github_actor": "moxnixmdj",
+  "github_repository": "moxnixmdj/brain",
+  "harness_verified_trials": [
+    "swebench-pro/instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+    "swebench-pro/instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6",
+    "swebench-pro/instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171"
+  ],
+  "head_sha": "41226b7cc4fa1f22d37a13b9622553614fd5c5be",
+  "hidden_test_reading": false,
+  "image_pin_bindings": {
+    "checks": {
+      "all_digest_pinned": true,
+      "all_task_toml_digest_bound": true,
+      "no_unpinned_tag_in_task_toml": true,
+      "pin_count": true
+    },
+    "model_calls": 0,
+    "raw_tasks_saved_in_workspace": false,
+    "rows": [
+      {
+        "digest_ref": "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:a67d0f526e5ea0fd7feadab688cb31865a3029c62c89fbf7439f26d14f488127",
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "task_id": "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171"
+      },
+      {
+        "digest_ref": "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:e0647aadaaeede17b1740922affcbe3dc4932f346a7aa4337b3ab248c2fe777a",
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "task_id": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf"
+      },
+      {
+        "digest_ref": "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:a5da56787aa6f4ad32a3dbcff7091f5f584c932dfbb402287f9de85793e7c2b1",
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6",
+        "task_id": "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6"
+      }
+    ],
+    "runtime_network_calls_in_agent_phase": 0,
+    "schema": "BRAIN_SWE_PRO_V2_IMAGE_PIN_BINDINGS_V1"
+  },
+  "incremental_spend_usd": 0,
+  "independent_hard_benchmark_attempt_runner_owned": true,
+  "independent_hard_benchmark_verification_completed": false,
+  "independent_verification_completed": false,
+  "initial_harbor_exit_code": 0,
+  "new_reality_units_consumed": 3,
+  "numeric_measurements": {
+    "aggregate_benchmark_score_claims": 0,
+    "borrowed_output_events": 0,
+    "failed_trials": 0,
+    "fresh_container_regrade_trials": 3,
+    "hard_benchmark_tasks_consumed": 3,
+    "harness_verified_trials": 3,
+    "hidden_test_reading_events": 0,
+    "marked_import_groups": 0,
+    "model_calls": 0,
+    "pinned_images_pulled": 3,
+    "purpose_decision_count": 3,
+    "runtime_network_calls": 0,
+    "section_6_verifications": 0,
+    "source_bindings": 4,
+    "task_reward_vectors_present": 3,
+    "task_success_count": 0,
+    "tasks_selected": 3,
+    "trial_results_present": 3,
+    "unresolved_purpose_count": 0,
+    "unverified_trials": 0
+  },
+  "oidc_checks": {
+    "audience": true,
+    "event_name": true,
+    "github_hosted": true,
+    "issuer": true,
+    "ref": true,
+    "repository": true,
+    "run_attempt": true,
+    "run_id": true,
+    "sha": true,
+    "workflow_path": true
+  },
+  "oidc_claims": {
+    "actor": "moxnixmdj",
+    "actor_id": "217246470",
+    "aud": "https://github.com/moxnixmdj/brain",
+    "event_name": "push",
+    "head_ref": "",
+    "iss": "https://token.actions.githubusercontent.com",
+    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain",
+    "jti": "819d1092-802b-4087-907b-e194a3f6f2cf",
+    "ref": "refs/heads/arena/6f8ac9ce-brain",
+    "repository": "moxnixmdj/brain",
+    "repository_id": "1364778274",
+    "run_attempt": "1",
+    "run_id": "45314632711",
+    "runner_environment": "github-hosted",
+    "sha": "41226b7cc4fa1f22d37a13b9622553614fd5c5be",
+    "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain"
+  },
+  "pinned_substrates": {
+    "authoritative_reward_phase": "FRESH_CONTAINER_PATCH_REPLAY",
+    "brain_agent_import_path": "canonical.harbor.brain_zero_model_purpose_agent_v2:ZeroModelBrainPurposeAgentV2",
+    "environment_type": "docker",
+    "harbor_version": "0.27.0",
+    "hard51_ids_sha256": "6e35e84708a26443e1746ae928940555a3188654c90f3a2eb691f4f699482bd1",
+    "initial_verification_disabled": true,
+    "model_cli_args": 0,
+    "patch_replay_sha256": "5c8b344de37164e9723f1724c2573013957fb644c3913a64c12c1718c737d876",
+    "python_version": "3.12.16",
+    "release_asset_sha256sums_sha256": "2377c1a2462a911cca428611494d2595a17bd9ddf5af2e476c77566b0b40ed9a",
+    "release_asset_tasks_zip_sha256": "1b4e97502e7c73c6c96d86fd72ae3b67cb081af1796784157fe3097b34406947",
+    "replay_agent_import_path": "patch_replay:PatchReplayAgent",
+    "repo_sha256sums_sha256": "9d84f8507c89241d42d8b3ef911600a1ec75dbbb32687ce9b45b93318502c0bd",
+    "swe_bench_pro_v2_release_sha": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "swe_bench_pro_v2_release_tag": "v2.0.0",
+    "workflow_git_blob_sha": "822b8ab36af93aeca37f175d80a417357ed014e5"
+  },
+  "producer_cognition_model_dependency_count": 0,
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+  "promotion_authority": false,
+  "pulled_images": {
+    "count": 3,
+    "refs": [
+      "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:a67d0f526e5ea0fd7feadab688cb31865a3029c62c89fbf7439f26d14f488127",
+      "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:e0647aadaaeede17b1740922affcbe3dc4932f346a7aa4337b3ab248c2fe777a",
+      "ghcr.io/scaleapi/swe-bench_pro-v2@sha256:a5da56787aa6f4ad32a3dbcff7091f5f584c932dfbb402287f9de85793e7c2b1"
+    ],
+    "schema": "BRAIN_SWE_PRO_V2_PINNED_IMAGE_PULLS_V1"
+  },
+  "purpose_audit": {
+    "borrowed_outputs": false,
+    "checks": {
+      "all_executed_commands_safe": true,
+      "all_hidden_boundaries": true,
+      "all_runtime_network_free": true,
+      "all_zero_model": true,
+      "initial_harbor_exit_zero": true,
+      "no_harness_exceptions": true,
+      "purpose_decision_count": true,
+      "regrade_harbor_exit_zero": true,
+      "reward_rows_present": true,
+      "reward_vectors_present": true,
+      "unresolved_purposes_fail_closed": true
+    },
+    "decisions": [
+      {
+        "all_executed_commands_safe": true,
+        "borrowed_outputs": false,
+        "commands_executed": 2,
+        "commands_planned": 0,
+        "goal_family": "COPY_FILE",
+        "hidden_test_reading": false,
+        "instruction_sha256": "b29415050a1a07795fb0c1440322e6c641c36176b53d339ad47578f06c3b5ebe",
+        "model_calls": 0,
+        "patch_bytes": 0,
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "refusal_count": 1,
+        "runtime_network_calls": 0,
+        "trial_dir": "agent"
+      },
+      {
+        "all_executed_commands_safe": true,
+        "borrowed_outputs": false,
+        "commands_executed": 2,
+        "commands_planned": 0,
+        "goal_family": "REMOVE_LITERAL_LINES",
+        "hidden_test_reading": false,
+        "instruction_sha256": "d0b2c469892300c54bd636349a91cad587620c505ce6883e6502b4a9d6e5bad5",
+        "model_calls": 0,
+        "patch_bytes": 209,
+        "patch_sha256": "f57713d16ca21fd9a70cc9d8babe4c11ac621fc7ae5a759c5e7b108a11de56a7",
+        "refusal_count": 1,
+        "runtime_network_calls": 0,
+        "trial_dir": "agent"
+      },
+      {
+        "all_executed_commands_safe": true,
+        "borrowed_outputs": false,
+        "commands_executed": 2,
+        "commands_planned": 0,
+        "goal_family": "COPY_FILE",
+        "hidden_test_reading": false,
+        "instruction_sha256": "8d42bdcc4b79b34a3f3e265f98901f4a5ee980cf76953ddde6e721a0b1f70411",
+        "model_calls": 0,
+        "patch_bytes": 0,
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "refusal_count": 1,
+        "runtime_network_calls": 0,
+        "trial_dir": "agent"
+      }
+    ],
+    "hidden_test_reading": false,
+    "note": "An unresolved natural-language purpose produces an empty patch; this is a fail-closed result, not authored repair content.",
+    "raw_instructions_saved": false,
+    "raw_patches_saved": false,
+    "schema": "BRAIN_SWE_PRO_V2_PURPOSE_DECISION_AUDIT_V1"
+  },
+  "raw_benchmark_tasks_saved_in_workspace": false,
+  "regrade_harbor_exit_code": 0,
+  "reward_log": {
+    "aggregate_benchmark_score": null,
+    "benchmark_score_authority": false,
+    "date": "2026-11-24",
+    "harbor_version": "0.27.0",
+    "initial_harbor_exit_code": 0,
+    "initial_job_name": "brain-no-inference-swe-pro-v2-hard51",
+    "job_result_path": "/tmp/harbor_regrade_jobs/brain-no-inference-swe-pro-v2-hard51-regrade/result.json",
+    "job_result_sha256": "ade2d59609e566ac237b3c28dedc085f0d68d24abb8f3216c457412e7de1aab8",
+    "note": "Per-trial rewards are official fresh-container verifier diagnostics, not an aggregate benchmark score and not capability credit.",
+    "purpose_decision_count": 3,
+    "regrade_harbor_exit_code": 0,
+    "regrade_job_name": "brain-no-inference-swe-pro-v2-hard51-regrade",
+    "release_sha": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "release_tag": "v2.0.0",
+    "rows": [
+      {
+        "agent_name": "patch-replay-agent",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "f538bfe23c24ecc6152b6deb9d602866d7e869957c0e6ff347511c0620593d2b",
+        "task_name": "swebench-pro/instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "trial_name": "instance_ansible__ansible-40ade1__cc2Vxke"
+      },
+      {
+        "agent_name": "patch-replay-agent",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "047552bd58ad798f4c6fe5c43193c1e35f93113a343c3d5b16e1ec0349ca6c86",
+        "task_name": "swebench-pro/instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6",
+        "trial_name": "instance_internetarchive__openli__2h6gSSb"
+      },
+      {
+        "agent_name": "patch-replay-agent",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "b39240074e45fa8cd8f8c1f18bec6d938cba79a66df6d3f5fe8ba00eb8869cbf",
+        "task_name": "swebench-pro/instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "trial_name": "instance_qutebrowser__qutebrowse__M95TyXR"
+      }
+    ],
+    "schema": "BRAIN_SWE_PRO_V2_HARD51_REWARD_LOG_20261124_V1",
+    "source": "FRESH_CONTAINER_PATCH_REPLAY_HARBOR_RESULT_JSON",
+    "task_selected_count": 3,
+    "trial_results_present": 3
+  },
+  "reward_log_git_blob_sha": "0f1978666d7daf28d960cfe68fc103934b0eeb3d",
+  "reward_log_sha256": "bfb1b92dc130e81b85ecbdab544e563f44d2fe149a0a9c60b22dbbb3b0636382",
+  "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_RELEASE_SUBSTRATES_AND_RUN_ID_SEEDED_TASK_SET__ANY_SEMANTIC_BYTE_OR_IMAGE_CHANGE_REQUIRES_REVERIFICATION",
+  "run_reference": {
+    "oidc_jti": "819d1092-802b-4087-907b-e194a3f6f2cf",
+    "runner_attestation": "github-actions-oidc-token",
+    "workflow_run_attempt": 1,
+    "workflow_run_id": 45314632711,
+    "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45314632711"
+  },
+  "runner_arch": "X64",
+  "runner_environment": "github-hosted",
+  "runner_os": "Linux",
+  "runner_owned": true,
+  "runtime_network_calls": 0,
+  "schema": "BRAIN_SWE_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1",
+  "scope": "SWE_BENCH_PRO_V2_HARD51_FRESH_SEEDED_SUBSET_ZERO_MODEL_INSTRUCTION_SUPPLIED_TRANSFORMATIONS_ONLY",
+  "selected_task_ids": [
+    "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+    "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+    "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6"
+  ],
+  "selection": {
+    "borrowed_outputs": false,
+    "checks": {
+      "agent_no_network": true,
+      "agent_timeout_sec": true,
+      "docker_image_tag_exact": true,
+      "hard51_count": true,
+      "hard51_ids_file_matches": true,
+      "hard51_ids_present": true,
+      "hard51_ids_unique": true,
+      "patch_replay_file_matches": true,
+      "sha256sums_file_matches": true,
+      "task_count": true,
+      "verifier_public_network": true
+    },
+    "excluded_seen_task_ids": [],
+    "hard51_count": 51,
+    "hard51_ids_sha256": "6e35e84708a26443e1746ae928940555a3188654c90f3a2eb691f4f699482bd1",
+    "hidden_test_reading": false,
+    "model_calls": 0,
+    "note": "Freshness is a run-id-seeded choice from the pinned HARD-51 ID list, not a claim that task content was unseen or that a capability was acquired.",
+    "patch_replay_sha256": "5c8b344de37164e9723f1724c2573013957fb644c3913a64c12c1718c737d876",
+    "raw_benchmark_tasks_saved_in_workspace": false,
+    "release_asset_digests": {
+      "SHA256SUMS": "2377c1a2462a911cca428611494d2595a17bd9ddf5af2e476c77566b0b40ed9a",
+      "swe-bench-pro-v2.0.0-tasks.zip": "1b4e97502e7c73c6c96d86fd72ae3b67cb081af1796784157fe3097b34406947"
+    },
+    "release_sha": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "release_tag": "v2.0.0",
+    "run_id": "45314632711",
+    "runtime_network_calls": 0,
+    "schema": "BRAIN_SWE_PRO_V2_HARD51_FRESH_SELECTION_V1",
+    "selected_task_count": 3,
+    "selection_seed": "sha256(run_id:task_id)",
+    "sha256sums_sha256": "9d84f8507c89241d42d8b3ef911600a1ec75dbbb32687ce9b45b93318502c0bd",
+    "source_reads_instruction_content": false,
+    "source_reads_solution_or_test_content": false,
+    "task_count": 642,
+    "task_specific_answers_in_repo": false,
+    "tasks": [
+      {
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+        "selection_sha256": "06137cfd8bf0f0c4b70df8cc3cadd1f84eec22a3b5701422f0d01acbb0e30953",
+        "task_id": "instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171"
+      },
+      {
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "selection_sha256": "07efabb733bf5c024b9e065c83ca944069700669d192e84b2bfa5508104f95e3",
+        "task_id": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf"
+      },
+      {
+        "image_tag": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6",
+        "selection_sha256": "170cb5628a21edacb311ac1621d7f41695b7a6af184cda9760493120e27c1b1d",
+        "task_id": "instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6"
+      }
+    ]
+  },
+  "selection_check": {
+    "hard51_count": true,
+    "hidden_boundaries": true,
+    "metadata_checks_pass": true,
+    "model_and_network_free": true,
+    "no_instruction_content_read": true,
+    "no_raw_tasks_in_workspace": true,
+    "no_seen_task_ids": true,
+    "no_solution_or_test_content_read": true,
+    "release_sha": true,
+    "selected_count": true,
+    "selection_seed": true,
+    "task_count": true
+  },
+  "source_binding": {
+    "equal": true,
+    "expected": {
+      "canonical/harbor/brain_zero_model_purpose_agent_v2.py": "84e25ae93154b09cf8f1eeb0d55d092479b62abdaca5ec346fea5975434de0cb",
+      "canonical/harbor/brain_zero_model_purpose_policy_v2.py": "b44e7532fd2513efd015e9943d48f996c3f0e025c0cdd7e4486d89bcae0c0fc2",
+      "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py": "d5a4c988fa8b9f6178780ebb9107873de5cfc34e5382bb350bf40883ae15afe7",
+      "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py": "316e17723c0607596e377b7139858348194ed684f28801d6d0a52234b94bd62f"
+    },
+    "observed": {
+      "canonical/harbor/brain_zero_model_purpose_agent_v2.py": "84e25ae93154b09cf8f1eeb0d55d092479b62abdaca5ec346fea5975434de0cb",
+      "canonical/harbor/brain_zero_model_purpose_policy_v2.py": "b44e7532fd2513efd015e9943d48f996c3f0e025c0cdd7e4486d89bcae0c0fc2",
+      "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py": "d5a4c988fa8b9f6178780ebb9107873de5cfc34e5382bb350bf40883ae15afe7",
+      "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py": "316e17723c0607596e377b7139858348194ed684f28801d6d0a52234b94bd62f"
+    },
+    "schema": "BRAIN_SWE_PRO_V2_PURPOSE_SOURCE_BINDING_V1"
+  },
+  "source_verification": {
+    "checks": {
+      "git_head_sha": true,
+      "hard51_count": true,
+      "hard51_ids_file": true,
+      "patch_replay_agent_file": true,
+      "release_asset_sha256sums_digest": true,
+      "release_asset_tasks_zip_digest": true,
+      "release_tag": true,
+      "repo_sha256sums_file": true,
+      "sha256sums_check_count": true,
+      "sha256sums_check_pass": true,
+      "task_dir_count": true
+    },
+    "hard51_count": 51,
+    "hard51_ids_sha256": "6e35e84708a26443e1746ae928940555a3188654c90f3a2eb691f4f699482bd1",
+    "patch_replay_sha256": "5c8b344de37164e9723f1724c2573013957fb644c3913a64c12c1718c737d876",
+    "raw_tasks_saved_in_workspace": false,
+    "release_asset_digests": {
+      "SHA256SUMS": "2377c1a2462a911cca428611494d2595a17bd9ddf5af2e476c77566b0b40ed9a",
+      "swe-bench-pro-v2.0.0-tasks.zip": "1b4e97502e7c73c6c96d86fd72ae3b67cb081af1796784157fe3097b34406947"
+    },
+    "release_sha": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "release_tag": "v2.0.0",
+    "repo_sha256sums_sha256": "9d84f8507c89241d42d8b3ef911600a1ec75dbbb32687ce9b45b93318502c0bd",
+    "schema": "BRAIN_SWE_PRO_V2_SOURCE_VERIFICATION_V1",
+    "sha256sums_check_count": 6436,
+    "task_dir_count": 642
+  },
+  "static_audit": {
+    "agent_model_name_none": true,
+    "agent_patch_capture_present": true,
+    "generic_plan_is_safe": true,
+    "imports": {
+      "canonical/harbor/brain_zero_model_purpose_agent_v2.py": [
+        "__future__",
+        "canonical",
+        "harbor",
+        "hashlib",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "canonical/harbor/brain_zero_model_purpose_policy_v2.py": [
+        "__future__",
+        "hashlib",
+        "pathlib",
+        "re",
+        "shlex",
+        "typing"
+      ],
+      "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py": [
+        "__future__",
+        "argparse",
+        "hashlib",
+        "json",
+        "pathlib",
+        "shutil",
+        "tomllib",
+        "typing"
+      ],
+      "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py": [
+        "__future__",
+        "canonical",
+        "hashlib",
+        "json",
+        "pathlib"
+      ]
+    },
+    "known_task_names_absent_from_agent_policy_selector": true,
+    "marked_imports": [],
+    "scan_is_safe": true,
+    "schema": "BRAIN_SWE_PRO_V2_PURPOSE_STATIC_AUDIT_V1",
+    "selector_reads_hidden_task_content": false,
+    "unresolved_purpose_refused": true,
+    "upstream_replay_agent_imports": [
+      "__future__",
+      "glob",
+      "harbor",
+      "json",
+      "pathlib",
+      "shlex"
+    ],
+    "upstream_replay_agent_is_model_free": true,
+    "upstream_replay_agent_marked_imports": []
+  },
+  "status": "RUNNER_OWNED_SWE_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_ATTEMPT_RECORDED__ZERO_CREDIT__SECTION_6_NOT_MET",
+  "task_specific_answers_in_repo": false,
+  "terminal_credit_delta": 0,
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "unverified": [
+    "NO_TASK_SUCCESS",
+    "Aggregate benchmark score authority",
+    "OSWorld 2.1 tasks",
+    "Remaining SWE-bench Pro V2 / HARD-51 tasks",
+    "Remaining Terminal-Bench 4.1 CPU and GPU tasks",
+    "Arbitrary natural-language purpose understanding",
+    "Authored repair content",
+    "GUI or browser computer use",
+    "Independent section 6 verification"
+  ],
+  "verified": [
+    "EXACT_SOURCE_SHA256_BINDINGS",
+    "NO_MODEL_NETWORK_OR_SUBPROCESS_IMPORTS_IN_AGENT_OR_UPSTREAM_REPLAY_SURFACE",
+    "UNRESOLVED_PURPOSE_FAILS_CLOSED_LOCALLY",
+    "PINNED_SWE_BENCH_PRO_V2_RELEASE_AND_FILE_CHECKSUMS",
+    "FRESH_RUN_ID_SEEDED_HARD51_SUBSET_SELECTED",
+    "GHCR_IMAGES_RESOLVED_TO_IMMUTABLE_DIGESTS",
+    "DIGEST_PINNED_IMAGES_PULLED",
+    "OFFICIAL_FRESH_CONTAINER_RESULT_JSON_REWARD_LOG_BOUND",
+    "ZERO_MODEL_PURPOSE_DECISIONS_AND_SAFE_COMMAND_AUDIT",
+    "OIDC_RUN_REFERENCE_BOUND",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45314632711",
+  "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45314632711",
+  "workflow_job": "hard_benchmark_attempt",
+  "workflow_name": "Zero-model SWE-bench Pro V2 HARD-51 purpose runner",
+  "workflow_ref": "refs/heads/arena/6f8ac9ce-brain",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 45314632711,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45314632711"
+}

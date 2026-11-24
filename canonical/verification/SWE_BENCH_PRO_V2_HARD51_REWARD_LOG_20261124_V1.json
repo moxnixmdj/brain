@@ -1,0 +1,55 @@
+{
+  "aggregate_benchmark_score": null,
+  "benchmark_score_authority": false,
+  "date": "2026-11-24",
+  "harbor_version": "0.27.0",
+  "initial_harbor_exit_code": 0,
+  "initial_job_name": "brain-no-inference-swe-pro-v2-hard51",
+  "job_result_path": "/tmp/harbor_regrade_jobs/brain-no-inference-swe-pro-v2-hard51-regrade/result.json",
+  "job_result_sha256": "ade2d59609e566ac237b3c28dedc085f0d68d24abb8f3216c457412e7de1aab8",
+  "note": "Per-trial rewards are official fresh-container verifier diagnostics, not an aggregate benchmark score and not capability credit.",
+  "purpose_decision_count": 3,
+  "regrade_harbor_exit_code": 0,
+  "regrade_job_name": "brain-no-inference-swe-pro-v2-hard51-regrade",
+  "release_sha": "66f92766bba642462d4bbe5479e83f91f9211862",
+  "release_tag": "v2.0.0",
+  "rows": [
+    {
+      "agent_name": "patch-replay-agent",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "f538bfe23c24ecc6152b6deb9d602866d7e869957c0e6ff347511c0620593d2b",
+      "task_name": "swebench-pro/instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+      "trial_name": "instance_ansible__ansible-40ade1__cc2Vxke"
+    },
+    {
+      "agent_name": "patch-replay-agent",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "047552bd58ad798f4c6fe5c43193c1e35f93113a343c3d5b16e1ec0349ca6c86",
+      "task_name": "swebench-pro/instance_internetarchive__openlibrary-630221ab686c64e75a2ce253c893c033e4814b2e-v93c53c13d5f9b383ebb411ee7750b49dcd1a34c6",
+      "trial_name": "instance_internetarchive__openli__2h6gSSb"
+    },
+    {
+      "agent_name": "patch-replay-agent",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "b39240074e45fa8cd8f8c1f18bec6d938cba79a66df6d3f5fe8ba00eb8869cbf",
+      "task_name": "swebench-pro/instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171",
+      "trial_name": "instance_qutebrowser__qutebrowse__M95TyXR"
+    }
+  ],
+  "schema": "BRAIN_SWE_PRO_V2_HARD51_REWARD_LOG_20261124_V1",
+  "source": "FRESH_CONTAINER_PATCH_REPLAY_HARBOR_RESULT_JSON",
+  "task_selected_count": 3,
+  "trial_results_present": 3
+}
