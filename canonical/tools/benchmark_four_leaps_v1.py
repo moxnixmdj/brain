@@ -544,10 +544,72 @@ def bench_leap_4() -> dict[str, Any]:
     }
 
 
+# --------------------------------------------------------------------------- #
+# Leap 2b -- real polyglot repositories (optional: needs a local clone)
+# --------------------------------------------------------------------------- #
+
+POLYGLOT = {"c": ".c", "javascript": ".js", "typescript": ".ts",
+            "go": ".go", "rust": ".rs", "cpp": ".cpp"}
+SKIP_PARTS = {"node_modules", "test", "tests", "fuzz", "benches", "examples",
+              ".git", "vendor", "third_party"}
+
+
+def bench_polyglot(root: pathlib.Path, per_repo: int = 400) -> dict[str, Any]:
+    """Lower every real file of every language found under ``root``.
+
+    Two numbers, neither of which needs a witness: how much real polyglot code
+    the lowerer accepts without a parse failure, and how much of it is the SAME
+    MEANING repeated (the e-graph's distinct-class ratio over real code).
+    """
+    rows: list[dict[str, Any]] = []
+    for repo in sorted(p for p in root.iterdir() if p.is_dir()):
+        lang = next((k for k, v in POLYGLOT.items()
+                     if any(repo.rglob("*" + v))), None)
+        if lang is None:
+            continue
+        files = [p for p in repo.rglob("*" + POLYGLOT[lang])
+                 if not any(x in SKIP_PARTS for x in p.parts)][:per_repo]
+        ids: list[int] = []
+        defs = calls = 0
+        g = mir.SemiPersistentEGraph()
+        t0 = time.perf_counter()
+        for f in files:
+            try:
+                m = mir.lower_file(f)
+            except Exception:
+                continue
+            defs += len(m.defs)
+            calls += len(m.calls)
+            ids.extend(g.add(d.term) for d in m.defs)
+        t_lower = (time.perf_counter() - t0) * 1000
+        t0 = time.perf_counter()
+        g.saturate(rounds=1, budget=4000)
+        t_sat = (time.perf_counter() - t0) * 1000
+        roots = {g.find(i) for i in ids}
+        rows.append({
+            "repo": repo.name, "lang": lang, "files": len(files),
+            "defs": defs, "calls": calls, "distinct_meanings": len(roots),
+            "dedup_pct": round(100 * (1 - len(roots) / max(1, len(ids))), 1),
+            "lower_ms": round(t_lower, 1), "saturate_ms": round(t_sat, 1),
+            "lower_ms_per_file": round(t_lower / max(1, len(files)), 2),
+        })
+    tot = sum(r["defs"] for r in rows)
+    dist = sum(r["distinct_meanings"] for r in rows)
+    return {"rows": rows, "defs": tot, "distinct_meanings": dist,
+            "dedup_pct": round(100 * (1 - dist / max(1, tot)), 1),
+            "repos": len(rows),
+            "note": ("dedup_pct is the share of lowered definitions that are the "
+                     "same Meaning-IR term as another one, after one saturation "
+                     "round.  It is a measure of redundancy in the corpus, not of "
+                     "code quality.")}
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--json", default=None)
     ap.add_argument("--limit", type=int, default=40)
+    ap.add_argument("--polyglot-root", default=None,
+                    help="directory of cloned repos to lower (real polyglot code)")
     args = ap.parse_args()
 
     print("Leap 1+2 : execution-verified before/after pairs ...", flush=True)
@@ -596,6 +658,19 @@ def main() -> int:
     for h in l3b["sample_inexact"]:
         print(f"    ~ {h['repo']}: want {h['new']!r}")
         print(f"                            got  {h['got']!r}")
+    l2b = None
+    if args.polyglot_root:
+        print("\n=== Leap 2b -- real polyglot repositories ===")
+        l2b = bench_polyglot(pathlib.Path(args.polyglot_root))
+        print(f"  {'repo':14s}{'lang':11s}{'files':>6s}{'defs':>7s}{'distinct':>10s}"
+              f"{'dedup%':>8s}{'lower_ms':>10s}{'sat_ms':>8s}")
+        for r in l2b["rows"]:
+            print(f"  {r['repo']:14s}{r['lang']:11s}{r['files']:6d}{r['defs']:7d}"
+                  f"{r['distinct_meanings']:10d}{r['dedup_pct']:7.1f}%"
+                  f"{r['lower_ms']:10.1f}{r['saturate_ms']:8.1f}")
+        print(f"  {'TOTAL':14s}{'':11s}{sum(r['files'] for r in l2b['rows']):6d}"
+              f"{l2b['defs']:7d}{l2b['distinct_meanings']:10d}{l2b['dedup_pct']:7.1f}%")
+        print(f"  note: {l2b['note']}")
     print("\n=== Leap 4 -- DeltaSim ===")
     for k, v in l4.items():
         print(f"  {k:38s} {v}")
@@ -604,7 +679,7 @@ def main() -> int:
         out = {"schema": "PROJECT_BRAIN_FOUR_LEAP_BENCHMARK_V1",
                "authority": "NONE__MEASUREMENT_ONLY",
                "leap_1_leap_2": l12, "leap_3": l3, "leap_3b": l3b,
-               "leap_4": l4}
+               "leap_4": l4, "leap_2b_polyglot": l2b}
         pathlib.Path(args.json).write_text(json.dumps(out, indent=1), encoding="utf-8")
         print(f"\nwrote {args.json}")
     return 0
