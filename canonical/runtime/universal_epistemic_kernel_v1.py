@@ -4987,6 +4987,10 @@ def solve_arbitrary_environment(
     goal_targets: Sequence[Mapping[str, Any]] | None = None,
     self_play_tasks: Sequence[Mapping[str, Any]] | None = None,
     skill_store: dict[str, Any] | None = None,
+    cow_speculative_actions: Sequence[Mapping[str, Any]] | None = None,
+    cow_executor: Callable[[Mapping[str, Any]], Any] | None = None,
+    cow_residual: Callable[[Any], float] | None = None,
+    petri_net_spec: Mapping[str, Any] | None = None,
     postcondition_fn: Callable[[pathlib.Path], tuple[bool, str]] | None = None,
     dom_nodes: Sequence[Mapping[str, Any]] | None = None,
     gui_env: Any | None = None,
@@ -5024,6 +5028,64 @@ def solve_arbitrary_environment(
             "modality": "adversarial_self_play_compounding",
             "status": str(sp_rep.get("status") or "UNSOLVED"),
             "self_play": sp_rep,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    # 000b. 16-Way Parallel Copy-on-Write Counterfactual Speculative Rollouts
+    if cow_speculative_actions and cow_executor is not None and cow_residual is not None:
+        from canonical.runtime import repo_component_and_cow_engine_v1 as RCCE
+
+        cow_rep = RCCE.speculative_cow_rollout(
+            cow_speculative_actions,
+            executor_fn=cow_executor,
+            residual_fn=cow_residual,
+            max_workers=16,
+            timeout_s=min(float(timeout_s), 10.0),
+        )
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": "cow_parallel_speculative_rollout",
+            "status": str(cow_rep.get("status") or "NO_IMPROVEMENT"),
+            "cow_rollout": cow_rep,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    # 000c. Unified Cross-Modal Type-Transition Petri Net (GUI + SQLite + CLI + Repo Python)
+    if isinstance(petri_net_spec, Mapping):
+        from canonical.runtime import repo_component_and_cow_engine_v1 as RCCE
+
+        pnet = petri_net_spec.get("petri_net")
+        if not isinstance(pnet, RCCE.UnifiedCrossModalPetriNet):
+            pnet = RCCE.UnifiedCrossModalPetriNet()
+            for tr in (petri_net_spec.get("transitions") or ()):
+                if isinstance(tr, RCCE.PetriTransition):
+                    pnet.add_transition(tr)
+        plan = pnet.solve(
+            petri_net_spec.get("initial_places") or (),
+            petri_net_spec.get("goal_places") or (),
+            max_steps=int(petri_net_spec.get("max_steps") or 8),
+        )
+        exec_res: dict[str, Any] | None = None
+        if plan.get("status") == "SOLVED" and petri_net_spec.get("execute"):
+            exec_res = pnet.execute_and_crystallize(
+                plan,
+                petri_net_spec.get("initial_context") or {},
+                governed_memory=governed_memory,
+                verifier=petri_net_spec.get("verifier"),
+            )
+        _p_raw_st = str((exec_res or plan).get("status") or "UNREACHABLE")
+        _p_ok = _p_raw_st in ("VERIFIED_AND_CRYSTALLIZED", "SOLVED", "TRIVIAL")
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": "unified_cross_modal_petri_net",
+            "status": "VERIFIED" if _p_ok else _p_raw_st,
+            "petri_status": _p_raw_st,
+            "petri_plan": {k: v for k, v in plan.items() if k != "steps"},
+            "petri_execution": exec_res,
             "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
             "model_calls": 0,
             "parameters_stored": 0,

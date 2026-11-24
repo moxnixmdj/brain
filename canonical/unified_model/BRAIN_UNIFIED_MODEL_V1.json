@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2026
+  "source_index_modules": 2027
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "06c9bf26c798927d40ab1b886844263610d127d54948fc1130d546b656af2c6b"
+  "value": "e4c2ebda2c154ff2209ad39052c4802e2e038cf4dcd541ea58736d29dc48ff1e"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "976a9f416057c5ac1ee4ade5d306adcbea6d9343720562ef0e0e2a89cc3c309e",
+   "sha256": "016ff15cc569b5cc2c267fd612ac3010a202d7dc327737c7ba5e374aa778f8ad",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -274048,7 +274048,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "f13c42d3b724fe3fc237a549534c0b334c198512a95a02e30abb2e3f13e43739",
+   "sha256": "9f3b58febec4e25d2641e1b822d0d338fa0deab46a5247fd4ed6b1f9f9db436a",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -278342,7 +278342,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "720a8d66180e0da0cf4611286ad1b18c2c432b844df2f0f5e79497ddbcd942fc",
+   "sha256": "de31ce97891bc794c6f032abc841240afa372c2678ee76100344fd7565623102",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 45,
    "symbols": [
@@ -289128,7 +289128,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/executable_mental_model_v1.py",
-   "sha256": "ec5a160138469fb689278d7ca2582b43c0de5787c37e694b0d9d59fcf6bff31c",
+   "sha256": "7f80a0eb0ba488fbb930a96dfd360e59c861fb22351e6b142107d86b5de1a649",
    "summary": "Lightweight Executable Mental Models — Leap 4 of Deep Program Understanding (0 LLM, 0 Weights).",
    "symbol_count": 14,
    "symbols": [
@@ -325466,6 +325466,60 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/repo_component_and_cow_engine_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/repo_component_and_cow_engine_v1.py",
+   "sha256": "87c51ca3c83b7234031533a25f8f3ff047719150cf0d0090a8ed84c57d1963a7",
+   "summary": "Repo-Native Component Mining, Dual-Program Splicing, 16-Way CoW Speculative Rollouts,",
+   "symbol_count": 13,
+   "symbols": [
+    "PetriTransition",
+    "RepoComponentMorphism",
+    "UnifiedCrossModalPetriNet",
+    "_find_changed_statement_pair",
+    "_infer_param_types",
+    "_infer_return_type_from_body",
+    "_norm_type_str",
+    "_rel_to_import_module",
+    "_unwrap_frame_envs",
+    "mine_repo_components_as_morphisms",
+    "speculative_cow_rollout",
+    "splice_dual_programs",
+    "synthesize_repo_component_return_candidates"
+   ],
+   "terms": {
+    "16-way": 1,
+    "component": 2,
+    "cow": 2,
+    "dual-program": 1,
+    "engine": 1,
+    "find_changed_statement_pair": 1,
+    "infer_param_types": 1,
+    "infer_return_type_from_body": 1,
+    "mine_repo_components_as_morphisms": 1,
+    "mining": 1,
+    "norm_type_str": 1,
+    "petritransition": 1,
+    "rel_to_import_module": 1,
+    "repo": 1,
+    "repo-native": 1,
+    "repocomponentmorphism": 1,
+    "rollouts": 1,
+    "speculative": 1,
+    "speculative_cow_rollout": 1,
+    "splice_dual_programs": 1,
+    "splicing": 1,
+    "synthesize_repo_component_return_candidates": 1,
+    "unifiedcrossmodalpetrinet": 1,
+    "unwrap_frame_envs": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/requirement_acceptance_compiler.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -338932,7 +338986,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "f07f715d5dd223ca8fd5311199f468969c92473056fc96bbaff075a8802675fa",
+   "sha256": "cc0e4de6065b87b758693df756c1e5055aa321913edd1061c510fcc62777b2cf",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [

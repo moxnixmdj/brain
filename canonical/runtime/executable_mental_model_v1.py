@@ -1111,3 +1111,38 @@ class CUMentalWorldModel:
             "model_calls": 0,
             "parameters_stored": 0,
         }
+
+    def speculative_cow_choose(
+        self,
+        initial_state: CUWorldState,
+        candidate_actions: Sequence[Mapping[str, Any]],
+        goal_facts: Mapping[str, Any],
+        *,
+        max_workers: int = 16,
+    ) -> dict[str, Any]:
+        """Fork up to 16 parallel Linux Copy-on-Write realities to speculatively execute
+        candidate CU actions in total isolation, scoring goal-fact residual across all 16
+        outcomes without mutating parent state."""
+        from canonical.runtime import repo_component_and_cow_engine_v1 as RCCE
+
+        def _residual_for_state(st_obj: CUWorldState) -> float:
+            missing = sum(1 for k, v in goal_facts.items() if st_obj.facts.get(k) != v)
+            return float(missing)
+
+        base_res = _residual_for_state(initial_state)
+
+        def _exec_in_cow_child(act: Mapping[str, Any]) -> tuple[bool, float]:
+            st_copy = initial_state.clone()
+            nxt, info = self.simulate_step(st_copy, act)
+            if not info.get("ok"):
+                return (False, float("inf"))
+            return (True, _residual_for_state(nxt))
+
+        return RCCE.speculative_cow_rollout(
+            candidate_actions,
+            executor_fn=_exec_in_cow_child,
+            residual_fn=lambda pair: pair[1] if pair[0] else float("inf"),
+            baseline_residual=base_res,
+            max_workers=max_workers,
+        )
+

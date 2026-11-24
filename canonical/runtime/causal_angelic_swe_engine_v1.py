@@ -41,6 +41,7 @@ from canonical.runtime import instant_swe_skill_store_v1 as SKILL_STORE
 from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
 from canonical.runtime import universal_semantic_ir_v1 as SEM_IR
 from canonical.runtime import executable_mental_model_v1 as MENTAL
+from canonical.runtime import repo_component_and_cow_engine_v1 as RCCE
 
 SCHEMA = "BRAIN_CAUSAL_ANGELIC_SWE_ENGINE_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
@@ -4762,6 +4763,26 @@ def _synthesize_static_cone_and_truthiness_repairs(
             _bwr_transforms = _BWS_RET.backward_propagate_expression("__ret__", _bwr_examples, max_depth=2)
         except Exception:
             _bwr_transforms = []
+        # Anti-overfit guard: never emit a multi-char / digit-bearing `.replace(old, new)`
+        # synthesized from a single assertion pair (e.g. `.replace('0.000-', '-0.0000')`).
+        if len(_bwr_pairs) == 1:
+            _bwr_filtered: list[str] = []
+            for _tr in _bwr_transforms:
+                if ".replace(" in _tr:
+                    _m_rep = re.search(r"\.replace\(([^,]+),\s*([^)]+)\)", _tr)
+                    if _m_rep:
+                        try:
+                            _r_old = ast.literal_eval(_m_rep.group(1).strip())
+                            _r_new = ast.literal_eval(_m_rep.group(2).strip())
+                            if isinstance(_r_old, str) and isinstance(_r_new, str):
+                                if any(ch.isdigit() for ch in _r_old + _r_new) or (
+                                    len(_r_old) > 2 and any(ch.isalnum() for ch in _r_old)
+                                ):
+                                    continue
+                        except Exception:
+                            pass
+                _bwr_filtered.append(_tr)
+            _bwr_transforms = _bwr_filtered
         # Prefer narrower/safer string trims (`rstrip`/`lstrip`) before broad `strip` when both satisfy
         _bwr_transforms = sorted(
             _bwr_transforms,
@@ -4906,6 +4927,153 @@ def _synthesize_static_cone_and_truthiness_repairs(
                         _nc_biw,
                     )
                     _biw_added += 1
+
+    # 12b-none-fallthrough. Backward Witness Propagation across Early `if X is None: return None` Guard
+    # (`TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH`):
+    # When failing assertion(s) state `assert None == <non_none_expected>` (e.g. `assert None == ('SRC', '')`),
+    # and a localized `if <X> is None: return None` immediately precedes `return <fallthrough(..., X, ...)>`,
+    # propagate the expected empty/default literal (`""`, `0`, `[]`, `{}`) backwards into `<X>` via `(<X> or <default>)`
+    # and allow execution to fall through instead of aborting with `None`. Zero bug-specific templates!
+    _none_exp_defaults: list[str] = []
+    for _ev in (loc.exceptions or {}).values():
+        _emsg = str((_ev.get("msg") if isinstance(_ev, Mapping) else _ev) or "")
+        for _ln_m in _emsg.splitlines():
+            _ln_s = _ln_m.strip()
+            if _ln_s.startswith("assert ") and " == " in _ln_s:
+                _lhs_s, _rhs_s = _ln_s[7:].split(" == ", 1)
+                try:
+                    _lv = ast.literal_eval(_lhs_s.strip())
+                    _rv = ast.literal_eval(_rhs_s.strip())
+                except Exception:
+                    continue
+                _exp_non_none = _rv if (_lv is None and _rv is not None) else (_lv if (_rv is None and _lv is not None) else None)
+                if _exp_non_none is not None:
+                    _elems = list(_exp_non_none) if isinstance(_exp_non_none, (tuple, list)) else [_exp_non_none]
+                    for _el in _elems:
+                        if _el == "" and '""' not in _none_exp_defaults:
+                            _none_exp_defaults.append('""')
+                        elif _el == 0 and type(_el) is int and "0" not in _none_exp_defaults:
+                            _none_exp_defaults.append("0")
+                        elif _el == [] and "[]" not in _none_exp_defaults:
+                            _none_exp_defaults.append("[]")
+                        elif _el == {} and "{}" not in _none_exp_defaults:
+                            _none_exp_defaults.append("{}")
+                break
+    if _none_exp_defaults:
+        _ng_seen: set[tuple[str, int, str]] = set()
+        for s in loc.sites[:10]:
+            _ng_fp = worktree / s.file
+            if not _ng_fp.is_file():
+                continue
+            try:
+                _ng_src = _ng_fp.read_text(encoding="utf-8", errors="ignore")
+                _ng_tree = ast.parse(_ng_src)
+            except Exception:
+                continue
+            _ng_lines = _ng_src.splitlines(keepends=True)
+            for _parent in ast.walk(_ng_tree):
+                _body = getattr(_parent, "body", None)
+                if not isinstance(_body, list) or len(_body) < 2:
+                    continue
+                for _bi in range(len(_body) - 1):
+                    _st_if = _body[_bi]
+                    _st_next = _body[_bi + 1]
+                    if not (isinstance(_st_if, ast.If) and not _st_if.orelse and isinstance(_st_next, ast.Return) and _st_next.value is not None):
+                        continue
+                    _if_s = int(getattr(_st_if, "lineno", 0))
+                    _if_e = int(getattr(_st_if, "end_lineno", _if_s))
+                    if not (_if_s <= s.lineno <= _if_e):
+                        continue
+                    if len(_st_if.body) != 1 or not isinstance(_st_if.body[0], ast.Return):
+                        continue
+                    _ret_if_val = _st_if.body[0].value
+                    if _ret_if_val is not None and not (isinstance(_ret_if_val, ast.Constant) and _ret_if_val.value is None):
+                        continue
+                    # Match `if <expr> is None:`
+                    _tst = _st_if.test
+                    if not (
+                        isinstance(_tst, ast.Compare)
+                        and len(_tst.ops) == 1
+                        and isinstance(_tst.ops[0], ast.Is)
+                        and len(_tst.comparators) == 1
+                        and isinstance(_tst.comparators[0], ast.Constant)
+                        and _tst.comparators[0].value is None
+                    ):
+                        continue
+                    _guard_expr_src = ast.unparse(_tst.left).strip()
+                    _next_ret_src = ast.unparse(_st_next.value).strip()
+                    if not _guard_expr_src or _guard_expr_src not in _next_ret_src:
+                        continue
+                    _next_e = int(getattr(_st_next, "end_lineno", getattr(_st_next, "lineno", _if_e + 1)))
+                    _ind_l = _ng_lines[_if_s - 1]
+                    _ind = _ind_l[: len(_ind_l) - len(_ind_l.lstrip())]
+                    for _dflt in _none_exp_defaults[:3]:
+                        _key = (s.file, _if_s, _dflt)
+                        if _key in _ng_seen:
+                            continue
+                        _ng_seen.add(_key)
+                        # Form 1: Fall through cleanly with `(<expr> or <default>)`
+                        _rewritten_ret = _next_ret_src.replace(_guard_expr_src, f"({_guard_expr_src} or {_dflt})")
+                        _nc_ng = (
+                            "".join(_ng_lines[: _if_s - 1])
+                            + f"{_ind}return {_rewritten_ret}\n"
+                            + "".join(_ng_lines[_next_e:])
+                        )
+                        try:
+                            ast.parse(_nc_ng)
+                            add_cand(
+                                s.file,
+                                _if_s,
+                                "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
+                                f"none_guard_default_fallthrough(L{_if_s}:{_guard_expr_src} or {_dflt})",
+                                _nc_ng,
+                            )
+                        except SyntaxError:
+                            pass
+
+    # 12b-repo-comp. Repo-Native Component Return Synthesis (`TIER3_REPO_COMPONENT_SYNTH`):
+    # Harvest real helper functions from anywhere in the target repository (even 3+ files away!)
+    # and test whether calling a mined repo helper (or 2-hop composition) on live locals / return
+    # value satisfies failing assertion witnesses. Zero fixed-grammar bottleneck!
+    if _bwr_pairs:
+        _rc_added = 0
+        for s in loc.sites[:3]:
+            if _rc_added >= 4:
+                break
+            _rc_fp = worktree / s.file
+            if not _rc_fp.is_file():
+                continue
+            try:
+                _rc_src = _rc_fp.read_text(encoding="utf-8", errors="ignore")
+                _rc_tree = ast.parse(_rc_src)
+            except Exception:
+                continue
+            # Check if localized site is at or near a Return statement
+            _ret_ln = None
+            for _nd in ast.walk(_rc_tree):
+                if isinstance(_nd, ast.Return) and abs(int(getattr(_nd, "lineno", 0)) - s.lineno) <= 2:
+                    _ret_ln = int(getattr(_nd, "lineno", 0))
+                    break
+            if _ret_ln is None:
+                continue
+            _rc_examples = [({"__ret__": _a}, _e) for _a, _e in _bwr_pairs[:4]]
+            try:
+                _rc_hits = RCCE.synthesize_repo_component_return_candidates(
+                    worktree, s.file, _rc_src, _ret_ln, _rc_examples, max_candidates=3
+                )
+            except Exception:
+                _rc_hits = []
+            for _hit in _rc_hits:
+                if _rc_added >= 4:
+                    break
+                add_cand(
+                    s.file,
+                    _ret_ln,
+                    "TIER3_REPO_COMPONENT_SYNTH",
+                    f"repo_component_synth(L{_ret_ln}:{_hit['call_expr']})",
+                    _hit["patched_source"],
+                )
+                _rc_added += 1
 
     # 12c. Python Builtin Exception-Hierarchy Widening + Subprocess-Resilient Sibling Repair
     # (`TIER3_EXCEPTION_HIERARCHY_WIDEN`):
@@ -10544,6 +10712,9 @@ def synthesize_candidates(
         "TIER3_OE_SYGUS_EARLY_RETURN_GUARD",
         "TIER3_BACKWARD_WITNESS_RET_TRANSFORM",
         "TIER3_BOOL_IMPLICATION_WEAKEN",
+        "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
+        "TIER3_REPO_COMPONENT_SYNTH",
+        "TIER3_DUAL_PROGRAM_SPLICE",
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
         "TIER3_STATIC_REGEX_FULLMATCH",
@@ -12471,6 +12642,7 @@ def solve_repository(
                 if c.file.replace("\\", "/").lstrip("./") not in _ro_norm
                 and pathlib.Path(c.file).name not in _ro_bases
             ]
+        splice_deferred: list[tuple[str, PatchCandidate]] = []
         for cand in hp_cands:
             pre_tested_keys.add((cand.file, cand.patched_source))
             attempts += 1
@@ -12564,6 +12736,10 @@ def solve_repository(
                     )
                     full_verdicts = _ce_fv
                     all_flipped, regressions = True, []
+                elif 1 <= len(regressions) <= 8 and len(splice_deferred) < 4:
+                    # Occam's Razor: defer Dual-Program Splicing until all direct (0-regression)
+                    # candidates have been tried, so cleaner 1-line algebraic fixes always win first!
+                    splice_deferred.append((orig_source, cand))
             if all_flipped and not regressions:
                 diff = "".join(
                     difflib.unified_diff(
@@ -13025,6 +13201,8 @@ def solve_repository(
                     )
                     full_verdicts = _ce_fv
                     all_flipped, regressions = True, []
+                elif 1 <= len(regressions) <= 8 and len(splice_deferred) < 6:
+                    splice_deferred.append((orig_source, cand))
             if all_flipped and not regressions:
                 diff = "".join(
                     difflib.unified_diff(
@@ -13104,6 +13282,63 @@ def solve_repository(
                     reason="FULL_SUITE_REGRESSION_OR_INCOMPLETE",
                 )
                 refuted_skills.append(ref)
+
+        # Stage 4a: Occam-Ordered Dual-Program Splicing (`TIER3_DUAL_PROGRAM_SPLICE`):
+        # Runs ONLY after all direct (0-regression) Stage 1.5 and Stage 2 candidates have been exhausted!
+        if winner is None and splice_deferred:
+            for _sp_orig, _sp_cand in splice_deferred:
+                if winner is not None:
+                    break
+                _sp_f_envs: list[dict[str, Any]] = []
+                _sp_p_envs: list[dict[str, Any]] = []
+                for _st in loc.sites:
+                    if _st.file == _sp_cand.file and abs(_st.lineno - _sp_cand.lineno) <= 4:
+                        _sp_f_envs.extend(_st.failing_frames or ())
+                        _sp_p_envs.extend(_st.passing_frames or ())
+                if not (_sp_f_envs and _sp_p_envs):
+                    continue
+                _splices = RCCE.splice_dual_programs(
+                    _sp_orig,
+                    _sp_cand.patched_source,
+                    _sp_cand.lineno,
+                    _sp_f_envs,
+                    _sp_p_envs,
+                    max_splices=3,
+                )
+                for _sp in _splices:
+                    full_verifications += 1
+                    _sp_wt = pathlib.Path(tmp_dir) / f"verify_splice_{full_verifications}"
+                    copy_worktree(src_root, _sp_wt)
+                    (_sp_wt / _sp_cand.file).write_text(_sp["patched_source"], encoding="utf-8")
+                    _sp_fv, _, _ = run_verdicts(
+                        _sp_wt, test_targets, python_exe=python_exe, timeout_s=max(timeout_s, 60.0)
+                    )
+                    _sp_flip, _sp_reg, _ = _eval_verdicts(_sp_fv, _sp_wt, target_flips)
+                    shutil.rmtree(_sp_wt, ignore_errors=True)
+                    if _sp_flip and not _sp_reg:
+                        _sp_diff = "".join(
+                            difflib.unified_diff(
+                                _sp_orig.splitlines(keepends=True),
+                                _sp["patched_source"].splitlines(keepends=True),
+                                fromfile=f"a/{_sp_cand.file}",
+                                tofile=f"b/{_sp_cand.file}",
+                            )
+                        )
+                        winner = {
+                            "file": _sp_cand.file,
+                            "lineno": int(_sp["lineno"]),
+                            "tier": "TIER3_DUAL_PROGRAM_SPLICE",
+                            "description": f"dual_program_splice(L{_sp['lineno']}:if {_sp['guard']})",
+                            "skill_id_used": None,
+                            "attempt": attempts,
+                            "diff": _sp_diff,
+                            "patched_source": _sp["patched_source"],
+                            "flipped_tests": target_flips,
+                            "regressions": 0,
+                            "total_passed_after": sum(1 for v in _sp_fv.values() if v == "PASSED"),
+                            "learned_skill_id": None,
+                        }
+                        break
 
         # Stage 4b: Compositional Differential Patch Accumulation ("Angelic Progress Composition")
         # If no single hunk resolved all failures, iterate through the strongest strict-progress

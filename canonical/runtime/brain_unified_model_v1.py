@@ -1063,6 +1063,8 @@ class UnifiedModel:
             and "gui_env" not in inp
             and "tomography_env" not in inp
             and "self_play_tasks" not in inp
+            and "cow_speculative_actions" not in inp
+            and "petri_net_spec" not in inp
             and "http://" not in goal
             and "https://" not in goal
         ):
@@ -1086,6 +1088,10 @@ class UnifiedModel:
             goal_targets=inp.get("goal_targets"),
             self_play_tasks=inp.get("self_play_tasks"),
             skill_store=inp.get("skill_store"),
+            cow_speculative_actions=inp.get("cow_speculative_actions"),
+            cow_executor=inp.get("cow_executor"),
+            cow_residual=inp.get("cow_residual"),
+            petri_net_spec=inp.get("petri_net_spec"),
             postcondition_fn=inp.get("postcondition_fn"),
             dom_nodes=inp.get("dom_nodes"),
             gui_env=inp.get("gui_env"),
