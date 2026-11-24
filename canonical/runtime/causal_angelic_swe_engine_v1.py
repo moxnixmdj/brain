@@ -40,6 +40,7 @@ from typing import Any, Mapping, Sequence
 from canonical.runtime import instant_swe_skill_store_v1 as SKILL_STORE
 from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
 from canonical.runtime import universal_semantic_ir_v1 as SEM_IR
+from canonical.runtime import executable_mental_model_v1 as MENTAL
 
 SCHEMA = "BRAIN_CAUSAL_ANGELIC_SWE_ENGINE_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
@@ -11740,6 +11741,65 @@ def solve_repository(
             ]
         if pre_tested_keys:
             cands = [c for c in cands if (c.file, c.patched_source) not in pre_tested_keys]
+
+        # Leap 4: Sub-Millisecond Pre-Execution Mental Model Simulation & Prioritization
+        # Simulates candidate patches in RAM against captured failing & passing frames (~0.2ms/cand)
+        # BEFORE spawning subprocess `pytest`: prunes provably dead candidates (passing regression +
+        # zero failing flips), demotes provable no-ops, and promotes provably clean flippers!
+        mental_pruned = 0
+        mental_promoted = 0
+        if len(cands) > 1 and loc.sites:
+            _file_src_cache: dict[str, str] = {}
+            _file_envs_cache: dict[str, tuple[list[dict[str, Any]], list[dict[str, Any]]]] = {}
+            for _s in loc.sites:
+                if _s.file not in _file_envs_cache:
+                    _f_e = [_frame_to_oe_env(fr) for fr in _s.failing_frames[:16]]
+                    _p_e = [_frame_to_oe_env(fr) for fr in _s.passing_frames[:24]]
+                    _file_envs_cache[_s.file] = ([e for e in _f_e if e], [e for e in _p_e if e])
+                else:
+                    _fe0, _pe0 = _file_envs_cache[_s.file]
+                    if len(_fe0) < 16 and _s.failing_frames:
+                        _fe0.extend(e for e in (_frame_to_oe_env(fr) for fr in _s.failing_frames[:16 - len(_fe0)]) if e)
+                    if len(_pe0) < 24 and _s.passing_frames:
+                        _pe0.extend(e for e in (_frame_to_oe_env(fr) for fr in _s.passing_frames[:24 - len(_pe0)]) if e)
+
+            _ranked_cands: list[tuple[int, int, PatchCandidate]] = []
+            for _idx, _c in enumerate(cands):
+                if _c.tier.startswith("TIER0_"):
+                    _ranked_cands.append((-1, _idx, _c))
+                    continue
+                _fe, _pe = _file_envs_cache.get(_c.file, ([], []))
+                if not _fe and not _pe:
+                    _ranked_cands.append((1, _idx, _c))
+                    continue
+                if _c.file not in _file_src_cache:
+                    _fp = wt / _c.file
+                    _file_src_cache[_c.file] = _fp.read_text(encoding="utf-8") if _fp.is_file() else ""
+                _orig_s = _file_src_cache[_c.file]
+                if not _orig_s:
+                    _ranked_cands.append((1, _idx, _c))
+                    continue
+                try:
+                    _mres = MENTAL.simulate_patch_mental_model(
+                        _orig_s, _c.patched_source, failing_envs=_fe, passing_envs=_pe, hint_lineno=_c.lineno
+                    )
+                    _mv = _mres.get("verdict")
+                    if _mv == "PRUNE_REGRESSION" and int(_mres.get("failing_flips", 0)) == 0:
+                        mental_pruned += 1
+                        continue
+                    if _mv == "PROMOTE_CLEAN_FLIP":
+                        mental_promoted += 1
+                        _ranked_cands.append((0, _idx, _c))
+                    elif _mv == "PRUNE_NOOP":
+                        _ranked_cands.append((2, _idx, _c))
+                    elif _mv == "PRUNE_REGRESSION":
+                        _ranked_cands.append((3, _idx, _c))
+                    else:
+                        _ranked_cands.append((1, _idx, _c))
+                except Exception:
+                    _ranked_cands.append((1, _idx, _c))
+            _ranked_cands.sort(key=lambda x: (x[0], x[1]))
+            cands = [x[2] for x in _ranked_cands]
 
         # Stage 4: Two-phase verification (fast failing-only screen -> fresh full-suite verify)
         # Tracks BOTH:

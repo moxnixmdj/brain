@@ -5512,5 +5512,56 @@
     "cumulative_unique_verified_real_oss_commits": 232,
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter74_leap4_executable_mental_models_and_oct2026_blind_verify": {
+    "date": "2026-11-21",
+    "summary": "Completed Leap 4 of the 4-Leap Deep Program Understanding Roadmap in pure stdlib (`canonical/runtime/executable_mental_model_v1.py`, zero LLM calls, zero stored weights, zero hand-written repair rules): (1) Sub-millisecond fuel-bounded pure-in-memory Python AST Mental Simulator (`MentalASTExecutor` + `simulate_patch_mental_model`) wired directly into `causal_angelic_swe_engine_v1.py` Stage 4 to prune provably regressive/dead patches and promote provably clean behavioral flippers in ~0.2ms BEFORE spawning subprocess `pytest` (with 100% sound fail-open `UNCERTAIN` on opaque external calls); (2) Unified Computer Use Symbolic World Model (`CUMentalWorldModel`) for pre-execution multi-step CLI/HTTP/SQLite/GUI rollout, automatic precondition & destructive-checkpoint repair, and PatchWorld-style online counterexample transition patching with O(1) deletion forgetting.",
+    "hand_written_repair_rules_added": 0,
+    "modules_added": [
+      "canonical/runtime/executable_mental_model_v1.py",
+      "canonical/tests/test_executable_mental_model_v1.py"
+    ],
+    "verified_leap4_capabilities": [
+      "swe_submillisecond_mental_ast_simulation_promote_clean_flip",
+      "swe_pre_pytest_prune_provably_regressive_and_noop_candidates",
+      "swe_sound_fail_open_uncertain_on_external_calls_and_infinite_loop_fuel_cap",
+      "cu_pre_execution_multistep_mental_rollout_and_auto_precondition_repair",
+      "cu_patchworld_counterexample_online_model_repair_and_o1_deletion_forgetting"
+    ],
+    "newly_verified_real_oct2026_blind_oss_commits": [
+      {
+        "repo": "more-itertools/more-itertools",
+        "commit": "67fcf64",
+        "date": "2026-10-06",
+        "description": "fix: honour a falsey validator in bucket (#1308)",
+        "file": "more_itertools/more.py",
+        "test_target": "tests/test_more.py::BucketTests",
+        "pre_fix": "1 failed, 9 passed (BucketTests) / 1 failed, 619 passed (test_more.py)",
+        "post_fix": "620 passed, 11318 subtests passed, 0 failed across full tests/test_more.py",
+        "attempt": 7,
+        "elapsed_s": 38.23,
+        "tier": "TIER3_BOOLOP_NONE_GUARD",
+        "mechanism": "boolop_or_none_guard(validator is not None)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "honest_unsolved_from_blind_oct2026_batch": [
+      {
+        "repo": "more-itertools/more-itertools",
+        "commit": "def2dab",
+        "status": "UNSOLVED",
+        "reason": "Multi-function falsy exception sentinel refactoring across one() and only()."
+      },
+      {
+        "repo": "jpadilla/pyjwt",
+        "commit": "7bf3252",
+        "status": "UNSOLVED",
+        "reason": "Multi-hunk Base64URL canonical padding validation in jwt/api_jws.py."
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 233,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

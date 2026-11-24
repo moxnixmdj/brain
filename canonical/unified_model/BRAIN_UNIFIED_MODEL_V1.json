@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2022
+  "source_index_modules": 2023
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e4f21ac3d6c6cb11608655de5dc53e87e5a6a7b7b4f7ad3444b4318f78536a5e"
+  "value": "78aab922716231e6d506164adc6901e72cf59c49ef5c0210188b29858cf61158"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "6968e4f6801903ac21ec0c79ef994c32d96176e7de07a00a3a619baed3d7fa2c",
+   "sha256": "f4bca7dc67c9df0f900c88fd842c553ff42c90b9351e69a38bc2c9abb7d5fd06",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "119aa6a964e55c0ab127a1c02fdedb731b6b73eebeadeb236196814fc3c1a2bf",
+   "sha256": "89b704c51b0944c9172beac317877c40615aca3486a6effe5d079a04a40c4243",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 44,
    "symbols": [
@@ -288955,6 +288955,62 @@
     "set": 1,
     "sound": 2,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/executable_mental_model_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/executable_mental_model_v1.py",
+   "sha256": "ec5a160138469fb689278d7ca2582b43c0de5787c37e694b0d9d59fcf6bff31c",
+   "summary": "Lightweight Executable Mental Models — Leap 4 of Deep Program Understanding (0 LLM, 0 Weights).",
+   "symbol_count": 14,
+   "symbols": [
+    "CUMentalWorldModel",
+    "CUWorldState",
+    "MentalASTExecutor",
+    "MentalExecResult",
+    "_MentalBreak",
+    "_MentalContinue",
+    "_MentalFuelExceeded",
+    "_MentalRaised",
+    "_MentalReturn",
+    "_UnknownSentinel",
+    "_extract_module_safe_consts",
+    "_find_changed_function_pair",
+    "_freeze_value",
+    "simulate_patch_mental_model"
+   ],
+   "terms": {
+    "cumentalworldmodel": 1,
+    "cuworldstate": 1,
+    "deep": 1,
+    "executable": 2,
+    "extract_module_safe_consts": 1,
+    "find_changed_function_pair": 1,
+    "freeze_value": 1,
+    "leap": 1,
+    "lightweight": 1,
+    "llm": 1,
+    "mental": 2,
+    "mentalastexecutor": 1,
+    "mentalbreak": 1,
+    "mentalcontinue": 1,
+    "mentalexecresult": 1,
+    "mentalfuelexceeded": 1,
+    "mentalraised": 1,
+    "mentalreturn": 1,
+    "model": 1,
+    "models": 1,
+    "program": 1,
+    "simulate_patch_mental_model": 1,
+    "understanding": 1,
+    "unknownsentinel": 1,
+    "v1": 1,
+    "weights": 1
    }
   },
   {
