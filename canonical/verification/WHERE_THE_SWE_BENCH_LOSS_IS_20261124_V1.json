@@ -1,0 +1,58 @@
+{
+  "schema": "PROJECT_BRAIN_WHERE_THE_SWE_BENCH_LOSS_IS_V1",
+  "action_id": "WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1",
+  "authority": "NONE__READS_RECORDED_RECEIPTS",
+  "date": "2026-11-24",
+  "canonical_base_commit": "1da0b549029bba88c39673368e0c62ccd51760da",
+  "why_this_round_exists": "Rounds 9-13 built produce-a-kind, judge-a-kind and a cost measurement. None of that answers the only question that decides the mission: on a hard real benchmark, how much of the loss is where? The tree already held a SWE-bench Verified Django run scored under the tasks' own tests, so this round decomposes its loss instead of building another layer on an assumption.",
+  "what_was_already_measured_and_is_not_repeated": {
+    "one_submission_resolves": "5 of 128 judged tasks with a candidate = 3.9%",
+    "within_twenty_resolves": "7 of 128, but choosing needs the hidden tests a submission may not use",
+    "localization_on_all_500_tasks": "expert file rank1 40.0% by score alone, 42.8% by the organ; rank3 62.2/64.8; rank10 82.6/83.8",
+    "another_tasks_text_control": "0 tasks resolved, so the 5 are not noise"
+  },
+  "the_decomposition_measured_here": {
+    "tasks_in_the_run": 231,
+    "tasks_with_a_candidate": 129,
+    "share_with_a_candidate": 0.558,
+    "candidates_run": 2422,
+    "candidates_that_resolve": 10,
+    "share_of_candidates_that_resolve": 0.0041,
+    "tasks_where_every_candidate_sits_in_ONE_file": 128,
+    "tasks_with_candidates": 128,
+    "median_distinct_files_per_task": 1.0,
+    "median_distinct_functions_per_task": 4.0
+  },
+  "the_arithmetic": {
+    "step_1": "56% of tasks get a candidate at all, so 44% are lost before anything is generated",
+    "step_2": "of the 128 judged tasks that have a candidate, only 10 of 2422 candidates resolve: 0.41%",
+    "step_3": "perfect SELECTION would add at most 2 tasks (+1.6%), because the resolving candidate exists for only 7 of 128",
+    "step_4": "and every candidate for every task sat in ONE file, while the expert's file is rank 1 only 40% of the time",
+    "conclusion": "THE LOSS IS UPSTREAM OF SELECTION, AND IT IS TWO DIFFERENT LOSSES. SELECTION is worth at most +2 tasks of 128. What remains splits into FINDING (44% of tasks never get a candidate, and 128/128 had every candidate in ONE file while the expert's file is rank 1 only 40% of the time) and PRECISION (18 of the 25 tasks whose target test starts passing still do not resolve, and 16 of those never reached the whole-module run). They need different fixes and the receipt names them apart.",
+    "step_5": "step_5: 18 of the 25 tasks whose target test starts passing do not resolve, and 16 of the 18 never reached the whole-module run -- so a second, separate loss is PRECISION after FINDING succeeds"
+  },
+  "what_this_falsifies": [
+    "that better ranking or better selection is the next lever -- measured ceiling +2 tasks of 128",
+    "that the 5 resolutions are luck -- the another-task control resolves 0",
+    "that coverage was already good -- 44% of tasks produce no candidate"
+  ],
+  "the_honest_reading_of_the_3_9_percent": "It is a real number measured under the tasks' own tests with a pre-registered expectation that held. It is also 5 tasks. A rate from 5 successes has a wide interval and must not be quoted as if it were stable.",
+  "what_this_round_does_NOT_do": [
+    "it does not run SWE-bench; it reads a receipt that did, so it inherits that run's commit and its 225/231 judged",
+    "it does not claim the generator cannot be improved -- it says the generator IS the bottleneck, which is the opposite",
+    "it does not propose a mechanism it has not tested; the next round must test one",
+    "no model calls, no network at run time, no parameters"
+  ],
+  "the_next_bottleneck": "COVERAGE and PRECISION, in that order, and they are separable: can the machine produce a candidate in the RIGHT file, and can it make the asked-for change without breaking a neighbour? 16 tasks were lost at a breakage that a local re-run would have shown for free.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0,
+  "the_second_failure_mode_measured_here": {
+    "what": "tasks where some candidate made the FAILING test pass and the task still did not resolve",
+    "tasks_with_a_candidate_that_makes_the_target_test_pass": 25,
+    "of_those_unresolved": 18,
+    "of_those_that_never_reached_the_whole_module_run": 16,
+    "why_this_is_not_localisation": "the candidate is in a file that reaches the failing test and does the asked-for thing; it is rejected because a neighbour breaks. FINDING is not the problem on these tasks -- PRECISION is",
+    "why_it_is_cheap_to_attack": "16 of the 18 never even reached the whole-module run, so the breakage is visible before the expensive check, and nothing was reading it"
+  }
+}
