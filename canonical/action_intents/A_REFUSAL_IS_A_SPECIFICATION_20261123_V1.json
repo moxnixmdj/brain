@@ -8,10 +8,10 @@
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
     "conversation_memory_is_authority": false,
-    "earlier_routes_exhausted_reason": "Three routes were measured and rejected rather than argued. (1) Re-scan every time: that is what the tree did, and the ledger sat at 82 gaps with 0 resolved. (2) A learned ranker (KBD's RL policy over entropy): the same quantity is a count of verdicts decided, so a policy would cost parameters to measure what the census's rows already say. (3) A generalised value-slot rule: written, measured, cost cp a door, reverted, and pinned by a test.",
+    "earlier_routes_exhausted_reason": "Four routes were measured and rejected in this round rather than argued. (1) Fetch preconditions from the web: nothing fetched from the web has moved a door in two rounds; the sentence is local. (2) A learned repair policy (PALADIN / ToolMono class): trains a model to imitate reading, and open baselines repair at most 9.6% in one shot; the refusal can be parsed instead. (3) A per-program repair table: a table of programs, the defect the census exists to avoid. (4) Appending the repaired flag at the end of the argv: measured, `openssl cms -stream in.txt -encrypt` never sees the flag because openssl stops reading options at the first operand -- the same defect round 7 found in the binder.",
     "incremental_spend_usd": 0,
     "independent_verification_completed": false,
-    "independent_verification_note": "Producer-run sandbox only: 11 new tests, 59 across four suites. One receipt: 20 programs, SENSOR 880 -> 198 at an unchanged 33 doors, 5 kinds, 786 rescuable / 0 exhausted, doubt persisted to the ledger. No independent identity has re-run any of it.",
+    "independent_verification_note": "Producer-run sandbox only: 16 new tests, 47 across three suites. One receipt: DOOR 61 -> 497 on an identical seed with zero regressions, of which 435 are one clause form answering 435 of git's 480 refusals, and the other five forms answered 1 of 138 -- both numbers reported. No independent identity has re-run any of it.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -40,7 +40,8 @@
     ],
     "route_class": "COMPOSE",
     "scope_complete_discharge": false,
-    "terminal_achieved": false
+    "terminal_achieved": false,
+    "route_id": null
   },
   "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the refusal -- the last and most specific declaration a program makes -- was read as an error instead of as a specification, so a missing world, a missing kind, an offered flag and a conflicting flag were all the same opaque failure",
