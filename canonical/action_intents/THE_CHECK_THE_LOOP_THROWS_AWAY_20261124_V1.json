@@ -116,7 +116,9 @@
     "17 of 26 sampled changed files need only what the project holds, so knowing is not the problem",
     "a trace of the failing test reaches the changed line for 1 task in 26",
     "258 candidates pass some new test and 10 resolve, so producing them is not the problem either"
-   ]
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC to these tasks as they are written: the issue names every new atom for 6 of 102, and neither a trace of the failing test nor the issue's own reproduction reaches the arrangement",
+   "surviving_causal_blocker": "the machine can find the file (expert file at rank 1 for 0.400 of 500 tasks), can hold the material (17 of 26 sampled changed files need nothing the project does not already hold), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests; every zero-model signal tested this round (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement"
   },
   "obs_capability": {
    "existing_inherited_routes_checked": "quoted_in_the_task_text_v1.code_lines, fix_shape_v1.shape/needs, the localisation receipt, the passing-patch shape census, the expert fix collector",
@@ -125,14 +127,17 @@
     "a ranker (ceiling +2 tasks)",
     "a reproduction reader (19 of 231 tasks)"
    ],
-   "what_was_added": "canonical/tools/the_content_channel_measured_v1.py, which re-derives the two numbers that carry this round's conclusion"
+   "what_was_added": "canonical/tools/the_content_channel_measured_v1.py, which re-derives the two numbers that carry this round's conclusion",
+   "external_existing_routes_checked": "automated program repair (learned models: outside the runtime), fault localisation by spectra and by execution trace (tested here and it reaches the changed line once in 26), mutation testing as a proxy oracle (costs a test run per mutant), and the benchmark's own shape census, already in the tree",
+   "surviving_gap": "a zero-model signal that ranks arrangements of already-held material; none of the routes checked provides one"
   },
   "obs_goal": {
    "proxy_goals_deleted": [
     "a higher resolved count this round",
     "a new mechanism"
    ],
-   "real_outcome": "a false number about the project's own loop was found, retracted and replaced with a measured one, and the next bottleneck moved"
+   "real_outcome": "a false number about the project's own loop was found, retracted and replaced with a measured one, and the next bottleneck moved",
+   "surviving_necessity": "the only necessity left is choosing among arrangements: 17 of 26 sampled changed files need nothing the project does not hold, so the next round can spend nothing on acquiring material and everything on preferring one arrangement of it"
   },
   "obs_inherited_system": {
    "adjacent_capabilities_absorbed": "the receipt's own rows, the code-line reader, the shape calculus and the expert-fix collector, none rebuilt",
@@ -187,9 +192,9 @@
    "challenger_routes": [
     {
      "route": "BUILD_A_LOCAL_NEIGHBOUR_TEST_RE_RUN",
-     "resolution": "ALREADY_BUILT",
+     "resolution": "DISQUALIFIED",
      "comparison": {
-      "CAPABILITY_STRENGTH": "none added",
+      "CAPABILITY_STRENGTH": "none added: the mechanism already exists in the judge",
       "CORRECTNESS": "holds and withholds nothing",
       "INCREMENTAL_COST": "the check already runs before every whole-module run",
       "RELIABILITY": "n/a",
@@ -204,7 +209,7 @@
       "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
      ],
      "qualification_evidence_classes": [
-      "BRAIN_INHERITED"
+      "DIRECT_PROBE"
      ]
     },
     {
@@ -225,7 +230,7 @@
       "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json"
      ],
      "qualification_evidence_classes": [
-      "BRAIN_INHERITED"
+      "DIRECT_PROBE"
      ]
     },
     {
@@ -287,15 +292,19 @@
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
-     "query": "rank candidate edits without running hidden tests, program repair prioritisation"
-    },
-    {
-     "intent": "IMPLEMENTATION_FORM",
-     "query": "fault localisation by test execution trace, mutation testing as a proxy oracle"
+     "query": "rank candidate program edits without the hidden tests, repair prioritisation"
     },
     {
      "intent": "SUPPLIER_OR_PRODUCT",
-     "query": "automated program repair benchmarks 2026, SWE-bench Verified failure analysis"
+     "query": "automated program repair tools and benchmarks 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "fault localisation by execution trace and mutation-based proxies"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-bench Verified failure analysis 2026"
     }
    ],
    "refresh_triggers": [
@@ -326,7 +335,7 @@
      },
      {
       "dependency": "the benchmark's statements and the Django trees at each base commit",
-      "kind": "FILESYSTEM",
+      "kind": "DATA_SOURCE",
       "scope": "LOCAL",
       "evidence_scope": "LOCAL",
       "required": true,
