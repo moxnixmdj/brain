@@ -31,12 +31,10 @@
     "producer_cognition_model_dependency_count": 0,
     "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
     "progress_evidence_paths": [
-      "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
-      "canonical/tools/ask_the_subcommand_before_you_call_it_unbound_v1.py",
-      "canonical/tests/test_ask_the_subcommand_v1.py",
-      "canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
-      "intake/ASK_THE_SUBCOMMAND_20261123_V1.md",
-      "canonical/runtime/tool_census_v1.py"
+      "canonical/runtime/a_refusal_is_a_specification_v1.py",
+      "canonical/tests/test_a_refusal_is_a_specification_v1.py",
+      "canonical/verification/A_REFUSAL_IS_A_SPECIFICATION_20261123_V1.json",
+      "intake/A_REFUSAL_IS_A_SPECIFICATION_20261123_V1.md"
     ],
     "route_class": "COMPOSE",
     "scope_complete_discharge": false,
