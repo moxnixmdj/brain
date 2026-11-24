@@ -1,0 +1,158 @@
+{
+  "action_id": "ZERO_KNOWLEDGE_HOUSE_REPO_NATIVE_MINING_20261110_V1",
+  "action_intent_id": "ZERO_KNOWLEDGE_HOUSE_REPO_NATIVE_MINING_20261110_V1",
+  "action_kind": "FRESH_REUSE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were walked first: the tree already has witness inversion (selects existing values, 0/16 on real corpus), the incremental semantic graph (0.35s warm vocabulary source), the zygote CoW pool (1-2ms forks), and the admission gate (crystallizer victims). What was missing was the bridge from mined vocabulary to synthesis (repo-native mining) and the counterexample-partitioned splice (P1 passes T1, P2 passes T2, synthesize 3-token separating guard by evaluation). No existing module mines vocabulary for synthesis or splices programs behind a guard; SYNTHESIZE_NEW_PRIMITIVE is the minimal new mechanism, reusing all four organs unchanged.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. Independent personnel verification is still open.",
+    "laws_read_this_session": [
+      "AGENTS.md",
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/repo_native_mining_v1.py",
+      "canonical/tests/test_repo_native_mining_v1.py",
+      "ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V1.md"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::THE_REACH_LAW_NAMED_EXPRESSIBILITY_AS_THE_BINDING_TERM_BUT_NO_ORGAN_EXISTED_THAT_COULD_NAME_AN_EDIT_OUTSIDE_A_FIXED_GRAMMAR_WITHOUT_ENUMERATING_ONE",
+  "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "THE_REACH_LAW_NAMED_EXPRESSIBILITY_AS_THE_BINDING_TERM_BUT_NO_ORGAN_EXISTED_THAT_COULD_NAME_AN_EDIT_OUTSIDE_A_FIXED_GRAMMAR_WITHOUT_ENUMERATING_ONE",
+  "date": "2026-11-10",
+  "deleted_or_bypassed_paths": [
+    "fixed grammar enumeration (depth-3, 80k candidates) which fails 75.2% outside grammar",
+    "LLM token guessing which is forbidden K3 and hallucinates names",
+    "hand-written rule per bug which buys exactly named defects",
+    "raw trace memorization as main asset which stores wrong reading",
+    "single-path imagined futures which hallucinate instead of executing CoW realities"
+  ],
+  "expected_parent_change": "canonical/swe_kernel/repo_native_mining_v1.py (vocabulary mining via incremental graph, typed transitions, separating-guard synthesis by evaluation, dual-program splicing, admission gate, parallel CoW rollouts, state fingerprint diff) + canonical/tests/test_repo_native_mining_v1.py (11 tests on real temp repos with real pytest) + ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V1.md (deliverables report)",
+  "expected_parent_frontier_change": "REACH_WIDENED_BY_HARVEST_NOT_BY_ENUMERATION__MINED_VOCABULARY_NAMES_REPO_HELPERS_A_FIXED_GRAMMAR_CANNOT_NAME__SPLICING_REPAIRS_TWO_BRANCH_BUGS_VIA_3_TOKEN_GUARD__ADMISSION_REFUSES_OVERFIT_PATCHES__PARALLEL_COW_PICKS_RESIDUAL_WINNER",
+  "explicit_user_authorization": [
+    "Build our own model with own weights architecture and agent that fully solves computer use",
+    "Zero model calls at runtime, zero-knowledge house, instant knowledge from project source",
+    "Hardest open tests only, honest baseline, single-experience and ablation tests",
+    "Never stop, never ask, research project first then web, ultimate minimal solution"
+  ],
+  "falsification_condition": "FALSIFIED if any of the 11 tests fails, if mining misses a helper three files away, if a spliced patch is accepted without the real test passing, if admission admits an overfit constant patch, if a file is left modified, or if the report claims a benchmark score the receipt does not contain",
+  "generic_repair_from_single_probe": true,
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [],
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Speculative forecast only. Measured reach is 18.7% with unlimited experience, 74% inside grammar vs 32% outside. Mining widens reach by harvest; forecast stays at 1/100 until measured against real multi-function commits and live Harbor/SWE runs on external VM.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/4",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": "11 tests pass on real temp repos with real pytest: mining finds normalize_price three files away (arity 2, call sites >=1); separating guard found for qty>0 vs qty==0; splice repairs two-branch total bug end-to-end with file restored; admission ADMITs good patch and REFUSEs breaking + overfit constant (BROKE_CORRECT_PROGRAM); parallel CoW picks residual winner via real fork (fork_ms>0); single-experience guard transfers qty->count; raw trace qty==2 fails on held-out qty==3 while generalized fires; empty store refuses. Combined run with witness+consistency+computer_use+zygote: 54 passed.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "next_step": "REVERSE_EXECUTION_SYNTHESIS_PLUS_CEGIS__PROPAGATE_CONSTRAINTS_BACKWARD_FROM_FAILING_TEST_THROUGH_SEMANTIC_IR_TO_COMPUTE_MISSING_BODY__WIRE_SELECT_PROBE_TO_CRYSTALLIZER_AS_SCOPE_EVIDENCE__THEN_ALGEBRAIC_CROSS_MODAL_COMPILATION_AND_CONFINEMENT_QUALIFICATION_FOR_LIVE_HARBOR_SWE_RUNS",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "paths": [
+    "canonical/swe_kernel/repo_native_mining_v1.py",
+    "canonical/tests/test_repo_native_mining_v1.py",
+    "ZERO_KNOWLEDGE_HOUSE_BUILD_20261110_V1.md",
+    "canonical/action_intents/ZERO_KNOWLEDGE_HOUSE_REPO_NATIVE_MINING_20261110_V1.json"
+  ],
+  "prior_work_reused": "witness_inversion_v1 (checker-has-last-word discipline, span-exact editor, 75.2% reach measurement, 0/16 honest refusals); incremental_semantic_graph_v1 (0.35s warm vocabulary source, Tarjan SCC, C3 MRO); zygote_worker_pool_v1 (1-2ms CoW forks); verified_skill_crystallizer_v1 (admission victims gate); consistency_vs_equivalence_v1 (proof-or-witness else UNKNOWN); computer_env_v1 (real subprocesses, verify_round_trip); brain_unified_model_v1 (local index recall, fail-closed routing)",
+  "probe_specific": false,
+  "recursive_obs": {
+    "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "fixed grammar enumeration",
+      "LLM token guessing",
+      "hand-written rule per bug",
+      "raw trace memorization",
+      "single-path imagined futures"
+    ],
+    "expected_parent_frontier_change": "REACH_WIDENED_BY_HARVEST_NOT_BY_ENUMERATION__MINED_VOCABULARY_NAMES_REPO_HELPERS_A_FIXED_GRAMMAR_CANNOT_NAME__SPLICING_REPAIRS_TWO_BRANCH_BUGS_VIA_3_TOKEN_GUARD__ADMISSION_REFUSES_OVERFIT_PATCHES__PARALLEL_COW_PICKS_RESIDUAL_WINNER",
+    "expected_parent_level_state_change": "REACH_WIDENED_BY_HARVEST_NOT_BY_ENUMERATION__MINED_VOCABULARY_NAMES_REPO_HELPERS_A_FIXED_GRAMMAR_CANNOT_NAME__SPLICING_REPAIRS_TWO_BRANCH_BUGS_VIA_3_TOKEN_GUARD__ADMISSION_REFUSES_OVERFIT_PATCHES__PARALLEL_COW_PICKS_RESIDUAL_WINNER",
+    "independent_verification_required": true,
+    "iteration_limit": 1,
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "delete fixed grammar as proposal source",
+        "bypass enumeration with mined vocabulary",
+        "substitute splice for whole-function synthesis"
+      ],
+      "intrinsic_or_path_specific": "intrinsic: what a set of observations determines is a fact about the action and the observations, not about the learner. Either the mined vocabulary contains the helper or it does not.",
+      "surviving_causal_blocker": "75.2% of real fixes need a name the fixed grammar cannot produce; witness inversion can only select existing values and correctly refuses when the required value is new content."
+    },
+    "obs_capability": {
+      "capability_id": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+      "capability_name": "Repo-native mining + dual-program splicing"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "selected": "SYNTHESIZE_NEW_PRIMITIVE"
+    }
+  },
+  "route_id": "HARVEST_REPO_VOCABULARY_AND_SPLICE_BY_COUNTEREXAMPLE_PARTITION",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scope_complete_discharge": false,
+  "selected_route": "HARVEST_REPO_VOCABULARY_VIA_INCREMENTAL_GRAPH_AND_SPLICE_PROGRAMS_BEHIND_EVALUATED_SEPARATING_GUARD_WITH_ADMISSION_GATE",
+  "status": "PRODUCED",
+  "stop_condition": "MINING_FINDS_HELPER_AND_SPLICE_REPAIRS_TWO_BRANCH_BUG_WITH_REAL_TEST_AND_ADMISSION_REFUSES_OVERFIT_OR_THE_GAP_IS_COUNTED_WITH_EVERY_ATTEMPT_IN_DENOMINATOR",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "false": [
+      "instant learning solves computer use",
+      "fixed grammar covers real fixes",
+      "storage makes a point correct"
+    ],
+    "p_correct": 0.2978,
+    "true": [
+      "reach is the binding term for synthesis",
+      "mined vocabulary names repo helpers",
+      "admission before persistence prevents wrong permanence"
+    ]
+  },
+  "user_authorized_governance_change": false,
+  "verification": "python3 -m pytest canonical/tests/test_repo_native_mining_v1.py -v; python3 -m pytest canonical/tests/test_repo_native_mining_v1.py canonical/tests/test_witness_inversion_v1.py canonical/tests/test_consistency_vs_equivalence_v1.py canonical/tests/test_computer_use_agent_v1.py canonical/tests/test_fast_internal_seams_and_zygote_v1.py -q; python3 execution_guard/agent_orientation_check_v1.py intent-check canonical/action_intents/ZERO_KNOWLEDGE_HOUSE_REPO_NATIVE_MINING_20261110_V1.json; python3 execution_guard/repo_integrity_guard_v1.py",
+  "weakens_existing_guard": false,
+  "action_summary": "Builds repo-native component mining (harvest vocabulary via incremental graph, type-annotate from call sites) + dual-program splicing (synthesize separating guard by evaluation, splice P1/P2) + admission gate + parallel CoW rollouts. 11 tests pass on real repos with real pytest; combined 54 passed. No benchmark score claimed; live Harbor/SWE runs need external VM."
+}
