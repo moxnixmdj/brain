@@ -20,18 +20,21 @@ executable agent.
 
 ### Why the Harbor transition remains blocked
 
-The current proposal loop calls `open_model().solve()` through a host-side
-Python thread. `solve()` can execute bound capabilities and create/update a
-routing ledger; `environment.exec()` only confines subsequent proposed commands.
-A container marker or Harbor object does not move `solve()` into that container.
-`canonical/tests/test_harbor_container_boundary_v1.py` demonstrates the host
-execution locus with a fake solver; it is a regression test, **not** a real
-Docker isolation test. The task image must receive a validated Brain runtime,
-run solver and commands inside the container, and constrain the actual runtime
-configuration and mounts before the entry point can be opened. Harbor also
-bind-mounts agent/verifier logs and artifacts to the host; it is not literally
-zero host writes. The owner-requested architecture can be implemented without
-nested namespaces, but has not been implemented or tested here.
+The former proposal helper called `solve()` on a host-side thread; it no longer
+accepts a host model. A **test-only** transport seam now dispatches a worker
+through `environment.exec()`; that worker calls `open_model().solve()` inside
+whatever environment executes it. The production entry point still refuses
+before dispatch. Mocked tests confirm command construction and refusal of a
+host model, **not** execution in Docker or isolation. `solve()` can have side
+effects before returning, and the command filter is not an egress boundary.
+
+Harbor `upload_dir` copies data; it does not make the copy read-only. The
+entry point does not yet stage Brain, validate mounts or privileges, verify
+no-network egress, capture an effect/base-bound patch, or integrate any
+verifier. A fake environment or a boolean opt-in cannot establish those
+properties. Harbor may also bind-mount logs and artifacts to the host, so the
+actual runtime configuration must be checked, not assumed. Nested namespaces
+are not required by the owner's current decision.
 
 Harbor's [verifier-mode source](https://github.com/harbor-framework/harbor/blob/39c2219a41b3caa7a689cef1882263b5a93ae93f/src/harbor/models/task/verifier_mode.py)
 defaults to a shared agent/verifier environment if no separate verifier is
@@ -41,6 +44,23 @@ merely running `harbor run` does not automatically provide that. FrontierSWE v2
 uses px-eval's separate verification. Each suite needs its own confirmed
 protocol rather than assuming every Harbor verifier is fresh. No independent
 reviewer has run this integration and no verified-integration credit is claimed.
+
+## Container-worker transport increment
+
+`canonical/runtime/harbor_container_solver_worker_v1.py` calls the existing
+`open_model().solve()` from a worker script. The non-production transport loop
+encodes the request and dispatches that script exclusively with Harbor
+`environment.exec`; a supplied host model is rejected before dispatch. Request
+and response validation rejects oversized, malformed or ambiguous envelopes;
+uncertain execution is not retried. Its returned trajectory explicitly says
+that no patch or external verifier was produced. The worker's isolated Python
+invocation and cleared environment do not themselves prove model independence,
+read-only staging or blocked egress.
+
+The existing proposal protocol is still only a hypothesis: no real run has
+shown that `solve` returns the expected action envelope or can solve a frontier
+task. Mock response tests do not show that. On this machine Docker, Podman and
+Harbor remain unavailable. No task was executed and no score was earned.
 
 ## Fixture-only effect expansion
 
@@ -115,7 +135,8 @@ a trustworthy task identity.
 These are **preparation and inspection only**, not evaluation commands. Use a
 separate disposable VM with adequate disk, and have its operator review the
 upstream code, resource requirements, license and costs. Network access to the
-image registry, package registry and model endpoint would also be necessary.
+image registry and package registry would be necessary during setup. The requested
+Brain runtime must not use a model endpoint; agent-phase egress must be denied.
 Do not put credentials in commands, source files, logs, or agent-visible task
 environments. No task code, container, oracle solution or agent is run here.
 
@@ -165,10 +186,11 @@ execution and effect model.
 
 ## Work remaining before admission
 
-1. Implement a container-local solver and task-command pipeline with no
-   host execution fallback. Verify the actual Harbor runtime, configuration,
-   mounts and lifecycle; test on a real disposable Docker VM. The owner no
-   longer requires nested namespaces for the requested Harbor route.
+1. Integrate and test the container-local worker in a real Harbor environment.
+   Establish genuinely read-only Brain staging; verify the actual runtime,
+   network enforcement, configuration, mounts and lifecycle on a disposable
+   Docker VM. The production entry point remains closed; the mock transport
+   is not qualification. The owner no longer requires nested namespaces.
 2. Implement each benchmark's artifact and verification protocol. Pro V2 must
    capture the complete patch, bind it to the actual base, hash its effects,
    and regrade in a pristine image. FrontierSWE and Terminal-Bench tasks may

@@ -1,12 +1,12 @@
 """Harbor external agent driven by Brain's open_model().solve(mode="EPISTEMIC").
 
 The owner requested Harbor's container as the execution boundary, without a
-nested namespace. The production entry point remains disabled: the present
-proposal loop calls the side-effecting solver in the host process, not in the
-Harbor environment. A Harbor transport or opt-in flag does not confine that
-call. The helper remains available for controlled unit tests only; its command
-policy is not an isolation boundary. Benchmark-specific independent verification
-also remains unintegrated.
+nested namespace. The proposal helper dispatches the solver worker through
+``environment.exec`` and never invokes solve on the host. The production entry
+point remains disabled until read-only staging, container configuration,
+network isolation, and benchmark-specific verifier handoff are checked. The
+helper is for controlled transport tests only; its command policy is not an
+isolation boundary.
 
 `EPISTEMIC` is forwarded verbatim. Brain's solve() special-cases only RECALL and
 SOLVE_OR_LEARN; every other mode string uses ordinary routing. This module does
@@ -17,10 +17,10 @@ No environment variable or dataset label can override this refusal.
 """
 from __future__ import annotations
 
-import asyncio
+import base64
 import hashlib
 import json
-import os
+import shlex
 from pathlib import Path
 from typing import Any, Mapping, Sequence
 
@@ -52,6 +52,7 @@ DEFAULT_MODE = "EPISTEMIC"
 MAX_CYCLES = 8
 MAX_COMMAND_CHARS = 12000
 MAX_OUTPUT_CHARS = 16000
+MAX_WORKER_REQUEST_BYTES = 64_000
 TRACE_FILENAME = "brain_epistemic_trace.json"
 EXEC_TYPES = frozenset({"terminal_exec", "environment_exec", "exec"})
 
@@ -68,10 +69,8 @@ def mode_note(mode: str) -> str:
 
 
 def make_model() -> Any:
-    from canonical.runtime.brain_unified_model_v1 import open_model
-
-    artifact = str(os.environ.get("BRAIN_MODEL_ARTIFACT") or "").strip()
-    return open_model(artifact) if artifact else open_model()
+    """A host-side model is never a valid Harbor solver."""
+    raise AgentRejected("HOST_SOLVER_FORBIDDEN")
 
 
 def build_goal(instruction: str, cycle: int, observations: Sequence[Mapping[str, Any]]) -> str:
@@ -159,20 +158,70 @@ def validate_action(action: Mapping[str, Any]) -> tuple[str, dict[str, Any]]:
     raise AgentRejected("HARBOR_ACTION_TYPE_REJECTED:" + typ[:80])
 
 
-async def _call_model(model: Any, goal: str, kwargs: Mapping[str, Any]) -> dict[str, Any]:
-    """Call the synchronous engine without blocking Harbor's event loop."""
-    return await asyncio.to_thread(model.solve, goal, **dict(kwargs))
+async def _call_container_model(
+    transport: HarborEnvironmentTransport, goal: str, kwargs: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Test-only transport seam; neither dispatch nor a response proves isolation."""
+    request = {
+        "goal": goal,
+        "inputs": dict(kwargs.get("inputs") or {}),
+        "mode": str(kwargs.get("mode") or DEFAULT_MODE),
+    }
+    raw = json.dumps(request, sort_keys=True, ensure_ascii=True).encode("utf-8")
+    if len(raw) > MAX_WORKER_REQUEST_BYTES:
+        raise AgentRejected("HARBOR_SOLVER_REQUEST_TOO_LARGE")
+    payload = base64.b64encode(raw).decode("ascii")
+    command = (
+        "env -i PATH=/usr/local/bin:/usr/bin:/bin HOME=/tmp "
+        "python3 -I -B /opt/brain-ro/canonical/runtime/harbor_container_solver_worker_v1.py "
+        + shlex.quote(payload)
+    )
+    receipt = await transport.exec(command, timeout_sec=180)
+    if receipt.returncode != 0:
+        raise AgentRejected("CONTAINER_SOLVER_NONZERO")
+    marker = "BRAIN_CONTAINER_SOLVE_V1:"
+    lines = [line[len(marker):] for line in receipt.stdout.splitlines()
+             if line.startswith(marker)]
+    if len(lines) != 1 or len(lines[0]) > 1_000_000:
+        raise AgentRejected("CONTAINER_SOLVER_RESPONSE_INVALID")
+    try:
+        result = json.loads(lines[0])
+    except (TypeError, ValueError) as exc:
+        raise AgentRejected("CONTAINER_SOLVER_RESPONSE_INVALID") from exc
+    if not isinstance(result, dict):
+        raise AgentRejected("CONTAINER_SOLVER_RESPONSE_INVALID")
+    return result
+
+
+def _transport_contract() -> dict[str, Any]:
+    return {
+        "transport_only": True,
+        "container_boundary_verified": False,
+        "read_only_staging_verified": False,
+        "network_egress_verified": False,
+        "runtime_model_calls_verified": False,
+        "parameters_stored_verified": False,
+        "patch_emitted": False,
+        "external_verifier_invoked": False,
+        "verified_by_agent": False,
+    }
 
 
 async def run_epistemic_goal(
     instruction: str,
     environment: Any,
     *,
-    model: Any,
+    model: Any = None,
     mode: str = DEFAULT_MODE,
     max_cycles: int = MAX_CYCLES,
 ) -> dict[str, Any]:
-    """Run a bounded propose-act loop. No proposal means no action."""
+    """Test-only container transport loop; production admission remains closed.
+
+    A supplied host model is explicitly rejected. This helper does not verify
+    container isolation, collect patches, or invoke benchmark verifiers.
+    """
+    if model is not None:
+        raise AgentRejected("HOST_SOLVER_FORBIDDEN")
     text = str(instruction or "").strip()
     if not text:
         raise AgentRejected("HARBOR_INSTRUCTION_REQUIRED")
@@ -184,19 +233,32 @@ async def run_epistemic_goal(
     instruction_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
     for cycle in range(1, int(max_cycles) + 1):
         goal = build_goal(text, cycle, observations)
-        result = await _call_model(
-            model,
-            goal,
-            {
-                "inputs": {
-                    "harbor_task": text,
-                    "cycle": cycle,
-                    "observations": list(observations),
+        try:
+            result = await _call_container_model(
+                transport,
+                goal,
+                {
+                    "inputs": {
+                        "harbor_task": text,
+                        "cycle": cycle,
+                        "observations": list(observations),
+                    },
+                    "mode": mode,
                 },
-                "mode": mode,
-                "context_paths": [],
-            },
-        )
+            )
+        except (AgentRejected, HarborTransportError) as exc:
+            trace.append({"cycle": cycle, "stop_reason": str(exc)[:200]})
+            return {
+                "schema": SCHEMA,
+                **_transport_contract(),
+                "status": "BLOCKED_CONTAINER_SOLVER_UNAVAILABLE",
+                "task_completion_claimed": False,
+                "mode_requested": mode,
+                "mode_semantics": mode_note(mode),
+                "instruction_sha256": instruction_sha256,
+                "cycles": cycle,
+                "trace": trace,
+            }
         envelope = {
             "cycle": cycle,
             "model_status": str(result.get("status") or "") if isinstance(result, Mapping) else "",
@@ -213,6 +275,7 @@ async def run_epistemic_goal(
             trace.append(envelope)
             return {
                 "schema": SCHEMA,
+                **_transport_contract(),
                 "status": "BLOCKED_NO_MODEL_PROPOSAL",
                 "task_completion_claimed": False,
                 "mode_requested": mode,
@@ -229,6 +292,7 @@ async def run_epistemic_goal(
             trace.append(envelope)
             return {
                 "schema": SCHEMA,
+                **_transport_contract(),
                 "status": "BLOCKED_MODEL_PROPOSAL_REJECTED",
                 "task_completion_claimed": False,
                 "mode_requested": mode,
@@ -242,9 +306,9 @@ async def run_epistemic_goal(
             trace.append(envelope)
             return {
                 "schema": SCHEMA,
+                **_transport_contract(),
                 "status": "FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES",
                 "task_completion_claimed": False,
-                "verified_by_agent": False,
                 "summary": args["summary"],
                 "mode_requested": mode,
                 "mode_semantics": mode_note(mode),
@@ -262,6 +326,7 @@ async def run_epistemic_goal(
             trace.append(envelope)
             return {
                 "schema": SCHEMA,
+                **_transport_contract(),
                 "status": "BLOCKED_EXEC_OUTCOME_UNCERTAIN",
                 "task_completion_claimed": False,
                 "mode_requested": mode,
@@ -286,6 +351,7 @@ async def run_epistemic_goal(
         observations.append(observed)
     return {
         "schema": SCHEMA,
+        **_transport_contract(),
         "status": "BLOCKED_MAX_CYCLES_WITHOUT_MODEL_FINISH",
         "task_completion_claimed": False,
         "mode_requested": mode,
@@ -314,19 +380,18 @@ class EpistemicBrainAgent(BaseAgent):
         return "1.0.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
-        # The engine runs in the Harbor process; nothing is installed in the
-        # task container, so there is no setup side effect to perform.
+        # Staging is intentionally disabled until a read-only mount and safe
+        # container configuration can be established and independently checked.
         return None
 
     async def run(self, instruction: str, environment: BaseEnvironment, context: AgentContext) -> None:
-        # The owner has requested a Harbor-container boundary, but the current
-        # solver would run on the host. A dataset name, environment variable, or
-        # container flag cannot change its execution locus. Refuse before model
-        # construction and command execution; no nested namespace is presumed.
+        # The transport exists, but no trusted runtime check has established
+        # read-only staging, mounts, privileges, network isolation or a fresh
+        # verifier. An opt-in flag is not proof. Refuse before any dispatch.
         result = {
             "schema": SCHEMA,
             "status": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
-            "boundary_issue": "SOLVER_EXECUTES_ON_HOST__HARBOR_CONTAINER_INTEGRATION_MISSING",
+            "boundary_issue": "CONTAINER_CONFIGURATION_AND_VERIFIER_UNVERIFIED",
             "requested_isolated_vm_eval": self.allow_isolated_vm_eval,
             "execution_authorized": False,
             "task_completion_claimed": False,

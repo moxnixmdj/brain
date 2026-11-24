@@ -32,13 +32,13 @@ class EnvironmentRecorder:
 
 
 class HarborContainerBoundaryTests(unittest.TestCase):
-    def test_proposal_helper_invokes_solver_on_host_not_through_environment(self):
+    def test_proposal_helper_rejects_host_solver_before_any_side_effect(self):
         with tempfile.TemporaryDirectory() as tmp:
             sentinel = Path(tmp) / 'sentinel'
             env = EnvironmentRecorder()
-            result = asyncio.run(agent.run_epistemic_goal('task', env, model=HostWritingProposalSource(sentinel)))
-            self.assertEqual(result['status'], 'BLOCKED_NO_MODEL_PROPOSAL')
-            self.assertEqual(sentinel.read_text(), 'host-side solve was called')
+            with self.assertRaisesRegex(agent.AgentRejected, 'HOST_SOLVER_FORBIDDEN'):
+                asyncio.run(agent.run_epistemic_goal('task', env, model=HostWritingProposalSource(sentinel)))
+            self.assertFalse(sentinel.exists())
             self.assertEqual(env.commands, [])
 
     def test_opt_in_must_be_a_boolean(self):
@@ -56,7 +56,7 @@ class HarborContainerBoundaryTests(unittest.TestCase):
                 asyncio.run(inst.run('task', env, SimpleNamespace()))
             trace = json.loads((Path(tmp) / agent.TRACE_FILENAME).read_text())
             self.assertEqual(trace['status'], 'ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK')
-            self.assertEqual(trace['boundary_issue'], 'SOLVER_EXECUTES_ON_HOST__HARBOR_CONTAINER_INTEGRATION_MISSING')
+            self.assertEqual(trace['boundary_issue'], 'CONTAINER_CONFIGURATION_AND_VERIFIER_UNVERIFIED')
             self.assertTrue(trace['requested_isolated_vm_eval'])
             self.assertFalse(trace['execution_authorized'])
             self.assertIs(agent.HarborEpistemicAgent, agent.EpistemicBrainAgent)
