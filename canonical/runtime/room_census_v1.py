@@ -110,6 +110,61 @@ def _signature(node: ast.AST) -> dict[str, Any]:
             "annotations": annotations}
 
 
+# CONCATENATED NAMES ARE ONE TOKEN, AND A PERSON DOES NOT SPEAK THAT WAY.
+#
+# `argparse` is `arg` + `parse`; `difflib` is `diff` + `lib`; `pathlib` is `path` + `lib`. BM25 sees
+# each as a single opaque word, so "parse command line arguments" cannot reach argparse and "diff two
+# strings" cannot reach difflib. Measured 2026-11-23: argparse.py was not in the top 30 paths for the
+# question argparse exists to answer.
+#
+# This is a deterministic SPLIT TABLE, not a stemmer and not a model: no weights, no training, nothing
+# fitted. A name is expanded by splitting off one of these suffixes when doing so leaves a real word,
+# and a query term is matched against a name when either is a prefix of the other with both long
+# enough to mean something. That is enough for arg->arguments and diff->difflib, and it is checkable
+# by eye, which is the point.
+_NAME_SUFFIXES = ("lib", "args", "arg", "parse", "file", "text", "path", "line", "util",
+                  "string", "time", "app", "tool", "tools", "core", "base", "misc")
+_MIN_AFFIX = 3
+
+
+def _expand_name(name: str) -> set[str]:
+    """The pieces a concatenated identifier is built from."""
+    low = name.replace("_", " ").replace(".", " ").lower()
+    out: set[str] = set()
+    for word in low.split():
+        if not word:
+            continue
+        out.add(word)
+        for suf in _NAME_SUFFIXES:
+            if word.endswith(suf) and len(word) - len(suf) >= _MIN_AFFIX:
+                out.add(word[: -len(suf)])
+                out.add(suf)
+    return out
+
+
+def _prefix_related(query_tokens, names) -> set[str]:
+    """Names a query term clearly points at, even though the token differs.
+
+    `arguments` vs `argparse` share only `arg`. `diff` vs `difflib` share a prefix. Both are the same
+    phenomenon -- identifiers are written without separators -- and neither is reachable by exact-token
+    BM25. Only prefixes of at least _MIN_AFFIX characters count, so `a` does not match everything.
+    """
+    hit: set[str] = set()
+    for name in names:
+        pieces = _expand_name(name)
+        for tok in query_tokens:
+            tok = str(tok).lower()
+            if len(tok) < _MIN_AFFIX:
+                continue
+            for piece in pieces:
+                if piece == tok or piece.startswith(tok) or tok.startswith(piece):
+                    hit.add(name)
+                    break
+            if name in hit:
+                break
+    return hit
+
+
 def _top_level_names(path: pathlib.Path) -> list[str]:
     """The names a file defines at top level and as members of its classes.
 
@@ -339,6 +394,19 @@ def survey(root: Any, max_files: int = MAX_FILES,
             chosen = [str((h.get("candidate") or {}).get("capability_id"))
                       for h in (picked.get("ranked_candidates") or [])
                       if (h.get("lexical_relevance_score") or 0) > 0]
+            # PREFIX-RELATED FILES GO TO THE FRONT, AND ARE NEVER CUT.
+            #
+            # BM25 cannot connect `arguments` to `argparse`; `_prefix_related` can, deterministically.
+            # A file whose NAME is clearly what the objective is about should not be dropped because
+            # the scorer reads identifiers as opaque words -- that is a limit of the scorer, and the
+            # budget should not punish the room for it.
+            stems = {pathlib.PurePosixPath(rel).stem.lower(): rel for rel in index["readable"]}
+            if objective:
+                from canonical.runtime.bound_capabilities.objective_relevance_bm25 import _tokens
+                related = _prefix_related(_tokens(objective), set(stems))
+                related_rels = [stems[k] for k in sorted(related) if k in stems]
+                if related_rels:
+                    chosen = [r for r in related_rels if r not in chosen] + chosen
             if chosen:
                 files = [base / c for c in chosen][:max_files]
                 budget_note = ("%d of %d python files read, chosen by objective relevance"

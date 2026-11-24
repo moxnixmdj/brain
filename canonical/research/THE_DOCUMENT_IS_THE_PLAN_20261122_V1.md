@@ -8944,3 +8944,48 @@ would expect needs morphology or semantics that this path does not have.
           without a subject: unambiguously spelled, and unusable.
     (132) A file's own vocabulary describes it better than its path does. The names a file defines
           are free to read and are the words a person uses to ask for what is inside it.
+
+### §A146 addendum 4 — identifiers are written without separators
+
+The lexical limit addendum 2 recorded has a deterministic cause, and therefore a deterministic fix.
+BM25 sees a name as **one opaque token**, but people write `argparse` for "arg(ument) parse(r)" and
+`difflib` for "diff lib". No amount of scoring connects them, because they are not the same word.
+
+The fix is a split table, not a stemmer and not a model — nothing fitted, nothing trained, checkable
+by eye:
+
+    _expand_name("argparse")  -> {argparse, arg, parse}
+    _expand_name("difflib")   -> {difflib, diff, lib}
+    _expand_name("pathlib")   -> {pathlib, path, lib}
+
+and a match when a query term and one of those pieces are prefixes of each other, both at least three
+characters so `a` does not match everything.
+
+Measured on a real 665-file stdlib directory, surveying with a small budget:
+
+    objective                                   files read   target found   rank
+    diff two unified strings line by line            23/665   unified_diff    2 of 57
+    parse command line arguments for a script        88/665   parse_args      >80
+
+Before this whole line of work: 400 files read alphabetically, and **neither function existed at all**.
+
+### Where it still honestly loses
+
+`parse_args` is in the room and reachable but ranks outside the top 80 for its own question. The
+functions above it are named `parse_command_line`, `get_command_line`, `print_arguments` — their
+*names* literally contain the query words, while `parse_args`'s docstring is one thin line. The
+scorer is being faithful to what it measures: lexical overlap between the objective and the
+candidate's title-and-docstring. Choosing a different candidate is a **tie-break among several
+plausible tools**, and the honest answer is that a person asked a question that four functions could
+claim and the ranking picked the one whose name matched best.
+
+What would fix it is not more weight on the right answer — that is fitting to a test case. It is
+evidence the scorer does not have: which of these the call graph actually reaches first, or which one
+a demonstration shows working on the user's own file. The verifier settles it; the ranker only
+proposes.
+
+    (133) When a name will not match, split it, do not blur it. A stemmer is a statistical claim; a
+          split table is a statement about how identifiers are written, and it can be read aloud.
+    (134) Do not tune a ranker until your favourite wins. If the answer ranks third behind three
+          functions that also fit the words, the ranking is not broken -- it is uninformed, and
+          information, not weight, is what it needs.

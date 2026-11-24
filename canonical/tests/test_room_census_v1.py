@@ -417,3 +417,47 @@ def test_a_room_whose_answer_is_a_method_can_be_ranked_to_it(tmp_path):
                            "parse command line arguments for a script", ())
     top = [n["function"] for n in plan["need"]]
     assert top and top[0] == "parse_args", plan
+
+
+def test_a_concatenated_name_is_reachable_from_the_words_a_person_says(tmp_path):
+    """`argparse` is `arg`+`parse`; `difflib` is `diff`+`lib`. BM25 reads each as one opaque token.
+
+    Measured 2026-11-23 on a real stdlib directory: argparse.py was not in the top 30 paths for the
+    question argparse exists to answer, and difflib.py was invisible to "diff two strings". The split
+    table is deterministic -- no weights, no training -- and it is checkable by eye, which is the
+    point. Without it the survey reads a fraction of the room and cannot find the answer inside it.
+    """
+    assert "arg" in RC._expand_name("argparse")
+    assert "parse" in RC._expand_name("argparse")
+    assert "diff" in RC._expand_name("difflib")
+    assert "path" in RC._expand_name("pathlib")
+
+    names = {"argparse", "difflib", "script_helper", "urllib_parse", "unrelated_thing"}
+    # "arguments" is the case that matters: it matches NOTHING in "argparse" exactly. Only the
+    # prefix relationship arg <-> arguments connects them, and an exact-token check would miss it.
+    got = RC._prefix_related(["arguments", "command", "script"], names)
+    assert "argparse" in got, got
+    got2 = RC._prefix_related(["diff", "two", "strings"], names)
+    assert "difflib" in got2, got2
+
+    # it must not match everything: an unrelated name stays out
+    assert "unrelated_thing" not in got and "unrelated_thing" not in got2, (got, got2)
+    # short query tokens are refused, or every name would match every objective
+    assert RC._prefix_related(["a", "b"], names) == set()
+
+
+def test_a_concatenated_filename_reaches_the_top_of_a_real_budget(tmp_path):
+    """The point is not the helper; it is that the file gets READ when the budget is small."""
+    for i in range(30):
+        (tmp_path / ("filler_%02d.py" % i)).write_text(
+            "def filler_%d():\n    \"\"\"Unrelated.\"\"\"\n    return {}\n" % i, encoding="utf-8")
+    (tmp_path / "difflib.py").write_text(
+        'def unified_diff(a, b):\n'
+        '    """Compare two sequences of lines and return the differences."""\n'
+        '    return []\n',
+        encoding="utf-8")
+    found = RC.survey(str(tmp_path), max_files=5,
+                      objective="diff two unified strings line by line")
+    calls = [f["call"] for f in found["functions"]]
+    assert "unified_diff" in calls, calls
+    assert found["files_read"] <= 5, found
