@@ -1,0 +1,144 @@
+{
+ "schema": "PROJECT_BRAIN_THE_CHECK_THE_LOOP_THROWS_AWAY_V1",
+ "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
+ "authority": "MEASURED__READS_THE_TASK_STATEMENTS, THE EXPERT FIXES AND A TRACE OF THE TASKS' OWN TESTS; RUNS NO MODEL AND ASKS NOBODY",
+ "date": "2026-11-24",
+ "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
+ "model_calls": 0,
+ "network_calls": "github.com only (the benchmark's own statements and test patches, the Django trees at each task's base commit, the merged pull requests behind each task)",
+ "parameters": 0,
+ "why_this_round_exists": "Round 14 named PRECISION as the cheap half of the loss and said the lever was a local re-run of the tests an edit touches, 'never taken', costing 16 tasks. Before building that loop this round checked whether the loop already takes it. It does. The round therefore had to answer a different question, and did.",
+ "what_was_already_measured_and_will_not_be_re_derived": {
+  "receipt": "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json",
+  "one_submission__tasks_resolved": 5,
+  "within_twenty__tasks_resolved": 7,
+  "control__another_tasks_text__resolved": 0,
+  "pre_registered_expectation": "[4,10] held",
+  "judged_of_231": 225,
+  "candidates_run": 2422,
+  "candidates_resolving": 10
+ },
+ "the_retraction": {
+  "what_round_14_said": "'18 of the 25 tasks whose target test starts passing still fail; 16 never reached the whole-module run' -- the 16 was read off the number of tasks that have a candidate passing SOME of the new tests, and was reported as 16 tasks lost to an untaken check.",
+  "what_is_true": {
+   "candidates_that_passed_at_least_one_new_test": 258,
+   "of_those_given_the_whole_module_run": 13,
+   "of_those_resolved": 10,
+   "passed_ALL_the_new_tests_and_were_stopped": 0,
+   "passed_SOME_of_the_new_tests_and_were_stopped": 245,
+   "in_how_many_tasks": 16
+  },
+  "why_round_14_was_wrong": "The 245 stopped candidates in those 16 tasks each passed at least one of the task's new tests and failed at least one other. A candidate cannot resolve a task without passing EVERY test that should start passing, so the tool stops it before the whole-module run: that is what the gate is for, and it fired correctly. Not one candidate that passed all the new tests was withheld from the neighbour tests. The local check round 14 called 'never taken' is taken, before every whole-module run, and it cost nothing.",
+  "the_correction": "PRECISION is not a lost 16. Of the 25 tasks where some candidate makes a new test pass, the number lost to a breakage in the neighbours is 3 -- the candidates named in the source receipt's `candidates_that_pass_the_new_tests_and_break_an_old_one` (django__django-13109 place 4, django__django-13569 place 1, django__django-15467 place 3), of 128 tasks that had a candidate. The loop that the round was going to build already exists, already runs, and already holds.",
+  "locked_by": "canonical/tests/test_the_check_the_loop_throws_away_v1.py"
+ },
+ "the_question_this_round_then_asked": "If neither selection nor the neighbour check is the loss, then the loss on these tasks is that the generator has nothing to propose. 101 of 231 judged tasks (44%) got no candidate at all. Where does a candidate's CONTENT come from when the issue text quotes no code, and is there anything at hand -- the text, the file, the project, the failing run -- that holds it?",
+ "measurement_1__why_102_tasks_have_no_candidate": {
+  "method": "The 231 Django statements were fetched from the benchmark repository the source receipt itself names (hyang0129/onlycodes, problems/swe/swebench-verified), and each statement's issue text was put through the tree's own reader for code lines, canonical/runtime/quoted_in_the_task_text_v1.code_lines.",
+  "tasks_with_at_least_one_code_line_in_the_issue_text": 138,
+  "tasks_with_no_code_line_in_the_issue_text": 93,
+  "tasks_with_no_code_line_AND_no_candidate": 93,
+  "tasks_with_code_lines_AND_no_candidate": 9,
+  "tasks_with_no_code_lines_but_a_candidate": 0,
+  "reading": "Every no-candidate task is a task whose issue writes no runnable code line. The generator's only source of content is the lines the text quotes, so this is not a search failure and not a budget failure: it is a channel that is empty. The 9 exceptions have the shape of a quoted line but the reader rejects it (a diff sign, a shell line, a non-call expression), which is a smaller defect inside the same channel."
+ },
+ "measurement_2__is_the_missing_content_anywhere_at_hand": {
+  "expert_fixes_fetched": 102,
+  "fetch_tool": "canonical/tools/expert_fix_pull_request_collector_v1.py (231 records, all whole, `before` content included)",
+  "issue_text": {
+   "new_atoms_the_fix_needs_that_the_issue_text_names__all_of_them": 6,
+   "partly": 20,
+   "not_at_all": 76,
+   "of_102": 102,
+   "atom_level": "36 of 200 new atoms (18%) are named anywhere in the issue text"
+  },
+  "the_file_being_changed": {
+   "files_whose_every_new_atom_the_file_already_holds__by_fix_shape_v1_needs": {
+    "nothing": 13,
+    "held": 25,
+    "built in": 5,
+    "new": 69,
+    "of": 112
+   },
+   "tasks_where_every_changed_file_is_listable_and_held": 6
+  },
+  "the_whole_project_at_the_task_s_base_commit": {
+   "method": "every .py of the tree at the base commit read as atoms; fix_shape_v1.shape(before, after, held=atoms_of_the_project)",
+   "deterministic_sample": "every 4th of the 102, in name order (26 tasks, 26 changed files)",
+   "needs_vs_the_file": {
+    "new": 12,
+    "held": 11,
+    "nothing": 2,
+    "built in": 1
+   },
+   "needs_vs_the_project": {
+    "new": 9,
+    "held": 15,
+    "nothing": 2
+   },
+   "reading": "A third of what the fixes need is not in the file but IS in the project: 15 of 26 are 'held' once the whole tree is the dictionary, against 11 against the file alone. So the missing material is mostly not unknown to the machine, it is unselected, and the selection is over a project rather than over a file."
+  }
+ },
+ "measurement_3__the_two_oracles_that_cost_nothing": {
+  "the_issue_s_own_reproduction": {
+   "method": "the >>> / ... lines of every issue text, with the expected output line that follows",
+   "tasks_with_one": 19,
+   "of": 231,
+   "of_those_with_no_candidate": 3,
+   "verdict": "too few to carry a round: 19 of 231, and 3 of the 102 that are stuck."
+  },
+  "the_failing_test_s_trace": {
+   "method": "the task's test patch written in, the task's own fail_to_pass tests run through tests/runtests.py under sys.settrace, recording every line executed in the file the expert changes, then intersected with the lines the expert's patch changes",
+   "file_runs_traced": 26,
+   "file_never_executed_at_all": 13,
+   "file_executed_but_the_changed_line_never_was": 12,
+   "changed_line_inside_the_trace": 1,
+   "median_lines_executed_in_the_changed_file": 72,
+   "of_file_lines_median": 349,
+   "reading": "A trace of the failing test is the cheapest oracle there is -- it is the task's own tests, under one test run, and it needs no model. On this benchmark it points at the changed line once in twenty-six. The reason is structural, not accidental: a missing FEATURE is absent code, and absent code cannot be executed. The tasks that remain are the ones where the test reaches the answer through code that is not there."
+  }
+ },
+ "what_this_round_falsifies": [
+  "That PRECISION is the cheap half of the loss. It is worth 3 tasks of 128, and the check it names is already built, already run before every whole-module run, and already caught everything it could have caught.",
+  "That the 44% of tasks with no candidate are a SEARCH problem. They are a CHANNEL problem: 93 of 93 have no code line in the issue text, and the generator's only content source is the code lines in the issue text.",
+  "That a trace of the failing test can localise these tasks. It localises one in twenty-six.",
+  "That the missing content is knowledge the machine lacks. Against the whole project, 15 of 26 changed files need only material the project already holds.",
+  "My own previous round's arithmetic, in detail, above, rather than by quietly correcting it."
+ ],
+ "what_is_left_and_what_it_costs": {
+  "the_three_content_channels_measured_here": {
+   "issue_text_alone": "6 of 102 tasks name every new atom; 18% of atoms overall",
+   "file_alone": "6 of 102 listable with nothing new needed",
+   "project_alone": "17 of 26 sampled changed files need only what the project holds (15 held + 2 needing nothing)"
+  },
+  "the_wall": "Every one of these channels can say WHICH atoms are available. None of them can say WHICH arrangement of those atoms is the fix. That choice is the remaining problem, and it is a choice over a space, not a gap in a store -- which is why every cheap oracle measured here fails on it: the tests cannot point at a line they never execute, and the text cannot name a name it never writes.",
+  "the_next_bottleneck": "Not coverage of the project, and not selection among candidates. It is that the machine has no way to PREFER one arrangement of known atoms over another without running the task's hidden tests. The next round must either find a public signal that ranks arrangements (the failing test's own output, the neighbouring code's conventions, the shape census already in the tree), or state plainly that no zero-model signal ranks them and the cost is a test run per candidate -- which is affordable, since these tests run in under a second.",
+  "rejected_because_measured": [
+   "a better ranker -- measured ceiling +2 tasks of 128 (round 14)",
+   "a local neighbour re-run -- already taken, 0 candidates that deserved it were withheld (this round)",
+   "transplanting source from the project -- the atoms are there (17 of 26), the arrangement is not; a transplant generator would propose thousands of arrangements per site with nothing to prefer one",
+   "reading the issue's reproduction -- 19 of 231 tasks have one"
+  ]
+ },
+ "what_this_round_does_NOT_do": [
+  "It does not run SWE-bench. The judged numbers are read from the 2026-11-13 receipt; everything else is a static measurement over statements, trees, patches and one trace per task.",
+  "It does not claim the 231 statements it fetched are byte-identical to the ones the 2026-11-13 run used; it claims the task names are, and the statement for each name is the benchmark's own.",
+  "It does not propose that the failing-test trace be built. It measured it and it is not the lever here.",
+  "It does not claim a capability gain. A capability gain has to be measured on real directories and files, and nothing here resolves a task."
+ ],
+ "limits": [
+  "the project-as-dictionary sample is every 4th of 102 (26 tasks); the atom-level figures over all 102 are the ones quoted with 102",
+  "the trace figures are over the same 26; a tree where the test patch did not apply was not counted as evidence either way",
+  "`held` is fix_shape_v1's own notion: a name counts as held whatever it names at that place, which errs towards held"
+ ],
+ "machine": {
+  "python": "3.11",
+  "cores": 2,
+  "network": "api.github.com, codeload.github.com, github.com"
+ },
+ "spend": {
+  "usd": 0,
+  "model_calls": 0,
+  "parameters": 0
+ }
+}

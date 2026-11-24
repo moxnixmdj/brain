@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 611,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7261,
+  "research_index_records": 7263,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a92825b0aa2eb7f298ed1c0920a2dc79662c4e6c11805e5a14d0b94272b3dc28"
+  "value": "c8887e966ae6fa0027b255a22ff22e81d32982459830f0c461822e6729bed01e"
  },
  "engines": [
   {
@@ -221966,6 +221966,26 @@
    }
   },
   {
+   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_THE_CHECK_THE_LOOP_THROWS_AWAY_V1",
+   "sha256": "d2da83d0f0018e4a261821cf7dbe9bdb0804c15f9c983a6f05cb17f4032ff445",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "away": 1,
+    "check": 1,
+    "loop": 1,
+    "the_check_the_loop_throws_away_20261124_v1": 1,
+    "throws": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-11-16",
@@ -259598,6 +259618,51 @@
     "read-only": 2,
     "spends": 2,
     "world": 2
+   }
+  },
+  {
+   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4c5ffeedb2f9062d9da338adaa5154d910c29242b7b5e6c99dc6dc4ed6023a38",
+   "status": "SHIPPED",
+   "terms": {
+    "0.400": 1,
+    "17": 1,
+    "20261124": 1,
+    "26": 1,
+    "500": 1,
+    "already": 2,
+    "among": 1,
+    "another": 1,
+    "arrangement": 2,
+    "arrangements": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "atoms": 1,
+    "away": 1,
+    "becomes": 1,
+    "but": 1,
+    "changed": 1,
+    "check": 1,
+    "choose": 1,
+    "code": 1,
+    "every": 1,
+    "expert": 1,
+    "failing": 1,
+    "fails": 1,
+    "file": 2,
+    "files": 1,
+    "find": 1,
+    "hidden": 2,
+    "hold": 2,
+    "material": 2,
+    "project": 2,
+    "signal": 2,
+    "tests": 3
    }
   },
   {
