@@ -80,7 +80,7 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "REPAIR_OF_A_PUBLISHED_FALSE_CERTIFICATION_AND_A_NAMED_UNREPAIRED_SLOT",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
    "canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
@@ -108,7 +108,8 @@
    "AGENTS.md"
   ],
   "honest_state_read_live": true,
-  "route_class_note": "SYNTHESIZE_NEW_PRIMITIVE applies to `certified_checks` and `_digest`: the repository had no test that a check is read-only, and no status field that could see an overwrite."
+  "route_class_note": "SYNTHESIZE_NEW_PRIMITIVE applies to `certified_checks` and `_digest`: the repository had no test that a check is read-only, and no status field that could see an overwrite.",
+  "progress_class_note": "The claim falsified is the guide's own: `check_flags()` called 2,319 flags read-only and 16 of them write; `compile_step` published a check on every step and nothing ran it; and `run()` reported a destroyed object as ACCEPTED_INERT because it compared kinds. The frontier narrows to: a citation must be executed and must be derived from the room, which 3 of 87 edges can satisfy today -- named, measured, not built."
  },
  "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
  "action_intent_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1",
@@ -195,7 +196,7 @@
  "expected_parent_change": "an object stops being a name the tool author chose and becomes a set of the machine's own verdicts",
  "expected_parent_frontier_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
  "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
- "progress_class": "REPAIR_OF_A_PUBLISHED_FALSE_CERTIFICATION_AND_A_NAMED_UNREPAIRED_SLOT",
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
  "progress_evidence_paths": [
   "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
   "canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
