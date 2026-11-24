@@ -252,7 +252,18 @@ def functions_in(path: pathlib.Path, root: pathlib.Path) -> list[dict]:
 
     _collect(tree.body, "", 0)
 
+    # A PROPERTY IS ONE NAME, NOT TWO.
+    # `@property def x(self)` and `@x.setter def x(self)` are two FunctionDef nodes with the same
+    # name in the same class, so the census listed `DictReader.fieldnames` twice -- measured
+    # 2026-11-23 on the stdlib csv module. A caller cannot tell them apart, and offering the same
+    # name twice makes a room look larger and less certain than it is. First definition wins; the
+    # accessor pair is one thing a person can ask for by name.
+    _seen_calls = set()
     for node, owner in entries:
+        _call = (owner + "." + node.name) if owner else node.name
+        if _call in _seen_calls:
+            continue
+        _seen_calls.add(_call)
         sig = _signature(node)
         doc = _doc_summary(node)
         # MEANING IS NAME + DOCSTRING. A function whose docstring says nothing is still listed --

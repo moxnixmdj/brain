@@ -528,3 +528,63 @@ def test_one_demonstration_generalises_to_a_file_it_never_saw(monkeypatch):
     finally:
         _drop_forged(admitted.get("capability_id"))
         shutil.rmtree(room, ignore_errors=True)
+
+
+def test_a_property_is_one_name_not_two(tmp_path):
+    """The getter and the setter are two FunctionDef nodes with the same name.
+
+    Measured on the stdlib csv module: `DictReader.fieldnames` was listed twice, because
+    `@property def fieldnames` and `@fieldnames.setter def fieldnames` are both AST function nodes.
+    A caller cannot distinguish them, and a room that lists one thing twice looks larger and less
+    certain than it is.
+    """
+    (tmp_path / "props.py").write_text(
+        'class Reader:\n'
+        '    @property\n'
+        '    def fieldnames(self):\n'
+        '        """Names of the columns."""\n'
+        '        return []\n'
+        '\n'
+        '    @fieldnames.setter\n'
+        '    def fieldnames(self, value):\n'
+        '        self._f = value\n',
+        encoding="utf-8")
+    calls = [f["call"] for f in RC.survey(str(tmp_path))["functions"]]
+    assert calls.count("Reader.fieldnames") == 1, calls
+
+
+def test_the_census_reads_python_source_and_says_so_when_there_is_none(tmp_path):
+    """THE HONEST BOUNDARY OF A SOURCE CENSUS, PINNED SO IT IS A KNOWN LIMIT.
+
+    A C-extension callable has no AST node in the module that exposes it. Measured 2026-11-23 on the
+    standard library:
+
+        module     python defs in its own source    public callables
+        json        5                                 7
+        csv         0                                21
+        zipfile    15                                47
+        base64     27                                 1
+
+    `csv` defines NOT ONE python function -- `csv.reader` and `csv.writer` are builtins imported from
+    `_csv`. So a directory holding the stdlib csv module surveys as a handful of class methods, and
+    the two functions everybody actually calls are invisible to it.
+
+    This is not a bug to fix by parsing differently: there is no source to parse. It is the boundary
+    between "a room of python" and "a room of compiled code", and the census must not report the
+    latter as an empty room. EMPTY and NO_READABLE_SOURCE are the two answers it can give about a
+    room it could not describe.
+    """
+    # a python file that defines nothing callable
+    (tmp_path / "thin.py").write_text(
+        '"""A module that re-exports compiled callables."""\n'
+        "from something import reader, writer\n", encoding="utf-8")
+    found = RC.survey(str(tmp_path))
+    assert found["status"] == "SURVEYED"
+    assert found["functions"] == [], found
+    # it is honest about having read a file, rather than claiming the room was empty
+    assert found["files_read"] == 1, found
+
+    # and a room with no source at all is a different answer
+    bare = tmp_path / "bare"
+    bare.mkdir()
+    assert RC.survey(str(bare))["status"] == "EMPTY"

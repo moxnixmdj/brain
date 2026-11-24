@@ -9127,3 +9127,62 @@ pre-existing failures in the affected test set are byte-identical with and witho
       and now honestly, but the capability that *could* have answered (counting rows in a csv) does
       not exist yet. That gap is the one worth closing next.
     * §6 NOT MET. No OSWorld task, no SWE-bench instance.
+
+### §A148 addendum — the wall, measured, and the room on the other side of it
+
+§A148 closed a false pass. It also exposed the real gap: **"how many rows are in a csv" had no
+capability to answer it.** The whole 156-row registry contained exactly ONE capability mentioning csv,
+and it was the one this work forged. The machine reached for a Python source analyser because nothing
+else fitted.
+
+The obvious move was to census the standard library's own `csv` module and learn it. That produced a
+finding worth more than the capability would have been:
+
+    module     python defs in its own source    public callables
+    json        5                                 7
+    csv         0                                21
+    zipfile    15                                47
+    tarfile     9                                62
+    base64     27                                 1
+
+**`csv` defines not one python function.** `csv.reader` and `csv.writer` are builtins imported from
+`_csv`, so they have no AST node, no docstring in that file, and no signature a source reader can see.
+Surveying a directory that contains the stdlib csv module reports six class methods and misses the two
+functions everybody actually calls.
+
+This is not a parsing bug and cannot be fixed by parsing differently: there is no source. It is the
+boundary between a room of python and a room of compiled code. The census now marks that boundary
+correctly (SURVEYED with `files_read` > 0 and no functions, versus EMPTY), and the limit is pinned by a
+test so it stays a known wall rather than a surprise.
+
+### The same instrument, on the other side of the wall
+
+Pointed at `json`, which does define its functions in source, the census is not merely adequate — it
+is exactly right:
+
+    survey(stdlib json.py)  ->  dump, dumps, detect_encoding, load, loads
+    "write the records as a json file"
+      -> dump  (2.25)    load (0.99)    dumps (0.33)    loads (0.26)
+
+A real, unseen library; the correct function ranked first; no hand-written entry, no registry row, no
+demonstration. That is the organ working on the case it was built for.
+
+    (139) "I could not see it" and "it is not there" are different sentences, and compiled code
+          produces the first while reading like the second. A source reader must state which it means.
+    (140) A boundary is a result. The measured shape of what a census can and cannot see is worth
+          more than one more capability, because it says where to build next.
+
+### What this says about the next step
+
+The room that matters for ordinary file work is mostly compiled: `csv`, `sqlite3`, `zlib`, `hashlib`,
+and every third-party binary a person has installed. A source census is the right instrument for the
+python world and simply cannot see the rest. The honest options are named here rather than chosen
+silently:
+
+    * read the compiled world through its published documentation (`documentation_mining_v1` already
+      fetches a module's manual and keeps only examples that execute and produce the artifact);
+    * ask the object itself (`inspect.signature`, `__doc__`) -- which is not source reading but is
+      still evidence, and is available at run time;
+    * write the adapter by hand.
+
+None of these is in this path yet. §6 remains NOT MET: no OSWorld task, no SWE-bench instance.
