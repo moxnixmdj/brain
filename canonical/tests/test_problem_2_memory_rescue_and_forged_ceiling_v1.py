@@ -68,10 +68,42 @@ class TestProblem2MemoryRescueAndForgedCeiling(unittest.TestCase):
         self.assertEqual(report["forged_total"], 6)
         self.assertEqual(report["forged_admitted"], 6, report)
         self.assertEqual(report["tasks_total"], 6)
-        self.assertEqual(report["tasks_rescued"], 6, report["rows"])
+        # 6 -> 5 on 2026-11-23 (A140), AND THE ONE THAT LEFT WAS NEVER RESCUED.
+        #
+        # `sum a column of numbers in a csv` reached VERIFIED_ACTION only because the forged capability's
+        # `_forged_defaults` -- the first fixture `capability_forge_v1` happened to run the module on -- were
+        # substituted for the slot the goal never supplied. The number it produced was a true sum of
+        #     item,amount\nalpha,12.5\nbeta,27.5\ngamma,10.0
+        # which is the FORGE'S OWN TEST DATA, presented as the answer about the person's file. Teaching that
+        # receipt then recorded a procedure for a task the machine had not done.
+        #
+        # `world_binding_v1` now refuses to fill a payload slot from a demonstration, so the capability is
+        # unbindable until something actually names the data -- which is the honest state. The other five are
+        # unaffected, and both counts are asserted separately below rather than hidden in one number.
+        # MEASURED, NOT ROUNDED. Four tasks are now rescued by memory, one is not rescued but no longer needs
+        # to be, and one cannot be done at all:
+        #
+        #   rescued (4)          zip, spreadsheet, docx, sort -- each taught once, then remembered for a
+        #                        paraphrase. This is the single-experience transfer working.
+        #   already answerable   "diff two files" is VERIFIED_ACTION before any teaching, so it is not a
+        #                        rescue. That is the machine getting better, not the memory failing.
+        #   not answerable (1)   "sum a column of numbers in a csv" names no data. It used to reach
+        #                        VERIFIED_ACTION by summing the FORGE'S OWN FIXTURE, which was a true number
+        #                        about a file nobody mentioned.
+        #
+        # Asserting 6 would claim a rescue that never happened; asserting 5 would bury the distinction.
+        self.assertEqual(report["tasks_rescued"], 4, report["rows"])
         self.assertEqual(report["paraphrases_total"], 6)
-        self.assertEqual(report["paraphrases_rescued"], 6, report["rows"])
+        self.assertEqual(report["paraphrases_rescued"], 5, report["rows"])
         for row in report["rows"]:
+            if row["task"] == "sum a column of numbers in a csv":
+                # no data was named, so nothing was done; assert THAT rather than a success
+                self.assertEqual(row["teach_status"], "AMBIGUOUS", row)
+                continue
+            if row["task"] == "diff two files":
+                # answerable before teaching -- a rescue is not needed and must not be claimed
+                self.assertEqual(row["before_task_status"], "VERIFIED_ACTION", row)
+                continue
             self.assertEqual(row["before_task_status"], "AMBIGUOUS", row)
             self.assertEqual(row["before_paraphrase_status"], "AMBIGUOUS", row)
             self.assertEqual(row["teach_status"], "VERIFIED_ACTION", row)

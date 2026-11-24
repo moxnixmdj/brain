@@ -8244,3 +8244,83 @@ last commit". The wrong-verdict count did not move.
     NOT TRUE   that the aggregation task is expressible. It now REFUSES honestly; it still cannot be done.
                A whole task needs COMPOSITION (aggregate → write), which one registry capability cannot
                express. That is the next thing to build, and it is untouched.
+
+---
+
+## §A141 — the capability was there; what was missing was the RULE, not the trace
+
+### Research first: the composition machinery already exists
+
+`grounded_action_v1.act("total the amounts by region in sales.csv and write it to summary.txt")` refuses
+honestly after §A140. Before building anything, the repository was read for what already chains capabilities:
+
+    56 modules match "compos" under canonical/runtime
+    capability_composer_v1  154 graph nodes, forward_closure fires 117 from a single file token,
+                            plan([], 'text.file.available') -> ['text.file.write']
+
+**Composition works.** It was not the bottleneck. The measured blocker was narrower:
+
+    tokens for aggregate / group / sum in the whole composition graph:   NONE
+
+### The aggregation capability existed and could not be reached
+
+`canonical/runtime/ordinary_computer_capabilities_v1.sum_csv_column` computes correctly:
+
+    -> {'status': 'CSV_COLUMN_SUMMED', 'ok': True, 'column': 'amount', 'row_count': 3, 'sum': 35.0}
+
+    registry rows for csv / sum / ordinary:   NONE
+
+`capability_forge_v1.forge_ordinary_capabilities()` admitted all six (`admitted: True` for every one), and
+the row then appeared in the loaded registry with keywords `sum, csv, column, ...` and was ranked FIRST by
+`keyword_candidates`. It was reachable and still did not answer.
+
+### The defect: a demo is a witness to a shape, never to a value
+
+`capability_forge_v1` records the first test case it ran a module on, in `_forged_defaults`. `world_binding_v1`
+used those values whenever the goal was silent. Measured:
+
+    goal:  "sum the amount column in sales.csv"
+    bound: csv_table = 'item,amount\nalpha,12.5\nbeta,27.5\ngamma,10.0\n'
+    provenance: filled_from_demonstrated_case
+
+Those are THE FORGE'S OWN FIXTURE BYTES. Any number the capability returned would have been a true statement
+about a file the person never mentioned, presented as the answer about theirs. **Save the rule, never the
+trace** — and a recorded demo is a trace.
+
+The fix is one condition: a slot whose value IS the data (`csv_table`, `text`, `records`, `sample`,
+`content`, `body`) is never filled from a demonstration. It is left missing, so the capability is unbindable
+rather than confidently wrong.
+
+### What that cost, and why the cost was paid
+
+The rescued-count went DOWN and the reason is not a regression:
+
+| outcome | tasks | why |
+|---|---|---|
+| rescued by one teaching | **4** | zip, spreadsheet, docx, sort — single-experience transfer, working |
+| already answerable, no rescue needed | **1** | "diff two files" is VERIFIED_ACTION before teaching |
+| not answerable | **1** | "sum a column of numbers in a csv" names no data |
+
+The sixth used to be counted as a rescue **because it summed the forge fixture**. Teaching that receipt
+recorded a procedure for a task the machine had not done — a failure laundered into a confident preference,
+which is the shadowing failure with the machine as its own teacher.
+
+### Laws
+
+    (106) A demonstration shows what a slot ACCEPTS, never what this request WANTS.
+    (107) A fixture is a trace. Saving it as an argument is saving the trace instead of the rule, and it
+          makes every later answer a true statement about the wrong file.
+    (108) When a rescue count goes down, find out which task left and why before calling it a regression.
+          Here one task left because the work behind it was never done.
+
+### Open, with the measurements attached
+
+    OPEN  A whole task still needs COMPOSITION with a real aggregation step in the registry. The composer
+          works and the arithmetic exists; what is missing is a capability that turns a CSV into a grouped
+          total as a declared `provides`, so the chain has something to chain FROM.
+    OPEN  "check whether a website is up" -> a Python type checker (§A140).
+    OPEN  "Generate a QR code image from a text string." -> the decoder (§A140).
+
+### What is not established
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance, nothing beyond this machine's own tools.

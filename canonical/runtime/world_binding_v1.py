@@ -440,6 +440,18 @@ def _text_marked_in(goal):
     return value or None
 
 
+# Slots that carry DATA. A demonstrated case may show what SHAPE such a slot takes, never what its value is:
+# filling one from a fixture answers a question about the fixture. Read from the slot's own name, which is the
+# vocabulary the registry already uses (`csv_table`, `text`, `records`, `sample`, `content`).
+_PAYLOAD_SLOT_WORDS = ("table", "text", "records", "sample", "content", "payload", "body", "data", "rows")
+
+
+def _is_payload_slot(name):
+    """True when a slot's value IS the data being worked on, rather than a reference to it."""
+    low = str(name or "").lower()
+    return any(word in low for word in _PAYLOAD_SLOT_WORDS)
+
+
 def named_destination(goal):
     """The destination the user actually said, if they said one.
 
@@ -1334,7 +1346,23 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
             # proven it can be called. The value is reported as
             # demonstrated, never as grounded.
             demo = (entry or {}).get("_forged_defaults") or {}
-            if isinstance(demo, dict) and demo.get(key) is not None:
+            # A DEMONSTRATED VALUE IS NOT A VALUE FOR THIS SENTENCE.
+            #
+            # `capability_forge_v1` records the first test case it ran the module on, and the comment above is
+            # right that this is the only witness to what the slot accepts. It is NOT a witness to what THIS
+            # request wanted. Measured 2026-11-23: asked to "sum the amount column in sales.csv", the forged
+            # `sum_csv_column` was handed the FORGE FIXTURE's bytes --
+            #     'item,amount\nalpha,12.5\nbeta,27.5\ngamma,10.0\n'
+            # and the binding was reported as `filled_from_demonstrated_case`. Any sum it then returned would be
+            # a true statement about a file the person never mentioned. That is the same defect this round
+            # opened on: a value that did not come from the request, silently substituted for one that should
+            # have. The repository's own line applies -- save the RULE, never the trace.
+            #
+            # So a demonstrated value is used ONLY when the goal named nothing AND the slot is one the demo can
+            # legitimately stand in for: a slot whose value the person would recognise as an example. A slot
+            # named like data (`csv_table`, `text`, `records`, `sample`) is never filled this way; it is left
+            # missing, which makes the capability unbindable rather than confidently wrong.
+            if isinstance(demo, dict) and demo.get(key) is not None and not _is_payload_slot(key):
                 value = demo[key]
                 from_demonstrated[key] = value
         if value:

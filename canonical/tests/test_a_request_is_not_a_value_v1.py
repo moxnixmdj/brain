@@ -134,3 +134,49 @@ def test_a_git_question_that_can_be_answered_is_answered_with_real_commits():
     for row in rows:
         assert row.get("sha") and row.get("subject"), row
     assert (receipt.get("observed_effect") or {}).get("commit_count") == 5
+
+
+# ------------------------------------------------------------------------------------------
+# 4. A demonstrated case is a witness to a SHAPE, never to a VALUE
+# ------------------------------------------------------------------------------------------
+def test_a_demonstrated_fixture_never_stands_in_for_the_data_the_goal_named():
+    """THE THIRD INSTANCE OF THE SAME DEFECT, and the one that was hardest to see.
+
+    `capability_forge_v1` records the first test case a module ran on, so the capability carries the
+    fixture's inputs as `_forged_defaults`. `world_binding_v1` then used them whenever the goal was silent --
+    reasonably, since a demo is the only witness to what a slot ACCEPTS.
+
+    Measured 2026-11-23: asked to "sum the amount column in sales.csv", the forged `sum_csv_column` was
+    handed the forge fixture's bytes --
+
+        'item,amount\nalpha,12.5\nbeta,27.5\ngamma,10.0\n'
+
+    -- and the binding was reported as `filled_from_demonstrated_case`. Any number it returned would be a true
+    statement about a file the person never mentioned, presented as the answer about theirs.
+
+    The rule this repository already states is: SAVE THE RULE, NEVER THE TRACE. A payload slot is left
+    missing, which makes the capability unbindable instead of confidently wrong about someone else's data.
+    """
+    forged = {cid: entry for cid, entry in GA.load_registry().items() if "sum_csv_column" in cid}
+    if not forged:
+        pytest.skip("the ordinary capabilities have not been forged on this machine")
+    cid, entry = next(iter(forged.items()))
+    fixture = (entry.get("_forged_defaults") or {}).get("csv_table")
+    assert fixture, "this machine's forged row carries no demonstrated fixture, so the case cannot arise"
+
+    with tempfile.TemporaryDirectory() as tmp:
+        (pathlib.Path(tmp) / "sales.csv").write_text("region,amount\nnorth,10\n", encoding="utf-8")
+        binding = WB.complete_inputs("sum the amount column in sales.csv", tmp, entry,
+                                     goal_paths=["sales.csv"])
+        bound = (binding.get("inputs") or {}).get("csv_table")
+        assert bound != fixture, (
+            "the forge fixture was substituted for the file the goal named: " + repr(str(bound)[:80]))
+        assert "csv_table" in (binding.get("missing") or []) or bound is None, binding
+
+
+def test_a_payload_slot_is_named_by_its_own_vocabulary():
+    """The rule is read from the slot's name, which is vocabulary the registry already uses."""
+    for payload in ("csv_table", "text", "records", "sample", "content", "body"):
+        assert WB._is_payload_slot(payload), payload
+    for reference in ("output_path", "archive_path", "repo_root", "limit", "op", "target"):
+        assert not WB._is_payload_slot(reference), reference
