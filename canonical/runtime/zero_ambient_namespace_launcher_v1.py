@@ -193,6 +193,28 @@ _SETUP=_SETUP.replace('@@ENTER_ROOT_BEHIND_SYSCALL_FILTER@@',_ENTER_ROOT_BEHIND_
 
 
 
+# Trusted PID-namespace init. WATCH is a Linux pidfd for the launching process,
+# observed by PID 1; it becomes readable when that process dies, including on
+# SIGKILL. Unlike a pipe, it cannot be kept alive by a fork inheriting a write
+# end. PID 1 exits and the kernel kills remaining namespace processes, including
+# new sessions. The workload never inherits WATCH. This is lifecycle hardening,
+# NOT carrier qualification.
+_PID1_GUARD = r'''import os,select,sys
+watch,broker=int(sys.argv[1]),int(sys.argv[2])
+if os.getpid()!=1 or select.select([watch],[],[],0)[0]: os._exit(126)
+pid=os.fork()
+if pid==0:
+    os.close(watch)
+    os.execv(sys.argv[3],sys.argv[3:])
+os.close(broker)
+while True:
+    done,status=os.waitpid(pid,os.WNOHANG)
+    if done:
+        code=os.waitstatus_to_exitcode(status)
+        os._exit(code if code>=0 else 128-code)
+    if select.select([watch],[],[],0.05)[0]: os._exit(126)
+'''
+
 _SYSTEM_BIN_DIRS = ("/usr/local/bin", "/usr/local/sbin", "/usr/bin", "/usr/sbin", "/bin", "/sbin")
 
 
@@ -237,12 +259,18 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
     th=threading.Thread(target=reader,daemon=True); th.start()
     env={'BROKER_FD':str(child.fileno()),'PYTHONDONTWRITEBYTECODE':'1'}
     for k,v in p['env'].items(): env[k]=v
-    cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),str(int(p['expose_null_device'])),str(int(p['expose_runtime_devices'])),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
+    try:
+        watch_pidfd=os.pidfd_open(os.getpid(),0)
+    except (OSError, AttributeError) as exc:
+        child.close(); parent.close(); th.join(timeout=2)
+        shutil.rmtree(root,ignore_errors=True)
+        raise NamespaceConfinementError('LIVENESS_PIDFD_UNAVAILABLE') from exc
+    cmd=[resolved['unshare'],'--user','--map-root-user','--mount','--net','--pid','--fork','--ipc','--uts',resolved['python3'],'-I','-c',_PID1_GUARD,str(watch_pidfd),str(child.fileno()),resolved['bash'],'-c',_SETUP,'_',root,p['input_dir'],str(child.fileno()),str(lim['memory_mb']*1024),str(lim['cpu_seconds']),str(math.ceil(lim['max_file_mb']*1024)),str(lim['nofile']),str(lim['pids']),str(lim['scratch_mb']),str(int(p['expose_null_device'])),str(int(p['expose_runtime_devices'])),resolved['setpriv'],'--no-new-privs','--bounding-set=-all','--inh-caps=-all','--ambient-caps=-all',resolved['env'],'-i','PATH=/usr/bin:/bin','HOME=/tmp','PYTHONDONTWRITEBYTECODE=1','PROJECT_BRAIN_BROKER_FD='+str(child.fileno())]
     for k,v in p['env'].items(): cmd.append(k+'='+v)
     cmd += p['argv']
-    popen_kw={'stdin':subprocess.DEVNULL,'stdout':subprocess.DEVNULL,'stderr':subprocess.DEVNULL,'pass_fds':(child.fileno(),),'env':env,'start_new_session':True}
+    popen_kw={'stdin':subprocess.DEVNULL,'stdout':subprocess.DEVNULL,'stderr':subprocess.DEVNULL,'pass_fds':(child.fileno(),watch_pidfd),'env':env,'start_new_session':True}
     if os.geteuid()==0: popen_kw.update(user=p['host_uid'],group=p['host_gid'],extra_groups=[])
-    started=time.monotonic(); timed_out=False
+    started=time.monotonic(); timed_out=False; proc=None
     try:
         proc=subprocess.Popen(cmd,**popen_kw); child.close()
         try: rc=proc.wait(timeout=lim['wallclock_s'])
@@ -253,11 +281,18 @@ def run_confined(policy:Mapping[str,Any])->dict[str,Any]:
             rc=proc.wait(timeout=5)
         th.join(timeout=2)
     finally:
-        try: child.close()
-        except OSError: pass
-        try: parent.close()
-        except OSError: pass
-        shutil.rmtree(root,ignore_errors=True)
+        try:
+            if proc is not None and proc.poll() is None:
+                try: os.killpg(proc.pid,9)
+                except ProcessLookupError: pass
+                proc.wait(timeout=5)
+        finally:
+            os.close(watch_pidfd)
+            try: child.close()
+            except OSError: pass
+            try: parent.close()
+            except OSError: pass
+            shutil.rmtree(root,ignore_errors=True)
     raw=b''.join(broker); status='CHILD_EXITED'
     if timed_out: status='WALLCLOCK_LIMIT_EXCEEDED'
     elif overflow[0]: status='BROKER_OUTPUT_LIMIT_EXCEEDED'

@@ -35,6 +35,31 @@ class CandidateDenied(ValueError):
 
 
 @dataclass(frozen=True)
+class SnapshotLimits:
+    max_files: int = MAX_FILES
+    max_dirs: int = MAX_DIRS
+    max_file_bytes: int = MAX_FILE_BYTES
+    max_total_bytes: int = MAX_TOTAL_BYTES
+
+
+# Expanded bounds for controlled fixture collection, not production admission.
+# The original staging/comparison API keeps its smaller default limits.
+FIXTURE_WORKTREE_LIMITS = SnapshotLimits(25_000, 10_000, 16_000_000, 256_000_000)
+
+
+def _validate_limits(limits: SnapshotLimits) -> None:
+    if not isinstance(limits, SnapshotLimits):
+        raise CandidateDenied('SNAPSHOT_LIMITS_INVALID')
+    for value, maximum in zip(
+        (limits.max_files, limits.max_dirs, limits.max_file_bytes, limits.max_total_bytes),
+        (FIXTURE_WORKTREE_LIMITS.max_files, FIXTURE_WORKTREE_LIMITS.max_dirs,
+         FIXTURE_WORKTREE_LIMITS.max_file_bytes, FIXTURE_WORKTREE_LIMITS.max_total_bytes),
+    ):
+        if type(value) is not int or not 0 < value <= maximum:
+            raise CandidateDenied('SNAPSHOT_LIMITS_INVALID')
+
+
+@dataclass(frozen=True)
 class ProjectSnapshot:
     # Immutable bytes held by the parent; not an identity or proof of origin.
     directories: tuple[str, ...]
@@ -76,14 +101,18 @@ def _digest(directories: tuple[str, ...], files: tuple[tuple[str, bytes], ...]) 
                            ensure_ascii=False).encode('utf-8'))
 
 
-def snapshot_project(root: str | Path) -> ProjectSnapshot:
+def snapshot_project(root: str | Path, *, limits: SnapshotLimits | None = None) -> ProjectSnapshot:
     """Capture a bounded tree without following symlinks or opening special files.
 
     The caller must select the complete intended project and keep it quiescent
     while taking the snapshot. Parent path components and concurrent rename or
     privileged filesystem attacks are not a security boundary. No secrets are
     automatically redacted. Both the original and staged tree must be quiescent.
+    Expanded snapshots are fixture-only and may exceed staging's smaller bounds.
     """
+    if limits is None:
+        limits = SnapshotLimits(MAX_FILES, MAX_DIRS, MAX_FILE_BYTES, MAX_TOTAL_BYTES)
+    _validate_limits(limits)
     if not all(hasattr(os, name) for name in ('O_NOFOLLOW', 'O_DIRECTORY', 'O_NONBLOCK')):
         raise CandidateDenied('REQUIRED_NOFOLLOW_FLAGS_UNAVAILABLE')
     if not isinstance(root, (str, Path)) or not os.fspath(root) or '\x00' in os.fspath(root):
@@ -101,14 +130,14 @@ def snapshot_project(root: str | Path) -> ProjectSnapshot:
         names = []
         with os.scandir(fd) as stream:
             for entry in stream:
-                if len(names) >= MAX_FILES + MAX_DIRS:
+                if len(names) >= limits.max_files + limits.max_dirs:
                     raise CandidateDenied('TOO_MANY_DIRECTORY_ENTRIES')
                 names.append(entry.name)
         for name in sorted(names):
             rel = _relative(prefix + '/' + name if prefix else name)
             st = os.stat(name, dir_fd=fd, follow_symlinks=False)
             if stat.S_ISDIR(st.st_mode):
-                if len(dirs) >= MAX_DIRS:
+                if len(dirs) >= limits.max_dirs:
                     raise CandidateDenied('TOO_MANY_DIRECTORIES')
                 child = os.open(name, flags, dir_fd=fd)
                 try:
@@ -123,9 +152,9 @@ def snapshot_project(root: str | Path) -> ProjectSnapshot:
             elif stat.S_ISREG(st.st_mode):
                 if st.st_nlink != 1:
                     raise CandidateDenied('HARDLINK_DENIED')
-                if len(files) >= MAX_FILES:
+                if len(files) >= limits.max_files:
                     raise CandidateDenied('TOO_MANY_FILES')
-                if st.st_size > MAX_FILE_BYTES or total + st.st_size > MAX_TOTAL_BYTES:
+                if st.st_size > limits.max_file_bytes or total + st.st_size > limits.max_total_bytes:
                     raise CandidateDenied('PROJECT_BYTES_EXCEEDED')
                 child = os.open(name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK, dir_fd=fd)
                 try:
@@ -133,12 +162,12 @@ def snapshot_project(root: str | Path) -> ProjectSnapshot:
                     if not stat.S_ISREG(opened.st_mode) or _identity(st) != _identity(opened):
                         raise CandidateDenied('TREE_CHANGED_DURING_SNAPSHOT')
                     data = bytearray()
-                    while len(data) <= MAX_FILE_BYTES:
-                        block = os.read(child, min(65536, MAX_FILE_BYTES + 1 - len(data)))
+                    while len(data) <= limits.max_file_bytes:
+                        block = os.read(child, min(65536, limits.max_file_bytes + 1 - len(data)))
                         if not block:
                             break
                         data.extend(block)
-                    if len(data) > MAX_FILE_BYTES:
+                    if len(data) > limits.max_file_bytes:
                         raise CandidateDenied('PROJECT_BYTES_EXCEEDED')
                     if (_identity(os.fstat(child)) != _identity(opened)
                             or _identity(os.stat(name, dir_fd=fd, follow_symlinks=False)) != _identity(opened)

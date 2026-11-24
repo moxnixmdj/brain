@@ -239,6 +239,34 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
     }
 
 
+class ProbeRestoreError(RuntimeError):
+    """A speculative probe could not be restored; the environment is unknown."""
+
+
+def probe_closeness(env: Any, action: Any, heuristic: Callable[[Any], float]
+                    ) -> tuple[float | None, str | None]:
+    """Probe once, restoring even when the action or heuristic raises.
+
+    This relies on the environment's snapshot/restore contract. It does not
+    prove that hidden or external side effects are reversible.
+    """
+    try:
+        saved = env.snapshot()
+    except Exception:
+        return None, "SNAPSHOT_FAILED"
+    try:
+        try:
+            env.act(action)
+            return float(heuristic(env.state())), None
+        except Exception:
+            return None, "ACTION_OR_HEURISTIC_FAILED"
+    finally:
+        try:
+            env.restore(saved)
+        except Exception as exc:
+            raise ProbeRestoreError("PROBE_RESTORE_FAILED") from exc
+
+
 def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
                    heuristic: Callable[[Any], float] | None,
                    epsilon: float = 0.25) -> str:
@@ -264,14 +292,8 @@ def _choose_action(env: Any, actions: Sequence[Any], rng: Any,
 
     scored: list[tuple[float, str]] = []
     for action in order:
-        try:
-            saved = env.snapshot()
-            env.act(action)
-            score = float(heuristic(env.state()))
-            env.restore(saved)
-        except Exception:
-            score = float("inf")
-        scored.append((score, str(action)))
+        score, _ = probe_closeness(env, action, heuristic)
+        scored.append((score if score is not None else float("inf"), str(action)))
     finite = [(s_, a) for s_, a in scored if s_ != float("inf")]
     if not finite:
         return str(rng.choice(order))

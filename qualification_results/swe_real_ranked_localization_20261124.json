@@ -1,0 +1,1262 @@
+{
+  "adapter_sha256": "af652751acbe906dabf387f05411e01678a896fa64b213e8a2c0cba61756aaa2",
+  "count": 5,
+  "instances": [
+    {
+      "adapter_trace": {
+        "executed": false,
+        "instance_id": "astropy__astropy-12907",
+        "mode_forwarded": false,
+        "mode_requested": "EPISTEMIC",
+        "mode_semantics": "MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC (open_model().solve() only special-cases RECALL and SOLVE_OR_LEARN; all other strings use ordinary routing)",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_reason": "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER",
+        "model_status": null,
+        "outcome": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+        "patch_chars": 0,
+        "patch_check": "NOT_ATTEMPTED",
+        "patch_source": "NONE",
+        "schema": "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
+      },
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "instance_id": "astropy__astropy-12907",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "ranked_candidates": {
+          "authority": "NONE__ADVISORY_ONLY",
+          "omitted_files": 0,
+          "scan_complete": true,
+          "scanned_bytes": 12493501,
+          "scanned_files": 902,
+          "symbols_truncated": false,
+          "target_paths": [
+            {
+              "evidence": [
+                "import_module:astropy/modeling/separable",
+                "definition:separability_matrix"
+              ],
+              "path": "astropy/modeling/separable.py",
+              "score": 120,
+              "symbols": [
+                "separability_matrix"
+              ]
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling",
+                "definition:Linear1D"
+              ],
+              "path": "astropy/modeling/functional_models.py",
+              "score": 28,
+              "symbols": [
+                "Linear1D"
+              ]
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/bounding_box.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/convolution.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/core.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/fitting.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/mappings.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/math_functions.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/models.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/optimizers.py",
+              "score": 16,
+              "symbols": []
+            }
+          ],
+          "test_targets": [
+            {
+              "evidence": [
+                "import_package:astropy/modeling",
+                "target_filename",
+                "target_package"
+              ],
+              "path": "astropy/modeling/tests/test_separable.py",
+              "score": 56,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_bounding_box.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_compound.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_constraints.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_convolution.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_core.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_fitters.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_functional_models.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_input.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/modeling"
+              ],
+              "path": "astropy/modeling/tests/test_mappings.py",
+              "score": 16,
+              "symbols": []
+            }
+          ]
+        },
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 6,
+          "candidates": [
+            "astropy/convolution/core.py",
+            "astropy/convolution/kernels.py",
+            "astropy/io/fits/column.py",
+            "astropy/modeling/functional_models.py",
+            "astropy/modeling/separable.py",
+            "astropy/nddata/nduncertainty.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "prediction": {
+        "instance_id": "astropy__astropy-12907",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_patch": ""
+      },
+      "problem_statement_sha256": "c01334ec1b21a089c650cf2e7b96ab974469076bf1260d23885799e1f0a7551f",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "4ffc67512585ebd76f93abe9544e3563f826ccf70e1576492d3f21eb8d3d4979"
+    },
+    {
+      "adapter_trace": {
+        "executed": false,
+        "instance_id": "astropy__astropy-13033",
+        "mode_forwarded": false,
+        "mode_requested": "EPISTEMIC",
+        "mode_semantics": "MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC (open_model().solve() only special-cases RECALL and SOLVE_OR_LEARN; all other strings use ordinary routing)",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_reason": "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER",
+        "model_status": null,
+        "outcome": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+        "patch_chars": 0,
+        "patch_check": "NOT_ATTEMPTED",
+        "patch_source": "NONE",
+        "schema": "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
+      },
+      "base_commit": "298ccb478e6bf092953bca67a3d29dc6c35f6752",
+      "instance_id": "astropy__astropy-13033",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "ranked_candidates": {
+          "authority": "NONE__ADVISORY_ONLY",
+          "omitted_files": 0,
+          "scan_complete": true,
+          "scanned_bytes": 12499122,
+          "scanned_files": 908,
+          "symbols_truncated": false,
+          "target_paths": [
+            {
+              "evidence": [
+                "import_package:astropy/timeseries",
+                "definition:TimeSeries",
+                "definition:time"
+              ],
+              "path": "astropy/timeseries/sampled.py",
+              "score": 71,
+              "symbols": [
+                "TimeSeries",
+                "time"
+              ]
+            },
+            {
+              "evidence": [
+                "title_filename:column"
+              ],
+              "path": "astropy/io/fits/column.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:column"
+              ],
+              "path": "astropy/table/column.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:check"
+              ],
+              "path": "astropy/utils/xml/check.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time",
+                "definition:Time"
+              ],
+              "path": "astropy/time/core.py",
+              "score": 22,
+              "symbols": [
+                "Time"
+              ]
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/formats.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/setup_package.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/utils.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/timeseries"
+              ],
+              "path": "astropy/timeseries/binned.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/timeseries"
+              ],
+              "path": "astropy/timeseries/core.py",
+              "score": 16,
+              "symbols": []
+            }
+          ],
+          "test_targets": [
+            {
+              "evidence": [
+                "import_package:astropy/timeseries",
+                "target_filename",
+                "target_package"
+              ],
+              "path": "astropy/timeseries/tests/test_sampled.py",
+              "score": 56,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:exception"
+              ],
+              "path": "astropy/io/votable/tests/exception_test.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:column"
+              ],
+              "path": "astropy/table/tests/test_column.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_basic.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_comparisons.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_corrs.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_custom_formats.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_delta.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_fast_parser.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/time"
+              ],
+              "path": "astropy/time/tests/test_functions.py",
+              "score": 16,
+              "symbols": []
+            }
+          ]
+        },
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 8,
+          "candidates": [
+            "astropy/io/fits/fitsrec.py",
+            "astropy/io/fits/hdu/groups.py",
+            "astropy/io/fits/hdu/table.py",
+            "astropy/table/index.py",
+            "astropy/table/row.py",
+            "astropy/table/table.py",
+            "astropy/time/core.py",
+            "astropy/timeseries/sampled.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "prediction": {
+        "instance_id": "astropy__astropy-13033",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_patch": ""
+      },
+      "problem_statement_sha256": "a295c83e68ff62290947b0796b75659b94621b7f2340d6f0055512d04be3f1d1",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "a5bab553799dade3acf5ad4797ca8a42327fc155dbd6052139fae6f07d4f3c82"
+    },
+    {
+      "adapter_trace": {
+        "executed": false,
+        "instance_id": "astropy__astropy-13236",
+        "mode_forwarded": false,
+        "mode_requested": "EPISTEMIC",
+        "mode_semantics": "MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC (open_model().solve() only special-cases RECALL and SOLVE_OR_LEARN; all other strings use ordinary routing)",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_reason": "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER",
+        "model_status": null,
+        "outcome": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+        "patch_chars": 0,
+        "patch_check": "NOT_ATTEMPTED",
+        "patch_source": "NONE",
+        "schema": "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
+      },
+      "base_commit": "6ed769d58d89380ebaa1ef52b300691eefda8928",
+      "instance_id": "astropy__astropy-13236",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "ranked_candidates": {
+          "authority": "NONE__ADVISORY_ONLY",
+          "omitted_files": 0,
+          "scan_complete": true,
+          "scanned_bytes": 12607293,
+          "scanned_files": 912,
+          "symbols_truncated": false,
+          "target_paths": [
+            {
+              "evidence": [
+                "quoted_source_lines:4"
+              ],
+              "path": "astropy/table/table.py",
+              "score": 80,
+              "symbols": [
+                "_convert_data_to_col"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:Column",
+                "definition:data",
+                "title_filename:column"
+              ],
+              "path": "astropy/table/column.py",
+              "score": 62,
+              "symbols": [
+                "data",
+                "Column"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:Column",
+                "title_filename:column"
+              ],
+              "path": "astropy/io/fits/column.py",
+              "score": 47,
+              "symbols": [
+                "Column"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:NdarrayMixin"
+              ],
+              "path": "astropy/table/ndarray_mixin.py",
+              "score": 37,
+              "symbols": [
+                "NdarrayMixin"
+              ]
+            },
+            {
+              "evidence": [
+                "title_filename:structured"
+              ],
+              "path": "astropy/units/structured.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:transform"
+              ],
+              "path": "astropy/visualization/transform.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "definition:data"
+              ],
+              "path": "astropy/coordinates/baseframe.py",
+              "score": 15,
+              "symbols": [
+                "data"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:data"
+              ],
+              "path": "astropy/io/fits/hdu/base.py",
+              "score": 15,
+              "symbols": [
+                "data"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:data"
+              ],
+              "path": "astropy/io/fits/hdu/compressed.py",
+              "score": 15,
+              "symbols": [
+                "data"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:data"
+              ],
+              "path": "astropy/io/fits/hdu/groups.py",
+              "score": 15,
+              "symbols": [
+                "data"
+              ]
+            }
+          ],
+          "test_targets": [
+            {
+              "evidence": [
+                "target_filename",
+                "target_package"
+              ],
+              "path": "astropy/table/tests/test_table.py",
+              "score": 40,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:structured"
+              ],
+              "path": "astropy/io/fits/tests/test_structured.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:transform"
+              ],
+              "path": "astropy/io/misc/asdf/tags/transform/tests/test_transform.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:column"
+              ],
+              "path": "astropy/table/tests/test_column.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:structured"
+              ],
+              "path": "astropy/units/tests/test_structured.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "target_filename"
+              ],
+              "path": "astropy/cosmology/io/tests/test_table.py",
+              "score": 30,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "target_filename"
+              ],
+              "path": "astropy/io/fits/tests/test_table.py",
+              "score": 30,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "target_filename"
+              ],
+              "path": "astropy/io/misc/asdf/tags/table/tests/test_table.py",
+              "score": 30,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "target_filename"
+              ],
+              "path": "astropy/io/votable/tests/table_test.py",
+              "score": 30,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "target_filename"
+              ],
+              "path": "astropy/utils/masked/tests/test_table.py",
+              "score": 30,
+              "symbols": []
+            }
+          ]
+        },
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 2,
+          "candidates": [
+            "astropy/uncertainty/core.py",
+            "astropy/utils/masked/core.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "prediction": {
+        "instance_id": "astropy__astropy-13236",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_patch": ""
+      },
+      "problem_statement_sha256": "1f01b57c4e17057a2427b8ed897618f91782d22e98804b706826ba936a3d5ec4",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "6ecddeeb73fbe9b4280607005d6f9f50e54075c0cae04ac408b8b642d746c667"
+    },
+    {
+      "adapter_trace": {
+        "executed": false,
+        "instance_id": "astropy__astropy-13398",
+        "mode_forwarded": false,
+        "mode_requested": "EPISTEMIC",
+        "mode_semantics": "MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC (open_model().solve() only special-cases RECALL and SOLVE_OR_LEARN; all other strings use ordinary routing)",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_reason": "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER",
+        "model_status": null,
+        "outcome": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+        "patch_chars": 0,
+        "patch_check": "NOT_ATTEMPTED",
+        "patch_source": "NONE",
+        "schema": "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
+      },
+      "base_commit": "6500928dc0e57be8f06d1162eacc3ba5e2eff692",
+      "instance_id": "astropy__astropy-13398",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "ranked_candidates": {
+          "authority": "NONE__ADVISORY_ONLY",
+          "omitted_files": 0,
+          "scan_complete": true,
+          "scanned_bytes": 12647048,
+          "scanned_files": 915,
+          "symbols_truncated": false,
+          "target_paths": [
+            {
+              "evidence": [
+                "import_module:astropy/coordinates/transformations",
+                "definition:FunctionTransformWithFiniteDifference",
+                "definition:transform",
+                "title_filename:transformations"
+              ],
+              "path": "astropy/coordinates/transformations.py",
+              "score": 145,
+              "symbols": [
+                "transform",
+                "FunctionTransformWithFiniteDifference"
+              ]
+            },
+            {
+              "evidence": [
+                "import_module:astropy/coordinates/matrix_utilities",
+                "definition:matrix_transpose",
+                "definition:rotation_matrix"
+              ],
+              "path": "astropy/coordinates/matrix_utilities.py",
+              "score": 98,
+              "symbols": [
+                "rotation_matrix",
+                "matrix_transpose"
+              ]
+            },
+            {
+              "evidence": [
+                "import_module:astropy/coordinates/baseframe",
+                "definition:realize_frame"
+              ],
+              "path": "astropy/coordinates/baseframe.py",
+              "score": 86,
+              "symbols": [
+                "realize_frame"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:ITRS",
+                "title_filename:itrs"
+              ],
+              "path": "astropy/coordinates/builtin_frames/itrs.py",
+              "score": 75,
+              "symbols": [
+                "ITRS"
+              ]
+            },
+            {
+              "evidence": [
+                "quoted_source_lines:2"
+              ],
+              "path": "astropy/coordinates/builtin_frames/cirs_observed_transforms.py",
+              "score": 40,
+              "symbols": [
+                "cirs_to_observed"
+              ]
+            },
+            {
+              "evidence": [
+                "quoted_source_lines:1"
+              ],
+              "path": "astropy/coordinates/builtin_frames/icrs_observed_transforms.py",
+              "score": 20,
+              "symbols": [
+                "icrs_to_observed"
+              ]
+            },
+            {
+              "evidence": [
+                "quoted_source_lines:1"
+              ],
+              "path": "astropy/coordinates/erfa_astrom.py",
+              "score": 20,
+              "symbols": [
+                "apio"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:AltAz"
+              ],
+              "path": "astropy/coordinates/builtin_frames/altaz.py",
+              "score": 15,
+              "symbols": [
+                "AltAz"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:HADec"
+              ],
+              "path": "astropy/coordinates/builtin_frames/hadec.py",
+              "score": 15,
+              "symbols": [
+                "HADec"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:transform"
+              ],
+              "path": "astropy/coordinates/representation.py",
+              "score": 15,
+              "symbols": [
+                "transform"
+              ]
+            }
+          ],
+          "test_targets": [
+            {
+              "evidence": [
+                "title_filename:transformations",
+                "target_filename",
+                "target_package"
+              ],
+              "path": "astropy/coordinates/tests/test_transformations.py",
+              "score": 75,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "definition:transform"
+              ],
+              "path": "astropy/visualization/wcsaxes/tests/test_misc.py",
+              "score": 15,
+              "symbols": [
+                "transform"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:transform"
+              ],
+              "path": "astropy/visualization/wcsaxes/tests/test_transform_coord_meta.py",
+              "score": 15,
+              "symbols": [
+                "transform"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:to_value"
+              ],
+              "path": "astropy/units/tests/test_quantity.py",
+              "score": 6,
+              "symbols": [
+                "to_value"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:test_straight_overhead"
+              ],
+              "path": "astropy/coordinates/tests/test_intermediate_transformations.py",
+              "score": 3,
+              "symbols": [
+                "test_straight_overhead"
+              ]
+            }
+          ]
+        },
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 12,
+          "candidates": [
+            "astropy/coordinates/baseframe.py",
+            "astropy/coordinates/earth.py",
+            "astropy/coordinates/matrix_utilities.py",
+            "astropy/coordinates/representation.py",
+            "astropy/coordinates/spectral_quantity.py",
+            "astropy/coordinates/transformations.py",
+            "astropy/time/core.py",
+            "astropy/time/formats.py",
+            "astropy/units/quantity.py",
+            "astropy/visualization/wcsaxes/frame.py",
+            "astropy/visualization/wcsaxes/transforms.py",
+            "astropy/visualization/wcsaxes/wcsapi.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "prediction": {
+        "instance_id": "astropy__astropy-13398",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_patch": ""
+      },
+      "problem_statement_sha256": "c26c8dc258dc5cb9dd34f30bdbaaed3f19a8ada137e0f19d81d7f57dc5f11bba",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "40e0109031eb10372d56e36cec87e7172462cfd870e537051f2fc6c6494733bc"
+    },
+    {
+      "adapter_trace": {
+        "executed": false,
+        "instance_id": "astropy__astropy-13453",
+        "mode_forwarded": false,
+        "mode_requested": "EPISTEMIC",
+        "mode_semantics": "MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC (open_model().solve() only special-cases RECALL and SOLVE_OR_LEARN; all other strings use ordinary routing)",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_reason": "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER",
+        "model_status": null,
+        "outcome": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+        "patch_chars": 0,
+        "patch_check": "NOT_ATTEMPTED",
+        "patch_source": "NONE",
+        "schema": "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
+      },
+      "base_commit": "19cc80471739bcb67b7e8099246b391c355023ee",
+      "instance_id": "astropy__astropy-13453",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "ranked_candidates": {
+          "authority": "NONE__ADVISORY_ONLY",
+          "omitted_files": 0,
+          "scan_complete": true,
+          "scanned_bytes": 12641217,
+          "scanned_files": 915,
+          "symbols_truncated": false,
+          "target_paths": [
+            {
+              "evidence": [
+                "import_package:astropy/table",
+                "definition:Table",
+                "definition:copy",
+                "title_filename:table"
+              ],
+              "path": "astropy/table/table.py",
+              "score": 75,
+              "symbols": [
+                "Table",
+                "copy"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:copy",
+                "definition:formats"
+              ],
+              "path": "astropy/io/fits/column.py",
+              "score": 52,
+              "symbols": [
+                "formats",
+                "copy"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:copy",
+                "definition:formats"
+              ],
+              "path": "astropy/io/fits/fitsrec.py",
+              "score": 52,
+              "symbols": [
+                "formats",
+                "copy"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:write",
+                "title_filename:html"
+              ],
+              "path": "astropy/io/ascii/html.py",
+              "score": 50,
+              "symbols": [
+                "write"
+              ]
+            },
+            {
+              "evidence": [
+                "definition:copy",
+                "title_filename:table"
+              ],
+              "path": "astropy/io/fits/hdu/table.py",
+              "score": 47,
+              "symbols": [
+                "copy"
+              ]
+            },
+            {
+              "evidence": [
+                "title_filename:table"
+              ],
+              "path": "astropy/cosmology/io/table.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table"
+              ],
+              "path": "astropy/io/misc/asdf/tags/table/table.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table"
+              ],
+              "path": "astropy/io/votable/table.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:html"
+              ],
+              "path": "astropy/io/votable/validator/html.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:formats"
+              ],
+              "path": "astropy/time/formats.py",
+              "score": 35,
+              "symbols": []
+            }
+          ],
+          "test_targets": [
+            {
+              "evidence": [
+                "import_package:astropy/table",
+                "title_filename:table",
+                "target_filename",
+                "target_package"
+              ],
+              "path": "astropy/table/tests/test_table.py",
+              "score": 91,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table",
+                "target_filename"
+              ],
+              "path": "astropy/cosmology/io/tests/test_table.py",
+              "score": 65,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table",
+                "target_filename"
+              ],
+              "path": "astropy/io/fits/tests/test_table.py",
+              "score": 65,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table",
+                "target_filename"
+              ],
+              "path": "astropy/io/misc/asdf/tags/table/tests/test_table.py",
+              "score": 65,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table",
+                "target_filename"
+              ],
+              "path": "astropy/io/votable/tests/table_test.py",
+              "score": 65,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:table",
+                "target_filename"
+              ],
+              "path": "astropy/utils/masked/tests/test_table.py",
+              "score": 65,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "title_filename:html"
+              ],
+              "path": "astropy/io/ascii/tests/test_html.py",
+              "score": 35,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/table"
+              ],
+              "path": "astropy/table/mixins/tests/test_dask.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/table"
+              ],
+              "path": "astropy/table/mixins/tests/test_registry.py",
+              "score": 16,
+              "symbols": []
+            },
+            {
+              "evidence": [
+                "import_package:astropy/table"
+              ],
+              "path": "astropy/table/tests/test_array.py",
+              "score": 16,
+              "symbols": []
+            }
+          ]
+        },
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 38,
+          "candidates": [
+            "astropy/constants/constant.py",
+            "astropy/extern/configobj/configobj.py",
+            "astropy/io/ascii/basic.py",
+            "astropy/io/ascii/cds.py",
+            "astropy/io/ascii/core.py",
+            "astropy/io/ascii/daophot.py",
+            "astropy/io/ascii/ecsv.py",
+            "astropy/io/ascii/fastbasic.py",
+            "astropy/io/ascii/fixedwidth.py",
+            "astropy/io/ascii/html.py",
+            "astropy/io/ascii/ipac.py",
+            "astropy/io/ascii/latex.py",
+            "astropy/io/ascii/mrt.py",
+            "astropy/io/ascii/qdp.py",
+            "astropy/io/ascii/rst.py",
+            "astropy/io/ascii/sextractor.py",
+            "astropy/io/ascii/ui.py",
+            "astropy/io/fits/column.py",
+            "astropy/io/fits/file.py",
+            "astropy/io/fits/fitsrec.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "prediction": {
+        "instance_id": "astropy__astropy-13453",
+        "model_name_or_path": "b81b2217-epistemic-v1",
+        "model_patch": ""
+      },
+      "problem_statement_sha256": "be929904c3062b54da2fa3ad7de338bd7f1f41a5aa48e64bec41f244d6e17c5a",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "b3efd052912d34ae1473cc73f8216ebee93691aa44707023bfde149cc79cdaf7"
+    }
+  ],
+  "localizer_sha256": "f4d9e1f133d5d151dd2d7168c6247072958d4c9a6547f537651b3ed701dd28d5",
+  "note": "Read-only localization and adapter refusal only; no repair, test, receipt, or score. Rows from a pinned third-party mirror. Source archives requested by base commit but not git-object verified. No gold/test fields passed to localizer or adapter. Non-Python regular files are empty placeholders; symlinks and special files omitted.",
+  "repair_runs": 0,
+  "schema": "LOCAL_SWE_REAL_ISSUE_LOCALIZATION_AND_REFUSAL_V1",
+  "source": "https://github.com/hyang0129/onlycodes",
+  "source_commit": "7548222e5f33b4e760b3cbeb193e5403f8e2e6cc",
+  "verified_patches": null
+}

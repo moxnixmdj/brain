@@ -192,6 +192,22 @@ class RepairCandidateBrokerTests(unittest.TestCase):
                 broker.snapshot_project(self.project)
         self.assertEqual(changed, [True])
 
+    def test_expanded_snapshot_limits_are_bounded_and_do_not_change_staging_defaults(self):
+        expanded = broker.snapshot_project(self.project, limits=broker.FIXTURE_WORKTREE_LIMITS)
+        self.assertEqual(expanded.digest, self.original.digest)
+        for bad in (True, 0, -1, 25_001):
+            with self.subTest(max_files=bad):
+                limits = replace(broker.FIXTURE_WORKTREE_LIMITS, max_files=bad)
+                with self.assertRaisesRegex(broker.CandidateDenied, 'SNAPSHOT_LIMITS_INVALID'):
+                    broker.snapshot_project(self.project, limits=limits)
+        for index in range(broker.MAX_FILES + 1):
+            (self.project / 'src' / f'f{index}.py').write_text('pass\n')
+        with self.assertRaisesRegex(broker.CandidateDenied, 'TOO_MANY_FILES'):
+            broker.snapshot_project(self.project)
+        large = broker.snapshot_project(self.project, limits=broker.FIXTURE_WORKTREE_LIMITS)
+        with self.assertRaisesRegex(broker.CandidateDenied, 'SNAPSHOT_INVALID'):
+            broker.stage_project(large, staging_parent=self.staging_parent)
+
     def test_forged_snapshot_and_resource_excess_are_denied(self):
         path, data = self.original.files[0]
         forged = replace(self.original, files=((path, data + b'x'),) + self.original.files[1:])

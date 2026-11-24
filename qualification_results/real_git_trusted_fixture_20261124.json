@@ -1,0 +1,53 @@
+{
+  "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+  "carrier_qualified": false,
+  "description": "Trusted fixed script appends a fixture comment to two files; it does not run project code or repair an issue. Producer-only diagnostics, not carrier qualification or an independent attestation.",
+  "fixture_only": true,
+  "fixture_script_sha256_is_before_path_redaction": "71da27035d68520a0315038de83e4ccac17232c1be416256cdea8acb295a0479",
+  "fixture_script_with_host_path_redacted": "from pathlib import Path\ntry:\n    Path('HOST_SENTINEL_PATH').write_bytes(b'ESCAPE')\nexcept OSError:\n    pass\nelse:\n    raise RuntimeError('host sentinel accessible')\ntry:\n    Path('/work/project/.git/HEAD').write_text('fake')\nexcept FileNotFoundError:\n    pass\nelse:\n    raise RuntimeError('git metadata accessible')\nfor path in ('astropy/modeling/separable.py','astropy/modeling/core.py'):\n    p=Path('/work/project') / path\n    p.write_bytes(p.read_bytes() + b'\\n# trusted collection fixture, not a repair\\n')\n",
+  "git_metadata_quarantined_during_worker": true,
+  "host_sentinel_unchanged": true,
+  "independent_verification": false,
+  "publication_authority": false,
+  "receipt": {
+    "after_snapshot_sha256": "46b64f9f1add8ff7965096547870b5de21ebb800c980d0c2960c96f341144944",
+    "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+    "before_snapshot_sha256": "d5a836f362468eeb871795350b32e12b856b81a621b41d7dca55d4eb03fc4435",
+    "effects": {
+      "files/astropy/modeling/core.py": {
+        "sha256": "50d5e09523049067429f7fe4c7edcaca85879ff44180e7275fbcd4c85276fec0",
+        "size": 175867
+      },
+      "files/astropy/modeling/separable.py": {
+        "sha256": "b801b5eb9d4e029c169eb4b3503d28b1e12f9a4050c58732c12c3dcc12b83069",
+        "size": 9922
+      },
+      "patch.diff": {
+        "sha256": "c2021fc721398ce0482af4021204a474c25fcdab9c994a8096398d6d185f3b42",
+        "size": 657
+      }
+    },
+    "fixture_returncode": 0,
+    "policy_sha256": "1fe6a296def9b240ba87ec7fc34f09bfa71d9e0c851dea98e8e05e60c405c698",
+    "schema": "PROJECT_BRAIN_ISOLATED_WORKTREE_FIXTURE_V1"
+  },
+  "receipt_sha256": "3fca99a2d0d99070d3ce98978a533b6b1e66c8fded9d52497bf2f3b19cf2b838",
+  "schema": "REAL_SOURCE_TRUSTED_FIXTURE_COLLECTION_DIAGNOSTIC_V1",
+  "separate_recomputation": {
+    "carrier_qualified": false,
+    "execution_authority": false,
+    "independent_attestation": false,
+    "patch_sha256": "c2021fc721398ce0482af4021204a474c25fcdab9c994a8096398d6d185f3b42",
+    "producer_built": true,
+    "publication_authority": false,
+    "receipt_sha256": "3fca99a2d0d99070d3ce98978a533b6b1e66c8fded9d52497bf2f3b19cf2b838",
+    "status": "FIXTURE_BYTES_RECOMPUTED"
+  },
+  "source_checkout_verified_by_git": true,
+  "source_hashes_before_and_after_equal": {
+    "astropy/modeling/core.py": "13615f0d5a58344aa0054b03669f5badc519443b3578ecd78868f3fef9f7cb1e",
+    "astropy/modeling/separable.py": "cac38fe9744203c720d50d6c88dcdcb0d93a7b2326fe89911e83640ad5676b0f"
+  },
+  "source_url": "https://github.com/astropy/astropy.git",
+  "tests_run": false
+}

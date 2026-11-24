@@ -193,6 +193,14 @@ def inspect(capability_id: str) -> dict[str, Any]:
     verification = entry.get("verification")
     if not isinstance(verification, Mapping) or not verification:
         raise BoundExecutionError("BOUND_CAPABILITY_VERIFICATION_MISSING:" + cid)
+    # The historical marker/mission-anchor predicate below does not authenticate
+    # a verifier, bind reviewed bytes, or qualify a carrier. For host-writing
+    # repair, none of those legacy encodings is admission evidence. No owner
+    # trust anchor or independently authenticated attestation verifier has been
+    # configured; refuse this capability unconditionally until that is designed,
+    # reviewed, and implemented. Other capabilities keep their existing policy.
+    if cid == "python.software.repair.apply.verified.v1":
+        raise BoundExecutionError("BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT:" + cid)
     # `independently_verified` (with -ly) is the spelling the verification
     # missions actually write; 14 of 70 entries carry it as boolean True with
     # real mission ids and observed effects on file, and this predicate did not
