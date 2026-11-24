@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_SCAN_AND_DIFF_AGAINST_MEMORY_RECEIPT_V1",
+  "action_id": "SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1",
+  "authority": "NONE__SANDBOX_MEASUREMENT",
+  "date": "2026-11-24",
+  "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+  "the_idea_tested": {
+    "owner_proposal": "enter an arbitrary environment, scan everything, diff the scan against memory, and what is not matched is what to go and learn",
+    "verdict": "the mechanism works; the naive form of it is worthless; two specific defects had to be found first"
+  },
+  "what_was_already_in_the_project": {
+    "environment_probe_v1": "snapshot(root) -> path/(size,mtime) -- observation with no notion of kind",
+    "discover_v1": "binaries() and entrypoints() -- reads what exists, not what it can read",
+    "ignorance_ledger_v1": "ranked gaps, value = p_useful/(1+cost), Beta prior (untried 0.5, tried-and-useless 0.045)",
+    "jit_knowledge_v1": "the instant-knowledge channel; needs >=2 independent sources before anything counts as known",
+    "cli_contract_inference_v1": "MAGIC_BY_SUFFIX -- suffix->magic table; the exact wrong shape this round replaces",
+    "missing": "nothing joined scan -> diff -> ranked gap. That join is this round's work."
+  },
+  "what_the_frontier_shows": {
+    "look_before_you_leap_2605.16143": "task-oriented training does NOT reliably yield exploration; NAIVE exploration can HURT performance; Explore-then-Act decouples information gathering from task execution",
+    "studying_without_a_syllabus_2609.10824": "an open-ended meta-agent that studies an environment task-agnostically and CHOOSES what artifacts to produce beats fixed preprocessing on 5 of 6 benchmarks -- the owner's idea, validated",
+    "agentcl_2606.02461": "continual learning is NOT solved by storing more trajectories; the hard part is deciding what to abstract, retrieve or ignore, and whether reuse was genuine or incidental",
+    "skillrl_2602.08234": "raw trajectories are redundant and noise-heavy; abstraction into skills is what transfers (10-20x compression, better utility)"
+  },
+  "two_defects_found_by_measurement": [
+    {
+      "defect": "the scanner used `python3 -m py_compile` as its python validator",
+      "why_it_mattered": "py_compile WRITES __pycache__ next to the file. A scan of intake/ then read the .pyc files its own validator had created and reported markdown as `json+python+utf8_text` -- a measurement that changes the thing it measures",
+      "fix": "ast.parse, which judges the same property and writes nothing",
+      "pinned_by": "test_the_scan_does_not_leave_artefacts_behind"
+    },
+    {
+      "defect": "every kind nothing can read shares the signature `()`",
+      "why_it_mattered": "learning it made the FIRST unreadable file teach memory that unreadable bytes are a known kind, so every later unknown file was reported KNOWN -- the machine confidently claiming to know exactly the things it did not know",
+      "fix": "`()` is never learned; absence is never evidence",
+      "pinned_by": "test_an_absence_is_never_learned_as_a_kind"
+    }
+  ],
+  "the_retraction": {
+    "claim_i_made_then_withdrew": "signature keying transfers better than suffix keying (0.8 vs 0.6)",
+    "why_withdrawn": "that number came from nine hand-made files in two tiny directories",
+    "real_measurement": "leave-one-out over 100 real files: signature 100/100, suffix 100/100, signatures buy 0 -- the repository holds only three signature classes, so any key that has seen a .json recognises the next one",
+    "what_signatures_do_buy": "lying names. Of seven test files, three declare a kind their bytes are refused by (lying.json does not parse, lying.py does not parse, lying.png is not a PNG). A suffix rule calls all three known; the content signature catches all three",
+    "pinned_by": "test_signature_keying_is_not_claimed_to_transfer_better"
+  },
+  "measured": {
+    "scan_cost": "40 files: 5.1 s -> 1.9 s after necessary-magic skipping; unzip -t alone was ~0.2 s per file",
+    "real_transfer": "learned on canonical/verification + canonical/action_intents, scanned intake/: 40 files, 27 KNOWN, 13 UNKNOWN, 0 unread",
+    "ranked_gaps": "an unaccepted kind ranks value 0.250 over half-known kinds at 0.167, from ignorance_ledger_v1's own formula rather than a rule written here",
+    "validators": "json, python, utf8_text, png, gzip, tar, zip -- each one REJECTS what is not its kind; `cat` is deliberately excluded because it accepts everything"
+  },
+  "honest_limits": [
+    "the mechanism transfers only among KINDS the machine has a declared validator for; a kind with no validator is UNKNOWN forever until one exists, and that is the real bottleneck",
+    "seven validators is a seed, not coverage; the repository's own file kinds (docx, xlsx, pdf) are not covered",
+    "no fetching was joined in this round: the scan produces the gap list and jit_knowledge_v1 can resolve a gap, but the automatic scan->fetch->verify round trip was not measured",
+    "no benchmark task was run; this is a mechanism measurement",
+    "authority NONE, sandbox only, independent verification OPEN"
+  ],
+  "next_bottleneck": "the VALIDATOR SET is the ceiling. Coverage of kinds is what decides how much of an unseen environment can be called known, and adding validators is the thing to make cheap and automatic -- a program's own declaration of what it accepts is the source, the same join as round 9's declared producer",
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}
