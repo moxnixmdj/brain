@@ -110,7 +110,7 @@ async def run_experimental(instruction: str, environment: Any, *, brain_source: 
     baseline = before.get('baseline')
     if not isinstance(baseline, dict) or not baseline:
         raise ExperimentalVMError('PROCESS_BASELINE_INVALID')
-    result = await run_epistemic_goal(instruction, checked, suite=suite)
+    result = await run_epistemic_goal(instruction, checked, suite=suite, repo=repo)
     # Cleanup is best effort, not a proof. Even a clean snapshot can miss a
     # detached process. An uncertain command never leads to patch publication.
     cleanup = await _process_command(checked, 'cleanup', baseline)

@@ -49,17 +49,28 @@ def main() -> int:
             print(MARKER + json.dumps(proposal, sort_keys=True), flush=True)
             return 0
 
+    # Inspect only through this container worker; these hints are untrusted
+    # observations, not an executable plan or evidence of a failing test.
+    grounding = None
+    if inputs.get("harbor_suite") == "pro-v2" and inputs.get("observations") == []:
+        from canonical.runtime.harbor_pro_grounding_v1 import ground
+        grounding = ground(inputs.get("harbor_task"), inputs.get("harbor_repo"))
+
     from canonical.runtime.brain_unified_model_v1 import open_model
 
     # Keep the routing ledger out of the read-only Brain tree. This setting
     # alone cannot constrain all writes made by every route.
     inputs = dict(inputs)
+    if grounding is not None:
+        inputs["harbor_grounding"] = grounding
     inputs["ledger_db_path"] = "/tmp/brain-harbor-routing.sqlite"
     result = open_model(root=root).solve(
         request["goal"], inputs=inputs, mode=mode, context_paths=[], cwd=os.getcwd()
     )
     if not isinstance(result, dict):
         raise ValueError("SOLVER_RESULT_NOT_OBJECT")
+    if grounding is not None:
+        result["harbor_grounding"] = grounding
     print(MARKER + json.dumps(result, sort_keys=True, default=str), flush=True)
     return 0
 

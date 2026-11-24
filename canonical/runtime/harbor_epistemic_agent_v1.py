@@ -216,6 +216,7 @@ async def run_epistemic_goal(
     mode: str = DEFAULT_MODE,
     max_cycles: int = MAX_CYCLES,
     suite: str = '',
+    repo: str = '/app',
 ) -> dict[str, Any]:
     """Container transport loop; the caller owns boundary checks.
 
@@ -243,6 +244,7 @@ async def run_epistemic_goal(
                     "inputs": {
                         "harbor_task": text,
                         "harbor_suite": suite,
+                        "harbor_repo": repo,
                         "cycle": cycle,
                         "observations": list(observations),
                     },
@@ -272,6 +274,11 @@ async def run_epistemic_goal(
             ),
             "proposal_source": str(result.get("proposal_source") or "OPEN_MODEL"),
         }
+        grounding = result.get("harbor_grounding")
+        if isinstance(grounding, dict):
+            # Container-supplied observations are advisory, never action or
+            # verification authority. Preserve them even when routing refuses.
+            envelope["harbor_grounding"] = grounding
         actions = extract_actions(result)
         envelope["proposed_actions"] = [str(a.get("type") or "") for a in actions]
         if not envelope["model_pass"] or not actions:

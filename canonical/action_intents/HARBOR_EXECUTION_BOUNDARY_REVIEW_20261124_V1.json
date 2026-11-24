@@ -66,6 +66,17 @@
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "container_pro_grounding_20261124": {
+    "implemented_scope": "Read-only bounded Pro task grounding inside the existing container solver dispatch: identify explicitly mentioned existing or missing Python, JavaScript and TypeScript paths, possible test files and available runner executables; include existing Python-only ranked localizer hints when applicable. All observations are advisory, with no test execution, generated patch, action proposal or success claim.",
+    "incremental_spend_usd": 0,
+    "limitations": "No general CLI planner, JavaScript/TypeScript repair, new-module implementation, test execution or benchmark success. No new benchmark run is claimed by this slice.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Temporary real filesystem tests and worker transport regression; official pristine replay is the only benchmark result, and these tests do not establish container isolation.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "request": "Self-contained terminal and Pro solver, official two-by-two verifier smoke.",
+    "route_order": "Reuse existing checked Harbor container worker and Python localizer; add conservative cross-language explicit-path and test inventory. Do not bypass repair or confinement gates or promote guesses to failing-test witnesses."
+  },
   "container_transport_scope_20261124": {
     "alternatives": "Do not call host solver; do not trust flags, writable uploads, or a mocked environment as isolation; do not emit an unverified patch or claim a verifier run.",
     "causal_blocker": "Production container mount, network and verifier effects have not been verified; directory upload is not read-only.",
