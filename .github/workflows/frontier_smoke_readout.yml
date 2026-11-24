@@ -1,0 +1,87 @@
+name: Frontier smoke artifact readout
+
+# One branch and one file only. This job reads an existing artifact and does
+# not rerun the benchmark or execute artifact contents.
+on:
+  push:
+    branches: ["arena/8e7b5375-brain"]
+    paths: [".github/workflows/frontier_smoke_readout.yml"]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  readout:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Download the existing smoke artifact
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: frontier-pro-smoke-45398863793-1
+          run-id: 45398863793
+          github-token: ${{ github.token }}
+          path: smoke-results
+      - name: Publish compact, unverified trial facts as annotations
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          from pathlib import Path
+          import sys
+
+          root = Path('smoke-results')
+          def emit(title, data):
+              value = json.dumps(data, sort_keys=True, separators=(',', ':'), ensure_ascii=True)
+              value = value.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+              print(f'::notice title={title}::{value}')
+          def read(path):
+              return json.loads(path.read_text(encoding='utf-8'))
+          def trials(job):
+              result = {}
+              for file in sorted((root / job).glob('instance_*/result.json')):
+                  data = read(file)
+                  key = data['task_name'].split('/')[-1]
+                  if key in result:
+                      raise ValueError('duplicate task result')
+                  result[key] = (file.parent, data)
+              return result
+          ids = (root / 'selected_hard51_ids.txt').read_text(encoding='utf-8').splitlines()
+          audit = read(root / 'smoke_audit.json')
+          emit('Smoke audit', {'selected_count': audit.get('selected_count'), 'issues': audit.get('issues')})
+          producer = trials('brain-pro-smoke')
+          regrade = trials('brain-pro-smoke-regrade')
+          for task in ids:
+              src_dir, src = producer[task]
+              dst_dir, dst = regrade[task]
+              trace = read(src_dir / 'agent' / 'brain_epistemic_trace.json')
+              replay = read(dst_dir / 'agent' / 'replay.json')
+              patch = (src_dir / 'agent' / 'model.patch').read_bytes()
+              row = {
+                  'task': task,
+                  'producer_exception': src.get('exception_info'),
+                  'regrade_exception': dst.get('exception_info'),
+                  'trace_status': trace.get('status'),
+                  'dispatch_status': trace.get('external_harbor_vm_eval_status'),
+                  'execution_authorized': trace.get('execution_authorized'),
+                  'docker_compose_id_present': bool(trace.get('compose_container_id')),
+                  'egress_verified': trace.get('egress_verified'),
+                  'patch_emitted': trace.get('patch_emitted'),
+                  'patch_bytes': len(patch),
+                  'patch_sha256': hashlib.sha256(patch).hexdigest(),
+                  'replay_patch_present': replay.get('patch') is not None,
+                  'replay_apply_rc': replay.get('apply_rc'),
+                  'verifier_result': dst.get('verifier_result'),
+              }
+              # Only report exception summaries, not arbitrary task output.
+              for key in ('producer_exception', 'regrade_exception'):
+                  if isinstance(row[key], dict):
+                      row[key] = {'exception_type': row[key].get('exception_type'),
+                                  'exception_message': str(row[key].get('exception_message', ''))[:500]}
+              emit('Smoke task', row)
+          if len(ids) != 2 or audit.get('issues'):
+              sys.exit(1)
+          PY
