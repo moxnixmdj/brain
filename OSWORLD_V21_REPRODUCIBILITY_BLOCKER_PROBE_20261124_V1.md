@@ -45,3 +45,7 @@ The iteration-11 local gate wrapper passed `ALL_GATES_OK True` with 30 checks at
 ## Workflow robustness follow-up
 
 The initial 10-step workflow had four embedded Python blocks. A fifth block now creates sanitized all-false `runner_probe.json` and `source_verification.json` files only if earlier measurement steps produce no JSON. The classifier then still emits a fail-closed `BLOCKED_REPRODUCIBLE_OSWORLD_V21_EVALUATION` decision, with no benchmark run, no score and no credit. The OIDC receipt step marks any missing source, probe or decision as failed, derives `gated_dataset_status_probes` and `external_network_probe_calls` from sanitized runner facts, and the landing step guards the decision copy. Workflow YAML/Py checks now compile 10 steps and 5 Python blocks. Exact Brain-owned policy/test SHA-256 bindings are unchanged.
+
+## Post-robustness full-gate rerun
+
+After the fifth embedded Python block, `/tmp/run_iter11_local_gates.py` passed `ALL_GATES_OK True` with 30 checks at `2026-11-24T04:01:28Z` on HEAD `ab05540d`. The rerun covered 10 steps / 5 compiled Python blocks, exact two-source binding, 27 source checks, 13 pinned file hashes, the sanitized 10-blocker fail-closed decision, three prior OIDC run references, no raw benchmark task files and 200 selected regression tests (`200 passed in 221.13s`). Workflow Git blob `143bfa0f4d5bd010cd92dc818ab112fbcf69caa2`. This remains producer-side authority only; the distinct OIDC runner receipt is still pending. No OSWorld task, score, credit or §6 verification is claimed.
