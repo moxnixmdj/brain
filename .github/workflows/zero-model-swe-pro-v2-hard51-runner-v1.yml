@@ -1,0 +1,815 @@
+name: Zero-model SWE-bench Pro V2 HARD-51 purpose runner
+
+# WHY THIS WORKFLOW EXISTS
+#
+# Iteration 9 answered the harness-authority question but returned three 0.0
+# Terminal-Bench 4.1 reward vectors. This workflow answers the next narrow,
+# honest question: can a Brain-owned zero-inference purpose compiler turn only
+# instruction-supplied finite transformations and visible repository evidence
+# into a non-empty patch on fresh HARD-51 tasks, without hidden-test leakage,
+# borrowed outputs or model calls? It runs three run-id-seeded tasks from the
+# pinned SWE-bench Pro V2 release and regrades the captured patch in a fresh
+# container using the release's own PatchReplayAgent. It does not register a
+# capability, claim an aggregate benchmark score, change terminal truth, merge,
+# or satisfy section 6.
+#
+# The local producer never writes the authoritative receipt. This distinct
+# GitHub Actions OIDC verifier binds its claims to the workflow run and commits
+# only the sanitized receipt, receipt sidecar and reward log on push.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml"
+      - "canonical/harbor/brain_zero_model_purpose_policy_v2.py"
+      - "canonical/harbor/brain_zero_model_purpose_agent_v2.py"
+      - "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py"
+      - "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py"
+
+concurrency:
+  group: zero-model-swe-pro-v2-hard51-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+  HARBOR_VERSION: "0.27.0"
+  SWE_TAG: "v2.0.0"
+  SWE_RELEASE_SHA: "66f92766bba642462d4bbe5479e83f91f9211862"
+  SWE_REPO_SHA256SUMS_SHA256: "9d84f8507c89241d42d8b3ef911600a1ec75dbbb32687ce9b45b93318502c0bd"
+  SWE_HARD51_IDS_SHA256: "6e35e84708a26443e1746ae928940555a3188654c90f3a2eb691f4f699482bd1"
+  SWE_PATCH_REPLAY_SHA256: "5c8b344de37164e9723f1724c2573013957fb644c3913a64c12c1718c737d876"
+  SWE_RELEASE_ASSET_SHA256SUMS_SHA256: "2377c1a2462a911cca428611494d2595a17bd9ddf5af2e476c77566b0b40ed9a"
+  SWE_RELEASE_TASKS_ZIP_SHA256: "1b4e97502e7c73c6c96d86fd72ae3b67cb081af1796784157fe3097b34406947"
+  AGENT_IMPORT_PATH: "canonical.harbor.brain_zero_model_purpose_agent_v2:ZeroModelBrainPurposeAgentV2"
+  REPLAY_AGENT_IMPORT_PATH: "patch_replay:PatchReplayAgent"
+  TASK_COUNT: "3"
+  JOB_NAME: "brain-no-inference-swe-pro-v2-hard51"
+  SWE_ROOT: "/tmp/swe_pro_v2"
+  SWE_SUBSET: "/tmp/swe_hard51_subset"
+  INITIAL_JOBS_DIR: "/tmp/harbor_initial_jobs"
+  REGRADE_JOBS_DIR: "/tmp/harbor_regrade_jobs"
+
+jobs:
+  hard_benchmark_attempt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Provision pinned Harbor and verify Docker
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          python3 -m pip install --disable-pip-version-check "harbor==${HARBOR_VERSION}"
+          python3 -c "import importlib.metadata as m; v=m.version('harbor'); assert v=='${HARBOR_VERSION}', v; print('HARBOR_VERSION_PASS', v)"
+          docker --version
+          docker compose version
+          docker info >/dev/null
+          echo "DOCKER_READY_PASS"
+      - name: Bind exact Brain-owned source bytes and audit no-inference surface
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          expected = {
+              "canonical/harbor/brain_zero_model_purpose_policy_v2.py": "b44e7532fd2513efd015e9943d48f996c3f0e025c0cdd7e4486d89bcae0c0fc2",
+              "canonical/harbor/brain_zero_model_purpose_agent_v2.py": "84e25ae93154b09cf8f1eeb0d55d092479b62abdaca5ec346fea5975434de0cb",
+              "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py": "d5a4c988fa8b9f6178780ebb9107873de5cfc34e5382bb350bf40883ae15afe7",
+              "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py": "316e17723c0607596e377b7139858348194ed684f28801d6d0a52234b94bd62f",
+          }
+          observed = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in expected}
+          if observed != expected:
+              raise SystemExit("EXACT_SOURCE_SHA256_BINDING_FAIL " + json.dumps({"expected": expected, "observed": observed}, sort_keys=True))
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess", "intake"}
+          imports = {}
+          marked_imports = []
+          for rel in expected:
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"))
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module)
+              roots = sorted({item.split(".")[0] for item in mods})
+              imports[rel] = roots
+              marked = sorted(set(roots) & forbidden)
+              if marked:
+                  marked_imports.append({"path": rel, "marked": marked})
+          if marked_imports:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_BRAIN_AGENT_SURFACE " + repr(marked_imports))
+          known_task_names = ("math-eval-grader", "html-js-filter", "bun-sourcemap-leak", "batched-eval-parity", "layout-config-recreation", "data-anonymization", "takens-embedding-lean", "fin-saccr-rwa", "hof-topology-interpenetration")
+          for rel in ("canonical/harbor/brain_zero_model_purpose_policy_v2.py", "canonical/harbor/brain_zero_model_purpose_agent_v2.py", "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py"):
+              lowered = (root / rel).read_text(encoding="utf-8").casefold()
+              leaked = [name for name in known_task_names if name in lowered]
+              if leaked:
+                  raise SystemExit("TASK_SPECIFIC_ANSWER_LEAK " + repr(leaked))
+          selector_source = (root / "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py").read_text(encoding="utf-8").casefold()
+          hidden_readers = ("instruction.md", "tests/test.sh", "solution/gold_patch.diff", "verifier/test.sh")
+          if any(marker in selector_source for marker in hidden_readers):
+              raise SystemExit("SELECTOR_READS_HIDDEN_TASK_CONTENT")
+          agent_source = (root / "canonical/harbor/brain_zero_model_purpose_agent_v2.py").read_text(encoding="utf-8")
+          if "model_name=None" not in agent_source or "model.patch" not in agent_source:
+              raise SystemExit("AGENT_MODEL_OR_PATCH_CAPTURE_CONTRACT_MISSING")
+          sys.path.insert(0, str(root))
+          from canonical.harbor import brain_zero_model_purpose_policy_v2 as policy
+          scan = policy.scan_command()
+          if not policy.scan_is_safe(scan) or "-prune" not in scan:
+              raise SystemExit("UNSAFE_SCAN_COMMAND")
+          generic = policy.plan("Create `/app/result.txt` with `hello`.", "/app/input.txt\n")
+          if generic["goal_family"] != "WRITE_QUOTED_FILE" or len(generic["commands"]) != 1 or not all(policy.command_is_safe(c) for c in generic["commands"]):
+              raise SystemExit("GENERIC_PURPOSE_PLAN_FAIL")
+          refusal = policy.plan("Fix the failing parser so edge cases behave correctly and add the missing behavior.", "/app/input.txt\n")
+          if refusal["goal_family"] != "UNRESOLVED_PURPOSE" or refusal["commands"]:
+              raise SystemExit("UNRESOLVED_PURPOSE_DID_NOT_REFUSE")
+          binding = {"schema": "BRAIN_SWE_PRO_V2_PURPOSE_SOURCE_BINDING_V1", "expected": expected, "observed": observed, "equal": True}
+          audit = {"schema": "BRAIN_SWE_PRO_V2_PURPOSE_STATIC_AUDIT_V1", "imports": imports, "marked_imports": marked_imports, "known_task_names_absent_from_agent_policy_selector": True, "selector_reads_hidden_task_content": False, "agent_model_name_none": True, "agent_patch_capture_present": True, "scan_is_safe": True, "generic_plan_is_safe": True, "unresolved_purpose_refused": True}
+          (out / "blob_bindings.json").write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_SOURCE_SHA256_BINDING_PASS", len(expected), "marked_imports", marked_imports)
+          PY
+      - name: Checkout and verify pinned SWE-bench Pro V2 release
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf "${SWE_ROOT}"
+          git clone --depth 1 --branch "${SWE_TAG}" https://github.com/scaleapi/SWE-bench_Pro-os.git "${SWE_ROOT}"
+          actual_sha="$(git -C "${SWE_ROOT}" rev-parse HEAD)"
+          if [ "${actual_sha}" != "${SWE_RELEASE_SHA}" ]; then
+            echo "SWE_RELEASE_SHA_FAIL expected=${SWE_RELEASE_SHA} observed=${actual_sha}" >&2
+            exit 1
+          fi
+          curl -fsSL --retry 5 --retry-all-errors --connect-timeout 10 \
+            "https://api.github.com/repos/scaleapi/SWE-bench_Pro-os/releases/tags/${SWE_TAG}" \
+            -o /tmp/swe_v2_release.json
+          (cd "${SWE_ROOT}/v2" && sha256sum -c SHA256SUMS > /tmp/swe_v2_sha_check.log)
+          mkdir -p "${WORKSPACE}/out"
+          cp /tmp/swe_v2_release.json "${WORKSPACE}/out/release_metadata.json"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          swe = pathlib.Path(os.environ["SWE_ROOT"])
+          out = root / "out"
+          release = json.loads(pathlib.Path("/tmp/swe_v2_release.json").read_text(encoding="utf-8"))
+          assets = {row.get("name"): str(row.get("digest") or "") for row in release.get("assets") or []}
+          def digest(rel):
+              return hashlib.sha256((swe / rel).read_bytes()).hexdigest()
+          task_dirs = sorted(p for p in (swe / "v2/tasks").iterdir() if p.is_dir())
+          hard_ids = [x for x in (swe / "v2/hard51_ids.txt").read_text(encoding="utf-8").splitlines() if x.strip()]
+          checks = {
+              "release_tag": release.get("tag_name") == os.environ["SWE_TAG"],
+              "git_head_sha": os.environ["SWE_RELEASE_SHA"] == "66f92766bba642462d4bbe5479e83f91f9211862",
+              "release_asset_sha256sums_digest": assets.get("SHA256SUMS") == "sha256:" + os.environ["SWE_RELEASE_ASSET_SHA256SUMS_SHA256"],
+              "release_asset_tasks_zip_digest": assets.get("swe-bench-pro-v2.0.0-tasks.zip") == "sha256:" + os.environ["SWE_RELEASE_TASKS_ZIP_SHA256"],
+              "repo_sha256sums_file": digest("v2/SHA256SUMS") == os.environ["SWE_REPO_SHA256SUMS_SHA256"],
+              "hard51_ids_file": digest("v2/hard51_ids.txt") == os.environ["SWE_HARD51_IDS_SHA256"],
+              "patch_replay_agent_file": digest("v2/tooling/patch_replay.py") == os.environ["SWE_PATCH_REPLAY_SHA256"],
+              "task_dir_count": len(task_dirs) == 642,
+              "hard51_count": len(hard_ids) == 51,
+              "sha256sums_check_pass": all(line.endswith(": OK") for line in pathlib.Path("/tmp/swe_v2_sha_check.log").read_text(encoding="utf-8").splitlines() if line),
+              "sha256sums_check_count": sum(1 for line in pathlib.Path("/tmp/swe_v2_sha_check.log").read_text(encoding="utf-8").splitlines() if line.endswith(": OK")) == 6436,
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("SWE_PRO_V2_SOURCE_VERIFICATION_FAIL " + repr(failed))
+          replay_source = (swe / "v2/tooling/patch_replay.py").read_text(encoding="utf-8")
+          tree = ast.parse(replay_source)
+          roots = set()
+          for node in ast.walk(tree):
+              if isinstance(node, ast.Import):
+                  roots.update(alias.name.split(".")[0] for alias in node.names)
+              elif isinstance(node, ast.ImportFrom) and node.module:
+                  roots.add(node.module.split(".")[0])
+          forbidden = {"urllib", "requests", "httpx", "socket", "openai", "anthropic", "litellm", "transformers", "torch", "subprocess"}
+          upstream_marked = sorted(roots & forbidden)
+          if upstream_marked:
+              raise SystemExit("UPSTREAM_REPLAY_AGENT_FORBIDDEN_IMPORT " + repr(upstream_marked))
+          audit_path = out / "static_audit.json"
+          audit = json.loads(audit_path.read_text(encoding="utf-8")) if audit_path.is_file() else {"schema": "BRAIN_SWE_PRO_V2_PURPOSE_STATIC_AUDIT_V1"}
+          audit["upstream_replay_agent_imports"] = sorted(roots)
+          audit["upstream_replay_agent_marked_imports"] = upstream_marked
+          audit["upstream_replay_agent_is_model_free"] = True
+          audit_path.write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          payload = {
+              "schema": "BRAIN_SWE_PRO_V2_SOURCE_VERIFICATION_V1",
+              "release_tag": os.environ["SWE_TAG"],
+              "release_sha": os.environ["SWE_RELEASE_SHA"],
+              "release_asset_digests": {
+                  "SHA256SUMS": os.environ["SWE_RELEASE_ASSET_SHA256SUMS_SHA256"],
+                  "swe-bench-pro-v2.0.0-tasks.zip": os.environ["SWE_RELEASE_TASKS_ZIP_SHA256"],
+              },
+              "repo_sha256sums_sha256": os.environ["SWE_REPO_SHA256SUMS_SHA256"],
+              "hard51_ids_sha256": os.environ["SWE_HARD51_IDS_SHA256"],
+              "patch_replay_sha256": os.environ["SWE_PATCH_REPLAY_SHA256"],
+              "task_dir_count": len(task_dirs),
+              "hard51_count": len(hard_ids),
+              "sha256sums_check_count": 6436,
+              "checks": checks,
+              "raw_tasks_saved_in_workspace": False,
+          }
+          (out / "source_verification.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("SWE_PRO_V2_SOURCE_AND_RELEASE_VERIFICATION_PASS", json.dumps(checks, sort_keys=True))
+          PY
+      - name: Select fresh run-id-seeded HARD-51 subset
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf "${SWE_SUBSET}"
+          python3 "${WORKSPACE}/canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py" \
+            --swe-root "${SWE_ROOT}" \
+            --out-dir "${SWE_SUBSET}" \
+            --run-id "${GITHUB_RUN_ID}" \
+            --count "${TASK_COUNT}" | tee "${WORKSPACE}/out/selection.log"
+          cp "${SWE_SUBSET}/selection.json" "${WORKSPACE}/out/selection.json"
+          cp "${SWE_SUBSET}/task_ids.txt" "${WORKSPACE}/out/task_ids.txt"
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          selection = json.loads((root / "out/selection.json").read_text(encoding="utf-8"))
+          count = int(os.environ["TASK_COUNT"])
+          rows = selection.get("tasks") or []
+          checks = {
+              "selected_count": selection.get("selected_task_count") == count == len(rows),
+              "hard51_count": selection.get("hard51_count") == 51,
+              "task_count": selection.get("task_count") == 642,
+              "selection_seed": selection.get("selection_seed") == "sha256(run_id:task_id)",
+              "release_sha": selection.get("release_sha") == os.environ["SWE_RELEASE_SHA"],
+              "no_seen_task_ids": selection.get("excluded_seen_task_ids") == [],
+              "metadata_checks_pass": all(bool(v) for v in (selection.get("checks") or {}).values()),
+              "no_instruction_content_read": selection.get("source_reads_instruction_content") is False,
+              "no_solution_or_test_content_read": selection.get("source_reads_solution_or_test_content") is False,
+              "no_raw_tasks_in_workspace": selection.get("raw_benchmark_tasks_saved_in_workspace") is False,
+              "hidden_boundaries": selection.get("hidden_test_reading") is False and selection.get("borrowed_outputs") is False,
+              "model_and_network_free": selection.get("model_calls") == 0 and selection.get("runtime_network_calls") == 0,
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("FRESH_HARD51_SELECTION_CHECK_FAIL " + repr(failed))
+          (root / "out/selection_check.json").write_text(json.dumps(checks, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("FRESH_HARD51_SELECTION_PASS", [row["task_id"] for row in rows])
+          PY
+      - name: Resolve and pin exact GHCR image digests
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess, tomllib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          subset = pathlib.Path(os.environ["SWE_SUBSET"])
+          tags = [x.strip() for x in (subset / "unpinned_tags.txt").read_text(encoding="utf-8").splitlines() if x.strip()]
+          ids = [x.strip() for x in (subset / "task_ids.txt").read_text(encoding="utf-8").splitlines() if x.strip()]
+          if len(tags) != len(ids) or len(tags) != int(os.environ["TASK_COUNT"]):
+              raise SystemExit("IMAGE_PIN_INPUT_COUNT_FAIL")
+          rows = []
+          refs = []
+          for task_id, tag in zip(ids, tags):
+              subprocess.run(["docker", "pull", "--platform", "linux/amd64", tag], check=True)
+              raw = subprocess.check_output(["docker", "image", "inspect", "--format", "{{json .RepoDigests}}", tag], text=True)
+              repo_digests = json.loads(raw)
+              image_name = tag.split(":", 1)[0]
+              candidates = sorted(x for x in repo_digests if x.startswith(image_name + "@sha256:"))
+              if not candidates:
+                  raise SystemExit("GHCR_DIGEST_RESOLUTION_FAIL " + tag)
+              digest_ref = candidates[0]
+              subprocess.run(["docker", "pull", "--platform", "linux/amd64", digest_ref], check=True)
+              config_path = subset / "tasks" / task_id / "task.toml"
+              text = config_path.read_text(encoding="utf-8")
+              old_line = 'docker_image = "' + tag + '"'
+              new_line = 'docker_image = "' + digest_ref + '"'
+              if text.count(old_line) != 1:
+                  raise SystemExit("TASK_TOML_IMAGE_TAG_BINDING_FAIL " + task_id)
+              config_path.write_text(text.replace(old_line, new_line, 1), encoding="utf-8")
+              config = tomllib.loads(config_path.read_text(encoding="utf-8"))
+              if ((config.get("environment") or {}).get("docker_image") or "") != digest_ref:
+                  raise SystemExit("TASK_TOML_DIGEST_WRITE_FAIL " + task_id)
+              rows.append({"task_id": task_id, "image_tag": tag, "digest_ref": digest_ref})
+              refs.append(digest_ref)
+          (out / "pinned_refs.txt").write_text("\n".join(refs) + "\n", encoding="utf-8")
+          (out / "pulled_images.json").write_text(json.dumps({"schema": "BRAIN_SWE_PRO_V2_PINNED_IMAGE_PULLS_V1", "count": len(refs), "refs": refs}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          checks = {
+              "pin_count": len(refs) == int(os.environ["TASK_COUNT"]),
+              "all_digest_pinned": all("@sha256:" in ref for ref in refs),
+              "all_task_toml_digest_bound": all((((tomllib.loads((subset / "tasks" / row["task_id"] / "task.toml").read_text(encoding="utf-8")).get("environment") or {}).get("docker_image") or "") == row["digest_ref"]) for row in rows),
+              "no_unpinned_tag_in_task_toml": all("ghcr.io/scaleapi/swe-bench_pro-v2:" not in (subset / "tasks" / row["task_id"] / "task.toml").read_text(encoding="utf-8") for row in rows),
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("IMAGE_PIN_CHECK_FAIL " + repr(failed))
+          payload = {"schema": "BRAIN_SWE_PRO_V2_IMAGE_PIN_BINDINGS_V1", "rows": rows, "checks": checks, "model_calls": 0, "runtime_network_calls_in_agent_phase": 0, "raw_tasks_saved_in_workspace": False}
+          (out / "image_pin_bindings.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("GHCR_DIGEST_PIN_PASS", len(refs))
+          PY
+      - name: Run initial Harbor phase with the Brain-owned zero-inference purpose agent
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          mkdir -p "${INITIAL_JOBS_DIR}" "${WORKSPACE}/out"
+          : > "${WORKSPACE}/out/initial_harbor_stdout.log"
+          : > "${WORKSPACE}/out/initial_harbor_stderr.log"
+          PYTHONPATH="${WORKSPACE}:/tmp/swe_pro_v2/v2/tooling${PYTHONPATH:+:${PYTHONPATH}}" harbor run \
+            -p "${SWE_SUBSET}/tasks" \
+            -e docker \
+            -a "${AGENT_IMPORT_PATH}" \
+            -o "${INITIAL_JOBS_DIR}" \
+            --job-name "${JOB_NAME}" \
+            -n 1 \
+            --quiet \
+            --no-export-traces \
+            --disable-verification \
+            > "${WORKSPACE}/out/initial_harbor_stdout.log" 2> "${WORKSPACE}/out/initial_harbor_stderr.log"
+          code=$?
+          echo "${code}" > "${WORKSPACE}/out/initial_harbor_exit_code.txt"
+          set -e
+          echo "INITIAL_HARBOR_RUN_EXIT_CODE ${code}"
+          [ "${code}" -eq 0 ]
+      - name: Regrade captured patches in fresh containers with upstream PatchReplayAgent
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -uo pipefail
+          mkdir -p "${REGRADE_JOBS_DIR}" "${WORKSPACE}/out"
+          : > "${WORKSPACE}/out/regrade_harbor_stdout.log"
+          : > "${WORKSPACE}/out/regrade_harbor_stderr.log"
+          PYTHONPATH="${WORKSPACE}:/tmp/swe_pro_v2/v2/tooling${PYTHONPATH:+:${PYTHONPATH}}" harbor run \
+            -p "${SWE_SUBSET}/tasks" \
+            -e docker \
+            -a "${REPLAY_AGENT_IMPORT_PATH}" \
+            --ak "source_job=${INITIAL_JOBS_DIR}/${JOB_NAME}" \
+            -o "${REGRADE_JOBS_DIR}" \
+            --job-name "${JOB_NAME}-regrade" \
+            -n 1 \
+            --quiet \
+            --no-export-traces \
+            > "${WORKSPACE}/out/regrade_harbor_stdout.log" 2> "${WORKSPACE}/out/regrade_harbor_stderr.log"
+          code=$?
+          echo "${code}" > "${WORKSPACE}/out/regrade_harbor_exit_code.txt"
+          set -e
+          echo "REGRADE_HARBOR_RUN_EXIT_CODE ${code}"
+          [ "${code}" -eq 0 ]
+      - name: Parse official fresh-container reward vectors and zero-model purpose decisions
+        if: always()
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          initial_jobs = pathlib.Path(os.environ["INITIAL_JOBS_DIR"])
+          regrade_jobs = pathlib.Path(os.environ["REGRADE_JOBS_DIR"])
+          job_name = os.environ["JOB_NAME"]
+          job_result_path = regrade_jobs / (job_name + "-regrade") / "result.json"
+          candidates = sorted(regrade_jobs.rglob("result.json"), key=lambda p: p.stat().st_mtime if p.exists() else 0)
+          if not job_result_path.is_file() and candidates:
+              job_result_path = candidates[-1]
+          job_result = None
+          job_result_sha256 = None
+          if job_result_path.is_file():
+              data = job_result_path.read_bytes()
+              job_result_sha256 = hashlib.sha256(data).hexdigest()
+              try:
+                  job_result = json.loads(data)
+              except Exception:
+                  job_result = None
+          trials = []
+          if isinstance(job_result, dict):
+              trials = job_result.get("trial_results") or []
+          if not trials:
+              for path in candidates:
+                  try:
+                      row = json.loads(path.read_text(encoding="utf-8"))
+                  except Exception:
+                      continue
+                  if isinstance(row, dict) and "verifier_result" in row:
+                      trials.append(row)
+          rows = []
+          for trial in trials:
+              if not isinstance(trial, dict):
+                  continue
+              rewards = ((trial.get("verifier_result") or {}).get("rewards") or {})
+              exceptions = []
+              info = trial.get("exception_info")
+              if isinstance(info, dict) and info.get("exception_type"):
+                  exceptions.append(str(info["exception_type"]))
+              for step in trial.get("step_results") or []:
+                  if isinstance(step, dict):
+                      sinfo = step.get("exception_info")
+                      if isinstance(sinfo, dict) and sinfo.get("exception_type"):
+                          exceptions.append(str(sinfo["exception_type"]))
+              rows.append({
+                  "task_name": str(trial.get("task_name") or ""),
+                  "trial_name": str(trial.get("trial_name") or ""),
+                  "task_checksum": str(trial.get("task_checksum") or ""),
+                  "agent_name": str((trial.get("agent_info") or {}).get("name") or ""),
+                  "reward_valid": bool(rewards) and not exceptions,
+                  "rewards": rewards,
+                  "exception_types": sorted(set(exceptions)),
+              })
+          def exit_code(name):
+              path = out / name
+              return int(path.read_text(encoding="utf-8").strip() or "-1") if path.is_file() else -1
+          initial_exit = exit_code("initial_harbor_exit_code.txt")
+          regrade_exit = exit_code("regrade_harbor_exit_code.txt")
+          purpose_decisions = []
+          for path in sorted(initial_jobs.rglob("agent_decision.json")):
+              try:
+                  payload = json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  continue
+              decision = payload.get("decision") or {}
+              executed = payload.get("executed_commands") or []
+              purpose_decisions.append({
+                  "trial_dir": path.parent.name,
+                  "goal_family": decision.get("goal_family"),
+                  "instruction_sha256": decision.get("instruction_sha256"),
+                  "commands_planned": len(decision.get("commands") or []),
+                  "commands_executed": len(executed),
+                  "refusal_count": len(decision.get("refusals") or []),
+                  "patch_sha256": payload.get("patch_sha256"),
+                  "patch_bytes": payload.get("patch_bytes"),
+                  "model_calls": payload.get("model_calls"),
+                  "runtime_network_calls": payload.get("runtime_network_calls"),
+                  "hidden_test_reading": payload.get("hidden_test_reading"),
+                  "borrowed_outputs": payload.get("borrowed_outputs"),
+                  "all_executed_commands_safe": all(bool(row.get("command_is_safe")) for row in executed) if executed else False,
+              })
+          selected_count = int(os.environ["TASK_COUNT"])
+          checks = {
+              "purpose_decision_count": len(purpose_decisions) == selected_count,
+              "all_zero_model": all(row.get("model_calls") == 0 for row in purpose_decisions) if purpose_decisions else False,
+              "all_runtime_network_free": all(row.get("runtime_network_calls") == 0 for row in purpose_decisions) if purpose_decisions else False,
+              "all_hidden_boundaries": all(row.get("hidden_test_reading") is False and row.get("borrowed_outputs") is False for row in purpose_decisions) if purpose_decisions else False,
+              "all_executed_commands_safe": all(bool(row.get("all_executed_commands_safe")) for row in purpose_decisions) if purpose_decisions else False,
+              "unresolved_purposes_fail_closed": all(row.get("commands_planned") == 0 and row.get("refusal_count", 0) > 0 for row in purpose_decisions if row.get("goal_family") == "UNRESOLVED_PURPOSE"),
+              "reward_rows_present": len(rows) == selected_count,
+              "reward_vectors_present": sum(1 for row in rows if row.get("rewards")) == selected_count,
+              "no_harness_exceptions": not any(row.get("exception_types") for row in rows),
+              "initial_harbor_exit_zero": initial_exit == 0,
+              "regrade_harbor_exit_zero": regrade_exit == 0,
+          }
+          purpose_audit = {
+              "schema": "BRAIN_SWE_PRO_V2_PURPOSE_DECISION_AUDIT_V1",
+              "decisions": purpose_decisions,
+              "checks": checks,
+              "raw_instructions_saved": False,
+              "raw_patches_saved": False,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "note": "An unresolved natural-language purpose produces an empty patch; this is a fail-closed result, not authored repair content.",
+          }
+          (out / "purpose_audit.json").write_text(json.dumps(purpose_audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          reward_log = {
+              "schema": "BRAIN_SWE_PRO_V2_HARD51_REWARD_LOG_20261124_V1",
+              "date": "2026-11-24",
+              "source": "FRESH_CONTAINER_PATCH_REPLAY_HARBOR_RESULT_JSON",
+              "harbor_version": os.environ["HARBOR_VERSION"],
+              "release_tag": os.environ["SWE_TAG"],
+              "release_sha": os.environ["SWE_RELEASE_SHA"],
+              "initial_job_name": job_name,
+              "regrade_job_name": job_name + "-regrade",
+              "job_result_path": str(job_result_path) if job_result_path.is_file() else None,
+              "job_result_sha256": job_result_sha256,
+              "initial_harbor_exit_code": initial_exit,
+              "regrade_harbor_exit_code": regrade_exit,
+              "task_selected_count": selected_count,
+              "trial_results_present": len(rows),
+              "rows": rows,
+              "purpose_decision_count": len(purpose_decisions),
+              "benchmark_score_authority": False,
+              "aggregate_benchmark_score": None,
+              "note": "Per-trial rewards are official fresh-container verifier diagnostics, not an aggregate benchmark score and not capability credit.",
+          }
+          (out / "SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json").write_text(
+              json.dumps(reward_log, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
+          )
+          print("PURPOSE_AND_REWARD_LOG_PASS", len(rows), "reward rows", len(purpose_decisions), "purpose decisions", "job_result_sha256", job_result_sha256)
+          PY
+      - name: Bind GitHub Actions OIDC run reference and emit runner-owned receipt
+        id: oidc_receipt
+        if: always()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, platform, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          workflow_path = ".github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml"
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": workflow_path in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed_oidc = sorted(k for k, v in checks.items() if not v)
+          if failed_oidc:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed_oidc))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref", "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor", "actor_id", "jti", "runner_environment")
+          oidc_claims = {k: claims.get(k) for k in keep}
+          def read_json(name, default):
+              path = out / name
+              if not path.is_file():
+                  return default
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+          def read_int(name, default=-1):
+              path = out / name
+              if not path.is_file():
+                  return default
+              try:
+                  return int(path.read_text(encoding="utf-8").strip() or str(default))
+              except Exception:
+                  return default
+          bindings = read_json("blob_bindings.json", {})
+          audit = read_json("static_audit.json", {})
+          source_verification = read_json("source_verification.json", {})
+          selection = read_json("selection.json", {})
+          selection_check = read_json("selection_check.json", {})
+          pulled_images = read_json("pulled_images.json", {})
+          image_pins = read_json("image_pin_bindings.json", {})
+          purpose_audit = read_json("purpose_audit.json", {})
+          reward_log = read_json("SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json", {})
+          initial_exit = read_int("initial_harbor_exit_code.txt")
+          regrade_exit = read_int("regrade_harbor_exit_code.txt")
+          rows = reward_log.get("rows") or []
+          decisions = purpose_audit.get("decisions") or []
+          selected_count = int(selection.get("selected_task_count") or os.environ["TASK_COUNT"])
+          task_ids = [str(row.get("task_id")) for row in selection.get("tasks") or []]
+          harness_verified = [str(row.get("task_name")) for row in rows if row.get("reward_valid") is True]
+          unverified = [str(row.get("task_name") or "UNNAMED_TRIAL") for row in rows if row.get("reward_valid") is not True]
+          if len(rows) < selected_count:
+              unverified.append("MISSING_TRIAL_RESULTS_FOR_" + str(selected_count - len(rows)) + "_SELECTED_TASKS")
+          successful = 0
+          for row in rows:
+              rewards = row.get("rewards") or {}
+              if any(isinstance(value, (int, float)) and value > 0 for value in rewards.values()):
+                  successful += 1
+          if successful == 0:
+              unverified.append("NO_TASK_SUCCESS")
+          unverified.extend([
+              "Aggregate benchmark score authority",
+              "OSWorld 2.1 tasks",
+              "Remaining SWE-bench Pro V2 / HARD-51 tasks",
+              "Remaining Terminal-Bench 4.1 CPU and GPU tasks",
+              "Arbitrary natural-language purpose understanding",
+              "Authored repair content",
+              "GUI or browser computer use",
+              "Independent section 6 verification",
+          ])
+          failed = []
+          for row in rows:
+              if row.get("exception_types"):
+                  failed.append(str(row.get("task_name") or "UNNAMED_TRIAL") + ": " + ",".join(row["exception_types"]))
+          if initial_exit != 0:
+              failed.append("INITIAL_HARBOR_RUN_EXIT_NONZERO:" + str(initial_exit))
+          if regrade_exit != 0:
+              failed.append("REGRADE_HARBOR_RUN_EXIT_NONZERO:" + str(regrade_exit))
+          for label, mapping in (("SOURCE_VERIFICATION", source_verification.get("checks") or {}), ("SELECTION", selection_check or {}), ("IMAGE_PINS", image_pins.get("checks") or {}), ("PURPOSE_AUDIT", purpose_audit.get("checks") or {})):
+              for key, value in mapping.items():
+                  if not value:
+                      failed.append(label + "_CHECK_FALSE:" + key)
+          if not bindings.get("equal"):
+              failed.append("EXACT_SOURCE_BINDING_FALSE")
+          if audit.get("marked_imports"):
+              failed.append("FORBIDDEN_IMPORTS_IN_BRAIN_SURFACE")
+          if audit.get("upstream_replay_agent_marked_imports"):
+              failed.append("FORBIDDEN_IMPORTS_IN_UPSTREAM_REPLAY_AGENT")
+          if failed_oidc:
+              failed.append("OIDC_RUN_REFERENCE_BINDING_FALSE")
+          verified = []
+          if bindings.get("equal") is True:
+              verified.append("EXACT_SOURCE_SHA256_BINDINGS")
+          if audit.get("marked_imports") == [] and audit.get("upstream_replay_agent_marked_imports") == []:
+              verified.append("NO_MODEL_NETWORK_OR_SUBPROCESS_IMPORTS_IN_AGENT_OR_UPSTREAM_REPLAY_SURFACE")
+          if audit.get("unresolved_purpose_refused") is True:
+              verified.append("UNRESOLVED_PURPOSE_FAILS_CLOSED_LOCALLY")
+          if all(bool(v) for v in (source_verification.get("checks") or {}).values()) and source_verification.get("checks"):
+              verified.append("PINNED_SWE_BENCH_PRO_V2_RELEASE_AND_FILE_CHECKSUMS")
+          if all(bool(v) for v in (selection_check or {}).values()) and selection_check:
+              verified.append("FRESH_RUN_ID_SEEDED_HARD51_SUBSET_SELECTED")
+          if all(bool(v) for v in (image_pins.get("checks") or {}).values()) and image_pins.get("checks"):
+              verified.append("GHCR_IMAGES_RESOLVED_TO_IMMUTABLE_DIGESTS")
+          if pulled_images.get("count", 0) >= selected_count:
+              verified.append("DIGEST_PINNED_IMAGES_PULLED")
+          if reward_log.get("job_result_sha256"):
+              verified.append("OFFICIAL_FRESH_CONTAINER_RESULT_JSON_REWARD_LOG_BOUND")
+          if all(bool(v) for v in (purpose_audit.get("checks") or {}).values()) and purpose_audit.get("checks"):
+              verified.append("ZERO_MODEL_PURPOSE_DECISIONS_AND_SAFE_COMMAND_AUDIT")
+          if not failed_oidc:
+              verified.append("OIDC_RUN_REFERENCE_BOUND")
+          verified.append("NO_CAPABILITY_OR_TERMINAL_CREDIT")
+          run_url = "https://github.com/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + str(run_id)
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          workflow_blob = subprocess.check_output(["git", "hash-object", workflow_path], cwd=root, text=True).strip()
+          reward_log_path = out / "SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json"
+          reward_log_bytes = reward_log_path.read_bytes() if reward_log_path.is_file() else b"{}\n"
+          reward_log_blob = subprocess.run(["git", "hash-object", "--stdin"], cwd=root, input=reward_log_bytes, stdout=subprocess.PIPE, check=True).stdout.decode().strip()
+          receipt = {
+              "schema": "BRAIN_SWE_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_SWE_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_ATTEMPT_RECORDED__ZERO_CREDIT__SECTION_6_NOT_MET",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FRESH_CONTAINER_PATCH_REPLAY_ATTEMPT__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              "scope": "SWE_BENCH_PRO_V2_HARD51_FRESH_SEEDED_SUBSET_ZERO_MODEL_INSTRUCTION_SUPPLIED_TRANSFORMATIONS_ONLY",
+              "runner_owned": True,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "verifier_identity": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "run_reference": {"workflow_run_id": run_id, "workflow_run_attempt": run_attempt, "workflow_run_url": run_url, "oidc_jti": claims.get("jti"), "runner_attestation": "github-actions-oidc-token"},
+              "pinned_substrates": {
+                  "harbor_version": os.environ["HARBOR_VERSION"],
+                  "python_version": platform.python_version(),
+                  "swe_bench_pro_v2_release_tag": os.environ["SWE_TAG"],
+                  "swe_bench_pro_v2_release_sha": os.environ["SWE_RELEASE_SHA"],
+                  "repo_sha256sums_sha256": os.environ["SWE_REPO_SHA256SUMS_SHA256"],
+                  "hard51_ids_sha256": os.environ["SWE_HARD51_IDS_SHA256"],
+                  "patch_replay_sha256": os.environ["SWE_PATCH_REPLAY_SHA256"],
+                  "release_asset_sha256sums_sha256": os.environ["SWE_RELEASE_ASSET_SHA256SUMS_SHA256"],
+                  "release_asset_tasks_zip_sha256": os.environ["SWE_RELEASE_TASKS_ZIP_SHA256"],
+                  "workflow_git_blob_sha": workflow_blob,
+                  "brain_agent_import_path": os.environ["AGENT_IMPORT_PATH"],
+                  "replay_agent_import_path": os.environ["REPLAY_AGENT_IMPORT_PATH"],
+                  "model_cli_args": 0,
+                  "environment_type": "docker",
+                  "initial_verification_disabled": True,
+                  "authoritative_reward_phase": "FRESH_CONTAINER_PATCH_REPLAY",
+              },
+              "source_binding": bindings,
+              "static_audit": audit,
+              "source_verification": source_verification,
+              "selection": selection,
+              "selection_check": selection_check,
+              "pulled_images": pulled_images,
+              "image_pin_bindings": image_pins,
+              "purpose_audit": purpose_audit,
+              "reward_log": reward_log,
+              "reward_log_sha256": hashlib.sha256(reward_log_bytes).hexdigest(),
+              "reward_log_git_blob_sha": reward_log_blob,
+              "initial_harbor_exit_code": initial_exit,
+              "regrade_harbor_exit_code": regrade_exit,
+              "oidc_checks": checks,
+              "numeric_measurements": {
+                  "source_bindings": len(bindings.get("expected") or {}),
+                  "marked_import_groups": len(audit.get("marked_imports") or []) + len(audit.get("upstream_replay_agent_marked_imports") or []),
+                  "tasks_selected": selected_count,
+                  "purpose_decision_count": len(decisions),
+                  "unresolved_purpose_count": sum(1 for row in decisions if row.get("goal_family") == "UNRESOLVED_PURPOSE"),
+                  "trial_results_present": len(rows),
+                  "task_reward_vectors_present": sum(1 for row in rows if row.get("rewards")),
+                  "harness_verified_trials": len(harness_verified),
+                  "unverified_trials": sum(1 for row in rows if row.get("reward_valid") is not True),
+                  "failed_trials": sum(1 for row in rows if row.get("exception_types")),
+                  "pinned_images_pulled": pulled_images.get("count", 0),
+                  "fresh_container_regrade_trials": len(rows),
+                  "task_success_count": successful,
+                  "model_calls": 0,
+                  "runtime_network_calls": 0,
+                  "hidden_test_reading_events": 0,
+                  "borrowed_output_events": 0,
+                  "hard_benchmark_tasks_consumed": selected_count,
+                  "aggregate_benchmark_score_claims": 0,
+                  "section_6_verifications": 0,
+              },
+              "verified": verified,
+              "harness_verified_trials": harness_verified,
+              "unverified": unverified,
+              "failed": failed,
+              "selected_task_ids": task_ids,
+              "producer_cognition_model_dependency_count": 0,
+              "runtime_network_calls": 0,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "task_specific_answers_in_repo": False,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "benchmark_score_authority": False,
+              "aggregate_benchmark_score": None,
+              "independent_hard_benchmark_attempt_runner_owned": True,
+              "independent_hard_benchmark_verification_completed": False,
+              "independent_verification_completed": False,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": len(rows),
+              "incremental_spend_usd": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_RELEASE_SUBSTRATES_AND_RUN_ID_SEEDED_TASK_SET__ANY_SEMANTIC_BYTE_OR_IMAGE_CHANGE_REQUIRES_REVERIFICATION",
+          }
+          receipt_path = out / "SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json"
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / "SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.sha256").write_text(hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8")
+          receipt_blob = subprocess.check_output(["git", "hash-object", str(receipt_path)], cwd=root, text=True).strip()
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("RUNNER_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print("RUNNER_RECEIPT_GIT_BLOB", receipt_blob)
+          print(json.dumps({"status": receipt["status"], "verified": len(verified), "unverified": len(unverified), "failed": len(failed), "task_success_count": successful, "truth": receipt["truth"]}, sort_keys=True))
+          PY
+          cat "${WORKSPACE}/out/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json"
+      - name: Land runner-owned receipt and reward log on the active branch
+        if: always() && steps.oidc_receipt.outcome == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json" \
+             "canonical/verification/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json"
+          cp "out/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.sha256" \
+             "canonical/verification/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.sha256"
+          cp "out/SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json" \
+             "canonical/verification/SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json"
+          git config user.name "project-brain-swe-pro-v2-hard51-runner"
+          git config user.email "project-brain-swe-pro-v2-hard51-runner@users.noreply.github.com"
+          git add "canonical/verification/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json" \
+                  "canonical/verification/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.sha256" \
+                  "canonical/verification/SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record runner-owned zero-model SWE Pro V2 HARD-51 purpose attempt"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
+      - name: Upload runner-owned sanitized hard-benchmark artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zero-model-swe-pro-v2-hard51-runner
+          path: |
+            out/blob_bindings.json
+            out/static_audit.json
+            out/release_metadata.json
+            out/source_verification.json
+            out/selection.json
+            out/selection_check.json
+            out/task_ids.txt
+            out/pinned_refs.txt
+            out/pulled_images.json
+            out/image_pin_bindings.json
+            out/purpose_audit.json
+            out/SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json
+            out/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json
+            out/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.sha256
+          if-no-files-found: warn
+          retention-days: 90

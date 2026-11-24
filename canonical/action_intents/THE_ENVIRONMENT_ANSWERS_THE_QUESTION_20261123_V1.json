@@ -2,21 +2,21 @@
   "action_id": "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1",
   "action_intent_id": "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Eight measured §5 iterations on the own-weights, zero-model, external-store boundary. Iteration 7 changes the goal/relation grammar from holder-shape to copy-cardinality and verifies a hashed declarative descriptor in a fresh stdlib-only process. Iteration 8 reuses the project's OIDC public-runner mechanism: a distinct GitHub Actions verifier re-ran the exact six pinned blobs under workflow run 45293031532, checked 28 measurements and five adversarial controls, and committed a runner-owned zero-credit receipt. The 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), 29 new tests and 200 selected regressions remain producer-side evidence. No §6 benchmark, capability credit or terminal completion is claimed.",
+  "action_summary": "Eight measured \u00a75 iterations on the own-weights, zero-model, external-store boundary. Iteration 7 changes the goal/relation grammar from holder-shape to copy-cardinality and verifies a hashed declarative descriptor in a fresh stdlib-only process. Iteration 8 reuses the project's OIDC public-runner mechanism: a distinct GitHub Actions verifier re-ran the exact six pinned blobs under workflow run 45293031532, checked 28 measurements and five adversarial controls, and committed a runner-owned zero-credit receipt. The 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), 29 new tests and 200 selected regressions remain producer-side evidence. No \u00a76 benchmark, capability credit or terminal completion is claimed. Iteration 10 adds a finite fail-closed zero-model purpose compiler and a pinned SWE-bench Pro V2 / HARD-51 OIDC runner carrier; it does not claim arbitrary purpose understanding, authored repair content, a benchmark score, capability credit or \u00a76 completion.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
     "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
     "conversation_memory_is_authority": false,
     "date_checked": "2026-11-24",
-    "earlier_routes_exhausted_reason": "The loop reuses the existing version-space fit, run grammar, quotient projections, separating-run search, completeness gate, external store, stdlib-only fresh-process execution and OIDC receipt carrier. It composed only a no-inference Harbor adapter, a fresh CPU task selector and one runner workflow. The distinct runner returned three zero rewards, so a new learner, model, world model, hand-built predicate, task-specific solver, hidden-test reader, stored expected verdict, scan-everything store or locally fabricated independent receipt would still duplicate a mechanism in the tree or hide a measured failure.",
+    "earlier_routes_exhausted_reason": "The loop reuses the existing version-space fit, run grammar, quotient projections, separating-run search, completeness gate, external store, stdlib-only fresh-process execution and OIDC receipt carrier. It composed only a no-inference Harbor adapter, a fresh CPU task selector and one runner workflow. The distinct runner returned three zero rewards, so a new learner, model, world model, hand-built predicate, task-specific solver, hidden-test reader, stored expected verdict, scan-everything store or locally fabricated independent receipt would still duplicate a mechanism in the tree or hide a measured failure. Iteration 10 composes only a finite instruction-supplied transformation grammar and the pinned runner carrier; a model, universal parser, authored repair generator, hidden-test reader or task-specific solver would duplicate a killed mechanism or hide a measured failure.",
     "incremental_spend_usd": 0,
     "independent_finite_transport_replay_completed": true,
     "independent_hard_benchmark_attempt_completed": true,
     "independent_hard_benchmark_verification_completed": false,
     "independent_verification_completed": false,
     "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_AND_HARD_BENCHMARK_ATTEMPT_ARE_NARROW_EXCEPTIONS",
-    "independent_verification_note": "Terminal/§6 independent verification remains absent: no independent identity has verified OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or a full Terminal-Bench 4.1 capability. The narrow finite transport replay is run 45293031532. The distinct runner-owned zero-inference hard-benchmark attempt is run 45306545636; it produced three official reward vectors, each 0.0, with no task success, no score and zero credit.",
+    "independent_verification_note": "Terminal/\u00a76 independent verification remains absent: no independent identity has verified OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or a full Terminal-Bench 4.1 capability. The narrow finite transport replay is run 45293031532. The distinct runner-owned zero-inference hard-benchmark attempt is run 45306545636; it produced three official reward vectors, each 0.0, with no task success, no score and zero credit. Iteration 10 adds a third OIDC runner carrier for a fresh three-task SWE-bench Pro V2 / HARD-51 attempt; it does not make independent \u00a76 verification true.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -79,16 +79,16 @@
     "terminal_achieved": false
   },
   "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, §6 verification or terminal credit exists. OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 remain unrun; arbitrary purpose discovery, authored repair content and general computer use remain open.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, \u00a76 verification or terminal credit exists. OSWorld 2.1 remains unrun; iteration 10 adds a pinned three-task SWE-bench Pro V2 / HARD-51 attempt; arbitrary purpose discovery, authored repair content and general computer use remain open. Iteration 10 adds the finite purpose compiler and pinned HARD-51 carrier as the next path-specific contrast; no receipt or task success is claimed from the producer side.",
   "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, §6 verification or terminal credit exists. OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 remain unrun; arbitrary purpose discovery, authored repair content and general computer use remain open.",
+  "causal_blocker": "A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, \u00a76 verification or terminal credit exists. OSWorld 2.1 remains unrun; iteration 10 adds a pinned three-task SWE-bench Pro V2 / HARD-51 attempt; arbitrary purpose discovery, authored repair content and general computer use remain open.",
   "date": "2026-11-24",
   "execution_authority": false,
-  "expected_parent_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. A distinct OIDC-attested runner re-ran those exact frozen bytes and committed its own zero-credit receipt, while independent §6 hard-benchmark verification, arbitrary purpose discovery and terminal completion remain open.",
-  "expected_parent_frontier_change": "The agent now carries relation texts plus a hashed declarative grammar descriptor, a zero-inference external Harbor adapter and a distinct runner-owned OIDC reward log for three fresh unseen CPU-only Terminal-Bench 4.1 tasks. The three official reward vectors are all 0.0, so this is a verified harness attempt with three failed task outcomes, not a benchmark score, not arbitrary purpose discovery and not terminal completion.",
+  "expected_parent_change": "The agent carries relation texts plus a hashed declarative grammar descriptor; a fresh isolated process recomputes the deictic pointer, all terms and the typed goal verdict from each machine's own raw executor log; deletion-to-unlearn, hash/allowlist, stored-label and control checks fail closed. A distinct OIDC-attested runner re-ran those exact frozen bytes and committed its own zero-credit receipt, while independent \u00a76 hard-benchmark verification, arbitrary purpose discovery and terminal completion remain open. Iteration 10 adds an instruction-supplied finite transformation grammar and fresh-container replay boundary; arbitrary natural-language purpose and authored repair content remain unresolved.",
+  "expected_parent_frontier_change": "The agent now carries relation texts plus a hashed declarative grammar descriptor, a zero-inference external Harbor adapter and a distinct runner-owned OIDC reward log for three fresh unseen CPU-only Terminal-Bench 4.1 tasks. The three official reward vectors are all 0.0, so this is a verified harness attempt with three failed task outcomes, not a benchmark score, not arbitrary purpose discovery and not terminal completion. Iteration 10 moves the next hard-environment contrast to three run-id-seeded SWE-bench Pro V2 / HARD-51 tasks under digest-pinned images and upstream PatchReplayAgent; this is a carrier, not a score.",
   "explicit_user_authorization": [
     "build our own model with a perfect algorithm as basically the model",
     "enter any arbitrary new computer environment knowing nothing",
@@ -98,11 +98,14 @@
     "our own model only, zero model calls at runtime",
     "hardest open tests as of Nov 2026, merge once when feature complete"
   ],
-  "falsification_condition": "FALSIFIED if any receipt is edited into a success after the run; if the runner-owned receipt is locally fabricated, backdated, or given a workflow_run_id without a real OIDC-attested run; if the narrow finite-transport replay is called §6 verification or a capability score; if a shallow fit is reported as portable; if N3, N2 or P3 are hidden; if identity/content literals, a hand-built holder_changed term, a hardcoded term family, stored code, stored expected verdicts or a two-statement/one-judgment C2 design are smuggled into the store or raw log; if the fresh same-identity process is called independent verification; if the three killed iteration-7 prototypes or the 3 false rejects from the iteration-6 store are hidden; if the four exact statements / two judgments are reduced to hide a failed run; if any primary-source score is presented as our system score; or if OSWorld, SWE-bench Pro or Terminal-Bench is claimed done without a zero-model run. FALSIFIED if hidden tests, solutions, verifier answers or benchmark task files are read into Brain source or saved into the repository; if a task-specific answer, oracle, borrowed output, model call or benchmark score is claimed; if the runner-owned receipt is locally fabricated, backdated or lacks a real OIDC run reference; or if the hard-benchmark attempt is called §6 verification or terminal completion. FALSIFIED if a 0.0 reward vector is called a task success, if three zero rewards are turned into a benchmark score or §6 verification, if hidden tests, solutions, verifier answers or benchmark task files are read into Brain source or saved into the repository, if a task-specific answer, oracle, borrowed output or model call is claimed, if the runner-owned receipt is locally fabricated, backdated or lacks a real OIDC run reference, or if terminal completion is claimed.",
+  "falsification_condition": "FALSIFIED if any receipt is edited into a success after the run; if the runner-owned receipt is locally fabricated, backdated, or given a workflow_run_id without a real OIDC-attested run; if the narrow finite-transport replay is called \u00a76 verification or a capability score; if a shallow fit is reported as portable; if N3, N2 or P3 are hidden; if identity/content literals, a hand-built holder_changed term, a hardcoded term family, stored code, stored expected verdicts or a two-statement/one-judgment C2 design are smuggled into the store or raw log; if the fresh same-identity process is called independent verification; if the three killed iteration-7 prototypes or the 3 false rejects from the iteration-6 store are hidden; if the four exact statements / two judgments are reduced to hide a failed run; if any primary-source score is presented as our system score; or if OSWorld, SWE-bench Pro or Terminal-Bench is claimed done without a zero-model run. FALSIFIED if hidden tests, solutions, verifier answers or benchmark task files are read into Brain source or saved into the repository; if a task-specific answer, oracle, borrowed output, model call or benchmark score is claimed; if the runner-owned receipt is locally fabricated, backdated or lacks a real OIDC run reference; or if the hard-benchmark attempt is called \u00a76 verification or terminal completion. FALSIFIED if a 0.0 reward vector is called a task success, if three zero rewards are turned into a benchmark score or \u00a76 verification, if hidden tests, solutions, verifier answers or benchmark task files are read into Brain source or saved into the repository, if a task-specific answer, oracle, borrowed output or model call is claimed, if the runner-owned receipt is locally fabricated, backdated or lacks a real OIDC run reference, or if terminal completion is claimed. FALSIFIED if the finite instruction-supplied transformation grammar is called arbitrary natural-language purpose understanding, if a fail-closed empty patch is called authored repair content, if a three-task HARD-51 attempt is called an aggregate benchmark score or \u00a76 verification, or if a producer-written substitute for the runner-owned OIDC receipt is used.",
   "family_credit_delta": 0,
   "gate_results": {
+    "authoritative_hard_benchmark_run_ids": [
+      45306545636
+    ],
     "authoritative_workflow_run_id": 45293031532,
-    "authority": "LOCAL_PRODUCER_GATES_PLUS_TWO_DISTINCT_GITHUB_ACTIONS_OIDC_RUN_REFERENCES__FINITE_TRANSPORT_REPLAY_AND_A_ZERO_CREDIT_HARD_BENCHMARK_ATTEMPT__NO_SECTION_6_VERIFICATION",
+    "authority": "LOCAL_PRODUCER_GATES_PLUS_TWO_DISTINCT_GITHUB_ACTIONS_OIDC_RUN_REFERENCES__FINITE_TRANSPORT_REPLAY_AND_A_ZERO_CREDIT_HARD_BENCHMARK_ATTEMPT__NO_SECTION_6_VERIFICATION__THIRD_ZERO_CREDIT_SWE_PRO_V2_HARD51_PURPOSE_ATTEMPT_WORKFLOW_ADDED__NO_SECTION_6_VERIFICATION",
     "base": "68bf040064452b740701dd81ad081d6f41f89b57",
     "drift_guard": "DRIFT_GUARD_PASS; action_id=THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1; sensitive_files=1; terminal_objective_sha256=cba32f33e868c580fd395998b1076a04f14c7320b479a911ad056c632decdbc9",
     "drift_workflow_continuous_obs": "python3 -m unittest canonical.runtime.test_continuous_obs_runtime canonical.tests.test_executor_broker -v: Ran 14 tests in 0.012s OK",
@@ -112,7 +115,7 @@
     "final_gate_wrapper_note": "First wrapper used an incorrect .json.sha256 sidecar path; that was a local harness typo, not a project gate failure. The corrected wrapper passed two full reruns. The final metadata-only commit records the second rerun and was rechecked with all lightweight gates.",
     "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final reconciliation changed no pinned bytes",
     "final_selected_regression": "200 passed in 194.60s (0:03:14) across 20 selected files",
-    "final_selected_regression_note": "Iteration-9 final counts after the runner receipt: 29 instrument tests, 4 new zero-model Harbor integration tests, 14 OBS/broker tests, 200 selected regression tests, 20 gate checks, ALL_GATES_OK True. Three official hard-task reward vectors are all 0.0; no hard-benchmark score, §6 verification, capability credit or terminal truth change.",
+    "final_selected_regression_note": "Iteration-9 final counts after the runner receipt: 29 instrument tests, 4 new zero-model Harbor integration tests, 14 OBS/broker tests, 200 selected regression tests, 20 gate checks, ALL_GATES_OK True. Three official hard-task reward vectors are all 0.0; no hard-benchmark score, \u00a76 verification, capability credit or terminal truth change.",
     "final_seven_file_test_run": "29 passed in 4.62s",
     "final_six_file_test_run": "23 passed in 2.49 s (iteration-6 historical run)",
     "fresh_isolated_cli_from_other_cwd": "cd /tmp && python3 -I -B with absolute final-tree paths: PASS; python_isolated_mode=true; authority NONE__PRODUCER_RUN_SANDBOX_FRESH_PROCESS; 5 normal machines + 1 pointerless control; 16 terms/machine; 0 false accepts/rejects",
@@ -132,6 +135,17 @@
     "independent_hard_benchmark_verification_completed": false,
     "independent_verification_completed": false,
     "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_AND_HARD_BENCHMARK_ATTEMPT_ARE_NARROW_EXCEPTIONS",
+    "iteration_10_local_gates": {
+      "section_6": "NOT_MET",
+      "status": "AWAITING_LOCAL_GATE_RESULT",
+      "terminal_credit_delta": 0
+    },
+    "iteration_10_source_bindings": {
+      "canonical/harbor/brain_zero_model_purpose_agent_v2.py": "84e25ae93154b09cf8f1eeb0d55d092479b62abdaca5ec346fea5975434de0cb",
+      "canonical/harbor/brain_zero_model_purpose_policy_v2.py": "b44e7532fd2513efd015e9943d48f996c3f0e025c0cdd7e4486d89bcae0c0fc2",
+      "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py": "d5a4c988fa8b9f6178780ebb9107873de5cfc34e5382bb350bf40883ae15afe7",
+      "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py": "316e17723c0607596e377b7139858348194ed684f28801d6d0a52234b94bd62f"
+    },
     "iteration_6_receipt": "THE_CONTENT_IS_NOT_A_LITERAL_20261123_V1.json C1-C7 all true, all_criteria_met=True, 11.27 s",
     "iteration_7_receipt": "THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json D1-D8 all true, all_criteria_met=True, 25.55 s",
     "iteration_9_local_final_gates": {
@@ -306,6 +320,8 @@
     "static_ast_audit": "19 local modules; marked model/network imports: []",
     "static_diff_repo_integrity_guard": "repo-integrity-guard: mode=static+diff base=68bf040064452b740701dd81ad081d6f41f89b57 rules=17 violations=0 -> PASS",
     "status": "PASS",
+    "swe_pro_v2_hard51_runner_receipt_status": "NOT_YET_RECORDED__OIDC_RUNNER_WORKFLOW_ADDED__ZERO_CREDIT__SECTION_6_OPEN",
+    "swe_pro_v2_hard51_runner_workflow": ".github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml",
     "truth": {
       "achieved": false,
       "section_6": "NOT_MET"
@@ -324,8 +340,8 @@
   "governance_change": false,
   "highest_leverage_now": true,
   "honest_limits": [
-    "terminal §6 authority NONE; a distinct OIDC verifier exists only for exact finite grammar-transport replay (run 45293031532)",
-    "no OSWorld 2.1, SWE-bench Pro / Pro V2 / HARD-51, Terminal-Bench 2.1 or 4.1 task was run",
+    "terminal \u00a76 authority NONE; a distinct OIDC verifier exists only for exact finite grammar-transport replay (run 45293031532)",
+    "Before iteration 10, no OSWorld 2.1, SWE-bench Pro / Pro V2 / HARD-51, Terminal-Bench 2.1 or 4.1 task was run; iteration 10 adds a pinned HARD-51 attempt, not a score",
     "first successful workflow run 45292371946 succeeded but this sandbox could not download its artifact or logs; the second run landed a runner-owned receipt instead",
     "iteration 3 N3 falsified and N2 void; iteration 4 P3 failed with 4 false rejects",
     "M4 first run failed and is preserved as a superseded V0 receipt",
@@ -340,14 +356,18 @@
     "iteration 8 OIDC replay consumed 0 hard-benchmark tasks and grants no capability, family, terminal or truth credit",
     "full canonical-trace table killed by 43/69 abstentions; no model-proposed predicate is used",
     "no capability registered, no truth changed, no PR, no merge",
-    "terminal §6 authority NONE; the new OIDC runner is distinct only for a fresh CPU-only Terminal-Bench 4.1 attempt",
-    "no OSWorld 2.1 or SWE-bench Pro V2 / HARD-51 task was run",
+    "terminal \u00a76 authority NONE; the new OIDC runner is distinct only for a fresh CPU-only Terminal-Bench 4.1 attempt",
+    "Before iteration 10, no OSWorld 2.1 or SWE-bench Pro V2 / HARD-51 task was run; iteration 10 adds a pinned HARD-51 attempt, not a score",
     "the runner uses a fresh seeded three-task CPU subset, not a full benchmark score",
     "task-specific /tmp html-js-filter prototypes are killed leakage controls, not capability",
     "no PR, no merge, no capability registration, no truth change",
     "three fresh seeded CPU-only Terminal-Bench 4.1 tasks were consumed and all three official reward vectors were 0.0; no task success and no aggregate benchmark score is claimed",
     "receipt.failed=[] means no harness exceptions; it does not mean no task failures",
-    "the runner-owned hard-benchmark attempt is not §6 verification, not terminal truth and not capability credit"
+    "the runner-owned hard-benchmark attempt is not \u00a76 verification, not terminal truth and not capability credit",
+    "iteration 10 is a finite instruction-supplied transformation compiler, not arbitrary natural-language purpose understanding or authored repair content",
+    "a three-task HARD-51 attempt is not the 642-task benchmark, not the full HARD-51 score and not \u00a76 verification",
+    "OSWorld 2.1 remains blocked by gated assets, websites, VM/KVM/display and pinned evaluators",
+    "the pinned OSWorld 2.1 release tag osworld-v2.1 is authoritative; a main-branch clone is only source-reading research"
   ],
   "incremental_spend_usd": 0,
   "independent_finite_transport_replay_completed": true,
@@ -361,9 +381,9 @@
     ],
     "expected_obligation_discharge_lcb": "0",
     "expected_obligation_unlock_lcb": "1/81",
-    "interpretation": "No open obligation is discharged or unlocked by this measurement. Seven producer instruments, one generic interpreter and one distinct OIDC replay of exact finite bytes construct, price, falsify and partially verify the mechanism; no §6 truth obligation moves. The claimed unlock is an honest upper-bound envelope showing the work is obligation-adjacent.",
+    "interpretation": "No open obligation is discharged or unlocked by this measurement. Seven producer instruments, one generic interpreter and one distinct OIDC replay of exact finite bytes construct, price, falsify and partially verify the mechanism; no \u00a76 truth obligation moves. The claimed unlock is an honest upper-bound envelope showing the work is obligation-adjacent.",
     "open_obligation_ids": [],
-    "proof_state_reachability": "A distinct OIDC verifier re-ran exact finite grammar-transport bytes; independent §6 zero-model verification and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 require real pinned harnesses and graders that did not run. The receipts are causal falsifiers and one narrow transport replay, not benchmark scores.",
+    "proof_state_reachability": "A distinct OIDC verifier re-ran exact finite grammar-transport bytes; independent \u00a76 zero-model verification and OSWorld 2.1 / SWE-bench Pro V2 / Terminal-Bench 4.1 require real pinned harnesses and graders that did not run. The receipts are causal falsifiers and one narrow transport replay, not benchmark scores.",
     "scope_complete_discharge": false,
     "success_probability_lcb": "0.5",
     "wall_clock_cost_ub": 3
@@ -385,6 +405,22 @@
       "raw_trace_abstentions": 31,
       "relation_abstentions": 0,
       "seconds": 155.62
+    },
+    "iteration_10": {
+      "benchmark_score_authority": false,
+      "combined_zero_model_harbor_tests": 15,
+      "embedded_python_blocks_compiled": 6,
+      "hard51_ids": 51,
+      "model_calls": 0,
+      "purpose_compiler_tests": 11,
+      "raw_benchmark_tasks_saved_in_workspace": 0,
+      "runner_task_count": 3,
+      "runtime_network_calls_in_agent_cognition": 0,
+      "section_6": "NOT_MET",
+      "source_bindings": 4,
+      "swe_pro_v2_sha256sums_checked": 6436,
+      "swe_pro_v2_tasks": 642,
+      "workflow_steps": 13
     },
     "iteration_2": {
       "all_criteria_met": true,
@@ -665,8 +701,8 @@
     },
     {
       "benchmark": "SWE_BENCH_PRO_V2_HARD_51",
-      "blocker": "642 locked Harbor tasks, GHCR images, offline agent phase and fresh-container patch re-grading",
-      "status": "UNRUN__BLOCKED"
+      "blocker": "full 642-task / full HARD-51 score, GHCR images, offline agent phase, fresh-container regrade and runner-owned OIDC receipt remain required",
+      "status": "THREE_TASK_RUNNER_WORKFLOW_ADDED__RECEIPT_NOT_YET_RECORDED__NO_SCORE"
     },
     {
       "benchmark": "TERMINAL_BENCH_4_1_REMAINING_CPU_AND_GPU_TASKS",
@@ -674,7 +710,7 @@
       "status": "THREE_FRESH_CPU_TASKS_ATTEMPTED__NO_TASK_SUCCESS__REMAINING_TASKS_UNRUN"
     }
   ],
-  "next_step": "REPEAT_WITH_GENERAL_ZERO_MODEL_PURPOSE_UNDERSTANDING_AND_REPAIR_CONTENT__THEN_OSWORLD_2_1_AND_SWE_BENCH_PRO_V2_HARD_51__NO_CREDIT_UNTIL_SECTION_6",
+  "next_step": "TRIGGER_RUNNER_OWNED_SWE_PRO_V2_HARD51_OIDC_RECEIPT__THEN_OSWORLD_2_1__REMAINING_HARD_TASKS__NO_CREDIT_UNTIL_SECTION_6",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "probe_specific": false,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
@@ -700,10 +736,24 @@
     "THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md",
     ".github/workflows/independent-grammar-transport-replay-v1.yml",
     "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json",
-    "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256"
+    "canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256",
+    "canonical/harbor/brain_zero_model_policy_v1.py",
+    "canonical/harbor/brain_zero_model_agent_v1.py",
+    "canonical/harbor/select_tb41_cpu_tasks_v1.py",
+    "canonical/tests/test_brain_zero_model_harbor_integration_v1.py",
+    ".github/workflows/zero-model-tb41-cpu-runner-v1.yml",
+    "canonical/verification/TERMINAL_BENCH_4_1_CPU_ZERO_MODEL_RUNNER_RECEIPT_20261124_V1.json",
+    "canonical/verification/TERMINAL_BENCH_4_1_CPU_REWARD_LOG_20261124_V1.json",
+    "HARD_BENCHMARK_ZERO_MODEL_HARBOR_INTEGRATION_20261124_V1.md",
+    "canonical/harbor/brain_zero_model_purpose_policy_v2.py",
+    "canonical/harbor/brain_zero_model_purpose_agent_v2.py",
+    "canonical/harbor/select_swe_pro_v2_hard51_tasks_v1.py",
+    "canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py",
+    ".github/workflows/zero-model-swe-pro-v2-hard51-runner-v1.yml",
+    "SWE_BENCH_PRO_V2_ZERO_MODEL_PURPOSE_INTEGRATION_20261124_V1.md"
   ],
   "promotion_authority": false,
-  "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no §6 obligation and grants no capability, family, terminal or truth credit.",
+  "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no \u00a76 obligation and grants no capability, family, terminal or truth credit. Iteration 10 composes a finite zero-model purpose compiler and a pinned SWE-bench Pro V2 / HARD-51 runner carrier; no runner receipt, task success, benchmark score, \u00a76 verification or credit is claimed from the producer side.",
   "recursive_obs": {
     "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
@@ -727,7 +777,7 @@
       "a locally self-written independent receipt without a real OIDC run reference",
       "artifact-host download as the sole independent-receipt channel",
       "scan-everything web research as a substitute for unseen hard-environment authority",
-      "claiming a finite OIDC transport replay is independent §6 verification"
+      "claiming a finite OIDC transport replay is independent \u00a76 verification"
     ],
     "expected_parent_level_state_change": "The agent now carries relation texts plus a hashed declarative grammar descriptor, a zero-inference external Harbor adapter and a distinct runner-owned OIDC reward log for three fresh unseen CPU-only Terminal-Bench 4.1 tasks. The three official reward vectors are all 0.0, so this is a verified harness attempt with three failed task outcomes, not a benchmark score, not arbitrary purpose discovery and not terminal completion.",
     "obs_blocker": {
@@ -747,10 +797,14 @@
         "delete task-specific solvers and fingerprint-bound probes as capability evidence",
         "bypass hidden tests, solutions, verifiers and borrowed outputs",
         "substitute a model, web scan or locally fabricated receipt for a distinct runner log",
-        "call zero reward vectors task successes or an aggregate benchmark score"
+        "call zero reward vectors task successes or an aggregate benchmark score",
+        "add a universal natural-language purpose parser (rejected: forbidden runtime model and authored-content problem)",
+        "read hidden tests or gold patches to author a repair (rejected: leakage boundary)",
+        "use unpinned GHCR tags (rejected: workflow resolves and pulls immutable digests)",
+        "call a three-task HARD-51 attempt an aggregate benchmark score (rejected: score authority remains false)"
       ],
-      "intrinsic_or_path_specific": "path-specific for fitted loops, finite replay and harness authority; distinct OIDC authority now exists for exact finite transport replay and a fresh CPU-only hard-benchmark attempt, while task success, OSWorld 2.1, SWE-bench Pro V2 / HARD-51 and terminal completion remain unresolved",
-      "surviving_causal_blocker": "A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, §6 verification or terminal credit exists. OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 remain unrun; arbitrary purpose discovery, authored repair content and general computer use remain open."
+      "intrinsic_or_path_specific": "path-specific for fitted loops, finite replay and harness authority; distinct OIDC authority now exists for exact finite transport replay and a fresh CPU-only hard-benchmark attempt, while task success, OSWorld 2.1, SWE-bench Pro V2 / HARD-51 is a pinned three-task attempt, and terminal completion remains unresolved Iteration 10 is path-specific for instruction-supplied finite transformations and fresh-container replay; it is not arbitrary purpose understanding.",
+      "surviving_causal_blocker": "A distinct OIDC runner re-ran exact finite grammar-transport bytes and then took three fresh seeded CPU-only Terminal-Bench 4.1 tasks with a Brain-owned zero-inference Harbor agent. The official verifier returned one reward vector per task, each 0.0; no task success, benchmark score, \u00a76 verification or terminal credit exists. OSWorld 2.1 remains unrun; iteration 10 adds a pinned three-task SWE-bench Pro V2 / HARD-51 attempt; arbitrary purpose discovery, authored repair content and general computer use remain open. Iteration 10 adds the pinned three-task SWE-bench Pro V2 / HARD-51 purpose-compiler carrier; OSWorld 2.1, full SWE/TB scores, arbitrary purpose discovery, authored repair content and general computer use remain unresolved."
     },
     "obs_capability": {
       "adjacent_capabilities_absorbed": "the same loop computes deictic pointers and grammar verdicts from executor evidence, and the new adapter reuses that boundary by refusing stored predicates, hidden-test labels, model calls and borrowed outputs; the runner-owned receipt is authority for the attempt only",
@@ -770,7 +824,11 @@
         "fingerprint-bound instruction gates as capability",
         "hidden-test or solution reading from the agent path",
         "model or web research as producer cognition",
-        "zero reward vectors as success or benchmark score"
+        "zero reward vectors as success or benchmark score",
+        "universal natural-language purpose parser",
+        "authored repair content from hidden tests or gold patches",
+        "unpinned image tags in the runner task subset",
+        "producer-written substitute for the runner-owned receipt"
       ],
       "existing_inherited_routes_checked": [
         "canonical/tools/breadth_buys_what_repetition_cannot_v1.py",
@@ -782,7 +840,11 @@
         "canonical/tools/recomputed_relation_grammar_v1.py",
         "canonical/tools/the_grammar_is_not_a_literal_v1.py",
         ".github/workflows/capability-receipt-verification.yml",
-        ".github/workflows/independent-grammar-transport-replay-v1.yml"
+        ".github/workflows/independent-grammar-transport-replay-v1.yml",
+        ".github/workflows/zero-model-tb41-cpu-runner-v1.yml",
+        "canonical/harbor/brain_zero_model_policy_v1.py",
+        "canonical/harbor/brain_zero_model_agent_v1.py",
+        "canonical/harbor/select_tb41_cpu_tasks_v1.py"
       ],
       "external_existing_routes_checked": [
         "memory-augmented continual learning: abstract procedural memories beat raw trajectories",
@@ -804,31 +866,32 @@
         "Terminal-Bench 4.1.0 release and RewardKit isolated verifier facts",
         "SWE-bench Pro V2 PR #119: 642 Harbor tasks, offline agent phase and pristine-image patch replay"
       ],
-      "fresh_reuse_plan": "the next round reuses exact blob pinning, OIDC run references and fail-closed replay only as a carrier; it still needs an independent pinned §6 hard-benchmark harness, purpose-bearing grammar discovery and shipped-agent integration",
-      "surviving_gap": "independent §6 hard-benchmark verification, arbitrary purpose-bearing grammar discovery, authored repair, real GUI/browser and SWE harnesses, and shipped-agent integration"
+      "fresh_reuse_plan": "the next round reuses exact blob pinning, OIDC run references and fail-closed replay only as a carrier; it still needs an independent pinned \u00a76 hard-benchmark harness, purpose-bearing grammar discovery and shipped-agent integration",
+      "surviving_gap": "independent \u00a76 hard-benchmark verification, arbitrary purpose-bearing grammar discovery, authored repair, real GUI/browser and SWE harnesses, and shipped-agent integration"
     },
     "obs_goal": {
       "proxy_goals_deleted": [
         "a higher benchmark score quoted from a fetched leaderboard",
         "all-criteria-met on every instrument",
         "an unbroken success narrative",
-        "content-pointer portability claimed as independent verification or §6 completion",
-        "claiming fresh-process transport is independent verification or §6 completion",
-        "claiming an OIDC-attested finite transport replay is independent §6 verification or terminal completion",
-        "claiming more fetched primary-source pages solve unseen hard-environment authority"
+        "content-pointer portability claimed as independent verification or \u00a76 completion",
+        "claiming fresh-process transport is independent verification or \u00a76 completion",
+        "claiming an OIDC-attested finite transport replay is independent \u00a76 verification or terminal completion",
+        "claiming more fetched primary-source pages solve unseen hard-environment authority",
+        "claiming a finite instruction-supplied transformation grammar is arbitrary purpose understanding or authored repair content"
       ],
-      "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no §6 obligation and grants no capability, family, terminal or truth credit.",
-      "surviving_necessity": "The smallest undecided relation class is now whether any zero-model Brain-owned mechanism can turn fresh hard-environment evidence into task success without hidden-test leakage; the first three official reward vectors were all 0.0."
+      "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no \u00a76 obligation and grants no capability, family, terminal or truth credit. Iteration 10 composes a finite purpose compiler and pinned HARD-51 carrier; no runner receipt, task success, benchmark score, \u00a76 verification or credit is claimed from the producer side.",
+      "surviving_necessity": "The smallest undecided relation class is whether a finite zero-model Brain-owned purpose compiler can turn instruction-supplied transformations and visible repository evidence into a non-empty patch and task success on fresh HARD-51 tasks without hidden-test leakage; arbitrary natural-language purpose and authored repair content remain outside this finite grammar."
     },
     "obs_inherited_system": {
       "adjacent_capabilities_absorbed": "minimum-experience pricing, fail-closed refusal, computed deictic terms, a computed content pointer, hashed grammar transport and one OIDC-attested distinct-run replay inside the same evidence discipline",
-      "downstream_work_to_delete_or_supersede": "the assumption that one fitted goal grammar can be hardcoded, that stored verdict labels can be trusted, that a fresh same-identity process is independent verification, or that exact finite transport replay is §6 authority",
+      "downstream_work_to_delete_or_supersede": "the assumption that one fitted goal grammar can be hardcoded, that stored verdict labels can be trusted, that a fresh same-identity process is independent verification, or that exact finite transport replay is \u00a76 authority",
       "fresh_reuse_plan": "future work reuses the OIDC receipt pattern with real pinned benchmark harnesses and independent graders; no producer-side score or terminal claim is admitted"
     },
     "obs_obs": {
       "affected_layers_only_on_revalidation": true,
       "analysis_steps_deleted_or_cached": "the 555-run fit was cited rather than re-run; the cheap 75-run rung, 83-run computed fit, 516-run pointer fit, 798-run grammar fit and runner-owned 2,404-record replay are the cached results",
-      "search_stop_decision": "stop this round after eight pre-registered iterations, twenty-nine tests, 52 unique primary-source pages / 182 distinct chunk reads / 188 invocations, two successful OIDC workflow runs, one runner-owned narrow receipt, the fresh-process transport checks, the repo-integrity / drift / load-bearing / orientation gates and the honest failed-round report; §6 remains NOT MET"
+      "search_stop_decision": "stop this round after eight pre-registered iterations, twenty-nine tests, 52 unique primary-source pages / 182 distinct chunk reads / 188 invocations, two successful OIDC workflow runs, one runner-owned narrow receipt, the fresh-process transport checks, the repo-integrity / drift / load-bearing / orientation gates and the honest failed-round report; \u00a76 remains NOT MET"
     },
     "obs_solution": {
       "deletion_first_order_applied": [
@@ -845,19 +908,19 @@
       "losing_routes_reason": "Model agents, oracle/solution paths, hidden-test reading, scan-everything research, local receipt fabrication and zero-reward-as-success scoring would violate measured authority boundaries or duplicate killed mechanisms.",
       "routes_ranked": [
         "REUSE existing grammar/OIDC/gate spine",
-        "COMPOSE stdlib policy with Harbor BaseAgent and pinned runner workflow",
-        "INTEGRATE fresh CPU-only Terminal-Bench 4.1 tasks under digest-pinned prebuilt images",
+        "COMPOSE finite zero-model purpose policy with Harbor BaseAgent and metadata-only HARD-51 selector",
+        "INTEGRATE three fresh seeded HARD-51 tasks under digest-pinned GHCR images and offline agent phase",
         "RECORD distinct OIDC receipt, reward log and zero-credit verified/unverified/failed split",
-        "SYNTHESIZE_NEW_PRIMITIVE rejected: no model, no learner, no task-specific solver"
+        "SYNTHESIZE_NEW_PRIMITIVE rejected: no model, no learner, no universal parser, no task-specific solver"
       ]
     },
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Real mv/cp/rm/ls/sh executions are the producer oracle: 555 fit runs, 31 held-out runs, 25 refusal runs, 68 second-goal held-out runs, 83 computed-relation fit runs, 68 OVERWRITE runs, 127 third-name runs, 516 pointer-fit runs, 258+258 content-pointer held-out runs, 798 grammar-fit runs and 399+584 grammar held-out runs. A fresh isolated process recomputes 2,404 raw records; 12 hard CLI cases fail closed. A distinct GitHub-hosted OIDC runner then re-ran the exact six pinned blobs, 28 checks and five adversarial controls under run 45293031532 and committed its own receipt. 29 new tests plus 200 selected regression tests pin the producer receipts; no independent verifier ran any §6 hard benchmark and none is claimed."
+      "synthetic_verification_necessity": "Real mv/cp/rm/ls/sh executions are the producer oracle: 555 fit runs, 31 held-out runs, 25 refusal runs, 68 second-goal held-out runs, 83 computed-relation fit runs, 68 OVERWRITE runs, 127 third-name runs, 516 pointer-fit runs, 258+258 content-pointer held-out runs, 798 grammar-fit runs and 399+584 grammar held-out runs. A fresh isolated process recomputes 2,404 raw records; 12 hard CLI cases fail closed. A distinct GitHub-hosted OIDC runner then re-ran the exact six pinned blobs, 28 checks and five adversarial controls under run 45293031532 and committed its own receipt. 29 new tests plus 200 selected regression tests pin the producer receipts; no independent verifier ran any \u00a76 hard benchmark and none is claimed."
     },
-    "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no §6 obligation and grants no capability, family, terminal or truth credit.",
-    "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, external deletable relation texts, recomputed grammar descriptors, and a Brain-owned no-inference Harbor custom agent whose commands derive only from instruction-supplied quoted operands and safe observed paths; distinct-run OIDC replay exists for exact finite-transport bytes and a distinct runner-owned reward log exists for three fresh CPU-only hard-benchmark attempts with zero task successes",
+    "real_outcome": "The minimal loop transported a different goal and relation grammar as a hashed declarative descriptor and a distinct OIDC runner re-ran those exact frozen bytes. Iteration 9 then shipped the first Brain-owned zero-inference external Harbor agent and a runner-side fresh CPU-only Terminal-Bench 4.1 harness carrier. The runner bound exact source bytes, pinned release digests, six digest-pinned images and OIDC claims; it parsed three official Harbor reward vectors, each 0.0, with no harness exceptions. The runner receipt is authoritative for the attempt and reward diagnostics; the local producer did not fabricate it. This closes no \u00a76 obligation and grants no capability, family, terminal or truth credit. Iteration 10 composes a finite zero-model purpose compiler and a pinned SWE-bench Pro V2 / HARD-51 runner carrier; no runner receipt, task success, benchmark score, \u00a76 verification or credit is claimed from the producer side.",
+    "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, external deletable relation texts, recomputed grammar descriptors, and a Brain-owned no-inference Harbor custom agent whose commands derive only from instruction-supplied quoted operands and safe observed paths; distinct-run OIDC replay exists for exact finite-transport bytes and a distinct runner-owned reward log exists for three fresh CPU-only hard-benchmark attempts with zero task successes; iteration 10 adds finite instruction-supplied transformations, metadata-only HARD-51 selection, GHCR digest pins and fresh-container patch replay boundaries, with no authored repair content",
     "route_frontier": {
       "challenger_routes": [
         {
@@ -910,7 +973,7 @@
             "CORRECTNESS": "identity literal false-rejects 4 named witnesses",
             "INCREMENTAL_COST": "hidden error or 43/69 abstentions",
             "RELIABILITY": "computed deictic relation wins",
-            "VERIFIABILITY": "seven producer receipts; no independent §6 hard-benchmark verifier",
+            "VERIFIABILITY": "seven producer receipts; no independent \u00a76 hard-benchmark verifier",
             "WALL_CLOCK": "fast but wrong or incomplete"
           },
           "evidence": [
@@ -932,11 +995,11 @@
         {
           "comparison": {
             "CAPABILITY_STRENGTH": "no new term family, only a fitted holder-shape grammar",
-            "CORRECTNESS": "content literal refuses 258 runs; producer receipt alone is not §6-independent",
+            "CORRECTNESS": "content literal refuses 258 runs; producer receipt alone is not \u00a76-independent",
             "INCREMENTAL_COST": "hidden refusal or hidden verifier gap",
             "RELIABILITY": "computed content pointer wins inside the sandbox only",
-            "VERIFIABILITY": "seven producer receipts; no independent §6 hard-benchmark verifier",
-            "WALL_CLOCK": "fast but not a §6 measurement"
+            "VERIFIABILITY": "seven producer receipts; no independent \u00a76 hard-benchmark verifier",
+            "WALL_CLOCK": "fast but not a \u00a76 measurement"
           },
           "evidence": [
             "iteration 5 old literal store refused a machine with alpha_content",
@@ -955,7 +1018,7 @@
         },
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "one changed finite typed grammar, fresh-process replay and distinct-run exact-byte authority; no §6 capability",
+            "CAPABILITY_STRENGTH": "one changed finite typed grammar, fresh-process replay and distinct-run exact-byte authority; no \u00a76 capability",
             "CORRECTNESS": "399/399 and 584/584 held-out predictions; 39/39 pointerless refusals; six pinned blobs unchanged in final tree",
             "INCREMENTAL_COST": "one workflow, two successful runs, one runner-owned receipt and sidecar; zero hard-benchmark tasks",
             "RELIABILITY": "28 measurement checks, five adversarial controls and 12 hard CLI cases fail closed; no stored expected verdicts",
@@ -1011,7 +1074,7 @@
         },
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "shipped harness integration and distinct hard-benchmark attempt, no §6 capability",
+            "CAPABILITY_STRENGTH": "shipped harness integration and distinct hard-benchmark attempt, no \u00a76 capability",
             "CORRECTNESS": "fail-closed zero-inference policy; official verifier decides rewards",
             "INCREMENTAL_COST": "one workflow, four source files, one runner receipt and one reward log",
             "RELIABILITY": "exact source hashes, pinned release digests, pinned images, OIDC claims and hidden-test boundary",
@@ -1067,7 +1130,7 @@
         },
         {
           "comparison": {
-            "CAPABILITY_STRENGTH": "three task attempts failed in reward sense; no general capability or §6 credit",
+            "CAPABILITY_STRENGTH": "three task attempts failed in reward sense; no general capability or \u00a76 credit",
             "CORRECTNESS": "official Harbor result.json produced three valid reward vectors with no harness exception",
             "INCREMENTAL_COST": "one workflow, four source files, one receipt, one sidecar and one reward log",
             "RELIABILITY": "exact source hashes, pinned release digests, six pinned images, OIDC claims and hidden-test boundary",
@@ -1106,7 +1169,8 @@
       "discovery_required": true,
       "incumbent_route": "BRAIN_OWNED_NO_INFERENCE_HARBOR_HARNESS_INTEGRATION_V1_WITH_OIDC_RUNNER_RECEIPT",
       "max_age_hours": 24,
-      "negative_search_summary": "The original exhaustive 52-page primary-source ledger remains unchanged. Iteration 9 added current-Nov-2026 Harbor 0.27.0, Terminal-Bench 4.1.0, OSWorld 2.1 and SWE-bench Pro V2 source/API checks; the GitHub registry page is large and only chunk 0 was read, so it is not claimed exhaustive. A distinct OIDC runner then consumed three fresh CPU-only tasks and returned three 0.0 reward vectors. No independent §6 verifier or benchmark score exists.",
+      "negative_search_summary": "The original exhaustive 52-page primary-source ledger remains unchanged. Iteration 9 added current-Nov-2026 Harbor 0.27.0, Terminal-Bench 4.1.0, OSWorld 2.1 and SWE-bench Pro V2 source/API checks; the GitHub registry page is large and only chunk 0 was read, so it is not claimed exhaustive. A distinct OIDC runner then consumed three fresh CPU-only tasks and returned three 0.0 reward vectors. No independent \u00a76 verifier or benchmark score exists.",
+      "no_known_counterexample_reason": "Three 0.0 reward vectors are a negative hard-benchmark result, not a known counterexample to the harness boundary; OSWorld 2.1 remains unrun, iteration 10 adds a pinned three-task SWE-bench Pro V2 / HARD-51 attempt, and no aggregate score is claimed. Earlier preserved counterexample receipts remain bound.",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
@@ -1301,41 +1365,41 @@
           "OSWorld-V2 README and OSWorld 2.1 release notes"
         ]
       },
-      "stop_condition": "Eight measured iterations, one generic fresh-process interpreter, eight producer receipts plus one runner-owned independent finite-transport receipt, twenty-nine new tests, four external relation stores, one raw executor log, the 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), one OIDC replay workflow and the consolidated report exist; all failed rounds and killed designs are preserved; same-identity transport is not claimed as independent verification; the OIDC receipt is not claimed as §6 verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
+      "stop_condition": "Eight measured iterations, one generic fresh-process interpreter, eight producer receipts plus one runner-owned independent finite-transport receipt, twenty-nine new tests, four external relation stores, one raw executor log, the 52-page primary-source ledger (182 distinct chunk reads / 188 invocations), one OIDC replay workflow and the consolidated report exist; all failed rounds and killed designs are preserved; same-identity transport is not claimed as independent verification; the OIDC receipt is not claimed as \u00a76 verification; no OSWorld, SWE-bench Pro or Terminal-Bench score is claimed; no capability credit is taken.",
       "unresolved_plausible_dominators": [],
-      "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. Reusing the existing OIDC public-runner carrier adds distinct-run authority for those exact frozen bytes with one workflow and zero benchmark tasks; it is cheaper than a new verification primitive and does not claim independent §6 identity verification."
+      "why_selected_route_is_fastest_sufficient": "A hashed allowlisted descriptor removes hardcoded producer-side term families without adding a model, a world fact or stored executable code; a fresh isolated process recomputes every term and the goal verdict from local raw states/commands, and hard byte-hash/label/control failures fail closed. Reusing the existing OIDC public-runner carrier adds distinct-run authority for those exact frozen bytes with one workflow and zero benchmark tasks; it is cheaper than a new verification primitive and does not claim independent \u00a76 identity verification."
     },
     "routes_considered": [
       "REUSE: existing version-space fit, quotient, gate, store, raw executor evidence and the project's OIDC public-runner carrier (selected)",
       "COMPOSE: seven instruments, one stdlib interpreter, a hashed declarative grammar and one independent exact-byte replay workflow (selected)",
       "BYPASS: ask a human or a model to pick the residual sentence, invent a grammar, or self-write an independent receipt (rejected)",
       "SUBSTITUTE: learned proposer, world model, hardcoded grammar, stored verdict labels or scan-everything research (rejected)",
-      "SYNTHESIZE_NEW_PRIMITIVE: hand-built holder_changed term, full canonical table, new verification primitive or independent §6 claim (rejected by measurement)"
+      "SYNTHESIZE_NEW_PRIMITIVE: hand-built holder_changed term, full canonical table, new verification primitive or independent \u00a76 claim (rejected by measurement)"
     ],
-    "selected_surviving_route": "BRAIN_OWNED_NO_INFERENCE_HARBOR_HARNESS_INTEGRATION_V1",
-    "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken.",
-    "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure."
+    "selected_surviving_route": "BRAIN_OWNED_NO_INFERENCE_SWE_PRO_V2_FINITE_PURPOSE_COMPILER_V2",
+    "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken. Iteration 10 adds one finite purpose compiler, one purpose agent, one HARD-51 selector, eleven new tests and one pinned OIDC runner workflow; no SWE-bench Pro V2 / HARD-51 receipt, score, \u00a76 verification or credit is claimed.",
+    "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure. Iteration 10 reuses the same carrier and composes only a finite instruction-supplied transformation grammar, metadata-only HARD-51 selection and upstream fresh-container replay; a universal parser, model, hidden-test reader, task-specific solver or new learner would duplicate a killed mechanism or hide a measured failure."
   },
-  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, external deletable relation texts, recomputed grammar descriptors, and a Brain-owned no-inference Harbor custom agent whose commands derive only from instruction-supplied quoted operands and safe observed paths; distinct-run OIDC replay exists for exact finite-transport bytes and a distinct runner-owned reward log exists for three fresh CPU-only hard-benchmark attempts with zero task successes",
+  "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, external deletable relation texts, recomputed grammar descriptors, and a Brain-owned no-inference Harbor custom agent whose commands derive only from instruction-supplied quoted operands and safe observed paths; distinct-run OIDC replay exists for exact finite-transport bytes and a distinct runner-owned reward log exists for three fresh CPU-only hard-benchmark attempts with zero task successes; iteration 10 adds a finite instruction-supplied transformation compiler, a metadata-only HARD-51 selector, GHCR digest pins and fresh-container patch replay boundaries, with no authored repair content",
   "route_class": "INTEGRATE",
-  "route_id": "BRAIN_OWNED_NO_INFERENCE_HARBOR_HARNESS_INTEGRATION_V1",
+  "route_id": "BRAIN_OWNED_NO_INFERENCE_SWE_PRO_V2_FINITE_PURPOSE_COMPILER_V2",
   "route_order_walk": {
     "ADAPT": "Adapted the external store to a hashed declarative grammar descriptor plus a transient raw executor log.",
     "BYPASS": "Rejected web-first and model-first answers.",
-    "COMPOSE": "Selected: seven measurement instruments, one generic fresh-process interpreter, one recomputed declarative relation grammar and one OIDC-attested independent replay workflow from existing parts.",
+    "COMPOSE": "Selected: seven measurement instruments, one generic fresh-process interpreter, one recomputed declarative relation grammar and one OIDC-attested independent replay workflow from existing parts. Iteration 10 composes a finite purpose policy, a zero-inference purpose agent with patch capture, a metadata-only HARD-51 selector and one pinned OIDC runner workflow.",
     "CONFIGURE": "No runtime configuration changes.",
-    "DELETE": "Deleted sentence-choice dialogue, raw trace memory, uniform-depth refit, identity literals, content literals, hardcoded term families, stored expected verdicts, model-proposed predicates, locally fabricated independent receipts and the blocked artifact-download path.",
+    "DELETE": "Deleted sentence-choice dialogue, raw trace memory, uniform-depth refit, identity literals, content literals, hardcoded term families, stored expected verdicts, model-proposed predicates, locally fabricated independent receipts and the blocked artifact-download path. Iteration 10 deletes arbitrary natural-language repair inference, hidden-task-content reads, unpinned image tags and producer-written runner receipts.",
     "INTEGRATE": "Not claimed; the shipped agent spine is unchanged.",
-    "REUSE": "Reused version space, quotient projections, run grammar, separating-run search, gate, external store and the project's existing capability-receipt-verification OIDC carrier.",
+    "REUSE": "Reused version space, quotient projections, run grammar, separating-run search, gate, external store and the project's existing capability-receipt-verification OIDC carrier. Iteration 10 reuses the OIDC carrier, exact-source binding, hidden-test boundary, Harbor custom-agent import path and fresh-task selection discipline.",
     "SUBSTITUTE": "Rejected a model, a world model, a hand-built predicate, a content literal and a full canonical-trace table.",
-    "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: independent §6 hard-benchmark verification, arbitrary purpose discovery and real OSWorld / SWE-bench Pro / Terminal-Bench runs remain unmeasured; finite transport replay is a narrow exception with zero credit.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: iteration 10 is a finite instruction-supplied transformation grammar, not arbitrary purpose discovery or authored repair content; independent \u00a76 hard-benchmark verification and OSWorld 2.1 remain unmeasured.",
     "WHITE_BOX_HARVEST": "Not used."
   },
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-  "selected_route": "BRAIN_OWNED_NO_INFERENCE_HARBOR_HARNESS_INTEGRATION_V1",
-  "selected_surviving_route": "BRAIN_OWNED_NO_INFERENCE_HARBOR_HARNESS_INTEGRATION_V1",
-  "status": "PROPOSED__PRODUCER_MEASURED__NINE_ITERATIONS__RUNNER_OWNED_HARD_BENCHMARK_ATTEMPT_RECORDED__FINAL_GATES_AFTER_RECEIPT_PASSED__SECTION_6_OPEN",
-  "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken.",
+  "selected_route": "BRAIN_OWNED_NO_INFERENCE_SWE_PRO_V2_FINITE_PURPOSE_COMPILER_V2",
+  "selected_surviving_route": "BRAIN_OWNED_NO_INFERENCE_SWE_PRO_V2_FINITE_PURPOSE_COMPILER_V2",
+  "status": "PROPOSED__PRODUCER_MEASURED__TEN_ITERATIONS__FINITE_ZERO_MODEL_PURPOSE_COMPILER_V2_ADDED__SWE_PRO_V2_HARD51_OIDC_RUNNER_ADDED__SECTION_6_OPEN",
+  "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken. Iteration 10 adds four exact source bindings, eleven finite-purpose tests, one metadata-only HARD-51 selector and one distinct OIDC runner workflow; no SWE-bench Pro V2 / HARD-51 receipt, score, \u00a76 verification or credit is claimed.",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "truth": {
@@ -1344,7 +1408,7 @@
     "family_credit_delta": 0,
     "section_6": "NOT_MET",
     "terminal_credit_delta": 0,
-    "the_law_this_round_adds": "Authority over unseen hard environments requires a shipped Brain-owned no-inference adapter, pinned official harness bytes, fresh seeded tasks, hidden-test/solution boundaries and a distinct runner-owned reward log. The first such OIDC run produced three valid reward vectors, all 0.0: verified harness authority is not task success, not a benchmark score, not arbitrary purpose understanding, not §6 verification and not terminal completion.",
+    "the_law_this_round_adds": "Authority over unseen hard environments requires a shipped Brain-owned no-inference adapter, pinned official harness bytes, fresh seeded tasks, hidden-test/solution boundaries and a distinct runner-owned reward log. The first such OIDC run produced three valid reward vectors, all 0.0: verified harness authority is not task success, not a benchmark score, not arbitrary purpose understanding, not \u00a76 verification and not terminal completion. Iteration 10 adds that a finite instruction-supplied transformation grammar can be fail-closed on arbitrary bug reports, but it is neither arbitrary purpose understanding nor authored repair content; only a distinct runner-owned fresh-container receipt can turn the pinned HARD-51 carrier into measured evidence.",
     "what_is_false_in_the_claim": [
       "that the user must choose between residual sentences",
       "that more fitted environments necessarily buy more correctness",
@@ -1354,19 +1418,24 @@
       "that a hand-built holder_changed term is a computed grammar",
       "that full trace isomorphism is the right quotient for transfer",
       "that a two-statement/one-judgment residual is the real iteration-6 class",
-      "that a producer-run content-pointer receipt is independent verification or §6 completion",
+      "that a producer-run content-pointer receipt is independent verification or \u00a76 completion",
       "that one hardcoded holder-shape term family is grammar transport",
       "that a fresh isolated process with the same OS identity is an independent verifier",
       "that a finite allowlisted grammar solves arbitrary purpose or authored repair content",
       "that primary-source leaderboard numbers are our system results",
-      "that an OIDC-attested replay of finite grammar-transport bytes is independent §6 verification or a terminal-capability score",
+      "that an OIDC-attested replay of finite grammar-transport bytes is independent \u00a76 verification or a terminal-capability score",
       "that a producer-written local receipt can substitute for a distinct runner-owned receipt with a real workflow run reference",
       "that a task-specific solver or fingerprint-bound probe is a Brain capability",
-      "that a runner-owned hard-benchmark attempt with reward logs is §6 verification or a benchmark score",
+      "that a runner-owned hard-benchmark attempt with reward logs is \u00a76 verification or a benchmark score",
       "that OSWorld 2.1 or SWE-bench Pro V2 / HARD-51 was run",
       "that hidden-test reading, borrowed outputs or model calls can be hidden inside a harness adapter",
       "that three reward vectors of 0.0 are task successes or a 0/3 benchmark score is authority",
-      "that receipt.failed=[] means no task failure; it records no harness exception only"
+      "that receipt.failed=[] means no task failure; it records no harness exception only",
+      "that a finite instruction-supplied transformation grammar is arbitrary natural-language purpose understanding",
+      "that an empty fail-closed patch is authored repair content",
+      "that a three-task HARD-51 attempt is an aggregate SWE-bench Pro V2 score or \u00a76 verification",
+      "that OSWorld 2.1 was run",
+      "that an OSWorld-V2 main-branch clone is the pinned osworld-v2.1 release"
     ]
   },
   "user_authorized_governance_change": false,
@@ -1416,7 +1485,7 @@
     },
     "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
     "mode": "ACTIVE_INTERFACE",
-    "proof_state_reachability": "No truth obligation is discharged. Eight producer receipts are causal measurements, one distinct OIDC runner re-ran exact finite transport bytes, and one distinct OIDC runner returned three zero-reward hard-benchmark trial vectors with zero task successes and zero §6 credit. Local final gates pass; fresh reality authority remains false.",
+    "proof_state_reachability": "No truth obligation is discharged. Eight producer receipts are causal measurements, one distinct OIDC runner re-ran exact finite transport bytes, and one distinct OIDC runner returned three zero-reward hard-benchmark trial vectors with zero task successes and zero \u00a76 credit. Local final gates pass; fresh reality authority remains false.",
     "target_truth_obligations": [
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
@@ -1436,7 +1505,7 @@
           "path": "canonical/verification/THE_GRAMMAR_IS_NOT_A_LITERAL_20261123_V1.json"
         }
       ],
-      "decisive_question": "Can a Brain-owned zero-inference external agent take fresh unseen CPU-only Terminal-Bench 4.1 tasks under a distinct OIDC runner with reward logs and no hidden-test reading, task-specific answers, borrowed outputs, model calls or §6 credit, and can it then solve tasks at all? The first runner answer to the first half is yes for the harness attempt; the second half is no, with three 0.0 rewards.",
+      "decisive_question": "Can a Brain-owned zero-inference external agent take fresh unseen CPU-only Terminal-Bench 4.1 tasks under a distinct OIDC runner with reward logs and no hidden-test reading, task-specific answers, borrowed outputs, model calls or \u00a76 credit, and can it then solve tasks at all? The first runner answer to the first half is yes for the harness attempt; the second half is no, with three 0.0 rewards.",
       "falsifier_id": "A_ZERO_REWARD_IS_CALLED_SUCCESS_OR_A_TASK_SPECIFIC_ANSWER_HIDDEN_TEST_READ_MODEL_CALL_BORROWED_OUTPUT_OR_LOCAL_RECEIPT_IS_SMUGGLED_IN",
       "known_counterexamples_checked": true,
       "no_known_counterexample_reason": "Three 0.0 reward vectors are a negative hard-benchmark result, not a known counterexample to the harness boundary; OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 remain unrun. Earlier preserved counterexample receipts remain bound.",
@@ -1467,7 +1536,7 @@
   },
   "verification": {
     "artifact_or_log_download_failure": "EOF from blob.core.windows.net and results-receiver.actions.githubusercontent.com; signed artifact URL returned HTTP 500; no local receipt was fabricated",
-    "authority": "PRODUCER_RUN_SANDBOX_PLUS_GITHUB_ACTIONS_OIDC_DISTINCT_RUN_FOR_FINITE_TRANSPORT_REPLAY_ONLY",
+    "authority": "PRODUCER_RUN_SANDBOX_PLUS_GITHUB_ACTIONS_OIDC_DISTINCT_RUN_FOR_FINITE_TRANSPORT_REPLAY_ONLY__THIRD_WORKFLOW_ADDED_FOR_FRESH_SWE_PRO_V2_HARD51_PURPOSE_ATTEMPT_ONLY",
     "commands": [
       "python3 canonical/tools/the_environment_answers_the_question_v1.py --receipt canonical/verification/THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.json --store canonical/astra_runtime/state/CARRIED_RELATION_V1.json",
       "python3 canonical/tools/the_minimum_experience_v1.py --receipt canonical/verification/THE_MINIMUM_EXPERIENCE_20261123_V1.json",
@@ -1489,7 +1558,9 @@
       "gh run view 45293031532 --repo moxnixmdj/brain --json conclusion,updatedAt,headSha,url",
       "python3 -c \"import hashlib,pathlib; p=pathlib.Path('canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.json'); s=pathlib.Path('canonical/verification/GRAMMAR_TRANSPORT_INDEPENDENT_VERIFICATION_20261123_V1.sha256'); assert hashlib.sha256(p.read_bytes()).hexdigest()==s.read_text().strip()\"",
       "cd /tmp && python3 -I -B /home/user/brain/canonical/tools/recomputed_relation_grammar_v1.py --store /home/user/brain/canonical/astra_runtime/state/COMPUTED_COPY_GRAMMAR_RELATION_V1.json --raw-log /home/user/brain/canonical/verification/GRAMMAR_TRANSPORT_RAW_LOG_20261123_V1.json",
-      "PYTHONPATH=/tmp/pylibs python3 -m pytest -q <20-file selected regression rerun including test_the_grammar_is_not_a_literal_v1.py>"
+      "PYTHONPATH=/tmp/pylibs python3 -m pytest -q <20-file selected regression rerun including test_the_grammar_is_not_a_literal_v1.py>",
+      "PYTHONPATH=/tmp/pylibs python3 -m pytest -q canonical/tests/test_brain_zero_model_swe_pro_v2_purpose_v1.py",
+      "PYTHONPATH=/tmp/pylibs python3 /tmp/check_swe_v2_workflow.py"
     ],
     "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final report/ledger/intent reconciliation changed none of the six pinned blobs",
     "first_workflow_run_id": 45292371946,

@@ -21,7 +21,7 @@ The project artifacts remain dated `2026-11-23`; this document uses the authorit
 - Terminal-Bench `v4.1.0`, published `2026-11-03`, source commit `4070d6cef56a7d20cb5dc98d5e10ada88a6b9440`, 66 tasks and a 63-task CPU-only dataset.
 - Release asset `prebuilt-images.json`, size `151060`, digest `sha256:49a2b9ce70dbbb957f3eaf74c737ccb8c6d68b3167d4ccfb5c58762a9726b289`, schema v1, `image_count=157`, `task_count=66`.
 - Release asset `terminal-bench-prebuilt-v4.1.0.tar.gz`, size `456508604`, digest `sha256:c8bc0fea10af116061069248595c820d6da927652df1049ec834c6d98a6c12aa`. The workflow pulls selected digest-pinned images by `pinned_ref`; it does not need to load the full tar.
-- OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 are addressed as the next blocked hard-verifier frontiers, not run here.
+- In iteration 9, OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 were addressed as the next blocked hard-verifier frontiers, not run here; iteration 10 adds a pinned three-task HARD-51 runner carrier, not a score.
 
 ## What the runner does
 
@@ -41,8 +41,8 @@ The policy is deliberately finite and zero-model. Most hard tasks should fail or
 ## Next hard-verifier frontiers
 
 - **OSWorld 2.1:** needs gated HF task classes/assets, self-hosted websites, VM/KVM/display, pinned evaluator images and a maintainer-style verifier. None exists in this sandbox or the current runner workflow.
-- **SWE-bench Pro V2 / HARD-51:** needs 642 locked Harbor tasks, GHCR images, an offline agent phase and fresh-container patch re-grading. No such run or score is claimed.
-- **Terminal-Bench 4.1:** this iteration tests only a fresh, seeded, CPU-only three-task subset under pinned images and RewardKit-style separate verifiers. The other CPU tasks, GPU tasks, OSWorld and SWE-bench Pro remain unverified.
+- **SWE-bench Pro V2 / HARD-51:** needs 642 locked Harbor tasks, GHCR images, an offline agent phase and fresh-container patch re-grading. In iteration 9 no such run or score was claimed; iteration 10 adds a pinned three-task HARD-51 purpose-compiler attempt, not a score.
+- **Terminal-Bench 4.1:** this iteration tests only a fresh, seeded, CPU-only three-task subset under pinned images and RewardKit-style separate verifiers. The other CPU tasks, GPU tasks, OSWorld and the full SWE-bench Pro V2 / HARD-51 benchmark remain unverified.
 - The loop continues only with zero-model Brain-owned cognition, fresh unseen tasks, distinct verifier logs, and explicit failed/unverified splits. It must not merge or claim done until §6 is genuinely met.
 
 
@@ -54,10 +54,15 @@ The declared carrier ran on a distinct GitHub Actions OIDC runner in [workflow r
 
 **Verified.** OIDC issuer/audience/repository/run id/attempt/ref/sha/workflow ref/runner environment all bound; four exact Brain-owned source SHA-256 bindings; zero forbidden model/network/subprocess imports; pinned Terminal-Bench `v4.1.0` source, prebuilt manifest and six digest-pinned environment/verifier images; fresh seeded CPU-only subset with no previously seen instruction names; official Harbor `result.json` parsed; three trial reward vectors present; no harness exceptions; `harbor` exit code 0; zero model calls and zero runtime network calls.
 
-**Unverified.** No task succeeded. The three selected tasks were `takens-embedding-lean`, `fin-saccr-rwa`, `hof-topology-interpenetration`; their official per-trial reward vectors were each `{"reward": 0.0}`. No aggregate benchmark score is claimed. OSWorld 2.1, SWE-bench Pro V2 / HARD-51, the remaining Terminal-Bench 4.1 CPU/GPU tasks, arbitrary natural-language purpose understanding, authored repair content and GUI/browser computer use remain unverified. §6 remains NOT MET.
+**Unverified.** No task succeeded. The three selected tasks were `takens-embedding-lean`, `fin-saccr-rwa`, `hof-topology-interpenetration`; their official per-trial reward vectors were each `{"reward": 0.0}`. No aggregate benchmark score is claimed. OSWorld 2.1, full SWE-bench Pro V2 / HARD-51, the remaining Terminal-Bench 4.1 CPU/GPU tasks, arbitrary natural-language purpose understanding, authored repair content and GUI/browser computer use remain unverified. §6 remains NOT MET.
 
 **Failed.** In reward terms, all three fresh task attempts failed with reward `0.0`. The receipt's `failed=[]` field means only that there were no harness/runtime exceptions; it is not a claim of task success. `truth.achieved=false`; no capability, family, terminal or truth credit is taken. No PR or merge is opened.
 
-**Next loop.** The harness question is answered but the capability question is not. The next smallest undecided relation class is whether a zero-model Brain-owned mechanism can derive task purpose and safe repair content from fresh environment evidence without hidden tests, task-specific answers, borrowed outputs or model calls. Only after verified hard-task success would OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 become executable frontiers.
+**Next loop.** The harness question is answered but the capability question is not. The next smallest undecided relation class is whether a zero-model Brain-owned mechanism can derive task purpose and safe repair content from fresh environment evidence without hidden tests, task-specific answers, borrowed outputs or model calls. Iteration 10 tests a pinned three-task SWE-bench Pro V2 / HARD-51 subset with a finite fail-closed compiler; OSWorld 2.1 remains blocked by gated assets, websites, VM/KVM/display and pinned evaluators.
 
 The final local gate wrapper after the runner receipt passed `ALL_GATES_OK True` with 20 checks, including both OIDC run references and exact receipt/reward-log bindings; no score or credit is taken.
+
+
+## Iteration-10 frontier-status supersession
+
+This note remains the exact iteration-9 Terminal-Bench 4.1 record. Iteration 10 supersedes only the frontier-status phrases above: `SWE_BENCH_PRO_V2_ZERO_MODEL_PURPOSE_INTEGRATION_20261124_V1.md` adds a finite zero-model purpose compiler and a pinned SWE-bench Pro V2 / HARD-51 OIDC runner carrier. No Terminal-Bench result is changed, no SWE-bench score is claimed, OSWorld 2.1 remains blocked, and §6 remains NOT MET.
