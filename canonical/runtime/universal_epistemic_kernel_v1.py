@@ -5018,7 +5018,10 @@ def solve_arbitrary_environment(
             workspace,
             instruction,
             governed_memory=governed_memory,
-            base_url=base_url or api_url or web_url,
+            base_url=base_url or api_url,
+            gui_env=gui_env,
+            web_url=web_url,
+            field_values=field_values,
             verifier=_es_ver,
             timeout_s=timeout_s,
         )

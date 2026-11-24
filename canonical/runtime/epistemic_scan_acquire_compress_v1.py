@@ -180,6 +180,8 @@ def scan_environment(
     env_root: str | pathlib.Path,
     *,
     http_base_url: str | None = None,
+    gui_env: Any | None = None,
+    web_url: str | None = None,
     candidate_clis: Sequence[str] = ("gzip", "sqlite3", "jq", "awk", "sort", "grep", "curl", "python3", "node", "gcc"),
     max_files: int = 128,
 ) -> dict[str, Any]:
@@ -213,6 +215,24 @@ def scan_environment(
     if http_base_url:
         http_info = {"base_url": http_base_url.rstrip("/"), "discovered_endpoints": []}
 
+    gui_info: dict[str, Any] = {}
+    if gui_env is not None:
+        try:
+            obs0 = gui_env.observe() if hasattr(gui_env, "observe") else {}
+            nodes0 = list(obs0.get("nodes") or ())
+            gui_info = {
+                "present": True,
+                "node_count": len(nodes0),
+                "has_disabled": any(bool(n.get("disabled", False)) for n in nodes0 if isinstance(n, Mapping)),
+                "roles": sorted({str(n.get("role") or "") for n in nodes0 if isinstance(n, Mapping) and n.get("role")}),
+            }
+        except Exception:
+            gui_info = {"present": True, "node_count": 0, "has_disabled": False, "roles": []}
+
+    web_info: dict[str, Any] = {}
+    if web_url:
+        web_info = {"url": web_url.rstrip("/"), "present": True}
+
     return {
         "schema": SCHEMA,
         "env_root": str(root),
@@ -221,6 +241,8 @@ def scan_environment(
         "available_clis": available_clis,
         "code_languages": sorted(code_langs),
         "http": http_info,
+        "gui_a11y": gui_info,
+        "web_html": web_info,
         "scan_ms": round((time.monotonic() - t0) * 1000.0, 3),
         "model_calls": 0,
         "parameters_stored": 0,
@@ -294,6 +316,20 @@ def compute_epistemic_frontier(
         else:
             unknown_gaps.append({"gap_type": "http_spec", "key": fkey, "base_url": http_meta["base_url"]})
 
+    # 2b. Interactive GUI Accessibility Tree & HTML Web Portal goal relevance
+    if (manifest.get("gui_a11y") or {}).get("present"):
+        fkey = "interface:gui_a11y_workflow"
+        if fkey in l3_facts:
+            known_l3.append(fkey)
+        else:
+            unknown_gaps.append({"gap_type": "gui_a11y_spec", "key": fkey})
+    if (manifest.get("web_html") or {}).get("present"):
+        fkey = "interface:web_html_form_workflow"
+        if fkey in l3_facts:
+            known_l3.append(fkey)
+        else:
+            unknown_gaps.append({"gap_type": "web_html_spec", "key": fkey, "url": (manifest.get("web_html") or {}).get("url")})
+
     # 3. Match active L2 Abstract Causal Skills by goal/modality signature (NOT concrete names!)
     env_signature = _compute_env_modality_signature(manifest, relevant_files, goal_toks)
     recalled_l2: list[dict[str, Any]] = []
@@ -341,6 +377,10 @@ def _compute_env_modality_signature(
         goal_toks & {"http", "api", "post", "get", "upload", "submit", "send", "endpoint", "service", "server", "auth", "token", "order", "orders", "invoice", "invoices"}
     ):
         sig.add("http_api")
+    if (manifest.get("gui_a11y") or {}).get("present"):
+        sig.add("gui_a11y")
+    if (manifest.get("web_html") or {}).get("present"):
+        sig.add("web_html")
     if goal_toks & {"write", "delete", "overwrite", "update", "mutate", "save"}:
         sig.add("destructive_write")
     return sig
@@ -452,6 +492,26 @@ def acquire_missing_knowledge(
             l3[gkey] = spec_found
             acquired.append(spec_found)
 
+        elif gtype == "gui_a11y_spec":
+            fact = {
+                "key": gkey,
+                "protocol": "accessibility_tree_world_model",
+                "supports_precondition_unlock": True,
+                "source": "live_a11y_probe",
+            }
+            l3[gkey] = fact
+            acquired.append(fact)
+
+        elif gtype == "web_html_spec":
+            fact = {
+                "key": gkey,
+                "protocol": "html_form_world_model",
+                "supports_precondition_unlock": True,
+                "source": "live_html_probe",
+            }
+            l3[gkey] = fact
+            acquired.append(fact)
+
     return {
         "schema": SCHEMA,
         "gaps_examined": len(gaps),
@@ -544,6 +604,10 @@ def synthesize_and_mentally_verify_plan(
                 "target": tgt,
                 "requires_auth": tgt in auth_req,
             })
+        if (manifest.get("gui_a11y") or {}).get("present"):
+            raw_plan.append({"kind": "gui_a11y_workflow"})
+        if (manifest.get("web_html") or {}).get("present"):
+            raw_plan.append({"kind": "web_html_workflow"})
         if goal_toks & {"write", "delete", "overwrite", "update", "mutate", "save"}:
             raw_plan.append({"kind": "destructive_write", "path": "output_state.json"})
 
@@ -696,6 +760,10 @@ def execute_verified_plan_live(
     verified_plan: Sequence[Mapping[str, Any]],
     *,
     base_url: str | None = None,
+    gui_env: Any | None = None,
+    web_url: str | None = None,
+    goal: str = "",
+    field_values: Mapping[str, str] | None = None,
     governed_memory: dict[str, Any] | None = None,
     timeout_s: float = 10.0,
 ) -> dict[str, Any]:
@@ -837,6 +905,53 @@ def execute_verified_plan_live(
                 artifacts["http_responses"].append({"target": tgt, "status": code, "body": body})
                 step_log.append({"step": idx, "kind": kind, "target": tgt, "ok": True, "http_status": code})
 
+            elif kind in ("gui_a11y_workflow", "web_html_workflow"):
+                from canonical.runtime import epistemic_world_model_planner_v1 as WM_PLANNER
+
+                # Bridge live OS/CSV/SQLite artifacts directly into GUI/Web form field bindings!
+                merged_fields: dict[str, str] = {}
+                for row in artifacts["csv_rows"][:1]:
+                    for rk, rv in row.items():
+                        if rk and rv is not None:
+                            merged_fields[str(rk)] = str(rv)
+                for row in artifacts["sqlite_rows"][:1]:
+                    for rk, rv in row.items():
+                        if rk and rv is not None:
+                            merged_fields.setdefault(str(rk), str(rv))
+                for fk, fv in (field_values or {}).items():
+                    merged_fields[str(fk)] = str(fv)
+
+                wm_mem = mem.setdefault("l2_ui_world_model_memory", {})
+                if kind == "gui_a11y_workflow":
+                    if gui_env is None:
+                        return {"status": "FAILED", "failed_step": dict(step), "error": "NO_GUI_ENV", "step_log": step_log, "artifacts": artifacts}
+                    ui_res = WM_PLANNER.solve_with_epistemic_world_model(
+                        WM_PLANNER.InteractiveA11yWorldAdapter(gui_env),
+                        goal or "complete workflow",
+                        field_values=merged_fields,
+                        memory=wm_mem,
+                    )
+                else:
+                    if not web_url:
+                        return {"status": "FAILED", "failed_step": dict(step), "error": "NO_WEB_URL", "step_log": step_log, "artifacts": artifacts}
+                    ui_res = WM_PLANNER.solve_with_epistemic_world_model(
+                        WM_PLANNER.LiveHTTPWorldAdapter(web_url, timeout_s=min(timeout_s, 6.0)),
+                        goal or "complete workflow",
+                        field_values=merged_fields,
+                        memory=wm_mem,
+                    )
+                if ui_res.get("status") != "VERIFIED":
+                    return {
+                        "status": "FAILED",
+                        "failed_step": dict(step),
+                        "error": f"UI_WORKFLOW_FAILED:{ui_res.get('status')}",
+                        "ui_result": ui_res,
+                        "step_log": step_log,
+                        "artifacts": artifacts,
+                    }
+                artifacts.setdefault("ui_workflows", []).append({"kind": kind, "status": "VERIFIED", "bridged_fields": merged_fields, "ui_result": ui_res})
+                step_log.append({"step": idx, "kind": kind, "ok": True, "bridged_field_count": len(merged_fields)})
+
             elif kind == "destructive_write":
                 rel = str(step.get("path") or "output_state.json")
                 out_path = ws / rel
@@ -846,6 +961,10 @@ def execute_verified_plan_live(
                     "sqlite_rows": artifacts["sqlite_rows"],
                     "http_responses": artifacts["http_responses"],
                     "decompressed_files": artifacts["decompressed_files"],
+                    "ui_workflows": [
+                        {"kind": u["kind"], "status": u["status"], "bridged_fields": u["bridged_fields"]}
+                        for u in artifacts.get("ui_workflows") or []
+                    ],
                 }
                 out_path.write_text(json.dumps(summary_payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
                 artifacts["written_files"].append(rel)
@@ -914,6 +1033,9 @@ def solve_unseen_environment_live(
     *,
     governed_memory: dict[str, Any] | None = None,
     base_url: str | None = None,
+    gui_env: Any | None = None,
+    web_url: str | None = None,
+    field_values: Mapping[str, str] | None = None,
     instant_knowledge: Callable[[str], dict[str, Any] | None] | None = None,
     verifier: Callable[[pathlib.Path, Mapping[str, Any]], tuple[bool, str]] | None = None,
     timeout_s: float = 10.0,
@@ -925,7 +1047,7 @@ def solve_unseen_environment_live(
     mem = governed_memory if governed_memory is not None else new_governed_memory()
 
     # 1. Grounded zero-LLM scan
-    manifest = scan_environment(ws, http_base_url=base_url)
+    manifest = scan_environment(ws, http_base_url=base_url, gui_env=gui_env, web_url=web_url)
     # 2. Epistemic Diff & Distractor Pruning
     frontier = compute_epistemic_frontier(goal, manifest, mem)
     # 3. Parallel Targeted Knowledge Acquisition ONLY for unknown & goal-relevant gaps
@@ -952,11 +1074,15 @@ def solve_unseen_environment_live(
             "parameters_stored": 0,
         }
 
-    # 5. Live Execution (real OS + SQLite + HTTP + live PatchWorld 401 counterexample recovery!)
+    # 5. Live Execution (real OS + SQLite + HTTP + live GUI/HTML Web UI + PatchWorld 401 recovery!)
     exec_res = execute_verified_plan_live(
         ws,
         sim["final_plan"],
         base_url=base_url,
+        gui_env=gui_env,
+        web_url=web_url,
+        goal=goal,
+        field_values=field_values,
         governed_memory=mem,
         timeout_s=timeout_s,
     )

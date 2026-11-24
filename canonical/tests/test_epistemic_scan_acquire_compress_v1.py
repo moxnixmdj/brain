@@ -438,3 +438,156 @@ def test_04_cascadefix_simultaneous_copy_cluster_and_lazy_sink_multi_function_re
         assert res["model_calls"] == 0
         assert res["parameters_stored"] == 0
 
+
+def _start_interactive_html_portal(submit_path: str, required_field: str) -> tuple[http.server.ThreadingHTTPServer, str, dict[str, Any]]:
+    """Live multi-step HTML web portal requiring CSRF + an OS-extracted field value before confirmation."""
+    import urllib.parse
+
+    state: dict[str, Any] = {"csrf": "csrf_tok_88", "submitted_params": [], "completed": False}
+
+    class _PortalHandler(BaseHTTPRequestHandler):
+        def log_message(self, fmt: str, *args: object) -> None:
+            return
+
+        def _send_html(self, code: int, html: str) -> None:
+            b = html.encode("utf-8")
+            self.send_response(code)
+            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Length", str(len(b)))
+            self.end_headers()
+            self.wfile.write(b)
+
+        def do_GET(self) -> None:
+            self._send_html(
+                200,
+                f"<html><body><h1>Dispatch Portal</h1>"
+                f"<a href='/noise'>Help Docs</a>"
+                f"<form method='POST' action='{submit_path}'>"
+                f"<input type='hidden' name='csrf' value='{state['csrf']}'/>"
+                f"<label for='f1'>{required_field}</label>"
+                f"<input id='f1' name='{required_field}' type='text'/>"
+                f"<button type='submit'>Submit Record</button>"
+                f"</form></body></html>",
+            )
+
+        def do_POST(self) -> None:
+            length = int(self.headers.get("Content-Length") or 0)
+            raw = self.rfile.read(length).decode("utf-8", errors="replace") if length else ""
+            params = {k: v[0] for k, v in urllib.parse.parse_qs(raw).items()}
+            if self.path == submit_path and params.get("csrf") == state["csrf"] and params.get(required_field):
+                state["submitted_params"].append(params)
+                state["completed"] = True
+                self._send_html(200, "<html><body><div data-goal-complete='1'>Record accepted!</div></body></html>")
+                return
+            self._send_html(400, f"<html><body><div role='alert'>Missing required field {required_field}</div></body></html>")
+
+    srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), _PortalHandler)
+    port = srv.server_address[1]
+    t = threading.Thread(target=srv.serve_forever, daemon=True)
+    t.start()
+    return srv, f"http://127.0.0.1:{port}/", state
+
+
+def test_05_hybrid_os_sqlite_plus_live_html_web_portal_one_front_door_and_zero_gap_transfer() -> None:
+    """Proves unified multi-modal CU through ONE Front Door (`open_model().solve(..., mode='EPISTEMIC')`):
+    OS gzip-disguised CSV + SQLite FK DB + live interactive HTML Web Portal with CSRF:
+      - OS/CSV/SQLite values automatically bridge into the live HTML form inputs!
+      - Transfers with ZERO gaps (`unknown_goal_relevant_gaps == []`) to brand-new Env B (new files, DB, HTML route & port)!"""
+    from canonical.runtime.brain_unified_model_v1 import open_model
+
+    model = open_model()
+    gmem = SAC.new_governed_memory()
+    srv_a, web_a, st_a = _start_interactive_html_portal("/dispatch/submit", "account_code")
+    srv_b, web_b, st_b = _start_interactive_html_portal("/portal/v2/commit", "account_code")
+    try:
+        with tempfile.TemporaryDirectory() as td_a, tempfile.TemporaryDirectory() as td_b:
+            ws_a = pathlib.Path(td_a)
+            for i in range(10):
+                (ws_a / f"distractor_{i}.log").write_text("ignore\n", encoding="utf-8")
+            (ws_a / "customers.csv").write_bytes(gzip.compress(b"account_code,tier\nACCT-7741,gold\n"))
+            _make_sqlite_db(ws_a / "orders.db", "clients", "orders")
+
+            res_a = model.solve(
+                "read customers csv and orders sqlite database, submit record in portal and write summary",
+                mode="EPISTEMIC",
+                inputs={"workspace": str(ws_a), "web_url": web_a, "governed_memory": gmem},
+            )
+            assert res_a["pass"] is True, res_a
+            es_a = res_a["epistemic_result"]["epistemic_result"]
+            assert es_a["status"] == "VERIFIED"
+            assert es_a["model_calls"] == 0
+            assert es_a["parameters_stored"] == 0
+            assert st_a["completed"] is True
+            # Proves the value extracted from the gzip-disguised CSV bridged straight into the live HTML form!
+            assert st_a["submitted_params"][0]["account_code"] == "ACCT-7741"
+            assert (ws_a / "output_state.json").is_file()
+
+            # Brand-new Env B: different filenames, DB tables, HTML route, and port -> 0 gaps!
+            ws_b = pathlib.Path(td_b)
+            for i in range(8):
+                (ws_b / f"noise_{i}.tmp").write_text("n\n", encoding="utf-8")
+            (ws_b / "partners.csv").write_bytes(gzip.compress(b"account_code,tier\nACCT-9902,platinum\n"))
+            _make_sqlite_db(ws_b / "shipments.db", "vendors", "shipments")
+
+            res_b = model.solve(
+                "read partners csv and shipments sqlite database, submit record in portal and write summary",
+                mode="EPISTEMIC",
+                inputs={"workspace": str(ws_b), "web_url": web_b, "governed_memory": gmem},
+            )
+            assert res_b["pass"] is True, res_b
+            es_b = res_b["epistemic_result"]["epistemic_result"]
+            assert es_b["status"] == "VERIFIED"
+            assert es_b["frontier"]["unknown_goal_relevant_gaps"] == []
+            assert st_b["completed"] is True
+            assert st_b["submitted_params"][0]["account_code"] == "ACCT-9902"
+    finally:
+        srv_a.shutdown()
+        srv_b.shutdown()
+
+
+def test_06_multi_crash_union_widen_except_and_cascadefix_sibling_handlers() -> None:
+    """Verifies Iter 77 Multi-Crash Union Widening (`TIER3_EXCEPTION_CAUSAL_UNION`) + CascadeFix
+    Simultaneous ExceptHandler Propagation across 3 sibling validators on Attempt #1 (`model_calls == 0`)."""
+    from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
+
+    with tempfile.TemporaryDirectory() as td:
+        repo = pathlib.Path(td)
+        (repo / "claim_checker.py").write_text(
+            "class ClaimError(Exception):\n    pass\n\n"
+            "def check_iat(d):\n"
+            "    try:\n        return int(d['iat'])\n"
+            "    except ValueError:\n        raise ClaimError('bad iat') from None\n\n"
+            "def check_nbf(d):\n"
+            "    try:\n        return int(d['nbf'])\n"
+            "    except ValueError:\n        raise ClaimError('bad nbf') from None\n\n"
+            "def check_exp(d):\n"
+            "    try:\n        return int(d['exp'])\n"
+            "    except ValueError:\n        raise ClaimError('bad exp') from None\n",
+            encoding="utf-8",
+        )
+        (repo / "test_claim_checker.py").write_text(
+            "import pytest\n"
+            "from claim_checker import ClaimError, check_iat, check_nbf, check_exp\n"
+            "def test_ok():\n"
+            "    assert check_iat({'iat': '10'}) == 10\n"
+            "    assert check_nbf({'nbf': 20}) == 20\n"
+            "    assert check_exp({'exp': 30}) == 30\n"
+            "def test_bad_str():\n"
+            "    for fn, k in [(check_iat, 'iat'), (check_nbf, 'nbf'), (check_exp, 'exp')]:\n"
+            "        with pytest.raises(ClaimError): fn({k: 'abc'})\n"
+            "@pytest.mark.parametrize('bad', [None, [], float('inf')])\n"
+            "@pytest.mark.parametrize('fn,k', [(check_iat, 'iat'), (check_nbf, 'nbf'), (check_exp, 'exp')])\n"
+            "def test_non_numeric(fn, k, bad):\n"
+            "    with pytest.raises(ClaimError): fn({k: bad})\n",
+            encoding="utf-8",
+        )
+        res = PY_SWE.solve_repository(repo, ["test_claim_checker.py"], python_exe=sys.executable, timeout_s=30.0)
+        assert res["verified"] is True, res
+        assert res["attempts"] == 1
+        assert res["winner"]["tier"] == "CASCADE_COPY_CLUSTER_PROPAGATION"
+        assert "sites=3" in res["winner"]["description"]
+        assert "OverflowError" in res["winner"]["description"] and "TypeError" in res["winner"]["description"]
+        assert res["model_calls"] == 0
+        assert res["parameters_stored"] == 0
+
+

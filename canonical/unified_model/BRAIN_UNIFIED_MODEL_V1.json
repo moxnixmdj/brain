@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "65c233c9e5524e1640b89b2181858ee670dcdd5a6e76ae5f888d82d93f13aeab"
+  "value": "0d780a575e1c9591b80d739514669ce21c21a77859da99a8e272853fa14e8d33"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "26acedcd8b3c3ccb3bd5602a10220a0233b92230e1e43d7340c202a94fa5eeb5",
+   "sha256": "82911ddf1ef026f5b8ac61257513511fa332961c0bb042527f288b88756e8b92",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "666845083c0c997582b187d479d139a761ae92c0109db38ea3bfa940b255cde9",
+   "sha256": "5069bc98a2a095663d75f014e2b02873c42442d3cb5f7be2a0b40ba948bd9e35",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 45,
    "symbols": [
@@ -288233,7 +288233,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_scan_acquire_compress_v1.py",
-   "sha256": "04ca4a89977a2998fa83881bd975629bdb4cb2ad1aab18b6863863d37ff686bc",
+   "sha256": "4adff0b70cb66e9f29db1d7ce16d8e790ffad4db4afc546a85a1702d08682095",
    "summary": "Goal-Directed Scan -> Epistemic-Gap-Diff -> Instant-Acquire -> Simulate -> Compress Engine.",
    "symbol_count": 19,
    "symbols": [
@@ -338833,7 +338833,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "9018333ff19ca187b2fb783b93ddee932a8300d2c56847ad10f13e414ca1d13b",
+   "sha256": "2fe2db193d0119a4321e2311902fc165b15b0c858062c8429ffe5fbf4af7e566",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [

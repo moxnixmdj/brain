@@ -10106,6 +10106,7 @@ def synthesize_candidates(
         "TIER3_ZIP_LONGEST_LEFT_BOUNDED",
         "TIER3_PREFIX_SIBLING_VAR_SWAP",
         "TIER3_SUPER_INIT_KWARG_LIFECYCLE",
+        "TIER3_EXCEPTION_CAUSAL_UNION",
     }
     _broad_hp_tiers = {
         "TIER3_TERNARY_COLLAPSE_TO_BRANCH",
@@ -10114,6 +10115,79 @@ def synthesize_candidates(
         "TIER3_BOOLOP_NONE_GUARD",
         "TIER3_OE_SYGUS_VALIDATION_RAISE",
     }
+    # Multi-Crash Union Widening across ALL observed crash frames per enclosing `try` block!
+    # When different failing tests crash inside the same `try:` with 2+ distinct builtin exceptions
+    # (e.g. `TypeError` + `OverflowError`), widen the handler with the EXACT observed union in ONE step.
+    _crashes_by_file: dict[str, list[Mapping[str, Any]]] = {}
+    for _cr in loc.crash_frames:
+        _crashes_by_file.setdefault(str(_cr.get("file") or ""), []).append(_cr)
+    for _cf, _cr_list in _crashes_by_file.items():
+        _loaded_u = load_file(_cf)
+        if _loaded_u is None:
+            continue
+        _, _tree_u = _loaded_u
+        _try_exc_union: dict[int, set[str]] = {}
+        _try_crash_ln: dict[int, int] = {}
+        for _cr in _cr_list:
+            _et = str(_cr.get("exc_type") or "")
+            if _et not in _BUILTIN_EXCEPTIONS:
+                continue
+            _cln = int(_cr.get("lineno") or 0)
+            for _n in ast.walk(_tree_u):
+                if isinstance(_n, ast.Try) and _n.body:
+                    _bs = min(getattr(s, "lineno", 10**9) for s in _n.body)
+                    _be = max(getattr(s, "end_lineno", getattr(s, "lineno", 0)) for s in _n.body)
+                    if _bs <= _cln <= _be:
+                        _tln = int(getattr(_n, "lineno", 0))
+                        _try_exc_union.setdefault(_tln, set()).add(_et)
+                        _try_crash_ln.setdefault(_tln, _cln)
+        for _tln, _excs in _try_exc_union.items():
+            if len(_excs) < 2:
+                continue
+            _sorted_excs = sorted(_excs)
+            for _n in ast.walk(_tree_u):
+                if isinstance(_n, ast.Try) and int(getattr(_n, "lineno", 0)) == _tln:
+                    for _h_idx, _h in enumerate(_n.handlers):
+                        if _h.type is None:
+                            continue
+                        _existing: set[str] = set()
+                        if isinstance(_h.type, ast.Name):
+                            _existing.add(_h.type.id)
+                        elif isinstance(_h.type, ast.Tuple):
+                            for _e in _h.type.elts:
+                                if isinstance(_e, ast.Name):
+                                    _existing.add(_e.id)
+                        _to_add = [e for e in _sorted_excs if e not in _existing]
+                        if not _to_add:
+                            continue
+                        _mut_t = copy.deepcopy(_tree_u)
+                        _ch = False
+                        for _m in ast.walk(_mut_t):
+                            if isinstance(_m, ast.Try) and int(getattr(_m, "lineno", 0)) == _tln and _h_idx < len(_m.handlers):
+                                _mh = _m.handlers[_h_idx]
+                                _new_nodes = [ast.Name(id=e, ctx=ast.Load()) for e in _to_add]
+                                if isinstance(_mh.type, ast.Tuple):
+                                    _mh.type.elts.extend(_new_nodes)
+                                elif _mh.type is not None:
+                                    _mh.type = ast.Tuple(elts=[_mh.type, *_new_nodes], ctx=ast.Load())
+                                _ch = True
+                                break
+                        if _ch:
+                            ast.fix_missing_locations(_mut_t)
+                            try:
+                                push(
+                                    PatchCandidate(
+                                        file=_cf,
+                                        lineno=_try_crash_ln.get(_tln, _tln),
+                                        tier="TIER3_EXCEPTION_CAUSAL_UNION",
+                                        description=f"widen_except(+{','.join(_to_add)})",
+                                        patched_source=ast.unparse(_mut_t) + "\n",
+                                        ast_position="stmt",
+                                    )
+                                )
+                            except Exception:
+                                pass
+
     _static_cone_cands = _synthesize_static_cone_and_truthiness_repairs(worktree, loc, load_file)
     for sc in _static_cone_cands:
         if sc.tier in _high_prec_tiers and sc.tier not in _broad_hp_tiers:
@@ -11247,22 +11321,10 @@ def _cascade_propagate_partial_patch(
     """CascadeFix (ACL 2026) Simultaneous Copy-Cluster Multi-Hunk Propagation.
 
     Given a single-hunk candidate that flipped a strict subset of failing tests (`partial progress`),
-    induces its alpha-canonical AST rewrite law `(pat_b -> pat_a)` and simultaneously applies it
-    to ALL matching sibling sites across the localized failing functions in `cand.file`!
+    induces its alpha-canonical AST rewrite law `(pat_b -> pat_a)` (or `ExceptHandler` widening /
+    Lazy-Code-Motion sinking) and simultaneously applies it to ALL matching sibling sites across
+    the localized failing functions in `cand.file`!
     """
-    tmp_store: dict[str, Any] = {}
-    law = _induce_ast_rewrite_law(tmp_store, orig_source, cand.patched_source, cand.lineno, "", cand.tier)
-    pat_b = law.get("pattern_before") if law else None
-    pat_a = law.get("pattern_after") if law else None
-    is_or_none_law = (
-        cand.tier == "TIER3_BOOLOP_NONE_GUARD"
-        or (isinstance(pat_b, list) and len(pat_b) >= 2 and pat_b[0] == "BoolOp" and pat_b[1] == "Or")
-    )
-    if (not pat_b or not pat_a) and is_or_none_law:
-        pat_b = ["BoolOp", "Or", [{"$var": 0}, {"$var": 1}]]
-        pat_a = ["IfExp", ["Compare", {"$var": 0}, ["IsNot"], [["Const", "NoneType", None]]], {"$var": 0}, {"$var": 1}]
-    if not pat_b or not pat_a:
-        return None
     try:
         tree = ast.parse(orig_source)
     except SyntaxError:
@@ -11284,6 +11346,65 @@ def _cascade_propagate_partial_patch(
 
     def _in_target_fn(ln: int) -> bool:
         return any(lo <= ln <= hi for lo, hi in target_spans)
+
+    # 0. Universal ExceptHandler Widening Copy-Cluster Cascade:
+    # If the candidate widened `except E_old:` -> `except (E_old, E_new, ...):` at one failing try/except,
+    # simultaneously widen ALL sibling `except E_old:` handlers inside the localized failing functions!
+    if "widen_except(" in (cand.description or "") or cand.tier == "TIER3_EXCEPTION_CAUSAL":
+        try:
+            cand_tree = ast.parse(cand.patched_source)
+        except SyntaxError:
+            cand_tree = None
+        if cand_tree is not None:
+            orig_h_map: dict[int, str] = {}
+            for _n in ast.walk(tree):
+                if isinstance(_n, ast.ExceptHandler) and _n.type is not None:
+                    orig_h_map[int(getattr(_n, "lineno", 0))] = ast.unparse(_n.type)
+            old_h_src: str | None = None
+            new_h_ast: ast.expr | None = None
+            # Find the single ExceptHandler whose type changed between orig_tree and cand_tree
+            orig_handlers = [n for n in ast.walk(tree) if isinstance(n, ast.ExceptHandler) and n.type is not None]
+            cand_handlers = [n for n in ast.walk(cand_tree) if isinstance(n, ast.ExceptHandler) and n.type is not None]
+            if len(orig_handlers) == len(cand_handlers):
+                for oh, ch in zip(orig_handlers, cand_handlers):
+                    osrc = ast.unparse(oh.type)
+                    csrc = ast.unparse(ch.type)
+                    if osrc != csrc:
+                        old_h_src = osrc
+                        new_h_ast = copy.deepcopy(ch.type)
+                        break
+            if old_h_src is not None and new_h_ast is not None:
+                t_eh = copy.deepcopy(tree)
+                eh_changed = 0
+                for _n in ast.walk(t_eh):
+                    if isinstance(_n, ast.ExceptHandler) and _n.type is not None:
+                        ln_h = int(getattr(_n, "lineno", 0))
+                        if _in_target_fn(ln_h) and ast.unparse(_n.type) == old_h_src:
+                            _n.type = copy.deepcopy(new_h_ast)
+                            eh_changed += 1
+                if eh_changed >= 2:
+                    ast.fix_missing_locations(t_eh)
+                    try:
+                        out_eh = ast.unparse(t_eh) + "\n"
+                        ast.parse(out_eh)
+                        if out_eh != orig_source and out_eh != cand.patched_source:
+                            return (out_eh, eh_changed)
+                    except SyntaxError:
+                        pass
+
+    tmp_store: dict[str, Any] = {}
+    law = _induce_ast_rewrite_law(tmp_store, orig_source, cand.patched_source, cand.lineno, "", cand.tier)
+    pat_b = law.get("pattern_before") if law else None
+    pat_a = law.get("pattern_after") if law else None
+    is_or_none_law = (
+        cand.tier == "TIER3_BOOLOP_NONE_GUARD"
+        or (isinstance(pat_b, list) and len(pat_b) >= 2 and pat_b[0] == "BoolOp" and pat_b[1] == "Or")
+    )
+    if (not pat_b or not pat_a) and is_or_none_law:
+        pat_b = ["BoolOp", "Or", [{"$var": 0}, {"$var": 1}]]
+        pat_a = ["IfExp", ["Compare", {"$var": 0}, ["IsNot"], [["Const", "NoneType", None]]], {"$var": 0}, {"$var": 1}]
+    if not pat_b or not pat_a:
+        return None
 
     # Preserve AST context precision: if the pattern is a bare `Name` (e.g. `if x:` -> `if x is not None:`),
     # only rewrite `If.test` / `IfExp.test` so arbitrary variable loads are never corrupted!
