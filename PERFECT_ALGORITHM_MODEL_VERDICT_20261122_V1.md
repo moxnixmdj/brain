@@ -1360,3 +1360,31 @@ fetchable as definitions; the protocol is portable; the environment is the
 sole blocker. The honest remaining gap is environment fidelity (the ghcr.io
 images), not agent capability — our own loop has never had the access to
 test itself on these tasks.
+
+## 39. §5 — Dynamic Traceback + AST-Guided CodeRepairEnv & Variable-Invariant `ast_rule:` Generalization (2026-11-23)
+
+Commits: `ff4975a0`, `a82e78fc`, `c89db4e6` on `arena/650e6068-brain`.
+
+Bottleneck addressed: `CodeRepairEnv` previously required a caller-supplied
+`DEFAULT_CANDIDATES` operator list, which fails on any unseen defect class.
+
+Minimal solution (`canonical/swe_kernel/code_repair_scan_env_v1.py`):
+  - `candidates=None` dynamic mode captures real subprocess test output
+    (`_last_test_output`) on reset.
+  - `discover_ast_candidates(source, traceback_text, module_name)` parses
+    exception type and failing line numbers, then derives minimal
+    content-invariant `ast_rule:` and `fix_op:` candidates localized to the
+    failing AST nodes.
+  - Variable-invariant `ast_rule:` actions (`subscript_to_get`,
+    `div_zero_guard`, `index_bounds_guard`, `none_attr_guard`) resolve
+    concrete AST edits at runtime with zero model calls.
+
+Honest test results (`unseen_dynamic_code_repair_probe_20261123.py`):
+  - **5/5 PASS** with `candidates=None` (0 pre-declared candidates, 0 model
+    calls, real subprocess test oracle): `KeyError`, `ZeroDivisionError`,
+    `IndexError`, `AttributeError`, `AssertionError_cmp`.
+  - **Held-out cross-variable transfer PASS**: `ast_rule:subscript_to_get`
+    learned on `get_timeout(cfg)` (`cfg['timeout']`) transferred to unseen
+    `read_port(settings)` (`settings['port']`) in 1 shot.
+  - Existing suite (`test_carried_model_walk_v1`, `test_perfect_algorithm_v1`):
+    **27/27 PASS**.
