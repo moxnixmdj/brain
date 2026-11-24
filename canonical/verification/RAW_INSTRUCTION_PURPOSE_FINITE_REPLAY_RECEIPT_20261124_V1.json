@@ -8,7 +8,7 @@
   "execution_authority": false,
   "family_credit_delta": 0,
   "github_repository": "moxnixmdj/brain",
-  "head_sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+  "head_sha": "c81110f9cc55ae73bec04add3dbe17e10b3003b7",
   "incremental_spend_usd": 0,
   "independent_verified": true,
   "measurement_checks": {
@@ -62,17 +62,17 @@
     "head_ref": "",
     "iss": "https://token.actions.githubusercontent.com",
     "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain",
-    "jti": "ac12eaab-0ab6-40e8-a4e8-190cc47b3aed",
+    "jti": "37dc3328-b869-4d27-81cc-2b32cbd97410",
     "ref": "refs/heads/arena/6f8ac9ce-brain",
     "repository": "moxnixmdj/brain",
     "repository_id": "1364778274",
     "run_attempt": "1",
-    "run_id": "45423083321",
+    "run_id": "45426280922",
     "runner_environment": "github-hosted",
-    "sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+    "sha": "c81110f9cc55ae73bec04add3dbe17e10b3003b7",
     "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain"
   },
-  "oidc_jti": "ac12eaab-0ab6-40e8-a4e8-190cc47b3aed",
+  "oidc_jti": "37dc3328-b869-4d27-81cc-2b32cbd97410",
   "pinned_blob_binding": {
     "equal": true,
     "expected_git_blob": {
@@ -210,10 +210,10 @@
     "OIDC_RUN_REFERENCE_BOUND",
     "NO_CAPABILITY_OR_TERMINAL_CREDIT"
   ],
-  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45423083321",
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45426280922",
   "workflow_job": "contract_replay",
   "workflow_path": ".github/workflows/zero-model-raw-instruction-purpose-v1.yml",
   "workflow_run_attempt": 1,
-  "workflow_run_id": 45423083321,
-  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45423083321"
+  "workflow_run_id": 45426280922,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45426280922"
 }

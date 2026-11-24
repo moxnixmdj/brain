@@ -1,1 +1,51 @@
-{}
+{
+  "benchmark_score_authority": false,
+  "date": "2026-11-24",
+  "harbor_exit_code": 0,
+  "harbor_version": "0.27.0",
+  "job_name": "brain-raw-instruction-purpose-tb41-cpu",
+  "job_result_path": "/tmp/harbor_jobs/brain-raw-instruction-purpose-tb41-cpu/result.json",
+  "job_result_sha256": "1cd18aec3db59862ad83e66c0cb6b64c575b10421d2b1ba9ca99e340d7cff883",
+  "note": "Per-trial reward vectors are harness diagnostics, not a benchmark score and not capability credit.",
+  "release_tag": "v4.1.0",
+  "rows": [
+    {
+      "agent_name": "brain-raw-instruction-purpose-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "cc0340909137a71892a7d765911cdcdd3c8724181ab42b2809416bc17812bb51",
+      "task_name": "terminal-bench/biped-contact-dynamics",
+      "trial_name": "biped-contact-dynamics__qbFM6DL"
+    },
+    {
+      "agent_name": "brain-raw-instruction-purpose-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "2664a387b9df6b817ee6b1770fc8194868a5d5a72a73b98d7aca09894697ae0b",
+      "task_name": "terminal-bench/mvcc-lsm-compaction",
+      "trial_name": "mvcc-lsm-compaction__TdvEARu"
+    },
+    {
+      "agent_name": "brain-raw-instruction-purpose-v1",
+      "exception_types": [],
+      "reward_valid": true,
+      "rewards": {
+        "reward": 0.0
+      },
+      "task_checksum": "b6ae66e109d9d76f09674a4c598b538cdfcecd8a0638e6dba6422d246067ac5b",
+      "task_name": "terminal-bench/retro-console-soc",
+      "trial_name": "retro-console-soc__Kf9EpiM"
+    }
+  ],
+  "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_TB41_REWARD_LOG_20261124_V1",
+  "source": "HARBOR_RESULT_JSON",
+  "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+  "task_selected_count": 3,
+  "trial_results_present": 3
+}

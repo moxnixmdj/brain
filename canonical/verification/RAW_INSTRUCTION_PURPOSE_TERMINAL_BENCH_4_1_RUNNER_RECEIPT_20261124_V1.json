@@ -6,37 +6,39 @@
   "date": "2026-11-24",
   "event_name": "push",
   "execution_authority": false,
-  "failed": [
-    "HARBOR_RUN_EXIT_NONZERO:-1"
-  ],
+  "failed": [],
   "family_credit_delta": 0,
   "finite_replay": {
     "contract_tests": 21,
-    "receipt_sha256": "8ae9a2b53199e9586d663311a8c733ddadc99553360958580eda2a3fc2789356",
+    "receipt_sha256": "6126e096a3073bb6956d1382332319541d3b84b90ecbbe3f0e70e8f87aa4f2f2",
     "status": "RUNNER_OWNED_OIDC_ATTESTED_FINITE_RAW_INSTRUCTION_PURPOSE_REPLAY__ZERO_CREDIT__SECTION_6_NOT_MET",
-    "workflow_run_id": 45423083321
+    "workflow_run_id": 45426280922
   },
   "github_actor": "moxnixmdj",
   "github_repository": "moxnixmdj/brain",
-  "harbor_exit_code": -1,
-  "harness_verified_trials": [],
-  "head_sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+  "harbor_exit_code": 0,
+  "harness_verified_trials": [
+    "terminal-bench/biped-contact-dynamics",
+    "terminal-bench/mvcc-lsm-compaction",
+    "terminal-bench/retro-console-soc"
+  ],
+  "head_sha": "c81110f9cc55ae73bec04add3dbe17e10b3003b7",
   "hidden_test_reading": false,
   "incremental_spend_usd": 0,
-  "new_reality_units_consumed": 0,
+  "new_reality_units_consumed": 3,
   "numeric_measurements": {
     "failed_trials": 0,
     "finite_contract_tests": 21,
     "hard_benchmark_tasks_consumed": 3,
-    "harness_verified_trials": 0,
+    "harness_verified_trials": 3,
     "marked_import_groups": 0,
     "model_calls": 0,
-    "pinned_images_pulled": 0,
+    "pinned_images_pulled": 6,
     "runtime_network_calls": 0,
     "source_bindings": 8,
-    "task_reward_vectors_present": 0,
+    "task_reward_vectors_present": 3,
     "tasks_selected": 3,
-    "trial_results_present": 0,
+    "trial_results_present": 3,
     "unverified_trials": 0
   },
   "oidc_checks": {
@@ -59,14 +61,14 @@
     "head_ref": "",
     "iss": "https://token.actions.githubusercontent.com",
     "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain",
-    "jti": "44a1e6d4-3022-4da4-9035-81507157e352",
+    "jti": "efb65819-6629-49c3-8c34-b31a75a418a9",
     "ref": "refs/heads/arena/6f8ac9ce-brain",
     "repository": "moxnixmdj/brain",
     "repository_id": "1364778274",
     "run_attempt": "1",
-    "run_id": "45423083321",
+    "run_id": "45426280922",
     "runner_environment": "github-hosted",
-    "sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+    "sha": "c81110f9cc55ae73bec04add3dbe17e10b3003b7",
     "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain"
   },
   "pinned_substrates": {
@@ -78,23 +80,84 @@
     "python_version": "3.12.16",
     "terminal_bench_release_tag": "v4.1.0",
     "terminal_bench_source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
-    "workflow_git_blob_sha": "8886f4e6e44a438ce60f25d78508b794cf1722d9"
+    "workflow_git_blob_sha": "f24e8001da6c117b6441d96a0843eca460e3da90"
   },
   "producer_cognition_model_dependency_count": 0,
   "producer_id": "arena-agent:arena/6f8ac9ce-brain",
   "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
   "promotion_authority": false,
-  "pulled_images": {},
-  "reward_log": {},
-  "reward_log_git_blob_sha": "0967ef424bce6791893e9a57bb952f80fd536e93",
-  "reward_log_sha256": "ca3d163bab055381827226140568f3bef7eaac187cebd76878e0b63e9e442356",
+  "pulled_images": {
+    "count": 6,
+    "refs": [
+      "harborframework/terminal-bench:mvcc-lsm-compaction-environment-1cd29d7b9ff9712f@sha256:f066b9356ea898e4588f5e5ed3863926988ca09bd37cc8e3b674f02b5ba3e9f8",
+      "harborframework/terminal-bench:mvcc-lsm-compaction-verifier-d3073c52362bbafc@sha256:7a9162429bed62abb205a5c1e3fa1da7c1171865969ad7b5e0d9d9d3efa0ffdf",
+      "harborframework/terminal-bench:retro-console-soc-environment-6ab33aade245cc0c@sha256:11b017483cf6fa17cc217940e75e121a63f17a5623fc963dc114b89c4a427ad0",
+      "harborframework/terminal-bench:retro-console-soc-verifier-0d742888c434aa43@sha256:359a891415a23f45a852e36096fb2aa8f8dccb399cef27ff440ae73b6b70e81a",
+      "harborframework/terminal-bench:biped-contact-dynamics-environment-7b16d8ff653bea3c@sha256:c5c1646a4994b6fe7fd2d02978a4eac6c934f60071467258cfadc2abb7bd4e85",
+      "harborframework/terminal-bench:biped-contact-dynamics-verifier-a45e3dfe20916296@sha256:6c135e272e9c8d0498a6481e8aed7e732d7413447faeff3a9000d116efef2ce2"
+    ],
+    "schema": "BRAIN_TB41_PINNED_IMAGE_PULLS_V1"
+  },
+  "reward_log": {
+    "benchmark_score_authority": false,
+    "date": "2026-11-24",
+    "harbor_exit_code": 0,
+    "harbor_version": "0.27.0",
+    "job_name": "brain-raw-instruction-purpose-tb41-cpu",
+    "job_result_path": "/tmp/harbor_jobs/brain-raw-instruction-purpose-tb41-cpu/result.json",
+    "job_result_sha256": "1cd18aec3db59862ad83e66c0cb6b64c575b10421d2b1ba9ca99e340d7cff883",
+    "note": "Per-trial reward vectors are harness diagnostics, not a benchmark score and not capability credit.",
+    "release_tag": "v4.1.0",
+    "rows": [
+      {
+        "agent_name": "brain-raw-instruction-purpose-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "cc0340909137a71892a7d765911cdcdd3c8724181ab42b2809416bc17812bb51",
+        "task_name": "terminal-bench/biped-contact-dynamics",
+        "trial_name": "biped-contact-dynamics__qbFM6DL"
+      },
+      {
+        "agent_name": "brain-raw-instruction-purpose-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "2664a387b9df6b817ee6b1770fc8194868a5d5a72a73b98d7aca09894697ae0b",
+        "task_name": "terminal-bench/mvcc-lsm-compaction",
+        "trial_name": "mvcc-lsm-compaction__TdvEARu"
+      },
+      {
+        "agent_name": "brain-raw-instruction-purpose-v1",
+        "exception_types": [],
+        "reward_valid": true,
+        "rewards": {
+          "reward": 0.0
+        },
+        "task_checksum": "b6ae66e109d9d76f09674a4c598b538cdfcecd8a0638e6dba6422d246067ac5b",
+        "task_name": "terminal-bench/retro-console-soc",
+        "trial_name": "retro-console-soc__Kf9EpiM"
+      }
+    ],
+    "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_TB41_REWARD_LOG_20261124_V1",
+    "source": "HARBOR_RESULT_JSON",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+    "task_selected_count": 3,
+    "trial_results_present": 3
+  },
+  "reward_log_git_blob_sha": "e4afd5934ff06ccec05bd27fd9f8ab1504eaf475",
+  "reward_log_sha256": "719ddb686653b5ec185533367673b0a567413f46757e5fcf45e6c1367240041a",
   "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_AND_SELECTED_TASK_SET__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
   "run_reference": {
-    "oidc_jti": "44a1e6d4-3022-4da4-9035-81507157e352",
+    "oidc_jti": "efb65819-6629-49c3-8c34-b31a75a418a9",
     "runner_attestation": "github-actions-oidc-token",
     "workflow_run_attempt": 1,
-    "workflow_run_id": 45423083321,
-    "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45423083321"
+    "workflow_run_id": 45426280922,
+    "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45426280922"
   },
   "runner_arch": "X64",
   "runner_environment": "github-hosted",
@@ -103,9 +166,66 @@
   "runtime_network_calls": 0,
   "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_TB41_RUNNER_RECEIPT_20261124_V1",
   "scope": "TERMINAL_BENCH_4_1_CPU_FRESH_SEEDED_SUBSET_RAW_INSTRUCTION_PURPOSE_BRIDGE_ZERO_MODEL_HARNESS_ATTEMPT_ONLY",
-  "selected_task_names": [],
-  "selection": {},
-  "selection_check": {},
+  "selected_task_names": [
+    "mvcc-lsm-compaction",
+    "retro-console-soc",
+    "biped-contact-dynamics"
+  ],
+  "selection": {
+    "cpu_candidates": 58,
+    "eligible_pinned_no_sidecar_tasks": 47,
+    "excluded_seen_instruction_task_names": [
+      "batched-eval-parity",
+      "bun-sourcemap-leak",
+      "data-anonymization",
+      "html-js-filter",
+      "layout-config-recreation",
+      "math-eval-grader"
+    ],
+    "release_tag": "v4.1.0",
+    "run_id": "45426280922",
+    "schema": "BRAIN_TB41_CPU_FRESH_SELECTION_V1",
+    "selected_task_count": 3,
+    "selection_seed": "sha256(run_id:task_name)",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+    "tasks": [
+      {
+        "environment_digest": "sha256:f066b9356ea898e4588f5e5ed3863926988ca09bd37cc8e3b674f02b5ba3e9f8",
+        "environment_image": "harborframework/terminal-bench:mvcc-lsm-compaction-environment-1cd29d7b9ff9712f@sha256:f066b9356ea898e4588f5e5ed3863926988ca09bd37cc8e3b674f02b5ba3e9f8",
+        "name": "mvcc-lsm-compaction",
+        "selection_hash": "07582bf00cde498b11a53ecb5c51679378b27d9ca8405667f8a628074060b71a",
+        "task_checksum": "sha256:fdf29c5e7778739cefa3f7a85f4b06acbfdfba329f332512c731b5d879ed446d",
+        "verifier_digest": "sha256:7a9162429bed62abb205a5c1e3fa1da7c1171865969ad7b5e0d9d9d3efa0ffdf",
+        "verifier_image": "harborframework/terminal-bench:mvcc-lsm-compaction-verifier-d3073c52362bbafc@sha256:7a9162429bed62abb205a5c1e3fa1da7c1171865969ad7b5e0d9d9d3efa0ffdf"
+      },
+      {
+        "environment_digest": "sha256:11b017483cf6fa17cc217940e75e121a63f17a5623fc963dc114b89c4a427ad0",
+        "environment_image": "harborframework/terminal-bench:retro-console-soc-environment-6ab33aade245cc0c@sha256:11b017483cf6fa17cc217940e75e121a63f17a5623fc963dc114b89c4a427ad0",
+        "name": "retro-console-soc",
+        "selection_hash": "09c7090090b089c5291379b6a09e431ee179c39f154448bbad195453f83557be",
+        "task_checksum": "sha256:5707df6b5c777e156896f1edd5137775f297a88c7f191545e83c7b7909889d96",
+        "verifier_digest": "sha256:359a891415a23f45a852e36096fb2aa8f8dccb399cef27ff440ae73b6b70e81a",
+        "verifier_image": "harborframework/terminal-bench:retro-console-soc-verifier-0d742888c434aa43@sha256:359a891415a23f45a852e36096fb2aa8f8dccb399cef27ff440ae73b6b70e81a"
+      },
+      {
+        "environment_digest": "sha256:c5c1646a4994b6fe7fd2d02978a4eac6c934f60071467258cfadc2abb7bd4e85",
+        "environment_image": "harborframework/terminal-bench:biped-contact-dynamics-environment-7b16d8ff653bea3c@sha256:c5c1646a4994b6fe7fd2d02978a4eac6c934f60071467258cfadc2abb7bd4e85",
+        "name": "biped-contact-dynamics",
+        "selection_hash": "0d4cb3463ad75ccad43c3ff398300d7447b0aa83cf640acf3bcdbec1f3065c06",
+        "task_checksum": "sha256:ae2cc175efc37461de142d15b01a02718c7fb7a16f87b2720d0dd666e694cf0a",
+        "verifier_digest": "sha256:6c135e272e9c8d0498a6481e8aed7e732d7413447faeff3a9000d116efef2ce2",
+        "verifier_image": "harborframework/terminal-bench:biped-contact-dynamics-verifier-a45e3dfe20916296@sha256:6c135e272e9c8d0498a6481e8aed7e732d7413447faeff3a9000d116efef2ce2"
+      }
+    ]
+  },
+  "selection_check": {
+    "environment_pinned": true,
+    "no_seen_instruction_task": true,
+    "selected_count": true,
+    "selection_seed": true,
+    "source_sha": true,
+    "verifier_pinned": true
+  },
   "source_binding": {
     "equal": true,
     "expected": {
@@ -130,7 +250,21 @@
     },
     "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_SOURCE_BINDING_V1"
   },
-  "source_verification": {},
+  "source_verification": {
+    "checks": {
+      "image_count": true,
+      "release_tag": true,
+      "schema_version": true,
+      "source_sha": true,
+      "task_count": true,
+      "tasks_present": true
+    },
+    "prebuilt_manifest_sha256": "49a2b9ce70dbbb957f3eaf74c737ccb8c6d68b3167d4ccfb5c58762a9726b289",
+    "prebuilt_tar_sha256": "c8bc0fea10af116061069248595c820d6da927652df1049ec834c6d98a6c12aa",
+    "release_tag": "v4.1.0",
+    "schema": "BRAIN_TB41_SOURCE_VERIFICATION_V1",
+    "source_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440"
+  },
   "static_audit": {
     "generic_plan_is_safe": true,
     "imports": {
@@ -223,7 +357,6 @@
     "section_6": "NOT_MET"
   },
   "unverified": [
-    "MISSING_TRIAL_RESULTS_FOR_3_SELECTED_TASKS",
     "OSWorld 2.1 tasks",
     "SWE-bench Pro V2 / HARD-51 tasks",
     "remaining Terminal-Bench 4.1 CPU and GPU tasks",
@@ -235,16 +368,20 @@
     "EXACT_SOURCE_SHA256_BINDINGS",
     "NO_MODEL_NETWORK_OR_SUBPROCESS_IMPORTS_IN_BRAIN_AGENT_SURFACE",
     "UNRESOLVED_PURPOSE_FAILS_CLOSED",
+    "TERMINAL_BENCH_4_1_SOURCE_AND_PREBUILT_MANIFEST_DIGESTS",
+    "FRESH_SEEDED_CPU_SUBSET_SELECTED",
+    "DIGEST_PINNED_ENVIRONMENT_AND_VERIFIER_IMAGES_PULLED",
+    "OFFICIAL_HARBOR_RESULT_JSON_REWARD_LOG_BOUND",
     "OIDC_RUN_REFERENCE_BOUND",
     "DEPENDENT_FINITE_REPLAY_RECEIPT_BOUND",
     "NO_CAPABILITY_OR_TERMINAL_CREDIT"
   ],
-  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45423083321",
-  "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45423083321",
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45426280922",
+  "verifier_identity": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45426280922",
   "workflow_job": "hard_benchmark_attempt",
   "workflow_name": "Zero-model raw-instruction purpose bridge and hard falsifier",
   "workflow_ref": "refs/heads/arena/6f8ac9ce-brain",
   "workflow_run_attempt": 1,
-  "workflow_run_id": 45423083321,
-  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45423083321"
+  "workflow_run_id": 45426280922,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45426280922"
 }
