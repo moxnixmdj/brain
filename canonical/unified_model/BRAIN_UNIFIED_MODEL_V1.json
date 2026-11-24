@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 602,
+  "knowledge_documents": 603,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7256,
+  "research_index_records": 7258,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 458,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2a6aadb3661c759a8bdc80f86d298416dc33098f8862368806c088967a2433c6"
+  "value": "22eb538443a96d4026498fb0af27272ad99411ee08a8acb3afe4f0c9cf6896ae"
  },
  "engines": [
   {
@@ -45806,6 +45806,86 @@
     "finds",
     "instance",
     "not"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 13000,
+   "headings": [
+    "A check that nobody runs is a check that cannot be wrong",
+    "0. The headline",
+    "1. What was claimed, before anything ran",
+    "2. The prose test, and what a prose test is worth",
+    "3. The citation: three separate defects in one slot",
+    "4. The repair, and the number that says it is not enough",
+    "5. `ACCEPTED_INERT` for a destroyed file",
+    "6. What the repair did not change",
+    "7. Where this loses",
+    "8. What is real and what is not",
+    "9. The three things the next round inherits",
+    "10. Reproduce it"
+   ],
+   "kind": "DOCUMENT",
+   "path": "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.md",
+   "sha256": "257abbb8a668f5252ef66228d08f5f0dd80afb6ae7a493af7df2576ee1c54dec",
+   "summary": "**Round:** `A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1` **Receipt:** `canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json` **Instrument:** `canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py` **Date:** 2026-12-03 · **Model calls:** 0 · **Stored parameters:** 0 · **Network at run time:** 0",
+   "terms": {
+    "13": 5,
+    "about": 7,
+    "accept": 5,
+    "accepted": 6,
+    "accepted_inert": 6,
+    "action": 5,
+    "after": 7,
+    "against": 6,
+    "blind": 6,
+    "bytes": 7,
+    "cannot": 6,
+    "changed": 11,
+    "check": 14,
+    "checks": 8,
+    "citation": 15,
+    "digest": 6,
+    "every": 13,
+    "file": 8,
+    "flag": 13,
+    "guide": 11,
+    "help": 14,
+    "kind": 11,
+    "last": 6,
+    "machine": 9,
+    "measured": 9,
+    "never": 7,
+    "not": 29,
+    "nothing": 7,
+    "object": 17,
+    "one": 20,
+    "own": 7,
+    "page": 11,
+    "pages": 6,
+    "real": 7,
+    "receipt": 6,
+    "repair": 12,
+    "room": 10,
+    "round": 23,
+    "rule": 11,
+    "run": 11,
+    "same": 7,
+    "shipped": 10,
+    "shred": 10,
+    "so": 6,
+    "status": 7,
+    "step": 9,
+    "test": 7,
+    "were": 8
+   },
+   "title": "A check that nobody runs is a check that cannot be wrong",
+   "title_terms": [
+    "cannot",
+    "check",
+    "nobody",
+    "runs",
+    "wrong"
    ]
   },
   {
@@ -91907,10 +91987,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1404,
+  "included_source_count": 1405,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "fd49ff01041bd2379374f77aeeff2989c6f2debd7cb10c6a6199d0b7e27b2d7f"
+  "source_tree_digest": "176784ba2e007f484c060877db61844a67e71c8ca3ee28b4809ceab70a3fba24"
  },
  "research_index": [
   {
@@ -162325,6 +162405,26 @@
     "public": 1,
     "route": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-12-03",
+   "id": "research:canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
+   "schema": "BRAIN_A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_V1",
+   "sha256": "960d2d6b8223d9ef5936a5207cbd2f804b30abe5064e3ea32601930019e4b3bc",
+   "status": "",
+   "terms": {
+    "20261203": 1,
+    "cannot": 1,
+    "check": 2,
+    "nobody": 1,
+    "runs": 1,
+    "v1": 1,
+    "wrong": 1
    }
   },
   {
@@ -242088,6 +242188,51 @@
     "general_reusable_problem_solving_capability_frontier": 1,
     "the_system_no_longer_reports_a_certainty_its_own_probe_list_cannot_justify_and_can_name_which_frozen_settings_its_verdict_depends_on__zero_capability_credit__zero_terminal_credit__no_family_flipped": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
+   "capability": false,
+   "date": "2026-12-03",
+   "id": "research:canonical/action_intents/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "ca601c03b4d04624e4a2d69cd94ad644231a15360c21fe54c37860e2bb855f96",
+   "status": "SHIPPED",
+   "terms": {
+    "11": 1,
+    "19": 1,
+    "20261203": 1,
+    "a_type_you_wrote_is_a_type_you_guess_20261202": 1,
+    "born": 1,
+    "cannot": 2,
+    "check": 2,
+    "collapse": 1,
+    "declarations": 1,
+    "did": 1,
+    "every": 2,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "goals": 1,
+    "guide": 1,
+    "hand-written": 1,
+    "kind": 2,
+    "kinds": 1,
+    "met": 1,
+    "moves": 1,
+    "my": 1,
+    "name": 3,
+    "names": 1,
+    "never": 1,
+    "next": 1,
+    "nobody": 1,
+    "object": 1,
+    "one": 2,
+    "producer": 1,
+    "questions": 1,
+    "right": 1,
+    "room": 2
    }
   },
   {

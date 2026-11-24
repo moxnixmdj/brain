@@ -327,10 +327,126 @@ def verbs_of_page(page: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def check_flags(declared: dict[str, dict[str, Any]]) -> list[str]:
-    """Flags whose own description is a question with no argument: a read-only check."""
-    return sorted({flag for flag, row in declared.items()
-                   if row["words"] and row["words"][0] in CHECK_VERBS and not row["arg_type"]})
+# THE VOCABULARY OF A WRITE, and the commands whose only job is to destroy. Neither is a list
+# of flags and neither is the fix on its own -- the fix is that a flag must be RUN before it is
+# called read-only (see `certified_checks`). These two are the cheap half, and they are here so
+# that a page whose prose is silent cannot smuggle a destroyer in.
+WRITE_WORDS = frozenset({"remove", "removes", "delete", "deletes", "overwrite", "overwrites",
+                         "destroy", "destroys", "erase", "erases", "wipe", "wipes", "truncate",
+                         "truncates", "replace", "replaces", "create", "creates", "append",
+                         "appends", "shuffle", "shuffles", "split", "splits"})
+DESTROYER_PROGRAMS = frozenset({"shred", "rm", "unlink", "truncate", "srm", "wipe"})
+
+
+def check_flags(declared: dict[str, dict[str, Any]],
+                *, program: str | None = None) -> list[str]:
+    """Flags whose own description is a question with no argument: a CANDIDATE read-only check.
+
+    THE DEFECT THIS REPLACES, MEASURED. The first version kept a flag when the first word of
+    its prose was one of list/show/print/display/test/check/verify/give and the flag took no
+    argument. Run against a real object, **16** of the 2,319 flags that rule certified changed
+    bytes -- `shred -v` (a destructive command whose page says "show progress"), `ln -v`,
+    `split -v`, ImageMagick's `stream`. A prose test is a guess about behaviour, and the
+    repository had already measured what a guess about behaviour is worth.
+
+    And the FIRST of these flags is what `compile_step` cites on every step, which on 249 pages
+    is `--help`: a flag that accepts every object and therefore says nothing about the object
+    it is attached to. So the alpha-first citation is now taken from the SURVIVORS rather than
+    from the raw list, and a page with no surviving flag cites nothing instead of citing a
+    vacuous one.
+
+    What is added here is cheap and mechanical: no destroyer by name, and no write in the
+    page's own vocabulary for that flag. What cannot be decided from a page -- whether the flag
+    changes bytes when run -- is decided by running it, in `certified_checks`.
+    """
+    if program is not None and program in DESTROYER_PROGRAMS:
+        return []
+    out: set[str] = set()
+    for flag, row in declared.items():
+        words = row.get("words") or []
+        if not words or words[0] not in CHECK_VERBS or row.get("arg_type"):
+            continue
+        prose = {word.lower() for word in words}
+        if prose & WRITE_WORDS:
+            continue
+        out.add(flag)
+    return sorted(out)
+
+
+def certified_checks(program: str, candidates: Sequence[str], root: pathlib.Path,
+                     names: Sequence[str]) -> list[str]:
+    """A candidate is a read-only check only if running it leaves every byte where it was.
+
+    This is the executed half of the repair, and it is what removes `shred -v`, `ln -v`,
+    `split -v` and `stream -version` without naming any of them. Each candidate gets its own
+    copy of the room, because a destructive flag that runs first would otherwise change the
+    verdict of the next one -- measured: a shared room reported one writer instead of sixteen.
+    """
+    import hashlib
+    import tempfile
+
+    def digest(where: pathlib.Path) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for path in sorted(where.rglob("*")):
+            if path.is_file() and not path.is_symlink():
+                rel = path.relative_to(where).as_posix()
+                try:
+                    out[rel] = hashlib.sha256(path.read_bytes()).hexdigest()
+                except OSError:
+                    out[rel] = "<unreadable>"
+        return out
+
+    if not candidates:
+        return []
+    baseline = digest(root)
+    survivors: list[str] = []
+    for flag in candidates:
+        clean = True
+        for name in names:
+            where = tempfile.mkdtemp(prefix="certify-")
+            room = pathlib.Path(where) / "room"
+            try:
+                import shutil
+                shutil.copytree(root, room)
+                got = run([program, flag, name], room)
+                if digest(room) != baseline:
+                    clean = False
+                    break
+                if got.get("reason") == "TIMEOUT":
+                    clean = False
+                    break
+            except OSError:
+                clean = False
+                break
+            finally:
+                import shutil
+                shutil.rmtree(where, ignore_errors=True)
+        if clean:
+            survivors.append(flag)
+    return survivors
+
+
+_CERTIFIED_CACHE: dict[tuple[str, str, tuple[str, ...]], str | None] = {}
+
+
+def _objects_in(root: pathlib.Path) -> list[str]:
+    return [path.relative_to(root).as_posix() for path in sorted(root.rglob("*"))
+            if path.is_file() and not path.is_symlink()]
+
+
+def _certified_for(page: dict[str, Any], root: pathlib.Path) -> str | None:
+    """The first candidate flag that survives the execution test, memoised per (room, page).
+
+    The memo is not an optimisation of convenience: without it every compiled step re-runs the
+    execution test for its page. The key carries the room, because a digest compared against a
+    different baseline is a different measurement.
+    """
+    names = tuple(_objects_in(root))
+    key = (str(root), page["program"], names)
+    if key not in _CERTIFIED_CACHE:
+        survivors = certified_checks(page["program"], page["checks"], root, list(names))
+        _CERTIFIED_CACHE[key] = survivors[0] if survivors else None
+    return _CERTIFIED_CACHE[key]
 
 
 def probe(name: str, args: Sequence[str]) -> dict[str, Any]:
@@ -612,7 +728,7 @@ def page_of(name: str, *, subcommand: str | None = None) -> dict[str, Any]:
             "synopsis": parse_synopsis(got["text"])}
     page["declared"] = parse_declared_options(got["text"])
     page["roles"] = verbs_of_page(page)
-    page["checks"] = check_flags(page["declared"])
+    page["checks"] = check_flags(page["declared"], program=name)
     return page
 
 
@@ -910,6 +1026,7 @@ def compile_step(edge: dict[str, Any], *, need: str, root: pathlib.Path,
         return {"status": "REFUSED__NO_OBJECT_OF_THE_INPUT_KIND", "in_kind": edge["in_kind"],
                 "room_kinds": sorted(set(typed(root).values()))}
     room_types = typed(root)
+    certified = _certified_for(page, root)
     # THE HANDED OBJECT HAS TO BE ONE THIS PAGE SAYS IT TAKES. A previous step in a path makes
     # objects, and the first of them is not automatically the right one: `tar -x` produced the
     # directory `proj`, and `xz proj` is xz being handed a directory ("Is a directory,
@@ -1147,7 +1264,10 @@ def compile_step(edge: dict[str, Any], *, need: str, root: pathlib.Path,
             "in_kind": edge["in_kind"], "out_kind": edge["out_kind"],
             "in_value": in_value, "out_value": out_value, "out_flag": named_output,
             "usage": synopsis["alternatives"][0]["text"], "declared": page["declared"],
-            "check": page["checks"][:1] and [page["program"], page["checks"][0]],
+            # THE CITATION IS TAKEN FROM THE SURVIVORS OF THE EXECUTION TEST, NOT FROM THE
+            # ALPHABETICAL HEAD OF THE LIST. `checks[0]` was `--help` on 249 pages: a flag that
+            # accepts every object. A page with no surviving flag cites nothing.
+            "check": ([page["program"], certified] if certified else None),
             "shape": {"required_slots": required, "bound": bound,
                       "filled": {slots[i]["name"]: v for i, v in filled.items()}}}
 
@@ -1163,6 +1283,21 @@ def _forms(declared: dict[str, dict[str, Any]], flag: str, value: str) -> list[s
 # 4. RUN, AND READ THE REFUSAL AS A SPECIFICATION
 # --------------------------------------------------------------------------- #
 
+def _digest(root: pathlib.Path) -> dict[str, str]:
+    """Every file in the room, by content. The one comparison a kind map cannot make."""
+    import hashlib
+
+    out: dict[str, str] = {}
+    for path in sorted(root.rglob("*")):
+        if path.is_file() and not path.is_symlink():
+            rel = path.relative_to(root).as_posix()
+            try:
+                out[rel] = hashlib.sha256(path.read_bytes()).hexdigest()
+            except OSError:
+                out[rel] = "<unreadable>"
+    return out
+
+
 def run(argv: Sequence[str], root: pathlib.Path, *, deadline: float = RUN_DEADLINE) -> dict[str, Any]:
     """One command in the room, bounded in time, in bytes and in what it can leave behind.
 
@@ -1174,6 +1309,13 @@ def run(argv: Sequence[str], root: pathlib.Path, *, deadline: float = RUN_DEADLI
       * stdin is closed, so no prompt is waited on.
     """
     before = typed(root)
+    # A KIND IS BLIND TO AN OVERWRITE. `shred -v payload.txt` replaces the file's contents with
+    # random bytes and leaves a file of the same type in the same place; comparing `typed(root)`
+    # before and after reports `changed: False`, and `attempt()` turns that into
+    # ACCEPTED_INERT -- "succeeded and changed nothing" -- for a destroyed object. Measured: 7 of
+    # the 16 flags the shipped check rule certified destroy bytes and are reported INERT this way.
+    # So the byte digest is taken as well, and a change in either is a change.
+    before_bytes = _digest(root)
     timed_out = False
     with tempfile.TemporaryFile() as out_file, tempfile.TemporaryFile() as err_file:
         try:
@@ -1200,10 +1342,16 @@ def run(argv: Sequence[str], root: pathlib.Path, *, deadline: float = RUN_DEADLI
         text_err = err_file.read(MAX_OUTPUT).decode("utf-8", "replace")
     if timed_out:
         return {"accepted": False, "reason": "TIMEOUT", "stdout": text_out, "stderr": text_err,
-                "changed": typed(root) != before}
+                "changed": typed(root) != before or _digest(root) != before_bytes}
     after = typed(root)
+    after_bytes = _digest(root)
+    bytes_changed = [rel for rel in sorted(set(before_bytes) | set(after_bytes))
+                     if before_bytes.get(rel) != after_bytes.get(rel)]
     return {"accepted": code == 0, "code": code, "stdout": text_out, "stderr": text_err,
-            "changed": before != after, "created": sorted(set(after) - set(before)),
+            "changed": before != after or bool(bytes_changed),
+            "changed_kinds": before != after,
+            "bytes_changed": bytes_changed[:8],
+            "created": sorted(set(after) - set(before)),
             "removed": sorted(set(before) - set(after)), "kinds_after": after}
 
 
