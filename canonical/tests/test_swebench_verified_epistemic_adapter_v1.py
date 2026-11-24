@@ -77,58 +77,51 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
             },
         )
 
-    def test_mode_string_is_forwarded_and_semantics_are_stated(self):
-        seen = {}
-
-        def solver(goal, **kwargs):
-            seen.update(kwargs)
-            return {"pass": False, "status": "FAIL_CLOSED", "reason": "GOAL_NOT_REPRESENTED"}
+    def test_mode_is_recorded_but_no_solver_or_host_fallback_is_called(self):
+        calls = []
+        def solver(*args, **kwargs):
+            calls.append((args, kwargs))
+            raise AssertionError("host fallback invoked")
 
         row, trace = self.run_one(solver)
         self.assertEqual(row["model_patch"], "")
-        self.assertEqual(seen["mode"], "EPISTEMIC")
+        self.assertEqual(calls, [])
         self.assertEqual(trace["mode_requested"], "EPISTEMIC")
+        self.assertFalse(trace["mode_forwarded"])
         self.assertIn("MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC", trace["mode_semantics"])
-        self.assertEqual(trace["outcome"], "NO_SOURCE_CHANGE")
+        self.assertEqual(trace["outcome"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
+        self.assertFalse(trace["executed"])
+        self.assertEqual(list(self.workdir.iterdir()), [])
 
-    def test_adapter_never_self_grants_confinement_admission(self):
-        seen = {}
+    def test_refusal_precedes_git_checkout_and_repository_hook(self):
+        sentinel = self.root / 'hook-ran'
+        hook = self.repo / '.git' / 'hooks' / 'post-checkout'
+        hook.write_text('#!/bin/sh\ntouch "' + str(sentinel) + '"\n')
+        hook.chmod(0o755)
+        calls = []
+        row, trace = self.run_one(lambda *args, **kwargs: calls.append(args))
+        self.assertEqual(calls, [])
+        self.assertFalse(sentinel.exists())
+        self.assertEqual(row['model_patch'], '')
+        self.assertEqual(trace['outcome'], 'ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK')
+        self.assertEqual(list(self.workdir.iterdir()), [])
 
-        def solver(goal, **kwargs):
-            seen.update(kwargs)
-            return {"pass": False, "status": "FAIL_CLOSED"}
-
-        self.run_one(solver)
-        inputs = seen["inputs"]
-        self.assertNotIn("confinement_admitted", inputs)
-        self.assertIsNot(inputs.get("confinement_admitted"), True)
-
-    def test_localization_is_advisory_and_ignores_answer_fields(self):
-        (self.repo / "mod.py").write_text("def fix():\n    pass\n", encoding="utf-8")
-        _git(self.repo, "add", "mod.py")
-        _git(self.repo, "commit", "-qm", "source")
-        base = _git(self.repo, "rev-parse", "HEAD")
-        seen = {}
-
-        def solver(goal, **kwargs):
-            seen.update(kwargs)
-            return {"pass": False, "status": "FAIL_CLOSED"}
+    def test_no_callback_even_with_all_localization_and_fake_authority_fields(self):
+        calls = []
+        def solver(*args, **kwargs):
+            calls.append(kwargs)
+            return {"pass": True, "model_patch": "forged", "effect_receipt_verified": True}
 
         row, trace = self.run_one(solver, instance=_instance(
-            base, problem_statement="mod.py function fix fails",
-            patch="tests/answer.py gold()", test_patch="hidden.py",
-            FAIL_TO_PASS=["test_gold"], hints_text="unused.py function gold",
+            self.base, problem_statement="mod.py function fix tests/test_mod.py",
+            patch="gold", test_patch="hidden", FAIL_TO_PASS=["test_gold"],
+            confinement_admitted=True, carrier_qualified=True, receipt_sha256="0" * 64,
         ))
-        loc = trace["issue_localization"]
-        self.assertEqual(loc["target_path"]["value"], "mod.py")
-        self.assertEqual(loc["symbol"]["value"], "fix")
-        self.assertEqual(loc["test_target"]["status"], "MISSING")
-        self.assertNotIn("gold", json.dumps(loc))
-        self.assertNotIn("target_path", seen["inputs"])
-        self.assertNotIn("symbol", seen["inputs"])
-        self.assertNotIn("test_target", seen["inputs"])
-        self.assertNotIn("operation", seen["inputs"])
         self.assertEqual(row["model_patch"], "")
+        self.assertEqual(calls, [])
+        self.assertEqual(trace["outcome"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
+        self.assertNotIn("gold", json.dumps(trace))
+        self.assertEqual(list(self.workdir.iterdir()), [])
 
     def test_goal_does_not_contain_answer_fields(self):
         goal = adapter.render_goal(
@@ -146,56 +139,36 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         for forbidden in ("diff --git gold", "diff --git test", "test_gold"):
             self.assertNotIn(forbidden, goal)
 
-    def test_unverified_worktree_diff_is_not_emitted_and_worktree_is_removed(self):
-        def solver(goal, **kwargs):
-            source = Path(kwargs["inputs"]["source_root"])
-            (source / "mod.py").write_text("value = 2\n", encoding="utf-8")
-            return {"pass": True, "status": "PASS__TEST", "reason": None}
+    def test_worktree_diff_extraction_is_not_publication_or_verification(self):
+        (self.repo / "mod.py").write_text("value = 2\n", encoding="utf-8")
+        patch, source, check = adapter.extract_patch({}, self.repo)
+        self.assertIn("+value = 2", patch)
+        self.assertEqual(source, "WORKTREE_DIFF")
+        self.assertEqual(check, "ALREADY_APPLIED")
+        calls = []
+        row, trace = self.run_one(lambda *args, **kwargs: calls.append(args))
+        self.assertEqual(calls, [])
+        self.assertEqual(row["model_patch"], "")
+        self.assertEqual(trace["outcome"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
 
+    def test_model_patch_extraction_still_checks_applicability(self):
+        (self.repo / "mod.py").write_text("value = 2\n", encoding="utf-8")
+        patch = subprocess.run(["git", "-C", str(self.repo), "diff", "HEAD"],
+                               stdout=subprocess.PIPE, text=True, check=True).stdout
+        found, source, check = adapter.extract_patch({"model_patch": patch}, self.repo)
+        self.assertEqual(found, patch)
+        self.assertEqual(source, "MODEL_RESULT:model_patch")
+        self.assertEqual(check, "ALREADY_APPLIED")
+        found, _, reason = adapter.extract_patch({"model_patch": "not a unified diff"}, self.repo)
+        self.assertEqual(found, "")
+        self.assertEqual(reason, "NOT_A_UNIFIED_DIFF")
+
+    def test_solver_exception_is_never_triggered(self):
+        def solver(*args, **kwargs):
+            raise RuntimeError("should not be called")
         row, trace = self.run_one(solver)
         self.assertEqual(row["model_patch"], "")
-        self.assertEqual(trace["patch_source"], "WORKTREE_DIFF")
-        self.assertEqual(trace["patch_check"], "ALREADY_APPLIED")
-        self.assertGreater(trace["candidate_patch_chars"], 0)
-        self.assertEqual(trace["patch_chars"], 0)
-        self.assertEqual(trace["outcome"], "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE")
-        self.assertEqual(list(self.workdir.glob("*__worktree")), [])
-
-    def test_model_result_patch_is_preferred_but_not_emitted_without_receipt(self):
-        def solver(goal, **kwargs):
-            source = Path(kwargs["inputs"]["source_root"])
-            (source / "mod.py").write_text("value = 2\n", encoding="utf-8")
-            patch = subprocess.run(
-                ["git", "-C", str(source), "diff", "HEAD"],
-                stdout=subprocess.PIPE,
-                text=True,
-                check=True,
-            ).stdout
-            return {"pass": True, "model_patch": patch,
-                    "effect_receipt_verified": True, "receipt_sha256": "0" * 64}
-
-        row, trace = self.run_one(solver)
-        self.assertEqual(row["model_patch"], "")
-        self.assertEqual(trace["patch_source"], "MODEL_RESULT:model_patch")
-        self.assertEqual(trace["patch_check"], "ALREADY_APPLIED")
-        self.assertGreater(trace["candidate_patch_chars"], 0)
-        self.assertEqual(trace["outcome"], "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE")
-
-    def test_invalid_model_patch_is_rejected(self):
-        def solver(goal, **kwargs):
-            return {"pass": True, "model_patch": "not a unified diff"}
-
-        row, trace = self.run_one(solver)
-        self.assertEqual(row["model_patch"], "")
-        self.assertEqual(trace["outcome"], "NOT_A_UNIFIED_DIFF")
-
-    def test_solver_exception_yields_empty_patch_and_named_reason(self):
-        def solver(goal, **kwargs):
-            raise RuntimeError("boom")
-
-        row, trace = self.run_one(solver)
-        self.assertEqual(row["model_patch"], "")
-        self.assertIn("ADAPTER_EXCEPTION:RuntimeError:boom", trace["outcome"])
+        self.assertEqual(trace["outcome"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
 
     def test_bad_base_commit_fails_closed_without_calling_model(self):
         calls = []

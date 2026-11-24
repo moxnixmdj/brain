@@ -69,6 +69,49 @@ class LocalizerTests(unittest.TestCase):
         self.assertIsNone(r['symbol']['value'])
         self.assertIsNone(r['test_target']['value'])
 
+    def test_ranked_results_use_import_and_evidence_without_claiming_authority(self):
+        self.put('other/thing.py', 'def repair():\n    pass\n')
+        self.put('docs/noise.py', 'def repair():\n    pass\n')
+        self.put('vendor/noise.py', 'def repair():\n    pass\n')
+        issue = 'repair fails\nfrom pkg.thing import repair\nrepair()'
+        r = loc.localize_issue(issue, self.root)
+        self.assertEqual(r['target_path']['status'], 'AMBIGUOUS')
+        ranked = r['ranked_candidates']
+        self.assertTrue(ranked['scan_complete'])
+        self.assertEqual(ranked['target_paths'][0]['path'], 'pkg/thing.py')
+        self.assertIn('import_module:pkg/thing', ranked['target_paths'][0]['evidence'])
+        self.assertNotIn('docs/noise.py', str(ranked))
+        self.assertNotIn('vendor/noise.py', str(ranked))
+        self.assertEqual(ranked['authority'], 'NONE__ADVISORY_ONLY')
+        self.assertIsNone(loc.explicit_input_candidates(r))
+
+    def test_quoted_source_line_ranks_enclosing_function(self):
+        self.put('pkg/example.py', 'def convert(data):\n    result = data + 123456789012345\n    return result\n')
+        r = loc.localize_issue('Broken conversion\n    result = data + 123456789012345', self.root)
+        top = r['ranked_candidates']['target_paths'][0]
+        self.assertEqual(top['path'], 'pkg/example.py')
+        self.assertEqual(top['symbols'], ['convert'])
+        self.assertIn('quoted_source_lines:1', top['evidence'])
+
+    def test_tie_order_is_lexical_and_top_k_is_bounded(self):
+        for i in range(15):
+            self.put(f'p{i:02d}/same.py', 'def repair(): pass\n')
+        r = loc.localize_issue('repair() fails', self.root)
+        ranked = r['ranked_candidates']['target_paths']
+        self.assertEqual(len(ranked), loc.TOP_K)
+        self.assertEqual([x['path'] for x in ranked], sorted(x['path'] for x in ranked))
+        self.assertEqual(r['target_path']['status'], 'AMBIGUOUS')
+
+    def test_partial_scan_retains_ranked_suggestions_not_unique_authority(self):
+        self.put('other/thing.py', 'def repair(): pass\n')
+        with patch.object(loc, 'MAX_SOURCE_FILES', 1):
+            r = loc.localize_issue('from pkg.thing import repair\nrepair()', self.root)
+        self.assertFalse(r['ranked_candidates']['scan_complete'])
+        self.assertGreater(r['ranked_candidates']['omitted_files'], 0)
+        self.assertEqual(r['ranked_candidates']['target_paths'][0]['path'], 'pkg/thing.py')
+        self.assertEqual(r['target_path']['status'], 'INCOMPLETE')
+        self.assertIsNone(r['target_path']['value'])
+
     def test_unsafe_paths_and_symlinks_are_never_read(self):
         (self.root / 'link.py').symlink_to(self.root.parent / 'external.py')
         (self.root / 'linked_dir').symlink_to(self.root.parent, target_is_directory=True)
@@ -90,7 +133,10 @@ class LocalizerTests(unittest.TestCase):
         with patch.object(loc, 'MAX_ENTRIES', 1):
             self.assertEqual(loc.localize_issue(query, self.root)['reason'], 'TREE_ENTRY_LIMIT')
         with patch.object(loc, 'MAX_SOURCE_FILES', 0):
-            self.assertEqual(loc.localize_issue('repair()', self.root)['reason'], 'SYMBOL_SCAN_FILE_LIMIT')
+            limited = loc.localize_issue('repair()', self.root)
+            self.assertFalse(limited['ranked_candidates']['scan_complete'])
+            self.assertEqual(limited['ranked_candidates']['scanned_files'], 0)
+            self.assertIsNone(limited['target_path']['value'])
         with patch.object(loc, 'MAX_FILE_BYTES', 2):
             self.assertEqual(loc.localize_issue(query, self.root)['reason'], 'SOURCE_FILE_TOO_LARGE_OR_INVALID')
 

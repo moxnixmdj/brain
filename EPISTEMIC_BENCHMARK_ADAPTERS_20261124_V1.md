@@ -5,12 +5,12 @@
 **Owner-authorization update:** The owner has approved a one-shot isolated scope;
 see `SWE_REPAIR_OWNER_APPROVAL_20261124_V1.md`. That statement was not accompanied
 by a digital signature, a trusted public key, independent reproduction logs, or
-an independently authenticated effect verifier. The existing SWE wrapper can
-invoke an unisolated solver and emit applicability-checked patches without an
-independent effect receipt. **Do not run it for the authorized evaluation**, and
-do not use the commands below for evaluation until a separately reviewed,
-no-host-fallback integration verifies the exact patch bytes against the trusted
-base and the five-real-instance gate has yielded a receipt-verified patch.
+an independently authenticated effect verifier. The SWE wrapper now refuses
+before invoking any solver or task checkout, and produces empty predictions;
+it does not yet invoke a namespace carrier. **Do not use the commands below for
+evaluation** until a separately reviewed, no-host-fallback integration verifies
+the exact patch bytes against the trusted base and the five-real-instance gate
+has yielded a receipt-verified patch.
 The five-real-issue localization-only diagnostic in
 `qualification_results/swe_real_localization_only_20261124.json` ran no repairs.
 
@@ -23,11 +23,10 @@ untouched. Its receipt identifier alone does not verify outcome/effect bytes.
 See the safety update at the top of
 `CONFINEMENT_FRONT_DOOR_WIRING_DESIGN_20261124_V1.md`. The original repair
 refusal remains; the later owner authorization does not supply a qualified
-execution path. The wrapper can inspect a model-returned or worktree diff with
-applicability checks, **not** receipt-verified patch bytes, and now refuses to
-emit nonempty predictions without a trusted receipt integration. This output
-guard does not confine its solver. The commands below are planning material,
-not a green light.
+execution path. The wrapper now refuses before a solver or checkout is invoked;
+its standalone diff-extraction utility still performs applicability checks,
+**not** receipt verification. The commands below are planning material, not a
+green light.
 
 Date: 2026-11-24 · Authority: `NONE__SANDBOX_ONLY` · Branch `arena/d582a17b-brain`
 
@@ -40,13 +39,13 @@ external machine described below.
 
 | File | Role |
 |---|---|
-| `canonical/tools/swebench_verified_epistemic_adapter_v1.py` | Calls `open_model().solve(goal, inputs=..., mode="EPISTEMIC", ...)`, writes official `predictions.jsonl` plus a fail-closed trace sidecar. |
+| `canonical/tools/swebench_verified_epistemic_adapter_v1.py` | Now refuses before a solver or task checkout; writes empty predictions and a refusal trace until a qualified carrier and trusted verifier are wired. |
 | `canonical/tests/test_swebench_verified_epistemic_adapter_v1.py` | 12 tests: prediction shape, answer-field exclusion, worktree diff, patch validation, no self-granted confinement, exception path, smoke-test filtering. |
 | `canonical/runtime/harbor_epistemic_agent_v1.py` | External `BaseAgent` that calls the same engine, executes only explicitly proposed commands through the existing Harbor transport/command policy, and writes a trace. |
 | `canonical/tests/test_harbor_epistemic_agent_v1.py` | 8 tests: proposal execution, fail-closed refusal, forbidden command, uncertain exec, trace and context handling. |
 
-Both wrappers forward the mode string verbatim. **Correction to the plan that
-was handed over:** `mode="EPISTEMIC"` is not a registered mode in
+The SWE wrapper records the mode but currently invokes no solver; it does not
+forward a mode. **Correction to the plan that was handed over:** `mode="EPISTEMIC"` is not a registered mode in
 `open_model().solve()`; only `RECALL` and `SOLVE_OR_LEARN` are special-cased.
 Every other string, including `EPISTEMIC` and `AUTO`, uses ordinary routing.
 Both wrappers record this as `MODE_NOT_SPECIAL_CASED_BY_ENGINE:EPISTEMIC` in
@@ -109,8 +108,8 @@ python3 -m canonical.tools.swebench_verified_epistemic_adapter_v1 \
 
 Every dataset instance is written, including unresolved ones with an empty
 `model_patch`. The sidecar records `model_status`, `model_reason`, patch source,
-`git apply --check` result and a reason code for each empty patch. The current
-wrapper may find a model or worktree diff, but emits no nonempty patch: an
+a reason code for each empty patch. The current wrapper does not call the model
+or inspect a worktree diff and emits no nonempty patch. A standalone
 applicability check is not an independently verified effect receipt.
 
 ### 2.3 Grade with the official harness

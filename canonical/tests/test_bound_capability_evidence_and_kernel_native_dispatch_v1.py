@@ -150,29 +150,30 @@ class TheGateNowReadsTheReceiptEncodingTests(unittest.TestCase):
         self.assertEqual(inspected["capability_id"], "knowledge.consistency.assess")
         self.assertEqual(inspected["entry"]["status"], "VERIFIED_BOUND_CAPABILITY")
 
-    def test_ten_capabilities_moved_from_refused_to_admitted(self):
-        """Pinned from a measurement: 38 of 72 before this change, 48 after.
+    def test_historically_anchored_capabilities_retain_receipt_evidence(self):
+        """Check specific receipt-backed rows, not a stale total registry size.
 
-        This is a registry fact, not a host fact, so it is safe to pin.  It is pinned at all
-        because the whole claim of the change is a count of capabilities the machine was
-        wrongly told it had no proof for.
+        These are legacy machine predicates, not authenticated independent
+        review, and they do not grant execution authority to repair.
         """
         registry = json.loads(
             (REPO_ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json")
             .read_text(encoding="utf-8"))["capabilities"]
-
-        def boolean_only(v):
-            return (v.get("independent_verified") is True
-                    or v.get("independently_verified") is True
-                    or isinstance(v.get("independently_verified_by"), str)
-                    or v.get("producer_independent") is True)
-
-        entries = [v.get("verification") or {} for v in registry.values()]
-        before = sum(1 for v in entries if boolean_only(v))
-        after = sum(1 for v in entries
-                    if boolean_only(v) or adapter._receipt_anchor_verified(v))
-        self.assertEqual((before, after, len(registry)), (38, 48, 72))
-        self.assertEqual(after - before, 10)
+        original_rows = (
+            'http.json.fetch_from_state', 'image.qr.generate.qrencode',
+            'knowledge.consistency.assess', 'knowledge.json.fetch.external',
+            'knowledge.status.assert', 'knowledge.support.materialize',
+            'pdf.extract.ocr.tesseract', 'pdf.extract.text.pypdf',
+            'pypi.provenance.audit_live_artifact', 'yaml.to_json.yq',
+        )
+        for cid in original_rows:
+            with self.subTest(capability=cid):
+                verification = registry[cid]['verification']
+                self.assertIsNot(verification.get('independent_verified'), True)
+                self.assertIsNot(verification.get('independently_verified'), True)
+                self.assertIsNot(verification.get('producer_independent'), True)
+                self.assertNotIsInstance(verification.get('independently_verified_by'), str)
+                self.assertTrue(adapter._receipt_anchor_verified(verification))
 
 
 class KernelNativeDispatchTests(unittest.TestCase):

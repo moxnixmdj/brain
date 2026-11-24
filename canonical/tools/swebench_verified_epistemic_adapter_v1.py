@@ -1,4 +1,7 @@
-"""Generate SWE-bench predictions.jsonl from Brain's open_model().solve().
+"""Fail-closed SWE-bench prediction producer; one-shot execution is unadmitted.
+
+No solver or task code is executed. Predictions are empty until a reviewed,
+qualified one-shot carrier and trusted effect-verifier integration exists.
 
 This is a *producer* only. It never grades anything and never edits a score.
 The official SWE-bench Docker harness grades the emitted patch strings.
@@ -9,8 +12,8 @@ What it deliberately does not do:
   * no claim that a patch resolves an instance (only the harness can say that);
   * no special meaning invented for `mode="EPISTEMIC"`. The engine only
     special-cases RECALL and SOLVE_OR_LEARN; any other mode falls through to
-    its ordinary routing. The requested string is forwarded verbatim and
-    recorded in the sidecar report.
+    its ordinary routing. The requested string is recorded but is not forwarded,
+    because the adapter does not invoke a solver.
 
 Usage (on a machine with the pre-cloned SWE-bench repos and the harness):
 
@@ -37,8 +40,6 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
-
-from canonical.tools.swebench_issue_localizer_v1 import explicit_input_candidates, localize_issue
 
 SCHEMA = "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
 DEFAULT_MODEL_NAME = "b81b2217-epistemic-v1"
@@ -309,7 +310,7 @@ def prediction_row(instance_id: str, patch: str, model_name: str) -> dict[str, s
 def solve_one(
     instance: Mapping[str, Any],
     *,
-    solve_fn: SolveFn,
+    solve_fn: SolveFn | None,
     repos_root: Path,
     workdir: Path,
     model_name: str,
@@ -321,13 +322,13 @@ def solve_one(
 ) -> tuple[dict[str, str], dict[str, Any]]:
     """Produce one prediction row and one fail-closed trace row."""
     iid = str(instance.get("instance_id") or "").strip()
-    goal = ""
     trace: dict[str, Any] = {
         "schema": SCHEMA,
         "instance_id": iid,
         "model_name_or_path": model_name,
         "mode_requested": mode,
         "mode_semantics": mode_note(mode),
+        "mode_forwarded": False,
         "model_status": None,
         "model_reason": None,
         "patch_source": "NONE",
@@ -335,82 +336,29 @@ def solve_one(
         "patch_chars": 0,
         "outcome": "NO_SOURCE_CHANGE",
     }
-    worktree: Path | None = None
+    # There is no admitted one-shot SWE repair carrier or trusted effect
+    # receipt integration. Do not run the solver, git checkout, fixtures, or a
+    # host fallback. In particular, the callback is intentionally never called.
     try:
-        goal = render_goal(instance, include_hints=include_hints)
-        worktree = make_worktree(repos_root, instance, workdir)
-        # Advisory only: do not put these values into the solver inputs or alter
-        # routing/admission. Existing patch checks do not verify effect receipts.
-        trace["issue_localization"] = localize_issue(
-            str(instance.get("problem_statement") or ""), worktree
-        )
-        # This subset is for a future qualified integration, not the current
-        # solver: neither a candidate nor a digest grants execution authority.
-        trace["explicit_input_candidates"] = explicit_input_candidates(trace["issue_localization"])
-        task_path = workdir / (iid.replace("/", "_") + "__task.txt")
-        task_path.write_text(goal + "\n", encoding="utf-8")
-        report_path = workdir / (iid.replace("/", "_") + "__model_result.json")
-        inputs: dict[str, Any] = {
-            "instance_id": iid,
-            "source_root": str(worktree),
-            "worktree_path": str(worktree),
-            "repo": str(instance.get("repo") or ""),
-            "base_commit": str(instance.get("base_commit") or ""),
-            "task_path": str(task_path),
-            "problem_statement_path": str(task_path),
-            "request_spec": goal,
-            "goal": goal,
-            "output_path": str(report_path),
-            "diff_path": str(workdir / (iid.replace("/", "_") + "__model.patch")),
-            "python_executable": sys.executable,
-            "synthesize_regression_test": False,
-            "test_paths": [],
-            "test_argv": [],
-            "timeout_s": 600,
-        }
-        result = solve_fn(
-            goal,
-            inputs=inputs,
-            mode=mode,
-            instance_id=iid,
-            context_paths=list(context_paths or [str(task_path)]),
-            cwd=str(worktree),
-        )
-        if not isinstance(result, Mapping):
-            raise AdapterError("SOLVE_RESULT_NOT_MAPPING")
-        trace["model_status"] = str(result.get("status") or "")
-        trace["model_reason"] = str(result.get("reason") or "")
-        trace["model_pass"] = result.get("pass") is True
-        trace["model_capability_id"] = str(result.get("capability_id") or "")
-        patch, source, check = extract_patch(
-            result, worktree, include_untracked=include_untracked
-        )
-        # An applicability check is not an independently verified effect
-        # receipt bound to the task's base and exact patch bytes. This adapter
-        # has no such trusted integration, so never emit a nonempty prediction.
-        # This is an output safeguard, NOT confinement for the solver above.
-        trace.update(
-            {
-                "patch_source": source,
-                "patch_check": check,
-                "candidate_patch_chars": len(patch),
-                "patch_chars": 0,
-                "outcome": "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE" if patch else check or "NO_SOURCE_CHANGE",
-            }
-        )
+        render_goal(instance, include_hints=include_hints)
+        repo_key(iid)
+        base = str(instance.get("base_commit") or "").strip()
+        if not re.fullmatch(r"[0-9a-fA-F]{7,40}", base):
+            raise AdapterError("BASE_COMMIT_INVALID:" + iid)
+        trace["outcome"] = "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK"
+        trace["model_reason"] = "NO_ADMITTED_ONESHOT_CARRIER_OR_TRUSTED_EFFECT_VERIFIER"
+        trace["executed"] = False
         return prediction_row(iid, "", model_name), trace
-    except Exception as exc:  # fail closed; keep the instance in predictions.jsonl
+    except AdapterError as exc:
         trace["outcome"] = "ADAPTER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc)[:300]
+        trace["executed"] = False
         return prediction_row(iid, "", model_name), trace
-    finally:
-        if worktree is not None and not keep_worktrees:
-            remove_worktree(repos_root, instance, worktree, workdir)
 
 
 def generate_predictions(
     instances: Iterable[Mapping[str, Any]],
     *,
-    solve_fn: SolveFn,
+    solve_fn: SolveFn | None,
     repos_root: Path,
     workdir: Path,
     output_path: Path,
@@ -471,20 +419,10 @@ def generate_predictions(
         "report_path": str(report_path),
         "mode_requested": mode,
         "mode_semantics": mode_note(mode),
+        "mode_forwarded": False,
         "counts": counts,
         "claim": "PREDICTIONS_GENERATED_ONLY__RESOLUTION_SCORE_REQUIRES_OFFICIAL_HARNESS",
     }
-
-
-def _engine_solver() -> SolveFn:
-    from canonical.runtime.brain_unified_model_v1 import open_model
-
-    model = open_model()
-
-    def solve(goal: str, **kwargs: Any) -> dict[str, Any]:
-        return model.solve(goal, **kwargs)
-
-    return solve
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -515,7 +453,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         instances = filter_instances(instances, limit=args.limit, instance_ids=args.instance_ids)
         summary = generate_predictions(
             instances,
-            solve_fn=_engine_solver(),
+            solve_fn=None,
             repos_root=args.repos_root.resolve(),
             workdir=args.workdir.resolve(),
             output_path=args.output.resolve(),

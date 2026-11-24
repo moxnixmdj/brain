@@ -16,12 +16,15 @@ from typing import Any
 
 SCHEMA = 'PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1'
 MAX_STATEMENT_CHARS = 40_000
-MAX_ENTRIES = 12_000
+MAX_ENTRIES = 50_000
 MAX_DEPTH = 32
-MAX_SOURCE_FILES = 500
+MAX_SOURCE_FILES = 6_000
 MAX_FILE_BYTES = 256_000
-MAX_SCAN_BYTES = 8_000_000
-EXCLUDED_DIRS = {'.git', '.hg', '.svn', '.venv', 'venv', 'node_modules', '__pycache__', '.tox', '.mypy_cache', '.pytest_cache'}
+MAX_SCAN_BYTES = 64_000_000
+TOP_K = 10
+EXCLUDED_DIRS = {'.git', '.hg', '.svn', '.venv', 'venv', 'node_modules', '__pycache__',
+                 '.tox', '.mypy_cache', '.pytest_cache', 'doc', 'docs', 'vendor',
+                 'vendors', 'vendored', 'third_party', 'third-party', 'build', 'dist'}
 PATH_RE = re.compile(r'(?<![A-Za-z0-9_./\\-])([A-Za-z0-9_./-]+\.py)(?![A-Za-z0-9_])')
 NAMED_SYMBOL_RE = re.compile(r'\b(?:function|method|class)\s+[`\'"]?([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)')
 CALL_SYMBOL_RE = re.compile(r'(?<![\w.])([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*)\s*\(')
@@ -155,6 +158,127 @@ def _field(candidates: list[str], basis: str) -> dict[str, Any]:
             'candidates': choices[:20], 'candidate_count': len(choices), 'basis': basis}
 
 
+def _ranked_candidates(statement: str, files: list[str], paths: list[str], root_fd: int) -> dict[str, Any]:
+    """Bounded reproducible ranking, not a confidence or correctness guarantee."""
+    # Exclude issue-template boilerplate from lexical evidence; never execute it.
+    text = re.sub(r'<!--.*?-->', ' ', statement, flags=re.DOTALL)
+    title = text.splitlines()[0] if text.splitlines() else ''
+    modules = set(re.findall(r'\bfrom\s+([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+)\s+import\b', text))
+    modules.update(re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*){2,}\b', text))
+    module_paths = sorted(m.replace('.', '/') for m in modules)
+    symbols = _symbol_mentions(text)
+    symbols.update(re.findall(r'`([A-Za-z_]\w{2,})`', text))
+    symbols.update(re.findall(r'\bfrom\s+[A-Za-z_.][\w.]*\s+import\s+([A-Za-z_]\w*)', text))
+    symbols -= {'print', 'len', 'str', 'int', 'list', 'dict', 'range', 'isinstance', 'type', 'super', 'Exception', 'ValueError'}
+    frequencies = {s: len(re.findall(r'\b' + re.escape(s) + r'\b', text)) for s in symbols}
+    ranked_symbols = sorted(symbols, key=lambda s: (-int(bool(re.search(r'\b'+re.escape(s)+r'\b', title))), -frequencies[s], s))[:128]
+    names = set(ranked_symbols)
+    title_tokens = {t.lower() for t in re.findall(r'[A-Za-z_]{3,}', title)} - {'the', 'and', 'for', 'when', 'not', 'with', 'from', 'does', 'into', 'that', 'this', 'support', 'output'}
+    snippets = sorted({line.strip() for line in text.splitlines()
+                       if 25 <= len(line.strip()) <= 200 and
+                       (line.startswith('    ') or line.lstrip().startswith(('# ', 'if ', 'return ')))})[:40]
+
+    def priority(path: str) -> tuple[int, str]:
+        stem = Path(path).stem.lower()
+        module = path[:-3]
+        relevance = 0
+        for mp in module_paths:
+            if module == mp or module == mp + '/__init__': relevance = max(relevance, 4)
+            elif module.startswith(mp + '/'): relevance = max(relevance, 3)
+            elif mp.startswith(module + '/'): relevance = max(relevance, 2)
+        if stem in title_tokens: relevance = max(relevance, 1)
+        if path in paths: relevance = 5
+        return (-relevance, path)
+
+    scan = sorted(files, key=priority)
+    complete = len(scan) <= MAX_SOURCE_FILES and len(symbols) <= 128
+    symbols_truncated = len(symbols) > 128
+    scan = scan[:MAX_SOURCE_FILES]
+    used = 0
+    omitted = 0
+    sources: list[dict[str, Any]] = []
+    tests: list[dict[str, Any]] = []
+    ascii_names = [s for s in ranked_symbols if s.isascii()]
+    unicode_names = [s.encode('utf-8') for s in ranked_symbols if not s.isascii()]
+    symbol_re = re.compile(rb'\b(?:' + b'|'.join(re.escape(s.encode('ascii')) for s in ascii_names) + rb')\b') if ascii_names else None
+    for i, path in enumerate(scan):
+        try:
+            data = _read_python(root_fd, path)
+        except LocalizationUnavailable as exc:
+            if str(exc) == 'SOURCE_FILE_TOO_LARGE_OR_INVALID':
+                complete = False; omitted += 1; continue
+            raise
+        if used + len(data) > MAX_SCAN_BYTES:
+            complete = False; omitted += len(scan) - i; break
+        used += len(data)
+        has_symbol = bool(symbol_re and symbol_re.search(data)) or any(name in data for name in unicode_names)
+        found = _definitions(data) if has_symbol else {}
+        matched = sorted(names.intersection(found))
+        evidence: list[str] = []
+        score = 0
+        if path in paths:
+            score += 200; evidence.append('issue_path')
+        module = path[:-3]
+        exact = [mp for mp in module_paths if module == mp or module == mp + '/__init__']
+        package = [mp for mp in module_paths if module.startswith(mp + '/')]
+        # Prefer a specific module, not a package initializer imported alongside it.
+        if exact:
+            mp = max(exact, key=len)
+            score += 15 if path.endswith('/__init__.py') else 80
+            evidence.append('import_module:' + mp)
+        elif package:
+            mp = max(package, key=len)
+            score += 16; evidence.append('import_package:' + mp)
+        for s in matched:
+            weight = min(frequencies[s], 5) * 3 + (25 if re.search(r'\b'+re.escape(s)+r'\b', title) else 0)
+            score += weight; evidence.append('definition:' + s)
+        hits = [line for line in snippets if line.encode('utf-8') in data]
+        context_symbols: list[str] = []
+        if hits:
+            score += min(len(hits), 5) * 20; evidence.append('quoted_source_lines:' + str(len(hits)))
+            try:
+                code_lines = data.decode('utf-8').splitlines()
+                nodes = [n for n in ast.walk(ast.parse(data)) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]
+                for lineno, line in enumerate(code_lines, 1):
+                    if line.strip() not in hits: continue
+                    enclosing = [n for n in nodes if n.lineno <= lineno <= (n.end_lineno or n.lineno)]
+                    if enclosing:
+                        context_symbols.append(min(enclosing, key=lambda n: (n.end_lineno or n.lineno) - n.lineno).name)
+            except (SyntaxError, UnicodeError, ValueError, RecursionError, MemoryError):
+                pass
+        stem = Path(path).stem.lower().removeprefix('test_').removesuffix('_test')
+        if stem in title_tokens:
+            score += 35; evidence.append('title_filename:' + stem)
+        if score:
+            ordered = sorted(matched, key=lambda s: (-int(bool(re.search(r'\b'+re.escape(s)+r'\b', title))), -frequencies[s], s))
+            ordered += [s for s in sorted(set(context_symbols)) if s not in ordered]
+            item = {'path': path, 'score': score, 'evidence': evidence, 'symbols': ordered}
+            if not _is_test(path): sources.append(item)
+            elif Path(path).name.startswith('test_') or Path(path).name.endswith('_test.py'): tests.append(item)
+    sources.sort(key=lambda item: (-item['score'], item['path']))
+    # Related test filenames and package locality are weak suggestions, not tests known to fail.
+    if sources:
+        top = sources[0]['path']
+        stem = Path(top).stem
+        top_parent = str(Path(top).parent)
+        known_tests = {item['path']: item for item in tests}
+        for path in files:
+            if not _is_test(path): continue
+            if Path(path).name in {f'test_{stem}.py', f'{stem}_test.py'}:
+                item = known_tests.setdefault(path, {'path': path, 'score': 0, 'evidence': [], 'symbols': []})
+                item['score'] += 30; item['evidence'].append('target_filename')
+                if str(Path(path).parent).startswith(top_parent + '/'):
+                    item['score'] += 10; item['evidence'].append('target_package')
+        tests = list(known_tests.values())
+    tests.sort(key=lambda item: (-item['score'], item['path']))
+    legacy_symbols = _symbol_mentions(statement)
+    return {'authority': 'NONE__ADVISORY_ONLY', 'scan_complete': complete,
+            'symbols_truncated': symbols_truncated,
+            'scanned_files': len(scan) - omitted, 'scanned_bytes': used, 'omitted_files': omitted + max(0, len(files) - len(scan)),
+            'target_paths': sources[:TOP_K], 'test_targets': tests[:TOP_K],
+            '_symbol_source_paths': sorted(item['path'] for item in sources if legacy_symbols.intersection(item['symbols']))}
+
+
 def explicit_input_candidates(localization: dict[str, Any]) -> dict[str, str] | None:
     """Return an all-or-nothing, explicit-reference subset for future wiring.
 
@@ -196,25 +320,17 @@ def localize_issue(statement: str, worktree: str | Path) -> dict[str, Any]:
         try:
             files = _inventory(root_fd)
             paths = _path_mentions(statement, files)
-            sources = [p for p in files if not _is_test(p)]
             source_mentions = [p for p in paths if not _is_test(p)]
             test_mentions = [p for p in paths if _is_test(p)]
             symbols = _symbol_mentions(statement)
+            ranked = _ranked_candidates(statement, files, paths, root_fd)
+            hits = ranked.pop('_symbol_source_paths')
             target = _field(source_mentions, 'EXPLICIT_ISSUE_PATH')
-            # Never resolve an explicitly ambiguous file by guessing a symbol.
+            # A partial scan can produce suggestions, but not a unique conclusion.
             if not source_mentions and symbols:
-                if len(sources) > MAX_SOURCE_FILES:
-                    raise LocalizationUnavailable('SYMBOL_SCAN_FILE_LIMIT')
-                hits = []
-                total = 0
-                for path in sources:
-                    data = _read_python(root_fd, path); total += len(data)
-                    if total > MAX_SCAN_BYTES:
-                        raise LocalizationUnavailable('SYMBOL_SCAN_BYTE_LIMIT')
-                    defs = _definitions(data)
-                    if any(name in defs for name in symbols):
-                        hits.append(path)
                 target = _field(hits, 'EXPLICIT_SYMBOL_AST_SEARCH')
+                if not ranked['scan_complete'] and target['status'] == 'SELECTED':
+                    target.update(status='INCOMPLETE', value=None)
             target_value = target['value']
             symbol_field = _field([], 'EXPLICIT_ISSUE_SYMBOL_AND_AST')
             if target_value and symbols:
@@ -234,7 +350,8 @@ def localize_issue(statement: str, worktree: str | Path) -> dict[str, Any]:
                 stem = Path(target_value).stem
                 tests = _field([p for p in files if _is_test(p) and Path(p).name in {f'test_{stem}.py', f'{stem}_test.py'}],
                                'MATCHING_TEST_FILENAME_HEURISTIC')
-            result.update(status='ADVISORY_CANDIDATES', target_path=target, symbol=symbol_field, test_target=tests)
+            result.update(status='ADVISORY_CANDIDATES', target_path=target, symbol=symbol_field, test_target=tests,
+                          ranked_candidates=ranked)
         finally:
             os.close(root_fd)
     except (LocalizationUnavailable, OSError) as exc:
