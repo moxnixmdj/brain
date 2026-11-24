@@ -66,3 +66,8 @@ The final local gate wrapper after the runner receipt passed `ALL_GATES_OK True`
 ## Iteration-10 frontier-status supersession
 
 This note remains the exact iteration-9 Terminal-Bench 4.1 record. Iteration 10 supersedes only the frontier-status phrases above: `SWE_BENCH_PRO_V2_ZERO_MODEL_PURPOSE_INTEGRATION_20261124_V1.md` adds a finite zero-model purpose compiler and a pinned SWE-bench Pro V2 / HARD-51 OIDC runner carrier. No Terminal-Bench result is changed, no SWE-bench score is claimed, OSWorld 2.1 remains blocked, and §6 remains NOT MET.
+
+
+## Iteration-10 runner receipt supersession
+
+Iteration 10 recorded a distinct OIDC runner receipt for three fresh SWE-bench Pro V2 / HARD-51 tasks. This changes only the iteration-9 frontier-status phrases above; it does not change any Terminal-Bench 4.1 result, does not produce an aggregate SWE-bench score, does not run OSWorld 2.1, does not satisfy §6 and does not grant credit. Three fresh-container HARD-51 reward vectors were all `{"reward":0.0}`. See `SWE_BENCH_PRO_V2_ZERO_MODEL_PURPOSE_INTEGRATION_20261124_V1.md` and `THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.md`.

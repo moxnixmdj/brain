@@ -41,11 +41,18 @@ This is a finite **instruction-supplied transformation compiler**, not arbitrary
 
 No aggregate benchmark score, §6 verification, capability/family/terminal credit, independent terminal verification, PR, merge or `truth.achieved=true` follows from this work. A three-task HARD-51 attempt is a fresh hard-environment contrast, not the full 642-task benchmark and not the full HARD-51 score. OSWorld 2.1, the remaining SWE-bench Pro V2 / HARD-51 tasks, remaining Terminal-Bench 4.1 CPU/GPU tasks, arbitrary purpose understanding, authored repair content and GUI/browser computer use remain unverified.
 
-## 5. Receipt status
+## 5. Runner-owned receipt status
 
-At producer time, the distinct OIDC runner workflow has been authored but no runner-owned receipt for this workflow has been recorded. The receipt, sidecar and reward log will be landed by the runner itself; local producer metadata will then be reconciled without changing any pinned Brain source bytes. Section 6 remains NOT MET.
+The distinct OIDC runner workflow `45314632711` succeeded in 6m11s and landed its own receipt, SHA-256 sidecar and sanitized reward log at HEAD `d2bbd4e9`. Receipt SHA-256 `c24a1ea914d6bcccbd00d925fb2e7e1ba76f4f365a066d9842e627a935406e3a`; reward-log SHA-256 `bfb1b92dc130e81b85ecbdab544e563f44d2fe149a0a9c60b22dbbb3b0636382`; official fresh-container `result.json` SHA-256 `ade2d59609e566ac237b3c28dedc085f0d68d24abb8f3216c457412e7de1aab8`. The final full gate wrapper passed `ALL_GATES_OK True` with 26 checks after the receipt.
+
+Three fresh run-id-seeded HARD-51 tasks produced three official reward vectors, all `{"reward":0.0}`, with `task_success_count=0` and no harness exceptions. The finite compiler planned zero action commands; one visible-state patch of 209 bytes and two empty patches were captured. This is measured evidence of fail-closed finite parsing, not task success, not authored repair content, not an aggregate benchmark score, not §6 verification and not terminal credit. Section 6 remains NOT MET.
 
 
 ## Producer-side gate record
 
 The iteration-10 local gate wrapper passed `ALL_GATES_OK True` with 24 checks at `2026-11-24T02:43:57Z` on HEAD `227c3e1c`, including exact four-source binding, 11 finite-purpose tests, 15 combined zero-model Harbor tests, new workflow YAML/embedded-Python/source-binding checks, no raw benchmark task files, 200 selected regression tests and a clean tree after the ledger revert. The first wrapper run's route/OBS drift mismatch and copied assertion bug are preserved in the main report. This is local producer authority only; the distinct OIDC runner receipt is still the authority for any SWE-bench Pro V2 / HARD-51 attempt result.
+
+
+## Runner receipt and final gates
+
+The runner receipt is `canonical/verification/SWE_BENCH_PRO_V2_HARD51_ZERO_MODEL_PURPOSE_RUNNER_RECEIPT_20261124_V1.json`, its sidecar is the same path with `.sha256`, and the reward log is `canonical/verification/SWE_BENCH_PRO_V2_HARD51_REWARD_LOG_20261124_V1.json`. The local final gate wrapper `/tmp/run_iter10_runner_final_gates.py` passed 26 checks with `200 passed in 223.07s`, exact receipt/reward-log/workflow blob bindings, three OIDC run references, 29 instrument tests, 4 old zero-model Harbor tests, 11 finite-purpose tests and a clean tree after the ledger revert. No capability, family, terminal or truth credit was taken; no PR or merge was opened.
