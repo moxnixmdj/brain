@@ -307,6 +307,20 @@ def typed_enumerate_candidates(
                     exprs.append(f"({comp} {op} {b})")
                     if len(exprs) >= budget:
                         return exprs[:budget]
+    # Depth 4: ((a op b) op c) op d — only when typed pruning keeps budget; G_t compression depth-3→depth-5
+    if max_depth >= 4:
+        depth_all = [e for e in exprs if e not in base]
+        depth3_cands = [e for e in depth_all if e.count("(") >= 2]
+        depth3_sorted = sorted(depth3_cands, key=lambda e: (0 if _mentions_var(e) else 1))[:12]
+        for comp in depth3_sorted:
+            for op in binops[:3]:
+                for b in base:
+                    tb = type_env.get(b, infer_type_of_value(_literal_val(b)))
+                    if result_type == INT and tb not in (INT, UNKNOWN) and op in ("+", "-", "*", "//", "%"):
+                        continue
+                    exprs.append(f"({comp} {op} {b})")
+                    if len(exprs) >= budget:
+                        return exprs[:budget]
 
     return exprs[:budget]
 

@@ -156,13 +156,22 @@ def compositional_candidates(
     """
     g_t = grammar_with_concepts(base_grammar, concepts, type_env)
     if HAS_TYPED:
-        # Typed enumeration already does depth split and type filtering; now with concepts
+        # Typed enumeration with Laplace priority queue — depth4 within 200 budget via G_t compression
         cands = _typed_enum(g_t, type_env, max_depth=max_depth, budget=budget)  # type: ignore
-        # Annotate reuse: count distinct concept tokens per candidate
-        # Sort to prefer reuse (few distinct concepts) — L_reg effect
-        def distinct_concepts(cand: str) -> int:
-            return sum(1 for ct in [c.get("ast","") for c in concepts] if ct and ct in cand)
-        cands_sorted = sorted(cands, key=lambda c: (distinct_concepts(c), len(c)))
+        # Laplace-ranked G_t: P(concept) empirical (uses+1)/(N+|V|) → log_prior already in library
+        # Score = Σ log_prior(concepts_used) + λ·distinct + len penalty — mirrors NLI L_reg discrete bottleneck
+        # More negative prior = more compressive = higher priority (lower score)
+        concept_index = { (c.get("ast","") or c.get("template","") or c.get("id","")): float(c.get("prior", c.get("log_prior", -0.5))) for c in concepts }
+        def laplace_score(cand: str) -> tuple[float, int, int]:
+            used = []
+            for tok, pri in concept_index.items():
+                if tok and tok in cand:
+                    used.append(pri)
+            distinct = len(used)
+            prior_sum = sum(used) if used else 0.0  # more negative = better
+            # λ=0.3 distinct penalty (NLI L_reg) + length tie-breaker
+            return (prior_sum + distinct * 0.3, distinct, len(cand))
+        cands_sorted = sorted(cands, key=laplace_score)
         return cands_sorted[:budget]
     # Fallback raw enumeration over G_t
     if HAS_DEEP:
