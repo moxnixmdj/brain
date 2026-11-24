@@ -1,0 +1,531 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "HARBOR_CONTAINER_LOCAL_SOLVER_20261124_V1",
+  "action_intent_id": "HARBOR_CONTAINER_LOCAL_SOLVER_20261124_V1",
+  "date": "2026-11-24",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "authority": "NONE__ENGINEERING_INTEGRATION_NOT_BENCHMARK_CREDIT",
+  "canonical_base_commit": "b182859b79766c758b49ac1117a8d4169116f125",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The prior Harbor epistemic helper invokes a side-effecting solver on the host rather than in the task container; its production entry point consequently refuses all work.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The prior Harbor epistemic helper invokes a side-effecting solver on the host rather than in the task container; its production entry point consequently refuses all work.",
+  "action_summary": "Provide a transport-only replacement for the historical disabled host proposal loop: stage immutable Brain source and invoke its existing solver only inside the task container, preserving raw model.patch and trajectory artifacts for official external verifiers. No solver cognition, benchmark answer, test oracle or capability authority is added.",
+  "selected_route": "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+  "expected_parent_frontier_change": "The execution locus is the task container, not the Harbor host; a binary patch and non-authoritative trajectory can be passed to independent benchmark runners without interpreting solver success as a score.",
+  "stop_condition": "Deliver the narrow transport change, truthful regressions and pinned external-runner commands; preserve failed baseline checks and unperformed container/benchmark qualification. Do not merge or declare mission completion without the required independent hard evidence.",
+  "highest_leverage_now": true,
+  "governance_change": false,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": false,
+  "incremental_spend_usd": 0,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "explicit_user_authorization": "Execute open_model().solve() only inside the task container via environment.exec; add mocked transport tests, record governance and provide official external verifier commands.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/harbor_epistemic_agent_v1.py",
+      "canonical/runtime/harbor_container_solver_v1.py",
+      "canonical/tests/test_harbor_epistemic_agent_v1.py",
+      "canonical/tests/test_harbor_container_solver_v1.py",
+      "canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+      "docs/HARBOR_CONTAINER_EVALUATION_20261124.md"
+    ],
+    "route_class": "ADAPT",
+    "earlier_routes_exhausted_reason": "Delete the erroneous proposal protocol and all host solver calls. Bypassing the task container violates the requested boundary. Reuse Brain's solve implementation and official verifier runners; adapt only their transport and artifact seam.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "scope_note": "Integration credit is restricted to the engineered transport seam and producer-run regressions. Actual Harbor BaseAgent/ATIF checks pass on 0.23.0 and 0.27.0; Docker integration and official benchmark qualification are NOT_RUN. Independent verification remains false and capability/terminal credit remains zero.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ]
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 8,
+    "interpretation": "Prospective planning estimates for removing the measurement-access defect, not statistical confidence bounds or measured benchmark success. No open obligation is discharged. The local integration/test route uses no paid carrier; full task-container qualification is still blocked/unperformed."
+  },
+  "research": {
+    "prior_branch": "arena/d582a17b-brain at 89bb2cd4bdeda5506153b20ec80294c8d4ae8aa0, read only; current Arena branch remains arena/c889ffa2-brain",
+    "existing_mechanisms": [
+      "canonical/runtime/brain_unified_model_v1.py: solve executes capabilities; EPISTEMIC is ordinary AUTO routing, not an action-proposal API",
+      "canonical/runtime/harbor_environment_transport_v2.py: fail-closed receipt semantics, but its 3600-second limit cannot carry FrontierSWE's 20-hour task budget",
+      "canonical/runtime/worker_syscall_allowlist_v1.py: reusable inherited syscall filter",
+      "canonical/runtime/memory_policy_v1.py: read-only memory scope",
+      "canonical/swe_kernel/perfect_algorithm_v1.py and canonical/runtime/local_guide_v1.py: existing goal-directed scan/question/knowledge path, not a proof of arbitrary task generalization"
+    ],
+    "official_sources": [
+      "https://github.com/scaleapi/SWE-bench_Pro-os/tree/66f92766bba642462d4bbe5479e83f91f9211862/v2",
+      "https://github.com/scaleapi/SWE-bench_Pro-os/blob/66f92766bba642462d4bbe5479e83f91f9211862/v2/tooling/patch_replay.py",
+      "https://github.com/Proximal-Labs/px-eval/tree/ef9c4d1a6c69ce3e518bd11732dca109b1fc7919",
+      "https://github.com/Proximal-Labs/frontier-swe-v2/tree/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df",
+      "https://github.com/harbor-framework/terminal-bench/releases/tag/v4.0.0",
+      "https://github.com/harbor-framework/harbor/releases/tag/v0.27.0"
+    ],
+    "rejected_routes": [
+      "Run solve in a host thread: changes scheduling, not filesystem/process authority.",
+      "Parse solve output as proposed shell commands: the API already executes, so this duplicates and misrepresents its semantics.",
+      "Trust a flag or chmod alone while solving as root: neither proves read-only code or blocks egress.",
+      "Replace official verifiers with solver pass flags: self-grading and not benchmark evidence.",
+      "Force every benchmark into patch-only replay: FrontierSWE transfers configured artifacts to a separate verifier; Terminal-Bench may verify non-git filesystem state.",
+      "Scan or memorize everything: neither identifies missing causal transformations from one experience nor provides bounded runtime. Goal-relevant, falsifiable external skills remain the defensible scope."
+    ]
+  },
+  "honest_limits": [
+    "No Docker executable in this Arena sandbox; no official benchmark instance has run here.",
+    "Mock transport and real local Git/syscall tests are infrastructure regressions, not the user's hard capability tests.",
+    "Root-owned source and an unprivileged filtered worker rely on the Harbor task container as the outer security boundary; they are not an independently reviewed hostile-code sandbox.",
+    "Prior branch disclosed public verifier test names for one NodeBB HARD-51 task; preserve that notice in the runbook and never count it as untouched qualification.",
+    "One-experience persistence and reuse of a verified rule do not prove arbitrary-environment identification, coding synthesis, GUI competence or sentience.",
+    "No terminal, scoreboard, registry, protected guard or capability count is modified."
+  ],
+  "status": "IMPLEMENTED__PRODUCER_REGRESSIONS_ONLY__OFFICIAL_BENCHMARKS_NOT_RUN",
+  "real_outcome": "A container-local execution/patch transport is implemented and its host interface, Git artifact logic and Linux child boundary mechanisms are tested. Real Harbor container integration and official benchmark qualification remain unperformed.",
+  "required_capability": "Run the existing zero-external-model solver in the task environment, never the Harbor host, and hand off unaltered artifacts to existing official verifiers.",
+  "verification": {
+    "producer": "Arena engineering agent on current branch",
+    "independent_verification_completed": false,
+    "evidence": "canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+    "runbook": "docs/HARBOR_CONTAINER_EVALUATION_20261124.md",
+    "model_calls_in_benchmark_tasks": "NOT_MEASURED__NO_TASK_RUN",
+    "official_benchmarks": "NOT_RUN",
+    "full_container_boundary": "NOT_QUALIFIED"
+  },
+  "intentional_route_race": false,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "truth": {
+    "achieved": false
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "b182859b79766c758b49ac1117a8d4169116f125",
+    "real_outcome": "A container-local execution/patch transport is implemented and its host interface, Git artifact logic and Linux child boundary mechanisms are tested. Real Harbor container integration and official benchmark qualification remain unperformed.",
+    "required_capability": "Run the existing zero-external-model solver in the task environment, never the Harbor host, and hand off unaltered artifacts to existing official verifiers.",
+    "obs_goal": {
+      "real_outcome": "A container-local execution/patch transport is implemented and its host interface, Git artifact logic and Linux child boundary mechanisms are tested. Real Harbor container integration and official benchmark qualification remain unperformed.",
+      "proxy_goals_deleted": [
+        "Treating a zero counter as confinement",
+        "Mistaking a mocked transport result for an official benchmark score",
+        "Treating persistence as proof of universal one-shot learning"
+      ],
+      "surviving_necessity": "The actual solver must run against the task filesystem, and correctness must come from the independent benchmark verifier."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/brain_unified_model_v1.py",
+        "canonical/runtime/worker_syscall_allowlist_v1.py",
+        "canonical/runtime/harbor_environment_transport_v2.py",
+        "canonical/swe_kernel/perfect_algorithm_v1.py",
+        "canonical/runtime/local_guide_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "https://github.com/scaleapi/SWE-bench_Pro-os/tree/66f92766bba642462d4bbe5479e83f91f9211862/v2",
+        "https://github.com/scaleapi/SWE-bench_Pro-os/blob/66f92766bba642462d4bbe5479e83f91f9211862/v2/tooling/patch_replay.py",
+        "https://github.com/Proximal-Labs/px-eval/tree/ef9c4d1a6c69ce3e518bd11732dca109b1fc7919",
+        "https://github.com/Proximal-Labs/frontier-swe-v2/tree/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df",
+        "https://github.com/harbor-framework/terminal-bench/releases/tag/v4.0.0",
+        "https://github.com/harbor-framework/harbor/releases/tag/v0.27.0",
+        "https://github.com/harbor-framework/harbor/tree/3c305dc5611e3600afc3c818735a82322f0264f8"
+      ],
+      "capability_work_deleted": [
+        "A second solver/planner",
+        "A new task grader",
+        "A host proposal protocol around a side-effecting solve API"
+      ],
+      "surviving_gap": "The transport seam was wrong/missing on the active branch. Real container integration and hard benchmark ability are still unverified after the seam implementation."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Path-specific execution-locus and artifact defect; separate unresolved capability/generalization questions are not hidden by this fix.",
+      "delete_bypass_substitute_options": [
+        "Delete the host proposal loop",
+        "Reuse the existing solver, inherited filter and official verifiers",
+        "Reject model-agent substitution and flag-only confinement"
+      ],
+      "surviving_causal_blocker": "The prior Harbor epistemic helper invokes a side-effecting solver on the host rather than in the task container; its production entry point consequently refuses all work."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+        "HOST_THREAD_PROPOSAL_ADAPTER",
+        "IMPORT_A_COMPLETE_EXTERNAL_MODEL_AGENT",
+        "READ_ONLY_MEMORY_FLAG_WITHOUT_KERNEL_BOUNDARY"
+      ],
+      "losing_routes_reason": [
+        "Run solve in a host thread: changes scheduling, not filesystem/process authority.",
+        "Parse solve output as proposed shell commands: the API already executes, so this duplicates and misrepresents its semantics.",
+        "Trust a flag or chmod alone while solving as root: neither proves read-only code or blocks egress.",
+        "Replace official verifiers with solver pass flags: self-grading and not benchmark evidence.",
+        "Force every benchmark into patch-only replay: FrontierSWE transfers configured artifacts to a separate verifier; Terminal-Bench may verify non-git filesystem state.",
+        "Scan or memorize everything: neither identifies missing causal transformations from one experience nor provides bounded runtime. Goal-relevant, falsifiable external skills remain the defensible scope."
+      ],
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Mocks are used only at the host I/O seam, paired with real Git/syscall/process tests and actual installed Harbor APIs. Full authority belongs to upstream pristine replay or separate/task verifiers; none has run here."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": "The historical host-side solve/proposal approach; no competing solver or self-grader is retained.",
+      "adjacent_capabilities_absorbed": "Reuse source staging, an existing syscall filter and existing model entry; no capability registration.",
+      "fresh_reuse_plan": "The same transport class serves three different official runner contracts; fresh actual task execution remains required, not credited."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": "Reuse the pinned official source/API review; do not re-fetch task instructions, tests or gold patches for engineering.",
+      "search_stop_decision": "Stop transport redesign once the falsified boundary/artifact cases are covered; continue only on new concrete failures. Execute real official jobs on an eligible carrier before any capability or mission-completion claim.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "routes_considered": [
+      "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+      "HOST_THREAD_PROPOSAL_ADAPTER",
+      "IMPORT_A_COMPLETE_EXTERNAL_MODEL_AGENT",
+      "READ_ONLY_MEMORY_FLAG_WITHOUT_KERNEL_BOUNDARY"
+    ],
+    "deleted_or_bypassed_paths": [
+      "Host solver thread fallback",
+      "Parsing solver results as shell proposals",
+      "Self-grading from solver pass flags",
+      "Cross-task state export",
+      "Claiming a bare chmod or memory flag is confinement"
+    ],
+    "selected_surviving_route": "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+    "why_selected_route_is_fastest_sufficient": "The requested seam can reuse Brain, the existing kernel filter, Git and upstream verifiers. Removing the incorrect host proposal layer is smaller than building a new cognition system or grader; this sufficiency is engineering-only, not benchmark qualification.",
+    "expected_parent_level_state_change": "The execution locus is the task container, not the Harbor host; a binary patch and non-authoritative trajectory can be passed to independent benchmark runners without interpreting solver success as a score.",
+    "stop_condition": "Deliver the narrow transport change, truthful regressions and pinned external-runner commands; preserve failed baseline checks and unperformed container/benchmark qualification. Do not merge or declare mission completion without the required independent hard evidence.",
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-24T05:19:46.268317+00:00",
+      "max_age_hours": 24,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/brain_unified_model_v1.py",
+          "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "canonical/runtime/harbor_environment_transport_v2.py",
+          "canonical/swe_kernel/perfect_algorithm_v1.py",
+          "canonical/runtime/local_guide_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "https://github.com/scaleapi/SWE-bench_Pro-os/tree/66f92766bba642462d4bbe5479e83f91f9211862/v2",
+          "https://github.com/scaleapi/SWE-bench_Pro-os/blob/66f92766bba642462d4bbe5479e83f91f9211862/v2/tooling/patch_replay.py",
+          "https://github.com/Proximal-Labs/px-eval/tree/ef9c4d1a6c69ce3e518bd11732dca109b1fc7919",
+          "https://github.com/Proximal-Labs/frontier-swe-v2/tree/da83f84f8fbcec3cbf0f2b17c98ebc811355c2df",
+          "https://github.com/harbor-framework/terminal-bench/releases/tag/v4.0.0",
+          "https://github.com/harbor-framework/harbor/releases/tag/v0.27.0",
+          "https://github.com/harbor-framework/harbor/tree/3c305dc5611e3600afc3c818735a82322f0264f8"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "PyPI harbor==0.23.0 and harbor==0.27.0 installed and imported under locally built CPython 3.12.16; actual API/schema tests recorded in canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+          "https://github.com/Proximal-Labs/px-eval/blob/ef9c4d1a6c69ce3e518bd11732dca109b1fc7919/pyproject.toml"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "https://github.com/badlogic/pi-terminal-bench \u2014 historical upload_dir destination-exists pitfall; this adapter uses a fresh UUID path and verifies the source manifest, not a monkeypatch to Harbor.",
+          "Web query: Harbor custom BaseAgent container environment.exec upload_dir independent verifier SWE bench Pro v2 patch replay. Returned primary replay documentation and community transport reports; no task answer was consumed."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Repository search for container-local zero-model solver execution, HARD51, pristine patch replay and inherited confinement."
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Official SWE-bench Pro V2 locked protocol; FrontierSWE v2 px-eval separate verifier; Terminal-Bench 4.0 Harbor."
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Harbor custom BaseAgent container environment.exec upload_dir independent verifier SWE bench Pro v2 patch replay."
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Harbor v0.23.0 versus v0.27.0 APIs, pinned px-eval pyproject, SWE Pro v2.0.0 and Terminal-Bench v4.0.0 release references."
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+      "incumbent_route": "HISTORICAL_DISABLED_HOST_PROPOSAL_ADAPTER",
+      "challenger_routes": [
+        {
+          "route": "HOST_THREAD_PROPOSAL_ADAPTER",
+          "resolution": "DISQUALIFIED",
+          "evidence": [
+            "https://github.com/moxnixmdj/brain/blob/89bb2cd4bdeda5506153b20ec80294c8d4ae8aa0/canonical/runtime/harbor_epistemic_agent_v1.py",
+            "canonical/runtime/brain_unified_model_v1.py"
+          ],
+          "qualification_evidence": [
+            "https://github.com/moxnixmdj/brain/blob/89bb2cd4bdeda5506153b20ec80294c8d4ae8aa0/canonical/runtime/harbor_epistemic_agent_v1.py",
+            "canonical/runtime/brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "comparison": {
+            "CORRECTNESS": "solve executes effects; calling it in a host thread does not move those effects into the task container.",
+            "CAPABILITY_STRENGTH": "Adds no solver capability and violates the requested execution locus.",
+            "WALL_CLOCK": "Scheduling the same host call is not a useful latency improvement.",
+            "INCREMENTAL_COST": "No paid model needed, but the boundary is wrong.",
+            "RELIABILITY": "Disabled production path or unconfined host execution; no admissible fallback.",
+            "VERIFIABILITY": "Cannot attribute a container patch to a host-side solver call."
+          }
+        },
+        {
+          "route": "IMPORT_A_COMPLETE_EXTERNAL_MODEL_AGENT",
+          "resolution": "DISQUALIFIED",
+          "evidence": [
+            "canonical/runtime/harbor_brain_agent.py",
+            "https://github.com/badlogic/pi-terminal-bench"
+          ],
+          "qualification_evidence": [
+            "canonical/runtime/harbor_brain_agent.py",
+            "https://github.com/badlogic/pi-terminal-bench"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "comparison": {
+            "CORRECTNESS": "External-model cognition violates the user contract.",
+            "CAPABILITY_STRENGTH": "Other agents' benchmark ability cannot be attributed to Brain.",
+            "WALL_CLOCK": "A faster borrowed solver is not an allowed producer.",
+            "INCREMENTAL_COST": "Potential paid model/carrier cost; no such call was made.",
+            "RELIABILITY": "Adds credentials and runtime network/model dependence.",
+            "VERIFIABILITY": "Would establish another model's performance, not owned Brain capability."
+          }
+        },
+        {
+          "route": "READ_ONLY_MEMORY_FLAG_WITHOUT_KERNEL_BOUNDARY",
+          "resolution": "DISQUALIFIED",
+          "evidence": [
+            "canonical/runtime/memory_policy_v1.py",
+            "canonical/runtime/worker_syscall_allowlist_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/runtime/memory_policy_v1.py",
+            "canonical/runtime/worker_syscall_allowlist_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "CODE_OR_PACKAGE_REGISTRY"
+          ],
+          "comparison": {
+            "CORRECTNESS": "Application memory policy alone does not stop shell effects or network syscalls.",
+            "CAPABILITY_STRENGTH": "Policy labels confer no actual execution isolation.",
+            "WALL_CLOCK": "Fewer lines but insufficient boundary, so not a sufficient route.",
+            "INCREMENTAL_COST": "Zero paid spend, insufficient safety.",
+            "RELIABILITY": "Underlying inherited filter permits sockets unless a separate boundary tightens it.",
+            "VERIFIABILITY": "Flags and zero counters are not execution evidence; real child-denial regressions are required."
+          }
+        }
+      ],
+      "scope_note": "Comparison and READY apply to local engineering/delivery of the transport seam, never to full task-container or benchmark readiness. No claim of globally exhaustive capability research or a solved general-learning mechanism.",
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-24T05:19:46.268317+00:00",
+        "max_age_hours": 2,
+        "selected_route": "ADAPT_EXISTING_BRAIN_ENTRY_TO_CONTAINER_EXEC_AND_OFFICIAL_VERIFIER_ARTIFACTS",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Local CPython 3.11.2, Git, pytest 9.2.0 and Linux syscall/process substrate for engineering regressions",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-11-24T05:19:46.268317+00:00",
+            "evidence": [
+              "canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+              "54 passed, 1 real-Harbor-only skip in the standard Linux test run; the skipped case is exercised in both installed-Harbor runs."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Actual Harbor 0.23.0 and 0.27.0 host BaseAgent/ATIF compatibility checks under CPython 3.12.16",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "observed_at_utc": "2026-11-24T05:19:46.268317+00:00",
+            "evidence": [
+              "canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+              "29 host-adapter tests passed for each pinned Harbor version; --print-config accepted the runbook options. No container started."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE",
+              "CODE_OR_PACKAGE_REGISTRY"
+            ]
+          },
+          {
+            "dependency": "Current Brain source, computed routing artifact, original syscall filter and official runner contracts",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "canonical/runtime/brain_unified_model_v1.py",
+              "canonical/runtime/worker_syscall_allowlist_v1.py",
+              "canonical/runtime/harbor_environment_transport_v2.py",
+              "canonical/swe_kernel/perfect_algorithm_v1.py",
+              "canonical/runtime/local_guide_v1.py",
+              "canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json",
+              "docs/HARBOR_CONTAINER_EVALUATION_20261124.md"
+            ],
+            "evidence_classes": [
+              "BRAIN_INHERITED",
+              "OFFICIAL_PRIMARY",
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Docker task-container carrier for full end-to-end qualification, not needed to build/deliver this transport change",
+            "kind": "CARRIER",
+            "required": false,
+            "volatility": "VOLATILE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "BLOCKED",
+            "observed_at_utc": "2026-11-24T05:19:46.268317+00:00",
+            "evidence": [
+              "Docker executable absent in this sandbox; no actual container run. canonical/verification/HARBOR_CONTAINER_TRANSPORT_20261124_V1.json"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Modal registry access, calibrated GPUs and approved billing for full FrontierSWE evaluation",
+            "kind": "CARRIER",
+            "required": false,
+            "volatility": "VOLATILE",
+            "scope": "ACCOUNT_SPECIFIC",
+            "evidence_scope": "ACCOUNT_SPECIFIC",
+            "status": "NOT_PREFLIGHTED",
+            "evidence": [
+              "No paid resources started; task-specific profiles and prerequisites are documented in docs/HARBOR_CONTAINER_EVALUATION_20261124.md"
+            ],
+            "evidence_classes": [
+              "OFFICIAL_PRIMARY"
+            ]
+          }
+        ],
+        "scope": "Local adaptation, real component regressions, actual host Harbor schema checks and pinned runbook delivery. Docker/Modal qualification is explicitly not asserted; those future execution dependencies remain blocked/unperformed."
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "An actually container-local adapter makes official external measurement possible. This producer-run transport change alone discharges no truth obligation and cannot establish any hard benchmark or generalization result.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "HARBOR_CONTAINER_LOCAL_SOLVER_20261124_V1",
+      "falsifier_id": "PRODUCER_RUN_TRANSPORT_GIT_SYSCALL_PROCESS_REGRESSIONS",
+      "decisive_question": "Can host solver execution, uncertain retries, mutable-source/egress assumptions or forged patch/trajectory contracts survive the seam tests without being rejected?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/runtime/brain_unified_model_v1.py",
+          "git_blob_sha": "57581cfca3db44fb5007f0049aeb8a5f7b94c778"
+        },
+        {
+          "path": "canonical/runtime/worker_syscall_allowlist_v1.py",
+          "git_blob_sha": "3ce4934c86ffdb20092d0c525c2f726229f419f6"
+        },
+        {
+          "path": "canonical/runtime/harbor_environment_transport_v2.py",
+          "git_blob_sha": "9aebd804c6d71b07da5134ed4e2d14a6427de84c"
+        },
+        {
+          "path": "canonical/tests/test_harbor_epistemic_agent_v1.py",
+          "git_blob_sha": "8ac01daab984ad41f9fa8267739d276cbb39a8d2"
+        },
+        {
+          "path": "canonical/tests/test_harbor_container_solver_v1.py",
+          "git_blob_sha": "72176f83a15b409670f040ee5a439179ef8b0cc0"
+        }
+      ]
+    }
+  }
+}

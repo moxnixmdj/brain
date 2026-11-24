@@ -1,0 +1,166 @@
+{
+  "schema": "PROJECT_BRAIN_HARBOR_CONTAINER_TRANSPORT_ENGINEERING_V1",
+  "recorded_at_utc": "2026-11-24T05:29:05.929684+00:00",
+  "authority": "NONE__PRODUCER_RUN_INFRASTRUCTURE_REGRESSIONS",
+  "independent_verification_completed": false,
+  "capability_credit_delta": 0,
+  "terminal_credit_delta": 0,
+  "truth": {
+    "achieved": false
+  },
+  "branch": "arena/c889ffa2-brain",
+  "base_commit": "b182859b79766c758b49ac1117a8d4169116f125",
+  "files_sha256": {
+    "canonical/runtime/harbor_epistemic_agent_v1.py": "af9e33f902ebc1c85fa777df59451bf45cc0d291a9211bf6cbd66dd706280c2c",
+    "canonical/runtime/harbor_container_solver_v1.py": "b918a54f569127736b6b263e5dcbf2615963cb9dcf71845e3f099ae619caca32",
+    "canonical/tests/test_harbor_epistemic_agent_v1.py": "4bbb56a7ea1bd70921526b27fd5be9d783c9cfe9dbd760fa1ee8dd17ab24115a",
+    "canonical/tests/test_harbor_container_solver_v1.py": "4833f77fc425aa2155ccb27c8c4e1cb67ecb2d6b1f149d077da9dc9b0ac76f87"
+  },
+  "engineering_checks": [
+    {
+      "check": "Linux real Git/process/seccomp plus mocked environment transport",
+      "command": ".venv/bin/python -m pytest -q canonical/tests/test_harbor_epistemic_agent_v1.py canonical/tests/test_harbor_container_solver_v1.py",
+      "python": "3.11.2",
+      "exit_code": 0,
+      "tests": 55,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 54,
+      "skip_reason": "Real Harbor-only schema test skips when Harbor is absent; it passes in both installed-Harbor runs below."
+    },
+    {
+      "check": "Actual Harbor 0.23.0 BaseAgent and ATIF with mocked environment I/O",
+      "command": "LITELLM_LOCAL_MODEL_COST_MAP=True .benchmarks/harbor023-venv/bin/python -m pytest -q canonical/tests/test_harbor_epistemic_agent_v1.py",
+      "python": "3.12.16",
+      "harbor": "0.23.0",
+      "exit_code": 0,
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 29
+    },
+    {
+      "check": "Actual Harbor 0.27.0 BaseAgent and ATIF with mocked environment I/O",
+      "command": "LITELLM_LOCAL_MODEL_COST_MAP=True .benchmarks/harbor027-venv/bin/python -m pytest -q canonical/tests/test_harbor_epistemic_agent_v1.py",
+      "python": "3.12.16",
+      "harbor": "0.27.0",
+      "exit_code": 0,
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 29
+    },
+    {
+      "check": "Harbor 0.27 runbook options resolve with --print-config",
+      "exit_code": 0,
+      "scope": "Configuration-only local fixture; no Docker, solver, task verifier, provider, or benchmark was executed."
+    },
+    {
+      "check": "Broader existing transport/orientation/integrity tests",
+      "command": ".venv/bin/python -m pytest -q canonical/tests/test_harbor_environment_transport.py canonical/tests/test_agent_orientation_v1.py canonical/tests/test_repo_integrity_guard_v1.py",
+      "exit_code": 1,
+      "passed": 45,
+      "failures": 1,
+      "scope": "Re-run after the completed new intent and after relocating build-only dependencies to .venv. This pre-existing failure remains visible; no protected test or historical intent was changed.",
+      "failure": "test_every_committed_intent_with_an_orientation_block_is_valid: RESTART_STABLE_KNOWLEDGE_GAPS_20261102_V1.json references missing test_transfer_experience_control_probe_20261102.py.",
+      "baseline_evidence": "The intent exists as Git blob 38ae76a073882d21bc1c3c15d4ecfbef39b55e36 at the base, and that referenced path is absent from the base tree. Neither the old intent nor the protected test was changed.",
+      "tests": 46,
+      "errors": 0,
+      "skipped": 0
+    }
+  ],
+  "observed_regressions": [
+    "The host open_model sentinel was never called; the sole dispatch is quoted environment.exec with instruction bytes carried in a request file, not shell interpolation.",
+    "Uncertain execution, malformed receipts, failed request upload/download, mismatched source/request/patch identities and false self-verification never become successful publications or a replayed solve.",
+    "Private-index patches replay through real git apply, including binary, new, deleted, symlink, executable, staged and already committed changes, without modifying the original index.",
+    "Dirty tracked or nonignored untracked initial workspaces are refused rather than attributing image changes to the solver.",
+    "Real isolated child processes observed EPERM for IPv4, IPv6 and Unix sockets, including a descendant; setsid/setpgid were also refused, while local file writes remained possible.",
+    "A real process test exposed asynchronous SIGKILL delivery after a leader exits. Child-subreaper adoption and reaping now finish before patch capture; both normal-exit and timeout regressions pass.",
+    "Worker symlink, hardlink, FIFO and oversized outputs are rejected; host publication replaces links without touching their targets.",
+    "Image toolchain variables are restored only after filtering. Provider keys, LD_PRELOAD and PYTHONPATH are not admissible tool environment entries.",
+    "Existing on-disk primary/snapshot registry receipt paths were checked against a staged export: 98 of 98 and 88 of 88 were present, respectively. This is not a complete dynamic-dependency qualification.",
+    "Pre-filter interpreter, module and bytecode paths must be root-owned, outside the writable task workspace, and non-replaceable by the worker. Root preparation refuses hardlinked workspace files instead of changing ownership outside the tree."
+  ],
+  "runtime_contract": {
+    "solver_locus": "TASK_CONTAINER_ONLY",
+    "host_solver_fallback": false,
+    "model_calls": 0,
+    "parameters_stored": 0,
+    "model_counter_measurement_in_official_tasks": "NOT_RUN",
+    "memory": "READ_ONLY; fresh per-trial scratch; no shared state copied",
+    "verifier_authority": "OFFICIAL_EXTERNAL_VERIFIER_ONLY",
+    "network_mechanism": "Inherited syscall allowlist plus network syscall denials; no-new-privileges; nonroot without capabilities",
+    "outer_boundary": "Harbor task container; not independently security-qualified"
+  },
+  "official_benchmarks": {
+    "SWE_BENCH_PRO_V2_HARD51": {
+      "status": "NOT_RUN",
+      "score": null,
+      "required_evidence": "Pristine-image upstream PatchReplayAgent job over all 51 patches; disclose one prior NodeBB test-name exposure."
+    },
+    "FRONTIERSWE_V2": {
+      "status": "NOT_RUN",
+      "score": null,
+      "required_evidence": "Pinned px-eval rollouts and separate verifier jobs; mean@5 over 34 tasks; required provider profiles/resources preserved."
+    },
+    "TERMINAL_BENCH_4_0": {
+      "status": "NOT_RUN",
+      "score": null,
+      "required_evidence": "Harbor official verifiers for all 66 tasks of exact dataset version 4.0.0, with all errors included."
+    }
+  },
+  "blockers": [
+    "Docker executable absent; no real task-container or root-container integration test was run.",
+    "Modal account/registry secret, calibrated GPU capacity and billing are not established; no paid resources were launched.",
+    "Strict unprivileged/no-socket execution may reject task-required operations. Such incompatibility must remain visible, never silently relax confinement.",
+    "Locally compiled Python 3.12 supports the host-adapter tests but lacks optional ctypes/bz2/lzma modules; Linux worker tests use the normal Python 3.11.2. The VM runbook uses a normal Ubuntu Python installation."
+  ],
+  "runbook": "docs/HARBOR_CONTAINER_EVALUATION_20261124.md",
+  "governance_checks": {
+    "orientation_verify": {
+      "ok": true,
+      "errors": []
+    },
+    "orientation_intent_check": {
+      "ok": true,
+      "errors": []
+    },
+    "repo_integrity_worktree": {
+      "exit_code": 0,
+      "rules": 17,
+      "violations": 0,
+      "base": "b182859b79766c758b49ac1117a8d4169116f125"
+    },
+    "load_bearing_worktree_function": {
+      "errors": []
+    },
+    "v22_worktree_function": {
+      "errors": []
+    },
+    "committed_head_admission": {
+      "load_bearing_exit_code": 0,
+      "result": "LOAD_BEARING_ADMISSION_PASS",
+      "open_obligation_count": 13,
+      "scope_complete": false,
+      "drift_guard_exit_code": 0,
+      "drift_result": "DRIFT_GUARD_PASS",
+      "base": "b182859b79766c758b49ac1117a8d4169116f125",
+      "scope": "Producer-run local admission checks, including V22 and blocker lease. Not a signed GitHub referee verdict or independent benchmark verification."
+    },
+    "independent_verifier_or_referee_run": false
+  },
+  "scope_note": "No task solved by the engineering assistant for Brain. Counts overlap across interpreter/Harbor runs and must not be added into a capability score. No universal-learning, one-shot unseen transfer, GUI/browser or terminal mission claim.",
+  "environment_setup_issue": {
+    "initial_guard_scan": "Downloaded CPython sources/stdlib tests and Harbor dependencies were initially placed under .benchmarks, which the unchanged integrity guard does not skip. The scan hit its tool timeout; its completed log listed 513 violations, all in those third-party dependency trees, none in project sources. The concurrent broader pytest run was stopped after timeout.",
+    "remedy": "Move build-only Python/dependency trees to the repository-standard .venv exclusion, preserving interpreter paths through ignored symlinks. No project source/test, guard, policy, fixture or historical answer was substituted or excluded. Re-run the unchanged guard and tests on the live tree."
+  },
+  "runbook_checks": {
+    "bash_blocks": 5,
+    "bash_syntax_exit_code": 0,
+    "harbor_027_print_config_exit_code": 0,
+    "end_to_end_benchmark_commands": "NOT_RUN"
+  }
+}
