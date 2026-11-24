@@ -2,8 +2,8 @@
   "date": "2026-11-24",
   "exact_source_bindings": {
     ".github/workflows/zero-model-raw-instruction-purpose-v1.yml": {
-      "git_blob_sha": "8886f4e6e44a438ce60f25d78508b794cf1722d9",
-      "sha256": "7d6c8fbc78825f3f8afa1a6ee0053f56d8818b7186c9d142e561bf79d9944ae6"
+      "git_blob_sha": "f24e8001da6c117b6441d96a0843eca460e3da90",
+      "sha256": "91e872e2c9585734ae20d188dfaefc6fcd4957e1ec26a104eadf941d1a5f687a"
     },
     "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": {
       "git_blob_sha": "4f4525e878f613133b7b377d55578c7c0f3bec49",
@@ -38,8 +38,8 @@
       "sha256": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
     },
     "canonical/verification/check_raw_instruction_purpose_workflow_v1.py": {
-      "git_blob_sha": "0a1380e622053d6f98df6b1bdc9d943a6c13888f",
-      "sha256": "b33b1e67f2cf671da856902e6db009fd38cabb435d51fc5c9e8530ac900d2ce1"
+      "git_blob_sha": "a4ece537892e042bf3e776917404ddbeffa1e8e8",
+      "sha256": "c067629212ed30cba981fbf147e291707ea4196fe83f6730d0de2139fbe91b1f"
     }
   },
   "measurements": {
@@ -51,6 +51,13 @@
     "external_template_store_templates": 2,
     "finite_replay_measurement_checks": 20,
     "finite_workflow_python_blocks": 10,
+    "first_runner_finite_contract_tests": 21,
+    "first_runner_finite_measurement_checks": 20,
+    "first_runner_harbor_exit_code": -1,
+    "first_runner_new_reality_units_consumed": 0,
+    "first_runner_pinned_images_pulled": 0,
+    "first_runner_release_asset_http_status": 403,
+    "first_runner_trial_results_present": 0,
     "harbor_policy_contract_tests": 8,
     "hard_benchmark_tasks_consumed_local": 0,
     "hidden_test_reading": false,
@@ -59,6 +66,9 @@
     "pre_runner_gate_checks": 20,
     "pre_runner_gates_all_ok": true,
     "raw_benchmark_tasks_in_workspace": 0,
+    "release_download_repair": "AUTHENTICATED_GH_RELEASE_DOWNLOAD_AND_ZERO_SELECTION_FALLBACK",
+    "repair_pre_runner_gate_checks": 20,
+    "repair_pre_runner_gates_all_ok": true,
     "runtime_model_calls": 0,
     "runtime_network_calls": 0,
     "selected_queries": 1
@@ -67,35 +77,43 @@
   "rule": "LOCAL_MEASUREMENT_IS_NOT_INDEPENDENT_VERIFICATION__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
   "runner_receipt": {
     "finite_receipt_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1.json",
+    "first_finite_oidc_jti": "ac12eaab-0ab6-40e8-a4e8-190cc47b3aed",
+    "first_finite_receipt_sha256": "8ae9a2b53199e9586d663311a8c733ddadc99553360958580eda2a3fc2789356",
+    "first_finite_verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45423083321",
+    "first_hard_attempt_status": "FAILED_CLOSED_AT_UNAUTHENTICATED_GITHUB_RELEASE_ASSET_403__NO_TRIAL_RESULTS_OR_OFFICIAL_REWARDS",
+    "first_hard_receipt_sha256": "c47c69465339abfa4574277b382c077f22aa3f0b8b298048438ab116c1f66b74",
+    "first_workflow_run_id": 45423083321,
     "hard_receipt_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json",
     "no_fabricated_runner_receipt": true,
     "reward_log_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json",
-    "status": "PENDING_DISTINCT_OIDC_FINITE_REPLAY_AND_HARD_FALSIFIER",
-    "workflow_run_id": null
+    "second_distinct_run_status": "PENDING_AFTER_20_20_REPAIR_PRE_RUNNER_GATES",
+    "second_workflow_run_id": null,
+    "status": "FIRST_FINITE_OIDC_ATTESTED__FIRST_HARD_ATTEMPT_FAILED_CLOSED_ON_RELEASE_ASSET_403__AUTHENTICATED_REPAIR_BUILT__20_20_REPAIR_GATES_PASS__SECOND_DISTINCT_RUN_PENDING__ZERO_CREDIT",
+    "workflow_run_id": 45423083321
   },
   "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_LOCAL_MEASUREMENT_20261124_V1",
   "scope": "FINITE_RAW_INSTRUCTION_PURPOSE_BINDER_V1_AND_FRESH_TB41_CPU_HARD_FALSIFIER_CARRIER",
   "selected_route": "COMPOSE_EXISTING_FINITE_TYPED_PURPOSE_GRAMMAR_GOAL_DIRECTED_EXACT_EVPI_KERNEL_EXTERNAL_EDITABLE_STORE_OIDC_REPLAY_AND_FRESH_TB41_HARD_FALSIFIER_V1",
-  "status": "PRODUCER_LOCAL_TESTS_FROZEN_BLOCK_REPLAY_AND_20_PRE_RUNNER_GATES_PASS__DISTINCT_FINITE_OIDC_AND_HARD_FALSIFIER_PENDING__ZERO_CREDIT",
+  "status": "PRODUCER_LOCAL_TESTS_FROZEN_BLOCK_REPLAY_20_PRE_RUNNER_GATES_AND_20_REPAIR_GATES_PASS__FIRST_FINITE_OIDC_ATTESTED__FIRST_HARD_ATTEMPT_FAILED_CLOSED_ON_RELEASE_ASSET_403__AUTHENTICATED_REPAIR_BUILT__SECOND_DISTINCT_RUN_PENDING__ZERO_CREDIT",
   "truth": {
     "achieved": false,
     "section_6": "NOT_MET"
   },
   "workflow": {
-    "git_blob_sha": "8886f4e6e44a438ce60f25d78508b794cf1722d9",
+    "git_blob_sha": "f24e8001da6c117b6441d96a0843eca460e3da90",
     "jobs": [
       "contract_replay",
       "hard_benchmark_attempt"
     ],
     "path": ".github/workflows/zero-model-raw-instruction-purpose-v1.yml",
     "python_blocks": 10,
-    "sha256": "7d6c8fbc78825f3f8afa1a6ee0053f56d8818b7186c9d142e561bf79d9944ae6"
+    "sha256": "91e872e2c9585734ae20d188dfaefc6fcd4957e1ec26a104eadf941d1a5f687a"
   },
   "workflow_checker": {
     "expected_git_blobs": 6,
     "expected_sha256_digests": 8,
-    "git_blob_sha": "0a1380e622053d6f98df6b1bdc9d943a6c13888f",
+    "git_blob_sha": "a4ece537892e042bf3e776917404ddbeffa1e8e8",
     "path": "canonical/verification/check_raw_instruction_purpose_workflow_v1.py",
-    "sha256": "b33b1e67f2cf671da856902e6db009fd38cabb435d51fc5c9e8530ac900d2ce1"
+    "sha256": "c067629212ed30cba981fbf147e291707ea4196fe83f6730d0de2139fbe91b1f"
   }
 }

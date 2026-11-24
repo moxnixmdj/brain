@@ -91,6 +91,11 @@ def main() -> None:
     assert "RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json" in text
     assert "benchmark_score_authority\": False" in text
     assert "section_6\": \"NOT_MET\"" in text
+    assert "GH_TOKEN: ${{ github.token }}" in text
+    assert 'gh release download "${TB_TAG}"' in text
+    assert "releases/assets/707398564" not in text
+    assert 'selected_count = int(selection.get("selected_task_count") or 0)' in text
+    assert '"hard_benchmark_tasks_consumed": len(rows)' in text
     for path in SOURCE_PATHS:
         assert path in text, "SOURCE_PATH_MISSING:" + path
     for blob in EXPECTED_GIT_BLOBS:

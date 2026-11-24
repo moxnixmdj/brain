@@ -15,6 +15,11 @@ name: Zero-model raw-instruction purpose bridge and hard falsifier
 # solution, verifier output, borrowed answer, raw task body, aggregate score,
 # capability credit, PR, merge, section 6 verification or terminal truth change
 # is made.
+# Run 45423083321 proved the finite OIDC replay but failed closed in the hard
+# job when an unauthenticated GitHub release-asset endpoint returned HTTP 403.
+# This repaired carrier uses an authenticated gh release download and records
+# zero selected/consumed tasks when no selection artifact exists. Neither
+# repair grants a task reward, benchmark score, capability credit or §6 truth.
 
 on:
   push:
@@ -438,6 +443,8 @@ jobs:
           PY
       - name: Checkout and verify pinned Terminal-Bench 4.1 release
         shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
           rm -rf /tmp/tb41
@@ -447,10 +454,11 @@ jobs:
             echo "TB_SOURCE_SHA_FAIL expected=${TB_SOURCE_SHA} observed=${actual_sha}" >&2
             exit 1
           fi
-          curl -fsSL --retry 5 --retry-all-errors --connect-timeout 10 \
-            -H "Accept: application/octet-stream" \
-            "https://api.github.com/repos/harbor-framework/terminal-bench/releases/assets/707398564" \
-            -o /tmp/prebuilt-images.json
+          gh release download "${TB_TAG}" \
+            --repo harbor-framework/terminal-bench \
+            --pattern "prebuilt-images.json" \
+            --dir /tmp \
+            --clobber
           echo "${PREBUILT_MANIFEST_SHA256}  /tmp/prebuilt-images.json" | sha256sum -c -
           cp /tmp/prebuilt-images.json "${WORKSPACE}/out/prebuilt-images.json"
           python3 - <<'PY'
@@ -698,15 +706,16 @@ jobs:
               raise SystemExit("FINITE_REPLAY_RECEIPT_BINDING_FAIL")
           harbor_exit_code = int(read_text("harbor_exit_code.txt", "-1"))
           rows = reward_log.get("rows") or []
-          selected_count = int(selection.get("selected_task_count") or os.environ["TASK_COUNT"])
+          expected_count = int(os.environ["TASK_COUNT"])
+          selected_count = int(selection.get("selected_task_count") or 0)
           task_names = [str(row.get("name")) for row in selection.get("tasks") or []]
           harness_verified = [str(row.get("task_name")) for row in rows if row.get("reward_valid") is True]
           unverified = [
               str(row.get("task_name") or "UNNAMED_TRIAL")
               for row in rows if row.get("reward_valid") is not True
           ]
-          if len(rows) < selected_count:
-              unverified.append("MISSING_TRIAL_RESULTS_FOR_" + str(selected_count - len(rows)) + "_SELECTED_TASKS")
+          if len(rows) < expected_count:
+              unverified.append("MISSING_TRIAL_RESULTS_FOR_" + str(expected_count - len(rows)) + "_SELECTED_TASKS")
           unverified.extend([
               "OSWorld 2.1 tasks",
               "SWE-bench Pro V2 / HARD-51 tasks",
@@ -733,7 +742,7 @@ jobs:
               verified.append("TERMINAL_BENCH_4_1_SOURCE_AND_PREBUILT_MANIFEST_DIGESTS")
           if selection_check.get("selected_count") is True:
               verified.append("FRESH_SEEDED_CPU_SUBSET_SELECTED")
-          if pulled_images.get("count", 0) >= selected_count * 2:
+          if selected_count > 0 and pulled_images.get("count", 0) >= selected_count * 2:
               verified.append("DIGEST_PINNED_ENVIRONMENT_AND_VERIFIER_IMAGES_PULLED")
           if reward_log.get("job_result_sha256"):
               verified.append("OFFICIAL_HARBOR_RESULT_JSON_REWARD_LOG_BOUND")
@@ -825,7 +834,7 @@ jobs:
                   "pinned_images_pulled": pulled_images.get("count", 0),
                   "model_calls": 0,
                   "runtime_network_calls": 0,
-                  "hard_benchmark_tasks_consumed": selected_count,
+                  "hard_benchmark_tasks_consumed": len(rows),
               },
               "verified": verified,
               "harness_verified_trials": harness_verified,

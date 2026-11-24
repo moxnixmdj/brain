@@ -24,8 +24,28 @@
     "https://arxiv.org/abs/2609.39564",
     "https://arxiv.org/html/2511.08798v2",
     "https://arxiv.org/abs/2605.02269v1",
-    "https://arxiv.org/abs/2611.26335v1"
+    "https://arxiv.org/abs/2611.26335v1",
+    "canonical/verification/RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1.json",
+    "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json"
   ],
+  "first_runner_attempt": {
+    "conclusion": "failure",
+    "finite_job": "contract_replay success; 21 tests, 20 checks, zero credit",
+    "hard_job": "failed closed at unauthenticated GitHub release-asset HTTP 403 before task selection, image pull, Harbor execution or rewards",
+    "repair": "authenticated gh release download; zero selected/consumed tasks when selection artifact is missing",
+    "repair_pre_runner_gates": {
+      "all_ok": true,
+      "check_count": 20,
+      "recorded_at_utc": "2026-11-24T15:28:26Z"
+    },
+    "runner_owned_finite_receipt_sha256": "8ae9a2b53199e9586d663311a8c733ddadc99553360958580eda2a3fc2789356",
+    "runner_owned_hard_receipt_sha256": "c47c69465339abfa4574277b382c077f22aa3f0b8b298048438ab116c1f66b74",
+    "truth": {
+      "achieved": false,
+      "section_6": "NOT_MET"
+    },
+    "workflow_run_id": 45423083321
+  },
   "governing_invariants": [
     "Own Brain weights and computed mechanisms only; zero runtime model calls.",
     "Parameters hold mechanisms, never a memorized world-fact warehouse.",
@@ -45,7 +65,7 @@
     "Official Harbor rewards from fresh unseen tasks are runner-owned falsifiers, never producer-written capability credit."
   ],
   "model_calls": 0,
-  "next_action": "Watch the distinct finite OIDC replay and dependent fresh run-id-seeded Terminal-Bench 4.1 hard falsifier, land runner-owned receipts, run final lightweight gates, then continue on authored repair content, GUI/browser control, completeness/source-scope closure and fresh unseen hard benchmarks.",
+  "next_action": "Watch the repaired second distinct finite OIDC replay and dependent fresh run-id-seeded Terminal-Bench 4.1 hard falsifier, land runner-owned receipts, run final lightweight gates, then continue on authored repair content, GUI/browser control, completeness/source-scope closure and fresh unseen hard benchmarks.",
   "non_goals": [
     "Claiming section 6, terminal truth, capability, family, benchmark or score credit.",
     "Reading hidden tests, solutions, verifier outputs or borrowed model answers.",
@@ -89,7 +109,7 @@
   "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
   "section_6_verifications": 0,
   "selected_route": "COMPOSE_EXISTING_FINITE_TYPED_PURPOSE_GRAMMAR_GOAL_DIRECTED_EXACT_EVPI_KERNEL_EXTERNAL_EDITABLE_STORE_OIDC_REPLAY_AND_FRESH_TB41_HARD_FALSIFIER_V1",
-  "status": "PRODUCER_REASONING_RECEIPT__FINITE_BRIDGE_BUILT__LOCAL_CONTRACTS_AND_20_PRE_RUNNER_GATES_PASS__DISTINCT_FINITE_OIDC_AND_HARD_FALSIFIER_PENDING__ZERO_CAPABILITY_CREDIT",
+  "status": "PRODUCER_REASONING_RECEIPT__FINITE_BRIDGE_BUILT__FIRST_FINITE_OIDC_ATTESTED__FIRST_HARD_ATTEMPT_FAILED_CLOSED_ON_RELEASE_ASSET_403__AUTHENTICATED_REPAIR_BUILT__20_20_REPAIR_GATES_PASS__SECOND_DISTINCT_RUN_PENDING__ZERO_CAPABILITY_CREDIT",
   "supersedes": [
     "UNIVERSAL_NATURAL_LANGUAGE_PURPOSE_PARSER",
     "MODEL_BASED_SYMBOLIC_GOAL_INTERPRETER",
@@ -113,5 +133,5 @@
     "Whether full completeness/source-scope closure can be certified in an open world.",
     "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style section 6 verification will become available."
   ],
-  "verifier_id": "PENDING_DISTINCT_GITHUB_ACTIONS_OIDC_RUNNER"
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45423083321__SECOND_DISTINCT_RUN_PENDING"
 }
