@@ -216,10 +216,25 @@ Six signature gaps, and they are not all the same kind of thing:
 | `arity=2\|values=1` | 18 (`comm`, `join`) | column numbers and a separator |
 | `arity=2\|values=1\|option=1` | 5 (`timeout`) | a whole command line as one value |
 
-`openssl` returns **0 operations at depth 1**: its help is a subcommand table with no usage
-line, so the census has nothing to parse. That is a pre-existing gap in
-`tool_census_v1`, not something this work introduced, and it is the single largest piece of
-the machine (676 subcommand operations) that is still invisible.
+`openssl` returns **0 operations at depth 1** and **4,391 at depth 2** (147 admitted
+subcommands). The depth-1 fleet number above therefore hides the single largest program on the
+machine; that is a pre-existing property of `tool_census_v1`, not something this work
+introduced.
+
+**And the mechanism does not rescue it.** A 400-operation slice of openssl at depth 2, budget
+24, 38 s: **43 addressable, 10.8%** — against 44.6% on the fleet. Of those 43, **42 are
+`-help` self-descriptions** and **1 is a door**. Two honest conclusions follow:
+
+1. *Domain witnesses, not more search, are the next mechanism.* openssl's operations want
+   `-inform=PEM`, `-oid=<object id>`, certificates and keys. No alphabet of `1` / `alpha` /
+   `in.txt` produces a certificate, and nothing on this machine produces one either. The
+   residue here is a **type**, and a type has to be constructed, not guessed.
+2. *A help operation is not a capability.* `openssl asn1parse -help` prints the subcommand's
+   own usage, which does not match the parent fingerprint this module compares against, so it
+   is scored as a SENSOR. That is a false-positive class in `effect_of` and it inflates any
+   program whose operations are mostly `-help`. The fleet's 353 sensors contain some of these;
+   the count is not separated yet, and until it is, **353 is an upper bound on sensors, not a
+   measurement of capability**.
 
 ---
 
