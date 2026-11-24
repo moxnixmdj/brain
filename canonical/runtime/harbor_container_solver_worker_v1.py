@@ -38,6 +38,17 @@ def main() -> int:
     # root. -I -B is used by the dispatcher; never rely on task PYTHONPATH.
     root = Path(__file__).resolve().parents[2]
     sys.path.insert(0, str(root))
+    # Try only the narrow, exact terminal grammar before ordinary model routing.
+    # The bridge reads the task workspace and proposes an action; it does not
+    # execute the copy or call solve. Unknown tasks use the existing route.
+    if inputs.get("harbor_suite") == "terminal-bench-4":
+        from canonical.runtime.harbor_terminal_copy_bridge_v1 import propose
+        proposal = propose(inputs.get("harbor_task"), inputs.get("observations"), os.getcwd())
+        if proposal is not None:
+            proposal["proposal_source"] = "DETERMINISTIC_TERMINAL_COPY_V1"
+            print(MARKER + json.dumps(proposal, sort_keys=True), flush=True)
+            return 0
+
     from canonical.runtime.brain_unified_model_v1 import open_model
 
     # Keep the routing ledger out of the read-only Brain tree. This setting

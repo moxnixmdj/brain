@@ -215,6 +215,7 @@ async def run_epistemic_goal(
     model: Any = None,
     mode: str = DEFAULT_MODE,
     max_cycles: int = MAX_CYCLES,
+    suite: str = '',
 ) -> dict[str, Any]:
     """Container transport loop; the caller owns boundary checks.
 
@@ -241,6 +242,7 @@ async def run_epistemic_goal(
                 {
                     "inputs": {
                         "harbor_task": text,
+                        "harbor_suite": suite,
                         "cycle": cycle,
                         "observations": list(observations),
                     },
@@ -268,6 +270,7 @@ async def run_epistemic_goal(
             "model_capability_id": (
                 str(result.get("capability_id") or "") if isinstance(result, Mapping) else ""
             ),
+            "proposal_source": str(result.get("proposal_source") or "OPEN_MODEL"),
         }
         actions = extract_actions(result)
         envelope["proposed_actions"] = [str(a.get("type") or "") for a in actions]
@@ -308,7 +311,9 @@ async def run_epistemic_goal(
             return {
                 "schema": SCHEMA,
                 **_transport_contract(),
-                "status": "FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES",
+                "status": ("FINISHED__DETERMINISTIC_PROPOSAL__VERIFIER_DECIDES"
+                           if envelope['proposal_source'] == 'DETERMINISTIC_TERMINAL_COPY_V1'
+                           else "FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES"),
                 "task_completion_claimed": False,
                 "summary": args["summary"],
                 "mode_requested": mode,

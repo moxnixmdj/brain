@@ -39,6 +39,17 @@
     "route_class": "REUSE"
   },
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "bounded_terminal_copy_bridge_20261124": {
+    "implemented_scope": "Experimental terminal-only literal file-copy request: inspect a bounded regular source under the current task workspace, propose one controlled container-side copy, and check source/destination content after a successful action. Unsupported requests preserve existing fail-closed routing; no software repair or general natural-language execution is claimed.",
+    "incremental_spend_usd": 0,
+    "limitations": "This slice cannot solve the specified Pro tasks or arbitrary Terminal-Bench instructions. It does not verify network isolation or container identity. No new benchmark run until an appropriate pinned benchmark and supported action route are available.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Real disposable local filesystem tests measure the narrow file effect; official task verifier and independent container boundary evidence remain necessary for benchmark or isolation claims.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "request": "Container-side grounding and action loop for Pro and Terminal-Bench, then official verifier smokes.",
+    "route_order": "Reuse checked Harbor environment.exec, action validation, trace and ATIF; add a bounded deterministic proposal and postcondition, preserving existing experimental opt-in and verifier."
+  },
   "branch_push_smoke_request_20261124": {
     "artifact_readout": "The requested benchmark run completed and uploaded an artifact, but this sandbox cannot connect to the artifact storage or logs hosts. Add a branch-only, pinned read-only download-and-annotation workflow for that exact run; do not rerun the producer or execute artifact content. Readouts are unverified facts, not benchmark or capability credit.",
     "configuration_spend_usd": 0,
