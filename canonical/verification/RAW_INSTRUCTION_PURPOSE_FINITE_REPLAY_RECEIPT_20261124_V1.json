@@ -1,0 +1,219 @@
+{
+  "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FINITE_CONTRACT_REPLAY__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+  "benchmark_score_authority": false,
+  "capability_credit_delta": 0,
+  "cli_decision": "BOUND__TYPED_ACTION_QUOTIENT",
+  "date": "2026-11-24",
+  "event_name": "push",
+  "execution_authority": false,
+  "family_credit_delta": 0,
+  "github_repository": "moxnixmdj/brain",
+  "head_sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+  "incremental_spend_usd": 0,
+  "independent_verified": true,
+  "measurement_checks": {
+    "cli_bound": true,
+    "cli_distinct_verifier": true,
+    "cli_exact_evpi_basis": true,
+    "cli_minimal_query_count": true,
+    "cli_packet_schema": true,
+    "cli_question_derived": true,
+    "no_benchmark_score_authority": true,
+    "no_execution_authority_in_kernel": true,
+    "no_trajectory_or_world_fact_warehouse": true,
+    "policy_bound": true,
+    "policy_gdsk_ready": true,
+    "policy_one_safe_command": true,
+    "policy_refuses_unmatched": true,
+    "section_6_not_met": true,
+    "store_removal_changes_behavior": true,
+    "test_count": true,
+    "unbounded_purpose_refused": true,
+    "zero_model_calls": true,
+    "zero_parameter_writes": true,
+    "zero_runtime_network_calls": true
+  },
+  "new_reality_units_consumed": 0,
+  "not_verified": [
+    "OSWorld 2.1 tasks",
+    "SWE-bench Pro V2 or HARD-51 tasks",
+    "Terminal-Bench 4.1 tasks",
+    "arbitrary natural-language purpose understanding",
+    "authored repair content",
+    "GUI or browser computer use",
+    "section 6 terminal capability"
+  ],
+  "numeric_measurements": {
+    "contract_tests": 21,
+    "environment_actions_executed": 0,
+    "hard_benchmark_tasks_consumed": 0,
+    "measurement_checks": 20,
+    "model_calls": 0,
+    "parameters_written": 0,
+    "pinned_blobs": 6,
+    "runtime_network_calls": 0,
+    "selected_queries": 1
+  },
+  "oidc_claims": {
+    "actor": "moxnixmdj",
+    "actor_id": "217246470",
+    "aud": "https://github.com/moxnixmdj/brain",
+    "event_name": "push",
+    "head_ref": "",
+    "iss": "https://token.actions.githubusercontent.com",
+    "job_workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain",
+    "jti": "ac12eaab-0ab6-40e8-a4e8-190cc47b3aed",
+    "ref": "refs/heads/arena/6f8ac9ce-brain",
+    "repository": "moxnixmdj/brain",
+    "repository_id": "1364778274",
+    "run_attempt": "1",
+    "run_id": "45423083321",
+    "runner_environment": "github-hosted",
+    "sha": "e9a94159d4d79c49fba8b9d512ec8c89e65a0d3f",
+    "workflow_ref": "moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain"
+  },
+  "oidc_jti": "ac12eaab-0ab6-40e8-a4e8-190cc47b3aed",
+  "pinned_blob_binding": {
+    "equal": true,
+    "expected_git_blob": {
+      "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "4f4525e878f613133b7b377d55578c7c0f3bec49",
+      "canonical/harbor/raw_instruction_purpose_agent_v1.py": "00f2f3a57979ed81fe9eadee2501da7a6c15fe01",
+      "canonical/harbor/raw_instruction_purpose_policy_v1.py": "e7eaf0cbeda2b6938f7d3aeb5029906496f0a96e",
+      "canonical/runtime/raw_instruction_purpose_binder_v1.py": "404d97482eae75fc48b88de7c29841dc20e4bd86",
+      "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "3f9797f699e0e0c1c0d78e5c7efbb7b9cd4a11ed",
+      "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "21ed2a90d7c2ee5e659ee9a57bff6cefc3a53a68"
+    },
+    "expected_sha256": {
+      "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "9d733bd875d3012893096f520d5a8aa5744272ee64c699fee7280d2a9ce37b64",
+      "canonical/harbor/raw_instruction_purpose_agent_v1.py": "19a36977629b2cda0bcf8e7158f2bf5d15ef151a028650511cbf6e99910299b4",
+      "canonical/harbor/raw_instruction_purpose_policy_v1.py": "58b35e8a6c7aa9661332051c0d2c1378ac4fda77e4985a846c75210e74ad42cd",
+      "canonical/runtime/raw_instruction_purpose_binder_v1.py": "ef2f8e239142ed08d23985b7582b481f66b54c6658a84c1d72b85e6c1e3d389a",
+      "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "f35a8dbdf9235e93d83450bdf14b813594d1e6802a65855f0fd515bc4ce32723",
+      "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
+    },
+    "observed_git_blob": {
+      "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "4f4525e878f613133b7b377d55578c7c0f3bec49",
+      "canonical/harbor/raw_instruction_purpose_agent_v1.py": "00f2f3a57979ed81fe9eadee2501da7a6c15fe01",
+      "canonical/harbor/raw_instruction_purpose_policy_v1.py": "e7eaf0cbeda2b6938f7d3aeb5029906496f0a96e",
+      "canonical/runtime/raw_instruction_purpose_binder_v1.py": "404d97482eae75fc48b88de7c29841dc20e4bd86",
+      "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "3f9797f699e0e0c1c0d78e5c7efbb7b9cd4a11ed",
+      "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "21ed2a90d7c2ee5e659ee9a57bff6cefc3a53a68"
+    },
+    "observed_sha256": {
+      "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "9d733bd875d3012893096f520d5a8aa5744272ee64c699fee7280d2a9ce37b64",
+      "canonical/harbor/raw_instruction_purpose_agent_v1.py": "19a36977629b2cda0bcf8e7158f2bf5d15ef151a028650511cbf6e99910299b4",
+      "canonical/harbor/raw_instruction_purpose_policy_v1.py": "58b35e8a6c7aa9661332051c0d2c1378ac4fda77e4985a846c75210e74ad42cd",
+      "canonical/runtime/raw_instruction_purpose_binder_v1.py": "ef2f8e239142ed08d23985b7582b481f66b54c6658a84c1d72b85e6c1e3d389a",
+      "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "f35a8dbdf9235e93d83450bdf14b813594d1e6802a65855f0fd515bc4ce32723",
+      "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
+    }
+  },
+  "policy_decision": "BOUND__HARBOR_HARNESS_ACTION_AUTHORIZED",
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "promotion_authority": false,
+  "rule": "VERIFICATION_APPLIES_ONLY_TO_EXACT_LISTED_BLOBS_AND_MEASUREMENTS__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+  "runner_environment": "github-hosted",
+  "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1",
+  "scope": "RAW_INSTRUCTION_PURPOSE_BINDER_V1_FINITE_CONTRACT_ONLY",
+  "section_6_verifications": 0,
+  "static_audit": {
+    "audits": {
+      "canonical/harbor/raw_instruction_purpose_agent_v1.py": {
+        "imports": [
+          "__future__",
+          "canonical",
+          "harbor",
+          "hashlib",
+          "json",
+          "pathlib",
+          "typing"
+        ],
+        "marked": []
+      },
+      "canonical/harbor/raw_instruction_purpose_policy_v1.py": {
+        "imports": [
+          "__future__",
+          "canonical",
+          "copy",
+          "hashlib",
+          "json",
+          "pathlib",
+          "re",
+          "shlex",
+          "typing"
+        ],
+        "marked": []
+      },
+      "canonical/runtime/raw_instruction_purpose_binder_v1.py": {
+        "imports": [
+          "__future__",
+          "argparse",
+          "copy",
+          "hashlib",
+          "json",
+          "math",
+          "pathlib",
+          "re",
+          "typing"
+        ],
+        "marked": []
+      },
+      "canonical/tests/test_raw_instruction_purpose_binder_v1.py": {
+        "imports": [
+          "__future__",
+          "ast",
+          "canonical",
+          "copy",
+          "hashlib",
+          "json",
+          "pathlib",
+          "unittest"
+        ],
+        "marked": []
+      },
+      "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": {
+        "imports": [
+          "__future__",
+          "ast",
+          "asyncio",
+          "canonical",
+          "importlib",
+          "json",
+          "pathlib",
+          "sys",
+          "tempfile",
+          "types",
+          "unittest"
+        ],
+        "marked": []
+      }
+    },
+    "external_store_editable": true,
+    "finite_grammar_templates": 2,
+    "known_task_names_absent": true,
+    "marked": []
+  },
+  "status": "RUNNER_OWNED_OIDC_ATTESTED_FINITE_RAW_INSTRUCTION_PURPOSE_REPLAY__ZERO_CREDIT__SECTION_6_NOT_MET",
+  "terminal_credit_delta": 0,
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "verified": [
+    "EXACT_PINNED_BLOBS_BOUND",
+    "ZERO_MODEL_ZERO_NETWORK_STDLIB_IMPORT_SURFACE",
+    "EXTERNAL_EDITABLE_FINITE_TEMPLATE_GRAMMAR",
+    "TWENTY_ONE_FROZEN_CONTRACT_TESTS_PASS",
+    "EXACT_EVPI_MINIMAL_QUESTION_SELECTION",
+    "POLICY_FAILS_CLOSED_ON_UNMATCHED_AND_UNBOUNDED_PURPOSE",
+    "STORE_REMOVAL_CHANGES_BEHAVIOR_WITHOUT_RETRAINING",
+    "OIDC_RUN_REFERENCE_BOUND",
+    "NO_CAPABILITY_OR_TERMINAL_CREDIT"
+  ],
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45423083321",
+  "workflow_job": "contract_replay",
+  "workflow_path": ".github/workflows/zero-model-raw-instruction-purpose-v1.yml",
+  "workflow_run_attempt": 1,
+  "workflow_run_id": 45423083321,
+  "workflow_run_url": "https://github.com/moxnixmdj/brain/actions/runs/45423083321"
+}
