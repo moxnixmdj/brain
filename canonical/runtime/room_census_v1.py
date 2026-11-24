@@ -53,6 +53,9 @@ MAX_FILES = 400
 MAX_FUNCTIONS = 2500
 # Source-shaped files, whether or not this reader can parse them. Membership here is what lets the
 # survey say "code is present but unreadable" instead of "nothing is here".
+# What this reader can turn into callables today, as opposed to merely list.
+_READABLE_SUFFIXES = frozenset({".py"})
+
 _SOURCE_SUFFIXES = frozenset({".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".rb",
                               ".go", ".rs", ".java", ".c", ".h", ".cpp", ".cc", ".sh", ".bash",
                               ".zsh", ".lua", ".php", ".pl", ".r", ".jl", ".swift", ".kt"})
@@ -182,8 +185,57 @@ def functions_in(path: pathlib.Path, root: pathlib.Path) -> list[dict]:
     return out
 
 
+def source_index(root: Any, max_files: int = 4000) -> dict:
+    """Every source-shaped file in the room, with NO parsing. The cheap first pass.
+
+    WHY THIS IS SEPARATE FROM `survey`. On a real tree the parse budget runs out long before the
+    files do: measured 2026-11-23 on an installed standard-library directory, 667 python files
+    against a 400-file budget, and `survey` read whichever 400 sorted first. On a big room that makes
+    coverage ARBITRARY -- the function you need is quite likely in a file that was never opened, and
+    the survey cannot say so.
+
+    Listing paths costs microseconds each and needs no parse, so the whole room can be indexed even
+    when it cannot be read. That is the same split the project already settled on elsewhere: the
+    INDEX is task-agnostic, the READING is goal-scoped.
+    """
+    base = pathlib.Path(root).resolve()
+    out, seen, skipped = [], {}, 0
+    if not base.is_dir():
+        return {"schema": SCHEMA, "root": str(base), "status": "NOT_A_DIRECTORY",
+                "files": [], "source_seen": {}, "readable": []}
+    for path in sorted(base.rglob("*")):
+        if len(out) >= max_files:
+            break
+        try:
+            rel_parts = path.relative_to(base).parts
+        except Exception:
+            continue
+        if any(q in SKIP_DIRS or q.startswith(".") for q in rel_parts[:-1]):
+            skipped += 1
+            continue
+        if not path.is_file():
+            continue
+        suf = path.suffix.lower()
+        if suf not in _SOURCE_SUFFIXES:
+            continue
+        seen[suf] = seen.get(suf, 0) + 1
+        out.append({"rel": str(path.relative_to(base)), "suffix": suf,
+                    "readable": suf in _READABLE_SUFFIXES})
+    readable = [f["rel"] for f in out if f["readable"]]
+    unreadable = {k: v for k, v in seen.items() if k not in _READABLE_SUFFIXES}
+    if readable:
+        status = "INDEXED"
+    elif unreadable:
+        status = "NO_READABLE_SOURCE"
+    else:
+        status = "EMPTY"
+    return {"schema": SCHEMA, "root": str(base), "status": status, "files": out,
+            "readable": readable, "source_seen": seen, "unreadable_source": unreadable,
+            "files_skipped": skipped, "truncated": len(out) >= max_files}
+
+
 def survey(root: Any, max_files: int = MAX_FILES,
-           max_functions: int = MAX_FUNCTIONS) -> dict:
+           max_functions: int = MAX_FUNCTIONS, objective: str = "") -> dict:
     """What this directory offers, as callables rather than as files.
 
     Deterministic and read-only: sorted by path, then by line, so the same room always produces the
@@ -194,38 +246,51 @@ def survey(root: Any, max_files: int = MAX_FILES,
     if not base.is_dir():
         return {"schema": SCHEMA, "root": str(base), "status": "NOT_A_DIRECTORY",
                 "functions": [], "files_read": 0, "files_skipped": 0}
-    files: list[pathlib.Path] = []
-    skipped = 0
-    # WHAT KINDS OF SOURCE ARE HERE AT ALL.
+    # ONE PASS OVER THE PATHS, THEN THE BUDGET.
+    # The loop below used to STOP at max_files, so on a big room every file after the limit was
+    # invisible -- there was nothing left for objective-guided selection to choose between, and the
+    # reading was simply alphabetical (measured: 665 python files against a 400 budget).
+    index = source_index(base)
+    if index["status"] == "NOT_A_DIRECTORY":
+        return {"schema": SCHEMA, "root": str(base), "status": "NOT_A_DIRECTORY",
+                "functions": [], "files_read": 0, "files_skipped": 0}
+    skipped = index["files_skipped"]
+    seen_suffixes = dict(index["source_seen"])
+    files = [base / rel for rel in index["readable"]]
+
+    # WHEN THE ROOM IS BIGGER THAN THE BUDGET, SPEND THE BUDGET ON WHAT THE OBJECTIVE IS ABOUT.
     #
-    # Reading only `*.py` made this census unable to tell two completely different rooms apart:
-    # measured 2026-11-23, a directory holding only `tools.js` reported status SURVEYED with 0
-    # functions -- identical to an EMPTY directory. An empty room is a fact; a room of code this
-    # reader cannot parse is a LIMIT, and a caller that cannot distinguish them will confidently
-    # report "nothing to learn here" about a place full of things to learn.
-    #
-    # So the survey reports what source kinds it saw and whether it could read them. Python is what
-    # this census can turn into callables today; the rest is stated rather than hidden.
-    _READABLE_SUFFIXES = {".py"}
-    seen_suffixes: dict[str, int] = {}
-    for path in sorted(base.rglob("*")):
-        if len(files) >= max_files:
-            break
+    # Ranking PATHS costs no parsing, and a file's name carries real signal -- a path like
+    # `bound_capabilities/objective_relevance_bm25.py` says what it holds. With no objective there is
+    # nothing to prefer, so the order is unchanged.
+    budget_note = ""
+    if objective and len(files) > max_files:
         try:
-            rel_parts = path.relative_to(base).parts
+            from canonical.runtime.bound_capabilities import objective_relevance_bm25 as bm25
+            cands = [{"capability_id": rel, "title": pathlib.PurePosixPath(rel).stem.replace("_", " "),
+                      "snippet": rel.replace("/", " ").replace("_", " ")}
+                     for rel in index["readable"]]
+            picked = bm25.rank(objective, cands, limit=max_files)
+            chosen = [str((h.get("candidate") or {}).get("capability_id"))
+                      for h in (picked.get("ranked_candidates") or [])
+                      if (h.get("lexical_relevance_score") or 0) > 0]
+            if chosen:
+                files = [base / c for c in chosen][:max_files]
+                budget_note = ("%d of %d python files read, chosen by objective relevance"
+                               % (len(files), len(index["readable"])))
         except Exception:
-            continue
-        if any(p in SKIP_DIRS or p.startswith(".") for p in rel_parts[:-1]):
-            skipped += 1
-            continue
-        if not path.is_file():
-            continue
-        suf = path.suffix.lower()
-        if suf in _SOURCE_SUFFIXES:
-            seen_suffixes[suf] = seen_suffixes.get(suf, 0) + 1
-        if suf not in _READABLE_SUFFIXES:
-            continue
-        files.append(path)
+            budget_note = ""
+    # COVERAGE IS REPORTED WHETHER OR NOT IT COULD BE AIMED.
+    #
+    # `budget` used to be set only on the objective-guided path, so an alphabetically-truncated room
+    # returned None -- indistinguishable from having read everything. That is the limit-reported-as-
+    # a-fact mistake again, at the level of the survey instead of the reader. Whenever the budget cuts
+    # the room, the survey now says so, and says whether anything guided the choice.
+    if len(files) > max_files:
+        budget_note = budget_note or ("%d of %d read, no objective supplied -- path order"
+                                      % (max_files, len(files)))
+    files = files[:max_files]
+
     found: list[dict] = []
     for path in files:
         if len(found) >= max_functions:
@@ -255,6 +320,7 @@ def survey(root: Any, max_files: int = MAX_FILES,
         "readable_source": sorted(_READABLE_SUFFIXES),
         "functions": found[:max_functions],
         "truncated": len(found) > max_functions,
+        "budget": budget_note or None,
         "note": ("Read from source: no import, no execution, no admission. "
                  "A function found here is a CANDIDATE, not a capability."),
     }

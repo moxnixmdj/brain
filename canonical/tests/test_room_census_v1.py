@@ -328,3 +328,41 @@ def test_the_docstring_survives_the_handoff(room):
     assert "fill rate" in entry["doc"], entry
     # and the words that describe the work reach the keywords, rather than only the name
     assert any(w in entry["keywords"] for w in ("csv", "fill", "column")), entry
+
+
+def test_a_big_room_says_how_much_of_it_was_read(tmp_path):
+    """A survey that silently reads a fraction of a room is reporting a fact it does not have.
+
+    On an installed stdlib directory the budget cut 665 python files to 400 and `budget` stayed None
+    -- indistinguishable from having read everything. Coverage is now always stated, and it says
+    whether anything guided the choice.
+    """
+    for i in range(12):
+        (tmp_path / ("mod%02d.py" % i)).write_text(
+            "def fn_%d():\n    \"\"\"Doing thing %d.\"\"\"\n    return {}\n" % (i, i),
+            encoding="utf-8")
+    full = RC.survey(str(tmp_path))
+    assert full["status"] == "SURVEYED"
+    assert full["budget"] is None, full
+    assert len(full["functions"]) == 12, full
+
+    cut = RC.survey(str(tmp_path), max_files=5)
+    assert cut["budget"], cut
+    assert "5 of 12" in cut["budget"], cut["budget"]
+    assert cut["files_read"] == 5, cut
+
+    aimed = RC.survey(str(tmp_path), max_files=5, objective="doing thing 7")
+    assert aimed["budget"], aimed
+    # only the files bearing on the objective need be read; it must not silently fall back to all
+    assert aimed["files_read"] <= 5, aimed
+
+
+def test_the_path_index_lists_the_room_without_reading_it(tmp_path):
+    """Listing costs nothing and covers everything; reading is the expensive, budgeted part."""
+    (tmp_path / "a.py").write_text("def f():\n    return {}\n", encoding="utf-8")
+    (tmp_path / "b.js").write_text("function g(){}\n", encoding="utf-8")
+    index = RC.source_index(str(tmp_path))
+    assert index["status"] == "INDEXED"
+    assert index["readable"] == ["a.py"], index
+    assert index["unreadable_source"] == {".js": 1}, index
+    assert len(index["files"]) == 2, index

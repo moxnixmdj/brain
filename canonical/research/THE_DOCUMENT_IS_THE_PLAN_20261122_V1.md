@@ -8840,3 +8840,57 @@ litters is a test whose next run measures something slightly different. It now r
 room in a `finally`.
 
 Verified after the change: three consecutive runs, 17 passed each time, state file steady at 3 rows.
+
+### §A146 addendum 2 — a budget that spends itself alphabetically
+
+Pointed at a **real** tree instead of a fixture, the survey fell over in a new way. An installed
+standard-library directory holds 665 python files; the budget is 400. The survey read whichever 400
+sorted first and reported nothing about the other 265.
+
+    survey(csv.__file__.parent)  ->  status SURVEYED, files_read 400, functions 2500, budget None
+
+`budget: None` is the same mistake as §A146's `NO_READABLE_SOURCE` collapse, one level up: a survey
+that read a fraction of a room reporting as though it read the room.
+
+**The fix is the split the project already made elsewhere, applied to files instead of tasks.**
+
+    source_index(root)         every source-shaped file, NO parsing -- 665 files in 0.02 s
+    survey(root, objective)    parses within budget, and spends the budget on what the objective is
+                               about when the objective is given
+
+The index is task-agnostic and nearly free; the reading is goal-scoped and rationed. Measured after:
+
+    objective                                    python files read (of 665)
+    (none)                                        400   "path order", and it says so
+    "parse command line arguments for a script"    25   by objective relevance
+    "read and write json encoder decoder"           5   by objective relevance
+
+A quarter of the tree instead of three fifths, for a question that lives in `argparse`.
+
+### And where that still fails, precisely
+
+Relevance is lexical, and a filename is **one token**. For "parse command line arguments":
+
+    argparse.py in the top 30 paths?   False
+    top paths instead:                 urllib/parse.py, test/support/script_helper.py,
+                                       lib2to3/pgen2/parse.py, sre_parse.py, ...
+
+`parse` is a token; `argparse` is a different token, and no amount of BM25 will connect them. The
+25-file read then found `copy_scripts`, `make_script`, `parse_qs` and **missed argparse entirely**.
+
+Two independent causes, both recorded rather than papered over:
+
+    1. LEXICAL. `difflib` does not contain `diff` as a token; `argparse` does not contain `arguments`.
+       Recovering from that needs morphology (a stemmer, a compound splitter like the one already in
+       `documentation_mining_v1._CONCAT_SUFFIX`) or a semantic index -- neither is in this path yet.
+    2. STRUCTURAL. The census lists module-level functions, not METHODS inside classes. argparse's
+       entire public surface is `ArgumentParser.add_argument` / `parse_args`. A room whose answers are
+       all methods presents as almost empty.
+
+Neither makes the survey dishonest -- it now says how much it read and whether anything aimed it --
+but both are the difference between browsing a room and understanding it, and neither is solved here.
+
+    (129) A budget spent in alphabetical order is not a budget, it is a coin: it decides what the
+          machine can see without reference to what it was asked.
+    (130) Report coverage whenever coverage is partial, with or without an objective. The count that
+          is only stated when the aiming worked is a count that lies exactly when it matters.
