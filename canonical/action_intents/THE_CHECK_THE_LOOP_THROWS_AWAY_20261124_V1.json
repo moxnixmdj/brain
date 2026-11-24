@@ -43,7 +43,7 @@
  },
  "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the machine can find the file (expert file at rank 1 for 0.400 of 500 tasks), can hold the material (17 of 26 sampled changed files need nothing the project does not already hold), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests; every zero-model signal tested this round (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement",
- "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+ "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": {
   "retracted": "16 tasks lost to an untaken local re-run",
@@ -97,7 +97,7 @@
  ],
  "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
  "recursive_obs": {
-  "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+  "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "the 16-task PRECISION claim (deleted by recomputation)",
@@ -188,7 +188,7 @@
   "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
   "required_capability": "the ability to prefer one arrangement of already-held material over another without the hidden tests",
   "route_frontier": {
-   "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+   "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
    "challenger_routes": [
     {
      "route": "BUILD_A_LOCAL_NEIGHBOUR_TEST_RE_RUN",
@@ -276,7 +276,7 @@
      ]
     }
    ],
-   "checked_at_utc": "2026-11-24T14:43:19+00:00",
+   "checked_at_utc": "2026-11-24T14:52:12+00:00",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -316,7 +316,7 @@
    "selected_route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-24T14:41:19+00:00",
+    "checked_at_utc": "2026-11-24T14:52:12+00:00",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime",
@@ -356,7 +356,7 @@
       "required": false,
       "status": "READY",
       "volatility": "VOLATILE",
-      "observed_at_utc": "2026-11-24T14:41:19+00:00",
+      "observed_at_utc": "2026-11-24T14:52:12+00:00",
       "evidence": [
        "every count in the receipt was produced from files already on disk"
       ],
