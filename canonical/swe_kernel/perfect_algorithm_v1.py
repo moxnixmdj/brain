@@ -1017,6 +1017,19 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     return receipts
 
 
+class scratch_room:
+    """A throwaway directory for proofs; the world being judged stays untouched."""
+
+    def __enter__(self):
+        import tempfile
+        self._tmp = tempfile.TemporaryDirectory(prefix="layer-room-")
+        return pathlib.Path(self._tmp.name)
+
+    def __exit__(self, *exc):
+        self._tmp.cleanup()
+        return False
+
+
 def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
                         contract: Any = None) -> dict[str, Any]:
     """Read the layers out of the goal's own name, then fold the store over them.
@@ -1042,15 +1055,38 @@ def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
         return {"status": "NOT_ATTEMPTED__THE_OUTPUT_DECLARES_ONE_LAYER"}
     operators = [r for r in (memory.get("rules") or []) if str(r.get("kind")) == "operator"]
 
+    # The match is by PROOF, not by name. A name like `zpack` that really is
+    # gzip has no substring in common with `gz`, and generous name matching is
+    # how `tar` once stood in for the gz layer. So: prefer an operator whose
+    # program is the machine's proven implementation of this layer.
     sequence, missing = [], []
+    source_for_proof = None
     for layer in layers:
-        named = [r for r in operators
-                 if layer.lower() in str(r.get("program") or "").lower()
-                 and str(r.get("argv_shape") or [])]
-        if not named:
+        candidates = [r for r in operators if str(r.get("argv_shape") or [])]
+        picked = None
+        for rule in sorted(candidates,
+                           key=lambda r: 0 if layer.lower() in
+                           str(r.get("program") or "").lower() else 1):
+            program = str(rule.get("program") or "")
+            if layer.lower() in program.lower():
+                picked = rule
+                break
+            if source_for_proof is None:
+                bound_now = contract(env) if callable(contract) else None
+                if bound_now and bound_now.get("source"):
+                    source_for_proof = pathlib.Path(str(getattr(env, "root", ""))) / \
+                        str(bound_now["source"])
+            if source_for_proof is not None and source_for_proof.is_file():
+                from canonical.runtime.effect_oracle_v1 import prove_layer
+                with scratch_room() as room:
+                    proof = prove_layer(program, layer, source_for_proof, room)
+                if proof.get("proved"):
+                    picked = rule
+                    break
+        if picked is None:
             missing.append(layer)
         else:
-            sequence.append(named[0])
+            sequence.append(picked)
     if missing:
         return {"status": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS", "layers": layers,
                 "missing": missing,

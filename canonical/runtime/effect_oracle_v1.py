@@ -208,6 +208,51 @@ def _candidates(component: str, programs: Sequence[str] | None) -> list[str]:
     return (literal + rest)[:_MAX_CANDIDATES]
 
 
+def prove_layer(program: str, component: str, source: pathlib.Path,
+                scratch: pathlib.Path, timeout_s: float = 20.0) -> dict[str, Any]:
+    """Is this program the machine's implementation of THIS layer?
+
+    Measured 2026-11-24: matching a layer to a program by name (`gz` in `gzip`)
+    is pattern matching, and it is wrong in both directions -- an alias called
+    `zpack` that really is gzip gets no match, and generous name matching let
+    `tar` stand in for `gz` elsewhere. So the match is made by behaviour: the
+    program must encode the source, decode its own artifact back to the same
+    bytes, and -- when the layer's format has an invariant header at all -- write
+    that header. `tar`'s invariant is empty, so the round trip carries it alone.
+    """
+    import shutil
+    import tempfile
+
+    if not shutil.which(program):
+        return {"proved": False, "reason": "NOT_INSTALLED", "program": program}
+    with tempfile.TemporaryDirectory(prefix="layer-proof-") as room:
+        room_path = pathlib.Path(room)
+        subject = room_path / source.name
+        subject.write_bytes(source.read_bytes())
+        known = resolve_chain("probe." + component, subject, room_path,
+                              programs=None)
+        signature = b""
+        if known.get("verdict") == "READER_CHAIN_PROVEN" and known.get("links"):
+            signature = known["links"][0].get("signature") or b""
+        for argv in _encode_shapes(program, subject):
+            done = _run(argv, cwd=room_path, timeout_s=timeout_s)
+            if done.returncode != 0 or not done.stdout:
+                continue
+            artifact = done.stdout
+            if signature and not artifact.startswith(signature):
+                return {"proved": False, "program": program, "component": component,
+                        "reason": "THE_ARTIFACT_IS_NOT_THIS_FORMAT",
+                        "artifact": artifact[:8].hex(), "signature": signature.hex()}
+            for decode in _decode_shapes(program):
+                back = _run(decode, cwd=room_path, stdin=artifact, timeout_s=timeout_s)
+                if back.returncode == 0 and back.stdout == subject.read_bytes():
+                    return {"proved": True, "program": program, "component": component,
+                            "encode": argv, "decode": decode,
+                            "signature": signature.hex()}
+    return {"proved": False, "program": program, "component": component,
+            "reason": "NO_ROUND_TRIP"}
+
+
 def resolve_chain(output_name: str, source: pathlib.Path, scratch: pathlib.Path,
                   *, programs: Sequence[str] | None = None) -> dict[str, Any]:
     """The proof-carrying reader chain for this output name, or the reason there is none.

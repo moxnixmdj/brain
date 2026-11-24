@@ -339,6 +339,16 @@ environment offers**. Result `PASS__COMPOSED_A_NEW_FORMAT`, layers
 Four tests, including one where a single wrong link refutes the whole chain and
 one where a missing shape stops the fold **before anything runs**.
 
+**The layer is matched by proof, not by name.** `gz` in `gzip` is pattern
+matching, and it fails in both directions: it let `tar` stand in for the gz layer
+(a plain tar named `out.gz` came back EFFECT_VERIFIED), and it refuses an alias
+called `zpack` that really is gzip. `prove_layer` asks the behavioural question --
+encode the source, decode the artifact back to the same bytes, write the header
+the format actually has (empty for tar, so the round trip carries it alone).
+Measured: `prove_layer("gzip","gz")` proved, `prove_layer("tar","gz")` refused,
+`prove_layer("/tmp/.../zpack","gz")` proved, and a store whose gzip contract is
+named `zpack` composes a verified `out.tar.gz` with chain `[gzip, tar]`.
+
 ### The four mechanisms in the brief, audited
 
 | claim | state |
