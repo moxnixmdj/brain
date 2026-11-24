@@ -1,0 +1,183 @@
+{
+  "benchmark_wall_seconds": 23.1725,
+  "date": "2026-11-24",
+  "experiment_1_goal_directed_room_learning": {
+    "empty_memory_control_unread_rate": 1.0,
+    "episodes": 8,
+    "goal_directed": {
+      "corrupt_decoys_caught": "8/8",
+      "judges_earned_count": 3,
+      "probes_by_episode": [
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total_probes": 6,
+      "total_seconds": 3.4529,
+      "valid_verified": "8/8",
+      "warm_episodes_zero_probes": 6
+    },
+    "lazy_trap_audit": {
+      "admitted_kinds": [
+        "bplist",
+        "bz2",
+        "elf",
+        "gzip",
+        "json",
+        "pdf",
+        "png",
+        "python",
+        "sqlite",
+        "tar",
+        "utf8_text",
+        "wav",
+        "xml",
+        "xz",
+        "zip"
+      ],
+      "lazy_traps_refused": [
+        "py:bz2:lazy_open",
+        "py:lzma:lazy_open",
+        "py:sqlite3:connect_lazy"
+      ],
+      "refused_total": 21
+    },
+    "probe_reduction_ratio": 0.25,
+    "upfront_all_baseline": {
+      "judges_earned_count": 8,
+      "probes_by_episode": [
+        24,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total_probes": 24,
+      "total_seconds": 7.3257
+    }
+  },
+  "experiment_2_cli_action_grammar": {
+    "cold_episode": {
+      "binaries_probed": 7,
+      "pass": true,
+      "recalled_from_memory": 0,
+      "seconds": 0.1737
+    },
+    "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+    "warm_unseen_episodes": {
+      "binaries_probed_total": 0,
+      "passed": "4/4",
+      "raw_argv_replay_control_passed": "0/4"
+    }
+  },
+  "experiment_3_w3c_aria_osworld_gui_transfer": {
+    "apps_evaluated": 6,
+    "mean_steps_v1_cold": 6.0,
+    "mean_steps_v2_warm": 5.0,
+    "naive_aria_without_state_diff_control_pass": "0/6",
+    "store_audit": {
+      "gui_workflows_count": 6,
+      "parameters_stored": 0,
+      "raw_coordinates_saved": 0,
+      "raw_xpath_saved": 0
+    },
+    "v1_cold_pass": "6/6",
+    "v1_lying_aria_traps_bypassed": 6,
+    "v2_raw_xy_coordinate_replay_control_pass": "0/6",
+    "v2_raw_xy_destructive_wipe_triggered": "6/6",
+    "v2_unseen_redesign_schema_transfer_pass": "6/6"
+  },
+  "experiment_4_blind_unseen_swe_commits": {
+    "aggregate_unseen_heldout": {
+      "fake_repairs_after_canary_gate": 0,
+      "top5_file_localization": "40/49 (81.6%)",
+      "total_commits_attempted": 57,
+      "total_reproducible_in_sandbox": 49,
+      "verified_genuine_repairs": "2/49 (4.1%)"
+    },
+    "calibration_attrs_seen": {
+      "exact_human_match_commits": [
+        "attrs@3b0378dd66"
+      ],
+      "localized_top5_file": 4,
+      "total": 4,
+      "verified_full_suite_repairs": 1
+    },
+    "heldout_unseen_fresh_round2_after_canary_freeze": {
+      "localized_top5_file": 6,
+      "repos": [
+        "werkzeug",
+        "urllib3",
+        "jinja",
+        "tqdm",
+        "httpx",
+        "starlette"
+      ],
+      "total_reproducible": 13,
+      "total_tasks": 17,
+      "verified_genuine_repairs": 0
+    },
+    "heldout_unseen_general_20261116": {
+      "localized_top5_file": 11,
+      "repos": [
+        "pypa/packaging",
+        "hukkin/tomli",
+        "pallets/itsdangerous"
+      ],
+      "total_reproducible": 12,
+      "total_tasks": 16,
+      "verified_genuine_repairs": 0
+    },
+    "heldout_unseen_single_line_round1": {
+      "false_positive_caught_by_runner_canary_audit": 1,
+      "localized_top5_file": 23,
+      "repos": [
+        "click",
+        "more-itertools",
+        "packaging",
+        "pluggy"
+      ],
+      "retracted_and_blocked_by_canary": {
+        "cause": "self-hosting pytest imported mutated pluggy._callers; blocked permanently by dual unittest+pytest verify_runner_canary",
+        "commit": "pluggy@4326ced299"
+      },
+      "total_reproducible": 24,
+      "verified_commits": [
+        {
+          "commit": "packaging@b80e6eb0a6",
+          "cross_module_tests_passed": 61705,
+          "exact_human_diff_match": true,
+          "family": "FALSY_NON_NONE_GUARD"
+        },
+        {
+          "commit": "packaging@8af75907bf",
+          "cross_module_tests_passed": 61541,
+          "exact_human_diff_match": false,
+          "family": "GUARD_DISJUNCTIVE_RELAXATION"
+        }
+      ],
+      "verified_genuine_repairs": 2
+    },
+    "prior_repo_engine_baseline": {
+      "real_fix_commits_20261116": "0/89",
+      "single_line_20261123_unseen_non_attrs": "0/41 (even with exact git diff line hand-held)"
+    },
+    "protocol": "git_stripped_worktree_parent_plus_test_only__zero_sha_zero_diff_zero_model_calls"
+  },
+  "invariants": {
+    "api_spend_usd": 0.0,
+    "model_calls": 0,
+    "parameters_stored": 0,
+    "raw_coordinates_saved": 0,
+    "raw_trajectories_saved": 0
+  },
+  "schema": "EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1"
+}

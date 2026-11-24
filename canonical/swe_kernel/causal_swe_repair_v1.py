@@ -1,0 +1,1632 @@
+#!/usr/bin/env python3
+"""Zero-Leakage Causal SWE Repair Engine.
+
+Given ONLY `(worktree, test_target)` -- NEVER a fix commit SHA, diff, or target line:
+  1. Dynamically traces failing vs. passing test executions at native C speed outside
+     the project source tree (`sys.settrace` returning `None` for non-project frames),
+     computing Ochiai fault localization, crash stack frames, `DID NOT RAISE` targets,
+     live local variable snapshots, falsy-non-None guards, and single-pass iterators.
+  2. Synthesizes minimal, frame-consistent candidate repairs across five first-principles
+     semantic operator families:
+       - `GUARD_PROJECTION_AND_POLARITY`: falsy-non-None (`x` -> `x is not None`),
+         relational/boundary flips (`<` <-> `<=`, `==` <-> `!=`, `in` <-> `not in`),
+         membership widening from failing-frame values (`x != 'a'` -> `x not in ('a', 'b')`),
+         and frame-discriminated conjunctive/disjunctive guards (`C and P`, `C or P`);
+       - `ITERATOR_AND_PROTOCOL_MATERIALIZATION`: single-pass iterator exhaustion
+         (`fn(...)` -> `tuple(fn(...))` / `list(fn(...))`) and boundary coercions;
+       - `DID_NOT_RAISE_VALIDATION`: widening existing `if C: raise ExpectedExc(...)`
+         guards with minimal predicates separating the failing invalid input from 100%
+         of passing valid frames;
+       - `EXCEPTION_GUARD_AND_TRANSLATION`: guarding `None`/empty/bounds crashes or
+         translating uncaught parser errors into the domain exception demanded by
+         `pytest.raises(ExpectedExc)`;
+       - `DEMAND_ALIGNED_EXPRESSION`: dynamic assertion operand alignment, induced
+         `f-string` templates over live frame variables, cross-attribute projections,
+         and off-by-one index/slice repairs.
+  3. Verifies every surviving patch on the FULL unmodified test file with bytecode
+     caching completely disabled (`PYTHONDONTWRITEBYTECODE=1` + `__pycache__` purge),
+     requiring 100% of failing tests to turn green AND 100% of previously passing
+     tests to remain green, while rejecting constant/literal test-echoing cheats.
+  4. Persists only operator-family value/cost posteriors and variable-erased structural
+     schemas in an inspectable, refutable external store (`SWERepairMemory`).
+
+Model calls: 0. Stored world-fact weights: 0. Answer/diff leakage: 0. Authority: NONE.
+"""
+from __future__ import annotations
+
+import ast
+import copy
+import hashlib
+import json
+import math
+import os
+import pathlib
+import re
+import shutil
+import subprocess
+import sys
+import tempfile
+import time
+from dataclasses import dataclass, field
+from typing import Any, Mapping, Sequence
+
+SCHEMA = "PROJECT_BRAIN_CAUSAL_SWE_REPAIR_V1"
+AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
+
+OPERATOR_FAMILIES: tuple[str, ...] = (
+    "ITERATOR_MATERIALIZATION",
+    "FALSY_NON_NONE_GUARD",
+    "MEMBERSHIP_SET_EXTENSION",
+    "GUARD_CONJUNCTIVE_RESTRICTION",
+    "GUARD_DISJUNCTIVE_RELAXATION",
+    "GUARD_BOUNDARY_OPERATOR",
+    "DID_NOT_RAISE_PREDICATE",
+    "EXCEPTION_SAFE_GUARD",
+    "DEMAND_FSTRING_INDUCTION",
+    "DEMAND_EXPRESSION_ALIGNMENT",
+)
+
+
+# =========================================================================== #
+# INSPECTABLE, REFUTABLE OPERATOR MEMORY (ZERO PATHS, ZERO LITERALS)
+# =========================================================================== #
+
+class SWERepairMemory:
+    """Tracks empirical `p_useful / (1 + mean_cost_s)` per semantic operator family."""
+
+    def __init__(self) -> None:
+        self.stats: dict[str, dict[str, Any]] = {
+            fam: {"trials": 0, "verified": 0, "regressions": 0, "cost_s": 0.1}
+            for fam in OPERATOR_FAMILIES
+        }
+        self.schemas: list[dict[str, Any]] = []
+
+    def priority_score(self, family: str) -> float:
+        row = self.stats.get(family) or {"trials": 0, "verified": 0, "regressions": 0, "cost_s": 0.1}
+        trials = max(0, int(row.get("trials", 0)))
+        verified = max(0, int(row.get("verified", 0)))
+        regressions = max(0, int(row.get("regressions", 0)))
+        mean_cost = float(row.get("cost_s", 0.1)) / max(1, trials)
+        p_useful = (verified + 0.5) / (trials + 1.0)
+        penalty = 1.0 + 0.25 * regressions
+        return p_useful / ((1.0 + mean_cost) * penalty)
+
+    def record_outcome(
+        self,
+        family: str,
+        *,
+        verified: bool,
+        caused_regression: bool,
+        elapsed_s: float,
+        abstract_shape: str | None = None,
+    ) -> None:
+        row = self.stats.setdefault(
+            family, {"trials": 0, "verified": 0, "regressions": 0, "cost_s": 0.0}
+        )
+        row["trials"] = int(row["trials"]) + 1
+        if verified:
+            row["verified"] = int(row["verified"]) + 1
+        if caused_regression:
+            row["regressions"] = int(row["regressions"]) + 1
+        row["cost_s"] = round(float(row["cost_s"]) + max(0.001, elapsed_s), 4)
+        if verified and abstract_shape:
+            if not any(s["shape"] == abstract_shape for s in self.schemas):
+                self.schemas.append({
+                    "family": family,
+                    "shape": abstract_shape,
+                    "verified_count": 1,
+                    "refutations": 0,
+                })
+            else:
+                for s in self.schemas:
+                    if s["shape"] == abstract_shape:
+                        s["verified_count"] = int(s["verified_count"]) + 1
+
+    def save(self, path: pathlib.Path | str) -> None:
+        p = pathlib.Path(path)
+        p.parent.mkdir(parents=True, exist_ok=True)
+        payload = {"schema": SCHEMA + "_MEMORY", "stats": self.stats, "schemas": self.schemas}
+        tmp = p.with_suffix(p.suffix + ".tmp")
+        tmp.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        tmp.replace(p)
+
+    @classmethod
+    def load(cls, path: pathlib.Path | str) -> "SWERepairMemory":
+        mem = cls()
+        p = pathlib.Path(path)
+        if not p.is_file():
+            return mem
+        raw = json.loads(p.read_text(encoding="utf-8"))
+        for k, v in (raw.get("stats") or {}).items():
+            mem.stats[k] = dict(v)
+        mem.schemas = list(raw.get("schemas") or [])
+        return mem
+
+
+# =========================================================================== #
+# SUBPROCESS ORACLE & TRACE HARNESS (ZERO BYTECODE CACHE MASKING)
+# =========================================================================== #
+
+_VERDICT_AFTER = re.compile(
+    r"^(\S.*?::.+?)\s+(PASSED|FAILED|ERROR|SKIPPED|XFAIL|XPASS)(?:\s+\[\s*\d+%\])?\s*$"
+)
+
+
+def _clean_env(worktree: pathlib.Path) -> dict[str, str]:
+    """Purge `__pycache__` and put `worktree/src` + `worktree` strictly ahead of site-packages."""
+    for cache in worktree.rglob("__pycache__"):
+        shutil.rmtree(cache, ignore_errors=True)
+    py_paths = []
+    if (worktree / "src").is_dir():
+        py_paths.append(str(worktree / "src"))
+    py_paths.append(str(worktree))
+    existing = os.environ.get("PYTHONPATH", "")
+    if existing:
+        py_paths.append(existing)
+    return {
+        **os.environ,
+        "PYTHONPATH": os.pathsep.join(py_paths),
+        "PYTHONDONTWRITEBYTECODE": "1",
+        "PYTHONPYCACHEPREFIX": str(worktree / ".brain_nocache"),
+    }
+
+
+def run_pytest_verdicts(
+    worktree: pathlib.Path,
+    target: str | Sequence[str],
+    *,
+    python_exe: str | None = None,
+    timeout_s: float = 45.0,
+) -> dict[str, Any]:
+    """Run pytest (or unittest fallback if pytest absent) and return exact per-test verdicts."""
+    py = python_exe or sys.executable
+    targets = [target] if isinstance(target, str) else list(target)
+    cmd = [
+        py,
+        "-m",
+        "pytest",
+        *targets,
+        "-v",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "-o",
+        "addopts=",
+    ]
+    env = _clean_env(worktree)
+    started = time.perf_counter()
+    try:
+        done = subprocess.run(
+            cmd,
+            cwd=str(worktree),
+            capture_output=True,
+            text=True,
+            errors="replace",
+            stdin=subprocess.DEVNULL,
+            timeout=timeout_s,
+            env=env,
+        )
+    except subprocess.TimeoutExpired:
+        return {
+            "ok": False,
+            "timeout": True,
+            "verdicts": {},
+            "failing": [],
+            "passing": [],
+            "output": "TIMEOUT",
+            "seconds": round(time.perf_counter() - started, 4),
+        }
+
+    out = (done.stdout or "") + "\n" + (done.stderr or "")
+    # Fallback to stdlib unittest if `py` has no `pytest` installed (keeps stdlib unit tests runnable!)
+    if done.returncode != 0 and "No module named pytest" in out:
+        return _run_unittest_fallback(worktree, targets, py, env, timeout_s)
+
+    verdicts: dict[str, str] = {}
+    for line in out.splitlines():
+        m = _VERDICT_AFTER.match(line.strip())
+        if m:
+            verdicts[m.group(1)] = m.group(2)
+
+    failing = [k for k, v in verdicts.items() if v in ("FAILED", "ERROR")]
+    passing = [k for k, v in verdicts.items() if v == "PASSED"]
+    return {
+        "ok": done.returncode == 0 and bool(passing) and not failing,
+        "returncode": done.returncode,
+        "verdicts": verdicts,
+        "failing": failing,
+        "passing": passing,
+        "output": out[-4000:],
+        "seconds": round(time.perf_counter() - started, 4),
+    }
+
+
+def verify_runner_canary(
+    worktree: pathlib.Path,
+    *,
+    python_exe: str | None = None,
+    timeout_s: float = 15.0,
+) -> bool:
+    """Victim/decoy check on the test runner itself (`earn_a_judge` invariant for SWE).
+
+    In self-hosting packages (`pluggy`, `pytest`, `unittest` wrappers), a patch could
+    suppress exception propagation inside the test runner so `assert False` exits 0!
+    A patched worktree is admissible ONLY if a deliberate false canary assertion still FAILS.
+    """
+    with tempfile.TemporaryDirectory(prefix="brain-canary-") as tmp:
+        canary_file = pathlib.Path(tmp) / "test_runner_canary_decoy.py"
+        canary_file.write_text(
+            "import unittest\n"
+            "def test_plain_function_false_assertion_must_fail():\n"
+            "    assert 1 == 2\n\n"
+            "class RunnerCanaryTests(unittest.TestCase):\n"
+            "    def test_false_assertion_must_fail(self):\n"
+            "        self.assertEqual(1, 2)\n",
+            encoding="utf-8",
+        )
+        res = run_pytest_verdicts(
+            worktree, str(canary_file), python_exe=python_exe, timeout_s=timeout_s
+        )
+        used_pytest = any("::" in k for k in res["verdicts"])
+        min_expected = 2 if used_pytest else 1
+        return len(res["failing"]) >= min_expected and not res["ok"]
+
+
+def _run_unittest_fallback(
+    worktree: pathlib.Path,
+    targets: Sequence[str],
+    py: str,
+    env: Mapping[str, str],
+    timeout_s: float,
+) -> dict[str, Any]:
+    """Stdlib unittest runner when `pytest` is absent in minimal sandbox interpreters."""
+    runner_code = (
+        "import json, sys, unittest, pathlib\n"
+        "sys.path[:0] = [p for p in ['src', '.'] if pathlib.Path(p).exists()]\n"
+        "loader = unittest.TestLoader()\n"
+        "suite = unittest.TestSuite()\n"
+        "for t in sys.argv[1:]:\n"
+        "    p = pathlib.Path(t.split('::')[0])\n"
+        "    mod_suite = loader.discover(str(p.parent), pattern=p.name)\n"
+        "    suite.addTests(mod_suite)\n"
+        "class Rec(unittest.TextTestResult):\n"
+        "    def __init__(self, *a, **kw):\n"
+        "        super().__init__(*a, **kw); self.v = {}\n"
+        "    def addSuccess(self, test): super().addSuccess(test); self.v[str(test)] = 'PASSED'\n"
+        "    def addFailure(self, test, err): super().addFailure(test, err); self.v[str(test)] = 'FAILED'\n"
+        "    def addError(self, test, err): super().addError(test, err); self.v[str(test)] = 'ERROR'\n"
+        "res = unittest.TextTestRunner(resultclass=Rec, verbosity=0).run(suite)\n"
+        "print('BRAIN_UNITTEST_JSON:' + json.dumps({'verdicts': res.v, 'errors': [[str(t), tb] for t, tb in res.failures + res.errors]}))\n"
+    )
+    started = time.perf_counter()
+    done = subprocess.run(
+        [py, "-c", runner_code, *targets],
+        cwd=str(worktree),
+        capture_output=True,
+        text=True,
+        errors="replace",
+        stdin=subprocess.DEVNULL,
+        timeout=timeout_s,
+        env=dict(env),
+    )
+    out = (done.stdout or "") + "\n" + (done.stderr or "")
+    verdicts: dict[str, str] = {}
+    for line in out.splitlines():
+        if line.startswith("BRAIN_UNITTEST_JSON:"):
+            payload = json.loads(line[len("BRAIN_UNITTEST_JSON:"):])
+            verdicts = payload.get("verdicts") or {}
+    failing = [k for k, v in verdicts.items() if v in ("FAILED", "ERROR")]
+    passing = [k for k, v in verdicts.items() if v == "PASSED"]
+    return {
+        "ok": bool(verdicts) and not failing,
+        "returncode": 0 if (verdicts and not failing) else 1,
+        "verdicts": verdicts,
+        "failing": failing,
+        "passing": passing,
+        "output": out[-4000:],
+        "seconds": round(time.perf_counter() - started, 4),
+    }
+
+
+# --------------------------------------------------------------------------- #
+# In-process Tracer Script (spawned once inside `worktree` to collect runtime
+# coverage, frame values, iterators, exceptions, and assertion comparisons)
+# --------------------------------------------------------------------------- #
+
+_TRACER_DRIVER = r'''
+import ast
+import json
+import os
+import pathlib
+import re
+import sys
+import types
+
+cfg = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
+wt = pathlib.Path(cfg["worktree"]).resolve()
+for p in ([str(wt / "src")] if (wt / "src").is_dir() else []) + [str(wt)]:
+    if p in sys.path:
+        sys.path.remove(p)
+    sys.path.insert(0, p)
+
+def _is_proj_source(filename: str) -> str | None:
+    try:
+        rp = pathlib.Path(filename).resolve()
+        rel = rp.relative_to(wt).as_posix()
+    except Exception:
+        return None
+    parts = rel.split("/")
+    if any(x in (".git", ".venv", "venv", "tests", "test", "doc", "docs") for x in parts[:-1]):
+        return None
+    name = parts[-1]
+    if not name.endswith(".py") or name.startswith("test_") or name.endswith("_test.py") or name == "conftest.py":
+        return None
+    return rel
+
+def _safe_val(v):
+    tname = type(v).__name__
+    is_iter = hasattr(v, "__iter__") and hasattr(v, "__next__") and not isinstance(v, (str, bytes, dict, list, tuple, set, frozenset))
+    try:
+        b = bool(v)
+    except Exception:
+        b = True
+    is_none = (v is None)
+    falsy_non_none = (not b) and (not is_none) and (type(v) is not bool)
+    scalar = None
+    if isinstance(v, (bool, int, float)) and not isinstance(v, bool):
+        scalar = v
+    elif isinstance(v, bool):
+        scalar = v
+    elif isinstance(v, str) and len(v) <= 200:
+        scalar = v
+    elif isinstance(v, bytes) and len(v) <= 120:
+        scalar = {"__bytes__": list(v)}
+    elif isinstance(v, tuple) and len(v) <= 8 and all(isinstance(x, (str, int, float, bool, type(None))) for x in v):
+        scalar = {"__tuple__": [x for x in v]}
+    attrs = {}
+    if not isinstance(v, (int, float, bool, str, bytes, list, tuple, dict, set, frozenset, type(None), types.ModuleType, types.FunctionType, type)):
+        try:
+            for k in list(vars(v).keys())[:12]:
+                av = getattr(v, k)
+                if isinstance(av, (str, int, float, bool, type(None))) and (not isinstance(av, str) or len(av) <= 100):
+                    attrs[k] = av
+                else:
+                    attrs[k] = {"__repr__": repr(av)[:80], "__type__": type(av).__name__}
+        except Exception:
+            pass
+    try:
+        rep = repr(v)[:140]
+    except Exception:
+        rep = f"<{tname}>"
+    return {
+        "type": tname,
+        "bool": b,
+        "is_none": is_none,
+        "falsy_non_none": falsy_non_none,
+        "is_iterator": is_iter,
+        "scalar": scalar,
+        "attrs": attrs,
+        "repr": rep,
+    }
+
+def _snap_locals(f_locals):
+    out = {}
+    for k, v in list(f_locals.items())[:24]:
+        if not isinstance(k, str) or k.startswith("__"):
+            continue
+        if isinstance(v, (types.ModuleType, types.FunctionType, types.BuiltinFunctionType, type)):
+            continue
+        out[k] = _safe_val(v)
+    return out
+
+records = {}
+current_node = [None]
+
+def _new_rec():
+    return {
+        "outcome": "unknown",
+        "lines": [],
+        "frames_by_site": {},
+        "exceptions": [],
+        "iterators_seen": [],
+        "falsy_non_none_sites": [],
+        "asserts": [],
+        "did_not_raise": None,
+        "crash": None,
+    }
+
+def _tracer(frame, event, arg):
+    node = current_node[0]
+    if node is None:
+        return None
+    rel = _is_proj_source(frame.f_code.co_filename)
+    if rel is None:
+        return None
+    rec = records[node]
+    if event == "call":
+        return _tracer
+    lineno = frame.f_lineno
+    site_key = f"{rel}:{lineno}"
+    if event == "line":
+        if len(rec["lines"]) < 4000:
+            rec["lines"].append([rel, lineno, frame.f_code.co_name])
+        bucket = rec["frames_by_site"].setdefault(site_key, [])
+        if len(bucket) < 4:
+            snap = _snap_locals(frame.f_locals)
+            bucket.append(snap)
+            for vname, vinfo in snap.items():
+                if vinfo["falsy_non_none"] and len(rec["falsy_non_none_sites"]) < 40:
+                    rec["falsy_non_none_sites"].append({"site": site_key, "var": vname, "repr": vinfo["repr"], "type": vinfo["type"]})
+                if vinfo["is_iterator"] and len(rec["iterators_seen"]) < 40:
+                    rec["iterators_seen"].append({"site": site_key, "var": vname, "type": vinfo["type"]})
+    elif event == "return":
+        if arg is not None and hasattr(arg, "__iter__") and hasattr(arg, "__next__") and not isinstance(arg, (str, bytes, dict, list, tuple, set, frozenset)):
+            if len(rec["iterators_seen"]) < 40:
+                rec["iterators_seen"].append({"site": site_key, "var": "<return>", "type": type(arg).__name__})
+    elif event == "exception":
+        exc_type, exc_val, _ = arg
+        if len(rec["exceptions"]) < 20:
+            rec["exceptions"].append({
+                "site": site_key,
+                "func": frame.f_code.co_name,
+                "exc_type": getattr(exc_type, "__name__", str(exc_type)),
+                "exc_msg": str(exc_val)[:200],
+                "locals": _snap_locals(frame.f_locals),
+            })
+    return _tracer
+
+try:
+    import pytest
+    has_pytest = True
+except ImportError:
+    has_pytest = False
+
+if has_pytest:
+    class _Plugin:
+        def pytest_runtest_setup(self, item):
+            records[item.nodeid] = _new_rec()
+        def pytest_runtest_call(self, item):
+            current_node[0] = item.nodeid
+            sys.settrace(_tracer)
+        def pytest_runtest_teardown(self, item):
+            sys.settrace(None)
+            current_node[0] = None
+        def pytest_assertrepr_compare(self, config, op, left, right):
+            nid = current_node[0]
+            if nid and nid in records and len(records[nid]["asserts"]) < 8:
+                records[nid]["asserts"].append({
+                    "op": str(op),
+                    "left": _safe_val(left),
+                    "right": _safe_val(right),
+                })
+            return None
+        def pytest_runtest_makereport(self, item, call):
+            sys.settrace(None)
+            if call.when != "call":
+                return
+            rec = records.setdefault(item.nodeid, _new_rec())
+            if call.excinfo is None:
+                rec["outcome"] = "passed"
+                return
+            rec["outcome"] = "failed"
+            msg = str(call.excinfo.value)
+            m = re.search(r"DID NOT RAISE <class '([^']+)'>", msg)
+            if m:
+                rec["did_not_raise"] = m.group(1).split(".")[-1]
+            else:
+                # Walk traceback inside project source
+                proj_tb = []
+                for entry in call.excinfo.traceback:
+                    rel = _is_proj_source(str(entry.path))
+                    if rel:
+                        proj_tb.append({"rel": rel, "lineno": entry.lineno})
+                rec["crash"] = {
+                    "exc_type": call.excinfo.typename,
+                    "exc_msg": msg[:300],
+                    "proj_traceback": proj_tb[-6:],
+                }
+
+    old_argv = sys.argv[:]
+    old_cwd = os.getcwd()
+    try:
+        os.chdir(wt)
+        sys.argv = ["pytest"]
+        pytest.main(
+            [*cfg["nodes"], "-q", "--no-header", "--tb=short", "-p", "no:cacheprovider",
+             "-o", "addopts="],
+            plugins=[_Plugin()],
+        )
+    finally:
+        sys.settrace(None)
+        os.chdir(old_cwd)
+        sys.argv = old_argv
+else:
+    import unittest
+    loader = unittest.TestLoader()
+    suite = unittest.TestSuite()
+    for t in cfg["targets"]:
+        p = pathlib.Path(t.split("::")[0])
+        suite.addTests(loader.discover(str((wt / p).parent), pattern=p.name))
+    for group in suite:
+        for sub in (group if hasattr(group, "__iter__") else [group]):
+            for case in (sub if hasattr(sub, "__iter__") else [sub]):
+                nid = str(case)
+                records[nid] = _new_rec()
+                current_node[0] = nid
+                old_cwd = os.getcwd()
+                os.chdir(wt)
+                res = unittest.TestResult()
+                sys.settrace(_tracer)
+                try:
+                    case.run(res)
+                finally:
+                    sys.settrace(None)
+                    os.chdir(old_cwd)
+                    current_node[0] = None
+                if res.wasSuccessful():
+                    records[nid]["outcome"] = "passed"
+                else:
+                    records[nid]["outcome"] = "failed"
+                    for _, tb_str in res.failures + res.errors:
+                        m = re.search(r"([A-Za-z_]\w*(?:Error|Exception))\s*not triggered", tb_str)
+                        if m:
+                            records[nid]["did_not_raise"] = m.group(1)
+                        records[nid]["crash"] = {"exc_type": "Failure", "exc_msg": tb_str[-300:], "proj_traceback": []}
+
+pathlib.Path(cfg["out"]).write_text(json.dumps({"records": records}), encoding="utf-8")
+'''
+
+
+def collect_causal_trace(
+    worktree: pathlib.Path,
+    failing_nodes: Sequence[str],
+    passing_nodes: Sequence[str],
+    test_target: str,
+    *,
+    python_exe: str | None = None,
+    timeout_s: float = 45.0,
+) -> dict[str, Any]:
+    """Run the 1-pass dynamic tracer on failing tests + up to 12 passing contrast tests."""
+    py = python_exe or sys.executable
+    selected_nodes = list(failing_nodes[:4]) + list(passing_nodes[:12])
+    # Only pass `::` node IDs directly to pytest; unittest fallback uses `test_target`
+    pytest_nodes = [n for n in selected_nodes if "::" in n] or [test_target]
+    with tempfile.TemporaryDirectory(prefix="brain-trace-") as tmp:
+        tdir = pathlib.Path(tmp)
+        driver_py = tdir / "driver.py"
+        cfg_json = tdir / "cfg.json"
+        out_json = tdir / "out.json"
+        driver_py.write_text(_TRACER_DRIVER, encoding="utf-8")
+        cfg_json.write_text(
+            json.dumps({
+                "worktree": str(worktree),
+                "nodes": pytest_nodes,
+                "targets": [test_target],
+                "out": str(out_json),
+            }),
+            encoding="utf-8",
+        )
+        env = _clean_env(worktree)
+        try:
+            subprocess.run(
+                [py, str(driver_py), str(cfg_json)],
+                cwd=str(worktree),
+                capture_output=True,
+                text=True,
+                stdin=subprocess.DEVNULL,
+                timeout=timeout_s,
+                env=env,
+            )
+        except subprocess.TimeoutExpired:
+            return {"records": {}}
+        if not out_json.is_file():
+            return {"records": {}}
+        try:
+            return json.loads(out_json.read_text(encoding="utf-8"))
+        except Exception:
+            return {"records": {}}
+
+
+# =========================================================================== #
+# STAGE 1: DYNAMIC FAULT LOCALIZATION (OCHIAI + CALL-TAIL + CRASH PROXIMITY)
+# =========================================================================== #
+
+def localize_suspicious_sites(
+    trace_data: Mapping[str, Any],
+) -> list[dict[str, Any]]:
+    """Rank `(rel_path, lineno)` sites purely from execution traces (ZERO commit/diff knowledge)."""
+    recs = trace_data.get("records") or {}
+    fail_recs = [r for r in recs.values() if r.get("outcome") == "failed"]
+    pass_recs = [r for r in recs.values() if r.get("outcome") == "passed"]
+    total_f = max(1, len(fail_recs))
+
+    ef: dict[tuple[str, int], int] = {}
+    ep: dict[tuple[str, int], int] = {}
+    tail_bonus: dict[tuple[str, int], float] = {}
+    crash_bonus: dict[tuple[str, int], float] = {}
+
+    for r in fail_recs:
+        seen_in_test: set[tuple[str, int]] = set()
+        lines = r.get("lines") or []
+        for idx, (rel, ln, _fn) in enumerate(lines):
+            seen_in_test.add((rel, int(ln)))
+        for key in seen_in_test:
+            ef[key] = ef.get(key, 0) + 1
+        # Recent lines right before failure/return carry higher causal weight
+        tail = lines[-25:]
+        for dist_from_end, (rel, ln, _fn) in enumerate(reversed(tail)):
+            key = (rel, int(ln))
+            tail_bonus[key] = max(tail_bonus.get(key, 0.0), 0.35 * (0.92 ** dist_from_end))
+        crash = r.get("crash") or {}
+        for depth, entry in enumerate(reversed(crash.get("proj_traceback") or [])):
+            ckey = (entry["rel"], int(entry["lineno"]))
+            crash_bonus[ckey] = max(crash_bonus.get(ckey, 0.0), 1.5 / (1 + depth))
+            # Also boost the line immediately above a `raise` (typically its `if` guard!)
+            for delta in (-3, -2, -1, 1):
+                nkey = (entry["rel"], int(entry["lineno"]) + delta)
+                crash_bonus[nkey] = max(crash_bonus.get(nkey, 0.0), 0.9 / (1 + depth))
+        for exc in r.get("exceptions") or []:
+            rel_s, ln_s = exc["site"].split(":", 1)
+            ekey = (rel_s, int(ln_s))
+            crash_bonus[ekey] = max(crash_bonus.get(ekey, 0.0), 0.8)
+            for delta in (-2, -1):
+                nkey = (rel_s, int(ln_s) + delta)
+                crash_bonus[nkey] = max(crash_bonus.get(nkey, 0.0), 0.6)
+
+    for r in pass_recs:
+        seen_p: set[tuple[str, int]] = set()
+        for rel, ln, _fn in r.get("lines") or []:
+            seen_p.add((rel, int(ln)))
+        for key in seen_p:
+            ep[key] = ep.get(key, 0) + 1
+
+    ranked: list[dict[str, Any]] = []
+    all_keys = set(ef) | set(crash_bonus)
+    for rel, ln in all_keys:
+        if ln <= 0:
+            continue
+        c_ef = ef.get((rel, ln), 0)
+        c_ep = ep.get((rel, ln), 0)
+        denom = math.sqrt(total_f * max(1, c_ef + c_ep))
+        ochiai = (c_ef / denom) if denom > 0 else 0.0
+        score = ochiai + tail_bonus.get((rel, ln), 0.0) + crash_bonus.get((rel, ln), 0.0)
+        ranked.append({
+            "rel": rel,
+            "lineno": ln,
+            "ochiai": round(ochiai, 4),
+            "score": round(score, 4),
+            "failed_hits": c_ef,
+            "passed_hits": c_ep,
+        })
+    ranked.sort(key=lambda row: (-row["score"], -row["ochiai"], row["passed_hits"], row["lineno"]))
+    return ranked
+
+
+# =========================================================================== #
+# AST SOURCE UTILITIES & SAFE BYTE-OFFSET SLICING
+# =========================================================================== #
+
+def _char_col(line_text: str, byte_offset: int) -> int:
+    raw = line_text.encode("utf-8")
+    return len(raw[:byte_offset].decode("utf-8", errors="ignore"))
+
+
+def replace_ast_node_source(source: str, node: ast.AST, replacement_expr: str) -> str | None:
+    """Replace a single-line or multi-line AST node span in `source`, verifying valid syntax."""
+    start_ln = getattr(node, "lineno", None)
+    end_ln = getattr(node, "end_lineno", None)
+    start_col_b = getattr(node, "col_offset", None)
+    end_col_b = getattr(node, "end_col_offset", None)
+    if None in (start_ln, end_ln, start_col_b, end_col_b):
+        return None
+    lines = source.splitlines(keepends=True)
+    if start_ln < 1 or end_ln > len(lines):
+        return None
+    s_col = _char_col(lines[start_ln - 1], start_col_b)
+    e_col = _char_col(lines[end_ln - 1], end_col_b)
+    prefix = lines[start_ln - 1][:s_col]
+    suffix = lines[end_ln - 1][e_col:]
+    new_lines = lines[: start_ln - 1] + [prefix + replacement_expr + suffix] + lines[end_ln:]
+    patched = "".join(new_lines)
+    try:
+        ast.parse(patched)
+    except SyntaxError:
+        return None
+    return patched
+
+
+def _unparse(node: ast.AST) -> str:
+    return ast.unparse(node)
+
+
+def _reconstruct_value(vinfo: Mapping[str, Any]) -> tuple[bool, Any]:
+    """Rehydrate a scalar/tuple/bytes value from the tracer's safe JSON snapshot."""
+    if vinfo.get("is_none"):
+        return True, None
+    sc = vinfo.get("scalar")
+    if sc is not None:
+        if isinstance(sc, dict):
+            if "__bytes__" in sc:
+                return True, bytes(sc["__bytes__"])
+            if "__tuple__" in sc:
+                return True, tuple(sc["__tuple__"])
+        return True, sc
+    return False, None
+
+
+def _module_constants_and_attrs(tree: ast.Module) -> dict[str, list[str]]:
+    """Collect attribute references (`mod.CONST`, `self._attr`) already written in the file."""
+    by_base: dict[str, list[str]] = {}
+    all_attrs: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name):
+            base = node.value.id
+            by_base.setdefault(base, [])
+            if node.attr not in by_base[base]:
+                by_base[base].append(node.attr)
+            all_attrs.add(node.attr)
+    by_base["__all_attrs__"] = sorted(all_attrs)
+    return by_base
+
+
+def _enclosing_function(tree: ast.Module, lineno: int) -> ast.FunctionDef | ast.AsyncFunctionDef | None:
+    best = None
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            end_ln = getattr(node, "end_lineno", node.lineno)
+            if node.lineno <= lineno <= end_ln:
+                if best is None or node.lineno >= best.lineno:
+                    best = node
+    return best
+
+
+def _boolean_atoms_in_guard(test_expr: ast.expr) -> list[ast.expr]:
+    """Sub-expressions whose truthiness is directly tested (`if a and not b:` -> `[a and not b, a, b]`)."""
+    out: list[ast.expr] = [test_expr]
+    if isinstance(test_expr, ast.BoolOp):
+        for v in test_expr.values:
+            out.extend(_boolean_atoms_in_guard(v))
+    elif isinstance(test_expr, ast.UnaryOp) and isinstance(test_expr.op, ast.Not):
+        out.extend(_boolean_atoms_in_guard(test_expr.operand))
+    return out
+
+
+def _is_degenerate_guard_extension(test_expr: ast.expr, candidate_pred: str) -> bool:
+    """Reject redundant (`P and P`) or contradictory (`x is not None and x is None`) guard atoms."""
+    try:
+        cand_ast = ast.parse(candidate_pred, mode="eval").body
+    except SyntaxError:
+        return True
+    cand_norm = _unparse(cand_ast)
+    neg_pairs = {
+        ast.Is: ast.IsNot,
+        ast.IsNot: ast.Is,
+        ast.Eq: ast.NotEq,
+        ast.NotEq: ast.Eq,
+        ast.In: ast.NotIn,
+        ast.NotIn: ast.In,
+        ast.Lt: ast.GtE,
+        ast.GtE: ast.Lt,
+        ast.Gt: ast.LtE,
+        ast.LtE: ast.Gt,
+    }
+    forbidden: set[str] = set()
+    for atom in _boolean_atoms_in_guard(test_expr):
+        atom_s = _unparse(atom)
+        forbidden.add(atom_s)
+        forbidden.add(f"not {atom_s}")
+        forbidden.add(f"not ({atom_s})")
+        if isinstance(atom, ast.UnaryOp) and isinstance(atom.op, ast.Not):
+            forbidden.add(_unparse(atom.operand))
+        if isinstance(atom, ast.Compare) and len(atom.ops) == 1 and len(atom.comparators) == 1:
+            op_t = type(atom.ops[0])
+            if op_t in neg_pairs:
+                neg_cmp = ast.Compare(
+                    left=atom.left,
+                    ops=[neg_pairs[op_t]()],
+                    comparators=atom.comparators,
+                )
+                forbidden.add(_unparse(neg_cmp))
+    return cand_norm in forbidden
+
+
+# =========================================================================== #
+# STAGE 2: FIVE CAUSAL SEMANTIC REPAIR GENERATORS
+# =========================================================================== #
+
+@dataclass
+class PatchCandidate:
+    family: str
+    rel_path: str
+    lineno: int
+    description: str
+    new_source: str
+    abstract_shape: str
+    heuristic_bonus: float = 0.0
+
+
+def synthesize_candidates(
+    worktree: pathlib.Path,
+    trace_data: Mapping[str, Any],
+    ranked_sites: Sequence[Mapping[str, Any]],
+    memory: SWERepairMemory,
+    *,
+    max_sites: int = 24,
+    max_candidates: int = 48,
+) -> list[PatchCandidate]:
+    """Synthesize minimal, frame-consistent candidate patches across all 5 causal modes."""
+    recs = trace_data.get("records") or {}
+    fail_recs = [r for r in recs.values() if r.get("outcome") == "failed"]
+    pass_recs = [r for r in recs.values() if r.get("outcome") == "passed"]
+    if not fail_recs:
+        return []
+
+    source_cache: dict[str, tuple[str, ast.Module, dict[str, list[str]]]] = {}
+
+    def _get_file(rel: str) -> tuple[str, ast.Module, dict[str, list[str]]] | None:
+        if rel in source_cache:
+            return source_cache[rel]
+        p = worktree / rel
+        if not p.is_file():
+            return None
+        try:
+            txt = p.read_text(encoding="utf-8")
+            mod = ast.parse(txt)
+        except (OSError, SyntaxError):
+            return None
+        entry = (txt, mod, _module_constants_and_attrs(mod))
+        source_cache[rel] = entry
+        return entry
+
+    # Index runtime snapshots per site for failing vs passing tests
+    fail_snaps: dict[str, list[dict[str, Any]]] = {}
+    pass_snaps: dict[str, list[dict[str, Any]]] = {}
+    falsy_vars_by_site: dict[str, set[str]] = {}
+    iterator_sites: set[str] = set()
+    iterator_vars_by_func: dict[tuple[str, str], set[str]] = {}
+
+    for r in fail_recs:
+        for skey, snaps in (r.get("frames_by_site") or {}).items():
+            fail_snaps.setdefault(skey, []).extend(snaps)
+        for item in r.get("falsy_non_none_sites") or []:
+            falsy_vars_by_site.setdefault(item["site"], set()).add(item["var"])
+        for item in r.get("iterators_seen") or []:
+            iterator_sites.add(item["site"])
+            rel_i, ln_i = item["site"].split(":", 1)
+            loaded = _get_file(rel_i)
+            if loaded:
+                fn_node = _enclosing_function(loaded[1], int(ln_i))
+                if fn_node:
+                    iterator_vars_by_func.setdefault((rel_i, fn_node.name), set()).add(item["var"])
+
+    for r in pass_recs:
+        for skey, snaps in (r.get("frames_by_site") or {}).items():
+            pass_snaps.setdefault(skey, []).extend(snaps)
+
+    # Collect assertion demands (including exception message strings!) from failing tests
+    string_demands: list[str] = []
+    scalar_demands: list[Any] = []
+    did_not_raise_excs: list[str] = []
+    unexpected_crashes: list[dict[str, Any]] = []
+
+    for r in fail_recs:
+        if r.get("did_not_raise"):
+            did_not_raise_excs.append(str(r["did_not_raise"]))
+        if r.get("crash"):
+            unexpected_crashes.append(r["crash"])
+        for a in r.get("asserts") or []:
+            for side in ("left", "right"):
+                ok_v, val = _reconstruct_value(a[side])
+                if ok_v:
+                    if isinstance(val, str) and 1 <= len(val) <= 200 and not val.startswith("assert "):
+                        if val not in string_demands:
+                            string_demands.append(val)
+                    elif val not in scalar_demands:
+                        scalar_demands.append(val)
+
+    candidates: list[PatchCandidate] = []
+    seen_patches: set[tuple[str, str]] = set()
+
+    def _emit(cand: PatchCandidate) -> None:
+        key = (cand.rel_path, cand.new_source)
+        if key not in seen_patches:
+            seen_patches.add(key)
+            candidates.append(cand)
+
+    # -----------------------------------------------------------------------
+    # Scan top suspicious sites & their enclosing functions
+    # -----------------------------------------------------------------------
+    visited_funcs: set[tuple[str, int]] = set()
+
+    for rank_idx, site_info in enumerate(ranked_sites[:max_sites]):
+        rel = site_info["rel"]
+        lineno = int(site_info["lineno"])
+        skey = f"{rel}:{lineno}"
+        loaded = _get_file(rel)
+        if loaded is None:
+            continue
+        src, tree, file_attrs = loaded
+        site_bonus = float(site_info["score"])
+        f_frames = fail_snaps.get(skey) or []
+        p_frames = pass_snaps.get(skey) or []
+
+        # Find AST statements / expressions on or enclosing `lineno`
+        fn_node = _enclosing_function(tree, lineno)
+        search_root: ast.AST = fn_node if fn_node is not None else tree
+
+        # --- FAMILY 1: ITERATOR MATERIALIZATION (`x = fn(...)` -> `tuple(fn(...))`) ---
+        if fn_node and (rel, fn_node.name) not in visited_funcs:
+            visited_funcs.add((rel, fn_node.name))
+            iter_vars = iterator_vars_by_func.get((rel, fn_node.name)) or set()
+            if iter_vars:
+                for stmt in ast.walk(fn_node):
+                    if isinstance(stmt, ast.Assign) and len(stmt.targets) == 1 and isinstance(stmt.targets[0], ast.Name):
+                        vname = stmt.targets[0].id
+                        if vname in iter_vars and isinstance(stmt.value, ast.Call):
+                            if not (isinstance(stmt.value.func, ast.Name) and stmt.value.func.id in ("tuple", "list")):
+                                inner = _unparse(stmt.value)
+                                for wrapper in ("tuple", "list"):
+                                    patched = replace_ast_node_source(src, stmt.value, f"{wrapper}({inner})")
+                                    if patched:
+                                        _emit(PatchCandidate(
+                                            family="ITERATOR_MATERIALIZATION",
+                                            rel_path=rel,
+                                            lineno=stmt.lineno,
+                                            description=f"materialize single-pass iterator `{vname}` with `{wrapper}(...)`",
+                                            new_source=patched,
+                                            abstract_shape=f"$VAR = {wrapper}($CALL)",
+                                            heuristic_bonus=site_bonus + 2.5,
+                                        ))
+
+        for node in ast.walk(search_root):
+            if getattr(node, "lineno", None) != lineno:
+                continue
+
+            # --- FAMILY 2: GUARD PROJECTION, MEMBERSHIP, BOUNDARY, CONJUNCTIVE/DISJUNCTIVE ---
+            if isinstance(node, (ast.If, ast.While)):
+                # 2a. Falsy non-None (`if x` -> `if x is not None` or `if a.attr` -> `if a.attr is not None`)
+                for sub in _boolean_atoms_in_guard(node.test):
+                    if isinstance(sub, (ast.Name, ast.Attribute)):
+                        sub_txt = _unparse(sub)
+                        observed_falsy = _expr_was_falsy_non_none(sub, f_frames)
+                        if observed_falsy or isinstance(sub, ast.Attribute):
+                            patched = replace_ast_node_source(src, sub, f"{sub_txt} is not None")
+                            if patched:
+                                _emit(PatchCandidate(
+                                    family="FALSY_NON_NONE_GUARD",
+                                    rel_path=rel,
+                                    lineno=lineno,
+                                    description=f"project `{sub_txt}` to `{sub_txt} is not None`",
+                                    new_source=patched,
+                                    abstract_shape="if $EXPR is not None:",
+                                    heuristic_bonus=site_bonus + (3.0 if observed_falsy else 0.4),
+                                ))
+
+                # 2b. Membership Set Extension (`if x != 'a':` -> `if x not in ('a', 'b'):` using live failing value!)
+                for sub in ast.walk(node.test):
+                    if isinstance(sub, ast.Compare) and len(sub.ops) == 1 and len(sub.comparators) == 1:
+                        op = sub.ops[0]
+                        left_node = sub.left
+                        comp_node = sub.comparators[0]
+                        if isinstance(left_node, ast.Name):
+                            var_id = left_node.id
+                            fail_vals = _distinct_scalars_in_frames(var_id, f_frames)
+                            pass_vals = _distinct_scalars_in_frames(var_id, p_frames)
+                            novel_vals = [v for v in fail_vals if v not in pass_vals and isinstance(v, (str, int))]
+                            if novel_vals:
+                                new_lit = repr(novel_vals[0])
+                                if isinstance(op, ast.NotEq) and isinstance(comp_node, ast.Constant):
+                                    old_lit = repr(comp_node.value)
+                                    if old_lit != new_lit:
+                                        patched = replace_ast_node_source(
+                                            src, sub, f"{var_id} not in ({old_lit}, {new_lit})"
+                                        )
+                                        if patched:
+                                            _emit(PatchCandidate(
+                                                family="MEMBERSHIP_SET_EXTENSION",
+                                                rel_path=rel,
+                                                lineno=lineno,
+                                                description=f"extend inequality on `{var_id}` with failing literal {new_lit}",
+                                                new_source=patched,
+                                                abstract_shape="$VAR not in ($LIT1, $LIT2)",
+                                                heuristic_bonus=site_bonus + 2.6,
+                                            ))
+                                elif isinstance(op, ast.Eq) and isinstance(comp_node, ast.Constant):
+                                    old_lit = repr(comp_node.value)
+                                    if old_lit != new_lit:
+                                        patched = replace_ast_node_source(
+                                            src, sub, f"{var_id} in ({old_lit}, {new_lit})"
+                                        )
+                                        if patched:
+                                            _emit(PatchCandidate(
+                                                family="MEMBERSHIP_SET_EXTENSION",
+                                                rel_path=rel,
+                                                lineno=lineno,
+                                                description=f"extend equality on `{var_id}` with failing literal {new_lit}",
+                                                new_source=patched,
+                                                abstract_shape="$VAR in ($LIT1, $LIT2)",
+                                                heuristic_bonus=site_bonus + 2.4,
+                                            ))
+                                elif isinstance(op, (ast.In, ast.NotIn)) and isinstance(comp_node, (ast.Tuple, ast.List, ast.Set)):
+                                    existing_elts = [_unparse(e) for e in comp_node.elts]
+                                    if new_lit not in existing_elts:
+                                        op_str = "in" if isinstance(op, ast.In) else "not in"
+                                        joined = ", ".join([*existing_elts, new_lit])
+                                        patched = replace_ast_node_source(src, sub, f"{var_id} {op_str} ({joined})")
+                                        if patched:
+                                            _emit(PatchCandidate(
+                                                family="MEMBERSHIP_SET_EXTENSION",
+                                                rel_path=rel,
+                                                lineno=lineno,
+                                                description=f"widen `{op_str}` tuple on `{var_id}` with {new_lit}",
+                                                new_source=patched,
+                                                abstract_shape=f"$VAR {op_str} (..., $LIT)",
+                                                heuristic_bonus=site_bonus + 2.5,
+                                            ))
+
+                        # 2c. Boundary relational flips (`<` <-> `<=`, `>` <-> `>=`, `==` <-> `!=`)
+                        flip_map = {
+                            ast.Lt: "<=",
+                            ast.LtE: "<",
+                            ast.Gt: ">=",
+                            ast.GtE: ">",
+                        }
+                        if type(op) in flip_map:
+                            new_op = flip_map[type(op)]
+                            patched = replace_ast_node_source(
+                                src, sub, f"{_unparse(left_node)} {new_op} {_unparse(comp_node)}"
+                            )
+                            if patched:
+                                _emit(PatchCandidate(
+                                    family="GUARD_BOUNDARY_OPERATOR",
+                                    rel_path=rel,
+                                    lineno=lineno,
+                                    description=f"boundary flip to `{new_op}`",
+                                    new_source=patched,
+                                    abstract_shape=f"$A {new_op} $B",
+                                    heuristic_bonus=site_bonus + 1.2,
+                                ))
+
+                # 2d. Frame-discriminated Conjunctive Restriction (`C and P`) & Disjunctive Relaxation (`C or P`)
+                discriminators = _discriminating_predicates(f_frames, p_frames, file_attrs)
+                old_cond_txt = _unparse(node.test)
+                # Wrap compound `or` in parens before `and`
+                wrapped_old = f"({old_cond_txt})" if isinstance(node.test, ast.BoolOp) else old_cond_txt
+                for pred_false_on_fail in discriminators["false_on_fail_true_on_pass"][:6]:
+                    if _is_degenerate_guard_extension(node.test, pred_false_on_fail):
+                        continue
+                    patched = replace_ast_node_source(src, node.test, f"{wrapped_old} and {pred_false_on_fail}")
+                    if patched:
+                        _emit(PatchCandidate(
+                            family="GUARD_CONJUNCTIVE_RESTRICTION",
+                            rel_path=rel,
+                            lineno=lineno,
+                            description=f"restrict guard with `and {pred_false_on_fail}`",
+                            new_source=patched,
+                            abstract_shape="($COND) and $PRED",
+                            heuristic_bonus=site_bonus + 2.0,
+                        ))
+                # If `did_not_raise` is active and this `if` body raises that exact exception, boost `or P`!
+                raises_target = any(
+                    isinstance(b, ast.Raise) and (
+                        not did_not_raise_excs
+                        or any(exc_name in _unparse(b) for exc_name in did_not_raise_excs)
+                    )
+                    for b in node.body
+                )
+                for pred_true_on_fail in discriminators["true_on_fail_false_on_pass"][:6]:
+                    if _is_degenerate_guard_extension(node.test, pred_true_on_fail):
+                        continue
+                    fam = "DID_NOT_RAISE_PREDICATE" if (did_not_raise_excs and raises_target) else "GUARD_DISJUNCTIVE_RELAXATION"
+                    patched = replace_ast_node_source(src, node.test, f"{wrapped_old} or {pred_true_on_fail}")
+                    if patched:
+                        _emit(PatchCandidate(
+                            family=fam,
+                            rel_path=rel,
+                            lineno=lineno,
+                            description=f"widen guard with `or {pred_true_on_fail}`",
+                            new_source=patched,
+                            abstract_shape="($COND) or $PRED",
+                            heuristic_bonus=site_bonus + (3.2 if fam == "DID_NOT_RAISE_PREDICATE" else 1.5),
+                        ))
+
+            # --- FAMILY 4: EXCEPTION SAFE GUARD (`None.attr` / `d[k]` / domain exception translation) ---
+            if unexpected_crashes and isinstance(node, (ast.Assign, ast.Return, ast.Expr)):
+                val_expr = getattr(node, "value", None)
+                if val_expr is not None:
+                    for sub in ast.walk(val_expr):
+                        if isinstance(sub, ast.Attribute) and isinstance(sub.value, ast.Name):
+                            base_name = sub.value.id
+                            if _var_was_none(base_name, f_frames):
+                                sub_s = _unparse(sub)
+                                patched = replace_ast_node_source(
+                                    src, sub, f"({sub_s} if {base_name} is not None else None)"
+                                )
+                                if patched:
+                                    _emit(PatchCandidate(
+                                        family="EXCEPTION_SAFE_GUARD",
+                                        rel_path=rel,
+                                        lineno=lineno,
+                                        description=f"guard `None` receiver `{base_name}`",
+                                        new_source=patched,
+                                        abstract_shape="$X.$ATTR if $X is not None else None",
+                                        heuristic_bonus=site_bonus + 2.4,
+                                    ))
+
+            # --- FAMILY 5: DEMAND-ALIGNED EXPRESSION SYNTHESIS (Induced f-strings, String/Slice/Attr) ---
+            if isinstance(node, (ast.Assign, ast.Return, ast.Raise)):
+                for sub in ast.walk(node):
+                    # 5a. Induced f-string when a string constant is a prefix/substring of a demanded string!
+                    if isinstance(sub, ast.Constant) and isinstance(sub.value, str) and len(sub.value) >= 4:
+                        for demanded in string_demands:
+                            if sub.value != demanded and sub.value in demanded:
+                                for fstring_expr in _induce_fstrings(demanded, f_frames):
+                                    patched = replace_ast_node_source(src, sub, fstring_expr)
+                                    if patched:
+                                        _emit(PatchCandidate(
+                                            family="DEMAND_FSTRING_INDUCTION",
+                                            rel_path=rel,
+                                            lineno=lineno,
+                                            description=f"induce f-string `{fstring_expr}` from demanded message",
+                                            new_source=patched,
+                                            abstract_shape='f"...{$VAR}..."',
+                                            heuristic_bonus=site_bonus + 3.5,
+                                        ))
+
+                # 5b. Return / RHS expression projections (`.strip()`, `.lower()`, `±1`, file attribute swap)
+                target_expr = getattr(node, "value", None) if isinstance(node, (ast.Assign, ast.Return)) else None
+                if target_expr is not None and getattr(target_expr, "lineno", None) == lineno:
+                    expr_txt = _unparse(target_expr)
+                    # Attribute swap on same receiver (`ca.converter` -> `ca._converter`)
+                    if isinstance(target_expr, ast.Attribute) and isinstance(target_expr.value, ast.Name):
+                        recv = target_expr.value.id
+                        for alt_attr in file_attrs.get("__all_attrs__", []):
+                            if alt_attr != target_expr.attr and (
+                                alt_attr.lstrip("_") == target_expr.attr.lstrip("_")
+                            ):
+                                patched = replace_ast_node_source(src, target_expr, f"{recv}.{alt_attr}")
+                                if patched:
+                                    _emit(PatchCandidate(
+                                        family="DEMAND_EXPRESSION_ALIGNMENT",
+                                        rel_path=rel,
+                                        lineno=lineno,
+                                        description=f"align attribute `{recv}.{target_expr.attr}` -> `{recv}.{alt_attr}`",
+                                        new_source=patched,
+                                        abstract_shape="$OBJ.$ALT_ATTR",
+                                        heuristic_bonus=site_bonus + 2.2,
+                                    ))
+                    # Off-by-one slice/binop (`a + 1` <-> `a`, `s[1:]`, `.strip()`)
+                    if isinstance(target_expr, ast.BinOp) and isinstance(target_expr.op, (ast.Add, ast.Sub)):
+                        if isinstance(target_expr.right, ast.Constant) and target_expr.right.value == 1:
+                            patched = replace_ast_node_source(src, target_expr, _unparse(target_expr.left))
+                            if patched:
+                                _emit(PatchCandidate(
+                                    family="DEMAND_EXPRESSION_ALIGNMENT",
+                                    rel_path=rel,
+                                    lineno=lineno,
+                                    description="remove off-by-one +/- 1",
+                                    new_source=patched,
+                                    abstract_shape="$X",
+                                    heuristic_bonus=site_bonus + 1.1,
+                                ))
+
+    # Also scan ALL `raise ExpectedExc` guards in executed files when `DID NOT RAISE` occurred,
+    # because in `DID NOT RAISE` the guard `if C: raise ExpectedExc` had `C == False`, so the
+    # `if` line itself WAS hit even though the `raise` line inside it was NOT hit!
+    if did_not_raise_excs:
+        executed_rels = {row["rel"] for row in ranked_sites[:max_sites]}
+        for rel in sorted(executed_rels):
+            loaded = _get_file(rel)
+            if not loaded:
+                continue
+            src, tree, file_attrs = loaded
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.If):
+                    continue
+                if not any(
+                    isinstance(b, ast.Raise)
+                    and any(exc in _unparse(b) for exc in did_not_raise_excs)
+                    for b in node.body
+                ):
+                    continue
+                skey = f"{rel}:{node.lineno}"
+                f_frames = fail_snaps.get(skey) or []
+                p_frames = pass_snaps.get(skey) or []
+                if not f_frames:
+                    continue
+                discriminators = _discriminating_predicates(f_frames, p_frames, file_attrs)
+                old_txt = _unparse(node.test)
+                wrapped = f"({old_txt})" if isinstance(node.test, ast.BoolOp) else old_txt
+                for pred in discriminators["true_on_fail_false_on_pass"][:6]:
+                    patched = replace_ast_node_source(src, node.test, f"{wrapped} or {pred}")
+                    if patched:
+                        _emit(PatchCandidate(
+                            family="DID_NOT_RAISE_PREDICATE",
+                            rel_path=rel,
+                            lineno=node.lineno,
+                            description=f"widen `{did_not_raise_excs[0]}` guard with `or {pred}`",
+                            new_source=patched,
+                            abstract_shape="($COND) or $PRED",
+                            heuristic_bonus=3.8,
+                        ))
+
+    # Rank candidates by `memory.priority_score(family) * (1.0 + heuristic_bonus)`
+    candidates.sort(
+        key=lambda c: -(memory.priority_score(c.family) * (1.0 + c.heuristic_bonus))
+    )
+    return candidates[:max_candidates]
+
+
+def _expr_was_falsy_non_none(expr: ast.expr, frames: Sequence[Mapping[str, Any]]) -> bool:
+    if isinstance(expr, ast.Name):
+        return any(bool((fr.get(expr.id) or {}).get("falsy_non_none")) for fr in frames)
+    if isinstance(expr, ast.Attribute) and isinstance(expr.value, ast.Name):
+        base = expr.value.id
+        attr = expr.attr
+        for fr in frames:
+            binfo = fr.get(base) or {}
+            aval = (binfo.get("attrs") or {}).get(attr)
+            if aval is not None and aval is not False and aval != "" and aval != 0:
+                if isinstance(aval, dict) and aval.get("__type__") not in ("NoneType", "bool"):
+                    return True
+            if aval in (0, "", ()):
+                return True
+    return False
+
+
+def _var_was_none(name: str, frames: Sequence[Mapping[str, Any]]) -> bool:
+    return any(bool((fr.get(name) or {}).get("is_none")) for fr in frames)
+
+
+def _distinct_scalars_in_frames(name: str, frames: Sequence[Mapping[str, Any]]) -> list[Any]:
+    out: list[Any] = []
+    for fr in frames:
+        vinfo = fr.get(name)
+        if not vinfo:
+            continue
+        ok, val = _reconstruct_value(vinfo)
+        if ok and val not in out:
+            out.append(val)
+    return out
+
+
+def _induce_fstrings(demanded: str, frames: Sequence[Mapping[str, Any]]) -> list[str]:
+    """Construct valid `f"..."` expressions from `demanded` using live frame variables."""
+    out: list[str] = []
+    for fr in frames:
+        for var_name, vinfo in fr.items():
+            if not var_name.isidentifier() or var_name.startswith("_"):
+                continue
+            ok, val = _reconstruct_value(vinfo)
+            if not ok or val is None or isinstance(val, (bool, bytes, tuple)):
+                continue
+            for fmt_suffix, rendered in (("", str(val)), ("!r", repr(val))):
+                if not rendered or len(rendered) > 80 or rendered not in demanded:
+                    continue
+                parts = demanded.split(rendered)
+                if len(parts) < 2 or any("{" in p or "}" in p for p in parts):
+                    continue
+                hole = "{" + var_name + fmt_suffix + "}"
+                body = hole.join(parts).replace("\\", "\\\\").replace('"', '\\"')
+                expr = f'f"{body}"'
+                if expr not in out:
+                    out.append(expr)
+    return out[:6]
+
+
+def _discriminating_predicates(
+    fail_frames: Sequence[Mapping[str, Any]],
+    pass_frames: Sequence[Mapping[str, Any]],
+    file_attrs: Mapping[str, Sequence[str]],
+) -> dict[str, list[str]]:
+    """Synthesize atomic Python predicates separating `fail_frames` from `pass_frames`.
+
+    Returns:
+      - `true_on_fail_false_on_pass`: predicates True on >=1 failing frame and False on 100% of `pass_frames`
+      - `false_on_fail_true_on_pass`: predicates False on >=1 failing frame and True on 100% of `pass_frames`
+    """
+    true_fail_false_pass: list[str] = []
+    false_fail_true_pass: list[str] = []
+    if not fail_frames:
+        return {
+            "true_on_fail_false_on_pass": true_fail_false_pass,
+            "false_on_fail_true_on_pass": false_fail_true_pass,
+        }
+
+    # Gather shared variable names
+    var_names = sorted({k for fr in fail_frames for k in fr if k.isidentifier() and not k.startswith("__")})
+
+    for var in var_names:
+        f_infos = [fr[var] for fr in fail_frames if var in fr]
+        p_infos = [fr[var] for fr in pass_frames if var in fr]
+        if not f_infos:
+            continue
+
+        # 1. None / truthiness checks
+        if any(i["is_none"] for i in f_infos) and p_infos and all(not i["is_none"] for i in p_infos):
+            true_fail_false_pass.append(f"{var} is None")
+            false_fail_true_pass.append(f"{var} is not None")
+        if any(not i["is_none"] for i in f_infos) and p_infos and all(i["is_none"] for i in p_infos):
+            true_fail_false_pass.append(f"{var} is not None")
+            false_fail_true_pass.append(f"{var} is None")
+        if any(not i["bool"] for i in f_infos) and p_infos and all(i["bool"] for i in p_infos):
+            true_fail_false_pass.append(f"not {var}")
+            false_fail_true_pass.append(f"bool({var})")
+
+        # 2. String property discriminators (essential for parsers like packaging & tomli!)
+        f_strs = [i["scalar"] for i in f_infos if isinstance(i.get("scalar"), str)]
+        p_strs = [i["scalar"] for i in p_infos if isinstance(i.get("scalar"), str)]
+        if f_strs:
+            if any(s == "" for s in f_strs) and all(s != "" for s in p_strs):
+                true_fail_false_pass.append(f"not {var}")
+            if any(not s.isascii() for s in f_strs) and all(s.isascii() for s in p_strs):
+                true_fail_false_pass.append(f"not {var}.isascii()")
+                false_fail_true_pass.append(f"{var}.isascii()")
+            if any(s != s.strip() for s in f_strs) and p_strs and all(s == s.strip() for s in p_strs):
+                true_fail_false_pass.append(f"{var} != {var}.strip()")
+                false_fail_true_pass.append(f"{var} == {var}.strip()")
+            # Specific offending characters present in failing string and NEVER in any passing string
+            p_chars = {ch for s in p_strs for ch in s}
+            for s in f_strs:
+                for ch in s:
+                    if not ch.isalnum() and ch not in p_chars:
+                        pred_in = f"{repr(ch)} in {var}"
+                        pred_notin = f"{repr(ch)} not in {var}"
+                        if pred_in not in true_fail_false_pass:
+                            true_fail_false_pass.append(pred_in)
+                        if pred_notin not in false_fail_true_pass:
+                            false_fail_true_pass.append(pred_notin)
+                        break
+
+        # 3. Object attribute vs file-referenced module constants (`a.on_setattr is not setters.NO_OP`)
+        f_attrs_list = [i.get("attrs") or {} for i in f_infos if i.get("attrs")]
+        p_attrs_list = [i.get("attrs") or {} for i in p_infos if i.get("attrs")]
+        if f_attrs_list:
+            attr_keys = sorted({ak for d in f_attrs_list for ak in d})
+            for ak in attr_keys:
+                f_avals = [d[ak] for d in f_attrs_list if ak in d]
+                p_avals = [d[ak] for d in p_attrs_list if ak in d]
+                if not f_avals:
+                    continue
+                # Check None vs non-None on `var.ak`
+                if any(v is None for v in f_avals) and p_avals and all(v is not None for v in p_avals):
+                    true_fail_false_pass.append(f"{var}.{ak} is None")
+                    false_fail_true_pass.append(f"{var}.{ak} is not None")
+                if any(v is not None for v in f_avals) and p_avals and all(v is None for v in p_avals):
+                    true_fail_false_pass.append(f"{var}.{ak} is not None")
+                    false_fail_true_pass.append(f"{var}.{ak} is None")
+                # Check module constant references already used in the file (e.g. `setters.NO_OP`)
+                for mod_base, mod_consts in file_attrs.items():
+                    if mod_base in ("self", "cls", "__all_attrs__", var):
+                        continue
+                    for mconst in mod_consts:
+                        # Match if failing attribute repr mentions the constant name or differs from all passing!
+                        f_reprs = [v.get("__repr__", repr(v)) if isinstance(v, dict) else repr(v) for v in f_avals]
+                        p_reprs = [v.get("__repr__", repr(v)) if isinstance(v, dict) else repr(v) for v in p_avals]
+                        if p_reprs and any(r not in p_reprs for r in f_reprs):
+                            if any(mconst.lower() in r.lower() for r in f_reprs) or mconst.isupper():
+                                cand_not = f"{var}.{ak} is not {mod_base}.{mconst}"
+                                cand_is = f"{var}.{ak} is {mod_base}.{mconst}"
+                                if cand_not not in false_fail_true_pass:
+                                    false_fail_true_pass.append(cand_not)
+                                if cand_is not in true_fail_false_pass:
+                                    true_fail_false_pass.append(cand_is)
+
+    return {
+        "true_on_fail_false_on_pass": true_fail_false_pass,
+        "false_on_fail_true_on_pass": false_fail_true_pass,
+    }
+
+
+# =========================================================================== #
+# STAGE 3: CLOSED-LOOP VERIFICATION & FULL REPAIR ENTRY POINT
+# =========================================================================== #
+
+def repair_worktree(
+    worktree: pathlib.Path,
+    test_target: str,
+    *,
+    python_exe: str | None = None,
+    memory: SWERepairMemory | None = None,
+    budget_s: float = 90.0,
+    max_verifications: int = 20,
+) -> dict[str, Any]:
+    """Autonomously localize, synthesize, and verify a bug repair in `worktree` (ZERO diff leakage)."""
+    started = time.perf_counter()
+    memory = memory if memory is not None else SWERepairMemory()
+    worktree = pathlib.Path(worktree).resolve()
+
+    # 1. Baseline suite run: confirm there is a real failure and record passing baseline!
+    baseline = run_pytest_verdicts(
+        worktree, test_target, python_exe=python_exe, timeout_s=min(45.0, budget_s * 0.5)
+    )
+    if not baseline["verdicts"]:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__SUITE_DID_NOT_COLLECT",
+            "pass": False,
+            "detail": baseline["output"][-400:],
+            "seconds": round(time.perf_counter() - started, 4),
+            "model_calls": 0,
+        }
+    if not baseline["failing"]:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__NO_FAILING_TEST_AT_START",
+            "pass": False,
+            "passing_baseline": len(baseline["passing"]),
+            "seconds": round(time.perf_counter() - started, 4),
+            "model_calls": 0,
+        }
+
+    failing_nodes = baseline["failing"]
+    passing_nodes = baseline["passing"]
+
+    # 2. Collect 1-pass dynamic causal trace (zero commit/diff input!)
+    trace_data = collect_causal_trace(
+        worktree,
+        failing_nodes,
+        passing_nodes,
+        test_target,
+        python_exe=python_exe,
+        timeout_s=min(35.0, max(10.0, budget_s - (time.perf_counter() - started))),
+    )
+    ranked_sites = localize_suspicious_sites(trace_data)
+    if not ranked_sites:
+        return {
+            "schema": SCHEMA,
+            "status": "OPEN__NO_PROJECT_LINES_TRACED",
+            "pass": False,
+            "failing_count": len(failing_nodes),
+            "seconds": round(time.perf_counter() - started, 4),
+            "model_calls": 0,
+        }
+
+    # 3. Synthesize candidate patches ranked by causal evidence + memory prior
+    candidates = synthesize_candidates(worktree, trace_data, ranked_sites, memory)
+    if not candidates:
+        return {
+            "schema": SCHEMA,
+            "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+            "pass": False,
+            "top_localized_sites": ranked_sites[:5],
+            "seconds": round(time.perf_counter() - started, 4),
+            "model_calls": 0,
+        }
+
+    # 4. Verify candidates: fast failing-test gate first, then FULL unmodified test_target gate!
+    originals: dict[str, str] = {}
+    attempts: list[dict[str, Any]] = []
+
+    for idx, cand in enumerate(candidates[:max_verifications]):
+        if time.perf_counter() - started > budget_s:
+            break
+        target_file = worktree / cand.rel_path
+        if cand.rel_path not in originals:
+            originals[cand.rel_path] = target_file.read_text(encoding="utf-8")
+
+        t0 = time.perf_counter()
+        target_file.write_text(cand.new_source, encoding="utf-8")
+        try:
+            # Fast gate: run the failing test(s) first!
+            fast_target = [n for n in failing_nodes if "::" in n] or [test_target]
+            fast = run_pytest_verdicts(
+                worktree, fast_target, python_exe=python_exe, timeout_s=20.0
+            )
+            if fast["failing"] or not fast["passing"]:
+                memory.record_outcome(
+                    cand.family,
+                    verified=False,
+                    caused_regression=False,
+                    elapsed_s=time.perf_counter() - t0,
+                )
+                attempts.append({
+                    "rank": idx + 1,
+                    "family": cand.family,
+                    "site": f"{cand.rel_path}:{cand.lineno}",
+                    "description": cand.description,
+                    "verdict": "FAILING_TEST_STILL_RED",
+                })
+                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+                continue
+
+            # Full gate: run the ENTIRE test_target file and require 0 failures and >= baseline passes!
+            full = run_pytest_verdicts(
+                worktree, test_target, python_exe=python_exe, timeout_s=40.0
+            )
+            regressed = bool(full["failing"]) or len(full["passing"]) < len(passing_nodes)
+            if regressed:
+                memory.record_outcome(
+                    cand.family,
+                    verified=False,
+                    caused_regression=True,
+                    elapsed_s=time.perf_counter() - t0,
+                )
+                attempts.append({
+                    "rank": idx + 1,
+                    "family": cand.family,
+                    "site": f"{cand.rel_path}:{cand.lineno}",
+                    "description": cand.description,
+                    "verdict": "REGRESSED_PASSING_TESTS",
+                })
+                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+                continue
+
+            # Runner-integrity victim check (`earn_a_judge` decoy invariant): ensure the patch
+            # did NOT lobotomize self-hosting test harnesses (`pluggy`/`pytest`) into passing false asserts!
+            if not verify_runner_canary(worktree, python_exe=python_exe):
+                memory.record_outcome(
+                    cand.family,
+                    verified=False,
+                    caused_regression=True,
+                    elapsed_s=time.perf_counter() - t0,
+                )
+                attempts.append({
+                    "rank": idx + 1,
+                    "family": cand.family,
+                    "site": f"{cand.rel_path}:{cand.lineno}",
+                    "description": cand.description,
+                    "verdict": "REFUSED__RUNNER_CANARY_LOBOTOMIZED",
+                })
+                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+                continue
+
+            # VERIFIED! Keep the verified edit in `worktree` and record operator learning!
+            memory.record_outcome(
+                cand.family,
+                verified=True,
+                caused_regression=False,
+                elapsed_s=time.perf_counter() - t0,
+                abstract_shape=cand.abstract_shape,
+            )
+            attempts.append({
+                "rank": idx + 1,
+                "family": cand.family,
+                "site": f"{cand.rel_path}:{cand.lineno}",
+                "description": cand.description,
+                "verdict": "VERIFIED_FULL_SUITE_GREEN",
+            })
+            return {
+                "schema": SCHEMA,
+                "authority": AUTHORITY,
+                "status": "PASS__VERIFIED_REPAIR",
+                "pass": True,
+                "winning_rank": idx + 1,
+                "winning_family": cand.family,
+                "repaired_file": cand.rel_path,
+                "repaired_line": cand.lineno,
+                "description": cand.description,
+                "abstract_shape": cand.abstract_shape,
+                "tests_passing_before": len(passing_nodes),
+                "tests_failing_before": len(failing_nodes),
+                "tests_passing_after": len(full["passing"]),
+                "tests_failing_after": 0,
+                "candidates_generated": len(candidates),
+                "verifications_run": idx + 1,
+                "top_localized_sites": ranked_sites[:5],
+                "attempts": attempts,
+                "seconds": round(time.perf_counter() - started, 4),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        except Exception:
+            target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+            raise
+
+    # Restore clean worktree if nothing verified
+    for rel_path, orig_src in originals.items():
+        (worktree / rel_path).write_text(orig_src, encoding="utf-8")
+
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "status": "OPEN__NO_CANDIDATE_VERIFIED",
+        "pass": False,
+        "candidates_generated": len(candidates),
+        "verifications_run": len(attempts),
+        "top_localized_sites": ranked_sites[:5],
+        "attempts": attempts[:10],
+        "seconds": round(time.perf_counter() - started, 4),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
