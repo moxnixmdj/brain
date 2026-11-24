@@ -50,3 +50,6 @@ canonical/tmp_*.json
 
 # Third-party benchmark clones (QuixBugs etc.). Never part of the project.
 .benchmarks/
+
+# machine-specific: regenerated in ~11s by machine_self_index_v1 --build
+canonical/verification/MACHINE_SELF_INDEX_*_V1.json

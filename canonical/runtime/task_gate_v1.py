@@ -159,15 +159,19 @@ def _verify_sqlite(root: pathlib.Path) -> tuple[bool, str]:
     except Exception as error:
         return False, f"unopenable: {type(error).__name__}"
     try:
-        tables = [row[0] for row in connection.execute(
-            "select name from sqlite_master where type='table'")]
-        if not tables:
-            return False, "no table"
-        for table in tables:
-            rows = connection.execute(f'select * from "{table}"').fetchall()
-            if rows:
-                return True, f"{table} rows={len(rows)}"
-        return False, "table exists but holds no row"
+        try:
+            tables = [row[0] for row in connection.execute(
+                "select name from sqlite_master where type='table'")]
+            if not tables:
+                return False, "no table"
+            for table in tables:
+                rows = connection.execute(f'select * from "{table}"').fetchall()
+                if rows:
+                    return True, f"{table} rows={len(rows)}"
+            return False, "table exists but holds no row"
+        except sqlite3.DatabaseError as error:
+            # a file that is not a database is a WRONG artifact, not a crash in the judge
+            return False, f"not a database: {str(error)[:60]}"
     finally:
         connection.close()
 
@@ -320,16 +324,48 @@ def _escapes(root: pathlib.Path, plan: dict[str, Any]) -> list[str]:
 
 
 def run_task(task: dict[str, Any], *, registry: dict[str, Any] | None = None,
-             execute: bool = True) -> dict[str, Any]:
-    """Set up a fresh workspace, compile the sentence, judge the artifact."""
+             execute: bool = True, lane: str = "registry") -> dict[str, Any]:
+    """Set up a fresh workspace, bind the sentence, judge the artifact.
+
+    Two lanes, one judge:
+
+      registry  compile through the 447-capability registry (the system as it stands)
+      grounded  bind one of the MACHINE's own doors to the workspace (grounded_binder_v1)
+
+    The verifier is identical and independent in both, so the difference between the two
+    numbers is the difference between "which of our capabilities matches these words" and
+    "which of this machine's doors does this sentence name".
+    """
     from canonical.runtime import goal_compiler as compiler
     from canonical.runtime import live_integrated_brain_v1 as brain
 
     started = time.perf_counter()
     root = pathlib.Path(tempfile.mkdtemp(prefix=f"gate-{task['id']}-"))
-    row: dict[str, Any] = {"id": task["id"], "instruction": task["instruction"]}
+    row: dict[str, Any] = {"id": task["id"], "instruction": task["instruction"], "lane": lane}
     try:
         task["setup"](root)
+        if lane == "grounded":
+            from canonical.runtime import grounded_binder_v1 as binder
+            routed: list[str] = []
+            try:
+                from canonical.runtime import machine_self_index_v1 as index_module
+                routed = [row["program"] for row in
+                          index_module.route(task["instruction"], index_module.load(), limit=6)]
+            except Exception:
+                routed = []
+            attempt = binder.run(task["instruction"], root, routed=routed)
+            row["binding"] = {"outcome": attempt.get("outcome"),
+                              "reason": attempt.get("reason"),
+                              "plan": (attempt.get("plan") or {}).get("argv"),
+                              "programs": attempt.get("programs"),
+                              "named_programs": attempt.get("named_programs"),
+                              "routed": routed}
+            row["capabilities"] = [(attempt.get("plan") or {}).get("program")]
+            ok, detail = task["verify"](root)
+            row.update(outcome="PASS" if ok else
+                       ("COMPILE" if attempt.get("outcome") != "EXECUTED" else "WRONG"),
+                       detail=detail)
+            return row
         registry = registry if registry is not None else dict(brain.load_verified_registry())
         try:
             plan = compiler.compile_goal(task["instruction"], registry, str(root))
