@@ -178,7 +178,11 @@
         }
       ]
     },
-    "obs_verification": "same seed and script on both sides; per-program regression check; the per-form breakdown reported instead of an aggregate; each repair judged by the tree, and a command that only printed a result counted separately from one that changed the tree",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "the oracle is the tree and the process: every repair is judged by a real run inside a restored temporary tree, BEFORE and AFTER come from the same script on the same seed, and a command that only PRINTED a result is counted separately from one that changed the tree. The directory-blindness of the file-only digest was found by the oracle disagreeing with a world that had plainly been created, and fixed by walking directories."
+    },
     "real_outcome": "20 real programs, 1,038 classified operations: SENSOR 880 -> 198 (delta 682) and UNBOUND 104 -> 786 at an unchanged 33 doors, because failed runs and unread scopes had been counted as sensors. The unknown collapses to 5 kinds (772 DROVE_IT_WRONG, 14 SLOT_UNSUPPLIED) and is triaged 786 rescuable / 0 certified exhausted. Questions are ranked by verdicts decided, not by a prior. The doubt is written to the ledger and persists. 0 model calls, 0 parameters, 57 s.",
     "required_capability": "a measured, persisted, triaged account of what is unknown",
     "route_frontier": {
@@ -251,7 +255,7 @@
           "route": "A_LEARNED_SCORER_OVER_DOORS"
         }
       ],
-      "checked_at_utc": "2026-11-24T00:35:00+00:00",
+      "checked_at_utc": "2026-11-24T00:12:24+00:00",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -291,7 +295,7 @@
       "selected_route": "READ_THE_REFUSAL_AS_THE_LAST_DECLARATION",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-24T00:35:00+00:00",
+        "checked_at_utc": "2026-11-24T00:12:24+00:00",
         "execution_dependencies": [
           {
             "dependency": "local Python 3 runtime",
