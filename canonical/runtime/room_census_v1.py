@@ -516,7 +516,12 @@ def rank(census: dict, objective: str, limit: int = 8) -> dict:
     # and the ranking said nothing -- measured 2026-11-23, on the very first room this surveyed.
     # The function's NAME is its title; its docstring is its snippet. Using the scorer's own fields,
     # rather than making it read mine, is the difference between reusing it and replacing it.
-    candidates = [{"capability_id": "%s::%s" % (r["source_rel"], r["function"]),
+    # A CANDIDATE'S ID MUST SAY WHERE IT CAME FROM, AND "LIVE" IS A REAL ANSWER.
+    # A callable asked of a running object has no source file; using r["source_rel"] crashed the
+    # ranking with KeyError the first time a live census was bridged in. The id keeps the honest
+    # origin -- the module it was asked of -- rather than inventing a path.
+    candidates = [{"capability_id": "%s::%s" % (r.get("source_rel") or r.get("origin") or "<live>",
+                                                r["function"]),
                    "title": str(r.get("call") or r["function"]).replace("_", " ").replace(".", " "),
                    "snippet": r.get("doc") or "",
                    "row": r} for r in rows]
@@ -554,7 +559,8 @@ def closing_plan(census: dict, objective: str, known_ids=(), limit: int = 4) -> 
     if not gaps:
         return {**short, "status": "ROOM_ALREADY_KNOWN", "need": []}
     ranked = rank({**census, "functions": gaps}, objective, limit=limit)
-    need = [{"source_rel": r["source_rel"], "function": r["function"],
+    need = [{"source_rel": r.get("source_rel") or r.get("origin") or "<live>",
+             "function": r["function"],
              "params": r["params"], "doc": r["doc"][:160], "score": r["score"]}
             for r in ranked.get("ranked") or []]
     return {**short, "status": ranked.get("status"),

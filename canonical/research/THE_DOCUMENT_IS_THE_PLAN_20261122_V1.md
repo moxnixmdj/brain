@@ -9186,3 +9186,77 @@ silently:
     * write the adapter by hand.
 
 None of these is in this path yet. §6 remains NOT MET: no OSWorld task, no SWE-bench instance.
+
+---
+
+## §A149 — a compiled callable cannot be read, but it can be asked
+
+§A148b measured a wall: the stdlib `csv` module defines **zero** python functions, so a source census
+sees six class methods and misses `csv.reader` and `csv.writer` — the two functions everybody calls.
+The wall is real and cannot be parsed away: there is no source.
+
+But the wall is not silent. Asked directly:
+
+    csv.reader.__module__  ->  '_csv'
+    csv.reader.__doc__     ->  "csv_reader = reader(iterable [, dialect='excel'] ..."
+    inspect.signature(...) ->  ValueError    (unavailable for builtins)
+
+The docstring opens with a **usage line** — the same artefact `cli_contract_inference` already reads
+off a program's `--help`. `reader(iterable [, dialect='excel'] ...)` states the name, the required
+input, and which parts are optional. That IS the contract, printed by the thing that has it.
+
+### Same instrument, both sides
+
+`live_object_census_v1` asks a live module what it can do and emits **the same candidate rows
+`room_census_v1` emits**, so the ranking, the forge and the verification are unchanged:
+
+    csv      ->  7 callables, 7 compiled      reader(iterable)   writer(fileobj)
+    json     ->  5 callables, 0 compiled      dump(obj, fp)      load(fp)
+
+    "count how many rows are in a csv file"   ->  reader  0.97,  writer 0.92
+    "write the records as a json file"        ->  dump    2.25,  load   0.99
+
+`bridge_to_room()` gives a live census the shape the rest of the pipeline already understands. Nothing
+downstream needs to know which side of the wall a callable came from — which is the whole point.
+
+### What it does not do
+
+A census never admits anything. `csv.reader`'s usage line is a **claim**; whether the call works is
+settled by `forge_and_record`, which runs it twice and tries to corrupt it. The docstring is a way to
+NOTICE a callable, never a reason to believe one.
+
+### Three defects found by trying to prove the tests were worth anything
+
+    1. CLASSES WERE OFFERED AS CALLABLES. `DictReader` sat beside `reader` as if both were things to
+       invoke, and `DictReader(path)` does not read a csv -- it needs a file OBJECT. Constructors are
+       templates, not callables a person asks for by name.
+
+    2. PROSE WAS PARSED AS A USAGE LINE. `json.dump`'s docstring is prose that happens to contain
+       parentheses -- "Serialize ``obj`` ... to ``fp`` (a ``.write()``-supporting object)" -- and the
+       usage parser scooped `obj, fp, skipkeys, ...` out of the wrong sentence. It produced the RIGHT
+       ANSWER BY ACCIDENT, which is worse than looking wrong: the signature path was being silently
+       duplicated and could have been deleted with no test failing.
+
+    3. THE GUARD WAS UNOBSERVABLE. Signature names were appended to the docstring-derived lists
+       BEFORE deciding which source to believe, so `if sig_names:` changed only `params` and a mutant
+       deleting it changed nothing. Restructured to one path or the other, never a blend. The mutant
+       now dies.
+
+The second and third are the same lesson this project has recorded before, in a new costume: **a
+guard that cannot be observed is decoration**, and a right answer for the wrong reason will not tell
+you when it stops being right.
+
+    (141) A callable that cannot be read can still be asked. `--help` for programs, `__doc__` +
+          `inspect.signature` for objects: the contract is published by the thing that has it, and
+          asking is not the same as trusting.
+    (142) When two sources of truth exist, use one or the other -- never a blend. A blend hides which
+          one answered, so deleting the one that did changes nothing measurable.
+
+### Honest limits
+
+    * `inspect.signature` fails for builtins, and a docstring may have no usage line at all
+      (`csv.get_dialect` supplies a name only because `inspect` reaches it).
+    * A parsed usage line gives names, not types or defaults beyond what the brackets imply.
+    * Importing the module is required to ask it anything, so this is for importable code, not for an
+      arbitrary file on disk.
+    * §6 NOT MET. No OSWorld task, no SWE-bench instance.
