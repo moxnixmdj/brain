@@ -31226,9 +31226,9 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 600,
+  "knowledge_documents": 601,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7243,
+  "research_index_records": 7244,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 455,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8cb645d8af96bcf535bbe74dd5d93103cc14e3ec5844001cbd88f8360febde87"
+  "value": "5f7039fbe1e1cb42c4dc4b9958fe92868380a7266e8c05ca05c0f77250c24136"
  },
  "engines": [
   {
@@ -68366,6 +68366,80 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 15803,
+   "headings": [
+    "The guide is an action grammar",
+    "1. What the last round left, and what this round priced",
+    "2. What was built (and what was deleted from the build)",
+    "3. The measurement, with every gate's caveat",
+    "4. What the machine actually did",
+    "Three needs that were false goals, and were fixed rather than counted",
+    "5. What is verified, what is unverified, what failed",
+    "6. The gate that is not met"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md",
+   "sha256": "4f48b4e0e2adfa0f0cc01d85d7633cac1d6fc837174768fb1e6ee5e0efdae219",
+   "summary": "**Round of 2026-11-24. Instrument: `canonical/tools/the_guide_is_an_action_grammar_v1.py`. Receipt: `canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json`.**",
+   "terms": {
+    "about": 8,
+    "archive": 25,
+    "because": 9,
+    "blind": 8,
+    "check": 9,
+    "compress": 8,
+    "compressed": 12,
+    "directory": 8,
+    "every": 9,
+    "file": 19,
+    "flag": 8,
+    "gate": 7,
+    "grammar": 7,
+    "gzip": 8,
+    "machine": 12,
+    "measured": 7,
+    "name": 9,
+    "need": 13,
+    "needs": 14,
+    "no": 11,
+    "not": 36,
+    "notes": 7,
+    "nothing": 9,
+    "number": 7,
+    "object": 13,
+    "one": 21,
+    "option": 8,
+    "own": 15,
+    "page": 19,
+    "pages": 7,
+    "path": 9,
+    "program": 13,
+    "read": 16,
+    "refusal": 8,
+    "repair": 8,
+    "room": 7,
+    "round": 12,
+    "second": 7,
+    "sentence": 15,
+    "so": 9,
+    "src": 9,
+    "tar": 26,
+    "they": 9,
+    "three": 7,
+    "typed": 7,
+    "verb": 7,
+    "were": 10,
+    "zero": 10
+   },
+   "title": "The guide is an action grammar",
+   "title_terms": [
+    "action",
+    "grammar",
+    "guide"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 13221,
    "headings": [
     "The GUI side has no invariance to find — and that is the answer, not a gap",
@@ -91755,10 +91829,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1402,
+  "included_source_count": 1403,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "ed74d64d448521a55eeadc089cbf602057de1efbb257a5a70bff27df4d3e4fb2"
+  "source_tree_digest": "46fe8ec3d6fc6c1bf62a2334a57bb834fb541d3712053538da9aca312cc7fa96"
  },
  "research_index": [
   {
@@ -259633,6 +259707,24 @@
     "the_previous_round_hardcoded_the_shape_of_the_answer_and_only_computed_a_parameter_inside_it_so_a_periodic_function_with_an_arbitrary_block_was_refused_while_the_round_reported_general_operator_growth": 1,
     "v1": 1,
     "writer": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
+   "schema": "BRAIN_THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1",
+   "sha256": "7cca2106688260be73e9b1a96d9703d4fa0311ace9a7ec99af903ee623d1addd",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "action": 1,
+    "grammar": 1,
+    "guide": 1,
+    "v1": 1
    }
   },
   {
