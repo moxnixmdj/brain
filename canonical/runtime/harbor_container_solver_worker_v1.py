@@ -200,7 +200,9 @@ def _find_letter_specimen(root: str) -> tuple[str | None, dict[str, int]]:
     """Locate the one letter-dense regular file that may be a ciphertext specimen.
 
     Computed from the filesystem at decision time; never assumes a filename.
-    Bounded: skips bloat dirs, caps scanned files and probe bytes.
+    Bounded: skips bloat dirs, caps scanned files and probe bytes. Accepts
+    files as dilute as 55% letters (spaces/punctuation in prose); selection
+    among candidates is still letter count.
     """
     from canonical.runtime.harbor_pro_worktree_v1 import SKIPPED_DIRS  # reuse inspected constants
     best: tuple[int, str] | None = None
@@ -226,7 +228,9 @@ def _find_letter_specimen(root: str) -> tuple[str | None, dict[str, int]]:
                     letters = sum(1 for b in blob if (65 <= b <= 90) or (97 <= b <= 122))
                     frac = letters / max(len(blob), 1)
                     seen += 1
-                    if frac >= 0.85 and letters >= 100:
+                    # 0.55 accommodates specimens with spaces/punctuation; the
+                    # IoC < 0.055 content gate below is the real discrimination.
+                    if frac >= 0.55 and letters >= 120:
                         score = letters
                         if best is None or score > best[0]:
                             best = (score, path)
