@@ -9496,3 +9496,74 @@ are different sentences and only one of them is about the code under test.
           before you show it PASSES on the fixed one, or you have measured nothing.
     (153) A null is not a failure. "The test never ran" and "the test ran and failed" are
           different statements, and a grader that merges them reports results it did not measure.
+
+## §A153 — The first repairs I did not write
+
+*2026-11-24. Same branch. Two SWE-bench Pro V2 instances go green on the benchmark's own tests.*
+
+### What changed from §A152
+
+§A152 reproduced an instance by replaying its gold patch — grading the answer sheet. This section
+is the first where the patch came from a derivation, and the test decided whether it was right.
+
+### The mechanism, and the law it reuses
+
+`fix_from_the_failure_v1` already stated the condition under which a repair is derivable with no
+model and no reference:
+
+    THE FAILURE MUST STATE THE CORRECTION, AND THE WORLD MUST CONFIRM IT.
+
+The census (below) says the reachable instances split into two shapes, and each states its
+correction differently:
+
+| shape | n of 68 | how the failure states the correction |
+|---|---|---|
+| NEW SYMBOL | 16 | `AttributeError: 'LinuxNetwork' object has no attribute 'get_locally_reachable_ips'` — names class and member; the test's call site gives the parameters; the requirement text gives the behaviour |
+| EDIT | 52 | `DID NOT RAISE TypeError` — names no symbol, but the requirement text enumerates which inputs must raise and which must parse |
+
+`canonical/runtime/derive_from_the_failure_v1.py` implements both directions of reading, and
+refuses when the text states nothing.
+
+### The census, so the choice was not a guess
+
+    642 published instances
+     11 repositories; 4 are Python (ansible 82, openlibrary 82, qutebrowser 73, vuls 58)
+    295 Python instances probed; 237 have pytest node-id verifiers
+     68 have <= 2 named failing tests   <- the tractable class measured here
+     16 NEW SYMBOL / 52 EDIT / 0 NEITHER
+
+### The two results, measured end to end
+
+| instance | shape | F2P | P2P | before | after |
+|---|---|---|---|---|---|
+| `ansible-11c1777d...` | NEW SYMBOL | 1 | 0 | `AttributeError: ... has no attribute 'get_locally_reachable_ips'` | **1 passed** |
+| `ansible-d9f18662...` | EDIT | 1 | 1 | `DID NOT RAISE TypeError` | **2 passed** (failing test *and* its sibling) |
+
+The second is the stronger result: it had a `pass_to_pass` sibling, and the sibling stayed green
+while the failing test went green. Every case named in the requirement text was then checked
+directly, not just through the test:
+
+    '{1}'        -> TypeError: string parsed to set, not a dictionary
+    'k1=v1 k2'   -> TypeError: token 'k2' is not key=value
+    'k1=v1 k2=v2'-> {'k1': 'v1', 'k2': 'v2'}
+    validation suite: 66 passed
+
+### The dishonest version I could have written, and did not
+
+My patch for the EDIT instance is **not** the published gold patch. Gold also deprecates
+`safe_eval` and edits `basic.py`; mine is narrower and passes the same named tests. Those are
+different objects. The benchmark scores named tests, so the instance is resolved; the patches are
+not equal, and calling mine "the same fix" would be a claim I cannot support.
+
+**And the sharpest limit:** in both runs the *body* was authored while I was reading the
+requirement text. The module reads the failure, the call site and the class, and derives the
+signature and the insertion — but it does not yet compile free-form prose into code. So these are
+not "the system solved two instances unattended." They are: two demonstrations that the
+information needed to solve this class **is present in the published artefacts**, plus a scaffold
+that carries the mechanical part. The prose-to-code step is still mine, and it is the next
+bottleneck. Naming it is the point.
+
+    (154) Two instances is not a benchmark score. It is two instances, and a number that cannot
+          be reported as a score must not be reported as one.
+    (155) Passing the named tests and matching the reference patch are different claims. The
+          benchmark scores the first; do not let a green run inflate it into the second.
