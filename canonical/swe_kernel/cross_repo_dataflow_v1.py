@@ -195,8 +195,23 @@ def build_cross_repo_graph(root: str | pathlib.Path, max_files: int = 500) -> Cr
                     pass
         file_imports[rel] = imps
 
+    # Also collect AST Name Loads per file — DFG only counts top-level assigns, not function bodies
+    file_name_loads: dict[str, set[str]] = {}
+    for rel in per_file.keys():
+        p = root / rel
+        try:
+            txt = p.read_text(encoding="utf-8", errors="ignore")
+            tree = ast.parse(txt)
+            loads=set()
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load):
+                    loads.add(node.id)
+            file_name_loads[rel]=loads
+        except: file_name_loads[rel]=set()
     for rel, dfg in per_file.items():
-        for var in dfg.var_uses.keys():
+        # union of DFG var_uses and AST loads — covers function bodies that DFG misses
+        uses = set(dfg.var_uses.keys()) | file_name_loads.get(rel, set())
+        for var in uses:
             # var is used in rel; does some other file define it AND rel imports it?
             if var in defines:
                 for def_rel in defines[var]:
