@@ -1,0 +1,100 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "counts": {
+  "COMPILE": 2,
+  "ESCAPED": 6
+ },
+ "model_calls": 0,
+ "parameters": 0,
+ "passed": 0,
+ "rows": [
+  {
+   "capabilities": [
+    "python.source.definition_count.v1"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/brain_out__python_source_definition_count_v1__d654dfdf39.json"
+   ],
+   "id": "line_count",
+   "instruction": "Read data.txt and write the number of lines to count.json.",
+   "outcome": "ESCAPED",
+   "seconds": 0.033
+  },
+  {
+   "detail": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "id": "gzip_copy",
+   "instruction": "Make a compressed copy of data.txt that gunzip can restore exactly.",
+   "outcome": "COMPILE",
+   "seconds": 0.02
+  },
+  {
+   "capabilities": [
+    "python.refactor.inline_helper.v1"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/brain_out__python_refactor_inline_helper_v1__cc84267b38.json"
+   ],
+   "id": "tar_gz_bundle",
+   "instruction": "Bundle data.txt, one.log and two.log into a single tar.gz archive.",
+   "outcome": "ESCAPED",
+   "seconds": 0.005
+  },
+  {
+   "detail": "GOAL_COMPILATION_NO_VERIFIED_CAPABILITY_MATCH",
+   "id": "rename_logs",
+   "instruction": "Rename every .log file in this directory so it ends in .txt instead.",
+   "outcome": "COMPILE",
+   "seconds": 0.007
+  },
+  {
+   "capabilities": [
+    "auto.pypi.msgpack"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/auto_proposal/c83810ad25942a72_direct-ac3c15c5ae695914_output-path.msgpack"
+   ],
+   "id": "adults_from_json",
+   "instruction": "Write the names of the people in records.json who are older than 30 to adults.txt, one name per line, in alphabetical order.",
+   "outcome": "ESCAPED",
+   "seconds": 0.011
+  },
+  {
+   "capabilities": [
+    "docx.document.create.python_docx"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/brain_out__docx_document_create_python_docx__0c9585901b.docx"
+   ],
+   "id": "sqlite_row",
+   "instruction": "Create tasks.db with a table called tasks and put one row in it.",
+   "outcome": "ESCAPED",
+   "seconds": 0.007
+  },
+  {
+   "capabilities": [
+    "python.source.definition_count.v1"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/brain_out__python_source_definition_count_v1__d654dfdf39.json"
+   ],
+   "id": "count_error_files",
+   "instruction": "Count the files in this directory that mention error and write the number to hits.txt.",
+   "outcome": "ESCAPED",
+   "seconds": 0.007
+  },
+  {
+   "capabilities": [
+    "python.source.definition_count.v1"
+   ],
+   "detail": [
+    "canonical/astra_runtime/tmp/brain_out__python_source_definition_count_v1__d654dfdf39.json"
+   ],
+   "id": "digest_report",
+   "instruction": "Write digest.json describing data.txt: how many bytes it has and its sha256.",
+   "outcome": "ESCAPED",
+   "seconds": 0.014
+  }
+ ],
+ "schema": "PROJECT_BRAIN_TASK_GATE_V1",
+ "tasks": 8
+}
