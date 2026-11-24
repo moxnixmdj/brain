@@ -198,3 +198,130 @@ class TheVerdictIsTheBenchmarksNotTheSearchs(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# --- phase 2: the body that is already in the class -------------------------------------------
+
+def test_a_missing_method_is_found_as_a_factored_statement_of_the_class():
+    """The case no single-purpose primitive can express.
+
+    `set_state_for_host(self, host_name, state)` needs `self._host_states[host_name] = state`,
+    and the class already runs `self._host_states[host.name] = s` inside `mark_host_failed`. The
+    missing method is a FACTORISATION of that statement. Nothing here is supplied: the statement
+    is in the module and the parameter names come from the test's call site.
+    """
+    from canonical.runtime.search_a_body_under_the_test_v1 import harvest_from_owner
+    owner = (
+        "class PlayIterator:\n"
+        "    def mark_host_failed(self, host):\n"
+        "        s = self.get_host_state(host)\n"
+        "        self._host_states[host.name] = s\n"
+    )
+    bodies = [b for _, b in harvest_from_owner(owner, ["host_name", "state"])]
+    assert "self._host_states[host_name] = state" in bodies
+
+
+def test_the_harvest_substitutes_the_KEY_and_the_VALUE_INDEPENDENTLY():
+    """Substituting only the right-hand side keeps `[host.name]`, which is the wrong key.
+
+    That version was tried live and failed eight tests. The key has to move too, so both slots
+    are offered and the test decides -- a wrong combination costs one run, not a wrong answer.
+    """
+    from canonical.runtime.search_a_body_under_the_test_v1 import harvest_from_owner
+    owner = ("class K:\n"
+             "    def a(self, host):\n"
+             "        self._d[host.name] = s\n")
+    bodies = [b for _, b in harvest_from_owner(owner, ["name", "value"])]
+    assert "self._d[name] = value" in bodies
+    # Every key slot is offered against every parameter, so a body keyed on the wrong parameter
+    # is also tried -- and costs one run, decided by the test rather than by this function.
+    assert "self._d[value] = value" in bodies
+
+
+def test_the_harvest_never_rewrites_a_longer_right_hand_side():
+    """`seg.replace("= s", ...)` also hit `= self._insert_tasks_into_state(...)`.
+
+    It produced `= res_stateelf._insert...`, a body that could only ever fail. Only a right-hand
+    side that IS the name is a slot.
+    """
+    from canonical.runtime.search_a_body_under_the_test_v1 import harvest_from_owner
+    owner = ("class K:\n"
+             "    def a(self, host, task_list):\n"
+             "        self._d[host.name] = self._insert(self._g(host), task_list)\n")
+    bodies = [b for _, b in harvest_from_owner(owner, ["h", "tl"])]
+    assert not any("res_stateelf" in b or "tlelf" in b for b in bodies)
+    assert not any(b.endswith("= tl_insert") for b in bodies)
+
+
+def test_the_harvest_returns_nothing_for_a_class_with_no_statements():
+    """An empty class must not make the search believe it has candidates."""
+    from canonical.runtime.search_a_body_under_the_test_v1 import harvest_from_owner
+    assert harvest_from_owner("class K:\n    pass\n", ["a", "b"]) == []
+    assert harvest_from_owner("def broken(:", ["a"]) == []      # unparseable is empty, not an error
+
+
+# --- the bare AttributeError, which is how a __getattr__ reports a missing member --------------
+
+def test_a_bare_attribute_error_is_read_as_a_missing_member_only_when_the_test_calls_it():
+    """`raise AttributeError(name)` produces a bare name, not "X has no attribute n".
+
+    A reader keyed on the phrased form cannot see it, and the instance then looks like an edit
+    when it is a missing member. The receiver must come from the TEST, because the error does not
+    name it -- and a name the test never calls is refused rather than guessed.
+    """
+    from canonical.runtime.derive_from_the_failure_v1 import read_bare_missing_member
+    src = (
+        "def test_it(self):\n"
+        "    itr = PlayIterator(inventory=inv)\n"
+        "    itr.set_state_for_host('h', st)\n"
+    )
+    assert read_bare_missing_member("E   AttributeError: set_state_for_host\n", src) == \
+        ("itr", "set_state_for_host")
+    # THE RECEIVER IS READ, NOT ASSUMED. A mutant that hard-codes "itr" passes the line above,
+    # so the same call under a different receiver name must report that name.
+    src2 = ("def test_it(self):\n"
+            "    cursor = PlayIterator(inventory=inv)\n"
+            "    cursor.set_state_for_host('h', st)\n")
+    assert read_bare_missing_member("E   AttributeError: set_state_for_host\n", src2) == \
+        ("cursor", "set_state_for_host")
+    # A name the test never calls cannot be attributed to a receiver.
+    assert read_bare_missing_member("E   AttributeError: never_called\n", src) is None
+    # The phrased form belongs to the other reader; this one must not fire on it.
+    assert read_bare_missing_member("E   AttributeError: 'K' object has no attribute 'm'\n",
+                                    src) is None
+
+
+def test_the_owning_class_is_read_from_the_test_not_from_the_error():
+    from canonical.runtime.derive_from_the_failure_v1 import receiver_class_in
+    src = ("def test_it(self):\n"
+           "    itr = PlayIterator(inventory=inv)\n"
+           "    itr.set_state_for_host('h', st)\n")
+    assert receiver_class_in(src, "itr") == "PlayIterator"
+    assert receiver_class_in(src, "nobody") is None
+
+
+# --- phase 2 is reachable ----------------------------------------------------------------------
+
+def test_the_search_tries_the_harvest_after_the_primitives_fail():
+    """A phase that is never reached is a phase that does not exist.
+
+    Asserted on the source of `search_body`: the call must be there and must come after the
+    primitive loop, because a harvested statement is a weaker fit than a purpose-built shape.
+    """
+    import inspect
+    from canonical.runtime import search_a_body_under_the_test_v1 as S
+    body = inspect.getsource(S.search_body)
+    assert "harvest_from_owner" in body, "phase 2 is not wired into the search"
+    assert body.index("for name, body in space") < body.index("harvest_from_owner")
+    # And it must be tried BEFORE the function concludes the space was empty.
+    assert body.index("harvest_from_owner") < body.rindex("NONE_OF_THE_SPACE")
+
+
+def test_a_truncated_right_hand_side_is_never_offered():
+    """`rhs.split(".")[0]` turned `self._insert(x, y)` into `self`, a body that cannot run."""
+    from canonical.runtime.search_a_body_under_the_test_v1 import harvest_from_owner
+    owner = ("class K:\n"
+             "    def a(self, host, tl):\n"
+             "        self._d[host.name] = self._insert(self._g(host), tl)\n")
+    bodies = [b for _, b in harvest_from_owner(owner, ["h", "t"])]
+    assert not any(b.endswith("= self") for b in bodies), bodies

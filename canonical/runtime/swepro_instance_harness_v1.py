@@ -214,7 +214,8 @@ def _apply(room: Path, patch: Path, *, check_only: bool = False) -> tuple[bool, 
     return proc.returncode == 0, (proc.stdout + proc.stderr).strip()
 
 
-def prepare_room(room: Path, python: str, *, timeout: int = 600) -> dict:
+def prepare_room(room: Path, python: str, *, repo_slug: str = "",
+                 timeout: int = 600) -> dict:
     """Make the room able to run its OWN tests: submodules, then requirements.
 
     A room whose conftest cannot import is not a task, it is a broken room -- measured on
@@ -266,12 +267,13 @@ def prepare_room(room: Path, python: str, *, timeout: int = 600) -> dict:
     # Key on the REPO, read from the room's own git remote -- not on a directory name, which
     # identifies the batch run and not the code. Two instances of one repo then share one venv;
     # two repos never do.
-    try:
-        remote = subprocess.run(["git", "config", "--get", "remote.origin.url"], cwd=room,
-                                capture_output=True, text=True, timeout=30).stdout.strip()
-    except Exception:
-        remote = ""
-    repo_key = re.sub(r"\W+", "-", remote.rstrip("/").split("/")[-1].removesuffix(".git")) or "repo"
+    # The room is a fresh `git init` with NO remote (measured: `git config --get
+    # remote.origin.url` exits 1), so a key derived from the remote fell back to the literal
+    # "repo" for EVERY instance of EVERY repository -- one venv shared across ansible and
+    # openlibrary, which is a dependency collision waiting for the second repo to be measured.
+    # The caller knows the instance, and the instance name contains the slug, so take it as an
+    # argument rather than re-deriving it from the filesystem.
+    repo_key = re.sub(r"\W+", "-", repo_slug or "unknown-repo")
     venv_dir = room.parent / f"venv-{repo_key}"
     if not (venv_dir / "bin" / "python").exists():
         subprocess.run([python, "-m", "venv", str(venv_dir)], capture_output=True, text=True,

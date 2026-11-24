@@ -9837,3 +9837,79 @@ testing the word, not the property; it now walks the AST and checks what is actu
     (166) A test that fails on the comment explaining a repair is testing the wrong artifact.
     (167) The number is only as good as the plumbing: three of the seven harness defects
           returned a plausible result and raised nothing.
+
+## §A157 — The body that was already in the class: 3/15, 20 %
+
+*2026-11-24. One new mechanism, one new instance, and the first dent in the EDIT class.*
+
+### The measurement
+
+| round | mechanisms | resolved | of runnable |
+|---|---|---|---|
+| §A156 | member search + operator gap | 2 | 15 |
+| §A157 | + statement harvest | **3** | 15 |
+
+    ansible-11c1777d  NEW SYMBOL      call_each_variant_then_parse      candidate 18
+    ansible-0ea40e09  operator gap    reflected_operator_from_mapping   candidate 19
+    ansible-5c225dc0  bare Attribute  harvest:both-params              candidate 68
+
+### What §A156 called "not derivable" was derivable
+
+`ansible-5c225dc0` failed with `AttributeError: set_state_for_host` and was filed under
+`NOT_DERIVABLE_BY_THIS_SPACE`. Two things were wrong with that filing.
+
+**First, the failure was not being read.** The class raises `AttributeError(name)` from
+`__getattr__`, which produces a BARE NAME — no "has no attribute" phrasing. My reader was keyed on
+the phrased form, so it saw nothing and fell through to the edit branch. `read_bare_missing_member`
+now reads the bare form, and takes the *receiver* from the test's own call site, because the error
+does not name it. A name the test never calls is refused rather than guessed.
+
+**Second, no primitive could ever have fit, and that was the point.** The required body is
+
+    self._host_states[host_name] = state
+
+and the class already contains, inside `mark_host_failed`,
+
+    self._host_states[host.name] = s
+
+The missing method is a **factorisation of a statement the class already runs**. A space of
+single-purpose shapes cannot express "the same assignment, re-keyed", because the assignment is
+not a shape — it is a line of this particular module.
+
+So phase 2 harvests: every bare `self.`-assignment in the owner class becomes a candidate, and
+every `[...]` key in it is offered against every parameter the test calls with. 45 statements for
+one class; candidate 68 of 69 resolved it.
+
+### What is derived, and what is supplied
+
+Nothing in `self._host_states[arg0] = res_state` was written by me:
+
+    * the statement        from the owner module (`mark_host_failed`)
+    * the receiver key     from the test's call site inside `[...]`
+    * the parameters       from `call_signature_at` on the test
+    * the decision         the benchmark's own 8 named tests
+
+The only thing the harvest contributes is the *hypothesis* that a missing method may be an
+existing statement re-keyed — a hypothesis the test adjudicates, and which costs one run when
+wrong.
+
+### The bucketing that this overturns
+
+§A156 published a deficit table with four instances under "value/behaviour" and labelled the rest
+by error string. That table was a classification of *messages*, not of *mechanisms*, and one of the
+entries it called un-derivable was a missing member the whole time. The distribution was also
+flat — no shape had more than four instances — which is why no single next primitive was worth
+building, and why the thing that worked was a mechanism that searches a different space entirely
+rather than a longer list.
+
+    (168) A flat deficit distribution says the next candidate is not another item in the same
+          list. It says the space is wrong.
+    (169) "Not derivable by this space" is a statement about the space. It must never be
+          recorded as a statement about the task, and it must not survive a second look.
+
+### Honest limits
+
+    * 3 of 15 runnable rooms; 23 instances of 237, one repository.
+    * Candidate 68 of 69 is a win and also a warning: the harvest is a shotgun. The next
+          question is whether 45 statements can be *ranked* instead of enumerated.
+    * §6 NOT MET.

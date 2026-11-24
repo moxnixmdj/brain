@@ -61,7 +61,7 @@ import sys
 
 __all__ = [
     "read_missing_member", "call_signature_at", "locate_class", "append_member",
-    "read_operator_gap",
+    "read_operator_gap", "read_bare_missing_member", "receiver_class_in",
     "grade_named_tests", "find_pytest",
 ]
 
@@ -139,6 +139,55 @@ def read_missing_member(output: str) -> tuple[str, str, bool] | None:
     m = MODULE_MISSING_RE.search(output)
     if m:
         return m.group("mod"), m.group("name"), True
+    return None
+
+
+# `raise AttributeError(name)` inside a `__getattr__` produces a BARE NAME, not the usual
+# "X has no attribute n" phrasing. A reader keyed only on the phrased form cannot see it, and the
+# instance then looks like an edit when it is a missing member (§A156: ansible-5c225dc0).
+BARE_ATTR_RE = re.compile(r"^E\s+AttributeError:\s*([A-Za-z_]\w*)\s*$", re.MULTILINE)
+
+
+def read_bare_missing_member(output: str, test_source: str) -> tuple[str, str] | None:
+    """(receiver, name) when a bare `AttributeError: name` names a method the TEST calls.
+
+    The error alone says a name is absent; it does not say from what. The test's own call site is
+    the only honest source for the receiver, so a bare name that the test does not call is
+    rejected rather than guessed -- a missing member written onto the wrong class is worse than
+    a refusal, because it compiles and changes behaviour somewhere else.
+    """
+    m = BARE_ATTR_RE.search(output)
+    if not m:
+        return None
+    name = m.group(1)
+    try:
+        tree = ast.parse(test_source)
+    except SyntaxError:
+        return None
+    for node in ast.walk(tree):
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+                and node.func.attr == name):
+            recv = node.func.value
+            if isinstance(recv, ast.Name):
+                return recv.id, name
+    return None
+
+
+def receiver_class_in(source: str, receiver: str) -> str | None:
+    """The class assigned to `receiver` in the test, following `x = Klass(...)` or `Klass(...)`."""
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Assign) and isinstance(node.value, ast.Call):
+            for tgt in node.targets:
+                if isinstance(tgt, ast.Name) and tgt.id == receiver:
+                    f = node.value.func
+                    if isinstance(f, ast.Name):
+                        return f.id
+                    if isinstance(f, ast.Attribute):
+                        return f.attr
     return None
 
 

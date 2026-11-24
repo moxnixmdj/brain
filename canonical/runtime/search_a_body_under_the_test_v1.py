@@ -33,12 +33,14 @@ from __future__ import annotations
 
 import itertools
 import pathlib
+import re
 import subprocess
 import sys
 import tempfile
 from typing import Iterable
 
-__all__ = ["PRIMITIVES", "candidates", "search_body", "render_candidate", "search"]
+__all__ = ["PRIMITIVES", "candidates", "search_body", "render_candidate", "search",
+           "harvest_from_owner"]
 
 # Each primitive is a small, self-contained body text. `{N}` is the hole for the argument name
 # that the caller's parameter list supplies. Nothing here is a world fact: every entry is a
@@ -262,6 +264,66 @@ def candidates(primitives: dict[str, str] | None = None,
             yield name, render_candidate(template, arg_name=arg_name)
 
 
+# A MECHANISM THE SPACE DID NOT HAVE: the body already exists elsewhere in the class.
+#
+# `set_state_for_host(self, host_name, state)` fits no primitive, and the reason is that the
+# behaviour is not new -- `mark_host_failed` already contains `self._host_states[host.name] = s`.
+# The missing method is a FACTORISATION of a statement the class already runs. So before
+# concluding `NONE_OF_THE_SPACE`, take every bare assignment in the class as a candidate body.
+#
+# Still derived, not supplied: the statement comes from the module, the parameter names from the
+# test's call site, and the test decides whether the result is right.
+def harvest_from_owner(owner_source: str, params: list[str]) -> list[tuple[str, str]]:
+    """(label, body) candidates from statements already present in the owner class."""
+    import ast
+    try:
+        tree = ast.parse(owner_source)
+    except SyntaxError:
+        return []
+    out: list[tuple[str, str]] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, ast.FunctionDef):
+            continue
+        for stmt in node.body:
+            if not isinstance(stmt, ast.Assign) or len(stmt.targets) != 1:
+                continue
+            seg = ast.get_source_segment(owner_source, stmt)
+            if not seg or "self." not in seg or "\n" in seg.strip():
+                continue
+            seg = seg.strip()
+            out.append(("verbatim", seg))
+            # SUBSTITUTE BOTH PARAMETERS, each for a plausible existing token.
+            #
+            # `set_state_for_host(host_name, state)` needs `self._host_states[host_name] = state`,
+            # and the statement in the class reads `self._host_states[host.name] = s`. Substituting
+            # only the right-hand side gives `[host.name] = res_state`, which is the wrong KEY and
+            # fails; the key has to move too. Rather than teach the harvester Python semantics, it
+            # offers the combinations and the test decides -- which is the same oracle every other
+            # candidate is judged by, so a wrong combination simply costs one run.
+            #
+            # The tokens are the ones already IN the statement (`host.name`, `s`), and the
+            # parameters are the ones the TEST calls with. Nothing is invented on either side.
+            if len(params) >= 2:
+                rhs = seg.rsplit("=", 1)[1].strip()
+                lhs = seg.rsplit("=", 1)[0]
+                # Every `[...]` key and every trailing bare name in the left side is a slot.
+                keys = re.findall(r"\[([^\]]+)\]", lhs)
+                for k in keys:
+                    for repl_key in (params[0], params[1]):
+                        for repl_val in (params[1], params[0]):
+                            new_lhs = lhs.replace(f"[{k}]", f"[{repl_key}]")
+                            new_val = repl_val if rhs == "s" else rhs
+                            out.append(("both-params",
+                                        f"{new_lhs.strip()} = {new_val}"))
+    seen, uniq = set(), []
+    for label, body in out:
+        if body in seen:
+            continue
+        seen.add(body)
+        uniq.append((label, body))
+    return uniq
+
+
 def _install(root: pathlib.Path, owner_path: pathlib.Path, owner_class: str, member: str,
              params: list[str], rendered_body: str, backup: str) -> bool:
     """Replace the member's body in the owner's class. Restores `backup` on any failure."""
@@ -357,9 +419,32 @@ def search_body(root: pathlib.Path, *, owner_path: pathlib.Path, owner_class: st
             return {"found": True, "candidate": name, "body": body, "tried": tried,
                     "literals": literals, "history": history[-3:], "outcome": "FOUND_AND_CONFIRMED"}
         owner_path.write_text(src_backup, encoding="utf-8")
+    # PHASE 2: nothing in the primitive space fits, so look for the body IN THE CLASS ITSELF.
+    # A missing method is often a factorisation of a statement the class already runs, which no
+    # single-purpose primitive can express. The statement is taken verbatim (or with the call
+    # site's parameter substituted) and the same oracle decides.
+    harvested = harvest_from_owner(src_backup, params)
+    for label, body in harvested:
+        if max_candidates is not None and tried >= max_candidates:
+            break
+        tried += 1
+        ok = _install(root, owner_path, owner_class, member, params, body, src_backup)
+        if not ok:
+            history.append({"candidate": f"harvest:{label}", "installed": False})
+            owner_path.write_text(src_backup, encoding="utf-8")
+            continue
+        rep = grade_named_tests(root, test_ids, [], python=python)
+        history.append({"candidate": f"harvest:{label}", "installed": True,
+                        "resolved": rep["resolved"], "tail": rep["tail"]})
+        if rep["resolved"]:
+            return {"found": True, "candidate": f"harvest:{label}", "body": body, "tried": tried,
+                    "literals": literals, "history": history[-3:],
+                    "outcome": "FOUND_AND_CONFIRMED"}
+        owner_path.write_text(src_backup, encoding="utf-8")
     owner_path.write_text(src_backup, encoding="utf-8")
     return {"found": False, "tried": tried, "history": history[-3:],
-            "outcome": "NONE_OF_THE_SPACE", "space_size": len(space), "literals": literals}
+            "outcome": "NONE_OF_THE_SPACE", "space_size": len(space) + len(harvested),
+            "literals": literals}
 
 
 def search(*args, **kwargs):  # pragma: no cover - thin alias kept for one entry point

@@ -202,7 +202,7 @@ def run_one(instance: str, workdir: pathlib.Path, python: str, *, fetch_only: bo
         # Make the room able to run its own tests BEFORE grading. Skip this and a conftest
         # ImportError reads as a failed task; measured on openlibrary (10/10 "failures" that were
         # a missing submodule and a missing `babel`).
-        rec["prepare"] = H.prepare_room(room, python)
+        rec["prepare"] = H.prepare_room(room, python, repo_slug=repo_slug)
         # Grade with the ROOM'S interpreter, never the caller's: the room installed its own pins
         # and a shared interpreter belongs to a different instance's dependency set.
         python = rec["prepare"].get("venv") or python
@@ -302,6 +302,30 @@ def _attempt(room: pathlib.Path, contract: dict, python: str) -> dict:
             return {"branch": "operator_gap", "gap": gap,
                     "search": {k: rep.get(k) for k in ("found", "outcome", "candidate", "tried")}}
         return {"branch": "operator_gap", "gap": gap, "result": "TARGET_CLASS_NOT_FOUND"}
+
+    # BRANCH 3: a BARE `AttributeError: name`, which is how a missing member surfaces when the
+    # class raises it from `__getattr__`. The name comes from the error, the receiver and the
+    # owning class from the TEST's own call site -- never guessed.
+    tf3 = _test_file(room, test_id)
+    if tf3 is not None:
+        src3 = tf3.read_text(encoding="utf-8", errors="replace")
+        bare = D.read_bare_missing_member(out, src3)
+        if bare is not None:
+            receiver, name = bare
+            owner = D.receiver_class_in(src3, receiver)
+            loc = D.locate_class(room, owner) if owner else None
+            if loc is not None:
+                params = D.call_signature_at(src3, name) or []
+                rep = S.search_body(room, owner_path=loc[0], owner_class=owner, member=name,
+                                    params=params,
+                                    test_ids=list(f2p) + list(contract["pass_to_pass"]),
+                                    test_source=src3, python=python)
+                return {"branch": "bare_attribute", "owner": owner, "member": name,
+                        "params": params,
+                        "search": {k: rep.get(k) for k in
+                                   ("found", "outcome", "candidate", "tried")}}
+            return {"branch": "bare_attribute", "owner": owner, "member": name,
+                    "result": "OWNER_NOT_FOUND" if owner else "RECEIVER_CLASS_UNKNOWN"}
 
     return {"branch": "edit", "result": "NOT_DERIVABLE_BY_THIS_SPACE", "failure": failure}
 
