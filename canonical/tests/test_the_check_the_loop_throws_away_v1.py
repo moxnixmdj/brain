@@ -19,7 +19,7 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "canonical" / "verification" / "CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
-RECEIPT = ROOT / "canonical" / "verification" / "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json"
+RECEIPT = ROOT / "canonical" / "verification" / "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json"
 
 
 def source() -> dict:

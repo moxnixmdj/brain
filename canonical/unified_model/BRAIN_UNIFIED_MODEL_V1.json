@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "da7e52a6cb14ff18c373be82a596e806943c92613653e10242f611f79c46c982"
+  "value": "e27144c41d0997d3156b5dabd89ec610d323ba4227fe191f2818b9e54d3f646c"
  },
  "engines": [
   {
@@ -221883,21 +221883,21 @@
    }
   },
   {
-   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1",
+   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
    "capability": false,
-   "date": "2026-11-25",
-   "id": "research:canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
    "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+   "path": "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
    "schema": "PROJECT_BRAIN_THE_CHECK_THE_LOOP_THROWS_AWAY_V1",
-   "sha256": "f5d77518d98a8314782a525a66f64d4654a4e36dd074bef925fb89884b25e7e1",
+   "sha256": "7c1a9d505234e14f3397c7ef1b21613c8711a443b61de16d842314c8bb9169cb",
    "status": "",
    "terms": {
-    "20261125": 1,
+    "20261124": 1,
     "away": 1,
     "check": 1,
     "loop": 1,
-    "the_check_the_loop_throws_away_20261125_v1": 1,
+    "the_check_the_loop_throws_away_20261124_v1": 1,
     "throws": 1,
     "v1": 1
    }
@@ -259520,22 +259520,22 @@
    }
   },
   {
-   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1",
+   "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
    "capability": false,
-   "date": "2026-11-25",
-   "id": "research:canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
    "kind": "RESEARCH_RECORD",
-   "path": "canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+   "path": "canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a2f249372598884554b6f44a5120ef26869f938f9dc169da50b65a3d9b404eba",
+   "sha256": "ea5c264d9fc3b1794605cfbf24e592a54b7dffd0b01c38c8d6125c93a9e249df",
    "status": "SHIPPED",
    "terms": {
     "0.400": 1,
     "17": 1,
-    "20261125": 1,
+    "20261124": 1,
     "26": 1,
     "500": 1,
-    "already": 1,
+    "already": 2,
     "among": 1,
     "another": 1,
     "arrangement": 2,
@@ -259550,16 +259550,16 @@
     "choose": 1,
     "code": 1,
     "every": 1,
+    "expert": 1,
     "failing": 1,
     "fails": 1,
-    "file": 1,
+    "file": 2,
     "files": 1,
     "find": 1,
-    "frontier": 1,
-    "general_reusable_problem_solving_capability_frontier": 1,
     "hidden": 2,
+    "hold": 2,
     "material": 2,
-    "over": 2,
+    "project": 2,
     "signal": 2,
     "tests": 3
    }

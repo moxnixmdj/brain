@@ -3,7 +3,7 @@
 
 WHY THIS EXISTS
 ---------------
-`THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1` retracted a number from the round before it and
+`THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1` retracted a number from the round before it and
 replaced it with three measured ones. A retraction is only worth something if the replacement can
 be re-derived by somebody who does not trust the receipt, so the two numbers that carry the
 conclusion are recomputed here from material anybody can fetch:

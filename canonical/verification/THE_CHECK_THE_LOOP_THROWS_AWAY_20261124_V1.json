@@ -1,8 +1,8 @@
 {
  "schema": "PROJECT_BRAIN_THE_CHECK_THE_LOOP_THROWS_AWAY_V1",
- "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1",
+ "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
  "authority": "MEASURED__READS_THE_TASK_STATEMENTS, THE EXPERT FIXES AND A TRACE OF THE TASKS' OWN TESTS; RUNS NO MODEL AND ASKS NOBODY",
- "date": "2026-11-25",
+ "date": "2026-11-24",
  "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
  "model_calls": 0,
  "network_calls": "github.com only (the benchmark's own statements and test patches, the Django trees at each task's base commit, the merged pull requests behind each task)",

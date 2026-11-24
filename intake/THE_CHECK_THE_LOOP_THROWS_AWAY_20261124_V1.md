@@ -1,6 +1,6 @@
 # The check the loop throws away — and the number that was wrong
 
-**2026-11-25 · no benchmark run · zero model calls · zero dollars**
+**2026-11-24 · no benchmark run · zero model calls · zero dollars**
 
 ## What I set out to build
 
@@ -85,8 +85,8 @@ A withdrawal and a redirect, not a capability gain. No task was resolved here; n
 against the benchmark. What changed is that a false number is gone, replaced by a measured one,
 and the next round's question is different because of it.
 
-- Receipt: `canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json`
+- Receipt: `canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json`
 - Tests: `canonical/tests/test_the_check_the_loop_throws_away_v1.py` (14 tests)
-- Intent: `canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json`
+- Intent: `canonical/action_intents/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json`
 
 Authority NONE — a measurement, not a verification receipt.
