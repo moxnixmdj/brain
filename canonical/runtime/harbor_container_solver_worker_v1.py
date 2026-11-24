@@ -192,7 +192,8 @@ def _pro_imported_cycle(inputs, repo: str) -> dict:
 
 
 _CIPHER_MARKERS = ("cipher", "ciphertext", "decrypt", "encrypt", "vigenere",
-                   "plaintext", "cryptanalysis", "keystream")
+                   "plaintext", "cryptanalysis", "keystream", "secret message",
+                   "encoded message", "cryptogram", "ciphered", "crack", "substitution")
 
 
 def _find_letter_specimen(root: str) -> tuple[str | None, dict[str, int]]:
@@ -247,8 +248,6 @@ def _cipher_candidate_cycle(request, inputs, repo: str) -> dict | None:
     """
     instruction = str(inputs.get("harbor_task") or "") + "\n" + str(request.get("goal") or "")
     goal_hit = any(marker in instruction.lower() for marker in _CIPHER_MARKERS)
-    if not goal_hit:
-        return None
     workspace = repo if Path(repo).is_absolute() else os.getcwd()
     specimen, census = _find_letter_specimen(workspace)
     if specimen is None:
@@ -258,6 +257,14 @@ def _cipher_candidate_cycle(request, inputs, repo: str) -> dict | None:
         text = Path(specimen).read_text(encoding="utf-8", errors="ignore")
     except OSError:
         return None
+    # Vocabulary-free gate: a long letter-only file whose index of coincidence
+    # is below the English monalphabetic baseline (~0.062) carries a
+    # polyalphabetic fingerprint. Computed from content, never from the task.
+    ioc_val = cc.ioc(text)
+    content_hit = len(cc._letters(text)) >= 200 and ioc_val < 0.055
+    if not goal_hit and not content_hit:
+        return None
+    gate = "goal_marker" if goal_hit else "low_ioc"
     cracked = cc.crack(text)
     applied = {"status": "CANDIDATE_EXECUTED_IN_PLACE__UNVERIFIED",
                "official_verifier_invoked": False}
@@ -281,6 +288,7 @@ def _cipher_candidate_cycle(request, inputs, repo: str) -> dict | None:
         classical_cipher={
             "specimen_scanned": census,
             "ioc_ciphertext": cracked.get("ioc_ciphertext"),
+            "ioc_gate_fired": gate,
             "variant": best.get("variant"),
             "period": best.get("period"),
             "candidates_tried": cracked.get("candidates_tried"),

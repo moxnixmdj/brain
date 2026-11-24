@@ -159,13 +159,18 @@ class CipherCandidateCycleTests(unittest.TestCase):
         self.assertFalse(cc_info["official_verifier_invoked"])
 
     def test_non_cipher_goal_does_not_invoke_engine(self):
-        request = {"goal": "Fix the failing unit tests in the project",
-                   "mode": "EPISTEMIC",
-                   "inputs": {"harbor_suite": "terminal-bench-4",
-                              "harbor_task": "Fix the failing unit tests in the project",
-                              "harbor_repo": str(self.root),
-                              "observations": [],
-                              "experimental_candidate_path": True}}
+        with tempfile.TemporaryDirectory() as plain_root:
+            # an English prose file (high IoC) and a non-cipher goal: the engine
+            # must stay out and the ordinary fallback path runs.
+            prose = _english_prose_slice(800)
+            Path(plain_root, "notes.txt").write_text(prose if prose else "HELLO WORLD THIS IS PLAIN TEXT" * 40)
+            request = {"goal": "Fix the failing unit tests in the project",
+                       "mode": "EPISTEMIC",
+                       "inputs": {"harbor_suite": "terminal-bench-4",
+                                  "harbor_task": "Fix the failing unit tests in the project",
+                                  "harbor_repo": plain_root,
+                                  "observations": [],
+                                  "experimental_candidate_path": True}}
         with patch.object(doc_compiler, "solve_multi_step_with_instant_knowledge",
                           return_value={"status": "FAILED", "mode": "CLI_EXECUTION_UNVERIFIED",
                                         "elapsed_ms": 1.0, "model_calls": 0, "parameters_stored": 0}), \

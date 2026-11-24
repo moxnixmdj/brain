@@ -1,7 +1,7 @@
 name: Frontier 2x2 Docker smoke evaluation
 
-# Triggered by pushing a commit that touches this file; HEAD adds the admitted classical-cipher
-# capability (Friedman/Kasiski/zlib arbiter) to the experimental TB4 path.
+# Triggered by pushing a commit that touches this file; HEAD widens the cipher gate with
+# a computed index-of-coincidence content test (no reliance on task vocabulary).
 
 # The push trigger is confined to the current session branch and this file;
 # manual dispatch remains available from the default branch.
