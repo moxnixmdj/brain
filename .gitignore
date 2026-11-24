@@ -54,3 +54,7 @@ canonical/tmp_*.json
 # Run-time state the fixture programs write. Committed once by mistake, it made every test run
 # dirty the working tree and hid real changes. State is an effect of running, not source.
 canonical/tests/programs/bin/.*-state.json
+
+# Scratch output from tar/gzip probes (A67 left 26 zero-byte `gzNNNNNN` files in the tree).
+# An experiment must not be able to commit its own litter.
+gz[0-9]*
