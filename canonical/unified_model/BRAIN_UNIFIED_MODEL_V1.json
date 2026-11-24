@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "9727c38c62930ec802080620c79f352ae0fc72e39a35e83945ca9172bba57b62"
+  "value": "65c233c9e5524e1640b89b2181858ee670dcdd5a6e76ae5f888d82d93f13aeab"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "c8f692a18428344b553135dbf1c1c9f48426f1619da3554e176fccc38340d8b8",
+   "sha256": "26acedcd8b3c3ccb3bd5602a10220a0233b92230e1e43d7340c202a94fa5eeb5",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -273995,7 +273995,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "ade3a6052e5aec6743bdd7414ee471a4caf478fcc78049b13576b863f14917df",
+   "sha256": "809e3e1fc71cb83aabcddd54d9b449a3db377336be186eebcb0bbc17b260d6dc",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -278289,9 +278289,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "5c3914e2ccd2f57878a29e527b2f17a5fba6db1a0e8e494848e5fde7ac85c3de",
+   "sha256": "666845083c0c997582b187d479d139a761ae92c0109db38ea3bfa940b255cde9",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
-   "symbol_count": 44,
+   "symbol_count": 45,
    "symbols": [
     "AngelicWitness",
     "LocalizationReport",
@@ -278300,6 +278300,7 @@
     "_anti_unify_sexpr_pairs",
     "_ast_expr_to_sexpr",
     "_boolean_positions",
+    "_cascade_propagate_partial_patch",
     "_cegis_refine_entry_guard",
     "_collect_pattern_vars",
     "_compress_ast_rewrite_laws",
@@ -278315,8 +278316,7 @@
     "_match_sexpr_pattern",
     "_mutate_condition_exprs",
     "_oe_safe_eval_ast",
-    "_oe_sig_key",
-    "_pytest_env"
+    "_oe_sig_key"
    ],
    "terms": {
     "angelic": 1,
@@ -288233,12 +288233,14 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_scan_acquire_compress_v1.py",
-   "sha256": "6e40385aa70ddab336f9a6e6abec5ff7d3232ffca0ba192c0eb9edf1ed808638",
+   "sha256": "04ca4a89977a2998fa83881bd975629bdb4cb2ad1aab18b6863863d37ff686bc",
    "summary": "Goal-Directed Scan -> Epistemic-Gap-Diff -> Instant-Acquire -> Simulate -> Compress Engine.",
-   "symbol_count": 15,
+   "symbol_count": 19,
    "symbols": [
     "_compute_env_modality_signature",
+    "_http_json_request",
     "_introspect_sqlite",
+    "_run_sqlite_fk_join_query",
     "_sniff_file_format",
     "_tokenize_goal",
     "acquire_missing_knowledge",
@@ -288246,11 +288248,13 @@
     "compute_epistemic_frontier",
     "delete_l2_skill",
     "delete_l3_fact",
+    "execute_verified_plan_live",
     "load_governed_memory",
     "new_governed_memory",
     "refute_l2_skill",
     "save_governed_memory",
     "scan_environment",
+    "solve_unseen_environment_live",
     "synthesize_and_mentally_verify_plan"
    ],
    "terms": {
@@ -288265,17 +288269,21 @@
     "engine": 1,
     "epistemic": 1,
     "epistemic-gap-diff": 1,
+    "execute_verified_plan_live": 1,
     "goal-directed": 1,
+    "http_json_request": 1,
     "instant-acquire": 1,
     "introspect_sqlite": 1,
     "load_governed_memory": 1,
     "new_governed_memory": 1,
     "refute_l2_skill": 1,
+    "run_sqlite_fk_join_query": 1,
     "save_governed_memory": 1,
     "scan": 2,
     "scan_environment": 1,
     "simulate": 1,
     "sniff_file_format": 1,
+    "solve_unseen_environment_live": 1,
     "synthesize_and_mentally_verify_plan": 1,
     "tokenize_goal": 1,
     "v1": 1
@@ -338825,7 +338833,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "7ffa2cf2e315b949b5c7dee11af9d2669ce88ceb2a995202f723dd62ca0a534d",
+   "sha256": "9018333ff19ca187b2fb783b93ddee932a8300d2c56847ad10f13e414ca1d13b",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [

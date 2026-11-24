@@ -4981,6 +4981,8 @@ def solve_arbitrary_environment(
     instruction: str,
     *,
     memory: dict[str, Any] | None = None,
+    governed_memory: dict[str, Any] | None = None,
+    base_url: str | None = None,
     postcondition_fn: Callable[[pathlib.Path], tuple[bool, str]] | None = None,
     dom_nodes: Sequence[Mapping[str, Any]] | None = None,
     gui_env: Any | None = None,
@@ -5002,6 +5004,34 @@ def solve_arbitrary_environment(
     atomic knowledge (model_calls == 0, parameters_stored == 0).
     """
     t0 = time.monotonic()
+    # 00. Live Goal-Directed Scan -> Epistemic-Gap-Diff -> Instant-Acquire -> Leap-4 Mental-Simulate
+    # -> Live Execute (OS + SQLite + HTTP + PatchWorld 401 Recovery) -> L2/L3 Governed Memory Compression
+    if governed_memory is not None:
+        from canonical.runtime import epistemic_scan_acquire_compress_v1 as ESAC
+
+        _es_ver = (
+            (lambda ws_p, _art: postcondition_fn(ws_p))
+            if postcondition_fn is not None
+            else verifier
+        )
+        es_res = ESAC.solve_unseen_environment_live(
+            workspace,
+            instruction,
+            governed_memory=governed_memory,
+            base_url=base_url or api_url or web_url,
+            verifier=_es_ver,
+            timeout_s=timeout_s,
+        )
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": "epistemic_scan_acquire_compress_live",
+            "status": str(es_res.get("status") or "UNSOLVED"),
+            "epistemic_result": es_res,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
     # 0a. Live Interactive Observable GUI / Accessibility-Tree Environment (zero-LLM, OSWorld/ARIA model)
     if gui_env is not None:
         from canonical.runtime import epistemic_world_model_planner_v1 as WM_PLANNER

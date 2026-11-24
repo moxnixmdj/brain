@@ -8984,6 +8984,80 @@ def _synthesize_static_cone_and_truthiness_repairs(
                     f"boolop_or_none_guard({ast.unparse(lhs)} is not None)",
                     code,
                 )
+        # Compiler Lazy-Code-Motion / Dead-Evaluation Sinking:
+        # When `v = expr; raise lhs or rhs` executes `expr` eagerly even though `v` is ONLY
+        # used in `rhs` (dead on the `lhs is not None` branch), sink `v = expr` after
+        # `if lhs is not None: raise lhs` so `expr` is never evaluated on the `lhs` path.
+        for blk_parent in ast.walk(tree):
+            for attr_b in ("body", "orelse", "finalbody"):
+                stmts_b = getattr(blk_parent, attr_b, None)
+                if not isinstance(stmts_b, list) or len(stmts_b) < 2:
+                    continue
+                for idx_s in range(1, len(stmts_b)):
+                    prev_s = stmts_b[idx_s - 1]
+                    curr_s = stmts_b[idx_s]
+                    if not (
+                        isinstance(prev_s, ast.Assign)
+                        and len(prev_s.targets) == 1
+                        and isinstance(prev_s.targets[0], ast.Name)
+                        and isinstance(curr_s, ast.Raise)
+                        and isinstance(curr_s.exc, ast.BoolOp)
+                        and isinstance(curr_s.exc.op, ast.Or)
+                        and len(curr_s.exc.values) == 2
+                        and isinstance(curr_s.exc.values[0], (ast.Attribute, ast.Name, ast.Subscript))
+                    ):
+                        continue
+                    r_ln = getattr(curr_s, "lineno", None)
+                    p_ln = getattr(prev_s, "lineno", None)
+                    if r_ln not in flines and p_ln not in flines:
+                        continue
+                    vname = prev_s.targets[0].id
+                    lhs_s, rhs_s = curr_s.exc.values
+                    lhs_names = {n.id for n in ast.walk(lhs_s) if isinstance(n, ast.Name)}
+                    rhs_names = {n.id for n in ast.walk(rhs_s) if isinstance(n, ast.Name)}
+                    if vname in lhs_names or vname not in rhs_names:
+                        continue
+                    t_sink = copy.deepcopy(tree)
+                    sunk_ok = False
+                    for bp2 in ast.walk(t_sink):
+                        sb2 = getattr(bp2, attr_b, None)
+                        if not isinstance(sb2, list) or len(sb2) <= idx_s:
+                            continue
+                        ps2, cs2 = sb2[idx_s - 1], sb2[idx_s]
+                        if (
+                            getattr(ps2, "lineno", None) == p_ln
+                            and getattr(cs2, "lineno", None) == r_ln
+                            and isinstance(cs2, ast.Raise)
+                            and isinstance(cs2.exc, ast.BoolOp)
+                        ):
+                            lhs2, rhs2 = cs2.exc.values
+                            guard_if = ast.If(
+                                test=ast.Compare(
+                                    left=copy.deepcopy(lhs2),
+                                    ops=[ast.IsNot()],
+                                    comparators=[ast.Constant(value=None)],
+                                ),
+                                body=[ast.Raise(exc=copy.deepcopy(lhs2), cause=copy.deepcopy(cs2.cause))],
+                                orelse=[],
+                            )
+                            new_raise = ast.Raise(exc=copy.deepcopy(rhs2), cause=copy.deepcopy(cs2.cause))
+                            sb2[idx_s - 1 : idx_s + 1] = [guard_if, ps2, new_raise]
+                            sunk_ok = True
+                            break
+                    if sunk_ok:
+                        ast.fix_missing_locations(t_sink)
+                        try:
+                            sunk_code = ast.unparse(t_sink) + "\n"
+                            ast.parse(sunk_code)
+                            add_cand(
+                                rel,
+                                int(r_ln or 1),
+                                "TIER3_BOOLOP_NONE_GUARD",
+                                f"lazy_sink_boolop_none_guard({vname}->{ast.unparse(lhs_s)} is not None)",
+                                sunk_code,
+                            )
+                        except SyntaxError:
+                            pass
 
     # 30. Safe Enum / Mapping Subscript Lookup (`TIER3_ENUM_SUBSCRIPT_LOOKUP`):
     # `try: ... getattr(obj, key) ... except AttributeError:` leaks non-member attributes
@@ -11165,6 +11239,165 @@ def _recall_tier0_ast_rewrite_laws(
     return out
 
 
+def _cascade_propagate_partial_patch(
+    orig_source: str,
+    cand: PatchCandidate,
+    loc: LocalizationReport,
+) -> tuple[str, int] | None:
+    """CascadeFix (ACL 2026) Simultaneous Copy-Cluster Multi-Hunk Propagation.
+
+    Given a single-hunk candidate that flipped a strict subset of failing tests (`partial progress`),
+    induces its alpha-canonical AST rewrite law `(pat_b -> pat_a)` and simultaneously applies it
+    to ALL matching sibling sites across the localized failing functions in `cand.file`!
+    """
+    tmp_store: dict[str, Any] = {}
+    law = _induce_ast_rewrite_law(tmp_store, orig_source, cand.patched_source, cand.lineno, "", cand.tier)
+    pat_b = law.get("pattern_before") if law else None
+    pat_a = law.get("pattern_after") if law else None
+    is_or_none_law = (
+        cand.tier == "TIER3_BOOLOP_NONE_GUARD"
+        or (isinstance(pat_b, list) and len(pat_b) >= 2 and pat_b[0] == "BoolOp" and pat_b[1] == "Or")
+    )
+    if (not pat_b or not pat_a) and is_or_none_law:
+        pat_b = ["BoolOp", "Or", [{"$var": 0}, {"$var": 1}]]
+        pat_a = ["IfExp", ["Compare", {"$var": 0}, ["IsNot"], [["Const", "NoneType", None]]], {"$var": 0}, {"$var": 1}]
+    if not pat_b or not pat_a:
+        return None
+    try:
+        tree = ast.parse(orig_source)
+    except SyntaxError:
+        return None
+
+    # Scope strictly to functions containing localized failing sites (never touch unrelated functions!)
+    fail_lines = {s.lineno for s in loc.sites if s.file == cand.file and s.ef > 0}
+    if not fail_lines:
+        return None
+    target_spans: list[tuple[int, int]] = []
+    for nd in ast.walk(tree):
+        if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            lo = int(getattr(nd, "lineno", 0))
+            hi = int(getattr(nd, "end_lineno", lo) or lo)
+            if any(lo <= fl <= hi for fl in fail_lines):
+                target_spans.append((lo, hi))
+    if not target_spans:
+        return None
+
+    def _in_target_fn(ln: int) -> bool:
+        return any(lo <= ln <= hi for lo, hi in target_spans)
+
+    # Preserve AST context precision: if the pattern is a bare `Name` (e.g. `if x:` -> `if x is not None:`),
+    # only rewrite `If.test` / `IfExp.test` so arbitrary variable loads are never corrupted!
+    is_bare_var_pat = isinstance(pat_b, list) and len(pat_b) == 2 and pat_b[0] == "$V"
+
+    changed = 0
+
+    # Also cascade Lazy-Branch Sinking (`v = expr; raise lhs or rhs` -> `if lhs is not None: raise lhs; v = expr; raise rhs`)
+    # whenever the induced law is a `BoolOp(Or) -> IfExp(IsNot None)` or `lazy_sink_boolop_none_guard`!
+    is_or_none_law = (
+        cand.tier == "TIER3_BOOLOP_NONE_GUARD"
+        or (isinstance(pat_b, list) and len(pat_b) >= 2 and pat_b[0] == "BoolOp" and pat_b[1] == "Or")
+    )
+
+    t_copy = copy.deepcopy(tree)
+    if is_or_none_law:
+        for blk_parent in ast.walk(t_copy):
+            for attr_b in ("body", "orelse", "finalbody"):
+                stmts_b = getattr(blk_parent, attr_b, None)
+                if not isinstance(stmts_b, list) or len(stmts_b) < 2:
+                    continue
+                new_stmts: list[ast.stmt] = []
+                i_s = 0
+                while i_s < len(stmts_b):
+                    if i_s + 1 < len(stmts_b):
+                        ps, cs = stmts_b[i_s], stmts_b[i_s + 1]
+                        r_ln = int(getattr(cs, "lineno", 0))
+                        if (
+                            _in_target_fn(r_ln)
+                            and isinstance(ps, ast.Assign)
+                            and len(ps.targets) == 1
+                            and isinstance(ps.targets[0], ast.Name)
+                            and isinstance(cs, ast.Raise)
+                            and isinstance(cs.exc, ast.BoolOp)
+                            and isinstance(cs.exc.op, ast.Or)
+                            and len(cs.exc.values) == 2
+                            and isinstance(cs.exc.values[0], (ast.Attribute, ast.Name, ast.Subscript))
+                        ):
+                            vn = ps.targets[0].id
+                            lhs2, rhs2 = cs.exc.values
+                            if vn not in {n.id for n in ast.walk(lhs2) if isinstance(n, ast.Name)} and vn in {n.id for n in ast.walk(rhs2) if isinstance(n, ast.Name)}:
+                                guard_if = ast.If(
+                                    test=ast.Compare(
+                                        left=copy.deepcopy(lhs2),
+                                        ops=[ast.IsNot()],
+                                        comparators=[ast.Constant(value=None)],
+                                    ),
+                                    body=[ast.Raise(exc=copy.deepcopy(lhs2), cause=copy.deepcopy(cs.cause))],
+                                    orelse=[],
+                                )
+                                new_stmts.append(guard_if)
+                                new_stmts.append(ps)
+                                new_stmts.append(ast.Raise(exc=copy.deepcopy(rhs2), cause=copy.deepcopy(cs.cause)))
+                                changed += 1
+                                i_s += 2
+                                continue
+                    new_stmts.append(stmts_b[i_s])
+                    i_s += 1
+                stmts_b[:] = new_stmts
+
+    class _CascadeTx(ast.NodeTransformer):
+        def visit_If(self, node: ast.If) -> ast.AST:
+            nonlocal changed
+            ln = int(getattr(node, "lineno", 0))
+            if is_bare_var_pat and _in_target_fn(ln):
+                b: dict[int, ast.expr] = {}
+                if _match_sexpr_pattern(node.test, pat_b, b):
+                    ne = _sexpr_to_ast(pat_a, b)
+                    if ne is not None:
+                        node.test = ne
+                        changed += 1
+            self.generic_visit(node)
+            return node
+
+        def visit_IfExp(self, node: ast.IfExp) -> ast.AST:
+            nonlocal changed
+            ln = int(getattr(node, "lineno", 0))
+            if is_bare_var_pat and _in_target_fn(ln):
+                b: dict[int, ast.expr] = {}
+                if _match_sexpr_pattern(node.test, pat_b, b):
+                    ne = _sexpr_to_ast(pat_a, b)
+                    if ne is not None:
+                        node.test = ne
+                        changed += 1
+            self.generic_visit(node)
+            return node
+
+        def generic_visit(self, node: ast.AST) -> ast.AST:
+            nonlocal changed
+            if (not is_bare_var_pat) and isinstance(node, ast.expr):
+                ln = int(getattr(node, "lineno", 0))
+                if _in_target_fn(ln):
+                    b: dict[int, ast.expr] = {}
+                    if _match_sexpr_pattern(node, pat_b, b):
+                        ne = _sexpr_to_ast(pat_a, b)
+                        if ne is not None:
+                            changed += 1
+                            return ne
+            return super().generic_visit(node)
+
+    _CascadeTx().visit(t_copy)
+    if changed < 2:
+        return None
+    ast.fix_missing_locations(t_copy)
+    try:
+        out_src = ast.unparse(t_copy) + "\n"
+        ast.parse(out_src)
+    except SyntaxError:
+        return None
+    if out_src == orig_source or out_src == cand.patched_source:
+        return None
+    return (out_src, changed)
+
+
 def _cegis_refine_entry_guard(
     worktree: pathlib.Path,
     src_root: pathlib.Path,
@@ -11568,14 +11801,37 @@ def solve_repository(
             fast_ok = bool(fast_verdicts) and fast_flipped_n == len(target_flips)
             if not fast_ok:
                 if max_compose_depth > 1 and fast_flipped_n >= 1:
-                    prev_bf = hp_best_per_file.get(cand.file)
-                    if prev_bf is None or fast_flipped_n > len(prev_bf[0]):
-                        hp_best_per_file[cand.file] = (fast_flipped_set, cand, orig_source)
-                    partial_pool.append((fast_flipped_n, cand, orig_source))
-                    partial_pool.sort(key=lambda x: -x[0])
-                    if len(partial_pool) > 6:
-                        del partial_pool[6:]
-                continue
+                    # CascadeFix Simultaneous Copy-Cluster Multi-Hunk Propagation!
+                    _casc = _cascade_propagate_partial_patch(orig_source, cand, loc)
+                    if _casc is not None:
+                        _c_src, _c_n = _casc
+                        try:
+                            file_path.write_text(_c_src, encoding="utf-8")
+                            _cv, _crc, _ = run_verdicts(
+                                wt, target_flips, python_exe=python_exe, timeout_s=min(timeout_s, 12.0), per_test_timeout_s=loc.per_test_timeout_s
+                            )
+                        finally:
+                            file_path.write_text(orig_source, encoding="utf-8")
+                        if _cv and sum(1 for ft in target_flips if _cv.get(ft) == "PASSED") == len(target_flips):
+                            cand = PatchCandidate(
+                                file=cand.file,
+                                lineno=cand.lineno,
+                                tier="CASCADE_COPY_CLUSTER_PROPAGATION",
+                                description=f"cascade_copy_cluster(sites={_c_n}:{cand.description})",
+                                patched_source=_c_src,
+                                ast_position=cand.ast_position,
+                            )
+                            fast_ok = True
+                if not fast_ok:
+                    if max_compose_depth > 1 and fast_flipped_n >= 1:
+                        prev_bf = hp_best_per_file.get(cand.file)
+                        if prev_bf is None or fast_flipped_n > len(prev_bf[0]):
+                            hp_best_per_file[cand.file] = (fast_flipped_set, cand, orig_source)
+                        partial_pool.append((fast_flipped_n, cand, orig_source))
+                        partial_pool.sort(key=lambda x: -x[0])
+                        if len(partial_pool) > 6:
+                            del partial_pool[6:]
+                    continue
             if rts_contrast_ids:
                 rts_ok = False
                 try:
@@ -11971,37 +12227,59 @@ def solve_repository(
             if not fast_ok:
                 if max_compose_depth > 1 and len(target_flips) >= 2 and fast_verdicts:
                     flipped_cnt = sum(1 for t in target_flips if fast_verdicts.get(t) == "PASSED")
-                    if flipped_cnt > 0 and len(partial_pool) < 16:
-                        partial_pool.append((flipped_cnt, cand, orig_source))
-                if max_compose_depth > 1 and base_causal_sig is not None and fast_out:
-                    c_exc, c_tln, c_frames, c_e0 = _extract_causal_sig(fast_out)
-                    b_exc, b_tln, b_frames, b_e0 = base_causal_sig
-                    if c_exc not in _BROKEN_EXCS and (c_exc, c_tln, c_frames, c_e0) != base_causal_sig:
-                        shift_score = 0
-                        if b_exc in _CRASH_EXCS and c_exc in ("AssertionError", "Failed"):
-                            shift_score += 100
-                        elif b_exc == "AssertionError" and c_exc == "AssertionError" and c_tln > b_tln and b_tln > 0:
-                            shift_score += 60
-                        elif (
-                            c_frames
-                            and b_frames
-                            and cand.file.replace("\\", "/") in b_frames[-1]
-                            and cand.file.replace("\\", "/") not in c_frames[-1]
-                        ):
-                            shift_score += 50
-                        elif b_exc in _CRASH_EXCS and c_exc in _CRASH_EXCS and c_exc != b_exc and c_frames and cand.file.replace("\\", "/") not in c_frames[-1]:
-                            shift_score += 40
-                        if shift_score > 0:
-                            causal_shift_pool.append((shift_score, cand, orig_source))
-                if cand.skill_id and refute_failed_skills and skill_store is not None:
-                    ref = SKILL_STORE.refute_skill(
-                        skill_store,
-                        cand.skill_id,
-                        counterexample_traits=cand.skill_bound_traits,
-                        reason="FAST_SCREEN_FAILED",
-                    )
-                    refuted_skills.append(ref)
-                continue
+                    if flipped_cnt > 0:
+                        _casc4 = _cascade_propagate_partial_patch(orig_source, cand, loc)
+                        if _casc4 is not None:
+                            _c4_src, _c4_n = _casc4
+                            try:
+                                file_path.write_text(_c4_src, encoding="utf-8")
+                                _cv4, _crc4, _ = run_verdicts(
+                                    wt, target_flips, python_exe=python_exe, timeout_s=min(timeout_s, 12.0), per_test_timeout_s=loc.per_test_timeout_s
+                                )
+                            finally:
+                                file_path.write_text(orig_source, encoding="utf-8")
+                            if _crc4 == 0 and _cv4 and all(_cv4.get(t) == "PASSED" for t in target_flips):
+                                cand = PatchCandidate(
+                                    file=cand.file,
+                                    lineno=cand.lineno,
+                                    tier="CASCADE_COPY_CLUSTER_PROPAGATION",
+                                    description=f"cascade_copy_cluster(sites={_c4_n}:{cand.description})",
+                                    patched_source=_c4_src,
+                                    ast_position=cand.ast_position,
+                                )
+                                fast_ok = True
+                        if (not fast_ok) and len(partial_pool) < 16:
+                            partial_pool.append((flipped_cnt, cand, orig_source))
+                if not fast_ok:
+                    if max_compose_depth > 1 and base_causal_sig is not None and fast_out:
+                        c_exc, c_tln, c_frames, c_e0 = _extract_causal_sig(fast_out)
+                        b_exc, b_tln, b_frames, b_e0 = base_causal_sig
+                        if c_exc not in _BROKEN_EXCS and (c_exc, c_tln, c_frames, c_e0) != base_causal_sig:
+                            shift_score = 0
+                            if b_exc in _CRASH_EXCS and c_exc in ("AssertionError", "Failed"):
+                                shift_score += 100
+                            elif b_exc == "AssertionError" and c_exc == "AssertionError" and c_tln > b_tln and b_tln > 0:
+                                shift_score += 60
+                            elif (
+                                c_frames
+                                and b_frames
+                                and cand.file.replace("\\", "/") in b_frames[-1]
+                                and cand.file.replace("\\", "/") not in c_frames[-1]
+                            ):
+                                shift_score += 50
+                            elif b_exc in _CRASH_EXCS and c_exc in _CRASH_EXCS and c_exc != b_exc and c_frames and cand.file.replace("\\", "/") not in c_frames[-1]:
+                                shift_score += 40
+                            if shift_score > 0:
+                                causal_shift_pool.append((shift_score, cand, orig_source))
+                    if cand.skill_id and refute_failed_skills and skill_store is not None:
+                        ref = SKILL_STORE.refute_skill(
+                            skill_store,
+                            cand.skill_id,
+                            counterexample_traits=cand.skill_bound_traits,
+                            reason="FAST_SCREEN_FAILED",
+                        )
+                        refuted_skills.append(ref)
+                    continue
 
             # Phase A.5: Regression Test Selection (RTS) fast contrast filter on huge suites (>80 tests).
             # Rejects regressive candidates in ~0.3s without running 2,000+ unrelated tests!
