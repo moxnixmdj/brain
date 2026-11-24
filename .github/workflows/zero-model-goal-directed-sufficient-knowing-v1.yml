@@ -1,0 +1,425 @@
+name: Zero-model goal-directed sufficient-knowing runner
+
+# WHY THIS WORKFLOW EXISTS
+#
+# A distinct GitHub Actions OIDC verifier re-runs the exact frozen Brain-owned
+# goal-directed sufficient-knowing contract from /tmp with Python isolated
+# mode. It verifies exact Git blob bindings, stdlib-only no-model imports,
+# sixteen local contract tests, exact EVPI question selection, one fresh CLI
+# evaluation, external-store add/remove without retraining, and zero runtime
+# model/network/parameter writes. It uploads a runner-owned receipt and, on a
+# qualifying push, commits only that receipt and its sidecar. The producer never
+# writes the authoritative receipt. No benchmark task, reward, score, §6
+# verification, capability credit, PR, merge or terminal truth change is made.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml"
+      - "canonical/runtime/goal_directed_sufficient_knowing_v1.py"
+      - "canonical/tests/test_goal_directed_sufficient_knowing_v1.py"
+      - "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml"
+      - "canonical/runtime/goal_directed_sufficient_knowing_v1.py"
+      - "canonical/tests/test_goal_directed_sufficient_knowing_v1.py"
+      - "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json"
+  workflow_dispatch:
+
+concurrency:
+  group: zero-model-goal-directed-sufficient-knowing-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+
+jobs:
+  contract_replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Bind exact frozen blobs and audit no-model static import surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          expected_git_blob = {
+              "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "e64204cffb1a7ae5043a77c1be153687fd63371e",
+              "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "03d195285cc60ec470566c993b6635410ea1a063",
+              "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
+          }
+          expected_sha256 = {
+              "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f",
+              "canonical/tests/test_goal_directed_sufficient_knowing_v1.py": "cd7978af65309a4ba9e562f2d7fbb8345b62e71d1de1e8bf22e408afc1269804",
+              "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": "939f8a433f1f94c94b4be24cbb05f1baef3c0736728bf64fab30dde50c6fc2e4",
+          }
+          observed_git_blob = {
+              p: subprocess.check_output(["git", "hash-object", p], cwd=root, text=True).strip()
+              for p in expected_git_blob
+          }
+          observed_sha256 = {
+              p: hashlib.sha256((root / p).read_bytes()).hexdigest()
+              for p in expected_sha256
+          }
+          if observed_git_blob != expected_git_blob or observed_sha256 != expected_sha256:
+              raise SystemExit("EXACT_BLOB_BINDING_FAIL " + json.dumps({
+                  "expected_git_blob": expected_git_blob,
+                  "observed_git_blob": observed_git_blob,
+                  "expected_sha256": expected_sha256,
+                  "observed_sha256": observed_sha256,
+              }, sort_keys=True))
+          forbidden = {
+              "urllib", "requests", "httpx", "socket", "http", "openai", "anthropic",
+              "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess",
+              "huggingface_hub", "docker", "yaml", "selenium", "playwright",
+          }
+          audits = {}
+          marked_all = []
+          for rel in (
+              "canonical/runtime/goal_directed_sufficient_knowing_v1.py",
+              "canonical/tests/test_goal_directed_sufficient_knowing_v1.py",
+          ):
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"), filename=rel)
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name.split(".")[0] for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module.split(".")[0])
+              marked = sorted(mods & forbidden)
+              audits[rel] = {"imports": sorted(mods), "marked": marked}
+              if marked:
+                  marked_all.append({"path": rel, "marked": marked})
+          if marked_all:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_FROZEN_CONTRACT " + repr(marked_all))
+          source = (root / "canonical/runtime/goal_directed_sufficient_knowing_v1.py").read_text(encoding="utf-8")
+          if "EXACT_EVPI" not in source or "DISTINCT_VERIFIER_MISSING" not in source:
+              raise SystemExit("EXACT_EVPI_OR_DISTINCT_VERIFIER_GUARD_ABSENT")
+          store = json.loads((root / "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json").read_text(encoding="utf-8"))
+          if store.get("facts") or store.get("relations") or store.get("parameters") or store.get("weights"):
+              raise SystemExit("EXTERNAL_STORE_NOT_EMPTY_ZERO_KNOWLEDGE_HOUSE")
+          if store.get("model_calls") != 0 or store.get("runtime_network_calls") != 0:
+              raise SystemExit("EXTERNAL_STORE_ASSERTS_MODEL_OR_NETWORK_DEPENDENCY")
+          bindings = {
+              "expected_git_blob": expected_git_blob,
+              "observed_git_blob": observed_git_blob,
+              "expected_sha256": expected_sha256,
+              "observed_sha256": observed_sha256,
+              "equal": True,
+          }
+          (out / "blob_bindings.json").write_text(json.dumps(bindings, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps({"audits": audits, "marked": marked_all, "exact_evpi_present": True, "distinct_verifier_guard_present": True, "store_empty": True}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_BLOB_BINDING_PASS", len(expected_git_blob), "marked", marked_all)
+          PY
+      - name: Replay exact contract, tests, CLI and editable-store control from /tmp
+        shell: bash
+        working-directory: /tmp
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          packet = {
+              "schema": "PROJECT_BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_PACKET_V1",
+              "goal": {
+                  "id": "goal_repair_workflow",
+                  "effect": "complete long horizon coding workflow",
+                  "success_predicate": "independent_verifier_accepts_final_state",
+                  "value": 2.0,
+                  "risk": 1.0,
+              },
+              "environment": {
+                  "id": "env_unseen_repo_a",
+                  "environment_class": "software_repository",
+              },
+              "store": {"schema": "PROJECT_BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1", "facts": [], "relations": []},
+              "actions": [
+                  {"id": "A1", "requires": ["u_test_command"], "effect": "run_local_tests"},
+                  {"id": "A2", "requires": ["u_test_command"], "effect": "edit_then_run_tests"},
+              ],
+              "unknowns": [{
+                  "id": "u_test_command",
+                  "source_class": "local_guide",
+                  "falsifier": "command_exit_code_or_test_manifest_mismatch",
+                  "bounded_enumeration": True,
+                  "completeness_required": False,
+                  "cost": 0.1,
+                  "hypotheses": [
+                      {"id": "guide_exists", "probability": 0.7, "utilities": {"A1": 1.0, "A2": 0.0}},
+                      {"id": "guide_absent", "probability": 0.3, "utilities": {"A1": 0.0, "A2": 1.0}},
+                  ],
+              }],
+              "scan": [
+                  {"id": "atom_decisive", "decision_terms": ["test", "repository"]},
+                  {"id": "atom_irrelevant", "decision_terms": ["wallpaper"]},
+              ],
+              "independent_verifier_present": True,
+              "producer_id": "arena-agent",
+              "verifier_id": "github-actions-oidc:distinct-runner",
+              "max_queries": 1,
+          }
+          pathlib.Path("/tmp/gdk_packet.json").write_text(json.dumps(packet, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("PACKET_WRITTEN")
+          PY
+          python3 -I -B "${WORKSPACE}/canonical/runtime/goal_directed_sufficient_knowing_v1.py" \
+            --packet /tmp/gdk_packet.json \
+            --out "${WORKSPACE}/out/cli_evaluate.json"
+          python3 -I -B - <<'PY'
+          import inspect, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          sys.path.insert(0, str(root))
+          from canonical.runtime import goal_directed_sufficient_knowing_v1 as s
+          from canonical.tests import test_goal_directed_sufficient_knowing_v1 as t
+          tests = [
+              (name, fn)
+              for name, fn in inspect.getmembers(t, inspect.isfunction)
+              if name.startswith("test_")
+          ]
+          if len(tests) != 16:
+              raise SystemExit("CONTRACT_TEST_COUNT_FAIL " + str(len(tests)))
+          for name, fn in tests:
+              fn()
+          cli = json.loads((out / "cli_evaluate.json").read_text(encoding="utf-8"))
+          packet = json.loads(pathlib.Path("/tmp/gdk_packet.json").read_text(encoding="utf-8"))
+          fact = {
+              "id": "fact_test_command",
+              "unknown_id": "u_test_command",
+              "value": "pytest -q",
+              "authenticated": True,
+              "source_bound": True,
+              "source_class": "local_guide",
+              "evidence_hash": "sha256:local-guide",
+              "policy_authority": False,
+              "answer_authority": False,
+              "capability_credit_delta": 0,
+              "freshness_ok": True,
+              "completeness_required": False,
+              "bounded_enumeration": True,
+              "scope": {
+                  "goal_effect": "complete long horizon coding workflow",
+                  "environment_class": "software_repository",
+                  "environment_ids": ["env_unseen_repo_a"],
+              },
+          }
+          bound = json.loads(json.dumps(packet))
+          bound["store"]["facts"] = [fact]
+          with_fact = s.evaluate(bound)
+          without_fact = s.evaluate(packet)
+          measurement_checks = {
+              "test_count": len(tests) == 16,
+              "cli_decision": cli.get("decision") == s.K1_QUERY_REQUIRED,
+              "cli_exact_evpi_basis": cli["selected_queries"][0]["value_of_information_basis"] == "EXACT_EVPI",
+              "cli_question_derived": cli["selected_queries"][0]["question_source"] == "DERIVED_FROM_ACTION_PARTITION",
+              "cli_minimal_query_count": cli.get("selected_query_count") == 1,
+              "cli_irrelevant_scan_deleted": "atom_irrelevant" in cli.get("deleted_scan_atoms", []),
+              "cli_zero_model_calls": cli.get("runtime_model_calls") == 0,
+              "cli_zero_network_calls": cli.get("runtime_network_calls") == 0,
+              "cli_zero_parameters": cli.get("parameters_written") == 0,
+              "cli_distinct_verifier": cli.get("distinct_verifier_present") is True,
+              "store_add_removes_question": with_fact.get("decision") == s.READY_FOR_DISTINCT_VERIFIER,
+              "store_removal_restores_question": without_fact.get("decision") == s.K1_QUERY_REQUIRED,
+              "store_add_no_parameter_writes": with_fact.get("parameters_written") == 0,
+              "no_execution_authority": cli.get("execution_authority") is False,
+              "no_benchmark_score_authority": cli.get("benchmark_score_authority") is False,
+              "section_6_not_met": cli.get("truth", {}).get("section_6") == "NOT_MET",
+          }
+          failed = sorted(k for k, v in measurement_checks.items() if not v)
+          if failed:
+              raise SystemExit("FROZEN_CONTRACT_REPLAY_MEASUREMENTS_FAIL " + repr(failed))
+          (out / "measurement_checks.json").write_text(json.dumps(measurement_checks, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("FROZEN_CONTRACT_REPLAY_PASS", len(tests), "tests", len(measurement_checks), "checks")
+          PY
+      - name: Bind GitHub Actions OIDC run reference and emit independent receipt
+        if: success()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          workflow_path = ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml"
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": workflow_path in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed))
+          keep = (
+              "iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref",
+              "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor",
+              "actor_id", "jti", "runner_environment",
+          )
+          oidc_claims = {k: claims.get(k) for k in keep}
+          bindings = json.loads((out / "blob_bindings.json").read_text(encoding="utf-8"))
+          audit = json.loads((out / "static_audit.json").read_text(encoding="utf-8"))
+          measurements = json.loads((out / "measurement_checks.json").read_text(encoding="utf-8"))
+          cli = json.loads((out / "cli_evaluate.json").read_text(encoding="utf-8"))
+          run_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run_id}"
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          receipt = {
+              "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_OIDC_ATTESTED_GOAL_DIRECTED_SUFFICIENT_KNOWING_CONTRACT_REPLAY__ZERO_CREDIT",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FINITE_CONTRACT_REPLAY__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              "scope": "GOAL_DIRECTED_SUFFICIENT_KNOWING_V1_FINITE_CONTRACT_ONLY",
+              "independent_verified": True,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_path": workflow_path,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "oidc_jti": claims.get("jti"),
+              "run_reference": {
+                  "workflow_run_id": run_id,
+                  "workflow_run_attempt": run_attempt,
+                  "workflow_run_url": run_url,
+                  "oidc_jti": claims.get("jti"),
+                  "runner_attestation": "github-actions-oidc-token",
+              },
+              "pinned_blob_binding": bindings,
+              "static_audit": audit,
+              "measurement_checks": measurements,
+              "cli_packet_hash": cli.get("packet_hash"),
+              "cli_decision": cli.get("decision"),
+              "numeric_measurements": {
+                  "pinned_blobs": len(bindings["expected_git_blob"]),
+                  "contract_tests": 16,
+                  "measurement_checks": len(measurements),
+                  "selected_queries": cli.get("selected_query_count"),
+                  "model_calls": cli.get("runtime_model_calls"),
+                  "runtime_network_calls": cli.get("runtime_network_calls"),
+                  "parameters_written": cli.get("parameters_written"),
+                  "knowledge_written_to_weights": cli.get("knowledge_written_to_weights"),
+                  "environment_actions_executed": 0,
+                  "hard_benchmark_tasks_consumed": 0,
+              },
+              "verified": [
+                  "EXACT_PINNED_BLOBS_BOUND",
+                  "ZERO_MODEL_ZERO_NETWORK_STDLIB_IMPORT_SURFACE",
+                  "EXTERNAL_STORE_EMPTY_AND_EDITABLE_WITHOUT_RETRAINING",
+                  "SIXTEEN_FROZEN_CONTRACT_TESTS_PASS",
+                  "EXACT_EVPI_MINIMAL_QUESTION_SELECTION",
+                  "QUESTION_DERIVED_FROM_ACTION_PARTITION",
+                  "IRRELEVANT_SCAN_DELETED",
+                  "DISTINCT_VERIFIER_REQUIRED",
+                  "OIDC_RUN_REFERENCE_BOUND",
+                  "NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              ],
+              "not_verified": [
+                  "OSWorld 2.1 tasks",
+                  "SWE-bench Pro V2 or HARD-51 tasks",
+                  "Terminal-Bench 4.1 tasks",
+                  "WebArena-Verified, DeepSearchQA, WideSearch or ClosureBench tasks",
+                  "arbitrary natural-language purpose understanding",
+                  "authored repair content",
+                  "GUI or browser computer use",
+                  "shipped-agent integration",
+                  "section 6 terminal capability",
+              ],
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "benchmark_score_authority": False,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "section_6_verifications": 0,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "VERIFICATION_APPLIES_ONLY_TO_EXACT_LISTED_BLOBS_AND_MEASUREMENTS__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+          }
+          receipt_path = out / "GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json"
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / "GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256").write_text(
+              hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8"
+          )
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("GOAL_DIRECTED_SUFFICIENT_KNOWING_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print(json.dumps({"status": receipt["status"], "scope": receipt["scope"], "truth": receipt["truth"]}, sort_keys=True))
+          PY
+      - name: Land runner-owned receipt on the active branch
+        if: success() && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json" \
+             "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json"
+          cp "out/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256" \
+             "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
+          git config user.name "project-brain-goal-directed-sufficient-knowing-replay"
+          git config user.email "project-brain-goal-directed-sufficient-knowing-replay@users.noreply.github.com"
+          git add "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json" \
+                  "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record OIDC-attested goal-directed sufficient-knowing contract replay"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
+      - name: Upload runner-owned contract replay artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zero-model-goal-directed-sufficient-knowing
+          path: out/
+          if-no-files-found: warn
+          retention-days: 90

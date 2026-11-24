@@ -1,0 +1,35 @@
+{
+  "schema": "PROJECT_BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1",
+  "status": "EMPTY_EXTERNAL_INSPECTABLE_EDITABLE_STORE__NO_WORLD_FACTS_IN_PARAMETERS",
+  "facts": [],
+  "relations": [],
+  "parameters": {},
+  "weights": {},
+  "model_calls": 0,
+  "runtime_network_calls": 0,
+  "allowed_source_classes": [
+    "official_primary",
+    "code_registry",
+    "direct_probe",
+    "independent_verifier",
+    "local_guide",
+    "authenticated_observation"
+  ],
+  "forbidden_source_classes": [
+    "runtime_model",
+    "model_output",
+    "unauthenticated",
+    "ready_made_plan",
+    "ready_made_answer",
+    "unknown"
+  ],
+  "write_rule": "Store only scoped K1 facts and typed relations with falsifiers, evidence hashes and distinct verifiers. Never store exact action trajectories, ready-made plans, executable predicates, model outputs, parameters or world facts in weights.",
+  "knowledge_lives_outside_weights": true,
+  "editable_without_retraining": true,
+  "capability_credit_delta": 0,
+  "section_6_verifications": 0,
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  }
+}
