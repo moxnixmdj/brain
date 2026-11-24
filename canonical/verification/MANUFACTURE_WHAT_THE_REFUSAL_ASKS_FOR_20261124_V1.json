@@ -1,0 +1,133 @@
+{
+  "schema": "PROJECT_BRAIN_MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_RECEIPT_V1",
+  "action_id": "MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_20261124_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_ONLY",
+  "date": "2026-11-24",
+  "canonical_base_commit": "caefcd5fe3956353dee8edb82517582475edfece",
+  "what_paid_the_doors": {
+    "the_census_repair": {
+      "defect": "the subcommand candidate reader kept only the FIRST column of a line, and openssl prints its commands as a columnar table -- `req  rsa  rsautl` -- so the command that CREATES a certificate was never a candidate at all",
+      "second_defect": "DEFAULT_MAX_SUBCOMMANDS was 24, an underived number that read 24 of openssl's 147 commands; `req` sits at index 37, so even after being made a candidate it was cut before it was asked",
+      "cost_of_removing_the_cap": "0.7 s for openssl to ask all 147; no measurable cost for any other program in the fleet; admission is decisive and refuses prose, so the cap bought no safety either",
+      "measured_before": {
+        "doors": 60,
+        "openssl_operations": 728,
+        "openssl_doors": 24
+      },
+      "measured_after": {
+        "doors": 174,
+        "openssl_operations": 4287,
+        "openssl_doors": 138
+      },
+      "regressions": 0,
+      "per_program": {
+        "cp": [
+          2,
+          2
+        ],
+        "mv": [
+          2,
+          2
+        ],
+        "rm": [
+          7,
+          7
+        ],
+        "gzip": [
+          12,
+          12
+        ],
+        "tar": [
+          4,
+          4
+        ],
+        "openssl": [
+          24,
+          138
+        ],
+        "grep": [
+          0,
+          0
+        ],
+        "sort": [
+          1,
+          1
+        ],
+        "find": [
+          1,
+          1
+        ],
+        "sed": [
+          1,
+          1
+        ],
+        "zip": [
+          0,
+          0
+        ],
+        "ln": [
+          0,
+          0
+        ],
+        "touch": [
+          0,
+          0
+        ],
+        "install": [
+          3,
+          3
+        ],
+        "git": [
+          3,
+          3
+        ]
+      }
+    }
+  },
+  "what_the_manufacturer_contributed": {
+    "manufactured_genuine_artefacts": true,
+    "examples": [
+      "openssl req -x509 -newkey=rsa:1024 -keyout=produced.key -out=produced.pem -days=1 -nodes -subj=/CN=produced  -> exit 0, both files produced",
+      "openssl genpkey -algorithm=RSA -out=produced.key -pkeyopt=rsa_keygen_bits:1024 -> exit 0"
+    ],
+    "consumer_accepts": [
+      "openssl x509 -in=produced.pem -out=out.bin : exit 1 -> 0 and the tree changes",
+      "openssl pkey -in=produced.key -noout : exit 1 -> 0"
+    ],
+    "new_doors_in_the_fleet": 0,
+    "operations_that_ask_for_a_producible_kind": 257,
+    "of_which_manufacture_made_act": 0,
+    "why": [
+      "141 ask for a `key`, and the operations asking are `ca`, which reads its key from `openssl.cnf` and never from the file produced -- the artefact is present and unused",
+      "92 ask for a `certificate`; the ones that name a file need it in the form THAT operation declared, not the form the producer chose",
+      "24 ask for `parameters`; dhparam needs an input it does not have, so its producer exits 1 and status is UNVERIFIED rather than credited"
+    ]
+  },
+  "the_guard_that_is_the_real_contribution": {
+    "frontier_measurement": "arXiv 2611.23305 (Dependency Fabrication in Repository Deployment Agents): probe repositories with a dependency that cannot legitimately be obtained; Repo2Run and SetupX agents almost always fabricated a stub and the harnesses MOSTLY MARKED THE RUN SUCCESSFUL; rules in the prompt or in CONTRIBUTING.md did not reliably prevent it",
+    "our_three_conditions": [
+      "PRODUCED, NOT WRITTEN: the producer is composed only from flags the program printed, checked against the subcommand's OWN scope; this module never assembles artefact bytes",
+      "VERIFIED BY THE PROGRAM: the consumer that refused is re-run and must accept; a stub cannot pass because openssl refuses bytes that are not a certificate",
+      "NO VANISHING: the artefact must survive and the tree must have changed"
+    ],
+    "adversarial_check": "a stub named produced.pem with PEM armour and no content: openssl x509 exit 1, 'Could not read certificate from produced.pem'",
+    "adversarial_key_check": "a stub produced.key: openssl pkey exit 1, 'Could not read key'",
+    "fabricated_outcomes_credited": 0
+  },
+  "the_refusal_reader_repair": {
+    "defect": "the UNLOADABLE noun capture took everything after the verb, so `Could not open file or uri for loading certificate from in.txt` yielded the kind `file or uri for` and `Could not read certificate from in.txt` yielded `certificate from in` -- fragments no producer can be found for",
+    "fix": "the kind is the noun the locative preposition hangs off: cut at from/into/at, drop the program's own loader words, keep the last noun",
+    "measured": "601 UNLOADABLE refusals on the enlarged openssl census now yield real kinds (key 141, certificate 92, parameters 24, crl, directory) instead of phrases"
+  },
+  "honest_limits": [
+    "the manufacturer adds ZERO doors to the fleet; its genuine artefacts are used by the consumers that were tested directly, not by the refused operations",
+    "the census repair is what moved the doors (60 -> 174) and it is a reading repair, not a manufacturing one",
+    "the producer table is three kinds (certificate, key, parameters); every other kind is reported NO_DECLARED_PRODUCER rather than guessed at",
+    "openssl's `ca` reads its key from a config file, so a produced key cannot satisfy it; that is a real environmental dependency this module does not model",
+    "authority NONE, sandbox only; independent verification OPEN",
+    "no benchmark result is claimed: this round measured the census and the guard, not a task suite"
+  ],
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}

@@ -82,7 +82,14 @@ DEFAULT_DEPTH = 2
 #: by enumerating all of them; the cap is what keeps the census cheap.
 DEFAULT_MAX_OPS = 400
 #: Subcommand asks per tool, so a program with a pathological tree cannot stall it.
-DEFAULT_MAX_SUBCOMMANDS = 24
+#: EVERY CANDIDATE IS ASKED, NOT THE FIRST FEW. A cap here is a cap on what the machine
+#: can know about a program, and it was measured to cost the most important operations in
+#: the fleet: openssl lists 147 commands in a columnar table, the cap read 24, and `req`
+#: -- the command that CREATES a certificate, which 87 refusals were asking for -- sits at
+#: index 37 and was never reached. The cost of asking all of them is 0.7 s for openssl and
+#: nothing measurable for any other program; admission is decisive and refuses prose, so
+#: the cap bought no safety either. It is a number nobody derived, and it is gone.
+DEFAULT_MAX_SUBCOMMANDS = 4096
 HELP_TIMEOUT = 8.0
 TRIAL_TIMEOUT = 20.0
 #: Nothing a program prints to describe itself is longer than this, and a program
@@ -361,7 +368,23 @@ def parse_subcommand_candidates(text: str) -> list[str]:
         stripped = line.strip()
         if not stripped or stripped.startswith("-"):
             continue
-        first = re.split(r"\s{2,}", stripped)[0].strip()
+        columns = [part.strip() for part in re.split(r"\s{2,}", stripped) if part.strip()]
+        if not columns:
+            continue
+        # THE FIRST COLUMN IS NOT THE ONLY COLUMN. openssl prints its commands as a
+        # COLUMNAR table under headings -- `req               rsa               rsautl` --
+        # where the name of the row is wherever it happens to sit. Reading only the first
+        # column dropped `req` and `genpkey` from the census entirely, and those are the
+        # operations that CREATE the certificates and keys 87 refusals were asking for.
+        # A column is a name when every word in it is a bare command word (no spaces, no
+        # punctuation, no capitals-as-prose) and the column holds at least two of them --
+        # which is what makes it a table rather than a sentence.
+        if len(columns) >= 2 and all(_WORD.match(word) for word in columns):
+            for word in columns:
+                if word not in candidates:
+                    candidates.append(word)
+            continue
+        first = columns[0]
         if not _WORD.match(first):
             continue
         if first not in candidates:

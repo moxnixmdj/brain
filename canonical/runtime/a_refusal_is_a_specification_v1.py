@@ -152,11 +152,20 @@ _P_WORLD = re.compile(r"\bnot an?\s+([a-z][a-z0-9_-]*)\s+"
                       re.IGNORECASE)
 #: `Unable to load certificate`, `Could not read recipient certificate file from in.gz`.
 #: The noun after the verb is the KIND the program needed and did not get.
+#: THE KIND IS THE OBJECT OF THE VERB, NOT THE VERB'S PHRASE. The first version captured
+#: everything after the verb, so `Could not open file or uri for loading certificate from
+#: in.txt` yielded `file or uri for` and `Could not read certificate from in.txt` yielded
+#: `certificate from in` -- fragments that name nothing a producer could be found for.
+#: `file or uri` is the program describing its own loader; `from <path>` is where it looked;
+#: the KIND is the noun the preposition hangs off.
 _P_UNLOADABLE = re.compile(
     r"(?:unable to|could not|cannot|can't)\s+"
-    r"(?:load|read|open|parse|decode|find)\s+"
-    r"(?:a\s+|an\s+|the\s+)?([a-z][a-z0-9()]*(?:\s+[a-z][a-z0-9()]*){0,3})",
+    r"(?:load|read|open|parse|decode|find|get)\s+"
+    r"(?:a\s+|an\s+|the\s+)?",
     re.IGNORECASE)
+#: Words the program uses about its own machinery rather than about the thing it wants.
+_LOADER_NOISE = frozenset({"file", "or", "uri", "the", "a", "an", "from", "into", "for",
+                           "loading", "reading", "opening", "in", "to", "of", "no"})
 #: `asn1parse: Use -help for summary.` and friends: an offer to explain, never a fix.
 _P_HELP_ONLY = re.compile(r"use\s+-{1,2}help", re.IGNORECASE)
 
@@ -224,7 +233,9 @@ def read_refusal(text: str) -> Clause | None:
             return Clause(WORLD, m.group(1).lower(), "", line.strip()[:240])
         m = _P_UNLOADABLE.search(line)
         if m and not _P_HELP_ONLY.search(line):
-            return Clause(UNLOADABLE, m.group(1).strip(), "", line.strip()[:240])
+            kind = _kind_from(line[m.end():])
+            if kind:
+                return Clause(UNLOADABLE, kind, "", line.strip()[:240])
         if _P_RANGE.search(line):
             return Clause(RANGE, "", "0", line.strip()[:240])
     return None
@@ -286,6 +297,26 @@ def file_is_kind(path: str, wanted: str) -> bool | None:
         if words & set(kinds):
             return any(marker in head for marker in signatures)
     return known
+
+
+def _kind_from(rest: str) -> str | None:
+    """The noun the program is asking for, read from the words after the verb.
+
+    `certificate from in.txt` -> `certificate`; `file or uri for loading certificate from
+    in.txt` -> `certificate`; `shared library` -> `shared library`; `parameters from <NULL>`
+    -> `parameters`. The rule is: drop a trailing `from/into ...` clause, drop the program's
+    own loader words, and keep the last noun that is left. Anything that reduces to nothing
+    returns None, so a sentence this cannot read is reported and never guessed at.
+    """
+    # `from <path>` / `into <path>` end the phrase, but `for loading X` does not: the thing
+    # asked for comes AFTER the "for", so only the locative prepositions cut.
+    text = re.split(r"\b(?:from|into|at)\b", rest, maxsplit=1, flags=re.IGNORECASE)[0]
+    words = [w for w in re.findall(r"[a-z][a-z0-9_]*", text.lower())
+             if w not in _LOADER_NOISE]
+    if not words:
+        return None
+    # the last one or two words are the noun phrase: `certificate`, `shared library`
+    return " ".join(words[-2:]) if len(words) > 1 and words[-2] == "shared" else words[-1]
 
 
 def witness_files(wanted: str, files: Sequence[str]) -> list[str]:
