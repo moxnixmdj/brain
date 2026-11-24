@@ -1062,6 +1062,7 @@ class UnifiedModel:
             and "db_path" not in inp
             and "gui_env" not in inp
             and "tomography_env" not in inp
+            and "self_play_tasks" not in inp
             and "http://" not in goal
             and "https://" not in goal
         ):
@@ -1083,6 +1084,8 @@ class UnifiedModel:
             base_url=inp.get("base_url"),
             tomography_env=inp.get("tomography_env"),
             goal_targets=inp.get("goal_targets"),
+            self_play_tasks=inp.get("self_play_tasks"),
+            skill_store=inp.get("skill_store"),
             postcondition_fn=inp.get("postcondition_fn"),
             dom_nodes=inp.get("dom_nodes"),
             gui_env=inp.get("gui_env"),

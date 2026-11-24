@@ -678,5 +678,110 @@ def test_09_unified_esac_tomography_and_algebraic_composition() -> None:
         assert json.loads(res_a["algebraic"]["output"]) == {"ok": "HELLO WORLD"}
 
 
+def test_10_pillar4_adversarial_self_play_compounding_and_one_front_door() -> None:
+    """Proves Pillar 4 closed-loop $0 adversarial self-play compounding through ONE Front Door
+    (`open_model().solve(..., mode='EPISTEMIC')`), including skill crystallization, honest
+    unsolved handling, and O(1) skill deletion without retraining."""
+    from canonical.runtime.brain_unified_model_v1 import open_model
+    from canonical.runtime import instant_swe_skill_store_v1 as SKSTORE
+
+    model = open_model()
+    store = SKSTORE.new_store()
+    with tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        # Task A: unseen repo with trailing-space formatting bug (Pillar 1 return-transform solve)
+        repo_a = root / "repo_a"
+        repo_a.mkdir()
+        (repo_a / "fmt_a.py").write_text(
+            "def render_tag(kind: str, extra: str) -> str:\n"
+            "    return f'{kind.title()} {extra}'\n",
+            encoding="utf-8",
+        )
+        (repo_a / "test_fmt_a.py").write_text(
+            "import fmt_a\n\n"
+            "def test_nonempty():\n"
+            "    assert fmt_a.render_tag('bearer', 'tok=1') == 'Bearer tok=1'\n\n"
+            "def test_empty():\n"
+            "    assert fmt_a.render_tag('bearer', '') == 'Bearer'\n",
+            encoding="utf-8",
+        )
+
+        # Task B: completely different repo, variables & domain (propositional implication bug)
+        repo_b = root / "repo_b"
+        repo_b.mkdir()
+        (repo_b / "gate_b.py").write_text(
+            "class Policy:\n"
+            "    def __init__(self, a_on: bool, b_on: bool, want_a: str, want_b: str):\n"
+            "        self.a_on = a_on\n"
+            "        self.b_on = b_on\n"
+            "        self.want_a = want_a\n"
+            "        self.want_b = want_b\n\n"
+            "    def route(self, val_a: str, val_b: str, force_ext: bool = False) -> str:\n"
+            "        if (\n"
+            "            not force_ext\n"
+            "            and (self.a_on or self.b_on)\n"
+            "            and ((self.a_on and val_a == self.want_a) or (self.b_on and val_b == self.want_b))\n"
+            "        ):\n"
+            "            return 'local'\n"
+            "        return 'remote'\n",
+            encoding="utf-8",
+        )
+        (repo_b / "test_gate_b.py").write_text(
+            "import gate_b\n\n"
+            "def test_match():\n"
+            "    assert gate_b.Policy(True, False, 'x', '').route('x', '') == 'local'\n\n"
+            "def test_mismatch():\n"
+            "    assert gate_b.Policy(True, False, 'x', '').route('y', '') == 'remote'\n\n"
+            "def test_force():\n"
+            "    assert gate_b.Policy(False, False, '', '').route('', '', force_ext=True) == 'remote'\n\n"
+            "def test_none_enabled():\n"
+            "    assert gate_b.Policy(False, False, '', '').route('', '') == 'local'\n",
+            encoding="utf-8",
+        )
+
+        # Task C: impossible contradiction — must remain honestly UNSOLVED without polluting store
+        repo_c = root / "repo_c"
+        repo_c.mkdir()
+        (repo_c / "imp_c.py").write_text("def f(x):\n    return x\n", encoding="utf-8")
+        (repo_c / "test_imp_c.py").write_text(
+            "import imp_c\n\n"
+            "def test_contradiction():\n"
+            "    v = imp_c.f(1)\n"
+            "    assert v == 1 and v == 2\n",
+            encoding="utf-8",
+        )
+
+        res = model.solve(
+            "run pillar 4 adversarial self-play compounding over unsolved repository queue",
+            mode="EPISTEMIC",
+            inputs={
+                "self_play_tasks": [
+                    {"task_id": "repo_a_fmt", "repo_root": str(repo_a), "test_targets": ["test_fmt_a.py"], "max_candidates": 20},
+                    {"task_id": "repo_b_policy", "repo_root": str(repo_b), "test_targets": ["test_gate_b.py"], "max_candidates": 20},
+                    {"task_id": "repo_c_impossible", "repo_root": str(repo_c), "test_targets": ["test_imp_c.py"], "max_candidates": 8},
+                ],
+                "skill_store": store,
+                "python_exe": sys.executable,
+            },
+        )
+        assert res["pass"] is True, res
+        assert res["model_calls"] == 0
+        assert res["parameters_stored"] == 0
+        sp = res["epistemic_result"]["self_play"]
+        assert sp["solved_count"] == 2, sp
+        assert sp["unsolved_count"] == 1, sp
+        assert sp["results"][0]["status"] == "VERIFIED"
+        assert sp["results"][1]["status"] == "VERIFIED"
+        assert sp["results"][2]["status"] == "UNSOLVED"
+        assert sp["skill_store_size"] >= 1
+        # O(1) deletion/forgetting from external inspectable skill store without retraining
+        for k in list((store.get("skills") or {}).keys()):
+            del store["skills"][k]
+        for k in list((store.get("ast_rewrite_laws") or {}).keys()):
+            del store["ast_rewrite_laws"][k]
+        assert len(store.get("skills") or {}) == 0 and len(store.get("ast_rewrite_laws") or {}) == 0
+
+
+
 
 

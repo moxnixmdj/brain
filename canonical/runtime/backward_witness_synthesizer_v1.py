@@ -750,3 +750,110 @@ def split_multi_assert_test_blocks(
         "parameters_stored": 0,
     }
 
+
+# ---------------------------------------------------------------------------
+# 7. Pillar 4: $0 Offline Adversarial Self-Play Compounding Loop
+# ---------------------------------------------------------------------------
+
+
+def run_adversarial_self_play_loop(
+    tasks: Sequence[Mapping[str, Any]],
+    *,
+    skill_store: dict[str, Any] | None = None,
+    python_exe: str | None = None,
+    max_candidates: int = 30,
+    timeout_s: float = 30.0,
+) -> dict[str, Any]:
+    """Closed-loop $0-cost offline self-play compounding over unsolved failing repositories.
+
+    For every failing task in `tasks`:
+      1. Invokes our zero-LLM Causal Angelic SWE Engine (which automatically applies Pillar 4
+         Assertion-Block Witness Splitting, Pillar 1 Backward Witness Propagation, OE-SyGuS,
+         Propositional Implication Weakening, Def-Use Guards, and Tier-0 Skill Recall).
+      2. Verifies every synthesized patch against the FULL unmodified repository test suite.
+      3. Commits verified generalized L2 repair morphisms into the external inspectable
+         `skill_store` (`parameters_stored == 0`, `O(1)` deletable) and refutes bad skills.
+      4. Measures compounding transfer (`tier0_recall_hits`, `skills_crystallized`) across the queue.
+    """
+    import pathlib
+    import sys as _sys
+    from canonical.runtime import causal_angelic_swe_engine_v1 as SWE
+    from canonical.runtime import instant_swe_skill_store_v1 as SKSTORE
+
+    t0 = time.monotonic()
+    py_exe = python_exe or _sys.executable
+    store: dict[str, Any] = skill_store if skill_store is not None else SKSTORE.new_store()
+
+    results: list[dict[str, Any]] = []
+    solved_count = 0
+    unsolved_count = 0
+    tier0_recall_hits = 0
+    skills_crystallized: list[str] = []
+
+    for idx, task in enumerate(tasks):
+        tid = str(task.get("task_id") or f"self_play_task_{idx}")
+        repo_root = pathlib.Path(str(task["repo_root"])).resolve()
+        test_targets = list(task.get("test_targets") or [])
+        task_py = str(task.get("python_exe") or py_exe)
+        task_max = int(task.get("max_candidates") or max_candidates)
+        t_start = time.monotonic()
+        try:
+            res = SWE.solve_repository(
+                repo_root,
+                test_targets,
+                skill_store=store,
+                learn_into_store=True,
+                refute_failed_skills=True,
+                python_exe=task_py,
+                max_candidates=task_max,
+                timeout_s=float(task.get("timeout_s") or timeout_s),
+            )
+        except Exception as exc:
+            res = {"status": "ERROR", "error": str(exc), "model_calls": 0, "parameters_stored": 0}
+
+        status = str(res.get("status") or "UNSOLVED")
+        winner = res.get("winner") or {}
+        tier = str(winner.get("tier") or "")
+        learned_id = winner.get("learned_skill_id")
+        used_skill = winner.get("skill_id_used")
+
+        if status == "VERIFIED":
+            solved_count += 1
+            if tier.startswith("TIER0") or used_skill:
+                tier0_recall_hits += 1
+            if learned_id and str(learned_id) not in skills_crystallized:
+                skills_crystallized.append(str(learned_id))
+        else:
+            unsolved_count += 1
+
+        results.append({
+            "task_id": tid,
+            "status": status,
+            "tier": tier or None,
+            "attempt": winner.get("attempt"),
+            "skill_id_used": used_skill,
+            "learned_skill_id": learned_id,
+            "elapsed_ms": round((time.monotonic() - t_start) * 1000.0, 2),
+            "model_calls": int(res.get("model_calls", 0)),
+            "parameters_stored": int(res.get("parameters_stored", 0)),
+        })
+
+    return {
+        "schema": SCHEMA,
+        "modality": "adversarial_self_play_compounding",
+        "status": "VERIFIED" if solved_count > 0 else "UNSOLVED",
+        "tasks_total": len(tasks),
+        "solved_count": solved_count,
+        "unsolved_count": unsolved_count,
+        "tier0_recall_hits": tier0_recall_hits,
+        "skills_crystallized": skills_crystallized,
+        "skill_store_size": (
+            len(store.get("skills") or {}) + len(store.get("ast_rewrite_laws") or {})
+        ),
+        "results": results,
+        "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+

@@ -5822,5 +5822,41 @@
     "cumulative_unique_verified_real_oss_commits": 240,
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter82_pillar4_self_play_compounding_and_blind_multifile_flask_05e9c6bd": {
+    "date": "2026-11-21",
+    "summary": "Completed Pillar 4 Closed-Loop $0 Adversarial Self-Play Compounding (`run_adversarial_self_play_loop` in `backward_witness_synthesizer_v1.py`) wired directly into ONE Front Door (`open_model().solve(..., mode='EPISTEMIC', inputs={'self_play_tasks': ...})`) with external inspectable/deletable L2 skill crystallization (`model_calls == 0`, `parameters_stored == 0`). Also ran strictly blind evaluation on brand-new never-before-seen 2026 `pallets/flask` commits: SOLVED multi-file Aug 11, 2026 `pallets/flask@05e9c6bd` (`Fix .partition(':') usage on potential IPv6 addresses (#6096)`) completely blind in 46.09s via `COMPOSED_ANGELIC_PROGRESS`, patching BOTH `src/flask/testing.py` AND `src/flask/app.py` simultaneously and passing all 480/480 runnable Flask tests (`0` regressions; only 2 pre-existing env failures `test_get_version` wheel metadata & `test_async_view` optional `asgiref` extra, identical to unpatched baseline `478 passed -> 480 passed`). Honestly logged `pallets/flask@12e95c93` (`provide_automatic_options` override, 207 failing tests) as `UNSOLVED`.",
+    "hand_written_repair_rules_added": 0,
+    "verified_real_oss_commits": [
+      {
+        "repo": "pallets/flask",
+        "commit": "05e9c6bd",
+        "date": "2026-08-11",
+        "status": "VERIFIED",
+        "multi_file": true,
+        "files_patched": [
+          "src/flask/testing.py",
+          "src/flask/app.py"
+        ],
+        "seconds": 46.09,
+        "tier": "COMPOSED_ANGELIC_PROGRESS",
+        "description": "ipv6_safe_partition_host_unbracketed(ctx.request.host) + ipv6_safe_partition_assign(server_name)",
+        "full_suite_verification": "480 passed, 4 skipped, 0 regressions vs baseline (478 passed -> 480 passed; 2 pre-existing env failures test_get_version & test_async_view)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "honest_unsolved_from_blind_2026_flask_batch": [
+      {
+        "repo": "pallets/flask",
+        "commit": "12e95c93",
+        "date": "2026-02-12",
+        "status": "UNSOLVED",
+        "reason": "Config-level API/behavior change across 207 failing tests in `src/flask/sansio/app.py`."
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 241,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

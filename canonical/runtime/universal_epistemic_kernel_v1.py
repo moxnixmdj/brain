@@ -4985,6 +4985,8 @@ def solve_arbitrary_environment(
     base_url: str | None = None,
     tomography_env: Any | None = None,
     goal_targets: Sequence[Mapping[str, Any]] | None = None,
+    self_play_tasks: Sequence[Mapping[str, Any]] | None = None,
+    skill_store: dict[str, Any] | None = None,
     postcondition_fn: Callable[[pathlib.Path], tuple[bool, str]] | None = None,
     dom_nodes: Sequence[Mapping[str, Any]] | None = None,
     gui_env: Any | None = None,
@@ -5006,6 +5008,26 @@ def solve_arbitrary_environment(
     atomic knowledge (model_calls == 0, parameters_stored == 0).
     """
     t0 = time.monotonic()
+    # 000a. Pillar 4 Adversarial Self-Play Compounding Loop ($0 offline skill crystallization)
+    if self_play_tasks:
+        from canonical.runtime import backward_witness_synthesizer_v1 as BWS
+
+        sp_rep = BWS.run_adversarial_self_play_loop(
+            self_play_tasks,
+            skill_store=skill_store,
+            python_exe=python_exe,
+            timeout_s=timeout_s,
+        )
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": "adversarial_self_play_compounding",
+            "status": str(sp_rep.get("status") or "UNSOLVED"),
+            "self_play": sp_rep,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
     # 000. Differential State Tomography (Active Mealy API Discovery + 300+ Step Long-Horizon Planner)
     if tomography_env is not None:
         from canonical.runtime import differential_state_tomography_v1 as DST

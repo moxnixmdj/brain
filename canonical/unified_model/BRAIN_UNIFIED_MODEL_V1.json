@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "aeae966fb6b836ed581b80b3ffce7d6e3daa2384eb3669450d3a7b86d0089df7"
+  "value": "06c9bf26c798927d40ab1b886844263610d127d54948fc1130d546b656af2c6b"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "20b54a65d67b88a4645397dede7e962c19c5f39f2f0235641515299350fb311a",
+   "sha256": "976a9f416057c5ac1ee4ade5d306adcbea6d9343720562ef0e0e2a89cc3c309e",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -269554,9 +269554,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/backward_witness_synthesizer_v1.py",
-   "sha256": "fb8b4097536e76313900110e0976b801e739c8547bbf2ba9b2f81d0f7d2f7181",
+   "sha256": "f7b102899306c1b51c882b595bab6b3794b13b2d0e28aa48443824e757bb7415",
    "summary": "Backward Deductive Witness Propagation (\"Reverse Execution\" Synthesis) + Minimal Witness Shrinking.",
-   "symbol_count": 12,
+   "symbol_count": 13,
    "symbols": [
     "WitnessExample",
     "_assigned_names",
@@ -269568,6 +269568,7 @@
     "backward_propagate_expression",
     "ddmin_shrink",
     "extract_frame_alphabet",
+    "run_adversarial_self_play_loop",
     "split_multi_assert_test_blocks",
     "synthesize_function_return_fix"
    ],
@@ -269587,6 +269588,7 @@
     "minimal": 1,
     "propagation": 1,
     "reverse": 1,
+    "run_adversarial_self_play_loop": 1,
     "shrinking": 1,
     "split_multi_assert_test_blocks": 1,
     "synthesis": 1,
@@ -274046,7 +274048,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "0fa4c9e33a78770187f0ca88371e4b7e39bb1c27e87dbcf72a3a16c132067d1f",
+   "sha256": "f13c42d3b724fe3fc237a549534c0b334c198512a95a02e30abb2e3f13e43739",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -338930,7 +338932,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "39b678d64c6a2686bfc0db45f495985d8b0daa387ada71aeff1638667026f1cd",
+   "sha256": "f07f715d5dd223ca8fd5311199f468969c92473056fc96bbaff075a8802675fa",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
