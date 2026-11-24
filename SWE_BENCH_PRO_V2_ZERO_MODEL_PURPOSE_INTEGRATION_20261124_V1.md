@@ -44,3 +44,8 @@ No aggregate benchmark score, §6 verification, capability/family/terminal credi
 ## 5. Receipt status
 
 At producer time, the distinct OIDC runner workflow has been authored but no runner-owned receipt for this workflow has been recorded. The receipt, sidecar and reward log will be landed by the runner itself; local producer metadata will then be reconciled without changing any pinned Brain source bytes. Section 6 remains NOT MET.
+
+
+## Producer-side gate record
+
+The iteration-10 local gate wrapper passed `ALL_GATES_OK True` with 24 checks at `2026-11-24T02:43:57Z` on HEAD `227c3e1c`, including exact four-source binding, 11 finite-purpose tests, 15 combined zero-model Harbor tests, new workflow YAML/embedded-Python/source-binding checks, no raw benchmark task files, 200 selected regression tests and a clean tree after the ledger revert. The first wrapper run's route/OBS drift mismatch and copied assertion bug are preserved in the main report. This is local producer authority only; the distinct OIDC runner receipt is still the authority for any SWE-bench Pro V2 / HARD-51 attempt result.
