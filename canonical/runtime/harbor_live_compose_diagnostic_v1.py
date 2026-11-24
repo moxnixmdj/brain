@@ -13,6 +13,7 @@ import asyncio
 import json
 from pathlib import Path
 import re
+import subprocess
 from typing import Any
 
 from canonical.runtime.harbor_docker_inspect_diagnostic_v1 import diagnose
@@ -51,6 +52,21 @@ def _real_directory(value: Any) -> str:
         return str(path)
     except (OSError, TypeError, ValueError, RuntimeError) as exc:
         raise ComposeDiagnosticError("HOST_DIRECTORY_INVALID") from exc
+
+
+def _read_inspect(command: list[str], env: dict[str, str], *, timeout: float = 15) -> bytes:
+    """Use the runtime's mediated subprocess entry point, off the event loop."""
+    try:
+        process = subprocess.run(command, env=env, stdin=subprocess.DEVNULL,
+                                 stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                                 timeout=timeout, check=False)
+    except subprocess.TimeoutExpired as exc:
+        raise ComposeDiagnosticError("DOCKER_INSPECT_TIMEOUT") from exc
+    except OSError as exc:
+        raise ComposeDiagnosticError("DOCKER_INSPECT_UNAVAILABLE") from exc
+    if process.returncode != 0 or len(process.stdout) > _MAX_INSPECT:
+        raise ComposeDiagnosticError("DOCKER_INSPECT_FAILED_OR_TOO_LARGE")
+    return process.stdout
 
 
 async def inspect_compose_environment(environment: Any, *, brain_source: str) -> dict[str, Any]:
@@ -104,22 +120,10 @@ async def inspect_compose_environment(environment: Any, *, brain_source: str) ->
 
     before = await get_id()
     runtime = type(environment).runtime()
-    try:
-        process = await asyncio.create_subprocess_exec(
-            *runtime.engine_cmd("inspect", before),
-            env=environment._compose_env_vars(include_os_env=True),
-            stdin=asyncio.subprocess.DEVNULL, stdout=asyncio.subprocess.PIPE,
-            stderr=asyncio.subprocess.PIPE)
-        try:
-            stdout, _ = await asyncio.wait_for(process.communicate(), timeout=15)
-        except asyncio.TimeoutError:
-            process.kill()
-            await process.communicate()
-            raise ComposeDiagnosticError("DOCKER_INSPECT_TIMEOUT")
-    except OSError as exc:
-        raise ComposeDiagnosticError("DOCKER_INSPECT_UNAVAILABLE") from exc
-    if process.returncode != 0 or len(stdout) > _MAX_INSPECT:
-        raise ComposeDiagnosticError("DOCKER_INSPECT_FAILED_OR_TOO_LARGE")
+    # Cancellation of this coroutine cannot stop the thread immediately;
+    # subprocess.run still kills and reaps the inspect command on its timeout.
+    stdout = await asyncio.to_thread(_read_inspect, runtime.engine_cmd("inspect", before),
+                                     environment._compose_env_vars(include_os_env=True))
     try:
         document = json.loads(stdout)
     except (ValueError, UnicodeError) as exc:

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c57971922262ba2d2bb8cb45a4312cd205a4c905b60735fa3601747880e838aa"
+  "value": "2e5fa9b88d67b6e16be6b643a52c053ab4ef975bb9f043c7facce8d813720c76"
  },
  "engines": [
   {
@@ -251807,7 +251807,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/HARBOR_EXECUTION_BOUNDARY_REVIEW_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "47975908640f7fbe8dfca93b9ff6ab1bf6eeb651d4c485871463a7725398463b",
+   "sha256": "3c6155b77940acc07baac211ddb168863b1f472f767e5c47f708809bd9c63ca9",
    "status": "VERIFICATION_PENDING__NO_CAPABILITY_CREDIT",
    "terms": {
     "20261124": 1,
@@ -299630,11 +299630,12 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/harbor_live_compose_diagnostic_v1.py",
-   "sha256": "a145de16bcbb6a2605fa70ed76059c5b1a264091683644f41f49354e4bc34f73",
+   "sha256": "b256dc9bc90aec63dab026f519dbbafab968cc2aebafad42b849d344840544a6",
    "summary": "Live, non-authorizing Docker Compose diagnostic for pinned Harbor.",
-   "symbol_count": 5,
+   "symbol_count": 6,
    "symbols": [
     "ComposeDiagnosticError",
+    "_read_inspect",
     "_real_directory",
     "compose_labels_match",
     "inspect_compose_environment",
@@ -299652,6 +299653,7 @@
     "non-authorizing": 1,
     "parse_single_id": 1,
     "pinned": 1,
+    "read_inspect": 1,
     "real_directory": 1,
     "v1": 1
    }

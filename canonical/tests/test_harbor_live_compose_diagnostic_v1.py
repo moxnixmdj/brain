@@ -1,4 +1,6 @@
 """Pure parsing/path checks; no Docker, Harbor daemon, or mocked executable."""
+import os
+import sys
 import tempfile
 from pathlib import Path
 import unittest
@@ -7,6 +9,19 @@ from canonical.runtime import harbor_live_compose_diagnostic_v1 as live
 
 
 class ComposeDiagnosticTests(unittest.TestCase):
+    def test_inspect_transport_uses_real_bounded_child_process(self):
+        # Exercise the generic subprocess transport with Python itself, not a
+        # simulated Docker executable or a claim about a live Docker daemon.
+        self.assertEqual(live._read_inspect([sys.executable, '-c', 'print("ok")'], dict(os.environ)), b'ok\n')
+        cases = (
+            ([sys.executable, '-c', 'raise SystemExit(3)'], 2, 'DOCKER_INSPECT_FAILED_OR_TOO_LARGE'),
+            ([sys.executable, '-c', 'import time; time.sleep(2)'], .05, 'DOCKER_INSPECT_TIMEOUT'),
+            (['/nonexistent/brain-diagnostic-command'], 2, 'DOCKER_INSPECT_UNAVAILABLE'),
+        )
+        for command, timeout, reason in cases:
+            with self.subTest(reason=reason), self.assertRaisesRegex(live.ComposeDiagnosticError, reason):
+                live._read_inspect(command, dict(os.environ), timeout=timeout)
+
     def test_single_full_id_required(self):
         cid = 'a' * 64
         self.assertEqual(live.parse_single_id(cid + '\n'), cid)

@@ -105,6 +105,7 @@
     "route_order": "Delete host solver; bypass nested namespaces; reuse Harbor exec, Compose diagnostic, candidate diff handoff and official verifier. Adapt for owner-explicit experimental opt-in; no identity or egress guarantees inferred from an inspect sample."
   },
   "pr_check_reconciliation_20261124": {
+    "follow_up": "A local full-suite collection identified a new asyncio subprocess site outside the Root3 two-chokepoint inventory. Use the existing subprocess.run choke point in a worker thread with a kill-and-reap timeout; this remains an unverified Docker diagnostic, not an isolation claim. Local collection additionally exposed legacy site mappings and missing libGL; the exact main CI log is inaccessible from this sandbox.",
     "incremental_spend_usd": 0,
     "limitations": "Current-main full regression is a separate push job. Reconciliation does not establish benchmark success or runtime isolation.",
     "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
