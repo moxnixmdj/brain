@@ -948,6 +948,8 @@ class UnifiedModel:
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
+        if requested == "EPISTEMIC":
+            return self._solve_via_universal_epistemic_kernel(goal, inputs=inputs, cwd=cwd)
         if requested == "SOLVE_OR_LEARN":
             return self.act_or_learn(
                 goal,
@@ -1005,6 +1007,10 @@ class UnifiedModel:
 
             routing = self.route(goal)
             if not routing["confident"]:
+                if isinstance(inputs, Mapping) and ("workspace" in inputs or "dom_nodes" in inputs or "web_url" in inputs):
+                    return self._solve_via_universal_epistemic_kernel(
+                        goal, inputs=inputs, cwd=cwd, routing=routing
+                    )
                 return self._failure(
                     goal,
                     "GOAL_NOT_REPRESENTED_IN_MODEL__FAIL_CLOSED",
@@ -1025,6 +1031,84 @@ class UnifiedModel:
             except Exception:
                 pass
         return out
+
+    def _solve_via_universal_epistemic_kernel(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        cwd: str | Path | None = None,
+        routing: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Front-door delegation to the zero-LLM, zero-weight Universal Epistemic Kernel.
+
+        Enters any arbitrary workspace/environment knowing nothing, senses the local
+        frontier, computes the exact Epistemic Diff against external inspectable memory,
+        acquires only missing gaps in parallel, verifies atomically in an isolated state
+        copy, and distills only generalized atomic knowledge (`parameters_stored == 0`).
+        """
+        from canonical.runtime import universal_epistemic_kernel_v1 as uek
+
+        inp = dict(inputs or {})
+        ws_raw = inp.get("workspace") or cwd
+        if (
+            ws_raw is None
+            and "dom_nodes" not in inp
+            and "web_url" not in inp
+            and "source_url" not in inp
+            and "target_url" not in inp
+            and "api_url" not in inp
+            and "graphql_url" not in inp
+            and "db_path" not in inp
+            and "gui_env" not in inp
+            and "http://" not in goal
+            and "https://" not in goal
+        ):
+            return self._failure(
+                goal,
+                "EPISTEMIC_WORKSPACE_REQUIRED__FAIL_CLOSED",
+                routing=routing,
+            )
+        ws_path = Path(ws_raw).resolve() if ws_raw is not None else Path.cwd()
+        mem = inp.get("memory")
+        mem_path = inp.get("memory_path")
+        if mem is None and mem_path:
+            mem = uek.load_universal_memory(mem_path)
+        res = uek.solve_arbitrary_environment(
+            ws_path,
+            goal,
+            memory=mem,
+            postcondition_fn=inp.get("postcondition_fn"),
+            dom_nodes=inp.get("dom_nodes"),
+            gui_env=inp.get("gui_env"),
+            web_url=inp.get("web_url") or inp.get("source_url"),
+            target_url=inp.get("target_url"),
+            api_url=inp.get("api_url"),
+            graphql_url=inp.get("graphql_url"),
+            db_path=inp.get("db_path"),
+            verifier=inp.get("verifier"),
+            field_values=inp.get("field_values"),
+            python_exe=inp.get("python_exe"),
+            allow_web=bool(inp.get("allow_web", True)),
+            timeout_s=float(inp.get("timeout_s", 20.0)),
+        )
+        if mem is not None and mem_path:
+            uek.save_universal_memory(mem, mem_path)
+        ok = res.get("status") == "VERIFIED"
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "EPISTEMIC_SOLVE",
+            "goal": goal,
+            "pass": ok,
+            "status": "PASS" if ok else "FAIL_CLOSED",
+            "model_digest": self.digest,
+            "model_calls": 0,
+            "parameters_stored": 0,
+            "external_model_dependency": False,
+            "authority": "NONE",
+            "routing": dict(routing) if isinstance(routing, Mapping) else None,
+            "epistemic_result": res,
+        }
 
     def act_or_learn(
         self,
@@ -2685,7 +2769,7 @@ def main(argv: list[str] | None = None) -> int:
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
-    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN"])
+    solve_p.add_argument("--mode", default="AUTO", choices=["AUTO", "RECALL", "SOLVE_OR_LEARN", "EPISTEMIC"])
     solve_p.add_argument("--capability-id", default=None)
     solve_p.add_argument("--instance-id", default=None)
     ns = parser.parse_args(argv)
