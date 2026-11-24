@@ -14,12 +14,31 @@ environment command. The legacy SWE adapter also refuses before solver or
 checkout. Neither accepts any real benchmark yet; the historical SWE-bench
 Verified dataset is out of scope.
 
+## Fixture-only effect expansion
+
+The fixture collector now handles UTF-8, newline-terminated text additions,
+modifications and deletions, including empty files, under its existing bounded
+snapshot policy. Deleted effects carry baseline file bytes and their SHA-256;
+new and modified effects carry resulting file bytes and their SHA-256. The
+separate producer-built recomputation checks the effect set against a fresh
+base checkout and replays the exact patch to compare file content, directories
+and modes. The changed effect format is bound into its policy hash; old fixture
+receipts were produced under the earlier policy and are not new-policy receipts.
+Unsupported file types, paths, empty directories and mode changes are refused.
+These are trusted-fixture tests, not admission for arbitrary tasks or an
+independent authenticated receipt. The collector still has size limits and
+unsupported Git effects; it must not be wired to execute real agents yet.
+
 Five genuine SWE-bench Pro V2 HARD-51 task IDs were selected read-only at the
 pinned commit in `qualification_results/frontier_five_discovery_20261124.json`.
 The instruction and task configuration hashes enable identification, not
 independent attestation. **0/5 executed; 0 patches collected or verified; no
-scores.** Neither the old Verified refusals nor the Astropy trusted-fixture
-patches are frontier evaluations. This machine has neither Docker nor Harbor,
+scores.** During further preparation, the first selected task's public
+`tests/config.json` verifier test names were displayed to the coding agent. No
+gold patch was accessed, but that instance is no longer blind to this agent;
+any later rollout must disclose this contamination. Neither the old Verified
+refusals nor the Astropy trusted-fixture patches are frontier evaluations.
+This machine has neither Docker nor Harbor,
 no external VM, and no independent signing/verifier material has been supplied.
 
 ## Benchmark compatibility

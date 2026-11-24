@@ -62,6 +62,7 @@ def _measure_policy(input_dir: Path) -> str:
              'pid1_sha256': hashlib.sha256(ns._PID1_GUARD.encode()).hexdigest(),
              'syscall_filter_sha256': ns.syscall_filter_sha256(),
              'git_visibility': 'QUARANTINED_BEFORE_WORKER',
+             'effect_format': 'REPLAY_CHECKED_TEXT_ADD_MODIFY_DELETE_0644_V1',
              'snapshot_limits': vars(snapshots.FIXTURE_WORKTREE_LIMITS),
              'fixture_script_sha256': hashlib.sha256(script).hexdigest()}
     return hashlib.sha256(json.dumps(basis, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
@@ -124,21 +125,30 @@ def recompute(*, source: Path, worktree: Path, input_dir: Path, receipt: dict[st
             raise RecomputeRefused('WORKTREE_CHANGED_DURING_RECOMPUTE')
         if before.digest != receipt['before_snapshot_sha256'] or after.digest != receipt['after_snapshot_sha256']:
             raise RecomputeRefused('SNAPSHOT_MISMATCH')
-        if _modes(baseline, before) != _modes(worktree, after):
-            raise RecomputeRefused('MODE_MISMATCH')
+        modes_before, modes_after = _modes(baseline, before), _modes(worktree, after)
+        if modes_after != _modes(worktree, after2):
+            raise RecomputeRefused('WORKTREE_CHANGED_DURING_RECOMPUTE')
         old, new = dict(before.files), dict(after.files)
-        if set(old) != set(new) or before.directories != after.directories:
-            raise RecomputeRefused('LAYOUT_MISMATCH')
-        changed = {name: data for name, data in new.items() if old[name] != data}
-        if set(effects) != {'patch.diff', *('files/' + name for name in changed)}:
+        if (any(modes_before[p] != modes_after[p] for p in modes_before.keys() & modes_after.keys())
+                or any(modes_before[p] != 0o644 for p in old.keys() - new.keys())
+                or any(modes_after[p] != 0o644 for p in new.keys() - old.keys())):
+            raise RecomputeRefused('MODE_MISMATCH')
+        changed = {name: data for name, data in new.items() if name not in old or old[name] != data}
+        deleted = {name: data for name, data in old.items() if name not in new}
+        if set(effects) != {'patch.diff', *('files/' + name for name in changed),
+                            *('deleted/' + name for name in deleted)}:
             raise RecomputeRefused('CHANGED_FILE_SET_MISMATCH')
         for name, data in changed.items():
             if effects['files/' + name] != data:
                 raise RecomputeRefused('CHANGED_FILE_BYTES_MISMATCH')
+        for name, data in deleted.items():
+            if effects['deleted/' + name] != data:
+                raise RecomputeRefused('DELETED_BASE_FILE_BYTES_MISMATCH')
         _git(['apply', '--check', '-'], cwd=baseline, home=root, input_bytes=patch)
         _git(['apply', '-'], cwd=baseline, home=root, input_bytes=patch)
         applied = snapshots.snapshot_project(baseline, limits=snapshots.FIXTURE_WORKTREE_LIMITS)
-        if applied.digest != after.digest or applied.files != after.files:
+        if (applied.digest != after.digest or applied.files != after.files
+                or _modes(baseline, applied) != modes_after):
             raise RecomputeRefused('PATCH_DOES_NOT_REPRODUCE_WORKTREE')
     return {'status': 'FIXTURE_BYTES_RECOMPUTED', 'producer_built': True,
             'independent_attestation': False, 'carrier_qualified': False,

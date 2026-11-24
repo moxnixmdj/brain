@@ -79,25 +79,44 @@ def _modes(worktree: Path, captured: snapshot.ProjectSnapshot) -> dict[str, int]
         raise FixtureRefused('WORKTREE_MODE_SNAPSHOT_FAILED') from exc
 
 
-def _limited_text_diff(before: snapshot.ProjectSnapshot, after: snapshot.ProjectSnapshot) -> tuple[bytes, dict[str, bytes]]:
+def _limited_text_diff(before: snapshot.ProjectSnapshot, after: snapshot.ProjectSnapshot) -> tuple[bytes, dict[str, bytes], dict[str, bytes]]:
+    """Fixture-only text edits/additions/deletions, with explicit deleted bytes.
+
+    Empty directories, non-text, modes and path quoting are not generally
+    representable here; replay checks below refuse anything lost by the patch.
+    """
     old, new = dict(before.files), dict(after.files)
-    if set(old) != set(new) or before.directories != after.directories:
-        raise FixtureRefused('FILE_LAYOUT_CHANGED_UNSUPPORTED')
-    changed = {p: new[p] for p in sorted(new) if new[p] != old[p]}
+    for snap, files in ((before, old), (after, new)):
+        parents: set[str] = set()
+        for path in files:
+            parent = path.rpartition('/')[0]
+            while parent:
+                parents.add(parent)
+                parent = parent.rpartition('/')[0]
+        if set(snap.directories) != parents:
+            raise FixtureRefused('EMPTY_DIRECTORY_UNSUPPORTED')
+    changed = {p: new[p] for p in sorted(new) if p not in old or new[p] != old[p]}
+    deleted = {p: old[p] for p in sorted(old.keys() - new.keys())}
     chunks: list[str] = []
-    for path, data in changed.items():
+    for path in sorted(set(changed) | set(deleted)):
         if not _SAFE_PATH.fullmatch(path):
             raise FixtureRefused('DIFF_PATH_UNSUPPORTED')
         try:
-            old_text, new_text = old[path].decode('utf-8'), data.decode('utf-8')
+            old_text = old.get(path, b'').decode('utf-8')
+            new_text = new.get(path, b'').decode('utf-8')
         except UnicodeError as exc:
             raise FixtureRefused('NON_TEXT_DIFF_UNSUPPORTED') from exc
         if '\x00' in old_text or '\x00' in new_text or (old_text and not old_text.endswith('\n')) or (new_text and not new_text.endswith('\n')):
             raise FixtureRefused('TEXT_DIFF_UNSUPPORTED')
         chunks.append('diff --git a/' + path + ' b/' + path + '\n')
+        if path not in old:
+            chunks.append('new file mode 100644\n')
+        elif path not in new:
+            chunks.append('deleted file mode 100644\n')
         chunks.extend(difflib.unified_diff(old_text.splitlines(keepends=True), new_text.splitlines(keepends=True),
-                                           fromfile='a/'+path, tofile='b/'+path))
-    return ''.join(chunks).encode('utf-8'), changed
+                                           fromfile='/dev/null' if path not in old else 'a/'+path,
+                                           tofile='/dev/null' if path not in new else 'b/'+path))
+    return ''.join(chunks).encode('utf-8'), changed, deleted
 
 
 def _run_fixture(input_dir: Path, worktree: Path, script: str) -> tuple[int, str]:
@@ -121,6 +140,7 @@ def _run_fixture(input_dir: Path, worktree: Path, script: str) -> tuple[int, str
                     'pid1_sha256': hashlib.sha256(ns._PID1_GUARD.encode()).hexdigest(),
                     'syscall_filter_sha256': ns.syscall_filter_sha256(),
                     'git_visibility': 'QUARANTINED_BEFORE_WORKER',
+                    'effect_format': 'REPLAY_CHECKED_TEXT_ADD_MODIFY_DELETE_0644_V1',
                     'snapshot_limits': vars(snapshot.FIXTURE_WORKTREE_LIMITS),
                     'fixture_script_sha256': hashlib.sha256(script.encode('utf-8')).hexdigest()}
     policy_sha = hashlib.sha256(json.dumps(policy_basis, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
@@ -292,10 +312,18 @@ def collect_fixture_worktree(source_repo: str | Path, expected_base_commit: str,
         after_again = snapshot.snapshot_project(worktree, limits=snapshot.FIXTURE_WORKTREE_LIMITS)
         if after.digest != after_again.digest or after.files != after_again.files:
             raise FixtureRefused('WORKTREE_CHANGED_DURING_COLLECTION')
-        if _modes(worktree, after) != modes_before:
+        modes_after = _modes(worktree, after)
+        if modes_after != _modes(worktree, after_again):
+            raise FixtureRefused('WORKTREE_CHANGED_DURING_COLLECTION')
+        if any(modes_before[p] != modes_after[p] for p in modes_before.keys() & modes_after.keys()):
             raise FixtureRefused('WORKTREE_MODE_CHANGED_UNSUPPORTED')
-        patch, changed = _limited_text_diff(before, after)
-        effects = {'patch.diff': patch, **{'files/' + k: v for k, v in changed.items()}}
+        old_names, new_names = set(dict(before.files)), set(dict(after.files))
+        if any(modes_before[p] != 0o644 for p in old_names - new_names) or any(
+                modes_after[p] != 0o644 for p in new_names - old_names):
+            raise FixtureRefused('WORKTREE_MODE_CHANGED_UNSUPPORTED')
+        patch, changed, deleted = _limited_text_diff(before, after)
+        effects = {'patch.diff': patch, **{'files/' + k: v for k, v in changed.items()},
+                   **{'deleted/' + k: v for k, v in deleted.items()}}
         receipt = {'schema': SCHEMA, 'base_commit': actual, 'policy_sha256': policy_sha,
                    'before_snapshot_sha256': before.digest, 'after_snapshot_sha256': after.digest,
                    'fixture_returncode': rc,

@@ -94,6 +94,76 @@ Path('/work/project/pkg/core.py').write_text('answer = 2\\n')
         self.assertFalse(result['independent_verification'])
         self.assertFalse(result['publication_authority'])
 
+    def test_fixture_add_modify_delete_and_replay(self):
+        (self.repo / 'old.txt').write_text('obsolete\n', encoding='utf-8')
+        subprocess.run(['git', '-C', str(self.repo), 'add', 'old.txt'], check=True)
+        self.commit('add old file')
+        base = subprocess.check_output(['git', '-C', str(self.repo), 'rev-parse', 'HEAD'], text=True).strip()
+        sentinel = self.root / 'host-sentinel'; sentinel.write_bytes(b'unchanged')
+        fixture = """from pathlib import Path
+root=Path('/work/project')
+(root/'mod.py').write_text('value = 2\\n')
+(root/'old.txt').unlink()
+(root/'newdir').mkdir()
+(root/'newdir/new.txt').write_text('new\\n')
+(root/'empty.txt').write_bytes(b'')
+"""
+        result = collector.collect_fixture_worktree(self.repo, base, fixture)
+        self.assertEqual(set(result['effect_bytes']), {'patch.diff', 'files/mod.py',
+                         'files/newdir/new.txt', 'files/empty.txt', 'deleted/old.txt'})
+        self.assertEqual(result['effect_bytes']['deleted/old.txt'], b'obsolete\n')
+        self.assertEqual(result['separate_recomputation']['status'], 'FIXTURE_BYTES_RECOMPUTED')
+        self.assertFalse(result['carrier_qualified'])
+        self.assertEqual(sentinel.read_bytes(), b'unchanged')
+        self.assertEqual((self.repo / 'old.txt').read_text(), 'obsolete\n')
+        self.assertFalse((self.repo / 'newdir').exists())
+        for path, data in result['effect_bytes'].items():
+            self.assertEqual(result['receipt']['effects'][path]['sha256'], hashlib.sha256(data).hexdigest())
+        check = subprocess.run(['git', '-C', str(self.repo), 'apply', '--check', '-'],
+                               input=result['patch_bytes'], capture_output=True)
+        self.assertEqual(check.returncode, 0, check.stderr)
+
+    def test_fixture_delete_last_files_and_directory(self):
+        directory = self.repo / 'obsolete'; directory.mkdir()
+        (directory / 'empty').write_bytes(b'')
+        (directory / 'text').write_text('bye\n')
+        subprocess.run(['git', '-C', str(self.repo), 'add', 'obsolete'], check=True)
+        self.commit('add directory')
+        base = subprocess.check_output(['git', '-C', str(self.repo), 'rev-parse', 'HEAD'], text=True).strip()
+        fixture = """from pathlib import Path
+p=Path('/work/project/obsolete')
+(p/'empty').unlink()
+(p/'text').unlink()
+p.rmdir()
+"""
+        result = collector.collect_fixture_worktree(self.repo, base, fixture)
+        self.assertEqual(result['effect_bytes']['deleted/obsolete/empty'], b'')
+        self.assertEqual(result['effect_bytes']['deleted/obsolete/text'], b'bye\n')
+        self.assertEqual(result['separate_recomputation']['status'], 'FIXTURE_BYTES_RECOMPUTED')
+        self.assertTrue(directory.exists())
+
+    def test_recomputed_receipt_rejects_forged_deleted_base_bytes(self):
+        original = collector._recompute_in_separate_process
+        def forge_then_recompute(**kwargs):
+            effects = dict(kwargs['effects'], **{'deleted/mod.py': b'forged\\n'})
+            receipt = copy.deepcopy(kwargs['receipt'])
+            receipt['effects']['deleted/mod.py'] = {'sha256': hashlib.sha256(effects['deleted/mod.py']).hexdigest(),
+                                                   'size': len(effects['deleted/mod.py'])}
+            digest = hashlib.sha256(json.dumps(receipt, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+            return original(**{**kwargs, 'effects': effects, 'receipt': receipt, 'receipt_sha': digest})
+        fixture = "from pathlib import Path\nPath('/work/project/mod.py').unlink()\n"
+        with mock.patch.object(collector, '_recompute_in_separate_process', side_effect=forge_then_recompute):
+            with self.assertRaisesRegex(collector.FixtureRefused, 'DELETED_BASE_FILE_BYTES_MISMATCH'):
+                collector.collect_fixture_worktree(self.repo, self.base, fixture)
+
+    def test_empty_directory_and_nonstandard_added_mode_are_refused(self):
+        with self.assertRaisesRegex(collector.FixtureRefused, 'EMPTY_DIRECTORY_UNSUPPORTED'):
+            collector.collect_fixture_worktree(self.repo, self.base,
+                "from pathlib import Path\nPath('/work/project/empty').mkdir()\n")
+        with self.assertRaisesRegex(collector.FixtureRefused, 'WORKTREE_MODE_CHANGED_UNSUPPORTED'):
+            collector.collect_fixture_worktree(self.repo, self.base,
+                "from pathlib import Path\np=Path('/work/project/new');p.write_text('x\\n');p.chmod(0o755)\n")
+
     def test_host_receipt_refuses_tampered_base_and_file_bytes(self):
         fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
         result = collector.collect_fixture_worktree(self.repo, self.base, fixture)
