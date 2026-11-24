@@ -473,11 +473,18 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
 
     try:
         from canonical.tools.the_guide_is_a_test_suite_v1 import (
-            _python_example_ok, as_sessions, compare, transcripts)
+            _python_example_ok, as_sessions, compare, fenced_blocks, transcripts)
     except Exception as error:  # noqa: BLE001
         return {"status": "REFUSED__EXTRACTOR_UNAVAILABLE", "error": str(error)[:200]}
-    block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
-    sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
+    # A real document is markdown with fenced blocks; a closing ``` is not part of the
+    # example's output. Split the fences first (the 2026-12-04 pipeline) and fall back to
+    # treating the whole text as one block only when no fences exist (raw docstrings).
+    fenced = fenced_blocks(text)
+    blocks = fenced or [{"language": "pycon", "first_line": 1, "text": text,
+                         "module_scope": False}]
+    sessions = []
+    for block in transcripts(blocks):
+        sessions.extend(as_sessions(block))
     if not sessions:
         return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
                 "gate": "EXTRACTED", "examples": 0}
@@ -525,6 +532,280 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
             "authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
             "why_this_plan": ("each step is a command the document printed, replayed in a scratch "
                               "room, whose output matched the document's own printed answer")}
+
+
+def _gap_report(actions: Sequence[Any], learned: Mapping[str, Any],
+                observations: Mapping[str, Any],
+                goal_predicate: Callable[[Any], bool],
+                stale_discarded: int, family: str,
+                cached_matches: int) -> dict[str, Any]:
+    """Name what this environment instance does not yet give us, in countable nouns.
+
+    The owner's mechanic -- scan the environment, diff memory against what is
+    present, fetch only the gap -- needs the gap to be a first-class object, not
+    a mood. Every field here is computed from what was observed; nothing is
+    inferred. The unknowns list feeds the instant-knowledge query, so the fetch
+    is driven by measured ignorance, not by a fixed template.
+    """
+    model = learned.get("model") or {}
+    root = learned.get("root")
+    root_row = model.get(root) or {}
+    novel = [str(a) for a in list(actions) if str(a) not in root_row]
+    goal_states = 0
+    for obs in observations.values():
+        try:
+            if goal_predicate(obs):
+                goal_states += 1
+        except Exception:
+            continue
+    unknowns: list[str] = []
+    if novel:
+        unknowns.append("ROOT_TRANSITIONS_UNPROBED:%d" % len(novel))
+    if not goal_states:
+        unknowns.append("GOAL_STATE_NEVER_OBSERVED")
+    if stale_discarded:
+        unknowns.append("PRIOR_ROWS_STALE:%d" % int(stale_discarded))
+    if not cached_matches:
+        unknowns.append("NO_ADMITTED_RULE_FOR:%s" % family)
+    return {"schema": SCHEMA,
+            "states_seen": len(observations),
+            "novel_actions_at_root": novel[:16],
+            "novel_action_count": len(novel),
+            "goal_states_observed": goal_states,
+            "goal_observed": bool(goal_states),
+            "stale_prior_rows_discarded": int(stale_discarded),
+            "admitted_rule_available": bool(cached_matches),
+            "unknowns": unknowns}
+
+
+def _document_text_from(local_result: Mapping[str, Any],
+                        local_root: str | pathlib.Path | None) -> str:
+    """Read the FULL text of the matched local documents.
+
+    `local_guide.lookup` returns a <=600-character paragraph snippet per document,
+    which can never feed the document-is-a-test-suite wire. The matched files are
+    on this machine and reading them is what a reader does. Read-only, capped at
+    three documents and 200k characters, best effort; any failure yields "" and
+    the wire stays closed -- honestly, with the snippet tier still reported.
+    """
+    docs = [d for d in (local_result.get("documents") or []) if isinstance(d, Mapping)]
+    if not docs:
+        return ""
+    base = pathlib.Path(local_root) if local_root is not None else pathlib.Path(__file__).resolve().parents[2]
+    parts: list[str] = []
+    total = 0
+    for d in docs[:3]:
+        if d.get("source") not in ("local_md",):
+            continue  # tool --help/man pages carry no full text at this layer
+        raw = d.get("path")
+        if not raw:
+            continue
+        cand = pathlib.Path(str(raw))
+        paths = [cand] if cand.is_absolute() else [base / cand]
+        text = None
+        for p in paths:
+            try:
+                text = p.read_text(encoding="utf-8", errors="replace")
+                break
+            except Exception:
+                continue
+        if not text:
+            continue
+        take = text[:120_000]
+        parts.append(take)
+        total += len(take)
+        if total >= 200_000:
+            break
+    return "\n\n".join(parts)
+
+
+def _admit_sketch_rule(rule: Mapping[str, Any],
+                       unseen_instances: Sequence[Any] | None,
+                       fresh_reset: Callable[[Any], None] | None,
+                       fresh_act: Callable[[Any, Any], None] | None,
+                       fresh_state: Callable[[Any], Any] | None,
+                       goal_predicate: Callable[[Any], bool]) -> dict[str, Any]:
+    """Replay a sketch on instances it never saw; the goal decides, never the renderer."""
+    from canonical.runtime import mechanism_sketch_v1 as sketch
+    if not (unseen_instances and fresh_reset and fresh_act and fresh_state):
+        return {"schema": SCHEMA, "verdict": "REFUSED",
+                "reason": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+                "authority": "NONE"}
+    steps = list(rule.get("plan_sketch") or [])
+    rows: list[dict[str, Any]] = []
+    admitted_any = False
+    for i, inst in enumerate(unseen_instances):
+        try:
+            fresh_reset(inst)
+            obs = fresh_state(inst)
+            candidates = sketch.candidate_values(obs)
+            out = sketch.bind_plan_and_verify(
+                steps, candidates,
+                execute=lambda stmt: fresh_act(inst, stmt),
+                is_goal=lambda: bool(goal_predicate(fresh_state(inst))),
+                reset=lambda: fresh_reset(inst))
+            reached = out.get("status") == "PASS__BOUND_AND_GOAL_OBSERVED"
+            row = {"instance_id": i, "verdict": "REACHED" if reached else "NOT_REACHED",
+                   "bind_status": out.get("status"), "bindings_tried": out.get("tried")}
+        except Exception as e:  # noqa: BLE001
+            row = {"instance_id": i, "verdict": "ERROR", "error": str(e)[:200]}
+            reached = False
+        rows.append(row)
+        admitted_any = admitted_any or reached
+    return {"schema": SCHEMA,
+            "verdict": "ADMIT" if admitted_any else "REFINE",
+            "reason": None if admitted_any else "NO_FRESH_INSTANCE_REACHED_GOAL",
+            "rows": rows, "instance_count": len(rows),
+            "reached": sum(1 for r in rows if r.get("verdict") == "REACHED"),
+            "rule_id": rule.get("rule_id"), "authority": "NONE"}
+
+
+def _replay_sketch_rule(env: Any, rule: Mapping[str, Any],
+                        goal_predicate: Callable[[Any], bool]) -> dict[str, Any]:
+    """Serve an admitted document-sketch rule on a NEW instance: rebind, execute, observe.
+
+    This is the only honest way a stored mechanism helps: it is never trusted,
+    only re-verified against the environment in front of us. A stale or wrong
+    sketch fails the goal check and the caller falls through to the full loop.
+    """
+    from canonical.runtime import mechanism_sketch_v1 as sketch
+    try:
+        env.reset()
+        obs = env.state()
+        candidates = sketch.candidate_values(obs)
+        out = sketch.bind_plan_and_verify(
+            list(rule.get("plan_sketch") or []), candidates,
+            execute=lambda stmt: env.act(str(stmt)),
+            is_goal=lambda: bool(goal_predicate(env.state())),
+            reset=lambda: env.reset())
+    except Exception as e:  # noqa: BLE001
+        return {"status": "OPEN__REPLAY_ERROR", "rule_id": rule.get("rule_id"),
+                "error": str(e)[:200], "fallback": "falls_through_full_loop"}
+    if out.get("status") == "PASS__BOUND_AND_GOAL_OBSERVED":
+        return {"status": "PASS__REPLAY_REACHED_GOAL", "rule_id": rule.get("rule_id"),
+                "rule_kind": "document_sketch", "binding": out.get("binding"),
+                "bindings_tried": out.get("tried")}
+    return {"status": "OPEN__REPLAY_FAILED", "rule_id": rule.get("rule_id"),
+            "rule_kind": "document_sketch",
+            "bind_status": out.get("status"), "bindings_tried": out.get("tried"),
+            "fallback": "falls_through_full_loop"}
+
+
+def _execute_document_plan(receipts: dict[str, Any], env: Any, closed: Mapping[str, Any],
+                           goal: str, *, goal_predicate: Callable[[Any], bool],
+                           family: str, kind: str,
+                           unseen_instances: Sequence[Any] | None,
+                           fresh_reset: Callable[[Any], None] | None,
+                           fresh_act: Callable[[Any, Any], None] | None,
+                           fresh_state: Callable[[Any], Any] | None,
+                           memory: Mapping[str, Any],
+                           memory_path_: str | pathlib.Path | None,
+                           started: float) -> dict[str, Any]:
+    """Execute a document-derived sketch on THIS instance, verify, generalize, admit, save.
+
+    The matched commands are demonstrations on the GUIDE's data, not on the
+    task's. They are parameterized and bound to the observed data of the live
+    instance; the bind itself executes candidates and the goal decides, so an
+    unbindable sketch is refused, never forced. On success the generalization
+    (mechanism templates, never the training data) is admitted on fresh instances
+    and saved only if admitted -- the same discipline as the model-plan path.
+    """
+    from canonical.runtime import mechanism_sketch_v1 as sketch
+
+    matched = [str(m.get("statement")) for m in (closed.get("matched") or [])][:8]
+    # matched examples are ALTERNATIVE demonstrations; two statements that slot
+    # to the same mechanism shape are one step, executed once. The dedup key is
+    # the shape with slot ids erased, because exemplars number their slots from
+    # their own example. Distinct shapes are kept in document order.
+    seen_templates: set = set()
+    sketches: list[dict[str, Any]] = []
+    offset = 0
+    for stmt in matched:
+        probe = sketch.parameterize(stmt, slot_start=offset)
+        if probe.get("status") == "PASS__SLOTTED":
+            key = (re.sub(r"\bS\d+\b", "S", probe["template"]),
+                   tuple(s.get("kind") for s in probe["slots"]))
+        else:
+            key = ("__literal__" + stmt, ())
+        if key in seen_templates:
+            continue
+        seen_templates.add(key)
+        if probe.get("status") == "PASS__SLOTTED":
+            sketches.append(probe)
+            offset += len(probe.get("slots") or [])
+        else:
+            sketches.append({"status": probe.get("status") or "REFUSED",
+                             "template": stmt, "slots": []})
+    try:
+        env.reset()
+        obs = env.state()
+        candidates = sketch.candidate_values(obs)
+        bind_out = sketch.bind_plan_and_verify(
+            sketches, candidates,
+            execute=lambda stmt: env.act(str(stmt)),
+            is_goal=lambda: bool(goal_predicate(env.state())),
+            reset=lambda: env.reset())
+    except ProbeRestoreError:
+        raise
+    except Exception as e:  # noqa: BLE001
+        bind_out = {"status": "REFUSED__ENV_ERROR", "tried": 0, "error": str(e)[:200]}
+    receipts["steps"]["document_execution"] = dict(bind_out)
+    if bind_out.get("status") != "PASS__BOUND_AND_GOAL_OBSERVED":
+        receipts["status"] = "OPEN__DOCUMENT_PLAN_EXECUTED_GOAL_NOT_OBSERVED"
+        receipts["pass"] = False
+        receipts["authority"] = "NONE__GOAL_NOT_OBSERVED_AFTER_DOCUMENT_PLAN"
+        receipts["plan"] = [s.get("template") for s in sketches]
+        receipts["plan_source"] = closed.get("authority")
+        receipts["duration_s"] = round(time.time() - started, 4)
+        return receipts
+
+    executed = list(bind_out.get("rendered") or [])
+    # evidence is an AUDIT of what happened, never a warehouse of the instance
+    # data: hashes and counts, so the rule stays mechanism-only
+    evidence = {
+        "document_matched_count": len(closed.get("matched") or []),
+        "document_matched_sha256": hashlib.sha256(
+            json.dumps(closed.get("matched") or [], sort_keys=True,
+                       default=str).encode("utf-8")).hexdigest()[:16],
+        "document_sessions": closed.get("sessions"),
+        "binding_keys": list((bind_out.get("binding") or {}).keys()),
+        "executed_plan_sha256": hashlib.sha256(
+            "\n".join(executed).encode("utf-8")).hexdigest()[:16],
+    }
+    rule = sketch.sketch_rule(family, kind, sketches,
+                              source_authority=str(closed.get("authority")
+                                                   or "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED"),
+                              evidence=evidence)
+    admission = _admit_sketch_rule(rule, unseen_instances, fresh_reset, fresh_act,
+                                   fresh_state, goal_predicate)
+    receipts["steps"]["admit"] = admission
+    persist = admission.get("verdict") == "ADMIT"
+    receipts["steps"]["admit"]["persist"] = persist
+    if persist:
+        new_memory = remember(memory, rule)
+        try:
+            save_memory(new_memory, memory_path_)
+            receipts["steps"]["save"] = {"status": "PASS__SAVED_TO_MEMORY",
+                                         "rule_id": rule["rule_id"]}
+            receipts["memory"] = new_memory
+        except Exception as e:  # noqa: BLE001
+            receipts["steps"]["save"] = {"status": "OPEN__SAVE_FAILED", "error": str(e)[:200]}
+            receipts["memory"] = new_memory
+    else:
+        receipts["steps"]["save"] = {"status": "REFUSED__NOT_PERSISTED",
+                                     "reason": admission.get("reason")}
+        receipts["memory"] = memory
+    receipts["status"] = "PASS__DOCUMENT_PLAN_EXECUTED_AND_VERIFIED"
+    receipts["pass"] = True
+    receipts["outcome"] = ("DOCUMENT_PLAN_VERIFIED_RULE_SAVED" if persist
+                           else "DOCUMENT_PLAN_VERIFIED_RULE_REFUSED")
+    receipts["rule_id"] = rule["rule_id"]
+    receipts["rule_kind"] = "document_sketch"
+    receipts["plan"] = executed
+    receipts["plan_source"] = rule["source_authority"]
+    receipts["authority"] = "EXTERNAL_DOCUMENT_EXECUTED_AND_GOAL_OBSERVED"
+    receipts["duration_s"] = round(time.time() - started, 4)
+    return receipts
 
 
 def run(env: Any, goal: str, actions: Sequence[Any],
@@ -581,6 +862,22 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         "rule_ids": [r.get("rule_id") for r in cached_rules],
     }
     if cached_rules:
+        # document-sketch rules are served by REBINDING against the live environment and
+        # re-verifying the goal; they are never trusted, only re-checked.
+        sketch_rules = [r for r in cached_rules if str(r.get("kind") or "") == "document_sketch"]
+        if sketch_rules:
+            replay = _replay_sketch_rule(env, sketch_rules[0], goal_predicate)
+            receipts["steps"]["memory_replay"] = replay
+            if replay.get("status") == "PASS__REPLAY_REACHED_GOAL":
+                receipts["status"] = "PASS__REPLAY_FROM_MEMORY"
+                receipts["pass"] = True
+                receipts["outcome"] = "INSTANT_RECALL"
+                receipts["rule_id"] = replay.get("rule_id")
+                receipts["rule_kind"] = "document_sketch"
+                receipts["duration_s"] = round(time.time() - started, 4)
+                return receipts
+            # a stale sketch: do not silently trust it; fall through to full loop
+            receipts["steps"]["memory_replay"]["fallback"] = "falls_through_full_loop"
         # only plan-sketch rules are served on this path; code-rule rules
         # (the specialist code-repair path) are served by their own replay.
         plan_rules = [r for r in cached_rules
@@ -641,6 +938,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         "priors_used": int(sum(len(r or {}) for r in (prior_rows or {}).values())),
         "priors_stale_discarded": int(stale_discarded),
     }
+    gap = _gap_report(actions, learned, scan_result["observations"],
+                      goal_predicate, stale_discarded, family, len(cached_rules))
+    receipts["steps"]["gap"] = gap
 
     # ---- RIGHT QUESTION: which action, tried next, most shrinks the unknown? ----
     observations = scan_result["observations"]
@@ -682,7 +982,7 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         # AGENTS.md, .md docs). It is always asked when the plan fails; it is
         # free (no network, $0) and it never concludes from one keyword.
         try:
-            query = _instant_knowledge_query(goal, kind)
+            query = _instant_knowledge_query(goal, kind, gap)
             from canonical.runtime import local_guide_v1 as local_guide
             local = local_guide.lookup(query, root=local_root,
                                        tools=tools, man_root=man_root)
@@ -695,6 +995,7 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                 "tool_preferred": bool(local.get("tool_preferred")),
             }
             if local.get("pass"):
+                instant["document_text"] = _document_text_from(local, local_root)
                 instant["status"] = "PASS__LOCAL_GUIDE_FOUND"
                 instant["query"] = query
                 instant["documents_returned"] = int(len(local.get("documents") or []))
@@ -749,19 +1050,23 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         #
         # The guide is EXTERNAL knowledge and stays labelled so: every plan row carries the
         # authority of the document it came from, and none of this is counted as capability.
+        # the full document text is input to the extractor, never receipt payload
+        retrieved = (instant.pop("document_text", None) or instant.get("text")
+                     or instant.get("documents") or instant.get("body") or "")
         receipts["steps"]["instant_knowledge"] = instant
-        retrieved = (instant.get("text") or instant.get("documents")
-                     or instant.get("body") or "")
         closed = _plan_from_document(retrieved, actions, goal)
         receipts["steps"]["document_as_test_suite"] = closed
         if closed.get("status") == "PASS__PLAN_FROM_A_DOCUMENT":
-            receipts["plan"] = closed["plan"]
-            receipts["plan_source"] = closed["authority"]
-            receipts["status"] = "PASS__PLAN_FROM_A_DOCUMENT"
-            receipts["pass"] = False  # a plan is not a solved goal; the caller still executes it
-            receipts["authority"] = closed["authority"]
-            receipts["duration_s"] = round(time.time() - started, 4)
-            return receipts
+            # A matched example is not yet an achieved goal. Parameterize the matched
+            # commands into mechanism sketches, bind them to THIS instance's observed
+            # data by execution, observe the goal, admit on fresh instances, and save
+            # only if admitted. See _execute_document_plan.
+            return _execute_document_plan(
+                receipts, env, closed, goal,
+                goal_predicate=goal_predicate, family=family, kind=kind,
+                unseen_instances=unseen_instances, fresh_reset=fresh_reset,
+                fresh_act=fresh_act, fresh_state=fresh_state,
+                memory=memory, memory_path_=memory_path_, started=started)
         receipts["status"] = "OPEN__NO_PLAN_AFTER_SCAN"
         receipts["plan_source"] = None
         receipts["pass"] = False
@@ -916,9 +1221,16 @@ def _default_family(goal: str) -> str:
     return "generic"
 
 
-def _instant_knowledge_query(goal: str, env_kind: str) -> str:
-    """The right question for the world: what is NOT known about the environment
-    is a question about what this environment IS, not about a specific page.
+def _instant_knowledge_query(goal: str, env_kind: str,
+                             gap: Mapping[str, Any] | None = None) -> str:
+    """The retrieval question names the SUBJECT, never our ignorance about it.
+
+    A first attempt appended the gap report's unknowns (`GOAL_STATE_NEVER_OBSERVED`,
+    `NO_ADMITTED_RULE_FOR:...`) to the query. It retrieved nothing: the gap names
+    failure modes, not subjects, and the guide cannot share tokens it does not
+    contain -- the miss was measured in the 2026-11-24 loop run and this function
+    is what remains. The gap still decides WHEN the fetch happens (only on a
+    planning gap) and is recorded in the receipt; it is never retrieval payload.
     """
     text = str(goal).strip()
     kind = str(env_kind or "unknown").replace("_", " ")

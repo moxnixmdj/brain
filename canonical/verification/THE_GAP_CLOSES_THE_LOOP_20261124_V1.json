@@ -1,0 +1,412 @@
+{
+  "all_claims_hold": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "claims": {
+    "admitted_on_two_unseen_instances": true,
+    "goal_value_matches_stdlib": true,
+    "learn_reaches_goal_and_observes_it": true,
+    "mechanism_saved_not_data": true,
+    "prose_only_guide_refused": true,
+    "recall_needs_no_scan_and_still_verifies": true
+  },
+  "cost": {
+    "model_calls": 0,
+    "network_calls_at_run_time": 0,
+    "parameters_stored": 0
+  },
+  "date": "2026-11-24",
+  "schema": "BRAIN_THE_GAP_CLOSES_THE_LOOP_20261124_V1",
+  "stages": {
+    "learn": {
+      "authority": "EXTERNAL_DOCUMENT_EXECUTED_AND_GOAL_OBSERVED",
+      "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+      "duration_s": 0.0553,
+      "env_kind": "statistics",
+      "goal": "compute the median of the numbers in the list",
+      "goal_family": "statistics_median",
+      "memory": {
+        "created_at": 1795540988.2893767,
+        "priors": {},
+        "rules": [
+          {
+            "authority": "EXTERNAL_DOCUMENT_SKETCH__ADMITTED_OR_REFUSED_BY_REPLAY",
+            "created_at": 1795540988.3440874,
+            "env_kind": "statistics",
+            "evidence": {
+              "binding_keys": [
+                "S0"
+              ],
+              "document_matched_count": 2,
+              "document_matched_sha256": "51cc343b39d43cf5",
+              "document_sessions": 2,
+              "executed_plan_sha256": "ab7833db503f2ea4"
+            },
+            "goal_family": "statistics_median",
+            "kind": "document_sketch",
+            "plan_sketch": [
+              {
+                "slots": [
+                  {
+                    "id": "S0",
+                    "kind": "sequence"
+                  }
+                ],
+                "template": "statistics.median(S0)"
+              }
+            ],
+            "rule_id": "sketch-3ae1551b4f711c8b",
+            "schema": "PROJECT_BRAIN_MECHANISM_SKETCH_V1",
+            "scope": {
+              "env_kind": "statistics",
+              "goal_family": "statistics_median"
+            },
+            "source_authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED"
+          }
+        ],
+        "schema": "PROJECT_BRAIN_PA_MEMORY_V1",
+        "updated_at": 1795540988.3444169
+      },
+      "memory_refused": null,
+      "outcome": "DOCUMENT_PLAN_VERIFIED_RULE_SAVED",
+      "pass": true,
+      "plan": [
+        "statistics.median((7, 2, 9, 4, 11))"
+      ],
+      "plan_source": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
+      "rule_id": "sketch-3ae1551b4f711c8b",
+      "rule_kind": "document_sketch",
+      "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+      "stage": "learn",
+      "status": "PASS__DOCUMENT_PLAN_EXECUTED_AND_VERIFIED",
+      "steps": {
+        "admit": {
+          "authority": "NONE",
+          "instance_count": 2,
+          "persist": true,
+          "reached": 2,
+          "reason": null,
+          "rows": [
+            {
+              "bind_status": "PASS__BOUND_AND_GOAL_OBSERVED",
+              "bindings_tried": 1,
+              "instance_id": 0,
+              "verdict": "REACHED"
+            },
+            {
+              "bind_status": "PASS__BOUND_AND_GOAL_OBSERVED",
+              "bindings_tried": 1,
+              "instance_id": 1,
+              "verdict": "REACHED"
+            }
+          ],
+          "rule_id": "sketch-3ae1551b4f711c8b",
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "verdict": "ADMIT"
+        },
+        "document_as_test_suite": {
+          "authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
+          "gate": "IN_VOCABULARY",
+          "matched": [
+            {
+              "check": "EXACT",
+              "expected": [
+                "3"
+              ],
+              "statement": "statistics.median([3, 1, 4, 1, 5])"
+            },
+            {
+              "check": "EXACT",
+              "expected": [
+                "35.0"
+              ],
+              "statement": "statistics.median([10, 20, 30, 40, 50, 60])"
+            }
+          ],
+          "plan": [
+            "statistics.median([3, 1, 4, 1, 5])",
+            "statistics.median([10, 20, 30, 40, 50, 60])"
+          ],
+          "sessions": 2,
+          "status": "PASS__PLAN_FROM_A_DOCUMENT",
+          "why_this_plan": "each step is a command the document printed, replayed in a scratch room, whose output matched the document's own printed answer"
+        },
+        "document_execution": {
+          "binding": {
+            "S0": "(7, 2, 9, 4, 11)"
+          },
+          "rendered": [
+            "statistics.median((7, 2, 9, 4, 11))"
+          ],
+          "status": "PASS__BOUND_AND_GOAL_OBSERVED",
+          "tried": 1
+        },
+        "gap": {
+          "admitted_rule_available": false,
+          "goal_observed": false,
+          "goal_states_observed": 0,
+          "novel_action_count": 0,
+          "novel_actions_at_root": [],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "stale_prior_rows_discarded": 0,
+          "states_seen": 2,
+          "unknowns": [
+            "GOAL_STATE_NEVER_OBSERVED",
+            "NO_ADMITTED_RULE_FOR:statistics_median"
+          ]
+        },
+        "instant_knowledge": {
+          "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+          "complete": true,
+          "documents_returned": 1,
+          "local_guide": {
+            "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+            "documents": [
+              {
+                "matched_terms": 5,
+                "path": "statistics.md",
+                "score": 5.0,
+                "snippet": "To compute the median of the numbers in a list, call statistics.median with the list. For example:",
+                "source": "local_md"
+              }
+            ],
+            "score": 5.0,
+            "sources_answered": [
+              "local_md"
+            ],
+            "status": "PASS__LOCAL_GUIDE_FOUND",
+            "tool_preferred": false
+          },
+          "query": "how to use statistics: compute the median of the numbers in the list",
+          "sources_answered": [
+            "local_md"
+          ],
+          "status": "PASS__LOCAL_GUIDE_FOUND",
+          "tier": "local",
+          "tool_preferred": false
+        },
+        "memory_lookup": {
+          "matches": 0,
+          "rule_ids": []
+        },
+        "plan": {
+          "goal_states_observed": 0,
+          "plan": null,
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "status": "REFUSED__GOAL_NEVER_OBSERVED"
+        },
+        "right_question": {
+          "best": "statistics.median",
+          "best_is_novel": false,
+          "goal_states_present_in_model": null,
+          "honest_note": "novelty-only ordering; the heuristic/snapshot is unavailable, so no strongest-possible ordering is claimed",
+          "novel_actions_at_root": 0,
+          "probed_actions": 0,
+          "question": "which action most shrinks what is not known? tried next: 'statistics.median'",
+          "ranked": [
+            {
+              "action": "statistics.median",
+              "closeness": null,
+              "novel_from_root": false,
+              "probed": false
+            }
+          ],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "total_states_seen": 2,
+          "total_transitions_known": 2
+        },
+        "save": {
+          "rule_id": "sketch-3ae1551b4f711c8b",
+          "status": "PASS__SAVED_TO_MEMORY"
+        },
+        "scan": {
+          "duration_s": 0.0012,
+          "priors_stale_discarded": 0,
+          "priors_used": 0,
+          "root": "el-state-v2:ea2cc741ff7a93431abbe798432f8415d02acea455bf0ad0e115c82474316f0a",
+          "states_seen": 2,
+          "transitions_seen": 2
+        }
+      }
+    },
+    "prose_only_negative_control": {
+      "authority": "NONE__PLAN_NOT_COMPUTED",
+      "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+      "duration_s": 0.0008,
+      "env_kind": "statistics",
+      "goal": "compute the median of the numbers in the list",
+      "goal_family": "statistics_median",
+      "memory_refused": null,
+      "pass": false,
+      "plan_source": null,
+      "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+      "stage": "prose_only_negative_control",
+      "status": "OPEN__NO_PLAN_AFTER_SCAN",
+      "steps": {
+        "document_as_test_suite": {
+          "examples": 0,
+          "gate": "EXTRACTED",
+          "status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT"
+        },
+        "gap": {
+          "admitted_rule_available": false,
+          "goal_observed": false,
+          "goal_states_observed": 0,
+          "novel_action_count": 0,
+          "novel_actions_at_root": [],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "stale_prior_rows_discarded": 0,
+          "states_seen": 2,
+          "unknowns": [
+            "GOAL_STATE_NEVER_OBSERVED",
+            "NO_ADMITTED_RULE_FOR:statistics_median"
+          ]
+        },
+        "instant_knowledge": {
+          "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+          "complete": true,
+          "documents_returned": 1,
+          "local_guide": {
+            "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+            "documents": [
+              {
+                "matched_terms": 5,
+                "path": "statistics.md",
+                "score": 5.0,
+                "snippet": "To compute the median of the numbers in a list, use statistics.median with the list.\nIt is robust against outliers and accepts any iterable of numbers. This page has\nno example and no transcript: nothing here can be replayed or executed.",
+                "source": "local_md"
+              }
+            ],
+            "score": 5.0,
+            "sources_answered": [
+              "local_md"
+            ],
+            "status": "PASS__LOCAL_GUIDE_FOUND",
+            "tool_preferred": false
+          },
+          "query": "how to use statistics: compute the median of the numbers in the list",
+          "sources_answered": [
+            "local_md"
+          ],
+          "status": "PASS__LOCAL_GUIDE_FOUND",
+          "tier": "local",
+          "tool_preferred": false
+        },
+        "memory_lookup": {
+          "matches": 0,
+          "rule_ids": []
+        },
+        "plan": {
+          "goal_states_observed": 0,
+          "plan": null,
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "status": "REFUSED__GOAL_NEVER_OBSERVED"
+        },
+        "right_question": {
+          "best": "statistics.median",
+          "best_is_novel": false,
+          "goal_states_present_in_model": null,
+          "honest_note": "novelty-only ordering; the heuristic/snapshot is unavailable, so no strongest-possible ordering is claimed",
+          "novel_actions_at_root": 0,
+          "probed_actions": 0,
+          "question": "which action most shrinks what is not known? tried next: 'statistics.median'",
+          "ranked": [
+            {
+              "action": "statistics.median",
+              "closeness": null,
+              "novel_from_root": false,
+              "probed": false
+            }
+          ],
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "total_states_seen": 2,
+          "total_transitions_known": 2
+        },
+        "scan": {
+          "duration_s": 0.0004,
+          "priors_stale_discarded": 0,
+          "priors_used": 0,
+          "root": "el-state-v2:ea2cc741ff7a93431abbe798432f8415d02acea455bf0ad0e115c82474316f0a",
+          "states_seen": 2,
+          "transitions_seen": 2
+        }
+      }
+    },
+    "recall": {
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+      "duration_s": 0.0003,
+      "env_kind": "statistics",
+      "goal": "compute the median of the numbers in the list",
+      "goal_family": "statistics_median",
+      "memory_refused": null,
+      "outcome": "INSTANT_RECALL",
+      "pass": true,
+      "rule_id": "sketch-3ae1551b4f711c8b",
+      "rule_kind": "document_sketch",
+      "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+      "stage": "recall",
+      "status": "PASS__REPLAY_FROM_MEMORY",
+      "steps": {
+        "memory_lookup": {
+          "matches": 1,
+          "rule_ids": [
+            "sketch-3ae1551b4f711c8b"
+          ]
+        },
+        "memory_replay": {
+          "binding": {
+            "S0": "(42, 8, 15, 16, 23, 4)"
+          },
+          "bindings_tried": 1,
+          "rule_id": "sketch-3ae1551b4f711c8b",
+          "rule_kind": "document_sketch",
+          "status": "PASS__REPLAY_REACHED_GOAL"
+        }
+      }
+    }
+  },
+  "stored_rule": [
+    {
+      "authority": "EXTERNAL_DOCUMENT_SKETCH__ADMITTED_OR_REFUSED_BY_REPLAY",
+      "created_at": 1795540988.3440874,
+      "env_kind": "statistics",
+      "evidence": {
+        "binding_keys": [
+          "S0"
+        ],
+        "document_matched_count": 2,
+        "document_matched_sha256": "51cc343b39d43cf5",
+        "document_sessions": 2,
+        "executed_plan_sha256": "ab7833db503f2ea4"
+      },
+      "goal_family": "statistics_median",
+      "kind": "document_sketch",
+      "plan_sketch": [
+        {
+          "slots": [
+            {
+              "id": "S0",
+              "kind": "sequence"
+            }
+          ],
+          "template": "statistics.median(S0)"
+        }
+      ],
+      "rule_id": "sketch-3ae1551b4f711c8b",
+      "schema": "PROJECT_BRAIN_MECHANISM_SKETCH_V1",
+      "scope": {
+        "env_kind": "statistics",
+        "goal_family": "statistics_median"
+      },
+      "source_authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED"
+    }
+  ],
+  "stored_rule_count": 1,
+  "what_this_is_not": [
+    "not a benchmark result: one machine, one narrow environment",
+    "not independent verification: producer sandbox measurement only",
+    "not OSWorld, not SWE-bench Pro, not Terminal-Bench",
+    "not a capability claim and not terminal truth",
+    "the guide excerpt was written by this script; no network was used"
+  ]
+}
