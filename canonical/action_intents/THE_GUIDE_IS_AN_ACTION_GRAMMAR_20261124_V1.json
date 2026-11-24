@@ -1702,5 +1702,49 @@
   "the same instrument, unchanged, against a room it has never seen",
   "the same instrument against an accessibility tree, to test whether page-is-a-grammar is a fact about Unix or about published structure",
   "a written answer to whether a refusal read once is stored, and in what generalised form"
- ]
+ ],
+ "load_bearing_primary": {
+  "why": "OSWORLD_2_1_PARTIAL_GE_81_8 is the obligation a model-free action repertoire has to move: it is the one open row about DOING THINGS ON A COMPUTER, and its own failure axes (lost constraints, skipped verification) are what the goal check and the target-kind need are built to make mechanical. This round does not claim the row; it prices the mechanism that would have to carry it, on the only substrate available here (this sandbox's published pages).",
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/20",
+  "success_probability_lcb": "1/5",
+  "wall_clock_cost_ub": "2400"
+ },
+ "highest_leverage_now": true,
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+   "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
+   "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "earlier_routes_exhausted_reason": "REUSE and ADAPT were priced and are dead ends in this tree: THE_REPERTOIRE_IS_A_QUERY executed 164 printed options on real state and 0 of the 80 accepted ones changed a byte, and the ten-round demand-language arc bought 2 of 75 repairs. COMPOSE over the existing goal compiler fails because nothing in the tree turns a page into typed transitions. The primitive that was missing is the one built here: a usage line read as arity and argument kind, a flag read as the verb it governs, and a search over those transitions against a room typed by bytes. It is synthesized rather than integrated because no existing module reads a page's own grammar.",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "honest_state_read_live": true
+ }
 }
