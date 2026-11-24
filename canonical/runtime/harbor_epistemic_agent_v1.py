@@ -1,20 +1,17 @@
 """Harbor external agent driven by Brain's open_model().solve(mode="EPISTEMIC").
 
-The model is an *optional proposal source*, never the authority. This agent only
-runs commands that the model explicitly proposes, passes each command through
-the repository's deterministic command policy, and executes it through the
-existing Harbor environment transport. There is no implicit retry, no network
-acquisition, no guessed action, and no completion claim by the agent: the
-Harbor verifier decides whether the task is solved.
+The production Harbor entry point is disabled: Harbor's environment transport
+is not the owner-approved, qualified one-shot worktree carrier. No solver or
+task command is invoked by the agent until that carrier and an independently
+trusted effect verifier are integrated. The proposal loop remains available for
+controlled unit tests only; its command policy is not an isolation boundary.
 
 `EPISTEMIC` is forwarded verbatim. Brain's solve() special-cases only RECALL and
 SOLVE_OR_LEARN; every other mode string uses ordinary routing. This module does
 not invent a new engine mode.
 
-Run from the Harbor process (the module must be importable there):
-
-    harbor run -d terminal-bench/terminal-bench@4.0.0 -e docker \
-      -a canonical.runtime.harbor_epistemic_agent_v1:EpistemicBrainAgent -n 4
+The Harbor entry point emits a refusal trace, not a benchmark result.
+No environment variable or dataset label can override this refusal.
 """
 from __future__ import annotations
 
@@ -312,22 +309,16 @@ class EpistemicBrainAgent(BaseAgent):
         return None
 
     async def run(self, instruction: str, environment: BaseEnvironment, context: AgentContext) -> None:
-        try:
-            mode = str(os.environ.get("BRAIN_SOLVE_MODE") or DEFAULT_MODE).strip().upper() or DEFAULT_MODE
-            result = await run_epistemic_goal(
-                instruction,
-                environment,
-                model=make_model(),
-                mode=mode,
-            )
-        except Exception as exc:
-            result = {
-                "schema": SCHEMA,
-                "status": "BLOCKED_AGENT_EXCEPTION",
-                "exception_type": type(exc).__name__,
-                "exception_sha256": hashlib.sha256(str(exc).encode("utf-8", "replace")).hexdigest(),
-                "task_completion_claimed": False,
-            }
+        # A dataset name, environment variable, or Harbor isolation flag is not
+        # authenticated evidence of the approved carrier. Refuse before making a
+        # model or issuing any command, including for the four requested suites.
+        result = {
+            "schema": SCHEMA,
+            "status": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+            "task_completion_claimed": False,
+            "verified_by_agent": False,
+            "instruction_sha256": hashlib.sha256(instruction.encode("utf-8")).hexdigest(),
+        }
         try:
             logs = Path(self.logs_dir)
             logs.mkdir(parents=True, exist_ok=True)
@@ -336,9 +327,4 @@ class EpistemicBrainAgent(BaseAgent):
             )
         except Exception:
             pass
-        for attr in ("cost_usd", "input_tokens", "output_tokens"):
-            if hasattr(context, attr):
-                try:
-                    setattr(context, attr, 0)
-                except Exception:
-                    pass
+        # Do not overwrite accounting fields: their values are owned by Harbor.

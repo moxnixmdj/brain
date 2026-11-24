@@ -1,5 +1,11 @@
 # EPISTEMIC BENCHMARK ADAPTERS
 
+**SUPERSEDED SCOPE:** The current request excludes SWE-bench Verified and
+includes only FrontierSWE v2, SWE-bench Pro, FrontierCode 2.0 and
+Terminal-Bench 4.0. Everything below is historical, not current execution
+instructions. See `FRONTIER_BENCHMARK_GATE_20261124_V1.md` for current status
+and preparation. The Harbor agent now refuses all real execution too.
+
 **Two experimental wrappers, zero score claims. Do not start a VM run yet.**
 
 **Owner-authorization update:** The owner has approved a one-shot isolated scope;

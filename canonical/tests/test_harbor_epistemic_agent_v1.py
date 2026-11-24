@@ -3,8 +3,10 @@ from __future__ import annotations
 
 import asyncio
 import json
+import os
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -109,17 +111,34 @@ class HarborEpistemicAgentTests(unittest.TestCase):
             inst.logs_dir = Path(tmp)
             context = SimpleNamespace(cost_usd=99.0, input_tokens=5, output_tokens=7)
             env = FakeEnvironment()
-            model = FakeModel([{"pass": False, "status": "FAIL_CLOSED"}])
             original = agent.make_model
-            agent.make_model = lambda: model
+            def forbidden_model():
+                self.fail("must refuse before constructing the solver")
+            agent.make_model = forbidden_model
             try:
                 self.run_async(inst.run("task", env, context))
             finally:
                 agent.make_model = original
             trace = json.loads((Path(tmp) / agent.TRACE_FILENAME).read_text())
-            self.assertEqual(trace["status"], "BLOCKED_NO_MODEL_PROPOSAL")
+            self.assertEqual(trace["status"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
             self.assertFalse(trace["task_completion_claimed"])
-            self.assertEqual((context.cost_usd, context.input_tokens, context.output_tokens), (0, 0, 0))
+            self.assertFalse(trace["verified_by_agent"])
+            self.assertEqual((context.cost_usd, context.input_tokens, context.output_tokens), (99.0, 5, 7))
+            self.assertEqual(env.commands, [])
+
+    def test_claimed_isolation_and_dataset_do_not_enable_execution(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, {
+            "BRAIN_CARRIER_QUALIFIED": "true",
+            "BRAIN_BENCHMARK": "SWE-bench Pro",
+            "BRAIN_SOLVE_MODE": "EPISTEMIC",
+        }):
+            inst = agent.EpistemicBrainAgent()
+            inst.logs_dir = Path(tmp)
+            env = FakeEnvironment()
+            with patch.object(agent, "make_model", side_effect=AssertionError("solver called")):
+                self.run_async(inst.run("task", env, SimpleNamespace()))
+            trace = json.loads((Path(tmp) / agent.TRACE_FILENAME).read_text())
+            self.assertEqual(trace["status"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
             self.assertEqual(env.commands, [])
 
     def test_empty_instruction_rejected(self):

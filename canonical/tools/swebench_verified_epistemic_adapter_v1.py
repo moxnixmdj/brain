@@ -15,18 +15,9 @@ What it deliberately does not do:
     its ordinary routing. The requested string is recorded but is not forwarded,
     because the adapter does not invoke a solver.
 
-Usage (on a machine with the pre-cloned SWE-bench repos and the harness):
-
-    python3 -m canonical.tools.swebench_verified_epistemic_adapter_v1 \\
-        --dataset-path verified.jsonl \\
-        --repos-root /data/swe_repos \\
-        --output predictions.jsonl --report adapter_report.jsonl \\
-        --limit 50 --run-id epistemic_smoke_50
-
-    python -m swebench.harness.run_evaluation \\
-        --dataset_name SWE-bench/SWE-bench_Verified \\
-        --predictions_path predictions.jsonl \\
-        --max_workers 6 --run_id epistemic_smoke_50
+Historical Verified row format is retained for refusal tests only. The current
+scope excludes SWE-bench Verified; this adapter does not ingest the Harbor
+format used by SWE-bench Pro V2 and is not an executable frontier adapter.
 """
 from __future__ import annotations
 

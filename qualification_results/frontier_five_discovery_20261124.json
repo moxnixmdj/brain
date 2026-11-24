@@ -1,0 +1,47 @@
+{
+  "dataset": "SWE-bench Pro V2 HARD-51",
+  "dataset_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+  "instances_executed": 0,
+  "note": "Read-only public metadata discovery, not a benchmark rollout or effect attestation.",
+  "patches_verified": 0,
+  "repository": "https://github.com/scaleapi/SWE-bench_Pro-os",
+  "schema": "PROJECT_BRAIN_FRONTIER_GATE_DISCOVERY_V1",
+  "selection": "first five IDs in v2/hard51_ids.txt at pinned commit",
+  "tasks": [
+    {
+      "instance_id": "instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e",
+      "instruction_sha256": "52de1203b5077923e832ebc37bd73e5a51bff564f027fd89bb4a6558540a5971",
+      "patch_emitted": false,
+      "status": "NOT_RUN_ONESHOT_CARRIER_UNQUALIFIED",
+      "task_toml_sha256": "db729b373648ee7f24d8dd66ed777c40aef55458562fb60d156b02d9e6d833cc"
+    },
+    {
+      "instance_id": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+      "instruction_sha256": "b29415050a1a07795fb0c1440322e6c641c36176b53d339ad47578f06c3b5ebe",
+      "patch_emitted": false,
+      "status": "NOT_RUN_ONESHOT_CARRIER_UNQUALIFIED",
+      "task_toml_sha256": "6f1785dcd2155ef84c9c66b621d6828b60645b84111ac170f8abf178e0edae49"
+    },
+    {
+      "instance_id": "instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86",
+      "instruction_sha256": "1af88816c11462de0d2cfd5157e855c7c50db006e794521c658d0c9be106e8ec",
+      "patch_emitted": false,
+      "status": "NOT_RUN_ONESHOT_CARRIER_UNQUALIFIED",
+      "task_toml_sha256": "ae8ae532b7c91894c019f46bddf1c615b0a1cf3271b8b46f11ad5950b820eb3e"
+    },
+    {
+      "instance_id": "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2",
+      "instruction_sha256": "b8c3df7e7877544a1480fe209c88d879b3ec55382922429c16115e3c2302c7d9",
+      "patch_emitted": false,
+      "status": "NOT_RUN_ONESHOT_CARRIER_UNQUALIFIED",
+      "task_toml_sha256": "b0cfa71c0f1cf40384d839ef884809ef5983c4cf3d6d2b6ffd23189074d1fe5a"
+    },
+    {
+      "instance_id": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "instruction_sha256": "5379b1581e024fcf9ba14d29f6b6a7821031a17e1ed0d20b4141aa50c3c282d2",
+      "patch_emitted": false,
+      "status": "NOT_RUN_ONESHOT_CARRIER_UNQUALIFIED",
+      "task_toml_sha256": "1a3c8842c8c8a1d527a943c6a7464f3a51c6cda01a509060d02caff3c5d24034"
+    }
+  ]
+}
