@@ -232,7 +232,11 @@ ProbeRestoreError = el.ProbeRestoreError
 def right_question(env: Any, scan_result: Mapping[str, Any],
                    actions: Sequence[Any], *,
                    heuristic: Callable[[Any], float] | None = None,
-                   goal_states: Iterable[str] | None = None) -> dict[str, Any]:
+                   goal_states: Iterable[str] | None = None,
+                   question_space: Any | None = None,
+                   probe_keys: Sequence[tuple[Any, ...]] = (),
+                   probe_oracle: Callable[[tuple[Any, ...]], str] | None = None,
+                   probe_budget: int = 4) -> dict[str, Any]:
     """The one question worth asking: which action, tried next, most shrinks
     what is not known -- or, honestly, what cannot be known until it is tried.
 
@@ -244,6 +248,12 @@ def right_question(env: Any, scan_result: Mapping[str, Any],
           giving goal-closeness exists), probe each action and prefer the one
           whose post-state is closest to the goal. Absent either, the ordering
           is novelty-only and the receipt says so -- it is not a clever lie.
+    (c) EXPECTED INFORMATION GAIN -- when a caller supplies a version space of
+          observed regimes, the reachable probes and a real oracle, the probe
+          that most splits the surviving regimes is SELECTED, EXECUTED and its
+          observation is fed back into the posterior. This is the "ask the right
+          question AND use the answer" wire; without it the ranking was only
+          logged. EIG is refused on an open proposal space (arXiv:2602.06818).
     """
     learned = scan_result.get("learned") or {}
     model = learned.get("model") or {}
@@ -275,7 +285,7 @@ def right_question(env: Any, scan_result: Mapping[str, Any],
     goal_states = set(goal_states or [])
     goal_present = any(s in model for s in goal_states) if goal_states else None
 
-    return {
+    result: dict[str, Any] = {
         "schema": SCHEMA,
         "question": (
             f"which action most shrinks what is not known? tried next: {best!r}"
@@ -295,7 +305,38 @@ def right_question(env: Any, scan_result: Mapping[str, Any],
             if not any(r.get("probed") for r in scored) else
             "closeness-probed ordering"
         ),
+        "eig": {"status": "NOT_REQUESTED__NO_VERSION_SPACE"},
     }
+
+    # ---- (c) THE ANSWER IS USED, NOT ONLY LOGGED --------------------------------------
+    if question_space is not None and probe_keys and probe_oracle is not None:
+        try:
+            from canonical.runtime import active_question_v1 as aq
+            decision = aq.policy(question_space, list(probe_keys), budget=probe_budget)
+            eig_row: dict[str, Any] = {"policy": decision["policy"],
+                                       "reason": decision["reason"],
+                                       "gain_bits": decision["gains"],
+                                       "probes_selected": [aq.key_of(p)
+                                                           for p in decision["probes"]],
+                                       "asked": [], "answered": False}
+            if decision["policy"] == "EIG" and decision["probes"]:
+                probe = decision["probes"][0]
+                observed = probe_oracle(probe)
+                question_space.observe(probe, observed)
+                eig_row["asked"] = [{"probe": aq.key_of(probe),
+                                     "outcome": aq.key_of(observed)}]
+                eig_row["answered"] = True
+                eig_row["gain_of_the_question_bits"] = decision["gains"][aq.key_of(probe)]
+                eig_row["posterior"] = {str(k): round(v, 6)
+                                        for k, v in question_space.posterior().items()}
+                result["best"] = aq.key_of(probe)
+                result["question"] = ("which probe most splits the surviving regimes? "
+                                      f"asked and answered: {aq.key_of(probe)!r}")
+                result["honest_note"] = "EIG-selected probe, executed and observed"
+            result["eig"] = eig_row
+        except Exception as error:  # noqa: BLE001 -- a broken oracle must refuse, not crash
+            result["eig"] = {"status": "REFUSED__EIG_UNAVAILABLE", "error": str(error)[:200]}
+    return result
 
 
 # --------------------------------------------------------------------------- #
@@ -581,7 +622,11 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         prior: Mapping[str, Any] | None = None,
         local_root: str | pathlib.Path | None = None,
         tools: Sequence[str] | None = None,
-        man_root: str | pathlib.Path | None = None) -> dict[str, Any]:
+        man_root: str | pathlib.Path | None = None,
+        question_space: Any | None = None,
+        probe_keys: Sequence[tuple[Any, ...]] = (),
+        probe_oracle: Callable[[tuple[Any, ...]], str] | None = None,
+        probe_budget: int = 4) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -688,6 +733,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
             continue
     try:
         right = right_question(env, scan_result, actions, heuristic=heuristic,
+                               question_space=question_space,
+                               probe_keys=probe_keys, probe_oracle=probe_oracle,
+                               probe_budget=probe_budget,
                                goal_states=goal_states_observed)
     except ProbeRestoreError:
         receipts["steps"]["right_question"] = {"status": "REFUSED__PROBE_RESTORE_FAILED"}

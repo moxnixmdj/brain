@@ -1,0 +1,918 @@
+{
+  "arms": {
+    "CHANGED_PRECONDITION": {
+      "arm": "CHANGED_PRECONDITION",
+      "cases": 4,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 0,
+      "refusals": {
+        "REFUSED__CHANGED_PRECONDITION_HAS_NO_BINDING": 4
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 4,
+      "verifier_run_refs": [
+        "af7ff35975bb0cf3",
+        "ac2ea4ff22c2f901",
+        "3dd75c7d274031ec",
+        "cc22bb3e5c46a9d3"
+      ]
+    },
+    "CONTRADICTORY_GOAL": {
+      "arm": "CONTRADICTORY_GOAL",
+      "cases": 4,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 14,
+      "refusals": {
+        "REFUSED__CONTRADICTORY_GOAL_NOT_REPRODUCED": 4
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 4,
+      "verifier_run_refs": [
+        "62ccad9a080ac5eb",
+        "cb2048989c5674c8",
+        "c2f2ad06f11357c1",
+        "0c0fa9707f373e4d"
+      ]
+    },
+    "EMPTY": {
+      "arm": "EMPTY",
+      "cases": 29,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 0,
+      "note": "no extra interpreter probe: the empty-memory arm reuses the real refusal already recorded while enumerating the target cases",
+      "refusals": {
+        "REFUSED__EMPTY_DID_NOT_REPRODUCE_THE_GUIDE_OUTPUT": 29
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 0
+    },
+    "EXACT_SOURCE_TRACE": {
+      "arm": "EXACT_SOURCE_TRACE",
+      "cases": 29,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 29,
+      "refusals": {
+        "REFUSED__EXACT_SOURCE_TRACE_DID_NOT_REPRODUCE_THE_GUIDE_OUTPUT": 29
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 0
+    },
+    "FOREIGN_SOURCE": {
+      "arm": "FOREIGN_SOURCE",
+      "cases": 29,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 29,
+      "refusals": {
+        "REFUSED__FOREIGN_SOURCE_DID_NOT_REPRODUCE_THE_GUIDE_OUTPUT": 29
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 0
+    },
+    "LEARNED_ABSTRACTION": {
+      "arm": "LEARNED_ABSTRACTION",
+      "cases": 29,
+      "composed_run": {
+        "act": "PASS__GOAL_VERIFIED_OBSERVED",
+        "admit": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+        "composed_eig": {
+          "answered": true,
+          "asked": [
+            {
+              "outcome": "MATCH",
+              "probe": "enum|bind/correct|5e55ca26767482b8"
+            }
+          ],
+          "gain_bits": 1.0,
+          "initial_posterior": {
+            "NON_TRANSFER": 0.5,
+            "TRANSFER": 0.5
+          },
+          "policy": "EIG",
+          "posterior": {
+            "NON_TRANSFER": 0.000999,
+            "TRANSFER": 0.999001
+          },
+          "reason": "a closed version space with positive-gain probes"
+        },
+        "ok": true,
+        "plan": [
+          "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3"
+        ],
+        "run_pass": true,
+        "run_status": "PASS__PERFECT_ALGORITHM_RUN",
+        "save": "REFUSED__NOT_PERSISTED"
+      },
+      "eig_rows": [
+        {
+          "asked": [
+            {
+              "outcome": "MATCH",
+              "probe": "enum|bind/correct|5e55ca26767482b8"
+            }
+          ],
+          "case_id": "C005",
+          "closed": true,
+          "gain_bits": 1.0,
+          "hypotheses": 2,
+          "initial_posterior": {
+            "NON_TRANSFER": 0.5,
+            "TRANSFER": 0.5
+          },
+          "keys": [
+            [
+              "enum",
+              "bind/correct",
+              "5e55ca26767482b8"
+            ],
+            [
+              "enum",
+              "bind/wrong",
+              "56ca288579b726f3"
+            ]
+          ],
+          "ok": true,
+          "policy": "EIG",
+          "posterior": {
+            "NON_TRANSFER": 0.000999,
+            "TRANSFER": 0.999001
+          },
+          "posterior_changed": true,
+          "probes": [
+            "enum|bind/correct|5e55ca26767482b8",
+            "enum|bind/wrong|56ca288579b726f3"
+          ],
+          "settlement": {
+            "confidence": 0.999001,
+            "domain_disagreement": 0.000999,
+            "information_bits": 1.0,
+            "posterior": {
+              "NON_TRANSFER": 0.000999,
+              "TRANSFER": 0.999001
+            },
+            "probe_space_size": 1,
+            "queries_used": 1,
+            "reason": "posterior concentrated after querying",
+            "status": "SETTLED",
+            "threshold": 0.99,
+            "winner": "TRANSFER"
+          },
+          "winner": "TRANSFER"
+        },
+        {
+          "asked": [
+            {
+              "outcome": "MATCH",
+              "probe": "statistics|bind/correct|93dfdc79ceaa06a5"
+            }
+          ],
+          "case_id": "C024",
+          "closed": true,
+          "gain_bits": 1.0,
+          "hypotheses": 2,
+          "initial_posterior": {
+            "NON_TRANSFER": 0.5,
+            "TRANSFER": 0.5
+          },
+          "keys": [
+            [
+              "statistics",
+              "bind/correct",
+              "93dfdc79ceaa06a5"
+            ],
+            [
+              "statistics",
+              "bind/wrong",
+              "a1edbea21a6efce4"
+            ]
+          ],
+          "ok": true,
+          "policy": "EIG",
+          "posterior": {
+            "NON_TRANSFER": 0.000999,
+            "TRANSFER": 0.999001
+          },
+          "posterior_changed": true,
+          "probes": [
+            "statistics|bind/correct|93dfdc79ceaa06a5",
+            "statistics|bind/wrong|a1edbea21a6efce4"
+          ],
+          "settlement": {
+            "confidence": 0.999001,
+            "domain_disagreement": 0.000999,
+            "information_bits": 1.0,
+            "posterior": {
+              "NON_TRANSFER": 0.000999,
+              "TRANSFER": 0.999001
+            },
+            "probe_space_size": 1,
+            "queries_used": 1,
+            "reason": "posterior concentrated after querying",
+            "status": "SETTLED",
+            "threshold": 0.99,
+            "winner": "TRANSFER"
+          },
+          "winner": "TRANSFER"
+        },
+        {
+          "asked": [
+            {
+              "outcome": "MATCH",
+              "probe": "statistics|bind/correct|3ce77fe53ae4f104"
+            }
+          ],
+          "case_id": "C025",
+          "closed": true,
+          "gain_bits": 1.0,
+          "hypotheses": 2,
+          "initial_posterior": {
+            "NON_TRANSFER": 0.5,
+            "TRANSFER": 0.5
+          },
+          "keys": [
+            [
+              "statistics",
+              "bind/correct",
+              "3ce77fe53ae4f104"
+            ],
+            [
+              "statistics",
+              "bind/wrong",
+              "c4669519243ad2bf"
+            ]
+          ],
+          "ok": true,
+          "policy": "EIG",
+          "posterior": {
+            "NON_TRANSFER": 0.000999,
+            "TRANSFER": 0.999001
+          },
+          "posterior_changed": true,
+          "probes": [
+            "statistics|bind/correct|3ce77fe53ae4f104",
+            "statistics|bind/wrong|c4669519243ad2bf"
+          ],
+          "settlement": {
+            "confidence": 0.999001,
+            "domain_disagreement": 0.000999,
+            "information_bits": 1.0,
+            "posterior": {
+              "NON_TRANSFER": 0.000999,
+              "TRANSFER": 0.999001
+            },
+            "probe_space_size": 1,
+            "queries_used": 1,
+            "reason": "posterior concentrated after querying",
+            "status": "SETTLED",
+            "threshold": 0.99,
+            "winner": "TRANSFER"
+          },
+          "winner": "TRANSFER"
+        },
+        {
+          "asked": [
+            {
+              "outcome": "MATCH",
+              "probe": "statistics|bind/correct|e3527ea382c42130"
+            }
+          ],
+          "case_id": "C026",
+          "closed": true,
+          "gain_bits": 1.0,
+          "hypotheses": 2,
+          "initial_posterior": {
+            "NON_TRANSFER": 0.5,
+            "TRANSFER": 0.5
+          },
+          "keys": [
+            [
+              "statistics",
+              "bind/correct",
+              "e3527ea382c42130"
+            ],
+            [
+              "statistics",
+              "bind/wrong",
+              "9275912330992d27"
+            ]
+          ],
+          "ok": true,
+          "policy": "EIG",
+          "posterior": {
+            "NON_TRANSFER": 0.000999,
+            "TRANSFER": 0.999001
+          },
+          "posterior_changed": true,
+          "probes": [
+            "statistics|bind/correct|e3527ea382c42130",
+            "statistics|bind/wrong|9275912330992d27"
+          ],
+          "settlement": {
+            "confidence": 0.999001,
+            "domain_disagreement": 0.000999,
+            "information_bits": 1.0,
+            "posterior": {
+              "NON_TRANSFER": 0.000999,
+              "TRANSFER": 0.999001
+            },
+            "probe_space_size": 1,
+            "queries_used": 1,
+            "reason": "posterior concentrated after querying",
+            "status": "SETTLED",
+            "threshold": 0.99,
+            "winner": "TRANSFER"
+          },
+          "winner": "TRANSFER"
+        }
+      ],
+      "external_rule_digest": "f2789846d844550c",
+      "false_successes": 0,
+      "independent_verified": 4,
+      "interpreter_probes": 72,
+      "refusals": {
+        "PASS__INDEPENDENTLY_VERIFIED": 4,
+        "REFUSED__AMBIGUOUS_BINDING": 4,
+        "REFUSED__BINDING_NOT_IDENTIFIED_BY_THE_EXAMPLE": 1,
+        "REFUSED__NO_BINDING_REPRODUCED_THE_GUIDES_OUTPUT": 15,
+        "REFUSED__NO_QUESTION_IDENTIFIED": 5
+      },
+      "replayed_matches": 4,
+      "verifier_probes": 4,
+      "verifier_runs": [
+        {
+          "attempted": 2,
+          "case_id": "C005",
+          "failed": 0,
+          "module": "enum",
+          "ok": true,
+          "returncode": 0,
+          "run_ref": "94f610b5ea92692d",
+          "script_sha256": "548514d0fa130e70",
+          "stderr_tail": "",
+          "stdout_tail": "{\"attempted\": 2, \"failed\": 0}\n"
+        },
+        {
+          "attempted": 3,
+          "case_id": "C024",
+          "failed": 0,
+          "module": "statistics",
+          "ok": true,
+          "returncode": 0,
+          "run_ref": "8a7a0d58d52bc89a",
+          "script_sha256": "eca714b7b4518bd7",
+          "stderr_tail": "",
+          "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+        },
+        {
+          "attempted": 3,
+          "case_id": "C025",
+          "failed": 0,
+          "module": "statistics",
+          "ok": true,
+          "returncode": 0,
+          "run_ref": "e682451936fbea42",
+          "script_sha256": "398e686821dcdc6d",
+          "stderr_tail": "",
+          "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+        },
+        {
+          "attempted": 3,
+          "case_id": "C026",
+          "failed": 0,
+          "module": "statistics",
+          "ok": true,
+          "returncode": 0,
+          "run_ref": "4caf9e5c40f6c1d9",
+          "script_sha256": "62e28c3c87b89694",
+          "stderr_tail": "",
+          "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+        }
+      ]
+    },
+    "SHUFFLED_SOURCE": {
+      "arm": "SHUFFLED_SOURCE",
+      "cases": 29,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 29,
+      "refusals": {
+        "REFUSED__SHUFFLED_SOURCE_DID_NOT_REPRODUCE_THE_GUIDE_OUTPUT": 29
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 0
+    },
+    "WRONG_SOURCE": {
+      "arm": "WRONG_SOURCE",
+      "cases": 29,
+      "false_successes": 0,
+      "independent_verified": 0,
+      "interpreter_probes": 29,
+      "refusals": {
+        "REFUSED__WRONG_SOURCE_DID_NOT_REPRODUCE_THE_GUIDE_OUTPUT": 29
+      },
+      "replayed_matches": 0,
+      "verifier_probes": 0
+    }
+  },
+  "authority": "NONE__PRODUCER_RUN_LOCAL_EXPERIMENT",
+  "cost": {
+    "cost_ratio_vs_exact_cache": 2.6207,
+    "exact_cache_probes": 29,
+    "independent_verifier_probes": 12,
+    "interpreter_probes": 338,
+    "learned_arm_total_probes": 76,
+    "wall_s": 6.6553
+  },
+  "date": "2026-11-24",
+  "eig": {
+    "all_direct_settlements_pass": true,
+    "composed_run": {
+      "act": "PASS__GOAL_VERIFIED_OBSERVED",
+      "admit": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+      "composed_eig": {
+        "answered": true,
+        "asked": [
+          {
+            "outcome": "MATCH",
+            "probe": "enum|bind/correct|5e55ca26767482b8"
+          }
+        ],
+        "gain_bits": 1.0,
+        "initial_posterior": {
+          "NON_TRANSFER": 0.5,
+          "TRANSFER": 0.5
+        },
+        "policy": "EIG",
+        "posterior": {
+          "NON_TRANSFER": 0.000999,
+          "TRANSFER": 0.999001
+        },
+        "reason": "a closed version space with positive-gain probes"
+      },
+      "ok": true,
+      "plan": [
+        "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3"
+      ],
+      "run_pass": true,
+      "run_status": "PASS__PERFECT_ALGORITHM_RUN",
+      "save": "REFUSED__NOT_PERSISTED"
+    },
+    "pass": true,
+    "resolved_cases": 4
+  },
+  "external_store_editability": {
+    "ok": true,
+    "removal_refuses": true,
+    "restore_available": true,
+    "weights_written": false
+  },
+  "failed_or_unproven": [
+    "hardest-open Nov-2026 SWE and computer-use benchmarks were not run",
+    "unseen arbitrary GUI/browser environments were not tested",
+    "container-local open_model().solve() confinement was not established",
+    "no independent cloud verifier or own-weights-only end-to-end qualification",
+    "target stdlib families are mechanically separated, not truly hidden frontier families",
+    "universal one-shot learning and real understanding remain unproven"
+  ],
+  "independent_verifier": {
+    "different_from": "the_guide_is_a_test_suite_v1._python_example_ok and compare",
+    "mechanism": "python3 -I -c doctest.DocTestParser/DocTestRunner in a fresh process",
+    "runs": [
+      {
+        "attempted": 2,
+        "case_id": "C005",
+        "failed": 0,
+        "module": "enum",
+        "ok": true,
+        "returncode": 0,
+        "run_ref": "94f610b5ea92692d",
+        "script_sha256": "548514d0fa130e70",
+        "stderr_tail": "",
+        "stdout_tail": "{\"attempted\": 2, \"failed\": 0}\n"
+      },
+      {
+        "attempted": 3,
+        "case_id": "C024",
+        "failed": 0,
+        "module": "statistics",
+        "ok": true,
+        "returncode": 0,
+        "run_ref": "8a7a0d58d52bc89a",
+        "script_sha256": "eca714b7b4518bd7",
+        "stderr_tail": "",
+        "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+      },
+      {
+        "attempted": 3,
+        "case_id": "C025",
+        "failed": 0,
+        "module": "statistics",
+        "ok": true,
+        "returncode": 0,
+        "run_ref": "e682451936fbea42",
+        "script_sha256": "398e686821dcdc6d",
+        "stderr_tail": "",
+        "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+      },
+      {
+        "attempted": 3,
+        "case_id": "C026",
+        "failed": 0,
+        "module": "statistics",
+        "ok": true,
+        "returncode": 0,
+        "run_ref": "4caf9e5c40f6c1d9",
+        "script_sha256": "62e28c3c87b89694",
+        "stderr_tail": "",
+        "stdout_tail": "{\"attempted\": 3, \"failed\": 0}\n"
+      }
+    ],
+    "total_processes": 12
+  },
+  "next_bottleneck": "Container-local open_model().solve() confinement with a different fresh verifier and run reference, then hardest-open Nov-2026 SWE/Terminal-Bench/FrontierSWE and OSWorld protocols; the Docker/Podman/Harbor/Python-3.12/VM blocker is already logged once.",
+  "preregistered": {
+    "candidate_probe_limit": 8,
+    "eig_probe_budget": 4,
+    "interpreter_timeout_s": 5,
+    "max_closed_space_hypotheses": 24,
+    "max_cost_ratio_vs_exact_cache": 8,
+    "min_learned_successes": 3,
+    "min_success_gap_over_controls": 3,
+    "no_tuning_after_formal_run": true,
+    "seed": 0
+  },
+  "preregistration": "OWN_MODEL_PREREGISTERED_TRANSFER_20261124_V1.md",
+  "restart_persistence": {
+    "command_sha256": "5cedc5e508272d43",
+    "ok": true,
+    "returncode": 0,
+    "run_ref": "ee4572081da7783b",
+    "stderr_tail": "",
+    "stdout": "{\"actual_digest\": \"2671531e1db84953\", \"expected_digest\": \"2671531e1db84953\", \"ok\": true, \"schema\": \"BRAIN_ONE_EXPERIENCE_CROSS_FAMILY_TRANSFER_V1_STORE\"}"
+  },
+  "schema": "BRAIN_ONE_EXPERIENCE_CROSS_FAMILY_TRANSFER_V1",
+  "source": {
+    "binding_digest": "101afb858b02d80f",
+    "family": "difflib",
+    "job_digest": "7d28567ba5352ba0",
+    "question": "s",
+    "resolution": {
+      "candidates": 8,
+      "probes_run": 8,
+      "reproducing": 1,
+      "status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED",
+      "unidentified": 0
+    },
+    "source_classes": {
+      "bind/contradictory": "MISMATCH",
+      "bind/correct": "MATCH",
+      "bind/foreign": "MISMATCH",
+      "bind/shuffled": "MISMATCH",
+      "bind/wrong": "MISMATCH"
+    },
+    "source_outcomes_digest": "175f4e74cf5aee5a",
+    "source_probes": [
+      {
+        "key": "source|bind/correct|101afb858b02d80f",
+        "kind": "correct",
+        "outcome": "MATCH",
+        "raw_verdict": "EXACT"
+      },
+      {
+        "key": "source|bind/wrong|064cc2cfaf65916a",
+        "kind": "wrong",
+        "outcome": "MISMATCH",
+        "raw_verdict": "MISMATCH_AT_LINE_2"
+      },
+      {
+        "key": "source|bind/shuffled|f4ef2a508f8af79d",
+        "kind": "shuffled",
+        "outcome": "MISMATCH",
+        "raw_verdict": "REFUSED_BY_INTERPRETER"
+      },
+      {
+        "key": "source|bind/foreign|f4f5b9b0ec39cb65",
+        "kind": "foreign",
+        "outcome": "MISMATCH",
+        "raw_verdict": "REFUSED_BY_INTERPRETER"
+      },
+      {
+        "key": "source|bind/contradictory|101afb858b02d80f",
+        "kind": "contradictory",
+        "outcome": "MISMATCH",
+        "raw_verdict": "MISMATCH_AT_LINE_0"
+      }
+    ]
+  },
+  "system_boundary": {
+    "external_instant_knowledge": "Python standard-library guide text read at run time",
+    "external_store": "/home/user/brain/canonical/astra_runtime/state/ONE_EXPERIENCE_CROSS_FAMILY_TRANSFER_V1.json",
+    "own_weights": false,
+    "runtime_model_calls": 0,
+    "runtime_network_calls": 0,
+    "store_contains_exact_source_binding": false,
+    "store_contains_target_outcomes": false,
+    "weights_written": false
+  },
+  "target_cases": {
+    "case_rows": [
+      {
+        "block_line": 1057,
+        "family": "enum",
+        "guide": "stdlib:enum",
+        "id": "C001",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "Color",
+        "statement_digest": "696d2bf7254b5e81"
+      },
+      {
+        "block_line": 1057,
+        "family": "enum",
+        "guide": "stdlib:enum",
+        "id": "C002",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "Color",
+        "statement_digest": "61db78313a2b0aa0"
+      },
+      {
+        "block_line": 1057,
+        "family": "enum",
+        "guide": "stdlib:enum",
+        "id": "C003",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "Color",
+        "statement_digest": "af26eb6ea7989eae"
+      },
+      {
+        "block_line": 1057,
+        "family": "enum",
+        "guide": "stdlib:enum",
+        "id": "C004",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "Color",
+        "statement_digest": "e62320732e41e3c2"
+      },
+      {
+        "block_line": 1057,
+        "family": "enum",
+        "guide": "stdlib:enum",
+        "id": "C005",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "Color",
+        "statement_digest": "4e61af1e191f9db9"
+      },
+      {
+        "block_line": 316,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C006",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": null,
+        "statement_digest": "e88d4c30ea439914"
+      },
+      {
+        "block_line": 316,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C007",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": null,
+        "statement_digest": "3d2b60e745b29d21"
+      },
+      {
+        "block_line": 439,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C008",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": null,
+        "statement_digest": "577489d75fc29631"
+      },
+      {
+        "block_line": 501,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C009",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": null,
+        "statement_digest": "9ff21592487a633a"
+      },
+      {
+        "block_line": 535,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C010",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "struct",
+        "statement_digest": "183f187e8ddf286f"
+      },
+      {
+        "block_line": 570,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C011",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "struct",
+        "statement_digest": "ab69792c10c11ff6"
+      },
+      {
+        "block_line": 630,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C012",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "enc",
+        "statement_digest": "8c069d8c24817ca4"
+      },
+      {
+        "block_line": 630,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C013",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "n",
+        "statement_digest": "61c65950130ec6bc"
+      },
+      {
+        "block_line": 669,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C014",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "enc",
+        "statement_digest": "8c069d8c24817ca4"
+      },
+      {
+        "block_line": 669,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C015",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "n",
+        "statement_digest": "4584d5c9e5c60758"
+      },
+      {
+        "block_line": 710,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C016",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "enc",
+        "statement_digest": "8c069d8c24817ca4"
+      },
+      {
+        "block_line": 710,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C017",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "n",
+        "statement_digest": "41447b69e5c8dd00"
+      },
+      {
+        "block_line": 751,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C018",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": null,
+        "statement_digest": "aaa2f417818d1bbe"
+      },
+      {
+        "block_line": 836,
+        "family": "pickletools",
+        "guide": "stdlib:pickletools",
+        "id": "C019",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "raw",
+        "statement_digest": "ab607d5299fb9ab9"
+      },
+      {
+        "block_line": 1,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C020",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "x",
+        "statement_digest": "282063ccc73049a0"
+      },
+      {
+        "block_line": 1,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C021",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "x",
+        "statement_digest": "dad5e643cb97178f"
+      },
+      {
+        "block_line": 615,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C022",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "demographics",
+        "statement_digest": "161ba581d58eb398"
+      },
+      {
+        "block_line": 615,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C023",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "data",
+        "statement_digest": "7354d574cd3bc9e4"
+      },
+      {
+        "block_line": 823,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C024",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "data",
+        "statement_digest": "c9ba7e264c7b6135"
+      },
+      {
+        "block_line": 867,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C025",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "data",
+        "statement_digest": "54817e5ffee4e39d"
+      },
+      {
+        "block_line": 964,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C026",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "x",
+        "statement_digest": "10df34c5caece31b"
+      },
+      {
+        "block_line": 964,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C027",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "z",
+        "statement_digest": "7856893bcb18fcae"
+      },
+      {
+        "block_line": 992,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C028",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "x",
+        "statement_digest": "d6e24eba51864e5e"
+      },
+      {
+        "block_line": 1028,
+        "family": "statistics",
+        "guide": "stdlib:statistics",
+        "id": "C029",
+        "initial_refusal": "REFUSED_BY_INTERPRETER",
+        "question": "x",
+        "statement_digest": "af7d9b79df35c7c9"
+      }
+    ],
+    "cases_digest": "f5d21e0c4c790a71",
+    "families": [
+      "statistics",
+      "enum",
+      "pickletools"
+    ],
+    "no_question": 5,
+    "total": 29,
+    "with_question": 24
+  },
+  "verdict": {
+    "ambiguous_or_unidentified_admitted": 0,
+    "best_control_successes": 0,
+    "changed_precondition_false_successes": 0,
+    "completion_claim": false,
+    "contradictory_false_successes": 0,
+    "cost_ok": true,
+    "eig_hypothesis_pass": true,
+    "external_store_editability_ok": true,
+    "learned_successes": 4,
+    "local_transfer_hypothesis_pass": true,
+    "restart_ok": true,
+    "section_6": "NOT_DONE",
+    "success_gap": 4,
+    "truth_achieved": false
+  },
+  "verified": [
+    "one computed procedure from one identified source experience was stored externally",
+    "real interpreter refusals in three different stdlib guide families were replayed",
+    "every claimed transfer success was checked by a separate doctest process",
+    "EIG-selected probes were executed and their observations changed the posterior",
+    "exact, shuffled, wrong and foreign memory controls were measured"
+  ]
+}

@@ -479,3 +479,18 @@ python3 -m pytest canonical/tests/test_the_check_is_the_object_the_action_produc
 changed cannot be wrong about that object. This round reads the small checkable part, binds it to
 the bytes, and refuses to store what one example cannot identify. It is two mechanisms, not a new
 model, and it is progress — not §6.*
+
+---
+
+## Continuation: EIG question wire and one-experience transfer
+
+The next loop is documented in `OWN_MODEL_PREREGISTERED_TRANSFER_20261124_V1.md`,
+`OWN_MODEL_ACTIVE_QUESTION_TRANSFER_20261124_V1.md`, and
+`canonical/verification/ONE_EXPERIENCE_CROSS_FAMILY_TRANSFER_20261124_V1.json`. It wires
+expected-information-gain probe selection into `perfect_algorithm_v1.right_question`, executes and
+uses the answer, runs the preregistered source-experience→unseen-family transfer experiment with
+empty/exact/shuffled/wrong/foreign memory controls, contradictory/changed-precondition victims, an
+independent doctest verifier, external-store editability and restart persistence. Local result:
+4 independently verified successes, 0 control successes, 0 false successes, EIG 4/4 settled,
+cost ratio 2.6207×, `57 passed` and `201 passed, 2 skipped` on the affected suites. §6 remains
+**NOT DONE**; `truth.achieved` remains false; no merge.

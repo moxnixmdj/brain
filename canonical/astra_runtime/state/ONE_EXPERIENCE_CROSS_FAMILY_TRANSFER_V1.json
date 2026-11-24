@@ -1,0 +1,35 @@
+{
+  "digest": "2671531e1db84953",
+  "learned_abstraction": {
+    "environment": "the interpreter's NameError and the current guide's inspectable statements",
+    "goal": "reproduce the current guide's own printed output",
+    "needs": "the refused name and candidate statements that bind it",
+    "parameters_written": false,
+    "rule": "WHEN_THE_INTERPRETER_NAMES_A_MISSING_BINDING_SCAN_THE_CURRENT_GUIDE_FOR_STATEMENTS_THAT_BIND_IT_REPLAY_THE_WHOLE_SESSION_REQUIRE_THE_GUIDES_PRINTED_OUTPUT_SEPARATE_A_MACHINE_MADE_WRONG_BINDING_AND_REFUSE_AMBIGUITY",
+    "runtime_model_calls": 0,
+    "runtime_network_calls": 0,
+    "schema": "BRAIN_ONE_EXPERIENCE_ABSTRACT_RULE_V1",
+    "what_not_to_save": [
+      "exact source action replay",
+      "target bindings",
+      "guide answers",
+      "weights",
+      "target outcomes"
+    ],
+    "what_to_save": "this computed procedure and source provenance only"
+  },
+  "runtime_model_calls": 0,
+  "schema": "BRAIN_ONE_EXPERIENCE_CROSS_FAMILY_TRANSFER_V1_STORE",
+  "source_provenance": {
+    "exact_source_binding_stored": false,
+    "schema": "BRAIN_SOURCE_PROVENANCE_V1",
+    "source_binding_digest": "101afb858b02d80f",
+    "source_family": "difflib",
+    "source_job_digest": "7d28567ba5352ba0",
+    "source_outcomes_digest": "175f4e74cf5aee5a",
+    "source_probe_count": 5,
+    "source_question": "s",
+    "source_resolution_status": "RESOLVED__GUIDE_OUTPUT_REPRODUCED"
+  },
+  "written_to_weights": false
+}
