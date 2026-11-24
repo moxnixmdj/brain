@@ -68,7 +68,7 @@
       "Host solver invocation",
       "Unverified fresh-verifier assumption"
     ],
-    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration.",
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner.",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "Reuse Harbor transport",
