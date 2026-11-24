@@ -1,0 +1,464 @@
+{
+ "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1",
+ "action_intent_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Round 14 named PRECISION -- a local re-run of the tests an edit touches, 'never taken', worth 16 tasks -- and this round was to build that loop. It already exists. The harness that produced the 2026-11-13 receipt gates every candidate on the tests that should start passing before it spends the whole-module run, and it stops a candidate the moment one of them fails. Recomputed from that receipt's own rows: 258 candidates pass at least one new test, 13 reach the whole-module run, 10 resolve, and ZERO candidates that passed every new test were withheld from the neighbour tests. The 245 stopped candidates in 16 tasks are each partial by construction. The breakage cost is 3 tasks of 128, not 16. Round 14's number is retracted here and locked by test. The round then asked where a candidate's content comes from at all: all 93 tasks whose issue text carries no code line get no candidate, and the generator's only content channel is the code lines in the issue text. Of the 102 stuck tasks, the issue text names every new atom for 6; against the whole project at the base commit, 15 of 26 sampled changed files need only material the project already holds; and a trace of the failing test executes the file being changed for 13 of 26 tasks and reaches the changed line for 1. The material is present; the ARRANGEMENT is what is missing, and no zero-model oracle measured here can rank arrangements.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Three routes rejected by measurement. (1) Build the local neighbour re-run: it exists and withholds nothing. (2) Build a better ranker: ceiling +2 tasks of 128. (3) Build a transplant generator: the atoms are in the project but the arrangement is not, so it would propose thousands of arrangements with nothing to prefer one.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 14 tests, every count recomputed from the 2026-11-13 receipt's own per_task rows or pinned as a measurement this round made. The retraction is the part most likely to be wrong, so it is tested directly: no candidate that passed every new test was stopped.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json",
+   "canonical/tests/test_where_the_swe_bench_loss_is_v1.py",
+   "intake/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false,
+  "route_id": null
+ },
+ "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::every prior round optimised a layer -- produce, judge, scan, cost -- without measuring which layer the actual benchmark loss sits in; the natural next build, a better ranker, is worth under 2%",
+ "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "retracted": "16 tasks lost to an untaken local re-run",
+  "measured": "3 tasks lost to a breakage, and the check is already taken",
+  "no_candidate_tasks_explained": "93 of 93 by an empty content channel",
+  "new_atoms_in_the_issue_text": "36 of 200 (18%)",
+  "project_holds_the_material": "17 of 26 sampled changed files need nothing new (15 held + 2 needing nothing)",
+  "trace_reaches_the_changed_line": "1 of 26"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "the machine can find the file (rank 1 at 0.400 over 500 tasks), can hold the material (17 of 26 sampled changed files need nothing new), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests, and every zero-model signal tested here (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement.",
+ "date": "2026-11-25",
+ "expected_parent_change": "effort moves off precision (worth 3) and off coverage of the store (the material is there), and onto ranking arrangements of held material; the tree gains a receipt that corrects its own previous round.",
+ "expected_parent_frontier_change": "the frontier becomes: choose, among the arrangements of material the project already holds, without running the hidden tests.",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "if any candidate that passed every test that should start passing had been stopped before the whole-module run, this round's retraction would be wrong and the 16 would stand. Recomputed: zero.",
+ "generic_repair_from_single_probe": true,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "no benchmark was run this round; the judged numbers are the 2026-11-13 receipt's",
+  "the project-as-dictionary figures are every 4th of the 102 (26 tasks); the atom figures are over all 102",
+  "the trace figures are over the same 26, one tree per task",
+  "'held' is fix_shape_v1's own notion and errs towards held",
+  "producer-run sandbox only; no independent identity has re-run anything"
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "A benchmark receipt can contain a number nobody read off the rows. Round 14 quoted one, and it was wrong by a factor of five. The correction is not prose: it is a recomputation from the receipt's own per_task rows, and it changes what the next round should build. The lesson is the one the tree keeps paying for -- measure the artifact, not the story about it.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "retracted: PRECISION is 3 tasks of 128, not 16, and its check is already built and already holds. measured instead: 93 of 93 no-candidate tasks write no code line in the issue (the generator's only content channel); 6 of 102 fixes have all their new names in the text (18% of atoms); 17 of 26 sampled changed files need only material the project holds; the failing test's trace reaches the changed line once in 26; 19 of 231 issues carry a runnable reproduction",
+ "next_step": "measure whether a public signal ranks arrangements: the failing test's own output, the conventions of the neighbouring code, and the shape census already in the tree. If none ranks them, state that plainly and pay a test run per candidate -- affordable, at under a second a run.",
+ "parent_capability": "tool_census_v1 + the refusal reader as shipped in caefcd5f",
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261125_V1.json",
+  "canonical/tests/test_the_check_the_loop_throws_away_v1.py",
+  "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
+ ],
+ "real_outcome": "the round's premise was falsified by the tree's own receipt, and correcting it redirected the bottleneck from PRECISION to the ranking of arrangements of already-held material. That is the round's product: a wrong number found, corrected and locked, and the next round's question changed because of it.",
+ "recursive_obs": {
+  "canonical_base_commit": "1da0b549029bba88c39673368e0c62ccd51760da",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "DEFAULT_MAX_SUBCOMMANDS=24 (an underived cap, removed after measuring its cost at 0.7 s)",
+   "first-column-only candidate reading (removed; prose is still refused by admission)",
+   "writing artefact bytes (never added)"
+  ],
+  "expected_parent_level_state_change": "the frontier is a candidate that reaches the right file and does not break a neighbour, not a better ordering of candidates that mostly do not work",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "write the missing artefact ourselves (rejected: arXiv 2611.23305 measured agents fabricating stubs and harnesses marking them successful; our guard makes that impossible instead)",
+    "fetch a fixture from the web (rejected: a network dependency at runtime, and nothing fetched has moved a door in three rounds)",
+    "raise the cap only (rejected: insufficient alone -- `req` was not a candidate at any cap until the columnar read was fixed)"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC: the producer was printed by the program and the reader stopped at the first column",
+   "surviving_causal_blocker": "layers were optimised without measuring which one carries the real benchmark loss, and the natural next build is worth under 2%"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a learned ranker of doubt (KBD's RL policy): the same quantity is a count here",
+    "a second subcommand discovery pass: the census had already admitted them, and the second copy was worse"
+   ],
+   "existing_inherited_routes_checked": "ignorance_ledger_v1, ignorance_loop_v1, index_capability_evidence_v1, local_guide_v1, jit_knowledge_v1, cli_capability_acquisition_v1, empirical_cli_probe_v1 and where_the_missing_term_comes_from_v1 were all read BEFORE anything was written. The circuit already existed and was joined to the financial-QA path only; the instant tier already existed and was wired into perfect_algorithm_v1; the ledger already existed and nothing on the program path wrote to it. Nothing was rebuilt.",
+   "external_existing_routes_checked": "KBD (2603.21022) uses an RL policy rewarded by entropy reduction to find a knowledge boundary; LLM-IDEA (2610.11253) triages a plateau into capability limit / resolvable / certified exhausted; OSExpert-style exploration reports +20% performance inside a 120B model. The first is beaten on cost (a count, no policy), the second was adopted as an axis, the third is deterministic here at 0 model calls.",
+   "surviving_gap": "driving the 786 rescuable operations; reading a goal from words; any benchmark score"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger door count",
+    "a higher sensor count"
+   ],
+   "real_outcome": "Ignorance becomes a measured, persistent, triaged object: each unbound operation is sorted into an evidence-backed kind, each question is priced by the number of verdicts it decides, and each doubt is marked rescuable or certified exhausted. The 682 false sensor credits are gone, so the capability figure the tree reports is one it can defend.",
+   "surviving_necessity": "an agent that cannot say what it does not know cannot decide what to ask, and will re-derive the same doubt forever"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "signature, join, selectivity and held-out scoring in one module",
+   "downstream_work_to_delete_or_supersede": "the census's coarse change_kind is kept for reporting; the join reads the relation signature instead",
+   "fresh_reuse_plan": "the signature rides on the census's existing rows; nothing re-runs"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no cache: 20 programs re-measured in 57 s, and the BEFORE column is reproduced by restoring the old rule rather than quoted",
+   "search_stop_decision": "stopped at five kinds because each is decided by evidence already in hand; a sixth would have needed a guess, and the rescuable/exhausted axis is derived from the five rather than added as a sixth"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each either needed parameters, or a model call, or re-derived the doubt",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+     "why": "kinds from documents and exit codes; questions priced by verdicts decided; 682 false credits removed"
+    },
+    {
+     "rank": 2,
+     "route": "KBD_STYLE_RL_ENTROPY_RANKER",
+     "why": "measures the same quantity with a policy and parameters"
+    },
+    {
+     "rank": 3,
+     "route": "RE_SCAN_EVERY_TIME",
+     "why": "measured: 82 gaps, 0 resolved"
+    },
+    {
+     "rank": 4,
+     "route": "MODEL_GUESSES_THE_GAP",
+     "why": "a model call and unverifiable"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the oracle is the benchmark's own tests as recorded, plus a control task text that resolves nothing; no synthetic proxy is used to stand in for a resolution"
+  },
+  "real_outcome": "20 real programs, 1,038 classified operations: SENSOR 880 -> 198 (delta 682) and UNBOUND 104 -> 786 at an unchanged 33 doors, because failed runs and unread scopes had been counted as sensors. The unknown collapses to 5 kinds (772 DROVE_IT_WRONG, 14 SLOT_UNSUPPLIED) and is triaged 786 rescuable / 0 certified exhausted. Questions are ranked by verdicts decided, not by a prior. The doubt is written to the ledger and persists. 0 model calls, 0 parameters, 57 s.",
+  "required_capability": "a measured, persisted, triaged account of what is unknown",
+  "route_frontier": {
+   "canonical_base_commit": "bbbe6af28d8437c40123e4b9a3c41bd75557b60e",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "cannot transfer across contents",
+      "CORRECTNESS": "0.4677 precision, measured",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "measured leave-one-out precision 0.4677 on 62 rows",
+      "0.0 on the held-out mv requests"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PER_CONTENT_CONDITION_MATCHING"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "coarse",
+      "CORRECTNESS": "cannot separate a rename from a delete",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "all five are commutative, so mv and rm of one file read identically",
+      "measured: 3 distinct move classes over 62 rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "THE_FIVE_RELATIONS_ALONE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no more than membership",
+      "CORRECTNESS": "unverifiable on 62 rows",
+      "INCREMENTAL_COST": "fitted parameters",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "slower"
+     },
+     "evidence": [
+      "62 rows would fit any scorer perfectly and prove nothing",
+      "the constraints forbid a parameter fitted to the measurement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "A_LEARNED_SCORER_OVER_DOORS"
+    }
+   ],
+   "checked_at_utc": "2026-11-24T11:46:03+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "DECOMPOSE_THE_REAL_BENCHMARK_LOSS_BEFORE_BUILDING_AGAIN",
+   "max_age_hours": 2,
+   "negative_search_summary": "no existing mechanism joins a goal to a door using a relation signature measured by execution; the 2026 affordance literature predicts with a VLM, and the project's own planner assumes the goal state was already observed",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "goal conditioned affordance selection from measured transition effects"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "tool effect prediction from help text and execution"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "state change classification relations for filesystem actions"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent affordance benchmark unspecified preconditions ADAPT"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "DECOMPOSE_THE_REAL_BENCHMARK_LOSS_BEFORE_BUILDING_AGAIN",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-24T11:46:03+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime",
+      "evidence": [
+       "59 tests pass across four suites on this host; the new suite is 11 tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the four programs whose doors are joined",
+      "evidence": [
+       "59 tests pass across four suites on this host; the new suite is 11 tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "no network at join time",
+      "evidence": [
+       "the join made zero network calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T21:37:05+00:00",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "DECOMPOSE_THE_REAL_BENCHMARK_LOSS_BEFORE_BUILDING_AGAIN",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (relation_value, five relations)",
+     "canonical/runtime/tool_census_v1.py (the 76 doors)",
+     "canonical/runtime/environment_learning_v1.py (shortest_plan, reused-not-rebuilt)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DynAfford/ADAPT (ACL 2026): affordance prediction via a VLM",
+     "CreativityBench (2026): affordance reasoning is model-mediated"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "no package provides a goal-to-door join over measured effects"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the programs' own --help declarations on this host",
+     "the project's A1-A5 verdict on the five relations"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   {
+    "route": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+    "verdict": "SELECTED",
+    "why": "sensor_delta 682, kinds 5, 786 rescuable / 0 exhausted, doubt persists"
+   },
+   {
+    "route": "KBD_STYLE_RL_ENTROPY_RANKER",
+    "verdict": "REJECTED",
+    "why": "a policy and parameters to compute a count"
+   },
+   {
+    "route": "RE_SCAN_EVERY_TIME",
+    "verdict": "REJECTED",
+    "why": "measured: 82 gaps, 0 resolved"
+   },
+   {
+    "route": "MODEL_GUESSES_THE_GAP",
+    "verdict": "REJECTED",
+    "why": "a model call, unverifiable"
+   }
+  ],
+  "selected_surviving_route": "DECOMPOSE_THE_REAL_BENCHMARK_LOSS_BEFORE_BUILDING_AGAIN",
+  "stop_condition": "stop when the loss on a hard real benchmark is attributed to causes that each have a measured cost, and the next mechanism is chosen by that cost",
+  "why_selected_route_is_fastest_sufficient": "the receipts already existed, so the whole decomposition cost one module and 0.25 seconds of test time, and it replaced a plan that would have spent a round on a 2% lever"
+ },
+ "required_capability": "an honest decomposition of a real benchmark loss into separable causes, so the next rounds attack the cause that costs the most rather than the one that is easiest to build",
+ "route_class": "ADAPT",
+ "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+ "route_order_walk": {
+  "ADAPT": "SELECTED: the plan was redirected by measurement, since the natural next build had a measured ceiling of +2 tasks.",
+  "COMPOSE": "reuses two existing receipts and their own per-task records; nothing new was executed.",
+  "BYPASS": "Not used. Building a ranker would have optimised a 2% lever because it is the easiest thing to build.",
+  "INVENT": "Not used. No new benchmark run, no new generator, no new claim about either."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selected_surviving_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selectivity_note": "this round changes no mechanism and claims no capability; it withdraws a number and replaces it with a measured one.",
+ "status": "SHIPPED",
+ "stop_condition": "stop when the loss on a hard real benchmark is attributed to causes that each have a measured cost, and the next mechanism is chosen by that cost",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "closing the 786 unknowns; reading a goal from words; any benchmark score; independent verification",
+  "what_is_real": "682 false sensor credits removed, the unknown collapsed to five evidence-backed kinds, a rescuable/exhausted triage, and doubt that persists across processes"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": "canonical/tests/test_the_check_the_loop_throws_away_v1.py (14 tests, all pass)",
+ "weakens_existing_guard": false
+}
