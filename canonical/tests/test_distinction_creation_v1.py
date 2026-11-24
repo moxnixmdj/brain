@@ -207,6 +207,53 @@ class ClosingTheGapTests(unittest.TestCase):
 
 
 class BranchEmissionTests(unittest.TestCase):
+    @staticmethod
+    def _compile(source, feature="n"):
+        """The emitted branch must actually be Python, or it is not a branch."""
+        body = source.replace(
+            "raise <exception-from-the-demand>", "raise ValueError('invalid')"
+        )
+        lines = [
+            l for l in body.splitlines() if l.strip() and not l.strip().startswith("#")
+        ]
+        module = f"def check({feature}):\n" + "".join(
+            "    " + l + "\n" for l in lines
+        )
+        namespace: dict = {}
+        exec(compile(module, "<emitted>", "exec"), namespace)  # noqa: S102
+        return namespace["check"]
+
+    def test_the_emitted_branch_executes(self):
+        out = dc.branch_from_outcomes(
+            [{"n": v} for v in (1, 2, 5)], [{"n": v} for v in (0, -1)]
+        )
+        check = self._compile(out["source"])
+        for value in (1, 2, 5):
+            check(value)  # valid: must not raise
+        for value in (0, -1, -100):
+            with self.assertRaises(ValueError):
+                check(value)
+
+    def test_the_branch_fires_on_the_invalid_region_not_the_valid_one(self):
+        """The first version emitted `if n gt 0: raise` and raised on every good
+        input. The guard describes what is valid, so the branch is its negation."""
+        out = dc.branch_from_outcomes(
+            [{"n": v} for v in (0, 100, 255)], [{"n": v} for v in (-1, 256)]
+        )
+        check = self._compile(out["source"])
+        for value in (0, 255):
+            check(value)
+        for value in (-1, 256):
+            with self.assertRaises(ValueError):
+                check(value)
+
+    def test_the_invalid_region_is_reported_in_python_syntax(self):
+        out = dc.branch_from_outcomes(
+            [{"n": v} for v in (1, 2)], [{"n": v} for v in (0,)]
+        )
+        self.assertIn("if n <= 0:", out["source"])
+        self.assertNotIn(" le ", out["source"])
+
     def test_the_missing_branch_is_written_out_as_a_proposal(self):
         out = dc.branch_from_outcomes(
             [{"n": v} for v in (1, 2, 5)],

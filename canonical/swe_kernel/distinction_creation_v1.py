@@ -150,6 +150,9 @@ class Guard:
                     return False
                 if value != operand:
                     return False
+            elif op == "ne":
+                if _kind(value) == _kind(operand) and value == operand:
+                    return False
             elif op == "lt":
                 if _kind(value) != _kind(operand) or not _ordered(value):
                     return False
@@ -176,9 +179,47 @@ class Guard:
                     return False
                 if not (low <= value <= high):
                     return False
+            elif op == "outside":
+                low, high = operand
+                if _kind(value) != _kind(low) or not _ordered(value):
+                    return False
+                if low <= value <= high:
+                    return False
             else:  # pragma: no cover - internal invariant
                 raise DistinctionError("UNKNOWN_OPERATOR:" + op)
         return True
+
+    def render_python(self) -> str:
+        """The same guard as EXECUTABLE Python, not as a report string.
+
+        `render()` is for humans and uses `eq/gt/between`. Emitted source must run,
+        so it needs real operators. Keeping the two apart is the fix for an
+        emitted branch that said `if n le 0:` and could not be executed at all --
+        the emission looked right and was not code.
+        """
+        parts = []
+        for name, op, operand in self.atoms:
+            if op == "between":
+                low, high = operand
+                parts.append(f"{low!r} <= {name} <= {high!r}")
+            elif op == "outside":
+                low, high = operand
+                parts.append(f"not ({low!r} <= {name} <= {high!r})")
+            elif op == "eq":
+                parts.append(f"{name} == {operand!r}")
+            elif op == "ne":
+                parts.append(f"{name} != {operand!r}")
+            elif op == "lt":
+                parts.append(f"{name} < {operand!r}")
+            elif op == "le":
+                parts.append(f"{name} <= {operand!r}")
+            elif op == "gt":
+                parts.append(f"{name} > {operand!r}")
+            elif op == "ge":
+                parts.append(f"{name} >= {operand!r}")
+            else:  # pragma: no cover
+                raise DistinctionError("NO_PYTHON_FOR:" + op)
+        return " and ".join(parts)
 
     def render(self) -> str:
         parts = []
@@ -186,6 +227,9 @@ class Guard:
             if op == "between":
                 low, high = operand
                 parts.append(f"{name} between {low!r} and {high!r}")
+            elif op == "outside":
+                low, high = operand
+                parts.append(f"{name} outside {low!r}..{high!r}")
             else:
                 parts.append(f"{name} {op} {operand!r}")
         return " and ".join(parts)
@@ -197,7 +241,7 @@ class Guard:
         atoms = []
         for name, op, operand in self.atoms:
             entry: dict[str, Any] = {"feature": name, "op": op}
-            if op == "between":
+            if op in {"between", "outside"}:
                 entry["operand"] = [operand[0], operand[1]]
             else:
                 entry["operand"] = operand
@@ -609,6 +653,32 @@ def _result(guard: Guard, positives, negatives, shape: str, length: int,
 # the thing a witness inverter cannot do: go from "must not raise" to a branch
 # --------------------------------------------------------------------------- #
 
+_NEGATION = {
+    "eq": "ne",
+    "lt": "ge",
+    "le": "gt",
+    "gt": "le",
+    "ge": "lt",
+}
+
+
+def _negate(atom: tuple[str, str, Any]) -> tuple[str, str, Any]:
+    """The complement of one atom, as another atom.
+
+    A conjunction's negation is a DISJUNCTION of negated atoms, so the emitted
+    test joins them with `or`.
+    """
+    name, op, operand = atom
+    if op == "between":
+        low, high = operand
+        # not (low <= v <= high)  ==  v < low or v > high ; the emitter joins
+        # with `or`, so this atom is expanded by the caller below
+        return (name, "outside", (low, high))
+    if op not in _NEGATION:
+        raise DistinctionError("CANNOT_NEGATE:" + op)
+    return (name, _NEGATION[op], operand)
+
+
 def branch_from_outcomes(
     positives: Sequence[Mapping[str, Any]],
     negatives: Sequence[Mapping[str, Any]],
@@ -630,14 +700,26 @@ def branch_from_outcomes(
     found = synthesise_guard(positives, negatives, max_terms=max_terms)
     if found["status"] != "PASS__GUARD_SYNTHESISED":
         return {**found, "branch": None, "source": None}
-    guard = Guard([(a["feature"], a["op"], a["operand"]) for a in found["guard"]["atoms"]])
+    atoms = [
+        (a["feature"], a["op"], tuple(a["operand"]) if a["op"] == "between" else a["operand"])
+        for a in found["guard"]["atoms"]
+    ]
+    guard = Guard(atoms)
+    # THE GUARD DESCRIBES THE VALID REGION, so the branch must fire on its
+    # NEGATION. The first version emitted `if <guard>: raise`, which raises on
+    # every input the positives prove is correct -- it would have broken every
+    # working case the examples were collected from. De Morgan is applied to the
+    # conjunction so the emitted test reads as the invalid region directly.
+    inverse_atoms = [_negate(atom) for atom in atoms]
+    negated = " or ".join(Guard([atom]).render_python() for atom in inverse_atoms)
     source = (
-        "if " + guard.render() + ":\n"
-        "    # behaviour the negative examples show is wrong\n"
+        "if " + negated + ":\n"
+        "    # the region the negative examples show is wrong\n"
         "    raise <exception-from-the-demand>\n"
     )
     return {
         **found,
+        "branch_condition_for_invalid_input": negated,
         "branch": guard.to_dict(),
         "source": source,
         "note": (
