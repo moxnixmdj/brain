@@ -1,0 +1,125 @@
+{
+  "attempts": {
+    "caps": {
+      "blocked": false,
+      "value": "0000000000000000"
+    },
+    "chroot_again": {
+      "blocked": true,
+      "errno": 1,
+      "error": "PermissionError",
+      "message": "[Errno 1] Operation not permitted: '/tmp'"
+    },
+    "dev_mem": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/dev/mem'"
+    },
+    "dns_resolve": {
+      "blocked": true,
+      "errno": -2,
+      "error": "gaierror",
+      "message": "[Errno -2] Name or service not known"
+    },
+    "escape_via_proc_root": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/proc/1/root/etc/hostname'"
+    },
+    "etc_passwd": {
+      "blocked": false,
+      "value": "root:x:0:0:root:/root:/bin/sh\nsandbox:x:1000:1000:sandbox:/work:/bin/sh\n"
+    },
+    "host_home": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/home'"
+    },
+    "host_pids": {
+      "blocked": false,
+      "value": 2
+    },
+    "list_host_dir": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/brain-isolation-canary-bv2cmsde'"
+    },
+    "mount_tmpfs": {
+      "blocked": true,
+      "errno": 1,
+      "error": "PermissionError",
+      "message": "[Errno 1] Operation not permitted"
+    },
+    "proc_one_root_home": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/proc/1/root/home'"
+    },
+    "read_host_canary": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/brain-isolation-canary-bv2cmsde/inside-outside.txt'"
+    },
+    "read_host_proc": {
+      "blocked": false,
+      "value": "/usr/bin/python3\u0000-c\u0000\nimport ctypes, json, os, subprocess, sy"
+    },
+    "tcp_connect": {
+      "blocked": true,
+      "errno": 101,
+      "error": "OSError",
+      "message": "[Errno 101] Network is unreachable"
+    },
+    "udp_connect": {
+      "blocked": true,
+      "errno": 101,
+      "error": "OSError",
+      "message": "[Errno 101] Network is unreachable"
+    },
+    "uid": {
+      "blocked": false,
+      "value": 0
+    },
+    "write_host_path": {
+      "blocked": true,
+      "errno": 2,
+      "error": "FileNotFoundError",
+      "message": "[Errno 2] No such file or directory: '/tmp/brain-isolation-canary-bv2cmsde/written-from-inside.txt'"
+    },
+    "write_readonly_bind": {
+      "blocked": true,
+      "errno": 30,
+      "error": "OSError",
+      "message": "[Errno 30] Read-only file system: '/usr/.escape'"
+    }
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "caps_after_drop": "0000000000000000",
+  "host_canary_written": false,
+  "isolated": true,
+  "reasons": [],
+  "receipt_summary": {
+    "allow_network": false,
+    "caps_dropped": true,
+    "isolated": true,
+    "namespaces": [
+      "user",
+      "mount",
+      "pid",
+      "ipc",
+      "uts",
+      "net"
+    ],
+    "network": "NONE__FRESH_NETNS",
+    "pid_count": 1,
+    "uid_in_sandbox": 0
+  },
+  "schema": "PROJECT_BRAIN_OS_ISOLATION_PROBE_V1",
+  "verdict": "ISOLATED"
+}

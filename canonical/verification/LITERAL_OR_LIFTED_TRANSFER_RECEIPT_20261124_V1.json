@@ -1,0 +1,312 @@
+{
+  "schema": "PROJECT_BRAIN_LITERAL_OR_LIFTED_V1",
+  "goal": "compress the input into out.gz",
+  "isolation": {
+    "verdict": "ISOLATED",
+    "reasons": []
+  },
+  "isolated_run": {
+    "ok": true,
+    "isolated": true,
+    "seconds": 1.371
+  },
+  "result": {
+    "learn": {
+      "seconds": 0.65,
+      "plan": [
+        "run_gzip"
+      ],
+      "status": "PASS__PERFECT_ALGORITHM_RUN",
+      "effect": {
+        "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+        "verdict": "EFFECT_VERIFIED",
+        "reader": "gzip",
+        "reader_argv": [
+          "gzip",
+          "-d",
+          "-c",
+          "out.gz"
+        ],
+        "suffix": "gz",
+        "output": "out.gz",
+        "source": "input.txt",
+        "bytes_decoded": 19,
+        "bytes_source": 19,
+        "bytes_equal_source": true
+      },
+      "rule": {
+        "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+        "kind": "operator",
+        "rule_id": "op-d4f8092a72090198",
+        "goal_family": "compress_to_named_file",
+        "env_kind": "posix_dir",
+        "goal": "compress the input into out.gz",
+        "program": "gzip",
+        "observed_action": "run_gzip",
+        "roles": {
+          "source": "source",
+          "output": "output"
+        },
+        "precondition": {
+          "kind": "source_exists",
+          "role": "source",
+          "description": "the source file named by the goal is a file here"
+        },
+        "effect": {
+          "kind": "roundtrip_equal",
+          "source_role": "source",
+          "output_role": "output",
+          "description": "the machine's own reader for the output's declared format turns it back into exactly the source's bytes"
+        },
+        "output_name": "out.gz",
+        "effect_checked_at_lift": true,
+        "evidence": {
+          "learn_states": 8,
+          "learn_transitions": 27
+        },
+        "refutations": 0
+      }
+    },
+    "conditions": [
+      {
+        "condition": "b",
+        "vocabulary": [
+          "run_gzip",
+          "run_xz",
+          "run_bzip2"
+        ],
+        "source": "report.txt",
+        "literal": {
+          "ok": true,
+          "detail": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "report.txt",
+            "bytes_decoded": 40,
+            "bytes_source": 40,
+            "bytes_equal_source": true
+          }
+        },
+        "lifted": {
+          "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+          "status": "APPLIED__EFFECT_VERIFIED_HERE",
+          "applied": true,
+          "action_used": "run_gzip",
+          "binding": {
+            "bound": "report.txt",
+            "reason": "the only input in this instance",
+            "files": [
+              "out.gz",
+              "report.txt"
+            ]
+          },
+          "search": {
+            "action": "run_gzip",
+            "status": "FOUND",
+            "reason": "the action contains the program's name",
+            "vocabulary_size": 5
+          },
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "report.txt",
+            "bytes_decoded": 40,
+            "bytes_source": 40,
+            "bytes_equal_source": true
+          },
+          "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+          "effect_ok": true
+        },
+        "system": {
+          "seconds": 0.006,
+          "status": "PASS__REPLAY_FROM_MEMORY",
+          "plan": null,
+          "scan_ran": false,
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "report.txt",
+            "bytes_decoded": 40,
+            "bytes_source": 40,
+            "bytes_equal_source": true
+          }
+        }
+      },
+      {
+        "condition": "c",
+        "vocabulary": [
+          "pack_with_gzip",
+          "pack_with_xz",
+          "pack_with_bzip2"
+        ],
+        "source": "input.txt",
+        "literal": {
+          "ok": false,
+          "detail": {
+            "verdict": "NO_ACTION_WITH_THAT_NAME"
+          }
+        },
+        "lifted": {
+          "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+          "status": "APPLIED__EFFECT_VERIFIED_HERE",
+          "applied": true,
+          "action_used": "pack_with_gzip",
+          "binding": {
+            "bound": "input.txt",
+            "reason": "the only input in this instance",
+            "files": [
+              "input.txt"
+            ]
+          },
+          "search": {
+            "action": "pack_with_gzip",
+            "status": "FOUND",
+            "reason": "the action contains the program's name",
+            "vocabulary_size": 5
+          },
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "input.txt",
+            "bytes_decoded": 50,
+            "bytes_source": 50,
+            "bytes_equal_source": true
+          },
+          "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+          "effect_ok": true
+        },
+        "system": {
+          "seconds": 0.009,
+          "status": "PASS__REPLAY_FROM_OPERATOR",
+          "plan": null,
+          "scan_ran": false,
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "input.txt",
+            "bytes_decoded": 50,
+            "bytes_source": 50,
+            "bytes_equal_source": true
+          }
+        }
+      },
+      {
+        "condition": "d",
+        "vocabulary": [
+          "a",
+          "b",
+          "c"
+        ],
+        "source": "input.txt",
+        "literal": {
+          "ok": false,
+          "detail": {
+            "verdict": "NO_ACTION_WITH_THAT_NAME"
+          }
+        },
+        "lifted": {
+          "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+          "status": "REFUSED__NO_ACTION_IN_THIS_ENVIRONMENT_HAS_THAT_PROGRAM",
+          "binding": {
+            "bound": "input.txt",
+            "reason": "the only input in this instance",
+            "files": [
+              "input.txt"
+            ]
+          },
+          "search": {
+            "action": null,
+            "status": "REFUSED__NO_ACTION_IN_THIS_ENVIRONMENT_HAS_THAT_PROGRAM",
+            "reason": "no action in this environment names 'gzip'",
+            "vocabulary_size": 5,
+            "vocabulary_sample": [
+              "a",
+              "b",
+              "c",
+              "copy_input",
+              "copy_to_out"
+            ]
+          },
+          "applied": false,
+          "effect_ok": false
+        },
+        "system": {
+          "seconds": 0.579,
+          "status": "PASS__PERFECT_ALGORITHM_RUN",
+          "plan": [
+            "a"
+          ],
+          "scan_ran": true,
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": "gzip",
+            "reader_argv": [
+              "gzip",
+              "-d",
+              "-c",
+              "out.gz"
+            ],
+            "suffix": "gz",
+            "output": "out.gz",
+            "source": "input.txt",
+            "bytes_decoded": 49,
+            "bytes_source": 49,
+            "bytes_equal_source": true
+          }
+        }
+      }
+    ],
+    "programs": [
+      "gzip",
+      "xz",
+      "bzip2"
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
+}

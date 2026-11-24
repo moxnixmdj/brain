@@ -197,7 +197,8 @@ def evidence_hash(trace: Sequence[Mapping[str, Any]]) -> str:
 
 def scan(env: Any, actions: Sequence[Any], *, budget: int = 60,
          max_depth: int = 6, heuristic: Callable[[Any], float] | None = None,
-         prior: Mapping[str, Any] | None = None, seed: int | None = None) -> dict[str, Any]:
+         prior: Mapping[str, Any] | None = None, seed: int | None = None,
+         goal_check: Callable[[Any], bool] | None = None) -> dict[str, Any]:
     """Observe the environment and record what is known.
 
     This is the first half of "scan everything": the affordance map (every
@@ -207,7 +208,8 @@ def scan(env: Any, actions: Sequence[Any], *, budget: int = 60,
     """
     learned = el.learn_model(env, actions, budget=budget, seed=seed, max_depth=max_depth,
                              heuristic=heuristic, prior=prior,
-                             prior_schema=el.STATE_KEY_SCHEMA if prior else None)
+                             prior_schema=el.STATE_KEY_SCHEMA if prior else None,
+                             goal_check=goal_check)
     return {
         "schema": SCHEMA,
         "learned": learned,
@@ -402,7 +404,8 @@ def generalize(trace: Sequence[Mapping[str, Any]], goal: str,
 def admit(rule: Mapping[str, Any], fresh_instances: Sequence[Any],
           goal_predicate: Callable[[Any], bool],
           *, reset: Callable[[Any], None], act: Callable[[Any, Any], None],
-          state: Callable[[Any], Any]) -> dict[str, Any]:
+          state: Callable[[Any], Any],
+          goal_check: Callable[[Any], bool] | None = None) -> dict[str, Any]:
     """Replay the rule on instances it was not taught on. ADMIT iff at least
     one fresh instance reached the goal; REFINE otherwise; REFUSED if nothing
     was offered. Never persists -- the caller decides to store.
@@ -418,7 +421,10 @@ def admit(rule: Mapping[str, Any], fresh_instances: Sequence[Any],
             plan = list(rule.get("plan_sketch") or [])
             for a in plan:
                 act(inst, a)
-            reached = bool(goal_predicate(state(inst)))
+            # When the caller supplies a live effect check, the verdict is what
+            # the world says, not what a snapshot string looked like.
+            reached = (bool(goal_check(inst)) if goal_check is not None
+                       else bool(goal_predicate(state(inst))))
         except Exception as e:  # noqa: BLE001
             rows.append({"instance_id": i, "verdict": "ERROR", "error": str(e)[:200]})
             continue
@@ -546,7 +552,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         prior: Mapping[str, Any] | None = None,
         local_root: str | pathlib.Path | None = None,
         tools: Sequence[str] | None = None,
-        man_root: str | pathlib.Path | None = None) -> dict[str, Any]:
+        man_root: str | pathlib.Path | None = None,
+        goal_check: Callable[[Any], bool] | None = None,
+        effect_contract: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -610,6 +618,36 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                     "status": "OPEN__REPLAY_ERROR",
                     "error": str(e)[:200],
                     "fallback": "falls_through_full_loop"}
+        # THE SPELLING FAILED. The CONTRACT may still hold: a rule that names a
+        # program and an effect can be bound to this environment's own
+        # vocabulary, executed, and re-verified here. Measured 2026-11-24: a
+        # literal plan sketch transferred on 1 of 2 renamed-vocabulary
+        # instances; a lifted contract transferred on both.
+        operator_rules = [r for r in cached_rules if str(r.get("kind")) == "operator"]
+        if operator_rules and not receipts.get("pass"):
+            from canonical.runtime import lifted_operator_v1 as lifted
+            attempts = []
+            for operator in operator_rules:
+                tried = lifted.apply_rule(operator, env)
+                attempts.append({"rule_id": operator.get("rule_id"),
+                                 "status": tried.get("status"),
+                                 "action_used": tried.get("action_used")})
+                if tried.get("applied"):
+                    receipts["steps"]["memory_replay"] = {
+                        "status": "PASS__REPLAY_FROM_OPERATOR",
+                        "rule_id": operator.get("rule_id"),
+                        "action_used": tried.get("action_used"),
+                        "binding": tried.get("binding"),
+                        "effect": tried.get("effect"),
+                        "attempts": attempts,
+                    }
+                    receipts["status"] = "PASS__REPLAY_FROM_OPERATOR"
+                    receipts["pass"] = True
+                    receipts["outcome"] = "INSTANT_OPERATOR_REBOUND"
+                    receipts["duration_s"] = round(time.time() - started, 4)
+                    return receipts
+            receipts["steps"]["operator_replay"] = {
+                "status": "OPEN__NO_OPERATOR_APPLIED_HERE", "attempts": attempts}
 
     # ---- SCAN (seeded by priors: the same family's learned model) ----
     stored_model = (priors_for(memory, kind) or {}).get("model")
@@ -624,7 +662,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         prior_rows = verified_rows
     try:
         scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
-                           heuristic=heuristic, prior=prior_rows, seed=seed)
+                           heuristic=heuristic, prior=prior_rows, seed=seed,
+                           goal_check=goal_check)
     except ProbeRestoreError:
         receipts["steps"]["scan"] = {"status": "REFUSED__PROBE_RESTORE_FAILED"}
         receipts["status"] = "OPEN__PROBE_RESTORE_FAILED"
@@ -644,13 +683,14 @@ def run(env: Any, goal: str, actions: Sequence[Any],
 
     # ---- RIGHT QUESTION: which action, tried next, most shrinks the unknown? ----
     observations = scan_result["observations"]
-    goal_states_observed = set()
-    for key, obs in observations.items():
-        try:
-            if goal_predicate(obs):
-                goal_states_observed.add(key)
-        except Exception:
-            continue
+    goal_states_observed = set(scan_result["learned"].get("goal_states") or [])
+    if goal_check is None:
+        for key, obs in observations.items():
+            try:
+                if goal_predicate(obs):
+                    goal_states_observed.add(key)
+            except Exception:
+                continue
     try:
         right = right_question(env, scan_result, actions, heuristic=heuristic,
                                goal_states=goal_states_observed)
@@ -664,7 +704,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     receipts["steps"]["right_question"] = right
 
     # ---- PLAN ----
-    plan_out = plan(learned, goal_predicate, observations)
+    plan_out = plan(learned, goal_predicate, observations,
+                    is_goal_key=(lambda k: k in goal_states_observed)
+                    if goal_check is not None else None)
     receipts["steps"]["plan"] = plan_out
 
     if plan_out.get("status") != "PASS__PLAN_COMPUTED":
@@ -789,7 +831,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
             return receipts
     reached = False
     try:
-        reached = bool(goal_predicate(env.state()))
+        reached = bool(goal_check(env)) if goal_check is not None \
+            else bool(goal_predicate(env.state()))
     except Exception:
         reached = False
     receipts["steps"]["act"] = {
@@ -834,7 +877,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     # ---- ADMIT: test on fresh instances it was never taught on ----
     if unseen_instances and fresh_reset and fresh_act and fresh_state:
         admission = admit(gen, unseen_instances, goal_predicate,
-                          reset=fresh_reset, act=fresh_act, state=fresh_state)
+                          reset=fresh_reset, act=fresh_act, state=fresh_state,
+                          goal_check=goal_check)
         receipts["steps"]["admit"] = admission
         persist = admission.get("verdict") == "ADMIT"
     else:
@@ -862,6 +906,36 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         receipts["steps"]["save_priors"] = {"status": "OPEN__PRIORS_SAVE_FAILED",
                                             "error": str(e)[:200]}
         new_memory = memory
+
+    # A verified run that has an explicit effect specification also yields a
+    # CONTRACT: program + roles + a checkable effect. It is saved only when the
+    # effect was verified here, and it is what survives a change of spelling.
+    if reached and goal_check is not None and effect_contract:
+        try:
+            from canonical.runtime import lifted_operator_v1 as lifted
+            operator = lifted.lift(
+                goal=goal, goal_family=family, env_kind=kind,
+                action=(executed or [""])[0],
+                program=None,
+                observation={"root": getattr(env, "root", None)},
+                source_name=str(effect_contract.get("source") or ""),
+                output_name=str(effect_contract.get("output") or ""),
+                evidence={"plan_length": len(cleaned_plan),
+                          "scan_states": scan_result["state_count"]})
+            if operator.get("effect_checked_at_lift"):
+                new_memory = remember(new_memory, operator)
+                receipts["steps"]["lift"] = {"status": "PASS__OPERATOR_LIFTED",
+                                             "rule_id": operator.get("rule_id"),
+                                             "program": operator.get("program")}
+            else:
+                receipts["steps"]["lift"] = {"status": "REFUSED__EFFECT_NOT_CHECKED_AT_LIFT"}
+        except Exception as error:  # noqa: BLE001 - a contract that cannot be lifted is not a fact
+            receipts["steps"]["lift"] = {"status": "OPEN__LIFT_FAILED",
+                                         "error": repr(error)[:200]}
+    else:
+        receipts["steps"]["lift"] = {
+            "status": "NOT_ATTEMPTED",
+            "reason": "an operator needs a goal_check and an effect_contract"}
 
     if persist and gen is not None:
         new_memory = remember(new_memory, gen)

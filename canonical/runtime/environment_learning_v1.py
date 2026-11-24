@@ -158,7 +158,8 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
                 reward: Callable[[Any, Any, Any], float] | None = None,
                 heuristic: Callable[[Any], float] | None = None,
                 prior: Mapping[str, Mapping[str, str]] | None = None,
-                prior_schema: str | None = None
+                prior_schema: str | None = None,
+                goal_check: Callable[[Any], bool] | None = None
                 ) -> dict[str, Any]:
     """Act, watch what changes, and record it. No model of the world is assumed.
 
@@ -189,10 +190,21 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
     trials = 0
     steps = 0
 
+    goal_states: set[str] = set()
+
     def observe() -> str:
         snapshot = env.state()
         key = state_key(snapshot)
         observations.setdefault(key, snapshot)
+        # A goal is an EFFECT in the world, checked while the world is in front
+        # of us. Checking later against a remembered snapshot cannot tell a file
+        # called out.gz from a real gzip of the input -- measured 2026-11-24.
+        if goal_check is not None:
+            try:
+                if goal_check(env):
+                    goal_states.add(key)
+            except Exception:  # noqa: BLE001 - an oracle that raises is not a yes
+                pass
         return key
 
     order = list(actions)
@@ -235,6 +247,8 @@ def learn_model(env: Any, actions: Sequence[Any], *, budget: int = 60,
         "trials": trials,
         "steps": steps,
         "root": reset_key,
+        "goal_states": sorted(goal_states),
+        "goal_check": goal_check is not None,
         "duration_s": round(time.time() - started, 4),
     }
 
@@ -378,7 +392,8 @@ def drive(env: Any, actions: Sequence[Any], *,
           max_depth: int = 6, verify: bool = True,
           heuristic: Callable[[Any], float] | None = None,
           prior: Mapping[str, Mapping[str, str]] | None = None,
-          prior_schema: str | None = None) -> dict[str, Any]:
+          prior_schema: str | None = None,
+          goal_check: Callable[[Any], bool] | None = None) -> dict[str, Any]:
     """Learn an unknown environment and reach the goal in it. Or say why not.
 
     The plan is executed and the goal is CHECKED afterwards. A plan that was
@@ -387,7 +402,7 @@ def drive(env: Any, actions: Sequence[Any], *,
     started = time.time()
     learned = learn_model(env, actions, budget=budget, seed=seed,
                           max_depth=max_depth, heuristic=heuristic, prior=prior,
-                          prior_schema=prior_schema)
+                          prior_schema=prior_schema, goal_check=goal_check)
     if not learned["model"] or learned["transition_count"] == 0:
         return {"schema": SCHEMA, "status": FAIL_NO_MODEL, "pass": False,
                 "learned": learned, "plan": None,
@@ -407,9 +422,13 @@ def drive(env: Any, actions: Sequence[Any], *,
         # to ask "is this the goal?" spends the trial budget asking questions
         # the model can already answer, and on a large environment it spends
         # all of it before learning anything.
+        for key in learned.get("goal_states") or []:
+            goal_states.add(key)
         for key, snapshot in (learned.get("observations") or {}).items():
+            if key in goal_states:
+                continue
             try:
-                if is_goal(snapshot):
+                if goal_check is None and is_goal(snapshot):
                     goal_states.add(key)
             except Exception:
                 continue

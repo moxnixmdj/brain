@@ -1,0 +1,393 @@
+{
+  "schema": "PROJECT_BRAIN_REAL_COMPUTER_LEARNING_V1",
+  "goal": "compress the input into out.gz",
+  "isolation_probe": {
+    "verdict": "ISOLATED",
+    "reasons": [],
+    "caps_after_drop": "0000000000000000"
+  },
+  "stages": [
+    {
+      "tag": "a",
+      "elapsed_s": 0.677,
+      "isolated": true,
+      "refused": null,
+      "payload": {
+        "receipt": {
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "goal": "compress the input into out.gz",
+          "goal_family": "compress_to_named_file",
+          "env_kind": "posix_dir",
+          "memory_refused": null,
+          "steps": {
+            "memory_lookup": {
+              "matches": 0,
+              "rule_ids": []
+            },
+            "scan": {
+              "states_seen": 11,
+              "transitions_seen": 36,
+              "root": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+              "duration_s": 0.5607,
+              "priors_used": 0,
+              "priors_stale_discarded": 0
+            },
+            "right_question": {
+              "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+              "question": "which action most shrinks what is not known? tried next: 'copy_input'",
+              "ranked": [
+                {
+                  "action": "copy_input",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
+                  "action": "copy_to_out",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
+                  "action": "run_bzip2",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
+                  "action": "run_gzip",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
+                  "action": "run_xz",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
+                  "action": "run_zip",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                }
+              ],
+              "best": "copy_input",
+              "best_is_novel": false,
+              "total_states_seen": 11,
+              "total_transitions_known": 36,
+              "goal_states_present_in_model": true,
+              "novel_actions_at_root": 0,
+              "probed_actions": 0,
+              "honest_note": "novelty-only ordering; the heuristic/snapshot is unavailable, so no strongest-possible ordering is claimed"
+            },
+            "plan": {
+              "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+              "status": "PASS__PLAN_COMPUTED",
+              "plan": [
+                "run_gzip"
+              ],
+              "plan_length": 1,
+              "goal_states_observed": 2,
+              "plan_sketch": [
+                "run_gzip"
+              ]
+            },
+            "act": {
+              "status": "PASS__GOAL_VERIFIED_OBSERVED",
+              "executed": [
+                "run_gzip"
+              ],
+              "actions_taken": 1,
+              "reached": true
+            },
+            "learn": {
+              "status": "PASS__GENERALIZED",
+              "rule_id": "ga-aa2b07c65fce5616",
+              "plan_sketch": [
+                "run_gzip"
+              ],
+              "trace_sha256": "978a78e3c24072c9e7c03e31eaeda257a65edc46274ab8c6716bba5a9db7f11f"
+            },
+            "admit": {
+              "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+              "verdict": "ADMIT",
+              "reason": null,
+              "rows": [
+                {
+                  "instance_id": 0,
+                  "verdict": "REACHED"
+                },
+                {
+                  "instance_id": 1,
+                  "verdict": "REACHED"
+                }
+              ],
+              "instance_count": 2,
+              "reached": 2,
+              "authority": "NONE",
+              "persist": true
+            },
+            "save_priors": {
+              "status": "PASS__PRIORS_SAVED",
+              "env_kind": "posix_dir",
+              "states": 11
+            },
+            "lift": {
+              "status": "NOT_ATTEMPTED",
+              "reason": "an operator needs a goal_check and an effect_contract"
+            },
+            "save": {
+              "status": "PASS__SAVED_TO_MEMORY",
+              "rule_id": "ga-aa2b07c65fce5616"
+            }
+          },
+          "authority": "NONE__REAL_EXECUTION_WITH_ADMITTED_OR_UNPERSISTED_RULE",
+          "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+          "memory": {
+            "schema": "PROJECT_BRAIN_PA_MEMORY_V1",
+            "rules": [
+              {
+                "schema": "PROJECT_BRAIN_PA_GENERALIZATION_V1",
+                "rule_id": "ga-aa2b07c65fce5616",
+                "goal_family": "compress_to_named_file",
+                "goal": "compress the input into out.gz",
+                "plan_sketch": [
+                  "run_gzip"
+                ],
+                "plan_length": 1,
+                "env_kind": "posix_dir",
+                "scope": {
+                  "goal_family": "compress_to_named_file",
+                  "env_kind": "posix_dir"
+                },
+                "evidence": {
+                  "trace_sha256": "978a78e3c24072c9e7c03e31eaeda257a65edc46274ab8c6716bba5a9db7f11f",
+                  "trace_length": 1,
+                  "plan_length": 1,
+                  "evidence_extra": {
+                    "scan_states": 11,
+                    "scan_transitions": 36,
+                    "plan_length": 1,
+                    "exploratory_trace_sha256": "1fb780b33c78e1199627be14e5af9ebb3cbbcf9ced9dde6a4741b741abfea928"
+                  }
+                },
+                "created_at": 1795557075.6695166,
+                "action_count": 1
+              }
+            ],
+            "priors": {
+              "posix_dir": {
+                "schema": "PROJECT_BRAIN_PA_PRIOR_V1",
+                "model": {
+                  "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
+                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+                  },
+                  "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4": {
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "copy_to_out": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "copy_input": "el-state-v2:7299ff02941b15e5d4b85528f9d1647f17845a6c1deab96682c58e766f13095f",
+                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b"
+                  },
+                  "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd": {
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
+                    "copy_to_out": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "copy_input": "el-state-v2:750954f1b3a86ba076d290c15818011a4799215f6c13bd6b657af6bb2870a1b4",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
+                  },
+                  "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b": {
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
+                    "copy_input": "el-state-v2:190d892ece0fc93bb5c98215b1508d817b663bd5fe9f909dceecbcda65aeda51",
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "copy_to_out": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b"
+                  },
+                  "el-state-v2:7299ff02941b15e5d4b85528f9d1647f17845a6c1deab96682c58e766f13095f": {},
+                  "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde": {
+                    "copy_to_out": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
+                    "copy_input": "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d",
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
+                  },
+                  "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d": {
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4"
+                  },
+                  "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
+                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
+                    "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
+                    "copy_to_out": "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927"
+                  },
+                  "el-state-v2:190d892ece0fc93bb5c98215b1508d817b663bd5fe9f909dceecbcda65aeda51": {
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd"
+                  },
+                  "el-state-v2:750954f1b3a86ba076d290c15818011a4799215f6c13bd6b657af6bb2870a1b4": {
+                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd"
+                  },
+                  "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927": {
+                    "copy_to_out": "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927"
+                  }
+                },
+                "saved_at": 1795557075.6836667
+              }
+            },
+            "created_at": 1795557075.1002398,
+            "updated_at": 1795557075.6840794
+          },
+          "status": "PASS__PERFECT_ALGORITHM_RUN",
+          "pass": true,
+          "outcome": "LEARNED_AND_VERIFIED",
+          "duration_s": 0.5842,
+          "artifact_truth": {
+            "out_gz_exists": true,
+            "gzip_ok": true,
+            "gzip_matches_input": true,
+            "oracle_verdict": "EFFECT_VERIFIED",
+            "oracle_reader": "gzip"
+          }
+        },
+        "programs": [
+          "gzip",
+          "bzip2",
+          "xz",
+          "zip"
+        ],
+        "listing": [
+          "input.txt",
+          "out.gz"
+        ]
+      }
+    },
+    {
+      "tag": "b",
+      "elapsed_s": 0.093,
+      "isolated": true,
+      "refused": null,
+      "payload": {
+        "receipt": {
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "goal": "compress the input into out.gz",
+          "goal_family": "compress_to_named_file",
+          "env_kind": "posix_dir",
+          "memory_refused": null,
+          "steps": {
+            "memory_lookup": {
+              "matches": 1,
+              "rule_ids": [
+                "ga-aa2b07c65fce5616"
+              ]
+            },
+            "memory_replay": {
+              "status": "PASS__REPLAY_REACHED_GOAL",
+              "rule_id": "ga-aa2b07c65fce5616",
+              "plan_length": [
+                "run_gzip"
+              ]
+            }
+          },
+          "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+          "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+          "status": "PASS__REPLAY_FROM_MEMORY",
+          "pass": true,
+          "outcome": "INSTANT_RECALL",
+          "duration_s": 0.0088,
+          "artifact_truth": {
+            "out_gz_exists": true,
+            "gzip_ok": true,
+            "gzip_matches_input": true,
+            "oracle_verdict": null,
+            "oracle_reader": null
+          }
+        },
+        "programs": [
+          "gzip",
+          "bzip2",
+          "xz",
+          "zip"
+        ],
+        "listing": [
+          "input.txt",
+          "out.gz"
+        ]
+      }
+    },
+    {
+      "tag": "renamed",
+      "elapsed_s": 0.107,
+      "isolated": true,
+      "refused": null,
+      "payload": {
+        "receipt": {
+          "schema": "PROJECT_BRAIN_PERFECT_ALGORITHM_V1",
+          "goal": "compress the input into out.gz",
+          "goal_family": "compress_to_named_file",
+          "env_kind": "posix_dir",
+          "memory_refused": null,
+          "steps": {
+            "memory_lookup": {
+              "matches": 1,
+              "rule_ids": [
+                "ga-aa2b07c65fce5616"
+              ]
+            },
+            "memory_replay": {
+              "status": "PASS__REPLAY_REACHED_GOAL",
+              "rule_id": "ga-aa2b07c65fce5616",
+              "plan_length": [
+                "run_gzip"
+              ]
+            }
+          },
+          "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+          "authority_note": "VERIFIED_REPORT = what was measured, nothing more",
+          "status": "PASS__REPLAY_FROM_MEMORY",
+          "pass": true,
+          "outcome": "INSTANT_RECALL",
+          "duration_s": 0.0113,
+          "artifact_truth": {
+            "out_gz_exists": true,
+            "gzip_ok": false,
+            "gzip_error": "FileNotFoundError",
+            "oracle_verdict": null,
+            "oracle_reader": null
+          }
+        },
+        "programs": [
+          "gzip",
+          "bzip2",
+          "xz",
+          "zip"
+        ],
+        "listing": [
+          "out.gz",
+          "report.txt"
+        ]
+      }
+    }
+  ],
+  "memory": {
+    "path": "/tmp/brain-real-computer-66fuorfx/state/memory.json",
+    "rules": 1,
+    "rule_scopes": [
+      {
+        "env_kind": "posix_dir",
+        "goal_family": "compress_to_named_file"
+      }
+    ],
+    "prior_kinds": [
+      "posix_dir"
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
+}
