@@ -59,3 +59,5 @@ The declared carrier ran on a distinct GitHub Actions OIDC runner in [workflow r
 **Failed.** In reward terms, all three fresh task attempts failed with reward `0.0`. The receipt's `failed=[]` field means only that there were no harness/runtime exceptions; it is not a claim of task success. `truth.achieved=false`; no capability, family, terminal or truth credit is taken. No PR or merge is opened.
 
 **Next loop.** The harness question is answered but the capability question is not. The next smallest undecided relation class is whether a zero-model Brain-owned mechanism can derive task purpose and safe repair content from fresh environment evidence without hidden tests, task-specific answers, borrowed outputs or model calls. Only after verified hard-task success would OSWorld 2.1 and SWE-bench Pro V2 / HARD-51 become executable frontiers.
+
+The final local gate wrapper after the runner receipt passed `ALL_GATES_OK True` with 20 checks, including both OIDC run references and exact receipt/reward-log bindings; no score or credit is taken.
