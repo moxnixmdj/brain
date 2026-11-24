@@ -9567,3 +9567,89 @@ bottleneck. Naming it is the point.
           be reported as a score must not be reported as one.
     (155) Passing the named tests and matching the reference patch are different claims. The
           benchmark scores the first; do not let a green run inflate it into the second.
+
+## §A154 — The step that was mine is now a search, for one of the two shapes
+
+*2026-11-24. Same branch. §A153's bottleneck — "the body was authored while I read the prose" —
+attacked with programme synthesis instead of prose understanding.*
+
+### Why search, and why it is not a step backwards
+
+The frontier answer to prose→code is an LLM, which this system may not call. The classical answer
+is synthesis under a specification. It applies here for a reason worth stating plainly:
+
+**THE TEST IS A FORMAL SPECIFICATION.** A pytest node id returns pass or fail, deterministically,
+for any candidate. That is CEGIS's oracle, and no human had to write a specification language —
+the benchmark shipped one.
+
+The second fact makes it tractable, and I measured it before building: the two derivations in
+§A153, which *looked* like prose understanding, used **17 primitive operations** between them.
+A space that small is enumerable. Prose does not have to be understood if the answer can be found
+and then confirmed.
+
+### The result, measured
+
+| instance | shape | search | tried | outcome |
+|---|---|---|---|---|
+| `ansible-11c1777d` | NEW SYMBOL | **FOUND_AND_CONFIRMED** | 18 of 28 | 1 passed |
+| `ansible-d9f18662` | EDIT | NONE_OF_THE_SPACE | 26 of 26 | not solved by search |
+
+The body the search produced for the first instance, with **every constant derived from the test**
+— bucket names from the expected mapping, the filter token by replaying each candidate token
+against that mapping, and the argv lists from the mock's own `command == [...]` comparisons:
+
+```python
+out = {'ipv4': [], 'ipv6': []}
+for _argv in [['fake/ip', '-4', 'route', 'show', 'table', 'local'],
+              ['fake/ip', '-6', 'route', 'show', 'table', 'local']]:
+    _rc, _out, _err = self.module.run_command(_argv)
+    if _rc != 0:
+        continue
+    for _line in _as_text(_out).splitlines():
+        _words = _line.split()
+        if len(_words) > 1 and _words[0] == 'local':
+            out['ipv6' if ':' in _words[1] else 'ipv4'].append(_words[1])
+return out
+```
+
+I supplied: the owner class, the member name, the parameter list. **Not the body, and not one
+constant in it.** Those three are themselves read by `derive_from_the_failure_v1` in §A153 — the
+failure names the class and member, the call site names the parameter — so in principle the whole
+chain is mechanical. What I have not yet done is join the two modules into one unattended run,
+and I am not going to describe that as done.
+
+### Seven defects found by building it, none by reading it
+
+Every one of these was found because a *measurement* disagreed with the code, and each would have
+produced a confident wrong answer:
+
+1. `"{T}" in template` — substring test on a template containing `{` hijacked every dict-literal
+   shape and corrupted its first line. A hole is a token, not a substring.
+2. Method bodies need **8** spaces of indent, not 4. `render_candidate` defaulted to 4 and every
+   candidate was an `IndentationError` inside a class.
+3. `.strip()` on body lines destroyed loop nesting, so the file could not parse.
+4. `str.replace("arg", name)` turned `_argv` into `_ip_pathv`. Word-boundary substitution only.
+5. `append_member` needs the module-level helper `_as_text`; without it every shape body raises
+   `NameError` and the search reports a space failure that is really a missing import.
+6. `sys.executable` had no `pytest` — the subprocess died and read as a failing test.
+7. Relative `PYTHONPATH` roots resolve against the wrong directory when cwd is the room.
+
+Defect 2 is the instructive one: I "verified" the primitives compiled by checking them at module
+level, where 4 spaces is correct. The code was right and my *test of it* was wrong, which is how a
+harness agrees with itself.
+
+### The boundary, stated rather than smoothed over
+
+The search does **not** solve the EDIT shape. `check_type_dict` exists and its body must be
+replaced by a composite: accept a dict, else JSON, else restricted literal, else `key=value` pairs
+with validation. My space holds single-purpose shapes, and no single shape is that composite. The
+honest reading is that the EDIT class needs a **composition** of shapes, not a bigger flat list —
+the next bottleneck, and the reason the census split 16/52 instead of being one number.
+
+    (156) A hole is a token, not a substring. `"{T}" in template` is true for every dict literal.
+    (157) Verifying a primitive at module level does not verify it where it is installed. The
+          indentation that is correct for a function is wrong for a method, and only the
+          installation site knows which it is.
+    (158) Synthesis solves the shape the specification states outright (a missing member) and
+          fails the shape that requires composing several behaviours (an edit). Report which,
+          because the difference is the next piece of work.
