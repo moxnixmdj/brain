@@ -36,7 +36,8 @@
       "canonical/tests/test_harbor_container_boundary_v1.py",
       "canonical/tests/test_perfect_algorithm_v1.py",
       "canonical/tests/test_perfect_algorithm_probe_restore_v1.py",
-      "canonical/tests/test_harbor_container_solver_transport_v1.py"
+      "canonical/tests/test_harbor_container_solver_transport_v1.py",
+      "canonical/tests/test_harbor_docker_inspect_diagnostic_v1.py"
     ],
     "route_class": "REUSE"
   },
@@ -53,7 +54,15 @@
     "selected_route": "REUSE_HARBOR_EXEC_AND_CONTAINER_LOCAL_WORKER_WITH_PRODUCTION_REFUSAL",
     "verification": "Mocked transport only. Real Docker execution, external verifier and SHA256-bound patch remain open."
   },
-  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal.",
+  "docker_inspect_diagnostic_scope_20261124": {
+    "limits": "Input may be fabricated; inspection is point-in-time; no Harbor exec identity binding, full egress proof, staging, patch, GPU support or verifier integration is established.",
+    "real_outcome": "Conservatively filter a supplied Docker inspect document and enumerate missing authority without dispatching a solver or opening production.",
+    "requested_progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "requested_progress_status": "NOT_ESTABLISHED__NO_REAL_CONTAINER_OR_INDEPENDENT_VERIFIER",
+    "route": "REUSE_DOCKER_HOST_INSPECT_AS_UNTRUSTED_DIAGNOSTIC",
+    "vm_smoke": "A standalone disposable Docker smoke checks a read-only bind and static inspect filter; it is not Harbor, not a solver, not a verifier and has not been run here."
+  },
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution.",
   "governance_change": false,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
@@ -76,7 +85,7 @@
       "Host solver invocation",
       "Unverified fresh-verifier assumption"
     ],
-    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal.",
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution.",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "Reuse Harbor transport",
@@ -148,7 +157,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier."
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox."
     },
     "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
     "required_capability": "Confined execution and independent verification of agent effects",

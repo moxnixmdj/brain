@@ -62,6 +62,43 @@ shown that `solve` returns the expected action envelope or can solve a frontier
 task. Mock response tests do not show that. On this machine Docker, Podman and
 Harbor remain unavailable. No task was executed and no score was earned.
 
+## Docker configuration diagnostic (not admission)
+
+`canonical.runtime.harbor_docker_inspect_diagnostic_v1` conservatively filters
+an externally supplied Docker inspect document for a running, non-privileged,
+no-network container with all capabilities dropped, no extra mounts or
+devices, and one read-only `/opt/brain-ro` bind to an expected host path. It
+rejects GPU/device access and many otherwise legitimate configurations. Harbor's
+pinned CLI exposes Docker Compose mounts via `--mounts` (a JSON array), but a
+writable `upload_dir` or `chmod` is not equivalent to a read-only mount.
+
+The input document and expected ID are supplied by the caller. Even a complete
+static match cannot authenticate Docker, prove the host source is sealed, bind
+the inspected container to Harbor's `environment.exec`, prove future egress
+stays disabled, or establish process quiescence. **It always returns a
+nonzero CLI status and `execution_authorized: false`; the production agent does
+not use it to bypass its refusal.** Its tests are data-only negative controls,
+not a Docker test. More work is still needed for all four requested wiring
+pieces and for the real VM and independent verifier.
+
+A standalone Docker smoke is provided for a disposable Linux VM with Docker
+already installed and usable by the current user (this command performs no
+benchmark and has not been run in this workspace):
+
+```bash
+git clone https://github.com/moxnixmdj/brain.git brain-harbor-smoke
+cd brain-harbor-smoke
+git checkout arena/d582a17b-brain
+bash canonical/tools/harbor_docker_diagnostic_smoke_v1.sh
+```
+
+It pulls `python:3.11-alpine` if needed, prints its resolved image ID, launches
+one disposable no-network container with a temporary fixture bind mounted
+read-only, attempts a write as root and runs the static filter on Docker
+inspect data. The container and fixture are removed on exit. It does not stage
+Brain, send a solver to Harbor, prove ongoing egress isolation, or invoke a
+benchmark verifier.
+
 ## Fixture-only effect expansion
 
 The fixture collector now handles UTF-8, newline-terminated text additions,
