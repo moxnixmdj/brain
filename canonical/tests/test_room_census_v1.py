@@ -25,6 +25,8 @@ from __future__ import annotations
 
 import json
 import pathlib
+import shutil
+import uuid
 import sys
 import textwrap
 
@@ -163,3 +165,129 @@ def test_a_zero_scored_candidate_is_not_offered_as_a_match():
     kept = [r["function"] for r in out["ranked"]]
     assert "profile" in kept, out
     assert "zzz_unrelated" not in kept, kept
+
+
+def test_an_unreadable_room_is_a_limit_not_a_fact(tmp_path):
+    """THE DIFFERENCE THAT MATTERS MOST IN AN ARBITRARY ENVIRONMENT.
+
+    The first census globbed `*.py` only, so a directory holding just `tools.js` reported
+    status SURVEYED with 0 functions -- byte-identical to an EMPTY directory. An empty room is a
+    fact about the world; a room full of code in a language this reader cannot parse is a limit of
+    the reader. A machine that conflates them reports "nothing to learn here" about a place that is
+    full of things to learn, which is the exact failure this whole round exists to remove.
+    """
+    empty = tmp_path / "empty"
+    empty.mkdir()
+    js = tmp_path / "js"
+    js.mkdir()
+    (js / "tools.js").write_text("function f(x){ return x; }\n", encoding="utf-8")
+    (js / "run.sh").write_text("#!/bin/sh\necho hi\n", encoding="utf-8")
+
+    assert RC.survey(str(empty))["status"] == "EMPTY"
+    unread = RC.survey(str(js))
+    assert unread["status"] == "NO_READABLE_SOURCE", unread
+    # and it names what it saw, rather than saying nothing was there
+    assert unread["unreadable_source"] == {".js": 1, ".sh": 1}, unread
+    assert unread["files_read"] == 0
+    assert unread["functions"] == []
+
+    # a python room in the same tree is still SURVEYED -- the distinction does not cost the normal case
+    (js / "tool.py").write_text("def g(y):\n    \"\"\"Return y.\"\"\"\n    return y\n", encoding="utf-8")
+    mixed = RC.survey(str(js))
+    assert mixed["status"] == "SURVEYED"
+    assert [f["function"] for f in mixed["functions"]] == ["g"]
+    assert mixed["unreadable_source"] == {".js": 1, ".sh": 1}
+
+
+def test_the_two_paths_answer_two_different_questions(room):
+    """A room-relative path is what a person there says; the forge needs a repository path.
+
+    Handed the room-relative name, `forge_and_record` resolved nothing and refused with
+    RESEARCH_TOOL_PATH_INVALID and `ran: 0/3` -- which reads like the function being broken. It was
+    not: the same row admitted at 2/3 with 8/8 mutations killed once given the path the importer can
+    actually open. The survey read both, so it records both rather than making a caller reconstruct
+    one from the other.
+    """
+    root = pathlib.Path(__file__).resolve().parents[2]
+    found = RC.survey(str(room))
+    row = {f["function"]: f for f in found["functions"]}["profile"]
+    # what someone standing in the room would say
+    assert row["source_rel"] == "census.py", row
+    # and where the file actually is; tmp_path is outside the repo, so the honest answer is the
+    # room-relative path -- never a fabricated prefix
+    assert row["source_path"], row
+    assert pathlib.Path(row["source_path"]).name == "census.py"
+
+
+def test_the_entry_is_spelled_the_way_the_forge_reads_it(room):
+    """`module` is the bare stem; `source_rel` is a real path. Mixing them up fails confusingly."""
+    found = RC.survey(str(room))
+    row = {f["function"]: f for f in found["functions"]}["profile"]
+    entry = RC.forge_entry(row)
+    assert entry["module"] == "census", entry
+    assert entry["function"] == "profile", entry
+    assert entry["required"] == ["path"], entry
+    assert entry["source_rel"].endswith("census.py"), entry
+    # nothing invented: keywords come from the function's own name and docstring
+    assert "profile" in entry["keywords"], entry
+    assert any("fill" in k or "csv" in k for k in entry["keywords"]), entry
+
+def test_the_whole_loop_on_a_room_nobody_registered(monkeypatch):
+    """THE OWNER'S SENTENCE, AS ONE ASSERTION.
+
+        "scan everything in the environment and then retrieve from his memory what he knows and
+         what he doesn't know"
+
+    A directory the machine has never seen, holding one honest callable and a csv. Survey it, find
+    the gap, demonstrate the function once, then act on the objective WITHOUT NAMING THE FUNCTION --
+    and get the right numbers back. This is the path that, before this module, ended at
+    `document.convert.markdown_pdf.pandoc_weasyprint` and ACTION_FAILED.
+
+    The function is named uniquely per run ON PURPOSE. The forge persists what it admits, so a fixed
+    name is already known on the second run -- the machine remembering across runs is the feature,
+    and a test that assumes amnesia would be testing the wrong thing. A fresh name is also the honest
+    simulation: a new environment does not contain yesterday's function.
+    """
+    root = pathlib.Path(__file__).resolve().parents[2]
+    room = root / "canonical" / "astra_runtime" / "tmp" / "test_room_census_loop"
+    shutil.rmtree(room, ignore_errors=True)
+    room.mkdir(parents=True, exist_ok=True)
+    (room / "__init__.py").write_text("", encoding="utf-8")
+
+    fname = "parcel_count_" + uuid.uuid4().hex[:8]
+    (room / "columnar.py").write_text(
+        '"""Summarise a csv by column."""\n'
+        "import csv\n\n\n"
+        "def %s(path):\n"
+        '    """Count shipped parcels in a logistics manifest file."""\n'
+        "    rows = list(csv.DictReader(open(path)))\n"
+        "    cols = {}\n"
+        "    for name in rows[0]:\n"
+        '        vals = [r.get(name, "") for r in rows]\n'
+        '        filled = sum(1 for v in vals if v.strip())\n'
+        '        cols[name] = {"fill_rate": round(filled / len(vals), 3)}\n'
+        '    return {"columns": cols, "rows": len(rows)}\n' % fname,
+        encoding="utf-8")
+    data = room / "sample.csv"
+    data.write_text("city,q1\nA,1\nB,\n", encoding="utf-8")
+
+    from canonical.runtime import capability_forge_v1 as F, grounded_action_v1 as GA
+    monkeypatch.chdir(root)
+
+    census = RC.survey(str(room))
+    assert census["status"] == "SURVEYED", census
+    assert [f["function"] for f in census["functions"]] == [fname], census
+
+    plan = RC.closing_plan(census, "count shipped parcels in a logistics manifest", list(GA.load_registry()))
+    assert plan["unknown"] >= 1, plan
+    assert fname in [n["function"] for n in plan["need"]], plan
+
+    admitted = F.forge_and_record(RC.forge_entry(census["functions"][0]), root=root,
+                                  seed_cases=[{"path": str(data)}])
+    assert admitted["admitted"] is True, admitted
+
+    acted = GA.act("count shipped parcels in the logistics manifest %s" % data, root=str(root))
+    assert acted.get("status") == "VERIFIED_ACTION", acted
+    assert acted.get("capability_id") == admitted["capability_id"], acted
+    cols = (acted.get("result") or {})["columns"]
+    assert cols["city"]["fill_rate"] == 1.0 and cols["q1"]["fill_rate"] == 0.5, cols

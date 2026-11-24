@@ -121,11 +121,68 @@ def load_registry():
         from canonical.runtime import capability_forge_v1 as FG
         forged = FG.registered()
         for cid, entry in (forged or {}).items():
-            if cid not in caps:
-                caps[cid] = entry
+            if cid in caps:
+                continue
+            # A MEMORY OF A TOOL THAT IS GONE IS NOT A CAPABILITY.
+            #
+            # The forge persists what it admits across runs. That is the point -- the machine keeps
+            # what it learned. But the FILE can change underneath it: measured 2026-11-23, a room was
+            # rewritten with a new function and `act` still selected the previous run's row, which
+            # pointed at a function no longer in the file, and reported
+            # RESEARCH_TOOL_SYMBOL_MISSING instead of doing the work.
+            #
+            # The premise of this whole system is that environments change. A capability survives
+            # only while the world still matches it, so a forged row is offered only while the
+            # function it names is still there. No content hash is consulted: an edited BODY may
+            # still be the same capability, and re-admitting on every edit would forget everything
+            # for no reason. The claim being checked is only the one the row actually makes -- that
+            # this function, in this file, exists.
+            if not _still_real(entry):
+                continue
+            caps[cid] = entry
     except Exception:
         pass
     return caps
+
+
+def _still_real(entry) -> bool:
+    """Is the function this forged row names still where the row says it is?
+
+    Any doubt answers True: an unreadable file, an odd shape, a path outside the repository -- none
+    of them are evidence that the capability is gone, and this check only exists to drop rows the
+    world has clearly contradicted.
+    """
+    try:
+        # THE ROW KEEPS THE PATH IN `provides`, AS `forged.<path>::<function>`.
+        # `source` is inventory provenance (`{"origin": ...}`), not a location, so reading it here
+        # silently answered "no evidence" for every row and the check never fired. Read the fields
+        # the row genuinely carries.
+        entry = entry or {}
+        provided = (entry.get("provides") or [""])[0]
+        cid = entry.get("capability_id") or ""
+        if "::" not in provided:
+            return True
+        src, fn = provided.split("::", 1)
+        src = src[len("forged."):] if src.startswith("forged.") else src
+        fn = fn or cid.rsplit(".", 1)[-1]
+        # A PATH THIS CANNOT READ IS NOT A PATH THAT IS GONE.
+        # Only a real python tool file can be checked against its own contents; anything else (a
+        # bare identifier, a non-source path, a row from another shape) is uninterpretable here,
+        # and uninterpretable answers KEEP. Dropping on doubt would forget working capabilities.
+        if not src.endswith(".py"):
+            return True
+        path = ROOT / src
+        if not path.is_file():
+            return False
+        text = path.read_text(encoding="utf-8", errors="replace")
+        import ast as _ast
+        names = set()
+        for node in _ast.walk(_ast.parse(text)):
+            if isinstance(node, (_ast.FunctionDef, _ast.AsyncFunctionDef)):
+                names.add(node.name)
+        return fn in names
+    except Exception:
+        return True
 
 
 # A capability that reports its own outcome as unresolved or failed cannot

@@ -8701,3 +8701,99 @@ it twice and failing to corrupt it.
     * The census does not know what a function DOES until something runs it. A docstring can lie; a
       demonstration cannot.
     * §6 still NOT MET. No OSWorld task, no SWE-bench instance.
+
+---
+
+## §A146 — a memory that cannot notice the world has changed
+
+§A145 gave the machine a way to see what a room offers. Running it repeatedly on the same room found
+four defects, and two of them are the same defect in two places — **a memory that outlives the thing it
+remembers**, which is precisely the failure this whole project exists to rule out.
+
+### 1. The census could not tell a limit from a fact
+
+The first survey globbed `*.py` only. A directory holding just `tools.js` reported:
+
+    status SURVEYED   files_read 0   functions 0
+
+— byte-identical to an **empty** directory. An empty room is a fact about the world. A room full of
+code in a language this reader cannot parse is a LIMIT of the reader. A machine that conflates them
+says "nothing to learn here" about a place that is full of things to learn. Three states now:
+
+    SURVEYED              python was here and was read
+    NO_READABLE_SOURCE    code is here, in a language this reader cannot parse   <- a LIMIT
+    EMPTY                 nothing source-shaped is here                          <- a FACT
+
+and the survey reports `unreadable_source: {".js": 1, ".sh": 1}` rather than silence.
+
+### 2. A path is not a description
+
+`capability_forge_v1.register` built keywords by tokenising `module + " " + function`, where `module`
+is a **full path**. Every function admitted from one tree therefore carried the keywords
+
+    astra, canonical, census, py, runtime, tmp, unseen
+
+— identical to every other function in that tree, and naming the directory rather than the work.
+Measured: two different tools became indistinguishable and `act` selected the wrong one. Keywords are
+now the function's own name, its docstring, and what it declares:
+
+    before   ['astra','canonical','census','profile','py','runtime','tmp','unseen']
+    after    ['column','csv','fill','numeric','per','profile','rate']
+
+and with that, two real tools in one directory route correctly:
+
+    "profile the columns of a csv"  -> forged.census.profile
+    "first line of a text file"     -> forged.peek.head_of_file
+
+### 3. The loader executed code that was no longer on disk
+
+`research_tool_loader_v1.load_symbol` cached each module in `sys.modules` under a name derived from
+the **path alone**. A file edited after its first load kept running its old code, and a function that
+was plainly on disk was reported `RESEARCH_TOOL_SYMBOL_MISSING`.
+
+Content-addressing the module name was **not enough** — and finding out why is the interesting part.
+Python's source-file loader keys its bytecode cache on the *file*, and tests staleness by (mtime,
+size) at one-second resolution. A file rewritten inside the same second, at the same length, loads its
+**old bytecode under the new module name**:
+
+    first                 -> 1
+    after write (t+0s)    -> 1     <- wrong
+    after rewinding mtime -> 2     <- only then correct
+
+So the loader now `exec`s the source text it has already read and parsed for the effect screen. The
+cache cannot be consulted wrongly if it is not consulted at all.
+
+### 4. A capability for a function that is gone was still offered
+
+The forge persists what it admits, and `load_registry` unioned every persisted row in unconditionally.
+When a directory was rewritten, `act` selected the previous run's row, which pointed at a function no
+longer in the file, and reported a missing symbol instead of doing the work.
+
+A forged row is now offered only while the function it names is still in the file it names. The claim
+being checked is only the one the row actually makes. No content hash is consulted: an edited **body**
+may still be the same capability, and re-admitting on every edit would forget everything for no
+reason. Doubt answers **keep**: an unreadable or odd-shaped row is not evidence of absence.
+
+Measured on six stale rows accumulated by the tests themselves — six loaded before, one after: the
+only one whose function was still on disk.
+
+### Laws
+
+    (123) A limit must never be reported as a fact. "I could not read this" and "there is nothing
+          here" are different sentences, and a system that says the second when it means the first
+          will confidently skip the room it was sent to learn from.
+    (124) Location is not meaning. A path tells you where a tool lives, never what it does; a
+          capability described by its directory is indistinguishable from its neighbours.
+    (125) Never believe a cache about a file you can read. The .pyc answered for a second longer than
+          the source did, and the source lost.
+    (126) A memory outliving its referent is a hallucination with a receipt. Persisting what was
+          learned is the feature; offering it after the tool is gone is the bug, and only checking
+          the world at use time separates them.
+
+### Honest limits
+
+    * The census reads Python only. Other languages are now honestly reported as unreadable, not
+      parsed -- adding a reader is mechanical work this has not done.
+    * `_still_real` checks that the function exists, not that it still behaves. A tool whose body
+      changed is still offered; whether it still works is the verifier's question at run time.
+    * §6 still NOT MET. No OSWorld task, no SWE-bench instance.

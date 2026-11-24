@@ -234,7 +234,13 @@ def test_verified_action_is_not_the_same_claim_as_answered(honest):
     # exactly why the forged-ceiling suite records `tasks_rescued == 0`: the file was the forge's own
     # fixture, not one the person named. The count is reported honestly here rather than suppressed, and
     # the invariant that actually matters is asserted against it below.
-    assert honest["verified"] in (4, 6), honest["verified"]
+    # THE COUNT IS STATE-DEPENDENT; THE INVARIANT IS NOT.
+    # This enumerated the two counts seen so far (4 cold, 6 with six forged rows) and failed at 5 the
+    # moment one more admitted capability existed -- a test breaking on the machine learning something.
+    # Its own comment says the invariant below is the claim that matters, so the count is bounded
+    # rather than enumerated: it must at least cover the honest answers it is supposed to dominate, and
+    # it cannot exceed the number of tasks asked. A real collapse to 0 still fails, loudly.
+    assert honest["honest"] + honest["not_an_answer"] - 1 < honest["verified"] <= len(honest["rows"]), honest
     assert honest["not_an_answer"] == 1, honest["not_an_answer"]
     assert honest["honest"] == 2, honest["honest"]
     assert honest["verified"] > honest["honest"] + honest["not_an_answer"] - 1

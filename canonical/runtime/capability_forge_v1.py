@@ -359,7 +359,14 @@ def forge_and_record(entry, root=None, seed_cases=None) -> dict:
         contract = {"module": src, "function": name, "parameters": params,
                     "required": list(entry.get("required") or []),
                     "optional": [p for p in params
-                                 if p not in (entry.get("required") or [])]}
+                                 if p not in (entry.get("required") or [])],
+                    # WHAT IT IS FOR, CARRIED WITH IT.
+                    # A capability stores only a name and a path today, so two functions in one
+                    # directory look identical to every later selector even when one profiles csvs
+                    # and the other converts PDFs. The census read the docstring; losing it here
+                    # would throw away the only sentence that says what the function is for.
+                    "doc": str(entry.get("doc") or "")[:400],
+                    "declares": list(entry.get("declares") or [])}
         cases = candidate_inputs(params, root,
                                  annotations=signature_of(src, name, root),
                                  source_rel=src, function=name)
@@ -398,8 +405,20 @@ def register(module: str, contract: dict, cases: list[dict],
         "cost": 1,
         "adapter_module": "forged_invoker",
         "entrypoint": "run",
-        "keywords": sorted(set(re.findall(
-            r"[a-z0-9]+", (module + " " + (function or "")).lower()))),
+        # A PATH IS NOT A DESCRIPTION.
+        #
+        # This used to tokenise `module` -- which is a full path like
+        # `canonical/astra_runtime/tmp/unseen/census.py` -- together with the function name, so
+        # every function in one tree carried the keywords `astra, canonical, census, py, runtime,
+        # tmp`: identical, and mostly naming the directory rather than the work. Measured
+        # 2026-11-23, that made two different tools indistinguishable and `act` chose the wrong
+        # one. The words that describe the work are the function's own name, its docstring, and
+        # what it declares; the file's location is kept as a single identifier, not as meaning.
+        "keywords": sorted(set(
+            re.findall(r"[a-z0-9]+", (function or "").replace("_", " ").lower())
+            + re.findall(r"[a-z0-9]+", str(contract.get("doc") or "").lower())
+            + [str(d).lower() for d in (contract.get("declares") or [])]
+        )) or [stem.lower()],
         # Forged capabilities declare nothing about shared effects:
         # inventing an effect would let them chain on claims nobody made.
         "provides": ["forged." + module + ("::" + function if function else "")],

@@ -51,6 +51,11 @@ SCHEMA = "PROJECT_BRAIN_ROOM_CENSUS_V1"
 # Reading a room has to be the cheap part. These are the bounds, not a policy:
 MAX_FILES = 400
 MAX_FUNCTIONS = 2500
+# Source-shaped files, whether or not this reader can parse them. Membership here is what lets the
+# survey say "code is present but unreadable" instead of "nothing is here".
+_SOURCE_SUFFIXES = frozenset({".py", ".js", ".mjs", ".cjs", ".ts", ".tsx", ".jsx", ".rb",
+                              ".go", ".rs", ".java", ".c", ".h", ".cpp", ".cc", ".sh", ".bash",
+                              ".zsh", ".lua", ".php", ".pl", ".r", ".jl", ".swift", ".kt"})
 SKIP_DIRS = frozenset({".git", "__pycache__", "node_modules", ".venv", "venv", ".tox",
                        ".pytest_cache", ".mypy_cache", "build", "dist", ".ruff_cache",
                        "site-packages", ".arena", "out", "target"})
@@ -102,6 +107,22 @@ def _signature(node: ast.AST) -> dict[str, Any]:
             "annotations": annotations}
 
 
+def _repo_relative(path: pathlib.Path, base: pathlib.Path) -> str:
+    """The file's path as a tool runner sees it, when that is knowable; else its room path.
+
+    Never invents a prefix. If the room is not inside the working directory, there is no honest
+    repository-relative answer, and the room-relative path is returned unchanged for a caller to
+    resolve or refuse.
+    """
+    try:
+        return str(path.resolve().relative_to(pathlib.Path.cwd().resolve()))
+    except Exception:
+        try:
+            return str(path.relative_to(base))
+        except Exception:
+            return str(path)
+
+
 def _safe_parse(path: pathlib.Path) -> ast.AST | None:
     """Parse without importing. Anything unreadable is skipped, not guessed at."""
     try:
@@ -137,7 +158,16 @@ def functions_in(path: pathlib.Path, root: pathlib.Path) -> list[dict]:
         text = " ".join(x for x in (node.name.replace("_", " "), doc) if x)
         out.append({
             "function": node.name,
+            # TWO PATHS, BECAUSE THEY ANSWER TWO DIFFERENT QUESTIONS.
+            # `source_rel` is the file's location IN THE ROOM -- what a person standing there would
+            # say, and what a gap report should show. `source_path` is the same file relative to the
+            # repository, which is what `capability_forge_v1` needs to import it (handed the room-
+            # relative name it resolved nothing and refused with RESEARCH_TOOL_PATH_INVALID,
+            # measured 2026-11-23). Deriving one from the other is only possible if the room sits
+            # under the repository, which is exactly the case a survey cannot assume -- so the
+            # survey records what it read rather than leaving a caller to reconstruct it.
             "source_rel": rel,
+            "source_path": _repo_relative(path, root),
             "line": getattr(node, "lineno", 0),
             "params": sig["params"],
             "required": sig["required"],
@@ -166,7 +196,19 @@ def survey(root: Any, max_files: int = MAX_FILES,
                 "functions": [], "files_read": 0, "files_skipped": 0}
     files: list[pathlib.Path] = []
     skipped = 0
-    for path in sorted(base.rglob("*.py")):
+    # WHAT KINDS OF SOURCE ARE HERE AT ALL.
+    #
+    # Reading only `*.py` made this census unable to tell two completely different rooms apart:
+    # measured 2026-11-23, a directory holding only `tools.js` reported status SURVEYED with 0
+    # functions -- identical to an EMPTY directory. An empty room is a fact; a room of code this
+    # reader cannot parse is a LIMIT, and a caller that cannot distinguish them will confidently
+    # report "nothing to learn here" about a place full of things to learn.
+    #
+    # So the survey reports what source kinds it saw and whether it could read them. Python is what
+    # this census can turn into callables today; the rest is stated rather than hidden.
+    _READABLE_SUFFIXES = {".py"}
+    seen_suffixes: dict[str, int] = {}
+    for path in sorted(base.rglob("*")):
         if len(files) >= max_files:
             break
         try:
@@ -176,18 +218,41 @@ def survey(root: Any, max_files: int = MAX_FILES,
         if any(p in SKIP_DIRS or p.startswith(".") for p in rel_parts[:-1]):
             skipped += 1
             continue
+        if not path.is_file():
+            continue
+        suf = path.suffix.lower()
+        if suf in _SOURCE_SUFFIXES:
+            seen_suffixes[suf] = seen_suffixes.get(suf, 0) + 1
+        if suf not in _READABLE_SUFFIXES:
+            continue
         files.append(path)
     found: list[dict] = []
     for path in files:
         if len(found) >= max_functions:
             break
         found.extend(functions_in(path, base))
+    # THE STATUS MUST SEPARATE THREE DIFFERENT ROOMS:
+    #   SURVEYED                   python was here and was read
+    #   NO_READABLE_SOURCE         code is here, in a language this reader cannot parse -- a LIMIT
+    #   EMPTY                      nothing source-shaped is here -- a FACT
+    # Conflating the last two is how a machine reports "nothing to learn" about a room it simply
+    # could not read.
+    unreadable = {k: v for k, v in seen_suffixes.items() if k not in _READABLE_SUFFIXES}
+    if files:
+        status = "SURVEYED"
+    elif unreadable:
+        status = "NO_READABLE_SOURCE"
+    else:
+        status = "EMPTY"
     return {
         "schema": SCHEMA,
         "root": str(base),
-        "status": "SURVEYED",
+        "status": status,
         "files_read": len(files),
         "files_skipped": skipped,
+        "source_seen": seen_suffixes,
+        "unreadable_source": unreadable,
+        "readable_source": sorted(_READABLE_SUFFIXES),
         "functions": found[:max_functions],
         "truncated": len(found) > max_functions,
         "note": ("Read from source: no import, no execution, no admission. "
@@ -286,3 +351,37 @@ def closing_plan(census: dict, objective: str, known_ids=(), limit: int = 4) -> 
             "relevance_scope": ranked.get("relevance_scope"),
             "semantic_entailment_status": ranked.get("semantic_entailment_status"),
             "need": need}
+
+
+def forge_entry(row: dict, keywords=None, provides=None, declares=None) -> dict:
+    """Turn a census row into the `entry` dict `capability_forge_v1` consumes.
+
+    WHY THIS EXISTS: THE TWO FIELDS ARE EASY TO GET WRONG, AND GETTING THEM WRONG LOOKS LIKE A BAD TOOL.
+
+    Measured 2026-11-23: `forge_and_record` wants `module` to be the bare stem (`census`) and
+    `source_rel` to be the repository path (`.../census.py`). Passing a dotted module name in `module`
+    -- the obvious thing to write -- produced `RESEARCH_TOOL_PATH_INVALID` and `ran: 0/3`, which reads
+    like the function being broken. It was not: the same row admitted at 2/3, 8/8 mutations killed,
+    once spelled correctly.
+
+    The census already knows both values, so it should not make every caller rediscover which one
+    goes where. This is a spelling of a dict, not a decision: admission is still the forge's, and it
+    still runs the function, twice, and tries to corrupt it.
+    """
+    rel = str(row.get("source_path") or row.get("source_rel") or "")
+    stem = pathlib.PurePosixPath(rel).stem if rel else str(row.get("function") or "")
+    words = [w for w in (keywords or []) if w]
+    if not words:
+        # the function's own name and docstring are what it says it is for; nothing is invented
+        words = [w.lower() for w in str(row.get("function") or "").replace("_", " ").split()]
+        words += [w.lower() for w in (row.get("doc") or "").split() if len(w) > 3][:12]
+    return {
+        "module": stem,
+        "function": str(row.get("function") or ""),
+        "source_rel": rel,
+        "params": list(row.get("params") or []),
+        "required": list(row.get("required") or []),
+        "provides": list(provides or []) or ["forged." + stem + "::" + str(row.get("function") or "")],
+        "declares": list(declares or []),
+        "keywords": sorted(set(words)),
+    }

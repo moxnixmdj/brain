@@ -116,10 +116,23 @@ def load_symbol(root: Any, rel: str, name: str, allow_import_effects: bool = Fal
     same refusal at runtime (brain_module_invoke_runner_v1's audit hook); everyone else keeps the
     static screen."""
     path = resolve(root, rel)
-    effects = [] if allow_import_effects else import_time_effects(ast.parse(path.read_text(encoding="utf-8")))
+    source = path.read_text(encoding="utf-8")
+    effects = [] if allow_import_effects else import_time_effects(ast.parse(source))
     if effects:
         raise ResearchToolUnsafe("RESEARCH_TOOL_IMPORT_TIME_EFFECTS:" + rel + ":" + effects[0])
-    module_name = "project_brain_research_tool_" + hashlib.sha256(str(path).encode()).hexdigest()[:16]
+    # THE CACHE KEY MUST INCLUDE THE CONTENT, NOT JUST THE LOCATION.
+    #
+    # This keyed the module on the path alone and kept it in `sys.modules` forever, so a file that
+    # CHANGED after its first load kept executing its old code. Measured 2026-11-23: a corrected
+    # tool was still being run from a stale cached module and failed with
+    # RESEARCH_TOOL_SYMBOL_MISSING for a function that was on disk. That is the exact failure this
+    # project exists to rule out -- the premise is that environments change and the machine must
+    # notice, and a cache that cannot see a change will happily repeat a memory of a file that is
+    # gone. Content-addressing the module name makes the old module a different object from the new
+    # one, so nothing has to be invalidated: a new source simply has no cached entry yet.
+    module_name = ("project_brain_research_tool_"
+                   + hashlib.sha256((str(path) + "\x00"
+                                     + hashlib.sha256(source.encode()).hexdigest()).encode()).hexdigest()[:16])
     module = sys.modules.get(module_name)
     if module is None:
         spec = importlib.util.spec_from_file_location(module_name, path)
@@ -128,7 +141,18 @@ def load_symbol(root: Any, rel: str, name: str, allow_import_effects: bool = Fal
         module = importlib.util.module_from_spec(spec)
         sys.modules[module_name] = module
         try:
-            spec.loader.exec_module(module)
+            # COMPILE THE BYTES WE JUST READ, NOT WHATEVER A .pyc REMEMBERS.
+            #
+            # Content-addressing the module NAME was not enough. Python's source-file loader keys
+            # its bytecode cache on the FILE, and its staleness test is (mtime, size) at
+            # one-second resolution -- so a file rewritten inside the same second, with the same
+            # length, loads its old bytecode under the NEW module name. Measured 2026-11-23: a tool
+            # returning {'v': 1} still returned {'v': 1} after the file was changed to return
+            # {'v': 2}, under a fresh module name and a fresh content hash.
+            #
+            # Executing the source text directly removes the cache from the question entirely. The
+            # file is already read and parsed above for the effect screen, so this costs nothing.
+            exec(compile(source, str(path), "exec"), module.__dict__)
         except BaseException:
             sys.modules.pop(module_name, None)
             raise
