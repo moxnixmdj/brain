@@ -1,0 +1,101 @@
+{
+  "date": "2026-11-24",
+  "exact_source_bindings": {
+    ".github/workflows/zero-model-raw-instruction-purpose-v1.yml": {
+      "git_blob_sha": "8886f4e6e44a438ce60f25d78508b794cf1722d9",
+      "sha256": "7d6c8fbc78825f3f8afa1a6ee0053f56d8818b7186c9d142e561bf79d9944ae6"
+    },
+    "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": {
+      "git_blob_sha": "4f4525e878f613133b7b377d55578c7c0f3bec49",
+      "sha256": "9d733bd875d3012893096f520d5a8aa5744272ee64c699fee7280d2a9ce37b64"
+    },
+    "canonical/harbor/raw_instruction_purpose_agent_v1.py": {
+      "git_blob_sha": "00f2f3a57979ed81fe9eadee2501da7a6c15fe01",
+      "sha256": "19a36977629b2cda0bcf8e7158f2bf5d15ef151a028650511cbf6e99910299b4"
+    },
+    "canonical/harbor/raw_instruction_purpose_policy_v1.py": {
+      "git_blob_sha": "e7eaf0cbeda2b6938f7d3aeb5029906496f0a96e",
+      "sha256": "58b35e8a6c7aa9661332051c0d2c1378ac4fda77e4985a846c75210e74ad42cd"
+    },
+    "canonical/harbor/select_tb41_cpu_tasks_v1.py": {
+      "git_blob_sha": "25226ae2ee11eb4888197d3f779badea3e68184b",
+      "sha256": "190a5786c41b3f6470228013e57943fcc4984a2205c8f71296ca9e66d176f4c9"
+    },
+    "canonical/runtime/goal_directed_sufficient_knowing_v1.py": {
+      "git_blob_sha": "e64204cffb1a7ae5043a77c1be153687fd63371e",
+      "sha256": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f"
+    },
+    "canonical/runtime/raw_instruction_purpose_binder_v1.py": {
+      "git_blob_sha": "404d97482eae75fc48b88de7c29841dc20e4bd86",
+      "sha256": "ef2f8e239142ed08d23985b7582b481f66b54c6658a84c1d72b85e6c1e3d389a"
+    },
+    "canonical/tests/test_raw_instruction_purpose_binder_v1.py": {
+      "git_blob_sha": "3f9797f699e0e0c1c0d78e5c7efbb7b9cd4a11ed",
+      "sha256": "f35a8dbdf9235e93d83450bdf14b813594d1e6802a65855f0fd515bc4ce32723"
+    },
+    "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": {
+      "git_blob_sha": "21ed2a90d7c2ee5e659ee9a57bff6cefc3a53a68",
+      "sha256": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
+    },
+    "canonical/verification/check_raw_instruction_purpose_workflow_v1.py": {
+      "git_blob_sha": "0a1380e622053d6f98df6b1bdc9d943a6c13888f",
+      "sha256": "b33b1e67f2cf671da856902e6db009fd38cabb435d51fc5c9e8530ac900d2ce1"
+    }
+  },
+  "measurements": {
+    "benchmark_score_authority": false,
+    "binder_contract_tests": 13,
+    "borrowed_outputs": false,
+    "combined_contract_tests": 21,
+    "exact_evpi_basis": "EXACT_EVPI",
+    "external_template_store_templates": 2,
+    "finite_replay_measurement_checks": 20,
+    "finite_workflow_python_blocks": 10,
+    "harbor_policy_contract_tests": 8,
+    "hard_benchmark_tasks_consumed_local": 0,
+    "hidden_test_reading": false,
+    "knowledge_written_to_weights": 0,
+    "parameters_written": 0,
+    "pre_runner_gate_checks": 20,
+    "pre_runner_gates_all_ok": true,
+    "raw_benchmark_tasks_in_workspace": 0,
+    "runtime_model_calls": 0,
+    "runtime_network_calls": 0,
+    "selected_queries": 1
+  },
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "rule": "LOCAL_MEASUREMENT_IS_NOT_INDEPENDENT_VERIFICATION__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+  "runner_receipt": {
+    "finite_receipt_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1.json",
+    "hard_receipt_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json",
+    "no_fabricated_runner_receipt": true,
+    "reward_log_path": "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json",
+    "status": "PENDING_DISTINCT_OIDC_FINITE_REPLAY_AND_HARD_FALSIFIER",
+    "workflow_run_id": null
+  },
+  "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_LOCAL_MEASUREMENT_20261124_V1",
+  "scope": "FINITE_RAW_INSTRUCTION_PURPOSE_BINDER_V1_AND_FRESH_TB41_CPU_HARD_FALSIFIER_CARRIER",
+  "selected_route": "COMPOSE_EXISTING_FINITE_TYPED_PURPOSE_GRAMMAR_GOAL_DIRECTED_EXACT_EVPI_KERNEL_EXTERNAL_EDITABLE_STORE_OIDC_REPLAY_AND_FRESH_TB41_HARD_FALSIFIER_V1",
+  "status": "PRODUCER_LOCAL_TESTS_FROZEN_BLOCK_REPLAY_AND_20_PRE_RUNNER_GATES_PASS__DISTINCT_FINITE_OIDC_AND_HARD_FALSIFIER_PENDING__ZERO_CREDIT",
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "workflow": {
+    "git_blob_sha": "8886f4e6e44a438ce60f25d78508b794cf1722d9",
+    "jobs": [
+      "contract_replay",
+      "hard_benchmark_attempt"
+    ],
+    "path": ".github/workflows/zero-model-raw-instruction-purpose-v1.yml",
+    "python_blocks": 10,
+    "sha256": "7d6c8fbc78825f3f8afa1a6ee0053f56d8818b7186c9d142e561bf79d9944ae6"
+  },
+  "workflow_checker": {
+    "expected_git_blobs": 6,
+    "expected_sha256_digests": 8,
+    "git_blob_sha": "0a1380e622053d6f98df6b1bdc9d943a6c13888f",
+    "path": "canonical/verification/check_raw_instruction_purpose_workflow_v1.py",
+    "sha256": "b33b1e67f2cf671da856902e6db009fd38cabb435d51fc5c9e8530ac900d2ce1"
+  }
+}

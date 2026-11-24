@@ -1,0 +1,217 @@
+{
+  "external_editable": true,
+  "facts_or_skills_in_parameters": false,
+  "schema": "BRAIN_EXTERNAL_PURPOSE_TEMPLATE_STORE_V1",
+  "templates": [
+    {
+      "binding_defaults": {
+        "action_universe_complete": true,
+        "distinct_from_producer": true,
+        "distinct_verifier": {
+          "evidence_ref": "harbor-official-verifier",
+          "falsifier": "official bounded state check differs from the typed success predicate",
+          "scope": {
+            "bounded_enumerated": true,
+            "closed_world": true
+          },
+          "source": "DISTINCT_VERIFIER"
+        },
+        "domain": "software_repository",
+        "environment_evidence": {
+          "evidence_ref": "bounded-file-name-scan",
+          "falsifier": "file-name scan omits a visible atom or includes a forbidden hidden path",
+          "scope": {
+            "bounded_enumerated": true,
+            "closed_world": true
+          },
+          "source": "BOUNDED_ENVIRONMENT_SCAN"
+        },
+        "hypothesis_model": [
+          {
+            "id": "v_safe",
+            "probability": 0.5,
+            "utilities": {
+              "A1": 1.0,
+              "A2": 0.0
+            }
+          },
+          {
+            "id": "v_unsafe",
+            "probability": 0.5,
+            "utilities": {
+              "A1": 0.0,
+              "A2": 1.0
+            }
+          }
+        ],
+        "query_cost": 0.0,
+        "schema": "BRAIN_TYPED_PURPOSE_BINDING_REQUEST_V1",
+        "unknown_evidence": {
+          "decision_relevant": true,
+          "evidence_ref": "bounded-file-name-scan",
+          "falsifier": "target path presence changes the decision-relevant action ordering",
+          "label": "K1_SCOPED_FACT",
+          "source": {
+            "evidence_ref": "bounded-file-name-scan",
+            "falsifier": "target path presence changes the decision-relevant action ordering",
+            "scope": {
+              "bounded_enumerated": true,
+              "closed_world": true
+            },
+            "source": "BOUNDED_ENVIRONMENT_SCAN"
+          }
+        }
+      },
+      "goal_family": "CREATE_FILE",
+      "instruction_patterns": [
+        "^\\s*(?:Create|Write|Make a file at)\\s+`(?P<path>[^`]+)`\\s+(?:with|containing)\\s+(?:the exact literal\\s+)?`(?P<literal>[^`]+)`[.!?]?(?:\\s+.*)?\\s*$"
+      ],
+      "observation_rule": {
+        "fact_source": "BOUNDED_ENVIRONMENT_SCAN",
+        "target_slot": "path",
+        "unknown": "u_test_command",
+        "value_when_target_absent": "v_safe",
+        "value_when_target_present": "v_unsafe"
+      },
+      "output_actions": [
+        {
+          "command_template": "printf '%s' '{{literal}}' > {{path}}",
+          "id": "A1",
+          "requires_unknown": "u_test_command",
+          "requires_value": "v_safe"
+        },
+        {
+          "command_template": "printf '%s' '{{literal}}' > {{path}}.candidate",
+          "id": "A2",
+          "requires_unknown": "u_test_command",
+          "requires_value": "v_unsafe"
+        }
+      ],
+      "required_slots": [
+        "path",
+        "literal"
+      ],
+      "success_predicate": {
+        "checks": [
+          "target path exists",
+          "target content equals the quoted literal",
+          "no other visible scan atom changes"
+        ],
+        "kind": "BOUNDED_EXACT_STATE"
+      },
+      "template_id": "create_literal_file",
+      "uncertainty": {
+        "unknown": "u_test_command",
+        "values": [
+          "v_safe",
+          "v_unsafe"
+        ]
+      }
+    },
+    {
+      "binding_defaults": {
+        "action_universe_complete": true,
+        "distinct_from_producer": true,
+        "distinct_verifier": {
+          "evidence_ref": "harbor-official-verifier",
+          "falsifier": "official bounded state check differs from the typed success predicate",
+          "scope": {
+            "bounded_enumerated": true,
+            "closed_world": true
+          },
+          "source": "DISTINCT_VERIFIER"
+        },
+        "domain": "software_repository",
+        "environment_evidence": {
+          "evidence_ref": "bounded-file-name-scan",
+          "falsifier": "file-name scan omits a visible atom or includes a forbidden hidden path",
+          "scope": {
+            "bounded_enumerated": true,
+            "closed_world": true
+          },
+          "source": "BOUNDED_ENVIRONMENT_SCAN"
+        },
+        "hypothesis_model": [
+          {
+            "id": "v_safe",
+            "probability": 0.5,
+            "utilities": {
+              "C1": 1.0,
+              "C2": 0.0
+            }
+          },
+          {
+            "id": "v_unsafe",
+            "probability": 0.5,
+            "utilities": {
+              "C1": 0.0,
+              "C2": 1.0
+            }
+          }
+        ],
+        "query_cost": 0.0,
+        "schema": "BRAIN_TYPED_PURPOSE_BINDING_REQUEST_V1",
+        "unknown_evidence": {
+          "decision_relevant": true,
+          "evidence_ref": "bounded-file-name-scan",
+          "falsifier": "target path presence changes the decision-relevant action ordering",
+          "label": "K1_SCOPED_FACT",
+          "source": {
+            "evidence_ref": "bounded-file-name-scan",
+            "falsifier": "target path presence changes the decision-relevant action ordering",
+            "scope": {
+              "bounded_enumerated": true,
+              "closed_world": true
+            },
+            "source": "BOUNDED_ENVIRONMENT_SCAN"
+          }
+        }
+      },
+      "goal_family": "COPY_FILE",
+      "instruction_patterns": [
+        "^\\s*Copy\\s+`(?P<literal>[^`]+)`\\s+to\\s+`(?P<path>[^`]+)`[.!?]?(?:\\s+.*)?\\s*$"
+      ],
+      "observation_rule": {
+        "fact_source": "BOUNDED_ENVIRONMENT_SCAN",
+        "target_slot": "path",
+        "unknown": "u_test_command",
+        "value_when_target_absent": "v_safe",
+        "value_when_target_present": "v_unsafe"
+      },
+      "output_actions": [
+        {
+          "command_template": "cp -f {{literal}} {{path}}",
+          "id": "C1",
+          "requires_unknown": "u_test_command",
+          "requires_value": "v_safe"
+        },
+        {
+          "command_template": "cp -f {{literal}} {{path}}.candidate",
+          "id": "C2",
+          "requires_unknown": "u_test_command",
+          "requires_value": "v_unsafe"
+        }
+      ],
+      "required_slots": [
+        "path",
+        "literal"
+      ],
+      "success_predicate": {
+        "checks": [
+          "target path exists",
+          "target bytes equal the quoted source path bytes",
+          "no other visible scan atom changes"
+        ],
+        "kind": "BOUNDED_EXACT_STATE"
+      },
+      "template_id": "copy_visible_file",
+      "uncertainty": {
+        "unknown": "u_test_command",
+        "values": [
+          "v_safe",
+          "v_unsafe"
+        ]
+      }
+    }
+  ]
+}

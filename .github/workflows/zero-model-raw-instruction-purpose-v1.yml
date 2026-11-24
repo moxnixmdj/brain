@@ -1,0 +1,901 @@
+name: Zero-model raw-instruction purpose bridge and hard falsifier
+
+# WHY THIS WORKFLOW EXISTS
+#
+# Iteration 14 composes one finite raw-instruction purpose binder, one external
+# editable finite template grammar, the exact-EVPI goal-directed sufficient-
+# knowing kernel, a Brain-owned zero-model Harbor adapter and the existing
+# run-id-seeded Terminal-Bench 4.1 selector. Job 1 is a distinct OIDC-attested
+# finite replay with exact Git blob/SHA-256 bindings, stdlib-only import audit,
+# 21 contract tests, one CLI binding, one exact-EVPI composition, external-store
+# removal and zero model/network/parameter writes. Job 2 needs job 1, then runs
+# fresh unseen CPU-only hard tasks through official Harbor and records runner-
+# owned reward diagnostics. The runner lands both receipts and the reward log;
+# the producer never writes the authoritative receipts. No hidden test,
+# solution, verifier output, borrowed answer, raw task body, aggregate score,
+# capability credit, PR, merge, section 6 verification or terminal truth change
+# is made.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/zero-model-raw-instruction-purpose-v1.yml"
+      - "canonical/runtime/raw_instruction_purpose_binder_v1.py"
+      - "canonical/harbor/raw_instruction_purpose_policy_v1.py"
+      - "canonical/harbor/raw_instruction_purpose_agent_v1.py"
+      - "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json"
+      - "canonical/tests/test_raw_instruction_purpose_binder_v1.py"
+      - "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py"
+      - "canonical/verification/check_raw_instruction_purpose_workflow_v1.py"
+  workflow_dispatch:
+
+concurrency:
+  group: zero-model-raw-instruction-purpose-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+  HARBOR_VERSION: "0.27.0"
+  TB_TAG: "v4.1.0"
+  TB_SOURCE_SHA: "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440"
+  PREBUILT_MANIFEST_SHA256: "49a2b9ce70dbbb957f3eaf74c737ccb8c6d68b3167d4ccfb5c58762a9726b289"
+  PREBUILT_TAR_SHA256: "c8bc0fea10af116061069248595c820d6da927652df1049ec834c6d98a6c12aa"
+  AGENT_IMPORT_PATH: "canonical.harbor.raw_instruction_purpose_agent_v1:RawInstructionPurposeAgent"
+  TASK_COUNT: "3"
+  JOB_NAME: "brain-raw-instruction-purpose-tb41-cpu"
+  FINITE_RECEIPT: "RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1.json"
+  HARD_RECEIPT: "RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json"
+  REWARD_LOG: "RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json"
+
+jobs:
+  contract_replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Bind exact frozen blobs and audit the zero-model source surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          expected_git_blob = {
+            "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "4f4525e878f613133b7b377d55578c7c0f3bec49",
+            "canonical/harbor/raw_instruction_purpose_agent_v1.py": "00f2f3a57979ed81fe9eadee2501da7a6c15fe01",
+            "canonical/harbor/raw_instruction_purpose_policy_v1.py": "e7eaf0cbeda2b6938f7d3aeb5029906496f0a96e",
+            "canonical/runtime/raw_instruction_purpose_binder_v1.py": "404d97482eae75fc48b88de7c29841dc20e4bd86",
+            "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "3f9797f699e0e0c1c0d78e5c7efbb7b9cd4a11ed",
+            "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "21ed2a90d7c2ee5e659ee9a57bff6cefc3a53a68"
+          }
+          expected_sha256 = {
+            "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "9d733bd875d3012893096f520d5a8aa5744272ee64c699fee7280d2a9ce37b64",
+            "canonical/harbor/raw_instruction_purpose_agent_v1.py": "19a36977629b2cda0bcf8e7158f2bf5d15ef151a028650511cbf6e99910299b4",
+            "canonical/harbor/raw_instruction_purpose_policy_v1.py": "58b35e8a6c7aa9661332051c0d2c1378ac4fda77e4985a846c75210e74ad42cd",
+            "canonical/runtime/raw_instruction_purpose_binder_v1.py": "ef2f8e239142ed08d23985b7582b481f66b54c6658a84c1d72b85e6c1e3d389a",
+            "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "f35a8dbdf9235e93d83450bdf14b813594d1e6802a65855f0fd515bc4ce32723",
+            "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
+          }
+          observed_git_blob = {p: subprocess.check_output(["git", "hash-object", p], cwd=root, text=True).strip() for p in expected_git_blob}
+          observed_sha256 = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in expected_sha256}
+          if observed_git_blob != expected_git_blob or observed_sha256 != expected_sha256:
+              raise SystemExit("EXACT_BLOB_BINDING_FAIL " + json.dumps({"expected_git_blob": expected_git_blob, "observed_git_blob": observed_git_blob, "expected_sha256": expected_sha256, "observed_sha256": observed_sha256}, sort_keys=True))
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess", "huggingface_hub", "docker", "yaml", "selenium", "playwright", "intake"}
+          audits = {}
+          marked_all = []
+          for rel in expected_git_blob:
+              if not rel.endswith(".py"):
+                  continue
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"), filename=rel)
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name.split(".")[0] for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module.split(".")[0])
+              marked = sorted(mods & forbidden)
+              audits[rel] = {"imports": sorted(mods), "marked": marked}
+              if marked:
+                  marked_all.append({"path": rel, "marked": marked})
+          if marked_all:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_FROZEN_CONTRACT " + repr(marked_all))
+          binder = (root / "canonical/runtime/raw_instruction_purpose_binder_v1.py").read_text(encoding="utf-8")
+          policy = (root / "canonical/harbor/raw_instruction_purpose_policy_v1.py").read_text(encoding="utf-8")
+          agent = (root / "canonical/harbor/raw_instruction_purpose_agent_v1.py").read_text(encoding="utf-8")
+          gdsk_source = (root / "canonical/runtime/goal_directed_sufficient_knowing_v1.py").read_text(encoding="utf-8")
+          for marker in ("EXACT_EVPI", "DISTINCT_VERIFIER_MISSING"):
+              if marker not in gdsk_source:
+                  raise SystemExit("EXACT_EVPI_OR_DISTINCT_VERIFIER_GUARD_ABSENT")
+          for marker in ("deliberately not a natural-language interpreter", "BindingRefused", "EXTERNAL_EDITABLE_NOT_ASSERTED"):
+              if marker not in binder:
+                  raise SystemExit("BINDER_GUARD_ABSENT:" + marker)
+          for marker in ("not a universal natural-language parser", "NO_FINITE_TYPED_TEMPLATE_MATCH", "hidden_test_reading"):
+              if marker not in policy:
+                  raise SystemExit("POLICY_GUARD_ABSENT:" + marker)
+          if "model_name=None" not in agent:
+              raise SystemExit("AGENT_MODEL_DEPENDENCY_GUARD_ABSENT")
+          known_task_names = ("math-eval-grader", "html-js-filter", "bun-sourcemap-leak", "batched-eval-parity", "layout-config-recreation", "data-anonymization")
+          for rel in ("canonical/runtime/raw_instruction_purpose_binder_v1.py", "canonical/harbor/raw_instruction_purpose_policy_v1.py", "canonical/harbor/raw_instruction_purpose_agent_v1.py"):
+              lowered = (root / rel).read_text(encoding="utf-8").casefold()
+              leaked = [name for name in known_task_names if name in lowered]
+              if leaked:
+                  raise SystemExit("TASK_SPECIFIC_ANSWER_LEAK " + repr(leaked))
+          store = json.loads((root / "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json").read_text(encoding="utf-8"))
+          if store.get("schema") != "BRAIN_EXTERNAL_PURPOSE_TEMPLATE_STORE_V1" or store.get("external_editable") is not True or store.get("facts_or_skills_in_parameters") is not False:
+              raise SystemExit("EXTERNAL_STORE_CONTRACT_INVALID")
+          if len(store.get("templates") or []) < 2:
+              raise SystemExit("EXTERNAL_TEMPLATE_GRAMMAR_NOT_NONTRIVIAL")
+          bindings = {"expected_git_blob": expected_git_blob, "observed_git_blob": observed_git_blob, "expected_sha256": expected_sha256, "observed_sha256": observed_sha256, "equal": True}
+          (out / "blob_bindings.json").write_text(json.dumps(bindings, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps({"audits": audits, "marked": marked_all, "known_task_names_absent": True, "external_store_editable": True, "finite_grammar_templates": len(store["templates"])}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_BLOB_BINDING_PASS", len(expected_git_blob), "marked", marked_all)
+          PY
+      - name: Replay frozen contracts, CLI binding, exact EVPI and store removal from /tmp
+        shell: bash
+        working-directory: /tmp
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          request = {
+              "schema": "BRAIN_TYPED_PURPOSE_BINDING_REQUEST_V1",
+              "raw_instruction": "Create `/app/result.txt` with `hello` in a bounded file workspace.",
+              "template_id": "create_literal_file",
+              "quoted_slots": {"path": "/app/result.txt", "literal": "hello"},
+              "environment_evidence": {"source": "BOUNDED_ENVIRONMENT_SCAN", "scope": {"closed_world": True, "bounded_enumerated": True}, "evidence_ref": "bounded-file-name-scan:finite-replay", "falsifier": "file-name scan omits a visible atom or includes a forbidden hidden path"},
+              "distinct_verifier": {"source": "DISTINCT_VERIFIER", "scope": {"closed_world": True, "bounded_enumerated": True}, "evidence_ref": "github-actions-oidc:finite-replay", "falsifier": "official bounded state check differs from the typed success predicate"},
+              "distinct_from_producer": True,
+              "visible_scan_atoms": ["/app/input.txt"],
+              "domain": "software_repository",
+              "action_universe_complete": True,
+              "hypothesis_model": [
+                  {"id": "v_safe", "probability": 0.5, "utilities": {"A1": 1.0, "A2": 0.0}},
+                  {"id": "v_unsafe", "probability": 0.5, "utilities": {"A1": 0.0, "A2": 1.0}},
+              ],
+              "unknown_evidence": {"label": "K1_SCOPED_FACT", "decision_relevant": True, "source": {"source": "BOUNDED_ENVIRONMENT_SCAN", "scope": {"closed_world": True, "bounded_enumerated": True}, "evidence_ref": "bounded-file-name-scan:finite-replay", "falsifier": "typed target presence changes action ordering"}, "distinct_from_producer": False, "evidence_ref": "bounded-file-name-scan:finite-replay", "falsifier": "typed target presence changes action ordering"},
+              "query_cost": 0.0,
+          }
+          pathlib.Path("/tmp/raw_instruction_purpose_request.json").write_text(json.dumps(request, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("TYPED_REQUEST_WRITTEN")
+          PY
+          python3 -I -B "${WORKSPACE}/canonical/runtime/raw_instruction_purpose_binder_v1.py" \
+            --request /tmp/raw_instruction_purpose_request.json \
+            --store "${WORKSPACE}/canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json" \
+            --out "${WORKSPACE}/out/cli_binding.json"
+          PYTHONPATH="${WORKSPACE}" python3 -B -m unittest -v canonical.tests.test_raw_instruction_purpose_binder_v1 canonical.tests.test_raw_instruction_purpose_harbor_policy_v1 2>&1 | tee "${WORKSPACE}/out/contract_tests.log"
+          python3 -I -B - <<'PY'
+          import copy, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          sys.path.insert(0, str(root))
+          from canonical.runtime import goal_directed_sufficient_knowing_v1 as gdsk
+          from canonical.runtime import raw_instruction_purpose_binder_v1 as binder
+          from canonical.harbor import raw_instruction_purpose_policy_v1 as policy
+          cli = json.loads((out / "cli_binding.json").read_text(encoding="utf-8"))
+          packet = cli["packet"]
+          decision = gdsk.evaluate(packet)
+          query = decision["selected_queries"][0] if decision["selected_queries"] else {}
+          plan = policy.plan("Create `/app/result.txt` with `hello`.", "/app/input.txt\n")
+          refusal = policy.plan("Repair the unknown system.", "/app/input.txt\n")
+          store = binder.load_external_store(root / "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json")
+          edited = copy.deepcopy(store)
+          edited["templates"] = [row for row in edited["templates"] if row["template_id"] == "copy_visible_file"]
+          temp_store = pathlib.Path("/tmp/raw_instruction_purpose_removed_store.json")
+          temp_store.write_text(json.dumps(edited, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          removed = policy.plan("Create `/app/result.txt` with `hello`.", "/app/input.txt\n", store_path=temp_store)
+          unbounded = policy.plan("Understand anything in the repository.", "/app/input.txt\n")
+          (out / "policy_decision.json").write_text(json.dumps({"bound": plan, "refusal": refusal, "removed_store": removed, "unbounded": unbounded}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          tests = (out / "contract_tests.log").read_text(encoding="utf-8")
+          measurement_checks = {
+              "test_count": "Ran 21 tests" in tests and "OK" in tests,
+              "cli_bound": cli.get("status") == "BOUND__TYPED_ACTION_QUOTIENT",
+              "cli_packet_schema": packet.get("schema") == binder.GDSK_PACKET_SCHEMA,
+              "cli_exact_evpi_basis": query.get("value_of_information_basis") == "EXACT_EVPI",
+              "cli_question_derived": query.get("question_source") == "DERIVED_FROM_ACTION_PARTITION",
+              "cli_minimal_query_count": decision.get("selected_query_count") == 1,
+              "cli_distinct_verifier": decision.get("distinct_verifier_present") is True,
+              "policy_bound": plan.get("status") == "BOUND__HARBOR_HARNESS_ACTION_AUTHORIZED",
+              "policy_one_safe_command": len(plan.get("commands") or []) == 1 and policy.command_is_safe(plan["commands"][0]),
+              "policy_gdsk_ready": plan.get("gdsk_decision", {}).get("decision") == gdsk.READY_FOR_DISTINCT_VERIFIER,
+              "policy_refuses_unmatched": refusal.get("status") == "REFUSED__NO_ENVIRONMENT_ACTION" and not refusal.get("commands"),
+              "store_removal_changes_behavior": removed.get("status") == "REFUSED__NO_ENVIRONMENT_ACTION" and not removed.get("commands"),
+              "unbounded_purpose_refused": unbounded.get("status") == "REFUSED__NO_ENVIRONMENT_ACTION" and not unbounded.get("commands"),
+              "zero_model_calls": cli.get("model_calls") == 0 and plan.get("model_calls") == 0,
+              "zero_runtime_network_calls": cli.get("runtime_network_calls") == 0 and plan.get("runtime_network_calls") == 0,
+              "zero_parameter_writes": cli.get("parameters_written") == 0 and plan.get("parameters_written") == 0,
+              "no_trajectory_or_world_fact_warehouse": cli.get("trajectory_saved") is False and cli.get("world_fact_warehouse") is False and plan.get("trajectory_saved") is False,
+              "no_execution_authority_in_kernel": decision.get("execution_authority") is False,
+              "no_benchmark_score_authority": decision.get("benchmark_score_authority") is False,
+              "section_6_not_met": decision.get("truth", {}).get("section_6") == "NOT_MET",
+          }
+          failed = sorted(k for k, v in measurement_checks.items() if not v)
+          if failed:
+              raise SystemExit("FROZEN_BRIDGE_REPLAY_MEASUREMENTS_FAIL " + repr(failed))
+          (out / "measurement_checks.json").write_text(json.dumps(measurement_checks, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("FROZEN_BRIDGE_REPLAY_PASS", 21, "tests", len(measurement_checks), "checks")
+          PY
+      - name: Bind first runner-owned OIDC receipt for the finite replay
+        if: success()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_finite_token.json
+        run: |
+          set -euo pipefail
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          workflow_path = ".github/workflows/zero-model-raw-instruction-purpose-v1.yml"
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": workflow_path in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref", "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor", "actor_id", "jti", "runner_environment")
+          oidc_claims = {k: claims.get(k) for k in keep}
+          bindings = json.loads((out / "blob_bindings.json").read_text(encoding="utf-8"))
+          audit = json.loads((out / "static_audit.json").read_text(encoding="utf-8"))
+          measurements = json.loads((out / "measurement_checks.json").read_text(encoding="utf-8"))
+          cli = json.loads((out / "cli_binding.json").read_text(encoding="utf-8"))
+          policy = json.loads((out / "policy_decision.json").read_text(encoding="utf-8"))
+          run_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run_id}"
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#job-contract_replay-run-" + str(run_id)
+          receipt = {
+              "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_OIDC_ATTESTED_FINITE_RAW_INSTRUCTION_PURPOSE_REPLAY__ZERO_CREDIT__SECTION_6_NOT_MET",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_FINITE_CONTRACT_REPLAY__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              "scope": "RAW_INSTRUCTION_PURPOSE_BINDER_V1_FINITE_CONTRACT_ONLY",
+              "independent_verified": True,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_path": workflow_path,
+              "workflow_job": "contract_replay",
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "oidc_claims": oidc_claims,
+              "oidc_jti": claims.get("jti"),
+              "pinned_blob_binding": bindings,
+              "static_audit": audit,
+              "measurement_checks": measurements,
+              "cli_decision": cli.get("status"),
+              "policy_decision": policy.get("bound", {}).get("status"),
+              "numeric_measurements": {
+                  "pinned_blobs": len(bindings["expected_git_blob"]),
+                  "contract_tests": 21,
+                  "measurement_checks": len(measurements),
+                  "selected_queries": 1,
+                  "model_calls": 0,
+                  "runtime_network_calls": 0,
+                  "parameters_written": 0,
+                  "environment_actions_executed": 0,
+                  "hard_benchmark_tasks_consumed": 0,
+              },
+              "verified": ["EXACT_PINNED_BLOBS_BOUND", "ZERO_MODEL_ZERO_NETWORK_STDLIB_IMPORT_SURFACE", "EXTERNAL_EDITABLE_FINITE_TEMPLATE_GRAMMAR", "TWENTY_ONE_FROZEN_CONTRACT_TESTS_PASS", "EXACT_EVPI_MINIMAL_QUESTION_SELECTION", "POLICY_FAILS_CLOSED_ON_UNMATCHED_AND_UNBOUNDED_PURPOSE", "STORE_REMOVAL_CHANGES_BEHAVIOR_WITHOUT_RETRAINING", "OIDC_RUN_REFERENCE_BOUND", "NO_CAPABILITY_OR_TERMINAL_CREDIT"],
+              "not_verified": ["OSWorld 2.1 tasks", "SWE-bench Pro V2 or HARD-51 tasks", "Terminal-Bench 4.1 tasks", "arbitrary natural-language purpose understanding", "authored repair content", "GUI or browser computer use", "section 6 terminal capability"],
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "benchmark_score_authority": False,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "section_6_verifications": 0,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "VERIFICATION_APPLIES_ONLY_TO_EXACT_LISTED_BLOBS_AND_MEASUREMENTS__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+          }
+          receipt_path = out / os.environ["FINITE_RECEIPT"]
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / (os.environ["FINITE_RECEIPT"] + ".sha256")).write_text(hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8")
+          print("FINITE_OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("FINITE_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          PY
+      - name: Upload finite replay artifact for the dependent hard job
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: raw-instruction-purpose-finite-replay
+          path: out/
+          if-no-files-found: error
+          retention-days: 90
+  hard_benchmark_attempt:
+    needs: contract_replay
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Download runner-owned finite replay receipt
+        uses: actions/download-artifact@v4
+        with:
+          name: raw-instruction-purpose-finite-replay
+          path: out/finite
+      - name: Provision pinned Harbor and verify Docker
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 --version
+          python3 -m pip install --disable-pip-version-check "harbor==${HARBOR_VERSION}"
+          python3 -c "import importlib.metadata as m; v=m.version('harbor'); assert v=='${HARBOR_VERSION}', v; print('HARBOR_VERSION_PASS', v)"
+          docker --version
+          docker compose version
+          docker info >/dev/null
+          echo "DOCKER_READY_PASS"
+      - name: Bind exact Brain-owned source bytes and audit no-inference surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          expected = {
+            "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json": "9d733bd875d3012893096f520d5a8aa5744272ee64c699fee7280d2a9ce37b64",
+            "canonical/harbor/raw_instruction_purpose_agent_v1.py": "19a36977629b2cda0bcf8e7158f2bf5d15ef151a028650511cbf6e99910299b4",
+            "canonical/harbor/raw_instruction_purpose_policy_v1.py": "58b35e8a6c7aa9661332051c0d2c1378ac4fda77e4985a846c75210e74ad42cd",
+            "canonical/harbor/select_tb41_cpu_tasks_v1.py": "190a5786c41b3f6470228013e57943fcc4984a2205c8f71296ca9e66d176f4c9",
+            "canonical/runtime/goal_directed_sufficient_knowing_v1.py": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f",
+            "canonical/runtime/raw_instruction_purpose_binder_v1.py": "ef2f8e239142ed08d23985b7582b481f66b54c6658a84c1d72b85e6c1e3d389a",
+            "canonical/tests/test_raw_instruction_purpose_binder_v1.py": "f35a8dbdf9235e93d83450bdf14b813594d1e6802a65855f0fd515bc4ce32723",
+            "canonical/tests/test_raw_instruction_purpose_harbor_policy_v1.py": "0b6c5028baf30fc2fb458508bed71a6a06f4df4387af5164accb97555bb54beb"
+          }
+          observed = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in expected}
+          if observed != expected:
+              raise SystemExit("EXACT_SOURCE_SHA256_BINDING_FAIL " + json.dumps({"expected": expected, "observed": observed}, sort_keys=True))
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess", "intake"}
+          imports = {}
+          marked_imports = []
+          for rel in expected:
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"))
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module)
+              roots = sorted({item.split(".")[0] for item in mods})
+              imports[rel] = roots
+              marked = sorted(set(roots) & forbidden)
+              if marked:
+                  marked_imports.append({"path": rel, "marked": marked})
+          if marked_imports:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_BRAIN_AGENT_SURFACE " + repr(marked_imports))
+          known_task_names = ("math-eval-grader", "html-js-filter", "bun-sourcemap-leak", "batched-eval-parity", "layout-config-recreation", "data-anonymization")
+          for rel in ("canonical/harbor/raw_instruction_purpose_policy_v1.py", "canonical/harbor/raw_instruction_purpose_agent_v1.py", "canonical/runtime/raw_instruction_purpose_binder_v1.py"):
+              lowered = (root / rel).read_text(encoding="utf-8").casefold()
+              leaked = [name for name in known_task_names if name in lowered]
+              if leaked:
+                  raise SystemExit("TASK_SPECIFIC_ANSWER_LEAK " + repr(leaked))
+          selector_source = (root / "canonical/harbor/select_tb41_cpu_tasks_v1.py").read_text(encoding="utf-8").casefold()
+          if "instruction.md" in selector_source or "tests/test.sh" in selector_source:
+              raise SystemExit("SELECTOR_READS_HIDDEN_TASK_CONTENT")
+          sys.path.insert(0, str(root))
+          from canonical.harbor import raw_instruction_purpose_policy_v1 as policy
+          scan = policy.scan_command()
+          if not policy.scan_is_safe(scan) or "-prune" not in scan:
+              raise SystemExit("UNSAFE_SCAN_COMMAND")
+          generic = policy.plan("Create `/app/result.txt` with `hello`.", "/app/input.txt\n")
+          if generic["status"] != "BOUND__HARBOR_HARNESS_ACTION_AUTHORIZED" or len(generic["commands"]) != 1 or not all(policy.command_is_safe(c) for c in generic["commands"]):
+              raise SystemExit("GENERIC_POLICY_PLAN_FAIL")
+          refusal = policy.plan("Repair the unknown system.", "/app/input.txt\n")
+          if refusal["status"] != "REFUSED__NO_ENVIRONMENT_ACTION" or refusal["commands"]:
+              raise SystemExit("UNRESOLVED_PURPOSE_DID_NOT_REFUSE")
+          binding = {"schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_SOURCE_BINDING_V1", "expected": expected, "observed": observed, "equal": True}
+          audit = {"schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_STATIC_AUDIT_V1", "imports": imports, "marked_imports": marked_imports, "known_task_names_absent_from_agent_and_policy": True, "scan_is_safe": True, "generic_plan_is_safe": True, "unresolved_purpose_refused": True, "selector_reads_hidden_task_content": False}
+          (out / "blob_bindings.json").write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_SOURCE_SHA256_BINDING_PASS", len(expected), "marked_imports", marked_imports)
+          PY
+      - name: Checkout and verify pinned Terminal-Bench 4.1 release
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf /tmp/tb41
+          git clone --depth 1 --branch "${TB_TAG}" https://github.com/harbor-framework/terminal-bench.git /tmp/tb41
+          actual_sha="$(git -C /tmp/tb41 rev-parse HEAD)"
+          if [ "${actual_sha}" != "${TB_SOURCE_SHA}" ]; then
+            echo "TB_SOURCE_SHA_FAIL expected=${TB_SOURCE_SHA} observed=${actual_sha}" >&2
+            exit 1
+          fi
+          curl -fsSL --retry 5 --retry-all-errors --connect-timeout 10 \
+            -H "Accept: application/octet-stream" \
+            "https://api.github.com/repos/harbor-framework/terminal-bench/releases/assets/707398564" \
+            -o /tmp/prebuilt-images.json
+          echo "${PREBUILT_MANIFEST_SHA256}  /tmp/prebuilt-images.json" | sha256sum -c -
+          cp /tmp/prebuilt-images.json "${WORKSPACE}/out/prebuilt-images.json"
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          d = json.loads(pathlib.Path("/tmp/prebuilt-images.json").read_text())
+          checks = {
+              "schema_version": d.get("schema_version") == 1,
+              "release_tag": d.get("release_tag") == os.environ["TB_TAG"],
+              "task_count": d.get("task_count") == 66,
+              "image_count": d.get("image_count") == 157,
+              "tasks_present": len(d.get("tasks") or []) == 66,
+              "source_sha": all(row.get("source_sha") == os.environ["TB_SOURCE_SHA"] for row in d.get("tasks") or []),
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("PREBUILT_MANIFEST_SCHEMA_FAIL " + repr(failed))
+          (root / "out" / "source_verification.json").write_text(json.dumps({"schema": "BRAIN_TB41_SOURCE_VERIFICATION_V1", "checks": checks, "source_sha": os.environ["TB_SOURCE_SHA"], "release_tag": os.environ["TB_TAG"], "prebuilt_manifest_sha256": os.environ["PREBUILT_MANIFEST_SHA256"], "prebuilt_tar_sha256": os.environ["PREBUILT_TAR_SHA256"]}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("TB41_SOURCE_AND_MANIFEST_PASS", json.dumps(checks, sort_keys=True))
+          PY
+      - name: Select fresh CPU-only unseen tasks and pin prebuilt images
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "${WORKSPACE}/canonical/harbor/select_tb41_cpu_tasks_v1.py" \
+            --tb-root /tmp/tb41 \
+            --manifest /tmp/prebuilt-images.json \
+            --out-dir /tmp/tb41_cpu_subset \
+            --run-id "${GITHUB_RUN_ID}" \
+            --count "${TASK_COUNT}" | tee "${WORKSPACE}/out/selection.log"
+          cp /tmp/tb41_cpu_subset/selection.json "${WORKSPACE}/out/selection.json"
+          cp /tmp/tb41_cpu_subset/pinned_refs.txt "${WORKSPACE}/out/pinned_refs.txt"
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          selection = json.loads((root / "out" / "selection.json").read_text())
+          count = int(os.environ["TASK_COUNT"])
+          excluded = set(selection["excluded_seen_instruction_task_names"])
+          rows = selection["tasks"]
+          checks = {
+              "selected_count": selection["selected_task_count"] == count == len(rows),
+              "no_seen_instruction_task": all(row["name"] not in excluded for row in rows),
+              "environment_pinned": all("@sha256:" in row["environment_image"] for row in rows),
+              "verifier_pinned": all("@sha256:" in row["verifier_image"] for row in rows),
+              "selection_seed": selection["selection_seed"] == "sha256(run_id:task_name)",
+              "source_sha": selection["source_sha"] == os.environ["TB_SOURCE_SHA"],
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("FRESH_CPU_SELECTION_CHECK_FAIL " + repr(failed))
+          (root / "out" / "selection_check.json").write_text(json.dumps(checks, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("FRESH_CPU_SELECTION_PASS", [row["name"] for row in rows])
+          PY
+      - name: Pull exact digest-pinned environment and verifier images
+        shell: bash
+        run: |
+          set -euo pipefail
+          : > "${WORKSPACE}/out/pulled_images.txt"
+          while IFS= read -r ref; do
+            [ -n "${ref}" ] || continue
+            echo "PULLING ${ref}"
+            docker pull "${ref}"
+            echo "${ref}" >> "${WORKSPACE}/out/pulled_images.txt"
+          done < /tmp/tb41_cpu_subset/pinned_refs.txt
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          refs = [x.strip() for x in (root / "out" / "pulled_images.txt").read_text().splitlines() if x.strip()]
+          (root / "out" / "pulled_images.json").write_text(json.dumps({"schema": "BRAIN_TB41_PINNED_IMAGE_PULLS_V1", "count": len(refs), "refs": refs}, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("PINNED_IMAGE_PULL_PASS", len(refs))
+          PY
+      - name: Run official Harbor with the Brain-owned no-inference agent
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p /tmp/harbor_jobs "${WORKSPACE}/out"
+          : > "${WORKSPACE}/out/harbor_stdout.log"
+          : > "${WORKSPACE}/out/harbor_stderr.log"
+          PYTHONPATH="${WORKSPACE}${PYTHONPATH:+:${PYTHONPATH}}" harbor run \
+            -p /tmp/tb41_cpu_subset \
+            -a "${AGENT_IMPORT_PATH}" \
+            -o /tmp/harbor_jobs \
+            --job-name "${JOB_NAME}" \
+            -n 1 \
+            --quiet \
+            --no-export-traces \
+            > "${WORKSPACE}/out/harbor_stdout.log" 2> "${WORKSPACE}/out/harbor_stderr.log"
+          code=$?
+          echo "${code}" > "${WORKSPACE}/out/harbor_exit_code.txt"
+          set -e
+          echo "HARBOR_RUN_EXIT_CODE ${code}"
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          jobs = pathlib.Path("/tmp/harbor_jobs")
+          job_result_path = jobs / os.environ["JOB_NAME"] / "result.json"
+          candidates = sorted(jobs.rglob("result.json"), key=lambda p: p.stat().st_mtime if p.exists() else 0)
+          if not job_result_path.is_file() and candidates:
+              job_result_path = candidates[-1]
+          job_result = None
+          job_result_sha256 = None
+          if job_result_path.is_file():
+              data = job_result_path.read_bytes()
+              job_result_sha256 = hashlib.sha256(data).hexdigest()
+              (out / "harbor_result.json").write_bytes(data)
+              try:
+                  job_result = json.loads(data)
+              except Exception:
+                  job_result = None
+          trials = []
+          if isinstance(job_result, dict):
+              trials = job_result.get("trial_results") or []
+          if not trials:
+              for path in candidates:
+                  try:
+                      row = json.loads(path.read_text())
+                  except Exception:
+                      continue
+                  if isinstance(row, dict) and "verifier_result" in row:
+                      trials.append(row)
+          rows = []
+          for trial in trials:
+              if not isinstance(trial, dict):
+                  continue
+              rewards = ((trial.get("verifier_result") or {}).get("rewards") or {})
+              exceptions = []
+              info = trial.get("exception_info")
+              if isinstance(info, dict) and info.get("exception_type"):
+                  exceptions.append(str(info["exception_type"]))
+              for step in trial.get("step_results") or []:
+                  if isinstance(step, dict):
+                      sinfo = step.get("exception_info")
+                      if isinstance(sinfo, dict) and sinfo.get("exception_type"):
+                          exceptions.append(str(sinfo["exception_type"]))
+              rows.append({
+                  "task_name": str(trial.get("task_name") or ""),
+                  "trial_name": str(trial.get("trial_name") or ""),
+                  "task_checksum": str(trial.get("task_checksum") or ""),
+                  "agent_name": str((trial.get("agent_info") or {}).get("name") or ""),
+                  "reward_valid": bool(rewards) and not exceptions,
+                  "rewards": rewards,
+                  "exception_types": sorted(set(exceptions)),
+              })
+          harbor_exit_code = int((out / "harbor_exit_code.txt").read_text().strip() or "0")
+          reward_log = {
+              "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_TB41_REWARD_LOG_20261124_V1",
+              "date": "2026-11-24",
+              "source": "HARBOR_RESULT_JSON",
+              "harbor_version": os.environ["HARBOR_VERSION"],
+              "release_tag": os.environ["TB_TAG"],
+              "source_sha": os.environ["TB_SOURCE_SHA"],
+              "job_name": os.environ["JOB_NAME"],
+              "job_result_path": str(job_result_path) if job_result_path.is_file() else None,
+              "job_result_sha256": job_result_sha256,
+              "harbor_exit_code": harbor_exit_code,
+              "task_selected_count": int(os.environ["TASK_COUNT"]),
+              "trial_results_present": len(rows),
+              "rows": rows,
+              "benchmark_score_authority": False,
+              "note": "Per-trial reward vectors are harness diagnostics, not a benchmark score and not capability credit.",
+          }
+          (out / os.environ["REWARD_LOG"]).write_text(
+              json.dumps(reward_log, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8"
+          )
+          print("HARBOR_REWARD_LOG_PASS", len(rows), "trial results", "job_result_sha256", job_result_sha256)
+          PY
+      - name: Bind GitHub Actions OIDC run reference and emit runner-owned receipt
+        id: oidc_receipt
+        if: always()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, platform, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": ".github/workflows/zero-model-raw-instruction-purpose-v1.yml" in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed_oidc = sorted(k for k, v in checks.items() if not v)
+          if failed_oidc:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed_oidc))
+          keep = (
+              "iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref",
+              "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor",
+              "actor_id", "jti", "runner_environment",
+          )
+          oidc_claims = {k: claims.get(k) for k in keep}
+
+          def read_json(name, default):
+              path = out / name
+              if not path.is_file():
+                  return default
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+
+          def read_text(name, default=""):
+              path = out / name
+              return path.read_text(encoding="utf-8").strip() if path.is_file() else default
+
+          bindings = read_json("blob_bindings.json", {})
+          audit = read_json("static_audit.json", {})
+          source_verification = read_json("source_verification.json", {})
+          selection = read_json("selection.json", {})
+          selection_check = read_json("selection_check.json", {})
+          pulled_images = read_json("pulled_images.json", {})
+          reward_log = read_json("RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json", {})
+          finite_path = out / "finite" / os.environ["FINITE_RECEIPT"]
+          finite_side_path = out / "finite" / (os.environ["FINITE_RECEIPT"] + ".sha256")
+          if not finite_path.is_file() or not finite_side_path.is_file():
+              raise SystemExit("FINITE_REPLAY_RECEIPT_ARTIFACT_MISSING")
+          finite_bytes = finite_path.read_bytes()
+          finite_sha = hashlib.sha256(finite_bytes).hexdigest()
+          finite_side = finite_side_path.read_text(encoding="utf-8").strip()
+          finite_receipt = json.loads(finite_bytes)
+          if finite_side != finite_sha or finite_receipt.get("workflow_run_id") != run_id or finite_receipt.get("truth", {}).get("section_6") != "NOT_MET":
+              raise SystemExit("FINITE_REPLAY_RECEIPT_BINDING_FAIL")
+          harbor_exit_code = int(read_text("harbor_exit_code.txt", "-1"))
+          rows = reward_log.get("rows") or []
+          selected_count = int(selection.get("selected_task_count") or os.environ["TASK_COUNT"])
+          task_names = [str(row.get("name")) for row in selection.get("tasks") or []]
+          harness_verified = [str(row.get("task_name")) for row in rows if row.get("reward_valid") is True]
+          unverified = [
+              str(row.get("task_name") or "UNNAMED_TRIAL")
+              for row in rows if row.get("reward_valid") is not True
+          ]
+          if len(rows) < selected_count:
+              unverified.append("MISSING_TRIAL_RESULTS_FOR_" + str(selected_count - len(rows)) + "_SELECTED_TASKS")
+          unverified.extend([
+              "OSWorld 2.1 tasks",
+              "SWE-bench Pro V2 / HARD-51 tasks",
+              "remaining Terminal-Bench 4.1 CPU and GPU tasks",
+              "arbitrary natural-language purpose understanding",
+              "authored repair content",
+              "GUI or browser computer use",
+          ])
+          failed = []
+          for row in rows:
+              types = row.get("exception_types") or []
+              if types:
+                  failed.append(str(row.get("task_name") or "UNNAMED_TRIAL") + ": " + ",".join(sorted(set(types))))
+          if harbor_exit_code != 0:
+              failed.append("HARBOR_RUN_EXIT_NONZERO:" + str(harbor_exit_code))
+          verified = []
+          if bindings.get("equal") is True:
+              verified.append("EXACT_SOURCE_SHA256_BINDINGS")
+          if audit.get("marked_imports") == []:
+              verified.append("NO_MODEL_NETWORK_OR_SUBPROCESS_IMPORTS_IN_BRAIN_AGENT_SURFACE")
+          if audit.get("unresolved_purpose_refused") is True:
+              verified.append("UNRESOLVED_PURPOSE_FAILS_CLOSED")
+          if source_verification.get("checks", {}).get("source_sha") is True:
+              verified.append("TERMINAL_BENCH_4_1_SOURCE_AND_PREBUILT_MANIFEST_DIGESTS")
+          if selection_check.get("selected_count") is True:
+              verified.append("FRESH_SEEDED_CPU_SUBSET_SELECTED")
+          if pulled_images.get("count", 0) >= selected_count * 2:
+              verified.append("DIGEST_PINNED_ENVIRONMENT_AND_VERIFIER_IMAGES_PULLED")
+          if reward_log.get("job_result_sha256"):
+              verified.append("OFFICIAL_HARBOR_RESULT_JSON_REWARD_LOG_BOUND")
+          if not failed_oidc:
+              verified.append("OIDC_RUN_REFERENCE_BOUND")
+          if finite_side == finite_sha and finite_receipt.get("independent_verified") is True:
+              verified.append("DEPENDENT_FINITE_REPLAY_RECEIPT_BOUND")
+          verified.append("NO_CAPABILITY_OR_TERMINAL_CREDIT")
+
+          run_url = f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{run_id}"
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          workflow_blob = subprocess.check_output(
+              ["git", "hash-object", ".github/workflows/zero-model-raw-instruction-purpose-v1.yml"],
+              cwd=root, text=True,
+          ).strip()
+          reward_log_path = out / os.environ["REWARD_LOG"]
+          reward_log_bytes = reward_log_path.read_bytes() if reward_log_path.is_file() else b"{}\n"
+          if not reward_log_path.is_file():
+              reward_log_path.write_bytes(reward_log_bytes)
+          reward_log_blob = subprocess.run(
+              ["git", "hash-object", "--stdin"], cwd=root, input=reward_log_bytes,
+              stdout=subprocess.PIPE, check=True,
+          ).stdout.decode().strip()
+          receipt = {
+              "schema": "BRAIN_RAW_INSTRUCTION_PURPOSE_TB41_RUNNER_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_HARD_BENCHMARK_ATTEMPT_RECORDED__FINITE_REPLAY_BOUND__ZERO_CREDIT__SECTION_6_NOT_MET",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_HARNESS_ATTEMPT__NO_CAPABILITY_OR_TERMINAL_CREDIT",
+              "scope": "TERMINAL_BENCH_4_1_CPU_FRESH_SEEDED_SUBSET_RAW_INSTRUCTION_PURPOSE_BRIDGE_ZERO_MODEL_HARNESS_ATTEMPT_ONLY",
+              "runner_owned": True,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "verifier_identity": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "run_reference": {
+                  "workflow_run_id": run_id,
+                  "workflow_run_attempt": run_attempt,
+                  "workflow_run_url": run_url,
+                  "oidc_jti": claims.get("jti"),
+                  "runner_attestation": "github-actions-oidc-token",
+              },
+              "pinned_substrates": {
+                  "harbor_version": os.environ["HARBOR_VERSION"],
+                  "python_version": platform.python_version(),
+                  "terminal_bench_release_tag": os.environ["TB_TAG"],
+                  "terminal_bench_source_sha": os.environ["TB_SOURCE_SHA"],
+                  "prebuilt_manifest_sha256": os.environ["PREBUILT_MANIFEST_SHA256"],
+                  "prebuilt_tar_sha256": os.environ["PREBUILT_TAR_SHA256"],
+                  "workflow_git_blob_sha": workflow_blob,
+                  "agent_import_path": os.environ["AGENT_IMPORT_PATH"],
+                  "model_cli_args": 0,
+              },
+              "finite_replay": {"receipt_sha256": finite_sha, "workflow_run_id": finite_receipt.get("workflow_run_id"), "contract_tests": finite_receipt.get("numeric_measurements", {}).get("contract_tests"), "status": finite_receipt.get("status")},
+              "source_binding": bindings,
+              "static_audit": audit,
+              "source_verification": source_verification,
+              "selection": selection,
+              "selection_check": selection_check,
+              "pulled_images": pulled_images,
+              "reward_log": reward_log,
+              "reward_log_sha256": hashlib.sha256(reward_log_bytes).hexdigest(),
+              "reward_log_git_blob_sha": reward_log_blob,
+              "harbor_exit_code": harbor_exit_code,
+              "oidc_checks": checks,
+              "numeric_measurements": {
+                  "source_bindings": len(bindings.get("expected") or {}),
+                  "finite_contract_tests": finite_receipt.get("numeric_measurements", {}).get("contract_tests"),
+                  "marked_import_groups": len(audit.get("marked_imports") or []),
+                  "tasks_selected": selected_count,
+                  "trial_results_present": len(rows),
+                  "task_reward_vectors_present": sum(1 for row in rows if row.get("rewards")),
+                  "harness_verified_trials": len(harness_verified),
+                  "unverified_trials": sum(1 for row in rows if row.get("reward_valid") is not True),
+                  "failed_trials": sum(1 for row in rows if row.get("exception_types")),
+                  "pinned_images_pulled": pulled_images.get("count", 0),
+                  "model_calls": 0,
+                  "runtime_network_calls": 0,
+                  "hard_benchmark_tasks_consumed": selected_count,
+              },
+              "verified": verified,
+              "harness_verified_trials": harness_verified,
+              "unverified": unverified,
+              "failed": failed,
+              "selected_task_names": task_names,
+              "producer_cognition_model_dependency_count": 0,
+              "runtime_network_calls": 0,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "task_specific_answers_in_repo": False,
+              "benchmark_score_authority": False,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": len(rows),
+              "incremental_spend_usd": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_AND_SELECTED_TASK_SET__ANY_SEMANTIC_BYTE_CHANGE_REQUIRES_REVERIFICATION",
+          }
+          receipt_path = out / os.environ["HARD_RECEIPT"]
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / (os.environ["HARD_RECEIPT"] + ".sha256")).write_text(
+              hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8"
+          )
+          receipt_blob = subprocess.check_output(["git", "hash-object", str(receipt_path)], cwd=root, text=True).strip()
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("RUNNER_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print("RUNNER_RECEIPT_GIT_BLOB", receipt_blob)
+          print(json.dumps({"status": receipt["status"], "verified": len(verified), "unverified": len(unverified), "failed": len(failed), "truth": receipt["truth"]}, sort_keys=True))
+          PY
+          cat "${WORKSPACE}/out/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json"
+      - name: Land runner-owned receipt and reward log on the active branch
+        if: always() && steps.oidc_receipt.outcome == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/finite/${FINITE_RECEIPT}" \
+             "canonical/verification/${FINITE_RECEIPT}"
+          cp "out/finite/${FINITE_RECEIPT}.sha256" \
+             "canonical/verification/${FINITE_RECEIPT}.sha256"
+          cp "out/${HARD_RECEIPT}" \
+             "canonical/verification/${HARD_RECEIPT}"
+          cp "out/${HARD_RECEIPT}.sha256" \
+             "canonical/verification/${HARD_RECEIPT}.sha256"
+          cp "out/${REWARD_LOG}" \
+             "canonical/verification/${REWARD_LOG}"
+          git config user.name "project-brain-zero-model-raw-instruction-purpose-runner"
+          git config user.email "project-brain-zero-model-raw-instruction-purpose-runner@users.noreply.github.com"
+          git add "canonical/verification/${FINITE_RECEIPT}" \
+                  "canonical/verification/${FINITE_RECEIPT}.sha256" \
+                  "canonical/verification/${HARD_RECEIPT}" \
+                  "canonical/verification/${HARD_RECEIPT}.sha256" \
+                  "canonical/verification/${REWARD_LOG}"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record runner-owned raw-instruction-purpose TB4.1 harness attempt"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
+      - name: Upload runner-owned sanitized hard-benchmark artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zero-model-raw-instruction-purpose-runner
+          path: out/
+          if-no-files-found: warn
+          retention-days: 90

@@ -1,0 +1,117 @@
+{
+  "assumptions": [
+    "Hard instructions that match the finite external regex templates supply explicit backtick operands and no hidden verifier content.",
+    "A bounded read-only file-name scan supplies current environment atoms and a scoped K1 observation.",
+    "GitHub Actions OIDC and official Harbor are build-time distinct verifiers, never Brain runtime cognition dependencies.",
+    "Any semantic byte change requires re-verification."
+  ],
+  "capability_credit_delta": 0,
+  "chat_only_authority": false,
+  "conclusion": "Raw instruction purpose can be bound to a typed action quotient only through explicit quoted operands, a finite external editable template grammar, a bounded success predicate, source-scoped evidence and a distinct verifier. The stdlib binder composes that quotient with the existing exact-EVPI goal-directed sufficient-knowing kernel; a zero-model Harbor adapter executes at most one safe command after a scan-derived K1 fact. Arbitrary natural-language understanding, authored repair content, GUI/browser control, completeness closure and section 6 remain unproven. This is a zero-credit bounded mechanism, not a verified general capability gain.",
+  "date": "2026-11-24",
+  "evidence_refs": [
+    "canonical/runtime/goal_directed_sufficient_knowing_v1.py",
+    "canonical/runtime/raw_instruction_purpose_binder_v1.py",
+    "canonical/astra_runtime/state/RAW_INSTRUCTION_PURPOSE_TEMPLATE_STORE_V1.json",
+    "canonical/harbor/raw_instruction_purpose_policy_v1.py",
+    "canonical/harbor/raw_instruction_purpose_agent_v1.py",
+    ".github/workflows/zero-model-raw-instruction-purpose-v1.yml",
+    "canonical/verification/check_raw_instruction_purpose_workflow_v1.py",
+    "RAW_INSTRUCTION_PURPOSE_BINDING_20261124_V1.md",
+    "https://arxiv.org/abs/2611.07825",
+    "https://aclanthology.org/2026.emnlp-main.2226/",
+    "https://arxiv.org/html/2605.05485v1",
+    "https://arxiv.org/abs/2609.39564",
+    "https://arxiv.org/html/2511.08798v2",
+    "https://arxiv.org/abs/2605.02269v1",
+    "https://arxiv.org/abs/2611.26335v1"
+  ],
+  "governing_invariants": [
+    "Own Brain weights and computed mechanisms only; zero runtime model calls.",
+    "Parameters hold mechanisms, never a memorized world-fact warehouse.",
+    "Facts, templates and skills live in an external inspectable editable store and may change without retraining.",
+    "A distinct verifier must own independent receipts; a fresh same-identity process is not independent verification.",
+    "Hardest open unseen benchmarks are falsifiers, not the product; no score alone grants capability credit.",
+    "Delete before add; ask only for information that can change a goal-relevant decision.",
+    "Open-world completeness without a bounded enumeration certificate fails closed.",
+    "One exact action trajectory cannot identify causal variables, scope, falsifier, verifier or transfer class.",
+    "No hidden-test reading, hidden solution, verifier output, borrowed answer or raw benchmark task body in the workspace."
+  ],
+  "material_premises": [
+    "The live project already has exact EVPI, relation-only external memory, fail-closed purpose gates, finite transformation policies, OIDC exact-byte receipts and run-id-seeded Terminal-Bench 4.1 selection.",
+    "Project measurements show purpose/vocabulary/specification holes dominate; universal parsing and scan-everything do not solve them.",
+    "2026 Generate-then-Rank, EAPRouter, ReaComp, A2Z GameSpec-Bench and SAGE-Agent support typed IRs, dependency-aware contracts, explicit specification holes and EVPI over typed domains, but their model-driven generation remains K3 and forbidden as Brain runtime cognition.",
+    "Specification gaming and ClosureBench support fail-closed unbounded intent words, explicit success predicates and bounded completeness certificates.",
+    "Official Harbor rewards from fresh unseen tasks are runner-owned falsifiers, never producer-written capability credit."
+  ],
+  "model_calls": 0,
+  "next_action": "Watch the distinct finite OIDC replay and dependent fresh run-id-seeded Terminal-Bench 4.1 hard falsifier, land runner-owned receipts, run final lightweight gates, then continue on authored repair content, GUI/browser control, completeness/source-scope closure and fresh unseen hard benchmarks.",
+  "non_goals": [
+    "Claiming section 6, terminal truth, capability, family, benchmark or score credit.",
+    "Reading hidden tests, solutions, verifier outputs or borrowed model answers.",
+    "Saving raw benchmark tasks, trajectories or world facts in the workspace or parameters.",
+    "Opening a PR or merging before the whole feature is complete."
+  ],
+  "parameters_written": 0,
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "rejected_material_alternatives": [
+    {
+      "reason": "K3 runtime model dependency; Generate-then-Rank uses supervised LLM generation and learned ranking.",
+      "route": "MODEL_BASED_SYMBOLIC_GOAL_INTERPRETER"
+    },
+    {
+      "reason": "Model-generated executable programs or LLM-trace-compiled solvers violate zero-runtime-model ownership.",
+      "route": "EAPROUTER_OR_REACOMP_RUNTIME"
+    },
+    {
+      "reason": "Hides measured goal/vocabulary/specification-hole wall and turns arbitrary prose into unjustified purpose.",
+      "route": "GENERIC_NATURAL_LANGUAGE_PARSER_OR_KEYWORD_SEMANTICS"
+    },
+    {
+      "reason": "Standing no-question law and K3 forbidden; the finite bridge must fail closed.",
+      "route": "ASK_USER_OR_MODEL_WHEN_UNCLEAR"
+    },
+    {
+      "reason": "Negative transfer and no causal identification; relation-only typed memory is required.",
+      "route": "EXACT_ACTION_TRAJECTORY_TEMPLATES"
+    },
+    {
+      "reason": "Forbidden by section 2 and parameter ownership laws.",
+      "route": "WORLD_FACT_WAREHOUSE_OR_PARAMETER_UPDATE"
+    },
+    {
+      "reason": "Not fresh, not unseen and not independent evidence for this bridge.",
+      "route": "REUSE_PRIOR_HARD_TASK_REWARD_VECTORS"
+    }
+  ],
+  "runtime_network_calls": 0,
+  "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
+  "section_6_verifications": 0,
+  "selected_route": "COMPOSE_EXISTING_FINITE_TYPED_PURPOSE_GRAMMAR_GOAL_DIRECTED_EXACT_EVPI_KERNEL_EXTERNAL_EDITABLE_STORE_OIDC_REPLAY_AND_FRESH_TB41_HARD_FALSIFIER_V1",
+  "status": "PRODUCER_REASONING_RECEIPT__FINITE_BRIDGE_BUILT__LOCAL_CONTRACTS_AND_20_PRE_RUNNER_GATES_PASS__DISTINCT_FINITE_OIDC_AND_HARD_FALSIFIER_PENDING__ZERO_CAPABILITY_CREDIT",
+  "supersedes": [
+    "UNIVERSAL_NATURAL_LANGUAGE_PURPOSE_PARSER",
+    "MODEL_BASED_SYMBOLIC_GOAL_INTERPRETER",
+    "EXACT_TRAJECTORY_TEMPLATE_STORE"
+  ],
+  "supersession_conditions": [
+    "A distinct OIDC verifier falsifies exact-byte replay, zero-model imports, exact EVPI composition or external-store editability.",
+    "Fresh unseen hard-benchmark rewards falsify transfer or expose a hidden model/runtime dependency.",
+    "The owner directly changes the standing mission or constraints.",
+    "A strictly smaller mechanism computes the same decisions with fewer bytes and equivalent fail-closed guarantees."
+  ],
+  "truth": {
+    "achieved": false,
+    "section_6": "NOT_MET"
+  },
+  "uncertainties": [
+    "Whether finite external typed templates cover arbitrary natural-language purposes beyond explicit quoted file operations.",
+    "Whether a scan-derived K1 observation is sufficient for hidden-state or cross-app long-horizon goals.",
+    "Whether the bridge transfers to untouched OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena/DeepSearchQA/WideSearch/ClosureBench.",
+    "Whether authored repair content and GUI/browser control can be represented without a model.",
+    "Whether full completeness/source-scope closure can be certified in an open world.",
+    "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style section 6 verification will become available."
+  ],
+  "verifier_id": "PENDING_DISTINCT_GITHUB_ACTIONS_OIDC_RUNNER"
+}
