@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 601,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7250,
+  "research_index_records": 7252,
   "routing_tokens": 2373,
   "skills": 18,
-  "source_index_entry_points": 457,
-  "source_index_modules": 2014
+  "source_index_entry_points": 458,
+  "source_index_modules": 2015
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "847c1ebc569b976e87ae78354faf973588898a546a14c21e339d09aa4349adda"
+  "value": "e3704da2d840cc5b762210d4e8a1820d50b738f04aca7a84504e19d6e21c3ca5"
  },
  "engines": [
   {
@@ -173906,6 +173906,24 @@
    }
   },
   {
+   "action_id": "DOES_EXPERIENCE_COMPOUND_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/DOES_EXPERIENCE_COMPOUND_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DOES_EXPERIENCE_COMPOUND_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_DOES_EXPERIENCE_COMPOUND_V1",
+   "sha256": "74c9c7eacc77cf96f87144061374e18add3d8015b74cb3263480149662d4b9a5",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "compound": 1,
+    "does_experience_compound_20261124_v1": 1,
+    "experience": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-11-19",
@@ -249721,6 +249739,51 @@
    }
   },
   {
+   "action_id": "DOES_EXPERIENCE_COMPOUND_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/DOES_EXPERIENCE_COMPOUND_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DOES_EXPERIENCE_COMPOUND_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "4deb1c31425126a8afd72588aee1cca0522d9c9eeea86321fa3d522080639db7",
+   "status": "SHIPPED",
+   "terms": {
+    "20261124": 1,
+    "against": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "becomes": 1,
+    "been": 2,
+    "compound": 1,
+    "controllable": 1,
+    "data": 1,
+    "descriptions": 1,
+    "distinguish": 1,
+    "does_experience_compound_20261124_v1": 1,
+    "elements": 1,
+    "experience": 2,
+    "false": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "had": 2,
+    "judge": 1,
+    "justifies": 1,
+    "learning": 1,
+    "leaves": 1,
+    "looking": 1,
+    "lowered": 1,
+    "never": 1,
+    "not": 1,
+    "number": 1,
+    "open": 1,
+    "optimising": 1,
+    "out": 1,
+    "own": 1,
+    "page": 1,
+    "pages": 1,
+    "produce": 1
+   }
+  },
+  {
    "action_id": "DOES_THE_REFUSAL_NAME_THE_MISSING_WORD_20261119_V1",
    "capability": false,
    "date": "2026-11-19",
@@ -288350,6 +288413,50 @@
     "true": 1,
     "true-capability": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/does_experience_compound_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/does_experience_compound_v1.py",
+   "sha256": "f4d093f248b60cf8bab46f8c8f0015dde02fb49a0ed3b10a46e89581cfc6f5bb",
+   "summary": "Does one experience make the next task cheaper? Measured, in bits, across a real run.",
+   "symbol_count": 8,
+   "symbols": [
+    "attribute_bill",
+    "bits",
+    "compounding",
+    "cost_distribution",
+    "main",
+    "steps_of",
+    "task_rows",
+    "verdict"
+   ],
+   "terms": {
+    "across": 1,
+    "attribute_bill": 1,
+    "bits": 2,
+    "cheaper": 1,
+    "compound": 1,
+    "compounding": 1,
+    "cost_distribution": 1,
+    "experience": 2,
+    "main": 1,
+    "make": 1,
+    "measured": 1,
+    "next": 1,
+    "one": 1,
+    "real": 1,
+    "run": 1,
+    "steps_of": 1,
+    "task": 1,
+    "task_rows": 1,
+    "v1": 1,
+    "verdict": 1
    }
   },
   {

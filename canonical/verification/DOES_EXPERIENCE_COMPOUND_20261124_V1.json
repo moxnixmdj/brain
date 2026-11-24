@@ -1,0 +1,193 @@
+{
+  "schema": "PROJECT_BRAIN_DOES_EXPERIENCE_COMPOUND_V1",
+  "authority": "NONE",
+  "read_from": "canonical/verification/MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json",
+  "does_experience_compound": {
+    "verdict": "FLAT__EXPERIENCE_DOES_NOT_LOWER_THE_COST_OF_AN_UNSEEN_TASK",
+    "tasks_with_steps": 78,
+    "bits_per_step_first_half": 5.49,
+    "bits_per_step_second_half": 5.39,
+    "change_bits_per_step": -0.1,
+    "distinct_descriptions": 96,
+    "distinct_after_first_half": 41,
+    "added_in_second_half": 55,
+    "share_of_descriptions_added_in_second_half": 0.573,
+    "threshold_bits_per_step": 0.25,
+    "reading": "a change smaller than 0.25 bits cannot be told apart from which pages happened to be in which half"
+  },
+  "where_the_cost_lives": {
+    "distinct_descriptions": 146,
+    "total_bits": 751.7,
+    "conjunctions": 0,
+    "by_attribute": {
+      "self.tag": {
+        "n": 61,
+        "bits": 263.1
+      },
+      "self.classes": {
+        "n": 43,
+        "bits": 250.6
+      },
+      "self.id": {
+        "n": 28,
+        "bits": 165.4
+      },
+      "(nothing to key on)": {
+        "n": 10,
+        "bits": 52.0
+      },
+      "self.text": {
+        "n": 1,
+        "bits": 7.7
+      },
+      "self.colour": {
+        "n": 1,
+        "bits": 6.6
+      },
+      "self.full_text": {
+        "n": 1,
+        "bits": 6.3
+      },
+      "prev.tag": {
+        "n": 1,
+        "bits": 0.0
+      }
+    },
+    "top_three": [
+      "self.tag",
+      "self.classes",
+      "self.id"
+    ],
+    "top_three_share": 0.903,
+    "language_is_already_small": true
+  },
+  "is_the_cost_page_shaped": {
+    "steps": 478,
+    "min": 1,
+    "median": 40.5,
+    "max": 308,
+    "share_above_30_candidates": 0.63,
+    "share_at_or_below_5": 0.046,
+    "bands": [
+      {
+        "candidates": "1-1",
+        "steps": 3,
+        "share": 0.006,
+        "bits_low_high": [
+          0.0,
+          0.0
+        ]
+      },
+      {
+        "candidates": "2-5",
+        "steps": 19,
+        "share": 0.04,
+        "bits_low_high": [
+          1.0,
+          2.3
+        ]
+      },
+      {
+        "candidates": "6-20",
+        "steps": 72,
+        "share": 0.151,
+        "bits_low_high": [
+          2.6,
+          4.3
+        ]
+      },
+      {
+        "candidates": "21-60",
+        "steps": 221,
+        "share": 0.462,
+        "bits_low_high": [
+          4.4,
+          5.9
+        ]
+      },
+      {
+        "candidates": "61-150",
+        "steps": 146,
+        "share": 0.305,
+        "bits_low_high": [
+          5.9,
+          7.2
+        ]
+      },
+      {
+        "candidates": "151-more",
+        "steps": 17,
+        "share": 0.036,
+        "bits_low_high": [
+          7.2,
+          8.3
+        ]
+      }
+    ],
+    "reading": "the cost is log2 of the candidates that still fit, so a heavy right tail is dense pages rather than a weak learner"
+  },
+  "the_answer": "NO, at this size. Across the 78 tasks that produced a program, the cost of an unseen step moves from 5.49 to 5.39 bits -- a change of -0.10 over the whole run, which is flat within the threshold that this measurement can resolve. The vocabulary keeps growing (96 descriptions, 57% of them arriving in the second half), and the language is already minimal: 90% of the bill sits in three attributes that are each needed to name an element, so removing one removes the ability to say what a step targets. 63% of real steps face more than 30 candidate descriptions, so the price is set by how dense a page is, not by what the learner has already seen.",
+  "what_this_refuses_to_claim": [
+    "that one experience is useless -- it pays about one bit, permanently, and that is real",
+    "that the 5 bits are irreducible in principle -- a smaller language would lower them; measured here, the language is already small and the price is spread over attributes that are each necessary",
+    "that a better learner would fix it -- the cost is log2 of what the page does not distinguish, which no learner can lower by seeing more pages",
+    "that this generalises beyond MiniWoB-shaped pages -- it is one recorded run"
+  ],
+  "the_lever_that_remains": "the bill is log2 of the descriptions that still fit, so it falls when an OBSERVATION REMOVES candidates -- an acting question, not a learning one. Looking before choosing, and pages that distinguish their elements, lower the price in a way no amount of experience can.",
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0,
+  "action_id": "DOES_EXPERIENCE_COMPOUND_20261124_V1",
+  "date": "2026-11-24",
+  "canonical_base_commit": "b182859b79766c758b49ac1117a8d4169116f125",
+  "why_this_round_exists": "Rounds 9-12 built a machine that can produce a missing kind and judge it, and by rounds 11-12 it could read 98.2% of a real system. Before building round 13 on the same pattern I tested the STRATEGY those rounds assume: that one demonstration per environment, plus a published guide, totals computer use. The tree already held the numbers to answer it, so no new episode was needed.",
+  "what_was_already_in_the_project": {
+    "what_one_experience_buys_v1": "one experience pays about 1 bit, a step costs 5.43, 99.4% of steps need more than one bit; reuse 1.55x; vocabulary does not saturate; names \"a smaller description language\" as the remaining lever",
+    "MINIWOB_ONE_SUCCESS_GENERALISATION_20261111_V5.json": "the recorded run: 130 tasks, 78 with programs, 478 steps with a measured descriptions_left",
+    "the_honest_prior": "the strategy had already been measured as pointing the wrong way, for element identification"
+  },
+  "what_is_new": "three measurements the tree did not have: (1) whether the cost of an UNSEEN step falls across the run, walked in order and weighted by steps; (2) where the bill sits by attribute, to test the smaller-language lever; (3) whether the cost distribution is page-shaped, which decides if any learner could lower it",
+  "measured": {
+    "does_experience_compound": {
+      "verdict": "FLAT__EXPERIENCE_DOES_NOT_LOWER_THE_COST_OF_AN_UNSEEN_TASK",
+      "tasks_with_steps": 78,
+      "bits_per_step_first_half": 5.49,
+      "bits_per_step_second_half": 5.39,
+      "change_bits_per_step": -0.1,
+      "distinct_descriptions": 96,
+      "distinct_after_first_half": 41,
+      "added_in_second_half": 55,
+      "share_of_descriptions_added_in_second_half": 0.573,
+      "threshold_bits_per_step": 0.25,
+      "reading": "a change smaller than 0.25 bits cannot be told apart from which pages happened to be in which half"
+    },
+    "where_the_cost_lives": {
+      "total_bits": 751.7,
+      "top_three": [
+        "self.tag",
+        "self.classes",
+        "self.id"
+      ],
+      "top_three_share": 0.903,
+      "conjunctions": 0,
+      "language_is_already_small": true
+    },
+    "is_the_cost_page_shaped": {
+      "steps": 478,
+      "min": 1,
+      "median": 40.5,
+      "max": 308,
+      "share_above_30_candidates": 0.63,
+      "share_at_or_below_5": 0.046
+    }
+  },
+  "honest_limits": [
+    "one recorded run; MiniWoB-shaped pages only",
+    "the 0.25-bit threshold is a resolution statement, not a law",
+    "the recorded receipt holds first_success programs, so learned skills beyond the first success are not in this count",
+    "the smaller-language lever is measured as spent HERE, at this size; a different description language is not excluded",
+    "no new episode was run and no benchmark task; this is a measurement over a recorded receipt",
+    "authority NONE, sandbox only, independent verification OPEN"
+  ],
+  "verdict_on_the_strategy": "RETRACTED AS A TOTAL ANSWER. Learn each environment once and that totals computer use is FALSE for the measured cost of identifying a step, because the price is set by page density and does not fall with experience. What survives is narrower and still worth having: each experience permanently removes about one bit, and the machine now has a mechanism (rounds 9-12) that reads and judges the environment that bit is about."
+}
