@@ -175,7 +175,16 @@ jobs:
 
           def trials(job):
               out = {}
-              for path in sorted((jobs / job).glob('instance_*/result.json')):
+              # Harbor creates one child directory per trial. Do not assume a
+              # suite-specific prefix (Pro task directories can be instance_*,
+              # while dataset package trials use the task name plus Harbor's
+              # generated suffix). Follow no symlinks here.
+              for child in sorted((jobs / job).iterdir()) if (jobs / job).is_dir() else []:
+                  if child.is_symlink() or not child.is_dir():
+                      continue
+                  path = child / 'result.json'
+                  if path.is_symlink() or not path.is_file():
+                      continue
                   try:
                       result = json.loads(path.read_text())
                       name = result['task_name'].split('/')[-1]
@@ -183,7 +192,7 @@ jobs:
                           issues.append(f'{job}:duplicate:{name}')
                       out[name] = (path.parent, result)
                   except (OSError, ValueError, TypeError, KeyError, AttributeError):
-                      issues.append(f'{job}:invalid_result:{path.parent.name}')
+                      issues.append(f'{job}:invalid_result:{child.name}')
               return out
 
           def read_trace(src_dir):
