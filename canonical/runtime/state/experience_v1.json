@@ -367,6 +367,20 @@
    "where": "forged.bounded_contextual_semantics.compile_context",
    "why": "VERIFIED"
   },
+  "git.repository.operate.v1|verified": {
+   "first_seen": 1795481738.015385,
+   "last_seen": 1795481758.3745127,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "git.repository.operate.v1",
+   "why": "VERIFIED"
+  },
   "image.extract.ocr.tesseract|bound_capability_source_unsupported": {
    "first_seen": 1792313437.9199655,
    "last_seen": 1792322976.5949187,
@@ -505,8 +519,9 @@
   },
   "pdf.extract.text.pypdf|verified": {
    "first_seen": 1792313436.2314923,
-   "last_seen": 1792322993.578042,
+   "last_seen": 1795481738.4579682,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -648,8 +663,9 @@
   },
   "python.source.audit.ast|verified": {
    "first_seen": 1792312443.2595565,
-   "last_seen": 1794960827.0187445,
+   "last_seen": 1795481826.299002,
    "observations": [
+    1,
     1,
     1,
     1,
@@ -714,6 +730,34 @@
    ],
    "structural": false,
    "where": "python.source.audit.ast",
+   "why": "VERIFIED"
+  },
+  "python.source.taint_flow.v1|failed": {
+   "first_seen": 1795481733.3365147,
+   "last_seen": 1795481758.4428,
+   "observations": [
+    -1,
+    -1,
+    -1
+   ],
+   "structural": false,
+   "where": "python.source.taint_flow.v1",
+   "why": "FAILED"
+  },
+  "python.source.taint_flow.v1|verified": {
+   "first_seen": 1795481680.7042832,
+   "last_seen": 1795481751.7909672,
+   "observations": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "structural": false,
+   "where": "python.source.taint_flow.v1",
    "why": "VERIFIED"
   },
   "python.task.acceptance.measured.objective.v1|bound_capability_source_unsupported": {
@@ -882,6 +926,17 @@
   }
  },
  "procedures": {
+  "amount+by+csv+data+region+sum+summary+txt+write": {
+   "capability_id": "python.source.taint_flow.v1",
+   "examples": [
+    "total the amounts by region in data.csv and write it to summary.txt"
+   ],
+   "first_taught": 1795481680.7053428,
+   "goal": "total the amounts by region in data.csv and write it to summary.txt",
+   "last_taught": 1795481751.7920368,
+   "signature": "amount+by+csv+data+region+sum+summary+txt+write",
+   "uses": 0
+  },
   "archive+create+gz+manifest+tar": {
    "capability_id": "archive.tar_gz.create_from_manifest",
    "examples": [
@@ -893,6 +948,17 @@
    "signature": "archive+create+gz+manifest+tar",
    "uses": 0
   },
+  "commit+five+git+last+me+show": {
+   "capability_id": "git.repository.operate.v1",
+   "examples": [
+    "show me the last five git commits"
+   ],
+   "first_taught": 1795481738.0163348,
+   "goal": "show me the last five git commits",
+   "last_taught": 1795481758.3755229,
+   "signature": "commit+five+git+last+me+show",
+   "uses": 0
+  },
   "docx+verify": {
    "capability_id": "docx.document.verify.intent_ooxml",
    "examples": [
@@ -902,6 +968,28 @@
    "goal": "verify the docx canonical/astra_runtime/tmp/DOCX_INTENT_VERIFY.docx",
    "last_taught": 1794960807.5366943,
    "signature": "docx+verify",
+   "uses": 0
+  },
+  "extract+pdf+text": {
+   "capability_id": "pdf.extract.text.pypdf",
+   "examples": [
+    "extract the text from a pdf"
+   ],
+   "first_taught": 1795481738.4591706,
+   "goal": "extract the text from a pdf",
+   "last_taught": 1795481738.459181,
+   "signature": "extract+pdf+text",
+   "uses": 0
+  },
+  "git+log": {
+   "capability_id": "git.repository.operate.v1",
+   "examples": [
+    "git log of this repository"
+   ],
+   "first_taught": 1795481738.1610203,
+   "goal": "git log of this repository",
+   "last_taught": 1795481738.1610353,
+   "signature": "git+log",
    "uses": 0
   }
  },

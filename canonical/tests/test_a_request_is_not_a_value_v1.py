@@ -180,3 +180,45 @@ def test_a_payload_slot_is_named_by_its_own_vocabulary():
         assert WB._is_payload_slot(payload), payload
     for reference in ("output_path", "archive_path", "repo_root", "limit", "op", "target"):
         assert not WB._is_payload_slot(reference), reference
+
+
+# ------------------------------------------------------------------------------------------
+# 5. A report about something is not that something
+# ------------------------------------------------------------------------------------------
+def test_a_security_report_is_not_a_per_region_total():
+    """THE WORST FALSE PASS THIS ROUND FOUND, reproduced end to end.
+
+    Asked for `"total the amounts by region in data.csv and write it to summary.txt"`, the machine selected
+    `python.source.taint_flow.v1` -- a SECURITY TAINT ANALYSER -- wrote its report into `summary.txt`,
+    re-read those bytes from disk, confirmed the hash, and reported VERIFIED_ACTION. `summary.txt` held:
+
+        {"analysis_model": "BOUNDED_NAME_BASED_DATAFLOW", "answer": "no", "files_scanned": 1,
+         "finding_count": 0, "is_security_proof": false, ...}
+
+    Every mechanism worked and the result was useless. A capability's `expect` proves what the ADAPTER did;
+    nothing proved the bytes answer the QUESTION.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        (pathlib.Path(tmp) / "data.csv").write_text("region,amount\nnorth,10\nsouth,20\n", encoding="utf-8")
+        (pathlib.Path(tmp) / "tally.py").write_text("print('x')\n", encoding="utf-8")
+        result = GA.act("total the amounts by region in data.csv and write it to summary.txt", root=tmp)
+        assert result.get("status") != "VERIFIED_ACTION", (
+            "a taint report was accepted as a per-region total: "
+            + json.dumps({"capability_id": result.get("capability_id"),
+                          "expect": result.get("expect")}, default=str)[:300])
+
+
+def test_the_gate_is_narrow_and_reads_the_sentence():
+    """It fires only on arithmetic requests answered by a report, and never the other way round."""
+    report = {"analysis_model": "X", "finding_count": 0, "is_security_proof": False}
+    total = {"totals": {"north": 15.0}, "sum": 35.0}
+
+    # an arithmetic request answered by a report -> refused, and it names what it saw
+    reason = GA._answers_the_arithmetic_asked("total the amounts by region in data.csv", report)
+    assert reason and reason.startswith("A_REPORT_ANSWERS_A_DIFFERENT_QUESTION"), reason
+    # an arithmetic request answered by arithmetic -> nothing to say
+    assert GA._answers_the_arithmetic_asked("total the amounts by region in data.csv", total) is None
+    # a request FOR a report -> nothing to say, even though the result is a report
+    assert GA._answers_the_arithmetic_asked("run a security analysis and write a report", report) is None
+    # a request that asks for no arithmetic -> nothing to say
+    assert GA._answers_the_arithmetic_asked("show me the last five git commits", report) is None

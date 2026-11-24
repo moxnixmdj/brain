@@ -8324,3 +8324,79 @@ which is the shadowing failure with the machine as its own teacher.
 ### What is not established
 
     NOT DONE   §6. No OSWorld task, no SWE-bench instance, nothing beyond this machine's own tools.
+
+---
+
+## §A142 — the machine cannot use a tool it has never been told about, and a report is not a total
+
+### The user's question, answered by measurement
+
+The question was: why can a person do something once and know it, while the machine cannot? To test it, a
+tool was placed in a directory the machine had never seen:
+
+    tally.py   -- reads a csv, groups by the first column, prints the totals as json
+
+and then the ordinary request:
+
+    "total the amounts by region in data.csv and write it to summary.txt"
+
+    -> VERIFIED_ACTION, capability_id: python.source.taint_flow.v1
+    summary.txt contains:
+        {"analysis_model": "BOUNDED_NAME_BASED_DATAFLOW", "answer": "no", "files_scanned": 1,
+         "finding_count": 0, "is_security_proof": false, ...}
+
+**A SECURITY TAINT ANALYSER was chosen for a summarisation task.** It scanned `tally.py`, wrote its report
+into `summary.txt`, the hash was re-read from disk and matched, and the run reported VERIFIED_ACTION.
+
+Three separate things are wrong, in increasing order of importance:
+
+    1. `tally.py` was never considered. The machine has no mechanism that looks at what a NEW directory
+       contains and asks whether a tool in it could do the job. It selects only among capabilities it was
+       TOLD about. That is the limitation the user's idea targets, measured rather than argued.
+    2. A taint report is not a per-region total, and nothing checked. Every verification passed: the file
+       existed at the named path, the bytes matched the hash, `output_verified` was true. A capability's
+       `expect` proves what the ADAPTER did. Nothing proved the bytes ANSWER THE QUESTION.
+    3. `answer_shape_v1` -- which exists for exactly this class of defect, and documents it ("an inspector
+       that counts was chosen for a request that asked to extract") -- is never called by
+       `grounded_action_v1`. A mechanism one route can skip is not a mechanism.
+
+### The fix, and its exact scope
+
+`_answers_the_arithmetic_asked(goal, result)` refuses a REPORT substituted for computed numbers. It fires
+only when the sentence asks for arithmetic (total/sum/average/mean/median/count) AND the result carries
+report vocabulary (`analysis_model`, `finding`, `finding_count`, `is_security_proof`, ...), and it stands
+aside when the sentence asked for a report.
+
+    -> ACTION_FAILED
+       expect: A_REPORT_ANSWERS_A_DIFFERENT_QUESTION:analysis_model,finding,finding_count
+               +ARTIFACT_REVERIFIED:summary.txt
+
+The artifact line stays: the bytes were real, and saying so is honest. What changed is that real bytes no
+longer buy a VERIFIED verdict for a question they do not answer.
+
+Real work is unaffected: git log, git status, writing a stated string, and pdf text extraction all still
+report VERIFIED_ACTION.
+
+### Laws
+
+    (109) A capability's postcondition is a statement about the adapter, never about the question. Bytes at
+          the named path with a matching hash can still be an answer to something else entirely.
+    (110) A report about a thing is not the thing. A taint analysis of a file is not that file's totals.
+    (111) A verification mechanism that only one route calls is not a mechanism. `answer_shape_v1` was
+          written for this exact failure on 2026-10-31 and `grounded_action_v1` never consulted it.
+
+### The real bottleneck, now measured rather than guessed
+
+The machine selects among a FIXED registry. In a new directory it never reads what is present and asks
+"could any of this do the job?". Everything else in this round -- binding, verification, memory,
+composition -- assumes a capability already exists and merely has to be reached.
+
+That is why one demonstration does not buy lasting capability here: a demonstration is recorded as a
+PROCEDURE (which capability to call, with what arguments), not as a NEW CAPABILITY. The forge can admit a
+Python function it already ships; it cannot yet turn `tally.py`, a file it has just met, into something it
+can call, verify once, and reuse.
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance.
+    NEXT       Reading an unfamiliar directory for callable tools and admitting one from a single verified
+               run -- the forge's five checks already exist for exactly that, and nothing yet points them at
+               a file the machine has just discovered.

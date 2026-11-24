@@ -199,6 +199,56 @@ _GOAL_STOPWORDS = frozenset({
 
 
 
+# WHAT A SENTENCE ASKS FOR, IN ITS OWN WORDS. A request that names a *total* wants a number for each group;
+# a request that names an *analysis* or a *report* wants prose. This is not a topic table: it is the small set
+# of arithmetic words a person uses when no prose answer would satisfy them.
+_WANTS_A_COMPUTED_NUMBER = ("total", "totals", "sum", "sums", "average", "mean", "median", "count")
+# A REPORT ABOUT SOMETHING IS NOT THAT SOMETHING. These are the words a scan, audit or analysis answers with.
+_REPORT_WORDS = ("analysis_model", "finding", "finding_count", "findings", "is_security_proof",
+                 "violation", "violations", "diagnostic", "diagnostics", "audit_trail")
+
+
+def _answers_the_arithmetic_asked(goal, result):
+    """Refuse a report substituted for a computed number.
+
+    MEASURED 2026-11-23, and this is the worst defect the round found. Asked for
+
+        "total the amounts by region in data.csv and write it to summary.txt"
+
+    the machine selected `python.source.taint_flow.v1` -- a SECURITY TAINT ANALYSER -- wrote its report into
+    `summary.txt`, re-read those bytes from disk, confirmed the hash, and reported VERIFIED_ACTION. The file
+    contained:
+
+        {"analysis_model": "BOUNDED_NAME_BASED_DATAFLOW", "answer": "no", "files_scanned": 1,
+         "finding_count": 0, "is_security_proof": false, ...}
+
+    Every mechanism worked. The bytes were real, the hash was right, the artifact existed at the named path.
+    NOTHING EVER CHECKED THAT A TAINT REPORT IS NOT A PER-REGION TOTAL. A person opening `summary.txt` would
+    find a security scan of a Python file and no totals at all.
+
+    The check is deliberately narrow: it fires only when the sentence asks for arithmetic AND the result is a
+    report about something else, and it looks only at the words the report itself uses. It cannot reject a
+    capability that returns a total, and it cannot reject a sentence that asked for a report.
+
+    Returns None when nothing is wrong, or the reason.
+    """
+    tokens = set(_re.findall(r"[a-z]+", str(goal or "").lower()))
+    if not tokens.intersection(_WANTS_A_COMPUTED_NUMBER):
+        return None
+    if "report" in tokens or "analysis" in tokens or "analyse" in tokens or "analyze" in tokens:
+        return None                                    # a report was what was asked for
+    if not isinstance(result, dict):
+        return None
+    keys = set(str(k).lower() for k in result.keys())
+    for nested in (result.get("result"), result.get("payload"), result.get("report")):
+        if isinstance(nested, dict):
+            keys |= set(str(k).lower() for k in nested.keys())
+    hit = keys.intersection(_REPORT_WORDS)
+    if not hit:
+        return None
+    return "A_REPORT_ANSWERS_A_DIFFERENT_QUESTION:" + ",".join(sorted(hit)[:3])
+
+
 def _independent_artifact_check(result, root):
     """Re-read what the capability claims to have produced.
 
@@ -973,6 +1023,15 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
                 result, invoked, error = None, False, type(exc).__name__ + ":" + str(exc)
         expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
         verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+        # A CAPABILITY'S OWN POSTCONDITION IS NOT A STATEMENT ABOUT THE QUESTION.
+        # `expect` proves what the adapter says it did -- bytes written, hash matched. It cannot prove those
+        # bytes answer the sentence, and measured 2026-11-23 it did not: a taint analyser wrote a security
+        # report into `summary.txt`, the hash matched, and VERIFIED_ACTION was reported for a request that
+        # asked for per-region totals. This is called at BOTH verification sites for exactly that reason.
+        if verified:
+            _wrong_question = _answers_the_arithmetic_asked(goal, result)
+            if _wrong_question:
+                verified, expect_note = False, _wrong_question
         independent = _independent_artifact_check(result, root) if invoked else None
         if independent is not None:
             if not independent[0]:
@@ -1019,6 +1078,10 @@ def act(goal, root=None, registry=None, verbose=False, memory=True,
 
     expect = ((chosen["entry"].get("action_template") or {}).get("expect"))
     verified, expect_note = _check_expect(expect, result) if invoked else (False, "NOT_INVOKED")
+    if verified:                                   # see the note at the other verification site
+        _wrong_question = _answers_the_arithmetic_asked(goal, result)
+        if _wrong_question:
+            verified, expect_note = False, _wrong_question
     independent = _independent_artifact_check(result, root) if invoked else None
     if independent is not None:
         if not independent[0]:
