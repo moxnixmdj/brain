@@ -1005,6 +1005,18 @@ _GENERATED_OUTPUTS = frozenset(
 )
 
 
+#: DIRECTORIES THAT ARE BUILD DEBRIS, NOT CONTENT. Measured on PR #7059: the research index
+#: walked `rglob("*")` excluding only `.git`, so a `__pycache__/*.pyc` left behind by a test
+#: run in `canonical/verification/` was indexed as a research record. The artifact then held
+#: 7246 rows where a clean checkout holds 7245, and `recompilation_is_byte_identical` failed
+#: in CI while passing locally -- the digest was a function of whether tests had been run,
+#: not of what the tree contains. `python3 -m py_compile` and the default `python3 file.py`
+#: both write `__pycache__`, so this is not an exotic case: any local run of any test seeds
+#: it. A compiled artifact must be a function of the tree alone.
+_NON_SOURCE_DIRS = frozenset({"__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache",
+                              ".git", "node_modules", ".venv", "venv"})
+
+
 def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     """Index the research record: governance, verification, and action intents.
 
@@ -1025,7 +1037,7 @@ def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
         if not base.is_dir():
             continue
         for path in sorted(base.rglob("*")):
-            if not path.is_file() or ".git" in path.parts:
+            if not path.is_file() or any(part in _NON_SOURCE_DIRS for part in path.parts):
                 continue
             rel = path.relative_to(root).as_posix()
             if rel in covered or rel in _GENERATED_OUTPUTS:

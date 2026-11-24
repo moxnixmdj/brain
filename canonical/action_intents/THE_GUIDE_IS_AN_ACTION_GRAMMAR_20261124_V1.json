@@ -1757,7 +1757,7 @@
   "what_is_real": "446 pages -> 87 stated transitions -> 11 of 11 servable needs held, 3 by a two-edge path, 2 held-out needs refused before any page was read, 0 model calls, 0 parameters, 0 run-time network, 65 s",
   "what_is_not": "a benchmark result; a claim about GUIs, browsers or unseen environments; single-experience learning; any terminal credit"
  },
- "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+ "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
@@ -1814,7 +1814,7 @@
   }
  ],
  "route_frontier": {
-  "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+  "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
   "checked_at_utc": "2026-11-24T03:09:52+00:00",
   "discovery_required": true,
   "max_age_hours": 2,
@@ -2023,7 +2023,7 @@
  "generic_repair_from_single_probe": false,
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+  "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
   "real_outcome": "446 pages read, 87 transitions the pages state, 11 of 11 servable needs held, 3 of them by a path of two edges, 2 held-out needs refused before a page was read, 1 named-flag repair and 2 object re-binds in a declared drill, 1 of 3 derived checks shown blind. 0 model calls, 0 parameters, 0 run-time network, 65 s.",
   "required_capability": "a typed action repertoire read from the machine's own pages, joined to a room typed by bytes",
   "obs_goal": {
@@ -2114,7 +2114,7 @@
   "expected_parent_level_state_change": "the frontier moves from 'which option changes a byte' to 'which typed transition, on which object, for which end' -- the missing object the repertoire round named as PURPOSE",
   "stop_condition": "stop when every page this machine can print has been read as a grammar, every transition its own sentence or flag states is in the repertoire, and every need is either answered by a path whose last step a read-only program confirms, or refused before a page is read",
   "route_frontier": {
-   "canonical_base_commit": "0514dc57466174bf2f16d6de29e60bfff9a443ef",
+   "canonical_base_commit": "62223e4080c062fed080ba84df973954ae732b12",
    "checked_at_utc": "2026-11-24T03:09:52+00:00",
    "discovery_required": true,
    "max_age_hours": 2,

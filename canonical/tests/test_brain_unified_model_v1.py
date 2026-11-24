@@ -1439,6 +1439,26 @@ class ResearchIndexTests(unittest.TestCase):
     def setUpClass(cls):
         cls.model = model_runtime.open_model()
 
+    def test_build_debris_is_not_indexed_as_research(self):
+        """THE DIGEST MUST NOT DEPEND ON WHETHER TESTS HAVE BEEN RUN.
+
+        Measured on PR #7059: the research index walked `rglob("*")` excluding
+        only `.git`, so a `canonical/verification/__pycache__/*.pyc` left by a
+        test run was indexed as a research record. The artifact then held 7246
+        rows where a clean checkout holds 7245, and
+        `recompilation_is_byte_identical` failed in CI while passing locally --
+        the digest was a function of the build, not of the tree.
+
+        `python3 file.py` and `python3 -m py_compile` both write `__pycache__`,
+        so any local run of any test seeds it. This asserts the artifact's
+        content is immune, which is the property the verifier is checking.
+        """
+        for record in self.model.research_index:
+            path = record if isinstance(record, str) else str(record.get("id") or "")
+            for debris in ("__pycache__", ".pyc", ".pytest_cache"):
+                self.assertNotIn(debris, path,
+                                 f"build debris {debris} was indexed as research")
+
     def test_the_research_corpora_are_indexed(self):
         roots = ("canonical/governance/", "canonical/verification/", "canonical/action_intents/")
         counts = {r: 0 for r in roots}
