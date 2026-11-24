@@ -237,7 +237,41 @@ def read_operator_gap(output: str) -> dict | None:
 def load_contract(meta_dir: pathlib.Path) -> dict:
     """The published verifier contract, parsed with literal_eval -- test names may contain quotes."""
     meta_dir = pathlib.Path(meta_dir)
-    cfg = json.loads((meta_dir / "config.json").read_text(encoding="utf-8"))
+    raw = (meta_dir / "config.json").read_text(encoding="utf-8")
+    try:
+        cfg = json.loads(raw)
+    except json.JSONDecodeError:
+        # SOME PUBLISHED config.json ARE MALFORMED: a parameterised id containing a quote is
+        # emitted without escaping it, so the file is not valid JSON. Measured on
+        # ansible-be2c376a, where `test_ttyify[no-op", "` breaks the document at char 611.
+        # Recover the STRUCTURE (test ids) rather than the document: every id is a `test/...`
+        # path followed by optional ::selectors, so the ids can be read without parsing the file.
+        def _ids_after(key):
+            m = re.search(r'"' + key + r'"\s*:', raw)
+            if not m:
+                return []
+            tail = raw[m.end():]
+            return re.findall(r'"((?:test|openlibrary|tests|lib)/[^"\\]*?)"', tail)
+        return {"fail_to_pass": _ids_after("fail_to_pass"),
+                "pass_to_pass": _ids_after("pass_to_pass"),
+                "config_recovered": True}
     def _lst(v):
-        return list(ast.literal_eval(v)) if isinstance(v, str) else list(v)
+        """Read a list that is stored as a STRING, surviving ids that contain quotes.
+
+        The file is valid JSON, and the value is a string containing a Python list. `literal_eval`
+        SILENTLY SUCCEEDS AND SILENTLY TRUNCATES when an id contains an escaped quote: measured
+        on ansible-be2c376a, where sixteen ids became two and the twelve lost ones included the
+        failing test. A truncating parse is worse than a failing one, so compare against the
+        count of id-shaped tokens in the raw text and use the textual reading when they disagree.
+        """
+        if not isinstance(v, str):
+            return list(v)
+        try:
+            got = list(ast.literal_eval(v))
+        except Exception:
+            got = []
+        ids = [m.replace('\\"', '"') for m in
+               re.findall(r'"((?:test|tests|openlibrary|lib)/[^"]*?)"', v)]
+        ids = [i for i in ids if i]
+        return ids if len(ids) > len(got) else got
     return {"fail_to_pass": _lst(cfg["fail_to_pass"]), "pass_to_pass": _lst(cfg["pass_to_pass"])}

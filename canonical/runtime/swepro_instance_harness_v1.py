@@ -125,13 +125,24 @@ def fetch_instance(instance_id: str, dest: Path) -> dict:
     # The contract is ALSO written under the plain name its one reader looks for. One file, one
     # copy, two paths that callers already use -- rather than a second parse or a second name.
     (dest / "config.json").write_bytes((dest / "tests__config.json").read_bytes())
+    # THE ANSWER SHEET IS NOT KEPT. `fetch_instance` is used by the SOLVER, and the gold patch was
+    # being downloaded into the attempt workspace on every instance. The solver never read it, so
+    # no result was contaminated -- but a file present is a file readable, and "we did not look"
+    # is not a guarantee. `reproduce()` fetches its own copy under the name it needs.
+    for leaked in ("solution__gold_patch.diff", "solution__solve.sh"):
+        f = dest / leaked
+        if f.exists():
+            f.unlink()
+    (dest / "solution_DELETED.txt").write_text(
+        "The published gold patch is deliberately not stored here.\n", encoding="utf-8")
 
-    cfg = json.loads(got["tests/config.json"].read_text(encoding="utf-8"))
-    # The bench stores these as python-repr strings, so json.loads needs the quotes fixed.
-    f2p = json.loads(cfg["fail_to_pass"].replace("'", '"')) if isinstance(cfg["fail_to_pass"], str) else cfg["fail_to_pass"]
-    p2p = json.loads(cfg["pass_to_pass"].replace("'", '"')) if isinstance(cfg["pass_to_pass"], str) else cfg["pass_to_pass"]
-    got["fail_to_pass"] = f2p
-    got["pass_to_pass"] = p2p
+    # ONE READER FOR ONE FILE. This used to re-parse the contract here with
+    # `json.loads(v.replace("'", '"'))` -- the exact corruption called out in the project's own
+    # list of dead ends, because replacing quotes mangles any id that legitimately contains an
+    # apostrophe or an escaped quote. It threw on ansible-be2c376a and was invisible for every
+    # other instance, which is the worst kind of duplicate: correct-looking most of the time.
+    from canonical.runtime.derive_from_the_failure_v1 import load_contract
+    got.update(load_contract(dest))
     return got
 
 
@@ -203,6 +214,108 @@ def _apply(room: Path, patch: Path, *, check_only: bool = False) -> tuple[bool, 
     return proc.returncode == 0, (proc.stdout + proc.stderr).strip()
 
 
+def prepare_room(room: Path, python: str, *, timeout: int = 600) -> dict:
+    """Make the room able to run its OWN tests: submodules, then requirements.
+
+    A room whose conftest cannot import is not a task, it is a broken room -- measured on
+    openlibrary, where `infogami` is a symlink into an unpopulated submodule and every instance
+    died with `ModuleNotFoundError` before a single assertion ran. The graded image populates
+    submodules; a harness that does not is measuring its own omissions.
+
+    pip is best-effort on purpose: openlibrary's requirements pin a package that will not build
+    here, and a partial install still lets the named test collect. The caller decides what to do
+    with a room that stays broken; this function only reports.
+    """
+    notes: dict = {"submodules": None, "pip": None}
+    if (room / ".gitmodules").is_file():
+        # `git submodule update` EXITS 0 AND POPULATES NOTHING in a tree whose gitlinks were not
+        # materialised by the tarball build -- measured: openlibrary, where it reported success
+        # and every conftest still died on `No module named 'infogami'`. So ask the file itself
+        # what it wants and fetch it directly when the cheap route leaves the path empty.
+        p = subprocess.run(["git", "submodule", "update", "--init", "--recursive", "--depth", "1"],
+                           cwd=room, capture_output=True, text=True, timeout=timeout)
+        notes["submodules"] = "ok" if p.returncode == 0 else (p.stderr or p.stdout)[-200:]
+        pairs = re.findall(r"path\s*=\s*(\S+)\s*\n\s*url\s*=\s*(\S+)",
+                           (room / ".gitmodules").read_text(encoding="utf-8", errors="replace"))
+        fetched = []
+        for rel, url in pairs:
+            dest = room / rel
+            if dest.is_dir() and any(dest.iterdir()):
+                continue
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            # The path may hold an EMPTY DIRECTORY (a gitlink that was never materialised) or a
+            # symlink into one. `unlink()` on a directory raises IsADirectoryError -- measured.
+            if dest.is_symlink() or dest.is_file():
+                dest.unlink()
+            elif dest.is_dir():
+                shutil.rmtree(dest, ignore_errors=True)
+            q = subprocess.run(["git", "clone", "-q", "--depth", "1", url, str(dest)],
+                               capture_output=True, text=True, timeout=timeout)
+            if q.returncode == 0:
+                fetched.append(rel)
+        if fetched:
+            notes["submodules_fetched"] = fetched
+    # A ROOM GETS ITS OWN INTERPRETER. Installing a repo's pins into a shared venv mutates every
+    # other instance: openlibrary pins `pytest==7.4.0`, which silently downgraded a shared 9.2.0
+    # and left `pytest-asyncio` incompatible with the repo's own `py`/apipkg (`AttributeError:
+    # __spec__`) -- a failure that reads as a broken repo and is a broken harness.
+    # ONE VENV PER REPOSITORY, not per room. Instances of one repo share their pins, and a venv
+    # costs ~90 MB: twenty-three rooms of ansible filled a 21 GB disk (measured, "No space left
+    # on device" mid-batch). Keyed on the repo slug, so two repos never share an interpreter.
+    import hashlib
+    # Key on the REPO, read from the room's own git remote -- not on a directory name, which
+    # identifies the batch run and not the code. Two instances of one repo then share one venv;
+    # two repos never do.
+    try:
+        remote = subprocess.run(["git", "config", "--get", "remote.origin.url"], cwd=room,
+                                capture_output=True, text=True, timeout=30).stdout.strip()
+    except Exception:
+        remote = ""
+    repo_key = re.sub(r"\W+", "-", remote.rstrip("/").split("/")[-1].removesuffix(".git")) or "repo"
+    venv_dir = room.parent / f"venv-{repo_key}"
+    if not (venv_dir / "bin" / "python").exists():
+        subprocess.run([python, "-m", "venv", str(venv_dir)], capture_output=True, text=True,
+                       timeout=timeout)
+    vpy = str(venv_dir / "bin" / "python")
+    subprocess.run([vpy, "-m", "pip", "install", "-q", "--disable-pip-version-check",
+                    "pytest", "pytest-asyncio"], capture_output=True, text=True, timeout=timeout)
+    notes["venv"] = vpy
+    # ONE LINE AT A TIME. A single unpinnable package aborts a whole `-r` install and takes the
+    # other forty down with it -- measured: openlibrary's `amightygirl.paapi5-python-sdk` killed
+    # the batch and left `babel` missing, which surfaced only as a conftest ImportError.
+    failed, done = [], 0
+    for req in ("requirements.txt", "requirements_test.txt"):
+        f = room / req
+        if not f.is_file():
+            continue
+        for line in f.read_text(encoding="utf-8", errors="replace").splitlines():
+            spec = line.split("#")[0].strip()
+            if not spec or spec.startswith("-"):
+                continue
+            p = subprocess.run([vpy, "-m", "pip", "install", "-q",
+                                "--disable-pip-version-check", spec],
+                               cwd=room, capture_output=True, text=True, timeout=timeout)
+            if p.returncode == 0:
+                done += 1
+                continue
+            # Binary-only retry. `psycopg2` wants to compile against libpq; `psycopg2-binary`
+            # ships the same module already built. A source build failing says nothing about
+            # whether the module is available, so before recording a failure, try the wheel.
+            if "psycopg2" in spec and "binary" not in spec:
+                alt = spec.replace("psycopg2", "psycopg2-binary", 1)
+                q = subprocess.run([vpy, "-m", "pip", "install", "-q",
+                                    "--disable-pip-version-check", alt],
+                                   cwd=room, capture_output=True, text=True, timeout=timeout)
+                if q.returncode == 0:
+                    done += 1
+                    continue
+            failed.append(spec.split("==")[0])
+    notes["pip"] = f"{done} installed, {len(failed)} failed"
+    if failed:
+        notes["pip_failed"] = failed[:20]
+    return notes
+
+
 def _import_roots(room: Path) -> list[str]:
     """The directories a repo expects on `sys.path`, discovered from its own layout.
 
@@ -211,7 +324,10 @@ def _import_roots(room: Path) -> list[str]:
     from sixteen failures. Discovery is by presence, not by repo name, so the next repo works.
     """
     roots = []
-    for rel in ("lib", "src", "test", "tests", "."):
+    # VENDORED SOURCES COUNT. openlibrary keeps `infogami` in vendor/infogami and exposes it
+    # through a symlink that points inside an (unpopulated) submodule; without the vendor parent
+    # on the path the conftest cannot import it and no test runs.
+    for rel in ("lib", "src", "test", "tests", "vendor", "vendor/infogami", "."):
         cand = room / rel
         if cand.is_dir():
             roots.append(str(cand))
@@ -289,7 +405,12 @@ def reproduce(instance_id: str, workdir: Path, python: str | None = None) -> dic
     f2p, p2p = meta["fail_to_pass"], meta["pass_to_pass"]
     before = grade(room, f2p, p2p, python=python)
 
-    ok, msg = _apply(room, meta["solution/gold_patch.diff"])
+    # The oracle state is the ONLY place the answer sheet is allowed, and it is fetched here, by
+    # this function, rather than riding along in every solver workspace.
+    gold = workdir / "meta" / "solution__gold_patch.diff"
+    if not gold.exists():
+        gold.write_bytes(_contents(f"{PRO_CONTENTS}/{instance_id}/solution/gold_patch.diff"))
+    ok, msg = _apply(room, gold)
     if not ok:
         raise RuntimeError("GOLD_PATCH_DID_NOT_APPLY:" + msg)
     after = grade(room, f2p, p2p, python=python)

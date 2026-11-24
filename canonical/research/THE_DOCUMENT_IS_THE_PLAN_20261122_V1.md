@@ -9733,3 +9733,75 @@ true one.** The classification looked complete and was reading the wrong lines.
     * Two instances resolved out of twelve is 16.7 %, and the frontier on this bench is not the
       comparison: these are single-test-per-instance, the easy tail of the census.
     * **§6 NOT MET.** No OSWorld task, no full-benchmark run, no unseen-environment result.
+
+## §A156 — The denominator grew, the rate did not: 2/15 runnable
+
+*2026-11-24. Re-measured after seven harness defects were killed. This supersedes §A155's 2/12.*
+
+### What is measured now
+
+All 23 ansible instances in the census with ≤2 named failing tests — the whole ansible tail, not
+a sample of twelve — each run end to end with no manual step.
+
+| outcome | n | meaning |
+|---|---|---|
+| RESOLVED | **2** | the system's own patch turns the named tests green |
+| NOT_RESOLVED | 13 | the room ran; the search space does not cover the task |
+| ROOM_SKIPPED | 1 | the suite declares it cannot run without an optional dep |
+| ROOM_BROKEN | 7 | the room cannot run its own tests at this commit |
+
+**Rate over rooms that actually ran: 2/15 = 13.3 %.** Rate over all 23 if broken rooms are
+counted as failures: 8.7 %. Both are reported because choosing one would be choosing a story.
+
+### The two that resolve, and nothing hand-supplied
+
+    ansible-11c1777d   NEW SYMBOL     call_each_variant_then_parse    candidate 18/28
+    ansible-0ea40e09   operator gap   reflected_operator_from_mapping candidate 19/29
+
+### Why "ROOM_BROKEN" is a separate column and not a failure
+
+Seven rooms cannot run their own tests at the base commit, for reasons that belong to the
+benchmark or the platform, not to the system under test:
+
+    3 x  exit 4    a module-level `pytest.importorskip` whose dependency is absent
+    1 x  exit 4    `SyntaxError: invalid syntax` in the repository at that commit
+    1 x  exit 1    `re.error: global flags not at the start of the expression` in the repo
+    2 x  not found the named class is added by the GOLD patch, not the test patch
+
+Counting those as capability failures would understate; counting them as passes would lie. A
+benchmark run that does not separate them is reporting its own plumbing as a score.
+
+### Seven defects in the measurer, each of which faked a result
+
+1. `pathlib.resolve()` on a venv interpreter follows the symlink and destroys the venv.
+2. Two names for one file (`tests__config.json` vs `config.json`).
+3. The failure reader took the FIRST `Error`-shaped line — usually source code, not the error.
+4. A relative interpreter path breaks once `subprocess` uses `cwd=<room>`.
+5. **Silent zero-collection** read as a failed task: a conftest `ImportError` exits 4 with no
+   test lines at all. Fixed by making "a named test was not seen" a ROOM_BROKEN, not a failure.
+6. **A duplicate contract reader** using `json.loads(v.replace("'", '"'))` — the exact corruption
+   already listed in this project's dead ends. It threw on one instance in twenty-three.
+7. **The answer sheet was in the attempt workspace.** `fetch_instance` downloaded
+   `solution/gold_patch.diff` (flattened to `solution__gold_patch.diff`) on every instance. The
+   solver never opened it, so no result above is contaminated — but the guard that was supposed
+   to catch it tested for `solution/gold_patch.diff` and could never fire, because the name on
+   disk is flattened. A guard whose pattern does not occur in reality is decoration.
+
+Defect 7 is the one to sit with. The measurement was clean and the *environment* was not, and the
+difference is exactly the kind of thing that makes a score meaningless after the fact. It is now
+deleted at fetch time, and `find … -name "*gold_patch*"` over the run directory returns nothing.
+
+    (162) A guard whose pattern does not occur in reality is decoration. Test the guard against
+          the name the file actually has.
+    (163) Report rooms that cannot run separately from tasks that were not solved. A benchmark
+          score that folds broken infrastructure into capability is a score of the harness.
+    (164) A truncating parse is worse than a failing one: it succeeds, returns less, and says so
+          to nobody.
+
+### Honest limits, unchanged and now sharper
+
+    * 23 of 237 pytest-verifiable instances, one repository, ≤2 named failing tests -- the tail.
+    * `NOT_DERIVABLE_BY_THIS_SPACE` is a statement about my space, not the task's difficulty.
+    * 13.3 % is not comparable to the published frontier: different subset, no scaffolding, no
+      model calls at all. It is a within-project measurement, repeated, with the same harness.
+    * **§6 NOT MET.** No OSWorld task, no full-benchmark run.

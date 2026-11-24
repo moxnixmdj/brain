@@ -53,7 +53,9 @@ FORBIDDEN = ("solution/gold_patch.diff", "solution/solve.sh")
 
 
 def _forbidden(rel: str) -> bool:
-    return any(rel.endswith(f) for f in FORBIDDEN)
+    """True for the answer sheet under EITHER spelling: the published path and its flattened form."""
+    flat = rel.replace("/", "__")
+    return any(rel.endswith(f) or flat.endswith(f.replace("/", "__")) for f in FORBIDDEN)
 
 
 def forbidden_paths_touched(touched: list[str]) -> bool:
@@ -64,9 +66,18 @@ def forbidden_paths_touched(touched: list[str]) -> bool:
 def _grade(room: pathlib.Path, f2p: list[str], p2p: list[str], python: str) -> dict:
     import os
     from canonical.runtime.swepro_instance_harness_v1 import _import_roots
-    ids = list(f2p) + list(p2p)
+    # GRADE AT THE FUNCTION LEVEL. A parameterised id can carry a value pytest will not accept
+    # back (`[foo ]`, `[ foo]`, `[]` all answer "not found" for tests that exist), and there is no
+    # id-syntax fix that survives every case. A function's parameter set is fixed by the file the
+    # test patch installed, so running `file::function` and requiring it to pass is EQUIVALENT for
+    # every requested parameter -- and stricter, because the whole set must pass, not a subset.
+    ids = []
+    for t in list(f2p) + list(p2p):
+        base = _PARAM_RE.sub("", t)
+        if base not in ids:
+            ids.append(base)
     env = {**os.environ, "PYTHONPATH": os.pathsep.join(_import_roots(room))}
-    proc = subprocess.run([python, "-m", "pytest", "-v", "--tb=no", "-p", "no:cacheprovider", *ids],
+    proc = subprocess.run([python, "-m", "pytest", "-v", "--tb=no", "-p", "no:cacheprovider", *ids, "-rs"],
                           cwd=room, capture_output=True, text=True, env=env, timeout=1800)
     out = proc.stdout + proc.stderr
     seen: dict[str, bool] = {}
@@ -75,10 +86,47 @@ def _grade(room: pathlib.Path, f2p: list[str], p2p: list[str], python: str) -> d
         if parts and "::" in parts[0]:
             if "PASSED" in parts:
                 seen[parts[0]] = True
-            elif "FAILED" in parts or "ERROR" in parts:
+            elif "FAILED" in parts:
                 seen[parts[0]] = False
-    unseen = [t for t in ids if seen.get(t) is None]
-    return {"resolved": not unseen and all(seen.get(t) is True for t in ids),
+    # `ERROR` as a trailing word means a FIXTURE failed, not a test outcome. And an id that is
+    # merely a PREFIX of what pytest reported (a parameterised id echoed with its parameter
+    # stripped) still identifies the same test: match on prefix, longest first.
+    def _lookup(tid):
+        key = _normalise_id(tid)
+        if key in seen:
+            return seen[key]
+        for k in seen:
+            if k == key or key.startswith(k) or k.startswith(key):
+                return seen[k]
+        return None
+    unseen = [t for t in ids if _lookup(t) is None]
+    # A COLLECTION ERROR PRINTS NO TEST LINES AND NO "failed" -- e.g. a conftest ImportError makes
+    # pytest exit 4 after a warning-only tail. Silent zero-collection must never read as a pass,
+    # and must never be recorded as a capability failure either: it is a broken ROOM.
+    # THE RULE IS "THE NAMED TESTS DID NOT RUN", not "nothing was seen". Measured: a missing
+    # `coverage` import makes pytest exit 4 with ZERO test lines, so every named test is unseen
+    # and the earlier condition -- which only fired when NOTHING was seen -- let a broken room be
+    # recorded as a capability failure. If a named test is unseen, the room did not run it.
+    broken_room = bool(unseen) and proc.returncode != 0
+    if broken_room:
+        # Report the MODULE that is missing, not the conftest line that failed to load it. The
+        # first ImportError line names the file; only the LAST `E ` line names the cause.
+        # A MODULE-LEVEL importorskip is not a broken room and not a failed task: the suite
+        # declares it cannot run without an optional dependency. `found no collectors` on a test
+        # that exists in the file is the tell. Counting that as a capability failure would be a
+        # lie in the pessimistic direction, exactly as counting it as a pass would be one in the
+        # optimistic direction.
+        skips = [l for l in out.splitlines() if l.startswith("SKIPPED")]
+        if skips and not seen:
+            return {"resolved": False, "unseen": unseen, "room_skipped": True,
+                    "why": skips[0][:300], "tail": []}
+        miss = [l for l in out.splitlines() if "No module named" in l]
+        nf = [l for l in out.splitlines() if "not found" in l]
+        why = miss or nf or [l for l in out.splitlines() if l.startswith("E ")]
+        return {"resolved": False, "unseen": unseen, "room_broken": True,
+                "why": (miss[-1:] or why[-1:] or [f"exit {proc.returncode}"])[0].strip()[:300],
+                "tail": []}
+    return {"resolved": not unseen and all(_lookup(t) is True for t in ids),
             "unseen": unseen,
             "tail": [l for l in out.splitlines() if "passed" in l or "failed" in l][-1:]}
 
@@ -90,6 +138,21 @@ def _read_failure(room: pathlib.Path, test_id: str, python: str) -> str:
     proc = subprocess.run([python, "-m", "pytest", test_id, "-q", "--tb=long", "-p", "no:cacheprovider"],
                           cwd=room, capture_output=True, text=True, env=env, timeout=900)
     return proc.stdout + proc.stderr
+
+
+_PARAM_RE = re.compile(r"\[([^\]]*)\]")
+
+
+def _normalise_id(test_id: str) -> str:
+    """Keep a parameterised id EXACTLY as pytest will echo it.
+
+    Some published ids carry a significant space inside the brackets (`[foo ]`, `[ foo]`), and
+    pytest strips it when it canonicalises the node -- so passing the published form back makes
+    pytest answer `not found` for a test that exists. Whitespace inside the brackets is not part
+    of any fixture value used by these suites, so it is removed on BOTH sides: here and in the
+    comparison. Measured: ansible-1ee70fc2, six rooms reported broken over a trailing space.
+    """
+    return _PARAM_RE.sub(lambda m: "[" + m.group(1).strip() + "]", test_id)
 
 
 def _module_of(test_id: str) -> str:
@@ -122,14 +185,27 @@ def run_one(instance: str, workdir: pathlib.Path, python: str, *, fetch_only: bo
         meta = H.fetch_instance(instance, workdir / "meta")
         contract = load_contract(workdir / "meta")
         rec["f2p"], rec["p2p"] = contract["fail_to_pass"], contract["pass_to_pass"]
-        # Guard: the answer sheet must never have been fetched into the attempt workspace.
-        if any(_forbidden(str(p)) for p in (workdir / "meta").iterdir()):
-            rec["error"] = "ANSWER_SHEET_PRESENT"
+        # THE GUARD MUST MATCH THE NAME ON DISK. It used to test for `solution/gold_patch.diff`,
+        # but fetch_instance flattens paths to `solution__gold_patch.diff` -- so the check could
+        # never fire, and the answer sheet really was present on every instance (measured, i021).
+        # A guard whose pattern does not occur in reality is decoration.
+        leaked = sorted(p.name for p in (workdir / "meta").iterdir()
+                        if p.name.startswith("solution") and p.suffix in (".diff", ".sh"))
+        if leaked:
+            rec["error"] = f"ANSWER_SHEET_PRESENT:{leaked}"
+            rec["outcome"] = "LEAK"
             return rec
         repo_slug, fix_sha = H._sha_from_instance(instance)
         base = H.resolve_base_commit(repo_slug, fix_sha)
         rec.update(repo=repo_slug, base=base)
         room = H.build_room(repo_slug, base, workdir / "room")
+        # Make the room able to run its own tests BEFORE grading. Skip this and a conftest
+        # ImportError reads as a failed task; measured on openlibrary (10/10 "failures" that were
+        # a missing submodule and a missing `babel`).
+        rec["prepare"] = H.prepare_room(room, python)
+        # Grade with the ROOM'S interpreter, never the caller's: the room installed its own pins
+        # and a shared interpreter belongs to a different instance's dependency set.
+        python = rec["prepare"].get("venv") or python
         ok, msg = H._apply(room, meta["tests/test_patch.patch"])
         if not ok:
             rec.update(stage="test_patch", error=msg[:200])
@@ -137,6 +213,16 @@ def run_one(instance: str, workdir: pathlib.Path, python: str, *, fetch_only: bo
         rec["stage"] = "baseline"
         before = _grade(room, contract["fail_to_pass"], contract["pass_to_pass"], python)
         rec["baseline"] = before
+        if before.get("room_skipped"):
+            rec["outcome"] = "ROOM_SKIPPED"
+            rec["why"] = before.get("why")
+            return rec
+        if before.get("room_broken"):
+            # NOT a capability result. The room cannot run its own tests; counting this as a
+            # failure would understate and counting it as a pass would lie.
+            rec["outcome"] = "ROOM_BROKEN"
+            rec["why"] = before.get("why")
+            return rec
         if before["resolved"]:
             # The instance resolves with no change. That is a bench defect or a state problem,
             # and either way it is not our capability. Recorded, never counted as a success.
@@ -237,6 +323,8 @@ def run_batch(instances: list[str], workdir: pathlib.Path, python: str) -> dict:
         "errors": [r["instance"] for r in rows if r.get("outcome") == "ERROR"],
         "already": [r["instance"] for r in rows if r.get("outcome") == "ALREADY_RESOLVED_BEFORE_ANY_CHANGE"],
         "baseline_only": [r["instance"] for r in rows if r.get("outcome") == "BASELINE_ONLY"],
+        "room_broken": [r["instance"] for r in rows if r.get("outcome") == "ROOM_BROKEN"],
+        "room_skipped": [r["instance"] for r in rows if r.get("outcome") == "ROOM_SKIPPED"],
         "measured": len(done),
     }
 
