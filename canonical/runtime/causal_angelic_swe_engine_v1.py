@@ -181,7 +181,7 @@ def _summarize_value(val, depth=0):
         scalar = val
 
     attrs = {}
-    if depth == 0 and (not is_none) and (not isinstance(val, (bool, int, float, str, bytes, list, tuple, dict, set, frozenset))):
+    if depth <= 1 and (not is_none) and (not isinstance(val, (bool, int, float, str, bytes, list, tuple, dict, set, frozenset))):
         try:
             try:
                 d = object.__getattribute__(val, "__dict__")
@@ -190,7 +190,7 @@ def _summarize_value(val, depth=0):
             if isinstance(d, dict):
                 for ak, av in list(d.items())[:12]:
                     if not ak.startswith("__"):
-                        attrs[ak] = _summarize_value(av, depth=1)
+                        attrs[ak] = _summarize_value(av, depth=depth + 1)
             elif not _is_iter_obj:
                 slot_names = []
                 for cls in type(val).__mro__:
@@ -204,7 +204,27 @@ def _summarize_value(val, depth=0):
                         try:
                             av = object.__getattribute__(val, ak)
                             if not callable(av):
-                                attrs[ak] = _summarize_value(av, depth=1)
+                                attrs[ak] = _summarize_value(av, depth=depth + 1)
+                        except Exception:
+                            pass
+            # Safe read-only @property descriptor introspection (scalar/bool/int/float/str/None only!)
+            # Enables OOP attribute synthesis (e.g. Version.major, Version.is_prerelease, Path.suffix)
+            # without mutating iterators or invoking arbitrary side-effectful methods.
+            if not _is_iter_obj and not isinstance(val, (type, BaseException)):
+                _prop_added = 0
+                for cls in type(val).__mro__:
+                    if cls is object or _prop_added >= 8:
+                        break
+                    for pk, pv in list(getattr(cls, "__dict__", {}).items()):
+                        if _prop_added >= 8:
+                            break
+                        if not isinstance(pv, property) or pk.startswith("_") or pk in attrs:
+                            continue
+                        try:
+                            av = getattr(val, pk)
+                            if av is None or isinstance(av, (bool, int, float, str)):
+                                attrs[pk] = _summarize_value(av, depth=2)
+                                _prop_added += 1
                         except Exception:
                             pass
         except Exception:
@@ -1035,6 +1055,39 @@ def localize_faults(
                                     exception_types=sorted(exc_by_line.get(_k, set())),
                                 )
                             )
+        except Exception:
+            pass
+
+    # Direct Subject-Under-Test (SUT) Module Grounding:
+    # Modules directly imported by the failing test file(s) get a small causal grounding bonus (+0.15)
+    # so the primary module under test outranks transitive helper dependencies (preventing cross-module overfits).
+    if sites and failing:
+        try:
+            _sut_stems: set[str] = set()
+            for _ft in failing[:8]:
+                _tfp = worktree / _ft.split("::", 1)[0]
+                if not _tfp.is_file():
+                    continue
+                _ttree = ast.parse(_tfp.read_text(encoding="utf-8", errors="replace"))
+                for _nd in ast.walk(_ttree):
+                    if isinstance(_nd, ast.ImportFrom) and _nd.module:
+                        _parts = [p for p in _nd.module.split(".") if p]
+                        if _parts:
+                            _sut_stems.add(_parts[-1])
+                            if len(_parts) >= 2:
+                                _sut_stems.add("/".join(_parts[-2:]))
+                    elif isinstance(_nd, ast.Import):
+                        for _al in _nd.names:
+                            _parts = [p for p in _al.name.split(".") if p]
+                            if _parts:
+                                _sut_stems.add(_parts[-1])
+            if _sut_stems:
+                for _s in sites:
+                    _sf_clean = _s.file.replace("\\", "/")
+                    _sf_noext = _sf_clean[:-3] if _sf_clean.endswith(".py") else _sf_clean
+                    _sf_base = _sf_noext.rsplit("/", 1)[-1]
+                    if _sf_base in _sut_stems or any(_sf_noext.endswith("/" + st) or _sf_noext == st for st in _sut_stems):
+                        _s.weight = round(_s.weight + 0.15, 6)
         except Exception:
             pass
 
@@ -2305,6 +2358,13 @@ def _frame_to_oe_env(frame: Mapping[str, Any]) -> dict[str, Any]:
                 env[f"{name}.{ak}"] = None
             elif "scalar" in ainfo and ainfo["scalar"] is not None:
                 env[f"{name}.{ak}"] = _decode_scalar(ainfo["scalar"])
+            for ak2, ainfo2 in (ainfo.get("attrs") or {}).items():
+                if not isinstance(ainfo2, Mapping) or ak2.startswith("_"):
+                    continue
+                if ainfo2.get("is_none"):
+                    env[f"{name}.{ak}.{ak2}"] = None
+                elif "scalar" in ainfo2 and ainfo2["scalar"] is not None:
+                    env[f"{name}.{ak}.{ak2}"] = _decode_scalar(ainfo2["scalar"])
     return env
 
 
@@ -4166,17 +4226,23 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 fn_sites = [s for s in rel_sites if lo <= s.lineno <= hi]
                 if not fn_sites:
                     continue
+                def _is_valid_attr_path(k: str) -> bool:
+                    parts = k.split(".")
+                    return bool(parts) and len(parts) <= 3 and all(p.isidentifier() and not p.startswith("_") for p in parts)
+
                 f_envs: list[dict[str, Any]] = []
                 p_envs: list[dict[str, Any]] = []
+                p_pairs: list[tuple[Mapping[str, Any], dict[str, Any]]] = []
                 for s in fn_sites:
                     for fr in s.failing_frames[:6]:
-                        e = {k: v for k, v in _frame_to_oe_env(fr).items() if k.isidentifier()}
+                        e = {k: v for k, v in _frame_to_oe_env(fr).items() if _is_valid_attr_path(k)}
                         if e:
                             f_envs.append(e)
                     for fr in s.passing_frames[:12]:
-                        e = {k: v for k, v in _frame_to_oe_env(fr).items() if k.isidentifier()}
+                        e = {k: v for k, v in _frame_to_oe_env(fr).items() if _is_valid_attr_path(k)}
                         if e:
                             p_envs.append(e)
+                            p_pairs.append((fr, e))
                 if not f_envs:
                     continue
 
@@ -4184,7 +4250,7 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 seen_guards: set[str] = set()
 
                 # A. Numeric / NaN / Decimal domain guards (`v < 0 or v != v` works for int, float, AND Decimal!)
-                cand_vars = sorted({k for e in f_envs for k in e.keys() if k not in ("self", "cls")})
+                cand_vars = sorted({k for e in f_envs for k in e.keys() if k not in ("self", "cls") and not k.startswith(("self.", "cls."))})
                 for vn in cand_vars:
                     f_vals = [e[vn] for e in f_envs if vn in e and _is_num(e[vn])]
                     if not f_vals:
@@ -4211,7 +4277,7 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 if f_envs and p_envs:
                     try:
                         p_forbid_exc = [
-                            pe for rf, pe in zip(site.passing_frames[:64], p_envs[:64])
+                            pe for rf, pe in p_pairs[:64]
                             if pe and not (
                                 isinstance(rf.get("__outcome__"), Mapping)
                                 and rf["__outcome__"].get("kind") == "exc"
@@ -4228,7 +4294,7 @@ def _synthesize_static_cone_and_truthiness_repairs(
                             pc = str(og.get("code") or "").strip()
                             if pc and pc not in seen_guards and "self is" not in pc and "cls is" not in pc:
                                 seen_guards.add(pc)
-                                pvars = [t for t in re.findall(r"\b[A-Za-z_]\w*\b", pc) if t in cand_vars]
+                                pvars = [cv for cv in cand_vars if cv in pc]
                                 guard_specs.append((pc, pvars[0] if pvars else "value"))
                     except Exception:
                         pass
@@ -4244,7 +4310,42 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 for gcode, pvar in guard_specs[:3]:
                     if _dnr_cands_added >= 16:
                         break
-                    msg = _pick_raise_msg(fn_node, tree, pvar)
+                    base_var = pvar.split(".", 1)[0]
+                    # 1. Existing-Branch Disjunctive Refinement: if `fn_node` ALREADY has `if <cond>: raise <exc_cls>(...)`,
+                    # directly widen `<cond>` to `(<cond>) or (<gcode>)` reusing the exact existing raise & message!
+                    try:
+                        g_expr = ast.parse(gcode, mode="eval").body
+                        for st_i, st in enumerate(fn_node.body):
+                            if isinstance(st, ast.If) and any(
+                                isinstance(r, ast.Raise)
+                                and (
+                                    (isinstance(r.exc, ast.Call) and isinstance(r.exc.func, ast.Name) and r.exc.func.id == exc_cls)
+                                    or (isinstance(r.exc, ast.Name) and r.exc.id == exc_cls)
+                                )
+                                for r in ast.walk(st)
+                            ):
+                                nt_or = copy.deepcopy(tree)
+                                for n_or in ast.walk(nt_or):
+                                    if isinstance(n_or, (ast.FunctionDef, ast.AsyncFunctionDef)) and n_or.lineno == fn_node.lineno and n_or.name == fn_node.name:
+                                        tgt_if = n_or.body[st_i]
+                                        if isinstance(tgt_if, ast.If):
+                                            tgt_if.test = ast.BoolOp(op=ast.Or(), values=[tgt_if.test, copy.deepcopy(g_expr)])
+                                            ast.fix_missing_locations(nt_or)
+                                            nc_or = ast.unparse(nt_or) + "\n"
+                                            ast.parse(nc_or)
+                                            add_cand(
+                                                rel,
+                                                tgt_if.lineno,
+                                                "TIER3_OE_SYGUS_VALIDATION_RAISE",
+                                                f"oe_sygus_raise_branch_or({fn_node.name}:{gcode}->{exc_cls})",
+                                                nc_or,
+                                            )
+                                            _dnr_cands_added += 1
+                                        break
+                    except Exception:
+                        pass
+
+                    msg = _pick_raise_msg(fn_node, tree, base_var)
                     # Type-safe Python numeric guard: supports int, float, and Decimal while never
                     # raising TypeError on polymorphic non-numeric types (str, bool, time, timedelta, callable, None).
                     safe_guard = gcode
@@ -4260,8 +4361,8 @@ def _synthesize_static_cone_and_truthiness_repairs(
                         continue
 
                     # Locate insertion point inside `fn_node.body`:
-                    # - If `pvar` is a parameter, insert right after docstring (and after any `isinstance(pvar, ...)` or coercion if `pvar` is assigned)
-                    # - If `pvar` is a local variable assigned in `fn_node.body`, insert right AFTER the last assignment to `pvar` before `return`!
+                    # - If `base_var` is a parameter, insert right after docstring (and after any assignment to `base_var`)
+                    # - If `base_var` is a local variable assigned in `fn_node.body`, insert right AFTER the last assignment to `base_var` before `return`!
                     def _clone_and_insert(insert_after_assign: bool) -> str | None:
                         nt = copy.deepcopy(tree)
                         target_fn = None
@@ -4283,12 +4384,12 @@ def _synthesize_static_cone_and_truthiness_repairs(
                             for bi, st in enumerate(target_fn.body):
                                 if isinstance(st, (ast.Assign, ast.AnnAssign)):
                                     tgs = st.targets if isinstance(st, ast.Assign) else [st.target]
-                                    if any(isinstance(t, ast.Name) and t.id == pvar for t in tgs):
+                                    if any(isinstance(t, ast.Name) and t.id == base_var for t in tgs):
                                         found_pos = bi + 1
                                 elif isinstance(st, ast.If):
-                                    # Check if `pvar` is assigned inside an `if/elif` branch (e.g., `if isinstance(x, str): size = ...`)
+                                    # Check if `base_var` is assigned inside an `if/elif` branch (e.g., `if isinstance(x, str): size = ...`)
                                     if any(
-                                        isinstance(sn, ast.Name) and isinstance(sn.ctx, ast.Store) and sn.id == pvar
+                                        isinstance(sn, ast.Name) and isinstance(sn.ctx, ast.Store) and sn.id == base_var
                                         for sn in ast.walk(st)
                                     ):
                                         found_pos = bi + 1
@@ -4301,7 +4402,7 @@ def _synthesize_static_cone_and_truthiness_repairs(
                         ast.parse(nc)
                         return nc
 
-                    positions = [True, False] if pvar in fn_params else [True]
+                    positions = [True, False] if base_var in fn_params else [True]
                     for use_after in positions:
                         try:
                             nc = _clone_and_insert(use_after)

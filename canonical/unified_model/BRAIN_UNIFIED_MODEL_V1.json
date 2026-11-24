@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2023
+  "source_index_modules": 2024
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "78aab922716231e6d506164adc6901e72cf59c49ef5c0210188b29858cf61158"
+  "value": "9727c38c62930ec802080620c79f352ae0fc72e39a35e83945ca9172bba57b62"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "f4bca7dc67c9df0f900c88fd842c553ff42c90b9351e69a38bc2c9abb7d5fd06",
+   "sha256": "c8f692a18428344b553135dbf1c1c9f48426f1619da3554e176fccc38340d8b8",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "89b704c51b0944c9172beac317877c40615aca3486a6effe5d079a04a40c4243",
+   "sha256": "5c3914e2ccd2f57878a29e527b2f17a5fba6db1a0e8e494848e5fde7ac85c3de",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 44,
    "symbols": [
@@ -288223,6 +288223,62 @@
     "transfer": 1,
     "v1": 2,
     "zero-llm": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/epistemic_scan_acquire_compress_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/epistemic_scan_acquire_compress_v1.py",
+   "sha256": "6e40385aa70ddab336f9a6e6abec5ff7d3232ffca0ba192c0eb9edf1ed808638",
+   "summary": "Goal-Directed Scan -> Epistemic-Gap-Diff -> Instant-Acquire -> Simulate -> Compress Engine.",
+   "symbol_count": 15,
+   "symbols": [
+    "_compute_env_modality_signature",
+    "_introspect_sqlite",
+    "_sniff_file_format",
+    "_tokenize_goal",
+    "acquire_missing_knowledge",
+    "compress_l1_to_governed_memory",
+    "compute_epistemic_frontier",
+    "delete_l2_skill",
+    "delete_l3_fact",
+    "load_governed_memory",
+    "new_governed_memory",
+    "refute_l2_skill",
+    "save_governed_memory",
+    "scan_environment",
+    "synthesize_and_mentally_verify_plan"
+   ],
+   "terms": {
+    "acquire": 1,
+    "acquire_missing_knowledge": 1,
+    "compress": 2,
+    "compress_l1_to_governed_memory": 1,
+    "compute_env_modality_signature": 1,
+    "compute_epistemic_frontier": 1,
+    "delete_l2_skill": 1,
+    "delete_l3_fact": 1,
+    "engine": 1,
+    "epistemic": 1,
+    "epistemic-gap-diff": 1,
+    "goal-directed": 1,
+    "instant-acquire": 1,
+    "introspect_sqlite": 1,
+    "load_governed_memory": 1,
+    "new_governed_memory": 1,
+    "refute_l2_skill": 1,
+    "save_governed_memory": 1,
+    "scan": 2,
+    "scan_environment": 1,
+    "simulate": 1,
+    "sniff_file_format": 1,
+    "synthesize_and_mentally_verify_plan": 1,
+    "tokenize_goal": 1,
+    "v1": 1
    }
   },
   {

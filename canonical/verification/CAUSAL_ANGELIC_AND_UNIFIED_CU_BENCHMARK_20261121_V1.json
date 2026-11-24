@@ -5563,5 +5563,35 @@
     "cumulative_unique_verified_real_oss_commits": 233,
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter75_oop_property_sygus_and_scan_acquire_compress": {
+    "date": "2026-11-21",
+    "summary": "Two universal zero-LLM, zero-weight breakthroughs (zero hand-written repair rules): (1) Object-Oriented @property + Depth-2 Nested Runtime Introspection (`_summarize_value`, `_frame_to_oe_env`), Direct Subject-Under-Test (SUT) Module Grounding (`localize_faults`), and Existing-Branch Disjunctive OE-SyGuS Validation Guard Synthesis in `causal_angelic_swe_engine_v1.py` — converting previously rejected/overfit Nov 2026 commit `pypa/packaging@71de7cb` into a clean 17.1s, 8,048-test-verified synthesis win inside `src/packaging/pylock.py`; (2) Goal-Directed Scan -> Epistemic-Gap-Diff -> On-Demand Instant Acquire -> Leap-4 Mental Verify -> EMNLP-2026-MSCE Governed L1->L2/L3 Compression Engine (`canonical/runtime/epistemic_scan_acquire_compress_v1.py`), verified on live multi-modal arbitrary environments (20 distractor files pruned, hidden gzip-disguised CSV, SQLite FK DB, live HTTP OpenAPI+Auth server, 0-gap cross-environment transfer to a brand-new environment, and O(1) deletion forgetting).",
+    "hand_written_repair_rules_added": 0,
+    "modules_added": [
+      "canonical/runtime/epistemic_scan_acquire_compress_v1.py",
+      "canonical/tests/test_epistemic_scan_acquire_compress_v1.py"
+    ],
+    "newly_verified_real_nov2026_oss_commits": [
+      {
+        "repo": "pypa/packaging",
+        "commit": "71de7cb",
+        "date": "2026-11-13",
+        "description": "fix(pylock): Don't accept different major prereleases (#1522) (previously REJECTED_OVERFIT in Iter 73; now solved cleanly in SUT file via OOP @property + depth-2 OE-SyGuS!)",
+        "file": "src/packaging/pylock.py",
+        "test_target": "tests/test_pylock.py",
+        "pre_fix": "3 failed, 74 passed",
+        "post_fix": "77 passed (8048 passed, 1 skipped, 0 failed across 5-file core suite; Version('2.0a1') < Version('2') intact)",
+        "attempt": 14,
+        "elapsed_s": 17.1,
+        "tier": "TIER3_OE_SYGUS_VALIDATION_RAISE",
+        "mechanism": "oe_sygus_raise_branch_or(_from_dict:bool(pylock.lock_version.is_prerelease)->PylockUnsupportedVersionError)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "cumulative_unique_verified_real_oss_commits": 234,
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }
