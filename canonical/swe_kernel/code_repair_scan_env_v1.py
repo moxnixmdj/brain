@@ -113,6 +113,15 @@ class CodeRepairEnv:
     # -- env protocol -- #
     def act(self, action: str) -> bool:
         name = str(action)
+        if name.startswith("ast_rule:"):
+            rule_name = name[len("ast_rule:"):]
+            text = self._module_file.read_text(encoding="utf-8")
+            concrete = discover_ast_candidates(
+                text, self._last_test_output, self.module_name, rule_filter=rule_name
+            )
+            if not concrete:
+                return False
+            name = concrete[0]
         prefix = "fix_op:"
         if not name.startswith(prefix):
             return False
@@ -201,6 +210,7 @@ def discover_ast_candidates(
     source: str,
     traceback_text: str,
     module_name: str = "broken_module",
+    rule_filter: str | None = None,
 ) -> tuple[str, ...]:
     """Derive minimal content-invariant fix_op:old|new candidates from traceback + AST.
 
@@ -234,7 +244,7 @@ def discover_ast_candidates(
         if not (1 <= ln <= len(src_lines)):
             continue
         line_txt = src_lines[ln - 1]
-        if exc_type == "KeyError" and "[" in line_txt and "]" in line_txt:
+        if exc_type == "KeyError" and "[" in line_txt and "]" in line_txt and rule_filter in (None, "subscript_to_get"):
             # Replace d[k] -> d.get(k)
             for node in _ast.walk(tree):
                 if isinstance(node, _ast.Subscript) and getattr(node, "lineno", 0) == ln:
@@ -243,14 +253,14 @@ def discover_ast_candidates(
                     sl_seg = _ast.get_source_segment(source, node.slice)
                     if seg and val_seg and sl_seg:
                         _add(seg, f"{val_seg}.get({sl_seg})")
-        elif exc_type == "ZeroDivisionError" and "/" in line_txt:
+        elif exc_type == "ZeroDivisionError" and "/" in line_txt and rule_filter in (None, "div_zero_guard"):
             for node in _ast.walk(tree):
                 if isinstance(node, _ast.BinOp) and isinstance(node.op, (_ast.Div, _ast.FloorDiv)) and getattr(node, "lineno", 0) == ln:
                     seg = _ast.get_source_segment(source, node)
                     r_seg = _ast.get_source_segment(source, node.right)
                     if seg and r_seg:
                         _add(seg, f"({seg} if {r_seg} else 0)")
-        elif exc_type == "IndexError" and "[" in line_txt and "]" in line_txt:
+        elif exc_type == "IndexError" and "[" in line_txt and "]" in line_txt and rule_filter in (None, "index_bounds_guard"):
             for node in _ast.walk(tree):
                 if isinstance(node, _ast.Subscript) and getattr(node, "lineno", 0) == ln:
                     seg = _ast.get_source_segment(source, node)

@@ -62,7 +62,40 @@ def main() -> int:
                 passed += 1
             print(f"{name:20s} status={res.get('status')} mode={res.get('mode')} candidates={len(env.candidates)}")
     print(f"TOTAL: {passed}/{len(CASES)}")
-    return 0 if passed == len(CASES) else 1
+
+    # Held-out cross-variable transfer test using generalized ast_rule:subscript_to_get
+    train_src = "def get_timeout(cfg):\n    return cfg['timeout']\n"
+    train_test = "from broken_module import get_timeout\nassert get_timeout({}) is None\nassert get_timeout({'timeout': 5}) == 5\n"
+    heldout_src = "def read_port(settings):\n    return settings['port']\n"
+    heldout_test = "from broken_module import read_port\nassert read_port({}) is None\nassert read_port({'port': 8080}) == 8080\n"
+
+    with tempfile.TemporaryDirectory() as td_mem, tempfile.TemporaryDirectory() as td1, tempfile.TemporaryDirectory() as td2:
+        mem_path = Path(td_mem) / "mem.json"
+        env1, meta1 = build_code_repair_env(train_src, train_test, candidates=None, workdir=td1)
+        res1 = pa.run(
+            env1,
+            goal="repair_KeyError_generalized",
+            actions=("ast_rule:subscript_to_get",),
+            goal_predicate=meta1["is_goal"],
+            heuristic=meta1["heuristic"],
+            env_kind=meta1["env_kind"],
+            memory_path_=mem_path,
+            budget=8,
+        )
+        env2, meta2 = build_code_repair_env(heldout_src, heldout_test, candidates=None, workdir=td2)
+        res2 = pa.run(
+            env2,
+            goal="repair_KeyError_generalized",
+            actions=("ast_rule:subscript_to_get",),
+            goal_predicate=meta2["is_goal"],
+            heuristic=meta2["heuristic"],
+            env_kind=meta2["env_kind"],
+            memory_path_=mem_path,
+            budget=8,
+        )
+        xfer_ok = str(res1.get("status", "")).startswith("PASS") and str(res2.get("status", "")).startswith("PASS") and res2.get("mode") == "rule_replay"
+        print(f"HELDOUT_XFER         status={res2.get('status')} mode={res2.get('mode')} xfer_ok={xfer_ok}")
+    return 0 if (passed == len(CASES) and xfer_ok) else 1
 
 
 if __name__ == "__main__":
