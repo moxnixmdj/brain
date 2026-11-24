@@ -205,31 +205,50 @@ def admit(
 
 
 def execute(conf: Confinement) -> dict[str, Any]:
-    """Run the admitted argv inside the worktree; report the outcome honestly."""
+    """Run the admitted argv inside the worktree; report the outcome honestly.
+
+    The substrate is `os_isolation_v1`: a user/mount/pid/net/ipc/uts namespace
+    with a read-only root bind, a chroot, and every capability dropped before
+    the payload starts. This replaced a plain `subprocess` after the 2026-11-24
+    review measured that a plain subprocess wrote outside the worktree while
+    the result still said `host_untouched=True`. When the kernel cannot provide
+    the namespaces, the run is REFUSED -- a weaker substrate is not silently
+    substituted, because that is exactly how the false receipt happened.
+    """
     started = time.monotonic()
     env = {
         "PATH": "/usr/local/bin:/usr/bin:/bin",
-        "HOME": str(conf.worktree),
+        "HOME": "/work",
         "LC_ALL": "C.UTF-8",
         "PYTHONHASHSEED": "0",
     }
-    outcome = OUTCOME_RAN
-    try:
-        proc = subprocess.run(
-            conf.argv, cwd=str(conf.worktree), env=env, shell=False,
-            capture_output=True, text=True, timeout=conf.budget_s)
-        stdout, stderr, code = proc.stdout, proc.stderr, proc.returncode
-        if code != 0:
-            outcome = OUTCOME_NONZERO_EXIT
-    except subprocess.TimeoutExpired as exc:
-        stdout = (exc.stdout or b"").decode("utf-8", "replace")
-        stderr = (exc.stderr or b"").decode("utf-8", "replace")
-        code = None
-        outcome = OUTCOME_BUDGET_EXCEEDED
-    except Exception as exc:  # noqa: BLE001 - a raise is an outcome
-        stdout, stderr, code = "", "", None
-        outcome = OUTCOME_PROGRAM_RAISED
-        conf.notes.append("raise:%s" % type(exc).__name__)
+    from canonical.runtime import os_isolation_v1 as isolation
+
+    boxed = isolation.run(conf.argv, work_dir=conf.worktree,
+                          budget_s=conf.budget_s, env=env,
+                          allow_network=conf.allow_network)
+    conf.notes.append("substrate:%s" % ("os_isolation_v1" if boxed.get("isolated")
+                                        else "REFUSED"))
+    if not boxed.get("ok"):
+        return {
+            "schema": SCHEMA,
+            "admitted": True,
+            "receipt_sha256": conf.receipt_sha256,
+            "argv": conf.argv,
+            "outcome": "REFUSED__NO_ISOLATION_SUBSTRATE",
+            "isolated": False,
+            "refused": boxed.get("refused"),
+            "detail": boxed.get("detail"),
+            "stage": boxed.get("stage"),
+            "elapsed_s": round(time.monotonic() - started, 3),
+            "host_untouched": None,
+            "verified": False,
+            "terminal_authority": False,
+        }
+    stdout, stderr, code = boxed.get("stdout", ""), boxed.get("stderr", ""), boxed.get("returncode")
+    outcome = OUTCOME_BUDGET_EXCEEDED if boxed.get("timed_out") else OUTCOME_RAN
+    if outcome is OUTCOME_RAN and code != 0:
+        outcome = OUTCOME_NONZERO_EXIT
     elapsed = time.monotonic() - started
 
     observed: dict[str, Any] = {}
@@ -248,7 +267,11 @@ def execute(conf: Confinement) -> dict[str, Any]:
         }
 
     host_status_after = _host_status(conf.host_root)
-    host_untouched = host_status_after == conf.host_status_before
+    # `host_untouched` used to mean "git porcelain is unchanged", which the
+    # 2026-11-24 review falsified. It now means: the kernel gave the payload no
+    # path to the host (namespaces + chroot + no capabilities), the payload is
+    # measured to have run that way, AND the porcelain still agrees.
+    host_untouched = bool(boxed.get("isolated")) and host_status_after == conf.host_status_before
 
     result = {
         "schema": SCHEMA,
@@ -262,6 +285,9 @@ def execute(conf: Confinement) -> dict[str, Any]:
         "stdout_tail": stdout[-2000:],
         "stderr_tail": stderr[-2000:],
         "declared_effects": observed,
+        "isolated": bool(boxed.get("isolated")),
+        "isolation": {k: boxed.get(k) for k in ("namespaces", "network", "caps_dropped",
+                                                "pid_count", "uid_in_sandbox")},
         "worktree": str(conf.worktree),
         "host_head": conf.host_head,
         "host_untouched": host_untouched,

@@ -1,0 +1,63 @@
+{
+  "schema": "PROJECT_BRAIN_STORE_KNOWS_THE_FORMAT_V1",
+  "isolation": {
+    "verdict": "ISOLATED"
+  },
+  "isolated_run": {
+    "ok": true,
+    "isolated": true
+  },
+  "result": {
+    "lesson": {
+      "tag": "A learn out.gz",
+      "status": "PASS__PERFECT_ALGORITHM_RUN",
+      "duration_s": 0.1861,
+      "scanned": 7,
+      "composition": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS",
+      "replay": null,
+      "plan": [
+        "run_gzip"
+      ]
+    },
+    "with_store": {
+      "tag": "b-with-store",
+      "status": "PASS__REPLAY_FROM_MEMORY",
+      "duration_s": 0.0098,
+      "scanned": null,
+      "composition": null,
+      "replay": "PASS__REPLAY_REACHED_GOAL",
+      "plan": null
+    },
+    "without_store": {
+      "tag": "b-without-store",
+      "status": "PASS__PERFECT_ALGORITHM_RUN",
+      "duration_s": 0.1482,
+      "scanned": 7,
+      "composition": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS",
+      "replay": null,
+      "plan": [
+        "run_gzip"
+      ]
+    },
+    "operators_only": {
+      "tag": "b-operators-only",
+      "status": "PASS__THE_STORE_KNEW_THE_FORMAT",
+      "duration_s": 0.0667,
+      "scanned": null,
+      "composition": "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT",
+      "replay": null,
+      "plan": null
+    },
+    "memory_rules": [
+      [
+        "gzip",
+        "out.gz"
+      ],
+      [
+        null,
+        null
+      ]
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
+}

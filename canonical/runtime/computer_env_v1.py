@@ -140,12 +140,30 @@ class ComputerEnv:
         for name, fn in actions:
             self.actions[str(name)] = fn
 
-    def act(self, action: str) -> bool:
-        """The learner records actions as dict keys, so they are names."""
+    def act(self, action: str, roles: dict[str, str] | None = None) -> bool:
+        """The learner records actions as dict keys, so they are names.
+
+        `roles` is how a BOUND role reaches the action. Measured 2026-11-24: an
+        action written against a fixed file name replayed into a world where the
+        contract had bound a different source, ran, and produced the wrong
+        effect -- the binding stopped at the plan. An action that accepts a
+        second parameter receives the roles the contract bound (source, output);
+        one that does not is called exactly as before, so nothing old breaks.
+        """
         fn = self.actions.get(str(action))
         if fn is None:
             return False
         try:
+            if roles:
+                import inspect
+
+                try:
+                    signature = inspect.signature(fn)
+                    takes_roles = len(signature.parameters) >= 2
+                except (TypeError, ValueError):
+                    takes_roles = False
+                if takes_roles:
+                    return bool(fn(self, roles))
             return bool(fn(self))
         except Exception:  # noqa: BLE001 - a failing action is data, not a crash
             return False

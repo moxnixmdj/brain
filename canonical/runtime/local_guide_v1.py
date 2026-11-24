@@ -51,6 +51,22 @@ FAIL_EMPTY = "FAIL_CLOSED__LOCAL_GUIDE_EMPTY_QUERY"
 
 _SKIP = {".git", "node_modules", "build", "dist", "out", ".next", ".venv",
          "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
+# A GUIDE THAT IS OUR OWN ANSWER IS NOT EVIDENCE.
+#
+# Measured 2026-11-24: asked to archive a file into `out.tar.gz` inside a
+# sandbox that had this repository mounted read-only, the local tier returned
+# `canonical/governance/EXPLORE_CHANNEL_STATE_20261019_V1.md` -- a file recording
+# an earlier run of the same goal, including the plan that worked. On a machine
+# that carries our own results, the "guide" is the answer key. The tier exists to
+# read the ENVIRONMENT's documentation, so records of this system's own outcomes
+# are excluded by default; a caller that wants them must say so.
+_OWN_RECORD_PARTS = frozenset({
+    "verification", "evidence", "astra_runtime", "qualification_results",
+    "superworker_state", "superworker_evidence", "receipts", "regressions",
+})
+_OWN_RECORD_NAMES = ("RECEIPT", "RESULTS", "RESULT_", "BASELINE", "LEDGER",
+                     "SCOREBOARD", "EPISODES", "_STATE_", "STATE_")
+
 _MAX_FILES = 500
 _MAX_SNIPPETS = 5
 _MAN_SECTIONS = (1, 2, 3, 4, 5, 6, 7, 8)
@@ -94,7 +110,16 @@ def _query_tokens(query: str) -> list[str]:
     return out
 
 
-def _local_guide_files(root: Path) -> list[Path]:
+def is_own_record(rel: Path) -> bool:
+    """Whether a document under the guide root records this system's own outcome."""
+    parts = {part.lower() for part in Path(rel).parts[:-1]}
+    if parts & _OWN_RECORD_PARTS:
+        return True
+    name = Path(rel).name.upper()
+    return any(marker in name for marker in _OWN_RECORD_NAMES)
+
+
+def _local_guide_files(root: Path, *, include_own_records: bool = False) -> list[Path]:
     root = Path(root)
     if not root.is_dir():
         return []
@@ -105,6 +130,8 @@ def _local_guide_files(root: Path) -> list[Path]:
         except ValueError:
             continue
         if any(part in _SKIP for part in rel.parts):
+            continue
+        if not include_own_records and is_own_record(rel):
             continue
         out.append(p)
         if len(out) >= _MAX_FILES:
@@ -199,7 +226,8 @@ def lookup(query: str, *, root: Path | str | None = None,
            man_root: Path | str | None = None,
            timeout_s: float = 5.0,
            max_snippets: int = _MAX_SNIPPETS,
-           deadline_s: float = 30.0) -> dict[str, Any]:
+           deadline_s: float = 30.0,
+           include_own_records: bool = False) -> dict[str, Any]:
     """Search the local guides on this computer for what a query asks.
 
     Returns evidence (path, score, matched tokens, paragraph snippet, source)
@@ -226,7 +254,7 @@ def lookup(query: str, *, root: Path | str | None = None,
 
     md_docs: list[dict[str, Any]] = []
     try:
-        for p in _local_guide_files(root_path):
+        for p in _local_guide_files(root_path, include_own_records=include_own_records):
             if time.time() - started > deadline_s:
                 break
             try:
@@ -310,7 +338,7 @@ def lookup(query: str, *, root: Path | str | None = None,
         "min_tokens_required": tool_needed if tool_preferred else md_needed,
         "documents": docs,
         "tokens": tokens,
-        "documents_scanned": len(_local_guide_files(root_path)),
+        "documents_scanned": len(_local_guide_files(root_path, include_own_records=include_own_records)),
         "duration_s": round(time.time() - started, 4),
         "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED" if enough else "NONE__LOCAL_GUIDE_UNANSWERED",
         "sources_answered": sorted({d.get("source") for d in docs if d.get("source")}),
