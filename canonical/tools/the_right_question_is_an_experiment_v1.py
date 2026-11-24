@@ -565,6 +565,13 @@ def _refine_relation(relation: str, kind: str) -> str:
     return relation
 
 
+def _refine_kind(relation: str, kind: str) -> str:
+    """A generic noun (`file`) that the verb itself narrows (`decompresses FILEs`)."""
+    if relation == "decompresses" and kind == "file":
+        return "compressed"
+    return kind
+
+
 def _first_match(table: Mapping[str, Sequence[str]], low: str) -> str | None:
     """The first class whose word appears in the sentence, longest word first.
 
@@ -647,34 +654,52 @@ def extract_claims(text: Any, *, actions: Sequence[Any] = (),
     out: list[dict[str, Any]] = []
     for sentence in sentences(text):
         low = sentence["text"].lower()
-        program = None
+        candidates: list[str] = []
         for token in _program_tokens(sentence["text"]):
             base = token.split("/")[0].split(".")[-1]
-            if token in offered or base in offered or token in known or base in known:
-                program = token
-                break
-        kind = _first_match(KINDS, low) or default_kind
+            if (token in offered or base in offered
+                    or token in offered_programs or base in offered_programs
+                    or token in known or base in known):
+                if token not in candidates:
+                    candidates.append(token)
         # The document's owner may be the implicit subject, but only of an IMPERATIVE: the
         # relation word must start the sentence. `sort order` in mid-sentence is a noun.
         implicit = False
-        if program is None and subject and low.startswith(tuple(
+        if not candidates and subject and low.startswith(tuple(
                 w for spec in RELATIONS.values()
                 for w in (spec["words"] if isinstance(spec, Mapping) else spec))):
-            program = subject
+            candidates = [subject]
             implicit = True
-        if program is None:
+        if not candidates:
             continue
         # EVERY relation the sentence can name is a candidate, provided the program is the
-        # SUBJECT of the verb. "bzip2, a block-sorting file compressor" names both `sorts` and
-        # `compresses`; the witness decides which is true, and the extractor refuses to choose
-        # by taste. This is the opposite of a parser that guesses one reading and is wrong
-        # silently. But a program that merely appears near a relation word is not a claim:
-        # `The locale affects sort order` names sort, and says nothing about what sort does.
+        # SUBJECT of the verb. When a sentence names two programs (`Unlike gzip, bzip2
+        # compresses files` or `To sort a file, cat sorts a file`), the subject of the verb is
+        # the program immediately preceding it (smallest `_subject_distance`), not the first
+        # word in the introductory clause.
         for relation in _all_relations(low):
             words = RELATIONS[relation]["words"]
-            if not implicit and _subject_distance(low, program, words) is None:
-                continue
+            if implicit:
+                program = candidates[0]
+            else:
+                ranked = [(dist, cand) for cand in candidates
+                          if (dist := _subject_distance(low, cand, words)) is not None]
+                if not ranked:
+                    continue
+                ranked.sort(key=lambda item: item[0])
+                program = ranked[0][1]
+            # The SUBJECT program is not the OBJECT kind. `bzip2, a block-sorting file compressor`
+            # names `bzip2` (5 letters) and `file` (4 letters); matching KINDS over the subject
+            # token let `bzip2` outvote `file` and claim that `bzip2` compresses an already-
+            # compressed file. Stripping the first occurrence of the subject leaves a second
+            # mention (`tar extracts a tar`) intact.
+            without_subject = re.sub(
+                r"(?<![A-Za-z0-9_])" + re.escape(program.lower()) + r"(?![A-Za-z0-9_])",
+                " ", low, count=1)
+            kind = (_first_match(KINDS, without_subject)
+                    or _first_match(KINDS, low) or default_kind)
             relation = _refine_relation(relation, kind)
+            object_kind = _refine_kind(relation, kind)
             out.append({
                 "schema": SCHEMA,
                 "sentence": sentence["text"],
@@ -682,7 +707,7 @@ def extract_claims(text: Any, *, actions: Sequence[Any] = (),
                 "program": program,
                 "relation": relation,
                 "observable": RELATIONS[relation]["observable"],
-                "object_kind": kind,
+                "object_kind": object_kind,
                 "predicate": RELATIONS[relation]["predicate"],
                 "qualifier": _qualifier_of(sentence["text"]),
                 "authority": "NONE__CANDIDATE_NOT_ADMITTED",
@@ -1842,6 +1867,23 @@ def _pre_templates(relation: Mapping[str, Any]) -> list[str]:
     return [" ".join(_slot(token, *_slots(relation)) for token in pre)] if pre else []
 
 
+def _canonical_kind(kind: str, reads: str = "") -> str:
+    """The artifact kind a witness actually read.
+
+    `line`, `text` and `file` are three English words for the same room artifact (`object-0.txt`).
+    Leaving `input_kind` in word-space while `output_kind` was in artifact-space made `sort` look
+    like a type-converter from `line` to `file`, so every chain from `line` ran `sort` first and
+    scrambled the file before `tar` or `wc` touched it.
+    """
+    if reads:
+        observed = _kind_of_artifact(reads)
+        if observed:
+            return observed
+    if KIND_PRODUCER.get(kind) == "text":
+        return "file"
+    return kind
+
+
 def induce_signatures(relations: Sequence[Mapping[str, Any]],
                       actions: Sequence[Any] = ()) -> dict[str, dict[str, dict[str, Any]]]:
     """The TYPE of every relation the store can actually vouch for, induced from its witnesses.
@@ -1850,18 +1892,21 @@ def induce_signatures(relations: Sequence[Mapping[str, Any]],
     `compressed` only because a witness ran it on a file and produced a `.gz`; if the same
     sentence is witnessed on a directory and the run fails, that edge does not exist and no
     amount of prose creates it. This is the data-flow graph: nodes are kinds, edges are
-    witnessed runs. Every row carries the relation id that vouches for it.
+    witnessed runs. Every row carries the relation id that vouches for it, and `candidates`
+    holds the equivalence class of every program that witnessed the same semantic edge.
     """
     offered = {str(a).strip() for a in actions if str(a).strip()}
     offered_programs = {a.split()[0] for a in offered if a.split()}
     table: dict[str, dict[str, dict[str, Any]]] = {}
     for relation in sorted(relations, key=lambda r: str(r.get("relation_id") or "")):
         name = str(relation.get("relation") or "")
-        kind = str(relation.get("object_kind") or "")
+        raw_kind = str(relation.get("object_kind") or "")
         witness = relation.get("witness") or {}
         produced = str(witness.get("output") or "")
-        if not name or not kind or not produced:
+        reads = str(witness.get("reads") or "")
+        if not name or not raw_kind or not produced:
             continue
+        kind = _canonical_kind(raw_kind, reads)
         if actions:
             program = str(relation.get("program") or "")
             if program not in offered and program not in offered_programs:
@@ -1877,7 +1922,14 @@ def induce_signatures(relations: Sequence[Mapping[str, Any]],
                "pre": _pre_templates(relation),
                "observable": relation.get("observable"),
                "predicate": relation.get("predicate")}
-        table.setdefault(name, {}).setdefault(kind, row)
+        existing = table.setdefault(name, {}).get(kind)
+        if existing is None:
+            row["candidates"] = [dict(row)]
+            table[name][kind] = row
+        else:
+            seen_candidates = {(c["program"], c["template"]) for c in existing["candidates"]}
+            if (row["program"], row["template"]) not in seen_candidates:
+                existing["candidates"].append(dict(row))
     return table
 
 
@@ -1900,21 +1952,23 @@ def compose_plan(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
     if not goal_edges:
         return {"status": "REFUSED__GOAL_IS_NOT_A_WITNESSED_RELATION", "goal": goal,
                 "relations_with_an_edge": sorted(signatures)}
-    frontier: list[tuple[str, list[dict[str, Any]]]] = [(start, [])]
-    seen = {start}
+    start_node = _canonical_kind(start)
+    frontier: list[tuple[str, list[dict[str, Any]]]] = [(start_node, [])]
+    seen = {start_node}
     while frontier:
         kind, path = frontier.pop(0)
         if kind in goal_edges:
             steps = [*path, goal_edges[kind]]
             return {"status": "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS",
                     "goal": goal, "start": start,
-                    "kinds": [start] + [str(s["output_kind"]) for s in steps],
+                    "kinds": [start_node] + [str(s["output_kind"]) for s in steps],
                     "plan": [str(s["template"]) for s in steps],
                     "steps": [{"relation_id": s["relation_id"], "program": s["program"],
                                "pre": s["pre"],
                                "relation": s["relation"], "input_kind": s["input_kind"],
                                "produces": s["output_kind"], "observable": s["observable"],
-                               "check": s["predicate"]} for s in steps],
+                               "check": s["predicate"],
+                               "candidates": list(s.get("candidates") or [s])} for s in steps],
                     "authority": "EXTERNAL_DOCUMENT_COMPILED_TO_A_WITNESS",
                     "why_this_plan": ("every step is a prose claim compiled to a witness that "
                                       "separated a wrong version and repeated on a second room; "
@@ -2001,6 +2055,7 @@ def run_composed_plan(plan: Mapping[str, Any], start_kind: str, *,
         ran: list[dict[str, Any]] = []
         final = current
         goal_input = current
+        archived_member: str | None = None
         before_value = None
         expected_lines = None
         last_stdout, last_exit = "", None
@@ -2010,6 +2065,8 @@ def run_composed_plan(plan: Mapping[str, Any], start_kind: str, *,
             if "{object}" not in template:
                 return {"status": "REFUSED__TEMPLATE_HAS_NO_INPUT_SLOT", "step": index,
                         "template": template}
+            if str(steps[index].get("relation") or "") == "archives":
+                archived_member = current
             out = f"step-{index}.out"
             other = f"step-{index}-other.txt"
             if "{other}" in template:
@@ -2099,8 +2156,12 @@ def run_composed_plan(plan: Mapping[str, Any], start_kind: str, *,
                         encoding="utf-8", errors="replace") if member else None)
                 except OSError:
                     needle = None
-        if predicate in ("stdout_contains_member", "stdout_contains"):
-            needle = (obj.get("members") or [None])[0] or obj.get("original")
+        if predicate == "stdout_contains_member":
+            # `tar --list` prints member NAMES, never file bodies: if the chain archived a file,
+            # the member is the file that step archived (`archived_member`), not `original`.
+            needle = (obj.get("members") or [None])[0] or archived_member
+        elif predicate == "stdout_contains":
+            needle = "alpha"
         expected = expected_lines if expected_lines is not None else obj.get("expected")
         if stream_goal:
             readings = {"after": last_stdout, "before": "", "stdout": last_stdout,
@@ -2125,6 +2186,61 @@ def run_composed_plan(plan: Mapping[str, Any], start_kind: str, *,
                 "needle": needle, "produced": final, "ran": ran}
     finally:
         shutil.rmtree(root, ignore_errors=True)
+
+
+def synthesize_plan(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
+                    start: str, goal: str, *, max_steps: int = 4,
+                    max_trials: int = 8) -> dict[str, Any]:
+    """Counterexample-guided composition (CEGIS) over the semantic equivalence classes.
+
+    Multiple programs inhabit the same `(relation, input_kind -> output_kind)` edge (`gzip`,
+    `bzip2`, and `xz` all witness `compresses: file -> compressed` and `decompresses:
+    compressed -> file`). A static type-check over the coarse kind `compressed` cannot see that
+    `gzip` followed by `bzip2 --decompress` will fail with `is not a bzip2 file`. Executing the
+    candidate chain in the scratch mental model (`run_composed_plan`) turns that failure into a
+    counterexample, refutes the incompatible witness pair, and selects the candidate assignment
+    that actually runs and satisfies the goal's predicate.
+    """
+    import itertools
+    plan = compose_plan(relations, actions, start, goal, max_steps=max_steps)
+    if plan.get("status") != "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS":
+        return plan
+    goal_spec = ({"predicate": RELATIONS[goal]["predicate"],
+                  "observable": RELATIONS[goal]["observable"]}
+                 if goal in RELATIONS else None)
+    step_pools = [list(s.get("candidates") or [s]) for s in (plan.get("steps") or [])]
+    counterexamples: list[dict[str, Any]] = []
+    best_failed_plan: dict[str, Any] = dict(plan)
+    best_failed_run: dict[str, Any] = {}
+    for trial_index, combo in enumerate(itertools.product(*step_pools)):
+        if trial_index >= max_trials:
+            break
+        candidate_steps = [{"relation_id": c.get("relation_id"), "program": c.get("program"),
+                            "pre": c.get("pre") or [],
+                            "relation": c.get("relation"), "input_kind": c.get("input_kind"),
+                            "produces": c.get("output_kind", c.get("produces")),
+                            "observable": c.get("observable"),
+                            "check": c.get("predicate", c.get("check"))} for c in combo]
+        candidate_plan = dict(plan,
+                              plan=[str(c.get("template")) for c in combo],
+                              steps=candidate_steps)
+        run = run_composed_plan(candidate_plan, start, goal=goal_spec)
+        if run.get("status") in ("PASS__CHAIN_RAN_AND_MET_THE_GOAL", "PASS__CHAIN_RAN"):
+            return {**candidate_plan, "run": run, "counterexamples": counterexamples,
+                    "trials": trial_index + 1}
+        if (not best_failed_run
+                or run.get("status") == "REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL"):
+            best_failed_plan = candidate_plan
+            best_failed_run = run
+        counterexamples.append({"plan": candidate_plan["plan"],
+                                "programs": [c.get("program") for c in combo],
+                                "status": run.get("status"),
+                                "step": run.get("step"),
+                                "stderr": str(run.get("stderr") or "")[:160]})
+    return {**best_failed_plan,
+            "status": str(best_failed_run.get("status") or "REFUSED__NO_CANDIDATE_RAN"),
+            "run": best_failed_run, "counterexamples": counterexamples,
+            "trials": len(counterexamples)}
 
 
 def plan_from_relations(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any],
@@ -2457,8 +2573,12 @@ def _graph_census(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any]
              if row["output_kind"]]
     readers = sorted(name for name, kinds in signatures.items()
                      if not any(row["output_kind"] for row in kinds.values()))
+    equivalence_classes = {f"{name}:{kind}": [c.get("program") for c in (row.get("candidates") or [])]
+                           for name, kinds in sorted(signatures.items())
+                           for kind, row in sorted(kinds.items())
+                           if len(row.get("candidates") or []) > 1}
     nodes = sorted({e[1] for e in edges} | {e[2] for e in edges})
-    composed = one_step = multi_step = ran = met = 0
+    composed = one_step = multi_step = ran = met = counterexamples_refuted = 0
     refusals: dict[str, int] = {}
     for goal in sorted(signatures):
         for start in nodes:
@@ -2474,18 +2594,20 @@ def _graph_census(relations: Sequence[Mapping[str, Any]], actions: Sequence[Any]
             if ran >= run_cap or time.time() > deadline:
                 continue
             ran += 1
-            run = run_composed_plan(plan, start,
-                                    goal={"predicate": RELATIONS[goal]["predicate"],
-                                          "observable": RELATIONS[goal]["observable"]})
+            synthesized = synthesize_plan(relations, actions, start, goal)
+            counterexamples_refuted += len(synthesized.get("counterexamples") or [])
+            run = synthesized.get("run") or {}
             if run.get("status") == "PASS__CHAIN_RAN_AND_MET_THE_GOAL":
                 met += 1
             else:
                 refusals[str(run.get("status"))] = refusals.get(str(run.get("status")), 0) + 1
     return {"nodes": nodes, "edges": len(edges), "readers": readers,
+            "equivalence_classes": equivalence_classes,
             "relations_with_an_edge": sorted(signatures),
             "edge_list": [f"{n}:{k}->{o}" for n, k, o in edges],
             "goals_composed": composed, "one_step": one_step, "multi_step": multi_step,
             "multi_step_run": ran, "multi_step_met_the_goal": met,
+            "counterexamples_refuted": counterexamples_refuted,
             "refusals": dict(sorted(refusals.items()))}
 
 

@@ -11,8 +11,8 @@ a prose claim to an executable witness, with seven gates that each refuse by nam
 admitted because it sounds right; a claim is admitted only when the witness separates a wrong
 version, is **false of the program that does nothing**, and repeats on a second room.
 
-**What was fixed.** The instant-knowledge circuit in `perfect_algorithm_v1.run()` was open in two
-places, not one. Both are closed and regression-tested:
+**What was fixed.** The instant-knowledge circuit in `perfect_algorithm_v1.run()` was open in
+three places. All three are closed and regression-tested:
 
 1. `run()` read `instant["documents"]`, a key nothing ever set, and the fetcher returned
    snippets rather than documents. Now the fetcher returns the document's **text** and `run()`
@@ -21,9 +21,15 @@ places, not one. Both are closed and regression-tested:
    text`). A shell guide is the same thing in the other dialect, so it now reads `$ command`
    transcripts, replays them in a scratch room, and uses the author's printed output as the
    oracle — the same four gates, the same vocabulary restriction.
+3. When a document has neither `>>>` nor `$` transcripts (94% of documentation bytes),
+   `_plan_from_document` now delegates to `_plan_from_prose`, which compiles prose sentences to
+   executable witnesses, induces typed data-flow signatures, and runs counterexample-guided
+   composition (`synthesize_plan`) in a scratch mental model before returning a plan.
 
 A README with ```` ```console ```` `$ echo hello` / `hello` now ends in
-`PASS__PLAN_FROM_A_DOCUMENT` with `plan: ['echo hello']`. Before this round it ended in
+`PASS__PLAN_FROM_A_DOCUMENT` with `plan: ['echo hello']`, and a prose-only README (`tar archives a
+directory. tar extracts an archive. gzip compresses a file.`) now ends in
+`PASS__PLAN_FROM_A_DOCUMENT` with the 3-step verified chain. Before this round both ended in
 `OPEN__NO_PLAN_AFTER_SCAN` with `documents_returned: 0`.
 
 ---
@@ -34,37 +40,52 @@ Three corpora, reported **separately**, because they are not interchangeable kin
 
 | corpus | documents | bytes | sentences | claims | admitted | claim yield | prose yield |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `--help` of the fleet | 37 | 94,098 | 336 | 28 | **16** | 57.1% | 4.76% |
+| `--help` of the fleet | 37 | 94,098 | 336 | 28 | **18** | 64.3% | 5.36% |
 | Python stdlib docstrings | 6 | 76,760 | 1,179 | **0** | 0 | — | 0% |
-| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **105** | 21.5% | 1.59% |
+| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **106** | 21.7% | 1.61% |
 
-Transfer to a **third** room, never seen: 56 tested, **49 admitted, 7 refused**. The seven are the
+Transfer to a **third** room, never seen: 58 tested, **50 admitted, 8 refused**. The eight are the
 honest part: a relation that held in two rooms and failed in a third was about the rooms.
 
 Operations, not sentences, are the honest denominator: **161 distinct (program, relation) pairs
-are named in the manuals, and 42 are admitted — 26.1% coverage.**
+are named in the manuals, and 44 are admitted — 27.3% coverage.**
 
-### The store as a typed data-flow graph (composition)
+### The store as a typed data-flow graph (semantic equivalence + CEGIS composition)
 
 A single relation opens one door; a goal is usually a chain of doors (`directory → archives →
 extracts → compresses`). Rather than hand-declaring output types, `induce_signatures()` induces
 each relation's signature `input_kind → output_kind` from the artifact its witness actually
 produced (`PRODUCING_RELATIONS`), while reader relations (`checks`, `compares`, `counts`, `lists`,
 `prints`, `searches`) induce `output_kind = None` and serve as goals rather than intermediate
-steps. Each witnessed `argv` and precondition `pre` is lifted into a role template (`{object}`,
-`{out}`, `{outdir}`, `{other}`), and `run_composed_plan()` executes the entire composed chain in a
-fresh room and checks the goal relation's own predicate on the final artifact or stream.
+steps.
 
-| metric | value |
-|---|---:|
-| kind nodes | 6 (`archive`, `compressed`, `directory`, `file`, `line`, `text`) |
-| producing edges | 9 |
-| reader relations (goals only) | 6 (`checks`, `compares`, `counts`, `lists`, `prints`, `searches`) |
-| goals composed `(start_kind, goal_relation)` | **66** (18 one-step, 48 multi-step) |
-| multi-step chains executed | **48 / 48** |
-| multi-step chains that ran and met the goal | **33 / 48** (68.8%) |
-| `REFUSED__CHAIN_BROKE_AT_A_STEP` | **5** (`gzip` writes `.gz`; `bzip2 --decompress` expects `.bz2`) |
-| `REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL` | **10** (e.g. `sort` reorders lines before `tar` archives/extracts) |
+Three mechanisms make multi-step composition exact without hardcoded rules:
+
+1. **Semantic equivalence of kinds (`_canonical_kind`).** English names the same room artifact
+   three ways (`line`, `text`, `file`). Inspecting the witness's initial room artifact collapses
+   lexical synonyms onto one node (`file`), eliminating phantom coercion steps (`sort` inserted
+   merely to convert `line` into `file`, which scrambled line order before `tar`).
+2. **Program equivalence classes per edge.** Every witnessed `(program, template)` for the same
+   `(relation, input_kind)` edge is retained (`compresses:file → [gzip, bzip2]`,
+   `decompresses:compressed → [bzip2, gzip]`).
+3. **Counterexample-guided composition (`synthesize_plan`, Executable Mental Model).** When an
+   edge has multiple candidate programs, the first type-correct chain (`gzip` followed by
+   `bzip2 --decompress`) can fail at a sub-type boundary (`bzip2: Data.txt.gz is not a bzip2
+   file`). `synthesize_plan()` tests candidate assignments in the scratch mental model
+   (`run_composed_plan`), records the failing pair as a structured counterexample, and advances
+   to the compatible assignment (`gzip → gzip --decompress`).
+
+| metric | before CEGIS + canonical kinds | with CEGIS + canonical kinds |
+|---|---:|---:|
+| kind nodes | 6 (`archive`, `compressed`, `directory`, `file`, `line`, `text`) | **4** (`archive`, `compressed`, `directory`, `file`) |
+| producing edges | 9 | **7** |
+| equivalence classes (`>1` program) | — | **3** (`compresses:file`, `decompresses:compressed`, `prints:file`) |
+| goals composed `(start_kind, goal_relation)` | 66 (18 one-step, 48 multi-step) | **44** (13 one-step, 31 multi-step) |
+| multi-step chains executed | 48 / 48 | **31 / 31** |
+| multi-step chains that ran and met the goal | 33 / 48 (68.8%) | **30 / 31 (96.8%)** |
+| counterexamples refuted in mental model | 0 | **6** |
+| `REFUSED__CHAIN_BROKE_AT_A_STEP` | 5 | **0** |
+| `REFUSED__CHAIN_RAN_BUT_MISSED_THE_GOAL` | 10 | **1** (`directory → decompresses`: directory room has no single-file `original`) |
 
 Running the composed chains exposed two defects in single-step admission that two-room testing
 alone had missed: `tar a b` exited 2 on syntax error and had been admitted as `compares` until
@@ -134,7 +155,7 @@ plus the last witness that answered it; the next room re-asks.
 ## 3. The defects this round found in its own instrument
 
 Each was a wrong admission or a wrong refusal, and each is held by a test in
-`canonical/tests/test_the_right_question_is_an_experiment_v1.py` (55 cases).
+`canonical/tests/test_the_right_question_is_an_experiment_v1.py` (59 cases).
 
 | # | Defect | Symptom | Fix |
 |---|---|---|---|
@@ -152,6 +173,10 @@ Each was a wrong admission or a wrong refusal, and each is held by a test in
 | 12 | Unbounded child output | `yes file` filled memory; the kernel SIGKILLed the measurement | `RLIMIT_FSIZE`/`RLIMIT_CPU` in the child |
 | 13 | `@c` matched `@command` | every sentence naming a program was dropped from the corpus | exact comment match |
 | 14 | A predicate true of nothing | `str(None) == str(None)` admitted `cp copies a directory` | presence, not truthiness |
+| 15 | The subject matched as its own object kind | `bzip2` (5 chars) outvoted `file` (4 chars), claiming `bzip2` compresses `.bz2` | strip the subject occurrence before matching `KINDS` |
+| 16 | `decompresses` paired with a plain `file` | `Compress or uncompress FILEs` set `object_kind = "file"` for both verbs | `_refine_kind("decompresses", "file") → "compressed"` |
+| 17 | Lexical synonyms treated as disjoint nodes | `line → extracts` inserted `sort` just to coerce `line` to `file`, scrambling order | `_canonical_kind` maps kind via observed room artifact |
+| 18 | Incompatible programs in an equivalence class | `gzip` followed by `bzip2 --decompress` type-checked on `compressed` and failed | `synthesize_plan` refutes incompatible pairs in the mental model |
 
 ---
 
@@ -189,7 +214,7 @@ the user (never).
   re-verified at use. `model_calls: 0`, `parameters: 0`, `spend_usd: 0`.
 
 Receipt: `canonical/verification/THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.json`.
-Tests: `canonical/tests/test_the_right_question_is_an_experiment_v1.py` — 55 cases, each a defect
+Tests: `canonical/tests/test_the_right_question_is_an_experiment_v1.py` — 59 cases, each a defect
 above; `canonical/tests/test_perfect_algorithm_v1.py` still passes (23).
 Prose corpus: fetched from the upstream manuals by `--fetch-prose`, cached machine-locally, never
 committed; the receipt records each tarball's sha256.

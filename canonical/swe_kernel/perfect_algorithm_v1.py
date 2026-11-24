@@ -620,6 +620,83 @@ def _plan_from_shell_sessions(sessions: Sequence[Mapping[str, Any]], actions: Se
             "pass": False}
 
 
+def _plan_from_prose(text: str, actions: Sequence[Any], goal: str) -> dict[str, Any]:
+    """Turn prose documentation into a verified single- or multi-step plan.
+
+    94% of documentation bytes have neither `>>>` nor `$` transcripts. A prose sentence that
+    names a program and a relation (`tar archives a directory`) is compiled to an executable
+    witness in `the_right_question_is_an_experiment_v1`, tested against its inverse and a null
+    program across two scratch rooms, induced into a typed data-flow edge, and composed into a
+    chain that is simulated in a scratch mental model (`synthesize_plan`) before it is returned.
+    """
+    try:
+        from canonical.tools import the_right_question_is_an_experiment_v1 as rq
+    except Exception:  # noqa: BLE001
+        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
+                "gate": "EXTRACTED", "examples": 0}
+    claims = rq.extract_claims(text, actions=actions, programs=rq.FLEET)
+    if not claims:
+        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
+                "gate": "EXTRACTED", "examples": 0}
+    admitted: list[dict[str, Any]] = []
+    seen_not_permitted: list[str] = []
+    reasons: dict[str, int] = {}
+    seen_rid: set[str] = set()
+    for claim in claims:
+        program = str(claim.get("program") or "")
+        result = rq.evaluate_claim(claim, actions=actions,
+                                   help_text=rq._help_text(program))
+        if result.verdict == "ADMIT" and result.relation is not None:
+            rid = str(result.relation.get("relation_id") or "")
+            if rid not in seen_rid:
+                seen_rid.add(rid)
+                admitted.append(result.relation)
+        elif result.verdict == "SEEN_NOT_PERMITTED":
+            seen_not_permitted.append(f"{program}:{claim.get('relation')}")
+        else:
+            reason = str(result.reason or result.verdict)
+            reasons[reason] = reasons.get(reason, 0) + 1
+    if not admitted:
+        if reasons:
+            return {"status": "REFUSED__PROSE_CLAIMS_REFUSED_BY_WITNESS",
+                    "gate": "MATCHED", "examples": len(claims), "reasons": reasons,
+                    "seen_not_permitted": seen_not_permitted[:5]}
+        if seen_not_permitted:
+            return {"status": "REFUSED__COMMAND_SEEN_NOT_PERMITTED",
+                    "gate": "IN_VOCABULARY", "examples": len(claims), "replayed": 0,
+                    "seen_not_permitted": seen_not_permitted[:5]}
+        return {"status": "REFUSED__PROSE_CLAIMS_REFUSED_BY_WITNESS",
+                "gate": "MATCHED", "examples": len(claims), "reasons": reasons}
+    goal_low = str(goal or "").lower()
+    start_kind = rq._first_match(rq.KINDS, goal_low) or str(admitted[0].get("object_kind") or "")
+    goal_rel = (rq._all_relations(goal_low) or [None])[0] or rq._first_match(rq.RELATIONS, goal_low)
+    if start_kind and goal_rel:
+        synthesized = rq.synthesize_plan(admitted, actions, start_kind, str(goal_rel))
+        run = synthesized.get("run") or {}
+        if (synthesized.get("status") == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+                and run.get("status") == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"):
+            return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
+                    "examples": len(claims), "admitted": len(admitted),
+                    "plan": synthesized["plan"], "steps": synthesized.get("steps"),
+                    "counterexamples": synthesized.get("counterexamples", []),
+                    "goal": goal,
+                    "authority": "EXTERNAL_DOCUMENT_COMPILED_TO_A_WITNESS",
+                    "pass": False}
+        return {"status": str(synthesized.get("status") or "REFUSED__NO_PLAN_FROM_PROSE"),
+                "gate": "MATCHED", "examples": len(claims), "admitted": len(admitted),
+                "counterexamples": synthesized.get("counterexamples", []),
+                "run_status": run.get("status")}
+    single = rq.plan_from_relations(admitted, actions)
+    if single.get("status") == "PASS__PLAN_FROM_A_VERIFIED_CLAIM":
+        return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
+                "examples": len(claims), "admitted": len(admitted),
+                "plan": single["plan"], "goal": goal,
+                "authority": "EXTERNAL_DOCUMENT_COMPILED_TO_A_WITNESS",
+                "pass": False}
+    return {"status": str(single.get("status") or "REFUSED__NO_PLAN_FROM_PROSE"),
+            "gate": "IN_VOCABULARY", "examples": len(claims)}
+
+
 def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[str, Any]:
     """Turn fetched documentation into a plan, using only what the document itself vouches for.
 
@@ -655,8 +732,7 @@ def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[st
     block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
     sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
     if not sessions:
-        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
-                "gate": "EXTRACTED", "examples": 0}
+        return _plan_from_prose(text, actions, goal)
     # THE VOCABULARY IS PROGRAMS, NOT WHOLE COMMANDS. `statistics.median([1])` and
     # `statistics.median([2, 3, 4, 5])` are the same program, and the plan space offers the program.
     def _program(expression: str) -> str:

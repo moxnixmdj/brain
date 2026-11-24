@@ -320,11 +320,11 @@ class _Room:
         return False
 
 
-def _run_with(readme: str, actions=("echo",)):
+def _run_with(readme: str, actions=("echo",), goal: str = "greet the user"):
     from canonical.swe_kernel import perfect_algorithm_v1 as pa
     room = pathlib.Path(tempfile.mkdtemp(prefix="circuit-room-"))
     (room / "README.md").write_text(readme, encoding="utf-8")
-    return pa.run(_Room(), "greet the user", list(actions),
+    return pa.run(_Room(), goal, list(actions),
                   goal_predicate=lambda obs: False, heuristic=lambda obs: 1,
                   goal_family="shell", env_kind="grid_world",
                   memory_path_=room / "memory.json", local_root=room,
@@ -549,3 +549,85 @@ def test_an_in_place_goal_step_reads_before_before_the_input_is_unlinked():
         plan, "directory", goal={"observable": "size", "predicate": "size_lt"})
     assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
     assert run["produced"].endswith(".gz")
+
+
+def test_the_subject_program_is_not_matched_as_its_own_object_kind():
+    """`bzip2` is 5 letters and `file` is 4; matching KINDS over the subject made `bzip2`
+    claim to compress an already-compressed `.bz2` file and fail.
+    """
+    claims = subject.extract_claims(
+        "If no file names are given, bzip2 compresses or decompresses from standard input.",
+        actions=["bzip2"], programs=["bzip2"])
+    by_rel = {c["relation"]: c["object_kind"] for c in claims}
+    assert by_rel == {"compresses": "file", "decompresses": "compressed"}
+    for c in claims:
+        res = subject.evaluate_claim(c, actions=["bzip2"], programs=["bzip2"],
+                                     help_text=subject._help_text("bzip2"))
+        assert res.verdict == "ADMIT"
+
+
+def test_semantic_equivalence_of_kinds_avoids_spurious_sort_coercion():
+    """`line`, `text` and `file` produce the same room artifact (`object-0.txt`).
+
+    Treating `line` as a disjoint node from `file` made `line -> extracts` run `sort` first
+    just to convert `line` into `file`, scrambling line order so `content_equals_member` failed.
+    """
+    doors = [
+        _admitted("sort", "sorts", "line", "sort sorts lines."),
+        _admitted("tar", "archives", "file", "tar archives a file."),
+        _admitted("tar", "extracts", "archive", "tar extracts an archive."),
+    ]
+    plan = subject.compose_plan(doors, ACTIONS, "line", "extracts")
+    assert plan["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    assert len(plan["plan"]) == 2
+    assert not any(step.startswith("sort ") for step in plan["plan"])
+    run = subject.run_composed_plan(
+        plan, "line", goal={"observable": "content", "predicate": "content_equals_member"})
+    assert run["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+
+
+def test_cegis_refutes_incompatible_compressor_pair_and_selects_compatible_one():
+    """`gzip` followed by `bzip2 --decompress` type-checks on `compressed` and fails in the room.
+
+    `synthesize_plan` runs each candidate assignment in the scratch mental model, records the
+    broken `gzip -> bzip2` pair as a counterexample, and selects `gzip -> gzip --decompress`.
+    """
+    doors = [
+        _admitted("gzip", "compresses", "file", "gzip compresses a file."),
+        _admitted("bzip2", "decompresses", "compressed", "bzip2 decompresses a compressed file."),
+        _admitted("gzip", "decompresses", "compressed", "gzip decompresses a compressed file."),
+    ]
+    # Order candidates so `bzip2` is tried first on `decompresses` and fails against `gzip`.
+    doors[1]["relation_id"] = "rel-0000"
+    doors[2]["relation_id"] = "rel-9999"
+    syn = subject.synthesize_plan(doors, ("gzip", "bzip2"), "file", "decompresses")
+    assert syn["status"] == "PASS__PLAN_COMPOSED_FROM_VERIFIED_CLAIMS"
+    assert syn["run"]["status"] == "PASS__CHAIN_RAN_AND_MET_THE_GOAL"
+    assert syn["plan"] == ["gzip {object}", "gzip --decompress {object}"]
+    assert len(syn["counterexamples"]) == 1
+    assert syn["counterexamples"][0]["programs"] == ["gzip", "bzip2"]
+    assert syn["counterexamples"][0]["status"] == "REFUSED__CHAIN_BROKE_AT_A_STEP"
+
+
+def test_prose_only_guide_closes_multi_step_plan_and_refuses_false_prose():
+    """94% of documentation has neither `>>>` nor `$` transcripts; `run()` now compiles prose."""
+    out = _run_with(
+        "# Guide\n\n"
+        "To compress a directory, tar archives a directory. "
+        "tar extracts an archive. gzip compresses a file.\n",
+        actions=("tar", "gzip"),
+        goal="compress a directory")
+    assert out["status"] == "PASS__PLAN_FROM_A_DOCUMENT"
+    assert out["plan"] == [
+        "tar --create -f {out} --recursion {object}",
+        "tar --extract -f {object} --directory {outdir}",
+        "gzip {object}",
+    ]
+
+    false_prose = _run_with(
+        "# Guide\n\nTo sort a file, cat sorts a file.\n",
+        actions=("cat",),
+        goal="sort a file")
+    assert false_prose["status"] != "PASS__PLAN_FROM_A_DOCUMENT"
+    assert false_prose["steps"]["document_as_test_suite"]["status"] == (
+        "REFUSED__PROSE_CLAIMS_REFUSED_BY_WITNESS")
