@@ -80,7 +80,7 @@ def keep_edit(snap) -> bool:
 
 
 def run_arm(learned_models, vocab, structure: str, seed: int, use_model: bool,
-            enforce: bool, work: str) -> dict:
+            enforce: bool, work: str, policy: str = "gap") -> dict:
     cls = StagedInstance if structure == "staged" else CommittedInstance
     inst = cls(os.path.join(work, f"X_{structure}_{seed}_{use_model}_{enforce}"), "tagH", "stray_H.txt")
     inst.reset()
@@ -90,7 +90,7 @@ def run_arm(learned_models, vocab, structure: str, seed: int, use_model: bool,
     key = lambda s: akey(abstract(s, vocab))  # noqa: E731
     keep = keep_edit if enforce else (lambda s: True)
     res = explore(env, ACTIONS, model, key=key, goal=goal_fn, keep=keep,
-                  budget=40, seed=seed)
+                  budget=40, seed=seed, policy=policy)
     res["must_not_change_holds_at_end"] = keep_edit(res["final"])
     res.pop("final")
     return res
@@ -110,18 +110,19 @@ def main(argv=None) -> int:
             inst = GitInstance(os.path.join(work, f"T{i}"), tag, junk)
             learned.append(learn_model(inst, ACTIONS, budget=args.train_budget, seed=i))
         vocab = invariant_vocabulary([list(L["observations"].values()) for L in learned])
-        arms = [("model_checkpoint", True, True), ("no_model_checkpoint", False, True),
-                ("model_no_checkpoint", True, False)]
+        arms = [("model_checkpoint", True, True, "gap"), ("no_model_checkpoint", False, True, "gap"),
+                ("model_no_checkpoint", True, False, "gap"), ("uniform_random_checkpoint", False, True, "uniform")]
         out: dict = {}
         for structure in ("staged", "committed"):
             out[structure] = {}
-            for name, use_model, enforce in arms:
-                rows = [run_arm(learned, vocab, structure, s, use_model, enforce, work)
+            for name, use_model, enforce, policy in arms:
+                rows = [run_arm(learned, vocab, structure, s, use_model, enforce, work, policy)
                         for s in range(args.seeds)]
                 out[structure][name] = {
                     "success": sum(r["success"] for r in rows),
                     "of": len(rows),
                     "actions": [r["actions"] for r in rows],
+                    "median_actions": sorted(r["actions"] for r in rows)[len(rows) // 2],
                     "restores": sum(r["restores"] for r in rows),
                     "mismatches": sum(r["mismatches"] for r in rows),
                     "must_not_change_violated_at_end": sum(not r["must_not_change_holds_at_end"] for r in rows),
@@ -139,7 +140,7 @@ def main(argv=None) -> int:
     if args.out:
         with open(args.out, "w") as f:
             f.write(text)
-    print(json.dumps({s: {a: {k: v[k] for k in ("success", "of", "restores", "must_not_change_violated_at_end")}
+    print(json.dumps({s: {a: {k: v[k] for k in ("success", "of", "median_actions", "restores", "must_not_change_violated_at_end")}
                           for a, v in arms_.items()} for s, arms_ in out.items()}, indent=1))
     return 0
 

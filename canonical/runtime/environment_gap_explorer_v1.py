@@ -70,7 +70,10 @@ class AbstractModel:
 
 def explore(env: Any, actions: Sequence[str], model: AbstractModel, *,
             key: Callable[[Any], str], goal: Callable[[Any], bool],
-            keep: Callable[[Any], bool], budget: int, seed: int) -> dict[str, Any]:
+            keep: Callable[[Any], bool], budget: int, seed: int,
+            policy: str = "gap") -> dict[str, Any]:
+    """policy='gap': plan if possible, else an untried action. policy='uniform': a random
+    action each step, ignoring the model and what was tried (the control)."""
     rng = random.Random(seed)
     order = list(actions)
     rng.shuffle(order)
@@ -84,6 +87,19 @@ def explore(env: Any, actions: Sequence[str], model: AbstractModel, *,
         if spent >= budget:
             break
         cur = key(snap)
+        if policy == "uniform":
+            allowed = [a for a in actions if (cur, a) not in unsafe]
+            if not allowed:
+                break
+            act = rng.choice(allowed)
+            token = env.checkpoint()
+            env.act(act); spent += 1
+            after = env.state()
+            if keep(snap) and not keep(after):
+                env.restore(token); restores += 1; unsafe.add((cur, act)); continue
+            model.observe(cur, act, key(after), goal(after))
+            snap = after
+            continue
         path = model.plan(cur)
         if path:
             act = path[0]

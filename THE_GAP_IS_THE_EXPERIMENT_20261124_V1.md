@@ -43,7 +43,7 @@ Must-not-change predicate (`keep`): the user's edit still exists in the worktree
 | committed | no model + checkpoint | **10** | 0 | 0 |
 | committed | model, no checkpoint | **10** | 0 | 0 |
 
-Per-run actions: staged with model, `[20, 11, 6, 6, 14, 16, 3, 11, 18, 15]` (median about 13); staged without model, median about 18; committed with model, one action in every run; committed without model, median about 4.
+Per-run actions: staged with model, `[20, 11, 6, 6, 14, 16, 3, 11, 18, 15]` (median 14; an earlier draft said 13, which was a loose reading); staged without model, median about 18; committed with model, one action in every run; committed without model, median about 4.
 
 ## 4. What this shows, and what it does not
 
@@ -64,7 +64,7 @@ Per-run actions: staged with model, `[20, 11, 6, 6, 14, 16, 3, 11, 18, 15]` (med
 ## 5. Answers to the questions in the brief, from this evidence
 
 - **What should be saved?** Edges of the abstract table, reliability marks for conflicting edges, and unsafe-action marks. Raw trajectories are not saved. The table is what transferred and what was used.
-- **Goal-directed or learn everything?** In this measurement, goal-directed exploration with gap choice reached the goal in 3 to 24 actions. A full exploration of the environment was not timed, so the comparison is not settled. What is settled: a plan with no route yet is replaced by an untried action from the current abstract state, and that is cheaper than uniform action search on these structures.
+- **Goal-directed or learn everything?** In this measurement, goal-directed exploration with gap choice reached the goal in 3 to 24 actions. A full exploration of the environment was not timed, so the comparison is not settled. **CORRECTED in `THE_RANDOM_BASELINE_WINS_ON_SMALL_GIT_20261124_V1.md`:** the claim that gap choice is cheaper than uniform random search was measured and is FALSE on these structures. Uniform random does as well or better. This sentence is kept only so the correction is visible.
 - **Must the agent be safe?** Yes, and the evidence is concrete: without the checkpoint, the goal was reached while the user's edit was lost in 6 of 10 staged runs. Safety is not a property of the goal alone.
 
 ## 6. Bottlenecks, ranked (updated)
