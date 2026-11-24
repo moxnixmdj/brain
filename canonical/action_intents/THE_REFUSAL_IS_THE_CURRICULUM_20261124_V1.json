@@ -1,0 +1,86 @@
+{
+ "action_id": "THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1",
+ "action_intent_id": "THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "date": "2026-11-24",
+ "status": "MEASURED__PRODUCER_RUN_SANDBOX__ONE_DECLARED_GATE_FAILS",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "claim_under_test": "AN_AGENT_THAT_READS_ONLY_WHAT_AN_ENVIRONMENT_PUBLISHES_ABOUT_ITSELF_CAN_ACT_IN_IT_AND_THE_SECOND_VISIT_COSTS_LESS_THAN_THE_FIRST_AND_WHERE_THE_PAGE_AND_THE_MACHINE_DISAGREE_THE_MACHINE_IS_THE_CURRICULUM",
+ "method": "SEVEN_REAL_ENVIRONMENTS_TWO_VISITS_TEN_GATES_DECLARED_BEFORE_THE_RUN",
+ "action_summary": "The owner asked three questions as one -- learn everything or only what the goal needs, learn toward a goal or accumulate, and persist a generalised encoding rather than the exact actions -- and every previous round answered them by argument. This round answers them by making the environment pay. One instrument opens seven real environments on this machine (less, more, node, pdb, python3, sh, bash), reads only what each publishes about itself, tries one key per axis the authors declared, and records what the machine did. Ten gates were declared BEFORE the run and are computed from the run. Nine are MET and one is NOT MET, and the failing one is the result: the pager's page says its `s` key saves input to a file, and a blind observation in a 24x80 TERM=dumb pty reports STATES_ONLY with no byte written, because `s` answers 'Input is not a pipe'. Four derivation defects were found by running it and fixed by measurement, not by argument: (1) an options-only page was accepted as a command table, so the probe that asks an interpreter for its own command list was skipped and the `.save` need was reported UNCHECKED; (2) a REPL banner ('Type \".help\" for more information') has no imperative verb before its quoted token, so a reader that required one read nothing from any interpreter banner; (3) the pager underlines a token with overstrike, so splitting on whitespace before normalising discarded its save row; (4) the topic-instruction pattern matched `--print  print result of --eval` and asked a JavaScript prompt for `help print`, which is a SyntaxError charged to the room. A word-to-program dictionary was BUILT, MEASURED AT ZERO ENTRIES, AND DELETED, with the number kept in the receipt: the words a room of files holds appear on no page.",
+ "fresh_reality_units_consumed": 7,
+ "incremental_spend_usd": 0,
+ "measurable_result": {
+  "needs_held": "7 of 7",
+  "actions_derived_from_an_environment_published_table": "3 of 7",
+  "command_tables_found": "3 of 7 environments (less 55 rows, pdb 42, node 7); 4 publish none",
+  "questions_first_visit": 32,
+  "questions_second_visit": 3,
+  "seconds_first_visit": 43.3,
+  "seconds_second_visit": 6.4,
+  "axioms_stored": 11,
+  "store_bytes": 15407,
+  "gates_met": "9 of 10",
+  "the_gate_that_failed": "G2_A_DESTRUCTIVE_KEY_IS_CAUGHT -- the page's claim about the pager's save key did not survive the machine"
+ },
+ "honest_limits": [
+  "No benchmark score: OSWorld 2.1, Terminal-Bench 4.0, SWE-bench Pro V2 and Terminal-Bench-Science cannot execute here (no browser, no X, no container runtime). They remain non-claims.",
+  "Six of eleven needs are answered by the fallback PROMPT_ACCEPTS_A_LINE, which is honest but is not a derivation.",
+  "Four of seven environments publish no command table and are learned ABOUT, not learned FROM.",
+  "Four environments still pay every visit because their table is below the cache threshold.",
+  "One machine, one terminal geometry, one implementation, producer-run only. No independent identity has re-run any of it."
+ ],
+ "artifacts": [
+  "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+  "canonical/tests/test_the_refusal_is_the_curriculum_v1.py",
+  "canonical/verification/THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1.json",
+  "canonical/verification/THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1.md"
+ ],
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Four routes were measured and rejected here rather than argued. (1) A dictionary from the room's own words to the pages that attest them: built, measured at 0 entries because a room of files holds words no page prints, deleted, number kept in removed_parts. (2) Asking a bare listing's meaning by assuming a program's name determines its query form: rejected after `help .save` at a JavaScript prompt returned a SyntaxError; the form is now read off the page (`help <topic>`) or off the command it publishes (`.help`). (3) Requiring prose on a row: rejected because `(Pdb) help` prints 41 bare tokens and a description one question deeper, so requiring prose made every debugger read as NO_TABLE. (4) Requiring two leading spaces on a row: rejected because a REPL prints its table at the left margin and every REPL read as NO_TABLE while its page was on the screen.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 14 new pins in canonical/tests/test_the_refusal_is_the_curriculum_v1.py, plus one full receipt produced by the instrument end to end (57.2 s). Nine of ten pre-declared gates MET; G2 NOT MET and reported as NOT MET. No independent identity has re-run any of it.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+   "canonical/tests/test_the_refusal_is_the_curriculum_v1.py",
+   "canonical/verification/THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1.json",
+   "canonical/verification/THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false,
+  "obs_layers_evaluated": {
+   "1_the_real_goal": "A general problem-solving system with an owned, zero-spend producer path; not a benchmark score (none is runnable here).",
+   "2_the_current_blocker": "The agent learns what an environment PUBLISHES only after three derivation defects were fixed by measurement; the ordering of questions is still the expensive part (26 questions for a 42-command debugger).",
+   "3_the_challenger_frontier": "Challengers considered and rejected this round: a word->program dictionary (built, measured 0 entries, deleted); assuming a program's name determines its query form (SyntaxError measured); requiring prose on a row (every REPL read NO_TABLE); requiring two leading spaces (every REPL read NO_TABLE).",
+   "4_volatile_dependency_preflight": "Zero network, zero model calls, zero incremental spend at run time; the only dependencies are the seven binaries present on this machine, and absent families are refused by name.",
+   "5_the_route_race": "Mechanism race won by deletion and by reading the environment's own table; no donor model is involved at any phase, so no transfer gate is engaged.",
+   "6_the_receipt": "This file, plus canonical/verification/THE_REFUSAL_IS_THE_CURRICULUM_20261124_V1.json produced end to end in 57.2 s.",
+   "7_the_decision": "KEEP the route (read-only interface learning in a declared geometry) and DECLARE the next blocker: question ordering. The one gate that failed is left failing."
+  }
+ }
+}
