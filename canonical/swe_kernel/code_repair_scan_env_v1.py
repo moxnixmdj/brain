@@ -276,6 +276,13 @@ def discover_ast_candidates(
                     sl_seg = _ast.get_source_segment(source, node.slice)
                     if seg and val_seg and sl_seg:
                         _add(seg, f"({seg} if abs({sl_seg}) < len({val_seg}) else None)")
+        elif exc_type == "AttributeError" and "." in line_txt and rule_filter in (None, "none_attr_guard"):
+            for node in _ast.walk(tree):
+                if isinstance(node, _ast.Attribute) and getattr(node, "lineno", 0) == ln:
+                    seg = _ast.get_source_segment(source, node)
+                    val_seg = _ast.get_source_segment(source, node.value)
+                    if seg and val_seg:
+                        _add(seg, f"({seg} if {val_seg} is not None else None)")
 
     # 2. Comparison / arithmetic / boolean operator swaps (localized first, then module)
     _CMP_SWAPS = {

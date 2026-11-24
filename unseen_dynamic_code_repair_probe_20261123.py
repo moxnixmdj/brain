@@ -36,6 +36,11 @@ CASES = [
         "from broken_module import safe_head\nassert safe_head([]) is None\nassert safe_head([7]) == 7\n",
     ),
     (
+        "AttributeError",
+        "def get_name(user):\n    return user.name\n",
+        "class U:\n    name = 'ada'\nfrom broken_module import get_name\nassert get_name(None) is None\nassert get_name(U()) == 'ada'\n",
+    ),
+    (
         "AssertionError_cmp",
         "def is_adult(age):\n    return age > 18\n",
         "from broken_module import is_adult\nassert is_adult(18) is True\nassert is_adult(17) is False\n",
