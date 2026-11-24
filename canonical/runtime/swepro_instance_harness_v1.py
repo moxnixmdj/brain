@@ -122,6 +122,9 @@ def fetch_instance(instance_id: str, dest: Path) -> dict:
         out = dest / rel.replace("/", "__")
         out.write_bytes(_contents(f"{PRO_CONTENTS}/{instance_id}/{rel}"))
         got[rel] = out
+    # The contract is ALSO written under the plain name its one reader looks for. One file, one
+    # copy, two paths that callers already use -- rather than a second parse or a second name.
+    (dest / "config.json").write_bytes((dest / "tests__config.json").read_bytes())
 
     cfg = json.loads(got["tests/config.json"].read_text(encoding="utf-8"))
     # The bench stores these as python-repr strings, so json.loads needs the quotes fixed.

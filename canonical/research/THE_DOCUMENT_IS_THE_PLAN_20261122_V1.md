@@ -9673,3 +9673,63 @@ defect 2 from the list above: the code was right and the test of it was wrong.
 
     (159) A mechanism exercised only against the cases it was built from is untested. The other
           points in its space are where it fails, and they are the ones nobody looked at.
+
+## §A155 — The first honest rate: 1/12, and what raised it
+
+*2026-11-24. Same branch. Two instances was never a score; this is a denominator.*
+
+### The measurement
+
+Twelve published instances, selected only by size (ansible, ≤2 named failing tests), run end to
+end with no manual step: fetch, build at the true base, apply the published test patch only, grade
+the baseline, attempt, grade again.
+
+| round | mechanism | resolved | rate |
+|---|---|---|---|
+| before | missing-member search only | 1 / 12 | **8.3 %** |
+| after | + operator-protocol gap | 2 / 12 | **16.7 %** |
+
+The two resolved are `ansible-11c1777d` (NEW SYMBOL) and `ansible-0ea40e09` (operator gap, 16/16
+including its 15 `pass_to_pass` siblings). The second is the instance §A153 could only solve by
+hand, now solved with no hand in it.
+
+### The deficit, read off the failures rather than guessed
+
+The first run's eleven failures, with genuine error text:
+
+    TypeError: unsupported operand type(s) for |: 'dict' and 'VarsWithSources'   -> protocol gap
+    RepresenterError: ('cannot represent an object', AnsibleUndefined)          -> protocol gap
+    AssertionError / AnsibleParserError / AnsibleError(match=...)               -> behavioural edit
+
+Two of the eleven were the same shape, and that shape is fully mechanical: the operator-to-dunder
+mapping is a property of **Python**, not a fact about the world, so a mechanism may hold it. One
+added branch moved the rate by one instance. That is not much, and it is the honest size of it.
+
+### Four defects in the measurer, all of which would have faked a result
+
+1. `pathlib.resolve()` on the venv interpreter follows `bin/python` to `/usr/bin/python3.11`,
+   destroying the venv. Every `-m pytest` died with "No module named pytest", which reads as a
+   missing dependency and is a destroyed path. `abspath` normalises without following the link.
+2. `fetch_instance` wrote `tests__config.json`; the contract reader wanted `config.json`. One
+   file, two names, three ERRORs that looked like missing tasks.
+3. The failure reader took the **first** line matching `\w*Error` anywhere in the traceback —
+   which is usually **source code from the context**, e.g. `RepresenterError("recursive objects
+   are not allowed: %r" % data`. The real failure is the last `E ` line. Three instances were
+   classified from code that had not failed.
+4. A relative interpreter path breaks once `subprocess` runs with `cwd=<room>`.
+
+Defect 3 is the one worth keeping: **I had a plausible failure for every instance before I had a
+true one.** The classification looked complete and was reading the wrong lines.
+
+    (160) A rate over a sample is a result; a rate over two instances is an anecdote with a
+          percentage sign on it.
+    (161) Read the LAST error line, not the first match. The first match in a traceback is
+          frequently the source code that was executing, and it reads exactly like a diagnosis.
+
+### Honest limits
+
+    * 12 instances of 237 pytest-verifiable ones, all ansible. Not a benchmark score.
+    * `NOT_DERIVABLE_BY_THIS_SPACE` is a statement about my space, not about the task.
+    * Two instances resolved out of twelve is 16.7 %, and the frontier on this bench is not the
+      comparison: these are single-test-per-instance, the easy tail of the census.
+    * **§6 NOT MET.** No OSWorld task, no full-benchmark run, no unseen-environment result.

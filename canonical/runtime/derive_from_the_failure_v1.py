@@ -61,6 +61,7 @@ import sys
 
 __all__ = [
     "read_missing_member", "call_signature_at", "locate_class", "append_member",
+    "read_operator_gap",
     "grade_named_tests", "find_pytest",
 ]
 
@@ -195,6 +196,42 @@ def append_member(path: pathlib.Path, indent: str, body_end: int, name: str,
         return False
     pathlib.Path(path).write_text(out, encoding="utf-8")
     return True
+
+
+# The operator-to-dunder map is a property of Python, not a fact about the world. Holding it is
+# what the constraints permit: a computed mechanism, not a memorised fact.
+_OPERATOR_DUNDER = {
+    "|": ("__or__", "__ror__", "__ior__"),
+    "&": ("__and__", "__rand__", "__iand__"),
+    "^": ("__xor__", "__rxor__", "__ixor__"),
+    "+": ("__add__", "__radd__", "__iadd__"),
+    "-": ("__sub__", "__rsub__", "__isub__"),
+    "*": ("__mul__", "__rmul__", "__imul__"),
+    "<": ("__lt__", None, None), ">": ("__gt__", None, None),
+    "<=": ("__le__", None, None), ">=": ("__ge__", None, None),
+}
+_UNSUPPORTED_OPERAND_RE = re.compile(
+    r"unsupported operand type\(s\) for (?P<op>[^:]+):\s*'(?P<left>[\w.]+)' and '(?P<right>[\w.]+)'")
+
+
+def read_operator_gap(output: str) -> dict | None:
+    """Read an operator-protocol gap out of the failure: the operator and which side is missing.
+
+    `TypeError: unsupported operand type(s) for |: 'dict' and 'VarsWithSources'` says the left
+    type has no handler and the right type has no REFLECTED handler -- so the method belongs on
+    the class named second, and its name is the language's `__r` + the forward name. Nothing here
+    is guessed; the failure states the operator and both types.
+    """
+    m = _UNSUPPORTED_OPERAND_RE.search(output)
+    if not m:
+        return None
+    op = m.group("op").strip()
+    fwd, rev, inp = _OPERATOR_DUNDER.get(op, (None, None, None))
+    if not fwd:
+        return None
+    return {"operator": op, "left": m.group("left"), "right": m.group("right"),
+            "method": rev, "forward": fwd, "inplace": inp,
+            "target_class": m.group("right").split(".")[-1]}
 
 
 def load_contract(meta_dir: pathlib.Path) -> dict:

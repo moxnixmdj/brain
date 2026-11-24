@@ -87,6 +87,26 @@ PRIMITIVES: dict[str, str] = {
         "        if len(_words) > 1 and _words[0] == '{TOK}':\n"
         "            out['{K1}' if '{DISC}' in _words[1] else '{K0}'].append(_words[1])\n"
         "return out",
+    # OPERATOR PROTOCOL. The mapping from a Python operator to its dunder methods is a property
+    # of the LANGUAGE, not a world fact -- so a mechanism may hold it (constraint-compatible).
+    # The failure names the operator and both operand types; this shape supplies the reflected
+    # method for a MutableMapping so that `other <op> self` succeeds and returns a plain result.
+    "reflected_operator_from_mapping":
+        "if not isinstance(other, {ABC}):\n"
+        "    return NotImplemented\n"
+        "out = dict(other)\n"
+        "out.update(dict(self))\n"
+        "return out",
+    "forward_operator_from_mapping":
+        "if not isinstance(other, {ABC}):\n"
+        "    return NotImplemented\n"
+        "out = dict(self)\n"
+        "out.update(dict(other))\n"
+        "return out",
+    "inplace_operator_from_mapping":
+        "for _k, _v in dict(other).items():\n"
+        "    self[_k] = _v\n"
+        "return self",
     "count_items": "return len(arg)",
     "sorted_unique": "return sorted(set(arg))",
     "filter_nonempty": "return [x for x in arg if x]",
@@ -126,6 +146,7 @@ def render_candidate(body_template: str, *, type_slot: str = "dict", indent: str
     # `_ip_pathv` and silently corrupted a shape whose identifiers merely contain "arg".
     import re as _re
     text = body_template.replace(_HOLE, type_slot)
+    text = text.replace("{ABC}", "MutableMapping")
     text = _re.sub(r"\barg\b", arg_name, text)
     return "\n".join(indent + line if line else line for line in text.splitlines())
 
