@@ -40,7 +40,9 @@
       "canonical/tests/test_harbor_docker_inspect_diagnostic_v1.py",
       "canonical/tests/test_harbor_pro_patch_handoff_v1.py",
       "canonical/tests/test_harbor_live_compose_diagnostic_v1.py",
-      "canonical/tests/test_harbor_pro_git_capture_v1.py"
+      "canonical/tests/test_harbor_pro_git_capture_v1.py",
+      "canonical/tests/test_harbor_experimental_vm_v1.py",
+      "canonical/tests/test_harbor_process_cleanup_worker_v1.py"
     ],
     "route_class": "REUSE"
   },
@@ -65,7 +67,7 @@
     "route": "REUSE_DOCKER_HOST_INSPECT_AS_UNTRUSTED_DIAGNOSTIC",
     "vm_smoke": "A standalone disposable Docker smoke checks a read-only bind and static inspect filter; it is not Harbor, not a solver, not a verifier and has not been run here."
   },
-  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim.",
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim. Wire owner-opted disposable-VM dispatch with sampled Compose checks, best-effort process cleanup, Pro candidate capture and Terminal-Bench container handoff; no progress or verification claim.",
   "governance_change": false,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
@@ -81,6 +83,17 @@
     "success_probability_lcb": "1/100",
     "wall_clock_cost_ub": 3600
   },
+  "owner_accepted_vm_residual_risk_20261124": {
+    "implemented": "Experimental production dispatch only under exact opt-in and suite; repeated Compose static checks, task-container process snapshot/cleanup, Pro candidate capture, ATIF-shaped audit and Terminal-Bench shared-container handoff. Independent runtime and score are unverified; local environment lacks Docker/Harbor.",
+    "incremental_spend_usd": 0,
+    "limits": "No local Docker or Harbor. Risk acceptance is not evidence of actual network isolation, quiescence, model capability or verifier independence. Unknown or uncertain command execution fails closed.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Official Pro pristine replay and Terminal-Bench verifier on an independent VM; mocked transport is not verification.",
+    "owner_request": "Opt-in experimental Harbor Docker dispatch after static Compose checks, best-effort process cleanup, Pro patch capture, and Terminal-Bench container verifier handoff; defer FrontierSWE. Owner accepts residual detached-process risk on disposable VM.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "route_order": "Delete host solver; bypass nested namespaces; reuse Harbor exec, Compose diagnostic, candidate diff handoff and official verifier. Adapt for owner-explicit experimental opt-in; no identity or egress guarantees inferred from an inspect sample."
+  },
   "recursive_obs": {
     "canonical_base_commit": "caefcd5fe3956353dee8edb82517582475edfece",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
@@ -88,7 +101,7 @@
       "Host solver invocation",
       "Unverified fresh-verifier assumption"
     ],
-    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim.",
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim. Wire owner-opted disposable-VM dispatch with sampled Compose checks, best-effort process cleanup, Pro candidate capture and Terminal-Bench container handoff; no progress or verification claim.",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "Reuse Harbor transport",
@@ -160,7 +173,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox. Remove fake docker command test: repository rule forbids fake docker; mocked environment.exec tests alone cannot establish real isolation. Pure identity parsing and mount-data controls do not validate real Docker Compose, isolation, capture or verifier results. Real local Git fixtures and a mocked environment.exec receipt do not establish task-container quiescence, isolation, provenance or official replay."
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox. Remove fake docker command test: repository rule forbids fake docker; mocked environment.exec tests alone cannot establish real isolation. Pure identity parsing and mount-data controls do not validate real Docker Compose, isolation, capture or verifier results. Real local Git fixtures and a mocked environment.exec receipt do not establish task-container quiescence, isolation, provenance or official replay. Mocked exec and Compose results cannot establish Docker enforcement, process quiescence, agent success or official verifier outcomes."
     },
     "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
     "required_capability": "Confined execution and independent verification of agent effects",

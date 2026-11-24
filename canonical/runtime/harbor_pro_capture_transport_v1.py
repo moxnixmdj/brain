@@ -2,7 +2,7 @@
 
 The worker response is untrusted and may be forged; a checksum verifies only
 byte agreement. This helper does not prove quiescence, container identity,
-isolation or benchmark validity. The production agent does not call it.
+isolation or benchmark validity. The explicit VM opt-in may call it.
 """
 from __future__ import annotations
 

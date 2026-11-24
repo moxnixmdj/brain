@@ -2,39 +2,37 @@
 
 ## Current state
 
-**Not qualified; do not execute task agents or claim a score.** The owner now
-requests Harbor task containers as the isolation boundary for these evaluations,
-without nested Linux namespaces. This supersedes the earlier restriction to the
-one-shot carrier for the requested Harbor evaluations; it does not imply
-approval for task-triggered effects on the unisolated host or production. The
-fixture collector is not qualified
-for arbitrary code; it cannot express all Git changes, and its own checks do not
-constitute independent authenticated attestation. Its producer-side SHA-256
+**Not independently qualified; no benchmark score is claimed.** The owner
+requests Harbor task containers as the isolation boundary, without nested Linux
+namespaces, and explicitly accepts residual detached-process risk on a disposable
+benchmark VM. The Harbor agent now has an **experimental opt-in path**, but it
+has not run against real Docker, Harbor, tasks, or an external verifier here.
+The opt-in is not approval for task effects on an unisolated host or production.
+The fixture collector is not qualified for arbitrary code; producer-side SHA-256
 recomputation is not proof of origin, isolation, correctness, or test success.
-The Harbor agent now refuses before constructing a solver or executing an
-environment command. The legacy SWE adapter also refuses before solver or
-checkout. Neither accepts any real benchmark yet; the historical SWE-bench
-Verified dataset is out of scope. The requested import name
-`HarborEpistemicAgent` aliases the same refusal-only class; it is not an
-executable agent.
+The legacy SWE adapter still refuses. The historical SWE-bench Verified dataset
+is out of scope. `HarborEpistemicAgent` aliases the experimental opt-in class.
 
-### Why the Harbor transition remains blocked
+### Experimental opt-in and limits
 
 The former proposal helper called `solve()` on a host-side thread; it no longer
-accepts a host model. A **test-only** transport seam now dispatches a worker
-through `environment.exec()`; that worker calls `open_model().solve()` inside
-whatever environment executes it. The production entry point still refuses
-before dispatch. Mocked tests confirm command construction and refusal of a
-host model, **not** execution in Docker or isolation. `solve()` can have side
-effects before returning, and the command filter is not an egress boundary.
+accepts a host model. The current worker calls `open_model().solve()` inside
+`environment.exec()`. With `BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1` and an
+explicit `suite=pro-v2` or `suite=terminal-bench-4`, the entry point samples
+Compose inspection before and after each exec, requires its strict static filter
+to pass, and dispatches the worker. Otherwise it refuses. Mocked tests confirm
+command construction and dispatch, **not** execution in Docker or isolation.
+`solve()` can have side effects before returning, and the command filter is not
+an egress boundary.
 
-Harbor `upload_dir` copies data; it does not make the copy read-only. The
-entry point does not yet stage Brain, validate mounts or privileges, verify
-no-network egress, capture an effect/base-bound patch, or integrate any
-verifier. A fake environment or a boolean opt-in cannot establish those
-properties. Harbor may also bind-mount logs and artifacts to the host, so the
-actual runtime configuration must be checked, not assumed. Nested namespaces
-are not required by the owner's current decision.
+Harbor `upload_dir` is a copy, not a read-only mount: the operator must supply a
+read-only bind at `/opt/brain-ro` and a no-network Compose configuration. The
+experimental process cleanup snapshots the PID table and kills newly visible
+processes before capture; it can kill unrelated new processes, can miss detached
+processes, and is not a proof of quiescence. The agent refuses a writable host
+agent-log mount because it writes the candidate patch on the host. A boolean,
+inspection, SHA-256 and mock results cannot establish isolation or correctness.
+Nested namespaces are not required by the owner's current decision.
 
 Harbor's [verifier-mode source](https://github.com/harbor-framework/harbor/blob/39c2219a41b3caa7a689cef1882263b5a93ae93f/src/harbor/models/task/verifier_mode.py)
 defaults to a shared agent/verifier environment if no separate verifier is
@@ -48,7 +46,7 @@ reviewer has run this integration and no verified-integration credit is claimed.
 ## Container-worker transport increment
 
 `canonical/runtime/harbor_container_solver_worker_v1.py` calls the existing
-`open_model().solve()` from a worker script. The non-production transport loop
+`open_model().solve()` from a worker script. The transport loop
 encodes the request and dispatches that script exclusively with Harbor
 `environment.exec`; a supplied host model is rejected before dispatch. Request
 and response validation rejects oversized, malformed or ambiguous envelopes;
@@ -77,13 +75,13 @@ exposes Docker Compose mounts via `--mounts` (a JSON array), but a writable
 The input document and expected ID are supplied by the caller. Even a complete
 static match cannot authenticate Docker, prove the host source is sealed, bind
 the inspected container to Harbor's `environment.exec`, prove future egress
-stays disabled, or establish process quiescence. **It always returns a
-nonzero CLI status and `execution_authorized: false`; the production agent does
-not use it to bypass its refusal.** Its tests are data-only negative controls,
-not a Docker test. The previous mock smoke-script test installed a fake `docker`
-executable, contrary to `AGENTS.md` rule 1; it has been removed. A green guard
-did not make that test compliant. More work is still needed for all four
-requested wiring pieces and for the real VM and independent verifier.
+stays disabled, or establish process quiescence. **The standalone diagnostic
+always returns a nonzero CLI status and `execution_authorized: false`.** The
+experimental opt-in uses the live diagnostic's static-filter result as a filter,
+not as proof. Tests are data-only negative controls, not a Docker test. The
+previous mock smoke-script test installed a fake `docker` executable, contrary
+to `AGENTS.md` rule 1; it was removed. A green guard did not make that test
+compliant. A real VM and independent verifier remain necessary.
 
 ### Pro candidate capture and byte handoff (not grading)
 
@@ -97,15 +95,13 @@ and includes binary changes without modifying the ordinary index. The
 real Git fixtures and a mocked exec receipt, including binary files and failed
 receipts; they are not real Harbor or Docker tests.
 
-This is **not** the production path, an official Pro replay, an authenticated
-base, a proof that the worker or its descendants stopped, or complete capture:
-ignored untracked files, submodule contents and effects outside the repository
-are not represented. A task-controlled Git configuration can run clean filters,
-so do not run this worker on an untrusted repository on the host. The task can
-also forge its Git and worker response; the checksum only checks byte agreement.
-The production Harbor agent still refuses, including when
-`BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1`; its trace records that request as
-blocked. The handoff never overwrites an existing `model.patch`.
+The opt-in agent now calls this path for `suite=pro-v2`. It is **not** an
+official Pro replay, authenticated base, proof that descendants stopped, or
+complete capture: ignored untracked files, submodule contents and effects
+outside the repository are not represented. A task-controlled Git configuration
+can run clean filters, so do not run this worker on an untrusted repository on
+the host. The task can also forge its Git and worker response; the checksum
+only checks byte agreement. The handoff never overwrites an existing `model.patch`.
 
 In the pinned Harbor version, `environment.exec` uses Docker Compose's `main`
 service. Automatic host log mounts are **optional** (`auto_mounting` defaults to
@@ -116,8 +112,8 @@ labels, and checks configured log source paths against trial paths. It accepts
 only exact standard log binds plus Brain, and resolves host paths before comparison.
 It has not been run with real Harbor or Docker here. The two ID samples do not
 atomically bind a subsequent `environment.exec`, establish quiescence, or
-independently prove egress isolation; the production agent does not use the
-diagnostic to authorize execution. A hostname is configurable, a private cgroup
+independently prove egress isolation; the opt-in uses the diagnostic as a filter,
+not as proof. A hostname is configurable, a private cgroup
 namespace may hide the Docker ID, and neither in-container value authenticates
 the earlier Docker inspection. A route check also does not exclude every egress
 path, and an exited worker can leave detached descendants. Combining checks and
@@ -252,38 +248,94 @@ mkdir -p reports
 # Both reports intentionally say PREFLIGHT_ONLY_EXECUTION_BLOCKED.
 ```
 
-px-eval specifies Python 3.12+, `uv`, an environment configuration and Modal
-credentials; its example runtime uses Modal and may cost money. SWE-bench Pro V2
-also documents Modal and public GHCR images. The owner has requested a Harbor
-boundary, but the current Brain agent is not yet integrated with it. The above
-clones are other repositories on the VM and do not alter this Arena branch.
+## Owner-opted Ubuntu VM commands (unexecuted draft)
 
-**No executable Brain evaluation command is provided**: using the current
-agent would only refuse, and claiming it is an integrated benchmark runner
-would be misleading. After carrier qualification, authenticated verification,
-protocol-specific integrations, the five-instance gate and any required scope
-approval, follow the pinned upstream READMEs for image preflights, rollout and
-separate grading. Terminal-Bench's upstream dataset selector is shown above;
-FrontierCode access must be arranged separately. Before running other task
-classes or harnesses, obtain explicit owner authorization for their actual
-execution and effect model.
+The following commands are derived from the pinned upstream CLIs and the
+experimental wiring. They have **not been executed or proven working** here:
+Docker, Harbor and Python 3.12 are unavailable. Run on a disposable Ubuntu VM
+with Python 3.12, `venv`, Git, Docker and the Docker Compose plugin installed,
+and a user permitted to use Docker. Installation and task execution access
+registries, consume time and resources, and may incur VM or registry costs.
+Inspect the code and resource settings first. The process cleanup can kill
+newly visible processes inside each task container. The restrictive Compose
+overlay may make tasks needing GPUs, capabilities or verifier network fail.
 
-## Work remaining before admission
+```bash
+set -euo pipefail
+export VMROOT="$HOME/brain-harbor-eval"
+mkdir -p "$VMROOT"
+cd "$VMROOT"
+git clone --branch arena/d582a17b-brain --single-branch https://github.com/moxnixmdj/brain.git brain
+git clone https://github.com/scaleapi/SWE-bench_Pro-os.git swe-pro
+git -C swe-pro checkout --detach 66f92766bba642462d4bbe5479e83f91f9211862
+python3.12 -m venv "$VMROOT/venv"
+. "$VMROOT/venv/bin/activate"
+python -m pip install 'git+https://github.com/harbor-framework/harbor.git@39c2219a41b3caa7a689cef1882263b5a93ae93f'
+export BRAIN="$(cd "$VMROOT/brain" && pwd -P)"
+export PYTHONPATH="$BRAIN:$VMROOT/swe-pro/v2/tooling${PYTHONPATH:+:$PYTHONPATH}"
+python -c 'import canonical.runtime.harbor_epistemic_agent_v1 as a; print(a.HarborEpistemicAgent.name())'
+docker info >/dev/null
+docker compose version
+(cd "$VMROOT/swe-pro/v2" && sha256sum -c SHA256SUMS)
+python "$VMROOT/swe-pro/v2/tooling/make_subset.py" \
+  "$VMROOT/swe-pro/v2/tasks" "$VMROOT/swe-pro/v2/hard51_ids.txt" "$VMROOT/hard51"
+cat > "$VMROOT/brain-no-network-compose.yaml" <<'YAML'
+services:
+  main:
+    network_mode: none
+    ipc: private
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+YAML
+export BRAIN_MOUNTS="$(python -c 'import json,os; print(json.dumps([{"type":"bind","source":os.environ["BRAIN"],"target":"/opt/brain-ro","read_only":True}]))')"
+mkdir -p "$VMROOT/runs"
+cd "$VMROOT/runs"
 
-1. Integrate and test the container-local worker in a real Harbor environment.
-   Establish genuinely read-only Brain staging; verify the actual runtime,
-   network enforcement, configuration, mounts and lifecycle on a disposable
-   Docker VM. The production entry point remains closed; the mock transport
-   is not qualification. The owner no longer requires nested namespaces.
-2. Implement each benchmark's artifact and verification protocol. Pro V2 must
-   capture the complete patch, bind it to the actual base, hash its effects,
-   and regrade in a pristine image. FrontierSWE and Terminal-Bench tasks may
-   require non-Git artifacts and cannot be represented by a patch alone.
-3. Arrange independent verification of the actual integration and retain raw
-   evidence. A same-process flag, self-generated hash or mocked test is not
-   reviewer authentication or proof of the container boundary.
-4. Run the requested benchmark tasks only after the route is ready, disclose the
-   Task #1 contamination, and report real outcomes and resource/cost data.
+# Terminal-Bench agent effects stay in the task container; Harbor runs its
+# task verifier. This is NOT generally a pristine-image regrade.
+BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1 harbor run \
+  -d terminal-bench/terminal-bench@4.0.0 -e docker -n 1 \
+  -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
+  --ak suite=terminal-bench-4 --ak "brain_source=$BRAIN" \
+  --mounts "$BRAIN_MOUNTS" --extra-docker-compose "$VMROOT/brain-no-network-compose.yaml" \
+  --job-name brain-tb4
+
+# SWE-bench Pro HARD-51 producer phase. No shared-container verification score.
+BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1 harbor run \
+  -p "$VMROOT/hard51" -e docker -n 1 \
+  -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
+  --ak suite=pro-v2 --ak repo_root=/app --ak "brain_source=$BRAIN" \
+  --mounts "$BRAIN_MOUNTS" --extra-docker-compose "$VMROOT/brain-no-network-compose.yaml" \
+  --disable-verification --job-name brain-pro-hard51
+
+# Official patch-replay agent; separate Harbor job creates fresh task containers.
+# It reads each prior trial's agent/model.patch, then runs the task verifier.
+harbor run -p "$VMROOT/hard51" -e docker -n 1 \
+  -a patch_replay:PatchReplayAgent -m replay \
+  --ak "source_job=$VMROOT/runs/jobs/brain-pro-hard51" \
+  --job-name brain-pro-hard51-regrade
+```
+
+Do not infer success from command completion: inspect every trial's exceptions,
+`agent/brain_epistemic_trace.json`, candidate patch and replay `replay.json`,
+and the official verifier results. A refused trial or missing/empty patch is not
+a solve. The `repo_root=/app` setting follows the pinned Pro reference's main
+path; tasks that actually need `/testbed` must be configured separately rather
+than silently assuming the patch replay applies it. Task #1's public verifier
+test-name disclosure must accompany any report. The production-VM setup and
+task images may be expensive; no result or zero-cost claim is made here.
+
+## Work remaining for qualification
+
+1. Independently run a disposable Docker VM and validate the actual Compose
+   config, mount, network behavior, container lifecycle, cleanup and task output.
+2. Check Pro capture completeness and regrade every candidate in a pristine
+   image. Terminal-Bench's usual shared container is not automatically a fresh
+   verifier, and its tasks may require non-Git artifacts.
+3. Independently validate ATIF and task-specific verifier outputs. FrontierSWE
+   remains closed until its px-eval transfer and separate grader are integrated.
+4. Report actual outcomes, contamination, exceptions and resource/cost data;
+   a mocked result or self-generated digest is not a score or independent review.
 
 ## Reference scores, not our results
 

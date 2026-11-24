@@ -4,7 +4,8 @@ This calls the real Harbor DockerEnvironment's Compose ``ps`` and Docker
 ``inspect`` using the same Docker runtime and environment. Identity is sampled
 before and after inspection, not atomically bound to a later exec. It cannot
 prove egress, quiescence, verifier independence, or configuration permanence.
-It is not wired to solver admission. No task command is executed here.
+The owner-opted experimental path uses this as a configuration filter, not as
+proof. No task command is executed by this diagnostic.
 """
 from __future__ import annotations
 
@@ -133,6 +134,7 @@ async def inspect_compose_environment(environment: Any, *, brain_source: str) ->
                       expected_log_sources=logs)
     result.update({
         "compose_main_container_id": before,
+        "host_log_mount_destinations": sorted(logs),
         "compose_identity_sampled_before_and_after": True,
         "compose_exec_atomically_bound": False,
         "execution_authorized": False,

@@ -2,18 +2,18 @@
 
 The owner requested Harbor's container as the execution boundary, without a
 nested namespace. The proposal helper dispatches the solver worker through
-``environment.exec`` and never invokes solve on the host. The production entry
-point remains disabled until read-only staging, container configuration,
-network isolation, and benchmark-specific verifier handoff are checked. The
-helper is for controlled transport tests only; its command policy is not an
-isolation boundary.
+``environment.exec`` and never invokes solve on the host. Explicit opt-in allows
+experimental disposable-VM dispatch only after conservative Docker Compose
+checks; this is not an independently verified boundary. The command policy is
+not an isolation boundary.
 
 `EPISTEMIC` is forwarded verbatim. Brain's solve() special-cases only RECALL and
 SOLVE_OR_LEARN; every other mode string uses ordinary routing. This module does
 not invent a new engine mode.
 
-The Harbor entry point emits a refusal trace, not a benchmark result.
-No environment variable or dataset label can override this refusal.
+The Harbor entry point refuses by default. Opted-in runs produce unverified
+candidate effects and a trace; only the relevant benchmark verifier decides
+outcomes. FrontierSWE is not supported by this agent.
 """
 from __future__ import annotations
 
@@ -162,7 +162,7 @@ def validate_action(action: Mapping[str, Any]) -> tuple[str, dict[str, Any]]:
 async def _call_container_model(
     transport: HarborEnvironmentTransport, goal: str, kwargs: Mapping[str, Any]
 ) -> dict[str, Any]:
-    """Test-only transport seam; neither dispatch nor a response proves isolation."""
+    """Container transport seam; neither dispatch nor a response proves isolation."""
     request = {
         "goal": goal,
         "inputs": dict(kwargs.get("inputs") or {}),
@@ -216,7 +216,7 @@ async def run_epistemic_goal(
     mode: str = DEFAULT_MODE,
     max_cycles: int = MAX_CYCLES,
 ) -> dict[str, Any]:
-    """Test-only container transport loop; production admission remains closed.
+    """Container transport loop; the caller owns boundary checks.
 
     A supplied host model is explicitly rejected. This helper does not verify
     container isolation, collect patches, or invoke benchmark verifiers.
@@ -364,14 +364,18 @@ async def run_epistemic_goal(
 
 
 class EpistemicBrainAgent(BaseAgent):
-    capabilities = AgentCapabilities()
+    capabilities = AgentCapabilities(atif=True)
 
-    def __init__(self, *args: Any, allow_isolated_vm_eval: bool = False, **kwargs: Any) -> None:
+    def __init__(self, *args: Any, allow_isolated_vm_eval: bool = False,
+                 suite: str = '', repo_root: str = '/app',
+                 brain_source: str | None = None, **kwargs: Any) -> None:
         if type(allow_isolated_vm_eval) is not bool:
             raise AgentRejected("ISOLATED_VM_EVAL_FLAG_MUST_BE_BOOLEAN")
         super().__init__(*args, **kwargs)
-        # This is only a request; it does not enable the unintegrated boundary.
         self.allow_isolated_vm_eval = allow_isolated_vm_eval
+        self.suite = suite
+        self.repo_root = repo_root
+        self.brain_source = brain_source or str(Path(__file__).resolve().parents[2])
 
     @staticmethod
     def name() -> str:
@@ -381,14 +385,13 @@ class EpistemicBrainAgent(BaseAgent):
         return "1.0.0"
 
     async def setup(self, environment: BaseEnvironment) -> None:
-        # Staging is intentionally disabled until a read-only mount and safe
-        # container configuration can be established and independently checked.
+        # Docker must already have mounted Brain read-only; upload_dir is a copy.
         return None
 
     async def run(self, instruction: str, environment: BaseEnvironment, context: AgentContext) -> None:
-        # The transport exists, but no trusted runtime check has established
-        # read-only staging, mounts, privileges, network isolation or a fresh
-        # verifier. An opt-in flag is not proof. Refuse before any dispatch.
+        # Refuse by default. An explicit owner opt-in permits experimental
+        # dispatch only after the Compose filter; it does not prove isolation,
+        # quiescence or verifier independence.
         result = {
             "schema": SCHEMA,
             "status": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
@@ -407,17 +410,41 @@ class EpistemicBrainAgent(BaseAgent):
             "task_identity_verified": False,
             "benchmark_disclosure_notice": {"instance_id": DISCLOSED_ID, "note": DISCLOSURE},
         }
+        error: Exception | None = None
+        trajectory = None
+        if result['requested_external_harbor_vm_eval'] and self.suite in ('pro-v2', 'terminal-bench-4'):
+            try:
+                from canonical.runtime.harbor_experimental_vm_v1 import atif_trajectory, run_experimental
+                logs = Path(self.logs_dir)
+                logs.mkdir(parents=True, exist_ok=True)
+                outcome = await run_experimental(instruction, environment, brain_source=self.brain_source,
+                                                 suite=self.suite, repo=self.repo_root, agent_log_dir=logs)
+                result = {**result, **outcome, 'execution_authorized': True,
+                          'external_harbor_vm_eval_status': 'EXPERIMENTAL_DISPATCH__UNVERIFIED'}
+                trajectory = atif_trajectory(instruction, outcome, getattr(self, 'session_id', None))
+            except Exception as exc:
+                error = exc
+                result['external_harbor_vm_eval_status'] = 'BLOCKED__EXPERIMENT_FAILED'
+                result['experiment_error'] = type(exc).__name__ + ':' + str(exc)[:300]
+        # Use no-follow, no-overwrite output so a task cannot redirect host
+        # writes via an existing symlink. No writable agent host mount is admitted.
         try:
             logs = Path(self.logs_dir)
             logs.mkdir(parents=True, exist_ok=True)
-            (logs / TRACE_FILENAME).write_text(
-                json.dumps(result, indent=2, sort_keys=True) + "\n", encoding="utf-8"
-            )
-        except Exception:
-            pass
+            for filename, data in ((TRACE_FILENAME, result), ('trajectory.json', trajectory)):
+                if data is None:
+                    continue
+                fd = os.open(logs / filename, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
+                with os.fdopen(fd, 'w', encoding='utf-8') as output:
+                    json.dump(data, output, indent=2, sort_keys=True)
+                    output.write('\n')
+        except OSError:
+            if error is None and result['requested_external_harbor_vm_eval'] and self.suite in ('pro-v2', 'terminal-bench-4'):
+                raise
+        if error is not None:
+            raise error
         # Do not overwrite accounting fields: their values are owned by Harbor.
 
 
-# Requested import name; this is the same fail-closed class, not an admitted
-# container implementation or an additional execution route.
+# Requested import name; the same opt-in experimental class, not a second route.
 HarborEpistemicAgent = EpistemicBrainAgent

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Container-side Brain solve worker. Never grants authority or verifies isolation.
 
-This program must only be dispatched inside an independently checked task
-container. The production Harbor entry point stays disabled until that check,
-read-only staging, and benchmark-specific artifact verification are integrated.
-The JSON output is an untrusted raw solver response, not a verified effect.
+This program must only be dispatched inside a suitably confined task container.
+The experimental Harbor path checks Docker configuration but has not been
+independently verified. The JSON output is an untrusted raw solver response,
+not a verified effect.
 """
 from __future__ import annotations
 

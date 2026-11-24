@@ -5,7 +5,7 @@ Checks HEAD before and after capture and preserves the normal index using a
 separate temporary index. This does NOT establish worker quiescence, authenticate
 Git metadata, guarantee a complete worktree snapshot, or run a verifier. Never
 run this against an untrusted repository on the host: Git add may run configured
-clean filters. The production Harbor entry point does not dispatch this tool.
+clean filters. The experimental opt-in Harbor path may dispatch this tool.
 """
 from __future__ import annotations
 

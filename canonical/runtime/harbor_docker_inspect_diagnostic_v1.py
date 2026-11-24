@@ -3,9 +3,9 @@
 This is a static filter, NOT a Harbor boundary check. Its caller supplies the
 JSON and expected identifiers; either may be forged. It does not bind Docker's
 container to Harbor's exec target, verify the daemon, source contents, future
-configuration, process quiescence, or perform a packet capture. Even an empty
-failure list never authorizes a solver, artifact, or benchmark. Production
-Harbor admission remains closed.
+configuration, process quiescence, or perform a packet capture. An empty
+failure list is not proof of a safe boundary, verifier, or benchmark outcome.
+The explicitly opted-in experimental Harbor path uses it as one filter.
 """
 from __future__ import annotations
 
