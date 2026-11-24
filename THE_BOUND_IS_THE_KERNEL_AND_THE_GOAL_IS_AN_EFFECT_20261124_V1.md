@@ -360,6 +360,39 @@ named `zpack` composes a verified `out.tar.gz` with chain `[gzip, tar]`.
 | "16-way parallel CoW rollouts scored by residual reduction" | **the substrate is verified** (18.77 ms for 16 branches). The *scoring function* is the open part: our effects are oracle-checkable, so branches can be verified, not merely scored |
 | "unified Petri net across GUI/CLI/SQL/code" | **not attempted**: `MealyAPICompiler`, `simulate_plan`, `MultiLayerSnapshot`, `CUMentalWorldModel`, `typed_invention_v1`, `epistemic_scan_acquire_compress_v1`, `BELIEFWEAVER` do **not exist** in this tree, and the six commit hashes in the brief (including `209bbc6c` and the five `click@`/`werkzeug@` heads) are **not valid git objects**. Nothing is claimed about them |
 
+## 5e. The second shape of effect: a store
+
+Every effect this system could verify was a byte stream: the artifact's reader
+had to carry the source out and bring it back. That covers compression and
+nothing else -- a database row, an accessibility tree, a DOM, a sent request were
+unverifiable, so the loop could act on them and had no way to know it had
+succeeded. That was the bottleneck named at the end of the last iteration.
+
+`verify_state` reads the store back and asks whether it reproduces the source.
+It knows no schema: every table and column is tried, and the reading that
+reproduces the source is the reader. Several readings that all reproduce it still
+verify the effect, and the receipt says how many. Shape is not read off the
+suffix -- it is read off the artifact's own first bytes, because `out.db` cost
+**72.77 s** of provably useless proofs when the byte reader was asked first.
+After the change: a store verifies in **0.00 s**, a `.gz` in 0.03 s.
+
+Receipt (`STATE_EFFECT_LESSON_RECEIPT_20261124_V1.json`): one exposure to
+"store the input in out.db" with four candidate actions (one correct row-per-line
+store, one correct single-row store, one wrong store, one decoy copy) ->
+`PASS__PERFECT_ALGORITHM_RUN`, effect `EFFECT_VERIFIED` by the state reader, then a
+**held-out** world with the source renamed to `report.txt` in a different
+directory -> `PASS__REPLAY_FROM_OPERATOR`, and the judge outside all of it, plain
+SQL issued by this report's author, returns rows equal to the renamed source.
+
+**A defect found on the way, and it is the important one.** The first held-out
+attempt replayed the action, ran it, and the effect came back
+`REFUTED__EFFECT_DID_NOT_HOLD_HERE` -- because the action hardcoded `input.txt`
+while the contract had bound `report.txt`. The binding stopped at the plan and
+never reached the action. `act(name, roles=...)` now carries the bound roles into
+any action that accepts them (actions that do not are called exactly as before),
+and the same lesson transfers. A contract that binds a source and then lets the
+action choose its own is not a contract.
+
 ## 6. The next bottleneck (one)
 
 **Composition: the loop cannot yet invent a missing action.** The compound
@@ -370,9 +403,11 @@ third, with the chain oracle deciding whether the composition is right. That is
 the brief's "algebraic skill composition", now demanded by a measurement rather
 than by a hunch.
 
-**And the oracle still covers one shape of goal.** "Produce this artifact from
-that source" is verified; a GUI state, a database row, a sent service, an edited
-document are not — and OSWorld-Science's 60.6% "no graded artifact" figure says the same gap
+**Two shapes are verified now, and there are more.** An artifact carried out and
+back, and a store that reads back as the source. A GUI's accessibility tree and a
+DOM should be the same question in another material -- but they need a live app,
+which this sandbox has neither the display nor the packages for, and that is the
+next honest wall: the mechanism is ready for a world this machine cannot provide — and OSWorld-Science's 60.6% "no graded artifact" figure says the same gap
 exists everywhere. The next single step is to **derive the effect oracle from the
 environment itself for other shapes** (for a GUI: the accessibility tree's own
 action-and-readback; for a document: the application's own reopen-and-compare),

@@ -973,8 +973,9 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                 action=action_name,
                 program=None,
                 observation={"root": getattr(env, "root", None)},
-                source_name=str(effect_contract.get("source") or ""),
-                output_name=str(effect_contract.get("output") or ""),
+                source_name=str((effect_contract or {}).get("source") or ""),
+                output_name=str((effect_contract or {}).get("output")
+                                or _goal_output(goal) or ""),
                 evidence={"plan_length": len(cleaned_plan),
                           "scan_states": scan_result["state_count"]},
                 argv=shape)
@@ -1028,6 +1029,15 @@ class scratch_room:
     def __exit__(self, *exc):
         self._tmp.cleanup()
         return False
+
+
+def _goal_output(goal: str) -> str | None:
+    try:
+        from canonical.runtime.computer_env_v1 import output_name
+
+        return output_name(goal)
+    except Exception:  # noqa: BLE001
+        return None
 
 
 def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,

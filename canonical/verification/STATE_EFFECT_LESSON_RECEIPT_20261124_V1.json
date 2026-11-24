@@ -1,0 +1,155 @@
+{
+  "schema": "PROJECT_BRAIN_STATE_EFFECT_LESSON_V1",
+  "isolation": {
+    "verdict": "ISOLATED"
+  },
+  "isolated_run": {
+    "ok": true,
+    "isolated": true
+  },
+  "result": {
+    "lesson": {
+      "status": "PASS__PERFECT_ALGORITHM_RUN",
+      "plan": [
+        "store_rows"
+      ],
+      "act": {
+        "status": "PASS__GOAL_VERIFIED_OBSERVED",
+        "executed": [
+          "store_rows"
+        ],
+        "actions_taken": 1,
+        "reached": true
+      },
+      "effect": {
+        "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+        "verdict": "EFFECT_VERIFIED",
+        "shape": "state",
+        "output": "out.db",
+        "source": "input.txt",
+        "reader": "notes",
+        "reading": {
+          "table": "notes",
+          "column": "body",
+          "how": "rows_newline_final",
+          "rows": 2
+        },
+        "also_matched": 0,
+        "looked_at": [
+          "notes.body"
+        ],
+        "shapes_tried": {
+          "bytes": "NOT_ASKED__THE_ARTIFACT_IS_A_STORE",
+          "state": "EFFECT_VERIFIED"
+        },
+        "binding": {
+          "source": "input.txt",
+          "reason": "the only file here that is not the output",
+          "files": [
+            "input.txt",
+            "out.db"
+          ]
+        }
+      },
+      "lift": "PASS__OPERATOR_LIFTED",
+      "admit": "ADMIT",
+      "duration_s": 0.0666
+    },
+    "held_out": {
+      "status": "PASS__REPLAY_FROM_OPERATOR",
+      "operator_replay": null,
+      "memory_replay": {
+        "status": "PASS__REPLAY_FROM_OPERATOR",
+        "rule_id": "op-6d0492a07506ab73",
+        "action_used": "store_rows",
+        "binding": {
+          "bound": "report.txt",
+          "reason": "the only input in this instance",
+          "files": [
+            "report.txt"
+          ]
+        },
+        "effect": {
+          "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+          "verdict": "EFFECT_VERIFIED",
+          "shape": "state",
+          "output": "out.db",
+          "source": "report.txt",
+          "reader": "notes",
+          "reading": {
+            "table": "notes",
+            "column": "body",
+            "how": "rows_newline_final",
+            "rows": 2
+          },
+          "also_matched": 0,
+          "looked_at": [
+            "notes.body"
+          ],
+          "shapes_tried": {
+            "bytes": "NOT_ASKED__THE_ARTIFACT_IS_A_STORE",
+            "state": "EFFECT_VERIFIED"
+          }
+        },
+        "attempts": [
+          {
+            "rule_id": "op-6d0492a07506ab73",
+            "status": "APPLIED__EFFECT_VERIFIED_HERE",
+            "action_used": "store_rows"
+          }
+        ]
+      },
+      "plan": null,
+      "effect": {
+        "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+        "verdict": "NOT_A_GOAL__NO_SUCH_ARTIFACT",
+        "shape": "state",
+        "output": "out.db",
+        "source": "report.txt",
+        "shapes_tried": {
+          "bytes": "NOT_A_GOAL__NO_SUCH_ARTIFACT",
+          "state": "NOT_A_GOAL__NO_SUCH_ARTIFACT"
+        },
+        "binding": {
+          "source": "report.txt",
+          "reason": "the only file here that is not the output",
+          "files": [
+            "report.txt"
+          ]
+        }
+      },
+      "duration_s": 0.0091
+    },
+    "judge": {
+      "lesson": {
+        "table": "notes",
+        "rows": [
+          "one line",
+          "second line"
+        ],
+        "bytes_equal_source": true
+      },
+      "held_out": {
+        "table": "notes",
+        "rows": [
+          "one line",
+          "second line"
+        ],
+        "bytes_equal_source": true
+      }
+    },
+    "memory_rules": [
+      [
+        "store_rows",
+        "store_in_a_database",
+        "out.db"
+      ],
+      [
+        null,
+        "store_in_a_database",
+        null
+      ]
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
+}

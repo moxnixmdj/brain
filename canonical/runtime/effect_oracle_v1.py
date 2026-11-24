@@ -57,6 +57,7 @@ from __future__ import annotations
 import pathlib
 import shutil
 import subprocess
+import time
 import tempfile
 from typing import Any, Mapping, Sequence
 
@@ -103,14 +104,15 @@ def _decode_shapes(program: str) -> list[list[str]]:
 
 
 def _run(argv: list[str], *, cwd: pathlib.Path, stdin: bytes | None = None,
-         timeout_s: float = 20.0):
+         timeout_s: float = 8.0):
     return subprocess.run(argv, cwd=str(cwd), capture_output=True,
                           input=stdin if stdin is not None else b"",
                           timeout=timeout_s)
 
 
 def prove_reader(program: str, source: pathlib.Path, scratch: pathlib.Path,
-                 timeout_s: float = 20.0) -> dict[str, Any] | None:
+                 timeout_s: float = 3.0,
+                 deadline: float | None = None) -> dict[str, Any] | None:
     """Can this program carry the source out and bring it back unchanged?
 
     Proven on a scratch copy, never on the artifact being judged: a reader that
@@ -170,6 +172,7 @@ def _invariant_header(program: str, source_bytes: bytes, first: bytes,
 
 
 _MAX_CANDIDATES = 8
+_PROOF_BUDGET_S = 20.0
 
 
 def _candidates(component: str, programs: Sequence[str] | None) -> list[str]:
@@ -265,10 +268,17 @@ def resolve_chain(output_name: str, source: pathlib.Path, scratch: pathlib.Path,
         return {"verdict": NO_READER, "detail": "the output name declares no format",
                 "components": []}
     links: list[dict[str, Any]] = []
+    deadline = time.monotonic() + _PROOF_BUDGET_S
     for component in reversed(components):          # outermost layer was applied last
         proven = None
         for candidate in _candidates(component, programs):
-            proven = prove_reader(candidate, source, scratch)
+            if time.monotonic() > deadline:
+                return {"verdict": NO_READER, "component": component,
+                        "components": components,
+                        "detail": "proving readers ran past the %.0fs budget; a "
+                                  "candidate that never returns is not a reader"
+                                  % _PROOF_BUDGET_S}
+            proven = prove_reader(candidate, source, scratch, deadline=deadline)
             if proven is not None:
                 proven["component"] = component
                 break
@@ -409,6 +419,141 @@ def _mentioned(goal: str) -> list[str]:
                                             str(goal or ""))]
 
 
+WRONG_STATE = "WRONG_STATE__THE_STORE_DOES_NOT_REPRODUCE_THE_SOURCE"
+NO_STATE_READER = "NO_STATE_READER__THE_ARTIFACT_IS_NOT_A_QUERYABLE_STORE"
+_SQLITE_MAGIC = b"SQLite format 3\x00"
+
+
+def verify_state(root: Any, output: str, source: str, *,
+                 timeout_s: float = 20.0) -> dict[str, Any]:
+    """The second shape of effect: a STORE whose contents are the source.
+
+    A `.gz` carries the source in its bytes; a database carries it in its rows,
+    and no amount of header inspection will tell you whether the rows are right.
+    So this asks the only question that matters -- read the store back and see
+    whether it reproduces the source -- and it does not know the table name, the
+    column name, or the schema. Every table and column is tried, and the reading
+    that reproduces the source is the reader. Several readings that all reproduce
+    it still verify the effect; the receipt says how many, so nothing is hidden.
+
+    This is the shape a GUI's accessibility tree and a DOM will take: structured
+    state, queried back, compared to what the goal demanded.
+    """
+    import sqlite3
+
+    base = pathlib.Path(str(root))
+    artifact = base / str(output)
+    if not artifact.is_file():
+        return {"schema": SCHEMA, "verdict": "NOT_A_GOAL__NO_SUCH_ARTIFACT",
+                "shape": "state", "output": output, "source": source}
+    wanted_bytes = (base / str(source)).read_bytes()
+    try:
+        wanted_text = wanted_bytes.decode("utf-8")
+    except UnicodeDecodeError:
+        wanted_text = None
+    head = artifact.read_bytes()[:16]
+    if not head.startswith(_SQLITE_MAGIC):
+        return {"schema": SCHEMA, "verdict": NO_STATE_READER, "shape": "state",
+                "output": output, "source": source,
+                "detail": "the artifact is not a SQLite store",
+                "artifact_header": head[:8].hex()}
+    looked: list[str] = []
+    matches: list[dict[str, Any]] = []
+    try:
+        uri = "file:%s?mode=ro&immutable=1" % artifact
+        connection = sqlite3.connect(uri, uri=True, timeout=timeout_s)
+        try:
+            tables = [row[0] for row in connection.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' "
+                "AND name NOT LIKE 'sqlite_%' ORDER BY name")]
+            for table in tables:
+                columns = [row[1] for row in connection.execute(
+                    'PRAGMA table_info("%s")' % table.replace('"', '""'))]
+                for column in columns:
+                    looked.append("%s.%s" % (table, column))
+                    rows = list(connection.execute(
+                        'SELECT "%s" FROM "%s" ORDER BY rowid'
+                        % (column.replace('"', '""'), table.replace('"', '""'))))
+                    values = [row[0] for row in rows if row[0] is not None]
+                    if not values:
+                        continue
+                    readings: list[tuple[str, Any]] = []
+                    if all(isinstance(v, str) for v in values):
+                        readings.append(("rows_joined", "".join(values)))
+                        if len(values) == 1:
+                            readings.append(("one_row", values[0]))
+                        readings.append(("rows_newline", "\n".join(values)))
+                        readings.append(("rows_newline_final",
+                                         "\n".join(values) + "\n"))
+                    elif all(isinstance(v, (bytes, bytearray)) for v in values):
+                        readings.append(("blobs_joined", b"".join(bytes(v) for v in values)))
+                        if len(values) == 1:
+                            readings.append(("one_blob", bytes(values[0])))
+                    for how, reading in readings:
+                        if isinstance(reading, str):
+                            if wanted_text is not None and reading == wanted_text:
+                                matches.append({"table": table, "column": column,
+                                                "how": how, "rows": len(values)})
+                        elif reading == wanted_bytes:
+                            matches.append({"table": table, "column": column,
+                                            "how": how, "rows": len(values)})
+        finally:
+            connection.close()
+    except sqlite3.Error as error:
+        return {"schema": SCHEMA, "verdict": NO_STATE_READER, "shape": "state",
+                "output": output, "source": source,
+                "detail": "the store could not be queried: %s" % str(error)[:160],
+                "looked_at": looked}
+
+    if matches:
+        return {"schema": SCHEMA, "verdict": EFFECT_VERIFIED, "shape": "state",
+                "output": output, "source": source, "reader": matches[0]["table"],
+                "reading": matches[0], "also_matched": len(matches) - 1,
+                "looked_at": looked}
+    return {"schema": SCHEMA, "verdict": WRONG_STATE, "shape": "state",
+            "output": output, "source": source, "looked_at": looked,
+            "detail": "no table or column in the store reproduces the source"}
+
+
+def verify_any(root: Any, output: str, source: str, *,
+               programs: Sequence[str] | None = None) -> tuple[bool, dict[str, Any]]:
+    """Which shape of effect is this? The ARTIFACT says, not its name.
+
+    Shape is not read off the suffix -- that would be the memorised table I
+    deleted from the format path. It is read off the first bytes of the thing
+    itself: a SQLite store announces itself, and asking the byte reader about it
+    is both wrong and wasteful (measured: 72.77 s of provably useless proofs for
+    `out.db` before the state shape was consulted). Anything that does not
+    announce a store is asked the cheaper byte question first, and the state
+    reader still gets its chance. A refusal from one shape is never a pass.
+    """
+    base = pathlib.Path(str(root))
+    artifact = base / str(output)
+    if artifact.is_file():
+        try:
+            if artifact.read_bytes()[:16].startswith(_SQLITE_MAGIC):
+                verdict = verify_state(root, output, source)
+                verdict["shapes_tried"] = {"bytes": "NOT_ASKED__THE_ARTIFACT_IS_A_STORE",
+                                           "state": verdict.get("verdict")}
+                return verdict.get("verdict") == EFFECT_VERIFIED, verdict
+        except OSError:
+            pass
+    byte_verdict = verify_roundtrip(root, output, source, programs=programs)
+    if byte_verdict.get("verdict") == EFFECT_VERIFIED:
+        byte_verdict["shape"] = "bytes"
+        return True, byte_verdict
+    state_verdict = verify_state(root, output, source)
+    if state_verdict.get("verdict") == EFFECT_VERIFIED:
+        return True, state_verdict
+    # report the refusal that actually had something to say
+    informative = state_verdict
+    if state_verdict.get("verdict") == NO_STATE_READER:
+        informative = byte_verdict
+    informative["shapes_tried"] = {"bytes": byte_verdict.get("verdict"),
+                                   "state": state_verdict.get("verdict")}
+    return False, informative
+
+
 def oracle_from_goal(goal: str, *, programs: Sequence[str] | None = None):
     """The whole contract, derived from the instruction and the observation.
 
@@ -466,11 +611,11 @@ def oracle_from_goal(goal: str, *, programs: Sequence[str] | None = None):
                           "detail": bound.get("reason"), "binding": bound,
                           "output": output}
             return False
-        verdict = verify_roundtrip(getattr(env, "root"), output, bound["source"],
-                                   programs=programs)
+        reached, verdict = verify_any(getattr(env, "root"), output, bound["source"],
+                                      programs=programs)
         verdict["binding"] = bound
         check.last = verdict
-        return verdict.get("verdict") == EFFECT_VERIFIED
+        return reached
 
     def contract(env: Any) -> dict[str, Any] | None:
         bound = _bind(env)

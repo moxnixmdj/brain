@@ -98,9 +98,14 @@ def lift(*, goal: str, goal_family: str, env_kind: str, action: str,
     try:
         from canonical.runtime import effect_oracle_v1 as oracle
 
-        verdict = oracle.verify_roundtrip(
-            observation_root(observation), output_name, source_name,
-            programs=None) if observation_root(observation) else {}
+        if observation_root(observation):
+            # any shape of effect: an artifact carried out and back, or a store
+            # that reads back as the source
+            reached, verdict = oracle.verify_any(
+                observation_root(observation), output_name, source_name,
+                programs=None)
+        else:
+            verdict = {}
     except Exception:  # noqa: BLE001 - a rule without a checked effect is still a rule
         verdict = {}
     rule = {
@@ -111,7 +116,13 @@ def lift(*, goal: str, goal_family: str, env_kind: str, action: str,
         "goal_family": goal_family,
         "env_kind": env_kind,
         "goal": str(goal)[:512],
-        "program": program or _program_of(action, _visible_programs()),
+        # Identity. When a program on this machine carries the action's name, the
+        # contract is anchored to that program and can travel. When the action is
+        # a callable the environment defines (a GUI click, a database insert), no
+        # program exists to name, so the ACTION is the identity -- and the rule
+        # says so instead of silently storing a null that can never be replayed.
+        "program": (program or _program_of(action, _visible_programs())
+                    or (action or None)),
         "observed_action": action,
         "roles": {"source": "source", "output": "output"},
         "precondition": {"kind": "source_exists", "role": "source",
@@ -125,6 +136,9 @@ def lift(*, goal: str, goal_family: str, env_kind: str, action: str,
         # program but not how it was called can be replayed, never composed.
         # `{source}` and `{output}` are the slots the environment filled in.
         "argv_shape": [str(a) for a in (argv or [])],
+        "identity": ("A_PROGRAM_ON_THIS_MACHINE"
+                     if (program or _program_of(action, _visible_programs()))
+                     else "THE_ACTION_ITSELF"),
         "effect_checked_at_lift": bool(verdict.get("verdict") == "EFFECT_VERIFIED"),
         "evidence": dict(evidence or {}),
         "refutations": 0,
@@ -248,15 +262,23 @@ def apply_rule(rule: Mapping[str, Any], env: Any, *,
     env.reset()
     acted = False
     try:
-        acted = bool(env.act(found["action"]))
+        # hand the bound roles to the action: a contract that binds a source and
+        # then lets the action pick its own is not a contract. An environment
+        # whose `act` predates roles is called the old way rather than broken.
+        roles = {"source": binding["bound"],
+                 "output": str(rule.get("output_name") or "")}
+        try:
+            acted = bool(env.act(found["action"], roles=roles))
+        except TypeError:
+            acted = bool(env.act(found["action"]))
     except Exception as error:  # noqa: BLE001 - an action that raises is data
         return {"schema": SCHEMA, "status": "OPEN__ACTION_RAISED",
                 "detail": repr(error)[:200], "applied": False}
     from canonical.runtime import effect_oracle_v1 as oracle
 
-    verdict = oracle.verify_roundtrip(root, rule.get("output_name", ""),
-                                      binding["bound"])
-    ok = verdict.get("verdict") == "EFFECT_VERIFIED"
+    reached, verdict = oracle.verify_any(root, rule.get("output_name", ""),
+                                         binding["bound"])
+    ok = bool(reached)
     return {
         "schema": SCHEMA,
         "status": APPLIED if ok else REFUTED,
@@ -367,8 +389,8 @@ def compose_chain(operators: Sequence[Mapping[str, Any]], *, env: Any,
                     "applied": False, "failed_at": operator.get("program")}
         current = name
 
-    verdict = oracle.verify_roundtrip(root, output, source)
-    ok = verdict.get("verdict") == "EFFECT_VERIFIED"
+    reached, verdict = oracle.verify_any(root, output, source)
+    ok = bool(reached)
     rule = None
     if ok:
         inner, outer = operators[0], operators[-1]
