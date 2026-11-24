@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "630304ba4560b4444a472f801049462c75c2f17f05f46d3ed80e08ba42e2b249"
+  "value": "1d28048f978bc8f406335ec097bd234a620b47c7eecb34923c584924287fd6ed"
  },
  "engines": [
   {
@@ -242191,20 +242191,20 @@
    }
   },
   {
-   "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
+   "action_id": "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203",
    "capability": false,
    "date": "2026-12-03",
    "id": "research:canonical/action_intents/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "496a5bf3961d2df4f3f6cdb2f0d76dab94ed69327d1bc95089d030d5d4abd33a",
+   "sha256": "e49d47d15fa5a6424d946741d9c7e29497b980995b1268674f1a7010811a44c5",
    "status": "SHIPPED",
    "terms": {
     "11": 1,
     "19": 1,
     "20261203": 1,
-    "a_type_you_wrote_is_a_type_you_guess_20261202": 1,
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_20261203": 1,
     "born": 1,
     "cannot": 2,
     "check": 2,

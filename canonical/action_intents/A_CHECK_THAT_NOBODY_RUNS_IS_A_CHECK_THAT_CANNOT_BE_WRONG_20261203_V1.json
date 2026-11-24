@@ -111,8 +111,8 @@
   "route_class_note": "SYNTHESIZE_NEW_PRIMITIVE applies to `certified_checks` and `_digest`: the repository had no test that a check is read-only, and no status field that could see an overwrite.",
   "progress_class_note": "The claim falsified is the guide's own: `check_flags()` called 2,319 flags read-only and 16 of them write; `compile_step` published a check on every step and nothing ran it; and `run()` reported a destroyed object as ACCEPTED_INERT because it compared kinds. The frontier narrows to: a citation must be executed and must be derived from the room, which 3 of 87 edges can satisfy today -- named, measured, not built."
  },
- "action_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202",
- "action_intent_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1",
+ "action_id": "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203",
+ "action_intent_id": "A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1",
  "action_kind": "FRESH_REUSE",
  "action_summary": "Pays obligation #3 of A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS: check_flags() certified shred -v as a read-only check. Measured: 16 of 2,319 certified flags change bytes; 281 of 370 citations accept every object (249 are --help); 8 of 8 cited-check probes accept a decoy of the same kind; 7 of 8 accepted destroyers are reported ACCEPTED_INERT. Repairs check_flags (vocabulary + named destroyers), adds an executed certification test, and makes run() compare content instead of kinds. Refuses to claim the citation is repaired: 3 of 87 edges have any flag that discriminates.",
  "status": "SHIPPED",
