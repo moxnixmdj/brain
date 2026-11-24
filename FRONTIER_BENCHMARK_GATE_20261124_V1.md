@@ -2,17 +2,45 @@
 
 ## Current state
 
-**Not qualified; do not execute task agents or claim a score.** The owner has
-approved only isolated one-shot SWE worktree evaluation. This is not approval
-for ordinary Harbor/Docker execution, other terminal tasks, a persistent worker,
-host writes by task code, or production. The fixture collector is not qualified
+**Not qualified; do not execute task agents or claim a score.** The owner now
+requests Harbor task containers as the isolation boundary for these evaluations,
+without nested Linux namespaces. This supersedes the earlier restriction to the
+one-shot carrier for the requested Harbor evaluations; it does not imply
+approval for task-triggered effects on the unisolated host or production. The
+fixture collector is not qualified
 for arbitrary code; it cannot express all Git changes, and its own checks do not
 constitute independent authenticated attestation. Its producer-side SHA-256
 recomputation is not proof of origin, isolation, correctness, or test success.
 The Harbor agent now refuses before constructing a solver or executing an
 environment command. The legacy SWE adapter also refuses before solver or
 checkout. Neither accepts any real benchmark yet; the historical SWE-bench
-Verified dataset is out of scope.
+Verified dataset is out of scope. The requested import name
+`HarborEpistemicAgent` aliases the same refusal-only class; it is not an
+executable agent.
+
+### Why the Harbor transition remains blocked
+
+The current proposal loop calls `open_model().solve()` through a host-side
+Python thread. `solve()` can execute bound capabilities and create/update a
+routing ledger; `environment.exec()` only confines subsequent proposed commands.
+A container marker or Harbor object does not move `solve()` into that container.
+`canonical/tests/test_harbor_container_boundary_v1.py` demonstrates the host
+execution locus with a fake solver; it is a regression test, **not** a real
+Docker isolation test. The task image must receive a validated Brain runtime,
+run solver and commands inside the container, and constrain the actual runtime
+configuration and mounts before the entry point can be opened. Harbor also
+bind-mounts agent/verifier logs and artifacts to the host; it is not literally
+zero host writes. The owner-requested architecture can be implemented without
+nested namespaces, but has not been implemented or tested here.
+
+Harbor's [verifier-mode source](https://github.com/harbor-framework/harbor/blob/39c2219a41b3caa7a689cef1882263b5a93ae93f/src/harbor/models/task/verifier_mode.py)
+defaults to a shared agent/verifier environment if no separate verifier is
+configured. [SWE-bench Pro V2](https://github.com/scaleapi/SWE-bench_Pro-os/blob/66f92766bba642462d4bbe5479e83f91f9211862/v2/README.md)
+requires capturing a patch and separately replaying it into a pristine image;
+merely running `harbor run` does not automatically provide that. FrontierSWE v2
+uses px-eval's separate verification. Each suite needs its own confirmed
+protocol rather than assuming every Harbor verifier is fresh. No independent
+reviewer has run this integration and no verified-integration credit is claimed.
 
 ## Fixture-only effect expansion
 
@@ -121,9 +149,9 @@ mkdir -p reports
 
 px-eval specifies Python 3.12+, `uv`, an environment configuration and Modal
 credentials; its example runtime uses Modal and may cost money. SWE-bench Pro V2
-also documents Modal and public GHCR images. These upstream environments are
-not themselves the approved Brain one-shot carrier. The above clones are other
-repositories on the VM and do not alter this Arena branch.
+also documents Modal and public GHCR images. The owner has requested a Harbor
+boundary, but the current Brain agent is not yet integrated with it. The above
+clones are other repositories on the VM and do not alter this Arena branch.
 
 **No executable Brain evaluation command is provided**: using the current
 agent would only refuse, and claiming it is an integrated benchmark runner
@@ -137,22 +165,19 @@ execution and effect model.
 
 ## Work remaining before admission
 
-1. Engineer and adversarially qualify a one-shot OS boundary for arbitrary
-   worker code, no host fallback, exact base checkout, immutable inaccessible
-   `.git`, and robust descendant termination/quiescence. Address shared-kernel
-   risk, races, mount escape and resource limits; a namespace smoke test alone
-   is not proof.
-2. Support or explicitly reject all relevant Git effect types; verify each
-   changed file and exact unified diff against the base using SHA-256, including
-   additions, deletions, modes, symlinks and binary content. Reject tampering,
-   ambiguity and unsupported effects. Bind scope, base, task, policy and output.
-3. Independently validate/sign attestation using pre-established trusted keys
-   and independently held evidence, not producer booleans or generated keys.
-   Wire the advisory localizer through the admitted boundary, not around it.
-4. Implement separate protocol adapters for each actually authorized benchmark,
-   including clean verifier replay as required. The two current wrappers are not
-   those integrations. Then run the five pinned Pro instances and publish raw
-   outcomes, receipt verification, independent review and resource/cost data.
+1. Implement a container-local solver and task-command pipeline with no
+   host execution fallback. Verify the actual Harbor runtime, configuration,
+   mounts and lifecycle; test on a real disposable Docker VM. The owner no
+   longer requires nested namespaces for the requested Harbor route.
+2. Implement each benchmark's artifact and verification protocol. Pro V2 must
+   capture the complete patch, bind it to the actual base, hash its effects,
+   and regrade in a pristine image. FrontierSWE and Terminal-Bench tasks may
+   require non-Git artifacts and cannot be represented by a patch alone.
+3. Arrange independent verification of the actual integration and retain raw
+   evidence. A same-process flag, self-generated hash or mocked test is not
+   reviewer authentication or proof of the container boundary.
+4. Run the requested benchmark tasks only after the route is ready, disclose the
+   Task #1 contamination, and report real outcomes and resource/cost data.
 
 ## Reference scores, not our results
 

@@ -1,0 +1,196 @@
+{
+  "action_id": "HARBOR_EXECUTION_BOUNDARY_REVIEW_20261124_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/tests/test_harbor_container_boundary_v1.py"
+    ],
+    "route_class": "REUSE"
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "canonical_base_commit": "caefcd5fe3956353dee8edb82517582475edfece",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Uncalibrated conservative planning estimate, not a measured score, discharge or capability credit.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/100",
+    "wall_clock_cost_ub": 3600
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "caefcd5fe3956353dee8edb82517582475edfece",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Host solver invocation",
+      "Unverified fresh-verifier assumption"
+    ],
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Reuse Harbor transport",
+        "Move solver into container",
+        "Replay patch in pristine image"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_EXECUTION_BOUNDARY",
+      "surviving_causal_blocker": "No tested container-local solver and independently verified runtime configuration are available."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Duplicate fixture collector execution"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/harbor_epistemic_agent_v1.py",
+        "canonical/runtime/harbor_environment_transport_v2.py"
+      ],
+      "external_existing_routes_checked": [
+        "Harbor DockerEnvironment",
+        "SWE-bench Pro V2 patch replay",
+        "px-eval separate verifier"
+      ],
+      "surviving_gap": "The current solver executes in the host process and fresh verifier mode is not automatic for every task."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Treat a flag as isolation proof"
+      ],
+      "real_outcome": "A real agent only runs within a checked task container.",
+      "surviving_necessity": "Execution locus, mounts and verifier must be bound."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Existing Harbor transport"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Nested namespace requirement when a Harbor-specific boundary is actually verified"
+      ],
+      "fresh_reuse_plan": "Reuse Harbor task transport only after runtime and mount isolation are checked."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse pinned upstream Harbor and Pro protocol source"
+      ],
+      "search_stop_decision": "Stop before unqualified execution; preserve findings and request an independent VM test."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "A flag and Harbor type cannot confine the host-side solver; container integration has not yet been tested on Docker.",
+      "routes_ranked": [
+        "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE",
+        "MOVE_SOLVER_INTO_CHECKED_CONTAINER",
+        "EXECUTE_SOLVER_ON_HOST"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary."
+    },
+    "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
+    "required_capability": "Confined execution and independent verification of agent effects",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Evidence preservation and a fail-closed governance guard; no external runtime or benchmark is executed."
+    },
+    "routes_considered": [
+      "Keep the execution gate",
+      "Container-local solver",
+      "Host solver"
+    ],
+    "selected_surviving_route": "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE",
+    "stop_condition": "Run focused tests and integrity guard; document missing Docker integration and independent verification; claim no benchmark or capability credit.",
+    "why_selected_route_is_fastest_sufficient": "It preserves the no-host-execution boundary while the user-requested integration is not yet testable here; it does not claim the integration is complete."
+  },
+  "requested_progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "requested_progress_class_status": "NOT_YET_ESTABLISHED__INDEPENDENT_EXECUTION_REQUIRED",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "status": "VERIFICATION_PENDING__NO_CAPABILITY_CREDIT",
+  "stop_condition": "Run focused tests and integrity guard; document missing Docker integration and independent verification; claim no benchmark or capability credit.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "ZERO CREDIT: preserve a factual boundary blocker for the Harbor evaluation route; no score or proof obligation discharged.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "57581cfca3db44fb5007f0049aeb8a5f7b94c778",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "145189a17bc82fb254c3b6a4f1de0d3ef33d2e40",
+          "path": "canonical/swe_kernel/upstream_routing_ledger_v1.py"
+        }
+      ],
+      "decisive_question": "Does the entry point keep the side-effecting host solver disabled until a container-local integration and benchmark-specific verifier are available?",
+      "falsifier_id": "HOST_SOLVER_OR_UNCHECKED_VERIFIER_ASSUMED_CONFINED",
+      "known_counterexamples_checked": true,
+      "proposal_id": "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE"
+    }
+  },
+  "weakens_existing_guard": false
+}

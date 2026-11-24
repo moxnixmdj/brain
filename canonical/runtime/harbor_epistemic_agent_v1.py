@@ -1,10 +1,12 @@
 """Harbor external agent driven by Brain's open_model().solve(mode="EPISTEMIC").
 
-The production Harbor entry point is disabled: Harbor's environment transport
-is not the owner-approved, qualified one-shot worktree carrier. No solver or
-task command is invoked by the agent until that carrier and an independently
-trusted effect verifier are integrated. The proposal loop remains available for
-controlled unit tests only; its command policy is not an isolation boundary.
+The owner requested Harbor's container as the execution boundary, without a
+nested namespace. The production entry point remains disabled: the present
+proposal loop calls the side-effecting solver in the host process, not in the
+Harbor environment. A Harbor transport or opt-in flag does not confine that
+call. The helper remains available for controlled unit tests only; its command
+policy is not an isolation boundary. Benchmark-specific independent verification
+also remains unintegrated.
 
 `EPISTEMIC` is forwarded verbatim. Brain's solve() special-cases only RECALL and
 SOLVE_OR_LEARN; every other mode string uses ordinary routing. This module does
@@ -297,6 +299,13 @@ async def run_epistemic_goal(
 class EpistemicBrainAgent(BaseAgent):
     capabilities = AgentCapabilities()
 
+    def __init__(self, *args: Any, allow_isolated_vm_eval: bool = False, **kwargs: Any) -> None:
+        if type(allow_isolated_vm_eval) is not bool:
+            raise AgentRejected("ISOLATED_VM_EVAL_FLAG_MUST_BE_BOOLEAN")
+        super().__init__(*args, **kwargs)
+        # This is only a request; it does not enable the unintegrated boundary.
+        self.allow_isolated_vm_eval = allow_isolated_vm_eval
+
     @staticmethod
     def name() -> str:
         return "brain-epistemic"
@@ -310,12 +319,16 @@ class EpistemicBrainAgent(BaseAgent):
         return None
 
     async def run(self, instruction: str, environment: BaseEnvironment, context: AgentContext) -> None:
-        # A dataset name, environment variable, or Harbor isolation flag is not
-        # authenticated evidence of the approved carrier. Refuse before making a
-        # model or issuing any command, including for the four requested suites.
+        # The owner has requested a Harbor-container boundary, but the current
+        # solver would run on the host. A dataset name, environment variable, or
+        # container flag cannot change its execution locus. Refuse before model
+        # construction and command execution; no nested namespace is presumed.
         result = {
             "schema": SCHEMA,
             "status": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
+            "boundary_issue": "SOLVER_EXECUTES_ON_HOST__HARBOR_CONTAINER_INTEGRATION_MISSING",
+            "requested_isolated_vm_eval": self.allow_isolated_vm_eval,
+            "execution_authorized": False,
             "task_completion_claimed": False,
             "verified_by_agent": False,
             "instruction_sha256": hashlib.sha256(instruction.encode("utf-8")).hexdigest(),
@@ -333,3 +346,8 @@ class EpistemicBrainAgent(BaseAgent):
         except Exception:
             pass
         # Do not overwrite accounting fields: their values are owned by Harbor.
+
+
+# Requested import name; this is the same fail-closed class, not an admitted
+# container implementation or an additional execution route.
+HarborEpistemicAgent = EpistemicBrainAgent
