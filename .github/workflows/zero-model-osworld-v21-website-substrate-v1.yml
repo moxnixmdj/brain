@@ -1,0 +1,781 @@
+name: Zero-model OSWorld 2.1 website substrate resolver
+
+# WHY THIS WORKFLOW EXISTS
+#
+# Iteration 11 recorded a runner-owned OSWorld 2.1 pinned-release blocker
+# receipt: 27/27 source checks passed, but eight reproducibility prerequisites
+# remained missing. This iteration resolves the public website-substrate source
+# question as far as pinned public bytes allow: bind the osworld-v2.1 website
+# tag, 25 gitlink commits, two root compose files and 24 runtime web-compose
+# files, then validate the generated compose graph with docker compose config.
+# It does not start a container, pull an image, deploy a website, download
+# gated task/asset bodies, run an OSWorld task, claim a score or claim §6.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/zero-model-osworld-v21-website-substrate-v1.yml"
+      - "canonical/harbor/osworld_v21_website_substrate_policy_v1.py"
+      - "canonical/tests/test_osworld_v21_website_substrate_policy_v1.py"
+
+concurrency:
+  group: zero-model-osworld-v21-website-substrate-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+  GH_TOKEN: ${{ github.token }}
+  OSW_TAG: "osworld-v2.1"
+  OSW_WEBSITE_TAG_COMMIT: "60c89fe6a8ed934668619d8d26132848239eb8ee"
+  OSW_WEB_ROOT: "/tmp/osworld_web_v21"
+  POLICY_IMPORT_PATH: "canonical.harbor.osworld_v21_website_substrate_policy_v1"
+  COMPOSE_JSON_PATH: "/tmp/osworld_v21_website_substrate_compose.json"
+  COMPOSE_STDERR_PATH: "/tmp/osworld_v21_website_substrate_compose.stderr"
+
+jobs:
+  website_substrate_probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Clone pinned OSWorld-web release tag
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf "${OSW_WEB_ROOT}"
+          git clone --depth 1 --branch "${OSW_TAG}" https://github.com/Task-Web/OSWorld-web.git "${OSW_WEB_ROOT}"
+          web_head="$(git -C "${OSW_WEB_ROOT}" rev-parse HEAD)"
+          if [ "${web_head}" != "${OSW_WEBSITE_TAG_COMMIT}" ]; then
+            echo "OSW_WEBSITE_TAG_COMMIT_FAIL expected=${OSW_WEBSITE_TAG_COMMIT} observed=${web_head}" >&2
+            exit 1
+          fi
+          echo "OSWORLD_V21_WEBSITE_TAG_COMMIT_PASS ${web_head}"
+      - name: Bind exact Brain-owned source bytes and audit no-inference surface
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          out.mkdir(parents=True, exist_ok=True)
+          expected = {
+              "canonical/harbor/osworld_v21_website_substrate_policy_v1.py": "83003680f6d72beda2fbf8fdfc15b8225b4473035e441e304e0d7d5a095d1724",
+              "canonical/tests/test_osworld_v21_website_substrate_policy_v1.py": "6b8c22cac8eee2c90e203e6c0f13b3f9f483813260d013b05a337432a246e589",
+          }
+          observed = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in expected}
+          if observed != expected:
+              raise SystemExit("EXACT_WEBSITE_SUBSTRATE_SOURCE_SHA256_BINDING_FAIL " + json.dumps({"expected": expected, "observed": observed}, sort_keys=True))
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess", "huggingface_hub", "docker", "yaml", "selenium", "playwright", "intake"}
+          imports = {}
+          marked_imports = []
+          for rel in expected:
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"))
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module)
+              roots = sorted({item.split(".")[0] for item in mods})
+              imports[rel] = roots
+              marked = sorted(set(roots) & forbidden)
+              if marked:
+                  marked_imports.append({"path": rel, "marked": marked})
+          if marked_imports:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_WEBSITE_SUBSTRATE_SURFACE " + repr(marked_imports))
+          policy_source = (root / "canonical/harbor/osworld_v21_website_substrate_policy_v1.py").read_text(encoding="utf-8").casefold()
+          hidden_reader_literals = ["task_" + "001.py", "instruction" + ".md", "gold_patch" + ".diff", "test_patch" + ".patch", "solve" + ".sh", "test" + ".sh"]
+          if any(marker in policy_source for marker in hidden_reader_literals):
+              raise SystemExit("POLICY_CONTAINS_HIDDEN_TASK_READER_LITERAL")
+          known_task_names = ("takens-embedding-lean", "fin-saccr-rwa", "hof-topology-interpenetration", "html-js-filter", "bun-sourcemap-leak", "instance_nodebb")
+          if any(name in policy_source for name in known_task_names):
+              raise SystemExit("POLICY_CONTAINS_TASK_SPECIFIC_ANSWER_LITERAL")
+          if "benchmark_score_authority" not in policy_source or "model_calls" not in policy_source:
+              raise SystemExit("POLICY_SCORE_OR_MODEL_BOUNDARY_MISSING")
+          workflow_text = (root / ".github/workflows/zero-model-osworld-v21-website-substrate-v1.yml").read_text(encoding="utf-8").casefold()
+          forbidden_commands = ["docker" + " compose up -d", "docker" + " run ", "docker" + " pull ", "docker" + " build ", "hf_hub" + "_download(", "uv" + " sync --frozen", "task_" + "001.py?download"]
+          if any(marker in workflow_text for marker in forbidden_commands):
+              raise SystemExit("WORKFLOW_CONTAINS_FORBIDDEN_DEPLOYMENT_OR_GATED_DOWNLOAD_COMMAND")
+          sys.path.insert(0, str(root))
+          from canonical.harbor import osworld_v21_website_substrate_policy_v1 as policy
+          source = {"checks": {"website_tag_commit": False, "web_compose_bytes_exact": False}}
+          probe = {"website_tag_commit": "0" * 40, "static_source_binding_pass": False, "compose_config_exit_code": 1, "compose_config_json_parsed": False, "compose_service_count": 0, "benchmark_run_attempted": False}
+          decision = policy.evaluate(probe, source)
+          if decision["decision"] != policy.BLOCKED_DECISION or decision["website_substrate_config_verified"] is not False:
+              raise SystemExit("LOCAL_WEBSITE_SUBSTRATE_POLICY_DID_NOT_FAIL_CLOSED")
+          binding = {"schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_SOURCE_BINDING_V1", "expected": expected, "observed": observed, "equal": True}
+          audit = {
+              "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_STATIC_AUDIT_V1",
+              "imports": imports,
+              "marked_imports": marked_imports,
+              "policy_has_no_hidden_task_reader_literals": True,
+              "policy_has_no_task_specific_answer_literals": True,
+              "workflow_has_no_deployment_or_gated_download_commands": True,
+              "local_fail_closed_probe": True,
+          }
+          (out / "blob_bindings.json").write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_WEBSITE_SUBSTRATE_SOURCE_SHA256_BINDING_PASS", len(expected), "marked_imports", marked_imports)
+          PY
+      - name: Verify pinned website substrate source, gitlinks and compose bytes
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, re, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          out.mkdir(parents=True, exist_ok=True)
+          web = pathlib.Path(os.environ["OSW_WEB_ROOT"])
+          website_tag_commit = os.environ["OSW_WEBSITE_TAG_COMMIT"]
+          expected_gitlinks =           {
+                        "awsconsole_web": "9f39391f3b9554fe3c4ae3b464ff0c579764cec2",
+                        "basesite": "7a881f8dd766615b7c512f3e4140960d56ddc3e3",
+                        "budgetwise_web": "d7450221ba688ab50f0abb74fa1bf1dbcf8bc601",
+                        "calendar_web": "5c96a0c57265e173ef3434f1667e2523ade1ed57",
+                        "careerlink_web": "3489e34a72cb8918ed295678b14d52ce5073d52c",
+                        "cloudcrm_web": "44c1d8650a9b262d2e903dcc31ff827d1120297c",
+                        "dinogame_web": "a822adbe4ea23b48e06ae051dc14ddf5aea0b69e",
+                        "eventix_web": "4ed784f8c5ca666572e70a0e450e560617747d55",
+                        "expenseflow_web": "4e0883e3ff2486c349a0cb9409d48d77081809ee",
+                        "formcraft_web": "0b7138aeacd2ed3c89ec095ef935f3912fc95777",
+                        "glbviewer_web": "42590687cf938ea854c64c04add117df1ff19ea9",
+                        "insurance_claim_web": "36e728f8aa60bd38bcfb5f26b3963a0727aed873",
+                        "interfacinglinux_web": "86e08dc6e26501b3a56cf384fe6073af6b9152f6",
+                        "mailhub_web": "6ea8fb2e8071a53a2d23c39bd206e848957f0f67",
+                        "overleaf_collab_web": "307d7e2d0b9ab32887145725fe14001ec4180d65",
+                        "overleaf_web": "1b5c1e0c5a92861e0c9bfeebf1c2074f976b28b6",
+                        "reviewsphere_web": "aa7439663128975edcca83802d3ea8dc0ab95ca5",
+                        "slidepuzzle_web": "137952038cb9c646e3075829b575f230a1f130d3",
+                        "streamview_web": "62c879ea14b5d3950c91d232eca4041b3b0cde98",
+                        "teamchat_web": "9c50b43bb7c1b03deba31eef234ed805f8014603",
+                        "travelhub_ad_web": "9b664c60c040d4d5f709367a616bf21b2f0765ff",
+                        "trippza_web": "223e5977a57c3f1022633aa1f5d5019d3396d498",
+                        "vaultbank_web": "51dca9c6346ffa15095cfde5c1d87380cbc3bc79",
+                        "visaapplication_web": "9db18412b25f56d586d619205d32da0b72be21f6",
+                        "wandb_web": "d0cb99226f69628b93eca2f4f335cca230297ef2"
+                    }
+          root_hashes =           {
+                        "docker-compose.main.yml": "304bd1aca0c848fab07c68bacac791c6d23890209e02d9e8e2709ce830cb647b",
+                        "docker-compose.yml": "53d986c0e3d406ae1c025900e81adf880c12525a5d2ebc69e095c5ff6b266a26"
+                    }
+          web_hashes =           {
+                        "awsconsole_web/web-compose.yml": "1147345fb37cf84e31a52dde442141982bde4f917ce8d88d8bed72afb14303a6",
+                        "budgetwise_web/web-compose.yml": "47d061331a28bfaf6edb47675e61b055c58b64fde532b0599df0eb64c2ecb663",
+                        "calendar_web/web-compose.yml": "a980b4c5b75423fb6cb398b3b30cc4104bdd35358d1e43b2e723e76a7216999d",
+                        "careerlink_web/web-compose.yml": "0a30e615c901a906764e0efb3ff913bcb37cdc4b86e842d5856e7a75301ae675",
+                        "cloudcrm_web/web-compose.yml": "981fe3ee7af5327ed8b9b8723a3443c5ca00dc22b65dc112fa150b2f7b15bea5",
+                        "dinogame_web/web-compose.yml": "30ef9adf8a5c5b7326a59ac518b125ef06b92fb1392fb40447a2508664047cf7",
+                        "eventix_web/web-compose.yml": "36681e3b4e51d404936a9ad2bc2e94af53c09873ebd248fe12e5d06d16628ce3",
+                        "expenseflow_web/web-compose.yml": "2b2e808ca8a5cdf227ab536584d5c27cc6090436e02b1975918fb05a41949496",
+                        "formcraft_web/web-compose.yml": "e8e7dbe3d4e487a599d1fa2816b56eb3653b5e7f800eba63a0cef53f22cc2181",
+                        "glbviewer_web/web-compose.yml": "8cd02a183a33fb0403f31ed5deea750f46125f939d41b495e059c49dbc2dc268",
+                        "insurance_claim_web/web-compose.yml": "1aac2551e4af8a7dd1b443a5223f2e2ff0a17cea5d83cd49f2bd34dd622fae7b",
+                        "interfacinglinux_web/web-compose.yml": "fc2be436b4ca1aa3ff5582800d7447e7f3027712d4f2c5a202a757cb9bc5280c",
+                        "mailhub_web/web-compose.yml": "5850cfd2dd0a7ce01d72a47e4016e211ce2ca74c6f28f5250280f5054cc4c9f8",
+                        "overleaf_collab_web/web-compose.yml": "997d62ebb6313ca1f2225a0597018e7a726d2dbbe6f63f4ef402ae79b2d04d09",
+                        "overleaf_web/web-compose.yml": "3542983b5e179b6f0a7ddb4ad421fa859122a207ecffdb9105fbf2a27649b1da",
+                        "reviewsphere_web/web-compose.yml": "beb1fd22b99fe33e3702a8f48f454c95a018da273e0c62289727b78b0740ee3d",
+                        "slidepuzzle_web/web-compose.yml": "2561c0c64ca6aca301f9d866ac8b2b97acd6b2ed755ef2e038de6b0feadb3205",
+                        "streamview_web/web-compose.yml": "21cedc75dff46b38fac51dcbc78299bea560e6479ced5fa56af37dafd6e96191",
+                        "teamchat_web/web-compose.yml": "03cd60b170f69b13e91360e92caf9a18eceddb7f678aed6dec2052472e6b9592",
+                        "travelhub_ad_web/web-compose.yml": "6fa82d7bb71db0e832a1be9e82110663ebc493a4d23ec019e67e3403a8b9ab9e",
+                        "trippza_web/web-compose.yml": "87f9d4acdfec939cc332f30a237bf8ebfa0234b75d9303de8574414117353a32",
+                        "vaultbank_web/web-compose.yml": "21f62a3c5a5f53fc3f3fca7c8d13e7f74c5714b4e1aa1e50b165b99e4fb00b75",
+                        "visaapplication_web/web-compose.yml": "f240fd8114e1d443478908665f5e40604456fae4d34facbefa65c45a5fc1d286",
+                        "wandb_web/web-compose.yml": "509bc363b45a9ea69658f128c3843f7349d4eea9933c53242f91525ef6d347b0"
+                    }
+          runtime_includes =           [
+                        "awsconsole_web/web-compose.yml",
+                        "budgetwise_web/web-compose.yml",
+                        "calendar_web/web-compose.yml",
+                        "careerlink_web/web-compose.yml",
+                        "cloudcrm_web/web-compose.yml",
+                        "dinogame_web/web-compose.yml",
+                        "eventix_web/web-compose.yml",
+                        "expenseflow_web/web-compose.yml",
+                        "formcraft_web/web-compose.yml",
+                        "glbviewer_web/web-compose.yml",
+                        "mailhub_web/web-compose.yml",
+                        "interfacinglinux_web/web-compose.yml",
+                        "overleaf_web/web-compose.yml",
+                        "overleaf_collab_web/web-compose.yml",
+                        "reviewsphere_web/web-compose.yml",
+                        "slidepuzzle_web/web-compose.yml",
+                        "streamview_web/web-compose.yml",
+                        "teamchat_web/web-compose.yml",
+                        "travelhub_ad_web/web-compose.yml",
+                        "trippza_web/web-compose.yml",
+                        "vaultbank_web/web-compose.yml",
+                        "visaapplication_web/web-compose.yml",
+                        "wandb_web/web-compose.yml",
+                        "insurance_claim_web/web-compose.yml"
+                    ]
+          web_head = ""
+          gitlinks = {}
+          if web.is_dir():
+              web_head = subprocess.check_output(["git", "-C", str(web), "rev-parse", "HEAD"], text=True).strip()
+              for line in subprocess.check_output(["git", "-C", str(web), "ls-tree", "HEAD"], text=True).splitlines():
+                  p = line.split(None, 3)
+                  if p[1] == "commit":
+                      gitlinks[p[3]] = p[2]
+          include_paths = []
+          if (web / "docker-compose.yml").is_file():
+              include_paths = re.findall(r"^\s*-\s*\./(.+)$", (web / "docker-compose.yml").read_text(encoding="utf-8"), re.M)
+          observed_root_hashes = {}
+          for rel in root_hashes:
+              p = web / rel
+              if p.is_file():
+                  observed_root_hashes[rel] = hashlib.sha256(p.read_bytes()).hexdigest()
+          observed_web_hashes = {}
+          web_compose_texts = []
+          public_github_api_calls = 0
+          for rel in runtime_includes:
+              dest = web / rel
+              dest.parent.mkdir(parents=True, exist_ok=True)
+              expected_digest = web_hashes[rel]
+              if dest.is_file() and hashlib.sha256(dest.read_bytes()).hexdigest() == expected_digest:
+                  data = dest.read_bytes()
+              else:
+                  name = rel.split("/", 1)[0]
+                  sha = expected_gitlinks[name]
+                  raw = subprocess.check_output(
+                      ["gh", "api", "repos/Task-Web/" + name + "/contents/web-compose.yml?ref=" + sha, "--jq", ".content"],
+                      text=True,
+                  ).strip()
+                  data = base64.b64decode(raw)
+                  dest.write_bytes(data)
+                  public_github_api_calls += 1
+              observed_web_hashes[rel] = hashlib.sha256(data).hexdigest()
+              web_compose_texts.append(data.decode("utf-8").casefold())
+          hidden_markers = ["task_" + "001.py", "instruction" + ".md", "gold_patch" + ".diff", "test_patch" + ".patch"]
+          gated_markers = ["hf_hub" + "_download(", "xlangai/osworld_v2_tasks", "xlangai/osworld_v2_assets_gated"]
+          deployment_markers = ["docker" + " compose up", "docker" + " run ", "docker" + " pull ", "docker" + " build "]
+          raw_task_files = [
+              str(p.relative_to(root)) for p in root.rglob("*")
+              if p.is_file() and re.fullmatch(r"task_\d{3}\.py", p.name) and ".git/" not in str(p.relative_to(root))
+          ]
+          checks = {
+              "website_tag_commit": web_head == website_tag_commit,
+              "gitlink_pin_count": len(gitlinks) == 25 == len(expected_gitlinks),
+              "gitlink_bytes_exact": gitlinks == expected_gitlinks,
+              "runtime_compose_include_count": len(runtime_includes) == 24 == len([p for p in include_paths if p != "docker-compose.main.yml"]),
+              "basesite_excluded_from_runtime_compose": "basesite/web-compose.yml" not in include_paths,
+              "root_compose_bytes_exact": observed_root_hashes == root_hashes,
+              "web_compose_bytes_exact": observed_web_hashes == web_hashes,
+              "no_nested_compose_includes": all("include:" not in text for text in web_compose_texts),
+              "no_gated_body_download_literals": all(not any(marker in text for marker in gated_markers) for text in web_compose_texts),
+              "no_hidden_task_markers": all(not any(marker in text for marker in hidden_markers) for text in web_compose_texts),
+              "no_deployment_commands_in_source_files": all(not any(marker in text for marker in deployment_markers) for text in web_compose_texts),
+              "no_raw_task_files_in_workspace": not raw_task_files,
+              "public_website_source_only": all(rel.endswith("/web-compose.yml") for rel in runtime_includes),
+          }
+          payload = {
+              "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_SOURCE_VERIFICATION_V1",
+              "release_tag": os.environ["OSW_TAG"],
+              "website_tag_commit": website_tag_commit,
+              "observed_website_head": web_head,
+              "gitlinks": gitlinks,
+              "gitlink_pin_count": len(gitlinks),
+              "runtime_compose_includes": runtime_includes,
+              "runtime_compose_include_count": len(runtime_includes),
+              "generated_compose_includes": include_paths,
+              "root_hashes": observed_root_hashes,
+              "web_compose_hashes": observed_web_hashes,
+              "web_compose_hash_count": len(observed_web_hashes),
+              "public_github_api_calls": public_github_api_calls,
+              "gated_dataset_status_probes": 0,
+              "external_network_probe_calls": 0,
+              "checks": checks,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "raw_gated_bodies_downloaded": False,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "model_calls": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+          }
+          (out / "source_verification.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("OSWORLD_V21_WEBSITE_SUBSTRATE_SOURCE_VERIFICATION_FAIL " + repr(failed))
+          print("OSWORLD_V21_WEBSITE_SUBSTRATE_SOURCE_VERIFICATION_PASS", len(checks), "checks", len(gitlinks), "gitlinks", len(observed_web_hashes), "web-compose hashes", public_github_api_calls, "public GitHub API calls")
+          PY
+      - name: Validate generated compose graph without deploying containers
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          cd "${OSW_WEB_ROOT}"
+          export HOST_SUFFIX=localhost
+          export WEBSITE_HOST_SUFFIX=localhost
+          export OSWORLD_HOST_SUFFIX=localhost
+          export CADDY_SCHEME=http://
+          export CADDY_INGRESS_NETWORKS=web
+          export NODE_ENV=production
+          export ENV=config-only
+          export PORT=3000
+          export API_PREFIX=/api
+          export CORS_ORIGINS=http://localhost
+          export COOKIE_NAME=sanitized
+          export COOKIE_MAX_AGE=3600
+          export COOKIE_SECURE=false
+          export EMAIL_CONFIRMATION_DISABLED=true
+          export COMPILE_TIMEOUT_MS=1000
+          export MAX_WAITING_COMPILES=1
+          export MAX_FILE_BYTES=1024
+          export MAX_LOG_BYTES=1024
+          export MAX_PDF_BYTES=1024
+          export MAX_REQUEST_BYTES=1024
+          export MAX_TOTAL_INPUT_BYTES=1024
+          export STATE_DIR=/tmp/osworld-web-state
+          export SIMULATION_TIME_SCALE=1
+          export MONGO_URL=mongodb://mongo:27017/sanitized
+          export REDIS_HOST=redis
+          export REDIS_PORT=6379
+          export OVERLEAF_ADMIN_EMAIL=sanitized@example.invalid
+          export OVERLEAF_APP_NAME=Sanitized
+          export OVERLEAF_FIXED_ADMIN_EMAIL=sanitized@example.invalid
+          export OVERLEAF_FIXED_ADMIN_PASSWORD=sanitized-placeholder
+          export OVERLEAF_MONGO_URL=mongodb://overleaf_web_mongo:27017/overleaf
+          export OVERLEAF_REDIS_HOST=overleaf_web_redis
+          export OVERLEAF_REDIS_PORT=6379
+          export OVERLEAF_SITE_URL=http://overleaf.localhost
+          export OVERLEAF_TRUSTED_PROXY_IPS=127.0.0.1
+          export TEX_COMPILER_URL=http://overleaf-collab-compiler:3000
+          export PODMIX_ZIP_SOURCE_URL=file:///dev/null
+          : > "${COMPOSE_STDERR_PATH}"
+          : > "${COMPOSE_JSON_PATH}"
+          set +e
+          docker compose -f docker-compose.yml config --quiet --no-path-resolution 2> "${COMPOSE_STDERR_PATH}"
+          COMPOSE_EXIT_CODE=$?
+          if [ "${COMPOSE_EXIT_CODE}" -eq 0 ]; then
+            docker compose -f docker-compose.yml config --format json --no-path-resolution > "${COMPOSE_JSON_PATH}" 2>> "${COMPOSE_STDERR_PATH}"
+            COMPOSE_JSON_EXIT_CODE=$?
+          else
+            COMPOSE_JSON_EXIT_CODE=1
+          fi
+          set -e
+          export COMPOSE_EXIT_CODE COMPOSE_JSON_EXIT_CODE
+          cd "${WORKSPACE}"
+          python3 - <<'PY'
+          import json, os, pathlib
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          out.mkdir(parents=True, exist_ok=True)
+          def read_json(name, default):
+              p = out / name
+              if not p.is_file():
+                  return default
+              try:
+                  return json.loads(p.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+          source = read_json("source_verification.json", {})
+          bindings = read_json("blob_bindings.json", {})
+          source_checks = source.get("checks") or {}
+          compose_json_path = pathlib.Path(os.environ.get("COMPOSE_JSON_PATH") or "/tmp/osworld_v21_website_substrate_compose.json")
+          stderr_path = pathlib.Path(os.environ.get("COMPOSE_STDERR_PATH") or "/tmp/osworld_v21_website_substrate_compose.stderr")
+          compose_exit = int(os.environ.get("COMPOSE_EXIT_CODE") or "1")
+          json_exit = int(os.environ.get("COMPOSE_JSON_EXIT_CODE") or "1")
+          services = {}
+          compose_json_parsed = False
+          if compose_json_path.is_file() and json_exit == 0:
+              try:
+                  config = json.loads(compose_json_path.read_text(encoding="utf-8"))
+                  services = config.get("services") or {}
+                  compose_json_parsed = isinstance(services, dict) and bool(services)
+              except Exception:
+                  services = {}
+                  compose_json_parsed = False
+          service_names = sorted(str(k) for k in services.keys())
+          image_count = sum(1 for value in services.values() if isinstance(value, dict) and "image" in value)
+          build_count = sum(1 for value in services.values() if isinstance(value, dict) and "build" in value)
+          stderr_lines = 0
+          if stderr_path.is_file():
+              stderr_lines = len([line for line in stderr_path.read_text(encoding="utf-8", errors="replace").splitlines() if line.strip()])
+          probe = {
+              "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_PROBE_V1",
+              "website_tag_commit": source.get("website_tag_commit"),
+              "static_source_binding_pass": bool(bindings.get("equal")),
+              "source_verification_all_true": bool(source_checks) and all(bool(v) for v in source_checks.values()),
+              "compose_config_command_is_config_only": compose_exit == 0 and json_exit == 0 and compose_json_parsed,
+              "compose_config_exit_code": compose_exit,
+              "compose_json_command_exit_code": json_exit,
+              "compose_config_json_parsed": compose_json_parsed,
+              "compose_service_count": len(services),
+              "compose_service_names": service_names,
+              "compose_image_service_count": image_count,
+              "compose_build_service_count": build_count,
+              "compose_config_stderr_lines": stderr_lines,
+              "public_github_api_calls": int(source.get("public_github_api_calls") or 0),
+              "gated_dataset_status_probes": 0,
+              "external_network_probe_calls": 0,
+              "image_pulls": 0,
+              "container_starts": 0,
+              "docker_build_calls": 0,
+              "website_http_responses": 0,
+              "self_hosted_websites_deployed": False,
+              "raw_gated_bodies_downloaded": False,
+              "hidden_test_reading": False,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "borrowed_outputs": False,
+              "benchmark_run_attempted": False,
+              "benchmark_score_authority": False,
+              "model_calls": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+          }
+          (out / "runner_probe.json").write_text(json.dumps(probe, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_PROBE_PASS", json.dumps({k: probe[k] for k in ("compose_config_exit_code", "compose_config_json_parsed", "compose_service_count", "public_github_api_calls", "image_pulls", "container_starts", "self_hosted_websites_deployed")}, sort_keys=True))
+          PY
+      - name: Create fail-closed fallback inputs when measurements are absent
+        shell: bash
+        if: always()
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import json, os, pathlib
+          out = pathlib.Path(os.environ["WORKSPACE"]) / "out"
+          out.mkdir(parents=True, exist_ok=True)
+          source_names = (
+              "website_tag_commit", "gitlink_pin_count", "gitlink_bytes_exact", "runtime_compose_include_count",
+              "basesite_excluded_from_runtime_compose", "root_compose_bytes_exact", "web_compose_bytes_exact",
+              "no_nested_compose_includes", "no_gated_body_download_literals", "no_hidden_task_markers",
+              "no_deployment_commands_in_source_files", "no_raw_task_files_in_workspace", "public_website_source_only",
+          )
+          source_path = out / "source_verification.json"
+          probe_path = out / "runner_probe.json"
+          source_ok = False
+          probe_ok = False
+          if source_path.is_file():
+              try:
+                  source = json.loads(source_path.read_text(encoding="utf-8"))
+                  checks = source.get("checks") or {}
+                  source_ok = bool(checks) and all(bool(v) for v in checks.values())
+              except Exception:
+                  source_ok = False
+          if probe_path.is_file():
+              try:
+                  probe = json.loads(probe_path.read_text(encoding="utf-8"))
+                  probe_ok = bool(probe.get("compose_config_json_parsed")) and int(probe.get("compose_config_exit_code") or 1) == 0
+              except Exception:
+                  probe_ok = False
+          if not source_ok:
+              source = {
+                  "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_SOURCE_VERIFICATION_V1",
+                  "website_tag_commit": "",
+                  "gitlink_pin_count": 0,
+                  "runtime_compose_include_count": 0,
+                  "web_compose_hash_count": 0,
+                  "checks": {name: False for name in source_names},
+                  "public_github_api_calls": 0,
+                  "gated_dataset_status_probes": 0,
+                  "external_network_probe_calls": 0,
+                  "fallback_reason": "PINNED_WEBSITE_SUBSTRATE_SOURCE_VERIFICATION_DID_NOT_PRODUCE_VALID_JSON",
+              }
+              source_path.write_text(json.dumps(source, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          if not probe_ok:
+              probe = {
+                  "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_PROBE_V1",
+                  "website_tag_commit": "",
+                  "static_source_binding_pass": False,
+                  "source_verification_all_true": False,
+                  "compose_config_command_is_config_only": False,
+                  "compose_config_exit_code": 1,
+                  "compose_config_json_parsed": False,
+                  "compose_service_count": 0,
+                  "compose_service_names": [],
+                  "public_github_api_calls": 0,
+                  "gated_dataset_status_probes": 0,
+                  "external_network_probe_calls": 0,
+                  "image_pulls": 0,
+                  "container_starts": 0,
+                  "docker_build_calls": 0,
+                  "website_http_responses": 0,
+                  "self_hosted_websites_deployed": False,
+                  "raw_gated_bodies_downloaded": False,
+                  "hidden_test_reading": False,
+                  "raw_benchmark_tasks_saved_in_workspace": False,
+                  "borrowed_outputs": False,
+                  "benchmark_run_attempted": False,
+                  "benchmark_score_authority": False,
+                  "model_calls": 0,
+                  "runtime_network_calls_in_agent_cognition": 0,
+                  "fallback_reason": "COMPOSE_CONFIG_STEP_DID_NOT_PRODUCE_VALID_JSON",
+              }
+              probe_path.write_text(json.dumps(probe, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("OSWORLD_V21_WEBSITE_SUBSTRATE_CLASSIFIER_INPUTS_FAIL_CLOSED", source_ok, probe_ok)
+          PY
+      - name: Classify website substrate with the Brain-owned zero-model policy
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 "${WORKSPACE}/canonical/harbor/osworld_v21_website_substrate_policy_v1.py" \
+            --probe "${WORKSPACE}/out/runner_probe.json" \
+            --source "${WORKSPACE}/out/source_verification.json" \
+            --out "${WORKSPACE}/out/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json"
+      - name: Bind GitHub Actions OIDC run reference and emit runner-owned receipt
+        id: oidc_receipt
+        if: always()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, platform, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          workflow_path = ".github/workflows/zero-model-osworld-v21-website-substrate-v1.yml"
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": workflow_path in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed_oidc = sorted(k for k, v in checks.items() if not v)
+          if failed_oidc:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed_oidc))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref", "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor", "actor_id", "jti", "runner_environment")
+          oidc_claims = {k: claims.get(k) for k in keep}
+          def read_json(name, default):
+              p = out / name
+              if not p.is_file():
+                  return default
+              try:
+                  return json.loads(p.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+          bindings = read_json("blob_bindings.json", {})
+          audit = read_json("static_audit.json", {})
+          source = read_json("source_verification.json", {})
+          probe = read_json("runner_probe.json", {})
+          decision_path = out / "OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json"
+          if not decision_path.is_file():
+              decision_path.write_text("{}\n", encoding="utf-8")
+          decision = read_json("OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json", {})
+          decision_bytes = decision_path.read_bytes()
+          decision_sha = hashlib.sha256(decision_bytes).hexdigest()
+          decision_blob = subprocess.run(["git", "hash-object", "--stdin"], cwd=root, input=decision_bytes, stdout=subprocess.PIPE, check=True).stdout.decode().strip()
+          workflow_blob = subprocess.check_output(["git", "hash-object", workflow_path], cwd=root, text=True).strip()
+          run_url = "https://github.com/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + str(run_id)
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          source_checks = source.get("checks") or {}
+          failed = list(dict.fromkeys(decision.get("failed") or []))
+          if not source:
+              failed.append("SOURCE_VERIFICATION_JSON_MISSING")
+          if not probe:
+              failed.append("RUNNER_PROBE_JSON_MISSING")
+          if not decision:
+              failed.append("WEBSITE_SUBSTRATE_DECISION_JSON_MISSING_OR_EMPTY")
+          if failed_oidc:
+              failed.append("OIDC_RUN_REFERENCE_BINDING_FALSE")
+          if not bindings.get("equal"):
+              failed.append("EXACT_SOURCE_BINDING_FALSE")
+          if audit.get("marked_imports"):
+              failed.append("FORBIDDEN_IMPORTS_IN_WEBSITE_SUBSTRATE_SURFACE")
+          for key, value in source_checks.items():
+              if not value:
+                  failed.append("SOURCE_VERIFICATION_CHECK_FALSE:" + key)
+          for key in ("image_pulls", "container_starts", "docker_build_calls", "website_http_responses"):
+              if int(probe.get(key) or 0) != 0:
+                  failed.append("NONZERO_FORBIDDEN_ACTIVITY:" + key)
+          failed = list(dict.fromkeys(failed))
+          verified = list(decision.get("verified") or [])
+          if source_checks and all(bool(v) for v in source_checks.values()):
+              verified.append("PINNED_WEBSITE_TAG_GITLINKS_AND_COMPOSE_BYTES")
+          if not failed_oidc:
+              verified.append("OIDC_RUN_REFERENCE_BOUND")
+          verified.append("NO_OSWORLD_TASK_RUN_OR_BENCHMARK_SCORE")
+          unverified = list(decision.get("unverified") or [])
+          for item in ("Actual self-hosted OSWorld 2.1 website deployment and HTTP responses", "Independent section 6 verification"):
+              if item not in unverified:
+                  unverified.append(item)
+          numeric = dict(decision.get("numeric_measurements") or {})
+          numeric.update({
+              "source_verification_checks": len(source_checks),
+              "source_verification_checks_true": sum(1 for value in source_checks.values() if value),
+              "website_gitlink_pins": int(source.get("gitlink_pin_count") or 0),
+              "website_runtime_compose_includes": int(source.get("runtime_compose_include_count") or 0),
+              "web_compose_file_hashes": int(source.get("web_compose_hash_count") or 0),
+              "public_github_api_calls": int(probe.get("public_github_api_calls") or 0),
+              "compose_service_count": int(probe.get("compose_service_count") or 0),
+              "compose_config_stderr_lines": int(probe.get("compose_config_stderr_lines") or 0),
+              "gated_dataset_status_probes": 0,
+              "external_network_probe_calls": 0,
+              "image_pulls": 0,
+              "container_starts": 0,
+              "docker_build_calls": 0,
+              "website_http_responses": 0,
+              "hard_benchmark_tasks_consumed": 0,
+              "reward_vectors": 0,
+              "benchmark_score_claims": 0,
+              "model_calls": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+              "hidden_test_reading_events": 0,
+              "borrowed_output_events": 0,
+              "section_6_verifications": 0,
+          })
+          receipt = {
+              "schema": "BRAIN_OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_OSWORLD_V21_WEBSITE_SUBSTRATE_CONFIG_RECORDED__NO_DEPLOYMENT__ZERO_CREDIT__SECTION_6_NOT_MET",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_PINNED_WEBSITE_SUBSTRATE_AND_COMPOSE_CONFIG_PROBE__NO_BENCHMARK_RUN_OR_SCORE",
+              "scope": "OSWORLD_V21_PINNED_WEBSITE_SOURCE_AND_COMPOSE_CONFIG_ONLY",
+              "runner_owned": True,
+              "benchmark_run_attempted": False,
+              "website_substrate_deployment_attempted": False,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "verifier_identity": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "run_reference": {"workflow_run_id": run_id, "workflow_run_attempt": run_attempt, "workflow_run_url": run_url, "oidc_jti": claims.get("jti"), "runner_attestation": "github-actions-oidc-token"},
+              "pinned_substrates": {
+                  "python_version": platform.python_version(),
+                  "osworld_release_tag": os.environ["OSW_TAG"],
+                  "website_tag_commit": os.environ["OSW_WEBSITE_TAG_COMMIT"],
+                  "workflow_git_blob_sha": workflow_blob,
+                  "policy_import_path": os.environ["POLICY_IMPORT_PATH"],
+                  "model_cli_args": 0,
+                  "vm_boot_attempted": False,
+                  "container_deployment_attempted": False,
+              },
+              "source_binding": bindings,
+              "static_audit": audit,
+              "source_verification": source,
+              "runner_probe": probe,
+              "website_substrate_decision": decision,
+              "website_substrate_decision_sha256": decision_sha,
+              "website_substrate_decision_git_blob_sha": decision_blob,
+              "blocked_reasons": decision.get("blocked_reasons") or [],
+              "oidc_checks": checks,
+              "numeric_measurements": numeric,
+              "verified": verified,
+              "unverified": unverified,
+              "failed": failed,
+              "producer_cognition_model_dependency_count": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+              "external_network_probe_calls": 0,
+              "gated_dataset_status_probes": 0,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "task_specific_answers_in_repo": False,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "benchmark_score_authority": False,
+              "aggregate_benchmark_score": None,
+              "independent_website_substrate_runner_owned": True,
+              "independent_hard_benchmark_verification_completed": False,
+              "independent_verification_completed": False,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_PINNED_PUBLIC_WEBSITE_SOURCE_BYTES_AND_SANITIZED_COMPOSE_CONFIG_FACTS__IT_IS_NOT_WEBSITE_DEPLOYMENT_OSWORLD_TASK_EXECUTION_BENCHMARK_SCORE_CAPABILITY_CREDIT_OR_SECTION_6_VERIFICATION",
+          }
+          receipt_path = out / "OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.json"
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / "OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.sha256").write_text(hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8")
+          receipt_blob = subprocess.check_output(["git", "hash-object", str(receipt_path)], cwd=root, text=True).strip()
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("RUNNER_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print("RUNNER_RECEIPT_GIT_BLOB", receipt_blob)
+          print(json.dumps({"status": receipt["status"], "decision": decision.get("decision"), "config_verified": decision.get("website_substrate_config_verified"), "blocked_reasons": len(receipt["blocked_reasons"]), "verified": len(verified), "unverified": len(unverified), "failed": len(failed), "tasks_consumed": numeric["hard_benchmark_tasks_consumed"], "truth": receipt["truth"]}, sort_keys=True))
+          PY
+      - name: Land runner-owned website substrate receipt and decision
+        if: always() && steps.oidc_receipt.outcome == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.json" \
+             "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.json"
+          cp "out/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.sha256" \
+             "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.sha256"
+          if [ -f "out/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json" ]; then
+            cp "out/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json" \
+               "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json"
+          fi
+          git config user.name "project-brain-osworld-v21-website-substrate-runner"
+          git config user.email "project-brain-osworld-v21-website-substrate-runner@users.noreply.github.com"
+          git add "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.json" \
+                  "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.sha256" \
+                  "canonical/verification/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record runner-owned OSWorld 2.1 website substrate probe"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
+      - name: Upload runner-owned sanitized website substrate artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zero-model-osworld-v21-website-substrate-probe
+          path: |
+            out/blob_bindings.json
+            out/static_audit.json
+            out/source_verification.json
+            out/runner_probe.json
+            out/OSWORLD_V21_WEBSITE_SUBSTRATE_DECISION_20261124_V1.json
+            out/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.json
+            out/OSWORLD_V21_WEBSITE_SUBSTRATE_RUNNER_RECEIPT_20261124_V1.sha256
+          if-no-files-found: warn
+          retention-days: 90
