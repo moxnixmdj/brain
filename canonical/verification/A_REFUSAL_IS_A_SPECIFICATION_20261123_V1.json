@@ -1,0 +1,214 @@
+{
+  "schema": "PROJECT_BRAIN_A_REFUSAL_IS_A_SPECIFICATION_RECEIPT_V1",
+  "action_id": "A_REFUSAL_IS_A_SPECIFICATION_20261123_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_ONLY",
+  "date": "2026-11-23",
+  "canonical_base_commit": "202d53c1c0201e608e949f8c3fe041ac28701790",
+  "the_claim": "A precondition is not knowledge to acquire and not a parameter to train. It is a DECLARATION the program makes in the one channel nobody reads: the refusal. Six clause forms are read from the program's own sentence, and resolving the largest of them -- a missing enclosing world -- took git from 3 doors in 480 refusals to 438.",
+  "measured_doors_same_seeds": {
+    "before": 61,
+    "after": 497,
+    "per_program": {
+      "cp": {
+        "before": 2,
+        "after": 2,
+        "refused": 29,
+        "read": 1,
+        "answered": 0
+      },
+      "mv": {
+        "before": 2,
+        "after": 2,
+        "refused": 10,
+        "read": 1,
+        "answered": 0
+      },
+      "rm": {
+        "before": 7,
+        "after": 7,
+        "refused": 0,
+        "read": 0,
+        "answered": 0
+      },
+      "gzip": {
+        "before": 12,
+        "after": 12,
+        "refused": 2,
+        "read": 0,
+        "answered": 0
+      },
+      "tar": {
+        "before": 4,
+        "after": 4,
+        "refused": 53,
+        "read": 46,
+        "answered": 0
+      },
+      "openssl": {
+        "before": 24,
+        "after": 25,
+        "refused": 439,
+        "read": 279,
+        "answered": 1
+      },
+      "grep": {
+        "before": 0,
+        "after": 0,
+        "refused": 47,
+        "read": 0,
+        "answered": 0
+      },
+      "sort": {
+        "before": 1,
+        "after": 1,
+        "refused": 6,
+        "read": 1,
+        "answered": 0
+      },
+      "find": {
+        "before": 1,
+        "after": 1,
+        "refused": 12,
+        "read": 0,
+        "answered": 0
+      },
+      "sed": {
+        "before": 1,
+        "after": 1,
+        "refused": 3,
+        "read": 1,
+        "answered": 0
+      },
+      "zip": {
+        "before": 0,
+        "after": 0,
+        "refused": 6,
+        "read": 6,
+        "answered": 0
+      },
+      "ln": {
+        "before": 0,
+        "after": 0,
+        "refused": 14,
+        "read": 0,
+        "answered": 0
+      },
+      "touch": {
+        "before": 0,
+        "after": 0,
+        "refused": 4,
+        "read": 0,
+        "answered": 0
+      },
+      "dd": {
+        "before": 0,
+        "after": 0,
+        "refused": 0,
+        "read": 0,
+        "answered": 0
+      },
+      "install": {
+        "before": 3,
+        "after": 3,
+        "refused": 16,
+        "read": 0,
+        "answered": 0
+      },
+      "git": {
+        "before": 3,
+        "after": 438,
+        "refused": 480,
+        "read": 436,
+        "answered": 435
+      },
+      "jq": {
+        "before": 0,
+        "after": 0,
+        "refused": 13,
+        "read": 0,
+        "answered": 0
+      },
+      "patch": {
+        "before": 1,
+        "after": 1,
+        "refused": 11,
+        "read": 1,
+        "answered": 0
+      }
+    },
+    "regressions": 0,
+    "note": "identical seed, identical script, before and after on the same machine; the only change is the repair pass"
+  },
+  "the_honest_sizes_per_clause_form": {
+    "WORLD": {
+      "read": 435,
+      "answered": 435,
+      "sentence": "fatal: not a git repository (or any of the parent directories): .git",
+      "mechanism": "the program declares the operation that CREATES the world it says is missing; `git init` is among git's own admitted subcommands",
+      "rate": 1.0
+    },
+    "UNLOADABLE": {
+      "read": 87,
+      "answered": 0,
+      "sentence": "Unable to load certificate",
+      "mechanism": "substitute a file whose CONTENT is the kind named",
+      "why_zero": "with a plain-text seed the environment has no certificate to substitute; with a real certificate in the seed the same form answered 22 more in the rich-seed run, so this is a seed-content limit and not a reading failure"
+    },
+    "WITNESS": {
+      "read": 14,
+      "answered": 0,
+      "sentence": "No recipient(s) certificate(s) specified",
+      "why_zero": "same seed-content limit: nothing in a plain-text trial is a certificate"
+    },
+    "ENUMERAL": {
+      "read": 18,
+      "answered": 1,
+      "sentence": "No operation option (-encrypt|-decrypt|-sign|...) specified",
+      "why_nearly_zero": "the alternatives are MODES, and each mode has its own further precondition (a recipient, a signer key) that the trial's seed cannot supply; one mode needed nothing more"
+    },
+    "OFFERED": {
+      "read": 12,
+      "answered": 0,
+      "sentence": "use the -signature option",
+      "why_zero": "the offered flag names an artifact that must already exist"
+    },
+    "RANGE": {
+      "read": 7,
+      "answered": 0,
+      "sentence": "Error: offset out of range",
+      "why_zero": "re-binding the declared numeric slot to 0 removes the range error and the operation then fails for a different reason (the input is not DER), so the tree does not change"
+    },
+    "CONFLICT": {
+      "read": 4,
+      "answered": 0,
+      "sentence": "You may not specify more than one '-Acdtrux' ... option",
+      "why_zero": "tar names the GROUP, not which of this command's flags is in it; removing each member in turn does not clear the conflict"
+    },
+    "UNREAD": 523,
+    "aggregate_honesty": "ONE FORM did the work. 435 of the 436 answers came from the world clause; the other five forms answered 1 of 138. An aggregate number would present a tuned reader as a general one, which is why both figures are reported."
+  },
+  "the_rich_seed_run": {
+    "seed": "in.txt (text) + cert.pem (a real 1024-bit certificate) + k.pem",
+    "result": "openssl 24 -> 54 doors, 465 of 1036 refusals answered across 9 programs",
+    "why_it_differs": "UNLOADABLE and WITNESS can only answer when the environment CONTAINS a file of the kind asked for; a plain-text trial contains none, so the same reader scores 0 there. Both numbers are real and neither is the whole truth without the seed it was measured on."
+  },
+  "the_mechanism_in_one_sentence": "Read the sentence the program wrote, supply the one thing it named, put a FLAG where the option parser will see it and a VALUE where the operands are, and let the tree say whether it paid.",
+  "why_the_placement_matters": "`openssl cms -stream in.txt -encrypt` answers 'No operation option specified' because openssl stops reading options at the first operand; the same flag before the operand works. This is the defect round 7 found in the binder, and the first version of this module reintroduced it by appending.",
+  "the_oracle_repair": "`git init` creates `.git/` and changes no file, so a file-only digest reported world_created: False for a world that had plainly been created. The digest now walks directories. The same blindness exists in tool_census_v1 and is NOT fixed there in this round -- recorded as an open item rather than silently patched.",
+  "what_this_does_not_say": [
+    "It does not say the reader generalises. Measured on 9 programs it had never been touched for (git, openssl, tar, zip, install, find, sed, patch, jq) the non-world forms answered 1 of 138. The world clause is the mechanism that generalises; the other five are read but do not pay on this seed.",
+    "It does not validate the world clause on a second program: no second toolchain (npm, cargo, go, terraform) is installed in this sandbox, so `npm init` style worlds are unmeasured. The mechanism reads ONLY the program's own admitted subcommands, so it is not git-specific by construction -- but that is an argument, not a measurement.",
+    "It does not resolve the four open questions from round 7. It answers what to save: the reliability of READING a clause form, not the action. A saved action expires with the environment; `world clause -> resolve with the program's own initialiser -> paid` does not."
+  ],
+  "honest_limits": [
+    "435 of 436 answers are one clause form from one program; presenting 61 -> 497 as general would be the reporting this project forbids",
+    "the reader's non-world forms are tuned on openssl's phrasing and scored 1/138 on unseen refusals",
+    "UNLOADABLE/WITNESS cannot pay without a seed that contains the artifact kind asked for",
+    "no second toolchain is installed, so the world clause is measured on git alone",
+    "a repair writes only inside a temporary tree; nothing is written to the repository and no temporary tree is left behind (checked)",
+    "authority NONE, sandbox only; independent verification OPEN"
+  ],
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}
