@@ -322,7 +322,11 @@ def budget_experiment(machine_name: str, depth: int, budget: int, seed: int = 13
         conditions = pop.condition_pool([b for _i, b, _a in transitions])
         oracle = make_oracle(machine, atoms)
 
-        states = list(dict.fromkeys(tuple(b) for _i, b, _a in transitions))
+        # SORTED, not insertion-ordered: `transitions` is deduplicated through a set inside
+        # `explore`, and Python's per-process string-hash randomisation makes set order
+        # differ between runs. A "seed 13" split over an unstable order is not reproducible,
+        # and the first version of this file produced a different split on every invocation.
+        states = sorted(dict.fromkeys(tuple(b) for _i, b, _a in transitions))
         shuffled = list(states)
         random.Random(seed).shuffle(shuffled)
         cut = max(1, len(shuffled) // 4)
