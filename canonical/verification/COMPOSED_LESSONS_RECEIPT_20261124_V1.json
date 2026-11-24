@@ -1,0 +1,243 @@
+{
+  "schema": "PROJECT_BRAIN_COMPOSED_LESSONS_V1",
+  "isolation": {
+    "verdict": "ISOLATED"
+  },
+  "isolated_run": {
+    "ok": true,
+    "isolated": true
+  },
+  "result": {
+    "stages": [
+      {
+        "goal": "archive the input into out.tar",
+        "status": "PASS__PERFECT_ALGORITHM_RUN",
+        "plan": [
+          "run_tar"
+        ],
+        "admit": "ADMIT",
+        "lift": "PASS__OPERATOR_LIFTED"
+      },
+      {
+        "goal": "compress the input into out.gz",
+        "status": "PASS__PERFECT_ALGORITHM_RUN",
+        "plan": [
+          "run_gzip"
+        ],
+        "admit": "ADMIT",
+        "lift": "PASS__OPERATOR_LIFTED"
+      }
+    ],
+    "composed_goal": "archive the input into out.tar.gz",
+    "offered_actions": [
+      "copy_input",
+      "copy_to_out",
+      "run_gzip",
+      "run_tar"
+    ],
+    "status": "PASS__COMPOSED_A_NEW_FORMAT",
+    "composition": {
+      "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+      "status": "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT",
+      "applied": true,
+      "runs": [
+        {
+          "argv": [
+            "tar",
+            "-c",
+            "input.txt"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "captured_stdout": 10240
+        },
+        {
+          "argv": [
+            "gzip",
+            "-c",
+            "out.tar"
+          ],
+          "rc": 0,
+          "stderr": "",
+          "captured_stdout": 148
+        }
+      ],
+      "effect": {
+        "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+        "verdict": "EFFECT_VERIFIED",
+        "reader": [
+          "gzip",
+          "tar"
+        ],
+        "reader_chain": [
+          "gzip",
+          "tar"
+        ],
+        "reader_argv": [
+          [
+            "gzip",
+            "-dc"
+          ],
+          [
+            "tar",
+            "-xOf",
+            "-"
+          ]
+        ],
+        "components": [
+          "tar",
+          "gz"
+        ],
+        "output": "out.tar.gz",
+        "source": "input.txt",
+        "bytes_decoded": 22,
+        "bytes_source": 22,
+        "bytes_equal_source": true
+      },
+      "rule": {
+        "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+        "kind": "operator",
+        "rule_id": "op-4c20206113b4de4a",
+        "goal_family": "compress",
+        "env_kind": "posix_dir",
+        "goal": "compress the input into out.gz",
+        "program": "tar+gzip",
+        "observed_action": "tar+gzip",
+        "roles": {
+          "source": "source",
+          "output": "output"
+        },
+        "precondition": {
+          "kind": "source_exists",
+          "role": "source",
+          "description": "the source file named by the goal is a file here"
+        },
+        "effect": {
+          "kind": "roundtrip_equal",
+          "source_role": "source",
+          "output_role": "output",
+          "description": "the machine's own reader for the output's declared format turns it back into exactly the source's bytes"
+        },
+        "output_name": "out.tar.gz",
+        "argv_shape": [
+          "tar",
+          "-c",
+          "input.txt",
+          "&&",
+          "gzip",
+          "-c",
+          "out.tar"
+        ],
+        "effect_checked_at_lift": true,
+        "evidence": {
+          "composed_of": [
+            "op-dbd9cbd7ed701c65",
+            "op-bb97b9ae4f78f29d"
+          ],
+          "runs": [
+            {
+              "argv": [
+                "tar",
+                "-c",
+                "input.txt"
+              ],
+              "rc": 0,
+              "stderr": "",
+              "captured_stdout": 10240
+            },
+            {
+              "argv": [
+                "gzip",
+                "-c",
+                "out.tar"
+              ],
+              "rc": 0,
+              "stderr": "",
+              "captured_stdout": 148
+            }
+          ],
+          "effect": {
+            "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
+            "verdict": "EFFECT_VERIFIED",
+            "reader": [
+              "gzip",
+              "tar"
+            ],
+            "reader_chain": [
+              "gzip",
+              "tar"
+            ],
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ],
+              [
+                "tar",
+                "-xOf",
+                "-"
+              ]
+            ],
+            "components": [
+              "tar",
+              "gz"
+            ],
+            "output": "out.tar.gz",
+            "source": "input.txt",
+            "bytes_decoded": 22,
+            "bytes_source": 22,
+            "bytes_equal_source": true
+          }
+        },
+        "refutations": 0,
+        "composed_of": [
+          "op-dbd9cbd7ed701c65",
+          "op-bb97b9ae4f78f29d"
+        ]
+      },
+      "intermediate": "out.tar",
+      "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+      "attempts": [
+        {
+          "parts": [
+            "op-dbd9cbd7ed701c65",
+            "op-bb97b9ae4f78f29d"
+          ],
+          "status": "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT"
+        }
+      ]
+    },
+    "truth": {
+      "gzip_rc": 0,
+      "tar_rc": 0,
+      "bytes_equal_source": true
+    },
+    "memory_rules": [
+      [
+        "tar",
+        [
+          "tar",
+          "-c",
+          "{source}"
+        ]
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        "gzip",
+        [
+          "gzip",
+          "-c",
+          "{source}"
+        ]
+      ],
+      [
+        null,
+        null
+      ]
+    ]
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
+}

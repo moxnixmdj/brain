@@ -182,7 +182,21 @@ def _candidates(component: str, programs: Sequence[str] | None) -> list[str]:
     NO_READER rather than guessing.
     """
     if programs is not None:
-        return [str(p) for p in programs]
+        # A caller-supplied list is a hint about which programs EXIST, never a
+        # licence for one of them to stand in for another layer. Measured
+        # 2026-11-24: with ["tar", "gzip"] handed in, `tar` proved itself as the
+        # reader for `gz` (tar -xOf returns the source bytes), so a plain tar
+        # named out.gz came back EFFECT_VERIFIED. Filter per layer; if nothing
+        # is named for this layer, the honest answer is that there is no reader.
+        named = [str(p) for p in programs if component in str(p)]
+        if named:
+            return named
+        try:
+            from canonical.runtime.computer_env_v1 import programs_for
+
+            return list(programs_for(component, limit=_MAX_CANDIDATES))
+        except Exception:  # noqa: BLE001
+            return []
     try:
         from canonical.runtime.computer_env_v1 import programs_for
 

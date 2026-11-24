@@ -600,7 +600,12 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                 env.reset()
                 for a in list(rule.get("plan_sketch") or []):
                     env.act(str(a))
-                reached = bool(goal_predicate(env.state()))
+                # The replay is a claim about an effect, so it is judged by the
+                # effect here -- not by a name in the observation. Measured
+                # 2026-11-24: replaying a tar plan into `out.tar.gz` passed the
+                # name test and produced a file that is not a tar.gz.
+                reached = (bool(goal_check(env)) if goal_check is not None
+                           else bool(goal_predicate(env.state())))
                 receipts["steps"]["memory_replay"] = {
                     "status": "PASS__REPLAY_REACHED_GOAL" if reached else "OPEN__REPLAY_FAILED",
                     "rule_id": rule.get("rule_id"),
@@ -661,6 +666,24 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     if prior_rows:
         verified_rows, stale_discarded = verify_priors(env, prior_rows)
         prior_rows = verified_rows
+    # TWO LESSONS, ONE FORMAT NEITHER OF THEM MAKES. Measured 2026-11-24: a
+    # goal for `out.tar.gz` is verifiable and unreachable when the only offered
+    # actions write a plain tar or a plain gzip. The store already holds both
+    # contracts; composing them produces a format the environment never offered
+    # as an action, and the chain oracle decides whether the composition is
+    # right. Tried HERE, before the scan dirties the world with decoy files
+    # (`copy_input` leaves a second candidate behind, and a source that cannot
+    # be determined is a refusal, not a guess).
+    composed = _compose_from_store(memory, env, goal, contract=effect_contract)
+    receipts["steps"]["composition"] = composed
+    if composed.get("status") == "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT":
+        receipts["status"] = "PASS__COMPOSED_A_NEW_FORMAT"
+        receipts["pass"] = True
+        receipts["outcome"] = "COMPOSED_FROM_TWO_LEARNED_CONTRACTS"
+        receipts["plan"] = composed.get("runs")
+        receipts["duration_s"] = round(time.time() - started, 4)
+        return receipts
+
     try:
         scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
                            heuristic=heuristic, prior=prior_rows, seed=seed,
@@ -941,15 +964,20 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     if reached and goal_check is not None and effect_contract:
         try:
             from canonical.runtime import lifted_operator_v1 as lifted
+            action_name = (executed or [""])[0]
+            recipe = (getattr(env, "recipes", {}) or {}).get(action_name) or {}
+            shape = [str(part).replace("{input}", "{source}")
+                     for part in (recipe.get("argv") or [])]
             operator = lifted.lift(
                 goal=goal, goal_family=family, env_kind=kind,
-                action=(executed or [""])[0],
+                action=action_name,
                 program=None,
                 observation={"root": getattr(env, "root", None)},
                 source_name=str(effect_contract.get("source") or ""),
                 output_name=str(effect_contract.get("output") or ""),
                 evidence={"plan_length": len(cleaned_plan),
-                          "scan_states": scan_result["state_count"]})
+                          "scan_states": scan_result["state_count"]},
+                argv=shape)
             if operator.get("effect_checked_at_lift"):
                 new_memory = remember(new_memory, operator)
                 receipts["steps"]["lift"] = {"status": "PASS__OPERATOR_LIFTED",
@@ -987,6 +1015,59 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     receipts["authority"] = "NONE__REAL_EXECUTION_WITH_ADMITTED_OR_UNPERSISTED_RULE"
     receipts["duration_s"] = round(time.time() - started, 4)
     return receipts
+
+
+def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
+                        contract: Any = None) -> dict[str, Any]:
+    """Try every ordered pair of stored contracts whose programs name the layers.
+
+    The goal's output name declares its own layers (`out.tar.gz` declares tar and
+    gzip, outermost last). Each layer is looked for as a PROVEN contract; a
+    missing layer is the honest reason nothing was composed.
+    """
+    try:
+        from canonical.runtime import lifted_operator_v1 as lifted
+        from canonical.runtime.effect_oracle_v1 import _components
+        from canonical.runtime.computer_env_v1 import output_name as _output_name
+
+        output = _output_name(goal)
+    except Exception:  # noqa: BLE001
+        return {"status": "NOT_ATTEMPTED__NO_GOAL_PARSER"}
+    if not output:
+        return {"status": "NOT_ATTEMPTED__THE_GOAL_NAMES_NO_OUTPUT"}
+    layers = _components(output)
+    if len(layers) < 2:
+        return {"status": "NOT_ATTEMPTED__THE_OUTPUT_DECLARES_ONE_LAYER"}
+    operators = [r for r in (memory.get("rules") or []) if str(r.get("kind")) == "operator"]
+    def names(rule: Mapping[str, Any], layer: str) -> bool:
+        # `gz` names `gzip`; equality would miss every real pair
+        return layer.lower() in str(rule.get("program") or "").lower()
+
+    inner = [r for r in operators if any(names(r, layer) for layer in layers[:-1])]
+    outer = [r for r in operators if names(r, layers[-1])]
+    if not inner or not outer:
+        return {"status": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS",
+                "layers": layers,
+                "programs_in_store": sorted({str(r.get("program")) for r in operators})}
+    bound = None
+    if callable(contract):
+        try:
+            bound = contract(env)
+        except Exception:  # noqa: BLE001
+            bound = None
+    attempts = []
+    for first in inner:
+        second = dict(outer[0])
+        second["output_name"] = output
+        composed = lifted.compose(first, second, env=env,
+                                  intermediate=output.rsplit(".", 1)[0],
+                                  binding=bound)
+        attempts.append({"parts": [first.get("rule_id"), second.get("rule_id")],
+                         "status": composed.get("status")})
+        if composed.get("applied"):
+            composed["attempts"] = attempts
+            return composed
+    return {"status": "OPEN__NO_COMPOSITION_VERIFIED", "attempts": attempts}
 
 
 def _default_env_kind(env: Any) -> str:

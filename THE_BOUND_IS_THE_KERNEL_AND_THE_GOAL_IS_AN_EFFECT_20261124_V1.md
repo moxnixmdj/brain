@@ -293,6 +293,37 @@ and the loop says OPEN. That is the correct answer — the oracle can verify a
 compound effect that the **action vocabulary cannot yet produce**. It is exactly
 the composition gap, now with a receipt instead of a hypothesis.
 
+## 5c. Two lessons, one format neither makes
+
+The compound goal was the measured gap, so it was closed by composition, not by
+a new action.
+
+* A contract now carries its **argv shape**, because a contract that names a
+  program but not how it was called can be replayed and never composed.
+* `compose(O1, O2)` fills the slots, carries a **stream** program's stdout to a
+  file (the gzip step prints; without capture the second layer vanishes and the
+  failure looks like a format problem), and then hands the outcome to the chain
+  oracle. Composition is trusted by the **effect**, on a format no action offers.
+* The goal-derived binding outranks the operator's own precondition, and a
+  world with two candidate sources is still a refusal.
+
+Receipt (`COMPOSED_LESSONS_RECEIPT_20261124_V1.json`): teach
+`archive the input into out.tar` (tar, operator lifted, admitted), then
+`compress the input into out.gz` (gzip, lifted, admitted), then ask for
+`out.tar.gz` — an environment whose every action writes one layer.
+Result `PASS__COMPOSED_A_NEW_FORMAT`: `tar -c input.txt` → `out.tar`,
+`gzip -c out.tar` → `out.tar.gz`, chain `[gzip, tar]`, and the judge outside all
+of it, `gzip -dc out.tar.gz | tar -xOf -`, returns the source's bytes exactly.
+
+**A soundness bug was found on the way and closed.** The caller's program list
+was used as the candidate set for *every* layer, so with `["tar","gzip"]` handed
+in, `tar` proved itself as the reader for `gz` (`tar -xOf` returns the source
+bytes) and a **plain tar named `out.gz` came back EFFECT_VERIFIED**. Candidates
+are now filtered per layer: a hint list may say which programs exist, never lend
+a layer a reader. Two tests pin it. A second one: the memory-replay path still
+judged by the artifact's **name**, so replaying a tar plan into `out.tar.gz`
+passed and produced a file that was not one; replay is now judged by the effect.
+
 ## 6. The next bottleneck (one)
 
 **Composition: the loop cannot yet invent a missing action.** The compound

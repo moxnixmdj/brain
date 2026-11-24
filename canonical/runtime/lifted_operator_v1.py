@@ -58,6 +58,7 @@ from __future__ import annotations
 import json
 import pathlib
 import re
+import subprocess
 from typing import Any, Callable, Mapping, Sequence
 
 SCHEMA = "PROJECT_BRAIN_LIFTED_OPERATOR_V1"
@@ -91,8 +92,8 @@ def _visible_programs() -> list[str]:
 
 def lift(*, goal: str, goal_family: str, env_kind: str, action: str,
          program: str | None, observation: Mapping[str, Any] | Sequence[str],
-         source_name: str, output_name: str, evidence: Mapping[str, Any] | None = None
-         ) -> dict[str, Any]:
+         source_name: str, output_name: str, evidence: Mapping[str, Any] | None = None,
+         argv: Sequence[str] | None = None) -> dict[str, Any]:
     """Turn one verified execution into a contract that does not name an action."""
     try:
         from canonical.runtime import effect_oracle_v1 as oracle
@@ -120,6 +121,10 @@ def lift(*, goal: str, goal_family: str, env_kind: str, action: str,
                    "description": "the machine's own reader for the output's declared "
                                   "format turns it back into exactly the source's bytes"},
         "output_name": output_name,
+        # The SHAPE is what makes composition possible: a contract that names a
+        # program but not how it was called can be replayed, never composed.
+        # `{source}` and `{output}` are the slots the environment filled in.
+        "argv_shape": [str(a) for a in (argv or [])],
         "effect_checked_at_lift": bool(verdict.get("verdict") == "EFFECT_VERIFIED"),
         "evidence": dict(evidence or {}),
         "refutations": 0,
@@ -262,6 +267,106 @@ def apply_rule(rule: Mapping[str, Any], env: Any, *,
         "effect": verdict,
         "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
     }
+
+
+COMPOSED = "COMPOSED__EFFECT_VERIFIED_ON_A_NEW_FORMAT"
+COMPOSE_NO_SHAPES = "REFUSED__A_CONTRACT_HAS_NO_ARGV_SHAPE"
+COMPOSE_NO_EFFECT = "REFUTED__COMPOSITION_DID_NOT_VERIFY"
+
+
+def compose(first: Mapping[str, Any], second: Mapping[str, Any], *,
+            env: Any, intermediate: str | None = None,
+            binding: Mapping[str, str] | None = None) -> dict[str, Any]:
+    """O2 after O1, on a format neither operator could produce alone.
+
+    Measured need (2026-11-24): a goal `archive the input into out.tar.gz` is
+    verifiable -- the chain oracle proves a real tar.gz through [gzip, tar] --
+    but no action in that environment does tar *and* gzip, so the loop reported
+    OPEN. Two proven contracts for the parts, composed, produce the third.
+
+    The composition is not trusted because it type-checks. It is trusted when
+    the outcome survives the chain oracle on a format that was never offered as
+    an action.
+    """
+    from canonical.runtime import effect_oracle_v1 as oracle
+
+    a_shape = list(first.get("argv_shape") or [])
+    b_shape = list(second.get("argv_shape") or [])
+    if not a_shape or not b_shape:
+        return {"schema": SCHEMA, "status": COMPOSE_NO_SHAPES, "applied": False,
+                "detail": "a contract without its argv shape can be replayed, not composed",
+                "parts": [first.get("rule_id"), second.get("rule_id")]}
+
+    root = pathlib.Path(str(getattr(env, "root", "")))
+    # A binding derived from the goal and the world outranks the operator's own
+    # precondition: the goal names the output, the world names the source, and
+    # two files with nothing to choose between them is still a refusal.
+    if binding and binding.get("source"):
+        bound = {"bound": str(binding["source"]),
+                 "status": "BOUND__FROM_THE_GOAL_CONTRACT"}
+    else:
+        bound = bind_source(first, root)
+    if not bound.get("bound"):
+        return {"schema": SCHEMA, "status": bound.get("status", REFUSED_PRECONDITION),
+                "binding": bound, "applied": False}
+    source = bound["bound"]
+    final = second.get("output_name") or first.get("output_name")
+    middle = intermediate or (final + ".part-" + (first.get("program") or "a"))
+
+    def fill(shape: Sequence[str], src: str, out: str) -> tuple[list[str], bool]:
+        """Fill the slots. `writes_file` says whether {output} was a real slot.
+
+        A stream program (`gzip -c source`) has no {output} slot -- it prints.
+        The composition has to carry that stream to a file itself, exactly as
+        `computer_env.program_actions` does, or the second step produces nothing
+        and the failure looks like a format problem it is not.
+        """
+        argv, writes = [], False
+        for part in shape:
+            if any(slot in part for slot in ("{output}", "{target}")):
+                writes = True
+            argv.append(part.replace("{source}", src).replace("{input}", src)
+                            .replace("{output}", out).replace("{target}", out))
+        return argv, writes
+
+    first_argv, first_writes = fill(a_shape, source, middle)
+    second_argv, second_writes = fill(b_shape, middle, final)
+    env.reset()
+    results = []
+    for argv, writes, out_name in ((first_argv, first_writes, middle),
+                                   (second_argv, second_writes, final)):
+        done = subprocess.run([str(a) for a in argv], cwd=str(root),
+                              capture_output=True, timeout=60)
+        row = {"argv": argv, "rc": done.returncode,
+               "stderr": (done.stderr or b"").decode("utf-8", "replace")[-200:]}
+        if done.returncode == 0 and not writes and done.stdout:
+            (root / out_name).write_bytes(done.stdout)
+            row["captured_stdout"] = len(done.stdout)
+        results.append(row)
+        if done.returncode != 0 or not (root / out_name).is_file():
+            return {"schema": SCHEMA, "status": COMPOSE_NO_EFFECT, "runs": results,
+                    "applied": False}
+    verdict = oracle.verify_roundtrip(root, final, source)
+    ok = verdict.get("verdict") == "EFFECT_VERIFIED"
+    rule = None
+    if ok:
+        rule = lift(goal=str(second.get("goal") or ""),
+                    goal_family=str(second.get("goal_family") or "composed"),
+                    env_kind=str(second.get("env_kind") or "unknown"),
+                    action="+".join([first.get("program") or "?", second.get("program") or "?"]),
+                    program="+".join([first.get("program") or "?", second.get("program") or "?"]),
+                    observation={"root": str(root)}, source_name=source,
+                    output_name=str(final),
+                    evidence={"composed_of": [first.get("rule_id"), second.get("rule_id")],
+                              "runs": results, "effect": verdict},
+                    argv=first_argv + ["&&"] + second_argv)
+        rule["kind"] = "operator"
+        rule["composed_of"] = [first.get("rule_id"), second.get("rule_id")]
+    return {"schema": SCHEMA,
+            "status": COMPOSED if ok else COMPOSE_NO_EFFECT,
+            "applied": bool(ok), "runs": results, "effect": verdict,
+            "rule": rule, "intermediate": middle,
+            "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"}
 
 
 def refute(memory: Mapping[str, Any], rule_id: str) -> dict[str, Any]:

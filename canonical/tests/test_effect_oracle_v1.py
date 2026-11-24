@@ -192,3 +192,27 @@ class CompoundFormatTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TheReaderMustBeNamedForItsLayerTests(unittest.TestCase):
+    """A hint list may say which programs exist; it may not lend a layer a reader."""
+
+    def setUp(self):
+        if not (HAS_GZIP and shutil.which("tar")):
+            self.skipTest("gzip and tar are both needed")
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix="layer-name-test-"))
+        (self.root / "input.txt").write_bytes(b"not a gzip\n")
+        self.root.joinpath("out.gz").write_bytes(subprocess.run(
+            ["tar", "-cf", "-", "input.txt"], cwd=self.root, capture_output=True).stdout)
+
+    def test_tar_cannot_stand_in_for_the_gzip_layer(self):
+        verdict = oracle.verify_roundtrip(self.root, "out.gz", "input.txt",
+                                          programs=["tar", "gzip"])
+        self.assertEqual(verdict["verdict"], oracle.WRONG_FORMAT, verdict)
+
+    def test_a_plain_tar_named_gz_is_never_a_pass(self):
+        for programs in (None, ["tar"], ["tar", "gzip"], ["gzip", "tar"]):
+            verdict = oracle.verify_roundtrip(self.root, "out.gz", "input.txt",
+                                              programs=programs)
+            self.assertNotEqual(verdict["verdict"], oracle.EFFECT_VERIFIED,
+                                "programs=%r" % (programs,))

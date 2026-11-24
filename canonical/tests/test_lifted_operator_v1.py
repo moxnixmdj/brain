@@ -139,3 +139,65 @@ class TransferTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CompositionTests(unittest.TestCase):
+    """Two proven contracts, one format neither of them makes."""
+
+    class Env:
+        def __init__(self, root):
+            self.root = pathlib.Path(root)
+
+        def reset(self):
+            pass
+
+    def setUp(self):
+        if not (HAS_GZIP and shutil.which("tar")):
+            self.skipTest("gzip and tar are both needed")
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix="compose-test-"))
+        (self.root / "input.txt").write_bytes(b"compose me\n" * 3)
+
+    def _tar(self):
+        return lifted.lift(goal="archive the input into out.tar", goal_family="archive",
+                           env_kind="posix_dir", action="run_tar", program="tar",
+                           observation={}, source_name="input.txt",
+                           output_name="out.tar",
+                           argv=["tar", "-cf", "{output}", "{source}"])
+
+    def _gz(self, output="out.tar.gz"):
+        return lifted.lift(goal="compress the input into %s" % output,
+                           goal_family="compress", env_kind="posix_dir",
+                           action="run_gzip", program="gzip", observation={},
+                           source_name="input.txt", output_name=output,
+                           argv=["gzip", "-c", "{source}"])
+
+    def test_two_contracts_compose_into_a_verified_new_format(self):
+        result = lifted.compose(self._tar(), self._gz(), env=self.Env(self.root),
+                                intermediate="out.tar")
+        self.assertTrue(result["applied"], result)
+        self.assertEqual(result["status"], lifted.COMPOSED)
+        self.assertEqual(result["effect"]["reader_chain"], ["gzip", "tar"])
+        self.assertEqual(len(result["rule"]["composed_of"]), 2)
+
+    def test_a_stream_program_is_carried_to_a_file_not_lost(self):
+        result = lifted.compose(self._tar(), self._gz(), env=self.Env(self.root),
+                                intermediate="out.tar")
+        captured = [row for row in result["runs"] if row.get("captured_stdout")]
+        self.assertEqual(len(captured), 1,
+                         "the gzip step prints; without capture the second layer "
+                         "would vanish and look like a format failure")
+
+    def test_a_contract_without_a_shape_cannot_be_composed(self):
+        bare = self._gz()
+        bare["argv_shape"] = []
+        result = lifted.compose(self._tar(), bare, env=self.Env(self.root))
+        self.assertFalse(result["applied"])
+        self.assertEqual(result["status"], lifted.COMPOSE_NO_SHAPES)
+
+    def test_a_wrong_composition_is_refuted_by_the_chain_oracle(self):
+        broken = self._tar()
+        broken["argv_shape"] = ["gzip", "-c", "{source}"]  # gzip where tar belongs
+        result = lifted.compose(broken, self._gz(), env=self.Env(self.root),
+                                intermediate="out.tar")
+        self.assertFalse(result["applied"])
+        self.assertIn(result["status"], (lifted.COMPOSE_NO_EFFECT,))
