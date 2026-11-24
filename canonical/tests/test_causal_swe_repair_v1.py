@@ -131,7 +131,7 @@ class CausalSWERepairTests(unittest.TestCase):
             )
             res = swe.repair_worktree(wt, "tests/test_mod.py")
             self.assertTrue(res["pass"], res)
-            self.assertEqual(res["winning_family"], "MEMBERSHIP_SET_EXTENSION")
+            self.assertIn(res["winning_family"], {"MEMBERSHIP_SET_EXTENSION", "STUN_GUARD_SYNTHESIS"})
 
         # 2. DID NOT RAISE parser guard widening
         with tempfile.TemporaryDirectory(prefix="swe-dnr-") as tmp2:
@@ -163,7 +163,10 @@ class CausalSWERepairTests(unittest.TestCase):
             )
             res2 = swe.repair_worktree(wt2, "tests/test_ver.py")
             self.assertTrue(res2["pass"], res2)
-            self.assertIn(res2["winning_family"], ("DID_NOT_RAISE_PREDICATE", "GUARD_DISJUNCTIVE_RELAXATION"))
+            self.assertIn(
+                res2["winning_family"],
+                ("DID_NOT_RAISE_PREDICATE", "GUARD_DISJUNCTIVE_RELAXATION", "STUN_GUARD_SYNTHESIS"),
+            )
 
     def test_degenerate_guard_and_runner_canary_anti_lobotomy_gate(self) -> None:
         import ast

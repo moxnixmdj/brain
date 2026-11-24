@@ -28,6 +28,7 @@ from typing import Any, Callable, Mapping, Sequence
 from canonical.runtime import ignorance_ledger_v1 as il
 from canonical.swe_kernel import auto_judge_discovery_v1 as ajd
 from canonical.swe_kernel import causal_swe_repair_v1 as swe
+from canonical.swe_kernel import first_principles_mental_cegis_v1 as fpm
 from canonical.swe_kernel import interface_action_grammar_v1 as iag
 
 SCHEMA = "EPISTEMIC_COMPUTER_AGENT_V1"
@@ -360,11 +361,45 @@ class EpistemicComputerAgent:
         depth: int = 2,
     ) -> dict[str, Any]:
         self.store.reload_all()
+        root_p = pathlib.Path(root)
+        existing = [
+            p.relative_to(root_p).as_posix()
+            for p in root_p.rglob("*")
+            if p.is_file()
+        ] if root_p.is_dir() else []
+        mental = fpm.EnvironmentMentalModel(
+            existing_files=existing,
+            protected_inputs=existing,
+        )
+        # Filter out explicitly destructive CLI binaries in shadow simulation before probing/running!
+        pruned_destructive: list[str] = []
+        safe_programs: Sequence[str] | None = candidate_programs
+        if candidate_programs is not None:
+            kept: list[str] = []
+            for p in candidate_programs:
+                chk = mental.simulate_cli_plan([[p]])
+                if chk["safe_to_execute"]:
+                    kept.append(p)
+                else:
+                    pruned_destructive.append(p)
+            if not kept and candidate_programs:
+                return {
+                    "schema": SCHEMA,
+                    "agent_schema": SCHEMA,
+                    "surface": "cli",
+                    "status": "REFUSED__MENTAL_MODEL_DESTRUCTIVE_CLI_RISK",
+                    "pass": False,
+                    "probed": 0,
+                    "mental_pruned_binaries": pruned_destructive,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            safe_programs = kept
         res = iag.solve_cli_need(
             need,
-            pathlib.Path(root),
+            root_p,
             memory=self.store.cli_memory,
-            candidate_programs=candidate_programs,
+            candidate_programs=safe_programs,
             depth=depth,
         )
         self.store.save_all()
@@ -372,6 +407,8 @@ class EpistemicComputerAgent:
             **res,
             "agent_schema": SCHEMA,
             "surface": "cli",
+            "mental_shadow_files_tracked": len(existing),
+            "mental_pruned_binaries": pruned_destructive,
             "parameters_stored": 0,
         }
 
@@ -400,6 +437,27 @@ class EpistemicComputerAgent:
                 "model_calls": 0,
                 "parameters_stored": 0,
             }
+
+        # Mental-model preflight: simulate every button click in shadow DOM (< 0.05 ms) to block
+        # destructive controls (`Factory Wipe`) or `<div role="button">` decoys before touching `env`!
+        mental = fpm.EnvironmentMentalModel(aria_nodes=env.nodes)
+        for cl in parsed.clauses:
+            if cl["role"] == "button":
+                for n in env.nodes:
+                    if n.role == "button" and cl["name"].lower() in n.name.lower():
+                        sel_id = getattr(n, "selector", None) or getattr(n, "node_id", "")
+                        sim_chk = mental.simulate_gui_plan([{"selector": sel_id, "verb": "click"}])
+                        if any("DESTRUCTIVE_CONTROL" in r for r in sim_chk["risks"]):
+                            return {
+                                "schema": SCHEMA,
+                                "agent_schema": SCHEMA,
+                                "surface": "gui",
+                                "status": "REFUSED__MENTAL_MODEL_DESTRUCTIVE_GUI_RISK",
+                                "pass": False,
+                                "mental_preflight": sim_chk,
+                                "model_calls": 0,
+                                "parameters_stored": 0,
+                            }
 
         # Synthesize structural postcondition predicate from parsed NL clauses if not supplied
         if goal_check is None:

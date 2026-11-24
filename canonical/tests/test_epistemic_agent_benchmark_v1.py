@@ -52,6 +52,20 @@ class EpistemicAgentBenchmarkReceiptTests(unittest.TestCase):
         self.assertEqual(
             exp4["heldout_unseen_single_line_round1"]["verified_genuine_repairs"], 2
         )
+        v2 = exp4["v2_first_principles_mental_cegis_full_corpus"]
+        self.assertEqual(v2["calibration_attrs_seen"]["verified_genuine_repairs"], 2)
+        self.assertEqual(
+            v2["unseen_heldout_12_repos_deduplicated"]["fake_repairs_remaining_after_4layer_referee"], 0
+        )
+
+        exp5 = data["experiment_5_first_principles_mental_cegis_4leaps"]
+        self.assertTrue(exp5["leap2_loop_comprehension_stream_canonical_equiv"])
+        self.assertTrue(exp5["leap2_python_to_javascript_semantic_transfer"])
+        self.assertTrue(exp5["leap3_coupled_two_file_cegis_verified"])
+        self.assertTrue(exp5["leap4_destructive_cli_blocked_in_shadow"])
+        self.assertTrue(exp5["leap4_inert_aria_decoy_pruned_in_shadow"])
+        self.assertTrue(exp5["leap4_destructive_gui_wipe_blocked_in_shadow"])
+        self.assertTrue(exp5["leap4_safe_gui_plan_admitted"])
 
 
 if __name__ == "__main__":

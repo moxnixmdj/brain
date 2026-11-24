@@ -2,7 +2,7 @@
   "action_id": "EPISTEMIC_COMPUTER_AGENT_20261124_V1",
   "action_intent_id": "EPISTEMIC_COMPUTER_AGENT_20261124_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Unifies zero-model goal-directed environment learning, automatic CLI+stdlib content-judge earning, content-addressed CLI and W3C Core-AAM GUI/OSWorld action grammars, and zero-leakage dynamic causal SWE fault localization and AST/frame repair behind one inspectable, refutable external store (`EpistemicStore`, 0 model calls, 0 stored weights, 0 saved coordinates). Evaluated across 8 heterogeneous OS rooms (4x fewer probes than upfront-all learning), unseen CLI rooms (0 warm `--help` subprocesses), 6 redesigned W3C ARIA apps (6/6 schema transfer vs 0/6 coordinate replay and 0/6 naive ARIA without state-diff), and 61 real git-stripped commits across 13 open-source Python repositories (40/49 = 81.6% unseen Top-5 file localization, 2/49 genuine unseen cross-module-verified repairs vs 0/41 prior engine, and 1 self-hosting pluggy runner-lobotomy false positive caught and blocked permanently by dual runner-canary screening).",
+  "action_summary": "Unifies zero-model goal-directed environment learning, automatic CLI+stdlib content-judge earning, content-addressed CLI and W3C Core-AAM GUI/OSWorld action grammars, executable OS/CLI/GUI shadow mental simulation (`EnvironmentMentalModel`), cross-file and cross-subprocess `CausalDataFlowGraph` backward lineage localization, language-agnostic `SemanticMeaningIR` (`loop == listcomp == map/filter`, Python/JS/Rust transfer), and `os.fork()` Copy-on-Write (`211.6x` speedup, `0` disk writes) multi-round Angelic CEGIS + coupled multi-file repair behind `EpistemicStore` (`0` model calls, `0` stored weights, `0` saved coordinates). Evaluated across 8 heterogeneous OS rooms (`4x` fewer probes), unseen CLI rooms (`0` warm `--help` subprocesses), 6 redesigned W3C ARIA apps (`6/6` schema transfer vs `0/6` controls), and all 127 unique git-stripped commits across both repository corpora in 13 upstream repos (`105/111 = 94.6%` unseen Top-5 causal file localization, `3/111` genuine unseen repairs including virgin general commit `packaging@022ae6c6fe` + `2/4` `attrs` calibration repairs, `1,440,593` in-memory expression simulations, `33,605` CoW fork simulations, and `0` remaining fake repairs after catching and blocking 4 false-repair classes).",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -11,7 +11,7 @@
     "earlier_routes_exhausted_reason": "Three earlier routes failed or stalled: (1) Handing git-diff lines to single-expression scalar equality synthesis (`identify_a_real_bugs_fix_v1`) leaked answers and still scored 0/41 on unseen non-attrs commits. (2) Blind upfront probing of every binary/file in an environment wastes 4x probes and risks AgentCL interference. (3) Saving raw `(x, y)` pixels or literal argv paths scored 0/6 and 0/4 on redesigned layouts and renamed directories.",
     "incremental_spend_usd": 0,
     "independent_verification_completed": false,
-    "independent_verification_note": "Producer-run sandbox only: 13 unit/receipt tests across 5 test modules + 61 real git-stripped open-source commits across 13 upstream repositories (`packaging`, `click`, `more-itertools`, `pluggy`, `tomli`, `itsdangerous`, `werkzeug`, `urllib3`, `jinja`, `tqdm`, `httpx`, `starlette`, `attrs`). Post-hoc audit caught a self-hosting `pluggy._callers` runner-lobotomy patch and added dual `pytest`+`unittest` canary screening (`0` fake repairs remaining). Independent CI/referee verification remains open until PR checks complete.",
+    "independent_verification_note": "Producer-run sandbox only: 17 unit/receipt test methods across 6 test modules + all 127 unique real git-stripped open-source commits across 13 upstream repositories (`packaging`, `click`, `more-itertools`, `pluggy`, `tomli`, `itsdangerous`, `werkzeug`, `urllib3`, `jinja`, `tqdm`, `httpx`, `starlette`, `attrs`). Four distinct `AGREEMENT_IS_NOT_EQUIVALENCE` false-repair classes were caught and blocked permanently (`pluggy` runner lobotomy, `more-itertools` `True == 1` bool-as-int punning, `packaging@258202ed7f` cross-module `test_metadata` regression, and `tomli@8b962e1349` `except type:` VM `TypeError` side effect), leaving `0` fake repairs. Independent CI/referee verification remains open until PR checks complete.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -33,12 +33,14 @@
     "progress_evidence_paths": [
       "canonical/swe_kernel/auto_judge_discovery_v1.py",
       "canonical/swe_kernel/interface_action_grammar_v1.py",
+      "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
       "canonical/swe_kernel/causal_swe_repair_v1.py",
       "canonical/swe_kernel/epistemic_computer_agent_v1.py",
       "canonical/tools/epistemic_agent_benchmark_v1.py",
       "canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
       "canonical/tests/test_auto_judge_discovery_v1.py",
       "canonical/tests/test_interface_action_grammar_v1.py",
+      "canonical/tests/test_first_principles_mental_cegis_v1.py",
       "canonical/tests/test_causal_swe_repair_v1.py",
       "canonical/tests/test_epistemic_computer_agent_v1.py",
       "canonical/tests/test_epistemic_agent_benchmark_v1.py",
@@ -50,28 +52,30 @@
     "terminal_achieved": false
   },
   "benchmark_or_family_rank_authority": "zero-leakage producer sandbox measurements on git-stripped real open-source commits and controlled CLI/ARIA rooms; no external benchmark authority claimed",
-  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::existing scan, judge-earning, ignorance-ledger, CLI-grammar, and SWE repair organs were disconnected, lacked automatic judge discovery and W3C ARIA state-diff/refutation, and localized SWE bugs by peeking at git diff lines",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::existing scan, judge-earning, ignorance-ledger, CLI-grammar, and SWE repair organs were disconnected, lacked automatic judge discovery and W3C ARIA state-diff/refutation, localized SWE bugs by peeking at git diff lines, and evaluated patches via slow cold subprocesses over rigid syntax templates without mental simulation",
   "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": {
     "auto_earned_content_judges": 15,
-    "blind_unseen_swe_top5_file_localization": "40/49",
-    "blind_unseen_swe_verified_repairs": "2/49",
+    "blind_unseen_swe_top5_file_localization": "105/111",
+    "blind_unseen_swe_verified_repairs": "3/111",
+    "calibration_swe_verified_repairs": "2/4",
+    "cow_in_memory_test_simulation_speedup": "211.6x",
     "w3c_aria_redesign_schema_transfer": "6/6"
   },
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
-  "causal_blocker": "existing scan, judge-earning, ignorance-ledger, CLI-grammar, and SWE repair organs were disconnected, lacked automatic judge discovery and W3C ARIA state-diff/refutation, and localized SWE bugs by peeking at git diff lines",
+  "causal_blocker": "existing scan, judge-earning, ignorance-ledger, CLI-grammar, and SWE repair organs were disconnected, lacked automatic judge discovery and W3C ARIA state-diff/refutation, localized SWE bugs by peeking at git diff lines, and evaluated patches via slow cold subprocesses over rigid syntax templates without mental simulation",
   "date": "2026-11-24",
-  "expected_parent_change": "the repository gains a single zero-model autonomous computer-use and software-engineering agent that enters unseen OS rooms, CLIs, W3C ARIA GUIs, and git-stripped Python repos without diff peeking, model calls, or saved coordinates",
-  "expected_parent_frontier_change": "shifts the zero-model bottleneck from fault localization and surface fragility (now 81.6% blind Top-5 file localization and 6/6 ARIA redesign transfer) to multi-statement domain/protocol AST synthesis and child-process tracing",
+  "expected_parent_change": "the repository gains a zero-model autonomous computer-use and software-engineering agent with executable shadow mental simulation (`EnvironmentMentalModel` + `211.6x` `os.fork()` CoW `CoWProgramSimulator`), cross-file/cross-process `CausalDataFlowGraph`, language-agnostic `SemanticMeaningIR`, and multi-round Angelic CEGIS across unseen OS rooms, CLIs, W3C ARIA GUIs, and git-stripped Python repos",
+  "expected_parent_frontier_change": "shifts the zero-model bottleneck from fault localization, subprocess verification latency, and syntax-template rigidity (now 94.6% blind Top-5 causal file localization across 111 unseen commits, 211.6x CoW in-memory simulation, and 6/6 ARIA redesign transfer) to multi-statement domain/RFC/protocol synthesis",
   "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
-  "falsification_condition": "falsified if raw coordinates or paths appear in `EpistemicStore.audit()`, if lazy open traps (`bz2.open`, `sqlite3.connect`) are admitted as judges, if self-hosting runner-lobotomy patches pass `verify_runner_canary`, or if unseen non-attrs git-stripped commits score 0 repairs",
+  "falsification_condition": "falsified if raw coordinates or paths appear in `EpistemicStore.audit()`, if lazy open traps (`bz2.open`, `sqlite3.connect`) are admitted as judges, if runner-lobotomy, bool-as-int punning, or cross-module regressive patches pass the 4-layer referee, or if unseen non-attrs git-stripped commits score 0 repairs",
   "generic_repair_from_single_probe": true,
   "governance_change": null,
   "highest_leverage_now": true,
   "honest_limits": [
     "Docker, Harbor, and OSWorld VM desktop runtimes are absent in this container; OSWorld `pyautogui` compilation and W3C ARIA planning are verified against multi-app HTML/DOM environments rather than live OSWorld 2.0/2.1 VMs",
-    "on 49 reproducible unseen real commits across 12 non-attrs repositories, 2/49 (4.1%; 2/24 = 8.3% on Round-1 single-line) verify end-to-end across 61,500+ cross-module tests while 47/49 remain OPEN due to multi-line protocol/API synthesis and subprocess trace boundaries",
+    "across all 111 reproducible unseen real commits in 12 non-attrs repositories (both corpora deduplicated), 105/111 (94.6%) localize the buggy source file in Top-5 and 3/111 (2.7%; 2/37 = 5.4% unseen single-line + 1 virgin general commit `packaging@022ae6c6fe` where V1 solved 0, plus 2/4 `attrs` calibration) verify end-to-end across full + cross-module suites, while 108/111 remain OPEN due to multi-statement RFC/protocol/state-machine domain semantics",
     "pixel-only canvas/WebGL interfaces without DOM or AT-SPI accessibility nodes are not yet bridged",
     "authority NONE, producer sandbox only; independent referee verification OPEN until CI runs"
   ],
@@ -83,27 +87,29 @@
       "OSWORLD_2_1_PARTIAL_GE_81_8"
     ],
     "expected_obligation_discharge_lcb": "0",
-    "expected_obligation_unlock_lcb": "2/49",
-    "interpretation": "Addresses the core zero-model computer-use and software-engineering bottleneck directly: replaces hand-authored 4-judge lists with automatic 15-kind CLI/stdlib judge earning, adds W3C Core-AAM Accessibility Tree planning with `ACCEPTED_INERT` broken-ARIA bypass and OSWorld `pyautogui` compilation (6/6 transfer across redesigned layouts where coordinate replay scores 0/6), and replaces diff-leaking SWE repair (`0/41` unseen) with git-stripped dynamic fault localization (`40/49` Top-5 file hit) and runner-canary-verified causal repair (`2/49` genuine unseen commits verified across 61,500+ tests). No official OSWorld or SWE-bench Pro obligation is claimed discharged.",
+    "expected_obligation_unlock_lcb": "3/111",
+    "interpretation": "Addresses the core zero-model computer-use and software-engineering bottleneck from first principles: automatic 15-kind CLI/stdlib judge earning, W3C Core-AAM Accessibility Tree planning with `ACCEPTED_INERT` broken-ARIA bypass and sub-millisecond `EnvironmentMentalModel` preflight (`6/6` V2 transfer), cross-file/cross-process `CausalDataFlowGraph` (`105/111 = 94.6%` blind unseen Top-5 file localization), language-agnostic `SemanticMeaningIR`, and `211.6x` `os.fork()` CoW in-memory multi-round Angelic CEGIS (`3/111` genuine unseen commits + `2/4` calibration, `0` fake repairs after 4-layer referee). No official OSWorld or SWE-bench Pro obligation is claimed discharged.",
     "open_obligation_ids": [],
     "scope_complete_discharge": false,
     "success_probability_lcb": "0.5",
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "Exp 1: 8/8 valid + 8/8 corrupt decoys caught in 6 probes (3.13s) vs 24 probes (6.54s) upfront-all, 15 kinds earned, 3/3 lazy traps refused; Exp 2: 4/4 unseen CLI warm rooms at 0 `--help` calls vs 0/4 raw path replay; Exp 3: 6/6 cold + 6/6 V2 ARIA redesign transfer vs 0/6 naive ARIA and 0/6 coordinate replay; Exp 4: 40/49 (81.6%) blind unseen Top-5 file localization, 2/49 genuine unseen full-suite repairs (`packaging@b80e6eb0a6` exact human match passing 61,705 tests; `packaging@8af75907bf` passing 61,541 tests) + 1/4 `attrs@3b0378dd66` exact human match, 0 fake repairs after runner canary",
-  "next_step": "extend causal trace collection across child processes/threads (`sitecustomize` trace hook) and add cross-function API/state-transition synthesis to attack the 47/49 localized-but-unrepaired unseen commits",
-  "parent_capability": "scan_and_diff_against_memory_v1 + earn_a_judge_v1 + ignorance_ledger_v1 + the_guide_is_an_action_grammar_v1",
+  "measured_effect": "Exp 1: 8/8 valid + 8/8 corrupt decoys caught in 6 probes (2.8s) vs 24 probes upfront-all, 15 kinds earned, 3/3 lazy traps refused; Exp 2: 4/4 unseen CLI warm rooms at 0 `--help` calls vs 0/4 raw path replay; Exp 3: 6/6 cold + 6/6 V2 ARIA redesign transfer vs 0/6 controls; Exp 4 (all 127 unique commits across 13 repos): 105/111 (94.6%) blind unseen Top-5 causal file localization (30/30 = 100% on virgin general slice), 3/111 genuine unseen full-suite+cross-module repairs (`packaging@b80e6eb0a6`, `packaging@8af75907bf`, and virgin general `packaging@022ae6c6fe`) + 2/4 `attrs` calibration (`3b0378dd66`, `a08bfb90ef`), 1,440,593 mental expression evaluations, 33,605 CoW fork simulations, 0 fake repairs; Exp 5: 4/4 structural leaps live-verified (loop/comprehension/stream IR canonicalization, Python->JS/Rust semantic delta transfer, coupled 2-file CoW CEGIS, shadow destructive CLI/GUI blocking)",
+  "next_step": "extend multi-statement relational/protocol synthesis (state-machine invariants, parser grammar productions, exception message contracts) to attack the 108/111 localized-but-unrepaired unseen commits",
+  "parent_capability": "scan_and_diff_against_memory_v1 + earn_a_judge_v1 + ignorance_ledger_v1 + the_guide_is_an_action_grammar_v1 + incremental_semantic_graph_v1",
   "probe_specific": false,
   "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
   "progress_evidence_paths": [
     "canonical/swe_kernel/auto_judge_discovery_v1.py",
     "canonical/swe_kernel/interface_action_grammar_v1.py",
+    "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
     "canonical/swe_kernel/causal_swe_repair_v1.py",
     "canonical/swe_kernel/epistemic_computer_agent_v1.py",
     "canonical/tools/epistemic_agent_benchmark_v1.py",
     "canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
     "canonical/tests/test_auto_judge_discovery_v1.py",
     "canonical/tests/test_interface_action_grammar_v1.py",
+    "canonical/tests/test_first_principles_mental_cegis_v1.py",
     "canonical/tests/test_causal_swe_repair_v1.py",
     "canonical/tests/test_epistemic_computer_agent_v1.py",
     "canonical/tests/test_epistemic_agent_benchmark_v1.py",
@@ -119,7 +125,7 @@
       "raw `(x, y)` coordinate and DOM XPath persistence (0 saved; replaced by role+slot causal schemas)",
       "tautological `P and not P` guards and runner-lobotomizing `pluggy` edits (deleted by `_is_degenerate_guard_extension` and `verify_runner_canary`)"
     ],
-    "expected_parent_level_state_change": "shifts the zero-model bottleneck from fault localization and surface fragility (now 81.6% blind Top-5 file localization and 6/6 ARIA redesign transfer) to multi-statement domain/protocol AST synthesis and child-process tracing",
+    "expected_parent_level_state_change": "shifts the zero-model bottleneck from fault localization, subprocess verification latency, and syntax-template rigidity (now 94.6% blind Top-5 causal file localization across 111 unseen commits, 211.6x CoW in-memory simulation, and 6/6 ARIA redesign transfer) to multi-statement domain/RFC/protocol synthesis",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "call an external LLM/VLM at runtime (rejected: forbidden `K3` dependency)",
@@ -266,7 +272,7 @@
           "route": "DIFF_HINTED_SINGLE_SITE_SCALAR_SYNTHESIS"
         }
       ],
-      "checked_at_utc": "2026-11-24T19:21:56+00:00",
+      "checked_at_utc": "2026-11-24T23:06:28+00:00",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -306,7 +312,7 @@
       "selected_route": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-24T19:21:56+00:00",
+        "checked_at_utc": "2026-11-24T23:06:28+00:00",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 stdlib runtime and CLI utilities (`tar`, `gzip`, `bzip2`, `xz`)",
@@ -404,9 +410,9 @@
   "route_class": "COMPOSE",
   "route_id": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
   "route_order_walk": {
+    "ADAPT": "adapted repair verification after post-hoc audit exposed self-hosting `pluggy._callers` runner lobotomy, adding dual `pytest`+`unittest` `verify_runner_canary`",
     "BYPASS": "bypassed diff-peeking SWE localization and upfront exhaustive room probing",
     "COMPOSE": "SELECTED: composed `scan_and_diff_against_memory_v1`, `earn_a_judge_v1`, `ignorance_ledger_v1`, and `the_guide_is_an_action_grammar_v1` with automatic judge discovery, W3C ARIA action grammar, and dynamic causal SWE repair",
-    "ADAPT": "adapted repair verification after post-hoc audit exposed self-hosting `pluggy._callers` runner lobotomy, adding dual `pytest`+`unittest` `verify_runner_canary`",
     "INVENT": "invented only the missing bridges: automatic stdlib/CLI judge discovery, W3C ARIA `ACCEPTED_INERT` workflow schema transfer, and git-stripped causal frame repair"
   },
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
@@ -418,8 +424,8 @@
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "truth": {
     "achieved": false,
-    "what_is_not": "SWE-bench Pro or Terminal-Bench 4.0 or live OSWorld 2.0/2.1 VM discharge; multi-line domain/protocol AST synthesis on the remaining 47/49 unseen commits; independent third-party verification",
-    "what_is_real": "zero-model unified agent (`model_calls=0`, `parameters_stored=0`) earning 15 content judges automatically (4x fewer probes goal-directed vs upfront), 0-subprocess warm CLI transfer, 6/6 W3C ARIA redesign transfer with broken-ARIA bypass, 40/49 (81.6%) blind unseen SWE Top-5 file localization, and 2 genuine unseen git-stripped commits verified across 61,500+ upstream tests (plus 1 exact-match `attrs` commit and 0 fake repairs)"
+    "what_is_not": "SWE-bench Pro or Terminal-Bench 4.0 or live OSWorld 2.0/2.1 VM discharge; multi-statement domain/RFC/protocol synthesis on the remaining 108/111 unseen commits; independent third-party verification",
+    "what_is_real": "zero-model unified agent (`model_calls=0`, `parameters_stored=0`) with 4 verified structural leaps: cross-file/cross-process `CausalDataFlowGraph` (`105/111 = 94.6%` blind unseen Top-5 file localization across 12 repos), language-agnostic `SemanticMeaningIR` (`loop == listcomp == map/filter` + Python->JS/Rust semantic delta transfer), `211.6x` `os.fork()` CoW in-memory multi-round Angelic CEGIS + coupled 2-file repair (`3/111` genuine unseen git-stripped commits + `2/4` `attrs` calibration commits, `0` fake repairs after 4-layer referee), and sub-millisecond `EnvironmentMentalModel` shadow simulation on OS/CLI/W3C ARIA surfaces"
   },
   "user_authorized_governance_change": false,
   "v22_prewrite_admission": {
@@ -459,6 +465,6 @@
       "proposal_id": "EPISTEMIC_COMPUTER_AGENT_V1"
     }
   },
-  "verification": "13 unittest assertions across 5 test suites (`test_auto_judge_discovery_v1`, `test_interface_action_grammar_v1`, `test_causal_swe_repair_v1`, `test_epistemic_computer_agent_v1`, `test_epistemic_agent_benchmark_v1`) + `EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json` covering 8 heterogeneous OS rooms, 5 CLI rooms, 6 W3C ARIA V1/V2 app pairs, and 61 git-stripped real open-source commits across 13 repositories",
+  "verification": "17 unittest assertions across 6 test suites (`test_auto_judge_discovery_v1`, `test_interface_action_grammar_v1`, `test_first_principles_mental_cegis_v1`, `test_causal_swe_repair_v1`, `test_epistemic_computer_agent_v1`, `test_epistemic_agent_benchmark_v1`) + `EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json` covering 8 heterogeneous OS rooms, 5 CLI rooms, 6 W3C ARIA V1/V2 app pairs, live 4-Leap verification, and all 127 unique git-stripped real open-source commits across 13 repositories",
   "weakens_existing_guard": false
 }

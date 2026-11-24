@@ -50,10 +50,18 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Mapping, Sequence
 
+from canonical.swe_kernel import first_principles_mental_cegis_v1 as fpm
+from canonical.swe_kernel import incremental_semantic_graph_v1 as isg
+
 SCHEMA = "PROJECT_BRAIN_CAUSAL_SWE_REPAIR_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 
 OPERATOR_FAMILIES: tuple[str, ...] = (
+    "ANGELIC_BRANCH_CEGIS",
+    "ANGELIC_VALUE_CEGIS",
+    "STUN_GUARD_SYNTHESIS",
+    "COUPLED_DATAFLOW_CEGIS",
+    "SEMANTIC_IR_TRANSFER",
     "ITERATOR_MATERIALIZATION",
     "FALSY_NON_NONE_GUARD",
     "MEMBERSHIP_SET_EXTENSION",
@@ -181,6 +189,14 @@ def run_pytest_verdicts(
     """Run pytest (or unittest fallback if pytest absent) and return exact per-test verdicts."""
     py = python_exe or sys.executable
     targets = [target] if isinstance(target, str) else list(target)
+    uses_hyp = any(
+        (worktree / str(t).split("::")[0]).is_file()
+        and "hypothesis" in (worktree / str(t).split("::")[0]).read_text(encoding="utf-8", errors="ignore")
+        for t in targets[:4]
+    )
+    extra_p = [] if uses_hyp else ["-p", "no:hypothesis"]
+    first_p = pathlib.Path(str(targets[0]).split("::")[0])
+    rdir = first_p.parent if first_p.is_absolute() and not str(first_p).startswith(str(worktree)) else worktree
     cmd = [
         py,
         "-m",
@@ -188,10 +204,16 @@ def run_pytest_verdicts(
         *targets,
         "-v",
         "--tb=short",
+        f"--rootdir={rdir}",
         "-p",
         "no:cacheprovider",
+        "-p",
+        "no:xprocess",
+        *extra_p,
         "-o",
         "addopts=",
+        "-W",
+        "default",
     ]
     env = _clean_env(worktree)
     started = time.perf_counter()
@@ -531,9 +553,16 @@ if has_pytest:
     try:
         os.chdir(wt)
         sys.argv = ["pytest"]
+        uses_hyp = any(
+            (pathlib.Path(wt) / str(n).split("::")[0]).is_file()
+            and "hypothesis" in (pathlib.Path(wt) / str(n).split("::")[0]).read_text(encoding="utf-8", errors="ignore")
+            for n in cfg["nodes"][:4]
+        )
+        extra_p = [] if uses_hyp else ["-p", "no:hypothesis"]
         pytest.main(
-            [*cfg["nodes"], "-q", "--no-header", "--tb=short", "-p", "no:cacheprovider",
-             "-o", "addopts="],
+            [*cfg["nodes"], "-q", "--no-header", "--tb=short", f"--rootdir={wt}",
+             "-p", "no:cacheprovider", "-p", "no:xprocess", *extra_p,
+             "-o", "addopts=", "-W", "default"],
             plugins=[_Plugin()],
         )
     finally:
@@ -1462,16 +1491,64 @@ def repair_worktree(
     failing_nodes = baseline["failing"]
     passing_nodes = baseline["passing"]
 
-    # 2. Collect 1-pass dynamic causal trace (zero commit/diff input!)
+    # 2. Build Cross-File & Cross-Process Causal Data-Flow Graph + 1-pass frame trace (zero diff input!)
+    dfg = fpm.collect_causal_dataflow_graph(
+        worktree,
+        failing_nodes,
+        passing_nodes,
+        default_test_file=test_target,
+        pytest_output=baseline.get("output", ""),
+        python_exe=python_exe,
+        timeout_s=min(25.0, max(8.0, budget_s * 0.35)),
+    )
+    dfg_ranked_sites = dfg.rank_causal_sites(len(failing_nodes))
+
     trace_data = collect_causal_trace(
         worktree,
         failing_nodes,
         passing_nodes,
         test_target,
         python_exe=python_exe,
-        timeout_s=min(35.0, max(10.0, budget_s - (time.perf_counter() - started))),
+        timeout_s=min(25.0, max(8.0, budget_s - (time.perf_counter() - started))),
     )
-    ranked_sites = localize_suspicious_sites(trace_data)
+    local_sites = localize_suspicious_sites(trace_data)
+
+    # Interleave cross-file/cross-process DFG sites 1-for-1 with crash-tail local sites so low-score
+    # tail DFG sites never bury `local_sites[0]` past `max_sites`!
+    seen_site_keys: set[tuple[str, int]] = set()
+    ranked_sites: list[dict[str, Any]] = []
+    max_len = max(len(dfg_ranked_sites), len(local_sites))
+    interleaved: list[Mapping[str, Any]] = []
+    for idx_i in range(max_len):
+        if idx_i < len(dfg_ranked_sites):
+            interleaved.append(dfg_ranked_sites[idx_i])
+        if idx_i < len(local_sites):
+            interleaved.append(local_sites[idx_i])
+    for s in interleaved:
+        key = (
+            str(s.get("rel") or s.get("file") or s.get("rel_path")),
+            int(s.get("lineno") if s.get("lineno") is not None else s["line"]),
+        )
+        if key not in seen_site_keys:
+            seen_site_keys.add(key)
+            ranked_sites.append({
+                **s,
+                "rel": key[0],
+                "file": key[0],
+                "rel_path": key[0],
+                "lineno": key[1],
+                "line": key[1],
+                "score": float(s.get("score") if s.get("score") is not None else s.get("ochiai", 0.0)),
+            })
+
+    top_localized_files: list[str] = []
+    for s in ranked_sites:
+        rf = s["rel"]
+        if rf not in top_localized_files:
+            top_localized_files.append(rf)
+            if len(top_localized_files) >= 5:
+                break
+
     if not ranked_sites:
         return {
             "schema": SCHEMA,
@@ -1482,108 +1559,247 @@ def repair_worktree(
             "model_calls": 0,
         }
 
-    # 3. Synthesize candidate patches ranked by causal evidence + memory prior
-    candidates = synthesize_candidates(worktree, trace_data, ranked_sites, memory)
-    if not candidates:
+    # 3. Boot Pre-Warmed CoW Fork Mental Simulator (`0` disk writes) & Run Angelic CEGIS + Demand Synthesis!
+    deadline = started + budget_s
+    sim_verified_patches: list[dict[str, Any]] = []
+    mental_stats = {
+        "mental_simulations": 0,
+        "mental_pruned": 0,
+        "cow_fork_simulations": 0,
+        "angelic_interventions": 0,
+        "cegis_refinements": 0,
+        "cross_process_events": dfg.cross_process_events,
+    }
+
+    structural_cands = synthesize_candidates(worktree, trace_data, ranked_sites, memory)
+
+    with fpm.CoWProgramSimulator(
+        worktree, failing_nodes, passing_nodes, default_test_file=test_target, python_exe=python_exe
+    ) as cow_sim:
+        if dfg_ranked_sites:
+            cegis = fpm.AngelicCEGISSynthesizer(worktree, dfg, cow_sim)
+            cegis_winners = cegis.run_cegis(
+                dfg_ranked_sites,
+                deadline_monotonic=min(deadline, time.perf_counter() + max(8.0, budget_s * 0.45)),
+            )
+            mental_stats["mental_simulations"] = cegis.mental_simulations
+            mental_stats["mental_pruned"] = cegis.mental_pruned
+            mental_stats["angelic_interventions"] = cegis.angelic_interventions_tested
+            mental_stats["cegis_refinements"] = cegis.cegis_refinements
+
+            for cw in cegis_winners:
+                # Map canonical semantic mechanism while preserving specialized labels when exact!
+                fam = cw.mechanism
+                matched_sc = next(
+                    (sc for sc in structural_cands if cw.file_patches == {sc.rel_path: sc.new_source}),
+                    None,
+                )
+                if matched_sc is not None:
+                    fam = matched_sc.family
+                elif "is not None" in cw.description and " is None" not in cw.description.split("->")[0]:
+                    fam = "FALSY_NON_NONE_GUARD"
+                elif "tuple(" in cw.description and "Stream materialization" in cw.description:
+                    fam = "ITERATOR_MATERIALIZATION"
+                elif " in (" in cw.description or " in {" in cw.description or " not in (" in cw.description:
+                    fam = "MEMBERSHIP_SET_EXTENSION"
+                sim_verified_patches.append({
+                    "file_patches": dict(cw.file_patches),
+                    "primary_file": cw.primary_file,
+                    "primary_line": cw.primary_line,
+                    "family": fam,
+                    "mechanism": cw.mechanism,
+                    "description": cw.description,
+                    "abstract_shape": cw.semantic_delta_ir,
+                })
+
+        # Screen supplementary structural/demand candidates in CoW RAM (~2 ms, 0 disk writes!)
+        if cow_sim.ready:
+            for sc in structural_cands[: max(64, max_verifications * 3)]:
+                if time.perf_counter() >= deadline:
+                    break
+                if any(
+                    p["file_patches"] == {sc.rel_path: sc.new_source}
+                    for p in sim_verified_patches
+                ):
+                    continue
+                sres = cow_sim.simulate_patch({sc.rel_path: sc.new_source})
+                if sres.get("ok"):
+                    sim_verified_patches.append({
+                        "file_patches": {sc.rel_path: sc.new_source},
+                        "primary_file": sc.rel_path,
+                        "primary_line": sc.lineno,
+                        "family": sc.family,
+                        "mechanism": sc.family,
+                        "description": sc.description,
+                        "abstract_shape": sc.abstract_shape,
+                    })
+            # Import-time decorator/metaclass fallback (`@attr.s`, `@dataclass`, class-body descriptors
+            # execute at import time before `os.fork()`): always reserve tail slots for top-6 structural
+            # candidates in case earlier CoW-screened candidates regress on the full suite!
+            for sc in structural_cands[:6]:
+                if not any(p["file_patches"] == {sc.rel_path: sc.new_source} for p in sim_verified_patches):
+                    sim_verified_patches.append({
+                        "file_patches": {sc.rel_path: sc.new_source},
+                        "primary_file": sc.rel_path,
+                        "primary_line": sc.lineno,
+                        "family": sc.family,
+                        "mechanism": sc.family,
+                        "description": sc.description,
+                        "abstract_shape": sc.abstract_shape,
+                    })
+        else:
+            for sc in structural_cands[:max_verifications]:
+                sim_verified_patches.append({
+                    "file_patches": {sc.rel_path: sc.new_source},
+                    "primary_file": sc.rel_path,
+                    "primary_line": sc.lineno,
+                    "family": sc.family,
+                    "mechanism": sc.family,
+                    "description": sc.description,
+                    "abstract_shape": sc.abstract_shape,
+                })
+        mental_stats["cow_fork_simulations"] = cow_sim.simulations_count
+
+    total_generated = mental_stats["mental_simulations"] + len(structural_cands)
+    if not sim_verified_patches and total_generated == 0:
         return {
             "schema": SCHEMA,
             "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
             "pass": False,
             "top_localized_sites": ranked_sites[:5],
+            "mental_model_stats": mental_stats,
             "seconds": round(time.perf_counter() - started, 4),
             "model_calls": 0,
         }
 
-    # 4. Verify candidates: fast failing-test gate first, then FULL unmodified test_target gate!
+    # 4. Cold Clean-Process Full-Suite Referee + Runner Canary (`0` trust in simulation alone!)
     originals: dict[str, str] = {}
     attempts: list[dict[str, Any]] = []
 
-    for idx, cand in enumerate(candidates[:max_verifications]):
+    for idx, item in enumerate(sim_verified_patches[:max_verifications]):
         if time.perf_counter() - started > budget_s:
             break
-        target_file = worktree / cand.rel_path
-        if cand.rel_path not in originals:
-            originals[cand.rel_path] = target_file.read_text(encoding="utf-8")
+        file_patches: Mapping[str, str] = item["file_patches"]
+        for rel_p in file_patches:
+            if rel_p not in originals:
+                originals[rel_p] = (worktree / rel_p).read_text(encoding="utf-8")
 
         t0 = time.perf_counter()
-        target_file.write_text(cand.new_source, encoding="utf-8")
+        for rel_p, new_src in file_patches.items():
+            (worktree / rel_p).write_text(new_src, encoding="utf-8")
         try:
-            # Fast gate: run the failing test(s) first!
-            fast_target = [n for n in failing_nodes if "::" in n] or [test_target]
-            fast = run_pytest_verdicts(
-                worktree, fast_target, python_exe=python_exe, timeout_s=20.0
-            )
-            if fast["failing"] or not fast["passing"]:
-                memory.record_outcome(
-                    cand.family,
-                    verified=False,
-                    caused_regression=False,
-                    elapsed_s=time.perf_counter() - t0,
-                )
-                attempts.append({
-                    "rank": idx + 1,
-                    "family": cand.family,
-                    "site": f"{cand.rel_path}:{cand.lineno}",
-                    "description": cand.description,
-                    "verdict": "FAILING_TEST_STILL_RED",
-                })
-                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
-                continue
-
-            # Full gate: run the ENTIRE test_target file and require 0 failures and >= baseline passes!
             full = run_pytest_verdicts(
                 worktree, test_target, python_exe=python_exe, timeout_s=40.0
             )
             regressed = bool(full["failing"]) or len(full["passing"]) < len(passing_nodes)
             if regressed:
                 memory.record_outcome(
-                    cand.family,
+                    item["family"],
                     verified=False,
                     caused_regression=True,
                     elapsed_s=time.perf_counter() - t0,
                 )
                 attempts.append({
                     "rank": idx + 1,
-                    "family": cand.family,
-                    "site": f"{cand.rel_path}:{cand.lineno}",
-                    "description": cand.description,
+                    "family": item["family"],
+                    "site": f"{item['primary_file']}:{item['primary_line']}",
+                    "description": item["description"],
                     "verdict": "REGRESSED_PASSING_TESTS",
                 })
-                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+                for rel_p in file_patches:
+                    (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
                 continue
 
-            # Runner-integrity victim check (`earn_a_judge` decoy invariant): ensure the patch
-            # did NOT lobotomize self-hosting test harnesses (`pluggy`/`pytest`) into passing false asserts!
             if not verify_runner_canary(worktree, python_exe=python_exe):
                 memory.record_outcome(
-                    cand.family,
+                    item["family"],
                     verified=False,
                     caused_regression=True,
                     elapsed_s=time.perf_counter() - t0,
                 )
                 attempts.append({
                     "rank": idx + 1,
-                    "family": cand.family,
-                    "site": f"{cand.rel_path}:{cand.lineno}",
-                    "description": cand.description,
+                    "family": item["family"],
+                    "site": f"{item['primary_file']}:{item['primary_line']}",
+                    "description": item["description"],
                     "verdict": "REFUSED__RUNNER_CANARY_LOBOTOMIZED",
                 })
-                target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+                for rel_p in file_patches:
+                    (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
                 continue
 
-            # VERIFIED! Keep the verified edit in `worktree` and record operator learning!
+            # Cross-module reverse-import impacted test referee (`IncrementalSemanticGraph` + `src/`-layout import scan)!
+            base_test_rel = test_target.split("::")[0]
+            if budget_s - (time.perf_counter() - started) > 8.0:
+                imp = isg.query_impacted_tests(worktree, ".", list(file_patches.keys()))
+                cand_tests: list[str] = []
+                if imp.get("exact_hit"):
+                    cand_tests.extend(imp.get("impacted_tests") or [])
+                # Also scan `src/`-stripped dotted module names (`src/pkg/utils.py` -> `pkg.utils`) across test files!
+                mod_tokens: list[str] = []
+                for rp in file_patches:
+                    norm_m = rp.removeprefix("src/").removesuffix(".py").replace("/", ".")
+                    mod_tokens.append(norm_m)
+                    if "." in norm_m:
+                        pkg_p, leaf_m = norm_m.rsplit(".", 1)
+                        mod_tokens.append(f"from {pkg_p} import {leaf_m}")
+                for tf_rel in imp.get("impacted_tests") or []:
+                    if tf_rel == base_test_rel or tf_rel in cand_tests:
+                        continue
+                    tf_p = worktree / tf_rel
+                    if tf_p.is_file() and tf_p.stat().st_size < 90_000:
+                        txt_t = tf_p.read_text(encoding="utf-8", errors="ignore")
+                        if any(tok in txt_t for tok in mod_tokens):
+                            cand_tests.append(tf_rel)
+                sibling_tests = [
+                    t for t in cand_tests
+                    if t != base_test_rel and (worktree / t).is_file() and (worktree / t).stat().st_size < 90_000
+                ][:4]
+                if sibling_tests:
+                    sib_res = run_pytest_verdicts(
+                        worktree, sibling_tests, python_exe=python_exe, timeout_s=18.0
+                    )
+                    sib_fails = list(sib_res.get("failing") or [])
+                    if sib_fails:
+                        # Check whether those failures were pre-existing on unpatched worktree
+                        for rel_p in file_patches:
+                            (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
+                        pre_sib = run_pytest_verdicts(
+                            worktree, sib_fails[:6], python_exe=python_exe, timeout_s=12.0
+                        )
+                        pre_set = set(pre_sib.get("failing") or [])
+                        new_sib_regressions = [f for f in sib_fails if f not in pre_set]
+                        if new_sib_regressions:
+                            memory.record_outcome(
+                                item["family"],
+                                verified=False,
+                                caused_regression=True,
+                                elapsed_s=time.perf_counter() - t0,
+                            )
+                            attempts.append({
+                                "rank": idx + 1,
+                                "family": item["family"],
+                                "site": f"{item['primary_file']}:{item['primary_line']}",
+                                "description": item["description"],
+                                "verdict": "REGRESSED_CROSS_MODULE_IMPACTED_TESTS",
+                                "cross_module_regressions": new_sib_regressions[:4],
+                            })
+                            continue
+                        for rel_p, new_src in file_patches.items():
+                            (worktree / rel_p).write_text(new_src, encoding="utf-8")
+
             memory.record_outcome(
-                cand.family,
+                item["family"],
                 verified=True,
                 caused_regression=False,
                 elapsed_s=time.perf_counter() - t0,
-                abstract_shape=cand.abstract_shape,
+                abstract_shape=item["abstract_shape"],
             )
             attempts.append({
                 "rank": idx + 1,
-                "family": cand.family,
-                "site": f"{cand.rel_path}:{cand.lineno}",
-                "description": cand.description,
+                "family": item["family"],
+                "site": f"{item['primary_file']}:{item['primary_line']}",
+                "description": item["description"],
                 "verdict": "VERIFIED_FULL_SUITE_GREEN",
             })
             return {
@@ -1592,28 +1808,33 @@ def repair_worktree(
                 "status": "PASS__VERIFIED_REPAIR",
                 "pass": True,
                 "winning_rank": idx + 1,
-                "winning_family": cand.family,
-                "repaired_file": cand.rel_path,
-                "repaired_line": cand.lineno,
-                "description": cand.description,
-                "abstract_shape": cand.abstract_shape,
+                "winning_family": item["family"],
+                "winning_mechanism": item["mechanism"],
+                "repaired_file": item["primary_file"],
+                "repaired_files": sorted(file_patches.keys()),
+                "repaired_line": item["primary_line"],
+                "description": item["description"],
+                "abstract_shape": item["abstract_shape"],
+                "semantic_delta_ir": item["abstract_shape"],
                 "tests_passing_before": len(passing_nodes),
                 "tests_failing_before": len(failing_nodes),
                 "tests_passing_after": len(full["passing"]),
                 "tests_failing_after": 0,
-                "candidates_generated": len(candidates),
+                "candidates_generated": total_generated,
                 "verifications_run": idx + 1,
+                "mental_model_stats": mental_stats,
                 "top_localized_sites": ranked_sites[:5],
+                "top_localized_files": top_localized_files,
                 "attempts": attempts,
                 "seconds": round(time.perf_counter() - started, 4),
                 "model_calls": 0,
                 "parameters_stored": 0,
             }
         except Exception:
-            target_file.write_text(originals[cand.rel_path], encoding="utf-8")
+            for rel_p in file_patches:
+                (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
             raise
 
-    # Restore clean worktree if nothing verified
     for rel_path, orig_src in originals.items():
         (worktree / rel_path).write_text(orig_src, encoding="utf-8")
 
@@ -1622,9 +1843,11 @@ def repair_worktree(
         "authority": AUTHORITY,
         "status": "OPEN__NO_CANDIDATE_VERIFIED",
         "pass": False,
-        "candidates_generated": len(candidates),
+        "candidates_generated": total_generated,
         "verifications_run": len(attempts),
+        "mental_model_stats": mental_stats,
         "top_localized_sites": ranked_sites[:5],
+        "top_localized_files": top_localized_files,
         "attempts": attempts[:10],
         "seconds": round(time.perf_counter() - started, 4),
         "model_calls": 0,
