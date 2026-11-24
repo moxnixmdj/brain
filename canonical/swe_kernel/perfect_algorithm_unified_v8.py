@@ -89,6 +89,11 @@ try:
 except Exception:
     HAS_CONCEPTS = False
 try:
+    from canonical.swe_kernel.adaptive_constant_concept_bridge_v1 import synthesize_adaptive as _synth_adaptive
+    HAS_ADAPTIVE = True
+except Exception:
+    HAS_ADAPTIVE = False
+try:
     from canonical.runtime.jit_knowledge_v1 import resolve as _jit_resolve
     from canonical.runtime.local_guide_v1 import query as _local_guide
     HAS_FETCH = True
@@ -192,6 +197,11 @@ class PerfectAlgorithmUnifiedV8:
         return {"status": "REFUSED__NO_DEEP_ENGINE", "model_calls": 0}
 
     def invent(self, spec: Mapping[str, Any]) -> dict[str, Any]:
+        if HAS_ADAPTIVE:
+            try:
+                return _synth_adaptive(spec, max_depth=4)
+            except Exception:
+                pass
         if HAS_CONCEPTS:
             try:
                 return _synth_concepts(spec, max_depth=3)

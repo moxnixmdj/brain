@@ -95,10 +95,16 @@ def load_concepts(library_path: pathlib.Path | None = None) -> list[dict[str, An
     """Load admitted concepts from library; fallback to curated compressive set if empty."""
     if HAS_CONCEPT_LIB:
         try:
-            lib = _ConceptLib(path=library_path) if library_path else _ConceptLib()
-            concepts = lib.list_concepts()  # type: ignore
-            if concepts:
-                return concepts  # type: ignore
+            lib = _ConceptLib(state_path=library_path) if library_path else _ConceptLib()
+            # ConceptEntry -> dict with ast/prior/type for G_t
+            entries = lib.concepts()  # type: ignore — live ConceptEntry list
+            if entries:
+                out=[]
+                for e in entries:
+                    # e.body_expr already anti-unified _v0 form; map to G_t token
+                    out.append({"id": e.concept_id, "ast": e.body_expr or "", "template": e.body_expr or "", "prior": float(getattr(e, 'log_prior', lambda: -1.0)() if callable(getattr(e,'log_prior',None)) else getattr(e, 'mdl_gain_bytes', -1.0)) / -100.0 if hasattr(e,'mdl_gain_bytes') else -0.5, "log_prior": float(getattr(e,'log_prior', lambda: -1.0)() if callable(getattr(e,'log_prior',None)) else -0.5), "type": getattr(e, 'domain_kind', 'int->int'), "desc": getattr(e, 'family',''), "nodes": 5})
+                if out:
+                    return out
         except Exception:
             pass
     return list(_FALLBACK_CONCEPTS)
