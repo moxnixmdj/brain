@@ -121,7 +121,7 @@ def test_a_kind_met_in_one_place_is_known_in_a_place_never_seen(world):
         shutil.rmtree(other, ignore_errors=True)
 
 
-def test_an_unaccepted_kind_in_a_new_directory_is_unknown(world):
+def test_an_unaccepted_kind_in_a_new_directory_is_unread(world):
     memory = S.Memory()
     memory.learn(S.scan(world))
     other = tempfile.mkdtemp(prefix="brain-scan-new2-")
@@ -129,8 +129,49 @@ def test_an_unaccepted_kind_in_a_new_directory_is_unknown(world):
         (pathlib.Path(other) / "mystery.xyz").write_bytes(b"\xff\xfe\x00\x01\x02")
         item = S.scan(other)[0]
         verdict, note = memory.judge(item)
-        assert verdict == S.UNKNOWN
+        assert verdict == S.UNREAD
         assert "no declared validator" in note
+    finally:
+        shutil.rmtree(other, ignore_errors=True)
+
+
+def test_a_readable_file_is_understood_not_unknown(world):
+    """THE ROUND-10 DEFECT, FOUND BY AUDITING ITS OWN OUTPUT.
+
+    Round 10 reported 13 UNKNOWN files in `intake/`, and every one of them was accepted by
+    `utf8_text` -- they were unknown only because memory had never recorded that exact
+    SUBSET of validators. That is memory's bookkeeping, not the file's problem, and it
+    aimed the next round's learning at markdown that the machine could already read.
+    A file some declared validator reads is UNDERSTOOD, and it is not queued for learning.
+    """
+    memory = S.Memory()
+    memory.learn(S.scan(world))                     # has json, python, png, utf8
+    other = tempfile.mkdtemp(prefix="brain-understood-")
+    try:
+        # utf8_text is already known as a KIND but this exact subset is new
+        (pathlib.Path(other) / "fresh.md").write_bytes(b"# a heading\n")
+        item = S.scan(other)[0]
+        assert item.sig, "expected some validator to read this file"
+        verdict, note = memory.judge(item)
+        assert verdict in (S.KNOWN, S.UNDERSTOOD), note
+        assert verdict != S.UNREAD
+        if verdict == S.UNDERSTOOD:
+            assert "the kind is not" in note
+    finally:
+        shutil.rmtree(other, ignore_errors=True)
+
+
+def test_only_unread_files_reach_the_learning_queue(world):
+    """A queue that asks to learn what is already readable spends the machine on nothing."""
+    memory = S.Memory()
+    memory.learn(S.scan(world))
+    other = tempfile.mkdtemp(prefix="brain-queue-")
+    try:
+        (pathlib.Path(other) / "readable.md").write_bytes(b"# heading\n")
+        (pathlib.Path(other) / "opaque.dat").write_bytes(b"\xff\x00\xfe\x01")
+        out = S.census(other, memory=memory)
+        assert out["understood"] + out["known"] + out["unread"] == out["files"]
+        assert out["learn_next"] == ["opaque.dat"], out["learn_next"]
     finally:
         shutil.rmtree(other, ignore_errors=True)
 
@@ -151,7 +192,7 @@ def test_an_absence_is_never_learned_as_a_kind(world):
         item = S.scan(other)[0]
         assert item.sig == (), "this file was expected to be unreadable"
         verdict, _ = memory.judge(item)
-        assert verdict == S.UNKNOWN, "an absence was learned as a kind"
+        assert verdict == S.UNREAD, "an absence was learned as a kind"
         assert () not in memory.seen, "the empty signature entered memory"
         assert memory.unread >= 1
     finally:
