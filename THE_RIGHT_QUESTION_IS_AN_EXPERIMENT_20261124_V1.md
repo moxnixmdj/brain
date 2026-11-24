@@ -36,14 +36,19 @@ Three corpora, reported **separately**, because they are not interchangeable kin
 |---|---:|---:|---:|---:|---:|---:|---:|
 | `--help` of the fleet | 37 | 94,098 | 336 | 28 | **16** | 57.1% | 4.76% |
 | Python stdlib docstrings | 6 | 76,760 | 1,179 | **0** | 0 | — | 0% |
-| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **38** | 7.8% | 0.58% |
+| GNU manuals (texinfo) | 285 | 470,392 | 6,595 | 496 | **107** | 21.9% | 1.62% |
 
-Transfer to a **third** room, never seen: 37 tested, **37 admitted**, 0 failed.
+Transfer to a **third** room, never seen: 57 tested, **51 admitted, 6 refused**. The six are the
+honest part: a relation that held in two rooms and failed in a third was about the rooms.
 
 Operations, not sentences, are the honest denominator: **161 distinct (program, relation) pairs
-are named in the manuals, and 37 are admitted — 23.0% coverage.** `bzip2:compresses`,
-`gzip:decompresses`, `tar:archives` and `cut:prints` are among the unadmitted, each for a reason
-the receipt records.
+are named in the manuals, and 43 are admitted — 26.7% coverage.**
+
+**The one change that moved the number.** 152 claims were refused `NO_PRODUCER_FOR_KIND`, and all
+152 named **no object at all** — `cat normally reads and writes in binary mode` says what cat
+does and leaves the object implicit. Guessing the object from the sentence is the wrong move;
+reading it from the **program's own usage line** is the right one, and it is the same reading the
+flag already gets. Admitted went 38 → 107 and claim yield 7.8% → 21.9% on that single change.
 
 **Why the stdlib corpus is zero, and why that is a finding rather than a failure.** A docstring is
 prose about a *function*. The extractor requires a program the machine has and a relation word
@@ -66,12 +71,12 @@ environment knowing nothing."**
 - Prose **does** compile to an executable witness, and the witness is strict enough to refuse
   161 claims as `CLAIM_IS_FALSE` — including `sort reverses the lines`, `gzip grows the size of a
   file`, and `cat sorts the lines of a file`. Wrong prose comes back wrong.
-- The admitted relations are **content-invariant**: 37 of 37 held on a third room with different
-  content and a different name.
+- The admitted relations are **content-invariant**: 51 of 57 held on a third room with different
+  content and a different name. The six that did not are reported, not averaged away.
 
 ### What is false
 
-- **"Prose is knowledge at scale."** 0.58% of prose sentences become an admitted relation. That
+- **"Prose is knowledge at scale."** 1.62% of prose sentences become an admitted relation. That
   is not because the extractor is weak — 7.5% of sentences even name a program-and-relation —
   but because a manual is mostly *options, portability notes and edge cases*, and an option is a
   claim about a flag, not about the program. `--help` already covers that dialect (57% claim
@@ -124,18 +129,20 @@ Each was a wrong admission or a wrong refusal, and each is held by a test in
 
 ## 4. The single next bottleneck
 
-**The room can make 14 kinds of object; the manuals name 161 operations.** `NO_PRODUCER_FOR_KIND`
-accounts for 155 refusals — the largest single reason after `CLAIM_IS_FALSE`. A claim about a
-file system, a device, a tape or a stream cannot be witnessed because the room cannot make one.
+**The relation is a coarsening of the sentence, and the coarsening is where the value is lost.**
+`ls lists each directory's contents alphabetically` is stored as `ls lists directory`: the
+adverb is gone, so the store can open the door and cannot state the rule. 102 claims are refused
+`RELATION_KIND_MISMATCH` and 33 `WITNESS_IGNORES_THE_OBJECT` — both are the same disease seen
+from two sides, a claim whose object or operation the closed vocabulary cannot hold.
 
-The minimal fix is not more kinds. It is to **derive the object from the claim's own noun**, the
-way the flag is already derived from the program's own help: the room reads what kind of thing
-the sentence is about and produces that, instead of a fixed table. That is the same move this
-round made twice — for the flag and for the archive format — and it is the next one to make.
+The minimal next move is not more relations. It is to **store the qualifier as a second,
+optional witness**: the relation stays the door, and a qualifier (`alphabetically`) becomes a
+predicate the room can test on the same object (`sort -c` on the listing). A qualifier that no
+read-only sensor can test is not stored, and the receipt says so.
 
-**Rejected instead:** adding kinds by hand (a table that grows with every corpus), a learned
-object model (a parameter that memorises world facts, which §2 forbids), and asking the user
-(never).
+**Rejected instead:** adding relations by hand (a vocabulary that grows with every corpus), a
+learned qualifier model (a parameter that memorises world facts, which §2 forbids), and asking
+the user (never).
 
 ---
 
@@ -144,10 +151,12 @@ object model (a parameter that memorises world facts, which §2 forbids), and as
 - Not a benchmark. One machine, 37 CLI programs, zero GUI, zero network at run time.
 - Not a claim that prose is mostly checkable. The yield **is** the measurement, and it is small.
 - Not a proof. A witness separated one wrong version, was false of one null program, and repeated
-  on two more rooms. A fourth room may refuse it.
+  on two more rooms; 6 of 57 were refused by a third. A fourth room may refuse the rest.
 - Not a capability. A stored relation is external knowledge, labelled with its source and
   re-verified at use. `model_calls: 0`, `parameters: 0`, `spend_usd: 0`.
 
 Receipt: `canonical/verification/THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.json`.
+Tests: `canonical/tests/test_the_right_question_is_an_experiment_v1.py` — 43 cases, each a defect
+above; `canonical/tests/test_perfect_algorithm_v1.py` still passes (23).
 Prose corpus: fetched from the upstream manuals by `--fetch-prose`, cached machine-locally, never
 committed; the receipt records each tarball's sha256.

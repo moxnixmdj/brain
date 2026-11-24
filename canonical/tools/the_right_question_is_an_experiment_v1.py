@@ -1983,9 +1983,16 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
                 break
             owner = _document_owner(name)
             programs = [owner] if owner else []
-            default_kind = _default_kind_from_help(text) if name.startswith("help:") else ""
+            # A MANUAL RARELY NAMES THE OBJECT. `cat normally reads and writes in binary mode`
+            # says what cat does and leaves the object implicit, and 152 claims were refused with
+            # NO_PRODUCER_FOR_KIND because the sentence named no kind at all. The object is not
+            # guessed from the sentence: it is read from the PROGRAM'S OWN usage line, which is
+            # the same reading the flag already gets.
+            program_help = text if name.startswith("help:") else (
+                _help_text(owner) if owner else "")
+            default_kind = _default_kind_from_help(program_help)
             compiled = compile_claims(text, actions=programs, programs=programs,
-                                      help_text=text if name.startswith("help:") else "",
+                                      help_text=program_help,
                                       default_kind=default_kind, subject=owner)
             for claim in compiled["claims_list"]:
                 operations.add((str(claim.get("program")), str(claim.get("relation"))))

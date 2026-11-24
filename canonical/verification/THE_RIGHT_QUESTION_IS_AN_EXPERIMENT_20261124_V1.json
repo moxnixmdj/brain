@@ -1,8 +1,8 @@
 {
-  "admitted": 54,
+  "admitted": 123,
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
   "bytes": 641250,
-  "claim_yield": 0.104651,
+  "claim_yield": 0.238372,
   "claims": 524,
   "corpora": {
     "help": {
@@ -18,14 +18,14 @@
       "unique_claims": 28
     },
     "prose": {
-      "admitted": 38,
+      "admitted": 107,
       "bytes": 470392,
-      "claim_yield": 0.077869,
+      "claim_yield": 0.219262,
       "claims": 496,
       "documents": 285,
-      "false_claims": 161,
-      "prose_yield": 0.005762,
-      "refused": 289,
+      "false_claims": 101,
+      "prose_yield": 0.016224,
+      "refused": 280,
       "sentences": 6595,
       "unique_claims": 488
     },
@@ -51,19 +51,19 @@
   },
   "date": "2026-11-24",
   "documents": 328,
-  "false_claims": 167,
+  "false_claims": 107,
   "gate_passes": {
-    "IS_FALSE_OF_A_NULL_PROGRAM": 54,
-    "NAMES_AN_OBJECT_KIND": 54,
-    "NAMES_AN_OBSERVABLE": 54,
-    "NAMES_A_PROGRAM": 54,
-    "OBSERVES": 54,
-    "REPEATS_ON_A_SECOND_ROOM": 54,
-    "SEPARATES_A_WRONG_VERSION": 54
+    "IS_FALSE_OF_A_NULL_PROGRAM": 123,
+    "NAMES_AN_OBJECT_KIND": 123,
+    "NAMES_AN_OBSERVABLE": 123,
+    "NAMES_A_PROGRAM": 123,
+    "OBSERVES": 123,
+    "REPEATS_ON_A_SECOND_ROOM": 123,
+    "SEPARATES_A_WRONG_VERSION": 123
   },
   "operations": {
-    "admitted": 37,
-    "coverage": 0.229814,
+    "admitted": 43,
+    "coverage": 0.267081,
     "named": 161,
     "unadmitted": [
       "arch:prints",
@@ -93,7 +93,6 @@
       "dircolors:prints",
       "dirname:prints",
       "du:counts",
-      "du:prints",
       "env:checks",
       "env:prints",
       "env:runs",
@@ -125,21 +124,22 @@
       "mv:removes",
       "nice:prints",
       "nice:runs",
-      "nl:counts"
+      "nl:counts",
+      "nohup:creates"
     ]
   },
   "prose_corpus_present": true,
-  "prose_yield": 0.006658,
+  "prose_yield": 0.015166,
   "reasons": {
-    "CLAIM_IS_FALSE": 167,
+    "CLAIM_IS_FALSE": 107,
     "CONTENT_DEPENDENT": 1,
-    "NO_PRODUCER_FOR_KIND": 155,
+    "NO_PRODUCER_FOR_KIND": 76,
     "NO_PROGRAM_ON_THIS_MACHINE": 2,
-    "RELATION_KIND_MISMATCH": 91,
-    "WITNESS_IGNORES_THE_OBJECT": 25,
+    "RELATION_KIND_MISMATCH": 102,
+    "WITNESS_IGNORES_THE_OBJECT": 33,
     "WITNESS_IS_TRUE_OF_A_NULL_PROGRAM": 2
   },
-  "refused": 295,
+  "refused": 286,
   "rows": [
     {
       "admitted": 1,
@@ -165,7 +165,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.076,
+      "seconds": 0.079,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -179,7 +179,7 @@
       "relations": [
         "rel-d0de5794090ceaa6"
       ],
-      "seconds": 0.015,
+      "seconds": 0.022,
       "sentences": 18,
       "unique_claims": 1
     },
@@ -193,7 +193,7 @@
       "relations": [
         "rel-7541f71ab6a262c6"
       ],
-      "seconds": 0.016,
+      "seconds": 0.014,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -205,7 +205,7 @@
       "document": "help:sed",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -217,7 +217,7 @@
       "document": "help:jq",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -253,7 +253,7 @@
       "document": "help:find",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -267,7 +267,7 @@
       "relations": [
         "rel-68d1566b0c566040"
       ],
-      "seconds": 0.02,
+      "seconds": 0.024,
       "sentences": 12,
       "unique_claims": 1
     },
@@ -282,7 +282,7 @@
         "rel-556ab55b451a0572",
         "rel-1efb1338bbc19f28"
       ],
-      "seconds": 0.029,
+      "seconds": 0.036,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -294,7 +294,7 @@
       "document": "help:cut",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.008,
       "sentences": 12,
       "unique_claims": 1
     },
@@ -318,7 +318,7 @@
       "document": "help:comm",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.016,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -330,7 +330,7 @@
       "document": "help:join",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.007,
       "sentences": 20,
       "unique_claims": 0
     },
@@ -344,7 +344,7 @@
       "relations": [
         "rel-1a5a7f765be180e9"
       ],
-      "seconds": 0.015,
+      "seconds": 0.014,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -434,7 +434,7 @@
       "relations": [
         "rel-e8989538be6f5260"
       ],
-      "seconds": 0.013,
+      "seconds": 0.014,
       "sentences": 9,
       "unique_claims": 1
     },
@@ -448,7 +448,7 @@
       "relations": [
         "rel-d41b3408a0a97d12"
       ],
-      "seconds": 0.017,
+      "seconds": 0.014,
       "sentences": 9,
       "unique_claims": 1
     },
@@ -474,7 +474,7 @@
       "relations": [
         "rel-2f44165f93645d00"
       ],
-      "seconds": 0.022,
+      "seconds": 0.016,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -536,7 +536,7 @@
       "relations": [
         "rel-ea8f7f6e56321eb6"
       ],
-      "seconds": 0.019,
+      "seconds": 0.027,
       "sentences": 7,
       "unique_claims": 2
     },
@@ -550,7 +550,7 @@
       "relations": [
         "rel-0d5c2219c1db403c"
       ],
-      "seconds": 0.028,
+      "seconds": 0.026,
       "sentences": 27,
       "unique_claims": 1
     },
@@ -562,7 +562,7 @@
       "document": "help:zip",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.015,
       "sentences": 3,
       "unique_claims": 1
     },
@@ -586,7 +586,7 @@
       "document": "help:xz",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -600,7 +600,7 @@
       "relations": [
         "rel-08b48782249e5353"
       ],
-      "seconds": 0.034,
+      "seconds": 0.046,
       "sentences": 6,
       "unique_claims": 3
     },
@@ -612,7 +612,7 @@
       "document": "help:ar",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.007,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -624,7 +624,7 @@
       "document": "stdlib:statistics",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.045,
+      "seconds": 0.05,
       "sentences": 317,
       "unique_claims": 0
     },
@@ -636,7 +636,7 @@
       "document": "stdlib:textwrap",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.015,
       "sentences": 83,
       "unique_claims": 0
     },
@@ -648,7 +648,7 @@
       "document": "stdlib:difflib",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.064,
+      "seconds": 0.066,
       "sentences": 416,
       "unique_claims": 0
     },
@@ -701,28 +701,31 @@
       "unique_claims": 0
     },
     {
-      "admitted": 1,
+      "admitted": 2,
       "bytes": 563,
       "claims": 3,
       "corpus": "prose",
       "document": "texi:cat",
       "false_claims": 1,
       "relations": [
+        "rel-904a3ca4e185bc80",
         "rel-c3a3d153ccf52663"
       ],
-      "seconds": 0.019,
+      "seconds": 0.032,
       "sentences": 9,
       "unique_claims": 3
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 671,
       "claims": 2,
       "corpus": "prose",
       "document": "texi:tac",
       "false_claims": 0,
-      "relations": [],
-      "seconds": 0.003,
+      "relations": [
+        "rel-1d20defa038e494f"
+      ],
+      "seconds": 0.016,
       "sentences": 10,
       "unique_claims": 2
     },
@@ -732,11 +735,11 @@
       "claims": 2,
       "corpus": "prose",
       "document": "texi:nl",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [
         "rel-211187b848dfa5fb"
       ],
-      "seconds": 0.019,
+      "seconds": 0.026,
       "sentences": 34,
       "unique_claims": 2
     },
@@ -752,7 +755,7 @@
         "rel-d07448fcb1fe8f26",
         "rel-0237e59eed50840b"
       ],
-      "seconds": 0.093,
+      "seconds": 0.135,
       "sentences": 58,
       "unique_claims": 7
     },
@@ -774,9 +777,9 @@
       "claims": 1,
       "corpus": "prose",
       "document": "texi:base64",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.018,
       "sentences": 10,
       "unique_claims": 1
     },
@@ -788,7 +791,7 @@
       "document": "texi:basenc",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -814,7 +817,7 @@
       "relations": [
         "rel-da1c3da0650b0e09"
       ],
-      "seconds": 0.017,
+      "seconds": 0.018,
       "sentences": 21,
       "unique_claims": 1
     },
@@ -824,11 +827,11 @@
       "claims": 2,
       "corpus": "prose",
       "document": "texi:fold",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [
         "rel-fd9b06db43e5556a"
       ],
-      "seconds": 0.015,
+      "seconds": 0.023,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -842,7 +845,7 @@
       "relations": [
         "rel-2bcdbbd0d6f4e9b0"
       ],
-      "seconds": 0.015,
+      "seconds": 0.017,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -856,7 +859,7 @@
       "relations": [
         "rel-f21f261e4f35a46e"
       ],
-      "seconds": 0.022,
+      "seconds": 0.023,
       "sentences": 29,
       "unique_claims": 2
     },
@@ -868,7 +871,7 @@
       "document": "texi:split",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.016,
       "sentences": 15,
       "unique_claims": 3
     },
@@ -880,7 +883,7 @@
       "document": "texi:csplit",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.011,
       "sentences": 19,
       "unique_claims": 2
     },
@@ -896,7 +899,7 @@
         "rel-556ab55b451a0572",
         "rel-1efb1338bbc19f28"
       ],
-      "seconds": 0.079,
+      "seconds": 0.129,
       "sentences": 23,
       "unique_claims": 8
     },
@@ -910,7 +913,7 @@
       "relations": [
         "rel-635d6cc2f2d7c25c"
       ],
-      "seconds": 0.026,
+      "seconds": 0.032,
       "sentences": 11,
       "unique_claims": 2
     },
@@ -934,7 +937,7 @@
       "document": "texi:md5sum",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 20,
       "unique_claims": 0
     },
@@ -946,7 +949,7 @@
       "document": "texi:b2sum",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -958,12 +961,12 @@
       "document": "texi:sha1sum",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 2,
       "unique_claims": 0
     },
     {
-      "admitted": 4,
+      "admitted": 5,
       "bytes": 9089,
       "claims": 20,
       "corpus": "prose",
@@ -971,11 +974,12 @@
       "false_claims": 1,
       "relations": [
         "rel-44b210959050fb81",
+        "rel-d0de5794090ceaa6",
         "rel-9868dc15f0a51194",
         "rel-6507cb49261998dc",
         "rel-3c76d13ec8c9907a"
       ],
-      "seconds": 0.245,
+      "seconds": 0.578,
       "sentences": 120,
       "unique_claims": 20
     },
@@ -1002,7 +1006,7 @@
         "rel-801dc761fe387932",
         "rel-2482be6ac74d20a6"
       ],
-      "seconds": 0.07,
+      "seconds": 0.082,
       "sentences": 23,
       "unique_claims": 8
     },
@@ -1014,7 +1018,7 @@
       "document": "texi:comm",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.015,
       "sentences": 30,
       "unique_claims": 3
     },
@@ -1026,19 +1030,21 @@
       "document": "texi:ptx",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.01,
       "sentences": 30,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1849,
       "claims": 1,
       "corpus": "prose",
       "document": "texi:tsort",
       "false_claims": 0,
-      "relations": [],
-      "seconds": 0.007,
+      "relations": [
+        "rel-290fbd16cd898c04"
+      ],
+      "seconds": 0.022,
       "sentences": 29,
       "unique_claims": 1
     },
@@ -1076,7 +1082,7 @@
       "document": "texi:join",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.017,
       "sentences": 15,
       "unique_claims": 3
     },
@@ -1102,7 +1108,7 @@
       "relations": [
         "rel-e3130b01879d392e"
       ],
-      "seconds": 0.013,
+      "seconds": 0.015,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -1130,7 +1136,7 @@
       "relations": [
         "rel-d33462630a586d77"
       ],
-      "seconds": 0.033,
+      "seconds": 0.041,
       "sentences": 26,
       "unique_claims": 4
     },
@@ -1166,7 +1172,7 @@
       "document": "texi:dircolors",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -1180,7 +1186,7 @@
       "relations": [
         "rel-40c23e31fe19c78c"
       ],
-      "seconds": 0.106,
+      "seconds": 0.122,
       "sentences": 90,
       "unique_claims": 13
     },
@@ -1192,7 +1198,7 @@
       "document": "texi:dd",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.017,
       "sentences": 62,
       "unique_claims": 5
     },
@@ -1206,7 +1212,7 @@
       "relations": [
         "rel-c573f8edae9fab60"
       ],
-      "seconds": 0.044,
+      "seconds": 0.077,
       "sentences": 19,
       "unique_claims": 5
     },
@@ -1222,7 +1228,7 @@
         "rel-b8127a0b570a9d24",
         "rel-dce070e241e22ec8"
       ],
-      "seconds": 0.083,
+      "seconds": 0.089,
       "sentences": 27,
       "unique_claims": 6
     },
@@ -1234,7 +1240,7 @@
       "document": "texi:rm",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.014,
       "sentences": 23,
       "unique_claims": 1
     },
@@ -1270,7 +1276,7 @@
       "document": "texi:ln",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.014,
       "sentences": 48,
       "unique_claims": 4
     },
@@ -1282,7 +1288,7 @@
       "document": "texi:mkdir",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 5,
       "unique_claims": 2
     },
@@ -1306,7 +1312,7 @@
       "document": "texi:mknod",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 14,
       "unique_claims": 2
     },
@@ -1366,7 +1372,7 @@
       "document": "texi:chgrp",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -1378,7 +1384,7 @@
       "document": "texi:chmod",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.013,
       "sentences": 22,
       "unique_claims": 0
     },
@@ -1390,7 +1396,7 @@
       "document": "texi:touch",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.014,
       "sentences": 28,
       "unique_claims": 0
     },
@@ -1405,19 +1411,21 @@
         "rel-c860ad80f4626afb",
         "rel-a15b5cbaac46cc61"
       ],
-      "seconds": 0.069,
+      "seconds": 0.089,
       "sentences": 58,
       "unique_claims": 6
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2669,
       "claims": 2,
       "corpus": "prose",
       "document": "texi:du",
       "false_claims": 1,
-      "relations": [],
-      "seconds": 0.015,
+      "relations": [
+        "rel-acf6c74e3e8417b9"
+      ],
+      "seconds": 0.026,
       "sentences": 34,
       "unique_claims": 2
     },
@@ -1427,11 +1435,11 @@
       "claims": 3,
       "corpus": "prose",
       "document": "texi:stat",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [
         "rel-68d1566b0c566040"
       ],
-      "seconds": 0.034,
+      "seconds": 0.054,
       "sentences": 91,
       "unique_claims": 3
     },
@@ -1441,9 +1449,9 @@
       "claims": 1,
       "corpus": "prose",
       "document": "texi:sync",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.01,
       "sentences": 16,
       "unique_claims": 1
     },
@@ -1455,7 +1463,7 @@
       "document": "texi:truncate",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -1483,7 +1491,7 @@
       "relations": [
         "rel-3dabb6585fcffc2e"
       ],
-      "seconds": 0.058,
+      "seconds": 0.055,
       "sentences": 80,
       "unique_claims": 10
     },
@@ -1497,7 +1505,7 @@
       "relations": [
         "rel-6d76aaa09fe1ace9"
       ],
-      "seconds": 0.031,
+      "seconds": 0.037,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -1521,7 +1529,7 @@
       "document": "texi:true",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -1533,7 +1541,7 @@
       "document": "texi:test",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.015,
       "sentences": 30,
       "unique_claims": 1
     },
@@ -1555,9 +1563,9 @@
       "claims": 2,
       "corpus": "prose",
       "document": "texi:tee",
-      "false_claims": 1,
+      "false_claims": 2,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.019,
       "sentences": 45,
       "unique_claims": 2
     },
@@ -1569,7 +1577,7 @@
       "document": "texi:basename",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.009,
       "sentences": 20,
       "unique_claims": 2
     },
@@ -1581,7 +1589,7 @@
       "document": "texi:dirname",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -1593,7 +1601,7 @@
       "document": "texi:pathchk",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.01,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -1643,7 +1651,7 @@
       "document": "texi:stty",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.012,
       "sentences": 25,
       "unique_claims": 2
     },
@@ -1679,7 +1687,7 @@
       "document": "texi:id",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.006,
       "sentences": 15,
       "unique_claims": 3
     },
@@ -1703,7 +1711,7 @@
       "document": "texi:whoami",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 1
     },
@@ -1715,7 +1723,7 @@
       "document": "texi:groups",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 7,
       "unique_claims": 1
     },
@@ -1737,9 +1745,9 @@
       "claims": 4,
       "corpus": "prose",
       "document": "texi:who",
-      "false_claims": 1,
+      "false_claims": 3,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.019,
       "sentences": 17,
       "unique_claims": 4
     },
@@ -1751,7 +1759,7 @@
       "document": "texi:pinky",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -1763,7 +1771,7 @@
       "document": "texi:date",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.008,
       "sentences": 17,
       "unique_claims": 1
     },
@@ -1787,7 +1795,7 @@
       "document": "texi:nproc",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 10,
       "unique_claims": 1
     },
@@ -1799,7 +1807,7 @@
       "document": "texi:uname",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -1847,7 +1855,7 @@
       "document": "texi:chcon",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -1859,7 +1867,7 @@
       "document": "texi:runcon",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 14,
       "unique_claims": 2
     },
@@ -1919,7 +1927,7 @@
       "document": "texi:nohup",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 27,
       "unique_claims": 3
     },
@@ -1955,7 +1963,7 @@
       "document": "texi:kill",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.008,
       "sentences": 26,
       "unique_claims": 1
     },
@@ -2025,11 +2033,11 @@
       "claims": 5,
       "corpus": "prose",
       "document": "gzip:Overview",
-      "false_claims": 1,
+      "false_claims": 2,
       "relations": [
         "rel-5372802255444f56"
       ],
-      "seconds": 0.065,
+      "seconds": 0.068,
       "sentences": 87,
       "unique_claims": 5
     },
@@ -2058,14 +2066,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1170,
       "claims": 1,
       "corpus": "prose",
       "document": "gzip:Advanced usage",
       "false_claims": 0,
-      "relations": [],
-      "seconds": 0.004,
+      "relations": [
+        "rel-5372802255444f56"
+      ],
+      "seconds": 0.037,
       "sentences": 16,
       "unique_claims": 1
     },
@@ -2113,31 +2123,35 @@
       "document": "gzip:GNU Free Documentation License",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 6942,
       "claims": 8,
       "corpus": "prose",
       "document": "tar:Top",
-      "false_claims": 6,
-      "relations": [],
-      "seconds": 0.109,
+      "false_claims": 4,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.259,
       "sentences": 132,
       "unique_claims": 8
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 558,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Introduction",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.047,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.139,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -2154,38 +2168,45 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 1607,
       "claims": 7,
       "corpus": "prose",
       "document": "tar:Definitions",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.08,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865",
+        "rel-8d3217ba52684064"
+      ],
+      "seconds": 0.252,
       "sentences": 22,
       "unique_claims": 6
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 744,
       "claims": 5,
       "corpus": "prose",
       "document": "tar:What tar Does",
-      "false_claims": 5,
-      "relations": [],
-      "seconds": 0.123,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.386,
       "sentences": 14,
       "unique_claims": 5
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 538,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Naming tar Archives",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.024,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.07,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -2197,7 +2218,7 @@
       "document": "tar:Authors",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.014,
       "sentences": 29,
       "unique_claims": 0
     },
@@ -2209,7 +2230,7 @@
       "document": "tar:Reports",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.003,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -2221,19 +2242,21 @@
       "document": "tar:Tutorial",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.007,
       "sentences": 8,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2204,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:assumptions",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.035,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.091,
       "sentences": 34,
       "unique_claims": 2
     },
@@ -2257,7 +2280,7 @@
       "document": "tar:basic tar options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.013,
       "sentences": 41,
       "unique_claims": 0
     },
@@ -2269,19 +2292,21 @@
       "document": "tar:frequent operations",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 436,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Two Frequent Options",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.025,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.07,
       "sentences": 3,
       "unique_claims": 1
     },
@@ -2293,7 +2318,7 @@
       "document": "tar:file tutorial",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.006,
       "sentences": 15,
       "unique_claims": 0
     },
@@ -2305,7 +2330,7 @@
       "document": "tar:verbose tutorial",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.006,
       "sentences": 31,
       "unique_claims": 0
     },
@@ -2317,19 +2342,21 @@
       "document": "tar:help tutorial",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1237,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:create",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.011,
+      "false_claims": 0,
+      "relations": [
+        "rel-8d3217ba52684064"
+      ],
+      "seconds": 0.045,
       "sentences": 17,
       "unique_claims": 1
     },
@@ -2341,7 +2368,7 @@
       "document": "tar:prepare for examples",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 16,
       "unique_claims": 0
     },
@@ -2353,7 +2380,7 @@
       "document": "tar:Creating the archive",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.01,
       "sentences": 29,
       "unique_claims": 1
     },
@@ -2365,7 +2392,7 @@
       "document": "tar:create verbose",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -2382,14 +2409,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2263,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:create dir",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.039,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.081,
       "sentences": 31,
       "unique_claims": 1
     },
@@ -2401,7 +2430,7 @@
       "document": "tar:list",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.01,
       "sentences": 39,
       "unique_claims": 0
     },
@@ -2413,19 +2442,21 @@
       "document": "tar:list dir",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.01,
       "sentences": 5,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 899,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:extract",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.029,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.069,
       "sentences": 12,
       "unique_claims": 2
     },
@@ -2447,9 +2478,9 @@
       "claims": 2,
       "corpus": "prose",
       "document": "tar:extracting files",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.018,
       "sentences": 33,
       "unique_claims": 2
     },
@@ -2459,21 +2490,24 @@
       "claims": 3,
       "corpus": "prose",
       "document": "tar:extract dir",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.013,
       "sentences": 20,
       "unique_claims": 3
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 578,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:extracting untrusted archives",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.045,
+      "false_claims": 0,
+      "relations": [
+        "rel-30f985b1eeda30a2",
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.124,
       "sentences": 4,
       "unique_claims": 2
     },
@@ -2485,7 +2519,7 @@
       "document": "tar:failing commands",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -2509,7 +2543,7 @@
       "document": "tar:tar invocation",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.006,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -2521,7 +2555,7 @@
       "document": "tar:Synopsis",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.019,
+      "seconds": 0.016,
       "sentences": 53,
       "unique_claims": 0
     },
@@ -2533,7 +2567,7 @@
       "document": "tar:using tar options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.013,
       "sentences": 38,
       "unique_claims": 2
     },
@@ -2545,7 +2579,7 @@
       "document": "tar:Styles",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.008,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -2557,7 +2591,7 @@
       "document": "tar:Long Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.01,
       "sentences": 27,
       "unique_claims": 0
     },
@@ -2581,7 +2615,7 @@
       "document": "tar:Old Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 30,
       "unique_claims": 0
     },
@@ -2593,7 +2627,7 @@
       "document": "tar:Mixing",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.008,
       "sentences": 22,
       "unique_claims": 0
     },
@@ -2605,21 +2639,23 @@
       "document": "tar:All Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 4,
       "unique_claims": 0
     },
     {
-      "admitted": 1,
+      "admitted": 3,
       "bytes": 27178,
       "claims": 49,
       "corpus": "prose",
       "document": "tar:Option Summary",
-      "false_claims": 18,
+      "false_claims": 14,
       "relations": [
+        "rel-fae878f13f7de865",
+        "rel-30f985b1eeda30a2",
         "rel-64ac14c044c2312b"
       ],
-      "seconds": 0.537,
+      "seconds": 1.189,
       "sentences": 516,
       "unique_claims": 44
     },
@@ -2643,7 +2679,7 @@
       "document": "tar:Position-Sensitive Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 19,
       "unique_claims": 0
     },
@@ -2653,9 +2689,9 @@
       "claims": 2,
       "corpus": "prose",
       "document": "tar:help",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.021,
       "sentences": 49,
       "unique_claims": 2
     },
@@ -2667,31 +2703,36 @@
       "document": "tar:defaults",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 12,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 5203,
       "claims": 6,
       "corpus": "prose",
       "document": "tar:verbose",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.06,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865",
+        "rel-1d0b743b4dba3141"
+      ],
+      "seconds": 0.135,
       "sentences": 58,
       "unique_claims": 6
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 5338,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:checkpoints",
       "false_claims": 1,
-      "relations": [],
-      "seconds": 0.035,
+      "relations": [
+        "rel-1d0b743b4dba3141"
+      ],
+      "seconds": 0.066,
       "sentences": 82,
       "unique_claims": 3
     },
@@ -2713,9 +2754,9 @@
       "claims": 2,
       "corpus": "prose",
       "document": "tar:interactive",
-      "false_claims": 1,
+      "false_claims": 2,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.015,
       "sentences": 26,
       "unique_claims": 2
     },
@@ -2787,7 +2828,7 @@
       "document": "tar:append",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.018,
       "sentences": 41,
       "unique_claims": 1
     },
@@ -2799,19 +2840,21 @@
       "document": "tar:appending files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 15,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1933,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:multiple",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.053,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.168,
       "sentences": 23,
       "unique_claims": 3
     },
@@ -2835,19 +2878,21 @@
       "document": "tar:how to update",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.019,
       "sentences": 17,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2517,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:concatenate",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.084,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.248,
       "sentences": 22,
       "unique_claims": 3
     },
@@ -2859,7 +2904,7 @@
       "document": "tar:delete",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.007,
       "sentences": 17,
       "unique_claims": 0
     },
@@ -2871,7 +2916,7 @@
       "document": "tar:compare",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.01,
       "sentences": 15,
       "unique_claims": 0
     },
@@ -2895,7 +2940,7 @@
       "document": "tar:override",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.005,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -2907,7 +2952,7 @@
       "document": "tar:extract options",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.013,
       "sentences": 12,
       "unique_claims": 3
     },
@@ -2919,7 +2964,7 @@
       "document": "tar:Reading",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.009,
       "sentences": 19,
       "unique_claims": 0
     },
@@ -2931,7 +2976,7 @@
       "document": "tar:read full records",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -2943,7 +2988,7 @@
       "document": "tar:Ignore Zeros",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.005,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -2955,7 +3000,7 @@
       "document": "tar:Writing",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -2967,7 +3012,7 @@
       "document": "tar:Dealing with Old Files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.02,
       "sentences": 42,
       "unique_claims": 1
     },
@@ -2991,7 +3036,7 @@
       "document": "tar:Keep Old Files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -3013,9 +3058,9 @@
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Unlink First",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.009,
       "sentences": 1,
       "unique_claims": 1
     },
@@ -3027,7 +3072,7 @@
       "document": "tar:Recursive Unlink",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.01,
       "sentences": 5,
       "unique_claims": 2
     },
@@ -3039,7 +3084,7 @@
       "document": "tar:Data Modification Times",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -3056,14 +3101,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2640,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Directory Modification Times and Permissions",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.014,
+      "false_claims": 0,
+      "relations": [
+        "rel-8d3217ba52684064"
+      ],
+      "seconds": 0.047,
       "sentences": 32,
       "unique_claims": 3
     },
@@ -3073,21 +3120,23 @@
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Writing to Standard Output",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.013,
       "sentences": 8,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2580,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Writing to an External Program",
       "false_claims": 1,
-      "relations": [],
-      "seconds": 0.027,
+      "relations": [
+        "rel-1d0b743b4dba3141"
+      ],
+      "seconds": 0.064,
       "sentences": 62,
       "unique_claims": 2
     },
@@ -3099,7 +3148,7 @@
       "document": "tar:remove files",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.006,
       "sentences": 4,
       "unique_claims": 1
     },
@@ -3135,7 +3184,7 @@
       "document": "tar:Same Order",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -3147,7 +3196,7 @@
       "document": "tar:backup",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.007,
       "sentences": 30,
       "unique_claims": 0
     },
@@ -3159,7 +3208,7 @@
       "document": "tar:Applications",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 10,
       "unique_claims": 0
     },
@@ -3171,7 +3220,7 @@
       "document": "tar:looking ahead",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 10,
       "unique_claims": 0
     },
@@ -3188,26 +3237,30 @@
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1535,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Full Dumps",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.031,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.08,
       "sentences": 16,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 6571,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Incremental Dumps",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.042,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.111,
       "sentences": 79,
       "unique_claims": 1
     },
@@ -3219,7 +3272,7 @@
       "document": "tar:Backup Levels",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.014,
       "sentences": 38,
       "unique_claims": 3
     },
@@ -3231,7 +3284,7 @@
       "document": "tar:Backup Parameters",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -3243,7 +3296,7 @@
       "document": "tar:General-Purpose Variables",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.021,
+      "seconds": 0.016,
       "sentences": 89,
       "unique_claims": 2
     },
@@ -3255,7 +3308,7 @@
       "document": "tar:Magnetic Tape Control",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 15,
       "unique_claims": 0
     },
@@ -3265,9 +3318,9 @@
       "claims": 3,
       "corpus": "prose",
       "document": "tar:User Hooks",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.012,
       "sentences": 18,
       "unique_claims": 3
     },
@@ -3279,7 +3332,7 @@
       "document": "tar:backup-specs example",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 0,
       "unique_claims": 0
     },
@@ -3320,26 +3373,32 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 3,
       "bytes": 3438,
       "claims": 4,
       "corpus": "prose",
       "document": "tar:file",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.078,
+      "false_claims": 0,
+      "relations": [
+        "rel-1d0b743b4dba3141",
+        "rel-30f985b1eeda30a2",
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.186,
       "sentences": 44,
       "unique_claims": 4
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1879,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Selecting Archive Members",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.03,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.081,
       "sentences": 26,
       "unique_claims": 1
     },
@@ -3351,7 +3410,7 @@
       "document": "tar:files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.012,
       "sentences": 47,
       "unique_claims": 1
     },
@@ -3363,7 +3422,7 @@
       "document": "tar:nul",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.006,
       "sentences": 19,
       "unique_claims": 1
     },
@@ -3387,19 +3446,21 @@
       "document": "tar:problems with exclude",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.008,
       "sentences": 23,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2422,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:wildcards",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.03,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.083,
       "sentences": 39,
       "unique_claims": 1
     },
@@ -3411,7 +3472,7 @@
       "document": "tar:controlling pattern-matching",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.008,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -3423,7 +3484,7 @@
       "document": "tar:quoting styles",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.006,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -3433,9 +3494,9 @@
       "claims": 1,
       "corpus": "prose",
       "document": "tar:transform",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.026,
       "sentences": 58,
       "unique_claims": 1
     },
@@ -3445,33 +3506,37 @@
       "claims": 1,
       "corpus": "prose",
       "document": "tar:after",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.017,
       "sentences": 35,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2174,
       "claims": 5,
       "corpus": "prose",
       "document": "tar:recurse",
-      "false_claims": 4,
-      "relations": [],
-      "seconds": 0.068,
+      "false_claims": 2,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.173,
       "sentences": 22,
       "unique_claims": 5
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1067,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:one",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.012,
+      "false_claims": 0,
+      "relations": [
+        "rel-8d3217ba52684064"
+      ],
+      "seconds": 0.041,
       "sentences": 15,
       "unique_claims": 1
     },
@@ -3483,31 +3548,36 @@
       "document": "tar:directory",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.007,
       "sentences": 25,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 3104,
       "claims": 7,
       "corpus": "prose",
       "document": "tar:absolute",
-      "false_claims": 6,
-      "relations": [],
-      "seconds": 0.121,
+      "false_claims": 2,
+      "relations": [
+        "rel-30f985b1eeda30a2",
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.31,
       "sentences": 45,
       "unique_claims": 7
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1052,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Formats",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.075,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.277,
       "sentences": 14,
       "unique_claims": 3
     },
@@ -3531,7 +3601,7 @@
       "document": "tar:gzip",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.048,
+      "seconds": 0.058,
       "sentences": 81,
       "unique_claims": 5
     },
@@ -3548,14 +3618,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2478,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:sparse",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.04,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.096,
       "sentences": 41,
       "unique_claims": 2
     },
@@ -3567,55 +3639,64 @@
       "document": "tar:Attributes",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 2,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 1195,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Portability",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.036,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865",
+        "rel-8d3217ba52684064"
+      ],
+      "seconds": 0.114,
       "sentences": 25,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 556,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Portable Names",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.026,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.081,
       "sentences": 9,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 921,
       "claims": 5,
       "corpus": "prose",
       "document": "tar:dereference",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.032,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.093,
       "sentences": 11,
       "unique_claims": 5
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1615,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:hard links",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.029,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.091,
       "sentences": 13,
       "unique_claims": 2
     },
@@ -3627,7 +3708,7 @@
       "document": "tar:old",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.008,
       "sentences": 11,
       "unique_claims": 0
     },
@@ -3639,7 +3720,7 @@
       "document": "tar:ustar",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.003,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -3651,7 +3732,7 @@
       "document": "tar:gnu",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.007,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -3680,14 +3761,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1705,
       "claims": 4,
       "corpus": "prose",
       "document": "tar:Checksumming",
-      "false_claims": 4,
-      "relations": [],
-      "seconds": 0.116,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.343,
       "sentences": 18,
       "unique_claims": 4
     },
@@ -3699,7 +3782,7 @@
       "document": "tar:Large or Negative Values",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 20,
       "unique_claims": 0
     },
@@ -3711,19 +3794,21 @@
       "document": "tar:Other Tars",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.008,
       "sentences": 14,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2349,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Split Recovery",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.03,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.082,
       "sentences": 24,
       "unique_claims": 1
     },
@@ -3733,9 +3818,9 @@
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Sparse Recovery",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.027,
       "sentences": 52,
       "unique_claims": 3
     },
@@ -3747,43 +3832,51 @@
       "document": "tar:cpio",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.017,
+      "seconds": 0.016,
       "sentences": 48,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1596,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Media",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.053,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.162,
       "sentences": 23,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 3197,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Device",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.05,
+      "false_claims": 0,
+      "relations": [
+        "rel-1d0b743b4dba3141",
+        "rel-30f985b1eeda30a2"
+      ],
+      "seconds": 0.108,
       "sentences": 42,
       "unique_claims": 3
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 3350,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Remote Tape Server",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.058,
+      "false_claims": 0,
+      "relations": [
+        "rel-30f985b1eeda30a2",
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.159,
       "sentences": 49,
       "unique_claims": 3
     },
@@ -3807,7 +3900,7 @@
       "document": "tar:Blocking",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.024,
+      "seconds": 0.026,
       "sentences": 81,
       "unique_claims": 2
     },
@@ -3819,19 +3912,22 @@
       "document": "tar:Format Variations",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 9,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 5562,
       "claims": 9,
       "corpus": "prose",
       "document": "tar:Blocking Factor",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.096,
+      "false_claims": 1,
+      "relations": [
+        "rel-0c8345648bf303e8",
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.285,
       "sentences": 73,
       "unique_claims": 9
     },
@@ -3843,19 +3939,21 @@
       "document": "tar:Many",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.01,
       "sentences": 39,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1508,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Tape Positioning",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.029,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.076,
       "sentences": 20,
       "unique_claims": 2
     },
@@ -3865,83 +3963,98 @@
       "claims": 1,
       "corpus": "prose",
       "document": "tar:mt",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.008,
       "sentences": 15,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1792,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Using Multiple Tapes",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.054,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.172,
       "sentences": 28,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 3,
       "bytes": 6925,
       "claims": 7,
       "corpus": "prose",
       "document": "tar:Multi-Volume Archives",
-      "false_claims": 4,
-      "relations": [],
-      "seconds": 0.117,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865",
+        "rel-1d0b743b4dba3141",
+        "rel-30f985b1eeda30a2"
+      ],
+      "seconds": 0.292,
       "sentences": 100,
       "unique_claims": 7
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1172,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Tape Files",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.027,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.074,
       "sentences": 13,
       "unique_claims": 2
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 843,
       "claims": 1,
       "corpus": "prose",
       "document": "tar:Tarcat",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.029,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.074,
       "sentences": 12,
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 2,
       "bytes": 3924,
       "claims": 7,
       "corpus": "prose",
       "document": "tar:label",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.115,
+      "false_claims": 1,
+      "relations": [
+        "rel-fae878f13f7de865",
+        "rel-2d9098898b8fabfd"
+      ],
+      "seconds": 0.283,
       "sentences": 47,
       "unique_claims": 6
     },
     {
-      "admitted": 1,
+      "admitted": 3,
       "bytes": 2999,
       "claims": 4,
       "corpus": "prose",
       "document": "tar:verify",
-      "false_claims": 1,
+      "false_claims": 0,
       "relations": [
-        "rel-64ac14c044c2312b"
+        "rel-64ac14c044c2312b",
+        "rel-fae878f13f7de865",
+        "rel-2d9098898b8fabfd"
       ],
-      "seconds": 0.121,
+      "seconds": 0.201,
       "sentences": 39,
       "unique_claims": 4
     },
@@ -3970,14 +4083,16 @@
       "unique_claims": 1
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 635,
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Reliability",
-      "false_claims": 2,
-      "relations": [],
-      "seconds": 0.056,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.159,
       "sentences": 6,
       "unique_claims": 2
     },
@@ -3989,7 +4104,7 @@
       "document": "tar:Permissions problems",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.011,
       "sentences": 5,
       "unique_claims": 1
     },
@@ -4006,14 +4121,16 @@
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 1568,
       "claims": 4,
       "corpus": "prose",
       "document": "tar:Race conditions",
-      "false_claims": 3,
-      "relations": [],
-      "seconds": 0.049,
+      "false_claims": 2,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.101,
       "sentences": 15,
       "unique_claims": 4
     },
@@ -4025,7 +4142,7 @@
       "document": "tar:Security",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -4037,19 +4154,21 @@
       "document": "tar:Privacy",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 12,
       "unique_claims": 0
     },
     {
-      "admitted": 0,
+      "admitted": 1,
       "bytes": 2023,
       "claims": 3,
       "corpus": "prose",
       "document": "tar:Integrity",
-      "false_claims": 1,
-      "relations": [],
-      "seconds": 0.031,
+      "false_claims": 0,
+      "relations": [
+        "rel-fae878f13f7de865"
+      ],
+      "seconds": 0.093,
       "sentences": 19,
       "unique_claims": 3
     },
@@ -4061,7 +4180,7 @@
       "document": "tar:Live untrusted data",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.013,
       "sentences": 23,
       "unique_claims": 3
     },
@@ -4073,7 +4192,7 @@
       "document": "tar:Security rules of thumb",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -4085,7 +4204,7 @@
       "document": "tar:Changes",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -4095,9 +4214,9 @@
       "claims": 2,
       "corpus": "prose",
       "document": "tar:Configuring Help Summary",
-      "false_claims": 0,
+      "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.022,
       "sentences": 58,
       "unique_claims": 2
     },
@@ -4109,7 +4228,7 @@
       "document": "tar:Fixing Snapshot Files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -4121,7 +4240,7 @@
       "document": "tar:Tar Internals",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -4133,7 +4252,7 @@
       "document": "tar:Genfile",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -4145,7 +4264,7 @@
       "document": "tar:Free Software Needs Free Documentation",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -4157,7 +4276,7 @@
       "document": "tar:GNU Free Documentation License",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -4169,17 +4288,17 @@
       "document": "tar:Index of Command Line Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 0
     }
   ],
   "schema": "BRAIN_THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1",
-  "seconds": 7.4,
+  "seconds": 15.0,
   "sentences": 8110,
   "transfer": {
-    "admitted": 46,
-    "failed": 2,
+    "admitted": 51,
+    "failed": 6,
     "failures": [
       {
         "reason": "CLAIM_IS_FALSE",
@@ -4190,9 +4309,29 @@
         "reason": "CLAIM_IS_FALSE",
         "relation_id": "rel-08b48782249e5353",
         "verdict": "REFUSED"
+      },
+      {
+        "reason": "CLAIM_IS_FALSE",
+        "relation_id": "rel-8d3217ba52684064",
+        "verdict": "REFUSED"
+      },
+      {
+        "reason": "CLAIM_IS_FALSE",
+        "relation_id": "rel-30f985b1eeda30a2",
+        "verdict": "REFUSED"
+      },
+      {
+        "reason": "CLAIM_IS_FALSE",
+        "relation_id": "rel-1d0b743b4dba3141",
+        "verdict": "REFUSED"
+      },
+      {
+        "reason": "CLAIM_IS_FALSE",
+        "relation_id": "rel-0c8345648bf303e8",
+        "verdict": "REFUSED"
       }
     ],
-    "tested": 48
+    "tested": 57
   },
   "unique_claims": 516,
   "what_this_is_not": [
