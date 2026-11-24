@@ -98,3 +98,20 @@ Nothing found in project or literature justifies widening the boundary. If a fut
 ## 8. Binding next step
 
 F1 (zero-call program-synthesis capability for TB4-class tasks) is the bottleneck. Research: project (`swe_kernel/` synthesis organs: `egraph_and_deductive_synthesizer_v1`, `operator_invention_v1`, `instruction_contract_for_code_v1`, `one_demonstration_*`) then frontier (test-time program synthesis, verifiable code generation without pretraining), then design the ultimate minimal substrate and implement it. No benchmark leakage; admission on victims.
+
+---
+
+## Addendum — build + measured outcomes (same day)
+
+**F1 progress (partial, honest).** Built `classical_cipher_v1.py`, a general classical-substitution cryptanalysis capability admitted on unseen REAL-prose victims (English from this repository's markdown corpus), never tuned to any benchmark item: exact plaintext recovery — Vigenere 10/10 across dev+holdout victims; interleaved-2-stream Vigenere 6/6; interleaved-3 1/2; interleaved-4 0/2; exact recovery holds down to 400-letter specimens. English statistics are derived from the repo corpus, stored inspectable (`language_statistics_en_v1.json`), and embedded in the emitted `/app/cracker.py` artifact as data (12 KB, zero deps, zero model calls). Also fixed the doc compiler's vacuous-verification honesty bug (`no_invariant_applicable__UNVERIFIED_CLAIM`).
+
+**Wired into the experimental TB4 path** (`_cipher_candidate_cycle`, runs before the doc compiler only when content evidence fires: letter-dense low-IoC specimen, IoC<0.055, computed from /app — no task vocabulary guessing), artifact self-contained, official verifier sole oracle (`official_verifier_invoked=false`).
+
+**Measured smoke results (runs 45446917182 → 45450940104 → 45454355667, head 990de4d316, all workflow-success):**
+- interleaved-vigenere: engine FIRES (gate=goal_marker) and writes the generic cracker (diff_bytes 12343, candidate_applied=true across runs) but finds NO separable candidate: variant=vigenere_beaufort period=1, IoC=0.0398, distinct-plaintext zlib margin=0 ⇒ artifact will almost surely fail the official check ⇒ reward **0.0**. Per integrity rules we did NOT fetch the task specimen to tune further; local admission evidence says the specimen is either short, or not English-like, or outside the modeled family (transposition layer / non-English plaintext) — each is a real, named limit, not a fixable detail.
+- session-window-debug: unchanged honest failure (DOC_COMPILER_VERIFIED but 5-byte DESIGN.md, reward 0.0).
+- pro-v2 ansible (NO_FAILING_TEST) and NodeBB (UNSOLVED): unchanged, reward 0.0.
+
+**What this proved and didn't.** Proved: the in-container loop can now (a) detect content evidence, (b) run a general admit-on-victims computational campaign, (c) leave a real artifact, (d) measure mutation. Did NOT prove: it solves THIS task — reward 0.0 stands. The honest general gap remains F1: a correct-program-from-spec substrate for non-English/arbitrary content and for debugging, which is the mission's hard core.
+
+**Next iterations (§5 loop, in order):** (S1) F1 program-synthesis substrate for spec-to-code tasks; (S2) per-family honest admission for any new capability (no artifact ships without fresh-victim recovery); (S3) close F3 (cross-task skill admission on real Harbor episodes); (S4) smoke after each change; rewards reported as measured, never claimed.
