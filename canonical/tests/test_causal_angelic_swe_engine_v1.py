@@ -2774,6 +2774,120 @@ def test_32_iter64_non_ascii_validation_guard_law12j() -> None:
         assert res["model_calls"] == 0 and res["parameters_stored"] == 0
 
 
+def test_33_iter66_pathlike_bool_kwarg_and_multifile_slots_pickle() -> None:
+    """Iter 66 universal Python laws:
+    1. Law 12k (`TIER3_ISINSTANCE_PATHLIKE_WIDENING`, PEP 519 `os.PathLike`)
+    2. Law 12l (`TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE`, live `inspect.signature` introspection)
+    3. Law 12m (`TIER3_SLOTS_DATACLASS_DICT_SETSTATE`, multi-file `COMPOSED_ANGELIC_PROGRESS`)
+    """
+    # 1. Law 12k: PEP 519 os.PathLike widening
+    with tempfile.TemporaryDirectory(prefix="brain_py_iter66_12k_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/ed.py": (
+                    "def collect_paths(filename):\n"
+                    "    if isinstance(filename, str):\n"
+                    "        filename = (filename,)\n"
+                    "    return [str(p) for p in filename]\n"
+                ),
+                "tests/test_ed.py": (
+                    "from pathlib import Path\n"
+                    "from pkg.ed import collect_paths\n\n"
+                    "def test_pathlib_single_and_list():\n"
+                    "    assert collect_paths('a.txt') == ['a.txt']\n"
+                    "    assert collect_paths(Path('/tmp/b.txt')) == ['/tmp/b.txt']\n"
+                    "    assert collect_paths([Path('/tmp/c.txt')]) == ['/tmp/c.txt']\n"
+                ),
+            },
+        )
+        res_k = ENGINE.solve_repository(root, ["tests/test_ed.py"], python_exe=sys.executable)
+        assert res_k["verified"] is True, res_k
+        assert res_k["winner"]["tier"] == "TIER3_ISINSTANCE_PATHLIKE_WIDENING", res_k["winner"]
+        assert res_k["model_calls"] == 0
+
+    # 2. Law 12l: Live inspect.signature boolean kwarg toggle (via local subclass of stdlib TextWrapper)
+    with tempfile.TemporaryDirectory(prefix="brain_py_iter66_12l_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/_tw.py": (
+                    "import textwrap\n\n"
+                    "class LocalWrapper(textwrap.TextWrapper):\n"
+                    "    pass\n"
+                ),
+                "pkg/fmt.py": (
+                    "from ._tw import LocalWrapper\n\n"
+                    "def wrap_help(text: str, width: int = 12) -> str:\n"
+                    "    w = LocalWrapper(width, replace_whitespace=False)\n"
+                    "    return w.fill(text)\n"
+                ),
+                "tests/test_fmt.py": (
+                    "from pkg.fmt import wrap_help\n\n"
+                    "def test_keeps_hyphenated_and_long_words_whole():\n"
+                    "    assert wrap_help('Add --avoid-motorways option', 12) == 'Add\\n--avoid-motorways\\noption'\n"
+                    "    assert wrap_help('supercalifragilistic', 10) == 'supercalifragilistic'\n"
+                ),
+            },
+        )
+        res_l = ENGINE.solve_repository(root, ["tests/test_fmt.py"], python_exe=sys.executable)
+        assert res_l["verified"] is True, res_l
+        assert res_l["winner"]["tier"] == "TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE", res_l["winner"]
+        assert res_l["model_calls"] == 0
+
+    # 3. Law 12m: Multi-file `@dataclass(..., slots=True)` legacy dict-state pickle compat
+    with tempfile.TemporaryDirectory(prefix="brain_py_iter66_12m_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/mod_a.py": (
+                    "from dataclasses import dataclass\n\n"
+                    "@dataclass(frozen=True, slots=True)\n"
+                    "class RecA:\n"
+                    "    x: int\n"
+                    "    y: str\n"
+                ),
+                "pkg/mod_b.py": (
+                    "from dataclasses import dataclass\n\n"
+                    "@dataclass(frozen=True, slots=True)\n"
+                    "class RecB:\n"
+                    "    name: str\n"
+                    "    flag: bool\n"
+                ),
+                "tests/test_pickles.py": (
+                    "import pickle\n"
+                    "import pytest\n"
+                    "from pkg.mod_a import RecA\n"
+                    "from pkg.mod_b import RecB\n\n"
+                    "def _dict_pickle(cls, state):\n"
+                    "    class _Fake:\n"
+                    "        def __reduce__(self):\n"
+                    "            return (object.__new__, (cls,), state)\n"
+                    "    return pickle.dumps(_Fake())\n\n"
+                    "def test_pickle_dict_state_mod_a():\n"
+                    "    obj = pickle.loads(_dict_pickle(RecA, {'x': 7, 'y': 'ok'}))\n"
+                    "    assert obj == RecA(x=7, y='ok')\n"
+                    "    with pytest.raises(TypeError):\n"
+                    "        pickle.loads(_dict_pickle(RecA, {'x': 7, 'bogus': 1}))\n\n"
+                    "def test_pickle_dict_state_mod_b():\n"
+                    "    obj = pickle.loads(_dict_pickle(RecB, {'name': 'n', 'flag': True}))\n"
+                    "    assert obj == RecB(name='n', flag=True)\n"
+                ),
+            },
+        )
+        res_m = ENGINE.solve_repository(root, ["tests/test_pickles.py"], python_exe=sys.executable)
+        assert res_m["verified"] is True, res_m
+        assert res_m["winner"]["tier"] == "COMPOSED_ANGELIC_PROGRESS", res_m["winner"]
+        assert set(res_m["winner"]["files"]) == {"pkg/mod_a.py", "pkg/mod_b.py"}
+        assert res_m["model_calls"] == 0 and res_m["parameters_stored"] == 0
+
+
 
 
 

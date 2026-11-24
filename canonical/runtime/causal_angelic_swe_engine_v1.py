@@ -8894,6 +8894,262 @@ def _synthesize_static_cone_and_truthiness_repairs(
                         except SyntaxError:
                             pass
 
+    # 29. Iter 66 Law 12k (`TIER3_ISINSTANCE_PATHLIKE_WIDENING` — PEP 519 `os.PathLike`):
+    # When failing tests pass a `PosixPath`/`WindowsPath`/`PathLike` and hit a `TypeError`
+    # (e.g. `'PosixPath' object is not iterable`) or type mismatch on `isinstance(x, str)`,
+    # widen `str` to `(str, os.PathLike)` (adding `import os` if absent).
+    if any(k in (exc_msgs + " " + failing_joined) for k in ("PosixPath", "WindowsPath", "PathLike", "pathlib", "Path")):
+        for rel in cand_files[:6]:
+            loaded = load_file(rel)
+            if loaded is None:
+                continue
+            src_txt, tree = loaded
+            if "isinstance(" not in src_txt:
+                continue
+            has_os_imp = bool(re.search(r"^\s*import\s+os\b", src_txt, flags=re.MULTILINE))
+            loc_lns_k = {s.lineno for s in loc.sites if s.file == rel}
+            hits_k: list[tuple[int, int, str, str]] = []
+            for node in ast.walk(tree):
+                if (
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Name)
+                    and node.func.id == "isinstance"
+                    and len(node.args) == 2
+                ):
+                    arg2 = node.args[1]
+                    ln_k = int(getattr(node, "lineno", 0) or 0)
+                    if ln_k <= 0:
+                        continue
+                    new_arg2_src: str | None = None
+                    if isinstance(arg2, ast.Name) and arg2.id == "str":
+                        new_arg2_src = "(str, os.PathLike)"
+                    elif isinstance(arg2, ast.Tuple) and any(isinstance(e, ast.Name) and e.id == "str" for e in arg2.elts):
+                        if not any("PathLike" in ast.unparse(e) for e in arg2.elts):
+                            new_arg2_src = "(" + ", ".join(ast.unparse(e) for e in arg2.elts) + ", os.PathLike)"
+                    if not new_arg2_src:
+                        continue
+                    try:
+                        new_call = copy.deepcopy(node)
+                        new_call.args[1] = ast.parse(new_arg2_src, mode="eval").body
+                        code_k = _replace_subexpr_in_tree(tree, ln_k, ast.unparse(node), new_call)
+                    except SyntaxError:
+                        code_k = ""
+                    if not code_k:
+                        continue
+                    if not has_os_imp:
+                        lines_k = code_k.splitlines(keepends=True)
+                        ins_i = 0
+                        for idx_i, l_i in enumerate(lines_k):
+                            if l_i.startswith("from __future__"):
+                                ins_i = idx_i + 1
+                            elif l_i.startswith(("import ", "from ")) and ins_i == 0:
+                                ins_i = idx_i
+                                break
+                        lines_k.insert(ins_i, "import os\n")
+                        code_k = "".join(lines_k)
+                    near_k = 1 if any(abs(ln_k - ll) <= 12 for ll in loc_lns_k) else 0
+                    hits_k.append((near_k, ln_k, f"widen_pathlike({ast.unparse(node.args[0])})", code_k))
+            hits_k.sort(key=lambda t: (-t[0], t[1]))
+            for _, ln_k, desc_k, code_k in hits_k[:4]:
+                add_cand(rel, ln_k, "TIER3_ISINSTANCE_PATHLIKE_WIDENING", desc_k, code_k)
+
+    # 30. Iter 66 Law 12l (`TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE` — Live `inspect.signature` Boolean Kwarg Abduction):
+    # When a localized call invokes a stdlib or local-subclass constructor/function with keyword
+    # arguments, inspect the callee's actual Python `inspect.signature` (following base classes
+    # when a local class subclasses a stdlib class) to discover bool kwargs with defaults, score
+    # them by lexical overlap against failing test names/messages, and toggle the top pair/singles.
+    if "AssertionError" in "\n".join(str(v.get("type") or "") for v in loc.exceptions.values()) or "assert " in exc_msgs:
+        import importlib
+        import inspect as _insp
+
+        _test_body_12l = ""
+        for _ft_l in loc.failing_tests[:4]:
+            _tfp_l = worktree / _ft_l.split("::", 1)[0]
+            if _tfp_l.is_file():
+                try:
+                    _test_body_12l += " " + _tfp_l.read_text(encoding="utf-8", errors="replace")[:2000]
+                except OSError:
+                    pass
+        _fail_toks_12l = set(
+            t for t in re.findall(r"[a-z]{3,}", (failing_joined + " " + exc_msgs + " " + _test_body_12l).lower())
+            if t not in {"test", "assert", "true", "false", "none", "error", "failed", "tests", "passed", "expected", "actual"}
+        )
+        if "-\\n" in exc_msgs or "-\n" in exc_msgs:
+            _fail_toks_12l.update({"hyphen", "hyphens", "break", "word", "words", "long"})
+
+        def _resolve_bool_kw_defaults(callee_name: str, src_tree: ast.Module, cur_rel: str) -> dict[str, bool]:
+            targets: list[tuple[str, str]] = []
+            for imp_n in ast.walk(src_tree):
+                if isinstance(imp_n, ast.ImportFrom) and imp_n.module:
+                    for al in imp_n.names:
+                        local_nm = al.asname or al.name
+                        if local_nm == callee_name:
+                            if imp_n.level > 0:
+                                base_dir = (worktree / cur_rel).parent
+                                for _ in range(imp_n.level - 1):
+                                    base_dir = base_dir.parent
+                                sib_py = base_dir / (imp_n.module.replace(".", "/") + ".py")
+                                if sib_py.is_file():
+                                    try:
+                                        sib_tree = ast.parse(sib_py.read_text(encoding="utf-8", errors="replace"))
+                                        for cn in sib_tree.body:
+                                            if isinstance(cn, ast.ClassDef) and cn.name == al.name:
+                                                for b in cn.bases:
+                                                    if isinstance(b, ast.Attribute) and isinstance(b.value, ast.Name):
+                                                        targets.append((b.value.id, b.attr))
+                                    except SyntaxError:
+                                        pass
+                            else:
+                                targets.append((imp_n.module, al.name))
+                elif isinstance(imp_n, ast.Import):
+                    for al in imp_n.names:
+                        if "." in callee_name and callee_name.split(".", 1)[0] == (al.asname or al.name):
+                            targets.append((al.name, callee_name.split(".", 1)[1]))
+
+            defaults: dict[str, bool] = {}
+            for mod_nm, attr_nm in targets:
+                try:
+                    mod_obj = importlib.import_module(mod_nm)
+                    obj = getattr(mod_obj, attr_nm, None)
+                    if obj is None:
+                        continue
+                    sig = _insp.signature(obj)
+                    for pname, param in sig.parameters.items():
+                        if isinstance(param.default, bool):
+                            defaults[pname] = param.default
+                except Exception:
+                    continue
+            return defaults
+
+        for rel in cand_files[:6]:
+            loaded = load_file(rel)
+            if loaded is None:
+                continue
+            src_txt, tree = loaded
+            loc_lns_l = {s.lineno for s in loc.sites if s.file == rel}
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Call) or not node.keywords:
+                    continue
+                ln_l = int(getattr(node, "lineno", 0) or 0)
+                if ln_l <= 0 or (loc_lns_l and not any(abs(ln_l - ll) <= 20 for ll in loc_lns_l)):
+                    continue
+                cname = ast.unparse(node.func)
+                if not re.match(r"^[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)?$", cname):
+                    continue
+                b_defs = _resolve_bool_kw_defaults(cname, tree, rel)
+                if not b_defs:
+                    continue
+                existing_kws = {kw.arg for kw in node.keywords if kw.arg}
+                scored_kws: list[tuple[int, str, bool]] = []
+                for kw_nm, def_v in b_defs.items():
+                    if kw_nm in existing_kws:
+                        continue
+                    kw_toks = set(t for t in kw_nm.lower().split("_") if len(t) >= 3)
+                    ov = sum(
+                        1 for kt in kw_toks
+                        if any(ft.startswith(kt[:4]) or kt.startswith(ft[:4]) for ft in _fail_toks_12l if len(ft) >= 4)
+                    )
+                    if ov > 0:
+                        scored_kws.append((ov, kw_nm, not def_v))
+                if not scored_kws:
+                    continue
+                scored_kws.sort(key=lambda t: (-t[0], t[1]))
+                combos: list[list[tuple[str, bool]]] = []
+                if len(scored_kws) >= 2:
+                    combos.append([(scored_kws[0][1], scored_kws[0][2]), (scored_kws[1][1], scored_kws[1][2])])
+                for _, kn, kv in scored_kws[:3]:
+                    combos.append([(kn, kv)])
+                for combo in combos:
+                    new_call = copy.deepcopy(node)
+                    for kn, kv in combo:
+                        new_call.keywords.append(ast.keyword(arg=kn, value=ast.Constant(value=kv)))
+                    code_l = _replace_subexpr_in_tree(tree, ln_l, ast.unparse(node), new_call)
+                    if code_l:
+                        lbl = ",".join(f"{kn}={kv}" for kn, kv in combo)
+                        add_cand(rel, ln_l, "TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE", f"bool_kwarg({cname}:{lbl})", code_l)
+
+    # 31. Iter 66 Law 12m (`TIER3_SLOTS_DATACLASS_DICT_SETSTATE` — Multi-File `@dataclass(..., slots=True)` Pickle Compat):
+    # In Python 3.10+, `@dataclass(slots=True)` unpickling a legacy dict-state pickle iterates
+    # the dict keys as slot values, corrupting fields. When failing pickle tests reference
+    # modules defining `@dataclass(..., slots=True)`, attach a dict-safe `__setstate__` compat
+    # decorator to those classes (supports multi-file composition via `COMPOSED_ANGELIC_PROGRESS`).
+    if "pickle" in (failing_joined + " " + exc_msgs).lower():
+        pkl_files: list[str] = list(cand_files)
+        for ft in loc.failing_tests[:12]:
+            tf_p = worktree / ft.split("::", 1)[0]
+            if not tf_p.is_file():
+                continue
+            try:
+                t_ast = ast.parse(tf_p.read_text(encoding="utf-8", errors="replace"))
+            except SyntaxError:
+                continue
+            for imp_n in ast.walk(t_ast):
+                mod_cand = imp_n.module if isinstance(imp_n, ast.ImportFrom) and imp_n.module else None
+                if not mod_cand:
+                    continue
+                for base_p in (worktree / "src", worktree):
+                    cand_py = base_p / (mod_cand.replace(".", "/") + ".py")
+                    if cand_py.is_file():
+                        rel_m = cand_py.relative_to(worktree).as_posix()
+                        if rel_m not in pkl_files:
+                            pkl_files.append(rel_m)
+
+        _pkl_helper = (
+            "\n\ndef _brain_dataclass_dict_setstate(self, state):\n"
+            "    import dataclasses as _dc\n"
+            "    _fields = _dc.fields(self)\n"
+            "    if isinstance(state, dict):\n"
+            "        _names = [f.name for f in _fields]\n"
+            "        if state.keys() != set(_names):\n"
+            "            raise TypeError(f'Invalid pickle state for {type(self).__name__}: {list(state)}')\n"
+            "        state = [state[name] for name in _names]\n"
+            "    for _f, _v in zip(_fields, state, strict=True):\n"
+            "        object.__setattr__(self, _f.name, _v)\n\n\n"
+            "def _brain_dict_state_pickle_compat(cls):\n"
+            "    cls.__setstate__ = _brain_dataclass_dict_setstate\n"
+            "    return cls\n\n"
+        )
+        for rel in pkl_files[:8]:
+            loaded = load_file(rel)
+            if loaded is None:
+                continue
+            src_txt, tree = loaded
+            if "slots=True" not in src_txt or "_brain_dict_state_pickle_compat" in src_txt:
+                continue
+            slots_cls_lines: list[int] = []
+            for node in tree.body:
+                if not isinstance(node, ast.ClassDef) or not node.decorator_list:
+                    continue
+                has_slots_dc = any(
+                    isinstance(d, ast.Call)
+                    and "dataclass" in ast.unparse(d.func)
+                    and any(kw.arg == "slots" and isinstance(kw.value, ast.Constant) and kw.value.value is True for kw in d.keywords)
+                    for d in node.decorator_list
+                )
+                if has_slots_dc:
+                    first_dec_ln = min(int(getattr(d, "lineno", node.lineno)) for d in node.decorator_list)
+                    slots_cls_lines.append(first_dec_ln)
+            if not slots_cls_lines:
+                continue
+            lines_m = src_txt.splitlines(keepends=True)
+            first_ln = min(slots_cls_lines)
+            for ln_c in sorted(slots_cls_lines, reverse=True):
+                ind_c = re.match(r"^(\s*)", lines_m[ln_c - 1]).group(1)
+                lines_m.insert(ln_c - 1, f"{ind_c}@_brain_dict_state_pickle_compat\n")
+            lines_m.insert(first_ln - 1, _pkl_helper)
+            code_m = "".join(lines_m)
+            try:
+                ast.parse(code_m)
+                add_cand(
+                    rel,
+                    first_ln,
+                    "TIER3_SLOTS_DATACLASS_DICT_SETSTATE",
+                    f"slots_dataclass_dict_pickle_compat({len(slots_cls_lines)} classes)",
+                    code_m,
+                )
+            except SyntaxError:
+                pass
+
     return out
 
 
@@ -9100,6 +9356,9 @@ def synthesize_candidates(
         "TIER3_PARAM_DOMAIN_GUARD",
         "TIER3_PROXY_INHERITED_METHOD_DELEGATE",
         "TIER3_EMPTY_VARARGS_KWARG_DEFAULT",
+        "TIER3_ISINSTANCE_PATHLIKE_WIDENING",
+        "TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE",
+        "TIER3_SLOTS_DATACLASS_DICT_SETSTATE",
     }
     _broad_hp_tiers = {
         "TIER3_TERNARY_COLLAPSE_TO_BRANCH",

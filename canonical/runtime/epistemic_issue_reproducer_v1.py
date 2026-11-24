@@ -866,8 +866,10 @@ def _compile_prose_clauses(issue_text: str, repo_index: RepoSymbolIndex) -> list
 
     if lang == "python" and py_asserts:
         # Emit combined spec (all clauses together) AND individual clauses as fallback
+        _doc_hint = re.sub(r"[^A-Za-z0-9 _.,:()\-]", " ", issue_text.splitlines()[0] if issue_text.strip() else "")[:120].strip()
+        _doc_line = f'    """{_doc_hint}"""\n' if _doc_hint else ""
         imps = ["import pytest"] + _build_python_imports(refs, repo_index)
-        combined = "\n".join(imps) + "\n\ndef test_issue_reproducer():\n" + "\n".join(f"    {s}" for s in py_asserts) + "\n"
+        combined = "\n".join(imps) + "\n\ndef test_issue_reproducer():\n" + _doc_line + "\n".join(f"    {s}" for s in py_asserts) + "\n"
         try:
             ast.parse(combined)
             specs.append(CompiledReproSpec(
