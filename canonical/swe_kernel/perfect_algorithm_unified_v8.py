@@ -18,7 +18,7 @@ Player-by-player best techniques assembled (no duplicated logic, every param reu
   INVENT typed CEGIS(T) Z3/FM 200 not 80k via SMALL_INT_CONSTANTS -2..5 + composition concepts G_t depth-3=depth-5 (for FOREIGN_IDENT_UNBOUND — build new helper/state-machine)
   ACT  CDP browser BROWSER_CLICK_TEXT + terminal + file ops via single bounded executor, verify goal OBSERVED
   LEARN  generalization not trace: lifted {{target}} + ir_hash V0/V1 + credit_indices + applicability + proof — not raw `.tmp/.bak` trace
-  ADMIT  proof-or-witness on unseen victims repaired+preserved (verifier bootstrap one contrast >200 reps: 4.81% 31/644 0/200 bits)
+  ADMIT  proof-or-witness on unseen victims repaired+preserved (verifier bootstrap one contrast >200 reps: 4.81% 31/644 0/200 bits — heartbeat 2026-11-24T20:04Z never stop)
   SAVE  one JSON outside weights — never warehouse
 
 Hardest discriminating Nov 2026: SWE-bench Pro 61.5%±3.1 (89.9% vendor harness-dependent, V2 HARD 98% Opus5 Code nearly saturated, 107 lines 4.1 files, Verified 76.8-79.2% saturated 30% broken flagged) + OSWorld2.0 20.6% binary/54.8% partial 108 workflows 1.6h/318 calls + Terminal-Bench 4.0 64.8% (66 tasks). Governance 4/12 verified owned covers 4 components proven.
