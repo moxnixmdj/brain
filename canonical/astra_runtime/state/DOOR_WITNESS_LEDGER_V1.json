@@ -1,0 +1,138 @@
+{
+ "ambiguous": {
+  "arity=0|values=0|option=1": {
+   "all_moves": {
+    "DROP2:art0": 16,
+    "SUBSTITUTE:1": 9
+   },
+   "kept": "DROP2:art0",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  },
+  "arity=0|values=0|option=2": {
+   "all_moves": {
+    "DROP1:art0": 6,
+    "DROP2:art0": 2,
+    "SUBSTITUTE:1": 4
+   },
+   "kept": "DROP1:art0",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  },
+  "arity=0|values=1|option=1": {
+   "all_moves": {
+    "APPEND1:art0": 1,
+    "DROP1:art0": 6,
+    "DROP2:art0": 28,
+    "SUBSTITUTE:1": 14,
+    "SUBSTITUTE:art0": 8,
+    "SUBSTITUTE:art1": 3
+   },
+   "kept": "DROP2:art0",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  },
+  "arity=1|values=1|option=0": {
+   "all_moves": {
+    "APPEND1:in.txt": 44,
+    "SUBSTITUTE:1": 2,
+    "SUBSTITUTE:in.txt": 2
+   },
+   "kept": "APPEND1:in.txt",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  },
+  "arity=1|values=1|option=1": {
+   "all_moves": {
+    "APPEND1:art0": 1,
+    "SUBSTITUTE:1": 2,
+    "SUBSTITUTE:alpha": 1,
+    "SUBSTITUTE:in.txt": 1
+   },
+   "kept": "SUBSTITUTE:1",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  },
+  "arity=2|values=1|option=0": {
+   "all_moves": {
+    "APPEND1:art0": 1,
+    "APPEND1:in.txt": 13
+   },
+   "kept": "APPEND1:in.txt",
+   "why_not": "the same signature accepted more than one move; the most frequent survived and the rest are recorded"
+  }
+ },
+ "rules": {
+  "arity=0|values=0|option=0": {
+   "all_moves_seen": {
+    "DROP1:art0": 6
+   },
+   "evidence": 6,
+   "move": "DROP1:art0"
+  },
+  "arity=0|values=0|option=1": {
+   "all_moves_seen": {
+    "DROP2:art0": 25
+   },
+   "evidence": 25,
+   "move": "DROP2:art0"
+  },
+  "arity=0|values=0|option=2": {
+   "all_moves_seen": {
+    "DROP1:art0": 6,
+    "DROP2:art0": 2,
+    "SUBSTITUTE:1": 4
+   },
+   "evidence": 6,
+   "move": "DROP1:art0"
+  },
+  "arity=0|values=0|option=3": {
+   "all_moves_seen": {
+    "SUBSTITUTE:art1": 10
+   },
+   "evidence": 10,
+   "move": "SUBSTITUTE:art1"
+  },
+  "arity=0|values=1|option=1": {
+   "all_moves_seen": {
+    "APPEND1:art0": 1,
+    "DROP1:art0": 6,
+    "DROP2:art0": 28,
+    "SUBSTITUTE:1": 14,
+    "SUBSTITUTE:art0": 8,
+    "SUBSTITUTE:art1": 3
+   },
+   "evidence": 28,
+   "move": "DROP2:art0"
+  },
+  "arity=1|values=0|option=1": {
+   "all_moves_seen": {
+    "APPEND1:art0": 3
+   },
+   "evidence": 3,
+   "move": "APPEND1:art0"
+  },
+  "arity=1|values=1|option=0": {
+   "all_moves_seen": {
+    "APPEND1:in.txt": 44,
+    "SUBSTITUTE:1": 2,
+    "SUBSTITUTE:in.txt": 2
+   },
+   "evidence": 44,
+   "move": "APPEND1:in.txt"
+  },
+  "arity=1|values=1|option=1": {
+   "all_moves_seen": {
+    "APPEND1:art0": 1,
+    "SUBSTITUTE:1": 2,
+    "SUBSTITUTE:alpha": 1,
+    "SUBSTITUTE:in.txt": 1
+   },
+   "evidence": 2,
+   "move": "SUBSTITUTE:1"
+  },
+  "arity=2|values=1|option=0": {
+   "all_moves_seen": {
+    "APPEND1:in.txt": 14
+   },
+   "evidence": 14,
+   "move": "APPEND1:in.txt"
+  }
+ },
+ "schema": "PROJECT_BRAIN_DOOR_WITNESS_LEDGER_V1"
+}
