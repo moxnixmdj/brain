@@ -554,7 +554,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         tools: Sequence[str] | None = None,
         man_root: str | pathlib.Path | None = None,
         goal_check: Callable[[Any], bool] | None = None,
-        effect_contract: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        effect_contract: Mapping[str, Any] | None = None,
+        preserve: Sequence[str] = ()) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -841,6 +842,28 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         "actions_taken": len(executed),
         "reached": reached,
     }
+
+    # THE EFFECT HAS A NEGATIVE HALF. A plan that reaches the goal by destroying
+    # what it was not asked to destroy has damaged the machine, and a success
+    # that damaged the machine must never become a lesson. `preserve` names the
+    # files that have to survive; a violation is reported, not repaired.
+    if preserve and reached:
+        root = getattr(env, "root", None)
+        missing = []
+        if root is not None:
+            import pathlib as _pathlib
+            base = _pathlib.Path(str(root))
+            missing = [name for name in preserve if not (base / name).is_file()]
+        receipts["steps"]["preserve"] = {
+            "status": "PASS__NOTHING_PRESERVED_WAS_LOST" if not missing
+                      else "OPEN__PLAN_DESTROYED_A_PRESERVED_FILE",
+            "preserved": list(preserve), "lost": missing}
+        if missing:
+            receipts["status"] = "OPEN__PLAN_DESTROYED_A_PRESERVED_FILE"
+            receipts["pass"] = False
+            receipts["authority"] = "NONE__EFFECT_DAMAGED_THE_MACHINE"
+            receipts["duration_s"] = round(time.time() - started, 4)
+            return receipts
 
     if not reached:
         receipts["status"] = "OPEN__PLAN_EXECUTED_GOAL_NOT_OBSERVED"

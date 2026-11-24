@@ -226,6 +226,16 @@ without the independent verification the review requires.
 
 ---
 
+### The effect has a negative half
+
+A goal is not only "this artifact appeared"; it is also "nothing I was not asked
+to touch was destroyed". `run(preserve=[...])` checks it after the plan: a plan
+that reaches the goal by deleting the input is reported as
+`OPEN__PLAN_DESTROYED_A_PRESERVED_FILE`, is not a pass, and writes no rule
+(measured in `test_learning_needs_a_verified_effect_v1.py::DestructiveSuccessTests`).
+Without this, `gzip input.txt` is a success that costs the user their file, and
+instant learning makes it the thing the system knows.
+
 ## 6. The next bottleneck (one)
 
 **The oracle covers one shape of goal.** "Produce this artifact from that source"

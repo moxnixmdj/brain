@@ -146,3 +146,53 @@ class VerifiedEffectTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class DestructiveSuccessTests(unittest.TestCase):
+    """A success that destroyed what it was not asked to touch is not a lesson."""
+
+    def setUp(self):
+        if not HAS_GZIP:
+            self.skipTest("gzip is not on this machine")
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix="preserve-gate-"))
+
+    def test_a_plan_that_eats_the_input_is_reported_and_not_learned(self):
+        class Destructive(WrongThenRightEnv):
+            @property
+            def action_names(self):
+                return ["gzip_in_place"]
+
+            def act(self, name):
+                if name != "gzip_in_place":
+                    return False
+                # the form that reaches the goal by deleting the source
+                return subprocess.run(["gzip", "input.txt"], cwd=str(self.root),
+                                      capture_output=True).returncode == 0
+
+            def state(self):
+                return "|".join("%s:%d" % (p.name, p.stat().st_size)
+                                for p in sorted(self.root.iterdir()) if p.is_file())
+
+        env = Destructive(self.root)
+        # rename what gzip produces so the goal's name matches
+        original_act = env.act
+
+        def act(name):
+            done = original_act(name)
+            produced = self.root / "input.txt.gz"
+            if done and produced.is_file():
+                produced.rename(self.root / "out.gz")
+            return done
+
+        env.act = act
+        receipt = pa.run(env, "compress the input into out.gz", env.action_names,
+                         goal_predicate=lambda s: "out.gz:" in str(s),
+                         goal_family="compress_to_named_file", env_kind="posix_dir",
+                         memory_path_=self.root / "memory.json", budget=8,
+                         max_depth=1, seed=5, preserve=["input.txt"])
+        self.assertFalse(receipt.get("pass"), receipt)
+        self.assertEqual(receipt["status"], "OPEN__PLAN_DESTROYED_A_PRESERVED_FILE")
+        self.assertEqual(receipt["steps"]["preserve"]["lost"], ["input.txt"])
+        memory = pa.load_memory(self.root / "memory.json")
+        self.assertEqual([r for r in memory.get("rules", []) if r.get("kind") == "operator"],
+                         [], "a destructive success wrote an operator into memory")
