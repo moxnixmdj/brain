@@ -50,6 +50,8 @@ class WorktreeFixtureCollectorTests(unittest.TestCase):
         self.assertEqual((self.repo / 'mod.py').read_bytes(), b'value = 9\n')
         self.assertFalse(result['carrier_qualified'])
         self.assertFalse(result['independent_verification'])
+        self.assertEqual(result['separate_recomputation']['status'], 'FIXTURE_BYTES_RECOMPUTED')
+        self.assertFalse(result['separate_recomputation']['independent_attestation'])
         self.assertFalse(result['publication_authority'])
         for name, data in result['effect_bytes'].items():
             self.assertEqual(result['receipt']['effects'][name]['sha256'], hashlib.sha256(data).hexdigest())
@@ -70,6 +72,53 @@ class WorktreeFixtureCollectorTests(unittest.TestCase):
         with self.assertRaisesRegex(collector.FixtureRefused, 'BASE_COMMIT_MISMATCH'):
             collector.verify_fixture_worktree_receipt(fake, result['effect_bytes'],
                                                        **{**args, 'expected_receipt_sha256': fake_digest})
+
+    def test_separate_recomputation_rejects_real_file_change_after_collection(self):
+        original = collector._recompute_in_separate_process
+        def mutate_then_recompute(**kwargs):
+            (kwargs['worktree'] / 'mod.py').write_text('value = 8\n', encoding='utf-8')
+            return original(**kwargs)
+        fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
+        with mock.patch.object(collector, '_recompute_in_separate_process', side_effect=mutate_then_recompute):
+            with self.assertRaisesRegex(collector.FixtureRefused, 'SNAPSHOT_MISMATCH'):
+                collector.collect_fixture_worktree(self.repo, self.base, fixture)
+
+    def test_separate_recomputation_rejects_rehashed_wrong_base(self):
+        original = collector._recompute_in_separate_process
+        def forge_then_recompute(**kwargs):
+            receipt = copy.deepcopy(kwargs['receipt'])
+            receipt['base_commit'] = 'b' * len(self.base)
+            digest = hashlib.sha256(json.dumps(receipt, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+            return original(**{**kwargs, 'receipt': receipt, 'receipt_sha': digest})
+        fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
+        with mock.patch.object(collector, '_recompute_in_separate_process', side_effect=forge_then_recompute):
+            with self.assertRaisesRegex(collector.FixtureRefused, 'BASE_MISMATCH'):
+                collector.collect_fixture_worktree(self.repo, self.base, fixture)
+
+    def test_separate_recomputation_rejects_changed_fixture_policy(self):
+        original = collector._recompute_in_separate_process
+        def mutate_then_recompute(**kwargs):
+            (kwargs['input_dir'] / 'fixture.py').write_text('pass\n', encoding='utf-8')
+            return original(**kwargs)
+        fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
+        with mock.patch.object(collector, '_recompute_in_separate_process', side_effect=mutate_then_recompute):
+            with self.assertRaisesRegex(collector.FixtureRefused, 'POLICY_MISMATCH'):
+                collector.collect_fixture_worktree(self.repo, self.base, fixture)
+
+    def test_separate_recomputation_rejects_rehashed_patch_that_changes_different_bytes(self):
+        original = collector._recompute_in_separate_process
+        def forge_then_recompute(**kwargs):
+            effects = dict(kwargs['effects'])
+            effects['patch.diff'] = effects['patch.diff'].replace(b'+value = 2', b'+value = 3')
+            receipt = copy.deepcopy(kwargs['receipt'])
+            receipt['effects']['patch.diff']['sha256'] = hashlib.sha256(effects['patch.diff']).hexdigest()
+            receipt['effects']['patch.diff']['size'] = len(effects['patch.diff'])
+            digest = hashlib.sha256(json.dumps(receipt, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+            return original(**{**kwargs, 'effects': effects, 'receipt': receipt, 'receipt_sha': digest})
+        fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
+        with mock.patch.object(collector, '_recompute_in_separate_process', side_effect=forge_then_recompute):
+            with self.assertRaisesRegex(collector.FixtureRefused, 'PATCH_DOES_NOT_REPRODUCE_WORKTREE'):
+                collector.collect_fixture_worktree(self.repo, self.base, fixture)
 
     def test_unknown_base_refuses_before_fixture_runs(self):
         fixture = "raise RuntimeError('fixture should not run')\n"

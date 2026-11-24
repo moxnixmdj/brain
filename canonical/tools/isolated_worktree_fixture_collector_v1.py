@@ -9,6 +9,7 @@ Only trusted test fixtures may use it. Nothing is adopted to the source repo.
 """
 from __future__ import annotations
 
+import base64
 import difflib
 import hashlib
 import json
@@ -19,6 +20,7 @@ import re
 import shutil
 import socket
 import subprocess
+import sys
 import tempfile
 from typing import Any
 
@@ -201,6 +203,39 @@ def verify_fixture_worktree_receipt(receipt: dict[str, Any], effect_bytes: dict[
         raise FixtureRefused('EFFECT_VERIFICATION_FAILED:' + str(exc)) from exc
 
 
+def _recompute_in_separate_process(*, source: Path, worktree: Path, input_dir: Path,
+                                   receipt: dict[str, Any], effects: dict[str, bytes],
+                                   expected_base: str, expected_policy: str,
+                                   receipt_sha: str) -> dict[str, Any]:
+    payload = {'source': str(source), 'worktree': str(worktree), 'input_dir': str(input_dir),
+               'receipt': receipt, 'effects': {k: base64.b64encode(v).decode('ascii') for k, v in effects.items()},
+               'expected_base': expected_base, 'expected_policy': expected_policy,
+               'expected_receipt_sha256': receipt_sha}
+    raw = json.dumps(payload, sort_keys=True, separators=(',', ':')).encode()
+    if len(raw) > 12_000_000:
+        raise FixtureRefused('RECOMPUTATION_INPUT_TOO_LARGE')
+    code_root = Path(__file__).resolve().parents[2]
+    env = {'PATH': '/usr/bin:/bin', 'HOME': str(input_dir.parent), 'LC_ALL': 'C.UTF-8',
+           'PYTHONDONTWRITEBYTECODE': '1'}
+    try:
+        proc = subprocess.run([sys.executable, '-m', 'canonical.tools.recompute_worktree_fixture_receipt_v1'],
+                              cwd=str(code_root), env=env, input=raw, capture_output=True, timeout=90)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise FixtureRefused('SEPARATE_RECOMPUTATION_UNAVAILABLE') from exc
+    if proc.returncode:
+        raise FixtureRefused('SEPARATE_RECOMPUTATION_FAILED:' + proc.stderr.decode('utf-8', 'replace')[:300])
+    try:
+        result = json.loads(proc.stdout)
+    except (ValueError, UnicodeError) as exc:
+        raise FixtureRefused('SEPARATE_RECOMPUTATION_RESULT_INVALID') from exc
+    if (not isinstance(result, dict) or result.get('status') != 'FIXTURE_BYTES_RECOMPUTED'
+            or result.get('receipt_sha256') != receipt_sha
+            or result.get('independent_attestation') is not False
+            or result.get('execution_authority') is not False):
+        raise FixtureRefused('SEPARATE_RECOMPUTATION_RESULT_INVALID')
+    return result
+
+
 def collect_fixture_worktree(source_repo: str | Path, expected_base_commit: str, fixture_script: str) -> dict[str, Any]:
     """Return a producer-run fixture receipt only; not an admission or signature."""
     if not isinstance(expected_base_commit, str) or not verifier._COMMIT.fullmatch(expected_base_commit):
@@ -253,11 +288,15 @@ def collect_fixture_worktree(source_repo: str | Path, expected_base_commit: str,
                    'effects': {k: {'size': len(v), 'sha256': hashlib.sha256(v).hexdigest()}
                                for k, v in sorted(effects.items())}}
         receipt_sha = hashlib.sha256(json.dumps(receipt, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+        recomputed = None
         if patch:
             verify_fixture_worktree_receipt(receipt, effects, expected_receipt_sha256=receipt_sha,
                                             expected_base_commit=expected_base_commit,
                                             expected_policy_sha256=policy_sha,
                                             expected_effect_paths=tuple(sorted(effects)))
+            recomputed = _recompute_in_separate_process(
+                source=source, worktree=worktree, input_dir=inp, receipt=receipt, effects=effects,
+                expected_base=expected_base_commit, expected_policy=policy_sha, receipt_sha=receipt_sha)
         return {'receipt': receipt, 'receipt_sha256': receipt_sha, 'effect_bytes': effects,
-                'patch_bytes': patch, 'carrier_qualified': False,
+                'patch_bytes': patch, 'separate_recomputation': recomputed, 'carrier_qualified': False,
                 'independent_verification': False, 'publication_authority': False}

@@ -239,13 +239,44 @@ while True: time.sleep(.2)
             self.cleanup_processes(proc, seen)
 
     def test_external_ip_egress_observed_by_host(self):
+        # TEST-NET-1 is reserved for documentation, not a public service. The
+        # host inspects the live namespace; errno is an additional trusted-probe
+        # observation, not proof that every possible exfiltration path is closed.
+        self.worker('''import errno,json,os,socket,time
+time.sleep(1)
+out={}
+for name,kind,port in [('tcp',socket.SOCK_STREAM,443),('udp',socket.SOCK_DGRAM,53)]:
+    s=socket.socket(socket.AF_INET,kind); s.settimeout(.5)
+    try:
+        s.connect(('192.0.2.1',port)); out[name]=0
+    except OSError as exc:
+        out[name]=exc.errno
+    finally: s.close()
+os.write(int(os.environ['PROJECT_BRAIN_BROKER_FD']),json.dumps(out).encode())
+time.sleep(.2)
+''')
+        proc = self.launch(self.policy(wallclock=6)); seen = []
         try:
-            monitor = socket.socket(socket.AF_PACKET, socket.SOCK_RAW, socket.htons(3))
-        except PermissionError:
-            self.skipTest('host denied packet capture (CAP_NET_RAW); external egress NOT QUALIFIED')
-        else:
-            monitor.close()
-            self.fail('host packet capture is available but an external egress observer is not implemented')
+            seen = self.await_workers(proc)
+            pid = seen[0][0]
+            self.assertNotEqual(os.stat(f'/proc/{pid}/ns/net').st_ino,
+                                os.stat('/proc/self/ns/net').st_ino,
+                                'worker shares the host network namespace')
+            devs = Path(f'/proc/{pid}/net/dev').read_text().splitlines()[2:]
+            interfaces = {line.split(':', 1)[0].strip() for line in devs if ':' in line}
+            self.assertEqual(interfaces, {'lo'}, 'unexpected network interface in worker namespace')
+            routes = Path(f'/proc/{pid}/net/route').read_text().splitlines()[1:]
+            self.assertEqual([line for line in routes if line.strip()], [], 'worker has an IPv4 route')
+            out, err = proc.communicate(timeout=12)
+            self.assertEqual(proc.returncode, 0, err.decode(errors='replace'))
+            result = json.loads(out)
+            self.assertEqual(result['status'], 'CHILD_EXITED')
+            self.assertEqual(result['returncode'], 0)
+            observed = json.loads(result['broker_payload'])
+            import errno
+            self.assertEqual(observed, {'tcp': errno.ENETUNREACH, 'udp': errno.ENETUNREACH})
+        finally:
+            self.cleanup_processes(proc, seen)
 
     def test_host_observes_runtime_python_environ(self):
         # Trusted probe materializes a uniquely framed copy of its live mapping;
