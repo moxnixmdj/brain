@@ -1,0 +1,32 @@
+{
+  "carrier_qualified": false,
+  "checkpoint_commit": "3c70735cbd7cc1922a7eb158f02984c3d92400c2",
+  "errors": 0,
+  "failed": 0,
+  "files_sha256": {
+    "canonical/runtime/brokered_workspace_execution_v1.py": "8d0fa5f96e5cf60c0270f93f34182471141836a6f84bfb9089eb67d136dfcc97",
+    "canonical/runtime/worker_syscall_allowlist_v1.py": "32f9366e0f773cbb2c73fbf8833df930beb9ed1ccdef14f20b481c5cb5942c40",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6a5c1d8d67667f2f77ca31ea5924c3260b13045347ee36633d6d0d7b274a1bb5",
+    "canonical/tests/test_isolated_effect_receipt_verifier_v1.py": "b47b8362ec0d3dbcd5bb122a858d4541d280f37d3f87159c470549daafedc081",
+    "canonical/tests/test_namespace_carrier_host_observed_v1.py": "e889055d3627f99ec77832dcc58784da27694d620cd4cdae5346da92df4e5579",
+    "canonical/tools/isolated_effect_collector_v1.py": "ba0e45f310643d0c6a4af7a559700c8d73650b9ce949ccecc30e562926c0d8d8",
+    "canonical/tools/isolated_effect_receipt_verifier_v1.py": "9f15b07f9343f2b93f9dcc54e210c2d1cfd12962d381c086195ddae4294b5004",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "c83299045394201a571b1791e2f607d2a139e112168f621253f36ae4efc612fa",
+    "qualification_results/namespace_pidfd_20261124.log": "7a4a28b483958452123bbd018a8ac5c4171b28b93de30706ad76518c2a2a4408"
+  },
+  "independent_verification": false,
+  "limits": [
+    "Host-observed producer-run fixture tests are not independent carrier qualification.",
+    "Collector binds received broker bytes, not a quiescent filesystem snapshot or verified base commit.",
+    "A real repair-capability independent-evidence gate is still unmet.",
+    "Host libraries and shared kernel remain part of the carrier trust boundary."
+  ],
+  "official_benchmark_report": false,
+  "os": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "passed": 82,
+  "schema": "LOCAL_PRODUCER_RUN_NAMESPACE_PIDFD_DIAGNOSTIC_V1",
+  "skip_reason": "Host packet capture denied (CAP_NET_RAW); external egress unverified.",
+  "skipped": 1,
+  "test_runtime_seconds": 46.447,
+  "tests_total": 83
+}

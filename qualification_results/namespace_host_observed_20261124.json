@@ -1,0 +1,116 @@
+{
+  "checkpoint_commit": "3c70735cbd7cc1922a7eb158f02984c3d92400c2",
+  "command": "python3 -m unittest -v canonical.tests.test_isolated_effect_receipt_verifier_v1 canonical.tests.test_namespace_carrier_host_observed_v1",
+  "errors": 0,
+  "failed": 1,
+  "files_sha256": {
+    "canonical/runtime/brokered_workspace_execution_v1.py": "c14ad052fbdc0c76133ca320e3d528ea72d55f0634c308aa681ed7b5a46da4d9",
+    "canonical/runtime/worker_syscall_allowlist_v1.py": "32f9366e0f773cbb2c73fbf8833df930beb9ed1ccdef14f20b481c5cb5942c40",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "c63f51721027b2833d52a8e83235552b70353de7a7a18abf6b1b8bf185d7c748",
+    "canonical/tests/test_isolated_effect_receipt_verifier_v1.py": "b47b8362ec0d3dbcd5bb122a858d4541d280f37d3f87159c470549daafedc081",
+    "canonical/tests/test_namespace_carrier_host_observed_v1.py": "343334e26babee350911e30ce89df73527d0675d8061822daf62b3a6c202c205",
+    "canonical/tools/isolated_effect_receipt_verifier_v1.py": "9f15b07f9343f2b93f9dcc54e210c2d1cfd12962d381c086195ddae4294b5004",
+    "qualification_results/namespace_host_observed_20261124.log": "c2f11d1122a2e3881a32849756ad4652a027a7f60d8f60d105a86b5b407122bf"
+  },
+  "independent_verification": false,
+  "limitations": [
+    "No trusted real-carrier effect collector or independently attested receipt.",
+    "External egress, nested input mounts and dynamic os.environ are unverified.",
+    "Producer-run checks do not grant carrier qualification."
+  ],
+  "official_benchmark_report": false,
+  "passed": 12,
+  "qualified": false,
+  "schema": "LOCAL_PRODUCER_RUN_NAMESPACE_QUALIFICATION_DIAGNOSTIC_V1",
+  "skipped": 4,
+  "system": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "test_runtime_seconds": 10.71,
+  "tests": [
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_base_commit_tampering_is_refused.test_base_commit_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_effect_bytes_tampering_is_refused.test_effect_bytes_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_effect_path_tampering_is_refused.test_effect_path_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_exact_patch_bytes_are_returned.test_exact_patch_bytes_are_returned"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_missing_empty_or_extra_effects_are_refused.test_missing_empty_or_extra_effects_are_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_patch_bytes_tampering_is_refused.test_patch_bytes_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_policy_tampering_is_refused.test_policy_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_receipt_digest_tampering_is_refused.test_receipt_digest_tampering_is_refused"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_untrusted_or_invalid_effect_paths_are_refused.test_untrusted_or_invalid_effect_paths_are_refused"
+    },
+    {
+      "detail": "'no host-observed external egress monitor configured; NOT QUALIFIED'",
+      "outcome": "skipped",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_external_ip_egress_observed_by_host.test_external_ip_egress_observed_by_host"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_inspects_worker_environment.test_host_inspects_worker_environment"
+    },
+    {
+      "detail": "",
+      "outcome": "FAIL",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_cancellation_kills_descendants.test_host_observes_cancellation_kills_descendants"
+    },
+    {
+      "detail": "'no controlled pre-existing nested host mount fixture; NOT QUALIFIED'",
+      "outcome": "skipped",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_nested_input_mount_refusal.test_host_observes_nested_input_mount_refusal"
+    },
+    {
+      "detail": "'host /proc initial environ does not prove a later os.environ value; NOT QUALIFIED'",
+      "outcome": "skipped",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_runtime_python_environ.test_host_observes_runtime_python_environ"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_timeout_kills_all_observed_workers.test_host_observes_timeout_kills_all_observed_workers"
+    },
+    {
+      "detail": "",
+      "outcome": "ok",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_sentinels_and_local_listeners_observe_no_escape.test_host_sentinels_and_local_listeners_observe_no_escape"
+    },
+    {
+      "detail": "'no trusted post-quiescence collector or independent attestation exists; NOT QUALIFIED'",
+      "outcome": "skipped",
+      "test": "canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_real_carrier_patch_effect_receipt.test_real_carrier_patch_effect_receipt"
+    }
+  ],
+  "tests_total": 17
+}

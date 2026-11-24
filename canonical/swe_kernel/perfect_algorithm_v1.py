@@ -224,6 +224,9 @@ def scan(env: Any, actions: Sequence[Any], *, budget: int = 60,
 # 2. THE RIGHT QUESTION
 # --------------------------------------------------------------------------- #
 
+ProbeRestoreError = el.ProbeRestoreError
+
+
 def right_question(env: Any, scan_result: Mapping[str, Any],
                    actions: Sequence[Any], *,
                    heuristic: Callable[[Any], float] | None = None,
@@ -255,14 +258,11 @@ def right_question(env: Any, scan_result: Mapping[str, Any],
                                  "closeness": None, "probed": False}
         # probe for closeness when the env supports it
         if heuristic is not None and hasattr(env, "snapshot") and hasattr(env, "restore"):
-            try:
-                saved = env.snapshot()
-                env.act(key)
-                entry["closeness"] = float(heuristic(env.state()))
-                env.restore(saved)
-                entry["probed"] = True
-            except Exception:
-                entry["probed"] = False
+            closeness, error = el.probe_closeness(env, key, heuristic)
+            entry["closeness"] = closeness
+            entry["probed"] = error is None
+            if error:
+                entry["probe_error"] = error
         scored.append(entry)
     scored.sort(key=lambda r: (not r["novel_from_root"],
                              r["closeness"] if r["closeness"] is not None else 0.0))
@@ -532,8 +532,16 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     if prior_rows:
         verified_rows, stale_discarded = verify_priors(env, prior_rows)
         prior_rows = verified_rows
-    scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
-                       heuristic=heuristic, prior=prior_rows, seed=seed)
+    try:
+        scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
+                           heuristic=heuristic, prior=prior_rows, seed=seed)
+    except ProbeRestoreError:
+        receipts["steps"]["scan"] = {"status": "REFUSED__PROBE_RESTORE_FAILED"}
+        receipts["status"] = "OPEN__PROBE_RESTORE_FAILED"
+        receipts["pass"] = False
+        receipts["authority"] = "NONE__ENVIRONMENT_STATE_UNKNOWN"
+        receipts["duration_s"] = round(time.time() - started, 4)
+        return receipts
     learned = scan_result["learned"]
     receipts["steps"]["scan"] = {
         "states_seen": scan_result["state_count"],
@@ -553,8 +561,16 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                 goal_states_observed.add(key)
         except Exception:
             continue
-    right = right_question(env, scan_result, actions, heuristic=heuristic,
-                           goal_states=goal_states_observed)
+    try:
+        right = right_question(env, scan_result, actions, heuristic=heuristic,
+                               goal_states=goal_states_observed)
+    except ProbeRestoreError:
+        receipts["steps"]["right_question"] = {"status": "REFUSED__PROBE_RESTORE_FAILED"}
+        receipts["status"] = "OPEN__PROBE_RESTORE_FAILED"
+        receipts["pass"] = False
+        receipts["authority"] = "NONE__ENVIRONMENT_STATE_UNKNOWN"
+        receipts["duration_s"] = round(time.time() - started, 4)
+        return receipts
     receipts["steps"]["right_question"] = right
 
     # ---- PLAN ----

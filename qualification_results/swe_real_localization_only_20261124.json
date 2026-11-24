@@ -1,0 +1,189 @@
+{
+  "count": 5,
+  "instances": [
+    {
+      "base_commit": "d16bfe05a744909de4b27f5875fe0d4ed41ce607",
+      "instance_id": "astropy__astropy-12907",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "reason": null,
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "ADVISORY_CANDIDATES",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_SYMBOL_AST_SEARCH",
+          "candidate_count": 6,
+          "candidates": [
+            "astropy/convolution/core.py",
+            "astropy/convolution/kernels.py",
+            "astropy/io/fits/column.py",
+            "astropy/modeling/functional_models.py",
+            "astropy/modeling/separable.py",
+            "astropy/nddata/nduncertainty.py"
+          ],
+          "status": "AMBIGUOUS",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "problem_statement_sha256": "c01334ec1b21a089c650cf2e7b96ab974469076bf1260d23885799e1f0a7551f",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "4ffc67512585ebd76f93abe9544e3563f826ccf70e1576492d3f21eb8d3d4979"
+    },
+    {
+      "base_commit": "298ccb478e6bf092953bca67a3d29dc6c35f6752",
+      "instance_id": "astropy__astropy-13033",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "reason": "SYMBOL_SCAN_FILE_LIMIT",
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "NOT_LOCATED",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_SYMBOL",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_TEST_FILENAME",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "problem_statement_sha256": "a295c83e68ff62290947b0796b75659b94621b7f2340d6f0055512d04be3f1d1",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "a5bab553799dade3acf5ad4797ca8a42327fc155dbd6052139fae6f07d4f3c82"
+    },
+    {
+      "base_commit": "6ed769d58d89380ebaa1ef52b300691eefda8928",
+      "instance_id": "astropy__astropy-13236",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "reason": "SYMBOL_SCAN_FILE_LIMIT",
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "NOT_LOCATED",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_SYMBOL",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_TEST_FILENAME",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "problem_statement_sha256": "1f01b57c4e17057a2427b8ed897618f91782d22e98804b706826ba936a3d5ec4",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "6ecddeeb73fbe9b4280607005d6f9f50e54075c0cae04ac408b8b642d746c667"
+    },
+    {
+      "base_commit": "6500928dc0e57be8f06d1162eacc3ba5e2eff692",
+      "instance_id": "astropy__astropy-13398",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "reason": "SYMBOL_SCAN_FILE_LIMIT",
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "NOT_LOCATED",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_SYMBOL",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_TEST_FILENAME",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "problem_statement_sha256": "c26c8dc258dc5cb9dd34f30bdbaaed3f19a8ada137e0f19d81d7f57dc5f11bba",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "40e0109031eb10372d56e36cec87e7172462cfd870e537051f2fc6c6494733bc"
+    },
+    {
+      "base_commit": "19cc80471739bcb67b7e8099246b391c355023ee",
+      "instance_id": "astropy__astropy-13453",
+      "localization": {
+        "authority": "NONE__ADVISORY_ONLY",
+        "reason": "SYMBOL_SCAN_FILE_LIMIT",
+        "schema": "PROJECT_BRAIN_SWEBENCH_ISSUE_LOCALIZER_V1",
+        "status": "NOT_LOCATED",
+        "symbol": {
+          "basis": "EXPLICIT_ISSUE_SYMBOL_AND_AST",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "target_path": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_SYMBOL",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        },
+        "test_target": {
+          "basis": "EXPLICIT_ISSUE_PATH_OR_UNIQUE_TEST_FILENAME",
+          "candidate_count": 0,
+          "candidates": [],
+          "status": "MISSING",
+          "value": null
+        }
+      },
+      "problem_statement_sha256": "be929904c3062b54da2fa3ad7de338bd7f1f41a5aa48e64bec41f244d6e17c5a",
+      "repo": "astropy/astropy",
+      "source_archive_sha256": "b3efd052912d34ae1473cc73f8216ebee93691aa44707023bfde149cc79cdaf7"
+    }
+  ],
+  "localizer_revision": "1f0f7367c75efb6ffcdf9637598ae73c92871453",
+  "note": "Read-only localization only; not a repair run, independently verified receipt, or official score. Rows from a third-party pinned mirror; source archives requested by base commit, not git-object verified. No gold or test fields supplied to localizer. Symlinks and non-regular archive members omitted.",
+  "repair_runs": 0,
+  "schema": "LOCAL_SWE_REAL_ISSUE_LOCALIZATION_ONLY_V1",
+  "source": "https://github.com/hyang0129/onlycodes",
+  "source_commit": "7548222e5f33b4e760b3cbeb193e5403f8e2e6cc",
+  "verified_patches": null
+}

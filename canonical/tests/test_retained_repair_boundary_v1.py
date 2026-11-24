@@ -30,6 +30,21 @@ class RetainedRepairBoundaryTests(unittest.TestCase):
         with self.assertRaisesRegex(bound.BoundExecutionError, 'BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT'):
             bound.prepare(CID, inputs=self.inputs)
 
+    def test_repair_inspect_rejects_legacy_flags_and_anchored_receipts(self):
+        for evidence in ({'independent_verified': True}, {'independently_verified': True},
+                         {'producer_independent': True}, {'independently_verified_by': 'reviewer'},
+                         {'receipt_path': 'fixture-receipt.json'}):
+            row = deepcopy(self.entry)
+            row['verification'] = evidence
+            # A synthetic positive anchor models a legacy receipt; it must never
+            # become repair authority. No filesystem or invocation is patched.
+            with self.subTest(evidence=evidence), \
+                 mock.patch.object(bound, '_load_registry', return_value=(b'{}', {}, {CID: row})), \
+                 mock.patch.object(bound, '_receipt_anchor_verified', return_value=True) as anchor:
+                with self.assertRaisesRegex(bound.BoundExecutionError, 'BOUND_CAPABILITY_INDEPENDENT_VERIFICATION_NOT_EVIDENT'):
+                    bound.inspect(CID)
+                anchor.assert_not_called()
+
     def test_even_if_inspection_later_succeeds_frozen_template_cannot_drop_retention(self):
         with mock.patch.object(bound, 'inspect', return_value=self.inspected):
             with self.assertRaisesRegex(bound.BoundExecutionError, 'RETAINED_LEARNING_NOT_BOUND_BY_FROZEN_TEMPLATE'):
