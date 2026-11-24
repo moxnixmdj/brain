@@ -1,0 +1,6354 @@
+{
+ "schema": "BRAIN_THE_GUIDE_IS_A_TEST_SUITE_20261204_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-12-04",
+ "mode": "THE_GUIDE_TRANSCRIPT_IS_THE_ORACLE",
+ "declared_before_the_run": {
+  "G1_a_real_guide_yields_runnable_examples_without_a_model": "at least one real guide contains transcript examples that can be extracted and executed with no model in the loop",
+  "G2_the_guides_own_printed_output_is_an_oracle": "at least half of the examples that run are scored by the output the guide itself printed, and the score is not trivially all-matches",
+  "G3_an_example_can_tell_which_input_it_is_looking_at": "at least one matched example separates every machine-produced mutation of its own input -- so the example is a verifier, not decoration",
+  "G4_a_rule_from_one_example_reaches_an_input_the_guide_never_showed": "at least one rule derived from a single documentation example satisfies the documentation's own stated property on held-out inputs",
+  "G5_the_store_admits_only_what_three_tests_allow": "what is kept is admitted by all three tests and the refusals are recorded with the test that refused them",
+  "G6_the_seam_is_measured_not_hidden": "the round reports what share of the documentation it read is of a kind a run can confirm, and names the rest as prose no example checks",
+  "G7_zero": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "verdict": {
+  "G1_a_real_guide_yields_runnable_examples_without_a_model": {
+   "claimed": "at least one real guide contains transcript examples that can be extracted and executed with no model in the loop",
+   "measured": "303 examples in 189 sessions from 9 guides; 138 ran",
+   "MET": true
+  },
+  "G2_the_guides_own_printed_output_is_an_oracle": {
+   "claimed": "at least half of the examples that run are scored by the output the guide itself printed, and the score is not trivially all-matches",
+   "measured": "130 of 138 run examples matched exactly; 51 were refused by the interpreter",
+   "MET": true
+  },
+  "G3_an_example_can_tell_which_input_it_is_looking_at": {
+   "claimed": "at least one matched example separates every machine-produced mutation of its own input -- so the example is a verifier, not decoration",
+   "measured": "72 of 88 mutations separated across 130 examples; 0 blind",
+   "MET": true
+  },
+  "G4_a_rule_from_one_example_reaches_an_input_the_guide_never_showed": {
+   "claimed": "at least one rule derived from a single documentation example satisfies the documentation's own stated property on held-out inputs",
+   "measured": "4 of 4 held-out instances hold across 2 tasks",
+   "MET": true
+  },
+  "G5_the_store_admits_only_what_three_tests_allow": {
+   "claimed": "what is kept is admitted by all three tests and the refusals are recorded with the test that refused them",
+   "measured": "2 admitted, 0 refused, 603 bytes stored",
+   "MET": true
+  },
+  "G6_the_seam_is_measured_not_hidden": {
+   "claimed": "the round reports what share of the documentation it read is of a kind a run can confirm, and names the rest as prose no example checks",
+   "measured": "21513 of 361161 bytes are transcript (6.0%); the rest is prose",
+   "MET": true
+  },
+  "G7_zero": {
+   "claimed": "zero model calls, zero stored parameters, zero network at run time",
+   "measured": "{\"seconds\": 4.6, \"model_calls\": 0, \"parameters_stored\": 0, \"network_calls_at_run_time\": 0}",
+   "MET": true
+  }
+ },
+ "harvest": {
+  "guides": {
+   "stdlib:textwrap": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/textwrap.py",
+    "blocks": 1,
+    "docstrings_with_a_transcript": 1,
+    "sessions": 2,
+    "examples": 2
+   },
+   "stdlib:difflib": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/difflib.py",
+    "blocks": 20,
+    "docstrings_with_a_transcript": 20,
+    "sessions": 43,
+    "examples": 75
+   },
+   "stdlib:statistics": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/statistics.py",
+    "blocks": 21,
+    "docstrings_with_a_transcript": 21,
+    "sessions": 53,
+    "examples": 82
+   },
+   "stdlib:fractions": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/fractions.py",
+    "blocks": 2,
+    "docstrings_with_a_transcript": 2,
+    "sessions": 13,
+    "examples": 13
+   },
+   "stdlib:enum": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/enum.py",
+    "blocks": 4,
+    "docstrings_with_a_transcript": 4,
+    "sessions": 10,
+    "examples": 15
+   },
+   "stdlib:pickletools": {
+    "status": "READ",
+    "path": "/usr/lib/python3.11/pickletools.py",
+    "blocks": 23,
+    "docstrings_with_a_transcript": 23,
+    "sessions": 59,
+    "examples": 97
+   },
+   "requests": {
+    "status": "READ",
+    "path": "/tmp/real/requests/README.md",
+    "blocks": 4,
+    "docstrings_with_a_transcript": 2,
+    "sessions": 5,
+    "examples": 8
+   },
+   "click": {
+    "status": "READ",
+    "path": "/tmp/real/click/README.md",
+    "blocks": 2,
+    "docstrings_with_a_transcript": 1,
+    "sessions": 0,
+    "examples": 1
+   },
+   "tqdm": {
+    "status": "MISSING",
+    "path": "/tmp/real/tqdm/README.md"
+   },
+   "httpx": {
+    "status": "READ",
+    "path": "/tmp/real/httpx/README.md",
+    "blocks": 5,
+    "docstrings_with_a_transcript": 5,
+    "sessions": 4,
+    "examples": 10
+   }
+  },
+  "blocks": 82,
+  "examples": 303,
+  "sessions": 189
+ },
+ "examples": {
+  "examples": 189,
+  "ran": 138,
+  "matched": 130,
+  "refused_by_the_interpreter": 51,
+  "could_not_run": 0,
+  "matched_rows": [
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello world!'"
+    ],
+    "got": [
+     "'Hello world!'"
+    ]
+   },
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello [...]'"
+    ],
+    "got": [
+     "'Hello [...]'"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 46,
+    "statement": "print(round(s.ratio(), 3))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.866"
+    ],
+    "got": [
+     "0.866"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"appel\", [\"ape\", \"apple\", \"peach\", \"puppy\"])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['apple', 'ape']"
+    ],
+    "got": [
+     "['apple', 'ape']"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"wheel\", _keyword.kwlist)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['while']"
+    ],
+    "got": [
+     "['while']"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "len(text1)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4"
+    ],
+    "got": [
+     "4"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('  #   \\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('hello\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK(' ')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('\\t')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('x')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1182,
+    "statement": "print(''.join(context_diff('one\\ntwo\\nthree\\nfour\\n'.splitlines(True),\n      'zero\\none\\ntree\\nfour\\n'.splitlines(True), 'Original', 'Current')),\n      end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    *** Original",
+     "    --- Current"
+    ],
+    "got": [
+     "*** Original",
+     "--- Current"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1304,
+    "statement": "print(''.join(diff), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    - one",
+     "    ?  ^"
+    ],
+    "got": [
+     "- one",
+     "?  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 2020,
+    "statement": "print(''.join(restore(diff, 1)), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    one",
+     "    two"
+    ],
+    "got": [
+     "one",
+     "two"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 185,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 197,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 223,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=0, b=4, size=5)"
+    ],
+    "got": [
+     "Match(a=0, b=4, size=5)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=1, b=0, size=4)"
+    ],
+    "got": [
+     "Match(a=1, b=0, size=4)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 2, 0, 1)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=0, b=0, size=0)"
+    ],
+    "got": [
+     "Match(a=0, b=0, size=0)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 422,
+    "statement": "list(s.get_matching_blocks())",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        [Match(a=0, b=0, size=2), Match(a=3, b=2, size=2), Match(a=5, b=4, size="
+    ],
+    "got": [
+     "[Match(a=0, b=0, size=2), Match(a=3, b=2, size=2), Match(a=5, b=4, size=0)]"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 548,
+    "statement": "pprint(list(SequenceMatcher(None,a,b).get_grouped_opcodes()))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        [[('equal', 5, 8, 5, 8), ('insert', 8, 8, 8, 9), ('equal', 8, 11, 9, 12)",
+     "         [('equal', 16, 19, 17, 20),"
+    ],
+    "got": [
+     "[[('equal', 5, 8, 5, 8), ('insert', 8, 8, 8, 9), ('equal', 8, 11, 9, 12)],",
+     " [('equal', 16, 19, 17, 20),"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 598,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 834,
+    "statement": "print(''.join(Differ().compare('one\\ntwo\\nthree\\n'.splitlines(True),\n                               'ore\\ntree\\nemu\\n'.splitlines(True))),\n      end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        - one",
+     "        ?  ^"
+    ],
+    "got": [
+     "- one",
+     "?  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 894,
+    "statement": "print(''.join(results), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        - abcDefghiJkl",
+     "        ?    ^  ^  ^"
+    ],
+    "got": [
+     "- abcDefghiJkl",
+     "?    ^  ^  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1000,
+    "statement": "for line in results: print(repr(line))\n",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        '- \\tabcDefghiJkl\\n'",
+     "        '? \\t ^ ^  ^\\n'"
+    ],
+    "got": [
+     "'- \\tabcDefghiJkl\\n'",
+     "'? \\t ^ ^  ^\\n'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "mean([-1.0, 2.5, 3.25, 5.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "2.625"
+    ],
+    "got": [
+     "2.625"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "median([2, 3, 4, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "3.5"
+    ],
+    "got": [
+     "3.5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "median_grouped([2, 2, 3, 3, 3, 4])  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "EXACT_UNDER_ELLIPSIS",
+    "matches": true,
+    "want": [
+     "2.8333333333..."
+    ],
+    "got": [
+     "2.8333333333333335"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "EXACT_UNDER_ELLIPSIS",
+    "matches": true,
+    "want": [
+     "4.38961843444..."
+    ],
+    "got": [
+     "4.389618434442793"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "pvariance(data, mu)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "2.5"
+    ],
+    "got": [
+     "2.5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "covariance(x, y)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([3, 2.25, 4.5, -0.5, 0.25])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'float'>, Fraction(19, 2), 5)"
+    ],
+    "got": [
+     "(<class 'float'>, Fraction(19, 2), 5)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([1e50, 1, -1e50] * 1000)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'float'>, Fraction(1000, 1), 3000)"
+    ],
+    "got": [
+     "(<class 'float'>, Fraction(1000, 1), 3000)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([F(2, 3), F(7, 5), F(1, 4), F(5, 6)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'fractions.Fraction'>, Fraction(63, 20), 4)"
+    ],
+    "got": [
+     "(<class 'fractions.Fraction'>, Fraction(63, 20), 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'decimal.Decimal'>, Fraction(6963, 10000), 4)"
+    ],
+    "got": [
+     "(<class 'decimal.Decimal'>, Fraction(6963, 10000), 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 288,
+    "statement": "_exact_ratio(0.25)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (1, 4)"
+    ],
+    "got": [
+     "(1, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([1, 2, 3, 4, 4])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    2.8"
+    ],
+    "got": [
+     "2.8"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(13, 21)"
+    ],
+    "got": [
+     "Fraction(13, 21)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([D(\"0.5\"), D(\"0.75\"), D(\"0.625\"), D(\"0.375\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('0.5625')"
+    ],
+    "got": [
+     "Decimal('0.5625')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 437,
+    "statement": "fmean([3.5, 4.0, 5.25])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4.25"
+    ],
+    "got": [
+     "4.25"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 475,
+    "statement": "round(geometric_mean([54, 24, 36]), 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    36.0"
+    ],
+    "got": [
+     "36.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 494,
+    "statement": "harmonic_mean([40, 60])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        48.0"
+    ],
+    "got": [
+     "48.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 494,
+    "statement": "harmonic_mean([40, 60], weights=[5, 30])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        56.0"
+    ],
+    "got": [
+     "56.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 550,
+    "statement": "median([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 550,
+    "statement": "median([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4.0"
+    ],
+    "got": [
+     "4.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 574,
+    "statement": "median_low([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 574,
+    "statement": "median_low([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 596,
+    "statement": "median_high([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 596,
+    "statement": "median_high([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    5"
+    ],
+    "got": [
+     "5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode([1, 1, 2, 3, 3, 3, 3, 4])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode([\"red\", \"blue\", \"blue\", \"red\", \"green\", \"red\", \"red\"])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'red'"
+    ],
+    "got": [
+     "'red'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode(['red', 'red', 'green', 'blue', 'blue'])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'red'"
+    ],
+    "got": [
+     "'red'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('aabbbbbbbbcc')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['b']"
+    ],
+    "got": [
+     "['b']"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('aabbbbccddddeeffffgg')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['b', 'd', 'f']"
+    ],
+    "got": [
+     "['b', 'd', 'f']"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    []"
+    ],
+    "got": [
+     "[]"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.3720238095238095"
+    ],
+    "got": [
+     "1.3720238095238095"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('31.01875')"
+    ],
+    "got": [
+     "Decimal('31.01875')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance([F(1, 6), F(1, 2), F(5, 3)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(67, 108)"
+    ],
+    "got": [
+     "Fraction(67, 108)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.25"
+    ],
+    "got": [
+     "1.25"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('24.815')"
+    ],
+    "got": [
+     "Decimal('24.815')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance([F(1, 4), F(5, 4), F(1, 2)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(13, 72)"
+    ],
+    "got": [
+     "Fraction(13, 72)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 908,
+    "statement": "stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.0810874155219827"
+    ],
+    "got": [
+     "1.0810874155219827"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 926,
+    "statement": "pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.986893273527251"
+    ],
+    "got": [
+     "0.986893273527251"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 964,
+    "statement": "covariance(x, y)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 992,
+    "statement": "correlation(x, x)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.0"
+    ],
+    "got": [
+     "1.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1240,
+    "statement": "N1.overlap(N2)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "            0.8035050657330205"
+    ],
+    "got": [
+     "0.8035050657330205"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(10, -8)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-5, 4)"
+    ],
+    "got": [
+     "Fraction(-5, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Fraction(1, 7), 5)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(1, 35)"
+    ],
+    "got": [
+     "Fraction(1, 35)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Fraction(1, 7), Fraction(2, 3))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(3, 14)"
+    ],
+    "got": [
+     "Fraction(3, 14)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('314')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(314, 1)"
+    ],
+    "got": [
+     "Fraction(314, 1)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('-35/4')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-35, 4)"
+    ],
+    "got": [
+     "Fraction(-35, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('3.1415') # conversion from numeric string",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(6283, 2000)"
+    ],
+    "got": [
+     "Fraction(6283, 2000)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('-47e-2') # string may include a decimal exponent",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-47, 100)"
+    ],
+    "got": [
+     "Fraction(-47, 100)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(1.47)  # direct construction from float (exact conversion)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(6620291452234629, 4503599627370496)"
+    ],
+    "got": [
+     "Fraction(6620291452234629, 4503599627370496)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(2.25)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(9, 4)"
+    ],
+    "got": [
+     "Fraction(9, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Decimal('1.47'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(147, 100)"
+    ],
+    "got": [
+     "Fraction(147, 100)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction('3.141592653589793').limit_denominator(10)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(22, 7)"
+    ],
+    "got": [
+     "Fraction(22, 7)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction('3.141592653589793').limit_denominator(100)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(311, 99)"
+    ],
+    "got": [
+     "Fraction(311, 99)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction(4321, 8765).limit_denominator(10000)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(4321, 8765)"
+    ],
+    "got": [
+     "Fraction(4321, 8765)"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 132,
+    "statement": "bin(10)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    '0b0 1010'"
+    ],
+    "got": [
+     "'0b0 1010'"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 132,
+    "statement": "bin(~10)   # ~10 is -11",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    '0b1 0101'"
+    ],
+    "got": [
+     "'0b1 0101'"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1631,
+    "statement": "Color",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        <enum 'Color'>"
+    ],
+    "got": [
+     "<enum 'Color'>"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 213,
+    "statement": "read_uint1(io.BytesIO(b'\\xff'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 232,
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 232,
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\xff'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    65535"
+    ],
+    "got": [
+     "65535"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 253,
+    "statement": "read_int4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 253,
+    "statement": "read_int4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == -(2**31)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 274,
+    "statement": "read_uint4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 274,
+    "statement": "read_uint4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == 2**31",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 295,
+    "statement": "read_uint8(io.BytesIO(b'\\xff\\x00\\x00\\x00\\x00\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 295,
+    "statement": "read_uint8(io.BytesIO(b'\\xff' * 8)) == 2**64-1",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"'abcd'\\nefg\\n\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abcd'"
+    ],
+    "got": [
+     "'abcd'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"\\n\"), stripquotes=False)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"''\\n\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(br\"'a\\n\\\\b\\x00c\\td'\" + b\"\\n'e'\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'a\\n\\\\b\\x00c\\td'"
+    ],
+    "got": [
+     "'a\\n\\\\b\\x00c\\td'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 387,
+    "statement": "read_stringnl_noescape_pair(io.BytesIO(b\"Queue\\nEmpty\\njunk\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'Queue Empty'"
+    ],
+    "got": [
+     "'Queue Empty'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 410,
+    "statement": "read_string1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 410,
+    "statement": "read_string1(io.BytesIO(b\"\\x03abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abc'"
+    ],
+    "got": [
+     "'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 439,
+    "statement": "read_string4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 439,
+    "statement": "read_string4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abc'"
+    ],
+    "got": [
+     "'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 473,
+    "statement": "read_bytes1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 473,
+    "statement": "read_bytes1(io.BytesIO(b\"\\x03abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 501,
+    "statement": "read_bytes4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 501,
+    "statement": "read_bytes4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 535,
+    "statement": "read_bytes8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 535,
+    "statement": "read_bytes8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 570,
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    bytearray(b'')"
+    ],
+    "got": [
+     "bytearray(b'')"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 570,
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    bytearray(b'abc')"
+    ],
+    "got": [
+     "bytearray(b'abc')"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 604,
+    "statement": "read_unicodestringnl(io.BytesIO(b\"abc\\\\uabcd\\njunk\")) == 'abc\\uabcd'",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 630,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 669,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 710,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 751,
+    "statement": "read_decimalnl_short(io.BytesIO(b\"1234\\n56\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1234"
+    ],
+    "got": [
+     "1234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 773,
+    "statement": "read_decimalnl_long(io.BytesIO(b\"1234L\\n56\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1234"
+    ],
+    "got": [
+     "1234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 773,
+    "statement": "read_decimalnl_long(io.BytesIO(b\"123456789012345678901234L\\n6\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    123456789012345678901234"
+    ],
+    "got": [
+     "123456789012345678901234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 814,
+    "statement": "read_floatnl(io.BytesIO(b\"-1.25\\n6\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -1.25"
+    ],
+    "got": [
+     "-1.25"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 836,
+    "statement": "raw",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'\\xbf\\xf4\\x00\\x00\\x00\\x00\\x00\\x00'"
+    ],
+    "got": [
+     "b'\\xbf\\xf4\\x00\\x00\\x00\\x00\\x00\\x00'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0"
+    ],
+    "got": [
+     "0"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x7f\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    32767"
+    ],
+    "got": [
+     "32767"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\xff\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -256"
+    ],
+    "got": [
+     "-256"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\x80\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -32768"
+    ],
+    "got": [
+     "-32768"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x7f\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    32767"
+    ],
+    "got": [
+     "32767"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\xff\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -256"
+    ],
+    "got": [
+     "-256"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\x80\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -32768"
+    ],
+    "got": [
+     "-32768"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long1(io.BytesIO(b\"\\x00\\x00\\x00\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0"
+    ],
+    "got": [
+     "0"
+    ]
+   }
+  ],
+  "mismatch_sample": [
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "text2 = '''  1. Beautiful is better than ugly.\n  3.   Simple is better than complex.\n  4. Complicated is better than complex.\n  5. Flat is better than nested.\n'",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Next we instantiate a Differ object:"
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "d = Differ()",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Note that when instantiating a Differ object we may pass functions to",
+     "    filter out line and character 'junk'.  See Differ.__init__ for details."
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1097,
+    "statement": "for line in unified_diff('one two three four'.split(),\n            'zero one tree four'.split(), 'Original', 'Current',\n            '2005-01-26 23:30:50', '2010",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_7",
+    "matches": false,
+    "want": [
+     "    --- Original        2005-01-26 23:30:50",
+     "    +++ Current         2010-04-02 10:20:52"
+    ],
+    "got": [
+     "--- Original\t2005-01-26 23:30:50",
+     "+++ Current\t2010-04-02 10:20:52"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 493,
+    "statement": "for tag, i1, i2, j1, j2 in s.get_opcodes():\n   print((\"%7s a[%d:%d] (%s) b[%d:%d] (%s)\" %\n          (tag, i1, i2, a[i1:i2], j1, j2, b[j1:j2])))",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "         delete a[0:1] (q) b[0:0] ()",
+     "          equal a[1:3] (ab) b[0:2] (ab)"
+    ],
+    "got": [
+     " delete a[0:1] (q) b[0:0] ()",
+     "  equal a[1:3] (ab) b[0:2] (ab)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 615,
+    "statement": "demographics = Counter({\n   25: 172,   # 20 to 30 years old\n   35: 484,   # 30 to 40 years old\n   45: 387,   # 40 to 50 years old\n   55:  22,   # 50 to 60 years",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    The 50th percentile (median) is the 536th person out of the 1071",
+     "    member cohort.  That person is in the 30 to 40 year old age group."
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1028,
+    "statement": "linear_regression(x, y)  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    LinearRegression(slope=3.09078914170..., intercept=1.75684970486...)"
+    ],
+    "got": [
+     "LinearRegression(slope=3.0907891417020465, intercept=1.756849704861633)"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Access them by:"
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1889,
+    "statement": "_test_simple_enum(CheckedColor, Color)",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    If differences are found, a :exc:`TypeError` is raised."
+    ],
+    "got": []
+   }
+  ],
+  "rows": [
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello world!'"
+    ],
+    "got": [
+     "'Hello world!'"
+    ]
+   },
+   {
+    "guide": "stdlib:textwrap",
+    "block_line": 399,
+    "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'Hello [...]'"
+    ],
+    "got": [
+     "'Hello [...]'"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 46,
+    "statement": "print(round(s.ratio(), 3))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.866"
+    ],
+    "got": [
+     "0.866"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 46,
+    "statement": "for block in s.get_matching_blocks():\n    print(\"a[%d] and b[%d] match for %d elements\" % block)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 46,
+    "statement": "for opcode in s.get_opcodes():\n    print(\"%6s a[%d:%d] b[%d:%d]\" % opcode)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"appel\", [\"ape\", \"apple\", \"peach\", \"puppy\"])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['apple', 'ape']"
+    ],
+    "got": [
+     "['apple', 'ape']"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"wheel\", _keyword.kwlist)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['while']"
+    ],
+    "got": [
+     "['while']"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"Apple\", _keyword.kwlist)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 667,
+    "statement": "get_close_matches(\"accept\", _keyword.kwlist)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "len(text1)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4"
+    ],
+    "got": [
+     "4"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "text1[0][-1]",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "text2 = '''  1. Beautiful is better than ugly.\n  3.   Simple is better than complex.\n  4. Complicated is better than complex.\n  5. Flat is better than nested.\n'",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Next we instantiate a Differ object:"
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "d = Differ()",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Note that when instantiating a Differ object we may pass functions to",
+     "    filter out line and character 'junk'.  See Differ.__init__ for details."
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "result = list(d.compare(text1, text2))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "_pprint(result)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 725,
+    "statement": "print(''.join(result), end=\"\")",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('  #   \\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1046,
+    "statement": "IS_LINE_JUNK('hello\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK(' ')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('\\t')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('\\n')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1062,
+    "statement": "IS_CHARACTER_JUNK('x')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    False"
+    ],
+    "got": [
+     "False"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1097,
+    "statement": "for line in unified_diff('one two three four'.split(),\n            'zero one tree four'.split(), 'Original', 'Current',\n            '2005-01-26 23:30:50', '2010",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_7",
+    "matches": false,
+    "want": [
+     "    --- Original        2005-01-26 23:30:50",
+     "    +++ Current         2010-04-02 10:20:52"
+    ],
+    "got": [
+     "--- Original\t2005-01-26 23:30:50",
+     "+++ Current\t2010-04-02 10:20:52"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1182,
+    "statement": "print(''.join(context_diff('one\\ntwo\\nthree\\nfour\\n'.splitlines(True),\n      'zero\\none\\ntree\\nfour\\n'.splitlines(True), 'Original', 'Current')),\n      end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    *** Original",
+     "    --- Current"
+    ],
+    "got": [
+     "*** Original",
+     "--- Current"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1304,
+    "statement": "print(''.join(diff), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    - one",
+     "    ?  ^"
+    ],
+    "got": [
+     "- one",
+     "?  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 2020,
+    "statement": "print(''.join(restore(diff, 1)), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    one",
+     "    two"
+    ],
+    "got": [
+     "one",
+     "two"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 2020,
+    "statement": "print(''.join(restore(diff, 2)), end=\"\")",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 185,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 197,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 197,
+    "statement": "s.ratio()",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 223,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 223,
+    "statement": "s.ratio()",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=0, b=4, size=5)"
+    ],
+    "got": [
+     "Match(a=0, b=4, size=5)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=1, b=0, size=4)"
+    ],
+    "got": [
+     "Match(a=1, b=0, size=4)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 306,
+    "statement": "s.find_longest_match(0, 2, 0, 1)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Match(a=0, b=0, size=0)"
+    ],
+    "got": [
+     "Match(a=0, b=0, size=0)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 422,
+    "statement": "list(s.get_matching_blocks())",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        [Match(a=0, b=0, size=2), Match(a=3, b=2, size=2), Match(a=5, b=4, size="
+    ],
+    "got": [
+     "[Match(a=0, b=0, size=2), Match(a=3, b=2, size=2), Match(a=5, b=4, size=0)]"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 493,
+    "statement": "for tag, i1, i2, j1, j2 in s.get_opcodes():\n   print((\"%7s a[%d:%d] (%s) b[%d:%d] (%s)\" %\n          (tag, i1, i2, a[i1:i2], j1, j2, b[j1:j2])))",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "         delete a[0:1] (q) b[0:0] ()",
+     "          equal a[1:3] (ab) b[0:2] (ab)"
+    ],
+    "got": [
+     " delete a[0:1] (q) b[0:0] ()",
+     "  equal a[1:3] (ab) b[0:2] (ab)"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 548,
+    "statement": "pprint(list(SequenceMatcher(None,a,b).get_grouped_opcodes()))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        [[('equal', 5, 8, 5, 8), ('insert', 8, 8, 8, 9), ('equal', 8, 11, 9, 12)",
+     "         [('equal', 16, 19, 17, 20),"
+    ],
+    "got": [
+     "[[('equal', 5, 8, 5, 8), ('insert', 8, 8, 8, 9), ('equal', 8, 11, 9, 12)],",
+     " [('equal', 16, 19, 17, 20),"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 598,
+    "statement": "s.ratio()",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 598,
+    "statement": "s.quick_ratio()",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 598,
+    "statement": "s.real_quick_ratio()",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 834,
+    "statement": "print(''.join(Differ().compare('one\\ntwo\\nthree\\n'.splitlines(True),\n                               'ore\\ntree\\nemu\\n'.splitlines(True))),\n      end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        - one",
+     "        ?  ^"
+    ],
+    "got": [
+     "- one",
+     "?  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 894,
+    "statement": "print(''.join(results), end=\"\")",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        - abcDefghiJkl",
+     "        ?    ^  ^  ^"
+    ],
+    "got": [
+     "- abcDefghiJkl",
+     "?    ^  ^  ^"
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "block_line": 1000,
+    "statement": "for line in results: print(repr(line))\n",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        '- \\tabcDefghiJkl\\n'",
+     "        '? \\t ^ ^  ^\\n'"
+    ],
+    "got": [
+     "'- \\tabcDefghiJkl\\n'",
+     "'? \\t ^ ^  ^\\n'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "mean([-1.0, 2.5, 3.25, 5.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "2.625"
+    ],
+    "got": [
+     "2.625"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "median([2, 3, 4, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "3.5"
+    ],
+    "got": [
+     "3.5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "median_grouped([2, 2, 3, 3, 3, 4])  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "EXACT_UNDER_ELLIPSIS",
+    "matches": true,
+    "want": [
+     "2.8333333333..."
+    ],
+    "got": [
+     "2.8333333333333335"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "EXACT_UNDER_ELLIPSIS",
+    "matches": true,
+    "want": [
+     "4.38961843444..."
+    ],
+    "got": [
+     "4.389618434442793"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "pvariance(data, mu)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "2.5"
+    ],
+    "got": [
+     "2.5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "covariance(x, y)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "correlation(x, y)  #doctest: +ELLIPSIS",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1,
+    "statement": "linear_regression(x, y)  #doctest:",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([3, 2.25, 4.5, -0.5, 0.25])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'float'>, Fraction(19, 2), 5)"
+    ],
+    "got": [
+     "(<class 'float'>, Fraction(19, 2), 5)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([1e50, 1, -1e50] * 1000)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'float'>, Fraction(1000, 1), 3000)"
+    ],
+    "got": [
+     "(<class 'float'>, Fraction(1000, 1), 3000)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum([F(2, 3), F(7, 5), F(1, 4), F(5, 6)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'fractions.Fraction'>, Fraction(63, 20), 4)"
+    ],
+    "got": [
+     "(<class 'fractions.Fraction'>, Fraction(63, 20), 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 155,
+    "statement": "_sum(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (<class 'decimal.Decimal'>, Fraction(6963, 10000), 4)"
+    ],
+    "got": [
+     "(<class 'decimal.Decimal'>, Fraction(6963, 10000), 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 288,
+    "statement": "_exact_ratio(0.25)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    (1, 4)"
+    ],
+    "got": [
+     "(1, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([1, 2, 3, 4, 4])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    2.8"
+    ],
+    "got": [
+     "2.8"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(13, 21)"
+    ],
+    "got": [
+     "Fraction(13, 21)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 415,
+    "statement": "mean([D(\"0.5\"), D(\"0.75\"), D(\"0.625\"), D(\"0.375\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('0.5625')"
+    ],
+    "got": [
+     "Decimal('0.5625')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 437,
+    "statement": "fmean([3.5, 4.0, 5.25])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4.25"
+    ],
+    "got": [
+     "4.25"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 475,
+    "statement": "round(geometric_mean([54, 24, 36]), 9)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    36.0"
+    ],
+    "got": [
+     "36.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 494,
+    "statement": "harmonic_mean([40, 60])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        48.0"
+    ],
+    "got": [
+     "48.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 494,
+    "statement": "harmonic_mean([40, 60], weights=[5, 30])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        56.0"
+    ],
+    "got": [
+     "56.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 550,
+    "statement": "median([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 550,
+    "statement": "median([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    4.0"
+    ],
+    "got": [
+     "4.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 574,
+    "statement": "median_low([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 574,
+    "statement": "median_low([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 596,
+    "statement": "median_high([1, 3, 5])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 596,
+    "statement": "median_high([1, 3, 5, 7])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    5"
+    ],
+    "got": [
+     "5"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 615,
+    "statement": "demographics = Counter({\n   25: 172,   # 20 to 30 years old\n   35: 484,   # 30 to 40 years old\n   45: 387,   # 40 to 50 years old\n   55:  22,   # 50 to 60 years",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    The 50th percentile (median) is the 536th person out of the 1071",
+     "    member cohort.  That person is in the 30 to 40 year old age group."
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 615,
+    "statement": "median(data)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 615,
+    "statement": "round(median_grouped(data, interval=10), 1)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode([1, 1, 2, 3, 3, 3, 3, 4])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        3"
+    ],
+    "got": [
+     "3"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode([\"red\", \"blue\", \"blue\", \"red\", \"green\", \"red\", \"red\"])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'red'"
+    ],
+    "got": [
+     "'red'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 687,
+    "statement": "mode(['red', 'red', 'green', 'blue', 'blue'])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        'red'"
+    ],
+    "got": [
+     "'red'"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('aabbbbbbbbcc')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['b']"
+    ],
+    "got": [
+     "['b']"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('aabbbbccddddeeffffgg')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ['b', 'd', 'f']"
+    ],
+    "got": [
+     "['b', 'd', 'f']"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 717,
+    "statement": "multimode('')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    []"
+    ],
+    "got": [
+     "[]"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.3720238095238095"
+    ],
+    "got": [
+     "1.3720238095238095"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance(data, m)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('31.01875')"
+    ],
+    "got": [
+     "Decimal('31.01875')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 823,
+    "statement": "variance([F(1, 6), F(1, 2), F(5, 3)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(67, 108)"
+    ],
+    "got": [
+     "Fraction(67, 108)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance(data)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.25"
+    ],
+    "got": [
+     "1.25"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance(data, mu)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Decimal('24.815')"
+    ],
+    "got": [
+     "Decimal('24.815')"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 867,
+    "statement": "pvariance([F(1, 4), F(5, 4), F(1, 2)])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    Fraction(13, 72)"
+    ],
+    "got": [
+     "Fraction(13, 72)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 908,
+    "statement": "stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.0810874155219827"
+    ],
+    "got": [
+     "1.0810874155219827"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 926,
+    "statement": "pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.986893273527251"
+    ],
+    "got": [
+     "0.986893273527251"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 964,
+    "statement": "covariance(x, y)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0.75"
+    ],
+    "got": [
+     "0.75"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 964,
+    "statement": "covariance(x, z)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 964,
+    "statement": "covariance(z, x)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 992,
+    "statement": "correlation(x, x)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1.0"
+    ],
+    "got": [
+     "1.0"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 992,
+    "statement": "correlation(x, y)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1028,
+    "statement": "linear_regression(x, y)  #doctest: +ELLIPSIS",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    LinearRegression(slope=3.09078914170..., intercept=1.75684970486...)"
+    ],
+    "got": [
+     "LinearRegression(slope=3.0907891417020465, intercept=1.756849704861633)"
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1028,
+    "statement": "linear_regression(x, y, proportional=True)  #doctest: +ELLIPSIS",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:statistics",
+    "block_line": 1240,
+    "statement": "N1.overlap(N2)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "            0.8035050657330205"
+    ],
+    "got": [
+     "0.8035050657330205"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(10, -8)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-5, 4)"
+    ],
+    "got": [
+     "Fraction(-5, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Fraction(1, 7), 5)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(1, 35)"
+    ],
+    "got": [
+     "Fraction(1, 35)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Fraction(1, 7), Fraction(2, 3))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(3, 14)"
+    ],
+    "got": [
+     "Fraction(3, 14)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('314')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(314, 1)"
+    ],
+    "got": [
+     "Fraction(314, 1)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('-35/4')",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-35, 4)"
+    ],
+    "got": [
+     "Fraction(-35, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('3.1415') # conversion from numeric string",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(6283, 2000)"
+    ],
+    "got": [
+     "Fraction(6283, 2000)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction('-47e-2') # string may include a decimal exponent",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(-47, 100)"
+    ],
+    "got": [
+     "Fraction(-47, 100)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(1.47)  # direct construction from float (exact conversion)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(6620291452234629, 4503599627370496)"
+    ],
+    "got": [
+     "Fraction(6620291452234629, 4503599627370496)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(2.25)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(9, 4)"
+    ],
+    "got": [
+     "Fraction(9, 4)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 63,
+    "statement": "Fraction(Decimal('1.47'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(147, 100)"
+    ],
+    "got": [
+     "Fraction(147, 100)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction('3.141592653589793').limit_denominator(10)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(22, 7)"
+    ],
+    "got": [
+     "Fraction(22, 7)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction('3.141592653589793').limit_denominator(100)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(311, 99)"
+    ],
+    "got": [
+     "Fraction(311, 99)"
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "block_line": 203,
+    "statement": "Fraction(4321, 8765).limit_denominator(10000)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        Fraction(4321, 8765)"
+    ],
+    "got": [
+     "Fraction(4321, 8765)"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 132,
+    "statement": "bin(10)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    '0b0 1010'"
+    ],
+    "got": [
+     "'0b0 1010'"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 132,
+    "statement": "bin(~10)   # ~10 is -11",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    '0b1 0101'"
+    ],
+    "got": [
+     "'0b1 0101'"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "class Color(Enum):\n    RED = 1\n    BLUE = 2\n    GREEN = 3",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    Access them by:"
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "Color.RED",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "Color(1)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "Color['RED']",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "len(Color)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1057,
+    "statement": "list(Color)",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1631,
+    "statement": "Color",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "        <enum 'Color'>"
+    ],
+    "got": [
+     "<enum 'Color'>"
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "block_line": 1889,
+    "statement": "_test_simple_enum(CheckedColor, Color)",
+    "ran": true,
+    "verdict": "MISMATCH_AT_LINE_0",
+    "matches": false,
+    "want": [
+     "    If differences are found, a :exc:`TypeError` is raised."
+    ],
+    "got": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 213,
+    "statement": "read_uint1(io.BytesIO(b'\\xff'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 232,
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 232,
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\xff'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    65535"
+    ],
+    "got": [
+     "65535"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 253,
+    "statement": "read_int4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 253,
+    "statement": "read_int4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == -(2**31)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 274,
+    "statement": "read_uint4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 274,
+    "statement": "read_uint4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == 2**31",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 295,
+    "statement": "read_uint8(io.BytesIO(b'\\xff\\x00\\x00\\x00\\x00\\x00\\x00\\x00'))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 295,
+    "statement": "read_uint8(io.BytesIO(b'\\xff' * 8)) == 2**64-1",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"'abcd'\\nefg\\n\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abcd'"
+    ],
+    "got": [
+     "'abcd'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"\\n\"))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"\\n\"), stripquotes=False)",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b\"''\\n\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(b'\"abcd\"'))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 316,
+    "statement": "read_stringnl(io.BytesIO(br\"'a\\n\\\\b\\x00c\\td'\" + b\"\\n'e'\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'a\\n\\\\b\\x00c\\td'"
+    ],
+    "got": [
+     "'a\\n\\\\b\\x00c\\td'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 387,
+    "statement": "read_stringnl_noescape_pair(io.BytesIO(b\"Queue\\nEmpty\\njunk\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'Queue Empty'"
+    ],
+    "got": [
+     "'Queue Empty'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 410,
+    "statement": "read_string1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 410,
+    "statement": "read_string1(io.BytesIO(b\"\\x03abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abc'"
+    ],
+    "got": [
+     "'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 439,
+    "statement": "read_string4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    ''"
+    ],
+    "got": [
+     "''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 439,
+    "statement": "read_string4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    'abc'"
+    ],
+    "got": [
+     "'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 439,
+    "statement": "read_string4(io.BytesIO(b\"\\x00\\x00\\x00\\x03abcdef\"))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 473,
+    "statement": "read_bytes1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 473,
+    "statement": "read_bytes1(io.BytesIO(b\"\\x03abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 501,
+    "statement": "read_bytes4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 501,
+    "statement": "read_bytes4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 501,
+    "statement": "read_bytes4(io.BytesIO(b\"\\x00\\x00\\x00\\x03abcdef\"))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 535,
+    "statement": "read_bytes8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b''"
+    ],
+    "got": [
+     "b''"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 535,
+    "statement": "read_bytes8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abc'"
+    ],
+    "got": [
+     "b'abc'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 535,
+    "statement": "read_bytes8(io.BytesIO(bigsize8 + b\"abcdef\"))  #doctest: +ELLIPSIS",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 570,
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    bytearray(b'')"
+    ],
+    "got": [
+     "bytearray(b'')"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 570,
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    bytearray(b'abc')"
+    ],
+    "got": [
+     "bytearray(b'abc')"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 570,
+    "statement": "read_bytearray8(io.BytesIO(bigsize8 + b\"abcdef\"))  #doctest: +ELLIPSIS",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 604,
+    "statement": "read_unicodestringnl(io.BytesIO(b\"abc\\\\uabcd\\njunk\")) == 'abc\\uabcd'",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    True"
+    ],
+    "got": [
+     "True"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 630,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 630,
+    "statement": "s == t",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 630,
+    "statement": "read_unicodestring1(io.BytesIO(n + enc[:-1]))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 669,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 669,
+    "statement": "s == t",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 669,
+    "statement": "read_unicodestring4(io.BytesIO(n + enc[:-1]))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 710,
+    "statement": "enc",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'abcd\\xea\\xaf\\x8d'"
+    ],
+    "got": [
+     "b'abcd\\xea\\xaf\\x8d'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 710,
+    "statement": "s == t",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 710,
+    "statement": "read_unicodestring8(io.BytesIO(n + enc[:-1]))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 751,
+    "statement": "read_decimalnl_short(io.BytesIO(b\"1234\\n56\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1234"
+    ],
+    "got": [
+     "1234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 751,
+    "statement": "read_decimalnl_short(io.BytesIO(b\"1234L\\n56\"))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 773,
+    "statement": "read_decimalnl_long(io.BytesIO(b\"1234L\\n56\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    1234"
+    ],
+    "got": [
+     "1234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 773,
+    "statement": "read_decimalnl_long(io.BytesIO(b\"123456789012345678901234L\\n6\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    123456789012345678901234"
+    ],
+    "got": [
+     "123456789012345678901234"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 814,
+    "statement": "read_floatnl(io.BytesIO(b\"-1.25\\n6\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -1.25"
+    ],
+    "got": [
+     "-1.25"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 836,
+    "statement": "raw",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    b'\\xbf\\xf4\\x00\\x00\\x00\\x00\\x00\\x00'"
+    ],
+    "got": [
+     "b'\\xbf\\xf4\\x00\\x00\\x00\\x00\\x00\\x00'"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 836,
+    "statement": "read_float8(io.BytesIO(raw + b\"\\n\"))",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0"
+    ],
+    "got": [
+     "0"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x7f\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    32767"
+    ],
+    "got": [
+     "32767"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\xff\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -256"
+    ],
+    "got": [
+     "-256"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 874,
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\x80\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -32768"
+    ],
+    "got": [
+     "-32768"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    255"
+    ],
+    "got": [
+     "255"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x7f\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    32767"
+    ],
+    "got": [
+     "32767"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\xff\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -256"
+    ],
+    "got": [
+     "-256"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\x80\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    -32768"
+    ],
+    "got": [
+     "-32768"
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "block_line": 906,
+    "statement": "read_long1(io.BytesIO(b\"\\x00\\x00\\x00\\x00\"))",
+    "ran": true,
+    "verdict": "EXACT",
+    "matches": true,
+    "want": [
+     "    0"
+    ],
+    "got": [
+     "0"
+    ]
+   },
+   {
+    "guide": "requests",
+    "block_line": 11,
+    "statement": "r.status_code",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "requests",
+    "block_line": 11,
+    "statement": "r.headers['content-type']",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "requests",
+    "block_line": 11,
+    "statement": "r.encoding",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "requests",
+    "block_line": 11,
+    "statement": "r.text",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "requests",
+    "block_line": 11,
+    "statement": "r.json()",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "httpx",
+    "block_line": 28,
+    "statement": "r",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "httpx",
+    "block_line": 28,
+    "statement": "r.status_code",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "httpx",
+    "block_line": 28,
+    "statement": "r.headers['content-type']",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   },
+   {
+    "guide": "httpx",
+    "block_line": 28,
+    "statement": "r.text",
+    "ran": false,
+    "verdict": "REFUSED_BY_INTERPRETER",
+    "matches": false
+   }
+  ]
+ },
+ "decoys": {
+  "examples_probed": 130,
+  "mutants": 88,
+  "separated": 72,
+  "blind": 0,
+  "equivalent_unseparable": 16,
+  "examples_fully_separating": 52,
+  "examples_untestable": 78,
+  "rows": [
+   {
+    "guide": "stdlib:textwrap",
+    "statement": "textwrap.shorten(\"Hello  world!\", width=12)",
+    "mutants": 1,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "12 -> 13",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:textwrap",
+    "statement": "textwrap.shorten(\"Hello  world!\", width=11)",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "11 -> 12",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(round(s.ratio(), 3))",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "3 -> 4",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "get_close_matches(\"appel\", [\"ape\", \"apple\", \"peach\", \"puppy\"])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "get_close_matches(\"wheel\", _keyword.kwlist)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "len(text1)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_LINE_JUNK('\\n')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_LINE_JUNK('  #   \\n')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_LINE_JUNK('hello\\n')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_CHARACTER_JUNK(' ')",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "' ' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_CHARACTER_JUNK('\\t')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_CHARACTER_JUNK('\\n')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "IS_CHARACTER_JUNK('x')",
+    "mutants": 1,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "'x' -> 'zzz'",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(''.join(context_diff('one\\ntwo\\nthree\\nfour\\n'.splitlines(True),\n      'zero\\none\\ntree\\nfour\\",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'.join(context_diff(' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(''.join(diff), end=\"\")",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(''.join(restore(diff, 1)), end=\"\")",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.ratio()",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.ratio()",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.ratio()",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "0 -> 1",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "5 -> 6",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.find_longest_match(0, 5, 0, 9)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "0 -> 1",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "5 -> 6",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.find_longest_match(0, 2, 0, 1)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "0 -> 1",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "2 -> 3",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "list(s.get_matching_blocks())",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "pprint(list(SequenceMatcher(None,a,b).get_grouped_opcodes()))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "s.ratio()",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(''.join(Differ().compare('one\\ntwo\\nthree\\n'.splitlines(True),\n                               ",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'.join(Differ().compare(' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "print(''.join(results), end=\"\")",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:difflib",
+    "statement": "for line in results: print(repr(line))\n",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mean([-1.0, 2.5, 3.25, 5.75])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median([2, 3, 4, 5])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "2 -> 3",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median_grouped([2, 2, 3, 3, 3, 4])  #doctest: +ELLIPSIS",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_UNDER_ELLIPSIS",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_UNDER_ELLIPSIS",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "stdev([2.5, 3.25, 5.5, 11.25, 11.75])  #doctest: +ELLIPSIS",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "pvariance(data, mu)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "covariance(x, y)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "_sum([3, 2.25, 4.5, -0.5, 0.25])",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "_sum([1e50, 1, -1e50] * 1000)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "1000 -> 1001",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "_sum([F(2, 3), F(7, 5), F(1, 4), F(5, 6)])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "2 -> 3",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "_sum(data)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "_exact_ratio(0.25)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mean([1, 2, 3, 4, 4])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mean([F(3, 7), F(1, 21), F(5, 3), F(1, 3)])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "3 -> 4",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "7 -> 8",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mean([D(\"0.5\"), D(\"0.75\"), D(\"0.625\"), D(\"0.375\")])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "fmean([3.5, 4.0, 5.25])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "round(geometric_mean([54, 24, 36]), 9)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "54 -> 55",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "24 -> 25",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "harmonic_mean([40, 60])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "40 -> 41",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "60 -> 61",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "harmonic_mean([40, 60], weights=[5, 30])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "40 -> 41",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "60 -> 61",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median([1, 3, 5])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median([1, 3, 5, 7])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median_low([1, 3, 5])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median_low([1, 3, 5, 7])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median_high([1, 3, 5])",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "median_high([1, 3, 5, 7])",
+    "mutants": 2,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 2,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "3 -> 4",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mode([1, 1, 2, 3, 3, 3, 3, 4])",
+    "mutants": 2,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 2,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "1 -> 2",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mode([\"red\", \"blue\", \"blue\", \"red\", \"green\", \"red\", \"red\"])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "mode(['red', 'red', 'green', 'blue', 'blue'])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'red' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "'red' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "multimode('aabbbbbbbbcc')",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'aabbbbbbbbcc' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "multimode('aabbbbccddddeeffffgg')",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'aabbbbccddddeeffffgg' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "multimode('')",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "variance(data)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "variance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "variance([F(1, 6), F(1, 2), F(5, 3)])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "6 -> 7",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "pvariance(data)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "pvariance([D(\"27.5\"), D(\"30.25\"), D(\"30.25\"), D(\"34.5\"), D(\"41.75\")])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "pvariance([F(1, 4), F(5, 4), F(1, 2)])",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "4 -> 5",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "stdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "pstdev([1.5, 2.5, 2.5, 2.75, 3.25, 4.75])",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "covariance(x, y)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "correlation(x, x)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:statistics",
+    "statement": "N1.overlap(N2)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(10, -8)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "10 -> 11",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "8 -> 9",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(Fraction(1, 7), 5)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "7 -> 8",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(Fraction(1, 7), Fraction(2, 3))",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1 -> 2",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "7 -> 8",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('314')",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'314' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "314 -> 315",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('-35/4')",
+    "mutants": 3,
+    "separated": 3,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'-35/4' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "35 -> 36",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "4 -> 5",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('3.1415') # conversion from numeric string",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'3.1415' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('-47e-2') # string may include a decimal exponent",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'-47e-2' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(1.47)  # direct construction from float (exact conversion)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(2.25)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(Decimal('1.47'))",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'1.47' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('3.141592653589793').limit_denominator(10)",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "'3.141592653589793' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "10 -> 11",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction('3.141592653589793').limit_denominator(100)",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "'3.141592653589793' -> 'zzz'",
+      "status": "REFUSED_BY_INTERPRETER",
+      "separates": true
+     },
+     {
+      "change": "100 -> 101",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:fractions",
+    "statement": "Fraction(4321, 8765).limit_denominator(10000)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "4321 -> 4322",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "8765 -> 8766",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "statement": "bin(10)",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "10 -> 11",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "statement": "bin(~10)   # ~10 is -11",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "10 -> 11",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "10 -> 11",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:enum",
+    "statement": "Color",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint1(io.BytesIO(b'\\xff'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\x00'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint2(io.BytesIO(b'\\xff\\xff'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_int4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_int4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == -(2**31)",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "31 -> 32",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint4(io.BytesIO(b'\\xff\\x00\\x00\\x00'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint4(io.BytesIO(b'\\x00\\x00\\x00\\x80')) == 2**31",
+    "mutants": 2,
+    "separated": 2,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     },
+     {
+      "change": "31 -> 32",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint8(io.BytesIO(b'\\xff\\x00\\x00\\x00\\x00\\x00\\x00\\x00'))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_uint8(io.BytesIO(b'\\xff' * 8)) == 2**64-1",
+    "mutants": 2,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "8 -> 9",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     },
+     {
+      "change": "2 -> 3",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_stringnl(io.BytesIO(b\"'abcd'\\nefg\\n\"))",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "'abcd' -> 'zzz'",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_stringnl(io.BytesIO(b\"\\n\"), stripquotes=False)",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_stringnl(io.BytesIO(b\"''\\n\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_stringnl(io.BytesIO(br\"'a\\n\\\\b\\x00c\\td'\" + b\"\\n'e'\"))",
+    "mutants": 1,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 1,
+    "rows": [
+     {
+      "change": "'e' -> 'zzz'",
+      "status": "EXACT",
+      "separates": false,
+      "equivalent_by_construction": true
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_stringnl_noescape_pair(io.BytesIO(b\"Queue\\nEmpty\\njunk\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_string1(io.BytesIO(b\"\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_string1(io.BytesIO(b\"\\x03abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_string4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_string4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes1(io.BytesIO(b\"\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes1(io.BytesIO(b\"\\x03abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes4(io.BytesIO(b\"\\x00\\x00\\x00\\x00abc\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes4(io.BytesIO(b\"\\x03\\x00\\x00\\x00abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytes8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00abc\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_bytearray8(io.BytesIO(b\"\\x03\\x00\\x00\\x00\\x00\\x00\\x00\\x00abcdef\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_unicodestringnl(io.BytesIO(b\"abc\\\\uabcd\\njunk\")) == 'abc\\uabcd'",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "enc",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "enc",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "enc",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_decimalnl_short(io.BytesIO(b\"1234\\n56\"))",
+    "mutants": 1,
+    "separated": 1,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": [
+     {
+      "change": "1234 -> 1235",
+      "status": "MISMATCH_AT_LINE_0",
+      "separates": true,
+      "equivalent_by_construction": false
+     }
+    ]
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_decimalnl_long(io.BytesIO(b\"1234L\\n56\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_decimalnl_long(io.BytesIO(b\"123456789012345678901234L\\n6\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_floatnl(io.BytesIO(b\"-1.25\\n6\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "raw",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\xff\\x7f\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\xff\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x02\\x00\\x80\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\xff\\x7f\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\xff\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long4(io.BytesIO(b\"\\x02\\x00\\x00\\x00\\x00\\x80\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "statement": "read_long1(io.BytesIO(b\"\\x00\\x00\\x00\\x00\"))",
+    "mutants": 0,
+    "separated": 0,
+    "blind": 0,
+    "equivalent_unseparable": 0,
+    "rows": []
+   }
+  ]
+ },
+ "transfer": {
+  "tasks": 2,
+  "instances": 4,
+  "property_holds": 4,
+  "rows": [
+   {
+    "task": "T1_textwrap_shorten",
+    "held_out": [
+     "The quick brown fox jumps over the lazy dog",
+     20
+    ],
+    "answer": "The quick [...]",
+    "property_holds": true
+   },
+   {
+    "task": "T1_textwrap_shorten",
+    "held_out": [
+     "Documentation is a test suite nobody grades",
+     18
+    ],
+    "answer": "[...]",
+    "property_holds": true
+   },
+   {
+    "task": "T2_statistics_median_sorted",
+    "held_out": [
+     9,
+     1,
+     5
+    ],
+    "answer": "True",
+    "property_holds": true
+   },
+   {
+    "task": "T2_statistics_median_sorted",
+    "held_out": [
+     3,
+     3,
+     3,
+     7,
+     7,
+     9,
+     11
+    ],
+    "answer": "True",
+    "property_holds": true
+   }
+  ]
+ },
+ "kept": {
+  "admitted": [
+   {
+    "rule_id": "T1_textwrap_shorten",
+    "callable": "shorten",
+    "what_is_kept": "call the callable the example exercised, on sentences the example never showed",
+    "tests": {
+     "example_ran_and_matched": true,
+     "decoys_all_separated": true,
+     "transferred_to_held_out": true
+    },
+    "source_example_guide": null
+   },
+   {
+    "rule_id": "T2_statistics_median_sorted",
+    "callable": "median",
+    "what_is_kept": "the property the docstring states: the median of data is the middle of its sorted form",
+    "tests": {
+     "example_ran_and_matched": true,
+     "decoys_all_separated": true,
+     "transferred_to_held_out": true
+    },
+    "source_example_guide": null
+   }
+  ],
+  "refused": [],
+  "admission_requires": [
+   "an example matched the guide's printed output",
+   "every mutation of that example was separated",
+   "the rule held on an input the guide never showed"
+  ],
+  "stored_bytes": 603,
+  "why_this_is_not_a_cache": "a matched example is a transcription of one answer; a rule kept here is the callable plus the property that let it be checked on inputs no guide contains"
+ },
+ "seam": {
+  "guides": [
+   {
+    "guide": "stdlib:textwrap",
+    "bytes": 19718,
+    "checkable_bytes": 157,
+    "prose_bytes": 19561,
+    "checkable_share": 0.008
+   },
+   {
+    "guide": "stdlib:difflib",
+    "bytes": 83308,
+    "checkable_bytes": 7613,
+    "prose_bytes": 75695,
+    "checkable_share": 0.0914
+   },
+   {
+    "guide": "stdlib:statistics",
+    "bytes": 47705,
+    "checkable_bytes": 4531,
+    "prose_bytes": 43174,
+    "checkable_share": 0.095
+   },
+   {
+    "guide": "stdlib:fractions",
+    "bytes": 28667,
+    "checkable_bytes": 1007,
+    "prose_bytes": 27660,
+    "checkable_share": 0.0351
+   },
+   {
+    "guide": "stdlib:enum",
+    "bytes": 78649,
+    "checkable_bytes": 1011,
+    "prose_bytes": 77638,
+    "checkable_share": 0.0129
+   },
+   {
+    "guide": "stdlib:pickletools",
+    "bytes": 93486,
+    "checkable_bytes": 5894,
+    "prose_bytes": 87592,
+    "checkable_share": 0.063
+   },
+   {
+    "guide": "requests",
+    "bytes": 2906,
+    "checkable_bytes": 457,
+    "prose_bytes": 2449,
+    "checkable_share": 0.1573
+   },
+   {
+    "guide": "click",
+    "bytes": 1778,
+    "checkable_bytes": 453,
+    "prose_bytes": 1325,
+    "checkable_share": 0.2548
+   },
+   {
+    "guide": "tqdm",
+    "status": "UNREADABLE"
+   },
+   {
+    "guide": "httpx",
+    "bytes": 4944,
+    "checkable_bytes": 390,
+    "prose_bytes": 4554,
+    "checkable_share": 0.0789
+   }
+  ],
+  "totals": {
+   "bytes": 361161,
+   "checkable_bytes": 21513,
+   "checkable_share": 0.0596,
+   "prose_bytes": 339648
+  },
+  "the_seam": "a transcript can be checked by replaying it; a prose sentence about the environment cannot be checked by any example, and this round does not pretend to read it"
+ },
+ "cost": {
+  "seconds": 4.6,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not a benchmark result: one machine, four guides, no OSWorld, no FrontierSWE, no Terminal-Bench",
+  "not evidence that the system reads arbitrary documentation: the extractor handles fenced transcripts with $ or >>> prompts and nothing else",
+  "not evidence of instant learning: the transfer tasks are two, chosen because the documentation states their property, and the rule comes from a module the example named rather than from the example's text",
+  "not a memory design: the store is a JSON list of admitted rules and refusals, written to show that three tests can refuse something, not to persist a capability"
+ ],
+ "limits": [
+  "the guides were fetched while building, so 'no network at run time' is a property of this instrument and not of the machine that fetched them",
+  "a guide's printed output is version-matched only when the guide and the library are the same version; neither is pinned here",
+  "the decoy mutation edits literals in the example's own statement, so an example with no literal cannot be probed and is reported as such rather than assumed blind"
+ ]
+}
