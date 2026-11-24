@@ -31228,16 +31228,16 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7243,
+  "research_index_records": 7246,
   "routing_tokens": 2373,
   "skills": 18,
-  "source_index_entry_points": 455,
-  "source_index_modules": 2012
+  "source_index_entry_points": 456,
+  "source_index_modules": 2013
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8cb645d8af96bcf535bbe74dd5d93103cc14e3ec5844001cbd88f8360febde87"
+  "value": "28f80c9be9e76687971df21a55285ffc34d0755c4b942bd56d035ebbdd4aec02"
  },
  "engines": [
   {
@@ -209671,6 +209671,26 @@
    }
   },
   {
+   "action_id": "SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_SCAN_AND_DIFF_AGAINST_MEMORY_RECEIPT_V1",
+   "sha256": "1fa154c3108c4a5d8e28ca5bac55d4f904312c9ab2c168896d10c291b6180545",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "against": 1,
+    "diff": 1,
+    "memory": 1,
+    "scan": 1,
+    "scan_and_diff_against_memory_20261124_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "2026-11-16",
@@ -225993,6 +226013,25 @@
     "v1": 1,
     "white": 1,
     "zero": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/__pycache__/MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_20261124_V1.cpython-311.pyc",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/__pycache__/MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_20261124_V1.cpython-311.pyc",
+   "schema": "",
+   "sha256": "072ffcfd53214a99462e5e12cfb72befaac830801e6ed183aeba72c62f392448",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "311": 1,
+    "asks": 1,
+    "manufacture": 1,
+    "refusal": 1,
+    "v1.cpython": 1
    }
   },
   {
@@ -256051,6 +256090,51 @@
     "tree": 3,
     "unittest": 3,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SCAN_AND_DIFF_AGAINST_MEMORY_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "72d1676f0df43aa80a496680b80054e3aec3bed1a8d036128f3fe7b2ff72f32f",
+   "status": "SHIPPED",
+   "terms": {
+    "20261124": 1,
+    "against": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "build": 1,
+    "called": 1,
+    "ceiling": 1,
+    "claims": 1,
+    "confidently": 1,
+    "coverage": 1,
+    "decides": 1,
+    "diff": 1,
+    "each": 1,
+    "empty": 1,
+    "environment": 1,
+    "exactly": 1,
+    "gap": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "honestly": 1,
+    "join": 1,
+    "joined": 1,
+    "kinds": 1,
+    "know": 2,
+    "known": 1,
+    "learning": 1,
+    "machine": 1,
+    "memory": 2,
+    "moves": 1,
+    "much": 1,
+    "not": 1,
+    "nothing": 1,
+    "obvious": 1,
+    "scan": 3
    }
   },
   {
@@ -329705,6 +329789,57 @@
     "validate_existing_state": 1,
     "validate_task": 1,
     "write_json_atomic": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "source:canonical/runtime/scan_and_diff_against_memory_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/scan_and_diff_against_memory_v1.py",
+   "sha256": "c1fdb0bc35ce277b63a7f38512e4c1d2fc58b0a7c5892606de88dad1c3e0f04a",
+   "summary": "Scan an environment, and say which parts of it the machine has never met.",
+   "symbol_count": 13,
+   "symbols": [
+    "Item",
+    "Memory",
+    "_histogram",
+    "_possible",
+    "_py_test",
+    "_rc",
+    "census",
+    "judge_all",
+    "main",
+    "scan",
+    "signature",
+    "to_ignorance",
+    "transfer"
+   ],
+   "terms": {
+    "against": 1,
+    "census": 1,
+    "diff": 1,
+    "environment": 1,
+    "histogram": 1,
+    "item": 1,
+    "judge_all": 1,
+    "machine": 1,
+    "main": 1,
+    "memory": 2,
+    "met": 1,
+    "never": 1,
+    "parts": 1,
+    "possible": 1,
+    "py_test": 1,
+    "rc": 1,
+    "say": 1,
+    "scan": 3,
+    "signature": 1,
+    "to_ignorance": 1,
+    "transfer": 1,
+    "v1": 1
    }
   },
   {
