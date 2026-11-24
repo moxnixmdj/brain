@@ -144,7 +144,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import hashlib, json, os, pathlib, subprocess
+          import hashlib, json, os, pathlib, re, subprocess
           root = pathlib.Path(os.environ["WORKSPACE"])
           out = root / "out"
           code = pathlib.Path(os.environ["OSW_ROOT"])
@@ -207,7 +207,12 @@ jobs:
               "code_file_hashes": all(hashes[rel] == digest for rel, digest in expected.items()),
               "public_task_class_directory_has_no_generated_task_files": not any((code / "evaluation_examples/task_class").glob("task_*.py")),
               "no_complete_asset_directory": not any((code / rel).is_dir() for rel in ("cache/osworld_v2_assets", "cache/osworld_v2_assets_v2.1")),
-              "no_raw_task_files_in_workspace": not any(root.rglob("task_*.py")),
+              "no_raw_task_files_in_workspace": not any(
+                  p.is_file()
+                  and re.fullmatch(r"task_\d{3}\.py", p.name)
+                  and not str(p.relative_to(root)).startswith(".git/")
+                  for p in root.rglob("*")
+              ),
           }
           failed = sorted(k for k, v in checks.items() if not v)
           if failed:
@@ -449,7 +454,7 @@ jobs:
           run_url = "https://github.com/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + str(run_id)
           verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
           source_checks = source_verification.get("checks") or {}
-          failed = list(decision.get("failed") or [])
+          failed = list(dict.fromkeys(decision.get("failed") or []))
           if not source_verification:
               failed.append("SOURCE_VERIFICATION_JSON_MISSING")
           if not probe:
@@ -465,6 +470,7 @@ jobs:
           for key, value in source_checks.items():
               if not value:
                   failed.append("SOURCE_VERIFICATION_CHECK_FALSE:" + key)
+          failed = list(dict.fromkeys(failed))
           verified = list(decision.get("verified") or [])
           if all(bool(v) for v in source_checks.values()) and source_checks:
               verified.append("PINNED_RELEASE_MANIFEST_TASK_HASHES_AND_WEBSITE_BYTES")
@@ -478,6 +484,7 @@ jobs:
           numeric = dict(decision.get("numeric_measurements") or {})
           numeric.update({
               "source_verification_checks": len(source_checks),
+              "source_verification_checks_true": sum(1 for value in source_checks.values() if value),
               "pinned_files_verified": len(source_verification.get("hashes") or {}) + len(source_verification.get("website_hashes") or {}),
               "public_task_ids": source_verification.get("public_task_id_count", 0),
               "task_hash_manifest_entries": source_verification.get("task_hash_count", 0),

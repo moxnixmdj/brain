@@ -35,7 +35,7 @@ Any byte change requires updating the workflow hashes, rerunning tests and repea
 
 ## 5. Receipt status
 
-At producer time, the distinct OIDC runner workflow has been authored but no runner-owned receipt for this workflow has been recorded. A local sanitized source/probe replay was executed against pinned public clones: `OSWORLD_V21_SOURCE_VERIFICATION_PASS 27 checks 13 pinned files`, `OSWORLD_V21_RUNNER_PROBE_PASS`, and `OSWORLD_V21_BLOCKER_DECISION_PASS` with 10 blocked reasons, zero tasks consumed and no score authority. The receipt, receipt sidecar and sanitized blocker decision will be landed by the runner itself; local producer metadata will then be reconciled without changing any pinned Brain-owned source bytes. Section 6 remains NOT MET.
+The first distinct OIDC runner receipt has been recorded by run `45323603070` at HEAD `8c59ebe7`, but it is explicitly **not** a pinned-release verification success. Its source-verification step failed because a broad `task_*.py` workspace glob matched two legitimate Brain runtime files; the fail-closed fallback produced ten false source checks and eight reproducibility blockers. A local sanitized source/probe replay had already produced `OSWORLD_V21_SOURCE_VERIFICATION_PASS 27 checks 13 pinned files`, `OSWORLD_V21_RUNNER_PROBE_PASS`, and `OSWORLD_V21_BLOCKER_DECISION_PASS` with 10 blocked reasons, zero tasks consumed and no score authority. The workflow has been corrected with a raw `task_NNN.py` regex, deduplicated failed labels and derived source-check counts; a second runner-owned receipt is pending. Section 6 remains NOT MET.
 
 ## Producer-side full gate record
 
@@ -49,3 +49,12 @@ The initial 10-step workflow had four embedded Python blocks. A fifth block now 
 ## Post-robustness full-gate rerun
 
 After the fifth embedded Python block, `/tmp/run_iter11_local_gates.py` passed `ALL_GATES_OK True` with 30 checks at `2026-11-24T04:01:28Z` on HEAD `ab05540d`. The rerun covered 10 steps / 5 compiled Python blocks, exact two-source binding, 27 source checks, 13 pinned file hashes, the sanitized 10-blocker fail-closed decision, three prior OIDC run references, no raw benchmark task files and 200 selected regression tests (`200 passed in 221.13s`). Workflow Git blob `143bfa0f4d5bd010cd92dc818ab112fbcf69caa2`. This remains producer-side authority only; the distinct OIDC runner receipt is still pending. No OSWorld task, score, credit or §6 verification is claimed.
+
+
+## First runner receipt and source-check correction
+
+The first runner-owned receipt, SHA-256 `de368338f2a58e651a903c812c0fc4587f58b28b4503bf1720e3b0dfbd2fcb3b`, Git blob `9be5f9a26db01bd5d1fe2de30e9bc5c4a25de022`, bound OIDC run `45323603070`, all ten OIDC checks, `runner_owned=true`, `benchmark_run_attempted=false`, zero tasks, zero reward vectors, no score authority and `truth={"achieved":false,"section_6":"NOT_MET"}`. Its sanitized decision is SHA-256 `4575a88b7b1395076344dc5516c9a57aefcdbe063a4a1de2401b4c9c8c1ad73c`, Git blob `c0f097cc1e9b6cc7c658d9811f1cfc398c39db38`.
+
+The runner source-verification step failed because `root.rglob("task_*.py")` matched `canonical/runtime/task_acceptance_quotient_inventory_v1.py` and `canonical/runtime/task_artifact_authority_v1.py`. The all-false fallback wrote ten false source checks, which the classifier correctly treated as a blocked decision. The first receipt's duplicated failed labels are preserved. It measured two gated HF API tree-metadata statuses of 200 without a token or accepted conditions, `kvm_device_present=true`, `xvfb_present=true`, `docker_present=true`, and eight missing prerequisites. A 200 listing status is not raw gated-body access.
+
+The corrected workflow narrows the raw-task boundary to `task_NNN.py`, deduplicates receipt failed labels, derives `source_verification_checks_true` from the actual source JSON, and makes the local checker execute the source-verification block with the repository root as `WORKSPACE`. Corrected workflow Git blob `c1d3a86a8f46c57b000bcddaa654996a230bbe6b`. A second distinct runner receipt is pending. No OSWorld task, score, §6 verification or credit is claimed.
