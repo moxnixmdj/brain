@@ -1,0 +1,1235 @@
+{
+ "schema": "BRAIN_A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-12-02",
+ "mode": "A_TYPE_IS_WHAT_THE_MACHINES_CHECKS_CAN_STILL_SAY_ABOUT_THE_OBJECT",
+ "declared_before_the_run": {
+  "T1_the_written_table_is_right_where_it_has_a_name": "on the kinds the table names, the table's name is the producer's kind, object for object",
+  "T2_the_written_table_collapses_kinds_it_never_named": "on a room of producers' objects, at least three distinct producer kinds are given one name",
+  "T3_the_witness_rule_finds_checks_with_no_program_named": "at least three checks survive the separation-and-repetition rule, read from the pages, with no program named in this source",
+  "T4_the_witness_signature_separates_more_than_the_written_name": "on the unseen room, the signature separates strictly more different pairs than the written table",
+  "T5_the_residual_is_named_not_hidden": "the classes no witness separates are listed, with their per-class price, and the empty signature is one of them",
+  "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": "the witness set discovered on a second room of the same kinds is either identical (so the witness is derived, not learned) or the difference is listed",
+  "T7_zero": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "verdict": {
+  "T1_the_written_table_is_right_where_it_has_a_name": {
+   "claimed": "on the kinds the table names, the table's name is the producer's kind, object for object",
+   "measured": "5 names for 9 objects, 21/21 different pairs separated",
+   "MET": true
+  },
+  "T2_the_written_table_collapses_kinds_it_never_named": {
+   "claimed": "on a room of producers' objects, at least three distinct producer kinds are given one name",
+   "measured": "2 names cover more than one kind; 0.6032 of different pairs separated",
+   "MET": true
+  },
+  "T3_the_witness_rule_finds_checks_with_no_program_named": {
+   "claimed": "at least three checks survive the separation-and-repetition rule, read from the pages, with no program named in this source",
+   "measured": "2319 declared checks, 66 separate, 64 repeat and observe, then 19 of 64 are removed by the second room -> 45 witnesses",
+   "MET": true
+  },
+  "T4_the_witness_signature_separates_more_than_the_written_name": {
+   "claimed": "on the unseen room, the signature separates strictly more different pairs than the written table",
+   "measured": "witnessed 155/189, written 114/189",
+   "MET": true
+  },
+  "T5_the_residual_is_named_not_hidden": {
+   "claimed": "the classes no witness separates are listed, with their per-class price, and the empty signature is one of them",
+   "measured": "5 unresolved classes, 9.077 bits undecidable on this machine",
+   "MET": true
+  },
+  "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": {
+   "claimed": "the witness set discovered on a second room of the same kinds is either identical (so the witness is derived, not learned) or the difference is listed",
+   "measured": "identical on both rooms; a store would hold nothing",
+   "MET": true
+  },
+  "T7_zero": {
+   "claimed": "zero model calls, zero stored parameters, zero network at run time",
+   "measured": "{\"model_calls\": 0, \"parameters_stored\": 0, \"network_calls_at_run_time\": 0}",
+   "MET": true
+  }
+ },
+ "rooms": {
+  "room_a": {
+   "objects": 9,
+   "producer_kinds": [
+    "gzip",
+    "json",
+    "plain-text",
+    "tar"
+   ]
+  },
+  "room_b": {
+   "objects": 8,
+   "producer_kinds": [
+    "gzip",
+    "json",
+    "plain-text",
+    "tar"
+   ]
+  },
+  "room_u": {
+   "objects": 20,
+   "producer_kinds": [
+    "ar",
+    "bzip2",
+    "elf-exec",
+    "elf-object",
+    "empty",
+    "gzip",
+    "jpeg",
+    "json",
+    "pem-key",
+    "plain-text",
+    "png",
+    "random-bytes",
+    "sqlite",
+    "tar",
+    "tar-gzip",
+    "x509-cert",
+    "xml",
+    "xz",
+    "zip"
+   ],
+   "built_by": "tar, gzip, xz, bzip2, zip, ar, openssl, sqlite3, convert, cp"
+  }
+ },
+ "written_table": {
+  "names": [
+   "archive",
+   "compressed",
+   "directory",
+   "executable",
+   "json",
+   "patch",
+   "plain"
+  ],
+  "room_a": {
+   "objects": 9,
+   "distinct_names": 5,
+   "different_pairs": 21,
+   "different_pairs_separated": 21,
+   "same_pairs": 15,
+   "accuracy_on_different_pairs": 1.0
+  },
+  "room_u": {
+   "objects": 20,
+   "distinct_names": 5,
+   "different_pairs": 189,
+   "different_pairs_separated": 114,
+   "same_pairs": 1,
+   "accuracy_on_different_pairs": 0.6032
+  },
+  "collapsed_on_room_u": [
+   {
+    "written_name": "compressed",
+    "producer_kinds": [
+     "bzip2",
+     "gzip",
+     "tar-gzip",
+     "xz",
+     "zip"
+    ],
+    "objects": {
+     "bzip2": [
+      "line.txt.bz2"
+     ],
+     "gzip": [
+      "line.txt.gz"
+     ],
+     "tar-gzip": [
+      "one.tgz"
+     ],
+     "xz": [
+      "line.txt.xz"
+     ],
+     "zip": [
+      "bundle.zip"
+     ]
+    }
+   },
+   {
+    "written_name": "plain",
+    "producer_kinds": [
+     "ar",
+     "elf-object",
+     "empty",
+     "jpeg",
+     "pem-key",
+     "plain-text",
+     "png",
+     "random-bytes",
+     "sqlite",
+     "x509-cert",
+     "xml"
+    ],
+    "objects": {
+     "ar": [
+      "lib.a"
+     ],
+     "elf-object": [
+      "unit.o"
+     ],
+     "empty": [
+      "empty.bin"
+     ],
+     "jpeg": [
+      "pic.jpg"
+     ],
+     "pem-key": [
+      "cert.pem"
+     ],
+     "plain-text": [
+      "copy.txt",
+      "line.txt"
+     ],
+     "png": [
+      "pic.png"
+     ],
+     "random-bytes": [
+      "noise.bin"
+     ],
+     "sqlite": [
+      "store.db"
+     ],
+     "x509-cert": [
+      "pub.pem"
+     ],
+     "xml": [
+      "doc.xml"
+     ]
+    }
+   }
+  ],
+  "objects_on_room_u": {
+   "bundle.zip": "compressed",
+   "cert.pem": "plain",
+   "copy.txt": "plain",
+   "data.json": "json",
+   "doc.xml": "plain",
+   "empty.bin": "plain",
+   "lib.a": "plain",
+   "line.txt": "plain",
+   "line.txt.bz2": "compressed",
+   "line.txt.gz": "compressed",
+   "line.txt.xz": "compressed",
+   "noise.bin": "plain",
+   "one.tar": "archive",
+   "one.tgz": "compressed",
+   "pic.jpg": "plain",
+   "pic.png": "plain",
+   "pub.pem": "plain",
+   "run.out": "executable",
+   "store.db": "plain",
+   "unit.o": "plain"
+  }
+ },
+ "witnesses": {
+  "rule": "a check a page declares, that (1) accepts at least one object and rejects at least one, (2) gives the same verdict in two independent copies of the room, (3) changes nothing in the room, and (4) gives every object of one producer kind the same verdict in a second room of the same kinds",
+  "candidates": 2319,
+  "most_declared_checks": [
+   {
+    "flag": "--help",
+    "pages": 342
+   },
+   {
+    "flag": "--version",
+    "pages": 202
+   },
+   {
+    "flag": "-h",
+    "pages": 149
+   },
+   {
+    "flag": "-V",
+    "pages": 105
+   },
+   {
+    "flag": "-v",
+    "pages": 83
+   },
+   {
+    "flag": "-l",
+    "pages": 36
+   },
+   {
+    "flag": "-t",
+    "pages": 34
+   },
+   {
+    "flag": "-?",
+    "pages": 31
+   }
+  ],
+  "room_a": {
+   "candidates": 2319,
+   "runs": 132,
+   "separating": 66,
+   "repeating": 66,
+   "stable": 64,
+   "changed_the_room": 16,
+   "accepted_everything": 1338,
+   "accepted_nothing": 913,
+   "unreadable": 2,
+   "seconds": 83.0
+  },
+  "room_a_names": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "perl -c",
+   "perl5.36-x86_64-linux-gnu -c",
+   "perl5.36.0 -c",
+   "rgrep --byte-offset",
+   "rgrep --count",
+   "rgrep --files-with-matches",
+   "rgrep --files-without-match",
+   "rgrep --line-number",
+   "rgrep --null",
+   "rgrep --only-matching",
+   "rgrep --with-filename",
+   "rgrep -H",
+   "rgrep -L",
+   "rgrep -Z",
+   "rgrep -b",
+   "rgrep -c",
+   "rgrep -l",
+   "rgrep -n",
+   "rgrep -o",
+   "scriptreplay --summary",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "room_b_names": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "perl -c",
+   "perl5.36-x86_64-linux-gnu -c",
+   "perl5.36.0 -c",
+   "rgrep --byte-offset",
+   "rgrep --count",
+   "rgrep --files-with-matches",
+   "rgrep --files-without-match",
+   "rgrep --line-number",
+   "rgrep --null",
+   "rgrep --only-matching",
+   "rgrep --with-filename",
+   "rgrep -H",
+   "rgrep -L",
+   "rgrep -Z",
+   "rgrep -b",
+   "rgrep -c",
+   "rgrep -l",
+   "rgrep -n",
+   "rgrep -o",
+   "scriptreplay --summary",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "invariance": {
+   "tested": 64,
+   "kept": 45,
+   "removed": 19,
+   "removed_detail": [
+    {
+     "witness": "perl -c",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "perl5.36-x86_64-linux-gnu -c",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "perl5.36.0 -c",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --byte-offset",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --count",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --files-with-matches",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --files-without-match",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --line-number",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --null",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --only-matching",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep --with-filename",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    },
+    {
+     "witness": "rgrep -H",
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     }
+    }
+   ]
+  },
+  "witnesses": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "scriptreplay --summary",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ]
+ },
+ "discrimination": {
+  "room_a": {
+   "written": {
+    "objects": 9,
+    "distinct_names": 5,
+    "different_pairs": 21,
+    "different_pairs_separated": 21,
+    "same_pairs": 15,
+    "accuracy_on_different_pairs": 1.0
+   },
+   "witnessed": {
+    "objects": 9,
+    "distinct_signatures": 4,
+    "distinct_producer_kinds": 4,
+    "different_pairs": 21,
+    "different_pairs_separated": 21,
+    "same_pairs": 15,
+    "accuracy_on_different_pairs": 1.0
+   }
+  },
+  "room_u": {
+   "written": {
+    "objects": 20,
+    "distinct_names": 5,
+    "different_pairs": 189,
+    "different_pairs_separated": 114,
+    "same_pairs": 1,
+    "accuracy_on_different_pairs": 0.6032
+   },
+   "witnessed": {
+    "objects": 20,
+    "distinct_signatures": 5,
+    "distinct_producer_kinds": 19,
+    "different_pairs": 189,
+    "different_pairs_separated": 155,
+    "same_pairs": 1,
+    "accuracy_on_different_pairs": 0.8201
+   }
+  }
+ },
+ "indistinguishable": {
+  "room_a": {
+   "classes": 4,
+   "singleton_classes": 3,
+   "unresolved_classes": [],
+   "unresolved_count": 0,
+   "bits_undecidable": 0
+  },
+  "room_u": {
+   "classes": 5,
+   "singleton_classes": 0,
+   "unresolved_classes": [
+    {
+     "signature": [
+      "gunzip --list",
+      "gunzip --test",
+      "gunzip -l",
+      "gunzip -t",
+      "gzip --list",
+      "gzip --test",
+      "gzip -l",
+      "gzip -t",
+      "uncompress --list",
+      "uncompress --test",
+      "uncompress -l",
+      "uncompress -t",
+      "zcat --list",
+      "zcat --test",
+      "zcat -l",
+      "zcat -t"
+     ],
+     "objects": [
+      "bundle.zip",
+      "line.txt.gz",
+      "one.tgz"
+     ],
+     "producer_kinds": [
+      "gzip",
+      "tar-gzip",
+      "zip"
+     ],
+     "questions_needed": 1.585
+    },
+    {
+     "signature": [
+      "iconv --verbose"
+     ],
+     "objects": [
+      "cert.pem",
+      "one.tar",
+      "pub.pem",
+      "run.out",
+      "unit.o"
+     ],
+     "producer_kinds": [
+      "elf-exec",
+      "elf-object",
+      "pem-key",
+      "tar",
+      "x509-cert"
+     ],
+     "questions_needed": 2.322
+    },
+    {
+     "signature": [
+      "iconv --verbose",
+      "scriptreplay --summary"
+     ],
+     "objects": [
+      "copy.txt",
+      "doc.xml",
+      "lib.a",
+      "line.txt"
+     ],
+     "producer_kinds": [
+      "ar",
+      "plain-text",
+      "xml"
+     ],
+     "questions_needed": 1.585
+    },
+    {
+     "signature": [
+      "docker-entrypoint.sh --trace-deprecation",
+      "docker-entrypoint.sh --trace-env",
+      "docker-entrypoint.sh --trace-env-js-stack",
+      "docker-entrypoint.sh --trace-env-native-stack",
+      "docker-entrypoint.sh --trace-exit",
+      "docker-entrypoint.sh --trace-promises",
+      "docker-entrypoint.sh --trace-sync-io",
+      "docker-entrypoint.sh --trace-uncaught",
+      "docker-entrypoint.sh --trace-warnings",
+      "iconv --verbose",
+      "node --trace-deprecation",
+      "node --trace-env",
+      "node --trace-env-js-stack",
+      "node --trace-env-native-stack",
+      "node --trace-exit",
+      "node --trace-promises",
+      "node --trace-sync-io",
+      "node --trace-uncaught",
+      "node --trace-warnings",
+      "nodejs --trace-deprecation",
+      "nodejs --trace-env",
+      "nodejs --trace-env-js-stack",
+      "nodejs --trace-env-native-stack",
+      "nodejs --trace-exit",
+      "nodejs --trace-promises",
+      "nodejs --trace-sync-io",
+      "nodejs --trace-uncaught",
+      "nodejs --trace-warnings",
+      "scriptreplay --summary"
+     ],
+     "objects": [
+      "data.json",
+      "empty.bin"
+     ],
+     "producer_kinds": [
+      "empty",
+      "json"
+     ],
+     "questions_needed": 1.0
+    },
+    {
+     "signature": [],
+     "objects": [
+      "line.txt.bz2",
+      "line.txt.xz",
+      "noise.bin",
+      "pic.jpg",
+      "pic.png",
+      "store.db"
+     ],
+     "producer_kinds": [
+      "bzip2",
+      "jpeg",
+      "png",
+      "random-bytes",
+      "sqlite",
+      "xz"
+     ],
+     "questions_needed": 2.585
+    }
+   ],
+   "unresolved_count": 5,
+   "bits_undecidable": 9.077
+  }
+ },
+ "distinctions": {
+  "room_a": {
+   "witnesses": 45,
+   "distinctions": 4,
+   "aliasing": [
+    27,
+    16,
+    1,
+    1
+   ],
+   "runs_saved_by_one_name_per_distinction": 41
+  },
+  "room_u": {
+   "witnesses": 45,
+   "distinctions": 4,
+   "aliasing": [
+    27,
+    16,
+    1,
+    1
+   ],
+   "runs_saved_by_one_name_per_distinction": 41
+  }
+ },
+ "writable_or_destructive_declared_checks": {
+  "count": 16,
+  "of_candidates": 2319,
+  "detail": [
+   "ln --verbose",
+   "ln -v",
+   "shred --verbose",
+   "shred -v",
+   "split --verbose",
+   "stream -help",
+   "stream -verbose",
+   "stream -version",
+   "stream-im6 -help",
+   "stream-im6 -verbose",
+   "stream-im6 -version",
+   "stream-im6.q16 -help"
+  ]
+ },
+ "statable_goals": {
+  "room_u_written": {
+   "producer_kinds": 19,
+   "written_names_available": [
+    "archive",
+    "compressed",
+    "executable",
+    "json",
+    "plain"
+   ],
+   "written_names_used": 5,
+   "producer_kinds_given_their_own_name": [
+    "bzip2",
+    "elf-exec",
+    "gzip",
+    "json",
+    "tar",
+    "tar-gzip",
+    "xz",
+    "zip"
+   ],
+   "producer_kinds_collapsed_into_plain": [
+    "ar",
+    "elf-object",
+    "empty",
+    "jpeg",
+    "pem-key",
+    "plain-text",
+    "png",
+    "random-bytes",
+    "sqlite",
+    "x509-cert",
+    "xml"
+   ],
+   "witness_classes": 5
+  }
+ },
+ "storing": {
+  "room_a_witnesses": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "perl -c",
+   "perl5.36-x86_64-linux-gnu -c",
+   "perl5.36.0 -c",
+   "rgrep --byte-offset",
+   "rgrep --count",
+   "rgrep --files-with-matches",
+   "rgrep --files-without-match",
+   "rgrep --line-number",
+   "rgrep --null",
+   "rgrep --only-matching",
+   "rgrep --with-filename",
+   "rgrep -H",
+   "rgrep -L",
+   "rgrep -Z",
+   "rgrep -b",
+   "rgrep -c",
+   "rgrep -l",
+   "rgrep -n",
+   "rgrep -o",
+   "scriptreplay --summary",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "room_b_witnesses": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "perl -c",
+   "perl5.36-x86_64-linux-gnu -c",
+   "perl5.36.0 -c",
+   "rgrep --byte-offset",
+   "rgrep --count",
+   "rgrep --files-with-matches",
+   "rgrep --files-without-match",
+   "rgrep --line-number",
+   "rgrep --null",
+   "rgrep --only-matching",
+   "rgrep --with-filename",
+   "rgrep -H",
+   "rgrep -L",
+   "rgrep -Z",
+   "rgrep -b",
+   "rgrep -c",
+   "rgrep -l",
+   "rgrep -n",
+   "rgrep -o",
+   "scriptreplay --summary",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "identical": true,
+  "common": 64,
+  "only_on_room_a": [],
+  "only_on_room_b": [],
+  "after_invariance": 45,
+  "scan_a": {
+   "candidates": 2319,
+   "runs": 132,
+   "separating": 66,
+   "repeating": 66,
+   "stable": 64,
+   "changed_the_room": 16,
+   "accepted_everything": 1338,
+   "accepted_nothing": 913,
+   "unreadable": 2,
+   "seconds": 83.0
+  },
+  "scan_b": {
+   "candidates": 2319,
+   "runs": 132,
+   "separating": 66,
+   "repeating": 66,
+   "stable": 64,
+   "changed_the_room": 16,
+   "accepted_everything": 1338,
+   "accepted_nothing": 913,
+   "unreadable": 2,
+   "seconds": 70.8
+  },
+  "changed_the_room_sample": [
+   "ln --verbose",
+   "ln -v",
+   "shred --verbose",
+   "shred -v",
+   "split --verbose",
+   "stream -help",
+   "stream -verbose",
+   "stream -version",
+   "stream-im6 -help",
+   "stream-im6 -verbose",
+   "stream-im6 -version",
+   "stream-im6.q16 -help"
+  ]
+ },
+ "signatures_on_room_u": {
+  "bundle.zip": [
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "cert.pem": [
+   "iconv --verbose"
+  ],
+  "copy.txt": [
+   "iconv --verbose",
+   "scriptreplay --summary"
+  ],
+  "data.json": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "scriptreplay --summary"
+  ],
+  "doc.xml": [
+   "iconv --verbose",
+   "scriptreplay --summary"
+  ],
+  "empty.bin": [
+   "docker-entrypoint.sh --trace-deprecation",
+   "docker-entrypoint.sh --trace-env",
+   "docker-entrypoint.sh --trace-env-js-stack",
+   "docker-entrypoint.sh --trace-env-native-stack",
+   "docker-entrypoint.sh --trace-exit",
+   "docker-entrypoint.sh --trace-promises",
+   "docker-entrypoint.sh --trace-sync-io",
+   "docker-entrypoint.sh --trace-uncaught",
+   "docker-entrypoint.sh --trace-warnings",
+   "iconv --verbose",
+   "node --trace-deprecation",
+   "node --trace-env",
+   "node --trace-env-js-stack",
+   "node --trace-env-native-stack",
+   "node --trace-exit",
+   "node --trace-promises",
+   "node --trace-sync-io",
+   "node --trace-uncaught",
+   "node --trace-warnings",
+   "nodejs --trace-deprecation",
+   "nodejs --trace-env",
+   "nodejs --trace-env-js-stack",
+   "nodejs --trace-env-native-stack",
+   "nodejs --trace-exit",
+   "nodejs --trace-promises",
+   "nodejs --trace-sync-io",
+   "nodejs --trace-uncaught",
+   "nodejs --trace-warnings",
+   "scriptreplay --summary"
+  ],
+  "lib.a": [
+   "iconv --verbose",
+   "scriptreplay --summary"
+  ],
+  "line.txt": [
+   "iconv --verbose",
+   "scriptreplay --summary"
+  ],
+  "line.txt.bz2": [],
+  "line.txt.gz": [
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "line.txt.xz": [],
+  "noise.bin": [],
+  "one.tar": [
+   "iconv --verbose"
+  ],
+  "one.tgz": [
+   "gunzip --list",
+   "gunzip --test",
+   "gunzip -l",
+   "gunzip -t",
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "uncompress --list",
+   "uncompress --test",
+   "uncompress -l",
+   "uncompress -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "pic.jpg": [],
+  "pic.png": [],
+  "pub.pem": [
+   "iconv --verbose"
+  ],
+  "run.out": [
+   "iconv --verbose"
+  ],
+  "store.db": [],
+  "unit.o": [
+   "iconv --verbose"
+  ]
+ },
+ "samples": {
+  "room_u_written": {
+   "bundle.zip": "compressed",
+   "cert.pem": "plain",
+   "copy.txt": "plain",
+   "data.json": "json",
+   "doc.xml": "plain",
+   "empty.bin": "plain",
+   "lib.a": "plain",
+   "line.txt": "plain",
+   "line.txt.bz2": "compressed",
+   "line.txt.gz": "compressed",
+   "line.txt.xz": "compressed",
+   "noise.bin": "plain",
+   "one.tar": "archive",
+   "one.tgz": "compressed",
+   "pic.jpg": "plain",
+   "pic.png": "plain",
+   "pub.pem": "plain",
+   "run.out": "executable",
+   "store.db": "plain",
+   "unit.o": "plain"
+  },
+  "room_u_producer": {
+   "line.txt": "plain-text",
+   "copy.txt": "plain-text",
+   "line.txt.gz": "gzip",
+   "line.txt.xz": "xz",
+   "line.txt.bz2": "bzip2",
+   "bundle.zip": "zip",
+   "one.tar": "tar",
+   "one.tgz": "tar-gzip",
+   "lib.a": "ar",
+   "cert.pem": "pem-key",
+   "pub.pem": "x509-cert",
+   "store.db": "sqlite",
+   "data.json": "json",
+   "doc.xml": "xml",
+   "noise.bin": "random-bytes",
+   "empty.bin": "empty",
+   "pic.png": "png",
+   "pic.jpg": "jpeg",
+   "run.out": "elf-exec",
+   "unit.o": "elf-object"
+  }
+ },
+ "cost": {
+  "seconds": 191.8,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not a benchmark result: nineteen objects, eight producers, one machine",
+  "not a type theory: a signature is what the machine's checks can still separate, and the classes they cannot separate are listed with their price",
+  "not a claim that a signature is a name: `gzip -t+tar -tf` is not the word gzip",
+  "not a claim about rooms with no checker: an object no program can check has the empty signature and is reported as such",
+  "not learned: nothing here is stored between runs, and T6 is why"
+ ],
+ "limits": [
+  "the label of an object is the command that produced it, used only to score",
+  "a witness is a flag the page declares with no argument of its own; a check that takes an argument needs a second derivation this round does not do",
+  "nineteen objects over eight producers is a mechanism measurement; the vocabulary of a browser accessibility tree is the analogous test and is not run here",
+  "T4 is a strict improvement, not a sufficiency: the residual is reported, not closed"
+ ]
+}
