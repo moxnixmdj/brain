@@ -366,3 +366,54 @@ def test_the_path_index_lists_the_room_without_reading_it(tmp_path):
     assert index["readable"] == ["a.py"], index
     assert index["unreadable_source"] == {".js": 1}, index
     assert len(index["files"]) == 2, index
+
+
+def test_methods_in_a_class_are_callables_too(tmp_path):
+    """A room whose answers are all METHODS must not present as nearly empty.
+
+    `ast.walk` returns methods and module functions alike with nothing to tell them apart, so a class
+    was invisible as a unit. Measured on an installed stdlib directory: argparse's entire public
+    surface is `ArgumentParser.add_argument` / `parse_args`, and none of it was offered. The census
+    now walks the structure, records the owner, and gives each callable a name a caller can use.
+    """
+    (tmp_path / "cli.py").write_text(
+        'class ArgumentParser:\n'
+        '    """Parse command line arguments."""\n'
+        '    def parse_args(self, argv):\n'
+        '        """Parse the arguments and return a namespace."""\n'
+        '        return {"argv": argv}\n'
+        '    def _secret(self):\n'
+        '        return None\n'
+        '\n'
+        'def main(argv):\n'
+        '    """Entry point."""\n'
+        '    return ArgumentParser().parse_args(argv)\n',
+        encoding="utf-8")
+    found = RC.survey(str(tmp_path))
+    rows = {f["call"]: f for f in found["functions"]}
+    assert "ArgumentParser.parse_args" in rows, sorted(rows)
+    assert rows["ArgumentParser.parse_args"]["owner"] == "ArgumentParser"
+    # a private method is not offered, exactly like a private function
+    assert "ArgumentParser._secret" not in rows, sorted(rows)
+    # module-level functions are unchanged
+    assert "main" in rows and rows["main"]["owner"] == ""
+    # the owner's name is part of what the thing is, so it reaches the text the scorer reads
+    assert "ArgumentParser" in rows["ArgumentParser.parse_args"]["text"]
+
+
+def test_a_room_whose_answer_is_a_method_can_be_ranked_to_it(tmp_path):
+    """The structural fix has to pay off in ranking, not just in listing."""
+    (tmp_path / "cli.py").write_text(
+        'class ArgumentParser:\n'
+        '    """Parse command line arguments for a script."""\n'
+        '    def parse_args(self):\n'
+        '        """Parse the command line arguments into a namespace."""\n'
+        '        return {}\n'
+        '    def format_usage(self):\n'
+        '        """Render a usage line."""\n'
+        '        return ""\n',
+        encoding="utf-8")
+    plan = RC.closing_plan(RC.survey(str(tmp_path)),
+                           "parse command line arguments for a script", ())
+    top = [n["function"] for n in plan["need"]]
+    assert top and top[0] == "parse_args", plan

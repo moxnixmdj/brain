@@ -8894,3 +8894,53 @@ but both are the difference between browsing a room and understanding it, and ne
           machine can see without reference to what it was asked.
     (130) Report coverage whenever coverage is partial, with or without an objective. The count that
           is only stated when the aiming worked is a count that lies exactly when it matters.
+
+### §A146 addendum 3 — a room whose answers are all methods
+
+Of the two limits addendum 2 recorded, the structural one was the serious one: **most real software
+exposes its functionality through classes, not module-level functions.** So the census was blind to
+the shape most rooms actually have.
+
+The bug was one line. `ast.walk` returns methods and module functions in the same flat bag, with
+nothing to distinguish them and no way back to the class. The census now walks the structure, records
+each callable's `owner`, and reports a `call` string a caller can use:
+
+    before   add_argument                    (owner lost, ambiguous, ungrounded)
+    after    ArgumentParser.add_argument      owner=ArgumentParser, callable as written
+
+Measured on a real stdlib file copied alone into a room, 21 callables before:
+
+    ArgumentParser.add_subparsers   ArgumentParser.parse_args
+    ArgumentParser.parse_known_args ArgumentParser.parse_intermixed_args
+    ArgumentParser.format_usage     ArgumentParser.format_help
+    ArgumentParser.print_usage      ArgumentParser.error
+    HelpFormatter.add_argument      HelpFormatter.start_section
+    Action, BooleanOptionalAction, ...
+
+Before the change, **none of those existed** to anything downstream: a directory with argparse.py in it
+looked like a directory with 21 unremarkable free functions, and the class names — the words a person
+actually says — were nowhere.
+
+### The file budget needed the same lesson
+
+Ranking *paths* alone lost `argparse.py` for "parse command line arguments": the token `parse` is in
+it, `argument` is not, and `argparse` is a third token matching neither. Reading a file's own
+top-level and class-member names costs one ast parse, no import and no execution, and it is precisely
+the vocabulary a person uses:
+
+    "parse command line arguments for a script"
+      paths only        25 files, ArgumentParser.parse_args ABSENT
+      names included    84 files, ArgumentParser.parse_args PRESENT
+
+### What is still not solved
+
+`parse_args` is now *in the room* and *reachable*, but it does not enter the top 60 of 2144 callables
+for that phrase: competing functions are named `parse_command_line`, `get_command_line`,
+`print_arguments`, which match the words literally while `parse_args` matches less of the sentence.
+Lexical relevance is doing exactly what it says on its tin, and the phrase-aware ranking a person
+would expect needs morphology or semantics that this path does not have.
+
+    (131) Walk the structure, not a flattened bag of nodes. A method without its owner is a verb
+          without a subject: unambiguously spelled, and unusable.
+    (132) A file's own vocabulary describes it better than its path does. The names a file defines
+          are free to read and are the words a person uses to ask for what is inside it.

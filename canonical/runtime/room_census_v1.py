@@ -110,6 +110,29 @@ def _signature(node: ast.AST) -> dict[str, Any]:
             "annotations": annotations}
 
 
+def _top_level_names(path: pathlib.Path) -> list[str]:
+    """The names a file defines at top level and as members of its classes.
+
+    Read from source with ast: no import, no execution. A file's own vocabulary is the best cheap
+    description of what it is for -- better than its path, and free to obtain.
+    """
+    tree = _safe_parse(path)
+    if tree is None:
+        return []
+    out = []
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            if node.name.startswith(_PUBLIC):
+                continue
+            out.append(node.name)
+            if isinstance(node, ast.ClassDef):
+                for sub in node.body:
+                    if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        if not sub.name.startswith(_PUBLIC):
+                            out.append(node.name + " " + sub.name)
+    return out[:200]
+
+
 def _repo_relative(path: pathlib.Path, base: pathlib.Path) -> str:
     """The file's path as a tool runner sees it, when that is knowable; else its room path.
 
@@ -148,19 +171,46 @@ def functions_in(path: pathlib.Path, root: pathlib.Path) -> list[dict]:
     # a module-level docstring describes the whole file; functions inherit it as context
     module_doc = " ".join((ast.get_docstring(tree) or "").strip().split("\n\n")[0].split())[:300]
     out = []
-    for node in ast.walk(tree):
-        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
-            continue
-        if node.name.startswith(_PUBLIC):
-            continue
+    # WALK THE STRUCTURE, NOT A FLATTENED BAG OF NODES.
+    #
+    # `ast.walk` returns methods and module-level functions alike, with nothing to tell them apart --
+    # so a class's methods were listed as if they could be called directly, and the class they belong
+    # to was lost. Measured 2026-11-23 on an installed stdlib directory: argparse's entire public
+    # surface is `ArgumentParser.add_argument` / `parse_args`, so a room whose answers are all methods
+    # presented as nearly empty to anything that could not name the owner.
+    #
+    # Each callable now carries its `owner` (the class it is defined in, or "" at module level) and a
+    # `call` string that a caller can actually use. Nested functions stay unowned: they are closures,
+    # not API, and offering them would be advertising something no one outside the file can call.
+    entries = []
+
+    def _collect(body, owner, depth):
+        for node in body:
+            if isinstance(node, ast.ClassDef):
+                if node.name.startswith(_PUBLIC):
+                    continue
+                _collect(node.body, node.name if depth == 0 else owner + "." + node.name, depth + 1)
+            elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                if node.name.startswith(_PUBLIC):
+                    continue
+                entries.append((node, owner))
+
+    _collect(tree.body, "", 0)
+
+    for node, owner in entries:
         sig = _signature(node)
         doc = _doc_summary(node)
         # MEANING IS NAME + DOCSTRING. A function whose docstring says nothing is still listed --
         # it exists and might be the only thing here -- but it carries the module's own statement
         # so a reader is not handed a bare identifier and told it is an answer.
-        text = " ".join(x for x in (node.name.replace("_", " "), doc) if x)
+        # THE OWNER'S NAME IS PART OF WHAT THIS THING IS. `add_argument` alone is generic;
+        # `ArgumentParser.add_argument` is the sentence a person would actually say.
+        text = " ".join(x for x in (owner.replace("_", " ") if owner else "",
+                                    node.name.replace("_", " "), doc) if x)
         out.append({
             "function": node.name,
+            "owner": owner,
+            "call": (owner + "." + node.name) if owner else node.name,
             # TWO PATHS, BECAUSE THEY ANSWER TWO DIFFERENT QUESTIONS.
             # `source_rel` is the file's location IN THE ROOM -- what a person standing there would
             # say, and what a gap report should show. `source_path` is the same file relative to the
@@ -265,10 +315,25 @@ def survey(root: Any, max_files: int = MAX_FILES,
     # nothing to prefer, so the order is unchanged.
     budget_note = ""
     if objective and len(files) > max_files:
+        # one parse per file, no import, no execution -- the same reading the survey would do anyway,
+        # just spent on the names rather than on the whole body
+        names_by_rel = {}
+        for rel in index["readable"]:
+            names_by_rel[rel] = _top_level_names(base / rel)
         try:
             from canonical.runtime.bound_capabilities import objective_relevance_bm25 as bm25
-            cands = [{"capability_id": rel, "title": pathlib.PurePosixPath(rel).stem.replace("_", " "),
-                      "snippet": rel.replace("/", " ").replace("_", " ")}
+            # A FILENAME IS ONE TOKEN; A FILE'S CLASSES AND TOP-LEVEL NAMES ARE MANY.
+            #
+            # Ranking paths alone lost `argparse.py` for "parse command line arguments": the token
+            # `parse` is in it, `argument` is not, and `argparse` is a third token that matches
+            # neither. The names a file DEFINES are free to read (ast parse, no import, no exec) and
+            # they are exactly the vocabulary a person uses -- `ArgumentParser.parse_args` says what
+            # that file is for far better than its path does. So the path index carries each file's
+            # top-level names, and the objective is scored against those.
+            cands = [{"capability_id": rel,
+                      "title": pathlib.PurePosixPath(rel).stem.replace("_", " "),
+                      "snippet": (rel.replace("/", " ").replace("_", " ") + " "
+                                  + " ".join(names_by_rel.get(rel, ())))}
                      for rel in index["readable"]]
             picked = bm25.rank(objective, cands, limit=max_files)
             chosen = [str((h.get("candidate") or {}).get("capability_id"))
@@ -349,7 +414,7 @@ def unknown_functions(census: dict, known_ids) -> list[dict]:
         known.add(text.split("::")[-1].lower() if "::" in text else text.split(".")[-1].lower())
     out = []
     for row in census.get("functions") or []:
-        if row["function"].lower() in known:
+        if row["function"].lower() in known or str(row.get("call") or "").lower() in known:
             continue
         out.append(row)
     return out
@@ -373,7 +438,7 @@ def rank(census: dict, objective: str, limit: int = 8) -> dict:
     # The function's NAME is its title; its docstring is its snippet. Using the scorer's own fields,
     # rather than making it read mine, is the difference between reusing it and replacing it.
     candidates = [{"capability_id": "%s::%s" % (r["source_rel"], r["function"]),
-                   "title": r["function"].replace("_", " "),
+                   "title": str(r.get("call") or r["function"]).replace("_", " ").replace(".", " "),
                    "snippet": r.get("doc") or "",
                    "row": r} for r in rows]
     report = bm25.rank(objective, candidates, limit=limit)
