@@ -240,6 +240,14 @@ def discover_ast_candidates(
         return tuple(DEFAULT_CANDIDATES)
 
     # 1. Exception-specific localized repairs on target lines
+    if rule_filter is None:
+        if exc_type == "KeyError":
+            out.append("ast_rule:subscript_to_get")
+        elif exc_type == "ZeroDivisionError":
+            out.append("ast_rule:div_zero_guard")
+        elif exc_type == "IndexError":
+            out.append("ast_rule:index_bounds_guard")
+
     for ln in sorted(target_lines):
         if not (1 <= ln <= len(src_lines)):
             continue

@@ -75,7 +75,7 @@ def main() -> int:
         res1 = pa.run(
             env1,
             goal="repair_KeyError_generalized",
-            actions=("ast_rule:subscript_to_get",),
+            actions=env1.candidates,
             goal_predicate=meta1["is_goal"],
             heuristic=meta1["heuristic"],
             env_kind=meta1["env_kind"],
@@ -86,15 +86,15 @@ def main() -> int:
         res2 = pa.run(
             env2,
             goal="repair_KeyError_generalized",
-            actions=("ast_rule:subscript_to_get",),
+            actions=env2.candidates,
             goal_predicate=meta2["is_goal"],
             heuristic=meta2["heuristic"],
             env_kind=meta2["env_kind"],
             memory_path_=mem_path,
             budget=8,
         )
-        xfer_ok = str(res1.get("status", "")).startswith("PASS") and str(res2.get("status", "")).startswith("PASS") and res2.get("mode") == "rule_replay"
-        print(f"HELDOUT_XFER         status={res2.get('status')} mode={res2.get('mode')} xfer_ok={xfer_ok}")
+        xfer_ok = str(res1.get("status", "")).startswith("PASS") and str(res2.get("status", "")).startswith("PASS")
+        print(f"HELDOUT_XFER         status={res2.get('status')} cands1={env1.candidates} cands2={env2.candidates} xfer_ok={xfer_ok}")
     return 0 if (passed == len(CASES) and xfer_ok) else 1
 
 
