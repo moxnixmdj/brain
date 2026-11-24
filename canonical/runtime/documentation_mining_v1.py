@@ -84,13 +84,44 @@ def candidate_modules(goal: str, limit: int = 6) -> list[tuple[float, str]]:
         nw = set(_WORD.findall(name.lower()))
         if not nw:
             continue
-        hit = len(gw & nw)
-        if not hit:
-            # "gz" is not a word but gzip is still the module for it
-            hit = sum(1 for w in gw if w and w in name)
-            if not hit:
+        # EVERY CANDIDATE USED TO SCORE EXACTLY 1.0, SO THE ORDER WAS ALPHABETICAL.
+        #
+        # MEASURED 2026-11-23: `sort` fell through to the name whenever the primary score tied, and
+        # the primary score tied for every hit. The machine therefore read manuals in alphabetical
+        # order -- "write the records as a json file" reached _json, cProfile, filecmp and fileinput
+        # before json; "make a zip archive" reached gzip before zipfile, and gzip's page has no
+        # runnable example at all.
+        #
+        # Three signals, strongest first. Nothing here is a new vocabulary: `_WORD` is this module's
+        # own boundary, and the compound suffixes are how CPython actually names these modules.
+        #   whole     the module's exact name is a word the goal states        json, csv, zipapp
+        #   compound  every part of the name is a goal word                    tarfile <- tar + file
+        #   partial   a goal word starts one of the name's words               gzip <- gz? no; gz <- gzip
+        # Scoring partial LAST is what stops "zip" matching inside "gZIP".
+        _CONCAT_SUFFIX = ("file", "lib", "app", "text", "path", "line", "util", "string", "time")
+        low_name = name.lower()
+        parts = {low_name}
+        for suf in _CONCAT_SUFFIX:
+            if low_name.endswith(suf) and len(low_name) > len(suf):
+                head = low_name[: -len(suf)]
+                parts.add(head)
+                parts.add(suf)
+        whole = len(gw & nw)
+        compound = sum(1 for w in gw if w in parts and w not in nw) if not whole else 0
+        if whole:
+            score = 3.0 + whole / (len(nw) ** 0.5)
+        elif compound and compound == len([w for w in gw if w in parts]):
+            score = 2.0 + compound / (len(nw) ** 0.5)
+        else:
+            # "gz" is not a word but gzip is still the module for it; the match must START a word,
+            # so "zip" no longer matches inside "gzip"
+            partial = sum(1 for w in gw if w and any(part.startswith(w) for part in (nw | parts)))
+            if not partial:
                 continue
-        scored.append((hit / (len(nw) ** 0.5), name))
+            score = 1.0 + partial / (len(nw) ** 0.5)
+        if low_name.startswith("_"):
+            score -= 0.5          # a C accelerator's private twin is never what a person means
+        scored.append((round(score, 6), name))
     scored.sort(key=lambda pair: (-pair[0], pair[1]))
     return scored[:limit]
 

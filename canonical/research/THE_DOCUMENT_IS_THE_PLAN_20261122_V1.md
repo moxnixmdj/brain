@@ -8594,3 +8594,110 @@ number was 0 until the rule was written down separately from the values.
     NOT DONE   §6. No OSWorld task, no SWE-bench instance.
     NEXT       The same split for non-tabular slots: which of a demonstration's values are the RULE
                (a kind, a shape, a role) and which are the TRACE (this filename, this column name).
+
+---
+
+## §A145 — the room has to be able to say what it can do
+
+### The gap, measured
+
+The owner's idea: walk into an arbitrary environment, scan it, retrieve what you know and what you do
+not, then get the rest instantly. Measured 2026-11-23 against a directory holding two honest callables
+and a csv:
+
+    census.py     profile(path) -> per-column fill rate and numeric rate
+                  as_markdown(report) -> that profile as a markdown table
+
+    "profile the columns of a csv and write a markdown table"
+    -> candidates: software.analysis.diagnose_and_architect.v1, sqlite.table.create_...,
+       xlsx.table.create_..., ...
+    -> chosen: document.convert.markdown_pdf.pandoc_weasyprint
+    -> ACTION_FAILED
+
+`census.profile` was never a candidate. Not ranked low — **never proposed**, because every selector in
+the tree starts from a fixed registry, and nothing could say "there is a callable in this directory I
+have never met". The three parts that would have made that sentence existed and were unconnected:
+
+    discover_v1.entrypoints()        Makefile / package.json / pyproject -- BUILD COMMANDS, never
+                                     python functions
+    autonomous_capability_inventory  one row per FILE: no functions, no docstrings, no meaning
+    capability_forge_v1              admits a function, but only from an `entry` dict a human wrote
+
+That is why "learn from one experience in a new environment" had no first step: there was no way to
+notice that the environment contained anything to learn.
+
+### What was built
+
+`room_census_v1` — a directory to its callables, and nothing else.
+
+    survey(root)                 every public function, each described by ITS OWN docstring and
+                                 signature, read by ast without importing or executing; bounded
+                                 (400 files, 2500 functions); an unreadable file contributes nothing
+    unknown_functions(census,..)  the owner's "what I don't know", asked about a PLACE
+    rank(census, objective)      which of them is about this objective, scored by
+                                 `objective_relevance_bm25` — the scorer the tree already owns
+    closing_plan(census, obj)    one answer: here is what is here, here is what I lack, here is the
+                                 short list worth a demonstration
+
+The whole loop, measured end to end:
+
+    1 ROOM    2 functions, 2 unknown
+    2 LEARN   forged.census.profile          (2/3 cases ran, 8/8 mutations killed)
+    3 ACT     VERIFIED_ACTION forged.census.profile
+              columns: city {fill 1.0, numeric 0.0}, q1 {fill .667, numeric 1.0},
+                       q2 {fill .333, numeric 1.0}, rows 3
+
+Correct on a file the machine had never seen, from a function it had never met, admitted by running
+it twice and failing to corrupt it.
+
+### Four defects found on the way, all pre-existing
+
+    1. `_requested_suffix` SCORED 1/8 ON ORDINARY PHRASINGS.
+       It demanded a dot-suffixed filename after into/to/as, so "write the records as a json file",
+       "save it as csv", "export as a zip archive", "turn this into a pdf" and four more all returned
+       ''. That single rejection is why `documentation_mining_v1.learn` — the module that reads a
+       manual and produces working code, written for exactly this purpose — could not run at all: its
+       first step is this suffix, so it answered OPEN__NO_OUTPUT_FORMAT_IN_GOAL without reading a
+       manual. Fixed by reading a FORMAT WORD (json, csv, markdown, tarball, pdf) and resolving
+       compounds through `program_synthesis_v1.suffix_for_name`. **1/8 -> 11/11.**
+
+    2. `documentation_mining_v1.candidate_modules` SCORED EVERY CANDIDATE EXACTLY 1.0, so the sort
+       fell through to the NAME and the machine read manuals alphabetically:
+           "write the records as a json file" -> _json, cProfile, filecmp, fileinput, json
+           "make a zip archive"               -> gzip, zipapp, zipfile, zipimport
+       gzip's page has no runnable example at all, which is why that goal failed. Whole-name matches
+       now outrank compound matches (tarfile <- tar + file) which outrank substring matches, and a
+       substring must START a word so "zip" no longer matches inside "gZIP". `json` now leads its own
+       question and `modules_read` fell from 5 to 1.
+
+    3. `objective_relevance_bm25._bm25_scores` RETURNED TWO DIFFERENT SHAPES. Bare floats when every
+       candidate document was empty, (score, contributions) tuples otherwise — so `rank`, which
+       unpacks the pair, raised "cannot unpack non-iterable float object". Any room whose functions
+       share no token with the objective took the whole scorer down instead of reporting zero
+       relevance. One shape now, always.
+
+    4. A ZERO-SCORED CANDIDATE WAS OFFERED AS A MATCH. `rank` returns every candidate it scored, so
+       passing them through presented "nothing here is about this" as a ranked shortlist.
+
+### Laws
+
+    (119) A system that can only select from what it was TOLD about cannot enter a room it has never
+          seen. The census is not a convenience; it is the difference between arriving and recursing
+          over old memories.
+    (120) Meaning is the author's own sentence. A function's name is what they typed; its docstring is
+          what it is for. A candidate described by a bare identifier is a candidate nobody can judge.
+    (121) Reading a room is not trusting it. A census imports nothing, executes nothing and admits
+          nothing: finding a function is a hypothesis about the room, and only running it, twice, with
+          a failed attempt to corrupt it, makes it a capability.
+    (122) A gap that cannot close is worse than no gap. `unknown_functions` first required both name
+          and file to match a capability id, but an id keeps only the file's STEM — so nothing ever
+          closed and every visit asked for the same demonstration again.
+
+### Honest limits
+
+    * Relevance is lexical. `LEXICAL_BM25_OBJECTIVE_RELEVANCE_ONLY`, `semantic_entailment_status:
+      UNVERIFIED`, carried through the adapter unchanged. It found `profile` and `as_markdown` for a
+      goal naming both; it would not understand a paraphrase that shares no word.
+    * The census does not know what a function DOES until something runs it. A docstring can lie; a
+      demonstration cannot.
+    * §6 still NOT MET. No OSWorld task, no SWE-bench instance.

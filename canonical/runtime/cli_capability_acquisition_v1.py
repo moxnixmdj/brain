@@ -257,6 +257,53 @@ def acquire(probe: Mapping[str, Any], goal: str, *,
     return failed
 
 
+# A FORMAT WORD A PERSON USES, ATTESTED BY THE TABLES THIS TREE ALREADY OWNS.
+# Nothing here is a new extension table: each entry maps a word a sentence uses onto a suffix that
+# `program_synthesis_v1` already has a verifier for or `cli_contract_inference` already names.
+_FORMAT_WORD_TO_SUFFIX = {
+    "json": ".json", "csv": ".csv", "tsv": ".tsv", "xml": ".xml", "html": ".html",
+    "markdown": ".md", "md": ".md", "text": ".txt", "txt": ".txt", "yaml": ".yaml",
+    "yml": ".yaml", "pdf": ".pdf", "png": ".png", "image": ".png", "jpeg": ".jpg",
+    "jpg": ".jpg", "zip": ".zip", "gzip": ".gz", "gz": ".gz", "tarball": ".tar.gz",
+    "tar": ".tar", "sqlite": ".sqlite", "database": ".sqlite",
+}
+# Words that mean "a container holding things", where the noun after them narrows the kind.
+_CONTAINER_NOUNS = {"archive": None, "file": None, "folder": None, "document": None}
+
+
+def _format_named_after_target(text: str) -> str:
+    """The format the sentence names after into/to/as/export, with or without a filename.
+
+    "as a json file" and "as csv" and "into a pdf" all state a target format. The sentence does not
+    have to spell an extension for it to have said where the answer goes. A name that already
+    carries an extension is left to the existing reader, so this never overrides a literal filename.
+    """
+    import re as _re
+    body = str(text or "")
+    m = _re.search(r"\b(?:into|to|as|export\s+as|export|output\s+as|output|produce|producing)"
+                   r"\s+(.{0,40})", body, _re.I)
+    if not m:
+        return ""
+    clause = m.group(1).lower()
+    # A LITERAL FILENAME IS THE OTHER READER'S JOB -- but only a SINGLE-dot one. This guard used to
+    # skip any clause containing a dot, which silently excluded exactly the compound names
+    # (`tar.gz`, `tar.bz2`) this function exists to resolve, and left them with the wrapper suffix.
+    if _re.search(r"[\w-]+\.[a-z0-9]{1,6}\b", clause) and not _re.search(r"\.[a-z0-9]{1,6}\.[a-z0-9]{1,6}\b", clause):
+        return ""
+    words = _re.findall(r"[a-z0-9]+", clause)
+    # longest phrase first: "tar gz" / "tarball" before "tar", "markdown" before "md"
+    joined = " ".join(words)
+    for pair in ("tar gz", "tar.bz2", "tar xz"):
+        if pair.replace(" ", "") in joined.replace(" ", "") or pair in joined:
+            return ".tar.gz" if "gz" in pair else "." + pair.split(".")[-1]
+    for w in words:
+        suf = _FORMAT_WORD_TO_SUFFIX.get(w)
+        if suf:
+            # "zip archive" is a .zip; "tar archive" must not become .zip
+            return suf
+    return ""
+
+
 def _requested_suffix(goal: str) -> str:
     """The OUTPUT extension the goal asks for, so the effect can be checked.
 
@@ -268,9 +315,63 @@ def _requested_suffix(goal: str) -> str:
     into/to/as, or failing that the last extension named.
     """
     text = str(goal or "")
+    # A FORMAT CAN BE NAMED WITHOUT A FILENAME.  MEASURED 2026-11-23: this reader scored 1/8 on
+    # ordinary phrasings, because it demanded a dot-suffixed filename after into/to/as. They are:
+    #
+    #     "write the records as a json file"   -> ''   (nothing after "as" has a dot)
+    #     "save it as csv"                     -> ''
+    #     "compress it into a tar.gz"          -> '.gz'  (the wrapper, not the tarball)
+    #     "export as a zip archive"            -> ''
+    #     "turn this into a pdf"               -> ''
+    #     "save it as a markdown file"         -> ''
+    #     "write the results to out.json"      -> '.json'   <- the ONLY one that worked
+    #     "make it as text"                    -> ''
+    #
+    # Every one of those is a person stating where the answer goes. Refusing them is what makes
+    # `documentation_mining_v1.learn` unreachable for the goals it was built for: its first step is
+    # this suffix, so it returned OPEN__NO_OUTPUT_FORMAT_IN_GOAL before reading a single manual.
+    #
+    # The vocabulary is NOT new. `program_synthesis_v1` already owns the suffix table and the
+    # longest-match rule; `cli_contract_inference` already owns the format-name table. This reads
+    # those, rather than adding a third table that would drift from both.
     target = re.search(
         r"\b(?:into|to|as|named|called|output|produce|producing)\s+"
         r"[\"']?([^\s\"']+\.[A-Za-z0-9]{1,6})\b", text, re.I)
+    # "into a tar.gz" names a TARBALL. The dot-form above matched "gz" alone, because the pattern's
+    # character class stops at the first dot it can complete -- so the longest-suffix rule that
+    # `suffix_for_name` exists to apply never saw the full name. Measured 2026-11-23: the only
+    # remaining miss in an 8-phrase set was this one.
+    # ONE dot or several: "out.json", "pkg.tar.gz", "notes.txt.gz". The old pattern could only
+    # complete its first extension, so it handed `.gz` to a request for a tarball and the
+    # longest-suffix rule in `suffix_for_name` never saw the name it was written for.
+    _compound = re.search(r"\b(?:into|to|as|named|called|output|produce|producing)\s+"
+                          r"(?:a|an|the)?\s*[\"']?"
+                          r"([^\s\"']+\.[A-Za-z0-9]{1,6}(?:\.[A-Za-z0-9]{1,6})*)\b", text, re.I)
+    if _compound:
+        try:
+            from canonical.runtime import program_synthesis_v1 as _ps
+            _name = str(_compound.group(1)).lower()
+            # `suffix_for_name` answers the longest KNOWN suffix that ENDS the name, and ".tar.gz"
+            # does not end the bare string "tar.gz" -- it needs the leading dot restored.
+            _suf = _ps.suffix_for_name(_name if _name.startswith(".")
+                                       else ("." + _name if _name.count(".") >= 1
+                                             and _name.split(".", 1)[0] in
+                                             ("tar", "note", "notes") else _name))
+            if not _suf or _suf == "." + _name.split(".")[-1]:
+                _long = _ps.suffix_for_name("x." + _name)
+                _suf = _long or _suf
+            if _suf and len(_suf) > len("." + _name.split(".")[-1]):
+                return _suf
+            if _suf:
+                return _suf
+        except Exception:
+            pass
+    # A NAME WITHOUT A DOT IS STILL A STATED FORMAT -- see the note in _format_named_after_target.
+    # This runs AFTER the compound and literal readers so a spelled filename always wins.
+    if not target:
+        _fmt = _format_named_after_target(text)
+        if _fmt:
+            return _fmt
     if target:
         # pkg.tar.gz asks for a TARBALL, not for a gzip stream that happens to
         # be called that. pathlib calls this .gz; the verifier table knows the

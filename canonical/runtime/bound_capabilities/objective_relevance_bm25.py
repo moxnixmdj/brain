@@ -170,7 +170,12 @@ def _bm25_scores(query_tokens, docs, k1=1.5, b=0.75):
     lengths=[len(x) for x in docs]
     avgdl=(sum(lengths)/n) if n else 0.0
     if avgdl<=0:
-        return [0.0]*n
+        # ONE SHAPE, ALWAYS. This returned bare floats here and (score, contributions) tuples
+        # everywhere else, so `rank` -- which unpacks `(score, parts)` -- raised
+        # "cannot unpack non-iterable float object" whenever EVERY candidate document was empty.
+        # Measured 2026-11-23: a directory whose functions have no docstrings and whose names share
+        # no token with the objective took the whole scorer down instead of reporting zero relevance.
+        return [(0.0, {}) for _ in range(n)]
     dfs={}
     for doc in docs:
         for term in set(doc):
