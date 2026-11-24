@@ -80,7 +80,7 @@ jobs:
           gates = got["verdict"]
           unmet = [name for name, row in gates.items() if not row["MET"]]
           assert not unmet, f"a declared gate no longer holds on this machine: {unmet}"
-          assert len(gates) == 11, sorted(gates)
+          assert len(gates) == 12, sorted(gates)
 
           # 1. THE BEFORE NUMBERS COME FROM THE SHIPPED RULE, NOT FROM THE REPAIRED TREE.
           cert = got["certification"]

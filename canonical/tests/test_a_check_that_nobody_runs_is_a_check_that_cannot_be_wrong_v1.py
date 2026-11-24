@@ -52,7 +52,7 @@ def receipt():
 
 def test_every_declared_gate_holds_and_the_receipt_says_so(receipt):
     gates = receipt["verdict"]
-    assert len(gates) == 9, sorted(gates)
+    assert len(gates) == 12, sorted(gates)
     unmet = [name for name, row in gates.items() if not row["MET"]]
     assert not unmet, unmet
 
@@ -119,11 +119,19 @@ def test_a_check_that_writes_still_writes_when_run_in_the_room():
     with tempfile.TemporaryDirectory() as where:
         victim = pathlib.Path(where) / "payload.txt"
         victim.write_text("the quick brown fox\n", encoding="utf-8")
-        before = hashlib.sha256(victim.read_bytes()).hexdigest()
-        guide.run(["shred", "-v", "payload.txt"], pathlib.Path(where))
-        assert not victim.exists(), "shred left the file it was asked to destroy"
-        assert "the quick brown fox" not in victim.read_text() if victim.exists() else True
-        assert before  # the hash existed, which is the only reason the loss is measurable
+        before_bytes = victim.read_bytes()
+        kind_before = guide.typed(pathlib.Path(where)).get("payload.txt")
+        outcome = guide.run(["shred", "-v", "payload.txt"], pathlib.Path(where))
+        # SHRED OVERWRITES; IT DOES NOT UNLINK. That is the whole point: the file is still there,
+        # still of the same kind, and its bytes are gone -- so a kind map sees nothing happen.
+        assert victim.exists(), "shred unlinked the file; the essay says it overwrites"
+        assert victim.read_bytes() != before_bytes, "the bytes survived, so the finding is wrong"
+        assert "the quick brown fox" not in victim.read_text(errors="replace")
+        assert guide.typed(pathlib.Path(where)).get("payload.txt") == kind_before, \
+            "the kind changed, so this is not the blind case the essay describes"
+        # the repaired comparison must see it
+        assert outcome["changed"] is True, outcome
+        assert outcome["bytes_changed"] == ["payload.txt"], outcome["bytes_changed"]
 
 
 def test_the_certification_a_repair_survives_is_executed_not_asserted():

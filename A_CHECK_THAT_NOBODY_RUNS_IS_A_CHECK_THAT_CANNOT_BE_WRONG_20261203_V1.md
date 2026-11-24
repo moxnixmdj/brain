@@ -50,7 +50,7 @@ the page, because **3 of 87 graph edges** have any flag that can tell one object
 ## 1. What was claimed, before anything ran
 
 Declared in the instrument's `judged()` and copied into the receipt under
-`declared_before_the_run`, eleven gates, each with a falsifier. Two could have killed the round
+`declared_before_the_run`, twelve gates, each with a falsifier. Two could have killed the round
 outright:
 
 * **C4** — that the repair removes every writer **without naming one**. If the rule had needed
