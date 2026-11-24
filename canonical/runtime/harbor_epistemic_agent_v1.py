@@ -20,6 +20,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import json
+import os
 import shlex
 from pathlib import Path
 from typing import Any, Mapping, Sequence
@@ -393,6 +394,10 @@ class EpistemicBrainAgent(BaseAgent):
             "status": "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK",
             "boundary_issue": "CONTAINER_CONFIGURATION_AND_VERIFIER_UNVERIFIED",
             "requested_isolated_vm_eval": self.allow_isolated_vm_eval,
+            # Record the owner's requested opt-in without treating an env var
+            # as proof of identity, mounts, network isolation or quiescence.
+            "requested_external_harbor_vm_eval": os.environ.get("BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL") == "1",
+            "external_harbor_vm_eval_status": "BLOCKED__INTEGRATION_INCOMPLETE",
             "execution_authorized": False,
             "task_completion_claimed": False,
             "verified_by_agent": False,

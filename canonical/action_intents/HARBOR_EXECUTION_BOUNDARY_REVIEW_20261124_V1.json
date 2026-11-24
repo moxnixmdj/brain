@@ -37,7 +37,8 @@
       "canonical/tests/test_perfect_algorithm_v1.py",
       "canonical/tests/test_perfect_algorithm_probe_restore_v1.py",
       "canonical/tests/test_harbor_container_solver_transport_v1.py",
-      "canonical/tests/test_harbor_docker_inspect_diagnostic_v1.py"
+      "canonical/tests/test_harbor_docker_inspect_diagnostic_v1.py",
+      "canonical/tests/test_harbor_pro_patch_handoff_v1.py"
     ],
     "route_class": "REUSE"
   },
@@ -62,7 +63,7 @@
     "route": "REUSE_DOCKER_HOST_INSPECT_AS_UNTRUSTED_DIAGNOSTIC",
     "vm_smoke": "A standalone disposable Docker smoke checks a read-only bind and static inspect filter; it is not Harbor, not a solver, not a verifier and has not been run here."
   },
-  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution.",
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test.",
   "governance_change": false,
   "highest_leverage_now": true,
   "incremental_spend_usd": 0,
@@ -85,7 +86,7 @@
       "Host solver invocation",
       "Unverified fresh-verifier assumption"
     ],
-    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution.",
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test.",
     "obs_blocker": {
       "delete_bypass_substitute_options": [
         "Reuse Harbor transport",
@@ -157,7 +158,7 @@
     "obs_verification": {
       "direct_real_effect_verification_considered": true,
       "existing_oracle_considered": true,
-      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox."
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox. Remove fake docker command test: repository rule forbids fake docker; mocked environment.exec tests alone cannot establish real isolation."
     },
     "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
     "required_capability": "Confined execution and independent verification of agent effects",
@@ -176,6 +177,17 @@
   },
   "requested_progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "requested_progress_class_status": "NOT_YET_ESTABLISHED__INDEPENDENT_EXECUTION_REQUIRED",
+  "requested_unverified_harbor_wiring_20261124": {
+    "correction": "Remove previous fake docker executable test because AGENTS.md prohibits fake docker, regardless of guard result.",
+    "incremental_spend_usd": 0,
+    "no_progress_claim": true,
+    "oracle": "independent operator running actual Docker VM and official benchmark verifiers",
+    "partial_scope": "Implement separately testable Pro candidate patch handoff, with caller-provided base comparison and SHA-256 integrity, without treating either as provenance or quiescence; production execution still refuses until live boundary and capture are bound.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "request": "opt-in container solver, base-bound patch and official verifier handoffs",
+    "route_order": "Delete unsafe host solve; bypass unneeded nested namespaces; reuse Harbor exec and official suite protocols; adapt diagnostic and capture. A flag alone cannot bind identity or prove egress; unsupported suite interfaces must fail closed."
+  },
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "status": "VERIFICATION_PENDING__NO_CAPABILITY_CREDIT",
   "stop_condition": "Run focused tests and integrity guard; document missing Docker integration and independent verification; claim no benchmark or capability credit.",

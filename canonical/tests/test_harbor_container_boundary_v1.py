@@ -41,6 +41,21 @@ class HarborContainerBoundaryTests(unittest.TestCase):
             self.assertFalse(sentinel.exists())
             self.assertEqual(env.commands, [])
 
+    def test_external_vm_opt_in_is_recorded_but_does_not_bypass_missing_boundary(self):
+        for value, requested in ((None, False), ('', False), ('true', False), ('1', True)):
+            with self.subTest(value=value), tempfile.TemporaryDirectory() as tmp:
+                inst = agent.HarborEpistemicAgent()
+                inst.logs_dir = Path(tmp)
+                env = EnvironmentRecorder()
+                variables = {} if value is None else {'BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL': value}
+                with patch.dict('os.environ', variables, clear=True):
+                    asyncio.run(inst.run('task', env, SimpleNamespace()))
+                trace = json.loads((Path(tmp) / agent.TRACE_FILENAME).read_text())
+                self.assertIs(trace['requested_external_harbor_vm_eval'], requested)
+                self.assertEqual(trace['external_harbor_vm_eval_status'], 'BLOCKED__INTEGRATION_INCOMPLETE')
+                self.assertFalse(trace['execution_authorized'])
+                self.assertEqual(env.commands, [])
+
     def test_opt_in_must_be_a_boolean(self):
         with self.assertRaisesRegex(agent.AgentRejected, 'ISOLATED_VM_EVAL_FLAG_MUST_BE_BOOLEAN'):
             agent.HarborEpistemicAgent(allow_isolated_vm_eval='true')

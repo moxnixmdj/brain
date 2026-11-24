@@ -1,11 +1,8 @@
 """Static input controls only; no Docker daemon, container or verifier is mocked."""
 import copy
 import json
-import os
-from pathlib import Path
 import subprocess
 import sys
-import tempfile
 import unittest
 
 from canonical.runtime import harbor_docker_inspect_diagnostic_v1 as diag
@@ -119,60 +116,6 @@ class DiagnosticTests(unittest.TestCase):
         check(doc)
         self.assertEqual(doc, before)
 
-    def test_smoke_script_wiring_and_cleanup_with_fake_docker_only(self):
-        # A fake command exercises plumbing and failure cleanup; it says
-        # nothing about a real daemon, mount, network or container boundary.
-        script = Path(__file__).resolve().parents[1] / 'tools/harbor_docker_diagnostic_smoke_v1.sh'
-        with tempfile.TemporaryDirectory() as tmp:
-            root = Path(tmp)
-            fake = root / 'docker'
-            fake.write_text('''#!/usr/bin/env python3
-import json, os, sys
-from pathlib import Path
-args = sys.argv[1:]
-state = Path(os.environ['FAKE_DOCKER_STATE'])
-with (state / 'calls').open('a') as f:
-    f.write(json.dumps(args) + '\\n')
-if args[0] == 'info':
-    pass
-elif args[0] == 'run':
-    mount = args[args.index('--mount') + 1]
-    (state / 'source').write_text(mount.split(',')[1].removeprefix('source='))
-    print('a' * 64)
-elif args[0] == 'exec':
-    if os.environ.get('FAKE_EXEC_FAIL') == '1':
-        sys.exit(1)
-    print('READ_ONLY_BIND_WRITE_REFUSED_EROFS')
-elif args[0] == 'inspect' and '--format' in args:
-    print(('a' if '{{.Id}}' in args else 'b') * 64)
-elif args[0] == 'inspect':
-    doc = json.loads(os.environ['FAKE_INSPECT'])
-    doc['Mounts'][0]['Source'] = (state / 'source').read_text()
-    print(json.dumps([doc]))
-elif args[0] == 'rm':
-    pass
-else:
-    sys.exit(1)
-''', encoding='utf-8')
-            fake.chmod(0o755)
-            env = dict(os.environ, PATH=str(root) + os.pathsep + os.environ['PATH'],
-                       FAKE_DOCKER_STATE=tmp, FAKE_INSPECT=json.dumps(inspection()))
-            for failure in ('0', '1'):
-                env['FAKE_EXEC_FAIL'] = failure
-                (root / 'calls').write_text('')
-                proc = subprocess.run(['bash', str(script)], env=env, text=True,
-                                      capture_output=True, check=False, timeout=15)
-                self.assertEqual(proc.returncode, 0 if failure == '0' else 1, proc.stderr)
-                calls = [json.loads(line) for line in (root / 'calls').read_text().splitlines()]
-                run = next(args for args in calls if args[0] == 'run')
-                self.assertIn('--network', run)
-                self.assertEqual(run[run.index('--network') + 1], 'none')
-                self.assertIn('readonly', run[run.index('--mount') + 1])
-                self.assertTrue(any(args[:2] == ['rm', '-f'] for args in calls))
-                self.assertFalse(Path((root / 'source').read_text()).exists())
-                if failure == '0':
-                    self.assertIn('SMOKE_ONLY__NO_HARBOR_OR_SOLVER_OR_VERIFIER_EXECUTED', proc.stdout)
-                    self.assertIn('"execution_authorized": false', proc.stdout)
 
 
 if __name__ == '__main__':

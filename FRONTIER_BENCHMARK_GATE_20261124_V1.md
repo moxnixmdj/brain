@@ -78,8 +78,33 @@ the inspected container to Harbor's `environment.exec`, prove future egress
 stays disabled, or establish process quiescence. **It always returns a
 nonzero CLI status and `execution_authorized: false`; the production agent does
 not use it to bypass its refusal.** Its tests are data-only negative controls,
-not a Docker test. More work is still needed for all four requested wiring
-pieces and for the real VM and independent verifier.
+not a Docker test. The previous mock smoke-script test installed a fake `docker`
+executable, contrary to `AGENTS.md` rule 1; it has been removed. A green guard
+did not make that test compliant. More work is still needed for all four
+requested wiring pieces and for the real VM and independent verifier.
+
+### Pro candidate byte handoff (not capture or grading)
+
+`canonical.runtime.harbor_pro_patch_handoff_v1.store_candidate_patch` can store
+caller-supplied Git diff bytes once as `agent/model.patch`, after comparing
+caller-supplied base values and rechecking SHA-256 over the stored bytes. Its
+local Git fixture tests include modifications, deletions, and a binary addition,
+then apply those bytes to a separate local Git fixture. This is **not** the
+production path, an official Pro replay, an authenticated base, a proof that the
+worker stopped, or complete patch capture. The production Harbor agent still
+refuses, including when `BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1`; its trace
+records that request as blocked. The helper only accepts a trusted host log
+directory and never overwrites an existing `model.patch`.
+
+In the pinned Harbor version, `environment.exec` uses Docker Compose's `main`
+service. The current static diagnostic accepts exactly one mount, whereas a
+Harbor trial normally needs additional log mounts. The container ID, mount
+allowlist and execution lifecycle must be bound to that service before the
+diagnostic can become a useful admission check. For FrontierSWE, the pinned
+px-eval rollout and grade scripts transfer configured artifacts to a separate
+verifier image; a plain Harbor invocation is not a substitute. Terminal-Bench
+verification is task-specific and the expected non-Git effects cannot be inferred
+from the Pro patch format.
 
 A standalone Docker smoke is provided for a disposable Linux VM with Docker
 already installed and usable by the current user (this command performs no
