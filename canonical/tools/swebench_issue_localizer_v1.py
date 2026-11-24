@@ -155,6 +155,29 @@ def _field(candidates: list[str], basis: str) -> dict[str, Any]:
             'candidates': choices[:20], 'candidate_count': len(choices), 'basis': basis}
 
 
+def explicit_input_candidates(localization: dict[str, Any]) -> dict[str, str] | None:
+    """Return an all-or-nothing, explicit-reference subset for future wiring.
+
+    This is not an authorization check. Even these candidates are unverified
+    guesses, and must not be used to bypass confinement or receipt admission.
+    Filename-derived tests and symbol-only file searches are not included.
+    """
+    if localization.get('status') != 'ADVISORY_CANDIDATES':
+        return None
+    expected = {'target_path': 'EXPLICIT_ISSUE_PATH',
+                'symbol': 'EXPLICIT_ISSUE_SYMBOL_AND_AST',
+                'test_target': 'EXPLICIT_ISSUE_PATH'}
+    values = {}
+    for name, basis in expected.items():
+        field = localization.get(name)
+        if (not isinstance(field, dict) or field.get('status') != 'SELECTED'
+                or field.get('basis') != basis or not isinstance(field.get('value'), str)
+                or not field['value']):
+            return None
+        values[name] = field['value']
+    return values
+
+
 def localize_issue(statement: str, worktree: str | Path) -> dict[str, Any]:
     result: dict[str, Any] = {'schema': SCHEMA, 'authority': 'NONE__ADVISORY_ONLY',
                               'status': 'NOT_LOCATED', 'reason': None,

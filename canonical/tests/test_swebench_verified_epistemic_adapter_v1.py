@@ -146,21 +146,22 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         for forbidden in ("diff --git gold", "diff --git test", "test_gold"):
             self.assertNotIn(forbidden, goal)
 
-    def test_worktree_diff_becomes_patch_and_worktree_is_removed(self):
+    def test_unverified_worktree_diff_is_not_emitted_and_worktree_is_removed(self):
         def solver(goal, **kwargs):
             source = Path(kwargs["inputs"]["source_root"])
             (source / "mod.py").write_text("value = 2\n", encoding="utf-8")
             return {"pass": True, "status": "PASS__TEST", "reason": None}
 
         row, trace = self.run_one(solver)
-        self.assertIn("diff --git", row["model_patch"])
-        self.assertIn("+value = 2", row["model_patch"])
+        self.assertEqual(row["model_patch"], "")
         self.assertEqual(trace["patch_source"], "WORKTREE_DIFF")
         self.assertEqual(trace["patch_check"], "ALREADY_APPLIED")
-        self.assertEqual(trace["outcome"], "PATCH_EMITTED")
+        self.assertGreater(trace["candidate_patch_chars"], 0)
+        self.assertEqual(trace["patch_chars"], 0)
+        self.assertEqual(trace["outcome"], "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE")
         self.assertEqual(list(self.workdir.glob("*__worktree")), [])
 
-    def test_model_result_patch_is_preferred_and_verified(self):
+    def test_model_result_patch_is_preferred_but_not_emitted_without_receipt(self):
         def solver(goal, **kwargs):
             source = Path(kwargs["inputs"]["source_root"])
             (source / "mod.py").write_text("value = 2\n", encoding="utf-8")
@@ -170,12 +171,15 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
                 text=True,
                 check=True,
             ).stdout
-            return {"pass": True, "model_patch": patch}
+            return {"pass": True, "model_patch": patch,
+                    "effect_receipt_verified": True, "receipt_sha256": "0" * 64}
 
         row, trace = self.run_one(solver)
-        self.assertTrue(row["model_patch"].startswith("diff --git"))
+        self.assertEqual(row["model_patch"], "")
         self.assertEqual(trace["patch_source"], "MODEL_RESULT:model_patch")
         self.assertEqual(trace["patch_check"], "ALREADY_APPLIED")
+        self.assertGreater(trace["candidate_patch_chars"], 0)
+        self.assertEqual(trace["outcome"], "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE")
 
     def test_invalid_model_patch_is_rejected(self):
         def solver(goal, **kwargs):
@@ -232,6 +236,18 @@ class SwebenchVerifiedEpistemicAdapterTests(unittest.TestCase):
         self.assertEqual(len(traces), 2)
         self.assertEqual(summary["counts"], {"total": 2, "skipped": 0, "patched": 0, "empty": 2})
         self.assertIn("REQUIRES_OFFICIAL_HARNESS", summary["claim"])
+
+    def test_skip_existing_refuses_unverified_nonempty_prediction_before_overwriting(self):
+        output = self.root / 'predictions.jsonl'
+        original = json.dumps(adapter.prediction_row('demo__proj-1', 'unverified patch', 'test-model')) + '\n'
+        output.write_text(original)
+        with self.assertRaisesRegex(adapter.AdapterError, 'EXISTING_PREDICTION_NOT_EMPTY_OR_INVALID'):
+            adapter.generate_predictions(
+                [_instance(self.base)], solve_fn=lambda *args, **kwargs: {},
+                repos_root=self.root, workdir=self.workdir, output_path=output,
+                report_path=self.root / 'report.jsonl', skip_existing=True,
+            )
+        self.assertEqual(output.read_text(), original)
 
     def test_dataset_loader_drops_answer_fields(self):
         dataset = self.root / "dataset.jsonl"

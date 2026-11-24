@@ -2,6 +2,18 @@
 
 **Two experimental wrappers, zero score claims. Do not start a VM run yet.**
 
+**Owner-authorization update:** The owner has approved a one-shot isolated scope;
+see `SWE_REPAIR_OWNER_APPROVAL_20261124_V1.md`. That statement was not accompanied
+by a digital signature, a trusted public key, independent reproduction logs, or
+an independently authenticated effect verifier. The existing SWE wrapper can
+invoke an unisolated solver and emit applicability-checked patches without an
+independent effect receipt. **Do not run it for the authorized evaluation**, and
+do not use the commands below for evaluation until a separately reviewed,
+no-host-fallback integration verifies the exact patch bytes against the trusted
+base and the five-real-instance gate has yielded a receipt-verified patch.
+The five-real-issue localization-only diagnostic in
+`qualification_results/swe_real_localization_only_20261124.json` ran no repairs.
+
 **Safety and decision-gate update (2026-11-24):** The five-instance synthetic
 post-candidate dry-run produced 0/5 patches for both EPISTEMIC and
 SOLVE_OR_LEARN; none was receipt-verified. The candidate Phase A repair wiring
@@ -10,10 +22,12 @@ an OS sandbox and can write outside its clone even while reporting the host
 untouched. Its receipt identifier alone does not verify outcome/effect bytes.
 See the safety update at the top of
 `CONFINEMENT_FRONT_DOOR_WIRING_DESIGN_20261124_V1.md`. The original repair
-refusal remains; no external smoke test is approved. The wrapper currently
-extracts a model-returned or worktree diff with applicability checks, **not**
-receipt-verified patch bytes; a non-empty prediction by itself cannot satisfy
-the gate. The commands below are planning material, not a green light.
+refusal remains; the later owner authorization does not supply a qualified
+execution path. The wrapper can inspect a model-returned or worktree diff with
+applicability checks, **not** receipt-verified patch bytes, and now refuses to
+emit nonempty predictions without a trusted receipt integration. This output
+guard does not confine its solver. The commands below are planning material,
+not a green light.
 
 Date: 2026-11-24 · Authority: `NONE__SANDBOX_ONLY` · Branch `arena/d582a17b-brain`
 
@@ -41,6 +55,17 @@ their sidecars rather than implying a new engine capability.
 ## 2. SWE-bench Verified: produce predictions
 
 ### 2.1 External machine (not this sandbox)
+
+No cloud account or VM is connected to this session, and none has been
+provisioned. The owner requested Ubuntu 24.04. After the local safety and
+five-instance gates pass, use a disposable credential-free VM and preserve
+harness versions, task revisions, run IDs, predictions, logs and official
+reports. Do not reuse these SWE Verified commands for Pro: the official
+[Pro repository](https://github.com/scaleapi/SWE-bench_Pro-os) currently
+lists a 642-task V2 Harbor format as its default and a separate V1 pipeline;
+select and record the version and follow that release's protocol. Run the
+50-task Verified smoke before its full 500, then Pro and Terminal-Bench in the
+requested order. No resources should be purchased merely on this preparation.
 
 Baseline from the SWE-bench harness docs: 8+ CPU cores, 16 GB+ RAM, 150 GB+
 free SSD (Docker images are large), unrestricted outbound network access.
@@ -84,9 +109,9 @@ python3 -m canonical.tools.swebench_verified_epistemic_adapter_v1 \
 
 Every dataset instance is written, including unresolved ones with an empty
 `model_patch`. The sidecar records `model_status`, `model_reason`, patch source,
-`git apply --check` result and a reason code for each empty patch. A patch is
-emitted only from a model result field or from an actual worktree diff, and it
-must look like a unified diff and pass `git apply --check` (forward or reverse).
+`git apply --check` result and a reason code for each empty patch. The current
+wrapper may find a model or worktree diff, but emits no nonempty patch: an
+applicability check is not an independently verified effect receipt.
 
 ### 2.3 Grade with the official harness
 

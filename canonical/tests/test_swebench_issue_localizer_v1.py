@@ -29,6 +29,16 @@ class LocalizerTests(unittest.TestCase):
         self.assertEqual(r['symbol']['value'], 'repair')
         self.assertEqual(r['test_target']['value'], 'tests/test_thing.py')
 
+    def test_explicit_subset_requires_all_three_explicit_references(self):
+        full = loc.localize_issue('pkg/thing.py function repair; tests/test_thing.py', self.root)
+        self.assertEqual(loc.explicit_input_candidates(full), {
+            'target_path': 'pkg/thing.py', 'symbol': 'repair', 'test_target': 'tests/test_thing.py'})
+        guessed_test = loc.localize_issue('pkg/thing.py function repair', self.root)
+        self.assertIsNone(loc.explicit_input_candidates(guessed_test))
+        guessed_path = loc.localize_issue('repair() tests/test_thing.py', self.root)
+        self.assertIsNone(loc.explicit_input_candidates(guessed_path))
+        self.assertIsNone(loc.explicit_input_candidates(loc.localize_issue('missing.py', self.root)))
+
     def test_symbol_only_and_test_filename(self):
         r = loc.localize_issue('Calling repair() fails.', self.root)
         self.assertEqual(r['target_path']['value'], 'pkg/thing.py')

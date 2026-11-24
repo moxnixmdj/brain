@@ -1,6 +1,6 @@
 # Independent repair and one-shot carrier review request
 
-**UNSIGNED, NOT AN ATTESTATION.** No reviewer has approved this request. The machine predicates described below are not evidence of independent review and must not be satisfied by inventing a flag or receipt. Neither this request nor a reviewer signature alone qualifies the carrier or grants execution authority. Review the exact candidate revision `9a6bb9c54696175e5a93530cdd11ba2010a3e62e`; any later localization commit requires separate review if it is in scope.
+**This template remains unsigned and is not an attestation.** The owner subsequently supplied a scoped approval statement, preserved in `SWE_REPAIR_OWNER_APPROVAL_20261124_V1.md`; it was not accompanied by a cryptographic signature or independent reproduction logs. The machine predicates described below are historical observations at the candidate revision, not evidence of independent review, and must not be satisfied by inventing a flag or receipt. The repair inspect gate is now explicitly fail-closed against these weak legacy encodings. Neither this request nor an approval statement alone qualifies the carrier or grants execution authority. The candidate revision was `9a6bb9c54696175e5a93530cdd11ba2010a3e62e`; later changes require review if they are in scope.
 
 ## Actual repair-capability machine contract at the candidate revision
 

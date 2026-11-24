@@ -38,7 +38,7 @@ import tempfile
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping, Sequence
 
-from canonical.tools.swebench_issue_localizer_v1 import localize_issue
+from canonical.tools.swebench_issue_localizer_v1 import explicit_input_candidates, localize_issue
 
 SCHEMA = "PROJECT_BRAIN_SWEBENCH_VERIFIED_EPISTEMIC_ADAPTER_V1"
 DEFAULT_MODEL_NAME = "b81b2217-epistemic-v1"
@@ -344,6 +344,9 @@ def solve_one(
         trace["issue_localization"] = localize_issue(
             str(instance.get("problem_statement") or ""), worktree
         )
+        # This subset is for a future qualified integration, not the current
+        # solver: neither a candidate nor a digest grants execution authority.
+        trace["explicit_input_candidates"] = explicit_input_candidates(trace["issue_localization"])
         task_path = workdir / (iid.replace("/", "_") + "__task.txt")
         task_path.write_text(goal + "\n", encoding="utf-8")
         report_path = workdir / (iid.replace("/", "_") + "__model_result.json")
@@ -382,15 +385,20 @@ def solve_one(
         patch, source, check = extract_patch(
             result, worktree, include_untracked=include_untracked
         )
+        # An applicability check is not an independently verified effect
+        # receipt bound to the task's base and exact patch bytes. This adapter
+        # has no such trusted integration, so never emit a nonempty prediction.
+        # This is an output safeguard, NOT confinement for the solver above.
         trace.update(
             {
                 "patch_source": source,
                 "patch_check": check,
-                "patch_chars": len(patch),
-                "outcome": "PATCH_EMITTED" if patch else check or "NO_SOURCE_CHANGE",
+                "candidate_patch_chars": len(patch),
+                "patch_chars": 0,
+                "outcome": "EFFECT_RECEIPT_VERIFICATION_UNAVAILABLE" if patch else check or "NO_SOURCE_CHANGE",
             }
         )
-        return prediction_row(iid, patch, model_name), trace
+        return prediction_row(iid, "", model_name), trace
     except Exception as exc:  # fail closed; keep the instance in predictions.jsonl
         trace["outcome"] = "ADAPTER_EXCEPTION:" + type(exc).__name__ + ":" + str(exc)[:300]
         return prediction_row(iid, "", model_name), trace
@@ -424,6 +432,9 @@ def generate_predictions(
             if not line.strip():
                 continue
             row = json.loads(line)
+            if (not isinstance(row, dict) or not isinstance(row.get("model_patch"), str)
+                    or row["model_patch"]):
+                raise AdapterError("EXISTING_PREDICTION_NOT_EMPTY_OR_INVALID__RECEIPT_UNAVAILABLE")
             existing[str(row.get("instance_id"))] = row
     counts: dict[str, int] = {"total": 0, "skipped": 0, "patched": 0, "empty": 0}
     with output_path.open("w", encoding="utf-8") as predictions, report_path.open(
