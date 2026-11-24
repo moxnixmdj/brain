@@ -233,3 +233,12 @@ This phase is research for a runner-owned hard-verifier carrier, not an exhausti
 - **2026 external-memory / continual-learning literature** says external memory relocates stability–plasticity rather than solving it; raw trajectories can hurt transfer; retrieval access is not behavioral learning; delayed credit assignment, selective forgetting, conflict/pollution and provenance/rollback remain hard. These support the §2 boundary that external stores are inspectable/editable knowledge/state, not a knowledge house in weights or a magic one-exposure capability. No literature result is counted as our system capability.
 
 **First-principles implication.** The bottleneck is verified authority over unseen hard environments, not more scanning or larger stores. The carrier must keep the smallest undecided relation class, execute the one decision-relevant contrast the current environment makes reachable, recompute terms from that machine’s own evidence, and submit exact bytes to a distinct verifier. A task-specific answer, hidden-test read, borrowed output, fetched leaderboard score or model call would kill the license. This ledger records inputs and limits only; it is not verification and it grants no §6 credit.
+
+
+---
+
+## 5g. Iteration-9 runner-owned hard-benchmark result (no new exhaustive web count)
+
+No new exhaustive primary-source count is claimed here. The original 52-page / 182-distinct-chunk / 188-invocation ledger remains intact, and §5f remains explicitly non-exhaustive. This phase records one runner-owned authority result only: GitHub Actions OIDC run [45306545636](https://github.com/moxnixmdj/brain/actions/runs/45306545636) used the pinned Harbor `0.27.0` / Terminal-Bench `v4.1.0` substrates from §5f, selected three fresh CPU-only tasks, pulled six digest-pinned images, ran the Brain-owned no-inference agent, and emitted `canonical/verification/TERMINAL_BENCH_4_1_CPU_ZERO_MODEL_RUNNER_RECEIPT_20261124_V1.json` plus `canonical/verification/TERMINAL_BENCH_4_1_CPU_REWARD_LOG_20261124_V1.json`.
+
+The three official reward vectors were each `{"reward": 0.0}`; no task success, aggregate benchmark score, §6 verification, terminal truth change, capability credit or merge is claimed. The runner receipt and reward log are authority for the attempt and reward diagnostics only; they are not runtime producer cognition and not external world facts in parameters. The next hard-verifier frontiers remain OSWorld 2.1 and SWE-bench Pro V2 / HARD-51.
