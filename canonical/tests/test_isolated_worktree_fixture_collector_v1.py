@@ -56,6 +56,44 @@ class WorktreeFixtureCollectorTests(unittest.TestCase):
         for name, data in result['effect_bytes'].items():
             self.assertEqual(result['receipt']['effects'][name]['sha256'], hashlib.sha256(data).hexdigest())
 
+    def test_larger_multi_file_fixture_and_host_sentinel(self):
+        directory = self.repo / 'pkg'; directory.mkdir()
+        (directory / 'core.py').write_text('answer = 1\n', encoding='utf-8')
+        for index in range(520):
+            (directory / f'file_{index:03}.py').write_text('pass\n', encoding='utf-8')
+        subprocess.run(['git', '-C', str(self.repo), 'add', 'pkg'], check=True)
+        self.commit('large fixture')
+        base = subprocess.check_output(['git', '-C', str(self.repo), 'rev-parse', 'HEAD'], text=True).strip()
+        sentinel = self.root / 'host-sentinel'; sentinel.write_bytes(b'HOST_UNCHANGED')
+        fixture = f'''from pathlib import Path
+try:
+    Path({str(sentinel)!r}).write_bytes(b'ESCAPE')
+except OSError:
+    pass
+else:
+    raise RuntimeError('host sentinel was reachable')
+Path('/work/project/mod.py').write_text('value = 2\\n')
+Path('/work/project/pkg/core.py').write_text('answer = 2\\n')
+'''
+        result = collector.collect_fixture_worktree(self.repo, base, fixture)
+        self.assertEqual(result['receipt']['base_commit'], base)
+        self.assertEqual(set(result['effect_bytes']), {'patch.diff', 'files/mod.py', 'files/pkg/core.py'})
+        self.assertEqual(result['effect_bytes']['files/mod.py'], b'value = 2\n')
+        self.assertEqual(result['effect_bytes']['files/pkg/core.py'], b'answer = 2\n')
+        for path, data in result['effect_bytes'].items():
+            self.assertEqual(result['receipt']['effects'][path]['sha256'], hashlib.sha256(data).hexdigest())
+        self.assertIn(b'diff --git a/mod.py b/mod.py', result['patch_bytes'])
+        self.assertIn(b'diff --git a/pkg/core.py b/pkg/core.py', result['patch_bytes'])
+        check = subprocess.run(['git', '-C', str(self.repo), 'apply', '--check', '-'],
+                               input=result['patch_bytes'], capture_output=True)
+        self.assertEqual(check.returncode, 0, check.stderr)
+        self.assertEqual(sentinel.read_bytes(), b'HOST_UNCHANGED')
+        self.assertEqual((self.repo / 'mod.py').read_bytes(), b'value = 1\n')
+        self.assertEqual((directory / 'core.py').read_bytes(), b'answer = 1\n')
+        self.assertFalse(result['carrier_qualified'])
+        self.assertFalse(result['independent_verification'])
+        self.assertFalse(result['publication_authority'])
+
     def test_host_receipt_refuses_tampered_base_and_file_bytes(self):
         fixture = "from pathlib import Path\nPath('/work/project/mod.py').write_text('value = 2\\n')\n"
         result = collector.collect_fixture_worktree(self.repo, self.base, fixture)
@@ -129,9 +167,9 @@ class WorktreeFixtureCollectorTests(unittest.TestCase):
     def test_actual_changes_during_host_collection_are_refused(self):
         original = snapshot.snapshot_project
         calls = 0
-        def inject_real_write(path):
+        def inject_real_write(path, **kwargs):
             nonlocal calls
-            result = original(path)
+            result = original(path, **kwargs)
             if Path(path).name == 'worktree':
                 calls += 1
             if Path(path).name == 'worktree' and calls == 2:  # real host write after first post-exit snapshot
@@ -142,9 +180,25 @@ class WorktreeFixtureCollectorTests(unittest.TestCase):
             with self.assertRaisesRegex(collector.FixtureRefused, 'WORKTREE_CHANGED_DURING_COLLECTION'):
                 collector.collect_fixture_worktree(self.repo, self.base, fixture)
 
-    def test_worker_cannot_change_git_metadata_and_keep_a_receipt(self):
-        fixture = "from pathlib import Path\nPath('/work/project/.git/HEAD').write_text('0'*40 + '\\n')\n"
-        with self.assertRaisesRegex(collector.FixtureRefused, 'GIT_METADATA_CHANGED'):
+    def test_actual_git_metadata_is_not_mounted_into_fixture(self):
+        fixture = '''from pathlib import Path
+head = Path('/work/project/.git/HEAD')
+try:
+    head.write_text('0'*40 + '\\n')
+except FileNotFoundError:
+    pass
+else:
+    raise RuntimeError('git metadata was reachable')
+Path('/work/project/mod.py').write_text('value = 2\\n')
+'''
+        result = collector.collect_fixture_worktree(self.repo, self.base, fixture)
+        self.assertEqual(result['effect_bytes']['files/mod.py'], b'value = 2\n')
+        self.assertEqual((self.repo / 'mod.py').read_bytes(), b'value = 1\n')
+        self.assertEqual(subprocess.check_output(['git', '-C', str(self.repo), 'rev-parse', 'HEAD'], text=True).strip(), self.base)
+
+    def test_worker_created_git_metadata_is_refused(self):
+        fixture = "from pathlib import Path\nPath('/work/project/.git').mkdir()\n"
+        with self.assertRaisesRegex(collector.FixtureRefused, 'WORKER_CREATED_GIT_METADATA'):
             collector.collect_fixture_worktree(self.repo, self.base, fixture)
         self.assertEqual((self.repo / 'mod.py').read_bytes(), b'value = 1\n')
 

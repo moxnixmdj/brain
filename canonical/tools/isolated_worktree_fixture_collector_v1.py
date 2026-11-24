@@ -63,7 +63,7 @@ def _snapshot_worktree(worktree: Path, quarantine: Path, *, restore: bool) -> sn
         raise FixtureRefused('SCRATCH_GIT_DIRECTORY_INVALID')
     os.rename(gitdir, quarantine)
     try:
-        return snapshot.snapshot_project(worktree)
+        return snapshot.snapshot_project(worktree, limits=snapshot.FIXTURE_WORKTREE_LIMITS)
     except (snapshot.CandidateDenied, OSError) as exc:
         raise FixtureRefused('WORKTREE_SNAPSHOT_FAILED') from exc
     finally:
@@ -120,6 +120,8 @@ def _run_fixture(input_dir: Path, worktree: Path, script: str) -> tuple[int, str
     policy_basis = {'policy_sha256': ns.policy_sha256(p), 'setup_sha256': hashlib.sha256(setup.encode()).hexdigest(),
                     'pid1_sha256': hashlib.sha256(ns._PID1_GUARD.encode()).hexdigest(),
                     'syscall_filter_sha256': ns.syscall_filter_sha256(),
+                    'git_visibility': 'QUARANTINED_BEFORE_WORKER',
+                    'snapshot_limits': vars(snapshot.FIXTURE_WORKTREE_LIMITS),
                     'fixture_script_sha256': hashlib.sha256(script.encode('utf-8')).hexdigest()}
     policy_sha = hashlib.sha256(json.dumps(policy_basis, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
     (input_dir / 'fixture.py').write_text(script, encoding='utf-8')
@@ -262,12 +264,24 @@ def collect_fixture_worktree(source_repo: str | Path, expected_base_commit: str,
         before = _snapshot_worktree(worktree, root / 'git_before', restore=True)
         modes_before = _modes(worktree, before)
         try:
-            git_before = snapshot.snapshot_project(worktree / '.git')
+            git_before = snapshot.snapshot_project(worktree / '.git', limits=snapshot.FIXTURE_WORKTREE_LIMITS)
         except snapshot.CandidateDenied as exc:
             raise FixtureRefused('GIT_METADATA_SNAPSHOT_FAILED') from exc
-        rc, policy_sha = _run_fixture(inp, worktree, fixture_script)
+        # Keep real clone metadata outside the worker's bind mount, rather than
+        # merely checking its hash after exposing it writable. A worker-created
+        # .git path is refused, even if it contains no persistent metadata edit.
+        # This quarantine is in a trusted private host temp directory; it does
+        # not defend against a malicious privileged host or a kernel escape.
+        quarantine = root / 'git_worker_quarantine'
+        os.rename(worktree / '.git', quarantine)
         try:
-            git_after = snapshot.snapshot_project(worktree / '.git')
+            rc, policy_sha = _run_fixture(inp, worktree, fixture_script)
+        finally:
+            if os.path.lexists(worktree / '.git'):
+                raise FixtureRefused('WORKER_CREATED_GIT_METADATA')
+            os.rename(quarantine, worktree / '.git')
+        try:
+            git_after = snapshot.snapshot_project(worktree / '.git', limits=snapshot.FIXTURE_WORKTREE_LIMITS)
         except snapshot.CandidateDenied as exc:
             raise FixtureRefused('GIT_METADATA_SNAPSHOT_FAILED') from exc
         if git_before.digest != git_after.digest or git_before.files != git_after.files:
@@ -275,7 +289,7 @@ def collect_fixture_worktree(source_repo: str | Path, expected_base_commit: str,
         after = _snapshot_worktree(worktree, root / 'git_after', restore=False)
         # Metadata/content checks during each read plus a second full snapshot
         # detect many races, but do not claim an adversarial-host guarantee.
-        after_again = snapshot.snapshot_project(worktree)
+        after_again = snapshot.snapshot_project(worktree, limits=snapshot.FIXTURE_WORKTREE_LIMITS)
         if after.digest != after_again.digest or after.files != after_again.files:
             raise FixtureRefused('WORKTREE_CHANGED_DURING_COLLECTION')
         if _modes(worktree, after) != modes_before:

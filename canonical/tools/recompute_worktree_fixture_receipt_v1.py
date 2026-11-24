@@ -61,6 +61,8 @@ def _measure_policy(input_dir: Path) -> str:
     basis = {'policy_sha256': ns.policy_sha256(policy), 'setup_sha256': hashlib.sha256(setup.encode()).hexdigest(),
              'pid1_sha256': hashlib.sha256(ns._PID1_GUARD.encode()).hexdigest(),
              'syscall_filter_sha256': ns.syscall_filter_sha256(),
+             'git_visibility': 'QUARANTINED_BEFORE_WORKER',
+             'snapshot_limits': vars(snapshots.FIXTURE_WORKTREE_LIMITS),
              'fixture_script_sha256': hashlib.sha256(script).hexdigest()}
     return hashlib.sha256(json.dumps(basis, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
 
@@ -115,9 +117,9 @@ def recompute(*, source: Path, worktree: Path, input_dir: Path, receipt: dict[st
         if head != expected_base:
             raise RecomputeRefused('CHECKED_OUT_BASE_MISMATCH')
         os.rename(baseline / '.git', root / 'git_baseline')
-        before = snapshots.snapshot_project(baseline)
-        after = snapshots.snapshot_project(worktree)
-        after2 = snapshots.snapshot_project(worktree)
+        before = snapshots.snapshot_project(baseline, limits=snapshots.FIXTURE_WORKTREE_LIMITS)
+        after = snapshots.snapshot_project(worktree, limits=snapshots.FIXTURE_WORKTREE_LIMITS)
+        after2 = snapshots.snapshot_project(worktree, limits=snapshots.FIXTURE_WORKTREE_LIMITS)
         if after.digest != after2.digest or after.files != after2.files:
             raise RecomputeRefused('WORKTREE_CHANGED_DURING_RECOMPUTE')
         if before.digest != receipt['before_snapshot_sha256'] or after.digest != receipt['after_snapshot_sha256']:
@@ -135,7 +137,7 @@ def recompute(*, source: Path, worktree: Path, input_dir: Path, receipt: dict[st
                 raise RecomputeRefused('CHANGED_FILE_BYTES_MISMATCH')
         _git(['apply', '--check', '-'], cwd=baseline, home=root, input_bytes=patch)
         _git(['apply', '-'], cwd=baseline, home=root, input_bytes=patch)
-        applied = snapshots.snapshot_project(baseline)
+        applied = snapshots.snapshot_project(baseline, limits=snapshots.FIXTURE_WORKTREE_LIMITS)
         if applied.digest != after.digest or applied.files != after.files:
             raise RecomputeRefused('PATCH_DOES_NOT_REPRODUCE_WORKTREE')
     return {'status': 'FIXTURE_BYTES_RECOMPUTED', 'producer_built': True,
