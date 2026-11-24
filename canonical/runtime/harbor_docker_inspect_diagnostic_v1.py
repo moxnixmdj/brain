@@ -21,12 +21,14 @@ _ID = re.compile(r"[0-9a-f]{64}\Z")
 _MAX_BYTES = 2_000_000
 
 
-def diagnose(inspect: Any, *, expected_id: str, expected_brain_source: str) -> dict[str, Any]:
-    """Filter a narrow no-network/no-host-writes Docker configuration.
+def diagnose(inspect: Any, *, expected_id: str, expected_brain_source: str,
+             expected_log_sources: dict[str, str] | None = None) -> dict[str, Any]:
+    """Filter a narrow no-network Docker configuration.
 
-    This intentionally refuses additional mounts, devices and GPUs, even where
-    some might be safe. Docker isolation still depends on the actual daemon,
-    kernel, lifecycle, and Harbor identity, none of which are validated here.
+    Log mounts are accepted only when the caller supplies exact source paths
+    for the standard Harbor targets. These may be writable and therefore
+    constitute host effects, not trusted verifier results. Caller-supplied
+    paths and inspect data are not authenticated. Devices and GPUs are refused.
     """
     failures: list[str] = []
 
@@ -91,16 +93,42 @@ def diagnose(inspect: Any, *, expected_id: str, expected_brain_source: str) -> d
                 nets_ok = False
     require(nets_ok, "NETWORK_ATTACHMENT_PRESENT_OR_UNKNOWN")
 
-    source_ok = (isinstance(expected_brain_source, str) and expected_brain_source.startswith("/")
-                 and "\x00" not in expected_brain_source
-                 and os.path.normpath(expected_brain_source) == expected_brain_source
-                 and expected_brain_source != "/")
+    def valid_source(path: Any) -> bool:
+        return (isinstance(path, str) and path.startswith("/") and "\x00" not in path
+                and os.path.normpath(path) == path and path != "/")
+
+    source_ok = valid_source(expected_brain_source)
     require(source_ok, "EXPECTED_BRAIN_SOURCE_INVALID")
-    mount_ok = (len(mounts) == 1 and isinstance(mounts[0], dict)
-                and mounts[0].get("Type") == "bind" and mounts[0].get("RW") is False
-                and mounts[0].get("Source") == expected_brain_source
-                and mounts[0].get("Destination") == "/opt/brain-ro")
-    require(mount_ok, "BRAIN_READ_ONLY_MOUNT_OR_EXTRA_MOUNTS")
+    allowed_targets = {"/logs/agent", "/logs/verifier", "/logs/artifacts"}
+    logs = {} if expected_log_sources is None else expected_log_sources
+    logs_ok = (isinstance(logs, dict) and set(logs).issubset(allowed_targets)
+               and all(valid_source(p) for p in logs.values()))
+    if logs_ok and source_ok:
+        # A writable log bind may not textually contain, or be contained by,
+        # Brain or another log source. Aliases/symlinks are NOT checked here.
+        paths = [expected_brain_source, *logs.values()]
+        logs_ok = all(os.path.commonpath((a, b)) not in (a, b)
+                      for i, a in enumerate(paths) for b in paths[i + 1:])
+    require(logs_ok, "EXPECTED_LOG_SOURCES_INVALID_OR_OVERLAPPING")
+    expected_mounts = {"/opt/brain-ro": (expected_brain_source, False)}
+    if logs_ok:
+        expected_mounts.update({target: (source, True) for target, source in logs.items()})
+    seen: set[str] = set()
+    mount_ok = logs_ok and len(mounts) == len(expected_mounts)
+    for mount in mounts:
+        if not isinstance(mount, dict):
+            mount_ok = False
+            continue
+        dest = mount.get("Destination")
+        if (not isinstance(dest, str) or dest in seen or dest not in expected_mounts
+                or mount.get("Type") != "bind"):
+            mount_ok = False
+            continue
+        seen.add(dest)
+        source, writable = expected_mounts[dest]
+        if mount.get("Source") != source or mount.get("RW") is not writable:
+            mount_ok = False
+    require(mount_ok and seen == set(expected_mounts), "BRAIN_READ_ONLY_MOUNT_OR_EXTRA_MOUNTS")
 
     return {
         "schema": SCHEMA,
@@ -119,7 +147,9 @@ def diagnose(inspect: Any, *, expected_id: str, expected_brain_source: str) -> d
             "inspect JSON and expected identifiers are caller supplied and unauthenticated",
             "no binding to Harbor exec or verification that configuration remains unchanged",
             "no source tree sealing, packet capture, process quiescence, or patch verification",
-            "only one read-only bind and no devices are accepted; GPU tasks are excluded",
+            "optional writable log mounts are caller-allowlisted; symlink aliases are not resolved",
+            "writable verifier logs can be modified by the agent and are not independent evidence",
+            "no devices are accepted; GPU tasks are excluded",
         ],
     }
 

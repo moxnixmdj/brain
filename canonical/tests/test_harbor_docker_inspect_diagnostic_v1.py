@@ -74,6 +74,41 @@ class DiagnosticTests(unittest.TestCase):
                               'Destination': '/var/run/docker.sock', 'RW': True})
         self.assertIn('BRAIN_READ_ONLY_MOUNT_OR_EXTRA_MOUNTS', check(doc)['failures'])
 
+    def test_exact_log_sources_are_optional_and_remain_non_authorizing(self):
+        doc = inspection()
+        sources = {'/logs/agent': '/host/job/agent', '/logs/verifier': '/host/job/verifier',
+                   '/logs/artifacts': '/host/job/artifacts'}
+        for target, source in sources.items():
+            doc['Mounts'].append({'Type': 'bind', 'Source': source, 'Destination': target, 'RW': True})
+        self.assertFalse(check(doc)['static_filter_passed'])
+        result = diag.diagnose(doc, expected_id=CID, expected_brain_source=SOURCE,
+                               expected_log_sources=sources)
+        self.assertTrue(result['static_filter_passed'])
+        self.assertFalse(result['execution_authorized'])
+        self.assertFalse(result['container_boundary_verified'])
+        self.assertTrue(any('verifier logs' in x for x in result['limitations']))
+        for index, changes in ((1, {'Source': '/host/elsewhere'}),
+                               (2, {'RW': False}),
+                               (3, {'Destination': '/logs/agent'}),
+                               (3, {'Type': 'volume'})):
+            altered = copy.deepcopy(doc)
+            altered['Mounts'][index].update(changes)
+            out = diag.diagnose(altered, expected_id=CID, expected_brain_source=SOURCE,
+                                expected_log_sources=sources)
+            self.assertIn('BRAIN_READ_ONLY_MOUNT_OR_EXTRA_MOUNTS', out['failures'])
+
+    def test_log_sources_cannot_overlap_brain_or_each_other(self):
+        doc = inspection()
+        for sources in ({'/logs/agent': SOURCE}, {'/logs/agent': '/sandbox'},
+                        {'/logs/agent': SOURCE + '/nested'},
+                        {'/logs/agent': '/host/job', '/logs/verifier': '/host/job/inner'},
+                        {'/var/run/docker.sock': '/host/sock'}, {'/logs/agent': '/host/../escape'}):
+            with self.subTest(sources=sources):
+                result = diag.diagnose(doc, expected_id=CID, expected_brain_source=SOURCE,
+                                       expected_log_sources=sources)
+                self.assertIn('EXPECTED_LOG_SOURCES_INVALID_OR_OVERLAPPING', result['failures'])
+                self.assertFalse(result['execution_authorized'])
+
     def test_privileged_capabilities_and_unconfined_security_refused(self):
         doc = inspection()
         doc['HostConfig'].update({'Privileged': True, 'CapDrop': [], 'CapAdd': ['SYS_ADMIN'],

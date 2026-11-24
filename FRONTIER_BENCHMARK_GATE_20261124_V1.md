@@ -66,11 +66,13 @@ Harbor remain unavailable. No task was executed and no score was earned.
 
 `canonical.runtime.harbor_docker_inspect_diagnostic_v1` conservatively filters
 an externally supplied Docker inspect document for a running, non-privileged,
-no-network container with all capabilities dropped, no extra mounts or
-devices, and one read-only `/opt/brain-ro` bind to an expected host path. It
-rejects GPU/device access and many otherwise legitimate configurations. Harbor's
-pinned CLI exposes Docker Compose mounts via `--mounts` (a JSON array), but a
-writable `upload_dir` or `chmod` is not equivalent to a read-only mount.
+no-network container with all capabilities dropped, no devices, one read-only
+`/opt/brain-ro` bind, and optionally exactly allowlisted Harbor log binds with
+caller-supplied sources. The log mounts are writable host effects and may
+include `/logs/verifier`; they are not independent verdicts. It rejects GPU
+access and many otherwise legitimate configurations. Harbor's pinned CLI
+exposes Docker Compose mounts via `--mounts` (a JSON array), but a writable
+`upload_dir` or `chmod` is not equivalent to a read-only mount.
 
 The input document and expected ID are supplied by the caller. Even a complete
 static match cannot authenticate Docker, prove the host source is sealed, bind
@@ -97,14 +99,20 @@ records that request as blocked. The helper only accepts a trusted host log
 directory and never overwrites an existing `model.patch`.
 
 In the pinned Harbor version, `environment.exec` uses Docker Compose's `main`
-service. The current static diagnostic accepts exactly one mount, whereas a
-Harbor trial normally needs additional log mounts. The container ID, mount
-allowlist and execution lifecycle must be bound to that service before the
-diagnostic can become a useful admission check. For FrontierSWE, the pinned
-px-eval rollout and grade scripts transfer configured artifacts to a separate
-verifier image; a plain Harbor invocation is not a substitute. Terminal-Bench
-verification is task-specific and the expected non-Git effects cannot be inferred
-from the Pro patch format.
+service. Automatic host log mounts are **optional** (`auto_mounting` defaults to
+false); task-defined mounts can also exist. A live, non-authorizing diagnostic
+in `canonical.runtime.harbor_live_compose_diagnostic_v1` samples the ID of that
+Compose service before and after `docker inspect`, checks its project/service
+labels, and checks configured log source paths against trial paths. It accepts
+only exact standard log binds plus Brain, and resolves host paths before comparison.
+It has not been run with real Harbor or Docker here. The two ID samples do not
+atomically bind a subsequent `environment.exec`, establish quiescence, or
+independently prove egress isolation; the production agent does not use the
+diagnostic to authorize execution. Writable verifier logs are not independent
+evidence. For FrontierSWE, the pinned px-eval rollout and grade scripts transfer
+configured artifacts to a separate verifier image; a plain Harbor invocation is
+not a substitute. Terminal-Bench verification is task-specific and the expected
+non-Git effects cannot be inferred from the Pro patch format.
 
 A standalone Docker smoke is provided for a disposable Linux VM with Docker
 already installed and usable by the current user (this command performs no
