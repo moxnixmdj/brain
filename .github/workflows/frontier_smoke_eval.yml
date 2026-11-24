@@ -1,5 +1,8 @@
 name: Frontier 2x2 Docker smoke evaluation
 
+# Triggered by pushing a commit that touches this file; run b013db506e tests the
+# experimental candidate path (workspace-diff measurement, Brain fallback, staging bloat skip).
+
 # The push trigger is confined to the current session branch and this file;
 # manual dispatch remains available from the default branch.
 on:
