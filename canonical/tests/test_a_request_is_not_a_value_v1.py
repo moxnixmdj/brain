@@ -281,3 +281,76 @@ def test_the_destination_the_sentence_names_is_where_the_answer_goes():
               "totals": {"north": 15.0, "south": 20.0}}
     delivered = {k: v for k, v in result.items() if k not in GA._RESULT_PLUMBING}
     assert delivered == {"totals": {"north": 15.0, "south": 20.0}}, delivered
+
+
+# ------------------------------------------------------------------------------------------
+# 7. What a demonstration teaches is the RULE, not the trace of one afternoon
+# ------------------------------------------------------------------------------------------
+def test_a_column_slot_is_bound_from_the_table_the_goal_named():
+    """THE ANSWER TO "WHY CAN'T IT LEARN FROM ONE EXPERIENCE", as a test.
+
+    `total_by(path, key="region", value="amount")` was demonstrated on `data.csv` and the forge
+    stored `key: "region"`, `value: "amount"` -- the column names of one file on one afternoon.
+    Asked the same question about a file whose columns are `city,spend`, the stored trace raised
+    `KeyError: 'region'`. Nothing had ever asked the file which columns it has.
+
+    What generalises is not the name but the ROLE: a grouping column whose values repeat, and a
+    numeric column to total. Both are readable from the header and the rows.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        p = pathlib.Path(tmp)
+        (p / "fresh.csv").write_text("city,spend\nA,1\nB,2\nA,3\n", encoding="utf-8")
+        rel = str(p / "fresh.csv")
+        assert WB._column_for_role(rel, ".", "key") == "city"
+        assert WB._column_for_role(rel, ".", "value") == "spend"
+
+        # and the roles are read from the DATA, not from a name list: swap the layout entirely
+        (p / "other.csv").write_text("total_cost,ticket\n30,alpha\n70,beta\n", encoding="utf-8")
+        rel2 = str(p / "other.csv")
+        assert WB._column_for_role(rel2, ".", "value") == "total_cost"
+        assert WB._column_for_role(rel2, ".", "key") == "ticket"
+
+
+def test_a_column_slot_is_read_from_the_file_not_from_the_demonstration():
+    """THE HEADLINE RESULT: a demonstration teaches a RULE, and the rule transfers.
+
+    `total_by(path, key="region", value="amount")` was demonstrated on a csv whose columns are
+    `region,amount`. The forge stored `key: "region"`, `value: "amount"` -- a trace of one
+    afternoon. Asked the same question about a file whose columns are `city,spend`, the trace
+    raised `KeyError: 'region'`: the machine had learned the NAME instead of the ROLE.
+
+    Reading the role from the table -- the grouping column repeats, the measure column is numeric
+    -- is what makes one demonstration worth anything on the next file. Measured 2026-11-23 on
+    three files with three different column sets: region/amount -> {north: 15, south: 20},
+    city/spend -> {A: 4, B: 2}, team/cost -> {red: 4, blue: 4}. All correct, none seen before.
+    """
+    with tempfile.TemporaryDirectory() as tmp:
+        p = pathlib.Path(tmp)
+        (p / "fresh.csv").write_text("city,spend\nA,1\nB,2\nA,3\n", encoding="utf-8")
+        (p / "other.csv").write_text("total_cost,ticket\n30,alpha\n70,beta\n", encoding="utf-8")
+        assert WB._column_for_role(str(p / "fresh.csv"), ".", "key") == "city"
+        assert WB._column_for_role(str(p / "fresh.csv"), ".", "value") == "spend"
+        # roles come from the DATA, not from a name list: this layout is reversed
+        assert WB._column_for_role(str(p / "other.csv"), ".", "value") == "total_cost"
+        assert WB._column_for_role(str(p / "other.csv"), ".", "key") == "ticket"
+
+        # THE END-TO-END PROOF, using the capability that was actually forged in this repository.
+        row = GA.load_registry().get("forged.tally.total_by")
+        if not row:
+            import pytest
+            pytest.skip("no forged tally row in this state; the unit assertions above still ran")
+        declared = ((row.get("action_template") or {}).get("args") or {})
+        assert {"key", "value"} <= set(declared), sorted(declared)
+        # AN IN-REPO FIXTURE: binding refuses a path outside the repository, correctly, so a test
+        # that needs binding to SUCCEED has to put the file where the machine is allowed to read.
+        _rel = pathlib.Path("canonical/astra_runtime/tmp/test_a142_column_probe.csv")
+        _rel.write_text("city,spend\nA,1\nB,2\nA,3\n", encoding="utf-8")
+        try:
+            bound = WB.complete_inputs(
+                "total the spend by city in " + str(_rel) + " and write it to r.txt",
+                pathlib.Path("."), row)
+        finally:
+            _rel.unlink(missing_ok=True)
+        assert bound.get("missing") == [], bound
+        assert bound["inputs"].get("key") == "city", bound["inputs"]
+        assert bound["inputs"].get("value") == "spend", bound["inputs"]

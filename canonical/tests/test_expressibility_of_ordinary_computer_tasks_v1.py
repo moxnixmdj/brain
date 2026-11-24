@@ -150,7 +150,11 @@ def test_every_unexpressible_task_is_ambiguous_not_routeless(report):
                              "make a chart from data", "diff two files"}
     assert {r["task"] for r in routeless} <= _ZERO_SCORE_ROUTELESS, \
         [r["task"] for r in routeless]
-    assert all(str(r.get("why") or "") == "EVERY_SURVIVOR_SCORED_ZERO__NONE_MATCHES_THIS_SENTENCE"
+    # TWO HONEST REASONS, AND BOTH ARE AN ABSENCE RATHER THAN A CLAIM: every survivor scored zero
+    # (a refusal), or nothing survived at all (an emptiness). Neither is a route to a wrong answer,
+    # which is the property this file exists to protect.
+    _HONEST = {"EVERY_SURVIVOR_SCORED_ZERO__NONE_MATCHES_THIS_SENTENCE", "NO_CANDIDATE_SURVIVED"}
+    assert all(str(r.get("why") or "") in _HONEST
                for r in routeless), [(r["task"], r.get("why")) for r in routeless]
     # Every refusal names its reason. `... or True` here would assert nothing and read as if it did:
     # the point is that a REFUSED status carries the file it contradicted, which is what makes the

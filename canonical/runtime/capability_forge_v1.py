@@ -343,8 +343,23 @@ def forge_and_record(entry, root=None, seed_cases=None) -> dict:
     if report.get("admitted"):
         name = str(entry.get("function") or "")
         src = str(entry.get("source_rel") or "")
-        params = list(entry.get("required") or [])
-        contract = {"module": src, "function": name, "parameters": params}
+        # THE CONTRACT MUST CARRY THE WHOLE SIGNATURE, NOT ONLY ITS REQUIRED PARTS.
+        #
+        # This recorded `entry["required"]` alone, so a function declared
+        # `total_by(path, key="region", value="amount")` was stored with `parameters: ["path"]`.
+        # The invoker then omitted `key` and `value` and Python applied the defaults baked into the
+        # function -- the demonstration's own column names. Measured 2026-11-23: a goal about
+        # `fresh.csv` (city,spend) was bound to the right PATH and then failed with
+        # `KeyError: 'region'`, because nothing had ever asked the file which columns it has.
+        #
+        # Recording every parameter means an optional one is either bound from the world or left to
+        # its declared default, and the difference is visible instead of silent.
+        _sig_all = signature_of(src, name, root)
+        params = [p for p in (entry.get("params") or list(_sig_all)) if not str(p).startswith("_")]
+        contract = {"module": src, "function": name, "parameters": params,
+                    "required": list(entry.get("required") or []),
+                    "optional": [p for p in params
+                                 if p not in (entry.get("required") or [])]}
         cases = candidate_inputs(params, root,
                                  annotations=signature_of(src, name, root),
                                  source_rel=src, function=name)
@@ -394,6 +409,9 @@ def register(module: str, contract: dict, cases: list[dict],
             "args": dict({"_forged_id": cid},
                          **{p: "${input.%s}" % p
                             for p in contract.get("parameters") or []}),
+            # NOTE: every declared parameter is a placeholder. Whether it can be FILLED is the
+            # binder's question, and an unfilled one is reported missing rather than silently
+            # handed the demonstration's value as a Python default.
             # A POSTCONDITION THAT THE ADAPTER ITSELF ALWAYS SATISFIES IS NOT A POSTCONDITION.
             # This used to be `{"field": "adapter", "type": "field_nonempty"}`, and the forged
             # invoker sets `adapter` on every return path -- including the envelope where it

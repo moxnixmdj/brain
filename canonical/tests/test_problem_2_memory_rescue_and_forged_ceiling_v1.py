@@ -68,7 +68,7 @@ class TestProblem2MemoryRescueAndForgedCeiling(unittest.TestCase):
         self.assertEqual(report["forged_total"], 6)
         self.assertEqual(report["forged_admitted"], 6, report)
         self.assertEqual(report["tasks_total"], 6)
-        # 6 -> 5 -> 4 -> 0. EVERY COUNT BEFORE THIS ONE WAS MEASURING THE FORGE'S OWN FIXTURES.
+        # 6 -> 5 -> 4 -> 0 -> 2. The dip measured a defect; the recovery measured its fix.
         #
         # The history, because the sequence IS the finding:
         #   * A140 measured 6/6 rescued on `_forged_defaults` -- the first fixture the forge happened
@@ -76,43 +76,44 @@ class TestProblem2MemoryRescueAndForgedCeiling(unittest.TestCase):
         #   * A141 refused to fill a PAYLOAD slot from a demonstration (the fixture's bytes), giving 4.
         #   * A142, measuring why a discovered `tally.py` was still invisible, found that every forged
         #     row scored 0.0 because its id (`forged.tally.total_by`) can never appear in a sentence.
-        #     Scoring the row by its own declared keywords exposed what the zero had been hiding.
         #   * A143 refused to fill a FILE slot from a demonstration either. The count fell to 0.
+        #   * A143 also found WHY it stayed 0: `_pick_path` threw away the input the sentence named
+        #     because the OUTPUT it named did not exist yet -- the destination was being treated as an
+        #     input candidate. With that fixed, 2 came back, and these two are real.
         #
-        # MEASURED 2026-11-23, after that last guard: `teach_status` is AMBIGUOUS for four of the six
-        # tasks, so nothing was ever taught and nothing could be remembered. The earlier "rescues" were
-        # not single-experience transfer; they were the machine answering a question about a file the
-        # person never named, with a file the forge left in `canonical/astra_runtime/tmp/`:
+        # MEASURED 2026-11-23. `diff two files` and `sort the lines of a file` are UNRESOLVED /
+        # AMBIGUOUS before any teaching, become VERIFIED_ACTION when taught once, and stay verified for
+        # a paraphrase. Their inputs come from files that ACTUALLY EXIST in the repository
+        # (`procedure_memory_v1.py`, `experience_v1.py`), not from a forge fixture, and the lesson is
+        # replayed through `REMEMBERED_PROCEDURE`. That is single-experience transfer working.
         #
-        #     sum a column of numbers in a csv   -> USER_POST_COUNTS.xlsx   (sum 55.0, VERIFIED_ACTION)
-        #     read a spreadsheet and sum a column-> the same workbook
-        #     make a zip archive of a directory  -> a forge fixture directory
-        #     convert a docx to text             -> a forge fixture docx
+        # The other four still measure 0, and they still measure it for the reason found above:
         #
-        # The two that still verify, `diff two files` and `sort the lines of a file`, do so WITHOUT
-        # memory and on files that really exist: their binding comes from the repository itself
-        # (`procedure_memory_v1.py` vs `experience_v1.py`), not from a demonstration. They are
-        # `VERIFIED_ACTION` BEFORE any teaching, so they are correctly not counted as rescues.
+        #     sum a column of numbers in a csv   -> names no data at all
+        #     read a spreadsheet and sum a column-> names no workbook
+        #     make a zip archive of a directory  -> names no directory
+        #     convert a docx to text             -> names no document
         #
-        # ZERO IS THE HONEST NUMBER. The lesson this whole sequence teaches is the one the user asked
-        # about: a demonstration is a trace of one run, and saving the trace is not learning. What
-        # generalises is the RULE the run evidences -- which slot accepts what -- and that has to be
-        # written down as a rule, not inferred from the values that happened to be lying around.
-        self.assertEqual(report["tasks_rescued"], 0, report["rows"])
+        # Their earlier "rescues" were the machine summing USER_POST_COUNTS.xlsx (a workbook left in
+        # `canonical/astra_runtime/tmp/` by an earlier forge run) and reporting VERIFIED_ACTION, sum
+        # 55.0, for a file nobody named. Those numbers were true and were answers to nothing.
+        self.assertEqual(report["tasks_rescued"], 2, report["rows"])
         self.assertEqual(report["paraphrases_total"], 6)
-        self.assertEqual(report["paraphrases_rescued"], 0, report["rows"])
-        _ANSWERABLE_WITHOUT_TEACHING = {"diff two files", "sort the lines of a file"}
+        self.assertEqual(report["paraphrases_rescued"], 2, report["rows"])
+        _RESCUED = {"diff two files", "sort the lines of a file"}
         for row in report["rows"]:
-            if row["task"] in _ANSWERABLE_WITHOUT_TEACHING:
-                # answerable before teaching -- a rescue is not needed and must not be claimed
-                self.assertEqual(row["before_task_status"], "VERIFIED_ACTION", row)
-                self.assertFalse(row["task_rescued"], row)
+            if row["task"] in _RESCUED:
+                # THE LOAD-BEARING ROWS: nothing before teaching, verified after one demonstration.
+                self.assertIn(row["before_task_status"], ("UNRESOLVED", "AMBIGUOUS"), row)
+                self.assertEqual(row["before_paraphrase_status"], "AMBIGUOUS", row)
+                self.assertEqual(row["teach_status"], "VERIFIED_ACTION", row)
+                self.assertEqual(row["after_task_status"], "VERIFIED_ACTION", row)
+                self.assertEqual(row["after_task_selected_because"], "REMEMBERED_PROCEDURE", row)
+                self.assertEqual(row["after_paraphrase_status"], "VERIFIED_ACTION", row)
+                self.assertEqual(row["after_paraphrase_selected_because"], "REMEMBERED_PROCEDURE", row)
+                self.assertTrue(row["task_rescued"], row)
                 continue
-            if row["task"] == "sum a column of numbers in a csv":
-                # no data was named, so nothing was done; assert THAT rather than a success
-                self.assertEqual(row["teach_status"], "AMBIGUOUS", row)
-                continue
-            # THE REST NAME NO FILE, SO NOTHING CAN BE BOUND AND NOTHING IS CLAIMED.
+            # THE FOUR THAT NAME NOTHING STILL LEARN NOTHING, AND SAY SO RATHER THAN GUESSING.
             self.assertEqual(row["before_task_status"], "AMBIGUOUS", row)
             self.assertEqual(row["teach_status"], "AMBIGUOUS",
                              (row["task"], "a demonstrated path was used as the input again"))

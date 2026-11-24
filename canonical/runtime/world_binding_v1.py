@@ -464,6 +464,83 @@ def _is_file_slot(name):
     return any(w in low for w in _FILE_SLOT_WORDS)
 
 
+# Slots that name a COLUMN of a table rather than a file or a passage of text.
+_COLUMN_SLOT_WORDS = frozenset({"key", "value", "column", "column_name", "group", "group_by",
+                                "groupby", "grouping", "measure", "field", "label", "category"})
+
+
+def _column_for_role(rel_path, root, role):
+    """Which column of this table plays `role` -- grouping (key) or measure (value).
+
+    Read from the data, not from a name list: a group column repeats at least one value, and a
+    measure column parses as a number. Deterministic, and the first column in file order wins so
+    the same table always binds the same way.
+    """
+    try:
+        from pathlib import Path as _P
+        path = _P(root) / str(rel_path)
+        head = path.read_text(errors="replace").splitlines()
+        if len(head) < 2:
+            return None
+        sep = "\t" if ("\t" in head[0] and "," not in head[0]) else ","
+        cols = [c.strip().strip('"') for c in head[0].split(sep)]
+        rows = [[c.strip().strip('"') for c in ln.split(sep)] for ln in head[1:] if ln.strip()]
+        if not cols or not rows:
+            return None
+        def _numeric(idx):
+            vals = [r[idx] for r in rows if idx < len(r) and r[idx] != ""]
+            if not vals:
+                return False
+            for v in vals:
+                try:
+                    float(v)
+                except Exception:
+                    return False
+            return True
+        def _repeats(idx):
+            vals = [r[idx] for r in rows if idx < len(r)]
+            return len(vals) > len(set(vals))
+        want_numeric = (str(role) == "value")
+        # A KEY NEED NOT REPEAT. Requiring repetition failed on a two-row table whose grouping
+        # column happened to be unique (`ticket` in a 2-row csv), and a group column with one row
+        # per group is still a group column. The only reliable split is numeric vs not, with
+        # repetition used as a PREFERENCE rather than a gate.
+        best = None
+        for idx, name in enumerate(cols):
+            if _numeric(idx) != want_numeric:
+                continue
+            if best is None:
+                best = name
+            if not want_numeric and _repeats(idx):
+                return name
+        return best
+    except Exception:
+        return None
+
+
+def _columns_of_table(rel_path, root):
+    """The column names a csv/tsv names, read from the file the goal pointed at.
+
+    THIS IS THE RULE THE DEMONSTRATION SHOULD HAVE TAUGHT, AND NEVER COULD.
+    A demonstration of `total_by` stored `key: "region", value: "amount"` -- the column names of
+    one file on one afternoon. Asking the same tool about `fresh.csv` (city,spend) failed with
+    `KeyError: 'region'`. What generalises is not the name but the ROLE: a grouping column whose
+    values repeat, and a numeric column to total. Both are readable from the header and the rows.
+    """
+    try:
+        from pathlib import Path as _P
+        path = _P(root) / str(rel_path)
+        if not path.is_file():
+            return []
+        head = path.read_text(errors="replace").splitlines()[:2]
+        if not head:
+            return []
+        sep = "\t" if ("\t" in head[0] and "," not in head[0]) else ","
+        return [c.strip().strip('"') for c in head[0].split(sep) if c.strip()]
+    except Exception:
+        return []
+
+
 def _goal_names_a_different_file(goal, demo_value, slot):
     """Did the SENTENCE state its own value for this file slot?
 
@@ -841,12 +918,30 @@ def _pick_path(name, cid, paths, root, goal=""):
             return rel
         if "test" in lowered_all and "test" in low:
             return rel
+    # THE DESTINATION IS NOT AN INPUT CANDIDATE.
+    #
+    # Measuring 2026-11-23 (probe with a real `data.csv` and a not-yet-existing `summary.txt`):
+    # asking "total the amounts by region in <path>/data.csv and write it to summary.txt" threw the
+    # named INPUT away because the named OUTPUT did not exist yet. The loop below treated every goal
+    # path as a candidate input, so `summary.txt` -- the thing the sentence says to CREATE -- made
+    # the existence check fail and the slot unboundable. The file to read was there the whole time.
+    #
+    # A path the goal marks as the destination is named by `named_destination`, which is the same
+    # reader the delivery step uses. It is excluded here, not guessed at.
+    try:
+        _dest = named_destination(goal)
+    except Exception:
+        _dest = None
+    _inputs = [rel for rel in paths
+               if not (_dest and str(rel).replace("\\", "/").endswith(str(_dest)))]
+    if not _inputs:
+        _inputs = list(paths)
     # Same rule for a file: naming one that does not exist is not a reason
     # to hand back a different one that does.
-    for rel in paths:
+    for rel in _inputs:
         if not (root / str(rel)).exists():
             return None
-    return paths[0]
+    return _inputs[0]
 
 
 _TEXT_PARAM_WORDS = ("source", "code", "text", "sample", "query",
@@ -1321,6 +1416,36 @@ def complete_inputs(goal, root, entry, compiler=None, goal_paths=None):
                 if found:
                     value = found
                     from_world[key] = found
+        elif low in _COLUMN_SLOT_WORDS:
+            # A COLUMN SLOT IS READ FROM THE TABLE THE SENTENCE NAMED, NOT FROM THE DEMONSTRATION.
+            #
+            # `total_by(path, key="region", value="amount")` was demonstrated on data.csv and stored
+            # `key: "region"`, `value: "amount"`. Asked the same question about fresh.csv
+            # (city,spend) it raised `KeyError: 'region'` -- the trace of one afternoon replayed at a
+            # file that has different columns. The header says which column is which role: the
+            # grouping column repeats its values, the measure column is numeric.
+            value = None
+            _table = None
+            for _k, _v in list(filled.items()) + list(bound.items()):
+                if isinstance(_v, str) and _v.lower().endswith((".csv", ".tsv")):
+                    _table = _v
+                    break
+            if _table is None:
+                for _p in goal_paths:
+                    _p = str(_p)
+                    if _p.lower().endswith((".csv", ".tsv")):
+                        _table = _p
+                        break
+            if _table:
+                _cols = _columns_of_table(_table, root)
+                if _cols:
+                    _role = "key" if ("key" in low or "group" in low or "by" in low) else \
+                            ("value" if ("value" in low or "measure" in low or "amount" in low
+                                         or "number" in low) else "")
+                    if _role:
+                        _pick = _column_for_role(_table, root, _role)
+                        if _pick:
+                            value = _pick
         elif low in _TEXT_PARAM_WORDS:
             # A CAPABILITY WHOSE INPUT IS CODE, NOT A FILE.
             #

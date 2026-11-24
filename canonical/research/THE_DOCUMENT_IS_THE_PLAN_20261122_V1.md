@@ -8520,3 +8520,77 @@ wrong file is indistinguishable from a lie.
     NEXT       The rule, not the trace: derive from a demonstration which SLOT accepts which KIND of
                value, and store that, so an empty slot can be filled only by something the world
                supplies and never by a value the demonstration happened to contain.
+
+---
+
+## §A144 — what a demonstration teaches is the rule, never the trace
+
+### The result
+
+§A143 ended by naming the gap: "What gets SAVED is the case; what gets GENERALISED is nothing." That is
+now fixed, and the fix is measurable.
+
+One `tally.py` is placed in a directory the machine has never seen. Two demonstrations admit it. Then it is
+asked three questions about THREE DIFFERENT FILES with three different column sets, none of which it was
+demonstrated on:
+
+    goal                                                       amounts by     result
+    total the amounts by region in data.csv  ... summary.txt   region/amount  {north: 15.0, south: 20.0}
+    total the spend by city in fresh.csv     ... report.txt    city/spend     {A: 4.0, B: 2.0}
+    total the cost by team in sales.csv      ... out2.txt      team/cost      {red: 4.0, blue: 4.0}
+
+All three are correct (10+5 and 20; 1+3 and 2; 3+1 and 4) and all three report VERIFIED_ACTION.
+
+### What made the difference
+
+    1. THE CONTRACT CARRIED ONLY THE REQUIRED PARAMETERS.
+       `total_by(path, key="region", value="amount")` was stored as `parameters: ["path"]`, because
+       `forge_and_record` recorded `entry["required"]`. The invoker therefore omitted `key` and
+       `value`, and Python applied the defaults baked into the function -- the demonstration's own
+       column names. The row now carries `parameters`, `required` and `optional`.
+
+    2. THE COLUMNS WERE NEVER READ FROM THE TABLE.
+       Even with the slots offered, the binder had no way to fill them, so it fell back to the
+       demonstration: `key: "region"`. Asking about `city,spend` then raised `KeyError: 'region'`.
+       `_column_for_role` now reads the header and the rows: the grouping column is the one whose
+       values are NOT numeric, the measure column is the one that parses as a number. Deterministic,
+       first-in-file-order, and it works on `total_cost,ticket` (reversed layout) as well.
+
+    3. THE DESTINATION WAS TREATED AS AN INPUT CANDIDATE.
+       `_pick_path` checked every path the goal named for existence before choosing one, so a sentence
+       naming a real input and a not-yet-created output discarded the input because the output did not
+       exist yet. The destination is now excluded from input candidates -- which also recovered TWO
+       genuine memory rescues that had been impossible to bind (`diff two files`, `sort the lines of a
+       file`: UNRESOLVED/AMBIGUOUS before teaching, VERIFIED_ACTION after one demonstration, on files
+       that really exist).
+
+### The answer to the user's question
+
+The machine can now do what was asked: experience an action once, and use it on something new. What made
+it possible was not a bigger model or more demonstrations. It was separating the two things a
+demonstration contains:
+
+    THE TRACE                          THE RULE
+    path = .../data.csv                a table slot accepts a csv the goal names
+    key  = region                      the grouping column is the non-numeric one
+    value = amount                     the measure column is the numeric one
+
+The trace is a fact about one afternoon. The rule is what transfers. §A140 through §A143 all failed at
+this same place -- the machine kept saving the trace and calling it learning, and the count of "rescued"
+tasks kept being a count of how often the trace happened to fit. It fit 6 times, then 5, then 4; the true
+number was 0 until the rule was written down separately from the values.
+
+    tasks_rescued: 0 -> 2  (diff, sort)  and the tally.py transfer above, which is new capability
+
+### Laws
+
+    (116) A demonstration contains a trace and a rule. Saving the trace makes every later answer true of
+          the file that happened to be in the test case. Only the rule transfers.
+    (117) A slot can be filled from the WORLD when the world can answer the question the slot asks. The
+          question "which column is the measure" is answered by the table, not by the demonstration.
+    (118) A destination is not an input. A path the sentence says to CREATE is not a candidate for the
+          path the sentence says to READ, and checking it for existence discards the wrong one.
+
+    NOT DONE   §6. No OSWorld task, no SWE-bench instance.
+    NEXT       The same split for non-tabular slots: which of a demonstration's values are the RULE
+               (a kind, a shape, a role) and which are the TRACE (this filename, this column name).
