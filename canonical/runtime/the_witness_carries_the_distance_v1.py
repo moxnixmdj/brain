@@ -80,6 +80,7 @@ DID_NOT_RAISE = 1.0
 WRONG_EXCEPTION = 1.5
 ESCAPED_ERROR = 4.0
 NO_OUTPUT = 8.0
+INFINITY = 1e9
 
 _MISMATCH = re.compile(r"^E\s+assert\s+(.+?)\s*(==|!=|<=|>=|<|>)\s*(.+?)\s*$")
 _DID_NOT_RAISE = re.compile(r"^E\s+Failed:\s*DID NOT RAISE\s+(\S+)")
@@ -313,6 +314,32 @@ def failures(text: str) -> list[dict[str, typing.Any]]:
     return out
 
 
+# A run that executed NOTHING is not a pass. pytest exits 0 with "no tests ran" when
+# collection finds nothing, and a syntactic edit that destroys a string literal's meaning
+# can make an entire module uncollectable. Measured on pypa/packaging 8efde605: a nonsense
+# candidate rewrote a lazy-import string and produced "0 failed, 0 passed", which the
+# failure COUNT reads as perfect -- the loop accepted it and would have shipped it. The
+# objective must refuse a run that did not execute the suite.
+NO_TESTS_RAN = "NO_TESTS_RAN"
+
+
+def executed_any(text: str) -> bool:
+    """Did the run actually execute at least one test?
+
+    "0 failed" alone is not evidence of success. A candidate that destroys collection
+    reports zero failures because it ran zero tests, and that is the worst possible
+    outcome being scored as the best possible one.
+    """
+    body = text or ""
+    if re.search(r"(?m)^no tests ran", body):
+        return False
+    counts = re.findall(r"(\d+)\s+(passed|failed|errors?|skipped|xfailed|xpassed|"
+                        r"subtests? passed|subtest[s]? (?:passed|failed))", body)
+    if not counts:
+        return False
+    return sum(int(n) for n, _ in counts) > 0
+
+
 def source_paths(tree: "pathlib.Path | str", source_rel: str = "") -> list[str]:
     """Where the package under repair actually lives, derived from the tree.
 
@@ -355,6 +382,7 @@ def score(text: str, failing_nodes: typing.Sequence[str] = ()) -> dict[str, typi
     """
     found = failures(text)
     named = set(failing_nodes or ())
+    unexecuted = not executed_any(text)
     # A gate is satisfied only if it was actually REPORTED satisfied. Matching node ids
     # literally meant a collection error ("ERROR tests/test_m.py") satisfied nothing by
     # name and therefore counted as "test_a PASSED, test_b PASSED" -- a perfect score for
@@ -387,6 +415,10 @@ def score(text: str, failing_nodes: typing.Sequence[str] = ()) -> dict[str, typi
         "key": (satisfied, -round(total, 6)),
         "failures": found,
         "nearest": nearest(found),
+        # A run that executed nothing satisfies nothing, whatever its failure count says.
+        **({"key": (0, -INFINITY), "satisfied": 0} if unexecuted else {}),
+        "executed": not unexecuted,
+        **({} if not unexecuted else {"status": NO_TESTS_RAN}),
     }
 
 

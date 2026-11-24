@@ -21,11 +21,45 @@ def _sha(b):return hashlib.sha256(b).hexdigest()
 def _text(r):return str(r.get('stdout') or '')+'\n'+str(r.get('stderr') or '')
 def _score(r):
  if r.get('timed_out'):return None
- if r.get('returncode')==0:return 0
+ _t0=_text(r)
+ # COLLECTION ERROR REFUSED FIRST, for every return code. These two checks used to live
+ # inside the returncode==0 branch and the generic-count branch, so a run that could not
+ # import the module still produced a NUMBER on one path. A program that cannot be
+ # collected has no measurable behaviour; it is refused, never scored.
+ if re.search(r'(?m)^ERROR collecting ', _t0) or 'error during collection' in _t0:
+  return None
+ # A WRAPPED PYTEST EXIT IS STILL AN EXIT. The in-process runner wraps a non-zero pytest
+ # status in `RuntimeError: PYTEST_EXECUTION_FAILED:<n>` and still prints a summary line,
+ # so a run whose pytest returned 4 (usage error -- the module never collected) reached
+ # the generic counter and scored 1 while the real bug scored 4. A broken program then
+ # looked like a REPAIR. Measured on pypa/packaging 491af5d5: the loop accepted a
+ # nonsense edit scored 4 -> 1 that re-runs at rc=4 from a clean tree. Any wrapped
+ # failure is refused; the number in the wrapper is pytest's verdict, not a count.
+ _wrapped = re.search(r'PYTEST_EXECUTION_FAILED:(\d+)', _t0)
+ if _wrapped:
+  return None
+ # A GREEN EXIT IS NOT A PASS. `returncode==0` was accepted as score 0 without asking
+ # whether any test executed, so a candidate that destroys collection -- "no tests ran",
+ # exit 0 -- scored PERFECT. Measured on pypa/packaging 8efde605: a nonsense candidate
+ # rewrote a lazy-import string, the module became uncollectable, the run reported
+ # "0 failed, 0 passed", and the loop accepted it as a repair. A verifier that can be
+ # satisfied by running nothing is not a verifier.
+ if r.get('returncode')==0:
+  t0=_text(r)
+  if re.search(r'(?m)^no tests ran',t0):return None
+  _c=re.findall(r'(\d+)\s+(?:passed|failed|errors?|skipped|xfailed|xpassed)',t0)
+  if not _c or sum(int(n) for n in _c)==0:return None
+  return 0
  t=_text(r);m=re.search(r'FAILED\s*\(([^)]*)\)',t)
  if m:
   n=sum(int(v) for _,v in re.findall(r'(failures|errors)=(\d+)',m.group(1)))
   if n:return n
+ # A COLLECTION ERROR IS NOT PROGRESS. `ERROR collecting <module>` means the program under
+ # repair cannot even be imported; it is the worst state, not a smaller one. The generic
+ # patterns below counted it as "1 failure", so wrecking a module scored BETTER than the
+ # four real assertion failures it replaced, and the loop accepted it. Measured on
+ # pypa/packaging 8efde605: 4 -> 1 was a module that no longer imports. A candidate that
+ # cannot be collected is refused outright; it is never a candidate.
  n=len(re.findall(r'(?m)^(?:FAIL|ERROR):\s',t))
  if n:return n
  summary=_PATCH.pytest_summary(t)
@@ -54,7 +88,20 @@ def _files(repo,root,tests,failure):
  for p in sorted(root.rglob('*.py')):add(p)
  return out
 def _purge(paths):
- for p in paths:_PATCH._purge_source_bytecode(p)
+ # PURGE THE WHOLE CACHE, not just each touched file's own .pyc. A candidate edit can make
+ # a DIFFERENT module stale, and a leftover .pyc of the module the suite actually imports
+ # replays the OLD behaviour -- so a candidate measures as an improvement it does not have.
+ # Measured on pypa/packaging 491af5d5: an accepted "4 -> 1" candidate re-runs at rc=4
+ # (refused) from a clean tree and at rc=1 from a stale one. The loop's own verification
+ # replay hid this because it purges before replaying; the per-candidate comparison did not.
+ import shutil as _sh
+ for p in paths:
+  _PATCH._purge_source_bytecode(p)
+  try:
+   _c=pathlib.Path(importlib.util.cache_from_source(str(p))).parent
+   if _c.is_dir():_sh.rmtree(_c,ignore_errors=True)
+  except (NotImplementedError,ValueError,OSError):
+   pass
 def _diff(repo,p,a,b):return ''.join(difflib.unified_diff(a.decode().splitlines(True),b.decode().splitlines(True),fromfile='a/'+_rel(repo,p),tofile='b/'+_rel(repo,p)))
 def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None,structural=False,
           veto_argv=None,veto_counter=None):
@@ -73,10 +120,34 @@ def _best(repo,source,tests,argv,timeout,score,limit,touched,env,focus=None,stru
   near=1 if not fl else 0 if any(abs(line-f)<=3 for f in fl) else 1
   specs.append((near,line,key,desc,replacer))
  specs.sort(key=lambda x:(x[0],x[1]))
- for near,line,key,desc,replacer in specs:
+ # RENDER BEFORE ORDERING AND BEFORE COUNTING. The specs are generated in AST-walk
+ # order, so the first thousand of them are module-level trivia (docstrings, imports)
+ # that no traceback ever names. The frontier below sorted the SPECS near-first but
+ # then walked them in generation order, so on 39 real bugs the first candidate within
+ # three lines of a failing frame sat at position 3025 -- a median of 7129 candidates
+ # were generated per bug and the default budget is 30, so the focus was reached 0 times
+ # out of 39. Rendering is pure and costs nothing; the ordering has to see the text.
+ # ROUND-ROBIN BY FAMILY, not by line. Line order is the wrong ordering when the
+ # families differ in size by two orders of magnitude: on packaging 8efde605 the
+ # grammar yields 2596 legacy specs and 24 name-scope specs, and the one candidate that
+ # repairs the bug sits at line 8, which sorts LAST -- so a 240-candidate budget never
+ # reached it and the loop reported OPEN for a bug it could have fixed. Each family now
+ # takes its turn, so a defect class with few candidates is not starved by one with many.
+ _by_family={}
+ for _n,_l,_k,_d,_r in sorted(specs,key=lambda x:(x[0],x[1])):
+  _c=renderer.render(_k,_r)
+  if _c and _c!=text: _by_family.setdefault(_d.get("family") or "legacy",[]).append((_n,_l,_c,_d))
+ rendered=[]
+ _queues=[list(v) for _,v in sorted(_by_family.items(),key=lambda kv:kv[0])]
+ while _queues:
+  for _q in list(_queues):
+   if _q: rendered.append(_q.pop(0))
+   else: _queues.remove(_q)
+ _seen=set()
+ for near,line,cand,desc in rendered:
   if tested>=limit:break
-  cand=renderer.render(key,replacer)
-  if not cand or cand==text:continue
+  if cand in _seen:continue
+  _seen.add(cand)
   tested+=1
   rec=None
   try:
