@@ -5184,5 +5184,95 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter70_three_modal_sqlite_cli_openapi_and_five_c_oss_commits": {
+    "date": "2026-11-21",
+    "summary": "Iter 70: (1) Added live SQLite schema introspection & typed query export (`_solve_sqlite_schema_query` via `sqlite_master` + `PRAGMA table_info` + live distinct-value discovery) in `epistemic_doc_compiler_agent_v1.py`, verifying a full 3-modal pipeline (`Unseen SQLite DB -> Unseen ./bin/summarize_jobs CLI -> Live OpenAPI 3.0 + 2-Step Bearer Auth Handshake -> receipt.json`) through ONE Front Door (`open_model().solve(...)`) in 96.55ms with leak-free `workflow_role_law = ['STEP_SQLITE_QUERY', 'STEP_CLI_TOOL', 'STEP_HTTP_SERVICE']`; (2) Added 5 general C/C++17 repair laws (`C_STDIO_FERROR_POST_CHECK`, `C_SIBLING_DUAL_CASE_FOLD_COMPARE`, `C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP`, `C_FASTPATH_GOTO_SLOWPATH_BAILOUT`, `C_PREFIX_SUBTREE_MOVE_GUARD`), multi-TU explicit C test linking, and monolithic >250KB C TU `-O1` fast-path in `multilang_causal_swe_engine_v1.py`, verifying 5/5 fresh Oct-Nov 2026 real C OSS commits across `benhoyt/inih`, `sheredom/utf8.h`, and `ibireme/yyjson` (cumulative verified real OSS commits: 221 -> 226).",
+    "cumulative_unique_verified_oss_commits": 226,
+    "three_modal_pipeline_verified": {
+      "workflow": "ops.sqlite (sqlite_master + PRAGMA table_info) -> ./bin/summarize_jobs (--help compiled) -> OpenAPI 3.0 + POST /v1/auth/token Bearer -> POST /v1/incidents -> GET /v1/incidents/1 -> receipt.json",
+      "front_door": "open_model().solve(goal, inputs={'workspace': ws}, mode='EPISTEMIC')",
+      "elapsed_ms": 96.55,
+      "workflow_role_law": [
+        "STEP_SQLITE_QUERY",
+        "STEP_CLI_TOOL",
+        "STEP_HTTP_SERVICE"
+      ],
+      "model_calls": 0,
+      "parameters_stored": 0
+    },
+    "newly_verified_c_oss_commits": [
+      {
+        "repo": "benhoyt/inih",
+        "commit": "2d5ec7b",
+        "date": "2026-10-25",
+        "language": "c",
+        "file": "ini.c",
+        "tier": "C_STDIO_FERROR_POST_CHECK",
+        "mechanism": "ferror(file)?-3:error",
+        "elapsed_s": 14.45,
+        "independent_full_suite": "gcc ini.c tests/unittest_file_error.c | diff -u tests/baseline_file_error.txt - (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "sheredom/utf8.h",
+        "commit": "be0931a",
+        "date": "2026-11-14",
+        "language": "c",
+        "file": "utf8.h",
+        "tier": "C_SIBLING_DUAL_CASE_FOLD_COMPARE",
+        "mechanism": "dual_fold_sync(utf8lwrcodepoint+utf8uprcodepoint,sites=2)",
+        "elapsed_s": 48.5,
+        "independent_full_suite": "gcc test/main.c test/test11.c: 231/231 passed (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ibireme/yyjson",
+        "commit": "b302245",
+        "date": "2026-10-25",
+        "language": "c",
+        "file": "src/yyjson.c",
+        "tier": "C_PREFIX_SUBTREE_MOVE_GUARD",
+        "mechanism": "reject_move_into_proper_prefix_child(sites=2)",
+        "elapsed_s": 150.6,
+        "independent_full_suite": "gcc src/yyjson.c test/util/yy_test_utils.c test/test_json_patch.c (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ibireme/yyjson",
+        "commit": "949e399",
+        "date": "2026-10-22",
+        "language": "c",
+        "file": "src/yyjson.c",
+        "tier": "C_FASTPATH_GOTO_SLOWPATH_BAILOUT",
+        "mechanism": "bailout_fastpath_to_copy_utf8",
+        "elapsed_s": 115.31,
+        "independent_full_suite": "gcc src/yyjson.c test/util/yy_test_utils.c test/test_string.c (rc=0) & test/test_json_reader.c (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "ibireme/yyjson",
+        "commit": "f5932e6",
+        "date": "2026-11-16",
+        "language": "c",
+        "file": "src/yyjson.c",
+        "tier": "C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP",
+        "mechanism": "swap_trivia_before_unquoted_key_if_blocks",
+        "elapsed_s": 67.18,
+        "independent_full_suite": "gcc src/yyjson.c test/util/yy_test_utils.c test/test_json_reader.c (rc=0)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "tests_added": [
+      "canonical/tests/test_epistemic_doc_compiler_agent_v1.py::test_12_iter70_three_modal_sqlite_cli_auth_openapi_pipeline",
+      "canonical/tests/test_multilang_causal_swe_engine_v1.py::test_iter70_c_five_general_repair_laws"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

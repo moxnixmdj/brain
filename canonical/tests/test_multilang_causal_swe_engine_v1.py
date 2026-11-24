@@ -3520,6 +3520,238 @@ class TestMultiLangCausalSWEEngineV1(unittest.TestCase):
                 self.assertEqual(r4["winner"]["tier"], "JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND")
                 self.assertEqual(r4["model_calls"], 0)
 
+    def test_iter70_c_five_general_repair_laws(self) -> None:
+        """Verify all 5 Iter-70 general C/C++17 repair laws end-to-end with GCC (`model_calls == 0`):
+        1. `C_STDIO_FERROR_POST_CHECK` (`FILE*` delegating wrapper `ferror(fp) ? -3 : error`)
+        2. `C_SIBLING_DUAL_CASE_FOLD_COMPARE` (sibling `lwr`+`upr` dual-fold sync)
+        3. `C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP` (trivia skip before unquoted-key dispatch)
+        4. `C_FASTPATH_GOTO_SLOWPATH_BAILOUT` (`skip_<tag>:` fast-path bailout to `copy_<tag>:`)
+        5. `C_PREFIX_SUBTREE_MOVE_GUARD` (RFC 6902 proper-prefix self-ancestry move rejection)
+        """
+        # 1. C_STDIO_FERROR_POST_CHECK
+        with self.subTest(law="C_STDIO_FERROR_POST_CHECK"):
+            with tempfile.TemporaryDirectory(prefix="brain_c_iter70_ferr_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "reader.c": (
+                            "#include <stdio.h>\n"
+                            "int read_stream(void *stream) {\n"
+                            "    FILE *f = (FILE *)stream;\n"
+                            "    int c = fgetc(f);\n"
+                            "    if (c == '!') return -1;\n"
+                            "    if (c == '?') return -2;\n"
+                            "    return 0;\n"
+                            "}\n"
+                            "int read_file(FILE* file)\n"
+                            "{\n"
+                            "    return read_stream(file);\n"
+                            "}\n"
+                        ),
+                        "tests/test_ferr.c": (
+                            "#include <assert.h>\n"
+                            "#include <stdio.h>\n"
+                            "int read_file(FILE* file);\n"
+                            "int main(void) {\n"
+                            "    FILE *f = tmpfile();\n"
+                            "    assert(f != NULL);\n"
+                            "    fputc('x', f); rewind(f);\n"
+                            "    assert(read_file(f) == 0);\n"
+                            "    fclose(f);\n"
+                            "    FILE *wo = fopen(\"/dev/null\", \"w\");\n"
+                            "    assert(wo != NULL);\n"
+                            "    int e = read_file(wo);\n"
+                            "    assert(ferror(wo) != 0);\n"
+                            "    assert(e == -3);\n"
+                            "    fclose(wo);\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                    },
+                )
+                r1 = ML_SWE.solve_c_repository(root, ["tests/test_ferr.c"], timeout_s=30.0)
+                self.assertEqual(r1["status"], "VERIFIED", r1)
+                self.assertEqual(r1["winner"]["tier"], "C_STDIO_FERROR_POST_CHECK")
+                self.assertEqual(r1["model_calls"], 0)
+
+        # 2. C_SIBLING_DUAL_CASE_FOLD_COMPARE
+        with self.subTest(law="C_SIBLING_DUAL_CASE_FOLD_COMPARE"):
+            with tempfile.TemporaryDirectory(prefix="brain_c_iter70_fold_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "fold.h": (
+                            "#pragma once\n"
+                            "static inline int foldlwr(int c) { return (c == 0x03A3) ? 0x03C3 : c; }\n"
+                            "static inline int foldupr(int c) { return (c == 0x03C2 || c == 0x03C3) ? 0x03A3 : c; }\n"
+                            "static inline int foldcasecmp(int a, int b) {\n"
+                            "    if ((foldlwr(a) != foldlwr(b)) && (foldupr(a) != foldupr(b))) return 1;\n"
+                            "    return 0;\n"
+                            "}\n"
+                            "static inline int foldcasematch(int a, int b) {\n"
+                            "    if (foldlwr(a) != foldlwr(b)) {\n"
+                            "        return 0;\n"
+                            "    }\n"
+                            "    return 1;\n"
+                            "}\n"
+                        ),
+                        "tests/test_fold.c": (
+                            "#include <assert.h>\n"
+                            "#include \"fold.h\"\n"
+                            "int main(void) {\n"
+                            "    assert(foldcasecmp(0x03A3, 0x03C2) == 0);\n"
+                            "    assert(foldcasematch(0x03A3, 0x03C2) == 1);\n"
+                            "    assert(foldcasematch(0x03A3, 'x') == 0);\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                    },
+                )
+                r2 = ML_SWE.solve_c_repository(root, ["tests/test_fold.c"], timeout_s=30.0)
+                self.assertEqual(r2["status"], "VERIFIED", r2)
+                self.assertEqual(r2["winner"]["tier"], "C_SIBLING_DUAL_CASE_FOLD_COMPARE")
+                self.assertEqual(r2["model_calls"], 0)
+
+        # 3. C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP
+        with self.subTest(law="C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP"):
+            with tempfile.TemporaryDirectory(prefix="brain_c_iter70_swap_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "parser.c": (
+                            "#include <stdbool.h>\n"
+                            "static bool is_id_start(unsigned char c) { return c >= 0x80 || (c >= 'a' && c <= 'z'); }\n"
+                            "static bool is_trivia(unsigned char c) { return c == 0xC2 || c == ' '; }\n"
+                            "static bool skip_trivia(const unsigned char **p) {\n"
+                            "    if (**p == 0xC2 && (*p)[1] == 0xA0) { *p += 2; return true; }\n"
+                            "    if (**p == ' ') { *p += 1; return true; }\n"
+                            "    return false;\n"
+                            "}\n"
+                            "int parse_key(const unsigned char *cur) {\n"
+                            "obj_key_begin:\n"
+                            "    if (*cur == '\"') return 1;\n"
+                            "    if (is_id_start(*cur)) {\n"
+                            "        if (*cur >= 'a' && *cur <= 'z') return 2;\n"
+                            "        return -1;\n"
+                            "    }\n"
+                            "    if (is_trivia(*cur)) {\n"
+                            "        if (skip_trivia(&cur)) goto obj_key_begin;\n"
+                            "        return -2;\n"
+                            "    }\n"
+                            "    return -3;\n"
+                            "}\n"
+                        ),
+                        "tests/test_parser.c": (
+                            "#include <assert.h>\n"
+                            "int parse_key(const unsigned char *cur);\n"
+                            "int main(void) {\n"
+                            "    const unsigned char s1[] = {0xC2, 0xA0, '\"', 'a', '\"', 0};\n"
+                            "    const unsigned char s2[] = {'a', 0};\n"
+                            "    assert(parse_key(s1) == 1);\n"
+                            "    assert(parse_key(s2) == 2);\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                    },
+                )
+                r3 = ML_SWE.solve_c_repository(root, ["tests/test_parser.c"], timeout_s=30.0)
+                self.assertEqual(r3["status"], "VERIFIED", r3)
+                self.assertEqual(r3["winner"]["tier"], "C_ADJACENT_IF_BLOCK_PRECEDENCE_SWAP")
+                self.assertEqual(r3["model_calls"], 0)
+
+        # 4. C_FASTPATH_GOTO_SLOWPATH_BAILOUT
+        with self.subTest(law="C_FASTPATH_GOTO_SLOWPATH_BAILOUT"):
+            with tempfile.TemporaryDirectory(prefix="brain_c_iter70_bail_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "scan.c": (
+                            "#include <stddef.h>\n"
+                            "int scan_str(const unsigned char *src, int allow_invalid, int *marked_noesc) {\n"
+                            "    const unsigned char *dst = src;\n"
+                            "    *marked_noesc = 1;\n"
+                            "skip_utf8:\n"
+                            "    if (*src == 0) return 0;\n"
+                            "    if (*src >= 0x80) {\n"
+                            "        if (allow_invalid) ++src;\n"
+                            "        else return -1;\n"
+                            "        goto skip_utf8;\n"
+                            "    }\n"
+                            "    dst = src;\n"
+                            "copy_utf8:\n"
+                            "    if (*src >= 0x80) {\n"
+                            "        *marked_noesc = 0;\n"
+                            "        ++src;\n"
+                            "        (void)dst;\n"
+                            "        return 0;\n"
+                            "    }\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                        "tests/test_scan.c": (
+                            "#include <assert.h>\n"
+                            "int scan_str(const unsigned char *src, int allow_invalid, int *marked_noesc);\n"
+                            "int main(void) {\n"
+                            "    const unsigned char bad[] = {0xFF, 0};\n"
+                            "    int noesc = 1;\n"
+                            "    assert(scan_str(bad, 0, &noesc) == -1);\n"
+                            "    assert(scan_str(bad, 1, &noesc) == 0);\n"
+                            "    assert(noesc == 0);\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                    },
+                )
+                r4 = ML_SWE.solve_c_repository(root, ["tests/test_scan.c"], timeout_s=30.0)
+                self.assertEqual(r4["status"], "VERIFIED", r4)
+                self.assertEqual(r4["winner"]["tier"], "C_FASTPATH_GOTO_SLOWPATH_BAILOUT")
+                self.assertEqual(r4["model_calls"], 0)
+
+        # 5. C_PREFIX_SUBTREE_MOVE_GUARD
+        with self.subTest(law="C_PREFIX_SUBTREE_MOVE_GUARD"):
+            with tempfile.TemporaryDirectory(prefix="brain_c_iter70_move_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "patch.c": (
+                            "#include <string.h>\n"
+                            "enum { PATCH_OP_MOVE = 1 };\n"
+                            "static void *ptr_remove(const char *from) { return (void *)from; }\n"
+                            "void *apply_move(int op, const char *from, const char *path) {\n"
+                            "    size_t from_len = strlen(from);\n"
+                            "    size_t path_len = strlen(path);\n"
+                            "    void *val = NULL;\n"
+                            "    switch (op) {\n"
+                            "        case PATCH_OP_MOVE:\n"
+                            "            if (from_len == 0 && path_len == 0) break;\n"
+                            "            val = ptr_remove(from);\n"
+                            "            return val;\n"
+                            "    }\n"
+                            "    return (void *)path;\n"
+                            "}\n"
+                        ),
+                        "tests/test_patch.c": (
+                            "#include <assert.h>\n"
+                            "#include <stddef.h>\n"
+                            "void *apply_move(int op, const char *from, const char *path);\n"
+                            "int main(void) {\n"
+                            "    assert(apply_move(1, \"/0\", \"/0/b\") == NULL);\n"
+                            "    assert(apply_move(1, \"/a\", \"/ab\") != NULL);\n"
+                            "    return 0;\n"
+                            "}\n"
+                        ),
+                    },
+                )
+                r5 = ML_SWE.solve_c_repository(root, ["tests/test_patch.c"], timeout_s=30.0)
+                self.assertEqual(r5["status"], "VERIFIED", r5)
+                self.assertEqual(r5["winner"]["tier"], "C_PREFIX_SUBTREE_MOVE_GUARD")
+                self.assertEqual(r5["model_calls"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

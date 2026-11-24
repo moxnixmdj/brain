@@ -2139,6 +2139,205 @@ def _solve_doc_compiled_http(
 # ---------------------------------------------------------------------------
 
 
+def _solve_sqlite_schema_query(
+    ws: pathlib.Path,
+    goal: str,
+    boundary: Mapping[str, Any],
+    *,
+    memory: EpistemicMemoryStore | None,
+    verifier: Callable[[dict[str, Any]], tuple[bool, str]] | None,
+) -> dict[str, Any]:
+    """Zero-LLM, zero-prior live SQLite schema introspection & typed export (`sqlite_master` + `PRAGMA table_info`)."""
+    import csv as _csv
+    import io as _io
+    import sqlite3 as _sqlite3
+
+    t0 = time.monotonic()
+    db_rel = boundary["input_files"][0]
+    db_path = ws / db_rel
+    gaps_queried = [f"sqlite_introspect:{db_rel}:sqlite_master"]
+    goal_concepts = set(boundary.get("goal_concepts") or ())
+    kv = dict(boundary.get("kv_bindings") or {})
+    g_lo = (goal or "").lower()
+
+    try:
+        con = _sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+    except Exception:
+        con = _sqlite3.connect(str(db_path))
+
+    try:
+        con.row_factory = _sqlite3.Row
+        tables = [
+            r[0]
+            for r in con.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
+            ).fetchall()
+        ]
+        if not tables:
+            return {
+                "schema": SCHEMA,
+                "authority": AUTHORITY,
+                "status": "FAILED",
+                "mode": "SQLITE_EMPTY_SCHEMA",
+                "gaps_queried": gaps_queried,
+                "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+
+        # Score tables against goal via schema + column names
+        table_meta: list[tuple[float, str, list[tuple[str, str]]]] = []
+        for tbl in tables:
+            cols = [(str(r[1]), str(r[2] or "").upper()) for r in con.execute(f'PRAGMA table_info("{tbl}")').fetchall()]
+            col_names = [c for c, _ in cols]
+            sc = _semantic_overlap(f"{tbl} {' '.join(col_names)}", goal)
+            if tbl.lower() in g_lo or tbl.lower().rstrip("s") in g_lo:
+                sc += 4.0
+            table_meta.append((sc, tbl, cols))
+        table_meta.sort(key=lambda x: (-x[0], x[1]))
+        _, chosen_tbl, chosen_cols = table_meta[0]
+
+        # Build WHERE predicates from explicit kv_bindings OR live distinct categorical values mentioned in goal!
+        where_clauses: list[str] = []
+        params: list[Any] = []
+        used_cols: set[str] = set()
+
+        for cname, ctype in chosen_cols:
+            c_lo = cname.lower()
+            if cname in kv:
+                where_clauses.append(f'"{cname}" = ?')
+                params.append(kv[cname])
+                used_cols.add(cname)
+                continue
+            for k, v in kv.items():
+                if k.lower() == c_lo:
+                    where_clauses.append(f'"{cname}" = ?')
+                    params.append(v)
+                    used_cols.add(cname)
+                    break
+            if cname in used_cols:
+                continue
+            # Numeric threshold predicates (e.g. `amount > 100`, `score >= 50`, `over 100`)
+            if any(nt in ctype for nt in ("INT", "REAL", "NUM", "DEC", "FLOAT")):
+                m_num = re.search(
+                    rf"(?i)\b{re.escape(c_lo)}\s*(>=|<=|>|<|=)\s*(-?\d+(?:\.\d+)?)\b",
+                    goal or "",
+                )
+                if not m_num:
+                    m_num = re.search(
+                        rf"(?i)\b{re.escape(c_lo)}\s+(?:greater\s+than|above|over)\s+(-?\d+(?:\.\d+)?)\b",
+                        goal or "",
+                    )
+                    if m_num:
+                        where_clauses.append(f'"{cname}" > ?')
+                        params.append(float(m_num.group(1)) if "." in m_num.group(1) else int(m_num.group(1)))
+                        used_cols.add(cname)
+                        continue
+                else:
+                    op_s, num_s = m_num.group(1), m_num.group(2)
+                    where_clauses.append(f'"{cname}" {op_s} ?')
+                    params.append(float(num_s) if "." in num_s else int(num_s))
+                    used_cols.add(cname)
+                    continue
+            # Live categorical value discovery (zero hardcoded enum values!)
+            try:
+                drows = con.execute(
+                    f'SELECT DISTINCT "{cname}" FROM "{chosen_tbl}" WHERE "{cname}" IS NOT NULL LIMIT 32'
+                ).fetchall()
+            except Exception:
+                drows = []
+            for dr in drows:
+                val = dr[0]
+                if isinstance(val, str) and len(val) >= 3 and re.search(rf"(?i)\b{re.escape(val)}\b", goal or ""):
+                    where_clauses.append(f'LOWER("{cname}") = LOWER(?)')
+                    params.append(val)
+                    used_cols.add(cname)
+                    break
+
+        sql = f'SELECT * FROM "{chosen_tbl}"'
+        if where_clauses:
+            sql += " WHERE " + " AND ".join(where_clauses)
+        # Optional ORDER BY / LIMIT
+        for cname, _ in chosen_cols:
+            if re.search(rf"(?i)\border(?:ed)?\s+by\s+{re.escape(cname)}\b", goal or ""):
+                direction = "DESC" if re.search(r"(?i)\b(desc|descending|highest|largest|reverse)\b", goal or "") else "ASC"
+                sql += f' ORDER BY "{cname}" {direction}'
+                break
+        m_lim = re.search(r"(?i)\b(?:limit|top|first)\s+(\d+)\b", goal or "")
+        if m_lim:
+            sql += f" LIMIT {int(m_lim.group(1))}"
+
+        rows = [dict(r) for r in con.execute(sql, params).fetchall()]
+    finally:
+        con.close()
+
+    out_rel = (boundary.get("output_files") or [""])[0]
+    out_text = ""
+    if out_rel.lower().endswith(".csv"):
+        buf = _io.StringIO()
+        fieldnames = list(rows[0].keys()) if rows else [c for c, _ in chosen_cols]
+        w = _csv.DictWriter(buf, fieldnames=fieldnames)
+        w.writeheader()
+        for r in rows:
+            w.writerow(r)
+        out_text = buf.getvalue()
+    else:
+        out_text = json.dumps(rows, indent=2)
+
+    out_path: str | None = None
+    if out_rel:
+        op = ws / out_rel
+        op.parent.mkdir(parents=True, exist_ok=True)
+        op.write_text(out_text, encoding="utf-8")
+        out_path = str(op)
+
+    state = {"sql": sql, "row_count": len(rows), "rows": rows, "output_path": out_path, "output_text": out_text}
+    ok_v, note_v = verifier(state) if verifier is not None else (len(rows) > 0, f"sqlite_rows_verified({len(rows)})")
+    if not ok_v:
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "status": "FAILED",
+            "mode": "SQLITE_QUERY_UNVERIFIED",
+            "sql": sql,
+            "row_count": len(rows),
+            "verification": note_v,
+            "gaps_queried": gaps_queried,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    law = None
+    if memory is not None:
+        role_pat = ["SQLITE_INTROSPECT", "?SELECT_TABLE", "?WHERE_FILTER" if where_clauses else "?FULL_SCAN", "?EXPORT_FILE"]
+        law = memory.generalize_and_store(
+            kind="sqlite_role_law",
+            goal_concepts=goal_concepts,
+            role_pattern=role_pat,
+            postcondition_kind="sqlite_nonempty_export",
+            env_fingerprint="sqlite:schema_query",
+            meta_roles={"filtered": bool(where_clauses), "output_ext": pathlib.Path(out_rel).suffix.lower() if out_rel else ".json"},
+        )
+
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "status": "VERIFIED",
+        "mode": "DOC_COMPILED_SQLITE_ACTIVE_INFERENCE",
+        "sql": sql,
+        "row_count": len(rows),
+        "output_path": out_path,
+        "verification": note_v,
+        "generalized_law": law,
+        "boundary_scan_ms": boundary["scan_ms"],
+        "gaps_queried": gaps_queried,
+        "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+
 def solve_with_instant_knowledge(
     goal: str,
     *,
@@ -2163,6 +2362,12 @@ def solve_with_instant_knowledge(
     )
     goal_concepts = set(boundary["goal_concepts"])
     gaps_queried: list[str] = []
+
+    # Branch 0: Live Unseen SQLite Database Introspection & Typed Export
+    if not boundary["base_url"] and boundary.get("input_magic") == "sqlite" and boundary.get("input_files"):
+        return _solve_sqlite_schema_query(
+            ws, goal, boundary, memory=memory, verifier=verifier
+        )
 
     # Branch 1: Doc-backed HTTP/REST Service (when URL is present)
     if boundary["base_url"]:
@@ -2445,7 +2650,7 @@ _IMPERATIVE_STEP_VERBS = (
     "decode", "encode", "filter", "search", "grep", "select", "cut", "sort", "deduplicate",
     "dedup", "count", "take", "keep", "limit", "head", "tail", "convert", "transform",
     "compute", "calculate", "hash", "fetch", "download", "create", "post", "use", "run",
-    "parse", "replace", "translate", "compress",
+    "parse", "replace", "translate", "compress", "query", "export", "upload", "send", "ingest",
 )
 _SAVE_ONLY_RE = re.compile(r"(?i)^(?:and\s+)?(?:save|write|output|store)\s+(?:it\s+|the\s+\w+\s+|output\s+|result\s+)?(?:to|into|as)\s+\S+$")
 
@@ -2630,6 +2835,8 @@ def solve_multi_step_with_instant_knowledge(
             md = str(sr.get("mode") or "")
             if "HTTP" in md:
                 wf_roles.append("STEP_HTTP_SERVICE")
+            elif "SQLITE" in md:
+                wf_roles.append("STEP_SQLITE_QUERY")
             else:
                 wf_roles.append("STEP_CLI_TOOL")
         workflow_law = memory.generalize_and_store(

@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "383ce3e8faf466de4a13d193835ee6c973087e6054781c439f4f1eb76d5d09d1"
+  "value": "06eeb8cd9532fa54680eaa6579e4a3d7374cd6d169c078b7a466dbafe3e0f0f5"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "b9388e4730d74c425b8efa79e6b8a788966e08f6224debd1790502677f39035f",
+   "sha256": "aee2d6cfa538f8763713c93636395c441e863b187fd95f5247f63cd7afd9f796",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -287869,9 +287869,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_doc_compiler_agent_v1.py",
-   "sha256": "f495a7d59d3d85cbbc8bdfba0edb17ba8e3462b9eced915c7c963a0bafbe06b6",
+   "sha256": "e1132d4b95814562897b3d113ffce23cc7ee7fb79c6d18cf463f64a23213bc39",
    "summary": "Goal-Directed Zero-LLM Epistemic Doc-Compiler & Active-Inference Agent V1.",
-   "symbol_count": 33,
+   "symbol_count": 34,
    "symbols": [
     "CLISubcommandContract",
     "EpistemicMemoryStore",
@@ -287895,8 +287895,8 @@
     "_select_best_subcommand",
     "_semantic_overlap",
     "_solve_doc_compiled_http",
-    "_strip_html",
-    "_synthesize_cli_invocations"
+    "_solve_sqlite_schema_query",
+    "_strip_html"
    ],
    "terms": {
     "active-inference": 1,
@@ -305957,7 +305957,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/multilang_causal_swe_engine_v1.py",
-   "sha256": "3d12fad2d5307c84732f27115c6603994325c03f3ca96c75fbe59fd0f1f210ab",
+   "sha256": "31f8013ec61d786948ea5aa55004a1b6927c0acf7aa040cf92a779677c780445",
    "summary": "Multi-Language Causal Angelic SWE Engine v1 (JavaScript / TypeScript / Node.js).",
    "symbol_count": 53,
    "symbols": [

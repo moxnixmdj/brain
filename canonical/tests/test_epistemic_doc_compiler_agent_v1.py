@@ -694,6 +694,171 @@ class TestEpistemicDocCompilerAgentV1(unittest.TestCase):
             srv.shutdown()
             srv.server_close()
 
+    def test_12_iter70_three_modal_sqlite_cli_auth_openapi_pipeline(self) -> None:
+        """ONE Front Door solves a 3-modal pipeline with zero LLM calls and zero weights:
+        Unseen SQLite DB (`sqlite_master` + `PRAGMA table_info` + live distinct-value filter)
+        -> Unseen `./bin/summarize_jobs` (`--help` contract compilation)
+        -> Live OpenAPI 3.0 + 2-step Bearer Auth Handshake + POST/GET readback -> `receipt.json`
+        + leak-free 3-modal `workflow_role_law` (`['STEP_SQLITE_QUERY', 'STEP_CLI_TOOL', 'STEP_HTTP_SERVICE']`).
+        """
+        import sqlite3
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        state = {"incidents": {}, "next_id": 1}
+        openapi_spec = {
+            "openapi": "3.0.0",
+            "components": {"securitySchemes": {"bearerAuth": {"type": "http", "scheme": "bearer"}}},
+            "paths": {
+                "/v1/auth/token": {
+                    "post": {
+                        "summary": "Issue bearer token",
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "username": {"type": "string"},
+                                            "password": {"type": "string"},
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                "/v1/incidents": {
+                    "post": {
+                        "summary": "Report incident summary payload",
+                        "security": [{"bearerAuth": []}],
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "failed_count": {"type": "integer"},
+                                            "total_retries": {"type": "integer"},
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                "/v1/incidents/{id}": {
+                    "get": {
+                        "summary": "Read back incident",
+                        "security": [{"bearerAuth": []}],
+                    }
+                },
+            },
+        }
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args: object) -> None:
+                pass
+
+            def _send(self, code: int, obj: object) -> None:
+                raw = json.dumps(obj).encode("utf-8")
+                self.send_response(code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+            def do_GET(self) -> None:
+                if self.path == "/openapi.json":
+                    return self._send(200, openapi_spec)
+                if self.headers.get("Authorization") != "Bearer jwt-3modal-77":
+                    return self._send(401, {"error": "Unauthorized"})
+                if self.path.startswith("/v1/incidents/"):
+                    rid = self.path.rsplit("/", 1)[-1]
+                    if rid in state["incidents"]:
+                        return self._send(200, state["incidents"][rid])
+                    return self._send(404, {"error": "not found"})
+                return self._send(404, {"error": "unknown"})
+
+            def do_POST(self) -> None:
+                n = int(self.headers.get("Content-Length", "0"))
+                body = json.loads(self.rfile.read(n).decode("utf-8") or "{}")
+                if self.path == "/v1/auth/token":
+                    if body.get("username") == "sre" and body.get("password") == "p4ssw0rd":
+                        return self._send(200, {"access_token": "jwt-3modal-77"})
+                    return self._send(401, {"error": "bad creds"})
+                if self.headers.get("Authorization") != "Bearer jwt-3modal-77":
+                    return self._send(401, {"error": "Unauthorized"})
+                if self.path == "/v1/incidents":
+                    rid = str(state["next_id"])
+                    state["next_id"] += 1
+                    rec = {"id": rid, "status": "logged", "summary": body}
+                    state["incidents"][rid] = rec
+                    return self._send(201, rec)
+                return self._send(404, {"error": "unknown"})
+
+        srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        port = srv.server_address[1]
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            model = open_model()
+            with tempfile.TemporaryDirectory(prefix="epistemic_3modal_") as td:
+                ws = pathlib.Path(td)
+                (ws / "bin").mkdir()
+                con = sqlite3.connect(str(ws / "ops.sqlite"))
+                con.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, email TEXT)")
+                con.execute("INSERT INTO users VALUES (1, 'a@example.com')")
+                con.execute("CREATE TABLE jobs (id INTEGER PRIMARY KEY, name TEXT, status TEXT, retries INTEGER)")
+                con.executemany(
+                    "INSERT INTO jobs VALUES (?, ?, ?, ?)",
+                    [
+                        (1, "sync-a", "ok", 0),
+                        (2, "billing-x", "failed", 3),
+                        (3, "email-y", "failed", 5),
+                        (4, "cleanup", "ok", 1),
+                    ],
+                )
+                con.commit()
+                con.close()
+
+                cli = ws / "bin" / "summarize_jobs"
+                cli.write_text(
+                    "#!/usr/bin/env python3\n"
+                    "import argparse, json, pathlib\n"
+                    "ap = argparse.ArgumentParser(description='Summarize failed jobs JSON')\n"
+                    "ap.add_argument('--input', required=True, help='Input jobs JSON file')\n"
+                    "ap.add_argument('--output', required=True, help='Output summary JSON file')\n"
+                    "a = ap.parse_args()\n"
+                    "rows = json.loads(pathlib.Path(a.input).read_text())\n"
+                    "out = {'failed_count': len(rows), 'total_retries': sum(r['retries'] for r in rows)}\n"
+                    "pathlib.Path(a.output).write_text(json.dumps(out))\n",
+                    encoding="utf-8",
+                )
+                cli.chmod(0o755)
+
+                goal = (
+                    f"Export failed jobs from ops.sqlite to failed.json, "
+                    f"then transform failed.json into summary.json, "
+                    f"then POST summary.json to http://127.0.0.1:{port} using user=sre pass=p4ssw0rd "
+                    f"and save receipt to receipt.json"
+                )
+                res = model.solve(goal, inputs={"workspace": str(ws)}, mode="EPISTEMIC")
+                self.assertTrue(res.get("pass"), res)
+                self.assertEqual(res["model_calls"], 0)
+                self.assertEqual(res["parameters_stored"], 0)
+                wf = res["epistemic_result"]["doc_compiler_result"]["generalized_workflow_law"]
+                self.assertEqual(
+                    wf["role_pattern"],
+                    ["STEP_SQLITE_QUERY", "STEP_CLI_TOOL", "STEP_HTTP_SERVICE"],
+                )
+                receipt = json.loads((ws / "receipt.json").read_text(encoding="utf-8"))
+                self.assertEqual(
+                    receipt,
+                    {"id": "1", "status": "logged", "summary": {"failed_count": 2, "total_retries": 8}},
+                )
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()
