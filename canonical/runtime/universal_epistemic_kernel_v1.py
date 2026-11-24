@@ -4983,6 +4983,8 @@ def solve_arbitrary_environment(
     memory: dict[str, Any] | None = None,
     governed_memory: dict[str, Any] | None = None,
     base_url: str | None = None,
+    tomography_env: Any | None = None,
+    goal_targets: Sequence[Mapping[str, Any]] | None = None,
     postcondition_fn: Callable[[pathlib.Path], tuple[bool, str]] | None = None,
     dom_nodes: Sequence[Mapping[str, Any]] | None = None,
     gui_env: Any | None = None,
@@ -5004,6 +5006,32 @@ def solve_arbitrary_environment(
     atomic knowledge (model_calls == 0, parameters_stored == 0).
     """
     t0 = time.monotonic()
+    # 000. Differential State Tomography (Active Mealy API Discovery + 300+ Step Long-Horizon Planner)
+    if tomography_env is not None:
+        from canonical.runtime import differential_state_tomography_v1 as DST
+
+        api_rep = DST.discover_app_api_via_tomography(tomography_env, workspace=workspace)
+        run_rep = (
+            DST.solve_long_horizon_via_tomography(
+                tomography_env,
+                goal_targets,
+                workspace=workspace,
+                tomography_api=api_rep,
+            )
+            if goal_targets
+            else {"status": "VERIFIED", "executed_steps_count": 0, "checkpoints_satisfied": 0}
+        )
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "modality": "differential_state_tomography_long_horizon",
+            "status": str(run_rep.get("status") or "UNSOLVED"),
+            "tomography_api": api_rep,
+            "tomography_run": run_rep,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
     # 00. Live Goal-Directed Scan -> Epistemic-Gap-Diff -> Instant-Acquire -> Leap-4 Mental-Simulate
     # -> Live Execute (OS + SQLite + HTTP + PatchWorld 401 Recovery) -> L2/L3 Governed Memory Compression
     if governed_memory is not None:

@@ -1061,6 +1061,7 @@ class UnifiedModel:
             and "graphql_url" not in inp
             and "db_path" not in inp
             and "gui_env" not in inp
+            and "tomography_env" not in inp
             and "http://" not in goal
             and "https://" not in goal
         ):
@@ -1080,6 +1081,8 @@ class UnifiedModel:
             memory=mem,
             governed_memory=inp.get("governed_memory"),
             base_url=inp.get("base_url"),
+            tomography_env=inp.get("tomography_env"),
+            goal_targets=inp.get("goal_targets"),
             postcondition_fn=inp.get("postcondition_fn"),
             dom_nodes=inp.get("dom_nodes"),
             gui_env=inp.get("gui_env"),

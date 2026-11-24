@@ -3089,10 +3089,10 @@ def _synthesize_value_and_expr_repairs(
                 for g in dc_guards[:2]:
                     _emit_entry_guard(g["code"], rv)
 
-        # Live Value-Angelic Return Expression Synthesis (`synthesize_value_expressions`, zero hand-written rules!):
+        # Live Value-Angelic & Backward Deductive Witness Return Expression Synthesis (zero hand-written rules!):
         # Given a localized `return <expr>` with passing_frames + failing_frames + assertion expected values,
-        # mathematically synthesize the exact return formula / coercion / clamp / ITE expression.
-        if any(f_clean) and any(p_clean) and loc_exceptions:
+        # mathematically calculate the exact return formula (including OOP dotted attributes like `item.price_cents * item.qty + item.tax_cents`)!
+        if any(f_envs) and loc_exceptions:
             ret_nodes = [
                 n for n in ast.walk(tree)
                 if isinstance(n, ast.Return) and n.value is not None and getattr(n, "lineno", None) == ln
@@ -3122,24 +3122,57 @@ def _synthesize_value_and_expr_repairs(
                     for rn in ret_nodes[:2]:
                         orig_ret_src = ast.unparse(rn.value)
                         io_examples: list[tuple[dict[str, Any], Any]] = []
-                        for pe in p_clean[:16]:
+                        bw_examples: list[Any] = []
+                        from canonical.runtime import backward_witness_synthesizer_v1 as BWS
+
+                        def _eval_or_lookup(env_d: Mapping[str, Any]) -> tuple[bool, Any]:
+                            if orig_ret_src in env_d:
+                                return True, env_d[orig_ret_src]
                             try:
-                                pv = eval(orig_ret_src, _eval_ns, pe)  # noqa: S307 (restricted safe builtins on traced scalars)
-                                if pv is None or isinstance(pv, (bool, int, float, str)):
-                                    io_examples.append((pe, pv))
+                                flat_d = {k: v for k, v in env_d.items() if k.isidentifier()}
+                                return True, eval(orig_ret_src, _eval_ns, flat_d)  # noqa: S307
                             except Exception:
-                                pass
+                                return False, None
+
+                        for pe in p_envs[:16]:
+                            ok_p, pv = _eval_or_lookup(pe)
+                            if ok_p and (pv is None or isinstance(pv, (bool, int, float, str, list, tuple))):
+                                p_flat = {k: v for k, v in pe.items() if k.isidentifier()}
+                                if p_flat:
+                                    io_examples.append((p_flat, pv))
+                                bw_examples.append(BWS.WitnessExample(env=pe, actual=pv, expected=pv, is_failing=False))
                         matched_fail = 0
-                        for fe in f_clean[:12]:
-                            try:
-                                fv = eval(orig_ret_src, _eval_ns, fe)  # noqa: S307
-                            except Exception:
+                        for fe in f_envs[:12]:
+                            ok_f, fv = _eval_or_lookup(fe)
+                            if not ok_f:
                                 continue
                             for av, ev in ae_pairs:
                                 if fv == av and type(fv) is type(av):
-                                    io_examples.append((fe, ev))
+                                    f_flat = {k: v for k, v in fe.items() if k.isidentifier()}
+                                    if f_flat:
+                                        io_examples.append((f_flat, ev))
+                                    bw_examples.append(BWS.WitnessExample(env=fe, actual=fv, expected=ev, is_failing=True))
                                     matched_fail += 1
                                     break
+                        # Pillar 1 ("Reverse Execution"): Backward Deductive Witness Propagation!
+                        # Directly calculates depth-1..3 arithmetic/attribute/string/sequence expressions
+                        # from `(actual -> expected)` without forward candidate explosion!
+                        if matched_fail >= 1 and len(bw_examples) >= 1:
+                            bw_sols = BWS.backward_propagate_expression(orig_ret_src, bw_examples, max_depth=3)
+                            for bcode in bw_sols[:4]:
+                                try:
+                                    b_ast = ast.parse(bcode, mode="eval").body
+                                except SyntaxError:
+                                    continue
+                                t_bw = copy.deepcopy(tree)
+                                replaced_b = False
+                                for n_r in ast.walk(t_bw):
+                                    if isinstance(n_r, ast.Return) and n_r.value is not None and getattr(n_r, "lineno", None) == ln and ast.unparse(n_r.value) == orig_ret_src:
+                                        n_r.value = copy.deepcopy(b_ast)
+                                        replaced_b = True
+                                        break
+                                if replaced_b:
+                                    add(f"backward_witness_return({bcode})", ast.unparse(t_bw))
                         if matched_fail >= 1 and len(io_examples) >= 3:
                             extra_c = [c for c in assert_consts[:4] if isinstance(c, (int, float, str))]
                             val_sols = OESYGUS.synthesize_value_expressions(

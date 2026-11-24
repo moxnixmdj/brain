@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2024
+  "source_index_modules": 2026
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0d780a575e1c9591b80d739514669ce21c21a77859da99a8e272853fa14e8d33"
+  "value": "da2b2ebe23274aca1be2fa377baec82e3cc8d7fd28100c2f9331cad2c4bf0020"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "82911ddf1ef026f5b8ac61257513511fa332961c0bb042527f288b88756e8b92",
+   "sha256": "5fbe5b8674eb7d6f7d5f681ef5fdba518d5a91e098e84f27da3d5f648eb3bdd2",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -269550,6 +269550,53 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/backward_witness_synthesizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/backward_witness_synthesizer_v1.py",
+   "sha256": "0350cfe4094a21f850cef4150cffae8928f57f8c0c4d769217c3a9f713985681",
+   "summary": "Backward Deductive Witness Propagation (\"Reverse Execution\" Synthesis) + Minimal Witness Shrinking.",
+   "symbol_count": 10,
+   "symbols": [
+    "WitnessExample",
+    "_const_repr",
+    "_deduce_string_replace",
+    "_eq_val",
+    "_is_num",
+    "_match_atom_or_const",
+    "backward_propagate_expression",
+    "ddmin_shrink",
+    "extract_frame_alphabet",
+    "synthesize_function_return_fix"
+   ],
+   "terms": {
+    "backward": 2,
+    "backward_propagate_expression": 1,
+    "const_repr": 1,
+    "ddmin_shrink": 1,
+    "deduce_string_replace": 1,
+    "deductive": 1,
+    "eq_val": 1,
+    "execution": 1,
+    "extract_frame_alphabet": 1,
+    "is_num": 1,
+    "match_atom_or_const": 1,
+    "minimal": 1,
+    "propagation": 1,
+    "reverse": 1,
+    "shrinking": 1,
+    "synthesis": 1,
+    "synthesize_function_return_fix": 1,
+    "synthesizer": 1,
+    "v1": 1,
+    "witness": 3,
+    "witnessexample": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/behavioral_contract_extension_gate_v1.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -273995,7 +274042,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "809e3e1fc71cb83aabcddd54d9b449a3db377336be186eebcb0bbc17b260d6dc",
+   "sha256": "0fa4c9e33a78770187f0ca88371e4b7e39bb1c27e87dbcf72a3a16c132067d1f",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -278289,7 +278336,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "5069bc98a2a095663d75f014e2b02873c42442d3cb5f7be2a0b40ba948bd9e35",
+   "sha256": "bf8c59271e94a99a207a007ce443a3c84ae6f90924421a8907e1f6efe8a03cc8",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 45,
    "symbols": [
@@ -285866,6 +285913,52 @@
     "finite": 1,
     "nonempty_str": 1,
     "outcome": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/differential_state_tomography_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/differential_state_tomography_v1.py",
+   "sha256": "e66f388a4367664ad0b8d497cea05518edfa50043bbb87c675bb3e1c8ffe68c3",
+   "summary": "Differential State Tomography (Active Mealy API Discovery) + Bidirectional Algebraic Skill Composition.",
+   "symbol_count": 9,
+   "symbols": [
+    "TypedSkillMorphism",
+    "_sha256_bytes",
+    "_snapshot_sqlite_tables",
+    "capture_unified_snapshot",
+    "compose_skills_bidirectional",
+    "compute_state_delta",
+    "discover_app_api_via_tomography",
+    "execute_and_crystallize_composition",
+    "solve_long_horizon_via_tomography"
+   ],
+   "terms": {
+    "active": 1,
+    "algebraic": 1,
+    "api": 1,
+    "bidirectional": 1,
+    "capture_unified_snapshot": 1,
+    "compose_skills_bidirectional": 1,
+    "composition": 1,
+    "compute_state_delta": 1,
+    "differential": 2,
+    "discover_app_api_via_tomography": 1,
+    "discovery": 1,
+    "execute_and_crystallize_composition": 1,
+    "mealy": 1,
+    "sha256_bytes": 1,
+    "skill": 1,
+    "snapshot_sqlite_tables": 1,
+    "solve_long_horizon_via_tomography": 1,
+    "state": 2,
+    "tomography": 2,
+    "typedskillmorphism": 1,
     "v1": 1
    }
   },
@@ -338833,7 +338926,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "2fe2db193d0119a4321e2311902fc165b15b0c858062c8429ffe5fbf4af7e566",
+   "sha256": "39b678d64c6a2686bfc0db45f495985d8b0daa387ada71aeff1638667026f1cd",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
