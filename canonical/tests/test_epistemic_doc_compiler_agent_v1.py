@@ -513,6 +513,187 @@ class TestEpistemicDocCompilerAgentV1(unittest.TestCase):
             srv.shutdown()
             srv.server_close()
 
+    def test_11_iter68_cross_modal_cli_auth_openapi_pipelines_via_one_front_door(self) -> None:
+        """ONE Front Door solves BOTH cross-modal directions end-to-end with zero LLM calls:
+        (1) Unseen `./bin/logparse` -> live OpenAPI 3.0 `/openapi.json` discovery ->
+            2-step `POST /v1/auth/token` Bearer handshake -> protected `POST /v1/ingest`
+            with JSON file body -> readback `GET /v1/ingest/{id}` -> `receipt.json`;
+        (2) Live OpenAPI 3.0 + Bearer handshake -> protected `GET /v1/export` -> `raw.json` ->
+            unseen `./bin/json2csv` -> `report.csv` + leak-free `workflow_role_law` distillation.
+        """
+        state = {"ingested": {}, "next_id": 1}
+        openapi_spec = {
+            "openapi": "3.0.0",
+            "components": {"securitySchemes": {"bearerAuth": {"type": "http", "scheme": "bearer"}}},
+            "paths": {
+                "/v1/auth/token": {
+                    "post": {
+                        "summary": "Exchange username and password for bearer token",
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "username": {"type": "string"},
+                                            "password": {"type": "string"},
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                "/v1/ingest": {
+                    "post": {
+                        "summary": "Ingest metrics payload and return receipt",
+                        "security": [{"bearerAuth": []}],
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "service": {"type": "string"},
+                                            "errors": {"type": "integer"},
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                "/v1/ingest/{id}": {
+                    "get": {"summary": "Read back ingested record by id", "security": [{"bearerAuth": []}]}
+                },
+                "/v1/export": {
+                    "get": {"summary": "Fetch export metrics dataset", "security": [{"bearerAuth": []}]}
+                },
+            },
+        }
+
+        class AuthOpenAPIHandler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args: object) -> None:
+                return
+
+            def _send(self, code: int, obj: object) -> None:
+                raw = json.dumps(obj).encode("utf-8")
+                self.send_response(code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+            def do_GET(self) -> None:
+                if self.path == "/openapi.json":
+                    self._send(200, openapi_spec)
+                    return
+                if self.headers.get("Authorization") != "Bearer tok-live-99":
+                    self._send(401, {"error": "Unauthorized"})
+                    return
+                if self.path.startswith("/v1/ingest/"):
+                    rid = self.path.rsplit("/", 1)[-1]
+                    if rid in state["ingested"]:
+                        self._send(200, state["ingested"][rid])
+                        return
+                    self._send(404, {"error": "not found"})
+                    return
+                if self.path == "/v1/export":
+                    self._send(200, {"rows": [{"host": "web-1", "cpu": 42}, {"host": "db-1", "cpu": 87}]})
+                    return
+                self._send(404, {"error": "unknown"})
+
+            def do_POST(self) -> None:
+                n = int(self.headers.get("Content-Length", "0"))
+                body = json.loads(self.rfile.read(n).decode("utf-8") or "{}")
+                if self.path == "/v1/auth/token":
+                    if body.get("username") == "ops" and body.get("password") == "s3cr3t":
+                        self._send(200, {"access_token": "tok-live-99"})
+                    else:
+                        self._send(401, {"error": "bad credentials"})
+                    return
+                if self.headers.get("Authorization") != "Bearer tok-live-99":
+                    self._send(401, {"error": "Unauthorized"})
+                    return
+                if self.path == "/v1/ingest":
+                    rid = str(state["next_id"])
+                    state["next_id"] += 1
+                    rec = {"id": rid, "accepted": True, "payload": body}
+                    state["ingested"][rid] = rec
+                    self._send(201, rec)
+                    return
+                self._send(404, {"error": "unknown"})
+
+        srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), AuthOpenAPIHandler)
+        port = srv.server_address[1]
+        th = threading.Thread(target=srv.serve_forever, daemon=True)
+        th.start()
+        try:
+            model = UM.open_model()
+            with tempfile.TemporaryDirectory(prefix="brain_edc_xmodal_") as td:
+                ws = pathlib.Path(td)
+                (ws / "bin").mkdir()
+                p1 = ws / "bin" / "logparse"
+                p1.write_text(
+                    "#!/usr/bin/env python3\n"
+                    "import argparse, json, pathlib\n"
+                    "ap = argparse.ArgumentParser(description='Parse log file into JSON metrics payload')\n"
+                    "ap.add_argument('--in', dest='inp', required=True, help='Input log file path')\n"
+                    "ap.add_argument('--out', dest='out', required=True, help='Output JSON file path')\n"
+                    "a = ap.parse_args()\n"
+                    "errs = sum(1 for l in pathlib.Path(a.inp).read_text().splitlines() if 'ERROR' in l)\n"
+                    "pathlib.Path(a.out).write_text(json.dumps({'service': 'payments', 'errors': errs}))\n",
+                    encoding="utf-8",
+                )
+                p1.chmod(0o755)
+                p2 = ws / "bin" / "json2csv"
+                p2.write_text(
+                    "#!/usr/bin/env python3\n"
+                    "import argparse, json, pathlib\n"
+                    "ap = argparse.ArgumentParser(description='Convert exported JSON rows to CSV report')\n"
+                    "ap.add_argument('--src', required=True, help='Source JSON file')\n"
+                    "ap.add_argument('--dst', required=True, help='Destination CSV file')\n"
+                    "a = ap.parse_args()\n"
+                    "rows = json.loads(pathlib.Path(a.src).read_text()).get('rows', [])\n"
+                    "out = ['host,cpu'] + [f\"{r['host']},{r['cpu']}\" for r in rows]\n"
+                    "pathlib.Path(a.dst).write_text('\\n'.join(out) + '\\n')\n",
+                    encoding="utf-8",
+                )
+                p2.chmod(0o755)
+                (ws / "events.log").write_text("INFO ok\nERROR timeout\nERROR retry\n", encoding="utf-8")
+
+                # Direction 1: Unseen CLI -> 2-step Auth Handshake -> Protected POST File -> receipt.json
+                g1 = (
+                    f"Parse events.log into payload.json, then POST payload.json to http://127.0.0.1:{port} "
+                    "using user=ops pass=s3cr3t and save receipt to receipt.json"
+                )
+                r1 = model.solve(g1, inputs={"workspace": str(ws)}, mode="EPISTEMIC")
+                self.assertTrue(r1.get("pass"), r1)
+                self.assertEqual(r1["model_calls"], 0)
+                er1 = r1["epistemic_result"]
+                self.assertEqual(er1["modality"], "cross_modal_cli_http_pipeline")
+                wf1 = er1["doc_compiler_result"]["generalized_workflow_law"]
+                self.assertEqual(wf1["role_pattern"], ["STEP_CLI_TOOL", "STEP_HTTP_SERVICE"])
+                self.assertNotIn("s3cr3t", json.dumps(wf1))
+                self.assertNotIn("payload.json", json.dumps(wf1))
+                receipt = json.loads((ws / "receipt.json").read_text(encoding="utf-8"))
+                self.assertEqual(receipt["payload"], {"service": "payments", "errors": 2})
+
+                # Direction 2: 2-step Auth Handshake -> Protected GET Export -> Unseen CLI -> report.csv
+                g2 = (
+                    f"Fetch export from http://127.0.0.1:{port} using user=ops pass=s3cr3t and save to raw.json, "
+                    "then convert raw.json into report.csv"
+                )
+                r2 = model.solve(g2, inputs={"workspace": str(ws)}, mode="EPISTEMIC")
+                self.assertTrue(r2.get("pass"), r2)
+                self.assertEqual(r2["model_calls"], 0)
+                csv_txt = (ws / "report.csv").read_text(encoding="utf-8")
+                self.assertIn("web-1,42", csv_txt)
+                self.assertIn("db-1,87", csv_txt)
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()

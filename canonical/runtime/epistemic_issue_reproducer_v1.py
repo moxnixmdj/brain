@@ -775,11 +775,36 @@ def _compile_prose_clauses(issue_text: str, repo_index: RepoSymbolIndex) -> list
         if not bal:
             continue
         args_str, close_i = bal
-        span = (m.start(), close_i + 1)
+        start_pos = m.start()
+        end_pos = close_i + 1
+        call_expr = f"{ident}({args_str})"
+        # Extend across chained `.method(...)` / `.attr` calls immediately following `)`
+        while end_pos < len(issue_text) and issue_text[end_pos] == ".":
+            m_attr = re.match(r"\.([A-Za-z_$]\w*)", issue_text[end_pos:])
+            if not m_attr:
+                break
+            attr_end = end_pos + m_attr.end()
+            if attr_end < len(issue_text) and issue_text[attr_end] == "(":
+                bal_c = _extract_balanced_call(issue_text, attr_end)
+                if not bal_c:
+                    break
+                c_args, c_close = bal_c
+                call_expr += f".{m_attr.group(1)}({c_args})"
+                end_pos = c_close + 1
+            else:
+                call_expr += f".{m_attr.group(1)}"
+                end_pos = attr_end
+        # Capture outer Python builtin wrapper (e.g. `list(OneOf(...).options())`, `len(...)`)
+        if lang == "python":
+            m_wrap = re.search(r"\b(list|tuple|set|dict|sorted|len|str|bool|int)\s*\($", issue_text[max(0, start_pos - 16) : start_pos])
+            if m_wrap and end_pos < len(issue_text) and issue_text[end_pos] == ")":
+                call_expr = f"{m_wrap.group(1)}({call_expr})"
+                start_pos = max(0, start_pos - 16) + m_wrap.start()
+                end_pos += 1
+        span = (start_pos, end_pos)
         if any(s <= span[0] and span[1] <= e for s, e in seen_spans):
             continue
         seen_spans.add(span)
-        call_expr = f"{ident}({args_str})"
         call_hits.append((span[0], span[1], call_expr, matched_sym))
 
     if not call_hits:
@@ -796,7 +821,7 @@ def _compile_prose_clauses(issue_text: str, repo_index: RepoSymbolIndex) -> list
             refs.append(base_sym)
         if "." in call_expr:
             head_id = call_expr.split(".", 1)[0]
-            if head_id not in refs:
+            if "(" not in head_id and head_id not in refs:
                 refs.append(head_id)
         # Window around the call (strictly sentence/line-bounded so adjacent clauses never bleed!)
         nl_after = issue_text.find("\n", end_i)

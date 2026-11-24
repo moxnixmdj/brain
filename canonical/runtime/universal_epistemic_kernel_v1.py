@@ -5074,6 +5074,42 @@ def solve_arbitrary_environment(
         m_u = _URL_RE.search(instruction or "")
         if m_u:
             detected_url = m_u.group(0).rstrip(".,;)")
+    # 0a. Cross-Modal Multi-Step Pipeline (`CLI <-> Authenticated HTTP API <-> CLI`)
+    # When the instruction chains multiple steps combining a live URL AND workspace file/CLI clauses,
+    # execute the full cross-modal pipeline via the zero-LLM Doc-Compiler BEFORE single-shot Web UI!
+    if detected_url and web_url is None and target_url is None:
+        from canonical.runtime import epistemic_doc_compiler_agent_v1 as EDC
+
+        _cm_clauses = EDC._decompose_multi_step_goal(instruction or "")
+        _has_url_clause = any("http://" in c or "https://" in c for c in _cm_clauses)
+        _has_non_url_clause = any("http://" not in c and "https://" not in c for c in _cm_clauses)
+        if len(_cm_clauses) >= 2 and _has_url_clause and _has_non_url_clause:
+            ws_cm = pathlib.Path(workspace).resolve()
+            _edc_mem = EDC.EpistemicMemoryStore()
+            _edc_ver = (lambda _st: postcondition_fn(ws_cm)) if postcondition_fn is not None else verifier
+            edc_res = EDC.solve_multi_step_with_instant_knowledge(
+                instruction,
+                workspace=ws_cm,
+                memory=_edc_mem,
+                knowledge_source=knowledge_source,
+                base_url=None,
+                verifier=_edc_ver,
+                timeout_s=timeout_s,
+            )
+            if edc_res.get("status") == "VERIFIED":
+                return {
+                    "schema": SCHEMA,
+                    "authority": AUTHORITY,
+                    "modality": "cross_modal_cli_http_pipeline",
+                    "status": "VERIFIED",
+                    "mode": str(edc_res.get("mode") or "MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE"),
+                    "doc_compiler_result": edc_res,
+                    "gaps_queried": list(edc_res.get("gaps_queried") or []),
+                    "web_queries_made": 0,
+                    "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
     if detected_url and (
         "/graphql" in detected_url.lower() or "graphql" in (instruction or "").lower()
     ):

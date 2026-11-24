@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d271656e51f3c5a912765a2c531155f99652d6fca681c2da2a27430518d43f3a"
+  "value": "bf5dffaa0ae3cde91747fb6a7ca4728d52eb187c2e6fa3796504fc09d5dcf098"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "07ec1a2b27e37e475e86977620b79291ed8906ebe36ef4292b30016701e85a23",
+   "sha256": "c560fdf817025a6c01846208e68d96980e61504c0d8a5948dad5f78fcf8f8b4a",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "8dfebc71cff1784241ce3109314dd880b369230cf8fbf8de923aa536572764fa",
+   "sha256": "4ffab91371bb18a75f475e5c359cd30f99fa60fec6c12cf4c6da604753a01e63",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 43,
    "symbols": [
@@ -287869,14 +287869,15 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_doc_compiler_agent_v1.py",
-   "sha256": "1ea75a7dfb372c132a4af0844f05525652d8a2ac56577c1593628f87126282b7",
+   "sha256": "f495a7d59d3d85cbbc8bdfba0edb17ba8e3462b9eced915c7c963a0bafbe06b6",
    "summary": "Goal-Directed Zero-LLM Epistemic Doc-Compiler & Active-Inference Agent V1.",
-   "symbol_count": 32,
+   "symbol_count": 33,
    "symbols": [
     "CLISubcommandContract",
     "EpistemicMemoryStore",
     "HTTPContract",
     "OptionSpec",
+    "_acquire_auth_token_from_contracts",
     "_build_os_tool_index",
     "_check_semantic_postconditions",
     "_concept_set",
@@ -287895,8 +287896,7 @@
     "_semantic_overlap",
     "_solve_doc_compiled_http",
     "_strip_html",
-    "_synthesize_cli_invocations",
-    "_tokenize"
+    "_synthesize_cli_invocations"
    ],
    "terms": {
     "active-inference": 1,
@@ -288015,7 +288015,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "0af2114f09beea66fe2903bd2db801a9e4a768b06c86edc4f47bf9d51a2bb7b9",
+   "sha256": "7ae93adf0d6911c3b53e2448d63705a4d041bca84f5c0f7d378fa9bdf0fca58d",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
    "symbol_count": 27,
    "symbols": [
@@ -338646,7 +338646,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "3043d2aefee13fee913111d838c4886051629132754a1e238bd70c3683307b4a",
+   "sha256": "7ffa2cf2e315b949b5c7dee11af9d2669ce88ceb2a995202f723dd62ca0a534d",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [

@@ -9150,6 +9150,307 @@ def _synthesize_static_cone_and_truthiness_repairs(
             except SyntaxError:
                 pass
 
+    # 32. Iter 68 Law 12n (`TIER3_ZIP_LONGEST_LEFT_BOUNDED` — Left-Bounded `zip_longest` Pad):
+    # When `zip_longest(primary, secondary, fillvalue=fv)` pads past `primary` (emitting phantom
+    # `(fv, sec)` pairs when `len(secondary) > len(primary)`), bind iteration length to `primary`
+    # while still padding shorter `secondary` via `zip(primary, chain(secondary, repeat(fv)))`.
+    for rel in cand_files[:6]:
+        loaded = load_file(rel)
+        if loaded is None:
+            continue
+        src_txt, tree_n = loaded
+        if "zip_longest" not in src_txt:
+            continue
+        for node in ast.walk(tree_n):
+            if not isinstance(node, ast.Call):
+                continue
+            fn_nm = node.func.attr if isinstance(node.func, ast.Attribute) else (node.func.id if isinstance(node.func, ast.Name) else "")
+            if fn_nm != "zip_longest" or len(node.args) != 2:
+                continue
+            fv_src = "None"
+            for kw in node.keywords:
+                if kw.arg == "fillvalue":
+                    fv_src = ast.unparse(kw.value)
+                    break
+            a_src = ast.unparse(node.args[0])
+            b_src = ast.unparse(node.args[1])
+            old_call = ast.unparse(node)
+            new_call = f"zip({a_src}, __import__('itertools').chain({b_src}, __import__('itertools').repeat({fv_src})))"
+            lines_n = src_txt.splitlines(keepends=True)
+            ln0 = max(1, int(getattr(node, "lineno", 1)))
+            ln1 = int(getattr(node, "end_lineno", ln0) or ln0)
+            seg = "".join(lines_n[ln0 - 1 : ln1])
+            if old_call in seg:
+                rep_seg = seg.replace(old_call, new_call, 1)
+            else:
+                # Fallback regex match for multi-line or spaced zip_longest call
+                rep_seg = re.sub(r"\b(?:itertools\.)?zip_longest\s*\([^)]*\)", new_call, seg, count=1)
+            if rep_seg != seg:
+                lines_n[ln0 - 1 : ln1] = [rep_seg]
+                code_n = "".join(lines_n)
+                try:
+                    ast.parse(code_n)
+                    add_cand(
+                        rel,
+                        ln0,
+                        "TIER3_ZIP_LONGEST_LEFT_BOUNDED",
+                        f"left_bounded_zip({a_src}, {b_src}, fillvalue={fv_src})",
+                        code_n,
+                    )
+                except SyntaxError:
+                    pass
+
+    # 33. Iter 68 Law 12o (`TIER3_PREFIX_SIBLING_VAR_SWAP` — Key-Space Consistency on Prefix Slicing):
+    # Inside any function where `col` is tested with `y in col` AND later sliced with
+    # `prefix = x + "."` + `f.startswith(prefix) for f in col` (`x != y`), swap `x -> y`
+    # so the prefix matches the exact key space checked in `col`.
+    for rel in cand_files[:6]:
+        loaded = load_file(rel)
+        if loaded is None:
+            continue
+        src_txt, tree_o = loaded
+        if "startswith(" not in src_txt:
+            continue
+        lines_o = src_txt.splitlines(keepends=True)
+        for fn in ast.walk(tree_o):
+            if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                continue
+            # Collect `(var, col)` pairs from `var in col`
+            in_pairs: dict[str, list[str]] = {}
+            for sub in ast.walk(fn):
+                if isinstance(sub, ast.Compare) and len(sub.ops) == 1 and isinstance(sub.ops[0], ast.In):
+                    if isinstance(sub.left, ast.Name) and isinstance(sub.comparators[0], ast.Name):
+                        in_pairs.setdefault(sub.comparators[0].id, []).append(sub.left.id)
+            if not in_pairs:
+                continue
+            # Find `prefix_var = x + sep` where `prefix_var` is used in `.startswith(prefix_var)` over `col`
+            sw_vars: dict[str, set[str]] = {}  # prefix_var -> set of cols iterated
+            for sub in ast.walk(fn):
+                if isinstance(sub, (ast.ListComp, ast.SetComp, ast.GeneratorExp)):
+                    for gen in sub.generators:
+                        if isinstance(gen.iter, ast.Name):
+                            col_nm = gen.iter.id
+                            for if_c in gen.ifs:
+                                for csub in ast.walk(if_c):
+                                    if (
+                                        isinstance(csub, ast.Call)
+                                        and isinstance(csub.func, ast.Attribute)
+                                        and csub.func.attr == "startswith"
+                                        and len(csub.args) == 1
+                                        and isinstance(csub.args[0], ast.Name)
+                                    ):
+                                        sw_vars.setdefault(csub.args[0].id, set()).add(col_nm)
+            if not sw_vars:
+                continue
+            for sub in ast.walk(fn):
+                if (
+                    isinstance(sub, ast.Assign)
+                    and len(sub.targets) == 1
+                    and isinstance(sub.targets[0], ast.Name)
+                    and sub.targets[0].id in sw_vars
+                    and isinstance(sub.value, ast.BinOp)
+                    and isinstance(sub.value.op, ast.Add)
+                    and isinstance(sub.value.left, ast.Name)
+                    and isinstance(sub.value.right, ast.Constant)
+                    and isinstance(sub.value.right.value, str)
+                    and len(sub.value.right.value) <= 3
+                ):
+                    pvar = sub.targets[0].id
+                    x_nm = sub.value.left.id
+                    ln_s = int(getattr(sub, "lineno", 1))
+                    for col_nm in sorted(sw_vars[pvar]):
+                        for y_nm in in_pairs.get(col_nm, ()):
+                            if y_nm == x_nm:
+                                continue
+                            orig_line = lines_o[ln_s - 1]
+                            new_line = re.sub(rf"\b{re.escape(x_nm)}\b", y_nm, orig_line, count=1)
+                            if new_line != orig_line:
+                                nl = list(lines_o)
+                                nl[ln_s - 1] = new_line
+                                code_o = "".join(nl)
+                                try:
+                                    ast.parse(code_o)
+                                    add_cand(
+                                        rel,
+                                        ln_s,
+                                        "TIER3_PREFIX_SIBLING_VAR_SWAP",
+                                        f"prefix_key_consistency({pvar}:{x_nm}->{y_nm} via {col_nm})",
+                                        code_o,
+                                    )
+                                except SyntaxError:
+                                    pass
+
+    # 34. Iter 68 Law 12p (`TIER3_SUPER_INIT_KWARG_LIFECYCLE` — Subclass `super().__init__(**kwargs)` Lifecycle):
+    # (A) Post-super `self.<attr> = <expr>` hoist: when `Subclass.__init__(..., **kwargs)` calls
+    #     `super().__init__(**kwargs)` BEFORE assigning `self.<attr> = <param>`, base `__init__`
+    #     misses `<attr>` (e.g. `allow_none = load_default is None`). Hoist `kwargs.setdefault("<attr>", <param>)`
+    #     (or `kwargs["<attr>"] = <param>`) before `super().__init__(**kwargs)`.
+    # (B) Pre-super `kwargs["<key>"] = <expr>` conflict guard: when `super().__init__(**kwargs)` raises
+    #     `ValueError` mentioning `'<key>'` and a conflicting flag (e.g. `required`), guard that
+    #     assignment with `if not kwargs.get("<flag>"):`.
+    _kw_conflict_keys: list[tuple[str, str]] = []
+    for _m_vc in re.finditer(r"['\"]([a-z_][a-z0-9_]*)['\"]\s+(?:must\s+not|cannot|can't|should\s+not)[^.\n]{0,60}\b([a-z_][a-z0-9_]*)\b", exc_msgs, flags=re.IGNORECASE):
+        _k_nm = _m_vc.group(1)
+        _tail_vc = _m_vc.group(0).lower()
+        for _flg in ("required", "readonly", "read_only", "disabled", "nullable", "allow_none", "strict", "unique"):
+            if _flg in _tail_vc and _flg != _k_nm:
+                if (_k_nm, _flg) not in _kw_conflict_keys:
+                    _kw_conflict_keys.append((_k_nm, _flg))
+    # Expand candidate files for 12p to also include files defining classes mentioned in failing tests
+    _p_files: list[str] = list(cand_files[:6])
+    _ft_blob_12p = " ".join(str(x) for x in (loc.failing_tests or ())) + " " + exc_msgs
+    for _tf_rel in (loc.failing_tests or ()):
+        _tf_p = worktree / str(_tf_rel).split("::", 1)[0]
+        if _tf_p.is_file():
+            try:
+                _ft_blob_12p += "\n" + _tf_p.read_text(encoding="utf-8", errors="replace")[:16000]
+            except Exception:
+                pass
+    _test_cls_hints = {m.group(1) for m in re.finditer(r"\b([A-Z][A-Za-z0-9_]{2,})\(", _ft_blob_12p)}
+    if _test_cls_hints:
+        for _py_p in sorted(worktree.rglob("*.py")):
+            _rel_p = str(_py_p.relative_to(worktree))
+            if any(part in _rel_p.split("/") for part in ("tests", "test", ".git", ".venv", "venv", "build", "dist", "__pycache__")):
+                continue
+            if _rel_p in _p_files:
+                continue
+            try:
+                _pt = _py_p.read_text(encoding="utf-8", errors="replace")
+            except OSError:
+                continue
+            if "super().__init__(" in _pt and any(f"class {c}(" in _pt for c in _test_cls_hints):
+                _p_files.append(_rel_p)
+                if len(_p_files) >= 10:
+                    break
+
+    for rel in _p_files:
+        loaded = load_file(rel)
+        if loaded is None:
+            continue
+        src_txt, tree_p = loaded
+        if "super().__init__(" not in src_txt:
+            continue
+        lines_p = src_txt.splitlines(keepends=True)
+        for cls_node in ast.walk(tree_p):
+            if not isinstance(cls_node, ast.ClassDef):
+                continue
+            # Prefer classes referenced in traceback or failing test names
+            _cls_low = cls_node.name.lower()
+            if _test_cls_hints and cls_node.name not in _test_cls_hints and _cls_low not in _ft_blob_12p.lower():
+                continue
+            for mnode in cls_node.body:
+                if not isinstance(mnode, ast.FunctionDef) or mnode.name != "__init__":
+                    continue
+                if mnode.args.kwarg is None:
+                    continue
+                kw_nm = mnode.args.kwarg.arg
+                param_names = {a.arg for a in mnode.args.args[1:]} | {a.arg for a in mnode.args.kwonlyargs}
+                super_idx = -1
+                for idx_s, st in enumerate(mnode.body):
+                    if (
+                        isinstance(st, ast.Expr)
+                        and isinstance(st.value, ast.Call)
+                        and isinstance(st.value.func, ast.Attribute)
+                        and st.value.func.attr == "__init__"
+                        and isinstance(st.value.func.value, ast.Call)
+                        and isinstance(st.value.func.value.func, ast.Name)
+                        and st.value.func.value.func.id == "super"
+                    ):
+                        super_idx = idx_s
+                        break
+                if super_idx < 0:
+                    continue
+                super_st = mnode.body[super_idx]
+                super_ln = int(getattr(super_st, "lineno", 1))
+                ind_s = re.match(r"^(\s*)", lines_p[super_ln - 1]).group(1)
+
+                # (B) Guard pre-super `kwargs["<key>"] = <expr>` conflicting with `<flag>`
+                if _kw_conflict_keys:
+                    for pre_st in mnode.body[:super_idx]:
+                        if (
+                            isinstance(pre_st, ast.Assign)
+                            and len(pre_st.targets) == 1
+                            and isinstance(pre_st.targets[0], ast.Subscript)
+                            and isinstance(pre_st.targets[0].value, ast.Name)
+                            and pre_st.targets[0].value.id == kw_nm
+                            and isinstance(pre_st.targets[0].slice, ast.Constant)
+                            and isinstance(pre_st.targets[0].slice.value, str)
+                        ):
+                            k_str = pre_st.targets[0].slice.value
+                            for ck, cflag in _kw_conflict_keys:
+                                if ck == k_str:
+                                    ln_a = int(getattr(pre_st, "lineno", 1))
+                                    ln_b = int(getattr(pre_st, "end_lineno", ln_a) or ln_a)
+                                    ind_a = re.match(r"^(\s*)", lines_p[ln_a - 1]).group(1)
+                                    indented_blk = "".join("    " + l for l in lines_p[ln_a - 1 : ln_b])
+                                    guarded = f"{ind_a}if not {kw_nm}.get({cflag!r}):\n{indented_blk}"
+                                    # Variant 1: suppress conflicting kwarg when `<flag>` is truthy
+                                    nl = list(lines_p)
+                                    nl[ln_a - 1 : ln_b] = [guarded]
+                                    code_pb = "".join(nl)
+                                    try:
+                                        ast.parse(code_pb)
+                                        add_cand(
+                                            rel,
+                                            ln_a,
+                                            "TIER3_SUPER_INIT_KWARG_LIFECYCLE",
+                                            f"guard_super_kwarg({cls_node.name}:{k_str} if not {cflag})",
+                                            code_pb,
+                                        )
+                                    except SyntaxError:
+                                        pass
+                                    # Variant 2: subclass owns `<key>`, so strip conflicting `<flag>` before `super().__init__`
+                                    nl2 = list(lines_p)
+                                    nl2.insert(super_ln - 1, f"{ind_s}{kw_nm}.pop({cflag!r}, None)\n")
+                                    code_pb2 = "".join(nl2)
+                                    try:
+                                        ast.parse(code_pb2)
+                                        add_cand(
+                                            rel,
+                                            super_ln,
+                                            "TIER3_SUPER_INIT_KWARG_LIFECYCLE",
+                                            f"pop_conflicting_super_kwarg({cls_node.name}:pop {cflag} for {k_str})",
+                                            code_pb2,
+                                        )
+                                    except SyntaxError:
+                                        pass
+
+                # (A) Hoist post-super `self.<attr> = <param>` into pre-super `kwargs["<attr>"] = <param>`
+                post_assigns: list[tuple[str, str, int]] = []
+                for post_st in mnode.body[super_idx + 1 :]:
+                    if (
+                        isinstance(post_st, ast.Assign)
+                        and len(post_st.targets) == 1
+                        and isinstance(post_st.targets[0], ast.Attribute)
+                        and isinstance(post_st.targets[0].value, ast.Name)
+                        and post_st.targets[0].value.id == "self"
+                        and isinstance(post_st.value, ast.Name)
+                        and post_st.value.id in param_names
+                    ):
+                        attr_nm = post_st.targets[0].attr
+                        # Skip primary identity attr matching param name itself (e.g. `self.constant = constant`)
+                        if attr_nm != post_st.value.id:
+                            post_assigns.append((attr_nm, post_st.value.id, int(getattr(post_st, "lineno", super_ln))))
+                if post_assigns:
+                    hoist_lines = [f"{ind_s}{kw_nm}[{a!r}] = {v}\n" for a, v, _ in post_assigns]
+                    nl = list(lines_p)
+                    # Remove original post-super assignments and hoist before `super().__init__`
+                    for _, _, rm_ln in sorted(post_assigns, key=lambda x: x[2], reverse=True):
+                        nl[rm_ln - 1] = ""
+                    nl.insert(super_ln - 1, "".join(hoist_lines))
+                    code_pa = "".join(nl)
+                    try:
+                        ast.parse(code_pa)
+                        add_cand(
+                            rel,
+                            super_ln,
+                            "TIER3_SUPER_INIT_KWARG_LIFECYCLE",
+                            f"hoist_super_kwargs({cls_node.name}:{','.join(a for a, _, _ in post_assigns)})",
+                            code_pa,
+                        )
+                    except SyntaxError:
+                        pass
+
     return out
 
 
@@ -9359,6 +9660,9 @@ def synthesize_candidates(
         "TIER3_ISINSTANCE_PATHLIKE_WIDENING",
         "TIER3_CALL_BOOL_KWARG_DEFAULT_TOGGLE",
         "TIER3_SLOTS_DATACLASS_DICT_SETSTATE",
+        "TIER3_ZIP_LONGEST_LEFT_BOUNDED",
+        "TIER3_PREFIX_SIBLING_VAR_SWAP",
+        "TIER3_SUPER_INIT_KWARG_LIFECYCLE",
     }
     _broad_hp_tiers = {
         "TIER3_TERNARY_COLLAPSE_TO_BRANCH",

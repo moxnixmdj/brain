@@ -2888,6 +2888,132 @@ def test_33_iter66_pathlike_bool_kwarg_and_multifile_slots_pickle() -> None:
         assert res_m["model_calls"] == 0 and res_m["parameters_stored"] == 0
 
 
+def test_34_iter68_zip_longest_prefix_key_and_super_init_kwarg_lifecycle() -> None:
+    """Iter 68 Laws 12n, 12o, 12p:
+    - 12n (`TIER3_ZIP_LONGEST_LEFT_BOUNDED`): left-bounded `zip_longest` pad without phantom tail items
+    - 12o (`TIER3_PREFIX_SIBLING_VAR_SWAP`): key-space consistency on prefix slicing (`attr_name` vs `field_name`)
+    - 12p (`TIER3_SUPER_INIT_KWARG_LIFECYCLE`): hoist post-super attrs + strip conflicting super kwargs
+    """
+    # 1. Law 12n: left-bounded zip_longest
+    with tempfile.TemporaryDirectory(prefix="iter68_12n_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/opt.py": (
+                    "from itertools import zip_longest\n\n"
+                    "class Picker:\n"
+                    "    def __init__(self, choices, labels=()):\n"
+                    "        self.choices = choices\n"
+                    "        self.labels = labels\n"
+                    "    def options(self):\n"
+                    "        pairs = zip_longest(self.choices, self.labels, fillvalue='')\n"
+                    "        return [(str(c), lbl) for c, lbl in pairs]\n"
+                ),
+                "tests/test_opt.py": (
+                    "from pkg.opt import Picker\n\n"
+                    "def test_extra_labels_and_short_labels():\n"
+                    "    assert Picker([1, 2], ['one', 'two', 'three']).options() == [('1', 'one'), ('2', 'two')]\n"
+                    "    assert Picker([1, 2], ['one']).options() == [('1', 'one'), ('2', '')]\n"
+                    "    assert Picker([], ['extra']).options() == []\n"
+                ),
+            },
+        )
+        r1 = ENGINE.solve_repository(root, ["tests/test_opt.py"], python_exe=sys.executable)
+        assert r1["verified"] is True, r1
+        assert r1["winner"]["tier"] == "TIER3_ZIP_LONGEST_LEFT_BOUNDED", r1["winner"]
+        assert r1["model_calls"] == 0 and r1["parameters_stored"] == 0
+
+    # 2. Law 12o: key-space consistency on prefix slicing
+    with tempfile.TemporaryDirectory(prefix="iter68_12o_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/loader.py": (
+                    "def load_nested(fields_spec, data, partial=()):\n"
+                    "    out = {}\n"
+                    "    for attr_name, data_key in fields_spec:\n"
+                    "        field_name = data_key if data_key is not None else attr_name\n"
+                    "        if field_name not in data:\n"
+                    "            if attr_name in partial:\n"
+                    "                continue\n"
+                    "            raise KeyError(field_name)\n"
+                    "        prefix = field_name + '.'\n"
+                    "        sub_partial = [f[len(prefix):] for f in partial if f.startswith(prefix)]\n"
+                    "        out[attr_name] = (data[field_name], sub_partial)\n"
+                    "    return out\n"
+                ),
+                "tests/test_loader.py": (
+                    "from pkg.loader import load_nested\n\n"
+                    "def test_nested_partial_data_key_and_plain():\n"
+                    "    res = load_nested([('address', 'homeAddress')], {'homeAddress': {'city': 'NYC'}}, partial=('address.zip',))\n"
+                    "    assert res['address'][1] == ['zip']\n"
+                    "    res2 = load_nested([('profile', None)], {'profile': {'a': 1}}, partial=('profile.bio',))\n"
+                    "    assert res2['profile'][1] == ['bio']\n"
+                ),
+            },
+        )
+        r2 = ENGINE.solve_repository(root, ["tests/test_loader.py"], python_exe=sys.executable)
+        assert r2["verified"] is True, r2
+        assert r2["winner"]["tier"] == "TIER3_PREFIX_SIBLING_VAR_SWAP", r2["winner"]
+        assert r2["model_calls"] == 0 and r2["parameters_stored"] == 0
+
+    # 3. Law 12p-A (hoist) & 12p-B (strip conflicting kwarg)
+    with tempfile.TemporaryDirectory(prefix="iter68_12p_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/flds.py": (
+                    "MISSING = object()\n\n"
+                    "class BaseField:\n"
+                    "    def __init__(self, *, load_default=MISSING, allow_none=None, required=False):\n"
+                    "        self.allow_none = (load_default is None) if allow_none is None else allow_none\n"
+                    "        if required is True and load_default is not MISSING:\n"
+                    "            raise ValueError(\"'load_default' must not be set for required fields.\")\n"
+                    "        self.load_default = load_default\n"
+                    "        self.required = required\n\n"
+                    "class ConstFieldHoist(BaseField):\n"
+                    "    def __init__(self, constant, **kwargs):\n"
+                    "        super().__init__(**kwargs)\n"
+                    "        self.constant = constant\n"
+                    "        self.load_default = constant\n\n"
+                    "class ConstFieldReq(BaseField):\n"
+                    "    def __init__(self, constant, **kwargs):\n"
+                    "        kwargs['load_default'] = constant\n"
+                    "        super().__init__(**kwargs)\n"
+                    "        self.constant = constant\n"
+                ),
+                "tests/test_flds_hoist.py": (
+                    "from pkg.flds import ConstFieldHoist\n\n"
+                    "def test_const_none_allows_none():\n"
+                    "    assert ConstFieldHoist(None).allow_none is True\n"
+                    "    assert ConstFieldHoist(7).allow_none is False\n"
+                ),
+                "tests/test_flds_req.py": (
+                    "from pkg.flds import ConstFieldReq\n\n"
+                    "def test_const_with_required():\n"
+                    "    f = ConstFieldReq(42, required=True)\n"
+                    "    assert f.load_default == 42 and f.required is False\n"
+                    "    f2 = ConstFieldReq(None)\n"
+                    "    assert f2.allow_none is True\n"
+                ),
+            },
+        )
+        r3a = ENGINE.solve_repository(root, ["tests/test_flds_hoist.py"], python_exe=sys.executable)
+        assert r3a["verified"] is True, r3a
+        assert r3a["winner"]["tier"] == "TIER3_SUPER_INIT_KWARG_LIFECYCLE", r3a["winner"]
+        r3b = ENGINE.solve_repository(root, ["tests/test_flds_req.py"], python_exe=sys.executable)
+        assert r3b["verified"] is True, r3b
+        assert r3b["winner"]["tier"] == "TIER3_SUPER_INIT_KWARG_LIFECYCLE", r3b["winner"]
+        assert r3a["model_calls"] == 0 and r3b["model_calls"] == 0
+
+
+
 
 
 

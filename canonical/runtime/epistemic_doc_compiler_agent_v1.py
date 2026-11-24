@@ -336,9 +336,90 @@ def compile_doc_to_http_contracts(
     *,
     source: str = "doc",
 ) -> list[HTTPContract]:
-    """Deterministically compile Markdown, HTML, plain-text API guides, and `curl`
-    examples into typed `HTTPContract` records (no OpenAPI JSON and no LLM needed).
+    """Deterministically compile OpenAPI/Swagger JSON, Markdown, HTML, plain-text API guides,
+    and `curl` examples into typed `HTTPContract` records (zero LLM, zero weights).
     """
+    raw_s = (raw_doc or "").strip()
+    if raw_s.startswith("{") and '"paths"' in raw_s:
+        try:
+            spec = json.loads(raw_s)
+            if isinstance(spec, dict) and isinstance(spec.get("paths"), dict):
+                sec_hdr = ""
+                sec_pfx = ""
+                schemes = (
+                    (spec.get("components") or {}).get("securitySchemes")
+                    or spec.get("securityDefinitions")
+                    or {}
+                )
+                if isinstance(schemes, dict):
+                    for sc in schemes.values():
+                        if not isinstance(sc, dict):
+                            continue
+                        st = str(sc.get("type") or "").lower()
+                        if st == "http" and str(sc.get("scheme") or "").lower() == "bearer":
+                            sec_hdr, sec_pfx = "Authorization", "Bearer"
+                            break
+                        if st == "apikey" and str(sc.get("in") or "").lower() == "header" and sc.get("name"):
+                            sec_hdr, sec_pfx = str(sc["name"]), ""
+                            break
+                global_sec = bool(spec.get("security"))
+                oa_contracts: list[HTTPContract] = []
+                for path_t, ops in spec["paths"].items():
+                    if not isinstance(ops, dict):
+                        continue
+                    for m_name, op in ops.items():
+                        m_up = str(m_name).upper()
+                        if m_up not in ("GET", "POST", "PUT", "PATCH", "DELETE") or not isinstance(op, dict):
+                            continue
+                        qparams: list[str] = []
+                        ep_hdr = ""
+                        ep_pfx = ""
+                        for prm in op.get("parameters") or []:
+                            if not isinstance(prm, dict):
+                                continue
+                            pin = str(prm.get("in") or "").lower()
+                            pname = str(prm.get("name") or "")
+                            if pin == "query" and pname:
+                                qparams.append(pname)
+                            elif pin == "header" and pname and not ep_hdr:
+                                ep_hdr = pname
+                        bfields: list[str] = []
+                        rb = op.get("requestBody") or {}
+                        if isinstance(rb, dict):
+                            content = rb.get("content") or {}
+                            if isinstance(content, dict):
+                                for media in content.values():
+                                    if isinstance(media, dict):
+                                        schema = media.get("schema") or {}
+                                        props = schema.get("properties") if isinstance(schema, dict) else None
+                                        if isinstance(props, dict):
+                                            for k in props.keys():
+                                                if str(k) not in bfields:
+                                                    bfields.append(str(k))
+                        op_sec = op.get("security")
+                        needs_sec = (bool(op_sec) if op_sec is not None else global_sec)
+                        if not ep_hdr and needs_sec and sec_hdr:
+                            ep_hdr, ep_pfx = sec_hdr, sec_pfx
+                        desc = " ".join(
+                            str(op.get(k) or "").strip() for k in ("summary", "description", "operationId") if op.get(k)
+                        ).strip()
+                        oa_contracts.append(
+                            HTTPContract(
+                                method=m_up,
+                                path_template=str(path_t),
+                                description=desc,
+                                auth_header=ep_hdr,
+                                auth_prefix=ep_pfx,
+                                query_params=qparams,
+                                body_fields=bfields,
+                                source=source,
+                            )
+                        )
+                if oa_contracts:
+                    return oa_contracts
+        except Exception:
+            pass
+
     text = _strip_html(raw_doc or "")
     lines = text.splitlines()
 
@@ -1064,9 +1145,11 @@ def scan_environment_boundary(
                         if sub.suffix.lower() not in (".json", ".txt", ".md", ".csv", ".gz", ".tar", ".zip"):
                             local_bins.append(str(sub))
 
-    # Extract concrete file references & key=value bindings from goal
+    # Extract concrete file references & key=value bindings from goal (strip URLs first so
+    # IP hosts like `127.0.0.1` or domains like `api.example.com` are NEVER mistaken for filenames!)
+    goal_no_urls = re.sub(r"https?://\S+", " ", goal or "")
     goal_files: list[str] = []
-    for m in _FILE_TOK_RE.finditer(goal or ""):
+    for m in _FILE_TOK_RE.finditer(goal_no_urls):
         cand = m.group(1)
         if not cand.startswith("http") and cand not in goal_files:
             goal_files.append(cand)
@@ -1076,7 +1159,7 @@ def scan_environment_boundary(
     is_output_dir = False
     _out_preps = frozenset({"to", "into", "as", "from", "on", "with", "at", "in", "by", "of", "the", "a", "an", "file", "output"})
     # Fallback: if goal mentions "output to X" / "into X" where X already exists or is a dir name
-    for m_out in re.finditer(r"(?i)\b(?:to|into|as|output|write|save)\s+(?:file\s+|dir(?:ectory)?\s+|folder\s+)?([A-Za-z0-9_./-]+)", goal or ""):
+    for m_out in re.finditer(r"(?i)\b(?:to|into|as|output|write|save)\s+(?:file\s+|dir(?:ectory)?\s+|folder\s+)?([A-Za-z0-9_./-]+)", goal_no_urls):
         cand = m_out.group(1).rstrip(".,;)")
         if cand.lower() in _out_preps:
             continue
@@ -1745,12 +1828,78 @@ def _resolve_http_path(template: str, kv: Mapping[str, str]) -> str:
     return re.sub(r"\{([^}]+)\}|<([^>]+)>|:([A-Za-z_][A-Za-z0-9_]*)", _sub, template)
 
 
+def _acquire_auth_token_from_contracts(
+    origin: str,
+    contracts: Sequence[HTTPContract],
+    kv: Mapping[str, str],
+    *,
+    timeout_s: float = 6.0,
+) -> tuple[str, dict[str, Any] | None]:
+    """Discover and execute a doc-compiled login/token endpoint when a protected
+    endpoint requires an auth token not yet supplied in `kv`.
+    """
+    token_eps = [
+        c for c in contracts
+        if any(tok in c.path_template.lower() for tok in ("/token", "/login", "/auth", "/session"))
+        and c.method in ("POST", "GET")
+    ]
+    if not token_eps:
+        return "", None
+
+    # Map credential aliases (e.g., `user` -> `username`, `pass` -> `password`)
+    alias_groups = (
+        ("username", "user", "login", "email", "account"),
+        ("password", "pass", "pwd", "secret", "client_secret"),
+        ("client_id", "app_id", "key_id"),
+    )
+
+    def _lookup_cred(field: str) -> str | None:
+        fl = field.lower()
+        if field in kv:
+            return kv[field]
+        for k, v in kv.items():
+            if k.lower() == fl:
+                return v
+        for grp in alias_groups:
+            if fl in grp:
+                for k, v in kv.items():
+                    if k.lower() in grp:
+                        return v
+        return None
+
+    for tep in token_eps[:3]:
+        t_body: dict[str, Any] | None = None
+        if tep.method == "POST":
+            t_body = {}
+            for fld in tep.body_fields:
+                val = _lookup_cred(fld)
+                if val is not None:
+                    t_body[fld] = val
+            if not t_body:
+                for k, v in kv.items():
+                    if any(k.lower() in g for g in alias_groups):
+                        t_body[k] = v
+        t_path = _resolve_http_path(tep.path_template, kv)
+        st, _, rbody = _http_call(tep.method, origin + t_path, json_body=t_body, timeout_s=min(timeout_s, 6.0))
+        if 200 <= st < 300:
+            try:
+                parsed = json.loads(rbody)
+            except Exception:
+                parsed = None
+            if isinstance(parsed, dict):
+                for tk in ("access_token", "token", "api_key", "jwt", "session_token", "bearer", "auth_token"):
+                    if parsed.get(tk):
+                        return str(parsed[tk]), {"method": tep.method, "path": t_path, "status": st, "auth_handshake": True}
+    return "", None
+
+
 def _solve_doc_compiled_http(
     base_url: str,
     goal: str,
     boundary: Mapping[str, Any],
     docs: Sequence[Mapping[str, str]],
     *,
+    workspace: pathlib.Path | None = None,
     memory: EpistemicMemoryStore | None,
     verifier: Callable[[dict[str, Any]], tuple[bool, str]] | None,
     timeout_s: float,
@@ -1774,10 +1923,26 @@ def _solve_doc_compiled_http(
     goal_concepts = set(boundary.get("goal_concepts") or ())
     recalled = memory.recall("http_role_law", goal_concepts) if memory else []
 
-    # Identify auth token value from kv_bindings (if supplied in goal)
+    # Load any existing workspace JSON file referenced in the goal as a candidate POST/PUT/PATCH body
+    file_json_payload: Any = None
+    if workspace is not None:
+        for inf in boundary.get("input_files") or []:
+            ip = workspace / inf
+            if ip.is_file() and ip.suffix.lower() in (".json", ".tmp"):
+                try:
+                    file_json_payload = json.loads(ip.read_text(encoding="utf-8", errors="replace"))
+                    break
+                except Exception:
+                    pass
+
+    # Identify explicit auth token value from kv_bindings (excluding login passwords/secrets!)
     auth_token_val = ""
     for k, v in kv.items():
-        if any(w in k.lower() for w in ("token", "key", "secret", "auth")):
+        kl = k.lower()
+        if kl in ("token", "api_key", "apikey", "auth_token", "access_token", "bearer", "x_api_key"):
+            auth_token_val = v
+            break
+        if any(w in kl for w in ("token", "key", "auth")) and kl not in ("password", "pass", "pwd", "user", "username"):
             auth_token_val = v
             break
 
@@ -1785,13 +1950,17 @@ def _solve_doc_compiled_http(
     def _rank_ep(c: HTTPContract) -> float:
         s = _semantic_overlap(f"{c.method} {c.path_template} {c.description} {' '.join(c.body_fields)} {' '.join(c.query_params)}", goal)
         g_lo = goal.lower()
-        if c.method == "POST" and any(w in g_lo for w in ("create", "add", "submit", "register", "new", "open", "post")):
+        # Deprioritize pure login/token endpoints unless goal explicitly asks only to login/issue token
+        is_auth_ep = any(tok in c.path_template.lower() for tok in ("/token", "/login", "/auth"))
+        if is_auth_ep and not re.search(r"(?i)^\s*(?:login|authenticate|get\s+token)\s*$", g_lo):
+            s -= 2.5
+        if c.method == "POST" and any(w in g_lo for w in ("create", "add", "submit", "register", "new", "open", "post", "upload", "send", "ingest")):
             s += 3.0
         elif c.method in ("PUT", "PATCH") and any(w in g_lo for w in ("update", "edit", "modify", "set", "patch")):
             s += 3.0
         elif c.method == "DELETE" and any(w in g_lo for w in ("delete", "remove", "cancel", "drop")):
             s += 3.0
-        elif c.method == "GET" and any(w in g_lo for w in ("list", "get", "fetch", "find", "query", "read", "retrieve")):
+        elif c.method == "GET" and any(w in g_lo for w in ("list", "get", "fetch", "find", "query", "read", "retrieve", "download", "pull")):
             s += 2.5
         # Penalize unresolved path params if we don't have a binding yet
         unresolved_p = re.findall(r"\{([^}]+)\}|<([^>]+)>|:([A-Za-z_][A-Za-z0-9_]*)", _resolve_http_path(c.path_template, kv))
@@ -1800,29 +1969,46 @@ def _solve_doc_compiled_http(
 
     ranked = sorted(contracts, key=_rank_ep, reverse=True)
     trace: list[dict[str, Any]] = []
-    origin = base_url.rstrip("/")
+    parsed_base = urllib.parse.urlparse(base_url)
+    origin = f"{parsed_base.scheme}://{parsed_base.netloc}" if parsed_base.scheme and parsed_base.netloc else base_url.rstrip("/")
 
-    # Execute top candidate with active refusal recovery (missing auth header / missing field / 401)
+    # Execute top candidate with active refusal recovery (auth handshake / missing header / missing field / 401)
     for ep in ranked[:4]:
+        if ep.auth_header and not auth_token_val:
+            tok_acq, tok_trace = _acquire_auth_token_from_contracts(origin, contracts, kv, timeout_s=min(timeout_s, 6.0))
+            if tok_acq:
+                auth_token_val = tok_acq
+                if tok_trace:
+                    trace.append(tok_trace)
+
         headers: dict[str, str] = {}
         if ep.auth_header and auth_token_val:
             headers[ep.auth_header] = f"{ep.auth_prefix} {auth_token_val}".strip() if ep.auth_prefix else auth_token_val
 
-        body: dict[str, Any] | None = None
+        body: Any = None
         if ep.method in ("POST", "PUT", "PATCH"):
-            body = {}
-            for fld in ep.body_fields:
-                if fld in kv:
-                    body[fld] = kv[fld]
-                else:
+            if isinstance(file_json_payload, dict):
+                body = dict(file_json_payload)
+            elif isinstance(file_json_payload, list):
+                body = {"items": file_json_payload} if "items" in ep.body_fields else file_json_payload
+            else:
+                body = {}
+            if isinstance(body, dict):
+                _skip_kv = ("token", "key", "api_key", "apikey", "auth", "secret", "user", "username", "pass", "password", "pwd")
+                for fld in ep.body_fields:
+                    if fld in body:
+                        continue
+                    if fld in kv:
+                        body[fld] = kv[fld]
+                    else:
+                        for k, v in kv.items():
+                            if k.lower() not in _skip_kv and _semantic_overlap(k, fld) >= 1.5:
+                                body[fld] = v
+                                break
+                if not file_json_payload:
                     for k, v in kv.items():
-                        if k.lower() not in ("token", "key", "api_key", "auth", "secret") and _semantic_overlap(k, fld) >= 1.5:
-                            body[fld] = v
-                            break
-            # Include any remaining non-auth kv pairs when doc didn't enumerate all fields
-            for k, v in kv.items():
-                if k.lower() not in ("token", "key", "api_key", "auth", "secret") and k not in body and k not in ep.query_params:
-                    body[k] = v
+                        if k.lower() not in _skip_kv and k not in body and k not in ep.query_params:
+                            body[k] = v
 
         qparams: dict[str, str] = {}
         for qp in ep.query_params:
@@ -1843,6 +2029,13 @@ def _solve_doc_compiled_http(
                     parsed_json = json.loads(resp_body)
                 except Exception:
                     pass
+                # Persist HTTP response to target output file when requested in goal (cross-modal handoff!)
+                out_path_written: str | None = None
+                if workspace is not None and boundary.get("output_files"):
+                    out_p = workspace / boundary["output_files"][0]
+                    out_p.parent.mkdir(parents=True, exist_ok=True)
+                    out_p.write_text(resp_body, encoding="utf-8")
+                    out_path_written = str(out_p)
                 # Independent readback verification when a GET sibling endpoint exists
                 readback_ok = True
                 readback_body = None
@@ -1863,13 +2056,18 @@ def _solve_doc_compiled_http(
                     "response_body": resp_body,
                     "response_json": parsed_json,
                     "readback_body": readback_body,
+                    "output_path": out_path_written,
                     "trace": trace,
                 }
                 ok_v, note_v = verifier(state) if verifier is not None else (readback_ok, f"http_{status}_verified")
                 if ok_v:
                     law = None
                     if memory is not None:
-                        role_pat = [f"HTTP_{ep.method}", "?AUTH_HDR" if headers else "?NO_AUTH", "?BODY_FIELDS" if body else "?QUERY"]
+                        role_pat = [
+                            f"HTTP_{ep.method}",
+                            "?AUTH_HANDSHAKE" if any(t.get("auth_handshake") for t in trace) else ("?AUTH_HDR" if headers else "?NO_AUTH"),
+                            "?FILE_JSON_BODY" if file_json_payload is not None else ("?BODY_FIELDS" if body else "?QUERY"),
+                        ]
                         law = memory.generalize_and_store(
                             kind="http_role_law",
                             goal_concepts=goal_concepts,
@@ -1886,6 +2084,7 @@ def _solve_doc_compiled_http(
                         "executed_trace": trace,
                         "response_json": parsed_json,
                         "response_body": resp_body,
+                        "output_path": out_path_written,
                         "verification": note_v,
                         "generalized_law": law,
                         "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
@@ -1894,19 +2093,26 @@ def _solve_doc_compiled_http(
                     }
                 break
 
-            # Active refusal recovery (doc-drift immunity!)
+            # Active refusal recovery (doc-drift immunity + live auth token handshake!)
             refusal = parse_refusal_surface(resp_body, status_code=status)
             changed = False
+            if (refusal["needs_auth"] or refusal["missing_headers"] or status in (401, 403)) and not auth_token_val:
+                tok_acq, tok_trace = _acquire_auth_token_from_contracts(origin, contracts, kv, timeout_s=min(timeout_s, 6.0))
+                if tok_acq:
+                    auth_token_val = tok_acq
+                    if tok_trace:
+                        trace.append(tok_trace)
+                    changed = True
             for mh in refusal["missing_headers"]:
                 if auth_token_val and mh not in headers:
-                    headers[mh] = auth_token_val
+                    headers[mh] = f"Bearer {auth_token_val}" if mh.lower() == "authorization" else auth_token_val
                     changed = True
-            if refusal["needs_auth"] and auth_token_val and not headers:
-                # Fallback to standard or doc-mentioned auth header
+            if (refusal["needs_auth"] or status in (401, 403)) and auth_token_val and not headers:
                 hdr_name = ep.auth_header or "Authorization"
-                headers[hdr_name] = f"Bearer {auth_token_val}" if hdr_name.lower() == "authorization" else auth_token_val
+                pfx = ep.auth_prefix or ("Bearer" if hdr_name.lower() == "authorization" else "")
+                headers[hdr_name] = f"{pfx} {auth_token_val}".strip() if pfx else auth_token_val
                 changed = True
-            if refusal["missing_fields"] and body is not None:
+            if refusal["missing_fields"] and isinstance(body, dict):
                 for mf in refusal["missing_fields"]:
                     if mf not in body:
                         for k, v in kv.items():
@@ -1967,14 +2173,20 @@ def solve_with_instant_knowledge(
         )
         # Also probe common live doc routes on the server itself if no local/web docs supplied
         if not docs:
-            origin = boundary["base_url"].rstrip("/")
             parsed_u = urllib.parse.urlparse(boundary["base_url"])
-            # Direct GET endpoint fetch when full concrete path is given (e.g. `Fetch http://host/api/items and save to raw.json`)
-            if parsed_u.path and parsed_u.path != "/" and re.search(r"(?i)\b(fetch|get|download|read|retrieve|pull)\b", goal or ""):
+            origin = f"{parsed_u.scheme}://{parsed_u.netloc}" if parsed_u.scheme and parsed_u.netloc else boundary["base_url"].rstrip("/")
+            # Direct GET endpoint fetch when full concrete non-doc path is given (e.g. `Fetch http://host/api/items and save to raw.json`)
+            _doc_paths = ("/openapi.json", "/swagger.json", "/docs", "/help", "/api-docs", "/readme.md")
+            if (
+                parsed_u.path
+                and parsed_u.path != "/"
+                and parsed_u.path.lower() not in _doc_paths
+                and re.search(r"(?i)\b(fetch|get|download|read|retrieve|pull)\b", goal or "")
+            ):
                 hdrs: dict[str, str] = {}
                 kv_b = boundary.get("kv_bindings") or {}
                 for k, v in kv_b.items():
-                    if any(w in k.lower() for w in ("token", "key", "auth", "secret")):
+                    if any(w in k.lower() for w in ("token", "key", "auth")) and k.lower() not in ("password", "pass", "pwd", "user", "username"):
                         hdrs["Authorization"] = f"Bearer {v}"
                 st, _, body = _http_call("GET", boundary["base_url"], headers=hdrs, timeout_s=min(timeout_s, 8.0))
                 if 200 <= st < 300 and body:
@@ -2011,14 +2223,17 @@ def solve_with_instant_knowledge(
                             "model_calls": 0,
                             "parameters_stored": 0,
                         }
-            for dpath in ("/docs", "/help", "/api-docs", "/README.md", "/"):
+            probe_paths = ["/openapi.json", "/docs", "/help", "/api-docs", "/README.md", "/"]
+            if parsed_u.path and parsed_u.path not in ("/", "") and parsed_u.path not in probe_paths:
+                probe_paths.insert(0, parsed_u.path)
+            for dpath in probe_paths:
                 st, _, body = _http_call("GET", origin + dpath, timeout_s=3.0)
                 if 200 <= st < 300 and body.strip():
                     docs.append({"source": f"live:{dpath}", "content": body})
-                    if re.search(r"\b(GET|POST|PUT|PATCH|DELETE)\s+/", body):
+                    if (body.lstrip().startswith("{") and '"paths"' in body) or re.search(r"\b(GET|POST|PUT|PATCH|DELETE)\s+/", body):
                         break
         res_http = _solve_doc_compiled_http(
-            boundary["base_url"], goal, boundary, docs, memory=memory, verifier=verifier, timeout_s=timeout_s
+            boundary["base_url"], goal, boundary, docs, workspace=ws, memory=memory, verifier=verifier, timeout_s=timeout_s
         )
         if res_http.get("status") == "VERIFIED" and boundary.get("output_files") and res_http.get("response_body"):
             out_p = ws / boundary["output_files"][0]
@@ -2348,11 +2563,12 @@ def solve_multi_step_with_instant_knowledge(
             is_last = idx == len(clauses) - 1
             clause = raw_clause
 
-            # Check if this clause already explicitly names its own input & output files
-            c_files = [m.group(1) for m in _FILE_TOK_RE.finditer(clause) if not m.group(1).startswith("http")]
+            # Check if this clause already explicitly names its own input & output files (strip URLs!)
+            clause_no_urls = re.sub(r"https?://\S+", " ", clause)
+            c_files = [m.group(1) for m in _FILE_TOK_RE.finditer(clause_no_urls) if not m.group(1).startswith("http")]
             has_existing_in = any((ws / f).exists() for f in c_files)
             has_explicit_out = any(not (ws / f).exists() for f in c_files) or bool(
-                re.search(r"(?i)\b(?:to|into|as|save|write)\s+(?:file\s+|dir(?:ectory)?\s+)?[A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,8}\b", clause)
+                re.search(r"(?i)\b(?:to|into|as|save|write)\s+(?:file\s+|dir(?:ectory)?\s+)?[A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,8}\b", clause_no_urls)
             )
 
             # Thread previous step's handoff file as this step's input if not explicitly named
@@ -2362,7 +2578,8 @@ def solve_multi_step_with_instant_knowledge(
             # Give intermediate step an isolated scratch handoff file if it has no explicit output file
             step_handoff: str | None = None
             if not is_last and not has_explicit_out:
-                ext = ".json" if ("http://" in clause or "https://" in clause or "json" in clause.lower()) else ".tmp"
+                _rc_lo = raw_clause.lower()
+                ext = ".json" if (("http://" in raw_clause or "https://" in raw_clause or "json" in _rc_lo) and "raw" not in _rc_lo) else ".tmp"
                 step_handoff = f"_epistemic_step_{idx}{ext}"
                 scratch_files.append(ws / step_handoff)
                 clause = f"{clause} and save to {step_handoff}"
@@ -2406,6 +2623,24 @@ def solve_multi_step_with_instant_knowledge(
             except Exception:
                 pass
 
+    workflow_law = None
+    if memory is not None and step_results:
+        wf_roles: list[str] = []
+        for sr in step_results:
+            md = str(sr.get("mode") or "")
+            if "HTTP" in md:
+                wf_roles.append("STEP_HTTP_SERVICE")
+            else:
+                wf_roles.append("STEP_CLI_TOOL")
+        workflow_law = memory.generalize_and_store(
+            kind="workflow_role_law",
+            goal_concepts=_concept_set(goal),
+            role_pattern=wf_roles,
+            postcondition_kind="multi_step_pipeline_verified",
+            env_fingerprint="workflow:" + "->".join(wf_roles),
+            meta_roles={"steps": len(wf_roles), "cross_modal": len(set(wf_roles)) > 1},
+        )
+
     return {
         "schema": SCHEMA,
         "authority": AUTHORITY,
@@ -2413,6 +2648,7 @@ def solve_multi_step_with_instant_knowledge(
         "mode": "MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE",
         "steps_completed": len(step_results),
         "steps": step_results,
+        "generalized_workflow_law": workflow_law,
         "gaps_queried": all_gaps,
         "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
         "model_calls": 0,
