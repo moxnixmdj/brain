@@ -130,6 +130,11 @@
   },
   "prose_corpus_present": true,
   "prose_yield": 0.015166,
+  "qualifiers": {
+    "CONTRADICTED": 0,
+    "NOT_WITNESSED": 0,
+    "WITNESSED": 1
+  },
   "reasons": {
     "CLAIM_IS_FALSE": 107,
     "CONTENT_DEPENDENT": 1,
@@ -151,7 +156,7 @@
       "relations": [
         "rel-5372802255444f56"
       ],
-      "seconds": 0.045,
+      "seconds": 0.05,
       "sentences": 4,
       "unique_claims": 2
     },
@@ -165,7 +170,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.079,
+      "seconds": 0.088,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -179,7 +184,7 @@
       "relations": [
         "rel-d0de5794090ceaa6"
       ],
-      "seconds": 0.022,
+      "seconds": 0.018,
       "sentences": 18,
       "unique_claims": 1
     },
@@ -193,7 +198,7 @@
       "relations": [
         "rel-7541f71ab6a262c6"
       ],
-      "seconds": 0.014,
+      "seconds": 0.02,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -205,7 +210,7 @@
       "document": "help:sed",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -217,7 +222,7 @@
       "document": "help:jq",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -229,7 +234,7 @@
       "document": "help:openssl",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 1,
       "unique_claims": 0
     },
@@ -241,7 +246,7 @@
       "document": "help:git",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -253,7 +258,7 @@
       "document": "help:find",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.005,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -282,7 +287,7 @@
         "rel-556ab55b451a0572",
         "rel-1efb1338bbc19f28"
       ],
-      "seconds": 0.036,
+      "seconds": 0.03,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -294,7 +299,7 @@
       "document": "help:cut",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.007,
       "sentences": 12,
       "unique_claims": 1
     },
@@ -330,7 +335,7 @@
       "document": "help:join",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.006,
       "sentences": 20,
       "unique_claims": 0
     },
@@ -396,7 +401,7 @@
       "relations": [
         "rel-70eb848c46455577"
       ],
-      "seconds": 0.015,
+      "seconds": 0.016,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -408,7 +413,7 @@
       "document": "help:patch",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -474,7 +479,7 @@
       "relations": [
         "rel-2f44165f93645d00"
       ],
-      "seconds": 0.016,
+      "seconds": 0.017,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -486,7 +491,7 @@
       "document": "help:seq",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.007,
       "sentences": 18,
       "unique_claims": 2
     },
@@ -510,7 +515,7 @@
       "document": "help:timeout",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.006,
       "sentences": 10,
       "unique_claims": 0
     },
@@ -522,7 +527,7 @@
       "document": "help:pr",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -536,7 +541,7 @@
       "relations": [
         "rel-ea8f7f6e56321eb6"
       ],
-      "seconds": 0.027,
+      "seconds": 0.024,
       "sentences": 7,
       "unique_claims": 2
     },
@@ -550,7 +555,7 @@
       "relations": [
         "rel-0d5c2219c1db403c"
       ],
-      "seconds": 0.026,
+      "seconds": 0.03,
       "sentences": 27,
       "unique_claims": 1
     },
@@ -562,7 +567,7 @@
       "document": "help:zip",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.013,
       "sentences": 3,
       "unique_claims": 1
     },
@@ -574,7 +579,7 @@
       "document": "help:unzip",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.003,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -586,7 +591,7 @@
       "document": "help:xz",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -600,7 +605,7 @@
       "relations": [
         "rel-08b48782249e5353"
       ],
-      "seconds": 0.046,
+      "seconds": 0.039,
       "sentences": 6,
       "unique_claims": 3
     },
@@ -612,7 +617,7 @@
       "document": "help:ar",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.006,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -624,7 +629,7 @@
       "document": "stdlib:statistics",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.05,
+      "seconds": 0.053,
       "sentences": 317,
       "unique_claims": 0
     },
@@ -636,7 +641,7 @@
       "document": "stdlib:textwrap",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.014,
       "sentences": 83,
       "unique_claims": 0
     },
@@ -711,7 +716,7 @@
         "rel-904a3ca4e185bc80",
         "rel-c3a3d153ccf52663"
       ],
-      "seconds": 0.032,
+      "seconds": 0.033,
       "sentences": 9,
       "unique_claims": 3
     },
@@ -725,7 +730,7 @@
       "relations": [
         "rel-1d20defa038e494f"
       ],
-      "seconds": 0.016,
+      "seconds": 0.015,
       "sentences": 10,
       "unique_claims": 2
     },
@@ -739,7 +744,7 @@
       "relations": [
         "rel-211187b848dfa5fb"
       ],
-      "seconds": 0.026,
+      "seconds": 0.025,
       "sentences": 34,
       "unique_claims": 2
     },
@@ -755,7 +760,7 @@
         "rel-d07448fcb1fe8f26",
         "rel-0237e59eed50840b"
       ],
-      "seconds": 0.135,
+      "seconds": 0.129,
       "sentences": 58,
       "unique_claims": 7
     },
@@ -779,7 +784,7 @@
       "document": "texi:base64",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.018,
+      "seconds": 0.011,
       "sentences": 10,
       "unique_claims": 1
     },
@@ -817,7 +822,7 @@
       "relations": [
         "rel-da1c3da0650b0e09"
       ],
-      "seconds": 0.018,
+      "seconds": 0.017,
       "sentences": 21,
       "unique_claims": 1
     },
@@ -831,7 +836,7 @@
       "relations": [
         "rel-fd9b06db43e5556a"
       ],
-      "seconds": 0.023,
+      "seconds": 0.02,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -845,7 +850,7 @@
       "relations": [
         "rel-2bcdbbd0d6f4e9b0"
       ],
-      "seconds": 0.017,
+      "seconds": 0.016,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -859,7 +864,7 @@
       "relations": [
         "rel-f21f261e4f35a46e"
       ],
-      "seconds": 0.023,
+      "seconds": 0.022,
       "sentences": 29,
       "unique_claims": 2
     },
@@ -871,7 +876,7 @@
       "document": "texi:split",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.025,
       "sentences": 15,
       "unique_claims": 3
     },
@@ -883,7 +888,7 @@
       "document": "texi:csplit",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.017,
       "sentences": 19,
       "unique_claims": 2
     },
@@ -899,7 +904,7 @@
         "rel-556ab55b451a0572",
         "rel-1efb1338bbc19f28"
       ],
-      "seconds": 0.129,
+      "seconds": 0.139,
       "sentences": 23,
       "unique_claims": 8
     },
@@ -913,7 +918,7 @@
       "relations": [
         "rel-635d6cc2f2d7c25c"
       ],
-      "seconds": 0.032,
+      "seconds": 0.027,
       "sentences": 11,
       "unique_claims": 2
     },
@@ -961,7 +966,7 @@
       "document": "texi:sha1sum",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.001,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -979,7 +984,7 @@
         "rel-6507cb49261998dc",
         "rel-3c76d13ec8c9907a"
       ],
-      "seconds": 0.578,
+      "seconds": 0.511,
       "sentences": 120,
       "unique_claims": 20
     },
@@ -1006,7 +1011,7 @@
         "rel-801dc761fe387932",
         "rel-2482be6ac74d20a6"
       ],
-      "seconds": 0.082,
+      "seconds": 0.08,
       "sentences": 23,
       "unique_claims": 8
     },
@@ -1018,7 +1023,7 @@
       "document": "texi:comm",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.013,
       "sentences": 30,
       "unique_claims": 3
     },
@@ -1030,7 +1035,7 @@
       "document": "texi:ptx",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.009,
       "sentences": 30,
       "unique_claims": 1
     },
@@ -1044,7 +1049,7 @@
       "relations": [
         "rel-290fbd16cd898c04"
       ],
-      "seconds": 0.022,
+      "seconds": 0.028,
       "sentences": 29,
       "unique_claims": 1
     },
@@ -1056,7 +1061,7 @@
       "document": "texi:cut",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.011,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -1070,7 +1075,7 @@
       "relations": [
         "rel-700143d88675d15b"
       ],
-      "seconds": 0.013,
+      "seconds": 0.02,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -1094,7 +1099,7 @@
       "document": "texi:tr",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.013,
       "sentences": 15,
       "unique_claims": 2
     },
@@ -1108,7 +1113,7 @@
       "relations": [
         "rel-e3130b01879d392e"
       ],
-      "seconds": 0.015,
+      "seconds": 0.018,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -1122,7 +1127,7 @@
       "relations": [
         "rel-b20249eab4a43f9d"
       ],
-      "seconds": 0.014,
+      "seconds": 0.016,
       "sentences": 8,
       "unique_claims": 1
     },
@@ -1148,7 +1153,7 @@
       "document": "texi:dir",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.001,
+      "seconds": 0.002,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -1212,7 +1217,7 @@
       "relations": [
         "rel-c573f8edae9fab60"
       ],
-      "seconds": 0.077,
+      "seconds": 0.05,
       "sentences": 19,
       "unique_claims": 5
     },
@@ -1228,7 +1233,7 @@
         "rel-b8127a0b570a9d24",
         "rel-dce070e241e22ec8"
       ],
-      "seconds": 0.089,
+      "seconds": 0.082,
       "sentences": 27,
       "unique_claims": 6
     },
@@ -1240,7 +1245,7 @@
       "document": "texi:rm",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.013,
       "sentences": 23,
       "unique_claims": 1
     },
@@ -1252,7 +1257,7 @@
       "document": "texi:shred",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.023,
+      "seconds": 0.026,
       "sentences": 79,
       "unique_claims": 1
     },
@@ -1264,7 +1269,7 @@
       "document": "texi:link",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -1276,7 +1281,7 @@
       "document": "texi:ln",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.013,
       "sentences": 48,
       "unique_claims": 4
     },
@@ -1324,7 +1329,7 @@
       "document": "texi:readlink",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -1336,7 +1341,7 @@
       "document": "texi:rmdir",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.011,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -1348,7 +1353,7 @@
       "document": "texi:unlink",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.013,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -1372,7 +1377,7 @@
       "document": "texi:chgrp",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.002,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -1384,7 +1389,7 @@
       "document": "texi:chmod",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.008,
       "sentences": 22,
       "unique_claims": 0
     },
@@ -1396,7 +1401,7 @@
       "document": "texi:touch",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.01,
       "sentences": 28,
       "unique_claims": 0
     },
@@ -1411,7 +1416,7 @@
         "rel-c860ad80f4626afb",
         "rel-a15b5cbaac46cc61"
       ],
-      "seconds": 0.089,
+      "seconds": 0.092,
       "sentences": 58,
       "unique_claims": 6
     },
@@ -1425,7 +1430,7 @@
       "relations": [
         "rel-acf6c74e3e8417b9"
       ],
-      "seconds": 0.026,
+      "seconds": 0.028,
       "sentences": 34,
       "unique_claims": 2
     },
@@ -1439,7 +1444,7 @@
       "relations": [
         "rel-68d1566b0c566040"
       ],
-      "seconds": 0.054,
+      "seconds": 0.056,
       "sentences": 91,
       "unique_claims": 3
     },
@@ -1451,7 +1456,7 @@
       "document": "texi:sync",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.012,
       "sentences": 16,
       "unique_claims": 1
     },
@@ -1491,7 +1496,7 @@
       "relations": [
         "rel-3dabb6585fcffc2e"
       ],
-      "seconds": 0.055,
+      "seconds": 0.06,
       "sentences": 80,
       "unique_claims": 10
     },
@@ -1505,7 +1510,7 @@
       "relations": [
         "rel-6d76aaa09fe1ace9"
       ],
-      "seconds": 0.037,
+      "seconds": 0.039,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -1541,7 +1546,7 @@
       "document": "texi:test",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.017,
       "sentences": 30,
       "unique_claims": 1
     },
@@ -1565,7 +1570,7 @@
       "document": "texi:tee",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.019,
+      "seconds": 0.022,
       "sentences": 45,
       "unique_claims": 2
     },
@@ -1577,7 +1582,7 @@
       "document": "texi:basename",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.012,
       "sentences": 20,
       "unique_claims": 2
     },
@@ -1601,7 +1606,7 @@
       "document": "texi:pathchk",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.014,
       "sentences": 11,
       "unique_claims": 1
     },
@@ -1627,7 +1632,7 @@
       "relations": [
         "rel-4056cfc56b338d7e"
       ],
-      "seconds": 0.015,
+      "seconds": 0.02,
       "sentences": 16,
       "unique_claims": 1
     },
@@ -1639,7 +1644,7 @@
       "document": "texi:pwd",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 5,
       "unique_claims": 1
     },
@@ -1651,7 +1656,7 @@
       "document": "texi:stty",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.014,
       "sentences": 25,
       "unique_claims": 2
     },
@@ -1675,7 +1680,7 @@
       "document": "texi:tty",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.008,
       "sentences": 9,
       "unique_claims": 1
     },
@@ -1687,7 +1692,7 @@
       "document": "texi:id",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.007,
       "sentences": 15,
       "unique_claims": 3
     },
@@ -1699,7 +1704,7 @@
       "document": "texi:logname",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.007,
       "sentences": 6,
       "unique_claims": 2
     },
@@ -1723,7 +1728,7 @@
       "document": "texi:groups",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 7,
       "unique_claims": 1
     },
@@ -1735,7 +1740,7 @@
       "document": "texi:users",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 12,
       "unique_claims": 2
     },
@@ -1747,7 +1752,7 @@
       "document": "texi:who",
       "false_claims": 3,
       "relations": [],
-      "seconds": 0.019,
+      "seconds": 0.02,
       "sentences": 17,
       "unique_claims": 4
     },
@@ -1759,7 +1764,7 @@
       "document": "texi:pinky",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.001,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -1771,7 +1776,7 @@
       "document": "texi:date",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.006,
       "sentences": 17,
       "unique_claims": 1
     },
@@ -1831,7 +1836,7 @@
       "document": "texi:hostid",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.003,
       "sentences": 7,
       "unique_claims": 1
     },
@@ -1843,7 +1848,7 @@
       "document": "texi:uptime",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.007,
       "sentences": 14,
       "unique_claims": 1
     },
@@ -1855,7 +1860,7 @@
       "document": "texi:chcon",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.006,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -1867,7 +1872,7 @@
       "document": "texi:runcon",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.009,
       "sentences": 14,
       "unique_claims": 2
     },
@@ -1879,7 +1884,7 @@
       "document": "texi:Modified",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -1891,7 +1896,7 @@
       "document": "texi:chroot",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.014,
       "sentences": 34,
       "unique_claims": 1
     },
@@ -1903,7 +1908,7 @@
       "document": "texi:env",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.024,
+      "seconds": 0.033,
       "sentences": 102,
       "unique_claims": 7
     },
@@ -1915,7 +1920,7 @@
       "document": "texi:nice",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.011,
       "sentences": 36,
       "unique_claims": 5
     },
@@ -1951,7 +1956,7 @@
       "document": "texi:timeout",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.007,
       "sentences": 18,
       "unique_claims": 1
     },
@@ -1963,7 +1968,7 @@
       "document": "texi:kill",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 26,
       "unique_claims": 1
     },
@@ -1975,7 +1980,7 @@
       "document": "texi:sleep",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.005,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -1987,7 +1992,7 @@
       "document": "texi:factor",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.02,
       "sentences": 26,
       "unique_claims": 3
     },
@@ -1999,7 +2004,7 @@
       "document": "texi:numfmt",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.017,
       "sentences": 43,
       "unique_claims": 6
     },
@@ -2011,7 +2016,7 @@
       "document": "texi:seq",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.018,
       "sentences": 34,
       "unique_claims": 10
     },
@@ -2023,7 +2028,7 @@
       "document": "gzip:Top",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.004,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -2037,7 +2042,7 @@
       "relations": [
         "rel-5372802255444f56"
       ],
-      "seconds": 0.068,
+      "seconds": 0.097,
       "sentences": 87,
       "unique_claims": 5
     },
@@ -2061,7 +2066,7 @@
       "document": "gzip:Invoking gzip",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 0,
       "unique_claims": 0
     },
@@ -2075,7 +2080,7 @@
       "relations": [
         "rel-5372802255444f56"
       ],
-      "seconds": 0.037,
+      "seconds": 0.046,
       "sentences": 16,
       "unique_claims": 1
     },
@@ -2087,7 +2092,7 @@
       "document": "gzip:Environment",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.005,
       "sentences": 10,
       "unique_claims": 0
     },
@@ -2137,7 +2142,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.259,
+      "seconds": 0.292,
       "sentences": 132,
       "unique_claims": 8
     },
@@ -2151,7 +2156,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.139,
+      "seconds": 0.149,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -2163,7 +2168,7 @@
       "document": "tar:Book Contents",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.007,
       "sentences": 20,
       "unique_claims": 0
     },
@@ -2178,7 +2183,7 @@
         "rel-fae878f13f7de865",
         "rel-8d3217ba52684064"
       ],
-      "seconds": 0.252,
+      "seconds": 0.264,
       "sentences": 22,
       "unique_claims": 6
     },
@@ -2192,7 +2197,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.386,
+      "seconds": 0.38,
       "sentences": 14,
       "unique_claims": 5
     },
@@ -2206,7 +2211,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.07,
+      "seconds": 0.076,
       "sentences": 6,
       "unique_claims": 1
     },
@@ -2218,7 +2223,7 @@
       "document": "tar:Authors",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.013,
       "sentences": 29,
       "unique_claims": 0
     },
@@ -2230,7 +2235,7 @@
       "document": "tar:Reports",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -2242,7 +2247,7 @@
       "document": "tar:Tutorial",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.004,
       "sentences": 8,
       "unique_claims": 0
     },
@@ -2306,7 +2311,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.07,
+      "seconds": 0.074,
       "sentences": 3,
       "unique_claims": 1
     },
@@ -2356,7 +2361,7 @@
       "relations": [
         "rel-8d3217ba52684064"
       ],
-      "seconds": 0.045,
+      "seconds": 0.036,
       "sentences": 17,
       "unique_claims": 1
     },
@@ -2392,7 +2397,7 @@
       "document": "tar:create verbose",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -2404,7 +2409,7 @@
       "document": "tar:short create",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 27,
       "unique_claims": 0
     },
@@ -2418,7 +2423,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.081,
+      "seconds": 0.101,
       "sentences": 31,
       "unique_claims": 1
     },
@@ -2442,7 +2447,7 @@
       "document": "tar:list dir",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.011,
       "sentences": 5,
       "unique_claims": 1
     },
@@ -2456,7 +2461,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.069,
+      "seconds": 0.083,
       "sentences": 12,
       "unique_claims": 2
     },
@@ -2480,7 +2485,7 @@
       "document": "tar:extracting files",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.018,
+      "seconds": 0.017,
       "sentences": 33,
       "unique_claims": 2
     },
@@ -2492,7 +2497,7 @@
       "document": "tar:extract dir",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.016,
       "sentences": 20,
       "unique_claims": 3
     },
@@ -2507,7 +2512,7 @@
         "rel-30f985b1eeda30a2",
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.124,
+      "seconds": 0.125,
       "sentences": 4,
       "unique_claims": 2
     },
@@ -2555,7 +2560,7 @@
       "document": "tar:Synopsis",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.015,
       "sentences": 53,
       "unique_claims": 0
     },
@@ -2567,7 +2572,7 @@
       "document": "tar:using tar options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.011,
       "sentences": 38,
       "unique_claims": 2
     },
@@ -2579,7 +2584,7 @@
       "document": "tar:Styles",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.006,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -2591,7 +2596,7 @@
       "document": "tar:Long Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.007,
       "sentences": 27,
       "unique_claims": 0
     },
@@ -2615,7 +2620,7 @@
       "document": "tar:Old Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.008,
       "sentences": 30,
       "unique_claims": 0
     },
@@ -2627,7 +2632,7 @@
       "document": "tar:Mixing",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.006,
       "sentences": 22,
       "unique_claims": 0
     },
@@ -2639,7 +2644,7 @@
       "document": "tar:All Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -2655,7 +2660,7 @@
         "rel-30f985b1eeda30a2",
         "rel-64ac14c044c2312b"
       ],
-      "seconds": 1.189,
+      "seconds": 1.37,
       "sentences": 516,
       "unique_claims": 44
     },
@@ -2679,7 +2684,7 @@
       "document": "tar:Position-Sensitive Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.004,
       "sentences": 19,
       "unique_claims": 0
     },
@@ -2691,7 +2696,7 @@
       "document": "tar:help",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.021,
+      "seconds": 0.024,
       "sentences": 49,
       "unique_claims": 2
     },
@@ -2718,7 +2723,7 @@
         "rel-fae878f13f7de865",
         "rel-1d0b743b4dba3141"
       ],
-      "seconds": 0.135,
+      "seconds": 0.153,
       "sentences": 58,
       "unique_claims": 6
     },
@@ -2732,7 +2737,7 @@
       "relations": [
         "rel-1d0b743b4dba3141"
       ],
-      "seconds": 0.066,
+      "seconds": 0.073,
       "sentences": 82,
       "unique_claims": 3
     },
@@ -2744,7 +2749,7 @@
       "document": "tar:warnings",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.006,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -2756,7 +2761,7 @@
       "document": "tar:interactive",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.024,
       "sentences": 26,
       "unique_claims": 2
     },
@@ -2768,7 +2773,7 @@
       "document": "tar:external",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.008,
       "sentences": 17,
       "unique_claims": 0
     },
@@ -2780,7 +2785,7 @@
       "document": "tar:operations",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 0,
       "unique_claims": 0
     },
@@ -2804,7 +2809,7 @@
       "document": "tar:Advanced tar",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.004,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -2816,7 +2821,7 @@
       "document": "tar:Operations",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.009,
       "sentences": 14,
       "unique_claims": 0
     },
@@ -2828,7 +2833,7 @@
       "document": "tar:append",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.018,
+      "seconds": 0.016,
       "sentences": 41,
       "unique_claims": 1
     },
@@ -2840,7 +2845,7 @@
       "document": "tar:appending files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.005,
       "sentences": 15,
       "unique_claims": 2
     },
@@ -2854,7 +2859,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.168,
+      "seconds": 0.152,
       "sentences": 23,
       "unique_claims": 3
     },
@@ -2866,7 +2871,7 @@
       "document": "tar:update",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.004,
       "sentences": 14,
       "unique_claims": 1
     },
@@ -2878,7 +2883,7 @@
       "document": "tar:how to update",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.019,
+      "seconds": 0.014,
       "sentences": 17,
       "unique_claims": 2
     },
@@ -2892,7 +2897,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.248,
+      "seconds": 0.221,
       "sentences": 22,
       "unique_claims": 3
     },
@@ -2904,7 +2909,7 @@
       "document": "tar:delete",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.005,
       "sentences": 17,
       "unique_claims": 0
     },
@@ -2916,7 +2921,7 @@
       "document": "tar:compare",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.005,
       "sentences": 15,
       "unique_claims": 0
     },
@@ -2940,7 +2945,7 @@
       "document": "tar:override",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.002,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -2952,7 +2957,7 @@
       "document": "tar:extract options",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.01,
       "sentences": 12,
       "unique_claims": 3
     },
@@ -2964,7 +2969,7 @@
       "document": "tar:Reading",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.007,
       "sentences": 19,
       "unique_claims": 0
     },
@@ -2976,7 +2981,7 @@
       "document": "tar:read full records",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.001,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -2988,7 +2993,7 @@
       "document": "tar:Ignore Zeros",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.005,
+      "seconds": 0.003,
       "sentences": 5,
       "unique_claims": 0
     },
@@ -3012,7 +3017,7 @@
       "document": "tar:Dealing with Old Files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.02,
+      "seconds": 0.012,
       "sentences": 42,
       "unique_claims": 1
     },
@@ -3036,7 +3041,7 @@
       "document": "tar:Keep Old Files",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.001,
       "sentences": 2,
       "unique_claims": 0
     },
@@ -3060,7 +3065,7 @@
       "document": "tar:Unlink First",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.009,
+      "seconds": 0.005,
       "sentences": 1,
       "unique_claims": 1
     },
@@ -3072,7 +3077,7 @@
       "document": "tar:Recursive Unlink",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.006,
       "sentences": 5,
       "unique_claims": 2
     },
@@ -3084,7 +3089,7 @@
       "document": "tar:Data Modification Times",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 3,
       "unique_claims": 0
     },
@@ -3110,7 +3115,7 @@
       "relations": [
         "rel-8d3217ba52684064"
       ],
-      "seconds": 0.047,
+      "seconds": 0.041,
       "sentences": 32,
       "unique_claims": 3
     },
@@ -3122,7 +3127,7 @@
       "document": "tar:Writing to Standard Output",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.01,
       "sentences": 8,
       "unique_claims": 2
     },
@@ -3136,7 +3141,7 @@
       "relations": [
         "rel-1d0b743b4dba3141"
       ],
-      "seconds": 0.064,
+      "seconds": 0.057,
       "sentences": 62,
       "unique_claims": 2
     },
@@ -3148,7 +3153,7 @@
       "document": "tar:remove files",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.005,
       "sentences": 4,
       "unique_claims": 1
     },
@@ -3160,7 +3165,7 @@
       "document": "tar:Scarce",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.0,
+      "seconds": 0.001,
       "sentences": 0,
       "unique_claims": 0
     },
@@ -3184,7 +3189,7 @@
       "document": "tar:Same Order",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 7,
       "unique_claims": 0
     },
@@ -3196,7 +3201,7 @@
       "document": "tar:backup",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.006,
       "sentences": 30,
       "unique_claims": 0
     },
@@ -3220,7 +3225,7 @@
       "document": "tar:looking ahead",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.004,
       "sentences": 10,
       "unique_claims": 0
     },
@@ -3246,7 +3251,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.08,
+      "seconds": 0.073,
       "sentences": 16,
       "unique_claims": 2
     },
@@ -3260,7 +3265,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.111,
+      "seconds": 0.088,
       "sentences": 79,
       "unique_claims": 1
     },
@@ -3272,7 +3277,7 @@
       "document": "tar:Backup Levels",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.014,
+      "seconds": 0.009,
       "sentences": 38,
       "unique_claims": 3
     },
@@ -3284,7 +3289,7 @@
       "document": "tar:Backup Parameters",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -3320,7 +3325,7 @@
       "document": "tar:User Hooks",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.012,
+      "seconds": 0.011,
       "sentences": 18,
       "unique_claims": 3
     },
@@ -3384,7 +3389,7 @@
         "rel-30f985b1eeda30a2",
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.186,
+      "seconds": 0.177,
       "sentences": 44,
       "unique_claims": 4
     },
@@ -3398,7 +3403,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.081,
+      "seconds": 0.073,
       "sentences": 26,
       "unique_claims": 1
     },
@@ -3434,7 +3439,7 @@
       "document": "tar:exclude",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.015,
+      "seconds": 0.016,
       "sentences": 29,
       "unique_claims": 2
     },
@@ -3446,7 +3451,7 @@
       "document": "tar:problems with exclude",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.007,
       "sentences": 23,
       "unique_claims": 1
     },
@@ -3460,7 +3465,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.083,
+      "seconds": 0.075,
       "sentences": 39,
       "unique_claims": 1
     },
@@ -3472,7 +3477,7 @@
       "document": "tar:controlling pattern-matching",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.006,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -3484,7 +3489,7 @@
       "document": "tar:quoting styles",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.005,
       "sentences": 25,
       "unique_claims": 0
     },
@@ -3496,7 +3501,7 @@
       "document": "tar:transform",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.026,
+      "seconds": 0.022,
       "sentences": 58,
       "unique_claims": 1
     },
@@ -3508,7 +3513,7 @@
       "document": "tar:after",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.017,
+      "seconds": 0.014,
       "sentences": 35,
       "unique_claims": 1
     },
@@ -3522,7 +3527,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.173,
+      "seconds": 0.158,
       "sentences": 22,
       "unique_claims": 5
     },
@@ -3536,7 +3541,7 @@
       "relations": [
         "rel-8d3217ba52684064"
       ],
-      "seconds": 0.041,
+      "seconds": 0.037,
       "sentences": 15,
       "unique_claims": 1
     },
@@ -3563,7 +3568,7 @@
         "rel-30f985b1eeda30a2",
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.31,
+      "seconds": 0.259,
       "sentences": 45,
       "unique_claims": 7
     },
@@ -3577,7 +3582,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.277,
+      "seconds": 0.218,
       "sentences": 14,
       "unique_claims": 3
     },
@@ -3601,7 +3606,7 @@
       "document": "tar:gzip",
       "false_claims": 2,
       "relations": [],
-      "seconds": 0.058,
+      "seconds": 0.049,
       "sentences": 81,
       "unique_claims": 5
     },
@@ -3627,7 +3632,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.096,
+      "seconds": 0.086,
       "sentences": 41,
       "unique_claims": 2
     },
@@ -3654,7 +3659,7 @@
         "rel-fae878f13f7de865",
         "rel-8d3217ba52684064"
       ],
-      "seconds": 0.114,
+      "seconds": 0.109,
       "sentences": 25,
       "unique_claims": 2
     },
@@ -3668,7 +3673,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.081,
+      "seconds": 0.074,
       "sentences": 9,
       "unique_claims": 1
     },
@@ -3682,7 +3687,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.093,
+      "seconds": 0.08,
       "sentences": 11,
       "unique_claims": 5
     },
@@ -3696,7 +3701,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.091,
+      "seconds": 0.074,
       "sentences": 13,
       "unique_claims": 2
     },
@@ -3708,7 +3713,7 @@
       "document": "tar:old",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.005,
       "sentences": 11,
       "unique_claims": 0
     },
@@ -3720,7 +3725,7 @@
       "document": "tar:ustar",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 6,
       "unique_claims": 0
     },
@@ -3732,7 +3737,7 @@
       "document": "tar:gnu",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.007,
+      "seconds": 0.004,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -3770,7 +3775,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.343,
+      "seconds": 0.297,
       "sentences": 18,
       "unique_claims": 4
     },
@@ -3794,7 +3799,7 @@
       "document": "tar:Other Tars",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.003,
       "sentences": 14,
       "unique_claims": 0
     },
@@ -3808,7 +3813,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.082,
+      "seconds": 0.077,
       "sentences": 24,
       "unique_claims": 1
     },
@@ -3820,7 +3825,7 @@
       "document": "tar:Sparse Recovery",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.027,
+      "seconds": 0.025,
       "sentences": 52,
       "unique_claims": 3
     },
@@ -3832,7 +3837,7 @@
       "document": "tar:cpio",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.016,
+      "seconds": 0.019,
       "sentences": 48,
       "unique_claims": 0
     },
@@ -3846,7 +3851,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.162,
+      "seconds": 0.153,
       "sentences": 23,
       "unique_claims": 2
     },
@@ -3861,7 +3866,7 @@
         "rel-1d0b743b4dba3141",
         "rel-30f985b1eeda30a2"
       ],
-      "seconds": 0.108,
+      "seconds": 0.11,
       "sentences": 42,
       "unique_claims": 3
     },
@@ -3876,7 +3881,7 @@
         "rel-30f985b1eeda30a2",
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.159,
+      "seconds": 0.135,
       "sentences": 49,
       "unique_claims": 3
     },
@@ -3900,7 +3905,7 @@
       "document": "tar:Blocking",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.026,
+      "seconds": 0.022,
       "sentences": 81,
       "unique_claims": 2
     },
@@ -3912,7 +3917,7 @@
       "document": "tar:Format Variations",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 9,
       "unique_claims": 0
     },
@@ -3927,7 +3932,7 @@
         "rel-0c8345648bf303e8",
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.285,
+      "seconds": 0.264,
       "sentences": 73,
       "unique_claims": 9
     },
@@ -3939,7 +3944,7 @@
       "document": "tar:Many",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.01,
+      "seconds": 0.009,
       "sentences": 39,
       "unique_claims": 1
     },
@@ -3953,7 +3958,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.076,
+      "seconds": 0.074,
       "sentences": 20,
       "unique_claims": 2
     },
@@ -3965,7 +3970,7 @@
       "document": "tar:mt",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.011,
       "sentences": 15,
       "unique_claims": 1
     },
@@ -3979,7 +3984,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.172,
+      "seconds": 0.154,
       "sentences": 28,
       "unique_claims": 1
     },
@@ -3995,7 +4000,7 @@
         "rel-1d0b743b4dba3141",
         "rel-30f985b1eeda30a2"
       ],
-      "seconds": 0.292,
+      "seconds": 0.254,
       "sentences": 100,
       "unique_claims": 7
     },
@@ -4009,7 +4014,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.074,
+      "seconds": 0.073,
       "sentences": 13,
       "unique_claims": 2
     },
@@ -4023,7 +4028,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.074,
+      "seconds": 0.073,
       "sentences": 12,
       "unique_claims": 1
     },
@@ -4038,7 +4043,7 @@
         "rel-fae878f13f7de865",
         "rel-2d9098898b8fabfd"
       ],
-      "seconds": 0.283,
+      "seconds": 0.25,
       "sentences": 47,
       "unique_claims": 6
     },
@@ -4054,7 +4059,7 @@
         "rel-fae878f13f7de865",
         "rel-2d9098898b8fabfd"
       ],
-      "seconds": 0.201,
+      "seconds": 0.194,
       "sentences": 39,
       "unique_claims": 4
     },
@@ -4078,7 +4083,7 @@
       "document": "tar:Reliability and security",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.008,
+      "seconds": 0.009,
       "sentences": 3,
       "unique_claims": 1
     },
@@ -4092,7 +4097,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.159,
+      "seconds": 0.173,
       "sentences": 6,
       "unique_claims": 2
     },
@@ -4104,7 +4109,7 @@
       "document": "tar:Permissions problems",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.011,
+      "seconds": 0.007,
       "sentences": 5,
       "unique_claims": 1
     },
@@ -4116,7 +4121,7 @@
       "document": "tar:Data corruption and repair",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.003,
+      "seconds": 0.002,
       "sentences": 8,
       "unique_claims": 0
     },
@@ -4130,7 +4135,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.101,
+      "seconds": 0.093,
       "sentences": 15,
       "unique_claims": 4
     },
@@ -4142,7 +4147,7 @@
       "document": "tar:Security",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.004,
+      "seconds": 0.003,
       "sentences": 4,
       "unique_claims": 0
     },
@@ -4154,7 +4159,7 @@
       "document": "tar:Privacy",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.004,
       "sentences": 12,
       "unique_claims": 0
     },
@@ -4168,7 +4173,7 @@
       "relations": [
         "rel-fae878f13f7de865"
       ],
-      "seconds": 0.093,
+      "seconds": 0.077,
       "sentences": 19,
       "unique_claims": 3
     },
@@ -4180,7 +4185,7 @@
       "document": "tar:Live untrusted data",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.013,
+      "seconds": 0.011,
       "sentences": 23,
       "unique_claims": 3
     },
@@ -4192,7 +4197,7 @@
       "document": "tar:Security rules of thumb",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.006,
+      "seconds": 0.005,
       "sentences": 13,
       "unique_claims": 1
     },
@@ -4216,7 +4221,7 @@
       "document": "tar:Configuring Help Summary",
       "false_claims": 1,
       "relations": [],
-      "seconds": 0.022,
+      "seconds": 0.02,
       "sentences": 58,
       "unique_claims": 2
     },
@@ -4288,13 +4293,13 @@
       "document": "tar:Index of Command Line Options",
       "false_claims": 0,
       "relations": [],
-      "seconds": 0.002,
+      "seconds": 0.001,
       "sentences": 4,
       "unique_claims": 0
     }
   ],
   "schema": "BRAIN_THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1",
-  "seconds": 15.0,
+  "seconds": 14.7,
   "sentences": 8110,
   "transfer": {
     "admitted": 51,

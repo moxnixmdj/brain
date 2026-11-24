@@ -125,7 +125,7 @@ def _claim(program: str, relation: str, kind: str, sentence: str) -> dict:
     return {"schema": subject.SCHEMA, "sentence": sentence, "line": 1, "program": program,
             "relation": relation, "observable": subject.RELATIONS[relation]["observable"],
             "object_kind": kind, "predicate": subject.RELATIONS[relation]["predicate"],
-            "authority": "NONE"}
+            "qualifier": subject._qualifier_of(sentence), "authority": "NONE"}
 
 
 def _evaluate(program: str, relation: str, kind: str, sentence: str):
@@ -380,6 +380,23 @@ def test_a_shell_command_outside_the_action_space_is_seen_not_planned():
     assert out["status"] != "PASS__PLAN_FROM_A_DOCUMENT"
     assert out["steps"]["document_as_test_suite"]["status"] == (
         "REFUSED__COMMAND_SEEN_NOT_PERMITTED")
+
+
+def test_a_qualifier_is_witnessed_or_contradicted_never_dropped():
+    """`alphabetically` is the part of the claim the relation cannot hold."""
+    witnessed = _evaluate("ls", "lists", "directory", "ls lists a directory alphabetically.")
+    assert witnessed.verdict == "ADMIT"
+    assert witnessed.relation["qualifier"] == {"text": "alphabetically", "verdict": "WITNESSED"}
+
+    wrong = _evaluate("sort", "sorts", "file", "sort sorts a file in reverse order.")
+    assert wrong.verdict == "ADMIT"
+    assert wrong.relation["qualifier"]["verdict"] == "CONTRADICTED"
+
+    # An adverb no read-only sensor can decide is NOT extracted as a qualifier. It stays in the
+    # sentence and is not stored as if it had been verified: `silently` is a word, not a test.
+    unheard = _evaluate("cat", "prints", "file", "cat prints a file silently.")
+    assert unheard.relation["qualifier"] == {"text": "", "verdict": "NONE"}
+    assert subject._qualifier_of("gzip will only attempt to compress regular files") == ""
 
 
 import tempfile  # noqa: E402

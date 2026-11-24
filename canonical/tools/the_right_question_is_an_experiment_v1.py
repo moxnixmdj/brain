@@ -249,6 +249,12 @@ PREDICATES: dict[str, Callable[[Mapping[str, Any]], bool]] = {
     "exit_zero": lambda r: _code(r.get("exit")) == 0,
     "source_gone_destination_there": lambda r: bool(r.get("after_exists"))
     and not bool(r.get("source_exists")),
+    # A QUALIFIER IS AN ORDER OVER THE PROGRAM'S OWN OUTPUT, read with a read-only sensor.
+    "order_alphabetical": lambda r: bool(r.get("stdout_order") == "ascending"),
+    "order_ascending": lambda r: bool(r.get("stdout_order") == "ascending"),
+    "order_descending": lambda r: bool(r.get("stdout_order") == "descending"),
+    "order_numerical": lambda r: bool(r.get("stdout_order") == "ascending"
+                                      and r.get("stdout_numeric") is True),
     "destination_absent_or_source_still_there": lambda r: not (
         bool(r.get("after_exists")) and not bool(r.get("source_exists"))),
     "exit_nonzero": lambda r: _code(r.get("exit")) not in (None, 0),
@@ -277,6 +283,8 @@ INVERSE: dict[str, str] = {
     "stdout_does_not_report_the_count": "stdout_reports_the_count",
     "checksum_equal": "content_changed",
     "source_gone_destination_there": "destination_absent_or_source_still_there",
+    "order_alphabetical": "order_descending", "order_ascending": "order_descending",
+    "order_descending": "order_ascending", "order_numerical": "order_descending",
     "destination_absent_or_source_still_there": "source_gone_destination_there",
     "exit_zero": "exit_nonzero", "exit_nonzero": "exit_zero",
 }
@@ -497,6 +505,29 @@ def _is_verb_form(low: str, span: tuple[int, int], sentence_start: int) -> bool:
     return span[0] == sentence_start
 
 
+#: A QUALIFIER is the part of a claim the relation cannot hold: `alphabetically`,
+#: `numerically`, `in reverse order`. It is stored as a SECOND, OPTIONAL witness, because a
+#: relation that drops it can open a door and cannot state a rule.
+#:
+#: THE VOCABULARY IS CLOSED, AND CLOSED ON PURPOSE. Matching every `-ly` word made `only`
+#: a qualifier (`gzip will only attempt to compress regular files`), and a qualifier no
+#: read-only sensor can decide is a word, not a test. So a qualifier is extracted only when the
+#: sensor table below can decide it; every other adverb stays in the sentence and is not
+#: pretended to be knowledge.
+_QUALIFIERS: tuple[str, ...] = (
+    "alphabetically", "lexicographically", "numerically",
+    "in ascending order", "in descending order", "in reverse order",
+)
+
+
+def _qualifier_of(sentence: str) -> str:
+    low = " " + sentence.lower() + " "
+    for candidate in _QUALIFIERS:
+        if re.search(r"(?<![a-z])" + re.escape(candidate) + r"(?![a-z])", low):
+            return candidate
+    return ""
+
+
 def _all_relations(low: str, sentence_start: int = 0) -> list[str]:
     """Every relation whose VERB appears in the sentence, ordered by first appearance."""
     found: list[tuple[int, str]] = []
@@ -640,6 +671,7 @@ def extract_claims(text: Any, *, actions: Sequence[Any] = (),
                 "observable": RELATIONS[relation]["observable"],
                 "object_kind": kind,
                 "predicate": RELATIONS[relation]["predicate"],
+                "qualifier": _qualifier_of(sentence["text"]),
                 "authority": "NONE__CANDIDATE_NOT_ADMITTED",
             })
             if len(out) >= max_claims:
@@ -1378,8 +1410,31 @@ def _run_witness(claim: Mapping[str, Any], root: pathlib.Path, variant: int,
             payload = b""
         argv = [str(x).replace(str(source.name), corrupt) for x in action["argv"]]
         corrupt_exit = _run(argv, root).get("exit")
+    # The qualifier is an order over what the program PRODUCED. A program that writes a file
+    # (`sort -o out`) produces nothing on stdout, so the order is read from the file it named.
+    produced = str(run.get("stdout") or "")
+    if not produced.strip() and output_name and (root / str(output_name)).is_file():
+        try:
+            produced = (root / str(output_name)).read_text(encoding="utf-8", errors="replace")
+        except OSError:
+            produced = ""
+    stdout_lines = [line for line in produced.splitlines() if line.strip()]
+    numeric = []
+    for line in stdout_lines:
+        head = line.split()[0] if line.split() else ""
+        numeric.append(_num(head))
+    stdout_numeric = bool(numeric) and all(value is not None for value in numeric)
+    ordered = ""
+    if len(stdout_lines) >= 2:
+        keys = numeric if stdout_numeric else stdout_lines
+        if keys == sorted(keys):
+            ordered = "ascending"
+        elif keys == sorted(keys, reverse=True):
+            ordered = "descending"
     readings = {
         "before": before,
+        "stdout_order": ordered,
+        "stdout_numeric": stdout_numeric,
         "after": after,
         "stdout": run.get("stdout", ""),
         "exit": run.get("exit"),
@@ -1421,6 +1476,35 @@ def _run_witness(claim: Mapping[str, Any], root: pathlib.Path, variant: int,
 def _present(value: Any) -> bool:
     """A reading that exists. `0` is a value; `None` and `""` are absent."""
     return value is not None and str(value) != ""
+
+
+#: How a qualifier is tested. Each entry is a read-only check over the program's own output;
+#: there is no entry for a qualifier no read-only sensor can decide, and such a qualifier is
+#: recorded as NOT_WITNESSED rather than stored as if it had been verified.
+_QUALIFIER_SENSOR: dict[str, str] = {
+    "alphabetically": "order_alphabetical",
+    "lexicographically": "order_alphabetical",
+    "numerically": "order_numerical",
+    "in ascending order": "order_ascending",
+    "in descending order": "order_descending",
+    "in reverse order": "order_descending",
+}
+
+
+def _qualifier_verdict(qualifier: str, readings: Mapping[str, Any]) -> str:
+    """`WITNESSED`, `CONTRADICTED`, or `NOT_WITNESSED` -- never a silent drop."""
+    if not qualifier:
+        return "NONE"
+    sensor = _QUALIFIER_SENSOR.get(qualifier)
+    if not sensor:
+        return "NOT_WITNESSED"
+    verdict = _predicate(sensor, readings)
+    if verdict is True:
+        return "WITNESSED"
+    inverse = INVERSE.get(sensor, "")
+    if inverse and _predicate(inverse, readings) is True:
+        return "CONTRADICTED"
+    return "NOT_WITNESSED"
 
 
 def _predicate(name: str, readings: Mapping[str, Any]) -> bool:
@@ -1544,6 +1628,8 @@ def evaluate_claim(claim: Mapping[str, Any], *, actions: Sequence[Any] = (),
                              {"watched": readings.get("action", {}).get("output_name")})
     gates["OBSERVES"] = True
 
+    qualifier = str(claim.get("qualifier") or "")
+    qualifier_verdict = _qualifier_verdict(qualifier, readings)
     relation = {
         "schema": RELATION_SCHEMA,
         "relation_id": "rel-" + hashlib.sha256(json.dumps(
@@ -1560,6 +1646,10 @@ def evaluate_claim(claim: Mapping[str, Any], *, actions: Sequence[Any] = (),
                     "sensor": OBSERVABLE_SENSOR.get(observable),
                     "output": readings.get("action", {}).get("output_name")},
         "source": {"sentence": claim.get("sentence"), "line": claim.get("line")},
+        # The qualifier is stored with its VERDICT, never as if it had been verified. A claim
+        # whose adverb no read-only sensor can decide keeps the door and loses the rule, and the
+        # receipt says which of the two happened.
+        "qualifier": {"text": qualifier, "verdict": qualifier_verdict},
         "source_sha256": hashlib.sha256(str(claim.get("sentence")).encode("utf-8")).hexdigest()[:16],
         "gates": dict(gates),
         "verdict": "ADMIT",
@@ -1976,6 +2066,7 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
     gate_totals: dict[str, int] = {}
     operations: set[tuple[str, str]] = set()
     operations_admitted: set[tuple[str, str]] = set()
+    qualifiers: dict[str, int] = {"WITNESSED": 0, "CONTRADICTED": 0, "NOT_WITNESSED": 0}
     for group_name, documents in groups.items():
         group_rows: list[dict[str, Any]] = []
         for name, text in documents.items():
@@ -2001,6 +2092,9 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
                 operations.add((str(relation.get("program")), str(relation.get("relation"))))
                 operations_admitted.add((str(relation.get("program")),
                                          str(relation.get("relation"))))
+                verdict = str(((relation.get("qualifier") or {}).get("verdict")) or "")
+                if verdict in qualifiers:
+                    qualifiers[verdict] += 1
                 if rid not in seen_relation:
                     seen_relation.add(rid)
                     all_relations.append(relation)
@@ -2065,6 +2159,7 @@ def measure(*, budget: float = 240.0, fleet: Sequence[str] = FLEET,
         "date": time.strftime("%Y-%m-%d"),
         "corpus": corpus,
         "corpora": per_corpus,
+        "qualifiers": dict(qualifiers),
         "operations": {
             "named": len(operations),
             "admitted": len(operations_admitted),

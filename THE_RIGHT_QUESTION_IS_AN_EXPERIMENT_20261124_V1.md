@@ -135,10 +135,15 @@ adverb is gone, so the store can open the door and cannot state the rule. 102 cl
 `RELATION_KIND_MISMATCH` and 33 `WITNESS_IGNORES_THE_OBJECT` — both are the same disease seen
 from two sides, a claim whose object or operation the closed vocabulary cannot hold.
 
-The minimal next move is not more relations. It is to **store the qualifier as a second,
-optional witness**: the relation stays the door, and a qualifier (`alphabetically`) becomes a
-predicate the room can test on the same object (`sort -c` on the listing). A qualifier that no
-read-only sensor can test is not stored, and the receipt says so.
+The move this round made is to **store the qualifier as a second, optional witness**: the
+relation stays the door, and a qualifier (`alphabetically`) becomes a predicate the room can test
+on the program's own output. A qualifier that no read-only sensor can decide is not extracted at
+all — matching every `-ly` word made `only` a qualifier, and a word is not a test.
+
+Measured on the corpus: **1 qualifier witnessed, 0 contradicted**. The manuals' adverbs are
+manner (`normally`, `automatically`, `recursively`), not order, and manner is not decidable by a
+read-only sensor over the output. So the qualifier mechanism is real and exercised by tests, and
+it is not where this corpus's value is. That is a finding, not a gap in the mechanism.
 
 **Rejected instead:** adding relations by hand (a vocabulary that grows with every corpus), a
 learned qualifier model (a parameter that memorises world facts, which §2 forbids), and asking
