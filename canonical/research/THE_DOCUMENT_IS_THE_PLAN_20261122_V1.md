@@ -8989,3 +8989,70 @@ proposes.
     (134) Do not tune a ranker until your favourite wins. If the answer ranks third behind three
           functions that also fit the words, the ranking is not broken -- it is uninformed, and
           information, not weight, is what it needs.
+
+---
+
+## §A147 — the requirement itself, asserted
+
+The owner's stated reason for saving rules instead of traces, quoted here because it is the thing
+being tested and not a paraphrase of it:
+
+> "saves only the learning that matters, generalised — not the raw experience, because environments
+>  change and exact actions are never needed again"
+
+Every previous section proved pieces of the loop. This one puts a **number on the generalisation**,
+because "it generalised" is the kind of sentence a system says about itself.
+
+### The measurement
+
+A tool is demonstrated on exactly one file, and the capability admitted from that demonstration is
+then asked to work on a file it has never seen:
+
+    taught on   taught.csv   columns a,b    values 1,2 / 3,4
+    asked to do fresh.csv    columns x,y,z  values 1,, / 2,9,
+
+    result   x {fill 1.0}   y {fill 0.5}   z {fill 0.0}
+    truth    x filled in 2/2   y in 1/2   z in 0/2
+
+The column names do not exist in the demonstration. The counts are computed from the **new** file.
+A capability that had stored the trace would return a,b with 1.0, 1.0.
+
+### The false alarm, and why it was worth chasing
+
+The first attempt pointed at `/tmp/never_seen.csv` and came back **`AMBIGUOUS`**, with the learned
+capability rejected as `NOT_CALLABLE_WITH_WHAT_GOAL_PROVIDES: missing ['path']`. That reads exactly
+like "the learning did not generalise", and it is not:
+
+    safe_repo_path():  if base not in path.parents:
+                           raise PATH_OUTSIDE_REPOSITORY
+
+A path outside the repository is refused by design. The capability was not failing to generalise; it
+was being run somewhere the system does not permit file work at all. Repeating the same test with a
+new file **inside** the repository gave `VERIFIED_ACTION` and the correct numbers first time.
+
+The distinction matters for how this is reported. "Does not generalise" would have been a damning
+finding about the learner. It would have been wrong.
+
+### Killing the mutant that fakes generalisation
+
+An assertion is only worth its mutant. Pinning the parameter to the demonstration's value —
+
+    args = {p: demonstration[p] or "${input.%p}"}
+
+— is exactly the failure mode described above: the capability remembers a file instead of a role.
+The test dies, and only that test. Restored: 20 passed.
+
+    (135) A demonstration teaches a ROLE, and a role is proved by binding something the demonstration
+          never contained. If the second call can only succeed on the first call's input, nothing was
+          learned; something was copied.
+    (136) Before believing a failure, check whose rule refused you. "It did not generalise" and "you
+          ran it outside the sandbox" produce the same status code and mean opposite things.
+
+### Honest limits
+
+    * Confinement is real: file work is currently repository-relative only. A person's documents
+      live in $HOME and /tmp, so this is a genuine gap between what works and what a user would ask
+      for -- deliberately not weakened here, because it is the rule that keeps every path checked.
+    * The demonstration still supplies the SHAPE (one path argument). A tool needing two coordinated
+      arguments is the next unsolved case.
+    * §6 NOT MET. No OSWorld task, no SWE-bench instance.

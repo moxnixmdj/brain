@@ -461,3 +461,70 @@ def test_a_concatenated_filename_reaches_the_top_of_a_real_budget(tmp_path):
     calls = [f["call"] for f in found["functions"]]
     assert "unified_diff" in calls, calls
     assert found["files_read"] <= 5, found
+
+
+def test_one_demonstration_generalises_to_a_file_it_never_saw(monkeypatch):
+    """THE OWNER'S REASON FOR SAVING A RULE INSTEAD OF A TRACE, AS AN ASSERTION.
+
+        "saves only the learning that matters, generalised -- not the raw experience, because
+         environments change and exact actions are never needed again"
+
+    The capability below is demonstrated on exactly ONE file. It is then asked to profile a
+    DIFFERENT file -- different name, different columns, different values -- and must produce the
+    right numbers for that file. If it merely replayed the demonstration it would either fail or
+    return the old file's figures.
+
+    Measured 2026-11-23: it generalises. A first attempt used /tmp/never_seen.csv and came back
+    AMBIGUOUS, which looked like a generalisation failure and was not: `safe_repo_path` refuses any
+    path outside the repository (`PATH_OUTSIDE_REPOSITORY`), a deliberate confinement rule. The test
+    therefore stays inside the repository, which is where the rule permits the work.
+    """
+    root = pathlib.Path(__file__).resolve().parents[2]
+    room = root / "canonical" / "astra_runtime" / "tmp" / "test_generalisation_room"
+    shutil.rmtree(room, ignore_errors=True)
+    room.mkdir(parents=True, exist_ok=True)
+    (room / "__init__.py").write_text("", encoding="utf-8")
+    fname = "tally_" + uuid.uuid4().hex[:8]
+    (room / "tally.py").write_text(
+        '"""Tally a table."""\n'
+        "import csv\n\n\n"
+        "def %s(path):\n"
+        '    """Per-column fill rate for a csv file."""\n'
+        "    rows = list(csv.DictReader(open(path)))\n"
+        "    cols = {}\n"
+        "    for name in rows[0]:\n"
+        '        vals = [r.get(name, "") for r in rows]\n'
+        '        filled = sum(1 for v in vals if v.strip())\n'
+        '        cols[name] = {"fill_rate": round(filled / len(vals), 3)}\n'
+        '    return {"columns": cols, "rows": len(rows)}\n' % fname,
+        encoding="utf-8")
+    taught = room / "taught.csv"
+    taught.write_text("a,b\n1,2\n3,4\n", encoding="utf-8")
+
+    from canonical.runtime import capability_forge_v1 as F, grounded_action_v1 as GA
+    monkeypatch.chdir(root)
+
+    census = RC.survey(str(room))
+    row = [f for f in census["functions"] if f["function"] == fname][0]
+    admitted = F.forge_and_record(RC.forge_entry(row), root=root,
+                                  seed_cases=[{"path": str(taught)}])
+    assert admitted["admitted"] is True, admitted
+    try:
+        # A FILE THAT WAS NEVER DEMONSTRATED: different name, different columns, different values.
+        fresh = room / "fresh.csv"
+        fresh.write_text("x,y,z\n1,,\n2,9,\n", encoding="utf-8")
+
+        acted = GA.act("fill rate per column for the csv in %s" % fresh, root=str(root))
+        assert acted.get("status") == "VERIFIED_ACTION", acted
+        assert acted.get("capability_id") == admitted["capability_id"], acted
+        cols = (acted.get("result") or {})["columns"]
+        # computed from fresh.csv, not replayed from taught.csv
+        assert set(cols) == {"x", "y", "z"}, cols
+        assert cols["x"]["fill_rate"] == 1.0, cols
+        assert cols["y"]["fill_rate"] == 0.5, cols
+        # z is blank in BOTH rows: fill rate 0.0, which is a different assertion from 0.5
+        # and was wrong in the first draft of this test. The capability was right.
+        assert cols["z"]["fill_rate"] == 0.0, cols
+    finally:
+        _drop_forged(admitted.get("capability_id"))
+        shutil.rmtree(room, ignore_errors=True)
