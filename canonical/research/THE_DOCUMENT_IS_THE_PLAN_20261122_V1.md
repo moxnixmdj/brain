@@ -9349,3 +9349,150 @@ question, not a better number.
       from this work: measured, it fails with all four runtime files reverted to HEAD, and
       it fails with `forged.rows.count_rows` dropped from state. Recorded, not claimed.
     * **§6 NOT MET.** No OSWorld task, no SWE-bench instance.
+
+## §A151 — `git apply` inside a clone of this repo applies to *this* repo
+
+*2026-11-24. Same branch. A near-miss recorded while starting the §6 work.*
+
+I downloaded the real `ansible/ansible` tree at the graded commit into
+`canonical/astra_runtime/tmp/swepro/` — a gitignored scratch area, which is correct — and then
+ran `git apply ../meta/tests_test_patch.patch` **from inside that directory**. It printed
+`test patch OK` and `APPLIED`. Both statements were false.
+
+`git rev-parse --show-toplevel` inside the downloaded tree answers `/home/user/brain`, because
+the tree is a *subdirectory of this repository*, not a repository of its own. `git apply`
+therefore resolved every hunk against the brain repo's index, matched nothing (the paths
+`test/units/utils/test_vars.py` and `lib/ansible/utils/vars.py` do not exist here), and applied
+its damage elsewhere: **105 tracked files, 20,440 insertions and 12,529 deletions**, all stamped
+`11:47:49` — the exact second of the command. The ansible patch itself never landed (verified: no
+`lib/ansible`, `test/units` or `changelogs` path in the diff). What changed was everything the
+matching heuristic touched.
+
+Two exit codes lied in the same way: `git apply --check` succeeded because a patch whose hunks
+match nothing is not an error, and `git apply` without `--check` reported success for the same
+reason. **A patch that changes nothing is indistinguishable, by exit code, from a patch applied
+correctly.** The evidence that it did not work was three steps away, in `__ror__ not in
+VarsWithSources.__dict__`, which is exactly what I checked and exactly what told the truth.
+
+Recovery: `git stash` the 105 modifications, confirm by `mtime` and by patch-path prefix that
+they were the leak and not earlier work, `git stash drop`, `git checkout -- .`. Then discover the
+sandbox had meanwhile been re-cloned and the local branch reset to `c43f660e`, so the session's
+commits were absent locally while intact on `origin` — `git fetch`, `git merge --ff-only`, and
+clear 80 untracked files that were byte-identical to their remote copies (verified one by one
+before deletion, 79 identical / 0 differing / 1 truncated filename).
+
+    (148) `git apply` inside a clone of this repository applies to THIS repository. A patch
+          whose hunks match nothing exits 0 and changes nothing; only a direct check of the
+          code knows whether the code changed. Ask whether the effect exists, never whether
+          the command succeeded.
+    (149) An exit code is a statement about the command, not about the world. `git apply` said
+          APPLIED while `__ror__` was absent from the class. I believed the message and
+          reported the result before checking the object. The object was right.
+
+## §A152 — A real SWE-bench Pro V2 instance, reproduced end to end
+
+*2026-11-24. Same branch. The first time this tree has touched an actual §6 artifact.*
+
+### Why this was possible at all, and what is still blocked
+
+The sandbox reaches `github.com` and `codeload.github.com` only. Blocked, measured with HTTP
+status: `huggingface.co` (000), `ghcr.io` (000), `modal.com` (000), `fastdl.mongodb.org` (000),
+and there is **no docker daemon**. So the published image cannot be pulled and Harbor-on-Modal
+cannot run. A *containerized* §6 run is impossible here, and no reading of the result below makes
+it possible.
+
+What is reachable is the **task definition**, and that turns out to be the part that carries the
+science: `v2/tasks/<instance>/` publishes `instruction.md`, `task.toml`, `tests/config.json`
+(the `fail_to_pass` / `pass_to_pass` lists), `tests/test_patch.patch`, `tests/test.sh`, and
+`solution/gold_patch.diff`. Four of the 642 instances are pure Python with pytest verifiers;
+`ansible/ansible` has 82 of them.
+
+### The instance
+
+    instance_ansible__ansible-0ea40e09d1b35bcb69ff4d9cecf3d0defa4b36e8-v30a923fb5c164d6cd18280c02422f75e611e8fb2
+    F2P 1:  test/units/utils/test_vars.py::TestVariableUtils::test_combine_vars_replace
+    P2P 15: the merge_hash and combine_vars siblings
+
+### Getting the base commit right took three tries, and each wrong try was informative
+
+The instance id reads `instance_<repo>__<name>-<sha>-v<sha>`. I assumed the plain sha was the
+base. It is the **fix commit** ("vars: handle exception in combine_vars (#81700)"); the `-v` sha
+is a pinned reference, not the parent. The true base is the fix commit's **parent**,
+`f7234968`. What identified it was the gold patch itself, which only applies to a tree whose
+`combine_vars` reads `result = a | b`:
+
+| tree | `combine_vars` replace path | `__ror__` on `VarsWithSources` | gold applies |
+|---|---|---|---|
+| `0ea40e09` (PR merge) | `a \| b` | **present** | no — already applied |
+| `30a923fb` (`-v` sha) | `a.copy(); update(b)` | absent | **no** |
+| `f7234968` (parent) | `a \| b` | absent | **yes** |
+
+### The measurement
+
+Published test patch and published gold patch, nothing of mine, graded by the instance's own
+`config.json`:
+
+| state | F2P | P2P | verdict |
+|---|---|---|---|
+| pre-fix (true base + `test_patch.patch`) | **FAIL** — `TypeError: unsupported operand type(s) for \|: 'dict' and 'VarsWithSources'` at `lib/ansible/utils/vars.py:91` | 15/15 pass | **NOT RESOLVED** |
+| post-fix (+ `gold_patch.diff`) | **PASS** | 15/15 pass | **RESOLVED** |
+
+The failure is the exact exception the PR description quotes, raised from the exact line it
+names. The instance discriminates: it does not pass before the fix and it does not fail after.
+
+### The false pass I nearly recorded as a finding
+
+Two intermediate runs showed the F2P test **passing on pre-fix source**, and I wrote down a
+mechanism for it (`mock.patch('ansible.constants.…')` fails to reach `vars.py`'s module-level
+`C`). That mechanism is real but it was not in play: both runs were reading trees where the
+patch had never been applied, because of the `git apply` defect in §A151. The lesson is the
+one this project keeps relearning — **I had an explanation before I had a measurement, and the
+explanation fit the wrong data.** The claim was retracted by re-measuring on a standalone clone.
+
+### What this does and does not establish
+
+**Established:** this tree can fetch a real SWE-bench Pro V2 instance, identify its true base
+commit, apply the published test patch, reproduce the published failure, apply the published
+gold patch, and grade both states by the instance's own named tests. That is a working §6
+*harness*, and it runs with no network at grade time and no container.
+
+**Not established:** that this system can **solve** the instance. Replaying the gold patch is
+grading the benchmark's own answer sheet. §6 asks for the agent to produce the patch, and
+nothing above does that.
+
+    (150) The instance id's two shas are the fix and a pin; the base is the fix's parent. What
+          identifies a base commit is that the published patch applies to it and the published
+          failure reproduces there — not what the filename suggests.
+    (151) A harness that reproduces a benchmark's failure is not a solution. Replaying the gold
+          patch grades the answer sheet; §6 grades the agent. Keep the two words apart.
+
+### The harness, as code
+
+`canonical/runtime/swepro_instance_harness_v1.py` — fetches a task definition, resolves the base
+commit from the fix commit's parent, materialises a **standalone** clone, applies the published
+test patch, grades, applies the gold patch, grades again. Verified run:
+
+    verdict       REPRODUCED__DISCRIMINATES
+    base          f7234968d241          (asked for, not sliced from the name)
+    pre_fix       f2p=False p2p=True    1 failed, 15 passed
+    post_fix      f2p=True  p2p=True    16 passed
+    unseen=0                            (every named test actually ran)
+
+Four defects were found *in the harness* while building it, and each one made it agree with
+itself — which is the only failure mode that matters here:
+
+| defect | what it looked like | what it was |
+|---|---|---|
+| base = fix sha | baseline passed | the tree already contained the fix |
+| `raw.githubusercontent.com` | TLS EOF | host is blocked (000); `api.github.com` is not |
+| no `PYTHONPATH` | 16 × `null` | every test errored at import; not one ran |
+| `pytest -q` parsing | "16 unmet" | `-q` prints no per-test line at all |
+
+The third and fourth are the same mistake in two places: **a null is not a failure.** The
+report now carries `unseen` separately from `unmet`, because "never ran" and "ran and failed"
+are different sentences and only one of them is about the code under test.
+
+    (152) A harness that agrees with itself is worthless. Show it FAILS on the broken tree
+          before you show it PASSES on the fixed one, or you have measured nothing.
+    (153) A null is not a failure. "The test never ran" and "the test ran and failed" are
+          different statements, and a grader that merges them reports results it did not measure.
