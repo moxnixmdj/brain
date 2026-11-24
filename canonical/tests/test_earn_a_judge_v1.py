@@ -74,11 +74,18 @@ def test_the_decoy_is_illegal_for_every_kind():
 
 def test_a_judge_that_accepts_everything_is_refused(receipt):
     """`gzip.open(path,'rb')` is lazy: it never reads, so it accepts a decoy. It must be
-    refused, and that refusal is the reason this module exists rather than a wider table."""
-    refused = {row["kind"]: row for row in receipt["refused"]}
+    refused, and that refusal is the reason this module exists rather than a wider table.
+
+    Note it is keyed by CANDIDATE, not by kind: after round 12 the honest gzip judge is
+    `gzip_stream`, so a lookup by kind would find the wrong row.
+    """
+    refused = {row["evidence"].get("candidate"): row for row in receipt["refused"]}
     lazy = refused.get("gzip_lazy_WRONG")
     assert lazy is not None, "the cat-shaped candidate was not refused"
-    assert lazy["status"] == E.REFUSED_ACCEPTS_EVERYTHING
+    # round 12 runs the stricter test first, so this candidate is caught as accepting
+    # another real kind; either label is a refusal, and both are checked to be non-admission
+    assert lazy["status"] in (E.REFUSED_ACCEPTS_EVERYTHING,
+                              E.REFUSED_ACCEPTS_ANOTHER_REAL_KIND)
     assert lazy["evidence"]["exit_on_real"] == 0
     assert lazy["evidence"]["exit_on_decoy"] == 0
 
@@ -87,20 +94,29 @@ def test_every_admitted_judge_separated_its_pair(receipt):
     for row in receipt["admitted"]:
         assert row["evidence"]["exit_on_real"] == 0, row["kind"]
         assert row["evidence"]["exit_on_decoy"] != 0, row["kind"]
-        assert row["status"] == E.EARNED
+        # round 12 admits two classes; both must separate their own pair
+        assert row["status"] in (E.EARNED, E.NESTED), row["kind"]
 
 
-def test_the_earned_set_equals_the_hand_typed_set(receipt):
-    """THE RESULT THAT MAKES THE TABLE REDUNDANT.
+def test_the_earned_set_is_measured_against_the_typed_set_not_assumed_equal(receipt):
+    """ROUND 11 ASSERTED THESE WERE EQUAL. ROUND 12 MEASURED, AND THEY ARE NOT.
 
-    Round 10 typed seven validators. Earning them by measurement yields the same seven --
-    measured equal, with 0 disagreements across 210 judgements on 30 real files. Writing
-    them was never the knowledge; the probe pair is.
+    Round 11 reported seven earned judges and "0 disagreements across 210 judgements". That
+    test compared each judge only against the file kinds it already agreed on, and its decoy
+    was a single nonsense blob, so a judge that says yes to ANOTHER REAL KIND passed. Running
+    every judge against every real kind (round 12) shows the honest number was five
+    exclusive plus two nested.
+
+    The equality is gone on purpose. What is asserted now is the relationship that must
+    hold: every earned kind is one the typed table also knows, and the earned set is not
+    described as larger than it is.
     """
     from canonical.runtime import scan_and_diff_against_memory_v1 as S
-    assert sorted(receipt["admitted_kinds"]) == sorted(S.VALIDATORS), (
-        "the earned set and the typed set have diverged; one of them is wrong and the "
-        "disagreement must be looked at rather than smoothed over")
+    earned = set(receipt["admitted_kinds"])
+    typed = set(S.VALIDATORS)
+    assert earned <= typed | {"elf"}, (
+        f"earned judges exist that the typed table never had: {sorted(earned - typed)}")
+    assert "elf" in earned, "ELF was earnable and is not in the set"
 
 
 def test_no_candidate_is_admitted_without_evidence(receipt):
@@ -122,7 +138,10 @@ def test_the_scan_uses_earned_judges_and_agrees_with_the_typed_ones():
     obtained by measurement instead of by assertion."""
     from canonical.runtime import scan_and_diff_against_memory_v1 as S
     earned = S.earned_validators()
-    assert sorted(earned) == sorted(S.VALIDATORS)
+    # round 12: the earned set is a SUBSET that has been independently judged, plus ELF.
+    # Equality with the typed table was round 11's claim and it was wrong.
+    assert set(S.VALIDATORS) <= set(earned), "a typed judge went missing from the merge"
+    assert "elf" in earned
     sample = pathlib.Path(__file__).resolve().parents[1] / "runtime" / "jit_knowledge_v1.py"
     if not sample.exists():
         pytest.skip("needs a source file to judge")

@@ -192,16 +192,33 @@ def signature(path: str, validators: Mapping | None = None) -> tuple[str, ...]:
 # --------------------------------------------------------------------------- #
 @dataclass
 class Item:
+    """One file, its signature, and the path that signature was computed from.
+
+    `path` is RELATIVE TO THE SCAN ROOT because that is what belongs in a receipt -- an
+    absolute path binds the record to the machine that made it. But that made the item
+    silently un-re-judgeable: `signature(item.path, judges)` resolves the relative path
+    against the CURRENT working directory, finds nothing, and returns `()`. Measured while
+    auditing this round -- 0% of /usr/share/doc looked readable through that route while the
+    same files read fine by absolute path. Every file would have been reported unreadable by
+    any caller that re-judged what it had been given. So the absolute path is kept ALONGSIDE
+    the relative one, and `rejudge()` uses it.
+    """
+
     path: str
     suffix: str
     size: int
     sig: tuple[str, ...]
     verdict: str = ""
     note: str = ""
+    abspath: str = ""
 
     def as_dict(self) -> dict[str, Any]:
         return {"path": self.path, "suffix": self.suffix, "size": self.size,
                 "signature": list(self.sig), "verdict": self.verdict, "note": self.note}
+
+    def rejudge(self, validators: Mapping | None = None) -> tuple[str, ...]:
+        """Recompute this item's signature, using the path it was actually taken from."""
+        return signature(self.abspath or self.path, validators)
 
 
 def scan(root: str | os.PathLike[str], *, max_files: int = 200,
@@ -222,7 +239,8 @@ def scan(root: str | os.PathLike[str], *, max_files: int = 200,
                 continue
             items.append(Item(path=os.path.relpath(path, root),
                               suffix=os.path.splitext(name)[1].lower(),
-                              size=size, sig=signature(path)))
+                              size=size, sig=signature(path),
+                              abspath=os.path.abspath(path)))
     return items
 
 
