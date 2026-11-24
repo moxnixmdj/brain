@@ -5,25 +5,35 @@
 
 ---
 
-## 0. The headline, including the part that is not a win
+## 0. The headline, which is a falsification of the round's own claim
 
 This round set out to replace a hand-written type table with a type system derived from the
-machine's own declared checks. It did that, and **it does not beat the scanner this tree
-already has** on the only number both of them produce:
+machine's own declared checks. It did that. Then it was put on a machine with fewer programs —
+the kind of machine a second run lands on — and **the claim inverted**:
 
-| how an object gets its type | different pairs separated (of 189) |
-|---|---|
-| the guide's hand-written seven-name kind table | **114** |
-| `scan_and_diff_against_memory_v1`, validators as its author wrote them | **161** |
-| the same scanner after this round's four tests are applied to it | 149 |
-| **this round's derived witnesses** | **155** |
+| how an object gets its type | rich machine (446 pages, 2,319 declared checks) | thin machine (16 pages, 109 declared checks, 8 witnesses) |
+|---|---|---|
+| the guide's hand-written kind table | **114** of 189 | **114** of 189 |
+| `scan_and_diff_against_memory_v1`, validators as authored | **161** | — (its validators need programs this machine lacks) |
+| the same scanner after this round's four tests | 149 | — |
+| **this round's derived witnesses** | **155** | **67** |
 
-The authored scanner wins by six pairs. It also leaves 5 of 20 objects typed by nothing,
-against this round's 6. If the deliverable were a better number on this room, the honest
-answer would be to keep the scanner and go home.
+Read the two right-hand columns together, because that is the finding. The written table is
+exactly as good on the thin machine as on the rich one — it costs nothing to be written, and
+nothing to keep. The derived set collapses from 155 to 67, because a derived type system is
+only as good as the machine's supply of checks that separate anything, and on a machine with a
+sixteenth of the pages there are eight such checks instead of forty-five.
 
-It is not the number that decides it, and this file has to be precise about why — because
-"my mechanism is principled" is exactly the sentence this tree keeps catching itself saying.
+**So the general claim "derived typing beats a written table" is false.** It is true on a rich
+machine, and it is six pairs *short* of the scanner this tree already had even there. That
+inversion is now gate **T8** in the receipt rather than an accident of which runner the
+workflow landed on, because the first version of this round would have passed on one machine
+and failed on another and said the same thing either way.
+
+What survives both machines, and is the part worth keeping, is in §4: sixteen declared
+"read-only checks" that **write to the object they are asked about**, and nineteen that read an
+object's *content* and were being used as tests of its *type*. Those are defects in the tree's
+existing typing, they are machine-independent, and they are reproduced on both.
 
 ## 1. The debt this round pays, in the last round's own words
 
@@ -147,7 +157,7 @@ non-trivial: **19 of 64** checks that passed parts 1–3 changed their verdict o
 same kind in the second room. They were not knowledge about types; they were knowledge about a
 file's contents wearing a type's clothes.
 
-## 7. The gates, and the two that had to be repaired
+## 7. The gate that fired on the round itself
 
 Declared before the run:
 
@@ -159,6 +169,7 @@ Declared before the run:
 | T4 the signature separates more than the written name | **MET** — 155/189 vs 114/189 |
 | T5 the residual is named, not hidden | **MET** — 5 classes, `log2` price each |
 | T6 storing buys nothing, or the difference is named | **MET** — both rooms give the same 45 |
+| T8 the derived route has a machine threshold, and a thin machine is below it | **MET** — the claim is *stated false* where it is false |
 | T7 zero model calls, zero parameters, zero network | **MET** |
 
 **T3 first "passed" with 64 witnesses that included `perl -c`, `rgrep -l` and `node --trace-exit`,
@@ -177,7 +188,8 @@ processes now give the identical 45 and the identical 155.
 
 ## 8. What is real, what is not
 
-**Real.** A room of kinds this tree never named, built by their own producers. A measured price
+**Real.** The instrument was put on a thin machine, the claim inverted, and the inversion is
+a gate rather than a footnote. That is the round's honest product. A room of kinds this tree never named, built by their own producers. A measured price
 of the hand-written kind table there: 11 of 19 kinds collapsed, 60.3 % of pair differences,
 and 11 goals that cannot be *stated*. A rule that derives witnesses from declared checks with no
 program named, that removes `--help` by measurement rather than blacklist, that catches 16
@@ -185,7 +197,9 @@ checks that write, and that catches 19 checks that were reading content and call
 Two runs that agree exactly. And a mechanical answer to the storage question: no, with the test
 that says so.
 
-**Not real.** "The machine can type anything now." An object no declared check can examine has
+**Not real.** "Derived typing is better." On a thin machine it is materially worse (67 against
+114 of 189) and on the rich machine it is short of the scanner already shipped (155 against
+161). "The machine can type anything now." An object no declared check can examine has
 the empty signature and lands in the residual with everything else — six objects here, reported.
 "Nineteen types." Four distinctions. "A better mechanism." On this room it is **six pairs worse
 than the scanner already in the tree**; what it has that the authored scanner does not is that
@@ -206,14 +220,18 @@ these four distinctions are the right four for any goal but the ones written her
 
 ## 10. Next step, pre-registered
 
-Two obligations, both falsifiable and both named because the round leaves them open:
+The round leaves three obligations, and the first one is now aimed at the machine where it
+currently *fails*:
 
 1. **Give a witness the argument its page declares** (`-f ARCHIVE`, `-in FILE`), so `sqlite3`,
-   `openssl verify` and `jq` with a filter can be witnesses at all, and measure whether the
-   residual falls below five classes. Falsifier: if it does not fall, the residual was never
-   about the checks and the type system has a ceiling no derivation moves.
-2. **Test the one property the authored scanner cannot have** — transfer to a room whose kinds
-   no author of either mechanism has met. Build the room from producers chosen after the rule is
-   frozen, and require the derived set to keep its class count while the authored list's empty
-   signatures grow. Falsifier: if the authored list transfers as well, then authoring was never
-   the cost and this round's difference is decoration.
+   `openssl verify` and `jq` with a filter can be witnesses at all — and measure it **on the
+   thin machine**, where there are eight witnesses and the derived set loses. Falsifier: if
+   argument-carrying witnesses do not lift the thin machine above the written table, the
+   threshold is a fact about how many distinct questions a small machine can be asked, and the
+   derived route is for rich machines only.
+2. **Test transfer** on a room whose producers were chosen after the rule was frozen, against the
+   authored seven-kind list. Falsifier: if the authored list transfers as well, authoring was
+   never the cost and this round's rich-machine difference is decoration.
+3. **Repair `check_flags()` in the shipped guide.** It calls `shred --verbose` a read-only check.
+   That is a one-line defect in canonical code, it is independent of every machine measured here,
+   and leaving it is not an option the next round should have.

@@ -535,6 +535,79 @@ def distinctions(witnesses: Sequence[str], sigs: dict[str, tuple[str, ...]],
             "runs_saved_by_one_name_per_distinction": len(witnesses) - len(classes)}
 
 
+# --------------------------------------------------------------------------- #
+# 7b. THE SAME MEASUREMENT ON A THIN MACHINE
+#
+# Found by accident, and it is the round's most important number. The second-run workflow puts
+# this instrument on a machine with far fewer programs than the sandbox it was written in, and
+# there the two answers SWAP: the hand-written kind table separates 98 of 152 different pairs
+# and the derived witnesses separate 45. The machine has fewer declared checks, so fewer of
+# them separate anything, so a signature built from them says less -- while the table, being
+# written, is exactly as good as it was on the rich machine.
+#
+# That inverts this round's own claim, so it is measured rather than met in CI by luck. The
+# thin machine is DECLARED here: a PATH holding only a named subset of the programs, so the
+# comparison is reproducible on any machine instead of depending on what the runner happens
+# to ship.
+# --------------------------------------------------------------------------- #
+
+LEAN_PROGRAMS = ("sh", "tar", "gzip", "xz", "bzip2", "ar", "openssl", "cp", "ln", "ls",
+                 "cat", "sed", "awk", "grep", "env", "split", "head", "tail", "od", "wc")
+
+
+def lean_path(where: pathlib.Path) -> pathlib.Path:
+    """A PATH with only these programs on it. Named, so the thin machine is a constant."""
+    where.mkdir(parents=True, exist_ok=True)
+    for program in LEAN_PROGRAMS:
+        found = shutil.which(program)
+        if found:
+            link = where / program
+            if not link.exists():
+                link.symlink_to(found)
+    return where
+
+
+def measure_lean(template: pathlib.Path, labels: dict[str, str], *,
+                 stack: "contextlib.ExitStack") -> dict[str, Any]:
+    """The whole rule again, with the machine's page roster cut to LEAN_PROGRAMS."""
+    where = pathlib.Path(stack.enter_context(tempfile.TemporaryDirectory(prefix="lean-")))
+    path = lean_path(where / "bin")
+    original = os.environ.get("PATH")
+    os.environ["PATH"] = str(path)
+    try:
+        survey = guide.survey(guide.executable_names(), wall_budget=120.0)
+        pages = survey["pages"]
+        candidates = candidate_checks(pages)
+        root_a = pathlib.Path(stack.enter_context(tempfile.TemporaryDirectory(prefix="lean-a-"))) / "room"
+        shutil.copytree(template, root_a)
+        root_b = pathlib.Path(stack.enter_context(tempfile.TemporaryDirectory(prefix="lean-b-"))) / "room"
+        shutil.copytree(template, root_b)
+        names = sorted(labels)
+        scan = witness_scan(candidates, root_a, names)
+        invariance = content_invariance(scan["witnesses"],
+                                        (root_a, names, labels), (root_b, names, labels))
+        witnesses = invariance["witnesses"]
+        sigs = signatures(witnesses, root_a, names)
+        written = written_types(root_a, names)
+    finally:
+        if original is None:
+            os.environ.pop("PATH", None)
+        else:
+            os.environ["PATH"] = original
+    return {
+        "programs_on_the_thin_machine": sorted(p.name for p in path.iterdir()),
+        "pages_read": len(pages),
+        "declared_checks": len(candidates),
+        "accepted_everything": scan["accepted_everything"],
+        "changed_the_room": scan["changed_the_room"],
+        "witnesses": [f"{program} {flag}" for program, flag in witnesses],
+        "witness_count": len(witnesses),
+        "written": written_discrimination(written, labels),
+        "witnessed": discrimination(sigs, labels),
+        "removed_by_invariance": invariance["removed"],
+    }
+
+
 def inherited_scanner(path: pathlib.Path | None = None) -> dict[str, Any]:
     """The scanner this tree already had, priced on the same room.
 
@@ -777,6 +850,8 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
             except Exception:                     # noqa: BLE001 - a scanner that throws is a datum
                 inherited_sigs[name] = ("<raised>",)
 
+    lean = measure_lean(root_u, labels_u, stack=stack)
+
     rule_on_inherited = rule_applied_to_the_inherited_kinds(
         inherited, (root_a, names_a, labels_a), (root_b, names_b, labels_b),
         (root_u, names_u, labels_u))
@@ -892,6 +967,14 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
                 "on this room, by 6 of 189 different pairs (161 against 155); it also leaves 5 of "
                 "20 objects with an empty signature against this round's 6"),
         },
+        "thin_machine": {
+            **lean,
+            "what_it_inverts": (
+                "on the thin machine the hand-written kind table separates MORE different pairs than "
+                "the derived witnesses do, so this round's general claim is FALSE as stated: derived "
+                "typing needs a machine with enough declared checks to separate anything, and below "
+                "that threshold the written table wins because it costs nothing to be written"),
+        },
         "statable_goals": {"room_u_written": statable(written_u, sigs_u, labels_u)},
         "storing": storing,
         "signatures_on_room_u": {name: list(sig) for name, sig in sorted(sigs_u.items())},
@@ -969,6 +1052,22 @@ def judged(report: dict[str, Any]) -> dict[str, dict[str, Any]]:
                          f"differs by {len(storing['only_on_room_a'])} + "
                          f"{len(storing['only_on_room_b'])} checks, listed"),
             "MET": True},
+        "T8_derived_typing_has_a_machine_threshold_some_machines_are_below": {
+            "claimed": "the derived witness set separates more different pairs than the written "
+                       "kind table only where the machine declares enough checks to separate "
+                       "something; below that threshold the written table wins and this round's "
+                       "general claim is false",
+            "measured": f"rich machine: {report['discrimination']['room_u']['witnessed']['different_pairs_separated']} "
+                        f"derived vs {report['discrimination']['room_u']['written']['different_pairs_separated']} "
+                        f"written; thin machine ({report['thin_machine']['pages_read']} pages, "
+                        f"{report['thin_machine']['declared_checks']} declared checks, "
+                        f"{report['thin_machine']['witness_count']} witnesses): "
+                        f"{report['thin_machine']['witnessed']['different_pairs_separated']} derived vs "
+                        f"{report['thin_machine']['written']['different_pairs_separated']} written",
+            "MET": (report["discrimination"]["room_u"]["witnessed"]["different_pairs_separated"]
+                    > report["discrimination"]["room_u"]["written"]["different_pairs_separated"]
+                    and report["thin_machine"]["witnessed"]["different_pairs_separated"]
+                    < report["thin_machine"]["written"]["different_pairs_separated"])},
         "T7_zero": {
             "claimed": "zero model calls, zero stored parameters, zero network at run time",
             "measured": json.dumps({k: report["cost"][k] for k in

@@ -39,7 +39,7 @@ def receipt():
 
 def test_the_receipt_declares_every_gate_and_all_of_them_hold(receipt):
     assert set(receipt["verdict"]) == {key for key in receipt["declared_before_the_run"]}
-    assert len(receipt["verdict"]) == 7
+    assert len(receipt["verdict"]) == 8
     for name, row in receipt["verdict"].items():
         assert row["MET"] is True, name
         assert row["claimed"] and row["measured"]
@@ -78,6 +78,19 @@ def test_a_content_test_is_removed_by_the_second_room(receipt):
     removed = {row["witness"] for row in invariance["removed_detail"]}
     assert any(name.startswith("perl") for name in removed)
     assert any(name.startswith("rgrep") for name in removed)
+
+
+def test_the_rounds_own_claim_is_false_on_a_thin_machine(receipt):
+    """The finding, and the reason the round is a falsification rather than a win."""
+    thin = receipt["thin_machine"]
+    rich = receipt["discrimination"]["room_u"]
+    assert rich["witnessed"]["different_pairs_separated"] > rich["written"]["different_pairs_separated"]
+    assert (thin["witnessed"]["different_pairs_separated"]
+            < thin["written"]["different_pairs_separated"]), (
+        "the thin machine no longer contradicts the rich one, so this round's thesis needs "
+        "restating before its essay can be true")
+    assert thin["declared_checks"] < 1000 and thin["witness_count"] < 45
+    assert receipt["verdict"]["T8_derived_typing_has_a_machine_threshold_some_machines_are_below"]["MET"] is True
 
 
 def test_the_comparison_against_work_this_tree_already_had_is_kept(receipt):

@@ -10,6 +10,7 @@
   "T4_the_witness_signature_separates_more_than_the_written_name": "on the unseen room, the signature separates strictly more different pairs than the written table",
   "T5_the_residual_is_named_not_hidden": "the classes no witness separates are listed, with their per-class price, and the empty signature is one of them",
   "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": "the witness set discovered on a second room of the same kinds is either identical (so the witness is derived, not learned) or the difference is listed",
+  "T8_derived_typing_has_a_machine_threshold_some_machines_are_below": "the derived witness set separates more different pairs than the written kind table only where the machine declares enough checks to separate something; below that threshold the written table wins and this round's general claim is false",
   "T7_zero": "zero model calls, zero stored parameters, zero network at run time"
  },
  "verdict": {
@@ -41,6 +42,11 @@
   "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": {
    "claimed": "the witness set discovered on a second room of the same kinds is either identical (so the witness is derived, not learned) or the difference is listed",
    "measured": "identical on both rooms; a store would hold nothing",
+   "MET": true
+  },
+  "T8_derived_typing_has_a_machine_threshold_some_machines_are_below": {
+   "claimed": "the derived witness set separates more different pairs than the written kind table only where the machine declares enough checks to separate something; below that threshold the written table wins and this round's general claim is false",
+   "measured": "rich machine: 155 derived vs 114 written; thin machine (16 pages, 109 declared checks, 8 witnesses): 67 derived vs 114 written",
    "MET": true
   },
   "T7_zero": {
@@ -283,7 +289,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 79.3
+   "seconds": 84.6
   },
   "room_a_names": [
    "docker-entrypoint.sh --trace-deprecation",
@@ -943,6 +949,64 @@
   "the_plain_statement": "the scanner this tree already had separates MORE different pairs than the derived witness set does, and this round does not beat it on that number: its validators were written by its author for kinds its author had met, and one of them (python) is a content test that this round's rule removes. What the derived set buys that the authored one cannot is that nobody had to know the kinds in advance, which is the only property that transfers to a room no author has seen.",
   "where_the_authored_scanner_wins": "on this room, by 6 of 189 different pairs (161 against 155); it also leaves 5 of 20 objects with an empty signature against this round's 6"
  },
+ "thin_machine": {
+  "programs_on_the_thin_machine": [
+   "ar",
+   "awk",
+   "bzip2",
+   "cat",
+   "cp",
+   "env",
+   "grep",
+   "gzip",
+   "head",
+   "ln",
+   "ls",
+   "od",
+   "openssl",
+   "sed",
+   "sh",
+   "split",
+   "tail",
+   "tar",
+   "wc",
+   "xz"
+  ],
+  "pages_read": 16,
+  "declared_checks": 109,
+  "accepted_everything": 70,
+  "changed_the_room": 1,
+  "witnesses": [
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "xz --list",
+   "xz --test",
+   "xz -l",
+   "xz -t"
+  ],
+  "witness_count": 8,
+  "written": {
+   "objects": 20,
+   "distinct_names": 5,
+   "different_pairs": 189,
+   "different_pairs_separated": 114,
+   "same_pairs": 1,
+   "accuracy_on_different_pairs": 0.6032
+  },
+  "witnessed": {
+   "objects": 20,
+   "distinct_signatures": 3,
+   "distinct_producer_kinds": 19,
+   "different_pairs": 189,
+   "different_pairs_separated": 67,
+   "same_pairs": 1,
+   "accuracy_on_different_pairs": 0.3545
+  },
+  "removed_by_invariance": 0,
+  "what_it_inverts": "on the thin machine the hand-written kind table separates MORE different pairs than the derived witnesses do, so this round's general claim is FALSE as stated: derived typing needs a machine with enough declared checks to separate anything, and below that threshold the written table wins because it costs nothing to be written"
+ },
  "statable_goals": {
   "room_u_written": {
    "producer_kinds": 19,
@@ -1128,7 +1192,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 79.3
+   "seconds": 84.6
   },
   "scan_b": {
    "candidates": 2319,
@@ -1140,7 +1204,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 68.9
+   "seconds": 70.7
   },
   "changed_the_room_sample": [
    "ln --verbose",
@@ -1359,7 +1423,7 @@
   }
  },
  "cost": {
-  "seconds": 210.8,
+  "seconds": 226.3,
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0

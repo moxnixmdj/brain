@@ -94,16 +94,34 @@ jobs:
           assert got["authority"] == "NONE__PRODUCER_RUN_SANDBOX"
           assert any("not a benchmark result" in line for line in got["what_this_is_not"])
 
-          # THE THREE NUMBERS THIS ROUND MUST NOT ROUND IN ITS OWN FAVOUR.
+          # THE NUMBERS THIS ROUND MUST NOT ROUND IN ITS OWN FAVOUR, ON WHATEVER MACHINE IT LANDS.
+          #
+          # This runner is a THIN machine -- far fewer programs than the sandbox the round was
+          # written in -- and there the round's own claim is FALSE: the derived witnesses separate
+          # fewer pairs than the hand-written table. The first version of this workflow asserted
+          # the rich-machine inequality and failed here for the right reason at the wrong moment.
+          # What is asserted now is the shape of the finding, not one machine's arithmetic:
           table = got["where_this_loses"]["honest_comparison_on_room_u"]
+          thin = got["thin_machine"]
+          rich_wins = table["this_rounds_derived_witnesses"] > table["written_kind_table"]
+          thin_loses = (thin["witnessed"]["different_pairs_separated"]
+                        < thin["written"]["different_pairs_separated"])
+          assert rich_wins and thin_loses, (
+              "the rich machine must favour the derived set and the thin machine must favour the "
+              "written table; if either has flipped, this round's stated finding is wrong and the "
+              "essay must be rewritten before this job can pass")
           assert table["inherited_scanner_as_written"] > table["this_rounds_derived_witnesses"], (
-              "the authored scanner's advantage has disappeared from the receipt")
-          assert table["this_rounds_derived_witnesses"] > table["written_kind_table"], (
-              "the derived set no longer beats the hand-written kind table, so the round's claim "
-              "is false on this run and must be reported as false")
+              "the authored scanner's advantage over the derived set has disappeared, which "
+              "contradicts the rich-machine comparison in the essay")
+          print("thin machine:", thin["pages_read"], "pages,", thin["declared_checks"],
+                "declared checks,", thin["witness_count"], "witnesses:",
+                thin["witnessed"]["different_pairs_separated"], "derived vs",
+                thin["written"]["different_pairs_separated"], "written")
           names = got["distinctions"]["room_u"]
           assert names["distinctions"] < names["witnesses"], (
               "the aliasing correction has disappeared")
+          assert got["verdict"]["T8_derived_typing_has_a_machine_threshold_some_machines_are_below"]["MET"] is True, (
+              "the round's own falsification is no longer recorded as met")
           assert got["writable_or_destructive_declared_checks"]["count"] >= 1, (
               "no declared check was shown to write, which contradicts the essay")
           removed = got["inherited_scanner"]["same_four_tests_applied"]["removed"]

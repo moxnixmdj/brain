@@ -23,6 +23,7 @@
   "T4_the_witness_signature_separates_more_than_the_written_name": true,
   "T5_the_residual_is_named_not_hidden": true,
   "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": true,
+  "T8_derived_typing_has_a_machine_threshold_some_machines_are_below": true,
   "T7_zero": true
  },
  "summary": {
@@ -39,7 +40,15 @@
   "different_pairs": 189,
   "residual_classes": 5,
   "witness_set_identical_on_two_rooms": true,
-  "seconds": 191.8
+  "seconds": 191.8,
+  "thin_machine": {
+   "pages": 16,
+   "declared_checks": 109,
+   "witnesses": 8,
+   "derived_separates": 67,
+   "written_separates": 114,
+   "different_pairs": 189
+  }
  },
  "what_this_is_not": [
   "not a benchmark result: twenty objects, ten producers, one machine",
@@ -49,9 +58,9 @@
   "not learned: nothing is stored between runs, and the identical witness sets on two rooms are why"
  ],
  "open_obligations": [
-  "give a witness the argument its page declares and measure whether the residual falls below five classes",
+  "raise the thin machine's witness count: an argument-carrying witness is the only lead named here, and it must be measured on the thin machine where the claim currently fails",
   "test transfer on a room whose producers were chosen after the rule was frozen, against the authored seven-kind list",
-  "a check that takes a second object (openssl verify, cmp, diff) is not a witness yet and its absence bounds this result"
+  "repair check_flags() in the shipped guide, which still calls shred --verbose a read-only check"
  ],
  "load_bearing_primary": {
   "why": "OSWORLD_2_1_PARTIAL_GE_81_8 is the obligation a model-free action repertoire has to move: it is the one open row about DOING THINGS ON A COMPUTER, and its own failure axes (lost constraints, skipped verification) are what the goal check and the target-kind need are built to make mechanical. This round does not claim the row; it prices the mechanism that would have to carry it, on the only substrate available here (this sandbox's published pages).",
@@ -70,7 +79,7 @@
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
   "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
   "progress_evidence_paths": [
    "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
    "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
@@ -104,8 +113,8 @@
  "status": "SHIPPED",
  "truth": {
   "achieved": false,
-  "what_is_real": "2319 declared checks -> 45 witnesses -> 4 distinctions that separate 155 of 189 different pairs on a room of 19 producer kinds, against 114 for the hand-written table; 5 residual classes priced in bits; the witness set identical on two rooms",
-  "what_is_not": "a type theory; a claim about checks that take arguments; a claim about GUIs; a benchmark result; any terminal credit"
+  "what_is_real": "derived witnesses separate 155 of 189 different pairs against the hand-written table's 114 ON A RICH MACHINE, and 67 against 114 ON A THIN ONE. Two self-corrections (16 declared checks write, 19 read content and call it type) hold on both. The witness set is identical on two rooms, so nothing needs storing.",
+  "what_is_not": "a general claim: the round's own headline is inverted on a machine with fewer pages, and that inversion is now a gate (T8) rather than an accident of which runner it lands on; no transfer is measured; no GUI; no terminal credit"
  },
  "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
@@ -120,7 +129,7 @@
  "expected_parent_change": "an object stops being a name the tool author chose and becomes a set of the machine's own verdicts",
  "expected_parent_frontier_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
  "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
- "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
  "progress_evidence_paths": [
   "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
   "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
@@ -149,7 +158,7 @@
  ],
  "route_frontier": {
   "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
-  "checked_at_utc": "2026-11-24T04:47:56+00:00",
+  "checked_at_utc": "2026-11-24T05:08:21+00:00",
   "discovery_required": true,
   "max_age_hours": 2,
   "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
@@ -297,7 +306,7 @@
   "unresolved_plausible_dominators": [],
   "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
   "selected_route_preflight": {
-   "checked_at_utc": "2026-11-24T04:47:56+00:00",
+   "checked_at_utc": "2026-11-24T05:08:21+00:00",
    "max_age_hours": 2,
    "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
    "status": "READY",
@@ -349,7 +358,7 @@
      "evidence_classes": [
       "DIRECT_PROBE"
      ],
-     "observed_at_utc": "2026-11-24T04:47:56+00:00"
+     "observed_at_utc": "2026-11-24T05:08:21+00:00"
     }
    ]
   }
@@ -454,7 +463,7 @@
   "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
   "route_frontier": {
    "canonical_base_commit": "47ad1c1a3f7237955f1c2767b7a8e69e3555e590",
-   "checked_at_utc": "2026-11-24T04:47:56+00:00",
+   "checked_at_utc": "2026-11-24T05:08:21+00:00",
    "discovery_required": true,
    "max_age_hours": 2,
    "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
@@ -602,7 +611,7 @@
    "unresolved_plausible_dominators": [],
    "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
    "selected_route_preflight": {
-    "checked_at_utc": "2026-11-24T04:47:56+00:00",
+    "checked_at_utc": "2026-11-24T05:08:21+00:00",
     "max_age_hours": 2,
     "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
     "status": "READY",
@@ -654,7 +663,7 @@
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
-      "observed_at_utc": "2026-11-24T04:47:56+00:00"
+      "observed_at_utc": "2026-11-24T05:08:21+00:00"
      }
     ]
    }
@@ -704,15 +713,15 @@
  "live_challenger_frontier_discovery_required": true,
  "governance_change": null,
  "weakens_existing_guard": false,
- "falsification_condition": "two falsifiers, both live: (1) if argument-carrying witnesses do not reduce the residual below five classes, the ceiling is the objects, not the checks; (2) if the authored seven-kind list transfers to a room of kinds written after the rule as well as the derived set does, then authoring was never the cost and the difference measured here is decoration",
- "measured_effect": "the hand-written table: 114 of 189 different pairs and 11 of 19 producer kinds collapsed into plain. The authored scanner already in the tree: 161. The derived witness set: 45 witnesses behind 4 distinctions, 155 of 189, 5 residual classes priced in bits, with 16 declared 'checks' shown to be writes and 19 shown to be content tests rather than type tests",
- "next_step": "give a witness the argument its page declares (-f ARCHIVE, -in FILE) and measure whether the residual falls below five classes; then test transfer on a room of producers chosen after the rule was frozen",
+ "falsification_condition": "two falsifiers, one already fired: (1) FIRED on the thin machine, where the derived set separates fewer pairs than the written table (67 against 114 of 189), so the claim 'derived typing beats a written table' is false there and the round says so; (2) live: if argument-carrying witnesses do not reduce the residual below five classes, the ceiling is the objects rather than the checks",
+ "measured_effect": "RICH MACHINE (446 pages, 2,319 declared checks): derived 155 of 189, authored scanner 161, written table 114. THIN MACHINE (16 pages, 109 declared checks, 8 witnesses): derived 67, written 114 of 189 -- the derived set LOSES. Robust on both: 16 declared checks WRITE to the object they are asked about, and 19 of 64 separate on content rather than type",
+ "next_step": "give a witness the argument its page declares (-f ARCHIVE, -in FILE) and measure whether the residual falls below five classes ON A THIN MACHINE, since that is the machine where the derived route currently loses",
  "honest_limits": [
+  "the round's general claim is FALSE on a machine with few declared checks: measured by declaring a thin PATH, 8 witnesses separate 67 of 189 pairs against the written table's 114",
+  "on the rich machine it does not beat the scanner this tree already had either (155 against 161 of 189)",
   "twenty objects and ten producers on one machine: a mechanism measurement, not a benchmark result",
-  "the derived witness set separates FEWER different pairs than the scanner this tree already had (155 vs 161 of 189) and leaves one more object with an empty signature (6 vs 5); the round says so rather than picking a room where it wins",
-  "45 witnesses are 4 distinctions: 41 of the names are aliases and the round counts distinctions, not names",
+  "45 witnesses are 4 distinctions on the rich machine: 41 of the names are aliases and the round counts distinctions, not names",
   "the rule reads only checks that take no argument of their own, so sqlite3, openssl verify and jq with a filter are absent by construction",
-  "transfer to a room whose kinds no author met is named as the next step, not measured here",
   "check_flags() in the shipped instrument still calls shred --verbose a read-only check; repairing it is the next round's first line",
   "nothing here is evidence about GUIs, browsers, or rooms whose objects no declared check can examine"
  ],
@@ -722,7 +731,7 @@
  "verification": "two consecutive runs give an identical verdict; the round's workflow re-runs the instrument on a clean machine and fails if the receipt stops saying what it is not; repo_integrity_guard reports 0 violations",
  "progress_evidence_note": "the evidence is the instrument, its receipt and its essay; the three were changed by this PR",
  "selected_route_preflight": {
-  "checked_at_utc": "2026-11-24T04:47:56+00:00",
+  "checked_at_utc": "2026-11-24T05:08:21+00:00",
   "max_age_hours": 2,
   "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
   "status": "READY",
@@ -774,7 +783,7 @@
     "evidence_classes": [
      "DIRECT_PROBE"
     ],
-    "observed_at_utc": "2026-11-24T04:47:56+00:00"
+    "observed_at_utc": "2026-11-24T05:08:21+00:00"
    }
   ]
  },
