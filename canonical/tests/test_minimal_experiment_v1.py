@@ -27,9 +27,20 @@ from canonical.runtime import minimal_experiment_v1 as me
 
 
 def tick_observations(modulus: int, ticks: int):
-    """A dial that wraps every `modulus` ticks, observed `ticks` times."""
+    """A dial that wraps every `modulus` ticks, observed `ticks` times.
+
+    `tick` is always AVAILABLE; the dial's cycle shows up in which states are
+    accepting. Availability and acceptance are separate facts, and conflating
+    them (as an earlier version did) turns every rejecting observation into a
+    dead end and makes every dial unlearnable.
+    """
     return [
-        {"access": ["tick"] * k, "action": "tick", "accepting": (k + 1) % modulus == 0}
+        {
+            "access": ["tick"] * k,
+            "action": "tick",
+            "available": True,
+            "accepting": (k + 1) % modulus == 0,
+        }
         for k in range(ticks)
     ]
 
@@ -93,55 +104,74 @@ class MinimalMachineTests(unittest.TestCase):
         self.assertIn("tick", out["unresolved_actions"])
 
 
-class GreedyVersusExactTests(unittest.TestCase):
-    def test_greedy_never_beats_the_exhaustive_search(self):
-        """If greedy ever found fewer blocks, the exhaustive search is incomplete."""
-        rng = random.Random(7)
-        compared = 0
-        for _ in range(200):
-            modulus = rng.choice([2, 3])
-            actions = ["a", "b"][: rng.choice([1, 2])]
-            trans = {(s, a): rng.randrange(modulus) for s in range(modulus) for a in actions}
-            accepting = [s for s in range(modulus) if rng.random() < 0.4]
-            observations = []
-            for _ in range(rng.randrange(2, 6)):
-                word = tuple(rng.choice(actions) for _ in range(rng.randrange(0, 4)))
-                state = 0
-                for step in word:
-                    state = trans[(state, step)]
-                last = rng.choice(actions)
-                observations.append(
-                    {
-                        "access": list(word),
-                        "action": last,
-                        "accepting": trans[(state, last)] in accepting,
-                    }
-                )
-            if not me.observations_consistent(observations)["consistent"]:
-                continue
-            tree = me.build_observation_tree(observations)
-            nodes = sorted(set(tree["children"]) | set(tree["terminal"]))
-            if len(nodes) > 7:
-                continue
-            label = {n: ("+" if tree["terminal"][n] else "-") for n in tree["terminal"]}
-            exact = me._minimum_partition(nodes, tree["children"], label)
-            greedy = me._merge_greedily(nodes, tree["children"], label)
-            if exact is None:
-                continue
-            compared += 1
-            # The direction is the whole point. Exhaustive search is the lower
-            # bound: a polynomial greedy pass may fail to find a merge that
-            # exists (that is what "suboptimal" means and it is allowed), but it
-            # may NEVER find a merge the exhaustive search missed. An earlier
-            # version of this test asserted the inequality backwards and so
-            # failed on a correct implementation.
-            self.assertGreaterEqual(
-                len(set(greedy.values())),
-                len(set(exact.values())),
-                "greedy found a smaller machine than the exhaustive search: "
-                "the exhaustive search is incomplete and PROVED_MINIMAL is a lie",
+class ExactnessTests(unittest.TestCase):
+    """The search claims PROVED_MINIMAL, so it is checked against brute force."""
+
+    def test_the_search_matches_an_independent_brute_force(self):
+        import itertools
+
+        def brute(nodes, children, label):
+            n = len(nodes)
+            index = {x: i for i, x in enumerate(nodes)}
+            status = {x: me._action_status(children, {}, x) for x in nodes}
+            best = n
+            for assignment in itertools.product(range(n), repeat=n):
+                size = max(assignment) + 1
+                if size >= best:
+                    continue
+                ok = True
+                for i in range(n):
+                    for j in range(i + 1, n):
+                        if assignment[i] != assignment[j]:
+                            continue
+                        a = label.get(nodes[i], "?")
+                        b = label.get(nodes[j], "?")
+                        if a != "?" and b != "?" and a != b:
+                            ok = False
+                            break
+                        if not me._statuses_compatible(status[nodes[i]], status[nodes[j]]):
+                            ok = False
+                            break
+                    if not ok:
+                        break
+                if not ok:
+                    continue
+                targets = {}
+                for i in range(n):
+                    for act, tgt in (children.get(nodes[i]) or {}).items():
+                        key = (assignment[i], act)
+                        tb = assignment[index[tgt]]
+                        if key in targets and targets[key] != tb:
+                            ok = False
+                            break
+                        targets[key] = tb
+                    if not ok:
+                        break
+                if ok:
+                    best = size
+            return best
+
+        rng = random.Random(11)
+        checked = 0
+        for _ in range(40):
+            depth = rng.randrange(2, 5)
+            nodes = [()]
+            for _ in range(depth - 1):
+                nodes.append(nodes[-1] + (rng.choice("ab"),))
+            children = {}
+            for node in nodes:
+                for act in "ab":
+                    tgt = node + (act,)
+                    if tgt in nodes and rng.random() < 0.7:
+                        children.setdefault(node, {})[act] = tgt
+            label = {x: rng.choice(["+", "-", "?"]) for x in nodes[1:]}
+            part = me._minimum_partition(nodes, children, label, {})
+            self.assertEqual(
+                brute(nodes, children, label), len(set(part.values())),
+                f"exhaustive search disagreed with brute force on {nodes}",
             )
-        self.assertGreater(compared, 100, "the comparison never ran enough cases")
+            checked += 1
+        self.assertEqual(40, checked)
 
 
 class SeparatingExperimentTests(unittest.TestCase):
@@ -301,7 +331,7 @@ class CompressionAndAdmissionTests(unittest.TestCase):
         self.assertEqual("NONE", report["authority"])
 
     def test_compression_is_reported_when_it_happens(self):
-        obs = tick_observations(3, 12)
+        obs = tick_observations(3, 10)
         out = me.minimal_consistent_machine(obs)
         report = me.compression_report(observations=obs, machine=out["machine"])
         self.assertEqual("COMPRESSED", report["status"])

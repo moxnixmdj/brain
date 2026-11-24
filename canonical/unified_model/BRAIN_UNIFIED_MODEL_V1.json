@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 462,
-  "source_index_modules": 2026
+  "source_index_modules": 2027
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d4f51496d66ff28edbd75dae17f0fba9d9898c1d2c237da30c6946ad380493fc"
+  "value": "dd4359fca7581bdd69d7df3d2ab30d3c7066f6d6340b97df25ad3e85d9b0d0ca"
  },
  "engines": [
   {
@@ -289860,6 +289860,40 @@
   },
   {
    "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/dom_state_environment_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/dom_state_environment_v1.py",
+   "sha256": "053e03ebd2d58b4e8d9a30b7a46cc975b1163be38dd09a1db6287fe7cab33e5f",
+   "summary": "An in-memory web app whose real state can be probed and never seen.",
+   "symbol_count": 3,
+   "symbols": [
+    "DomStateEnvironment",
+    "snapshot_to_elements",
+    "stable_actions"
+   ],
+   "terms": {
+    "app": 1,
+    "dom": 1,
+    "domstateenvironment": 1,
+    "environment": 1,
+    "in-memory": 1,
+    "never": 1,
+    "probed": 1,
+    "real": 1,
+    "seen": 1,
+    "snapshot_to_elements": 1,
+    "stable_actions": 1,
+    "state": 2,
+    "v1": 1,
+    "web": 1,
+    "whose": 1
+   }
+  },
+  {
+   "capability": false,
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "source:canonical/runtime/domain_behavioral_quotient_v2_repair_verifier.py",
@@ -308391,16 +308425,18 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/minimal_experiment_v1.py",
-   "sha256": "ac1dae11c25dd0fa7768c84622adc891a847ba488141d1c74ebcbce0226050ae",
+   "sha256": "73525c8344546432497d232f7cd502010f1bb11462cf710ddcaf64a0f5862723",
    "summary": "What to save: a provenance-free machine plus the shortest experiment that settles it.",
-   "symbol_count": 20,
+   "symbol_count": 22,
    "symbols": [
+    "_action_status",
     "_close_under_determinism",
     "_compatible",
     "_machine_from_partition",
     "_merge_greedily",
     "_minimum_partition",
     "_rgs",
+    "_statuses_compatible",
     "_words",
     "admit_learnable_unit",
     "build_observation_tree",
@@ -308417,6 +308453,7 @@
     "separating_word"
    ],
    "terms": {
+    "action_status": 1,
     "admit_learnable_unit": 1,
     "build_observation_tree": 1,
     "canonically_relabelled": 1,
@@ -308444,6 +308481,7 @@
     "separating_word": 1,
     "settles": 1,
     "shortest": 1,
+    "statuses_compatible": 1,
     "v1": 1,
     "words": 1
    }

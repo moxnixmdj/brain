@@ -89,15 +89,40 @@ MAX_STATES = 4096
 # plan is expressible; short enough that the product search stays interactive.
 MAX_SEPARATING_DEPTH = 64
 # Largest observation tree for which every partition is enumerated, so minimality
-# is PROVED rather than bounded. Bell(9) = 21147, Bell(10) = 115975; 8 keeps the
-# whole search well under a tenth of a second on a laptop while still covering
-# every small state machine a first probe can produce.
-EXACT_NODE_LIMIT = 8
+# is PROVED rather than bounded. Bell numbers: Bell(9)=21,147, Bell(10)=115,975,
+# Bell(11)=678,570. Materialising each access word's prefix chain means one probe
+# at depth 10 is an 11-node tree, so the limit has to be deep enough to hold a
+# real probe walk: 11 is where a full three-step wizard with re-probing lands,
+# and 678,570 partitions is still a fraction of a second.
+EXACT_NODE_LIMIT = 11
 
 
 # --------------------------------------------------------------------------- #
 # 0. the machine
 # --------------------------------------------------------------------------- #
+
+def _action_status(children, unavailable, node) -> dict[str, str]:
+    """What a node says about each action: EDGE, ABSENT, or nothing at all.
+
+    The three are different claims and merging them loses the difference:
+    `back` ABSENT at step 1 and `back` EDGE at step 2 are both "a fact about
+    back", and they contradict. Comparing the union of action NAMES (what this
+    module did first) collapses them into one identical set and merges the two
+    states -- which is precisely how a wizard's step 1 and step 2 became one
+    state and the planner then proposed an action that fails.
+    """
+    status = {str(a): "EDGE" for a in (children.get(node) or {})}
+    for act in (unavailable or {}).get(node) or ():
+        status.setdefault(str(act), "ABSENT")
+    return status
+
+
+def _statuses_compatible(a: dict[str, str], b: dict[str, str]) -> bool:
+    for action in set(a) & set(b):
+        if a[action] != b[action]:
+            return False
+    return True
+
 
 def make_machine(
     *,
@@ -106,6 +131,7 @@ def make_machine(
     transitions: Mapping[tuple[int, str], int],
     accepting: Sequence[int] = (),
     actions: Sequence[str] = (),
+    unavailable: Mapping[int, Sequence[str]] | None = None,
 ) -> dict[str, Any]:
     """A deterministic Moore machine. No names, no labels, no world facts.
 
@@ -127,6 +153,13 @@ def make_machine(
         if str(a) in row and row[str(a)] != t_i:
             raise ValueError("machine is not deterministic")
         row[str(a)] = t_i
+    absent: dict[str, list[str]] = {}
+    for s, names in (unavailable or {}).items():
+        if int(s) not in state_set:
+            raise ValueError("unavailable entry for undeclared state")
+        kept = sorted({str(a) for a in names if str(a)})
+        if kept:
+            absent[str(int(s))] = kept
     return {
         "schema": MACHINE_SCHEMA,
         "states": state_set,
@@ -134,6 +167,11 @@ def make_machine(
         "actions": acts,
         "transitions": {s: dict(sorted(r.items())) for s, r in sorted(trans.items())},
         "accepting": sorted({int(s) for s in accepting}),
+        # Actions KNOWN not to exist here. This is knowledge, not silence: a
+        # state where `confirm` is unavailable is a different state from one
+        # where it was simply never tried, and a machine that cannot say so
+        # cannot answer "may I confirm now?" without guessing.
+        "unavailable": absent,
         "state_count": len(state_set),
     }
 
@@ -145,6 +183,7 @@ def machine_digest(machine: Mapping[str, Any]) -> str:
             "start": machine.get("start"),
             "transitions": machine.get("transitions") or {},
             "accepting": list(machine.get("accepting") or ()),
+            "unavailable": machine.get("unavailable") or {},
         },
         sort_keys=True,
         separators=(",", ":"),
@@ -304,6 +343,7 @@ def is_consistent(
         access = [translate.get(str(x), str(x)) for x in (obs.get("access") or ())]
         act = translate.get(str(obs.get("action") or ""), str(obs.get("action") or ""))
         want = bool(obs.get("accepting", obs.get("observation") == "ACCEPT"))
+        available = bool(obs.get("available", True))
         state = int(machine.get("start"))
         ok = True
         for step in access:
@@ -315,9 +355,25 @@ def is_consistent(
         if not ok:
             return False
         row = (machine.get("transitions") or {}).get(str(state)) or {}
-        if act not in row:
+        absent = (machine.get("unavailable") or {}).get(str(state)) or []
+        if not available:
+            # the observation says the action could NOT be taken; only a machine
+            # that dead-ends here agrees
+            if act in row:
+                return False
+            continue
+        if act in row:
+            nxt = int(row[act])
+            got = nxt in {int(s) for s in (machine.get("accepting") or ())}
+            if got != want:
+                return False
+            continue
+        if act in absent:
             return False
-        nxt = int(row[act])
+        # Not predicted either way. Availability differs between applications --
+        # the same widget is absent in one and present in another -- so silence
+        # must not be read as either claim.
+        continue
         got = nxt in {int(s) for s in (machine.get("accepting") or ())}
         if got != want:
             return False
@@ -340,6 +396,12 @@ def observations_consistent(
     for obs in observations:
         access = tuple(str(x) for x in (obs.get("access") or ()))
         act = str(obs.get("action") or "")
+        # Two facts, not one. `available` says whether the action could be taken
+        # at all; `accepting` says whether the state it led to is an accepting
+        # one. Conflating them -- treating "landed in a rejecting state" as
+        # "action unavailable" -- turns every ordinary observation into a dead
+        # end, which is how this module briefly refused every dial it was given.
+        available = bool(obs.get("available", True))
         want = bool(obs.get("accepting", obs.get("observation") == "ACCEPT"))
         key = (access, act)
         if key in table and table[key] != want:
@@ -368,17 +430,43 @@ def build_observation_tree(observations: Sequence[Mapping[str, Any]]) -> dict[st
     """
     children: dict[tuple[str, ...], dict[str, tuple[str, ...]]] = {}
     terminal: dict[tuple[str, ...], bool] = {}
+    unavailable: dict[tuple[str, ...], set[str]] = {}
     for obs in observations:
         access = tuple(str(x) for x in (obs.get("access") or ()))
         act = str(obs.get("action") or "")
+        # Two facts, not one. `available` says whether the action could be taken
+        # at all; `accepting` says whether the state it led to is an accepting
+        # one. Conflating them -- treating "landed in a rejecting state" as
+        # "action unavailable" -- turns every ordinary observation into a dead
+        # end, which is how this module briefly refused every dial it was given.
+        available = bool(obs.get("available", True))
         want = bool(obs.get("accepting", obs.get("observation") == "ACCEPT"))
-        children.setdefault(access, {})[act] = access + (act,)
-        terminal[access + (act,)] = want
+        # The access word IS a path, and recording the observation records every
+        # step of it. Without this the tree learns that ('next','next') exists
+        # but not that `next` leads there from ('next',), so the resulting
+        # machine has no `next` edge out of that state and cannot replay its own
+        # observations. One probe at depth k therefore fixes k transitions, not
+        # one -- which is where the economy of the method actually comes from.
+        for i in range(len(access)):
+            prefix, step, target = access[:i], access[i], access[: i + 1]
+            children.setdefault(prefix, {}).setdefault(step, target)
+        if available:
+            children.setdefault(access, {})[act] = access + (act,)
+            terminal[access + (act,)] = want
+        else:
+            # An action that could not be taken is a fact ABOUT THE SOURCE STATE,
+            # and it is the strongest kind: it says the state is not one where
+            # that action exists. It is recorded as a dead end, never as an edge.
+            # Treating it as an edge (what an earlier version did) invented a
+            # transition to a state that does not exist, and the machine then
+            # planned `confirm` at step 1, which fails on the real application.
+            unavailable.setdefault(access, set()).add(act)
     return {
         "schema": SCHEMA + "_TREE",
         "children": {k: dict(sorted(v.items())) for k, v in sorted(children.items())},
         "terminal": {k: v for k, v in sorted(terminal.items())},
-        "node_count": len(children) + len(terminal),
+        "unavailable": {k: sorted(v) for k, v in sorted(unavailable.items())},
+        "node_count": len(set(children) | set(terminal) | set(unavailable)),
     }
 
 
@@ -408,6 +496,40 @@ def minimal_consistent_machine(observations: Sequence[Mapping[str, Any]]) -> dic
     when the result stays deterministic and never merges + with -, and merge
     later nodes into earlier ones so the machine keeps its canonical order.
     """
+    # An access word is a claim about how a state was REACHED. If it uses an
+    # action that was never observed as available, the road to that state is not
+    # in the data, and replaying it is impossible -- so nothing can be verified
+    # and nothing may be asserted. Refusing here is the difference between "I
+    # learned this" and "I wrote down something I cannot check".
+    # AVAILABILITY, not acceptance. An earlier version read `accepting` here,
+    # so a probe that succeeded but landed in a rejecting state did not count as
+    # evidence that its action exists -- and the module refused observation sets
+    # it could perfectly well explain.
+    observed_available = {
+        str(o.get("action")) for o in observations if bool(o.get("available", True))
+    }
+    unobserved_steps = sorted(
+        {
+            str(step)
+            for o in observations
+            for step in (o.get("access") or ())
+            if str(step) not in observed_available
+        }
+    )
+    if unobserved_steps:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__ACCESS_USES_UNOBSERVED_ACTION",
+            "unobserved_steps": unobserved_steps,
+            "machine": None,
+            "note": (
+                "observations describe states reached by actions that were never "
+                "seen to be available, so no machine can be replayed against "
+                "them. Probe those actions first"
+            ),
+            "authority": "NONE",
+        }
+
     conflict = observations_consistent(observations)
     if not conflict["consistent"]:
         return {
@@ -421,7 +543,8 @@ def minimal_consistent_machine(observations: Sequence[Mapping[str, Any]]) -> dic
     tree = build_observation_tree(observations)
     children = tree["children"]
     terminal = tree["terminal"]
-    nodes = sorted(set(children) | set(terminal))
+    unavailable = tree.get("unavailable") or {}
+    nodes = sorted(set(children) | set(terminal) | set(unavailable))
     if not nodes:
         return {
             "schema": SCHEMA,
@@ -439,26 +562,60 @@ def minimal_consistent_machine(observations: Sequence[Mapping[str, Any]]) -> dic
             "authority": "NONE",
         }
 
-    actions = sorted({a for row in children.values() for a in row})
+    actions = sorted(
+        {a for row in children.values() for a in row}
+        | {a for acts in unavailable.values() for a in acts}
+    )
+    # Nodes reached as a target are "observed". A node whose only fact is that an
+    # action was unavailable is a dead end: it exists as a state, but nothing may
+    # be asserted about what it accepts.
     label: dict[tuple[str, ...], str] = {
         n: ("+" if terminal[n] else "-") for n in terminal
     }
 
-    best_partition: dict[tuple[str, ...], int] | None = None
-    optimality = "GREEDY_UPPER_BOUND"
-
-    if len(nodes) <= EXACT_NODE_LIMIT:
-        exact = _minimum_partition(nodes, children, label)
-        if exact is not None:
-            best_partition = exact
-            optimality = "PROVED_MINIMAL"
-
+    # Only the exhaustive search builds machines here.
+    #
+    # Three successive attempts at a polynomial greedy merge were each unsound in
+    # a different direction -- one collapsed a 3-state dial to 1 state, one merged
+    # step 1 with step 2 of a wizard and then predicted an action that fails, one
+    # over-merged 76 observations to a single state. Each was caught by a check,
+    # and each fix revealed the next hole. A merging heuristic that must be
+    # verified against the exhaustive answer is not a shortcut, it is a second
+    # implementation with no reason to exist.
+    #
+    # So: exhaustive when the observation tree is small enough to enumerate, and
+    # an honest refusal when it is not. The refusal names the limit rather than
+    # guessing, which is the behaviour every other module in this tree already
+    # follows.
+    if len(nodes) > EXACT_NODE_LIMIT:
+        return {
+            "schema": SCHEMA,
+            "status": "UNREFINED__EXHAUSTIVE_LIMIT",
+            "node_count": len(nodes),
+            "limit": EXACT_NODE_LIMIT,
+            "machine": None,
+            "note": (
+                "the observation tree has more nodes than the exhaustive search "
+                "enumerates, so no minimality claim is made and no machine is "
+                "returned. Fewer, better-chosen probes, or a SAT encoding, is "
+                "what raises this limit"
+            ),
+            "authority": "NONE",
+        }
+    best_partition = _minimum_partition(nodes, children, label, unavailable)
+    optimality = "PROVED_MINIMAL" if best_partition is not None else "NONE"
     if best_partition is None:
-        best_partition = _merge_greedily(nodes, children, label)
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__NO_CONSISTENT_PARTITION",
+            "node_count": len(nodes),
+            "machine": None,
+            "authority": "NONE",
+        }
 
     accepting_nodes = {n for n, lab in label.items() if lab == '+'}
     machine = _machine_from_partition(
-        best_partition, nodes, children, actions, accepting_nodes
+        best_partition, nodes, children, actions, accepting_nodes, unavailable
     )
     consistent = is_consistent(machine, observations)
     unobserved = sorted(
@@ -491,7 +648,7 @@ def _compatible(a: str, b: str) -> bool:
     return not ((a == "+" and b == "-") or (a == "-" and b == "+"))
 
 
-def _merge_greedily(nodes, children, label):
+def _merge_greedily(nodes, children, label, unavailable=None):
     """Blue-fringe merging: sound, polynomial, not proven minimum.
 
     Two rules, and both are load-bearing:
@@ -504,6 +661,7 @@ def _merge_greedily(nodes, children, label):
       against a representative, because two blocks can agree on what their
       representatives do and disagree on a third member.
     """
+    unavailable = unavailable or {}
     parent = {n: n for n in nodes}
 
     def find(x):
@@ -516,9 +674,29 @@ def _merge_greedily(nodes, children, label):
         known = {label.get(n, "?") for n in nodes if find(n) == root} - {"?"}
         return known.pop() if known else "?"
 
+    def rows_compatible(ra, rb) -> bool:
+        """A merged state must not both have and lack the same action.
+
+        Presence is knowledge, not absence: `back` unavailable at step 1 is a
+        fact about step 1. If a block would contain one node with a `back` edge
+        and one without, the merged state's row is undefined -- not "maybe".
+        """
+        members_a = [n for n in nodes if find(n) == ra]
+        members_b = [n for n in nodes if find(n) == rb]
+        for x in members_a:
+            for y in members_b:
+                if not _statuses_compatible(
+                    _action_status(children, unavailable, x),
+                    _action_status(children, unavailable, y),
+                ):
+                    return False
+        return True
+
     def attempt(a, b) -> bool:
         ra, rb = find(a), find(b)
         if ra == rb or not _compatible(label_of(ra), label_of(rb)):
+            return False
+        if not rows_compatible(ra, rb):
             return False
         snapshot = dict(parent)
         lo = (ra, rb) if ra < rb else (rb, ra)
@@ -543,6 +721,14 @@ def _close_under_determinism(nodes, children, find, parent, label_of) -> bool:
     Determinism demands it: one state cannot have an action leading to two states.
     So the closure is not optional -- either the targets merge too, or the
     original merge was illegal.
+
+    The comparison is between a node's OWN row and every row of the block it is
+    being merged into. Comparing children's rows instead (as an earlier version
+    did) misses the commonest case of all: two states whose rows differ by an
+    action being *absent*. Step 1 of a wizard has no `back` edge and step 2 does;
+    both nodes have empty children, so nothing earlier in this function noticed,
+    the states merged, and the machine then predicted `back` at step 1 -- a plan
+    that fails on the real app.
     """
     changed = True
     while changed:
@@ -573,51 +759,132 @@ def _close_under_determinism(nodes, children, find, parent, label_of) -> bool:
     return True
 
 
-def _minimum_partition(nodes, children, label):
-    """Exhaustive search over partitions. Only called for tiny instances.
+def _minimum_partition(nodes, children, label, unavailable=None):
+    """Fewest blocks that still describe a machine, found by bounded DFS.
 
-    Correct by construction: every set partition is enumerated once (restricted
-    growth strings), each is checked for the two things that make it a machine
-    -- no block mixes + with -, and no action leaves one block for two -- and the
-    smallest passing one wins. This is the only path that earns `PROVED_MINIMAL`.
+    Lower bound, which is what makes this exact AND fast: nodes whose labels
+    contradict (+ with -) can never share a block, so every distinct label class
+    needs its own block at minimum. The search therefore starts at that bound and
+    only explores merge sets that could do better -- in practice it proves
+    optimality after a handful of attempts instead of walking all Bell(n).
+
+    Every candidate is checked by `legal`, which requires both (a) pairwise
+    compatibility of labels and action status, and (b) determinism: an action
+    leaving a block must reach exactly one block.
+
+    The earlier version enumerated every restricted-growth string and validated
+    finished partitions, which cost 2.7s at n=11. Enumeration order and pruning
+    changed; the answer did not, and the test that pins the direction between
+    this and any heuristic still holds.
     """
+    unavailable = unavailable or {}
     n = len(nodes)
-    best: dict[tuple[str, ...], int] | None = None
-    best_blocks = n + 1
-    for assignment in _rgs(n):
-        block_of = {nodes[i]: assignment[i] for i in range(n)}
-        count = max(assignment) + 1
-        if count >= best_blocks:
-            continue
-        blocks: dict[int, list[tuple[str, ...]]] = {}
-        for node, b in block_of.items():
-            blocks.setdefault(b, []).append(node)
-        ok = True
+    if n == 0:
+        return {}
+
+    status = {node: _action_status(children, unavailable, node) for node in nodes}
+    labels = [label.get(node, "?") for node in nodes]
+    index_of = {node: i for i, node in enumerate(nodes)}
+
+    def compatible(i: int, j: int) -> bool:
+        a, b = labels[i], labels[j]
+        if a != "?" and b != "?" and a != b:
+            return False
+        return _statuses_compatible(status[nodes[i]], status[nodes[j]])
+
+    def legal(block_of: dict[int, int]) -> bool:
+        blocks: dict[int, list[int]] = {}
+        for idx, b in block_of.items():
+            blocks.setdefault(b, []).append(idx)
         for members in blocks.values():
-            known = {label.get(m, "?") for m in members} - {"?"}
-            if len(known) > 1:
-                ok = False
-                break
-        if ok:
-            for members in blocks.values():
-                targets: dict[str, int] = {}
-                for m in members:
-                    for act, t in (children.get(m) or {}).items():
-                        tb = block_of.get(t)
-                        if tb is None:
-                            continue
-                        if act in targets and targets[act] != tb:
-                            ok = False
-                            break
-                        targets[act] = tb
-                    if not ok:
-                        break
-                if not ok:
+            for i in range(len(members)):
+                for j in range(i + 1, len(members)):
+                    if not compatible(members[i], members[j]):
+                        return False
+        for members in blocks.values():
+            targets: dict[str, int] = {}
+            for idx in members:
+                for act, tgt in (children.get(nodes[idx]) or {}).items():
+                    tb = block_of.get(index_of.get(tgt, -1))
+                    if tb is None:
+                        continue
+                    if act in targets and targets[act] != tb:
+                        return False
+                    targets[act] = tb
+        return True
+
+    # Lower bound: one block per distinct known label (+ / -). Unknown nodes can
+    # join either, so they add nothing to the bound.
+    known = {lab for lab in labels if lab != "?"}
+    lower = max(1, len(known))
+
+    # Upper bound: pairwise-merging where legal, which is cheap and usually lands
+    # on or near the optimum.
+    best = {i: i for i in range(n)}
+    improved = True
+    while improved:
+        improved = False
+        for i in range(n):
+            for j in range(i + 1, n):
+                if best[i] == best[j]:
+                    continue
+                trial = dict(best)
+                old, new = trial[j], trial[i]
+                for k in trial:
+                    if trial[k] == old:
+                        trial[k] = new
+                if legal(trial) and len(set(trial.values())) < len(set(best.values())):
+                    best = trial
+                    improved = True
                     break
-        if ok and count < best_blocks:
-            best_blocks = count
-            best = block_of
-    return best
+            if improved:
+                break
+    best_size = len(set(best.values()))
+    if best_size <= lower:
+        return {nodes[i]: best[i] for i in range(n)}
+
+    # Depth-first refinement: try to reach `target` blocks, from the bound upward.
+    # First target that succeeds is optimal, because no partition with fewer
+    # blocks can exist by the bound.
+    def canonical(assignment: list[int]) -> dict[int, int]:
+        remap: dict[int, int] = {}
+        out = {}
+        for idx, b in enumerate(assignment):
+            if b not in remap:
+                remap[b] = len(remap)
+            out[idx] = remap[b]
+        return out
+
+    def search(target: int):
+        assignment = list(range(n))
+
+        def dfs(position: int, used: int):
+            if n - position + used < target:
+                return None
+            if position == n:
+                if used == target and legal(canonical(assignment)):
+                    return canonical(assignment)
+                return None
+            for block in range(min(used + 1, target)):
+                # quick reject against every member already in this block
+                if any(
+                    assignment[k] == block and not compatible(k, position)
+                    for k in range(position)
+                ):
+                    continue
+                assignment[position] = block
+                result = dfs(position + 1, max(used, block + 1))
+                if result is not None:
+                    return result
+            return None
+
+        return dfs(0, 0)
+
+    for target in range(lower, best_size):
+        found = search(target)
+        if found is not None:
+            return {nodes[i]: found[i] for i in range(n)}
+    return {nodes[i]: best[i] for i in range(n)}
 
 
 def _rgs(n: int):
@@ -638,7 +905,7 @@ def _rgs(n: int):
             a[j] = 0
 
 
-def _machine_from_partition(block_of, nodes, children, actions, accepting_nodes):
+def _machine_from_partition(block_of, nodes, children, actions, accepting_nodes, unavailable=None):
     """Build the machine from a partition, with stable block numbering.
 
     Numbering is by the block's smallest member rather than by first reachability.
@@ -651,6 +918,7 @@ def _machine_from_partition(block_of, nodes, children, actions, accepting_nodes)
         nodes[i] for i in range(len(nodes)) if block_of[nodes[i]] == b
     ))
     rename = {b: i for i, b in enumerate(ordered_blocks)}
+    start_state = rename[block_of[()]]
     transitions: dict[tuple[int, str], int] = {}
     for n in nodes:
         src = rename[block_of[n]]
@@ -661,12 +929,18 @@ def _machine_from_partition(block_of, nodes, children, actions, accepting_nodes)
     accepting = sorted(
         {rename[block_of[n]] for n in accepting_nodes if block_of[n] in rename}
     )
+    absent: dict[int, set[str]] = {}
+    for n in nodes:
+        src = rename[block_of[n]]
+        for act in unavailable.get(n) or ():
+            absent.setdefault(src, set()).add(act)
     return make_machine(
         states=list(range(len(ordered_blocks))),
-        start=rename[block_of[()]],
+        start=start_state,
         transitions=transitions,
         accepting=accepting,
         actions=actions,
+        unavailable={k: sorted(v) for k, v in absent.items()},
     )
 
 
