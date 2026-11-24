@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
-  "source_index_modules": 2020
+  "source_index_modules": 2021
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "06eeb8cd9532fa54680eaa6579e4a3d7374cd6d169c078b7a466dbafe3e0f0f5"
+  "value": "f18289a1e26cd533751dd49b764721d846b81390ed8e4c58b668af160849cc8c"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "aee2d6cfa538f8763713c93636395c441e863b187fd95f5247f63cd7afd9f796",
+   "sha256": "8b451bb1b9910d48c26297642ed149288b2c6a021bd4e99df87375414efbb78a",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -287869,15 +287869,16 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_doc_compiler_agent_v1.py",
-   "sha256": "e1132d4b95814562897b3d113ffce23cc7ee7fb79c6d18cf463f64a23213bc39",
+   "sha256": "ff5e30cf33d23c697a35da23faaf7f0b3aad9550c8d7907653893e873e59495a",
    "summary": "Goal-Directed Zero-LLM Epistemic Doc-Compiler & Active-Inference Agent V1.",
-   "symbol_count": 34,
+   "symbol_count": 37,
    "symbols": [
     "CLISubcommandContract",
     "EpistemicMemoryStore",
     "HTTPContract",
     "OptionSpec",
     "_acquire_auth_token_from_contracts",
+    "_attempt_mid_trajectory_recovery",
     "_build_os_tool_index",
     "_check_semantic_postconditions",
     "_concept_set",
@@ -287891,12 +287892,11 @@
     "_independent_cli_verify",
     "_probe_binary_help",
     "_resolve_http_path",
+    "_restore_workspace_files",
     "_score_option_for_role",
     "_select_best_subcommand",
     "_semantic_overlap",
-    "_solve_doc_compiled_http",
-    "_solve_sqlite_schema_query",
-    "_strip_html"
+    "_snapshot_workspace_files"
    ],
    "terms": {
     "active-inference": 1,
@@ -305957,7 +305957,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/multilang_causal_swe_engine_v1.py",
-   "sha256": "31f8013ec61d786948ea5aa55004a1b6927c0acf7aa040cf92a779677c780445",
+   "sha256": "031b15389bb26112395aabaffb7332c87278ca684bb59b3b8c8126f3813c2eac",
    "summary": "Multi-Language Causal Angelic SWE Engine v1 (JavaScript / TypeScript / Node.js).",
    "symbol_count": 53,
    "symbols": [
@@ -313098,6 +313098,73 @@
     "probe": 2,
     "project": 1,
     "summarize": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/polyglot_cst_skill_inducer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/polyglot_cst_skill_inducer_v1.py",
+   "sha256": "263bcbc87a8ea048bd6e2d435165237fe5a78615ad8f8e94eeda59e592b51a99",
+   "summary": "Universal Zero-LLM Polyglot CST Single-Experience Skill Inducer & Store.",
+   "symbol_count": 21,
+   "symbols": [
+    "Tok",
+    "_canonicalize_template_lines",
+    "_common_indent",
+    "_extract_hunk_lines",
+    "_find_relational_sibling",
+    "_is_declared_local_in_after",
+    "_match_pattern_at",
+    "_render_template",
+    "_resolve_relational_hole",
+    "_strip_common_indent",
+    "admit_cst_skill",
+    "apply_cst_skill",
+    "delete_cst_skill",
+    "detect_language",
+    "induce_cst_skill",
+    "load_cst_store",
+    "new_cst_store",
+    "recall_cst_candidates",
+    "record_cst_counterexample",
+    "save_cst_store",
+    "tokenize_code"
+   ],
+   "terms": {
+    "admit_cst_skill": 1,
+    "apply_cst_skill": 1,
+    "canonicalize_template_lines": 1,
+    "common_indent": 1,
+    "cst": 2,
+    "delete_cst_skill": 1,
+    "detect_language": 1,
+    "extract_hunk_lines": 1,
+    "find_relational_sibling": 1,
+    "induce_cst_skill": 1,
+    "inducer": 2,
+    "is_declared_local_in_after": 1,
+    "load_cst_store": 1,
+    "match_pattern_at": 1,
+    "new_cst_store": 1,
+    "polyglot": 2,
+    "recall_cst_candidates": 1,
+    "record_cst_counterexample": 1,
+    "render_template": 1,
+    "resolve_relational_hole": 1,
+    "save_cst_store": 1,
+    "single-experience": 1,
+    "skill": 2,
+    "store": 1,
+    "strip_common_indent": 1,
+    "tok": 1,
+    "tokenize_code": 1,
+    "universal": 1,
+    "v1": 1,
+    "zero-llm": 1
    }
   },
   {

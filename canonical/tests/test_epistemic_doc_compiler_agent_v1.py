@@ -859,6 +859,186 @@ class TestEpistemicDocCompilerAgentV1(unittest.TestCase):
             srv.shutdown()
             srv.server_close()
 
+    def test_13_iter71_relational_sqlite_join_and_beliefweaver_recovery(self) -> None:
+        """ONE Front Door solves BOTH:
+        (A) Relational multi-table SQLite FK `JOIN` + `WHERE` + `GROUP BY SUM` -> Unseen CLI -> Auth OpenAPI;
+        (B) BELIEFWEAVER mid-trajectory failure diagnosis, pre-step workspace rollback (cleaning corrupt
+            partial artifacts), and hidden-gzip wrapper recovery -> Auth OpenAPI (`model_calls == 0`).
+        """
+        import gzip
+        import sqlite3
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        state = {"reports": {}, "next_id": 1}
+        openapi_spec = {
+            "openapi": "3.0.0",
+            "components": {"securitySchemes": {"bearerAuth": {"type": "http", "scheme": "bearer"}}},
+            "paths": {
+                "/v1/auth/token": {
+                    "post": {
+                        "summary": "Issue bearer token",
+                        "requestBody": {
+                            "content": {
+                                "application/json": {
+                                    "schema": {
+                                        "type": "object",
+                                        "properties": {
+                                            "username": {"type": "string"},
+                                            "password": {"type": "string"},
+                                        },
+                                    }
+                                }
+                            }
+                        },
+                    }
+                },
+                "/v1/reports": {
+                    "post": {
+                        "summary": "Submit report payload",
+                        "security": [{"bearerAuth": []}],
+                        "requestBody": {"content": {"application/json": {"schema": {"type": "object"}}}},
+                    }
+                },
+                "/v1/reports/{id}": {"get": {"summary": "Read back report", "security": [{"bearerAuth": []}]}},
+            },
+        }
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args: object) -> None:
+                pass
+
+            def _send(self, code: int, obj: object) -> None:
+                raw = json.dumps(obj).encode("utf-8")
+                self.send_response(code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
+
+            def do_GET(self) -> None:
+                if self.path == "/openapi.json":
+                    return self._send(200, openapi_spec)
+                if self.headers.get("Authorization") != "Bearer jwt-bw-99":
+                    return self._send(401, {"error": "unauth"})
+                if self.path.startswith("/v1/reports/"):
+                    rid = self.path.rsplit("/", 1)[-1]
+                    if rid in state["reports"]:
+                        return self._send(200, state["reports"][rid])
+                return self._send(404, {"error": "nf"})
+
+            def do_POST(self) -> None:
+                n = int(self.headers.get("Content-Length", "0"))
+                body = json.loads(self.rfile.read(n).decode("utf-8") or "{}")
+                if self.path == "/v1/auth/token":
+                    if body.get("username") == "fin" and body.get("password") == "audit77":
+                        return self._send(200, {"access_token": "jwt-bw-99"})
+                    return self._send(401, {"error": "bad"})
+                if self.headers.get("Authorization") != "Bearer jwt-bw-99":
+                    return self._send(401, {"error": "unauth"})
+                if self.path == "/v1/reports":
+                    rid = str(state["next_id"])
+                    state["next_id"] += 1
+                    rec = {"id": rid, "accepted": True, "payload": body}
+                    state["reports"][rid] = rec
+                    return self._send(201, rec)
+                return self._send(404, {"error": "unk"})
+
+        srv = http.server.ThreadingHTTPServer(("127.0.0.1", 0), Handler)
+        port = srv.server_address[1]
+        threading.Thread(target=srv.serve_forever, daemon=True).start()
+        try:
+            model = open_model()
+            # (A) Relational multi-table FK JOIN + GROUP BY SUM
+            with tempfile.TemporaryDirectory(prefix="epistemic_rel_join_") as td:
+                ws = pathlib.Path(td)
+                (ws / "bin").mkdir()
+                con = sqlite3.connect(str(ws / "billing.sqlite"))
+                con.execute("CREATE TABLE teams (id INTEGER PRIMARY KEY, name TEXT)")
+                con.executemany("INSERT INTO teams VALUES (?, ?)", [(1, "infra"), (2, "ml"), (3, "sec")])
+                con.execute(
+                    "CREATE TABLE invoices (id INTEGER PRIMARY KEY, team_id INTEGER REFERENCES teams(id), status TEXT, amount INTEGER)"
+                )
+                con.executemany(
+                    "INSERT INTO invoices VALUES (?, ?, ?, ?)",
+                    [(1, 1, "paid", 120), (2, 1, "paid", 80), (3, 1, "void", 999), (4, 2, "paid", 350), (5, 3, "pending", 500)],
+                )
+                con.commit()
+                con.close()
+
+                cli = ws / "bin" / "pack_report"
+                cli.write_text(
+                    "#!/usr/bin/env python3\n"
+                    "import argparse, json, pathlib\n"
+                    "ap = argparse.ArgumentParser(description='Wrap totals into report JSON')\n"
+                    "ap.add_argument('--input', required=True, help='Input totals JSON')\n"
+                    "ap.add_argument('--output', required=True, help='Output report JSON')\n"
+                    "a = ap.parse_args()\n"
+                    "rows = json.loads(pathlib.Path(a.input).read_text())\n"
+                    "pathlib.Path(a.output).write_text(json.dumps({'teams': rows, 'grand_total': sum(r['total_amount'] for r in rows)}))\n",
+                    encoding="utf-8",
+                )
+                cli.chmod(0o755)
+
+                ga = (
+                    f"Export total amount per team for paid invoices from billing.sqlite to totals.json, "
+                    f"then transform totals.json into report.json, "
+                    f"then POST report.json to http://127.0.0.1:{port} using user=fin pass=audit77 and save receipt to receipt.json"
+                )
+                ra = model.solve(ga, inputs={"workspace": str(ws)}, mode="EPISTEMIC")
+                self.assertTrue(ra.get("pass"), ra)
+                self.assertEqual(ra["model_calls"], 0)
+                sql_a = ra["epistemic_result"]["doc_compiler_result"]["steps"][0]["sql"]
+                self.assertIn("JOIN", sql_a)
+                self.assertIn("GROUP BY", sql_a)
+                self.assertEqual(
+                    json.loads((ws / "totals.json").read_text(encoding="utf-8")),
+                    [{"team": "infra", "total_amount": 200}, {"team": "ml", "total_amount": 350}],
+                )
+                self.assertEqual(json.loads((ws / "receipt.json").read_text(encoding="utf-8"))["payload"]["grand_total"], 550)
+
+            # (B) BELIEFWEAVER checkpoint rollback + hidden-gzip recovery
+            with tempfile.TemporaryDirectory(prefix="epistemic_bw_rec_") as td:
+                ws = pathlib.Path(td)
+                (ws / "bin").mkdir()
+                (ws / "raw_events.json").write_bytes(
+                    gzip.compress(json.dumps([{"k": "a", "v": 10}, {"k": "b", "v": 25}]).encode("utf-8"))
+                )
+                cli_b = ws / "bin" / "sum_events"
+                cli_b.write_text(
+                    "#!/usr/bin/env python3\n"
+                    "import argparse, json, pathlib\n"
+                    "ap = argparse.ArgumentParser(description='Aggregate JSON event records')\n"
+                    "ap.add_argument('--input', required=True, help='Input JSON events file')\n"
+                    "ap.add_argument('--output', required=True, help='Output aggregated JSON file')\n"
+                    "a = ap.parse_args()\n"
+                    "pathlib.Path('partial_corrupt.tmp').write_text('DIRTY')\n"
+                    "rows = json.loads(pathlib.Path(a.input).read_text(encoding='utf-8'))\n"
+                    "pathlib.Path('partial_corrupt.tmp').unlink(missing_ok=True)\n"
+                    "pathlib.Path(a.output).write_text(json.dumps({'count': len(rows), 'sum': sum(r['v'] for r in rows)}))\n",
+                    encoding="utf-8",
+                )
+                cli_b.chmod(0o755)
+
+                gb = (
+                    f"Transform raw_events.json into agg.json, "
+                    f"then POST agg.json to http://127.0.0.1:{port} using user=fin pass=audit77 and save receipt to receipt_b.json"
+                )
+                rb = model.solve(gb, inputs={"workspace": str(ws)}, mode="EPISTEMIC")
+                self.assertTrue(rb.get("pass"), rb)
+                self.assertEqual(rb["model_calls"], 0)
+                bu = rb["epistemic_result"]["doc_compiler_result"]["belief_updates"]
+                self.assertEqual(len(bu), 1)
+                self.assertEqual(bu[0]["diagnosis"], "hidden_gzip_wrapper_in_mislabeled_file")
+                self.assertTrue(bu[0]["recovered"])
+                self.assertFalse((ws / "partial_corrupt.tmp").exists())
+                self.assertEqual(
+                    json.loads((ws / "receipt_b.json").read_text(encoding="utf-8"))["payload"],
+                    {"count": 2, "sum": 35},
+                )
+        finally:
+            srv.shutdown()
+            srv.server_close()
+
 
 if __name__ == "__main__":
     unittest.main()

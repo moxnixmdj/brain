@@ -5274,5 +5274,73 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter71_polyglot_cst_single_experience_inducer_and_beliefweaver_recovery": {
+    "date": "2026-11-21",
+    "summary": "Iter 71 directly attacked the #1 architectural bottleneck (hand-authored regex passes vs true single-experience executable skill induction + mid-trajectory failure recovery): (1) Created `canonical/runtime/polyglot_cst_skill_inducer_v1.py` (O(N) polyglot CST tokenizer, alpha-canonicalization, relational sibling hole discovery, hygienic local vars, self-roundtrip admission, fail-closed foreign-name refusal, counterexample precondition narrowing, external inspectable/deletable JSON store) and wired it at Tier-0 into `multilang_causal_swe_engine_v1.py` (JS/TS + C/C++); (2) Verified zero-hardcoded single-experience cross-repo transfer on two real 2025 C security vulnerabilities (`DaveGamble/cJSON@74e1ff4` CVE-2025-57052 and `benhoyt/inih@8e06f6b` ASan stack-buffer-underflow #206: UNSOLVED with empty memory -> VERIFIED on Attempt #1 after ONE unrelated 3-line C experience -> immediately UNSOLVED after deleting JSON skill); (3) Upgraded `epistemic_doc_compiler_agent_v1.py` with live foreign-key multi-table SQLite `JOIN` + `GROUP BY SUM/COUNT/AVG` compilation and BELIEFWEAVER pre-step workspace checkpoints + diagnostic rollback/repair for hidden-state mislabeled gzip inputs & stderr missing-flag recovery.",
+    "cumulative_unique_verified_oss_commits_upstream_tests": 226,
+    "single_experience_cross_repo_cve_transfer_verified": [
+      {
+        "repo": "DaveGamble/cJSON",
+        "commit": "74e1ff4",
+        "cve": "CVE-2025-57052",
+        "date": "2025-09-05",
+        "file": "cJSON_Utils.c",
+        "lineno": 285,
+        "empty_memory_status": "UNSOLVED",
+        "after_1_unrelated_experience": {
+          "status": "VERIFIED",
+          "attempt": 1,
+          "tier": "C_CST_TIER0_LEARNED_SKILL",
+          "elapsed_s": 4.4,
+          "independent_asan_cve_rc": 0,
+          "upstream_cjson_add_rc": 0
+        },
+        "note": "Faithful CVE-2025-57052 reproducer (`/1:` on 21-elem array); counted separately from the 226 upstream-test-bearing commits for strict benchmark honesty.",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "benhoyt/inih",
+        "commit": "8e06f6b",
+        "issue": "#206 ASan Stack-Buffer-Underflow OOB Read",
+        "date": "2025-10-24",
+        "file": "ini.c",
+        "lineno": 167,
+        "empty_memory_status": "UNSOLVED",
+        "after_1_unrelated_experience": {
+          "status": "VERIFIED",
+          "attempt": 1,
+          "tier": "C_CST_TIER0_LEARNED_SKILL",
+          "elapsed_s": 6.61,
+          "independent_asan_oob_rc": 0,
+          "upstream_unittest_sh_rc": 0
+        },
+        "note": "Faithful ASan stack-buffer-underflow reproducer + full upstream tests/unittest.sh pass; counted separately from the 226 upstream-test-bearing commits.",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "epistemic_relational_and_beliefweaver_verified": {
+      "relational_sqlite_join_groupby_pipeline": {
+        "compiled_sql": "SELECT t1.\"name\" AS \"team\", SUM(t0.\"amount\") AS \"total_amount\" FROM \"invoices\" t0 JOIN \"teams\" t1 ON t0.\"team_id\" = t1.\"id\" WHERE LOWER(t0.\"status\") = LOWER(?) GROUP BY t1.\"name\" ORDER BY t1.\"name\" ASC",
+        "elapsed_ms": 267.27,
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      "beliefweaver_hidden_gzip_rollback_recovery": {
+        "diagnosis": "hidden_gzip_wrapper_in_mislabeled_file",
+        "corrupt_partial_artifact_rolled_back": true,
+        "recovered": true,
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    },
+    "tests_added": [
+      "canonical/tests/test_polyglot_cst_skill_inducer_v1.py",
+      "canonical/tests/test_epistemic_doc_compiler_agent_v1.py::test_13_iter71_relational_sqlite_join_and_beliefweaver_recovery"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

@@ -2187,31 +2187,128 @@ def _solve_sqlite_schema_query(
 
         # Score tables against goal via schema + column names
         table_meta: list[tuple[float, str, list[tuple[str, str]]]] = []
+        cols_by_table: dict[str, list[tuple[str, str]]] = {}
+        fk_edges: list[tuple[str, str, str, str]] = []  # (from_tbl, from_col, to_tbl, to_col)
         for tbl in tables:
             cols = [(str(r[1]), str(r[2] or "").upper()) for r in con.execute(f'PRAGMA table_info("{tbl}")').fetchall()]
+            cols_by_table[tbl] = cols
             col_names = [c for c, _ in cols]
             sc = _semantic_overlap(f"{tbl} {' '.join(col_names)}", goal)
             if tbl.lower() in g_lo or tbl.lower().rstrip("s") in g_lo:
                 sc += 4.0
             table_meta.append((sc, tbl, cols))
+            try:
+                for fk in con.execute(f'PRAGMA foreign_key_list("{tbl}")').fetchall():
+                    fk_edges.append((tbl, str(fk[3]), str(fk[2]), str(fk[4])))
+            except Exception:
+                pass
+        # Also infer implicit `<other_singular>_id -> other.id` FK links when PRAGMA foreign_key_list is empty
+        for tbl, cols in cols_by_table.items():
+            for cname, _ in cols:
+                if cname.lower().endswith("_id"):
+                    stem = cname.lower()[:-3]
+                    for other in tables:
+                        if other != tbl and (other.lower() == stem or other.lower().rstrip("s") == stem):
+                            other_cols = [c for c, _ in cols_by_table[other]]
+                            if "id" in [oc.lower() for oc in other_cols]:
+                                id_c = next(oc for oc in other_cols if oc.lower() == "id")
+                                edge = (tbl, cname, other, id_c)
+                                if edge not in fk_edges:
+                                    fk_edges.append(edge)
+
         table_meta.sort(key=lambda x: (-x[0], x[1]))
         _, chosen_tbl, chosen_cols = table_meta[0]
+
+        # Detect relational aggregation (`total`/`sum`/`count`/`average` + `per <X>`/`by <X>`) with automatic FK JOIN!
+        agg_fn: str | None = None
+        if re.search(r"(?i)\b(sum|total)\b", goal or ""):
+            agg_fn = "SUM"
+        elif re.search(r"(?i)\b(count|number\s+of|how\s+many)\b", goal or ""):
+            agg_fn = "COUNT"
+        elif re.search(r"(?i)\b(avg|average|mean)\b", goal or ""):
+            agg_fn = "AVG"
+        m_grp = re.search(r"(?i)\b(?:per|by|for\s+each|grouped\s+by)\s+([A-Za-z_][A-Za-z0-9_]*)\b", goal or "")
+        join_tbl: str | None = None
+        join_on: str | None = None
+        group_expr: str | None = None
+        group_alias: str | None = None
+        agg_expr: str | None = None
+        agg_alias: str | None = None
+
+        if agg_fn and m_grp:
+            grp_tok = m_grp.group(1).lower()
+            grp_stem = grp_tok.rstrip("s")
+            # 1. Pick the fact table containing a numeric column mentioned in goal (or best-scoring numeric table)
+            fact_tbl = chosen_tbl
+            measure_col: str | None = None
+            if agg_fn in ("SUM", "AVG"):
+                for _, t_cand, c_cand in table_meta:
+                    num_cols = [
+                        cn for cn, ct in c_cand
+                        if any(nt in ct for nt in ("INT", "REAL", "NUM", "DEC", "FLOAT"))
+                        and cn.lower() != "id" and not cn.lower().endswith("_id")
+                    ]
+                    mentioned = [cn for cn in num_cols if re.search(rf"(?i)\b{re.escape(cn)}\b", goal or "")]
+                    if mentioned:
+                        fact_tbl = t_cand
+                        measure_col = mentioned[0]
+                        break
+                    if measure_col is None and num_cols:
+                        fact_tbl = t_cand
+                        measure_col = num_cols[0]
+            chosen_tbl = fact_tbl
+            chosen_cols = cols_by_table[chosen_tbl]
+
+            # 2. Resolve grouping column either directly on `chosen_tbl` OR across an FK-linked dimension table!
+            direct_grp = next(
+                (cn for cn, _ in chosen_cols if cn.lower() in (grp_tok, grp_stem)),
+                None,
+            )
+            if direct_grp:
+                group_expr = f't0."{direct_grp}"'
+                group_alias = direct_grp
+            else:
+                # Follow FK edge from/to `chosen_tbl` to a dimension table matching `grp_tok`/`grp_stem`
+                for f_t, f_c, to_t, to_c in fk_edges:
+                    if f_t == chosen_tbl and (to_t.lower() in (grp_tok, grp_stem) or to_t.lower().rstrip("s") == grp_stem):
+                        join_tbl = to_t
+                        join_on = f't0."{f_c}" = t1."{to_c}"'
+                    elif to_t == chosen_tbl and (f_t.lower() in (grp_tok, grp_stem) or f_t.lower().rstrip("s") == grp_stem):
+                        join_tbl = f_t
+                        join_on = f't0."{to_c}" = t1."{f_c}"'
+                    if join_tbl:
+                        dim_cols = cols_by_table[join_tbl]
+                        label_col = next(
+                            (cn for cn, ct in dim_cols if "TEXT" in ct or "CHAR" in ct or cn.lower() in ("name", "title", "label", "code")),
+                            dim_cols[0][0],
+                        )
+                        group_expr = f't1."{label_col}"'
+                        group_alias = grp_stem if label_col.lower() == "name" else label_col
+                        break
+            if group_expr:
+                if agg_fn == "COUNT":
+                    agg_expr = "COUNT(*)"
+                    agg_alias = "count"
+                elif measure_col:
+                    agg_expr = f'{agg_fn}(t0."{measure_col}")'
+                    agg_alias = f"{'total' if agg_fn == 'SUM' else agg_fn.lower()}_{measure_col}"
 
         # Build WHERE predicates from explicit kv_bindings OR live distinct categorical values mentioned in goal!
         where_clauses: list[str] = []
         params: list[Any] = []
         used_cols: set[str] = set()
+        t_prefix = "t0." if group_expr else ""
 
         for cname, ctype in chosen_cols:
             c_lo = cname.lower()
             if cname in kv:
-                where_clauses.append(f'"{cname}" = ?')
+                where_clauses.append(f'{t_prefix}"{cname}" = ?')
                 params.append(kv[cname])
                 used_cols.add(cname)
                 continue
             for k, v in kv.items():
                 if k.lower() == c_lo:
-                    where_clauses.append(f'"{cname}" = ?')
+                    where_clauses.append(f'{t_prefix}"{cname}" = ?')
                     params.append(v)
                     used_cols.add(cname)
                     break
@@ -2229,13 +2326,13 @@ def _solve_sqlite_schema_query(
                         goal or "",
                     )
                     if m_num:
-                        where_clauses.append(f'"{cname}" > ?')
+                        where_clauses.append(f'{t_prefix}"{cname}" > ?')
                         params.append(float(m_num.group(1)) if "." in m_num.group(1) else int(m_num.group(1)))
                         used_cols.add(cname)
                         continue
                 else:
                     op_s, num_s = m_num.group(1), m_num.group(2)
-                    where_clauses.append(f'"{cname}" {op_s} ?')
+                    where_clauses.append(f'{t_prefix}"{cname}" {op_s} ?')
                     params.append(float(num_s) if "." in num_s else int(num_s))
                     used_cols.add(cname)
                     continue
@@ -2249,20 +2346,28 @@ def _solve_sqlite_schema_query(
             for dr in drows:
                 val = dr[0]
                 if isinstance(val, str) and len(val) >= 3 and re.search(rf"(?i)\b{re.escape(val)}\b", goal or ""):
-                    where_clauses.append(f'LOWER("{cname}") = LOWER(?)')
+                    where_clauses.append(f'LOWER({t_prefix}"{cname}") = LOWER(?)')
                     params.append(val)
                     used_cols.add(cname)
                     break
 
-        sql = f'SELECT * FROM "{chosen_tbl}"'
-        if where_clauses:
-            sql += " WHERE " + " AND ".join(where_clauses)
-        # Optional ORDER BY / LIMIT
-        for cname, _ in chosen_cols:
-            if re.search(rf"(?i)\border(?:ed)?\s+by\s+{re.escape(cname)}\b", goal or ""):
-                direction = "DESC" if re.search(r"(?i)\b(desc|descending|highest|largest|reverse)\b", goal or "") else "ASC"
-                sql += f' ORDER BY "{cname}" {direction}'
-                break
+        if group_expr and agg_expr and group_alias and agg_alias:
+            sql = f'SELECT {group_expr} AS "{group_alias}", {agg_expr} AS "{agg_alias}" FROM "{chosen_tbl}" t0'
+            if join_tbl and join_on:
+                sql += f' JOIN "{join_tbl}" t1 ON {join_on}'
+            if where_clauses:
+                sql += " WHERE " + " AND ".join(where_clauses)
+            sql += f" GROUP BY {group_expr} ORDER BY {group_expr} ASC"
+        else:
+            sql = f'SELECT * FROM "{chosen_tbl}"'
+            if where_clauses:
+                sql += " WHERE " + " AND ".join(where_clauses)
+            # Optional ORDER BY / LIMIT
+            for cname, _ in chosen_cols:
+                if re.search(rf"(?i)\border(?:ed)?\s+by\s+{re.escape(cname)}\b", goal or ""):
+                    direction = "DESC" if re.search(r"(?i)\b(desc|descending|highest|largest|reverse)\b", goal or "") else "ASC"
+                    sql += f' ORDER BY "{cname}" {direction}'
+                    break
         m_lim = re.search(r"(?i)\b(?:limit|top|first)\s+(\d+)\b", goal or "")
         if m_lim:
             sql += f" LIMIT {int(m_lim.group(1))}"
@@ -2728,6 +2833,115 @@ def _decompose_multi_step_goal(goal: str) -> list[str]:
     return merged if merged else [text]
 
 
+def _snapshot_workspace_files(ws: pathlib.Path) -> dict[str, bytes]:
+    """Lightweight pre-step checkpoint of top-level workspace files (BELIEFWEAVER rollback state)."""
+    snap: dict[str, bytes] = {}
+    for p in sorted(ws.iterdir()):
+        if p.is_file() and not p.name.startswith("."):
+            try:
+                if p.stat().st_size <= 8_000_000:
+                    snap[p.name] = p.read_bytes()
+            except OSError:
+                pass
+    return snap
+
+
+def _restore_workspace_files(ws: pathlib.Path, snap: Mapping[str, bytes]) -> None:
+    """Roll back corrupt partial files created by a failed step to the exact pre-step checkpoint."""
+    for p in list(ws.iterdir()):
+        if p.is_file() and not p.name.startswith(".") and p.name not in snap:
+            try:
+                p.unlink()
+            except OSError:
+                pass
+    for name, data in snap.items():
+        p = ws / name
+        try:
+            if not p.is_file() or p.read_bytes() != data:
+                p.write_bytes(data)
+        except OSError:
+            pass
+
+
+def _attempt_mid_trajectory_recovery(
+    ws: pathlib.Path,
+    clause: str,
+    step_res: Mapping[str, Any],
+    checkpoint: Mapping[str, bytes],
+    *,
+    step_idx: int,
+    scratch_files: list[pathlib.Path],
+) -> tuple[str | None, dict[str, Any] | None]:
+    """BELIEFWEAVER-style diagnostic belief update + rollback on mid-trajectory failure.
+
+    Inspects failure telemetry (`stderr`, `attempts`, input magic bytes) to recover from:
+      1. Hidden-state mislabeled compressed/encoded inputs (e.g. gzip bytes inside a `.json`/`.csv` file)
+      2. Undocumented/missed required CLI options revealed in `stderr` (`required: --flag` / `choose from '...'`)
+    Returns `(repaired_clause, belief_update_record)` or `(None, None)`.
+    """
+    import gzip as _gzip
+
+    # Collect diagnostic stderr/notes across all failed attempts
+    diag_parts: list[str] = [str(step_res.get("verification") or ""), str(step_res.get("stderr") or "")]
+    for att in (step_res.get("attempts") or ()):
+        if isinstance(att, Mapping):
+            diag_parts.append(str(att.get("stderr") or ""))
+            diag_parts.append(str(att.get("stdout") or ""))
+    diag_txt = "\n".join(diag_parts)
+
+    # Recovery 1: Hidden-state mislabeled gzip input file (magic `\x1f\x8b` despite `.json`/`.csv`/`.txt` name!)
+    clause_no_urls = re.sub(r"https?://\S+", " ", clause)
+    for m_f in _FILE_TOK_RE.finditer(clause_no_urls):
+        rel_f = m_f.group(1)
+        fp = ws / rel_f
+        if not fp.is_file() or rel_f.lower().endswith((".gz", ".gzip", ".tgz", ".tar.gz")):
+            continue
+        try:
+            raw_b = fp.read_bytes()
+        except OSError:
+            continue
+        if raw_b.startswith(b"\x1f\x8b"):
+            try:
+                plain_b = _gzip.decompress(raw_b)
+            except Exception:
+                continue
+            _restore_workspace_files(ws, checkpoint)
+            ext = pathlib.Path(rel_f).suffix or ".txt"
+            unpacked_rel = f"_epistemic_unpacked_{step_idx}{ext}"
+            up = ws / unpacked_rel
+            up.write_bytes(plain_b)
+            scratch_files.append(up)
+            repaired = clause.replace(rel_f, unpacked_rel, 1)
+            return repaired, {
+                "step": step_idx,
+                "diagnosis": "hidden_gzip_wrapper_in_mislabeled_file",
+                "original_file": rel_f,
+                "unpacked_file": unpacked_rel,
+                "action": "rollback_checkpoint_and_decompress",
+            }
+
+    # Recovery 2: Diagnostic `stderr` reveals a missing required flag / allowed enum choice
+    m_req = re.search(r"(?i)(?:required|missing)[^:\n]*:\s*(--[A-Za-z0-9][A-Za-z0-9_-]*)", diag_txt)
+    if m_req:
+        req_flag = m_req.group(1)
+        flag_key = req_flag.lstrip("-")
+        # Check if stderr also lists valid choices (e.g. `choose from 'json', 'csv'` or `expected: strict`)
+        m_ch = re.search(r"(?i)(?:choose\s+from|valid\s+values|must\s+be\s+one\s+of)[^'\"]*['\"]([A-Za-z0-9_.-]+)['\"]", diag_txt)
+        val_hint = m_ch.group(1) if m_ch else "true"
+        if f"{flag_key}=" not in clause:
+            _restore_workspace_files(ws, checkpoint)
+            repaired = f"{clause} {flag_key}={val_hint}"
+            return repaired, {
+                "step": step_idx,
+                "diagnosis": "stderr_missing_required_flag",
+                "discovered_flag": req_flag,
+                "bound_value": val_hint,
+                "action": "rollback_checkpoint_and_rebind_flag",
+            }
+
+    return None, None
+
+
 def solve_multi_step_with_instant_knowledge(
     goal: str,
     *,
@@ -2740,7 +2954,8 @@ def solve_multi_step_with_instant_knowledge(
     timeout_s: float = 20.0,
 ) -> dict[str, Any]:
     """Compose sequential sub-goals (`A, then B, then C` OR implicit `Decompress X, filter Y, sort Z, and save to out.txt`)
-    across heterogeneous unseen tools/services with automatic typed dataflow handoff and
+    across heterogeneous unseen tools/services with automatic typed dataflow handoff,
+    BELIEFWEAVER pre-step workspace checkpoints + diagnostic rollback/repair, and
     independent semantic verification at EVERY intermediate step.
     """
     t0 = time.monotonic()
@@ -2760,6 +2975,7 @@ def solve_multi_step_with_instant_knowledge(
 
     step_results: list[dict[str, Any]] = []
     all_gaps: list[str] = []
+    belief_updates: list[dict[str, Any]] = []
     scratch_files: list[pathlib.Path] = []
     prev_handoff: str | None = None
 
@@ -2767,6 +2983,7 @@ def solve_multi_step_with_instant_knowledge(
         for idx, raw_clause in enumerate(clauses):
             is_last = idx == len(clauses) - 1
             clause = raw_clause
+            checkpoint = _snapshot_workspace_files(ws)
 
             # Check if this clause already explicitly names its own input & output files (strip URLs!)
             clause_no_urls = re.sub(r"https?://\S+", " ", clause)
@@ -2803,9 +3020,38 @@ def solve_multi_step_with_instant_knowledge(
                 verifier=verifier if is_last else None,
                 timeout_s=timeout_s,
             )
+
+            # BELIEFWEAVER Mid-Trajectory Failure Diagnosis -> Rollback -> Belief Update -> Repair (up to 2 rounds)
+            if step_res.get("status") != "VERIFIED":
+                cur_clause = clause
+                for _rec_round in range(2):
+                    rep_clause, b_upd = _attempt_mid_trajectory_recovery(
+                        ws, cur_clause, step_res, checkpoint, step_idx=idx, scratch_files=scratch_files
+                    )
+                    if rep_clause is None or b_upd is None:
+                        break
+                    belief_updates.append(b_upd)
+                    all_gaps.append(f"belief_recovery:{b_upd['diagnosis']}")
+                    cur_clause = rep_clause
+                    step_res = solve_with_instant_knowledge(
+                        cur_clause,
+                        workspace=ws,
+                        memory=memory,
+                        knowledge_source=knowledge_source,
+                        base_url=base_url if ("http://" in cur_clause or "https://" in cur_clause or (is_last and base_url)) else None,
+                        candidate_binaries=candidate_binaries,
+                        verifier=verifier if is_last else None,
+                        timeout_s=timeout_s,
+                    )
+                    if step_res.get("status") == "VERIFIED":
+                        b_upd["recovered"] = True
+                        break
+                    b_upd["recovered"] = False
+
             step_results.append(step_res)
             all_gaps.extend(step_res.get("gaps_queried") or [])
             if step_res.get("status") != "VERIFIED":
+                _restore_workspace_files(ws, checkpoint)
                 return {
                     "schema": SCHEMA,
                     "authority": AUTHORITY,
@@ -2814,6 +3060,7 @@ def solve_multi_step_with_instant_knowledge(
                     "failed_step_index": idx,
                     "failed_clause": clause,
                     "steps": step_results,
+                    "belief_updates": belief_updates,
                     "gaps_queried": all_gaps,
                     "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
                     "model_calls": 0,
@@ -2855,6 +3102,7 @@ def solve_multi_step_with_instant_knowledge(
         "mode": "MULTI_STEP_DOC_COMPILED_ACTIVE_INFERENCE",
         "steps_completed": len(step_results),
         "steps": step_results,
+        "belief_updates": belief_updates,
         "generalized_workflow_law": workflow_law,
         "gaps_queried": all_gaps,
         "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),

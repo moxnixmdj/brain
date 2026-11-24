@@ -29,6 +29,7 @@ from typing import Any, Mapping, Sequence
 from urllib.parse import unquote, urlparse
 
 from canonical.runtime import oe_sygus_synthesizer_v1 as OESYGUS
+from canonical.runtime import polyglot_cst_skill_inducer_v1 as CST_SKILLS
 
 SCHEMA = "BRAIN_MULTILANG_CAUSAL_SWE_ENGINE_V1"
 
@@ -1285,6 +1286,7 @@ def synthesize_js_candidates(
             return (-score_p, _orig_pos.get(rf, 999))
         file_order.sort(key=_file_promo)
 
+    # 0a. Universal Polyglot CST Single-Experience Executable Skill Recall (Tier-0, zero hardcoded passes!)
     # 0. Tier-0 Recall from External Inspectable `js_rewrite_laws` (0 extra search on unseen repos!)
     js_laws = memory.get("js_rewrite_laws") if isinstance(memory, Mapping) else None
     if isinstance(js_laws, Mapping) and js_laws:
@@ -1309,6 +1311,28 @@ def synthesize_js_candidates(
                             nl = list(lines)
                             nl[ln - 1] = new_line
                             add_cand(rel, ln, "JS_TIER0_SKILL_RECALL", f"tier0({rec.get('kind', lid)})", "".join(nl), skill_id=str(lid))
+
+    # 0_cst. Universal Polyglot CST Single-Experience Learned Skill Recall (Iter 71)
+    cst_store = memory.get("polyglot_cst_skills") if isinstance(memory, Mapping) else None
+    if isinstance(cst_store, Mapping) and cst_store.get("skills"):
+        for rel in file_order[:4]:
+            p = worktree / rel
+            if not p.is_file():
+                continue
+            orig = p.read_text(encoding="utf-8", errors="replace")
+            lang_js = CST_SKILLS.detect_language(rel)
+            lns = lines_by_file_ranked.get(rel) or []
+            for m_cst in CST_SKILLS.recall_cst_candidates(
+                cst_store, orig, language=lang_js, target_lines=lns, max_candidates=6
+            ):
+                add_cand(
+                    rel,
+                    int(m_cst["lineno"]),
+                    "JS_CST_TIER0_LEARNED_SKILL",
+                    f"cst_skill({m_cst['skill_id']},sites={m_cst['sites_patched']})",
+                    m_cst["patched_source"],
+                    skill_id=m_cst["skill_id"],
+                )
 
     # Pass 1: High-precision semantic operators (Ops 1-5) across ranked lines
     # Pass 2: Broad comparison/boolean flips (Op 6) so they never starve Pass 1
@@ -3542,7 +3566,8 @@ def synthesize_js_candidates(
     _raw_lo = str(getattr(loc, "initial_output", "") or "").lower()
     _empty_or_range = ("empty" in _raw_lo) or ("rangeerror" in _raw_lo)
     _TIER_PRIO = {
-        "JS_TIER0_SKILL_RECALL": 0,
+        "JS_TIER0_SKILL_RECALL": -2,
+        "JS_CST_TIER0_LEARNED_SKILL": -1,
         "JS_TYPEOF_STRING_NONEMPTY_GUARD": 0 if _empty_or_range else 1,
         "JS_TYPEERROR_OPTIONAL_MEMBER_GUARD": 1,
         "JS_TS_INTERFACE_S3_GUARD": 1,
@@ -4077,6 +4102,7 @@ def solve_js_repository(
             oe_cands_ran = True
             if oe_cands:
                 _p0_tiers = {
+                    "JS_CST_TIER0_LEARNED_SKILL",
                     "JS_TIER0_SKILL_RECALL",
                     "JS_TYPEOF_STRING_NONEMPTY_GUARD",
                     "JS_REGEX_DOTALL_NEWLINE_LAW",
@@ -4269,6 +4295,17 @@ def solve_js_repository(
                                 _oe_law["utility_q"] = 0.85
                                 jstore[lid] = _oe_law
                             learned_law_id = lid
+                    # Also induce & admit an executable polyglot CST rewrite skill from this ONE verified fix!
+                    _cst_js = memory.setdefault("polyglot_cst_skills", CST_SKILLS.new_cst_store())
+                    _adm_js = CST_SKILLS.admit_cst_skill(
+                        _cst_js,
+                        orig_src,
+                        cand.patched_source,
+                        language=CST_SKILLS.detect_language(cand.file),
+                        description=f"{cand.tier}:{cand.description}",
+                    )
+                    if _adm_js.get("admitted") and not learned_law_id:
+                        learned_law_id = _adm_js["skill_id"]
 
                 if cand.extra_patches:
                     for ef, esrc in cand.extra_patches:
@@ -5624,6 +5661,28 @@ def synthesize_c_candidates(
             asserted_fields.append(af)
 
     cmp_deferred: list[tuple[str, int, str, str, str]] = []
+
+    # Pass 0_cst (Tier-0 Universal Polyglot CST Executable Skill Recall — zero hardcoded passes!):
+    _cst_c_store = memory.get("polyglot_cst_skills") if isinstance(memory, Mapping) else None
+    if isinstance(_cst_c_store, Mapping) and _cst_c_store.get("skills"):
+        for rel_cst in file_order[:4]:
+            p_cst = worktree / rel_cst
+            if not p_cst.is_file():
+                continue
+            orig_cst = p_cst.read_text(encoding="utf-8", errors="replace")
+            lang_c = CST_SKILLS.detect_language(rel_cst)
+            lns_c = lines_by_file_ranked.get(rel_cst) or []
+            for m_cst in CST_SKILLS.recall_cst_candidates(
+                _cst_c_store, orig_cst, language=lang_c, target_lines=lns_c, max_candidates=6
+            ):
+                add_cand(
+                    rel_cst,
+                    int(m_cst["lineno"]),
+                    "C_CST_TIER0_LEARNED_SKILL",
+                    f"cst_skill({m_cst['skill_id']},sites={m_cst['sites_patched']})",
+                    m_cst["patched_source"],
+                    skill_id=m_cst["skill_id"],
+                )
 
     # Pass 0y (high-precision C linked-list node pointer swap vs shallow field copy):
     # `C_LINKED_NODE_POINTER_SWAP_VS_FIELD_COPY`:
