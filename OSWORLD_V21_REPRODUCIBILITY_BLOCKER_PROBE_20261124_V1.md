@@ -1,0 +1,38 @@
+# OSWorld 2.1 pinned-release reproducibility blocker probe — iteration 11
+
+Date: 2026-11-24 UTC  
+Branch: `arena/6f8ac9ce-brain`  
+Status: producer-side zero-model blocker policy and distinct OIDC runner carrier added and locally executed; no OSWorld task run, no benchmark score, no capability credit, §6 NOT MET.
+
+## 1. Why this iteration exists
+
+Iteration 9 recorded three official Terminal-Bench 4.1 CPU reward vectors, all `{"reward":0.0}`. Iteration 10 recorded three official SWE-bench Pro V2 / HARD-51 fresh-container reward vectors, all `{"reward":0.0}`. The active intent named OSWorld 2.1 as the remaining hard frontier. OSWorld 2.1 is not a small terminal or patch-replay harness: it is a 108-task long-horizon desktop/computer-use benchmark whose reproducible release pins gated task classes, gated complete assets, public runtime assets, self-hosted websites, provider VM images and evaluation dependencies. This iteration does **not** pretend that a public GitHub-hosted runner can supply those prerequisites. It answers the smaller decision-relevant question with a distinct runner: can the pinned `osworld-v2.1` release bytes be verified and the missing prerequisites be measured without leaking raw task content or claiming a score?
+
+The computed mechanism is a small zero-model blocker classifier, not a model, browser agent, VM controller, hidden-test reader or task solver. It receives only sanitized runner facts and pinned-release verification, then either allows a synthetic run probe or fails closed with named blockers. No raw external web page, PDF, benchmark task, hidden test, solution, asset or trajectory is saved under `/home/user/brain`.
+
+## 2. Primary-source facts bound as exact substrate
+
+- Recommended release tag `osworld-v2.1`, published 2026-09-16, is active and is a bug-fix release with pinned task, asset, website and provider-image references. See [OSWorld-V2 release notes](https://github.com/xlang-ai/OSWorld-V2/releases/tag/osworld-v2.1) and [OSWorld-V2 repository README](https://github.com/xlang-ai/OSWorld-V2). The pinned tag commit is `3d778a3c9a34a079316f70df023b166700445792`; the release manifest records code base `325ab352e2ff7410854bf8e3324c391bc60e7526`.
+- `benchmark_releases/osworld-v2.1.json` SHA-256 `978686683bdf9f946703c1d316cbbd29c0e3ea97396e48d940ee92c597806ecf`; `benchmark_releases/osworld-v2.1.task_hashes.json` SHA-256 `c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb`; 108 public task IDs and 108 hash-manifest entries.
+- Gated task classes are `xlangai/osworld_v2_tasks@osworld-v2.1` and complete task assets are `xlangai/osworld_v2_assets_gated@osworld-v2.1`. The fetched dataset pages explicitly say: “You need to agree to share your Hugging Face information to access this dataset” and “Gated dataset — You can list files but not access them.” See [gated task dataset](https://huggingface.co/datasets/xlangai/osworld_v2_tasks/tree/osworld-v2.1) and [gated asset dataset](https://huggingface.co/datasets/xlangai/osworld_v2_assets_gated/tree/osworld-v2.1). Public `xlangai/osworld_v2_assets@osworld-v2.1` is explicitly not the complete asset snapshot.
+- Self-hosted websites are `Task-Web/OSWorld-web@osworld-v2.1`, tag commit `60c89fe6a8ed934668619d8d26132848239eb8ee`, with 25 pinned submodule commits in the release verification. The public guideline requires `WEBSITE_HOST_SUFFIX`, `OSWORLD_FILE_BASE_URL`, `GITLAB_URL` / `GITLAB_PRIVATE_TOKEN` for GitLab tasks, AWS credentials/security-group/subnet for AWS provider, VNC/Chrome/backend ports and `uv sync --frozen`. See [public evaluation guideline](https://github.com/xlang-ai/OSWorld-V2/blob/osworld-v2.1/docs/PUBLIC_EVALUATION_GUIDELINE_v2.1.md).
+- Docker provider runtime image is `happysixd/osworld-docker@sha256:0e6497a9295647cf05bf2b2af522fdd79bdeba2737595259cab310a3bcf6baa9`; the Ubuntu QCOW2 archive is 14,891,811,084 bytes with SHA-256 `14b08aa7ba6c023ecb91d46de8df5de32af4d1d6bd75ea925519caf9677fc8b3`. The release manifest states that Docker VM boot remained blocked by absent KVM, that no full 108-task agent evaluation was run, and that hosted website deployment was not verified or deployed.
+- The release README states that official V2 Python task classes are gated and not in the public GitHub checkout, to reduce benchmark leakage and keep setup logic/evaluator details out of agents’ reach. No gated file body is downloaded by this iteration.
+
+## 3. What was built
+
+- `canonical/harbor/osworld_v21_blocker_policy_v1.py` — pure computed policy, `BRAIN_OSWORLD_V21_REPRODUCIBILITY_BLOCKER_POLICY_V1`. It checks pinned source verification and eleven reproducibility prerequisites: gated task classes, gated complete assets, `OSWORLD_FILE_BASE_URL`, `WEBSITE_HOST_SUFFIX`, self-hosted websites, provider VM image, KVM/equivalent, desktop display, evaluator dependencies, maintainer-style verifier and no hidden/raw-task leakage. Any missing prerequisite produces `BLOCKED_REPRODUCIBLE_OSWORLD_V21_EVALUATION`. A synthetic all-true probe returns `RUN_ALLOWED_SYNTHETIC_PROBE_ONLY`, never a score and never a real run.
+- `canonical/tests/test_osworld_v21_blocker_policy_v1.py` — seven tests covering realistic blocked probes, synthetic all-prerequisites probes, fail-closed source verification, non-numeric gated statuses, no arbitrary probe payload echo, no model/network/hidden-reader imports in the policy source, and sanitized CLI output.
+- `.github/workflows/zero-model-osworld-v21-blocker-probe-v1.yml` — a distinct GitHub Actions OIDC runner carrier. It binds exact Brain-owned source bytes, AST-audits imports, clones and verifies the pinned code and website tags, verifies 13 pinned file hashes and the release manifest, probes two gated-dataset **API tree metadata** endpoints with `-o /dev/null`, records only HTTP status codes and sanitized booleans, checks `/dev/kvm`, CPU virtualization flags, Docker/QEMU/uv/Xvfb/display, environment-variable presence, absent local task classes/assets/QCOW2 archive, and then runs the zero-model policy. It lands only the runner-owned receipt, receipt sidecar and sanitized blocker decision.
+- No `uv sync --frozen`, gated dataset download, QCOW2 archive download, website deployment, VM boot, browser control, model call, OSWorld task, hidden test, solution, reward vector or aggregate score occurs.
+
+## 4. Exact producer-side source SHA-256 bindings
+
+- `canonical/harbor/osworld_v21_blocker_policy_v1.py` — `ec1327ea0daa2c0ed7a2db0dd014e0c791cf35d061ec764671d6527ba82395f7`
+- `canonical/tests/test_osworld_v21_blocker_policy_v1.py` — `4d9d4b0bab59fb8ae91d7456e5718bf4a4e043224246f4b77de87f6327594f5e`
+
+Any byte change requires updating the workflow hashes, rerunning tests and repeating gates/reverification. The workflow binds these bytes before classifying any runner fact.
+
+## 5. Receipt status
+
+At producer time, the distinct OIDC runner workflow has been authored but no runner-owned receipt for this workflow has been recorded. A local sanitized source/probe replay was executed against pinned public clones: `OSWORLD_V21_SOURCE_VERIFICATION_PASS 27 checks 13 pinned files`, `OSWORLD_V21_RUNNER_PROBE_PASS`, and `OSWORLD_V21_BLOCKER_DECISION_PASS` with 10 blocked reasons, zero tasks consumed and no score authority. The receipt, receipt sidecar and sanitized blocker decision will be landed by the runner itself; local producer metadata will then be reconciled without changing any pinned Brain-owned source bytes. Section 6 remains NOT MET.

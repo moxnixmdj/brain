@@ -1,0 +1,561 @@
+name: Zero-model OSWorld 2.1 pinned-release blocker probe
+
+# WHY THIS WORKFLOW EXISTS
+#
+# Iterations 9 and 10 produced three official Terminal-Bench 4.1 reward vectors
+# and three official SWE-bench Pro V2 / HARD-51 reward vectors, all 0.0. The
+# remaining named hard frontier is OSWorld 2.1. This workflow does not run
+# OSWorld tasks, does not download gated task classes or complete assets, does
+# not boot a VM, and does not claim a score. It is a distinct OIDC-attested
+# reproducibility probe: pin the recommended release bytes, measure the gated
+# and VM/website/evaluator prerequisites on a public GitHub-hosted runner, and
+# land a runner-owned blocker receipt. Section 6 remains NOT MET.
+#
+# The local producer never writes the authoritative receipt. GitHub Actions
+# OIDC binds the receipt to a real public-runner workflow run.
+
+on:
+  push:
+    branches: [arena/6f8ac9ce-brain]
+    paths:
+      - ".github/workflows/zero-model-osworld-v21-blocker-probe-v1.yml"
+      - "canonical/harbor/osworld_v21_blocker_policy_v1.py"
+      - "canonical/tests/test_osworld_v21_blocker_policy_v1.py"
+
+concurrency:
+  group: zero-model-osworld-v21-blocker-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  id-token: write
+
+env:
+  WORKSPACE: ${{ github.workspace }}
+  OSW_TAG: "osworld-v2.1"
+  OSW_CODE_TAG_COMMIT: "3d778a3c9a34a079316f70df023b166700445792"
+  OSW_MANIFEST_BASE_COMMIT: "325ab352e2ff7410854bf8e3324c391bc60e7526"
+  OSW_WEBSITE_TAG_COMMIT: "60c89fe6a8ed934668619d8d26132848239eb8ee"
+  OSW_TASKS_COMMIT: "0a1aadad95aa79b00b3783e717d865089ab06e26"
+  OSW_ASSETS_COMMIT: "384b3834faba5700a7b589e6cc181490c9808949"
+  OSW_PUBLIC_ASSETS_COMMIT: "3a140a3df8f351b22bb5b9526846f078e738777f"
+  OSW_MANIFEST_SHA256: "978686683bdf9f946703c1d316cbbd29c0e3ea97396e48d940ee92c597806ecf"
+  OSW_TASK_HASH_MANIFEST_SHA256: "c54d428329be5ca72742a6becd49ee83cf739df5dea429bba182e1f3f21badfb"
+  OSW_PROVIDER_RUNTIME_IMAGE_DIGEST: "0e6497a9295647cf05bf2b2af522fdd79bdeba2737595259cab310a3bcf6baa9"
+  OSW_PROVIDER_ARCHIVE_SHA256: "14b08aa7ba6c023ecb91d46de8df5de32af4d1d6bd75ea925519caf9677fc8b3"
+  OSW_PROVIDER_ARCHIVE_SIZE: "14891811084"
+  POLICY_IMPORT_PATH: "canonical.harbor.osworld_v21_blocker_policy_v1"
+  OSW_ROOT: "/tmp/osworld_v21"
+  OSW_WEB_ROOT: "/tmp/osworld_web_v21"
+  TASK_TREE_URL: "https://huggingface.co/api/datasets/xlangai/osworld_v2_tasks/tree/osworld-v2.1"
+  ASSET_TREE_URL: "https://huggingface.co/api/datasets/xlangai/osworld_v2_assets_gated/tree/osworld-v2.1"
+
+jobs:
+  pinned_release_blocker_probe:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Bind exact Brain-owned source bytes and audit no-inference surface
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          python3 - <<'PY'
+          import ast, hashlib, json, os, pathlib, sys
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          expected = {
+              "canonical/harbor/osworld_v21_blocker_policy_v1.py": "ec1327ea0daa2c0ed7a2db0dd014e0c791cf35d061ec764671d6527ba82395f7",
+              "canonical/tests/test_osworld_v21_blocker_policy_v1.py": "4d9d4b0bab59fb8ae91d7456e5718bf4a4e043224246f4b77de87f6327594f5e",
+          }
+          observed = {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in expected}
+          if observed != expected:
+              raise SystemExit("EXACT_SOURCE_SHA256_BINDING_FAIL " + json.dumps({"expected": expected, "observed": observed}, sort_keys=True))
+          forbidden = {"urllib", "requests", "httpx", "socket", "http", "openai", "anthropic", "litellm", "transformers", "torch", "tensorflow", "boto3", "subprocess", "huggingface_hub", "intake"}
+          imports = {}
+          marked_imports = []
+          for rel in expected:
+              tree = ast.parse((root / rel).read_text(encoding="utf-8"))
+              mods = set()
+              for node in ast.walk(tree):
+                  if isinstance(node, ast.Import):
+                      mods.update(alias.name for alias in node.names)
+                  elif isinstance(node, ast.ImportFrom) and node.module:
+                      mods.add(node.module)
+              roots = sorted({item.split(".")[0] for item in mods})
+              imports[rel] = roots
+              marked = sorted(set(roots) & forbidden)
+              if marked:
+                  marked_imports.append({"path": rel, "marked": marked})
+          if marked_imports:
+              raise SystemExit("FORBIDDEN_IMPORT_IN_BRAIN_BLOCKER_SURFACE " + repr(marked_imports))
+          policy_source = (root / "canonical/harbor/osworld_v21_blocker_policy_v1.py").read_text(encoding="utf-8").casefold()
+          hidden_readers = ("task_001.py", "instruction.md", "gold_patch.diff", "test_patch.patch", "solve.sh", "test.sh")
+          if any(marker in policy_source for marker in hidden_readers):
+              raise SystemExit("POLICY_CONTAINS_HIDDEN_TASK_READER_LITERAL")
+          known_task_names = ("takens-embedding-lean", "fin-saccr-rwa", "hof-topology-interpenetration", "html-js-filter", "bun-sourcemap-leak", "instance_nodebb")
+          if any(name in policy_source for name in known_task_names):
+              raise SystemExit("POLICY_CONTAINS_TASK_SPECIFIC_ANSWER_LITERAL")
+          if "benchmark_score_authority" not in policy_source or "model_calls" not in policy_source:
+              raise SystemExit("POLICY_SCORE_OR_MODEL_BOUNDARY_MISSING")
+          sys.path.insert(0, str(root))
+          from canonical.harbor import osworld_v21_blocker_policy_v1 as policy
+          source = {"checks": {"release_tag": True, "no_raw_task_files_in_workspace": True}}
+          probe = {"hf_token_present": False, "gated_conditions_accepted": False, "hf_task_metadata_http_status": 401, "hf_asset_metadata_http_status": 403, "task_class_directory_present": False, "complete_asset_directory_present": False, "osworld_file_base_url_present": False, "website_host_suffix_present": False, "websites_deployed": False, "qcow2_archive_present": False, "kvm_device_present": False, "kvm_cpu_flags_count": 0, "display_present": False, "xvfb_present": False, "maintainer_verifier_present": False, "evaluator_dependencies_installed": False, "hidden_test_reading": False, "raw_benchmark_tasks_saved_in_workspace": False, "borrowed_outputs": False, "static_source_binding_pass": True, "external_network_probe_calls": 2}
+          decision = policy.evaluate(probe, source)
+          if decision["decision"] != "BLOCKED_REPRODUCIBLE_OSWORLD_V21_EVALUATION" or decision["benchmark_run_allowed"] is not False:
+              raise SystemExit("LOCAL_BLOCKER_POLICY_DID_NOT_FAIL_CLOSED")
+          binding = {"schema": "BRAIN_OSWORLD_V21_SOURCE_BINDING_V1", "expected": expected, "observed": observed, "equal": True}
+          audit = {"schema": "BRAIN_OSWORLD_V21_STATIC_AUDIT_V1", "imports": imports, "marked_imports": marked_imports, "policy_has_no_hidden_task_reader_literals": True, "policy_has_no_task_specific_answer_literals": True, "local_fail_closed_probe": True}
+          (out / "blob_bindings.json").write_text(json.dumps(binding, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          (out / "static_audit.json").write_text(json.dumps(audit, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("EXACT_SOURCE_SHA256_BINDING_PASS", len(expected), "marked_imports", marked_imports)
+          PY
+      - name: Clone and verify pinned OSWorld 2.1 code and website tags
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          rm -rf "${OSW_ROOT}" "${OSW_WEB_ROOT}"
+          git clone --depth 1 --branch "${OSW_TAG}" https://github.com/xlang-ai/OSWorld-V2.git "${OSW_ROOT}"
+          git clone --depth 1 --branch "${OSW_TAG}" https://github.com/Task-Web/OSWorld-web.git "${OSW_WEB_ROOT}"
+          code_head="$(git -C "${OSW_ROOT}" rev-parse HEAD)"
+          web_head="$(git -C "${OSW_WEB_ROOT}" rev-parse HEAD)"
+          if [ "${code_head}" != "${OSW_CODE_TAG_COMMIT}" ]; then
+            echo "OSW_CODE_TAG_COMMIT_FAIL expected=${OSW_CODE_TAG_COMMIT} observed=${code_head}" >&2
+            exit 1
+          fi
+          if [ "${web_head}" != "${OSW_WEBSITE_TAG_COMMIT}" ]; then
+            echo "OSW_WEBSITE_TAG_COMMIT_FAIL expected=${OSW_WEBSITE_TAG_COMMIT} observed=${web_head}" >&2
+            exit 1
+          fi
+          echo "OSWORLD_V21_TAG_COMMITS_PASS ${code_head} ${web_head}"
+      - name: Verify pinned release manifest, hashes and gated-boundary declarations
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, os, pathlib, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          code = pathlib.Path(os.environ["OSW_ROOT"])
+          web = pathlib.Path(os.environ["OSW_WEB_ROOT"])
+          def sha(path):
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+          expected = {
+              "benchmark_releases/osworld-v2.1.json": os.environ["OSW_MANIFEST_SHA256"],
+              "benchmark_releases/osworld-v2.1.task_hashes.json": os.environ["OSW_TASK_HASH_MANIFEST_SHA256"],
+              "docs/PUBLIC_EVALUATION_GUIDELINE_v2.1.md": "85e072aac7e53d97bedbc75b3cfaa616695397807a0ff5a17b6454fa114c78d7",
+              "scripts/tools/download_osworld_v2_tasks.py": "2640163f6651b2557915a3d93a4d7fed1ee89b8f1e2aefd84edba11df2348f75",
+              "scripts/tools/download_osworld_v2_assets.py": "c1e2695d505c5f638b28c608ecea8db422718ed5b6c7a2abf515c3e19d59626a",
+              "pyproject.toml": "25f22a5cb242be1f3a1938d52a2c8bd1d4e727e6e61a73b9e85801b25c227c51",
+              "evaluation_examples/test_v2.json": "7f2c0f531d035dd6f5886c492b96739534385f8e5369e4c764295ad52bf6e7f4",
+              "docs/PROVIDER_SETUP.md": "b3a6abec7e9e9c1089326f6a4b5ff68b7d14a087b5209cc790c65d71ae8ded57",
+              "desktop_env/providers/docker/DOCKER_GUIDELINE.md": "867234c5a926781cc1082285a53f4ad721a8dcd64eb34199206d06a3d00aafe8",
+              "desktop_env/providers/docker/manager.py": "9ac687e88f99cf6478573e995e372ffaf56e08bd81a0fa3844eab019f7bb28a8",
+              "desktop_env/providers/docker/provider.py": "88a60a91ac0d29bb2ab1b6ed81e20be7e7196c170acd45c133451b04dd79cae6",
+          }
+          web_expected = {
+              "docker-compose.yml": "53d986c0e3d406ae1c025900e81adf880c12525a5d2ebc69e095c5ff6b266a26",
+              "docker-compose.main.yml": "304bd1aca0c848fab07c68bacac791c6d23890209e02d9e8e2709ce830cb647b",
+          }
+          hashes = {rel: sha(code / rel) for rel in expected}
+          web_hashes = {rel: sha(web / rel) for rel in web_expected}
+          manifest_path = code / "benchmark_releases/osworld-v2.1.json"
+          manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+          task_hashes = json.loads((code / "benchmark_releases/osworld-v2.1.task_hashes.json").read_text(encoding="utf-8"))
+          test_v2 = json.loads((code / "evaluation_examples/test_v2.json").read_text(encoding="utf-8"))
+          tasks = test_v2.get("tasks") or []
+          task_source = (code / "scripts/tools/download_osworld_v2_tasks.py").read_text(encoding="utf-8")
+          asset_source = (code / "scripts/tools/download_osworld_v2_assets.py").read_text(encoding="utf-8")
+          submodule_status = subprocess.check_output(["git", "-C", str(web), "submodule", "status"], text=True)
+          submodule_lines = [line for line in submodule_status.splitlines() if line.strip()]
+          limitations = manifest.get("verification", {}).get("limitations") or []
+          checks = {
+              "release_tag": manifest.get("release") == os.environ["OSW_TAG"],
+              "status_active": manifest.get("status") == "active",
+              "manifest_sha256": hashes["benchmark_releases/osworld-v2.1.json"] == expected["benchmark_releases/osworld-v2.1.json"],
+              "task_hash_manifest_sha256": hashes["benchmark_releases/osworld-v2.1.task_hashes.json"] == expected["benchmark_releases/osworld-v2.1.task_hashes.json"],
+              "manifest_base_commit": (manifest.get("osworld_code") or {}).get("base_commit") == os.environ["OSW_MANIFEST_BASE_COMMIT"],
+              "tasks_commit": (manifest.get("tasks") or {}).get("commit") == os.environ["OSW_TASKS_COMMIT"],
+              "assets_commit": (manifest.get("assets") or {}).get("commit") == os.environ["OSW_ASSETS_COMMIT"],
+              "public_assets_commit": (manifest.get("public_assets") or {}).get("commit") == os.environ["OSW_PUBLIC_ASSETS_COMMIT"],
+              "website_tag_commit": (manifest.get("website_code") or {}).get("commit") == os.environ["OSW_WEBSITE_TAG_COMMIT"],
+              "task_hash_manifest_declared_sha": (manifest.get("task_hash_manifest") or {}).get("sha256") == "sha256:" + os.environ["OSW_TASK_HASH_MANIFEST_SHA256"],
+              "task_hash_manifest_count": len(task_hashes.get("files") or {}) == 108 == (manifest.get("task_hash_manifest") or {}).get("task_count"),
+              "public_task_id_count": len(tasks) == 108 and tasks == [f"{i:03d}" for i in range(1, 109)],
+              "provider_runtime_image_digest": os.environ["OSW_PROVIDER_RUNTIME_IMAGE_DIGEST"] in ((manifest.get("provider_images") or {}).get("docker", {}).get("ubuntu", {}).get("runtime_image") or ""),
+              "provider_archive_sha256": os.environ["OSW_PROVIDER_ARCHIVE_SHA256"] in ((manifest.get("provider_images") or {}).get("docker", {}).get("ubuntu", {}).get("artifact_sha256") or ""),
+              "provider_archive_size": str((manifest.get("provider_images") or {}).get("docker", {}).get("ubuntu", {}).get("artifact_size") or "") == os.environ["OSW_PROVIDER_ARCHIVE_SIZE"],
+              "gated_task_repo_declared": "xlangai/osworld_v2_tasks" in task_source and "gated" in task_source.casefold(),
+              "gated_asset_repo_declared": "xlangai/osworld_v2_assets_gated" in asset_source and "gated" in asset_source.casefold(),
+              "public_assets_not_complete": "not the complete task asset snapshot" in ((manifest.get("public_assets") or {}).get("purpose") or "").casefold(),
+              "release_notes_no_full_agent_evaluation": any("No full 108-task agent evaluation." in item for item in limitations),
+              "release_notes_no_hosted_website_deployment": any("No hosted website deployment verification or deployment." in item for item in limitations),
+              "release_notes_docker_vm_boot_blocked": "VM boot remains blocked by absent KVM." in (manifest.get("verification") or {}).get("docker", ""),
+              "website_submodule_pins_present": len(submodule_lines) == 25,
+              "website_compose_hashes": all(web_hashes[rel] == digest for rel, digest in web_expected.items()),
+              "code_file_hashes": all(hashes[rel] == digest for rel, digest in expected.items()),
+              "public_task_class_directory_has_no_generated_task_files": not any((code / "evaluation_examples/task_class").glob("task_*.py")),
+              "no_complete_asset_directory": not any((code / rel).is_dir() for rel in ("cache/osworld_v2_assets", "cache/osworld_v2_assets_v2.1")),
+              "no_raw_task_files_in_workspace": not any(root.rglob("task_*.py")),
+          }
+          failed = sorted(k for k, v in checks.items() if not v)
+          if failed:
+              raise SystemExit("OSWORLD_V21_SOURCE_VERIFICATION_FAIL " + repr(failed))
+          payload = {
+              "schema": "BRAIN_OSWORLD_V21_SOURCE_VERIFICATION_V1",
+              "release_tag": os.environ["OSW_TAG"],
+              "code_tag_commit": os.environ["OSW_CODE_TAG_COMMIT"],
+              "manifest_base_commit": os.environ["OSW_MANIFEST_BASE_COMMIT"],
+              "website_tag_commit": os.environ["OSW_WEBSITE_TAG_COMMIT"],
+              "tasks_commit": os.environ["OSW_TASKS_COMMIT"],
+              "assets_commit": os.environ["OSW_ASSETS_COMMIT"],
+              "public_assets_commit": os.environ["OSW_PUBLIC_ASSETS_COMMIT"],
+              "manifest_sha256": os.environ["OSW_MANIFEST_SHA256"],
+              "task_hash_manifest_sha256": os.environ["OSW_TASK_HASH_MANIFEST_SHA256"],
+              "provider_runtime_image_digest": os.environ["OSW_PROVIDER_RUNTIME_IMAGE_DIGEST"],
+              "provider_archive_sha256": os.environ["OSW_PROVIDER_ARCHIVE_SHA256"],
+              "provider_archive_size": int(os.environ["OSW_PROVIDER_ARCHIVE_SIZE"]),
+              "hashes": hashes,
+              "website_hashes": web_hashes,
+              "public_task_id_count": len(tasks),
+              "task_hash_count": len(task_hashes.get("files") or {}),
+              "website_submodule_pin_count": len(submodule_lines),
+              "gated_dataset_names": ["xlangai/osworld_v2_tasks", "xlangai/osworld_v2_assets_gated"],
+              "checks": checks,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "model_calls": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+          }
+          (out / "source_verification.json").write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("OSWORLD_V21_SOURCE_VERIFICATION_PASS", len(checks), "checks", len(hashes) + len(web_hashes), "pinned files")
+          PY
+      - name: Probe gated access and runner prerequisites without downloading task content
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          : > "${WORKSPACE}/out/hf_task_metadata_status.txt"
+          : > "${WORKSPACE}/out/hf_asset_metadata_status.txt"
+          curl -sS -L --max-time 15 -o /dev/null -w '%{http_code}' "${TASK_TREE_URL}" > "${WORKSPACE}/out/hf_task_metadata_status.txt" || echo 000 > "${WORKSPACE}/out/hf_task_metadata_status.txt"
+          curl -sS -L --max-time 15 -o /dev/null -w '%{http_code}' "${ASSET_TREE_URL}" > "${WORKSPACE}/out/hf_asset_metadata_status.txt" || echo 000 > "${WORKSPACE}/out/hf_asset_metadata_status.txt"
+          python3 - <<'PY'
+          import json, os, pathlib, shutil
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          code = pathlib.Path(os.environ["OSW_ROOT"])
+          bindings = json.loads((out / "blob_bindings.json").read_text(encoding="utf-8")) if (out / "blob_bindings.json").is_file() else {}
+          def status(name):
+              try:
+                  return int((out / name).read_text(encoding="utf-8").strip() or "0")
+              except Exception:
+                  return 0
+          def any_env(*names):
+              return any(bool(os.environ.get(name)) for name in names)
+          def cpu_flags():
+              try:
+                  text = pathlib.Path("/proc/cpuinfo").read_text(encoding="utf-8")
+              except Exception:
+                  return 0
+              return sum(1 for line in text.splitlines() if line.casefold().startswith("flags") and (" vmx" in line.casefold() or " svm" in line.casefold()))
+          task_class_dir = code / "evaluation_examples/task_class"
+          asset_dirs = [code / "cache/osworld_v2_assets", code / "cache/osworld_v2_assets_v2.1"]
+          qcow2_candidates = [
+              code / "osworld-v2-ubuntu-x86.qcow2.zip",
+              code / "docker_vm_data/Ubuntu0/System.qcow2",
+              pathlib.Path("/tmp/osworld-v2-ubuntu-x86.qcow2.zip"),
+          ]
+          probe = {
+              "hf_token_present": any_env("HF_TOKEN", "HUGGING_FACE_HUB_TOKEN"),
+              "gated_conditions_accepted": any_env("OSWORLD_GATED_CONDITIONS_ACCEPTED"),
+              "hf_task_metadata_http_status": status("hf_task_metadata_status.txt"),
+              "hf_asset_metadata_http_status": status("hf_asset_metadata_status.txt"),
+              "task_class_directory_present": task_class_dir.is_dir() and any(task_class_dir.glob("task_*.py")),
+              "complete_asset_directory_present": any(p.is_dir() and any(p.rglob("*")) for p in asset_dirs),
+              "osworld_file_base_url_present": any_env("OSWORLD_FILE_BASE_URL"),
+              "benchmark_release_present": any_env("OSWORLD_BENCHMARK_RELEASE"),
+              "website_host_suffix_present": any_env("WEBSITE_HOST_SUFFIX"),
+              "gitlab_credentials_present": bool(os.environ.get("GITLAB_URL")) and bool(os.environ.get("GITLAB_PRIVATE_TOKEN")),
+              "aws_credentials_present": all(os.environ.get(name) for name in ("AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY", "AWS_SECURITY_GROUP_ID", "AWS_SUBNET_ID")),
+              "websites_deployed": any_env("OSWORLD_WEBSITES_DEPLOYED"),
+              "qcow2_archive_present": any(p.is_file() for p in qcow2_candidates),
+              "kvm_device_present": pathlib.Path("/dev/kvm").exists(),
+              "kvm_cpu_flags_count": cpu_flags(),
+              "docker_present": shutil.which("docker") is not None,
+              "qemu_system_present": shutil.which("qemu-system-x86_64") is not None,
+              "uv_present": shutil.which("uv") is not None,
+              "display_present": any_env("DISPLAY", "WAYLAND_DISPLAY"),
+              "xvfb_present": shutil.which("Xvfb") is not None,
+              "maintainer_verifier_present": any_env("OSWORLD_MAINTAINER_VERIFIER"),
+              "evaluator_dependencies_installed": (code / ".venv").is_dir() and shutil.which("uv") is not None,
+              "hidden_test_reading": False,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "borrowed_outputs": False,
+              "static_source_binding_pass": bool(bindings.get("equal")),
+              "external_network_probe_calls": 2,
+              "runtime_network_calls_in_agent_cognition": 0,
+              "model_calls": 0,
+              "raw_task_bodies_downloaded": False,
+              "raw_asset_bodies_downloaded": False,
+              "raw_web_pages_saved_in_workspace": False,
+          }
+          (out / "runner_probe.json").write_text(json.dumps(probe, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          print("OSWORLD_V21_RUNNER_PROBE_PASS", json.dumps({k: probe[k] for k in ("hf_token_present", "hf_task_metadata_http_status", "hf_asset_metadata_http_status", "task_class_directory_present", "complete_asset_directory_present", "kvm_device_present", "kvm_cpu_flags_count", "docker_present", "display_present", "websites_deployed")}, sort_keys=True))
+          PY
+      - name: Classify reproducibility blockers with the Brain-owned zero-model policy
+        shell: bash
+        continue-on-error: true
+        run: |
+          set -euo pipefail
+          python3 "${WORKSPACE}/canonical/harbor/osworld_v21_blocker_policy_v1.py" \
+            --probe "${WORKSPACE}/out/runner_probe.json" \
+            --source "${WORKSPACE}/out/source_verification.json" \
+            --out "${WORKSPACE}/out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+      - name: Bind GitHub Actions OIDC run reference and emit runner-owned receipt
+        id: oidc_receipt
+        if: always()
+        shell: bash
+        env:
+          OIDC_AUDIENCE: https://github.com/${{ github.repository }}
+          TOKEN_JSON: /tmp/oidc_token.json
+        run: |
+          set -euo pipefail
+          mkdir -p "${WORKSPACE}/out"
+          curl -fsS -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+            "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" > "${TOKEN_JSON}"
+          python3 - <<'PY'
+          import base64, hashlib, json, os, pathlib, platform, subprocess
+          root = pathlib.Path(os.environ["WORKSPACE"])
+          out = root / "out"
+          token = json.loads(pathlib.Path(os.environ["TOKEN_JSON"]).read_text(encoding="utf-8"))["value"]
+          part = token.split(".")[1]
+          part += "=" * (-len(part) % 4)
+          claims = json.loads(base64.urlsafe_b64decode(part))
+          audience = os.environ["OIDC_AUDIENCE"]
+          run_id = int(os.environ["GITHUB_RUN_ID"])
+          run_attempt = int(os.environ["GITHUB_RUN_ATTEMPT"])
+          workflow_path = ".github/workflows/zero-model-osworld-v21-blocker-probe-v1.yml"
+          checks = {
+              "issuer": str(claims.get("iss")) == "https://token.actions.githubusercontent.com",
+              "audience": str(claims.get("aud")) == audience,
+              "repository": str(claims.get("repository")) == os.environ["GITHUB_REPOSITORY"],
+              "run_id": int(claims.get("run_id", -1)) == run_id,
+              "event_name": str(claims.get("event_name")) in {"push", "workflow_dispatch", "pull_request"},
+              "workflow_path": workflow_path in str(claims.get("workflow_ref")),
+              "github_hosted": str(claims.get("runner_environment")) == "github-hosted",
+          }
+          if "run_attempt" in claims:
+              checks["run_attempt"] = int(claims["run_attempt"]) == run_attempt
+          if "sha" in claims:
+              checks["sha"] = str(claims["sha"]) == os.environ["GITHUB_SHA"]
+          if "ref" in claims:
+              checks["ref"] = str(claims["ref"]) == os.environ["GITHUB_REF"]
+          failed_oidc = sorted(k for k, v in checks.items() if not v)
+          if failed_oidc:
+              raise SystemExit("OIDC_RUN_REFERENCE_BINDING_FAIL " + repr(failed_oidc))
+          keep = ("iss", "aud", "repository", "repository_id", "workflow_ref", "job_workflow_ref", "run_id", "run_attempt", "event_name", "head_ref", "ref", "sha", "actor", "actor_id", "jti", "runner_environment")
+          oidc_claims = {k: claims.get(k) for k in keep}
+          def read_json(name, default):
+              path = out / name
+              if not path.is_file():
+                  return default
+              try:
+                  return json.loads(path.read_text(encoding="utf-8"))
+              except Exception:
+                  return default
+          bindings = read_json("blob_bindings.json", {})
+          audit = read_json("static_audit.json", {})
+          source_verification = read_json("source_verification.json", {})
+          probe = read_json("runner_probe.json", {})
+          decision = read_json("OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json", {})
+          decision_path = out / "OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+          decision_bytes = decision_path.read_bytes() if decision_path.is_file() else b"{}\n"
+          decision_sha = hashlib.sha256(decision_bytes).hexdigest()
+          decision_blob = subprocess.run(["git", "hash-object", "--stdin"], cwd=root, input=decision_bytes, stdout=subprocess.PIPE, check=True).stdout.decode().strip()
+          workflow_blob = subprocess.check_output(["git", "hash-object", workflow_path], cwd=root, text=True).strip()
+          run_url = "https://github.com/" + os.environ["GITHUB_REPOSITORY"] + "/actions/runs/" + str(run_id)
+          verifier_identity = "github-actions-oidc:" + str(claims.get("workflow_ref")) + "#run-" + str(run_id)
+          source_checks = source_verification.get("checks") or {}
+          failed = list(decision.get("failed") or [])
+          if failed_oidc:
+              failed.append("OIDC_RUN_REFERENCE_BINDING_FALSE")
+          if not bindings.get("equal"):
+              failed.append("EXACT_SOURCE_BINDING_FALSE")
+          if audit.get("marked_imports"):
+              failed.append("FORBIDDEN_IMPORTS_IN_BRAIN_BLOCKER_SURFACE")
+          for key, value in source_checks.items():
+              if not value:
+                  failed.append("SOURCE_VERIFICATION_CHECK_FALSE:" + key)
+          verified = list(decision.get("verified") or [])
+          if all(bool(v) for v in source_checks.values()) and source_checks:
+              verified.append("PINNED_RELEASE_MANIFEST_TASK_HASHES_AND_WEBSITE_BYTES")
+          if not failed_oidc:
+              verified.append("OIDC_RUN_REFERENCE_BOUND")
+          verified.append("NO_OSWORLD_TASK_RUN_OR_BENCHMARK_SCORE")
+          unverified = list(decision.get("unverified") or [])
+          for item in ("OSWorld 2.1 tasks and official reward vectors", "Independent section 6 verification"):
+              if item not in unverified:
+                  unverified.append(item)
+          numeric = dict(decision.get("numeric_measurements") or {})
+          numeric.update({
+              "source_verification_checks": len(source_checks),
+              "pinned_files_verified": len(source_verification.get("hashes") or {}) + len(source_verification.get("website_hashes") or {}),
+              "public_task_ids": source_verification.get("public_task_id_count", 0),
+              "task_hash_manifest_entries": source_verification.get("task_hash_count", 0),
+              "website_submodule_pins": source_verification.get("website_submodule_pin_count", 0),
+              "gated_dataset_status_probes": 2,
+              "external_network_probe_calls": int(probe.get("external_network_probe_calls") or 0),
+              "hard_benchmark_tasks_consumed": 0,
+              "reward_vectors": 0,
+              "benchmark_score_claims": 0,
+              "model_calls": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+              "hidden_test_reading_events": 0,
+              "borrowed_output_events": 0,
+              "section_6_verifications": 0,
+          })
+          receipt = {
+              "schema": "BRAIN_OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1",
+              "date": "2026-11-24",
+              "status": "RUNNER_OWNED_OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RECORDED__ZERO_CREDIT__SECTION_6_NOT_MET",
+              "authority": "GITHUB_ACTIONS_OIDC_ATTESTED_PINNED_RELEASE_AND_PREREQUISITE_BLOCKER_PROBE__NO_BENCHMARK_RUN_OR_SCORE",
+              "scope": "OSWORLD_V21_PINNED_RELEASE_AND_GATED_PREREQUISITE_BLOCKER_PROBE_ONLY",
+              "runner_owned": True,
+              "benchmark_run_attempted": False,
+              "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+              "producer_identity": "arena-agent:arena/6f8ac9ce-brain",
+              "verifier_id": verifier_identity,
+              "verifier_identity": verifier_identity,
+              "workflow_run_id": run_id,
+              "workflow_run_attempt": run_attempt,
+              "workflow_run_url": run_url,
+              "workflow_job": os.environ.get("GITHUB_JOB"),
+              "workflow_name": os.environ.get("GITHUB_WORKFLOW"),
+              "workflow_ref": os.environ.get("GITHUB_REF"),
+              "head_sha": os.environ.get("GITHUB_SHA"),
+              "event_name": os.environ.get("GITHUB_EVENT_NAME"),
+              "runner_os": os.environ.get("RUNNER_OS"),
+              "runner_arch": os.environ.get("RUNNER_ARCH"),
+              "runner_environment": claims.get("runner_environment"),
+              "github_repository": os.environ.get("GITHUB_REPOSITORY"),
+              "github_actor": os.environ.get("GITHUB_ACTOR"),
+              "oidc_claims": oidc_claims,
+              "run_reference": {"workflow_run_id": run_id, "workflow_run_attempt": run_attempt, "workflow_run_url": run_url, "oidc_jti": claims.get("jti"), "runner_attestation": "github-actions-oidc-token"},
+              "pinned_substrates": {
+                  "python_version": platform.python_version(),
+                  "osworld_release_tag": os.environ["OSW_TAG"],
+                  "code_tag_commit": os.environ["OSW_CODE_TAG_COMMIT"],
+                  "manifest_base_commit": os.environ["OSW_MANIFEST_BASE_COMMIT"],
+                  "website_tag_commit": os.environ["OSW_WEBSITE_TAG_COMMIT"],
+                  "tasks_commit": os.environ["OSW_TASKS_COMMIT"],
+                  "assets_commit": os.environ["OSW_ASSETS_COMMIT"],
+                  "public_assets_commit": os.environ["OSW_PUBLIC_ASSETS_COMMIT"],
+                  "manifest_sha256": os.environ["OSW_MANIFEST_SHA256"],
+                  "task_hash_manifest_sha256": os.environ["OSW_TASK_HASH_MANIFEST_SHA256"],
+                  "provider_runtime_image_digest": os.environ["OSW_PROVIDER_RUNTIME_IMAGE_DIGEST"],
+                  "provider_archive_sha256": os.environ["OSW_PROVIDER_ARCHIVE_SHA256"],
+                  "provider_archive_size": int(os.environ["OSW_PROVIDER_ARCHIVE_SIZE"]),
+                  "workflow_git_blob_sha": workflow_blob,
+                  "policy_import_path": os.environ["POLICY_IMPORT_PATH"],
+                  "model_cli_args": 0,
+                  "vm_boot_attempted": False,
+              },
+              "source_binding": bindings,
+              "static_audit": audit,
+              "source_verification": source_verification,
+              "runner_probe": probe,
+              "blocker_decision": decision,
+              "blocker_decision_sha256": decision_sha,
+              "blocker_decision_git_blob_sha": decision_blob,
+              "blocked_reasons": decision.get("blocked_reasons") or [],
+              "oidc_checks": checks,
+              "numeric_measurements": numeric,
+              "verified": verified,
+              "unverified": unverified,
+              "failed": failed,
+              "producer_cognition_model_dependency_count": 0,
+              "runtime_network_calls_in_agent_cognition": 0,
+              "external_network_probe_calls": int(probe.get("external_network_probe_calls") or 0),
+              "hidden_test_reading": False,
+              "borrowed_outputs": False,
+              "task_specific_answers_in_repo": False,
+              "raw_benchmark_tasks_saved_in_workspace": False,
+              "benchmark_score_authority": False,
+              "aggregate_benchmark_score": None,
+              "independent_blocker_probe_runner_owned": True,
+              "independent_hard_benchmark_verification_completed": False,
+              "independent_verification_completed": False,
+              "capability_credit_delta": 0,
+              "family_credit_delta": 0,
+              "terminal_credit_delta": 0,
+              "new_reality_units_consumed": 0,
+              "incremental_spend_usd": 0,
+              "execution_authority": False,
+              "promotion_authority": False,
+              "truth": {"achieved": False, "section_6": "NOT_MET"},
+              "rule": "RECEIPT_APPLIES_ONLY_TO_EXACT_LISTED_SOURCE_BYTES_PINNED_RELEASE_COMPONENTS_AND_SANITIZED_RUNNER_FACTS__IT_IS_NOT_AN_OSWORLD_TASK_RUN_SCORE_CAPABILITY_CREDIT_OR_SECTION_6_VERIFICATION",
+          }
+          receipt_path = out / "OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json"
+          data = json.dumps(receipt, indent=2, sort_keys=True, ensure_ascii=False).encode("utf-8") + b"\n"
+          receipt_path.write_bytes(data)
+          (out / "OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256").write_text(hashlib.sha256(data).hexdigest() + "\n", encoding="utf-8")
+          receipt_blob = subprocess.check_output(["git", "hash-object", str(receipt_path)], cwd=root, text=True).strip()
+          print("OIDC_RUN_REFERENCE_BOUND", run_id, run_attempt)
+          print("RUNNER_RECEIPT_SHA256", hashlib.sha256(data).hexdigest())
+          print("RUNNER_RECEIPT_GIT_BLOB", receipt_blob)
+          print(json.dumps({"status": receipt["status"], "decision": decision.get("decision"), "blocked_reasons": len(receipt["blocked_reasons"]), "verified": len(verified), "unverified": len(unverified), "failed": len(failed), "tasks_consumed": numeric["hard_benchmark_tasks_consumed"], "truth": receipt["truth"]}, sort_keys=True))
+          PY
+          cat "${WORKSPACE}/out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json"
+      - name: Land runner-owned blocker receipt and decision on the active branch
+        if: always() && steps.oidc_receipt.outcome == 'success' && github.event_name == 'push' && github.ref == 'refs/heads/arena/6f8ac9ce-brain' && github.repository == 'moxnixmdj/brain'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cd "${WORKSPACE}"
+          cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json" \
+             "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json"
+          cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256" \
+             "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256"
+          cp "out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json" \
+             "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+          git config user.name "project-brain-osworld-v21-blocker-runner"
+          git config user.email "project-brain-osworld-v21-blocker-runner@users.noreply.github.com"
+          git add "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json" \
+                  "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256" \
+                  "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json"
+          if git diff --cached --quiet; then
+            echo "NO_RUNNER_RECEIPT_CHANGE"
+            exit 0
+          fi
+          git commit -m "Record runner-owned OSWorld 2.1 pinned-release blocker probe"
+          git pull --rebase origin arena/6f8ac9ce-brain
+          git push origin HEAD:arena/6f8ac9ce-brain
+      - name: Upload runner-owned sanitized blocker artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zero-model-osworld-v21-blocker-probe
+          path: |
+            out/blob_bindings.json
+            out/static_audit.json
+            out/source_verification.json
+            out/runner_probe.json
+            out/hf_task_metadata_status.txt
+            out/hf_asset_metadata_status.txt
+            out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_DECISION_20261124_V1.json
+            out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json
+            out/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.sha256
+          if-no-files-found: warn
+          retention-days: 90
