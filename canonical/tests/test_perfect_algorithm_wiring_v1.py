@@ -85,6 +85,48 @@ class K1PriorIsConsultedTests(unittest.TestCase):
             self.assertNotIn("execution_authority", row)
 
 
+class K1PriorIsMeasuredTests(unittest.TestCase):
+    """The prior's benefit must be a measurement, not a slogan.
+
+    A prior reorders candidates. It cannot shrink a branching factor, so the
+    documented "8.34 -> 2" framing was replaced by two falsifiable facts: the
+    1-based rank of the goal-named element, and whether that rank is 1.
+    """
+
+    def _elements(self):
+        elements = [{"type": "generic", "label": f"item{i}"} for i in range(10)]
+        elements[7] = {"type": "button", "label": "submit"}
+        return elements
+
+    def test_goal_match_is_ranked_first_when_the_goal_names_it(self):
+        out = pa.prior_over_actions(
+            {"goal": "click the submit button"},
+            {"accessibility_tree": {"elements": self._elements()}},
+        )
+        self.assertEqual(1, out["goal_relevant_rank"])
+        self.assertTrue(out["prior_places_goal_match_first"])
+        self.assertEqual("button", out["ranked_actions"][0]["type"])
+
+    def test_no_goal_match_is_reported_as_no_match_not_a_small_factor(self):
+        out = pa.prior_over_actions(
+            {"goal": "do the thing"},
+            {"accessibility_tree": {"elements": self._elements()}},
+        )
+        self.assertIsNone(out["goal_relevant_rank"])
+        self.assertFalse(out["prior_places_goal_match_first"])
+        # The candidate count is unchanged: the prior never filters.
+        self.assertEqual(10, out["action_count"])
+
+    def test_prior_never_drops_a_candidate(self):
+        elements = self._elements()
+        out = pa.prior_over_actions(
+            {"goal": "click the submit button"},
+            {"accessibility_tree": {"elements": elements}},
+        )
+        self.assertEqual(len(elements), len(out["ranked_actions"]))
+        self.assertTrue(out["prior_is_a_reordering_not_a_filter"])
+
+
 class TomographyGateIsAdditiveTests(unittest.TestCase):
     def test_state_diff_can_only_add_evidence(self):
         clean = {}

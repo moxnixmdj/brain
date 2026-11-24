@@ -995,8 +995,13 @@ def prior_over_actions(
 ) -> dict[str, Any]:
     """Rank actions by prior from interface knowledge (K1).
 
-    Cuts branching factor from 8.34 to ~2 by telling the search
-    which action is worth trying first.
+    A prior REORDERS actions, it does not delete them. What it buys depends
+    entirely on whether the environment actually discriminates: when the goal
+    text or element roles separate plausible actions, the measured effective
+    branching factor falls well below the unprompted 8.34; when every element
+    is equally plausible the prior cannot help and the factor stays at the
+    candidate count. This function reports both numbers it measured for the
+    current environment rather than asserting a fixed improvement.
     """
     # Extract UI elements from environment
     elements: list[dict[str, Any]] = []
@@ -1051,14 +1056,32 @@ def prior_over_actions(
         if cumulative / total_score >= 0.9:
             break
 
+    # The goal-relevant element's 1-based position in the ranking. This is the
+    # measurement that can actually be wrong, so it is the one reported.
+    goal_rank = None
+    for position, item in enumerate(scored, start=1):
+        if float(item.get("goal_relevance") or 1.0) > 1.0:
+            goal_rank = position
+            break
+
     return {
         "schema": SCHEMA,
         "kind": "ACTION_PRIOR",
         "ranked_actions": scored,
         "action_count": len(scored),
+        # Retained because callers already read it, but it is NOT a reduction
+        # of the search space. See `prior_is_a_reordering_not_a_filter`.
         "effective_branching_factor": max(1, effective_bf),
-        "original_branching_factor": 8.34,
-        "reduction": 8.34 / max(1, effective_bf),
+        # What the prior is actually measured to do: put the element the goal
+        # names at the front, so the search's FIRST try is the right one.
+        "goal_relevant_rank": goal_rank,
+        "prior_places_goal_match_first": goal_rank == 1,
+        "prior_is_a_reordering_not_a_filter": True,
+        "note": (
+            "Reorders candidates; every candidate remains reachable. It cannot "
+            "shrink a branching factor -- a prior with no discriminating "
+            "evidence leaves the candidate count unchanged."
+        ),
     }
 
 
@@ -1229,11 +1252,22 @@ def k1_prior_for_skill_selection(
         if cum / total >= 0.9:
             break
 
+    goal_rank = None
+    for position, item in enumerate(ranked, start=1):
+        if float(item.get("post_cover") or 0.0) > 0.0:
+            goal_rank = position
+            break
+
     return {
         "ranked_skill_ids": [x.get("skill_id") for x in ranked],
         "ranked": ranked,
+        # NOTE: at selection time every surviving candidate has already passed
+        # exact pre/post/skeleton checks, so this is "how concentrated the
+        # ranking is", NOT "how many candidates were eliminated". The prior
+        # reorders; the gates above are what filter.
         "effective_branching_factor": max(1, eff_bf),
-        "original_branching_factor": 8.34,
+        "goal_covering_skill_rank": goal_rank,
+        "prior_is_a_reordering_not_a_filter": True,
     }
 
 

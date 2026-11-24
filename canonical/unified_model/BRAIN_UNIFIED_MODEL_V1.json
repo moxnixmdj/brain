@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2e1f76b2d0c14b530d504a6ca1ec2532cd23328aa5ad3ee7d95282eee56c4ca6"
+  "value": "713f8383d57f98363635f47dae8d798a5ecea7df54a816b9fd49dcc22c42a3e8"
  },
  "engines": [
   {
@@ -315685,7 +315685,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/perfect_algorithm_v1.py",
-   "sha256": "f56477e3d04d131237dacba2710d7793d868fdba26e8c16d63681b9a7f8fdd5e",
+   "sha256": "071d364d82c71ae02e8ae4b3a0b824024147f9afe27cc2aaf6c6a158395ba339",
    "summary": "Perfect Algorithm V1 — the model itself.",
    "symbol_count": 31,
    "symbols": [
