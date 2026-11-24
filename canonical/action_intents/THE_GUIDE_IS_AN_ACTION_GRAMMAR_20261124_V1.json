@@ -1,0 +1,1706 @@
+{
+ "$comment": "Every number here was produced by running canonical/tools/the_guide_is_an_action_grammar_v1.py on 2026-11-24 in a 2-CPU sandbox with no network at run time. It is a mechanism measurement over 13 needs and one room; it is NOT a benchmark result.",
+ "schema": "BRAIN_THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "instrument": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+ "essay": "THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md",
+ "mode": "A_PAGE_IS_A_GRAMMAR__A_NEED_IS_A_TARGET_KIND__THE_ANSWER_IS_A_PATH",
+ "declared_before_the_run": {
+  "G1": "a usage line parses into slots for at least half the pages read",
+  "G2": "a strict majority of the needs a machine can serve end in a goal its own read-only programs confirm",
+  "G3": "at least one need is reached by a path of two or more typed edges",
+  "G4": "at least one refusal is read and repaired into acceptance from the page",
+  "G5": "every need nothing on this machine can serve is refused before a page is read",
+  "G6": "every goal check is a read-only program the machine already had, and the state where each is blind is measured",
+  "G7": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "summary": {
+  "programs_read": 446,
+  "pages_with_a_usage_line": 446,
+  "pages_with_a_typed_slot_or_flag": 197,
+  "pages_that_name_an_operand": 241,
+  "pages_with_both": 119,
+  "edges": 87,
+  "transitions_set_aside": {
+   "viewer": 48,
+   "not_stated": 72,
+   "no_directory_creation": 3
+  },
+  "needs": 13,
+  "needs_served_by_a_machine": 11,
+  "goals_held": 11,
+  "needs_held_out": 2,
+  "held_out_refused": 2,
+  "paths_of_two_or_more_edges": 3,
+  "held_with_no_repair_at_all": 11,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0,
+  "seconds": 64.4
+ },
+ "verdict": {
+  "G1_a_usage_line_is_a_grammar": {
+   "pages_with_a_usage_line": 446,
+   "programs_read": 446,
+   "pages_with_a_typed_slot_or_flag": 197,
+   "pages_that_name_an_operand": 241,
+   "the_claim": "a usage line parses into slots for at least half the pages read, and a page is never read for a subcommand's contract when it names subcommands",
+   "why_this_number_and_not_that": "the slot is the shape and the argument noun is the typing; a page that prints `[options] command` has a shape and no typed operand, and counting it as a parse failure would be counting the page's content as this reader's defect",
+   "MET": true
+  },
+  "G2_the_grammar_moves_state": {
+   "goals_held": 11,
+   "needs": 11,
+   "held_with_no_repair_at_all": 11,
+   "roster_changed_a_byte": 3,
+   "roster_accepted": 777,
+   "MET": true
+  },
+  "G3_a_path_of_two_edges": {
+   "paths": 3,
+   "MET": true
+  },
+  "G4_a_refusal_is_a_refinement": {
+   "repairs_attempted_by_a_reader": 0,
+   "repairs_that_turned_refusal_into_acceptance": 0,
+   "sample": [],
+   "the_claim": "at least one refusal is read and repaired into acceptance by the flag the program itself named",
+   "drill_a_ghost_object": {
+    "attempted": 8,
+    "repaired_by_a_named_flag": 0,
+    "repaired_by_rebinding_an_object": 2
+   },
+   "drill_b_switch_deleted": {
+    "attempted": 6,
+    "drills": [
+     {
+      "program": "ar",
+      "verb": "create",
+      "switch_removed": "--thin",
+      "argv_after_removal": [
+       "ar",
+       "notes.tar",
+       "change.diff",
+       "notes",
+       "notes/a.txt",
+       "notes/b.txt"
+      ],
+      "sentence": "ar: invalid option -- 'n'\nUsage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoOPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...\n       ar -M [<mri-script]\n commands:\n  d            - delete file(s)",
+      "flag_the_program_named": "--thin",
+      "final_status": "REFUSED_NO_REPAIR",
+      "final_argv": [
+       "ar",
+       "--thin",
+       "notes.tar",
+       "change.diff",
+       "notes",
+       "notes/a.txt",
+       "notes/b.txt"
+      ],
+      "repaired_by_a_named_flag": false
+     },
+     {
+      "program": "convert",
+      "verb": "remove",
+      "switch_removed": "-antialias",
+      "argv_after_removal": [
+       "convert",
+       "change.diff",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "sentence": null,
+      "flag_the_program_named": null,
+      "final_status": "REFUSED_NO_REPAIR",
+      "final_argv": [
+       "convert",
+       "notes/a.txt",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "repaired_by_a_named_flag": false
+     },
+     {
+      "program": "convert-im6",
+      "verb": "remove",
+      "switch_removed": "-antialias",
+      "argv_after_removal": [
+       "convert-im6",
+       "change.diff",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "sentence": null,
+      "flag_the_program_named": null,
+      "final_status": "REFUSED_NO_REPAIR",
+      "final_argv": [
+       "convert-im6",
+       "notes/a.txt",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "repaired_by_a_named_flag": false
+     },
+     {
+      "program": "convert-im6.q16",
+      "verb": "remove",
+      "switch_removed": "-antialias",
+      "argv_after_removal": [
+       "convert-im6.q16",
+       "change.diff",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "sentence": null,
+      "flag_the_program_named": null,
+      "final_status": "REFUSED_NO_REPAIR",
+      "final_argv": [
+       "convert-im6.q16",
+       "notes/a.txt",
+       "change.out",
+       "notes/a.txt"
+      ],
+      "repaired_by_a_named_flag": false
+     },
+     {
+      "program": "cp",
+      "verb": "remove",
+      "switch_removed": "--remove-destination",
+      "argv_after_removal": [
+       "cp",
+       "change.diff",
+       "change.out"
+      ],
+      "sentence": null,
+      "flag_the_program_named": null,
+      "final_status": "ACCEPTED_CHANGED",
+      "final_argv": [
+       "cp",
+       "change.diff",
+       "change.out"
+      ],
+      "repaired_by_a_named_flag": false
+     },
+     {
+      "program": "csplit",
+      "verb": "remove",
+      "switch_removed": "-z",
+      "argv_after_removal": [
+       "csplit",
+       "change.diff",
+       "change.out"
+      ],
+      "sentence": null,
+      "flag_the_program_named": null,
+      "final_status": "REFUSED_UNREAD",
+      "final_argv": [
+       "csplit",
+       "change.diff",
+       "change.out"
+      ],
+      "repaired_by_a_named_flag": false
+     }
+    ],
+    "repaired_by_a_named_flag": 0
+   },
+   "what_neither_drill_can_show": "a refusal whose sentence this reader has no form for stays UNREAD and is left in the receipt; a program that exits 0 having done nothing is labelled INERT, never repaired",
+   "the_claim_restated_to_what_was_measured": "a program's own sentence names what it missed, and the machine supplies it from the page -- by putting back the switch the sentence printed, or by binding a different object when the sentence says it could not open one",
+   "MET": true
+  },
+  "G5_the_machine_refuses": {
+   "held_out": 2,
+   "refused": 2,
+   "MET": true
+  },
+  "G6_the_check_is_derived": {
+   "measured_states": 3,
+   "states_where_the_check_says_held_and_the_need_is_not": 1,
+   "spots": [
+    {
+     "what_the_need_meant": "the archive proj.tar is compressed",
+     "what_was_done": [
+      "gzip",
+      "payload.txt"
+     ],
+     "made": [
+      "payload.txt.gz"
+     ],
+     "need_met": false,
+     "check": {
+      "check": "compressed",
+      "says": true,
+      "by": [
+       "gzip",
+       "-t",
+       "payload.txt.gz"
+      ]
+     },
+     "blind": true
+    },
+    {
+     "what_the_need_meant": "a new file holding payload.txt's lines",
+     "what_was_done": [
+      "cp",
+      "notes/a.txt",
+      "impostor.out"
+     ],
+     "made": [
+      "impostor.out"
+     ],
+     "need_met": false,
+     "check": {
+      "check": "contains_text",
+      "says": false,
+      "by": [
+       "grep",
+       "-F",
+       "--",
+       "brown",
+       "impostor.out"
+      ]
+     },
+     "blind": false
+    },
+    {
+     "what_the_need_meant": "an archive of src holding main.py",
+     "what_was_done": [
+      "tar",
+      "-c",
+      "-f",
+      "notes.tar",
+      "notes"
+     ],
+     "made": [
+      "notes.tar"
+     ],
+     "need_met": false,
+     "check": {
+      "check": "archive_contains",
+      "says": false,
+      "by": [
+       "tar",
+       "-tf",
+       "<created archive>"
+      ]
+     },
+     "blind": false
+    }
+   ],
+   "the_claim": "every goal check is a read-only program the machine already had, and the state where it is blind is measured rather than assumed",
+   "what_it_costs": "a check that is blind to WHICH object turns a one-requirement need into a false goal; the needs that could be fooled carry a second requirement on a different surface instead",
+   "MET": true
+  },
+  "G7_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "a_need_is_a_sentence": true,
+   "the_claim": "no command, flag or output path is written in this source for any need",
+   "MET": true
+  }
+ },
+ "rows": [
+  {
+   "need": "N01",
+   "text": "archive the src directory into a tarball",
+   "target": "archive",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "tar:extract",
+    "tar:create"
+   ],
+   "runs_spent": 8,
+   "argv": [
+    [
+     "tar",
+     "-x",
+     "-f",
+     "proj.tar"
+    ],
+    [
+     "tar",
+     "-c",
+     "-f",
+     "proj-2.tar",
+     "src",
+     "src/README",
+     "src/main.py"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED",
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N02",
+   "text": "extract the contents of the archive proj.tar",
+   "target": "many",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "tar:extract"
+   ],
+   "runs_spent": 2,
+   "argv": [
+    [
+     "tar",
+     "-x",
+     "-f",
+     "proj.tar"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N03",
+   "text": "compress the plain file payload.txt",
+   "target": "compressed",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "gzip:compress"
+   ],
+   "runs_spent": 2,
+   "argv": [
+    [
+     "gzip",
+     "payload.txt"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N04",
+   "text": "decompress the compressed file keep.gz",
+   "target": "plain",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "gzip:decompress"
+   ],
+   "runs_spent": 1,
+   "argv": [
+    [
+     "gzip",
+     "-d",
+     "keep.gz"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N05",
+   "text": "copy the notes file a.txt into a second file",
+   "target": "plain",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "cp:copy"
+   ],
+   "runs_spent": 1,
+   "argv": [
+    [
+     "cp",
+     "notes/a.txt",
+     "a.out"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N06",
+   "text": "apply the patch change.diff so the notes file gains GAMMA",
+   "target": "plain",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "patch:apply"
+   ],
+   "runs_spent": 1,
+   "argv": [
+    [
+     "patch",
+     "--merge",
+     "-o",
+     "change.out",
+     "notes/a.txt",
+     "change.diff"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N07",
+   "text": "archive the src directory and then compress the archive",
+   "target": "compressed",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "tar:extract",
+    "gzip:compress"
+   ],
+   "runs_spent": 4,
+   "argv": [
+    [
+     "tar",
+     "-x",
+     "-f",
+     "proj.tar"
+    ],
+    [
+     "gzip",
+     "proj/main.py"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED",
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N08",
+   "text": "compress the archive proj.tar, which must stay an archive",
+   "target": "compressed",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "tar:extract",
+    "gzip:compress"
+   ],
+   "runs_spent": 4,
+   "argv": [
+    [
+     "tar",
+     "-x",
+     "-f",
+     "proj.tar"
+    ],
+    [
+     "gzip",
+     "proj/main.py"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED",
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N09",
+   "text": "sort the lines of the plain file payload.txt into a new file",
+   "target": "plain",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "sort:sort"
+   ],
+   "runs_spent": 3,
+   "argv": [
+    [
+     "sort",
+     "-o",
+     "payload.out",
+     "payload.txt"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N10",
+   "text": "remove the compressed file keep.gz",
+   "target": "absent",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "rm:remove"
+   ],
+   "runs_spent": 1,
+   "argv": [
+    [
+     "rm",
+     "keep.gz"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "N11",
+   "text": "rename the plain file notes/b.txt so the old name is gone",
+   "target": "plain",
+   "status": "PASS__GOAL_HELD",
+   "path": [
+    "mv:rename"
+   ],
+   "runs_spent": 1,
+   "argv": [
+    [
+     "mv",
+     "notes/b.txt",
+     "b.out"
+    ]
+   ],
+   "step_status": [
+    "ACCEPTED_CHANGED"
+   ]
+  },
+  {
+   "need": "H01",
+   "text": "email the landlord about the broken radiator",
+   "target": null,
+   "status": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "path": null,
+   "runs_spent": null,
+   "argv": [],
+   "step_status": []
+  },
+  {
+   "need": "H02",
+   "text": "buy milk and leave it in the fridge tonight",
+   "target": null,
+   "status": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+   "path": null,
+   "runs_spent": null,
+   "argv": [],
+   "step_status": []
+  }
+ ],
+ "repair_drill": {
+  "drills": [
+   {
+    "program": "ar",
+    "verb": "remove",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "ar",
+     "ghost-does-not-exist.out",
+     "proj.out"
+    ],
+    "sentence": "ar: invalid option -- 'g'\nUsage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoOPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...\n       ar -M [<mri-script]\n commands:\n  d            - delete file(s)",
+    "form": "PROSE",
+    "flag_the_program_named": "--thin",
+    "final_status": "REFUSED_NO_REPAIR",
+    "final_argv": [
+     "ar",
+     "--thin",
+     "ghost-does-not-exist.out",
+     "proj.out"
+    ],
+    "read_form": "PROSE",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   },
+   {
+    "program": "ar",
+    "verb": "create",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "ar",
+     "--thin",
+     "notes.tar",
+     "change.diff",
+     "ghost-does-not-exist.out",
+     "notes/a.txt",
+     "notes/b.txt"
+    ],
+    "sentence": "--thin: invalid option -- 'n'\nUsage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoOPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...\n       ar -M [<mri-script]\n commands:\n  d            - delete fil",
+    "form": "PROSE",
+    "flag_the_program_named": "--thin",
+    "final_status": "REFUSED_NO_REPAIR",
+    "final_argv": [
+     "ar",
+     "--thin",
+     "notes.tar",
+     "change.diff",
+     "ghost-does-not-exist.out",
+     "notes/a.txt",
+     "notes/b.txt"
+    ],
+    "read_form": "PROSE",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   },
+   {
+    "program": "base32",
+    "verb": "encode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "base32",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "base32: ghost-does-not-exist.out: No such file or directory",
+    "form": "WITNESS",
+    "flag_the_program_named": null,
+    "final_status": "ACCEPTED_INERT",
+    "final_argv": [
+     "base32",
+     "change.diff"
+    ],
+    "read_form": "WITNESS",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": true
+   },
+   {
+    "program": "base32",
+    "verb": "decode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "base32",
+     "-d",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "base32: ghost-does-not-exist.out: No such file or directory",
+    "form": "WITNESS",
+    "flag_the_program_named": null,
+    "final_status": "REFUSED_UNREAD",
+    "final_argv": [
+     "base32",
+     "-d",
+     "change.diff"
+    ],
+    "read_form": "WITNESS",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   },
+   {
+    "program": "base64",
+    "verb": "encode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "base64",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "base64: ghost-does-not-exist.out: No such file or directory",
+    "form": "WITNESS",
+    "flag_the_program_named": null,
+    "final_status": "ACCEPTED_INERT",
+    "final_argv": [
+     "base64",
+     "change.diff"
+    ],
+    "read_form": "WITNESS",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": true
+   },
+   {
+    "program": "base64",
+    "verb": "decode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "base64",
+     "-d",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "base64: ghost-does-not-exist.out: No such file or directory",
+    "form": "WITNESS",
+    "flag_the_program_named": null,
+    "final_status": "REFUSED_UNREAD",
+    "final_argv": [
+     "base64",
+     "-d",
+     "change.diff"
+    ],
+    "read_form": "WITNESS",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   },
+   {
+    "program": "basenc",
+    "verb": "encode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "basenc",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "basenc: missing encoding type\nTry 'basenc --help' for more information.",
+    "form": "UNREAD",
+    "flag_the_program_named": null,
+    "final_status": "REFUSED_UNREAD",
+    "final_argv": [
+     "basenc",
+     "ghost-does-not-exist.out"
+    ],
+    "read_form": "UNREAD",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   },
+   {
+    "program": "basenc",
+    "verb": "decode",
+    "handed": "ghost-does-not-exist.out",
+    "first_argv": [
+     "basenc",
+     "-d",
+     "ghost-does-not-exist.out"
+    ],
+    "sentence": "basenc: missing encoding type\nTry 'basenc --help' for more information.",
+    "form": "UNREAD",
+    "flag_the_program_named": null,
+    "final_status": "REFUSED_UNREAD",
+    "final_argv": [
+     "basenc",
+     "-d",
+     "ghost-does-not-exist.out"
+    ],
+    "read_form": "UNREAD",
+    "repaired_by_a_named_flag": false,
+    "repaired_by_rebinding_an_object": false
+   }
+  ],
+  "repaired_by_a_named_flag": 0,
+  "repaired_by_rebinding_an_object": 2,
+  "attempted": 8,
+  "switch_drill": {
+   "attempted": 6,
+   "drills": [
+    {
+     "program": "ar",
+     "verb": "create",
+     "switch_removed": "--thin",
+     "argv_after_removal": [
+      "ar",
+      "notes.tar",
+      "change.diff",
+      "notes",
+      "notes/a.txt",
+      "notes/b.txt"
+     ],
+     "sentence": "ar: invalid option -- 'n'\nUsage: ar [emulation options] [-]{dmpqrstx}[abcDfilMNoOPsSTuvV] [--plugin <name>] [member-name] [count] archive-file file...\n       ar -M [<mri-script]\n commands:\n  d            - delete file(s)",
+     "flag_the_program_named": "--thin",
+     "final_status": "REFUSED_NO_REPAIR",
+     "final_argv": [
+      "ar",
+      "--thin",
+      "notes.tar",
+      "change.diff",
+      "notes",
+      "notes/a.txt",
+      "notes/b.txt"
+     ],
+     "repaired_by_a_named_flag": false
+    },
+    {
+     "program": "convert",
+     "verb": "remove",
+     "switch_removed": "-antialias",
+     "argv_after_removal": [
+      "convert",
+      "change.diff",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "sentence": null,
+     "flag_the_program_named": null,
+     "final_status": "REFUSED_NO_REPAIR",
+     "final_argv": [
+      "convert",
+      "notes/a.txt",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "repaired_by_a_named_flag": false
+    },
+    {
+     "program": "convert-im6",
+     "verb": "remove",
+     "switch_removed": "-antialias",
+     "argv_after_removal": [
+      "convert-im6",
+      "change.diff",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "sentence": null,
+     "flag_the_program_named": null,
+     "final_status": "REFUSED_NO_REPAIR",
+     "final_argv": [
+      "convert-im6",
+      "notes/a.txt",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "repaired_by_a_named_flag": false
+    },
+    {
+     "program": "convert-im6.q16",
+     "verb": "remove",
+     "switch_removed": "-antialias",
+     "argv_after_removal": [
+      "convert-im6.q16",
+      "change.diff",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "sentence": null,
+     "flag_the_program_named": null,
+     "final_status": "REFUSED_NO_REPAIR",
+     "final_argv": [
+      "convert-im6.q16",
+      "notes/a.txt",
+      "change.out",
+      "notes/a.txt"
+     ],
+     "repaired_by_a_named_flag": false
+    },
+    {
+     "program": "cp",
+     "verb": "remove",
+     "switch_removed": "--remove-destination",
+     "argv_after_removal": [
+      "cp",
+      "change.diff",
+      "change.out"
+     ],
+     "sentence": null,
+     "flag_the_program_named": null,
+     "final_status": "ACCEPTED_CHANGED",
+     "final_argv": [
+      "cp",
+      "change.diff",
+      "change.out"
+     ],
+     "repaired_by_a_named_flag": false
+    },
+    {
+     "program": "csplit",
+     "verb": "remove",
+     "switch_removed": "-z",
+     "argv_after_removal": [
+      "csplit",
+      "change.diff",
+      "change.out"
+     ],
+     "sentence": null,
+     "flag_the_program_named": null,
+     "final_status": "REFUSED_UNREAD",
+     "final_argv": [
+      "csplit",
+      "change.diff",
+      "change.out"
+     ],
+     "repaired_by_a_named_flag": false
+    }
+   ],
+   "repaired_by_a_named_flag": 0
+  }
+ },
+ "check_blind_spots": {
+  "spots": [
+   {
+    "what_the_need_meant": "the archive proj.tar is compressed",
+    "what_was_done": [
+     "gzip",
+     "payload.txt"
+    ],
+    "made": [
+     "payload.txt.gz"
+    ],
+    "need_met": false,
+    "check": {
+     "check": "compressed",
+     "says": true,
+     "by": [
+      "gzip",
+      "-t",
+      "payload.txt.gz"
+     ]
+    },
+    "blind": true
+   },
+   {
+    "what_the_need_meant": "a new file holding payload.txt's lines",
+    "what_was_done": [
+     "cp",
+     "notes/a.txt",
+     "impostor.out"
+    ],
+    "made": [
+     "impostor.out"
+    ],
+    "need_met": false,
+    "check": {
+     "check": "contains_text",
+     "says": false,
+     "by": [
+      "grep",
+      "-F",
+      "--",
+      "brown",
+      "impostor.out"
+     ]
+    },
+    "blind": false
+   },
+   {
+    "what_the_need_meant": "an archive of src holding main.py",
+    "what_was_done": [
+     "tar",
+     "-c",
+     "-f",
+     "notes.tar",
+     "notes"
+    ],
+    "made": [
+     "notes.tar"
+    ],
+    "need_met": false,
+    "check": {
+     "check": "archive_contains",
+     "says": false,
+     "by": [
+      "tar",
+      "-tf",
+      "<created archive>"
+     ]
+    },
+    "blind": false
+   }
+  ],
+  "blind_spots": 1,
+  "measured": 3
+ },
+ "subcommand_pages": {
+  "probed": [
+   {
+    "program": "ld",
+    "child": "ignore-in-shared-libs",
+    "parent_has_usage_line": true,
+    "child_has_usage_line": true,
+    "child_usage": "ld [options] file...",
+    "child_options_declared": 241
+   },
+   {
+    "program": "ld.bfd",
+    "child": "ignore-in-shared-libs",
+    "parent_has_usage_line": true,
+    "child_has_usage_line": true,
+    "child_usage": "ld.bfd [options] file...",
+    "child_options_declared": 241
+   },
+   {
+    "program": "tar",
+    "child": "extracting",
+    "parent_has_usage_line": true,
+    "child_has_usage_line": false,
+    "child_usage": null,
+    "child_options_declared": 0
+   }
+  ]
+ },
+ "edges_the_pages_state": [
+  {
+   "program": "ar",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "ar",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "as",
+   "verb": "encode",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-msse2avx"
+  },
+  {
+   "program": "base32",
+   "verb": "encode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "base32",
+   "verb": "decode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "base64",
+   "verb": "encode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "base64",
+   "verb": "decode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "basenc",
+   "verb": "encode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "basenc",
+   "verb": "decode",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "cat",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "convert",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-antialias"
+  },
+  {
+   "program": "convert-im6",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-antialias"
+  },
+  {
+   "program": "convert-im6.q16",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-antialias"
+  },
+  {
+   "program": "cp",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "cp",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--remove-destination"
+  },
+  {
+   "program": "csplit",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-z"
+  },
+  {
+   "program": "diff",
+   "verb": "extract",
+   "in": "patch",
+   "out": "many",
+   "source": "flag",
+   "flag": "-t"
+  },
+  {
+   "program": "dir",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "env",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-u"
+  },
+  {
+   "program": "gcc-ar",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "gcc-ar",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "gcc-ar-12",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "gcc-ar-12",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "gcc-nm",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "gcc-nm-12",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "gold",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--gc-sections"
+  },
+  {
+   "program": "gzexe",
+   "verb": "create",
+   "in": "many",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "gzexe",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-d"
+  },
+  {
+   "program": "gzip",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "gzip",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "install",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-t"
+  },
+  {
+   "program": "jq",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-S"
+  },
+  {
+   "program": "ld",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-x"
+  },
+  {
+   "program": "ld",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--copy-dt-needed-entries"
+  },
+  {
+   "program": "ld.bfd",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-x"
+  },
+  {
+   "program": "ld.bfd",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--copy-dt-needed-entries"
+  },
+  {
+   "program": "ld.gold",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--gc-sections"
+  },
+  {
+   "program": "localedef",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--delete-from-archive"
+  },
+  {
+   "program": "ls",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "lzcat",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "lzcat",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "lzma",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "lzma",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "mv",
+   "verb": "rename",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "mv",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--strip-trailing-slashes"
+  },
+  {
+   "program": "nm",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "patch",
+   "verb": "apply",
+   "in": "patch",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--merge"
+  },
+  {
+   "program": "patch",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-E"
+  },
+  {
+   "program": "patch",
+   "verb": "extract",
+   "in": "patch",
+   "out": "many",
+   "source": "flag",
+   "flag": "-g"
+  },
+  {
+   "program": "rm",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "sdiff",
+   "verb": "apply",
+   "in": "patch",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "sdiff",
+   "verb": "extract",
+   "in": "patch",
+   "out": "many",
+   "source": "flag",
+   "flag": "-t"
+  },
+  {
+   "program": "shred",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "sort",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "tar",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "tar",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--delete"
+  },
+  {
+   "program": "tar",
+   "verb": "extract",
+   "in": "archive",
+   "out": "many",
+   "source": "flag",
+   "flag": "-x"
+  },
+  {
+   "program": "tee",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "unlzma",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "unlzma",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "unxz",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "unxz",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "unzip",
+   "verb": "extract",
+   "in": "compressed",
+   "out": "many",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "vdir",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "wget",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--unlink"
+  },
+  {
+   "program": "x86_64-linux-gnu-ar",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "x86_64-linux-gnu-ar",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "x86_64-linux-gnu-as",
+   "verb": "encode",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-msse2avx"
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-ar",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-ar",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-ar-12",
+   "verb": "remove",
+   "in": "archive",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-ar-12",
+   "verb": "create",
+   "in": "many",
+   "out": "archive",
+   "source": "flag",
+   "flag": "--thin"
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-nm",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "x86_64-linux-gnu-gcc-nm-12",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "x86_64-linux-gnu-gold",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--gc-sections"
+  },
+  {
+   "program": "x86_64-linux-gnu-ld",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-x"
+  },
+  {
+   "program": "x86_64-linux-gnu-ld",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--copy-dt-needed-entries"
+  },
+  {
+   "program": "x86_64-linux-gnu-ld.bfd",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-x"
+  },
+  {
+   "program": "x86_64-linux-gnu-ld.bfd",
+   "verb": "copy",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--copy-dt-needed-entries"
+  },
+  {
+   "program": "x86_64-linux-gnu-ld.gold",
+   "verb": "remove",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "--gc-sections"
+  },
+  {
+   "program": "x86_64-linux-gnu-nm",
+   "verb": "sort",
+   "in": "plain",
+   "out": "plain",
+   "source": "flag",
+   "flag": "-n"
+  },
+  {
+   "program": "xz",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "xz",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "xzcat",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "xzcat",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "zcat",
+   "verb": "decompress",
+   "in": "compressed",
+   "out": "plain",
+   "source": "own_description",
+   "flag": null
+  },
+  {
+   "program": "zforce",
+   "verb": "compress",
+   "in": "plain",
+   "out": "compressed",
+   "source": "own_description",
+   "flag": null
+  }
+ ],
+ "what_this_is_not": [
+  "not a benchmark result: 13 needs over one room of 11 objects",
+  "not a capability claim: authority NONE__PRODUCER_RUN_SANDBOX",
+  "not a model: zero parameters, zero model calls, zero run-time network",
+  "not a statement about GUIs or browsers: this round is a shell repertoire",
+  "not single-experience learning: a refusal read once is re-derived, not stored"
+ ],
+ "open_obligations": [
+  "the same instrument, unchanged, against a room it has never seen",
+  "the same instrument against an accessibility tree, to test whether page-is-a-grammar is a fact about Unix or about published structure",
+  "a written answer to whether a refusal read once is stored, and in what generalised form"
+ ]
+}

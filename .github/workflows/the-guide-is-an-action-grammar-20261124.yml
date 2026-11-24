@@ -1,0 +1,93 @@
+name: The Guide Is An Action Grammar 20261124
+
+# One instrument, one receipt, no verdict:
+#   canonical/tools/the_guide_is_an_action_grammar_v1.py
+#     -> canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json
+# Anything this workflow says is a SECOND RUN of the same tool on a clean machine, which is
+# the only kind of verification this repository accepts (a re-hash of the producer's own
+# output is not verification).
+#
+# What it does NOT claim: 13 needs over one room is a mechanism measurement, not a benchmark
+# result, and the workflow fails if the receipt says otherwise.
+
+on:
+  push:
+    branches:
+      - arena/b18cef3a-brain
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rerun-the-instrument:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Nothing under canonical/runtime or canonical/laws may move
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/ canonical/laws/)"
+
+      - name: The instrument writes no program, flag or path for any need
+        shell: bash
+        run: |
+          set -euo pipefail
+          # G7 says no command, flag or output path is written in the source for any need.
+          # This checks it mechanically instead of asserting it in prose: the needs block and
+          # the binder must contain no shell command string with an argument.
+          python - <<'PY'
+          import re, pathlib, sys
+          src = pathlib.Path("canonical/tools/the_guide_is_an_action_grammar_v1.py").read_text()
+          needs = src[src.index("NEEDS: tuple[dict[str, Any], ...] = ("):]
+          needs = needs[:needs.index("\n)\n")]
+          offenders = re.findall(r"['\"](?:tar|gzip|gunzip|xz|cp|mv|rm|sort|patch|unzip|ar)\s+-{1,2}\S+", needs)
+          if offenders:
+              print("a need contains a command:", offenders)
+              sys.exit(1)
+          print("needs name no program and no flag: ok")
+          PY
+
+      - name: Run the instrument
+        run: python canonical/tools/the_guide_is_an_action_grammar_v1.py --receipt "$RUNNER_TEMP/receipt.json"
+
+      - name: The gates are the ones that were declared, and zero means zero
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - "$RUNNER_TEMP/receipt.json" <<'PY'
+          import json, sys
+          got = json.load(open(sys.argv[1]))
+          verdict = got["verdict"]
+          for gate, row in verdict.items():
+              print(f"{gate}: {row.get('MET')}")
+              if row.get("MET") is not True:
+                  print(f"  {gate} is not met on this machine; that is a result, not a failure")
+          summary = got["summary"]
+          assert summary["model_calls"] == 0, "a model was called at run time"
+          assert summary["parameters_stored"] == 0, "something was stored between runs"
+          assert summary["network_calls_at_run_time"] == 0, "the run touched the network"
+          # The receipt must keep saying what it is not, or it will be quoted as a benchmark.
+          assert got["authority"] == "NONE__PRODUCER_RUN_SANDBOX"
+          assert any("not a benchmark result" in line for line in got["what_this_is_not"])
+          print("goals held:", summary["goals_held"], "of", summary["needs_served_by_a_machine"])
+          print("paths of two or more edges:", summary["paths_of_two_or_more_edges"])
+          print("held out refused:", summary["held_out_refused"], "of", summary["needs_held_out"])
+          PY
+
+      - name: Upload the second run
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-guide-is-an-action-grammar-20261124-second-run
+          path: ${{ runner.temp }}/receipt.json
+          if-no-files-found: error
