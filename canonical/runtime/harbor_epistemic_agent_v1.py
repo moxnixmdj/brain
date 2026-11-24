@@ -208,6 +208,73 @@ def _transport_contract() -> dict[str, Any]:
     }
 
 
+_WORKSPACE_DIFF_SCRIPT = "/opt/brain-ro/canonical/runtime/harbor_workspace_diff_v1.py"
+_WORKSPACE_DIFF_MARKER = "BRAIN_WORKSPACE_DIFF_V1:"
+_WORKSPACE_BASELINE_PATH = "/tmp/brain-workspace-baseline.json"
+
+
+async def _workspace_state(transport: HarborEnvironmentTransport, mode: str, repo: str) -> dict[str, Any]:
+    """Run the bounded in-container workspace snapshot/diff helper."""
+    command = (
+        "env -i PATH=/usr/local/bin:/usr/bin:/bin HOME=/tmp "
+        f"python3 -I -B {_WORKSPACE_DIFF_SCRIPT} {mode} {shlex.quote(repo)} {_WORKSPACE_BASELINE_PATH}"
+    )
+    receipt = await transport.exec(command, timeout_sec=90)
+    if receipt.returncode != 0:
+        raise HarborTransportError(f"WORKSPACE_DIFF_NONZERO:{mode}")
+    lines = [line[len(_WORKSPACE_DIFF_MARKER):] for line in receipt.stdout.splitlines()
+             if line.startswith(_WORKSPACE_DIFF_MARKER)]
+    if len(lines) != 1 or len(lines[0]) > 100_000:
+        raise HarborTransportError(f"WORKSPACE_DIFF_RESPONSE_INVALID:{mode}")
+    try:
+        report = json.loads(lines[0])
+    except ValueError as exc:
+        raise HarborTransportError(f"WORKSPACE_DIFF_RESPONSE_INVALID:{mode}") from exc
+    if not isinstance(report, dict):
+        raise HarborTransportError(f"WORKSPACE_DIFF_RESPONSE_INVALID:{mode}")
+    return report
+
+
+def _attach_workspace_diff(result: dict[str, Any], report: dict[str, Any], repo: str) -> None:
+    """Bind the measured cumulative workspace mutation into the result and trace."""
+    changed = bool(report.get("candidate_changed"))
+    diff_bytes = int(report.get("diff_bytes") or 0)
+    apply_report = {
+        "status": "APPLIED__UNVERIFIED" if changed else "NO_CANDIDATE_APPLIED",
+        "workspace": repo,
+        "changed_paths": list(report.get("changed_paths") or [])[:25],
+        "added": report.get("added"), "changed": report.get("changed"),
+        "removed": report.get("removed"),
+        "official_verifier_invoked": False,
+    }
+    result["candidate_applied"] = changed
+    result["diff_bytes"] = diff_bytes
+    result["apply"] = apply_report
+    result["workspace_diff"] = report
+    trace = result.get("trace")
+    if isinstance(trace, list) and trace and isinstance(trace[-1], dict):
+        diagnostic = trace[-1].get("imported_engine")
+        if not isinstance(diagnostic, dict):
+            diagnostic = {}
+            trace[-1]["imported_engine"] = diagnostic
+        diagnostic["candidate_applied"] = changed
+        diagnostic["diff_bytes"] = diff_bytes
+        diagnostic["apply"] = apply_report
+        diagnostic["workspace_diff"] = report
+
+
+def _attach_workspace_diff_unavailable(result: dict[str, Any], reason: str) -> None:
+    note = {"status": "UNAVAILABLE", "reason": str(reason)[:200]}
+    result["workspace_diff"] = note
+    trace = result.get("trace")
+    if isinstance(trace, list) and trace and isinstance(trace[-1], dict):
+        diagnostic = trace[-1].get("imported_engine")
+        if not isinstance(diagnostic, dict):
+            diagnostic = {}
+            trace[-1]["imported_engine"] = diagnostic
+        diagnostic["workspace_diff"] = note
+
+
 async def run_epistemic_goal(
     instruction: str,
     environment: Any,
@@ -217,11 +284,15 @@ async def run_epistemic_goal(
     max_cycles: int = MAX_CYCLES,
     suite: str = '',
     repo: str = '/app',
+    experimental_candidate_path: bool = False,
 ) -> dict[str, Any]:
     """Container transport loop; the caller owns boundary checks.
 
     A supplied host model is explicitly rejected. This helper does not verify
-    container isolation, collect patches, or invoke benchmark verifiers.
+    container isolation, collect patches, or invoke benchmark verifiers. When
+    ``experimental_candidate_path`` is set for Terminal-Bench 4, the /app tree
+    is snapshotted before and after the cycles so the caller gets a measured,
+    cumulative record of what the candidate actually changed.
     """
     if model is not None:
         raise AgentRejected("HOST_SOLVER_FORBIDDEN")
@@ -231,6 +302,46 @@ async def run_epistemic_goal(
     if not 1 <= int(max_cycles) <= MAX_CYCLES:
         raise AgentRejected("HARBOR_MAX_CYCLES_INVALID")
     transport = HarborEnvironmentTransport(environment)
+    measure_workspace = experimental_candidate_path and suite == 'terminal-bench-4'
+    baseline_ok = False
+    baseline_reason = "BASELINE_NOT_TAKEN"
+    if measure_workspace:
+        try:
+            snapshot = await _workspace_state(transport, "snapshot", repo)
+            baseline_ok = snapshot.get("status") == "SNAPSHOT"
+            if not baseline_ok:
+                baseline_reason = json.dumps(snapshot, sort_keys=True)[:200]
+        except Exception as exc:
+            baseline_reason = type(exc).__name__ + ":" + str(exc)[:150]
+    result = await _cycle_loop(
+        text, transport, mode=mode, max_cycles=max_cycles, suite=suite, repo=repo,
+        experimental_candidate_path=experimental_candidate_path,
+    )
+    if measure_workspace:
+        if baseline_ok:
+            try:
+                report = await _workspace_state(transport, "diff", repo)
+                if report.get("status") == "DIFF":
+                    _attach_workspace_diff(result, report, repo)
+                else:
+                    _attach_workspace_diff_unavailable(result, json.dumps(report, sort_keys=True)[:200])
+            except Exception as exc:
+                _attach_workspace_diff_unavailable(result, type(exc).__name__ + ":" + str(exc)[:150])
+        else:
+            _attach_workspace_diff_unavailable(result, baseline_reason)
+    return result
+
+
+async def _cycle_loop(
+    text: str,
+    transport: HarborEnvironmentTransport,
+    *,
+    mode: str = DEFAULT_MODE,
+    max_cycles: int = MAX_CYCLES,
+    suite: str = '',
+    repo: str = '/app',
+    experimental_candidate_path: bool = False,
+) -> dict[str, Any]:
     trace: list[dict[str, Any]] = []
     observations: list[dict[str, Any]] = []
     instruction_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -241,13 +352,23 @@ async def run_epistemic_goal(
                 transport,
                 goal,
                 {
-                    "inputs": {
-                        "harbor_task": text,
-                        "harbor_suite": suite,
-                        "harbor_repo": repo,
-                        "cycle": cycle,
-                        "observations": list(observations),
-                    },
+                    "inputs": (
+                        {
+                            "harbor_task": text,
+                            "harbor_suite": suite,
+                            "harbor_repo": repo,
+                            "cycle": cycle,
+                            "observations": list(observations),
+                            "experimental_candidate_path": True,
+                        }
+                        if experimental_candidate_path else {
+                            "harbor_task": text,
+                            "harbor_suite": suite,
+                            "harbor_repo": repo,
+                            "cycle": cycle,
+                            "observations": list(observations),
+                        }
+                    ),
                     "mode": mode,
                 },
             )
@@ -283,7 +404,9 @@ async def run_epistemic_goal(
         for key in ("engine_status", "language", "engine", "engine_result",
                     "staging", "test_targets_count", "candidate_applied",
                     "apply", "diff_bytes", "doc_compiler", "world_model",
-                    "workspace", "language_counts", "markers", "marker_errors"):
+                    "workspace", "language_counts", "markers", "marker_errors",
+                    "fallback", "doc_compiler_fallback", "fallback_error",
+                    "workspace_diff"):
             if key in result:
                 diagnostic[key] = result[key]
         if diagnostic:

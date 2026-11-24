@@ -88,6 +88,28 @@ def _finish(summary: str, **details):
         "actions": [{"type": "finish", "args": {"summary": summary[:1500]}}],
     }
     result.update(details)
+    # Mirror the routing status under engine_status for uniform diagnostics;
+    # status remains the machine-readable envelope state.
+    result["engine_status"] = result["status"]
+    return result
+
+
+def _open_model_fallback(goal: str, mode: str, inputs, root):
+    """Invoke Brain's ordinary solve() route (zero external model calls).
+
+    Returns the raw solver envelope; the caller annotates it. Raises on any
+    failure so the caller can record an honest finish instead of crashing.
+    """
+    from canonical.runtime.brain_unified_model_v1 import open_model
+
+    forwarded = dict(inputs)
+    forwarded.pop("workspace_baseline", None)
+    forwarded["ledger_db_path"] = "/tmp/brain-harbor-routing.sqlite"
+    result = open_model(root=root).solve(
+        goal, inputs=forwarded, mode=mode, context_paths=[], cwd=os.getcwd()
+    )
+    if not isinstance(result, dict):
+        raise ValueError("SOLVER_RESULT_NOT_OBJECT")
     return result
 
 
@@ -103,7 +125,7 @@ def _pro_imported_cycle(inputs, repo: str) -> dict:
     staged = temp_parent / "work"
     staged.mkdir(mode=0o700)
     try:
-        staging = stage_worktree(repo, staged)
+        staging = stage_worktree(repo, staged, authorize_test_execution=True)
         language_counts, markers, marker_errors = _scan_languages(staged)
         js_count = int(language_counts.get("javascript_typescript", 0))
         py_count = int(language_counts.get("python", 0))
@@ -168,7 +190,7 @@ def _pro_imported_cycle(inputs, repo: str) -> dict:
         shutil.rmtree(temp_parent, ignore_errors=True)
 
 
-def _terminal_imported_cycle(inputs, repo: str) -> dict:
+def _terminal_imported_cycle(request, inputs, repo: str) -> dict:
     from canonical.runtime.epistemic_doc_compiler_agent_v1 import (
         solve_multi_step_with_instant_knowledge,
     )
@@ -213,10 +235,38 @@ def _terminal_imported_cycle(inputs, repo: str) -> dict:
     doc_status = str(doc.get("status") if isinstance(doc, dict) else "ENGINE_RESULT_INVALID")
     summary = (f"Imported local doc compiler ran (status={doc_status}); "
                f"world_model={world.get('status')}. Official task verifier decides.")
-    return _finish(summary, engine_status="DOC_COMPILER_" + doc_status,
-                   doc_compiler=compact_doc, world_model=world,
-                   workspace=workspace, candidate_applied=False,
-                   diff_bytes=0, apply={"status": "NOT_APPLICABLE_TERMINAL_BENCH"})
+    applied = {"status": "CANDIDATE_EXECUTED_IN_PLACE__UNVERIFIED",
+               "official_verifier_invoked": False}
+    # The in-place candidate ran; the agent (or a later cycle) measures the
+    # cumulative /app mutation. No self-reported verification is trusted.
+    if doc_status == "VERIFIED":
+        return _finish(summary, engine_status="DOC_COMPILER_" + doc_status,
+                       doc_compiler=compact_doc, world_model=world,
+                       workspace=workspace, apply=applied)
+    # Deterministic compiler could not verify locally: fall back to Brain's
+    # ordinary solve()/agent loop against the task workspace instead of
+    # hard-exiting with zero model invocations.
+    root = Path(__file__).resolve().parents[2]
+    goal = str(request.get("goal") or "")
+    mode = str(request.get("mode") or "EPISTEMIC")
+    try:
+        fallback = _open_model_fallback(goal, mode, inputs, root)
+    except Exception as exc:
+        return _finish(summary + f" Fallback to Brain solve failed ({type(exc).__name__}).",
+                       engine_status="DOC_COMPILER_" + doc_status,
+                       doc_compiler=compact_doc, world_model=world,
+                       workspace=workspace, apply=applied,
+                       fallback="OPEN_MODEL_UNAVAILABLE",
+                       doc_compiler_fallback=compact_doc,
+                       fallback_error=type(exc).__name__ + ":" + str(exc)[:200])
+    fallback["fallback"] = "OPEN_MODEL_AFTER_" + doc_status
+    fallback["engine_status"] = "DOC_COMPILER_" + doc_status
+    fallback["doc_compiler"] = compact_doc
+    fallback["doc_compiler_fallback"] = compact_doc
+    fallback["world_model"] = world
+    fallback["workspace"] = workspace
+    fallback["apply"] = applied
+    return fallback
 
 
 def main() -> int:
@@ -260,10 +310,29 @@ def main() -> int:
         print(MARKER + json.dumps(result, sort_keys=True, default=str), flush=True)
         return 0
     if inputs.get("observations") == [] and inputs.get("harbor_suite") == "terminal-bench-4":
-        result = _terminal_imported_cycle(inputs, repo)
+        result = _terminal_imported_cycle(request, inputs, repo)
         print(MARKER + json.dumps(result, sort_keys=True, default=str), flush=True)
         return 0
     if inputs.get("observations") != [] and inputs.get("harbor_suite") in ("pro-v2", "terminal-bench-4"):
+        if inputs.get("experimental_candidate_path") is True:
+            # Multi-cycle experimental candidate path: keep the Brain agent
+            # loop against the workspace instead of hard-exiting.
+            root = Path(__file__).resolve().parents[2]
+            try:
+                result = _open_model_fallback(str(request.get("goal") or ""),
+                                              str(request.get("mode") or "EPISTEMIC"),
+                                              inputs, root)
+                result["fallback"] = "OPEN_MODEL_AFTER_IMPORTED_ENGINE_ROUTE"
+            except Exception as exc:
+                result = _finish(
+                    f"Brain solve() route failed after observed workspace actions ({type(exc).__name__}); finishing.",
+                    engine_status="OPEN_MODEL_ROUTE_FAILED",
+                    fallback="OPEN_MODEL_UNAVAILABLE",
+                    fallback_error=type(exc).__name__ + ":" + str(exc)[:200],
+                    apply={"status": "CANDIDATE_EXECUTED_IN_PLACE__UNVERIFIED",
+                           "official_verifier_invoked": False})
+            print(MARKER + json.dumps(result, sort_keys=True, default=str), flush=True)
+            return 0
         result = _finish("Unexpected observations reached the one-cycle imported-engine worker; finishing without further actions.",
                          engine_status="UNEXPECTED_OBSERVATIONS", candidate_applied=False,
                          diff_bytes=0, apply={"status": "NO_CANDIDATE_APPLIED"})

@@ -35,6 +35,12 @@ class MockEnvironment:
         elif 'harbor_process_cleanup_worker_v1.py cleanup' in command:
             out = vm._PROCESS_MARKER + json.dumps({'status': 'NO_NEW_VISIBLE_PROCESSES',
                                                   'killed_pids': [], 'quiescence_verified': False})
+        elif 'harbor_workspace_diff_v1.py snapshot' in command:
+            out = agent._WORKSPACE_DIFF_MARKER + json.dumps({'status': 'SNAPSHOT', 'files': 3, 'bytes_hashed': 100, 'skipped': 0})
+        elif 'harbor_workspace_diff_v1.py diff' in command:
+            out = agent._WORKSPACE_DIFF_MARKER + json.dumps({'status': 'DIFF', 'added': 0, 'removed': 0, 'changed': 1,
+                                                           'diff_bytes': 42, 'candidate_changed': True,
+                                                           'changed_paths': ['app/sessions.py'], 'removed_paths': [], 'skipped': 0})
         elif 'harbor_container_solver_worker_v1.py' in command:
             self.solver_calls += 1
             if self.do_action and self.solver_calls == 1:
@@ -102,6 +108,16 @@ class ExperimentalDispatchTests(unittest.TestCase):
             self.assertEqual(result['status'], 'FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES')
             self.assertIn('printf x', env.commands)
             self.assertFalse((Path(tmp) / 'model.patch').exists())
+            trace = json.loads((Path(tmp) / agent.TRACE_FILENAME).read_text())
+            self.assertEqual(trace['candidate_applied'], True)
+            self.assertEqual(trace['diff_bytes'], 42)
+            self.assertEqual(trace['apply']['status'], 'APPLIED__UNVERIFIED')
+            self.assertEqual(trace['workspace_diff']['diff_bytes'], 42)
+            diag = trace['trace'][-1]['imported_engine']
+            self.assertEqual(diag['candidate_applied'], True)
+            self.assertEqual(diag['workspace_diff']['changed_paths'], ['app/sessions.py'])
+            self.assertTrue(any('harbor_workspace_diff_v1.py snapshot' in c for c in env.commands))
+            self.assertTrue(any('harbor_workspace_diff_v1.py diff' in c for c in env.commands))
             traj = json.loads((Path(tmp) / 'trajectory.json').read_text())
             call = next(step for step in traj['steps'] if step.get('tool_calls'))
             self.assertEqual(call['tool_calls'][0]['arguments']['command'], 'printf x')

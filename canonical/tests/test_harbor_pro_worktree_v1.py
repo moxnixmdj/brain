@@ -31,9 +31,10 @@ class StageWorktreeTests(unittest.TestCase):
         target.write_bytes(data)
         return target
 
-    def test_regular_files_and_node_modules_copied_symlinks_skipped(self):
+    def test_regular_files_copied_symlinks_and_bloat_dirs_skipped(self):
         original = self.put('src/mod.js', b'const a = 1;\n')
         self.put('node_modules/pkg/index.js', b'module.exports = 1;\n')
+        self.put('dist/bundle.js', b'bundle')
         self.put('.git/config', b'secret')
         external = self.root / 'outside.txt'
         external.write_bytes(b'private')
@@ -43,20 +44,30 @@ class StageWorktreeTests(unittest.TestCase):
         original.chmod(0o755)
         result = stage.stage_worktree(self.src, self.dst)
         self.assertEqual((self.dst / 'src/mod.js').read_bytes(), b'const a = 1;\n')
-        self.assertEqual((self.dst / 'node_modules/pkg/index.js').read_bytes(), b'module.exports = 1;\n')
+        self.assertFalse((self.dst / 'node_modules').exists())
+        self.assertFalse((self.dst / 'dist').exists())
         self.assertEqual((self.dst / 'src/mod.js').stat().st_mode & 0o777, 0o755)
         self.assertFalse((self.dst / '.git').exists())
         self.assertFalse((self.dst / 'external.js').exists())
         self.assertFalse((self.dst / 'broken.js').exists())
-        self.assertFalse((self.dst / 'node_modules/pkg/internal.js').exists())
-        self.assertEqual(result['symlinks_skipped'], 3)
-        self.assertEqual(result['excluded_entries'], 1)
+        self.assertEqual(result['symlinks_skipped'], 2)
+        self.assertEqual(result['excluded_entries'], 3)
         self.assertFalse(result['dependency_completeness_verified'])
         self.assertFalse(result['confinement_verified'])
         self.assertFalse(result['test_execution_authorized'])
         self.assertFalse(result['patch_applied'])
         (self.dst / 'src/mod.js').write_text('changed')
         self.assertEqual(original.read_bytes(), b'const a = 1;\n')
+
+    def test_authorize_test_execution_flag_is_reported_verbatim(self):
+        self.put('a.txt', b'x')
+        default = stage.stage_worktree(self.src, self.dst)
+        self.assertFalse(default['test_execution_authorized'])
+        # A fresh private destination: a reused one is refused by design.
+        other = self.root / 'staged2'
+        other.mkdir(mode=0o700)
+        granted = stage.stage_worktree(self.src, other, authorize_test_execution=True)
+        self.assertTrue(granted['test_execution_authorized'])
 
     @unittest.skipUnless(shutil.which('node'), 'node required')
     def test_imported_js_engine_generates_candidate_from_staged_fixture(self):

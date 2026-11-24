@@ -135,6 +135,63 @@ class HarborEpistemicAgentTests(unittest.TestCase):
             self.assertEqual(trace["status"], "ONESHOT_CARRIER_UNQUALIFIED_NO_FALLBACK")
             self.assertEqual(env.commands, [])
 
+    def test_terminal_candidate_path_measures_workspace_mutation(self):
+        class MeasuredEnvironment(FakeEnvironment):
+            async def exec(self, command, **kwargs):
+                if "harbor_workspace_diff_v1.py" in command:
+                    self.commands.append((command, kwargs))
+                    if " snapshot " in command:
+                        report = {"status": "SNAPSHOT", "files": 2, "bytes_hashed": 10, "skipped": 0}
+                    else:
+                        report = {"status": "DIFF", "added": 0, "removed": 0, "changed": 1,
+                                  "diff_bytes": 123, "candidate_changed": True,
+                                  "changed_paths": ["app/sessions.py"], "removed_paths": [], "skipped": 0}
+                    from types import SimpleNamespace as _NS
+                    return _NS(return_code=0, stdout="BRAIN_WORKSPACE_DIFF_V1:" + json.dumps(report) + "\n", stderr="")
+                return await super().exec(command, **kwargs)
+
+        worker_finish = {
+            "pass": True, "status": "DOC_COMPILER_VERIFIED",
+            "proposal_source": "DETERMINISTIC_IMPORTED_ENGINES_V1",
+            "actions": [{"type": "finish", "args": {"summary": "compiler ok"}}],
+            "engine_status": "DOC_COMPILER_VERIFIED",
+            "apply": {"status": "CANDIDATE_EXECUTED_IN_PLACE__UNVERIFIED",
+                      "official_verifier_invoked": False},
+        }
+        env = MeasuredEnvironment(replies=[worker_finish])
+        out = self.run_async(agent.run_epistemic_goal(
+            "debug the session processor", env, suite="terminal-bench-4",
+            repo="/app", experimental_candidate_path=True))
+        self.assertEqual(out["status"], "FINISHED__DETERMINISTIC_PROPOSAL__VERIFIER_DECIDES")
+        self.assertEqual(out["candidate_applied"], True)
+        self.assertEqual(out["diff_bytes"], 123)
+        self.assertEqual(out["apply"]["status"], "APPLIED__UNVERIFIED")
+        self.assertEqual(out["workspace_diff"]["changed_paths"], ["app/sessions.py"])
+        diag = out["trace"][-1]["imported_engine"]
+        self.assertEqual(diag["candidate_applied"], True)
+        self.assertEqual(diag["diff_bytes"], 123)
+        self.assertEqual(diag["apply"]["changed_paths"], ["app/sessions.py"])
+        worker_calls = [c for c, _ in env.commands if "harbor_container_solver_worker_v1.py" in c]
+        self.assertEqual(len(worker_calls), 1)
+        snapshot_at = next(i for i, (c, _) in enumerate(env.commands) if "workspace_diff_v1.py snapshot" in c)
+        diff_at = next(i for i, (c, _) in enumerate(env.commands) if "workspace_diff_v1.py diff" in c)
+        worker_at = next(i for i, (c, _) in enumerate(env.commands) if "harbor_container_solver_worker_v1.py" in c)
+        self.assertLess(snapshot_at, worker_at)
+        self.assertGreater(diff_at, worker_at)
+
+    def test_terminal_candidate_path_reports_unavailable_measurement(self):
+        # Default FakeEnvironment returns no marker for the workspace helper,
+        # so measurement fails and is reported, never guessed.
+        worker_finish = {"pass": True, "status": "DOC_COMPILER_FAILED",
+                         "actions": [{"type": "finish", "args": {"summary": "x"}}]}
+        env = FakeEnvironment(replies=[worker_finish])
+        out = self.run_async(agent.run_epistemic_goal(
+            "debug the session processor", env, suite="terminal-bench-4",
+            repo="/app", experimental_candidate_path=True))
+        self.assertEqual(out["workspace_diff"]["status"], "UNAVAILABLE")
+        self.assertNotIn("candidate_applied", out)
+        self.assertEqual(out["trace"][-1]["imported_engine"]["workspace_diff"]["status"], "UNAVAILABLE")
+
     def test_empty_instruction_rejected(self):
         with self.assertRaises(agent.AgentRejected):
             self.run_async(

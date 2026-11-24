@@ -12,12 +12,18 @@ from pathlib import Path
 import stat
 from typing import Any
 
-MAX_ENTRIES = 50_000
+MAX_ENTRIES = 100_000
 MAX_DEPTH = 32
 MAX_FILE_BYTES = 32 * 1024 * 1024
 MAX_TOTAL_BYTES = 512 * 1024 * 1024
+# Non-source bloat whose bytes and entry counts drown source ingestion.
+# VCS metadata was already excluded; dependency and build caches are not
+# reviewable source and reproducible offline.
 SKIPPED_DIRS = frozenset({'.git', '.hg', '.svn', '__pycache__', '.pytest_cache',
-                          '.mypy_cache', '.ruff_cache', '.tox', '.venv', 'venv'})
+                          '.mypy_cache', '.ruff_cache', '.tox', '.venv', 'venv',
+                          'node_modules', 'dist', 'build', 'coverage', 'out',
+                          'target', '.next', '.nuxt', '.cache', '.parcel-cache',
+                          '.turbo'})
 
 
 class StageError(ValueError):
@@ -38,13 +44,18 @@ def _write_all(fd: int, data: bytes) -> None:
         view = view[n:]
 
 
-def stage_worktree(source: str | Path, destination: str | Path) -> dict[str, Any]:
+def stage_worktree(source: str | Path, destination: str | Path, *,
+                   authorize_test_execution: bool = False) -> dict[str, Any]:
     """Copy a bounded snapshot, omitting symlinks and VCS/cache directories.
 
     Paths are opened component-by-component without following symlinks below
     the opened source and destination roots. Never call this concurrently with
     untrusted writers and never treat success as proof that a later test is
     confined. Resource limits and skipped entries are explicitly reported.
+
+    ``authorize_test_execution`` is an honesty flag for the owner-authorized
+    experimental producer path: tests may run in the disposable container copy.
+    It grants nothing by itself; the engine decides what it runs.
     """
     src, dst = Path(source), Path(destination)
     if not src.is_absolute() or not dst.is_absolute():
@@ -155,7 +166,7 @@ def stage_worktree(source: str | Path, destination: str | Path) -> dict[str, Any
                 'entries_seen': entries, 'symlinks_skipped': skipped, 'excluded_entries': excluded,
                 'skipped_symlink_examples': skipped_examples,
                 'dependency_completeness_verified': False, 'confinement_verified': False,
-                'test_execution_authorized': False, 'patch_applied': False}
+                'test_execution_authorized': bool(authorize_test_execution), 'patch_applied': False}
     except OSError as exc:
         raise StageError('STAGING_IO_ERROR') from exc
     finally:
