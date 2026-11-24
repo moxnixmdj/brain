@@ -52,7 +52,7 @@ spec = json.loads(pathlib.Path(sys.argv[1]).read_text())
 base = pathlib.Path("/state/lessons")
 shutil.rmtree(base, ignore_errors=True)
 base.mkdir(parents=True, exist_ok=True)
-programs = [p for p in ("tar", "gzip") if shutil.which(p)]
+programs = [p for p in ("tar", "gzip", "xz") if shutil.which(p)]
 seed = {"input.txt": b"two lessons, composed\n"}
 memory = "/state/lessons/memory.json"
 
@@ -101,32 +101,34 @@ def lesson(tag, goal, target):
 
 
 stages = [lesson("tar", "archive the input into out.tar", "out.tar"),
-          lesson("gz", "compress the input into out.gz", "out.gz")]
+          lesson("gz", "compress the input into out.gz", "out.gz"),
+          lesson("xz", "compress the input into out.xz", "out.xz")]
 
 # ---- the whole, which no action can make -------------------------------------
-goal = "archive the input into out.tar.gz"
+goal = "archive the input into out.tar.gz.xz"
 root = base / "composed"
 shutil.rmtree(root, ignore_errors=True)
 root.mkdir(parents=True, exist_ok=True)
 (root / "input.txt").write_bytes(seed["input.txt"])
 env = cenv.ComputerEnv(root=root, seed=dict(seed))
 for program in programs:
-    for name, fn in cenv.program_actions(env, programs=[program], target="out.tar.gz",
+    for name, fn in cenv.program_actions(env, programs=[program], target="out.tar.gz.xz",
                                          goal=goal):
         env.register([(name, fn)])
 offered = list(env.action_names)
 check = oracle.oracle_from_goal(goal, programs=programs)
 whole = pa.run(env, goal, env.action_names,
-               goal_predicate=lambda s: "out.tar.gz:" in str(s),
+               goal_predicate=lambda s: "out.tar.gz.xz:" in str(s),
                goal_family="archive", env_kind="posix_dir", memory_path_=memory,
                budget=12, max_depth=3, seed=7, goal_check=check,
                effect_contract=check.contract)
 
 # the judge: is out.tar.gz really a tar.gz of input.txt?
-raw = subprocess.run(["gzip", "-dc", "out.tar.gz"], cwd=str(root), capture_output=True)
+chain = subprocess.run(["xz", "-dc", "out.tar.gz.xz"], cwd=str(root), capture_output=True)
+raw = subprocess.run(["gzip", "-dc"], cwd=str(root), input=chain.stdout, capture_output=True)
 inner = subprocess.run(["tar", "-xOf", "-"], cwd=str(root), input=raw.stdout,
                        capture_output=True)
-truth = {"gzip_rc": raw.returncode, "tar_rc": inner.returncode,
+truth = {"xz_rc": chain.returncode, "gzip_rc": raw.returncode, "tar_rc": inner.returncode,
          "bytes_equal_source": inner.stdout == (root / "input.txt").read_bytes()}
 
 print(json.dumps({

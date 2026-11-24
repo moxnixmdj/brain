@@ -201,3 +201,64 @@ class CompositionTests(unittest.TestCase):
                                 intermediate="out.tar")
         self.assertFalse(result["applied"])
         self.assertIn(result["status"], (lifted.COMPOSE_NO_EFFECT,))
+
+
+class ChainCompositionTests(unittest.TestCase):
+    """Any number of layers, in the order the name declares them."""
+
+    class Env:
+        def __init__(self, root):
+            self.root = pathlib.Path(root)
+
+        def reset(self):
+            pass
+
+    def setUp(self):
+        if not all(shutil.which(p) for p in ("tar", "gzip", "xz")):
+            self.skipTest("tar, gzip and xz are all needed")
+        self.root = pathlib.Path(tempfile.mkdtemp(prefix="chain3-test-"))
+        (self.root / "input.txt").write_bytes(b"three layers deep\n" * 2)
+
+    def _op(self, program, out, argv):
+        return lifted.lift(goal="pack into %s" % out, goal_family="pack",
+                           env_kind="posix_dir", action=program, program=program,
+                           observation={}, source_name="input.txt",
+                           output_name=out, argv=argv)
+
+    def _three(self):
+        return [self._op("tar", "out.tar", ["tar", "-c", "{source}"]),
+                self._op("gzip", "out.tar.gz", ["gzip", "-c", "{source}"]),
+                self._op("xz", "out.tar.gz.xz", ["xz", "-c", "{source}"])]
+
+    def test_three_contracts_fold_into_the_format_the_name_claims(self):
+        result = lifted.compose_chain(self._three(), env=self.Env(self.root),
+                                      output="out.tar.gz.xz")
+        self.assertTrue(result["applied"], result)
+        self.assertEqual(result["effect"]["reader_chain"], ["xz", "gzip", "tar"])
+        self.assertEqual(result["layers"], ["tar", "gzip", "xz"])
+        self.assertEqual(len(result["rule"]["composed_of"]), 3)
+
+    def test_the_middle_layers_are_real_files_not_placeholders(self):
+        result = lifted.compose_chain(self._three(), env=self.Env(self.root),
+                                      output="out.tar.gz.xz",
+                                      intermediates=["out.tar", "out.tar.gz"])
+        names = [row["argv"][-1] for row in result["runs"]]
+        self.assertEqual(names, ["input.txt", "out.tar", "out.tar.gz"])
+        self.assertTrue((self.root / "out.tar").is_file())
+
+    def test_one_link_that_does_not_carry_the_format_refutes_the_chain(self):
+        broken = self._three()
+        broken[1]["argv_shape"] = ["tar", "-c", "{source}"]  # tar where gzip belongs
+        result = lifted.compose_chain(broken, env=self.Env(self.root),
+                                      output="out.tar.gz.xz")
+        self.assertFalse(result["applied"])
+        self.assertNotEqual(result["status"], lifted.COMPOSED)
+
+    def test_a_layer_with_no_shape_stops_the_fold_before_it_runs(self):
+        broken = self._three()
+        broken[2]["argv_shape"] = []
+        result = lifted.compose_chain(broken, env=self.Env(self.root),
+                                      output="out.tar.gz.xz")
+        self.assertEqual(result["status"], lifted.COMPOSE_NO_SHAPES)
+        self.assertFalse((self.root / "out.tar").exists(),
+                         "nothing may run when a layer has no shape")

@@ -324,6 +324,32 @@ a layer a reader. Two tests pin it. A second one: the memory-replay path still
 judged by the artifact's **name**, so replaying a tar plan into `out.tar.gz`
 passed and produced a file that was not one; replay is now judged by the effect.
 
+## 5d. Composition is transitive, and the four proposed mechanisms audited
+
+Two layers was an arbitrary stopping point in my own code. `out.tar.gz.xz`
+declares three, and the fold handles any number: each contract's output name
+becomes the next one's source, the last writes the goal's own name, and the
+chain oracle -- which decodes the whole stack outermost-first -- decides.
+
+Receipt: teach `out.tar` (tar), `out.gz` (gzip), `out.xz` (xz), each lifted and
+admitted, then ask for `out.tar.gz.xz` -- a format **no action in that
+environment offers**. Result `PASS__COMPOSED_A_NEW_FORMAT`, layers
+`[tar, gzip, xz]`, chain `[xz, gzip, tar]`, and the judge outside all of it
+(`xz -dc out.tar.gz.xz | gzip -dc | tar -xOf -`) returns the source bytes exactly.
+Four tests, including one where a single wrong link refutes the whole chain and
+one where a missing shape stops the fold **before anything runs**.
+
+### The four mechanisms in the brief, audited
+
+| claim | state |
+|---|---|
+| `zygote_worker_pool_v1.py` exists, CoW forks ~1-2 ms | **verified**: prewarm 234.94 s->ms, dispatch median **2.12 ms** (min 1.83, max 6.00), 16-way sharded **18.77 ms**, 447 capabilities in the registry |
+| `witness_inversion_v1.py` exists, and the **75.2%** reach ceiling is a repo measurement | **verified as a repo measurement** (2,178 fix pieces from 500 SWE-bench Verified tasks; 18.7% asymptote). Not independently re-measured here |
+| "repo-native component mining" as a *new* play | **already the core of `witness_inversion_v1`**: it reads its alphabet from the failing frame's own locals, attributes and the module's callables. Rebuilding it would be the duplication the brief forbids |
+| "dual-program splicing" via a separating guard | **unbuilt here, unverified**: plausible, but it needs `witness_inversion_v1`'s candidate chain to produce partial-passing programs first. Doing it before that exists would be inventing a mechanism with nothing to merge |
+| "16-way parallel CoW rollouts scored by residual reduction" | **the substrate is verified** (18.77 ms for 16 branches). The *scoring function* is the open part: our effects are oracle-checkable, so branches can be verified, not merely scored |
+| "unified Petri net across GUI/CLI/SQL/code" | **not attempted**: `MealyAPICompiler`, `simulate_plan`, `MultiLayerSnapshot`, `CUMentalWorldModel`, `typed_invention_v1`, `epistemic_scan_acquire_compress_v1`, `BELIEFWEAVER` do **not exist** in this tree, and the six commit hashes in the brief (including `209bbc6c` and the five `click@`/`werkzeug@` heads) are **not valid git objects**. Nothing is claimed about them |
+
 ## 6. The next bottleneck (one)
 
 **Composition: the loop cannot yet invent a missing action.** The compound

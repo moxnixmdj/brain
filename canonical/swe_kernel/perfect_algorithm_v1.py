@@ -1019,11 +1019,13 @@ def run(env: Any, goal: str, actions: Sequence[Any],
 
 def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
                         contract: Any = None) -> dict[str, Any]:
-    """Try every ordered pair of stored contracts whose programs name the layers.
+    """Read the layers out of the goal's own name, then fold the store over them.
 
-    The goal's output name declares its own layers (`out.tar.gz` declares tar and
-    gzip, outermost last). Each layer is looked for as a PROVEN contract; a
-    missing layer is the honest reason nothing was composed.
+    `out.tar.gz.xz` declares three layers in its name; the store is searched for
+    one proven contract per layer, in that order, and the chain oracle decides
+    whether the fold is the format the name claims. Layers are matched by
+    containment (`gz` names `gzip`) because equality would miss every real pair.
+    A missing layer is the honest reason nothing was composed.
     """
     try:
         from canonical.runtime import lifted_operator_v1 as lifted
@@ -1039,35 +1041,36 @@ def _compose_from_store(memory: Mapping[str, Any], env: Any, goal: str,
     if len(layers) < 2:
         return {"status": "NOT_ATTEMPTED__THE_OUTPUT_DECLARES_ONE_LAYER"}
     operators = [r for r in (memory.get("rules") or []) if str(r.get("kind")) == "operator"]
-    def names(rule: Mapping[str, Any], layer: str) -> bool:
-        # `gz` names `gzip`; equality would miss every real pair
-        return layer.lower() in str(rule.get("program") or "").lower()
 
-    inner = [r for r in operators if any(names(r, layer) for layer in layers[:-1])]
-    outer = [r for r in operators if names(r, layers[-1])]
-    if not inner or not outer:
-        return {"status": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS",
-                "layers": layers,
+    sequence, missing = [], []
+    for layer in layers:
+        named = [r for r in operators
+                 if layer.lower() in str(r.get("program") or "").lower()
+                 and str(r.get("argv_shape") or [])]
+        if not named:
+            missing.append(layer)
+        else:
+            sequence.append(named[0])
+    if missing:
+        return {"status": "OPEN__NO_CONTRACTS_FOR_THESE_LAYERS", "layers": layers,
+                "missing": missing,
                 "programs_in_store": sorted({str(r.get("program")) for r in operators})}
+
+    parts = output.split(".")
+    intermediates = [".".join(parts[: len(parts) - len(layers) + index])
+                     for index in range(1, len(layers))]
     bound = None
     if callable(contract):
         try:
             bound = contract(env)
         except Exception:  # noqa: BLE001
             bound = None
-    attempts = []
-    for first in inner:
-        second = dict(outer[0])
-        second["output_name"] = output
-        composed = lifted.compose(first, second, env=env,
-                                  intermediate=output.rsplit(".", 1)[0],
-                                  binding=bound)
-        attempts.append({"parts": [first.get("rule_id"), second.get("rule_id")],
-                         "status": composed.get("status")})
-        if composed.get("applied"):
-            composed["attempts"] = attempts
-            return composed
-    return {"status": "OPEN__NO_COMPOSITION_VERIFIED", "attempts": attempts}
+    composed = lifted.compose_chain(sequence, env=env, output=output,
+                                    binding=bound, intermediates=intermediates)
+    composed["attempts"] = [{"layers": layers, "output": output,
+                             "parts": [r.get("rule_id") for r in sequence],
+                             "status": composed.get("status")}]
+    return composed
 
 
 def _default_env_kind(env: Any) -> str:
