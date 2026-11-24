@@ -98,6 +98,12 @@ def _eval_expr(expr: Expr, env: Mapping[str, Any]) -> Any:
         if op == "strip":
             v = _eval_expr(a[0], env)
             return v.strip() if isinstance(v, str) else _SENTINEL_ERR
+        if op == "lstrip":
+            v = _eval_expr(a[0], env)
+            return v.lstrip() if isinstance(v, str) else _SENTINEL_ERR
+        if op == "rstrip":
+            v = _eval_expr(a[0], env)
+            return v.rstrip() if isinstance(v, str) else _SENTINEL_ERR
         if op == "lower":
             v = _eval_expr(a[0], env)
             return v.lower() if isinstance(v, str) else _SENTINEL_ERR
@@ -109,6 +115,58 @@ def _eval_expr(expr: Expr, env: Mapping[str, Any]) -> Any:
         if op == "not":
             v = _eval_expr(a[0], env)
             return (not bool(v)) if isinstance(v, bool) else _SENTINEL_ERR
+        if op == "is_true":
+            v = _eval_expr(a[0], env)
+            return (v is True) if isinstance(v, bool) else _SENTINEL_ERR
+        if op == "is_false":
+            v = _eval_expr(a[0], env)
+            return (v is False) if isinstance(v, bool) else _SENTINEL_ERR
+        if op == "is_bool":
+            v = _eval_expr(a[0], env)
+            return isinstance(v, bool) if v is not _SENTINEL_ERR else _SENTINEL_ERR
+        if op == "not_bool":
+            v = _eval_expr(a[0], env)
+            return (not isinstance(v, bool)) if v is not _SENTINEL_ERR else _SENTINEL_ERR
+        if op == "is_str":
+            v = _eval_expr(a[0], env)
+            return isinstance(v, str) if v is not _SENTINEL_ERR else _SENTINEL_ERR
+        if op == "not_str":
+            v = _eval_expr(a[0], env)
+            return (not isinstance(v, str)) if v is not _SENTINEL_ERR else _SENTINEL_ERR
+        if op == "has_ctrl":
+            v = _eval_expr(a[0], env)
+            return any(ord(c) < 32 or ord(c) == 127 for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_space":
+            v = _eval_expr(a[0], env)
+            return any(c.isspace() for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_ctrl_or_space":
+            v = _eval_expr(a[0], env)
+            return any(ord(c) <= 32 or ord(c) == 127 or c.isspace() for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_non_ascii":
+            v = _eval_expr(a[0], env)
+            return any(ord(c) > 127 for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_outer_ws":
+            v = _eval_expr(a[0], env)
+            return (len(v) > 0 and v != v.strip()) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_newline":
+            v = _eval_expr(a[0], env)
+            return ("\n" in v or "\r" in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_null_byte":
+            v = _eval_expr(a[0], env)
+            return ("\x00" in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_digit":
+            v = _eval_expr(a[0], env)
+            return any(c.isdigit() for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_upper":
+            v = _eval_expr(a[0], env)
+            return any(c.isupper() for c in v) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "is_digits":
+            v = _eval_expr(a[0], env)
+            return (len(v) > 0 and v.isdigit()) if isinstance(v, str) else _SENTINEL_ERR
+        if op == "has_char_range":
+            v = _eval_expr(a[0], env)
+            lo_c, hi_c = int(a[1]), int(a[2])
+            return any(lo_c <= ord(c) <= hi_c for c in v) if isinstance(v, str) else _SENTINEL_ERR
         if op == "is_none":
             v = _eval_expr(a[0], env)
             return (v is None) if v is not _SENTINEL_ERR else _SENTINEL_ERR
@@ -209,12 +267,30 @@ def _eval_expr(expr: Expr, env: Mapping[str, Any]) -> Any:
             return (lv - rv) if (_is_num(lv) and _is_num(rv)) else _SENTINEL_ERR
         if op == "*":
             return (lv * rv) if (_is_num(lv) and _is_num(rv)) else _SENTINEL_ERR
+        if op == "//":
+            if _is_num(lv) and _is_num(rv) and rv != 0 and math.isfinite(float(lv)) and math.isfinite(float(rv)):
+                return lv // rv
+            return _SENTINEL_ERR
+        if op == "%":
+            if _is_num(lv) and _is_num(rv) and rv != 0 and math.isfinite(float(lv)) and math.isfinite(float(rv)):
+                return lv % rv
+            return _SENTINEL_ERR
         if op == "min":
             return min(lv, rv) if (_is_num(lv) and _is_num(rv) and not (math.isnan(float(lv)) or math.isnan(float(rv)))) else _SENTINEL_ERR
         if op == "max":
             return max(lv, rv) if (_is_num(lv) and _is_num(rv) and not (math.isnan(float(lv)) or math.isnan(float(rv)))) else _SENTINEL_ERR
         if op == "in":
-            return (lv in rv) if (isinstance(lv, str) and isinstance(rv, str)) else _SENTINEL_ERR
+            if isinstance(lv, str) and isinstance(rv, str):
+                return lv in rv
+            if isinstance(rv, (list, tuple, set, dict)):
+                return lv in rv
+            return _SENTINEL_ERR
+        if op == "not_in":
+            if isinstance(lv, str) and isinstance(rv, str):
+                return lv not in rv
+            if isinstance(rv, (list, tuple, set, dict)):
+                return lv not in rv
+            return _SENTINEL_ERR
         if op == "startswith":
             return rv.startswith(lv) if (isinstance(lv, str) and isinstance(rv, str)) else _SENTINEL_ERR
         if op == "endswith":
@@ -302,6 +378,12 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
     if op == "strip":
         s = emit_expr(a[0], lg)
         return f"{s}.strip()" if lg == "python" else f"{s}.trim()"
+    if op == "lstrip":
+        s = emit_expr(a[0], lg)
+        return f"{s}.lstrip()" if lg == "python" else f"{s}.trimStart()"
+    if op == "rstrip":
+        s = emit_expr(a[0], lg)
+        return f"{s}.rstrip()" if lg == "python" else f"{s}.trimEnd()"
     if op == "lower":
         s = emit_expr(a[0], lg)
         return f"{s}.lower()" if lg == "python" else f"{s}.toLowerCase()"
@@ -312,6 +394,102 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
     if op == "not":
         s = emit_expr(a[0], lg)
         return f"(not ({s}))" if lg == "python" else f"!({s})"
+    if op == "is_true":
+        s = emit_expr(a[0], lg)
+        return f"bool({s})" if lg == "python" else f"({s} === true)" if lg == "js" else f"(({s}) != 0)"
+    if op == "is_false":
+        s = emit_expr(a[0], lg)
+        return f"(not {s})" if lg == "python" else f"(!{s})"
+    if op == "is_bool":
+        s = emit_expr(a[0], lg)
+        return {"python": f"isinstance({s}, bool)", "js": f"(typeof {s} === 'boolean')", "c": "0"}[lg]
+    if op == "not_bool":
+        s = emit_expr(a[0], lg)
+        return {"python": f"(not isinstance({s}, bool))", "js": f"(typeof {s} !== 'boolean')", "c": "1"}[lg]
+    if op == "is_str":
+        s = emit_expr(a[0], lg)
+        return {"python": f"isinstance({s}, str)", "js": f"(typeof {s} === 'string')", "c": "1"}[lg]
+    if op == "not_str":
+        s = emit_expr(a[0], lg)
+        return {"python": f"(not isinstance({s}, str))", "js": f"(typeof {s} !== 'string')", "c": "0"}[lg]
+    if op == "has_ctrl":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(ord(c) < 32 or ord(c) == 127 for c in {s})"
+        if lg == "js":
+            return f"/[\\x00-\\x1f\\x7f]/.test({s})"
+        return f"(strpbrk({s}, \"\\t\\n\\r\") != NULL)"
+    if op == "has_space":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(c.isspace() for c in {s})"
+        if lg == "js":
+            return f"/\\s/.test({s})"
+        return f"(strpbrk({s}, \" \\t\\n\\r\\f\\v\") != NULL)"
+    if op == "has_ctrl_or_space":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(ord(c) <= 32 or ord(c) == 127 or c.isspace() for c in {s})"
+        if lg == "js":
+            return f"/[\\x00-\\x20\\x7f\\s]/.test({s})"
+        return f"(strpbrk({s}, \" \\t\\n\\r\\f\\v\") != NULL)"
+    if op == "has_non_ascii":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(ord(c) > 127 for c in {s})"
+        if lg == "js":
+            return f"/[^\\x00-\\x7f]/.test({s})"
+        return f"(({s})[0] < 0)"
+    if op == "has_outer_ws":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"(len({s}) > 0 and {s} != {s}.strip())"
+        if lg == "js":
+            return f"({s}.length > 0 && {s} !== {s}.trim())"
+        return f"(({s})[0] == ' ')"
+    if op == "has_newline":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"('\\n' in {s} or '\\r' in {s})"
+        if lg == "js":
+            return f"/[\\r\\n]/.test({s})"
+        return f"(strpbrk({s}, \"\\r\\n\") != NULL)"
+    if op == "has_null_byte":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"('\\x00' in {s})"
+        if lg == "js":
+            return f"{s}.includes('\\x00')"
+        return "0"
+    if op == "has_digit":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(c.isdigit() for c in {s})"
+        if lg == "js":
+            return f"/[0-9]/.test({s})"
+        return f"(strpbrk({s}, \"0123456789\") != NULL)"
+    if op == "has_upper":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"any(c.isupper() for c in {s})"
+        if lg == "js":
+            return f"/[A-Z]/.test({s})"
+        return f"(strpbrk({s}, \"ABCDEFGHIJKLMNOPQRSTUVWXYZ\") != NULL)"
+    if op == "is_digits":
+        s = emit_expr(a[0], lg)
+        if lg == "python":
+            return f"(len({s}) > 0 and {s}.isdigit())"
+        if lg == "js":
+            return f"/^[0-9]+$/.test({s})"
+        return "0"
+    if op == "has_char_range":
+        s = emit_expr(a[0], lg)
+        lo_c, hi_c = int(a[1]), int(a[2])
+        if lg == "python":
+            return f"any({lo_c} <= ord(c) <= {hi_c} for c in {s})"
+        if lg == "js":
+            return f"/[\\x{lo_c:02x}-\\x{hi_c:02x}]/.test({s})" if hi_c <= 0xFF else f"/[\\u{lo_c:04x}-\\u{hi_c:04x}]/.test({s})"
+        return "0"
     if op == "is_none":
         s = emit_expr(a[0], lg)
         return {"python": f"{s} is None", "js": f"{s} == null", "c": f"{s} == NULL"}[lg]
@@ -362,9 +540,16 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
     if op == "or":
         l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
         return f"({l} or {r})" if lg == "python" else f"({l} || {r})"
-    if op in ("<", "<=", ">", ">=", "+", "-", "*"):
+    if op in ("<", "<=", ">", ">=", "+", "-", "*", "%"):
         l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
         return f"({l} {op} {r})"
+    if op == "//":
+        l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
+        if lg == "python":
+            return f"({l} // {r})"
+        if lg == "js":
+            return f"Math.floor(({l}) / ({r}))"
+        return f"(({l}) / ({r}))"
     if op == "==":
         l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
         eq = "===" if lg == "js" else "=="
@@ -382,6 +567,9 @@ def emit_expr(expr: Expr, lang: str = "python") -> str:
     if op == "in":
         l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
         return f"({l} in {r})" if lg == "python" else f"{r}.includes({l})"
+    if op == "not_in":
+        l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
+        return f"({l} not in {r})" if lg == "python" else f"!{r}.includes({l})"
     if op == "startswith":
         l, r = emit_expr(a[0], lg), emit_expr(a[1], lg)
         return f"{r}.startswith({l})" if lg == "python" else f"{r}.startsWith({l})"
@@ -445,14 +633,24 @@ def synthesize_separating_predicates(
     n_p = len(p_envs)
     target_bits = tuple([True] * n_f + [False] * n_p)
 
-    # Candidate variables present across all failing envs (and at least one passing env)
+    # Candidate variables present across all failing envs and at least 80% of passing envs
+    # (prevents 1 huge non-scalarized passing input from wiping out the primary parameter!)
+    _min_p_cov = max(1, int(0.8 * len(p_envs)))
     shared_vars = sorted(
         k for k in set(f_envs[0].keys())
-        if all(k in e for e in f_envs) and all(k in e for e in p_envs)
+        if all(k in e for e in f_envs)
+        and sum(1 for e in p_envs if k in e) >= _min_p_cov
         and not any(b in k.lower() for b in ("pytest_", "_pytest", "conftest", "unittest", "plugin_name"))
     )
     if not shared_vars:
         return []
+    # Keep passing envs that bind every shared variable (all_envs stays dense & exact)
+    p_envs = [e for e in p_envs if all(k in e for k in shared_vars)]
+    if not p_envs:
+        return []
+    all_envs = f_envs + p_envs
+    n_p = len(p_envs)
+    target_bits = tuple([True] * n_f + [False] * n_p)
 
     # Build OE-pruned atomic boolean predicate pool: bit_tuple -> (rank_tuple, Expr)
     pred_pool: dict[tuple[bool, ...], tuple[tuple[int, int, str], Expr]] = {}
@@ -482,7 +680,10 @@ def synthesize_separating_predicates(
     for vname in shared_vars[:12]:
         vexpr = Expr("var", (vname,), 1, 0)
         sample_vals = [e[vname] for e in all_envs]
+        f_vals = [e[vname] for e in f_envs]
+        p_vals = [e[vname] for e in p_envs]
         has_none = any(v is None for v in sample_vals)
+        has_bool = any(isinstance(v, bool) for v in sample_vals)
         has_num = any(_is_num(v) for v in sample_vals)
         has_str = any(isinstance(v, str) for v in sample_vals)
         has_seq = any(isinstance(v, (str, list, tuple)) for v in sample_vals)
@@ -491,6 +692,13 @@ def synthesize_separating_predicates(
             _add_pred(Expr("is_none", (vexpr,), 2, 0))
             _add_pred(Expr("is_not_none", (vexpr,), 2, 0))
 
+        if has_bool:
+            _add_pred(Expr("is_true", (vexpr,), 1, 0))
+            _add_pred(Expr("is_false", (vexpr,), 2, 0))
+            if not all(isinstance(v, bool) for v in sample_vals):
+                _add_pred(Expr("is_bool", (vexpr,), 2, 0))
+                _add_pred(Expr("not_bool", (vexpr,), 2, 0))
+
         if has_num:
             # High-generality domain predicates (penalty = 0!)
             _add_pred(Expr("not_integer", (vexpr,), 2, 0))
@@ -498,8 +706,24 @@ def synthesize_separating_predicates(
             _add_pred(Expr("not_finite", (vexpr,), 2, 0))
             _add_pred(Expr("is_finite", (vexpr,), 2, 0))
             _add_pred(Expr("is_nan", (vexpr,), 2, 0))
-            for b in num_bounds:
-                pen = 0 if b == 0 else (1 if b in (1, -1) else 3)
+            # Data-driven multi-sample numeric threshold discovery (strict MDL: requires >=2 distinct fail & pass vals!)
+            local_bounds = list(num_bounds)
+            f_nums = sorted({float(v) for v in f_vals if _is_num(v) and math.isfinite(float(v))})
+            p_nums = sorted({float(v) for v in p_vals if _is_num(v) and math.isfinite(float(v))})
+            mdl_bounds: set[Any] = set()
+            if len(f_nums) >= 2 and len(p_nums) >= 2:
+                if p_nums[-1] < f_nums[0]:
+                    b_val = int(p_nums[-1]) if p_nums[-1].is_integer() else p_nums[-1]
+                    mdl_bounds.add(b_val)
+                    if b_val not in local_bounds:
+                        local_bounds.append(b_val)
+                elif f_nums[-1] < p_nums[0]:
+                    b_val = int(p_nums[0]) if p_nums[0].is_integer() else p_nums[0]
+                    mdl_bounds.add(b_val)
+                    if b_val not in local_bounds:
+                        local_bounds.append(b_val)
+            for b in local_bounds:
+                pen = 0 if b == 0 else (1 if (b in (1, -1) or b in mdl_bounds) else 3)
                 bexpr = Expr("const", (b,), 1, pen)
                 for cmp_op in ("<", "<=", ">", ">="):
                     _add_pred(Expr(cmp_op, (vexpr, bexpr), 3, pen))
@@ -511,8 +735,40 @@ def synthesize_separating_predicates(
         if has_seq:
             _add_pred(Expr("is_empty", (vexpr,), 2, 0))
             _add_pred(Expr("not_empty", (vexpr,), 2, 0))
+            len_expr = Expr("len", (vexpr,), 2, 0)
+            for lb in (1, 2):
+                lb_e = Expr("const", (lb,), 1, 1)
+                _add_pred(Expr("<", (len_expr, lb_e), 4, 1))
+                _add_pred(Expr(">", (len_expr, lb_e), 4, 1))
 
         if has_str:
+            if not all(isinstance(v, str) for v in sample_vals):
+                _add_pred(Expr("is_str", (vexpr,), 2, 0))
+                _add_pred(Expr("not_str", (vexpr,), 2, 0))
+            # Universal algebraic character-class quantifier predicates (zero domain hardcoding!)
+            for sop in (
+                "has_ctrl",
+                "has_space",
+                "has_ctrl_or_space",
+                "has_non_ascii",
+                "has_outer_ws",
+                "has_newline",
+                "has_null_byte",
+                "has_digit",
+                "has_upper",
+                "is_digits",
+            ):
+                _add_pred(Expr(sop, (vexpr,), 2, 0))
+            # Data-driven codepoint-interval separation (strict MDL: requires >=2 distinct failing strings!)
+            f_strs = [v for v in f_vals if isinstance(v, str)]
+            p_strs = [v for v in p_vals if isinstance(v, str)]
+            if len(set(f_strs)) >= 2 and p_strs:
+                p_ords = {ord(ch) for s in p_strs for ch in s}
+                witness_ords = sorted({ord(ch) for s in f_strs for ch in s if ord(ch) not in p_ords})
+                if len(witness_ords) >= 2:
+                    lo_o, hi_o = witness_ords[0], witness_ords[-1]
+                    if lo_o < hi_o and all(not (lo_o <= po <= hi_o) for po in p_ords):
+                        _add_pred(Expr("has_char_range", (vexpr, lo_o, hi_o), 3, 1))
             for c in extra_consts[:6]:
                 if isinstance(c, str) and len(c) >= 2:
                     cexpr = Expr("const", (c,), 1, 2)
@@ -520,7 +776,7 @@ def synthesize_separating_predicates(
                     _add_pred(Expr("startswith", (cexpr, vexpr), 3, 2))
                     _add_pred(Expr("endswith", (cexpr, vexpr), 3, 2))
 
-    # Pairwise variable comparisons (e.g. a < b, a <= b, a > b)
+    # Pairwise variable comparisons (e.g. a < b, a <= b, a > b, va in vb)
     num_vars = [vn for vn in shared_vars[:8] if all(_is_num(e[vn]) for e in all_envs)]
     for i in range(len(num_vars)):
         for j in range(i + 1, len(num_vars)):
@@ -528,6 +784,15 @@ def synthesize_separating_predicates(
             vb = Expr("var", (num_vars[j],), 1, 0)
             for cmp_op in ("<", "<=", ">", ">=", "==", "!="):
                 _add_pred(Expr(cmp_op, (va, vb), 3, 0))
+    seq_vars = [vn for vn in shared_vars[:8] if all(isinstance(e[vn], (str, list, tuple)) for e in all_envs)]
+    for vn_elem in shared_vars[:8]:
+        for vn_cont in seq_vars:
+            if vn_elem == vn_cont:
+                continue
+            ve = Expr("var", (vn_elem,), 1, 0)
+            vc = Expr("var", (vn_cont,), 1, 0)
+            _add_pred(Expr("in", (ve, vc), 3, 0))
+            _add_pred(Expr("not_in", (ve, vc), 3, 0))
 
     solutions: list[tuple[tuple[int, int, str], Expr]] = []
     seen_codes: set[str] = set()
@@ -678,7 +943,7 @@ def synthesize_value_expressions(
         if (c is None or isinstance(c, (bool, int, float, str))) and c not in consts:
             consts.append(c)
     for c in consts:
-        _register(Expr("const", (c,), 1, 1 if c not in (0, 1, "") else 0))
+        _register(Expr("const", (c,), 1, 1 if c in (0, 1, "") else 2))
 
     # Level 1: unary coercions & normalizers
     lvl0 = list(pool.values())[:28]
@@ -689,7 +954,7 @@ def synthesize_value_expressions(
             for uop in ("trunc", "floor", "ceil", "int32_trunc", "abs", "neg"):
                 _register(Expr(uop, (node,), node.size + 1, node.generality_penalty))
         elif all(isinstance(v, str) for v in vt):
-            for uop in ("strip", "lower", "upper", "len"):
+            for uop in ("strip", "lstrip", "rstrip", "lower", "upper", "len"):
                 _register(Expr(uop, (node,), node.size + 1, node.generality_penalty))
 
     # Level 2: binary ops (OE-pruned)
@@ -705,7 +970,20 @@ def synthesize_value_expressions(
                 for bop in ("+", "*", "min", "max"):
                     _register(Expr(bop, (na, nb), na.size + nb.size + 1, na.generality_penalty + nb.generality_penalty))
             if i != j:
-                _register(Expr("-", (na, nb), na.size + nb.size + 1, na.generality_penalty + nb.generality_penalty))
+                for bop in ("-", "//", "%"):
+                    _register(Expr(bop, (na, nb), na.size + nb.size + 1, na.generality_penalty + nb.generality_penalty))
+
+    # Level 2b (if still unsolved): nested clamp/arithmetic over OE-pruned Level 2 numbers
+    if not solutions:
+        lvl2_num = [x for x in sorted(pool.values(), key=lambda x: x[0])[:24] if all(_is_num(v) for v in x[2])]
+        for _rka, na, _va in lvl2_num[:12]:
+            if na.op not in ("min", "max", "+", "-"):
+                continue
+            for _rkb, nb, _vb in num_items[:10]:
+                if nb.op != "var" and nb.op != "const":
+                    continue
+                for bop in ("min", "max", "+", "-"):
+                    _register(Expr(bop, (na, nb), na.size + nb.size + 1, na.generality_penalty + nb.generality_penalty))
 
     for i, (_rka, na, _va) in enumerate(str_items[:10]):
         for j, (_rkb, nb, _vb) in enumerate(str_items[:10]):

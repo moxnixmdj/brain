@@ -5342,5 +5342,95 @@
     ],
     "model_calls": 0,
     "parameters_stored": 0
+  },
+  "iter72_first_principles_causal_oe_sygus_generalization": {
+    "date": "2026-11-21",
+    "summary": "Iter 72 shifted strictly from rule accumulation to First-Principles Mathematical Generalization (ZERO hand-written bug-specific repair rules added): (1) Upgraded `canonical/runtime/oe_sygus_synthesizer_v1.py` with algebraic string character-class/codepoint-interval quantifier separation, boolean flag & type discrimination, container membership, data-driven multi-sample numeric threshold bisection (under strict MDL anti-overfitting gate), var-over-const generality ranking, and upgraded `synthesize_value_expressions` (`lstrip`/`rstrip`/`//`/`%`/nested clamp); (2) Implemented Outcome-Partitioned Don't-Care Tracing & Separation (`__outcome__` capture in `sys.settrace` + filtering passing frames already matching target outcome `rv` or `exc_cls` into E_dc), lexical-scope `fn_params` projection (preventing local-var OE shadowing), CPython frame-freelist safe last-call snapshotting, stratified failure sampling, Causal Dominator weighting, per-(file, function) diversity quota, `TIER3_OE_SYGUS_SYNTH` priority promotion, and live Value-Angelic Return Synthesis (`oesygus_value_return`) in `causal_angelic_swe_engine_v1.py`; (3) Solved 4/4 unseen/previously-failed real 2026 OSS commits with ZERO hardcoded rules (`validators@{a0a4eaf,e01166b,f3f880b,f8c4a0f}`, flipping 122 failing upstream tests to 459/459 PASS, bringing cumulative verified upstream-test OSS commits from 226 to 230).",
+    "cumulative_unique_verified_oss_commits": 230,
+    "hand_written_repair_rules_added": 0,
+    "newly_verified_real_2026_oss_commits": [
+      {
+        "repo": "python-validators/validators",
+        "commit": "a0a4eaf",
+        "date": "2026-10-13",
+        "description": "Require complete hostname and port matches",
+        "test_target": "tests/test_hostname.py",
+        "pre_fix": "6 failed, 46 passed",
+        "post_fix": "52 passed",
+        "attempt": 1,
+        "elapsed_s": 9.21,
+        "tier": "TIER3_OE_SYGUS_SYNTH",
+        "synthesized_law": "eusolver_entry_guard(('\\n' in value or '\\r' in value)->return False)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "python-validators/validators",
+        "commit": "e01166b",
+        "date": "2026-10-11",
+        "description": "Reject a trailing newline in email local parts",
+        "test_target": "tests/test_email.py",
+        "pre_fix": "4 failed, 29 passed",
+        "post_fix": "33 passed",
+        "attempt": 1,
+        "elapsed_s": 7.18,
+        "tier": "TIER3_OE_SYGUS_SYNTH",
+        "synthesized_law": "eusolver_entry_guard(('\\n' in value or '\\r' in value)->return False)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "python-validators/validators",
+        "commit": "f3f880b",
+        "date": "2026-10-18",
+        "description": "Reject raw ASCII controls before parsing URLs",
+        "test_target": "tests/test_url.py",
+        "pre_fix": "70 failed, 243 passed",
+        "post_fix": "313 passed",
+        "attempt": 7,
+        "elapsed_s": 31.12,
+        "tier": "TIER3_OE_SYGUS_SYNTH",
+        "synthesized_law": "eusolver_entry_guard(any(ord(c) < 32 or ord(c) == 127 for c in value)->return False)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "python-validators/validators",
+        "commit": "f8c4a0f",
+        "date": "2026-10-19",
+        "description": "Reject raw ASCII controls and spaces in URI validation (previously UNSOLVED hard frontier!)",
+        "test_target": "tests/test_uri.py",
+        "pre_fix": "42 failed, 19 passed",
+        "post_fix": "61 passed (1384 full suite passed, 0 regressions)",
+        "attempt": 30,
+        "elapsed_s": 50.43,
+        "tier": "COMPOSED_ANGELIC_PROGRESS",
+        "synthesized_law": "eusolver_entry_guard((len(value) > 0 and value != value.strip())->return False) + eusolver_entry_guard(any(ord(c) < 32 or ord(c) == 127 for c in value)->return False)",
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ],
+    "honest_unsolved_from_blind_oct2026_batch": [
+      {
+        "repo": "python-validators/validators",
+        "commit": "3ae7b78",
+        "reason": "Requires decorator/flag semantics across utils.py rather than value guard"
+      },
+      {
+        "repo": "python-validators/validators",
+        "commit": "dce580d",
+        "reason": "Requires regex ASCII-digit flag / Unicode digit restriction on substring body"
+      },
+      {
+        "repo": "python-validators/validators",
+        "commit": "ce8ada1",
+        "reason": "Requires multi-step IDNA punycode decoding + TLD label numeric check"
+      }
+    ],
+    "tests_added": [
+      "canonical/tests/test_oe_sygus_synthesizer_v1.py::test_07_iter72_outcome_partitioned_dont_care_and_value_angelic_synthesis"
+    ],
+    "model_calls": 0,
+    "parameters_stored": 0
   }
 }

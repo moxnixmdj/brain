@@ -74,6 +74,8 @@ _RESULTS = {}
 _CURRENT_LINES = set()
 _CURRENT_FUNCS = {}
 _CURRENT_SNAPS = {}
+_FRAME_SKEYS = {}
+_SNAP_OWNER = {}
 _LINE_BUDGET = [0]
 _SNAP_BUDGET = [0]
 _FAILING_NODE_LIMIT = 8
@@ -173,7 +175,7 @@ def _summarize_value(val, depth=0):
                 scalar = round(_fv, 6)
         except Exception:
             pass
-    elif isinstance(val, str) and len(val) <= 120:
+    elif isinstance(val, str) and len(val) <= 512:
         scalar = val
 
     attrs = {}
@@ -240,6 +242,28 @@ def _snapshot_locals(frame):
 
 
 def _tracer(frame, event, arg):
+    if event == "return":
+        skeys = _FRAME_SKEYS.pop(id(frame), None)
+        if skeys and _CAPTURE_FRAMES:
+            try:
+                rv_sum = _summarize_value(arg)
+            except Exception:
+                rv_sum = None
+            for sk in skeys:
+                _SNAP_OWNER.pop(sk, None)
+                sn = _CURRENT_SNAPS.get(sk)
+                if isinstance(sn, dict) and "__outcome__" not in sn:
+                    sn["__outcome__"] = {"kind": "return", "val": rv_sum}
+        return _tracer
+    if event == "exception":
+        skeys = _FRAME_SKEYS.get(id(frame))
+        if skeys and _CAPTURE_FRAMES and isinstance(arg, tuple) and arg:
+            et = getattr(arg[0], "__name__", "")
+            for sk in skeys:
+                sn = _CURRENT_SNAPS.get(sk)
+                if isinstance(sn, dict):
+                    sn["__outcome__"] = {"kind": "exc", "type": et}
+        return _tracer
     if event != "line":
         return _tracer
     if _LINE_BUDGET[0] >= _MAX_LINES_PER_TEST:
@@ -254,16 +278,20 @@ def _tracer(frame, event, arg):
     if skey not in _CURRENT_FUNCS:
         _CURRENT_FUNCS[skey] = frame.f_code.co_name
     if _CAPTURE_FRAMES:
-        if skey not in _CURRENT_SNAPS:
-            if _SNAP_BUDGET[0] < _MAX_FRAME_SNAPS_PER_TEST:
-                _SNAP_BUDGET[0] += 1
+        fid = id(frame)
+        if skey not in _CURRENT_SNAPS or _SNAP_OWNER.get(skey) != fid:
+            if skey in _CURRENT_SNAPS or _SNAP_BUDGET[0] < _MAX_FRAME_SNAPS_PER_TEST:
+                if skey not in _CURRENT_SNAPS:
+                    _SNAP_BUDGET[0] += 1
                 _CURRENT_SNAPS[skey] = _snapshot_locals(frame)
+                _SNAP_OWNER[skey] = fid
+                _FRAME_SKEYS.setdefault(fid, []).append(skey)
         else:
-            # O(1) interval-domain range update across repeated loop iterations
+            # O(1) interval-domain range update across repeated loop iterations within the SAME call
             snap = _CURRENT_SNAPS[skey]
             floc = frame.f_locals
             for k, info in snap.items():
-                if "num_min" in info:
+                if isinstance(info, dict) and "num_min" in info:
                     v = floc.get(k)
                     if type(v) is int or type(v) is float:
                         if v < info["num_min"]:
@@ -314,6 +342,8 @@ def pytest_runtest_call(item):
     _CURRENT_LINES.clear()
     _CURRENT_FUNCS.clear()
     _CURRENT_SNAPS.clear()
+    _FRAME_SKEYS.clear()
+    _SNAP_OWNER.clear()
     _LINE_BUDGET[0] = 0
     _SNAP_BUDGET[0] = 0
     _pt_s = float(os.environ.get("BRAIN_PER_TEST_TIMEOUT_S", "0") or 0.0)
@@ -764,18 +794,33 @@ def localize_faults(
     if len(passing_all) > 40 or (_s1a_elapsed > 8.0 and len(passing_all) > 10):
         _max_pass = 8 if _s1a_elapsed > 8.0 else 28
         selected_pass = _select_contrast_passing(failing_all, passing_all, max_passing=_max_pass)
-        # Round-robin across (test_file, base_test_name_without_param) so every failing file & family is traced!
+        # Stratified round-robin across (test_file, base_test_name_without_param):
+        # Within each parametrized bucket, pick evenly-spaced indices across [0..N-1] so
+        # alphabetically clustered params (e.g. `?query` cases 0..17 out of 70) never blind
+        # localization to other sub-branches (path/host/fragment cases 18..69)!
         _fail_buckets: dict[str, list[str]] = {}
         for _fnid in failing_all:
             _bkey = _fnid.split("[", 1)[0]
             _fail_buckets.setdefault(_bkey, []).append(_fnid)
+        _n_b = max(1, len(_fail_buckets))
+        _per_b = max(1, (18 + _n_b - 1) // _n_b)
+        _strat_buckets: dict[str, list[str]] = {}
+        for _bk, _bl in _fail_buckets.items():
+            if len(_bl) <= _per_b:
+                _strat_buckets[_bk] = list(_bl)
+            elif _per_b == 1:
+                _strat_buckets[_bk] = [_bl[0]]
+            else:
+                _idxs = [int(round(i * (len(_bl) - 1) / (_per_b - 1))) for i in range(_per_b)]
+                _seen_i: set[int] = set()
+                _strat_buckets[_bk] = [_bl[ix] for ix in _idxs if not (ix in _seen_i or _seen_i.add(ix))]
         selected_fail: list[str] = []
         _rr_i = 0
-        _bkeys = list(_fail_buckets.keys())
+        _bkeys = list(_strat_buckets.keys())
         while len(selected_fail) < 18 and _bkeys:
             _next_bkeys: list[str] = []
             for _bk in _bkeys:
-                _bl = _fail_buckets[_bk]
+                _bl = _strat_buckets[_bk]
                 if _rr_i < len(_bl):
                     selected_fail.append(_bl[_rr_i])
                     if len(selected_fail) >= 18:
@@ -912,7 +957,10 @@ def localize_faults(
         denom = math.sqrt((ef + nf) * (ef + ep)) if (ef + nf) > 0 and (ef + ep) > 0 else 0.0
         ochiai = (ef / denom) if denom > 0 else 0.0
         tbb = tb_weight.get(key, 0.0)
-        fail_only = 1.0 if (ef > 0 and ep == 0) else 0.0
+        # Causal coverage scaling: fail-only bonus scales by fraction of failures covered (ef/total_fail),
+        # and full-failure Causal Dominators (lines executing on 100% of >=2 failing tests) receive +0.25!
+        fail_only = (ef / total_fail) if (ef > 0 and ep == 0 and total_fail > 0) else 0.0
+        dom_bonus = 0.25 if (total_fail >= 2 and ef == total_fail) else 0.0
         src_stem = pathlib.Path(rel).stem.lower()
         src_stem_flat = src_stem.lstrip("_").replace("_", "")
         stem_boost = (
@@ -931,8 +979,8 @@ def localize_faults(
             )
             else 0.0
         )
-        # Calculated weight: Ochiai + traceback proximity + fail-only signal + module/function proximity
-        weight = round(ochiai + 1.5 * tbb + 0.35 * fail_only + stem_boost + func_boost, 6)
+        # Calculated weight: Ochiai + traceback proximity + fail-only coverage + causal dominator + module/function proximity
+        weight = round(ochiai + 1.5 * tbb + 0.35 * fail_only + dom_bonus + stem_boost + func_boost, 6)
         sites.append(
             LocalizedSite(
                 file=rel,
@@ -950,19 +998,25 @@ def localize_faults(
         )
 
     sites.sort(key=lambda s: (-s.weight, -s.tb_boost, -s.ochiai, s.file, s.lineno))
-    # Per-file diversity quota: prevent a single utility/formatter file without traceback frames
-    # from monopolizing all `top_k` slots and starving sibling target modules!
-    distinct_files = {s.file for s in sites}
-    if len(distinct_files) > 1 and len(sites) > top_k:
-        per_file_cap = max(6, top_k // 4)
+    # Per-file AND per-(file, function) diversity quota: prevent a single helper function or
+    # utility file without traceback frames from monopolizing all `top_k` slots and starving
+    # its caller/entry function or sibling target modules!
+    if len(sites) > top_k:
+        distinct_files = {s.file for s in sites}
+        per_file_cap = max(6, top_k // 4) if len(distinct_files) > 1 else top_k
+        per_func_cap = 4
         selected_sites: list[LocalizedSite] = []
         overflow_sites: list[LocalizedSite] = []
         per_file_cnt: dict[str, int] = {}
+        per_func_cnt: dict[tuple[str, str], int] = {}
         for s in sites:
-            c = per_file_cnt.get(s.file, 0)
-            if s.tb_boost > 0.0 or c < per_file_cap:
+            cf = per_file_cnt.get(s.file, 0)
+            fn_k = (s.file, func_map.get(f"{s.file}:{s.lineno}", ""))
+            ck = per_func_cnt.get(fn_k, 0)
+            if s.tb_boost > 0.0 or (cf < per_file_cap and ck < per_func_cap):
                 selected_sites.append(s)
-                per_file_cnt[s.file] = c + 1
+                per_file_cnt[s.file] = cf + 1
+                per_func_cnt[fn_k] = ck + 1
                 if len(selected_sites) >= top_k:
                     break
             else:
@@ -1797,8 +1851,8 @@ def _mutate_condition_exprs(
     # overfitting constant thresholds (`used > 5`) while strictly preserving `test_expr` (S3).
     if failing_frames and passing_frames:
         try:
-            f_envs = [_frame_to_oe_env(f) for f in failing_frames[:8]]
-            p_envs = [_frame_to_oe_env(f) for f in passing_frames[:16]]
+            f_envs = [_frame_to_oe_env(f) for f in failing_frames[:24]]
+            p_envs = [_frame_to_oe_env(f) for f in passing_frames[:64]]
             f_clean = [{k: v for k, v in e.items() if k.isidentifier()} for e in f_envs]
             p_clean = [{k: v for k, v in e.items() if k.isidentifier()} for e in p_envs]
             oe_guards = (
@@ -2448,6 +2502,8 @@ def _synthesize_value_and_expr_repairs(
     witness: AngelicWitness | None,
     site: LocalizedSite | None,
     assert_consts: Sequence[Any],
+    loc_exceptions: Mapping[str, Mapping[str, str]] | None = None,
+    all_sites: Sequence[LocalizedSite] | None = None,
 ) -> list[tuple[str, str]]:
     """Synthesize expression/operator/constant/slice/local repairs on line `ln`."""
     out: list[tuple[str, str]] = []
@@ -2777,81 +2833,236 @@ def _synthesize_value_and_expr_repairs(
 
     # Unified OE-SyGuS + EUSolver Decision-Tree Separating Guard Synthesis (zero-LLM, <5ms):
     # Separates failing_frames from passing_frames with semantic domain guards (e.g. not_integer,
-    # not_finite, x < 0, x <= 0, is_empty, is_none, or EUSolver disjunctions/conjunctions).
-    if site is not None and site.failing_frames and site.passing_frames:
-        f_envs = [_frame_to_oe_env(f) for f in site.failing_frames[:6]]
-        p_envs = [_frame_to_oe_env(f) for f in site.passing_frames[:12]]
+    # not_finite, x < 0, x <= 0, is_empty, is_none, algebraic char-class quantifiers, or EUSolver
+    # disjunctions/conjunctions).
+    if site is not None and (site.failing_frames or all_sites):
+        enc_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+        for node in ast.walk(tree):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.body:
+                lo = getattr(node, "lineno", 10**9)
+                hi = getattr(node, "end_lineno", lo) or lo
+                if lo <= ln <= hi:
+                    if enc_fn is None or (hi - lo) < ((getattr(enc_fn, "end_lineno", 0) or 0) - getattr(enc_fn, "lineno", 0)):
+                        enc_fn = node
+
+        # Resolve enclosing function's entry-level frames (maximal passing+failing coverage)
+        # so an entry guard synthesized for `enc_fn` sees ALL passing & failing calls even when
+        # Ochiai ranked a rare inner branch line with 0 passing frames at #1!
+        entry_site = site
+        if enc_fn is not None and all_sites:
+            fn_lo = getattr(enc_fn, "lineno", 10**9)
+            fn_hi = getattr(enc_fn, "end_lineno", fn_lo) or fn_lo
+            best_s = entry_site
+            best_key = (len(best_s.passing_frames), len(best_s.failing_frames))
+            for cand_s in all_sites:
+                if cand_s.file == site.file and fn_lo <= cand_s.lineno <= fn_hi and cand_s.failing_frames and cand_s.passing_frames:
+                    ck = (len(cand_s.passing_frames), len(cand_s.failing_frames))
+                    if ck > best_key:
+                        best_s = cand_s
+                        best_key = ck
+            entry_site = best_s
+
+        f_envs = [_frame_to_oe_env(f) for f in entry_site.failing_frames[:24]]
+        p_envs = [_frame_to_oe_env(f) for f in entry_site.passing_frames[:64]]
         f_clean = [{k: v for k, v in e.items() if k.isidentifier()} for e in f_envs]
         p_clean = [{k: v for k, v in e.items() if k.isidentifier()} for e in p_envs]
-        if any(f_clean) and any(p_clean):
-            guards = OESYGUS.synthesize_separating_predicates(
-                f_clean,
-                p_clean,
-                lang="python",
-                extra_consts=(),
-                max_results=3,
+        _safe_builtins = {
+            "isinstance", "int", "bool", "str", "float", "len", "math", "abs",
+            "any", "all", "ord", "chr", "min", "max", "list", "tuple", "set", "dict",
+        }
+
+        def _free_vars(expr_ast: ast.AST) -> set[str]:
+            bound: set[str] = set()
+            for sn in ast.walk(expr_ast):
+                if isinstance(sn, ast.comprehension):
+                    for tn in ast.walk(sn.target):
+                        if isinstance(tn, ast.Name):
+                            bound.add(tn.id)
+            return {
+                sn.id for sn in ast.walk(expr_ast)
+                if isinstance(sn, ast.Name) and isinstance(sn.ctx, ast.Load)
+            } - _safe_builtins - bound
+
+        if any(f_clean) and any(p_clean) and enc_fn is not None and enc_fn.body:
+            fn_params = {
+                a.arg for a in (
+                    list(getattr(enc_fn.args, "posonlyargs", []))
+                    + list(enc_fn.args.args)
+                    + list(enc_fn.args.kwonlyargs)
+                )
+            }
+            first_body_idx = 1 if (
+                len(enc_fn.body) > 1
+                and isinstance(enc_fn.body[0], ast.Expr)
+                and isinstance(enc_fn.body[0].value, ast.Constant)
+                and isinstance(enc_fn.body[0].value.value, str)
+            ) else 0
+            ret_vals: list[Any] = [c for c in assert_consts[:3] if c is None or isinstance(c, (bool, int, float, str))]
+            # Also harvest explicit constant return values ALREADY present in `enc_fn` (e.g. `return False`)!
+            for sn in ast.walk(enc_fn):
+                if isinstance(sn, ast.Return) and isinstance(sn.value, ast.Constant):
+                    cv = sn.value.value
+                    if (cv is None or isinstance(cv, (bool, int, float, str))) and not any(
+                        cv == r and type(cv) is type(r) for r in ret_vals
+                    ):
+                        ret_vals.append(cv)
+            for fb in (False, None, "", 0):
+                if not any(fb == r and type(fb) is type(r) for r in ret_vals):
+                    ret_vals.append(fb)
+
+            def _frame_ret_val(raw_frame: Mapping[str, Any]) -> tuple[bool, Any]:
+                oc = raw_frame.get("__outcome__")
+                if not isinstance(oc, Mapping) or oc.get("kind") != "return":
+                    return (False, None)
+                vi = oc.get("val")
+                if not isinstance(vi, Mapping):
+                    return (False, None)
+                if vi.get("is_none"):
+                    return (True, None)
+                if "scalar" in vi and vi["scalar"] is not None:
+                    return (True, vi["scalar"])
+                return (False, None)
+
+            def _emit_entry_guard(gcode: str, rv: Any | None, *, raise_exc: bool = False) -> None:
+                needs_math = "math." in gcode
+                try:
+                    g_test = ast.parse(gcode, mode="eval").body
+                except SyntaxError:
+                    return
+                g_names = _free_vars(g_test)
+                if not g_names or not g_names.issubset(fn_params):
+                    return
+                t_copy = copy.deepcopy(tree)
+                if needs_math:
+                    _insert_after_future(t_copy, [ast.Import(names=[ast.alias(name="math", asname=None)])])
+                for n2 in ast.walk(t_copy):
+                    if isinstance(n2, (ast.FunctionDef, ast.AsyncFunctionDef)) and n2.name == enc_fn.name and getattr(n2, "lineno", None) == getattr(enc_fn, "lineno", None):
+                        if raise_exc:
+                            stmt_body = [ast.Raise(exc=ast.Call(func=ast.Name(id="ValueError", ctx=ast.Load()), args=[ast.Constant(value="invalid argument")], keywords=[]), cause=None)]
+                            label = f"eusolver_entry_guard({gcode}->raise ValueError)"
+                        else:
+                            stmt_body = [ast.Return(value=ast.Constant(value=rv))]
+                            label = f"eusolver_entry_guard({gcode}->return {rv!r})"
+                        n2.body.insert(first_body_idx, ast.If(test=copy.deepcopy(g_test), body=stmt_body, orelse=[]))
+                        add(label, ast.unparse(t_copy))
+                        break
+
+            # 1) Full-passing separation (zero-don't-care baseline) — projected onto `fn_params`
+            # (lexical scope soundness: locals defined after function entry cannot shadow parameters
+            # inside the Observational-Equivalence predicate pool!)
+            f_param_clean = [{k: v for k, v in e.items() if k in fn_params} for e in f_clean]
+            p_param_clean = [{k: v for k, v in e.items() if k in fn_params} for e in p_clean]
+            guards = (
+                OESYGUS.synthesize_separating_predicates(
+                    f_param_clean, p_param_clean, lang="python", extra_consts=(), max_results=3
+                )
+                if (any(f_param_clean) and any(p_param_clean))
+                else []
             )
-            # Anti-overfitting guardrail ("Real understanding, not pattern matching"):
-            # Only accept semantic domain/structural guards (generality_penalty <= 1),
-            # never test-literal substring/equality hacks!
             guards = [g for g in guards if int(g.get("generality_penalty", 99)) <= 1]
-            if guards:
-                enc_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
-                for node in ast.walk(tree):
-                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.body:
-                        lo = getattr(node, "lineno", 10**9)
-                        hi = getattr(node, "end_lineno", lo) or lo
-                        if lo <= ln <= hi:
-                            if enc_fn is None or (hi - lo) < ((getattr(enc_fn, "end_lineno", 0) or 0) - getattr(enc_fn, "lineno", 0)):
-                                enc_fn = node
-                if enc_fn is not None and enc_fn.body:
-                    fn_params = {a.arg for a in enc_fn.args.args + enc_fn.args.kwonlyargs}
-                    first_body_idx = 1 if (
-                        len(enc_fn.body) > 1
-                        and isinstance(enc_fn.body[0], ast.Expr)
-                        and isinstance(enc_fn.body[0].value, ast.Constant)
-                        and isinstance(enc_fn.body[0].value.value, str)
-                    ) else 0
-                    ret_vals: list[Any] = [c for c in assert_consts[:2] if c is None or isinstance(c, (bool, int, float, str))]
-                    if not ret_vals:
-                        ret_vals = [None, "", 0]
-                    for g in guards[:2]:
-                        gcode = g["code"]
-                        needs_math = "math." in gcode
+            for g in guards[:2]:
+                for rv in ret_vals[:3]:
+                    _emit_entry_guard(g["code"], rv)
+                _emit_entry_guard(g["code"], None, raise_exc=True)
+
+            # 2) Outcome-Partitioned Don't-Care Separation (First-Principles Semantic Theorem!):
+            # When synthesizing `if P(x): return rv`, passing tests that ALREADY return `rv` are
+            # semantically invariant (don't-care E_dc); ONLY passing tests with outcome != rv are
+            # preservation constraints (E_forbid). Projected onto `fn_params` for lexical soundness.
+            raw_p_frames = list(entry_site.passing_frames[:64])
+            for rv in ret_vals[:3]:
+                p_forbid = [
+                    pe for rf, pe in zip(raw_p_frames, p_param_clean)
+                    if pe and not (
+                        (_frame_ret_val(rf)[0])
+                        and (_frame_ret_val(rf)[1] == rv)
+                        and (type(_frame_ret_val(rf)[1]) is type(rv))
+                    )
+                ]
+                if not p_forbid or not any(f_param_clean) or len(p_forbid) == len(p_param_clean):
+                    continue
+                dc_guards = OESYGUS.synthesize_separating_predicates(
+                    f_param_clean, p_forbid, lang="python", extra_consts=(), max_results=3
+                )
+                dc_guards = [g for g in dc_guards if int(g.get("generality_penalty", 99)) <= 1]
+                for g in dc_guards[:2]:
+                    _emit_entry_guard(g["code"], rv)
+
+        # Live Value-Angelic Return Expression Synthesis (`synthesize_value_expressions`, zero hand-written rules!):
+        # Given a localized `return <expr>` with passing_frames + failing_frames + assertion expected values,
+        # mathematically synthesize the exact return formula / coercion / clamp / ITE expression.
+        if any(f_clean) and any(p_clean) and loc_exceptions:
+            ret_nodes = [
+                n for n in ast.walk(tree)
+                if isinstance(n, ast.Return) and n.value is not None and getattr(n, "lineno", None) == ln
+            ]
+            if ret_nodes:
+                # Extract concrete `(actual, expected)` literal pairs from pytest/unittest AssertionErrors
+                ae_pairs: list[tuple[Any, Any]] = []
+                for info in loc_exceptions.values():
+                    msg = str(info.get("msg") or "")
+                    for m_ae in re.finditer(r"assert\s+([^\n=]+?)\s*==\s*([^\n]+)", msg):
                         try:
-                            g_test = ast.parse(gcode, mode="eval").body
-                        except SyntaxError:
-                            continue
-                        g_names = {n.id for n in ast.walk(g_test) if isinstance(n, ast.Name)} - {"isinstance", "int", "bool", "len", "math", "abs"}
-                        if not g_names or not g_names.issubset(fn_params):
-                            continue
-                        for rv in ret_vals[:2]:
-                            t_copy = copy.deepcopy(tree)
-                            if needs_math:
-                                _insert_after_future(t_copy, [ast.Import(names=[ast.alias(name="math", asname=None)])])
-                            for n2 in ast.walk(t_copy):
-                                if isinstance(n2, (ast.FunctionDef, ast.AsyncFunctionDef)) and n2.name == enc_fn.name and getattr(n2, "lineno", None) == getattr(enc_fn, "lineno", None):
-                                    n2.body.insert(
-                                        first_body_idx,
-                                        ast.If(test=copy.deepcopy(g_test), body=[ast.Return(value=ast.Constant(value=rv))], orelse=[]),
-                                    )
-                                    add(f"eusolver_entry_guard({gcode}->return {rv!r})", ast.unparse(t_copy))
+                            av = ast.literal_eval(m_ae.group(1).strip())
+                            ev = ast.literal_eval(m_ae.group(2).strip())
+                            if (av is None or isinstance(av, (bool, int, float, str))) and (ev is None or isinstance(ev, (bool, int, float, str))):
+                                ae_pairs.append((av, ev))
+                        except Exception:
+                            pass
+                if ae_pairs:
+                    import math as _math_mod
+                    _eval_ns = {
+                        "__builtins__": {
+                            "abs": abs, "len": len, "min": min, "max": max,
+                            "int": int, "float": float, "str": str, "bool": bool, "round": round,
+                        },
+                        "math": _math_mod,
+                    }
+                    for rn in ret_nodes[:2]:
+                        orig_ret_src = ast.unparse(rn.value)
+                        io_examples: list[tuple[dict[str, Any], Any]] = []
+                        for pe in p_clean[:16]:
+                            try:
+                                pv = eval(orig_ret_src, _eval_ns, pe)  # noqa: S307 (restricted safe builtins on traced scalars)
+                                if pv is None or isinstance(pv, (bool, int, float, str)):
+                                    io_examples.append((pe, pv))
+                            except Exception:
+                                pass
+                        matched_fail = 0
+                        for fe in f_clean[:12]:
+                            try:
+                                fv = eval(orig_ret_src, _eval_ns, fe)  # noqa: S307
+                            except Exception:
+                                continue
+                            for av, ev in ae_pairs:
+                                if fv == av and type(fv) is type(av):
+                                    io_examples.append((fe, ev))
+                                    matched_fail += 1
                                     break
-                        t_copy_v = copy.deepcopy(tree)
-                        if needs_math:
-                            _insert_after_future(t_copy_v, [ast.Import(names=[ast.alias(name="math", asname=None)])])
-                        for n2 in ast.walk(t_copy_v):
-                            if isinstance(n2, (ast.FunctionDef, ast.AsyncFunctionDef)) and n2.name == enc_fn.name and getattr(n2, "lineno", None) == getattr(enc_fn, "lineno", None):
-                                n2.body.insert(
-                                    first_body_idx,
-                                    ast.If(
-                                        test=copy.deepcopy(g_test),
-                                        body=[ast.Raise(exc=ast.Call(func=ast.Name(id="ValueError", ctx=ast.Load()), args=[ast.Constant(value="invalid argument")], keywords=[]), cause=None)],
-                                        orelse=[],
-                                    ),
-                                )
-                                add(f"eusolver_entry_guard({gcode}->raise ValueError)", ast.unparse(t_copy_v))
-                                break
+                        if matched_fail >= 1 and len(io_examples) >= 3:
+                            extra_c = [c for c in assert_consts[:4] if isinstance(c, (int, float, str))]
+                            val_sols = OESYGUS.synthesize_value_expressions(
+                                io_examples, lang="python", extra_consts=extra_c, max_results=3
+                            )
+                            for vs in val_sols:
+                                vcode = str(vs.get("code") or "").strip()
+                                if not vcode or vcode == orig_ret_src or int(vs.get("generality_penalty", 9)) > 1 or int(vs.get("size", 99)) > 8:
+                                    continue
+                                try:
+                                    v_ast = ast.parse(vcode, mode="eval").body
+                                except SyntaxError:
+                                    continue
+                                t_val = copy.deepcopy(tree)
+                                if "math." in vcode:
+                                    _insert_after_future(t_val, [ast.Import(names=[ast.alias(name="math", asname=None)])])
+                                replaced_v = False
+                                for n_r in ast.walk(t_val):
+                                    if isinstance(n_r, ast.Return) and n_r.value is not None and getattr(n_r, "lineno", None) == ln and ast.unparse(n_r.value) == orig_ret_src:
+                                        n_r.value = copy.deepcopy(v_ast)
+                                        replaced_v = True
+                                        break
+                                if replaced_v:
+                                    add(f"oesygus_value_return({vcode})", ast.unparse(t_val))
 
     return out
 
@@ -3954,10 +4165,21 @@ def _synthesize_static_cone_and_truthiness_repairs(
                                 guard_specs.append((gexpr, vn))
 
                 # B. Unified OE-SyGuS + EUSolver separating predicates (`generality_penalty <= 1`, zero magic numbers)
+                # Includes Outcome-Partitioned Don't-Care filtering: passing frames already raising `exc_cls`
+                # are don't-care (semantically invariant under `if P: raise exc_cls`).
                 if f_envs and p_envs:
                     try:
+                        p_forbid_exc = [
+                            pe for rf, pe in zip(site.passing_frames[:64], p_envs[:64])
+                            if pe and not (
+                                isinstance(rf.get("__outcome__"), Mapping)
+                                and rf["__outcome__"].get("kind") == "exc"
+                                and rf["__outcome__"].get("type") == exc_cls
+                            )
+                        ]
+                        p_use = p_forbid_exc if p_forbid_exc else p_envs[:64]
                         oe_g = OESYGUS.synthesize_separating_predicates(
-                            f_envs[:8], p_envs[:16], lang="python", extra_consts=(), max_results=3
+                            f_envs[:24], p_use, lang="python", extra_consts=(), max_results=3
                         )
                         for og in oe_g:
                             if int(og.get("generality_penalty", 9)) > 1:
@@ -3973,7 +4195,11 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 if not guard_specs:
                     continue
 
-                fn_params = {a.arg for a in fn_node.args.args} | {a.arg for a in fn_node.args.kwonlyargs}
+                fn_params = (
+                    {a.arg for a in getattr(fn_node.args, "posonlyargs", [])}
+                    | {a.arg for a in fn_node.args.args}
+                    | {a.arg for a in fn_node.args.kwonlyargs}
+                )
                 for gcode, pvar in guard_specs[:3]:
                     if _dnr_cands_added >= 16:
                         break
@@ -9675,6 +9901,64 @@ def synthesize_candidates(
     for sc in _static_cone_cands:
         if sc.tier in _high_prec_tiers and sc.tier not in _broad_hp_tiers:
             push(sc)
+
+    # ------------------------------------------------------------------
+    # Tier 3a / First-Principles Mathematical OE-SyGuS Synthesis (Zero-Rule, <5ms):
+    # Placed right after exact `_high_prec_tiers` and strictly BEFORE `_broad_hp_tiers`
+    # (`drop_kwarg`, `collapse_ifexp`) so mathematical domain synthesis is never starved
+    # while keeping exact structural-tier backward compatibility!
+    # ------------------------------------------------------------------
+    _oe_seen_fns: set[tuple[str, str, int]] = set()
+    _oe_emitted = 0
+    if len(loc.failing_tests) >= 2 and len(loc.passing_tests) >= 2:
+        for site in loc.sites[:14]:
+            if _oe_emitted >= 12:
+                break
+            loaded = load_file(site.file)
+            if loaded is None:
+                continue
+            _, tree = loaded
+            _enc: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+            for _n in ast.walk(tree):
+                if isinstance(_n, (ast.FunctionDef, ast.AsyncFunctionDef)) and _n.body:
+                    _lo = getattr(_n, "lineno", 10**9)
+                    _hi = getattr(_n, "end_lineno", _lo) or _lo
+                    if _lo <= site.lineno <= _hi:
+                        if _enc is None or (_hi - _lo) < ((getattr(_enc, "end_lineno", 0) or 0) - getattr(_enc, "lineno", 0)):
+                            _enc = _n
+            if _enc is not None:
+                _fn_key = (site.file, _enc.name, getattr(_enc, "lineno", 0))
+                if _fn_key in _oe_seen_fns:
+                    continue
+                _oe_seen_fns.add(_fn_key)
+            traits = _traits_from_frames(site.failing_frames)
+            for desc, code in _synthesize_value_and_expr_repairs(
+                tree,
+                site.lineno,
+                witness=None,
+                site=site,
+                assert_consts=assert_consts,
+                loc_exceptions=loc.exceptions,
+                all_sites=loc.sites,
+            ):
+                if desc.startswith("eusolver_entry_guard(") and any(
+                    tok in desc for tok in ("ord(c)", "\\n", "\\r", "\\x00", ".strip()", ".isspace()", "isfinite", "isinstance")
+                ):
+                    push(
+                        PatchCandidate(
+                            file=site.file,
+                            lineno=site.lineno,
+                            tier="TIER3_OE_SYGUS_SYNTH",
+                            description=desc,
+                            patched_source=code,
+                            ast_position="expr",
+                            hole_traits=traits,
+                        )
+                    )
+                    _oe_emitted += 1
+                    if _oe_emitted >= 12:
+                        break
+
     for sc in _static_cone_cands:
         if sc.tier in _broad_hp_tiers:
             push(sc)
@@ -9823,7 +10107,7 @@ def synthesize_candidates(
 
         elif w.kind == "VALUE_FORCE":
             for desc, code in _synthesize_value_and_expr_repairs(
-                tree, w.lineno, witness=w, site=None, assert_consts=assert_consts
+                tree, w.lineno, witness=w, site=None, assert_consts=assert_consts, loc_exceptions=loc.exceptions
             ):
                 push(
                     PatchCandidate(
@@ -10104,7 +10388,7 @@ def synthesize_candidates(
 
         # Expressions / operators / off-by-one / kwargs on localized lines
         for desc, code in _synthesize_value_and_expr_repairs(
-            tree, site.lineno, witness=None, site=site, assert_consts=assert_consts
+            tree, site.lineno, witness=None, site=site, assert_consts=assert_consts, loc_exceptions=loc.exceptions, all_sites=loc.sites
         ):
             push(
                 PatchCandidate(

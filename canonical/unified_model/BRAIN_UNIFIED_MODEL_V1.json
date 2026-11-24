@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f18289a1e26cd533751dd49b764721d846b81390ed8e4c58b668af160849cc8c"
+  "value": "2a6e6dbe69b624f9d13aae7e5f8982da680420b16dbd31abcb2a87094ab86c0c"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "8b451bb1b9910d48c26297642ed149288b2c6a021bd4e99df87375414efbb78a",
+   "sha256": "a849a87ab0d2b6025d276e8fa569d6aee4e73699e6d39699c1cede7003b09481",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -278289,7 +278289,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "4ffab91371bb18a75f475e5c359cd30f99fa60fec6c12cf4c6da604753a01e63",
+   "sha256": "6d0e5a542f0bde07d8ffdae887f8dc6d67453ee71c6f07a81115046e62f36ba2",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 43,
    "symbols": [
@@ -306863,7 +306863,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/oe_sygus_synthesizer_v1.py",
-   "sha256": "695bd228e66ace0c3f86da2c00a50d897e6b697a2b7e3bcfc07cb0ba3c6a9bc2",
+   "sha256": "2054e93023130afcd303fdc07b839e58c98b1ebf001553499233413ea62d38fa",
    "summary": "Unified Multi-Language Observational-Equivalence SyGuS + EUSolver Synthesizer v1.",
    "symbol_count": 11,
    "symbols": [

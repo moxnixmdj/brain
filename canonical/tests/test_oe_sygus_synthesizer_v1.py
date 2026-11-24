@@ -342,6 +342,93 @@ class TestOESyGuSSynthesizerV1(unittest.TestCase):
             with self.assertRaises(ValueError):
                 mod.parse_limit(-999)
 
+    def test_07_iter72_outcome_partitioned_dont_care_and_value_angelic_synthesis(self) -> None:
+        """Iter 72 first-principles mathematical generalization tests (`model_calls == 0`, `parameters_stored == 0`):
+        (A) Outcome-Partitioned Don't-Care separation + algebraic character-class quantifier synthesis
+            on positional-only parameter (`def check_uri(value: str, /)` where passing tests ALREADY
+            include invalid inputs returning `False` + multi-call tests + 254-char strings);
+        (B) Live Value-Angelic return expression synthesis (`oesygus_value_return`) deriving a universal
+            2-sided clamp purely from runtime I/O traces (preferring parameter vars over hardcoded constants);
+        (C) Outcome-Partitioned Don't-Care `raise ValueError` when passing tests already raise `ValueError`.
+        """
+        import sys
+        from canonical.runtime import causal_angelic_swe_engine_v1 as PY_SWE
+
+        # (A) Universal 3-language parameter-over-constant generality law in synthesize_value_expressions
+        ex_clamp = [
+            ({"val": 5, "lo": 0, "hi": 10}, 5),
+            ({"val": 0, "lo": 0, "hi": 10}, 0),
+            ({"val": 10, "lo": 0, "hi": 10}, 10),
+            ({"val": -7, "lo": 0, "hi": 10}, 0),
+            ({"val": 42, "lo": 0, "hi": 10}, 10),
+        ]
+        for lg in ("python", "js", "c"):
+            sols = OESYGUS.synthesize_value_expressions(ex_clamp, lang=lg, max_results=2)
+            self.assertTrue(sols, lg)
+            self.assertEqual(sols[0]["generality_penalty"], 0, sols[0])
+            self.assertIn("lo", sols[0]["code"])
+            self.assertIn("hi", sols[0]["code"])
+
+        with tempfile.TemporaryDirectory(prefix="brain_iter72_fp_") as td:
+            # (B) End-to-end live Value-Angelic clamp synthesis
+            r1 = pathlib.Path(td) / "clamp_repo"
+            _write_files(
+                r1,
+                {
+                    "clamp.py": "def bound_value(val, lo, hi):\n    return val\n",
+                    "test_clamp.py": (
+                        "from clamp import bound_value\n"
+                        "def test_ok():\n"
+                        "    assert bound_value(5, 0, 10) == 5\n"
+                        "    assert bound_value(0, 0, 10) == 0\n"
+                        "    assert bound_value(10, 0, 10) == 10\n"
+                        "def test_low():\n"
+                        "    assert bound_value(-7, 0, 10) == 0\n"
+                        "def test_high():\n"
+                        "    assert bound_value(42, 0, 10) == 10\n"
+                    ),
+                },
+            )
+            res1 = PY_SWE.solve_repository(r1, ["test_clamp.py"], python_exe=sys.executable, max_candidates=30, timeout_s=25.0)
+            self.assertEqual(res1["status"], "VERIFIED", res1)
+            self.assertEqual(res1["model_calls"], 0)
+            self.assertEqual(res1["parameters_stored"], 0)
+            self.assertIn("oesygus_value_return(", res1["winner"]["description"])
+
+            # (C) Outcome-Partitioned Don't-Care separation on positional-only validator with already-False passing tests
+            r2 = pathlib.Path(td) / "dc_val_repo"
+            _write_files(
+                r2,
+                {
+                    "ident.py": (
+                        "def check_id(value: str, /):\n"
+                        "    if not value or value.startswith('bad:'):\n"
+                        "        return False\n"
+                        "    return True\n"
+                    ),
+                    "test_ident.py": (
+                        "from ident import check_id\n"
+                        "def test_valid():\n"
+                        "    assert check_id('ok_1') is True\n"
+                        "    assert check_id('a' * 254) is True\n"
+                        "def test_existing_bad_with_ctrl():\n"
+                        "    assert check_id('bad:foo\\nbar') is False\n"
+                        "    assert check_id('bad:baz\\x00') is False\n"
+                        "def test_new_ctrl_rejected():\n"
+                        "    assert check_id('good_prefix') is True\n"
+                        "    assert check_id('good\\x00bad') is False\n"
+                        "def test_new_newline_rejected():\n"
+                        "    assert check_id('good\\nbad') is False\n"
+                    ),
+                },
+            )
+            res2 = PY_SWE.solve_repository(r2, ["test_ident.py"], python_exe=sys.executable, max_candidates=30, timeout_s=25.0)
+            self.assertEqual(res2["status"], "VERIFIED", res2)
+            self.assertEqual(res2["model_calls"], 0)
+            self.assertEqual(res2["parameters_stored"], 0)
+            self.assertEqual(res2["winner"]["tier"], "TIER3_OE_SYGUS_SYNTH")
+            self.assertIn("eusolver_entry_guard(", res2["winner"]["description"])
+
 
 if __name__ == "__main__":
     unittest.main()
