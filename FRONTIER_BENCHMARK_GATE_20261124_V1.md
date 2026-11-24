@@ -85,18 +85,27 @@ executable, contrary to `AGENTS.md` rule 1; it has been removed. A green guard
 did not make that test compliant. More work is still needed for all four
 requested wiring pieces and for the real VM and independent verifier.
 
-### Pro candidate byte handoff (not capture or grading)
+### Pro candidate capture and byte handoff (not grading)
 
-`canonical.runtime.harbor_pro_patch_handoff_v1.store_candidate_patch` can store
-caller-supplied Git diff bytes once as `agent/model.patch`, after comparing
-caller-supplied base values and rechecking SHA-256 over the stored bytes. Its
-local Git fixture tests include modifications, deletions, and a binary addition,
-then apply those bytes to a separate local Git fixture. This is **not** the
-production path, an official Pro replay, an authenticated base, a proof that the
-worker stopped, or complete patch capture. The production Harbor agent still
-refuses, including when `BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1`; its trace
-records that request as blocked. The helper only accepts a trusted host log
-directory and never overwrites an existing `model.patch`.
+`canonical.runtime.harbor_pro_git_capture_v1` captures nonignored worktree
+changes with a temporary Git index, checks the expected `HEAD` before and after,
+and includes binary changes without modifying the ordinary index. The
+`harbor_pro_capture_transport_v1` helper dispatches this worker through Harbor's
+`environment.exec` transport and feeds its claimed base, bytes and SHA-256 to
+`harbor_pro_patch_handoff_v1.store_candidate_patch`, which publishes once as
+`agent/model.patch` in a caller-trusted host log directory. Local tests exercise
+real Git fixtures and a mocked exec receipt, including binary files and failed
+receipts; they are not real Harbor or Docker tests.
+
+This is **not** the production path, an official Pro replay, an authenticated
+base, a proof that the worker or its descendants stopped, or complete capture:
+ignored untracked files, submodule contents and effects outside the repository
+are not represented. A task-controlled Git configuration can run clean filters,
+so do not run this worker on an untrusted repository on the host. The task can
+also forge its Git and worker response; the checksum only checks byte agreement.
+The production Harbor agent still refuses, including when
+`BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL=1`; its trace records that request as
+blocked. The handoff never overwrites an existing `model.patch`.
 
 In the pinned Harbor version, `environment.exec` uses Docker Compose's `main`
 service. Automatic host log mounts are **optional** (`auto_mounting` defaults to
@@ -108,8 +117,13 @@ only exact standard log binds plus Brain, and resolves host paths before compari
 It has not been run with real Harbor or Docker here. The two ID samples do not
 atomically bind a subsequent `environment.exec`, establish quiescence, or
 independently prove egress isolation; the production agent does not use the
-diagnostic to authorize execution. Writable verifier logs are not independent
-evidence. For FrontierSWE, the pinned px-eval rollout and grade scripts transfer
+diagnostic to authorize execution. A hostname is configurable, a private cgroup
+namespace may hide the Docker ID, and neither in-container value authenticates
+the earlier Docker inspection. A route check also does not exclude every egress
+path, and an exited worker can leave detached descendants. Combining checks and
+launch in one shell invocation narrows one race but does not make Docker policy,
+mount state and process quiescence atomic. Writable verifier logs are not
+independent evidence. For FrontierSWE, the pinned px-eval rollout and grade scripts transfer
 configured artifacts to a separate verifier image; a plain Harbor invocation is
 not a substitute. Terminal-Bench verification is task-specific and the expected
 non-Git effects cannot be inferred from the Pro patch format.
