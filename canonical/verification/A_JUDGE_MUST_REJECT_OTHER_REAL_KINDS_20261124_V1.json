@@ -1,0 +1,76 @@
+{
+  "schema": "PROJECT_BRAIN_A_JUDGE_MUST_REJECT_OTHER_REAL_KINDS_RECEIPT_V1",
+  "action_id": "A_JUDGE_MUST_REJECT_OTHER_REAL_KINDS_20261124_V1",
+  "authority": "NONE__SANDBOX_MEASUREMENT",
+  "date": "2026-11-24",
+  "canonical_base_commit": "bc54ee86189a23b39ffbdf4c6b1787dfdd1397b9",
+  "what_round_11_claimed": "7 of 8 judges earned; earned set identical to the hand-typed set; 210 judgements across 30 real files with 0 disagreements",
+  "what_is_true": "5 exclusive + 2 nested, and the '0 disagreements' test could not have found the difference",
+  "the_defect": {
+    "why_one_decoy_cannot_work": "round 11 admitted a judge if it said 0 to a real file of the kind and non-zero to a single nonsense blob. That cannot distinguish 'rejects what is not my kind' from 'accepts my kind plus some other real kinds'",
+    "measured_cross_kind_matrix": {
+      "gzip": "exit 0 on a real ZIP FILE (gzip 1.12 prints 'OK') -- and 1 on the decoy, so round 11 admitted it",
+      "tar": "exit 0 on a real gzip stream",
+      "python_ast": "exit 0 on a real JSON document",
+      "utf8_text": "exit 0 on json, tar and python"
+    },
+    "why_json_is_valid_python": "`{\"a\": 1}` parses as a Python expression statement -- verified with ast.dump, so no parser-based judge can separate them",
+    "consequence": "a scan built on those judges would report a zip file as gzip -- the lying-name failure round 10 fixed, arriving through the validator instead of the suffix"
+  },
+  "the_fix": {
+    "strict_test": "a candidate must also REJECT every other real kind in the corpus, not just a nonsense decoy",
+    "labels": "REFUSED__SAID_YES_TO_A_KIND_THAT_IS_NOT_ITS_OWN names which kinds it accepted",
+    "recovery": "gzip and tar were recovered by ASKING A DIFFERENT QUESTION: `gzip -t` tests integrity and calls a zip OK, but reading a byte through the decompressor asks 'is this a gzip stream'. Same for tarfile.open vs tar -tf"
+  },
+  "the_second_correction": {
+    "problem": "the strict test is the right test for a kind and the wrong test for a NESTED kind",
+    "measured": "with the strict rule alone, 5 judges remain and 0% of /usr/share/doc and /usr/lib/python3 is readable -- because a .py file IS utf8 text and JSON IS parseable python",
+    "fix": "two admission classes. EXCLUSIVE must reject every other real kind. NESTED accepts a superset, which is CORRECT for a nested kind, and is admitted under a name saying it can never prove a file is NOT something else",
+    "final_set": {
+      "exclusive": [
+        "elf",
+        "gzip",
+        "json",
+        "png",
+        "tar",
+        "zip"
+      ],
+      "nested": [
+        "python",
+        "utf8_text"
+      ]
+    }
+  },
+  "an_api_trap_found_while_auditing": {
+    "defect": "Item.path is relative to the scan root, so signature(item.path, judges) resolves against the caller's cwd, finds nothing, returns ()",
+    "measured": "0% of /usr/share/doc looked readable through that route while the same files read fine by absolute path -- every caller that re-judged what it was given would have reported every file unreadable",
+    "fix": "Item keeps the absolute path alongside the relative one, and rejudge() uses it",
+    "pinned_by": "test_a_scanned_item_can_be_rejudged"
+  },
+  "coverage_on_a_real_machine": {
+    "before": {
+      "usr_bin_unreadable": "73%"
+    },
+    "after": {
+      "/usr/share/doc": "80/80",
+      "/usr/lib/python3": "80/80",
+      "/etc": "73/80",
+      "/usr/bin": "80/80",
+      "/usr/lib/x86_64-linux-gnu": "80/80",
+      "TOTAL": "393/400 = 98.2%"
+    },
+    "elf": "the largest unread class on a real machine. Four programs here judge it (readelf, objdump, nm, ldd) and all four agree; `readelf -h` was earned. `strings` was refused as a candidate in advance because it accepts everything"
+  },
+  "honest_limits": [
+    "the candidate argv is still supplied by me; the loop decides WHETHER it is a judge, not which program to try",
+    "'exclusive' is a statement about the probe corpus, not a proof of exclusivity -- a kind not in the corpus could still be accepted",
+    "the nested class is declared per kind, so a genuinely nested kind not named in NESTED_KINDS is refused rather than classified",
+    "nested judges can only ever ADD a signature; they cannot make a file unreadable, but they also cannot distinguish structure",
+    "no benchmark task was run; this is a mechanism measurement",
+    "authority NONE, sandbox only, independent verification OPEN"
+  ],
+  "the_next_bottleneck": "choosing the candidate without me naming it -- and this round shows why that matters: every judge that survived was recovered by asking a DIFFERENT question of the same program, which is exactly what a named candidate list cannot do",
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}
