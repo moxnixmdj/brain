@@ -1,27 +1,14 @@
 {
-  "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
-  "date": "2026-11-24",
-  "status": "PRODUCER_REASONING_RECEIPT__ZERO_CAPABILITY_CREDIT__DISTINCT_RUNNER_PENDING",
+  "assumptions": [
+    "The test packet supplies a typed goal effect, success predicate, action partition, unknown IDs, source classes, evidence hashes and a distinct verifier identity.",
+    "External K1 facts are authenticated and scoped but never authoritative for policy or final answers.",
+    "GitHub Actions OIDC is a build-time distinct verifier, never a Brain runtime cognition dependency.",
+    "Any semantic byte change requires re-verification."
+  ],
+  "capability_credit_delta": 0,
   "chat_only_authority": false,
-  "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
-  "governing_invariants": [
-    "Own Brain weights and computed mechanisms only; zero runtime model calls.",
-    "Parameters hold mechanisms, never a memorized world-fact warehouse.",
-    "Knowledge and skills live in an external inspectable editable store and may change without retraining.",
-    "A distinct verifier must own independent receipts; a fresh same-identity process is not independent verification.",
-    "Hardest open unseen benchmarks are falsifiers, not the product; no score alone grants capability credit.",
-    "Delete before add; ask only for information that can change a goal-relevant decision.",
-    "Open-world completeness without a bounded enumeration certificate fails closed.",
-    "One exact action trajectory cannot identify causal variables, scope, falsifier, verifier or transfer class."
-  ],
-  "material_premises": [
-    "The live project already has full scan/ask/retrieve/plan/act/verify/generalize/save mechanisms, JIT K1 knowledge, a global retrieval completeness firewall, relation grammars, one-shot falsifications and runner-owned exact-byte receipts.",
-    "Project measurements show breadth saturates, learning does not accumulate from raw traces, and the bottleneck is the index, verifier, grammar, goal and site rather than memory capacity.",
-    "2026 external-memory literature shows raw trajectories can cause negative transfer on hard cases while abstract procedural relations transfer more safely.",
-    "2026 VoI/EVPI literature supports cost-penalized clarification selected by expected downstream decision improvement, and SAGE-Agent/REVOIR use model-based variants that cannot be runtime dependencies for Brain.",
-    "2026 completeness/closure benchmarks show stopping criteria and source-scope closure remain hard failure modes.",
-    "Hardest open suites remain OSWorld 2.1 long-horizon workflows, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1 and completeness probes; gated assets, VM images, evaluator dependencies and independent §6 verification are external blockers."
-  ],
+  "conclusion": "Goal-directed sufficient knowing is the minimal defensible interpretation: compute the action quotient, derive the smallest decision-relevant question, use exact EVPI when a scoped hypothesis model exists, refuse open-world completeness without bounded enumeration, bind K1 facts to scope/evidence/falsifier, recompute relation terms from the current machine, and persist typed relations rather than trajectories. Learn everything, scan everything, web-as-runtime-reasoner, exact trace replay, and one-experience universal generalization are rejected or fail closed. This is a zero-credit guard/contract instrument, not a verified general capability gain.",
+  "date": "2026-11-24",
   "evidence_refs": [
     "canonical/swe_kernel/perfect_algorithm_v1.py",
     "canonical/runtime/jit_knowledge_v1.py",
@@ -40,57 +27,91 @@
     "https://arxiv.org/html/2610.29357",
     "https://arxiv.org/abs/2611.26335v1",
     "https://arxiv.org/html/2601.20975v1",
-    "https://proceedings.iclr.cc/paper_files/paper/2026/file/1119587863e78451f080da2a768c4935-Paper-Conference.pdf"
+    "https://proceedings.iclr.cc/paper_files/paper/2026/file/1119587863e78451f080da2a768c4935-Paper-Conference.pdf",
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256",
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json"
   ],
-  "conclusion": "Goal-directed sufficient knowing is the minimal defensible interpretation: compute the action quotient, derive the smallest decision-relevant question, use exact EVPI when a scoped hypothesis model exists, refuse open-world completeness without bounded enumeration, bind K1 facts to scope/evidence/falsifier, recompute relation terms from the current machine, and persist typed relations rather than trajectories. Learn everything, scan everything, web-as-runtime-reasoner, exact trace replay, and one-experience universal generalization are rejected or fail closed. This is a zero-credit guard/contract instrument, not a verified general capability gain.",
-  "selected_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
-  "rejected_material_alternatives": [
-    {"route": "SCAN_EVERYTHING_AND_LEARN_EVERY_ENVIRONMENT", "reason": "Unbounded cost, negative transfer, no finite completeness certificate, WideSearch/DeepSearchQA/ClosureBench failures."},
-    {"route": "RUNTIME_WEB_OR_MODEL_AS_PERFECT_RESEARCHER", "reason": "Forbidden K3 runtime dependency and no authority over hidden state, gated assets, stale pages or §6."},
-    {"route": "SAVE_EXACT_ACTION_TRAJECTORIES", "reason": "Project and 2026 literature show hard-case negative transfer; exact actions rarely recur."},
-    {"route": "TRAIN_PARAMETERS_FROM_ONE_EXPERIENCE", "reason": "One trace cannot justify a weight delta and would make parameters a knowledge warehouse."},
-    {"route": "SELF_WRITTEN_INDEPENDENT_PASS", "reason": "AGENTS.md rule 4; independent verification needs a distinct runner identity."},
-    {"route": "WORST_CASE_CONTRAST_AS_EXACT_INFORMATION_VALUE", "reason": "First implementation mislabeled a bound as VoI; exact EVPI now used when probabilities exist and the bound is labeled otherwise."}
+  "governing_invariants": [
+    "Own Brain weights and computed mechanisms only; zero runtime model calls.",
+    "Parameters hold mechanisms, never a memorized world-fact warehouse.",
+    "Knowledge and skills live in an external inspectable editable store and may change without retraining.",
+    "A distinct verifier must own independent receipts; a fresh same-identity process is not independent verification.",
+    "Hardest open unseen benchmarks are falsifiers, not the product; no score alone grants capability credit.",
+    "Delete before add; ask only for information that can change a goal-relevant decision.",
+    "Open-world completeness without a bounded enumeration certificate fails closed.",
+    "One exact action trajectory cannot identify causal variables, scope, falsifier, verifier or transfer class."
   ],
-  "uncertainties": [
-    "Whether scoped hypothesis probabilities and utilities can be computed from arbitrary natural-language goals without a model.",
-    "Whether typed relation grammars can cover authored repair content and unseen GUI/browser state.",
-    "Whether the new quotient transfers to untouched OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena-Verified, DeepSearchQA, WideSearch or ClosureBench.",
-    "Whether full completeness/source-scope closure can be certified in an open world.",
-    "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style §6 verification will become available."
+  "material_premises": [
+    "The live project already has full scan/ask/retrieve/plan/act/verify/generalize/save mechanisms, JIT K1 knowledge, a global retrieval completeness firewall, relation grammars, one-shot falsifications and runner-owned exact-byte receipts.",
+    "Project measurements show breadth saturates, learning does not accumulate from raw traces, and the bottleneck is the index, verifier, grammar, goal and site rather than memory capacity.",
+    "2026 external-memory literature shows raw trajectories can cause negative transfer on hard cases while abstract procedural relations transfer more safely.",
+    "2026 VoI/EVPI literature supports cost-penalized clarification selected by expected downstream decision improvement, and SAGE-Agent/REVOIR use model-based variants that cannot be runtime dependencies for Brain.",
+    "2026 completeness/closure benchmarks show stopping criteria and source-scope closure remain hard failure modes.",
+    "Hardest open suites remain OSWorld 2.1 long-horizon workflows, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1 and completeness probes; gated assets, VM images, evaluator dependencies and independent \u00a76 verification are external blockers."
   ],
-  "assumptions": [
-    "The test packet supplies a typed goal effect, success predicate, action partition, unknown IDs, source classes, evidence hashes and a distinct verifier identity.",
-    "External K1 facts are authenticated and scoped but never authoritative for policy or final answers.",
-    "GitHub Actions OIDC is a build-time distinct verifier, never a Brain runtime cognition dependency.",
-    "Any semantic byte change requires re-verification."
-  ],
+  "model_calls": 0,
+  "next_action": "Pull the runner-owned receipt, record final metadata, run and push final lightweight gates, then continue the \u00a75 loop on arbitrary purpose binding, authored repair content and fresh hard-benchmark qualification.",
   "non_goals": [
-    "Claiming §6, terminal truth, capability, family, benchmark or score credit.",
+    "Claiming \u00a76, terminal truth, capability, family, benchmark or score credit.",
     "Executing OSWorld, SWE-Bench Pro V2, Terminal-Bench or any hidden-test body in this contract iteration.",
     "Deploying websites, pulling provider images, reading hidden solutions or borrowing model outputs.",
     "Opening a PR or merging before the whole feature is complete."
   ],
-  "next_action": "Push the frozen contract and distinct OIDC workflow, watch the runner-owned receipt, pull it, rerun final gates, then continue the §5 loop on the next bottleneck: arbitrary purpose binding, authored repair content and fresh hard-benchmark qualification.",
+  "parameters_written": 0,
+  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
+  "real_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "rejected_material_alternatives": [
+    {
+      "reason": "Unbounded cost, negative transfer, no finite completeness certificate, WideSearch/DeepSearchQA/ClosureBench failures.",
+      "route": "SCAN_EVERYTHING_AND_LEARN_EVERY_ENVIRONMENT"
+    },
+    {
+      "reason": "Forbidden K3 runtime dependency and no authority over hidden state, gated assets, stale pages or \u00a76.",
+      "route": "RUNTIME_WEB_OR_MODEL_AS_PERFECT_RESEARCHER"
+    },
+    {
+      "reason": "Project and 2026 literature show hard-case negative transfer; exact actions rarely recur.",
+      "route": "SAVE_EXACT_ACTION_TRAJECTORIES"
+    },
+    {
+      "reason": "One trace cannot justify a weight delta and would make parameters a knowledge warehouse.",
+      "route": "TRAIN_PARAMETERS_FROM_ONE_EXPERIENCE"
+    },
+    {
+      "reason": "AGENTS.md rule 4; independent verification needs a distinct runner identity.",
+      "route": "SELF_WRITTEN_INDEPENDENT_PASS"
+    },
+    {
+      "reason": "First implementation mislabeled a bound as VoI; exact EVPI now used when probabilities exist and the bound is labeled otherwise.",
+      "route": "WORST_CASE_CONTRAST_AS_EXACT_INFORMATION_VALUE"
+    }
+  ],
+  "runtime_network_calls": 0,
+  "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
+  "section_6_verifications": 0,
+  "selected_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
+  "status": "PRODUCER_REASONING_RECEIPT__DISTINCT_FINITE_OIDC_REPLAY_RECORDED__FINAL_METADATA_GATES_PENDING__ZERO_CAPABILITY_CREDIT",
+  "supersedes": [
+    "PROVISIONAL_WORST_CASE_CONTRAST_VOI_V0",
+    "LEARN_EVERYTHING_AS_UNIVERSAL_DEFAULT"
+  ],
   "supersession_conditions": [
     "A distinct verifier falsifies exact-byte replay, exact EVPI, zero-model imports, or store editability.",
     "A fresh unseen hard-benchmark attempt shows no transfer or a hidden model dependency.",
     "The owner directly changes the standing mission or constraints.",
     "A strictly smaller mechanism computes the same decisions with fewer bytes and equivalent fail-closed guarantees."
   ],
-  "supersedes": [
-    "PROVISIONAL_WORST_CASE_CONTRAST_VOI_V0",
-    "LEARN_EVERYTHING_AS_UNIVERSAL_DEFAULT"
-  ],
-  "producer_id": "arena-agent:arena/6f8ac9ce-brain",
-  "verifier_id": "PENDING_DISTINCT_GITHUB_ACTIONS_OIDC_RUN",
-  "model_calls": 0,
-  "runtime_network_calls": 0,
-  "parameters_written": 0,
-  "capability_credit_delta": 0,
-  "section_6_verifications": 0,
   "truth": {
     "achieved": false,
     "section_6": "NOT_MET"
-  }
+  },
+  "uncertainties": [
+    "Whether scoped hypothesis probabilities and utilities can be computed from arbitrary natural-language goals without a model.",
+    "Whether typed relation grammars can cover authored repair content and unseen GUI/browser state.",
+    "Whether the new quotient transfers to untouched OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena-Verified, DeepSearchQA, WideSearch or ClosureBench.",
+    "Whether full completeness/source-scope closure can be certified in an open world.",
+    "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style \u00a76 verification will become available."
+  ],
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45408866721"
 }

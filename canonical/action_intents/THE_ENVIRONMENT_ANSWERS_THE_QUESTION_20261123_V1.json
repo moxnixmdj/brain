@@ -2,7 +2,7 @@
   "action_id": "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1",
   "action_intent_id": "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1",
   "action_kind": "GOVERNANCE_GUARD",
-  "action_summary": "The new prompt was read as a fresh, binding restatement of the whole mission. §2 was resolved as computed mechanisms in parameters, facts/skills in an external inspectable editable store, zero runtime model calls, and no world-fact warehouse. Exhaustive project and frontier research found existing perfect-algorithm/JIT/global-retrieval/relation-grammar/one-shot mechanisms plus 2026 EVPI/VoI, external-memory, completeness/closure and hard-benchmark evidence. §3 verdict: instant learning is real only for finite machine-relative relation retention; one-experience universal mastery, learn-everything and web-as-runtime-reasoner are false or unproven. The minimal plan derives the question from the action quotient, uses exact EVPI when probabilities exist, refuses open-world completeness and model dependencies, and stores only typed relations with falsifiers. Built one stdlib zero-model module, one empty external store, sixteen tests, one durable reasoning receipt, one local measurement receipt, one workflow checker and one distinct OIDC runner workflow. Local tests and frozen runner block replay pass. Runner-owned receipt, hard-benchmark transfer and §6 remain pending.",
+  "action_summary": "The new prompt was read as a fresh, binding restatement of the whole mission. §2 was resolved as computed mechanisms in parameters, facts/skills in an external inspectable editable store, zero runtime model calls, and no world-fact warehouse. Exhaustive project and frontier research found existing perfect-algorithm/JIT/global-retrieval/relation-grammar/one-shot mechanisms plus 2026 EVPI/VoI, external-memory, completeness/closure and hard-benchmark evidence. §3 verdict: instant learning is real only for finite machine-relative relation retention; one-experience universal mastery, learn-everything and web-as-runtime-reasoner are false or unproven. The minimal plan derives the question from the action quotient, uses exact EVPI when probabilities exist, refuses open-world completeness and model dependencies, and stores only typed relations with falsifiers. Built one stdlib zero-model module, one empty external store, sixteen tests, one durable reasoning receipt, one local measurement receipt, one workflow checker and one distinct OIDC runner workflow. Local tests and frozen runner block replay pass. A distinct OIDC runner recorded finite contract replay at run 45408866721 with zero model/network/parameter writes. Hard-benchmark transfer and §6 remain absent; final metadata gates are pending.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -16,7 +16,7 @@
     "independent_hard_benchmark_verification_completed": false,
     "independent_verification_completed": false,
     "independent_verification_completed_scope": "SECTION_6_OR_TERMINAL_CAPABILITY_VERIFICATION_ONLY__FINITE_TRANSPORT_REPLAY_AND_HARD_BENCHMARK_ATTEMPT_ARE_NARROW_EXCEPTIONS",
-    "independent_verification_note": "Terminal/§6 independent verification remains absent: no independent identity has verified OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or a full Terminal-Bench 4.1 capability. The narrow finite transport replay is run 45293031532. The distinct runner-owned zero-inference hard-benchmark attempt is run 45306545636; it produced three official reward vectors, each 0.0, with no task success, no score and zero credit. Iteration 10 recorded a third OIDC runner receipt for a fresh three-task SWE-bench Pro V2 / HARD-51 attempt; all three rewards were 0.0 and independent §6 verification remains false. Iteration 11 adds a fourth distinct OIDC carrier for a sanitized pinned-release blocker receipt; it does not make independent §6 verification true. The first OSWorld blocker runner receipt is distinct but recorded a failed source-check fallback and eight blockers; it does not make independent §6 verification true. The corrected OSWorld blocker runner receipt 45324866256 verifies 27 pinned source checks and eight blockers on a distinct public runner; it is not an OSWorld task run, aggregate score or independent §6 verification. Iteration 12 adds local pinned website source and compose-config verification; its distinct runner-owned OIDC receipt is pending and independent §6 verification remains false. Iteration-12 full local gates passed at 2026-11-24T12:22:14Z, but the distinct runner-owned OIDC website-substrate receipt is still pending and independent §6 verification remains false. The first website-substrate runner receipt is distinct but fail-closed due to a zero-exit fallback bug; independent §6 verification remains false and a corrected second receipt is pending. Corrected-workflow full local gates passed at 2026-11-24T12:35:50Z, but the corrected second runner-owned OIDC website-substrate receipt is still pending and independent §6 verification remains false. The corrected second runner-owned OIDC website-substrate receipt is config-verified at 2026-11-24T12:40:19Z, but independent §6 verification remains false; final gates after receipt are pending. Final gates after receipt passed at 2026-11-24T12:45:37Z; independent §6 verification remains false and terminal truth is unchanged. The goal-directed sufficient-knowing contract has local tests and a frozen runner-block replay, but no distinct OIDC receipt yet; independent §6 verification remains false.",
+    "independent_verification_note": "Terminal/§6 independent verification remains absent: no independent identity has verified OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or a full Terminal-Bench 4.1 capability. The narrow finite transport replay is run 45293031532. The distinct runner-owned zero-inference hard-benchmark attempt is run 45306545636; it produced three official reward vectors, each 0.0, with no task success, no score and zero credit. Iteration 10 recorded a third OIDC runner receipt for a fresh three-task SWE-bench Pro V2 / HARD-51 attempt; all three rewards were 0.0 and independent §6 verification remains false. Iteration 11 adds a fourth distinct OIDC carrier for a sanitized pinned-release blocker receipt; it does not make independent §6 verification true. The first OSWorld blocker runner receipt is distinct but recorded a failed source-check fallback and eight blockers; it does not make independent §6 verification true. The corrected OSWorld blocker runner receipt 45324866256 verifies 27 pinned source checks and eight blockers on a distinct public runner; it is not an OSWorld task run, aggregate score or independent §6 verification. Iteration 12 adds local pinned website source and compose-config verification; its distinct runner-owned OIDC receipt is pending and independent §6 verification remains false. Iteration-12 full local gates passed at 2026-11-24T12:22:14Z, but the distinct runner-owned OIDC website-substrate receipt is still pending and independent §6 verification remains false. The first website-substrate runner receipt is distinct but fail-closed due to a zero-exit fallback bug; independent §6 verification remains false and a corrected second receipt is pending. Corrected-workflow full local gates passed at 2026-11-24T12:35:50Z, but the corrected second runner-owned OIDC website-substrate receipt is still pending and independent §6 verification remains false. The corrected second runner-owned OIDC website-substrate receipt is config-verified at 2026-11-24T12:40:19Z, but independent §6 verification remains false; final gates after receipt are pending. Final gates after receipt passed at 2026-11-24T12:45:37Z; independent §6 verification remains false and terminal truth is unchanged. The goal-directed sufficient-knowing contract has local tests, a frozen runner-block replay and a distinct runner-owned OIDC finite replay at run 45408866721; independent §6 hard-benchmark verification remains false.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -95,7 +95,9 @@
       "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json",
       "canonical/verification/check_goal_directed_sufficient_knowing_workflow_v1.py",
       ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml",
-      "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md"
+      "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
     ],
     "route_class": "COMPOSE",
     "scope_complete_discharge": false,
@@ -144,7 +146,9 @@
       "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json",
       "canonical/verification/check_goal_directed_sufficient_knowing_workflow_v1.py",
       ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml",
-      "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md"
+      "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
     ],
     "dependencies": [
       {
@@ -185,6 +189,16 @@
       {
         "material": true,
         "path": "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md",
+        "status": "CURRENT"
+      },
+      {
+        "material": true,
+        "path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+        "status": "CURRENT"
+      },
+      {
+        "material": true,
+        "path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256",
         "status": "CURRENT"
       }
     ],
@@ -265,10 +279,26 @@
       "checked_at_utc": "2026-11-24T13:49:09Z",
       "contract_tests": "16 passed",
       "frozen_runner_block_replay": "16 checks passed",
-      "independent_oidc_receipt": "PENDING",
+      "independent_oidc_receipt": "RECORDED__45408866721",
       "status": "PASS__PRODUCER_SIDE_ONLY",
       "workflow_static_checker": "4 Python blocks compiled; zero forbidden runtime imports",
       "yaml_parse": "7 steps; push branch arena/6f8ac9ce-brain"
+    },
+    "goal_directed_runner_receipt": {
+      "conclusion": "success",
+      "hard_benchmark_tasks_consumed": 0,
+      "oidc_jti": "1a8b7197-7788-4765-9c5e-043e913e0b06",
+      "receipt_git_blob_sha": "f25c2a54e7083d4cb62aee190d484ff09c80bd5a",
+      "receipt_sha256": "a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3",
+      "runner_receipt_commit": "67a343f6",
+      "section_6_verifications": 0,
+      "sidecar_git_blob_sha": "640bea643273dac23d40a17f060fccc6aca9d8ea",
+      "status": "RUNNER_OWNED_OIDC_RECEIPT_RECORDED__ZERO_CREDIT",
+      "trigger_head_sha": "4a488af98d3daafb316f5c19ae3a53b2f0af1eb0",
+      "verified_measurements": 16,
+      "workflow_job_id": 138496906549,
+      "workflow_run_attempt": 1,
+      "workflow_run_id": 45408866721
     },
     "hard_benchmark_reward_log_git_blob_sha": "dc63bfbe631a0f848161497fd64eb355a91f8252",
     "hard_benchmark_reward_log_path": "canonical/verification/TERMINAL_BENCH_4_1_CPU_REWARD_LOG_20261124_V1.json",
@@ -1000,10 +1030,12 @@
     "the current website-substrate result is config-verified but benchmark-run-blocked",
     "goal-directed sufficient knowing has not been transferred to untouched OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena-Verified, DeepSearchQA, WideSearch or ClosureBench",
     "exact EVPI requires a scoped hypothesis probability/utility model; arbitrary purpose binding and authored repair content remain unsolved",
-    "the distinct OIDC runner receipt for the frozen contract is pending at this producer state",
-    "no independent §6 verifier, aggregate score, capability/family/terminal credit, PR or merge exists"
+    "no independent §6 verifier, aggregate score, capability/family/terminal credit, PR or merge exists",
+    "the distinct OIDC runner receipt at run 45408866721 verifies only finite exact-byte contract replay, not hard-benchmark transfer or §6",
+    "final metadata gates after the runner receipt are pending at this producer state"
   ],
   "incremental_spend_usd": 0,
+  "independent_finite_contract_replay_completed": true,
   "independent_finite_transport_replay_completed": true,
   "independent_hard_benchmark_attempt_completed": true,
   "independent_hard_benchmark_verification_completed": false,
@@ -1566,9 +1598,11 @@
       "model_calls": 0,
       "parameters_written": 0,
       "question_source": "DERIVED_FROM_ACTION_PARTITION",
+      "runner_receipt_run_id": 45408866721,
+      "runner_receipt_sha256": "a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3",
       "runtime_network_calls": 0,
       "section_6": "NOT_MET",
-      "status": "LOCAL_ZERO_MODEL_CONTRACT_MEASURED__RUNNER_RECEIPT_PENDING__ZERO_CREDIT",
+      "status": "LOCAL_ZERO_MODEL_CONTRACT_MEASURED__DISTINCT_OIDC_FINITE_REPLAY_RECORDED__FINAL_METADATA_GATES_PENDING__ZERO_CREDIT",
       "workflow_static_checker": "PASS 4 Python blocks; zero forbidden runtime imports"
     },
     "primary_source_distinct_chunk_reads": 182,
@@ -1603,7 +1637,7 @@
       "status": "THREE_FRESH_CPU_TASKS_ATTEMPTED__NO_TASK_SUCCESS__REMAINING_TASKS_UNRUN"
     }
   ],
-  "next_step": "LAND_AND_PULL_DISTINCT_OIDC_CONTRACT_RECEIPT__RERUN_FINAL_GATES__THEN_ATTACK_ARBITRARY_PURPOSE_BINDING_AUTHORED_REPAIR_CONTENT_GUI_BROWSER_CONTROL_AND_FRESH_UNSEEN_HARD_BENCHMARKS__NO_CREDIT_UNTIL_SECTION_6",
+  "next_step": "RUN_AND_PUSH_FINAL_METADATA_GATES_AFTER_RECEIPT__THEN_ATTACK_ARBITRARY_PURPOSE_BINDING_AUTHORED_REPAIR_CONTENT_GUI_BROWSER_CONTROL_AND_FRESH_UNSEEN_HARD_BENCHMARKS__NO_CREDIT_UNTIL_SECTION_6",
   "ownership_tests": {
     "model_dependency_count": 0,
     "paths": [
@@ -1684,11 +1718,13 @@
     "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json",
     "canonical/verification/check_goal_directed_sufficient_knowing_workflow_v1.py",
     ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml",
-    "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md"
+    "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md",
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
   ],
   "promotion_authority": false,
   "qualification_stage": "FINITE_CONTRACT_REPLAY__NOT_HARD_BENCHMARK_QUALIFICATION",
-  "real_outcome": "Goal-directed sufficient knowing is implemented as a finite fail-closed contract, not a claim of sentience or arbitrary computer use. Sixteen local tests, exact blob binding, exact EVPI, derived question, store add/remove without retraining, zero model/network/parameter writes and workflow/static checks pass locally. The distinct OIDC runner receipt is pending; §6 remains NOT MET.",
+  "real_outcome": "Goal-directed sufficient knowing is implemented as a finite fail-closed contract, not a claim of sentience or arbitrary computer use. Sixteen local tests, exact blob binding, exact EVPI, derived question, store add/remove without retraining, zero model/network/parameter writes and workflow/static checks pass locally. A distinct GitHub Actions OIDC runner re-ran the frozen bytes and landed a runner-owned zero-credit receipt. Final metadata gates are pending; §6 remains NOT MET.",
   "reality_query_admission": {
     "counterfactual_terminal_distinctions_explicit": true,
     "deductive_closure_complete": true,
@@ -1697,7 +1733,7 @@
     "grandfathered_current_valid_action": true,
     "minimum_reality_cut_member": false,
     "reality_query_has_terminal_decision_value": false,
-    "status": "NO_NEW_REALITY_QUERY_EXCEPT_DISTINCT_FINITE_CONTRACT_REPLAY"
+    "status": "DISTINCT_FINITE_CONTRACT_REPLAY_RECORDED__NO_NEW_HARD_BENCHMARK_REALITY_QUERY"
   },
   "reasoning_durability": {
     "assumptions": [
@@ -1728,7 +1764,10 @@
       "https://arxiv.org/html/2610.29357",
       "https://arxiv.org/abs/2611.26335v1",
       "https://arxiv.org/html/2601.20975v1",
-      "https://proceedings.iclr.cc/paper_files/paper/2026/file/1119587863e78451f080da2a768c4935-Paper-Conference.pdf"
+      "https://proceedings.iclr.cc/paper_files/paper/2026/file/1119587863e78451f080da2a768c4935-Paper-Conference.pdf",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256",
+      "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json"
     ],
     "governing_invariants": [
       "Own Brain weights and computed mechanisms only; zero runtime model calls.",
@@ -1749,7 +1788,7 @@
       "Hardest open suites remain OSWorld 2.1 long-horizon workflows, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1 and completeness probes; gated assets, VM images, evaluator dependencies and independent §6 verification are external blockers."
     ],
     "model_calls": 0,
-    "next_action": "Push the frozen contract and distinct OIDC workflow, watch the runner-owned receipt, pull it, rerun final gates, then continue the §5 loop on the next bottleneck: arbitrary purpose binding, authored repair content and fresh hard-benchmark qualification.",
+    "next_action": "Pull the runner-owned receipt, record final metadata, run and push final lightweight gates, then continue the §5 loop on arbitrary purpose binding, authored repair content and fresh hard-benchmark qualification.",
     "non_goals": [
       "Claiming §6, terminal truth, capability, family, benchmark or score credit.",
       "Executing OSWorld, SWE-Bench Pro V2, Terminal-Bench or any hidden-test body in this contract iteration.",
@@ -1789,7 +1828,7 @@
     "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
     "section_6_verifications": 0,
     "selected_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
-    "status": "PRODUCER_REASONING_RECEIPT__ZERO_CAPABILITY_CREDIT__DISTINCT_RUNNER_PENDING",
+    "status": "PRODUCER_REASONING_RECEIPT__DISTINCT_FINITE_OIDC_REPLAY_RECORDED__FINAL_METADATA_GATES_PENDING__ZERO_CAPABILITY_CREDIT",
     "supersedes": [
       "PROVISIONAL_WORST_CASE_CONTRAST_VOI_V0",
       "LEARN_EVERYTHING_AS_UNIVERSAL_DEFAULT"
@@ -1811,7 +1850,7 @@
       "Whether full completeness/source-scope closure can be certified in an open world.",
       "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style §6 verification will become available."
     ],
-    "verifier_id": "PENDING_DISTINCT_GITHUB_ACTIONS_OIDC_RUN"
+    "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45408866721"
   },
   "recursive_obs": {
     "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
@@ -1997,7 +2036,7 @@
       "existing_oracle_considered": true,
       "synthetic_verification_necessity": "Real mv/cp/rm/ls/sh executions are the producer oracle: 555 fit runs, 31 held-out runs, 25 refusal runs, 68 second-goal held-out runs, 83 computed-relation fit runs, 68 OVERWRITE runs, 127 third-name runs, 516 pointer-fit runs, 258+258 content-pointer held-out runs, 798 grammar-fit runs and 399+584 grammar held-out runs. A fresh isolated process recomputes 2,404 raw records; 12 hard CLI cases fail closed. A distinct GitHub-hosted OIDC runner then re-ran the exact six pinned blobs, 28 checks and five adversarial controls under run 45293031532 and committed its own receipt. 29 new tests plus 200 selected regression tests pin the producer receipts; no independent verifier ran any §6 hard benchmark and none is claimed. A third distinct GitHub-hosted OIDC runner verified pinned SWE-bench Pro V2 release bytes, digest-pinned images, exact source bindings, zero-model purpose decisions and three official fresh-container reward vectors under run 45314632711; all rewards were 0.0 and no independent §6 verification is claimed. The fourth GitHub-hosted OIDC carrier is needed only to bind the pinned release bytes and sanitized public-runner prerequisites to a real distinct run; local producer verification cannot substitute for the runner-owned receipt and neither can satisfy §6. The first fourth-runner receipt proves the OIDC carrier but not pinned source bytes; a corrected second receipt is required before local metadata can claim runner-pinned source verification. The fifth OIDC run binds 27/27 source checks and eight blockers to a distinct runner; it still cannot satisfy §6 without official task execution and independent verification. A distinct OIDC runner is still required for the website-substrate receipt; local compose replay cannot be substituted for it. Iteration-12 full local gates passed, but they do not replace the distinct OIDC website-substrate receipt; §6 remains unverified. The first fail-closed receipt exposed a carrier bug; local fallback replay is necessary but a corrected second OIDC runner receipt is still required. Corrected-workflow full local gates passed, but they do not replace the corrected second OIDC website-substrate receipt; §6 remains unverified. Final gates after the runner-owned config-verified receipt are still required; local replay and the receipt itself do not complete independent §6 verification. The 32-check final gate wrapper passed after the runner receipt; §6 remains unverified."
     },
-    "real_outcome": "Goal-directed sufficient knowing is implemented as a finite fail-closed contract, not a claim of sentience or arbitrary computer use. Sixteen local tests, exact blob binding, exact EVPI, derived question, store add/remove without retraining, zero model/network/parameter writes and workflow/static checks pass locally. The distinct OIDC runner receipt is pending; §6 remains NOT MET.",
+    "real_outcome": "Goal-directed sufficient knowing is implemented as a finite fail-closed contract, not a claim of sentience or arbitrary computer use. Sixteen local tests, exact blob binding, exact EVPI, derived question, store add/remove without retraining, zero model/network/parameter writes and workflow/static checks pass locally. A distinct GitHub Actions OIDC runner re-ran the frozen bytes and landed a runner-owned zero-credit receipt. Final metadata gates are pending; §6 remains NOT MET.",
     "required_capability": "Zero-model goal quotient, exact-EVPI minimal question, bounded K1 source admission, external editable relation store, distinct verifier, falsifiable relation distillation, and unchanged hard-benchmark honesty boundary.",
     "route_frontier": {
       "challenger_routes": [
@@ -2397,7 +2436,7 @@
           "route": "COMPOSE_EXACT_EVPI_MINIMAL_QUESTION_WITH_EXTERNAL_RELATION_STORE"
         }
       ],
-      "checked_at_utc": "2026-11-24T13:49:09Z",
+      "checked_at_utc": "2026-11-24T14:00:25Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -2409,8 +2448,8 @@
       "discovery_required": true,
       "incumbent_route": "BRAIN_OWNED_NO_INFERENCE_OSWORLD_V21_PINNED_WEBSITE_SUBSTRATE_AND_COMPOSE_CONFIG_RESOLVER_V1",
       "max_age_hours": 24,
-      "negative_search_summary": "The original exhaustive 52-page primary-source ledger remains unchanged. Iteration 9 added current-Nov-2026 Harbor, Terminal-Bench 4.1, OSWorld 2.1 and SWE-bench Pro V2 source/API checks; iteration 10 added SWE-bench Pro V2 v2.0.0 bytes. Iteration 11 checked the pinned osworld-v2.1 tag, manifest, task hash manifest, public guideline, provider setup, website tag, gated Hugging Face dataset pages and 25 website submodules. Gated pages allow listing but deny bodies. No independent §6 verifier or benchmark score exists. The first OSWorld blocker runner receipt had a failed source-check fallback caused by a broad task_*.py glob; the corrected raw task_NNN.py boundary is awaiting a second runner receipt. Gated HF API tree metadata returned 200 while bodies remained unavailable without accepted conditions. No independent §6 verifier or benchmark score exists. The corrected second runner receipt passed 27/27 pinned source checks and recorded eight missing prerequisites, two gated 200 metadata statuses without bodies, KVM/Xvfb/Docker present and no task run. No independent §6 verifier or benchmark score exists. Iteration 12 refreshed official OSWorld V2, OSWorld 2.1 release, Task-Web/OSWorld-web pinned tag, GitHub API compose bytes, Docker Compose config documentation and broad CI compose-validation practice. No dominating route deploys websites or satisfies §6 without gated assets, provider image, evaluator dependencies and maintainer verification. The first runner receipt supplied a direct counterexample to the previous fallback guard; no external deployment or gated access is needed to correct that measured carrier bug. The corrected second runner receipt is a direct OIDC-attested config verification; no external deployment or gated access was needed for this narrow source/compose question. Iteration 13 refreshed 2026 EVPI/VoI, SAGE-Agent, REVOIR, ClosureBench, external-memory, completeness and November benchmark sources. No dominating route makes open-world completeness, arbitrary purpose, authored repair content or §6 verification automatic.",
-      "no_known_counterexample_reason": "Three TB4.1 0.0 reward vectors and three SWE-bench Pro V2 / HARD-51 0.0 reward vectors are negative hard-benchmark results, not known counterexamples to the harness boundary; OSWorld 2.1 remains unrun and its pinned release notes explicitly report no full 108-task agent evaluation, no hosted website deployment and no Docker VM boot. No aggregate score is claimed. The first OSWorld blocker receipt is a fail-closed source-check failure and eight-prerequisite block, not a counterexample to the pinned-release boundary; the corrected workflow is pending a second runner receipt. The corrected OSWorld blocker receipt is a measured reproducibility boundary, not a counterexample to the harness boundary and not an OSWorld task result; no aggregate score is claimed. A compose-config-only website source receipt is a measured deployment-plan boundary, not a website deployment or OSWorld task result; no aggregate score is claimed. A corrected runner receipt is still required; neither the successful GitHub job nor local fallback replay is substituted for runner-owned config verification. The final config-verified receipt still blocks benchmark execution and §6; no aggregate score is claimed. The final gates bind the corrected config-verified receipt and still record no aggregate score, no §6 verification and no credit. The new contract is a finite guard with no hard-benchmark result; its local tests and frozen runner-block replay are not counterexamples to any terminal obligation or independent §6 claims.",
+      "negative_search_summary": "The original exhaustive 52-page primary-source ledger remains unchanged. Iteration 9 added current-Nov-2026 Harbor, Terminal-Bench 4.1, OSWorld 2.1 and SWE-bench Pro V2 source/API checks; iteration 10 added SWE-bench Pro V2 v2.0.0 bytes. Iteration 11 checked the pinned osworld-v2.1 tag, manifest, task hash manifest, public guideline, provider setup, website tag, gated Hugging Face dataset pages and 25 website submodules. Gated pages allow listing but deny bodies. No independent §6 verifier or benchmark score exists. The first OSWorld blocker runner receipt had a failed source-check fallback caused by a broad task_*.py glob; the corrected raw task_NNN.py boundary is awaiting a second runner receipt. Gated HF API tree metadata returned 200 while bodies remained unavailable without accepted conditions. No independent §6 verifier or benchmark score exists. The corrected second runner receipt passed 27/27 pinned source checks and recorded eight missing prerequisites, two gated 200 metadata statuses without bodies, KVM/Xvfb/Docker present and no task run. No independent §6 verifier or benchmark score exists. Iteration 12 refreshed official OSWorld V2, OSWorld 2.1 release, Task-Web/OSWorld-web pinned tag, GitHub API compose bytes, Docker Compose config documentation and broad CI compose-validation practice. No dominating route deploys websites or satisfies §6 without gated assets, provider image, evaluator dependencies and maintainer verification. The first runner receipt supplied a direct counterexample to the previous fallback guard; no external deployment or gated access is needed to correct that measured carrier bug. The corrected second runner receipt is a direct OIDC-attested config verification; no external deployment or gated access was needed for this narrow source/compose question. Iteration 13 refreshed 2026 EVPI/VoI, SAGE-Agent, REVOIR, ClosureBench, external-memory, completeness and November benchmark sources. No dominating route makes open-world completeness, arbitrary purpose, authored repair content or §6 verification automatic. The distinct runner at 45408866721 supplied a successful finite contract replay with 16 measurement checks, zero model/network/parameter writes and zero hard-benchmark tasks; no dominating §6 route appeared.",
+      "no_known_counterexample_reason": "Three TB4.1 0.0 reward vectors and three SWE-bench Pro V2 / HARD-51 0.0 reward vectors are negative hard-benchmark results, not known counterexamples to the harness boundary; OSWorld 2.1 remains unrun and its pinned release notes explicitly report no full 108-task agent evaluation, no hosted website deployment and no Docker VM boot. No aggregate score is claimed. The first OSWorld blocker receipt is a fail-closed source-check failure and eight-prerequisite block, not a counterexample to the pinned-release boundary; the corrected workflow is pending a second runner receipt. The corrected OSWorld blocker receipt is a measured reproducibility boundary, not a counterexample to the harness boundary and not an OSWorld task result; no aggregate score is claimed. A compose-config-only website source receipt is a measured deployment-plan boundary, not a website deployment or OSWorld task result; no aggregate score is claimed. A corrected runner receipt is still required; neither the successful GitHub job nor local fallback replay is substituted for runner-owned config verification. The final config-verified receipt still blocks benchmark execution and §6; no aggregate score is claimed. The final gates bind the corrected config-verified receipt and still record no aggregate score, no §6 verification and no credit. The new contract is a finite guard with no hard-benchmark result; its local tests and frozen runner-block replay are not counterexamples to any terminal obligation or independent §6 claims. The runner-owned finite replay is not a counterexample to any terminal obligation and not an independent §6 hard-benchmark verification.",
       "query_families": [
         {
           "intent": "CAPABILITY_VECTOR",
@@ -2497,7 +2536,7 @@
       "selected_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-24T13:49:09Z",
+        "checked_at_utc": "2026-11-24T14:00:25Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11+ runtime with pytest and PyYAML for policy/workflow checks",
@@ -2570,7 +2609,7 @@
             ],
             "evidence_scope": "GLOBAL",
             "kind": "REMOTE_SERVICE",
-            "observed_at_utc": "2026-11-24T13:49:09Z",
+            "observed_at_utc": "2026-11-24T14:00:25Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -2590,7 +2629,7 @@
             ],
             "evidence_scope": "GLOBAL",
             "kind": "CARRIER",
-            "observed_at_utc": "2026-11-24T13:49:09Z",
+            "observed_at_utc": "2026-11-24T14:00:25Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -2621,7 +2660,10 @@
               "workflow git blob 908f2e0edd94f5a021345d9f1b59b215537be293",
               "workflow declares contents: write and id-token: write",
               "four embedded Python blocks compile and first two blocks replay locally",
-              "producer cannot write authoritative receipt"
+              "producer cannot write authoritative receipt",
+              "OIDC run 45408866721 succeeded in 21s",
+              "runner receipt commit 67a343f6",
+              "OIDC jti 1a8b7197-7788-4765-9c5e-043e913e0b06"
             ],
             "evidence_classes": [
               "INDEPENDENT_VERIFIER",
@@ -2630,7 +2672,7 @@
             ],
             "evidence_scope": "GLOBAL",
             "kind": "CARRIER",
-            "observed_at_utc": "2026-11-24T13:49:09Z",
+            "observed_at_utc": "2026-11-24T14:00:25Z",
             "required": true,
             "scope": "GLOBAL",
             "status": "READY",
@@ -2703,7 +2745,9 @@
           "canonical/verification/OSWORLD_V21_REPRODUCIBILITY_BLOCKER_RUNNER_RECEIPT_20261124_V1.json",
           "pending distinct OIDC website-substrate runner receipt",
           "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1.json",
-          "pending distinct OIDC goal-directed sufficient-knowing runner receipt"
+          "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+          "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256",
+          "OIDC run 45408866721 with jti 1a8b7197-7788-4765-9c5e-043e913e0b06"
         ],
         "OFFICIAL_PRIMARY": [
           "Harbor v0.27.0 custom agents docs and source",
@@ -2720,9 +2764,9 @@
           "arXiv 2611.26335 ClosureBench OWA/CWA/LCWA"
         ]
       },
-      "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken. Iteration 10 adds four exact source bindings, eleven finite-purpose tests, one metadata-only HARD-51 selector, one distinct OIDC runner workflow and one runner-owned receipt with three 0.0 HARD-51 rewards; six fresh hard tasks have now been consumed with no task success, no score, no §6 verification and no credit. Iteration 11 adds two exact source bindings, seven blocker-policy tests, one distinct OIDC workflow, 13 pinned file hashes, 27 local source-verification checks and 10 fail-closed blocker reasons; no OSWorld task, VM, evaluator, reward vector, score, runner receipt, §6 verification or credit is claimed. The first OSWorld runner receipt is recorded with source-check failure and eight blockers; a corrected workflow with a raw `task_NNN.py` regex, deduplicated failed labels and derived source-check counts is ready for a second runner receipt, which is not yet recorded. The corrected second runner receipt and final gates after receipt are recorded: 27/27 source checks, 13 pinned file hashes, eight blockers, no task run, no score, no §6 verification and zero credit. Iteration 12 adds two exact Brain-owned source bindings, one website-substrate policy, nine tests, one distinct 11-step/5-block workflow, 25 website gitlink pins, two root compose hashes, 24 runtime web-compose hashes, a local compose-config-only replay and no deployment or score. The runner-owned website-substrate receipt is pending. Iteration-12 full local gates passed at 2026-11-24T12:22:14Z on HEAD 286e5cd9; the distinct runner-owned website-substrate receipt remains pending. The first website-substrate runner receipt is recorded at 2026-11-24T12:30:35Z as fail-closed evidence; the corrected workflow requires full gates and a second runner receipt. Corrected-workflow full local gates passed at 2026-11-24T12:35:50Z on HEAD def80442; the second runner-owned website-substrate receipt remains pending. The corrected second runner-owned website-substrate receipt is recorded at 2026-11-24T12:40:19Z on HEAD 6c772331; final gates after receipt are pending. Final gates after receipt passed at 2026-11-24T12:45:37Z on HEAD 11127587; no PR, merge, score, credit, §6 verification or terminal truth change exists. Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The runner-owned receipt is pending at this producer state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
+      "stop_condition": "Nine measured iterations, one generic fresh-process interpreter, eight producer receipts, one runner-owned finite-transport receipt, one Brain-owned no-inference Harbor adapter, one pure stdlib policy, one fresh CPU-only Terminal-Bench 4.1 selector, one runner-owned OIDC hard-benchmark attempt workflow, one sanitized reward log and one runner-owned hard-benchmark receipt are recorded; all failed rounds and killed designs are preserved; three fresh task attempts returned reward 0.0; no OSWorld 2.1, SWE-bench Pro V2 / HARD-51 or full Terminal-Bench score is claimed; no capability credit is taken. Iteration 10 adds four exact source bindings, eleven finite-purpose tests, one metadata-only HARD-51 selector, one distinct OIDC runner workflow and one runner-owned receipt with three 0.0 HARD-51 rewards; six fresh hard tasks have now been consumed with no task success, no score, no §6 verification and no credit. Iteration 11 adds two exact source bindings, seven blocker-policy tests, one distinct OIDC workflow, 13 pinned file hashes, 27 local source-verification checks and 10 fail-closed blocker reasons; no OSWorld task, VM, evaluator, reward vector, score, runner receipt, §6 verification or credit is claimed. The first OSWorld runner receipt is recorded with source-check failure and eight blockers; a corrected workflow with a raw `task_NNN.py` regex, deduplicated failed labels and derived source-check counts is ready for a second runner receipt, which is not yet recorded. The corrected second runner receipt and final gates after receipt are recorded: 27/27 source checks, 13 pinned file hashes, eight blockers, no task run, no score, no §6 verification and zero credit. Iteration 12 adds two exact Brain-owned source bindings, one website-substrate policy, nine tests, one distinct 11-step/5-block workflow, 25 website gitlink pins, two root compose hashes, 24 runtime web-compose hashes, a local compose-config-only replay and no deployment or score. The runner-owned website-substrate receipt is pending. Iteration-12 full local gates passed at 2026-11-24T12:22:14Z on HEAD 286e5cd9; the distinct runner-owned website-substrate receipt remains pending. The first website-substrate runner receipt is recorded at 2026-11-24T12:30:35Z as fail-closed evidence; the corrected workflow requires full gates and a second runner receipt. Corrected-workflow full local gates passed at 2026-11-24T12:35:50Z on HEAD def80442; the second runner-owned website-substrate receipt remains pending. The corrected second runner-owned website-substrate receipt is recorded at 2026-11-24T12:40:19Z on HEAD 6c772331; final gates after receipt are pending. Final gates after receipt passed at 2026-11-24T12:45:37Z on HEAD 11127587; no PR, merge, score, credit, §6 verification or terminal truth change exists. Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The runner-owned receipt is pending at this producer state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification. Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The distinct runner-owned receipt is recorded at run 45408866721 on trigger head 4a488af98d3daafb316f5c19ae3a53b2f0af1eb0; final metadata gates are pending at this state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
       "unresolved_plausible_dominators": [],
-      "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure. Iteration 10 reuses the same carrier and composes only a finite instruction-supplied transformation grammar, metadata-only HARD-51 selection and upstream fresh-container replay; a universal parser, model, hidden-test reader, task-specific solver or new learner would duplicate a killed mechanism or hide a measured failure. The third OIDC runner supplied the decision-relevant contrast: three fresh-container HARD-51 rewards, all 0.0, with zero planned action commands from the finite grammar. Iteration 11 reuses the same OIDC/gate spine and composes only a finite reproducibility classifier; a GUI agent, VM boot, gated-body download, universal parser or new §6 verifier would duplicate a killed mechanism or hide the measured access boundary. The first runner failed only the broad source glob while preserving fail-closed no-score semantics; narrowing the glob and deduplicating receipt labels is cheaper and more honest than inventing a new verifier. The corrected fifth OIDC run supplied the decision-relevant contrast: 27/27 pinned source checks pass, eight prerequisites remain blocked, and no score or §6 verification is claimed. Iteration 12 reuses the OIDC carrier and gate spine to bind 25 website gitlinks and 24 compose files to a runner-owned source/compose receipt without deployment, gated bodies or score authority. Iteration 13 deletes the universal-knowledge route, reuses all existing mechanisms, and adds only a compact exact-EVPI quotient, relation distiller and test/workflow carrier."
+      "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure. Iteration 10 reuses the same carrier and composes only a finite instruction-supplied transformation grammar, metadata-only HARD-51 selection and upstream fresh-container replay; a universal parser, model, hidden-test reader, task-specific solver or new learner would duplicate a killed mechanism or hide a measured failure. The third OIDC runner supplied the decision-relevant contrast: three fresh-container HARD-51 rewards, all 0.0, with zero planned action commands from the finite grammar. Iteration 11 reuses the same OIDC/gate spine and composes only a finite reproducibility classifier; a GUI agent, VM boot, gated-body download, universal parser or new §6 verifier would duplicate a killed mechanism or hide the measured access boundary. The first runner failed only the broad source glob while preserving fail-closed no-score semantics; narrowing the glob and deduplicating receipt labels is cheaper and more honest than inventing a new verifier. The corrected fifth OIDC run supplied the decision-relevant contrast: 27/27 pinned source checks pass, eight prerequisites remain blocked, and no score or §6 verification is claimed. Iteration 12 reuses the OIDC carrier and gate spine to bind 25 website gitlinks and 24 compose files to a runner-owned source/compose receipt without deployment, gated bodies or score authority. Iteration 13 deletes the universal-knowledge route, reuses all existing mechanisms, and adds only a compact exact-EVPI quotient, relation distiller and test/workflow carrier. The distinct runner confirmed the finite contract in 21s with zero incremental spend and zero benchmark consumption."
     },
     "routes_considered": [
       "REUSE: existing version-space fit, quotient, gate, store, raw executor evidence and the project's OIDC public-runner carrier (selected)",
@@ -2736,8 +2780,8 @@
       "SYNTHESIZE_NEW_PRIMITIVE: model or parameter-trained universal learner (rejected)"
     ],
     "selected_surviving_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
-    "stop_condition": "Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The runner-owned receipt is pending at this producer state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
-    "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure. Iteration 10 reuses the same carrier and composes only a finite instruction-supplied transformation grammar, metadata-only HARD-51 selection and upstream fresh-container replay; a universal parser, model, hidden-test reader, task-specific solver or new learner would duplicate a killed mechanism or hide a measured failure. The third OIDC runner supplied the decision-relevant contrast: three fresh-container HARD-51 rewards, all 0.0, with zero planned action commands from the finite grammar. Iteration 11 reuses the same OIDC/gate spine and composes only a finite reproducibility classifier; a GUI agent, VM boot, gated-body download, universal parser or new §6 verifier would duplicate a killed mechanism or hide the measured access boundary. The first runner failed only the broad source glob while preserving fail-closed no-score semantics; narrowing the glob and deduplicating receipt labels is cheaper and more honest than inventing a new verifier. The corrected fifth OIDC run supplied the decision-relevant contrast: 27/27 pinned source checks pass, eight prerequisites remain blocked, and no score or §6 verification is claimed. Iteration 12 reuses the OIDC carrier and gate spine to bind 25 website gitlinks and 24 compose files to a runner-owned source/compose receipt without deployment, gated bodies or score authority. The 28-check full local gate result supports pushing the pinned workflow to the distinct OIDC runner without changing source bytes or claiming credit. The corrected carrier is the fastest sufficient route because it changes only one guard, reuses all exact source bindings, and isolates the failure to a measured zero-model shape bug rather than benchmark access. The 30-check corrected-workflow full gate result supports pushing the corrected workflow to the second OIDC runner without changing source bytes or claiming credit. The corrected second OIDC run resolved the pinned website source/compose-config question in 22 seconds without deployment, image pulls, gated bodies or score authority. The final 32-check gate result closes the bounded website-substrate carrier iteration without deployment, gated bodies or score authority. Iteration 13 composes only a stdlib exact-EVPI/quotient contract, an empty external store, sixteen tests and one reused OIDC carrier. Learn-everything, model reasoning, parameter updates and exact trace stores were deleted before addition; a distinct runner is required before any independent finite replay claim."
+    "stop_condition": "Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The distinct runner-owned receipt is recorded at run 45408866721 on trigger head 4a488af98d3daafb316f5c19ae3a53b2f0af1eb0; final metadata gates are pending at this state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
+    "why_selected_route_is_fastest_sufficient": "The existing version-space, grammar interpreter, OIDC carrier, relation store and gate spine are reused; only a stdlib no-inference policy, external BaseAgent, fresh CPU task selector and one runner workflow were composed, and the distinct runner has now supplied the one decision-relevant hard-environment contrast: three valid zero-reward vectors. A model, web scan, task-specific solver, hidden-test reader or new learner would duplicate a mechanism or hide a measured failure. Iteration 10 reuses the same carrier and composes only a finite instruction-supplied transformation grammar, metadata-only HARD-51 selection and upstream fresh-container replay; a universal parser, model, hidden-test reader, task-specific solver or new learner would duplicate a killed mechanism or hide a measured failure. The third OIDC runner supplied the decision-relevant contrast: three fresh-container HARD-51 rewards, all 0.0, with zero planned action commands from the finite grammar. Iteration 11 reuses the same OIDC/gate spine and composes only a finite reproducibility classifier; a GUI agent, VM boot, gated-body download, universal parser or new §6 verifier would duplicate a killed mechanism or hide the measured access boundary. The first runner failed only the broad source glob while preserving fail-closed no-score semantics; narrowing the glob and deduplicating receipt labels is cheaper and more honest than inventing a new verifier. The corrected fifth OIDC run supplied the decision-relevant contrast: 27/27 pinned source checks pass, eight prerequisites remain blocked, and no score or §6 verification is claimed. Iteration 12 reuses the OIDC carrier and gate spine to bind 25 website gitlinks and 24 compose files to a runner-owned source/compose receipt without deployment, gated bodies or score authority. The 28-check full local gate result supports pushing the pinned workflow to the distinct OIDC runner without changing source bytes or claiming credit. The corrected carrier is the fastest sufficient route because it changes only one guard, reuses all exact source bindings, and isolates the failure to a measured zero-model shape bug rather than benchmark access. The 30-check corrected-workflow full gate result supports pushing the corrected workflow to the second OIDC runner without changing source bytes or claiming credit. The corrected second OIDC run resolved the pinned website source/compose-config question in 22 seconds without deployment, image pulls, gated bodies or score authority. The final 32-check gate result closes the bounded website-substrate carrier iteration without deployment, gated bodies or score authority. Iteration 13 composes only a stdlib exact-EVPI/quotient contract, an empty external store, sixteen tests and one reused OIDC carrier. Learn-everything, model reasoning, parameter updates and exact trace stores were deleted before addition; a distinct runner is required before any independent finite replay claim. The distinct OIDC runner has now supplied the finite exact-byte replay; it still supplies no hard-benchmark or §6 result."
   },
   "required_capability": "Zero-model goal quotient, exact-EVPI minimal question, bounded K1 source admission, external editable relation store, distinct verifier, falsifiable relation distillation, and unchanged hard-benchmark honesty boundary.",
   "route_class": "COMPOSE",
@@ -2757,8 +2801,8 @@
   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
   "selected_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
   "selected_surviving_route": "COMPOSE_EXISTING_QUOTIENT_JIT_GLOBAL_RETRIEVAL_RELATION_GRAMMAR_OIDC_CARRIER_WITH_EXACT_EVPI_MINIMAL_QUESTION_AND_RELATION_DISTILLATION_V1",
-  "status": "PROPOSED__NEW_PROMPT_FULL_MISSION_READ__GOAL_DIRECTED_SUFFICIENT_KNOWING_CONTRACT_BUILT__LOCAL_TESTS_AND_FROZEN_RUNNER_BLOCK_REPLAY_PASS__DISTINCT_OIDC_RECEIPT_PENDING__SECTION_6_OPEN",
-  "stop_condition": "Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The runner-owned receipt is pending at this producer state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
+  "status": "PROPOSED__NEW_PROMPT_FULL_MISSION_READ__GOAL_DIRECTED_SUFFICIENT_KNOWING_CONTRACT_BUILT__DISTINCT_OIDC_FINITE_REPLAY_RECORDED__FINAL_METADATA_GATES_PENDING__SECTION_6_OPEN",
+  "stop_condition": "Iteration 13 freezes one external-store exact-EVPI contract, sixteen local tests, one exact-source/local-runner-block replay, one workflow checker, one durable reasoning receipt and one distinct OIDC runner workflow. The distinct runner-owned receipt is recorded at run 45408866721 on trigger head 4a488af98d3daafb316f5c19ae3a53b2f0af1eb0; final metadata gates are pending at this state. No untouched hard benchmark, aggregate score, independent §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed; the §5 loop continues on arbitrary purpose binding, authored repair content, GUI/browser control and fresh hard-environment qualification.",
   "terminal_credit_delta": 0,
   "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "terminal_proof_control": {
@@ -3027,6 +3071,7 @@
   },
   "verification": {
     "artifact_or_log_download_failure": "EOF from blob.core.windows.net and results-receiver.actions.githubusercontent.com; signed artifact URL returned HTTP 500; no local receipt was fabricated",
+    "authoritative_goal_directed_contract_run_id": 45408866721,
     "authority": "PRODUCER_RUN_SANDBOX_PLUS_GITHUB_ACTIONS_OIDC_DISTINCT_RUN_FOR_FINITE_TRANSPORT_REPLAY_ONLY__THIRD_OIDC_RUNNER_RECEIPT_RECORDED_FOR_FRESH_SWE_PRO_V2_HARD51_PURPOSE_ATTEMPT_ONLY__FOURTH_WORKFLOW_ADDED_FOR_PINNED_OSWORLD_V21_REPRODUCIBILITY_BLOCKER_PROBE_ONLY__FOURTH_OIDC_RUNNER_RECEIPT_RECORDED_WITH_FAIL_CLOSED_SOURCE_CHECK_FAILURE__CORRECTED_SECOND_RUN_PENDING__FIFTH_OIDC_RUNNER_RECEIPT_RECORDED_WITH_PINNED_RELEASE_SOURCE_VERIFICATION_AND_EIGHT_BLOCKERS__NO_SECTION_6_VERIFICATION__ITERATION12_LOCAL_PINNED_WEBSITE_SOURCE_AND_COMPOSE_CONFIG_REPLAY__RUNNER_RECEIPT_PENDING__NO_SECTION_6_VERIFICATION__ITER12_FULL_GATES_PASSED__DISTINCT_RUNNER_RECEIPT_PENDING__NO_SECTION_6_VERIFICATION__FIRST_WEBSITE_SUBSTRATE_OIDC_RECEIPT_FAIL_CLOSED__CORRECTED_FALLBACK_GUARD_LOCAL_REPLAY__SECOND_RUN_PENDING__NO_SECTION_6_VERIFICATION__CORRECTED_WORKFLOW_FULL_GATES_PASSED__SECOND_RUNNER_RECEIPT_PENDING__NO_SECTION_6_VERIFICATION__SECOND_WEBSITE_SUBSTRATE_OIDC_RECEIPT_RECORDED__FINAL_GATES_PENDING__NO_SECTION_6_VERIFICATION__FINAL_GATES_AFTER_RECEIPT_PASSED__NO_SECTION_6_VERIFICATION",
     "commands": [
       "python3 canonical/tools/the_environment_answers_the_question_v1.py --receipt canonical/verification/THE_ENVIRONMENT_ANSWERS_THE_QUESTION_20261123_V1.json --store canonical/astra_runtime/state/CARRIED_RELATION_V1.json",
@@ -3070,6 +3115,14 @@
     ],
     "final_pinned_blob_binding": "EXACT_BLOB_BINDING PASS 6; final report/ledger/intent reconciliation changed none of the six pinned blobs",
     "first_workflow_run_id": 45292371946,
+    "goal_directed_contract_runner_receipt": {
+      "git_blob_sha": "f25c2a54e7083d4cb62aee190d484ff09c80bd5a",
+      "independent_hard_benchmark_verification_completed": false,
+      "path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+      "sha256": "a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3",
+      "sidecar_git_blob_sha": "640bea643273dac23d40a17f060fccc6aca9d8ea",
+      "sidecar_path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256"
+    },
     "independent_finite_transport_replay_completed": true,
     "independent_hard_benchmark_verification_completed": false,
     "independent_verification_completed": false,

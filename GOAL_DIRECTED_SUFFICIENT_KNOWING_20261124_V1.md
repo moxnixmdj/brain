@@ -1,6 +1,6 @@
 # Goal-directed sufficient knowing — minimal plan, build, and honest boundary
 
-**Date:** 2026-11-24 UTC · **Branch:** `arena/6f8ac9ce-brain` · **Status:** local zero-model contract instrument built, 16 tests passing, distinct-runner binding in progress; §6 NOT MET; no capability, family, terminal or truth credit.
+**Date:** 2026-11-24 UTC · **Branch:** `arena/6f8ac9ce-brain` · **Status:** local zero-model contract instrument built, 16 tests passing, runner-owned OIDC finite replay recorded, final metadata gates pending; §6 NOT MET; no capability, family, terminal or truth credit.
 
 ## 0. Requirements read, and §2 contradiction resolved
 
@@ -68,10 +68,23 @@ New contract tests: `canonical/tests/test_goal_directed_sufficient_knowing_v1.py
 
 This is a deletion-first composition of already-owned mechanisms (goal quotient, JIT K1 boundary, global retrieval completeness firewall, relation grammar, distinct verifier) plus one compact new policy surface. No new runtime model, no parameter training, no external runtime dependency, no benchmark-specific solver, and no hidden/gated bodies.
 
+## 5A. Runner-owned finite replay
+
+- OIDC run: `45408866721`, attempt 1, job `138496906549`, conclusion `success` in 21s.
+- Trigger head: `4a488af98d3daafb316f5c19ae3a53b2f0af1eb0`; runner receipt commit: `67a343f6`.
+- Receipt: `canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json`.
+- SHA-256 / sidecar: `a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3`.
+- Receipt Git blob: `f25c2a54e7083d4cb62aee190d484ff09c80bd5a`; sidecar blob: `640bea643273dac23d40a17f060fccc6aca9d8ea`.
+- OIDC `jti`: `1a8b7197-7788-4765-9c5e-043e913e0b06`; verifier identity is the distinct workflow ref plus run ID.
+- Verified: 3 exact blobs, 16 tests, 16 measurement checks, one derived minimal query, exact EVPI, zero model calls, zero runtime network calls, zero parameter writes, zero environment actions, zero hard-benchmark tasks.
+- Not verified: every item in the `not_verified` list of the receipt, including untouched hard benchmarks, arbitrary purpose, authored repair content, GUI/browser control, shipped-agent integration and §6.
+
+The runner is a build-time verifier only. OIDC provenance never becomes a Brain runtime dependency and never changes terminal truth.
+
 ## 6. Honest tests and blockers
 
-Sixteen local contract tests pass, including exact EVPI normalization, derived-question generation, store add/remove without parameter writes, open-world and model-source refusals, scoped relation-only distillation and cross-environment contrast licensing. These are regression/measurement only, not §6 hard-benchmark tests. The §6 test set remains unseen hard instances of OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena-Verified/DeepSearchQA/WideSearch-class completeness problems and fresh arbitrary computer environments, run only by our own system with zero model calls and a distinct maintainer-style verifier.
+Sixteen local contract tests pass, including exact EVPI normalization, derived-question generation, store add/remove without parameter writes, open-world and model-source refusals, scoped relation-only distillation and cross-environment contrast licensing. A distinct GitHub Actions OIDC runner re-ran the exact pinned module/test/store bytes from `/tmp` under isolated Python, checked 16 measurement conditions, bound 3 exact blobs, verified zero model/network/parameter writes, and recorded a runner-owned receipt. These are finite regression/replay measurements only, not §6 hard-benchmark tests. The §6 test set remains unseen hard instances of OSWorld 2.1, SWE-Bench Pro V2 HARD-51, Terminal-Bench 4.1, WebArena-Verified/DeepSearchQA/WideSearch-class completeness problems and fresh arbitrary computer environments, run only by our own system with zero model calls and a distinct maintainer-style verifier.
 
 **Fully user/external-authority-dependent blockers, logged once:** owner/gated access to OSWorld 2.1 task classes and complete assets, reachable self-hosted websites, provider VM image, pinned evaluator dependencies, maintainer-style verifier, and official hard-benchmark execution/§6 countersign. I am continuing on all other work and do not ask for them here.
 
-No OSWorld task, reward vector, aggregate score, §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed. `truth.achieved=false`; §6 remains `NOT_MET`.
+No OSWorld task, reward vector, aggregate score, §6 verification, capability/family/terminal credit, PR, merge or terminal truth change is claimed. Final metadata gates after the runner receipt are pending at this report state; no post-receipt gate result is backdated. `truth.achieved=false`; §6 remains `NOT_MET`.

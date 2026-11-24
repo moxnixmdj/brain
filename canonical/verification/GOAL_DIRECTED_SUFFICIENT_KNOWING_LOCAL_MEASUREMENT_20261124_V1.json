@@ -1,11 +1,22 @@
 {
-  "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1",
-  "date": "2026-11-24",
   "authority": "PRODUCER_SIDE_LOCAL_CONTRACT_MEASUREMENT__NOT_INDEPENDENT_VERIFICATION",
-  "status": "LOCAL_TESTS_AND_FROZEN_RUNNER_BLOCK_REPLAY_PASS__DISTINCT_OIDC_RECEIPT_PENDING",
-  "branch": "arena/6f8ac9ce-brain",
   "base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
+  "branch": "arena/6f8ac9ce-brain",
+  "capability_credit_delta": 0,
+  "date": "2026-11-24",
   "exact_source_bindings": {
+    ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml": {
+      "git_blob_sha": "908f2e0edd94f5a021345d9f1b59b215537be293",
+      "sha256": "2fce3df5477e5ba7016eebfbcb91d200599b53ce2db8956d57d4a3be61e3d4e4"
+    },
+    "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md": {
+      "git_blob_sha": "7ca70f4d67f2dc49e51824bbc98d038bec11fd81",
+      "sha256": "cbc90560940e7719d383b94ce4a86c3a116bacb205162be8783825abf4dc2e69"
+    },
+    "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": {
+      "git_blob_sha": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
+      "sha256": "939f8a433f1f94c94b4be24cbb05f1baef3c0736728bf64fab30dde50c6fc2e4"
+    },
     "canonical/runtime/goal_directed_sufficient_knowing_v1.py": {
       "git_blob_sha": "e64204cffb1a7ae5043a77c1be153687fd63371e",
       "sha256": "cbdc8db87e756d36587fcdadc91b54e0cf14500263aa37857689b1c3ff38ad5f"
@@ -14,50 +25,66 @@
       "git_blob_sha": "03d195285cc60ec470566c993b6635410ea1a063",
       "sha256": "cd7978af65309a4ba9e562f2d7fbb8345b62e71d1de1e8bf22e408afc1269804"
     },
-    "canonical/astra_runtime/state/GOAL_DIRECTED_SUFFICIENT_KNOWLEDGE_STORE_V1.json": {
-      "git_blob_sha": "7c9c70db9fa4ec28bc01ff9442108ede2e168c92",
-      "sha256": "939f8a433f1f94c94b4be24cbb05f1baef3c0736728bf64fab30dde50c6fc2e4"
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json": {
+      "git_blob_sha": "f25c2a54e7083d4cb62aee190d484ff09c80bd5a",
+      "sha256": "a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3"
     },
-    ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml": {
-      "git_blob_sha": "908f2e0edd94f5a021345d9f1b59b215537be293",
-      "sha256": "2fce3df5477e5ba7016eebfbcb91d200599b53ce2db8956d57d4a3be61e3d4e4"
+    "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256": {
+      "git_blob_sha": "640bea643273dac23d40a17f060fccc6aca9d8ea",
+      "sha256": "7dda54657bcccae6866df5964f12209567610ab365b65164138f15bd1d95a435"
     },
     "canonical/verification/check_goal_directed_sufficient_knowing_workflow_v1.py": {
       "git_blob_sha": "05651af6dd89c9ac6b544be74fe247fc7cf8a793",
       "sha256": "654500c5ae189863950667aaf1f8b36ada7aac97abc291c9f651b7daa0604f17"
-    },
-    "GOAL_DIRECTED_SUFFICIENT_KNOWING_20261124_V1.md": {
-      "git_blob_sha": "8dd245dbd957fdfdea9ce54e93b032f1a02d32b2",
-      "sha256": "23c1f90805ebef92698eabcb02f00cd2f294356efd6f2950b2e2b832605d8782"
     }
   },
+  "family_credit_delta": 0,
+  "final_metadata_gates": {
+    "status": "PENDING",
+    "wrapper": "/tmp/run_iter13_final_lightweight_gates.py"
+  },
   "measurements": {
-    "contract_tests": "16 passed in 0.24s",
-    "frozen_runner_block_replay_from_tmp": "EXACT_BLOB_BINDING_PASS 3; FROZEN_CONTRACT_REPLAY_PASS 16 tests 16 checks",
-    "workflow_static_checker": "GOAL_DIRECTED_SUFFICIENT_KNOWING_WORKFLOW_CHECK_PASS; PYTHON_BLOCKS 4; FORBIDDEN_RUNTIME_IMPORTS []",
-    "workflow_yaml_parse": "YAML_OK branches ['arena/6f8ac9ce-brain'] steps 7",
+    "benchmark_score_authority": false,
     "cli_decision": "K1_QUERY_REQUIRED__ASK_ONLY_THE_DECIDING_QUESTION",
-    "selected_query_count": 1,
-    "value_of_information": 0.5,
-    "value_of_information_basis": "EXACT_EVPI",
+    "contract_tests": "16 passed in 0.24s",
+    "environment_actions_executed": 0,
+    "frozen_runner_block_replay_from_tmp": "EXACT_BLOB_BINDING_PASS 3; FROZEN_CONTRACT_REPLAY_PASS 16 tests 16 checks",
+    "hard_benchmark_tasks_consumed": 0,
+    "independent_finite_contract_replay_completed": true,
+    "independent_verification_completed": false,
+    "parameters_written": 0,
     "question_source": "DERIVED_FROM_ACTION_PARTITION",
     "runtime_model_calls": 0,
     "runtime_network_calls": 0,
-    "parameters_written": 0,
-    "environment_actions_executed": 0,
-    "hard_benchmark_tasks_consumed": 0,
-    "benchmark_score_authority": false,
-    "independent_verification_completed": false,
-    "section_6_verifications": 0
+    "section_6_verifications": 0,
+    "selected_query_count": 1,
+    "value_of_information": 0.5,
+    "value_of_information_basis": "EXACT_EVPI",
+    "workflow_static_checker": "GOAL_DIRECTED_SUFFICIENT_KNOWING_WORKFLOW_CHECK_PASS; PYTHON_BLOCKS 4; FORBIDDEN_RUNTIME_IMPORTS []",
+    "workflow_yaml_parse": "YAML_OK branches ['arena/6f8ac9ce-brain'] steps 7"
   },
+  "measures_note": "The distinct runner receipt is narrow finite replay evidence, not independent section-6 verification.",
   "runner_receipt": {
-    "status": "PENDING_DISTINCT_GITHUB_ACTIONS_OIDC_RUN",
+    "conclusion": "success",
+    "hard_benchmark_tasks_consumed": 0,
+    "oidc_jti": "1a8b7197-7788-4765-9c5e-043e913e0b06",
     "path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.json",
+    "receipt_git_blob_sha": "f25c2a54e7083d4cb62aee190d484ff09c80bd5a",
+    "receipt_sha256": "a7cacaab194841ba744787686b8d7dd38eb3c14093c0523a3c2a22ff254402d3",
+    "runner_receipt_commit": "67a343f6",
+    "section_6_verifications": 0,
+    "sidecar_git_blob_sha": "640bea643273dac23d40a17f060fccc6aca9d8ea",
     "sidecar_path": "canonical/verification/GOAL_DIRECTED_SUFFICIENT_KNOWING_RUNNER_RECEIPT_20261124_V1.sha256",
-    "workflow_path": ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml"
+    "status": "RUNNER_OWNED_OIDC_RECEIPT_RECORDED__ZERO_CREDIT",
+    "trigger_head_sha": "4a488af98d3daafb316f5c19ae3a53b2f0af1eb0",
+    "verified_measurements": 16,
+    "workflow_job_id": 138496906549,
+    "workflow_path": ".github/workflows/zero-model-goal-directed-sufficient-knowing-v1.yml",
+    "workflow_run_attempt": 1,
+    "workflow_run_id": 45408866721
   },
-  "capability_credit_delta": 0,
-  "family_credit_delta": 0,
+  "schema": "BRAIN_GOAL_DIRECTED_SUFFICIENT_KNOWING_LOCAL_MEASUREMENT_20261124_V1",
+  "status": "LOCAL_TESTS_AND_FROZEN_RUNNER_BLOCK_REPLAY_PASS__DISTINCT_OIDC_RECEIPT_RECORDED__FINAL_METADATA_GATES_PENDING",
   "terminal_credit_delta": 0,
   "truth": {
     "achieved": false,
