@@ -600,5 +600,62 @@
   "the which-object probes are four artifact kinds read from this machine's pages; a kind with no decoy here is not measured",
   "a check that changes no bytes and accepts a decoy is BLIND, not wrong: it is a validity test, and the honest repair is to stop calling it a verification",
   "the repaired rule is measured on this machine's pages; its behaviour on a machine whose pages print different vocabulary is not measured"
- ]
+ ],
+ "shipped_round": {
+  "what_it_is": "the round that owns the code this round repaired, re-run after the repair and recorded here need for need so a second machine can compare it",
+  "instrument": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+  "programs_read": 446,
+  "edges": 87,
+  "transitions_set_aside": {
+   "viewer": 48,
+   "not_stated": 72,
+   "no_directory_creation": 3
+  },
+  "needs": {
+   "total": 13,
+   "held": 11,
+   "refused": 2,
+   "statuses": [
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+    "REFUSED__NAMES_NOTHING_IN_THIS_WORLD"
+   ],
+   "ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06",
+    "N07",
+    "N08",
+    "N09",
+    "N10",
+    "N11",
+    "H01",
+    "H02"
+   ]
+  },
+  "gates": {
+   "G1_a_usage_line_is_a_grammar": true,
+   "G2_the_grammar_moves_state": true,
+   "G3_a_path_of_two_edges": true,
+   "G4_a_refusal_is_a_refinement": true,
+   "G5_the_machine_refuses": true,
+   "G6_the_check_is_derived": true,
+   "G7_zero": true
+  },
+  "identical_to_the_round_before_the_repair": true,
+  "why_it_did_not_move": "the citation this round repaired is a receipt field that neither edges_of() nor goal_holds() reads, which is why the defect could persist"
+ }
 }

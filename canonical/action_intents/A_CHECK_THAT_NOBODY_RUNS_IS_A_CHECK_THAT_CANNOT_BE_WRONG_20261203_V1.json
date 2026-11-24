@@ -802,7 +802,7 @@
   "edges_with_a_discriminating_check": "3/87",
   "shipped_inert_of_accepted_destroyers": "7/8",
   "repaired_inert": 0,
-  "the_rounds_13_needs_unchanged": "11 held / 2 refused, G1..G7 MET, identical to 1da0b549",
+  "the_rounds_13_needs_unchanged": "11 held / 2 refused, 87 edges, 446 pages read, G1..G7 MET -- re-run after the repair and recorded in the receipt under shipped_round",
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0

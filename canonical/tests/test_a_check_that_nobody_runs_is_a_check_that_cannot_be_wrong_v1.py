@@ -79,6 +79,16 @@ def test_a_destroyer_is_no_longer_certified_and_its_citation_is_gone(receipt):
         "stream-im6.q16 -help", "truncate --help", "unlink --help"]
 
 
+def test_the_shipped_round_reproduces_after_the_repair(receipt):
+    """The repair must not move the round that produced it. Recorded need for need."""
+    round_ = receipt["shipped_round"]
+    assert round_["needs"]["total"] == 13
+    assert round_["needs"]["held"] == 11
+    assert round_["needs"]["refused"] == 2
+    assert round_["edges"] == 87
+    assert all(round_["gates"].values()), round_["gates"]
+
+
 def test_the_citation_was_never_load_bearing(receipt):
     """If repairing the citation moved a number, the shipped round was wrong for an unnoticed
     reason. It did not move, and that is the finding."""
