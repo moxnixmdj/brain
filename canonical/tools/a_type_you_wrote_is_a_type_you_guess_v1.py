@@ -109,8 +109,14 @@ SCHEMA = "BRAIN_A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 DATE = "2026-12-02"
 
-CHECK_DEADLINE = 2.0          # a check that needs longer is not a check, it is a run
-WORKERS = 12                  # declared; a bound on parallelism, not on the work
+# A CHECK THAT NEEDS LONGER IS NOT A CHECK, IT IS A RUN -- but the bound must not be so tight
+# that a loaded machine turns a verdict into a timeout. Measured: at 2.0 s with 12 workers the
+# witness set moved between two runs of the same instrument (155 of 189 one run, 160 the
+# next), because `node --trace-*` sometimes exceeded the bound under load. An instrument whose
+# answer depends on how busy the machine is has no answer, so the bound is loosened, the
+# parallelism is cut, and anything still unstable is dropped and counted.
+CHECK_DEADLINE = 5.0
+WORKERS = 6                   # declared; a bound on parallelism, not on the work
 REPEATS = 2                   # a witness must say the same thing twice
 
 
@@ -354,8 +360,16 @@ def witness_scan(candidates: Sequence[tuple[str, str]], root: pathlib.Path,
         second = {(program, flag): row for program, flag, row in pool.map(_pair_run, jobs,
                                                                          chunksize=4)}
     repeated = [pair for pair in separating if second[pair]["codes"] == first[pair]["codes"]]
+    # a THIRD pass, serial, over the survivors: the set that is reported must be the set that
+    # can be reproduced, not the set that happened to fit in the deadline the first time.
+    unstable: list[str] = []
+    for program, flag in repeated:
+        _p, _f, row = _pair_run((program, flag, root, tuple(names)))
+        if row["codes"] != first[(program, flag)]["codes"]:
+            unstable.append(f"{program} {flag}")
     stable = [pair for pair in repeated
-              if not first[pair]["changed_objects"] and not second[pair]["changed_objects"]]
+              if not first[pair]["changed_objects"] and not second[pair]["changed_objects"]
+              and f"{pair[0]} {pair[1]}" not in unstable]
     # a check that changed the room is a WRITE, whatever it returned -- `shred --verbose`
     # separates the objects on this machine and destroys the one it is asked about.
     mutant = sorted({f"{program} {flag}" for (program, flag), row in first.items()
@@ -368,6 +382,7 @@ def witness_scan(candidates: Sequence[tuple[str, str]], root: pathlib.Path,
         "separating": len(separating),
         "repeating": len(repeated),
         "stable": len(stable),
+        "unstable_on_a_third_pass": unstable,
         "witnesses": stable,
         "changed_the_room": len(mutant),
         "changed_the_room_sample": mutant[:12],
@@ -503,6 +518,112 @@ def distinctions(witnesses: Sequence[str], sigs: dict[str, tuple[str, ...]],
             "runs_saved_by_one_name_per_distinction": len(witnesses) - len(classes)}
 
 
+def inherited_scanner(path: pathlib.Path | None = None) -> dict[str, Any]:
+    """The scanner this tree already had, priced on the same room.
+
+    `canonical/runtime/scan_and_diff_against_memory_v1.py` types a file by which of its
+    declared validators accept the bytes -- the right shape, and the reason this round's rule
+    could be stated at all. What it does NOT do is derive the validators: its `VALIDATORS`
+    table is SEVEN kinds written by its author (json, python, utf8_text, png, gzip, tar, zip).
+    A signature over a written list is bounded by the list, which is the same defect the
+    guide's kind table has, one layer up. This prices that on the same twenty objects.
+    """
+    import importlib.util
+    where = path or (REPO / "canonical/runtime/scan_and_diff_against_memory_v1.py")
+    if not where.is_file():
+        return {"available": False}
+    spec = importlib.util.spec_from_file_location("_inherited_scanner", where)
+    if spec is None or spec.loader is None:
+        return {"available": False}
+    module = importlib.util.module_from_spec(spec)
+    # the module uses dataclasses, which resolve their own __module__ through sys.modules:
+    # registering the module before executing it is required, not tidiness.
+    sys.modules[spec.name] = module
+    spec.loader.exec_module(module)
+    return {"available": True, "module": module,
+            "written_kinds": sorted(getattr(module, "VALIDATORS", {})),
+            "path": str(where.relative_to(REPO))}
+
+
+def rule_applied_to_the_inherited_kinds(
+        inherited: dict[str, Any],
+        room_a: tuple[pathlib.Path, Sequence[str], dict[str, str]],
+        room_b: tuple[pathlib.Path, Sequence[str], dict[str, str]],
+        room_u: tuple[pathlib.Path, Sequence[str], dict[str, str]]) -> dict[str, Any]:
+    """The same four tests, pointed at the seven kinds this tree had already written.
+
+    This is the measurement that makes the round belong to the tree instead of beside it. The
+    inherited scanner's validators are not declared checks read from a page, so the rule cannot
+    be applied to its *provenance* -- but it can be applied to its *verdicts*, which is what a
+    validator is for. Of its seven kinds, `python` and `utf8_text` are questions about an
+    object's CONTENT, not its type: a `.md` and a `.py` both satisfy both.
+    """
+    if not inherited.get("available"):
+        return {"available": False}
+    validators = inherited["module"].VALIDATORS
+    root_a, names_a, labels_a = room_a
+    root_b, names_b, labels_b = room_b
+    root_u, names_u, labels_u = room_u
+
+    def verdict(kind: str, root: pathlib.Path, name: str) -> bool | None:
+        before = _inventory(root)
+        try:
+            code = validators[kind](str(root / name))
+        except Exception:                     # noqa: BLE001
+            return None
+        after = _inventory(root)
+        if before != after:
+            return None                       # a validator that writes is not a validator
+        return code == 0
+
+    rows: list[dict[str, Any]] = []
+    survivors: list[str] = []
+    for kind in sorted(validators):
+        # SEPARATION IS TESTED ON THE ROOM WHERE THE KIND CAN OCCUR. Asking a png validator to
+        # separate a room with no PNG in it answers "no", which is a fact about the room and
+        # not about the validator -- measured here as png and zip being wrongly removed when
+        # the test was run on the guide's room.
+        on_u = {name: verdict(kind, root_u, name) for name in names_u}
+        on_a = {name: verdict(kind, root_a, name) for name in names_a}
+        on_a2 = {name: verdict(kind, root_a, name) for name in names_a}
+        separates = (any(on_u.values()) and any(value is False for value in on_u.values()))
+        repeats = on_a == on_a2 and all(on_u[name] == on_u2[name] for name in names_u
+                                        for on_u2 in [{n: verdict(kind, root_u, n)
+                                                       for n in names_u}])
+        by_kind: dict[str, list[bool]] = {}
+        for name in names_a:
+            if on_a[name] is not None:
+                by_kind.setdefault(labels_a[name], []).append(bool(on_a[name]))
+        for name in names_b:
+            got = verdict(kind, root_b, name)
+            if got is not None:
+                by_kind.setdefault(labels_b[name], []).append(got)
+        split = {label: sorted({"ACCEPT" if value else "REJECT" for value in values})
+                 for label, values in by_kind.items() if len(set(values)) > 1}
+        survives = bool(separates and repeats and not split)
+        if survives:
+            survivors.append(kind)
+        rows.append({"written_kind": kind, "separates": separates, "repeats": repeats,
+                     "content_invariant_per_kind": not split, "contradicted_on": split,
+                     "survives_the_rule": survives})
+
+    if survivors:
+        def signature_of(name: str) -> tuple[str, ...]:
+            return tuple(kind for kind in survivors
+                         if verdict(kind, root_u, name) is True)
+        sigs = {name: signature_of(name) for name in names_u}
+        surviving = discrimination(sigs, labels_u)
+        surviving_empty = sorted(name for name, sig in sigs.items() if not sig)
+    else:
+        surviving, surviving_empty = None, []
+    return {"available": True, "rows": rows,
+            "written_kinds": len(validators),
+            "survivors": survivors,
+            "removed": [row["written_kind"] for row in rows if not row["survives_the_rule"]],
+            "survivors_discrimination": surviving,
+            "survivors_empty_signature": surviving_empty}
+
+
 def indistinguishables(sigs: dict[str, tuple[str, ...]], labels: dict[str, str]
                        ) -> dict[str, Any]:
     """The objects no witness separates: the part of the type no machine here can decide."""
@@ -629,6 +750,24 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
     names_u = sorted(labels_u)
     written_u = written_types(root_u, names_u)
     sigs_u = signatures(witnesses, root_u, names_u)
+    inherited = inherited_scanner()
+    inherited_sigs: dict[str, tuple[str, ...]] = {}
+    if inherited.get("available"):
+        module = inherited["module"]
+        for name in names_u:
+            try:
+                inherited_sigs[name] = tuple(module.signature(str(root_u / name)))
+            except Exception:                     # noqa: BLE001 - a scanner that throws is a datum
+                inherited_sigs[name] = ("<raised>",)
+
+    rule_on_inherited = rule_applied_to_the_inherited_kinds(
+        inherited, (root_a, names_a, labels_a), (root_b, names_b, labels_b),
+        (root_u, names_u, labels_u))
+
+    disc = {"written": written_discrimination(written_u, labels_u),
+            "witnessed": discrimination(sigs_u, labels_u)}
+    disc_written = disc["written"]["different_pairs_separated"]
+    disc_witnessed = disc["witnessed"]["different_pairs_separated"]
 
     storing = {
         "room_a_witnesses": [f"{p} {f}" for p, f in sorted(set(scan_a["witnesses"]))],
@@ -685,8 +824,7 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
         "discrimination": {
             "room_a": {"written": written_discrimination(written_a, labels_a),
                        "witnessed": discrimination(sigs_a, labels_a)},
-            "room_u": {"written": written_discrimination(written_u, labels_u),
-                       "witnessed": discrimination(sigs_u, labels_u)},
+            "room_u": disc,
         },
         "indistinguishable": {
             "room_a": indistinguishables(sigs_a, labels_a),
@@ -696,10 +834,44 @@ def _measure(stack: "contextlib.ExitStack", *, budget: float) -> dict[str, Any]:
             "room_a": distinctions(names_of, sigs_a, labels_a),
             "room_u": distinctions(names_of, sigs_u, labels_u),
         },
+        "inherited_scanner": {
+            "path": inherited.get("path"),
+            "written_kinds": inherited.get("written_kinds", []),
+            "written_kinds_count": len(inherited.get("written_kinds", [])),
+            "discrimination": (discrimination(inherited_sigs, labels_u)
+                               if inherited_sigs else None),
+            "distinct_signatures": (len(set(inherited_sigs.values()))
+                                    if inherited_sigs else 0),
+            "empty_signature_objects": (sorted(name for name, sig in inherited_sigs.items()
+                                               if not sig) if inherited_sigs else []),
+            "same_four_tests_applied": rule_on_inherited,
+        },
         "writable_or_destructive_declared_checks": {
             "count": storing["scan_a"]["changed_the_room"],
             "of_candidates": len(candidates),
             "detail": storing["changed_the_room_sample"]},
+        "where_this_loses": {
+            "honest_comparison_on_room_u": {
+                "written_kind_table": disc_written,
+                "inherited_scanner_as_written": (
+                    discrimination(inherited_sigs, labels_u)["different_pairs_separated"]
+                    if inherited_sigs else None),
+                "inherited_scanner_after_the_four_tests": (
+                    (rule_on_inherited.get("survivors_discrimination") or {})
+                    .get("different_pairs_separated")),
+                "this_rounds_derived_witnesses": disc_witnessed,
+                "different_pairs": disc["witnessed"]["different_pairs"]},
+            "the_plain_statement": (
+                "the scanner this tree already had separates MORE different pairs than the derived "
+                "witness set does, and this round does not beat it on that number: its validators "
+                "were written by its author for kinds its author had met, and one of them (python) "
+                "is a content test that this round's rule removes. What the derived set buys that "
+                "the authored one cannot is that nobody had to know the kinds in advance, which "
+                "is the only property that transfers to a room no author has seen."),
+            "where_the_authored_scanner_wins": (
+                "on this room, by 6 of 189 different pairs (161 against 155); it also leaves 5 of "
+                "20 objects with an empty signature against this round's 6"),
+        },
         "statable_goals": {"room_u_written": statable(written_u, sigs_u, labels_u)},
         "storing": storing,
         "signatures_on_room_u": {name: list(sig) for name, sig in sorted(sigs_u.items())},

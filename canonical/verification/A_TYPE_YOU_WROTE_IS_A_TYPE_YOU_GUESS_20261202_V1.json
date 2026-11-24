@@ -271,7 +271,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 83.0
+   "seconds": 78.9
   },
   "room_a_names": [
    "docker-entrypoint.sh --trace-deprecation",
@@ -780,6 +780,128 @@
    "runs_saved_by_one_name_per_distinction": 41
   }
  },
+ "inherited_scanner": {
+  "path": "canonical/runtime/scan_and_diff_against_memory_v1.py",
+  "written_kinds": [
+   "gzip",
+   "json",
+   "png",
+   "python",
+   "tar",
+   "utf8_text",
+   "zip"
+  ],
+  "written_kinds_count": 7,
+  "discrimination": {
+   "objects": 20,
+   "distinct_signatures": 8,
+   "distinct_producer_kinds": 19,
+   "different_pairs": 189,
+   "different_pairs_separated": 161,
+   "same_pairs": 1,
+   "accuracy_on_different_pairs": 0.8519
+  },
+  "distinct_signatures": 8,
+  "empty_signature_objects": [
+   "line.txt.bz2",
+   "line.txt.xz",
+   "noise.bin",
+   "pic.jpg",
+   "store.db"
+  ],
+  "same_four_tests_applied": {
+   "available": true,
+   "rows": [
+    {
+     "written_kind": "gzip",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    },
+    {
+     "written_kind": "json",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    },
+    {
+     "written_kind": "png",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    },
+    {
+     "written_kind": "python",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": false,
+     "contradicted_on": {
+      "plain-text": [
+       "ACCEPT",
+       "REJECT"
+      ]
+     },
+     "survives_the_rule": false
+    },
+    {
+     "written_kind": "tar",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    },
+    {
+     "written_kind": "utf8_text",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    },
+    {
+     "written_kind": "zip",
+     "separates": true,
+     "repeats": true,
+     "content_invariant_per_kind": true,
+     "contradicted_on": {},
+     "survives_the_rule": true
+    }
+   ],
+   "written_kinds": 7,
+   "survivors": [
+    "gzip",
+    "json",
+    "png",
+    "tar",
+    "utf8_text",
+    "zip"
+   ],
+   "removed": [
+    "python"
+   ],
+   "survivors_discrimination": {
+    "objects": 20,
+    "distinct_signatures": 8,
+    "distinct_producer_kinds": 19,
+    "different_pairs": 189,
+    "different_pairs_separated": 149,
+    "same_pairs": 1,
+    "accuracy_on_different_pairs": 0.7884
+   },
+   "survivors_empty_signature": [
+    "noise.bin",
+    "pic.jpg",
+    "store.db"
+   ]
+  }
+ },
  "writable_or_destructive_declared_checks": {
   "count": 16,
   "of_candidates": 2319,
@@ -797,6 +919,17 @@
    "stream-im6 -version",
    "stream-im6.q16 -help"
   ]
+ },
+ "where_this_loses": {
+  "honest_comparison_on_room_u": {
+   "written_kind_table": 114,
+   "inherited_scanner_as_written": 161,
+   "inherited_scanner_after_the_four_tests": 149,
+   "this_rounds_derived_witnesses": 155,
+   "different_pairs": 189
+  },
+  "the_plain_statement": "the scanner this tree already had separates MORE different pairs than the derived witness set does, and this round does not beat it on that number: its validators were written by its author for kinds its author had met, and one of them (python) is a content test that this round's rule removes. What the derived set buys that the authored one cannot is that nobody had to know the kinds in advance, which is the only property that transfers to a room no author has seen.",
+  "where_the_authored_scanner_wins": "on this room, by 6 of 189 different pairs (161 against 155); it also leaves 5 of 20 objects with an empty signature against this round's 6"
  },
  "statable_goals": {
   "room_u_written": {
@@ -983,7 +1116,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 83.0
+   "seconds": 78.9
   },
   "scan_b": {
    "candidates": 2319,
@@ -995,7 +1128,7 @@
    "accepted_everything": 1338,
    "accepted_nothing": 913,
    "unreadable": 2,
-   "seconds": 70.8
+   "seconds": 73.8
   },
   "changed_the_room_sample": [
    "ln --verbose",
@@ -1214,7 +1347,7 @@
   }
  },
  "cost": {
-  "seconds": 191.8,
+  "seconds": 215.1,
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0

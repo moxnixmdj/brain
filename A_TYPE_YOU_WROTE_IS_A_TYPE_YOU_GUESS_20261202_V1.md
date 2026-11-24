@@ -1,201 +1,219 @@
 # A type you wrote is a type you guess
 
-**2026-12-02 · branch `arena/eaf4537b-brain` · receipt `canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json`**
-**Tool `canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py` · 0 model calls · 0 parameters · 0 network at run time**
+**2026-12-02 · branch `arena/eaf4537b-brain`**
+**Tool `canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py` · receipt `canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json` · 0 model calls · 0 parameters · 0 network at run time**
 
 ---
 
+## 0. The headline, including the part that is not a win
+
+This round set out to replace a hand-written type table with a type system derived from the
+machine's own declared checks. It did that, and **it does not beat the scanner this tree
+already has** on the only number both of them produce:
+
+| how an object gets its type | different pairs separated (of 189) |
+|---|---|
+| the guide's hand-written seven-name kind table | **114** |
+| `scan_and_diff_against_memory_v1`, validators as its author wrote them | **161** |
+| the same scanner after this round's four tests are applied to it | 149 |
+| **this round's derived witnesses** | **155** |
+
+The authored scanner wins by six pairs. It also leaves 5 of 20 objects typed by nothing,
+against this round's 6. If the deliverable were a better number on this room, the honest
+answer would be to keep the scanner and go home.
+
+It is not the number that decides it, and this file has to be precise about why — because
+"my mechanism is principled" is exactly the sentence this tree keeps catching itself saying.
+
 ## 1. The debt this round pays, in the last round's own words
 
-`THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md` §6 ended with three obligations and said so
-that they could not be quietly dropped. The first and the third are the subject here:
+`THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.md` §6 ended with three obligations, written down
+so they could not be quietly dropped. The first and third are the subject here:
 
 > 1. the same instrument, unchanged, against a **room it has never seen** — an unfamiliar tree
 >    with objects whose kinds the vocabulary does not already contain;
 > 3. a written answer to whether a refusal read once should be **stored**, and if so in what
 >    generalised form
 
-That round also told on itself in one line, and the line is the whole round:
+That round also told on itself in one line: *"The one typed table in the file is a verb's
+(in-kind, out-kind) pair"*. There were **two** tables. The second was `REFINES` / `kind_of()`:
+seven names and a chain of magic numbers deciding which name an object gets. Every need in that
+round was a *target kind*, every edge was *typed over kinds*, and every goal check compared a
+*kind*. The types were load-bearing and they were written by hand.
 
-> The one typed table in the file is a verb's (in-kind, out-kind) pair …
-
-There were in fact **two** tables. The verb table it confessed to, and `REFINES` / `kind_of()`:
-seven names (`plain, archive, compressed, patch, json, executable, directory`) and a chain of
-magic numbers that decides which name an object gets. Every need in that round was a *target
-kind*, every edge was *typed over kinds*, and every goal check compared a *kind*. The types
-were the load-bearing part, and they were written by hand.
-
-So: build a room out of objects whose producers this tree has never seen, and ask the table
-what it thinks they are.
-
-## 2. What the table does on a room it never saw
+## 2. What the hand-written table does on a room it never saw
 
 Twenty objects, built by ten producers (`tar`, `gzip`, `xz`, `bzip2`, `zip`, `ar`, `openssl`,
-`sqlite3`, `convert`, `cp`), nineteen distinct producer kinds. The written table gives them
-**five** names:
+`sqlite3`, `convert`, `cp`), nineteen distinct producer kinds. The table gives them **five**
+names. `compressed` covers gzip, xz, bzip2, zip and tar-gzip. `plain` covers eleven kinds:
+plain-text, empty, random-bytes, `ar`, sqlite, X.509 certificate, PEM key, XML, PNG, JPEG and
+ELF object.
 
-| written name | producer kinds it covers |
-|---|---|
-| `compressed` | gzip, xz, bzip2, zip, tar-gzip |
-| `plain` | plain-text, empty, random-bytes, ar, sqlite, x509-cert, pem-key, xml, png, jpeg, elf-object |
-| `archive`, `json`, `executable` | one kind each |
+**The table is right where it has a name.** On the guide's own room — the seven kinds it was
+written for — its name *is* the producer's kind, object for object: **21 of 21** different
+pairs (T1). It was not a bad table for the room it was born in, and that is the control which
+makes the next sentence a measurement instead of a complaint.
 
-Two things are true at once and both matter.
+**It is confidently wrong where it does not.** On the unseen room: **114 of 189** different
+pairs (60.3 %). And the cost is not a mislabelled object. A need is a *target kind*: an agent
+whose vocabulary cannot name a certificate cannot hold the goal "extract the public key from
+this certificate". It does not answer wrongly; it cannot ask. **11 of 19** producer kinds are
+collapsed into one name.
 
-**The table is right where it has a name.** On the guide's own room — the seven kinds the
-table was written for — its name *is* the producer's kind, object for object: **21 of 21**
-different pairs separated (T1). It was not a bad table for the room it was born in. This is
-the control, and it is the reason the next paragraph is a finding rather than a complaint.
+## 3. The tree already had the right shape — with a written table inside it
 
-**The table is confidently wrong where it does not.** A SQLite database, an X.509
-certificate, a PEM private key, a PNG, a JPEG, an `ar` archive, an ELF object and a file of
-random bytes all come out **`plain`** — the same name the round used for "a file with no
-structure". On the unseen room the table separates **114 of 189** different pairs (60.3 %).
+Here is where the round stops being a clean story. `canonical/runtime/scan_and_diff_against_memory_v1.py`
+— shipped in this repository one round earlier — already types a file by which of its
+**declared validators accept the bytes**, and it says the important sentence itself: identity
+is content, not name. Its validators are `gzip -t`, `tar -tf`, `unzip -t`, a JSON parse, a PNG
+magic test, an `ast.parse`, a UTF-8 read. It also already recorded the defect this round then
+re-met from the other side: its first version used `py_compile`, which **writes `__pycache__`
+next to the file it judges**, so the scanner was reading artefacts it had made itself.
 
-The cost is not a mislabelled object. A need is a *target kind*: an agent whose vocabulary
-cannot name a certificate cannot hold the goal "extract the public key from this certificate".
-It is not that it answers wrongly; it is that it cannot ask. Counted on the room: **11 of 19**
-producer kinds are collapsed into one name, and the vocabulary offers five names for the
-nineteen kinds present.
+But `VALIDATORS` is a **dict of seven kinds written by its author**, and a signature over a
+written list is bounded by the list — the same defect as the kind table, one floor up. So the
+question this round actually had to answer is not "should types come from validators" (the tree
+had answered that) but:
 
-## 3. What replaces the table, and why it is not a second table
+> **Can the validators be derived instead of authored — and if so, what may count as one?**
 
-The guide already contains the right idea one layer up, and the last round used it for goals
-and left types to the table: **a page declares a check** — a flag whose prose is a question and
-whose argument is the object (`gzip -t`, `tar -tf`, `unzip -t`, `jq .`). 2,319 such
-(program, flag) pairs are declared across the 446 pages this machine prints.
+## 4. The rule
 
-Let those be the type system, under a rule that names no program:
+A page declares a check: a flag whose prose is a question and whose argument is the object.
+2,319 such (program, flag) pairs are declared across the 446 pages this machine prints. Let
+them be the type system, under a rule that names no program:
 
 > A declared check is a **witness** when
 > 1. it **separates** — accepts at least one object and rejects at least one;
-> 2. it **repeats** — the same verdict in two independent copies of the room;
+> 2. it **repeats** — the same verdict on a second and third independent pass;
 > 3. it **observes** — it changes nothing in the room;
-> 4. it is **content-invariant per kind** — every object of one producer kind gets one
->    verdict, in a second room of the same kinds with different content.
+> 4. it is **content-invariant per kind** — every object of one producer kind gets one verdict,
+>    in a second room of the same kinds with different content.
 
-An object's type is then the set of witnesses that accept it: a signature, not a name.
+An object's type is the set of witnesses that accept it: a signature, not a name.
 
-Each of the four parts removes something real, and each is listed in the receipt by name:
+Each part removes something real, and each removal is listed in the receipt by name:
 
-| part | what it removes | measured |
+| part | what it removes | measured on this machine |
 |---|---|---|
 | separates | `--help`, declared by 342 of 446 pages as a "read-only check" | **1,338** of 2,319 accept every object |
 | separates | checks that accept nothing here | **913** accepted no object |
-| repeats | anything nondeterministic | 66 separated, 64 repeated |
-| observes | `shred -v`, `ln -v`, `split -v`, ImageMagick's `stream` | **16** declared checks WRITE to the object they are asked about |
-| content-invariant | `perl -c`, `rgrep -l/-n/-H`, `node --trace-*` | **19** of 64 contradicted themselves between two rooms |
+| repeats | anything nondeterministic | 66 separated, 64 repeated, 2 dropped on a third pass |
+| observes | `shred -v`, `ln -v`, `split -v`, ImageMagick `stream` | **16** declared "checks" WRITE to the object they are asked about |
+| content-invariant | `perl -c`, `rgrep -l/-n/-H`, `node --trace-*` | **19 of 64** contradicted themselves between two rooms |
 
-The `observes` line is the one I did not expect and the one that matters most. This tree's
-existing `check_flags()` — the function that decides what counts as a read-only check — keeps
-any flag whose prose starts with `list, show, print, display, test, check, verify, give` and
-whose argument is none. By that rule **`shred --verbose` is a read-only check.** It is not: it
-overwrote the object it was asked about, and it "separated" the room precisely because
-destroying an object changes the answer. A "read-only check" list that contains a destructive
-command is the same class of defect as a benchmark whose answer is in the prompt.
+The `observes` line is the one I did not expect, and it is the round's sharpest result. The
+shipped `check_flags()` keeps any flag whose prose starts with *list, show, print, display,
+test, check, verify, give* and whose argument is none. By that rule **`shred --verbose` is a
+read-only check** — and it separated the room precisely because destroying an object changes
+the answer. A "read-only check" list containing a destructive command is the same class of
+defect as a benchmark whose answer is in the prompt.
 
-What survives is 45 checks, and their signatures separate **155 of 189** different pairs
-(82.0 %) on the unseen room, against the table's 114.
+And the same four tests, pointed at the tree's own seven authored validators, remove exactly
+one of them: **`python`**, which accepts a `.py` and rejects a `.md` — a test of *content*, not
+of *type*, and it contradicts itself on plain-text between two rooms. That is the honest size
+of the correction to work the tree had already done.
 
-## 4. What the witnesses actually buy, said plainly
+## 5. What the witnesses actually buy, said plainly
 
-Forty-five names is a flattering number, so here is the correcting measurement. Group the
-witnesses by the *verdict vector* they produce over a room: 45 witnesses fall into **4**
-distinctions (classes of 27, 16, 1, 1). Forty-one of the forty-five are **aliases** — the same
-question asked by `gzip -t`, `gunzip -t`, `zcat -t`, `uncompress -t`, `gzip --test`, … The
-honest count of what the rule discovered on this machine is **four questions**, not
-forty-five:
+Forty-five names is a flattering number. Group the witnesses by the verdict vector they produce
+over a room: **45 witnesses are 4 distinctions** (classes of 27, 16, 1, 1). Forty-one of the
+names are aliases — the same question asked by `gzip -t`, `gunzip -t`, `zcat -t`,
+`uncompress -t`, `gzip --test`, `gzip -l`, … The distinctions are:
 
-1. *is it a gzip stream?* (27 spellings across gzip/gunzip/zcat/uncompress — and it accepts
-   `zip` and `tar.gz`, correctly, because both really do contain a gzip member);
-2. *is it binary?* (`scriptreplay --summary` aborts with `replay_emit` on binary and accepts
-   text — a distinction no word in the table names);
+1. *is it a gzip stream?* (27 spellings; it accepts `zip` and `tar.gz` too, correctly, because
+   both really do contain a gzip member);
+2. *is it binary?* (`scriptreplay --summary` aborts in `replay_emit` on binary, accepts text —
+   a distinction nothing in the table names);
 3. *does `iconv` accept it as text?*
-4. *does `node` tolerate it?* (the 27-name class accepts `data.json` and `empty.bin` and
-   rejects everything else; whatever the mechanism, it separates.)
+4. *does `node` tolerate it?* (29 spellings accept `data.json` and the empty file and reject
+   everything else; whatever the mechanism, it separates).
 
-So the discovery is real but small: **four distinctions, 41 redundant names, 82 % of pair
-differences.** Four is not nineteen. That gap is the residual, and the receipt names it with a
-price rather than a default: five classes remain for twenty objects, with
-**`log2(class)` bits undecidable** per class — 1.585 bits for gzip-vs-tar.gz-vs-zip, for
-example, which no check on this machine can pay.
+Four distinctions are not nineteen. The receipt prices the gap rather than defaulting it: five
+classes remain for twenty objects, `log2(class)` bits undecidable each — 1.585 bits for
+gzip-vs-tar.gz-vs-zip, which no check on this machine can pay, and gzip-vs-tar.gz-vs-zip is
+exactly the ambiguity that matters if a need says "the archive", so it is listed, not hidden.
 
-## 5. Should a refusal read once be stored?
+## 6. Should a refusal read once be stored?
 
-The last round's third obligation, answered the same way — by running the rule twice, on two
-rooms of the **same kinds** with different content.
+Asked by running the rule twice, on two rooms of the **same kinds** with different content. The
+witness sets are **identical**: 45 checks, the same 45, on both rooms. So a witness is
+**derived from the pages and the room, never learned from experience**: storing one buys
+nothing, and a stored copy is a liability the day a page changes. What a store would hold is
+the empty set.
 
-The witness sets are **identical**: 45 checks, same 45, on both rooms. That is the answer:
-a witness is **derived from the pages and the room, not learned from experience**, so storing
-one buys nothing, and a stored copy is a liability the day a page changes. What a store *would*
-hold is the empty set. The same argument covers the refusal reader from the last round: the
-sentence read once is re-derived next time from the program's own words, and the honest
-generalised form of "keep it" is *keep the rule that finds it*, not the sentence.
+The invariance test is the same measurement from the other side and it is what makes the answer
+non-trivial: **19 of 64** checks that passed parts 1–3 changed their verdict on an object of the
+same kind in the second room. They were not knowledge about types; they were knowledge about a
+file's contents wearing a type's clothes.
 
-The invariance test is the same measurement from the other side, and it is the part that makes
-the answer non-trivial: **19 of 64** checks that passed parts 1–3 changed their verdict on an
-object of the same kind in the second room. They were not knowledge about types; they were
-knowledge about a file's contents wearing a type's clothes.
+## 7. The gates, and the two that had to be repaired
 
-## 6. The gates, and which one nearly failed
-
-Declared before the run, all seven met:
+Declared before the run:
 
 | gate | result |
 |---|---|
-| T1 the written table is right where it has a name | **MET** — 21/21 different pairs on the guide's own room |
+| T1 the written table is right where it has a name | **MET** — 21/21 pairs on the guide's own room |
 | T2 it collapses kinds it never named | **MET** — 11 producer kinds inside `plain` |
 | T3 the witness rule finds checks with no program named | **MET** — 2,319 candidates → 45 witnesses |
 | T4 the signature separates more than the written name | **MET** — 155/189 vs 114/189 |
-| T5 the residual is named, not hidden | **MET** — 5 classes, `log2` price per class |
+| T5 the residual is named, not hidden | **MET** — 5 classes, `log2` price each |
 | T6 storing buys nothing, or the difference is named | **MET** — both rooms give the same 45 |
 | T7 zero model calls, zero parameters, zero network | **MET** |
 
-**And which one nearly failed, because it is the honest part of this file.** The first version
-of T3 passed with 64 witnesses that included `perl -c`, `rgrep -l` and `node --trace-exit`.
-The second version raised T4 to 160 of 189 — a *better* number — by keeping them. Both were
-wrong in the same way: those checks separate by reading an object's *content* and calling it a
-*type*. The invariance test exists because a gate that improves when a defect is added is not
-a gate. With it, T4 fell to 155 and the witness count to 45, which is the number that survives
-a room the witnesses were not fitted on.
+**T3 first "passed" with 64 witnesses that included `perl -c`, `rgrep -l` and `node --trace-exit`,
+and T4 rose to 160 of 189 — a better number — by keeping them.** Both were wrong the same way:
+those checks separate by reading an object's *content* and calling it a *type*. The invariance
+test exists because a gate that improves when a defect is added is not a gate. With it, T4 fell
+to 155 and the names to 45. T1 also failed on the first build for a related reason: a declared
+"check" it ran, `ln --verbose`, **mutated the room between objects**, so the objects being named
+were not the objects being asked about. That is what put `observes` in the rule.
 
-The first version also failed T1 for a reason worth recording: a "check" it ran, `ln --verbose`,
-**mutated the room between objects**, so the objects were not what the table was asked about.
-That is what put the `observes` part in the rule.
+And one number moved between runs before it was fixed: 155 one run, 160 the next, because
+`node --trace-*` sometimes exceeded a 2-second deadline under 12-way parallelism. An instrument
+whose answer depends on how busy the machine is has no answer. The deadline is now 5 s at 6
+workers, with a third serial pass that drops anything still unstable; two runs from two clean
+processes now give the identical 45 and the identical 155.
 
-## 7. What is real, what is not
+## 8. What is real, what is not
 
-**Real.** A room of kinds this tree never named, built by their own producers. A measured
-statement of what the hand-written kind table costs there: 11 of 19 kinds collapsed, 60.3 % of
-pair differences. A rule that turns *declared checks* into a type system with no program named
-and no table written, which separates 82 % and tells on itself where it cannot: 4 distinctions
-behind 45 names, 5 residual classes, `log2` bits. And a mechanical answer to "should it be
-stored": no, and here is the test that says so.
+**Real.** A room of kinds this tree never named, built by their own producers. A measured price
+of the hand-written kind table there: 11 of 19 kinds collapsed, 60.3 % of pair differences,
+and 11 goals that cannot be *stated*. A rule that derives witnesses from declared checks with no
+program named, that removes `--help` by measurement rather than blacklist, that catches 16
+checks that write, and that catches 19 checks that were reading content and calling it type.
+Two runs that agree exactly. And a mechanical answer to the storage question: no, with the test
+that says so.
 
-**Not real.** "The machine can type anything now." An object that no declared check can
-examine has the empty signature and lands in the residual class with everything else — reported,
-not hidden. "Nineteen types." Four distinctions. "A signature is a name." `gzip -t+gunzip -t+…`
-is not the word *gzip*; it is what the machine can still say about an object once everyone who
-knew the word is gone — which is the useful thing and also the smaller thing.
+**Not real.** "The machine can type anything now." An object no declared check can examine has
+the empty signature and lands in the residual with everything else — six objects here, reported.
+"Nineteen types." Four distinctions. "A better mechanism." On this room it is **six pairs worse
+than the scanner already in the tree**; what it has that the authored scanner does not is that
+nobody had to know the kinds in advance, and that property matters on a room no author has seen
+— which is a claim about transfer, and this round does not measure transfer.
 
-**Not measured.** A room whose kinds need a check that *takes an argument* (`sqlite3`,
-`openssl verify`, `jq` with a filter) — the rule only reads no-argument checks, and a second
-derivation would be needed. Browser accessibility trees, the analogue the last round named. And
-whether the four distinctions are the *right* four for any goal but the ones written here.
+**Not measured.** A witness that takes an argument (`sqlite3`, `openssl verify`, `jq` with a
+filter) — the rule reads only no-argument checks, so `sqlite`, `jpeg`, `bzip2`, `xz` and `png`
+are typed by nothing here. Accessibility trees, the analogue the last round named. And whether
+these four distinctions are the right four for any goal but the ones written here.
 
-## 8. The one line
+## 9. The one line
 
-> **A type you wrote is a type you guess: the table is perfect on the room it was born in and
-> collapses eleven kinds into one name on the next room. A type you can check is a type you
-> have, and the machine will tell you exactly how many distinct questions it can still ask —
-> four here — and which of its own declarations are not questions at all but writes.**
+> **A type you wrote is a type you guess. It is perfect on the room it was born in and it puts
+> eleven kinds under one name on the next. The machine will tell you how many distinct questions
+> it can still ask about an object — four, here, behind forty-five names — and, if you ask
+> properly, it will also tell you which of its own declared "read-only checks" are writes.**
 
-## 9. Next step, pre-registered
+## 10. Next step, pre-registered
 
-The rule reads only checks that take no argument of their own, which is why `sqlite3`,
-`openssl verify` and `jq` are absent from it. The next round: derive the **argument** a check
-needs from the same page (`-f ARCHIVE`, `-in FILE`), let witnesses take that argument, and
-measure whether the residual on this room falls below five classes. Falsifier, declared now:
-if the argument-carrying witnesses do not reduce the class count, then the residual was never
-about the checks — it was about what the objects can exhibit — and the type system has a
-ceiling that no further derivation moves.
+Two obligations, both falsifiable and both named because the round leaves them open:
+
+1. **Give a witness the argument its page declares** (`-f ARCHIVE`, `-in FILE`), so `sqlite3`,
+   `openssl verify` and `jq` with a filter can be witnesses at all, and measure whether the
+   residual falls below five classes. Falsifier: if it does not fall, the residual was never
+   about the checks and the type system has a ceiling no derivation moves.
+2. **Test the one property the authored scanner cannot have** — transfer to a room whose kinds
+   no author of either mechanism has met. Build the room from producers chosen after the rule is
+   frozen, and require the derived set to keep its class count while the authored list's empty
+   signatures grow. Falsifier: if the authored list transfers as well, then authoring was never
+   the cost and this round's difference is decoration.
