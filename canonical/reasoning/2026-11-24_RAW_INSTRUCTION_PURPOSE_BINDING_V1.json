@@ -26,7 +26,8 @@
     "https://arxiv.org/abs/2605.02269v1",
     "https://arxiv.org/abs/2611.26335v1",
     "canonical/verification/RAW_INSTRUCTION_PURPOSE_FINITE_REPLAY_RECEIPT_20261124_V1.json",
-    "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json"
+    "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_RUNNER_RECEIPT_20261124_V1.json",
+    "canonical/verification/RAW_INSTRUCTION_PURPOSE_TERMINAL_BENCH_4_1_REWARD_LOG_20261124_V1.json"
   ],
   "first_runner_attempt": {
     "conclusion": "failure",
@@ -65,7 +66,7 @@
     "Official Harbor rewards from fresh unseen tasks are runner-owned falsifiers, never producer-written capability credit."
   ],
   "model_calls": 0,
-  "next_action": "Watch the repaired second distinct finite OIDC replay and dependent fresh run-id-seeded Terminal-Bench 4.1 hard falsifier, land runner-owned receipts, run final lightweight gates, then continue on authored repair content, GUI/browser control, completeness/source-scope closure and fresh unseen hard benchmarks.",
+  "next_action": "Continue on authored repair content, GUI/browser control, completeness/source-scope closure and fresh unseen hard benchmarks. The three zero rewards and 23/23 final gates are transfer falsifiers and governance closure, not capability credit.",
   "non_goals": [
     "Claiming section 6, terminal truth, capability, family, benchmark or score credit.",
     "Reading hidden tests, solutions, verifier outputs or borrowed model answers.",
@@ -107,9 +108,50 @@
   ],
   "runtime_network_calls": 0,
   "schema": "PROJECT_BRAIN_DURABLE_REASONING_DECISION_RECEIPT_V1",
+  "second_runner_attempt": {
+    "benchmark_score_authority": false,
+    "conclusion": "success",
+    "finite_replay": {
+      "contract_tests": 21,
+      "measurement_checks": 20,
+      "oidc_jti": "37dc3328-b869-4d27-81cc-2b32cbd97410",
+      "receipt_sha256": "6126e096a3073bb6956d1382332319541d3b84b90ecbbe3f0e70e8f87aa4f2f2"
+    },
+    "hard_attempt": {
+      "harbor_exit_code": 0,
+      "new_reality_units_consumed": 3,
+      "pinned_images_pulled": 6,
+      "receipt_sha256": "a0e27ea3c5845edc75d53751b01cb6d3df753506eaf41cc0e8c46a2f6b36f79b",
+      "reward_log_sha256": "719ddb686653b5ec185533367673b0a567413f46757e5fcf45e6c1367240041a",
+      "reward_values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "reward_vectors_present": 3,
+      "tasks_selected": [
+        "mvcc-lsm-compaction",
+        "retro-console-soc",
+        "biped-contact-dynamics"
+      ],
+      "trial_results_present": 3
+    },
+    "head_sha": "c81110f9cc55ae73bec04add3dbe17e10b3003b7",
+    "runner_final_gates": {
+      "all_ok": true,
+      "check_count": 23,
+      "recorded_at_utc": "2026-11-24T15:46:56Z"
+    },
+    "runner_owned": true,
+    "truth": {
+      "achieved": false,
+      "section_6": "NOT_MET"
+    },
+    "workflow_run_id": 45426280922
+  },
   "section_6_verifications": 0,
   "selected_route": "COMPOSE_EXISTING_FINITE_TYPED_PURPOSE_GRAMMAR_GOAL_DIRECTED_EXACT_EVPI_KERNEL_EXTERNAL_EDITABLE_STORE_OIDC_REPLAY_AND_FRESH_TB41_HARD_FALSIFIER_V1",
-  "status": "PRODUCER_REASONING_RECEIPT__FINITE_BRIDGE_BUILT__FIRST_FINITE_OIDC_ATTESTED__FIRST_HARD_ATTEMPT_FAILED_CLOSED_ON_RELEASE_ASSET_403__AUTHENTICATED_REPAIR_BUILT__20_20_REPAIR_GATES_PASS__SECOND_DISTINCT_RUN_PENDING__ZERO_CAPABILITY_CREDIT",
+  "status": "PRODUCER_REASONING_RECEIPT__FINITE_BRIDGE_BUILT__FIRST_HARD_ATTEMPT_FAILED_CLOSED_ON_RELEASE_ASSET_403__SECOND_DISTINCT_OIDC_AND_HARD_FALSIFIER_ATTESTED__THREE_ZERO_REWARD_VECTORS__23_23_RUNNER_FINAL_GATES_PASS__ZERO_CAPABILITY_CREDIT",
   "supersedes": [
     "UNIVERSAL_NATURAL_LANGUAGE_PURPOSE_PARSER",
     "MODEL_BASED_SYMBOLIC_GOAL_INTERPRETER",
@@ -133,5 +175,5 @@
     "Whether full completeness/source-scope closure can be certified in an open world.",
     "Whether gated assets, provider VM images, self-hosted websites, evaluator dependencies and maintainer-style section 6 verification will become available."
   ],
-  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#job-contract_replay-run-45423083321__SECOND_DISTINCT_RUN_PENDING"
+  "verifier_id": "github-actions-oidc:moxnixmdj/brain/.github/workflows/zero-model-raw-instruction-purpose-v1.yml@refs/heads/arena/6f8ac9ce-brain#run-45426280922"
 }
