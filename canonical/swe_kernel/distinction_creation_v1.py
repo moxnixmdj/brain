@@ -90,7 +90,17 @@ def _kind(value: Any) -> str:
 
 
 def _ordered(value: Any) -> bool:
-    return _kind(value) in {"number", "string", "bool"}
+    """Whether `<` on this value carries meaning.
+
+    Strings are deliberately EXCLUDED. `kind < 'strict_pin'` compares codepoints,
+    which for categorical values (enum members, labels, kinds) is a coincidence
+    and not a distinction: it would accept 'strict_pina' and reject 'none'.
+    A string guard is meaningful only as equality or set membership, so strings
+    are routed to the equality branch and never to a threshold. Version strings
+    and name ranges that genuinely order need their own comparator, which is not
+    something this module pretends to have.
+    """
+    return _kind(value) in {"number", "bool"}
 
 
 def _compare(a: Any, b: Any) -> int | None:
@@ -727,6 +737,178 @@ def branch_from_outcomes(
             "comes from the demanded outcome, not from these examples"
         ),
     }
+
+
+# Where the same derived condition can be placed. The condition is computed once;
+# the placement is a choice about the shape of the surrounding code. Real fixes in
+# `real_fix_pairs_20261119_V1.json` use all three, and none of them needs a
+# different mechanism to find the condition -- only a different emitter.
+PLACEMENTS: tuple[dict[str, str], ...] = (
+    {
+        "placement": "statement_guard",
+        "template": "if {invalid}:\n    {body}\n",
+        "note": "the condition is a statement of its own, before the work",
+    },
+    {
+        "placement": "negative_guard_first",
+        "template": "if {valid}:\n    {good_body}\n{else_clause}",
+        "note": "the valid region is the early path and the invalid case is the tail",
+    },
+    {
+        "placement": "wrapped_call",
+        "template": "try:\n    {call}\nexcept {exc}:\n    raise {typed} from None\n",
+        "note": "the condition is carried by the exception the callee already raises",
+    },
+)
+
+
+def emit_placements(
+    positives: Sequence[Mapping[str, Any]],
+    negatives: Sequence[Mapping[str, Any]],
+    *,
+    exception: str = "<exception-from-the-demand>",
+    call: str = "<call-under-guard>",
+) -> dict[str, Any]:
+    """One derived condition, every placement it can take.
+
+    The point is that the hard part -- computing the distinction -- is done once.
+    Moving it from an `if` statement to a `try` wrapper changes the emitted shape
+    and not the reasoning, so a single mechanism covers fixes that look different
+    in the diff. `wrapped_call` is emitted only when a caller supplies the call
+    and the exception, because the module will not invent either.
+    """
+    found = branch_from_outcomes(positives, negatives)
+    if found["status"] != "PASS__GUARD_SYNTHESISED":
+        return {**found, "placements": []}
+
+    guard = Guard([
+        (a["feature"], a["op"], tuple(a["operand"]) if a["op"] in {"between", "outside"} else a["operand"])
+        for a in found["guard"]["atoms"]
+    ])
+    valid = guard.render_python()
+    invalid = found["branch_condition_for_invalid_input"]
+    body = f"raise {exception}"
+
+    emitted = []
+    for entry in PLACEMENTS:
+        if entry["placement"] == "statement_guard":
+            src = entry["template"].format(invalid=invalid, body=body)
+        elif entry["placement"] == "negative_guard_first":
+            src = entry["template"].format(
+                valid=valid,
+                good_body="return <result>",
+                else_clause=f"raise {exception}\n",
+            )
+        else:
+            src = entry["template"].format(call=call, exc=exception, typed=exception)
+        emitted.append(
+            {
+                "placement": entry["placement"],
+                "note": entry["note"],
+                "source": src,
+            }
+        )
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__CONDITION_PLACED",
+        "condition_for_valid_input": valid,
+        "condition_for_invalid_input": invalid,
+        "placements": emitted,
+        "claim": "ONE_DERIVED_CONDITION_IN_EVERY_PLACEMENT_THE_CODE_ADMITS",
+        "not_claimed": "THAT_A_PLACEMENT_WAS_CHOSEN_FOR_YOU",
+        "authority": "NONE",
+    }
+
+
+def clause_to_delete(
+    clauses: Sequence[str],
+    kept_positive: Sequence[Mapping[str, Any]],
+    kept_negative: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Which existing clause must be REMOVED, given a counterexample.
+
+    Deletion is the inverse of adding a guard, and the corpus says so: 4 of the 7
+    DELETE fixes in `real_fix_pairs_20261119_V1.json` remove a condition that a
+    test now contradicts (5a7d3386 dropped `"===" in token.text` from a skip
+    rule; the fix had to KEEP those tokens).
+
+    The input is the set of clauses currently in the code, plus the two sets the
+    test now demands: inputs that must be processed (`kept_positive`) and inputs
+    that must still be skipped (`kept_negative`). A clause is deletable when it is
+    the reason a `kept_positive` input was being wrongly skipped -- which is
+    checkable by asking whether the clause holds on inputs that must now pass.
+
+    Refuses when no clause explains the counterexample, because then the bug is
+    not an over-broad condition and deletion is the wrong operation.
+    """
+    if not clauses:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__NO_CLAUSES",
+            "note": "there is no clause to delete, so this is an insert",
+            "clause": None,
+            "authority": "NONE",
+        }
+    if not kept_positive:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__NEEDS_BOTH_POLARITIES",
+            "note": "without an input the test says must now pass, nothing is over-broad",
+            "clause": None,
+            "authority": "NONE",
+        }
+    # rank by how much of the newly-required region each clause wrongly excludes
+    scored = []
+    for clause in clauses:
+        excluded = sum(1 for p in kept_positive if _clause_holds(clause, p))
+        if excluded:
+            scored.append((excluded, clause))
+    if not scored:
+        return {
+            "schema": SCHEMA,
+            "status": "REFUSED__NO_CLAUSE_EXPLAINS_THE_FAILURE",
+            "clauses": list(clauses),
+            "note": (
+                "no existing clause rejects an input the test now requires. The "
+                "defect is not an over-broad condition, so DELETE is the wrong "
+                "operation and adding or changing something is what is needed"
+            ),
+            "clause": None,
+            "authority": "NONE",
+        }
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return {
+        "schema": SCHEMA,
+        "status": "PASS__CLAUSE_IDENTIFIED_FOR_DELETION",
+        "clause": scored[0][1],
+        "excludes_required_inputs": scored[0][0],
+        "alternatives": [c for _, c in scored[1:4]],
+        "claim": "THE_CLAUSE_THAT_REJECTS_WHAT_THE_TEST_REQUIRES",
+        "not_claimed": "THAT_DELETING_IT_PASSES_THE_SUITE",
+        "must_be_accepted_by": "the caller's own test run",
+        "authority": "NONE",
+    }
+
+
+def _clause_holds(clause: str, example: Mapping[str, Any]) -> bool:
+    """Evaluate a clause against one example.
+
+    Clauses are supplied as `feature op value` triples in the same vocabulary as
+    the guards, so a clause read out of the code can be compared with the same
+    machinery. Anything else refuses rather than being guessed at.
+    """
+    parts = clause.split()
+    if len(parts) != 3:
+        raise DistinctionError("CLAUSE_NOT_UNDERSTOOD:" + clause)
+    name, op, operand = parts
+    try:
+        value: Any = json.loads(operand)
+    except json.JSONDecodeError:
+        value = operand
+    values = features(example)
+    if name not in values:
+        return False
+    return Guard([(name, op, value)]).holds(example)
 
 
 def main(argv: Sequence[str] | None = None) -> int:

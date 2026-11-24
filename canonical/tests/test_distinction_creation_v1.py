@@ -54,12 +54,26 @@ class GuardCreationTests(unittest.TestCase):
         self.assertEqual("PASS__GUARD_SYNTHESISED", out["status"])
         self.assertEqual("f.d", out["guard"]["atoms"][0]["feature"].split(".")[0] + "." + out["guard"]["atoms"][0]["feature"].split(".")[1])
 
-    def test_a_string_distinction_is_created(self):
-        positives = [{"specifier": ">=1"}, {"specifier": "==1.0"}, {"specifier": "<2"}]
-        negatives = [{"specifier": "not-a-spec"}]
-        out = dc.synthesise_guard(positives, negatives)
+    def test_a_single_valued_string_distinction_is_created(self):
+        """One positive value against other values is separable by equality."""
+        out = dc.synthesise_guard([{"kind": "strict_pin"}], [{"kind": "none"}])
         self.assertEqual("PASS__GUARD_SYNTHESISED", out["status"])
-        self.assertFalse(dc.Guard([("specifier", "eq", "not-a-spec")]).holds({"specifier": ">=1"}))
+        self.assertEqual("kind eq 'strict_pin'", out["guard"]["render"])
+
+    def test_strings_are_never_ordered_by_codepoint(self):
+        """`kind < 'strict_pin'` is a coincidence, not a distinction.
+
+        An earlier version treated any string as ordered and produced
+        `kind lt 'strict_pin'`, which accepts 'strict_pina' and rejects 'none'.
+        Strings are now equality-only, so several distinct positive strings with
+        no shared structure must REFUSE rather than invent an ordering.
+        """
+        out = dc.synthesise_guard(
+            [{"specifier": ">=1"}, {"specifier": "==1.0"}, {"specifier": "<2"}],
+            [{"specifier": "not-a-spec"}],
+        )
+        self.assertEqual("REFUSED__NO_DISCRIMINATING_FEATURE", out["status"])
+        self.assertIsNone(out["guard"])
 
 
 class RefusalsTests(unittest.TestCase):
@@ -198,10 +212,10 @@ class ClosingTheGapTests(unittest.TestCase):
         self.assertTrue(out["next_probes"], "the open edge stays open")
 
     def test_strings_get_no_numeric_probe(self):
-        out = dc.synthesise_guard(
-            [{"s": v} for v in ("a", "b", "c")], [{"s": ""}]
-        )
+        """No arithmetic on strings, and no invented ordering either."""
+        out = dc.synthesise_guard([{"s": "c"}], [{"s": ""}])
         self.assertEqual("PASS__GUARD_SYNTHESISED", out["status"])
+        self.assertEqual("s eq 'c'", out["guard"]["render"])
         for probe in out["next_probes"]:
             self.assertNotIn("+", probe["ask"])
 
@@ -274,6 +288,86 @@ class BranchEmissionTests(unittest.TestCase):
         out = dc.branch_from_outcomes([{"n": 1}], [])
         self.assertIsNone(out["source"])
         self.assertEqual("REFUSED__NEEDS_BOTH_POLARITIES", out["status"])
+
+
+class DeletionTests(unittest.TestCase):
+    """DELETE is the inverse of adding a guard: remove what the test contradicts."""
+
+    def test_the_over_broad_clause_is_identified(self):
+        """Real case 5a7d3386: `"===" in token.text` skipped tokens that must
+        now be kept."""
+        out = dc.clause_to_delete(
+            ['kind eq "strict"', 'kind eq "none"'],
+            [{"kind": "strict"}],
+            [{"kind": "none"}],
+        )
+        self.assertEqual("PASS__CLAUSE_IDENTIFIED_FOR_DELETION", out["status"])
+        self.assertEqual('kind eq "strict"', out["clause"])
+
+    def test_a_bug_deletion_cannot_fix_is_refused(self):
+        """If no clause rejects what the test requires, deletion is not the fix."""
+        out = dc.clause_to_delete(
+            ['kind eq "none"'], [{"kind": "other"}], [{"kind": "none"}]
+        )
+        self.assertEqual("REFUSED__NO_CLAUSE_EXPLAINS_THE_FAILURE", out["status"])
+        self.assertIsNone(out["clause"])
+
+    def test_no_clauses_means_the_fix_is_an_insert(self):
+        out = dc.clause_to_delete([], [{"kind": "a"}], [{"kind": "b"}])
+        self.assertEqual("REFUSED__NO_CLAUSES", out["status"])
+        self.assertIn("insert", out["note"])
+
+    def test_deletion_alone_is_not_claimed_to_pass_the_suite(self):
+        out = dc.clause_to_delete(
+            ['kind eq "strict"'], [{"kind": "strict"}], [{"kind": "none"}]
+        )
+        self.assertEqual("THAT_DELETING_IT_PASSES_THE_SUITE", out["not_claimed"])
+        self.assertEqual("the caller's own test run", out["must_be_accepted_by"])
+
+
+class PlacementTests(unittest.TestCase):
+    """One derived condition, several placements. The reasoning happens once."""
+
+    def _result(self):
+        return dc.emit_placements(
+            [{"n": v} for v in (1, 2, 5)],
+            [{"n": v} for v in (0, -1)],
+            exception="ValueError",
+            call="int(payload)",
+        )
+
+    def test_the_condition_is_computed_once_for_every_placement(self):
+        out = self._result()
+        self.assertEqual("PASS__CONDITION_PLACED", out["status"])
+        self.assertEqual("n > 0", out["condition_for_valid_input"])
+        self.assertEqual("n <= 0", out["condition_for_invalid_input"])
+        self.assertEqual(3, len(out["placements"]))
+        self.assertEqual(
+            {"statement_guard", "negative_guard_first", "wrapped_call"},
+            {p["placement"] for p in out["placements"]},
+        )
+
+    def test_every_placement_is_valid_python(self):
+        for entry in self._result()["placements"]:
+            source = (
+                entry["source"]
+                .replace("raise <result>", "raise RuntimeError")
+                .replace("return <result>", "return n")
+            )
+            module = "def check(n, payload=None):\n" + "".join(
+                "    " + line + "\n" for line in source.splitlines()
+            )
+            compile(module, "<placement:%s>" % entry["placement"], "exec")
+
+    def test_a_refused_condition_yields_no_placements(self):
+        out = dc.emit_placements([{"n": 1}], [])
+        self.assertEqual("REFUSED__NEEDS_BOTH_POLARITIES", out["status"])
+        self.assertEqual([], out["placements"])
+
+    def test_the_choice_of_placement_is_not_claimed(self):
+        self.assertEqual(
+            "THAT_A_PLACEMENT_WAS_CHOSEN_FOR_YOU", self._result()["not_claimed"]
+        )
 
 
 if __name__ == "__main__":
