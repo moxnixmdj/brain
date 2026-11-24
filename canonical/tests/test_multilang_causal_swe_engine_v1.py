@@ -3369,6 +3369,157 @@ class TestMultiLangCausalSWEEngineV1(unittest.TestCase):
                 self.assertEqual(res["winner"]["tier"], "JS_PROTO_SAFE_DEFINE_PROPERTY")
                 self.assertEqual(res["model_calls"], 0)
 
+    def test_iter69_ts_nonempty_accum_lookahead_and_trailing_delim_ops(self) -> None:
+        """Iter 69 JS/TS Ops 0s (msg align), 0ag (`JS_EMPTY_ACCUMULATOR_THROW_GUARD`),
+        0ah (`JS_SKIP_EMPTY_TEXT_LOOKAHEAD`), and 0ai (`JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND`).
+        """
+        # 1. Op 0s (non-empty string + throw message alignment)
+        with self.subTest(case="op_0s_nonempty_string_msg_align"):
+            with tempfile.TemporaryDirectory(prefix="iter69_0s_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "param.js": (
+                            "function fmtParam(name, value) {\n"
+                            "  if (typeof value !== 'string') {\n"
+                            "    throw new TypeError(`Expected \"${name}\" to be a string`);\n"
+                            "  }\n"
+                            "  return '/' + value;\n"
+                            "}\n"
+                            "module.exports = { fmtParam };\n"
+                        ),
+                        "test_param.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { fmtParam } = require('./param.js');\n"
+                            "test('rejects empty string and non-string with aligned message', () => {\n"
+                            "  assert.strictEqual(fmtParam('id', 'abc'), '/abc');\n"
+                            "  assert.throws(() => fmtParam('id', ''), { name: 'TypeError', message: 'Expected \"id\" to be a non-empty string' });\n"
+                            "  assert.throws(() => fmtParam('id', 123), { name: 'TypeError', message: 'Expected \"id\" to be a non-empty string' });\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                r1 = ML_SWE.solve_js_repository(root, ["test_param.js"], timeout_s=20.0)
+                self.assertTrue(r1["verified"], r1)
+                self.assertEqual(r1["winner"]["tier"], "JS_TYPEOF_STRING_NONEMPTY_GUARD")
+                self.assertEqual(r1["model_calls"], 0)
+
+        # 2. Op 0ag (empty accumulator throw guard)
+        with self.subTest(case="op_0ag_empty_accum_throw"):
+            with tempfile.TemporaryDirectory(prefix="iter69_0ag_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "wild.js": (
+                            "function fmtWild(name, value) {\n"
+                            "  if (!Array.isArray(value) || value.length === 0) {\n"
+                            "    throw new TypeError(`Expected \"${name}\" to be a non-empty array`);\n"
+                            "  }\n"
+                            "  let result = '';\n"
+                            "  for (let i = 0; i < value.length; i++) {\n"
+                            "    if (i > 0) result += '/';\n"
+                            "    result += value[i];\n"
+                            "  }\n"
+                            "  return result;\n"
+                            "}\n"
+                            "module.exports = { fmtWild };\n"
+                        ),
+                        "test_wild.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { fmtWild } = require('./wild.js');\n"
+                            "test('rejects wildcard array yielding empty path', () => {\n"
+                            "  assert.strictEqual(fmtWild('w', ['a', 'b']), 'a/b');\n"
+                            "  assert.throws(() => fmtWild('w', ['']), TypeError);\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                r2 = ML_SWE.solve_js_repository(root, ["test_wild.js"], timeout_s=20.0)
+                self.assertTrue(r2["verified"], r2)
+                self.assertEqual(r2["winner"]["tier"], "JS_EMPTY_ACCUMULATOR_THROW_GUARD")
+                self.assertEqual(r2["model_calls"], 0)
+
+        # 3. Op 0ah (skip empty text lookahead)
+        with self.subTest(case="op_0ah_skip_empty_text_lookahead"):
+            with tempfile.TemporaryDirectory(prefix="iter69_0ah_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "tok.js": (
+                            "function stringifyName(name, next) {\n"
+                            "  if (next && next.type === 'text' && /^[a-z]/.test(next.value)) return '\"' + name + '\"';\n"
+                            "  return name;\n"
+                            "}\n"
+                            "function stringifyTokens(tokens, index) {\n"
+                            "  let out = '';\n"
+                            "  while (index < tokens.length) {\n"
+                            "    const tok = tokens[index++];\n"
+                            "    if (tok.type === 'text') { out += tok.value; continue; }\n"
+                            "    if (tok.type === 'param') { out += ':' + stringifyName(tok.name, tokens[index]); continue; }\n"
+                            "  }\n"
+                            "  return out;\n"
+                            "}\n"
+                            "module.exports = { stringifyTokens };\n"
+                        ),
+                        "test_tok.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { stringifyTokens } = require('./tok.js');\n"
+                            "test('skips empty text tokens on lookahead', () => {\n"
+                            "  const res = stringifyTokens([{type:'text',value:'/'},{type:'param',name:'foo'},{type:'text',value:''},{type:'text',value:'bar'}], 0);\n"
+                            "  assert.strictEqual(res, '/:\"foo\"bar');\n"
+                            "  const res2 = stringifyTokens([{type:'text',value:'/'},{type:'param',name:'foo'},{type:'text',value:''},{type:'text',value:'/x'}], 0);\n"
+                            "  assert.strictEqual(res2, '/:foo/x');\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                r3 = ML_SWE.solve_js_repository(root, ["test_tok.js"], timeout_s=20.0)
+                self.assertTrue(r3["verified"], r3)
+                self.assertEqual(r3["winner"]["tier"], "JS_SKIP_EMPTY_TEXT_LOOKAHEAD")
+                self.assertEqual(r3["model_calls"], 0)
+
+        # 4. Op 0ai (trailing delimiter negative lookbehind deduplication)
+        with self.subTest(case="op_0ai_trailing_delim_lookbehind"):
+            with tempfile.TemporaryDirectory(prefix="iter69_0ai_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "rx.js": (
+                            "function esc(s) { return s.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\$&'); }\n"
+                            "function makeRe(src, delim = '/', trailing = true) {\n"
+                            "  let pattern = '^(?:' + src + ')';\n"
+                            "  if (trailing) pattern += '(?:' + esc(delim) + '$)?';\n"
+                            "  pattern += '$';\n"
+                            "  return new RegExp(pattern);\n"
+                            "}\n"
+                            "module.exports = { makeRe };\n"
+                        ),
+                        "test_rx.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { makeRe } = require('./rx.js');\n"
+                            "test('does not match duplicate trailing slash', () => {\n"
+                            "  const r1 = makeRe('/test/');\n"
+                            "  assert.strictEqual(r1.test('/test/'), true);\n"
+                            "  assert.strictEqual(r1.test('/test//'), false);\n"
+                            "  const r2 = makeRe('/test');\n"
+                            "  assert.strictEqual(r2.test('/test/'), true);\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                r4 = ML_SWE.solve_js_repository(root, ["test_rx.js"], timeout_s=20.0)
+                self.assertTrue(r4["verified"], r4)
+                self.assertEqual(r4["winner"]["tier"], "JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND")
+                self.assertEqual(r4["model_calls"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

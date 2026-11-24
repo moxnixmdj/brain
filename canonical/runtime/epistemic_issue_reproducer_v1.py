@@ -92,6 +92,8 @@ class RepoSymbolIndex:
     package_name: str = ""
     package_main: str = ""
     js_is_esm: bool = False
+    is_typescript_vitest: bool = False
+    ts_entry_rel: str = ""
     symbols: dict[str, list[SymbolEntry]] = field(default_factory=dict)
     proven_imports: list[str] = field(default_factory=list)
     test_files: list[str] = field(default_factory=list)
@@ -320,6 +322,14 @@ def scan_repo_symbols(repo_root: pathlib.Path) -> RepoSymbolIndex:
                 idx.symbols.setdefault(idx.package_name, []).append(
                     SymbolEntry(idx.package_name, "javascript", idx.package_main or "index.js", "./" + (idx.package_main or "index.js"), "default_export")
                 )
+        ts_src_files = [
+            p.relative_to(root).as_posix()
+            for p in all_js
+            if p.suffix.lower() in (".ts", ".tsx", ".mts") and not _is_test_rel(p.relative_to(root).as_posix())
+        ]
+        if ts_src_files and (root / "node_modules" / ".bin" / "vitest").exists():
+            idx.is_typescript_vitest = True
+            idx.ts_entry_rel = "src/index.ts" if "src/index.ts" in ts_src_files else ts_src_files[0]
 
     return idx
 
@@ -394,23 +404,37 @@ def _build_python_imports(referenced: Sequence[str], repo_index: RepoSymbolIndex
 
 
 def _build_js_imports(referenced: Sequence[str], repo_index: RepoSymbolIndex) -> list[str]:
-    """Assemble working CommonJS/ESM imports for a JS reproducer test placed at repo root."""
+    """Assemble working CommonJS/ESM/TypeScript-Vitest imports for a reproducer test at repo root."""
     pkg_var = re.sub(r"[^A-Za-z0-9_$]", "_", repo_index.package_name or "pkg")
     if not pkg_var or pkg_var[0].isdigit():
         pkg_var = "pkg"
-    main_rel = "./" + (repo_index.package_main or "index.js").lstrip("./")
-    lines: list[str] = [
-        "const test = require('node:test');",
-        "const assert = require('node:assert/strict');",
-        f"const {pkg_var} = require('{main_rel}');",
-    ]
-    # Destructure any exported symbol directly referenced without `pkg.` prefix
     bare_exports: list[str] = []
     for sym in referenced:
         if sym == pkg_var or "." in sym:
             continue
         if sym in repo_index.symbols and sym not in bare_exports:
             bare_exports.append(sym)
+    if repo_index.is_typescript_vitest:
+        entry_rel = "./" + (repo_index.ts_entry_rel or "src/index.ts").lstrip("./")
+        ts_exports = [
+            nm for nm in bare_exports
+            if any(e.kind == "export" for e in repo_index.symbols.get(nm, ()))
+        ]
+        lines = [
+            "import { test, expect } from 'vitest';",
+            "import assert from 'node:assert/strict';",
+            f"import * as {pkg_var} from '{entry_rel}';",
+        ]
+        if ts_exports:
+            lines.append(f"import {{ {', '.join(ts_exports)} }} from '{entry_rel}';")
+        return lines
+
+    main_rel = "./" + (repo_index.package_main or "index.js").lstrip("./")
+    lines = [
+        "const test = require('node:test');",
+        "const assert = require('node:assert/strict');",
+        f"const {pkg_var} = require('{main_rel}');",
+    ]
     if bare_exports:
         for nm in bare_exports:
             lines.append(f"const {nm} = {pkg_var}.{nm};")
@@ -703,11 +727,14 @@ def _wrap_js_snippet(
             description="fenced_node_test",
         )
 
-    header: list[str] = ["const test = require('node:test');"]
-    if "require('node:assert" not in joined and 'require("node:assert' not in joined and "require('assert" not in joined:
-        header.append("const assert = require('node:assert/strict');")
-    if "require(" not in joined:
-        header.extend(_build_js_imports(refs, repo_index)[2:])
+    if repo_index.is_typescript_vitest:
+        header = _build_js_imports(refs, repo_index) if "import " not in joined else ["import { test, expect } from 'vitest';", "import assert from 'node:assert/strict';"]
+    else:
+        header = ["const test = require('node:test');"]
+        if "require('node:assert" not in joined and 'require("node:assert' not in joined and "require('assert" not in joined:
+            header.append("const assert = require('node:assert/strict');")
+        if "require(" not in joined:
+            header.extend(_build_js_imports(refs, repo_index)[2:])
 
     # If no assertions yet, synthesize from tail prose
     if n_assert == 0 and lines_out:
@@ -1262,6 +1289,11 @@ def _run_reproducer_once(
         env["PYTEST_DISABLE_PLUGIN_AUTOLOAD"] = "1"
         cmd = [py, "-m", "pytest", "-q", "--tb=short", rel_test]
         harness_errs = _PY_HARNESS_ERRORS
+    elif repo_index.is_typescript_vitest:
+        tmp_test = repo_root / "_epistemic_repro_probe.spec.ts"
+        env = dict(os.environ)
+        cmd = [str(repo_root / "node_modules" / ".bin" / "vitest"), "run", "--no-file-parallelism", str(tmp_test.name)]
+        harness_errs = _JS_HARNESS_ERRORS
     else:
         tmp_test = repo_root / "_epistemic_repro_probe.test.js"
         env = dict(os.environ)
@@ -1429,6 +1461,22 @@ def _run_regression_suite(
             "rc": proc.returncode,
             "summary": (proc.stdout or "").strip().splitlines()[-1] if (proc.stdout or "").strip() else "",
         })
+    elif repo_index.is_typescript_vitest:
+        vitest_bin = str(ws / "node_modules" / ".bin" / "vitest")
+        for tf in test_files:
+            tf_text = (ws / tf).read_text(encoding="utf-8", errors="replace")
+            if not re.search(r"\b(?:describe|it|test)\s*\(", tf_text):
+                continue
+            cmd = [vitest_bin, "run", "--no-file-parallelism", tf]
+            proc = subprocess.run(cmd, cwd=ws, capture_output=True, text=True, timeout=timeout_s)
+            ok = proc.returncode == 0
+            if not ok:
+                all_ok = False
+            results.append({
+                "file": tf,
+                "rc": proc.returncode,
+                "summary": (proc.stdout or "").strip().splitlines()[-1] if (proc.stdout or "").strip() else "",
+            })
     else:
         for tf in test_files:
             # Prefer `node` directly for tape/custom harnesses; fall back to `node --test`
@@ -1454,7 +1502,7 @@ def _copy_workspace(src: pathlib.Path, dst: pathlib.Path) -> None:
     shutil.copytree(src, dst, ignore=_ignore)
     nm = src / "node_modules"
     if nm.exists() and not (dst / "node_modules").exists():
-        (dst / "node_modules").symlink_to(nm)
+        (dst / "node_modules").symlink_to(nm.resolve())
 
 
 def solve_issue_from_description(
@@ -1506,6 +1554,8 @@ def solve_issue_from_description(
                 subdir = str(rp.get("test_subdir") or "").strip("/")
                 fname = f"_epistemic_issue_repro_{idx_r}_test.py" if idx_r > 0 else "_epistemic_issue_repro_test.py"
                 r_rel = f"{subdir}/{fname}" if subdir else fname
+            elif repo_index.is_typescript_vitest:
+                r_rel = f"_epistemic_issue_repro_{idx_r}.spec.ts" if idx_r > 0 else "_epistemic_issue_repro.spec.ts"
             else:
                 r_rel = f"_epistemic_issue_repro_{idx_r}.test.js" if idx_r > 0 else "_epistemic_issue_repro.test.js"
             r_path = ws / r_rel

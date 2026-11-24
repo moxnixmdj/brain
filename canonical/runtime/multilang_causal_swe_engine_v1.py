@@ -986,7 +986,8 @@ def localize_js_faults(
     src_files_list, _ = _discover_js_files(worktree)
     src_files = set(src_files_list)
     test_cmd, runner = detect_js_test_command(worktree, test_targets)
-    build_cmd = _detect_js_build_cmd(worktree, src_files_list)
+    # Vitest / tsx / ts-node transform TypeScript source directly; skip slow/external `npm run build`
+    build_cmd = None if runner in ("vitest", "tsx", "ts-node") else _detect_js_build_cmd(worktree, src_files_list)
     if build_cmd:
         _b_rc, _, _ = _run_pgroup_cmd(
             build_cmd,
@@ -2272,6 +2273,15 @@ def synthesize_js_candidates(
                 if (len(leaf_s) >= 3 and leaf_s in _fail_lower_0s)
                 else 1
             )
+            # If the failure message expects `"non-empty string"` and the next 1-2 lines throw `"to be a string"`,
+            # also emit the throw-message-aligned candidate with highest priority!
+            if "non-empty string" in _fail_lower_0s:
+                for _k_msg in range(idx_s + 1, min(len(lines), idx_s + 3)):
+                    if "to be a string" in nl_s[_k_msg] and "non-empty" not in nl_s[_k_msg]:
+                        nl_sm = list(nl_s)
+                        nl_sm[_k_msg] = nl_sm[_k_msg].replace("to be a string", "to be a non-empty string", 1)
+                        _0s_hits.append((-1, idx_s, tos_var, "".join(nl_sm)))
+                        break
             _0s_hits.append((sym_match, idx_s, tos_var, "".join(nl_s)))
         _0s_hits.sort(key=lambda t: (t[0], t[1]))
         for _, idx_s, tos_var, src_s in _0s_hits[:6]:
@@ -2936,6 +2946,101 @@ def synthesize_js_candidates(
             for _scaf, ln_0af, desc_0af, psrc_0af in _0af_hits[:4]:
                 add_cand(rel, ln_0af, "JS_PROTO_SAFE_DEFINE_PROPERTY", desc_0af, psrc_0af)
 
+        # Op 0ag (JS/TS Empty Accumulated Result Throw Guard, `JS_EMPTY_ACCUMULATOR_THROW_GUARD`):
+        # When a function ALREADY validates an input array/collection with `...length === 0` +
+        # `throw new <Err>(...)` and accumulates a string (`let <res> = ""; ... return <res>;`),
+        # elements like `[""]` pass the input length check yet produce an empty accumulated string.
+        # Guard `return <res>;` with `if (<res>.length === 0) { <same throw>; }`.
+        _fail_lo_0ag = str(getattr(loc, "initial_output", "") or "").lower()
+        if any(k in _fail_lo_0ag for k in ("non-empty", "empty", "tothrow", "throw")):
+            for idx_ag, raw_ag in enumerate(lines):
+                m_th_ag = re.search(r"(\bthrow\s+new\s+(?:TypeError|RangeError|Error)\s*\([^;\n]+\);?)", raw_ag)
+                if not m_th_ag:
+                    continue
+                prev_win = "".join(lines[max(0, idx_ag - 2) : idx_ag + 1])
+                if ".length === 0" not in prev_win and ".length == 0" not in prev_win:
+                    continue
+                throw_stmt = m_th_ag.group(1).rstrip(";") + ";"
+                # Look forward (within 25 lines) for `let <res> = "";` and `return <res>;`
+                res_var: str | None = None
+                for j_ag in range(idx_ag + 1, min(len(lines), idx_ag + 28)):
+                    m_init = re.match(r"^\s*(?:let|var)\s+([A-Za-z_$]\w*)\s*=\s*(?:''|\"\")\s*;", lines[j_ag])
+                    if m_init:
+                        res_var = m_init.group(1)
+                    if res_var:
+                        m_ret = re.match(rf"^(\s*)return\s+{re.escape(res_var)}\s*;", lines[j_ag])
+                        if m_ret:
+                            ind_r = m_ret.group(1)
+                            nl_ag = list(lines)
+                            nl_ag.insert(j_ag, f"{ind_r}if ({res_var}.length === 0) {{ {throw_stmt} }}\n")
+                            add_cand(
+                                rel,
+                                j_ag + 1,
+                                "JS_EMPTY_ACCUMULATOR_THROW_GUARD",
+                                f"empty_accumulator_throw({res_var})",
+                                "".join(nl_ag),
+                            )
+                            break
+
+        # Op 0ah (JS/TS Lookahead Skipping Empty Text Tokens, `JS_SKIP_EMPTY_TEXT_LOOKAHEAD`):
+        # Inside any `while (idx < arr.length)` loop consuming `arr[idx++]` and passing `arr[idx]`
+        # as a lookahead argument to a helper, empty `text` tokens (`{ type: "text", value: "" }`)
+        # blind the lookahead to the real next non-empty token. Replace `arr[idx]` lookaheads in
+        # the loop atomically with `arr.slice(idx).find((_t) => _t.type !== "text" || _t.value.length > 0)`.
+        if "empty" in _fail_lo_0ag or "text" in _fail_lo_0ag:
+            for idx_ah, raw_ah in enumerate(lines):
+                m_wh = re.match(r"^\s*while\s*\(\s*([A-Za-z_$]\w*)\s*<\s*([A-Za-z_$]\w*)\.length\s*\)", raw_ah)
+                if not m_wh:
+                    continue
+                iv, av = m_wh.group(1), m_wh.group(2)
+                # Scan loop body (next 35 lines) for `av[iv++]` AND lookahead calls passing `, av[iv])`
+                blk_end = min(len(lines), idx_ah + 35)
+                blk_txt = "".join(lines[idx_ah:blk_end])
+                if f"{av}[{iv}++]" not in blk_txt:
+                    continue
+                la_pat = re.compile(rf"(,\s*){re.escape(av)}\[{re.escape(iv)}\](\s*\))")
+                if not la_pat.search(blk_txt):
+                    continue
+                nl_ah = list(lines)
+                changed_ah = 0
+                rep_expr = f"{av}.slice({iv}).find((_t) => _t.type !== 'text' || _t.value.length > 0)"
+                for j_ah in range(idx_ah + 1, blk_end):
+                    new_l, cnt = la_pat.subn(rf"\1{rep_expr}\2", nl_ah[j_ah])
+                    if cnt:
+                        nl_ah[j_ah] = new_l
+                        changed_ah += cnt
+                if changed_ah:
+                    add_cand(
+                        rel,
+                        idx_ah + 1,
+                        "JS_SKIP_EMPTY_TEXT_LOOKAHEAD",
+                        f"skip_empty_text_lookahead({av}[{iv}], {changed_ah} sites)",
+                        "".join(nl_ah),
+                    )
+
+        # Op 0ai (JS/TS Trailing Delimiter Negative Lookbehind Deduplication, `JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND`):
+        # When a regex compiler appends an optional trailing delimiter (`"(?:" + escape(delim) + "$)?"`),
+        # paths that ALREADY end with `delim` match duplicate trailing delimiters (`"/test//"`).
+        # Guard with negative lookbehind: `"(?:(?<!" + escape(delim) + ")" + escape(delim) + "$)?"`.
+        for idx_ai, raw_ai in enumerate(lines):
+            m_tr = re.search(
+                r"""(['"])\(\?:\1\s*\+\s*([A-Za-z_$][\w$.]*\([^)]*\)|[A-Za-z_$][\w$.]*)\s*\+\s*(['"])\$\)\?\3""",
+                raw_ai,
+            )
+            if not m_tr:
+                continue
+            q1, dexpr, q2 = m_tr.group(1), m_tr.group(2), m_tr.group(3)
+            repl_tr = f"{q1}(?:(?<!{q1} + {dexpr} + {q1}){q1} + {dexpr} + {q2}$)?{q2}"
+            nl_ai = list(lines)
+            nl_ai[idx_ai] = raw_ai[: m_tr.start()] + repl_tr + raw_ai[m_tr.end() :]
+            add_cand(
+                rel,
+                idx_ai + 1,
+                "JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND",
+                f"trailing_delim_lookbehind({dexpr})",
+                "".join(nl_ai),
+            )
+
         # Op 0l (high-precision JS implicit-string-coercion guard hardening):
         # `JS_COERCE_STRICT_STRING_GUARD`:
         # When a guard checks strict equality against string literals (`if (k === 'a' || k === 'b' ...)`),
@@ -3456,6 +3561,9 @@ def synthesize_js_candidates(
         "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY": 0,
         "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY": 0,
         "JS_PROTO_SAFE_DEFINE_PROPERTY": 0,
+        "JS_EMPTY_ACCUMULATOR_THROW_GUARD": 0,
+        "JS_SKIP_EMPTY_TEXT_LOOKAHEAD": 0,
+        "JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND": 0,
         "JS_S3_BRANCH_STRENGTHEN": 1,
         "JS_NULLISH_TYPEOF_GUARD": 2,
         "JS_FALSY_ZERO_NUMERIC_COERCION_FIX": 2,
@@ -3983,6 +4091,9 @@ def solve_js_repository(
                     "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY",
                     "JS_EARLY_RETURN_SIBLING_WRAPPER_CONSISTENCY",
                     "JS_PROTO_SAFE_DEFINE_PROPERTY",
+                    "JS_EMPTY_ACCUMULATOR_THROW_GUARD",
+                    "JS_SKIP_EMPTY_TEXT_LOOKAHEAD",
+                    "JS_TRAILING_DELIM_NEGATIVE_LOOKBEHIND",
                 }
                 _p0 = [c for c in cands if c.tier in _p0_tiers]
                 _rest = [c for c in cands if c.tier not in _p0_tiers]
@@ -4101,7 +4212,11 @@ def solve_js_repository(
                         break
             else:
                 _, _all_js_tests_v = _discover_js_files(verify_wt)
-                _phase_b_targets = test_targets if (test_targets and len(_all_js_tests_v) > 4) else None
+                _phase_b_targets = (
+                    test_targets
+                    if (test_targets and (loc.test_runner == "vitest" or len(_all_js_tests_v) > 4))
+                    else None
+                )
                 full_cmd, _ = detect_js_test_command(verify_wt, _phase_b_targets)
                 _rc_full, _, _ = _run_pgroup_cmd(
                     full_cmd,

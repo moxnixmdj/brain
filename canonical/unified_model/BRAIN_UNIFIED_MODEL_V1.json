@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "bf5dffaa0ae3cde91747fb6a7ca4728d52eb187c2e6fa3796504fc09d5dcf098"
+  "value": "383ce3e8faf466de4a13d193835ee6c973087e6054781c439f4f1eb76d5d09d1"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "c560fdf817025a6c01846208e68d96980e61504c0d8a5948dad5f78fcf8f8b4a",
+   "sha256": "b9388e4730d74c425b8efa79e6b8a788966e08f6224debd1790502677f39035f",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -288015,7 +288015,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/epistemic_issue_reproducer_v1.py",
-   "sha256": "7ae93adf0d6911c3b53e2448d63705a4d041bca84f5c0f7d378fa9bdf0fca58d",
+   "sha256": "52be4f59320cef3c42bd1bb00ec16ebf35b517b52b4a03d97cc8e37eacb7780c",
    "summary": "Zero-LLM, Zero-Weight Polyglot Epistemic Issue-to-Reproducer & Blind SWE Resolver (v1).",
    "symbol_count": 27,
    "symbols": [
@@ -305957,7 +305957,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/multilang_causal_swe_engine_v1.py",
-   "sha256": "7832c42950f9216f0d026d02da1ad517c02c88a6cf51864952bbd517ae81277a",
+   "sha256": "3d12fad2d5307c84732f27115c6603994325c03f3ca96c75fbe59fd0f1f210ab",
    "summary": "Multi-Language Causal Angelic SWE Engine v1 (JavaScript / TypeScript / Node.js).",
    "symbol_count": 53,
    "symbols": [
