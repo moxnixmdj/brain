@@ -11,11 +11,15 @@ with stale prose/curl docs, zero-leakage memory governance, and ONE Front Door
 from __future__ import annotations
 
 import base64
+import gzip
+import hashlib
 import http.server
+import io
 import json
 import pathlib
 import socketserver
 import stat
+import tarfile
 import tempfile
 import threading
 import unittest
@@ -369,6 +373,145 @@ class TestEpistemicDocCompilerAgentV1(unittest.TestCase):
             self.assertEqual(ep.get("modality"), "epistemic_doc_compiler")
             self.assertEqual(ep.get("model_calls"), 0)
             self.assertEqual(ep.get("parameters_stored"), 0)
+
+    def test_07_implicit_tool_five_step_pipeline_zero_tool_names(self) -> None:
+        """5-step real Linux data pipeline (`gzip -> grep -> cut -> sort -> head`) with ZERO tool names in goal."""
+        with tempfile.TemporaryDirectory(prefix="brain_edc_imp5_") as td:
+            root = pathlib.Path(td)
+            mem = EDC.EpistemicMemoryStore(root / "mem.json")
+            with gzip.open(root / "metrics.csv.gz", "wt", encoding="utf-8") as f:
+                f.write(
+                    "ENV,HOST,VAL\n"
+                    "DEV,dev-1,10\n"
+                    "PROD,zeta-node,90\n"
+                    "PROD,alpha-node,20\n"
+                    "PROD,mid-node,50\n"
+                    "PROD,zeta-node,99\n"
+                    "STAGING,stg-1,5\n"
+                )
+            goal = (
+                "Decompress metrics.csv.gz, filter lines matching PROD, "
+                "extract field 2 with delimiter=,, sort unique lines in reverse order, "
+                "take first 2 lines, and save to top2.txt"
+            )
+            res = EDC.solve_multi_step_with_instant_knowledge(goal, workspace=root, memory=mem)
+            self.assertEqual(res["status"], "VERIFIED", res)
+            self.assertEqual(res["steps_completed"], 5)
+            self.assertEqual(res["model_calls"], 0)
+            self.assertEqual(res["parameters_stored"], 0)
+            self.assertEqual((root / "top2.txt").read_text(encoding="utf-8"), "zeta-node\nmid-node\n")
+            # Ensure scratch handoff files were cleaned up
+            self.assertEqual([p.name for p in root.glob("_epistemic_step_*")], [])
+            # Ensure zero concrete filename/data leakage into persisted memory
+            mem_text = (root / "mem.json").read_text(encoding="utf-8")
+            self.assertNotIn("metrics.csv.gz", mem_text)
+            self.assertNotIn("zeta-node", mem_text)
+            self.assertNotIn("top2.txt", mem_text)
+
+    def test_08_implicit_tool_gzip_grep_sort_via_one_front_door(self) -> None:
+        """ONE Front Door solves an implicit 3-step gzip+filter+sort goal with ZERO tool names."""
+        with tempfile.TemporaryDirectory(prefix="brain_edc_imp3_fd_") as td:
+            root = pathlib.Path(td)
+            with gzip.open(root / "app.log.gz", "wt", encoding="utf-8") as f:
+                f.write(
+                    "INFO ok\n"
+                    "ERROR 500 db-timeout\n"
+                    "WARN slow\n"
+                    "ERROR 500 auth-fail\n"
+                    "ERROR 500 db-timeout\n"
+                    "ERROR 404 miss\n"
+                )
+            goal = "Decompress app.log.gz, filter lines containing ERROR 500, sort unique lines, and save to out.txt"
+            resp = UM.open_model().solve(goal, inputs={"workspace": str(root)}, mode="EPISTEMIC")
+            self.assertTrue(resp.get("pass"), resp)
+            self.assertEqual(
+                (root / "out.txt").read_text(encoding="utf-8"),
+                "ERROR 500 auth-fail\nERROR 500 db-timeout\n",
+            )
+            ep = resp.get("epistemic_result") or {}
+            self.assertEqual(ep.get("modality"), "epistemic_doc_compiler")
+            self.assertEqual(ep.get("model_calls"), 0)
+
+    def test_09_implicit_sha256_and_tar_gz_extract_and_false_positive_rejection(self) -> None:
+        """Implicit binary checksum, tar.gz directory extraction, and adversarial false-positive rejection."""
+        with tempfile.TemporaryDirectory(prefix="brain_edc_imp_misc_") as td:
+            root = pathlib.Path(td)
+
+            # 1. Implicit SHA-256 checksum
+            raw = b"epistemic-zero-llm-sha256-payload\n"
+            (root / "payload.bin").write_bytes(raw)
+            expected_hex = hashlib.sha256(raw).hexdigest()
+            r_hash = EDC.solve_multi_step_with_instant_knowledge(
+                "Compute sha256 checksum of payload.bin and save to hash.txt",
+                workspace=root,
+            )
+            self.assertEqual(r_hash["status"], "VERIFIED", r_hash)
+            self.assertIn(expected_hex, (root / "hash.txt").read_text(encoding="utf-8"))
+
+            # 2. Implicit tar.gz archive extraction into new directory
+            with tarfile.open(root / "bundle.tar.gz", "w:gz") as tf:
+                body = b"hello from inside tar.gz\n"
+                ti = tarfile.TarInfo(name="notes/readme.txt")
+                ti.size = len(body)
+                tf.addfile(ti, io.BytesIO(body))
+            r_tar = EDC.solve_multi_step_with_instant_knowledge(
+                "Extract bundle.tar.gz into extracted_dir",
+                workspace=root,
+            )
+            self.assertEqual(r_tar["status"], "VERIFIED", r_tar)
+            self.assertEqual(
+                (root / "extracted_dir" / "notes" / "readme.txt").read_text(encoding="utf-8"),
+                "hello from inside tar.gz\n",
+            )
+
+            # 3. Adversarial false-positive rejection: raw compressed bytes MUST NOT pass decompress verifier
+            gz_bytes = gzip.compress(b"ERROR 500 foo\nINFO bar\n")
+            (root / "in.gz").write_bytes(gz_bytes)
+            b = EDC.scan_environment_boundary(root, "Decompress in.gz and save to bad.txt")
+            ok_bad, note_bad = EDC._check_semantic_postconditions(
+                root, b, "Decompress in.gz and save to bad.txt", gz_bytes, root / "bad.txt"
+            )
+            self.assertFalse(ok_bad)
+            self.assertIn("still_compressed", note_bad)
+
+    def test_10_cross_modal_live_http_to_cli_pipeline(self) -> None:
+        """Cross-modal live HTTP GET -> jq -> sort unique pipeline with 0 LLM calls."""
+
+        class RecordsHandler(http.server.BaseHTTPRequestHandler):
+            def log_message(self, *args: object) -> None:
+                pass
+
+            def do_GET(self) -> None:
+                if self.path == "/api/records":
+                    self.send_response(200)
+                    self.send_header("Content-Type", "application/json")
+                    self.end_headers()
+                    payload = {"records": [{"name": "delta"}, {"name": "alpha"}, {"name": "delta"}, {"name": "bravo"}]}
+                    self.wfile.write(json.dumps(payload).encode("utf-8"))
+                    return
+                self.send_response(404)
+                self.end_headers()
+
+        srv = socketserver.TCPServer(("127.0.0.1", 0), RecordsHandler)
+        port = srv.server_address[1]
+        th = threading.Thread(target=srv.serve_forever, daemon=True)
+        th.start()
+        try:
+            with tempfile.TemporaryDirectory(prefix="brain_edc_http_cli_") as td:
+                root = pathlib.Path(td)
+                goal = (
+                    f"Fetch http://127.0.0.1:{port}/api/records, "
+                    "use jq with raw output filter '.records[] | .name', "
+                    "sort unique lines, and save to names.txt"
+                )
+                res = EDC.solve_multi_step_with_instant_knowledge(goal, workspace=root)
+                self.assertEqual(res["status"], "VERIFIED", res)
+                self.assertEqual(res["steps_completed"], 3)
+                self.assertEqual(res["model_calls"], 0)
+                self.assertEqual((root / "names.txt").read_text(encoding="utf-8"), "alpha\nbravo\ndelta\n")
+        finally:
+            srv.shutdown()
+            srv.server_close()
 
 
 if __name__ == "__main__":

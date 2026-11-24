@@ -3188,6 +3188,99 @@ class TestMultiLangCausalSWEEngineV1(unittest.TestCase):
                 self.assertEqual(res["model_calls"], 0)
                 self.assertEqual(res["parameters_stored"], 0)
 
+    def test_27_iter63_js_hex_regex_i_nonzero_limit_and_ternary_drop(self) -> None:
+        """Iter 63 JS laws: Op 0y hex-escape `/i`, Op 0ac nonzero lower bound, Op 0ad ternary drop."""
+        # 1. Op 0y: single-letter hex escape `/%2E/g` -> `/%2E/gi`
+        with self.subTest(case="js_hex_escape_regex_i"):
+            with tempfile.TemporaryDirectory(prefix="brain_js_iter63_hex_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "dec.js": (
+                            "function decodeKey(k, decodeDot) {\n"
+                            "  return decodeDot ? k.replace(/%2E/g, '.') : k;\n"
+                            "}\n"
+                            "module.exports = { decodeKey };\n"
+                        ),
+                        "test_dec.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { decodeKey } = require('./dec.js');\n"
+                            "test('decodes lowercase %2e dots case-insensitively', () => {\n"
+                            "  assert.strictEqual(decodeKey('a%2Eb', true), 'a.b');\n"
+                            "  assert.strictEqual(decodeKey('a%2eb', true), 'a.b');\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                res = ML_SWE.solve_js_repository(root, ["test_dec.js"], timeout_s=20.0)
+                self.assertTrue(res["verified"], res)
+                self.assertEqual(res["winner"]["tier"], "JS_REGEX_CASE_INSENSITIVE_FLAG")
+                self.assertEqual(res["model_calls"], 0)
+
+        # 2. Op 0ac: `count >= limit` throw guard must allow `count === 0` when `limit === 0`
+        with self.subTest(case="js_throw_limit_nonzero_lower_bound"):
+            with tempfile.TemporaryDirectory(prefix="brain_js_iter63_lim_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "arr.js": (
+                            "function checkScalar(val, opts, currentLen) {\n"
+                            "  if (opts.throwOnLimit && currentLen >= opts.arrayLimit) {\n"
+                            "    throw new RangeError('Array limit exceeded');\n"
+                            "  }\n"
+                            "  return val;\n"
+                            "}\n"
+                            "module.exports = { checkScalar };\n"
+                        ),
+                        "test_arr.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { checkScalar } = require('./arr.js');\n"
+                            "test('zero arrayLimit allows scalar at currentLen 0', () => {\n"
+                            "  assert.strictEqual(checkScalar('ok', { throwOnLimit: true, arrayLimit: 0 }, 0), 'ok');\n"
+                            "  assert.throws(() => checkScalar('x', { throwOnLimit: true, arrayLimit: 1 }, 1), RangeError);\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                res = ML_SWE.solve_js_repository(root, ["test_arr.js"], timeout_s=20.0)
+                self.assertTrue(res["verified"], res)
+                self.assertEqual(res["winner"]["tier"], "JS_THROW_LIMIT_NONZERO_LOWER_BOUND")
+                self.assertEqual(res["model_calls"], 0)
+
+        # 3. Op 0ad: conditional double-transform ternary simplification
+        with self.subTest(case="js_ternary_fallback_branch_simplify"):
+            with tempfile.TemporaryDirectory(prefix="brain_js_iter63_tern_") as td:
+                root = pathlib.Path(td)
+                _write_files(
+                    root,
+                    {
+                        "enc.js": (
+                            "function formatPrefix(prefix, encodeDotInKeys) {\n"
+                            "  var encodedPrefix = encodeDotInKeys ? String(prefix).replace(/\\./g, '%2E') : String(prefix);\n"
+                            "  return encodedPrefix + '.leaf';\n"
+                            "}\n"
+                            "module.exports = { formatPrefix };\n"
+                        ),
+                        "test_enc.js": (
+                            "const test = require('node:test');\n"
+                            "const assert = require('node:assert/strict');\n"
+                            "const { formatPrefix } = require('./enc.js');\n"
+                            "test('encodeDotInKeys does not re-encode structural separator dots', () => {\n"
+                            "  assert.strictEqual(formatPrefix('a.b', true), 'a.b.leaf');\n"
+                            "  assert.strictEqual(formatPrefix('a.b', false), 'a.b.leaf');\n"
+                            "});\n"
+                        ),
+                    },
+                )
+                res = ML_SWE.solve_js_repository(root, ["test_enc.js"], timeout_s=20.0)
+                self.assertTrue(res["verified"], res)
+                self.assertEqual(res["winner"]["tier"], "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY")
+                self.assertEqual(res["model_calls"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

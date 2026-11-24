@@ -2631,13 +2631,19 @@ def synthesize_js_candidates(
             for _il, ln_0x, desc_0x, psrc_0x in _0x_hits[:4]:
                 add_cand(rel, ln_0x, "JS_DETACHED_THIS_TO_DEFINED_RECEIVER", desc_0x, psrc_0x)
 
-        # Op 0y (Iter 61 — ECMA-262 case-insensitive RegExp `/i` flag law):
+        # Op 0y (Iter 61/63 — ECMA-262 case-insensitive RegExp `/i` flag law):
         # `JS_REGEX_CASE_INSENSITIVE_FLAG`:
         # Companion to Op 0u (`JS_REGEX_DOTALL_NEWLINE_LAW`). When a failing test exercises
         # case variations against a regex literal `/pattern/flags` containing ASCII letters
-        # without `i` (including module-level `var/const/let NAME = /.../` definitions), add `/i`,
-        # ranked by lexical overlap between the regex identifier/literal words and failing tests.
-        _fail_blob_0y = ((loc.initial_output or "")[:2000] + " " + (loc.initial_output or "")[-3000:]).lower()
+        # (including hex escapes like `/%2E/g`) without `i`, add `/i`, ranked by lexical
+        # overlap against the actual failure lines (including mid-stream TAP `not ok` blocks).
+        _raw_out_0y = loc.initial_output or ""
+        _not_ok_0y: list[str] = []
+        _out_lines_0y = _raw_out_0y.splitlines()
+        for _li_y, _ln_y in enumerate(_out_lines_0y):
+            if _ln_y.startswith(("not ok ", "  ---", "FAIL ", "✖")) or "AssertionError" in _ln_y or "not equal" in _ln_y.lower():
+                _not_ok_0y.extend(_out_lines_0y[max(0, _li_y - 2) : min(len(_out_lines_0y), _li_y + 8)])
+        _fail_blob_0y = (_raw_out_0y[:2000] + " " + " ".join(_not_ok_0y[:80]) + " " + _raw_out_0y[-3000:]).lower()
         _fail_toks_0y = {
             w for w in re.findall(r"[a-z]{3,}", _fail_blob_0y)
             if w not in {
@@ -2647,7 +2653,7 @@ def synthesize_js_candidates(
             }
         }
         _case_hint_0y = any(
-            k in _fail_blob_0y for k in ("case", "insensitive", "uppercase", "lowercase", "capital")
+            k in _fail_blob_0y for k in ("case", "insensitive", "uppercase", "lowercase", "capital", "%2e")
         )
         _rx_decl_re = re.compile(
             r"(?<!['\"\\])/(?![/*])((?:\\.|[^/\\\r\n])+)/([dgimsuvy]*)(?!\s*[\w/])"
@@ -2663,7 +2669,7 @@ def synthesize_js_candidates(
                     continue
                 # Strip regex escape sequences like \s, \d, \w before checking for literal ASCII letters
                 pat_lit = re.sub(r"\\.", "", pat_y)
-                if not re.search(r"[A-Za-z]{2,}", pat_lit):
+                if not re.search(r"[A-Za-z]", pat_lit):
                     continue
                 # Lexical tokens from the variable name + literal words inside the regex
                 line_words = set(re.findall(r"[a-z]{3,}", (raw_y[: m_ry.start()] + " " + pat_lit).lower()))
@@ -2672,9 +2678,10 @@ def synthesize_js_candidates(
                     if len(cid) >= 3:
                         line_words.add(cid.lower())
                 ov_y = sum(1 for w in line_words if w in _fail_toks_0y)
-                if ov_y <= 0 and not (_case_hint_0y and (ri_y + 1) in lns):
+                pct_hex_hit = bool(re.search(r"%[0-9a-fA-F]{2}", pat_lit)) and (pat_lit.lower() in _fail_blob_0y)
+                if ov_y <= 0 and not pct_hex_hit and not (_case_hint_0y and (ri_y + 1) in lns):
                     continue
-                score_y = ov_y * 4 + (3 if _case_hint_0y else 0) + (2 if (ri_y + 1) in lns else 0)
+                score_y = ov_y * 4 + (6 if pct_hex_hit else 0) + (3 if _case_hint_0y else 0) + (2 if (ri_y + 1) in lns else 0)
                 patched_y = raw_y[: m_ry.end(2)] + "i" + raw_y[m_ry.end(2) :]
                 nl_y = list(lines)
                 nl_y[ri_y] = patched_y
@@ -2775,6 +2782,63 @@ def synthesize_js_candidates(
         _0ab_hits.sort(key=lambda t: (-t[0], t[1]))
         for _ilab, ln_0ab, desc_0ab, psrc_0ab in _0ab_hits[:6]:
             add_cand(rel, ln_0ab, "JS_NULLISH_BOOL_DEFAULT_STRICT_UNDEFINED", desc_0ab, psrc_0ab)
+
+        # Op 0ac (Iter 63 — Arithmetic zero-limit throw-guard boundary law):
+        # `JS_THROW_LIMIT_NONZERO_LOWER_BOUND`:
+        # When an `if (... && count >= limit)` guard immediately `throw`s (e.g. RangeError
+        # on limit exceeded), `limit === 0` with `count === 0` falsely triggers the throw on
+        # a scalar / empty collection. Conjoining `&& count > 0` protects the zero-count case.
+        if "rangeerror" in _fail_blob_0y or "limit" in _fail_blob_0y:
+            _0ac_hits: list[tuple[int, int, str, str]] = []
+            _lim_cmp_re = re.compile(r"\b([A-Za-z_$][\w$.]*)\s*>=\s*([A-Za-z_$][\w$.]*)")
+            for ri_ac, raw_ac in enumerate(lines):
+                if "if" not in raw_ac or ">=" not in raw_ac:
+                    continue
+                next_blk = "".join(lines[ri_ac + 1 : min(len(lines), ri_ac + 4)])
+                if "throw " not in next_blk:
+                    continue
+                for m_ac in _lim_cmp_re.finditer(raw_ac):
+                    lhs_ac, rhs_ac = m_ac.group(1), m_ac.group(2)
+                    if f"{lhs_ac} > 0" in raw_ac:
+                        continue
+                    patched_ac = raw_ac[: m_ac.end()] + f" && {lhs_ac} > 0" + raw_ac[m_ac.end() :]
+                    nl_ac = list(lines)
+                    nl_ac[ri_ac] = patched_ac
+                    in_loc_ac = 1 if (ri_ac + 1) in lns else 0
+                    _0ac_hits.append((in_loc_ac, ri_ac + 1, f"nonzero_limit_guard({lhs_ac} > 0)", "".join(nl_ac)))
+            _0ac_hits.sort(key=lambda t: (-t[0], t[1]))
+            for _ilac, ln_0ac, desc_0ac, psrc_0ac in _0ac_hits[:4]:
+                add_cand(rel, ln_0ac, "JS_THROW_LIMIT_NONZERO_LOWER_BOUND", desc_0ac, psrc_0ac)
+
+        # Op 0ad (Iter 63 — Conditional double-transform ternary simplification law):
+        # `JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY`:
+        # When a ternary applies a method transform (`cond ? base.replace(...) : base`) whose
+        # `else` branch is the unmodified `base` expression, simplifying to `base` eliminates
+        # premature/redundant transformation (e.g. re-encoding structural separators).
+        _0ad_hits: list[tuple[int, int, str, str]] = []
+        _tern_tx_re = re.compile(
+            r"([A-Za-z_$][\w$.]*)\s*\?\s*([^?:;\n]+?)\.(?:replace|replaceAll|toLowerCase|toUpperCase|trim)\([^;\n]*?\)\s*:\s*([^;\n]+?)(?=[;,\n])"
+        )
+        for ri_ad, raw_ad in enumerate(lines):
+            if "?" not in raw_ad or ":" not in raw_ad:
+                continue
+            for m_ad in _tern_tx_re.finditer(raw_ad):
+                cond_ad, base_then, base_else = m_ad.group(1).strip(), m_ad.group(2).strip(), m_ad.group(3).strip()
+                if base_then != base_else:
+                    continue
+                # Score against failure tokens (camelCase-split condition name)
+                c_words = {w.lower() for w in re.findall(r"[A-Za-z][a-z]+", cond_ad) if len(w) >= 3}
+                c_words.add(cond_ad.lower())
+                ov_ad = sum(1 for w in c_words if w in _fail_toks_0y)
+                in_loc_ad = 1 if (ri_ad + 1) in lns else 0
+                if ov_ad <= 0 and not in_loc_ad:
+                    continue
+                nl_ad = list(lines)
+                nl_ad[ri_ad] = raw_ad[: m_ad.start()] + base_else + raw_ad[m_ad.end() :]
+                _0ad_hits.append((ov_ad * 3 + in_loc_ad * 2, ri_ad + 1, f"ternary_drop_transform({cond_ad} -> {base_else})", "".join(nl_ad)))
+        _0ad_hits.sort(key=lambda t: (-t[0], t[1]))
+        for _scad, ln_0ad, desc_0ad, psrc_0ad in _0ad_hits[:4]:
+            add_cand(rel, ln_0ad, "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY", desc_0ad, psrc_0ad)
 
         # Op 0l (high-precision JS implicit-string-coercion guard hardening):
         # `JS_COERCE_STRICT_STRING_GUARD`:
@@ -3292,6 +3356,8 @@ def synthesize_js_candidates(
         "JS_SORT_COMPARATOR_TYPEOF_FUNCTION_GUARD": 0,
         "JS_OBJECT_SPREAD_STRIP_UNDEFINED_OPTIONS": 0,
         "JS_NULLISH_BOOL_DEFAULT_STRICT_UNDEFINED": 0,
+        "JS_THROW_LIMIT_NONZERO_LOWER_BOUND": 0,
+        "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY": 0,
         "JS_S3_BRANCH_STRENGTHEN": 1,
         "JS_NULLISH_TYPEOF_GUARD": 2,
         "JS_FALSY_ZERO_NUMERIC_COERCION_FIX": 2,
@@ -3815,6 +3881,8 @@ def solve_js_repository(
                     "JS_SORT_COMPARATOR_TYPEOF_FUNCTION_GUARD",
                     "JS_OBJECT_SPREAD_STRIP_UNDEFINED_OPTIONS",
                     "JS_NULLISH_BOOL_DEFAULT_STRICT_UNDEFINED",
+                    "JS_THROW_LIMIT_NONZERO_LOWER_BOUND",
+                    "JS_TERNARY_FALLBACK_BRANCH_SIMPLIFY",
                 }
                 _p0 = [c for c in cands if c.tier in _p0_tiers]
                 _rest = [c for c in cands if c.tier not in _p0_tiers]

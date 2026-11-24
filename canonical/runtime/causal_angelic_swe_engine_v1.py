@@ -9364,6 +9364,7 @@ def synthesize_candidates(
     # ------------------------------------------------------------------
     # Tier 4: Localized Suspicious Guards, Hoists, and Expressions
     # ------------------------------------------------------------------
+    _seen_12i_files: set[str] = set()
     for site in loc.sites[:14]:
         if len(candidates) >= max_candidates:
             break
@@ -9372,6 +9373,55 @@ def synthesize_candidates(
             continue
         _, tree = loaded
         traits = _traits_from_frames(site.failing_frames)
+
+        # Iter 63 Law 12i (AST Dataflow Normalization Consistency):
+        # When a function in a top localized file computes `local_var = normalize_fn(raw_expr)`
+        # (e.g. `include_group = _normalize_name(item.include_group)`) and a downstream call
+        # in the same function still passes the unnormalized `raw_expr`, substitute `local_var`.
+        _norm_fn_hints = ("norm", "canon", "clean", "strip", "lower", "upper", "resolve", "parse", "decode", "sanitize")
+        if site.file not in _seen_12i_files and len(_seen_12i_files) < 3:
+            _seen_12i_files.add(site.file)
+            for fn_node in ast.walk(tree):
+                if not isinstance(fn_node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    continue
+                norm_bindings: list[tuple[int, str, str]] = []
+                for st_n in ast.walk(fn_node):
+                    if (
+                        isinstance(st_n, ast.Assign)
+                        and len(st_n.targets) == 1
+                        and isinstance(st_n.targets[0], ast.Name)
+                        and isinstance(st_n.value, ast.Call)
+                        and len(st_n.value.args) == 1
+                    ):
+                        fn_c = st_n.value.func
+                        fn_cname = fn_c.id if isinstance(fn_c, ast.Name) else (fn_c.attr if isinstance(fn_c, ast.Attribute) else "")
+                        if any(h in fn_cname.lower() for h in _norm_fn_hints):
+                            raw_src = ast.unparse(st_n.value.args[0])
+                            var_id = st_n.targets[0].id
+                            if raw_src != var_id and ("." in raw_src or "[" in raw_src):
+                                norm_bindings.append((getattr(st_n, "lineno", 0), var_id, raw_src))
+                for assign_ln, var_id, raw_src in norm_bindings:
+                    for call_n in ast.walk(fn_node):
+                        c_ln = getattr(call_n, "lineno", 0)
+                        if isinstance(call_n, ast.Call) and c_ln > assign_ln:
+                            for arg_n in call_n.args:
+                                if ast.unparse(arg_n) == raw_src:
+                                    a_ln = getattr(arg_n, "lineno", c_ln)
+                                    code_12i = _replace_subexpr_in_tree(
+                                        tree, a_ln, raw_src, ast.Name(id=var_id, ctx=ast.Load())
+                                    )
+                                    if code_12i:
+                                        push(
+                                            PatchCandidate(
+                                                file=site.file,
+                                                lineno=a_ln,
+                                                tier="TIER3_NORMALIZED_LOCAL_SUBSTITUTION",
+                                                description=f"use_normalized_local({raw_src} -> {var_id})",
+                                                patched_source=code_12i,
+                                                ast_position="expr",
+                                                hole_traits=traits,
+                                            )
+                                        )
 
         # Guards & hoists on localized lines (even if angelic global flip wasn't tested)
         for node in ast.walk(tree):

@@ -2693,6 +2693,47 @@ def test_30_iter61_safe_next_default_pep479() -> None:
         assert res["model_calls"] == 0 and res["parameters_stored"] == 0
 
 
+def test_31_iter63_normalized_local_substitution_law12i() -> None:
+    """Iter 63 Law 12i (`TIER3_NORMALIZED_LOCAL_SUBSTITUTION`):
+    When a function computes `norm_v = _normalize_name(item.name)` and a downstream
+    call still passes the raw unnormalized `item.name`, substitute `norm_v`.
+    """
+    with tempfile.TemporaryDirectory(prefix="brain_py_iter63_norm_") as td:
+        root = pathlib.Path(td)
+        _write_files(
+            root,
+            {
+                "pkg/__init__.py": "",
+                "pkg/groups.py": (
+                    "class Include:\n"
+                    "    def __init__(self, group_name):\n"
+                    "        self.group_name = group_name\n\n"
+                    "def _normalize_name(name):\n"
+                    "    return name.lower().replace('_', '-')\n\n"
+                    "def check_self_cycle(group, item):\n"
+                    "    group_name = _normalize_name(item.group_name)\n"
+                    "    if group_name == group:\n"
+                    "        return format_cycle(group, item.group_name)\n"
+                    "    return 'ok'\n\n"
+                    "def format_cycle(group, target):\n"
+                    "    return f'{group} includes itself' if target == group else f'{target} -> {group}'\n"
+                ),
+                "tests/test_groups.py": (
+                    "from pkg.groups import Include, check_self_cycle, format_cycle\n\n"
+                    "def test_unnormalized_self_include():\n"
+                    "    assert check_self_cycle('my-group', Include('My_Group')) == 'my-group includes itself'\n"
+                    "    assert check_self_cycle('dev-tools', Include('Dev_Tools')) == 'dev-tools includes itself'\n"
+                    "    assert check_self_cycle('my-group', Include('other')) == 'ok'\n"
+                    "    assert format_cycle('a', 'b') == 'b -> a'\n"
+                ),
+            },
+        )
+        res = ENGINE.solve_repository(root, ["tests/test_groups.py"], python_exe=sys.executable)
+        assert res["verified"] is True, res
+        assert res["winner"]["tier"] == "TIER3_NORMALIZED_LOCAL_SUBSTITUTION", res["winner"]
+        assert res["model_calls"] == 0 and res["parameters_stored"] == 0
+
+
 
 
 

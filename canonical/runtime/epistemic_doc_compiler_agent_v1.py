@@ -27,6 +27,7 @@ tool/app/endpoint catalogs:
 
 from __future__ import annotations
 
+import concurrent.futures
 import hashlib
 import html
 import json
@@ -77,6 +78,10 @@ _CONCEPT_CLUSTERS: tuple[frozenset[str], ...] = (
     frozenset({"auth", "token", "key", "secret", "header", "credential", "bearer", "apikey"}),
     frozenset({"verbose", "quiet", "silent", "stdout", "force", "overwrite", "recursive"}),
     frozenset({"base64", "b64", "hex", "utf8", "ascii"}),
+    frozenset({"first", "top", "head", "initial", "leading", "limit"}),
+    frozenset({"last", "tail", "bottom", "trailing", "final"}),
+    frozenset({"line", "lines", "row", "rows", "record", "records"}),
+    frozenset({"containing", "contains", "matching", "matches", "pattern", "patterns", "substring", "regex"}),
 )
 
 _TOKEN_TO_CONCEPTS: dict[str, set[str]] = {}
@@ -173,7 +178,7 @@ _OPT_LINE_RE = re.compile(
     r"^\s{1,8}"
     r"(?:(?P<short>-[A-Za-z0-9?])(?:\s+(?P<sarg><[^>]+>|[A-Z][A-Z0-9_-]{1,20}))?)?"
     r"(?:\s*,\s*|\s+)?"
-    r"(?:(?P<long>--[A-Za-z0-9][A-Za-z0-9_-]*)(?:[=\s](?P<larg><[^>]+>|[A-Z][A-Z0-9_-]{1,20}|\[[^\]]+\]))?)?"
+    r"(?:(?P<long>--[A-Za-z0-9][A-Za-z0-9_-]*)(?:[=\s](?P<larg><[^>]+>|[A-Z][A-Z0-9_-]{1,20}|\[[^\]]+\]))?(?:\s*,\s*--[A-Za-z0-9][A-Za-z0-9_-]*(?:[=\s](?:<[^>]+>|[A-Z][A-Z0-9_-]{1,20}))?)*)?"
     r"(?:\s{2,}|\t+|:?\s+-\s+|\s+)"
     r"(?P<desc>.*)$"
 )
@@ -781,6 +786,253 @@ _KV_PAT = re.compile(
 _FILE_TOK_RE = re.compile(r"\b([A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,8})\b")
 
 
+def _detect_file_magic(path: pathlib.Path) -> str:
+    """Pure-byte magic-number sensing (<0.1ms, zero external dependencies)."""
+    try:
+        if not path.is_file():
+            return "missing"
+        head = path.read_bytes()[:512]
+    except Exception:
+        return "unknown"
+    if not head:
+        return "empty"
+    if head.startswith(b"\x1f\x8b"):
+        # Check tar.gz by filename cue or inner header
+        if path.name.lower().endswith((".tar.gz", ".tgz")):
+            return "tar_gzip"
+        return "gzip"
+    if head.startswith(b"BZh"):
+        if path.name.lower().endswith((".tar.bz2", ".tbz2")):
+            return "tar_bzip2"
+        return "bzip2"
+    if head.startswith(b"\xfd7zXZ\x00"):
+        if path.name.lower().endswith((".tar.xz", ".txz")):
+            return "tar_xz"
+        return "xz"
+    if head.startswith(b"PK\x03\x04"):
+        return "zip"
+    if len(head) > 262 and head[257:262] == b"ustar":
+        return "tar"
+    if head.startswith(b"SQLite format 3\x00"):
+        return "sqlite"
+    try:
+        txt = head.decode("utf-8")
+        st = txt.lstrip()
+        if st.startswith(("{", "[")):
+            return "json_text"
+        if st.startswith(("<!DOCTYPE", "<html", "<HTML")):
+            return "html_text"
+        return "utf8_text"
+    except UnicodeDecodeError:
+        return "binary"
+
+
+def _extract_unquoted_patterns_and_numeric_slots(goal: str) -> tuple[list[str], dict[str, str]]:
+    """Extract unquoted pattern phrases (`containing ERROR 500`, `matching PROD`)
+    and numeric role slots (`first 2 lines`, `top 3`, `field 2`, `column 3`).
+    """
+    patterns: list[str] = []
+    # Match unquoted phrase after containing/matching/pattern (stop at clause punctuation/conjunction)
+    for m in re.finditer(
+        r"""(?i)\b(?:containing|contains|matching|matches|with\s+pattern)\s+(?!['"])([A-Za-z0-9_.:/@*+\- ]{1,60}?)(?=\s*(?:,|;|\band\b|\bthen\b|\bin\b|\bfrom\b|\bon\b|\bto\b|\binto\b|\bsave\b|\bwrite\b|$))""",
+        goal or "",
+    ):
+        pat = m.group(1).strip()
+        if pat and pat not in patterns:
+            patterns.append(pat)
+
+    numeric_slots: dict[str, str] = {}
+    # first/top/last N (lines)
+    m_head = re.search(r"(?i)\b(?:first|top|head|limit)\s+(\d+)\b", goal or "")
+    if m_head:
+        numeric_slots["lines"] = m_head.group(1)
+    m_tail = re.search(r"(?i)\b(?:last|bottom|tail)\s+(\d+)\b", goal or "")
+    if m_tail:
+        numeric_slots["lines"] = m_tail.group(1)
+    # field/column N
+    m_fld = re.search(r"(?i)\b(?:field|fields|column|columns|col)\s+(\d+(?:[,-]\d+)*)\b", goal or "")
+    if m_fld:
+        numeric_slots["fields"] = m_fld.group(1)
+    return patterns, numeric_slots
+
+
+# Lazy process-wide cache of live OS tool summaries (read purely from running OS, ZERO hardcoded tool catalog)
+_OS_TOOL_INDEX_CACHE: dict[str, str] | None = None
+
+
+def _build_os_tool_index() -> dict[str, str]:
+    """Read live package summaries (`dpkg-query`) + live 1-line `--help` headers for
+    coreutils & key CLI packages (~180ms ONCE per process, zero hardcoded tool knowledge).
+    """
+    global _OS_TOOL_INDEX_CACHE
+    if _OS_TOOL_INDEX_CACHE is not None:
+        return _OS_TOOL_INDEX_CACHE
+
+    idx: dict[str, str] = {}
+    if shutil.which("dpkg-query") and shutil.which("dpkg"):
+        pkg_summaries: dict[str, str] = {}
+        try:
+            out = subprocess.check_output(
+                ["dpkg-query", "-W", "-f=${Package}\t${binary:Summary}\n"],
+                text=True,
+                timeout=3.0,
+            )
+            for line in out.splitlines():
+                if "\t" in line:
+                    pkg, summ = line.split("\t", 1)
+                    pkg_summaries[pkg.strip()] = summ.strip()
+        except Exception:
+            pkg_summaries = {}
+
+        # 1. Index direct CLI packages whose package name IS an executable on PATH
+        for pkg, summ in pkg_summaries.items():
+            resolved = shutil.which(pkg)
+            if resolved:
+                idx[resolved] = summ
+        # Also inspect key utility packages whose binary name differs from package name (e.g. xz-utils->xz, mawk->awk, ripgrep->rg, diffutils->diff)
+        cli_pkgs = [
+            pkg
+            for pkg, summ in pkg_summaries.items()
+            if pkg == "coreutils"
+            or any(
+                kw in summ.lower()
+                for kw in ("compression", "de-archiver", "archiving", "archiver", "grep", "regex", "json", "stream editor", "text processing", "url syntax", "checksum", "diff", "patch", "cryptographic")
+            )
+        ]
+        bins_to_probe: list[tuple[str, str]] = []
+        for pkg in cli_pkgs[:30]:
+            try:
+                files = subprocess.check_output(["dpkg", "-L", pkg], text=True, timeout=2.0).splitlines()
+            except Exception:
+                continue
+            psumm = pkg_summaries.get(pkg, "")
+            for f in files:
+                if (f.startswith("/usr/bin/") or f.startswith("/bin/")) and os.path.isfile(f) and os.access(f, os.X_OK):
+                    bins_to_probe.append((f, psumm))
+
+        def _probe_one(item: tuple[str, str]) -> tuple[str, str]:
+            bpath, psumm = item
+            try:
+                r = subprocess.run([bpath, "--help"], capture_output=True, text=True, timeout=0.5)
+                lines = [l.strip() for l in (r.stdout or r.stderr or "").splitlines() if l.strip()]
+                desc_lines = [l for l in lines[:8] if not l.lower().startswith(("usage:", "or:"))][:2]
+                desc = " ".join(desc_lines)
+                return bpath, f"{psumm} {desc}".strip()
+            except Exception:
+                return bpath, psumm
+
+        seen_paths: set[str] = set()
+        dedup_probe: list[tuple[str, str]] = []
+        for bp, ps in bins_to_probe:
+            if bp not in seen_paths:
+                seen_paths.add(bp)
+                dedup_probe.append((bp, ps))
+        if dedup_probe:
+            with concurrent.futures.ThreadPoolExecutor(max_workers=16) as ex:
+                for bpath, desc in ex.map(_probe_one, dedup_probe):
+                    if desc:
+                        idx[bpath] = desc
+
+    _OS_TOOL_INDEX_CACHE = idx
+    return idx
+
+
+def _discover_implicit_tools(
+    goal: str,
+    boundary: Mapping[str, Any],
+    *,
+    knowledge_source: Callable[[str], list[dict[str, str]]] | None = None,
+    gaps_queried: list[str] | None = None,
+) -> list[str]:
+    """Discover candidate executables on the running OS when the goal NEVER names the tool.
+
+    Sources (zero hardcoded tool catalog):
+      1. Magic-byte / format affinity on PATH (`gzip` -> gzip/gunzip, `tar_gzip` -> tar, `zip` -> unzip, `sha256` -> sha256sum)
+      2. Live OS package + `--help` summary index (`_build_os_tool_index`)
+      3. External `knowledge_source` documentation command extraction (verified against live PATH)
+    """
+    goal_low = (goal or "").lower()
+    in_magic = str(boundary.get("input_magic") or "")
+    scored: dict[str, float] = {}
+
+    def _bump(path_or_name: str, delta: float) -> None:
+        resolved = path_or_name if os.path.isabs(path_or_name) and os.path.isfile(path_or_name) else (shutil.which(path_or_name) or "")
+        if not resolved:
+            return
+        scored[resolved] = scored.get(resolved, 0.0) + delta
+
+    # 1. Live magic-byte & format affinity (purely structural, verified via PATH)
+    if in_magic in ("tar_gzip", "tar_bzip2", "tar_xz", "tar") and re.search(r"\b(extract|unpack|unarchive|untar|list)\b", goal_low):
+        _bump("tar", 12.0)
+    elif in_magic == "gzip" and re.search(r"\b(decompress|uncompress|inflate|extract|unpack|gunzip|decode)\b", goal_low):
+        _bump("gzip", 12.0)
+    elif in_magic == "bzip2" and re.search(r"\b(decompress|uncompress|extract|unpack|bunzip2)\b", goal_low):
+        _bump("bzip2", 12.0)
+    elif in_magic == "xz" and re.search(r"\b(decompress|uncompress|extract|unpack|unxz)\b", goal_low):
+        _bump("xz", 12.0)
+    elif in_magic == "zip" and re.search(r"\b(decompress|uncompress|extract|unpack|unzip)\b", goal_low):
+        _bump("unzip", 12.0)
+
+    # 2. Live OS package + `--help` summary index scoring
+    os_idx = _build_os_tool_index()
+    if gaps_queried is not None:
+        gaps_queried.append("introspect:os_tool_index")
+
+    # Build enriched query text from goal (preserving key action cues)
+    query_text = goal
+    for bpath, desc in os_idx.items():
+        bname = pathlib.Path(bpath).name.lower()
+        # Skip destructive / system / irrelevant helpers when doing data transforms
+        if bname in ("rm", "rmdir", "shred", "dd", "chmod", "chown", "kill", "nohup", "timeout", "env", "yes", "true", "false", "sleep", "sync", "df", "du", "ls", "dir", "vdir", "ln", "mkfifo", "mknod", "stty", "tty", "uname", "whoami", "id", "groups", "pinky", "users", "who", "arch", "nproc", "hostid", "logname", "chgrp", "chcon", "runcon", "chroot", "stdbuf", "dircolors", "install", "mktemp", "touch", "mkdir", "cp", "mv"):
+            continue
+        desc_low = desc.lower()
+        ov = _semantic_overlap(query_text, f"{bname} {desc}")
+        # Strong exact alignment boosts from live `--help` self-description
+        if re.search(r"\b(first|top|head)\s+\d+\b", goal_low) and "first" in desc_low and "lines" in desc_low:
+            ov += 8.0
+        if re.search(r"\b(last|bottom|tail)\s+\d+\b", goal_low) and "last" in desc_low and "lines" in desc_low:
+            ov += 8.0
+        if re.search(r"\b(containing|contains|matching|matches|pattern)\b", goal_low) and ("pattern" in desc_low or "search" in desc_low):
+            ov += 6.0
+            if bname in ("grep", "rg"):
+                ov += 2.0
+        if re.search(r"\b(field|fields|column|columns)\s+\d+\b", goal_low) and ("selected parts of lines" in desc_low or "field" in desc_low):
+            ov += 8.0
+        if re.search(r"\b(sha256|sha-256)\b", goal_low) and "sha256" in desc_low:
+            ov += 10.0
+        if re.search(r"\b(md5)\b", goal_low) and "md5" in desc_low:
+            ov += 10.0
+        if re.search(r"\b(sha1|sha-1)\b", goal_low) and "sha1" in desc_low:
+            ov += 10.0
+        if re.search(r"\b(sort|sorted|alphabetical|order)\b", goal_low) and "sorted" in desc_low:
+            ov += 7.0
+        if re.search(r"\b(count\s+lines|line\s+count|word\s+count)\b", goal_low) and "newline, word, and byte counts" in desc_low:
+            ov += 8.0
+        if re.search(r"\b(json|jq)\b", goal_low) and "json" in desc_low:
+            ov += 6.0
+        if ov >= 2.5:
+            _bump(bpath, ov)
+
+    # 3. External instant knowledge source command discovery (if provided)
+    if knowledge_source is not None:
+        kq = f"linux command to {goal}"
+        if gaps_queried is not None:
+            gaps_queried.append(f"knowledge:{kq[:80]}")
+        try:
+            kdocs = knowledge_source(kq) or []
+        except Exception:
+            kdocs = []
+        for kd in kdocs:
+            content = str(kd.get("content") or "")
+            for m_cmd in re.finditer(r"(?:`|\$\s*)([a-z][a-z0-9_-]{1,20})\s+[-A-Za-z0-9_.'\"]", content):
+                cname = m_cmd.group(1)
+                if cname not in _STOPWORDS:
+                    _bump(cname, 7.0)
+
+    ranked = sorted(scored.items(), key=lambda x: (-x[1], x[0]))
+    return [bp for bp, _ in ranked[:6]]
+
+
 def scan_environment_boundary(
     workspace: pathlib.Path,
     goal: str,
@@ -816,16 +1068,23 @@ def scan_environment_boundary(
 
     input_files = [f for f in goal_files if (ws / f).exists()]
     output_files = [f for f in goal_files if not (ws / f).exists()]
-    # Fallback: if goal mentions "output to X" / "into X" where X already exists
+    is_output_dir = False
+    _out_preps = frozenset({"to", "into", "as", "from", "on", "with", "at", "in", "by", "of", "the", "a", "an", "file", "output"})
+    # Fallback: if goal mentions "output to X" / "into X" where X already exists or is a dir name
     for m_out in re.finditer(r"(?i)\b(?:to|into|as|output|write|save)\s+(?:file\s+|dir(?:ectory)?\s+|folder\s+)?([A-Za-z0-9_./-]+)", goal or ""):
         cand = m_out.group(1).rstrip(".,;)")
+        if cand.lower() in _out_preps:
+            continue
         if cand in goal_files and cand not in output_files:
             output_files.append(cand)
             if cand in input_files and len(input_files) > 1:
                 input_files.remove(cand)
-        elif "/" not in cand and "." not in cand and re.search(r"(?i)\b(dir|folder|extract|unpack)\b", goal or ""):
+        elif "/" not in cand and "." not in cand and not output_files and re.search(r"(?i)\b(dir|folder|extract|unpack|unarchive)\b", goal or ""):
             if cand not in output_files and not (ws / cand).is_file():
                 output_files.append(cand)
+                is_output_dir = True
+
+    input_magic = _detect_file_magic(ws / input_files[0]) if input_files else "none"
 
     kv_bindings: dict[str, str] = {}
     for m_kv in _KV_PAT.finditer(goal or ""):
@@ -835,8 +1094,9 @@ def scan_environment_boundary(
             v_clean = v.rstrip(".,;") if len(v) > 1 else v
             kv_bindings[k] = v_clean
 
-    # Extract quoted strings (expressions, queries, payloads)
+    # Extract quoted strings & unquoted patterns/numeric slots
     quoted_literals = [m.group(1) or m.group(2) for m in re.finditer(r"""'([^']+)'|"([^"]+)\"""", goal or "")]
+    unquoted_patterns, numeric_slots = _extract_unquoted_patterns_and_numeric_slots(goal)
 
     # Discover binaries strictly relevant to goal or workspace (NEVER dump /usr/bin!)
     discovered_bins: list[str] = list(local_bins)
@@ -846,7 +1106,7 @@ def scan_environment_boundary(
             discovered_bins.append(resolved)
     # Check tokens in goal that match a real executable on PATH
     for tok in re.findall(r"\b([a-z][a-z0-9_-]{1,20})\b", (goal or "").lower()):
-        if tok in _STOPWORDS or tok in ("test", "true", "false", "file", "json", "text", "read", "write", "make", "link", "join", "head", "tail", "line", "name", "type", "user", "pass", "time", "date", "size", "list", "info", "help", "copy", "move", "open", "send", "post", "call"):
+        if tok in _STOPWORDS or tok in ("test", "true", "false", "file", "json", "text", "read", "write", "make", "link", "join", "head", "tail", "line", "name", "type", "user", "pass", "time", "date", "size", "list", "info", "help", "copy", "move", "open", "send", "post", "call", "dir", "top", "split", "cut", "last", "find", "env", "id", "tr", "nl", "wc", "fmt", "sum", "od", "pr", "yes", "seq", "tee", "who"):
             continue
         found = shutil.which(tok)
         if found and found not in discovered_bins:
@@ -866,9 +1126,13 @@ def scan_environment_boundary(
         "binaries": discovered_bins,
         "base_url": detected_url,
         "input_files": input_files,
+        "input_magic": input_magic,
         "output_files": output_files,
+        "is_output_dir": is_output_dir,
         "kv_bindings": kv_bindings,
         "quoted_literals": quoted_literals,
+        "unquoted_patterns": unquoted_patterns,
+        "numeric_slots": numeric_slots,
         "goal_tokens": _tokenize(goal),
         "goal_concepts": sorted(_concept_set(goal)),
         "scan_ms": round((time.monotonic() - t0) * 1000.0, 2),
@@ -949,11 +1213,12 @@ def _score_option_for_role(opt: OptionSpec, role_query: str, *, exclude_tokens: 
     if ex and flag_name:
         flag_name = " ".join(t for t in flag_name.split() if t.lower() not in ex)
     name_score = _semantic_overlap(flag_name, role_query) * 2.5 if flag_name else 0.0
-    desc_text = f"{opt.arg_name} {opt.description}"
+    arg_score = _semantic_overlap(opt.arg_name, role_query) * 1.5 if opt.arg_name else 0.0
+    desc_text = opt.description
     if ex:
         desc_text = " ".join(t for t in desc_text.split() if t.lower().strip(".,;:()") not in ex)
     desc_score = _semantic_overlap(desc_text, role_query)
-    return name_score + desc_score
+    return name_score + arg_score + desc_score
 
 
 def _select_best_subcommand(contract: CLISubcommandContract, goal: str) -> str:
@@ -987,18 +1252,26 @@ def _synthesize_cli_invocations(
 
     inputs = list(boundary.get("input_files") or [])
     outputs = list(boundary.get("output_files") or [])
+    is_output_dir = bool(boundary.get("is_output_dir"))
     kv = dict(boundary.get("kv_bindings") or {})
+    numeric_slots = dict(boundary.get("numeric_slots") or {})
     quoted = list(boundary.get("quoted_literals") or [])
+    unquoted_patterns = list(boundary.get("unquoted_patterns") or [])
     goal_low = (goal or "").lower()
 
     usable_opts = [o for o in contract.options if not (set(o.all_flags) & banned_flags)]
 
-    # 1. Bind explicit kv_bindings (`format=json`, `delimiter=,`, `key=val`) to matching value-taking options
+    # 1. Bind explicit kv_bindings (`format=json`, `delimiter=,`) AND numeric slots (`lines=2`, `fields=2`)
     bound_args: list[str] = []
     bound_roles: list[str] = []
     used_flags: set[str] = set()
 
-    for k, v in kv.items():
+    merged_kv = dict(kv)
+    for nk, nv in numeric_slots.items():
+        if nk not in merged_kv:
+            merged_kv[nk] = nv
+
+    for k, v in merged_kv.items():
         best_o, best_s = None, 0.0
         for o in usable_opts:
             if not o.takes_arg or o.primary_flag in used_flags:
@@ -1011,14 +1284,20 @@ def _synthesize_cli_invocations(
             bound_roles.extend([f"?FLAG_{k.upper()}", f"?VAL_{k.upper()}"])
             used_flags.update(best_o.all_flags)
 
-    # 2. Detect boolean mode flags strongly aligned with the goal (e.g. --decode, --raw-output, --reverse, --unique)
-    bin_stem_excl = {pathlib.Path(bname).name.lower()}
+    # 2. Detect boolean mode flags strongly aligned with the goal (e.g. --decode, --decompress, --extract, --raw-output, --reverse, --unique)
+    bin_stem_excl = {pathlib.Path(bname).name.lower()} | {k.lower() for k in merged_kv.keys()}
+    wants_nul = bool(re.search(r"\b(nul|null|zero[- ]?terminated)\b", goal_low))
     bool_flags: list[tuple[float, OptionSpec]] = []
+    stdout_flag: OptionSpec | None = None
     for o in usable_opts:
         if o.takes_arg or o.primary_flag in used_flags:
             continue
         if o.primary_flag in ("-h", "--help", "-V", "--version"):
             continue
+        if not wants_nul and ("zero-terminated" in o.long.lower() or "nul" in o.description.lower().split()):
+            continue
+        if o.long in ("--stdout", "--to-stdout") or (o.short == "-c" and "standard output" in o.description.lower()):
+            stdout_flag = o
         s = _score_option_for_role(o, goal, exclude_tokens=bin_stem_excl)
         if o.primary_flag in required_extra_flags:
             s += 10.0
@@ -1027,46 +1306,58 @@ def _synthesize_cli_invocations(
     bool_flags.sort(key=lambda x: -x[0])
     chosen_bools = [o for _, o in bool_flags[:2]]
 
-    # 3. Detect dedicated input-file flag & output-file/dir flag from compiled option specs
+    # 3. Detect dedicated input-file/archive flag & output-file/dir flag from compiled option specs
     in_flag: OptionSpec | None = None
     out_flag: OptionSpec | None = None
-    _non_io_qualifiers = ("random", "temp", "temporary", "compress", "buffer", "batch", "debug", "parallel", "log", "config")
+    _non_io_qualifiers = ("random", "temp", "temporary", "compress", "buffer", "batch", "debug", "parallel", "log", "config", "exclude", "files-from", "listed-incremental", "add-file", "delimiter")
+    in_query = "input infile src source from read archive file" if boundary.get("input_magic") in ("tar", "tar_gzip", "tar_bzip2", "tar_xz") else "input infile src source from read"
+    out_query = "dir directory chdir extract into destination target" if is_output_dir else "output outfile dst dest destination target write save"
     for o in usable_opts:
         if not o.takes_arg or o.primary_flag in used_flags:
             continue
-        f_lo = (o.long + " " + o.description).lower()
         if any(q in o.long.lower() for q in _non_io_qualifiers):
             continue
-        s_in = _score_option_for_role(o, "input infile src source from read")
-        s_out = _score_option_for_role(o, "output outfile dst dest destination target write save dir directory")
+        s_in = _score_option_for_role(o, in_query)
+        s_out = _score_option_for_role(o, out_query)
         if s_in >= 3.0 and s_in > s_out:
-            if in_flag is None or s_in > _score_option_for_role(in_flag, "input infile src source from read"):
+            if in_flag is None or s_in > _score_option_for_role(in_flag, in_query):
                 in_flag = o
         if s_out >= 3.0 and s_out >= s_in:
-            if out_flag is None or s_out > _score_option_for_role(out_flag, "output outfile dst dest destination target write save dir directory"):
+            if out_flag is None or s_out > _score_option_for_role(out_flag, out_query):
                 out_flag = o
 
-    # 4. Detect positional expression/query/filter (e.g., quoted jq/awk/sed expression)
+    # General UNIX preservation rule: when capturing stdout to an output file without an explicit
+    # output flag AND the tool offers `--stdout`/`--to-stdout` (e.g. gzip/bzip2/xz), include it so
+    # the tool writes to stdout cleanly without destroying the input file in-place!
+    if stdout_flag is not None and out_flag is None and outputs and not is_output_dir:
+        if stdout_flag not in chosen_bools:
+            chosen_bools.append(stdout_flag)
+
+    # 4. Detect positional/flag expression/query/pattern (quoted OR unquoted `containing X` / `matching X`)
     expr_args: list[str] = []
     expr_roles: list[str] = []
-    for q in quoted:
-        if q not in kv.values() and q not in inputs and q not in outputs:
-            # Check if an option explicitly wants an expression/query/filter
-            expr_opt = None
-            best_es = 0.0
-            for o in usable_opts:
-                if o.takes_arg and o.primary_flag not in used_flags and o != in_flag and o != out_flag:
-                    es = _score_option_for_role(o, "filter query expression pattern field")
-                    if es > best_es:
-                        expr_opt, best_es = o, es
-            if expr_opt is not None and best_es >= 2.0:
-                expr_args.extend([expr_opt.primary_flag, q])
-                expr_roles.extend(["?FLAG_EXPR", "?EXPR"])
-                used_flags.update(expr_opt.all_flags)
-            else:
-                expr_args.append(q)
-                expr_roles.append("?EXPR")
-            break
+    pattern_candidates = [q for q in quoted if q not in kv.values() and q not in inputs and q not in outputs]
+    if not pattern_candidates and unquoted_patterns:
+        pattern_candidates = [p for p in unquoted_patterns if p not in inputs and p not in outputs]
+
+    for q in pattern_candidates:
+        expr_opt = None
+        best_es = 0.0
+        for o in usable_opts:
+            if o.takes_arg and o.primary_flag not in used_flags and o != in_flag and o != out_flag:
+                if any(bad in o.long.lower() for bad in ("file", "exclude", "include", "from")):
+                    continue
+                es = _score_option_for_role(o, "filter query expression pattern regexp")
+                if es > best_es:
+                    expr_opt, best_es = o, es
+        if expr_opt is not None and best_es >= 3.5:
+            expr_args.extend([expr_opt.primary_flag, q])
+            expr_roles.extend(["?FLAG_EXPR", "?EXPR"])
+            used_flags.update(expr_opt.all_flags)
+        else:
+            expr_args.append(q)
+            expr_roles.append("?EXPR")
+        break
 
     candidates: list[tuple[list[str], list[str], bool]] = []
 
@@ -1174,11 +1465,141 @@ def _synthesize_cli_invocations(
     return candidates[:8]
 
 
+def _check_semantic_postconditions(
+    workspace: pathlib.Path,
+    boundary: Mapping[str, Any],
+    goal: str,
+    out_bytes: bytes | None,
+    out_path: pathlib.Path | None,
+) -> tuple[bool, str]:
+    """Compile executable semantic invariants directly from the goal text + live input bytes.
+
+    Prevents false positives (such as running `sort` on raw `.gz` binary bytes and claiming
+    success merely because an output file has >0 bytes!).
+    """
+    goal_low = (goal or "").lower()
+    in_files = list(boundary.get("input_files") or [])
+    in_path = (workspace / in_files[0]) if in_files else None
+    in_magic = str(boundary.get("input_magic") or "")
+    is_output_dir = bool(boundary.get("is_output_dir"))
+
+    # 1. Directory extraction check
+    if is_output_dir and out_path is not None:
+        if not out_path.is_dir():
+            return False, f"missing_output_dir:{out_path.name}"
+        extracted = [p for p in out_path.rglob("*") if p.is_file() and p.stat().st_size > 0]
+        if not extracted:
+            return False, f"empty_extracted_dir:{out_path.name}"
+        return True, f"extracted_dir_verified:{out_path.name}({len(extracted)}files)"
+
+    if out_bytes is None or len(out_bytes) == 0:
+        return False, "empty_output_bytes"
+
+    # 2. Decompression invariant: output must NOT still carry compressed archive magic
+    if re.search(r"\b(decompress|uncompress|gunzip|bunzip2|unxz|inflate)\b", goal_low) or (
+        in_magic in ("gzip", "bzip2", "xz") and re.search(r"\b(extract|decode)\b", goal_low)
+    ):
+        if out_bytes.startswith((b"\x1f\x8b", b"BZh", b"\xfd7zXZ\x00", b"PK\x03\x04")):
+            return False, "postcondition_failed:output_still_compressed"
+        if in_path is not None and in_path.is_file():
+            try:
+                if out_bytes == in_path.read_bytes():
+                    return False, "postcondition_failed:output_identical_to_compressed_input"
+            except Exception:
+                pass
+
+    # 3. Text-level invariants (filter/match, sort/unique/reverse, first/last N, checksum, JSON)
+    needs_utf8 = bool(
+        re.search(
+            r"\b(containing|contains|matching|matches|filter|sort|unique|dedup|deduplicate|reverse|first|top|last|tail|head|field|column|sha256|md5|sha1|checksum|json)\b",
+            goal_low,
+        )
+    )
+    out_text: str | None = None
+    if needs_utf8:
+        try:
+            out_text = out_bytes.decode("utf-8")
+        except UnicodeDecodeError:
+            return False, "postcondition_failed:non_utf8_output_for_text_goal"
+        if "\x00" in out_text:
+            return False, "postcondition_failed:nul_bytes_in_text_output"
+
+    if out_text is not None:
+        lines = [ln for ln in out_text.splitlines() if ln != ""]
+
+        # 3a. Pattern filter invariant (`containing X` / `matching X`)
+        unq_pats = list(boundary.get("unquoted_patterns") or [])
+        if unq_pats and re.search(r"\b(containing|contains|matching|matches)\b", goal_low):
+            pat = unq_pats[0]
+            ign_case = bool(re.search(r"\b(case[- ]?insensitive|ignore[- ]?case)\b", goal_low))
+            for ln in lines:
+                hay = ln.lower() if ign_case else ln
+                ndl = pat.lower() if ign_case else pat
+                if ndl not in hay:
+                    return False, f"postcondition_failed:line_missing_pattern({pat!r})"
+            # Semantic law of line filtering: `filter lines matching P` must preserve whole input lines
+            # (rejects destructive partial-match flags like `--only-matching` unless explicitly requested!)
+            if (
+                re.search(r"\blines?\b", goal_low)
+                and not re.search(r"\bonly\s+matching\b", goal_low)
+                and in_path is not None
+                and in_path.is_file()
+            ):
+                try:
+                    in_lines = set(in_path.read_text(encoding="utf-8", errors="replace").splitlines())
+                    if in_lines and any(ln not in in_lines for ln in lines):
+                        return False, "postcondition_failed:filtered_output_altered_input_lines"
+                except Exception:
+                    pass
+
+        # 3b. Unique / deduplicate invariant
+        if re.search(r"\b(unique|dedup|deduplicate|deduplicated)\b", goal_low):
+            if len(lines) != len(set(lines)):
+                return False, "postcondition_failed:duplicate_lines_remain"
+
+        # 3c. Sort order invariant (when explicitly sorting without numeric-only custom key)
+        if re.search(r"\b(sort|sorted)\b", goal_low) and not re.search(r"\b(numeric|number|frequency|count|column|field|key)\b", goal_low):
+            rev = bool(re.search(r"\b(reverse|descending|desc)\b", goal_low))
+            # Check monotonic order under standard ASCII or case-insensitive locale collation
+            if lines != sorted(lines, reverse=rev) and [l.lower() for l in lines] != sorted([l.lower() for l in lines], reverse=rev):
+                return False, f"postcondition_failed:not_sorted(reverse={rev})"
+
+        # 3d. Top-N / First-N / Last-N line count invariant
+        num_slots = dict(boundary.get("numeric_slots") or {})
+        if "lines" in num_slots and re.search(r"\b(first|top|head|last|tail|limit)\s+\d+\b", goal_low):
+            try:
+                max_n = int(num_slots["lines"])
+                if not (1 <= len(lines) <= max_n):
+                    return False, f"postcondition_failed:line_count({len(lines)})_exceeds_limit({max_n})"
+            except ValueError:
+                pass
+
+        # 3e. Checksum / hash digest format invariant
+        if re.search(r"\b(sha256|sha-256)\b", goal_low):
+            if not re.search(r"\b[0-9a-fA-F]{64}\b", out_text):
+                return False, "postcondition_failed:missing_64hex_sha256_digest"
+        elif re.search(r"\b(sha1|sha-1)\b", goal_low):
+            if not re.search(r"\b[0-9a-fA-F]{40}\b", out_text):
+                return False, "postcondition_failed:missing_40hex_sha1_digest"
+        elif re.search(r"\bmd5\b", goal_low):
+            if not re.search(r"\b[0-9a-fA-F]{32}\b", out_text):
+                return False, "postcondition_failed:missing_32hex_md5_digest"
+
+        # 3f. JSON syntax check if output file is `.json`
+        if out_path is not None and out_path.suffix.lower() == ".json":
+            try:
+                json.loads(out_text)
+            except Exception as exc:
+                return False, f"invalid_json_output:{exc}"
+
+    return True, "semantic_postconditions_verified"
+
+
 def _independent_cli_verify(
     workspace: pathlib.Path,
     boundary: Mapping[str, Any],
     goal: str,
-    stdout: str,
+    stdout_bytes: bytes,
     rc: int,
     verifier: Callable[[dict[str, Any]], tuple[bool, str]] | None,
 ) -> tuple[bool, str]:
@@ -1186,11 +1607,18 @@ def _independent_cli_verify(
         return False, f"non_zero_exit:{rc}"
     outputs = list(boundary.get("output_files") or [])
     out_path = (workspace / outputs[0]) if outputs else None
+    out_bytes: bytes | None = None
+    if out_path is not None and out_path.is_file():
+        out_bytes = out_path.read_bytes()
+    elif out_path is None and stdout_bytes:
+        out_bytes = stdout_bytes
+    stdout_text = stdout_bytes.decode("utf-8", errors="replace")
     state = {
         "workspace": str(workspace),
-        "stdout": stdout,
+        "stdout": stdout_text,
         "output_path": str(out_path) if out_path else None,
-        "output_text": out_path.read_text(encoding="utf-8", errors="replace") if (out_path and out_path.is_file()) else None,
+        "output_text": out_bytes.decode("utf-8", errors="replace") if out_bytes is not None else None,
+        "output_bytes": out_bytes,
     }
     if verifier is not None:
         try:
@@ -1198,19 +1626,21 @@ def _independent_cli_verify(
         except Exception as exc:
             return False, f"verifier_error:{type(exc).__name__}:{exc}"
     if out_path is not None:
+        if bool(boundary.get("is_output_dir")):
+            return _check_semantic_postconditions(workspace, boundary, goal, None, out_path)
         if out_path.is_file() and out_path.stat().st_size > 0:
-            # Independent JSON syntax check if output is `.json`
-            if out_path.suffix.lower() == ".json":
-                try:
-                    json.loads(out_path.read_text(encoding="utf-8"))
-                except Exception as exc:
-                    return False, f"invalid_json_output:{exc}"
-            return True, f"output_file_verified:{out_path.name}({out_path.stat().st_size}B)"
+            ok_sem, note_sem = _check_semantic_postconditions(workspace, boundary, goal, out_bytes, out_path)
+            if not ok_sem:
+                return False, note_sem
+            return True, f"output_file_verified:{out_path.name}({out_path.stat().st_size}B,{note_sem})"
         if out_path.is_dir() and any(out_path.iterdir()):
             return True, f"output_dir_verified:{out_path.name}"
         return False, f"missing_or_empty_output:{out_path.name}"
-    if stdout.strip():
-        return True, f"stdout_verified({len(stdout.strip())}chars)"
+    if stdout_bytes.strip():
+        ok_sem, note_sem = _check_semantic_postconditions(workspace, boundary, goal, stdout_bytes, None)
+        if not ok_sem:
+            return False, note_sem
+        return True, f"stdout_verified({len(stdout_bytes)}B,{note_sem})"
     return False, "empty_observable_effect"
 
 
@@ -1483,6 +1913,49 @@ def solve_with_instant_knowledge(
         # Also probe common live doc routes on the server itself if no local/web docs supplied
         if not docs:
             origin = boundary["base_url"].rstrip("/")
+            parsed_u = urllib.parse.urlparse(boundary["base_url"])
+            # Direct GET endpoint fetch when full concrete path is given (e.g. `Fetch http://host/api/items and save to raw.json`)
+            if parsed_u.path and parsed_u.path != "/" and re.search(r"(?i)\b(fetch|get|download|read|retrieve|pull)\b", goal or ""):
+                hdrs: dict[str, str] = {}
+                kv_b = boundary.get("kv_bindings") or {}
+                for k, v in kv_b.items():
+                    if any(w in k.lower() for w in ("token", "key", "auth", "secret")):
+                        hdrs["Authorization"] = f"Bearer {v}"
+                st, _, body = _http_call("GET", boundary["base_url"], headers=hdrs, timeout_s=min(timeout_s, 8.0))
+                if 200 <= st < 300 and body:
+                    outputs_h = list(boundary.get("output_files") or [])
+                    out_p = (ws / outputs_h[0]) if outputs_h else None
+                    if out_p is not None:
+                        out_p.parent.mkdir(parents=True, exist_ok=True)
+                        out_p.write_text(body, encoding="utf-8")
+                    ok_v = True
+                    note_v = f"http_direct_get_200({len(body)}B)"
+                    if verifier is not None:
+                        try:
+                            ok_v, note_v = verifier(
+                                {
+                                    "status_code": st,
+                                    "response_body": body,
+                                    "output_path": str(out_p) if out_p else None,
+                                    "output_text": body,
+                                }
+                            )
+                        except Exception as exc:
+                            ok_v, note_v = False, f"verifier_error:{exc}"
+                    if ok_v:
+                        return {
+                            "schema": SCHEMA,
+                            "authority": AUTHORITY,
+                            "status": "VERIFIED",
+                            "mode": "DIRECT_HTTP_GET_VERIFIED",
+                            "response_body": body[:2000],
+                            "verification": note_v,
+                            "boundary_scan_ms": boundary["scan_ms"],
+                            "gaps_queried": gaps_queried,
+                            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                            "model_calls": 0,
+                            "parameters_stored": 0,
+                        }
             for dpath in ("/docs", "/help", "/api-docs", "/README.md", "/"):
                 st, _, body = _http_call("GET", origin + dpath, timeout_s=3.0)
                 if 200 <= st < 300 and body.strip():
@@ -1492,6 +1965,11 @@ def solve_with_instant_knowledge(
         res_http = _solve_doc_compiled_http(
             boundary["base_url"], goal, boundary, docs, memory=memory, verifier=verifier, timeout_s=timeout_s
         )
+        if res_http.get("status") == "VERIFIED" and boundary.get("output_files") and res_http.get("response_body"):
+            out_p = ws / boundary["output_files"][0]
+            if not out_p.exists():
+                out_p.parent.mkdir(parents=True, exist_ok=True)
+                out_p.write_text(str(res_http["response_body"]), encoding="utf-8")
         res_http["schema"] = SCHEMA
         res_http["authority"] = AUTHORITY
         res_http["boundary_scan_ms"] = boundary["scan_ms"]
@@ -1500,6 +1978,26 @@ def solve_with_instant_knowledge(
 
     # Branch 2: Arbitrary Unseen CLI / Binary Tool Environment
     binaries = list(boundary["binaries"])
+    # Goal-directed implicit OS/doc tool discovery when the goal doesn't explicitly name the binary
+    # (or when an input file exists and additional candidate tools may be needed for its magic type)
+    if not binaries or (
+        boundary.get("input_magic") in ("gzip", "bzip2", "xz", "zip", "tar", "tar_gzip", "tar_bzip2", "tar_xz")
+        and not any(
+            pathlib.Path(b).name.lower() in ("gzip", "gunzip", "bzip2", "bunzip2", "xz", "unxz", "unzip", "tar")
+            for b in binaries
+        )
+    ):
+        implicit = _discover_implicit_tools(
+            goal, boundary, knowledge_source=knowledge_source, gaps_queried=gaps_queried
+        )
+        # Prioritize magic-matched implicit tools ahead of incidental goal tokens
+        if boundary.get("input_magic") in ("gzip", "bzip2", "xz", "zip", "tar", "tar_gzip", "tar_bzip2", "tar_xz"):
+            binaries = [b for b in implicit if b not in binaries] + binaries
+        else:
+            for b in implicit:
+                if b not in binaries:
+                    binaries.append(b)
+
     if not binaries:
         return {
             "schema": SCHEMA,
@@ -1517,7 +2015,7 @@ def solve_with_instant_knowledge(
     recalled_cli = memory.recall("cli_role_law", goal_concepts) if memory else []
     exec_trace: list[dict[str, Any]] = []
 
-    for binary in binaries[:4]:
+    for binary in binaries[:5]:
         bname = pathlib.Path(binary).name
         # L0: Live `--help` introspection
         help_text = _probe_binary_help(binary)
@@ -1569,24 +2067,28 @@ def solve_with_instant_knowledge(
             progressed_refusal = False
             for argv, role_pat, cap_stdout in cands:
                 outputs = list(boundary.get("output_files") or [])
-                out_path = (ws / outputs[0]) if (cap_stdout and outputs) else None
+                out_path = (ws / outputs[0]) if outputs else None
+                if bool(boundary.get("is_output_dir")) and out_path is not None:
+                    out_path.mkdir(parents=True, exist_ok=True)
                 try:
                     p = subprocess.run(
                         argv,
                         cwd=ws,
                         capture_output=True,
-                        text=True,
+                        text=False,
                         timeout=min(timeout_s, 10.0),
                     )
                 except Exception as exc:
                     exec_trace.append({"argv": argv, "error": str(exc)})
                     continue
 
-                if p.returncode == 0 and out_path is not None and p.stdout:
+                stdout_b = p.stdout or b""
+                stderr_b = p.stderr or b""
+                if p.returncode == 0 and cap_stdout and out_path is not None and not bool(boundary.get("is_output_dir")) and stdout_b:
                     out_path.parent.mkdir(parents=True, exist_ok=True)
-                    out_path.write_text(p.stdout, encoding="utf-8")
+                    out_path.write_bytes(stdout_b)
 
-                ok_v, note_v = _independent_cli_verify(ws, boundary, goal, p.stdout, p.returncode, verifier)
+                ok_v, note_v = _independent_cli_verify(ws, boundary, goal, stdout_b, p.returncode, verifier)
                 exec_trace.append(
                     {
                         "argv": argv,
@@ -1599,14 +2101,18 @@ def solve_with_instant_knowledge(
                 if ok_v:
                     law = None
                     if memory is not None:
-                        post_kind = "output_file" if outputs else "stdout_nonempty"
+                        post_kind = "output_dir" if boundary.get("is_output_dir") else ("output_file" if outputs else "stdout_nonempty")
                         law = memory.generalize_and_store(
                             kind="cli_role_law",
                             goal_concepts=goal_concepts,
                             role_pattern=role_pat,
                             postcondition_kind=post_kind,
-                            env_fingerprint=f"cli:{bname}:{contract.subcommand}:{len(contract.options)}",
-                            meta_roles={"has_subcommand": bool(contract.subcommand), "cap_stdout": cap_stdout},
+                            env_fingerprint=f"cli:{bname}:{contract.subcommand}:{len(contract.options)}:{boundary.get('input_magic')}",
+                            meta_roles={
+                                "has_subcommand": bool(contract.subcommand),
+                                "cap_stdout": cap_stdout,
+                                "input_magic": str(boundary.get("input_magic") or ""),
+                            },
                         )
                     return {
                         "schema": SCHEMA,
@@ -1619,7 +2125,7 @@ def solve_with_instant_knowledge(
                         "recalled_laws": len(recalled_cli),
                         "winning_argv": argv,
                         "winning_role_pattern": role_pat,
-                        "stdout": p.stdout[:2000],
+                        "stdout": stdout_b.decode("utf-8", errors="replace")[:2000],
                         "verification": note_v,
                         "generalized_law": law,
                         "executed_trace": exec_trace,
@@ -1630,8 +2136,17 @@ def solve_with_instant_knowledge(
                         "parameters_stored": 0,
                     }
 
+                # Remove bad partial output written by failed candidate so next candidate starts clean
+                if cap_stdout and out_path is not None and out_path.is_file():
+                    try:
+                        out_path.unlink()
+                    except Exception:
+                        pass
+
                 # Parse refusal surface for active re-planning
-                refusal = parse_refusal_surface(p.stderr + "\n" + p.stdout)
+                refusal = parse_refusal_surface(
+                    stderr_b.decode("utf-8", errors="replace") + "\n" + stdout_b.decode("utf-8", errors="replace")
+                )
                 if refusal["banned_flags"]:
                     banned_flags.update(refusal["banned_flags"])
                     progressed_refusal = True
@@ -1655,6 +2170,89 @@ def solve_with_instant_knowledge(
     }
 
 
+_IMPERATIVE_STEP_VERBS = (
+    "decompress", "uncompress", "gunzip", "bunzip2", "unxz", "unzip", "extract", "unpack",
+    "decode", "encode", "filter", "search", "grep", "select", "cut", "sort", "deduplicate",
+    "dedup", "count", "take", "keep", "limit", "head", "tail", "convert", "transform",
+    "compute", "calculate", "hash", "fetch", "download", "create", "post", "use", "run",
+    "parse", "replace", "translate", "compress",
+)
+_SAVE_ONLY_RE = re.compile(r"(?i)^(?:and\s+)?(?:save|write|output|store)\s+(?:it\s+|the\s+\w+\s+|output\s+|result\s+)?(?:to|into|as)\s+\S+$")
+
+
+def _decompose_multi_step_goal(goal: str) -> list[str]:
+    """Decompose natural-language multi-step pipelines into ordered imperative clauses.
+
+    Handles both explicit chaining (`A, then B, then C`, `A -> B`) AND implicit comma/and
+    imperative chains (`Decompress X, filter lines containing Y, sort unique, take first 2 lines, and save to out.txt`)
+    while preserving final `save to <file>` clauses on the last transformation step and
+    never splitting inside quoted strings or `key=,` values!
+    """
+    text = (goal or "").strip()
+    if not text:
+        return []
+
+    # 1. Explicit `then` / `->` splitting (quote-aware)
+    explicit = [c.strip(" ,.;") for c in re.split(r"(?i)(?:,\s*then\s+|\s+and\s+then\s+|\s*->\s*)", text) if c.strip()]
+    if len(explicit) > 1:
+        return explicit
+
+    # 2. Quote-aware split on `, ` (protecting `delimiter=,` / `separator=,` and quoted strings)
+    parts: list[str] = []
+    buf: list[str] = []
+    in_q: str | None = None
+    i = 0
+    n = len(text)
+    while i < n:
+        ch = text[i]
+        if in_q:
+            buf.append(ch)
+            if ch == in_q:
+                in_q = None
+            i += 1
+            continue
+        if ch in ("'", '"'):
+            in_q = ch
+            buf.append(ch)
+            i += 1
+            continue
+        # Detect comma separator NOT immediately preceded by `=` or `:` (protects `delimiter=,`)
+        if ch == "," and (i == 0 or text[i - 1] not in ("=", ":")):
+            # Look ahead to see if next non-space token starts a new imperative clause (or `and save/write/...`)
+            rest = text[i + 1 :].lstrip()
+            m_next = re.match(r"(?i)(?:and\s+)?([a-z]+)\b", rest)
+            if m_next:
+                w_next = m_next.group(1).lower()
+                if w_next in _IMPERATIVE_STEP_VERBS or w_next in ("save", "write", "output", "store"):
+                    seg = "".join(buf).strip(" .;")
+                    if seg.endswith(",") and not seg.endswith(("=,", ":,")):
+                        seg = seg.rstrip(",").strip()
+                    if seg:
+                        parts.append(seg)
+                    buf = []
+                    i += 1
+                    continue
+        buf.append(ch)
+        i += 1
+    tail = "".join(buf).strip(" .;")
+    if tail.endswith(",") and not tail.endswith(("=,", ":,")):
+        tail = tail.rstrip(",").strip()
+    if tail:
+        parts.append(tail)
+
+    # Merge trailing `and save to out.txt` onto the preceding transformation step
+    merged: list[str] = []
+    for seg in parts:
+        if merged and _SAVE_ONLY_RE.match(seg):
+            merged[-1] = f"{merged[-1]} {seg}"
+        else:
+            # Strip leading `and ` from a new transformation clause
+            cleaned = re.sub(r"(?i)^and\s+", "", seg).strip()
+            if cleaned:
+                merged.append(cleaned)
+    return merged if merged else [text]
+
+
 def solve_multi_step_with_instant_knowledge(
     goal: str,
     *,
@@ -1666,12 +2264,13 @@ def solve_multi_step_with_instant_knowledge(
     verifier: Callable[[dict[str, Any]], tuple[bool, str]] | None = None,
     timeout_s: float = 20.0,
 ) -> dict[str, Any]:
-    """Compose sequential sub-goals (`A, then B, then C`) across heterogeneous unseen
-    tools/services, verifying each intermediate artifact before advancing to the next step.
+    """Compose sequential sub-goals (`A, then B, then C` OR implicit `Decompress X, filter Y, sort Z, and save to out.txt`)
+    across heterogeneous unseen tools/services with automatic typed dataflow handoff and
+    independent semantic verification at EVERY intermediate step.
     """
     t0 = time.monotonic()
     ws = pathlib.Path(workspace).resolve()
-    clauses = [c.strip(" ,.;") for c in re.split(r"(?i)(?:,\s*then\s+|\s+and\s+then\s+|\s*->\s*)", goal or "") if c.strip()]
+    clauses = _decompose_multi_step_goal(goal)
     if len(clauses) <= 1:
         return solve_with_instant_knowledge(
             goal,
@@ -1686,34 +2285,71 @@ def solve_multi_step_with_instant_knowledge(
 
     step_results: list[dict[str, Any]] = []
     all_gaps: list[str] = []
-    for idx, clause in enumerate(clauses):
-        is_last = idx == len(clauses) - 1
-        step_res = solve_with_instant_knowledge(
-            clause,
-            workspace=ws,
-            memory=memory,
-            knowledge_source=knowledge_source,
-            base_url=base_url if ("http://" in clause or "https://" in clause or (is_last and base_url)) else None,
-            candidate_binaries=candidate_binaries,
-            verifier=verifier if is_last else None,
-            timeout_s=timeout_s,
-        )
-        step_results.append(step_res)
-        all_gaps.extend(step_res.get("gaps_queried") or [])
-        if step_res.get("status") != "VERIFIED":
-            return {
-                "schema": SCHEMA,
-                "authority": AUTHORITY,
-                "status": "FAILED",
-                "mode": "MULTI_STEP_FAILED",
-                "failed_step_index": idx,
-                "failed_clause": clause,
-                "steps": step_results,
-                "gaps_queried": all_gaps,
-                "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
-                "model_calls": 0,
-                "parameters_stored": 0,
-            }
+    scratch_files: list[pathlib.Path] = []
+    prev_handoff: str | None = None
+
+    try:
+        for idx, raw_clause in enumerate(clauses):
+            is_last = idx == len(clauses) - 1
+            clause = raw_clause
+
+            # Check if this clause already explicitly names its own input & output files
+            c_files = [m.group(1) for m in _FILE_TOK_RE.finditer(clause) if not m.group(1).startswith("http")]
+            has_existing_in = any((ws / f).exists() for f in c_files)
+            has_explicit_out = any(not (ws / f).exists() for f in c_files) or bool(
+                re.search(r"(?i)\b(?:to|into|as|save|write)\s+(?:file\s+|dir(?:ectory)?\s+)?[A-Za-z0-9_./-]+\.[A-Za-z0-9]{1,8}\b", clause)
+            )
+
+            # Thread previous step's handoff file as this step's input if not explicitly named
+            if prev_handoff and not has_existing_in and "http://" not in clause and "https://" not in clause:
+                clause = f"{clause} on {prev_handoff}"
+
+            # Give intermediate step an isolated scratch handoff file if it has no explicit output file
+            step_handoff: str | None = None
+            if not is_last and not has_explicit_out:
+                ext = ".json" if ("http://" in clause or "https://" in clause or "json" in clause.lower()) else ".tmp"
+                step_handoff = f"_epistemic_step_{idx}{ext}"
+                scratch_files.append(ws / step_handoff)
+                clause = f"{clause} and save to {step_handoff}"
+            elif not is_last and has_explicit_out:
+                # Find the newly created output file from this clause to pass to next step if needed
+                out_cands = [f for f in c_files if not (ws / f).exists()]
+                step_handoff = out_cands[-1] if out_cands else None
+
+            step_res = solve_with_instant_knowledge(
+                clause,
+                workspace=ws,
+                memory=memory,
+                knowledge_source=knowledge_source,
+                base_url=base_url if ("http://" in clause or "https://" in clause or (is_last and base_url)) else None,
+                candidate_binaries=candidate_binaries,
+                verifier=verifier if is_last else None,
+                timeout_s=timeout_s,
+            )
+            step_results.append(step_res)
+            all_gaps.extend(step_res.get("gaps_queried") or [])
+            if step_res.get("status") != "VERIFIED":
+                return {
+                    "schema": SCHEMA,
+                    "authority": AUTHORITY,
+                    "status": "FAILED",
+                    "mode": "MULTI_STEP_FAILED",
+                    "failed_step_index": idx,
+                    "failed_clause": clause,
+                    "steps": step_results,
+                    "gaps_queried": all_gaps,
+                    "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            prev_handoff = step_handoff
+    finally:
+        for sf in scratch_files:
+            try:
+                if sf.is_file():
+                    sf.unlink()
+            except Exception:
+                pass
 
     return {
         "schema": SCHEMA,
