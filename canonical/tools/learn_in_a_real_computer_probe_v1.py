@@ -67,7 +67,7 @@ spec = json.loads(pathlib.Path(sys.argv[1]).read_text())
 root = pathlib.Path(spec["root"])
 goal = spec["goal"]
 
-programs = [p for p in ("gzip", "bzip2", "xz", "zip") if shutil.which(p)]
+programs = [p for p in ("gzip", "bzip2", "xz", "zip", "tar") if shutil.which(p)]
 env = cenv.ComputerEnv(root=root, seed={k: v.encode() for k, v in spec["seed"].items()})
 env.register(cenv.program_actions(env, programs=programs, target="out.gz", goal=goal))
 
@@ -77,9 +77,11 @@ def is_goal(state) -> bool:
     return "out.gz:" in str(state)
 
 
-# The real check: the input's bytes come back out of out.gz through the
-# machine's own gzip reader. Computed live, while the world is in front of us.
-effect = oracle.compress_oracle("input.txt", "out.gz", programs=programs)
+# The whole contract, derived from the sentence and the world. Nothing here
+# says which file is the input or which program is the reader: the instruction
+# names the output, the observation supplies the source, and the reader is
+# proven by carrying the source out and bringing it back.
+effect = oracle.oracle_from_goal(goal, programs=programs)
 
 
 fresh = []
@@ -103,6 +105,7 @@ receipt = pa.run(
     fresh_reset=lambda instance: instance.reset(),
     seed=11,
     goal_check=effect,
+    effect_contract=effect.contract,
 )
 # the goal predicate the learner was given only says "a file called out.gz
 # exists". Whether the file IS a gzip of the input is a stricter question, asked
@@ -118,6 +121,8 @@ except Exception as error:  # noqa: BLE001 - a wrong artifact is data
     truth["gzip_error"] = type(error).__name__
 truth["oracle_verdict"] = (effect.last or {}).get("verdict")
 truth["oracle_reader"] = (effect.last or {}).get("reader")
+truth["derived_contract"] = effect.contract(env)
+truth["derived_output"] = effect.output
 receipt["artifact_truth"] = truth
 print(json.dumps({"receipt": receipt, "programs": programs,
                   "listing": env.listing()}, default=str))
@@ -132,7 +137,7 @@ def _seed_text(tag: str) -> dict[str, bytes]:
 
 
 def _stage(tag: str, state: pathlib.Path, base: pathlib.Path,
-           fresh_count: int = 2) -> dict[str, Any]:
+           fresh_count: int = 2, goal: str = GOAL) -> dict[str, Any]:
     work = base / tag
     work.mkdir(parents=True, exist_ok=True)
     seed = _seed_text(tag if tag != "b" else "b")
@@ -153,7 +158,7 @@ def _stage(tag: str, state: pathlib.Path, base: pathlib.Path,
     memory = state / "memory.json"
     spec_path = base / ("spec-%s.json" % tag)
     spec_path.write_text(json.dumps(
-        {"root": "/work", "goal": GOAL, "seed": {k: v.decode("utf-8", "replace")
+        {"root": "/work", "goal": goal, "seed": {k: v.decode("utf-8", "replace")
                                                    for k, v in seed.items()},
          "memory": "/state/memory.json", "fresh_roots": fresh_roots, "budget": 40, "tag": tag}),
         encoding="utf-8")
@@ -180,15 +185,17 @@ def _stage(tag: str, state: pathlib.Path, base: pathlib.Path,
             "refused": result.get("refused"), "payload": payload}
 
 
-def measure(*, keep: str | None = None) -> dict[str, Any]:
+def measure(*, keep: str | None = None, goal: str | None = None) -> dict[str, Any]:
     probe = isolation.probe()
     base = pathlib.Path(keep) if keep else pathlib.Path(
         tempfile.mkdtemp(prefix="brain-real-computer-"))
+    effective_goal = goal or GOAL
     state = base / "state"
     state.mkdir(parents=True, exist_ok=True)
     memory = state / "memory.json"
     try:
-        stages = [_stage(tag, state, base) for tag in ("a", "b", "renamed")]
+        stages = [_stage(tag, state, base, goal=effective_goal or GOAL)
+                  for tag in ("a", "b", "renamed")]
         stored = {}
         if memory.is_file():
             try:
@@ -197,7 +204,7 @@ def measure(*, keep: str | None = None) -> dict[str, Any]:
                 stored = {"refused": "MEMORY_CORRUPT"}
         return {
             "schema": SCHEMA,
-            "goal": GOAL,
+            "goal": effective_goal,
             "isolation_probe": {"verdict": probe.get("verdict"),
                                 "reasons": probe.get("reasons"),
                                 "caps_after_drop": probe.get("caps_after_drop")},
@@ -240,8 +247,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--json", default=None, help="write the receipt here")
     parser.add_argument("--keep", default=None, help="keep the scratch tree here")
+    parser.add_argument("--goal", default=None,
+                        help="the instruction under study; default %r" % GOAL)
     args = parser.parse_args(argv)
-    report = measure(keep=args.keep)
+    report = measure(keep=args.keep, goal=args.goal)
     if args.json:
         pathlib.Path(args.json).parent.mkdir(parents=True, exist_ok=True)
         pathlib.Path(args.json).write_text(json.dumps(report, indent=2, default=str),

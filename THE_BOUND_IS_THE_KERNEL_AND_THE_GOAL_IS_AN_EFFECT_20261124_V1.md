@@ -236,11 +236,76 @@ that reaches the goal by deleting the input is reported as
 Without this, `gzip input.txt` is a success that costs the user their file, and
 instant learning makes it the thing the system knows.
 
+## 5b. Second iteration — the hand-holding removed
+
+The first iteration's probes were given the source's name and the effect
+contract by me. That is hand-solving, so it did not count. This iteration
+deletes it.
+
+**The format table is gone.** It held `gz -> gzip`, `bz2 -> bzip2` — memorised
+world knowledge in the costume of a derivation, and it broke on the first
+compound name. What replaced it is derivation plus proof:
+
+* candidates come from the machine's own naming (`computer_env_v1.programs_for`),
+  and every candidate is only a **guess**;
+* a guess becomes a **reader** only by carrying a scratch copy of the source out
+  and bringing it back byte-identical, in a scratch room;
+* a compound name is a **chain**, decoded outermost-first, each layer proven
+  separately — `out.tar.gz` is verified through `[gzip, tar]`;
+* the artifact's header must match the **invariant** header the encoder itself
+  writes. Measured while building this: a fixed 4-byte signature wrongly
+  rejected a real `.tar.gz`, because byte 4 is gzip's FLG (0x08 when a filename
+  is stored, 0x00 when piping) — an option, not the format. The invariant is now
+  computed by invoking the same encoder two different ways and taking what stays
+  the same.
+
+**The instruction now supplies the contract.** `effect_oracle_v1.oracle_from_goal`
+reads the output name from the sentence (`into out.gz`), reads the source from
+the world (a file the sentence names, else the only file that is not the output),
+and returns a live predicate plus `.contract(env)`. Two candidates and no named
+input is a refusal, not a choice. Both probes now take **a sentence and nothing
+else**, and reproduce the previous results:
+
+| stage | status | derived contract | artifact |
+|---|---|---|---|
+| a | PASS, 0.85 s, 14 states / 39 transitions | `{source: input.txt, output: out.gz}` | EFFECT_VERIFIED, operator lifted |
+| b | replay 0.09 s | `{source: input.txt, …}` | identical |
+| c (renamed source) | replay 0.10 s | `{source: report.txt, …}` | identical |
+
+Transfer with goal-only input is unchanged: literal fails on the renamed
+vocabulary, the operator replays in **0.03 s**, opaque vocabulary refuses and
+the loop rescans in 0.647 s.
+
+**An integrity defect found while doing it, and closed.** Asked for
+`out.tar.gz`, the local-guide tier answered with
+`canonical/governance/EXPLORE_CHANNEL_STATE_20261019_V1.md` — a file recording an
+**earlier run of the same goal, including the plan that worked**. On any machine
+that carries our own results, the "guide" is the answer key, and reading it is
+self-answering. `local_guide_v1` now classifies our own records (verification,
+evidence, state, receipts, baselines, ledgers) and excludes them **by default**;
+reading them requires saying so explicitly. A real guide in the same tree is
+still served. Four tests.
+
+**A reach limit, measured and left standing.** `archive the input into out.tar.gz`
+returns `OPEN__NO_PLAN_AFTER_SCAN` on a vocabulary whose `tar` action writes a
+plain archive: the artifact is a tar, the name promises gzip, the oracle refuses,
+and the loop says OPEN. That is the correct answer — the oracle can verify a
+compound effect that the **action vocabulary cannot yet produce**. It is exactly
+the composition gap, now with a receipt instead of a hypothesis.
+
 ## 6. The next bottleneck (one)
 
-**The oracle covers one shape of goal.** "Produce this artifact from that source"
-is verified; a GUI state, a database row, a sent service, an edited document are
-not — and OSWorld-Science's 60.6% "no graded artifact" figure says the same gap
+**Composition: the loop cannot yet invent a missing action.** The compound
+goal above is verifiable and unreachable because no offered action performs
+`tar` *and* `gzip`. The next single step is typed composition of the operators
+already in the store — two proven contracts (`gzip`, `tar`) composed into the
+third, with the chain oracle deciding whether the composition is right. That is
+the brief's "algebraic skill composition", now demanded by a measurement rather
+than by a hunch.
+
+**And the oracle still covers one shape of goal.** "Produce this artifact from
+that source" is verified; a GUI state, a database row, a sent service, an edited
+document are not — and OSWorld-Science's 60.6% "no graded artifact" figure says the same gap
 exists everywhere. The next single step is to **derive the effect oracle from the
 environment itself for other shapes** (for a GUI: the accessibility tree's own
 action-and-readback; for a document: the application's own reopen-and-compare),

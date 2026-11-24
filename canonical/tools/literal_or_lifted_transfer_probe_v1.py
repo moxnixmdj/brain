@@ -118,7 +118,7 @@ rule = None
 
 # ---- learn once, on instance A ------------------------------------------------
 env_a, vocab_a = make("a", "input.txt", b"the first instance\n")
-effect_a = oracle.compress_oracle("input.txt", "out.gz", programs=programs)
+effect_a = oracle.oracle_from_goal(spec["goal"], programs=programs)
 started = time.monotonic()
 receipt_a = pa.run(env_a, spec["goal"], env_a.action_names,
                    goal_predicate=lambda s: "out.gz:" in str(s),
@@ -130,7 +130,7 @@ receipt_a = pa.run(env_a, spec["goal"], env_a.action_names,
                    fresh_state=lambda i: i.state(),
                    fresh_reset=lambda i: i.reset(),
                    seed=11, goal_check=effect_a,
-                   effect_contract={"source": "input.txt", "output": "out.gz"})
+                   effect_contract=effect_a.contract)
 learn_seconds = round(time.monotonic() - started, 3)
 plan_a = (receipt_a.get("steps", {}).get("plan") or {}).get("plan")
 verdict_a = judge(env_a, "input.txt")
@@ -170,14 +170,14 @@ for tag, source_name, payload in conditions:
     row["lifted"] = lifted_out
 
     # the system as it runs: memory + oracle, no help
-    effect = oracle.compress_oracle(source_name, "out.gz", programs=programs)
+    effect = oracle.oracle_from_goal(spec["goal"], programs=programs)
     started = time.monotonic()
     receipt = pa.run(env, spec["goal"], env.action_names,
                      goal_predicate=lambda s: "out.gz:" in str(s),
                      goal_family="compress_to_named_file", env_kind="posix_dir",
                      memory_path_="/state/memory.json", budget=40, max_depth=4,
                      unseen_instances=None, seed=11, goal_check=effect,
-                     effect_contract={"source": source_name, "output": "out.gz"})
+                     effect_contract=effect.contract)
     row["system"] = {
         "seconds": round(time.monotonic() - started, 3),
         "status": receipt.get("status"),

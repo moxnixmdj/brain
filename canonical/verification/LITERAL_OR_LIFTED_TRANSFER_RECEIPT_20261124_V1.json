@@ -8,11 +8,11 @@
   "isolated_run": {
     "ok": true,
     "isolated": true,
-    "seconds": 1.371
+    "seconds": 1.549
   },
   "result": {
     "learn": {
-      "seconds": 0.65,
+      "seconds": 0.667,
       "plan": [
         "run_gzip"
       ],
@@ -21,13 +21,18 @@
         "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
         "verdict": "EFFECT_VERIFIED",
         "reader": "gzip",
-        "reader_argv": [
-          "gzip",
-          "-d",
-          "-c",
-          "out.gz"
+        "reader_chain": [
+          "gzip"
         ],
-        "suffix": "gz",
+        "reader_argv": [
+          [
+            "gzip",
+            "-dc"
+          ]
+        ],
+        "components": [
+          "gz"
+        ],
         "output": "out.gz",
         "source": "input.txt",
         "bytes_decoded": 19,
@@ -61,8 +66,8 @@
         "output_name": "out.gz",
         "effect_checked_at_lift": true,
         "evidence": {
-          "learn_states": 8,
-          "learn_transitions": 27
+          "learn_states": 10,
+          "learn_transitions": 29
         },
         "refutations": 0
       }
@@ -82,13 +87,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "report.txt",
             "bytes_decoded": 40,
@@ -119,13 +129,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "report.txt",
             "bytes_decoded": 40,
@@ -136,7 +151,7 @@
           "effect_ok": true
         },
         "system": {
-          "seconds": 0.006,
+          "seconds": 0.005,
           "status": "PASS__REPLAY_FROM_MEMORY",
           "plan": null,
           "scan_ran": false,
@@ -144,13 +159,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "report.txt",
             "bytes_decoded": 40,
@@ -195,13 +215,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "input.txt",
             "bytes_decoded": 50,
@@ -212,7 +237,7 @@
           "effect_ok": true
         },
         "system": {
-          "seconds": 0.009,
+          "seconds": 0.03,
           "status": "PASS__REPLAY_FROM_OPERATOR",
           "plan": null,
           "scan_ran": false,
@@ -220,13 +245,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "input.txt",
             "bytes_decoded": 50,
@@ -276,7 +306,7 @@
           "effect_ok": false
         },
         "system": {
-          "seconds": 0.579,
+          "seconds": 0.647,
           "status": "PASS__PERFECT_ALGORITHM_RUN",
           "plan": [
             "a"
@@ -286,13 +316,18 @@
             "schema": "PROJECT_BRAIN_EFFECT_ORACLE_V1",
             "verdict": "EFFECT_VERIFIED",
             "reader": "gzip",
-            "reader_argv": [
-              "gzip",
-              "-d",
-              "-c",
-              "out.gz"
+            "reader_chain": [
+              "gzip"
             ],
-            "suffix": "gz",
+            "reader_argv": [
+              [
+                "gzip",
+                "-dc"
+              ]
+            ],
+            "components": [
+              "gz"
+            ],
             "output": "out.gz",
             "source": "input.txt",
             "bytes_decoded": 49,

@@ -933,6 +933,11 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     # A verified run that has an explicit effect specification also yields a
     # CONTRACT: program + roles + a checkable effect. It is saved only when the
     # effect was verified here, and it is what survives a change of spelling.
+    if reached and goal_check is not None and callable(effect_contract):
+        try:
+            effect_contract = effect_contract(env)
+        except Exception:  # noqa: BLE001
+            effect_contract = None
     if reached and goal_check is not None and effect_contract:
         try:
             from canonical.runtime import lifted_operator_v1 as lifted

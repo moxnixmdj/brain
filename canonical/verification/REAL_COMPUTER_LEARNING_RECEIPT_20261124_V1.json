@@ -9,7 +9,7 @@
   "stages": [
     {
       "tag": "a",
-      "elapsed_s": 0.677,
+      "elapsed_s": 0.854,
       "isolated": true,
       "refused": null,
       "payload": {
@@ -25,10 +25,10 @@
               "rule_ids": []
             },
             "scan": {
-              "states_seen": 11,
-              "transitions_seen": 36,
+              "states_seen": 14,
+              "transitions_seen": 39,
               "root": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
-              "duration_s": 0.5607,
+              "duration_s": 0.7155,
               "priors_used": 0,
               "priors_stale_discarded": 0
             },
@@ -61,6 +61,12 @@
                   "probed": false
                 },
                 {
+                  "action": "run_tar",
+                  "novel_from_root": false,
+                  "closeness": null,
+                  "probed": false
+                },
+                {
                   "action": "run_xz",
                   "novel_from_root": false,
                   "closeness": null,
@@ -75,8 +81,8 @@
               ],
               "best": "copy_input",
               "best_is_novel": false,
-              "total_states_seen": 11,
-              "total_transitions_known": 36,
+              "total_states_seen": 14,
+              "total_transitions_known": 39,
               "goal_states_present_in_model": true,
               "novel_actions_at_root": 0,
               "probed_actions": 0,
@@ -89,7 +95,7 @@
                 "run_gzip"
               ],
               "plan_length": 1,
-              "goal_states_observed": 2,
+              "goal_states_observed": 1,
               "plan_sketch": [
                 "run_gzip"
               ]
@@ -132,11 +138,12 @@
             "save_priors": {
               "status": "PASS__PRIORS_SAVED",
               "env_kind": "posix_dir",
-              "states": 11
+              "states": 14
             },
             "lift": {
-              "status": "NOT_ATTEMPTED",
-              "reason": "an operator needs a goal_check and an effect_contract"
+              "status": "PASS__OPERATOR_LIFTED",
+              "rule_id": "op-a4a7431f662f29ea",
+              "program": "gzip"
             },
             "save": {
               "status": "PASS__SAVED_TO_MEMORY",
@@ -148,6 +155,38 @@
           "memory": {
             "schema": "PROJECT_BRAIN_PA_MEMORY_V1",
             "rules": [
+              {
+                "schema": "PROJECT_BRAIN_LIFTED_OPERATOR_V1",
+                "kind": "operator",
+                "rule_id": "op-a4a7431f662f29ea",
+                "goal_family": "compress_to_named_file",
+                "env_kind": "posix_dir",
+                "goal": "compress the input into out.gz",
+                "program": "gzip",
+                "observed_action": "run_gzip",
+                "roles": {
+                  "source": "source",
+                  "output": "output"
+                },
+                "precondition": {
+                  "kind": "source_exists",
+                  "role": "source",
+                  "description": "the source file named by the goal is a file here"
+                },
+                "effect": {
+                  "kind": "roundtrip_equal",
+                  "source_role": "source",
+                  "output_role": "output",
+                  "description": "the machine's own reader for the output's declared format turns it back into exactly the source's bytes"
+                },
+                "output_name": "out.gz",
+                "effect_checked_at_lift": true,
+                "evidence": {
+                  "plan_length": 1,
+                  "scan_states": 14
+                },
+                "refutations": 0
+              },
               {
                 "schema": "PROJECT_BRAIN_PA_GENERALIZATION_V1",
                 "rule_id": "ga-aa2b07c65fce5616",
@@ -167,13 +206,13 @@
                   "trace_length": 1,
                   "plan_length": 1,
                   "evidence_extra": {
-                    "scan_states": 11,
-                    "scan_transitions": 36,
+                    "scan_states": 14,
+                    "scan_transitions": 39,
                     "plan_length": 1,
-                    "exploratory_trace_sha256": "1fb780b33c78e1199627be14e5af9ebb3cbbcf9ced9dde6a4741b741abfea928"
+                    "exploratory_trace_sha256": "4c88b035b10f547ded41adc45cfb004ec4758a0a2bd8c1773cbdcc72b7b4c636"
                   }
                 },
-                "created_at": 1795557075.6695166,
+                "created_at": 1795559659.0666947,
                 "action_count": 1
               }
             ],
@@ -182,86 +221,100 @@
                 "schema": "PROJECT_BRAIN_PA_PRIOR_V1",
                 "model": {
                   "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79": {
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_zip": "el-state-v2:0e6621fc1c47641990401d150560b50c80e9379be4c82c6abe7fdda7f3e26ad3",
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3",
                     "copy_to_out": "el-state-v2:1ce0e137b1201f443cbb6367d24868220df7039f744349f9c27c324d447ebd79",
-                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
-                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2"
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
+                    "run_tar": "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75",
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
+                  },
+                  "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25": {
+                    "run_tar": "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75",
+                    "run_zip": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25",
+                    "copy_to_out": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3"
+                  },
+                  "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75": {
+                    "run_zip": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25",
+                    "copy_input": "el-state-v2:e842339f91bbc93305c252551926c577838cf56620a4e969714891d552d33ef6",
+                    "copy_to_out": "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75"
+                  },
+                  "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3": {
+                    "run_tar": "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "copy_input": "el-state-v2:42f828fc82336a55765c20c13d24983ee3cc4c056d60a03fe420c3fadc62a85a",
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3",
+                    "run_zip": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25",
+                    "copy_to_out": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3"
                   },
                   "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4": {
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "copy_to_out": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_tar": "el-state-v2:fe375beed784bdd3014f5a79f0ec6c6dc21980957ce0483fd2a60589368ec2c5",
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3",
                     "copy_input": "el-state-v2:7299ff02941b15e5d4b85528f9d1647f17845a6c1deab96682c58e766f13095f",
-                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b"
-                  },
-                  "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd": {
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
-                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
-                    "copy_to_out": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "copy_input": "el-state-v2:750954f1b3a86ba076d290c15818011a4799215f6c13bd6b657af6bb2870a1b4",
-                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
-                  },
-                  "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b": {
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
-                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
-                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
-                    "copy_input": "el-state-v2:190d892ece0fc93bb5c98215b1508d817b663bd5fe9f909dceecbcda65aeda51",
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "copy_to_out": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b"
-                  },
-                  "el-state-v2:7299ff02941b15e5d4b85528f9d1647f17845a6c1deab96682c58e766f13095f": {},
-                  "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde": {
-                    "copy_to_out": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
-                    "copy_input": "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d",
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd",
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
-                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
-                  },
-                  "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d": {
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4"
+                    "run_zip": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25"
                   },
                   "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2": {
-                    "run_zip": "el-state-v2:d6c9a41421fb4c0e9eb18dff4da151705d88f4252b53fed95bd05e4ec80c8f3b",
+                    "run_tar": "el-state-v2:5117bee8b996d918eef523cc86d991e07f48cc2bac6f0f50e356fb23b4f69b75",
                     "copy_input": "el-state-v2:7c56d7423a2ab5b7f06d497c291420387dc653067e2f655b7b1f858578997aa2",
-                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
-                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde",
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3",
                     "copy_to_out": "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927"
                   },
-                  "el-state-v2:190d892ece0fc93bb5c98215b1508d817b663bd5fe9f909dceecbcda65aeda51": {
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd"
+                  "el-state-v2:e842339f91bbc93305c252551926c577838cf56620a4e969714891d552d33ef6": {},
+                  "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde": {
+                    "run_gzip": "el-state-v2:d06cbe1649055357025613821eab9766a927eb095e1c82dbe8593475dc7261e3",
+                    "run_zip": "el-state-v2:d80286fad00c2f67e6f273398c22f91b28e0d7d7ea038f5409d6494490e48d25",
+                    "copy_input": "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d"
                   },
-                  "el-state-v2:750954f1b3a86ba076d290c15818011a4799215f6c13bd6b657af6bb2870a1b4": {
-                    "run_gzip": "el-state-v2:41f46b80fb3d5d9b3b33571fdca414b24e77a8a4a5bb7b324536500db116cbbd"
+                  "el-state-v2:42f828fc82336a55765c20c13d24983ee3cc4c056d60a03fe420c3fadc62a85a": {
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4",
+                    "copy_input": "el-state-v2:42f828fc82336a55765c20c13d24983ee3cc4c056d60a03fe420c3fadc62a85a"
                   },
+                  "el-state-v2:5c9bc5f39279f1fdb55ad7320632f964043c0c61e67017018cbcec99a8ab989d": {
+                    "run_bzip2": "el-state-v2:4c5bc7fdda4338c87a864c6f3213d759fdc425c18e828dd18c66c458ed021bde"
+                  },
+                  "el-state-v2:7299ff02941b15e5d4b85528f9d1647f17845a6c1deab96682c58e766f13095f": {},
                   "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927": {
                     "copy_to_out": "el-state-v2:0542f271fa1225c9c9c1afee69b63ca61498ce70850da252dd16f59fd7bad927"
+                  },
+                  "el-state-v2:0e6621fc1c47641990401d150560b50c80e9379be4c82c6abe7fdda7f3e26ad3": {
+                    "run_tar": "el-state-v2:fe375beed784bdd3014f5a79f0ec6c6dc21980957ce0483fd2a60589368ec2c5"
+                  },
+                  "el-state-v2:fe375beed784bdd3014f5a79f0ec6c6dc21980957ce0483fd2a60589368ec2c5": {
+                    "run_xz": "el-state-v2:25f7d9604a268d1cba6eac4da1852c8be8a0ecad54b0e14f36bf3a5a47560ed4"
                   }
                 },
-                "saved_at": 1795557075.6836667
+                "saved_at": 1795559659.0854843
               }
             },
-            "created_at": 1795557075.1002398,
-            "updated_at": 1795557075.6840794
+            "created_at": 1795559658.34126,
+            "updated_at": 1795559659.1123064
           },
           "status": "PASS__PERFECT_ALGORITHM_RUN",
           "pass": true,
           "outcome": "LEARNED_AND_VERIFIED",
-          "duration_s": 0.5842,
+          "duration_s": 0.7715,
           "artifact_truth": {
             "out_gz_exists": true,
             "gzip_ok": true,
             "gzip_matches_input": true,
             "oracle_verdict": "EFFECT_VERIFIED",
-            "oracle_reader": "gzip"
+            "oracle_reader": "gzip",
+            "derived_contract": {
+              "source": "input.txt",
+              "output": "out.gz"
+            },
+            "derived_output": "out.gz"
           }
         },
         "programs": [
           "gzip",
           "bzip2",
           "xz",
-          "zip"
+          "zip",
+          "tar"
         ],
         "listing": [
           "input.txt",
@@ -271,7 +324,7 @@
     },
     {
       "tag": "b",
-      "elapsed_s": 0.093,
+      "elapsed_s": 0.09,
       "isolated": true,
       "refused": null,
       "payload": {
@@ -283,9 +336,10 @@
           "memory_refused": null,
           "steps": {
             "memory_lookup": {
-              "matches": 1,
+              "matches": 2,
               "rule_ids": [
-                "ga-aa2b07c65fce5616"
+                "ga-aa2b07c65fce5616",
+                "op-a4a7431f662f29ea"
               ]
             },
             "memory_replay": {
@@ -301,20 +355,26 @@
           "status": "PASS__REPLAY_FROM_MEMORY",
           "pass": true,
           "outcome": "INSTANT_RECALL",
-          "duration_s": 0.0088,
+          "duration_s": 0.0083,
           "artifact_truth": {
             "out_gz_exists": true,
             "gzip_ok": true,
             "gzip_matches_input": true,
             "oracle_verdict": null,
-            "oracle_reader": null
+            "oracle_reader": null,
+            "derived_contract": {
+              "source": "input.txt",
+              "output": "out.gz"
+            },
+            "derived_output": "out.gz"
           }
         },
         "programs": [
           "gzip",
           "bzip2",
           "xz",
-          "zip"
+          "zip",
+          "tar"
         ],
         "listing": [
           "input.txt",
@@ -324,7 +384,7 @@
     },
     {
       "tag": "renamed",
-      "elapsed_s": 0.107,
+      "elapsed_s": 0.103,
       "isolated": true,
       "refused": null,
       "payload": {
@@ -336,9 +396,10 @@
           "memory_refused": null,
           "steps": {
             "memory_lookup": {
-              "matches": 1,
+              "matches": 2,
               "rule_ids": [
-                "ga-aa2b07c65fce5616"
+                "ga-aa2b07c65fce5616",
+                "op-a4a7431f662f29ea"
               ]
             },
             "memory_replay": {
@@ -354,20 +415,26 @@
           "status": "PASS__REPLAY_FROM_MEMORY",
           "pass": true,
           "outcome": "INSTANT_RECALL",
-          "duration_s": 0.0113,
+          "duration_s": 0.0082,
           "artifact_truth": {
             "out_gz_exists": true,
             "gzip_ok": false,
             "gzip_error": "FileNotFoundError",
             "oracle_verdict": null,
-            "oracle_reader": null
+            "oracle_reader": null,
+            "derived_contract": {
+              "source": "report.txt",
+              "output": "out.gz"
+            },
+            "derived_output": "out.gz"
           }
         },
         "programs": [
           "gzip",
           "bzip2",
           "xz",
-          "zip"
+          "zip",
+          "tar"
         ],
         "listing": [
           "out.gz",
@@ -377,9 +444,10 @@
     }
   ],
   "memory": {
-    "path": "/tmp/brain-real-computer-66fuorfx/state/memory.json",
-    "rules": 1,
+    "path": "/tmp/brain-real-computer-2a6kn8s7/state/memory.json",
+    "rules": 2,
     "rule_scopes": [
+      null,
       {
         "env_kind": "posix_dir",
         "goal_family": "compress_to_named_file"
