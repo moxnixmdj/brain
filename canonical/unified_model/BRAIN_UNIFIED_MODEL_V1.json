@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 600,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7246,
+  "research_index_records": 7245,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 456,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "28f80c9be9e76687971df21a55285ffc34d0755c4b942bd56d035ebbdd4aec02"
+  "value": "a2d9c4cb9f0bcc1322d6ef69a601e7b36a7c6c6692bccb8f643bcc2e4b1792da"
  },
  "engines": [
   {
@@ -91751,7 +91751,7 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "b73aef2fde81f38b38c26e1bfb89a1b3ed94451b6e8b46ab3d9738ef42b1ef28",
+  "compiler_sha256": "555e71628c7557e02f85d9fe3a1174904647b83d7da06abe60cf1ff4a191b732",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
@@ -226019,25 +226019,6 @@
    "action_id": "",
    "capability": false,
    "date": "",
-   "id": "research:canonical/verification/__pycache__/MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_20261124_V1.cpython-311.pyc",
-   "kind": "RESEARCH_RECORD",
-   "path": "canonical/verification/__pycache__/MANUFACTURE_WHAT_THE_REFUSAL_ASKS_FOR_20261124_V1.cpython-311.pyc",
-   "schema": "",
-   "sha256": "072ffcfd53214a99462e5e12cfb72befaac830801e6ed183aeba72c62f392448",
-   "status": "",
-   "terms": {
-    "20261124": 1,
-    "311": 1,
-    "asks": 1,
-    "manufacture": 1,
-    "refusal": 1,
-    "v1.cpython": 1
-   }
-  },
-  {
-   "action_id": "",
-   "capability": false,
-   "date": "",
    "id": "research:canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/p3_audience_grounded_numeric_independent_replay_v1.py",
@@ -281668,7 +281649,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "b73aef2fde81f38b38c26e1bfb89a1b3ed94451b6e8b46ab3d9738ef42b1ef28",
+   "sha256": "555e71628c7557e02f85d9fe3a1174904647b83d7da06abe60cf1ff4a191b732",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "symbol_count": 35,
    "symbols": [
