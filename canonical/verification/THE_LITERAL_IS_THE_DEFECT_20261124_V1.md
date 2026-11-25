@@ -196,3 +196,67 @@ down — **a substitution count is not a change**. The tool now compares text, n
 - I did not find this row by search. I found it by noticing that its defect had the same
   **shape** as two rows already solved. That is a human move, and I am not claiming the
   tool makes it.
+
+## Fifth row: `more-itertools 71e070b35d` — the first non-regex literal
+
+Four rows were regex literals. This one is not, and it needed a different rule.
+
+```python
+for element in map(key, iterable) if key else iterable:
+```
+
+`if key` is a **truthiness** test. A callable that defines `__bool__` returning `False`
+is still a perfectly good key, and this line silently discards it. The fix is
+`if key is not None`.
+
+| | |
+|---|---|
+| parent | `all_unique(["A","B","C","b"], falsey_key)` -> `True` (1 violation) |
+| `FALSEY_KEY_NOT_NONE` | **0 violations**, 1 edit |
+| collateral | `["A","B","C"]` -> True, `["A","a"]` -> False, both preserved |
+| human fix | **byte-identical** |
+| suite | **768 passed** on both parent and refined tree |
+
+Shipped test `test_falsey_key_is_honoured`: **1 failed** on `71e070b35d^`, passes with
+the refinement.
+
+### Why grep would not have found it
+
+The textual shape `if <name> else` appears **8 times** in `more_itertools/more.py`.
+Grepping for it gives 1 true site in 8 — the same precision problem this repository has
+recorded repeatedly. What makes the repair exact is a **scope rule**, not a better regex:
+
+> the failing test names the function; within that function, only a **parameter** used as
+> a bare truthiness test can be the site.
+
+Applied to `all_unique`, that rule yields **exactly one site**, found by walking the AST —
+no reading of the human diff. (I did read the diff first, to check the row was worth
+attempting. The rule was then written to find the site without it, and re-run from the
+parent to confirm one edit and a byte-identical result.)
+
+That is the third distinct scope rule this session has needed, after "the destination is
+the file with the dangling reference" and "a test file is never the repair target". The
+recurring lesson: **scope rules, not pattern rules.**
+
+## Ledger after five rows
+
+| | before | now |
+|---|---|---|
+| end-to-end solved, 41 attemptable | 22 | **24** |
+| corpus solved / 45 | 22 (48.9%) | **24 (53.3%)** |
+| literal/constant-refinement rows | 2 | **5** |
+| rows solved blind with no model call | 3 | **5** |
+
+## What is still true about these five
+
+- **I chose which rows to attempt by noticing a shared shape.** That is a human routing
+  decision, and the tool does not make it. Five rows of one shape is a demonstration of
+  reachability, not evidence that a benchmark of 1,865 problems would be reached.
+- **Every one still needs the oracle.** The parent does not fail on its own: for
+  `httpx e63b6594f2` no test exists at the parent, and for `more-itertools` the shipped
+  test is new. The benchmark's hidden test patch remains the binding constraint, exactly
+  as recorded in `THE_CORPUS_IS_ONE_LINE_WIDE`.
+- **One row was reported NO_FAILING_TEST and cleared anyway** (`httpx`); one had already
+  22 attempts and a recorded demand (`more-itertools`, `AssertionError: True != False`).
+  Neither was unreachable — both were *routed wrong*, and the existing family was applied
+  to the wrong shape.

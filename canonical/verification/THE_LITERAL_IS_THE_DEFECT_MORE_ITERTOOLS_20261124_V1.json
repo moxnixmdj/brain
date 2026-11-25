@@ -1,0 +1,56 @@
+{
+ "schema": "THE_LITERAL_IS_THE_DEFECT_V1",
+ "repo": "more-itertools",
+ "commit": "71e070b35d",
+ "module": "more_itertools.more",
+ "relation": [
+  "",
+  ""
+ ],
+ "candidates": [
+  {
+   "refinement": "FALSEY_KEY_NOT_NONE",
+   "edits": 1,
+   "result": {
+    "error": null,
+    "count": 0,
+    "witness": [],
+    "cases": 1,
+    "collateral": [
+     [
+      "['A', 'B', 'C']",
+      true
+     ],
+     [
+      "['A', 'a']",
+      true
+     ]
+    ]
+   },
+   "moved": true,
+   "cleared": true
+  }
+ ],
+ "parent": {
+  "error": null,
+  "count": 1,
+  "witness": [
+   [
+    "['A', 'B', 'C', 'b']",
+    true
+   ]
+  ],
+  "cases": 1,
+  "collateral": [
+   [
+    "['A', 'B', 'C']",
+    true
+   ],
+   [
+    "['A', 'a']",
+    false
+   ]
+  ]
+ },
+ "verdict": "LITERAL_REFINEMENT_CLEARS"
+}

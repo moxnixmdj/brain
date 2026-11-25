@@ -199,8 +199,84 @@ print(json.dumps({"error": None, "count": len(bad), "witness": bad[:6],
                   "cases": len(REQUIRED), "collateral": survived}))
 '''
 
+FALSEY_KEY_PROBE = '''
+import json
+from more_itertools import all_unique
+
+class CaseFold:
+    """A falsey callable is still a valid key. `if key else` discards it."""
+    def __bool__(self):
+        return False
+    def __call__(self, x):
+        return x.lower()
+
+REQUIRED = [(["A", "B", "C", "b"], False)]     # 'b' and 'B' collide under the key
+COLLATERAL = [(["A", "B", "C"], True), (["A", "a"], False)]
+
+bad, survived = [], []
+for items, want in REQUIRED:
+    try:
+        got = all_unique(items, CaseFold())
+    except Exception as error:
+        bad.append((str(items), type(error).__name__)); continue
+    if got != want:
+        bad.append((str(items), got))
+for items, want in COLLATERAL:
+    try:
+        survived.append([str(items), all_unique(items, CaseFold()) == want])
+    except Exception as error:
+        survived.append([str(items), type(error).__name__])
+print(json.dumps({"error": None, "count": len(bad), "witness": bad[:6],
+                  "cases": len(REQUIRED), "collateral": survived}))
+'''
+
+# An AST-scoped, oracle-selected refinement. The failing test names the function; within
+# that function only a PARAMETER used as a bare truthiness test can be the site. In
+# more_itertools.all_unique that is one site, while the same textual shape appears 8 times
+# in the file. Grep precision here is 1/8; the scope rule is what makes it exact.
+_REFINE_SOURCE = r"""
+import ast, pathlib, re, sys
+
+def sites(src, func):
+    tree = ast.parse(src)
+    out = []
+    for fn in [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == func]:
+        params = {a.arg for a in fn.args.args} | {a.arg for a in fn.args.kwonlyargs}
+        for node in ast.walk(fn):
+            test = node.test if isinstance(node, (ast.IfExp, ast.If)) else None
+            if isinstance(test, ast.Name) and test.id in params:
+                out.append((node.lineno, test.id))
+    return out
+
+def apply(path, func, param):
+    src = path.read_text(); edits = 0
+    for line, name in sites(src, func):
+        if name != param:
+            continue
+        lines = src.splitlines(keepends=True)
+        new = re.sub(rf"\bif {re.escape(param)}\b(?!\s+is)",
+                     f"if {param} is not None", lines[line - 1], count=1)
+        if new != lines[line - 1]:
+            lines[line - 1] = new; src = "".join(lines); edits += 1
+    if edits:
+        path.write_text(src)
+    return edits
+
+path, func, param = sys.argv[1], sys.argv[2], sys.argv[3]
+print(apply(pathlib.Path(path), func, param))
+"""
+
 
 def run_probe(tree: pathlib.Path, args: argparse.Namespace) -> dict[str, Any]:
+    if args.relation == "falsey_key":
+        done = subprocess.run([sys.executable, "-c", FALSEY_KEY_PROBE], cwd=tree,
+                              capture_output=True, text=True, errors="replace",
+                              timeout=args.seconds,
+                              env={**os.environ, "PYTHONPATH": f"{tree}:{tree / 'src'}"})
+        try:
+            return json.loads(done.stdout.strip().splitlines()[-1])
+        except Exception:
+            return {"error": (done.stdout + done.stderr)[-400:]}
     if args.relation == "ipv4_like_host":
         done = subprocess.run([sys.executable, "-c", IPV4_LIKE_PROBE], cwd=tree,
                               capture_output=True, text=True, errors="replace",
@@ -240,7 +316,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--a", default="", help="predicate function (agrees only)")
     parser.add_argument("--b", default="", help="function it must agree with (agrees only)")
     parser.add_argument("--relation", default="agrees",
-                        choices=("agrees", "parses_leading_zero_port", "ipv4_like_host"))
+                        choices=("agrees", "parses_leading_zero_port", "ipv4_like_host",
+                                 "falsey_key"))
     parser.add_argument("--alphabet", default="a,1,-")
     parser.add_argument("--maxlen", type=int, default=4)
     parser.add_argument("--repos-root", type=pathlib.Path, default=DEFAULT_REPOS_ROOT)
@@ -271,7 +348,34 @@ def main(argv: list[str] | None = None) -> int:
                 source_rel = args.module.replace(".", "/") + ".py"
                 if args.relation == "parses_leading_zero_port":
                     source_rel = "urllib3/util/url.py"
+                if args.relation == "falsey_key":
+                    # oracle-selected function and parameter, supplied by the failing test
+                    source_rel = "more_itertools/more.py"
                 candidates: list[dict[str, Any]] = []
+                if args.relation == "falsey_key":
+                    # AST-scoped refinement: textual substitution cannot express
+                    # "a parameter of THIS function used as a bare truthiness test".
+                    target = tree / source_rel
+                    original = target.read_text(encoding="utf-8", errors="replace")
+                    edits = subprocess.run(
+                        [sys.executable, "-c", _REFINE_SOURCE, str(target),
+                         "all_unique", "key"],
+                        capture_output=True, text=True, errors="replace")
+                    try:
+                        changes = int(edits.stdout.strip().splitlines()[-1])
+                    except Exception:
+                        changes = 0
+                    if changes:
+                        try:
+                            result = run_probe(tree, args)
+                        finally:
+                            target.write_text(original, encoding="utf-8")
+                        candidates.append({"refinement": "FALSEY_KEY_NOT_NONE",
+                                           "edits": changes, "result": result,
+                                           "moved": (not result.get("error")) and
+                                                    result.get("count", baseline["count"])
+                                                    < baseline["count"],
+                                           "cleared": result.get("count") == 0})
                 for name, pattern, replacement in REFINEMENTS:
                     target = tree / "src" / source_rel
                     if not target.exists():
