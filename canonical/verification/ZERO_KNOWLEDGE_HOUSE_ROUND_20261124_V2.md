@@ -632,3 +632,17 @@ its acceptance test written before the implementation: learn from `pluggy@8051a4
 `pluggy@50585e0`'s `unregister` **without** being told the function name.
 
 Tally unchanged: **11/13 = 84.62%**, 0 regressions, `K3 = 0`.
+
+### The deeper reason the store cannot earn anything here
+
+Every graded commit in this catalogue arrives **with the test that specifies the repair**. `pluggy@50585e0` hands the
+engine `unregister(a); assert list_plugin_distributions() == []`, so the mutator and the container are both in the
+prompt; the store is asked to compete with a spec that is already present and strictly better. The store's comparative
+advantage — a defect seen once, fixed, and met again *without* a specification — is precisely the situation this
+catalogue does not contain. That is why two rounds of ablation produced identical numbers: not because the mechanism is
+wrong, but because the benchmark is blind to it. A truthful claim about instant learning needs a task stream where the
+test arrives *after* the fix, or not at all; until such a stream exists, the honest statement is "the store is not
+measurable here", not "the store works".
+
+This also sets the priority for the next stream, ahead of the positional delta: **a held-out-defect stream** — fix
+commit A, then present commit B's *failing trace only* and ask for the repair without its test file.
