@@ -1295,3 +1295,69 @@ repair was **not expressible at all**, and with the insertion rung the single de
 behaviour anywhere it should not.
 
 Stream tally unchanged: **6 repaired, 1 refused**; test-present **11/13 = 84.62%**.
+
+## Round V24 — the copyable edit is the wrong unit to accumulate
+
+V23 made insertion edits expressible, so the obvious next move was the plan's own Step 1: induce the six hand-written
+repairs instead of writing them. The test was run in the hardest honest form — teach on five commits, apply at the sixth,
+no hand-written candidate anywhere, every rung available.
+
+| held-out commit | file-level candidates | recovered |
+| --- | --- | --- |
+| `click@05f6fd0` | 400 (cap) | no |
+| `more-itertools@cca32949f1` | 400 (cap) | no |
+| `pluggy@50585e0` | 400 (cap) | no |
+| `pluggy@8051a4d` | 400 (cap) | no |
+| `pyjwt@793a302` | 30 | no |
+| `werkzeug@051fd663` | 281 | no |
+
+**0/6 at file level, 0/10 at function level** (`format_arguments`, `last`, `unregister` twice, `list_plugin_distinfo`,
+`list_plugin_distributions`, `load_setuptools_entrypoints`, `_validate_iat/_nbf/_exp`). Enumeration is not the cause:
+those 10 sites produced 0–59 candidates each, and the cap was never what excluded the answer. The cause is in the basis:
+of 120 templates induced from five commits, **110 have support 1**, five have support 2, five have support 3. A
+support-1 template carries one commit's literals; the sixth commit's fix has a different shape, so no template fires.
+
+A six-commit corpus cannot settle whether that is bad luck, so recurrence was measured on real history instead of on
+narrow corpora: 180 commits across `pluggy`, `werkzeug`, `more-itertools`, `pyjwt`, `click`, `attrs`, restricted to
+commits that change both a module and a test file, diffed at function level — **587 function fixes**. Reproducible with
+`canonical/tools/measure_edit_shape_recurrence_v1.py`.
+
+| rung | fixes it can express | distinct full keys | keys recurring in ≥2 commits | occurrences under a recurring key | transfer on those |
+| --- | --- | --- | --- | --- | --- |
+| leaf (V20's `EditTemplate`) | **81 / 587 = 13.8%** | 89 | 2 (1 within one repo) | **5 / 110 = 4.5%** | 1/2 |
+| node + insertion, RELATIONAL | **304 / 587 = 51.8%** | 438 | 6 (5 within one repo) | **18 / 488 = 3.7%** | 1/6 |
+
+Three facts, each measured rather than argued:
+
+1. **Expressiveness is not the binding constraint any more.** The rungs reach 51.8% of real function fixes at context
+   depth 0; V23's insertion rung is part of that. The remaining 48.2% is the honest ceiling of this inducer, not of the
+   corpus.
+2. **Recurrence is the binding constraint.** Among everything the deep rungs can express, **96.3% of occurrences are
+   unique to a single commit**, and only five of the six recurring keys recur inside one project. "The same edit, with
+   the same literals, is needed twice" is a 4-in-100 event. A store built on that unit has nothing to store.
+3. **Transfer on a shared key is still 1/6.** Where recurrence does happen the student's enclosing context differs, so
+   the taught template applies somewhere else in the function or not at all. Recurrence of a key is necessary and not
+   sufficient; the sample is n=6 and that limit is stated, not hidden.
+
+There is one case worth naming because it shows what a transferable edit looks like when it exists: two independent
+`pyjwt` commits both widen an exception tuple, and `H -> (H, RecursionError)` — a hole plus one appended name —
+reproduces the held-out fix exactly. That is an edit whose general part is a *shape* and whose specific part is a single
+name; everything else in the 587 is a bundle of site-specific names.
+
+**Rejected alternatives, and why.** Bigger candidate budgets (the cap was never binding at function level). Deeper
+context in the templates' applicability condition (depth 1 collapsed candidates to 0–4 at the same sites, so it removes
+reachability without adding precision). Merging all rungs' keys (they are already disjoint key spaces; the union is the
+51.8% above). Rewriting the inducer to search harder: the measurements above are of *the corpus's* recurrence, not of
+search effort, so a better search would raise candidate counts and leave 3.7% untouched.
+
+**What this changes.** Rule accumulation was never blocked by the inducer being weak. It was blocked by the choice of
+unit: a syntactic edit is a fact about one commit. The unit that *did* transfer across all six repositories in this
+round is the law — `sibling_totality`, `state_consistency`, `iterable_retyping`, `error_discipline`, `round_trip`,
+`assert_validation` each fired on a buggy tree in a repository it was not written for, and each was refuted on the fixed
+tree. Those are statements about behaviour that can be *checked* anywhere, not edits that can be *copied* anywhere.
+
+**Next bottleneck, named by this measurement.** The law is now the only unit with evidence of transfer, and its
+recurrence has never been measured. The measurement to run is the same one, one level up: over the same 180 commits,
+run the law suite on each buggy tree and count how many distinct laws fire, how often a law fires in ≥2 independent
+commits, and whether a law that fires is enough to *select* a repair — the shape that produced 6/6 repairs here versus
+0/6 for edits.

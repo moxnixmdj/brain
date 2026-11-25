@@ -629,6 +629,10 @@
     "canonical/swe_kernel/induced_edit_basis_v1.py": {
       "lines": 941,
       "sha256": "806c7517c7b1feb972bb7be4b41c52149860cb5d8f34d3cbd640d0334428fea6"
+    },
+    "canonical/tools/measure_edit_shape_recurrence_v1.py": {
+      "lines": 180,
+      "sha256": "5cb92d9bd855a8da5b02c33e379315dc57030c56664a836ef788fde1261f3df8"
     }
   },
   "new_mechanisms": [
@@ -898,5 +902,94 @@
       "passed": 8,
       "combined_with_neighbours": "29 passed"
     }
+  },
+  "accumulation_bound_v24": {
+    "question": "can the six hand-written repairs be induced from each other, i.e. is the copyable edit an accumulating unit",
+    "corpus_test": {
+      "teaching": "five commits, every rung available",
+      "held_out_files": 6,
+      "recovered_files": 0,
+      "held_out_functions": 10,
+      "recovered_functions": 0,
+      "candidates_per_site": "0-59 at function level, 30-400 at file level (cap not binding)",
+      "template_support_histogram": {
+        "1": 110,
+        "2": 5,
+        "3": 5
+      },
+      "conclusion": "support-1 templates carry one commit's literals; the sixth commit's fix has a different shape"
+    },
+    "recurrence_on_real_history": {
+      "tool": "canonical/tools/measure_edit_shape_recurrence_v1.py",
+      "repos": [
+        "pluggy",
+        "werkzeug",
+        "more-itertools",
+        "pyjwt",
+        "click",
+        "attrs"
+      ],
+      "commits": 180,
+      "function_fixes": 587,
+      "leaf_rung": {
+        "expressible": 81,
+        "expressible_pct": 13.8,
+        "distinct_keys": 89,
+        "recurring_keys": 2,
+        "recurring_within_one_repo": 1,
+        "occurrences_under_recurring_key": "5/110 = 4.5%",
+        "transfer": "1/2"
+      },
+      "deep_rung_node_and_insertion": {
+        "expressible": 304,
+        "expressible_pct": 51.8,
+        "distinct_keys": 438,
+        "recurring_keys": 6,
+        "recurring_within_one_repo": 5,
+        "occurrences_under_recurring_key": "18/488 = 3.7%",
+        "transfer": "1/6"
+      },
+      "binding_constraint": "recurrence, not expressiveness: 96.3% of expressible occurrences are unique to one commit"
+    },
+    "transferable_example": "pyjwt, two independent commits: H -> (H, RecursionError) reproduces the held-out fix exactly -- a hole plus one appended name",
+    "rejected": [
+      "larger candidate budgets (cap never binding at function level)",
+      "deeper applicability context (depth 1 collapsed candidates to 0-4, removes reachability)",
+      "union of rung key spaces (already 51.8%)",
+      "a stronger search over the same basis (recurrence is a property of the corpus, not of search)"
+    ],
+    "changed_unit": "the law: six laws each fired on a buggy tree in a repository they were not written for and were refuted on the fixed tree, which is 6/6 versus 0/6 for edits",
+    "next_bottleneck": {
+      "item": "law recurrence and law-to-repair selection over the same 180 commits",
+      "measurement": "run the law suite on each buggy tree; count distinct laws, laws firing in >=2 independent commits, and whether a firing law selects the repair"
+    }
+  },
+  "claim_verification_20261124": {
+    "method": "checked against this repository and its remotes; nothing inherited from an earlier report",
+    "verified": {
+      "arena_branch_existence": "the quoted short identifiers aab1b545, b81b2217, 06dc079e, f7ec1162, 50c05c04, cd5bfaaa, d86a0174, 4260e934, 80a7e8eb, 94363358, 39d26eb4, 8fe5f749, 9026f2bc exist as remote BRANCH NAMES (arena/<id>-brain), not as commits; their heads are different shas",
+      "iter_83_84_commits": "92b6db85 and d6c1661a exist locally as commits titled Iter 83 / Iter 84",
+      "modules_present": [
+        "canonical/swe_kernel/witness_inversion_v1.py",
+        "canonical/swe_kernel/typed_invention_v1.py",
+        "canonical/swe_kernel/zygote_worker_pool_v1.py",
+        "canonical/swe_kernel/universal_semantic_ir_v1.py",
+        "canonical/swe_kernel/repo_component_petri_v1.py"
+      ]
+    },
+    "failed": {
+      "instant_swe_skill_store_v1.py": "no such path anywhere under canonical/; the named Step-1 target did not exist",
+      "repo_component_and_cow_engine_v1.py": "no such path; the nearest real module is repo_component_petri_v1.py"
+    },
+    "unverified_here": [
+      "45/45 corpus and 51.11% one-shot transfer",
+      "244 verified OSS commits",
+      "75.2% of hunks outside fixed grammars",
+      "frontier scores (Opus 5.5, Sonnet 5.5, GPT-6 Astra, GPT-6.1 Sol, Muse Spark 1.1)",
+      "0.35s warm-cache runtime",
+      "OSWorld-2 horizon decay arithmetic",
+      "SWE-bench Pro / Terminal-Bench / OSWorld numbers: no Docker or KVM in this sandbox, so they remain unmeasured by this round"
+    ],
+    "measured_instead": "48.2% of 587 real function fixes are not expressible by this inducer's node/insertion rungs at context depth 0; 3.7% of expressible occurrences recur in an independent commit"
   }
 }
