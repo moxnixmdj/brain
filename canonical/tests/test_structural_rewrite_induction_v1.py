@@ -194,3 +194,52 @@ def test_verify_boundary_invariance_64_catches_boundary_crash_and_accepts_safe_p
     assert unsafe["passed"] is False and unsafe["new_crashes"] > 0
 
 
+def test_federated_self_play_distiller_harvests_and_transfers_multi_statement_skills(tmp_path):
+    episodes = [
+        {
+            "repo": "attrs",
+            "commit": "d0c73d8faa",
+            "defective": "def deep_iterable(member_validator, iterable_validator=None):\n    return _DeepIterable(member_validator, iterable_validator)\n",
+            "repaired": (
+                "def deep_iterable(member_validator, iterable_validator=None):\n"
+                "    if isinstance(member_validator, (list, tuple)):\n"
+                "        member_validator = and_(*member_validator)\n"
+                "    return _DeepIterable(member_validator, iterable_validator)\n"
+            ),
+            "held_out_target": "def check_items(item_rule, container_rule=None):\n    return _Checker(item_rule, container_rule)\n",
+            "held_out_expected": (
+                "def check_items(item_rule, container_rule=None):\n"
+                "    if isinstance(item_rule, (list, tuple)):\n"
+                "        item_rule = and_(*item_rule)\n"
+                "    return _Checker(item_rule, container_rule)\n"
+            ),
+        },
+        {
+            "repo": "click",
+            "commit": "701b313160",
+            "defective": "def get_args():\n    incomplete = os.environ['COMP_CWORD']\n    return incomplete\n",
+            "repaired": (
+                "def get_args():\n"
+                "    incomplete = os.environ['COMP_CWORD']\n"
+                "    if incomplete:\n"
+                "        incomplete = split_arg_string(incomplete)[0]\n"
+                "    return incomplete\n"
+            ),
+            "held_out_target": "def parse_word():\n    token = env['WORD']\n    return token\n",
+            "held_out_expected": (
+                "def parse_word():\n"
+                "    token = env['WORD']\n"
+                "    if token:\n"
+                "        token = split_arg_string(token)[0]\n"
+                "    return token\n"
+            ),
+        },
+    ]
+    res = S.run_federated_self_play_distiller(episodes, store_path=tmp_path / "distilled.json")
+    assert res["episodes_processed"] == 2
+    assert res["harvested_before_compact"] == 2
+    assert res["compacted_store_size"] == 2
+    assert res["replayed_on_held_out"] == 2
+
+
+

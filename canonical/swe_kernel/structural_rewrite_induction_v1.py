@@ -1158,6 +1158,45 @@ def induce_subtree_morphism(
                         source_repo=source_repo,
                         source_commit=source_commit,
                     )
+
+    # Pattern 3: PRECONDITION_SEQUENCE_COERCION_GUARD (e.g. attrs@d0c73d8faa)
+    # Before: `return ?C(?arg0, ...)`
+    # After:  `if isinstance(?arg0, (list, tuple)): ?arg0 = ?comb(*?arg0)` followed by `return ?C(?arg0, ...)`
+    if len(new_stmts) == len(old_stmts) + 1:
+        for i, st in enumerate(new_stmts):
+            if (isinstance(st, ast.If) and len(st.body) == 1
+                    and isinstance(st.body[0], ast.Assign)
+                    and len(st.body[0].targets) == 1
+                    and isinstance(st.body[0].targets[0], ast.Name)):
+                without_if = new_stmts[:i] + new_stmts[i + 1:]
+                if [ast.unparse(s) for s in without_if] == [ast.unparse(s) for s in old_stmts]:
+                    rhs_val = st.body[0].value
+                    if (isinstance(rhs_val, ast.Call) and len(rhs_val.args) == 1
+                            and isinstance(rhs_val.args[0], ast.Starred)
+                            and isinstance(rhs_val.func, ast.Name)):
+                        comb_name = rhs_val.func.id
+                        sid = f"L2_SUBTREE_SEQ_COERCE_{source_commit or '0000'}"
+                        return SubtreeMorphism(
+                            skill_id=sid,
+                            family="PRECONDITION_SEQUENCE_COERCION_GUARD",
+                            holes=("?arg0", "?combinator0"),
+                            fallback_literal=comb_name,
+                            source_repo=source_repo,
+                            source_commit=source_commit,
+                        )
+                    if (isinstance(rhs_val, ast.Subscript)
+                            and isinstance(rhs_val.value, ast.Call)
+                            and isinstance(rhs_val.value.func, ast.Name)):
+                        fn_name = rhs_val.value.func.id
+                        sid = f"L2_SUBTREE_NONEMPTY_NORM_{source_commit or '0000'}"
+                        return SubtreeMorphism(
+                            skill_id=sid,
+                            family="NONEMPTY_VAR_NORMALIZE_GUARD",
+                            holes=("?var0", "?norm_fn0"),
+                            fallback_literal=fn_name,
+                            source_repo=source_repo,
+                            source_commit=source_commit,
+                        )
     return None
 
 
@@ -1206,6 +1245,34 @@ def apply_subtree_morphism(morphism: SubtreeMorphism, target_source: str) -> str
         for i, st in enumerate(stmts):
             if isinstance(st, ast.If) and len(st.body) == 1 and not st.orelse:
                 remaining = stmts[:i] + st.body + stmts[i + 1:]
+                if is_func:
+                    fn = copy.deepcopy(mod.body[0])
+                    fn.body = remaining
+                    out_mod = ast.Module(body=[fn], type_ignores=[])
+                else:
+                    out_mod = ast.Module(body=remaining, type_ignores=[])
+                return ast.unparse(ast.fix_missing_locations(out_mod))
+
+    if morphism.family == "PRECONDITION_SEQUENCE_COERCION_GUARD":
+        comb = morphism.fallback_literal or "and_"
+        if is_func and mod.body[0].args.args:
+            first_arg = mod.body[0].args.args[0].arg
+            guard_stmt = ast.parse(
+                f"if isinstance({first_arg}, (list, tuple)):\n"
+                f"    {first_arg} = {comb}(*{first_arg})"
+            ).body[0]
+            fn = copy.deepcopy(mod.body[0])
+            fn.body = [guard_stmt] + list(stmts)
+            out_mod = ast.Module(body=[fn], type_ignores=[])
+            return ast.unparse(ast.fix_missing_locations(out_mod))
+
+    if morphism.family == "NONEMPTY_VAR_NORMALIZE_GUARD":
+        norm_fn = morphism.fallback_literal or "split_arg_string"
+        for i, st in enumerate(stmts):
+            if isinstance(st, ast.Assign) and len(st.targets) == 1 and isinstance(st.targets[0], ast.Name):
+                vname = st.targets[0].id
+                guard_stmt = ast.parse(f"if {vname}:\n    {vname} = {norm_fn}({vname})[0]").body[0]
+                remaining = list(stmts[:i + 1]) + [guard_stmt] + list(stmts[i + 1:])
                 if is_func:
                     fn = copy.deepcopy(mod.body[0])
                     fn.body = remaining
@@ -1347,6 +1414,41 @@ def verify_boundary_invariance_64(
         "new_crashes": new_crashes,
         "type_consistent_cases": preserved_when_defined,
     }
+
+
+def run_federated_self_play_distiller(
+    subtree_episodes: Sequence[Mapping[str, str]],
+    *,
+    store_path: pathlib.Path | None = None,
+    refuted_families: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Harvest multi-statement subtree fixes into an L2 MorphismSkillStore, compact, and verify transfer."""
+    store = MorphismSkillStore(store_path)
+    harvested = 0
+    replayed_on_held_out = 0
+    for ep in subtree_episodes:
+        m = induce_subtree_morphism(
+            ep["defective"],
+            ep["repaired"],
+            source_repo=ep.get("repo", ""),
+            source_commit=ep.get("commit", ""),
+        )
+        if m is not None:
+            store.add(m)
+            harvested += 1
+            if ep.get("held_out_target") and ep.get("held_out_expected"):
+                applied = apply_subtree_morphism(m, ep["held_out_target"])
+                if applied is not None and ast.dump(ast.parse(applied)) == ast.dump(ast.parse(ep["held_out_expected"])):
+                    replayed_on_held_out += 1
+    compaction = store.compact(refuted_families=refuted_families)
+    return {
+        "episodes_processed": len(subtree_episodes),
+        "harvested_before_compact": harvested,
+        "compacted_store_size": len(store),
+        "compaction": compaction,
+        "replayed_on_held_out": replayed_on_held_out,
+    }
+
 
 
 def main(argv: Sequence[str] | None = None) -> int:
