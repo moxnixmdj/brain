@@ -41,6 +41,9 @@ from canonical.swe_kernel.repo_component_petri_v1 import (
     extract_test_spec_literals,
     synthesize_repo_petri_repairs,
 )
+from canonical.swe_kernel.differential_witness_inversion_v1 import (
+    synthesize_live_differential_witness_repairs,
+)
 from canonical.swe_kernel.universal_semantic_ir_v1 import (
     DEFAULT_LAW_STORE_PATH,
     IGNORED_DIRS,
@@ -671,6 +674,38 @@ class ExecutableMentalModel:
             )
 
         combined = (p_out or "") + "\n" + (p_err or "")
+        if (
+            self.language == "python"
+            and self.custom_test_cmd is None
+            and p_obj.returncode != 0
+            and "No module named pytest" in (p_err or "")
+        ):
+            ut_cmd = [self.py_exe, "-m", "unittest", "discover", "-v"]
+            if specific_target and specific_target.endswith(".py"):
+                ut_cmd = [self.py_exe, "-m", "unittest", specific_target, "-v"]
+            ut_p = subprocess.Popen(
+                ut_cmd,
+                cwd=self.cow_root,
+                env=env,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                encoding="utf-8",
+                errors="replace",
+                stdin=subprocess.DEVNULL,
+                start_new_session=True,
+            )
+            try:
+                p_out, p_err = ut_p.communicate(timeout=t_limit)
+                p_obj = ut_p
+                combined = (p_out or "") + "\n" + (p_err or "")
+            except subprocess.TimeoutExpired:
+                try:
+                    os.killpg(ut_p.pid, signal.SIGKILL)
+                except OSError:
+                    ut_p.kill()
+                ut_p.communicate()
+
         outcomes: dict[str, str] = {}
         if self.language == "python":
             for line in (p_out or "").splitlines():
@@ -2006,7 +2041,11 @@ class CausalCEGISInventor:
                 baseline = _try_abduce_from_issue()
 
             if baseline is None:
-                baseline = mental.run_oracle()
+                baseline = mental.run_oracle(
+                    timeout_sec=max(timeout_sec, 25.0)
+                    if (norm_lang == "python" and timeout_sec >= 10.0)
+                    else timeout_sec
+                )
                 if (baseline.passed or not baseline.failing_tests) and problem_statement and norm_lang == "python":
                     ab_v = _try_abduce_from_issue()
                     if ab_v is not None:
@@ -2370,7 +2409,7 @@ class CausalCEGISInventor:
                     if p_extra not in test_file_paths:
                         test_file_paths.append(p_extra)
 
-                for r_fn, fn_nm, fl_no in loc_fns_ordered[:6]:
+                for fn_ord_idx, (r_fn, fn_nm, fl_no) in enumerate(loc_fns_ordered[:18]):
                     fp_fn = repo_root / r_fn
                     if not fp_fn.is_file():
                         continue
@@ -2400,6 +2439,8 @@ class CausalCEGISInventor:
                             )
                             if v_fn_res is not None:
                                 return v_fn_res
+                    if fn_ord_idx >= 6:
+                        continue
 
                     fn_bucket: list[tuple[dict[str, str], str, str]] = []
                     hot_lns = loc_fn_hot_lines[(r_fn, fn_nm, fl_no)]
@@ -2424,6 +2465,29 @@ class CausalCEGISInventor:
                     if fn_bucket:
                         fn_prio = -1 if (fn_nm in called_symbols or fn_nm.lower() in called_symbols_lower) else 1
                         per_site_buckets.append((fn_prio, fn_bucket))  # type: ignore[arg-type]
+
+                # Live-Frame Concrete Differential Witness Inversion (`COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION`)
+                witness_target_rels = list(
+                    dict.fromkeys(
+                        [r_fn for (r_fn, _, _) in list(loc_fn_hot_lines.keys())[:8]]
+                        + list(candidate_files_ordered[:6])
+                    )
+                )
+                w_cands, w_eval_cnt = synthesize_live_differential_witness_repairs(
+                    cow_root=mental.cow_root,
+                    pycache_dir=mental.pycache_dir,
+                    py_exe=mental.py_exe,
+                    py_env=mental._python_env(),
+                    top_rel_files=witness_target_rels,
+                    failing_tests=baseline.failing_tests,
+                    passing_tests=baseline.passing_tests,
+                    timeout_sec=min(16.0, max(timeout_sec, 12.0)),
+                )
+                mem_eval_total += w_eval_cnt
+                if w_cands:
+                    single_file_Queue.extend(w_cands[:6])
+                    if w_cands[6:]:
+                        per_site_buckets.append((-2, w_cands[6:]))  # type: ignore[arg-type]
 
                 for rel_path, line_no, _ in combined_ranked[:110]:
                     if (rel_path, line_no) in visited_sites:
@@ -2629,10 +2693,13 @@ class CausalCEGISInventor:
                         rel_only, cand_only = next(iter(file_patches.items()))
                         orig_only = (repo_root / rel_only).read_text(encoding="utf-8", errors="replace")
                         mental.apply_overrides(file_patches)
-                        reg_check = mental.run_oracle(timeout_sec=min(8.0, timeout_sec))
+                        reg_check = mental.run_oracle(
+                            timeout_sec=max(timeout_sec, 20.0) if norm_lang == "python" else min(8.0, timeout_sec)
+                        )
                         mental.restore_originals([rel_only])
+                        base_fail_set = set(baseline.failing_tests)
                         reg_tests = [
-                            rt for rt in reg_check.failing_tests if rt in set(baseline.passing_tests)
+                            rt for rt in reg_check.failing_tests if rt not in base_fail_set and not rt.startswith("<")
                         ][:2]
                         if reg_tests:
                             f_tr_s, r_tr_s = _collect_python_traces(
@@ -2936,7 +3003,11 @@ class CausalCEGISInventor:
         try:
             mental.apply_overrides(file_patches)
             # Gate 1: Full target test file must pass (every failing test flips green, 0 passing break)
-            full_v = mental.run_oracle()
+            full_v = mental.run_oracle(
+                timeout_sec=max(mental.timeout_sec, 25.0)
+                if (norm_lang == "python" and mental.timeout_sec >= 10.0)
+                else None
+            )
             if not full_v.passed:
                 return None
             for p_name in baseline.passing_tests:

@@ -116,8 +116,8 @@ jobs:
             --ak "source_job=$GITHUB_WORKSPACE/runs/jobs/brain-pro-smoke" \
             --job-name brain-pro-smoke-regrade
 
-      - name: Run official Terminal-Bench Harbor Docker smoke (suite=terminal-bench-4)
-        id: tb2_smoke
+      - name: Run official Terminal-Bench 4.0 Harbor Docker smoke (suite=terminal-bench-4)
+        id: tb4_smoke
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         working-directory: runs
         shell: bash
@@ -125,25 +125,25 @@ jobs:
           BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL: '1'
         run: |
           set -euo pipefail
-          git clone --no-checkout https://github.com/laude-institute/terminal-bench-2.git "$GITHUB_WORKSPACE/tb2-repo"
-          git -C "$GITHUB_WORKSPACE/tb2-repo" checkout --detach 2fd12b88aafdd04a52c298e3940bcb189f9766d6
-          mkdir -p "$GITHUB_WORKSPACE/tb2-smoke"
-          for tname in cancel-async-tasks regex-log; do
-            cp -R "$GITHUB_WORKSPACE/tb2-repo/$tname" "$GITHUB_WORKSPACE/tb2-smoke/$tname"
+          git clone --no-checkout https://github.com/harbor-framework/terminal-bench.git "$GITHUB_WORKSPACE/tb4-repo"
+          git -C "$GITHUB_WORKSPACE/tb4-repo" checkout --detach 452bf305c6daa62fc59061d22133a7cbc7c1572e
+          mkdir -p "$GITHUB_WORKSPACE/tb4-smoke"
+          for tname in wal-recovery-ordering session-window-debug; do
+            cp -R "$GITHUB_WORKSPACE/tb4-repo/tasks/$tname" "$GITHUB_WORKSPACE/tb4-smoke/$tname"
           done
           BRAIN_MOUNTS="$(python -c 'import json,os; print(json.dumps([{"type":"bind","source":os.environ["BRAIN"],"target":"/opt/brain-ro","read_only":True}]))')"
-          harbor run -p "$GITHUB_WORKSPACE/tb2-smoke" -e docker -n 1 \
+          harbor run -p "$GITHUB_WORKSPACE/tb4-smoke" -e docker -n 1 \
             -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
             --ak suite=terminal-bench-4 --ak repo_root=/app --ak "brain_source=$BRAIN" \
             --mounts "$BRAIN_MOUNTS" \
             --extra-docker-compose "$GITHUB_WORKSPACE/brain-no-network-compose.yaml" \
-            --job-name brain-tb2-smoke || true
+            --job-name brain-tb4-smoke || true
           python - <<'PY'
           import json
           from pathlib import Path
           jobs = Path('jobs').resolve()
           tb_rows = []
-          for p in sorted((jobs / 'brain-tb2-smoke').glob('*/result.json')):
+          for p in sorted((jobs / 'brain-tb4-smoke').glob('*/result.json')):
               res = json.loads(p.read_text())
               tr_p = p.parent / 'agent' / 'brain_epistemic_trace.json'
               tr = json.loads(tr_p.read_text()) if tr_p.is_file() else {}
@@ -154,9 +154,9 @@ jobs:
                   'external_status': tr.get('external_harbor_vm_eval_status'),
                   'rewards': (res.get('verifier_result') or {}).get('rewards'),
               })
-          tb_audit = {'tb2_rev': '2fd12b88aafdd04a52c298e3940bcb189f9766d6', 'rows': tb_rows}
-          (jobs / 'tb2_audit.json').write_text(json.dumps(tb_audit, indent=2) + '\n')
-          print(f"::warning title=HARBOR_TB2_AUDIT::{json.dumps(tb_audit, separators=(',', ':'))}")
+          tb_audit = {'tb4_rev': '452bf305c6daa62fc59061d22133a7cbc7c1572e', 'rows': tb_rows}
+          (jobs / 'tb4_audit.json').write_text(json.dumps(tb_audit, indent=2) + '\n')
+          print(f"::warning title=HARBOR_TB4_AUDIT::{json.dumps(tb_audit, separators=(',', ':'))}")
           PY
 
       - name: Reject unsafe artifact paths

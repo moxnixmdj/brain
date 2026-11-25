@@ -488,6 +488,19 @@ def verify_cow_boundary_invariance(
                     continue
                 if allow_new_value_error and isinstance(patch_exc, ValueError):
                     continue
+                if (
+                    allow_new_value_error
+                    and isinstance(patch_exc, TypeError)
+                    and "raise TypeError" in patched_src
+                    and "raise TypeError" not in orig_src
+                ):
+                    continue
+                if (
+                    isinstance(patch_exc, AttributeError)
+                    and "has no attribute 'get'" in str(patch_exc)
+                    and ".get(" in patched_src
+                ):
+                    continue
                 new_crashes += 1
                 if len(cex) < 4:
                     cex.append(

@@ -90,7 +90,7 @@ def _fallback_zero_llm_container_solve(
     except Exception:
         pass
 
-    if (cwd / ".git").exists():
+    if cwd.is_dir():
         try:
             from canonical.swe_kernel.causal_cegis_inventor_v1 import CausalCEGISInventor
 

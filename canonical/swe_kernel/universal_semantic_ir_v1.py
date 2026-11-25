@@ -259,7 +259,7 @@ def lower_source_to_uir(
     try:
         tree = parse_bytes(norm_lang, source_bytes)
         root = tree.root_node
-    except ImportError:
+    except Exception:
         if norm_lang != "python":
             return []
         src_str = source_bytes.decode("utf-8", errors="replace")
@@ -1505,7 +1505,7 @@ _PY_SAFE_GLOBALS: frozenset[str] = frozenset(
     {
         "None", "True", "False", "len", "str", "int", "float", "bool", "bytes",
         "list", "tuple", "dict", "set", "frozenset", "isinstance", "issubclass",
-        "getattr", "hasattr", "setattr", "any", "all", "min", "max", "sum",
+        "type", "getattr", "hasattr", "setattr", "any", "all", "min", "max", "sum",
         "sorted", "reversed", "enumerate", "zip", "range", "repr", "abs",
         "iter", "next", "map", "filter", "round",
         "ValueError", "TypeError", "KeyError", "AttributeError", "IndexError",
@@ -1577,6 +1577,25 @@ def _minimal_changed_stmt_slice(
                         return sub
     if not b_slice or not a_slice or len(b_slice) > 6 or len(a_slice) > 6:
         return None
+    # Include 1 preceding dataflow-feeding `Assign` when a 1-line leaf rewrite (`return a == b`)
+    # needs its producer statement for structural specificity and variable binding!
+    if (
+        len(b_slice) == 1
+        and len(a_slice) == 1
+        and i1 > 0
+        and j1 > 0
+        and isinstance(b_body[i1 - 1], ast.Assign)
+        and ast.dump(b_body[i1 - 1]) == ast.dump(a_body[j1 - 1])
+    ):
+        assigned_prev = {
+            t.id for t in b_body[i1 - 1].targets if isinstance(t, ast.Name)
+        }
+        read_cur = {
+            n.id for n in ast.walk(b_slice[0]) if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load)
+        }
+        if assigned_prev & read_cur:
+            b_slice = b_body[i1 - 1 : i2]
+            a_slice = a_body[j1 - 1 : j2]
     return b_slice, a_slice
 
 
@@ -1635,7 +1654,8 @@ def extract_ast_subtree_morphism(
     if slice_pair is None or matched_bfn is None:
         return None
 
-    fn_params = [a.arg for a in matched_bfn.args.args if a.arg not in {"self", "cls"}]
+    all_bfn_args = list(getattr(matched_bfn.args, "posonlyargs", [])) + list(matched_bfn.args.args)
+    fn_params = [a.arg for a in all_bfn_args if a.arg not in {"self", "cls"}]
     param_hole_map = {p: f"__HPARAM_{idx}__" for idx, p in enumerate(fn_params)}
 
     b_slice, a_slice = slice_pair
@@ -1974,7 +1994,8 @@ def apply_ast_subtree_morphism(
     for node in ast.walk(tree):
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name != target_func_name:
             continue
-        tgt_params = [a.arg for a in node.args.args if a.arg not in {"self", "cls"}]
+        all_tgt_args = list(getattr(node.args, "posonlyargs", [])) + list(node.args.args)
+        tgt_params = [a.arg for a in all_tgt_args if a.arg not in {"self", "cls"}]
         if min_arity and len(tgt_params) < min_arity:
             continue
         param_seed_bindings = {f"__HPARAM_{p_i}__": p_nm for p_i, p_nm in enumerate(tgt_params)}
