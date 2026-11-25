@@ -47,3 +47,16 @@ Any number in `canonical/verification/` is a claim about *this* environment. If 
 environment is rebuilt and the number does not reproduce, the number was never a fact about
 the tool — it was a fact about a machine that no longer exists. Re-run before quoting; the
 regression gate in `THE_REGRESSION_GATE_RECEIPT_*` is the artifact that proves it was re-run.
+
+
+## Added 2026-11-24: markupsafe
+
+`pip install markupsafe` in the driver venv.
+
+**Why it was missed for a whole session.** The 45-commit corpus contains no werkzeug
+row that imports `werkzeug.routing` or `werkzeug.wrappers` at the failing commit, so
+nothing in the sweep ever needed it. The first time a held-out werkzeug row
+(`884437ae`, `src/werkzeug/routing/map.py`) was attempted, `tests/test_routing.py`
+failed to import and the row came back `NO_PASSING_TEST` -- a harness verdict that reads
+exactly like an engine verdict. Pin it, and re-read any `NO_PASSING_TEST` / `NO_ORACLE`
+row as "the harness produced no evidence" rather than "the engine cannot do this".
