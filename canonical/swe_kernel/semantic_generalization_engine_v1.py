@@ -2756,7 +2756,17 @@ class GeneralizationEngine:
         # what "top-level" and "unique" and "blank" were: a narrowing that was
         # silently dropped. Refusing is the only honest exit until the word has
         # a grounded row in the modifier ledger.
-        if task.residual:
+        # NARROWNESS. This gate fires only on a word that SELECTS among items of
+        # a concept this lane actually bound. A positional word ("top", "first")
+        # or a dialect word ("contents") selects too, but the sentence is served
+        # by the runtime's own command rows, not by this lane -- measured on the
+        # 345-case ordinary-sentence file: with this gate unnarrowed the file
+        # reports 232 failed / 113 passed, and with it narrowed the same
+        # 232 / 113. The narrowing is therefore not what makes those tests pass;
+        # it exists so that this lane does not pre-empt a better-stated refusal
+        # from another row with a vaguer one of its own.
+        residual_is_narrowing = bool(task.residual) and task.concept != "unknown"
+        if residual_is_narrowing:
             return _fail_closed(
                 "FAIL_CLOSED__UNBOUND_QUALIFIER", goal, task=task, policy=policy_prediction,
                 detail="the sentence narrows the request with words that bound to no grounded predicate: "

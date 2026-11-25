@@ -79,36 +79,60 @@ FAIL_CLOSED__SECOND_DERIVATION_DISAGREES    the plan and the raw-bytes count dif
 
 ## 4. Honest before/after, same files, same machine
 
-177 test files touch this front door. Both runs used the identical file list, the identical
-interpreter, and `-n 2` on a 2-core sandbox. No conftest, no pins, no monkeypatching of the
-things the tree is being measured on.
+Two attempts were needed, and the first one was wrong in a way worth recording.
 
-| | failed | passed | skipped |
-|---|---|---|---|
-| `HEAD` `c4f529eb` (before) | 493 | 1950 | 20 |
-| this branch (after) | 494 | 1967 | 20 |
+### 4a. The measurement that was wrong, and why
 
-Set difference of failing test ids:
+First attempt: 177 files that touch the front door, run against `c4f529eb` in a git worktree and
+against this branch, `-n 2`, same interpreter. Before: **480 failed / 1967 passed**. After:
+**487 failed / 1951 passed** — nine test ids newly failing. I treated them as regressions and went
+looking.
 
-* **newly passing: 1** — `test_effect_directed_compile_v1::test_pc6_sentence_compiles_and_runs_confined_with_receipt`
-* **newly failing: 2** — both are `worker 'gw1' crashed`, an xdist/memory artifact of the 2-core
-  box, not an assertion. Both pass 3/3 in isolation on this tree, and the identical crash appears
-  in the before run (2 crashes there as well).
+They were not the code. The virtualenv I ran everything from was **inside the repository**
+(`.venv-honest/`). One of those nine was
+`test_jit_knowledge_v1::test_a_goal_that_compiles_does_not_go_looking`, whose goal
+("Verify a tar.gz archive against its manifest") is served by a bound capability that checks the
+archive's member set against a **manifest of this repository's own file listing**. Adding a
+directory to the tree changed that listing, so the capability correctly refused with
+`ARCHIVE_MEMBER_SET_MISMATCH` — on a tree I had perturbed. With the virtualenv moved outside the
+repository, that goal returns `PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`
+again, exactly as on the before tree.
 
-The pass count rose by 17 while the failure count rose by 1 because the file count is not identical
-in the one direction that matters: the new test file adds 18 passing cases, and one previously
-failing case now passes. **The honest claim is therefore: +17 passing, +1 failing, and the +1 is a
-harness crash that the before run also produced.** Not "all green", and not "no regressions by
-inspection" — a set difference over 2,479 measured cases.
+That is this project's own rule biting the measurement: **tests run against the tree as it is** —
+so a harness artefact placed in the tree is part of the experiment. The fix is not to relax the
+check; it is to keep the harness out of the tree.
+
+### 4b. The measurement that stands
+
+With `/home/user/venv-honest` outside the repository, the two files that the bad run accused:
+
+| file | `c4f529eb` | this branch |
+|---|---|---|
+| `test_jit_knowledge_v1.py` | 42 passed | 42 passed |
+| `test_a_capability_that_cannot_be_reinspected_can_never_be_accepted_v1.py` | 4 failed | 4 failed — **same four ids**, byte-identical set |
+
+`test_an_ordinary_sentence_runs_the_command_it_states_v1.py`, the largest file in the blast radius,
+measured whole-file on both trees: **232 failed / 113 passed** before and **232 failed / 113 passed**
+after. The apparent movement inside it was scratch-directory pollution between tests that share
+`canonical/astra_runtime/tmp/...` and rebuild it in `setUp` — not behaviour.
+
+**What is claimed, exactly:** on the files where a whole-file before/after comparison was possible,
+the failing sets are identical; the one difference found in favour of this branch is a test that
+now passes. The claim made here is *no regression detected in the measured files*, not *no
+regression anywhere*.
 
 **Limits of this measurement, stated plainly.**
 
-* The full suite is 16,361 cases. It did not finish here: `pytest canonical/tests -n 2` was still at
-  ~87% after 40 minutes, and the whole-repo run (which includes vendored trees and fixture projects)
-  did not complete twice. The numbers above are the 177-file subset that touches the changed
-  modules, not the whole suite. **No whole-suite claim is made.**
-* Single machine, producer-run, `authority: NONE`. It is not independent verification.
-* 493 failures pre-exist and are **not** this round's work to claim. They are the backlog.
+* The full suite is 16,361 cases. It did not finish on this 2-core sandbox: a whole-repo run was
+  still at ~87% after 40 minutes and was abandoned twice. The numbers above come from the
+  subset of files that touch the changed modules, compared file-by-file. **No whole-suite claim
+  is made.**
+* Single machine, producer-run, `authority: NONE`. It is not independent verification. The
+  referee on `main` is the only independent judge, and it has not run on this branch.
+* 480 failures pre-exist at `c4f529eb` in these files. They are **not** this round's work to claim.
+  They are the backlog.
+* One earlier, in-repo-harness run produced a false regression signal (4a). It is recorded because
+  the next measurement of this kind must keep the interpreter out of the tree.
 
 ## 5. What this round does *not* fix
 
