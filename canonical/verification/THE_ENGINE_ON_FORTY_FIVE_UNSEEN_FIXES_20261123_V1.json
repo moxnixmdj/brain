@@ -1622,11 +1622,63 @@
       "seconds": 5.92
     },
     {
+      "index": 28,
       "repo": "packaging",
-      "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
-      "test": "tests/test_requirements.py",
-      "stage": "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT",
-      "why": "THE_SPAN_IS_NOT_IN_THE_PARENT_SOURCE|AST:packaging/_parser.py:THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
+      "commit": "e7ce051e91",
+      "subject": "Fix a typo in an error message",
+      "stage": "DEMAND_MET",
+      "demand_provenance": "SPEC_LITERALS",
+      "failing_test": "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+      "site_line": 329,
+      "site_finder": "semantic_ast",
+      "shifted_from_line": null,
+      "site_expression": "'Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, not, not in'",
+      "human_expression": "'Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in, not in'",
+      "count_contrasts": false,
+      "identify_curve": null,
+      "audit": null,
+      "table": [],
+      "human_admissible": true,
+      "contrast": {
+        "rows": 0,
+        "admissible": 1,
+        "masks": {
+          "0": 1
+        },
+        "human_mask": 0,
+        "human_mask_bits": "0b0"
+      },
+      "frames": 3,
+      "table_rows": 0,
+      "space_offered_before_survivors": 84321,
+      "survivors": 1,
+      "survivor_sources": [
+        "demand:tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace"
+      ],
+      "human_expression_rank": -1,
+      "verifications": 1,
+      "found": {
+        "rank": -1,
+        "expression": "'Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in, not in'",
+        "ring": 0,
+        "source": "demand:tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+        "preserves": 0,
+        "in_test_preserves": 0,
+        "mask": "0b0",
+        "tests_green": 4703
+      },
+      "greens": [
+        {
+          "expression": "'Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, in, not in'",
+          "rank": -1,
+          "source": "demand:tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+          "tests_green": 4703
+        }
+      ],
+      "green_count": 1,
+      "found_is_the_human_fix": true,
+      "parameters_stored": 0,
+      "seconds": 31.04
     },
     {
       "repo": "pluggy",
@@ -2594,16 +2646,16 @@
   ],
   "seconds": 651.0,
   "stages": {
-    "DEMAND_MET": 31,
+    "DEMAND_MET": 32,
     "SPEC_DEMAND_FOUND_NOTHING": 11,
-    "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT": 2,
+    "EXCLUDED__THE_FIX_IS_NOT_A_SINGLE_EXPRESSION_REPLACEMENT": 1,
     "DRIVER_TIMEOUT": 1
   },
   "Headline": {
     "commits": 45,
-    "demand_met": 31,
-    "demand_met_matches_human": 27,
-    "single_expression_population": 43,
+    "demand_met": 32,
+    "demand_met_matches_human": 28,
+    "single_expression_population": 44,
     "no_relation": 0,
     "no_assertion_demand": 0,
     "no_value_matches": 0,

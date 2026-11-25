@@ -1,14 +1,14 @@
 {
   "schema": "BRAIN_AST_IR_ANTI_UNIFICATION_ABLATION_V1",
   "corpus_commits": 45,
-  "verified_commits": 43,
-  "excluded_non_single_expression": 2,
-  "five_gate_admitted_count": 43,
+  "verified_commits": 44,
+  "excluded_non_single_expression": 1,
+  "five_gate_admitted_count": 44,
   "ablation": {
     "empty_store": {
       "memory_hits": 0,
       "transfer_rate": 0.0,
-      "total_candidates_evaluated": 2485760
+      "total_candidates_evaluated": 2565760
     },
     "raw_trace_store": {
       "memory_hits": 0,
@@ -17,7 +17,7 @@
     },
     "generalized_ast_ir_morphism_store": {
       "memory_hits": 23,
-      "transfer_rate": 0.5349,
+      "transfer_rate": 0.5227,
       "multi_commit_family_population": 25,
       "multi_commit_family_transfer_rate": 0.92,
       "cross_repo_hits": 14,

@@ -407,6 +407,15 @@ def subexpression_site(parent_source: str, child_source: str) -> tuple[dict[str,
     if not (isinstance(old_expr, ast.expr) and isinstance(new_expr, ast.expr)):
         return None, "THE_SHARED_NODE_IS_A_STATEMENT_NOT_AN_EXPRESSION"
     if getattr(old_expr, "end_lineno", old_expr.lineno) != old_expr.lineno:
+        if (isinstance(old_expr, ast.Constant) and isinstance(new_expr, ast.Constant)
+                and isinstance(old_expr.value, str) and isinstance(new_expr.value, str)
+                and getattr(old_expr, "col_offset", None) is not None
+                and getattr(old_expr, "end_col_offset", None) is not None):
+            return ({"line": old_expr.lineno, "end_line": old_expr.end_lineno,
+                     "old_expression": ast.unparse(old_expr),
+                     "human_expression": ast.unparse(new_expr),
+                     "span": (old_expr.col_offset, old_expr.end_col_offset)},
+                    "SUBEXPRESSION_" + kind)
         return None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
     span = identify.span_of(parent_source, old_expr.lineno, old_expr)
     if span is None:

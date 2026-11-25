@@ -375,7 +375,8 @@ def candidates_at(source: str, site_line: int, site_text: str, *, budget: int = 
     return produced
 
 
-def replace_site(source: str, site_line: int, start_col: int, end_col: int, expression: str) -> str | None:
+def replace_site(source: str, site_line: int, start_col: int, end_col: int, expression: str,
+                 end_line: int | None = None) -> str | None:
     """Put `expression` where the old sub-expression was, by column, not by matching its text.
 
     Literal matching failed on `default_value == ""`: the AST unparses the constant with single quotes
@@ -386,10 +387,16 @@ def replace_site(source: str, site_line: int, start_col: int, end_col: int, expr
     index = site_line - 1
     if index < 0 or index >= len(lines):
         return None
-    line = lines[index]
-    if end_col > len(line):
-        return None
-    lines[index] = line[:start_col] + expression + line[end_col:]
+    if end_line is not None and end_line > site_line:
+        end_idx = end_line - 1
+        if end_idx >= len(lines) or end_col > len(lines[end_idx]):
+            return None
+        lines[index:end_line] = [lines[index][:start_col] + expression + lines[end_idx][end_col:]]
+    else:
+        line = lines[index]
+        if end_col > len(line):
+            return None
+        lines[index] = line[:start_col] + expression + line[end_col:]
     patched = "".join(lines)
     try:
         ast.parse(patched)

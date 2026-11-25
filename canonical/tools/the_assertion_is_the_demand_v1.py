@@ -627,15 +627,24 @@ class Capture:
         return None
 
 
-def instrument(source: str, line: int, span: tuple[int, int]) -> str:
+def instrument(source: str, line: int, span: tuple[int, int], end_line: int | None = None) -> str:
     """Wrap the site's expression in the hook, and put the hook's machinery at the top of the module."""
     lines = source.splitlines(keepends=True)
     index = line - 1
     if index >= len(lines):
         raise ValueError("SITE_LINE_OUT_OF_RANGE")
     start, end = span
-    original = lines[index]
-    lines[index] = f"{original[:start]}{HELPER}(0, (lambda: {original[start:end]})){original[end:]}"
+    if end_line is not None and end_line > line:
+        end_idx = end_line - 1
+        expr_text = "".join(
+            [lines[index][start:]] + lines[index + 1:end_idx] + [lines[end_idx][:end]]
+        ).replace("\n", " ")
+        lines[index:end_line] = [
+            f"{lines[index][:start]}{HELPER}(0, (lambda: {expr_text})){lines[end_idx][end:]}"
+        ]
+    else:
+        original = lines[index]
+        lines[index] = f"{original[:start]}{HELPER}(0, (lambda: {original[start:end]})){original[end:]}"
     try:
         ast.parse("".join(lines))
     except SyntaxError as error:
@@ -1273,6 +1282,17 @@ def _driver_body(config_path: str) -> int:
                     and getattr(part["kept"][0], "fallback", None) is None):
                 part["descriptor_fallback"] = type(part["kept"][0])
                 targets.append((part["node"], "DESCRIPTOR_FALLBACK"))
+            # Check exception message prefix embedded in multi-line test string (#28)
+            if part["kept"] and isinstance(part["kept"][0], str) and len(part["kept"][0]) >= 20:
+                orig_msg = part["kept"][0]
+                for s_lit in [v for v in raw_lits if isinstance(v, str)] + all_spec_strs:
+                    first_line = s_lit.splitlines()[0] if s_lit else ""
+                    if ": " in first_line:
+                        after_colon = first_line.split(": ", 1)[1]
+                        if len(after_colon) >= 20 and after_colon[:20] == orig_msg[:20] and after_colon != orig_msg:
+                            part["demands"] = [after_colon]
+                            targets.append((part["node"], after_colon))
+                            break
         if targets:
             provenance = "SPEC_LITERALS"
     else:
@@ -1828,7 +1848,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
             node = node_id if "::" in node_id else f"{test_path}::{node_id}"
 
             target = worktree / source_path
-            target.write_text(instrument(original, site["line"], site["span"]), encoding="utf-8")
+            target.write_text(instrument(original, site["line"], site["span"],
+                                         end_line=site.get("end_line")), encoding="utf-8")
             result_path = pathlib.Path(where) / "driver.json"
             config_path = pathlib.Path(where) / "driver_in.json"
             config_path.write_text(json.dumps({
@@ -1942,7 +1963,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 if not plausible(survivor["expression"], original, test_text, site["old_expression"]):
                     continue
                 patched = identify.replace_site(original, site["line"], site["span"][0],
-                                                site["span"][1], survivor["expression"])
+                                                site["span"][1], survivor["expression"],
+                                                end_line=site.get("end_line"))
                 if patched is None:
                     continue
                 target.write_text(patched, encoding="utf-8")

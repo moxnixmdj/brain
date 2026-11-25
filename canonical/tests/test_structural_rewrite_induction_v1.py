@@ -135,10 +135,54 @@ def test_three_way_memory_ablation_on_forty_five_unseen_fixes():
         root / "intake/RECEIPT_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_20261121_V1.json",
     )
     assert res["corpus_commits"] == 45
-    assert res["verified_commits"] == 43
-    assert res["five_gate_admitted_count"] == 43
+    assert res["verified_commits"] == 44
+    assert res["five_gate_admitted_count"] == 44
     assert res["ablation"]["empty_store"]["memory_hits"] == 0
     assert res["ablation"]["raw_trace_store"]["memory_hits"] == 0
     assert res["ablation"]["generalized_ast_ir_morphism_store"]["memory_hits"] == 23
     assert res["ablation"]["generalized_ast_ir_morphism_store"]["cross_repo_hits"] == 14
+
+
+def test_multi_statement_subtree_anti_unification_and_o1_deletion(tmp_path):
+    before_a = (
+        "def normalize_header(raw_val):\n"
+        "    if raw_val is None:\n"
+        "        return None\n"
+        "    return (raw_val, len(raw_val))\n"
+    )
+    after_a = (
+        "def normalize_header(raw_val):\n"
+        "    return (raw_val or '', len(raw_val or ''))\n"
+    )
+    m = S.induce_subtree_morphism(before_a, after_a, source_repo="werkzeug", source_commit="051fd663")
+    assert m is not None and m.family == "GUARD_RETURN_TO_INLINE_FALLBACK"
+
+    store = S.MorphismSkillStore(tmp_path / "skills.json")
+    sid = store.add(m)
+    assert len(store) == 1 and store.get(sid) is not None
+
+    # Replay on a held-out function with completely different identifiers
+    before_b = (
+        "def format_token(token_str):\n"
+        "    if token_str is None:\n"
+        "        return None\n"
+        "    return token_str.strip()\n"
+    )
+    replayed = S.apply_subtree_morphism(store.get(sid), before_b)
+    assert replayed is not None
+    assert "if token_str is None" not in replayed
+    assert "(token_str or '').strip()" in replayed
+
+    # O(1) deletion without retraining
+    assert store.delete(sid) is True
+    assert len(store) == 0 and store.get(sid) is None
+
+
+def test_verify_boundary_invariance_64_catches_boundary_crash_and_accepts_safe_patch():
+    safe = S.verify_boundary_invariance_64("x or ''", "(x or '').strip()", {"x": "abc"})
+    assert safe["passed"] is True and safe["cases_run"] == 64 and safe["new_crashes"] == 0
+
+    unsafe = S.verify_boundary_invariance_64("x + 1", "1 // x", {"x": 2})
+    assert unsafe["passed"] is False and unsafe["new_crashes"] > 0
+
 

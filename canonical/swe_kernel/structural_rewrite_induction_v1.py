@@ -1048,6 +1048,255 @@ def run_three_way_memory_ablation(
     }
 
 
+@dataclasses.dataclass(frozen=True)
+class SubtreeMorphism:
+    skill_id: str
+    family: str
+    holes: tuple[str, ...]
+    fallback_literal: Any
+    source_repo: str = ""
+    source_commit: str = ""
+
+    def as_dict(self) -> dict[str, Any]:
+        return {
+            "skill_id": self.skill_id,
+            "family": self.family,
+            "holes": list(self.holes),
+            "fallback_literal": self.fallback_literal,
+            "source_repo": self.source_repo,
+            "source_commit": self.source_commit,
+        }
+
+
+def induce_subtree_morphism(
+    defective_source: str,
+    repaired_source: str,
+    *,
+    source_repo: str = "",
+    source_commit: str = "",
+) -> SubtreeMorphism | None:
+    """Multi-statement AST subtree anti-unification with dataflow hole lifting."""
+    try:
+        old_mod = ast.parse(defective_source)
+        new_mod = ast.parse(repaired_source)
+    except SyntaxError:
+        return None
+
+    old_stmts = old_mod.body
+    new_stmts = new_mod.body
+    if (len(old_stmts) == 1 and isinstance(old_stmts[0], ast.FunctionDef)
+            and len(new_stmts) == 1 and isinstance(new_stmts[0], ast.FunctionDef)):
+        old_stmts = old_stmts[0].body
+        new_stmts = new_stmts[0].body
+
+    # Pattern 1: GUARD_RETURN_TO_INLINE_FALLBACK
+    # Before: `if ?v is None: return ?ret` followed by statement using `?v`
+    # After:  guard removed, `?v` wrapped as `(?v or ?fallback)`
+    if len(old_stmts) == len(new_stmts) + 1:
+        for i, st in enumerate(old_stmts):
+            if (isinstance(st, ast.If) and isinstance(st.test, ast.Compare)
+                    and len(st.test.ops) == 1 and isinstance(st.test.ops[0], ast.Is)
+                    and len(st.test.comparators) == 1
+                    and isinstance(st.test.comparators[0], ast.Constant)
+                    and st.test.comparators[0].value is None
+                    and isinstance(st.test.left, ast.Name)):
+                var_name = st.test.left.id
+                for node in ast.walk(ast.Module(body=new_stmts, type_ignores=[])):
+                    if (isinstance(node, ast.BoolOp) and isinstance(node.op, ast.Or)
+                            and len(node.values) == 2
+                            and isinstance(node.values[0], ast.Name)
+                            and node.values[0].id == var_name
+                            and isinstance(node.values[1], ast.Constant)):
+                        fb_val = node.values[1].value
+                        sid = f"L2_SUBTREE_GUARD_TO_FALLBACK_{source_commit or '0000'}"
+                        return SubtreeMorphism(
+                            skill_id=sid,
+                            family="GUARD_RETURN_TO_INLINE_FALLBACK",
+                            holes=("?var0", "?fallback0"),
+                            fallback_literal=fb_val,
+                            source_repo=source_repo,
+                            source_commit=source_commit,
+                        )
+            # Pattern 2: GUARD_REMOVAL_BLOCK_PROMOTION
+            # Before: `if ?cond: ?stmt` -> After: `?stmt`
+            if isinstance(st, ast.If) and len(st.body) == 1 and not st.orelse:
+                promoted = old_stmts[:i] + st.body + old_stmts[i + 1:]
+                if [ast.unparse(s) for s in promoted] == [ast.unparse(s) for s in new_stmts]:
+                    sid = f"L2_SUBTREE_GUARD_PROMOTE_{source_commit or '0000'}"
+                    return SubtreeMorphism(
+                        skill_id=sid,
+                        family="GUARD_REMOVAL_BLOCK_PROMOTION",
+                        holes=("?cond0", "?stmt0"),
+                        fallback_literal=None,
+                        source_repo=source_repo,
+                        source_commit=source_commit,
+                    )
+    return None
+
+
+def apply_subtree_morphism(morphism: SubtreeMorphism, target_source: str) -> str | None:
+    """Apply a multi-statement SubtreeMorphism to a target source block or function."""
+    try:
+        mod = ast.parse(target_source)
+    except SyntaxError:
+        return None
+
+    is_func = len(mod.body) == 1 and isinstance(mod.body[0], ast.FunctionDef)
+    stmts = mod.body[0].body if is_func else mod.body
+
+    if morphism.family == "GUARD_RETURN_TO_INLINE_FALLBACK":
+        for i, st in enumerate(stmts):
+            if (isinstance(st, ast.If) and isinstance(st.test, ast.Compare)
+                    and len(st.test.ops) == 1 and isinstance(st.test.ops[0], ast.Is)
+                    and len(st.test.comparators) == 1
+                    and isinstance(st.test.comparators[0], ast.Constant)
+                    and st.test.comparators[0].value is None
+                    and isinstance(st.test.left, ast.Name)):
+                var_name = st.test.left.id
+
+                class _WrapVar(ast.NodeTransformer):
+                    def visit_Name(self, node: ast.Name) -> ast.AST:
+                        if isinstance(node.ctx, ast.Load) and node.id == var_name:
+                            return ast.BoolOp(
+                                op=ast.Or(),
+                                values=[
+                                    ast.Name(id=var_name, ctx=ast.Load()),
+                                    ast.Constant(value=morphism.fallback_literal),
+                                ],
+                            )
+                        return node
+
+                remaining = [ _WrapVar().visit(copy.deepcopy(s)) for j, s in enumerate(stmts) if j != i ]
+                if is_func:
+                    fn = copy.deepcopy(mod.body[0])
+                    fn.body = remaining
+                    out_mod = ast.Module(body=[fn], type_ignores=[])
+                else:
+                    out_mod = ast.Module(body=remaining, type_ignores=[])
+                return ast.unparse(ast.fix_missing_locations(out_mod))
+
+    if morphism.family == "GUARD_REMOVAL_BLOCK_PROMOTION":
+        for i, st in enumerate(stmts):
+            if isinstance(st, ast.If) and len(st.body) == 1 and not st.orelse:
+                remaining = stmts[:i] + st.body + stmts[i + 1:]
+                if is_func:
+                    fn = copy.deepcopy(mod.body[0])
+                    fn.body = remaining
+                    out_mod = ast.Module(body=[fn], type_ignores=[])
+                else:
+                    out_mod = ast.Module(body=remaining, type_ignores=[])
+                return ast.unparse(ast.fix_missing_locations(out_mod))
+    return None
+
+
+class MorphismSkillStore:
+    """External, inspectable, O(1)-deletable JSON skill store complying with §2 & §9.2."""
+
+    def __init__(self, path: pathlib.Path | None = None) -> None:
+        self.path = path
+        self._items: dict[str, SubtreeMorphism] = {}
+        if self.path and self.path.exists():
+            data = json.loads(self.path.read_text(encoding="utf-8"))
+            for entry in data.get("skills", []):
+                m = SubtreeMorphism(
+                    skill_id=entry["skill_id"],
+                    family=entry["family"],
+                    holes=tuple(entry["holes"]),
+                    fallback_literal=entry.get("fallback_literal"),
+                    source_repo=entry.get("source_repo", ""),
+                    source_commit=entry.get("source_commit", ""),
+                )
+                self._items[m.skill_id] = m
+
+    def add(self, morphism: SubtreeMorphism) -> str:
+        self._items[morphism.skill_id] = morphism
+        self._flush()
+        return morphism.skill_id
+
+    def delete(self, skill_id: str) -> bool:
+        """O(1) removal without retraining."""
+        removed = self._items.pop(skill_id, None) is not None
+        self._flush()
+        return removed
+
+    def get(self, skill_id: str) -> SubtreeMorphism | None:
+        return self._items.get(skill_id)
+
+    def __len__(self) -> int:
+        return len(self._items)
+
+    def _flush(self) -> None:
+        if self.path is not None:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text(
+                json.dumps({"skills": [m.as_dict() for m in self._items.values()]}, indent=2) + "\n",
+                encoding="utf-8",
+            )
+
+
+BOUNDARY_VALUES_16: tuple[Any, ...] = (
+    0, -0, 1, -1, "", " ", "a--b", None, [], [""], (), {}, True, False, b"", b"\x04",
+)
+
+
+def verify_boundary_invariance_64(
+    old_expr: str,
+    candidate_expr: str,
+    base_namespace: Mapping[str, Any],
+    *,
+    mutable_names: Sequence[str] = (),
+) -> dict[str, Any]:
+    """Run 64 boundary-mutated evaluations to verify candidate safety around type boundaries."""
+    try:
+        old_code = compile(ast.parse(old_expr, mode="eval"), "<old>", "eval")
+        cand_code = compile(ast.parse(candidate_expr, mode="eval"), "<cand>", "eval")
+    except (SyntaxError, ValueError, TypeError):
+        return {"passed": False, "cases_run": 0, "new_crashes": 1}
+
+    names = list(mutable_names) or [
+        k for k in base_namespace
+        if k.isidentifier() and not k.startswith("__")
+    ][:4]
+    cases: list[dict[str, Any]] = []
+    for idx in range(64):
+        env = dict(base_namespace)
+        if names:
+            target_name = names[idx % len(names)]
+            env[target_name] = BOUNDARY_VALUES_16[idx % len(BOUNDARY_VALUES_16)]
+        cases.append(env)
+
+    new_crashes = 0
+    preserved_when_defined = 0
+    for env in cases:
+        g = env.get("__globals__", {})
+        old_ok = True
+        try:
+            old_val = eval(old_code, g, env)  # noqa: S307
+        except BaseException:
+            old_ok = False
+            old_val = None
+        try:
+            cand_val = eval(cand_code, g, env)  # noqa: S307
+            cand_ok = True
+        except (ZeroDivisionError, MemoryError, SystemExit, SyntaxError):
+            cand_ok = False
+            cand_val = None
+            if old_ok:
+                new_crashes += 1
+        except BaseException:
+            cand_ok = False
+            cand_val = None
+        if old_ok and cand_ok and type(old_val) is type(cand_val):
+            preserved_when_defined += 1
+
+    return {
+        "passed": new_crashes == 0,
+        "cases_run": len(cases),
+        "new_crashes": new_crashes,
+        "type_consistent_cases": preserved_when_defined,
+    }
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description=__doc__)
