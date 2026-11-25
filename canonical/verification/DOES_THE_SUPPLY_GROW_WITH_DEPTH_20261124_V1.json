@@ -1,0 +1,659 @@
+{
+ "schema": "BRAIN_DOES_THE_SUPPLY_GROW_WITH_DEPTH_V1",
+ "generated": "2026-11-25T02:34:18Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 327.3
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "depth": 2,
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 2,
+   "states": 4,
+   "transitions": 10,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 2,
+   "states": 8,
+   "transitions": 20,
+   "held_out": 20,
+   "questions": 25,
+   "per_100_states": 312.5,
+   "arm_A": {
+    "predictions": 3,
+    "wrong": 1,
+    "refused": 17
+   },
+   "arm_C": {
+    "predictions": 18,
+    "wrong": 8,
+    "refused": 2
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 2,
+   "states": 6,
+   "transitions": 12,
+   "held_out": 12,
+   "questions": 21,
+   "per_100_states": 350.0,
+   "arm_A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 11
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 7,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 2,
+   "states": 7,
+   "transitions": 12,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 14.29,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 2,
+   "states": 33,
+   "transitions": 49,
+   "held_out": 35,
+   "questions": 3,
+   "per_100_states": 9.09,
+   "arm_A": {
+    "predictions": 9,
+    "wrong": 4,
+    "refused": 26
+   },
+   "arm_C": {
+    "predictions": 10,
+    "wrong": 4,
+    "refused": 25
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 2,
+   "states": 6,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 2,
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 2,
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 2,
+   "states": 4,
+   "transitions": 12,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 25.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "depth": 3,
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 3,
+   "states": 4,
+   "transitions": 20,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 3,
+   "states": 31,
+   "transitions": 55,
+   "held_out": 55,
+   "questions": 22,
+   "per_100_states": 70.97,
+   "arm_A": {
+    "predictions": 24,
+    "wrong": 18,
+    "refused": 31
+   },
+   "arm_C": {
+    "predictions": 51,
+    "wrong": 40,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 3,
+   "states": 19,
+   "transitions": 36,
+   "held_out": 36,
+   "questions": 29,
+   "per_100_states": 152.63,
+   "arm_A": {
+    "predictions": 10,
+    "wrong": 9,
+    "refused": 26
+   },
+   "arm_C": {
+    "predictions": 34,
+    "wrong": 30,
+    "refused": 2
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 3,
+   "states": 15,
+   "transitions": 28,
+   "held_out": 16,
+   "questions": 3,
+   "per_100_states": 20.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 3,
+   "states": 136,
+   "transitions": 231,
+   "held_out": 210,
+   "questions": 16,
+   "per_100_states": 11.76,
+   "arm_A": {
+    "predictions": 35,
+    "wrong": 9,
+    "refused": 175
+   },
+   "arm_C": {
+    "predictions": 43,
+    "wrong": 9,
+    "refused": 167
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 3,
+   "states": 10,
+   "transitions": 24,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 10.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 3,
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 3,
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 3,
+   "states": 4,
+   "transitions": 16,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 25.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "depth": 4,
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 4,
+   "states": 4,
+   "transitions": 20,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 4,
+   "states": 115,
+   "transitions": 205,
+   "held_out": 205,
+   "questions": 26,
+   "per_100_states": 22.61,
+   "arm_A": {
+    "predictions": 69,
+    "wrong": 64,
+    "refused": 136
+   },
+   "arm_C": {
+    "predictions": 164,
+    "wrong": 156,
+    "refused": 41
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 4,
+   "states": 64,
+   "transitions": 100,
+   "held_out": 100,
+   "questions": 47,
+   "per_100_states": 73.44,
+   "arm_A": {
+    "predictions": 9,
+    "wrong": 8,
+    "refused": 91
+   },
+   "arm_C": {
+    "predictions": 89,
+    "wrong": 85,
+    "refused": 11
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 4,
+   "states": 31,
+   "transitions": 60,
+   "held_out": 44,
+   "questions": 5,
+   "per_100_states": 16.13,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 44
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 44
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 4,
+   "states": 519,
+   "transitions": 952,
+   "held_out": 924,
+   "questions": 43,
+   "per_100_states": 8.29,
+   "arm_A": {
+    "predictions": 107,
+    "wrong": 28,
+    "refused": 817
+   },
+   "arm_C": {
+    "predictions": 139,
+    "wrong": 28,
+    "refused": 785
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 4,
+   "states": 15,
+   "transitions": 40,
+   "held_out": 16,
+   "questions": 2,
+   "per_100_states": 13.33,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 4,
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 4,
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 4,
+   "states": 4,
+   "transitions": 16,
+   "held_out": 12,
+   "questions": 8,
+   "per_100_states": 200.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 5,
+    "refused": 0
+   }
+  }
+ ],
+ "summary": {
+  "by_depth": {
+   "2": {
+    "machines": 10,
+    "states": 77,
+    "questions": 51,
+    "questions_per_100_states": 66.23,
+    "A_predictions": 13,
+    "A_wrong": 5,
+    "C_predictions": 40,
+    "C_wrong": 19,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.678
+   },
+   "3": {
+    "machines": 10,
+    "states": 231,
+    "questions": 72,
+    "questions_per_100_states": 31.17,
+    "A_predictions": 69,
+    "A_wrong": 36,
+    "C_predictions": 128,
+    "C_wrong": 79,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.6184
+   },
+   "4": {
+    "machines": 10,
+    "states": 767,
+    "questions": 131,
+    "questions_per_100_states": 17.08,
+    "A_predictions": 185,
+    "A_wrong": 100,
+    "C_predictions": 404,
+    "C_wrong": 274,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.5959
+   }
+  },
+  "verdicts": {
+   "the_supply_is_monotone_in_depth": true,
+   "the_supply_grows_by_more_than_a_third": true,
+   "the_density_does_not_collapse": false,
+   "deeper_exploration_is_worth_more_questions": false,
+   "the_supply_is_finite_at_every_depth": true,
+   "the_supply_scales_sublinearly": true,
+   "the_supply_scales_with_a_measurable_exponent": true
+  },
+  "budget": 400,
+  "scaling": {
+   "states": [
+    77,
+    231,
+    767
+   ],
+   "questions": [
+    51,
+    72,
+    131
+   ],
+   "exponents": [
+    0.314,
+    0.499
+   ],
+   "mean_exponent": 0.406,
+   "interpretation": "questions grow as states**0.41: SUBLINEAR, so each extra state costs more questions to reach",
+   "density_at_depth_2_to_4": [
+    66.23,
+    31.17,
+    17.08
+   ],
+   "projection": {
+    "depth_6_states_if_trend_holds": 2546.7,
+    "depth_6_questions_if_trend_holds": 238.3
+   }
+  }
+ }
+}
