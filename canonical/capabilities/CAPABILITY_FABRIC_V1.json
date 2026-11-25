@@ -1,5 +1,5 @@
 {
-  "admission_coverage_ratio": 0.005171,
+  "admission_coverage_ratio": 0.005155,
   "authority": "NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS",
   "certified_capabilities": {
     "AUTHENTICATED_PARETO_SCHEDULE_V1": {
@@ -184,14 +184,14 @@
       "11",
       "11"
     ],
-    "components": 3533,
+    "components": 3544,
     "distinct_schema_constants": 1993,
     "import_edges": 3479,
     "max_fan_out": 18,
-    "modules": 5904,
+    "modules": 5915,
     "modules_declaring_authority": 156,
-    "modules_exposing_def_main": 579,
-    "modules_with_no_internal_importer": 4616,
+    "modules_exposing_def_main": 580,
+    "modules_with_no_internal_importer": 4627,
     "most_imported": [
       [
         "canonical.swe_kernel.verified_skill_crystallizer_v1",
@@ -226,8 +226,8 @@
         26
       ]
     ],
-    "runnable_entry_points": 2689,
-    "singletons": 3011,
+    "runnable_entry_points": 2690,
+    "singletons": 3022,
     "widest_importers": [
       [
         "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
@@ -263,14 +263,14 @@
       ]
     ]
   },
-  "fabric_sha256_16": "4b30be2ade766931",
-  "head": "c18d19d8",
+  "fabric_sha256_16": "6d9b53edc0fa06df",
+  "head": "1bcf5105",
   "model_calls": 0,
   "reachability": {
-    "ENTRY_POINT": 565,
+    "ENTRY_POINT": 566,
     "IN_USE": 547,
-    "ISLAND": 1448,
-    "TEST": 2810,
+    "ISLAND": 1457,
+    "TEST": 2811,
     "TEST_ONLY": 534
   },
   "schema": "BRAIN_CAPABILITY_FABRIC_V1"

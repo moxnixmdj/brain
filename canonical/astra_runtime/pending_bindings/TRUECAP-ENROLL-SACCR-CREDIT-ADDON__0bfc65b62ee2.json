@@ -1,0 +1,141 @@
+{
+  "capability_id": "truecap.saccr_credit_addon",
+  "contract": {
+    "declared_expectation": {
+      "field": "capability_id",
+      "type": "field_nonempty"
+    },
+    "generator": {
+      "entry": "generate",
+      "module": "canonical/capabilities/true/generators/saccr_credit_addon_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_instance",
+      "module": "canonical/runtime/saccr_credit_kernel.py"
+    },
+    "oracle_verdicts": {
+      "CRE52_CLOSED_FORM": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "DONOR_DIFFERENTIAL": {
+        "class": "DIFFERENTIAL_EXTERNAL",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "NOTIONAL_HOMOGENEITY": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "OFFSET_CANCELS": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "SINGLE_ENTITY_BOUNDS": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
+    "spec": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json"
+  },
+  "effect": "truecap.saccr_credit_addon.outcome.credit_addon",
+  "goal": "Promote the measured true capability SACCR_CREDIT_ADDON_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.saccr_credit_addon",
+        "instance_path": "canonical/capabilities/true/instances/saccr_credit_addon.json"
+      },
+      "expect": {
+        "field": "capability_id",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_saccr_credit_addon",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/saccr_credit_addon.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/saccr_credit_addon.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "measured",
+      "saccr",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO options or CDO tranche deltas",
+      "NO replacement cost, PFE multiplier or whole netting-set EAD",
+      "NO rating/entity inference from documents; inputs are already structured",
+      "entity with mixed supervisory factor or correlation fails closed (ValueError) by design",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.saccr_credit_addon.outcome.credit_addon",
+      "truecap.saccr_credit_addon.outcome.traces"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "credit_addon",
+      "traces"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "credit_addon",
+      "traces"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_saccr_credit_addon.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-10-14T16:30:19Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_saccr_credit_addon.py",
+      "receipt": "canonical/capabilities/true/receipts/SACCR_CREDIT_ADDON_V1__3e600b175e196a2e.json",
+      "solver_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
+      "spec": "canonical/capabilities/true/specs/SACCR_CREDIT_ADDON_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/saccr_credit_addon.json",
+  "verification_fixture_sha256": "b06d6b1cbc5c3645fe3bc5402a5e462408a6c1bca675a33fe3038c3c379cb52d",
+  "verification_mission_id": "TRUECAP-ENROLL-SACCR-CREDIT-ADDON__0BFC65B62EE2",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SACCR-CREDIT-ADDON__0bfc65b62ee2__VERIFY.json"
+}

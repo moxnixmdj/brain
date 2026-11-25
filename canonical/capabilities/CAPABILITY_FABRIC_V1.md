@@ -1,25 +1,25 @@
 # Capability fabric: what is connected to what, derived
 
-digest `4b30be2ade766931` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00
+digest `6d9b53edc0fa06df` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00
 
 | measure | value | what it decides |
 |---|---|---|
-| modules under `canonical/` | 5904 | the surface any unification has to cover |
+| modules under `canonical/` | 5915 | the surface any unification has to cover |
 | internal import edges | 3479 | what is actually composed today |
-| connected components | 3533 (largest 1422, singletons 3011) | **the fragmentation, measured** — 'not one model' is this number |
+| connected components | 3544 (largest 1422, singletons 3022) | **the fragmentation, measured** — 'not one model' is this number |
 | distinct `SCHEMA = "…"` constants | 1993 | bespoke envelopes; the cost a shared envelope removes; the number to drive to 1 |
 | modules declaring an `AUTHORITY` | 156 | self-limiting claims — the good part of the culture |
-| runnable modules (`if __name__ == "__main__"`) | 2689 | **ways in**; a system has one root and N adapters. Of these, 579 expose a `main()` at all |
-| modules nothing in `canonical/` imports | 4616 | nothing in the tree imports them; they are reached only by hand or not at all |
+| runnable modules (`if __name__ == "__main__"`) | 2690 | **ways in**; a system has one root and N adapters. Of these, 580 expose a `main()` at all |
+| modules nothing in `canonical/` imports | 4627 | nothing in the tree imports them; they are reached only by hand or not at all |
 | widest importer fan-out | 18 | the ceiling on 'just write an orchestrator that imports everything' |
-| certified capabilities | 16 (0.517 % of non-test modules) | what may be wired into the root with a receipt behind it |
+| certified capabilities | 16 (0.515 % of non-test modules) | what may be wired into the root with a receipt behind it |
 
 ## Reachability classes (every module, one label each)
 
-- `ENTRY_POINT`: 565
+- `ENTRY_POINT`: 566
 - `IN_USE`: 547
-- `ISLAND`: 1448
-- `TEST`: 2810
+- `ISLAND`: 1457
+- `TEST`: 2811
 - `TEST_ONLY`: 534
 
 ## What is composed most, and what is certified most

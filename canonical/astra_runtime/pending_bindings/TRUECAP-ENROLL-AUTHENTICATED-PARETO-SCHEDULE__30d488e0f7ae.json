@@ -1,0 +1,155 @@
+{
+  "capability_id": "truecap.authenticated_pareto_schedule",
+  "contract": {
+    "declared_expectation": {
+      "field": "capability_id",
+      "type": "field_nonempty"
+    },
+    "generator": {
+      "entry": "generate_schedule",
+      "module": "canonical/capabilities/true/generators/scheduler_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_schedule",
+      "module": "canonical/runtime/scheduler_true_capability_adapters_v1.py"
+    },
+    "oracle_verdicts": {
+      "AUTHORITY_ENVELOPE": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "PERMUTATION_INVARIANCE": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "REFERENCE_SCHEDULE": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "TAMPER_AFTER_RECEIPT_IS_REFUSED": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+    "spec": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json"
+  },
+  "effect": "truecap.authenticated_pareto_schedule.outcome.candidate_id",
+  "goal": "Promote the measured true capability AUTHENTICATED_PARETO_SCHEDULE_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.authenticated_pareto_schedule",
+        "instance_path": "canonical/capabilities/true/instances/authenticated_pareto_schedule.json"
+      },
+      "expect": {
+        "field": "capability_id",
+        "type": "field_nonempty"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_authenticated_pareto_schedule",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/authenticated_pareto_schedule.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/authenticated_pareto_schedule.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "authenticated",
+      "measured",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO verification that the receipt sha256 refers to a real measurement; only the binding of metrics to the receipt subject is measured",
+      "NO claim about float rounding beyond exact equality of the supplied numbers",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.authenticated_pareto_schedule.outcome.candidate_id",
+      "truecap.authenticated_pareto_schedule.outcome.dominated_by",
+      "truecap.authenticated_pareto_schedule.outcome.incremental_spend_usd",
+      "truecap.authenticated_pareto_schedule.outcome.nondominated_candidate_ids",
+      "truecap.authenticated_pareto_schedule.outcome.pass",
+      "truecap.authenticated_pareto_schedule.outcome.promotion_authority",
+      "truecap.authenticated_pareto_schedule.outcome.reason",
+      "truecap.authenticated_pareto_schedule.outcome.schedule_authority",
+      "truecap.authenticated_pareto_schedule.outcome.terminal_authority",
+      "truecap.authenticated_pareto_schedule.outcome.terminal_credit_delta"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "candidate_id",
+      "dominated_by",
+      "incremental_spend_usd",
+      "nondominated_candidate_ids",
+      "pass",
+      "promotion_authority",
+      "reason",
+      "schedule_authority",
+      "terminal_authority",
+      "terminal_credit_delta"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "candidate_id",
+      "capability_id",
+      "certification",
+      "dominated_by",
+      "incremental_spend_usd",
+      "nondominated_candidate_ids",
+      "pass",
+      "promotion_authority",
+      "reason",
+      "schedule_authority",
+      "terminal_authority",
+      "terminal_credit_delta"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_authenticated_pareto_schedule.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 2000,
+      "measured_utc": "2026-10-14T18:50:24Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_authenticated_pareto_schedule.py",
+      "receipt": "canonical/capabilities/true/receipts/AUTHENTICATED_PARETO_SCHEDULE_V1__463480e1295d2068.json",
+      "solver_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+      "spec": "canonical/capabilities/true/specs/AUTHENTICATED_PARETO_SCHEDULE_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/authenticated_pareto_schedule.json",
+  "verification_fixture_sha256": "58be52ec038af42ead27ff1b9022fc255fd07be2829cc5b3bfe98e5744f3042a",
+  "verification_mission_id": "TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__30D488E0F7AE",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__30d488e0f7ae__VERIFY.json"
+}

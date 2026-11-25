@@ -1,18 +1,29 @@
 {
+  "admission_probe_error": null,
   "authority": "NONE__DERIVED_FROM_REGISTRY_ROWS_AND_COMMITTED_RECEIPTS",
   "certified_capabilities": 9,
+  "certified_pending_binding_only": [
+    "AUTHENTICATED_PARETO_SCHEDULE_V1",
+    "CAPABILITY_FIRST_RANKING_V1",
+    "DOCX_EXACT_TEXT_EDIT_V1",
+    "DOCX_RUN_SPAN_REPLACE_V1",
+    "DOCX_STORY_PART_REPLACE_V1",
+    "DOCX_TEXT_EDIT_TRANSACTION_V1",
+    "PARETO_FRONTIER_UPDATE_V1",
+    "SAME_IDENTITY_SUPERVISOR_V1"
+  ],
+  "certified_registry_bound": [
+    "SACCR_CREDIT_ADDON_V1"
+  ],
   "clean": false,
   "defect_counts": {
-    "DANGLING_ADAPTER": 1,
+    "DANGLING_ADAPTER": 0,
     "MISSING_VERIFICATION_RECEIPT": 8,
-    "REGISTRY_VS_SNAPSHOT_DIVERGENCE": 35,
-    "UNENROLLED_CERTIFIED_CAPABILITY": 8,
+    "UNENROLLED_CERTIFIED_CAPABILITY": 0,
     "UNSATISFIABLE_REQUIRES": 25
   },
   "defects": {
-    "DANGLING_ADAPTER": [
-      "python.task.acceptance.measured.objective.v1 -> python_measured_objective_acceptance_v1"
-    ],
+    "DANGLING_ADAPTER": [],
     "MISSING_VERIFICATION_RECEIPT": [
       "code.multilanguage.parse.tree_sitter.v1 -> canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
       "software.hardcore.closing.supercomposer.v1 -> canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json",
@@ -23,6 +34,38 @@
       "software.synthesis.grid_induction.v1 -> canonical/verification/HARDCORE_VERIFY_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1_V1.json",
       "test.slice.never_miss.v1 -> canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json"
     ],
+    "UNENROLLED_CERTIFIED_CAPABILITY": [],
+    "UNSATISFIABLE_REQUIRES": [
+      "archive.tar_gz.available",
+      "artifact.file.available",
+      "candidate.response_or_fields.available",
+      "chart.query.x_value.available",
+      "chart.query.y_value.available",
+      "chart.question.binary_phase_solvus.available",
+      "chart.question.legend_linear_intersection.available",
+      "chart.series.label.available",
+      "git.repository.available",
+      "image.file.available",
+      "manifest.json.available",
+      "markdown.file.available",
+      "network.http.available",
+      "node.runtime.available",
+      "pdf.file.available",
+      "pdf.file.image_only.available",
+      "pypi.live_metadata.available",
+      "pypi.selection.available",
+      "raw_task.text.available",
+      "source.candidate.provenance.verified",
+      "structured.json.available",
+      "structured.release_claim.available",
+      "trades.json.available",
+      "typed.scalar.inputs.available",
+      "yaml.file.available"
+    ]
+  },
+  "distinct_provides": 586,
+  "distinct_requires": 125,
+  "facts": {
     "REGISTRY_VS_SNAPSHOT_DIVERGENCE": [
       "code.polyglot.transform_and_verify.v1",
       "file.copy.v1",
@@ -60,53 +103,20 @@
       "source.candidates.enumerate.stdlib",
       "structured.decision_evidence.locate.stdlib"
     ],
-    "UNENROLLED_CERTIFIED_CAPABILITY": [
-      "AUTHENTICATED_PARETO_SCHEDULE_V1",
-      "CAPABILITY_FIRST_RANKING_V1",
-      "DOCX_EXACT_TEXT_EDIT_V1",
-      "DOCX_RUN_SPAN_REPLACE_V1",
-      "DOCX_STORY_PART_REPLACE_V1",
-      "DOCX_TEXT_EDIT_TRANSACTION_V1",
-      "PARETO_FRONTIER_UPDATE_V1",
-      "SAME_IDENTITY_SUPERVISOR_V1"
-    ],
-    "UNSATISFIABLE_REQUIRES": [
-      "archive.tar_gz.available",
-      "artifact.file.available",
-      "candidate.response_or_fields.available",
-      "chart.query.x_value.available",
-      "chart.query.y_value.available",
-      "chart.question.binary_phase_solvus.available",
-      "chart.question.legend_linear_intersection.available",
-      "chart.series.label.available",
-      "git.repository.available",
-      "image.file.available",
-      "manifest.json.available",
-      "markdown.file.available",
-      "network.http.available",
-      "node.runtime.available",
-      "pdf.file.available",
-      "pdf.file.image_only.available",
-      "pypi.live_metadata.available",
-      "pypi.selection.available",
-      "raw_task.text.available",
-      "source.candidate.provenance.verified",
-      "structured.json.available",
-      "structured.release_claim.available",
-      "trades.json.available",
-      "typed.scalar.inputs.available",
-      "yaml.file.available"
-    ]
+    "REGISTRY_VS_SNAPSHOT_DIVERGENCE_note": "by design: the snapshot is a floor and the merge is a union, so divergence cannot delete a row -- it is drift to read, not a defect to block"
   },
-  "distinct_provides": 282,
-  "distinct_requires": 125,
   "native_kind_rows": 2,
   "native_kind_rows_ids": [
     "knowledge.consistency.assess",
     "knowledge.json.fetch.external"
   ],
+  "pending_bindings": 16,
+  "pending_bindings_unreadable": [],
+  "registry_rows_admitted_by_root": 447,
+  "registry_rows_extended": 2310,
   "registry_rows_live": 145,
-  "registry_rows_merged": 153,
+  "registry_rows_merged": 2463,
+  "registry_rows_projection": 305,
   "registry_rows_snapshot": 146,
-  "schema": "BRAIN_CAPABILITY_ENROLLMENT_GATE_V1"
+  "schema": "BRAIN_CAPABILITY_ENROLLMENT_GATE_V2"
 }

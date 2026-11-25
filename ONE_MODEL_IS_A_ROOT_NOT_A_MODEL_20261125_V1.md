@@ -171,7 +171,7 @@ islanded; the capability itself is still the expensive part.
 ## 5. What this turn changed in the tree
 
 `canonical/tools/capability_fabric_v1.py` (import graph + certified manifest + `--check`),
-`canonical/tools/capability_enrollment_gate_v1.py` (5 defect classes + `--emit-candidates` +
+`canonical/tools/capability_enrollment_gate_v1.py` (4 defect classes + 1 fact + `--emit-candidates` +
 `--fail-on-defect`), their outputs `canonical/capabilities/CAPABILITY_FABRIC_V1.{json,md}`,
 `ENROLLMENT_GATE_V1.{json,md}`, `ENROLLMENT_CANDIDATES_V1.json`;
 `canonical/tests/test_capability_enrollment_gate_counts_the_missing_binding_v1.py` (6 tests: two fixture
@@ -183,5 +183,90 @@ independent `ast` recount that caught the understated entry-point number); and o
 `test_capability_inventory_refuses_stale_and_broken_claims_v1.py`, whose report-refusal test is now
 data-driven instead of pinned to one run's verdict — it went stale the moment CI overwrote
 `swe-pro-v2-hard51-latest.json` with a void report, which is itself the lesson about pinning numbers in
-tests. **56 passed** across the six files that touch this work. `capability_fabric_v1.py --check` passes.
+tests. **56 passed** across the six files at that point; the count after section 6 is 65 across eight.
+`capability_fabric_v1.py --check` passed then on digest `4b30be2ade766931`, and now on `6d9b53edc0fa06df`.
 HARD-51 re-armed (`RUN_SWE_PRO_V2`, 6 shards, 240 s engine budget) against the fixed collector CLI.
+
+## 6. Execution: the enrollment, and what the instruments said back
+
+Plan item 2 was carried out for all nine measured capabilities, and item 1 turned out to need
+corrections rather than repairs. `canonical/tools/capability_enroll_certified_v1.py` (`--write`,
+`--check`) derives, for each capability, four artifacts and refuses to author any of their contents:
+
+| artifact | count | what it is |
+|---|---|---|
+| `canonical/runtime/bound_capabilities/truecap_*.py` | 9 | thin `run(args, root)` adapters; the measured kernel is the whole implementation, and the adapter's only logic is resolving an instance |
+| `canonical/capabilities/true/instances/*.json` | 9 | the instance the edge was measured on, committed, because a capability that can only be called with an in-memory dict cannot be re-run by anyone else |
+| `canonical/astra_runtime/pending_bindings/TRUECAP-ENROLL-*.json` | 9 | `registry_entry` + fixture digest + result path, in the shape `auto_pypi_library_acquisition.py` already uses for acquired capabilities |
+| `canonical/capabilities/COMPOSITION_EDGES_V1.json` | 9 edges | 34 oracle verdicts executed against real output: 102 passes, 0 failures, 0 oracle errors; 1 published canary passed; 0 model calls, $0.00 |
+
+Three instrument bugs were caught before anything was committed. Each one would have become a quoted
+number, which is what makes them worth writing down rather than fixing silently:
+
+1. an oracle's `check(inst, out, solve)` returns `(ok, detail)`, per the harness's own contract; treating
+   it as a bool made every one of the 34 checks read `0/3`. A green-looking tool reporting total failure
+   is the friendlier version of this bug, and it is still a lie.
+2. the first `action_template` asserted `field_equals status == "None"`, because statuses were collected
+   with `str(out.get("status"))` and four of the nine kernels return no `status` key at all. That is a
+   binding no result can ever satisfy — published, dispatchable in principle, permanently failing. The
+   expectation is now derived from whether the kernel uses the field, and falls back to
+   `field_nonempty capability_id` when it does not (the envelope always carries it).
+3. enrollment was traced by substring over the merged rows, which made all nine look `registry_bound` —
+   the extended inventory has a row for nearly every module in the tree, so "mentions the kernel's name"
+   matched everything. Binding is now decided by artifact identity (the file a row dispatches to *is* the
+   measured kernel or forwards to it, or the row cites the capability's own spec), and it is graded:
+   **registry-bound 1** (`SACCR_CREDIT_ADDON_V1`), **pending-binding-only 8**, **unenrolled 0**.
+
+Corrections to §1 and §3b, in the same spirit: the root was understated, not missing.
+
+- `load_verified_registry` merges **four** sources — curated live (145 rows), curated snapshot (146),
+  the extended inventory (2,310) and the receipt projection (305 entries) — and admits **447** rows today
+  (153 with `include_extended=False`). The claim "there is already one registry" is therefore stronger
+  than the draft said, and it comes with a second admission route (`_receipt_admits`) that a measurement
+  can actually use. The 1,993-schema sprawl is real; the dispatch surface is already unified.
+- `REGISTRY_VS_SNAPSHOT_DIVERGENCE` (35) was defect class 5 and is now a reported fact. The loader's own
+  comment is the reason: "A PROJECTION MAY ADD OR UPDATE A ROW; IT MAY NEVER DELETE ONE. The snapshot is
+  therefore the FLOOR." The merge is a union, so divergence cannot lose a row — it is drift to read, not
+  something to block on. A gate that fires on ordinary growth is a gate that gets deleted, and this one
+  would have been deleted for a stylistic objection.
+- `DANGLING_ADAPTER` was 1, and the 1 was my error, not the registry's.
+  `python.task.acceptance.measured.objective.v1` resolves through `source.adapter_path` →
+  `canonical/runtime/python_measured_objective_acceptance_v1.py` (present, 7,999 bytes), which is exactly
+  the convention `capability_receipt_lane_v1.py:587` uses. Under the corrected rule the count is 0. Same
+  class of mistake as the `runtime_native_action` exclusion one section earlier: applying one file's
+  schema to a corpus admitted through another route.
+
+The stopping rule, item by item, as of this commit:
+
+1. *gate `--fail-on-defect` exits 0* — **not met**, and not met for reasons this change did not create: 8
+   curated rows cite absent `canonical/verification/HARDCORE_VERIFY_*.json` receipts, and 25 `requires`
+   predicates have no provider. Those are plan items 1 and 4, still open, still named in
+   `ENROLLMENT_GATE_V1.md` with every id listed.
+2. *9/9 dispatchable, with the measured blob equal to HEAD* — **met**. `git hash-object` equals the
+   ledger's `solver_git_blob_sha` for all nine kernels (so the certifications describe the code that is
+   in the tree right now, not a copy of it), and every adapter was executed with the lane's own argument
+   shape and met its derived expectation.
+3. *every `requires` edge certified or declared ambient* — **met for the nine**: `requires: []`, with the
+   fixture named under `ambient_preconditions` and sha256-pinned by the queue entry. The remaining 25
+   belong to pre-existing rows and are item 4.
+4. *`capability_fabric_v1.py --check` passes* — **met**, digest `6d9b53edc0fa06df`: 5,915 modules,
+   3,544 components, 3,022 singletons, 2,690 runnable entry points of which 580 expose a `main()`.
+
+**65 tests pass** across the eight files that cover this work, 8 of them new
+(`test_measured_capabilities_are_enrolled_into_the_one_registry_v1.py`).
+
+What "100 % sure" means here, stated so it can be refuted. It means: every advanced capability the repo
+measures now has exactly one row-shape in the one queue the root consumes; the row's predicates came
+from executing the composition, not from a person typing them; the adapters were run, not inspected; the
+kernels are byte-identical to what was certified; and `--check` plus the tests fail if code and queue
+disagree. It does **not** mean the nine are admitted. They carry
+`BOUND_PENDING_INDEPENDENT_VERIFICATION` with no `verification` block, because `_receipt_admits` demands
+a producer receipt at the adapter's content hash *and* an independent verification record whose run
+reference carries a platform-attested `github_run_id`, and only
+`.github/workflows/capability-receipt-verification.yml` can mint that. Writing it from this sandbox would
+be the `SESSION_E0A256F8` failure mode the root exists to prevent ("produced 464 self-verified
+receipts"), and a unification bought by laundering a status is worse than the sprawl: the sprawl at least
+told the truth. So the gap is named rather than closed, and the last mile is one CI run against this
+branch's queue entries — at which point `truecap.*` rows appear in `load_verified_registry()` without
+anything in this document needing to be rewritten.
+

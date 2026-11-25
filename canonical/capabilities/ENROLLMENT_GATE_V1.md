@@ -1,21 +1,18 @@
-# Enrollment gate: the root exists, the binding does not
+# Enrollment gate: what the root can actually dispatch
 
-- registry rows: live 145, snapshot 146, merged 153 | provides vocabulary 282, requires vocabulary 125
+- registry rows: live 145, snapshot 146, extended 2310, projection 305, pending bindings 16 → merged 2463 | admitted by `load_verified_registry`: **447**
+- provides vocabulary 586, requires vocabulary 125
 - rows dispatched as the declared native kind `runtime_native_action`: 2 (no adapter file expected; listed, not counted as a defect)
-- harness-certified capabilities: 9
+- harness-certified capabilities: 9 — registry-bound 1, pending binding only 8 (AUTHENTICATED_PARETO_SCHEDULE_V1, CAPABILITY_FIRST_RANKING_V1, DOCX_EXACT_TEXT_EDIT_V1, DOCX_RUN_SPAN_REPLACE_V1, DOCX_STORY_PART_REPLACE_V1, DOCX_TEXT_EDIT_TRANSACTION_V1, PARETO_FRONTIER_UPDATE_V1, SAME_IDENTITY_SUPERVISOR_V1), unenrolled 0
 - **clean: False**
 
 | defect class | count | what it means for 'one model' |
 |---|---|---|
-| `DANGLING_ADAPTER` | 1 | the dispatch table names code that is not in the tree |
+| `DANGLING_ADAPTER` | 0 | the dispatch table names code that is not in the tree |
 | `MISSING_VERIFICATION_RECEIPT` | 8 | admission rule 2 is cited but the evidence file is gone |
 | `UNSATISFIABLE_REQUIRES` | 25 | a planner can never satisfy these preconditions from registered work |
-| `UNENROLLED_CERTIFIED_CAPABILITY` | 8 | the strongest measurements are not dispatchable |
-| `REGISTRY_VS_SNAPSHOT_DIVERGENCE` | 35 | live registry and the snapshot floor disagree; at load time the snapshot wins, so a newer live row can be shadowed |
-
-`DANGLING_ADAPTER`:
-
-- python.task.acceptance.measured.objective.v1 -> python_measured_objective_acceptance_v1
+| `UNENROLLED_CERTIFIED_CAPABILITY` | 0 | the strongest measurements are not dispatchable and not even queued |
+| `REGISTRY_VS_SNAPSHOT_DIVERGENCE` (fact, not a defect) | 35 | by design: the snapshot is a floor and the merge is a union, so divergence cannot delete a row -- it is drift to read, not a defect to block |
 
 `MISSING_VERIFICATION_RECEIPT`:
 
@@ -55,43 +52,3 @@
 - trades.json.available
 - typed.scalar.inputs.available
 - yaml.file.available
-
-`UNENROLLED_CERTIFIED_CAPABILITY`:
-
-- AUTHENTICATED_PARETO_SCHEDULE_V1
-- CAPABILITY_FIRST_RANKING_V1
-- DOCX_EXACT_TEXT_EDIT_V1
-- DOCX_RUN_SPAN_REPLACE_V1
-- DOCX_STORY_PART_REPLACE_V1
-- DOCX_TEXT_EDIT_TRANSACTION_V1
-- PARETO_FRONTIER_UPDATE_V1
-- SAME_IDENTITY_SUPERVISOR_V1
-
-`REGISTRY_VS_SNAPSHOT_DIVERGENCE`:
-
-- code.polyglot.transform_and_verify.v1
-- file.copy.v1
-- file.line.appended.v1
-- file.question.taught_words.v1
-- file.rename.v1
-- git.history.bisect_regression.v1
-- python.fault.localize.dynamic.dataflow.v1
-- python.feature.implement_function_spec.v1
-- python.patch.search.test_guided.ast.v1
-- python.refactor.add_parameter.v1
-- python.refactor.inline_helper.v1
-- python.refactor.move_function.v1
-- python.refactor.move_symbol.v1
-- python.software.repair.guided.provenance.coupled.v1
-- python.software.repair.loop.coupled.ast.v1
-- python.software.repair.loop.strict_progress.ast.v1
-- python.software.repair.loop.test_guided.ast.v1
-- python.software.repair.measured_acceptance.v1
-- python.software.repair.semantic_acceptance.v1
-- python.software.request.semantic_behavior.compile.v1
-- python.source.add_function.v1
-- python.source.add_parameter.v1
-- python.source.complexity.v1
-- python.source.dead_code.v1
-- python.source.definition_count.v1
-- … 10 more

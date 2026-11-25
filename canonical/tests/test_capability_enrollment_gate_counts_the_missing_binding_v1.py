@@ -2,8 +2,14 @@
 """The enrollment gate must count real defects, refuse to invent predicates, and be satisfiable.
 
 Two of these tests build a fixture registry so the assertions are known to bite: a tool that only
-ever agrees with the file it reads is decoration. The first test recomputes two of the five classes
-straight from the JSON, so the gate cannot quietly stop looking at rows it should.
+ever agrees with the file it reads is decoration. The first test recomputes three of the four defect
+classes straight from the JSON, so the gate cannot quietly stop looking at rows it should.
+
+The gate reads all four registry sources now, and one class was demoted from defect to fact: the live
+registry and the snapshot floor are allowed to disagree (the merge is a union with the snapshot as a
+floor), so a divergence is drift to read, not something to block on. The last test pins that
+recomputation is not the reason the numbers went down: point the same code at a root without the spec
+files and the queue, and all nine certified capabilities are unenrolled again.
 """
 from __future__ import annotations
 
@@ -17,6 +23,17 @@ from canonical.tools import capability_enrollment_gate_v1 as gate
 ROOT = pathlib.Path(gate.ROOT)
 LIVE = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_V1.json"
 SNAPSHOT = ROOT / "canonical/runtime/BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"
+EXTENDED = ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+PROJECTION = ROOT / "canonical/runtime/CAPABILITY_RECEIPT_PROJECTION_V1.json"
+PENDING = ROOT / "canonical/astra_runtime/pending_bindings"
+
+
+def _merged_rows() -> dict:
+    """The same four sources, in the loader's precedence order, read independently of the gate."""
+    def rows_of(path, key="capabilities"):
+        d = json.loads(path.read_text(encoding="utf-8"))
+        return dict(d.get(key) or {})
+    return {**rows_of(EXTENDED), **rows_of(PROJECTION, "entries"), **rows_of(LIVE), **rows_of(SNAPSHOT)}
 LEDGER = ROOT / "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json"
 ADAPTERS = ROOT / "canonical/runtime/bound_capabilities"
 
@@ -41,7 +58,10 @@ def _build(f: dict) -> dict:
 
 def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     r = gate.build(ROOT, LIVE, SNAPSHOT, LEDGER, ADAPTERS)
-    rows = {**json.loads(LIVE.read_text())["capabilities"], **json.loads(SNAPSHOT.read_text())["capabilities"]}
+    rows = _merged_rows()
+    assert len(rows) == r["registry_rows_merged"] > 2000, (
+        "the gate must be looking at the whole dispatch surface, not the curated pair it started with"
+    )
 
     missing = {cid for cid, row in rows.items()
                if isinstance(row.get("verification"), dict) and row["verification"].get("receipt_path")
@@ -49,9 +69,21 @@ def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     assert missing, "the known-missing receipts must still be named, not summarized away"
     assert missing == {x.split(" -> ")[0] for x in r["defects"]["MISSING_VERIFICATION_RECEIPT"]}
 
-    dangling = {cid for cid, row in rows.items()
-                if row.get("adapter_module") and row["adapter_module"] != "runtime_native_action"
-                and not (ADAPTERS / f"{row['adapter_module']}.py").is_file()}
+    def resolvable(row) -> bool:
+        # Two conventions are in use and both are honoured by the code that dispatches: an adapter
+        # module under bound_capabilities/, or an explicit `source.path` / `source.adapter_path`.
+        # The row that used to be flagged here, python.task.acceptance.measured.objective.v1, is a
+        # stdlib composition living in canonical/runtime/ -- my first rule could not see it, and a
+        # defect class that reports the checker's blind spot is not a defect class.
+        am = row.get("adapter_module")
+        if not am or am == "runtime_native_action":
+            return True
+        if (ADAPTERS / f"{am}.py").is_file():
+            return True
+        src = row.get("source") or {}
+        return any((ROOT / str(src[k])).is_file() for k in ("path", "adapter_path") if src.get(k))
+
+    dangling = {cid for cid, row in rows.items() if not resolvable(row)}
     assert dangling == {x.split(" -> ")[0] for x in r["defects"]["DANGLING_ADAPTER"]}
 
     # `runtime_native_action` is a declared kind, so it is listed apart and never counted as broken.
@@ -60,11 +92,22 @@ def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     assert not any("runtime_native_action" in x for x in r["defects"]["DANGLING_ADAPTER"])
 
     assert r["certified_capabilities"] == 9
-    assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == r["certified_capabilities"] - 1, (
-        "today exactly one certified capability (the SACCR kernel) is bound by a registry row; "
-        "when a second is enrolled, this is where the change gets noticed"
+    # Enrollment is graded, because the tree has two legitimate states: a row the root already reads,
+    # and a pending binding queued for the receipt only CI may mint. Anything else is a defect.
+    assert r["certified_registry_bound"] == ["SACCR_CREDIT_ADDON_V1"]
+    assert len(r["certified_pending_binding_only"]) == 8
+    assert set(r["certified_registry_bound"]) | set(r["certified_pending_binding_only"]) == \
+        set(json.loads(LEDGER.read_text())["rows"]), "every measurement is either bound or queued"
+    assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == 0
+    assert r["pending_bindings"] == len(list(PENDING.glob("*.json"))) == 16
+    assert "REGISTRY_VS_SNAPSHOT_DIVERGENCE" not in r["defect_counts"], (
+        "a by-design floor may not be a blocker: making it one is how a gate gets deleted"
     )
-    assert r["clean"] is False
+    assert "floor" in r["facts"]["REGISTRY_VS_SNAPSHOT_DIVERGENCE_note"]
+    assert isinstance(r["facts"]["REGISTRY_VS_SNAPSHOT_DIVERGENCE"], list)
+    assert r["registry_rows_admitted_by_root"] == r["registry_rows_admitted_by_root"] is not None
+    assert r["admission_probe_error"] is None
+    assert r["clean"] is False, "8 cited receipts are still absent and 25 preconditions still unsatisfied"
 
 
 def test_gate_detects_a_fabricated_adapter_and_a_lost_receipt(tmp_path: pathlib.Path) -> None:
@@ -125,9 +168,24 @@ def test_cli_exit_code_is_the_defect_verdict(tmp_path: pathlib.Path) -> None:
     assert run() == 0, "with a provider for y, the fixture is genuinely clean"
 
 
+def test_a_root_without_specs_or_queue_unenrolls_all_nine(tmp_path: pathlib.Path) -> None:
+    """The bite: the good numbers above come from files, not from a rule that stopped looking.
+
+    Same registry and ledger JSON, same code, but a root with no spec files and no pending bindings:
+    nothing is traceable, so all nine certified capabilities are unenrolled and the root probe refuses
+    to answer rather than reporting the repository's counts.
+    """
+    r = gate.build(tmp_path, LIVE, SNAPSHOT, LEDGER, ADAPTERS)
+    assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == 9
+    assert r["certified_registry_bound"] == [] and r["certified_pending_binding_only"] == []
+    assert r["registry_rows_admitted_by_root"] is None
+    assert "skipped" in (r["admission_probe_error"] or "")
+
+
 def test_candidates_carry_evidence_and_refuse_to_invent_predicates() -> None:
-    r = gate.build(ROOT, LIVE, SNAPSHOT, LEDGER, ADAPTERS)
+    r = gate.build(pathlib.Path("/nonexistent-but-a-real-shape"), LIVE, SNAPSHOT, LEDGER, ADAPTERS)
     cands = gate.candidates(ROOT, LEDGER, r)
+    assert len(cands) == 9
     assert len(cands) == r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"]
     for c in cands:
         assert c["provides"] is None and c["requires"] is None, "a predicate invented here is an unmeasured claim"
@@ -144,4 +202,6 @@ def test_markdown_names_every_class_even_when_empty() -> None:
     md = gate.to_markdown(r)
     for k in gate.DEFECT_ORDER:
         assert f"`{k}`" in md
-    assert "snapshot wins" in md
+    for k in gate.FACT_ORDER:
+        assert f"`{k}`" in md and "fact, not a defect" in md
+    assert "admitted by" in md and "pending binding only" in md
