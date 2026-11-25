@@ -109,10 +109,40 @@ class NetworkRefusedByHarness(RuntimeError):
     """
 
 
+def _is_local_endpoint(target: Any) -> bool:
+    """Loopback and unix sockets are NOT the web.
+
+    `allow_web` means 'no external knowledge', and the environment's own local services —
+    a server the engine spawned itself, a DB on 127.0.0.1, a unix socket — are the thing
+    the engine is supposed to probe, not a knowledge source. A guard that blocked these
+    would quietly remove a capability instead of adding a constraint, so the rule is
+    literal-address based (no DNS: resolving a name to decide is itself a lookup).
+    """
+    import ipaddress
+
+    host: Any = target
+    if isinstance(target, (tuple, list)) and target:
+        host = target[0]
+    if isinstance(host, (bytes, bytearray)):  # unix socket path
+        return True
+    if isinstance(host, str) and (host.startswith("/") or host.endswith(".sock")):
+        return True  # AF_UNIX: a filesystem path, not an address
+    if isinstance(host, str):
+        h = host.strip("[]")
+        if h == "localhost" or h.startswith("127.") or h == "::1":
+            return True
+        try:
+            return ipaddress.ip_address(h).is_loopback
+        except ValueError:
+            return False
+    return False  # unix socket objects pass a str/bytes address above; anything else: refuse
+
+
 def network_guard(enabled: bool):
     """Context manager: refuse (and count) in-process outbound connects while enabled."""
     import contextlib
     import socket
+    import urllib.parse
     import urllib.request
 
     attempts: list[str] = []
@@ -129,10 +159,15 @@ def network_guard(enabled: bool):
     real_open = urllib.request.urlopen
 
     def _refuse_connect(self, *a, **k):  # noqa: ANN001 - monkeypatch target
-        attempts.append(f"socket.connect:{a[0] if a else '?'!r}"[:160])
+        target = a[0] if a else None
+        if _is_local_endpoint(target):
+            return real_connect(self, *a, **k)
+        attempts.append(f"socket.connect:{target!r}"[:160])
         raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
 
     def _refuse_create(address, *a, **k):
+        if _is_local_endpoint(address):
+            return real_create(address, *a, **k)
         attempts.append(f"create_connection:{address!r}"[:160])
         raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
 
@@ -141,6 +176,9 @@ def network_guard(enabled: bool):
             full = getattr(url, "full_url", url)
         except Exception:  # pragma: no cover - defensive against odd url objects
             full = url
+        host = urllib.parse.urlparse(str(full)).hostname
+        if _is_local_endpoint(host):
+            return real_open(url, *a, **k)
         attempts.append(f"urlopen:{full!r}"[:160])
         raise NetworkRefusedByHarness("network fetch refused: harness set allow_web=False")
 

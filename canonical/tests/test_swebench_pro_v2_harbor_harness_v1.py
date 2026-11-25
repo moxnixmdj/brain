@@ -9,6 +9,7 @@ from __future__ import annotations
 import asyncio
 import json
 import pathlib
+import socket
 import tempfile
 import urllib.request
 
@@ -384,15 +385,40 @@ def test_network_guard_enforces_allow_web_and_counts_attempts() -> None:
         guard_off, attempts_off = AG.network_guard(False)
         with guard_off:
             socket.create_connection(srv.getsockname(), timeout=2).close()
-        # and inside a *refusing* guard the same connect is blocked — proof the two
-        # observations above are about the guard, not about the ordering of the test
+        # and a *refusing* guard does block a non-local address, which is what makes the
+        # two passes above evidence about the guard rather than about ordering
         guard2, attempts2 = AG.network_guard(True)
         with guard2, pytest.raises(AG.NetworkRefusedByHarness):
-            socket.create_connection(srv.getsockname(), timeout=2)
+            socket.create_connection(("93.184.216.34", 80), timeout=2)
     finally:
         srv.close()
     assert attempts_off == []
     assert len(attempts2) == 1
+
+
+def test_the_guard_blocks_the_web_and_leaves_the_environment_alone() -> None:
+    """`allow_web` = no external knowledge. Loopback is the environment, not the web."""
+    
+    assert AG._is_local_endpoint("127.0.0.1") and AG._is_local_endpoint(("localhost", 8000))
+    assert AG._is_local_endpoint(("::1", 80)) and AG._is_local_endpoint("/run/x.sock")
+    assert not AG._is_local_endpoint(("pypi.org", 443)) and not AG._is_local_endpoint("8.8.8.8")
+    # a live local service is reachable through the guard; an external name is not
+    srv = socket.socket()
+    srv.bind(("127.0.0.1", 0))
+    srv.listen(2)
+    port = srv.getsockname()[1]
+    guard, attempts = AG.network_guard(True)
+    try:
+        with guard:
+            s = socket.create_connection(("127.0.0.1", port), timeout=2)
+            s.close()
+            with pytest.raises(AG.NetworkRefusedByHarness):
+                urllib.request.urlopen(f"http://example.invalid:{port}/", timeout=2)  # noqa: S310
+            with pytest.raises(AG.NetworkRefusedByHarness):
+                socket.create_connection(("93.184.216.34", 80), timeout=1)
+    finally:
+        srv.close()
+    assert len(attempts) == 2, attempts
 
 
 def test_run_engine_reports_the_guard_and_the_solver_sees_the_same_flag(tmp_path) -> None:

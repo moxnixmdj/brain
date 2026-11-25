@@ -35,6 +35,7 @@ import csv
 import gzip
 import hashlib
 import io
+import http.client
 import json
 import time
 import pathlib
@@ -753,6 +754,17 @@ def _http_json_request(
         except Exception:
             parsed = {"error": raw or str(exc)}
         return int(exc.code), parsed
+    except urllib.error.URLError as exc:
+        # No response AT ALL: connection refused, timed out, host unresolvable. That is
+        # a fact about the environment — there is no service here to probe — and not an
+        # error in the agent. It used to propagate, which turned "the API is not running"
+        # into an exception that aborted the whole solve (measured: one SWE-bench Pro V2
+        # trial died this way as HARNESS_ERROR and scored 0 for a reason that says nothing
+        # about the solver). Status 0 with an "unreachable" body keeps the acquisition
+        # honest: the gap stays open, and the caller records that the probe found nothing.
+        return 0, {"error": "unreachable", "reason": str(getattr(exc, "reason", exc))[:200], "url": url}
+    except (OSError, http.client.HTTPException) as exc:  # transport-level, same meaning
+        return 0, {"error": "unreachable", "reason": f"{type(exc).__name__}: {exc}"[:200], "url": url}
 
 
 def execute_verified_plan_live(

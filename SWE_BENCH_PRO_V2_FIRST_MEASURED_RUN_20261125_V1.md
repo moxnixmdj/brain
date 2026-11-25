@@ -106,12 +106,39 @@ engine's self-judgement.
   that scored 0 for a reason that says nothing about the solver. The harness now refuses
   outbound connects in-process while `allow_web` is false, counts the attempts, and prints the
   count in the report (`network_guard: enforced`, `network_attempts: N`). What is still open is
-  *which* engine path needed the fetch — that is an engine question now, not a network one.
+  *which* engine path needed the fetch, and that answer is in §4b.
 - `materialize` writes task dirs whose names differ from the ids in the manifest's own report keys
   (105-char `-v<sha>` form). Reconciled by tolerant matching; still worth pinning at the source.
 - n = 1 trial per task. No variance estimate.
 - The `hard51` list is vendored and re-diffed against upstream `31a20c7` in CI (byte-identical,
   verified twice), but the 51-task number itself has not been run yet.
+
+## 4b. The fetch was never about the web
+
+The guard found the path, and the path was not a knowledge lookup: `_http_json_request` in
+`canonical/runtime/epistemic_scan_acquire_compress_v1.py` probes the *environment's own* HTTP
+service (`/openapi.json`, `/token`) as part of learning an API by observation. Nothing was
+listening inside the runner, so the transport raised `URLError: [Errno 111]`, the function had a
+handler for `HTTPError` (a response) and none for `URLError` (no response), and the exception aborted
+the whole solve.
+
+Two laws fall out of that, and they are not the same law:
+
+1. **An unreachable service is a fact, not an error.** `_http_json_request` now returns
+   `(0, {"error": "unreachable", "reason": …, "url": …})` for `URLError`/`OSError`, so the gap stays
+   open and the rest of the solve continues; a 401 or a 404 is still returned as the response it is,
+   because a reply *is* evidence. Tests: `test_unreachable_service_is_a_fact_not_an_error_v1.py` (5,
+   including a live loopback server proving real replies are not swallowed and a raw `OSError` case).
+2. **`allow_web` means no external knowledge, not no IPC.** The first version of the harness guard
+   refused *every* outbound connect, which would have blocked the engine from probing a service it
+   started itself — a capability quietly deleted in the name of a constraint. The guard now refuses
+   non-loopback addresses only, decided on the literal address (no DNS: resolving a name in order to
+   decide would itself be a lookup), and treats unix socket paths as local. That distinction is the
+   test `test_the_guard_blocks_the_web_and_leaves_the_environment_alone`.
+
+So the remaining open question is not "why did it try to reach the network" but **why an
+`http_spec` gap was inferred at all for a repo with no running service** — a Wall-1 shaped
+question about gap classification, which is what the 51-task run is now there to measure.
 
 ## 5. Corrections to what earlier rounds asserted
 
