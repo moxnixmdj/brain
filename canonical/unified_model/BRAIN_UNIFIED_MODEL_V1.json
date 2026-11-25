@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 701,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7375,
+  "research_index_records": 7377,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0109a762909896753f2cf7c506f3f044d1a27d7e9a85220baf553021a38bec1e"
+  "value": "b26a10b3de363e1c32a66aaa495d809177cbcc57ec226df3bdcf0e3748968bb1"
  },
  "engines": [
   {
@@ -182684,6 +182684,25 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
+   "schema": "EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1",
+   "sha256": "e6a9a5c7b2a13501c70e416c4815a7b7a96ba41c3ae58e46f1b9194005322a8a",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "agent": 1,
+    "benchmark": 1,
+    "computer": 1,
+    "epistemic": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/ESCAPE_ACTIVE_GAP_B_CAUSAL_RECLASSIFICATION_PUBLIC_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -258697,7 +258716,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/COMPOSED_TRANSITION_REPAIR_FIVE_COMMITS_20261125_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "c31b30210f902c244a5c0e9ff458fc20cfa495f1f10808d895ecb23fbfd128d5",
+   "sha256": "a073a6ec26b4342210746787d3df3bd50b8a27a5404ab03643c61822f2aef059",
    "status": "",
    "terms": {
     "20261125": 1,
@@ -260132,6 +260151,51 @@
     "own": 3,
     "passed": 2,
     "registry": 2
+   }
+  },
+  {
+   "action_id": "EPISTEMIC_COMPUTER_AGENT_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/EPISTEMIC_COMPUTER_AGENT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/EPISTEMIC_COMPUTER_AGENT_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "9d1f682397a2ab8e943be3b66c0640b38da52e3d57cbcb96c9bba02bf6e1ad93",
+   "status": "SHIPPED",
+   "terms": {
+    "111": 1,
+    "20261124": 1,
+    "211.6x": 1,
+    "94.6": 1,
+    "across": 1,
+    "agent": 1,
+    "aria": 2,
+    "automatic": 1,
+    "blind": 1,
+    "bottleneck": 1,
+    "bugs": 1,
+    "causal": 1,
+    "cli-grammar": 1,
+    "cold": 1,
+    "commits": 1,
+    "computer": 1,
+    "cow": 1,
+    "diff": 1,
+    "disconnected": 1,
+    "discovery": 1,
+    "domain": 1,
+    "epistemic": 1,
+    "epistemic_computer_agent_20261124_v1": 1,
+    "evaluated": 1,
+    "existing": 1,
+    "fault": 1,
+    "file": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "git": 1,
+    "localization": 2,
+    "simulation": 2,
+    "swe": 2
    }
   },
   {
@@ -286308,7 +286372,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "9d8820abcb81c71e68915f3f566de86f973acacd5f69b93a3aa35497406bf5dd",
+   "sha256": "d03f2837db276e11b1adece1050631be34359e00fedb0944be7e98b16d520e14",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [

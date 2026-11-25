@@ -40,7 +40,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__FIVE_PINNED_COMMITS_AND_TWO_UNSEEN_COMMITS",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EMPTY_VALUE_CROSSES_PRODUCERS__REPAIR_REQUIRES_COMPOSED_TRANSITIONS_AND_WHOLE_FILE_VERIFICATION",
-  "canonical_base_commit": "edc5e0a39337bfbcdaad132291bcd4f22407fd24",
+  "canonical_base_commit": "145556966aa4c524c67108fd5001426e22c0d63a",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -67,7 +67,7 @@
   "measured_effect": "5/5 pinned commits verified by generator and independent replay (676, 116, 8, 150, 124 passing tests); 0/2 unseen commits; zero model calls, network calls, stored parameters or gold-patch reads.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "recursive_obs": {
-    "canonical_base_commit": "edc5e0a39337bfbcdaad132291bcd4f22407fd24",
+    "canonical_base_commit": "145556966aa4c524c67108fd5001426e22c0d63a",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Single-guard repair loop, insufficient on five commits",
