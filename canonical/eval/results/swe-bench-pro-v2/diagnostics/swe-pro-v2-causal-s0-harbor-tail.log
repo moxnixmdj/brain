@@ -1,7 +1,7 @@
 Tip: There are many benchmarks available in Harbor's registry.
 Run `harbor datasets list` to see all available datasets.
 
-  3/3 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:02:36 0:00:00
+  3/3 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:02:46 0:00:00
 
 adhoc • causal_engine
 ┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
@@ -17,7 +17,7 @@ adhoc • causal_engine
 └────────┴───────┘
 
 Job Info
-Total runtime: 2m 36s
+Total runtime: 2m 46s
 Results written to 
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.jso
 n
