@@ -31227,10 +31227,10 @@
   "capabilities": 447,
   "engines": 26,
   "harvested_admitted": 0,
-  "harvested_capabilities": 621,
+  "harvested_capabilities": 622,
   "harvested_contract_surfaces": 40,
-  "harvested_program_surfaces": 581,
-  "knowledge_documents": 732,
+  "harvested_program_surfaces": 582,
+  "knowledge_documents": 733,
   "receipt_backed_capabilities": 294,
   "research_index_records": 7393,
   "routing_tokens": 2373,
@@ -31241,7 +31241,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c2a6bb68ff50132e73f17143ea8945a8d8582882084aa6c28f8be001c8552c7c"
+  "value": "34ea9733da761cdcf0887bd76f7f0b739d8723b59397cd6ba04e90f3bc8ea49c"
  },
  "engines": [
   {
@@ -50364,6 +50364,28 @@
     "tasks",
     "tests",
     "measure"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.capability_inventory_by_domain_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/capability_inventory_by_domain_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "78ad4cb981861e39483c4e8fc08fa189f30023cac988028fdb438a68c823514e",
+   "summary": "Inventory every capability the project owns, grouped by what it can do.",
+   "triggers": [
+    "capability",
+    "inventory",
+    "domain"
    ]
   },
   {
@@ -111572,6 +111594,82 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 11284,
+   "headings": [
+    "Everything we have, and who wins at each — 25 November 2026 (V2)",
+    "1. How \"all of them\" was established",
+    "2. Head to head",
+    "3. The pattern, stated once",
+    "4. Conflicts this document resolves rather than hides",
+    "5. Non-claims"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/CAPABILITY_VERSUS_FRONTIER_20261125_V2.md",
+   "sha256": "882f1129ed8c5c3f91ec3bd13feb451ab515ba2582c8b92f68c44c083f3d52c8",
+   "summary": "Supersedes `CAPABILITY_VERSUS_FRONTIER_20261124_V1.md`. V1 was written before the harvest landed, so it described 447 capabilities. The tree owns more than that, and one of the things it owned was *a comparison of this exact question* sitting unmerged on `arena/b81b2217-brain` — which is itself evidence for the point.",
+   "terms": {
+    "10": 6,
+    "11": 6,
+    "13": 6,
+    "14": 4,
+    "15": 4,
+    "2.0": 4,
+    "2000": 4,
+    "30": 6,
+    "51": 11,
+    "arena": 5,
+    "benchmark": 8,
+    "board": 5,
+    "both": 5,
+    "different": 4,
+    "every": 4,
+    "evidence": 4,
+    "exact": 5,
+    "frontier": 13,
+    "gui": 4,
+    "main": 4,
+    "measured": 4,
+    "memory": 5,
+    "never": 6,
+    "no": 13,
+    "not": 19,
+    "one": 6,
+    "only": 8,
+    "ours": 4,
+    "own": 6,
+    "pro": 6,
+    "produced": 5,
+    "published": 9,
+    "real": 4,
+    "row": 5,
+    "run": 8,
+    "session": 4,
+    "split": 4,
+    "swe-bench": 5,
+    "tasks": 7,
+    "they": 4,
+    "three": 5,
+    "tree": 4,
+    "true": 4,
+    "us": 11,
+    "v2": 4,
+    "verification": 4,
+    "win": 6,
+    "zero": 5
+   },
+   "title": "Everything we have, and who wins at each — 25 November 2026 (V2)",
+   "title_terms": [
+    "2026",
+    "25",
+    "each",
+    "everything",
+    "november",
+    "v2",
+    "wins"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 10121,
    "headings": [
     "Every advanced capability we have, against the frontier — complete census",
@@ -116071,10 +116169,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2155,
+  "included_source_count": 2157,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3cfaff2464fb0feeaa42ffa1b0aabef2efd53ec38b0b7d13231ed6cf755891ac"
+  "source_tree_digest": "d52085c10811fe77853ad525dc4983ca35cdc6e323b9158640454e5a3fdd644f"
  },
  "research_index": [
   {
