@@ -118,6 +118,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/pareto_frontier_update.json",
   "verification_fixture_sha256": "f904dea764e7d591f5d04a3f9514a671045f1de083f79361017d125fcb7c206a",
-  "verification_mission_id": "TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__C64992669AD1",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__c64992669ad1__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__E075C5D8FA0F",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-PARETO-FRONTIER-UPDATE__e075c5d8fa0f__VERIFY.json"
 }

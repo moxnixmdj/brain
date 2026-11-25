@@ -139,7 +139,7 @@
   "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/docx_exact_text_edit.json",
-  "verification_fixture_sha256": "c636076870cbecabf4d489b182579ee0173535de8af998662b160c9d96ebbafd",
-  "verification_mission_id": "TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__AE61F188AF3A",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__ae61f188af3a__VERIFY.json"
+  "verification_fixture_sha256": "4e7e5e2af0d46875763d353e164f01780cf0149c5491246f473c7d06414f3de0",
+  "verification_mission_id": "TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__85C322C2A8DC",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-EXACT-TEXT-EDIT__85c322c2a8dc__VERIFY.json"
 }

@@ -136,6 +136,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/saccr_credit_addon.json",
   "verification_fixture_sha256": "b06d6b1cbc5c3645fe3bc5402a5e462408a6c1bca675a33fe3038c3c379cb52d",
-  "verification_mission_id": "TRUECAP-ENROLL-SACCR-CREDIT-ADDON__0BFC65B62EE2",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SACCR-CREDIT-ADDON__0bfc65b62ee2__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-SACCR-CREDIT-ADDON__BE40CDD4B275",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SACCR-CREDIT-ADDON__be40cdd4b275__VERIFY.json"
 }

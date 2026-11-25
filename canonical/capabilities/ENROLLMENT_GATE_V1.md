@@ -1,9 +1,9 @@
 # Enrollment gate: what the root can actually dispatch
 
-- registry rows: live 145, snapshot 146, extended 2310, projection 305, pending bindings 16 → merged 2463 | admitted by `load_verified_registry`: **447**
-- provides vocabulary 586, requires vocabulary 125
+- registry rows: live 145, snapshot 146, extended 2319, projection 305, pending bindings 16 → merged 2472 | admitted by `load_verified_registry`: **447**
+- provides vocabulary 658, requires vocabulary 125
 - rows dispatched as the declared native kind `runtime_native_action`: 2 (no adapter file expected; listed, not counted as a defect)
-- harness-certified capabilities: 9 — registry-bound 1, pending binding only 8 (AUTHENTICATED_PARETO_SCHEDULE_V1, CAPABILITY_FIRST_RANKING_V1, DOCX_EXACT_TEXT_EDIT_V1, DOCX_RUN_SPAN_REPLACE_V1, DOCX_STORY_PART_REPLACE_V1, DOCX_TEXT_EDIT_TRANSACTION_V1, PARETO_FRONTIER_UPDATE_V1, SAME_IDENTITY_SUPERVISOR_V1), unenrolled 0
+- harness-certified capabilities: 9 — registry-bound 9, pending binding only 0 (), unenrolled 0
 - **clean: False**
 
 | defect class | count | what it means for 'one model' |

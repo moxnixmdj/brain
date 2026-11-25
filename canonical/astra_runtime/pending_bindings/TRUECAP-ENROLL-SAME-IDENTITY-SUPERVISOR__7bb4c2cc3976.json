@@ -143,6 +143,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/same_identity_supervisor.json",
   "verification_fixture_sha256": "377330b010cf80c0a178d6c1dd0980e730d0c9cc924f3e5894b9fd445eaff479",
-  "verification_mission_id": "TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__70CF15942D41",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__70cf15942d41__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__7BB4C2CC3976",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__7bb4c2cc3976__VERIFY.json"
 }

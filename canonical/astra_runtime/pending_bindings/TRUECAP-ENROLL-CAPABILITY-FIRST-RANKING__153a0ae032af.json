@@ -144,6 +144,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/capability_first_ranking.json",
   "verification_fixture_sha256": "b1a89687604756b57d884d8581923630f40bac6f089dcc192a51fc466c3b8149",
-  "verification_mission_id": "TRUECAP-ENROLL-CAPABILITY-FIRST-RANKING__31DFEB206026",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-CAPABILITY-FIRST-RANKING__31dfeb206026__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-CAPABILITY-FIRST-RANKING__153A0AE032AF",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-CAPABILITY-FIRST-RANKING__153a0ae032af__VERIFY.json"
 }

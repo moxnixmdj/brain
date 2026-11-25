@@ -94,10 +94,14 @@ def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     assert r["certified_capabilities"] == 9
     # Enrollment is graded, because the tree has two legitimate states: a row the root already reads,
     # and a pending binding queued for the receipt only CI may mint. Anything else is a defect.
-    assert r["certified_registry_bound"] == ["SACCR_CREDIT_ADDON_V1"]
-    assert len(r["certified_pending_binding_only"]) == 8
-    assert set(r["certified_registry_bound"]) | set(r["certified_pending_binding_only"]) == \
-        set(json.loads(LEDGER.read_text())["rows"]), "every measurement is either bound or queued"
+    assert r["registry_rows_extended"] == 2319, "the generated rows are registered, and one is not a typo"
+    # Every measured capability now has a row the dispatch surface reads. Before the enrollment tool
+    # existed this was `["SACCR_CREDIT_ADDON_V1"]` and eight unenrolled; the count is the point, and the
+    # bite test below is what stops it from being satisfied by a loosened rule.
+    assert set(r["certified_registry_bound"]) == set(json.loads(LEDGER.read_text())["rows"]), (
+        f"bound: {r['certified_registry_bound']}"
+    )
+    assert r["certified_pending_binding_only"] == []
     assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == 0
     assert r["pending_bindings"] == len(list(PENDING.glob("*.json"))) == 16
     assert "REGISTRY_VS_SNAPSHOT_DIVERGENCE" not in r["defect_counts"], (

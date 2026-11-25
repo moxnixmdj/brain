@@ -24,6 +24,7 @@ import sys
 
 TOOL = "canonical/tools/capability_enroll_certified_v1.py"
 ROOT = pathlib.Path(__file__).resolve().parents[2]
+EXTENDED = ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
 LEDGER = ROOT / "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json"
 EDGES = ROOT / "canonical/capabilities/COMPOSITION_EDGES_V1.json"
 ADAPTERS = ROOT / "canonical/runtime/bound_capabilities"
@@ -170,8 +171,39 @@ def test_the_envelope_carries_the_result_fields_the_row_declares() -> None:
             assert str(out[expect["field"]]) != ""
 
 
+def test_the_receipt_lane_will_actually_look_at_them() -> None:
+    """Registration has one purpose: the CI lane's own discovery must find the adapters.
+
+    `capability_receipt_lane_v1.discover()` is the function that decides which capabilities get a
+    producer receipt, and a receipt is the only thing the root admits. It reads the extended inventory,
+    skips anything the bound registry already carries, and requires a module that speaks
+    `run(args, root) -> dict` -- so this test is the difference between "queued into a file nobody
+    consumes" and "reachable from the one pipeline that grants admission".
+    """
+    sys.path.insert(0, str(ROOT))
+    from canonical.runtime import capability_receipt_lane_v1 as lane
+    caps = sorted((json.loads(LEDGER.read_text(encoding="utf-8")).get("rows") or {}))
+    expected = {f"truecap.{_slug(c)}" for c in caps}
+    found = {c[0]: c for c in lane.discover(str(ROOT)) if c[0].startswith("truecap.")}
+    assert set(found) == expected, f"lane discovers {sorted(set(found))} of {len(expected)}"
+    for cid, (mine_cid, path, kind, entrypoint) in sorted(found.items()):
+        assert kind == "contract" and entrypoint == "run", f"{cid}: discovered as {kind}/{entrypoint}"
+        assert path.startswith("canonical/runtime/bound_capabilities/truecap_"), f"{cid}: {path}"
+        row = json.loads(EXTENDED.read_text(encoding="utf-8"))["capabilities"][cid]
+        assert row["status"] == "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION"
+        # The registration block must not be the thing that admits: `_receipt_admits` reads
+        # verification.receipt_path, so naming one here would be self-certification with extra steps.
+        assert "receipt_path" not in (row.get("verification") or {}), f"{cid}: verification names a receipt"
+
+
 def test_no_local_hand_granted_the_status_the_root_reads() -> None:
     """The last line: enrollment stops at the queue. Verification is someone else running it."""
+    ext = json.loads(EXTENDED.read_text(encoding="utf-8"))["capabilities"]
+    admitted_ids = set()
+    for cid, row in ext.items():
+        if cid.startswith("truecap.") and row.get("status") == "VERIFIED_BOUND_CAPABILITY":
+            admitted_ids.add(cid)
+    assert not admitted_ids, f"generated rows self-granted the curated status: {sorted(admitted_ids)}"
     for path in (LIVE, SNAPSHOT):
         rows = json.loads(path.read_text(encoding="utf-8"))["capabilities"]
         assert not [k for k in rows if k.startswith("truecap.")], (

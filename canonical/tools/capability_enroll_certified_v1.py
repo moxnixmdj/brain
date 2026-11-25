@@ -68,6 +68,15 @@ ENTRY_STATUS = "BOUND_PENDING_INDEPENDENT_VERIFICATION"
 PENDING_STATUS = "PENDING_INDEPENDENT_VERIFICATION"
 FIXTURES = ROOT / "canonical/capabilities/true/instances"
 PENDING = ROOT / "canonical/astra_runtime/pending_bindings"
+EXTENDED = ROOT / "canonical/runtime/AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json"
+EXTENDED_SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1"
+# The key set of the one extended-registry row this repo already curates (brain.module.function.invoke,
+# status AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION). Copied rather than invented: a generated row
+# that speaks a private dialect is a row no consumer reads.
+EXTENDED_KEYS = ("action_template", "adapter_module", "cost", "entrypoint", "incremental_spend_usd",
+                 "keywords", "limitations", "platforms", "provides", "requires", "result_fields",
+                 "source", "status", "verification")
+EXTENDED_STATUS = "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION"
 ADAPTER_TEMPLATE = '''#!/usr/bin/env python3
 """Bound-capability adapter for {cap} — GENERATED, thin by design.
 
@@ -136,6 +145,25 @@ def run(args: Mapping[str, Any], root=None) -> dict[str, Any]:
     envelope["certification"] = CERTIFICATION
     return envelope
 '''
+
+
+def _extended_row(want: Mapping[str, Any]) -> dict[str, Any]:
+    """The derived row, in the extended registry's dialect: the key set and the two fields that differ
+    from the queue entry (`status`, `verification`) and nothing else. Written as one function because a
+    check that re-implements the transform is a check that reports 18 drifts and teaches nothing."""
+    row = {k: want[k] for k in EXTENDED_KEYS if k in want}
+    row["status"] = EXTENDED_STATUS
+    row["verification"] = {
+        "verified": False,
+        "note": (
+            "No receipt exists for this adapter yet, and none is named here: "
+            "`live_integrated_brain_v1._receipt_admits` reads `verification.receipt_path`, and a "
+            "declaration must never be the thing that admits a capability. The lane mints the producer "
+            "receipt on a real runner; independence is the workflow's OIDC-attested reproduction. "
+            "This block is registration only."
+        ),
+    }
+    return row
 
 
 def _slug(cap: str) -> str:
@@ -354,6 +382,8 @@ def derive(*, instances: int = 3, seed: int = 0xC0FFEE,
             "fixture": fixture_rel if not fixture_error else None,
             "fixture_error": fixture_error,
         }
+        if fixture_error:
+            rows[capability_id]["status"] = "ENROLLMENT_BLOCKED__" + fixture_error.split(":")[0]
         edges[cap] = {
             "capability_id": capability_id,
             "adapter": f"canonical/runtime/bound_capabilities/{adapter}.py",
@@ -376,7 +406,11 @@ def derive(*, instances: int = 3, seed: int = 0xC0FFEE,
             fpath.parent.mkdir(parents=True, exist_ok=True)
             if not fpath.is_file() or fpath.read_text(encoding="utf-8") != fixture_text:
                 fpath.write_text(fixture_text, encoding="utf-8")
-            fp = hashlib.sha256((src + fixture_text).encode("utf-8")).hexdigest()[:12]
+            # The fingerprint names the *code and contract*, not the instance bytes: four of the nine
+            # generators embed zip-member timestamps, so hashing the fixture would rename these queue
+            # files on every regeneration and turn a stable registration into churn. What the bytes are
+            # is still recorded, inside the file, as `verification_fixture_sha256`.
+            fp = hashlib.sha256((src + spec_rel + capability_id).encode("utf-8")).hexdigest()[:12]
             mid = f"TRUECAP-ENROLL-{cap.upper().removesuffix('_V1').replace('_', '-')}"
             pending = {
                 "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
@@ -407,6 +441,29 @@ def derive(*, instances: int = 3, seed: int = 0xC0FFEE,
             for stale in sorted(PENDING.glob(f"{mid}__*.json")):
                 if stale != ppath:
                     stale.unlink()
+
+    if write:
+        # Registration, not admission. `capability_receipt_lane_v1.discover()` only mints producer
+        # receipts for rows it can read out of the extended inventory or the bound registry, and the
+        # bound registry is where a status may not be self-granted -- so the extended file is the one
+        # door a measured capability can be walked through by a tool that is not claiming to have
+        # verified it. Writing here also freezes the file: `autonomous_capability_inventory_v1.main()`
+        # refuses to rewrite an inventory containing any non-`UNVERIFIED_INVENTORY` row, which is how
+        # the tree protects a declared capability from being re-derived away.
+        doc = json.loads(EXTENDED.read_text(encoding="utf-8")) if EXTENDED.is_file() else {}
+        if doc.get("schema") != EXTENDED_SCHEMA:
+            raise RuntimeError(f"EXTENDED_REGISTRY_SCHEMA_UNEXPECTED: {doc.get('schema')!r}")
+        caps = doc.get("capabilities") or {}
+        for cid, want in sorted(rows.items()):
+            extended_row = _extended_row(want)
+            if caps.get(cid) != extended_row:
+                caps[cid] = extended_row
+        for cid in list(caps):
+            if cid.startswith("truecap.") and cid not in rows:
+                raise RuntimeError(f"STALE_TRUECAP_ROW_REFUSED_FOR_DELETION: {cid} -- remove it in "
+                                   "a reviewed change, not as a side effect of this tool")
+        doc["capabilities"] = caps
+        EXTENDED.write_text(json.dumps(doc, indent=2) + "\n", encoding="utf-8")
 
     if write:
         EDGES.write_text(json.dumps({
@@ -468,14 +525,34 @@ def check(*, instances: int = 3) -> tuple[list[str], int]:
     for cap, edge in sorted(edges.items()):
         if "error" in edge:
             problems.append(f"EDGE_UNMEASURED: {cap}: {edge['error']}")
-    # (3) no local status laundering: the registry must not carry generated truecap rows
-    live = json.loads(REGISTRY.read_text(encoding="utf-8")).get("capabilities") or {}
-    written = sorted(k for k in live if k.startswith("truecap."))
-    for k in written:
-        st = (live[k] or {}).get("status")
-        if st == "VERIFIED_BOUND_CAPABILITY":
-            problems.append(f"STATUS_IN_REGISTRY_WITHOUT_CI: {k} carries VERIFIED_BOUND_CAPABILITY, "
-                            "which only the verification workflow may grant")
+    # (3) no local status laundering, in either direction: the curated registries must carry no
+    # generated row, and the registered rows must not claim anything the workflow has not granted.
+    for path in (REGISTRY, REGISTRY.parent / "BOUND_CAPABILITY_REGISTRY_SNAPSHOT_V1.json"):
+        caps = json.loads(path.read_text(encoding="utf-8")).get("capabilities") or {}
+        for k in sorted(caps):
+            if k.startswith("truecap."):
+                problems.append(f"GENERATED_ROW_IN_CURATED_REGISTRY: {k} in {path.name}")
+    ext_doc = json.loads(EXTENDED.read_text(encoding="utf-8"))
+    ext = ext_doc.get("capabilities") or {}
+    from canonical.runtime import capability_receipt_lane_v1 as lane  # the consumer's own discovery
+    for cid, want in sorted(rows.items()):
+        got = ext.get(cid)
+        want_ext = _extended_row(want)
+        if got is None:
+            problems.append(f"NOT_REGISTERED: {cid} has no extended-registry row, so the receipt lane "
+                            "will never look at it")
+            continue
+        for field in ("status", "adapter_module", "entrypoint", "action_template", "provides",
+                      "requires", "result_fields", "incremental_spend_usd", "verification"):
+            if json.dumps(got.get(field), sort_keys=True) != json.dumps(want_ext.get(field), sort_keys=True):
+                problems.append(f"EXTENDED_DRIFT: {cid}.{field} committed="
+                                f"{json.dumps(got.get(field), sort_keys=True)[:140]}")
+        if (got.get("verification") or {}).get("receipt_path"):
+            problems.append(f"SELF_ADMISSION_ATTEMPT: {cid} declares verification.receipt_path from a "
+                            "local session, which is the one field the root reads to admit")
+        rel = str((got.get("source") or {}).get("path") or "")
+        if lane.contract_shape(str(ROOT / rel)) is None:
+            problems.append(f"LANE_CANNOT_INVOKE: {cid} -> {rel} does not speak run(args, root)")
     return problems, len(rows)
 
 

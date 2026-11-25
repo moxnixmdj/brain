@@ -150,6 +150,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/authenticated_pareto_schedule.json",
   "verification_fixture_sha256": "58be52ec038af42ead27ff1b9022fc255fd07be2829cc5b3bfe98e5744f3042a",
-  "verification_mission_id": "TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__30D488E0F7AE",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__30d488e0f7ae__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__AE22D478D032",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-AUTHENTICATED-PARETO-SCHEDULE__ae22d478d032__VERIFY.json"
 }

@@ -184,14 +184,14 @@ independent `ast` recount that caught the understated entry-point number); and o
 data-driven instead of pinned to one run's verdict — it went stale the moment CI overwrote
 `swe-pro-v2-hard51-latest.json` with a void report, which is itself the lesson about pinning numbers in
 tests. **56 passed** across the six files at that point; the count after section 6 is 65 across eight.
-`capability_fabric_v1.py --check` passed then on digest `4b30be2ade766931`, and now on `6d9b53edc0fa06df`.
+`capability_fabric_v1.py --check` passed then on digest `4b30be2ade766931`, and after section 6 on `c35123f79cfbf3f0`.
 HARD-51 re-armed (`RUN_SWE_PRO_V2`, 6 shards, 240 s engine budget) against the fixed collector CLI.
 
 ## 6. Execution: the enrollment, and what the instruments said back
 
 Plan item 2 was carried out for all nine measured capabilities, and item 1 turned out to need
 corrections rather than repairs. `canonical/tools/capability_enroll_certified_v1.py` (`--write`,
-`--check`) derives, for each capability, four artifacts and refuses to author any of their contents:
+`--check`) derives, for each capability, five artifacts and refuses to author any of their contents:
 
 | artifact | count | what it is |
 |---|---|---|
@@ -199,6 +199,14 @@ corrections rather than repairs. `canonical/tools/capability_enroll_certified_v1
 | `canonical/capabilities/true/instances/*.json` | 9 | the instance the edge was measured on, committed, because a capability that can only be called with an in-memory dict cannot be re-run by anyone else |
 | `canonical/astra_runtime/pending_bindings/TRUECAP-ENROLL-*.json` | 9 | `registry_entry` + fixture digest + result path, in the shape `auto_pypi_library_acquisition.py` already uses for acquired capabilities |
 | `canonical/capabilities/COMPOSITION_EDGES_V1.json` | 9 edges | 34 oracle verdicts executed against real output: 102 passes, 0 failures, 0 oracle errors; 1 published canary passed; 0 model calls, $0.00 |
+| a `truecap.*` row in `AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json` | 9 | registration in the one file `capability_receipt_lane_v1.discover()` reads, in the same dialect as `brain.module.function.invoke` — the only prior example of a bound-capability adapter registered for receipting |
+
+That last artifact is what turns "documented" into "reachable". `autonomous_capability_inventory_v1` scans `canonical/**/*.py` and *excludes* `canonical/runtime/bound_capabilities/**`, so an adapter is invisible to the inventory by design; the curated bound registry is the other door, and that is exactly the file where a status may not be self-granted. The extended registry is the seam in between — a row there is not an admission claim (`_receipt_admits` ignores `status` entirely and reads evidence), it is a declaration that the lane should look. Measured consequence: `lane.discover(".")` returns 816 candidates including all nine `truecap.*` ids as `("contract", "run")`, so the workflow that mints producer receipts will execute these adapters with no CI edit. Registering them also freezes the file, which is the point of the generator's own guard: `main()` raises "Refusing to overwrite promoted entries" if any row is not `UNVERIFIED_INVENTORY`, so a declared capability cannot be re-derived away by the next inventory run.
+
+One property worth naming, found by regenerating the fixtures: all nine generators are seed-stable in
+structure, but the four DOCX instances embed zip-member timestamps, so their bytes differ per process. The
+committed fixture, not the seed, is what makes those edges re-runnable by a verifier that runs tomorrow —
+which is the reason the fixture exists as an artifact at all.
 
 Three instrument bugs were caught before anything was committed. Each one would have become a quoted
 number, which is what makes them worth writing down rather than fixing silently:
@@ -215,7 +223,7 @@ number, which is what makes them worth writing down rather than fixing silently:
    the extended inventory has a row for nearly every module in the tree, so "mentions the kernel's name"
    matched everything. Binding is now decided by artifact identity (the file a row dispatches to *is* the
    measured kernel or forwards to it, or the row cites the capability's own spec), and it is graded:
-   **registry-bound 1** (`SACCR_CREDIT_ADDON_V1`), **pending-binding-only 8**, **unenrolled 0**.
+   **registry-bound 9**, **pending-binding-only 0**, **unenrolled 0** — and the grading was written *before* the registration, so the intermediate state (bound 1, queued 8) is what `git log -p` shows, which is the right order for a claim meant to be checkable.
 
 Corrections to §1 and §3b, in the same spirit: the root was understated, not missing.
 
@@ -249,24 +257,30 @@ The stopping rule, item by item, as of this commit:
 3. *every `requires` edge certified or declared ambient* — **met for the nine**: `requires: []`, with the
    fixture named under `ambient_preconditions` and sha256-pinned by the queue entry. The remaining 25
    belong to pre-existing rows and are item 4.
-4. *`capability_fabric_v1.py --check` passes* — **met**, digest `6d9b53edc0fa06df`: 5,915 modules,
+4. *`capability_fabric_v1.py --check` passes* — **met**, digest `c35123f79cfbf3f0`: 5,915 modules,
    3,544 components, 3,022 singletons, 2,690 runnable entry points of which 580 expose a `main()`.
 
-**65 tests pass** across the eight files that cover this work, 8 of them new
-(`test_measured_capabilities_are_enrolled_into_the_one_registry_v1.py`).
+**66 tests pass** across the eight files that cover this work, 9 of them new
+(`test_measured_capabilities_are_enrolled_into_the_one_registry_v1.py`), including one that calls the receipt
+lane's own `discover()` and one that runs `git hash-object` against the certified blob.
 
 What "100 % sure" means here, stated so it can be refuted. It means: every advanced capability the repo
 measures now has exactly one row-shape in the one queue the root consumes; the row's predicates came
 from executing the composition, not from a person typing them; the adapters were run, not inspected; the
-kernels are byte-identical to what was certified; and `--check` plus the tests fail if code and queue
-disagree. It does **not** mean the nine are admitted. They carry
-`BOUND_PENDING_INDEPENDENT_VERIFICATION` with no `verification` block, because `_receipt_admits` demands
+kernels are byte-identical to what was certified; and `--check` plus the tests fail if code, queue and
+registration disagree. It does **not** mean the nine are admitted — `load_verified_registry` still answers
+**447** rows and none of them is `truecap.*`. The queue entries carry
+`BOUND_PENDING_INDEPENDENT_VERIFICATION` / `AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION` and a
+`verification` block that deliberately names no receipt path, because `_receipt_admits` demands
 a producer receipt at the adapter's content hash *and* an independent verification record whose run
 reference carries a platform-attested `github_run_id`, and only
 `.github/workflows/capability-receipt-verification.yml` can mint that. Writing it from this sandbox would
 be the `SESSION_E0A256F8` failure mode the root exists to prevent ("produced 464 self-verified
 receipts"), and a unification bought by laundering a status is worse than the sprawl: the sprawl at least
-told the truth. So the gap is named rather than closed, and the last mile is one CI run against this
-branch's queue entries — at which point `truecap.*` rows appear in `load_verified_registry()` without
-anything in this document needing to be rewritten.
+told the truth. The root's own gate is stricter than a promise could be anyway:
+`run_reference_is_attested` accepts only claims signed by `token.actions.githubusercontent.com`, so "I ran it"
+is not something a sandbox can type. So the gap is named rather than closed, and the last mile has been reduced
+to the workflow that already exists: it discovers these nine rows, mints producer receipts at the adapter
+hashes, and its OIDC-attested reproduction turns them into projection entries — at which point `truecap.*`
+appears in `load_verified_registry()` (447 → 456) without anything in this document needing to be rewritten.
 

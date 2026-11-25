@@ -263,8 +263,8 @@
       ]
     ]
   },
-  "fabric_sha256_16": "6d9b53edc0fa06df",
-  "head": "1bcf5105",
+  "fabric_sha256_16": "c35123f79cfbf3f0",
+  "head": "c616f4f5",
   "model_calls": 0,
   "reachability": {
     "ENTRY_POINT": 566,

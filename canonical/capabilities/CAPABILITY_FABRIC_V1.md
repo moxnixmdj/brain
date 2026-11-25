@@ -1,6 +1,6 @@
 # Capability fabric: what is connected to what, derived
 
-digest `6d9b53edc0fa06df` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00
+digest `c35123f79cfbf3f0` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00
 
 | measure | value | what it decides |
 |---|---|---|
