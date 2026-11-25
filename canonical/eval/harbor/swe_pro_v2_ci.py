@@ -230,11 +230,15 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
                 "reward": reward,
                 "resolved": reward is not None and float(reward) >= 1.0,
                 "exception": (res.get("exception_info") or {}).get("exception_type") if isinstance(res.get("exception_info"), dict) else None,
-                "agent_status": rep.get("status"),
+                "agent_status": rep.get("status") or "NO_AGENT_REPORT",
                 "engine_status": rep.get("engine_result_status"),
                 "model_calls": rep.get("model_calls", 0),
                 "cost_usd": rep.get("cost_usd", 0.0),
                 "n_files_changed": n_changed,
+                "edits_applied_by": rep.get("edits_applied_by"),
+                "tree_changed": rep.get("tree_changed"),
+                "store_saved": rep.get("store_saved"),
+                "engine_notes": rep.get("notes") or [],
                 "seconds": secs,
                 "store_ablated": rep.get("store_ablated"),
                 "trial_dir": td.name,
@@ -257,8 +261,22 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
         "cost_usd_total": round(sum(float(v.get("cost_usd") or 0.0) for v in ordered.values()), 4),
         "wall_seconds_total": round(sum(secs), 2) if secs else None,
         "wall_seconds_mean": round(sum(secs) / len(secs), 2) if secs else None,
+        "engine_statuses": status_tally(ordered),
         "tasks": ordered,
     }
+
+
+def status_tally(ordered: dict[str, Any]) -> dict[str, int]:
+    """How the agent behaved, independent of whether it passed.
+
+    0/N reads differently if the engine never acted (NO_EDITS / UPLOAD_BLOCKED /
+    NO_AGENT_REPORT) than if it edited every tree and the hidden tests disagreed.
+    """
+    tally: dict[str, int] = {}
+    for v in ordered.values():
+        key = str(v.get("agent_status") or "UNKNOWN")
+        tally[key] = tally.get(key, 0) + 1
+    return tally
 
 
 def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
@@ -297,6 +315,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
         "cost_usd_total": round(sum(float(v.get("cost_usd") or 0.0) for v in ordered.values()), 4),
         "wall_seconds_total": round(sum(secs), 2) if secs else None,
         "wall_seconds_mean": round(sum(secs) / len(secs), 2) if secs else None,
+        "engine_statuses": status_tally(ordered),
         "tasks": ordered,
     }
 
@@ -379,6 +398,14 @@ def to_markdown(
             f"| `{tid[:56]}` | {t.get('reward')} | {'yes' if t.get('resolved') else 'no'} "
             f"| {t.get('agent_status')} | {t.get('engine_status')} | {t.get('n_files_changed')} |"
         )
+    tally = (causal.get("engine_statuses") or {}) if causal else {}
+    if tally:
+        lines += [
+            "",
+            "What the engine did across the causal arm (behaviour, not a score): "
+            + ", ".join(f"`{k}`×{v}" for k, v in sorted(tally.items()))
+            + ". Resolve rate is decided only by each task's own verifier.",
+        ]
     lines.append("")
     return lines
 

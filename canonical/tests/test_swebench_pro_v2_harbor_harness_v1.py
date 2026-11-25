@@ -370,6 +370,53 @@ def test_upload_falls_back_to_root_exec_and_reports_it() -> None:
         AG.run_engine_on_tree = original  # type: ignore[assignment]
 
 
+def test_collect_surfaces_the_agents_own_report_without_treating_it_as_evidence() -> None:
+    """A 0/N table must be distinguishable from 'the agent never acted'."""
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        trial = root / "jobs" / "j" / "t0__a"
+        (trial / "agent").mkdir(parents=True)
+        (trial / "result.json").write_text(
+            json.dumps({"task_name": "t0", "verifier_result": {"rewards": {"reward": 0.0}}}),
+            encoding="utf-8",
+        )
+        (trial / "agent" / "causal_engine_report.json").write_text(
+            json.dumps(
+                {
+                    "status": "EDITS_UPLOADED",
+                    "engine_result_status": "NO_DEFECT_EVIDENCE",
+                    "edits_applied_by": "tree-mutation",
+                    "tree_changed": True,
+                    "store_saved": True,
+                    "notes": ["no patch produced"],
+                    "model_calls": 0,
+                    "cost_usd": 0.0,
+                    "wall_seconds": 3.5,
+                    "changed": {"modified": ["a.py"], "added": [], "removed": []},
+                }
+            ),
+            encoding="utf-8",
+        )
+        rep = CI.collect([root / "jobs"], arm="causal", expected_ids=["t0"])
+        row = rep["tasks"]["t0"]
+        assert row["agent_status"] == "EDITS_UPLOADED"
+        assert row["engine_status"] == "NO_DEFECT_EVIDENCE"
+        assert row["edits_applied_by"] == "tree-mutation"
+        assert row["n_files_changed"] == 1
+        assert row["resolved"] is False  # the agent's own report never counts as a fix
+        assert rep["engine_statuses"] == {"EDITS_UPLOADED": 1}
+        merged = CI.merge_arm_reports([rep])
+        assert merged["engine_statuses"] == {"EDITS_UPLOADED": 1}
+        md = "\n".join(CI.to_markdown({"causal": merged}, benchmark="B", commit="c"))
+        assert "`EDITS_UPLOADED`×1" in md
+
+        # no agent report at all must be visible as such, not blank
+        (trial / "agent" / "causal_engine_report.json").unlink()
+        rep2 = CI.collect([root / "jobs"], arm="nop", expected_ids=["t0"])
+        assert rep2["tasks"]["t0"]["agent_status"] == "NO_AGENT_REPORT"
+
+
+
 def test_collect_finds_trials_regardless_of_nesting_depth() -> None:
     """A harness that ran trials must not be reported as 'no data' because of a path guess."""
     with tempfile.TemporaryDirectory() as tmp:
