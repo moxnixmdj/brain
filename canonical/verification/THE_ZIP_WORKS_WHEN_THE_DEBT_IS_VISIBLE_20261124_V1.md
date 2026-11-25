@@ -76,3 +76,56 @@ That last clause is the same law that has governed every null in this project â€
 ablations. A green suite does not constrain what it never runs. Here it is finally
 demonstrated in the *positive* direction: make the suite run it, and one mechanical hop
 repairs the whole thing.
+
+## Second case: two importers, one hop, and the per-symbol correction
+
+Moving `_normalize_header_key` had all its call sites in a single file, so the first
+success did not test the interesting case. `to_str` does:
+
+```
+defined      httpx/_utils.py:115          executed 386 times
+imported by  httpx/_auth.py:13            "from ._utils import to_bytes, to_str, unquote"
+             httpx/_models.py:49          "from ._utils import to_bytes_or_str, to_str"
+```
+
+**Two importers, each on a line that also imports symbols which must NOT move.**
+
+First run of the loop against this: eight hops, no convergence, thrashing between
+`to_str -> ._strconv` and `to_bytes_or_str -> ._utils`. The cause was a single mistake in
+my rewriter, and it is worth stating because it is the kind a real patcher would make:
+
+> a line-level move drags every symbol on the line. Repairing `to_str` also relocated
+> `to_bytes_or_str`, which never moved, so the next hop relocated it back.
+
+The repair must be **per symbol**, not per import statement. After rewriting at symbol
+granularity:
+
+| stage | result |
+|---|---|
+| after the blind move | `ImportError: cannot import name 'to_str' from 'httpx._utils'` |
+| hop 1 | `to_str -> ._strconv`, **2 files** |
+| hop 2 | **28 failed, 1386 passed, 1 skipped** â€” baseline exactly |
+
+Final state, verified by reading both files:
+
+```
+_auth.py:13    from ._utils import to_bytes, unquote      <- unchanged symbols stay
+               from ._strconv import to_str               <- only the moved one moves
+_models.py:49  from ._utils import to_bytes_or_str        <- unchanged symbols stay
+               from ._strconv import to_str               <- only the moved one moves
+```
+
+That is the correct minimal diff, produced without knowing anything about the fix.
+
+## The three rules the loop needed, all learned from failures
+
+1. **Target selection**: move the symbol with the most *executed* call sites. Otherwise
+   the debt is invisible (proven: the human commit moved three functions that execute
+   zero times).
+2. **Destination**: the file holding the dangling reference, never the file that defines
+   the symbol (otherwise: self-import loop, observed over 8 hops).
+3. **Granularity**: per symbol, not per import statement (otherwise: two-symbol thrash,
+   observed over 8 hops).
+
+Each of the three was found by watching the loop fail in a specific, diagnosable way. None
+was guessed.

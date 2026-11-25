@@ -103,18 +103,44 @@ def main(argv: list[str] | None = None) -> int:
             module = import_path(tree, home)
             old = origin.split(".", 1)[1] if "." in origin else origin
             touched = 0
-            pattern = re.compile(rf"from \.{re.escape(old)} import \(([^)]*)\)", re.S)
-            single = re.compile(rf"from \.{re.escape(old)} import ([^(\n]*\b{name}\b[^\n]*)")
+            # Per-SYMBOL rewrite. Moving the whole import line drags symbols that never
+            # moved along with it, and the next hop then moves them back -- an observed
+            # two-symbol thrash: "from ._utils import to_bytes_or_str, to_str" needs ONE
+            # of the two relocated, and a line-level move gets it wrong every hop.
+            single = re.compile(
+                rf"^from \.{re.escape(old)} import ([^\n(]+)$", re.M)
+            block = re.compile(
+                rf"^from \.{re.escape(old)} import \(([^)]*)\)", re.M | re.S)
+
+            def split_single(match: re.Match[str]) -> str:
+                names = [part.strip() for part in match.group(1).split(",") if part.strip()]
+                if name not in names:
+                    return match.group(0)
+                stay = [n for n in names if n != name]
+                lines = []
+                if stay:
+                    lines.append(f"from .{old} import {', '.join(stay)}")
+                lines.append(f"from .{module} import {name}")
+                return "\n".join(lines)
+
+            def split_block(match: re.Match[str]) -> str:
+                names = [part.strip() for part in re.split(r"[,\n]", match.group(1))
+                         if part.strip()]
+                if name not in names:
+                    return match.group(0)
+                stay = [n for n in names if n != name]
+                lines = []
+                if stay:
+                    lines.append(f"from .{old} import {', '.join(stay)}")
+                lines.append(f"from .{module} import {name}")
+                return "\n".join(lines)
+
             for path in tree.rglob("*.py"):
                 if any(part in path.parts for part in (".git", "build")):
                     continue
                 original = path.read_text(errors="replace")
-                updated = pattern.sub(
-                    lambda m: (f"from .{module} import ({m.group(1)})"
-                               if re.search(rf"\b{name}\b", m.group(1)) else m.group(0)),
-                    original)
-                updated = single.sub(lambda m: f"from .{module} import {m.group(1)}",
-                                     updated)
+                updated = block.sub(split_block, original)
+                updated = single.sub(split_single, updated)
                 if updated != original:
                     path.write_text(updated)
                     touched += 1
