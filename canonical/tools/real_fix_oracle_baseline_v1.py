@@ -479,6 +479,50 @@ ARMS: dict[str, Callable[..., list[tuple[str, str]]]] = {
 }
 
 
+# --------------------------------------------------------------------------- #
+# self-judging arms: they run the real test themselves, so the harness does not
+# apply a candidate -- it only records what they report and re-checks the claim.
+# --------------------------------------------------------------------------- #
+
+def witness_candidates(before: str, repo_path: pathlib.Path, *,
+                      oracle: Oracle | None = None, task: Mapping[str, Any] | None = None,
+                      budget: int = 12) -> list[tuple[str, str]]:
+    """`witness_inversion_v1` as a pure PROPOSER.
+
+    It already implements the idea: the assertion names a required value, the
+    failing frame carries the concrete inputs, so the expression at that site is
+    inverted by evaluation over an alphabet read from the frame.  This arm adds
+    nothing to it.  It points it at the real oracle, uses the task's own
+    virtualenv instead of this interpreter, and hands the proposals back so the
+    HARNESS judges them -- a self-report is not a result.
+    """
+    if oracle is None or task is None:
+        return []
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[1] / "swe_kernel"))
+    try:
+        import witness_inversion_v1 as W
+    except Exception:
+        return []
+    node = task["failed_nodes"][0]
+    test_file, _, test_name = node.partition("::")
+    report = W.capture(oracle.path, [oracle.path / task["source"]],
+                       oracle.path / test_file, test_name, python=oracle.py)
+    if report.get("outcome") != "WITNESSED":
+        return []
+    out: list[tuple[str, str]] = []
+    for site in report.get("sites", [])[:4]:
+        for expression in W.invert(site)[:budget]:
+            rebuilt = W.apply_expression(before, site, expression)
+            if rebuilt and rebuilt != before:
+                out.append((f"witness:{site.get('function')}:{expression}", rebuilt))
+            if len(out) >= 96:
+                return out
+    return out
+
+
+ARMS["witness"] = witness_candidates
+
+
 def apply_candidate(before: str, kind: str, payload: str,
                     repo_path: pathlib.Path | None = None) -> str:
     """Materialise a candidate edit.  Unknown kinds are refused, not guessed."""
@@ -607,8 +651,12 @@ def run(corpus: pathlib.Path, workdir: pathlib.Path, *, arm: str | None,
         t0 = time.perf_counter()
         if gen is not None:
             try:
-                cands = (gen(t["before"], o.path, failure_output=first["output"])
-                         if arm == "local" else gen(t["before"], o.path))
+                if arm == "local":
+                    cands = gen(t["before"], o.path, failure_output=first["output"])
+                elif arm == "witness":
+                    cands = gen(t["before"], o.path, oracle=o, task=t)
+                else:
+                    cands = gen(t["before"], o.path)
             except Exception:
                 cands = []
             for kind, payload in cands:
@@ -616,7 +664,8 @@ def run(corpus: pathlib.Path, workdir: pathlib.Path, *, arm: str | None,
                     break
                 tried += 1
                 o.write_source(t["source"], t["before"])
-                patched = apply_candidate(t["before"], kind, payload, repo_path=o.path)
+                patched = (payload if kind.startswith("witness:")
+                           else apply_candidate(t["before"], kind, payload, repo_path=o.path))
                 if arm != "local":
                     if patched == t["before"]:
                         continue
@@ -674,7 +723,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--corpus", default=str(CORPUS))
     ap.add_argument("--workdir", default=str(DEFAULT_WORKDIR))
-    ap.add_argument("--arm", default=None, choices=[None, "blind", "local"])
+    ap.add_argument("--arm", default=None,
+                    choices=[None, "blind", "local", "witness"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--offset", type=int, default=0,
                     help="skip the first N corpus tasks (sliced runs)")
