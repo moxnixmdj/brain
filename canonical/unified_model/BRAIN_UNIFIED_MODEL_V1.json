@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 729,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7392,
+  "research_index_records": 7393,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 557,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4ac64683c49e759bf902ab7b13453530bca7be3a33f65f326d4aec288d75c48e"
+  "value": "8ee9c7f8a6fbe02b74a0841a1e36b23d47cd652efbd1441f1ce8dcf9944a4d57"
  },
  "engines": [
   {
@@ -265126,6 +265126,31 @@
     "reachability_from_one_entry_63_to_66__zero_input_capabilities_3_to_0": 1,
     "reachable": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "MAKE_THE_SOLVER_ADDRESSABLE_BY_ITS_OWN_MODEL_20261124_V40",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/MAKE_THE_SOLVER_ADDRESSABLE_BY_ITS_OWN_MODEL_20261124_V40.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MAKE_THE_SOLVER_ADDRESSABLE_BY_ITS_OWN_MODEL_20261124_V40.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "d8017d25763e316e6740da2bbade6d472f971194d044f09d7b22b7c43d37add7",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "addressable": 1,
+    "declare_the_source_roots_once_and_scan_all_of_them": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "make": 1,
+    "make_the_solver_addressable_by_its_own_model_20261124_v40": 1,
+    "model": 1,
+    "own": 1,
+    "solver": 1,
+    "the_source_scan_and_its_partition_test_were_hard_coded_to_canonical_runtime_so_canonical_swe_kernel_was_outside_the_domain_and_the_model_could_not_locate_the_code_that_implements_its_own_solver": 1,
+    "the_unified_model_can_now_answer_where_its_own_solver_is__measured_from_0_of_8_to_8_of_8_at_rank_one__and_the_round_also_records_that_this_changed_the_solve_rate_not_at_all_from_0_to_0_on_a_genuine_fail_to_pass_task_whose_failure_is_one_attribute_error": 1,
+    "v40": 1
    }
   },
   {
