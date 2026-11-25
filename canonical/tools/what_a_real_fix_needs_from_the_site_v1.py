@@ -433,6 +433,16 @@ def change_points(old: ast.AST, new: ast.AST) -> list[tuple[tuple, ast.AST, ast.
     differing = [p for p in common
                  if ast.dump(old_paths[p], annotate_fields=False)
                  != ast.dump(new_paths[p], annotate_fields=False)]
+    list_changed = {
+        p for p in differing
+        if isinstance(old_paths[p], ast.expr) and isinstance(new_paths[p], ast.expr)
+        and any(isinstance(getattr(old_paths[p], f, None), list)
+                and isinstance(getattr(new_paths[p], f, None), list)
+                and len(getattr(old_paths[p], f)) != len(getattr(new_paths[p], f))
+                for f, _ in ast.iter_fields(old_paths[p]))
+    }
+    differing = [p for p in differing
+                 if not any(len(p) > len(lp) and p[:len(lp)] == lp for lp in list_changed)]
     picked: list[tuple] = []
     for path in sorted(differing, key=len, reverse=True):
         # Skip anything nested with an already-picked change point, in EITHER direction: an

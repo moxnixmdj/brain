@@ -1,0 +1,442 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "blind_evaluation": {
+  "additional_unseen_commits": {
+   "environment_blocked": 2,
+   "graded": 7,
+   "rows": [
+    {
+     "candidates_evaluated": 24,
+     "commit": "f67c2bb",
+     "environment_blocked": false,
+     "reason": "help-text abbreviation rules; 8 L3 refutations recorded",
+     "repo": "click"
+    },
+    {
+     "candidates_evaluated": 24,
+     "commit": "50585e0",
+     "environment_blocked": false,
+     "reason": "unregister must drop the distribution record: new bookkeeping statement",
+     "repo": "pluggy"
+    },
+    {
+     "candidates_evaluated": 24,
+     "commit": "8051a4d",
+     "environment_blocked": false,
+     "reason": "register must reject None: a new precondition, not an expression",
+     "repo": "pluggy"
+    },
+    {
+     "candidates_evaluated": 24,
+     "commit": "c629214",
+     "environment_blocked": false,
+     "reason": "__eq__/__hash__ overflow above sys.maxsize: new guard + new body",
+     "repo": "more-itertools"
+    },
+    {
+     "candidates_evaluated": 18,
+     "commit": "6d9f244",
+     "environment_blocked": false,
+     "reason": "heap overflow inside cJSON_Utils.c; ASan aborts before any expression can be blamed",
+     "repo": "cJSON"
+    },
+    {
+     "candidates_evaluated": 24,
+     "commit": "cf2cdf0",
+     "environment_blocked": true,
+     "reason": "cannot be graded here: tests import 'pretend', which is not installed",
+     "repo": "packaging"
+    },
+    {
+     "candidates_evaluated": 24,
+     "commit": "6c4c680f",
+     "environment_blocked": true,
+     "reason": "cannot be graded here: test needs werkzeug.exceptions.default_exceptions, absent at parent",
+     "repo": "werkzeug"
+    }
+   ],
+   "verified": 0
+  },
+  "open_tasks_v1_sample": [
+   {
+    "candidates_evaluated": 26,
+    "commit": "af8181c",
+    "reason": "rejecting an empty HMAC key needs a new guard, not a value",
+    "repo": "pyjwt"
+   },
+   {
+    "candidates_evaluated": 40,
+    "commit": "c53d373",
+    "reason": "prompt/abort interaction across several statements",
+    "repo": "click"
+   },
+   {
+    "candidates_evaluated": 19,
+    "commit": "fc518e4",
+    "reason": "interrupt handling during abort reporting; 2 L3 refutations recorded",
+    "repo": "click"
+   },
+   {
+    "candidates_evaluated": 7,
+    "commit": "9d1b229086",
+    "reason": "allocator-guard memory safety under ASan; needs a statement-level fix",
+    "repo": "cJSON"
+   }
+  ],
+  "open_v1_sample": 4,
+  "protocol": "single-parent commits from 8 external repos; ONLY test files are copied from the fix commit; no source diff, patch, commit message, or issue text is read; a repair counts only when the project's own suite passes on a clean /dev/shm clone with the answer key absent",
+  "regressions_introduced": 0,
+  "resolve_rate_v1_sample": 0.6923,
+  "sample_v1": 13,
+  "stage_a_before_frame_provenance": {
+   "identical_to_v1": true,
+   "resolve_rate": 0.6154,
+   "verified": 8
+  },
+  "stage_b_after_frame_provenance": {
+   "flipped": [
+    "click@05f6fd0"
+   ],
+   "resolve_rate": 0.6923,
+   "verified": 9
+  },
+  "stage_c_after_spec_contracts": {
+   "flipped": [],
+   "note": "all 9 re-verified with the new pass in place",
+   "resolve_rate": 0.6923,
+   "verified": 9
+  },
+  "stage_d_after_composed_spec_contracts": {
+   "after": {
+    "pluggy@8051a4d": "VERIFIED__SPEC_CONTRACT_GUARD (1 candidate, 4.87 s)",
+    "resolve_rate_graded": "10/13 = 76.92%"
+   },
+   "before": {
+    "pluggy@8051a4d": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (24 candidates, 19.8 s)",
+    "resolve_rate_graded": "9/13"
+   },
+   "regression_batch": "the 9 previously verified commits re-run under the new ordering: 9/9 still REPAIRED, 0 regressions",
+   "two_failed_attempts_recorded": [
+    "proposals ordered by dict insertion and truncated: 16 candidates all came from a test that did not need them, the real contract never ran",
+    "predicate guard ordered before the bare nullity conjunction: `unregister()` then raised ValueError('not registered') instead of the contract's TypeError('one of name or plugin')",
+    "the spec pass was allowed to spend the whole candidate budget: pyjwt@5fde08a regressed from REPAIRED to OPEN until the pass was capped at min(8, max_candidates//4)"
+   ],
+   "what_changed": "Contracts stated by the same test are enforced as ONE patch (itertools.product over the scope's guard families), predicates are mined from the repository's own one-argument methods and ranked by token overlap with the contract's expected message, each predicate is also offered conditioned on another parameter being absent, and the guard that calls nothing is ordered before any guard that calls a sibling."
+  },
+  "stage_e_exception_containment_attempt": {
+   "commit": "click@fc518e4",
+   "disposition": "mechanism REVERTED (0 containment lines remain); recorded here rather than kept unearned",
+   "families_built_and_measured": [
+    "whole-body try/except containment (pass and return None variants)",
+    "single-statement granularity lattice, deepest-and-latest first",
+    "single-statement end-first ordering (exit paths last in the body)",
+    "stackable Pareto composition of containments (keep on strict shrink, stack, rebuild)"
+   ],
+   "lesson": "bind by traceback frame (file:line) instead of function name",
+   "measurement": "every family: 5 failed, 3 passed on tests/test_abort_interrupt.py - unchanged from baseline; patched statements proved not to be on the raising path",
+   "outcome": "OPEN"
+  },
+  "stage_f_frame_bound_containment": {
+   "earned_a_blind_oss_commit": false,
+   "elicitation_attempt": {
+    "result": "no change (click@fc518e4 OPEN, 27 candidates); removed",
+    "what": "re-run each failing node with --tb=long to elicit the missing frame",
+    "why": "the interrupt is raised inside the test's own sys.exit replacement, so no project frame names it; and the test's second assertion `assert codes == [0, 0]` demands a RETRY, not containment"
+   },
+   "measured": {
+    "click@f67c2bb": "OPEN",
+    "click@fc518e4": "5 -> 2 -> 1 failures (shrink, no repair)",
+    "pyjwt@af8181c": "OPEN"
+   },
+   "outcome": "OPEN on every commit tried"
+  },
+  "stage_g_postcondition_state_consistency": {
+   "after": {
+    "pluggy@50585e0": "VERIFIED__STATE_CONSISTENCY (25 candidates, 22.4 s, suite 220 passed)",
+    "resolve_rate_graded": "11/13 = 84.62%"
+   },
+   "before": {
+    "pluggy@50585e0": "OPEN (24 candidates, 41.4 s)",
+    "resolve_rate_graded": "10/13"
+   },
+   "failed_attempts_recorded": [
+    "purge appended at end_line (after `return`) = dead code: measured `1 failed, 77 passed`, unchanged",
+    "miner required a variable argument and so missed `unregister(name='a')`: contracts came back empty"
+   ],
+   "what_changed": "a failing `assert getter() == [...]` after a mutator is mined as a postcondition contract: the getter's own `return` names the container, the preceding call names the mutator, and the purge is emitted (per parameter, both tuple positions) before the mutator's own `return`"
+  },
+  "total_graded": 20,
+  "total_verified": 11,
+  "verified_tasks": [
+   {
+    "candidates_evaluated": 5,
+    "commit": "cca32949f1",
+    "engine_ms": 11409.84,
+    "mechanism": "UIR_DESCRIPTOR_NONNULL_GETATTR",
+    "repo": "more-itertools"
+   },
+   {
+    "candidates_evaluated": 30,
+    "commit": "3b0378dd66",
+    "engine_ms": 23785.44,
+    "mechanism": "UIR_DEFENSIVE_SEQ_COPY",
+    "repo": "attrs"
+   },
+   {
+    "candidates_evaluated": 15,
+    "commit": "884437ae",
+    "engine_ms": 27260.28,
+    "mechanism": "UIR_BOOL_CONJUNCT_TO_IMPLIES",
+    "repo": "werkzeug"
+   },
+   {
+    "candidates_evaluated": 1,
+    "commit": "051fd663",
+    "engine_ms": 24610.73,
+    "mechanism": "UIR_STR_TRAILING_DELIM_STRIP",
+    "repo": "werkzeug"
+   },
+   {
+    "candidates_evaluated": 2,
+    "commit": "5fde08a",
+    "engine_ms": 21581.39,
+    "mechanism": "UIR_EXCEPT_LATTICE_JOIN",
+    "repo": "pyjwt"
+   },
+   {
+    "candidates_evaluated": 6,
+    "commit": "793a302",
+    "engine_ms": 25187.2,
+    "mechanism": "VERIFIED__MULTI_SITE_COMPOSITIONAL_CEGIS (3x UIR_EXCEPT_LATTICE_JOIN)",
+    "repo": "pyjwt"
+   },
+   {
+    "candidates_evaluated": 2,
+    "commit": "b2890c8d76",
+    "engine_ms": 5516.63,
+    "mechanism": "CEGIS_NULL_PTR_PRECONDITION",
+    "repo": "cJSON"
+   },
+   {
+    "candidates_evaluated": 5,
+    "commit": "be749d7efa",
+    "engine_ms": 9579.85,
+    "mechanism": "CEGIS_CALL_ARG_NULL_SHORTCIRCUIT_OR",
+    "repo": "cJSON"
+   },
+   {
+    "candidates_evaluated": 1,
+    "commit": "05f6fd0",
+    "engine_ms": 10883.73,
+    "mechanism": "NEXUS_FRAME_SUBSTITUTED_FALLBACK",
+    "repo": "click"
+   },
+   {
+    "candidates_evaluated": 1,
+    "commit": "8051a4d",
+    "engine_ms": 4870.0,
+    "mechanism": "SPEC_CONTRACT_SET[test_register]:SPEC_CONTRACT_GUARD[name is None and not self.is_registered(plugin)]+SPEC_CONTRACT_GUARD[plugin is None and name is None]",
+    "repo": "pluggy"
+   },
+   {
+    "candidates_evaluated": 25,
+    "commit": "50585e0",
+    "engine_ms": 21317.98,
+    "mechanism": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
+    "repo": "pluggy"
+   }
+  ],
+  "verified_v1_sample": 9
+ },
+ "branch": "arena/1412289d-brain",
+ "environment": {
+  "hypothesis": "installed",
+  "markupsafe": "installed",
+  "note": "fresh sandbox this round; the ten verified commits were re-measured here, not carried over",
+  "pytest": "9.2.0",
+  "python": "3.11.2",
+  "tree_sitter": "0.20.4",
+  "tree_sitter_languages": "1.10.2",
+  "z3_solver": "installed"
+ },
+ "generated_at_utc": "2026-11-25T02:04:44Z",
+ "honest_verdict": "10 of 13 graded unseen OSS commits repaired and verified against their own suites (76.92%), 0 regressions, 2 env-blocked, K3=0 runtime model calls. The new capability is real but narrow: it resolves commits whose fix is restated in the project's own test as `pytest.raises` contracts. Ten graded commits still fail, no public benchmark container score was produced here, and nothing in this receipt was obtained by gating, mocking, or reading a human diff.",
+ "incremental_spend_usd": 0.0,
+ "integrity_notes": [
+  "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
+ ],
+ "modules": {
+  "canonical/runtime/causal_computer_use_agent_v1.py": {
+   "lines": 578,
+   "sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845"
+  },
+  "canonical/swe_kernel/causal_nexus_v1.py": {
+   "lines": 1547,
+   "sha256": "ca055b6cf4b5d226d4bb63ea89560505234ceceef0be944458692d488e01dc9d"
+  },
+  "canonical/swe_kernel/executable_mental_model_v1.py": {
+   "lines": 1849,
+   "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
+  },
+  "canonical/swe_kernel/semantic_causal_engine_v1.py": {
+   "bytes": 208516,
+   "lines": 4412,
+   "sha256": "7e579c1dcbcf0fcec79929c700ed96328c5e5154044463cf5597e19bd1f39778"
+  },
+  "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
+   "bytes": 21011,
+   "lines": 318,
+   "sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
+  },
+  "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
+   "lines": 932,
+   "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
+  }
+ },
+ "new_mechanisms": [
+  {
+   "blind_diagnosis": "pluggy@8051a4d: the correct guard WAS synthesized and applied, and the suite still failed because that commit also requires a type-level contract on the same method (`pm.register(42, name='abc')` must raise ValueError). One commit, two contracts; the pass currently stops after one.",
+   "earned_a_blind_oss_commit": false,
+   "evidence": "fixture end to end: status VERIFIED__SPEC_CONTRACT_GUARD, guard `if plugin is None: raise TypeError(\"plugin must not be None\")` inserted into the owning method; unit: both contract forms mined",
+   "id": "SPEC_CONTRACT_GUARD",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "verified_here": true,
+   "what": "mine the test's own `pytest.raises(Exc, match=...)` plus the literal it calls with, bind the callee to a project function through the CPG by name and arity, and emit the one-line guard-and-raise that enforces it; refuse non-boundary literals, ambiguous callees, and any guard the project's own suite does not accept"
+  },
+  {
+   "earned_a_blind_oss_commit": true,
+   "evidence": "click@05f6fd0 repaired blind in 10.88 s with 1 candidate, yielding (None or (self.make_metavar(ctx), '')) -- no 'SRC' literal in the patch",
+   "id": "FRAME_SUBSTITUTED_FALLBACK",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "record every in-scope expression that produced a primitive value (attributes, zero/one-arg public methods over primitive and object locals, primitive method chains); rebuild the wanted value out of those expressions, preferring names the repository itself defines"
+  },
+  {
+   "earned_a_blind_oss_commit": true,
+   "evidence": "4/4 obligation forms recovered; duplicate-rendering support inflation found and closed",
+   "id": "EXPECTED_VALUE_ABDUCTION",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "parse (actual, expected) literal pairs published by the failing assertion; dedupe renderings of the same assertion so one test cannot corroborate itself"
+  },
+  {
+   "earned_a_blind_oss_commit": true,
+   "evidence": "click@05f6fd0 proved in one probe; fixture case closes in 4.58 s with 1 candidate",
+   "id": "SINGLE_SITE_COUNTERFACTUAL_BLAME",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "force the expected value at one suspect site in an isolated CoW clone; a site that closes every failing test is a proven nexus, not a ranked suspicion"
+  },
+  {
+   "earned_a_blind_oss_commit": true,
+   "evidence": "('SRC','') refused as data; one-character strings demoted to data; () admitted",
+   "id": "TEST_VALUE_LAUNDERING_GATE",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "a forced value may seed a repair only if it is a canonical default, demanded by >=2 distinct test nodes, or fully reconstructible from the site's own frame"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "b'\\x04'->b'^D' round-trips; identity and conflicting pairs refused",
+   "id": "BIDIRECTIONAL_LENS_FST",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "fit a minimal consistent transliteration or token table; compile to translate/replace; emit the inverse or report non-invertibility"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "learns a 2-statement guard-to-fallback fix, replays on renamed identifiers, refuses a changed guard body; click@05f6fd0 also crystallized 1 morphism",
+   "id": "TREE_REWRITE_MORPHISM_L2",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "statement-level Plotkin anti-unification with identifier alpha-abstraction and two-sided holes; JSON store with provenance, staleness probe and O(1) delete"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "unit: blocks recorded shape, ignores other tags, O(1) removal; live runs recorded 19 refutations across 5 commits (click@f67c2bb: 8)",
+   "id": "NEGATIVE_SPACE_INVARIANT_L3",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "not_yet_measured": "the candidate saving from pruning inside a single run",
+   "verified_here": true,
+   "what": "record the structural shape of every refuted candidate as a pre-compilation filter"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "predicted fallback accepted; silent constant replacement rejected",
+   "id": "BOUNDARY_INVARIANCE_FUZZ",
+   "module": "canonical/swe_kernel/causal_nexus_v1.py",
+   "verified_here": true,
+   "what": "execute before/after over a 40-value boundary corpus; every divergence must be predicted"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "chain with a dead-end branch yields 3 slices; a diamond yields none",
+   "id": "CUT_VERTEX_SUBGOAL_SLICING",
+   "module": "canonical/swe_kernel/executable_mental_model_v1.py",
+   "verified_here": true,
+   "what": "Tarjan articulation points over the bounded marking graph; slice plans at tokens every path needs"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "gzip goal reached, prediction error 0, bystander byte-identical, runtime_model_calls 0",
+   "id": "SEVEN_STEP_LOOP",
+   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+   "verified_here": true,
+   "what": "goal -> scan -> recall -> acquire -> predict/act -> verify -> compress with per-step receipts"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "goal-directed 1 probe / 11.9 ms vs broad ingest 3 probes / 23.7 ms",
+   "id": "GOAL_DIRECTED_VS_BROAD_INGEST",
+   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+   "verified_here": true,
+   "what": "same goal, identical fresh workspaces, both acquisition arms measured"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "2-episode run: 1 solved, 1 honestly open",
+   "id": "OFFLINE_SELF_PLAY",
+   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+   "verified_here": true,
+   "what": "run unsolved failures through the solver, crystallize verified fixes, refute near misses"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "click@fc518e4: 5 failed -> 2 (single frame _compat.py:542) -> 1 (stacked with core.py:1569); no further frame shrinks; 4 commits measured (click@fc518e4, click@f67c2bb, pyjwt@af8181c, plus 2 regressions), 0 repairs",
+   "id": "FRAME_CONTAINMENT",
+   "known_blind_spot": "the residual click failure raises at core.py:1627, a line that appears in NO traceback pytest printed - the oracle is only as complete as the report",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "placement": "last-resort pass, after every other pass, so it cannot displace a verified repair",
+   "verified_here": true,
+   "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "pyjwt@af8181c: 2 failures -> 1 (411 passed, 1 failed) with the guard the engine now synthesizes; a 64-proposal sweep (193 s) finds nothing green, so the commit stays OPEN",
+   "id": "CONTRACT_BINDING_BY_TEST_EVIDENCE",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "verified_here": true,
+   "what": "receiver class inferred from the test's own `algo = Algo(...)` assignment; guard family for a boundary value nested in a container literal (`obj.get('k') == ''`); exception raised under the name the target module actually binds"
+  },
+  {
+   "disposition": "REMOVED after measurement: zero candidates produced on pyjwt@af8181c, cJSON@6d9f244, pluggy@50585e0 and click@f67c2bb; zero repairs",
+   "earned_a_blind_oss_commit": false,
+   "id": "RAISING_SITE_SUBSTITUTION",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "verified_here": true,
+   "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
+  }
+ ],
+ "next_bottleneck": "Assertion-literal expectations. The two remaining sample opens are about what a function must RETURN, not raise or delete: click@c53d373/click@fc518e4 assert exit codes and call counts (`assert codes == [0, 0]`). No family reads the assertion's literal expectation and synthesizes a return/retry accordingly.",
+ "runtime_model_calls": 0,
+ "runtime_network_calls": 0,
+ "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
+ "stored_world_facts_in_weights": 0,
+ "tests": {
+  "causal_suite": "13 passed in 63.09s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+  "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
+  "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
+  "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
+ }
+}
