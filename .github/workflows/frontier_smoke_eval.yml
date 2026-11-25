@@ -3,12 +3,15 @@ name: Frontier Pro V2 smoke evaluation
 # Manual only. GitHub exposes workflow_dispatch only once this workflow file
 # exists on the default branch; choosing --ref still selects the branch version.
 on:
+  push:
+    branches:
+      - arena/4260e934-brain
   workflow_dispatch:
     inputs:
       task_limit:
         description: Number of HARD-51 tasks to run in file order (1-51)
         required: true
-        default: '2'
+        default: '3'
         type: string
 
 permissions:
@@ -25,7 +28,7 @@ jobs:
       - name: Validate task limit
         shell: bash
         env:
-          TASK_LIMIT: ${{ inputs.task_limit || '2' }}
+          TASK_LIMIT: ${{ inputs.task_limit || '3' }}
         run: |
           set -euo pipefail
           if [[ ! "$TASK_LIMIT" =~ ^([1-9]|[1-4][0-9]|5[01])$ ]]; then
@@ -210,6 +213,8 @@ jobs:
               src_dir, src = producers[task]
               dst_dir, dst = replays[task]
               if src.get('exception_info') is not None or dst.get('exception_info') is not None:
+                  row['src_exc'] = str(src.get('exception_info'))[:240]
+                  row['dst_exc'] = str(dst.get('exception_info'))[:240]
                   issues.append(f'{task}:trial_exception')
               patch = src_dir / 'agent' / 'model.patch'
               trace_path = src_dir / 'agent' / 'brain_epistemic_trace.json'
@@ -239,6 +244,7 @@ jobs:
           print(f"::warning title=HARBOR_SMOKE_AUDIT::{json.dumps(report, separators=(',', ':'))}")
           print(json.dumps(report, indent=2))
           if issues or len(ids) != int(__import__('os').environ['TASK_LIMIT']):
+              print(f"::error::smoke_audit_failed issues={issues} rows={rows}", flush=True)
               sys.exit(1)
           PY
 
