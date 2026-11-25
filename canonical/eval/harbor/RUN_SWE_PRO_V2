@@ -1,0 +1,5 @@
+swe-pro-v2-hard51
+arms=all
+shards=6
+agent_timeout_s=240
+commit_results=true

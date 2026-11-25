@@ -380,6 +380,8 @@ jobs:
           # trailing backslashes, so `collect` ran without --out, exited 2, and `bash -e`
           # aborted the step before the fallback could write -- which is how run
           # 45663363378 published zero reports while harbor had exited 0 with 9 trials.
+          # stdout+stderr go to a published log: run 45676020414 lost 18/18 shards to
+          # `error: unrecognized arguments: --note ...` and nothing in the committed evidence said so.
           python -m canonical.eval.harbor.swe_pro_v2_ci collect \
             --jobs-dir "$W/jobs" \
             --manifest "$W/manifest.json" \
@@ -387,12 +389,24 @@ jobs:
             --note engine_timeout_s="$AGENT_TIMEOUT_S" \
             --note n_shards="$N_SHARDS" \
             --note eval_commit="$GITHUB_SHA" \
-            --out "$W/out/$ARM-s$SHARD.json"
+            --out "$W/out/$ARM-s$SHARD.json" \
+            > "$W/out/$ARM-s$SHARD.collect.log" 2>&1
           cx=$?
           if [ "$cx" != "0" ] || [ ! -s "$W/out/$ARM-s$SHARD.json" ]; then
             echo "::error::collect failed (exit $cx) for $ARM shard $SHARD"
-            printf '{"arm":"%s","error":"COLLECT_FAILED","exit_code":"%s"}\n' "$ARM" "$cx" \
-              > "$W/out/$ARM-s$SHARD.json"
+            python3 - "$W/out/$ARM-s$SHARD.json" "$ARM" "$cx" "$W/out/$ARM-s$SHARD.collect.log" <<'FAILJSON'
+          import json, pathlib, sys
+          out, arm, code, log = sys.argv[1], sys.argv[2], sys.argv[3], pathlib.Path(sys.argv[4])
+          tail = ""
+          if log.is_file():
+              tail = log.read_text(errors="replace")[-1500:]
+          pathlib.Path(out).write_text(json.dumps({
+              "arm": arm,
+              "error": "COLLECT_FAILED",
+              "exit_code": code,
+              "collector_output_tail": tail,
+          }, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          FAILJSON
           fi
           cp "$W/store-$ARM-s$SHARD.json" "$W/out/store-snapshot.json" 2>/dev/null || true
           tail -c 150000 "$W/harbor-$ARM-s$SHARD.log" > "$W/out/harbor-tail.log" 2>/dev/null || true
@@ -496,10 +510,23 @@ jobs:
           names = [s for s in sys.argv[1].split() if s]
           path = pathlib.Path("out/report.json")
           d = json.loads(path.read_text(encoding="utf-8"))
-          d["incomplete_shards"] = names
+          entries = []
+          for name in names:
+              row = {"shard": name, "error": "COLLECT_FAILED"}
+              cand = next(iter(sorted(pathlib.Path("dl").rglob(f"{name}.json"))), None)
+              if cand is not None:
+                  try:
+                      raw = json.loads(cand.read_text(encoding="utf-8"))
+                      row["exit_code"] = raw.get("exit_code")
+                      tail = str(raw.get("collector_output_tail") or "").strip().splitlines()
+                      row["collector_last_line"] = tail[-1][:300] if tail else ""
+                  except Exception as exc:  # a diagnostic must never be the thing that fails a run
+                      row["read_error"] = type(exc).__name__
+              entries.append(row)
+          d["incomplete_shards"] = entries
           path.write_text(json.dumps(d, indent=2, sort_keys=True) + "\n", encoding="utf-8")
           INCOMPLETE
-            { echo ""; echo "## Incomplete shards in this run"; echo ""; echo "These shard artifacts reported a collection error, so their tasks are counted as missing rather than resolved — the run is qualified, not discarded:"; echo ""; for s in $failed_shards; do echo "- \`$s\`"; done; } >> out/report.md
+            { echo ""; echo "## Incomplete shards in this run"; echo ""; echo "These shard artifacts reported a collection error, so their tasks are counted as missing rather than resolved — the run is qualified, not discarded:"; for s in $failed_shards; do tail -c 220 "dl"/*/"$s".json >/dev/null 2>&1; echo "- \`$s\`"; done; } >> out/report.md
           fi
           python3 - <<'DECISIONS'
           import json, os, pathlib
@@ -519,7 +546,7 @@ jobs:
           echo '--- report ---'
           head -80 out/report.md
           mkdir -p out/diagnostics
-          for f in $(find dl -name '*.meta.json' -o -name 'status.env' -o -name '*.layout.txt' 2>/dev/null | sort); do cp "$f" out/diagnostics/ 2>/dev/null || true; done
+          for f in $(find dl -name '*.meta.json' -o -name 'status.env' -o -name '*.layout.txt' -o -name '*.collect.log' 2>/dev/null | sort); do cp "$f" out/diagnostics/ 2>/dev/null || true; done
           for f in $(find dl -name 'harbor-tail.log' 2>/dev/null | sort); do tail -c 40000 "$f" > "out/diagnostics/$(basename $(dirname "$f"))-$(basename "$f")" 2>/dev/null || true; done
           ls out/diagnostics 2>/dev/null | head -20 || true
 

@@ -607,7 +607,16 @@ def to_markdown(
     return lines
 
 
-def main(argv: list[str] | None = None) -> int:
+def build_parser() -> argparse.ArgumentParser:
+    """The CLI, in one place, so a test can ask what each subcommand accepts.
+
+    This exists because the workflow called `collect --note KEY=VALUE` for two runs while the
+    `--note` argument was only ever declared here for… nothing: the flag was written into the
+    collect *branch* of `main` but never added to the collect *subparser*. argparse exited 2 with
+    "unrecognized arguments", every shard published `COLLECT_FAILED`, and run 45676020414 lost all
+    51 x 3 tasks to a typo in a line no unit test touched -- the tests drove `collect(notes=...)`,
+    which has always worked. A CLI is an interface, and an untested interface is a broken one.
+    """
     ap = argparse.ArgumentParser(prog="swe_pro_v2_ci")
     sub = ap.add_subparsers(dest="cmd", required=True)
 
@@ -629,6 +638,8 @@ def main(argv: list[str] | None = None) -> int:
     j.add_argument("--agent-timeout-s", type=float, default=900.0)
 
     c = sub.add_parser("collect")
+    c.add_argument("--note", action="append", default=[],
+                   help="KEY=VALUE condition this shard was measured under; ints are coerced")
     c.add_argument("--jobs-dir", action="append", required=True)
     c.add_argument("--manifest", required=True)
     c.add_argument("--arm", required=True, choices=list(ARMS))
@@ -652,6 +663,11 @@ def main(argv: list[str] | None = None) -> int:
     a.add_argument("--out-md", required=True)
     a.add_argument("--benchmark", default="SWE-bench Pro V2 (HARD-51)")
     a.add_argument("--commit", default="unknown")
+    return ap
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = build_parser()
 
     args = ap.parse_args(argv)
 

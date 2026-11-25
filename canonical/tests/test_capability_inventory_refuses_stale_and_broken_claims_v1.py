@@ -98,10 +98,25 @@ def test_self_reported_counts_are_compared_to_the_fields_they_summarize(monkeypa
     assert any("99" in p for p in tampered["problems"]), tampered["problems"]
 
 
-def test_markdown_carries_the_uncertified_run_as_a_fact_not_a_score() -> None:
+def test_no_committed_report_appears_without_its_refusal() -> None:
+    """Not "assert the string OFFICIAL_TASK_VERDICTS is present" -- that pinned one run's verdict and
+    went stale the moment CI overwrote the hard51 report with a void one. The property that actually
+    matters: every report printed here is either quotable with its gates, or arrives with its
+    refusal attached, and a void run is never rendered as a table of zeros."""
+    results = pathlib.Path(inv.EVAL_RESULTS)
+    reports = sorted(results.glob("*-latest.json"))
+    assert reports, "the inventory must be looking at the real results dir"
     doc = inv.build()
     md = inv.to_markdown(doc)
     assert "STALE_MEASUREMENT" not in md or doc["measured_capabilities"]["n_stale"] > 0
-    assert "claimable=False" in md, "the HARD-51 run must appear with its refusal attached"
-    assert "OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED" in md
+    for path in reports:
+        rep = json.loads(path.read_text(encoding="utf-8"))
+        label = path.stem.replace("-latest", "")
+        assert label in md, f"{path.name} is missing from the report"
+        if rep.get("run_produced_number") is False or rep.get("run_failed"):
+            assert "claimable=False" in md, "a void run must arrive with its refusal attached"
+    for entry in (doc.get("benchmark_runs") or {}).get("reports", {}).values():
+        gates = entry.get("gates") or {}
+        if gates.get("nop_gate_pass") and gates.get("oracle_gate_pass"):
+            assert entry.get("receipt_claimable") is True, "a run that passed both gates must be quotable"
     assert "Disagree" in md or inv._count_mismatch()["agrees_with_fields"]
