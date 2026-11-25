@@ -1,0 +1,174 @@
+{
+ "schema": "BRAIN_HONEST_PER_TASK_BASELINE_V1",
+ "generated": "2026-11-25T14:08:42Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "network_during_build": "git clone of pypa/packaging and hukkin/tomli",
+  "duration_s": 6.5
+ },
+ "summary": {
+  "tasks": 12,
+  "by_class": {
+   "NO_PROPOSAL": 12
+  },
+  "verified_solved": 0,
+  "resolve_rate": 0.0,
+  "patch_emission_rate": 0.0,
+  "verdicts": {
+   "the_system_emits_a_patch_at_all": false,
+   "the_system_solves_at_least_one": false,
+   "this_is_a_baseline_not_a_result": true
+  },
+  "reading": "An honest per-task baseline on twelve provably fail-to-pass tasks in real repositories, offline, with the instruction derived from pytest's own failure output. A zero here is the starting number, and it is the first time this project has had one.",
+  "what_this_does_not_show": "nothing about SWE-bench Pro, Terminal-Bench or OSWorld. These are twelve small single-node bugs in pypa/packaging and hukkin/tomli. It shows what the shipped system does when handed a real failing test and a real checkout -- which is the precondition for any of those benchmarks.",
+  "failure_anatomy": {
+   "every_task_failed_before_producing_anything": true,
+   "reasons": {
+    "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path": 11,
+    "CAPABILITY_INPUTS_MISSING:limit,message,message_source,op,repo_root,rev,staged,target": 1
+   },
+   "capabilities_chosen": {
+    "software.analysis.diagnose_and_architect.v1": 11,
+    "git.repository.operate.v1": 1
+   },
+   "note": "No patch was attempted on any task. All twelve stopped at the same place: the routed capability declares required inputs that a task statement cannot supply -- output_path, request_spec, repo_root, a bibtex-style `symbol`. The routing was not wrong in spirit (diagnose_and_architect is a plausible reading of 'a test fails'), but the capability cannot act from a test failure.",
+   "the_structure_of_the_gap": "build_goal() asks the model for {\"actions\":[{\"type\":\"terminal_exec\",\"args\":{\"command\":...}}]}. solve() has no code path that produces that shape: it returns a capability envelope with status, routing, required_inputs and non_claims. So the transport's contract and the model's output contract do not meet, and no amount of routing improvement closes it."
+  }
+ },
+ "per_task": [
+  {
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once\nThe test runner printed:\n  E           AssertionError: _resolve('leaf', 'root', <ANY>, <ANY>) call not found | FAILED tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d2fa92384821919d48eab89bae087b950637d52a",
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy\nThe test runner printed:\n  E       AttributeError: 'VersionRange' object has no attribute '_prereleases' | FAILED tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_metadata.py::TestRawMetadata::test_complete\nThe test runner printed:\n  E       AssertionError: assert '2.5' == '2.6' | E         - 2.6 | E         + 2.5 | FAILED tests/test_metadata.py::TestRawMetadata::test_complete - AssertionErro...\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "668da8662a112036e4850b68980790cb2d10dae9",
+   "node": "tests/test_markers.py",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_markers.py\nThe test runner printed:\n  E       AssertionError: assert '3.11' == '3.10' | E         - 3.10 | E         ?    ^ | E         + 3.11 | E         ?    ^ | FAILED tests/test_markers.py::TestDefaultEnvironment::test_multidigit_minor_version\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a3b6a1f6c34182414558ad3628814cce1f039004",
+   "node": "tests/test_dependency_groups.py",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_dependency_groups.py\nThe test runner printed:\n  E           AssertionError: _resolve('leaf', 'root', <ANY>) call not found | FAILED tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+   "node": "tests/test_structures.py::test_infinity_self_comparison",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_structures.py::test_infinity_self_comparison\nThe test runner printed:\n  E       TypeError: '<' not supported between instances of 'InfinityType' and 'InfinityType' | FAILED tests/test_structures.py::test_infinity_self_comparison - TypeError: '...\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_metadata.py::TestRawMetadata::test_complete\nThe test runner printed:\n  E       assert 26 == 28 | E        +  where 26 = len({'home_page': 'http://www.example.com/~cschultz/bvote/', 'requires_dist': [\"reportlab; extra == 'pdf'\", 'pkginfo', 'Pa...bscureUnix', 'RareDOS'], 'classifiers': ['Development Status :: 4 - Beta', 'Environment :: Console (Text Based)'], ...}) | FAILED tests/test_metadata.py::TestRawMetadata::test_complete - assert 26 == 28\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:limit,message,message_source,op,repo_root,rev,staged,target",
+   "system_best": "git.repository.operate.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "node": "tests/test_error.py::test_module_name",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_error.py::test_module_name\nThe test runner printed:\n  E       AssertionError: assert 'tomli._parser' == 'tomli' | E         - tomli | E         + tomli._parser | FAILED tests/test_error.py::test_module_name - AssertionError: assert 'tomli....\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "node": "tests/test_error.py::test_invalid_char_quotes",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_error.py::test_invalid_char_quotes\nThe test runner printed:\n  E       assert \" '\\\\n' \" in 'Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)' | E        +  where 'Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)' = str(TOMLDecodeError('Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)')) | E        +    where TOMLDecodeError('Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)') = <ExceptionInfo TOMLDecodeError('Found invalid character \"\\'\\\\n\\'\" (at line 1, column 6)') tblen=7>.value | FAILED tests/test_error.py::test_invalid_char_quotes - assert \" '\\\\n' \" in 'F...\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578d0bfa9823e986572735a7429ffdf79",
+   "node": "tests/test_misc.py::test_own_pyproject",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_misc.py::test_own_pyproject\nThe test runner printed:\n  E       KeyError: 'project' | FAILED tests/test_misc.py::test_own_pyproject - KeyError: 'project'\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "node": "tests/test_error.py::test_line_and_col",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_error.py::test_line_and_col\nThe test runner printed:\n  E       AssertionError: assert 'Invalid value' == 'Invalid valu... 1, column 5)' | E         - Invalid value (at line 1, column 5) | E         + Invalid value | FAILED tests/test_error.py::test_line_and_col - AssertionError: assert 'Inval...\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "node": "tests/test_misc.py::test_parse_float",
+   "instruction": "A test in this repository fails. The failing node is:\n  tests/test_misc.py::test_parse_float\nThe test runner printed:\n  E       TypeError: loads() got an unexpected keyword argument 'parse_float' | FAILED tests/test_misc.py::test_parse_float - TypeError: loads() got an unexp...\nMake the named test pass without breaking the other tests in that file.",
+   "system_status": "FAIL_CLOSED",
+   "system_reason": "CAPABILITY_INPUTS_MISSING:operation,output_path,request_spec,symbol,target_path",
+   "system_best": "software.analysis.diagnose_and_architect.v1",
+   "patch_emitted": false,
+   "class": "NO_PROPOSAL"
+  }
+ ]
+}
