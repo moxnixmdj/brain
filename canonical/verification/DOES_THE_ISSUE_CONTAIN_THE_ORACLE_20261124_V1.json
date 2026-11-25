@@ -1,0 +1,780 @@
+{
+ "schema": "DOES_THE_ISSUE_CONTAIN_THE_ORACLE_V1",
+ "question": "on how many of the 45 real fix commits does the issue/PR body already carry an executable fragment a test can be built from?",
+ "method": "regex over fenced code blocks; zero model calls",
+ "counts": {
+  "ORACLE_IN_ISSUE": 10,
+  "PROSE_ONLY": 35
+ },
+ "rate": {
+  "ORACLE_IN_ISSUE": 0.2222,
+  "PROSE_ONLY": 0.7778
+ },
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a7",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1410",
+    "issue#1354"
+   ],
+   "body_chars": 1558,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#1410",
+    "issue#1354"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/python-attrs/attrs/pull/1410"
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1417",
+    "issue#1416"
+   ],
+   "body_chars": 9294,
+   "reasons": [
+    "traceback",
+    "call"
+   ],
+   "fetched": [
+    "pr#1417",
+    "issue#1416"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/python-attrs/attrs/pull/1417"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "issue#1136"
+   ],
+   "body_chars": 6566,
+   "reasons": [
+    "traceback"
+   ],
+   "fetched": [
+    "issue#1136"
+   ],
+   "has_fence": true
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c5",
+   "verdict": "PROSE_ONLY",
+   "sources": [],
+   "body_chars": 47,
+   "reasons": [],
+   "fetched": [],
+   "has_fence": false
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f505",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2972",
+    "issue#2971"
+   ],
+   "body_chars": 1496,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#2972",
+    "issue#2971"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2972"
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154e",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2728",
+    "issue#2697"
+   ],
+   "body_chars": 1493,
+   "reasons": [
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#2728",
+    "issue#2697"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2728"
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1990",
+    "issue#1978"
+   ],
+   "body_chars": 1251,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1990",
+    "issue#1978"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1990"
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f60",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1551"
+   ],
+   "body_chars": 3024,
+   "reasons": [
+    "traceback",
+    "assertion",
+    "call"
+   ],
+   "fetched": [
+    "pr#1551"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1551"
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1615",
+    "issue#1422"
+   ],
+   "body_chars": 2039,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1615",
+    "issue#1422"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1615"
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2730",
+    "issue#2632"
+   ],
+   "body_chars": 3564,
+   "reasons": [
+    "call",
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#2730",
+    "issue#2632"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2730"
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c120",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#3299",
+    "issue#3298"
+   ],
+   "body_chars": 2570,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#3299",
+    "issue#3298"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/3299"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2886"
+   ],
+   "body_chars": 783,
+   "reasons": [],
+   "fetched": [
+    "pr#2886"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/encode/httpx/pull/2886"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cba",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1984",
+    "issue#1921"
+   ],
+   "body_chars": 7138,
+   "reasons": [
+    "traceback",
+    "call"
+   ],
+   "fetched": [
+    "pr#1984",
+    "issue#1921"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/jinja/pull/1984"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1762",
+    "issue#1624"
+   ],
+   "body_chars": 1707,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1762",
+    "issue#1624"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/jinja/pull/1762"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#412",
+    "issue#409"
+   ],
+   "body_chars": 1455,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#412",
+    "issue#409"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/412"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1311"
+   ],
+   "body_chars": 851,
+   "reasons": [],
+   "fetched": [
+    "pr#1311"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1311"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1117"
+   ],
+   "body_chars": 98,
+   "reasons": [],
+   "fetched": [
+    "pr#1117"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1117"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f1",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1028",
+    "issue#1001"
+   ],
+   "body_chars": 1962,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#1028",
+    "issue#1001"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1028"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#373"
+   ],
+   "body_chars": 155,
+   "reasons": [],
+   "fetched": [
+    "pr#373"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/373"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e50",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1427"
+   ],
+   "body_chars": 3885,
+   "reasons": [
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#1427"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/1427"
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1218"
+   ],
+   "body_chars": 518,
+   "reasons": [],
+   "fetched": [
+    "pr#1218"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/1218"
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1345"
+   ],
+   "body_chars": 716,
+   "reasons": [],
+   "fetched": [
+    "pr#1345"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1345"
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#925"
+   ],
+   "body_chars": 772,
+   "reasons": [],
+   "fetched": [
+    "pr#925"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/925"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d916",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1121"
+   ],
+   "body_chars": 141,
+   "reasons": [],
+   "fetched": [
+    "pr#1121"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1121"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1341"
+   ],
+   "body_chars": 57,
+   "reasons": [],
+   "fetched": [
+    "pr#1341"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1341"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1362"
+   ],
+   "body_chars": 683,
+   "reasons": [],
+   "fetched": [
+    "pr#1362"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1362"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea23",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1230"
+   ],
+   "body_chars": 1188,
+   "reasons": [],
+   "fetched": [
+    "pr#1230"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1230"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e91",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#624",
+    "issue#336",
+    "issue#432",
+    "issue#529"
+   ],
+   "body_chars": 14847,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#624",
+    "issue#336",
+    "issue#432",
+    "issue#529"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/624"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#481"
+   ],
+   "body_chars": 75,
+   "reasons": [],
+   "fetched": [
+    "pr#481"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/481"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca1",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#743"
+   ],
+   "body_chars": 1185,
+   "reasons": [],
+   "fetched": [
+    "pr#743"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/743"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#755"
+   ],
+   "body_chars": 1418,
+   "reasons": [],
+   "fetched": [
+    "pr#755"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/755"
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed3",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#801",
+    "issue#800"
+   ],
+   "body_chars": 1618,
+   "reasons": [],
+   "fetched": [
+    "pr#801",
+    "issue#800"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/Kludex/starlette/pull/801"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83b",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1212"
+   ],
+   "body_chars": 538,
+   "reasons": [],
+   "fetched": [
+    "pr#1212"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/tqdm/tqdm/pull/1212"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1549"
+   ],
+   "body_chars": 602,
+   "reasons": [],
+   "fetched": [
+    "pr#1549"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/tqdm/tqdm/pull/1549"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a66",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#3012"
+   ],
+   "body_chars": 130,
+   "reasons": [],
+   "fetched": [
+    "pr#3012"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/urllib3/urllib3/pull/3012"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0",
+   "verdict": "PROSE_ONLY",
+   "sources": [],
+   "body_chars": 43,
+   "reasons": [],
+   "fetched": [],
+   "has_fence": false
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#2806",
+    "issue#2804"
+   ],
+   "body_chars": 1977,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#2806",
+    "issue#2804"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/urllib3/urllib3/pull/2806"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#3092"
+   ],
+   "body_chars": 2046,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#3092"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/3092"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2612",
+    "issue#2611"
+   ],
+   "body_chars": 1161,
+   "reasons": [],
+   "fetched": [
+    "pr#2612",
+    "issue#2611"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2612"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd71679",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2042"
+   ],
+   "body_chars": 303,
+   "reasons": [],
+   "fetched": [
+    "pr#2042"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2042"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffd",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2470"
+   ],
+   "body_chars": 720,
+   "reasons": [],
+   "fetched": [
+    "pr#2470"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2470"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2971",
+    "issue#2969"
+   ],
+   "body_chars": 250,
+   "reasons": [],
+   "fetched": [
+    "pr#2971",
+    "issue#2969"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2971"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b462",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1965"
+   ],
+   "body_chars": 1955,
+   "reasons": [],
+   "fetched": [
+    "pr#1965"
+   ],
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/1965"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b977797",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1798",
+    "issue#1797"
+   ],
+   "body_chars": 1844,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1798",
+    "issue#1797"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/1798"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65b",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#2661",
+    "issue#2657"
+   ],
+   "body_chars": 4848,
+   "reasons": [
+    "assertion",
+    "call"
+   ],
+   "fetched": [
+    "pr#2661",
+    "issue#2657"
+   ],
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/2661"
+  }
+ ]
+}
