@@ -162,7 +162,12 @@ def violations_from_run(
         data["baseline_exitstatus"] = plain.returncode
         data["perturbed"] = plain.returncode == 0
         if data["perturbed"]:
+            # A clean tree and a tree the instrument changed must never look the same. `attrs` is the measured
+            # case: it builds its classes out of its own module functions, so wrapping them changes what it
+            # constructs (5 tests fail with every law disabled). The run is refused, not reported.
             data["violations"] = []
+            data["status"] = "REFUSED__OBSERVER_CHANGES_THE_PROGRAM"
+            data["plain_exitstatus"] = plain.returncode
     data["tail"] = tail
     data["collected"] = True
     return PluginRun(data)
@@ -176,6 +181,8 @@ def main(argv: Iterable[str] | None = None) -> int:
     repo, targets = argv[0], argv[1].split(",")
     run = violations_from_run(repo, targets, argv[2:])
     print(json.dumps({k: v for k, v in run.items() if k != "tail"}, indent=1, sort_keys=True))
+    if run.get("status") == "REFUSED__OBSERVER_CHANGES_THE_PROGRAM":
+        return 3
     return 0 if not run.violations else 1
 
 

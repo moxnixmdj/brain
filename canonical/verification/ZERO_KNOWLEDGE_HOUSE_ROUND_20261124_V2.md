@@ -1203,3 +1203,19 @@ own module functions cannot be wrapped, because the wrapper becomes part of the 
 only the surface the module actually publishes (`__all__` / public names) and to re-attempt `attrs` under that
 restriction; if it still perturbs, the correct answer is admission-time refusal — a repository the method cannot watch
 should be refused when it is picked up, not reported as clean after a law run that changed the program.
+
+## Round V22 — `attrs` is refused, not reported
+
+`attrs@3b0378dd66` is the one item the method cannot take, and the isolation is now measured rather than asserted. With
+every law disabled, wrapping perturbs five of its tests; skipping **module functions** leaves two failures, skipping
+**class methods** leaves three. Every one of attrs' public classes is built out of the module's own functions, so a
+wrapper becomes part of the constructed class: the observer is inside the program it is watching.
+
+The honest contract is therefore a refusal at the same level as a violation: a run whose instrument changed the program
+returns `status: REFUSED__OBSERVER_CHANGES_THE_PROGRAM` with `plain_exitstatus` recorded, its violations discarded, and
+the CLI exits 3. `attrs` now reports that status with `plain_exitstatus: 0` — the bare suite passes, so the change is
+the instrument's, and nothing from that run can be mistaken for a clean tree.
+
+**Recorded honestly:** test-absent stream **6 repaired, 1 refused** (`attrs@3b0378dd66`). Test-present tally unchanged:
+**11/13 = 84.62%**. All five gates re-checked after the change: `more-itertools`, `pyjwt` and `click` fire exactly one
+law on the buggy tree and none on the fixed one; `pluggy` fires `assert_validation`; no run is perturbed.

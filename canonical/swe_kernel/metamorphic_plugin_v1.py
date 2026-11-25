@@ -290,8 +290,16 @@ def _sweep_aliases() -> None:
                 pass
 
 
+# Diagnostics for "which kind of wrapping perturbs this repository": measured on `attrs`, module functions and
+# class methods each contribute (5 failed with both, 2 with only functions skipped, 3 with only methods skipped).
+_NO_FUNCS = bool(__import__("os").environ.get("META_NO_FUNCS"))
+_NO_METHODS = bool(__import__("os").environ.get("META_NO_METHODS"))
+
+
 def _wrap_module(mod: Any) -> None:
     for attr_name in list(vars(mod)):
+        if _NO_FUNCS:
+            break
         attr = vars(mod)[attr_name]
         if inspect.isfunction(attr) and getattr(attr, "__module__", None) == mod.__name__:
             if attr_name.startswith("_"):
@@ -304,6 +312,8 @@ def _wrap_module(mod: Any) -> None:
             except Exception:
                 pass
     for cls_name in list(vars(mod)):
+        if _NO_METHODS:
+            break
         cls = vars(mod)[cls_name]
         if not inspect.isclass(cls) or getattr(cls, "__module__", None) != mod.__name__:
             continue

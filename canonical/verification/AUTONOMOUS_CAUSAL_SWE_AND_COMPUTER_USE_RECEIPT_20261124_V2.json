@@ -598,7 +598,7 @@
   },
   "canonical/swe_kernel/law_repair_synthesis_v1.py": "56749ea6239e02721d8a4328c0347316d7daacac64a9eaac863e8ecf09c85844",
   "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
-  "canonical/swe_kernel/metamorphic_oracle_v1.py": "af2261d69022b4a7470c5a05a3402109b0a6ecc9c58c895570be8ec8d64117a3",
+  "canonical/swe_kernel/metamorphic_oracle_v1.py": "4ce39d403cc6042a76c80b1b59f55c8a3391ff4d5760019d4c4d6404402b8fad",
   "canonical/swe_kernel/metamorphic_plugin_v1.py": "f1d4aee4ea483f0e8add7fb3a5d9c191e8f69cbceae0c1ca41fdcc7e3828500b",
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
@@ -763,6 +763,19 @@
  ],
  "next_bottleneck": "attrs is the limit of wrapping: observe only published names (__all__) and retry; if it still perturbs, refuse such a repository at admission time instead of reporting a clean tree.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
+ "refusal_v22": {
+  "attrs@3b0378dd66": {
+   "contract": "status REFUSED with plain_exitstatus recorded, violations discarded, CLI exit 3",
+   "isolation": {
+    "class methods skipped": "3 failed",
+    "everything wrapped": "5 failed",
+    "module functions skipped": "2 failed"
+   },
+   "verdict": "REFUSED__OBSERVER_CHANGES_THE_PROGRAM",
+   "why": "attrs builds its public classes out of the module's own functions, so a wrapper becomes part of the constructed class"
+  },
+  "test_absent_stream": "6 repaired, 1 refused"
+ },
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
