@@ -433,13 +433,19 @@ jobs:
           merge-multiple: false
 
       - name: Aggregate
+        env:
+          SWE_BENCHMARK: ${{ needs.swe-mode.outputs.benchmark }}
+          SWE_ARMS: ${{ needs.swe-mode.outputs.arms }}
+          SWE_N_SHARDS: ${{ needs.swe-mode.outputs.n_shards }}
+          SWE_AGENT_TIMEOUT_S: ${{ needs.swe-mode.outputs.agent_timeout_s }}
+          SWE_COMMIT_RESULTS: ${{ needs.swe-mode.outputs.commit_results }}
         run: |
           set -euo pipefail
           python -m pip install --quiet pyyaml
           mkdir -p out
           mapfile -t reports < <(find dl -name '*-s[0-9].json' -type f 2>/dev/null | sort || true)
           if [ "${#reports[@]}" -eq 0 ]; then
-            printf '%s\n' '{"schema":"brain.bench_eval_report.v1","arms":{},"note":"NO SHARD REPORTS: every shard failed before collect; this run produced no benchmark number"}' > out/report.json
+            printf '%s\n' '{"schema":"brain.bench_eval_report.v1","arms":{},"run_produced_number":false,"run_failed":true,"note":"NO SHARD REPORTS: every shard failed before collect; this run produced no benchmark number"}' > out/report.json
             printf '%s\n' "# SWE-bench Pro V2 — engine eval" "" "No shard report was produced. This run generated **no** benchmark number." > out/report.md
             echo "RUN_FAILED=true" >> "$GITHUB_ENV"
           else
@@ -476,6 +482,21 @@ jobs:
           INCOMPLETE
             { echo ""; echo "## Incomplete shards in this run"; echo ""; echo "These shard artifacts reported a collection error, so their tasks are counted as missing rather than resolved — the run is qualified, not discarded:"; echo ""; for s in $failed_shards; do echo "- \`$s\`"; done; } >> out/report.md
           fi
+          python3 - <<'DECISIONS'
+          import json, os, pathlib
+          path = pathlib.Path("out/report.json")
+          d = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+          d["mode_inputs"] = {
+              "benchmark": os.environ.get("SWE_BENCHMARK"),
+              "arms": os.environ.get("SWE_ARMS"),
+              "n_shards": os.environ.get("SWE_N_SHARDS"),
+              "agent_timeout_s": os.environ.get("SWE_AGENT_TIMEOUT_S"),
+              "commit_results": os.environ.get("SWE_COMMIT_RESULTS"),
+              "run_failed": os.environ.get("RUN_FAILED", ""),
+              "n_shard_reports_found": len([str(x) for x in pathlib.Path("dl").rglob("*-s[0-9].json")]) if pathlib.Path("dl").is_dir() else 0,
+          }
+          path.write_text(json.dumps(d, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          DECISIONS
           echo '--- report ---'
           head -80 out/report.md
           mkdir -p out/diagnostics
@@ -483,8 +504,13 @@ jobs:
           for f in $(find dl -name 'harbor-tail.log' 2>/dev/null | sort); do tail -c 40000 "$f" > "out/diagnostics/$(basename $(dirname "$f"))-$(basename "$f")" 2>/dev/null || true; done
           ls out/diagnostics 2>/dev/null | head -20 || true
 
+      # A run that produced nothing is still a fact about this branch, and the only
+      # channel back to this sandbox is a committed file (Actions logs live on hosts the
+      # sandbox cannot reach: results-receiver.actions.githubusercontent.com and
+      # *.blob.core.windows.net both EOF). So nothing is ever silently skipped — the
+      # report says "no number" and the receipt refuses to certify it.
       - name: Commit results to this branch
-        if: ${{ needs.swe-mode.outputs.commit_results == 'true' && env.RUN_FAILED != 'true' }}
+        if: ${{ needs.swe-mode.outputs.commit_results == 'true' }}
         run: |
           set -euo pipefail
           branch="${GITHUB_REF_NAME}"

@@ -1,5 +1,5 @@
-swe-pro-v2-hard51
+swe-pro-v2-smoke3
 arms=all
-shards=6
-agent_timeout_s=240
+shards=1
+agent_timeout_s=600
 commit_results=true
