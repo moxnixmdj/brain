@@ -967,3 +967,77 @@ wrapped, budget spent, iterator unusable, law crashed — and every one of them 
 reports what it did not do (`law_errors`, `per_law`, `re_invocations`, `observed_calls`) rather than only what it found.
 The next item stays what V17 recorded and still blocks `pyjwt@793a302`: the violation must carry its witness (argument
 index and value) into the generator, and the candidate must clear the law *and* pass the hidden test with that index used.
+
+## Round V19 — a value inside a document, and the family that is not one thing
+
+`pyjwt@793a302` was the live gate: `error_discipline` fired, three candidates failed to clear it, and the diagnosis was
+"same function, different argument". Both halves of that diagnosis were wrong. The law was wrong, and the repair was
+right.
+
+**What the defect actually is.** `jwt.decode()` reads `exp`/`nbf`/`iat` with `int(claim)` inside `except ValueError`.
+`int("not-an-int")` raises `ValueError` and is handled; `int([1])` and `int(None)` raise `TypeError` and are not, so a
+crafted token leaks a bare `TypeError` out of a public API whose documented contract is `PyJWTError`. Every law in the
+library mutated the *arguments* of `decode` — the token as a string, the key, the algorithms list — and the defect lives
+in a value *inside* the first argument. No amount of broadening claim handlers could silence a witness from a different
+argument, exactly as V17 recorded; the conclusion drawn from it was too narrow.
+
+**The law that sees it** (`content_retyping`). Mutating the serialized text is not enough: the payload is signed, so the
+parser answers `InvalidSignatureError` before it reads a claim (measured). The parser's own inverse — `encode` next to
+`decode` — puts the mutation back into a *valid* document, which is the only form in which the defect is reachable. For
+each claim the law substitutes `[1]`, `None` and `float("inf")`, re-encodes with the same key and the same keyword
+arguments, and requires the exception to belong to the package's own error family. The witness it emits is the site the
+builtin escaped from, found by walking the traceback for the innermost frame inside the package.
+
+| tree | `content_retyping` |
+|---|---|
+| `793a302^1` (buggy) | **9 violations** — `_validate_exp (api_jwt.py:506)`, `_validate_iat (api_jwt.py:477)`, `_validate_nbf (api_jwt.py:492)`, each for `[1]`/`None` → `TypeError` and `inf` → `OverflowError` |
+| `793a302` (human fix) | **0** — checked before any candidate was generated |
+
+**The family is not one thing.** The first candidate chosen from the law alone was "broaden 5 handlers to catch
+`TypeError`". It cleared the law, and the hidden test — overlaid only after that choice — said **9 of 12**: the three
+`inf` cases still failed, because `int(float("inf"))` raises `OverflowError`, a family no mutation had ever produced. The
+mutation set was widened with `float("inf")` (a value, not a test literal) and the generator gained the ability to offer
+each sibling family separately, since a family the witness never exhibited is a wider edit than the evidence supports.
+Re-selecting with the law leading:
+
+| candidate | law | hidden test |
+|---|---|---|
+| broaden 1 handler, `(ValueError, TypeError)` | 9 remaining | not run |
+| broaden 2 handlers, `(ValueError, TypeError)` | 7 remaining | not run |
+| broaden 5 handlers, `(ValueError, TypeError)` | **silent** | 9/12 (3 `inf` failures) |
+| broaden 5 handlers, `(ValueError, TypeError, OverflowError)` | **silent** | **96 passed** |
+| bug tree, unpatched, hidden test overlaid | — | 12 failed, 84 passed |
+
+So `pyjwt@793a302` is the fourth test-absent repair, and the second whose law the library did not have before the round.
+
+**Recorded honestly, because two things weaken it.**
+
+1. *Blindness is compromised for this item.* Issue 1186 is AI-prepared and states its own cause ("`int()` raises
+   `ValueError` only for strings") and its own fix ("broaden each handler to `except (ValueError, TypeError)`"). The
+   candidate was nevertheless selected by law silence, and it is **not** the documented edit: the documented one clears
+   nine of twelve hidden cases, because the issue never mentions `inf`. The `OverflowError` dimension came from the law
+   plus a measurement, not from the issue text — but the issue text cannot be un-read, so this repair is evidence that the
+   machinery converges, not that it found the defect unaided.
+2. *Not minimal.* The law names three sites; the winning candidate broadens all five single-family handlers in the file.
+   The law is silent either way, and the generator's granularity is "n handlers in the witness's file". A witness-targeted
+   generator (broaden exactly the functions the traceback named) is the obvious next refinement.
+
+**Four more observation-layer faults, all found by the suite failing, not by the law.** None of these was a law error;
+each was the plugin changing the program it was watching, which is the one thing an observer may not do:
+
+| fault | what it looked like |
+|---|---|
+| re-invocations were recorded by the test's warning recorder | pyjwt `assert len(deprecation_warnings) == 1` saw 3; fixed with a private `catch_warnings(record=True)` — `record=True` is the part that installs a handler, filters alone do not |
+| `_inverse_for` only knew `encode → decode` | a parser is as often the *inverse* of a serializer, so `decode` found no `encode`; both directions are now searched |
+| the re-invocation dropped keyword arguments | replaying only positional arguments lost `algorithms=[...]`, the parser raised "algorithms required" — a member of the family — and the law saw nothing; replay is now a closure over the whole call |
+| a content budget of 4 calls | the first four decodes carried no `exp`; the call that carried it was never examined |
+
+**Recorded honestly:** test-absent stream **4 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`,
+`more-itertools@cca32949f1`, `pyjwt@793a302`), 3 open (`pluggy@8051a4d` has no generator, `click@05f6fd0`,
+`attrs@3b0378dd66`). Test-present tally unchanged: **11/13 = 84.62%**. The `more-itertools` gate was re-run after every
+change in this round and still discriminates (`last` on the buggy tree, absent on the fix).
+
+**Next bottleneck.** The witness now travels (a site, a claim, a family, an argument index) but the generator still works
+by *file sweep*: it broadens n handlers in the file the witness named and lets the law cut. Witness-targeted synthesis —
+edit exactly the function the traceback named, with exactly the family the exception was — is the same idea carried one
+step further, and it is what would have made the pyjwt candidate minimal.

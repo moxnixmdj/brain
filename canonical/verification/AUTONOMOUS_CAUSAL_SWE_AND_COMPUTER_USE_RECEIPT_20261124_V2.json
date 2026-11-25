@@ -419,6 +419,40 @@
   "regression_check": "werkzeug canonicality still discriminates: 'Bearer ' on buggy, 'Bearer' on fixed",
   "test_absent_stream": "3 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1), 4 open"
  },
+ "law_repair_v19": {
+  "observation_layer_faults_fixed": [
+   "re-invocations were recorded by the suite's warning recorder (need catch_warnings(record=True))",
+   "_inverse_for searched one direction only; a parser is often the inverse of a serializer",
+   "replay dropped keyword arguments, so algorithms=[...] was lost and the parser raised a family member",
+   "content budget of 4 calls starved the call that carried the claim"
+  ],
+  "pyjwt@793a302": {
+   "candidate": "LAW_ERROR_DISCIPLINE[broaden 5 handler(s) to catch TypeError, OverflowError]",
+   "caveats": [
+    "blindness compromised: issue 1186 is AI-prepared and states its own cause and fix",
+    "the candidate differs from the documented fix, which clears 9 of 12 hidden cases (no inf case)",
+    "not minimal: 3 sites named by the witness, 5 handlers broadened",
+    "the inf dimension was added after the hidden test showed 3 failures on the first law-silent candidate"
+   ],
+   "defect": "int(claim) inside `except ValueError` leaks TypeError (and OverflowError for inf) out of decode() for attacker-controlled exp/nbf/iat",
+   "hidden_test_after_patch": {
+    "buggy_unpatched": "12 failed, 84 passed",
+    "final_candidate": "96 passed",
+    "first_law_silent_candidate": "3 failed, 93 passed (the three inf cases)"
+   },
+   "law_on_buggy": "9 violations: _validate_exp/_validate_iat/_validate_nbf x ([1], None -> TypeError; inf -> OverflowError)",
+   "law_on_candidate": "silent",
+   "law_on_fixed": "0 (checked before any candidate was generated)",
+   "new_law": "content_retyping \u2014 mutate a value inside the parsed content, re-encode with the parser's own inverse, require the package's own error family",
+   "why_previous_laws_missed_it": "every other law mutates the arguments of decode; the defect lives inside the first argument, and mutating the text alone breaks the signature (InvalidSignatureError answers first)",
+   "witness": "site (innermost package frame), claim, value, exception family"
+  },
+  "regressions_rechecked": {
+   "more-itertools": "last fires on buggy only",
+   "werkzeug": "canonicality 'Bearer ' vs 'Bearer'"
+  },
+  "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open"
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -505,13 +539,10 @@
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
-  "canonical/swe_kernel/law_repair_synthesis_v1.py": "b04064983216b9eac8077712cb9fc72201070df2963287fbf23b26e02681192d",
-  "canonical/swe_kernel/metamorphic_laws_v1.py": "9813764f86f43982d104f2787941c7ceee226211f626995ee6fb280f211620e5",
-  "canonical/swe_kernel/metamorphic_oracle_v1.py": {
-   "purpose": "manufacture a failing assertion from the repository's own name/effect vocabulary; no model, no hidden test",
-   "sha256": "3600755dfde982faefa23be9ddc982f9579df388504f4f413205d65cc7691716"
-  },
-  "canonical/swe_kernel/metamorphic_plugin_v1.py": "503df8c6af38f60a32f092928a0726e1026054225e77e550d0ee881d134f7993",
+  "canonical/swe_kernel/law_repair_synthesis_v1.py": "8054d9db2c81913f6a9109456b3a6a0fef28ef93682a54c002f2969c1e681203",
+  "canonical/swe_kernel/metamorphic_laws_v1.py": "2b2007ced1e71ddec4276c06fe2cd134bbab7c0e43a550b1cf422318ab96630a",
+  "canonical/swe_kernel/metamorphic_oracle_v1.py": "8b930c77d4b34818c43ad261302ffda94965160b726824f675ec97ae00e03eb6",
+  "canonical/swe_kernel/metamorphic_plugin_v1.py": "c3dfe5d9e77b46b2a8d61abe2436551d8bd1f23b72d67ce2c8101b2b6e8a9b24",
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
@@ -527,6 +558,7 @@
    "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
   },
   "canonical/tests/test_a_law_that_retypes_an_iterable_compares_outcomes_v1.py": "b6c8c4ff78878c782c8bdc4b3e2545decb72f6403a202c710031727eb725046d",
+  "canonical/tests/test_a_value_inside_a_document_is_attacker_controlled_v1.py": "0bcd1483b7a12d87efad5d2ff0245bce5122eadcae68439acb3ce637f4dac426",
   "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
    "status": "1 passed"
   },
@@ -669,7 +701,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "observation by omission: alias not wrapped, budget spent, iterator unusable, law crashed all read as no-defect. Now reported (law_errors/per_law/observed_calls). Still open: carry the witness (argument index and value) into the generator; pyjwt@793a302 clears the law and passes the hidden test with that index used.",
+ "next_bottleneck": "witness-targeted synthesis: the witness now carries site/claim/family/argument index, but the generator still broadens n handlers in the witness's file and lets the law cut. Editing exactly the function the traceback named with exactly the family the exception was is what would have made the pyjwt candidate minimal.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,

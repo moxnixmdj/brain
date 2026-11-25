@@ -160,6 +160,7 @@ def error_discipline_candidates(
     *,
     narrow_to: Sequence[str] | None = None,
     max_candidates: int = 4,
+    extra_families: Sequence[Sequence[str]] | None = None,
 ) -> list[tuple[str, dict[str, bytes]]]:
     """Broaden a `try` that catches one builtin family so it also catches its siblings.
 
@@ -169,6 +170,11 @@ def error_discipline_candidates(
     observed (`int(None)` raises TypeError, `int("x")` raises ValueError — pyjwt's `exp`/`nbf`/`iat`).
 
     `max_candidates` bounds how many handlers are broadened at once: one, two, all. The law decides.
+
+    `extra_families` says which sibling families to try, because "the sibling" is not one thing: `int(None)`
+    raises `TypeError` and `int(float("inf"))` raises `OverflowError`, and a candidate that catches only the
+    first clears nine of pyjwt's twelve hidden cases. A family the witness never exhibited is a wider edit
+    than the evidence supported, so each family is offered separately and the law chooses.
     """
     base = pathlib.Path(root)
     sites: list[tuple[pathlib.Path, int, int, list[str]]] = []  # file, start, end, names
@@ -193,31 +199,35 @@ def error_discipline_candidates(
             end = sum(len(l) for l in lines[: (node.type.end_lineno or node.type.lineno) - 1]) + (
                 node.type.end_col_offset or 0)
             sites.append((path, start, end, names))
+    families = tuple(tuple(f) for f in extra_families) if extra_families else (("TypeError", "ValueError"),)
     out: list[tuple[str, dict[str, bytes]]] = []
     for count in sorted({1, 2, len(sites)} & set(range(1, max_candidates + 1)) | ({len(sites)} if sites else set())):
         chosen = sites[:count]
         if not chosen:
             continue
-        blobs: dict[str, bytes] = {}
-        by_file: dict[pathlib.Path, list[tuple[int, int, list[str]]]] = {}
-        for path, start, end, names in chosen:
-            by_file.setdefault(path, []).append((start, end, names))
-        for path, edits in by_file.items():
-            source = path.read_text(encoding="utf-8", errors="replace")
-            patched = source
-            for start, end, names in sorted(edits, key=lambda e: e[0], reverse=True):
-                extra = [n for n in ("TypeError", "ValueError") if n not in names]
-                if not extra:
+        for family in families:
+            blobs: dict[str, bytes] = {}
+            by_file: dict[pathlib.Path, list[tuple[int, int, list[str]]]] = {}
+            for path, start, end, names in chosen:
+                by_file.setdefault(path, []).append((start, end, names))
+            for path, edits in by_file.items():
+                source = path.read_text(encoding="utf-8", errors="replace")
+                patched = source
+                for start, end, names in sorted(edits, key=lambda e: e[0], reverse=True):
+                    extra = [n for n in family if n not in names]
+                    if not extra:
+                        continue
+                    joined = ", ".join([names[0], *extra])
+                    patched = patched[:start] + f"({joined})" + patched[end:]
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
                     continue
-                patched = patched[:start] + f"({names[0]}, {extra[0]})" + patched[end:]
-            try:
-                ast.parse(patched)
-            except SyntaxError:
-                continue
-            blobs[path.relative_to(base).as_posix()] = patched.encode("utf-8")
-        if blobs:
-            tag = f"LAW_ERROR_DISCIPLINE[broaden {count} handler(s) to catch the sibling family]"
-            out.append((tag, blobs))
+                blobs[path.relative_to(base).as_posix()] = patched.encode("utf-8")
+            if blobs:
+                tag = (f"LAW_ERROR_DISCIPLINE[broaden {count} handler(s) to catch "
+                       f"{', '.join(family)}]")
+                out.append((tag, blobs))
     return out
 
 

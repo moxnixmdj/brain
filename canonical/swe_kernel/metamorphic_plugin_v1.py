@@ -93,6 +93,24 @@ def _replay(args: tuple) -> tuple | None:
     return tuple(copies)
 
 
+def _quiet(thunk):
+    """Run a law's re-invocations with their own warning machinery.
+
+    Re-invoking a function is observation of its *value*, not of its warnings, but Python's warning
+    registry is one-shot per location: pyjwt's `test_decode_complete_warns_on_...` failed because an
+    earlier re-invocation had already consumed the emission the test was waiting for. A private
+    `catch_warnings` block gives the law its own recorder and leaves the suite's warnings untouched.
+    """
+    import warnings
+
+    with warnings.catch_warnings(record=True):
+        # `record=True` is the part that matters: without it the nested block only changes *filters*, the
+        # outer handler still receives the emission, and pyjwt's `assert len(deprecation_warnings) == 1`
+        # saw 3 because the law's re-invocations were being recorded by the test's own `pytest.warns`.
+        warnings.simplefilter("always")
+        return thunk()
+
+
 def _arg_sig(args: tuple) -> str:
     """A cheap structural signature of a call's arguments.
 
@@ -132,7 +150,10 @@ def _budget(key: str, limit: int = 24) -> bool:
 def _inverse_for(namespace: Any, name: str):
     laws = _laws()
     base = name.split(".")[-1]
-    for forward, inverse in laws.PAIR_STEMS:
+    # Both directions: a parser is as often the *inverse* of a serializer (`decode` next to `encode`),
+    # and the content law needs the encoder to re-sign what it mutated.
+    both = tuple(laws.PAIR_STEMS) + tuple((b, a) for a, b in laws.PAIR_STEMS)
+    for forward, inverse in both:
         if not (base == forward or base.startswith(forward + "_") or base.endswith("_" + forward)):
             continue
         for cand in (inverse, inverse + "s", inverse + "s_"):
@@ -152,45 +173,61 @@ def _check_call(namespace: Any, owner: str, name: str, fn: Any, args: tuple, kwa
                 module_name: str) -> None:
     laws = _laws()
     qual = f"{owner}.{name}" if owner else name
+    replay = _replay(args)
     if _want("canonicality"):
         for violation in laws.check_canonicality(name, result):
             _record(violation)
     if _want("idempotence") and _budget("idem:" + qual):
-        replay = _replay(args)
         try:
             if result is not None and replay is not None:
-                for violation in laws.check_idempotence(name, fn, replay, result):
+                for violation in _quiet(lambda: laws.check_idempotence(name, fn, replay, result)):
                     _record(violation)
         except Exception as exc:
             _STATE["law_errors"].append(f"idempotence:{name}:{type(exc).__name__}")
     if _want("round_trip") and args and _budget("rt:" + qual):
         inverse = _inverse_for(namespace, name)
-        replay = _replay(args)
         if inverse is not None and replay is not None:
-            for violation in laws.check_round_trip(name, replay, result, inverse):
+            for violation in _quiet(lambda: laws.check_round_trip(name, replay, result, inverse)):
                 _record(violation)
     # Retyping arguments is a statement about *data*, not about a receiver: substituting `self` with a
     # retyped shell made `__repr__` "raise" on the healthy tree (AttributeError on the shell). The law
     # therefore applies to module-level functions, where every argument is data.
     if _want("iterable_retyping") and not owner and _budget(f"it:{qual}:{_arg_sig(args)}", limit=3):
-        replay = _replay(args)
         try:
-            for violation in laws.check_iterable_retyping(name, fn, replay if replay is not None else ()):
+            for violation in _quiet(lambda: laws.check_iterable_retyping(name, fn, replay if replay is not None else ())):
                 _record(violation)
         except Exception as exc:
             _STATE["law_errors"].append(f"iterable_retyping:{name}:{type(exc).__name__}")
+    if _want("content_retyping") and args and result is not None and _budget("cr:" + qual, limit=40):
+        # The mutation goes inside the parsed content, so the parser's own inverse has to put it back into
+        # a document the parser will accept; without that the signature check answers first and the claim
+        # is never read (measured: mutating the payload text alone raises InvalidSignatureError).
+        inverse = _inverse_for(namespace, name)
+        errors = laws.package_error_classes(module_name, cache=_STATE.setdefault("errors", {}))
+        offset = 1 if owner else 0
+        if inverse is not None and errors and len(args) > offset and isinstance(args[offset], str):
+            head, tail = tuple(args)[:offset], tuple(args)[offset + 1:]
+            recall = lambda document: fn(*head, document, *tail, **kwargs)  # noqa: E731
+            encode = lambda mutated: inverse(*head, mutated, *tail[:1])  # noqa: E731
+            try:
+                for violation in _quiet(lambda: laws.check_content_retyping(
+                        name, recall, encode, result, errors,
+                        package=module_name.split(".")[0])):
+                    violation["where"] = qual
+                    _record(violation)
+            except Exception as exc:
+                _STATE["law_errors"].append(f"content_retyping:{name}:{type(exc).__name__}")
     if _want("error_discipline") and args and _budget("err:" + qual, limit=12):
         errors = laws.package_error_classes(module_name, cache=_STATE.setdefault("errors", {}))
         if errors:
             outcomes: list[tuple[str, type | None]] = []
-            replay = _replay(args)
             for idx, label, mutated in laws.mutations_for(replay or ()):
                 # Must be the *copies*: building new_args from the live args let
                 # `prepend("not-a-number")` land on the suite's own instance and broke 14 tests.
                 new_args = list(replay or ())
                 new_args[idx] = mutated
                 try:
-                    fn(*new_args, **kwargs)
+                    _quiet(lambda: fn(*new_args, **kwargs))
                     outcomes.append((f"[{idx}]={label}", None))
                 except BaseException as exc:  # noqa: BLE001 - the type *is* the observable
                     outcomes.append((f"[{idx}]={label}", type(exc)))

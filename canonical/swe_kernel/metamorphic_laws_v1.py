@@ -401,3 +401,135 @@ def mutations_for(args: Sequence[Any], *, budget: int = 4) -> list[tuple[int, st
         elif value is None:
             out.append((idx, "str", "none"))
     return out
+
+def _document_variants(text: str) -> list[tuple[str, str]]:
+    """Mutate the claims of a dot-separated base64url document (`header.payload.signature`).
+
+    The content of a token is attacker-controlled, so a parser's contract is that content it cannot
+    interpret is answered with the package's own error. The mutation is the smallest one that changes a
+    *value* while leaving the document well-formed: one claim at a time replaced with a wrong-typed value.
+    """
+    import base64
+    import json
+
+    parts = text.split(".")
+    if len(parts) != 3:
+        return []
+    try:
+        padded = parts[1] + "=" * (-len(parts[1]) % 4)
+        claims = json.loads(base64.urlsafe_b64decode(padded))
+    except Exception:
+        return []
+    if not isinstance(claims, dict) or not claims:
+        return []
+    out: list[tuple[str, str]] = []
+    for key, _ in claims.items():
+        for value in ([1], None):
+            mutated = dict(claims)
+            mutated[key] = value
+            body = base64.urlsafe_b64encode(json.dumps(mutated).encode()).rstrip(b"=").decode()
+            out.append((f"{key}={value!r}", ".".join([parts[0], body, parts[2]])))
+    return out[:12]
+
+
+def _escape_site(exc: BaseException, package: str) -> str:
+    """The innermost frame of the package in which a leaked exception was raised."""
+    import os
+    import traceback
+
+    frames = traceback.extract_tb(exc.__traceback__)
+    if not frames:
+        return ""
+    if not package:
+        # No package hint (a law run outside a known tree): the innermost frame is still the site.
+        frame = frames[-1]
+        return f"{frame.name} ({os.path.basename(frame.filename)}:{frame.lineno})"
+    best = ""
+    for frame in frames:
+        if f"{os.sep}{package}{os.sep}" in frame.filename:
+            best = f"{frame.name} ({os.path.basename(frame.filename)}:{frame.lineno})"
+    return best
+
+
+def check_document_retyping(
+    name: str,
+    fn: Callable[..., Any],
+    args: Sequence[Any],
+    error_classes: Sequence[type],
+    package: str = "",
+) -> list[Violation]:
+    """A wrong-typed value inside a document must not leak a builtin exception out of the parser.
+
+    Measured need: `pyjwt` decoded `{"exp": [1]}` and `int([1])` raised `TypeError`, which the handler —
+    `except ValueError` — did not catch, so `jwt.decode()` leaked `TypeError` for an attacker-controlled
+    claim while every other malformed claim raised `DecodeError`. Applications catching `PyJWTError` (the
+    documented contract) crashed. The witness is a *value inside the argument*, which is why every law
+    that mutates the arguments themselves (V17's `error_discipline`) could not name this site.
+    """
+    if not args or not isinstance(args[0], str):
+        return []
+    out: list[Violation] = []
+    for label, document in _document_variants(args[0]):
+        new_args = (document,) + tuple(args[1:])
+        try:
+            fn(*new_args)
+        except Exception as exc:  # noqa: BLE001 - the family is the observable
+            if error_classes and isinstance(exc, tuple(error_classes)):
+                continue
+            out.append(Violation(
+                "document_retyping",
+                name,
+                f"{label} raised {type(exc).__name__} at {_escape_site(exc, package) or 'unknown site'}: {exc}",
+            ))
+    return out
+
+def check_content_retyping(
+    name: str,
+    recall: Callable[[Any], Any],
+    encode: Callable[[Any], Any],
+    result: Any,
+    error_classes: Sequence[type],
+    package: str = "",
+) -> list[Violation]:
+    """Values *inside* a parsed document are attacker-controlled too — including after re-encoding.
+
+    Mutating the serialized text is not enough for a signed document: changing the payload invalidates the
+    signature, so the parser rejects it before it ever reads the claim (`InvalidSignatureError`, measured).
+    The parser's own inverse — `encode` next to `decode` — puts the mutation back into a *valid* document,
+    which is the only form in which the defect is reachable.
+
+    The two callables are supplied by the caller, not derived here: the parser's keyword arguments
+    (`algorithms=["HS256"]`) are part of the call, and slicing the positional arguments alone dropped them,
+    so the re-invocation raised "algorithms required" — a member of the package family — and the law saw
+    nothing. A closure over the *whole* call is the only faithful replay.
+    """
+    from collections.abc import Mapping
+
+    if not isinstance(result, Mapping):
+        return []
+    out: list[Violation] = []
+    for claim in list(result)[:6]:
+        # `inf` is the value that separates the families: `int(float("inf"))` raises `OverflowError`, not
+        # `TypeError`. Measured on pyjwt: broadening to `(ValueError, TypeError)` cleared 9 of the 12 hidden
+        # cases and still failed the three `inf` ones, because no mutation had ever produced `OverflowError`.
+        for value in ([1], None, float("inf")):
+            mutated = dict(result)
+            mutated[claim] = value
+            try:
+                document = encode(mutated)
+            except Exception:
+                continue
+            if not isinstance(document, (str, bytes)):
+                continue
+            try:
+                recall(document)
+            except Exception as exc:  # noqa: BLE001 - the family is the observable
+                if error_classes and isinstance(exc, tuple(error_classes)):
+                    continue
+                out.append(Violation(
+                    "content_retyping",
+                    name,
+                    f"{claim}={value!r} raised {type(exc).__name__} at "
+                    f"{_escape_site(exc, package) or 'unknown site'}: {exc}",
+                ))
+    return out
