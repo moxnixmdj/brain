@@ -1,0 +1,43 @@
+W=/home/runner/work/brain/brain/work-nop-0
+/home/runner/work/brain/brain/work-nop-0/jobs
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/job.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/artifacts
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/artifacts
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/verifier
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/agent
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/config.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/trial.log
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/lock.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/artifacts
+--- result.json files ---
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
+/home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__Aii9UJh/result.json
+--- keys of the first result.json found ---
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__kt4gEne/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/instance_qutebrowser__qutebrowse__g7JaoMu/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+## /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
+['finished_at', 'id', 'n_total_trials', 'started_at', 'stats', 'updated_at']

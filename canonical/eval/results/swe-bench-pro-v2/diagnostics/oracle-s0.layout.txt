@@ -1,0 +1,43 @@
+W=/home/runner/work/brain/brain/work-oracle-0
+/home/runner/work/brain/brain/work-oracle-0/jobs
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/artifacts
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/config.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/agent
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/verifier
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/lock.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/trial.log
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/artifacts
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/config.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/agent
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/verifier
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/lock.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/trial.log
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/job.log
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/artifacts
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/config.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/agent
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/verifier
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/lock.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/trial.log
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/config.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/lock.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/result.json
+--- result.json files ---
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/result.json
+/home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/result.json
+--- keys of the first result.json found ---
+## /home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__KJSStBt/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+## /home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__hqvSw58/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+## /home/runner/work/brain/brain/work-oracle-0/jobs/swe-pro-v2-oracle-s0/instance_qutebrowser__qutebrowse__iwbgeZ9/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']

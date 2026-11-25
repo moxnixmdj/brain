@@ -1,6 +1,6 @@
 # SWE-bench Pro V2 (smoke: 3 qutebrowser HARD-51 tasks) — engine eval (measured run)
 
-- upstream/eval commit recorded by CI: `003e43dff429e8dad992c5658b05ccba49e47923`
+- upstream/eval commit recorded by CI: `3c5b04356a6aea4c30332679374ed23fbd30ba5d`
 - Resolve decisions come from each task's own verifier inside the official container image.
 - `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.
 
@@ -30,4 +30,6 @@
 | `instance_qutebrowser__qutebrowser-3e21c8214a998cb1058def` | None | no | NOT_RUN | None | 0 |
 | `instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af57` | None | no | NOT_RUN | None | 0 |
 | `instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd5` | None | no | NOT_RUN | None | 0 |
+
+What the engine did across the causal arm (behaviour, not a score): `NOT_RUN`×3. Resolve rate is decided only by each task's own verifier.
 

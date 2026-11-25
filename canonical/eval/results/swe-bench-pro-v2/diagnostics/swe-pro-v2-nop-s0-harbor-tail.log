@@ -1,7 +1,7 @@
 Tip: There are many benchmarks available in Harbor's registry.
 Run `harbor datasets list` to see all available datasets.
 
-  3/3 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:02:07 0:00:00
+  3/3 Mean: 0.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:02:45 0:00:00
 
 adhoc • nop
 ┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
@@ -17,7 +17,7 @@ adhoc • nop
 └────────┴───────┘
 
 Job Info
-Total runtime: 2m 7s
+Total runtime: 2m 45s
 Results written to 
 /home/runner/work/brain/brain/work-nop-0/jobs/swe-pro-v2-nop-s0/result.json
 Inspect results by running `harbor view 
