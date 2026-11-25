@@ -1,0 +1,57 @@
+{
+ "schema": "BRAIN_LINE_LOCALISATION_RECEIPT_V1",
+ "generated": "2026-11-25T16:46:41Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 14.2
+ },
+ "the_question": "file-level localisation generalises (17/28 top-1). Line-level has never been measured. Where in the file does the edit go, scored against the lines the real commit touched?",
+ "measured": {
+  "tasks": 28,
+  "file_top1": 17,
+  "line_top1": 1,
+  "hit_within_5": 6,
+  "hit_within_10": 9,
+  "hit_within_25": 12,
+  "never_reaches_within_25": 16,
+  "median_truth_lines": 20,
+  "median_ranked_lines": 113
+ },
+ "the_gap_that_explains_everything": {
+  "right_file_at_rank_1": 16,
+  "of_those_line_reached_within_25": 5,
+  "of_those_line_reached_within_10": 2,
+  "of_those_line_reached_at_1": 0,
+  "reading": "even when the file is correct, the line is reached in 5 of 16 cases. V38's blind search could not reach the position because the system never had a position to reach. That is the wall, quantified."
+ },
+ "rankers_that_were_tried_and_deleted": [
+  {
+   "name": "EXCEPTION",
+   "what": "lines near raise/except for the exception type named in the failure",
+   "measured": "a net loss: generic types (TypeError, NotImplementedError, ExceptionGroup) appear on hundreds of lines and the ranker contributed noise",
+   "action": "restricted to non-generic exception types"
+  },
+  {
+   "name": "SHAPE",
+   "what": "statements whose shape repeats across sibling functions",
+   "measured": "made line_top1 1 -> 0, within-25 12 -> 8",
+   "action": "deleted"
+  },
+  {
+   "name": "file ordering by fusion strength",
+   "what": "rank files by mean reciprocal rank of each ranker's first line",
+   "measured": "file_top1 17 -> 11",
+   "action": "reverted to ordering by fused length"
+  }
+ ],
+ "the_one_ranker_that_helped": {
+  "name": "NAMED",
+  "what": "lines inside a function or class the commit message names",
+  "measured": "within-5 5 -> 6, within-10 7 -> 9",
+  "note": "small and measured, not assumed"
+ },
+ "what_this_establishes": "line-level localisation is not a solved problem at this scale: 1 of 28 top-1 against 17 of 28 for the file. The generation wall V38 found is downstream of this.",
+ "what_this_does_not_establish": "that no ranker could do better. Three were tried and deleted on measurement; others may exist. No SWE-bench, Terminal-Bench or OSWorld task has been attempted and no benchmark row exists or is claimed."
+}

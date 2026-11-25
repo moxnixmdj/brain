@@ -1,0 +1,407 @@
+{
+ "schema": "BRAIN_ASK_WHAT_YOU_WILL_BE_TESTED_ON_V1",
+ "generated": "2026-11-25T01:40:55Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 134.3
+ },
+ "seeds": [
+  13,
+  42
+ ],
+ "rows": [
+  {
+   "machine": "GIT",
+   "A_walk_only": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 23
+   },
+   "ADJACENT": {
+    "predictions": 21,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 18,
+    "confirmed": 9,
+    "falsified": 9
+   },
+   "REPRESENTATIVE": {
+    "predictions": 21,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 18,
+    "confirmed": 10,
+    "falsified": 8
+   },
+   "RANDOM": {
+    "predictions": 17,
+    "wrong": 0,
+    "refused": 18,
+    "probes": 10,
+    "confirmed": 6,
+    "falsified": 4
+   }
+  },
+  {
+   "machine": "GIT2",
+   "A_walk_only": {
+    "predictions": 11,
+    "wrong": 2,
+    "refused": 29
+   },
+   "ADJACENT": {
+    "predictions": 31,
+    "wrong": 2,
+    "refused": 9,
+    "probes": 27,
+    "confirmed": 10,
+    "falsified": 17
+   },
+   "REPRESENTATIVE": {
+    "predictions": 31,
+    "wrong": 2,
+    "refused": 9,
+    "probes": 27,
+    "confirmed": 11,
+    "falsified": 16
+   },
+   "RANDOM": {
+    "predictions": 12,
+    "wrong": 2,
+    "refused": 28,
+    "probes": 9,
+    "confirmed": 1,
+    "falsified": 8
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "ADJACENT": {
+    "predictions": 2,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   },
+   "REPRESENTATIVE": {
+    "predictions": 2,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   },
+   "RANDOM": {
+    "predictions": 2,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   }
+  },
+  {
+   "machine": "LIST",
+   "A_walk_only": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181
+   },
+   "ADJACENT": {
+    "predictions": 42,
+    "wrong": 6,
+    "refused": 168,
+    "probes": 16,
+    "confirmed": 4,
+    "falsified": 12
+   },
+   "REPRESENTATIVE": {
+    "predictions": 42,
+    "wrong": 6,
+    "refused": 168,
+    "probes": 16,
+    "confirmed": 4,
+    "falsified": 12
+   },
+   "RANDOM": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181,
+    "probes": 2,
+    "confirmed": 0,
+    "falsified": 2
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "ADJACENT": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "REPRESENTATIVE": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "RANDOM": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   }
+  },
+  {
+   "machine": "VAULT",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "ADJACENT": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "REPRESENTATIVE": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "RANDOM": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   }
+  },
+  {
+   "machine": "GIT",
+   "A_walk_only": {
+    "predictions": 13,
+    "wrong": 0,
+    "refused": 22
+   },
+   "ADJACENT": {
+    "predictions": 20,
+    "wrong": 0,
+    "refused": 15,
+    "probes": 23,
+    "confirmed": 10,
+    "falsified": 13
+   },
+   "REPRESENTATIVE": {
+    "predictions": 20,
+    "wrong": 0,
+    "refused": 15,
+    "probes": 23,
+    "confirmed": 11,
+    "falsified": 12
+   },
+   "RANDOM": {
+    "predictions": 19,
+    "wrong": 0,
+    "refused": 16,
+    "probes": 5,
+    "confirmed": 3,
+    "falsified": 2
+   }
+  },
+  {
+   "machine": "GIT2",
+   "A_walk_only": {
+    "predictions": 5,
+    "wrong": 0,
+    "refused": 19
+   },
+   "ADJACENT": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 12,
+    "probes": 27,
+    "confirmed": 12,
+    "falsified": 15
+   },
+   "REPRESENTATIVE": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 12,
+    "probes": 27,
+    "confirmed": 12,
+    "falsified": 15
+   },
+   "RANDOM": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 14,
+    "probes": 15,
+    "confirmed": 5,
+    "falsified": 10
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "ADJACENT": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   },
+   "REPRESENTATIVE": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   },
+   "RANDOM": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16,
+    "probes": 3,
+    "confirmed": 0,
+    "falsified": 3
+   }
+  },
+  {
+   "machine": "LIST",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 203
+   },
+   "ADJACENT": {
+    "predictions": 26,
+    "wrong": 2,
+    "refused": 177,
+    "probes": 27,
+    "confirmed": 8,
+    "falsified": 19
+   },
+   "REPRESENTATIVE": {
+    "predictions": 26,
+    "wrong": 2,
+    "refused": 177,
+    "probes": 23,
+    "confirmed": 7,
+    "falsified": 16
+   },
+   "RANDOM": {
+    "predictions": 24,
+    "wrong": 1,
+    "refused": 179,
+    "probes": 20,
+    "confirmed": 7,
+    "falsified": 13
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "A_walk_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "ADJACENT": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "REPRESENTATIVE": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   },
+   "RANDOM": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1
+   }
+  }
+ ],
+ "summary": {
+  "machines": 11,
+  "budget": 30,
+  "walk_steps": 120,
+  "A_walk_only": {
+   "predictions": 70,
+   "wrong": 5,
+   "probes": 0,
+   "correct": 65,
+   "accuracy": 0.929
+  },
+  "ADJACENT": {
+   "predictions": 154,
+   "wrong": 10,
+   "probes": 147,
+   "correct": 144,
+   "accuracy": 0.935
+  },
+  "REPRESENTATIVE": {
+   "predictions": 154,
+   "wrong": 10,
+   "probes": 143,
+   "correct": 144,
+   "accuracy": 0.935
+  },
+  "RANDOM": {
+   "predictions": 113,
+   "wrong": 6,
+   "probes": 70,
+   "correct": 107,
+   "accuracy": 0.947
+  },
+  "verdicts": {
+   "representative_beats_adjacent_on_correct": false,
+   "representative_beats_random_on_correct": true,
+   "representative_keeps_a_better_accuracy_than_adjacent": false,
+   "representative_beats_asking_nothing_on_correct": true
+  }
+ }
+}

@@ -1,0 +1,704 @@
+{
+ "schema": "BRAIN_ASK_INSTEAD_OF_STARE_V1",
+ "generated": "2026-11-24T23:41:37Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 100.46
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "atoms": 4,
+   "transitions": 12,
+   "contradictions_at_start": 3,
+   "asked": 1,
+   "answered": 1,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "AR_A1",
+     "prefix": [
+      "AR_A2"
+     ],
+     "predicate_held": true
+    }
+   ],
+   "probes_verified": 1,
+   "operators_before": 12,
+   "operators_after": 9,
+   "atoms_before": 4,
+   "atoms_after": 3,
+   "atoms_total": 4,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "atoms": 5,
+   "transitions": 20,
+   "contradictions_at_start": 0,
+   "asked": 0,
+   "answered": 0,
+   "unaskable": 0,
+   "probes_run": [],
+   "probes_verified": 0,
+   "operators_before": 20,
+   "operators_after": 20,
+   "atoms_before": 5,
+   "atoms_after": 5,
+   "atoms_total": 5,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "GIT",
+   "atoms": 5,
+   "transitions": 40,
+   "contradictions_at_start": 28,
+   "asked": 8,
+   "answered": 0,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "GIT_A1",
+     "prefix": [
+      "GIT_A4"
+     ],
+     "predicate_held": false
+    }
+   ],
+   "probes_verified": 0,
+   "operators_before": 40,
+   "operators_after": 40,
+   "atoms_before": 5,
+   "atoms_after": 5,
+   "atoms_total": 5,
+   "contradictions_at_end": 28
+  },
+  {
+   "machine": "GIT2",
+   "atoms": 4,
+   "transitions": 24,
+   "contradictions_at_start": 30,
+   "asked": 8,
+   "answered": 0,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    },
+    {
+     "atom": "G2_A1",
+     "prefix": [
+      "G2_A3"
+     ],
+     "predicate_held": false
+    }
+   ],
+   "probes_verified": 0,
+   "operators_before": 24,
+   "operators_after": 24,
+   "atoms_before": 4,
+   "atoms_after": 4,
+   "atoms_total": 4,
+   "contradictions_at_end": 30
+  },
+  {
+   "machine": "JOURNAL",
+   "atoms": 4,
+   "transitions": 28,
+   "contradictions_at_start": 63,
+   "asked": 3,
+   "answered": 3,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "JN_A1",
+     "prefix": [
+      "JN_A4"
+     ],
+     "predicate_held": true
+    },
+    {
+     "atom": "JN_A2",
+     "prefix": [
+      "JN_A4"
+     ],
+     "predicate_held": true
+    },
+    {
+     "atom": "JN_A3",
+     "prefix": [
+      "JN_A4"
+     ],
+     "predicate_held": true
+    }
+   ],
+   "probes_verified": 3,
+   "operators_before": 28,
+   "operators_after": 7,
+   "atoms_before": 4,
+   "atoms_after": 1,
+   "atoms_total": 4,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "LIST",
+   "atoms": 7,
+   "transitions": 231,
+   "contradictions_at_start": 1584,
+   "asked": 3,
+   "answered": 3,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "LS_A5",
+     "prefix": [
+      "LS_A4"
+     ],
+     "predicate_held": true
+    },
+    {
+     "atom": "LS_A6",
+     "prefix": [
+      "LS_A4"
+     ],
+     "predicate_held": true
+    },
+    {
+     "atom": "LS_A7",
+     "prefix": [
+      "LS_A4"
+     ],
+     "predicate_held": true
+    }
+   ],
+   "probes_verified": 3,
+   "operators_before": 231,
+   "operators_after": 132,
+   "atoms_before": 7,
+   "atoms_after": 4,
+   "atoms_total": 7,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "SQLITE",
+   "atoms": 4,
+   "transitions": 12,
+   "contradictions_at_start": 3,
+   "asked": 1,
+   "answered": 1,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "SQL_A1",
+     "prefix": [
+      "SQL_A2"
+     ],
+     "predicate_held": true
+    }
+   ],
+   "probes_verified": 1,
+   "operators_before": 12,
+   "operators_after": 9,
+   "atoms_before": 4,
+   "atoms_after": 3,
+   "atoms_total": 4,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "TARBALL",
+   "atoms": 4,
+   "transitions": 12,
+   "contradictions_at_start": 3,
+   "asked": 1,
+   "answered": 1,
+   "unaskable": 0,
+   "probes_run": [
+    {
+     "atom": "TAR_A1",
+     "prefix": [
+      "TAR_A2"
+     ],
+     "predicate_held": true
+    }
+   ],
+   "probes_verified": 1,
+   "operators_before": 12,
+   "operators_after": 9,
+   "atoms_before": 4,
+   "atoms_after": 3,
+   "atoms_total": 4,
+   "contradictions_at_end": 0
+  },
+  {
+   "machine": "VAULT",
+   "atoms": 4,
+   "transitions": 16,
+   "contradictions_at_start": 0,
+   "asked": 0,
+   "answered": 0,
+   "unaskable": 0,
+   "probes_run": [],
+   "probes_verified": 0,
+   "operators_before": 16,
+   "operators_after": 16,
+   "atoms_before": 4,
+   "atoms_after": 4,
+   "atoms_total": 4,
+   "contradictions_at_end": 0
+  }
+ ],
+ "budget_rows": [
+  {
+   "machine": "ARCHIVE2",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 2,
+   "arm_A_zero_queries": {
+    "pred": 2,
+    "right": 0,
+    "WRONG": 2,
+    "refused": 2,
+    "coverage": 0.5,
+    "sound": false
+   },
+   "arm_B_targeted": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 2
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": false,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  },
+  {
+   "machine": "FILESYSTEM",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 3,
+   "arm_A_zero_queries": {
+    "pred": 1,
+    "right": 1,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.2,
+    "sound": true
+   },
+   "arm_B_targeted": {
+    "pred": 1,
+    "right": 1,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.2,
+    "sound": true,
+    "queries": 0
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 5,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": true,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  },
+  {
+   "machine": "GIT",
+   "budget": 8,
+   "held_states": 2,
+   "queryable_states": 9,
+   "arm_A_zero_queries": {
+    "pred": 3,
+    "right": 0,
+    "WRONG": 3,
+    "refused": 7,
+    "coverage": 0.3,
+    "sound": false
+   },
+   "arm_B_targeted": {
+    "pred": 3,
+    "right": 0,
+    "WRONG": 3,
+    "refused": 7,
+    "coverage": 0.3,
+    "sound": false,
+    "queries": 0
+   },
+   "arm_C_random": {
+    "pred": 1,
+    "right": 0,
+    "WRONG": 1,
+    "refused": 9,
+    "coverage": 0.1,
+    "sound": false,
+    "queries": 8
+   },
+   "targeted_beats_random": true,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": false
+  },
+  {
+   "machine": "GIT2",
+   "budget": 8,
+   "held_states": 2,
+   "queryable_states": 7,
+   "arm_A_zero_queries": {
+    "pred": 4,
+    "right": 0,
+    "WRONG": 4,
+    "refused": 4,
+    "coverage": 0.5,
+    "sound": false
+   },
+   "arm_B_targeted": {
+    "pred": 4,
+    "right": 0,
+    "WRONG": 4,
+    "refused": 4,
+    "coverage": 0.5,
+    "sound": false,
+    "queries": 0
+   },
+   "arm_C_random": {
+    "pred": 2,
+    "right": 0,
+    "WRONG": 2,
+    "refused": 6,
+    "coverage": 0.25,
+    "sound": false,
+    "queries": 7
+   },
+   "targeted_beats_random": true,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": false
+  },
+  {
+   "machine": "JOURNAL",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 6,
+   "arm_A_zero_queries": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true
+   },
+   "arm_B_targeted": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 3
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": false,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  },
+  {
+   "machine": "LIST",
+   "budget": 8,
+   "held_states": 8,
+   "queryable_states": 25,
+   "arm_A_zero_queries": {
+    "pred": 24,
+    "right": 3,
+    "WRONG": 21,
+    "refused": 32,
+    "coverage": 0.4286,
+    "sound": false
+   },
+   "arm_B_targeted": {
+    "pred": 12,
+    "right": 3,
+    "WRONG": 9,
+    "refused": 44,
+    "coverage": 0.2143,
+    "sound": false,
+    "queries": 3
+   },
+   "arm_C_random": {
+    "pred": 4,
+    "right": 0,
+    "WRONG": 4,
+    "refused": 52,
+    "coverage": 0.0714,
+    "sound": false,
+    "queries": 8
+   },
+   "targeted_beats_random": true,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": false
+  },
+  {
+   "machine": "SQLITE",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 2,
+   "arm_A_zero_queries": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true
+   },
+   "arm_B_targeted": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 1
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": false,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  },
+  {
+   "machine": "TARBALL",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 2,
+   "arm_A_zero_queries": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true
+   },
+   "arm_B_targeted": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 2
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": false,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  },
+  {
+   "machine": "VAULT",
+   "budget": 8,
+   "held_states": 1,
+   "queryable_states": 3,
+   "arm_A_zero_queries": {
+    "pred": 2,
+    "right": 2,
+    "WRONG": 0,
+    "refused": 2,
+    "coverage": 0.5,
+    "sound": true
+   },
+   "arm_B_targeted": {
+    "pred": 2,
+    "right": 2,
+    "WRONG": 0,
+    "refused": 2,
+    "coverage": 0.5,
+    "sound": true,
+    "queries": 0
+   },
+   "arm_C_random": {
+    "pred": 0,
+    "right": 0,
+    "WRONG": 0,
+    "refused": 4,
+    "coverage": 0.0,
+    "sound": true,
+    "queries": 8
+   },
+   "targeted_beats_random": true,
+   "targeted_beats_nothing": false,
+   "targeted_stays_sound": true
+  }
+ ],
+ "budget_summary": {
+  "zero_queries_predictions": 36,
+  "zero_queries_wrong": 30,
+  "targeted_predictions": 22,
+  "targeted_wrong": 16,
+  "random_predictions": 7,
+  "random_wrong": 7,
+  "queries_spent": 11,
+  "verdicts": {
+   "targeted_beats_random_on_the_same_budget": true,
+   "targeted_beats_no_queries_at_all": false,
+   "targeted_stays_sound": false
+  }
+ },
+ "summary": {
+  "machines": 9,
+  "asked": 25,
+  "answered": 9,
+  "unaskable": 0,
+  "probes_verified": 9,
+  "contradictions_at_start": 1714,
+  "contradictions_at_end": 58,
+  "operators_before": 395,
+  "operators_after": 266,
+  "atoms_before": 41,
+  "atoms_after": 32,
+  "verdicts": {
+   "the_environment_answers_some_questions": true,
+   "every_question_was_checked_not_assumed": false,
+   "some_questions_are_unaskable_with_this_atom_set": false,
+   "asking_reduces_contradictions": true,
+   "the_reduction_kept_the_atoms": true
+  }
+ },
+ "fork": {
+  "final_content": "child-b",
+  "both_children_wrote_their_own_reality": true,
+  "isolated": false,
+  "why": "both children wrote the same path; the last writer won, so the branches were one reality observed twice, not two realities"
+ }
+}

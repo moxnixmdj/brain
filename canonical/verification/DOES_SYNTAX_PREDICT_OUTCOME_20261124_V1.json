@@ -1,0 +1,52 @@
+{
+ "schema": "BRAIN_DOES_SYNTAX_PREDICT_OUTCOME_V1",
+ "generated": "2026-11-25T12:53:58Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 1349.5
+ },
+ "summary": {
+  "tests_run": 2242,
+  "trained": 1437,
+  "held_out": 805,
+  "pass_rate_train": 0.9645,
+  "pass_rate_held_out": 0.9478,
+  "majority_class_accuracy": 0.9478,
+  "best": {
+   "subset": [
+    "BRANCH_ON_CALL",
+    "BRANCH_ON_NAME",
+    "BRANCH_ON_SUBSCRIPT",
+    "COUNTS_ON_OPERATION",
+    "LINES"
+   ],
+   "predictions": 97,
+   "wrong": 0,
+   "refused": 708,
+   "accuracy": 1.0,
+   "coverage": 0.1205
+  },
+  "detail": {
+   "predictions": 97,
+   "wrong": 0,
+   "refused": 708,
+   "said_fail": 0,
+   "said_fail_right": 0,
+   "failures_in_held_out": 42,
+   "failures_spoken_about": 0,
+   "same_coverage_always_pass_accuracy": 1.0
+  },
+  "verdicts": {
+   "there_are_both_outcomes_in_the_data": true,
+   "the_vocabulary_beats_the_majority_class": true,
+   "the_vocabulary_beats_always_pass_at_equal_coverage": false,
+   "the_vocabulary_predicts_any_failure": false,
+   "the_vocabulary_is_only_a_confident_pass_detector": true,
+   "the_vocabulary_predicts_anything_at_all": true,
+   "the_target_is_an_outcome_not_a_syntax_class": true
+  },
+  "baseline_note": "majority_class_accuracy is the bar at full coverage. At the vocabulary's OWN coverage the bar is same_coverage_always_pass_accuracy, and the decisive number is said_fail_right: a vocabulary that never predicts a failure is a confident-pass detector with abstention, not a predictor of outcomes."
+ }
+}

@@ -1,0 +1,423 @@
+{
+ "schema": "BRAIN_SWE_VERIFIED_ISSUE_TEXT_V1",
+ "generated": "2026-11-25T13:50:43Z",
+ "source": "GitHub issue and pull-request bodies for the instance ids recorded in FIX_CONTENT_IN_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json. Reference patches and test patches were NOT fetched.",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "network_during_build": 1,
+  "kind_of_network": "plain public issue fetch"
+ },
+ "summary": {
+  "instances_attempted": 80,
+  "issue_text_fetched": 80,
+  "fetch_failed": [],
+  "median_text_chars": 277,
+  "min_text_chars": 29,
+  "max_text_chars": 4458,
+  "what_this_is_not": "not a benchmark result. It is the distribution of the input this system is handed before it does anything, so that a gate measured on four hand-written goals can be measured on the real thing."
+ },
+ "per_instance": {
+  "astropy__astropy-12907": {
+   "title": "Correctly calculate the separability of a nested compound model",
+   "body": "It appeared the issue was in calculating the separability when there was a compound model on the right of the & operand.\r\n\r\nFixes #12906",
+   "url": "https://github.com/astropy/astropy/pull/12907"
+  },
+  "astropy__astropy-14309": {
+   "title": "BUG: Fix broken logic in FITS connect when filepath is given without args",
+   "body": "<!-- This comments are hidden when you submit the pull request,\r\nso you do not need to remove them! -->\r\n\r\n<!-- Please be sure to check out our contributing guidelines,\r\nhttps://github.com/astropy/astropy/blob/main/CONTRIBUTING.md .\r\nPlease be sure to check out our code of conduct,\r\nhttps://github.com/astropy/astropy/blob/main/CODE_OF_CONDUCT.md . -->\r\n\r\n<!-- If you are new or need to be re-acquainted with Astropy\r\ncontributing workflow, please see\r\nhttp://docs.astropy.org/en/latest/development/workflow/development_workflow.html .\r\nThere is even a practical example at\r\nhttps://docs.astropy.org/en/latest/development/workflow/git_edit_workflow_examples.html#astropy-fix-example . -->\r\n\r\n<!-- Astropy coding style guidelines can be found here:\r\nhttps://docs.astropy.org/en/latest/development/codeguide.html#coding-style-conventions\r\nOur testing infrastructure enforces to follow a subset of the PEP8 to be\r\nfollowed. You can check locally whether your changes have followed these by\r\nrunning the following command:\r\n\r\ntox -e codestyle\r\n\r\n-->\r\n\r\n<!-- Please just have a quick search on GitHub to see if a similar\r\npull request has already been posted.\r\nWe have old closed pull requests that might provide useful code or ideas\r\nthat directly tie in with your pull request. -->\r\n\r\n<!-- We have several automatic features that run when a pull request is open.\r\nThey can appear daunting but do not worry because maintainers will help\r\nyou navigate them, if necessary. -->\r\n\r\n### Description\r\n<!-- Provide a general description of what your pull request does.\r\nComplete the following sentence and add relevant details as you see fit. -->\r\n\r\n<!-- In addition please ensure that the pull request title is descriptive\r\nand allows maintainers to infer the applicable subpackage(s). -->\r\n\r\n<!-- READ THIS FOR MANUAL BACKPORT FROM A MAINTAINER:\r\nApply \"skip-basebranch-check\" label **before** you open the PR! -->\r\n\r\nThis pull request is to fix `IndexError: tuple index out of range in identify_format` from `io.registry` for FITS when `filepath` is provided without `args`.\r\n\r\n<!-- If the pull request closes any open issues you can add this.\r\nIf you replace <Issue Number> with a number, GitHub will automatically link it.\r\nIf this pull request is unrelated to any issues, please remove\r\nthe following line. -->\r\n\r\nFixes #14305 \r\n\r\nThis is a direct follow-up of #14274 \r\n\r\n### Checklist for package maintainer(s)\r\n<!-- This section is to be filled by package maintainer(s) who will\r\nreview this pull request. -->\r\n\r\nThis checklist is meant to remind the package maintainer(s) who will review this pull request of some common things to look for. This list is not exhaustive.\r\n\r\n- [x] Do the proposed changes actually accomplish desired goals?\r\n- [x] Do the proposed changes follow the [Astropy coding guidelines](https://docs.astropy.org/en/latest/development/codeguide.html)?\r\n- [x] Are tests added/updated as required? If so, do they follow the [Astropy testing guidelines](https://docs.astropy.org/en/latest/development/testguide.html)?\r\n- [x] Are docs added/updated as required? If so, do they follow the [Astropy documentation guidelines](https://docs.astropy.org/en/latest/development/docguide.html#astropy-documentation-rules-and-guidelines)?\r\n- [ ] Is rebase and/or squash necessary? If so, please provide the author with appropriate instructions. Also see [\"When to rebase and squash commits\"](https://docs.astropy.org/en/latest/development/when_to_rebase.html).\r\n- [x] Did the CI pass? If no, are the failures related? If you need to run daily and weekly cron jobs as part of the PR, please apply the `Extra CI` label. Codestyle issues can be fixed by the [bot](https://docs.astropy.org/en/latest/development/workflow/development_workflow.html#pre-commit).\r\n- [x] Is a change log needed? If yes, did the change log check pass? If no, add the `no-changelog-entry-needed` label. If this is a manual backport, use the `skip-changelog-checks` label unless special changelog handling is necessary.\r\n- [x] Is this a big PR that makes a \"What's new?\" entry worthwhile and if so, is (1) a \"what's new\" entry included in this PR and (2) the \"whatsnew-needed\" label applied?\r\n- [x] Is a milestone set? Milestone must be set but `astropy-bot` check might be missing; do not let the green checkmark fool you.\r\n- [x] At the time of adding the milestone, if the milestone set requires a backport to release branch(es), apply the appropriate `backport-X.Y.x` label(s) *before* merge.\r\n",
+   "url": "https://github.com/astropy/astropy/pull/14309"
+  },
+  "django__django-11066": {
+   "title": "Fixed #29706 -- Made RenameContentType._rename() save to the correct database.",
+   "body": "https://code.djangoproject.com/ticket/29706",
+   "url": "https://github.com/django/django/pull/11066"
+  },
+  "django__django-11119": {
+   "title": "Fixed #29791 -- Honor engine's autoescape attribute in render_to_string",
+   "body": "Passed down autoescape value from Engine to Context in Engine.render_to_string.",
+   "url": "https://github.com/django/django/pull/11119"
+  },
+  "django__django-11133": {
+   "title": "Fixed #30294 -- Allowed HttpResponse to accept memoryview objects.",
+   "body": "Ticket [#30294](https://code.djangoproject.com/ticket/30294).",
+   "url": "https://github.com/django/django/pull/11133"
+  },
+  "django__django-11163": {
+   "title": "Fixed #30302 -- Fixed forms.model_to_dict() result if empty list of fields is passed.",
+   "body": "called with empty fields list",
+   "url": "https://github.com/django/django/pull/11163"
+  },
+  "django__django-11299": {
+   "title": "Fixed #30412 -- Fixed crash when adding check constraints with OR'ed condition on Oracle and SQLite.",
+   "body": "Ticket: [#30412](https://code.djangoproject.com/ticket/30412)",
+   "url": "https://github.com/django/django/pull/11299"
+  },
+  "django__django-12125": {
+   "title": "Fixed #27914 -- Fixed serialization of nested classes in migrations.",
+   "body": "With v3.0.x introducing models.Choices, models.IntegerChoices, using nested enums will become a common pattern; serializing them properly with __qualname__ seems prudent.\r\n",
+   "url": "https://github.com/django/django/pull/12125"
+  },
+  "django__django-12155": {
+   "title": "Fixed #30255 -- Fixed admindocs errors when rendering docstrings without leading newlines.",
+   "body": "\u2026g with no leading newline\r\n\r\nticket-30255",
+   "url": "https://github.com/django/django/pull/12155"
+  },
+  "django__django-12209": {
+   "title": "Fixed #31071 -- Disabled insert optimization for primary keys with defaults when loading fixtures.",
+   "body": "",
+   "url": "https://github.com/django/django/pull/12209"
+  },
+  "django__django-12262": {
+   "title": "Fixed #31128 -- Fixed TemplateSyntaxError in simple_tag() and inclusion_tag() for kwargs.",
+   "body": "https://code.djangoproject.com/ticket/31128#ticket\r\n\r\nSee there for description",
+   "url": "https://github.com/django/django/pull/12262"
+  },
+  "django__django-12708": {
+   "title": "Fixed #29224 -- Fixed removing index_together indexes if exists unique_together constraint on the same fields.",
+   "body": "Hi Django fellows :)\r\n\r\nA little fix of an old bug that is still relevant today it seems. https://code.djangoproject.com/ticket/29224\r\n\r\nI was able to reproduce the issue with a test (and when creating a test project).\r\n\r\nAbout the 2 commits: the first one should allow the second one, which adds a test and contains the 'real' fix.\r\nThis fix is filtering constraints on indices that are not only `{'index': True}` but also `{'unique': False}`. So that the unique_together constraint is not making the removal of index_together fail.\r\n\r\nI couldn't think of any problem that could occur through adding this condition, but I'm not aware of all the possible side-effects on the stack.",
+   "url": "https://github.com/django/django/pull/12708"
+  },
+  "django__django-13023": {
+   "title": "Fixed #31663 -- Made DecimalField.to_python() handle non-numeric invalid values.",
+   "body": "If a dictionary was being passed to DecimalField.to_python() it failed to generate the ValidationError, and instead was propagating the TypeError from the lower-level code, thus hiding the specifics of which value exacly caused the error. This - for example - affects debugging a save() on an improperly initialized object with many fields.",
+   "url": "https://github.com/django/django/pull/13023"
+  },
+  "django__django-13028": {
+   "title": "Fixed #31664 -- Reallowed using non-expressions having filterable attribute as rhs in queryset filters.",
+   "body": "Check if rhs is an expression to be able to use `filterable` as model field name",
+   "url": "https://github.com/django/django/pull/13028"
+  },
+  "django__django-13786": {
+   "title": "Fixed #32262 -- Fixed migration optimization for model creation and Meta options removal.",
+   "body": "https://code.djangoproject.com/ticket/32262",
+   "url": "https://github.com/django/django/pull/13786"
+  },
+  "django__django-14140": {
+   "title": "Fixed #32548 -- Fixed crash when combining Q() objects with boolean expressions.",
+   "body": "ticket-32548",
+   "url": "https://github.com/django/django/pull/14140"
+  },
+  "django__django-14434": {
+   "title": "Fixed #32777 -- Passed table reference as a string to DatabaseSchemaEditor._index_columns().",
+   "body": "Ticket: https://code.djangoproject.com/ticket/32777\r\n\r\nThis makes `_create_unique_sql` behave like `_create_index_sql`.",
+   "url": "https://github.com/django/django/pull/14434"
+  },
+  "django__django-14493": {
+   "title": "Fixed #32716 -- Fixed ManifestStaticFilesStorage crash when max_post_process_passes is 0.",
+   "body": "I fixed [32716](https://code.djangoproject.com/ticket/32716) bug reported in Trac. \r\n\r\nFixing the error makes sense because setting max_post_process_passes=0 enables the user to turn off changing references by Django when using ManifestStaticFilesStorage. This also makes sense for ticket [21080](https://code.djangoproject.com/ticket/21080#comment:19). ",
+   "url": "https://github.com/django/django/pull/14493"
+  },
+  "django__django-14672": {
+   "title": "Fixed #32947 -- Fixed hash() crash on reverse M2M relation when through_fields is a list.",
+   "body": "[Fixes #32947](https://code.djangoproject.com/ticket/32947)\r\n\r\nAlthough resolving the problem is very simple and probably won't result in any regressions, it'd require a very custom test case as shown in the ticket. Please let me know if the test case is required in such a case.",
+   "url": "https://github.com/django/django/pull/14672"
+  },
+  "django__django-15278": {
+   "title": "Fixed #33408 -- Fixed adding nullable unique fields on SQLite.",
+   "body": "Regression in 2f73e5406d54cb8945e187eff302a3a3373350be.\r\n\r\nThanks Alan Crosswell for the report.\r\n\r\nticket-33408\r\n\r\nAccording to [SQLite docs](https://www.sqlite.org/lang_altertable.html#alter_table_add_column):\r\n_\"The column may not have a PRIMARY KEY or UNIQUE constraint.\"_",
+   "url": "https://github.com/django/django/pull/15278"
+  },
+  "django__django-15315": {
+   "title": "Fixed #33441 -- Restored immutability of models.Field.__hash__().",
+   "body": "ticket-33441",
+   "url": "https://github.com/django/django/pull/15315"
+  },
+  "django__django-15368": {
+   "title": "Fixed #33463 -- Fixed QuerySet.bulk_update() with F() expressions.",
+   "body": "Should fix plain F() usage with `bulk_update` :smile_cat:.\r\n\r\n@felixxm Wondering, if this would qualify for 3.2+ backport?",
+   "url": "https://github.com/django/django/pull/15368"
+  },
+  "django__django-15380": {
+   "title": "Fixed #33480 -- Fixed makemigrations crash when renaming field of renamed model.",
+   "body": "Got some typo whet try to rename objects in model.",
+   "url": "https://github.com/django/django/pull/15380"
+  },
+  "django__django-15741": {
+   "title": "Fixed #33748 -- Fixed date template filter crash with lazy format.",
+   "body": "",
+   "url": "https://github.com/django/django/pull/15741"
+  },
+  "django__django-15814": {
+   "title": "Fixed #33816 -- Fixed QuerySet.only() after select_related() crash on proxy models.",
+   "body": "QuerySet.only() after select_related() crash on proxy models.",
+   "url": "https://github.com/django/django/pull/15814"
+  },
+  "django__django-15863": {
+   "title": "Fixed #34098 -- Fixed loss of precision for Decimal values in floatformat filter.",
+   "body": "I discovered that `floatformat` may round up high precision decimal numbers.\r\n\r\nThe underlying cause is that the first attempt to convert input to a decimal is written in a way that almost never works (`repr` vs `str`).",
+   "url": "https://github.com/django/django/pull/15863"
+  },
+  "django__django-16082": {
+   "title": "Fixed #33464 -- Resolved output_field for combined numeric expressions with MOD operator.",
+   "body": "[ticket-33464](https://code.djangoproject.com/ticket/33464)\r\n\r\nI'm unsure about the second commit, if it makes sense to define as default `FloatField + DecimalField => DecimalField`.\r\nI'd say that one wants to keep the decimal precision by default, like when doing plain Python arithmetic with a `Decimal`.",
+   "url": "https://github.com/django/django/pull/16082"
+  },
+  "django__django-16255": {
+   "title": "Fixed #34088 -- Fixed Sitemap.get_latest_lastmod() crash with empty items.",
+   "body": "Fix for [#34088](https://code.djangoproject.com/ticket/34088). A small bit of help & my first contribution to Django, so pls cut me some slack :)",
+   "url": "https://github.com/django/django/pull/16255"
+  },
+  "django__django-16485": {
+   "title": "Fixed #34272 -- Fixed floatformat crash on zero with trailing zeros to zero decimal places.",
+   "body": "[ticket-34727](https://code.djangoproject.com/ticket/34272)",
+   "url": "https://github.com/django/django/pull/16485"
+  },
+  "django__django-16527": {
+   "title": "Fixed #34301 -- Made admin's submit_row check add permission for \"Save as new\" button.",
+   "body": "Fixed [ticket #34301](https://code.djangoproject.com/ticket/34301).\r\nAdded `has_add_permission` verification to `show_save_as_new` in admin, since `save_as_new` is an add moditication.",
+   "url": "https://github.com/django/django/pull/16527"
+  },
+  "django__django-16901": {
+   "title": "Fixed #34604 -- Corrected fallback SQL for n-ary logical XOR.",
+   "body": "An n-ary logical XOR `Q(\u2026) ^ Q(\u2026) ^ \u2026 ^ Q(\u2026)` should evaluate to true when an odd number of its operands evaluate to true, not when exactly one operand evaluates to true.\r\n\r\nhttps://code.djangoproject.com/ticket/34604",
+   "url": "https://github.com/django/django/pull/16901"
+  },
+  "django__django-17087": {
+   "title": "Fixed #34716 -- Fixed serialization of nested class methods in migrations.",
+   "body": "This PR fixes the bug reported at https://code.djangoproject.com/ticket/34716\r\n\r\nA small change has been made to FunctionTypeSerializer.serialize and a regression test has been added.\r\n\r\nThanks for your time!",
+   "url": "https://github.com/django/django/pull/17087"
+  },
+  "matplotlib__matplotlib-13989": {
+   "title": "FIX: update not replace hist_kwargs when density is passed",
+   "body": "closes #13982\n\n\n## PR Summary\n\n## PR Checklist\n\n- [x] Has Pytest style unit tests\n- [x] Code is [Flake 8](http://flake8.pycqa.org/en/latest/) compliant\n\n<!--\nThank you so much for your PR!  To help us review your contribution, please\nconsider the following points:\n\n- A development guide is available at https://matplotlib.org/devdocs/devel/index.html.\n\n- Help with git and github is available at\n  https://matplotlib.org/devel/gitwash/development_workflow.html.\n\n- Do not create the PR out of master, but out of a separate branch.\n\n- The PR title should summarize the changes, for example \"Raise ValueError on\n  non-numeric input to set_xlim\".  Avoid non-descriptive titles such as\n  \"Addresses issue #8576\".\n\n- The summary should provide at least 1-2 sentences describing the pull request\n  in detail (Why is this change required?  What problem does it solve?) and\n  link to any relevant issues.\n\n- If you are contributing fixes to docstrings, please pay attention to\n  http://matplotlib.org/devel/documenting_mpl.html#formatting.  In particular,\n  note the difference between using single backquotes, double backquotes, and\n  asterisks in the markup.\n\nWe understand that PRs can sometimes be overwhelming, especially as the\nreviews start coming in.  Please let us know if the reviews are unclear or\nthe recommended next step seems overly demanding, if you would like help in\naddressing a reviewer's comments, or if you have been waiting too long to hear\nback on your PR.\n-->",
+   "url": "https://github.com/matplotlib/matplotlib/pull/13989"
+  },
+  "matplotlib__matplotlib-23412": {
+   "title": "Fix dash offset bug in Patch",
+   "body": "## PR Summary\r\nPass the given offest in the draw method of the Patch class. In this way, the Patch class no longer ignores the dash offset. (closes #22977 )  \r\n\r\n## PR Checklist\r\n\r\n<!-- Please mark any checkboxes that do not apply to this PR as [N/A]. -->\r\n**Tests and Styling**\r\n- [ ] Has pytest style unit tests (and `pytest` passes).\r\n- [ ] Is [Flake 8](https://flake8.pycqa.org/en/latest/) compliant (install `flake8-docstrings` and run `flake8 --docstring-convention=all`).\r\n\r\n**Documentation**\r\n- [ ] New features are documented, with examples if plot related.\r\n- [ ] New features have an entry in `doc/users/next_whats_new/` (follow instructions in README.rst there).\r\n- [ ] API changes documented in `doc/api/next_api_changes/` (follow instructions in README.rst there).\r\n- [ ] Documentation is sphinx and numpydoc compliant (the docs should [build](https://matplotlib.org/devel/documenting_mpl.html#building-the-docs) without error).\r\n\r\n<!--\r\nThank you so much for your PR!  To help us review your contribution, please\r\nconsider the following points:\r\n\r\n- A development guide is available at https://matplotlib.org/devdocs/devel/index.html.\r\n\r\n- Help with git and github is available at\r\n  https://matplotlib.org/devel/gitwash/development_workflow.html.\r\n\r\n- Do not create the PR out of main, but out of a separate branch.\r\n\r\n- The PR title should summarize the changes, for example \"Raise ValueError on\r\n  non-numeric input to set_xlim\".  Avoid non-descriptive titles such as\r\n  \"Addresses issue #8576\".\r\n\r\n- The summary should provide at least 1-2 sentences describing the pull request\r\n  in detail (Why is this change required?  What problem does it solve?) and\r\n  link to any relevant issues.\r\n\r\n- If you are contributing fixes to docstrings, please pay attention to\r\n  http://matplotlib.org/devel/documenting_mpl.html#formatting.  In particular,\r\n  note the difference between using single backquotes, double backquotes, and\r\n  asterisks in the markup.\r\n\r\nWe understand that PRs can sometimes be overwhelming, especially as the\r\nreviews start coming in.  Please let us know if the reviews are unclear or\r\nthe recommended next step seems overly demanding, if you would like help in\r\naddressing a reviewer's comments, or if you have been waiting too long to hear\r\nback on your PR.\r\n-->\r\n",
+   "url": "https://github.com/matplotlib/matplotlib/pull/23412"
+  },
+  "matplotlib__matplotlib-24026": {
+   "title": "Don't modify Axes property cycle in stackplot",
+   "body": "## PR Summary\r\n\r\nThis is not documented, and likely unwanted, and it breaks using cycle colours ('C0', 'C1', etc.) in the colour list.\r\n\r\nFixes #24024\r\n\r\n## PR Checklist\r\n\r\n**Tests and Styling**\r\n- [x] Has pytest style unit tests (and `pytest` passes).\r\n- [x] Is [Flake 8](https://flake8.pycqa.org/en/latest/) compliant (install `flake8-docstrings` and run `flake8 --docstring-convention=all`).\r\n\r\n**Documentation**\r\n- [n/a] New features are documented, with examples if plot related.\r\n- [n/a] New features have an entry in `doc/users/next_whats_new/` (follow instructions in README.rst there).\r\n- [ ] API changes documented in `doc/api/next_api_changes/` (follow instructions in README.rst there).\r\n- [ ] Documentation is sphinx and numpydoc compliant (the docs should [build](https://matplotlib.org/devel/documenting_mpl.html#building-the-docs) without error).",
+   "url": "https://github.com/matplotlib/matplotlib/pull/24026"
+  },
+  "matplotlib__matplotlib-25122": {
+   "title": "FIX: scaling factor for window with negative value",
+   "body": "## PR Summary\r\nSimply drop the `np.abs()` on window to fix the wrong scaling factor for window with negative value. For more detail refer to https://github.com/matplotlib/matplotlib/issues/24821\r\n\r\n**Caution**: With this fix, the behavior would change for window with complex value.\r\nWith `np.abs()` on window, it seems can handle complex value, but I don't think it's the right way to do it. As it can't fall back to real value case for complex value with zero imaginary part and negative real part (for example -1 + 0j).\r\nAlso, I didn't understand the need for complex window, so here I simply ignore the complex case. And this is consistent with the implementation of [scipy](https://github.com/scipy/scipy/blob/d9f75db82fdffef06187c9d8d2f0f5b36c7a791b/scipy/signal/_spectral_py.py#L1854-L1859).\r\n\r\nCloses #24821 \r\n\r\nRelated to #22828 (not sure it can be closed, that seems to try to deal with the complex case as well, but is there one?).\r\n\r\n## PR Checklist\r\n\r\n<!-- Please mark any checkboxes that do not apply to this PR as [N/A]. -->\r\n\r\n**Documentation and Tests**\r\n- [ ] Has pytest style unit tests (and `pytest` passes)\r\n- [ ] Documentation is sphinx and numpydoc compliant (the docs should [build](https://matplotlib.org/devel/documenting_mpl.html#building-the-docs) without error).\r\n- [ ] New plotting related features are documented with examples.\r\n\r\n**Release Notes**\r\n- [ ] New features are marked with a `.. versionadded::` directive in the docstring and documented in `doc/users/next_whats_new/`\r\n- [ ] API changes are marked with a `.. versionchanged::` directive in the docstring and documented in `doc/api/next_api_changes/`\r\n- [ ] Release notes conform with instructions in  `next_whats_new/README.rst` or `next_api_changes/README.rst`\r\n\r\n<!--\r\nThank you so much for your PR!  To help us review your contribution, please\r\nconsider the following points:\r\n\r\n- A development guide is available at https://matplotlib.org/devdocs/devel/index.html.\r\n\r\n- Help with git and github is available at\r\n  https://matplotlib.org/devel/gitwash/development_workflow.html.\r\n\r\n- Create a separate branch for your changes and open the PR from this branch. Please avoid working on `main`.\r\n\r\n- The PR title should summarize the changes, for example \"Raise ValueError on\r\n  non-numeric input to set_xlim\".  Avoid non-descriptive titles such as\r\n  \"Addresses issue #8576\".\r\n\r\n- The summary should provide at least 1-2 sentences describing the pull request\r\n  in detail (Why is this change required?  What problem does it solve?) and\r\n  link to any relevant issues.\r\n\r\n- If you are contributing fixes to docstrings, please pay attention to\r\n  http://matplotlib.org/devel/documenting_mpl.html#formatting.  In particular,\r\n  note the difference between using single backquotes, double backquotes, and\r\n  asterisks in the markup.\r\n\r\nWe understand that PRs can sometimes be overwhelming, especially as the\r\nreviews start coming in.  Please let us know if the reviews are unclear or\r\nthe recommended next step seems overly demanding, if you would like help in\r\naddressing a reviewer's comments, or if you have been waiting too long to hear\r\nback on your PR.\r\n-->\r\n",
+   "url": "https://github.com/matplotlib/matplotlib/pull/25122"
+  },
+  "matplotlib__matplotlib-26113": {
+   "title": "Fixes #12926 - inconsistency upon passing C in hexbin",
+   "body": "## PR summary\r\n\r\nCloses #12926 \r\n\r\nAround [line 4998 in _axes.py](https://github.com/matplotlib/matplotlib/blob/5f297631c2f295b2f3b52cfddeb33f02567a07f5/lib/matplotlib/axes/_axes.py#LL4998) two code paths diverge, depending on whether parameter `C` is given. The strict inequality between `accum` and `mincnt` in L5003 when `C == None` is not symmetric to the strict inequality at L5017, when `C != None`. This causes data points to become \"hidden\", when the number of data points (`accum`) is equal to `mincnt`.\r\n\r\n*'Tis but a scratch*: changing `> mincnt` to `>= mincnt` was enough to get consistent hexbin plots.\r\n\r\n<detail>\r\n<summary>\r\nhexbin result before\r\n</summary>\r\n\r\n![image](https://github.com/matplotlib/matplotlib/assets/28384651/040c9620-a0b4-4e7b-b8b8-87a7ebd733e4)\r\n</detail>\r\n\r\n<detail>\r\n<summary>\r\nhexbin result after\r\n</summary>\r\n\r\n![image](https://github.com/matplotlib/matplotlib/assets/28384651/0b673f02-e25d-44d0-82ae-18a09e6a5153)\r\n</detail>\r\n\r\n## PR checklist\r\n<!-- Please mark any checkboxes that do not apply to this PR as [N/A].-->\r\n\r\n- [x] \"closes #0000\" is in the body of the PR description to [link the related issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue)\r\n- [ ] new and changed code is [tested](https://matplotlib.org/devdocs/devel/testing.html)\r\n- [x] *Plotting related* features are demonstrated in an [example](https://matplotlib.org/devdocs/devel/documenting_mpl.html#writing-examples-and-tutorials)\r\n- [N/A] *New Features* and *API Changes* are noted with a [directive and release note](https://matplotlib.org/devdocs/devel/coding_guide.html#new-features-and-api-changes)\r\n- [N/A] Documentation complies with [general](https://matplotlib.org/devdocs/devel/documenting_mpl.html#writing-rest-pages) and [docstring](https://matplotlib.org/devdocs/devel/documenting_mpl.html#writing-docstrings) guidelines\r\n\r\n<!--\r\nThank you so much for your PR!  To help us review your contribution, please\r\nconsider the following points:\r\n\r\n- A development guide is available at https://matplotlib.org/devdocs/devel/index.html.\r\n\r\n- Help with git and github is available at https://matplotlib.org/devdocs/devel/development_workflow.html\r\n\r\n- Create a separate branch for your changes and open the PR from this branch. Please avoid working on `main`.\r\n\r\n- The PR title should summarize the changes, for example \"Raise ValueError on\r\n  non-numeric input to set_xlim\".  Avoid non-descriptive titles such as\r\n  \"Addresses issue #8576\".\r\n\r\n- The summary should provide at least 1-2 sentences describing the pull request\r\n  in detail (Why is this change required?  What problem does it solve?) and\r\n  link to any relevant issues.\r\n\r\n- If you are contributing fixes to docstrings, please pay attention to\r\n  https://matplotlib.org/stable/devel/documenting_mpl.html#formatting-conventions.  In particular,\r\n  note the difference between using single backquotes, double backquotes, and\r\n  asterisks in the markup.\r\n\r\nWe understand that PRs can sometimes be overwhelming, especially as the\r\nreviews start coming in.  Please let us know if the reviews are unclear or\r\nthe recommended next step seems overly demanding, if you would like help in\r\naddressing a reviewer's comments, or if you have been waiting too long to hear\r\nback on your PR.\r\n-->\r\n",
+   "url": "https://github.com/matplotlib/matplotlib/pull/26113"
+  },
+  "psf__requests-1142": {
+   "title": "Remove default Content-Length from GET requests.",
+   "body": "Fix #1051.\n",
+   "url": "https://github.com/psf/requests/pull/1142"
+  },
+  "psf__requests-1724": {
+   "title": "Fixed #1723",
+   "body": "I'm unsure that using unicode to `method` is expectable behavior or not.\nbut this pull request will fix #1723\n",
+   "url": "https://github.com/psf/requests/pull/1724"
+  },
+  "psf__requests-2317": {
+   "title": "Use to_native_string instead of builtin_str",
+   "body": "Fixes #2316\n",
+   "url": "https://github.com/psf/requests/pull/2317"
+  },
+  "pydata__xarray-3095": {
+   "title": "Fix regression: IndexVariable.copy(deep=True) casts dtype=U to object",
+   "body": " - [x] Closes #3094\r\n - [x] Tests added\r\n - [x] Fully documented, including `whats-new.rst` for all changes and `api.rst` for new API\r\n",
+   "url": "https://github.com/pydata/xarray/pull/3095"
+  },
+  "pydata__xarray-4075": {
+   "title": "Fix bool weights",
+   "body": "<!-- Feel free to remove check-list items aren't relevant to your change -->\r\n\r\n - [x] Closes #4074\r\n - [x] Tests added\r\n - [x] Passes `isort -rc . && black . && mypy . && flake8`\r\n - [x] Fully documented, including `whats-new.rst` for all changes and `api.rst` for new API\r\n",
+   "url": "https://github.com/pydata/xarray/pull/4075"
+  },
+  "pydata__xarray-4094": {
+   "title": "Fix to_unstacked_dataset for single dimension variables.",
+   "body": "<!-- Feel free to remove check-list items aren't relevant to your change -->\r\n\r\n - [x] Closes #4049\r\n - [x] Tests added\r\n - [x] Passes `isort -rc . && black . && mypy . && flake8`\r\n - [x] Fully documented, including `whats-new.rst` for all changes and `api.rst` for new API\r\n",
+   "url": "https://github.com/pydata/xarray/pull/4094"
+  },
+  "pydata__xarray-4629": {
+   "title": "fixes bug #4627 to make a copy of the attrs in the merged object",
+   "body": "<!-- Feel free to remove check-list items aren't relevant to your change -->\r\n\r\n - [x] Closes #4627 \r\n - [x] Tests added\r\n - [x] Passes `isort . && black . && mypy . && flake8`\r\n - [x] User visible changes (including notable bug fixes) are documented in `whats-new.rst`\r\n",
+   "url": "https://github.com/pydata/xarray/pull/4629"
+  },
+  "pydata__xarray-6721": {
+   "title": "Fix .chunks loading lazy backed array data",
+   "body": "- [x] Closes #6538\r\n- [x] Tests added\r\n- [x] User visible changes (including notable bug fixes) are documented in `whats-new.rst`\r\n\r\n@shoyer is there a way to test this?\r\n",
+   "url": "https://github.com/pydata/xarray/pull/6721"
+  },
+  "pydata__xarray-7233": {
+   "title": "Ensure Coarsen.construct keeps all coords",
+   "body": "<!-- Feel free to remove check-list items aren't relevant to your change -->\r\n\r\n- [x] Closes #7232\r\n- [x] Tests added\r\n- [x] User visible changes (including notable bug fixes) are documented in `whats-new.rst`\r\n- [ ] ~~New functions/methods are listed in `api.rst`~~\r\n",
+   "url": "https://github.com/pydata/xarray/pull/7233"
+  },
+  "pylint-dev__pylint-6903": {
+   "title": "Prevent pylint.run._cpu_count() from returning 0",
+   "body": "<!--\r\nThank you for submitting a PR to pylint!\r\n\r\nTo ease the process of reviewing your PR, do make sure to complete the following boxes.\r\n\r\n- [ ] Write a good description on what the PR does.\r\n- [ ] Add an entry to the change log describing the change in\r\n  `doc/whatsnew/2/2.15/index.rst` (or ``doc/whatsnew/2/2.14/full.rst``\r\n   if the change needs backporting in 2.14). If necessary you can write\r\n   details or offer examples on how the new change is supposed to work.\r\n- [ ] If you used multiple emails or multiple names when contributing, add your mails\r\n      and preferred name in ``script/.contributors_aliases.json``\r\n-->\r\n\r\n## Type of Changes\r\n\r\n<!-- Leave the corresponding lines for the applicable type of change: -->\r\n\r\n|     | Type                   |\r\n| --- | ---------------------- |\r\n| \u2713   | :bug: Bug fix          |\r\n\r\n## Description\r\n\r\nIf `--jobs=0` is passed to pylint, sometimes `pylint.run._query_cpu` will return 0. This later leads to a crash when passed to `multiprocessing.pool.Pool` as this requires more an integer >= 1 for processes.\r\nTherefore, we just check the return value of  `pylint.run._query_cpu` to evaluate to True instead of `not None`.\r\n\r\n<!-- If this PR fixes an issue, use the following to automatically close when we merge: -->\r\n\r\nCloses #6902",
+   "url": "https://github.com/pylint-dev/pylint/pull/6903"
+  },
+  "pytest-dev__pytest-10081": {
+   "title": "Do not call tearDown for skipped unittest.TestCases with --pdb",
+   "body": "Fix #10060\r\n",
+   "url": "https://github.com/pytest-dev/pytest/pull/10081"
+  },
+  "pytest-dev__pytest-5262": {
+   "title": "Remove 'b' from sys.stdout.mode",
+   "body": "Resolves #5257",
+   "url": "https://github.com/pytest-dev/pytest/pull/5262"
+  },
+  "pytest-dev__pytest-6202": {
+   "title": "Fix incorrect result of getmodpath method.",
+   "body": "<!--\r\nThanks for submitting a PR, your contribution is really appreciated!\r\n\r\nHere is a quick checklist that should be present in PRs.\r\n\r\n- [x] Target the `master` branch for bug fixes, documentation updates and trivial changes.\r\n- [ ] Target the `features` branch for new features, improvements, and removals/deprecations.\r\n- [ ] Include documentation when adding new features.\r\n- [ ] Include new tests or update existing tests when applicable.\r\n\r\nUnless your change is trivial or a small documentation fix (e.g., a typo or reword of a small section) please:\r\n\r\n- [x] Create a new changelog file in the `changelog` folder, with a name like `<ISSUE NUMBER>.<TYPE>.rst`. See [changelog/README.rst](https://github.com/pytest-dev/pytest/blob/master/changelog/README.rst) for details.\r\n- [x] Add yourself to `AUTHORS` in alphabetical order.\r\n-->\r\n\r\nResolves #6189 ",
+   "url": "https://github.com/pytest-dev/pytest/pull/6202"
+  },
+  "pytest-dev__pytest-7205": {
+   "title": "Issue 7126 - \"saferepr\" to avoid BytesWarning when using --setup-show",
+   "body": "Fix for #7126\r\n\r\nI added a special case for bytes only as `saferepr` adds quotes to pure string literals. A bunch of tests depend on the original behavior, so I was not comfortable changing it globally. Scrapping `saferepr` output to match the original behavior doesn't sound as a trouble-proof solution too. Please correct me if it was a wrong idea.\r\n\r\nThank you for your time reviewing the PR \ud83d\ude4f\r\n\r\n<!--\r\nThanks for submitting a PR, your contribution is really appreciated!\r\n\r\nHere is a quick checklist that should be present in PRs.\r\n\r\n- [ ] Include documentation when adding new features.\r\n- [X] Include new tests or update existing tests when applicable.\r\n- [X] Allow maintainers to push and squash when merging my commits. Please uncheck this if you prefer to squash the commits yourself.\r\n\r\nUnless your change is trivial or a small documentation fix (e.g., a typo or reword of a small section) please:\r\n\r\n- [X] Create a new changelog file in the `changelog` folder, with a name like `<ISSUE NUMBER>.<TYPE>.rst`. See [changelog/README.rst](https://github.com/pytest-dev/pytest/blob/master/changelog/README.rst) for details.\r\n\r\n  Write sentences in the **past or present tense**, examples:\r\n\r\n  * *Improved verbose diff output with sequences.*\r\n  * *Terminal summary statistics now use multiple colors.*\r\n\r\n  Also make sure to end the sentence with a `.`.\r\n\r\n- [X] Add yourself to `AUTHORS` in alphabetical order.\r\n-->\r\n",
+   "url": "https://github.com/pytest-dev/pytest/pull/7205"
+  },
+  "pytest-dev__pytest-7432": {
+   "title": "Fix reported location of skip when --runxfail is used",
+   "body": "Fixes #7392.",
+   "url": "https://github.com/pytest-dev/pytest/pull/7432"
+  },
+  "pytest-dev__pytest-7521": {
+   "title": "Preserve newlines when captured with capfd",
+   "body": "Resolves #7517",
+   "url": "https://github.com/pytest-dev/pytest/pull/7521"
+  },
+  "pytest-dev__pytest-7982": {
+   "title": "pathlib: fix symlinked directories not followed during collection",
+   "body": "Fixes #7981.",
+   "url": "https://github.com/pytest-dev/pytest/pull/7982"
+  },
+  "scikit-learn__scikit-learn-11578": {
+   "title": "[MRG] fixes multinomial scoring for LogisticRegressionCV",
+   "body": "#### Reference Issues/PRs\r\nFixes #8720.\r\nCloses #8760.\r\n\r\n#### What does this implement/fix? Explain your changes.\r\nThe change is described in the issue (see https://github.com/scikit-learn/scikit-learn/issues/8720#issuecomment-405349408)\r\n\r\n#### Any other comments?\r\n\r\nOn master, the test fails for param scoring='neg_log_loss', whereas it passes on this branch.\r\n\r\nFor the test, note that `_log_reg_scoring_path` has different defaults than `LogisticRegression` (for instance `fit_intercept` is True for one, False for the other), so I took the get_params from the `LogisticRegression` to put them in `_log_reg_scoring_path`.\r\n\r\nWhen doing that, I deleted the ones that do not exist in `_log_reg_scoring_path` removing explicitely 'C' ,'n_jobs' and 'warm_start'. This way, if some new arguments are added to both `LogisticRegression` and `_log_reg_scoring_path`, they would be transmitted. On the other hand, if a new argument is created only in `LogisticRegression`, it would break the test (but then someone would just update it). \r\nAnother option would be to have the list of arguments that we keep (instead of a list of the ones we throw). But doing that if we added a new parameter to both `LogisticRegression` and `_log_reg_scoring_path`, we would have a weird behaviour with params that are not transmitted and this could not raise any error.\t\r\n\r\n\r\nI also tested the function not only for `neg_log_loss` but also for other metrics for classification with the 'multinomial' option (see http://scikit-learn.org/stable/modules/model_evaluation.html#common-cases-predefined-values). `average_precision` and `roc_auc` returned \"multiclass format is not supported\" so as they are not applicable for this test I didn't include them. For `f1`, `precision` and `recall`, I test all averagings methods except `samples`, since it is only applicable for multilabel classification (``ValueError: Sample-based precision, recall, fscore is not meaningful outside multilabel classification. See the accuracy_score instead.``)\r\n\r\nAs it only tests the `multinomial` case, it is rather tailored for the previous particular issue. Should I include also a test for the multiclass + ovr case (this test would be a bit more complicated because when using 'ovr', `_log_reg_scoring_path` should be called with a pos_class argument and returns only a 1 vs rest score, so it must be done for every class and mixed together for having a single ovr score), and the binary case ? \r\n\r\n\r\n\r\n",
+   "url": "https://github.com/scikit-learn/scikit-learn/pull/11578"
+  },
+  "scikit-learn__scikit-learn-13124": {
+   "title": "FIX Shuffle each class's samples with different random_state in StratifiedKFold",
+   "body": "Fixes #13110 \r\nOur StratifiedKFold shuffle each class's samples with same random_state (i.e., in the same way). This is not good IMO:\r\n(1) We can only get certain splits.\r\n```python\r\nimport numpy as np\r\nfrom sklearn.model_selection import StratifiedKFold\r\nX = np.arange(20)\r\ny = [0] * 10 + [1] * 10\r\nStratifiedKFold(n_splits=5, shuffle=True, random_state=XXX)\r\n# all the test folds in the split will be [a, b, 10+a, 10+b]\r\n```\r\n(2) When there're only two samples in the groups, users will always get the same splits with different random_state.\r\n```python\r\nimport numpy as np\r\nfrom sklearn.model_selection import StratifiedKFold\r\nX = np.arange(10)\r\ny = [0] * 5 + [1] * 5\r\nStratifiedKFold(n_splits=5, shuffle=True, random_state=XXX)\r\n# the test folds will always be [[0, 5], [1, 6], [2, 7], [3, 8], [4, 9]]\r\n```\r\nRevert part of #7823, I think it's a regression introduced in 0.19, ping @jnothman @amueller \r\n",
+   "url": "https://github.com/scikit-learn/scikit-learn/pull/13124"
+  },
+  "scikit-learn__scikit-learn-14496": {
+   "title": "[MRG+1] FIX Support float min_samples and min_cluster_size in OPTICS",
+   "body": "closes #14421 \r\nping @jnothman ",
+   "url": "https://github.com/scikit-learn/scikit-learn/pull/14496"
+  },
+  "scikit-learn__scikit-learn-15100": {
+   "title": "FIX a bug in feature_extraction.text.strip_accents_unicode",
+   "body": "\r\n<!--\r\nThanks for contributing a pull request! Please ensure you have taken a look at\r\nthe contribution guidelines: https://github.com/scikit-learn/scikit-learn/blob/master/CONTRIBUTING.md#pull-request-checklist\r\n-->\r\n\r\n#### Reference Issues/PRs\r\n<!--\r\nExample: Fixes #1234. See also #3456.\r\nPlease use keywords (e.g., Fixes) to create link to the issues or pull requests\r\nyou resolved, so that they will automatically be closed when your pull request\r\nis merged. See https://github.com/blog/1506-closing-issues-via-pull-requests\r\n-->\r\n\r\nFixes #15087\r\n\r\n\r\n#### What does this implement/fix? Explain your changes.\r\n\r\nstrip_accents_unicode contained a check to see if applying NFKD normalization to the input string changed it. If the string was unchanged, then it would not attempt to remove accents. This meant that if an input string was already in NFKD form and also contained accents, the accents were not removed.\r\n\r\nNow, strip_accents_unicode always filters out combining characters after applying NFKD normalization.\r\n\r\n\r\n#### Any other comments?\r\n\r\n\r\n<!--\r\nPlease be aware that we are a loose team of volunteers so patience is\r\nnecessary; assistance handling other issues is very welcome. We value\r\nall user contributions, no matter how minor they are. If we are slow to\r\nreview, either the pull request needs some benchmarking, tinkering,\r\nconvincing, etc. or more likely the reviewers are simply busy. In either\r\ncase, we ask for your understanding during the review process.\r\nFor more information, see our FAQ on this topic:\r\nhttp://scikit-learn.org/dev/faq.html#why-is-my-pull-request-not-getting-any-attention.\r\n\r\nThanks for contributing!\r\n-->\r\n",
+   "url": "https://github.com/scikit-learn/scikit-learn/pull/15100"
+  },
+  "sphinx-doc__sphinx-7440": {
+   "title": "Fix #7418: std domain: duplication warning for glossary terms is case insensitive",
+   "body": "### Feature or Bugfix\r\n- Bugfix\r\n\r\n### Purpose\r\n- refs: #7418 ",
+   "url": "https://github.com/sphinx-doc/sphinx/pull/7440"
+  },
+  "sphinx-doc__sphinx-7910": {
+   "title": "show docs for decorated special functions",
+   "body": "Subject: show docs for decorated special functions. Fix https://github.com/sphinx-doc/sphinx/issues/4258\r\n\r\n\r\n### Feature or Bugfix\r\n- Bugfix\r\n\r\n### Purpose\r\n1. fix #4258, as explained in the original issue\r\n2. fix a bug about the existing testing framework \r\n\r\n### Detail\r\n1. by checking `hasattr(obj, '__wrapped__')`, napoleon is now able to correctly handle functions decorated by `functools.wraps`. This is verified by a new unittest which would fail without this PR.\r\n2. The unittest code had a bug: it uses `assertFalse` which cannot distinguish `False` and `None`. It is now fixed.",
+   "url": "https://github.com/sphinx-doc/sphinx/pull/7910"
+  },
+  "sphinx-doc__sphinx-9320": {
+   "title": "Fix #9319: Make sphinx-quickstart exit when conf.py already exists",
+   "body": "### Feature or Bugfix\r\n- Bugfix for #9319 \r\n\r\n### Purpose\r\n- Pressing 'Enter' did not exit the program where the prompt said it would (when running sphinx-quickstart when conf.py already exists):\r\n- Previously (pressing enter for each prompt)\r\n![spqs-noexit](https://user-images.githubusercontent.com/30437511/121693108-28d49a80-cb0c-11eb-9b87-1fcc21153e26.png)\r\n- Now\r\n![exit-prompt](https://user-images.githubusercontent.com/30437511/121853842-c3172700-cd34-11eb-8610-912c3e13080e.png)\r\n\r\n\r\n### Detail\r\n- Previously the prompt included validation that the input was a path. If it wasn't then the user was re-prompted. Just pressing Enter input the empty string which failed the path check, which lead to a re-prompt.\r\n- My second commit removes the validation check which gets rid of the re-prompting but creates new bugs when the input is not a proper path.\r\n- Then, following @astrojuanlu's suggestion, I just got rid of the prompt altogether.\r\n- Then, following @tk0miya suggestion I re-added the prompt with a new validator that allows empty inputs but checks is_path() otherwise.\r\n\r\n### Relates\r\n- #9319 \r\n\r\n",
+   "url": "https://github.com/sphinx-doc/sphinx/pull/9320"
+  },
+  "sphinx-doc__sphinx-9698": {
+   "title": "Fix #9697: An index entry with parens was registered for py:method",
+   "body": "### Feature or Bugfix\r\n- Bugfix\r\n\r\n### Purpose\r\n- refs: #9697 ",
+   "url": "https://github.com/sphinx-doc/sphinx/pull/9698"
+  },
+  "sympy__sympy-12096": {
+   "title": "Implemented recursive calling of evalf() function",
+   "body": "Fixes #12092. \r\n\r\nEnabled recursive calling of the `evalf()` function. \r\n\r\n#### Output before this PR:\r\n```python \r\n>>> from sympy.utilities.lambdify import implemented_function\r\n>>> f = implemented_function('f', lambda x: x ** 2)\r\n>>> g = implemented_function('g', lambda x: 2 * x)\r\n>>> print(f(g(2)).evalf())\r\nf(g(2))\r\n```\r\n\r\n### Output after this PR:\r\n\r\n```python\r\n>>> from sympy.utilities.lambdify import implemented_function\r\n>>> f = implemented_function('f', lambda x: x ** 2)\r\n>>> g = implemented_function('g', lambda x: 2 * x)\r\n>>> print(f(g(2)).evalf())\r\n16.0000000000000\r\n```\r\n* Tests are added.",
+   "url": "https://github.com/sympy/sympy/pull/12096"
+  },
+  "sympy__sympy-13372": {
+   "title": "13076 evalf.py, Mul args order issue",
+   "body": "\r\nFixes #13076, an issue with the order of Mul arguments.\r\n",
+   "url": "https://github.com/sympy/sympy/pull/13372"
+  },
+  "sympy__sympy-13480": {
+   "title": "Fix typo in hyperbolic.py",
+   "body": "Fixes #13473. Add two tests to cover this branch.",
+   "url": "https://github.com/sympy/sympy/pull/13480"
+  },
+  "sympy__sympy-13647": {
+   "title": "fixed col_insert",
+   "body": "Fixes #13643 \r\n",
+   "url": "https://github.com/sympy/sympy/pull/13647"
+  },
+  "sympy__sympy-15017": {
+   "title": "Changed `__len__` of rank-0 arrays to 1 (was 0)",
+   "body": "#### References to other Issues or PRs\r\nFixes #15016 \r\n\r\n#### Brief description of what is fixed or changed\r\n`sympy.tensor.array.NDimArray.__len__` always returned zero for rank-0 arrays (scalars). I believe the correct value should be one, which is the number of elements of the iterator and the observed behavior in numpy.\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* tensor\r\n  * Changed the `len` of rank-0 arrays to 1.\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/15017"
+  },
+  "sympy__sympy-15349": {
+   "title": "quaternions: fix a sign mistake in the definition of the rotation matrix",
+   "body": "quaternions: fix a sign mistake in definition of rotation matrix\r\n<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\". See\r\nhttps://github.com/blog/1506-closing-issues-via-pull-requests .-->\r\n\r\nFixes #15193.\r\n#### Brief description of what is fixed or changed\r\nSign was corrected. A unit test added. Other unit tests fixed with the correct values.\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below. See\r\nhttps://github.com/sympy/sympy/wiki/Writing-Release-Notes for more information\r\non how to write release notes. The bot will check your release notes\r\nautomatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* algebras\r\n    * fix sign mistake in Quaternion.to_rotation_matrix method\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/15349"
+  },
+  "sympy__sympy-15875": {
+   "title": "[WIP] Fixing is_zero for complex numbers in Add",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\". See\r\nhttps://github.com/blog/1506-closing-issues-via-pull-requests . Please also\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\nfixes #15873\r\n\r\ncloses #15880\r\n#### Brief description of what is fixed or changed\r\n\r\nThe example `-2*I + (1 + I)**2` gets past the breakpoint\r\n```\r\n            if im and not im_or_z:\r\n                return False\r\n```\r\ngiving the wrong determination.\r\n\r\nFrom my understanding, the original logic seems identical to separating the expression into real and imaginary parts and testing it against zero, ~~so I may experiment here with more simple logic.~~\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below. See\r\nhttps://github.com/sympy/sympy/wiki/Writing-Release-Notes for more information\r\non how to write release notes. The bot will check your release notes\r\nautomatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n\r\n- core\r\n  - Fix `is_zero` becoming `False` on some expressions with `Add`.\r\n\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/15875"
+  },
+  "sympy__sympy-18189": {
+   "title": "Diophantine , Fix #18186",
+   "body": "Fixes #18186 \r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* solvers\r\n  *  fixed a bug in `diophantine` when using `permute=True` which caused incomplete permutations to be returned\r\n<!-- END RELEASE NOTES -->",
+   "url": "https://github.com/sympy/sympy/pull/18189"
+  },
+  "sympy__sympy-18763": {
+   "title": "Fix Incorrect parenthesizing of Subs",
+   "body": "#### References to other Issues or PRs\r\nFixes #18755 \r\n\r\n\r\n#### Brief description of what is fixed or changed\r\nWhen printing expressions with substitutions, it may be hard to interpret where the substitution begins, and where it ends. This commit adds parenthesis to the latex output around the substitution in the expression, making the output easier to interpret.\r\n\r\n\r\n#### Other comments\r\nExample:\r\n<pre>\r\nIn[1]: from sympy import *\r\nIn[2]: from sympy.abc import x, y\r\nIn[3]: expr = 3*Subs(-x+y, (x,),(1,))\r\nIn[4]: print(latex(expr))\r\n3 \\left. \\left(- x + y\\right) \\right|_{\\substack{ x=1 }}\r\nIn[5]: pprint(expr)\r\n3\u22c5(-x + y)\u2502\r\n\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0\u00a0 \u2502x=1\r\n</pre>\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below. See\r\nhttps://github.com/sympy/sympy/wiki/Writing-Release-Notes for more information\r\non how to write release notes. The bot will check your release notes\r\nautomatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* printing\r\n  * Makes latex substitution printing clearer by adding parenthesis.\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/18763"
+  },
+  "sympy__sympy-19495": {
+   "title": "fix ConditionSet._eval_subs",
+   "body": "#### References to other Issues or PRs\r\nFixes #17341\r\n\r\n#### Brief description of what is fixed or changed\r\nFixes the bug, fixes an existing test and adds a regression test.\r\nBefore:\r\n```\r\nIn [1]: imageset(Lambda(n, 2*n*pi + asin(y)), S.Integers)\r\nOut[1]: {2\u22c5\u03c0\u22c5n + asin(y) | n \u220a \u2124}\r\n\r\nIn [2]: ConditionSet(x, Contains(y, Interval(-1,1)), _)\r\nOut[2]: {x | x \u220a {2\u22c5\u03c0\u22c5n + asin(y) | n \u220a \u2124} \u2227 (y \u2208 [-1, 1])}\r\n\r\nIn [3]: _.subs(y, Rational(1,3))\r\nOut[3]: {1/3 | 1/3 \u220a {2\u22c5\u03c0\u22c5n + asin(1/3) | n \u220a \u2124} \u2227 (1/3 \u2208 {2\u22c5\u03c0\u22c5n + asin(1/3) | n \u220a \u2124})}\r\n```\r\nAfter:\r\n```\r\nIn [1]: imageset(Lambda(n, 2*n*pi + asin(y)), S.Integers)\r\nOut[1]: {2\u22c5\u03c0\u22c5n + asin(y) | n \u220a \u2124}\r\n\r\nIn [2]: ConditionSet(x, Contains(y, Interval(-1,1)), _)\r\nOut[2]: {x | x \u220a {2\u22c5\u03c0\u22c5n + asin(y) | n \u220a \u2124} \u2227 (y \u2208 [-1, 1])}\r\n\r\nIn [3]: _.subs(y, Rational(1,3))\r\nOut[3]: {2\u22c5\u03c0\u22c5n + asin(1/3) | n \u220a \u2124}\r\n\r\nIn [4]: _2.subs(y, Rational(4,3))\r\nOut[4]: \u2205\r\n```\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n<!-- BEGIN RELEASE NOTES -->\r\n* sets\r\n  * Fixed `ConditionSet.subs()` in the case where the substitution targets a free symbol.\r\n<!-- END RELEASE NOTES -->",
+   "url": "https://github.com/sympy/sympy/pull/19495"
+  },
+  "sympy__sympy-19637": {
+   "title": "fixes 19608",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nFixes #19608 \r\n\r\n#### Brief description of what is fixed or changed\r\n\r\nCase for no space in text for sympify is now handled.\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below. See\r\nhttps://github.com/sympy/sympy/wiki/Writing-Release-Notes for more information\r\non how to write release notes. The bot will check your release notes\r\nautomatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\nNO ENTRY\r\n<!-- END RELEASE NOTES -->",
+   "url": "https://github.com/sympy/sympy/pull/19637"
+  },
+  "sympy__sympy-20801": {
+   "title": "core: Make S(0.0) == S.false return False",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\nFixes #20796 \r\n\r\n\r\n#### Brief description of what is fixed or changed\r\nMoved the `not self` check to the end of other checks in `Float.__eq__` so that `S(0.0) == S.false` will be correctly evaluated by an earlier check.\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below. See\r\nhttps://github.com/sympy/sympy/wiki/Writing-Release-Notes for more information\r\non how to write release notes. The bot will check your release notes\r\nautomatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* core\r\n    * Make S(0.0) == S.false return False\r\n<!-- END RELEASE NOTES -->",
+   "url": "https://github.com/sympy/sympy/pull/20801"
+  },
+  "sympy__sympy-22456": {
+   "title": "codegen/ast: argument invariance is now supported for String",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nFixes #22455\r\nSee also https://github.com/sympy/sympy/issues/22310\r\n\r\n#### Brief description of what is fixed or changed\r\nPreviously, `String` and its subclasses only supported the\r\ninvariance `string.func(**string.kwargs()) == string`. Now\r\nalso `string.func(string.args) == string` is supported as is\r\nrequired for all `Basic` subclasses.\r\n\r\n\r\n#### Other comments\r\n**Now the proposed solution since it would allow the class to function as it currently does in addition to preserving the argument invariance**\r\nCurrently this would mean that `string.func(**string.kwargs()) == string` does not work, since no arguments are allowed. Instead, it acts as an `Atom` and does not allow modification of its non-`expr.arg` arguments.\r\nThis does not generally solve the issue for `Token` classes with mixed `expr.arg` and non-`expr.arg` arguments, however, it does not appear that such a class currently exists.\r\n\r\nThis could be a possible solution for supporting this invariance:\r\n```python\r\n\r\n    def func(self, *args, **kwargs):\r\n        if self.is_Atom and not kwargs:\r\n            return self\r\n        else:\r\n            return super().func(*args, **kwargs)\r\n```\r\n\r\nAlternatively,\r\n`lambda *args, **kwargs: self` could simply be returned\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\nNO ENTRY\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/22456"
+  },
+  "sympy__sympy-22714": {
+   "title": "Fixed issue with unevaluated Point2D",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nCloses #22684 \r\n\r\n#### Brief description of what is fixed or changed\r\n\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* geometry\r\n    * Fixed issue when `with evaluate(False)` for `Point2D`. \r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/22714"
+  },
+  "sympy__sympy-23534": {
+   "title": "Fix symbols recursion not pass cls parameter",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nFixes #23532\r\n#### Brief description of what is fixed or changed\r\n\r\n\r\n#### Other comments\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* core\r\n  * Fix calling symbols with Iterable not pass cls parameter\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/23534"
+  },
+  "sympy__sympy-23824": {
+   "title": "Fix issue #23823 in physics.hep.gamma_matrices.kahane_simplify()",
+   "body": "Simple fix to the order of insertion of leading uncontracted matrices.\r\n\r\n<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n\r\nFixes #23823\r\n\r\n#### Brief description of what is fixed or changed\r\n\r\nGamma matrices preceding the first contracted gamma matrix are now added in the correct order.\r\nThere was no test case for correct ordering in the case of more than one initial uncontracted gamma matrix, so this commit also adds a test case for two leading uncontracted gamma matrices and another for the case of two trailing gamma matrices for good measure.\r\n\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* physics.hep\r\n  * Fixed a bug in gamma_matrices.kahane_simplify() when there is more than one uncontracted gamma matrix before the first contracted gamma matrix.\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/23824"
+  },
+  "sympy__sympy-24443": {
+   "title": "Repair `_check_homomorphism()`",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nFixes #24442 \r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* combinatorics\r\n  * Fix a bug in forming a group homomorphism with PermutationGroup as domain. Previously this would raise ValueError incorrectly in some cases.\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/24443"
+  },
+  "sympy__sympy-24539": {
+   "title": "Fix `PolyElement.as_expr()`",
+   "body": "<!-- Your title above should be a short description of what\r\nwas changed. Do not include the issue number in the title. -->\r\n\r\n#### References to other Issues or PRs\r\n<!-- If this pull request fixes an issue, write \"Fixes #NNNN\" in that exact\r\nformat, e.g. \"Fixes #1234\" (see\r\nhttps://tinyurl.com/auto-closing for more information). Also, please\r\nwrite a comment on that issue linking back to this pull request once it is\r\nopen. -->\r\n\r\nFixes #24538 \r\n\r\n#### Brief description of what is fixed or changed\r\n\r\nMake `PolyElement.as_expr()` accept symbols.\r\n\r\n#### Release Notes\r\n\r\n<!-- Write the release notes for this release below between the BEGIN and END\r\nstatements. The basic format is a bulleted list with the name of the subpackage\r\nand the release note for this PR. For example:\r\n\r\n* solvers\r\n  * Added a new solver for logarithmic equations.\r\n\r\n* functions\r\n  * Fixed a bug with log of integers.\r\n\r\nor if no release note(s) should be included use:\r\n\r\nNO ENTRY\r\n\r\nSee https://github.com/sympy/sympy/wiki/Writing-Release-Notes for more\r\ninformation on how to write release notes. The bot will check your release\r\nnotes automatically to see if they are formatted correctly. -->\r\n\r\n<!-- BEGIN RELEASE NOTES -->\r\n* polys\r\n  * Repaired a bug with `PolyElement.as_expr()`, so that it now accepts symbols.\r\n<!-- END RELEASE NOTES -->\r\n",
+   "url": "https://github.com/sympy/sympy/pull/24539"
+  }
+ }
+}

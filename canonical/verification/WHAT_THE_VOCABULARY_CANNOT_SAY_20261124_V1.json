@@ -1,0 +1,724 @@
+{
+  "schema": "BRAIN_WHAT_THE_VOCABULARY_CANNOT_SAY_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "date": "2026-11-24T23:22:00Z",
+  "results": {
+    "summary": {
+      "machines": 9,
+      "aliases_observed": 0,
+      "machines_with_an_alias": 0,
+      "aliases_left_unseparated": 0,
+      "impure_cells_before": 0,
+      "impure_cells_after": 0,
+      "held_out_predictions_frames_only": 0,
+      "held_out_predictions_with_distinction": 0,
+      "held_out_WRONG_frames_only": 0,
+      "held_out_WRONG_with_distinction": 0,
+      "literals": {
+        "full_signature_then_trimmed": 10050,
+        "minimal_descriptor": 210,
+        "minimal_then_trimmed": 0
+      },
+      "minimal_on_its_own_data_WRONG": 0,
+      "minimal_on_its_own_data_predictions": 115,
+      "minimal_held_out_WRONG": 29,
+      "minimal_held_out_predictions": 30,
+      "minimal_then_trimmed_held_out_WRONG": 0,
+      "columns_ever_needed": [],
+      "columns_never_needed": [
+        "content_tail",
+        "duplicate_count",
+        "id_content_agree",
+        "inversions",
+        "runs_of_equal_content",
+        "sorted_content",
+        "unique_content"
+      ],
+      "verdicts": {
+        "the_frames_alone_cannot_separate_some_states": false,
+        "a_computed_extension_separates_them_all": true,
+        "the_extension_reduces_inexpressible_contexts": false,
+        "the_extension_buys_predictions_on_held_out_states": false,
+        "safety_is_preserved_by_the_extension": true,
+        "the_frames_are_redundant_by_a_large_factor": true,
+        "a_minimal_descriptor_is_exact_on_what_it_saw": true,
+        "a_minimal_descriptor_is_WRONG_on_states_it_did_not_see": true,
+        "trimming_is_sound_only_because_it_never_cites": true
+      }
+    },
+    "rows": [
+      {
+        "machine": "ARCHIVE2",
+        "atoms": 4,
+        "transitions": 12,
+        "held_out": 3,
+        "conditions_from_frames": 54,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 144,
+          "minimal_descriptor": 2,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 1,
+          "right": 1,
+          "WRONG": 0,
+          "refused": 8,
+          "coverage": 0.1111,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "FILESYSTEM",
+        "atoms": 5,
+        "transitions": 20,
+        "held_out": 5,
+        "conditions_from_frames": 34,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 15,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 15,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 156,
+          "minimal_descriptor": 4,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 1,
+          "right": 1,
+          "WRONG": 0,
+          "refused": 14,
+          "coverage": 0.0667,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 2,
+          "right": 1,
+          "WRONG": 1,
+          "refused": 3,
+          "coverage": 0.4,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 5,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 5,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 5,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "GIT",
+        "atoms": 5,
+        "transitions": 35,
+        "held_out": 8,
+        "conditions_from_frames": 104,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 27,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 27,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 350,
+          "minimal_descriptor": 17,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 6,
+          "right": 6,
+          "WRONG": 0,
+          "refused": 21,
+          "coverage": 0.2222,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 2,
+          "right": 0,
+          "WRONG": 2,
+          "refused": 6,
+          "coverage": 0.25,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 8,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 8,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 8,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "GIT2",
+        "atoms": 4,
+        "transitions": 36,
+        "held_out": 9,
+        "conditions_from_frames": 144,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 27,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 27,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 358,
+          "minimal_descriptor": 23,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 14,
+          "right": 14,
+          "WRONG": 0,
+          "refused": 13,
+          "coverage": 0.5185,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 2,
+          "right": 0,
+          "WRONG": 2,
+          "refused": 7,
+          "coverage": 0.2222,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 9,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 9,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 9,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "JOURNAL",
+        "atoms": 4,
+        "transitions": 28,
+        "held_out": 7,
+        "conditions_from_frames": 128,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 21,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 21,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 417,
+          "minimal_descriptor": 17,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 17,
+          "right": 17,
+          "WRONG": 0,
+          "refused": 4,
+          "coverage": 0.8095,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 1,
+          "right": 0,
+          "WRONG": 1,
+          "refused": 6,
+          "coverage": 0.1429,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 7,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 7,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 7,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "LIST",
+        "atoms": 7,
+        "transitions": 231,
+        "held_out": 57,
+        "conditions_from_frames": 1061,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 174,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 174,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 8340,
+          "minimal_descriptor": 139,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 73,
+          "right": 73,
+          "WRONG": 0,
+          "refused": 101,
+          "coverage": 0.4195,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 22,
+          "right": 0,
+          "WRONG": 22,
+          "refused": 35,
+          "coverage": 0.386,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 57,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 57,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 57,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "SQLITE",
+        "atoms": 4,
+        "transitions": 12,
+        "held_out": 3,
+        "conditions_from_frames": 42,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 90,
+          "minimal_descriptor": 0,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 9,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "TARBALL",
+        "atoms": 4,
+        "transitions": 12,
+        "held_out": 3,
+        "conditions_from_frames": 42,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 9,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 90,
+          "minimal_descriptor": 2,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 1,
+          "right": 1,
+          "WRONG": 0,
+          "refused": 8,
+          "coverage": 0.1111,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 3,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      },
+      {
+        "machine": "VAULT",
+        "atoms": 4,
+        "transitions": 16,
+        "held_out": 4,
+        "conditions_from_frames": 40,
+        "aliases_observed": 0,
+        "aliased_atoms": [],
+        "extension_chosen": [],
+        "extension_left_over_pairs": 0,
+        "cover_report": {
+          "greedy_steps": [],
+          "candidates_considered": 7,
+          "not_greedy_optimum": true
+        },
+        "purity_before": {
+          "cells": 12,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "purity_after": {
+          "cells": 12,
+          "impure_cells": 0,
+          "max_effects_in_one_cell": 1,
+          "pure_fraction": 1.0
+        },
+        "literals": {
+          "full_signature_then_trimmed": 105,
+          "minimal_descriptor": 6,
+          "minimal_then_trimmed": 0
+        },
+        "minimal_descriptor_on_its_own_training_data": {
+          "predictions": 2,
+          "right": 2,
+          "WRONG": 0,
+          "refused": 10,
+          "coverage": 0.1667,
+          "sound": true
+        },
+        "held_out_scored_with_minimal_descriptors": {
+          "predictions": 1,
+          "right": 0,
+          "WRONG": 1,
+          "refused": 3,
+          "coverage": 0.25,
+          "sound": false
+        },
+        "held_out_scored_with_minimal_then_trimmed": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 4,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_frames_only": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 4,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "held_out_scored_with_the_created_distinction": {
+          "predictions": 0,
+          "right": 0,
+          "WRONG": 0,
+          "refused": 4,
+          "coverage": 0.0,
+          "sound": true
+        },
+        "ablation_each_column_alone": {}
+      }
+    ]
+  },
+  "cost": {
+    "model_calls": 0,
+    "stored_parameters": 0,
+    "network_at_run_time": 0,
+    "duration_s": 56.12
+  }
+}
