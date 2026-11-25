@@ -11,8 +11,8 @@ Mechanically, from artefacts, three layers with three different statuses:
 
 | layer | count | produced by | what a claim on it is worth |
 | --- | --- | --- | --- |
-| **admitted** | **447** capabilities (153 bound, 294 receipt-backed), 26 engines, 18 skills | `BRAIN_UNIFIED_MODEL_V1.json` compiled from the live registry | executable through the front door |
-| **discovered** | **621** executable surfaces no registry declares | `harvest_hidden_capabilities_v1` (AST invocation shape) | callable with evidence, never routed |
+| **admitted** | **449** capabilities (153 bound, 296 receipt-backed), 26 engines, 18 skills | `BRAIN_UNIFIED_MODEL_V1.json` compiled from the live registry | executable through the front door |
+| **discovered** | **622** executable surfaces no registry declares | `harvest_hidden_capabilities_v1` (AST invocation shape) | callable with evidence, never routed |
 | **branch-only** | **82 diverged `arena/*` branches**, **1,776 files** absent from `main` (759 after excluding tests, receipts and JSON dumps: 146 runtime modules, 82 tools, 53 swe-kernel, 30 bound adapters) | GitHub compare of every `arena/*` branch against `main` | **zero credit** — in-flight work |
 
 Plus the inventory that a parallel session left on `arena/b81b2217-brain`
@@ -27,7 +27,7 @@ Domain split (reproducible: `canonical/tools/capability_inventory_by_domain_v1.p
 
 | domain | admitted | discovered | branch-only |
 | --- | ---: | ---: | ---: |
-| orchestration / runtime | 152 | 87 | 124 |
+| orchestration / runtime | 154 | 87 | 124 |
 | verification / proof | 94 | 69 | 38 |
 | code comprehension | 44 | 29 | 11 |
 | blind repair | 31 | 99 | 30 |
@@ -39,7 +39,7 @@ Domain split (reproducible: `canonical/tools/capability_inventory_by_domain_v1.p
 | data / query | 10 | 4 | 13 |
 | math / symbolic | 6 | 7 | 7 |
 | memory / learning | 4 | 62 | 32 |
-| search / retrieval | 2 | 24 | 16 |
+| search / retrieval | 2 | 25 | 16 |
 | computer-use / GUI | 1 | 4 | 21 |
 
 The shape is the story: we are deep in orchestration and verification, thin in
@@ -109,7 +109,30 @@ is "can it fix real software bugs", the frontier wins and it is not close.
   the primary row-1 evidence, because it is the only claimable benchmark number
   we have.
 
-## 5. Non-claims
+## 5. Addendum, same sitting: the loop closed while this was being written
+
+Two of the surfaces discovered yesterday are now **admitted capabilities**, and
+not by anyone's say-so. The chain, with the artefacts:
+
+1. `binding_pin_is_current_v1.py` and `capability_selection_retrieval_v1.py`
+   ran through `harvested_capability_runtime_v1` and produced producer receipts
+   (`ran_by: harvest-local-session`).
+2. `capability-receipt-verification.yml` re-ran both under
+   `github-actions:moxnixmdj/brain` (run `45721683545`) and wrote
+   `PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1` records with
+   `reproduced: true` and OIDC claims whose `iss` is
+   `https://token.actions.githubusercontent.com`.
+3. `load_verified_registry()` admitted them: the live count moved
+   **447 → 449**, receipt-backed **294 → 296**, and both left
+   `harvested_capabilities` because an admitted capability cannot also be a
+   discovered one — the verifier's disjointness case enforces that.
+
+So the answer to "hidden capabilities must be at the unified runtime and the
+unified model" is no longer a design: two of them are, verified by an identity
+that is not ours. The remaining 622 are staged on the same path and blocked only
+on inputs, not on authority.
+
+## 6. Non-claims
 
 No frontier number here was produced by us. No official benchmark of ours except
 the 0/51 exists, and that one is a zero. The 84.6 % test-present figure from V1

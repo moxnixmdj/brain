@@ -558,6 +558,16 @@
      "kind": "BOUND_CAPABILITY"
     },
     {
+     "adapter": "canonical/runtime/binding_pin_is_current_v1.py",
+     "id": "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
+     "kind": "RECEIPT_BACKED_CAPABILITY"
+    },
+    {
+     "adapter": "canonical/runtime/capability_selection_retrieval_v1.py",
+     "id": "canonical.runtime.capability_selection_retrieval_v1.hidden.v1",
+     "kind": "RECEIPT_BACKED_CAPABILITY"
+    },
+    {
      "adapter": "canonical/runtime/bound_capabilities/cli_command.py",
      "id": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
      "kind": "RECEIPT_BACKED_CAPABILITY"
@@ -7339,6 +7349,11 @@
      "path": "canonical/swe_kernel/the_repository_is_the_seed_corpus_v1.py"
     },
     {
+     "id": "canonical.tools.capability_inventory_by_domain_v1.hidden.v1",
+     "invocation": "cli",
+     "path": "canonical/tools/capability_inventory_by_domain_v1.py"
+    },
+    {
      "id": "canonical.tools.census_orphan_capabilities_v1.hidden.v1",
      "invocation": "cli",
      "path": "canonical/tools/census_orphan_capabilities_v1.py"
@@ -8489,11 +8504,11 @@
    ]
   }
  },
- "model_digest": "c2a6bb68ff50132e73f17143ea8945a8d8582882084aa6c28f8be001c8552c7c",
+ "model_digest": "70d72055b5112b19aac75bdeed412dae7ce85f4bc00e9053113f1245d183c1f0",
  "schema": "PROJECT_BRAIN_CAPABILITY_DOMAIN_INVENTORY_V1",
  "summary": {
   "admitted": {
-   "__total__": 447,
+   "__total__": 449,
    "benchmark_harness": 8,
    "blind_repair": 31,
    "code_comprehension": 44,
@@ -8501,7 +8516,7 @@
    "data_query": 10,
    "math_symbolic": 6,
    "memory_learning": 4,
-   "orchestration_runtime": 152,
+   "orchestration_runtime": 154,
    "perception_documents": 21,
    "planning_agency": 28,
    "search_retrieval": 2,
@@ -8529,7 +8544,7 @@
    "verification_proof": 38
   },
   "discovered": {
-   "__total__": 621,
+   "__total__": 622,
    "benchmark_harness": 27,
    "blind_repair": 99,
    "code_comprehension": 29,
@@ -8540,7 +8555,7 @@
    "orchestration_runtime": 87,
    "perception_documents": 13,
    "planning_agency": 54,
-   "search_retrieval": 24,
+   "search_retrieval": 25,
    "security_policy": 14,
    "terminal_shell": 15,
    "unclassified": 113,
