@@ -126,14 +126,16 @@ def parse(output: str) -> dict[str, Any]:
             facts["kind"] = "containment"
             facts["containment"] = (containment.group(1).strip(), containment.group(2).strip())
     if "kind" not in facts:
-        bare = re.search(r"^E\s+assert (.+?)$", output, re.M)
+        bare = re.search(r"^E\s+(?:Failed: )?assert (.+?)$", output, re.M)
         if bare:
             facts["kind"] = "assertion"
             facts["bare"] = bare.group(1).strip()
-    did_not_raise = re.search(r"DID NOT RAISE.*?<class '([\w.]+)'>", output)
+    # pytest writes `DID NOT RAISE <class 'X'>` for a bare expression and
+    # `Failed: DID NOT RAISE X` for a with-block. The second form was missed entirely.
+    did_not_raise = re.search(r"DID NOT RAISE (?:<class '([\w.]+)'>|([A-Za-z_][\w.]*))", output)
     if did_not_raise:
         facts["kind"] = "did_not_raise"
-        facts["expected_exception"] = did_not_raise.group(1).split(".")[-1]
+        facts["expected_exception"] = (did_not_raise.group(1) or did_not_raise.group(2)).split(".")[-1]
     # the test machinery names the type it wanted: assertRaises / pytest.raises with the wrong error raised
     wrong_type = re.search(r"(?:assertRaises|pytest\.raises)\(([A-Za-z_][\w.]*)\)", output)
     if wrong_type and "Error" in output:
