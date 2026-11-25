@@ -1,0 +1,84 @@
+{
+ "action_id": "THE_GUIDE_IS_A_KEY_TABLE_20261124_V1",
+ "action_intent_id": "THE_GUIDE_IS_A_KEY_TABLE_20261124_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "date": "2026-11-24",
+ "status": "MEASURED__PRODUCER_RUN_SANDBOX__FIVE_OF_SEVEN_ROOMS_DISAGREE",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "claim_under_test": "THE_CHEAP_WAY_OF_ASKING_A_PROGRAM_WHAT_IT_ACCEPTS_PREDICTS_THE_OPERATIONAL_ANSWER_AND_THE_FAMILY_CELL_GENERALISES_ACROSS_PROGRAMS",
+ "method": "SEVEN_ROOMS_FOUR_WAYS_OF_ASKING_ONE_OPERATIONAL_ORACLE_PER_ROOM",
+ "action_summary": "Round 4's receipt named its own bottleneck: a 42-command debugger cost 26 questions and every one was about a COMMAND. This round asked about the way of asking instead. Four channels were priced on this machine (batch `-c help` 2.3-36 ms, the page 2.1-56 ms, the live prompt 4-1420 ms, and `strings` at 0.2 ms which was later deleted), the hypothesis space was cut to the two axes that exist -- SHAPE (KEY/TOKEN/SUBCOMMAND/OPTION_LANGUAGE/NONE) and COUNTER (COMMANDS/BUILTINS/PATH/OPTIONS), five admissible cells with five uniform priors and no learned weights -- and the policy is one line: ask the cheapest channel that can still split the survivors, stop when one cell survives. The claim was made falsifiable by an operational oracle: the same program asked the same question at its own prompt must publish the same KIND of evidence. It holds in 2 rooms of 7 and fails in 5, and the receipt prints every disagreement with its numbers. Most of the round's value is in having built the oracle and in what it convicted: the text parser I spent the round tuning. Four parser facts each needed a patch and each patch broke a different room (prose split on whitespace became commands; an options page was read as a command table; a wide description field swallowed a command column; a capitalised word rule ate the shell's usage tails). The expected-failure test `test_an_options_page_yields_options_and_no_commands` is kept red on purpose as the evidence that typography cannot be the mechanism.",
+ "fresh_reality_units_consumed": 7,
+ "incremental_spend_usd": 0,
+ "measurable_result": {
+  "rooms": 7,
+  "cheap_answer_agrees_with_the_live_oracle": "2 of 7",
+  "cheap_ms_total": 278.0,
+  "live_ms_total": 5289.9,
+  "speed_ratio": "19x",
+  "hypothesis_space_parameters": 5,
+  "deciding_channel_histogram": {"none": 5, "batch": 2},
+  "expected_failure_tests_kept_red": 1,
+  "run_seconds": 5.6
+ },
+ "honest_limits": [
+  "No benchmark score: OSWorld 2.1, Terminal-Bench 4.0 and SWE-bench Pro V2 cannot execute here (no browser, no X, no container runtime). They remain non-claims.",
+  "The generalisation claim is unverified: PAGER -> (OPTION_LANGUAGE, COMMANDS) was learned from `more` and is wrong for `less`.",
+  "python3 was placed in the PYTHON_DEBUGGER family by hand and is not that family.",
+  "The typography parser fails on 5 rooms of 7 and one test is an expected failure.",
+  "One machine, one geometry, one implementation, producer-run only."
+ ],
+ "artifacts": [
+  "canonical/tools/the_guide_is_a_key_table_v1.py",
+  "canonical/tests/test_the_guide_is_a_key_table_v1.py",
+  "canonical/verification/THE_GUIDE_IS_A_KEY_TABLE_20261124_V1.json",
+  "canonical/verification/THE_GUIDE_IS_A_KEY_TABLE_20261124_V1.md"
+ ],
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Four routes were measured and rejected in this round rather than argued. (1) A `strings` channel over the binary's own words: cheapest of all at 0.2-260 ms, and it decided no cell in any room; a pager's 31,336 words of strings parsed into ~13,000 'tokens' of prose and symbols; deleted. (2) The `help X` channel: descriptions arrive free in the answer that lists the token, and where they do not, the alphabet is still the whole answer; deleted, saving round 4's 26 x 24 ms. (3) Needles recalled from these programs' manuals: two of four were wrong on the first run and two of four shape claims with them; replaced by what the parser found, printed in the receipt. (4) Tuning admissibility rules until each program landed in the expected cell: four attempts, each breaking a different room (the shell read as a pager, the REPL as a pager, the interpreter as a debugger); abandoned for an operational oracle that costs 600 ms and cannot be argued with.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 15 pins (14 pass, 1 expected failure) and one end-to-end receipt over seven rooms in 5.6 s. The headline claim fails in 5 of 7 rooms and is reported as failing. No independent identity has re-run any of it.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/governance/OPERATOR_OBS_DECISION_BOUNDARY_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "obs_layers_evaluated": {
+   "1_the_real_goal": "A general problem-solving system whose producer path is its own; no benchmark score is claimed because none is runnable here.",
+   "2_the_current_blocker": "Decoding a program's published guide into an alphabet by parsing its typography. The parser is where the round died: five of seven rooms disagree with the operational oracle.",
+   "3_the_challenger_frontier": "Challengers built and killed this round: a `strings` channel, the `help X` channel, recalled needles, a second `if`-chain claim procedure, and four generations of typography rules.",
+   "4_volatile_dependency_preflight": "Zero network, zero model calls, zero incremental spend at run time; the only dependencies are the seven binaries on this machine.",
+   "5_the_route_race": "Deletion won twice and the operational oracle beat the parser: an answer that costs 600 ms and is a FACT beats an answer that costs 0 ms and is a JUDGEMENT.",
+   "6_the_receipt": "This file, plus canonical/verification/THE_GUIDE_IS_A_KEY_TABLE_20261124_V1.json produced end to end in 5.6 s.",
+   "7_the_decision": "KEEP the two-axis hypothesis space and the priced channel order; REJECT the typography parser as the mechanism; DECLARE the next blocker: the family row needs one more axis -- which ways of asking exist at all -- and it must be declared and checked, not parsed."
+  },
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/the_guide_is_a_key_table_v1.py",
+   "canonical/tests/test_the_guide_is_a_key_table_v1.py",
+   "canonical/verification/THE_GUIDE_IS_A_KEY_TABLE_20261124_V1.json",
+   "canonical/verification/THE_GUIDE_IS_A_KEY_TABLE_20261124_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ }
+}

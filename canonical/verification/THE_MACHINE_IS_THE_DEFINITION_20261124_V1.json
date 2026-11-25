@@ -1,0 +1,698 @@
+{
+ "schema": "BRAIN_THE_MACHINE_IS_THE_DEFINITION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "geometry": "TERM=dumb;24x80;stdin=/dev/null;cwd=throwaway-room",
+ "deny_rule": [
+  "apt",
+  "apt-get",
+  "bash",
+  "cargo",
+  "cc",
+  "curl",
+  "dd",
+  "docker",
+  "ed",
+  "emacs",
+  "fdisk",
+  "ftp",
+  "gcc",
+  "gem",
+  "go",
+  "htop",
+  "init",
+  "less",
+  "man",
+  "mkfs",
+  "more",
+  "mount",
+  "nano",
+  "nc",
+  "ncat",
+  "node",
+  "npm",
+  "nvim",
+  "parted",
+  "pdb",
+  "pip",
+  "pip3",
+  "podman",
+  "python3",
+  "reboot",
+  "scp",
+  "sftp",
+  "sh",
+  "shutdown",
+  "socat",
+  "ssh",
+  "su",
+  "sudo",
+  "systemctl",
+  "telnet",
+  "top",
+  "umount",
+  "vi",
+  "vim",
+  "wget",
+  "yarn"
+ ],
+ "known_rule": [
+  "awk",
+  "bash",
+  "cat",
+  "echo",
+  "find",
+  "git",
+  "grep",
+  "less",
+  "ls",
+  "more",
+  "node",
+  "openssl",
+  "pdb",
+  "pip",
+  "python",
+  "python3",
+  "sed",
+  "sh",
+  "tar"
+ ],
+ "seen_rooms": {
+  "less": {
+   "cell_verdict": "BOTH_WAYS",
+   "problems": [],
+   "program": "less",
+   "room": "/tmp/machine-def-room-grlkaa1u",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 81,
+   "index_answers_read": 3,
+   "index_raw_words": 1419,
+   "argv_probed": 80,
+   "argv_ms": 0.0,
+   "prompt_probed": 16,
+   "prompt_ms": 48331.9,
+   "confirmed": 36,
+   "moves_state": [],
+   "defined_by_argv": [
+    "-?",
+    "-a",
+    "-A",
+    "-b",
+    "-B",
+    "-c",
+    "-D",
+    "-e",
+    "-E",
+    "-f",
+    "-F",
+    "-g",
+    "-G",
+    "-h",
+    "-i",
+    "-I",
+    "-j",
+    "-k",
+    "-K",
+    "-m",
+    "-n",
+    "-N",
+    "-O",
+    "-P",
+    "-Q",
+    "-r",
+    "-S",
+    "-u",
+    "-V",
+    "-w",
+    "-W",
+    "-x",
+    "-X",
+    "-y"
+   ],
+   "defined_by_prompt": [
+    "h",
+    "one"
+   ],
+   "blind": [
+    "-d",
+    "-J",
+    "-L",
+    "-M",
+    "-o",
+    "-p",
+    "-q",
+    "-R",
+    "-s",
+    "-t"
+   ],
+   "precision_of_the_index": 0.45,
+   "argv_reject_sample": [
+    "h",
+    "q",
+    "ZZ",
+    "e",
+    "j",
+    "CR",
+    "*",
+    "one",
+    "y",
+    "k",
+    "f",
+    "SPACE"
+   ],
+   "probes": 356,
+   "evidence_sample": [
+    {
+     "token": "-?",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": false,
+     "evidence": [
+      "!_\bc_\bo_\bm_\bm_\ba_\bn_\bd             Execute the shell command with $SHELL.",
+      "$  means  end of the file",
+      "&_\bp_\ba_\bt_\bt_\be_\br_\bn          *  Display only matching lines."
+     ]
+    },
+    {
+     "token": "-a",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": false,
+     "evidence": [
+      "<P> is a directory"
+     ]
+    },
+    {
+     "token": "-A",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": false,
+     "evidence": [
+      "<P> is a directory"
+     ]
+    }
+   ]
+  },
+  "bash": {
+   "cell_verdict": "BOTH_WAYS",
+   "problems": [],
+   "program": "bash",
+   "room": "/tmp/machine-def-room-5b6zk27q",
+   "learned_form": {
+    "form": [
+     "-c",
+     "help"
+    ],
+    "switch": "-c",
+    "taught_by": "Type `bash -c help' for more information about shell builtin commands.",
+    "documented_as": "Type `bash -c help' for more information about shell builtin commands.",
+    "words": 411,
+    "sample": "GNU bash, version 5.2.15(1)-release (x86_64-pc-linux-gnu)"
+   },
+   "index_tokens": 64,
+   "index_answers_read": 2,
+   "index_raw_words": 98,
+   "argv_probed": 64,
+   "argv_ms": 0.0,
+   "prompt_probed": 16,
+   "prompt_ms": 250.1,
+   "confirmed": 11,
+   "moves_state": [],
+   "defined_by_argv": [
+    "-ilrsD",
+    ".",
+    "kill",
+    "[",
+    "printf",
+    "pwd",
+    "test",
+    "true",
+    "false"
+   ],
+   "defined_by_prompt": [
+    "caller",
+    "case"
+   ],
+   "blind": [
+    "cd",
+    "[GNU long option]",
+    "history",
+    "jobs",
+    "alias",
+    "logout",
+    "bg",
+    "break"
+   ],
+   "precision_of_the_index": 0.172,
+   "argv_reject_sample": [
+    "[GNU long option]",
+    "home page: <http://www.gnu.org/software/bash>",
+    "job_spec",
+    "history",
+    "jobs",
+    "let",
+    "alias",
+    "logout",
+    "bg",
+    "mapfile",
+    "popd",
+    "break"
+   ],
+   "probes": 316,
+   "evidence_sample": [
+    {
+     "token": "-ilrsD",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "<ROOM> $ logout",
+      "bash: cannot set terminal process group (<N>): Inappropriate ioctl for device",
+      "bash: no job control in this shell"
+     ]
+    },
+    {
+     "token": ".",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "126",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "<T>: <T>: Is a directory"
+     ]
+    },
+    {
+     "token": "kill",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "126",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "<P>/<T>: <P>/<T>: cannot execute binary file"
+     ]
+    }
+   ]
+  },
+  "node": {
+   "cell_verdict": "OPTION_TABLE",
+   "problems": [
+    "more than a third of the candidates were unobservable"
+   ],
+   "program": "node",
+   "room": "/tmp/machine-def-room-2j7bqrzs",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 5,
+   "index_answers_read": 3,
+   "index_raw_words": 3935,
+   "argv_probed": 5,
+   "argv_ms": 3000.0,
+   "prompt_probed": 3,
+   "prompt_ms": 241.5,
+   "confirmed": 2,
+   "moves_state": [],
+   "defined_by_argv": [
+    "-",
+    "inspect"
+   ],
+   "defined_by_prompt": [],
+   "blind": [
+    "script",
+    "TZ",
+    "specify"
+   ],
+   "precision_of_the_index": 0.4,
+   "argv_reject_sample": [
+    "script",
+    "TZ",
+    "specify"
+   ],
+   "probes": 28,
+   "evidence_sample": [
+    {
+     "token": "-",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": []
+    },
+    {
+     "token": "inspect",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "TIMEOUT",
+     "ms": 3000.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": []
+    }
+   ]
+  },
+  "sh": {
+   "cell_verdict": "UNPROVEN",
+   "problems": [
+    "the index found nothing and the prompt defined nothing: this program publishes no alphabet in any form tried"
+   ],
+   "program": "sh",
+   "room": "/tmp/machine-def-room-lx9_x58n",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 0,
+   "index_answers_read": 3,
+   "index_raw_words": 18,
+   "argv_probed": 0,
+   "argv_ms": 0.0,
+   "prompt_probed": 0,
+   "prompt_ms": 0.0,
+   "confirmed": 0,
+   "moves_state": [],
+   "defined_by_argv": [],
+   "defined_by_prompt": [],
+   "blind": [],
+   "precision_of_the_index": null,
+   "argv_reject_sample": [],
+   "probes": 0,
+   "evidence_sample": []
+  }
+ },
+ "unseen_rooms": {
+  "corepack": {
+   "cell_verdict": "OPTION_TABLE",
+   "problems": [],
+   "program": "corepack",
+   "room": "/tmp/machine-def-room-njly5ygu",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 8,
+   "index_answers_read": 3,
+   "index_raw_words": 313,
+   "argv_probed": 8,
+   "argv_ms": 0.0,
+   "prompt_probed": 0,
+   "prompt_ms": 0.0,
+   "confirmed": 8,
+   "moves_state": [],
+   "defined_by_argv": [
+    "cache clean",
+    "disable",
+    "enable",
+    "install",
+    "install <-g,--global>",
+    "pack",
+    "up",
+    "use <pattern>"
+   ],
+   "defined_by_prompt": [],
+   "blind": [],
+   "precision_of_the_index": 1.0,
+   "argv_reject_sample": [],
+   "probes": 32,
+   "evidence_sample": [
+    {
+     "token": "cache clean",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "<N>. corepack -h",
+      "<N>. corepack -v",
+      "<N>. corepack <T>"
+     ]
+    },
+    {
+     "token": "disable",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "$ corepack <T> [--install-directory #<N>] ...",
+      "Usage Error: Invalid package manager name '<P>'"
+     ]
+    },
+    {
+     "token": "enable",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "$ corepack <T> [--install-directory #<N>] ...",
+      "Usage Error: Invalid package manager name '<P>'"
+     ]
+    }
+   ]
+  },
+  "nodejs": {
+   "cell_verdict": "OPTION_TABLE",
+   "problems": [],
+   "program": "nodejs",
+   "room": "/tmp/machine-def-room-q7t4d_k4",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 4,
+   "index_answers_read": 3,
+   "index_raw_words": 3935,
+   "argv_probed": 4,
+   "argv_ms": 0.0,
+   "prompt_probed": 3,
+   "prompt_ms": 345.5,
+   "confirmed": 1,
+   "moves_state": [],
+   "defined_by_argv": [
+    "-"
+   ],
+   "defined_by_prompt": [],
+   "blind": [
+    "script",
+    "specify"
+   ],
+   "precision_of_the_index": 0.25,
+   "argv_reject_sample": [
+    "script",
+    "TZ",
+    "specify"
+   ],
+   "probes": 28,
+   "evidence_sample": [
+    {
+     "token": "-",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "0",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": []
+    }
+   ]
+  },
+  "npx": {
+   "cell_verdict": "UNPROVEN",
+   "problems": [
+    "the index found nothing and the prompt defined nothing: this program publishes no alphabet in any form tried"
+   ],
+   "program": "npx",
+   "room": "/tmp/machine-def-room-hcpfmy4u",
+   "learned_form": {
+    "form": null,
+    "why": "the page documents no run-a-command switch"
+   },
+   "index_tokens": 0,
+   "index_answers_read": 3,
+   "index_raw_words": 135,
+   "argv_probed": 0,
+   "argv_ms": 0.0,
+   "prompt_probed": 0,
+   "prompt_ms": 0.0,
+   "confirmed": 0,
+   "moves_state": [],
+   "defined_by_argv": [],
+   "defined_by_prompt": [],
+   "blind": [],
+   "precision_of_the_index": null,
+   "argv_reject_sample": [],
+   "probes": 0,
+   "evidence_sample": []
+  },
+  "pygmentize": {
+   "cell_verdict": "OPTION_TABLE",
+   "problems": [],
+   "program": "pygmentize",
+   "room": "/tmp/machine-def-room-la6e9eqs",
+   "learned_form": {
+    "form": [
+     "-C",
+     "help"
+    ],
+    "switch": "-C",
+    "documented_as": "printed.\n  -C            Like",
+    "words": 1,
+    "sample": "text"
+   },
+   "index_tokens": 11,
+   "index_answers_read": 3,
+   "index_raw_words": 1098,
+   "argv_probed": 11,
+   "argv_ms": 0.0,
+   "prompt_probed": 1,
+   "prompt_ms": 243.1,
+   "confirmed": 10,
+   "moves_state": [],
+   "defined_by_argv": [
+    "-l",
+    "-f",
+    "-v",
+    "-s",
+    "-x",
+    "-N",
+    "-C",
+    "-H",
+    "-V",
+    "-a"
+   ],
+   "defined_by_prompt": [],
+   "blind": [
+    "-g",
+    "-g"
+   ],
+   "precision_of_the_index": 0.909,
+   "argv_reject_sample": [],
+   "probes": 46,
+   "evidence_sample": [
+    {
+     "token": "-l",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": false,
+     "evidence": [
+      "Error: no lexer for alias '<P>' found"
+     ]
+    },
+    {
+     "token": "-f",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "Error: no formatter found for name '<P>'"
+     ]
+    },
+    {
+     "token": "-v",
+     "way": "argv",
+     "verdict": "DEFINED",
+     "changed": [],
+     "exit": "1",
+     "ms": 0.0,
+     "probes": 4,
+     "controls_agree": true,
+     "evidence": [
+      "Error: cannot read infile: [Errno <N>] Permission denied: '<P>'"
+     ]
+    }
+   ]
+  }
+ },
+ "summary_seen": {
+  "rooms": 4,
+  "index_tokens": 150,
+  "confirmed": 49,
+  "moves_state": [],
+  "probes": 700,
+  "ms": 51823.5,
+  "precision": 0.266,
+  "rooms_with_no_confirmed_token": [
+   "sh"
+  ]
+ },
+ "summary_unseen": {
+  "rooms": 4,
+  "index_tokens": 23,
+  "confirmed": 19,
+  "moves_state": [],
+  "probes": 106,
+  "ms": 588.6,
+  "precision": 0.704,
+  "rooms_with_no_confirmed_token": [
+   "npx"
+  ]
+ },
+ "measured": {
+  "seconds": 78.5,
+  "probes_total": 806,
+  "rooms": 8
+ },
+ "removed_parts": {
+  "the_parser_as_the_definer": {
+   "what_it_was": "round 5's typography parser deciding what a program's commands are",
+   "what_it_measured": "2 of 7 rooms agreed with the program's own live answer",
+   "why_demoted": "it is now an INDEX only: it proposes candidates and the machine disposes of them. Its precision is measured here instead of assumed."
+  },
+  "grading_a_probe_by_its_text": {
+   "what_it_was": "reading 'not found' as 'no such command' and 'invalid option' as 'unknown'",
+   "what_it_measured": "`sh -c help` answers `help: not found` and a round-3 instrument read that as a shell with no command table",
+   "why_deleted": "a probe is graded by a DIFFERENTIAL against a control of the same shape, never by what the text says"
+  }
+ },
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "network_calls_at_run_time": 0
+}
