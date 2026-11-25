@@ -48,6 +48,7 @@ _LAWS = {law for law in _env("META_LAWS").split(",") if law}
 _REMOVE = tuple(v for v in _env("META_REMOVE").split(",") if v)
 _GET = tuple(v for v in _env("META_GET").split(",") if v)
 _OUT = _env("META_OUT")
+_HINTS = [h for h in _env("META_HINTS").split(",") if h]
 
 
 def _laws():
@@ -288,6 +289,35 @@ def _probe(inst: Any) -> None:
     getters = [n for n in dir(cls) if _is_getter(n) and callable(getattr(cls, n, None))]
     if not getters:
         return
+    # Presentation probing: a header/token string is usually produced by `__str__`/`to_header`, and
+    # the suite may never call it on an object it constructed. Measured need: werkzeug@051fd663's
+    # trailing space never appeared because nothing in the passing suite presented the header.
+    laws = _laws()
+    for pname in dir(cls):
+        low = pname.lower()
+        if not any(tok in low for tok in laws.HEADER_TOKENS):
+            continue
+        fn = getattr(cls, pname, None)
+        if not callable(fn):
+            continue
+        try:
+            import inspect as _inspect
+            sig = _inspect.signature(fn)
+        except Exception:
+            continue
+        required = [p for p in sig.parameters.values()
+                    if p.name != "self" and p.default is p.empty
+                    and p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)]
+        if required:
+            continue
+        try:
+            produced = getattr(inst, pname)()
+        except Exception:
+            continue
+        for violation in laws.check_canonicality(pname, produced):
+            violation["where"] = f"{cls.__name__}.{pname}"
+            _record(violation)
+
     for name in _remove_methods(cls):
         if _STATE["probes"] >= _MAX_PROBES:
             return
@@ -352,7 +382,56 @@ def pytest_runtest_teardown(item, nextitem) -> None:
             _STATE["skipped"] += 1
 
 
+def _hinted_constructions() -> None:
+    """Build the object the issue names, from the issue's own words, and present it.
+
+    Measured need: werkzeug's trailing space appears for `WWWAuthenticate("bearer")`, a construction
+    the passing suite never performs. Without this the canonicality law has no trigger at all.
+    """
+    if not _HINTS:
+        return
+    laws = _laws()
+    for modname in _TARGETS:
+        try:
+            mod = importlib.import_module(modname)
+        except Exception:
+            continue
+        for cls_name, cls in list(vars(mod).items()):
+            if not inspect.isclass(cls) or getattr(cls, "__module__", None) != modname:
+                continue
+            presenters = [n for n in dir(cls)
+                          if any(tok in n.lower() for tok in laws.HEADER_TOKENS)
+                          and callable(getattr(cls, n, None))]
+            if not presenters:
+                continue
+            try:
+                ctor = inspect.signature(cls.__init__)
+            except (TypeError, ValueError):
+                continue
+            positional = [p for p in ctor.parameters.values()
+                          if p.name != "self" and p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)]
+            if not positional:
+                continue
+            for hint in _HINTS[:12]:
+                try:
+                    inst = cls(hint)
+                except Exception:
+                    continue
+                for pname in presenters:
+                    try:
+                        produced = getattr(inst, pname)()
+                    except Exception:
+                        continue
+                    for violation in laws.check_canonicality(pname, produced):
+                        violation["where"] = f'{cls_name}("{hint}").{pname}'
+                        _record(violation)
+
+
 def pytest_sessionfinish(session, exitstatus) -> None:
+    try:
+        _hinted_constructions()
+    except Exception:
+        _STATE["skipped"] += 1
     if not _OUT:
         return
     seen: set[tuple] = set()

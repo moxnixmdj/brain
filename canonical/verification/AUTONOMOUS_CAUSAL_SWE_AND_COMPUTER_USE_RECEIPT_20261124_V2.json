@@ -368,6 +368,27 @@
   "rejected_by_measurement": "the first error_discipline law ('a builtin escaped a library with an error hierarchy') fired on 6/6 commits identically on both trees; replaced by the inconsistency observable",
   "tests": "canonical/tests/test_metamorphic_oracle_v1.py + test_oracle_drives_purge_synthesis_v1.py, 4 passed"
  },
+ "law_repair_v17": {
+  "pyjwt@793a302": {
+   "candidates": 3,
+   "law_after_patch": "unchanged (2 error_discipline violations on decode/decode_complete)",
+   "result": "NOT repaired: same function, different argument",
+   "why": "the mixed exception families are witnessed by mutating an argument other than the claims; broadening the claim handlers cannot clear a violation whose witness is a different parameter"
+  },
+  "test_absent_stream": "2 repaired (pluggy@50585e0, werkzeug@051fd663), 5 open",
+  "trigger_fix": [
+   "presentation probing at teardown",
+   "issue-seeded construction: WWWAuthenticate(<word from the issue>)"
+  ],
+  "werkzeug@051fd663": {
+   "buggy_construction": "WWWAuthenticate('bearer') -> 'Bearer '",
+   "candidate": "LAW_CANONICALITY[WWWAuthenticate.__str__+WWWAuthenticate.to_header:strip every exit]",
+   "fixed_construction": "WWWAuthenticate('bearer') -> 'Bearer'",
+   "hidden_test_after_patch": "124 passed (test overlaid only after the patch was chosen)",
+   "law_after_patch": "silent",
+   "result": "REPAIRED blind, non-lifecycle defect"
+  }
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -453,6 +474,10 @@
   "canonical/swe_kernel/executable_mental_model_v1.py": {
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
+  },
+  "canonical/swe_kernel/law_repair_synthesis_v1.py": {
+   "purpose": "generate a patch from a law violation (canonicality, error discipline) with no test",
+   "sha256": "67bc43b9239a88037173c7991fc88f49f592f6fe958c3ab5ef5ec3238872f70e"
   },
   "canonical/swe_kernel/metamorphic_laws_v1.py": {
    "sha256": "920fec5b529935c14a8bc79ad8599007770c3830928c8704322b90296f253001"
@@ -620,7 +645,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Generation for non-lifecycle laws. Gate stated before the build: for pyjwt@793a302 (error discipline) and werkzeug@051fd663 (canonicality), a synthesized candidate must be accepted by its own law on the buggy tree, silent on the fixed tree, and NOT accepted by the other law.",
+ "next_bottleneck": "Carry the witness into the candidate: the violation's argument index and value travel to the generator, so the edit targets the site the witness came from rather than the site the issue name suggests. Gate: for pyjwt@793a302 a candidate must clear the law AND pass the hidden test, with the witness's argument index recorded and used.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,

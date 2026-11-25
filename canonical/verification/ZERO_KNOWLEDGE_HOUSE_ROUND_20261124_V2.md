@@ -851,3 +851,55 @@ law — three conditions, so a candidate cannot pass by being indiscriminately h
 **Rejected this round:** using the PR/commit text as the task signal (it contains the fix — measured above); embedding
 similarity for attribution (it is a model call in the runtime path, forbidden by §2); breaking same-function ties by
 file order or line number (measured to pick the wrong defect for #762 before law vocabulary was added).
+
+## Round V17 — a non-lifecycle defect repaired blind: the law generates, the test confirms
+
+Gate declared in V16: for `werkzeug@051fd663` (canonicality) and `pyjwt@793a302` (error discipline), a synthesized candidate
+must be accepted by its own law on the buggy tree, silent on the fixed tree, and not accepted by the other law. One of the
+two passed, and the one that failed failed for a reason worth more than the pass.
+
+**First, the trigger had to exist.** In V15/V16 werkzeug produced *zero* violations: nothing in the passing suite ever
+presented a header string. Two additions fixed that, both of the same family as the lifecycle fix — manufacture the call
+rather than wait for it:
+1. *presentation probing*: at teardown, call `__str__`/`to_header`-style methods on the instances the suite built;
+2. *issue-seeded construction*: build the object the issue names from the issue's own words —
+   `WWWAuthenticate("bearer")` — which the suite never constructs.
+
+Measured, and this is the whole reason the channel is legitimate: `WWWAuthenticate("bearer")` yields `'Bearer '` on
+`051fd663^1` and `'Bearer'` on the fix. The hint value can be any parameter-less type; nothing is hand-tuned.
+
+**Built:** `canonical/swe_kernel/law_repair_synthesis_v1.py` — the law *generates* the patch.
+- `canonicality_candidates_multi`: wrap every `return` of every method the law fired on in `.strip()`.
+- `error_discipline_candidates`: broaden a single-family `except` handler to catch the sibling builtin family.
+
+**The failure that changed the design.** The first werkzeug candidate patched only `__str__` (the first method the law
+named), and the hidden test failed with `assert 'Bearer ' == 'Bearer'`. `WWWAuthenticate` presents its header through
+**both** `__str__` and `to_header`, and `to_header` builds the string itself. A law names an observable, not one exit
+point: a candidate that clears half of it is not a repair. Patching every exit the law named:
+
+| condition | result |
+|---|---|
+| accepted by its own law on the buggy tree | **yes** — no `WWWAuthenticate(...)` canonicality violations remain |
+| silent on the fixed tree | **yes** — the construction is clean there (checked before any patch) |
+| the hidden test, overlaid *after* the patch was chosen | **124 passed** |
+
+So `werkzeug@051fd663` is the second test-absent repair in this catalogue, and the first one whose defect is not a
+lifecycle violation: the law alone produced an edit, and an independent human test — never shown to the loop — accepted it.
+
+**pyjwt: the law fires, the repair does not follow, and the reason is precise.** Three candidate variants
+(broaden 1, 2 and all 5 handlers in `jwt/api_jwt.py`) were generated and **none** cleared the `error_discipline`
+violations on `PyJWT.decode` / `decode_complete`. The mixed exception families in that violation are produced by
+mutating an argument other than the claims — the law's *evidence* and the defect's *site* are different arguments of the
+same function. Broadening the claim handlers cannot silence a violation whose witness is a different parameter. That is
+the same shape as the two limitations already recorded (same function, different defect; same law, different instance),
+now with a third variant: **same function, different argument**.
+
+**Recorded honestly:** test-absent stream **2 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`), 5 still open
+(`pluggy@8051a4d` has no generator, `pyjwt@793a302` misses on argument identity, `click@05f6fd0`, `more-itertools@cca32949f1`
+and `attrs@3b0378dd66` have no law that fires). Test-present tally unchanged: **11/13 = 84.62%**.
+
+**Next bottleneck.** Every failure this round is an *identity* failure: the law finds a witness, and the repair is aimed at
+a neighbouring witness. The reframing is to let the law carry its witness into the candidate — the violating argument's
+index and value travel with the violation, so the generator edits the site the witness came from rather than the site the
+issue name suggests. Gate stated before the build: for `pyjwt@793a302`, a candidate must clear the law *and* pass the
+hidden test, with the witness's argument index recorded and used.

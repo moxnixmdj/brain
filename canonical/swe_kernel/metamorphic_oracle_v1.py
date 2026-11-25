@@ -111,6 +111,7 @@ def violations_from_run(
     timeout_s: float = 900.0,
     max_calls: int = 20000,
     python: str | None = None,
+    hints: Sequence[str] | None = None,
 ) -> PluginRun:
     """Run `pytest` in `project_root` with the name/effect law instrumented; return what it saw.
 
@@ -133,6 +134,9 @@ def violations_from_run(
     env["META_ADD"] = ",".join(ADD_VERBS)
     env["META_GET"] = ",".join(GETTER_PREFIXES)
     env["META_LAWS"] = ",".join(LAWS)
+    # Hints are the issue's own words. They let the oracle *construct* the object the issue is about
+    # (werkzeug: "bearer" -> WWWAuthenticate("bearer")) instead of waiting for the suite to build it.
+    env["META_HINTS"] = ",".join(dict.fromkeys(h for h in (hints or []) if h))[:600]
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     cmd = [python, "-m", "pytest", "-p", "meta_oracle_plugin", "-p", "no:cacheprovider", *pytest_args]
     try:
