@@ -108,15 +108,34 @@ Artifact: `canonical/Immediate_Results/issue_only_and_honest_baseline_audit_2026
   - **`HONEST_SUITE_BASELINE_20261103_V1.json`**: Verified **`344` failing files / `1,026` failing cases** (`793` `ASSERTION`, `113` `OTHER`, `69` `CURRENTNESS_GUARD`, `43` `IMPORT_ERROR`, `5` `MISSING_FILE`, `3` `NETWORK`).
   - **Live GitHub Actions Harbor + Air-Gapped Docker Execution (`run_id=45537959351`, `job_id=138949134648` on `arena/06dc079e-brain`)**: Executed Harbor `39c2219a` + `SWE-bench_Pro-os` (`66f92766` `HARD-51[:2]`: `NodeBB__NodeBB-8168c6c4...` JS & `ansible__ansible-40ade1f8...` Python) + `PatchReplayAgent` pristine container replay (`network_mode: none`, `cap_drop: [ALL]`, `/opt/brain-ro:ro`) in `4m24s` with **`0` trial exceptions, `0` leaked processes, `issues = []`**, and honest fail-closed `reward = 0.0` (`0/2` on `HARD-51` multi-file enterprise tasks without unverified guessing).
 
+### 4.5 Unified Organ Composition (`boltons` + `more-itertools`), Entry-Anchored Subtree Transfer, `cJSON` Native Crash-Horizon Chaining & Harbor `Terminal-Bench 2.0` Docker Run
+Artifacts: `canonical/Immediate_Results/historical_boltons_more_itertools_transfer_20261124_v1.json`, `canonical/Immediate_Results/external_memory_surgical_ablation_20261124_v1.json`, `canonical/Immediate_Results/blind_cjson_real_commits_unified_cogs_20261124_v2.json`, and `canonical/Immediate_Results/final_unified_verification_summary_20261124_v2.json` (`0` model calls).
+- **Historical `boltons` + `more-itertools` Upstream Curriculum (`0 / 4 -> 4 / 4 = 100.0%`, `4 / 4` Held-Out External Audit Passed)**:
+  - Unified `CausalCEGISInventor` with `_BrainTracePlugin` infinite-loop trace escape (`TimeoutError("COGS_INFINITE_LOOP_TRACE_LIMIT")` + `"<timeout>"` nodeid recovery), per-test-scope `ast.walk` exception-message extraction (`whitebox_introspector_and_trace_synthesizer_v1.py`), relational boundary synthesis (`_surgical_span_mutations`), and `__HPARAM_{idx}__` `entry_anchored` pure-insertion AST subtree morphisms (`universal_semantic_ir_v1.py`):
+    - **`bits_capacity` (`boltons`)**: Solved in **`9` sims (`3.12s`)**, crystallized `uir_law_0d9cbe454542`, `held_out_external_audit_passed = True`.
+    - **`unit_boundary` (`boltons`)**: Solved in **`11` sims (`3.67s`)**, crystallized `uir_law_6eca4feb18f1`, `held_out_external_audit_passed = True`.
+    - **`ichunked_zero` (`more-itertools`, `5,644`-line `more.py`)**: Solved in **`6` sims (`21.78s`)**, crystallized `uir_law_d14dfdade03f`, `held_out_external_audit_passed = True`.
+    - **`chunked_even_zero` (`more-itertools`, unseen held-out commit)**: Solved on **1st localized candidate** via **`SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f`** (`5` oracle runs total), `held_out_external_audit_passed = True`.
+    - **O(1) External Memory Surgical Deletion Ablation**: Calling `law_store.remove_law("uir_law_d14dfdade03f")` (`0` retraining steps, `remaining_law_ids = []`) cleanly reverted `chunked_even_zero` from `SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f` back to cold `COGS_REVERSE_PRECONDITION_SYNTHESIS`.
+- **Real Historical `DaveGamble/cJSON` C Memory-Safety Commits (`0 / 13 -> 2 / 13 = 15.38%`, `frozen_engine_hashes_identical = True`)**:
+  - Fixed scoped C/C++ dominator null-guard analysis (`scoped_null_guards` + `CHAINED_ARROW` `p->prev->next` + C89-safe `body_entry_idx` + cleanup `goto` + UBSAN `file:line:col: runtime error:` anchoring + `os.killpg` process-group reaping) and added **Crash-Horizon Monotonicity Chaining** for multi-hunk native ASAN/UBSAN commits:
+    - **`b2890c8d76` (`fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)`)**: Solved in **`4` sims (`3.23s`)**, `exact_file_match = True`, `sabotage_verified = True`, crystallized `uir_law_6e054af54b35`.
+    - **`2f6fc7f0f2` (`fix several null pointer problems on allocation failure (#526)`)**: Solved in **`19` sims (`12.65s`)** via **`COGS_COUPLED_MULTIFILE_INVENTION`** (multi-hunk Crash-Horizon Monotonicity Chaining under `gcc -fsanitize=address,undefined` + LeakSanitizer), `exact_file_match = True`, `sabotage_verified = True`.
+- **Live GitHub Actions Docker Harbor Run #2 (`run_id=45549795585`, `job_id=138987969469`, `conclusion: success` in `5m34s`)**:
+  - Verified polyglot `_detect_repo_language` worker on `SWE-bench Pro V2` (`HARD-51[:2]` + `PatchReplayAgent` -> `issues: []`, `0` trial exceptions) AND official `laude-institute/terminal-bench-2@2fd12b88` (`suite=terminal-bench-4`): `cancel-async-tasks` dispatched cleanly (`EXPERIMENTAL_DISPATCH__UNVERIFIED`, `0` leaked processes; Harbor's `test.sh` `uvx pytest` blocked by air-gapped `network_mode: none`), while `regex-log` fail-closed cleanly (`PROCESS_SNAPSHOT_FAILED` due to missing `/usr/bin/python3` in minimal container).
+
 ---
 
-## 5. Verification Commands (`84 / 84` Passing in `13.4s`, `0` Integrity Violations)
+## 5. Verification Commands (`111 / 111` Passing + `8` Subtests, `0` Integrity Violations)
 
 ```bash
 python3 -m pytest -q -o asyncio_default_fixture_loop_scope=function \
   canonical/tests/test_causal_cegis_inventor_v1.py \
   canonical/tests/test_perfect_algorithm_v1.py \
   canonical/tests/test_petri_cow_unified_architecture_v1.py \
+  canonical/tests/test_three_pillar_swe_breakthroughs_v1.py \
+  canonical/tests/test_computer_use_agent_v1.py \
+  canonical/tests/test_consistency_vs_equivalence_v1.py \
   canonical/tests/test_harbor_epistemic_agent_v1.py \
   canonical/tests/test_harbor_container_solver_transport_v1.py \
   canonical/tests/test_harbor_experimental_vm_v1.py \

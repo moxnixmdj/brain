@@ -1,0 +1,79 @@
+{
+  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V2",
+  "branch": "arena/06dc079e-brain",
+  "model_calls": 0,
+  "inference_spend_usd": 0.0,
+  "memorized_world_facts_in_weights": 0,
+  "automated_pytest_verification": {
+    "suites": 10,
+    "passed": 111,
+    "subtests_passed": 8,
+    "failed": 0,
+    "repo_integrity_guard": "rules=17 violations=0 -> PASS"
+  },
+  "verified_swe_benchmarks": {
+    "historical_boltons_more_itertools_curriculum": {
+      "artifact": "canonical/Immediate_Results/historical_boltons_more_itertools_transfer_20261124_v1.json",
+      "baseline_before_unification": "0/4 (0.0%)",
+      "unified_cogs_v2": "4/4 (100.0%)",
+      "held_out_external_audit_passed": "4/4 (100.0%)",
+      "cross_issue_law_transfer": {
+        "teacher": "ichunked_zero (more-itertools, 5644-line more.py) -> uir_law_d14dfdade03f",
+        "held_out_student": "chunked_even_zero -> SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f (1st localized candidate)",
+        "o1_surgical_memory_deletion_ablation": "canonical/Immediate_Results/external_memory_surgical_ablation_20261124_v1.json"
+      }
+    },
+    "davegamble_cjson_real_c_commits_blind": {
+      "artifact": "canonical/Immediate_Results/blind_cjson_real_commits_unified_cogs_20261124_v2.json",
+      "baseline_v1": "0/13 (0.0%)",
+      "unified_cogs_v2": "2/13 (15.38%)",
+      "frozen_engine_hashes_identical": true,
+      "solved_commits": [
+        {
+          "commit": "b2890c8d76bbb64e710585ebc0a917196b9c67e7",
+          "subject": "fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)",
+          "simulations": 4,
+          "elapsed_sec": 3.23,
+          "mechanism": "COGS_UIR_Z3_INVENTION",
+          "crystallized_law_id": "uir_law_6e054af54b35",
+          "exact_file_match": true
+        },
+        {
+          "commit": "2f6fc7f0f28b4dab68a3d7fcf447beabefd04afb",
+          "subject": "fix several null pointer problems on allocation failure (#526)",
+          "simulations": 19,
+          "elapsed_sec": 12.65,
+          "mechanism": "COGS_COUPLED_MULTIFILE_INVENTION",
+          "crystallized_law_id": "uir_law_6e054af54b35",
+          "exact_file_match": true
+        }
+      ]
+    },
+    "upstream_click_werkzeug_blind_and_issue_only": {
+      "blind_with_tests": "2/6 (33.33%) solved (werkzeug@051fd66352 in 9 sims, click@05f6fd0df4 in 54 sims; 4/4 remaining localized to rank #2-#4)",
+      "issue_only_zero_test_leakage_base_commit": "2/2 verified solves (werkzeug@051fd66352~1 -> 124/124 held-out tests passed; click@05f6fd0df4~1 -> 116/116 held-out tests passed)"
+    }
+  },
+  "verified_terminal_and_docker_harbor_benchmarks": {
+    "terminal_bench_local_official_verifiers": "6/11 (54.55%) passed, 6/6 (100.0%) committed precision, +60.0% generalized skill probe reduction",
+    "github_actions_docker_harbor_runs": [
+      {
+        "run_id": 45537959351,
+        "job_id": 138949134648,
+        "suite": "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent)",
+        "conclusion": "success",
+        "issues": [],
+        "rewards": [0.0, 0.0]
+      },
+      {
+        "run_id": 45549795585,
+        "job_id": 138987969469,
+        "suites": [
+          "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], 0 trial exceptions)",
+          "terminal-bench-2@2fd12b88 (suite=terminal-bench-4: cancel-async-tasks agent ran cleanly with EXPERIMENTAL_DISPATCH__UNVERIFIED & 0 leaked processes, verifier uvx blocked by network_mode:none; regex-log refused fail-closed with PROCESS_SNAPSHOT_FAILED due to missing /usr/bin/python3 in minimal image)"
+        ],
+        "conclusion": "success"
+      }
+    ]
+  }
+}

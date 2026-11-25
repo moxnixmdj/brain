@@ -2396,6 +2396,7 @@ class CausalCEGISInventor:
                                 norm_lang=norm_lang,
                                 mem_eval_total=mem_eval_total,
                                 t0=t0,
+                                already_law_id=law.law_id,
                             )
                             if v_fn_res is not None:
                                 return v_fn_res

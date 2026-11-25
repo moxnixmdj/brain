@@ -3,9 +3,6 @@ name: Frontier Pro V2 smoke evaluation
 # Manual only. GitHub exposes workflow_dispatch only once this workflow file
 # exists on the default branch; choosing --ref still selects the branch version.
 on:
-  push:
-    branches:
-      - 'arena/06dc079e-brain'
   workflow_dispatch:
     inputs:
       task_limit:
