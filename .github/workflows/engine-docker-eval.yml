@@ -123,6 +123,7 @@ jobs:
       n_shards: ${{ steps.m.outputs.n_shards }}
       agent_timeout_s: ${{ steps.m.outputs.agent_timeout_s }}
       commit_results: ${{ steps.m.outputs.commit_results }}
+      label: ${{ steps.m.outputs.label }}
     steps:
       - uses: actions/checkout@v4
       - id: m
@@ -171,6 +172,12 @@ jobs:
             echo "n_shards=$n_shards"
             echo "agent_timeout_s=$agent_timeout_s"
             echo "commit_results=$commit_results"
+            case "$benchmark" in
+              swe-pro-v2-hard51) label="SWE-bench Pro V2 (HARD-51, 51 tasks)" ;;
+              swe-pro-v2-smoke3) label="SWE-bench Pro V2 (smoke: 3 qutebrowser HARD-51 tasks)" ;;
+              *) label="none" ;;
+            esac
+            echo "label=$label"
           } >> "$GITHUB_OUTPUT"
           echo "mode: benchmark=$benchmark arms=$arms shards=$n_shards timeout=${agent_timeout_s}s commit=$commit_results" >> "$GITHUB_STEP_SUMMARY"
 
@@ -396,6 +403,7 @@ jobs:
             python -m canonical.eval.harbor.swe_pro_v2_ci aggregate \
               "${args[@]}" "${meta_args[@]}" \
               --out-json out/report.json --out-md out/report.md \
+              --benchmark "${{ needs.swe-mode.outputs.label }}" \
               --commit "${{ github.sha }}"
           fi
           echo '--- report ---'
