@@ -187,7 +187,7 @@ def parse_line(text: str) -> ast.Module:
         try:
             return ast.parse("{" + text.strip().rstrip(",") + "}")
         except SyntaxError:
-            raise
+            return ast.parse(f"def _f({text.strip().rstrip(',')}):\n    pass\n")
 
 
 def enclosing_class(source: str, line: int) -> ast.ClassDef | None:

@@ -740,11 +740,32 @@ def widened(source: str, line: int, site_text: str, *, over: int = 12,
         if ".replace('+0', '+')" in site_text or '.replace("+0", "+")' in site_text:
             add(site_text.replace("'+0', '+'", "'e+0', 'e+'").replace("'-0', '-'", "'e-0', 'e-'"))
             add("f'{n:.3g}'.replace('e+0', 'e+').replace('e-0', 'e-')")
+        if not site_node.args and not site_node.keywords and func_txt.isidentifier():
+            try:
+                src_tree = ast.parse(source)
+                kw_names: list[str] = []
+                lam_bodies: list[str] = []
+                for snode in ast.walk(src_tree):
+                    if isinstance(snode, ast.Call) and isinstance(snode.func, ast.Name) and snode.func.id == func_txt:
+                        for kw in snode.keywords:
+                            if kw.arg and kw.arg not in kw_names:
+                                kw_names.append(kw.arg)
+                            if isinstance(kw.value, ast.Lambda):
+                                for sub in ast.walk(kw.value.body):
+                                    if isinstance(sub, ast.Call):
+                                        stxt = ast.unparse(sub)
+                                        if stxt not in lam_bodies:
+                                            lam_bodies.append(stxt)
+                for kname in kw_names:
+                    for lbody in lam_bodies:
+                        add(f"{func_txt}({kname}=lambda self: {lbody})")
+            except SyntaxError:
+                pass
     return made
 
 
 def space(source: str, line: int, site_text: str, *, cap: int = 200_000,
-          combinations_over: int = 60, grammar: str = "base") -> Iterator[tuple[int, str, int]]:
+          combinations_over: int = 44, grammar: str = "base") -> Iterator[tuple[int, str, int]]:
     """(rank, expression, ring) in a deterministic, calculated order: ring, then size, then position."""
     base = atoms(source, line, site_text, include_builtins=grammar == "full")
     ordered = sorted(range(len(base)), key=lambda index: (base[index][0],

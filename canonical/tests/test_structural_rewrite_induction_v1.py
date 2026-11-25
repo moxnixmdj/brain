@@ -101,3 +101,44 @@ def test_headline_reports_the_baseline_on_the_same_sample():
                          "states": {S.NOT_FOUND: 5}, "baseline": {"BASELINE_SOLVES": 0}}}
     line = S.headline(report)
     assert "5 real fix commits" in line and "0 solved" in line and "0 solved" in line.split("grammar on the same sample:")[1]
+
+
+def test_single_experience_ast_ir_morphism_transfers_across_repositories():
+    # Taught from 1 commit in packaging (#24: list(charset) -> charset), transfers to werkzeug (#43: _cookie_unquote(key) -> key)
+    m_unwrap = S.induce_ast_morphism("list(charset)", "charset", source_commit="553582d916", source_repo="packaging")
+    assert m_unwrap is not None and m_unwrap.family == "UNWRAP_SINGLE_ARG_CALL"
+    adm = S.admit_morphism_5gate(m_unwrap, "list(charset)", "charset", tests_green=12)
+    assert adm["admitted"] is True and adm["gates_passed"] == 5
+    assert S.apply_ast_morphism(m_unwrap, "_cookie_unquote(key)") == "key"
+
+    # Taught from 1 commit in more-itertools (#16: key -> key is not None), transfers to packaging (#26) & pluggy (#31)
+    m_none = S.induce_ast_morphism("key", "key is not None", source_commit="71e070b35d", source_repo="more-itertools")
+    assert m_none is not None and m_none.family == "TRUTHY_TO_IS_NOT_NONE"
+    assert S.apply_ast_morphism(m_none, "self.environments") == "self.environments is not None"
+    assert S.apply_ast_morphism(m_none, "self.get_plugin(ep.name)") == "self.get_plugin(ep.name) is not None"
+
+    # Taught from 1 commit in click (#08), transfers to pluggy (#29)
+    m_comp = S.induce_ast_morphism(
+        "[self.options_metavar]",
+        "[x for x in [self.options_metavar] if x]",
+        source_commit="42ee8a1f60",
+        source_repo="click",
+    )
+    assert m_comp is not None and m_comp.family == "COLLECTION_TRUTHY_FILTER_COMPREHENSION"
+    assert S.apply_ast_morphism(m_comp, "set(self._name2plugin.values())") == "{x for x in self._name2plugin.values() if x}"
+
+
+def test_three_way_memory_ablation_on_forty_five_unseen_fixes():
+    root = pathlib.Path(__file__).resolve().parents[2]
+    res = S.run_three_way_memory_ablation(
+        root / "canonical/verification/THE_ENGINE_ON_FORTY_FIVE_UNSEEN_FIXES_20261123_V1.json",
+        root / "intake/RECEIPT_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_20261121_V1.json",
+    )
+    assert res["corpus_commits"] == 45
+    assert res["verified_commits"] == 43
+    assert res["five_gate_admitted_count"] == 43
+    assert res["ablation"]["empty_store"]["memory_hits"] == 0
+    assert res["ablation"]["raw_trace_store"]["memory_hits"] == 0
+    assert res["ablation"]["generalized_ast_ir_morphism_store"]["memory_hits"] == 23
+    assert res["ablation"]["generalized_ast_ir_morphism_store"]["cross_repo_hits"] == 14
+
