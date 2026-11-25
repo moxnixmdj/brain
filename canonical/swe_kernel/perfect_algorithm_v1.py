@@ -1112,3 +1112,77 @@ def verify_priors(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
     non_root_rows = sum(len(r or {}) for k, r in prior_rows.items() if k != root_key)
     discarded = dropped + non_root_rows
     return verified, discarded
+
+
+# --------------------------------------------------------------------------- #
+# 8. FOUR-LEAP SEMANTIC GENERALIZATION ENTRYPOINTS
+#    (Causal Data-Flow Graph + Universal SemanticIR + CEGIS + Executable Mental Model)
+# --------------------------------------------------------------------------- #
+
+def solve_code_semantically(
+    files: Mapping[str, str],
+    *,
+    entry_func: str,
+    entry_file: str | None = None,
+    failing_cases: Sequence[tuple[Sequence[Any], Any]] = (),
+    passing_cases: Sequence[tuple[Sequence[Any], Any]] = (),
+    real_oracle: Any = None,
+    neighbor_oracle: Any = None,
+    skill_store: Any = None,
+    language_overrides: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Run the unified 4-Leap SemanticProgramEngine (zero model calls, zero syntax rules)."""
+    from canonical.swe_kernel import cegis_semantic_synthesizer_v1 as syn
+
+    engine = syn.SemanticProgramEngine(skill_store=skill_store)
+    return engine.repair_multi_file_program(
+        files,
+        entry_func=entry_func,
+        entry_file=entry_file,
+        failing_cases=failing_cases,
+        passing_cases=passing_cases,
+        real_oracle=real_oracle,
+        neighbor_oracle=neighbor_oracle,
+        language_overrides=language_overrides,
+    )
+
+
+def plan_and_execute_with_mental_model(
+    model: Any,
+    env_step: Any,
+    env_observe: Any,
+    goal_pred: Any,
+    *,
+    safety_invariant: Any = None,
+    max_replans: int = 6,
+    max_depth: int = 8,
+) -> dict[str, Any]:
+    """Simulate action trajectories in `EnvironmentMentalModel` before mutating real state,
+    blocking unsafe states and refining transition laws on counterexamples (CEGAR).
+    """
+    return model.execute_with_cegar(
+        env_step=env_step,
+        env_observe=env_observe,
+        goal_pred=goal_pred,
+        safety_invariant=safety_invariant,
+        max_replans=max_replans,
+        max_depth=max_depth,
+    )
+
+
+def solve_universal_computer_goal(
+    env: Any,
+    goal_text: str,
+    *,
+    law_store_path: Any = None,
+    max_steps: int = 12,
+) -> dict[str, Any]:
+    """Run the zero-model, zero-knowledge-house UniversalComputerAgent on a live terminal or web-DOM env."""
+    from canonical.swe_kernel import universal_computer_agent_v1 as uca
+
+    agent = uca.UniversalComputerAgent(law_store_path=law_store_path)
+    if isinstance(env, uca.RealWebDOMEnv):
+        return agent.solve_web_dom_goal(env, goal_text, max_steps=max_steps)
+    return agent.solve_terminal_goal(env, goal_text, max_steps=max_steps)
+
+
