@@ -1,0 +1,442 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "CONSOLIDATED_POLYGLOT_SWE_SPINE_AND_CAPABILITY_TRUTH_AUDIT_20261125_V1",
+  "action_intent_id": "CONSOLIDATED_POLYGLOT_SWE_SPINE_AND_CAPABILITY_TRUTH_AUDIT_20261125_V1",
+  "action_kind": "FRESH_REUSE",
+  "date": "2026-11-25",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "canonical_base_commit": "316caa3ec98b909c22972b39e854acb415cc17da",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "27 competing SWE repair modules in canonical/swe_kernel were unintegrated from the single front door (only 11/194 swe_kernel files reachable), 3 of 11 true-capability harness specs were stale or absent from TRUE_CAPABILITY_LEDGER_V1.json (causing test_true_capability_supervisor_v1.py to fail on main), true-capability-receipt.yml timed out at 15m on FILE_* 2000-instance runs, and no single reproducible auditor separated honest executable bound capabilities from wrappers, broken imports, pending entries, and quarantined fabricated receipts",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::27 competing SWE repair modules in canonical/swe_kernel were unintegrated from the single front door (only 11/194 swe_kernel files reachable), 3 of 11 true-capability harness specs were stale or absent from TRUE_CAPABILITY_LEDGER_V1.json (causing test_true_capability_supervisor_v1.py to fail on main), true-capability-receipt.yml timed out at 15m on FILE_* 2000-instance runs, and no single reproducible auditor separated honest executable bound capabilities from wrappers, broken imports, pending entries, and quarantined fabricated receipts",
+  "action_summary": "Consolidate the strongest verified zero-model polyglot SWE repair modules (metamorphic_habitation_zipper_v1, cow_angelic_zygote_v1, the_zip_propagates_v1, repair_input_dependency_gate_v1, c_asan_cegis_repair_v1, js_causal_cegis_repair_v1) into one canonical front-door spine (canonical/swe_kernel/canonical_swe_spine_v1.py) wired into UnifiedModel (brain_unified_model_v1.py) with strict zero-model default (model_calls == 0), fail-closed green-suite gate, optional untrusted-proposer-behind-verifier boundary with byte-exact rollback, and O(1) law crystallization/deletion. Refresh all stale/unledgered true-capability harness specs (SAME_IDENTITY_SUPERVISOR_V1 2000/2000, FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 500/500, FILE_QUESTION_TAUGHT_WORDS_V1 500/500) so TRUE_CAPABILITY_LEDGER_V1.json reaches 11/11 fresh PASS rows (0 stale) and test_true_capability_supervisor_v1.py passes 9/9. Harden .github/workflows/true-capability-receipt.yml (30m timeout, 500 instances on FILE_* specs matching min_instances=500) and ship capability_consolidation_audit_v1.py + CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json partitioning all 447 unified-model entries, Coq 99 Qed / 0 Admitted proofs, 28 SWE modules, and quarantining AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json. Recompile BRAIN_UNIFIED_MODEL_V1.json (33/33 verify PASS).",
+  "expected_parent_change": "True-capability ledger coverage rises from 8/11 fresh (1 stale failing test on main + 2 unledgered) to 11/11 fresh PASS (0 stale, 55/55 true-capability tests passing); front-door UnifiedModel gains direct polyglot Python/C/JS SWE repair + fail-closed verifier boundary via canonical_swe_spine_v1 without bloating BOUND_CAPABILITY_REGISTRY_V1.json; capability audit truthfully partitions all 447 capabilities (73 Brain-owned executable bound, 17 external wrappers, 49 missing evidence, 14 broken imports, 294 pending promotion) and quarantines fabricated receipts.",
+  "expected_parent_frontier_change": "Eliminates SWE front-door fragmentation and stale true-capability ledger debt so subsequent work can either measure public-runner true-capability receipts via true-capability-receipt.yml or wire a real external proposer behind canonical_swe_spine_v1's fail-closed verifier without inflating capability counts.",
+  "required_capability": "Unified front-door polyglot SWE repair/verification spine, fresh true-capability ledger receipts, and reproducible capability consolidation auditing.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/tools/capability_consolidation_audit_v1.py",
+    "canonical/verification/CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json",
+    "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+    "canonical/tests/test_canonical_swe_spine_v1.py",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+    ".github/workflows/true-capability-receipt.yml"
+  ],
+  "route_class": "INTEGRATE",
+  "route_id": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+  "selected_route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+  "selected_surviving_route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+  "route_order_walk": {
+    "DELETE": "Avoided adding vanity entries to BOUND_CAPABILITY_REGISTRY_V1.json and explicitly quarantined AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json from verified counts.",
+    "BYPASS": "Not sufficient: stale TRUE_CAPABILITY_LEDGER_V1.json broke test_true_capability_supervisor_v1.py on main and required real harness re-execution.",
+    "REUSE": "Reused all 6 empirically verified core modules (metamorphic_habitation_zipper_v1, cow_angelic_zygote_v1, the_zip_propagates_v1, repair_input_dependency_gate_v1, c_asan_cegis_repair_v1, js_causal_cegis_repair_v1) and true_capability_harness_v1.py without rewriting their engines.",
+    "ADAPT": "Adapted true-capability-receipt.yml timeout and FILE_* instance budget (matching min_instances=500) so public runner runs complete cleanly.",
+    "COMPOSE": "Composed the 6 verified SWE modules into canonical_swe_spine_v1.py with a unified fail-closed verifier boundary and O(1) law store.",
+    "INTEGRATE": "SELECTED: wired canonical_swe_spine_v1 directly into brain_unified_model_v1.py (0D route in act_or_learn + UnifiedModel.solve_swe_repo), refreshed 11/11 true-capability receipts, and recompiled BRAIN_UNIFIED_MODEL_V1.json (33/33 verify PASS)."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/canonical_swe_spine_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/tools/capability_consolidation_audit_v1.py",
+      "canonical/verification/CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json",
+      "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+      "canonical/tests/test_canonical_swe_spine_v1.py"
+    ],
+    "route_class": "INTEGRATE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE alone could not wire the 27 fragmented SWE engines into brain_unified_model_v1.py or fix the failing stale SAME_IDENTITY_SUPERVISOR_V1 ledger row; composing the 6 verified winners behind one fail-closed verifier and re-running the stdlib harness resolves both without adding new capability registry bloat.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox measurements only (authority=NONE_SANDBOX). 63/63 pytest tests passed (55 true-capability tests + 8 real-execution canonical SWE spine tests covering Python, C ASan, JS Node, multi-file zipper, fail-closed green suite, untrusted-proposer verification/rollback, O(1) law crystallization/deletion, front-door routing, and consolidation auditor); verify_brain_unified_model_v1.py passed 33/33. Public-runner credit for true_capability_harness_v1 requires GitHub Actions execution of true-capability-receipt.yml.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ]
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox verification only (authority=NONE_SANDBOX); zero model calls, zero capability registry inflation, zero terminal credit claimed.",
+  "capability_credit_delta": {
+    "true_capability_ledger_fresh_before": "8/11 (1 stale failing test + 2 unledgered)",
+    "true_capability_ledger_fresh_after": "11/11 fresh PASS (0 stale, MEASURED_SANDBOX, authority=NONE)",
+    "swe_front_door_spine": "canonical_swe_spine_v1 wired into brain_unified_model_v1.py (0D route + UnifiedModel.solve_swe_repo), 22 redundant swe_kernel modules explicitly mapped as archive candidates",
+    "unified_model_verification": "33/33 PASS",
+    "branch_pytest_suite": "63/63 PASS (55 true-capability + 8 real-execution canonical SWE spine tests)"
+  },
+  "measured_effect": "Fixed the failing test_true_capability_supervisor_v1.py::test_ledger_row_matches_committed_receipt on main (9/9 PASS), brought TRUE_CAPABILITY_LEDGER_V1.json from 8/11 to 11/11 fresh PASS rows (0 stale), wired canonical_swe_spine_v1 into brain_unified_model_v1.py with 8/8 real-execution Python/C/JS/proposer-boundary/law-store tests passing, produced CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json partitioning all 447 unified-model entries and quarantining AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json, and verified BRAIN_UNIFIED_MODEL_V1.json at 33/33 PASS.",
+  "real_outcome": "Single front-door polyglot SWE spine wired into UnifiedModel, 11/11 fresh true-capability ledger receipts with 0 stale blobs, hardened public-runner workflow, and deterministic honest capability consolidation audit.",
+  "falsification_condition": "Falsified if any of the 11 true-capability ledger rows is stale against git hash-object, if canonical_swe_spine_v1 mutates a green suite or accepts a test-tampering/input-dropping/failing proposer patch without byte-exact rollback, if O(1) deleted laws still recall, or if verify_brain_unified_model_v1.py fails any of its 33 checks.",
+  "stop_condition": "Stop once 63/63 branch tests pass, verify_brain_unified_model_v1.py passes 33/33, and repo_integrity_guard_v1.py + agent_orientation_check_v1.py + goal/load-bearing guards pass with 0 violations.",
+  "next_step": "Trigger true-capability-receipt.yml on GitHub Actions to earn PUBLIC_RUNNER receipts for all 11 true capabilities, repair or prune the 14 broken-import bound capabilities identified by capability_consolidation_audit_v1.py, and archive the 22 superseded swe_kernel modules after confirming zero external importers.",
+  "honest_limits": [
+    "All 11 true-capability receipts in this PR are MEASURED_SANDBOX (authority=NONE); PUBLIC_RUNNER authority requires GitHub Actions execution.",
+    "The 14 broken-import bound capabilities (8 chart.*, 4 knowledge.*, 1 sympy, 1 visual_observer) and 294 pending-promotion entries remain documented rather than artificially hidden.",
+    "The 22 legacy/redundant swe_kernel modules are indexed as archive candidates rather than bulk-deleted in this PR so existing tests referencing them remain unbroken.",
+    "Option-A untrusted proposer support is verified via a deterministic test proposer behind the real verifier; no live external LLM API is called at runtime (model_calls == 0 by default)."
+  ],
+  "selectivity_note": "Zero new entries added to BOUND_CAPABILITY_REGISTRY_V1.json, zero protected-path modifications, zero grandiose naming, and strict fail-closed verification on every edit.",
+  "verification": "pytest (63 passed, 0 failed across test_true_capability_*.py and test_canonical_swe_spine_v1.py) + verify_brain_unified_model_v1.py (33/33 PASS) + capability_consolidation_audit_v1.py (11/11 fresh, 0 stale, 99 Qed / 0 Admitted) + repo_integrity_guard_v1.py (0 violations)",
+  "truth": {
+    "achieved": false,
+    "what_is_real": "11/11 fresh sandbox true-capability receipts with 0 stale blobs, canonical_swe_spine_v1 wired into brain_unified_model_v1.py passing 8/8 real-execution Python/C/JS/proposer-boundary/law-store tests, 33/33 unified-model verification, and deterministic consolidation audit separating 73 Brain-owned executable bound capabilities from wrappers, broken imports, pending entries, and quarantined fabricated receipts.",
+    "what_is_not": "PUBLIC_RUNNER credited receipts (pending GitHub Actions), repair of the 14 broken-import bound capabilities, or terminal truth discharge."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Consolidates verified polyglot SWE repair primitives into the single front door, repairs stale true-capability receipts and workflow timeout hygiene, and provides a reproducible honest audit without claiming premature obligation discharge.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "316caa3ec98b909c22972b39e854acb415cc17da",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "vanity BOUND_CAPABILITY_REGISTRY_V1.json inflation (wired directly into UnifiedModel instead)",
+      "pytest-timeout dependency inside multi-file zipper hops (reused the_zip_propagates_v1 rules with stdlib timeout)",
+      "re-citation of AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json (explicitly quarantined in consolidation audit)"
+    ],
+    "expected_parent_level_state_change": "Eliminates SWE front-door fragmentation and stale true-capability ledger debt so subsequent work can either measure public-runner true-capability receipts via true-capability-receipt.yml or wire a real external proposer behind canonical_swe_spine_v1's fail-closed verifier without inflating capability counts.",
+    "real_outcome": "11/11 fresh true-capability receipts, 63/63 passing tests, 33/33 unified-model verification, and canonical_swe_spine_v1 wired into brain_unified_model_v1.py.",
+    "required_capability": "Unified front-door polyglot SWE spine, fresh true-capability receipts, and deterministic capability truth auditing.",
+    "selected_surviving_route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+    "stop_condition": "Stop once 63/63 branch tests pass, verify_brain_unified_model_v1.py passes 33/33, and repo_integrity_guard_v1.py + agent_orientation_check_v1.py + goal/load-bearing guards pass with 0 violations.",
+    "why_selected_route_is_fastest_sufficient": "Reuses the 6 empirically verified SWE modules and existing stdlib true-capability harness directly instead of inventing a 28th standalone repair engine or adding registry bloat.",
+    "obs_blocker": {
+      "blocker_is": "Fragmented SWE engines unintegrated from brain_unified_model_v1.py, 3 stale/missing true-capability ledger entries breaking supervisor tests on main, and lack of a deterministic capability honesty partition.",
+      "delete_bypass_substitute_options": [
+        "Adding a 28th standalone SWE module outside the front door (rejected: worsens fragmentation)",
+        "Adding vanity entries to BOUND_CAPABILITY_REGISTRY_V1.json (rejected: inflates unrouted registry count)",
+        "Skipping true-capability re-measurement (rejected: leaves test_true_capability_supervisor_v1.py broken on main)"
+      ],
+      "evidence_the_blocker_is_real": [
+        "Pass 6 AST audit found only 11/194 swe_kernel files reachable from the 5 front-door files",
+        "test_true_capability_supervisor_v1.py::test_ledger_row_matches_committed_receipt FAILED on main at 316caa3e",
+        "447 unified-model entries conflated 73 Brain-owned executable bound capabilities with 17 wrappers, 49 missing-evidence entries, 14 broken imports, and 294 pending-promotion entries"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC technical debt accumulated across rapid parallel branches",
+      "surviving_causal_blocker": "27 competing SWE repair modules in canonical/swe_kernel were unintegrated from the single front door (only 11/194 swe_kernel files reachable), 3 of 11 true-capability harness specs were stale or absent from TRUE_CAPABILITY_LEDGER_V1.json (causing test_true_capability_supervisor_v1.py to fail on main), true-capability-receipt.yml timed out at 15m on FILE_* 2000-instance runs, and no single reproducible auditor separated honest executable bound capabilities from wrappers, broken imports, pending entries, and quarantined fabricated receipts"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "metamorphic_habitation_zipper_v1.py, cow_angelic_zygote_v1.py, c_asan_cegis_repair_v1.py, js_causal_cegis_repair_v1.py, repair_input_dependency_gate_v1.py, the_zip_propagates_v1.py, true_capability_harness_v1.py",
+      "capability_work_deleted": [
+        "new capability registry inflation (0 entries added to BOUND_CAPABILITY_REGISTRY_V1.json)",
+        "duplicate repair engine implementations"
+      ],
+      "what_was_added": "canonical_swe_spine_v1.py, front-door wiring in brain_unified_model_v1.py, capability_consolidation_audit_v1.py, CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json, 3 fresh true-capability receipts, hardened true-capability-receipt.yml, and test_canonical_swe_spine_v1.py",
+      "external_existing_routes_checked": "Proposer-behind-fail-closed-verifier architecture vs pure zero-model verification",
+      "surviving_gap": "Public-runner GitHub Actions execution of true-capability-receipt.yml and cleanup/repair of the 14 broken-import bound capabilities and 22 legacy archive candidates"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "inflating capability count in BOUND_CAPABILITY_REGISTRY_V1.json",
+        "citing quarantined receipts as live capability evidence"
+      ],
+      "real_outcome": "11/11 fresh true-capability receipts, wired front-door polyglot SWE spine with real-execution tests, and honest machine-generated capability partition",
+      "surviving_necessity": "Public-runner receipt generation and pruning of broken/superseded modules"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "metamorphic_habitation_zipper_v1, cow_angelic_zygote_v1, c_asan_cegis_repair_v1, js_causal_cegis_repair_v1, repair_input_dependency_gate_v1, and the_zip_propagates_v1 composed behind one front door",
+      "downstream_work_to_delete_or_supersede": "22 legacy/redundant swe_kernel repair modules indexed as archive candidates in CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json",
+      "fresh_reuse_plan": "UnifiedModel.act_or_learn and UnifiedModel.solve_swe_repo expose canonical_swe_spine_v1 directly to all callers"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Re-ran only the 3 stale/missing true-capability specs rather than churning the 8 already-fresh specs",
+      "search_stop_decision": "Stopped once 11/11 ledger rows were fresh, 63/63 tests passed, 33/33 unified-model checks passed, and all integrity guards passed"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Adding another unintegrated repair script worsens fragmentation; skipping ledger refresh leaves main tests broken",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+          "why": "Composes the 6 verified winners behind one front door, fixes broken main tests via real harness runs, and produces an honest machine audit"
+        },
+        {
+          "rank": 2,
+          "route": "ADD_28TH_STANDALONE_SWE_ENGINE",
+          "why": "Worsens fragmentation without reaching front-door callers"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Real-execution tests invoke actual pytest, gcc -fsanitize=address, and node on isolated temporary repositories to verify Python/C/JS repair, rollback, law recall/deletion, and front-door wiring"
+    },
+    "routes_considered": [
+      {
+        "route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+        "verdict": "SELECTED",
+        "why": "Reuses verified kernels, fixes broken main true-capability test, and surfaces exact executable truth"
+      },
+      {
+        "route": "ADD_28TH_STANDALONE_SWE_ENGINE",
+        "verdict": "REJECTED",
+        "why": "Worsens swe_kernel sprawl without front-door integration"
+      },
+      {
+        "route": "BULK_DELETE_22_SWE_MODULES_IMMEDIATELY",
+        "verdict": "REJECTED",
+        "why": "Would break existing unit tests referencing legacy modules before a dedicated deprecation sweep"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "316caa3ec98b909c22972b39e854acb415cc17da",
+      "checked_at_utc": "2026-11-25T22:51:11+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "FRAGMENTED_UNWIRED_SWE_ENGINES_AND_STALE_LEDGER",
+      "selected_route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "FRAGMENTED_UNWIRED_SWE_ENGINES_AND_STALE_LEDGER",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "SWE engines unreachable from UnifiedModel; 3/11 true capabilities stale or unledgered",
+            "CORRECTNESS": "test_true_capability_supervisor_v1.py fails on main",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "true-capability-receipt.yml risks 15m timeout on FILE_* 2000-instance runs",
+            "VERIFIABILITY": "no consolidated audit separating real executable bound caps from broken imports and fabricated receipts",
+            "WALL_CLOCK": "slower"
+          },
+          "evidence": [
+            "test_true_capability_supervisor_v1.py failed on main at 316caa3e; now 9/9 PASS and 11/11 fresh"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_canonical_swe_spine_v1.py",
+            "canonical/verification/CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "BULK_DELETE_22_SWE_MODULES_IMMEDIATELY",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "equal",
+            "CORRECTNESS": "breaks legacy unit tests that import superseded modules directly",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "high regression risk without dedicated import sweep",
+            "VERIFIABILITY": "lower until importers are migrated",
+            "WALL_CLOCK": "higher"
+          },
+          "evidence": [
+            "Pass 6 audit showed 37.4% of runtime/kernel files are imported by tests"
+          ],
+          "qualification_evidence": [
+            "canonical/verification/SIXTH_PASS_MEASURING_THE_UNREVIEWED_20261125_V5.md"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "Consolidating the 6 empirically verified modules directly inside brain_unified_model_v1.py while preserving legacy test compatibility and refreshing the stdlib true-capability ledger strictly dominates spawning additional standalone repair modules or bulk-deleting tested modules without an import migration.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "project brain capability audit unified model front door reachability"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "proposer behind fail-closed verifier program repair architecture"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "true capability harness fresh instance measurement ledger"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "polyglot Python C ASan JavaScript causal CEGIS verification"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/verification/EVERY_CAPABILITY_AGAINST_THE_FRONTIER_20261125_V2.md",
+          "canonical/verification/FIFTH_PASS_THE_94_FILE_DELTA_20261125_V4.md",
+          "canonical/verification/SIXTH_PASS_MEASURING_THE_UNREVIEWED_20261125_V5.md",
+          "canonical/tools/audit_the_447_capabilities_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "execution_guard/true_capability_harness_v1.py",
+          "execution_guard/repo_integrity_guard_v1.py",
+          "canonical/runtime/verify_brain_unified_model_v1.py"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "local Python 3.11 + pytest 9.2 + gcc -fsanitize=address + node"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "GitHub Actions ubuntu-latest workflow timeout hygiene for true-capability-receipt.yml"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-25T22:51:11+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "CONSOLIDATE_EXISTING_SWE_WINNERS_AND_REFRESH_TRUE_CAPABILITY_TRUTH",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 + pytest + gcc + node",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "63/63 pytest tests passed; verify_brain_unified_model_v1.py 33/33 PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "true_capability_harness_v1 stdlib network-blocked measurement",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "true_capability_harness_v1.py self-test 6/6 PASS; 11/11 specs fresh in TRUE_CAPABILITY_LEDGER_V1.json"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "zero external model calls at runtime",
+            "kind": "NETWORK_ENDPOINT",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "required": false,
+            "status": "READY",
+            "volatility": "VOLATILE",
+            "observed_at_utc": "2026-11-25T22:51:11+00:00",
+            "evidence": [
+              "canonical_swe_spine_v1 defaults to proposer=None with model_calls == 0"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR integrates verified SWE repair modules into the single front door, brings TRUE_CAPABILITY_LEDGER_V1.json to 11/11 fresh PASS, and ships a deterministic honest capability audit.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "afbf78e47ca14d8941b04a4202a0f1b14adcf067",
+          "path": "canonical/verification/THE_TRANSFER_RECEIPT_IS_FABRICATED_20261124_V1.md"
+        }
+      ],
+      "decisive_question": "Does composing the 6 verified SWE kernels behind one fail-closed front-door verifier while refreshing all 11 true-capability specs pass every real-execution Python/C/JS/rollback/O(1)-law and 33-check unified-model test with zero model calls and zero registry inflation?",
+      "falsifier_id": "CANONICAL_SWE_SPINE_AND_TRUE_CAPABILITY_TRUTH_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "CONSOLIDATED_POLYGLOT_SWE_SPINE_AND_CAPABILITY_TRUTH_AUDIT_V1"
+    }
+  }
+}

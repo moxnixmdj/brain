@@ -1197,6 +1197,16 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
+        # 0D. Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1.solve_repository_task`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("swe_repo_task"), Mapping):
+            swe_spec = dict(inputs["swe_repo_task"])
+            repo_target = swe_spec.pop("repo_root", cwd or ROOT)
+            return self.solve_swe_repo(
+                repo_target,
+                goal=goal,
+                **swe_spec,
+            )
+
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
         if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
@@ -1568,6 +1578,46 @@ class UnifiedModel:
             engine_id=eid,
             engine_mode=mode,
             result=dict(out),
+        )
+
+    def solve_swe_repo(
+        self,
+        repo_root: str | Path,
+        *,
+        goal: str = "",
+        test_file: str | None = None,
+        c_sources: Sequence[str] | None = None,
+        regression_tests: Sequence[str] = (),
+        issue_text: str = "",
+        language: str | None = None,
+        timeout_s: float = 35.0,
+        proposer: Any = None,
+        law_store: Any = None,
+        keep_patch_applied: bool = True,
+    ) -> dict[str, Any]:
+        """Run the consolidated polyglot SWE repair & verification spine directly from the front door."""
+        from canonical.swe_kernel import canonical_swe_spine_v1 as spine
+
+        res = spine.solve_repository_task(
+            repo_root,
+            test_file=test_file,
+            c_sources=c_sources,
+            regression_tests=regression_tests,
+            issue_text=issue_text or goal,
+            language=language,
+            timeout_s=timeout_s,
+            proposer=proposer,
+            law_store=law_store,
+            keep_patch_applied=keep_patch_applied,
+        )
+        passed = bool(res.get("solved") is True)
+        return self._envelope(
+            operation="SOLVE_SWE_REPO",
+            goal=goal or issue_text or f"repair {repo_root}",
+            status=str(res.get("status") or ("PASS_VERIFIED_ON_DISK" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "SWE_SPINE_UNSOLVED"),
+            canonical_swe_spine=res,
         )
 
 

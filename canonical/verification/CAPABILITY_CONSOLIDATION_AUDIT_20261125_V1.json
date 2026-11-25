@@ -1,0 +1,330 @@
+{
+  "authority": "NONE_SANDBOX",
+  "coq_formal_certificates": {
+    "admitted_count": 0,
+    "certificate_dir": "canonical/certificates/CAD_NURBS_RCF_V1",
+    "coq_modules": 14,
+    "qed_theorems": 99,
+    "total_loc": 2311,
+    "zero_admitted": true
+  },
+  "elapsed_s": 0.2718,
+  "incremental_spend_usd": 0.0,
+  "model_calls": 0,
+  "quarantined_receipts": [
+    {
+      "evidence": "canonical/verification/FIFTH_PASS_THE_94_FILE_DELTA_20261125_V4.md",
+      "note": "Flagged in Pass 5 audit as the source of retracted 45/45 and 51.11% transfer claims; exclude from verified counts.",
+      "path": "canonical/verification/AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json",
+      "present_on_disk": true,
+      "status": "QUARANTINED_DISPUTED_FABRICATED"
+    },
+    {
+      "evidence": "canonical/verification/THE_TRANSFER_RECEIPT_IS_FABRICATED_20261124_V1.md",
+      "note": "Documents retraction of fabricated transfer claims.",
+      "path": "canonical/verification/THE_TRANSFER_RECEIPT_IS_FABRICATED_20261124_V1.md",
+      "present_on_disk": true,
+      "status": "RETRACTION_RECORD"
+    }
+  ],
+  "schema": "CAPABILITY_CONSOLIDATION_AUDIT_V1",
+  "swe_kernel_consolidation": {
+    "canonical_front_door_spine": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "composed_core_modules": [
+      "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+      "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+      "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
+      "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
+      "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
+      "canonical/tools/the_zip_propagates_v1.py"
+    ],
+    "redundant_or_legacy_archive_candidates": [
+      "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+      "canonical/swe_kernel/angelic_cegis_v1.py",
+      "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+      "canonical/swe_kernel/angelic_oe_synthesizer_v1.py",
+      "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+      "canonical/swe_kernel/causal_dependency_repair_v1.py",
+      "canonical/swe_kernel/causal_swe_repair_v1.py",
+      "canonical/swe_kernel/cegis_semantic_synthesizer_v1.py",
+      "canonical/swe_kernel/closed_loop_trace_abduction_repair_v1.py",
+      "canonical/swe_kernel/contract_grounded_repair_v1.py",
+      "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+      "canonical/swe_kernel/cow_lens_fuzz_and_negative_space_v1.py",
+      "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+      "canonical/swe_kernel/first_principles_mental_cegis_v1.py",
+      "canonical/swe_kernel/law_repair_synthesis_v1.py",
+      "canonical/swe_kernel/passing_repairs_version_space_v1.py",
+      "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "canonical/swe_kernel/real_commit_repair_v1.py",
+      "canonical/swe_kernel/repair_version_space_selection_v1.py",
+      "canonical/swe_kernel/retained_repair_session_v1.py",
+      "canonical/swe_kernel/speculative_cow_petri_agent_v1.py",
+      "canonical/swe_kernel/whitebox_introspector_and_trace_synthesizer_v1.py"
+    ],
+    "redundant_or_legacy_archive_candidates_count": 22,
+    "spine_wired_into_front_door": true,
+    "total_swe_repair_modules_detected": 28
+  },
+  "true_capabilities": {
+    "in_ledger_count": 11,
+    "items": [
+      {
+        "capability_id": "AUTHENTICATED_PARETO_SCHEDULE_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "CAPABILITY_FIRST_RANKING_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "DOCX_EXACT_TEXT_EDIT_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 3000,
+        "ledger_git_blob_sha": "c137d9d05de3822a0bac6f2d52d1f4446f2682da",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "DOCX_RUN_SPAN_REPLACE_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "DOCX_STORY_PART_REPLACE_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "DOCX_TEXT_EDIT_TRANSACTION_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "0008bed08fa3e17587a4af04e5bce04ff81fc8d2",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 500,
+        "ledger_git_blob_sha": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "FILE_QUESTION_TAUGHT_WORDS_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 500,
+        "ledger_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "PARETO_FRONTIER_UPDATE_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "d7dbd9d320d27587d2dac228e16bc5b4eceba61a",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "SACCR_CREDIT_ADDON_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "fb451d4a413ec537321920a5182e717f5079e512",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      },
+      {
+        "capability_id": "SAME_IDENTITY_SUPERVISOR_V1",
+        "carrier": "SANDBOX",
+        "fresh_pass_rate": 1.0,
+        "head_git_blob_sha": null,
+        "in_ledger": true,
+        "instances": 2000,
+        "ledger_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
+        "solver_path": null,
+        "stale": false,
+        "status": "MEASURED_SANDBOX"
+      }
+    ],
+    "ledger_authority": "NONE",
+    "missing_from_ledger_count": 0,
+    "public_runner_credited_count": 0,
+    "sandbox_measured_count": 11,
+    "specs_total": 11,
+    "stale_count": 0
+  },
+  "unified_model_registry_truth": {
+    "brain_owned_executable_bound_count": 73,
+    "broken_import_count": 14,
+    "broken_imports": [
+      {
+        "adapter_module": "chart_axis_title_unit_binding_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_axis_title_unit_binding_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.axis_title_unit_binding.v1"
+      },
+      {
+        "adapter_module": "chart_curve_value_query_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_curve_value_query_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.curve_value_query.v1"
+      },
+      {
+        "adapter_module": "chart_curve_x_at_y_query_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_curve_x_at_y_query_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.curve_x_at_y_query.v1"
+      },
+      {
+        "adapter_module": "chart_direct_curve_label_family_rank_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_direct_curve_label_family_rank_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.direct_curve_label_family_rank.v1"
+      },
+      {
+        "adapter_module": "chart_legend_style_binding_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_legend_style_binding_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.legend_style_binding.v1"
+      },
+      {
+        "adapter_module": "chart_raster_scene_graph_v1",
+        "error": "ModuleNotFoundError: No module named 'chart_raster_scene_graph_v1'",
+        "evidence_exists": true,
+        "id": "chart.raster.scene_graph.v1"
+      },
+      {
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "error": "ModuleNotFoundError: No module named 'chartography_deterministic_professional_v1'",
+        "evidence_exists": true,
+        "id": "chart.read.binary_phase_solvus.v1"
+      },
+      {
+        "adapter_module": "chartography_deterministic_professional_v1",
+        "error": "ModuleNotFoundError: No module named 'chartography_deterministic_professional_v1'",
+        "evidence_exists": true,
+        "id": "chart.read.legend_linear_intersection.v1"
+      },
+      {
+        "adapter_module": "runtime_native_action",
+        "error": "ModuleNotFoundError: No module named 'runtime_native_action'",
+        "evidence_exists": true,
+        "id": "knowledge.consistency.assess"
+      },
+      {
+        "adapter_module": "runtime_native_action",
+        "error": "ModuleNotFoundError: No module named 'runtime_native_action'",
+        "evidence_exists": true,
+        "id": "knowledge.json.fetch.external"
+      },
+      {
+        "adapter_module": "knowledge_status_adapter",
+        "error": "ModuleNotFoundError: No module named 'knowledge_status_adapter'",
+        "evidence_exists": true,
+        "id": "knowledge.status.assert"
+      },
+      {
+        "adapter_module": "knowledge_status_adapter",
+        "error": "ModuleNotFoundError: No module named 'knowledge_status_adapter'",
+        "evidence_exists": true,
+        "id": "knowledge.support.materialize"
+      },
+      {
+        "adapter_module": "numeric_expression_sympy",
+        "error": "ModuleNotFoundError: No module named 'numeric_expression_sympy'",
+        "evidence_exists": false,
+        "id": "math.numeric_expression.sympy"
+      },
+      {
+        "adapter_module": "professional_artifact_visual_observer_v1",
+        "error": "ModuleNotFoundError: No module named 'professional_artifact_visual_observer_v1'",
+        "evidence_exists": true,
+        "id": "professional.artifact.visual_observer.v1"
+      }
+    ],
+    "external_wrapper_bound_count": 17,
+    "external_wrapper_sample": [
+      "archive.verify.tar_gz.gnu",
+      "auto.apt.zint",
+      "auto.npm.dfinity-cbor",
+      "auto.npm.msgpack-msgpack",
+      "auto.npm.shelacek-ubjson",
+      "auto.pypi.bson-modern",
+      "auto.pypi.msgpack",
+      "document.convert.markdown_pdf.pandoc_weasyprint",
+      "image.code.decode.zbarimg",
+      "image.extract.ocr.tesseract",
+      "image.qr.generate.qrencode",
+      "json.query.jq",
+      "pdf.extract.ocr.tesseract",
+      "pdf.extract.text.pypdf",
+      "shell.command.run",
+      "web.browser.rendered.capture.chromedriver",
+      "yaml.to_json.yq"
+    ],
+    "tier_counts": {
+      "BOUND_BROKEN_IMPORT": 14,
+      "BOUND_MISSING_EVIDENCE": 49,
+      "BRAIN_OWNED_EXECUTABLE_BOUND": 73,
+      "EXTERNAL_TOOL_OR_LIB_WRAPPER_BOUND": 17,
+      "PENDING_PROMOTION_RECEIPT_BACKED": 294
+    },
+    "total_named_in_unified_model": 447
+  }
+}
