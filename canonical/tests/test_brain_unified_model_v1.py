@@ -1270,15 +1270,25 @@ class SourceIndexTests(unittest.TestCase):
     def setUpClass(cls):
         cls.model = model_runtime.open_model()
 
-    def test_the_partition_of_the_runtime_tree_is_exact(self):
-        """Every runtime module is either a capability or indexed source, never both."""
+    def test_the_partition_of_the_source_tree_is_exact(self):
+        """Every source module is either a capability or indexed source, never both.
+
+        Scoped to the compiler's declared source roots rather than one hard-coded
+        directory. Measured before that widening: ``find_source`` located 0 of 8
+        of the project's own SWE-kernel modules, because ``canonical/swe_kernel``
+        was outside the scan. The invariant is unchanged -- it is the *domain*
+        that is now stated once, in ``_SOURCE_ROOTS``, and read from there.
+        """
         import pathlib
+
+        from canonical.runtime.compile_brain_unified_model_v1 import _SOURCE_ROOTS
 
         root = model_runtime.ROOT
         on_disk = {
             p.relative_to(root).as_posix()
-            for p in (root / "canonical" / "runtime").rglob("*.py")
-            if ".git" not in p.parts
+            for source_root in _SOURCE_ROOTS
+            for p in (root / source_root).rglob("*.py")
+            if ".git" not in p.parts and "__pycache__" not in p.parts
         }
 
         capability_paths = {
@@ -1333,6 +1343,39 @@ class SourceIndexTests(unittest.TestCase):
                     self.assertFalse(row["executable"], row["path"])
                     self.assertFalse(row["capability"], row["path"])
                 self.assertIn("NOT_EXECUTABLE", result["reason"])
+
+    def test_the_swe_kernel_is_addressable_by_name(self):
+        """The project's own solver machinery must be findable by the model.
+
+        This is a regression pin for a measured defect, not a taste test. The
+        source scan was hard-coded to ``canonical/runtime``, so ``find_source``
+        located 0 of 8 of the SWE-kernel modules that implement repair, CEGIS,
+        the epistemic loop and the causal dataflow graph -- the code that *is*
+        the solver was invisible to the model that runs it. Each query below is
+        an operator asking "where is this?" about a component they can name.
+
+        It asserts rank 1, not mere presence in the top-k: a hit outside the
+        top of the ranking is a search that did not help the caller.
+        """
+        cases = (
+            ("cegis repair", "canonical/swe_kernel/angelic_cegis_repair_v1.py"),
+            ("angelic lens cow repair", "canonical/swe_kernel/angelic_lens_cow_repair_v1.py"),
+            ("epistemic store self play", "canonical/swe_kernel/epistemic_admission_and_self_play_v1.py"),
+            ("causal dataflow graph", "canonical/swe_kernel/causal_dataflow_graph_v1.py"),
+            ("concept library compounding", "canonical/swe_kernel/concept_library_v1.py"),
+            ("cow angelic zygote", "canonical/swe_kernel/cow_angelic_zygote_v1.py"),
+            ("executable mental model", "canonical/swe_kernel/executable_mental_model_v1.py"),
+            ("cross modal tomography", "canonical/swe_kernel/cross_modal_tomography_petri_v1.py"),
+        )
+        for query, expected in cases:
+            with self.subTest(query=query):
+                result = self.model.find_source(query, top_k=5)
+                self.assertIsNotNone(result["best"], f"nothing found for {query!r}")
+                self.assertEqual(
+                    result["best"]["path"],
+                    expected,
+                    f"{query!r} did not rank {expected} first",
+                )
 
     def test_find_source_is_not_reachable_from_solve(self):
         """Indexing a module must not make `solve()` able to select it."""
