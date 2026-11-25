@@ -284,6 +284,35 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
     }
 
 
+def row_is_real(row: dict[str, Any]) -> bool:
+    """True for a row read from a trial harbor ran, false for a NOT_RUN placeholder."""
+    return bool(row.get("trial_dir")) or row.get("agent_status") not in (None, "NOT_RUN")
+
+
+def real_trial_count(rep: dict[str, Any]) -> int:
+    """How many rows of an arm report came from a trial harbor actually ran.
+
+    Rows for tasks with no trial data are ``NOT_RUN`` placeholders and carry no
+    ``trial_dir``. Counting them as reported is what made two void runs look, in the
+    machine-readable report, like a measured 0/N — the markdown shouted "no trial
+    data" while the JSON said ``run_produced_number: true``.
+    """
+    return sum(1 for v in (rep.get("tasks") or {}).values() if row_is_real(v))
+
+
+def compute_gates(arm_reports: dict[str, dict[str, Any]]) -> dict[str, bool]:
+    causal_oracle = arm_reports.get("oracle") or {}
+    nop = arm_reports.get("nop") or {}
+    return {
+        "oracle_gate_pass": bool(causal_oracle.get("n_expected"))
+        and real_trial_count(causal_oracle) == causal_oracle["n_expected"]
+        and all(v.get("resolved") for v in (causal_oracle.get("tasks") or {}).values()),
+        "nop_gate_pass": bool(nop.get("n_expected"))
+        and real_trial_count(nop) == nop["n_expected"]
+        and not any(v.get("resolved") for v in (nop.get("tasks") or {}).values()),
+    }
+
+
 def status_tally(ordered: dict[str, Any]) -> dict[str, int]:
     """How the agent behaved, independent of whether it passed.
 
@@ -323,7 +352,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
     return {
         "arm": arm,
         "n_expected": len(expected),
-        "n_reported": len(tasks),
+        "n_reported": sum(1 for v in ordered.values() if row_is_real(v)),
         "n_missing_trial": sum(1 for v in ordered.values() if v.get("agent_status") == "NOT_RUN"),
         "missing_trials": [t for t, v in ordered.items() if v.get("agent_status") == "NOT_RUN"],
         "n_shard_reports": len(reports),
@@ -375,12 +404,7 @@ def to_markdown(
         )
     lines.append("")
     causal = arm_reports.get("causal") or {}
-    oracle = arm_reports.get("oracle") or {}
-    nop = arm_reports.get("nop") or {}
-    gates = {
-        "oracle_gate_pass": bool(oracle) and oracle["resolved"] == oracle["n_expected"],
-        "nop_gate_pass": bool(nop) and nop["resolved"] == 0,
-    }
+    gates = compute_gates(arm_reports)
     lines += ["## Harness gates", ""]
     for k, v in gates.items():
         lines.append(f"- `{k}`: **{'PASS' if v else 'FAIL'}**")
@@ -534,12 +558,15 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             data["source"] = pathlib.Path(mp).name
             diagnostics.append(data)
-        void_run = all(not r.get("n_reported") for r in reports.values()) if reports else True
+        void_run = all(not real_trial_count(r) for r in reports.values()) if reports else True
         out = {
             "schema": "brain.bench_eval_report.v1",
             "arms": reports,
             "run_produced_number": not void_run,
             "n_reports_read": len(args.reports),
+            "benchmark": args.benchmark,
+            "commit": args.commit,
+            "gates": compute_gates(reports),
             "shard_diagnostics": diagnostics,
             "note": "Resolve decisions come from each task's own verifier inside the "
             "official container image. Merged across shards by task union.",

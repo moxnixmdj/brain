@@ -257,11 +257,33 @@ def test_collect_and_aggregate_read_only_real_harbor_artifacts() -> None:
         assert rep["tasks"]["t0"]["resolved"] is True
         assert rep["tasks"]["t2"]["agent_status"] == "NOT_RUN"
 
-        md = "\n".join(
-            CI.to_markdown({"causal": rep, "nop": {**rep, "resolved": 0, "n_expected": 3}, "oracle": {**rep, "resolved": 0, "n_expected": 3}}, benchmark="SWE-bench Pro V2 (HARD-51)", commit="deadbeef")
-        )
-        assert "`oracle_gate_pass`: **FAIL**" in md
+        def arm_rows(**kw):
+            return {tid: {"reward": kw["reward"], "resolved": kw["reward"] == 1.0,
+                          "agent_status": kw["status"], "n_files_changed": 0,
+                          "trial_dir": f"{tid}__x"} for tid in ids}
+
+        # Gates are recomputed from complete per-task truth: an arm with a missing
+        # trial cannot pass, because silence is not evidence that nop did nothing.
+        md = "\n".join(CI.to_markdown(
+            {
+                "causal": rep,
+                "nop": {**rep, "arm": "nop", "resolved": 0, "tasks": arm_rows(reward=0.0, status="NO_EDITS")},
+                "oracle": {**rep, "arm": "oracle", "resolved": 3, "tasks": arm_rows(reward=1.0, status="oracle")},
+            },
+            benchmark="SWE-bench Pro V2 (HARD-51)", commit="deadbeef",
+        ))
+        assert "`oracle_gate_pass`: **PASS**" in md
         assert "`nop_gate_pass`: **PASS**" in md
+
+        md_broken = "\n".join(CI.to_markdown(
+            {
+                "causal": rep,
+                "nop": {**rep, "arm": "nop", "tasks": arm_rows(reward=1.0, status="oracle")},
+                "oracle": {**rep, "arm": "oracle", "resolved": 1, "tasks": arm_rows(reward=1.0, status="oracle"), "n_expected": 3},
+            },
+            benchmark="B", commit="c",
+        ))
+        assert "`nop_gate_pass`: **FAIL**" in md_broken  # nop resolved a task => tests are not the constraint
     assert "NO TRIAL DATA" not in md  # there IS trial data here
 
     # A run where no shard produced a result.json must shout, not print 0/N quietly.
