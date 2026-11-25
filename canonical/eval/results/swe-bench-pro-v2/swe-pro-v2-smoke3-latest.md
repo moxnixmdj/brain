@@ -1,6 +1,6 @@
-# SWE-bench Pro V2 (HARD-51) — engine eval (real run)
+# SWE-bench Pro V2 (HARD-51) — engine eval (measured run)
 
-- upstream/eval commit recorded by CI: `61d9a14c1eb5da3f20e7da9b0250e8578ad4718d`
+- upstream/eval commit recorded by CI: `337c64a8df7f0129d6be0629626508ee9cb2e662`
 - Resolve decisions come from each task's own verifier inside the official container image.
 - `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.
 
@@ -14,6 +14,14 @@
 
 - `oracle_gate_pass`: **FAIL**
 - `nop_gate_pass`: **PASS**
+
+## Shard diagnostics (harness truth: did harbor even start trials?)
+
+| artifact | harbor exit | log lines kept | last line |
+|---|---|---|---|
+| `causal-s0.meta.json` | 0 | 28 | `` |
+| `nop-s0.meta.json` | 0 | 27 | `` |
+| `oracle-s0.meta.json` | 0 | 28 | `` |
 
 ## Per-task (causal arm)
 
