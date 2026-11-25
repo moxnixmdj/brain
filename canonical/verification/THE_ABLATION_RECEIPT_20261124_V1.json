@@ -1,0 +1,258 @@
+{
+  "arms": {
+    "EMPTY": {
+      "arm": "EMPTY",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "1c962d15",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "3b0378dd",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "MATERIALISE",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "a08bfb90",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "a572c3a4",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "SIBLING_DISJUNCT",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "1b0e19f5",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "GUARD_AGAINST_NONE",
+          "repo": "click",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "3f91d215",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "40830087",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "42ee8a1f",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        }
+      ],
+      "rows": 8,
+      "skills_admitted": 0,
+      "skills_refused": 0,
+      "verified": 3,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "3b0378dd",
+        "a572c3a4",
+        "1b0e19f5"
+      ]
+    },
+    "GENERAL": {
+      "arm": "GENERAL",
+      "learned_before_use": 6,
+      "outcomes": [
+        {
+          "commit": "1c962d15",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "3b0378dd",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "MATERIALISE",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "a08bfb90",
+          "landed": null,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "a572c3a4",
+          "landed": true,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": "SIBLING_DISJUNCT",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "1b0e19f5",
+          "landed": true,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": "GUARD_AGAINST_NONE",
+          "repo": "click",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "3f91d215",
+          "landed": null,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "40830087",
+          "landed": null,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "42ee8a1f",
+          "landed": null,
+          "prior_given": [
+            "MATERIALISE"
+          ],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        }
+      ],
+      "rows": 8,
+      "skills_admitted": 3,
+      "skills_refused": 0,
+      "verified": 3,
+      "verified_after_learning": 2,
+      "verified_commits": [
+        "3b0378dd",
+        "a572c3a4",
+        "1b0e19f5"
+      ]
+    },
+    "RAW": {
+      "arm": "RAW",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "1c962d15",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "3b0378dd",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "MATERIALISE",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "a08bfb90",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "attrs",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "a572c3a4",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "SIBLING_DISJUNCT",
+          "repo": "attrs",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "1b0e19f5",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "GUARD_AGAINST_NONE",
+          "repo": "click",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "3f91d215",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "40830087",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "42ee8a1f",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "click",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        }
+      ],
+      "rows": 8,
+      "skills_admitted": 3,
+      "skills_refused": 0,
+      "verified": 3,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "3b0378dd",
+        "a572c3a4",
+        "1b0e19f5"
+      ]
+    }
+  },
+  "authority": "measured on the 45-row corpus; every number below is a printed receipt",
+  "schema": "THE_STORE_IS_THE_ONLY_THING_THAT_LEARNS_V1"
+}

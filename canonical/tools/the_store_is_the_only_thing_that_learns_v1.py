@@ -377,6 +377,12 @@ def main(argv: Sequence[str] | None = None) -> int:
                          store=store)
         store.save()
         receipt["arms"][arm] = result
+        # SAVE AFTER EVERY ARM. A receipt written only at the end is a receipt lost to any
+        # timeout, and an ablation that finishes two of three arms must still be able to
+        # say what those two measured. The first run of this file died at 1750 s with the
+        # RAW arm half done and nothing on disk.
+        args.receipt.parent.mkdir(parents=True, exist_ok=True)
+        args.receipt.write_text(json.dumps(receipt, indent=2, sort_keys=True))
         print(f"=== {arm}: {result['verified']}/{result['rows']} verified, "
               f"{result['skills_admitted']} skills admitted, "
               f"{result['skills_refused']} refused", flush=True)
