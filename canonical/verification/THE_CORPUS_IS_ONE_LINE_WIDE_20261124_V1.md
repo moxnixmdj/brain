@@ -7,7 +7,18 @@
 | | mean source files | mean source lines | multi-file source fixes |
 |---|---|---|---|
 | **this corpus** | **1.00** | **1.00** | **0 / 45** |
-| SWE-bench Pro (claimed) | 4.1 | 107.4 | — |
+| SWE-bench Verified | 1.7 | 32.8 | — |
+| SWE-bench Pro | 4.1 | 107.4 | — |
+
+The 107.4 / 4.1 figure is now **verified**, not an input: the SWE-bench Pro paper states
+reference solutions "average 107.4 lines of code across 4.1 files", against SWE-bench
+Verified's 32.8 lines across 1.7 files (arXiv:2509.16941). A separate audit of 266 Python
+Pro tasks reports gold patches averaging "145.5 changed lines across 3.42 files and 9.84
+hunks", and that "the Pro tasks change a mean of nine functions across three files".
+
+So the honest position is not merely that my corpus is smaller. It is that my corpus sits
+**below SWE-bench Verified**, the benchmark generally described as saturated, by 33× in
+lines — and I have been reporting results against Pro.
 
 Counted by `git show --numstat`, excluding test files. All 45 rows touch **exactly one
 source file** and change **exactly one line**, because that is the filter the corpus was
@@ -74,5 +85,22 @@ that already work. So the experiment is cheap and the failure mode is informativ
 zip does not converge, that is a real Wall 3 measurement on a single case, which is more
 than the plan's 107.4 figure has behind it here.
 
-`flask` and `werkzeug 285af2c465` (4 files) are the available candidates. Neither has a
-verified oracle yet, so the first measurement is oracle extraction on them.
+`flask` and `werkzeug 285af2c465` looked like candidates and are not. Checked:
+
+```
+werkzeug 285af2c465  "4 files" = CHANGES.rst + src/werkzeug/utils.py + 2 test files
+                     the source change is `code: int = 302` -> `code: int = 303`
+urllib3  644124ecd0  "5 files" = CHANGES + docs + src/urllib3/util/retry.py + 2 tests
+werkzeug 3a408edffd  "3 files" = CHANGES + src/werkzeug/routing/rules.py + 1 test
+```
+
+Every apparent multi-file fix in the corpus is **one source line** plus changelog, docs
+and tests. Confirmed mechanically: **0 of 45 commits touch more than one source file.**
+The propagation machinery the plan's Idea 3 proposes has no row here on which it could
+run, and that is a fact about my evidence rather than about the method.
+
+A genuine multi-file task therefore cannot be manufactured from this corpus. It has to
+be taken from a source that contains one: either a full clone of a repo with multi-file
+fixes in its history (blocked here only by the partial clone, fixable with one full
+clone), or the public SWE-bench Pro set itself, which would also supply the container
+environment and remove the 100% of test-patch dependency for FAIL_TO_PASS parsing.
