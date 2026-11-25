@@ -368,3 +368,26 @@ def test_upload_falls_back_to_root_exec_and_reports_it() -> None:
             assert "if name else" not in (container / "pkg" / "core.py").read_text(encoding="utf-8")
     finally:
         AG.run_engine_on_tree = original  # type: ignore[assignment]
+
+
+def test_collect_finds_trials_regardless_of_nesting_depth() -> None:
+    """A harness that ran trials must not be reported as 'no data' because of a path guess."""
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        nested = root / "jobs" / "job-a" / "trials" / "t0__xyz"
+        nested.mkdir(parents=True)
+        (nested / "result.json").write_text(
+            json.dumps({"task_name": "t0", "trial_name": "t0__xyz", "verifier_result": {"rewards": {"reward": 1.0}}}),
+            encoding="utf-8",
+        )
+        # job-level result.json (different schema) must be ignored
+        (root / "jobs" / "job-a" / "result.json").write_text(
+            json.dumps({"job_name": "job-a", "n_total_trials": 1}), encoding="utf-8"
+        )
+        rep = CI.collect([root / "jobs"], arm="causal", expected_ids=["t0", "t1"])
+        assert rep["n_reported"] == 1, rep
+        assert rep["resolved"] == 1
+        assert rep["missing_trials"] == ["t1"]
+        # and a jobs dir that does not exist at all is 'no data', not a crash
+        rep2 = CI.collect([root / "nope"], arm="causal", expected_ids=["t0"])
+        assert rep2["n_reported"] == 0 and rep2["resolved"] == 0

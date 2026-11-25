@@ -144,8 +144,28 @@ def split_shards(ids: list[str], n_shards: int) -> list[list[str]]:
     return [s for s in shards if s]
 
 
-def _trial_dirs(jobs_dir: pathlib.Path) -> list[pathlib.Path]:
-    return sorted(p.parent for p in jobs_dir.glob("*/*/result.json"))
+def iter_trial_results(jobs_dir: pathlib.Path):
+    """Yield (trial_dir, parsed result) for every trial result.json under a jobs dir.
+
+    Located by content, not by depth: a trial result is a JSON object keyed by
+    ``task_name`` that also carries one of the per-trial payloads
+    (trial_name / verifier_result / agent_result / exception_info). A job-level
+    ``result.json`` (job_name + counts) is therefore skipped. Pinning an assumed
+    directory layout instead would let a harness that DID run trials be reported as
+    "no data".
+    """
+    jobs_dir = pathlib.Path(jobs_dir)
+    if not jobs_dir.is_dir():
+        return
+    for path in sorted(jobs_dir.rglob("result.json")):
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if not isinstance(data, dict) or "task_name" not in data:
+            continue
+        if any(k in data for k in ("trial_name", "verifier_result", "agent_result", "exception_info")):
+            yield path.parent, data
 
 
 def _reward(trial_dir: pathlib.Path, result: dict[str, Any]) -> float | None:
@@ -189,11 +209,7 @@ def _agent_report(trial_dir: pathlib.Path) -> dict[str, Any]:
 def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str]) -> dict[str, Any]:
     per_task: dict[str, Any] = {}
     for jd in jobs_dirs:
-        for td in _trial_dirs(jd):
-            try:
-                res = json.loads((td / "result.json").read_text(encoding="utf-8"))
-            except (OSError, ValueError):
-                continue
+        for td, res in iter_trial_results(pathlib.Path(jd)):
             tid = str(res.get("task_name") or td.name)
             reward = _reward(td, res)
             rep = _agent_report(td)
