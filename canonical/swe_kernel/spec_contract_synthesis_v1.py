@@ -78,6 +78,7 @@ class ExceptionContract:
     call_text: str
     node_id: str = ""
     arg_texts: tuple[str, ...] = ()
+    callee_qualifier: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -89,6 +90,7 @@ class ExceptionContract:
             "call_text": self.call_text[:200],
             "node_id": self.node_id,
             "arg_texts": list(self.arg_texts),
+            "callee_qualifier": self.callee_qualifier,
         }
 
 
@@ -102,6 +104,21 @@ def _raises_exc_name(node: ast.AST) -> str | None:
     if isinstance(node, ast.Tuple) and node.elts:
         return _raises_exc_name(node.elts[0])
     return None
+
+
+def _call_qualifier(node: ast.Call, receivers: Mapping[str, str] | None = None) -> str:
+    """The class a called attribute belongs to.
+
+    `jwt.PyJWK.from_dict` names it directly (`PyJWK`). `algo.from_jwk(...)` names a *variable*, so the
+    test's own `algo = HMACAlgorithm(...)` assignment is the evidence: the constructor's name is the
+    class. Nothing outside the test source is consulted.
+    """
+    func = node.func
+    if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Attribute):
+        return func.value.attr
+    if isinstance(func, ast.Attribute) and isinstance(func.value, ast.Name):
+        return (receivers or {}).get(func.value.id, func.value.id)
+    return ""
 
 
 def _call_callee(node: ast.Call) -> str | None:
@@ -143,6 +160,15 @@ def mine_exception_contracts(test_source: str, *, node_id: str = "") -> list[Exc
         scopes = [(node_id, tree)]
     out: list[ExceptionContract] = []
     for scope_name, scope_node in scopes:
+        receivers: dict[str, str] = {}
+        for sub in ast.walk(scope_node):
+            if isinstance(sub, ast.Assign) and isinstance(sub.value, ast.Call):
+                callee = _call_callee(sub.value)
+                if not callee:
+                    continue
+                for target in sub.targets:
+                    if isinstance(target, ast.Name):
+                        receivers[target.id] = callee
         for node in ast.walk(scope_node):
             if not isinstance(node, ast.With):
                 continue
@@ -184,6 +210,7 @@ def mine_exception_contracts(test_source: str, *, node_id: str = "") -> list[Exc
                         keyword_literals=kw_lits,
                         call_text=ast.unparse(call)[:200],
                         node_id=scope_name,
+                        callee_qualifier=_call_qualifier(call, receivers),
                     )
                 )
     return out
@@ -254,6 +281,73 @@ def _indent_of(text: str) -> str:
         if line.strip():
             return line[: len(line) - len(line.lstrip())]
     return "    "
+
+
+_CLASS_CACHE: dict[tuple[str, str], str] = {}
+
+
+def _enclosing_class_name(root: pathlib.Path, rel_path: str, lineno: int) -> str:
+    """The class whose body contains `lineno`. Cached: this is called in a bind loop."""
+    key = (rel_path, str(lineno))
+    if key in _CLASS_CACHE:
+        return _CLASS_CACHE[key]
+    name = ""
+    try:
+        tree = ast.parse((root / rel_path).read_text(errors="replace"))
+    except (SyntaxError, OSError):
+        _CLASS_CACHE[key] = ""
+        return ""
+    for node in ast.walk(tree):
+        if isinstance(node, ast.ClassDef) and node.lineno <= lineno <= (node.end_lineno or node.lineno):
+            name = node.name
+    _CLASS_CACHE[key] = name
+    return name
+
+
+_MODULE_NAMES_CACHE: dict[str, frozenset[str]] = {}
+
+
+def _module_bound_names(root: pathlib.Path, rel_path: str) -> frozenset[str]:
+    """Every name the module itself binds: imports, classes, functions, stores."""
+    if rel_path in _MODULE_NAMES_CACHE:
+        return _MODULE_NAMES_CACHE[rel_path]
+    try:
+        tree = ast.parse((root / rel_path).read_text(errors="replace"))
+    except (SyntaxError, OSError):
+        _MODULE_NAMES_CACHE[rel_path] = frozenset()
+        return frozenset()
+    names: set[str] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.Import):
+            for alias in node.names:
+                names.add((alias.asname or alias.name).split(".")[0])
+        elif isinstance(node, ast.ImportFrom):
+            for alias in node.names:
+                names.add(alias.asname or alias.name)
+        elif isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+            names.add(node.name)
+        elif isinstance(node, ast.Name) and isinstance(node.ctx, ast.Store):
+            names.add(node.id)
+    _MODULE_NAMES_CACHE[rel_path] = frozenset(names)
+    return _MODULE_NAMES_CACHE[rel_path]
+
+
+def _resolvable_exc_name(root: pathlib.Path, rel_path: str, exc_name: str) -> str:
+    """Raise the exception under a name the target module already binds.
+
+    The test writes `jwt.InvalidKeyError`; the module that must raise it imports `InvalidKeyError` and
+    never imports `jwt`, so the dotted form is a `NameError` waiting to happen. Which name is bound is
+    read from the module, not assumed.
+    """
+    if "." not in exc_name:
+        return exc_name
+    bound = _module_bound_names(root, rel_path)
+    head, _, last = exc_name.rpartition(".")
+    if last in bound:
+        return last
+    if head.split(".")[0] in bound:
+        return exc_name
+    return last
 
 
 def _same_class_predicates(fn: "scm.FunctionCPG", cpg: "scm.ProjectCPG") -> list[str]:
@@ -347,6 +441,22 @@ def guard_candidates(
         for cond in _guard_conditions(param, literal):
             _emit(cond, f"SPEC_CONTRACT_GUARD[{cond}]")
 
+    # Family 1b: the contract's argument is a container literal with a boundary field inside it.
+    # `PyJWK.from_dict({"kty": "oct", "k": "", ...})` must raise `InvalidKeyError("must not be empty")`:
+    # the empty field is the field the message names, and comparing it (not testing its truthiness)
+    # keeps keys that legitimately have no such field untouched.
+    for term in contract.arg_literals:
+        if not isinstance(term, dict):
+            continue
+        for key, val in term.items():
+            if not isinstance(key, str):
+                continue
+            if not (val is None or val == "" or nexus.is_canonical_default(val)):  # noqa: SLF001
+                continue
+            literal = "None" if val is None else repr(val)
+            _emit(f'{params[0]}.get("{key}") == {literal}',
+                  f'SPEC_CONTRACT_GUARD[{params[0]}.get("{key}") == {literal}]')
+
     # Family 2: a call with no arguments at all -> every parameter must be absent.
     if not contract.arg_literals and not contract.keyword_literals and not contract.arg_texts:
         conj = " and ".join(f"{p} is None" for p in params)
@@ -401,6 +511,16 @@ def synthesize_spec_guards(
                 fn for fn in cpg.functions.get(contract.callee, [])
                 if fn.language == "python" and len(_param_names(fn)) >= arity
             ]
+            if len(candidates) > 1 and contract.callee_qualifier:
+                # `jwt.PyJWK.from_dict` or `algo = HMACAlgorithm(...)` followed by `algo.prepare_key`
+                # names its class, so same-named overrides are resolved by the test's own text
+                # instead of being refused as ambiguous.
+                narrowed = [
+                    fn for fn in candidates
+                    if _enclosing_class_name(root, fn.rel_path, fn.start_line) == contract.callee_qualifier
+                ]
+                if narrowed:
+                    candidates = narrowed
             if len(candidates) != 1:
                 continue  # ambiguity is refused, not guessed
             fn = candidates[0]
@@ -408,7 +528,10 @@ def synthesize_spec_guards(
             if body_site is None:
                 continue
             guards: list[tuple[str, str]] = []
-            for tag, new_body in guard_candidates(fn, contract, body_site.source_text, cpg):
+            resolved = dataclasses.replace(
+                contract, exc_name=_resolvable_exc_name(root, fn.rel_path, contract.exc_name)
+            )
+            for tag, new_body in guard_candidates(fn, resolved, body_site.source_text, cpg):
                 if not new_body.endswith(body_site.source_text):
                     continue
                 guards.append((tag, new_body[: len(new_body) - len(body_site.source_text)]))

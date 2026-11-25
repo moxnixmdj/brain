@@ -231,6 +231,9 @@
  "generated_at_utc": "2026-11-25T02:04:44Z",
  "honest_verdict": "10 of 13 graded unseen OSS commits repaired and verified against their own suites (76.92%), 0 regressions, 2 env-blocked, K3=0 runtime model calls. The new capability is real but narrow: it resolves commits whose fix is restated in the project's own test as `pytest.raises` contracts. Ten graded commits still fail, no public benchmark container score was produced here, and nothing in this receipt was obtained by gating, mocking, or reading a human diff.",
  "incremental_spend_usd": 0.0,
+ "integrity_notes": [
+  "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
+ ],
  "modules": {
   "canonical/runtime/causal_computer_use_agent_v1.py": {
    "lines": 578,
@@ -247,12 +250,12 @@
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
-   "sha256": "cbd9a90ff9e91ecbec29e2b059e492d95e85c98af4cf67462c6b8a0a4a154390"
+   "sha256": "e3e11702ef5edd7aa544f4babc781f5c60c19ae1eefe6493a2ad505695bbbbaf"
   },
   "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
    "bytes": 21011,
    "lines": 318,
-   "sha256": "72027eca679be72ceff3a9e4f3a13bdd9880984914d2fa3a4a56357ca0386334"
+   "sha256": "9dc9f31ccc08e8c9df0bc4949b10a99046f933f43d78c00373785e46d996a927"
   },
   "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
    "lines": 932,
@@ -375,15 +378,31 @@
    "placement": "last-resort pass, after every other pass, so it cannot displace a verified repair",
    "verified_here": true,
    "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "pyjwt@af8181c: 2 failures -> 1 (411 passed, 1 failed) with the guard the engine now synthesizes; a 64-proposal sweep (193 s) finds nothing green, so the commit stays OPEN",
+   "id": "CONTRACT_BINDING_BY_TEST_EVIDENCE",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "verified_here": true,
+   "what": "receiver class inferred from the test's own `algo = Algo(...)` assignment; guard family for a boundary value nested in a container literal (`obj.get('k') == ''`); exception raised under the name the target module actually binds"
+  },
+  {
+   "disposition": "REMOVED after measurement: zero candidates produced on pyjwt@af8181c, cJSON@6d9f244, pluggy@50585e0 and click@f67c2bb; zero repairs",
+   "earned_a_blind_oss_commit": false,
+   "id": "RAISING_SITE_SUBSTITUTION",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "verified_here": true,
+   "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Assertion mining. Two independent witnesses now: click@fc518e4 needs `assert codes == [0, 0]` (retry the interrupted statement, a count) and more-itertools@c629214 needs overflow-free comparison for ranges above sys.maxsize (substitute len(self) with the class's own arithmetic). The engine can prove a candidate but has no candidate family derived from the assertion's own comparison.",
+ "next_bottleneck": "Cross-sibling contract composition: pyjwt@af8181c now states a family of contracts on one class (empty key, non-string key, PEM/JWK/JSON variants) and each synthesized guard MOVES the failing set rather than removing it. The engine composes guards by prefix insertion on one function only; it never composes two contracts that constrain the same parameter across sibling methods.",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
  "stored_world_facts_in_weights": 0,
  "tests": {
-  "causal_suite": "11 passed in 51.05s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+  "causal_suite": "12 passed in 57.18s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
   "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
   "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
   "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"

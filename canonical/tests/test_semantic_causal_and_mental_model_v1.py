@@ -1118,3 +1118,70 @@ def test_escape_contract_binds_to_the_traceback_frame_not_the_name(tmp_path: pat
     text = composed["pkg/mod.py"].decode()
     assert text.count("except KeyboardInterrupt:") == 2
     compile(text, "mod.py", "exec")
+
+
+def test_contract_binds_through_the_tests_constructor_and_reads_a_container_field(
+    tmp_path: pathlib.Path,
+) -> None:
+    """`algo.from_jwk({...})` names a variable; the test's own `algo = Algo(...)` line names the class.
+
+    The exception reference is resolved the same way: the test writes `pkg.algo.InvalidKeyError`, the
+    module that must raise it binds `InvalidKeyError`, and a guard has to use the name that exists.
+    """
+    from canonical.swe_kernel import causal_nexus_v1 as nx
+    from canonical.swe_kernel import spec_contract_synthesis_v1 as spc
+    from canonical.swe_kernel.semantic_causal_engine_v1 import build_project_cpg
+
+    repo = tmp_path / "container_repo"
+    (repo / "pkg").mkdir(parents=True)
+    (repo / "tests").mkdir(parents=True)
+    (repo / "pkg" / "__init__.py").write_text("")
+    (repo / "pkg" / "algo.py").write_text(
+        "class InvalidKeyError(Exception):\n"
+        "    pass\n"
+        "\n"
+        "\n"
+        "class Algo:\n"
+        "    def __init__(self, kind):\n"
+        "        self.kind = kind\n"
+        "\n"
+        "    def from_jwk(self, jwk):\n"
+        "        return jwk\n"
+    )
+    (repo / "tests" / "test_algo.py").write_text(
+        "import pytest\n"
+        "import pkg.algo\n"
+        "from pkg.algo import Algo\n"
+        "\n"
+        "\n"
+        "def test_rejects_empty_key():\n"
+        "    algo = Algo('HS256')\n"
+        "    with pytest.raises(pkg.algo.InvalidKeyError, match='must not be empty'):\n"
+        "        algo.from_jwk({'kty': 'oct', 'k': '', 'alg': 'HS256'})\n"
+    )
+    contracts = spc.mine_exception_contracts((repo / "tests" / "test_algo.py").read_text())
+    assert contracts and contracts[0].callee_qualifier == "Algo", "the constructor line names the class"
+    assert contracts[0].exc_name.endswith("InvalidKeyError")
+
+    cpg = build_project_cpg(repo)
+    guards = spc.synthesize_spec_guards(repo, cpg, [(repo / "tests" / "test_algo.py").read_text()])
+    assert guards
+    tag, fn_name, _fn, patched = guards[0]
+    text = patched.decode()
+    assert fn_name == "from_jwk"
+    assert 'jwk.get("k") ==' in text, "the empty field is the field the message names"
+    assert "raise InvalidKeyError(\"must not be empty\")" in text, "the name the module binds, not the dotted one"
+
+    store = pathlib.Path(tempfile.mkdtemp(prefix="container-e2e-", dir=str(tmp_path)))
+    result = repair_project_causally(
+        repo,
+        [sys.executable, "-m", "pytest", "-q", "tests/test_algo.py"],
+        law_store=CausalLawStore(store / "laws.json"),
+        skill_store=nx.SkillStoreV2(store / "skills.json"),
+        invariant_store=nx.NegativeInvariantStore(store / "invs.json"),
+        origin="container_e2e",
+        max_sites=12,
+        max_candidates=16,
+    )
+    assert result.repaired is True, result.status
+    assert result.status == "VERIFIED__SPEC_CONTRACT_GUARD"

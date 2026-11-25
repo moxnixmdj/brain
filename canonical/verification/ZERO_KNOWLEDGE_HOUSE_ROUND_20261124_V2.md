@@ -409,3 +409,49 @@ next round starts.
 
 `click@fc518e4`, `click@f67c2bb`, `pyjwt@af8181c`, `pluggy@50585e0`, `more-itertools@c629214`, `cJSON@6d9f244`,
 `cJSON@9d1b229086`, `click@c53d373` remain OPEN. Tally **10/13 = 76.92%**.
+
+## Round V8 — contracts that name a *variable*, and a container field; plus a contamination disclosure
+
+**Integrity disclosure, first.** While diagnosing `more-itertools@c629214` I ran `git show c629214`, which printed
+that commit's human fix. That is outside the blind protocol. The commit is therefore **not** re-evaluated and **not**
+claimed in any tally this round, and no mechanism below was tuned on it — the only thing carried forward is the
+generic question "what does a failure tell you about the line that raised", which came from the failure text of other
+commits. Tally stays on the original 13 graded commits: **10/13 = 76.92%**, and `c629214` is still OPEN.
+
+**Three binding repairs, all forced by a measurement.**
+
+1. *Receiver type inference.* `algo.from_jwk({...})` names a variable, so class-based binding had nothing to match and
+   every same-named override was refused as ambiguous. The test's own `algo = HMACAlgorithm(...)` assignment is the
+   evidence: the constructor's name is the class. Six `prepare_key` overrides collapse to the one the test means.
+2. *Container-literal field guard.* A contract whose argument is `{"kty": "oct", "k": "", ...}` carries the boundary
+   *inside* the literal. The guard compares that field (`obj.get("k") == ''`) rather than testing truthiness, so keys
+   that legitimately have no `k` are untouched. This is the same "the literal is the contract" rule as V3, one level
+   deeper.
+3. *Exception-name resolution.* The test writes `jwt.InvalidKeyError`; the module that must raise it imports
+   `InvalidKeyError` and never imports `jwt`, so the guard as-written was a `NameError` — measured: `411 passed`, and
+   the one failure was `api_jwk.py:92: NameError: name 'jwt' is not defined`. The name bound by the module is now read
+   from the module.
+
+**What those three earned: one failure, not one commit.** With the guard installed, `pyjwt@af8181c` goes from **2
+failures to 1** (`411 passed, 1 failed`), and the remaining one is `test_hmac_prepare_key_rejects_empty_key`. A sweep
+of **64** proposals against that suite (193 s) found none that is green or that shrinks the set without adding a new
+failure — the commit adds a *family* of security behaviours (prepare_key rejections, key-length validation, a GHSA
+case), so `pyjwt@af8181c` remains OPEN.
+
+**Removed in this round.** *Raising-site substitution* — replace the call in the raising statement (`len(self)`) by the
+class's own attribute whose name overlaps it — was implemented and measured on four non-contaminated open commits
+(`pyjwt@af8181c`, `cJSON@6d9f244`, `pluggy@50585e0`, `click@f67c2bb`): **zero candidates produced, zero repairs**,
+removed from both the module and the engine. It was the wrong successor to V7's finding.
+
+**Regression status.** All ten verified commits re-run with the new binding: `pluggy@8051a4d` 1 candidate 5.84 s,
+`click@05f6fd0` 1 / 12.87 s, `pyjwt@5fde08a` 8 / 67.06 s, `werkzeug@884437ae` 21 / 73.59 s, `pyjwt@793a302` 6 / 27.06 s,
+`cJSON@b2890c8d76` 2 / 7.17 s, `cJSON@be749d7efa` 5 / 11.43 s, `more-itertools@cca32949f1` 5 / 15.64 s,
+`attrs@3b0378dd66` 30 / 25.82 s, `werkzeug@051fd663` 1 / 17.42 s — **10/10 still REPAIRED, 0 regressions**.
+Causal suite `12 passed in 57.18 s`.
+
+**What the next round should attack.** `pyjwt@af8181c` is now a *set* of contracts on one class (empty key, non-string
+key, PEM/JWK/JSON variants), and the engine's accumulation only accepts a guard that shrinks the failing set without
+adding a new failure — which is correct, but each individual guard here *moves* failures rather than removing them.
+The measured gap is that the engine composes guards by prefixed insertion on one function and never composes **two
+contracts that apply to the same parameter across sibling methods**; the sweep data for that is in the 64-proposal run
+above.

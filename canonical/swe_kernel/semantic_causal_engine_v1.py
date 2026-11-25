@@ -4525,6 +4525,8 @@ def repair_project_causally(
             # changed nothing on click@fc518e4: even a long traceback does not show the raise site,
             # because the interrupt is raised inside the test's own `sys.exit` replacement. Removed
             # rather than kept as dead runtime (round V7 of the report).
+            # (3.9a raising-site substitution was implemented, measured on four non-contaminated
+            # open commits, produced zero verified repairs and was removed - round V8 of the report.)
             try:
                 frames = spec_module.mine_escape_frames(base_out, root)
             except Exception:
