@@ -15,7 +15,7 @@ that nobody knows all of 18,054 files:
 | harness-measured true capabilities | 9 (all PASS, 0 stale after today) | strongest class: fresh instances, independent oracles, mutation-tested |
 | frontier ownership matrix (per family) | 19 families; 7 `VERIFIED_OWNED_EQUAL_OR_BETTER` | the repo's own vs-frontier verdict, dated 2026-10-03 |
 | root ledgers + verification receipts | 367 ledgers (20261015→20261201), 2,927 receipts | the claim surface; each ledger names its receipt |
-| committed CI benchmark reports | 2 (`hard51`, `smoke3`) + receipts | official verdicts; one quotable, one refused |
+| committed CI benchmark reports | 3 (`hard51` run A refused + `hard51` run B claimable, `smoke3`) + receipts | official verdicts; the refused run stays published next to the quotable one |
 | **unmerged branches** | **6,969 branches, ≥100 open PRs** | **in-flight, therefore zero credit** — e.g. #7071 (kernel boundary + effect oracle), #7070 (zero-model epistemic computer + angelic CEGIS), #7049 (exact-minimax interrogation), #7019 (contrastive oracle bootstrap), #6854 (experience distillation) |
 
 Three integrity findings the inventory produced today, before any comparison was written:
@@ -50,7 +50,7 @@ matched-ish protocol, with source and date. Verdicts are then stated plainly.
 
 | # | capability | ours (measured, this tree) | frontier (published, this sitting) | who wins |
 |---|---|---|---|---|
-| 1 | Agentic software engineering at benchmark scale (SWE-bench Pro V2, hard repos) | causal **0/51** (nop 0/51 gate PASS, oracle **50/51** gate FAIL) → receipt refuses the number; 44 of 51 never reached an action (`STORE_FILE_ABSENT` → `FAIL_CLOSED`); 3 patched one file, engine said `PASS`, verifier said 0.0 | 61.50 % ± 3.10 official public leader (Meta Muse Spark 1.1, board stale since 2026-07-09); vendor-confirmed up to 81.2 % (Fable 5.1) / 79.2 % (Opus 5) | **FRONTIER**, decisively |
+| 1 | Agentic software engineering at benchmark scale (SWE-bench Pro V2, hard repos) | **0.0 % on 51 tasks, now claimable** (run `20261125T204359Z` @ `ab47d3bd`: nop 0/51 PASS, oracle **51/51** PASS, rows complete 51/51/51, `claimable_as_a_benchmark_number: true`, `why_not_claimable: []`, 0 model calls, $0.00). The number is a real measurement of a cold start: 43 of 51 returned `NO_EDITS` because `load_store()` fails closed on an absent skill store **by design**, and 4 hit `HARNESS_ERROR` | 61.50 % ± 3.10 official public leader (Meta Muse Spark 1.1, board stale since 2026-07-09); vendor-confirmed up to 81.2 % (Fable 5.1) / 79.2 % (Opus 5) — **superseded by §5: 99.4 % Claude Opus 5, board 2026-11-06**; verdict unchanged, the margin is now ~99 points | **FRONTIER**, decisively |
 | 2 | SWE-bench Verified (500 curated issues) | never run by us | 76.80 % bash-only (Claude Opus 4.5, official harness, 2026-11-05); 79.2 % any-scaffold; 96 % self-reported by Anthropic (display-only board, 2026-11-23) | **FRONTIER** (and note the 19-point spread between harnesses — scaffold, not intelligence) |
 | 3 | Terminal/shell agentic tasks | one real Terminal-Bench 4.0 task passed earlier under the V5 route: `wal-recovery-ordering`, reward 1, verifier exit 0, 97/97 tests across 10 determinism runs. No breadth run | 64.85 % ± 3.11 (Claude Code + Opus 5.5, max effort, tbench.ai 4.0); 71.2 % on 4.1 (Copilot Fusion); 58.2 % GPT-6 Astra on the Sep board | **FRONTIER** on breadth; our single-task pass is a mechanism proof, not a rate |
 | 4 | Long-horizon autonomy | not measured as duration; our 51-task run spent 878 s of engine time total (≈17.2 s/task) and resolved nothing | METR 50 % time horizon ≈ **40 h** (GPT-6 Astra, 95 % CI 13–2,645 h), 39 h (Opus 5.5, 12–1,253 h), verifiable-only 27 h; doubling ≈ 3.61 months (METR Q4 2026, 2026-11-20) | **FRONTIER**; also note their own CIs span two orders of magnitude |
@@ -65,7 +65,7 @@ matched-ish protocol, with source and date. Verdicts are then stated plainly.
 | 13 | Memory / skill transfer as a measurable quantity | capability law recomputed from six pinned receipts: `memory_exact 0.0481`, `memory_coverage 0.1584`, `silent_corruption 0.3114`, `determined 0.5469`, `seen 0.5445`, operating point `p_correct 0.2978`, value-bearing `0.1167`; lever analysis: `check_density` controllable (0.5469), `determined` capped (→ 0.0) | "experience distillation", skill libraries, continual-learning claims — no published rate for *exact* replay of a lesson, and no corruption rate | **US** as a measurement; as a capability, our 0.0481 is a loss we quantified and they did not quantify |
 | 14 | Cost and dependency per verified outcome | every arm: **0 model calls, $0.00**, network refused by harness, results produced by CI on official images | $6.88–$14.30 per task at the top of Terminal-Bench; every frontier number requires a rented model | **US by construction** — and worth nothing if the output is wrong, which rows 1–4 remind us of |
 | 15 | Authority governance: refusing work that is not certified | `AUTHENTICATED_PARETO_SCHEDULE_V1` 2000/2000: a candidate whose receipt was edited after the fact is refused (`TAMPER_AFTER_RECEIPT_IS_REFUSED` metamorphic), zero-spend enforced, no promotion authority granted | no equivalent: an agent will execute a plan it cannot justify; governance is a prompt | **US** |
-| 16 | Consistency of its own claims | today: found and fixed a stale measurement binding, exposed a 5-vs-7 count drift, published a run that produced nothing (`run_produced_number: false`, receipt authority `NO_MEASUREMENT__HARNESS_ONLY`) rather than deleting it | vendor boards and self-reported numbers are routinely 15–20 points above the shared-harness result (row 2); retractions are not published | **US**, and the cost is visible: we also publish our own 0/51 |
+| 16 | Consistency of its own claims | today: the run that produced nothing (`run_produced_number: false`, authority `NO_MEASUREMENT__HARNESS_ONLY`) was kept, not deleted; the next run passed both gates and we publish its **0.0 %** the same way, with `why_not_claimable` empty rather than quietly dropping the arm that scored zero | vendor boards and self-reported numbers are routinely 15–20 points above the shared-harness result (row 2); retractions are not published | **US**, and the cost is visible: both our 0/51 refusals and our claimable 0.0 % are in the tree |
 
 **Tally: frontier wins 7 rows (1, 2, 3, 4, 5, 9, plus the quality half of 6); we win 8 rows (7, 10,
 11, 12, 13, 14, 15, 16, plus the guarantee half of 6); row 8 is a draw in the uncomfortable sense —
@@ -89,11 +89,13 @@ cross-set before any transfer claim is made.
 
 ## 3. The three things this comparison says to do, in order
 
-1. **Finish the certification of the rig before touching the engine again.** oracle must be N/N with
-   complete rows; run `45656646429` and the `smoke3` pass both died inside our own harness (a missing
-   backslash on a `--note` line, then `bash -e` deleting the shard's evidence — now pinned by
-   `canonical/tests/test_eval_workflow_shell_invocations_are_well_formed_v1.py`), and the next
-   HARD-51 attempt is armed with the fixed workflow.
+1. ~~Finish the certification of the rig before touching the engine again.~~ **Done, by run
+   `20261125T204359Z`**: oracle 51/51 with complete rows, nop 0/51, both gates PASS, recomputed
+   independently in the receipt. That was the precondition, and it held — which is why the first
+   *claimable* number this benchmark can produce for us is 0.0 %. The item that replaces it is the one
+   the 43 `NO_EDITS` rows name: seed the store. `instant_swe_skill_store_v1.new_store()` is the only
+   builder in the tree and `swe_pro_v2_ci.py` points `--store-path` at a fresh per-shard file, so a
+   seeded arm is new work, not a flag — and it must not be faked by silencing the `NO_STORE_PATH` note.
 2. **Buy density, not cleverness.** The lever analysis says `check_density` is the only controllable
    term. Concretely: metamorphic witnesses over the 47 engine-attributable failures, since a witness
    does not need to know the fix — it needs to know that two things which must agree do not.
@@ -117,8 +119,10 @@ METR Q4 2026 capability update via `archyde.com`, `inoryva.blogspot.com`, `groun
 (2026-11-21/23); `buildfastwithai.com/blogs/best-ai-model-per-task-2026` (2026-03-20, GPQA/ARC-AGI-2).
 
 Not claimed: that any of these boards was reproduced by us; that a `PASS` from the engine's own status
-means a fix (it never does); that the 0/51 is a benchmark score (the receipt refuses it,
-`OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED`); that unmerged branches contribute capability (they
+means a fix (it never does); that the earlier 0/51 run was a benchmark score (its receipt refused it,
+`OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED`); that the claimable 0.0 % says anything about a *seeded* store
+(it measures the cold-start ablation, which is the only arm this rig can honestly run without one); that
+unmerged branches contribute capability (they
 contribute candidates); or that a `MEASURED_SANDBOX` row is credit — under
 `canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md` it is reproducibility, not ownership.
 
@@ -210,3 +214,20 @@ barred / held. Then the honest answer becomes "we cover N of M enumerated classe
 Caveat on the numbers above: 276 files and 19 matrix families are hard counts; **198 is derived by stripping
 filename suffixes**, and reconciling it with the 19-family ownership matrix is exactly the drift the instrument
 should remove.
+
+### 5d. The shelf-life lesson, demonstrated on our own row within one sitting
+
+§5 was written to record that the *external* column moves in weeks. It moved on us in hours: the run
+committed while §5c was being typed (`20261125T204359Z`, eval commit `ab47d3bd`) flipped row 1 from
+"the receipt refuses the number" to `claimable_as_a_benchmark_number: true`, because oracle went 50/51 →
+51/51. Three consequences, in the order they matter:
+
+1. **We now have a claimable public-benchmark number, and it is 0.0 %.** That is worth writing down in
+   exactly this form: the rig is honest in both directions, so the first number it releases is our
+   failure. Any document that reported only rows where we win would have deleted this line.
+2. **Interpretation, not score.** `control_rows` are complete (51/51/51 read against 51 expected in all
+   three arms) and `harness_side_statuses` include `EMPTY_TREE`, `UPLOAD_BLOCKED`, `NO_AGENT_REPORT`,
+   `TREE_TOO_BIG`, `NOT_RUN` — the 0 is decomposed, which is what makes it a measurement rather than a
+   silence. `NO_EDITS` 43 / `EDITS_UPLOADED` 4 / `HARNESS_ERROR` 4 at $0.00 and 0 model calls.
+3. **The `ADVANCED_AGENTIC_CODING` row of the ownership matrix asked for "a comparable stage-1 score
+   ≥ 66.4 %" and can now receive a real number against it: 0.0 %.** Recording that is the point of a bar.
