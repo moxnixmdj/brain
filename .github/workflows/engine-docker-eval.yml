@@ -1,0 +1,49 @@
+name: engine-docker-eval
+
+# Clean-room Docker reproduction of the causal-angelic SWE engine suites.
+#
+# Honest scope statement (keep in sync with canonical/eval/docker/Dockerfile):
+#   - builds a fresh python:3.11-slim image with ONLY the imported package
+#     trees and runs the two engine suites inside the container;
+#   - zero model calls, zero network access at run time, zero benchmark
+#     claims of any kind - this is NOT SWE-bench Pro and NOT Terminal-Bench;
+#   - the log is uploaded as the `engine-docker-eval` artifact and the job
+#     fails if either suite fails.
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - arena/b81b2217-brain
+    paths:
+      - "canonical/eval/docker/Dockerfile"
+      - ".github/workflows/engine-docker-eval.yml"
+      - "canonical/runtime/causal_angelic_swe_engine_v1.py"
+      - "canonical/runtime/repo_component_and_cow_engine_v1.py"
+      - "canonical/runtime/backward_witness_synthesizer_v1.py"
+      - "canonical/runtime/instant_swe_skill_store_v1.py"
+      - "canonical/tests/test_causal_angelic_swe_engine_v1.py"
+      - "canonical/tests/test_repo_component_and_cow_engine_v1.py"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: engine-docker-eval-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docker-eval:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the clean-room engine image
+        run: docker build -f canonical/eval/docker/Dockerfile -t brain-engine-eval:ci .
+      - name: Run both engine suites inside Docker
+        run: docker run --rm brain-engine-eval:ci 2>&1 | tee /tmp/engine_docker_eval.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: engine-docker-eval
+          path: /tmp/engine_docker_eval.log
+          if-no-files-found: ignore
