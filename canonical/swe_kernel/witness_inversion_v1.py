@@ -895,6 +895,304 @@ def _headline(report: Mapping[str, Any]) -> str:
            states["verified_by_inversion"], states["verified_by_grammar"]))
 
 
+# --------------------------------------------------------------------------------------------------
+# Repo-Native Component Mining, Dual-Program Splicing, Bidirectional Lens / FST & L3 Negative Space
+# --------------------------------------------------------------------------------------------------
+
+def mine_repo_components(repo_root: pathlib.Path, max_files: int = 64) -> dict[str, Any]:
+    """Harvest the repository's own functions, methods, classes, constants, and exception types."""
+    functions: list[dict[str, Any]] = []
+    methods: list[dict[str, Any]] = []
+    classes: list[str] = []
+    exceptions: list[str] = []
+    constants: list[str] = []
+
+    py_files = sorted(
+        p for p in repo_root.rglob("*.py")
+        if ".git" not in p.parts and "__pycache__" not in p.parts
+    )[:max_files]
+    for path in py_files:
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+        except SyntaxError:
+            continue
+        rel = path.relative_to(repo_root).as_posix()
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                args = [a.arg for a in node.args.args]
+                functions.append({"name": node.name, "arity": len(args), "args": args, "file": rel})
+            elif isinstance(node, ast.ClassDef):
+                classes.append(node.name)
+                bases_txt = " ".join(ast.unparse(b) for b in node.bases)
+                if "Error" in node.name or "Exception" in node.name or "Error" in bases_txt or "Exception" in bases_txt:
+                    if node.name not in exceptions:
+                        exceptions.append(node.name)
+                for item in node.body:
+                    if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        margs = [a.arg for a in item.args.args if a.arg != "self"]
+                        methods.append({
+                            "class": node.name,
+                            "name": item.name,
+                            "arity": len(margs),
+                            "args": margs,
+                            "file": rel,
+                        })
+            elif isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id.isupper():
+                        if target.id not in constants:
+                            constants.append(target.id)
+    return {
+        "files_scanned": len(py_files),
+        "functions": functions,
+        "methods": methods,
+        "classes": classes,
+        "exceptions": exceptions,
+        "constants": constants,
+    }
+
+
+def splice_dual_programs(
+    p1_expr: str,
+    p2_expr: str,
+    t1_frames: Sequence[Mapping[str, Any]],
+    t2_frames: Sequence[Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """Counterexample-partitioned program splicing: synthesize separating guard G and return `P1 if G else P2`."""
+    if not t1_frames or not t2_frames:
+        return None
+    shared_keys = sorted(
+        k for k in set(t1_frames[0].keys()) & set(t2_frames[0].keys())
+        if k.isidentifier() and not k.startswith("__")
+    )
+    candidate_guards: list[str] = []
+    for k in shared_keys:
+        candidate_guards.extend([
+            f"{k} is None",
+            f"{k} is not None",
+            f"bool({k})",
+            f"not {k}",
+            f"isinstance({k}, str)",
+            f"isinstance({k}, (list, tuple))",
+            f"len({k}) == 0",
+            f"len({k}) > 0",
+        ])
+        v1 = t1_frames[0].get(k)
+        v2 = t2_frames[0].get(k)
+        if isinstance(v1, (int, str)) and type(v1) is type(v2) and v1 != v2:
+            candidate_guards.append(f"{k} == {v1!r}")
+            if isinstance(v1, int) and isinstance(v2, int):
+                if v1 < v2:
+                    candidate_guards.append(f"{k} <= {v1!r}")
+                else:
+                    candidate_guards.append(f"{k} >= {v1!r}")
+
+    for guard in candidate_guards:
+        try:
+            code = compile(ast.parse(guard, mode="eval"), "<guard>", "eval")
+            t1_vals = [bool(eval(code, {}, dict(f))) for f in t1_frames]  # noqa: S307
+            t2_vals = [bool(eval(code, {}, dict(f))) for f in t2_frames]  # noqa: S307
+        except BaseException:
+            continue
+        if all(t1_vals) and not any(t2_vals):
+            spliced = f"({p1_expr}) if ({guard}) else ({p2_expr})"
+            return {
+                "guard": guard,
+                "spliced_expression": spliced,
+                "p1": p1_expr,
+                "p2": p2_expr,
+            }
+        if not any(t1_vals) and all(t2_vals):
+            spliced = f"({p2_expr}) if ({guard}) else ({p1_expr})"
+            return {
+                "guard": guard,
+                "spliced_expression": spliced,
+                "p1": p1_expr,
+                "p2": p2_expr,
+            }
+    return None
+
+
+def synthesize_bidirectional_lens(
+    pairs: Sequence[tuple[str | bytes, str | bytes]],
+    *,
+    input_var: str = "data",
+) -> dict[str, Any] | None:
+    """Synthesize an invertible FST / lookup-table lens (forward & backward) from concrete I/O pairs."""
+    if not pairs:
+        return None
+    forward_map: dict[Any, Any] = {}
+    backward_map: dict[Any, Any] = {}
+    for src, dst in pairs:
+        if src == dst:
+            continue
+        if src in forward_map and forward_map[src] != dst:
+            return None
+        if dst in backward_map and backward_map[dst] != src:
+            return None
+        forward_map[src] = dst
+        backward_map[dst] = src
+
+    if not forward_map:
+        return None
+
+    # Build chained `.replace(k, v)` expression for str or bytes
+    forward_expr = input_var
+    backward_expr = input_var
+    for k, v in forward_map.items():
+        forward_expr = f"{forward_expr}.replace({k!r}, {v!r})"
+    for v, k in backward_map.items():
+        backward_expr = f"{backward_expr}.replace({v!r}, {k!r})"
+
+    # Verify round-trip consistency on all witness pairs
+    for src, dst in pairs:
+        fwd_out = eval(compile(ast.parse(forward_expr, mode="eval"), "<fwd>", "eval"), {}, {input_var: src})  # noqa: S307
+        if fwd_out != dst:
+            return None
+        bwd_out = eval(compile(ast.parse(backward_expr, mode="eval"), "<bwd>", "eval"), {}, {input_var: fwd_out})  # noqa: S307
+        if bwd_out != src:
+            return None
+
+    return {
+        "forward_map": {repr(k): repr(v) for k, v in forward_map.items()},
+        "forward_expression": forward_expr,
+        "backward_expression": backward_expr,
+        "round_trip_verified": True,
+        "rules_count": len(forward_map),
+    }
+
+
+class NegativeSpaceInvariantStore:
+    """L3 Negative-Space Invariant Store: records refuted AST/state shapes to prune future search in O(1)."""
+
+    def __init__(self, path: pathlib.Path | None = None) -> None:
+        self.path = path
+        self._refuted_ast_dumps: dict[str, dict[str, Any]] = {}
+        if self.path and self.path.exists():
+            doc = json.loads(self.path.read_text(encoding="utf-8"))
+            for entry in doc.get("invariants", []):
+                self._refuted_ast_dumps[entry["ast_signature"]] = entry
+
+    def record_refutation(self, bad_expr: str, *, reason: str, repo: str = "", commit: str = "") -> str | None:
+        try:
+            tree = ast.parse(bad_expr, mode="eval").body
+        except SyntaxError:
+            return None
+        sig = ast.dump(tree, include_attributes=False)
+        self._refuted_ast_dumps[sig] = {
+            "ast_signature": sig,
+            "expression": bad_expr,
+            "reason": reason,
+            "repo": repo,
+            "commit": commit,
+        }
+        if self.path is not None:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text(
+                json.dumps({"invariants": list(self._refuted_ast_dumps.values())}, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        return sig
+
+    def is_refuted(self, candidate_expr: str) -> bool:
+        try:
+            sig = ast.dump(ast.parse(candidate_expr, mode="eval").body, include_attributes=False)
+        except SyntaxError:
+            return True
+        return sig in self._refuted_ast_dumps
+
+    def filter_candidates(self, candidates: Sequence[str]) -> list[str]:
+        return [c for c in candidates if not self.is_refuted(c)]
+
+
+def localize_by_angelic_perturbation(
+    module_sources: Mapping[str, str],
+    entry_expr: str,
+    failing_cases: Sequence[tuple[Mapping[str, Any], Any]],
+    passing_cases: Sequence[tuple[Mapping[str, Any], Any]],
+    angelic_values: Sequence[Any],
+) -> list[dict[str, Any]]:
+    """Counterfactual Causal Blame via Angelic Perturbation across multi-file/multi-function sources.
+
+    Perturbs each single-line return expression across `module_sources` with `angelic_values` on failing inputs
+    (while leaving passing inputs unperturbed or checking which site can satisfy all failing cases without
+    corrupting passing structure) to isolate the exact causal fault nexus.
+    """
+    suspect_sites: list[dict[str, Any]] = []
+    for file_path, src in module_sources.items():
+        try:
+            tree = ast.parse(src)
+        except SyntaxError:
+            continue
+        lines = src.splitlines()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Return) and node.value is not None:
+                if node.value.lineno == getattr(node.value, "end_lineno", node.value.lineno):
+                    suspect_sites.append({
+                        "file": file_path,
+                        "line": node.value.lineno,
+                        "col": node.value.col_offset,
+                        "end_col": node.value.end_col_offset,
+                        "old_expr": lines[node.value.lineno - 1][node.value.col_offset:node.value.end_col_offset],
+                    })
+
+    verified_blames: list[dict[str, Any]] = []
+    for site in suspect_sites:
+        f_path = site["file"]
+        orig_lines = module_sources[f_path].splitlines(keepends=True)
+        line_idx = site["line"] - 1
+        orig_line = orig_lines[line_idx]
+
+        # Check if there exists an angelic value assignment per failing case that makes all failing cases pass
+        all_failing_recoverable = True
+        witness_map: list[dict[str, Any]] = []
+        for f_env, expected_out in failing_cases:
+            recovered_this_case = False
+            for val in angelic_values:
+                patched_lines = list(orig_lines)
+                patched_lines[line_idx] = (
+                    orig_line[:site["col"]] + repr(val) + orig_line[site["end_col"]:]
+                )
+                ns: dict[str, Any] = {}
+                try:
+                    for mod_p, mod_s in module_sources.items():
+                        code_str = "".join(patched_lines) if mod_p == f_path else mod_s
+                        exec(compile(ast.parse(code_str), mod_p, "exec"), ns)  # noqa: S102
+                    actual = eval(compile(ast.parse(entry_expr, mode="eval"), "<entry>", "eval"), ns, dict(f_env))  # noqa: S307
+                except BaseException:
+                    continue
+                if actual == expected_out:
+                    recovered_this_case = True
+                    witness_map.append({"input": dict(f_env), "angelic_value": val, "output": actual})
+                    break
+            if not recovered_this_case:
+                all_failing_recoverable = False
+                break
+
+        if all_failing_recoverable and witness_map:
+            # Verify passing cases still pass on the unperturbed module
+            passing_ok = True
+            base_ns: dict[str, Any] = {}
+            for mod_p, mod_s in module_sources.items():
+                exec(compile(ast.parse(mod_s), mod_p, "exec"), base_ns)  # noqa: S102
+            for p_env, p_expected in passing_cases:
+                try:
+                    p_actual = eval(compile(ast.parse(entry_expr, mode="eval"), "<entry>", "eval"), base_ns, dict(p_env))  # noqa: S307
+                    if p_actual != p_expected:
+                        passing_ok = False
+                        break
+                except BaseException:
+                    passing_ok = False
+                    break
+            if passing_ok:
+                verified_blames.append({
+                    **site,
+                    "causal_blame_verified": True,
+                    "witnesses": witness_map,
+                })
+    return verified_blames
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Name the edit nobody wrote: invert the failing assertion at the site it fails.")

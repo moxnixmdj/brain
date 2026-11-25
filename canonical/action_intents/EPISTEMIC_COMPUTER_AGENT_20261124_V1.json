@@ -60,7 +60,7 @@
   },
   "benchmark_or_family_rank_authority": "zero-leakage producer sandbox measurements on git-stripped real open-source commits and controlled CLI/ARIA rooms; no external benchmark authority claimed",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::existing scan, judge-earning, ignorance-ledger, CLI-grammar, and SWE repair organs were disconnected, lacked automatic judge discovery and W3C ARIA state-diff/refutation, localized SWE bugs by peeking at git diff lines, and evaluated patches via slow cold subprocesses over rigid syntax templates without mental simulation",
-  "canonical_base_commit": "181b54fce3fad0241781dd40184b15a5f2b98fa1",
+  "canonical_base_commit": "0cacccb6cdf2b00b648f414b03ed0cce1819dc33",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": {
     "auto_earned_content_judges": 15,
@@ -136,7 +136,7 @@
   ],
   "real_outcome": "zero-model epistemic agent unifies OS room verification, CLI toolchains, W3C ARIA/OSWorld GUI workflows, and git-stripped SWE repair with inspectable/refutable JSON memory and zero leaked answers",
   "recursive_obs": {
-    "canonical_base_commit": "181b54fce3fad0241781dd40184b15a5f2b98fa1",
+    "canonical_base_commit": "0cacccb6cdf2b00b648f414b03ed0cce1819dc33",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "diff-peeking SWE localization (`site_or_reason(repo, sha, ...)` bypassed completely; `.git` stripped in blind evaluation)",
@@ -225,7 +225,7 @@
     "real_outcome": "13 unit/receipt tests pass; 21.7s multi-surface benchmark verified; 61 real git-stripped commits evaluated across 13 repos with 0 fake repairs and 2 genuine unseen full-suite repairs (`61,705` and `61,541` tests passed)",
     "required_capability": "a unified zero-model epistemic computer-use and SWE system that learns goal-directed, execution-verified structural schemas into an inspectable, refutable store",
     "route_frontier": {
-      "canonical_base_commit": "181b54fce3fad0241781dd40184b15a5f2b98fa1",
+      "canonical_base_commit": "0cacccb6cdf2b00b648f414b03ed0cce1819dc33",
       "challenger_routes": [
         {
           "comparison": {
@@ -291,7 +291,7 @@
           "route": "DIFF_HINTED_SINGLE_SITE_SCALAR_SYNTHESIS"
         }
       ],
-      "checked_at_utc": "2026-11-25T21:32:55Z",
+      "checked_at_utc": "2026-11-25T21:38:01Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -331,7 +331,7 @@
       "selected_route": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-25T21:32:55Z",
+        "checked_at_utc": "2026-11-25T21:38:01Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 stdlib runtime and CLI utilities (`tar`, `gzip`, `bzip2`, `xz`)",

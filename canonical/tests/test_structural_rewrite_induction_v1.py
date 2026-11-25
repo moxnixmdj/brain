@@ -101,3 +101,145 @@ def test_headline_reports_the_baseline_on_the_same_sample():
                          "states": {S.NOT_FOUND: 5}, "baseline": {"BASELINE_SOLVES": 0}}}
     line = S.headline(report)
     assert "5 real fix commits" in line and "0 solved" in line and "0 solved" in line.split("grammar on the same sample:")[1]
+
+
+def test_single_experience_ast_ir_morphism_transfers_across_repositories():
+    # Taught from 1 commit in packaging (#24: list(charset) -> charset), transfers to werkzeug (#43: _cookie_unquote(key) -> key)
+    m_unwrap = S.induce_ast_morphism("list(charset)", "charset", source_commit="553582d916", source_repo="packaging")
+    assert m_unwrap is not None and m_unwrap.family == "UNWRAP_SINGLE_ARG_CALL"
+    adm = S.admit_morphism_5gate(m_unwrap, "list(charset)", "charset", tests_green=12)
+    assert adm["admitted"] is True and adm["gates_passed"] == 5
+    assert S.apply_ast_morphism(m_unwrap, "_cookie_unquote(key)") == "key"
+
+    # Taught from 1 commit in more-itertools (#16: key -> key is not None), transfers to packaging (#26) & pluggy (#31)
+    m_none = S.induce_ast_morphism("key", "key is not None", source_commit="71e070b35d", source_repo="more-itertools")
+    assert m_none is not None and m_none.family == "TRUTHY_TO_IS_NOT_NONE"
+    assert S.apply_ast_morphism(m_none, "self.environments") == "self.environments is not None"
+    assert S.apply_ast_morphism(m_none, "self.get_plugin(ep.name)") == "self.get_plugin(ep.name) is not None"
+
+    # Taught from 1 commit in click (#08), transfers to pluggy (#29)
+    m_comp = S.induce_ast_morphism(
+        "[self.options_metavar]",
+        "[x for x in [self.options_metavar] if x]",
+        source_commit="42ee8a1f60",
+        source_repo="click",
+    )
+    assert m_comp is not None and m_comp.family == "COLLECTION_TRUTHY_FILTER_COMPREHENSION"
+    assert S.apply_ast_morphism(m_comp, "set(self._name2plugin.values())") == "{x for x in self._name2plugin.values() if x}"
+
+
+def test_three_way_memory_ablation_on_forty_five_unseen_fixes():
+    root = pathlib.Path(__file__).resolve().parents[2]
+    res = S.run_three_way_memory_ablation(
+        root / "canonical/verification/THE_ENGINE_ON_FORTY_FIVE_UNSEEN_FIXES_20261123_V1.json",
+        root / "intake/RECEIPT_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_20261121_V1.json",
+    )
+    assert res["corpus_commits"] == 45
+    assert res["verified_commits"] == 45
+    assert res["five_gate_admitted_count"] == 45
+    assert res["ablation"]["empty_store"]["memory_hits"] == 0
+    assert res["ablation"]["raw_trace_store"]["memory_hits"] == 0
+    assert res["ablation"]["generalized_ast_ir_morphism_store"]["memory_hits"] == 23
+    assert res["ablation"]["generalized_ast_ir_morphism_store"]["cross_repo_hits"] == 14
+
+
+def test_multi_statement_subtree_anti_unification_and_o1_deletion(tmp_path):
+    before_a = (
+        "def normalize_header(raw_val):\n"
+        "    if raw_val is None:\n"
+        "        return None\n"
+        "    return (raw_val, len(raw_val))\n"
+    )
+    after_a = (
+        "def normalize_header(raw_val):\n"
+        "    return (raw_val or '', len(raw_val or ''))\n"
+    )
+    m = S.induce_subtree_morphism(before_a, after_a, source_repo="werkzeug", source_commit="051fd663")
+    assert m is not None and m.family == "GUARD_RETURN_TO_INLINE_FALLBACK"
+
+    store = S.MorphismSkillStore(tmp_path / "skills.json")
+    sid = store.add(m)
+    assert len(store) == 1 and store.get(sid) is not None
+
+    # Replay on a held-out function with completely different identifiers
+    before_b = (
+        "def format_token(token_str):\n"
+        "    if token_str is None:\n"
+        "        return None\n"
+        "    return token_str.strip()\n"
+    )
+    replayed = S.apply_subtree_morphism(store.get(sid), before_b)
+    assert replayed is not None
+    assert "if token_str is None" not in replayed
+    assert "(token_str or '').strip()" in replayed
+
+    # Compaction deduplicates overlapping morphisms and prunes refuted families
+    m_dup = S.induce_subtree_morphism(before_a, after_a, source_repo="other_repo", source_commit="99999999")
+    assert m_dup is not None
+    store.add(m_dup)
+    assert len(store) == 2
+    comp_res = store.compact()
+    assert comp_res["deduplicated"] == 1 and len(store) == 1
+
+    # O(1) deletion without retraining
+    assert store.delete(sid) is True
+    assert len(store) == 0 and store.get(sid) is None
+
+
+def test_verify_boundary_invariance_64_catches_boundary_crash_and_accepts_safe_patch():
+    safe = S.verify_boundary_invariance_64("x or ''", "(x or '').strip()", {"x": "abc"})
+    assert safe["passed"] is True and safe["cases_run"] == 64 and safe["new_crashes"] == 0
+
+    unsafe = S.verify_boundary_invariance_64("x + 1", "1 // x", {"x": 2})
+    assert unsafe["passed"] is False and unsafe["new_crashes"] > 0
+
+
+def test_federated_self_play_distiller_harvests_and_transfers_multi_statement_skills(tmp_path):
+    episodes = [
+        {
+            "repo": "attrs",
+            "commit": "d0c73d8faa",
+            "defective": "def deep_iterable(member_validator, iterable_validator=None):\n    return _DeepIterable(member_validator, iterable_validator)\n",
+            "repaired": (
+                "def deep_iterable(member_validator, iterable_validator=None):\n"
+                "    if isinstance(member_validator, (list, tuple)):\n"
+                "        member_validator = and_(*member_validator)\n"
+                "    return _DeepIterable(member_validator, iterable_validator)\n"
+            ),
+            "held_out_target": "def check_items(item_rule, container_rule=None):\n    return _Checker(item_rule, container_rule)\n",
+            "held_out_expected": (
+                "def check_items(item_rule, container_rule=None):\n"
+                "    if isinstance(item_rule, (list, tuple)):\n"
+                "        item_rule = and_(*item_rule)\n"
+                "    return _Checker(item_rule, container_rule)\n"
+            ),
+        },
+        {
+            "repo": "click",
+            "commit": "701b313160",
+            "defective": "def get_args():\n    incomplete = os.environ['COMP_CWORD']\n    return incomplete\n",
+            "repaired": (
+                "def get_args():\n"
+                "    incomplete = os.environ['COMP_CWORD']\n"
+                "    if incomplete:\n"
+                "        incomplete = split_arg_string(incomplete)[0]\n"
+                "    return incomplete\n"
+            ),
+            "held_out_target": "def parse_word():\n    token = env['WORD']\n    return token\n",
+            "held_out_expected": (
+                "def parse_word():\n"
+                "    token = env['WORD']\n"
+                "    if token:\n"
+                "        token = split_arg_string(token)[0]\n"
+                "    return token\n"
+            ),
+        },
+    ]
+    res = S.run_federated_self_play_distiller(episodes, store_path=tmp_path / "distilled.json")
+    assert res["episodes_processed"] == 2
+    assert res["harvested_before_compact"] == 2
+    assert res["compacted_store_size"] == 2
+    assert res["replayed_on_held_out"] == 2
+
+
+
