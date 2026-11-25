@@ -35,7 +35,7 @@ jobs:
           echo "TASK_LIMIT=$TASK_LIMIT" >> "$GITHUB_ENV"
           mkdir -p "$GITHUB_WORKSPACE/runs/jobs"
           {
-            echo 'Brain revision: e974b5a0366bf6096623818e0448ab825d84b794'
+            echo "Brain revision: ${{ github.sha }}"
             echo 'Harbor revision: 39c2219a41b3caa7a689cef1882263b5a93ae93f'
             echo 'SWE-bench Pro revision: 66f92766bba642462d4bbe5479e83f91f9211862'
             echo "Selected task count: $TASK_LIMIT"
@@ -48,7 +48,7 @@ jobs:
       - name: Check out requested Brain revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: e974b5a0366bf6096623818e0448ab825d84b794
+          ref: ${{ github.sha }}
           path: brain
           persist-credentials: false
 

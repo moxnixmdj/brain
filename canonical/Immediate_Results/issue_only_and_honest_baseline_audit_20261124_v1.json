@@ -1,0 +1,65 @@
+{
+  "schema": "ISSUE_ONLY_ZERO_LEAKAGE_SWE_AND_HONEST_BASELINE_AUDIT_20261124_V1",
+  "generated_utc": "2026-11-24T00:00:00Z",
+  "model_calls": 0,
+  "issue_only_zero_test_leakage_swe": {
+    "total_cases": 2,
+    "solved_and_passed_held_out_upstream_suite": 2,
+    "cases": [
+      {
+        "case_id": "werkzeug@051fd66352_issue_only",
+        "base_commit_only": true,
+        "held_out_upstream_test_checkout_until_post_solve": true,
+        "solved_by_abduced_oracle": true,
+        "zero_test_leakage_in_patch": true,
+        "held_out_upstream_test_suite_passed": true,
+        "held_out_pytest_summary": "124 passed in 0.29s",
+        "simulations": 9,
+        "elapsed_ms": 7947.13,
+        "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+        "crystallized_law_id": null,
+        "modified_files": [
+          "src/werkzeug/datastructures/auth.py"
+        ],
+        "model_calls": 0
+      },
+      {
+        "case_id": "click@05f6fd0df4_issue_only",
+        "base_commit_only": true,
+        "held_out_upstream_test_checkout_until_post_solve": true,
+        "solved_by_abduced_oracle": true,
+        "zero_test_leakage_in_patch": true,
+        "held_out_upstream_test_suite_passed": true,
+        "held_out_pytest_summary": "116 passed in 0.21s",
+        "simulations": 48,
+        "elapsed_ms": 33603.47,
+        "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+        "crystallized_law_id": "uir_law_6efc5c047e37",
+        "modified_files": [
+          "src/click/core.py"
+        ],
+        "model_calls": 0
+      }
+    ],
+    "law_store_compaction": {
+      "before": 1,
+      "after": 1,
+      "pruned": 0
+    }
+  },
+  "honest_suite_baseline_20261103_audit": {
+    "source_file": "canonical/verification/HONEST_SUITE_BASELINE_20261103_V1.json",
+    "files_with_failures_or_errors": 344,
+    "failing_cases_total": 1026,
+    "failure_buckets": {
+      "ASSERTION": 793,
+      "OTHER": 113,
+      "CURRENTNESS_GUARD__DRIFT": 53,
+      "IMPORT_ERROR": 43,
+      "MISSING_FILE": 5,
+      "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT": 16,
+      "NETWORK": 3
+    },
+    "confinement_or_source_gate_deliberate_refusals": 0
+  }
+}
