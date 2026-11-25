@@ -285,9 +285,16 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
     }
 
 
-def to_markdown(arm_reports: dict[str, dict[str, Any]], *, benchmark: str, commit: str) -> list[str]:
+def to_markdown(
+    arm_reports: dict[str, dict[str, Any]],
+    *,
+    benchmark: str,
+    commit: str,
+    diagnostics: list[dict[str, Any]] | None = None,
+) -> list[str]:
+    void = all(not rep.get("n_reported") for rep in arm_reports.values()) if arm_reports else True
     lines = [
-        f"# {benchmark} — engine eval (real run)",
+        f"# {benchmark} — engine eval (measured run)",
         "",
         f"- upstream/eval commit recorded by CI: `{commit}`",
         "- Resolve decisions come from each task's own verifier inside the official container image.",
@@ -324,6 +331,26 @@ def to_markdown(arm_reports: dict[str, dict[str, Any]], *, benchmark: str, commi
     lines += ["## Harness gates", ""]
     for k, v in gates.items():
         lines.append(f"- `{k}`: **{'PASS' if v else 'FAIL'}**")
+    if void:
+        lines += [
+            "",
+            "> **NO TRIAL DATA — THIS RUN PRODUCED NO BENCHMARK NUMBER.**",
+            "> No `result.json` was found for any expected task, so the 0/N columns below are",
+            "> a harness failure, not a score. Do not quote them as a resolve rate.",
+        ]
+    if diagnostics:
+        lines += [
+            "",
+            "## Shard diagnostics (harness truth: did harbor even start trials?)",
+            "",
+            "| artifact | harbor exit | log lines kept | last line |",
+            "|---|---|---|---|",
+        ]
+        for d in diagnostics:
+            lines.append(
+                f"| `{d.get('source', '?')}` | {d.get('harbor_exit_code')} "
+                f"| {d.get('harbor_log_line_count')} | `{str((d.get('harbor_log_last_lines') or [''])[-1])[:110]}` |"
+            )
     lines += [
         "",
         "## Per-task (causal arm)",
@@ -375,6 +402,12 @@ def main(argv: list[str] | None = None) -> int:
 
     a = sub.add_parser("aggregate")
     a.add_argument("--reports", action="append", required=True)
+    a.add_argument(
+        "--meta",
+        action="append",
+        default=[],
+        help="per-shard diagnostics JSON (harbor exit code + log tail)",
+    )
     a.add_argument("--out-json", required=True)
     a.add_argument("--out-md", required=True)
     a.add_argument("--benchmark", default="SWE-bench Pro V2 (HARD-51)")
@@ -432,15 +465,37 @@ def main(argv: list[str] | None = None) -> int:
                 continue
             by_arm.setdefault(str(data.get("arm") or "causal"), []).append(data)
         reports = {arm: merge_arm_reports(rep_list) for arm, rep_list in by_arm.items()}
+        diagnostics: list[dict[str, Any]] = []
+        for mp in args.meta:
+            try:
+                data = json.loads(pathlib.Path(mp).read_text(encoding="utf-8"))
+            except (OSError, ValueError):
+                continue
+            data["source"] = pathlib.Path(mp).name
+            diagnostics.append(data)
+        void_run = all(not r.get("n_reported") for r in reports.values()) if reports else True
         out = {
             "schema": "brain.bench_eval_report.v1",
             "arms": reports,
+            "run_produced_number": not void_run,
             "n_reports_read": len(args.reports),
+            "shard_diagnostics": diagnostics,
             "note": "Resolve decisions come from each task's own verifier inside the "
             "official container image. Merged across shards by task union.",
         }
         pathlib.Path(args.out_json).write_text(json.dumps(out, indent=2, sort_keys=True), encoding="utf-8")
-        pathlib.Path(args.out_md).write_text("\n".join(to_markdown(reports, benchmark=args.benchmark, commit=args.commit)) + "\n", encoding="utf-8")
+        pathlib.Path(args.out_md).write_text(
+            "\n".join(
+                to_markdown(
+                    reports,
+                    benchmark=args.benchmark,
+                    commit=args.commit,
+                    diagnostics=diagnostics,
+                )
+            )
+            + "\n",
+            encoding="utf-8",
+        )
         return 0
 
     return 2

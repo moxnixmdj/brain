@@ -144,11 +144,15 @@ jobs:
             agent_timeout_s="${D_TIMEOUT:-900}"
             commit_results="${D_COMMIT:-true}"
           elif [ -f "$MARKER" ]; then
-            benchmark="$(tr -d '[:space:]' < "$MARKER")"
-            arms=all
-            n_shards=3
-            agent_timeout_s=900
-            commit_results=true
+            # marker format: first non-empty line = mode; further "key=value" lines
+            # may override arms / shards / timeout / commit_results.
+            benchmark="$(awk 'NF && $0 !~ /=/ {print; exit}' "$MARKER")"
+            arms="$(awk -F= '/^arms=/{print $2}' "$MARKER" | head -1)"
+            n_shards="$(awk -F= '/^shards=/{print $2}' "$MARKER" | head -1)"
+            agent_timeout_s="$(awk -F= '/^agent_timeout_s=/{print $2}' "$MARKER" | head -1)"
+            commit_results="$(awk -F= '/^commit_results=/{print $2}' "$MARKER" | head -1)"
+            arms="${arms:-all}"; n_shards="${n_shards:-3}"
+            agent_timeout_s="${agent_timeout_s:-900}"; commit_results="${commit_results:-true}"
           else
             benchmark=none
             arms=all
@@ -156,6 +160,7 @@ jobs:
             agent_timeout_s=900
             commit_results=true
           fi
+          case "$arms" in all|causal-only) ;; *) echo "::error::unknown arms '$arms'"; exit 1 ;; esac
           case "$benchmark" in
             swe-pro-v2-smoke3|swe-pro-v2-hard51|none) ;;
             *) echo "::error::unknown benchmark mode '$benchmark'"; exit 1 ;;
@@ -296,6 +301,9 @@ jobs:
           PYTHONPATH: ${{ github.workspace }}/brain
         run: |
           set -uo pipefail
+          echo "--- harbor CLI surface (for diagnosing usage errors) ---"
+          harbor --help 2>&1 | head -40 || true
+          harbor run --help 2>&1 | head -60 || true
           echo "--- job config ---"
           cat "$W/cfgs/job-$SHARD.yaml"
           echo "--- run ---"
@@ -319,6 +327,21 @@ jobs:
             || echo '{"arm":"'"$ARM"'","error":"COLLECT_FAILED"}' > "$W/out/$ARM-s$SHARD.json"
           cp "$W/store-$ARM-s$SHARD.json" "$W/out/store-snapshot.json" 2>/dev/null || true
           tail -c 150000 "$W/harbor-$ARM-s$SHARD.log" > "$W/out/harbor-tail.log" 2>/dev/null || true
+          # Machine-readable diagnostics: the exit code plus the last lines of the
+          # run, committed with the report, because a green job can still mean
+          # "harbor never started a trial" -- that distinction must be readable.
+          python3 - "$W/out/$ARM-s$SHARD.meta.json" "$(cat "$W/harbor-exit.txt" 2>/dev/null || echo NOFILE)" "$W/harbor-$ARM-s$SHARD.log" <<'DIAG'
+          import json, pathlib, sys
+          out, exit_code, log = sys.argv[1], sys.argv[2], pathlib.Path(sys.argv[3])
+          tail = []
+          if log.is_file():
+              tail = log.read_text(errors="replace").splitlines()[-120:]
+          pathlib.Path(out).write_text(json.dumps({
+              "harbor_exit_code": exit_code,
+              "harbor_log_last_lines": tail,
+              "harbor_log_line_count": len(tail),
+          }, indent=2), encoding="utf-8")
+          DIAG
           echo "--- collected ---"
           head -c 2000 "$W/out/$ARM-s$SHARD.json" || true
 
@@ -367,13 +390,20 @@ jobs:
           else
             args=()
             for f in "${reports[@]}"; do args+=(--reports "$f"); done
+            metas=( $(find dl -name '*.meta.json' -type f 2>/dev/null | sort || true) )
+            meta_args=()
+            for f in "${metas[@]}"; do meta_args+=(--meta "$f"); done
             python -m canonical.eval.harbor.swe_pro_v2_ci aggregate \
-              "${args[@]}" \
+              "${args[@]}" "${meta_args[@]}" \
               --out-json out/report.json --out-md out/report.md \
               --commit "${{ github.sha }}"
           fi
           echo '--- report ---'
           head -80 out/report.md
+          mkdir -p out/diagnostics
+          for f in $(find dl -name '*.meta.json' -o -name 'status.env' 2>/dev/null | sort); do cp "$f" out/diagnostics/ 2>/dev/null || true; done
+          for f in $(find dl -name 'harbor-tail.log' 2>/dev/null | sort); do tail -c 40000 "$f" > "out/diagnostics/$(basename $(dirname "$f"))-$(basename "$f")" 2>/dev/null || true; done
+          ls out/diagnostics 2>/dev/null | head -20 || true
 
       - name: Commit results to this branch
         if: ${{ needs.swe-mode.outputs.commit_results == 'true' && env.RUN_FAILED != 'true' }}
@@ -384,6 +414,8 @@ jobs:
           dir="canonical/eval/results/swe-bench-pro-v2"
           mkdir -p "$dir"
           mode="${{ needs.swe-mode.outputs.benchmark }}"
+          mkdir -p "$dir/diagnostics"
+          cp -r out/diagnostics/. "$dir/diagnostics/" 2>/dev/null || true
           for ext in json md; do
             cp "out/report.$ext" "$dir/$mode-$ts.$ext"
             cp "out/report.$ext" "$dir/$mode-latest.$ext"

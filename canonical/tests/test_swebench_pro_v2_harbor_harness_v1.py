@@ -262,6 +262,12 @@ def test_collect_and_aggregate_read_only_real_harbor_artifacts() -> None:
         )
         assert "`oracle_gate_pass`: **FAIL**" in md
         assert "`nop_gate_pass`: **PASS**" in md
+    assert "NO TRIAL DATA" not in md  # there IS trial data here
+
+    # A run where no shard produced a result.json must shout, not print 0/N quietly.
+    empty = CI.merge_arm_reports([])
+    md2 = "\n".join(CI.to_markdown({"causal": empty}, benchmark="B", commit="x"))
+    assert "NO TRIAL DATA — THIS RUN PRODUCED NO BENCHMARK NUMBER" in md2
 def test_aggregate_merges_shard_reports_by_task_union() -> None:
     shard0 = {
         "arm": "causal",
