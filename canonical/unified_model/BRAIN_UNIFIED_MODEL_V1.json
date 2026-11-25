@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "946a4ec7247b9e5d506fda6b44856eafc9b00c5c54eb3119d06e907a642097ba"
+  "value": "0cc85b3615572c2c9a7072e9b7725ef71261c286f183f9db06c3728d3a72fa63"
  },
  "engines": [
   {
@@ -175317,7 +175317,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAPABILITY_CONSOLIDATION_AUDIT_20261125_V1.json",
    "schema": "CAPABILITY_CONSOLIDATION_AUDIT_V1",
-   "sha256": "0c1534fa1336ee63b1a98727abcdbb6bdb05e7ff4fb792a08657ea0bd9d481d4",
+   "sha256": "3bcab166ac12b471fc3eadf930f5bed7e9b8fb2baa21d147aa975b5e64f49abb",
    "status": "",
    "terms": {
     "20261125": 1,
@@ -288892,7 +288892,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "e193bb0b03195cfd632be17ef63a9e7df6b7ea67c71369f23026d0b546e4b6fd",
+   "sha256": "77f9a364faa634f11de653b6fecff2aeb756a4a6910de8e959223f5fe0f0f237",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [

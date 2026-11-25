@@ -266,6 +266,50 @@ def audit_swe_consolidation(root: pathlib.Path) -> dict[str, Any]:
     }
 
 
+def audit_unified_front_door_spines(root: pathlib.Path) -> dict[str, Any]:
+    """Audit all six front-door canonical spines (`0D`..`0I`) wired into ``brain_unified_model_v1``."""
+    fd_path = root / "canonical/runtime/brain_unified_model_v1.py"
+    fd_text = fd_path.read_text(encoding="utf-8", errors="replace") if fd_path.is_file() else ""
+    spines = [
+        ("0D", "canonical.swe_kernel.canonical_swe_spine_v1", "swe_repo_task"),
+        ("0E", "canonical.swe_kernel.canonical_env_discovery_spine_v1", "env_discovery_task"),
+        ("0F", "canonical.swe_kernel.canonical_cu_sandbox_spine_v1", "cu_sandbox_task"),
+        ("0G", "canonical.swe_kernel.canonical_memory_crystallizer_v1", "memory_bus_op"),
+        ("0H", "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1", "oracle_vericoding_task"),
+        ("0I", "canonical.swe_kernel.canonical_boundary_router_v1", "boundary_route_task"),
+    ]
+    rows: list[dict[str, Any]] = []
+    wired_ok = 0
+    for slot, mod_name, dispatch_key in spines:
+        imported = False
+        err = ""
+        try:
+            importlib.import_module(mod_name)
+            imported = True
+        except Exception as exc:
+            err = f"{type(exc).__name__}: {exc}"
+        short_mod = mod_name.rsplit(".", 1)[-1]
+        wired = (short_mod in fd_text) and (dispatch_key in fd_text)
+        if imported and wired:
+            wired_ok += 1
+        rows.append(
+            {
+                "slot": slot,
+                "module": mod_name,
+                "dispatch_key": dispatch_key,
+                "imported": imported,
+                "wired_in_front_door": wired,
+                "error": err or None,
+            }
+        )
+    return {
+        "spines_total": len(spines),
+        "spines_wired_and_importable": wired_ok,
+        "all_spines_live": wired_ok == len(spines),
+        "spines": rows,
+    }
+
+
 def audit_quarantined_receipts(root: pathlib.Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for item in QUARANTINED_RECEIPTS:
@@ -281,6 +325,7 @@ def run_audit(root: pathlib.Path | None = None) -> dict[str, Any]:
     coq = audit_coq_certificates(base)
     registry = audit_unified_model_registry(base)
     swe = audit_swe_consolidation(base)
+    spines = audit_unified_front_door_spines(base)
     quarantine = audit_quarantined_receipts(base)
 
     return {
@@ -293,6 +338,7 @@ def run_audit(root: pathlib.Path | None = None) -> dict[str, Any]:
         "coq_formal_certificates": coq,
         "unified_model_registry_truth": registry,
         "swe_kernel_consolidation": swe,
+        "unified_front_door_spines": spines,
         "quarantined_receipts": quarantine,
     }
 

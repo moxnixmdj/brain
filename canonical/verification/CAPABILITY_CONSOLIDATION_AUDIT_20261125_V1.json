@@ -8,7 +8,7 @@
     "total_loc": 2311,
     "zero_admitted": true
   },
-  "elapsed_s": 0.2718,
+  "elapsed_s": 0.3483,
   "incremental_spend_usd": 0.0,
   "model_calls": 0,
   "quarantined_receipts": [
@@ -208,6 +208,61 @@
     "sandbox_measured_count": 11,
     "specs_total": 11,
     "stale_count": 0
+  },
+  "unified_front_door_spines": {
+    "all_spines_live": true,
+    "spines": [
+      {
+        "dispatch_key": "swe_repo_task",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_swe_spine_v1",
+        "slot": "0D",
+        "wired_in_front_door": true
+      },
+      {
+        "dispatch_key": "env_discovery_task",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_env_discovery_spine_v1",
+        "slot": "0E",
+        "wired_in_front_door": true
+      },
+      {
+        "dispatch_key": "cu_sandbox_task",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_cu_sandbox_spine_v1",
+        "slot": "0F",
+        "wired_in_front_door": true
+      },
+      {
+        "dispatch_key": "memory_bus_op",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_memory_crystallizer_v1",
+        "slot": "0G",
+        "wired_in_front_door": true
+      },
+      {
+        "dispatch_key": "oracle_vericoding_task",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_oracle_vericoding_spine_v1",
+        "slot": "0H",
+        "wired_in_front_door": true
+      },
+      {
+        "dispatch_key": "boundary_route_task",
+        "error": null,
+        "imported": true,
+        "module": "canonical.swe_kernel.canonical_boundary_router_v1",
+        "slot": "0I",
+        "wired_in_front_door": true
+      }
+    ],
+    "spines_total": 6,
+    "spines_wired_and_importable": 6
   },
   "unified_model_registry_truth": {
     "brain_owned_executable_bound_count": 73,

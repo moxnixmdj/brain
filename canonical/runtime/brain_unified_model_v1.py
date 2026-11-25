@@ -330,6 +330,8 @@ class UnifiedModel:
         self._knowledge_df_cache: dict[str, int] | None = None
         self._knowledge_lengths_cache: list[int] | None = None
         self._avg_length_cache: float | None = None
+        self._memory_bus: Any = None
+        self._boundary_router: Any = None
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
@@ -1207,6 +1209,34 @@ class UnifiedModel:
                 **swe_spec,
             )
 
+        # 0E. Canonical Environment Discovery & Conflict-Aware Automata Spine (`canonical_env_discovery_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("env_discovery_task"), Mapping):
+            env_spec = dict(inputs["env_discovery_task"])
+            return self.discover_environment(goal=goal, **env_spec)
+
+        # 0F. Canonical Speculative CoW Rollback & Code-over-GUI Spine (`canonical_cu_sandbox_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("cu_sandbox_task"), Mapping):
+            cu_spec = dict(inputs["cu_sandbox_task"])
+            return self.execute_speculative(goal=goal, **cu_spec)
+
+        # 0G. Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`canonical_memory_crystallizer_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("memory_bus_op"), Mapping):
+            mem_spec = dict(inputs["memory_bus_op"])
+            op_name = str(mem_spec.pop("operation", "STATS"))
+            payload = mem_spec.pop("payload", mem_spec)
+            return self.memory_operation(op_name, payload=payload, goal=goal)
+
+        # 0H. Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding (`canonical_oracle_vericoding_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("oracle_vericoding_task"), Mapping):
+            ov_spec = dict(inputs["oracle_vericoding_task"])
+            return self.audit_oracle_and_vericoding(goal=goal, **ov_spec)
+
+        # 0I. Canonical BoundaryRouter (Tier-0 Reflex -> Tier-1 Zero-Model Spines -> Tier-2 Gated Proposer)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("boundary_route_task"), Mapping):
+            br_spec = dict(inputs["boundary_route_task"])
+            kind = str(br_spec.pop("kind", "swe_repair"))
+            return self.route_with_boundary(kind, goal=goal, **br_spec)
+
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
         if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
@@ -1618,6 +1648,113 @@ class UnifiedModel:
             **{"pass": passed},
             reason=None if passed else str(res.get("reason") or "SWE_SPINE_UNSOLVED"),
             canonical_swe_spine=res,
+        )
+
+    @property
+    def memory_bus(self) -> Any:
+        """Lazy 5-timescale verification-first memory bus (`0G`) attached to this UnifiedModel."""
+        if self._memory_bus is None:
+            from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+            self._memory_bus = mem_spine.VerificationFirstMemoryBus()
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Lazy Tier-0 -> Tier-1 -> Tier-2 compounding BoundaryRouter (`0I`) sharing ``self.memory_bus``."""
+        if self._boundary_router is None:
+            from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+            self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+        return self._boundary_router
+
+    def discover_environment(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated zero-shot environment discovery & C3AL automata spine (`0E`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        res = env_spine.discover_environment(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="DISCOVER_ENVIRONMENT",
+            goal=goal or "discover_environment",
+            status=str(res.get("status") or ("PASS__ENVIRONMENT_DISCOVERED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ENV_DISCOVERY_INCOMPLETE"),
+            env_discovery=res,
+        )
+
+    def execute_speculative(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated CoW rollback sandbox & Code-over-GUI spine (`0F`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        res = cu_spine.execute_speculative_computer_task(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="EXECUTE_SPECULATIVE_CU",
+            goal=goal or "execute_speculative_cu",
+            status=str(res.get("status") or ("PASS__SPECULATIVE_COW_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "CU_SANDBOX_UNSOLVED"),
+            cu_sandbox=res,
+        )
+
+    def memory_operation(
+        self,
+        operation: str,
+        *,
+        payload: Mapping[str, Any] | None = None,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Execute a verified memory, crystallization, sleep-consolidation, or O(1) forgetting op (`0G`)."""
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+        res = mem_spine.execute_memory_operation(self.memory_bus, operation, payload)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="MEMORY_BUS_OP",
+            goal=goal or f"memory:{operation}",
+            status=str(res.get("status") or ("PASS__MEMORY_OP" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "MEMORY_OP_FAILED"),
+            memory_result=res,
+        )
+
+    def audit_oracle_and_vericoding(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run dual-channel goal-negation oracle auditing & Coq formal certificate verification (`0H`)."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+        res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="AUDIT_ORACLE_AND_VERICODING",
+            goal=goal or "audit_oracle_and_vericoding",
+            status=str(res.get("status") or ("PASS__ORACLE_AND_VERICODING_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ORACLE_VERICODING_REJECTED"),
+            oracle_vericoding=res,
+        )
+
+    def route_with_boundary(self, kind: str, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`)."""
+        k = str(kind or "swe_repair").lower().strip()
+        if k == "swe_repair":
+            res = self.boundary_router.route_swe_repair(**kwargs)
+        elif k == "env_goal":
+            res = self.boundary_router.route_env_goal(**kwargs)
+        elif k == "cu_task":
+            res = self.boundary_router.route_cu_task(**kwargs)
+        elif k == "status":
+            res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_BOUNDARY_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="BOUNDARY_ROUTER",
+            goal=goal or f"boundary:{k}",
+            status=str(res.get("status") or ("PASS__BOUNDARY_ROUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
+            boundary_route=res,
         )
 
 
