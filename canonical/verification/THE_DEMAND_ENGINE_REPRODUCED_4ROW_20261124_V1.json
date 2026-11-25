@@ -1,0 +1,197 @@
+{
+ "schema": "BRAIN_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "LEARN_THE_DEMAND_FROM_THE_RUN",
+ "declared_before_the_runs": {
+  "L1": "candidate predicates are computed from probed guard values and pass/fail runs; the human edit is used only as a control on the judge",
+  "L2": "every counted row has a real failing test and an accepted control on its project's own suite",
+  "L3": "at most 4 compiled predicates are judged per row; each is selected by a pass/fail separation score, not by trying it against the hidden suite",
+  "L4": "at least one row missed by the fixed is-not-None engine becomes VERIFIED with exact witness footprint and 0 broken tests",
+  "L5": "zero model calls, zero stored parameters, zero network calls at run time"
+ },
+ "verdict": {
+  "L1_inputs_only": true,
+  "L2_real_witness_and_control": 3,
+  "L3_candidate_cap": true,
+  "L4_new_repair": 3,
+  "L5_zeros": true
+ },
+ "all_criteria_met": true,
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef5104675d96b427858063a638774484",
+   "test": "tests/test_packaging.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+   ],
+   "baseline_verdicts": 22,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+     "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+    ]
+   },
+   "guard_sites": 9,
+   "observations": 152,
+   "learned": [
+    {
+     "line": 104,
+     "text": "name != \"__version_info__\"",
+     "feature": "lhs_ne:'__version__'",
+     "polarity": true,
+     "gain": 2,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 104,
+    "col": 11,
+    "text": "name != \"__version_info__\"",
+    "feature": "lhs_ne:'__version__'",
+    "polarity": true,
+    "gain": 2,
+    "fail_matches": 2,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "((name != \"__version_info__\") and (name != '__version__'))",
+    "observed_value": "True"
+   },
+   "replacement": "((name != \"__version_info__\") and (name != '__version__'))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+   ],
+   "seconds": 6.11
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+   "test": "tests/test_more.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "tests/test_more.py::LastTests::test_reversed_is_none"
+   ],
+   "baseline_verdicts": 544,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "tests/test_more.py::LastTests::test_reversed_is_none"
+    ]
+   },
+   "guard_sites": 307,
+   "observations": 3310,
+   "learned": [
+    {
+     "line": 286,
+     "text": "hasattr(iterable, '__reversed__')",
+     "feature": "getattr_truthy",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 286,
+    "col": 11,
+    "text": "hasattr(iterable, '__reversed__')",
+    "feature": "getattr_truthy",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "bool(getattr(iterable, '__reversed__', None))",
+    "observed_value": "True"
+   },
+   "replacement": "bool(getattr(iterable, '__reversed__', None))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_more.py::LastTests::test_reversed_is_none"
+   ],
+   "seconds": 15.45
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+   "test": "testing/test_pluginmanager.py",
+   "parameters_stored": 0,
+   "failing_tests": [
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]",
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]"
+   ],
+   "baseline_verdicts": 75,
+   "control": {
+    "accepted": true,
+    "reason": "VERIFIED",
+    "flipped": [
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]",
+     "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
+    ]
+   },
+   "guard_sites": 58,
+   "observations": 13216,
+   "learned": [
+    {
+     "line": 502,
+     "text": "self.get_plugin(ep.name)",
+     "feature": "is_none",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 0,
+     "observed_value": "<test_pluginmanager.test_load_setuptools_instantiation.<locals>.EntryPoint.load.<locals>.PseudoPlugin object at 0x7f6a70"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 502,
+    "col": 23,
+    "text": "self.get_plugin(ep.name)",
+    "feature": "is_none",
+    "polarity": false,
+    "gain": 2,
+    "fail_matches": 2,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -1,
+    "compiled": null,
+    "observed_value": "<test_pluginmanager.test_load_setuptools_instantiation.<locals>.EntryPoint.load.<locals>.PseudoPlugin object at 0x7f6a70"
+   },
+   "replacement": "not (((self.get_plugin(ep.name)) is None))",
+   "attempts": 1,
+   "flipped": [
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]",
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
+   ],
+   "seconds": 6.83
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+   "test": "tests/test_routing.py",
+   "parameters_stored": 0,
+   "stage": "NO_ORACLE",
+   "reason": "empty verdicts or timeout on the parent suite",
+   "seconds": 0.88
+  }
+ ],
+ "seconds": 29.3,
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ }
+}

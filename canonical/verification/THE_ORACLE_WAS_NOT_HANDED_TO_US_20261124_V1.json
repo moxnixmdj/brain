@@ -1,0 +1,493 @@
+{
+ "schema": "THE_ORACLE_WAS_NOT_HANDED_TO_US_V1",
+ "question": "of the 45 real fix commits, on how many does the parent already carry a failing test?",
+ "counts": {
+  "ORACLE_ABSENT": 1,
+  "ORACLE_ALREADY_RED": 2,
+  "ORACLE_GREEN": 5,
+  "ORACLE_NEW_TEST_CASE": 37
+ },
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a7",
+   "test": "tests/test_annotations.py",
+   "failing_named": 1,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 0,
+   "failed": 1,
+   "errors": 0,
+   "tail": "1 failed in 0.01s",
+   "returncode": 1,
+   "verdict": "ORACLE_ALREADY_RED"
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66",
+   "test": "tests/test_hooks.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Class TestTransformHook>])"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef",
+   "test": "tests/test_packaging.py",
+   "failing_named": 2,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ImportError: cannot import name 'PY310' from 'attr._compat' (/home/user/venv/lib/python3.11/site-packages/attr/_comp"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c5",
+   "test": "tests/test_setattr.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Class TestSetAttr>])"
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f505",
+   "test": "tests/test_options.py",
+   "failing_named": 1,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 1,
+   "failed": 0,
+   "errors": 0,
+   "tail": "1 passed in 0.04s",
+   "returncode": 0,
+   "verdict": "ORACLE_GREEN",
+   "note": "named test exists and passes at parent; the fix changed it"
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154e",
+   "test": "tests/test_types.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Module test_types.py>])"
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd",
+   "test": "tests/test_options.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.06s || (no match in any of [<Module test_options.py>])"
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f60",
+   "test": "tests/test_formatting.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_formatting.py>])"
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913",
+   "test": "tests/test_commands.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_commands.py>])"
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c",
+   "test": "tests/test_defaults.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Module test_defaults.py>])"
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c120",
+   "test": "tests/test_options.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.11s || (no match in any of [<Module test_options.py>])"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2",
+   "test": "tests/test_urlparse.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_urlparse.py>])"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cba",
+   "test": "tests/test_filters.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'jinja2'"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c",
+   "test": "tests/test_regression.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'jinja2'"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618",
+   "test": "tests/test_more.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.07s || (no match in any of [<UnitTestCase SpyTests>])"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d",
+   "test": "tests/test_more.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.16s || (no match in any of [<UnitTestCase AllUniqueTests>])"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb",
+   "test": "tests/test_recipes.py",
+   "failing_named": 1,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 1,
+   "failed": 0,
+   "errors": 0,
+   "tail": "1 passed in 0.02s",
+   "returncode": 0,
+   "verdict": "ORACLE_GREEN",
+   "note": "named test exists and passes at parent; the fix changed it"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f1",
+   "test": "tests/test_more.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.13s || (no match in any of [<UnitTestCase LastTests>])"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2",
+   "test": "tests/test_more.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.07s || (no match in any of [<UnitTestCase SlicedTests>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e50",
+   "test": "tests/test_utils.py",
+   "failing_named": 2,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Module test_utils.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794",
+   "test": "tests/test_direct_url.py",
+   "failing_named": 2,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_direct_url.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d",
+   "test": "tests/test_markers.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.10s || (no match in any of [<Class TestMarker>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f",
+   "test": "tests/test_utils.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Module test_utils.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d916",
+   "test": "tests/test_metadata.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.08s || (no match in any of [<Class TestMetadata>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf",
+   "test": "tests/test_utils.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.02s || (no match in any of [<Module test_utils.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6",
+   "test": "tests/test_pylock_select.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_pylock_select.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea23",
+   "test": "tests/test_utils.py",
+   "failing_named": 2,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_utils.py>])"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e91",
+   "test": "tests/test_requirements.py",
+   "failing_named": 3,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 3,
+   "failed": 0,
+   "errors": 0,
+   "tail": "3 passed in 0.09s",
+   "returncode": 0,
+   "verdict": "ORACLE_GREEN",
+   "note": "named test exists and passes at parent; the fix changed it"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299",
+   "test": "testing/test_pluginmanager.py",
+   "failing_named": 1,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 1,
+   "failed": 0,
+   "errors": 0,
+   "tail": "1 passed in 0.01s",
+   "returncode": 0,
+   "verdict": "ORACLE_GREEN",
+   "note": "named test exists and passes at parent; the fix changed it"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca1",
+   "test": "testing/test_details.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.03s || (no match in any of [<Module test_details.py>])"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490",
+   "test": "testing/test_pluginmanager.py",
+   "failing_named": 2,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.07s || (no match in any of [<Module test_pluginmanager.py>])"
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed3",
+   "test": "tests/middleware/test_cors.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.09s || (no match in any of [<Module test_cors.py>])"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83b",
+   "test": "tests/py37_asyncio.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "========================== 1 test collected in 0.12s =========================== || "
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4",
+   "test": "tests/tests_tqdm.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "========================== 1 test collected in 0.13s =========================== || "
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a66",
+   "test": "test/with_dummyserver/test_socketlevel.py",
+   "failing_named": 2,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 1,
+   "failed": 0,
+   "errors": 1,
+   "tail": "1 passed, 1 warning, 1 error in 0.04s",
+   "returncode": 1,
+   "verdict": "ORACLE_GREEN",
+   "note": "named test exists and passes at parent; the fix changed it"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0",
+   "test": "test/test_retry.py",
+   "failing_named": 1,
+   "collectable_at_parent": true,
+   "timed_out": false,
+   "passed": 0,
+   "failed": 1,
+   "errors": 0,
+   "tail": "1 failed in 0.01s",
+   "returncode": 1,
+   "verdict": "ORACLE_ALREADY_RED"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2",
+   "test": "test/test_util.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected in 0.05s || (no match in any of [<Class TestUtil>])"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465",
+   "test": "tests/test_test.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected, 1 error in 0.08s || ERROR: found no collectors for /tmp/tmp579tkiw8/wt/tests/test_test.py::test_redirects_are_tracked"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196c",
+   "test": "tests/test_security.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'werkzeug'"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd71679",
+   "test": "tests/test_local.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'werkzeug'"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffd",
+   "test": "tests/test_routing.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'werkzeug'"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21",
+   "test": "tests/test_security.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": "no tests collected, 1 error in 0.03s || ERROR: found no collectors for /tmp/tmpyidisrw9/wt/tests/test_security.py::test_pbkdf2"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b462",
+   "test": "tests/test_http.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'werkzeug'"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b977797",
+   "test": "tests/test_useragents.py",
+   "failing_named": 2,
+   "verdict": "ORACLE_ABSENT",
+   "note": "the fix introduced this test file; the parent has no oracle"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65b",
+   "test": "tests/test_routing.py",
+   "failing_named": 1,
+   "collectable_at_parent": false,
+   "verdict": "ORACLE_NEW_TEST_CASE",
+   "note": "test file exists at parent but these node ids do not: the fix introduced them",
+   "probe_tail": " || E   ModuleNotFoundError: No module named 'werkzeug'"
+  }
+ ]
+}
