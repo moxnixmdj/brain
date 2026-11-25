@@ -397,7 +397,13 @@ def lower_source_to_uir(
         uir_nodes: list[UIRNode] = []
         calls: list[tuple[str, int]] = []
         null_guarded_vars: set[str] = set()
+        scoped_null_guards: list[tuple[str, int, int]] = []
         nonzero_guarded_vars: set[str] = set()
+
+        def _is_null_dominated(expr: str, ln: int) -> bool:
+            if expr in null_guarded_vars:
+                return True
+            return any(g_expr == expr and gs <= ln <= ge for g_expr, gs, ge in scoped_null_guards)
 
         # Pass 1: collect calls, guards, loops, exception boundaries
         for sub in _walk_ts(body_node):
@@ -425,15 +431,32 @@ def lower_source_to_uir(
                         stripped_cond = stripped_cond[1:-1].strip()
                     cond_ids = _extract_identifiers(source_bytes, cond_node)
                     sub_txt = _node_text(source_bytes, sub)
-                    has_early_exit = bool(re.search(r"\b(?:return|break|continue|raise|throw)\b", sub_txt))
+                    has_early_exit = bool(re.search(r"\b(?:return|break|continue|raise|throw|goto)\b", sub_txt))
 
                     if _NULL_CHECK_RE.search(stripped_cond) or (
                         norm_lang == "cpp" and re.match(r"^!\s*[A-Za-z_][\w\.\->]*$", stripped_cond)
                     ):
                         guard_kind = "EXISTENCE_CHECK"
-                        for cid in cond_ids:
-                            if cid not in {"NULL", "nullptr", "None", "null", "undefined", "nil"}:
-                                null_guarded_vars.add(cid)
+                        null_exprs: list[str] = []
+                        for m_ne in re.finditer(
+                            r"(?:([A-Za-z_][\w\.\->]*)\s*(?:==|!=|===|!==|\bis\s+not\b|\bis\b)\s*(?:NULL|nullptr|None|null|undefined)\b"
+                            r"|\b(?:NULL|nullptr|None|null|undefined)\s*(?:==|!=|===|!==)\s*([A-Za-z_][\w\.\->]*)"
+                            r"|!\s*\(?\s*([A-Za-z_][\w\.\->]*)\s*\)?)",
+                            stripped_cond,
+                        ):
+                            g_ex = (m_ne.group(1) or m_ne.group(2) or m_ne.group(3) or "").strip()
+                            if g_ex and g_ex not in {"NULL", "nullptr", "None", "null", "undefined", "nil"}:
+                                null_exprs.append(g_ex)
+                        if not null_exprs:
+                            null_exprs = [
+                                cid for cid in cond_ids
+                                if cid not in {"NULL", "nullptr", "None", "null", "undefined", "nil"}
+                            ]
+                        for g_ex in null_exprs:
+                            if has_early_exit:
+                                null_guarded_vars.add(g_ex)
+                            else:
+                                scoped_null_guards.append((g_ex, st_line, en_line))
                     elif re.match(r"^(?:not\s+|!\s*)?[A-Za-z_][\w\.]*$", stripped_cond):
                         guard_kind = "TRUTHINESS_CHECK"
                         if has_early_exit and norm_lang in {"cpp", "javascript", "typescript"}:
@@ -566,7 +589,7 @@ def lower_source_to_uir(
                             roles={
                                 "base_var": base_var,
                                 "deref_op": "INDEX",
-                                "dominated_by_null_guard": base_var in null_guarded_vars,
+                                "dominated_by_null_guard": _is_null_dominated(base_var, st_line),
                                 "default_return": default_ret,
                             },
                         )
@@ -586,7 +609,24 @@ def lower_source_to_uir(
                                 roles={
                                     "base_var": base_var,
                                     "deref_op": "ARROW",
-                                    "dominated_by_null_guard": base_var in null_guarded_vars,
+                                    "dominated_by_null_guard": _is_null_dominated(base_var, st_line),
+                                    "default_return": default_ret,
+                                },
+                            )
+                        )
+                    prefix_expr = txt.rsplit("->", 1)[0].strip("()* ")
+                    if "->" in prefix_expr and re.match(r"^[A-Za-z_]\w*(?:->[A-Za-z_]\w*)+$", prefix_expr):
+                        uir_nodes.append(
+                            UIRNode(
+                                kind="UIR_DEREF_LOAD",
+                                start_line=st_line,
+                                end_line=en_line,
+                                start_byte=sub.start_byte,
+                                end_byte=sub.end_byte,
+                                roles={
+                                    "base_var": prefix_expr,
+                                    "deref_op": "CHAINED_ARROW",
+                                    "dominated_by_null_guard": _is_null_dominated(prefix_expr, st_line),
                                     "default_return": default_ret,
                                 },
                             )
@@ -604,7 +644,7 @@ def lower_source_to_uir(
                                 roles={
                                     "base_var": base_var,
                                     "deref_op": "STAR",
-                                    "dominated_by_null_guard": base_var in null_guarded_vars,
+                                    "dominated_by_null_guard": _is_null_dominated(base_var, st_line),
                                     "default_return": default_ret,
                                 },
                             )
@@ -1204,6 +1244,12 @@ class SemanticCausalLawStore:
         results: list[tuple[SemanticCausalLaw, bytes, str]] = []
 
         for law in self.laws:
+            if (
+                target_func_name is None
+                and law.precondition_signature.get("entry_anchored")
+                and len(u_fns) > 12
+            ):
+                continue
             for ufn in u_fns:
                 if target_func_name and ufn.name != target_func_name:
                     continue
@@ -1261,36 +1307,93 @@ def compile_law_to_function(
         law.defect_uir_kind == "UIR_DEREF_LOAD"
         and law.transform_operator == "INSERT_DOMINATING_NULL_GUARD"
     ):
-        seen_vars: set[str] = set()
+        body_entry_idx = max(0, ufn.start_line - 1)
+        body_indent = "    "
+        fn_body_txt = "".join(lines[max(0, ufn.start_line - 1) : min(len(lines), ufn.end_line)])
+        cleanup_labels = list(dict.fromkeys(re.findall(r"\bgoto\s+([A-Za-z_]\w*)\s*;", fn_body_txt)))
+        if language != "python":
+            for scan_i in range(max(0, ufn.start_line - 1), min(len(lines), ufn.end_line)):
+                if "{" in lines[scan_i]:
+                    body_entry_idx = min(len(lines), scan_i + 1)
+                    while body_entry_idx < min(len(lines), ufn.end_line):
+                        dl = lines[body_entry_idx].strip()
+                        if not dl or dl.startswith(("/*", "*", "//")):
+                            body_entry_idx += 1
+                            continue
+                        if (
+                            language == "cpp"
+                            and dl.endswith(";")
+                            and "->" not in dl
+                            and not dl.startswith(("return", "if", "for", "while", "switch", "goto"))
+                            and re.match(r"^(?:const\s+|unsigned\s+|signed\s+|struct\s+)*[A-Za-z_]\w*[\s\*]+[A-Za-z_]\w*\s*(?:=\s*[^;]+)?;$", dl)
+                        ):
+                            body_entry_idx += 1
+                            continue
+                        break
+                    if body_entry_idx < len(lines):
+                        m_ind = re.match(r"^\s*", lines[body_entry_idx])
+                        if m_ind and m_ind.group(0).strip("\r\n"):
+                            body_indent = m_ind.group(0)
+                    break
+
+        seen_sites: set[tuple[str, int]] = set()
+        seen_params: set[str] = set()
         for node in ufn.nodes:
             if node.kind == "UIR_DEREF_LOAD" and not node.roles.get("dominated_by_null_guard"):
                 base_var = str(node.roles.get("base_var") or "")
-                if not base_var or base_var in seen_vars:
+                deref_op = str(node.roles.get("deref_op") or "")
+                is_param = base_var in ufn.params
+                if not base_var:
                     continue
-                seen_vars.add(base_var)
-                ret_expr = str(node.roles.get("default_return") or ufn.return_hint)
-                line_idx = node.start_line - 1
-                if 0 <= line_idx < len(lines):
-                    indent = re.match(r"^\s*", lines[line_idx]).group(0)
-                    if language == "cpp":
-                        ret_stmt = f"return {ret_expr};" if ret_expr != "" else "return;"
-                        guard_line = f"{indent}if ({base_var} == NULL) {{ {ret_stmt} }}\n"
-                    elif language == "python":
-                        guard_line = f"{indent}if {base_var} is None:\n{indent}    return {ret_expr}\n"
-                    elif language in {"javascript", "typescript"}:
-                        guard_line = f"{indent}if ({base_var} === null || {base_var} === undefined) {{ return {ret_expr}; }}\n"
-                    elif language == "go":
-                        guard_line = f"{indent}if {base_var} == nil {{ return {ret_expr} }}\n"
-                    else:
+                if is_param:
+                    if base_var in seen_params:
                         continue
-                    new_lines = list(lines)
-                    new_lines.insert(line_idx, guard_line)
-                    out.append(
-                        (
-                            "".join(new_lines).encode("utf-8"),
-                            f"UIR[{law.law_id}]: insert null/None existence guard for `{base_var}`",
-                        )
+                    seen_params.add(base_var)
+                line_idx = body_entry_idx if (is_param and language != "python") else (node.start_line - 1)
+                if (base_var, line_idx) in seen_sites or not (0 <= line_idx < len(lines)):
+                    continue
+                seen_sites.add((base_var, line_idx))
+                indent = body_indent if (is_param and language != "python") else re.match(r"^\s*", lines[line_idx]).group(0)
+                ret_expr = str(node.roles.get("default_return") or ufn.return_hint)
+                if language == "cpp":
+                    if deref_op == "CHAINED_ARROW" or ("->" in base_var and not lines[line_idx].lstrip().startswith("return")):
+                        stmt_s = lines[line_idx].strip()
+                        if stmt_s.endswith(";"):
+                            wrapped = list(lines)
+                            wrapped[line_idx] = f"{indent}if ({base_var} != NULL) {{ {stmt_s} }}\n"
+                            out.append(("".join(wrapped).encode("utf-8"), f"UIR[{law.law_id}]: conditional null guard for `{base_var}`"))
+                    for lbl in cleanup_labels[:1]:
+                        if not is_param:
+                            g_goto = list(lines)
+                            g_goto.insert(line_idx, f"{indent}if ({base_var} == NULL) {{ goto {lbl}; }}\n")
+                            out.append(("".join(g_goto).encode("utf-8"), f"UIR[{law.law_id}]: cleanup goto guard for `{base_var}`"))
+                    ret_cands = [ret_expr]
+                    if "nan" in ret_expr.lower() or "0.0" in ret_expr:
+                        for extra_rc in ["(double)0", "0"] + [p for p in ufn.params if p != base_var][:1]:
+                            if extra_rc not in ret_cands:
+                                ret_cands.append(extra_rc)
+                    for rc in ret_cands:
+                        ret_stmt = f"return {rc};" if rc != "" else "return;"
+                        new_lines = list(lines)
+                        new_lines.insert(line_idx, f"{indent}if ({base_var} == NULL) {{ {ret_stmt} }}\n")
+                        out.append(("".join(new_lines).encode("utf-8"), f"UIR[{law.law_id}]: insert null existence guard for `{base_var}`"))
+                    continue
+                elif language == "python":
+                    guard_line = f"{indent}if {base_var} is None:\n{indent}    return {ret_expr}\n"
+                elif language in {"javascript", "typescript"}:
+                    guard_line = f"{indent}if ({base_var} === null || {base_var} === undefined) {{ return {ret_expr}; }}\n"
+                elif language == "go":
+                    guard_line = f"{indent}if {base_var} == nil {{ return {ret_expr} }}\n"
+                else:
+                    continue
+                new_lines = list(lines)
+                new_lines.insert(line_idx, guard_line)
+                out.append(
+                    (
+                        "".join(new_lines).encode("utf-8"),
+                        f"UIR[{law.law_id}]: insert null/None existence guard for `{base_var}`",
                     )
+                )
 
     # 3. Truthiness vs Existence disambiguation (`if x:` -> `if x is not None:` / `x !== null && x !== undefined`)
     elif (
@@ -1404,6 +1507,7 @@ _PY_SAFE_GLOBALS: frozenset[str] = frozenset(
         "list", "tuple", "dict", "set", "frozenset", "isinstance", "issubclass",
         "getattr", "hasattr", "setattr", "any", "all", "min", "max", "sum",
         "sorted", "reversed", "enumerate", "zip", "range", "repr", "abs",
+        "iter", "next", "map", "filter", "round",
         "ValueError", "TypeError", "KeyError", "AttributeError", "IndexError",
         "RuntimeError", "OSError", "Exception", "StopIteration",
     }
@@ -1440,7 +1544,13 @@ def _minimal_changed_stmt_slice(
     j1 = changed[0][3]
     j2 = changed[-1][4]
     if i1 == i2:
-        if i1 > 0 and j1 > 0:
+        prev_is_doc = (
+            i1 == 1
+            and isinstance(b_body[0], ast.Expr)
+            and isinstance(b_body[0].value, ast.Constant)
+            and isinstance(b_body[0].value.value, str)
+        )
+        if not prev_is_doc and i1 > 0 and j1 > 0:
             i1 -= 1
             j1 -= 1
         elif i2 < len(b_body) and j2 < len(a_body):
@@ -1503,22 +1613,45 @@ def extract_ast_subtree_morphism(
     b_fns = _index_python_functions(b_tree)
     a_fns = _index_python_functions(a_tree)
     slice_pair: tuple[list[ast.stmt], list[ast.stmt]] | None = None
+    matched_bfn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+    entry_anchored = False
     for key, bfn in b_fns.items():
         afn = a_fns.get(key)
         if afn is not None and ast.dump(bfn) != ast.dump(afn):
             slice_pair = _minimal_changed_stmt_slice(bfn.body, afn.body)
             if slice_pair is not None:
+                matched_bfn = bfn
+                first_exec_idx = (
+                    1
+                    if bfn.body
+                    and isinstance(bfn.body[0], ast.Expr)
+                    and isinstance(bfn.body[0].value, ast.Constant)
+                    and isinstance(bfn.body[0].value.value, str)
+                    else 0
+                )
+                if first_exec_idx < len(bfn.body) and slice_pair[0][0] is bfn.body[first_exec_idx]:
+                    entry_anchored = len(slice_pair[1]) > len(slice_pair[0])
                 break
-    if slice_pair is None:
+    if slice_pair is None or matched_bfn is None:
         return None
 
+    fn_params = [a.arg for a in matched_bfn.args.args if a.arg not in {"self", "cls"}]
+    param_hole_map = {p: f"__HPARAM_{idx}__" for idx, p in enumerate(fn_params)}
+
     b_slice, a_slice = slice_pair
+    b_expr_dumps: set[str] = {
+        ast.dump(sub)
+        for stmt in b_slice
+        for sub in ast.walk(stmt)
+        if _is_liftable_load_expr(sub)
+    }
     a_expr_dumps: set[str] = {
         ast.dump(sub)
         for stmt in a_slice
         for sub in ast.walk(stmt)
         if _is_liftable_load_expr(sub)
     }
+    shared_expr_dumps = b_expr_dumps & a_expr_dumps
 
     expr_hole_map: dict[str, str] = {}
     hole_purity_required: dict[str, bool] = {}
@@ -1527,7 +1660,7 @@ def extract_ast_subtree_morphism(
         def visit(self, node: ast.AST) -> Any:
             if _is_liftable_load_expr(node):
                 d = ast.dump(node)
-                if d in a_expr_dumps:
+                if d in shared_expr_dumps:
                     h = expr_hole_map.get(d)
                     if h is None:
                         h = f"__HEXPR_{len(expr_hole_map)}__"
@@ -1555,6 +1688,8 @@ def extract_ast_subtree_morphism(
                 h = f"__HVAR_{len(var_map)}__"
                 var_map[node.id] = h
                 return ast.Name(id=h, ctx=node.ctx)
+            if node.id in param_hole_map:
+                return ast.Name(id=param_hole_map[node.id], ctx=node.ctx)
             return node
 
         def visit_Attribute(self, node: ast.Attribute) -> ast.AST:
@@ -1589,6 +1724,20 @@ def extract_ast_subtree_morphism(
         if lhs_counts.get(h, 0) != 1 or rhs_counts.get(h, 0) != 1
     )
 
+    used_param_holes = sorted(
+        {
+            n.id
+            for s in a_lifted
+            for n in ast.walk(s)
+            if isinstance(n, ast.Name) and n.id.startswith("__HPARAM_")
+        }
+    )
+    min_param_arity = (
+        max(int(ph.split("_")[3]) + 1 for ph in used_param_holes)
+        if used_param_holes
+        else 0
+    )
+
     # Closedness check (FOREIGN_IDENT_UNBOUND guard)
     assigned_in_rhs = {
         n.id
@@ -1596,7 +1745,7 @@ def extract_ast_subtree_morphism(
         for n in ast.walk(s)
         if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store)
     }
-    bound_holes = set(lhs_counts) | set(var_map.values())
+    bound_holes = set(lhs_counts) | set(var_map.values()) | set(used_param_holes)
     for s in a_lifted:
         for n in ast.walk(s):
             if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load):
@@ -1608,9 +1757,10 @@ def extract_ast_subtree_morphism(
                     return None
 
     # Specificity guard: disallow degenerate single-hole wildcards (e.g. `return __HEXPR_0__`)
+    structural_scope = (b_lifted + a_lifted) if entry_anchored else b_lifted
     structural_nodes = sum(
         1
-        for s in b_lifted
+        for s in structural_scope
         for n in ast.walk(s)
         if isinstance(
             n,
@@ -1629,12 +1779,21 @@ def extract_ast_subtree_morphism(
         for n in ast.walk(s)
         if isinstance(n, ast.Constant) and isinstance(n.value, (str, bytes, int, float))
     }
+    raise_msg_ids = {
+        id(sub)
+        for s in a_lifted
+        for r in ast.walk(s)
+        if isinstance(r, ast.Raise)
+        for sub in ast.walk(r)
+        if isinstance(sub, ast.Constant) and isinstance(sub.value, str)
+    }
     domain_lits = sorted(
         {
             repr(n.value)
             for s in a_lifted
             for n in ast.walk(s)
             if isinstance(n, ast.Constant)
+            and id(n) not in raise_msg_ids
             and isinstance(n.value, (str, bytes, int, float))
             and n.value not in _UNIVERSAL_IDENTITY_LITERALS
             and n.value not in b_consts
@@ -1655,7 +1814,7 @@ def extract_ast_subtree_morphism(
                 mapping[tok] = f"__H_{len(mapping)}__"
             return mapping[tok]
 
-        return re.sub(r"__H(?:EXPR|VAR|ATTR)_\d+__", _repl, pattern_src)
+        return re.sub(r"__H(?:EXPR|VAR|ATTR|PARAM)_\d+__", _repl, pattern_src)
 
     lhs_canon = _alpha_canonicalize(lhs_src)
     rhs_canon = _alpha_canonicalize(rhs_src)
@@ -1665,6 +1824,8 @@ def extract_ast_subtree_morphism(
         "rhs_ast_pattern": rhs_src,
         "lhs_stmt_count": len(b_lifted),
         "rhs_stmt_count": len(a_lifted),
+        "entry_anchored": entry_anchored,
+        "min_param_arity": min_param_arity,
         "pure_only_holes": pure_only_holes,
         "required_domain_literals": domain_lits,
         "effect_contract": {
@@ -1695,13 +1856,15 @@ def _unify_ast_nodes(
         bindings[pat.id] = copy.deepcopy(conc)
         return True
 
-    if isinstance(pat, ast.Name) and pat.id.startswith("__HVAR_"):
+    if isinstance(pat, ast.Name) and (pat.id.startswith("__HVAR_") or pat.id.startswith("__HPARAM_")):
         if not isinstance(conc, ast.Name):
             return False
         prev = bindings.get(pat.id)
         if prev is not None:
             return prev == conc.id
-        if conc.id in {v for k, v in bindings.items() if k.startswith("__HVAR_")}:
+        if pat.id.startswith("__HVAR_") and conc.id in {
+            v for k, v in bindings.items() if k.startswith("__HVAR_")
+        }:
             return False
         bindings[pat.id] = conc.id
         return True
@@ -1751,7 +1914,7 @@ def _instantiate_ast_pattern(rhs_stmts: list[ast.stmt], bindings: dict[str, Any]
         def visit_Name(self, node: ast.Name) -> ast.AST:
             if node.id.startswith("__HEXPR_") and node.id in bindings:
                 return copy.deepcopy(bindings[node.id])
-            if node.id.startswith("__HVAR_") and node.id in bindings:
+            if (node.id.startswith("__HVAR_") or node.id.startswith("__HPARAM_")) and node.id in bindings:
                 return ast.Name(id=str(bindings[node.id]), ctx=node.ctx)
             return node
 
@@ -1802,6 +1965,8 @@ def apply_ast_subtree_morphism(
         return []
 
     pure_only = set(precond.get("pure_only_holes") or [])
+    entry_anchored = bool(precond.get("entry_anchored"))
+    min_arity = int(precond.get("min_param_arity") or 0)
     lines = src_text.splitlines(keepends=True)
     results: list[tuple[bytes, str]] = []
     k_len = len(lhs_stmts)
@@ -1809,12 +1974,30 @@ def apply_ast_subtree_morphism(
     for node in ast.walk(tree):
         if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name != target_func_name:
             continue
-        for body in _iter_stmt_lists(node):
+        tgt_params = [a.arg for a in node.args.args if a.arg not in {"self", "cls"}]
+        if min_arity and len(tgt_params) < min_arity:
+            continue
+        param_seed_bindings = {f"__HPARAM_{p_i}__": p_nm for p_i, p_nm in enumerate(tgt_params)}
+        first_exec_idx = (
+            1
+            if node.body
+            and isinstance(node.body[0], ast.Expr)
+            and isinstance(node.body[0].value, ast.Constant)
+            and isinstance(node.body[0].value.value, str)
+            else 0
+        )
+        candidate_bodies = [node.body] if entry_anchored else _iter_stmt_lists(node)
+        for body in candidate_bodies:
             if len(body) < k_len:
                 continue
-            for idx in range(len(body) - k_len + 1):
+            idx_range = [first_exec_idx] if entry_anchored else list(range(len(body) - k_len + 1))
+            for idx in idx_range:
+                if idx + k_len > len(body):
+                    continue
+                if entry_anchored and isinstance(body[idx], ast.If):
+                    continue
                 window = body[idx : idx + k_len]
-                bindings: dict[str, Any] = {}
+                bindings: dict[str, Any] = dict(param_seed_bindings)
                 ok = True
                 for p_stmt, c_stmt in zip(lhs_stmts, window):
                     if not _unify_ast_nodes(p_stmt, c_stmt, bindings, pure_only):
@@ -1889,7 +2072,9 @@ def lift_verified_diff_to_semantic_law(
         if not transform_op:
             b_unchecked = [n for n in bfn.nodes if n.kind == "UIR_DEREF_LOAD" and not n.roles.get("dominated_by_null_guard")]
             a_unchecked = [n for n in afn.nodes if n.kind == "UIR_DEREF_LOAD" and not n.roles.get("dominated_by_null_guard")]
-            if len(b_unchecked) > len(a_unchecked):
+            b_ex_cnt = sum(1 for n in bfn.nodes if n.kind == "UIR_GUARD" and n.roles.get("guard_kind") == "EXISTENCE_CHECK")
+            a_ex_cnt = sum(1 for n in afn.nodes if n.kind == "UIR_GUARD" and n.roles.get("guard_kind") == "EXISTENCE_CHECK")
+            if len(b_unchecked) > len(a_unchecked) and a_ex_cnt > b_ex_cnt:
                 defect_kind = "UIR_DEREF_LOAD"
                 transform_op = "INSERT_DOMINATING_NULL_GUARD"
                 precond = {"dominated_by_null_guard": False}

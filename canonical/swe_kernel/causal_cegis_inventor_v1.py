@@ -50,6 +50,12 @@ from canonical.swe_kernel.universal_semantic_ir_v1 import (
     lift_verified_diff_to_semantic_law,
     lower_source_to_uir,
 )
+try:
+    from canonical.swe_kernel import whitebox_introspector_and_trace_synthesizer_v1 as wb_synth
+    from canonical.swe_kernel.multistep_repo_closed_loop_solver_v1 import _surgical_span_mutations
+except Exception:
+    wb_synth = None  # type: ignore[assignment]
+    _surgical_span_mutations = None  # type: ignore[assignment]
 
 
 def merge_orthogonal_file_patches(
@@ -630,20 +636,30 @@ class ExecutableMentalModel:
         else:
             cmd = list(self.custom_test_cmd or ["ctest", "--output-on-failure"])
             env = dict(os.environ)
+            env.setdefault("UBSAN_OPTIONS", "print_stacktrace=1:halt_on_error=1")
 
+        import signal
+
+        p_obj = subprocess.Popen(
+            cmd,
+            cwd=self.cow_root,
+            env=env,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdin=subprocess.DEVNULL,
+            start_new_session=True,
+        )
         try:
-            proc = subprocess.run(
-                cmd,
-                cwd=self.cow_root,
-                env=env,
-                capture_output=True,
-                text=True,
-                encoding="utf-8",
-                errors="replace",
-                stdin=subprocess.DEVNULL,
-                timeout=t_limit,
-            )
+            p_out, p_err = p_obj.communicate(timeout=t_limit)
         except subprocess.TimeoutExpired:
+            try:
+                os.killpg(p_obj.pid, signal.SIGKILL)
+            except OSError:
+                p_obj.kill()
+            p_obj.communicate()
             return TestRunVerdict(
                 passed=False,
                 returncode=124,
@@ -654,10 +670,10 @@ class ExecutableMentalModel:
                 elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 2),
             )
 
-        combined = (proc.stdout or "") + "\n" + (proc.stderr or "")
+        combined = (p_out or "") + "\n" + (p_err or "")
         outcomes: dict[str, str] = {}
         if self.language == "python":
-            for line in (proc.stdout or "").splitlines():
+            for line in (p_out or "").splitlines():
                 s = line.strip()
                 m1 = _PYTEST_VERDICT_AFTER.match(s)
                 if m1:
@@ -670,17 +686,17 @@ class ExecutableMentalModel:
         failing = [k for k, v in outcomes.items() if v in {"FAILED", "ERROR", "TIMEOUT"}]
         passing = [k for k, v in outcomes.items() if v == "PASSED"]
         if not outcomes:
-            if proc.returncode == 0:
+            if p_obj.returncode == 0:
                 outcomes["<suite>"] = "PASSED"
                 passing = ["<suite>"]
             else:
                 outcomes["<suite>"] = "FAILED"
                 failing = ["<suite>"]
 
-        passed = proc.returncode == 0 and len(failing) == 0 and len(passing) > 0
+        passed = p_obj.returncode == 0 and len(failing) == 0 and len(passing) > 0
         return TestRunVerdict(
             passed=passed,
-            returncode=proc.returncode,
+            returncode=p_obj.returncode,
             outcomes=outcomes,
             failing_tests=failing,
             passing_tests=passing,
@@ -787,14 +803,16 @@ def _summarize_val(v, depth=0):
 
 class _BrainTracePlugin:
     def pytest_collection_modifyitems(self, items):
-        kept = [it for it in items if it.nodeid in wanted_ids]
-        if kept:
-            items[:] = kept
+        if wanted_ids and not any(w.startswith("<") for w in wanted_ids):
+            kept = [it for it in items if it.nodeid in wanted_ids]
+            if kept:
+                items[:] = kept
 
     @pytest.hookimpl(hookwrapper=True)
     def pytest_runtest_call(self, item):
         nid = item.nodeid
-        if nid not in wanted_ids:
+        trace_all = (not wanted_ids) or any(w.startswith("<") for w in wanted_ids)
+        if not trace_all and nid not in wanted_ids:
             yield
             return
         line_hits = {}
@@ -804,10 +822,12 @@ class _BrainTracePlugin:
         producer_lines = {}
         exceptions_seen = []
         events = [0]
+        aborted_loop = [False]
 
         def _tracer(frame, event, arg):
             if events[0] >= max_events_per_test:
-                return None
+                aborted_loop[0] = True
+                raise TimeoutError("COGS_INFINITE_LOOP_TRACE_LIMIT")
             rel = _is_repo_file(frame.f_code.co_filename)
             if rel is None:
                 return None
@@ -853,8 +873,10 @@ class _BrainTracePlugin:
             return _tracer
 
         sys.settrace(_tracer)
+        call_failed = False
         try:
-            yield
+            outcome = yield
+            call_failed = getattr(outcome, "excinfo", None) is not None
         finally:
             sys.settrace(None)
             traces_by_id[nid] = {
@@ -863,6 +885,7 @@ class _BrainTracePlugin:
                 "frame_samples": frame_samples,
                 "producer_lines": producer_lines,
                 "exceptions_seen": exceptions_seen,
+                "call_failed": bool(call_failed or aborted_loop[0]),
             }
 
 target_args = cfg.get("target_nodeids") or [test_file]
@@ -888,7 +911,7 @@ def _collect_python_traces(
     out_json = mental.pycache_dir / "traces_combined.json"
     if out_json.exists():
         out_json.unlink()
-    test_file = mental.test_target or (failing_tests[0].split("::")[0] if failing_tests else "tests")
+    test_file = mental.test_target or (failing_tests[0].split("::")[0] if failing_tests and not failing_tests[0].startswith("<") else "tests")
     sel_fail = failing_tests[:4]
     sel_pass = passing_tests[:6]
     explicit_ids = [nid for nid in (sel_fail + sel_pass) if nid and not nid.startswith("<")]
@@ -915,6 +938,14 @@ def _collect_python_traces(
         )
         if out_json.exists():
             combined = json.loads(out_json.read_text(encoding="utf-8"))
+            if any(x.startswith("<") for x in sel_fail):
+                disc_fail = [k for k, v in combined.items() if v.get("call_failed")]
+                disc_pass = [k for k, v in combined.items() if not v.get("call_failed")]
+                if disc_fail:
+                    failing_tests[:] = disc_fail
+                    passing_tests[:] = disc_pass
+                    sel_fail = disc_fail[:4]
+                    sel_pass = disc_pass[:6]
             fail_traces = [combined[k] for k in sel_fail if k in combined]
             pass_traces = [combined[k] for k in sel_pass if k in combined]
             return fail_traces, pass_traces
@@ -1643,6 +1674,40 @@ def _z3_proves_inclusive_bound_oob() -> bool:
     return has_oob and fixed_safe
 
 
+def _extract_native_crash_progress(out: str, repo_root: pathlib.Path) -> tuple[int, str, str, int] | None:
+    """Extract monotonic native crash progress `(pass_count, rel_path, fn_name, line_no)`
+    from ASAN/UBSAN/Unity output; returns `None` on compiler failure or timeout."""
+    if not out or out == "TIMEOUT":
+        return None
+    has_sanitizer_or_unity = (
+        "AddressSanitizer" in out
+        or "runtime error:" in out
+        or ":FAIL" in out
+        or ":PASS" in out
+    )
+    if ("error:" in out or "ld returned 1 exit status" in out) and not has_sanitizer_or_unity:
+        return None
+    pass_cnt = len(re.findall(r":PASS\b", out))
+    for m_fr in re.finditer(r"#\d+\s+0x[0-9a-fA-F]+\s+in\s+([A-Za-z_]\w*)\s+([^\s:]+):(\d+)", out):
+        fn_nm, fpath, ln_s = m_fr.group(1), m_fr.group(2), int(m_fr.group(3))
+        if any(tok in fpath for tok in ("asan", "sanitizer", "/usr/", "libc", "unity.c")):
+            continue
+        base_nm = pathlib.Path(fpath).name
+        if "test" in base_nm.lower():
+            continue
+        rel_match = base_nm
+        for cand_p in repo_root.rglob(base_nm):
+            rel_match = cand_p.relative_to(repo_root).as_posix()
+            break
+        return (pass_cnt, rel_match, fn_nm, ln_s)
+    for m_ub in re.finditer(r"([^\s:]+):(\d+):\d+:\s+runtime error:", out):
+        fpath, ln_s = m_ub.group(1), int(m_ub.group(2))
+        base_nm = pathlib.Path(fpath).name
+        if "test" not in base_nm.lower():
+            return (pass_cnt, base_nm, "", ln_s)
+    return (pass_cnt, "", "", 0)
+
+
 def synthesize_polyglot_uir_z3_repairs(
     *,
     source_bytes: bytes,
@@ -1650,6 +1715,7 @@ def synthesize_polyglot_uir_z3_repairs(
     rel_path: str,
     target_func_name: str | None = None,
     cached_u_fns: list[UIRFunction] | None = None,
+    hot_line: int | None = None,
 ) -> list[tuple[bytes, str]]:
     """First-principles cold-start synthesis (with zero stored laws!) over U-IR + Z3."""
     norm_lang = "cpp" if language in {"c", "cpp", "c++"} else language
@@ -1663,18 +1729,41 @@ def synthesize_polyglot_uir_z3_repairs(
         # Locate function body entry line (first line inside `{` for C/JS/Rust, or first statement for Python)
         body_entry_idx = max(0, ufn.start_line - 1)
         body_indent = "    "
+        fn_body_txt = "".join(lines[max(0, ufn.start_line - 1) : min(len(lines), ufn.end_line)])
+        cleanup_labels = list(dict.fromkeys(re.findall(r"\bgoto\s+([A-Za-z_]\w*)\s*;", fn_body_txt)))
         if norm_lang != "python":
             for scan_i in range(max(0, ufn.start_line - 1), min(len(lines), ufn.end_line)):
                 if "{" in lines[scan_i]:
                     body_entry_idx = min(len(lines), scan_i + 1)
+                    while body_entry_idx < min(len(lines), ufn.end_line):
+                        dl = lines[body_entry_idx].strip()
+                        if not dl or dl.startswith(("/*", "*", "//")):
+                            body_entry_idx += 1
+                            continue
+                        if (
+                            norm_lang == "cpp"
+                            and dl.endswith(";")
+                            and "->" not in dl
+                            and not dl.startswith(("return", "if", "for", "while", "switch", "goto"))
+                            and re.match(r"^(?:const\s+|unsigned\s+|signed\s+|struct\s+)*[A-Za-z_]\w*[\s\*]+[A-Za-z_]\w*\s*(?:=\s*[^;]+)?;$", dl)
+                        ):
+                            body_entry_idx += 1
+                            continue
+                        break
                     if body_entry_idx < len(lines):
                         m_ind = re.match(r"^\s*", lines[body_entry_idx])
                         if m_ind and m_ind.group(0).strip("\r\n"):
                             body_indent = m_ind.group(0)
                     break
         emitted_param_guards: set[str] = set()
+        emitted_deref_sites: set[tuple[str, int]] = set()
+        ordered_nodes = (
+            sorted(ufn.nodes, key=lambda nd: abs(nd.start_line - hot_line))
+            if hot_line is not None
+            else list(ufn.nodes)
+        )
 
-        for node in ufn.nodes:
+        for node in ordered_nodes:
             # 1. Z3-backed loop-bound off-by-one repair across C/Python/JS/Rust/Go
             if (
                 node.kind == "UIR_ITER_BOUNDED"
@@ -1697,6 +1786,7 @@ def synthesize_polyglot_uir_z3_repairs(
             # 2. Dominating Null/Existence pre-guard invention across C/Python/JS
             if node.kind == "UIR_DEREF_LOAD" and not node.roles.get("dominated_by_null_guard"):
                 base_var = str(node.roles.get("base_var") or "")
+                deref_op = str(node.roles.get("deref_op") or "")
                 if base_var and (base_var in ufn.params or norm_lang == "cpp"):
                     ret_expr = str(node.roles.get("default_return") or ufn.return_hint)
                     is_param = base_var in ufn.params
@@ -1705,10 +1795,28 @@ def synthesize_polyglot_uir_z3_repairs(
                     if is_param:
                         emitted_param_guards.add(base_var)
                     line_idx = body_entry_idx if (is_param and norm_lang != "python") else (node.start_line - 1)
+                    if (base_var, line_idx) in emitted_deref_sites:
+                        continue
+                    emitted_deref_sites.add((base_var, line_idx))
                     if 0 <= line_idx < len(lines):
                         indent = body_indent if (is_param and norm_lang != "python") else re.match(r"^\s*", lines[line_idx]).group(0)
                         if norm_lang == "cpp":
-                            ret_cands = [ret_expr, "0"] if ("NAN" in ret_expr or "0.0" in ret_expr) else [ret_expr]
+                            if deref_op == "CHAINED_ARROW" or ("->" in base_var and not lines[line_idx].lstrip().startswith("return")):
+                                stmt_s = lines[line_idx].strip()
+                                if stmt_s.endswith(";"):
+                                    wrapped = list(lines)
+                                    wrapped[line_idx] = f"{indent}if ({base_var} != NULL) {{ {stmt_s} }}\n"
+                                    candidates.append(("".join(wrapped).encode("utf-8"), f"Causal conditional null guard in `{ufn.name}` on `{base_var}`"))
+                            for lbl in cleanup_labels[:1]:
+                                if not is_param:
+                                    g_goto = list(lines)
+                                    g_goto.insert(line_idx, f"{indent}if ({base_var} == NULL) {{ goto {lbl}; }}\n")
+                                    candidates.append(("".join(g_goto).encode("utf-8"), f"Causal cleanup-goto null guard in `{ufn.name}` on `{base_var}`"))
+                            ret_cands = [ret_expr]
+                            if "nan" in ret_expr.lower() or "0.0" in ret_expr:
+                                for extra_rc in ["(double)0", "0"] + [p for p in ufn.params if p != base_var][:1]:
+                                    if extra_rc not in ret_cands:
+                                        ret_cands.append(extra_rc)
                             for rc in ret_cands:
                                 ret_stmt = f"return {rc};" if rc != "" else "return;"
                                 guard = f"{indent}if ({base_var} == NULL) {{ {ret_stmt} }}\n"
@@ -1925,23 +2033,33 @@ class CausalCEGISInventor:
 
             # Fast static + traceback anchor extraction BEFORE paying for dynamic trace instrumentation
             fast_anchors: list[tuple[str, int]] = []
-            if test_target and test_target in causal_graph.file_imports:
-                fast_anchors.append((test_target, 1))
             for m_py in re.finditer(r'File "([^"]+)", line (\d+)', baseline.output):
                 fpath = pathlib.Path(m_py.group(1))
                 for known_rel in causal_graph.functions_by_file:
                     if m_py.group(1).endswith(known_rel) or known_rel == fpath.name:
                         fast_anchors.append((known_rel, int(m_py.group(2))))
+            for m_ub in re.finditer(r"([^\s:]+):(\d+):\d+:\s+runtime error:", baseline.output):
+                fpath = pathlib.Path(m_ub.group(1))
+                for known_rel in causal_graph.functions_by_file:
+                    if known_rel.endswith(fpath.name):
+                        fast_anchors.append((known_rel, int(m_ub.group(2))))
             for m in _ASAN_FRAME_RE.finditer(baseline.output):
                 fpath = pathlib.Path(m.group(2))
                 for known_rel in causal_graph.functions_by_file:
                     if known_rel.endswith(fpath.name):
                         fast_anchors.append((known_rel, int(m.group(3))))
+            for m_un in re.finditer(r"([^\s:]+):(\d+):[A-Za-z_]\w*:FAIL\b", baseline.output):
+                fpath = pathlib.Path(m_un.group(1))
+                for known_rel in causal_graph.functions_by_file:
+                    if known_rel.endswith(fpath.name):
+                        fast_anchors.append((known_rel, int(m_un.group(2))))
             for m in _JS_FRAME_RE.finditer(baseline.output):
                 fpath = pathlib.Path(m.group(2))
                 for known_rel in causal_graph.functions_by_file:
                     if known_rel.endswith(fpath.name):
                         fast_anchors.append((known_rel, int(m.group(3))))
+            if not fast_anchors and test_target and test_target in causal_graph.file_imports:
+                fast_anchors.append((test_target, 1))
 
             fast_cuts = causal_graph.trace_backward_causal_slice(fast_anchors[:12], max_hops=3)
             fast_recall_files: list[str] = []
@@ -1964,15 +2082,32 @@ class CausalCEGISInventor:
                     phase1_hint["assertion_literals"] = extract_test_spec_literals(
                         mental.cow_root, baseline.failing_tests
                     )
+                phase1_targets: list[tuple[str, str | None]] = []
+                for cut in fast_cuts[:4]:
+                    if (cut.rel_path, cut.func_name) not in phase1_targets:
+                        phase1_targets.append((cut.rel_path, cut.func_name))
                 for rel_path in fast_recall_files[:8]:
+                    if len(causal_graph.functions_by_file.get(rel_path, ())) <= 12:
+                        if (rel_path, None) not in phase1_targets:
+                            phase1_targets.append((rel_path, None))
+                phase1_sim_cap = max(8, self.sandbox_budget // 3)
+                for rel_path, tgt_fn_p1 in phase1_targets:
+                    if mental.simulations_run >= phase1_sim_cap:
+                        break
                     full_p = repo_root / rel_path
                     if not full_p.is_file():
                         continue
                     orig_bytes = full_p.read_bytes()
                     law_cands = self.law_store.match_and_compile_candidates(
-                        orig_bytes, norm_lang, rel_path=rel_path, runtime_hint=phase1_hint
+                        orig_bytes,
+                        norm_lang,
+                        rel_path=rel_path,
+                        target_func_name=tgt_fn_p1,
+                        runtime_hint=phase1_hint,
                     )
                     for law, patched_bytes, desc in law_cands:
+                        if mental.simulations_run >= phase1_sim_cap:
+                            break
                         mem_eval_total += 1
                         verdict_res = self._verify_and_finalize_patch(
                             mental=mental,
@@ -2189,6 +2324,106 @@ class CausalCEGISInventor:
                 visited_sites: set[tuple[str, int]] = set()
                 per_site_buckets: list[list[tuple[dict[str, str], str, str]]] = []
 
+                # Collect top localized functions `(rel_path, fn_name, firstlineno)` and hot lines
+                loc_fns_ordered: list[tuple[str, str, int]] = []
+                loc_fn_hot_lines: dict[tuple[str, str, int], list[int]] = {}
+                for r_lk, l_lk, _ in combined_ranked[:80]:
+                    if r_lk not in fn_spans_by_file and (repo_root / r_lk).is_file():
+                        st_lk = (repo_root / r_lk).read_text(encoding="utf-8", errors="replace")
+                        spans_lk: list[tuple[int, int, str]] = []
+                        try:
+                            tr_lk = ast.parse(st_lk)
+                            src_cache[r_lk] = (st_lk, tr_lk)
+                            for nd_lk in ast.walk(tr_lk):
+                                if isinstance(nd_lk, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                                    spans_lk.append(
+                                        (nd_lk.lineno, getattr(nd_lk, "end_lineno", nd_lk.lineno), nd_lk.name)
+                                    )
+                        except SyntaxError:
+                            src_cache[r_lk] = (st_lk, None)
+                        fn_spans_by_file[r_lk] = spans_lk
+                    # Pick innermost enclosing function span
+                    enclosing = [
+                        (s_ln, e_ln, fn_nm)
+                        for s_ln, e_ln, fn_nm in fn_spans_by_file.get(r_lk, [])
+                        if s_ln <= l_lk <= e_ln
+                    ]
+                    if enclosing:
+                        s_ln, _, fn_nm = min(enclosing, key=lambda x: x[1] - x[0])
+                        fkey = (r_lk, fn_nm, s_ln)
+                        if fkey not in loc_fn_hot_lines:
+                            loc_fns_ordered.append(fkey)
+                            loc_fn_hot_lines[fkey] = []
+                        if l_lk not in loc_fn_hot_lines[fkey]:
+                            loc_fn_hot_lines[fkey].append(l_lk)
+
+                test_file_paths = sorted(
+                    {
+                        mental.cow_root / t.split("::")[0]
+                        for t in baseline.failing_tests
+                        if t and not t.startswith("<") and (mental.cow_root / t.split("::")[0]).is_file()
+                    }
+                )
+                if not test_file_paths and mental.test_target and (mental.cow_root / mental.test_target).is_file():
+                    test_file_paths = [mental.cow_root / mental.test_target]
+                for p_extra in sorted(mental.cow_root.glob("test_*.py"))[:3]:
+                    if p_extra not in test_file_paths:
+                        test_file_paths.append(p_extra)
+
+                for r_fn, fn_nm, fl_no in loc_fns_ordered[:6]:
+                    fp_fn = repo_root / r_fn
+                    if not fp_fn.is_file():
+                        continue
+                    orig_b_fn = fp_fn.read_bytes()
+                    orig_s_fn = orig_b_fn.decode("utf-8", errors="replace")
+                    if self.law_store.laws:
+                        for law, patched_b_fn, desc_fn in self.law_store.match_and_compile_candidates(
+                            orig_b_fn,
+                            norm_lang,
+                            rel_path=r_fn,
+                            target_func_name=fn_nm,
+                            runtime_hint={"assertion_literals": spec_literals},
+                        ):
+                            mem_eval_total += 1
+                            v_fn_res = self._verify_and_finalize_patch(
+                                mental=mental,
+                                causal_graph=causal_graph,
+                                repo_root=repo_root,
+                                baseline=baseline,
+                                file_patches={r_fn: patched_b_fn.decode("utf-8", errors="replace")},
+                                mechanism=f"SEMANTIC_LAW_RECALL:{law.law_id}",
+                                description=desc_fn,
+                                norm_lang=norm_lang,
+                                mem_eval_total=mem_eval_total,
+                                t0=t0,
+                            )
+                            if v_fn_res is not None:
+                                return v_fn_res
+
+                    fn_bucket: list[tuple[dict[str, str], str, str]] = []
+                    hot_lns = loc_fn_hot_lines[(r_fn, fn_nm, fl_no)]
+                    if wb_synth is not None:
+                        if test_file_paths:
+                            for tag, c_src in wb_synth.test_driven_precondition_guard_candidates(
+                                orig_s_fn, test_file_paths, allowed_functions={fn_nm}, max_candidates=5
+                            ):
+                                mem_eval_total += 1
+                                fn_bucket.append(({r_fn: c_src}, "COGS_REVERSE_PRECONDITION_SYNTHESIS", f"Entry guard `{tag}` in `{fn_nm}`"))
+                        for tag, c_src in wb_synth.algebraic_dual_span_candidates(
+                            orig_s_fn, allowed_functions={fn_nm}, hot_lines=hot_lns, max_candidates=6
+                        ):
+                            mem_eval_total += 1
+                            fn_bucket.append(({r_fn: c_src}, "COGS_ALGEBRAIC_DUAL_MORPHISM", f"Algebraic dual `{tag}` in `{fn_nm}`"))
+                    if _surgical_span_mutations is not None:
+                        for tag, c_src in _surgical_span_mutations(
+                            orig_s_fn, fn_nm, hot_lns, firstlineno=fl_no
+                        )[:10]:
+                            mem_eval_total += 1
+                            fn_bucket.append(({r_fn: c_src}, "COGS_RELATIONAL_BOUNDARY_SYNTHESIS", f"Boundary `{tag}` in `{fn_nm}`"))
+                    if fn_bucket:
+                        fn_prio = -1 if (fn_nm in called_symbols or fn_nm.lower() in called_symbols_lower) else 1
+                        per_site_buckets.append((fn_prio, fn_bucket))  # type: ignore[arg-type]
+
                 for rel_path, line_no, _ in combined_ranked[:110]:
                     if (rel_path, line_no) in visited_sites:
                         continue
@@ -2287,18 +2522,36 @@ class CausalCEGISInventor:
                         if d_idx < len(bucket):
                             single_file_Queue.append(bucket[d_idx])
 
+            base_native_prog = (
+                _extract_native_crash_progress(baseline.output, repo_root)
+                if norm_lang != "python"
+                else None
+            )
+            native_horizon_seeds: list[tuple[dict[str, str], tuple[int, str, str, int], str]] = []
+
             # Polyglot U-IR + Z3 cold-start synthesis across all causal cut files
             for cut in causal_cuts[:10]:
                 full_p = repo_root / cut.rel_path
                 if not full_p.is_file():
                     continue
                 orig_b = full_p.read_bytes()
+                cut_hot_ln = (
+                    base_native_prog[3]
+                    if (
+                        base_native_prog is not None
+                        and base_native_prog[1] == cut.rel_path
+                        and base_native_prog[2] == cut.func_name
+                        and base_native_prog[3] > 0
+                    )
+                    else None
+                )
                 poly_cands = synthesize_polyglot_uir_z3_repairs(
                     source_bytes=orig_b,
                     language=norm_lang,
                     rel_path=cut.rel_path,
                     target_func_name=cut.func_name,
                     cached_u_fns=causal_graph.functions_by_file.get(cut.rel_path),
+                    hot_line=cut_hot_ln,
                 )
                 for patched_b, desc in poly_cands:
                     mem_eval_total += 1
@@ -2317,8 +2570,13 @@ class CausalCEGISInventor:
                 else None
             )
 
+            single_hunk_cap = (
+                max(12, self.sandbox_budget - max(6, self.sandbox_budget // 5))
+                if self.sandbox_budget >= 20
+                else self.sandbox_budget + 2
+            )
             for file_patches, mech, desc in single_file_Queue:
-                if mental.simulations_run >= self.sandbox_budget + 2:
+                if mental.simulations_run >= single_hunk_cap:
                     break
                 phash = hashlib.sha256(
                     json.dumps(file_patches, sort_keys=True).encode("utf-8")
@@ -2409,17 +2667,94 @@ class CausalCEGISInventor:
                                 )
                                 if sp_res is not None:
                                     return sp_res
-                elif quick_v is not None and (
-                    0 < len(quick_v.failing_tests) < base_fail_cnt
-                    or (norm_lang != "python" and quick_v.output != baseline.output and "TIMEOUT" not in quick_v.output)
-                ):
-                    partial_progress_beam.append(
-                        (file_patches, len(quick_v.failing_tests), list(quick_v.failing_tests), desc)
-                    )
+                elif quick_v is not None:
+                    if 0 < len(quick_v.failing_tests) < base_fail_cnt:
+                        partial_progress_beam.append(
+                            (file_patches, len(quick_v.failing_tests), list(quick_v.failing_tests), desc)
+                        )
+                    elif norm_lang != "python" and base_native_prog is not None:
+                        cand_prog = _extract_native_crash_progress(quick_v.output, repo_root)
+                        if cand_prog is not None and (
+                            cand_prog[0] > base_native_prog[0]
+                            or (cand_prog[2] and cand_prog[2] != base_native_prog[2])
+                            or (
+                                cand_prog[2] == base_native_prog[2]
+                                and cand_prog[3] > base_native_prog[3] + 2
+                            )
+                        ):
+                            partial_progress_beam.append(
+                                (file_patches, -cand_prog[0], list(quick_v.failing_tests), desc)
+                            )
+                            native_horizon_seeds.append((file_patches, cand_prog, desc))
 
             # ------------------------------------------------------------------
             # PHASE 3: Coupled Multi-File & Same-File Orthogonal Multi-Hunk Beam
             # ------------------------------------------------------------------
+            if norm_lang != "python" and native_horizon_seeds:
+                native_horizon_seeds.sort(key=lambda s: (-s[1][0], -s[1][3]))
+                curr_p, curr_prog, curr_d = native_horizon_seeds[0]
+                for _chain_step in range(5):
+                    if mental.simulations_run >= self.sandbox_budget + 12 or not curr_prog[1]:
+                        break
+                    nxt_rel, nxt_fn, nxt_ln = curr_prog[1], curr_prog[2], curr_prog[3]
+                    base_src_b = (
+                        curr_p[nxt_rel].encode("utf-8")
+                        if nxt_rel in curr_p
+                        else (repo_root / nxt_rel).read_bytes()
+                    )
+                    nxt_cands = synthesize_polyglot_uir_z3_repairs(
+                        source_bytes=base_src_b,
+                        language=norm_lang,
+                        rel_path=nxt_rel,
+                        target_func_name=nxt_fn or None,
+                        hot_line=nxt_ln if nxt_ln > 0 else None,
+                    )
+                    advanced_this_step = False
+                    for nxt_b, nxt_desc in nxt_cands[:10]:
+                        if mental.simulations_run >= self.sandbox_budget + 12:
+                            break
+                        chained = dict(curr_p)
+                        chained[nxt_rel] = nxt_b.decode("utf-8", errors="replace")
+                        ch_hash = hashlib.sha256(
+                            json.dumps(chained, sort_keys=True).encode("utf-8")
+                        ).hexdigest()[:16]
+                        if ch_hash in seen_patch_hashes:
+                            continue
+                        seen_patch_hashes.add(ch_hash)
+                        mental.apply_overrides(chained)
+                        qn_ok, qn_v = mental.run_fast_gate(
+                            modified_rels=list(chained.keys()),
+                            timeout_sec=timeout_sec,
+                        )
+                        mental.restore_originals(list(chained.keys()))
+                        if qn_ok:
+                            v_ch = self._verify_and_finalize_patch(
+                                mental=mental,
+                                causal_graph=causal_graph,
+                                repo_root=repo_root,
+                                baseline=baseline,
+                                file_patches=chained,
+                                mechanism="COGS_COUPLED_MULTIFILE_INVENTION",
+                                description=f"{curr_d} + {nxt_desc}",
+                                norm_lang=norm_lang,
+                                mem_eval_total=mem_eval_total,
+                                t0=t0,
+                            )
+                            if v_ch is not None:
+                                return v_ch
+                        elif qn_v is not None:
+                            nxt_prog = _extract_native_crash_progress(qn_v.output, repo_root)
+                            if nxt_prog is not None and (
+                                nxt_prog[0] > curr_prog[0]
+                                or (nxt_prog[2] and nxt_prog[2] != curr_prog[2])
+                                or (nxt_prog[2] == curr_prog[2] and nxt_prog[3] > curr_prog[3] + 2)
+                            ):
+                                curr_p, curr_prog, curr_d = chained, nxt_prog, f"{curr_d} + {nxt_desc}"
+                                advanced_this_step = True
+                                break
+                    if not advanced_this_step:
+                        break
+
             partial_progress_beam.sort(key=lambda item: item[1])
             for step1_patches, _, rem_fails, step1_desc in partial_progress_beam[:3]:
                 # 3a. Compose orthogonal hunks across `partial_progress_beam` + `single_file_Queue`

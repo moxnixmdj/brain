@@ -626,3 +626,143 @@ def test_harbor_container_worker_zero_llm_fallback(tmp_path: Path) -> None:
     assert '"PASS__ZERO_LLM_COW_PETRI_TERMINAL"' in proc.stdout
 
 
+def test_entry_anchored_param_hole_subtree_morphism_transfer_and_ablation(tmp_path: Path) -> None:
+    from canonical.swe_kernel.universal_semantic_ir_v1 import (
+        SemanticCausalLawStore,
+        lift_verified_diff_to_semantic_law,
+    )
+
+    teacher_before = (
+        b"def batch_iter(seq, size):\n"
+        b'    """Yield batches."""\n'
+        b"    cursor = iter(seq)\n"
+        b"    yield list(cursor)\n"
+    )
+    teacher_after = (
+        b"def batch_iter(seq, size):\n"
+        b'    """Yield batches."""\n'
+        b"    if size is not None and size < 0:\n"
+        b"        raise ValueError('size must be >= 0')\n"
+        b"    if size == 0:\n"
+        b"        return\n"
+        b"    cursor = iter(seq)\n"
+        b"    yield list(cursor)\n"
+    )
+    law = lift_verified_diff_to_semantic_law(
+        before_bytes=teacher_before,
+        after_bytes=teacher_after,
+        language="python",
+        sabotage_verified=True,
+        contrast_verified=True,
+    )
+    assert law is not None
+    assert law.precondition_signature["entry_anchored"] is True
+    assert law.precondition_signature["min_param_arity"] == 2
+    assert law.precondition_signature["required_domain_literals"] == []
+
+    store = SemanticCausalLawStore(tmp_path / "entry_laws.json")
+    assert store.admit_law(law) is True
+
+    target_src = (
+        b"def slice_even(items, count):\n"
+        b'    """Evenly slice items."""\n'
+        b"    stream = iter(items)\n"
+        b"    yield list(stream)\n"
+    )
+    cands = store.match_and_compile_candidates(
+        target_src, "python", rel_path="slicer.py", target_func_name="slice_even"
+    )
+    assert len(cands) == 1
+    patched_txt = cands[0][1].decode("utf-8")
+    assert "if count is not None and count < 0:" in patched_txt
+    assert "if count == 0:" in patched_txt
+
+    # O(1) surgical memory removal ablation
+    assert store.remove_law(law.law_id) is True
+    assert store.match_and_compile_candidates(
+        target_src, "python", rel_path="slicer.py", target_func_name="slice_even"
+    ) == []
+
+
+def test_infinite_loop_timeout_recovery_and_precondition_synthesis(tmp_path: Path) -> None:
+    from canonical.swe_kernel.causal_cegis_inventor_v1 import CausalCEGISInventor
+
+    repo = tmp_path / "loop_repo"
+    repo.mkdir()
+    (repo / "chunker.py").write_text(
+        "from itertools import islice\n\n"
+        "def take_chunks(iterable, width):\n"
+        '    """Yield width-sized lists."""\n'
+        "    it = iter(iterable)\n"
+        "    while True:\n"
+        "        part = list(islice(it, width))\n"
+        "        if not part and width > 0:\n"
+        "            return\n"
+        "        yield part\n",
+        encoding="utf-8",
+    )
+    (repo / "test_chunker.py").write_text(
+        "from itertools import count\nimport unittest\nfrom chunker import take_chunks\n\n"
+        "class ChunkerTests(unittest.TestCase):\n"
+        "    def test_normal(self):\n"
+        "        self.assertEqual(list(take_chunks([1, 2, 3, 4], 2)), [[1, 2], [3, 4]])\n"
+        "    def test_zero_infinite_input(self):\n"
+        "        self.assertEqual(list(take_chunks(count(), 0)), [])\n"
+        "    def test_negative(self):\n"
+        "        with self.assertRaises(ValueError):\n"
+        "            list(take_chunks([1, 2], -1))\n",
+        encoding="utf-8",
+    )
+    inv = CausalCEGISInventor(law_store_path=tmp_path / "loop_laws.json", sandbox_budget=20)
+    res = inv.solve_repository(repo, language="python", test_target="test_chunker.py", timeout_sec=3.0)
+    assert res.solved is True
+    assert res.sabotage_verified is True
+    assert res.crystallized_law_id is not None
+
+
+def test_c_scoped_null_dominance_and_chained_arrow_uir(tmp_path: Path) -> None:
+    from canonical.swe_kernel.causal_cegis_inventor_v1 import synthesize_polyglot_uir_z3_repairs
+    from canonical.swe_kernel.universal_semantic_ir_v1 import lower_source_to_uir
+
+    c_src = (
+        b"typedef struct Node { double val; struct Node *prev; struct Node *next; } Node;\n"
+        b"double set_num(Node *obj, double num) {\n"
+        b"    int tag = 0;\n"
+        b"    if (num >= 10.0) { obj->val = 10.0; }\n"
+        b"    if (obj->prev != NULL) { tag = 1; }\n"
+        b"    obj->prev->next = obj->next;\n"
+        b"    return obj->val = num;\n"
+        b"}\n"
+    )
+    ufns = lower_source_to_uir(c_src, "cpp", rel_path="node.c")
+    assert len(ufns) == 1
+    derefs = [n for n in ufns[0].nodes if n.kind == "UIR_DEREF_LOAD"]
+    assert any(
+        n.roles.get("base_var") == "obj->prev"
+        and n.roles.get("deref_op") == "CHAINED_ARROW"
+        and n.roles.get("dominated_by_null_guard") is False
+        for n in derefs
+    )
+    cands = synthesize_polyglot_uir_z3_repairs(
+        source_bytes=c_src, language="c", rel_path="node.c", target_func_name="set_num"
+    )
+    texts = [c[0].decode("utf-8") for c in cands]
+    assert any("if (obj == NULL) { return 0; }" in t and t.index("int tag = 0;") < t.index("if (obj == NULL)") for t in texts)
+    assert any("if (obj->prev != NULL) { obj->prev->next = obj->next; }" in t for t in texts)
+
+
+def test_harbor_worker_language_autodetect(tmp_path: Path) -> None:
+    from canonical.runtime.harbor_container_solver_worker_v1 import _detect_repo_language
+
+    js_dir = tmp_path / "js_app"
+    js_dir.mkdir()
+    (js_dir / "package.json").write_text('{"name":"demo"}', encoding="utf-8")
+    assert _detect_repo_language(js_dir) == "javascript"
+
+    c_dir = tmp_path / "c_app"
+    c_dir.mkdir()
+    (c_dir / "main.c").write_text("int main(void) { return 0; }\n", encoding="utf-8")
+    assert _detect_repo_language(c_dir) == "c"
+
+
+

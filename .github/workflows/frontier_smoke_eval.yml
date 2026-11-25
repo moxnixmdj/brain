@@ -3,6 +3,9 @@ name: Frontier Pro V2 smoke evaluation
 # Manual only. GitHub exposes workflow_dispatch only once this workflow file
 # exists on the default branch; choosing --ref still selects the branch version.
 on:
+  push:
+    branches:
+      - 'arena/06dc079e-brain'
   workflow_dispatch:
     inputs:
       task_limit:
@@ -115,6 +118,49 @@ jobs:
             -a patch_replay:PatchReplayAgent -m replay \
             --ak "source_job=$GITHUB_WORKSPACE/runs/jobs/brain-pro-smoke" \
             --job-name brain-pro-smoke-regrade
+
+      - name: Run official Terminal-Bench Harbor Docker smoke (suite=terminal-bench-4)
+        id: tb2_smoke
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        working-directory: runs
+        shell: bash
+        env:
+          BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL: '1'
+        run: |
+          set -euo pipefail
+          git clone --no-checkout https://github.com/laude-institute/terminal-bench-2.git "$GITHUB_WORKSPACE/tb2-repo"
+          git -C "$GITHUB_WORKSPACE/tb2-repo" checkout --detach 2fd12b88aafdd04a52c298e3940bcb189f9766d6
+          mkdir -p "$GITHUB_WORKSPACE/tb2-smoke"
+          for tname in cancel-async-tasks regex-log; do
+            cp -R "$GITHUB_WORKSPACE/tb2-repo/$tname" "$GITHUB_WORKSPACE/tb2-smoke/$tname"
+          done
+          BRAIN_MOUNTS="$(python -c 'import json,os; print(json.dumps([{"type":"bind","source":os.environ["BRAIN"],"target":"/opt/brain-ro","read_only":True}]))')"
+          harbor run -p "$GITHUB_WORKSPACE/tb2-smoke" -e docker -n 1 \
+            -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
+            --ak suite=terminal-bench-4 --ak repo_root=/app --ak "brain_source=$BRAIN" \
+            --mounts "$BRAIN_MOUNTS" \
+            --extra-docker-compose "$GITHUB_WORKSPACE/brain-no-network-compose.yaml" \
+            --job-name brain-tb2-smoke || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          jobs = Path('jobs').resolve()
+          tb_rows = []
+          for p in sorted((jobs / 'brain-tb2-smoke').glob('*/result.json')):
+              res = json.loads(p.read_text())
+              tr_p = p.parent / 'agent' / 'brain_epistemic_trace.json'
+              tr = json.loads(tr_p.read_text()) if tr_p.is_file() else {}
+              tb_rows.append({
+                  'task': res.get('task_name'),
+                  'exception': res.get('exception_info'),
+                  'agent_status': tr.get('status'),
+                  'external_status': tr.get('external_harbor_vm_eval_status'),
+                  'rewards': (res.get('verifier_result') or {}).get('rewards'),
+              })
+          tb_audit = {'tb2_rev': '2fd12b88aafdd04a52c298e3940bcb189f9766d6', 'rows': tb_rows}
+          (jobs / 'tb2_audit.json').write_text(json.dumps(tb_audit, indent=2) + '\n')
+          print(f"::warning title=HARBOR_TB2_AUDIT::{json.dumps(tb_audit, separators=(',', ':'))}")
+          PY
 
       - name: Reject unsafe artifact paths
         id: artifact_safety

@@ -19,6 +19,42 @@ MARKER = "BRAIN_CONTAINER_SOLVE_V1:"
 MAX_REQUEST_BYTES = 64_000
 
 
+def _detect_repo_language(cwd: Path) -> str:
+    if (cwd / "Cargo.toml").is_file():
+        return "rust"
+    if (cwd / "go.mod").is_file():
+        return "go"
+    if (cwd / "tsconfig.json").is_file():
+        return "typescript"
+    if (cwd / "package.json").is_file():
+        return "javascript"
+    counts = {"python": 0, "cpp": 0, "c": 0, "javascript": 0, "typescript": 0, "rust": 0, "go": 0}
+    skip_dirs = {".git", "node_modules", "vendor", ".venv", "venv", "dist", "build", "__pycache__"}
+    ext_map = {
+        ".py": "python",
+        ".c": "c",
+        ".cc": "cpp",
+        ".cpp": "cpp",
+        ".js": "javascript",
+        ".ts": "typescript",
+        ".rs": "rust",
+        ".go": "go",
+    }
+    try:
+        for dirpath, dirnames, filenames in os.walk(cwd):
+            dirnames[:] = [d for d in dirnames if d not in skip_dirs][:16]
+            for fn in filenames[:64]:
+                lang = ext_map.get(Path(fn).suffix.lower())
+                if lang:
+                    counts[lang] += 1
+            if sum(counts.values()) >= 40:
+                break
+    except OSError:
+        pass
+    best_lang, best_cnt = max(counts.items(), key=lambda kv: kv[1])
+    return best_lang if best_cnt > 0 else "python"
+
+
 def _fallback_zero_llm_container_solve(
     task_instruction: str,
     cwd: Path,
@@ -27,6 +63,11 @@ def _fallback_zero_llm_container_solve(
     """Zero-model-call container-native fallback using Speculative CoW Petri Rollouts
     (terminal environments) and CausalCEGISInventor + Issue-to-Oracle Abduction (Git repos).
     All scratch/store writes stay strictly under /tmp (never touching read-only /opt/brain-ro)."""
+    clean_instruction = (
+        task_instruction.split("Task instruction:\n", 1)[1].strip()
+        if "Task instruction:\n" in task_instruction
+        else task_instruction
+    )
     try:
         from canonical.swe_kernel.speculative_cow_petri_agent_v1 import (
             EpistemicPetriSkillStore,
@@ -36,7 +77,7 @@ def _fallback_zero_llm_container_solve(
         tmp_skills = Path("/tmp/brain-harbor-petri-skills.json")
         term_out = solve_terminal_workspace(
             cwd,
-            task_instruction,
+            clean_instruction,
             skill_store=EpistemicPetriSkillStore(tmp_skills),
         )
         if term_out.committed:
@@ -65,8 +106,8 @@ def _fallback_zero_llm_container_solve(
             )
             swe_res = inv.solve_repository(
                 cwd,
-                language="python",
-                problem_statement=task_instruction,
+                language=_detect_repo_language(cwd),
+                problem_statement=clean_instruction,
                 timeout_sec=18.0,
             )
             if swe_res.solved and swe_res.modified_files:
