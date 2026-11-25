@@ -99,8 +99,14 @@ engine's self-judgement.
   and harbor's trial span are now separate columns and separate totals, so the next run says which
   is which instead of averaging two quantities into one. Until then **no speed claim is made** —
   neither 0.35 s nor 3.5 s is quotable from this evidence.
-- The `HARNESS_ERROR` cause: `error`, `store_note`, `skills_newly_admissible` are now carried into
-  the shard report and printed per task. Not yet diagnosed.
+- **Diagnosed on the following run** (`080753b7`): the `HARNESS_ERROR` was
+  `URLError: <urlopen error [Errno 111] Connection refused>` — a fallback path inside the engine
+  reached for the network even though `inputs["allow_web"] = False` was set. So the flag was
+  *declared* and not *enforced*, and one trial's capability question turned into a plumbing error
+  that scored 0 for a reason that says nothing about the solver. The harness now refuses
+  outbound connects in-process while `allow_web` is false, counts the attempts, and prints the
+  count in the report (`network_guard: enforced`, `network_attempts: N`). What is still open is
+  *which* engine path needed the fetch — that is an engine question now, not a network one.
 - `materialize` writes task dirs whose names differ from the ids in the manifest's own report keys
   (105-char `-v<sha>` form). Reconciled by tolerant matching; still worth pinning at the source.
 - n = 1 trial per task. No variance estimate.

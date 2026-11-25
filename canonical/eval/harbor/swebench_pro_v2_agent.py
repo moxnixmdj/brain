@@ -92,6 +92,73 @@ _TEXT_SUFFIXES = frozenset(
 )
 
 
+class NetworkRefusedByHarness(RuntimeError):
+    """Raised in place of an outbound connect while the harness has ``allow_web`` off.
+
+    The engine is *told* it has no network (`inputs["allow_web"] = False`), and on one
+    qutebrowser task that turned out to be a suggestion: a fallback path reached
+    `urlopen`, the container-side proxy refused it, and the exception propagated out of
+    the agent as a HARNESS_ERROR — so a capability question became a plumbing failure and
+    the trial was scored 0 for the wrong reason.
+
+    Enforcing the flag is the honest version of declaring it: nothing depends on remembering
+    to check the flag at every call site, the count of refused attempts is reported, and the
+    engine gets a typed error of its own language instead of a transport error. Covers
+    in-process sockets and `urlopen`; a subprocess the engine spawns is its own process and
+    is not covered, which is why the attempt count is an enforcement record, not a sandbox.
+    """
+
+
+def network_guard(enabled: bool):
+    """Context manager: refuse (and count) in-process outbound connects while enabled."""
+    import contextlib
+    import socket
+    import urllib.request
+
+    attempts: list[str] = []
+    if not enabled:
+
+        @contextlib.contextmanager
+        def _noop():
+            yield
+
+        return _noop(), attempts
+
+    real_connect = socket.socket.connect
+    real_create = socket.create_connection
+    real_open = urllib.request.urlopen
+
+    def _refuse_connect(self, *a, **k):  # noqa: ANN001 - monkeypatch target
+        attempts.append(f"socket.connect:{a[0] if a else '?'!r}"[:160])
+        raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
+
+    def _refuse_create(address, *a, **k):
+        attempts.append(f"create_connection:{address!r}"[:160])
+        raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
+
+    def _refuse_open(url, *a, **k):
+        try:
+            full = getattr(url, "full_url", url)
+        except Exception:  # pragma: no cover - defensive against odd url objects
+            full = url
+        attempts.append(f"urlopen:{full!r}"[:160])
+        raise NetworkRefusedByHarness("network fetch refused: harness set allow_web=False")
+
+    @contextlib.contextmanager
+    def _guard():
+        socket.socket.connect = _refuse_connect  # type: ignore[method-assign]
+        socket.create_connection = _refuse_create  # type: ignore[assignment]
+        urllib.request.urlopen = _refuse_open  # type: ignore[assignment]
+        try:
+            yield
+        finally:
+            socket.socket.connect = real_connect  # type: ignore[method-assign]
+            socket.create_connection = real_create  # type: ignore[assignment]
+            urllib.request.urlopen = real_open  # type: ignore[assignment]
+
+    return _guard(), attempts
+
+
 def _sha256_bytes(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
@@ -238,6 +305,7 @@ def run_engine_on_tree(
     timeout_s: float = 900.0,
     python_exe: str | None = None,
     solver: Callable[..., dict[str, Any]] | None = None,
+    inputs_allow_web: bool = False,
 ) -> dict[str, Any]:
     """Run the un-gated engine on a downloaded copy of a repo tree.
 
@@ -254,10 +322,13 @@ def run_engine_on_tree(
         store, store_note = load_store(store_path)
     before = snapshot_tree(tree)
 
+    guard, net_attempts = network_guard(not inputs_allow_web)
+
     inputs: dict[str, Any] = {
         "workspace": str(tree),
         "python_exe": python_exe or sys.executable,
-        "allow_web": False,  # no lookups, no network knowledge: zero-knowledge house
+        # one source of truth: the guard enforces exactly what the engine is told
+        "allow_web": bool(inputs_allow_web),  # default False: zero-knowledge house
         "timeout_s": float(timeout_s),
     }
     if memory_path:
@@ -265,12 +336,13 @@ def run_engine_on_tree(
     if store is not None:
         inputs["skill_store"] = store
 
-    if solver is not None:
-        result = solver(instruction=instruction, tree=tree, inputs=inputs)
-    else:
-        from canonical.runtime.brain_unified_model_v1 import open_model
+    with guard:
+        if solver is not None:
+            result = solver(instruction=instruction, tree=tree, inputs=inputs)
+        else:
+            from canonical.runtime.brain_unified_model_v1 import open_model
 
-        result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+            result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
 
     edits_reported = extract_engine_edits(result if isinstance(result, Mapping) else {})
     applied_by = "tree-mutation"
@@ -303,10 +375,13 @@ def run_engine_on_tree(
         "store_note": store_note or "NO_STORE",
         "store_saved": store_saved,
         "timeout_s": float(timeout_s),
-        "allow_web": False,
+        "allow_web": bool(inputs_allow_web),
         # Field names the shard collector reads. They are aliases of data already
         # computed above, not new measurement: without them the report showed
         # tree_changed=None and fell back to harbor's timestamps for wall time.
+        "network_attempts": len(net_attempts),
+        "network_attempt_samples": net_attempts[:3],
+        "network_guard": "enforced" if not inputs_allow_web else "open",
         "tree_changed": bool(diff.get("modified") or diff.get("added") or diff.get("removed")),
         "wall_seconds": round(time.monotonic() - t0, 3),
         "notes": [

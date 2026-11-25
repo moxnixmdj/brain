@@ -10,6 +10,9 @@ import asyncio
 import json
 import pathlib
 import tempfile
+import urllib.request
+
+import pytest
 
 from canonical.eval.harbor import swebench_pro_v2_agent as AG
 from canonical.eval.harbor import swe_pro_v2_ci as CI
@@ -353,6 +356,72 @@ def test_aggregate_merges_shard_reports_by_task_union() -> None:
     # 5.0 is harbor's trial wall; the engine-seconds column stays None here because the
     # fixture wrote no agent report — the two quantities must never be conflated.
     assert "| causal | 2 | 2 | 100.0 | 0 | 0.0 | 5.0 | None | 0 |" in md
+
+
+def test_network_guard_enforces_allow_web_and_counts_attempts() -> None:
+    """`allow_web: False` must be enforced, not requested — and the enforcement is visible.
+
+    Found by a real run: one task's trial died with `URLError: Connection refused` from a
+    fallback `urlopen` inside the engine, i.e. a capability question became a plumbing
+    failure and the score was 0 for a reason that says nothing about the engine.
+    """
+    import socket
+
+    guard, attempts = AG.network_guard(True)
+    with guard:
+        with pytest.raises(AG.NetworkRefusedByHarness):
+            urllib.request.urlopen("http://example.invalid/x")  # noqa: S310
+        with pytest.raises(AG.NetworkRefusedByHarness):
+            socket.create_connection(("example.invalid", 80))
+    assert len(attempts) == 2, attempts
+    # the guard lifts: a real loopback connect succeeds again, both after the guard and
+    # while a disabled guard is "active" (no patching at all in that case)
+    srv = socket.socket()
+    srv.bind(("127.0.0.1", 0))
+    srv.listen(4)
+    try:
+        socket.create_connection(srv.getsockname(), timeout=2).close()
+        guard_off, attempts_off = AG.network_guard(False)
+        with guard_off:
+            socket.create_connection(srv.getsockname(), timeout=2).close()
+        # and inside a *refusing* guard the same connect is blocked — proof the two
+        # observations above are about the guard, not about the ordering of the test
+        guard2, attempts2 = AG.network_guard(True)
+        with guard2, pytest.raises(AG.NetworkRefusedByHarness):
+            socket.create_connection(srv.getsockname(), timeout=2)
+    finally:
+        srv.close()
+    assert attempts_off == []
+    assert len(attempts2) == 1
+
+
+def test_run_engine_reports_the_guard_and_the_solver_sees_the_same_flag(tmp_path) -> None:
+    tree = tmp_path / "repo"
+    (tree / "pkg").mkdir(parents=True)
+    (tree / "pkg" / "m.py").write_text("X = 1\n", encoding="utf-8")
+
+    seen: dict = {}
+
+    def solver(*, instruction, tree, inputs):  # noqa: ANN001 - test stand-in
+        seen.update(inputs)
+        import urllib.request
+
+        with pytest.raises(AG.NetworkRefusedByHarness):
+            urllib.request.urlopen("http://example.invalid/y")  # noqa: S310
+        return {"status": "NO_DEFECT_EVIDENCE", "patch": {}}
+
+    rep = AG.run_engine_on_tree(
+        instruction="fix it", tree=tree, store_path=None, solver=solver, timeout_s=5.0
+    )
+    assert seen["allow_web"] is False, "the engine is told exactly what the harness enforces"
+    assert rep["network_guard"] == "enforced"
+    assert rep["network_attempts"] == 1 and "urlopen" in rep["network_attempt_samples"][0]
+    # and an open-web run records that it was open instead of pretending otherwise
+    rep2 = AG.run_engine_on_tree(
+        instruction="fix it", tree=tree, store_path=None, solver=lambda **kw: {"status": "X"},
+        timeout_s=5.0, inputs_allow_web=True,
+    )
+    assert rep2["network_guard"] == "open" and rep2["network_attempts"] == 0
 
 
 def test_upload_falls_back_to_root_exec_and_reports_it() -> None:

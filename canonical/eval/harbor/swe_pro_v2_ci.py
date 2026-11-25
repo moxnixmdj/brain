@@ -320,6 +320,8 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
                 "store_saved": rep.get("store_saved"),
                 "engine_notes": rep.get("notes") or [],
                 "error": rep.get("error"),
+                "network_attempts": rep.get("network_attempts"),
+                "network_guard": rep.get("network_guard"),
                 "engine_pass": rep.get("engine_pass"),
                 "skills_newly_admissible": rep.get("skills_newly_admissible"),
                 "store_note": rep.get("store_note"),
@@ -552,6 +554,14 @@ def to_markdown(
             "What the engine did across the causal arm (behaviour, not a score): "
             + ", ".join(f"`{k}`×{v}" for k, v in sorted(tally.items()))
             + ". Resolve rate is decided only by each task's own verifier.",
+        ]
+    net = sum(int(t.get("network_attempts") or 0) for t in (causal.get("tasks") or {}).values())
+    if net:
+        lines += [
+            "",
+            f"Outbound network attempts refused by the harness during the causal arm: **{net}** "
+            "(`allow_web` is enforced, not requested). A zero here is what 'this run needed no "
+            "external knowledge' means operationally.",
         ]
     lines.append("")
     return lines
