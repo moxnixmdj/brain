@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 654,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7303,
+  "research_index_records": 7304,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 462,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "86faf643ab689198799f33c8a193f2fe17c628edfe82999e4da6552e301558d4"
+  "value": "c2aba955d1568368ffa3d205094a65b0ba0cee396d4226af75f9625c4d08abd9"
  },
  "engines": [
   {
@@ -257940,6 +257940,32 @@
     "refusal": 2,
     "rows": 2,
     "v1": 2
+   }
+  },
+  {
+   "action_id": "MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "6c244d4ad3cdaf15e148e9ccdaad800c8475a3b26bca8af11aa8080b23e91c0d",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "call": 1,
+    "every_generation_mechanism_built_in_seven_rounds_failed_to_convert_the_one_component_that_generalises_file_localisation_into_a_solve_and_no_round_had_measured_where_in_a_file_the_edit_belongs_so_the_failure_was_over_determined": 1,
+    "honest_measurement_of_a_zero_model_call_solver_rather_than_a_score_claim": 1,
+    "integrate": 1,
+    "measure": 1,
+    "measure_what_a_zero_model_call_solver_reaches_20261124_v1": 1,
+    "model": 1,
+    "none_claimed": 1,
+    "reaches": 1,
+    "solver": 1,
+    "v1": 1,
+    "zero": 1
    }
   },
   {
