@@ -344,11 +344,21 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--out", required=True)
     parser.add_argument("--only", default=None)
     parser.add_argument("--keep", default=None)
+    parser.add_argument("--corpus", default=None,
+                        help="JSON with tasks[] in {repo, sha, parent, test, failed_nodes} form")
+    parser.add_argument("--clones", default=None, help="JSON {repo: existing checkout}")
     args = parser.parse_args(argv)
+    clones = json.loads(pathlib.Path(args.clones).read_text()) if args.clones else {}
     started = time.time()
 
-    selected = [row for row in json.loads(SELECTED.read_text())["per_task"] if row["class"] == "FAIL"]
-    corpus = {task["sha"]: task for task in json.loads(CORPUS.read_text())["tasks"]}
+    if args.corpus:
+        tasks = json.loads(pathlib.Path(args.corpus).read_text())["tasks"]
+        selected = [{"sha": task["sha"], "class": "FAIL"} for task in tasks]
+        corpus = {task["sha"]: task for task in tasks}
+    else:
+        selected = [row for row in json.loads(SELECTED.read_text())["per_task"]
+                    if row["class"] == "FAIL"]
+        corpus = {task["sha"]: task for task in json.loads(CORPUS.read_text())["tasks"]}
     workdir = (pathlib.Path(args.keep) if args.keep
                else pathlib.Path(tempfile.mkdtemp(prefix="brain-loc-")))
     workdir.mkdir(parents=True, exist_ok=True)
@@ -360,6 +370,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.only and not task["sha"].startswith(args.only):
                 continue
             checkout = workdir / task["repo"].replace("/", "__")
+            if not checkout.exists() and clones.get(task["repo"]):
+                checkout = pathlib.Path(clones[task["repo"]])
             if not checkout.exists():
                 if run(["git", "clone", "-q", f"https://github.com/{task['repo']}.git", str(checkout)],
                        workdir).returncode != 0:

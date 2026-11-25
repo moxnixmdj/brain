@@ -55,6 +55,7 @@ CORPUS = REPO / "canonical" / "corpus" / "real_fix_commits_20261116_V1.json"
 SELECTED = (REPO / "canonical" / "corpus" /
             "tasks_whose_oracle_precedes_the_fix_20261124_V1.json")
 SEED: dict[str, list[str]] = {}
+CLONES: dict[str, str] = {}
 CURRENT_SHA = [""]
 MAX_CANDIDATES = 40
 # tasks whose real fix edits a test fixture: the assertion can only be satisfied by editing test data, which
@@ -129,6 +130,15 @@ def parse(output: str) -> dict[str, Any]:
         if bare:
             facts["kind"] = "assertion"
             facts["bare"] = bare.group(1).strip()
+    did_not_raise = re.search(r"DID NOT RAISE.*?<class '([\w.]+)'>", output)
+    if did_not_raise:
+        facts["kind"] = "did_not_raise"
+        facts["expected_exception"] = did_not_raise.group(1).split(".")[-1]
+    # the test machinery names the type it wanted: assertRaises / pytest.raises with the wrong error raised
+    wrong_type = re.search(r"(?:assertRaises|pytest\.raises)\(([A-Za-z_][\w.]*)\)", output)
+    if wrong_type and "Error" in output:
+        facts["kind"] = "wrong_exception"
+        facts["expected_exception"] = wrong_type.group(1).split(".")[-1]
     if "kind" not in facts:
         scalar = re.search(r"AssertionError: assert (.+?) == (.+?)(?:\n|$)", output)
         if scalar:
@@ -604,6 +614,58 @@ def _boolean_return_candidates(original: dict[pathlib.Path, str],
     return out
 
 
+def _wrap_exception_candidates(original: dict[pathlib.Path, str],
+                               facts: dict[str, Any], test_source: str) -> list[dict[str, Any]]:
+    """The test says DID NOT RAISE X; the code performs an operation that silently succeeds.
+
+    The expected exception type is stated by pytest, not guessed. The candidate set is every single-line
+    statement in the localised file that is not already inside a try block, wrapped so that the failure
+    becomes the exception the test demands. Execution decides which statement is the right one.
+    """
+    if facts.get("kind") not in ("did_not_raise", "wrong_exception"):
+        return []
+    expected = facts.get("expected_exception")
+    if not expected:
+        return []
+    out: list[dict[str, Any]] = []
+    for path, text in original.items():
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        guarded: set[int] = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Try):
+                for part in node.body:
+                    guarded.update(range(part.lineno, (part.end_lineno or part.lineno) + 1))
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Expr) or not isinstance(node.value, ast.Call):
+                continue
+            line = node.lineno
+            if line in guarded or (node.end_lineno or line) != line:
+                continue
+            lines = text.splitlines(keepends=True)
+            if line - 1 >= len(lines):
+                continue
+            statement = lines[line - 1]
+            indent = re.match(r"\s*", statement).group(0)
+            new_lines = list(lines)
+            new_lines[line - 1] = (
+                f"{indent}try:\n"
+                f"{indent}    {statement.strip()}\n"
+                f"{indent}except {expected}:\n"
+                f"{indent}    raise\n"
+                f"{indent}except Exception:\n"
+                f"{indent}    raise {expected}(str(__import__('sys').exc_info()[1])) from None\n")
+            out.append({"path": path, "text": "".join(new_lines),
+                        "why": f"the test expects {expected} to be raised; line {line} is the operation "
+                               f"that silently succeeds",
+                        "family": "WRAP_EXCEPTION"})
+            if len(out) >= 12:
+                return out
+    return out
+
+
 def expectation(checkout: pathlib.Path, test_file: str, output: str) -> dict[str, Any] | None:
     """The assertion the test actually makes, read from its SOURCE.
 
@@ -823,6 +885,11 @@ def attempt(checkout: pathlib.Path, node: str, test_file: str) -> dict[str, Any]
                  _attribute_set_candidates(checkout, want, original)
                  + _collection_extend_candidates(checkout, want, original)
                  + _collection_extend_all(checkout, want, original)]
+    test_source = ""
+    test_path = checkout / test_file
+    if test_path.exists():
+        test_source = test_path.read_text(errors="ignore")
+    pool += _wrap_exception_candidates(original, facts, test_source)
     pool += _fstring_dequote_candidates(original, facts)
     pool += _boolean_return_candidates(original, facts)
     if not pool:
@@ -864,15 +931,27 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--out", required=True)
     parser.add_argument("--only", default=None)
     parser.add_argument("--keep", default=None)
+    parser.add_argument("--clones", default=None,
+                        help="JSON {repo: existing checkout}; avoids re-cloning when the network is unavailable")
+    parser.add_argument("--corpus", default=None,
+                        help="JSON with tasks[] in {repo, sha, parent, test, failed_nodes} form")
     parser.add_argument("--seed", default=None,
                         help="JSON of {sha: [files]} to seed localisation where the traceback named none")
     args = parser.parse_args(argv)
+    if args.clones:
+        CLONES.update(json.loads(pathlib.Path(args.clones).read_text()))
     if args.seed:
         SEED.update(json.loads(pathlib.Path(args.seed).read_text()))
     started = time.time()
 
-    selected = [row for row in json.loads(SELECTED.read_text())["per_task"] if row["class"] == "FAIL"]
-    corpus = {task["sha"]: task for task in json.loads(CORPUS.read_text())["tasks"]}
+    if args.corpus:
+        tasks = json.loads(pathlib.Path(args.corpus).read_text())["tasks"]
+        selected = [{"sha": task["sha"], "class": "FAIL"} for task in tasks]
+        corpus = {task["sha"]: task for task in tasks}
+    else:
+        selected = [row for row in json.loads(SELECTED.read_text())["per_task"]
+                    if row["class"] == "FAIL"]
+        corpus = {task["sha"]: task for task in json.loads(CORPUS.read_text())["tasks"]}
     workdir = (pathlib.Path(args.keep) if args.keep
                else pathlib.Path(tempfile.mkdtemp(prefix="brain-behav-")))
     workdir.mkdir(parents=True, exist_ok=True)
@@ -884,6 +963,8 @@ def main(argv: Sequence[str] | None = None) -> int:
             if args.only and not task["sha"].startswith(args.only):
                 continue
             checkout = workdir / task["repo"].replace("/", "__")
+            if not checkout.exists() and CLONES.get(task["repo"]):
+                checkout = pathlib.Path(CLONES[task["repo"]])
             if not checkout.exists() and run(
                     ["git", "clone", "-q", f"https://github.com/{task['repo']}.git", str(checkout)],
                     workdir).returncode != 0:

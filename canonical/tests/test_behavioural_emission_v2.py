@@ -79,6 +79,8 @@ def test_end_to_end_on_the_task_that_was_solved(tmp_path):
     assert code == 0
     rows = json.loads(result.read_text())["per_task"]
     assert len(rows) == 1
+    if rows[0]["class"] == "CLONE_FAILED":
+        pytest.skip("no network egress: this test needs to clone the repository it measures")
     assert rows[0]["class"] == "SOLVED", rows[0].get("why")
     assert rows[0]["family"] == "KEYWORD_APPLY_ALL"
     # the patch may not touch the oracle
