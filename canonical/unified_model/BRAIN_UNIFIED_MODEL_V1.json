@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 730,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7393,
+  "research_index_records": 7394,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 557,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "059b5d0116263051eb5aad2951df448b366d4d0ba52f076153140d823f5fcc72"
+  "value": "40e4e2d78b18524a570ce9a8ed52ecd9aa25aacde57225a1a5784e6a08087005"
  },
  "engines": [
   {
@@ -262162,6 +262162,31 @@
     "verified": 1,
     "verified_episodes_6_to_7_and_parked_success_learning_1_to_0_measured_on_a_tree_wiped_of_every_untracked_artifact__the_new_episode_is_the_three_step_chain_structured_decision_evidence_locate_stdlib_then_decision_synthesis_typed_stdlib_then_decision_synthesis_verify_stdlib__acceptance_holds_at_11_and_selection_at_21_of_23": 1,
     "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
+   "action_id": "DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "222dd10e3230c1177ac3bbb172c34c4ee3ef81b6608a7ccd741086127e523efe",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "a_definition_level_defer_form_now_solves_1_of_27_mined_fail_to_pass_tasks_with_the_target_flipping_and_the_whole_test_module_green__and_the_calibration_records_that_the_one_solve_is_the_design_point_so_transfer_is_none": 1,
+    "candidate": 1,
+    "defer": 1,
+    "defer_form_for_zero_candidate_emission_20261124_v41": 1,
+    "derive_one_definition_level_defer_form_from_the_traceback_and_calibrate_it_before_reporting": 1,
+    "emission": 1,
+    "form": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "the_engine_emits_zero_candidates_from_a_correctly_localised_site_because_its_operators_substitute_expressions_that_already_exist_and_this_repair_requires_changing_what_kind_of_thing_the_attribute_is": 1,
+    "v41": 1,
+    "zero": 1
    }
   },
   {
