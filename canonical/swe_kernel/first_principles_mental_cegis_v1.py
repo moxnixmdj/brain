@@ -909,7 +909,14 @@ class CausalDataFlowGraph:
             lineage_bonus = 0.55 * (0.82 ** prof.backward_slice_distance) if prof.backward_slice_distance < 999 else 0.0
             anomaly_bonus = min(0.75, 0.30 * len(set(prof.fail_anomalies)))
             stack_bonus = 0.35 if prof.in_crash_stack else 0.0
-            score = ochiai + lineage_bonus + anomaly_bonus + stack_bonus
+            # Gentle harness prior: in-package test client helpers (`*/test.py`, `*/testing.py`) execute on
+            # every client request without being the domain target unless specifically crashed in stack.
+            harness_penalty = (
+                0.38
+                if rel_f.endswith(("/test.py", "/testing.py")) and not prof.in_crash_stack
+                else 0.0
+            )
+            score = max(0.01, ochiai + lineage_bonus + anomaly_bonus + stack_bonus - harness_penalty)
             ranked.append({
                 "file": rel_f,
                 "line": ln,
@@ -987,11 +994,22 @@ def _snap_val(v):
         d["len"] = len(v)
     elif isinstance(v, (list, tuple, set, frozenset, dict)):
         d["len"] = len(v)
+        if isinstance(v, (list, tuple, set, frozenset)) and len(v) > 0:
+            try:
+                first_el = next(iter(v))
+                d["elem_t"] = type(first_el).__name__
+                d["elem_mro"] = [c.__name__ for c in type(first_el).__mro__[:4] if c is not object]
+            except Exception:
+                pass
         try:
             d["repr"] = repr(v)[:120]
         except Exception:
             pass
     else:
+        try:
+            d["mro"] = [c.__name__ for c in type(v).__mro__[:4] if c is not object]
+        except Exception:
+            pass
         try:
             d["len"] = len(v)
         except Exception:
@@ -1239,8 +1257,14 @@ def _normalize_node_ids(nodes: Sequence[str], default_test_file: str = "") -> li
     for n in nodes:
         if "::" in n:
             out.append(n)
+            continue
+        m_ut = re.match(r"^([A-Za-z_]\w*)\s+\((?:[\w\.]+\.)?([A-Za-z_]\w*)(?:\.\1)?\)$", n.strip())
+        if m_ut and base_file:
+            meth_part, cls_part = m_ut.group(1), m_ut.group(2)
+            out.append(f"{base_file}::{cls_part}::{meth_part}")
         elif base_file and "." in n and not n.endswith(".py"):
             cls_part, meth_part = n.rsplit(".", 1)
+            cls_part = cls_part.rsplit(".", 1)[-1]
             out.append(f"{base_file}::{cls_part}::{meth_part}")
         elif base_file and not n.endswith(".py"):
             out.append(f"{base_file}::{n}")
@@ -1715,85 +1739,161 @@ def _recv(fd):
         body.extend(ch)
     return json.loads(body.decode("utf-8"))
 
+def _eval_one_patch_in_child(w_fd, patches, capture_site, run_one_fn, fail_ids, pass_ids):
+    devnull = os.open(os.devnull, os.O_WRONLY)
+    os.dup2(devnull, 1)
+    os.dup2(devnull, 2)
+    os.close(devnull)
+    cex_frames = []
+    if capture_site:
+        c_rel, c_ln = capture_site[0], int(capture_site[1])
+        c_abs = str((WORKTREE / c_rel).resolve())
+        def _cex_tr(frame, event, arg):
+            if frame.f_code.co_filename != c_abs:
+                return None
+            if event == "line" and frame.f_lineno == c_ln and len(cex_frames) < 4:
+                snap = {}
+                for k, v in list(frame.f_locals.items())[:16]:
+                    if not k.startswith("__"):
+                        if v is None or isinstance(v, (bool, int, float, str)):
+                            snap[k] = {"t": type(v).__name__, "v": v[:120] if isinstance(v, str) else v}
+                        else:
+                            snap[k] = {"t": type(v).__name__, "repr": repr(v)[:100]}
+                cex_frames.append(snap)
+            return _cex_tr
+    else:
+        _cex_tr = None
+
+    if not _fp._apply_ram_patches_in_child(WORKTREE, patches):
+        _send(w_fd, {"ok": False, "fail_passed": False, "passed_fail_mask": [False] * len(fail_ids), "reason": "SYNTAX_OR_EXEC_ERROR"})
+        os.close(w_fd)
+        os._exit(0)
+
+    passed_fail_mask = []
+    fail_msg = ""
+    for fid in fail_ids:
+        passed, msg = run_one_fn(fid, None)
+        passed_fail_mask.append(bool(passed))
+        if not passed and not fail_msg:
+            fail_msg = msg
+        # When >6 failing tests exist, short-circuit after first failure to stay <2ms
+        if not passed and len(fail_ids) > 6:
+            passed_fail_mask.extend([False] * (len(fail_ids) - len(passed_fail_mask)))
+            break
+
+    fail_ok = all(passed_fail_mask) and len(passed_fail_mask) == len(fail_ids)
+    if not fail_ok:
+        _send(w_fd, {
+            "ok": False,
+            "fail_passed": False,
+            "passed_fail_mask": passed_fail_mask,
+            "msg": fail_msg,
+        })
+        os.close(w_fd)
+        os._exit(0)
+
+    regressed = None
+    for idx, pid_node in enumerate(pass_ids):
+        nxt = pass_ids[idx + 1] if idx + 1 < len(pass_ids) else None
+        if _cex_tr is not None:
+            cex_frames.clear()
+            sys.settrace(_cex_tr)
+        try:
+            passed, _ = run_one_fn(pid_node, nxt)
+        finally:
+            if _cex_tr is not None:
+                sys.settrace(None)
+        if not passed:
+            regressed = pid_node
+            break
+
+    _send(w_fd, {
+        "ok": regressed is None,
+        "fail_passed": True,
+        "passed_fail_mask": passed_fail_mask,
+        "regressed_node": regressed,
+        "counterexample_frames": cex_frames if regressed else [],
+    })
+    os.close(w_fd)
+    os._exit(0)
+
+
 def _serve_fork_loop(run_one_fn, fail_ids, pass_ids):
     _send(RESP_FD, {"ready": True, "fail_count": len(fail_ids), "pass_count": len(pass_ids)})
     while True:
         req = _recv(REQ_FD)
         if req is None or req.get("cmd") == "quit":
             break
-        patches = req.get("patches") or {}
+        cmd = req.get("cmd", "sim")
         capture_site = req.get("capture_site")
         timeout_s = float(req.get("timeout_s", 3.5))
+
+        if cmd == "batch":
+            batch_patches = list(req.get("batch_patches") or [])
+            concurrency = max(1, min(16, int(req.get("concurrency", 8))))
+            t_batch = time.perf_counter()
+            out_results = [None] * len(batch_patches)
+            for w_start in range(0, len(batch_patches), concurrency):
+                wave = batch_patches[w_start : w_start + concurrency]
+                active = {}
+                bufs = {}
+                for off, p_map in enumerate(wave):
+                    r_fd, w_fd = os.pipe()
+                    t0 = time.perf_counter()
+                    pid = os.fork()
+                    if pid == 0:
+                        os.close(r_fd)
+                        _eval_one_patch_in_child(w_fd, p_map or {}, capture_site, run_one_fn, fail_ids, pass_ids)
+                    else:
+                        os.close(w_fd)
+                        active[r_fd] = (pid, w_start + off, t0)
+                        bufs[r_fd] = bytearray()
+                deadline = time.perf_counter() + timeout_s
+                while active:
+                    rem = max(0.0, deadline - time.perf_counter())
+                    rdy, _, _ = select.select(list(active.keys()), [], [], rem)
+                    if not rdy:
+                        for fd, (pid, idx_b, t0) in list(active.items()):
+                            try:
+                                os.kill(pid, 9)
+                            except OSError:
+                                pass
+                            os.waitpid(pid, 0)
+                            os.close(fd)
+                            out_results[idx_b] = {"ok": False, "fail_passed": False, "timeout": True, "ms": round((time.perf_counter() - t0) * 1000, 2)}
+                        active.clear()
+                        break
+                    for fd in rdy:
+                        ch = os.read(fd, 65536)
+                        if ch:
+                            bufs[fd].extend(ch)
+                            continue
+                        pid, idx_b, t0 = active.pop(fd)
+                        os.close(fd)
+                        os.waitpid(pid, 0)
+                        raw_b = bytes(bufs[fd])
+                        if len(raw_b) >= 4:
+                            (sz_b,) = struct.unpack(">I", raw_b[:4])
+                            res_b = json.loads(raw_b[4 : 4 + sz_b].decode("utf-8"))
+                        else:
+                            res_b = {"ok": False, "fail_passed": False}
+                        res_b["ms"] = round((time.perf_counter() - t0) * 1000, 2)
+                        out_results[idx_b] = res_b
+                if any(r and r.get("ok") for r in out_results[: w_start + len(wave)]):
+                    break
+            _send(RESP_FD, {
+                "results": [r or {"ok": False, "fail_passed": False, "skipped": True, "ms": 0.0} for r in out_results],
+                "wall_ms": round((time.perf_counter() - t_batch) * 1000, 2),
+            })
+            continue
+
+        patches = req.get("patches") or {}
         r_fd, w_fd = os.pipe()
         t0 = time.perf_counter()
         pid = os.fork()
         if pid == 0:
             os.close(r_fd)
-            devnull = os.open(os.devnull, os.O_WRONLY)
-            os.dup2(devnull, 1)
-            os.dup2(devnull, 2)
-            os.close(devnull)
-            cex_frames = []
-            if capture_site:
-                c_rel, c_ln = capture_site[0], int(capture_site[1])
-                c_abs = str((WORKTREE / c_rel).resolve())
-                def _cex_tr(frame, event, arg):
-                    if frame.f_code.co_filename != c_abs:
-                        return None
-                    if event == "line" and frame.f_lineno == c_ln and len(cex_frames) < 4:
-                        snap = {}
-                        for k, v in list(frame.f_locals.items())[:16]:
-                            if not k.startswith("__"):
-                                if v is None or isinstance(v, (bool, int, float, str)):
-                                    snap[k] = {"t": type(v).__name__, "v": v[:120] if isinstance(v, str) else v}
-                                else:
-                                    snap[k] = {"t": type(v).__name__, "repr": repr(v)[:100]}
-                        cex_frames.append(snap)
-                    return _cex_tr
-            else:
-                _cex_tr = None
-
-            if not _fp._apply_ram_patches_in_child(WORKTREE, patches):
-                _send(w_fd, {"ok": False, "fail_passed": False, "reason": "SYNTAX_OR_EXEC_ERROR"})
-                os.close(w_fd)
-                os._exit(0)
-
-            fail_ok = True
-            fail_msg = ""
-            for fid in fail_ids:
-                passed, msg = run_one_fn(fid, None)
-                if not passed:
-                    fail_ok = False
-                    fail_msg = msg
-                    break
-            if not fail_ok:
-                _send(w_fd, {"ok": False, "fail_passed": False, "msg": fail_msg})
-                os.close(w_fd)
-                os._exit(0)
-
-            regressed = None
-            for idx, pid_node in enumerate(pass_ids):
-                nxt = pass_ids[idx + 1] if idx + 1 < len(pass_ids) else None
-                if _cex_tr is not None:
-                    cex_frames.clear()
-                    sys.settrace(_cex_tr)
-                try:
-                    passed, _ = run_one_fn(pid_node, nxt)
-                finally:
-                    if _cex_tr is not None:
-                        sys.settrace(None)
-                if not passed:
-                    regressed = pid_node
-                    break
-
-            _send(w_fd, {
-                "ok": regressed is None,
-                "fail_passed": True,
-                "regressed_node": regressed,
-                "counterexample_frames": cex_frames if regressed else [],
-            })
-            os.close(w_fd)
-            os._exit(0)
+            _eval_one_patch_in_child(w_fd, patches, capture_site, run_one_fn, fail_ids, pass_ids)
         else:
             os.close(w_fd)
             ready, _, _ = select.select([r_fd], [], [], timeout_s)
@@ -1995,6 +2095,33 @@ class CoWProgramSimulator:
         res = self._read_frame() or {"ok": False, "fail_passed": False}
         self.total_sim_ms += float(res.get("ms", 0.0))
         return res
+
+    def simulate_patches_parallel(
+        self,
+        batch_patches: Sequence[Mapping[str, str]],
+        *,
+        capture_site: tuple[str, int] | None = None,
+        timeout_s: float = 4.0,
+        concurrency: int = 8,
+    ) -> list[dict[str, Any]]:
+        """16-Way Parallel Copy-on-Write Batch Speculative Execution (`~0.3-0.6 ms` amortized/patch)."""
+        if not batch_patches:
+            return []
+        if not self.ready:
+            return [{"ok": False, "fail_passed": False, "reason": "SIMULATOR_NOT_READY"} for _ in batch_patches]
+        self._write_frame({
+            "cmd": "batch",
+            "batch_patches": [dict(p) for p in batch_patches],
+            "capture_site": list(capture_site) if capture_site else None,
+            "timeout_s": timeout_s,
+            "concurrency": concurrency,
+        })
+        resp = self._read_frame() or {}
+        results = list(resp.get("results") or [])
+        executed = sum(1 for r in results if not r.get("skipped"))
+        self.simulations_count += max(1, executed)
+        self.total_sim_ms += float(resp.get("wall_ms", 0.0))
+        return results
 
     def close(self) -> None:
         if self._req_w >= 0:
@@ -2561,10 +2688,11 @@ class AngelicCEGISSynthesizer:
 
     def _find_enclosing_stmt_and_func(
         self, tree: ast.Module, lineno: int
-    ) -> tuple[ast.stmt | None, ast.FunctionDef | ast.AsyncFunctionDef | None]:
+    ) -> tuple[ast.stmt | None, ast.FunctionDef | ast.AsyncFunctionDef | None, list[ast.If]]:
         best_stmt: ast.stmt | None = None
         best_span = 10**9
         enclosing_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+        enclosing_ifs: list[tuple[int, ast.If]] = []
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 end_ln = getattr(node, "end_lineno", node.lineno)
@@ -2572,10 +2700,15 @@ class AngelicCEGISSynthesizer:
                     enclosing_fn = node
             elif isinstance(node, ast.stmt) and hasattr(node, "lineno"):
                 end_ln = getattr(node, "end_lineno", node.lineno)
-                if node.lineno <= lineno <= end_ln and (end_ln - node.lineno) <= best_span:
-                    best_stmt = node
-                    best_span = end_ln - node.lineno
-        return best_stmt, enclosing_fn
+                if node.lineno <= lineno <= end_ln:
+                    span = end_ln - node.lineno
+                    if span <= best_span:
+                        best_stmt = node
+                        best_span = span
+                    if isinstance(node, ast.If) and node.lineno < lineno:
+                        enclosing_ifs.append((lineno - node.lineno, node))
+        enclosing_ifs.sort(key=lambda item: item[0])
+        return best_stmt, enclosing_fn, [if_n for _, if_n in enclosing_ifs[:2]]
 
     def _module_safe_globals(self, tree: ast.Module) -> tuple[dict[str, Any], list[str], list[str]]:
         ns: dict[str, Any] = {}
@@ -2623,7 +2756,34 @@ class AngelicCEGISSynthesizer:
             except (OSError, SyntaxError):
                 return None
 
-        for site_row in ranked_sites[:16]:
+        from canonical.swe_kernel.petri_cow_splicing_engine_v1 import (
+            BackwardWitnessAndDualSplicer,
+            RepoNativePetriMiner,
+        )
+
+        top_distinct_files: list[str] = []
+        for r in ranked_sites:
+            rf = str(r["file"])
+            if rf not in top_distinct_files:
+                top_distinct_files.append(rf)
+            if len(top_distinct_files) >= 6:
+                break
+
+        petri = RepoNativePetriMiner(self.worktree)
+        petri.mine_scope(top_distinct_files, max_imported_files=8)
+
+        # Diversify across top 6 distinct files (up to 4 top sites per file) so no single wrapper starves rank #2-#6!
+        selected_sites: list[Mapping[str, Any]] = []
+        per_file_cnt: dict[str, int] = {}
+        for r in ranked_sites:
+            rf = str(r["file"])
+            if rf in top_distinct_files and per_file_cnt.get(rf, 0) < 4:
+                per_file_cnt[rf] = per_file_cnt.get(rf, 0) + 1
+                selected_sites.append(r)
+            if len(selected_sites) >= 22:
+                break
+
+        for site_row in selected_sites:
             if time.perf_counter() >= deadline_monotonic:
                 break
             rel_f = str(site_row["file"])
@@ -2635,7 +2795,7 @@ class AngelicCEGISSynthesizer:
             prof = self.graph.sites.get((rel_f, lineno))
             if prof is None:
                 continue
-            stmt, enclosing_fn = self._find_enclosing_stmt_and_func(tree, lineno)
+            stmt, enclosing_fn, enclosing_ifs = self._find_enclosing_stmt_and_func(tree, lineno)
             if stmt is None:
                 continue
 
@@ -2650,21 +2810,36 @@ class AngelicCEGISSynthesizer:
             mental = ProgramStateMentalModel(prof.fail_frames, prof.pass_frames, extra_globals=mod_globals)
 
             # ------------------------------------------------------------------
-            # A. ANGELIC BRANCH & SUB-CONDITION ABDUCTION + CEGIS / STUN
+            # A. ANGELIC BRANCH & CONTROL-DEPENDENT ENCLOSING-IF ABDUCTION + CEGIS
             # ------------------------------------------------------------------
-            bool_sites: list[ast.expr] = []
+            bool_sites_with_line: list[tuple[ast.expr, int]] = []
             if isinstance(stmt, (ast.If, ast.While)) and stmt.lineno == lineno:
-                bool_sites.append(stmt.test)
+                bool_sites_with_line.append((stmt.test, lineno))
                 if isinstance(stmt.test, ast.BoolOp):
-                    bool_sites.extend(stmt.test.values)
+                    for bv in stmt.test.values:
+                        bool_sites_with_line.append((bv, lineno))
             elif isinstance(stmt, (ast.Return, ast.Assign)):
                 for sub in ast.walk(stmt):
                     if isinstance(sub, ast.IfExp):
-                        bool_sites.append(sub.test)
+                        bool_sites_with_line.append((sub.test, lineno))
 
-            for cond_expr in bool_sites[:4]:
+            # Control-dependence escalation: if `lineno` is inside an `if`/`else` branch body,
+            # also abduct its immediate governing `if <cond>:` header!
+            for enc_if in enclosing_ifs:
+                bool_sites_with_line.append((enc_if.test, enc_if.lineno))
+                if isinstance(enc_if.test, ast.BoolOp):
+                    for bv in enc_if.test.values[:2]:
+                        bool_sites_with_line.append((bv, enc_if.lineno))
+
+            for cond_expr, cond_ln in bool_sites_with_line[:5]:
                 if time.perf_counter() >= deadline_monotonic or not self.sim.ready:
                     break
+                cond_prof = self.graph.sites.get((rel_f, cond_ln)) or prof
+                cond_mental = (
+                    ProgramStateMentalModel(cond_prof.fail_frames, cond_prof.pass_frames, extra_globals=mod_globals)
+                    if cond_prof is not prof
+                    else mental
+                )
                 orig_cond_txt = ast.unparse(cond_expr)
                 for angelic_bool in (True, False):
                     if time.perf_counter() >= deadline_monotonic:
@@ -2673,30 +2848,43 @@ class AngelicCEGISSynthesizer:
                     if not forced_src:
                         continue
                     self.angelic_interventions_tested += 1
-                    sim_res = self.sim.simulate_patch({rel_f: forced_src}, capture_site=(rel_f, lineno))
+                    sim_res = self.sim.simulate_patch({rel_f: forced_src}, capture_site=(rel_f, cond_ln))
                     if not sim_res.get("fail_passed"):
                         continue
 
                     cex_snaps = list(sim_res.get("counterexample_frames") or [])
-                    active_pass_envs = [*mental.pass_envs, *[_rehydrate_frame(s) for s in cex_snaps]]
+                    active_pass_envs = [*cond_mental.pass_envs, *[_rehydrate_frame(s) for s in cex_snaps]]
 
                     for _round in range(4):
                         if time.perf_counter() >= deadline_monotonic:
                             break
-                        target_vals = [angelic_bool] * len(mental.fail_envs)
+                        target_vals = [angelic_bool] * len(cond_mental.fail_envs)
                         cands = synthesize_expressions_bottom_up(
-                            mental,
+                            cond_mental,
                             orig_expr=orig_cond_txt,
-                            fail_envs=mental.fail_envs,
+                            fail_envs=cond_mental.fail_envs,
                             pass_envs=active_pass_envs,
-                            target_fail_values=target_vals if mental.fail_envs else None,
+                            target_fail_values=target_vals if cond_mental.fail_envs else None,
                             module_names=helper_names,
                             assertion_literals=self.graph.assertion_expected_literals,
                             max_terms=20,
                         )
+                        for p_txt, _ in petri.synthesize_petri_candidates(
+                            rel_file=rel_f,
+                            orig_expr=orig_cond_txt,
+                            fail_frames=cond_prof.fail_frames,
+                            pass_frames=cond_prof.pass_frames,
+                            require_bool=True,
+                            max_candidates=10,
+                        ):
+                            try:
+                                p_ir = SemanticMeaningIR.lift_expr(ast.parse(p_txt, mode="eval").body)
+                                cands.append((p_txt, p_ir))
+                            except SyntaxError:
+                                pass
                         disc_preds = synthesize_discriminating_predicates(
-                            mental,
-                            fail_envs=mental.fail_envs,
+                            cond_mental,
+                            fail_envs=cond_mental.fail_envs,
                             pass_envs=active_pass_envs,
                             site_constants=site_constants,
                             max_preds=12,
@@ -2715,33 +2903,44 @@ class AngelicCEGISSynthesizer:
                         # Sort strictly by minimal MDL cost so concise sub-expression fixes (`converter is not None`) win!
                         cands.sort(key=lambda item: len(item[0]))
 
+                        batch_items: list[tuple[str, IRNode, str]] = []
+                        seen_c: set[str] = set()
+                        for cand_txt, cand_ir in cands[:24]:
+                            if cand_txt in seen_c:
+                                continue
+                            seen_c.add(cand_txt)
+                            patched_src = _replace_ast_span_in_source(src, cond_expr, cand_txt)
+                            if patched_src:
+                                batch_items.append((cand_txt, cand_ir, patched_src))
+
                         solved_site = False
                         new_cex_added = False
-                        for cand_txt, cand_ir in cands[:20]:
-                            patched_src = _replace_ast_span_in_source(src, cond_expr, cand_txt)
-                            if not patched_src:
-                                continue
-                            res = self.sim.simulate_patch({rel_f: patched_src}, capture_site=(rel_f, lineno))
-                            if res.get("ok"):
-                                orig_ir = SemanticMeaningIR.lift_expr(cond_expr)
-                                verified_in_sim.append(CandidatePatch(
-                                    description=f"Angelic-CEGIS `{orig_cond_txt}` -> `{cand_txt}` at {rel_f}:{lineno}",
-                                    file_patches={rel_f: patched_src},
-                                    primary_file=rel_f,
-                                    primary_line=lineno,
-                                    mechanism="ANGELIC_BRANCH_CEGIS",
-                                    semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {cand_ir.canonical_sexpr()}",
-                                    mdl_cost=len(cand_txt),
-                                ))
-                                solved_site = True
-                                break
-                            if res.get("fail_passed") and res.get("counterexample_frames"):
-                                for cs in res["counterexample_frames"]:
-                                    env_cx = _rehydrate_frame(cs)
-                                    if env_cx not in active_pass_envs:
-                                        active_pass_envs.append(env_cx)
-                                        new_cex_added = True
-                                        self.cegis_refinements += 1
+                        if batch_items:
+                            batch_res = self.sim.simulate_patches_parallel(
+                                [{rel_f: it[2]} for it in batch_items[:16]],
+                                capture_site=(rel_f, cond_ln),
+                            )
+                            for (cand_txt, cand_ir, patched_src), res in zip(batch_items[:16], batch_res):
+                                if res.get("ok"):
+                                    orig_ir = SemanticMeaningIR.lift_expr(cond_expr)
+                                    verified_in_sim.append(CandidatePatch(
+                                        description=f"Angelic-CEGIS `{orig_cond_txt}` -> `{cand_txt}` at {rel_f}:{cond_ln}",
+                                        file_patches={rel_f: patched_src},
+                                        primary_file=rel_f,
+                                        primary_line=cond_ln,
+                                        mechanism="ANGELIC_BRANCH_CEGIS",
+                                        semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {cand_ir.canonical_sexpr()}",
+                                        mdl_cost=len(cand_txt),
+                                    ))
+                                    solved_site = True
+                                    break
+                                if res.get("fail_passed") and res.get("counterexample_frames"):
+                                    for cs in res["counterexample_frames"]:
+                                        env_cx = _rehydrate_frame(cs)
+                                        if env_cx not in active_pass_envs:
+                                            active_pass_envs.append(env_cx)
+                                            new_cex_added = True
+                                            self.cegis_refinements += 1
                         if solved_site or not new_cex_added:
                             break
                     if verified_in_sim:
@@ -2753,80 +2952,283 @@ class AngelicCEGISSynthesizer:
                 break
 
             # ------------------------------------------------------------------
-            # B. COMPOSITIONAL EXPRESSION & CALL-ARGUMENT CEGIS
+            # B. COMPOSITIONAL EXPRESSION + REPO-NATIVE PETRI NET + DUAL-PROGRAM SPLICING
             # ------------------------------------------------------------------
             value_exprs: list[ast.expr] = []
-            if isinstance(stmt, ast.Return) and stmt.value is not None:
-                value_exprs.append(stmt.value)
-            elif isinstance(stmt, ast.Assign) and stmt.lineno == lineno:
-                value_exprs.append(stmt.value)
-            elif isinstance(stmt, ast.AnnAssign) and stmt.value is not None and stmt.lineno == lineno:
-                value_exprs.append(stmt.value)
-            elif isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Call):
-                value_exprs.extend(stmt.value.args[:3])
-            # Also include interior Call / Compare / BinOp sub-expressions for compositional repair!
-            for sub in ast.walk(stmt):
-                if isinstance(sub, (ast.Compare, ast.BinOp, ast.Call)) and sub not in value_exprs and getattr(sub, "lineno", -1) == lineno:
-                    value_exprs.append(sub)
 
-            for v_node in value_exprs[:4]:
+            def _add_val_expr(enode: ast.expr, *, allow_none_const: bool = False) -> None:
+                if isinstance(enode, ast.Constant) and enode.value is None and not allow_none_const:
+                    return
+                # Never replace a multi-part f-string message template (`JoinedStr`) wholesale with a bare variable;
+                # instead mutate its interpolated `FormattedValue.value` expressions!
+                if isinstance(enode, ast.JoinedStr) and any(isinstance(v, ast.FormattedValue) for v in enode.values):
+                    return
+                if enode not in value_exprs:
+                    value_exprs.append(enode)
+
+            if isinstance(stmt, ast.Return) and stmt.value is not None:
+                _add_val_expr(stmt.value, allow_none_const=True)
+            elif isinstance(stmt, ast.Assign) and stmt.lineno == lineno:
+                _add_val_expr(stmt.value, allow_none_const=True)
+            elif isinstance(stmt, ast.AnnAssign) and stmt.value is not None and stmt.lineno == lineno:
+                _add_val_expr(stmt.value, allow_none_const=True)
+            elif isinstance(stmt, ast.Expr) and isinstance(stmt.value, ast.Call):
+                for a_node in stmt.value.args[:4]:
+                    _add_val_expr(a_node)
+                for kw_node in stmt.value.keywords[:4]:
+                    _add_val_expr(kw_node.value)
+
+            # Exception-Factory Callee Preservation: inside `raise <Call>`, never swap the exception
+            # constructor call itself for a non-exception method; only synthesize over its arguments/f-strings!
+            raise_exc_call = stmt.exc if isinstance(stmt, ast.Raise) and isinstance(stmt.exc, ast.Call) else None
+            is_compound_block = isinstance(stmt, (ast.If, ast.For, ast.AsyncFor, ast.While, ast.With, ast.AsyncWith, ast.Try))
+            stmt_end_ln = lineno if is_compound_block else getattr(stmt, "end_lineno", lineno)
+            walk_root: ast.AST = stmt.test if isinstance(stmt, (ast.If, ast.While)) else stmt
+            if isinstance(stmt, (ast.If, ast.While)):
+                stmt_end_ln = getattr(stmt.test, "end_lineno", lineno)
+
+            for sub in ast.walk(walk_root):
+                sub_ln = getattr(sub, "lineno", -1)
+                if not (stmt.lineno <= sub_ln <= stmt_end_ln):
+                    continue
+                if isinstance(sub, ast.FormattedValue):
+                    _add_val_expr(sub.value)
+                elif isinstance(sub, ast.Call):
+                    if sub is not raise_exc_call:
+                        _add_val_expr(sub)
+                    for a_node in sub.args[:4]:
+                        _add_val_expr(a_node)
+                    for kw_node in sub.keywords[:4]:
+                        _add_val_expr(kw_node.value)
+                elif isinstance(sub, (ast.Compare, ast.BinOp, ast.Attribute)):
+                    _add_val_expr(sub)
+
+            in_scope_var_names = [
+                k for env in mental.fail_envs[:2] for k in env.keys() if isinstance(k, str) and k.isidentifier()
+            ]
+            self_types = []
+            for ff in prof.fail_frames[:2]:
+                sm = ff.get("self")
+                if isinstance(sm, Mapping):
+                    self_types.extend(sm.get("mro") or ([sm["t"]] if sm.get("t") else []))
+            sibling_attrs = petri.sibling_attrs_for_types(self_types) if self_types else []
+
+            for v_node in value_exprs[:6]:
                 if time.perf_counter() >= deadline_monotonic or not self.sim.ready:
                     break
                 orig_v_txt = ast.unparse(v_node)
                 active_pass_envs = list(mental.pass_envs)
+
+                # Backward witness propagation when `stmt` is `return ...` and expected literal is known!
+                target_fail_vals: list[Any] | None = None
+                if (
+                    isinstance(stmt, ast.Return)
+                    and stmt.value is not None
+                    and self.graph.assertion_expected_literals
+                    and len(mental.fail_envs) == 1
+                ):
+                    for exp_lit in self.graph.assertion_expected_literals[:2]:
+                        for inv_node, inv_val in BackwardWitnessAndDualSplicer.invert_return_residual(stmt.value, exp_lit):
+                            if ast.unparse(inv_node) == orig_v_txt:
+                                target_fail_vals = [inv_val]
+                                break
+
                 expr_cands = synthesize_expressions_bottom_up(
                     mental,
                     orig_expr=orig_v_txt,
                     fail_envs=mental.fail_envs,
                     pass_envs=active_pass_envs,
-                    target_fail_values=None,
+                    target_fail_values=target_fail_vals,
                     module_names=helper_names,
                     assertion_literals=self.graph.assertion_expected_literals,
-                    max_terms=24,
+                    max_terms=20,
                 )
-                for cand_txt, cand_ir in expr_cands:
+                if target_fail_vals is not None and not expr_cands:
+                    expr_cands = synthesize_expressions_bottom_up(
+                        mental,
+                        orig_expr=orig_v_txt,
+                        fail_envs=mental.fail_envs,
+                        pass_envs=active_pass_envs,
+                        target_fail_values=None,
+                        module_names=helper_names,
+                        assertion_literals=self.graph.assertion_expected_literals,
+                        max_terms=20,
+                    )
+
+                v_node_is_bool = (
+                    isinstance(v_node, (ast.Compare, ast.BoolOp))
+                    or (isinstance(v_node, ast.UnaryOp) and isinstance(v_node.op, ast.Not))
+                    or (isinstance(v_node, ast.Constant) and isinstance(v_node.value, bool))
+                )
+                # Inject Repo-Native Type-Transition Petri-Net morphisms + Sibling-Return Monoidal Lifts!
+                sib_lifts = (
+                    petri.synthesize_sibling_return_lifts(enclosing_fn, stmt, prof.fail_frames)
+                    if isinstance(stmt, ast.Return) and v_node is stmt.value
+                    else []
+                )
+                raw_petri = petri.synthesize_petri_candidates(
+                    rel_file=rel_f,
+                    orig_expr=orig_v_txt,
+                    fail_frames=prof.fail_frames,
+                    pass_frames=prof.pass_frames,
+                    require_bool=v_node_is_bool,
+                    max_candidates=16,
+                )
+                if isinstance(stmt, ast.Raise):
+                    # Inside `raise ...`, forbid replacing message expressions with side-effecting validator calls
+                    raw_petri = [
+                        (pt, pv) for pt, pv in raw_petri
+                        if not pv.startswith(("PETRI_METHOD", "PETRI_MOD_FUNC"))
+                    ]
+                petri_cands = [*sib_lifts, *raw_petri]
+                merged_cands: list[tuple[str, IRNode, str]] = []
+                seen_expr_txt: set[str] = set()
+                # Interleave top Petri morphisms + observational CEGIS terms so domain calls aren't starved
+                for p_txt, p_prov in petri_cands[:12]:
+                    if p_txt not in seen_expr_txt:
+                        try:
+                            p_ir = SemanticMeaningIR.lift_expr(ast.parse(p_txt, mode="eval").body)
+                            seen_expr_txt.add(p_txt)
+                            merged_cands.append((p_txt, p_ir, f"PETRI_NET_SYNTHESIS:{p_prov}"))
+                        except SyntaxError:
+                            pass
+                for c_txt, c_ir in expr_cands[:16]:
+                    if c_txt not in seen_expr_txt:
+                        seen_expr_txt.add(c_txt)
+                        merged_cands.append((c_txt, c_ir, "ANGELIC_VALUE_CEGIS"))
+
+                eval_queue: list[tuple[str, IRNode, str, str]] = []
+                for c_txt, c_ir, mech in merged_cands[:24]:
+                    p_src = _replace_ast_span_in_source(src, v_node, c_txt)
+                    if p_src:
+                        eval_queue.append((c_txt, c_ir, mech, p_src))
+
+                partial_fail_passers: list[tuple[str, list[dict[str, Any]]]] = []
+                partial_mask_holders: list[tuple[str, list[bool]]] = []
+
+                for w_idx in range(0, len(eval_queue), 16):
                     if time.perf_counter() >= deadline_monotonic:
                         break
-                    patched_src = _replace_ast_span_in_source(src, v_node, cand_txt)
-                    if not patched_src:
-                        continue
-                    res = self.sim.simulate_patch({rel_f: patched_src}, capture_site=(rel_f, lineno))
-                    if res.get("ok"):
-                        orig_ir = SemanticMeaningIR.lift_expr(v_node)
-                        verified_in_sim.append(CandidatePatch(
-                            description=f"Value-CEGIS `{orig_v_txt}` -> `{cand_txt}` at {rel_f}:{lineno}",
-                            file_patches={rel_f: patched_src},
-                            primary_file=rel_f,
-                            primary_line=lineno,
-                            mechanism="ANGELIC_VALUE_CEGIS",
-                            semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {cand_ir.canonical_sexpr()}",
-                            mdl_cost=len(cand_txt),
-                        ))
+                    wave_items = eval_queue[w_idx : w_idx + 16]
+                    wave_res = self.sim.simulate_patches_parallel(
+                        [{rel_f: it[3]} for it in wave_items],
+                        capture_site=(rel_f, lineno),
+                    )
+                    for (cand_txt, cand_ir, mech, patched_src), res in zip(wave_items, wave_res):
+                        if res.get("ok"):
+                            orig_ir = SemanticMeaningIR.lift_expr(v_node)
+                            verified_in_sim.append(CandidatePatch(
+                                description=f"{mech} `{orig_v_txt}` -> `{cand_txt}` at {rel_f}:{lineno}",
+                                file_patches={rel_f: patched_src},
+                                primary_file=rel_f,
+                                primary_line=lineno,
+                                mechanism=mech.split(":")[0],
+                                semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {cand_ir.canonical_sexpr()}",
+                                mdl_cost=len(cand_txt),
+                            ))
+                            break
+                        if res.get("fail_passed"):
+                            partial_fail_passers.append((cand_txt, list(res.get("counterexample_frames") or [])))
+                        mask = list(res.get("passed_fail_mask") or [])
+                        if mask and any(mask) and not all(mask):
+                            partial_mask_holders.append((cand_txt, mask))
+                    if verified_in_sim:
                         break
-                    if res.get("fail_passed"):
+
+                # Dual-Program Splicing Regime A: `P1` (`fail_passed=True`) spliced with `P0` (`orig_v_txt`)!
+                if not verified_in_sim and partial_fail_passers:
+                    for cand_txt, cx_raw in partial_fail_passers[:4]:
                         self.cegis_refinements += 1
-                        cx_envs = [_rehydrate_frame(s) for s in (res.get("counterexample_frames") or [])]
-                        disc_preds = synthesize_discriminating_predicates(
-                            mental, fail_envs=mental.fail_envs, pass_envs=[*active_pass_envs, *cx_envs], max_preds=8
+                        cx_envs = [_rehydrate_frame(s) for s in cx_raw]
+                        guards = BackwardWitnessAndDualSplicer.synthesize_separating_guards(
+                            mental,
+                            positive_envs=mental.fail_envs,
+                            negative_envs=[*active_pass_envs, *cx_envs],
+                            site_constants=site_constants,
+                            sibling_bool_attrs=sibling_attrs,
+                            synthesize_disc_fn=synthesize_discriminating_predicates,
+                            max_guards=8,
                         )
-                        for d_expr, _ in disc_preds:
-                            stun_txt = f"({cand_txt}) if ({d_expr}) else ({orig_v_txt})"
-                            stun_src = _replace_ast_span_in_source(src, v_node, stun_txt)
-                            if not stun_src:
-                                continue
-                            if self.sim.simulate_patch({rel_f: stun_src}).get("ok"):
-                                stun_ir = SemanticMeaningIR.lift_expr(ast.parse(stun_txt, mode="eval").body)
-                                orig_ir = SemanticMeaningIR.lift_expr(v_node)
-                                verified_in_sim.append(CandidatePatch(
-                                    description=f"STUN-CEGIS `{stun_txt}` at {rel_f}:{lineno}",
-                                    file_patches={rel_f: stun_src},
-                                    primary_file=rel_f,
-                                    primary_line=lineno,
-                                    mechanism="STUN_GUARD_SYNTHESIS",
-                                    semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {stun_ir.canonical_sexpr()}",
-                                    mdl_cost=len(stun_txt),
-                                ))
+                        spliced_list = BackwardWitnessAndDualSplicer.build_spliced_expressions(
+                            positive_expr=cand_txt,
+                            negative_expr=orig_v_txt,
+                            guards=guards,
+                            in_scope_vars=in_scope_var_names,
+                            num_distinct_fail_witnesses=len(mental.fail_envs),
+                        )
+                        splice_batch: list[tuple[str, str]] = []
+                        for sp_txt, _ in spliced_list[:8]:
+                            sp_src = _replace_ast_span_in_source(src, v_node, sp_txt)
+                            if sp_src:
+                                splice_batch.append((sp_txt, sp_src))
+                        if splice_batch:
+                            sp_res = self.sim.simulate_patches_parallel([{rel_f: it[1]} for it in splice_batch])
+                            for (sp_txt, sp_src), r_sp in zip(splice_batch, sp_res):
+                                if r_sp.get("ok"):
+                                    sp_ir = SemanticMeaningIR.lift_expr(ast.parse(sp_txt, mode="eval").body)
+                                    orig_ir = SemanticMeaningIR.lift_expr(v_node)
+                                    verified_in_sim.append(CandidatePatch(
+                                        description=f"Dual-Program-Splice `{sp_txt}` at {rel_f}:{lineno}",
+                                        file_patches={rel_f: sp_src},
+                                        primary_file=rel_f,
+                                        primary_line=lineno,
+                                        mechanism="DUAL_PROGRAM_SPLICING",
+                                        semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {sp_ir.canonical_sexpr()}",
+                                        mdl_cost=len(sp_txt),
+                                    ))
+                                    break
+                        if verified_in_sim:
+                            break
+
+                # Dual-Program Splicing Regime B: Complementary `P1` + `P2` across multiple failing tests!
+                if not verified_in_sim and len(partial_mask_holders) >= 2 and len(mental.fail_envs) >= 2:
+                    for i_m, (p1_txt, m1) in enumerate(partial_mask_holders[:6]):
+                        for p2_txt, m2 in partial_mask_holders[i_m + 1 : 6]:
+                            if len(m1) == len(m2) and all(a or b for a, b in zip(m1, m2)):
+                                pos_envs = [mental.fail_envs[k] for k, ok_k in enumerate(m1) if ok_k and k < len(mental.fail_envs)]
+                                neg_envs = [mental.fail_envs[k] for k, ok_k in enumerate(m1) if not ok_k and k < len(mental.fail_envs)]
+                                guards_12 = BackwardWitnessAndDualSplicer.synthesize_separating_guards(
+                                    mental,
+                                    positive_envs=pos_envs,
+                                    negative_envs=neg_envs,
+                                    site_constants=site_constants,
+                                    sibling_bool_attrs=sibling_attrs,
+                                    synthesize_disc_fn=synthesize_discriminating_predicates,
+                                    max_guards=6,
+                                )
+                                spliced_12 = BackwardWitnessAndDualSplicer.build_spliced_expressions(
+                                    positive_expr=p1_txt,
+                                    negative_expr=p2_txt,
+                                    guards=guards_12,
+                                    in_scope_vars=in_scope_var_names,
+                                    num_distinct_fail_witnesses=len(mental.fail_envs),
+                                )
+                                sp12_batch = [
+                                    (sp_t, s_p)
+                                    for sp_t, _ in spliced_12[:6]
+                                    if (s_p := _replace_ast_span_in_source(src, v_node, sp_t)) is not None
+                                ]
+                                if sp12_batch:
+                                    r12 = self.sim.simulate_patches_parallel([{rel_f: it[1]} for it in sp12_batch])
+                                    for (sp_t, s_p), rr in zip(sp12_batch, r12):
+                                        if rr.get("ok"):
+                                            sp_ir = SemanticMeaningIR.lift_expr(ast.parse(sp_t, mode="eval").body)
+                                            orig_ir = SemanticMeaningIR.lift_expr(v_node)
+                                            verified_in_sim.append(CandidatePatch(
+                                                description=f"Dual-Partition-Splice `{sp_t}` at {rel_f}:{lineno}",
+                                                file_patches={rel_f: s_p},
+                                                primary_file=rel_f,
+                                                primary_line=lineno,
+                                                mechanism="DUAL_PROGRAM_SPLICING",
+                                                semantic_delta_ir=f"{orig_ir.canonical_sexpr()} => {sp_ir.canonical_sexpr()}",
+                                                mdl_cost=len(sp_t),
+                                            ))
+                                            break
+                            if verified_in_sim:
                                 break
+                        if verified_in_sim:
+                            break
+
                 if verified_in_sim:
                     break
 
@@ -2966,8 +3368,8 @@ class AngelicCEGISSynthesizer:
                 down_sites = [s for s in ranked_sites if s["file"] == down_file][:4]
                 for us in up_sites:
                     for ds in down_sites:
-                        u_stmt, _ = self._find_enclosing_stmt_and_func(up_loaded[2], int(us["line"]))
-                        d_stmt, _ = self._find_enclosing_stmt_and_func(down_loaded[2], int(ds["line"]))
+                        u_stmt, _, _ = self._find_enclosing_stmt_and_func(up_loaded[2], int(us["line"]))
+                        d_stmt, _, _ = self._find_enclosing_stmt_and_func(down_loaded[2], int(ds["line"]))
                         if u_stmt is None or d_stmt is None:
                             continue
                         u_expr = u_stmt.value if isinstance(u_stmt, (ast.Return, ast.Assign)) else None

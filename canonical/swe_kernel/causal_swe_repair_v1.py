@@ -1735,26 +1735,47 @@ def repair_worktree(
                 cand_tests: list[str] = []
                 if imp.get("exact_hit"):
                     cand_tests.extend(imp.get("impacted_tests") or [])
-                # Also scan `src/`-stripped dotted module names (`src/pkg/utils.py` -> `pkg.utils`) across test files!
-                mod_tokens: list[str] = []
+                # Also scan 2-hop `src/`-stripped dotted module names (`utils.py` -> `metadata.py` -> `test_metadata.py`)!
+                direct_mods: set[str] = set()
                 for rp in file_patches:
-                    norm_m = rp.removeprefix("src/").removesuffix(".py").replace("/", ".")
-                    mod_tokens.append(norm_m)
-                    if "." in norm_m:
-                        pkg_p, leaf_m = norm_m.rsplit(".", 1)
+                    direct_mods.add(rp.removeprefix("src/").removesuffix(".py").replace("/", "."))
+                hop2_mods: set[str] = set(direct_mods)
+                src_root = worktree / "src" if (worktree / "src").is_dir() else worktree
+                for py_p in src_root.rglob("*.py"):
+                    rel_py = py_p.relative_to(worktree).as_posix()
+                    if rel_py.startswith(("tests/", "test/", "testing/")) or py_p.stat().st_size > 180_000:
+                        continue
+                    py_txt = py_p.read_text(encoding="utf-8", errors="ignore")
+                    for dm in direct_mods:
+                        leaf = dm.rsplit(".", 1)[-1]
+                        if dm in py_txt or f"import {leaf}" in py_txt:
+                            hop2_mods.add(rel_py.removeprefix("src/").removesuffix(".py").replace("/", "."))
+                mod_tokens: list[str] = []
+                for nm in sorted(hop2_mods)[:12]:
+                    mod_tokens.append(nm)
+                    if "." in nm:
+                        pkg_p, leaf_m = nm.rsplit(".", 1)
                         mod_tokens.append(f"from {pkg_p} import {leaf_m}")
-                for tf_rel in imp.get("impacted_tests") or []:
+                all_test_candidates = list(imp.get("impacted_tests") or [])
+                for td_name in ("tests", "test", "testing"):
+                    td_p = worktree / td_name
+                    if td_p.is_dir():
+                        for tf_cand in sorted(td_p.rglob("test_*.py")):
+                            r_tf = tf_cand.relative_to(worktree).as_posix()
+                            if r_tf not in all_test_candidates:
+                                all_test_candidates.append(r_tf)
+                for tf_rel in all_test_candidates:
                     if tf_rel == base_test_rel or tf_rel in cand_tests:
                         continue
                     tf_p = worktree / tf_rel
-                    if tf_p.is_file() and tf_p.stat().st_size < 90_000:
+                    if tf_p.is_file() and tf_p.stat().st_size < 180_000:
                         txt_t = tf_p.read_text(encoding="utf-8", errors="ignore")
                         if any(tok in txt_t for tok in mod_tokens):
                             cand_tests.append(tf_rel)
                 sibling_tests = [
                     t for t in cand_tests
-                    if t != base_test_rel and (worktree / t).is_file() and (worktree / t).stat().st_size < 90_000
-                ][:4]
+                    if t != base_test_rel and (worktree / t).is_file() and (worktree / t).stat().st_size < 180_000
+                ][:6]
                 if sibling_tests:
                     sib_res = run_pytest_verdicts(
                         worktree, sibling_tests, python_exe=python_exe, timeout_s=18.0

@@ -1,5 +1,5 @@
 {
-  "benchmark_wall_seconds": 23.7863,
+  "benchmark_wall_seconds": 23.8748,
   "date": "2026-11-24",
   "experiment_1_goal_directed_room_learning": {
     "empty_memory_control_unread_rate": 1.0,
@@ -18,7 +18,7 @@
         0
       ],
       "total_probes": 6,
-      "total_seconds": 3.1022,
+      "total_seconds": 3.2167,
       "valid_verified": "8/8",
       "warm_episodes_zero_probes": 6
     },
@@ -61,7 +61,7 @@
         0
       ],
       "total_probes": 24,
-      "total_seconds": 6.6258
+      "total_seconds": 6.7098
     }
   },
   "experiment_2_cli_action_grammar": {
@@ -69,7 +69,7 @@
       "binaries_probed": 6,
       "pass": true,
       "recalled_from_memory": 0,
-      "seconds": 0.1579
+      "seconds": 0.1573
     },
     "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
     "warm_unseen_episodes": {
@@ -269,6 +269,91 @@
     "leap4_destructive_gui_wipe_blocked_in_shadow": true,
     "leap4_inert_aria_decoy_pruned_in_shadow": true,
     "leap4_safe_gui_plan_admitted": true
+  },
+  "experiment_6_petri_cow_splicing_and_ablations": {
+    "admission_filter_and_memory_ablations": {
+      "ablation_disabled_empty_store_hits": "0/4",
+      "ablation_generalized_store_hits": "4/4",
+      "ablation_raw_traces_store_hits": "1/4",
+      "foreign_ident_unbound_rejected": true,
+      "staleness_drift_revalidated": true,
+      "valid_skill_admitted": true
+    },
+    "cross_modal_petri_net": {
+      "pass": true,
+      "steps_executed": 4,
+      "surfaces_chained": [
+        "GUI_ARIA",
+        "SQLITE_QUERY",
+        "PYTHON_TRANSFORM",
+        "CLI_EXEC"
+      ]
+    },
+    "speculative_16way_cow_world_tomography": {
+      "branches_forked": 16,
+      "mealy_transitions_compiled": 16,
+      "wall_ms": 38.48,
+      "winner_action": "heal_gateway_and_unlock_settings",
+      "zero_base_disk_mutation": true
+    },
+    "v3_petri_splicing_swe_delta": {
+      "additional_petri_verified_repairs": [
+        {
+          "certified_genuine": true,
+          "commit": "pluggy@e108fa4490",
+          "exact_ast_human_match": true,
+          "mechanism": "PETRI_RECV_METHOD_SWAP:self.get_plugin->has_plugin"
+        },
+        {
+          "certified_genuine": true,
+          "commit": "packaging@553582d916",
+          "mechanism": "PETRI_UNWRAP:list(charset)->charset"
+        }
+      ],
+      "hop2_reverse_import_referee_false_positives": 0,
+      "named_5_commits_evaluated": [
+        {
+          "certified_genuine": true,
+          "commit": "click@05f6fd0",
+          "mechanism": "PETRI_SIBLING_RETURN_COALESCE",
+          "split": "repo_documented_calibration",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "PASS__VERIFIED_REPAIR"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "click@c53d373",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__MULTI_HUNK_23_LINES"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "click@fc518e4",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__ASYNC_SIGINT_TEARDOWN_76_LINES"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "werkzeug@884437ae",
+          "localized_top5": false,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__BOOLEAN_IMPLICATION_RESTRUCTURE"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "werkzeug@051fd663",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__EARLY_RETURN_METHOD_INSERTION"
+        }
+      ]
+    }
   },
   "invariants": {
     "api_spend_usd": 0.0,

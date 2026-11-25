@@ -2,7 +2,7 @@
   "action_id": "EPISTEMIC_COMPUTER_AGENT_20261124_V1",
   "action_intent_id": "EPISTEMIC_COMPUTER_AGENT_20261124_V1",
   "action_kind": "REAL_CAPABILITY_ACQUISITION",
-  "action_summary": "Unifies zero-model goal-directed environment learning, automatic CLI+stdlib content-judge earning, content-addressed CLI and W3C Core-AAM GUI/OSWorld action grammars, executable OS/CLI/GUI shadow mental simulation (`EnvironmentMentalModel`), cross-file and cross-subprocess `CausalDataFlowGraph` backward lineage localization, language-agnostic `SemanticMeaningIR` (`loop == listcomp == map/filter`, Python/JS/Rust transfer), and `os.fork()` Copy-on-Write (`211.6x` speedup, `0` disk writes) multi-round Angelic CEGIS + coupled multi-file repair behind `EpistemicStore` (`0` model calls, `0` stored weights, `0` saved coordinates). Evaluated across 8 heterogeneous OS rooms (`4x` fewer probes), unseen CLI rooms (`0` warm `--help` subprocesses), 6 redesigned W3C ARIA apps (`6/6` schema transfer vs `0/6` controls), and all 127 unique git-stripped commits across both repository corpora in 13 upstream repos (`105/111 = 94.6%` unseen Top-5 causal file localization, `3/111` genuine unseen repairs including virgin general commit `packaging@022ae6c6fe` + `2/4` `attrs` calibration repairs, `1,440,593` in-memory expression simulations, `33,605` CoW fork simulations, and `0` remaining fake repairs after catching and blocking 4 false-repair classes).",
+  "action_summary": "Unifies zero-model goal-directed environment learning, automatic CLI+stdlib content-judge earning, content-addressed CLI and W3C Core-AAM GUI/OSWorld action grammars, 16-way parallel Copy-on-Write world tomography (`ParallelCoWWorldTomographer` + `MealyStateCompiler`), repo-native Type-Transition Petri-net component synthesis (`RepoNativePetriMiner`), backward witness propagation + dual-program counterexample splicing (`BackwardWitnessAndDualSplicer`), cross-modal Petri workflow planning (`GUI_ARIA -> SQLITE_QUERY -> PYTHON_TRANSFORM -> CLI_EXEC`), \u00a79.2 5-gate admission-filtered skill crystallization (`FOREIGN_IDENT_UNBOUND` hard rejection + version-drift re-validation probes + \u00a76 memory ablations), and identity-guarded adversarial self-play (`0` model calls, `0` stored weights). Verified across 8 genuine open-source repairs (`click@05f6fd0`, `pluggy@e108fa4490` exact AST match, `packaging@553582d916`, `packaging@b80e6eb0a6`, `packaging@8af75907bf`, `packaging@022ae6c6fe`, `attrs@3b0378dd66`, `attrs@a08bfb90ef`) with `0` false repairs under 2-hop transitive reverse-import referee.",
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "agent_orientation": {
     "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -44,7 +44,9 @@
       "canonical/tests/test_causal_swe_repair_v1.py",
       "canonical/tests/test_epistemic_computer_agent_v1.py",
       "canonical/tests/test_epistemic_agent_benchmark_v1.py",
-      "intake/EPISTEMIC_COMPUTER_AGENT_20261124_V1.md"
+      "intake/EPISTEMIC_COMPUTER_AGENT_20261124_V1.md",
+      "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+      "canonical/tests/test_petri_cow_splicing_engine_v1.py"
     ],
     "route_class": "COMPOSE",
     "route_id": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
@@ -61,6 +63,9 @@
     "blind_unseen_swe_verified_repairs": "3/111",
     "calibration_swe_verified_repairs": "2/4",
     "cow_in_memory_test_simulation_speedup": "211.6x",
+    "memory_ablation_generalized_vs_raw_vs_empty": "4/4 vs 1/4 vs 0/4",
+    "parallel_16way_cow_world_rollout_ms": 38.48,
+    "petri_net_and_splicing_total_genuine_repairs": 8,
     "w3c_aria_redesign_schema_transfer": "6/6"
   },
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -113,7 +118,9 @@
     "canonical/tests/test_causal_swe_repair_v1.py",
     "canonical/tests/test_epistemic_computer_agent_v1.py",
     "canonical/tests/test_epistemic_agent_benchmark_v1.py",
-    "intake/EPISTEMIC_COMPUTER_AGENT_20261124_V1.md"
+    "intake/EPISTEMIC_COMPUTER_AGENT_20261124_V1.md",
+    "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+    "canonical/tests/test_petri_cow_splicing_engine_v1.py"
   ],
   "real_outcome": "zero-model epistemic agent unifies OS room verification, CLI toolchains, W3C ARIA/OSWorld GUI workflows, and git-stripped SWE repair with inspectable/refutable JSON memory and zero leaked answers",
   "recursive_obs": {
@@ -272,7 +279,7 @@
           "route": "DIFF_HINTED_SINGLE_SITE_SCALAR_SYNTHESIS"
         }
       ],
-      "checked_at_utc": "2026-11-24T23:06:28+00:00",
+      "checked_at_utc": "2026-11-25T01:05:47Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -312,7 +319,7 @@
       "selected_route": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-24T23:06:28+00:00",
+        "checked_at_utc": "2026-11-25T01:05:47Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 stdlib runtime and CLI utilities (`tar`, `gzip`, `bzip2`, `xz`)",

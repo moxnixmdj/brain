@@ -30,6 +30,14 @@ from canonical.swe_kernel import auto_judge_discovery_v1 as ajd
 from canonical.swe_kernel import causal_swe_repair_v1 as swe
 from canonical.swe_kernel import first_principles_mental_cegis_v1 as fpm
 from canonical.swe_kernel import interface_action_grammar_v1 as iag
+from canonical.swe_kernel.petri_cow_splicing_engine_v1 import (
+    AdmissionFilteredSkillStore,
+    CrossModalMorphism,
+    CrossModalPetriPlanner,
+    MealyStateCompiler,
+    MultiLayerStateSnapshot,
+    ParallelCoWWorldTomographer,
+)
 
 SCHEMA = "EPISTEMIC_COMPUTER_AGENT_V1"
 AUTHORITY = "FIRST_PRINCIPLES_ZERO_MODEL_AGENT"
@@ -70,25 +78,31 @@ def hypothesize_candidate_kinds(path: pathlib.Path) -> set[str]:
 class EpistemicStore:
     """Inspectable, human-editable, execution-refutable external store (`parameters_stored = 0`)."""
 
-    def __init__(self, root: pathlib.Path | str) -> None:
+    def __init__(self, root: pathlib.Path | str, *, skill_ablation_mode: str = "generalized") -> None:
         self.root = pathlib.Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
         self.judges_path = self.root / "judges.json"
         self.cli_path = self.root / "cli_grammars.json"
         self.gui_path = self.root / "gui_workflows.json"
         self.swe_path = self.root / "swe_operators.json"
+        self.admitted_skills_path = self.root / "admitted_skills_v1.json"
         self.ledger_path = self.root / "ignorance_ledger.json"
+        self.skill_ablation_mode = skill_ablation_mode
 
         self.judges = ajd.JudgeStore.load(self.judges_path)
         self.cli_memory = iag.CLIGrammarMemory.load(self.cli_path)
         self.gui_memory = iag.GUIWorkflowMemory.load(self.gui_path)
         self.swe_memory = swe.SWERepairMemory.load(self.swe_path)
+        self.admission_skills = AdmissionFilteredSkillStore(
+            self.admitted_skills_path, mode=self.skill_ablation_mode
+        )
 
     def save_all(self) -> None:
         self.judges.save(self.judges_path)
         self.cli_memory.save(self.cli_path)
         self.gui_memory.save(self.gui_path)
         self.swe_memory.save(self.swe_path)
+        self.admission_skills.save()
 
     def reload_all(self) -> None:
         """Reload from disk so human edits or deletions take immediate effect."""
@@ -96,6 +110,9 @@ class EpistemicStore:
         self.cli_memory = iag.CLIGrammarMemory.load(self.cli_path)
         self.gui_memory = iag.GUIWorkflowMemory.load(self.gui_path)
         self.swe_memory = swe.SWERepairMemory.load(self.swe_path)
+        self.admission_skills = AdmissionFilteredSkillStore(
+            self.admitted_skills_path, mode=self.skill_ablation_mode
+        )
 
     def audit(self) -> dict[str, Any]:
         """Verify that zero raw coordinates, zero raw action traces, and zero weights are stored."""
@@ -543,7 +560,7 @@ class EpistemicComputerAgent:
             wt,
             test_target,
             python_exe=python_exe,
-            memory=self.store.swe_memory,
+            memory=self.store.swe_memory if self.store.skill_ablation_mode != "disabled" else None,
             budget_s=budget_s,
         )
         self.store.save_all()
@@ -552,3 +569,86 @@ class EpistemicComputerAgent:
             "agent_schema": SCHEMA,
             "surface": "swe",
         }
+
+    def execute_speculative_world_goal(
+        self,
+        workspace: pathlib.Path | str,
+        candidate_actions: Sequence[tuple[str, Callable[[pathlib.Path], dict[str, Any]]]],
+        goal_residual_fn: Callable[[MultiLayerStateSnapshot, Mapping[str, Any]], float],
+        *,
+        commit_winner: bool = True,
+        initial_dom_state: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """16-Way Parallel CoW Speculative Rollout + 5-Layer Differential State Tomography."""
+        ws = pathlib.Path(workspace).resolve()
+        tomo = ParallelCoWWorldTomographer(max_parallel_ways=16, wave_concurrency=8)
+        mealy = MealyStateCompiler()
+        ranked = tomo.speculate_parallel(
+            ws,
+            candidate_actions,
+            goal_residual_fn,
+            initial_dom_state=initial_dom_state,
+        )
+        transitions_compiled = mealy.ingest_rollouts(ranked)
+        if not ranked:
+            return {
+                "schema": SCHEMA,
+                "surface": "speculative_world",
+                "pass": False,
+                "status": "NO_CANDIDATE_ACTIONS",
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        winner = ranked[0]
+        committed = False
+        if commit_winner and winner.goal_residual == 0.0:
+            for action_id, fn in candidate_actions:
+                if action_id == winner.action_id:
+                    fn(ws)
+                    committed = True
+                    break
+        return {
+            "schema": SCHEMA,
+            "surface": "speculative_world",
+            "pass": winner.goal_residual == 0.0,
+            "winner_action": winner.action_id,
+            "winner_residual": winner.goal_residual,
+            "committed": committed,
+            "branches_forked": tomo.branches_forked,
+            "mealy_transitions_compiled": transitions_compiled,
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    def execute_cross_modal_petri_goal(
+        self,
+        morphisms: Sequence[CrossModalMorphism],
+        initial_tokens: Mapping[str, Any],
+        goal_place: str,
+        goal_verifier: Callable[[Mapping[str, Any]], bool],
+    ) -> dict[str, Any]:
+        """Plan and execute a multi-surface workflow (`GUI -> SQLite -> Python -> CLI`) via Petri reachability."""
+        planner = CrossModalPetriPlanner(morphisms)
+        plan = planner.plan_reachability(list(initial_tokens.keys()), goal_place)
+        if plan is None:
+            return {
+                "schema": SCHEMA,
+                "surface": "cross_modal_petri",
+                "pass": False,
+                "status": "UNREACHABLE_GOAL_PLACE",
+                "goal_place": goal_place,
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        exec_res = planner.execute_plan(plan, initial_tokens, goal_verifier)
+        return {
+            "schema": SCHEMA,
+            "surface": "cross_modal_petri",
+            "pass": bool(exec_res["ok"]),
+            "steps_executed": exec_res["steps_executed"],
+            "surfaces_used": exec_res["surfaces_used"],
+            "trace": exec_res["trace"],
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+

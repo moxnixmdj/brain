@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "09fb5fdbb78d3277d7534c7d839740b7b1e80d4e63212b5606d9f40d7d8368ed"
+  "value": "367226367103ca719afba22c7c5ad725a014cfcc9a8476426a7a71c87782e874"
  },
  "engines": [
   {
@@ -175185,7 +175185,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
    "schema": "EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1",
-   "sha256": "44f766c51daea363d503268ce3c7e88678f88245ddda7fe437f8ad8caf7fd1b0",
+   "sha256": "a3163b2b35c21a1e55c4adf867b6e4d17b6a7eff78ac03a5b3656f4b7fff4f4c",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -251081,7 +251081,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/EPISTEMIC_COMPUTER_AGENT_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "80e564fb34a9be8be121ea638fbf7d94c6d402ffbbf0844be17096af5e515d6c",
+   "sha256": "cca8f23ad4f7cda5b933acd9fcbf3962279f0a11ffe9731d3af07b66991599a7",
    "status": "SHIPPED",
    "terms": {
     "111": 1,
