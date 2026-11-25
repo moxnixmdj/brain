@@ -29,6 +29,7 @@ one run's guard values is not the missing demand language either.
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import pathlib
 import subprocess
@@ -59,42 +60,153 @@ DECLARED: dict[str, str] = {
     "L5": "zero model calls, zero stored parameters, zero network calls at run time",
 }
 
-PROBE_SOURCE = '''"""Records type-level facts about values the program asks a yes/no question of."""
+PROBE_SOURCE = '''"""Records type-level and causal Ring-1 facts about values the program asks a yes/no question of."""
+import atexit
 import json
 import os
 
+_FAST_COUNTS = {}
+_COUNTS = {}
+_BUFFER = []
 
-def probe(line, col, value):
+
+def _flush():
+    path = os.environ.get("BRAIN_PROBE_OUT")
+    if path and _BUFFER:
+        with open(path, "a", encoding="utf-8") as handle:
+            handle.write("".join(_BUFFER))
+        _BUFFER.clear()
+
+
+atexit.register(_flush)
+
+
+def _record(line, col, value, raised=False, extras=None, self_obj=None):
+    node = os.environ.get("PYTEST_CURRENT_TEST", "")
+    if raised:
+        truthy = True
+    else:
+        try:
+            truthy = bool(value)
+        except Exception:
+            truthy = False
+    if node:
+        fast_key = (line, col, node, truthy, raised)
+        fc = _FAST_COUNTS.get(fast_key, 0)
+        if fc >= 6 and extras is None and self_obj is None:
+            return
+        if fc >= 12:
+            return
+        _FAST_COUNTS[fast_key] = fc + 1
+    tname = "RAISED" if raised else type(value).__name__
+    is_none = (not raised) and (value is None)
+    ex_sig = None
+    ex_out = {}
+    if extras:
+        for k, fn in extras:
+            try:
+                ex_out[k] = fn()
+            except Exception:
+                ex_out[k] = None
+        ex_sig = tuple(sorted((k, ex_out[k]) for k in ex_out))
+    self_bools = {}
+    if self_obj is not None:
+        try:
+            d = getattr(self_obj, "__dict__", None)
+            if isinstance(d, dict):
+                self_bools = {k: v for k, v in d.items()
+                              if type(v) is bool and not k.startswith("_") and len(k) <= 24}
+        except Exception:
+            pass
+    if node:
+        key = (line, col, node, truthy, is_none, tname, ex_sig, tuple(sorted(self_bools.items())))
+        c = _COUNTS.get(key, 0)
+        if c >= 2:
+            return
+        _COUNTS[key] = c + 1
     facts = {
         "line": line,
         "col": col,
-        "node": os.environ.get("PYTEST_CURRENT_TEST", ""),
-        "type": type(value).__name__,
-        "repr": repr(value)[:120],
-        "is_none": value is None,
-        "is_bool": type(value) is bool,
-        "truthy": bool(value),
-        "zero": type(value) in (int, float) and value == 0,
-        "empty_str": type(value) is str and value == "",
-        "is_str": type(value) is str,
-        "is_list": type(value) is list,
-        "is_dict": type(value) is dict,
-        "is_tuple": type(value) is tuple,
-        "is_set": type(value) is set,
-        "is_int": type(value) is int,
-        "is_float": type(value) is float,
+        "node": node,
+        "type": tname,
+        "repr": "<raised>" if raised else repr(value)[:120],
+        "raised": raised,
+        "is_none": is_none,
+        "is_bool": (not raised) and (type(value) is bool),
+        "truthy": truthy,
+        "zero": (not raised) and (type(value) in (int, float) and value == 0),
+        "empty_str": (not raised) and (type(value) is str and value == ""),
+        "is_str": (not raised) and (type(value) is str),
+        "is_list": (not raised) and (type(value) is list),
+        "is_dict": (not raised) and (type(value) is dict),
+        "is_tuple": (not raised) and (type(value) is tuple),
+        "is_set": (not raised) and (type(value) is set),
+        "is_int": (not raised) and (type(value) is int),
+        "is_float": (not raised) and (type(value) is float),
     }
-    try:
-        facts["has_len"] = True
-        facts["length"] = len(value)
-    except Exception:
+    if not raised:
+        try:
+            facts["has_len"] = True
+            facts["length"] = len(value)
+        except Exception:
+            facts["has_len"] = False
+            facts["length"] = 0
+    else:
         facts["has_len"] = False
         facts["length"] = 0
+    if ex_out:
+        facts["extras"] = ex_out
+    if self_bools:
+        facts["self_bools"] = self_bools
     path = os.environ.get("BRAIN_PROBE_OUT")
     if path:
-        with open(path, "a", encoding="utf-8") as handle:
-            handle.write(json.dumps(facts) + "\\n")
+        if node:
+            _BUFFER.append(json.dumps(facts) + "\\n")
+            if len(_BUFFER) >= 512:
+                _flush()
+        else:
+            with open(path, "a", encoding="utf-8") as handle:
+                handle.write(json.dumps(facts) + "\\n")
+
+
+def probe(line, col, value, extras=None, self_obj=None):
+    _record(line, col, value, raised=False, extras=extras, self_obj=self_obj)
     return value
+
+
+def probe_thunk(line, col, thunk, extras=None, self_obj=None):
+    try:
+        value = thunk()
+    except Exception:
+        _record(line, col, None, raised=True, extras=extras, self_obj=self_obj)
+        raise
+    _record(line, col, value, raised=False, extras=extras, self_obj=self_obj)
+    return value
+
+
+def probe_callable(line, col, fn, alt_fn):
+    def _wrapped(*args, **kwargs):
+        res = fn(*args, **kwargs)
+        try:
+            alt = bool(alt_fn(*args, **kwargs))
+        except Exception:
+            alt = None
+        _record(line, col, res, raised=False, extras=(("fullmatch", lambda: alt),))
+        return res
+    return _wrapped
+
+
+def probe_sig(line, col):
+    def _deco(fn):
+        def _wrapped(*args, **kwargs):
+            try:
+                return fn(*args, **kwargs)
+            except TypeError as exc:
+                if "positional argument" in str(exc):
+                    _record(line, col, None, raised=True, extras=(("vararg_signature", lambda: False),))
+                raise
+        return _wrapped
+    return _deco
 '''
 
 # (feature name, compiled expression over the guarded expression x, predicate on facts)
@@ -117,6 +229,314 @@ FEATURES: tuple[tuple[str, str, Any], ...] = (
     ("is_float", "isinstance(({x}), float)", lambda f: f["is_float"]),
     ("is_bool", "isinstance(({x}), bool)", lambda f: f["is_bool"]),
 )
+
+_FEAT_ORDER = {name: idx for idx, (name, _, _) in enumerate(FEATURES)}
+
+
+def _parent_map(tree: ast.AST) -> dict[int, ast.AST]:
+    return {id(child): parent for parent in ast.walk(tree)
+            for child in ast.iter_child_nodes(parent)}
+
+
+def _enclosing(node: ast.AST, parents: dict[int, ast.AST],
+               kinds: tuple[type, ...]) -> ast.AST | None:
+    cur = parents.get(id(node))
+    while cur is not None:
+        if isinstance(cur, kinds):
+            return cur
+        cur = parents.get(id(cur))
+    return None
+
+
+def _is_load_expr(node: ast.AST, skip: set[str]) -> bool:
+    if isinstance(node, ast.Name):
+        return (isinstance(node.ctx, ast.Load)
+                and node.id not in skip
+                and not node.id.startswith("__"))
+    if isinstance(node, ast.Attribute):
+        if not isinstance(node.ctx, ast.Load) or node.attr.startswith("__"):
+            return False
+        root: ast.AST = node
+        while isinstance(root, ast.Attribute):
+            root = root.value
+        return isinstance(root, ast.Name) and root.id not in skip
+    return False
+
+
+def _has_unsafe_thunk_nodes(node: ast.AST) -> bool:
+    return any(isinstance(sub, (ast.ListComp, ast.SetComp, ast.GeneratorExp,
+                                ast.DictComp, ast.NamedExpr, ast.Lambda,
+                                ast.Await, ast.Yield, ast.YieldFrom))
+               for sub in ast.walk(node))
+
+
+def _extract_extras(node: ast.AST, target_expr: ast.expr, target_text: str,
+                    parents: dict[int, ast.AST],
+                    skip: set[str]) -> list[dict[str, Any]]:
+    """Extract zero-parameter causal Ring-1 probes from the guard's AST neighborhood."""
+    extras: list[dict[str, Any]] = []
+    seen_keys: set[str] = set()
+
+    def add(key: str, kind: str, probe_expr: str, compiled: str,
+            priority: int = 2) -> None:
+        if key in seen_keys:
+            return
+        try:
+            ast.parse(probe_expr, mode="eval")
+            ast.parse(compiled, mode="eval")
+        except SyntaxError:
+            return
+        seen_keys.add(key)
+        extras.append({"key": key, "kind": kind, "probe": probe_expr,
+                       "compiled": compiled, "priority": priority})
+
+    if isinstance(target_expr, ast.Compare) and len(target_expr.ops) == 1 and len(target_expr.comparators) == 1:
+        lhs = target_expr.left
+        rhs = target_expr.comparators[0]
+        op = target_expr.ops[0]
+        lhs_txt = ast.unparse(lhs)
+        if isinstance(op, ast.NotEq) and _is_load_expr(lhs, skip):
+            add("__lhs_repr__", "lhs_ne", f"repr({lhs_txt})", lhs_txt, priority=0)
+        elif isinstance(op, ast.Eq) and isinstance(rhs, ast.Constant) and type(rhs.value) in (str, int, bytes):
+            tname = type(rhs.value).__name__
+            add(f"lhs_is_{tname}", "guard_replace",
+                f"isinstance({lhs_txt}, {tname})",
+                f"(isinstance({lhs_txt}, {tname}) and ({target_text}))",
+                priority=0)
+    elif isinstance(target_expr, ast.Call):
+        if (isinstance(target_expr.func, ast.Name)
+                and target_expr.func.id == "hasattr"
+                and len(target_expr.args) == 2):
+            obj_txt = ast.unparse(target_expr.args[0])
+            attr_txt = ast.unparse(target_expr.args[1])
+            add("getattr_truthy", "replace",
+                f"bool(getattr({obj_txt}, {attr_txt}, None))",
+                f"bool(getattr({obj_txt}, {attr_txt}, None))",
+                priority=0)
+
+    if isinstance(target_expr, (ast.Name, ast.Attribute)):
+        body_nodes = getattr(node, "body", [])
+        if isinstance(body_nodes, ast.AST):
+            body_nodes = [body_nodes]
+        for bnode in body_nodes:
+            for sub in ast.walk(bnode):
+                if isinstance(sub, ast.Attribute) and _is_load_expr(sub, skip):
+                    atxt = ast.unparse(sub)
+                    if atxt not in target_text:
+                        add(f"body_not_none:{atxt}", "narrow",
+                            f"({atxt} is not None)",
+                            f"(({target_text}) and ({atxt} is not None))",
+                            priority=0)
+
+    if_ancestors = [node] if isinstance(node, ast.If) else []
+    outer_if = _enclosing(node, parents, (ast.If,))
+    if outer_if is not None:
+        if_ancestors.append(outer_if)
+    for if_node in if_ancestors:
+        for orelse_stmt in getattr(if_node, "orelse", []):
+            if isinstance(orelse_stmt, ast.If):
+                for sub in ast.walk(orelse_stmt.test):
+                    if isinstance(sub, ast.Compare) and sub.lineno == getattr(sub, "end_lineno", sub.lineno):
+                        ctxt = ast.unparse(sub)
+                        if ctxt != target_text:
+                            add(f"elif_cmp:{ctxt}", "narrow",
+                                f"bool({ctxt})",
+                                f"(({target_text}) and ({ctxt}))",
+                                priority=0)
+                    elif isinstance(sub, ast.Name) and _is_load_expr(sub, skip):
+                        ntxt = sub.id
+                        if ntxt not in target_text:
+                            add(f"elif_name:{ntxt}", "replace",
+                                f"bool({ntxt})",
+                                f"bool({ntxt})",
+                                priority=0)
+
+    if isinstance(target_expr, ast.Name):
+        pblock = parents.get(id(node))
+        for field in ("body", "orelse"):
+            seq = getattr(pblock, field, None)
+            if isinstance(seq, list) and node in seq:
+                idx = seq.index(node)
+                for nxt in seq[idx + 1 : idx + 2]:
+                    for sub in ast.walk(nxt):
+                        if isinstance(sub, ast.Name) and _is_load_expr(sub, skip):
+                            ntxt = sub.id
+                            if ntxt != target_text:
+                                add(f"next_not:{ntxt}", "companion_not",
+                                    f"(not {ntxt})",
+                                    f"not {ntxt}",
+                                    priority=1)
+    return extras[:10]
+
+
+def guard_sites(source: str) -> list[dict[str, Any]]:
+    """Every single-line guard or boolean-clause decision site in `source`."""
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return []
+    skip = prior.definitions(tree)
+    parents = _parent_map(tree)
+    lines = source.splitlines()
+    raw_candidates: list[tuple[ast.AST, ast.expr, bool, str | None]] = []
+
+    def boolean_clauses(expr: ast.expr) -> list[ast.expr]:
+        out: list[ast.expr] = []
+
+        def walk(e: ast.expr) -> None:
+            if isinstance(e, ast.BoolOp):
+                for v in e.values:
+                    walk(v)
+            elif isinstance(e, ast.UnaryOp) and isinstance(e.op, ast.Not):
+                walk(e.operand)
+            else:
+                out.append(e)
+
+        walk(expr)
+        return out
+
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.If, ast.IfExp, ast.While)):
+            continue
+        fn = _enclosing(node, parents, (ast.FunctionDef, ast.AsyncFunctionDef))
+        has_self = bool(fn is not None and fn.args.args and fn.args.args[0].arg == "self"
+                        and isinstance(node.test, ast.BoolOp)
+                        and all(isinstance(v, ast.Name) for v in node.test.values))
+        test = node.test
+        if test.lineno == getattr(test, "end_lineno", test.lineno) and not _has_unsafe_thunk_nodes(test):
+            if isinstance(test, ast.Name) and test.id in skip:
+                continue
+            raw_candidates.append((node, test, has_self, None))
+        else:
+            for part in boolean_clauses(test):
+                if _has_unsafe_thunk_nodes(part):
+                    continue
+                if part.lineno == getattr(part, "end_lineno", part.lineno):
+                    if isinstance(part, ast.Name) and part.id in skip:
+                        continue
+                    raw_candidates.append((node, part, False, None))
+                elif (isinstance(part, ast.Call)
+                      and isinstance(part.func, ast.Attribute)
+                      and part.func.attr == "match"):
+                    fnode = part.func
+                    if fnode.lineno == getattr(fnode, "end_lineno", fnode.lineno):
+                        rec_txt = ast.unparse(fnode.value)
+                        raw_candidates.append((node, fnode, False, f"{rec_txt}.fullmatch"))
+
+    spans: list[dict[str, Any]] = []
+    for node, expr, has_self, callable_alt in raw_candidates:
+        line = expr.lineno
+        if not (1 <= line <= len(lines)):
+            continue
+        c_start, c_end = prior.char_span(lines[line - 1], expr.col_offset, expr.end_col_offset)
+        text = lines[line - 1][c_start:c_end]
+        if not text or not text.strip():
+            continue
+        extras = [] if callable_alt else _extract_extras(node, expr, text, parents, skip)
+        use_thunk = isinstance(expr, ast.Compare) and any(x["kind"] == "guard_replace" for x in extras)
+        spans.append({
+            "line": line, "col": c_start, "end": c_end, "text": text,
+            "test_line": node.lineno, "extras": extras,
+            "has_self": has_self, "use_thunk": use_thunk,
+            "callable_alt": callable_alt,
+            "is_value_site": isinstance(expr, (ast.Name, ast.Attribute))
+                             or (isinstance(expr, ast.Call) and isinstance(expr.func, ast.Attribute)),
+        })
+
+    kept = []
+    for s in spans:
+        if any(o["line"] == s["line"] and o["col"] <= s["col"] and s["end"] <= o["end"]
+               and (o["col"], o["end"]) != (s["col"], s["end"]) for o in spans):
+            continue
+        kept.append(s)
+
+    # Also detect function/method signature positional-arity guards (`param, *` before kwonlyargs).
+    import re
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            if node.args.vararg is None and node.args.kwonlyargs and node.args.args:
+                last_arg = node.args.args[-1]
+                if last_arg.arg not in ("self", "cls") and 1 <= last_arg.lineno <= len(lines):
+                    line_txt = lines[last_arg.lineno - 1]
+                    m = re.search(rf"\b({re.escape(last_arg.arg)})\s*,\s*\*", line_txt)
+                    if m:
+                        kept.append({
+                            "line": last_arg.lineno,
+                            "col": m.start(),
+                            "end": m.end(),
+                            "text": line_txt[m.start():m.end()],
+                            "test_line": node.lineno,
+                            "extras": [{
+                                "key": "vararg_signature",
+                                "kind": "guard_replace",
+                                "probe": "False",
+                                "compiled": f"*{last_arg.arg}",
+                                "priority": 0,
+                            }],
+                            "has_self": False,
+                            "use_thunk": False,
+                            "callable_alt": None,
+                            "is_value_site": False,
+                            "is_sig_guard": True,
+                            "def_line": node.lineno,
+                            "def_indent": node.col_offset,
+                        })
+
+    unique = {(s["line"], s["col"]): s for s in kept}
+    return [unique[k] for k in sorted(unique)]
+
+
+def instrument_guards(source: str, sites: Sequence[dict[str, Any]]) -> str | None:
+    """Wrap each guard site in its probe helper while preserving program semantics."""
+    lines = source.splitlines(keepends=True)
+    by_line: dict[int, list[dict[str, Any]]] = {}
+    sig_sites: list[dict[str, Any]] = []
+    for s in sites:
+        if s.get("is_sig_guard"):
+            sig_sites.append(s)
+        else:
+            by_line.setdefault(s["line"], []).append(s)
+    for line_no, group in by_line.items():
+        index = line_no - 1
+        if not (0 <= index < len(lines)):
+            return None
+        line = lines[index]
+        for s in sorted(group, key=lambda item: item["col"], reverse=True):
+            if line[s["col"]:s["end"]] != s["text"]:
+                return None
+            if s.get("callable_alt"):
+                call = (f"__brain_probe_callable__({s['line']}, {s['col']}, "
+                        f"({s['text']}), ({s['callable_alt']}))")
+            else:
+                ex_items = [f"({x['key']!r}, lambda: ({x['probe']}))"
+                            for x in s.get("extras", [])]
+                ex_arg = f", ({', '.join(ex_items)},)" if ex_items else ", None"
+                self_arg = ", self" if s.get("has_self") else ""
+                if s.get("use_thunk"):
+                    call = (f"__brain_probe_thunk__({s['line']}, {s['col']}, "
+                            f"(lambda: ({s['text']})){ex_arg}{self_arg})")
+                else:
+                    call = (f"__brain_probe__({s['line']}, {s['col']}, "
+                            f"({s['text']}){ex_arg}{self_arg})")
+            line = line[:s["col"]] + call + line[s["end"]:]
+        lines[index] = line
+    for s in sorted(sig_sites, key=lambda item: item["def_line"], reverse=True):
+        def_idx = s["def_line"] - 1
+        if 0 <= def_idx < len(lines):
+            indent = " " * int(s.get("def_indent", 0))
+            lines[def_idx] = f"{indent}@__brain_probe_sig__({s['line']}, {s['col']})\n" + lines[def_idx]
+    insert = prior._insertion_line(source)
+    import_stmt = (f"from {MODULE} import probe as __brain_probe__, "
+                   f"probe_thunk as __brain_probe_thunk__, "
+                   f"probe_callable as __brain_probe_callable__, "
+                   f"probe_sig as __brain_probe_sig__\n")
+    lines.insert(insert, import_stmt)
+    candidate = "".join(lines)
+    try:
+        ast.parse(candidate)
+    except SyntaxError:
+        return None
+    return candidate
 
 
 def run_tests(worktree: pathlib.Path, targets: Sequence[str], seconds: int,
@@ -161,59 +581,191 @@ def judge(baseline: dict[str, str], after: dict[str, str],
 
 
 def learn(observations: Sequence[dict[str, Any]], failing: set[str],
-           passing: set[str], sites: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
+          passing: set[str], sites: Sequence[dict[str, Any]]) -> list[dict[str, Any]]:
     """A predicate is learned by separating failed from passing runs at one guard site.
 
-    Each feature is evaluated at each site on one value per test. `gain` is
-    fail-matches minus pass-matches; its negation has exactly the opposite gain, so
-    one score produces both polarities. A strict candidate matches no passing run.
+    Each feature or causal Ring-1 refinement is evaluated against the observed
+    branch truth (`truthy`): a valid repair flips the guard's branch decision on
+    failing runs while preserving branch decisions on passing runs (`gain > 0`).
     """
-    by_site: dict[tuple[int, int], dict[str, dict[str, bool]]] = {}
+    by_site: dict[tuple[int, int], dict[str, list[dict[str, Any]]]] = {}
     for row in observations:
         if not row.get("node"):
             continue
         key = (row["line"], row["col"])
-        slot = by_site.setdefault(key, {})
         node = str(row["node"]).split(" ")[0]
-        slot.setdefault(node, {})
-        for name, _template, predicate in FEATURES:
-            slot[node][name] = bool(predicate(row))
+        by_site.setdefault(key, {}).setdefault(node, []).append(row)
     ranked: list[dict[str, Any]] = []
     for site in sites:
         key = (site["line"], site["col"])
         values = by_site.get(key, {})
         fail_nodes = [node for node in values if node in failing]
         pass_nodes = [node for node in values if node in passing]
-        if not fail_nodes or not pass_nodes:
+        if not fail_nodes:
             continue
-        for name, _template, _predicate in FEATURES:
-            fail_true = sum(values[node][name] for node in fail_nodes)
-            pass_true = sum(values[node][name] for node in pass_nodes)
-            gain = fail_true - pass_true
-            for polarity in (True, False):
-                matches_fail = fail_true if polarity else len(fail_nodes) - fail_true
-                matches_pass = pass_true if polarity else len(pass_nodes) - pass_true
-                score = gain if polarity else -gain
-                if score <= 0 or matches_fail == 0:
+        all_obs = [r for node in fail_nodes + pass_nodes for r in values[node]]
+        pass_obs = [r for node in pass_nodes for r in values[node]]
+        fail_obs = [r for node in fail_nodes for r in values[node]]
+        if not pass_nodes and len(fail_obs) < 2 and not site.get("is_sig_guard"):
+            continue
+
+        def score_candidate(feature_name: str, polarity: bool, eval_fn: Any,
+                            compiled: str | None = None, priority: int = 2,
+                            allow_unseen_branch_in_pass: bool = False,
+                            allow_monotonic_widening: bool = False) -> None:
+            vals_all = [bool(eval_fn(r)) for r in all_obs]
+            if not (any(vals_all) and not all(vals_all)) and not allow_unseen_branch_in_pass:
+                return
+            matches_fail = 0
+            for node in fail_nodes:
+                obs_n = values[node]
+                if any(bool(eval_fn(r)) != bool(r.get("truthy", False)) for r in obs_n):
+                    matches_fail += 1
+            if matches_fail == 0:
+                return
+            if not pass_nodes:
+                if not site.get("is_sig_guard") and not (
+                    any(bool(eval_fn(r)) == bool(r.get("truthy", False)) for r in fail_obs)
+                    and any(bool(eval_fn(r)) != bool(r.get("truthy", False)) for r in fail_obs)
+                ):
+                    return
+                matches_pass = 0
+                gain = matches_fail
+            elif allow_monotonic_widening:
+                if any(bool(r.get("truthy", False)) and not bool(eval_fn(r)) for r in pass_obs):
+                    return
+                if not any((not bool(r.get("truthy", False))) and (not bool(eval_fn(r))) for r in pass_obs):
+                    return
+                if not (any(bool(eval_fn(r)) for r in fail_obs) and any(not bool(eval_fn(r)) for r in fail_obs)):
+                    return
+                if any(bool(r.get("truthy", False)) for r in fail_obs):
+                    return
+                matches_pass = 0
+                gain = matches_fail
+            else:
+                matches_pass = sum(
+                    any(bool(eval_fn(r)) != bool(r.get("truthy", False)) for r in values[node])
+                    for node in pass_nodes
+                )
+                is_narrowing = all(bool(r.get("truthy", False)) and not bool(eval_fn(r))
+                                   for r in fail_obs
+                                   if bool(eval_fn(r)) != bool(r.get("truthy", False)))
+                if is_narrowing:
+                    if not allow_unseen_branch_in_pass and not any(
+                        bool(r.get("truthy", False)) and bool(eval_fn(r)) for r in pass_obs
+                    ):
+                        return
+                else:
+                    if not allow_unseen_branch_in_pass and not any(
+                        (not bool(r.get("truthy", False))) and (not bool(eval_fn(r))) for r in pass_obs
+                    ):
+                        return
+                gain = matches_fail - matches_pass
+                if gain <= 0:
+                    return
+            effective_prio = priority
+            if any(r.get("raised") for r in fail_obs) and priority == 0:
+                effective_prio = -2
+            elif feature_name == "is_none" and polarity is False:
+                if any((not r.get("truthy", False)) and (not r.get("is_none", False))
+                       and (not r.get("is_bool", False)) for r in fail_obs):
+                    effective_prio = -1
+            ranked.append({
+                "line": site["line"], "col": site["col"], "text": site["text"],
+                "feature": feature_name, "polarity": polarity,
+                "gain": gain, "fail_matches": matches_fail,
+                "pass_mismatches": matches_pass,
+                "strict": matches_pass == 0,
+                "priority": effective_prio,
+                "compiled": compiled,
+                "observed_value": next((r.get("repr", "") for r in fail_obs
+                                        if bool(eval_fn(r)) != bool(r.get("truthy", False))), ""),
+            })
+
+        if pass_nodes and site.get("is_value_site", True):
+            for name, _template, predicate in FEATURES:
+                if name in ("truthy", "falsey"):
                     continue
-                ranked.append({
-                    "line": site["line"], "col": site["col"], "text": site["text"],
-                    "feature": name, "polarity": polarity,
-                    "gain": score, "fail_matches": matches_fail,
-                    "pass_mismatches": matches_pass,
-                    "strict": matches_pass == 0,
-                    "observed_value": next((row.get("repr") for row in observations
-                                            if (row["line"], row["col"]) == key
-                                            and str(row.get("node", "")).split(" ")[0] in failing), ""),
-                })
+                if name.startswith("is_") and name != "is_none":
+                    if all(r.get("is_bool", False) for r in all_obs):
+                        continue
+                for polarity in (True, False):
+                    def _ev(r: dict[str, Any], p: Any = predicate, pol: bool = polarity) -> bool:
+                        v = bool(p(r))
+                        return v if pol else (not v)
+                    score_candidate(name, polarity, _ev, compiled=None,
+                                    priority=1 if name == "is_none" else 3)
+
+        if site.get("callable_alt"):
+            def _ev_call(r: dict[str, Any]) -> bool:
+                ex = r.get("extras") or {}
+                v = ex.get("fullmatch")
+                return bool(r.get("truthy", False)) if v is None else bool(v)
+            score_candidate("fullmatch", True, _ev_call,
+                            compiled=site["callable_alt"], priority=-1)
+
+        for ex in site.get("extras", []):
+            k = ex["key"]
+            kind = ex["kind"]
+            prio = ex.get("priority", 2)
+            if kind == "lhs_ne":
+                fail_vals = {(r.get("extras") or {}).get(k) for r in fail_obs if r.get("truthy", False)}
+                for fval in sorted(v for v in fail_vals if isinstance(v, str) and v and not v.startswith("<")):
+                    def _ev_ne(r: dict[str, Any], kk: str = k, fv: str = fval) -> bool:
+                        return bool(r.get("truthy", False)) and ((r.get("extras") or {}).get(kk) != fv)
+                    score_candidate(f"lhs_ne:{fval}", True, _ev_ne,
+                                    compiled=f"(({site['text']}) and ({ex['compiled']} != {fval}))",
+                                    priority=prio)
+            elif kind == "guard_replace":
+                def _ev_gr(r: dict[str, Any], kk: str = k) -> bool:
+                    if r.get("raised"):
+                        return bool((r.get("extras") or {}).get(kk))
+                    return bool((r.get("extras") or {}).get(kk)) and bool(r.get("truthy", False))
+                score_candidate(k, True, _ev_gr, compiled=ex["compiled"],
+                                priority=prio, allow_unseen_branch_in_pass=True)
+            elif kind == "narrow":
+                def _ev_nar(r: dict[str, Any], kk: str = k) -> bool:
+                    v = (r.get("extras") or {}).get(kk)
+                    return bool(r.get("truthy", False)) and (True if v is None else bool(v))
+                score_candidate(k, True, _ev_nar, compiled=ex["compiled"],
+                                priority=prio,
+                                allow_unseen_branch_in_pass=k.startswith("body_not_none:"))
+            elif kind == "replace":
+                def _ev_rep(r: dict[str, Any], kk: str = k) -> bool:
+                    v = (r.get("extras") or {}).get(kk)
+                    return bool(r.get("truthy", False)) if v is None else bool(v)
+                score_candidate(k, True, _ev_rep, compiled=ex["compiled"], priority=prio)
+            elif kind == "companion_not":
+                def _ev_comp(r: dict[str, Any], kk: str = k) -> bool:
+                    v = (r.get("extras") or {}).get(kk)
+                    return bool(r.get("truthy", False)) if v is None else bool(v)
+                score_candidate(k, True, _ev_comp, compiled=ex["compiled"],
+                                priority=prio, allow_monotonic_widening=True)
+
+        if pass_nodes and site.get("has_self"):
+            attr_names = sorted({ak for r in all_obs for ak in (r.get("self_bools") or {})})
+            for ak in attr_names:
+                if f"self.{ak}" in site["text"]:
+                    continue
+                def _ev_sb(r: dict[str, Any], a: str = ak) -> bool:
+                    sb = r.get("self_bools") or {}
+                    return bool(r.get("truthy", False)) and (not bool(sb.get(a, False)))
+                score_candidate(f"self_not:self.{ak}", True, _ev_sb,
+                                compiled=f"(({site['text']}) and (not self.{ak}))",
+                                priority=1)
+
     # At most one compiled predicate per site, so a file with hundreds of observed
-    # guards cannot swamp a row. Prefer strict separation, then the largest gain.
+    # guards cannot swamp a row. Prefer strict separation, causal structural priority, then largest gain.
     chosen: list[dict[str, Any]] = []
     used: set[tuple[int, int]] = set()
-    for candidate in sorted(ranked, key=lambda row: (-int(row["strict"]), -row["gain"],
+    for candidate in sorted(ranked, key=lambda row: (-int(row["strict"]),
+                                                     row.get("priority", 2),
+                                                     -row["gain"],
                                                      -row["fail_matches"],
                                                      row["pass_mismatches"],
-                                                     row["feature"], row["polarity"])):
+                                                     _FEAT_ORDER.get(row["feature"], 99),
+                                                     row["feature"],
+                                                     row["polarity"])):
         key = (candidate["line"], candidate["col"])
         if key in used:
             continue
@@ -225,6 +777,8 @@ def learn(observations: Sequence[dict[str, Any]], failing: set[str],
 
 
 def compile_rule(candidate: dict[str, Any]) -> str | None:
+    if candidate.get("compiled"):
+        return str(candidate["compiled"])
     template = next((tpl for name, tpl, _ in FEATURES if name == candidate["feature"]), None)
     if template is None:
         return None
@@ -243,13 +797,14 @@ def replace(source: str, candidate: dict[str, Any], expression: str) -> str | No
     start, end = candidate["col"], candidate["col"] + len(candidate["text"])
     if line[start:end] != candidate["text"]:
         return None
-    lines[index] = line[:start] + "(" + expression + ")" + line[end:]
-    try:
-        import ast
-        ast.parse("".join(lines))
-    except SyntaxError:
-        return None
-    return "".join(lines)
+    for wrapped in (f"({expression})", expression):
+        lines[index] = line[:start] + wrapped + line[end:]
+        try:
+            ast.parse("".join(lines))
+            return "".join(lines)
+        except SyntaxError:
+            continue
+    return None
 
 
 def explore(repo: pathlib.Path, entry: dict[str, Any], *, seconds: int) -> dict[str, Any]:
@@ -265,8 +820,18 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, seconds: int) -> dict[
         if added.returncode != 0:
             return {**row, "stage": "WORKTREE_FAILED"}
         try:
-            (worktree / test_path).write_text(identify.show(repo, commit, test_path),
-                                              encoding="utf-8")
+            if entry.get("oracle_file"):
+                # A benchmark applies a TEST PATCH: the oracle is supplied, not restored
+                # from the fix commit. An oracle derived from the issue text (see
+                # run_the_reproducer_the_user_wrote_v1.py) arrives this way, because it
+                # exists nowhere in the repository's history.
+                oracle_path = pathlib.Path(entry["oracle_file"])
+                (worktree / test_path).parent.mkdir(parents=True, exist_ok=True)
+                (worktree / test_path).write_text(oracle_path.read_text(encoding="utf-8"),
+                                                  encoding="utf-8")
+            else:
+                (worktree / test_path).write_text(identify.show(repo, commit, test_path),
+                                                  encoding="utf-8")
             baseline = run_tests(worktree, [test_path], seconds)
             # An empty verdict map (collection error, missing dependency, strict
             # config warning) or a timeout is NOT evidence that the parent passes.
@@ -307,16 +872,8 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, seconds: int) -> dict[
                 return {**row, "stage": "REFUSED__CONTROL_BROKEN",
                         "seconds": round(time.time() - started, 2)}
 
-            sites = prior.guards(original)
-            # The older engine's instrument() reads PROBE_MODULE from its module
-            # global. Restore it immediately so a shared pytest process cannot
-            # inherit our probe name and fail that engine's own tests.
-            saved_module = prior.PROBE_MODULE
-            prior.PROBE_MODULE = MODULE
-            try:
-                instrumented = prior.instrument(original, sites)
-            finally:
-                prior.PROBE_MODULE = saved_module
+            sites = guard_sites(original)
+            instrumented = instrument_guards(original, sites)
             if instrumented is None:
                 return {**row, "stage": "INSTRUMENTATION_REFUSED",
                         "seconds": round(time.time() - started, 2)}

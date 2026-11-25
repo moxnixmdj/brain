@@ -1,0 +1,250 @@
+{
+  "schema": "BLIND_CJSON_REAL_COMMITS_UNIFIED_COGS_20261124_V2",
+  "benchmark": "DaveGamble/cJSON_real_historical_memory_safety_commits_blind",
+  "compiler_oracle": "gcc -O0 -g -fsanitize=address,undefined -fno-sanitize=float-divide-by-zero + Unity test runner",
+  "baseline_v1_solved": 0,
+  "unified_v2_solved": 2,
+  "total_reproducible_bugfix_commits": 13,
+  "solve_rate_pct": 15.38,
+  "model_calls": 0,
+  "file_or_line_hints_given": 0,
+  "frozen_engine_sha256_pre": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "f7e70f4c0b0c5e34950322e4a7a02d73f7d53b59626db29c8396e1488ec04301",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "fc4586fe4976840d7b1531b5dab4aee0ea75e28c99f53ce7f830d4b731bd5394",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "frozen_engine_sha256_post": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "f7e70f4c0b0c5e34950322e4a7a02d73f7d53b59626db29c8396e1488ec04301",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "fc4586fe4976840d7b1531b5dab4aee0ea75e28c99f53ce7f830d4b731bd5394",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "hashes_identical": true,
+  "total_wall_sec": 294.04,
+  "results": [
+    {
+      "commit": "b2890c8d76bbb64e710585ebc0a917196b9c67e7",
+      "subject": "fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": true,
+      "mechanism": "COGS_UIR_Z3_INVENTION",
+      "sabotage_verified": true,
+      "crystallized_law_id": "uir_law_6e054af54b35",
+      "candidates_evaluated_in_memory": 4,
+      "candidates_executed_in_sandbox": 4,
+      "elapsed_sec": 3.23,
+      "modified_files": [
+        "cJSON.c"
+      ],
+      "exact_file_match": true
+    },
+    {
+      "commit": "a78d975537a8df40d58a96f8ce326d7fb625e1e5",
+      "subject": "cJSON_DetachItemViaPointer: added test and fix for check for null in item->prev",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 8,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 11.24,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "60ff122ef5862d04b39b150541459e7f5e35add8",
+      "subject": "add NULL checkings (#809)",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 19,
+      "candidates_executed_in_sandbox": 25,
+      "elapsed_sec": 19.36,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "2f6fc7f0f28b4dab68a3d7fcf447beabefd04afb",
+      "subject": "fix several null pointer problems on allocation failure (#526)",
+      "test": "tests/cjson_add.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": true,
+      "mechanism": "COGS_COUPLED_MULTIFILE_INVENTION",
+      "sabotage_verified": true,
+      "crystallized_law_id": "uir_law_6e054af54b35",
+      "candidates_evaluated_in_memory": 32,
+      "candidates_executed_in_sandbox": 19,
+      "elapsed_sec": 12.65,
+      "modified_files": [
+        "cJSON.c"
+      ],
+      "exact_file_match": true
+    },
+    {
+      "commit": "08d2bc766a82cd75764d036f9efef444590d1cf9",
+      "subject": "Fix infinite loop in cJSON_Minify",
+      "test": "tests/minify_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 4,
+      "candidates_executed_in_sandbox": 5,
+      "elapsed_sec": 30.27,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "a43fa56a63920343d0ac8f8e73a6b0447867f459",
+      "subject": "Rewrite cJSON_Minify, fixing buffer overflows, fixes #338",
+      "test": "tests/minify_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 13,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 28.47,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "be749d7efa7c9021da746e685bd6dec79f9dd99b",
+      "subject": "Fix crash of cJSON_GetObjectItemCaseSensitive when calling it on arrays",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 22,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 32.36,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "22a7d04fa004462e0dca35c3cc7809bea38e65f9",
+      "subject": "add_item_to_object: Fix use-after-free when string is aliased",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 9,
+      "candidates_executed_in_sandbox": 10,
+      "elapsed_sec": 22.6,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "629c354390b5ed1984a37b87fea6cf47946fc83c",
+      "subject": "Rewrite test for cJSON_ParseWithOpts() to expect non-null error pointer in error case and change code to match new expectations.",
+      "test": "tests/parse_with_opts.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 18,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 25.54,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "954d61e5e7cb9dc6c480fc28ac1cdceca07dd5bd",
+      "subject": "Fix #189, ensure returns an invalid pointer",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 18,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 28.12,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "03ba72faec115160d1f3aea5582d9b6af5d3e473",
+      "subject": "cJSON_Compare: Fix comparison of objects",
+      "test": "tests/compare_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 18,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 25.25,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "569aa060c6319fb24ab21bbf699aad2c40f454c1",
+      "subject": "cJSON_Compare: Fix comparison of arrays",
+      "test": "tests/compare_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 18,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 25.85,
+      "modified_files": [],
+      "exact_file_match": false
+    },
+    {
+      "commit": "9ecc96878f4a57bf61b1787ca109867fa48f076d",
+      "subject": "fix #174: cJSON_ReplaceItemInObject doesn't copy name",
+      "test": "tests/misc_tests.c",
+      "human_sources": [
+        "cJSON.c"
+      ],
+      "solved": false,
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "crystallized_law_id": null,
+      "candidates_evaluated_in_memory": 30,
+      "candidates_executed_in_sandbox": 14,
+      "elapsed_sec": 27.68,
+      "modified_files": [],
+      "exact_file_match": false
+    }
+  ]
+}

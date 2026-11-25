@@ -1,0 +1,238 @@
+{
+  "schema": "BRAIN_ORIGINATOR_ABLATION_V1",
+  "results": [
+    {
+      "repo": "attrs",
+      "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+      "failing": 1,
+      "passing": 46,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "click",
+      "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+      "failing": 1,
+      "passing": 38,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "click",
+      "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+      "failing": 1,
+      "passing": 15,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "click",
+      "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+      "failing": 1,
+      "passing": 13,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "httpx",
+      "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+      "failing": 1,
+      "passing": 35,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "jinja",
+      "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+      "failing": 1,
+      "passing": 131,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "jinja",
+      "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+      "failing": 1,
+      "passing": 52,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "more-itertools",
+      "commit": "62411c1618493f94b16901746c34e72ad415061e",
+      "failing": 1,
+      "passing": 322,
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "more-itertools",
+      "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+      "failing": 1,
+      "passing": 136,
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "more-itertools",
+      "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+      "failing": 1,
+      "passing": 314,
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "packaging",
+      "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+      "failing": 1,
+      "passing": 294,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "packaging",
+      "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+      "failing": 2,
+      "passing": 68,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "BROKE_PASSING",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "packaging",
+      "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+      "failing": 3,
+      "passing": 4700,
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "pluggy",
+      "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+      "stage": "NO_FAILING_TEST"
+    },
+    {
+      "repo": "pluggy",
+      "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+      "failing": 1,
+      "passing": 15,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "tqdm",
+      "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+      "failing": 1,
+      "passing": 69,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "urllib3",
+      "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+      "stage": "NO_FAILING_TEST"
+    },
+    {
+      "repo": "urllib3",
+      "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+      "failing": 1,
+      "passing": 60,
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "urllib3",
+      "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+      "failing": 1,
+      "passing": 325,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+      "failing": 1,
+      "passing": 59,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+      "failing": 1,
+      "passing": 3,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+      "failing": 1,
+      "passing": 61,
+      "raw_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+      "failing": 1,
+      "passing": 11,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+      "failing": 1,
+      "passing": 54,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+      "failing": 3,
+      "passing": 1,
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+      "failing": 1,
+      "passing": 115,
+      "raw_arm": "DID_NOT_FLIP",
+      "generalized_arm": "DID_NOT_FLIP",
+      "stage": "EMPTY_STORE_PROPOSES_NOTHING",
+      "solved_by": null
+    }
+  ],
+  "seconds": 143.08
+}
