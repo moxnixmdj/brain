@@ -835,6 +835,47 @@ def _add_end_anchor_edit(text: str) -> str | None:
     return text[:match.end(3)] + chr(92) + "Z" + text[match.end(3):]
 
 
+_SPLIT_WITH_SEPARATOR = re.compile(r"""\.(?<!r)(split|rsplit)\(\s*(["'])(.*?)\2""")
+_MIRROR = {"split": "rsplit", "rsplit": "split"}
+
+
+def _split_side_edit(text: str, samples: Sequence[Mapping[str, Any]],
+                     wanted: Mapping[str, Any]) -> str | None:
+    """`netloc.split("@", 1)` -> `netloc.rsplit("@", 1)`: split from the other end.
+
+    READ FROM THE RUN, not from a guess. A string that was assembled by splitting on a
+    separator and taking one side will still CONTAIN that separator when the wrong side
+    was taken. Measured: packaging 08bb0477, where the failing value is
+    `https://ss@g.c/user/repo.git` and the expected value is `https://g.c/user/repo.git`
+    -- the `@` that should have been consumed survives in the middle of the actual value,
+    as the password fragment `ss@`. The run therefore carries both halves of the proof:
+    a separator present in what we got and absent from what we owed.
+
+    Only fires when the separator is visible in BOTH the actual and the expected value's
+    difference, so a bare `split` mention in a message cannot trigger it."""
+    match = _SPLIT_WITH_SEPARATOR.search(text)
+    if not match:
+        return None
+    separator = match.group(3)
+    if not separator:
+        return None
+    actual = str(wanted.get("actual") or "")
+    expected = str(wanted.get("expected") or "")
+    if not actual or not expected:
+        actual = " ".join(str(s.get("repr") or "") for s in samples)
+        if not actual:
+            return None
+    # the separator must be doing havoc in the middle of what we actually produced
+    if actual.count(separator) < 1:
+        return None
+    if actual.count(separator) > expected.count(separator):
+        pass
+    else:
+        return None
+    start, end = match.span(1)
+    return text[:start] + _MIRROR[match.group(1)] + text[end:]
+
+
 def _end_anchor_edit(text: str) -> str | None:
     """`re.compile(r"$")` -> `re.compile(r"\\Z")`, splicing INSIDE the literal.
 
@@ -1469,6 +1510,17 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
     expected = expected_elements(wanted)
     _ = exception_type
     expression = site.text.strip()
+    # EMITTED BEFORE THE FORK, DELIBERATELY. Twice in this build a relation was added to
+    # one of `relations_for`'s two entry paths and not the other -- END_ANCHOR's added
+    # anchor, and then this one -- so the same fix worked on import-time patterns and
+    # silently failed on sampled values. A relation that lives above the fork cannot
+    # diverge from itself.
+    split_here = _split_side_edit(expression, samples, wanted)
+    if split_here:
+        out.append({"relation": "SPLIT_FROM_THE_WRONG_END", "site": site.index,
+                    "line": site.line, "expression": expression, "edit": split_here,
+                    "witness": {"demand": "the separator survived the strip",
+                                "why": "the wrong side of the split was taken"}})
     if not samples:
         # A pattern compiled at IMPORT time (a dict of rules, a module constant) can never
         # be sampled: the trace's probes run inside functions, and import has already
