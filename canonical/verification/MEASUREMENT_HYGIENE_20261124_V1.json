@@ -1,21 +1,21 @@
 {
  "schema": "BRAIN_MEASUREMENT_HYGIENE_GUARD_V1",
- "generated": "2026-11-25T13:35:48Z",
+ "generated": "2026-11-25T13:56:40Z",
  "cost": {
   "model_calls": 0,
   "stored_parameters": 0,
   "network_at_run_time": 0,
-  "duration_s": 0.21
+  "duration_s": 0.18
  },
  "summary": {
   "receipts_examined": 2988,
   "receipts_policed": 35,
   "receipts_exempt": 2953,
-  "clean": 18,
+  "clean": 20,
   "findings_by_rule": {
-   "MAJORITY_CLASS_WITHOUT_BASELINE": 16,
-   "ACCURACY_WITHOUT_SENSITIVITY": 16,
-   "RATIO_WITHOUT_DENOMINATOR": 3
+   "MAJORITY_CLASS_WITHOUT_BASELINE": 14,
+   "ACCURACY_WITHOUT_SENSITIVITY": 15,
+   "RATIO_WITHOUT_DENOMINATOR": 2
   },
   "offenders": [
    {
@@ -35,13 +35,6 @@
     ]
    },
    {
-    "file": "DOES_DENSITY_PREDICT_ACCURACY_20261124_V1.json",
-    "status": "POLICED",
-    "findings": [
-     "MAJORITY_CLASS_WITHOUT_BASELINE"
-    ]
-   },
-   {
     "file": "DOES_DENSITY_PREDICT_ACCURACY_20261124_V2.json",
     "status": "POLICED",
     "findings": [
@@ -54,15 +47,6 @@
     "status": "POLICED",
     "findings": [
      "ACCURACY_WITHOUT_SENSITIVITY"
-    ]
-   },
-   {
-    "file": "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V1.json",
-    "status": "POLICED",
-    "findings": [
-     "MAJORITY_CLASS_WITHOUT_BASELINE",
-     "ACCURACY_WITHOUT_SENSITIVITY",
-     "RATIO_WITHOUT_DENOMINATOR"
     ]
    },
    {
@@ -163,8 +147,8 @@
    "the_rules_are_specific": true
   },
   "defect_ledger": {
-   "flagged": 17,
-   "resolved": 17,
+   "flagged": 15,
+   "resolved": 15,
    "unresolved": [],
    "material": [
     "PRICE_A_REFUSAL_ON_REAL_CODE_20261124_V2.json"

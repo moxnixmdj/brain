@@ -144,11 +144,6 @@ LEDGER: dict[str, dict[str, str]] = {
         "why": "the claim is a comparison between three arms on the same test set, and all three report "
                "predictions and wrong alongside accuracy; a base-rate tie would have to score identically "
                "in all three arms, which is visible in the table"},
-    "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V1.json": {
-        "missing": "majority-class baseline; sensitivity; raw denominators",
-        "material": "NO",
-        "why": "V1 is superseded for an unrelated reason (the vocabulary leak) and its numbers are not "
-               "cited; the guard finding is real but subordinate to a larger defect already recorded"},
     "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V2.json": {
         "missing": "majority-class baseline; sensitivity; raw denominators",
         "material": "NO",
@@ -206,10 +201,6 @@ LEDGER: dict[str, dict[str, str]] = {
         "material": "NO",
         "why": "four arms compared on the same machines, all reporting predictions and wrong; the headline "
                "is that two arms tie exactly"},
-    "DOES_DENSITY_PREDICT_ACCURACY_20261124_V1.json": {
-        "missing": "majority-class baseline",
-        "material": "NO",
-        "why": "superseded by V2 for the vocabulary leak; not cited"},
     "DOES_DENSITY_PREDICT_ACCURACY_20261124_V2.json": {
         "missing": "majority-class baseline; sensitivity",
         "material": "NO",
