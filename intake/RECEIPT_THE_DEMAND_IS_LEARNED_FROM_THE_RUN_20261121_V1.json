@@ -14,7 +14,7 @@
   "L1_inputs_only": true,
   "L2_real_witness_and_control": 44,
   "L3_candidate_cap": true,
-  "L4_new_repair": 11,
+  "L4_new_repair": 12,
   "L5_zeros": true
  },
  "all_criteria_met": true,
@@ -1113,12 +1113,40 @@
      "tests/py37_asyncio.py::test_gather"
     ]
    },
-   "guard_sites": 6,
-   "observations": 45,
-   "learned": [],
-   "stage": "NO_SEPARATING_RULE",
-   "attempts": 0,
-   "seconds": 9.02
+   "guard_sites": 8,
+   "observations": 46,
+   "learned": [
+    {
+     "line": 71,
+     "text": "fs, *",
+     "feature": "vararg_signature",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "<raised>"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 71,
+    "col": 26,
+    "text": "fs, *",
+    "feature": "vararg_signature",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -2,
+    "compiled": "*fs",
+    "observed_value": "<raised>"
+   },
+   "replacement": "*fs",
+   "attempts": 1,
+   "flipped": [
+    "tests/py37_asyncio.py::test_gather"
+   ],
+   "seconds": 10.02
   },
   {
    "repo": "tqdm",

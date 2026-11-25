@@ -135,8 +135,8 @@ def test_three_way_memory_ablation_on_forty_five_unseen_fixes():
         root / "intake/RECEIPT_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_20261121_V1.json",
     )
     assert res["corpus_commits"] == 45
-    assert res["verified_commits"] == 44
-    assert res["five_gate_admitted_count"] == 44
+    assert res["verified_commits"] == 45
+    assert res["five_gate_admitted_count"] == 45
     assert res["ablation"]["empty_store"]["memory_hits"] == 0
     assert res["ablation"]["raw_trace_store"]["memory_hits"] == 0
     assert res["ablation"]["generalized_ast_ir_morphism_store"]["memory_hits"] == 23

@@ -592,6 +592,21 @@ def induce_ast_morphism(
         old_node = ast.parse(old_expr, mode="eval").body
         new_node = ast.parse(new_expr, mode="eval").body
     except SyntaxError:
+        try:
+            old_fn = ast.parse(f"def _f({old_expr}, _k=1): pass").body[0]
+            new_fn = ast.parse(f"def _f({new_expr}, _k=1): pass").body[0]
+            if (isinstance(old_fn, ast.FunctionDef) and isinstance(new_fn, ast.FunctionDef)
+                    and old_fn.args.vararg is None and new_fn.args.vararg is not None):
+                return ASTIRMorphism(
+                    family="SIGNATURE_POSARG_TO_VARARG",
+                    lhs_signature="Arguments(args=[?arg], vararg=None, kwonlyargs=[...])",
+                    rhs_template="*?arg",
+                    holes=("?arg",),
+                    source_commit=source_commit,
+                    source_repo=source_repo,
+                )
+        except SyntaxError:
+            pass
         return None
     old_u = ast.unparse(old_node)
     new_u = ast.unparse(new_node)
@@ -763,12 +778,21 @@ def apply_ast_morphism(
     context_demand: str | None = None,
 ) -> str | None:
     """Instantiate an ASTIRMorphism on a target site expression (and its demand/trace separator)."""
+    fam = morphism.family
+    if fam == "SIGNATURE_POSARG_TO_VARARG":
+        try:
+            old_fn = ast.parse(f"def _f({target_old_expr}, _k=1): pass").body[0]
+            if isinstance(old_fn, ast.FunctionDef) and old_fn.args.vararg is None and old_fn.args.args:
+                return f"*{old_fn.args.args[-1].arg}"
+        except SyntaxError:
+            pass
+        return None
+
     try:
         node = ast.parse(target_old_expr, mode="eval").body
     except SyntaxError:
         return None
     old_u = ast.unparse(node)
-    fam = morphism.family
 
     if fam == "UNWRAP_SINGLE_ARG_CALL":
         if isinstance(node, ast.Call) and len(node.args) == 1 and not node.keywords:
@@ -879,7 +903,10 @@ def admit_morphism_5gate(
     gate4_syntax_compile = False
     if instantiated:
         try:
-            compile(ast.parse(instantiated, mode="eval"), "<morphism>", "eval")
+            if morphism.family == "SIGNATURE_POSARG_TO_VARARG":
+                compile(ast.parse(f"def _f({instantiated}, _k=1): pass"), "<morphism>", "exec")
+            else:
+                compile(ast.parse(instantiated, mode="eval"), "<morphism>", "eval")
             gate4_syntax_compile = True
         except (SyntaxError, ValueError, TypeError):
             gate4_syntax_compile = False

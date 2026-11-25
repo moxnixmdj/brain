@@ -194,6 +194,19 @@ def probe_callable(line, col, fn, alt_fn):
         _record(line, col, res, raised=False, extras=(("fullmatch", lambda: alt),))
         return res
     return _wrapped
+
+
+def probe_sig(line, col):
+    def _deco(fn):
+        def _wrapped(*args, **kwargs):
+            try:
+                return fn(*args, **kwargs)
+            except TypeError as exc:
+                if "positional argument" in str(exc):
+                    _record(line, col, None, raised=True, extras=(("vararg_signature", lambda: False),))
+                raise
+        return _wrapped
+    return _deco
 '''
 
 # (feature name, compiled expression over the guarded expression x, predicate on facts)
@@ -436,6 +449,39 @@ def guard_sites(source: str) -> list[dict[str, Any]]:
                and (o["col"], o["end"]) != (s["col"], s["end"]) for o in spans):
             continue
         kept.append(s)
+
+    # Also detect function/method signature positional-arity guards (`param, *` before kwonlyargs).
+    import re
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            if node.args.vararg is None and node.args.kwonlyargs and node.args.args:
+                last_arg = node.args.args[-1]
+                if last_arg.arg not in ("self", "cls") and 1 <= last_arg.lineno <= len(lines):
+                    line_txt = lines[last_arg.lineno - 1]
+                    m = re.search(rf"\b({re.escape(last_arg.arg)})\s*,\s*\*", line_txt)
+                    if m:
+                        kept.append({
+                            "line": last_arg.lineno,
+                            "col": m.start(),
+                            "end": m.end(),
+                            "text": line_txt[m.start():m.end()],
+                            "test_line": node.lineno,
+                            "extras": [{
+                                "key": "vararg_signature",
+                                "kind": "guard_replace",
+                                "probe": "False",
+                                "compiled": f"*{last_arg.arg}",
+                                "priority": 0,
+                            }],
+                            "has_self": False,
+                            "use_thunk": False,
+                            "callable_alt": None,
+                            "is_value_site": False,
+                            "is_sig_guard": True,
+                            "def_line": node.lineno,
+                            "def_indent": node.col_offset,
+                        })
+
     unique = {(s["line"], s["col"]): s for s in kept}
     return [unique[k] for k in sorted(unique)]
 
@@ -444,8 +490,12 @@ def instrument_guards(source: str, sites: Sequence[dict[str, Any]]) -> str | Non
     """Wrap each guard site in its probe helper while preserving program semantics."""
     lines = source.splitlines(keepends=True)
     by_line: dict[int, list[dict[str, Any]]] = {}
+    sig_sites: list[dict[str, Any]] = []
     for s in sites:
-        by_line.setdefault(s["line"], []).append(s)
+        if s.get("is_sig_guard"):
+            sig_sites.append(s)
+        else:
+            by_line.setdefault(s["line"], []).append(s)
     for line_no, group in by_line.items():
         index = line_no - 1
         if not (0 <= index < len(lines)):
@@ -470,10 +520,16 @@ def instrument_guards(source: str, sites: Sequence[dict[str, Any]]) -> str | Non
                             f"({s['text']}){ex_arg}{self_arg})")
             line = line[:s["col"]] + call + line[s["end"]:]
         lines[index] = line
+    for s in sorted(sig_sites, key=lambda item: item["def_line"], reverse=True):
+        def_idx = s["def_line"] - 1
+        if 0 <= def_idx < len(lines):
+            indent = " " * int(s.get("def_indent", 0))
+            lines[def_idx] = f"{indent}@__brain_probe_sig__({s['line']}, {s['col']})\n" + lines[def_idx]
     insert = prior._insertion_line(source)
     import_stmt = (f"from {MODULE} import probe as __brain_probe__, "
                    f"probe_thunk as __brain_probe_thunk__, "
-                   f"probe_callable as __brain_probe_callable__\n")
+                   f"probe_callable as __brain_probe_callable__, "
+                   f"probe_sig as __brain_probe_sig__\n")
     lines.insert(insert, import_stmt)
     candidate = "".join(lines)
     try:
@@ -550,7 +606,7 @@ def learn(observations: Sequence[dict[str, Any]], failing: set[str],
         all_obs = [r for node in fail_nodes + pass_nodes for r in values[node]]
         pass_obs = [r for node in pass_nodes for r in values[node]]
         fail_obs = [r for node in fail_nodes for r in values[node]]
-        if not pass_nodes and len(fail_obs) < 2:
+        if not pass_nodes and len(fail_obs) < 2 and not site.get("is_sig_guard"):
             continue
 
         def score_candidate(feature_name: str, polarity: bool, eval_fn: Any,
@@ -568,8 +624,10 @@ def learn(observations: Sequence[dict[str, Any]], failing: set[str],
             if matches_fail == 0:
                 return
             if not pass_nodes:
-                if not (any(bool(eval_fn(r)) == bool(r.get("truthy", False)) for r in fail_obs)
-                        and any(bool(eval_fn(r)) != bool(r.get("truthy", False)) for r in fail_obs)):
+                if not site.get("is_sig_guard") and not (
+                    any(bool(eval_fn(r)) == bool(r.get("truthy", False)) for r in fail_obs)
+                    and any(bool(eval_fn(r)) != bool(r.get("truthy", False)) for r in fail_obs)
+                ):
                     return
                 matches_pass = 0
                 gain = matches_fail
@@ -739,13 +797,14 @@ def replace(source: str, candidate: dict[str, Any], expression: str) -> str | No
     start, end = candidate["col"], candidate["col"] + len(candidate["text"])
     if line[start:end] != candidate["text"]:
         return None
-    lines[index] = line[:start] + "(" + expression + ")" + line[end:]
-    try:
-        import ast
-        ast.parse("".join(lines))
-    except SyntaxError:
-        return None
-    return "".join(lines)
+    for wrapped in (f"({expression})", expression):
+        lines[index] = line[:start] + wrapped + line[end:]
+        try:
+            ast.parse("".join(lines))
+            return "".join(lines)
+        except SyntaxError:
+            continue
+    return None
 
 
 def explore(repo: pathlib.Path, entry: dict[str, Any], *, seconds: int) -> dict[str, Any]:

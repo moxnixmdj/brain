@@ -1,14 +1,14 @@
 {
   "schema": "BRAIN_AST_IR_ANTI_UNIFICATION_ABLATION_V1",
   "corpus_commits": 45,
-  "verified_commits": 44,
-  "excluded_non_single_expression": 1,
-  "five_gate_admitted_count": 44,
+  "verified_commits": 45,
+  "excluded_non_single_expression": 0,
+  "five_gate_admitted_count": 45,
   "ablation": {
     "empty_store": {
       "memory_hits": 0,
       "transfer_rate": 0.0,
-      "total_candidates_evaluated": 2565760
+      "total_candidates_evaluated": 2566240
     },
     "raw_trace_store": {
       "memory_hits": 0,
@@ -17,9 +17,9 @@
     },
     "generalized_ast_ir_morphism_store": {
       "memory_hits": 23,
-      "transfer_rate": 0.5227,
-      "multi_commit_family_population": 25,
-      "multi_commit_family_transfer_rate": 0.92,
+      "transfer_rate": 0.5111,
+      "multi_commit_family_population": 26,
+      "multi_commit_family_transfer_rate": 0.8846,
       "cross_repo_hits": 14,
       "candidates_evaluated_on_hits": 23,
       "empty_store_candidates_saved": 1124297
@@ -34,6 +34,7 @@
     "REGEX_END_ANCHOR_Z": 4,
     "METHOD_VARIANT_SWAP": 2,
     "UNWRAP_SINGLE_ARG_CALL": 2,
+    "SIGNATURE_POSARG_TO_VARARG": 1,
     "GUARD_DISJUNCTION_WIDENING": 1,
     "INTEGER_CONSTANT_SPEC_UPDATE": 3
   },
