@@ -31226,7 +31226,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 729,
+  "knowledge_documents": 730,
   "receipt_backed_capabilities": 294,
   "research_index_records": 7393,
   "routing_tokens": 2373,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ee9c7f8a6fbe02b74a0841a1e36b23d47cd652efbd1441f1ce8dcf9944a4d57"
+  "value": "059b5d0116263051eb5aad2951df448b366d4d0ba52f076153140d823f5fcc72"
  },
  "engines": [
   {
@@ -60533,6 +60533,83 @@
     "showing",
     "time",
     "worth"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6300,
+   "headings": [
+    "One solve, at the design point",
+    "What I set out to do",
+    "The defect, isolated",
+    "Why the obvious repairs all fail",
+    "The one genuine solve",
+    "The calibration, and why it overrules the celebration",
+    "A contamination I must disclose",
+    "Six bugs in my own instruments, all caught by measuring",
+    "What this round establishes",
+    "The next lever, stated plainly"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_SOLVE_AT_THE_DESIGN_POINT_20261124_V41.md",
+   "sha256": "c811b08e3792ffc2059665597ebbe8cb40320a9f7956da09b552585219537da8",
+   "summary": "Date: 2026-11-24 · V41 · branch `arena/1ac14ac1-brain`",
+   "terms": {
+    "23": 2,
+    "27": 5,
+    "89": 2,
+    "above": 2,
+    "all": 5,
+    "but": 3,
+    "calibration": 3,
+    "class": 5,
+    "construction": 3,
+    "derived": 3,
+    "design": 4,
+    "detector": 3,
+    "emitted": 3,
+    "engine": 5,
+    "fail": 5,
+    "fail-to-pass": 4,
+    "failed": 3,
+    "failure": 5,
+    "file": 4,
+    "fires": 3,
+    "fix": 4,
+    "form": 13,
+    "green": 4,
+    "init": 3,
+    "module": 4,
+    "no": 6,
+    "not": 18,
+    "nothing": 3,
+    "one": 7,
+    "only": 4,
+    "point": 3,
+    "previous": 3,
+    "property": 4,
+    "repair": 4,
+    "round": 6,
+    "self": 5,
+    "so": 5,
+    "solve": 4,
+    "source": 3,
+    "still": 3,
+    "str": 6,
+    "target": 3,
+    "task": 6,
+    "tasks": 5,
+    "test": 7,
+    "traceback": 4,
+    "until": 3,
+    "would": 3
+   },
+   "title": "One solve, at the design point",
+   "title_terms": [
+    "design",
+    "one",
+    "point",
+    "solve"
    ]
   },
   {
@@ -102010,10 +102087,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1531,
+  "included_source_count": 1532,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "8f9156dfd16de58efb35ffd195e4ad548ec3d7f32e8878b8a5eb01d240e22435"
+  "source_tree_digest": "2d427cf12233a48994e4a59b368da8d1af5a68f27dc8129cdc4d736841b3a989"
  },
  "research_index": [
   {
