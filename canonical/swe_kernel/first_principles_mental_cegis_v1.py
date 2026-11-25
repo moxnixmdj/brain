@@ -904,19 +904,24 @@ class CausalDataFlowGraph:
                 continue
             if prof.func_name == "<module>" and not prof.in_crash_stack:
                 continue
-            denom = math.sqrt(n_fail * max(1, prof.fail_hits + prof.pass_hits))
-            ochiai = prof.fail_hits / denom if denom > 0 else 0.0
+            # Normalize loop hit counts against test-count scale (`eff_fail <= 1.5 * n_fail`) so a 40-iteration
+            # utility loop (`__getattr__`, `Client.open`) cannot inflate Ochiai > 1.0 and drown out 1-hit domain branches.
+            eff_fail = min(float(prof.fail_hits), float(n_fail) * 1.5)
+            eff_pass = min(float(prof.pass_hits), max(float(n_fail) * 4.0, 20.0))
+            denom = math.sqrt(n_fail * max(1.0, eff_fail + eff_pass))
+            ochiai = eff_fail / denom if denom > 0 else 0.0
+            fail_exclusivity = 0.28 * (prof.fail_hits / max(1, prof.fail_hits + prof.pass_hits))
             lineage_bonus = 0.55 * (0.82 ** prof.backward_slice_distance) if prof.backward_slice_distance < 999 else 0.0
             anomaly_bonus = min(0.75, 0.30 * len(set(prof.fail_anomalies)))
             stack_bonus = 0.35 if prof.in_crash_stack else 0.0
             # Gentle harness prior: in-package test client helpers (`*/test.py`, `*/testing.py`) execute on
             # every client request without being the domain target unless specifically crashed in stack.
             harness_penalty = (
-                0.38
-                if rel_f.endswith(("/test.py", "/testing.py")) and not prof.in_crash_stack
+                0.28
+                if rel_f.endswith(("/test.py", "/testing.py")) and not prof.in_crash_stack and prof.pass_hits > prof.fail_hits * 2
                 else 0.0
             )
-            score = max(0.01, ochiai + lineage_bonus + anomaly_bonus + stack_bonus - harness_penalty)
+            score = max(0.01, ochiai + fail_exclusivity + lineage_bonus + anomaly_bonus + stack_bonus - harness_penalty)
             ranked.append({
                 "file": rel_f,
                 "line": ln,
@@ -935,9 +940,9 @@ class CausalDataFlowGraph:
         overflow: list[dict[str, Any]] = []
         per_fn_counts: dict[tuple[str, str], int] = {}
         for row in ranked:
-            fk = (row["file"], row["func"])
+            fk = (row["file"], f"{row['func']}@{int(row['line']) // 40}")
             cnt = per_fn_counts.get(fk, 0)
-            if cnt < 2:
+            if cnt < 3:
                 per_fn_counts[fk] = cnt + 1
                 primary.append(row)
             else:
@@ -992,9 +997,9 @@ def _snap_val(v):
     elif isinstance(v, (str, bytes)):
         d["v"] = v[:120] if isinstance(v, str) else repr(v[:60])
         d["len"] = len(v)
-    elif isinstance(v, (list, tuple, set, frozenset, dict)):
+    elif type(v) in (list, tuple, set, frozenset, dict):
         d["len"] = len(v)
-        if isinstance(v, (list, tuple, set, frozenset)) and len(v) > 0:
+        if type(v) in (list, tuple, set, frozenset) and len(v) > 0:
             try:
                 first_el = next(iter(v))
                 d["elem_t"] = type(first_el).__name__
@@ -1015,15 +1020,46 @@ def _snap_val(v):
         except Exception:
             pass
         try:
+            attrs = {}
+            def _enc_attr(val):
+                if val is None or isinstance(val, (bool, int, float, str)):
+                    return repr(val[:60] if isinstance(val, str) else val)
+                try:
+                    return {"r": repr(val)[:60], "b": bool(val), "t": type(val).__name__}
+                except Exception:
+                    return repr(val)[:60]
+
             v_dict = getattr(v, "__dict__", None)
             if isinstance(v_dict, dict):
-                attrs = {
-                    k: repr(val)[:60]
-                    for k, val in list(v_dict.items())[:10]
-                    if isinstance(k, str) and not k.startswith("__") and not callable(val)
-                }
-                if attrs:
-                    d["attrs"] = attrs
+                for k, val in list(v_dict.items())[:10]:
+                    if isinstance(k, str) and not k.startswith("__") and not callable(val):
+                        attrs[k] = _enc_attr(val)
+            # Also capture `__slots__` and `@property` descriptors across MRO (`Authorization.type`, `.parameters`, etc.)
+            if len(attrs) < 12:
+                for cls_m in type(v).__mro__[:4]:
+                    if cls_m is object:
+                        continue
+                    slots = getattr(cls_m, "__slots__", ())
+                    if isinstance(slots, str):
+                        slots = (slots,)
+                    for sk in slots or ():
+                        if isinstance(sk, str) and not sk.startswith("__") and sk not in attrs and len(attrs) < 12:
+                            try:
+                                sval = getattr(v, sk)
+                                if not callable(sval):
+                                    attrs[sk] = _enc_attr(sval)
+                            except Exception:
+                                pass
+                    for pk, pdesc in list(getattr(cls_m, "__dict__", {}).items())[:24]:
+                        if pk not in attrs and not pk.startswith("_") and isinstance(pdesc, property) and len(attrs) < 12:
+                            try:
+                                pval = getattr(v, pk)
+                                if not callable(pval):
+                                    attrs[pk] = _enc_attr(pval)
+                            except Exception:
+                                pass
+            if attrs:
+                d["attrs"] = attrs
             d["repr"] = repr(v)[:100]
         except Exception:
             d["repr"] = f"<{t}>"
@@ -1092,25 +1128,32 @@ def _run_traced(nodes, is_fail):
                 edges.append([r_rel, int(r_ln), rel, ln, "RETURN_VALUE_FLOW", r_fn])
                 last_ret_site[0] = None
             lst = frames_out.setdefault(key, {"func": frame.f_code.co_name, "snaps": []})
-            if len(lst["snaps"]) < (6 if is_fail else 4):
-                snap = {}
-                for k, val in list(frame.f_locals.items())[:18]:
-                    if k.startswith("__"):
-                        continue
-                    snap[k] = _snap_val(val)
-                    if k == "self" or hasattr(val, "__dict__"):
-                        oid = id(val)
-                        try:
-                            for ak, av in list(vars(val).items())[:12]:
-                                prev = attr_producers.get((oid, ak))
-                                cur_repr = repr(av)[:80]
-                                if prev is None or prev[2] != cur_repr:
-                                    attr_producers[(oid, ak)] = (rel, ln, cur_repr)
-                                elif (prev[0], prev[1]) != (rel, ln):
-                                    edges.append([prev[0], prev[1], rel, ln, "HEAP_ATTR_FLOW", ak])
-                        except Exception:
-                            pass
-                lst["snaps"].append(snap)
+            max_snaps = 6 if is_fail else 4
+            if hits[key] <= (48 if is_fail else 8):
+                sys.settrace(None)
+                try:
+                    snap = {}
+                    for k, val in list(frame.f_locals.items())[:18]:
+                        if k.startswith("__"):
+                            continue
+                        snap[k] = _snap_val(val)
+                        if k == "self" or hasattr(val, "__dict__"):
+                            oid = id(val)
+                            try:
+                                for ak, av in list(vars(val).items())[:12]:
+                                    prev = attr_producers.get((oid, ak))
+                                    cur_repr = repr(av)[:80]
+                                    if prev is None or prev[2] != cur_repr:
+                                        attr_producers[(oid, ak)] = (rel, ln, cur_repr)
+                                    elif (prev[0], prev[1]) != (rel, ln):
+                                        edges.append([prev[0], prev[1], rel, ln, "HEAP_ATTR_FLOW", ak])
+                            except Exception:
+                                pass
+                    if len(lst["snaps"]) >= max_snaps:
+                        lst["snaps"].pop(2)
+                    lst["snaps"].append(snap)
+                finally:
+                    sys.settrace(tracer)
         elif event == "return":
             last_ret_site[0] = (key, frame.f_code.co_name)
         elif event == "exception" and is_fail:
@@ -1336,7 +1379,18 @@ def collect_causal_dataflow_graph(
             "BRAIN_CHILD_TRACE_DIR": str(child_dir),
             "BRAIN_CHILD_ACTIVE": "0",
             "BRAIN_FAIL_NODES": json.dumps(list(failing_nodes[:6])),
-            "BRAIN_PASS_NODES": json.dumps(list(passing_nodes[:24])),
+            "BRAIN_PASS_NODES": json.dumps(
+                sorted(
+                    passing_nodes,
+                    key=lambda pn: (
+                        -len(
+                            set(re.findall(r"[a-z0-9]+", pn.lower()))
+                            & {tok for fn in failing_nodes[:6] for tok in re.findall(r"[a-z0-9]+", fn.lower())}
+                        ),
+                        pn,
+                    ),
+                )[:24]
+            ),
         }
         try:
             subprocess.run(
@@ -1477,6 +1531,21 @@ def _rehydrate_frame(snap: Mapping[str, Any]) -> dict[str, Any]:
             continue
         if "v" in meta:
             env[k] = meta["v"]
+        elif meta.get("attrs") and meta.get("t") not in ("list", "tuple", "set", "frozenset", "dict", "str", "bytes", "int", "float", "bool", "NoneType"):
+            attrs = meta.get("attrs") or {}
+            parsed_attrs = {}
+            for ak, av in attrs.items():
+                if isinstance(av, dict) and "b" in av:
+                    try:
+                        parsed_attrs[ak] = ast.literal_eval(str(av.get("r", "")))
+                    except Exception:
+                        parsed_attrs[ak] = _OpaqueFalsyObject({}, length=1 if av.get("b") else 0)
+                else:
+                    try:
+                        parsed_attrs[ak] = ast.literal_eval(av)
+                    except Exception:
+                        parsed_attrs[ak] = av
+            env[k] = _OpaqueFalsyObject(parsed_attrs, length=meta.get("len"))
         elif "repr" in meta:
             try:
                 env[k] = ast.literal_eval(meta["repr"])
@@ -2686,8 +2755,9 @@ class AngelicCEGISSynthesizer:
         self.mental_simulations = 0
         self.mental_pruned = 0
 
+    @staticmethod
     def _find_enclosing_stmt_and_func(
-        self, tree: ast.Module, lineno: int
+        tree: ast.Module, lineno: int
     ) -> tuple[ast.stmt | None, ast.FunctionDef | ast.AsyncFunctionDef | None, list[ast.If]]:
         best_stmt: ast.stmt | None = None
         best_span = 10**9
@@ -2772,15 +2842,36 @@ class AngelicCEGISSynthesizer:
         petri = RepoNativePetriMiner(self.worktree)
         petri.mine_scope(top_distinct_files, max_imported_files=8)
 
-        # Diversify across top 6 distinct files (up to 4 top sites per file) so no single wrapper starves rank #2-#6!
-        selected_sites: list[Mapping[str, Any]] = []
-        per_file_cnt: dict[str, int] = {}
+        # Diversify across top 6 distinct files AND distinct functions, interleaved ROUND-ROBIN across files
+        # so file #2 (`auth.py`) is tested in iteration #2 rather than starving behind 6 functions of file #1 (`http.py`)!
+        buckets_by_file: dict[str, list[Mapping[str, Any]]] = {rf: [] for rf in top_distinct_files}
+        seen_file_funcs: dict[tuple[str, str], int] = {}
         for r in ranked_sites:
             rf = str(r["file"])
-            if rf in top_distinct_files and per_file_cnt.get(rf, 0) < 4:
-                per_file_cnt[rf] = per_file_cnt.get(rf, 0) + 1
-                selected_sites.append(r)
-            if len(selected_sites) >= 22:
+            if rf not in buckets_by_file or len(buckets_by_file[rf]) >= 8:
+                continue
+            loaded_r = _load_file(rf)
+            enc_ln = int(r["line"])
+            fn_nm = str(r.get("func") or "")
+            if loaded_r is not None:
+                _, enc_fn_r, _ = self._find_enclosing_stmt_and_func(loaded_r[2], int(r["line"]))
+                if enc_fn_r is not None:
+                    fn_nm = enc_fn_r.name
+                    enc_ln = enc_fn_r.lineno
+            fk = (rf, f"{fn_nm}@{enc_ln}")
+            if seen_file_funcs.get(fk, 0) >= 3:
+                continue
+            seen_file_funcs[fk] = seen_file_funcs.get(fk, 0) + 1
+            buckets_by_file[rf].append(r)
+
+        selected_sites: list[Mapping[str, Any]] = []
+        for round_idx in range(8):
+            for rf in top_distinct_files:
+                if round_idx < len(buckets_by_file[rf]):
+                    selected_sites.append(buckets_by_file[rf][round_idx])
+                    if len(selected_sites) >= 28:
+                        break
+            if len(selected_sites) >= 28:
                 break
 
         for site_row in selected_sites:
@@ -2792,11 +2883,18 @@ class AngelicCEGISSynthesizer:
             if loaded is None:
                 continue
             src, lines, tree = loaded
-            prof = self.graph.sites.get((rel_f, lineno))
-            if prof is None:
-                continue
             stmt, enclosing_fn, enclosing_ifs = self._find_enclosing_stmt_and_func(tree, lineno)
-            if stmt is None:
+            prof = self.graph.sites.get((rel_f, lineno))
+            if prof is None and enclosing_fn is not None:
+                end_fn_ln = getattr(enclosing_fn, "end_lineno", lineno + 30)
+                for cand_ln in range(enclosing_fn.lineno, end_fn_ln + 1):
+                    cand_p = self.graph.sites.get((rel_f, cand_ln))
+                    if cand_p is not None and cand_p.fail_hits > 0:
+                        prof = cand_p
+                        lineno = cand_ln
+                        stmt, enclosing_fn, enclosing_ifs = self._find_enclosing_stmt_and_func(tree, lineno)
+                        break
+            if prof is None or stmt is None:
                 continue
 
             mod_globals, helper_names, mod_excs = self._module_safe_globals(tree)
@@ -3319,6 +3417,133 @@ class AngelicCEGISSynthesizer:
                     if verified_in_sim:
                         break
 
+            # Method-entry Petri guard synthesis (`if <separating_guard>: return <Petri_projection>`):
+            # Supports BOTH inter-test contrast (`fail_envs` vs `pass_envs`) AND intra-test contrast
+            # (`[fail_envs[-1]]` vs `fail_envs[:-1]`, when multiple assertions execute inside one test function
+            # and all earlier calls succeeded before the final call triggered `AssertionError`!).
+            eff_pos_envs = mental.fail_envs if mental.pass_envs else ([mental.fail_envs[-1]] if len(mental.fail_envs) >= 2 else [])
+            eff_neg_envs = mental.pass_envs if mental.pass_envs else ([mental.fail_envs[0]] if len(mental.fail_envs) >= 2 else [])
+            if (
+                not verified_in_sim
+                and enclosing_fn is not None
+                and eff_pos_envs
+                and eff_neg_envs
+                and self.sim.ready
+                and time.perf_counter() < deadline_monotonic
+            ):
+                from canonical.swe_kernel.petri_cow_splicing_engine_v1 import BackwardWitnessAndDualSplicer
+                sib_attrs = list(sibling_attrs)
+                # Also harvest `self.<attr>` names observed in runtime frame snapshots or AST of `enclosing_fn`
+                for fn_sub in ast.walk(enclosing_fn):
+                    if isinstance(fn_sub, ast.Attribute) and isinstance(fn_sub.value, ast.Name) and fn_sub.value.id == "self":
+                        if fn_sub.attr not in sib_attrs and not fn_sub.attr.startswith("__"):
+                            sib_attrs.append(fn_sub.attr)
+                for snap_d in prof.fail_frames + prof.pass_frames[:3]:
+                    self_meta = snap_d.get("self") if isinstance(snap_d, Mapping) else None
+                    if isinstance(self_meta, Mapping):
+                        for k_at in (self_meta.get("attrs") or {}):
+                            if k_at not in sib_attrs and not k_at.startswith("__"):
+                                sib_attrs.append(k_at)
+
+                # Prefer public properties/attributes (`self.type`) over private backing slots (`self._type`)
+                sib_attrs.sort(key=lambda a: (1 if a.startswith("_") else 0))
+
+                sep_guards = BackwardWitnessAndDualSplicer.synthesize_separating_guards(
+                    mental,
+                    positive_envs=eff_pos_envs,
+                    negative_envs=eff_neg_envs,
+                    sibling_bool_attrs=sib_attrs,
+                    synthesize_disc_fn=synthesize_discriminating_predicates,
+                    max_guards=6,
+                )
+                if sep_guards:
+                    # Determine first non-docstring statement AND first statement after any leading `if ...: return/raise` guards
+                    body_stmts = list(enclosing_fn.body)
+                    start_idx = 0
+                    if (
+                        len(body_stmts) >= 2
+                        and isinstance(body_stmts[0], ast.Expr)
+                        and isinstance(getattr(body_stmts[0], "value", None), ast.Constant)
+                        and isinstance(body_stmts[0].value.value, str)
+                    ):
+                        start_idx = 1
+                    entry_stmt = body_stmts[start_idx]
+                    post_guard_idx = start_idx
+                    while post_guard_idx < len(body_stmts) - 1:
+                        cur_s = body_stmts[post_guard_idx]
+                        if (
+                            isinstance(cur_s, ast.If)
+                            and not cur_s.orelse
+                            and len(cur_s.body) == 1
+                            and isinstance(cur_s.body[0], (ast.Return, ast.Raise))
+                        ):
+                            post_guard_idx += 1
+                        else:
+                            break
+                    post_guard_stmt = body_stmts[post_guard_idx]
+
+                    petri_returns: list[str] = []
+                    # Mine string/scalar projections over `self.<attr>` & bound arguments
+                    for attr_nm in sib_attrs[:10]:
+                        ok_a, vec_a = mental.eval_expr_vector(f"self.{attr_nm}", eff_pos_envs[:1])
+                        if ok_a and vec_a and vec_a[0][0] == "str":
+                            for m_str in (f"self.{attr_nm}.title()", f"self.{attr_nm}.strip()", f"self.{attr_nm}.lower()", f"self.{attr_nm}.upper()", f"self.{attr_nm}"):
+                                if m_str not in petri_returns:
+                                    petri_returns.append(m_str)
+                        elif ok_a and vec_a and vec_a[0][0] in ("int", "bool", "tuple", "list", "bytes"):
+                            if f"self.{attr_nm}" not in petri_returns:
+                                petri_returns.append(f"self.{attr_nm}")
+                    for arg_node in enclosing_fn.args.args:
+                        a_nm = arg_node.arg
+                        if a_nm in ("self", "cls"):
+                            continue
+                        ok_p, vec_p = mental.eval_expr_vector(a_nm, eff_pos_envs[:1])
+                        if ok_p and vec_p and vec_p[0][0] == "str":
+                            petri_returns.extend([f"{a_nm}.strip()", a_nm])
+                        elif ok_p:
+                            petri_returns.append(a_nm)
+                    for neutral in ("''", "()", "[]", "None"):
+                        if neutral not in petri_returns:
+                            petri_returns.append(neutral)
+
+                    target_insert_lines: list[int] = [post_guard_stmt.lineno]
+                    for top_st in body_stmts[start_idx:]:
+                        end_top = getattr(top_st, "end_lineno", top_st.lineno)
+                        if top_st.lineno <= stmt.lineno <= end_top and top_st.lineno not in target_insert_lines:
+                            target_insert_lines.append(top_st.lineno)
+                            break
+                    if entry_stmt.lineno not in target_insert_lines:
+                        target_insert_lines.append(entry_stmt.lineno)
+
+                    entry_candidates: list[tuple[str, str, str, int]] = []
+                    for ins_ln in target_insert_lines:
+                        for g_expr in sep_guards[:4]:
+                            if "==" in g_expr and "None" not in g_expr and "0" not in g_expr and "''" not in g_expr:
+                                continue
+                            for r_expr in petri_returns[:8]:
+                                g_src = _insert_before_line(lines, ins_ln, [f"if {g_expr}:", f"    return {r_expr}"])
+                                try:
+                                    ast.parse(g_src)
+                                    entry_candidates.append((g_expr, r_expr, g_src, ins_ln))
+                                except SyntaxError:
+                                    continue
+                    if entry_candidates:
+                        batch_out = self.sim.simulate_patches_parallel(
+                            [{rel_f: ec[2]} for ec in entry_candidates[:16]]
+                        )
+                        for (g_expr, r_expr, g_src, ins_ln), b_res in zip(entry_candidates[:16], batch_out):
+                            if b_res.get("ok"):
+                                verified_in_sim.append(CandidatePatch(
+                                    description=f"Method Petri guard `if {g_expr}: return {r_expr}` at {rel_f}:{ins_ln}",
+                                    file_patches={rel_f: g_src},
+                                    primary_file=rel_f,
+                                    primary_line=ins_ln,
+                                    mechanism="PETRI_NET_SYNTHESIS:EARLY_RETURN_PETRI_GUARD",
+                                    semantic_delta_ir=f"METHOD_ENTRY_GUARD({g_expr} => {r_expr})",
+                                    mdl_cost=len(g_expr) + len(r_expr) + 10,
+                                ))
+                                break
+
             # Single-pass stream/iterator materialization on multi-read variables in enclosing function
             if not verified_in_sim and enclosing_fn is not None and self.sim.ready:
                 read_counts: dict[str, int] = {}
@@ -3347,6 +3572,67 @@ class AngelicCEGISSynthesizer:
                             break
                     if verified_in_sim:
                         break
+
+            # Bidirectional Codec / Stream Lens Synthesis (`BIDIRECTIONAL_CODEC_LENS`) for `.decode` / `.encode` / `TextIOWrapper`
+            if not verified_in_sim and enclosing_fn is not None and self.sim.ready and time.perf_counter() < deadline_monotonic:
+                codec_cands: list[tuple[str, str, int]] = []
+                has_io_import = ("import io" in src) or ("from io import" in src)
+                for c_node in ast.walk(enclosing_fn):
+                    if not isinstance(c_node, ast.Call):
+                        continue
+                    # Pattern A: `<expr>.decode(...)` or `<expr>.decode(...).replace("\r\n", "\n")`
+                    if (
+                        isinstance(c_node.func, ast.Attribute)
+                        and c_node.func.attr == "replace"
+                        and len(c_node.args) == 2
+                        and isinstance(c_node.func.value, ast.Call)
+                        and isinstance(c_node.func.value.func, ast.Attribute)
+                        and c_node.func.value.func.attr == "decode"
+                        and has_io_import
+                    ):
+                        dec_call = c_node.func.value
+                        raw_txt = ast.unparse(dec_call.func.value)
+                        enc_txt = ast.unparse(dec_call.args[0]) if len(dec_call.args) >= 1 else "'utf-8'"
+                        err_txt = ast.unparse(dec_call.args[1]) if len(dec_call.args) >= 2 else "'replace'"
+                        tio_expr = f"io.TextIOWrapper(io.BytesIO({raw_txt}), encoding={enc_txt}, errors={err_txt}).read()"
+                        patched_c = _replace_ast_span_in_source(src, c_node, tio_expr)
+                        if patched_c:
+                            codec_cands.append((tio_expr, patched_c, c_node.lineno))
+                    elif isinstance(c_node.func, ast.Attribute) and c_node.func.attr == "decode":
+                        raw_txt = ast.unparse(c_node.func.value)
+                        enc_txt = ast.unparse(c_node.args[0]) if len(c_node.args) >= 1 else "'utf-8'"
+                        for err_m in ("'replace'", "'surrogateescape'", "'strict'"):
+                            cand_e = f"{raw_txt}.decode({enc_txt}, {err_m})"
+                            patched_c = _replace_ast_span_in_source(src, c_node, cand_e)
+                            if patched_c and patched_c != src:
+                                codec_cands.append((cand_e, patched_c, c_node.lineno))
+                        if has_io_import:
+                            tio_expr = f"io.TextIOWrapper(io.BytesIO({raw_txt}), encoding={enc_txt}, errors='replace').read()"
+                            patched_c = _replace_ast_span_in_source(src, c_node, tio_expr)
+                            if patched_c:
+                                codec_cands.append((tio_expr, patched_c, c_node.lineno))
+                    elif isinstance(c_node.func, ast.Attribute) and c_node.func.attr == "TextIOWrapper":
+                        orig_tio = ast.unparse(c_node)
+                        if "newline=" not in orig_tio and orig_tio.endswith(")"):
+                            for nl_opt in ("newline=''", "newline='\\n'"):
+                                cand_tio = orig_tio[:-1] + f", {nl_opt})"
+                                patched_c = _replace_ast_span_in_source(src, c_node, cand_tio)
+                                if patched_c:
+                                    codec_cands.append((cand_tio, patched_c, c_node.lineno))
+                if codec_cands:
+                    c_batch = self.sim.simulate_patches_parallel([{rel_f: cc[1]} for cc in codec_cands[:12]])
+                    for (c_desc, c_src, c_ln), c_res in zip(codec_cands[:12], c_batch):
+                        if c_res.get("ok"):
+                            verified_in_sim.append(CandidatePatch(
+                                description=f"Bidirectional codec/stream lens `{c_desc}` at {rel_f}:{c_ln}",
+                                file_patches={rel_f: c_src},
+                                primary_file=rel_f,
+                                primary_line=c_ln,
+                                mechanism="BIDIRECTIONAL_CODEC_LENS",
+                                semantic_delta_ir=f"CODEC_STREAM_LENS({c_desc})",
+                                mdl_cost=len(c_desc) + 6,
+                            ))
+                            break
 
             self.mental_simulations += mental.simulations_run
             self.mental_pruned += mental.candidates_pruned

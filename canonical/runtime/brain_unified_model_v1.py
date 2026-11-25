@@ -960,6 +960,14 @@ class UnifiedModel:
 
         routing: dict[str, Any] | None = None
         ledger_db = inputs.pop("ledger_db_path", None) if isinstance(inputs, dict) and "ledger_db_path" in inputs else None
+        if not capability_id:
+            from canonical.swe_kernel.harbor_epistemic_controller_v1 import (
+                is_harbor_epistemic_envelope,
+                solve_harbor_cycle,
+            )
+
+            if is_harbor_epistemic_envelope(inputs):
+                return solve_harbor_cycle(goal, inputs=inputs, model_digest=self.digest)
         ledger_pref: str | None = None
         if capability_id:
             cid = _normalise_capability_id(capability_id)

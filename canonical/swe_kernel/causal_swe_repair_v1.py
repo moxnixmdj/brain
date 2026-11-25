@@ -1457,6 +1457,7 @@ def repair_worktree(
     *,
     python_exe: str | None = None,
     memory: SWERepairMemory | None = None,
+    skill_store: Any | None = None,
     budget_s: float = 90.0,
     max_verifications: int = 20,
 ) -> dict[str, Any]:
@@ -1576,7 +1577,62 @@ def repair_worktree(
     with fpm.CoWProgramSimulator(
         worktree, failing_nodes, passing_nodes, default_test_file=test_target, python_exe=python_exe
     ) as cow_sim:
-        if dfg_ranked_sites:
+        # 3a. Multi-Statement AST Subtree Skill Retrieval (`O(1)`-removable external skill store)
+        if skill_store is not None and getattr(skill_store, "mode", "generalized") != "disabled":
+            seen_sub_fns: set[tuple[str, int]] = set()
+            for r_site in ranked_sites[:12]:
+                rf_s = str(r_site.get("file") or "")
+                ln_s = int(r_site.get("line") or 0)
+                fp_s = worktree / rf_s
+                if not fp_s.is_file():
+                    continue
+                try:
+                    src_s = fp_s.read_text(encoding="utf-8")
+                    tree_s = ast.parse(src_s)
+                except (OSError, SyntaxError):
+                    continue
+                _, enc_fn_s, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(tree_s, ln_s)
+                if enc_fn_s is None or not enc_fn_s.body:
+                    continue
+                fk_s = (rf_s, enc_fn_s.lineno)
+                if fk_s in seen_sub_fns:
+                    continue
+                seen_sub_fns.add(fk_s)
+                lines_s = src_s.splitlines(keepends=True)
+                b_start = enc_fn_s.body[0].lineno - 1
+                b_end = getattr(enc_fn_s.body[-1], "end_lineno", enc_fn_s.body[-1].lineno)
+                raw_body = "".join(lines_s[b_start:b_end])
+                indent_match = re.match(r"^([ \t]*)", lines_s[b_start]) if b_start < len(lines_s) else None
+                body_indent = indent_match.group(1) if indent_match else "    "
+                retrieved_hits = skill_store.retrieve_for_subtree(raw_body, target_lang="python")
+                for new_body_dedented, matched_skill_id in retrieved_hits[:4]:
+                    if skill_store.is_blocked_by_negative_invariant(
+                        target_ast_shape=enc_fn_s.name,
+                        candidate_delta_op=matched_skill_id,
+                    ):
+                        continue
+                    reindented = "".join(
+                        (body_indent + ln if ln.strip() else ln)
+                        for ln in (new_body_dedented.rstrip("\n") + "\n").splitlines(keepends=True)
+                    )
+                    cand_full_src = "".join(lines_s[:b_start]) + reindented + "".join(lines_s[b_end:])
+                    try:
+                        ast.parse(cand_full_src)
+                    except SyntaxError:
+                        continue
+                    if not cow_sim.ready or cow_sim.simulate_patch({rf_s: cand_full_src}).get("ok"):
+                        sim_verified_patches.append({
+                            "file_patches": {rf_s: cand_full_src},
+                            "primary_file": rf_s,
+                            "primary_line": enc_fn_s.lineno,
+                            "family": "SUBTREE_SKILL_REUSE",
+                            "mechanism": "SUBTREE_SKILL_REUSE",
+                            "description": f"Reused anti-unified subtree skill `{matched_skill_id}` on {rf_s}:{enc_fn_s.lineno}",
+                            "abstract_shape": f"SUBTREE_SKILL({matched_skill_id})",
+                            "reused_skill_id": matched_skill_id,
+                        })
+
+        if dfg_ranked_sites and not sim_verified_patches:
             cegis = fpm.AngelicCEGISSynthesizer(worktree, dfg, cow_sim)
             cegis_winners = cegis.run_cegis(
                 dfg_ranked_sites,
@@ -1699,6 +1755,14 @@ def repair_worktree(
                     caused_regression=True,
                     elapsed_s=time.perf_counter() - t0,
                 )
+                if skill_store is not None and hasattr(skill_store, "record_negative_invariant"):
+                    skill_store.record_negative_invariant(
+                        domain="swe_python",
+                        target_ast_shape=str(item.get("primary_file") or ""),
+                        forbidden_delta_op=str(item.get("abstract_shape") or item["family"]),
+                        failure_kind="REGRESSED_PASSING_TESTS",
+                        minimal_witness={"failing": list(full["failing"][:3])},
+                    )
                 attempts.append({
                     "rank": idx + 1,
                     "family": item["family"],
@@ -1816,6 +1880,48 @@ def repair_worktree(
                 elapsed_s=time.perf_counter() - t0,
                 abstract_shape=item["abstract_shape"],
             )
+            learned_skill_id: str | None = item.get("reused_skill_id")
+            if skill_store is not None and learned_skill_id is None and hasattr(skill_store, "try_admit_subtree"):
+                prim_f = str(item["primary_file"])
+                orig_f_src = originals.get(prim_f, "")
+                new_f_src = file_patches.get(prim_f, "")
+                if orig_f_src and new_f_src and orig_f_src != new_f_src:
+                    try:
+                        t_orig = ast.parse(orig_f_src)
+                        t_new = ast.parse(new_f_src)
+                        _, fn_o, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
+                            t_orig, int(item["primary_line"])
+                        )
+                        _, fn_n, _ = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(
+                            t_new, int(item["primary_line"])
+                        )
+                        if fn_o is not None and fn_n is not None and fn_o.body and fn_n.body:
+                            lo = orig_f_src.splitlines(keepends=True)
+                            ln_new = new_f_src.splitlines(keepends=True)
+                            bo_txt = "".join(lo[fn_o.body[0].lineno - 1 : getattr(fn_o.body[-1], "end_lineno", fn_o.body[-1].lineno)])
+                            bn_txt = "".join(ln_new[fn_n.body[0].lineno - 1 : getattr(fn_n.body[-1], "end_lineno", fn_n.body[-1].lineno)])
+                            mod_syms = [
+                                nd.name for nd in ast.walk(t_orig)
+                                if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))
+                            ] + [a.arg for a in fn_o.args.args]
+                            ok_adm, adm_id = skill_store.try_admit_subtree(
+                                domain="swe_python",
+                                concrete_before=bo_txt,
+                                concrete_after=bn_txt,
+                                verified=True,
+                                goal_relevant=True,
+                                probes_before_success=max(1, total_generated),
+                                raw_episode_bytes=len(orig_f_src.encode("utf-8")),
+                                source_fingerprint=prim_f,
+                                witness_inputs=[{"failing_nodes": list(failing_nodes[:3])}],
+                                revalidation_probe={"test_target": test_target},
+                                allowed_module_symbols=mod_syms,
+                            )
+                            if ok_adm:
+                                learned_skill_id = adm_id
+                    except Exception:
+                        pass
+
             attempts.append({
                 "rank": idx + 1,
                 "family": item["family"],
@@ -1831,6 +1937,7 @@ def repair_worktree(
                 "winning_rank": idx + 1,
                 "winning_family": item["family"],
                 "winning_mechanism": item["mechanism"],
+                "learned_skill_id": learned_skill_id,
                 "repaired_file": item["primary_file"],
                 "repaired_files": sorted(file_patches.keys()),
                 "repaired_line": item["primary_line"],

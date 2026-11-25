@@ -1,5 +1,5 @@
 {
-  "benchmark_wall_seconds": 23.8748,
+  "benchmark_wall_seconds": 24.642,
   "date": "2026-11-24",
   "experiment_1_goal_directed_room_learning": {
     "empty_memory_control_unread_rate": 1.0,
@@ -18,7 +18,7 @@
         0
       ],
       "total_probes": 6,
-      "total_seconds": 3.2167,
+      "total_seconds": 2.9392,
       "valid_verified": "8/8",
       "warm_episodes_zero_probes": 6
     },
@@ -61,7 +61,7 @@
         0
       ],
       "total_probes": 24,
-      "total_seconds": 6.7098
+      "total_seconds": 6.3455
     }
   },
   "experiment_2_cli_action_grammar": {
@@ -69,7 +69,7 @@
       "binaries_probed": 6,
       "pass": true,
       "recalled_from_memory": 0,
-      "seconds": 0.1573
+      "seconds": 0.1698
     },
     "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
     "warm_unseen_episodes": {
@@ -292,7 +292,7 @@
     "speculative_16way_cow_world_tomography": {
       "branches_forked": 16,
       "mealy_transitions_compiled": 16,
-      "wall_ms": 38.48,
+      "wall_ms": 50.78,
       "winner_action": "heal_gateway_and_unlock_settings",
       "zero_base_disk_mutation": true
     },
@@ -353,6 +353,64 @@
           "v3_petri_splice": "OPEN__EARLY_RETURN_METHOD_INSERTION"
         }
       ]
+    }
+  },
+  "experiment_7_v4_subtree_fuzzer_petri320_and_harbor": {
+    "bidirectional_codec_lens": {
+      "caret_control_bytes_roundtrip_verified": true
+    },
+    "cow_64way_boundary_fuzzer": {
+      "boundary_cases_tested": 39,
+      "caught_empty_string_index_regression": true,
+      "wall_ms": 13.242
+    },
+    "harbor_front_door_epistemic_dispatch": {
+      "capability_id": "swe.harbor.epistemic_cycle.v1",
+      "model_calls": 0,
+      "pass": true,
+      "task_completion_claimed": false,
+      "validated_action_kind": "exec"
+    },
+    "long_horizon_320_step_petri_dominator_slicer": {
+      "cut_vertices_discovered": 320,
+      "ok": true,
+      "steps_executed": 320,
+      "wall_ms": 889.743
+    },
+    "multistatement_subtree_anti_unification": {
+      "ablation_disabled": "0/5",
+      "ablation_generalized_python_js_rust": "5/5",
+      "ablation_raw_traces": "1/5",
+      "learned_skill_id": "sub_b7afd77421fc",
+      "o1_skill_removal_verified": true
+    },
+    "v4_swe_repair_and_blind_localization_summary": {
+      "click_ac0e297_blind_unseen": {
+        "localized_rank1_file": "src/click/testing.py",
+        "post_eval_root_cause": "3-method split-stream PTY EOF discipline (`_echo` writes `^D\\n` to stdout while stripping `\\x04` from stdin + `readlines`/`__iter__` filter empty chunks)",
+        "split": "unseen_virgin",
+        "v3_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v4_status": "OPEN__NO_CANDIDATE_VERIFIED"
+      },
+      "false_positive_repairs": 0,
+      "new_virgin_unseen_localization": {
+        "more_itertools_collected_rank1_localized": "2/2",
+        "packaging_collected_rank1_localized": "3/3",
+        "pluggy_collected_top5_localized": "3/3",
+        "pyjwt_rank1_localized": "4/6",
+        "pyjwt_top5_localized": "5/6"
+      },
+      "total_genuine_oss_repairs_across_splits": 9,
+      "werkzeug_051fd663_calibration_post_v3": {
+        "exact_human_ast_match": true,
+        "learned_skill_id": "sub_4813a6185091",
+        "mechanism": "PETRI_NET_SYNTHESIS:EARLY_RETURN_PETRI_GUARD",
+        "pass1_wall_s": 14.34,
+        "pass2_subtree_reuse_wall_s": 8.64,
+        "split": "calibration_audited_post_v3",
+        "v3_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v4_status": "PASS__VERIFIED_REPAIR"
+      }
     }
   },
   "invariants": {

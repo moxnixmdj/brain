@@ -67,6 +67,17 @@ class EpistemicAgentBenchmarkReceiptTests(unittest.TestCase):
         self.assertTrue(exp5["leap4_destructive_gui_wipe_blocked_in_shadow"])
         self.assertTrue(exp5["leap4_safe_gui_plan_admitted"])
 
+        exp7 = data["experiment_7_v4_subtree_fuzzer_petri320_and_harbor"]
+        self.assertEqual(exp7["multistatement_subtree_anti_unification"]["ablation_generalized_python_js_rust"], "5/5")
+        self.assertEqual(exp7["multistatement_subtree_anti_unification"]["ablation_raw_traces"], "1/5")
+        self.assertEqual(exp7["multistatement_subtree_anti_unification"]["ablation_disabled"], "0/5")
+        self.assertTrue(exp7["multistatement_subtree_anti_unification"]["o1_skill_removal_verified"])
+        self.assertTrue(exp7["bidirectional_codec_lens"]["caret_control_bytes_roundtrip_verified"])
+        self.assertTrue(exp7["cow_64way_boundary_fuzzer"]["caught_empty_string_index_regression"])
+        self.assertEqual(exp7["long_horizon_320_step_petri_dominator_slicer"]["steps_executed"], 320)
+        self.assertTrue(exp7["harbor_front_door_epistemic_dispatch"]["pass"])
+        self.assertEqual(exp7["harbor_front_door_epistemic_dispatch"]["model_calls"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()

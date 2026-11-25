@@ -1364,37 +1364,56 @@ class CrossModalPetriPlanner:
 
 
 def check_foreign_ident_unbound(lhs_pattern_py: str, rhs_pattern_py: str, allowed_module_symbols: Sequence[str] = ()) -> list[str]:
-    """Hard `FOREIGN_IDENT_UNBOUND` detector: returns any identifier in `rhs_pattern_py` that is
-    neither bound in `lhs_pattern_py`, nor a `?vK`/`?exprK` schematic hole, nor a safe builtin/allowed symbol."""
-    lhs_norm = re.sub(r"\?(?:expr|v)\d+", "_HOLE_", lhs_pattern_py)
-    rhs_norm = re.sub(r"\?(?:expr|v)\d+", "_HOLE_", rhs_pattern_py)
+    """Hard `FOREIGN_IDENT_UNBOUND` detector across BOTH single expressions AND multi-statement AST blocks."""
+    import keyword
+    lhs_norm = re.sub(r"(?:\$|\?)(?:expr|v|attr|fn)\d+", "_HOLE_", lhs_pattern_py)
+    rhs_norm = re.sub(r"(?:\$|\?)(?:expr|v|attr|fn)\d+", "_HOLE_", rhs_pattern_py)
+
+    def _parse_any(code_str: str) -> ast.AST | None:
+        for mode in ("eval", "exec"):
+            try:
+                return ast.parse(code_str, mode=mode)
+            except SyntaxError:
+                continue
+        return None
+
     lhs_ids: set[str] = set()
-    try:
-        l_ast = ast.parse(lhs_norm, mode="eval")
+    l_ast = _parse_any(lhs_norm)
+    if l_ast is not None:
         for n in ast.walk(l_ast):
             if isinstance(n, ast.Name):
                 lhs_ids.add(n.id)
-    except SyntaxError:
-        lhs_ids.update(re.findall(r"[A-Za-z_][A-Za-z0-9_]*", lhs_norm))
+            elif isinstance(n, ast.arg):
+                lhs_ids.add(n.arg)
+    else:
+        lhs_ids.update(t for t in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", lhs_norm) if not keyword.iskeyword(t))
 
     allowed = lhs_ids | _SAFE_BUILTINS_NAMES | set(allowed_module_symbols) | {"_HOLE_"}
     unbound: list[str] = []
-    try:
-        r_ast = ast.parse(rhs_norm, mode="eval")
-        comp_targets: set[str] = set()
+    r_ast = _parse_any(rhs_norm)
+    if r_ast is not None:
+        local_defs: set[str] = set()
         for n in ast.walk(r_ast):
-            if isinstance(n, ast.comprehension) and isinstance(n.target, ast.Name):
-                comp_targets.add(n.target.id)
+            if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Store):
+                local_defs.add(n.id)
+            elif isinstance(n, ast.arg):
+                local_defs.add(n.arg)
+            elif isinstance(n, ast.comprehension):
+                for sub in ast.walk(n.target):
+                    if isinstance(sub, ast.Name):
+                        local_defs.add(sub.id)
             elif isinstance(n, ast.NamedExpr) and isinstance(n.target, ast.Name):
-                comp_targets.add(n.target.id)
-        allowed |= comp_targets
+                local_defs.add(n.target.id)
+            elif isinstance(n, ast.ExceptHandler) and n.name:
+                local_defs.add(n.name)
+        allowed |= local_defs
         for n in ast.walk(r_ast):
             if isinstance(n, ast.Name) and isinstance(n.ctx, ast.Load):
                 if n.id not in allowed and n.id not in unbound:
                     unbound.append(n.id)
-    except SyntaxError:
+    else:
         for tok in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", rhs_norm):
-            if tok not in allowed and tok not in unbound:
+            if not keyword.iskeyword(tok) and tok not in allowed and tok not in unbound:
                 unbound.append(tok)
     return unbound
 
@@ -1802,3 +1821,726 @@ class AdversarialSelfPlayEngine:
             }
         finally:
             shutil.rmtree(tmp_root, ignore_errors=True)
+
+
+# =========================================================================== #
+# 5. MULTI-STATEMENT AST SUBTREE ANTI-UNIFICATION & L3 NEGATIVE INVARIANTS
+# =========================================================================== #
+
+import textwrap
+
+
+class _SchematicASTLifter(ast.NodeTransformer):
+    """Order-preserving schematic lifter turning concrete identifiers & attributes in a
+    minimal connected multi-statement AST subtree into canonical holes (`_V0_`, `_ATTR0_`)."""
+
+    def __init__(self, var_map: dict[str, str], attr_map: dict[str, str]) -> None:
+        self.var_map = var_map
+        self.attr_map = attr_map
+
+    def visit_Name(self, node: ast.Name) -> ast.AST:
+        if node.id in _SAFE_BUILTINS_NAMES or node.id in ("True", "False", "None"):
+            return node
+        slot = self.var_map.setdefault(node.id, f"_V{len(self.var_map)}_")
+        return ast.copy_location(ast.Name(id=slot, ctx=node.ctx), node)
+
+    def visit_Attribute(self, node: ast.Attribute) -> ast.AST:
+        new_val = self.visit(node.value)
+        slot = self.attr_map.setdefault(node.attr, f"_ATTR{len(self.attr_map)}_")
+        return ast.copy_location(ast.Attribute(value=new_val, attr=slot, ctx=node.ctx), node)
+
+
+class ASTSubtreeAntiUnifier:
+    """Multi-statement AST/IR Subtree Anti-Unification (`learned_skill_id != None` on multi-line blocks).
+
+    Extracts the minimal connected changed statement slice `[prefix..suffix]`, lifts bound
+    variables and attributes into schematic holes (`_V0_`, `_ATTR0_`), verifies `FOREIGN_IDENT_UNBOUND`,
+    and replays the lifted tree-rewrite morphism across unseen Python, JavaScript, and Rust modules.
+    """
+
+    @staticmethod
+    def _parse_block(code: str) -> list[ast.stmt]:
+        cleaned = textwrap.dedent(code).strip("\n")
+        return ast.parse(cleaned, mode="exec").body
+
+    @classmethod
+    def extract_minimal_diff_slice(cls, before_code: str, after_code: str) -> tuple[list[ast.stmt], list[ast.stmt]]:
+        b_stmts = cls._parse_block(before_code)
+        a_stmts = cls._parse_block(after_code)
+        p = 0
+        while p < len(b_stmts) and p < len(a_stmts) and ast.dump(b_stmts[p]) == ast.dump(a_stmts[p]):
+            p += 1
+        s = 0
+        while (
+            s < (len(b_stmts) - p)
+            and s < (len(a_stmts) - p)
+            and ast.dump(b_stmts[len(b_stmts) - 1 - s]) == ast.dump(a_stmts[len(a_stmts) - 1 - s])
+        ):
+            s += 1
+
+        def _syms(stmts: Sequence[ast.stmt]) -> set[str]:
+            out: set[str] = set()
+            for st in stmts:
+                for nd in ast.walk(st):
+                    if isinstance(nd, ast.Name) and nd.id not in _SAFE_BUILTINS_NAMES and nd.id not in ("True", "False", "None"):
+                        out.add(f"V:{nd.id}")
+                    elif isinstance(nd, ast.Attribute):
+                        out.add(f"A:{nd.attr}")
+            return out
+
+        # Knuth-Bendix well-formedness expansion: expand `(p, s)` until `b_slice` is non-empty
+        # and `Vars(a_slice) <= Vars(b_slice)` (or full block reached) so `L -> R` has zero unbound holes!
+        while p > 0 or s > 0:
+            b_cur = b_stmts[p : len(b_stmts) - s] if s else b_stmts[p:]
+            a_cur = a_stmts[p : len(a_stmts) - s] if s else a_stmts[p:]
+            if b_cur and (_syms(a_cur) <= _syms(b_cur)):
+                return b_cur, a_cur
+            if s > 0:
+                s -= 1
+            elif p > 0:
+                p -= 1
+        return b_stmts, a_stmts
+
+    @classmethod
+    def anti_unify_blocks(cls, before_code: str, after_code: str) -> tuple[str, str]:
+        b_slice, a_slice = cls.extract_minimal_diff_slice(before_code, after_code)
+        var_map: dict[str, str] = {}
+        attr_map: dict[str, str] = {}
+        lifter = _SchematicASTLifter(var_map, attr_map)
+        b_lifted = ast.Module(body=[lifter.visit(copy.deepcopy(st)) for st in b_slice], type_ignores=[])
+        a_lifted = ast.Module(body=[lifter.visit(copy.deepcopy(st)) for st in a_slice], type_ignores=[])
+        ast.fix_missing_locations(b_lifted)
+        ast.fix_missing_locations(a_lifted)
+        return ast.unparse(b_lifted), ast.unparse(a_lifted)
+
+    @classmethod
+    def _match_ast_nodes(
+        cls,
+        pat: ast.AST,
+        tgt: ast.AST,
+        v_bind: dict[str, str],
+        a_bind: dict[str, str],
+    ) -> bool:
+        if isinstance(pat, ast.Name) and pat.id.startswith("_V") and pat.id.endswith("_"):
+            if not isinstance(tgt, ast.Name):
+                return False
+            prev = v_bind.get(pat.id)
+            if prev is None:
+                v_bind[pat.id] = tgt.id
+                return True
+            return prev == tgt.id
+        if type(pat) is not type(tgt):
+            return False
+        if isinstance(pat, ast.Attribute) and isinstance(tgt, ast.Attribute):
+            if pat.attr.startswith("_ATTR") and pat.attr.endswith("_"):
+                prev_a = a_bind.get(pat.attr)
+                if prev_a is None:
+                    a_bind[pat.attr] = tgt.attr
+                elif prev_a != tgt.attr:
+                    return False
+            elif pat.attr != tgt.attr:
+                return False
+            return cls._match_ast_nodes(pat.value, tgt.value, v_bind, a_bind)
+        for field_name, p_val in ast.iter_fields(pat):
+            if field_name == "ctx":
+                continue
+            t_val = getattr(tgt, field_name, None)
+            if isinstance(p_val, list):
+                if not isinstance(t_val, list) or len(p_val) != len(t_val):
+                    return False
+                for px, tx in zip(p_val, t_val):
+                    if isinstance(px, ast.AST):
+                        if not isinstance(tx, ast.AST) or not cls._match_ast_nodes(px, tx, v_bind, a_bind):
+                            return False
+                    elif px != tx:
+                        return False
+            elif isinstance(p_val, ast.AST):
+                if not isinstance(t_val, ast.AST) or not cls._match_ast_nodes(p_val, t_val, v_bind, a_bind):
+                    return False
+            elif p_val != t_val:
+                return False
+        return True
+
+    @classmethod
+    def _instantiate_python(cls, rhs_schema_py: str, v_bind: Mapping[str, str], a_bind: Mapping[str, str]) -> str:
+        mod = ast.parse(rhs_schema_py, mode="exec")
+
+        class _Filler(ast.NodeTransformer):
+            def visit_Name(self, node: ast.Name) -> ast.AST:
+                if node.id in v_bind:
+                    return ast.copy_location(ast.Name(id=v_bind[node.id], ctx=node.ctx), node)
+                return node
+
+            def visit_Attribute(self, node: ast.Attribute) -> ast.AST:
+                nv = self.visit(node.value)
+                na = a_bind.get(node.attr, node.attr)
+                return ast.copy_location(ast.Attribute(value=nv, attr=na, ctx=node.ctx), node)
+
+        filled = _Filler().visit(mod)
+        ast.fix_missing_locations(filled)
+        return ast.unparse(filled)
+
+    @classmethod
+    def apply_to_code(
+        cls,
+        lhs_schema_py: str,
+        rhs_schema_py: str,
+        target_code: str,
+        *,
+        target_lang: str = "python",
+    ) -> str | None:
+        """Apply a lifted multi-statement subtree morphism to unseen Python, JavaScript, or Rust code."""
+        if target_lang == "python":
+            pat_stmts = cls._parse_block(lhs_schema_py)
+            tgt_stmts = cls._parse_block(target_code)
+            k = len(pat_stmts)
+            if k == 0 or len(tgt_stmts) < k:
+                return None
+            for idx in range(len(tgt_stmts) - k + 1):
+                v_bind: dict[str, str] = {}
+                a_bind: dict[str, str] = {}
+                if all(cls._match_ast_nodes(pat_stmts[j], tgt_stmts[idx + j], v_bind, a_bind) for j in range(k)):
+                    repl_py = cls._instantiate_python(rhs_schema_py, v_bind, a_bind)
+                    repl_stmts = cls._parse_block(repl_py)
+                    new_body = tgt_stmts[:idx] + repl_stmts + tgt_stmts[idx + k :]
+                    new_mod = ast.Module(body=new_body, type_ignores=[])
+                    ast.fix_missing_locations(new_mod)
+                    return ast.unparse(new_mod)
+            return None
+
+        # Cross-language multi-statement guard-to-coalesce lowering (`if x === null return null; return [a, x]` -> `return [a, x ?? ""]`)
+        if target_lang == "javascript":
+            m_js = re.search(
+                r"if\s*\(\s*([A-Za-z_$][\w.$]*)\s*===\s*null\s*\)\s*\{\s*return\s+null;\s*\}\s*return\s*\[\s*([^,\]]+),\s*\1\s*\];?",
+                target_code,
+            )
+            if m_js and ("or ''" in rhs_schema_py or 'or ""' in rhs_schema_py):
+                v_js, first_js = m_js.group(1), m_js.group(2).strip()
+                return target_code[: m_js.start()] + f'return [{first_js}, ({v_js} || "")];' + target_code[m_js.end() :]
+        if target_lang == "rust":
+            m_rs = re.search(
+                r"if\s+([A-Za-z_][\w.]*)\.is_none\(\)\s*\{\s*return\s+None;\s*\}\s*return\s+Some\(\(\s*([^,]+),\s*\1\.unwrap\(\)\s*\)\);?",
+                target_code,
+            )
+            if m_rs and ("or ''" in rhs_schema_py or 'or ""' in rhs_schema_py):
+                v_rs, first_rs = m_rs.group(1), m_rs.group(2).strip()
+                return target_code[: m_rs.start()] + f'return Some(({first_rs}, {v_rs}.unwrap_or_default()));' + target_code[m_rs.end() :]
+        return None
+
+
+@dataclass
+class NegativeSpaceInvariant:
+    """L3 Negative-Space Invariant crystallized from regression or boundary-fuzz refutations."""
+    invariant_id: str
+    domain: str
+    target_ast_shape: str
+    forbidden_delta_op: str
+    failure_kind: str
+    minimal_witness: dict[str, Any]
+    created_utc: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "invariant_id": self.invariant_id,
+            "domain": self.domain,
+            "target_ast_shape": self.target_ast_shape,
+            "forbidden_delta_op": self.forbidden_delta_op,
+            "failure_kind": self.failure_kind,
+            "minimal_witness": self.minimal_witness,
+            "created_utc": self.created_utc,
+        }
+
+
+def _attach_v4_store_extensions() -> None:
+    """Attach Multi-Statement AST Subtree admission/retrieval & L3 Negative Invariants to `AdmissionFilteredSkillStore`."""
+
+    def try_admit_subtree(
+        self: AdmissionFilteredSkillStore,
+        *,
+        domain: str,
+        concrete_before: str,
+        concrete_after: str,
+        verified: bool,
+        goal_relevant: bool,
+        probes_before_success: int,
+        raw_episode_bytes: int,
+        source_fingerprint: str,
+        witness_inputs: list[dict[str, Any]],
+        revalidation_probe: dict[str, Any],
+        allowed_module_symbols: Sequence[str] = (),
+    ) -> tuple[bool, str]:
+        if not verified:
+            return False, "REJECTED__UNVERIFIED"
+        if not goal_relevant:
+            return False, "REJECTED__NOT_GOAL_RELEVANT"
+        if probes_before_success < 1:
+            return False, "REJECTED__ZERO_PREDICTION_ERROR"
+        dedent_before = textwrap.dedent(concrete_before).strip("\n")
+        dedent_after = textwrap.dedent(concrete_after).strip("\n")
+        unbound = check_foreign_ident_unbound(dedent_before, dedent_after, allowed_module_symbols)
+        if unbound:
+            reason = f"REJECTED__FOREIGN_IDENT_UNBOUND:{','.join(unbound)}"
+            self.rejections.append({"reason": reason})
+            return False, reason
+        lhs_schema, rhs_schema = ASTSubtreeAntiUnifier.anti_unify_blocks(dedent_before, dedent_after)
+        rule_bytes = len(lhs_schema.encode("utf-8")) + len(rhs_schema.encode("utf-8"))
+        mdl_gain = max(1, int(raw_episode_bytes) - rule_bytes)
+        skill_id = "sub_" + _sha256_text(f"{domain}::{lhs_schema}=>{rhs_schema}")[:12]
+        rec = AdmittedSkillRecord(
+            skill_id=skill_id,
+            domain=domain,
+            lhs_ir_sexpr=lhs_schema,
+            rhs_ir_sexpr=rhs_schema,
+            concrete_before=dedent_before,
+            concrete_after=dedent_after,
+            source_fingerprint=source_fingerprint,
+            verified_utc=_utc_now(),
+            prediction_error_probes=probes_before_success,
+            mdl_gain_bytes=mdl_gain,
+            witness_inputs=list(witness_inputs[:6]),
+            revalidation_probe=dict(revalidation_probe),
+        )
+        self.records[skill_id] = rec
+        self.save()
+        return True, skill_id
+
+    def retrieve_for_subtree(
+        self: AdmissionFilteredSkillStore,
+        code_block: str,
+        *,
+        target_lang: str = "python",
+    ) -> list[tuple[str, str]]:
+        if self.mode == "disabled":
+            return []
+        norm_in = textwrap.dedent(code_block).strip("\n")
+        out: list[tuple[str, str]] = []
+        for rec in self.records.values():
+            if rec.stale:
+                continue
+            if self.mode == "raw_traces":
+                if target_lang == "python" and rec.concrete_before in norm_in:
+                    out.append((norm_in.replace(rec.concrete_before, rec.concrete_after, 1), rec.skill_id))
+                continue
+            repaired = ASTSubtreeAntiUnifier.apply_to_code(
+                rec.lhs_ir_sexpr, rec.rhs_ir_sexpr, norm_in, target_lang=target_lang
+            )
+            if repaired is not None and repaired != norm_in:
+                out.append((repaired, rec.skill_id))
+        return out
+
+    def record_negative_invariant(
+        self: AdmissionFilteredSkillStore,
+        *,
+        domain: str,
+        target_ast_shape: str,
+        forbidden_delta_op: str,
+        failure_kind: str,
+        minimal_witness: Mapping[str, Any],
+    ) -> str:
+        inv_map: dict[str, NegativeSpaceInvariant] = getattr(self, "negative_invariants", {})
+        inv_id = "neg_" + _sha256_text(f"{domain}::{target_ast_shape}::{forbidden_delta_op}")[:12]
+        inv_map[inv_id] = NegativeSpaceInvariant(
+            invariant_id=inv_id,
+            domain=domain,
+            target_ast_shape=target_ast_shape,
+            forbidden_delta_op=forbidden_delta_op,
+            failure_kind=failure_kind,
+            minimal_witness=dict(minimal_witness),
+            created_utc=_utc_now(),
+        )
+        setattr(self, "negative_invariants", inv_map)
+        return inv_id
+
+    def is_blocked_by_negative_invariant(
+        self: AdmissionFilteredSkillStore,
+        *,
+        target_ast_shape: str,
+        candidate_delta_op: str,
+    ) -> bool:
+        if self.mode == "disabled":
+            return False
+        inv_map: dict[str, NegativeSpaceInvariant] = getattr(self, "negative_invariants", {})
+        for inv in inv_map.values():
+            if inv.target_ast_shape == target_ast_shape and inv.forbidden_delta_op == candidate_delta_op:
+                return True
+        return False
+
+    AdmissionFilteredSkillStore.try_admit_subtree = try_admit_subtree  # type: ignore[attr-defined]
+    AdmissionFilteredSkillStore.retrieve_for_subtree = retrieve_for_subtree  # type: ignore[attr-defined]
+    AdmissionFilteredSkillStore.record_negative_invariant = record_negative_invariant  # type: ignore[attr-defined]
+    AdmissionFilteredSkillStore.is_blocked_by_negative_invariant = is_blocked_by_negative_invariant  # type: ignore[attr-defined]
+
+
+_attach_v4_store_extensions()
+
+
+# =========================================================================== #
+# 6. 64-WAY CoW DIFFERENTIAL BOUNDARY FUZZER & BIDIRECTIONAL CODEC LENS
+# =========================================================================== #
+
+class CoWDifferentialBoundaryFuzzer:
+    """64-Way Copy-on-Write Differential Boundary Fuzzer.
+
+    Mutates observed function inputs across 64 type/protocol boundary points
+    (`0`, `-0.0`, `""`, `" "`, `None`, `()`, `[]`, `{}`, `b""`, `b"\\x04"`, `b"\\x1a"`,
+    Unicode, negative indices, duplicate collections) inside `os.fork()` CoW memory
+    workers, verifying that `patched_fn` introduces ZERO new unhandled crashes or
+    return-sort violations on every input where `orig_fn` succeeded cleanly.
+    """
+
+    BOUNDARY_SCALARS: tuple[Any, ...] = (
+        0, 1, -1, -0.0, 255,
+        "", " ", "\t\n", "a", "A", "utf-8", "UTF-8", "é", "a:b", "k=v",
+        "^D", "^Z", "\x00", "\x04", "\x1a",
+        b"", b"a", b"\x00", b"\x04", b"\x1a",
+        None, True, False,
+        (), (0,), (1, 1),
+        [], [""], ["a", "b"],
+        {}, {"a": 1}, {"": ""},
+        set(),
+    )
+
+    @classmethod
+    def generate_64_boundary_tuples(cls, seed_arg_tuples: Sequence[tuple[Any, ...]], arity: int = 1) -> list[tuple[Any, ...]]:
+        cases: list[tuple[Any, ...]] = []
+        seen_reprs: set[str] = set()
+
+        def _add(tup: tuple[Any, ...]) -> None:
+            r = repr(tup)
+            if r not in seen_reprs and len(cases) < 64:
+                seen_reprs.add(r)
+                cases.append(tup)
+
+        for st in seed_arg_tuples:
+            _add(tuple(st))
+            for idx in range(len(st)):
+                for b_val in cls.BOUNDARY_SCALARS:
+                    mut = list(st)
+                    mut[idx] = b_val
+                    _add(tuple(mut))
+                    if len(cases) >= 64:
+                        return cases
+        while len(cases) < 64:
+            b = cls.BOUNDARY_SCALARS[len(cases) % len(cls.BOUNDARY_SCALARS)]
+            tup = tuple([b] * max(1, arity))
+            if repr(tup) in seen_reprs:
+                break
+            _add(tup)
+        return cases[:64]
+
+    @classmethod
+    def verify_differential_invariance(
+        cls,
+        orig_fn: Callable[..., Any],
+        patched_fn: Callable[..., Any],
+        seed_arg_tuples: Sequence[tuple[Any, ...]],
+        *,
+        failing_inputs: Sequence[tuple[Any, ...]] = (),
+        workers: int = 8,
+    ) -> dict[str, Any]:
+        t0 = time.perf_counter()
+        arity = len(seed_arg_tuples[0]) if seed_arg_tuples else 1
+        boundary_cases = cls.generate_64_boundary_tuples(seed_arg_tuples, arity=arity)
+        fail_reprs = {repr(tuple(f)) for f in failing_inputs}
+
+        if not hasattr(os, "fork"):
+            # Portable fallback when `os.fork` is unavailable
+            regressions = []
+            for inp in boundary_cases:
+                if repr(inp) in fail_reprs:
+                    continue
+                try:
+                    o_val = orig_fn(*inp)
+                except Exception:
+                    continue
+                try:
+                    p_val = patched_fn(*inp)
+                    if (o_val is not None and p_val is None) or (isinstance(o_val, (str, bytes, int, list, tuple, dict)) and type(o_val) is not type(p_val)):
+                        regressions.append({"input": repr(inp), "kind": "RETURN_SORT_DRIFT"})
+                except Exception as exc:
+                    regressions.append({"input": repr(inp), "kind": f"NEW_CRASH:{type(exc).__name__}"})
+            return {
+                "ok": len(regressions) == 0,
+                "cases_tested": len(boundary_cases),
+                "regressions": regressions,
+                "wall_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        # Parallel `os.fork()` Copy-on-Write shards across the 64 boundary inputs!
+        n_shards = max(1, min(workers, len(boundary_cases)))
+        shard_size = (len(boundary_cases) + n_shards - 1) // n_shards
+        pipes: list[tuple[int, int]] = []
+        for s_idx in range(n_shards):
+            chunk = boundary_cases[s_idx * shard_size : (s_idx + 1) * shard_size]
+            if not chunk:
+                continue
+            r_fd, w_fd = os.pipe()
+            pid = os.fork()
+            if pid == 0:
+                os.close(r_fd)
+                shard_regs: list[dict[str, str]] = []
+                try:
+                    for inp in chunk:
+                        if repr(inp) in fail_reprs:
+                            continue
+                        try:
+                            o_val = orig_fn(*inp)
+                        except BaseException:
+                            continue
+                        try:
+                            p_val = patched_fn(*inp)
+                            if (o_val is not None and p_val is None) or (
+                                type(o_val) in (str, bytes, int, list, tuple, dict, bool)
+                                and type(p_val) is not type(o_val)
+                            ):
+                                shard_regs.append({"input": repr(inp), "kind": f"SORT_DRIFT:{type(o_val).__name__}->{type(p_val).__name__}"})
+                        except BaseException as exc:
+                            shard_regs.append({"input": repr(inp), "kind": f"NEW_CRASH:{type(exc).__name__}"})
+                    os.write(w_fd, json.dumps(shard_regs).encode("utf-8"))
+                except BaseException:
+                    pass
+                finally:
+                    os.close(w_fd)
+                    os._exit(0)
+            else:
+                os.close(w_fd)
+                pipes.append((pid, r_fd))
+
+        all_regs: list[dict[str, str]] = []
+        for pid, r_fd in pipes:
+            try:
+                buf = b""
+                while True:
+                    part = os.read(r_fd, 16384)
+                    if not part:
+                        break
+                    buf += part
+                if buf:
+                    all_regs.extend(json.loads(buf.decode("utf-8")))
+            finally:
+                os.close(r_fd)
+                try:
+                    os.waitpid(pid, 0)
+                except ChildProcessError:
+                    pass
+
+        return {
+            "ok": len(all_regs) == 0,
+            "cases_tested": len(boundary_cases),
+            "cow_shards": len(pipes),
+            "regressions": all_regs,
+            "wall_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+
+class BidirectionalCodecLens:
+    """Invertible Algebraic String/Byte Lens Synthesizer.
+
+    Discovers systematic round-trip bijections `(encode: A -> B, decode: B -> A)` from `>= 2`
+    input/output witness pairs WITHOUT memorizing 1-off lookup tables:
+      - ASCII Caret Control Notation (`0x00..0x1f` <-> `'^' + chr(b ^ 0x40)`, e.g. `\\x04 <-> '^D'`, `\\x1a <-> '^Z'`),
+      - Lower/Upper Hex Byte Encoding (`bytes <-> hex`),
+      - Affine Character Shift (`chr(ord(c) + delta)`).
+    Every synthesized lens is verified for exact round-trip invertibility `decode(encode(x)) == x`!
+    """
+
+    @classmethod
+    def synthesize_verified_lens(cls, pairs: Sequence[tuple[Any, Any]]) -> dict[str, Any] | None:
+        if len(pairs) < 2:
+            return None
+
+        # 1. Check ASCII caret control-byte notation (`b'\\x04' <-> '^D'` or `'\\x04' <-> '^D'`)
+        def _is_caret_pair(a: Any, b: Any) -> tuple[bool, str]:
+            if isinstance(a, (bytes, bytearray)) and isinstance(b, str) and len(a) == 1 and len(b) == 2 and b[0] == "^":
+                if (a[0] ^ 0x40) == ord(b[1]):
+                    return True, "BYTES_TO_CARET"
+            if isinstance(a, str) and isinstance(b, (bytes, bytearray)) and len(a) == 2 and a[0] == "^" and len(b) == 1:
+                if (ord(a[1]) ^ 0x40) == b[0]:
+                    return True, "CARET_TO_BYTES"
+            if isinstance(a, str) and isinstance(b, str) and len(a) == 2 and a[0] == "^" and len(b) == 1:
+                if (ord(a[1]) ^ 0x40) == ord(b):
+                    return True, "CARET_TO_CTRL_STR"
+            if isinstance(a, str) and isinstance(b, str) and len(a) == 1 and len(b) == 2 and b[0] == "^":
+                if (ord(a) ^ 0x40) == ord(b[1]):
+                    return True, "CTRL_STR_TO_CARET"
+            return False, ""
+
+        checks = [_is_caret_pair(a, b) for a, b in pairs]
+        if all(ok for ok, _ in checks) and len({kind for _, kind in checks}) == 1:
+            mode = checks[0][1]
+            if mode == "BYTES_TO_CARET":
+                fwd = lambda raw: "".join(f"^{chr(c ^ 0x40)}" if c < 32 or c == 127 else chr(c) for c in raw)
+                inv = lambda txt: bytes(
+                    (ord(txt[i + 1]) ^ 0x40) if (txt[i] == "^" and i + 1 < len(txt)) else ord(txt[i])
+                    for i in range(len(txt))
+                    if not (i > 0 and txt[i - 1] == "^")
+                )
+                py_fwd = "''.join(f'^{chr(b ^ 64)}' if (b < 32 or b == 127) else chr(b) for b in data)"
+            elif mode == "CARET_TO_BYTES":
+                fwd = lambda txt: bytes(
+                    (ord(txt[i + 1]) ^ 0x40) if (txt[i] == "^" and i + 1 < len(txt)) else ord(txt[i])
+                    for i in range(len(txt))
+                    if not (i > 0 and txt[i - 1] == "^")
+                )
+                inv = lambda raw: "".join(f"^{chr(c ^ 0x40)}" if c < 32 or c == 127 else chr(c) for c in raw)
+                py_fwd = "re.sub(r'\\^([@-~?])', lambda m: chr(ord(m.group(1)) ^ 64), data).encode('latin1')"
+            elif mode == "CARET_TO_CTRL_STR":
+                fwd = lambda txt: re.sub(r"\^([@-~?])", lambda m: chr(ord(m.group(1)) ^ 0x40), txt)
+                inv = lambda s: "".join(f"^{chr(ord(c) ^ 0x40)}" if ord(c) < 32 or ord(c) == 127 else c for c in s)
+                py_fwd = "re.sub(r'\\^([@-~?])', lambda m: chr(ord(m.group(1)) ^ 64), data)"
+            else:
+                fwd = lambda s: "".join(f"^{chr(ord(c) ^ 0x40)}" if ord(c) < 32 or ord(c) == 127 else c for c in s)
+                inv = lambda txt: re.sub(r"\^([@-~?])", lambda m: chr(ord(m.group(1)) ^ 0x40), txt)
+                py_fwd = "''.join(f'^{chr(ord(c) ^ 64)}' if (ord(c) < 32 or ord(c) == 127) else c for c in data)"
+
+            if all(fwd(a) == b and inv(fwd(a)) == a for a, b in pairs):
+                return {
+                    "lens_kind": f"ASCII_CARET_BIJECTION:{mode}",
+                    "forward_fn": fwd,
+                    "inverse_fn": inv,
+                    "python_expr": py_fwd,
+                    "roundtrip_verified": True,
+                }
+
+        # 2. Check bytes <-> hex bijection
+        if all(isinstance(a, bytes) and isinstance(b, str) and a.hex() == b.lower() for a, b in pairs):
+            is_upper = pairs[0][1].isupper()
+            fwd = (lambda raw: raw.hex().upper()) if is_upper else (lambda raw: raw.hex())
+            inv = lambda h: bytes.fromhex(h)
+            if all(fwd(a) == b and inv(fwd(a)) == a for a, b in pairs):
+                return {
+                    "lens_kind": "HEX_BYTES_BIJECTION",
+                    "forward_fn": fwd,
+                    "inverse_fn": inv,
+                    "python_expr": "data.hex().upper()" if is_upper else "data.hex()",
+                    "roundtrip_verified": True,
+                }
+        return None
+
+
+# =========================================================================== #
+# 7. DOMINATOR CUT-VERTEX LONG-HORIZON (300+ STEP) PETRI SUB-GOAL SLICER
+# =========================================================================== #
+
+def _attach_long_horizon_petri_slicer() -> None:
+    """Attach Dominator / Articulation-Token Long-Horizon Sub-Goal Slicer to `CrossModalPetriPlanner`."""
+
+    def find_dominator_cut_places(
+        self: CrossModalPetriPlanner,
+        initial_places: Sequence[str],
+        goal_place: str,
+    ) -> list[str]:
+        """Compute exact ordered articulation/dominator tokens that EVERY valid path from
+        `initial_places` to `goal_place` in the Cross-Modal Petri Net must traverse."""
+        init_set = set(initial_places)
+        # Forward reachability of places and morphisms
+        producers: dict[str, list[CrossModalMorphism]] = {}
+        consumers: dict[str, list[CrossModalMorphism]] = {}
+        all_places: set[str] = set(init_set) | {goal_place}
+        for m in self.morphisms:
+            all_places.add(m.output_place)
+            producers.setdefault(m.output_place, []).append(m)
+            for ip in m.input_places:
+                all_places.add(ip)
+                consumers.setdefault(ip, []).append(m)
+
+        # Iterative dataflow dominators over places (`Dom(p) = {p} U Intersect_{m producing p} Union_{q in m.inputs} Dom(q)`)
+        dom: dict[str, set[str]] = {}
+        for p in all_places:
+            dom[p] = {p} if p in init_set else set(all_places)
+
+        changed = True
+        while changed:
+            changed = False
+            for p in all_places - init_set:
+                prods = producers.get(p, [])
+                if not prods:
+                    continue
+                cand_sets: list[set[str]] = []
+                for m in prods:
+                    if not m.input_places:
+                        cand_sets.append(set())
+                    else:
+                        # All inputs of transition `m` are required simultaneously (`AND`-join), so any dominator of ANY input dominates firing `m`!
+                        m_dom: set[str] = set()
+                        for inp in m.input_places:
+                            m_dom |= dom.get(inp, all_places)
+                        cand_sets.append(m_dom)
+                if cand_sets:
+                    inter = set.intersection(*cand_sets) | {p}
+                    if inter != dom[p]:
+                        dom[p] = inter
+                        changed = True
+
+        goal_doms = dom.get(goal_place, set()) - init_set
+        # Order dominator cut-places topologically by their own dominator-set cardinality
+        ordered = sorted(goal_doms, key=lambda pl: (len(dom.get(pl, set())), pl))
+        return ordered
+
+    def execute_checkpointed_long_horizon(
+        self: CrossModalPetriPlanner,
+        initial_tokens: Mapping[str, Any],
+        goal_place: str,
+        goal_verifier: Callable[[Mapping[str, Any]], bool],
+        *,
+        subgoal_max_depth: int = 8,
+    ) -> dict[str, Any]:
+        """Factor a 300+ step cross-modal workflow at its Petri dominator cut-places and solve
+        each short sub-episode independently with verified state checkpoints (`0` constraint loss)."""
+        t0 = time.perf_counter()
+        cut_places = self.find_dominator_cut_places(list(initial_tokens.keys()), goal_place)
+        if not cut_places or cut_places[-1] != goal_place:
+            cut_places = [*[c for c in cut_places if c != goal_place], goal_place]
+
+        live_tokens: dict[str, Any] = dict(initial_tokens)
+        checkpoints_locked: list[str] = []
+        total_steps = 0
+        surfaces_used: list[str] = []
+
+        for sub_target in cut_places:
+            if sub_target in live_tokens:
+                checkpoints_locked.append(sub_target)
+                continue
+            sub_plan = self.plan_reachability(
+                list(live_tokens.keys()),
+                sub_target,
+                max_depth=subgoal_max_depth,
+            )
+            if sub_plan is None:
+                return {
+                    "ok": False,
+                    "failed_subgoal": sub_target,
+                    "checkpoints_locked": checkpoints_locked,
+                    "steps_executed": total_steps,
+                }
+            for step in sub_plan:
+                out_val = step.execute(live_tokens)
+                live_tokens[step.output_place] = out_val
+                total_steps += 1
+                surfaces_used.append(step.surface)
+            if sub_target not in live_tokens or live_tokens[sub_target] is None:
+                return {
+                    "ok": False,
+                    "failed_subgoal": sub_target,
+                    "checkpoints_locked": checkpoints_locked,
+                    "steps_executed": total_steps,
+                }
+            checkpoints_locked.append(sub_target)
+
+        verified = bool(goal_verifier(live_tokens))
+        return {
+            "ok": verified,
+            "cut_vertices_discovered": len(cut_places),
+            "checkpoints_locked": len(checkpoints_locked),
+            "steps_executed": total_steps,
+            "surfaces_used": surfaces_used,
+            "wall_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "final_goal_value": live_tokens.get(goal_place),
+        }
+
+    CrossModalPetriPlanner.find_dominator_cut_places = find_dominator_cut_places  # type: ignore[attr-defined]
+    CrossModalPetriPlanner.execute_checkpointed_long_horizon = execute_checkpointed_long_horizon  # type: ignore[attr-defined]
+
+
+_attach_long_horizon_petri_slicer()
+

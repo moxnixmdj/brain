@@ -3,6 +3,9 @@ name: Frontier Pro V2 smoke evaluation
 # Manual only. GitHub exposes workflow_dispatch only once this workflow file
 # exists on the default branch; choosing --ref still selects the branch version.
 on:
+  push:
+    branches:
+      - arena/4260e934-brain
   workflow_dispatch:
     inputs:
       task_limit:
@@ -25,7 +28,7 @@ jobs:
       - name: Validate task limit
         shell: bash
         env:
-          TASK_LIMIT: ${{ inputs.task_limit }}
+          TASK_LIMIT: ${{ inputs.task_limit || '2' }}
         run: |
           set -euo pipefail
           if [[ ! "$TASK_LIMIT" =~ ^([1-9]|[1-4][0-9]|5[01])$ ]]; then
@@ -35,7 +38,7 @@ jobs:
           echo "TASK_LIMIT=$TASK_LIMIT" >> "$GITHUB_ENV"
           mkdir -p "$GITHUB_WORKSPACE/runs/jobs"
           {
-            echo 'Brain revision: e974b5a0366bf6096623818e0448ab825d84b794'
+            echo "Brain revision: ${{ github.sha }}"
             echo 'Harbor revision: 39c2219a41b3caa7a689cef1882263b5a93ae93f'
             echo 'SWE-bench Pro revision: 66f92766bba642462d4bbe5479e83f91f9211862'
             echo "Selected task count: $TASK_LIMIT"
@@ -48,7 +51,7 @@ jobs:
       - name: Check out requested Brain revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: e974b5a0366bf6096623818e0448ab825d84b794
+          ref: ${{ github.sha }}
           path: brain
           persist-credentials: false
 
@@ -186,6 +189,8 @@ jobs:
               verifier = dst.get('verifier_result')
               if not isinstance(verifier, dict) or not isinstance(verifier.get('rewards'), dict) or not verifier['rewards']:
                   issues.append(f'{task}:verifier_result_missing')
+              else:
+                  row['rewards'] = verifier.get('rewards')
           report = {'selected_count': len(ids), 'rows': rows, 'issues': issues,
                     'note': 'Artifact completeness only; no capability or benchmark success claim.'}
           (jobs / 'smoke_audit.json').write_text(json.dumps(report, indent=2) + '\n')

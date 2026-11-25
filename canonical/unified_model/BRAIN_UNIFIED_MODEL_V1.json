@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "367226367103ca719afba22c7c5ad725a014cfcc9a8476426a7a71c87782e874"
+  "value": "29c1e7457b36e56ff44ac97e52db9ee5703c4fac1634194fa0fb6f640028e26e"
  },
  "engines": [
   {
@@ -175185,7 +175185,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1.json",
    "schema": "EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1",
-   "sha256": "a3163b2b35c21a1e55c4adf867b6e4d17b6a7eff78ac03a5b3656f4b7fff4f4c",
+   "sha256": "c75144a98ddb586b5b8112f641dfafa4f939010bb981bd31ac68beb47dd4cc9c",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -251081,7 +251081,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/EPISTEMIC_COMPUTER_AGENT_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "cca8f23ad4f7cda5b933acd9fcbf3962279f0a11ffe9731d3af07b66991599a7",
+   "sha256": "389129c8bfa80c7a9d42daaed3b0b7ac9b9beb09d3cc9b6f294f09bd4709456d",
    "status": "SHIPPED",
    "terms": {
     "111": 1,
@@ -277086,7 +277086,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "0141224349d7c1bea8ea852dfa37dc1f4de1f227c8ec21d6e66169625cfa544a",
+   "sha256": "1042f9220270c0be19e9c53e5df95645c31979ede99362fe472f80bcd5ec79fb",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
