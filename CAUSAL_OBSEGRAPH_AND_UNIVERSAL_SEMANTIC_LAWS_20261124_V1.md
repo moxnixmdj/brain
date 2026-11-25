@@ -121,15 +121,33 @@ Artifacts: `canonical/Immediate_Results/historical_boltons_more_itertools_transf
   - Fixed scoped C/C++ dominator null-guard analysis (`scoped_null_guards` + `CHAINED_ARROW` `p->prev->next` + C89-safe `body_entry_idx` + cleanup `goto` + UBSAN `file:line:col: runtime error:` anchoring + `os.killpg` process-group reaping) and added **Crash-Horizon Monotonicity Chaining** for multi-hunk native ASAN/UBSAN commits:
     - **`b2890c8d76` (`fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)`)**: Solved in **`4` sims (`3.23s`)**, `exact_file_match = True`, `sabotage_verified = True`, crystallized `uir_law_6e054af54b35`.
     - **`2f6fc7f0f2` (`fix several null pointer problems on allocation failure (#526)`)**: Solved in **`19` sims (`12.65s`)** via **`COGS_COUPLED_MULTIFILE_INVENTION`** (multi-hunk Crash-Horizon Monotonicity Chaining under `gcc -fsanitize=address,undefined` + LeakSanitizer), `exact_file_match = True`, `sabotage_verified = True`.
-- **Live GitHub Actions Docker Harbor Run #2 (`run_id=45549795585`, `job_id=138987969469`, `conclusion: success` in `5m34s`)**:
+    - **Live GitHub Actions Docker Harbor Run #2 (`run_id=45549795585`, `job_id=138987969469`, `conclusion: success` in `5m34s`)**:
   - Verified polyglot `_detect_repo_language` worker on `SWE-bench Pro V2` (`HARD-51[:2]` + `PatchReplayAgent` -> `issues: []`, `0` trial exceptions) AND official `laude-institute/terminal-bench-2@2fd12b88` (`suite=terminal-bench-4`): `cancel-async-tasks` dispatched cleanly (`EXPERIMENTAL_DISPATCH__UNVERIFIED`, `0` leaked processes; Harbor's `test.sh` `uvx pytest` blocked by air-gapped `network_mode: none`), while `regex-log` fail-closed cleanly (`PROCESS_SNAPSHOT_FAILED` due to missing `/usr/bin/python3` in minimal container).
+
+### 4.6 Generalized Live-Frame Differential Witness Inversion (`0 / 30 -> 6 / 30` on `pypa/packaging` + `hukkin/tomli`), Producer-Slice Law Recall & Official `Terminal-Bench 4.0` (`v4.0.0`) Air-Gapped Harbor Docker Run
+Artifact: `canonical/Immediate_Results/blind_packaging_tomli_differential_witness_20261124_v1.json` (`0` model calls, `$0.00`, `0` source diff leakage).
+- **Root-Cause Failure Diagnosis of Standalone `witness_inversion_v1.py` (`0 / 30` Verified Solves)**:
+  - Standalone `witness_inversion_v1.py` (preserved 100% read-only per `checkability_by_differential_pin_v1.py:60`) scored `0 / 30` (`0.0%`) across the materialized `CORPUS_REPOS` (`pypa/packaging`, `pallets/itsdangerous`, `pypa/pyproject-hooks`, `hukkin/tomli`) because it only parsed static `assert f(const) == const` literals without live frames, walked function return annotations (`Union[...]` subscripts), stripped PEP-570 positional-only parameters (`__s`), and lacked coupled data-model / sequence-prefix / re-export invariants.
+- **Generalized Live-Frame Differential Witness Inverter (`canonical/swe_kernel/differential_witness_inversion_v1.py`)**:
+  - Evaluates candidate witness inversions directly against live `f_locals`/`f_globals` snapshots across strided positive + negative parametrized sibling passing tests inside `ExecutableMentalModel`, covering public re-export `__module__` invariants, body-only `_walk_body` `KeyError` `.get(...)` totalization, PEP-570 `posonlyargs` (`__s`) type-guard abduction, `.replace(c_old, c_new)` string-monoid extensions, coupled `__eq__` + `__hash__` homomorphisms, and sequence prefix-slice equality (`a1[:len(a2)] == a2`).
+- **Blind 30-Commit Benchmark Results (`0 / 30 = 0.0%` -> `6 / 30 = 20.0%`)**:
+  1. `pypa/packaging@c52d2b3046` (`13` sims, `10.04s`, `8,117` pytest cases passed): `split_spec[:len(shortened_prospective)] == shortened_prospective`; automatically crystallizes **`uir_law_5e3064259652`**.
+  2. `pypa/packaging@7013a6048f` (`7` sims, `4.47s`, `8,251` pytest cases passed): `string.replace(".", "_").replace("-", "_").replace(' ', '_')`.
+  3. `pypa/packaging@a6c9bc4dce` (**`6` sims via `SEMANTIC_LAW_RECALL:uir_law_5e3064259652`**): recalls `uir_law_5e3064259652` on the 1st candidate; surgical O(1) `remove_law("uir_law_5e3064259652")` reverts `a6c9bc4dce` from `6` sims (`SEMANTIC_LAW_RECALL`) to `21` sims (`COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION`) with zero weight changes.
+  4. `pypa/packaging@e184feef1a` (`10` sims, `8.73s`, `2,670` pytest cases passed): `padded_prospective[:len(split_spec)] == split_spec`.
+  5. `hukkin/tomli@4e245a4bbb` (`6` sims, `2.37s`): `if not isinstance(__s, str): raise TypeError(f"Expected str object, not '{type(__s).__qualname__}'")`; automatically crystallizes PEP-570 **`uir_law_482e0e05ed5d`**.
+  6. `hukkin/tomli@96dfe2cef7` (`6` sims, `2.05s`): `TOMLDecodeError.__module__ = 'tomli'`.
+- **Live GitHub Actions Docker + Harbor Run #3 (`run_id=45621009866`, `job_id=139228822848`, `conclusion: success` in `6m38s`)**:
+  - Executed official **`Terminal-Bench 4.0` (`harbor-framework/terminal-bench@v4.0.0` = `452bf305c6daa62fc59061d22133a7cbc7c1572e`: `session-window-debug` & `wal-recovery-ordering`)** alongside `SWE-bench_Pro-os@66f92766` (`HARD-51[:2]` + `PatchReplayAgent`) under `network_mode: none`, `cap_drop: [ALL]`, `/opt/brain-ro:ro` -> **`exception: null` on all 4 container trials, `issues: []`, offline baked verifiers executed cleanly with `rewards: {"reward": 0.0}`, and `0` leaked processes**.
 
 ---
 
-## 5. Verification Commands (`111 / 111` Passing + `8` Subtests, `0` Integrity Violations)
+## 5. Verification Commands (`135 / 135` Passing + `8` Subtests, `0` Integrity Violations)
 
 ```bash
 python3 -m pytest -q -o asyncio_default_fixture_loop_scope=function \
+  canonical/tests/test_differential_witness_inversion_v1.py \
+  canonical/tests/test_witness_inversion_v1.py \
   canonical/tests/test_causal_cegis_inventor_v1.py \
   canonical/tests/test_perfect_algorithm_v1.py \
   canonical/tests/test_petri_cow_unified_architecture_v1.py \

@@ -1,17 +1,31 @@
 {
-  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V2",
+  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V3",
   "branch": "arena/06dc079e-brain",
   "model_calls": 0,
   "inference_spend_usd": 0.0,
   "memorized_world_facts_in_weights": 0,
   "automated_pytest_verification": {
-    "suites": 10,
-    "passed": 111,
+    "suites": 12,
+    "passed": 135,
     "subtests_passed": 8,
     "failed": 0,
     "repo_integrity_guard": "rules=17 violations=0 -> PASS"
   },
   "verified_swe_benchmarks": {
+    "blind_packaging_tomli_differential_witness_corpus": {
+      "artifact": "canonical/Immediate_Results/blind_packaging_tomli_differential_witness_20261124_v1.json",
+      "witness_inversion_v1_standalone_baseline": "0/30 (0.0%)",
+      "unmodified_causal_cegis_baseline": "0/12 (0.0%)",
+      "unified_cogs_differential_witness_v1": "6/30 (20.0%)",
+      "solved_commits": [
+        "pypa/packaging@c52d2b3046 (13 sims -> crystallizes uir_law_5e3064259652)",
+        "pypa/packaging@7013a6048f (7 sims, 4.47s, 8251 pytest cases passed)",
+        "pypa/packaging@a6c9bc4dce (6 sims via SEMANTIC_LAW_RECALL:uir_law_5e3064259652 -> 21 sims after surgical remove_law)",
+        "pypa/packaging@e184feef1a (10 sims, 8.73s, 2670 pytest cases passed)",
+        "hukkin/tomli@4e245a4bbb (6 sims, 2.37s -> crystallizes PEP-570 posonly uir_law_482e0e05ed5d)",
+        "hukkin/tomli@96dfe2cef7 (6-12 sims, public re-export __module__ invariant)"
+      ]
+    },
     "historical_boltons_more_itertools_curriculum": {
       "artifact": "canonical/Immediate_Results/historical_boltons_more_itertools_transfer_20261124_v1.json",
       "baseline_before_unification": "0/4 (0.0%)",
@@ -70,7 +84,16 @@
         "job_id": 138987969469,
         "suites": [
           "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], 0 trial exceptions)",
-          "terminal-bench-2@2fd12b88 (suite=terminal-bench-4: cancel-async-tasks agent ran cleanly with EXPERIMENTAL_DISPATCH__UNVERIFIED & 0 leaked processes, verifier uvx blocked by network_mode:none; regex-log refused fail-closed with PROCESS_SNAPSHOT_FAILED due to missing /usr/bin/python3 in minimal image)"
+          "terminal-bench-2@2fd12b88 (suite=terminal-bench-4)"
+        ],
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45621009866,
+        "job_id": 139228822848,
+        "suites": [
+          "swebench-pro-v2@66f92766 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], rewards=[0.0, 0.0])",
+          "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e (official Terminal-Bench 4.0 v4.0.0: session-window-debug & wal-recovery-ordering -> exception=null, external_status=EXPERIMENTAL_DISPATCH__UNVERIFIED, baked offline verifiers executed cleanly under network_mode:none with rewards=[0.0, 0.0])"
         ],
         "conclusion": "success"
       }
