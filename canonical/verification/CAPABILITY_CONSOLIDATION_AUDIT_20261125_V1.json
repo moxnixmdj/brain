@@ -8,7 +8,7 @@
     "total_loc": 2311,
     "zero_admitted": true
   },
-  "elapsed_s": 0.3483,
+  "elapsed_s": 0.3398,
   "incremental_spend_usd": 0.0,
   "model_calls": 0,
   "quarantined_receipts": [
@@ -378,8 +378,8 @@
       "BOUND_MISSING_EVIDENCE": 49,
       "BRAIN_OWNED_EXECUTABLE_BOUND": 73,
       "EXTERNAL_TOOL_OR_LIB_WRAPPER_BOUND": 17,
-      "PENDING_PROMOTION_RECEIPT_BACKED": 294
+      "PENDING_PROMOTION_RECEIPT_BACKED": 296
     },
-    "total_named_in_unified_model": 447
+    "total_named_in_unified_model": 449
   }
 }

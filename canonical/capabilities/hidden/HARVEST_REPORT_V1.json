@@ -1,0 +1,48 @@
+{
+ "admission": "PENDING_INDEPENDENT_VERIFICATION",
+ "candidates": 15,
+ "failure_sample": {
+  "DID_NOT_RUN": [
+   "canonical/runtime/a_refusal_is_a_specification_v1.py",
+   "canonical/runtime/attested_state_v1.py",
+   "canonical/runtime/brain_unified_model_v1.py",
+   "canonical/runtime/capability_forge_v1.py",
+   "canonical/runtime/capability_receipt_lane_v1.py",
+   "canonical/runtime/creature_runtime_v1.py",
+   "canonical/runtime/effect_directed_compile_v1.py",
+   "canonical/runtime/manufacture_what_the_refusal_asks_for_v1.py"
+  ]
+ },
+ "failures_by_reason": {
+  "DID_NOT_RUN": 14
+ },
+ "kinds": [
+  "cli"
+ ],
+ "note": "producer receipts only; a different identity with signed GitHub OIDC claims must re-run these before the loader admits anything",
+ "probe_side_effects_reverted": 11,
+ "projection_entries_added": 1,
+ "projection_total_entries": 308,
+ "ran_by": "harvest-local-session",
+ "receipts_by_domain": {
+  "canonical/runtime": 1
+ },
+ "receipts_issued": 1,
+ "registry_written": false,
+ "reverted_sample": [
+  "canonical/astra_runtime/evidence/COMMAND_MANPAGE_SEMANTICS_DIAGNOSTIC_001__RESULT.json",
+  "canonical/astra_runtime/evidence/PRETRUNCATION_CANDIDATE_RANK_TRACE_001__RESULT.json",
+  "canonical/astra_runtime/evidence/RAW_TO_RANKED_CANDIDATE_TRACE_001__RESULT.json",
+  "canonical/astra_runtime/evidence/SEMANTIC_ROLE_DIAGNOSTIC_001__RESULT.json",
+  "canonical/runtime/state/_falsify_exp_a.json",
+  "canonical/runtime/state/_falsify_exp_b.json",
+  "canonical/runtime/state/_falsify_exp_d.json",
+  "canonical/runtime/state/_falsify_exp_e.json",
+  "canonical/runtime/state/_falsify_exp_f.json",
+  "canonical/runtime/state/_falsify_exp_g.json"
+ ],
+ "schema": "PROJECT_BRAIN_HIDDEN_CAPABILITY_HARVEST_REPORT_V1",
+ "status_flipped": false,
+ "throughput_per_s": 0.14,
+ "wall_time_s": 103.827
+}
