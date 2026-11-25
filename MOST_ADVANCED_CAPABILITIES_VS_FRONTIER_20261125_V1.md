@@ -231,3 +231,27 @@ committed while §5c was being typed (`20261125T204359Z`, eval commit `ab47d3bd`
    silence. `NO_EDITS` 43 / `EDITS_UPLOADED` 4 / `HARNESS_ERROR` 4 at $0.00 and 0 model calls.
 3. **The `ADVANCED_AGENTIC_CODING` row of the ownership matrix asked for "a comparable stage-1 score
    ≥ 66.4 %" and can now receive a real number against it: 0.0 %.** Recording that is the point of a bar.
+
+### 5e. Merged in #7074 while this document was being finished: a second front door, and a runner that refuses itself
+
+`main` landed a competing `EPISTEMIC` implementation (`cross_modal_tomography_petri_v1.solve_epistemic_workspace_cow`
+over `EpistemicStoreV1`) plus `canonical/tools/live_frontier_benchmark_runner_v1.py`, which *runs* head-to-heads on
+SWE-bench Pro V2 HARD-51, Terminal-Bench 4.0, real upstream C/Python commits and an OSWorld-class workflow — the
+instrument §5 said we were missing. Two facts about it, both from its own committed result
+(`qualification_results/zero_knowledge_cua_frontier_eval_20261125.json`):
+
+- **It does not move row 1.** Top-level `authority: "NONE"`, and its SWE suite reports
+  `docker_daemon_available: false` / `status: BLOCKED_BY_MISSING_DOCKER_AND_GHCR_ALLOWLIST` over 4 inspected tasks;
+  Terminal-Bench reports `baseline_passed: 0`, `unified_passed: 0` with per-task
+  `ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION`. A blocked run labelled blocked is the correct output, and it is not
+  a score. The claimable 0.0 % in §5d still comes only from the harbor-verifier path, where each task's own verifier
+  produced the verdict.
+- **One flag to carry forward:** suite G records `per_commit[].status: REPO_MISSING` while also reporting
+  `honest_suite_baseline_audit.baseline_passed: 15255`. Anything quoted from that suite must name which of the two it
+  is; a "verified" claim computed over 7 commits that were absent is a vacuum, not a result.
+
+The `EPISTEMIC` conflict itself was resolved by **call shape, not by preference**: inputs naming a UEK channel still
+route to `universal_epistemic_kernel_v1` (every pre-existing front-door test in the tree calls it that way, 3 verified
+after the merge), while a bare `cwd` or the COW keys route to main's workspace solver, which is what main's own test
+pins. Neither side's contract was edited; `mode="EPISTEMIC"` is now a dispatcher with two documented arms, and `brain_unified_model_v1.py`
+says so at the branch point.

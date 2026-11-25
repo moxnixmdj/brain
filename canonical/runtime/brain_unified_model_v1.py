@@ -949,6 +949,26 @@ class UnifiedModel:
         if requested == "RECALL":
             return self.recall(goal)
         if requested == "EPISTEMIC":
+            # Two kernels answer mode="EPISTEMIC": the Universal Epistemic Kernel this branch
+            # added, and the workspace-COW solver that main added in #7074.  Which one runs is
+            # decided by the call shape, not by a preference -- no shape is claimed by both, so
+            # neither side's contract is quietly overwritten:
+            #   * inputs naming a UEK channel (workspace, web/db/dom/gui/tomography/...) -> UEK,
+            #     even when cwd is also set, because explicit inputs outrank an ambient cwd;
+            #   * a bare cwd, or the COW keys (workspace_dir, repo_dir, store, pytest_targets,
+            #     suspect_files) -> the workspace-COW solver, which is what main's tests pin;
+            #   * neither -> UEK, which fails closed with EPISTEMIC_WORKSPACE_REQUIRED__FAIL_CLOSED.
+            _cow_keys = {"workspace_dir", "repo_dir", "store", "pytest_targets", "suspect_files"}
+            _uek_keys = {
+                "workspace", "memory", "memory_path", "governed_memory", "dom_nodes", "gui_env",
+                "web_url", "source_url", "target_url", "api_url", "graphql_url", "db_path",
+                "tomography_env", "self_play_tasks", "cow_speculative_actions", "cow_executor",
+                "cow_residual", "petri_net_spec", "skill_store", "goal_targets", "postcondition_fn",
+                "verifier", "field_values", "knowledge_source", "python_exe", "allow_web",
+            }
+            if not _uek_keys.intersection(inputs or {}):
+                if cwd is not None or _cow_keys.intersection(inputs or {}):
+                    return self._solve_via_epistemic_workspace_cow(goal, inputs=inputs, cwd=cwd)
             return self._solve_via_universal_epistemic_kernel(goal, inputs=inputs, cwd=cwd)
         if requested == "SOLVE_OR_LEARN":
             return self.act_or_learn(
@@ -1031,6 +1051,50 @@ class UnifiedModel:
             except Exception:
                 pass
         return out
+
+    def _solve_via_epistemic_workspace_cow(
+        self,
+        goal: str,
+        *,
+        inputs: Mapping[str, Any] | None = None,
+        cwd: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Trunk semantics for mode="EPISTEMIC": the zero-knowledge workspace COW solver.
+
+        Added by main in #7074 (``cross_modal_tomography_petri_v1.solve_epistemic_workspace_cow``
+        over an ``EpistemicStoreV1``).  Kept as its own method so the front door can dispatch to it
+        by call shape instead of choosing one kernel for every caller.
+        """
+        from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
+        from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
+
+        inputs = dict(inputs or {})
+        ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
+        store_obj = inputs.get("store")
+        if isinstance(store_obj, (str, Path)):
+            store_obj = _easp.EpistemicStoreV1(Path(store_obj))
+        elif not isinstance(store_obj, _easp.EpistemicStoreV1):
+            store_obj = _easp.EpistemicStoreV1()
+        ep_res = _cmtp.solve_epistemic_workspace_cow(
+            workspace_dir=Path(ws_arg) if ws_arg is not None else Path.cwd(),
+            goal_text=str(goal or ""),
+            store=store_obj,
+            pytest_targets=inputs.get("pytest_targets"),
+            suspect_files=inputs.get("suspect_files"),
+            timeout_s=float(inputs.get("timeout_s", 35.0)),
+        )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "EPISTEMIC_WORKSPACE_COW_SOLVE",
+            "goal": goal,
+            "status": ep_res.get("status", "UNSOLVED"),
+            "pass": bool(ep_res.get("pass")),
+            "epistemic_result": ep_res,
+            "model_calls": 0,
+            "parameters_stored": 0,
+            "authority": "NONE",
+            "non_claims": list(NON_CLAIMS),
+        }
 
     def _solve_via_universal_epistemic_kernel(
         self,
