@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Residual-wall closers: the twelve laws a trace-literal engine cannot reach.
+"""Residual-wall closers: the thirteen laws a trace-literal engine cannot reach.
 
 WHY THIS FILE EXISTS
 --------------------
@@ -20,7 +20,7 @@ statements proved not to be on the raising path"**. That is the honest failure
 mode: the engine could generate statements, but not the *right* ones, because it
 was looking for a site that the traceback names and the traceback never names it.
 
-This module closes those walls with **twelve general mechanisms**, each of which is
+This module closes those walls with **thirteen general mechanisms**, each of which is
 a *relation between two facts already inside the repository* -- never a stored fix,
 never a literal from the answer key. Nothing here reads a commit message, a source
 diff, an issue, or the fix commit's own source. Only:
@@ -122,6 +122,13 @@ never regressed, so re-running it would measure the earlier receipt, not this on
    they can state a requirement in prose. The option is DERIVED from the sentence's grammar
    and checked against the standard library's own signature, never looked up from a table.
    Live: `click@7996a89` -- second hop, 8 -> 0.
+
+13. `DEMANDED_DEPRECATION_EMISSION`
+    A test wraps a call in `pytest.deprecated_call()`; the method emits no warning. The
+    requirement comes from the test, the FORM comes from the repository's own
+    `warnings.warn(..., DeprecationWarning, stacklevel=2)` convention.
+    Live: `werkzeug@21b45dbd` -- 1 -> 0 in 1 evaluation. Refuses `e43d440c` and
+    `3d27209c`, which need different shapes.
 
 TWO CORRECTIONS TO THIS MODULE'S OWN EARLIER CLAIMS
 --------------------------------------------------
@@ -1148,6 +1155,151 @@ class DocstringDefaultUngating:
         return out
 
 
+class DemandedDeprecationEmission:
+    """A test demands a DeprecationWarning at a public method that emits none.
+
+    The fix test says, in code: `with pytest.deprecated_call(): response.freeze()`.
+    That is a precondition stated by the tests, and this protocol permits reading the fix
+    commit's test files -- they are what the program is asked to be.
+
+    The *body* of the warning is not guessed. The repository already deprecates in its own
+    idiom -- `warnings.warn(..., DeprecationWarning, stacklevel=2)` across
+    `_header_property.py`, `datastructures/*.py`, `accept.py` and `auth.py` -- so the
+    emission is copied from the tree's own convention. Requirement from the test, form
+    from the repository; neither half is stored.
+    """
+
+    mechanism = "DEMANDED_DEPRECATION_EMISSION"
+
+    def _test_demands_deprecation(self, test_sources: Sequence[str], method: str) -> str:
+        """Find `with pytest.deprecated_call():` wrapping a call to `method`."""
+        for src in test_sources:
+            try:
+                tree = ast.parse(src)
+            except SyntaxError:
+                continue
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.With):
+                    continue
+                for item in node.items:
+                    ctx = ast.unparse(item.context_expr)
+                    if "deprecated_call" not in ctx:
+                        continue
+                    for inner in node.body:
+                        if method in ast.unparse(inner):
+                            return f"{ctx}: {ast.unparse(inner).strip()}"[:160]
+        return ""
+
+    def _repo_warns_with(self, repo_sources: Sequence[str]) -> str | None:
+        """The repository's own deprecation statement, as source text."""
+        for src in repo_sources:
+            try:
+                tree = ast.parse(src)
+            except SyntaxError:
+                continue
+            for node in ast.walk(tree):
+                if (
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Attribute)
+                    and node.func.attr == "warn"
+                    and isinstance(node.func.value, ast.Name)
+                    and node.func.value.id == "warnings"
+                ):
+                    args = [ast.unparse(a) for a in node.args]
+                    kws = [f"{k.arg}={ast.unparse(k.value)}" for k in node.keywords if k.arg]
+                    if any("DeprecationWarning" in a for a in args):
+                        return f"warnings.warn({', '.join(args + kws)})"
+        return None
+
+    def mine_for_pair(
+        self,
+        source: str,
+        target_function: str,
+        test_sources: Sequence[str],
+        repo_sources: Sequence[str] = (),
+    ) -> list[WallCandidate]:
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return []
+        # Already warns? Nothing to do.
+        for node in ast.walk(fn):
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Attribute)
+                and node.func.attr == "warn"
+            ):
+                return []
+        demand = self._test_demands_deprecation(test_sources, target_function.split(".")[-1])
+        if not demand:
+            return []
+        idiom = self._repo_warns_with(repo_sources)
+        if not idiom:
+            return []
+
+        short = target_function.split(".")[-1]
+        msg = f"{short} is deprecated and will be removed in a future version."
+        stacklevel = "stacklevel=2" if "stacklevel" in idiom else ""
+        # Indentation comes from the function's own body: a module-level function is at
+        # 4 spaces, a method at 8. A hard-coded indent silently produces a SyntaxError
+        # for one of the two shapes.
+        body_indent = _indent_at(source, fn.body[-1].lineno) or (
+            _indent_at(source, fn.lineno) + "    "
+        )
+        warn_lines = [
+            f"{body_indent}import warnings",
+            "",
+            f"{body_indent}warnings.warn({msg!r}, DeprecationWarning"
+            + (f", {stacklevel}" if stacklevel else "")
+            + ")",
+        ]
+        body0 = fn.body[0]
+        has_doc = (
+            isinstance(body0, ast.Expr)
+            and isinstance(body0.value, ast.Constant)
+            and isinstance(body0.value.value, str)
+        )
+        insert_at = (body0.end_lineno or body0.lineno) if has_doc else body0.lineno - 1
+        insert_at = max(insert_at, 1)
+        lines = source.splitlines()
+        patched = list(lines)
+        patched[insert_at:insert_at] = list(warn_lines)
+        new_src = "\n".join(patched) + ("\n" if source.endswith("\n") else "")
+        try:
+            ast.parse(new_src)
+        except SyntaxError:
+            return []
+        return [
+            WallCandidate(
+                mechanism=self.mechanism,
+                target_function=target_function,
+                lineno=insert_at,
+                old_code="\n".join(lines[max(0, insert_at - 2) : insert_at]),
+                new_code="\n".join(warn_lines),
+                patched_module_source=new_src,
+                evidence=(
+                    f"the tests demand a deprecation here: {demand!r}",
+                    f"the repository emits deprecations in its own idiom: {idiom}",
+                    "this method emits none",
+                ),
+                explanation=(
+                    "The tests wrap this call in a deprecation assertion, so the method is "
+                    "required to warn. The repository already states how it deprecates, so "
+                    "the statement is copied from that convention rather than invented."
+                ),
+                edits=tuple(
+                    (insert_at + i, insert_at + i, ln) for i, ln in enumerate(warn_lines)
+                ),
+            )
+        ]
+
+    needs_test_sources = True
+    needs_repo_sources = True
+
+
 class StatedRequirementKeywordCompletion:
     """The fix commit's own test docstring states the policy; the site omits the kwargs.
 
@@ -1794,6 +1946,7 @@ class ResidualWallCloser:
             ConfigParityFromRepoIdiom(),
             OrderPreservingDedupParity(),
             StatedRequirementKeywordCompletion(),
+            DemandedDeprecationEmission(),
             PostconditionStatePurge(),
         )
     )
@@ -1819,7 +1972,13 @@ class ResidualWallCloser:
         seen: set[str] = {source}
         for name in targets:
             for closer in self.closers:
-                if getattr(closer, "needs_test_sources", False):
+                if getattr(closer, "needs_test_sources", False) and getattr(
+                    closer, "needs_repo_sources", False
+                ):
+                    fired = closer.mine_for_pair(  # type: ignore[attr-defined]
+                        source, name, list(test_sources), list(repo_sources) + [source]
+                    )
+                elif getattr(closer, "needs_test_sources", False):
                     fired = closer.mine_for_pair(  # type: ignore[attr-defined]
                         source, name, list(test_sources)
                     )
@@ -2283,6 +2442,19 @@ RESIDUAL_WALL_CASES: tuple[dict[str, Any], ...] = (
         "wall": (
             "wrapping must not break hyphenated words: the repo states this policy in "
             "`utils.py` and omits it at the `TextWrapper` construction in `formatting.py`"
+        ),
+    },
+    {
+        "wall_id": "werkzeug@21b45dbd",
+        "repo": "werkzeug", "commit": "21b45dbd",
+        "source_path": "src/werkzeug/wrappers/response.py",
+        "fix_test_files": ("tests/test_wrappers.py",),
+        "target_functions": ("Response.freeze",),
+        "project_tests": ("tests/",), "suite_scope": "per-file",
+        "repo_source_globs": ("src/werkzeug/**/*.py",),
+        "wall": (
+            "a public method the test wraps in `pytest.deprecated_call()` must emit a "
+            "DeprecationWarning, which it currently does not"
         ),
     },
     {

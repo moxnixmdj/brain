@@ -26,6 +26,7 @@ from canonical.swe_kernel.residual_wall_closers_v1 import (
     RESIDUAL_WALL_CASES,
     AssertContractToTypedRaise,
     ConfigParityFromRepoIdiom,
+    DemandedDeprecationEmission,
     DocstringDefaultUngating,
     EmptyContainerPrefixArm,
     NoneGuardToTruthiness,
@@ -734,6 +735,60 @@ def render(text, width):
         )
 
 
+
+class DemandedDeprecationEmissionTests(unittest.TestCase):
+    """The demand comes from the test; the FORM of the answer comes from the repository."""
+
+    TARGET = (
+        "def freeze(self):\n"
+        '    """Make it reusable."""\n'
+        "    self.make_sequence()\n"
+        "    self.add_etag()\n"
+    )
+    TEST = "def test_freeze():\n    with pytest.deprecated_call():\n        response.freeze()\n"
+    REPO = 'import warnings\n\n\ndef old_thing():\n    warnings.warn("old", DeprecationWarning, stacklevel=2)\n'
+
+    def _mine(self, target=None, tests=None, repo=None):
+        return DemandedDeprecationEmission().mine_for_pair(
+            target or self.TARGET, "freeze",
+            tests if tests is not None else [self.TEST],
+            repo if repo is not None else [self.REPO, target or self.TARGET],
+        )
+
+    def test_demanded_warning_is_emitted_in_the_repositorys_idiom(self) -> None:
+        cands = self._mine()
+        self.assertEqual(len(cands), 1)
+        self.assertIn("DeprecationWarning", cands[0].new_code)
+        self.assertIn("stacklevel=2", cands[0].new_code)   # copied from the repo
+        self.assertTrue(any("deprecated_call" in e for e in cands[0].evidence))
+
+    def test_no_demand_in_the_tests_means_no_candidate(self) -> None:
+        self.assertEqual(self._mine(tests=["def test_x():\n    response.freeze()\n"]), [])
+
+    def test_no_deprecation_idiom_in_the_repo_means_no_candidate(self) -> None:
+        self.assertEqual(self._mine(repo=[self.TARGET]), [])
+
+    def test_a_method_that_already_warns_is_left_alone(self) -> None:
+        already = self.TARGET.replace(
+            "    self.make_sequence()",
+            '    import warnings\n    warnings.warn("x", DeprecationWarning)\n    self.make_sequence()',
+        )
+        self.assertEqual(self._mine(target=already, repo=[self.REPO, already]), [])
+
+    def test_the_emitted_patch_parses_for_a_method(self) -> None:
+        import ast as _ast
+        _ast.parse(self._mine()[0].patched_module_source)
+
+    def test_indentation_is_derived_not_assumed(self) -> None:
+        """A module-level function is at 4 spaces; a method at 8. Both must parse."""
+        import ast as _ast
+        flat = "def freeze():\n    self_marker()\n"
+        cands = self._mine(target=flat, repo=[self.REPO, flat])
+        self.assertEqual(len(cands), 1)
+        _ast.parse(cands[0].patched_module_source)
+        self.assertTrue(cands[0].new_code.startswith("    import warnings"), cands[0].new_code)
+
+
 class HonestOpenWallTests(unittest.TestCase):
     """A wall the engine cannot close must be registered, not quietly dropped."""
 
@@ -746,18 +801,21 @@ class HonestOpenWallTests(unittest.TestCase):
         needs_repo = {
             c["wall_id"] for c in RESIDUAL_WALL_CASES if c.get("repo_source_globs")
         }
-        self.assertEqual(needs_repo, {"click@7996a89", "click@047adef"})
+        self.assertEqual(
+            needs_repo, {"click@7996a89", "click@047adef", "werkzeug@21b45dbd"}
+        )
         for case in RESIDUAL_WALL_CASES:
+            globs = case.get("repo_source_globs", ())
             if case["wall_id"] in needs_repo:
-                self.assertEqual(case["repo_source_globs"], ("src/click/*.py",))
+                self.assertTrue(globs, case["wall_id"])
             else:
-                self.assertEqual(case.get("repo_source_globs", ()), ())
+                self.assertEqual(globs, ())
 
 
 
 class CaseListTests(unittest.TestCase):
     def test_every_declared_wall_names_its_evidence_and_its_suite(self) -> None:
-        self.assertEqual(len(RESIDUAL_WALL_CASES), 10)
+        self.assertEqual(len(RESIDUAL_WALL_CASES), 11)
         for case in RESIDUAL_WALL_CASES:
             self.assertTrue(case["wall_id"])
             self.assertTrue(case["fix_test_files"])
