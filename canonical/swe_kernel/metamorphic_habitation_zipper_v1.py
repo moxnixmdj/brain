@@ -772,8 +772,8 @@ def generate_type_habitation_candidates(
                     if lit:
                         new_lit = _replace_trailing_regex_dollar_with_Z(lit)
                         if new_lit:
-                            in_mod_global = scope in mod_globals
-                            prio = 96.0 if (has_nl_cue and in_mod_global) else (88.0 if in_mod_global else 78.0)
+                            in_mod_global = (scope in mod_globals) or isinstance(scope, (ast.Assign, ast.AnnAssign))
+                            prio = 96.0 if (has_nl_cue and in_mod_global) else (90.0 if in_mod_global else 80.0)
                             _add(
                                 _splice_ast_node(source, node.args[0], new_lit),
                                 "TYPE_HABITATION__REGEX_END_ANCHOR_Z",
@@ -1900,36 +1900,37 @@ def abduce_metamorphic_witness(
     *,
     timeout_s: float = 15.0,
 ) -> AbducedWitness | None:
-    """Abduce a strictly non-tautological failing metamorphic witness on a pristine green parent repo.
+    """Abduce a strictly non-tautological failing witness on a pristine green parent repo.
+
+    Combines 4 zero-leakage oracle channels:
+      1. Inline reproducer extraction (fenced code / `>>>` doctests in issue text)
+      2. Ephemeral per-repo `git log` symbol/file alignment (destroyed on exit)
+      3. Docstring-stated metamorphic oracles (`A(x) == (B(x) == x)` roundtrip / regex contracts)
+      4. Relational metamorphic witness probes seeded from live passing test fixtures
 
     ZERO hidden tests are accessed. Returns an `AbducedWitness` ONLY when the synthesized
-    metamorphic probe cleanly FAILS (`rc == 1`) on the unmodified parent commit.
+    probe cleanly FAILS (`rc == 1`) on the unmodified parent commit.
     """
-    relations = _classify_issue_relations(issue_text)
-    attributed = _attribute_issue_symbols(issue_text, profile)
-    wanted_syms = [s for _, s, _ in attributed[:10]]
-    harvested = _harvest_passing_test_calls(repo_root, visible_test_file, wanted_syms, timeout_s=min(6.0, timeout_s / 2.0))
-    probes = _build_metamorphic_probe_candidates(repo_root, issue_text, relations, attributed, harvested)
+    from canonical.swe_kernel import cow_angelic_zygote_v1 as caz
 
     witness_rel = "_brain_metamorphic_witness_v1.py"
     witness_path = repo_root / witness_rel
-    for rel_kind, mod, sym, code in probes:
+    setup_sentinels = (
+        "no_invoked_serializer",
+        "no_mutable_alias_tuple",
+        "not_a_class",
+        "no_redact_attr",
+        "no_constructed_instance",
+        "assert tested > 0",
+        "ModuleNotFoundError",
+        "has no attribute",
+    )
+
+    def _try_probe(rel_kind: str, mod: str, sym: str, code: str, harvested_n: int = 0) -> AbducedWitness | None:
         try:
             witness_path.write_text(code, encoding="utf-8")
             res = run_pytest_targets(repo_root, [witness_rel], timeout_s=min(6.0, timeout_s))
-            # Strict non-tautology gate: must fail with a genuine assertion/runtime error on the target,
-            # NOT a probe-setup sentinel (`no_invoked_serializer`, `no_mutable_alias_tuple`, `not_a_class`, ImportError/AttributeError on module)
             out = res["output"]
-            setup_sentinels = (
-                "no_invoked_serializer",
-                "no_mutable_alias_tuple",
-                "not_a_class",
-                "no_redact_attr",
-                "no_constructed_instance",
-                "assert tested > 0",
-                "ModuleNotFoundError",
-                "has no attribute",
-            )
             if res["rc"] == 1 and res["failed_nodeids"] and not any(s in out for s in setup_sentinels):
                 return AbducedWitness(
                     witness_file_rel=witness_rel,
@@ -1938,10 +1939,46 @@ def abduce_metamorphic_witness(
                     target_module=mod,
                     target_symbol=sym,
                     parent_failure_output=out[-600:],
-                    harvested_calls_count=len(harvested),
+                    harvested_calls_count=harvested_n,
                 )
         finally:
             witness_path.unlink(missing_ok=True)
+        return None
+
+    # Channel 1: Inline issue reproducer (if user provided code/doctest in issue body)
+    inline_code = caz.extract_inline_issue_reproducer(issue_text)
+    if inline_code:
+        w = _try_probe("INLINE_ISSUE_REPRODUCER", "", "inline", inline_code, 0)
+        if w is not None:
+            return w
+
+    # Channel 2: Ephemeral per-repo git-history alignment boosts candidate files for docstring oracles
+    git_scores = caz.mine_ephemeral_git_alignment(repo_root, issue_text)
+    attributed = _attribute_issue_symbols(issue_text, profile)
+    cand_files: list[str] = []
+    for _, _, rf in attributed[:8]:
+        if rf not in cand_files:
+            cand_files.append(rf)
+    for rf, _sc in sorted(git_scores.items(), key=lambda kv: -kv[1])[:5]:
+        if rf not in cand_files:
+            cand_files.append(rf)
+
+    # Channel 3: Docstring-stated metamorphic oracles (e.g. `is_normalized_name` <-> `canonicalize_name` roundtrip!)
+    doc_oracles = caz.mine_docstring_metamorphic_oracles(repo_root, cand_files, issue_text)
+    for dspec in doc_oracles[:6]:
+        w = _try_probe(dspec.kind, dspec.module_name, dspec.func_name, dspec.probe_code, 0)
+        if w is not None:
+            return w
+
+    # Channel 4: Relational metamorphic probes seeded from live passing fixtures
+    relations = _classify_issue_relations(issue_text)
+    wanted_syms = [s for _, s, _ in attributed[:10]]
+    harvested = _harvest_passing_test_calls(repo_root, visible_test_file, wanted_syms, timeout_s=min(6.0, timeout_s / 2.0))
+    probes = _build_metamorphic_probe_candidates(repo_root, issue_text, relations, attributed, harvested)
+    for rel_kind, mod, sym, code in probes:
+        w = _try_probe(rel_kind, mod, sym, code, len(harvested))
+        if w is not None:
+            return w
     return None
 
 
@@ -2142,90 +2179,235 @@ def repair_repo_unified_zero_model(
                 "elapsed_s": round(time.monotonic() - t0, 3),
             }
 
-        # Stage 1 (Wall 2): Global Priority Queue across top localized files
-        # Top-ranked habitation candidates (priority >= 84) fire within ~4-6s; capping miss
-        # overhead reserves ~70% of wall budget for Stage 3 Angelic CEGIS fallback (zero starvation!).
+        # Stage 1 (Wall 2 + Algebraic Differential Lenses) & Stage 1b (Angelic Branch Separating Guards)
+        # Powered by `PytestCoWZygoteServer` (prewarmed `os.fork()` + zero-disk in-memory imports + parallel batching).
+        # Every winning patch is ALWAYS verified on clean disk with real `run_pytest_targets` before acceptance!
+        from canonical.swe_kernel import cow_angelic_zygote_v1 as caz
+
         partial_progress_candidates: list[tuple[RepairCandidate, int, dict[str, Any]]] = []
-        hab_budget_deadline = min(deadline - 6.0, t0 + max(6.5, timeout_s * 0.28))
+        neg_guard = caz.NegativeSpaceGuard()
 
-        global_queue: list[tuple[float, int, int, RepairCandidate]] = []
-        for file_rank, rel_file in enumerate(loc.ranked_files[:3]):
-            path = root / rel_file
-            if not path.is_file():
-                continue
-            original_bytes.setdefault(rel_file, path.read_bytes())
-            original_texts.setdefault(rel_file, path.read_text(encoding="utf-8", errors="replace"))
-            file_cands = generate_type_habitation_candidates(root, rel_file, loc, profile, max_candidates=16)
-            for cand in file_cands:
-                eff_prio = cand.priority - (file_rank * 1.5)
-                global_queue.append((-eff_prio, file_rank, cand.line_no, cand))
-        global_queue.sort(key=lambda item: (item[0], item[1], item[2]))
-
-        for _neg_prio, _f_rank, _ln, cand in global_queue[:12]:
-            if time.monotonic() >= hab_budget_deadline:
-                break
-            rel_file = cand.rel_file
-            path = root / rel_file
-            orig_b = original_bytes[rel_file]
-            orig_s = original_texts[rel_file]
-            if skill_store is not None and hasattr(skill_store, "matches_negative_invariant"):
-                if skill_store.matches_negative_invariant(cand.patched_source):
-                    continue
-            candidates_tested += 1
+        def _confirm_and_return_winner(
+            cand_rel: str,
+            cand_src: str,
+            cand_mech: str,
+            cand_desc: str,
+            *,
+            zygote_evals: int = 0,
+        ) -> dict[str, Any] | None:
+            nonlocal final_edits
+            p = root / cand_rel
+            orig_b = original_bytes[cand_rel]
+            orig_s = original_texts[cand_rel]
             try:
-                path.write_text(cand.patched_source, encoding="utf-8")
+                p.write_text(cand_src, encoding="utf-8")
                 _clear_repo_pycache(root)
-                # Fast reject on failing nodeids only (saves ~80% wall time)
-                if loc.failing_nodeids:
-                    fast = run_pytest_targets(
-                        root,
-                        loc.failing_nodeids[:4],
-                        timeout_s=min(5.0, max(2.0, hab_budget_deadline - time.monotonic())),
-                    )
-                    if not fast["ok"]:
-                        # Track strict partial progress (e.g. cleared primary failure on a multi-file task!)
-                        fast_fails = set(fast["failed_nodeids"])
-                        if enable_zipper and primary_fail_set and len(fast_fails) < len(primary_fail_set) and fast["rc"] != 124:
-                            partial_progress_candidates.append((cand, len(fast_fails), fast))
-                        continue
-                # Full test target verification (witness + visible test suite -> ZERO regressions!)
-                full = run_pytest_targets(
+                full_disk = run_pytest_targets(
                     root,
                     active_targets,
-                    timeout_s=min(16.0, max(4.0, deadline - time.monotonic())),
+                    timeout_s=min(18.0, max(5.0, deadline - time.monotonic())),
                 )
-                if full["ok"]:
-                    final_edits = {rel_file: cand.patched_source}
+                if full_disk["ok"]:
+                    final_edits = {cand_rel: cand_src}
                     admitted = _crystallize_verified_edits(
                         original_texts, final_edits, skill_store,
-                        {"mechanism": cand.mechanism, "test": test_file},
+                        {"mechanism": cand_mech, "test": test_file},
                     )
                     if not keep_patch_applied:
-                        path.write_bytes(orig_b)
+                        p.write_bytes(orig_b)
                         _clear_repo_pycache(root)
                     return {
                         "schema": SCHEMA,
                         "repaired": True,
-                        "mechanism": cand.mechanism,
-                        "description": cand.description,
-                        "modified_files": [rel_file],
-                        "unified_diff": _unified_diff(rel_file, orig_s, cand.patched_source),
-                        "passed": full["passed"],
+                        "mechanism": cand_mech,
+                        "description": cand_desc,
+                        "modified_files": [cand_rel],
+                        "unified_diff": _unified_diff(cand_rel, orig_s, cand_src),
+                        "passed": full_disk["passed"],
                         "candidates_tested": candidates_tested,
+                        "zygote_evals": zygote_evals,
+                        "negative_invariants_learned": neg_guard.count(),
                         "admitted_morphisms": admitted,
                         "metamorphic_witness": abduced_witness.relation_kind if abduced_witness else None,
                         "model_calls": 0,
                         "elapsed_s": round(time.monotonic() - t0, 3),
                     }
-                # Check if full run cleared ALL primary failures but broke a downstream file -> Wall 3 Zipper!
+                # Regression on full suite -> crystallize L3 Negative-Space Invariant & check Wall 3 Zipper!
+                neg_guard.record_refutation(orig_s, cand_src, f"full_suite_regression:{len(full_disk['failed_nodeids'])}")
                 if enable_zipper and primary_fail_set:
-                    full_fails = set(full["failed_nodeids"])
+                    full_fails = set(full_disk["failed_nodeids"])
                     if full_fails and primary_fail_set.isdisjoint(full_fails):
-                        partial_progress_candidates.append((cand, len(full_fails), full))
+                        partial_progress_candidates.append(
+                            (RepairCandidate(cand_rel, cand_src, cand_mech, cand_desc, 90.0, 1), len(full_fails), full_disk)
+                        )
             finally:
                 if not final_edits:
-                    path.write_bytes(orig_b)
+                    p.write_bytes(orig_b)
                     _clear_repo_pycache(root)
+            return None
+
+        with caz.PytestCoWZygoteServer(root) as zygote:
+            # Optional 1-shot Differential Ochiai Spectrum (~300ms) when failing nodeids exist
+            spec_files: list[str] = []
+            spec_line_scores: dict[str, dict[int, float]] = {}
+            if loc.failing_nodeids and abduced_witness is None and (deadline - time.monotonic()) > 16.0:
+                passing_sibs = caz._discover_passing_sibling_nodeids(root, primary_test, loc.failing_nodeids, max_passing=4)
+                spec = zygote.trace_differential_spectrum(
+                    loc.failing_nodeids, passing_sibs, timeout_s=min(6.0, max(2.0, deadline - time.monotonic() - 12.0))
+                )
+                if spec.get("ok"):
+                    spec_files = list(spec.get("ranked_files") or [])
+                    for rf, lmap in (spec.get("line_scores") or {}).items():
+                        spec_line_scores[rf] = {int(k): float(v) for k, v in lmap.items()}
+
+            merged_ranked_files = list(
+                dict.fromkeys(list(loc.traceback_lines.keys()) + spec_files + list(loc.ranked_files))
+            )
+
+            # Stage 1: Global Priority Queue across top-4 files (Type-Habitation + Algebraic Differential Lenses)
+            # Reserve at least 12s for Stage 4 Angelic CEGIS fallback so zero prior solves ever starve!
+            stage1_deadline = min(deadline - 12.0, t0 + max(8.0, timeout_s * 0.30))
+            global_queue: list[tuple[float, int, int, RepairCandidate]] = []
+            seen_edit_keys: set[tuple[str, str]] = set()
+            for file_rank, rel_file in enumerate(merged_ranked_files[:4]):
+                path = root / rel_file
+                if not path.is_file():
+                    continue
+                original_bytes.setdefault(rel_file, path.read_bytes())
+                original_texts.setdefault(rel_file, path.read_text(encoding="utf-8", errors="replace"))
+                orig_s = original_texts[rel_file]
+                act_lines = (
+                    set(loc.executed_lines.get(rel_file, set()))
+                    | set(loc.traceback_lines.get(rel_file, []))
+                    | set(spec_line_scores.get(rel_file, {}).keys())
+                )
+                # 1a. Codebase Type-Habitation candidates
+                for cand in generate_type_habitation_candidates(root, rel_file, loc, profile, max_candidates=14):
+                    ek = (rel_file, hashlib.sha1(cand.patched_source.encode("utf-8")).hexdigest())
+                    if ek in seen_edit_keys or neg_guard.is_refuted(orig_s, cand.patched_source):
+                        continue
+                    seen_edit_keys.add(ek)
+                    eff_prio = cand.priority - (file_rank * 1.2)
+                    global_queue.append((-eff_prio, file_rank, cand.line_no, cand))
+                # 1b. Algebraic Differential Lenses (Call-Unwrap, Codec safe=, Literal Delta, Caret FST, Param Prop)
+                for ac in caz.synthesize_algebraic_differential_repairs(root, rel_file, act_lines, loc.raw_output, max_candidates=10):
+                    ek = (rel_file, hashlib.sha1(ac.patched_source.encode("utf-8")).hexdigest())
+                    if ek in seen_edit_keys or neg_guard.is_refuted(orig_s, ac.patched_source):
+                        continue
+                    seen_edit_keys.add(ek)
+                    rc = RepairCandidate(ac.rel_file, ac.patched_source, ac.mechanism, ac.description, ac.priority, ac.line_no)
+                    eff_prio = rc.priority - (file_rank * 1.2)
+                    global_queue.append((-eff_prio, file_rank, rc.line_no, rc))
+            global_queue.sort(key=lambda item: (item[0], item[1], item[2]))
+
+            top_stage1: list[RepairCandidate] = []
+            for _neg_prio, _f_rank, _ln, cand in global_queue[:18]:
+                if skill_store is not None and hasattr(skill_store, "matches_negative_invariant"):
+                    if skill_store.matches_negative_invariant(cand.patched_source):
+                        continue
+                top_stage1.append(cand)
+
+            # Evaluate Stage 1 candidates in parallel CoW batches of 6 (~0.5-1.2s per batch!)
+            fast_targets = list(loc.failing_nodeids[:4]) if loc.failing_nodeids else list(active_targets)
+            for b_start in range(0, len(top_stage1), 6):
+                if time.monotonic() >= stage1_deadline:
+                    break
+                batch = top_stage1[b_start:b_start + 6]
+                candidates_tested += len(batch)
+                b_res = zygote.eval_batch(
+                    [{"edits": {c.rel_file: c.patched_source}} for c in batch],
+                    fast_targets,
+                    timeout_s=min(5.0, max(2.0, stage1_deadline - time.monotonic())),
+                    max_workers=2,
+                )
+                for cand, fast in zip(batch, b_res):
+                    if fast.get("ok"):
+                        # Fast full check in CoW before paying disk write
+                        full_cow = zygote.eval_patch(
+                            {cand.rel_file: cand.patched_source},
+                            active_targets,
+                            timeout_s=min(10.0, max(3.0, deadline - time.monotonic())),
+                        )
+                        if full_cow.get("ok"):
+                            win = _confirm_and_return_winner(
+                                cand.rel_file, cand.patched_source, cand.mechanism, cand.description,
+                                zygote_evals=zygote.eval_count,
+                            )
+                            if win is not None:
+                                return win
+                        else:
+                            neg_guard.record_refutation(original_texts[cand.rel_file], cand.patched_source, "cow_full_regression")
+                            if enable_zipper and primary_fail_set:
+                                ff = set(full_cow.get("failed_nodeids") or [])
+                                if ff and primary_fail_set.isdisjoint(ff):
+                                    partial_progress_candidates.append((cand, len(ff), full_cow))
+                    elif enable_zipper and primary_fail_set and fast.get("rc") != 124:
+                        ff = set(fast.get("failed_nodeids") or [])
+                        if len(ff) < len(primary_fail_set):
+                            partial_progress_candidates.append((cand, len(ff), fast))
+
+            # Stage 1b: Angelic Branch Inversion + Contrastive Separating-Guard & Dual-Program Splicing
+            # Runs on top-2 Ochiai-ranked files while preserving >=12s for Stage 4 Angelic CEGIS!
+            stage1b_deadline = min(deadline - 12.0, time.monotonic() + max(6.0, timeout_s * 0.28))
+            if loc.failing_nodeids and time.monotonic() < stage1b_deadline - 2.0:
+                for rel_file in merged_ranked_files[:2]:
+                    if time.monotonic() >= stage1b_deadline - 1.5:
+                        break
+                    path = root / rel_file
+                    if not path.is_file():
+                        continue
+                    original_bytes.setdefault(rel_file, path.read_bytes())
+                    original_texts.setdefault(rel_file, path.read_text(encoding="utf-8", errors="replace"))
+                    lscores = spec_line_scores.get(rel_file, {})
+                    act_lines = (
+                        set(loc.executed_lines.get(rel_file, set()))
+                        | set(loc.traceback_lines.get(rel_file, []))
+                        | set(lscores.keys())
+                    )
+                    tb_l = set(loc.traceback_lines.get(rel_file, []))
+                    ang_cands = caz.synthesize_angelic_separating_guards(
+                        root,
+                        rel_file,
+                        act_lines,
+                        loc.failing_nodeids,
+                        primary_test,
+                        loc.raw_output,
+                        zygote,
+                        deadline=stage1b_deadline,
+                        max_candidates=20,
+                        line_ochiai=lscores,
+                        tb_lines=tb_l,
+                    )
+                    if not ang_cands or time.monotonic() >= deadline - 8.0:
+                        continue
+                    # Batch-test top-16 separating guards in CoW
+                    for b_start in range(0, min(16, len(ang_cands)), 8):
+                        if time.monotonic() >= deadline - 6.0:
+                            break
+                        batch_a = ang_cands[b_start:b_start + 8]
+                        candidates_tested += len(batch_a)
+                        b_res = zygote.eval_batch(
+                            [{"edits": {c.rel_file: c.patched_source}} for c in batch_a],
+                            fast_targets,
+                            timeout_s=min(5.0, max(2.0, deadline - time.monotonic() - 4.0)),
+                            max_workers=2,
+                        )
+                        for ac, fast in zip(batch_a, b_res):
+                            if fast.get("ok"):
+                                full_cow = zygote.eval_patch(
+                                    {ac.rel_file: ac.patched_source},
+                                    active_targets,
+                                    timeout_s=min(10.0, max(3.0, deadline - time.monotonic())),
+                                )
+                                if full_cow.get("ok"):
+                                    win = _confirm_and_return_winner(
+                                        ac.rel_file, ac.patched_source, ac.mechanism, ac.description,
+                                        zygote_evals=zygote.eval_count,
+                                    )
+                                    if win is not None:
+                                        return win
+                                else:
+                                    neg_guard.record_refutation(original_texts[ac.rel_file], ac.patched_source, "angelic_cow_regression")
 
         # Stage 2 (Wall 3): Relational Zipper on strict-progress partial candidates OR direct ImportError/TypeError!
         if enable_zipper and time.monotonic() < deadline - 2.0:

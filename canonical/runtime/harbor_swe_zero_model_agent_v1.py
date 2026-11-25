@@ -59,6 +59,7 @@ MAX_OUTPUT_CHARS = 16000
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 _KERNEL_FILES = (
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+    "canonical/swe_kernel/cow_angelic_zygote_v1.py",
     "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
     "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
