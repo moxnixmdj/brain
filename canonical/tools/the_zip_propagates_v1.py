@@ -18,6 +18,8 @@ from __future__ import annotations
 
 import argparse
 import ast
+import importlib.util
+import importlib.util
 import pathlib
 import re
 import subprocess
@@ -85,15 +87,19 @@ def insert_import(path: pathlib.Path, line: str) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--tree", type=pathlib.Path, required=True)
-    parser.add_argument("--hops", type=int, default=8)
+    parser.add_argument("--hops", type=int, default=20)
     parser.add_argument("--seconds", type=int, default=60)
     args = parser.parse_args(argv)
     tree = args.tree
 
+    first_summary: str | None = None
     for hop in range(1, args.hops + 1):
         log = run(tree, args.seconds)
         found = SUMMARY.findall(log)
         print(f"hop {hop}: {found[-1] if found else 'no tests ran'}")
+
+        if first_summary is None:
+            first_summary = found[-1] if found else ""
 
         broken = IMPORT_FAIL.search(log)
         if broken:
@@ -141,6 +147,34 @@ def main(argv: list[str] | None = None) -> int:
                 if any(part in path.parts for part in (".git", "build")):
                     continue
                 original = path.read_text(errors="replace")
+                # THE FILE THAT DEFINES THE SYMBOL MUST NOT IMPORT IT. When a symbol is
+                # moved into a module that ALREADY imported it, the stale import is still
+                # there and now shadows the local definition. The correct repair is to
+                # DELETE it from that import, not to redirect it. Without this the loop
+                # wrote `from ._models import parse_header_links` INTO _models.py, which
+                # is a circular self-import and turned a 4-hop repair into a dead stop.
+                if path.resolve() == home.resolve():
+                    def drop_self(match: re.Match[str]) -> str:
+                        parts = [part.strip() for part in re.split(r"[,\n]", match.group(1))
+                                 if part.strip()]
+                        if name not in parts:
+                            return match.group(0)
+                        rest = [n for n in parts if n != name]
+                        return f"from .{old} import {', '.join(rest)}" if rest else ""
+                    def drop_single(match: re.Match[str]) -> str:
+                        parts = [part.strip() for part in match.group(1).split(",")
+                                 if part.strip()]
+                        if name not in parts:
+                            return match.group(0)
+                        rest = [n for n in parts if n != name]
+                        return f"from .{old} import {', '.join(rest)}" if rest else ""
+
+                    updated = block.sub(drop_self, original)
+                    updated = single.sub(drop_single, updated)
+                    if updated != original:
+                        path.write_text(updated)
+                        touched += 1
+                    continue
                 updated = block.sub(split_block, original)
                 updated = single.sub(split_single, updated)
                 if updated != original:
@@ -199,6 +233,25 @@ def main(argv: list[str] | None = None) -> int:
             name = undefined.group(1)
             home = home_of(tree, name)
             if home is None:
+                # Moved code carries its IMPORTS with it. A function that used `codecs`
+                # in its old module is a NameError in its new one. If the name is
+                # importable (stdlib or installed), the repair is to import it -- not to
+                # give up. Observed: "NameError: name 'codecs' is not defined" after a
+                # 4-symbol move from _utils.py to _models.py.
+                frames0 = re.findall(r"^([\w/]+\.py):(\d+): ", log, re.M)
+                target0 = None
+                for path_text, _line in reversed(frames0):
+                    candidate = tree / path_text
+                    if "tests" in candidate.parts:
+                        continue
+                    if candidate.exists():
+                        target0 = candidate
+                        break
+                if target0 is not None and importlib.util.find_spec(name) is not None:
+                    insert_import(target0, f"import {name}")
+                    print(f"  DEPENDENCY hop: stdlib {name!r} imported into "
+                          f"{target0.relative_to(tree)}")
+                    continue
                 print(f"  DEPENDENCY hop: {name!r} defined nowhere -> cannot repair")
                 return 1
             # Destination = the file containing the dangling reference. Take the
@@ -208,6 +261,11 @@ def main(argv: list[str] | None = None) -> int:
             target = None
             for path_text, _line in reversed(frames):
                 candidate = tree / path_text
+                # Never repair a TEST file: production debt is a production repair, and a
+                # relative import dropped into tests/ is an ImportError of its own
+                # ("No module named 'tests._urlparse'"). Observed exactly that.
+                if "tests" in candidate.parts:
+                    continue
                 if candidate.exists() and candidate.resolve() != home.resolve():
                     target = candidate
                     break
@@ -216,9 +274,14 @@ def main(argv: list[str] | None = None) -> int:
                       f"module -> nothing to repair")
                 return 2
             module = import_path(tree, home)
-            insert_import(target, f"from .{module} import {name}")
+            # Relative only inside the package; absolute otherwise.
+            inside = target.parent == (tree / "httpx")
+            stmt = f"from .{module} import {name}" if inside else f"import {tree.name}"
+            if not inside:
+                stmt = f"from {tree.name}.{module} import {name}"
+            insert_import(target, stmt)
             print(f"  DEPENDENCY hop: {name} imported into "
-                  f"{target.relative_to(tree)} from .{module}")
+                  f"{target.relative_to(tree)}: {stmt}")
             continue
 
         # A run that collected nothing prints no summary line. Treating that as
@@ -227,6 +290,15 @@ def main(argv: list[str] | None = None) -> int:
         if not found:
             print("  NO SUMMARY LINE -- tests did not run. Not convergence.")
             return 3
+        # Convergence is only meaningful if the tree was actually broken and a hop
+        # repaired it. A tree that was GREEN on arrival (or an edit that silently
+        # failed to apply) would otherwise be reported as a successful zip. This
+        # happened: a failed regex left the tree untouched and the loop printed
+        # "converged".
+        if hop == 1 and found[-1] == first_summary:
+            print(f"  NOT A ZIP: tree was already {first_summary} before any hop.")
+            print("  Nothing was broken, so nothing was repaired.")
+            return 4
         failed_lines = [line for line in log.splitlines() if line.startswith("FAILED")]
         print(f"  converged: {found[-1]}; FAILED lines: {len(failed_lines)}")
         for line in failed_lines[:5]:

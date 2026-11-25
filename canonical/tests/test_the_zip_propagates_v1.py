@@ -92,10 +92,10 @@ def parent_tree():
             git("worktree", "remove", "--force", str(tree))
 
 
-def run_loop(tree: pathlib.Path) -> subprocess.CompletedProcess[str]:
+def run_loop(tree: pathlib.Path, hops: int = 20) -> subprocess.CompletedProcess[str]:
     return subprocess.run(
         [sys.executable, str(TOOLS / "the_zip_propagates_v1.py"),
-         "--tree", str(tree), "--seconds", "60"],
+         "--tree", str(tree), "--seconds", "60", "--hops", str(hops)],
         capture_output=True, text=True, errors="replace", timeout=900)
 
 
@@ -156,3 +156,62 @@ def test_case_c_signature_change(parent_tree):
     done = run_loop(tree)
     assert counts(suite(tree)) == BASELINE, done.stdout[-600:]
     assert "strict=True" in (tree / "httpx/_models.py").read_text(encoding="utf-8")
+
+
+def test_case_d_four_symbol_move_with_carried_imports():
+    """The real refactor from httpx 41597adffa: four utility functions moved out of
+    _utils.py into _models.py -- which ALREADY imported them. Three repairs needed:
+
+    1. redirect the importers,
+    2. DELETE the now-stale import inside _models.py itself (redirecting it, as the loop
+       first did, is a circular self-import),
+    3. carry the moved code's own dependencies (codecs, re, to_str, to_bytes_or_str) into
+       its new home, one NameError at a time.
+
+    Monotone: 53 -> 45 -> 40 -> 34 -> 28 failed. Nine hops to the baseline of 28."""
+    with tempfile.TemporaryDirectory() as where:
+        tree = pathlib.Path(where) / "httpx"
+        added = git("worktree", "add", "--detach", str(tree), "41597adffa^")
+        if added.returncode != 0:
+            pytest.skip(f"worktree add failed: {added.stderr[:140]}")
+        try:
+            _case_d(tree)
+        finally:
+            git("worktree", "remove", "--force", str(tree))
+
+
+def _case_d(tree: pathlib.Path) -> None:
+    utils, models = tree / "httpx/_utils.py", tree / "httpx/_models.py"
+    names = ["is_known_encoding", "parse_header_links",
+             "parse_content_type_charset", "obfuscate_sensitive_headers"]
+    src = utils.read_text(encoding="utf-8")
+    lines = src.splitlines(keepends=True)
+    moved, out, i = [], [], 0
+    while i < len(lines):
+        m = re.match(r"def (\w+)\(", lines[i])
+        if m and m.group(1) in names:
+            j = i
+            while j < len(lines) and not (j > i and re.match(r"^(def |class |@)", lines[j])):
+                j += 1
+            moved.append("".join(lines[i:j]))
+            i = j
+            continue
+        out.append(lines[i])
+        i += 1
+    assert len(moved) == 4, f"expected 4 functions, moved {len(moved)}"
+    utils.write_text("".join(out), encoding="utf-8")
+    models.write_text(
+        models.read_text(encoding="utf-8").rstrip() + "\n\n\n"
+        + "\n\n".join(m.strip() + "\n" for m in moved), encoding="utf-8")
+
+    assert counts(suite(tree)) is None, "move should break collection"
+    # This commit's parent has a different baseline (1388, not 1386): tests were added
+    # between b47d94c and 41597adffa. Compare against the tree's own starting state,
+    # which is the only sound reference for "restored".
+    start = (28, 1388)
+    done = run_loop(tree, hops=20)
+    assert counts(suite(tree)) == start, done.stdout[-600:]
+    # The stale self-import must be GONE, not redirected.
+    final = models.read_text(encoding="utf-8")
+    assert "from ._models import" not in final
+    assert "def parse_header_links" in final

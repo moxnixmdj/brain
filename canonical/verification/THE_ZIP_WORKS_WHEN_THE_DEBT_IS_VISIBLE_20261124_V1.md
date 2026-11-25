@@ -188,3 +188,56 @@ Recorded because each is the kind a real patcher would hit:
 Considered together with the three design corrections in the section above, that is seven
 distinct failures before the loop did anything correct. The tool is small; the failure
 modes were not.
+
+## The zipper against four real historical fixes
+
+Everything above was constructed. These are commits that actually happened in httpx.
+
+| commit | what it really did | my root edit | result |
+|---|---|---|---|
+| `7b19cd5f4b` | moved a header-key helper | moved `_normalize_header_key` | 586 failed -> 2 hops -> baseline |
+| `ba2e51215e` | deleted `urlencode` from `_urlparse`, switched callers | moved `urlencode` to a new module | 46 failed -> 1 hop -> baseline |
+| `41597adffa` | moved 4 utilities `_utils` -> `_models`, renamed | moved the same 4, no rename | **53 failed -> 9 hops -> baseline** |
+| (case B) | — | moved `to_str`, two importers | 2 hops -> baseline |
+
+The `41597adffa` run is the important one: it needed four hypotheses that all four earlier
+cases had failed to force.
+
+## Four more failures, each demanded by a real fix
+
+1. **A file must not import what it defines.** `_models.py` already imported the four
+   symbols from `_utils.py`. After the move those imports were stale, and the loop
+   "repaired" them by writing `from ._models import parse_header_links` *into
+   `_models.py`* — a circular self-import that ended the run. The right repair is
+   **deletion**, and the loop had no concept of it.
+2. **A test file is never the repair target.** A `NameError` surfaced in
+   `tests/test_decoders.py` and the loop inserted a *relative* import there:
+   `No module named 'tests._urlparse'`. Production debt is a production repair.
+3. **Moved code carries its imports.** After the move, `NameError: name 'codecs' is not
+   defined` — inside the new module. `home_of` only searched the tree, so a stdlib name
+   read as "defined nowhere". Now: if the name is importable, import it (`codecs`, `re`);
+   otherwise redirect to its module (`to_str`, `to_bytes_or_str`).
+4. **A hop budget is a measurement, not a constant.** Eight hops stopped at 34 failed
+   with every hop still monotone. The repair needed nine.
+
+## The one thing this cannot do
+
+The human's `41597adffa` also **renamed** the four functions public -> private
+(`parse_header_links` -> not renamed here, but `is_known_encoding` -> `_is_known_encoding`).
+The loop follows imports and names; it does not know a rename is the intent. Run against
+the renamed shape it would have nothing to find, because the old name simply ceases to
+exist and the "repair" would be to recreate it.
+
+That is the boundary: **the zipper restores a property. It does not invent a decision.**
+Given a move, it restores reachability. Given a rename, the decision is the human's.
+
+## What the four bugs have in common
+
+Every one was a **scope error**, not a parsing error: the wrong file (a test, or the
+defining module itself), the wrong search space (the tree instead of the world), the
+wrong budget. The loop's error-text parsing was right every time. This is the same lesson
+as `THE_ZIP_NEEDS_A_SCOPE_RESOLVER`: the failures are about *where a thing is allowed to
+live*, and the fix is a scope rule, not a better regex.
+
+Eight distinct loop defects were found and fixed across the four real cases. Five tests
+now pin them; the suite runs in 2 minutes.
