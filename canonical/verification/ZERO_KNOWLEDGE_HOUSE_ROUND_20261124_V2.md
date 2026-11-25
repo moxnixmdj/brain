@@ -1361,3 +1361,147 @@ recurrence has never been measured. The measurement to run is the same one, one 
 run the law suite on each buggy tree and count how many distinct laws fire, how often a law fires in ≥2 independent
 commits, and whether a law that fires is enough to *select* a repair — the shape that produced 6/6 repairs here versus
 0/6 for edits.
+
+## Round V25 — laws recur where edits do not, and firing is not catching
+
+V24 ended with the law as the only unit showing transfer, and that conclusion was weakened by how it was reached: the six
+successful repairs were produced by *searching* commits and laws until one fired and was refuted by the fix. A unit
+chosen that way is measured on a selected sample. This round measures the same unit on an unselected one, and then
+corrects V24 in place rather than leaving it standing.
+
+**Sampling, and why it had to be conditioned.** Twelve recent commits that change both a module and a test were taken at
+random first. Only four of the twelve had a genuine fail-to-pass test; the rest were collection errors (`1 error`), a
+missing package, or `no tests ran`. Counting those as "commits the laws failed to catch" would have been dishonest, so
+the sample was rebuilt: enumerate commits, keep only those whose own new test file **fails** on the parent — a failure,
+not an error — and run the laws only on those. Reproducible with
+`canonical/tools/measure_law_selection_v1.py`.
+
+**Twelve confirmed fixes** (pluggy 4, more-itertools 4, pyjwt 4). `click`, `werkzeug` and `attrs` could not contribute:
+a bare worktree does not make them importable (`ModuleNotFoundError: No module named 'click'`), so their commits were
+skipped rather than counted as negatives. That limit is stated, not worked around.
+
+| measure | result |
+| --- | --- |
+| commits with at least one law firing on the buggy tree | **9 / 12** |
+| distinct laws fired | 6 |
+| laws firing in ≥2 independent commits | **6 / 6** (`iterable_retyping` 4 commits, `assert_validation` 3, `idempotence` 2, `remove_argument_vanishes` 2, `error_discipline` 2, `round_trip` 2) |
+| commits where the fix removes the violation (refutation) | **2 / 12** |
+| commits where the witness names a function the human changed | **2 / 12** — and they are the same two |
+
+The contrast with V24 is the finding: **edit templates recur in 3.7% of occurrences; laws recur in every law's case**.
+`iterable_retyping` fires in four unrelated commits, `assert_validation` in three. A law is a statement about behaviour,
+so it is available everywhere the behaviour occurs; this is the first measurement in this round where the accumulating
+unit actually recurs.
+
+The second half is the problem. Of the nine commits with a firing law, **seven have violations their own fix leaves
+untouched** — `substrings_indexes` fires on four more-itertools fixes that never touch it, `PyJWS.decode` on two pyjwt
+fixes. Those are the repository's background debt, exercised by the same tests. On the two real detections the law does
+exactly what the round claims for it: `remove_argument_vanishes` names `PluginManager.unregister` on `pluggy@50585e0` and
+goes silent on the fix; `assert_validation` names the same function on `pluggy@8051a4d` and goes silent on the fix.
+Precision at commit level is **2/9 = 22%**.
+
+**A runtime selector was tried and failed.** Refutation needs the fixed tree, which does not exist at solve time. The
+available substitute was reachability: is the witness on the failing test's call path? It is — for **9 of 9** firing
+commits, including all seven background-debt ones (475–1178 distinct functions recorded per run). Reachability therefore
+selects nothing beyond firing itself, and the idea is recorded as tried rather than adopted.
+
+**Correction to V24.** V24 said the law is "the unit with evidence of transfer" and quoted 6/6. That 6/6 was a
+**selected** sample: those six commits were found by requiring a law to fire *and* be refuted. On a conditioned random
+sample the same procedure scores **2/12 refutations** and **2/9 precision**. Both numbers are true; the second is the
+honest one to quote, and the first is what a search over a corpus can find when it is allowed to choose its own
+examples. V24's other result is unaffected: edit recurrence at 3.7% was measured unconditionally and stands.
+
+**What is now established about the unit.** Laws clear the recurrence bar that edits fail (6/6 versus 3.7%), and they are
+the only unit in this round that has ever named the right place. What they cannot yet do is tell a violation *caused by
+this failure* from one *inherited from the repository*. So the bottleneck has moved one level and is now precise: it is
+not inducing a law, it is **selecting among firings**.
+
+**Next bottleneck.** A selector that requires the violating call's arguments to be objects the failing test itself
+created — provenance, not reachability, since the background debt is also reached. The claim to test is sharp and
+falsifiable on the same twelve commits: keep 2/2 true detections and drop 7/7 inherited ones. If provenance fails the same
+way reachability did, the honest conclusion is that a law firing is not evidence about a specific failure, and the
+selector has to come from the failing assertion's own values instead.
+
+## Round V26 — isolating the failing test selects the violation (and keeps both true detections)
+
+V25 ended with a precise question: a law fires, but is the violation *this failure's* or the repository's? Refutation answers
+it with a fixed tree that does not exist at solve time. Two discriminators are available at runtime, and both were
+measured against the human fix as ground truth on the ten commits where a law fires.
+
+**Isolation** — run only the failing test. Inherited debt needs the rest of the suite to reach it; the bug's own test
+carries its violation by itself.
+
+**Deselection** — run the suite with the failing test removed. A violation that survives does not need this test at all.
+
+| commit | fires with the suite | fires alone (isolation) | human fix removes |
+| --- | --- | --- | --- |
+| `pluggy@50585e0` | `assert_validation`, `idempotence`, `remove_argument_vanishes` | `assert_validation`, `remove_argument_vanishes` | `remove_argument_vanishes` — **kept** |
+| `pluggy@8051a4d` | `assert_validation`, `remove_argument_vanishes` | `assert_validation` | `assert_validation` — **kept** |
+| `pluggy@4d6b10d` | `assert_validation`, `idempotence` | `assert_validation` | none — kept, see below |
+| `pyjwt@7bf3252` | `error_discipline`, `round_trip` | `round_trip` | none — kept, see below |
+| 4 × more-itertools (`iterable_retyping`), `pyjwt@5fde08a`, `click@c4dd0cd` | fires | **silent** | none — **silenced** |
+
+Isolation removes **6 of 8** inherited firings and keeps **2 of 2** true detections. Measured as a classifier against the
+human fix, on ten firing commits:
+
+| selector | precision | recall |
+| --- | --- | --- |
+| firing at all (V25) | 2/9 = 22% | 2/2 = 100% |
+| isolation | 2/4 = 50% | **2/2 = 100%** |
+| deselection | **1/1 = 100%** | 1/2 = 50% |
+| both (intersection) | 1/1 = 100% | 1/2 = 50% |
+
+Two things in that table matter more than the numbers. First, **the two selectors fail in opposite directions**: deselection
+misses `pluggy@50585e0` because other tests in the same files call `unregister` and keep the violation alive; isolation
+keeps two violations the human fix never touched. Second, and this is a correction to how the "false positives" should be
+read: `pluggy@4d6b10d`'s `assert_validation` and `pyjwt@7bf3252`'s `round_trip` **are** violations of the law, triggered by
+the failing test's own execution. They are false positives only against the ground truth "the human fix removes it",
+which is a statement about what the engineer chose to fix, not about what is violated. Isolation is therefore doing its
+job — it reports what the failing test executes — and the mismatch is in the label, not the detector.
+
+**What this settles.** V25's problem was that a firing says nothing about a specific failure: 7 of 9 firings were inherited
+and reachability could not tell them apart (9/9 on the path). Isolation is the first runtime-available signal that
+actually discriminates, and it does so without a fixed tree, without a model, and at the cost of one extra suite run of a
+single test.
+
+**What it does not settle.** Precision against the human fix is 50%, and that is fine only if a wrong candidate is cheap:
+the failing test is still the final oracle, so a candidate generated for an inherited violation simply fails and is
+discarded. What has *not* been measured is that end-to-end cost — how many repair attempts an isolated law buys, and
+whether the two non-matching commits produce a passing patch within any budget.
+
+**Next bottleneck.** End-to-end on the same ten commits: isolate the law, generate the repair the law names, and run the
+failing test — reporting attempts-to-passing per commit. The falsifiable claim is that both true detections pass within a
+small budget while the two non-matching commits produce no passing patch at any budget, which would make isolation a
+sound candidate generator even at 50% precision.
+
+## Round V27 — an isolated law buys a repair in one attempt, and buys nothing where it should
+
+V26 left one falsifiable claim open: if isolation is a sound candidate generator at 50% precision, then a true detection
+should be repaired by the law's own generator while a non-matching firing produces no passing patch. That was run on two
+`pluggy` commits, one law (`assert_validation`), the generator that already exists for it
+(`law_repair_synthesis_v1.assert_to_raise_candidates`), and the commits' own failing tests.
+
+| commit | status | witnesses under isolation | candidates | passing attempt |
+| --- | --- | --- | --- | --- |
+| `pluggy@8051a4d` | the fix removes this violation | `unregister` lines 289, 291 | 1 | **1** |
+| `pluggy@4d6b10d` | the fix never touches it | `unregister` lines 290, 292 | 1 | **none** |
+
+The true detection is repaired on the first attempt with no search and no model. The non-matching commit yields a
+syntactically valid candidate that does not make its own failing test pass, which is exactly the behaviour a
+candidate-generator at 50% precision needs: a wrong candidate costs one test run and is discarded. Neither commit is one
+of the six this round started from; both were found by the measurement, not chosen to fit it.
+
+**Generator coverage, stated because it bounds the result.** Of the four law firings that survive isolation in the V26
+sample, only one has a generator: `assert_validation` via `assert_to_raise_candidates`. `remove_argument_vanishes`
+(`pluggy@50585e0`) and `round_trip` (`pyjwt@7bf3252`) have none in `law_repair_synthesis_v1`, so for those the number of
+attempts is not small — it is *undefined*, and no end-to-end claim is made about them. Four of nine laws have a generator
+(`canonicality`, `error_discipline`, `assert_validation`, `sibling_totality`; plus `protocol_presence` and
+`totality_fallback` outside the nine).
+
+So the end-to-end evidence is n=1 against n=1. It is a falsification test that survived, not a rate.
+
+**Next bottleneck.** The gap is now generator coverage, not selection: isolation names the site and the law names the
+repair shape, but only four laws can turn that into a patch. The measured next step is the one the round has avoided so
+far — induce the *repair generator* from the six known repairs the way V23 induced edit templates, and require it to
+produce the pass on the same commits, instead of hand-writing a generator per law. That is the §9.3 requirement in its
+narrowest form: one law's repairs learned from its witnesses rather than authored.

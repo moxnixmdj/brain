@@ -633,6 +633,10 @@
     "canonical/tools/measure_edit_shape_recurrence_v1.py": {
       "lines": 180,
       "sha256": "5cb92d9bd855a8da5b02c33e379315dc57030c56664a836ef788fde1261f3df8"
+    },
+    "canonical/tools/measure_law_selection_v1.py": {
+      "lines": 286,
+      "sha256": "d8b0ab474f1ba44dc06acd22c5129b1a07c6c6f938cbd6306491363a0b2ab8aa"
     }
   },
   "new_mechanisms": [
@@ -770,9 +774,8 @@
     }
   ],
   "next_bottleneck": {
-    "item": "rule accumulation over the repaired corpus",
-    "state": "insertion edits now enter the basis; the six hand repairs can be re-expressed as induced templates",
-    "next": "re-run the six repaired commits from induced templates only (no hand-written candidate) and appraise each induced patch against the hidden tests, one commit at a time"
+    "item": "generator coverage: 4 of 9 laws can turn a named site into a patch",
+    "measurement": "induce the repair generator from the known repairs, as V23 induced edit templates, and require it to produce the pass on the same commits"
   },
   "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
   "refusal_v22": {
@@ -991,5 +994,144 @@
       "SWE-bench Pro / Terminal-Bench / OSWorld numbers: no Docker or KVM in this sandbox, so they remain unmeasured by this round"
     ],
     "measured_instead": "48.2% of 587 real function fixes are not expressible by this inducer's node/insertion rungs at context depth 0; 3.7% of expressible occurrences recur in an independent commit"
+  },
+  "law_recurrence_v25": {
+    "tool": "canonical/tools/measure_law_selection_v1.py",
+    "sampling": {
+      "first_attempt": "12 random module+test commits: 4 confirmed fail-to-pass, 8 were collection errors or no tests",
+      "conditioned": "keep only commits whose own new test FAILS on the parent; run laws only on those",
+      "confirmed_fixes": 12,
+      "repos": {
+        "pluggy": 4,
+        "more-itertools": 4,
+        "pyjwt": 4
+      },
+      "skipped_repos": "click, werkzeug, attrs -- bare worktree is not importable (ModuleNotFoundError), so they contribute nothing rather than counting as negatives"
+    },
+    "results": {
+      "commits_with_a_firing_law": "9/12",
+      "distinct_laws_fired": 6,
+      "laws_firing_in_two_or_more_commits": [
+        "iterable_retyping (4)",
+        "assert_validation (3)",
+        "idempotence (2)",
+        "remove_argument_vanishes (2)",
+        "error_discipline (2)",
+        "round_trip (2)"
+      ],
+      "commit_level_precision": "2/9 = 22%",
+      "refutations": [
+        "pluggy@50585e0 remove_argument_vanishes -> PluginManager.unregister",
+        "pluggy@8051a4d assert_validation -> PluginManager.unregister"
+      ],
+      "inherited_debt": "7 of 9 firing commits: violations their own fix leaves untouched (substrings_indexes on 4 more-itertools fixes, PyJWS.decode on 2 pyjwt fixes)",
+      "runtime_selector_tried": {
+        "reachability": "witness on the failing test's call path held for 9/9 firing commits (475-1178 functions recorded per run) -- no discrimination"
+      }
+    },
+    "contrast_with_edits": {
+      "edit_template_recurrence": "3.7% of occurrences",
+      "law_recurrence": "6/6 laws recur"
+    },
+    "correction_v24": "the 6/6 law-transfer figure was a SELECTED sample (commits found by requiring fire AND refutation). Unconditioned on a conditioned random sample the same procedure is 2/12 refutations, 2/9 precision. V24's edit-recurrence result (3.7%) is unaffected.",
+    "next_bottleneck": {
+      "item": "selecting among law firings",
+      "design": "require the violating call's arguments to be objects the failing test itself created (provenance), since the inherited debt is also on the failing test's call path",
+      "falsifiable_claim": "keep 2/2 true detections and drop 7/7 inherited ones on the same twelve commits",
+      "if_it_fails": "then a law firing is not evidence about a specific failure and the selector must come from the failing assertion's own values"
+    }
+  },
+  "law_selector_v26": {
+    "question": "is a firing law's violation this failure's, or the repository's? -- without the fixed tree",
+    "tool": "canonical/tools/measure_law_selection_v1.py --selectors",
+    "discriminators": {
+      "isolation": "run only the failing test; inherited debt needs the rest of the suite",
+      "deselection": "run the suite with the failing test removed; survivors do not need it"
+    },
+    "sample": {
+      "firing_commits": 10,
+      "repos": [
+        "pluggy",
+        "more-itertools",
+        "pyjwt",
+        "click"
+      ]
+    },
+    "results": {
+      "isolation_silences_inherited": "6 of 8",
+      "isolation_keeps_true_detections": "2 of 2",
+      "classifier": {
+        "firing_at_all": {
+          "precision": "2/9 = 22%",
+          "recall": "2/2 = 100%"
+        },
+        "isolation": {
+          "precision": "2/4 = 50%",
+          "recall": "2/2 = 100%"
+        },
+        "deselection": {
+          "precision": "1/1 = 100%",
+          "recall": "1/2 = 50%"
+        },
+        "intersection": {
+          "precision": "1/1 = 100%",
+          "recall": "1/2 = 50%"
+        }
+      },
+      "opposite_failure_modes": "deselection misses pluggy@50585e0 (other tests keep the violation alive); isolation keeps pluggy@4d6b10d assert_validation and pyjwt@7bf3252 round_trip"
+    },
+    "label_correction": "the two isolation 'false positives' are genuine law violations triggered by the failing test; the ground truth 'the human fix removes it' records what the engineer chose to fix, not what is violated",
+    "next_bottleneck": {
+      "item": "end-to-end cost of an isolated law",
+      "measurement": "isolate the law, generate the repair the law names, run the failing test; attempts-to-passing per commit on the same ten",
+      "claim": "both true detections pass within a small budget, and the two non-matching commits produce no passing patch at any budget"
+    }
+  },
+  "law_end_to_end_v27": {
+    "question": "does an isolated law buy a repair, and does it buy nothing where it should",
+    "design": "one law (assert_validation), its existing generator, the commits' own failing tests, no search, no model",
+    "rows": [
+      {
+        "commit": "pluggy@8051a4d",
+        "status": "fix removes the violation",
+        "witnesses": [
+          "unregister:289",
+          "unregister:291"
+        ],
+        "candidates": 1,
+        "passing_attempt": 1
+      },
+      {
+        "commit": "pluggy@4d6b10d",
+        "status": "fix never touches it",
+        "witnesses": [
+          "unregister:290",
+          "unregister:292"
+        ],
+        "candidates": 1,
+        "passing_attempt": null
+      }
+    ],
+    "claim_status": "survived: true detection repaired on attempt 1; non-matching firing produced no passing patch",
+    "sample_honesty": "n=1 against n=1; both commits were surfaced by the measurement, not chosen to fit it",
+    "generator_coverage": {
+      "laws_with_a_generator": [
+        "canonicality",
+        "error_discipline",
+        "assert_validation",
+        "sibling_totality",
+        "protocol_presence",
+        "totality_fallback"
+      ],
+      "isolated_firings_without_one": [
+        "remove_argument_vanishes (pluggy@50585e0)",
+        "round_trip (pyjwt@7bf3252)"
+      ],
+      "consequence": "for those, attempts-to-passing is undefined, not large; no end-to-end claim is made"
+    },
+    "next_bottleneck": {
+      "item": "generator coverage: 4 of 9 laws can turn a named site into a patch",
+      "measurement": "induce the repair generator from the known repairs, as V23 induced edit templates, and require it to produce the pass on the same commits"
+    }
   }
 }
