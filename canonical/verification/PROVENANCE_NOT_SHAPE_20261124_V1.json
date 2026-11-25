@@ -1,0 +1,124 @@
+{
+ "schema": "BRAIN_PROVENANCE_NOT_SHAPE_V1",
+ "generated": "2026-11-25T11:49:51Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 343.5
+ },
+ "summary": {
+  "files_scanned": 1200,
+  "functions_trained": 7812,
+  "functions_held_out": 3679,
+  "vocabulary_budget_per_arm": 4,
+  "arms": {
+   "SHAPE_ONLY": {
+    "subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_IF",
+     "LINES"
+    ],
+    "predictions": 211,
+    "wrong": 4,
+    "refused": 3468,
+    "accuracy": 0.9814,
+    "coverage": 0.0574
+   },
+   "PROVENANCE_ONLY": {
+    "subset": [
+     "BRANCH_COUNT",
+     "BRANCH_ON_ATTRIBUTE",
+     "BRANCH_ON_CALL",
+     "BRANCH_ORIGINS"
+    ],
+    "predictions": 20,
+    "wrong": 3,
+    "refused": 3659,
+    "accuracy": 0.8696,
+    "coverage": 0.0054
+   },
+   "BOTH": {
+    "subset": [
+     "BRANCH_ORIGINS",
+     "DEPTH",
+     "HAS_IF",
+     "LINES"
+    ],
+    "predictions": 395,
+    "wrong": 22,
+    "refused": 3284,
+    "accuracy": 0.9472,
+    "coverage": 0.1074
+   }
+  },
+  "by_price": {
+   "1": {
+    "arm": "BOTH",
+    "subset": [
+     "BRANCH_ORIGINS",
+     "DEPTH",
+     "HAS_IF",
+     "LINES"
+    ],
+    "cost": 3306,
+    "predictions": 395,
+    "wrong": 22,
+    "refused": 3284,
+    "accuracy": 0.9472,
+    "coverage": 0.1074
+   },
+   "10": {
+    "arm": "BOTH",
+    "subset": [
+     "BRANCH_ON_OPERATION",
+     "DEPTH",
+     "HAS_IF",
+     "LINES"
+    ],
+    "cost": 3454,
+    "predictions": 255,
+    "wrong": 3,
+    "refused": 3424,
+    "accuracy": 0.9884,
+    "coverage": 0.0693
+   },
+   "100": {
+    "arm": "BOTH",
+    "subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_LOOP",
+     "LINES"
+    ],
+    "cost": 3505,
+    "predictions": 174,
+    "wrong": 0,
+    "refused": 3505,
+    "accuracy": 1.0,
+    "coverage": 0.0473
+   }
+  },
+  "verdicts": {
+   "provenance_beats_shape_at_equal_budget": false,
+   "provenance_is_at_least_as_accurate": false,
+   "provenance_beats_shape_at_every_price": true,
+   "provenance_lifts_coverage_out_of_single_digits": false,
+   "no_feature_reads_a_return_node": true,
+   "the_union_beats_both": true,
+   "the_pre_registered_claim_was_refuted_by_its_own_measurement": true
+  },
+  "leak_that_was_caught": {
+   "what": "a first version included features computed from Return nodes while the target class is defined by Return nodes; RET_ORIGINS_COUNT_0 IS 'no return carries a value'",
+   "what_it_looked_like": {
+    "coverage_with_leak_best_arm": 0.188,
+    "coverage_with_leak_at_price_1": 0.9842,
+    "accuracy_at_price_1": 0.9989
+   },
+   "what_it_actually_was": "the label handed to the predictor -- the same defect as the vocabulary leak of V14, committed again four rounds later",
+   "how_it_was_caught": "asking whether any feature reads the same node type the label is computed from",
+   "fix": "every Return-derived feature removed; PROVENANCE_FEATURES is branch-test provenance only"
+  }
+ }
+}
