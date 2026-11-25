@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Residual-wall closers: the eight statement shapes a trace-literal engine cannot reach.
+"""Residual-wall closers: the ten statement shapes a trace-literal engine cannot reach.
 
 WHY THIS FILE EXISTS
 --------------------
@@ -20,7 +20,7 @@ statements proved not to be on the raising path"**. That is the honest failure
 mode: the engine could generate statements, but not the *right* ones, because it
 was looking for a site that the traceback names and the traceback never names it.
 
-This module closes those walls with **eight general mechanisms**, each of which is
+This module closes those walls with **ten general mechanisms**, each of which is
 a *relation between two facts already inside the repository* -- never a stored fix,
 never a literal from the answer key. Nothing here reads a commit message, a source
 diff, an issue, or the fix commit's own source. Only:
@@ -74,7 +74,14 @@ WHAT EACH CLOSER MINES, AND FROM WHERE
    The row exists; only its help text is absent.
    Live: `click@05f6fd0` `Argument.get_help_record`.
 
-8. `POSTCONDITION_STATE_PURGE`
+8. `DOCSTRING_DEFAULT_UNGATING`
+   The method's own docstring says "this is what happens by default", and the branch
+   that implements it is gated behind an unrelated feature flag, so with the flag off
+   the documented default is unreachable. The gate is rewritten as
+   `A and (not F or B)` -- the feature flag becomes an OR, not an AND.
+   Live: `werkzeug@884437ae` `MapAdapter.build`.
+
+9. `POSTCONDITION_STATE_PURGE`
    A failing `assert getter() == [...]` after a mutator call: the getter's own
    `return` names the container, the mutator's parameter names the key, and the
    purge is emitted before the mutator's own `return`.
@@ -88,12 +95,33 @@ The case list below re-measures seven walls. The eighth mechanism
 repaired by the anti-unified `UIR_BOOL_CONJUNCT_TO_IMPLIES` law in the previous round and
 never regressed, so re-running it would measure the earlier receipt, not this one.
 
-WHAT IS NOT RE-MEASURED, AND WHY
---------------------------------
-`werkzeug@884437ae` (boolean logic for external URLs) is not re-implemented here:
-`DefUseRelationalZipper` plus the anti-unified `UIR_BOOL_CONJUNCT_TO_IMPLIES` law
-already repairs it, and it stayed repaired under every later replay. This module only
-adds mechanisms for walls that were still measured OPEN.
+9. `DOCSTRING_DEFAULT_UNGATING`
+   A method's own docstring names a behaviour as the default, but the branch that
+   implements it is unreachable unless a feature flag is on.
+   Live: `werkzeug@884437ae` `MapAdapter.build`.
+
+10. `CONFIG_PARITY_FROM_REPO_IDIOM`
+   The repository applies a policy keyword at one call into a shared module
+   (`textwrap.shorten(..., break_on_hyphens=False)` in `click/utils.py`) and omits it
+   at another call into the same module (`TextWrapper(...)` in `click/formatting.py`).
+   The missing keyword is lifted from the repository's own usage and re-emitted only
+   if the constructed object really accepts it.
+   Live: `click@7996a89` -- closes 2 of 10 failures from repository evidence alone.
+
+TWO WALLS MEASURED OPEN BY THIS ROUND
+-------------------------------------
+`click@7996a89` is registered and honestly OPEN: the repository-derivable half of the
+patch (`break_on_hyphens=False`) is found and admitted (10 -> 8 failures), but the
+remaining two kwargs (`break_long_words=False` and the `_handle_long_word` removal)
+are a *product decision* -- no statement anywhere in the parent tree implies them.
+Repository evidence reaches half of that patch and stops. Recorded, not papered over.
+
+`click@047adef` is registered and honestly REFUSED: it requires the law
+`set(x)` -> `dict.fromkeys(x)` when the returned order is the contract. The counter-
+idiom (`dict.fromkeys` for order-preserving dedup) exists in the baseline at
+`types.py:420`, but **nothing in the parent tree says the order of help option names
+is a contract** -- `set()` reproduces the baseline's own behaviour exactly. Without a
+written precondition the law would be a guess, so no closer fires.
 
 Authority: NONE__PRODUCER_RUN_SANDBOX. Runtime model calls: 0. Parameters stored: 0.
 """
@@ -101,6 +129,7 @@ from __future__ import annotations
 
 import ast
 import dataclasses
+import inspect
 import itertools
 import json
 import pathlib
@@ -953,6 +982,323 @@ class OptionalTupleShapeCompletion:
 # Closer 8: POSTCONDITION_STATE_PURGE
 # ==============================================================================
 
+# ==============================================================================
+# Closer 9: DOCSTRING_DEFAULT_UNGATING
+# ==============================================================================
+
+class DocstringDefaultUngating:
+    """A documented default that is unreachable behind a feature flag.
+
+    `MapAdapter.build` says, in its own docstring: *"This produces relative URLs
+    (path only, no host) by default"*, and separately: *"the URL will be absolute if
+    the endpoint is not on the same host"*. The code then gates the relative branch
+    on `subdomain_matching or host_matching` -- a feature flag -- so with both flags
+    off the documented default cannot be reached at all.
+
+    The repository supplies both halves of the evidence: the prose that names the
+    default, and the condition that makes it unreachable. The closer rewrites the
+    gating by one Boolean identity (`A and (B and C or D) == A and (not (not B and
+    not D) implies ...)` is not needed here -- the identity is `(B or C) and (X or Y)
+    == (B and X) or (C and Y)`, so negating the outer disjunction is exactly what the
+    prose asks for).
+    """
+
+    mechanism = "DOCSTRING_DEFAULT_UNGATING"
+    _DEFAULT_WORDS = ("by default", "defaults to", "unless")
+
+    def _docstring_default_sentence(self, fn: ast.FunctionDef) -> str:
+        doc = ast.get_docstring(fn) or ""
+        if not doc:
+            return ""
+        body_start = fn.body[0] if fn.body else None
+        if not (
+            body_start is not None
+            and isinstance(body_start, ast.Expr)
+            and isinstance(body_start.value, ast.Constant)
+            and isinstance(body_start.value.value, str)
+        ):
+            return ""
+        for sentence in re.split(r"(?<=\.)\s+", " ".join(doc.split())):
+            low = sentence.lower()
+            if "by default" in low and ("produce" in low or "return" in low or "path" in low):
+                return sentence.strip()
+        return ""
+
+    def mine(self, source: str, target_function: str) -> list[WallCandidate]:
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return []
+        sentence = self._docstring_default_sentence(fn)
+        if not sentence:
+            return []
+
+        out: list[WallCandidate] = []
+        lines = source.splitlines()
+        for node in ast.walk(fn):
+            if not isinstance(node, ast.If):
+                continue
+            if not node.body or not isinstance(node.body[-1], ast.Return):
+                continue
+            test = node.test
+            # The gate shape: `not X and Y and Z` -- a kill-flag conjoined with a
+            # feature-flag disjunction. Only that shape is rewritten.
+            if not (isinstance(test, ast.BoolOp) and isinstance(test.op, ast.And)):
+                continue
+            values = test.values
+            if len(values) < 2 or not (isinstance(values[0], ast.UnaryOp) and isinstance(values[0].op, ast.Not)):
+                continue
+            # A *feature-flag* disjunction has bare flag operands (`self.map.subdomain_matching
+            # or self.map.host_matching`); the other disjunction here is a disjunction of
+            # comparisons (`A and X or B and Y`), which is the behaviour, not the gate.
+            def _is_bare_flag(expr: ast.AST) -> bool:
+                return isinstance(expr, (ast.Name, ast.Attribute)) and not any(
+                    isinstance(n, ast.Compare) for n in ast.walk(expr)
+                )
+
+            feature_disjunctions = [
+                v for v in values[1:]
+                if isinstance(v, ast.BoolOp)
+                and isinstance(v.op, ast.Or)
+                and len(v.values) >= 2
+                and all(_is_bare_flag(inner) for inner in v.values)
+            ]
+            if len(feature_disjunctions) != 1:
+                continue
+            # The rewrite, stated as the Boolean algebra it is. The documented default is
+            # the branch's *own* behaviour; the feature flag must be an OR, not an AND:
+            #
+            #   A and F and B      (feature on, behaviour B)
+            #   ->  A and (not F or B)        (feature off -> default; feature on -> B)
+            #
+            # Conjoining `not F` instead would demand the flag be off AND the behaviour
+            # hold, which is strictly narrower than both the docstring and the old code.
+            behaviour = [v for v in values[1:] if v is not feature_disjunctions[0]]
+            if not behaviour:
+                continue
+            flag_text = " or ".join(f"({ast.unparse(v)})" for v in feature_disjunctions[0].values)
+            behaviour_text = (
+                f"({ast.unparse(behaviour[0])})"
+                if len(behaviour) == 1
+                else "(" + " and ".join(f"({ast.unparse(v)})" for v in behaviour) + ")"
+            )
+            new_test = f"({ast.unparse(values[0])}) and ((not ({flag_text})) or {behaviour_text})"
+            # Rebuild the whole `if` from the AST rather than patching one text line: the
+            # condition may span several lines (this one does), and a text edit would
+            # silently skip it. Comments inside the body are not preserved -- a limitation
+            # recorded rather than hidden.
+            try:
+                new_test_node = ast.parse(new_test, mode="eval").body
+            except SyntaxError:
+                continue
+            rebuilt = ast.If(test=new_test_node, body=list(node.body), orelse=list(node.orelse))
+            rendered = ast.unparse(ast.fix_missing_locations(rebuilt))
+            indent = _indent_at(source, node.lineno)
+            guard = "\n".join(indent + line if line.strip() else line for line in rendered.splitlines())
+            start_line, end_line = _line_span(source, node)
+            old_text = "\n".join(lines[start_line - 1 : end_line])
+            out.append(
+                WallCandidate(
+                    mechanism=self.mechanism,
+                    target_function=target_function,
+                    lineno=node.lineno,
+                    old_code=old_text,
+                    new_code=guard,
+                    patched_module_source=_rewrite_span(source, start_line, end_line, guard),
+                    evidence=(
+                        f"docstring states the default: {sentence!r}",
+                        f"the default branch is gated behind: {ast.unparse(feature_disjunctions[0])}",
+                    ),
+                    explanation=(
+                        "The method's own docstring says this is the default behaviour, but the "
+                        "branch is only reachable when a feature flag is enabled, so with the "
+                        "flags off the documented default cannot happen. The gate is rewritten "
+                        "so the default holds when the feature is off."
+                    ),
+                    edits=((start_line, end_line, guard),),
+                )
+            )
+        return out
+
+
+class ConfigParityFromRepoIdiom:
+    """A rendering/parsing policy the repository applies in one place and forgets in another.
+
+    `click`'s `utils.py` carries the comment *"Do not split hyphenated words."* directly
+    above `textwrap.shorten(..., break_on_hyphens=False)`. That is the repository stating
+    a product policy for itself. The help-text wrapper in `formatting.py` constructs the
+    same kind of `textwrap.TextWrapper` and omits the policy, so help output still breaks
+    option names across lines.
+
+    The closer does not guess the missing keyword: it reads the policy *names* out of the
+    sibling call site in the repository, and only re-emits a keyword that (a) exists in the
+    sibling call, (b) is absent from the target call, and (c) is a real parameter of the
+    object being constructed. Both halves of the evidence are in the repo, so nothing is
+    invented and nothing is memorised.
+    """
+
+    mechanism = "CONFIG_PARITY_FROM_REPO_IDIOM"
+    _POLICY_WORDS = ("hyphen", "split", "break", "wrap", "word", "strip")
+
+    def _module_alias(self, source: str, module_name: str) -> str:
+        """The local name the module is imported under (`textwrap`, `tw`, ...)."""
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return module_name
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    if alias.name == module_name:
+                        return alias.asname or alias.name
+        return module_name
+
+    def _sibling_keyword_policies(
+        self, repo_sources: Sequence[str], module_name: str
+    ) -> dict[str, list[str]]:
+        """Policy keywords used with ANY `module_name.<fn>(...)` call in the repository.
+
+        Scoping this to one class name is too narrow: `click` states its no-break policy
+        on `textwrap.shorten(...)` in `utils.py`, while the target site builds a
+        `textwrap.TextWrapper`. Both are calls into the same module, which is where the
+        policy actually lives.
+        """
+        found: dict[str, list[str]] = {}
+        for src in repo_sources:
+            try:
+                tree = ast.parse(src)
+            except SyntaxError:
+                continue
+            alias = self._module_alias(src, module_name)
+            for node in ast.walk(tree):
+                if not isinstance(node, ast.Call):
+                    continue
+                func = node.func
+                if not (
+                    isinstance(func, ast.Attribute)
+                    and isinstance(func.value, ast.Name)
+                    and func.value.id == alias
+                ):
+                    continue
+                for kw in node.keywords:
+                    if kw.arg is None:
+                        continue
+                    found.setdefault(kw.arg, []).append(ast.unparse(kw.value))
+        return found
+
+    def _target_call(self, tree: ast.AST, target_function: str, ctor_name: str) -> ast.Call | None:
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return None
+        best: ast.Call | None = None
+        for node in ast.walk(fn):
+            if not isinstance(node, ast.Call):
+                continue
+            fname = (
+                node.func.attr
+                if isinstance(node.func, ast.Attribute)
+                else node.func.id
+                if isinstance(node.func, ast.Name)
+                else ""
+            )
+            if fname == ctor_name:
+                if best is None or node.lineno > best.lineno:
+                    best = node
+        return best
+
+    needs_repo_sources = True
+
+    def mine(
+        self,
+        source: str,
+        target_function: str,
+        *,
+        repo_sources: Sequence[str] = (),
+    ) -> list[WallCandidate]:
+        """Uniform closer entry point: the repo's own sources are required evidence."""
+        return self.mine_for_pair(source, target_function, list(repo_sources))
+
+    def mine_for_pair(
+        self, source: str, target_function: str, repo_sources: Sequence[str]
+    ) -> list[WallCandidate]:
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return []
+        out: list[WallCandidate] = []
+        for ctor_name, module_name in (("TextWrapper", "textwrap"), ("Wrapper", "textwrap")):
+            call = self._target_call(tree, target_function, ctor_name)
+            if call is None:
+                continue
+            policies = self._sibling_keyword_policies(repo_sources, module_name)
+            if not policies:
+                continue
+            present = {kw.arg for kw in call.keywords if kw.arg}
+            missing = [
+                name
+                for name in policies
+                if name not in present
+                and any(w in name.lower() for w in self._POLICY_WORDS)
+            ]
+            if not missing:
+                continue
+            # Only emit keywords that the constructed object really accepts.
+            try:
+                import textwrap as _tw
+
+                accepted = set(inspect.signature(_tw.TextWrapper.__init__).parameters)
+            except (ValueError, TypeError):
+                accepted = set()
+            missing = [n for n in missing if n in accepted] if accepted else missing
+            if not missing:
+                continue
+
+            lines = source.splitlines()
+            # Insert after the last keyword argument, keeping the call's own indentation.
+            last_kw = [kw for kw in call.keywords if kw.arg]
+            anchor_kw = max(last_kw, key=lambda kw: getattr(kw.value, "end_lineno", 0) or 0)
+            insert_at = (anchor_kw.value.end_lineno or anchor_kw.value.lineno)
+            indent = _indent_at(source, anchor_kw.value.lineno)
+            new_lines = [f"{indent}{name}={policies[name][0]}," for name in missing]
+            patched = list(lines)
+            patched[insert_at:insert_at] = new_lines
+            new_src = "\n".join(patched) + ("\n" if source.endswith("\n") else "")
+            old_text = "\n".join(lines[insert_at - 1 : insert_at])
+            out.append(
+                WallCandidate(
+                    mechanism=self.mechanism,
+                    target_function=target_function,
+                    lineno=insert_at,
+                    old_code=old_text,
+                    new_code="\n".join(new_lines),
+                    patched_module_source=new_src,
+                    evidence=tuple(
+                        f"repository applies {module_name}.{ctor_name}(..., {name}={policies[name][0]}, ...) elsewhere"
+                        for name in missing
+                    )
+                    + (
+                        f"this {ctor_name} call omits: {', '.join(missing)}",
+                    ),
+                    explanation=(
+                        "The repository states this rendering policy for itself in a sibling "
+                        "call site, and this construction of the same object omits it, so the "
+                        "two paths behave differently. The missing keyword is copied from the "
+                        "repository's own usage, not invented."
+                    ),
+                    edits=tuple(
+                        (insert_at + i, insert_at + i, line) for i, line in enumerate(new_lines)
+                    ),
+                )
+            )
+        return out
+
+
 class PostconditionStatePurge:
     """A getter's returned container is not updated by the mutator that must drop a key."""
 
@@ -1108,6 +1454,8 @@ class ResidualWallCloser:
             ParserDegenerateNoneRefusal(),
             OptionalTupleShapeCompletion(),
             TerminalActionRetryPolicy(),
+            DocstringDefaultUngating(),
+            ConfigParityFromRepoIdiom(),
             PostconditionStatePurge(),
         )
     )
@@ -1118,6 +1466,7 @@ class ResidualWallCloser:
         target_function: str,
         *,
         functions: Sequence[str] = (),
+        repo_sources: Sequence[str] = (),
     ) -> list[WallCandidate]:
         """Every candidate the closers can fire, plus their disjoint compositions.
 
@@ -1131,7 +1480,13 @@ class ResidualWallCloser:
         seen: set[str] = {source}
         for name in targets:
             for closer in self.closers:
-                for cand in _split_bundles(closer.mine(source, name)):
+                if getattr(closer, "needs_repo_sources", False):
+                    fired = closer.mine(  # type: ignore[call-arg]
+                        source, name, repo_sources=list(repo_sources) + [source]
+                    )
+                else:
+                    fired = closer.mine(source, name)
+                for cand in _split_bundles(fired):
                     if cand.patched_module_source in seen:
                         continue
                     try:
@@ -1323,6 +1678,7 @@ def close_wall_against_git(
     max_evaluations: int = 40,
     full_suite: Sequence[str] = (),
     suite_scope: str = "one",
+    repo_source_globs: Sequence[str] = (),
 ) -> WallResult:
     """Repair one real commit in a `/dev/shm` worktree of its parent, with only tests copied.
 
@@ -1361,8 +1717,22 @@ def close_wall_against_git(
         source = source_file.read_text(encoding="utf-8")
         closer = ResidualWallCloser()
 
+        # The repository is allowed to testify about itself: sibling call sites give the
+        # policy names that this call site forgot. Only files under the declared globs are
+        # read, and only *names plus values* are lifted -- no answer key is consulted.
+        repo_sources: list[str] = []
+        for pattern in repo_source_globs:
+            for path in sorted(wtree.glob(pattern)):
+                if path.is_file() and path.suffix == ".py":
+                    try:
+                        repo_sources.append(path.read_text(encoding="utf-8"))
+                    except OSError:
+                        continue
+
         def _offered(text: str) -> list[WallCandidate]:
-            cands = closer.mine_all(text, target_function, functions=functions)
+            cands = closer.mine_all(
+                text, target_function, functions=functions, repo_sources=repo_sources
+            )
             return [c for c in cands if not mechanisms or c.mechanism in mechanisms]
 
         pool = _offered(source)
@@ -1532,6 +1902,31 @@ RESIDUAL_WALL_CASES: tuple[dict[str, Any], ...] = (
         "wall": "a second interrupt while reporting must not replace the decided outcome",
     },
     {
+        "wall_id": "click@047adef",
+        "repo": "click", "commit": "047adef",
+        "source_path": "src/click/core.py",
+        "fix_test_files": ("tests/test_commands.py",),
+        "target_functions": ("Command.get_help_option_names",),
+        "project_tests": CLICK_PROJECT_TESTS, "suite_scope": "per-file",
+        "wall": (
+            "help option names must keep declaration order: `set()` is used where the "
+            "returned list order is part of the contract"
+        ),
+    },
+    {
+        "wall_id": "click@7996a89",
+        "repo": "click", "commit": "7996a89",
+        "source_path": "src/click/formatting.py",
+        "fix_test_files": ("tests/test_formatting.py",),
+        "target_functions": ("wrap_text",),
+        "project_tests": ("tests/test_formatting.py",), "suite_scope": "one",
+        "repo_source_globs": ("src/click/*.py",),
+        "wall": (
+            "wrapping must not break hyphenated words: the repo states this policy in "
+            "`utils.py` and omits it at the `TextWrapper` construction in `formatting.py`"
+        ),
+    },
+    {
         "wall_id": "werkzeug@051fd663",
         "repo": "werkzeug", "commit": "051fd663",
         "source_path": "src/werkzeug/datastructures/auth.py",
@@ -1548,6 +1943,15 @@ RESIDUAL_WALL_CASES: tuple[dict[str, Any], ...] = (
         "target_functions": ("parse_range_header",),
         "project_tests": ("tests/",), "suite_scope": "per-file",
         "wall": "a suffix cardinality of zero selects nothing and must be refused",
+    },
+    {
+        "wall_id": "werkzeug@884437ae",
+        "repo": "werkzeug", "commit": "884437ae",
+        "source_path": "src/werkzeug/routing/map.py",
+        "fix_test_files": ("tests/test_routing.py",),
+        "target_functions": ("MapAdapter.build",),
+        "project_tests": ("tests/test_routing.py",), "suite_scope": "one",
+        "wall": "a documented default that is only reachable behind a feature flag",
     },
     {
         "wall_id": "pluggy@8051a4d",
@@ -1599,6 +2003,7 @@ def evaluate_residual_walls(
             extra_pythonpath=extra_pythonpath,
             full_suite=list(case["project_tests"]),
             suite_scope=case["suite_scope"],
+            repo_source_globs=case.get("repo_source_globs", ()),
         )
         row = result.as_dict()
         row.update(

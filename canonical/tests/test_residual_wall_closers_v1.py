@@ -25,6 +25,8 @@ from canonical.swe_kernel.residual_wall_closers_v1 import (
     CLICK_PROJECT_TESTS,
     RESIDUAL_WALL_CASES,
     AssertContractToTypedRaise,
+    ConfigParityFromRepoIdiom,
+    DocstringDefaultUngating,
     EmptyContainerPrefixArm,
     NoneGuardToTruthiness,
     OptionalTupleShapeCompletion,
@@ -302,6 +304,49 @@ class OptionalTupleShapeCompletionTests(unittest.TestCase):
         )
 
 
+class DocstringDefaultUngatingTests(unittest.TestCase):
+    SOURCE = textwrap.dedent(
+        '''
+        class Adapter:
+            def build(self, force_external=False, subdomain_matching=False, host_matching=False):
+                """This produces relative URLs (path only, no host) by default.
+
+                When subdomain or host matching is enabled, the URL is absolute unless the
+                endpoint is on the same host.
+                """
+                if not force_external and (subdomain_matching or host_matching) and (
+                    (subdomain_matching and True) or (host_matching and False)
+                ):
+                    return "relative"
+                return "absolute"
+        '''
+    )
+
+    def test_the_documented_default_becomes_reachable_with_the_flag_off(self) -> None:
+        cands = DocstringDefaultUngating().mine(self.SOURCE, "Adapter.build")
+        self.assertEqual(len(cands), 1)
+        patch = cands[0].patched_module_source
+        self.assertIn("not (subdomain_matching or host_matching)", patch)
+        # The flag must be an OR with the behaviour, never a conjunct: conjoining
+        # `not flag` would demand the flag be off AND the behaviour hold.
+        self.assertIn(" or ", patch.split("if ", 1)[1].split(":", 1)[0])
+        ast.parse(patch)
+        self.assertIn("by default", cands[0].evidence[0])
+
+    def test_a_method_whose_docstring_states_no_default_is_left_alone(self) -> None:
+        source = textwrap.dedent(
+            '''
+            class Adapter:
+                def build(self):
+                    """Build a URL."""
+                    if not (1 or 2) and (3 or 4):
+                        return "x"
+                    return "y"
+            '''
+        )
+        self.assertEqual(DocstringDefaultUngating().mine(source, "Adapter.build"), [])
+
+
 class PostconditionStatePurgeTests(unittest.TestCase):
     SOURCE = textwrap.dedent(
         '''
@@ -517,9 +562,89 @@ class SyntheticSuiteAdmissionTests(unittest.TestCase):
             self.assertEqual(result.final_failures, 0)
 
 
+class ConfigParityFromRepoIdiomTests(unittest.TestCase):
+    """The repository's own usage is the evidence; nothing is inferred from outside it."""
+
+    SIBLING = """
+import textwrap
+
+
+def shorten(text, max_length):
+    return textwrap.shorten(text, max_length, placeholder="...", break_on_hyphens=False)
+"""
+
+    TARGET = """
+import textwrap
+
+
+def fill(text, width):
+    wrapper = textwrap.TextWrapper(
+        width,
+        replace_whitespace=False,
+    )
+    return wrapper.fill(text)
+"""
+
+    def test_policy_stated_elsewhere_is_re_emitted_here(self) -> None:
+        closer = ConfigParityFromRepoIdiom()
+        cands = closer.mine_for_pair(self.TARGET, "fill", [self.SIBLING, self.TARGET])
+        self.assertEqual(len(cands), 1)
+        self.assertIn("break_on_hyphens=False", cands[0].new_code)
+        self.assertEqual(cands[0].mechanism, "CONFIG_PARITY_FROM_REPO_IDIOM")
+        self.assertTrue(
+            any("break_on_hyphens=False" in e for e in cands[0].evidence),
+            cands[0].evidence,
+        )
+
+    def test_no_sibling_statement_means_no_candidate(self) -> None:
+        """Without the repository saying it, the closer must stay silent."""
+        closer = ConfigParityFromRepoIdiom()
+        cands = closer.mine_for_pair(self.TARGET, "fill", [self.TARGET])
+        self.assertEqual(cands, [])
+
+    def test_a_policy_the_object_does_not_accept_is_not_invented(self) -> None:
+        closer = ConfigParityFromRepoIdiom()
+        bogus = """
+import textwrap
+
+
+def shorten(text, n):
+    return textwrap.shorten(text, n, break_on_hyphens=False, not_a_real_kwarg=False)
+"""
+        cands = closer.mine_for_pair(self.TARGET, "fill", [bogus, self.TARGET])
+        for cand in cands:
+            self.assertNotIn("not_a_real_kwarg", cand.new_code)
+
+    def test_already_matching_call_sites_produce_nothing(self) -> None:
+        closer = ConfigParityFromRepoIdiom()
+        already = self.TARGET.replace(
+            "        replace_whitespace=False,\n",
+            "        replace_whitespace=False,\n        break_on_hyphens=False,\n",
+        )
+        self.assertEqual(closer.mine_for_pair(already, "fill", [self.SIBLING, already]), [])
+
+
+class HonestOpenWallTests(unittest.TestCase):
+    """A wall the engine cannot close must be registered, not quietly dropped."""
+
+    def test_both_unclosed_walls_are_registered(self) -> None:
+        ids = {c["wall_id"] for c in RESIDUAL_WALL_CASES}
+        self.assertIn("click@7996a89", ids)
+        self.assertIn("click@047adef", ids)
+
+    def test_the_config_parity_wall_declares_the_repository_globs(self) -> None:
+        case = next(c for c in RESIDUAL_WALL_CASES if c["wall_id"] == "click@7996a89")
+        self.assertEqual(case["repo_source_globs"], ("src/click/*.py",))
+        # Every other wall works from its own file alone.
+        for other in RESIDUAL_WALL_CASES:
+            if other["wall_id"] != "click@7996a89":
+                self.assertEqual(other.get("repo_source_globs", ()), ())
+
+
+
 class CaseListTests(unittest.TestCase):
     def test_every_declared_wall_names_its_evidence_and_its_suite(self) -> None:
-        self.assertEqual(len(RESIDUAL_WALL_CASES), 7)
+        self.assertEqual(len(RESIDUAL_WALL_CASES), 10)
         for case in RESIDUAL_WALL_CASES:
             self.assertTrue(case["wall_id"])
             self.assertTrue(case["fix_test_files"])
