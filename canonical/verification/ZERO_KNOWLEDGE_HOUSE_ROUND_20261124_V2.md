@@ -203,3 +203,56 @@ Rejected alternatives, and why:
   statement-level failures at all, and it should not be presented as if it had.
 - Statement-level morphisms are Python-only in this version; the C/C++/JS path still uses expression-level UIR
   laws. That is a real limitation, not a rounding error.
+
+
+---
+
+## 8. Round V3 — the statement bottleneck, attacked and only half-crossed
+
+**What was built.** `canonical/swe_kernel/spec_contract_synthesis_v1.py`. A `DID NOT RAISE` failure has no wrong
+expression to blame; the program is missing a statement. The test states the contract exactly —
+`with pytest.raises(TypeError, match="plugin must not be None"): pm.register(None)` — so the mechanism mines the
+exception type and message from the test's expectation, mines the *call* and its literal argument, binds the
+callee to the owning function through the project's own CPG by name and arity, and emits the guard:
+
+```python
+def register(self, plugin, name=None):
+    if plugin is None:
+        raise TypeError("plugin must not be None")
+```
+
+Refusals are explicit: non-boundary literals (one test's data) are not contracts; a callee that resolves to more
+than one project function is refused rather than guessed; and a guard that does not leave the whole suite green is
+rejected by the suite itself. A new engine pass (`VERIFIED__SPEC_CONTRACT_GUARD`) wires it in, and the accepted
+guard is crystallized into the L2 morphism store.
+
+**What it earned on the blind benchmark: nothing.**
+
+| commit | outcome | why |
+|---|---|---|
+| pluggy@8051a4d | **still OPEN** | the correct guard *was* synthesized, applied, and verified as progress — and the suite still failed, because the same commit also requires `pm.register(42, name='abc')` to raise `ValueError`. One commit, **two** contracts; the pass stops after one. |
+| click@c53d373 | still OPEN | its `pytest.raises` contracts are not the failing behaviour (prompt/abort interaction); no guard closes the failures |
+| the other 9 verified commits | **9/9 re-verified** | the new pass runs first on every pytest repo and changed no outcome |
+
+So the honest state is: **9/13 (69.23%)**, unchanged, with zero regressions and the whole suite green
+(`9 passed in 44.32 s`).
+
+**Why this is progress anyway, and where the line is.** The mechanism is not a bigger grammar: it reads a
+specification the test already publishes and writes the statement that satisfies it. It is the first time the
+engine has produced a *statement* rather than an expression. What it cannot yet do is produce the **second**
+statement in the same function, and the closest miss proves that this is exactly the gap — a boundary guard
+plus a type guard, both in `register`, both stated by the same test module.
+
+**The next bottleneck, from the evidence.** Compositional contract accumulation: accept a guard that strictly
+shrinks the failing-test set (the Pareto-subset rule the CEGIS loop already uses), re-mine contracts against what
+is left, and derive type guards from the callee's own annotation vocabulary rather than from a literal. That is
+one mechanism, not a family of rules.
+
+Rejected in this round, with reasons:
+- *Admitting non-boundary literals as guards* (`if plugin == 42`) — that is a test's data written into the
+  program, the same laundering the nexus gate exists to stop.
+- *Guessing the exception message from the repo's existing messages* — the test already states it exactly;
+  mining the repo would be strictly worse.
+- *Loosening the "whole suite must pass" acceptance to "the failing test now passes"* — measured on
+  pluggy@8051a4d: the guard passes its target test and the commit is still broken, which is precisely the
+  regression class the strict gate catches.

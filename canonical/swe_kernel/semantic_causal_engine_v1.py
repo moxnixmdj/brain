@@ -4172,6 +4172,62 @@ def repair_project_causally(
                         baseline_failure_excerpt=base_out[-400:],
                     )
 
+        # 3.4 Specification-contract pass — the test's own `pytest.raises` is the missing contract.
+        #
+        # A `DID NOT RAISE` failure has no wrong expression to blame: the program is missing a
+        # statement. The test states which exception it expects, for which call, on which argument;
+        # that is a specification, and the guard that enforces it is one line.
+        spec_module = None
+        if is_pytest:
+            try:
+                from canonical.swe_kernel import spec_contract_synthesis_v1 as spec_module  # noqa: PLC0415
+            except Exception:
+                spec_module = None
+        if spec_module is not None:
+            test_sources: list[str] = []
+            seen_paths: set[str] = set()
+            for node_id in initial_failed_nodes:
+                rel = node_id.split("::", 1)[0]
+                if rel and rel not in seen_paths and (root / rel).is_file():
+                    seen_paths.add(rel)
+                    test_sources.append((root / rel).read_text(encoding="utf-8", errors="replace"))
+            for guard_sel in spec_module.synthesize_spec_guards(root, cpg, test_sources):
+                if evaluated >= max_candidates:
+                    break
+                g_tag, g_fn, g_fn_cpg, g_patched = guard_sel
+                evaluated += 1
+                if not _verify_candidate({g_fn_cpg.rel_path: g_patched}):
+                    continue
+                if skill_store is not None:
+                    body_site = next((st for st in g_fn_cpg.sites if st.kind == "func_body"), None)
+                    if body_site is not None:
+                        patched_body = g_patched[
+                            body_site.start_byte:
+                            len(g_patched) - (len((root / g_fn_cpg.rel_path).read_bytes()) - body_site.end_byte)
+                        ].decode("utf-8", errors="replace")
+                        try:
+                            skill_store.learn(
+                                body_site.source_text, patched_body, origin=origin,
+                                diagnostic_class="SPEC_CONTRACT_GUARD",
+                            )
+                        except Exception:
+                            pass
+                patched_str = g_patched.decode("utf-8")
+                if apply_in_place:
+                    (root / g_fn_cpg.rel_path).write_bytes(g_patched)
+                return CausalRepairResult(
+                    repaired=True,
+                    status="VERIFIED__SPEC_CONTRACT_GUARD",
+                    rel_path=g_fn_cpg.rel_path,
+                    func_name=g_fn,
+                    mechanism=g_tag,
+                    patched_files={g_fn_cpg.rel_path: patched_str},
+                    causal_chain=[f"{g_fn_cpg.rel_path}:{g_fn}"],
+                    candidates_evaluated=evaluated,
+                    elapsed_ms=round((time.perf_counter_ns() - t0) / 1e6, 2),
+                    baseline_failure_excerpt=base_out[-400:],
+                )
+
         # 3.5 Causal Nexus pass — expected-value abduction + single-site counterfactual proof.
         #
         # The failing assertion publishes the value it wanted. Forcing that literal at one suspect

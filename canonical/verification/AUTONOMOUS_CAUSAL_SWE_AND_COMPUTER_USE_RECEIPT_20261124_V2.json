@@ -101,6 +101,12 @@
       "resolve_rate": 0.6923,
       "verified": 9
     },
+    "stage_c_after_spec_contracts": {
+      "flipped": [],
+      "note": "all 9 re-verified with the new pass in place",
+      "resolve_rate": 0.6923,
+      "verified": 9
+    },
     "total_graded": 20,
     "total_verified": 9,
     "verified_tasks": [
@@ -173,6 +179,7 @@
   "branch": "arena/1412289d-brain",
   "generated_at_utc": "2026-11-25T02:04:44Z",
   "honest_verdict": [
+    "Round V3 (this commit): the specification-contract mechanism earned no blind commit. pluggy@8051a4d is the closest miss and the reason is measured, not guessed -- it needs two contracts, one of them type-level.",
     "Stage A (before frame provenance): 8/13, exactly reproducing V1 with zero regressions.",
     "Stage B (after frame provenance): 9/13 = 69.23%. One previously-open blind commit flipped: click@05f6fd0.",
     "That flip is the only blind commit any new mechanism earned, and it was earned by provenance rather than breadth.",
@@ -198,12 +205,25 @@
       "lines": 4412,
       "sha256": "2b80befb0119a44d0368444f69cb4106c94644fdc2f9543a749351f6fe2fe74c"
     },
+    "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
+      "lines": 318,
+      "sha256": "f6b093f82418b7147744286a794a047e9fb4e1f08dc10c02c55fff3e7989d1b7"
+    },
     "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
       "lines": 932,
       "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
     }
   },
   "new_mechanisms": [
+    {
+      "blind_diagnosis": "pluggy@8051a4d: the correct guard WAS synthesized and applied, and the suite still failed because that commit also requires a type-level contract on the same method (`pm.register(42, name='abc')` must raise ValueError). One commit, two contracts; the pass currently stops after one.",
+      "earned_a_blind_oss_commit": false,
+      "evidence": "fixture end to end: status VERIFIED__SPEC_CONTRACT_GUARD, guard `if plugin is None: raise TypeError(\"plugin must not be None\")` inserted into the owning method; unit: both contract forms mined",
+      "id": "SPEC_CONTRACT_GUARD",
+      "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "verified_here": true,
+      "what": "mine the test's own `pytest.raises(Exc, match=...)` plus the literal it calls with, bind the callee to a project function through the CPG by name and arity, and emit the one-line guard-and-raise that enforces it; refuse non-boundary literals, ambiguous callees, and any guard the project's own suite does not accept"
+    },
     {
       "earned_a_blind_oss_commit": true,
       "evidence": "click@05f6fd0 repaired blind in 10.88 s with 1 candidate, yielding (None or (self.make_metavar(ctx), '')) -- no 'SRC' literal in the patch",
@@ -303,16 +323,16 @@
     }
   ],
   "next_bottleneck": {
-    "evidence_that_this_is_the_bottleneck": "pluggy@50585e0, pluggy@8051a4d, more-itertools@c629214 and cJSON@9d1b229086 each fail on a missing statement, not a wrong value",
-    "mechanism": "statement-level differential synthesis: mine the project's own statement shapes at the nexus site, splice a guard/assignment whose postcondition is the proven value, and prove it with the same CoW counterfactual before any suite run",
-    "statement": "the engine can now name the value it needs, but it still cannot invent the statement that carries it (a new guard, a new bookkeeping assignment, a new early return)"
+    "evidence_that_this_is_the_bottleneck": "pluggy@8051a4d produces a correct TypeError guard for register(None) and still fails on register(42, name='abc'), which needs a second, type-level guard",
+    "mechanism": "compositional contract accumulation: accept a guard that strictly reduces the failing-test set (the Pareto-subset rule the CEGIS loop already uses), then re-mine contracts against the remaining failures, and derive type guards from the callee's own annotation vocabulary",
+    "statement": "the engine can now enforce one boundary contract per method, but a real fix often needs two contracts (a boundary guard plus a type guard) and the pass stops after the first"
   },
   "runtime_model_calls": 0,
   "runtime_network_calls": 0,
   "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
   "stored_world_facts_in_weights": 0,
   "tests": {
-    "causal_suite": "8 passed in 41.81 s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+    "causal_suite": "9 passed in 44.32s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
     "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
     "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
     "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
