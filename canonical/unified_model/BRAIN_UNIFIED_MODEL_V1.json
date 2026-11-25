@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c2aba955d1568368ffa3d205094a65b0ba0cee396d4226af75f9625c4d08abd9"
+  "value": "e337d84349a224d58cb1ad8abd5d3c6f0fba9b68b3d5fa569830195d7b8a9d86"
  },
  "engines": [
   {
@@ -257950,18 +257950,18 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "6c244d4ad3cdaf15e148e9ccdaad800c8475a3b26bca8af11aa8080b23e91c0d",
+   "sha256": "ecfa87891264a16e34e79819f6412d5a7bcdb9a1a6fe9bca51d480825c574380",
    "status": "",
    "terms": {
     "20261124": 1,
+    "a_false_general_claim_is_now_falsified_by_committed_receipts__the_solver_is_measured_at_0_of_28_tasks_on_the_wider_set_0_of_6_on_the_ceiling_set_and_0_of_3_on_the_calibration_set_while_file_level_localisation_reaches_top_one_on_17_of_28_and_line_level_localisation_reaches_the_correct_line_first_on_1_of_28__so_the_rounds_that_follow_can_no_longer_treat_generation_as_the_only_missing_component": 1,
     "call": 1,
     "every_generation_mechanism_built_in_seven_rounds_failed_to_convert_the_one_component_that_generalises_file_localisation_into_a_solve_and_no_round_had_measured_where_in_a_file_the_edit_belongs_so_the_failure_was_over_determined": 1,
-    "honest_measurement_of_a_zero_model_call_solver_rather_than_a_score_claim": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
     "integrate": 1,
     "measure": 1,
     "measure_what_a_zero_model_call_solver_reaches_20261124_v1": 1,
     "model": 1,
-    "none_claimed": 1,
     "reaches": 1,
     "solver": 1,
     "v1": 1,
