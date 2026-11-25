@@ -1,6 +1,6 @@
-# SWE-bench Pro V2 (HARD-51) — engine eval (measured run)
+# SWE-bench Pro V2 (smoke: 3 qutebrowser HARD-51 tasks) — engine eval (measured run)
 
-- upstream/eval commit recorded by CI: `337c64a8df7f0129d6be0629626508ee9cb2e662`
+- upstream/eval commit recorded by CI: `003e43dff429e8dad992c5658b05ccba49e47923`
 - Resolve decisions come from each task's own verifier inside the official container image.
 - `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.
 
