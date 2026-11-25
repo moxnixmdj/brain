@@ -61,5 +61,46 @@
       "NETWORK": 3
     },
     "confinement_or_source_gate_deliberate_refusals": 0
+  },
+  "live_github_actions_harbor_docker_smoke": {
+    "workflow": ".github/workflows/frontier_smoke_eval.yml",
+    "branch": "arena/06dc079e-brain",
+    "head_sha": "33f591f8",
+    "run_id": 45537959351,
+    "job_id": 138949134648,
+    "harbor_revision": "39c2219a41b3caa7a689cef1882263b5a93ae93f",
+    "swe_bench_pro_revision": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "docker_confinement": {
+      "network_mode": "none",
+      "ipc": "private",
+      "cap_drop": [
+        "ALL"
+      ],
+      "brain_mount": "/opt/brain-ro:ro"
+    },
+    "selected_count": 2,
+    "issues": [],
+    "rows": [
+      {
+        "task": "instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e",
+        "producer_present": true,
+        "replay_present": true,
+        "patch_bytes": 0,
+        "agent_status": "BLOCKED_NO_MODEL_PROPOSAL",
+        "rewards": {
+          "reward": 0.0
+        }
+      },
+      {
+        "task": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "producer_present": true,
+        "replay_present": true,
+        "patch_bytes": 0,
+        "agent_status": "BLOCKED_NO_MODEL_PROPOSAL",
+        "rewards": {
+          "reward": 0.0
+        }
+      }
+    ]
   }
 }
