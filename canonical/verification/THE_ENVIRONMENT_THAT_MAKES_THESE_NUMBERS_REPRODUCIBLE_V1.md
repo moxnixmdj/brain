@@ -60,3 +60,20 @@ nothing in the sweep ever needed it. The first time a held-out werkzeug row
 failed to import and the row came back `NO_PASSING_TEST` -- a harness verdict that reads
 exactly like an engine verdict. Pin it, and re-read any `NO_PASSING_TEST` / `NO_ORACLE`
 row as "the harness produced no evidence" rather than "the engine cannot do this".
+
+
+## Added 2026-11-24, later: requests
+
+`pip install requests` in the driver venv.
+
+**This one was worth two rows.** After `markupsafe` was pinned, the next held-out row
+(werkzeug `d03b9777`, `tests/test_useragents.py`) failed with
+`ModuleNotFoundError: No module named 'requests'` -- also reported as `NO_ORACLE`.
+With it installed the row produces a real oracle (2 failed, 1 passed) and the row is
+attemptable.
+
+Both missing pins were found only by running rows that had never been run before. The
+corpus was built from rows that happened to work, so **the corpus cannot discover its own
+missing dependencies**. Every new held-out row is also an environment probe, and a
+`NO_ORACLE` / `NO_PASSING_TEST` verdict should be treated as "check the venv" before it is
+recorded as anything about the engine.
