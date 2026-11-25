@@ -9,11 +9,15 @@ Frontier figures taken **only** from the benchmark owners' own leaderboards.
 
 ## 0. The one-sentence answer
 
-**The frontier wins 9 of 14 capability families outright. We win 2 on narrow but genuinely
-measured properties (external-store skill reuse; verification independence). 3 are unsettled
-because we have no comparable score at all.** Our most advanced code is not on `main`, and
-where we and the frontier both ran the *same public benchmark*, we score **0** and they score
-**31–43 out of 51**.
+**The frontier wins 9 of 14 capability families outright. We win 3 on narrow but genuinely
+measured properties (external-store skill reuse; verification independence; calibrated
+refusal). 2 are unsettled because we have no comparable score at all.** Our most advanced code
+is not on `main`, and where we and the frontier both ran the *same public benchmark*, we score
+**0** and they score **31–43 out of 51**.
+
+**One correction, added after reading the harness (§6a): that 0/51 is a real score but an
+uninterpretable one — the harness never passed `test_targets` to the engine, and it discards
+the one field that would tell us which of three failure modes we hit.**
 
 ---
 
@@ -185,8 +189,10 @@ Two things I will not do: call 0/51 "early progress," or quote 54/54 without 0/5
 
 Not a mystery, and not a lack of modules. Three specific, checkable facts:
 
-1. **The engine produces no edit on 44 of 51 real tasks** (`NO_EDITS`). Everything downstream
-   is unreachable. This is a *localization/triggering* failure, not a *repair* failure.
+1. **The engine produces no edit on 43–44 of 51 real tasks** (`NO_EDITS`), and **we cannot say
+   which of three different causes it was**, because the harness discards the reason.
+   See §6a — this is the most important finding in this document and it revises the
+   first version of this section.
 2. **OSWorld was never run.** `hard_benchmark_tasks_consumed: 0`, 8 blockers, 40 services
    composed, 0 containers started. Family 7 and 9 are therefore not "weak" — they are **unmeasured**.
 3. **The zero-model claim has a qualifier that is still open.** The census says
@@ -197,7 +203,56 @@ Not a mystery, and not a lack of modules. Three specific, checkable facts:
 
 ---
 
-## 7. Bottom line
+## 6a. CORRECTION — the 0/51 is uninterpretable, and that is our fault
+
+I read the harness after writing §6. My first diagnosis ("localization failure") was a guess
+and I should not have stated it. Here is what the code actually does.
+
+**`canonical/eval/harbor/swebench_pro_v2_agent.py` line 462 does this:**
+
+```python
+result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+```
+
+`inputs` = `{workspace, python_exe, allow_web, timeout_s}`. **There is no `test_targets`.**
+The engine's entire repair machinery — `solve_repository`, `localize_faults`, all 90+ laws,
+the CoW forks, the mental model — is keyed on `test_targets` arriving from
+`inputs["pytest_targets"]` (line 1090 of `brain_unified_model_v1.py`). On this benchmark path
+it is **never passed**.
+
+Two controls confirm what that costs:
+
+- Every `EDITS_UPLOADED` trial applied **1 file** and `engine_pass: True`. A repair engine
+  that locates, patches, and re-runs a sealed test suite cannot be 100%-passing on 4 different
+  unfamiliar codebases. `engine_pass: True` is the honest engine reporting *"I produced
+  something I could check against nothing"* — not a repair.
+- The **blind issue-reproducer does not need `test_targets`** — it synthesizes its own
+  reproducer from the issue text, which is exactly the SWE-bench Pro distribution. It *is*
+  wired into the kernel (`universal_epistemic_kernel_v1.py:5493`). It returns
+  `status: NO_QUALIFIED_REPRODUCER`, `verified: False`.
+
+**And that reason is thrown away.** `engine_diagnosis()` copies `modality/status/mode/
+reason/explanation` from the result — but the reproducer writes its outcome into a *nested*
+dict (`{"blind_py": ...}`), never into those keys. So the per-task table shows
+`FAIL_CLOSED` ×43 and cannot tell us whether:
+
+1. the reproducer found **no** qualifying reproducer (`NO_QUALIFIED_REPRODUCER`),
+2. it found one but could not **solve** (`UNSOLVED`), or
+3. it solved and the **regression check rejected** it (`REGRESSION_REJECTED`).
+
+Those are three completely different engineering problems with three different fixes. **We
+spent a 51-task benchmark run and did not learn which one we have.** That is the single
+largest defect this audit found, and it is a design defect, not a capability defect.
+
+### What this changes
+
+- I can no longer say the 0/51 is a "localization failure." I can only say: **0/51, cause
+  unmeasured.**
+- The 0/51 **stands as a score** — the oracle and nop gates prove the harness is sound, and a
+  score does not care why. But it is currently a dead end operationally.
+- Nothing in §7's conclusions changes: the frontier still wins 9 of 14 families.
+
+
 
 - Our **best** capability is external-store skill reuse with provable isolation — real, small.
 - Our **best-verified** property is that we never claim a false success — real, and it does not
