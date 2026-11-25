@@ -1,0 +1,30 @@
+{
+  "schema": "BRAIN_UNSEEN_ROWS_V1",
+  "note": "Commits named by the incoming plan that are NOT in the 45-commit corpus. Added so they can be attempted without leaking which fix belongs to which commit into the engines.",
+  "tasks": [
+    {
+      "repo": "werkzeug",
+      "commit": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "test": "tests/test_routing.py",
+      "sources": [
+        "src/werkzeug/routing/map.py"
+      ],
+      "old_line": "and (self.map.subdomain_matching or self.map.host_matching)",
+      "new_line": "not (self.map.subdomain_matching or self.map.host_matching)",
+      "expression_pair": true,
+      "subject": "fix boolean logic for external url"
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "test": "tests/test_http.py",
+      "sources": [
+        "src/werkzeug/datastructures/auth.py"
+      ],
+      "old_line": "return self.type.title()",
+      "new_line": "if not self.parameters:\\n            return self.type.title()",
+      "expression_pair": true,
+      "subject": "fix trailing whitespace in WWW-Authenticate bearer"
+    }
+  ]
+}

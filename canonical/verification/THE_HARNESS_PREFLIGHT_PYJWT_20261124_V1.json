@@ -1,0 +1,70 @@
+{
+  "results": [
+    {
+      "repo": "pyjwt",
+      "commit": "93f187f8ea503f5d1d0ea197f5e950fac37db1cb",
+      "passing": 85,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "381a15a21fafb54348e4abc7f354eb5486509a93",
+      "passing": 71,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "9a20ab3f7011e0afaf148264764fdefb8669e9a7",
+      "passing": 52,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "541dd0dd8cafacc0aff9fa36cf04251c535f69eb",
+      "passing": 52,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "d3219c5c2e4dea78955080afaaf251dd3e61bc01",
+      "passing": 52,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "9324d6f007bbd0a48edafe1889d0af7eb0064103",
+      "passing": 17,
+      "failing": 0,
+      "verdict": "NO_FAILING_TEST__ROW_IS_NOT_A_BUG_FIX",
+      "cause": "the commit's test file passes on the parent"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "2fec85102ed8b149cbb3705305509db55d95b351",
+      "passing": 0,
+      "failing": 0,
+      "verdict": "NO_ORACLE__ENVIRONMENT",
+      "cause": "PYTEST_CONFIG_SECTION",
+      "evidence": "[pytest] section in setup.cfg files is no longer supported"
+    },
+    {
+      "repo": "pyjwt",
+      "commit": "256a03e5086049ee63d436fd0b07837e1a6c0f18",
+      "passing": 0,
+      "failing": 0,
+      "verdict": "NO_ORACLE__ENVIRONMENT",
+      "cause": "PYTEST_CONFIG_SECTION",
+      "evidence": "[pytest] section in setup.cfg files is no longer supported"
+    }
+  ]
+}

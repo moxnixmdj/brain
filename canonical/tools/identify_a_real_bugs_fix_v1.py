@@ -83,6 +83,41 @@ def failing_tests(verdicts: dict[str, str]) -> list[str]:
     return [name for name, verdict in verdicts.items() if verdict in FAILURE_VERDICTS]
 
 
+def assert_module_provenance(worktree: pathlib.Path, module: str,
+                             seconds: int = 30) -> dict[str, object]:
+    """Prove the suite is importing the worktree, not an installed copy.
+
+    Five src-layout packages in this corpus (click, packaging, pluggy, urllib3, attr)
+    are also installed from PyPI into the driver venv at versions that differ from the
+    corpus commits. `PYTHONPATH="src:."` is what makes the worktree win; without it
+    every patch would be compiled into `src/` and never imported, and the suite would
+    report PASSED against a different version of the library. Measured directly:
+
+        packaging worktree, no PYTHONPATH   -> site-packages/packaging
+        packaging worktree, PYTHONPATH=src:. -> <worktree>/src/packaging
+
+    This function turns that silent failure mode into a loud one. It is cheap (one
+    interpreter start) and should be run on at least one row per repository.
+    """
+    probe = "import %s as m; print('PROVENANCE=' + (m.__file__ or ''))" % module
+    try:
+        done = subprocess.run([sys.executable, "-c", probe], cwd=worktree,
+                              capture_output=True, text=True, errors="replace",
+                              timeout=seconds, stdin=subprocess.DEVNULL,
+                              env={**__import__("os").environ, **fresh_bytecode(worktree)})
+    except subprocess.TimeoutExpired:
+        return {"ok": False, "reason": "timeout", "module": module}
+    location = ""
+    for line in (done.stdout or "").splitlines():
+        if line.startswith("PROVENANCE="):
+            location = line.split("=", 1)[1].strip()
+    inside = bool(location) and pathlib.Path(location).resolve().is_relative_to(
+        worktree.resolve())
+    return {"ok": inside, "module": module, "location": location,
+            "reason": "imports the worktree" if inside else
+                      ("imports " + (location or "unknown") + " -- CONTAMINATED")}
+
+
 def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
     """No bytecode, in either direction, for any run of the oracle.
 

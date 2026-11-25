@@ -303,7 +303,10 @@ def right_question(env: Any, scan_result: Mapping[str, Any],
 # --------------------------------------------------------------------------- #
 
 def plan(learned: Mapping[str, Any], goal_predicate: Callable[[Any], bool],
-         observations: Mapping[str, Any], is_goal_key: Callable[[str], bool] | None = None) -> dict[str, Any]:
+         observations: Mapping[str, Any], is_goal_key: Callable[[str], bool] | None = None,
+         screen: bool = False,
+         invariants: Sequence[tuple[str, Callable[[Mapping[str, Any]], bool]]] | None = None,
+         goal_score: Callable[[Mapping[str, Any]], Any] | None = None) -> dict[str, Any]:
     """Shortest plan over the learned model. The goal predicate is over the
     environment's own observations, exactly as environment_learning does it.
     """
@@ -338,9 +341,96 @@ def plan(learned: Mapping[str, Any], goal_predicate: Callable[[Any], bool],
     if plan_actions is None:
         return {"schema": SCHEMA, "status": "OPEN__MODEL_LEARNED_GOAL_UNREACHABLE",
                 "plan": None}
-    return {"schema": SCHEMA, "status": "PASS__PLAN_COMPUTED",
-            "plan": [str(a) for a in plan_actions], "plan_length": len(plan_actions),
-            "goal_states_observed": len(goal_states)}
+    out = {"schema": SCHEMA, "status": "PASS__PLAN_COMPUTED",
+           "plan": [str(a) for a in plan_actions], "plan_length": len(plan_actions),
+           "goal_states_observed": len(goal_states)}
+    if screen:
+        out["plan_sim"] = screen_plan(learned, [str(a) for a in plan_actions],
+                                      invariants=invariants, goal=goal_score)
+        # a plan that violates an invariant in simulation is NOT a plan
+        if out["plan_sim"].get("viable") is False:
+            out["status"] = "REFUSED__PLAN_FAILS_DELTA_SIMULATION"
+    return out
+
+
+def _numeric_leaves(obs: Any, prefix: str = "") -> dict[str, float]:
+    """Flatten an observation into ``name -> number`` for the delta simulator."""
+    flat: dict[str, float] = {}
+    if isinstance(obs, Mapping):
+        items = obs.items()
+    elif isinstance(obs, (list, tuple)):
+        items = ((str(i), v) for i, v in enumerate(obs))
+    else:
+        items = ()
+    for k, v in items:
+        name = f"{prefix}.{k}" if prefix else str(k)
+        if isinstance(v, bool):
+            flat[name] = float(v)
+        elif isinstance(v, (int, float)):
+            flat[name] = float(v)
+        else:
+            flat.update(_numeric_leaves(v, name))
+    return flat
+
+
+def screen_plan(learned: Mapping[str, Any], plan_actions: Sequence[str], *,
+                invariants: Sequence[tuple[str, Callable[[Mapping[str, Any]], bool]]] | None = None,
+                goal: Callable[[Mapping[str, Any]], Any] | None = None) -> dict[str, Any]:
+    """Fast in-memory delta simulation of a candidate plan.
+
+    The environment is NEVER touched: the frame is reconstructed from the
+    observations the scan already recorded, and each step's delta is the
+    difference between the two recorded observations its transition connects.
+    ``DeltaSim`` then replays the whole plan in memory and reports whether it
+    survives every invariant -- the "will this plan destroy something I need
+    later?" question, answered before anything is executed.
+    """
+    from canonical.swe_kernel.guarded_meaning_ir_v1 import Action, DeltaSim
+
+    model = learned.get("model") or {}
+    observations = learned.get("observations") or {}
+    root = learned.get("root")
+    if root is None or not plan_actions:
+        return {"schema": SCHEMA, "status": "REFUSED__NOTHING_TO_SIMULATE",
+                "viable": None, "steps": []}
+    keys = [root]
+    cur = root
+    for action in plan_actions:
+        nxt = (model.get(cur) or {}).get(str(action))
+        if not isinstance(nxt, str):
+            return {"schema": SCHEMA, "status": "REFUSED__PLAN_LEAVES_THE_MODEL",
+                    "viable": None, "steps": [], "at_step": len(keys) - 1}
+        keys.append(nxt)
+        cur = nxt
+
+    frames = [_numeric_leaves(observations.get(k)) for k in keys]
+    start = frames[0] or {}
+    sim = DeltaSim(dict(start), invariants=list(invariants or []))
+    steps: list[dict[str, Any]] = []
+    for i, action in enumerate(plan_actions):
+        before, after = frames[i], frames[i + 1]
+        writes = tuple(("write", k) for k in after if k not in before or before[k] != after[k])
+        gone = tuple(("destroy", k) for k in before if k not in after)
+        target = dict(after)
+
+        def _apply(_f, _t=target):
+            return dict(_t)
+
+        act = Action(str(action), writes + gone, apply=_apply)
+        d = sim.apply(act)
+        bad = [name for name, fn in (invariants or []) if not fn(sim.frame)]
+        steps.append({"step": i, "action": str(action), "writes": len(writes),
+                      "destroys": len(gone), "raised": d.raises,
+                      "violated": bad})
+        if d.raises or bad:
+            sim.pop()
+            return {"schema": SCHEMA, "status": "REFUSED__PLAN_FAILS_DELTA_SIMULATION",
+                    "viable": False, "at_step": i, "reason": bad or "CRASH",
+                    "steps": steps}
+        sim.pop()
+    return {"schema": SCHEMA, "status": "PASS__PLAN_SURVIVES_DELTA_SIMULATION",
+            "viable": True, "steps": steps,
+            "goal_score": (float(goal(sim.frame)) if goal is not None else None)}
 
 
 # --------------------------------------------------------------------------- #
@@ -546,7 +636,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         prior: Mapping[str, Any] | None = None,
         local_root: str | pathlib.Path | None = None,
         tools: Sequence[str] | None = None,
-        man_root: str | pathlib.Path | None = None) -> dict[str, Any]:
+        man_root: str | pathlib.Path | None = None,
+        verify_trajectories: bool = False) -> dict[str, Any]:
     """The Perfect Algorithm: scan, remember-or-learn, PLAN, ACT, VERIFY,
     LEARN, ADMIT, SAVE, REPORT.
 
@@ -620,7 +711,8 @@ def run(env: Any, goal: str, actions: Sequence[Any],
     verified_rows = None
     stale_discarded = 0
     if prior_rows:
-        verified_rows, stale_discarded = verify_priors(env, prior_rows)
+        verified_rows, stale_discarded = verify_priors(
+            env, prior_rows, trajectories=bool(verify_trajectories))
         prior_rows = verified_rows
     try:
         scan_result = scan(env, actions, budget=budget, max_depth=max_depth,
@@ -1061,25 +1153,35 @@ def replay_code_repair(rule: Mapping[str, Any], source: str, oracle: Any,
 # --------------------------------------------------------------------------- #
 
 def verify_priors(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
-                  *, max_checks: int = 256) -> tuple[dict[str, dict[str, str]], int]:
-    """Replay the recorded root row of this prior against ``env`` and keep only
-    the transitions that actually hold here.
+                  *, max_checks: int = 256,
+                  trajectories: bool = False) -> tuple[dict[str, dict[str, str]], int]:
+    """Replay a recorded prior against ``env`` and keep only what actually holds.
 
     A prior is observed from a DIFFERENT instance of the same environment kind,
-    so a stored row is a hypothesis about this instance, not a fact. The only
-    state that can be re-reached so cheaply and soundly is the root: reset puts
-    the environment back at its standard start. So:
+    so a stored row is a hypothesis about this instance, not a fact.
 
-      - every recorded root action is re-executed against the live env;
-        a transition that replays is kept, one that does not is discarded;
-      - every row recorded for any other state is DISCARDED -- it cannot be
-        re-verified cheaply without walking the whole prior model, which is the
-        scan itself. The scan re-derives those rows against this instance.
+    ``trajectories=False`` (the default, unchanged) re-verifies the ROOT only and
+    discards every non-root row -- sound, but it throws away the whole body of a
+    learned model and forces a full blind re-scan.
 
-    Returns ``(verified_rows, discarded_rows)`` where verified_rows is keyed by
-    state key and only ever contains the root state, and discarded_rows counts
+    ``trajectories=True`` also re-verifies NON-ROOT rows by *replaying the path
+    that reaches them*: the prior model is walked breadth-first from the root,
+    every prefix is re-executed on THIS instance, and a row is kept only when
+    its own path replays to the recorded state key. A prefix that does not
+    replay invalidates the row and everything beneath it, so a stale branch is
+    still discarded rather than trusted.
+
+    Returns ``(verified_rows, discarded_rows)`` where discarded_rows counts
     every recorded transition dropped (root or non-root).
     """
+    if trajectories:
+        return _verify_priors_by_trajectory(env, prior_rows, max_checks=max_checks)
+    return _verify_priors_root_only(env, prior_rows)
+
+
+def _verify_priors_root_only(env: Any,
+                             prior_rows: Mapping[str, Mapping[str, str]]) -> tuple[dict[str, dict[str, str]], int]:
+    """The original sound-but-amnesiac policy: root row only."""
     verified: dict[str, dict[str, str]] = {}
     if not prior_rows:
         return verified, 0
@@ -1111,4 +1213,119 @@ def verify_priors(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
     # re-derives them; we never trust the store silently.
     non_root_rows = sum(len(r or {}) for k, r in prior_rows.items() if k != root_key)
     discarded = dropped + non_root_rows
+    return verified, discarded
+
+
+class _PathDiverged(Exception):
+    """Internal: a recorded path did not replay on this instance."""
+
+
+def _verify_priors_by_trajectory(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
+                                 *, max_checks: int = 256,
+                                 max_depth: int = 24) -> tuple[dict[str, dict[str, str]], int]:
+    """Verify non-root rows by replaying the path that reaches them.
+
+    Soundness argument: a row for state ``k`` is a claim about ``k``. The only
+    way to be *at* ``k`` on this instance is to re-execute a recorded path from
+    the root, so the path itself is re-verified hop by hop first. If any hop
+    lands somewhere other than the recorded state, the row is not evidence about
+    this instance and is dropped together with its whole subtree -- exactly as
+    the root-only policy would have dropped it, but without also discarding the
+    rows that DO replay.
+
+    Every recorded transition is either kept or counted as discarded, so
+    ``discarded == total - sum(len(r) for r in verified.values())`` always holds.
+    """
+    verified: dict[str, dict[str, str]] = {}
+    total = sum(len(r or {}) for r in prior_rows.values())
+    if not prior_rows:
+        return verified, 0
+    max_checks = max(max_checks, 4 * total)
+    try:
+        env.reset()
+        root_key = el.state_key(env.state())
+    except Exception:
+        return verified, total
+
+    # ---- breadth-first walk of the RECORDED model from the root ------------
+    parent: dict[str, str] = {}          # child key -> parent key
+    via: dict[str, str] = {}             # child key -> action that produced it
+    order: list[str] = [root_key]
+    seen = {root_key}
+    queue = [root_key]
+    while queue:
+        cur = queue.pop(0)
+        for action, nxt in list((prior_rows.get(cur) or {}).items()):
+            if not isinstance(nxt, str) or nxt in seen:
+                continue
+            if len(order) >= max_checks:
+                break
+            seen.add(nxt)
+            parent[nxt] = cur
+            via[nxt] = str(action)
+            order.append(nxt)
+            queue.append(nxt)
+
+    def chain_to(key: str) -> list[tuple[str, str]] | None:
+        """[(action, recorded next key), ...] from the root down to ``key``."""
+        steps: list[tuple[str, str]] = []
+        cur = key
+        for _ in range(max_depth + 1):
+            if cur == root_key:
+                steps.reverse()
+                return steps
+            if cur not in parent:
+                return None
+            steps.append((via[cur], cur))
+            cur = parent[cur]
+        return None
+
+    checks = 0
+    kept: set[str] = {root_key}
+    dropped = 0
+    for key in order:
+        row = prior_rows.get(key) or {}
+        if not row:
+            continue
+        # a row is only evidence if the state it describes was itself verified
+        if key != root_key and parent.get(key) not in kept:
+            dropped += len(row)
+            continue
+        chain = chain_to(key)
+        if chain is None:
+            dropped += len(row)
+            continue
+        verified_row: dict[str, str] = {}
+        for action, nxt in list(row.items()):
+            if not isinstance(nxt, str):
+                dropped += 1
+                continue
+            if checks >= max_checks:
+                dropped += 1
+                continue
+            checks += 1
+            try:
+                env.reset()
+                # re-verify the whole recorded path hop by hop
+                for step, recorded_key in chain:
+                    env.act(step)
+                    if el.state_key(env.state()) != recorded_key:
+                        raise _PathDiverged(recorded_key)
+                if el.state_key(env.state()) != key:
+                    raise _PathDiverged(key)
+                env.act(str(action))
+                if el.state_key(env.state()) == nxt:
+                    verified_row[str(action)] = nxt
+                else:
+                    dropped += 1
+            except _PathDiverged:
+                dropped += len(row)
+                verified_row = {}
+                break
+            except Exception:
+                dropped += 1
+        if verified_row:
+            verified[key] = verified_row
+            kept.add(key)
+    discarded = total - sum(len(r) for r in verified.values())
     return verified, discarded
