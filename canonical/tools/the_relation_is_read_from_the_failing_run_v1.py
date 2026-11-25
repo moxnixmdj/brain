@@ -612,6 +612,30 @@ BACKSLASH = chr(92)
 _REGEX_CALLS = {"compile", "match", "fullmatch", "search", "findall", "finditer", "sub", "subn", "split"}
 
 
+class _NoLinkedPattern(Exception):
+    """Raised inside the ANCHOR branch to abandon that branch ONLY.
+
+    It exists because the alternative -- `return out` -- silently disabled every relation
+    that came after it for an entire site kind."""
+
+
+def _end_anchor_edit(text: str) -> str | None:
+    """`re.compile(r"$")` -> `re.compile(r"\\Z")`, splicing INSIDE the literal.
+
+    The edit must land on the pattern's own characters. Rewriting the last character of
+    the whole expression removed the closing paren instead of the `$` and produced
+    `re.compile(r"$"\\Z,` -- a syntax error reported as a failed hypothesis, which hides
+    a working relation behind a broken splice."""
+    match = re.search(r"""(r)(["'])(.*?)\2""", text)
+    if not match:
+        return None
+    body = match.group(3)
+    if not body.endswith("$") or body.endswith(chr(92) + "$"):
+        return None
+    replacement = text[:match.start(3)] + body[:-1] + chr(92) + "Z" + text[match.end(3):]
+    return replacement
+
+
 def _regex_literal_from_text(text: str) -> str | None:
     """The pattern body of a regex CALL's source text, with its escapes decoded."""
     for candidate in re.findall(r'r"([^"]*)"|r\'([^\']*)\'', text):
@@ -1188,6 +1212,20 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
     _ = exception_type
     expression = site.text.strip()
     if not samples:
+        # A pattern compiled at IMPORT time (a dict of rules, a module constant) can never
+        # be sampled: the trace's probes run inside functions, and import has already
+        # happened. Its VALUE is not in question -- a compiled literal is a literal -- so
+        # END_ANCHOR is the one relation that can be read without a sample, and only when
+        # the run itself said an exception failed to arrive.
+        if (site.kind == "regex" and str(wanted.get("source") or "") == "did_not_raise"):
+            literal_here = _regex_literal_from_text(site.text)
+            repaired_here = _end_anchor_edit(expression)
+            if literal_here and repaired_here:
+                out.append({"relation": "END_ANCHOR", "site": site.index, "line": site.line,
+                            "expression": expression, "edit": repaired_here,
+                            "witness": {"demand": "the exception that did not come",
+                                        "pattern": literal_here[:120],
+                                        "why": "$ also matches before a trailing newline"}})
         return out
     falsey_not_none = [s for s in samples if s.get("is_none") is False and s.get("truth") is False
                        and s.get("type") != "bool"]
@@ -1244,106 +1282,118 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
                                     "type": falsey_not_none[0].get("type"),
                                     "len": 0}})
     if site.kind == "regex":
-        # ANCHOR relation, read from the run and the code's own call site.
-        #
-        # A regex site's sample is the MATCH RESULT at that call. When the demand is
-        # that a named string be REJECTED, the pattern must be read against the strings
-        # the CALLER passed in the SAME traced run: `_wheel_name_regex.fullmatch(name)`
-        # at line 244 had `name` = the newline-bearing filename, which `$` accepts and
-        # `\Z` rejects. The relation is therefore: (1) the demand is a rejection,
-        # (2) this pattern's own site has a `$` anchor, (3) `$` and `\Z` DISAGREE on a
-        # string this program actually passed at this call, (4) on the disagreeing
-        # string the current pattern ACCEPTED. Then the edit is the anchor substitution.
-        # No candidate string is invented: (3) is computed from the traced argument.
-        rejected = str(wanted.get("source") or "") == "did_not_raise"
-        pattern_text = _regex_literal_from_text(site.text)
-        if rejected and pattern_text and pattern_text.endswith("$"):
-            # ONLY the `regex_argument` samples are candidate strings. The pattern
-            # site's own sample is a Pattern object (or the synthetic placeholder for an
-            # import-time compile) -- including it made `here` a list whose entries cannot
-            # be decoded, and the branch died quietly on its own bookkeeping.
-            here = [s.get("repr") for _site, values in sites_inside
-                    for s in values if _site.kind == "regex_argument" and isinstance(s.get("repr"), str)]
-            # The pattern must be the one the DENIED string actually went through, and
-            # "went through" is not a guess: the pattern is assigned to a NAME and some
-            # `NAME.method(arg)` call site recorded `arg` in this same run. Without that
-            # link, several regexes in one file accept the same denied string and the
-            # first one reached wins (measured: packaging 258202ed, where the human fix
-            # is `_validate_regex` on line 38 and a sibling `_normalized_regex` on line
-            # 41 accepts the identical string).
-            # `patterns_linked` is keyed by LINE, not by the site index: the row's
-            # sites are a FILTERED subset (`only_lines`), so an index-keyed map pointed
-            # at a different site's pattern and the relation silently vanished on both
-            # rows it had just verified.
-            if not patterns_linked.get(site.line):
-                return out
-            decoded = []
-            for value in here:
-                try:
-                    decoded.append(ast.literal_eval(value))
-                except Exception:
-                    continue
-            # Which pattern receiver saw the DENIED string in THIS run. The denied
-            # string is the one the demand named (the failing parametrization), never
-            # "any string this pattern also met": the earlier form asked whether the
-            # receiver saw ANY value in the sampled set, which every receiver satisfies,
-            # and the relation then fired on an unrelated sibling pattern (measured:
-            # packaging 258202ed, firing on `_normalized_regex` line 41 instead of
-            # `_validate_regex` line 37).
-            # A `DID NOT RAISE` failure names only the exception TYPE, never the string,
-            # so the denied text is often absent from the message. The link is then
-            # read from the run itself: which name-dotted pattern call received a string
-            # in this session. (Requiring the literal on every row was measured to turn
-            # a VERIFIED row into NO_RELATION: packaging 8af75907.)
-            # the exception TYPE is a literal too, and it is never the denied STRING, so
-            # only literals that are not dotted names of the demanded exception count
-            # The failing test names the exception TYPE in `DID NOT RAISE`, and the
-            # exception's dotted path is the only literal such a message carries. It is
-            # never the denied STRING, so when the only literal is the type, the denied
-            # text is unknown and the link is read from the run alone; the project's
-            # suite then decides between the linked patterns.
-            message = str(wanted.get("exception") or "")
-            type_token = message.split("<class '")[-1].split("'")[0] if "<class '" in message else ""
-            denied = [text for text in (wanted.get("literals") or [])
-                      if isinstance(text, str) and text and text != type_token
-                      and "." not in text]
-            denied_receivers = set()
-            for other, values in sites_inside:
-                if other.kind != "regex_argument":
-                    continue
-                seen = {_safe_literal(v["repr"]) for v in values if isinstance(v.get("repr"), str)}
-                if not denied or any(item in seen for item in denied):
-                    if seen:
-                        denied_receivers.add(other.context.split("Call:", 1)[-1])
-            # Several patterns can legitimately be linked (a file may validate the same
-            # denied string against two regexes), so the choice between them is NOT
-            # guessed here: every linked pattern that accepts-and-should-not becomes a
-            # hypothesis, and the project's own suite keeps the right one. Guessing from
-            # the source was measured wrong (packaging 258202ed: `_validate_regex` and
-            # `_normalized_regex` both accept the denied `hi\n`).
+        try:
+            # ANCHOR relation, read from the run and the code's own call site.
+            #
+            # A regex site's sample is the MATCH RESULT at that call. When the demand is
+            # that a named string be REJECTED, the pattern must be read against the strings
+            # the CALLER passed in the SAME traced run: `_wheel_name_regex.fullmatch(name)`
+            # at line 244 had `name` = the newline-bearing filename, which `$` accepts and
+            # `\Z` rejects. The relation is therefore: (1) the demand is a rejection,
+            # (2) this pattern's own site has a `$` anchor, (3) `$` and `\Z` DISAGREE on a
+            # string this program actually passed at this call, (4) on the disagreeing
+            # string the current pattern ACCEPTED. Then the edit is the anchor substitution.
+            # No candidate string is invented: (3) is computed from the traced argument.
+            rejected = str(wanted.get("source") or "") == "did_not_raise"
+            pattern_text = _regex_literal_from_text(site.text)
+            if rejected and pattern_text and pattern_text.endswith("$"):
+                # ONLY the `regex_argument` samples are candidate strings. The pattern
+                # site's own sample is a Pattern object (or the synthetic placeholder for an
+                # import-time compile) -- including it made `here` a list whose entries cannot
+                # be decoded, and the branch died quietly on its own bookkeeping.
+                here = [s.get("repr") for _site, values in sites_inside
+                        for s in values if _site.kind == "regex_argument" and isinstance(s.get("repr"), str)]
+                # The pattern must be the one the DENIED string actually went through, and
+                # "went through" is not a guess: the pattern is assigned to a NAME and some
+                # `NAME.method(arg)` call site recorded `arg` in this same run. Without that
+                # link, several regexes in one file accept the same denied string and the
+                # first one reached wins (measured: packaging 258202ed, where the human fix
+                # is `_validate_regex` on line 38 and a sibling `_normalized_regex` on line
+                # 41 accepts the identical string).
+                # `patterns_linked` is keyed by LINE, not by the site index: the row's
+                # sites are a FILTERED subset (`only_lines`), so an index-keyed map pointed
+                # at a different site's pattern and the relation silently vanished on both
+                # rows it had just verified.
+                if not patterns_linked.get(site.line):
+                    # This pattern has no call site in this run (an import-time rule in a
+                    # dict), so the ANCHOR relation cannot link it to a denied string.
+                    # Abandon ANCHOR only: END_ANCHOR needs no call site at all, and
+                    # `return out` here silently disabled it.
+                    raise _NoLinkedPattern()
+                decoded = []
+                for value in here:
+                    try:
+                        decoded.append(ast.literal_eval(value))
+                    except Exception:
+                        continue
+                # Which pattern receiver saw the DENIED string in THIS run. The denied
+                # string is the one the demand named (the failing parametrization), never
+                # "any string this pattern also met": the earlier form asked whether the
+                # receiver saw ANY value in the sampled set, which every receiver satisfies,
+                # and the relation then fired on an unrelated sibling pattern (measured:
+                # packaging 258202ed, firing on `_normalized_regex` line 41 instead of
+                # `_validate_regex` line 37).
+                # A `DID NOT RAISE` failure names only the exception TYPE, never the string,
+                # so the denied text is often absent from the message. The link is then
+                # read from the run itself: which name-dotted pattern call received a string
+                # in this session. (Requiring the literal on every row was measured to turn
+                # a VERIFIED row into NO_RELATION: packaging 8af75907.)
+                # the exception TYPE is a literal too, and it is never the denied STRING, so
+                # only literals that are not dotted names of the demanded exception count
+                # The failing test names the exception TYPE in `DID NOT RAISE`, and the
+                # exception's dotted path is the only literal such a message carries. It is
+                # never the denied STRING, so when the only literal is the type, the denied
+                # text is unknown and the link is read from the run alone; the project's
+                # suite then decides between the linked patterns.
+                message = str(wanted.get("exception") or "")
+                type_token = message.split("<class '")[-1].split("'")[0] if "<class '" in message else ""
+                denied = [text for text in (wanted.get("literals") or [])
+                          if isinstance(text, str) and text and text != type_token
+                          and "." not in text]
+                denied_receivers = set()
+                for other, values in sites_inside:
+                    if other.kind != "regex_argument":
+                        continue
+                    seen = {_safe_literal(v["repr"]) for v in values if isinstance(v.get("repr"), str)}
+                    if not denied or any(item in seen for item in denied):
+                        if seen:
+                            denied_receivers.add(other.context.split("Call:", 1)[-1])
+                # Several patterns can legitimately be linked (a file may validate the same
+                # denied string against two regexes), so the choice between them is NOT
+                # guessed here: every linked pattern that accepts-and-should-not becomes a
+                # hypothesis, and the project's own suite keeps the right one. Guessing from
+                # the source was measured wrong (packaging 258202ed: `_validate_regex` and
+                # `_normalized_regex` both accept the denied `hi\n`).
 
-            if not (denied_receivers & patterns_linked.get(site.line, set())):
-                return out
-            flags = _regex_flags(site.text)
-            for candidate in [c for c in decoded if isinstance(c, str) and c]:
-                try:
-                    loose = re.search(pattern_text, candidate, flags) is not None
-                    strict = re.search(pattern_text[:-1] + BACKSLASH + "Z", candidate, flags) is not None
-                except re.error:
-                    continue
-                # only a pattern that ACCEPTED this string in this run is the site
-                # `loose`/`strict` are already computed with the pattern's OWN flags; the
-                # extra unflagged re-check that used to sit here rejected exactly the
-                # rows the flags made true (measured: packaging 258202ed, a
-                # `re.IGNORECASE` pattern whose candidate was lowercase)
-                if loose and not strict:
-                    out.append({"relation": "ANCHOR", "site": site.index, "line": site.line,
-                                "expression": expression,
-                                "edit": site.text.replace("$", BACKSLASH + "Z"),
-                                "witness": {"accepted_by_$": candidate[:120],
-                                            "rejected_by_\\Z": True,
-                                            "pattern": pattern_text[:120]}})
-                    break
+                if not (denied_receivers & patterns_linked.get(site.line, set())):
+                    # NO LINKED PATTERN: the `ANCHOR` relation has nothing to stand on here,
+                    # but the ROW is not finished. Returning from the whole relation function
+                    # made every later relation unreachable for every `regex` site -- which is
+                    # how END_ANCHOR sat as dead code while the rows that needed it failed.
+                    # Only THIS branch gives up.
+                    raise _NoLinkedPattern()
+                flags = _regex_flags(site.text)
+                for candidate in [c for c in decoded if isinstance(c, str) and c]:
+                    try:
+                        loose = re.search(pattern_text, candidate, flags) is not None
+                        strict = re.search(pattern_text[:-1] + BACKSLASH + "Z", candidate, flags) is not None
+                    except re.error:
+                        continue
+                    # only a pattern that ACCEPTED this string in this run is the site
+                    # `loose`/`strict` are already computed with the pattern's OWN flags; the
+                    # extra unflagged re-check that used to sit here rejected exactly the
+                    # rows the flags made true (measured: packaging 258202ed, a
+                    # `re.IGNORECASE` pattern whose candidate was lowercase)
+                    if loose and not strict:
+                        out.append({"relation": "ANCHOR", "site": site.index, "line": site.line,
+                                    "expression": expression,
+                                    "edit": site.text.replace("$", BACKSLASH + "Z"),
+                                    "witness": {"accepted_by_$": candidate[:120],
+                                                "rejected_by_\\Z": True,
+                                                "pattern": pattern_text[:120]}})
+                        break
+        except _NoLinkedPattern:
+            pass
     if site.kind == "test" and wanted.get("over_broad_guard"):
         # SIBLING_DISJUNCT: the demanded path must not be taken, and the SAME if-chain
         # already contains a predicate that distinguishes the caller that must take it
@@ -1408,6 +1458,25 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
                         "expression": expression, "edit": body,
                         "witness": {"demand": "this path must not be taken",
                                     "conjuncts_true_in_the_run": operand_edits[:3]}})
+    if site.kind == "regex" and str(wanted.get("source") or "") == "did_not_raise":
+        # END_ANCHOR: the run owed an exception and the program returned normally, and
+        # this file holds a pattern anchored with `$`. In Python `$` also matches just
+        # before a trailing newline, so an anchored pattern ACCEPTS a string it should
+        # reject, and the rejection the test demanded never happens. The edit is `\Z`,
+        # which matches only at the true end of the string.
+        # Measured: packaging 189a76d5, where the demand is
+        # `DID NOT RAISE InvalidMarker` and the human's one-line fix is
+        # `re.compile(r"$")` -> `re.compile(r"\Z")` in `_tokenizer.py`.
+        # Only `$` at the END of the literal is a candidate: `$` in the middle is an
+        # ordinary anchor for something else, and rewriting it would be a guess.
+        repaired = _end_anchor_edit(expression)
+        literal = _regex_literal_from_text(site.text)
+        if repaired and literal:
+            out.append({"relation": "END_ANCHOR", "site": site.index, "line": site.line,
+                        "expression": expression, "edit": repaired,
+                        "witness": {"demand": "the exception that did not come",
+                                    "pattern": literal[:120],
+                                    "why": "$ also matches before a trailing newline; \\Z does not"}})
     if site.kind == "format_string":
         # A DETERMINISTIC, EDITED-STRING relation: the run handed back a string the
         # test rejected, and the demanded string differs from it. The edit is read by
@@ -1949,7 +2018,7 @@ def explore(entry: Mapping[str, Any], *, repos_root: pathlib.Path, seconds: int 
                                   "generator/iterator is consumed by the probe")
                 return row
 
-            order = {"RAISES_BY_PREDICATE": 0, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
+            order = {"RAISES_BY_PREDICATE": 0, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "END_ANCHOR": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
                      "PRESENCE": 2, "MATERIALISE": 3, "EXCHANGE": 4, "INCLUSION": 5,
                      "UNION": 6, "QUOTING": 6, "KEY_SELECTION": 7,
                      "PRESENCE_ON_OPERAND": 8, "NONE_GUARD": 9, "NEGATION": 10}
