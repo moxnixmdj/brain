@@ -1079,6 +1079,17 @@ def sense_local_frontier(
         modality = "swe_codebase"
     elif swe_intent and (js_files or (ws / "package.json").is_file()):
         modality = "swe_js_codebase"
+    elif (test_files and py_files) or (js_test_files and js_files) or (c_test_files and c_files):
+        # General workspace-shape law: a tree that ships an executable test harness
+        # IS a codebase task, whatever the instruction says. Real issue text (e.g.
+        # SWE-bench Pro) describes desired behaviour and rarely contains words like
+        # "fix", so modality must not hinge on intent keywords.
+        if test_files and py_files:
+            modality = "swe_codebase"
+        elif js_test_files and js_files:
+            modality = "swe_js_codebase"
+        else:
+            modality = "swe_c_codebase"
     else:
         modality = "os_cli_computer_use"
 
@@ -5502,6 +5513,21 @@ def solve_arbitrary_environment(
                     "regression_tests": blind_py.get("regression_tests"),
                     "gaps_queried": [],
                 }
+        if swe_res.get("mode") == "ALREADY_PASSING":
+            # Fail closed on a claim we cannot support: the visible harness showed no
+            # defect and the blind reproducer qualified no patch, so NOTHING in the
+            # workspace was changed. Surfacing VERIFIED here would report a fix the
+            # system never made (this is exactly the SWE-bench-shaped case where the
+            # graded tests are hidden from us).
+            swe_res = {
+                "status": "NO_DEFECT_EVIDENCE",
+                "mode": "ALREADY_PASSING__NO_PATCH",
+                "patched_file": None,
+                "gaps_queried": list(swe_res.get("gaps_queried") or []),
+                "initial_failure_signal": swe_res.get("initial_failure_signal"),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
         # Optional first-principles CWE vulnerability report emitter when explicitly requested
         cwe_report: dict[str, Any] | None = None
         if (
