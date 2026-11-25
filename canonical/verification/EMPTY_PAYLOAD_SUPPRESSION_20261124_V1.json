@@ -1,0 +1,68 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "declared_before_the_run": {
+    "Z1": "only runtime-observed empty payloads are used to tighten a guard",
+    "Z2": "a candidate is accepted only by the whole test file",
+    "Z3": "no diff, gold patch, model, network or stored parameter is read"
+  },
+  "generated_at_utc": "2026-11-25T16:09:56Z",
+  "note": "The c53d373 guard `envvar is not None -> envvar` was generated and fixed the target help tests, but broke 7 tests where the same value is formatted as an error-hint sequence; single-site truthiness tightening is insufficient.",
+  "rows": [
+    {
+      "payloads": 166,
+      "proposals": 70,
+      "repo": "pallets/click",
+      "seconds": 65.6,
+      "sha": "c53d3732b98c764932e146c007146ad402acb229",
+      "stage": "COMPARED",
+      "verified": false
+    },
+    {
+      "payloads": 21,
+      "proposals": 1,
+      "repo": "pallets/click",
+      "seconds": 2.3,
+      "sha": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+      "stage": "COMPARED",
+      "verified": false
+    },
+    {
+      "payloads": 204,
+      "proposals": 35,
+      "repo": "pallets/click",
+      "seconds": 21.9,
+      "sha": "fc518e41218b447e875fe27244ae692c269bcb77",
+      "stage": "COMPARED",
+      "verified": false
+    },
+    {
+      "payloads": 150,
+      "proposals": 5,
+      "repo": "pallets/werkzeug",
+      "seconds": 14.4,
+      "sha": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "stage": "COMPARED",
+      "verified": false
+    },
+    {
+      "payloads": 2,
+      "proposals": 0,
+      "repo": "pallets/werkzeug",
+      "seconds": 1.5,
+      "sha": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "stage": "COMPARED",
+      "verified": false
+    }
+  ],
+  "schema": "PROJECT_BRAIN_EMPTY_PAYLOAD_SUPPRESSION_V1",
+  "summary": {
+    "model_calls": 0,
+    "network_calls": 0,
+    "observed_empty_payloads": 543,
+    "parameters_stored": 0,
+    "proposals": 111,
+    "rows": 5,
+    "verified": 0
+  },
+  "verdict": "FAIL"
+}

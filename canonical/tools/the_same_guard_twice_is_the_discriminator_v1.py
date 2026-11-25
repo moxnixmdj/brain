@@ -574,7 +574,10 @@ def same_test(left: str, right: str) -> bool:
 
 def explore(repo: pathlib.Path, sha: str, *, source_path: str, test_path: str,
             cap_sites: int = 60, cap_occurrences: int = 6, cap_interventions: int = 120,
-            seconds: int = 90) -> dict[str, Any]:
+            seconds: int = 90, fit: Any = None) -> dict[str, Any]:
+    """One real fix. `fit` may replace the predicate selector; it is called after the
+    flip oracle, never with the human edit."""
+    fit_fn = fit or fit_predicate
     started = time.time()
     parent = f"{sha}^"
     parent_source = identify.show(repo, parent, source_path)
@@ -660,7 +663,7 @@ def explore(repo: pathlib.Path, sha: str, *, source_path: str, test_path: str,
             for survivor in survivors:
                 site = survivor["site"]
                 rows = by_site[site["sid"]]
-                fit = fit_predicate(site, rows, survivor["occurrence"])
+                fit = fit_fn(site, rows, survivor["occurrence"])
                 if fit is None:
                     survivor["fit"] = None
                     continue

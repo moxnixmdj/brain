@@ -1,0 +1,837 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus": {
+    "commits": 15,
+    "repository": "marshmallow",
+    "selection": "one source file and one test file; oracle executes; commit sha appears in no receipt or corpus file"
+  },
+  "declared_before_the_run": {
+    "R1": "at least one fresh real commit is VERIFIED by a synthesized expression on its project's whole test file",
+    "R2": "at least one verified expression is outside the four hand-written identity/truth forms",
+    "R3": "no row is accepted while breaking a test that passed on the parent (zero accusations)",
+    "R4": "zero parameters stored, zero model calls, zero network calls at run time",
+    "R5": "every counted row has a real failing test and an instrumentation run that preserved the verdict"
+  },
+  "gates": {
+    "R1": false,
+    "R2": false,
+    "R3": true,
+    "R4": true,
+    "R5": true
+  },
+  "generated_at_utc": "2026-11-24T21:45:07Z",
+  "rows": [
+    {
+      "bits_from_the_oracle": 84,
+      "commit": "5761beab3985d654d712f9326e08bfb2e2ec9c4c",
+      "failing": "tests/test_fields.py::TestPluckFiekd::test_pluck_empty_data_key[False]",
+      "failing_count": 2,
+      "failing_share": 0.0182,
+      "failing_test": "tests/test_fields.py::TestPluckFiekd::test_pluck_empty_data_key[False]",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 84,
+      "keep": true,
+      "occurrences_logged": 307,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 61.37,
+      "sha": "5761beab3985d654d712f9326e08bfb2e2ec9c4c",
+      "sites_executed": 36,
+      "sites_instrumented": 113,
+      "sites_planned": 36,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 61.4,
+      "test": "tests/test_fields.py",
+      "test_file": "tests/test_fields.py",
+      "tests": [
+        "tests/test_fields.py"
+      ],
+      "tests_in_file": 110,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 94,
+      "commit": "7dff08fcb7fb40d2772728bb8d8a76b5beff3200",
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_timedelta_field_deserialization[nan]",
+      "failing_count": 1,
+      "failing_share": 0.0025,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_timedelta_field_deserialization[nan]",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 94,
+      "keep": true,
+      "occurrences_logged": 440,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 79.38,
+      "sha": "7dff08fcb7fb40d2772728bb8d8a76b5beff3200",
+      "sites_executed": 32,
+      "sites_instrumented": 113,
+      "sites_planned": 32,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 79.4,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 396,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 12,
+      "commit": "902f99c4151d1f0c4c3b8e8dfbafc7b6a76aeaa6",
+      "failing": "tests/test_validate.py::test_url_absolute_valid[http://example.org#fragment]",
+      "failing_count": 4,
+      "failing_share": 0.0181,
+      "failing_test": "tests/test_validate.py::test_url_absolute_valid[http://example.org#fragment]",
+      "human_fix": "'(?:/?|[/?#]\\\\S+)\\\\Z'",
+      "human_fix_found": false,
+      "interventions": 12,
+      "keep": true,
+      "occurrences_logged": 12,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 18.11,
+      "sha": "902f99c4151d1f0c4c3b8e8dfbafc7b6a76aeaa6",
+      "sites_executed": 10,
+      "sites_instrumented": 29,
+      "sites_planned": 10,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 4,
+          "file_green": false,
+          "fit": null,
+          "guard": "not matched",
+          "kind": "If",
+          "line": 241,
+          "occurrence": 1,
+          "sid": 6
+        },
+        {
+          "broken_count": 4,
+          "file_green": false,
+          "fit": null,
+          "guard": "scheme == 'file' and value.lower().startswith('file:///')",
+          "kind": "If",
+          "line": 236,
+          "occurrence": 1,
+          "sid": 5
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 18.1,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 221,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 8,
+      "commit": "f07eadc87dfac25ed505d5cd9d186920f2682733",
+      "failing": "tests/test_validate.py::test_email_idn_invalid[user@-m\\xfcnchen.de]",
+      "failing_count": 2,
+      "failing_share": 0.0092,
+      "failing_test": "tests/test_validate.py::test_email_idn_invalid[user@-m\\xfcnchen.de]",
+      "human_fix": "_UNICODE_LETTERS",
+      "human_fix_found": false,
+      "interventions": 8,
+      "keep": true,
+      "occurrences_logged": 8,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 15.39,
+      "sha": "f07eadc87dfac25ed505d5cd9d186920f2682733",
+      "sites_executed": 7,
+      "sites_instrumented": 30,
+      "sites_planned": 7,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 2,
+          "file_green": false,
+          "fit": null,
+          "guard": "self.DOMAIN_REGEX.match(domain_part)",
+          "kind": "If",
+          "line": 300,
+          "occurrence": 1,
+          "sid": 29
+        },
+        {
+          "broken_count": 2,
+          "file_green": false,
+          "fit": null,
+          "guard": "not self.USER_REGEX.match(user_part)",
+          "kind": "If",
+          "line": 290,
+          "occurrence": 1,
+          "sid": 8
+        },
+        {
+          "broken_count": 2,
+          "file_green": false,
+          "fit": null,
+          "guard": "not value or '@' not in value",
+          "kind": "If",
+          "line": 285,
+          "occurrence": 1,
+          "sid": 7
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 15.4,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 217,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 12,
+      "commit": "c1e727e16bed9851c6e77dde0119ee2d4f1ba08d",
+      "failing": "tests/test_validate.py::test_url_idn_valid[https://\\u09a4\\u09cc\\u09b9\\u09bf\\u09a6\\u09c1\\u09b0.\\u09ac\\u09be\\u0982\\u09b2\\u09be]",
+      "failing_count": 6,
+      "failing_share": 0.029,
+      "failing_test": "tests/test_validate.py::test_url_idn_valid[https://\\u09a4\\u09cc\\u09b9\\u09bf\\u09a6\\u09c1\\u09b0.\\u09ac\\u09be\\u0982\\u09b2\\u09be]",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 12,
+      "keep": true,
+      "occurrences_logged": 12,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 16.85,
+      "sha": "c1e727e16bed9851c6e77dde0119ee2d4f1ba08d",
+      "sites_executed": 10,
+      "sites_instrumented": 30,
+      "sites_planned": 10,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 6,
+          "file_green": false,
+          "fit": null,
+          "guard": "not matched",
+          "kind": "If",
+          "line": 221,
+          "occurrence": 1,
+          "sid": 6
+        },
+        {
+          "broken_count": 6,
+          "file_green": false,
+          "fit": null,
+          "guard": "scheme == 'file' and value.lower().startswith('file:///')",
+          "kind": "If",
+          "line": 216,
+          "occurrence": 1,
+          "sid": 5
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 16.9,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 207,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 92,
+      "commit": "024b5d09e9f026f0f96d220e243be69346687ce0",
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[mro]",
+      "failing_count": 3,
+      "failing_share": 0.0078,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[mro]",
+      "human_fix": "self.enum[val]",
+      "human_fix_found": false,
+      "interventions": 92,
+      "keep": true,
+      "occurrences_logged": 268,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 81.33,
+      "sha": "024b5d09e9f026f0f96d220e243be69346687ce0",
+      "sites_executed": 32,
+      "sites_instrumented": 110,
+      "sites_planned": 32,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 3,
+          "file_green": false,
+          "fit": null,
+          "guard": "self.by_value",
+          "kind": "If",
+          "line": 1944,
+          "occurrence": 1,
+          "sid": 73
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 81.3,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 385,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 120,
+      "commit": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+      "failing": "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key",
+      "human_fix": "attr_name",
+      "human_fix_found": false,
+      "interventions": 120,
+      "keep": true,
+      "occurrences_logged": 1532,
+      "parameters_stored": 0,
+      "refinement": "(errors) and (data == {'city': 'Springfield'})",
+      "refinement_site": {
+        "guard": "errors",
+        "line": 935
+      },
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 141.71,
+      "sha": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+      "sites_executed": 32,
+      "sites_instrumented": 58,
+      "sites_planned": 32,
+      "source": "src/marshmallow/schema.py",
+      "sources": [
+        "src/marshmallow/schema.py"
+      ],
+      "stage": "FLIP_FOUND__REFINEMENT_NOT_VERIFIED",
+      "survivors": [
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": {
+            "expression": "(errors) and (data == {'city': 'Springfield'})",
+            "false_at": 2,
+            "novel": true,
+            "operator": "identity_or_truth",
+            "predicate": "data == {'city': 'Springfield'}",
+            "true_at": [
+              1
+            ],
+            "vacuous": false
+          },
+          "guard": "errors",
+          "kind": "If",
+          "line": 935,
+          "occurrence": 2,
+          "sid": 16
+        },
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": {
+            "expression": "(errors) and (data != {'city': 'Springfield'})",
+            "false_at": 1,
+            "novel": true,
+            "operator": "identity_or_truth",
+            "predicate": "data != {'city': 'Springfield'}",
+            "true_at": [
+              2
+            ],
+            "vacuous": false
+          },
+          "guard": "errors",
+          "kind": "If",
+          "line": 935,
+          "occurrence": 1,
+          "sid": 16
+        },
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": {
+            "expression": "(not field_obj.dump_only) and (field_name != 'zip_code')",
+            "false_at": 29,
+            "novel": true,
+            "operator": "identity_or_truth",
+            "predicate": "field_name != 'zip_code'",
+            "true_at": [
+              1,
+              2,
+              3,
+              6,
+              7,
+              8,
+              10,
+              11,
+              12,
+              15,
+              16,
+              17,
+              18,
+              19,
+              20,
+              21,
+              22,
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              30
+            ],
+            "vacuous": false
+          },
+          "guard": "not field_obj.dump_only",
+          "kind": "If",
+          "line": 1016,
+          "occurrence": 29,
+          "sid": 34
+        },
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": null,
+          "guard": "field_name in self.dump_only",
+          "kind": "If",
+          "line": 1067,
+          "occurrence": 29,
+          "sid": 26
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 141.7,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 382,
+      "verification": {
+        "broken": [
+          "tests/test_deserialization.py::TestFieldDeserialization::test_field_deserialization_with_user_validator_that_raises_error_with_list",
+          "tests/test_deserialization.py::TestSchemaDeserialization::test_nested_single_none_not_allowed",
+          "tests/test_deserialization.py::TestSchemaDeserialization::test_nested_many_non_not_allowed",
+          "tests/test_deserialization.py::TestSchemaDeserialization::test_nested_single_required_missing",
+          "tests/test_deserialization.py::TestSchemaDeserialization::test_nested_many_required_missing",
+          "tests/test_deserialization.py::TestSchemaDeserialization::test_deserialize_with_attribute_param_error_returns_field_name_not_attribute_name"
+        ],
+        "output_tail": "n.py::test_deserialize_raises_exception_if_input_type_is_incorrect[None-raise]\nFAILED tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[data4-exclude]\nFAILED tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[data4-include]\nFAILED tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[data4-raise]\n======================== 69 failed, 313 passed in 1.25s ========================\n",
+        "stage": "REFINEMENT_FAILS_THE_SUITE",
+        "tests": 383
+      }
+    },
+    {
+      "bits_from_the_oracle": 3,
+      "commit": "65374df0c31cdc45acc4435741779298201306a2",
+      "failing": "tests/test_validate.py::test_oneof_options",
+      "failing_count": 1,
+      "failing_share": 0.005,
+      "failing_test": "tests/test_validate.py::test_oneof_options",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 3,
+      "keep": true,
+      "occurrences_logged": 3,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 4.86,
+      "sha": "65374df0c31cdc45acc4435741779298201306a2",
+      "sites_executed": 2,
+      "sites_instrumented": 30,
+      "sites_planned": 2,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 4.9,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 199,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 81,
+      "commit": "070dde08bad456e743a0d2e1842c142a799a9568",
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 81,
+      "keep": true,
+      "occurrences_logged": 255,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 69.28,
+      "sha": "070dde08bad456e743a0d2e1842c142a799a9568",
+      "sites_executed": 25,
+      "sites_instrumented": 108,
+      "sites_planned": 25,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 69.3,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 381,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 84,
+      "commit": "19ca8dce2d5bde94509a4a89e495f35c695442d5",
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_none_allows_none_value",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_none_allows_none_value",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 84,
+      "keep": true,
+      "occurrences_logged": 258,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 74.56,
+      "sha": "19ca8dce2d5bde94509a4a89e495f35c695442d5",
+      "sites_executed": 28,
+      "sites_instrumented": 108,
+      "sites_planned": 28,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": null,
+          "guard": "value is None and (not self.allow_none)",
+          "kind": "If",
+          "line": 299,
+          "occurrence": 1,
+          "sid": 8
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 74.6,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 380,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 71,
+      "commit": "2bf3ae6ac656c977ec10808b5eb0e7480ced0311",
+      "failing": "tests/test_schema.py::test_nested_many_should_override_schema_many_case1",
+      "failing_count": 2,
+      "failing_share": 0.0099,
+      "failing_test": "tests/test_schema.py::test_nested_many_should_override_schema_many_case1",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 71,
+      "keep": true,
+      "occurrences_logged": 197,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 55.71,
+      "sha": "2bf3ae6ac656c977ec10808b5eb0e7480ced0311",
+      "sites_executed": 27,
+      "sites_instrumented": 107,
+      "sites_planned": 27,
+      "source": "src/marshmallow/fields.py",
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 55.7,
+      "test": "tests/test_schema.py",
+      "test_file": "tests/test_schema.py",
+      "tests": [
+        "tests/test_schema.py"
+      ],
+      "tests_in_file": 203,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 7,
+      "commit": "a45329dfde2f46bcea67b384912b21ca39fcfbd6",
+      "failing": "tests/test_validate.py::test_url_custom_scheme_case_insensitive",
+      "failing_count": 1,
+      "failing_share": 0.0052,
+      "failing_test": "tests/test_validate.py::test_url_custom_scheme_case_insensitive",
+      "human_fix": "{s.lower() for s in schemes} if schemes else self.default_schemes",
+      "human_fix_found": false,
+      "interventions": 7,
+      "keep": true,
+      "occurrences_logged": 7,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 8.78,
+      "sha": "a45329dfde2f46bcea67b384912b21ca39fcfbd6",
+      "sites_executed": 5,
+      "sites_instrumented": 30,
+      "sites_planned": 5,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 8.8,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 191,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 0,
+      "commit": "2b84b56e9a80d07b65d74811673e8e5cf46cd0f1",
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_function_field_deserialization_missing_with_length_validator",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_function_field_deserialization_missing_with_length_validator",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 0,
+      "keep": true,
+      "occurrences_logged": 0,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 3.28,
+      "sha": "2b84b56e9a80d07b65d74811673e8e5cf46cd0f1",
+      "sites_executed": 0,
+      "sites_instrumented": 0,
+      "sites_planned": 0,
+      "source": "src/marshmallow/constants.py",
+      "sources": [
+        "src/marshmallow/constants.py"
+      ],
+      "stage": "NO_SWITCH__NO_SINGLE_OCCURRENCE_FLIP_PASSES",
+      "survivors": [],
+      "survivors_sound": 0,
+      "synthesis_seconds": 3.3,
+      "test": "tests/test_deserialization.py",
+      "test_file": "tests/test_deserialization.py",
+      "tests": [
+        "tests/test_deserialization.py"
+      ],
+      "tests_in_file": 379,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 12,
+      "commit": "76bc28ae74e723760d54f097290ba85e717d5fe4",
+      "failing": "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]",
+      "failing_count": 5,
+      "failing_share": 0.0263,
+      "failing_test": "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 12,
+      "keep": true,
+      "occurrences_logged": 12,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 14.98,
+      "sha": "76bc28ae74e723760d54f097290ba85e717d5fe4",
+      "sites_executed": 9,
+      "sites_instrumented": 30,
+      "sites_planned": 9,
+      "source": "src/marshmallow/validate.py",
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 5,
+          "file_green": false,
+          "fit": null,
+          "guard": "not regex.search(value)",
+          "kind": "If",
+          "line": 228,
+          "occurrence": 1,
+          "sid": 5
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 15.0,
+      "test": "tests/test_validate.py",
+      "test_file": "tests/test_validate.py",
+      "tests": [
+        "tests/test_validate.py"
+      ],
+      "tests_in_file": 190,
+      "verification": null
+    },
+    {
+      "bits_from_the_oracle": 120,
+      "commit": "94234acd1a98e5fd8b21ba3e8f78ac87a4996949",
+      "failing": "tests/test_decorators.py::test_post_load_method_that_appends_to_data",
+      "failing_count": 1,
+      "failing_share": 0.0263,
+      "failing_test": "tests/test_decorators.py::test_post_load_method_that_appends_to_data",
+      "human_fix": null,
+      "human_fix_found": false,
+      "interventions": 120,
+      "keep": true,
+      "occurrences_logged": 658,
+      "parameters_stored": 0,
+      "refinement": null,
+      "refinement_site": null,
+      "repo": "marshmallow",
+      "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+      "seconds": 105.48,
+      "sha": "94234acd1a98e5fd8b21ba3e8f78ac87a4996949",
+      "sites_executed": 45,
+      "sites_instrumented": 66,
+      "sites_planned": 45,
+      "source": "src/marshmallow/schema.py",
+      "sources": [
+        "src/marshmallow/schema.py"
+      ],
+      "stage": "FLIP_PASSED_THE_TEST__BROKE_THE_SUITE__NO_FIT",
+      "survivors": [
+        {
+          "broken_count": 1,
+          "file_green": false,
+          "fit": null,
+          "guard": "hook_many != pass_many",
+          "kind": "If",
+          "line": 1284,
+          "occurrence": 4,
+          "sid": 46
+        }
+      ],
+      "survivors_sound": 0,
+      "synthesis_seconds": 105.5,
+      "test": "tests/test_decorators.py",
+      "test_file": "tests/test_decorators.py",
+      "tests": [
+        "tests/test_decorators.py"
+      ],
+      "tests_in_file": 38,
+      "verification": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_THE_REPLACEMENT_EXPRESSION_V1",
+  "summary": {
+    "model_calls": 0,
+    "network_calls": 0,
+    "novel_verified": 0,
+    "parameters_stored": 0,
+    "rows": 15,
+    "seconds": 751.3,
+    "verified": 0
+  },
+  "verdict": "FAIL",
+  "what_this_is_not": [
+    "not a benchmark: 15 real commits from one repository, producer-run",
+    "not proof of general repair; the human edit is read only for reporting",
+    "not a learned model: candidate atoms are computed from the run and the source AST"
+  ]
+}

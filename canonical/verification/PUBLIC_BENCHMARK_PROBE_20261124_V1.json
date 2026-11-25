@@ -1,0 +1,60 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "benchmark": "SWE-bench Lite (public instance metadata mirrored on GitHub; gold patch never read)",
+  "environment_setup": [
+    "base commit checked out from pytest-dev/pytest",
+    "generated _pytest/_version.py stub committed as environment setup, not a solution patch",
+    "test_patch applied as the specification; PASS_TO_PASS not fully replayed (5752 tests, environment mismatch produced one unrelated failure)",
+    "third-party pytest plugins disabled; pytester enabled; attrs/py/tomli/pluggy/iniconfig/packaging installed into /tmp/pydeps"
+  ],
+  "generated_at_utc": "2026-11-25T01:32:03Z",
+  "instance": "pytest-dev__pytest-8906",
+  "oracle": {
+    "failing_tests_on_parent": [
+      "testing/test_skipping.py::test_errors_in_xfail_skip_expressions",
+      "testing/test_skipping.py::test_module_level_skip_error"
+    ],
+    "official_fail_to_pass": [
+      "testing/test_skipping.py::test_module_level_skip_error"
+    ],
+    "target_present_in_oracle": true
+  },
+  "repo_native_mining": {
+    "control_verified": 0,
+    "gates": {
+      "M1": false,
+      "M2": true,
+      "M3": true,
+      "M4": true,
+      "M5": true
+    },
+    "seconds": 11.0,
+    "treatment_verified": 0,
+    "verdict": "FAIL"
+  },
+  "schema": "PROJECT_BRAIN_PUBLIC_BENCHMARK_PROBE_V1",
+  "selection": "one instance chosen because its dependencies could be made runnable in this sandbox; NOT a random or full-benchmark sample",
+  "strict_manufactured_contrast": {
+    "gates": {
+      "F1": false,
+      "F2": false,
+      "F3": true,
+      "F4": true,
+      "F5": true
+    },
+    "paired_rows": 0,
+    "seconds": 102.6,
+    "vacuous_passes_rejected": 0,
+    "verdict": "FAIL",
+    "verified": 0
+  },
+  "summary": {
+    "gold_patch_read": false,
+    "instances": 1,
+    "model_calls": 0,
+    "network_calls_during_solve": 0,
+    "parameters_stored": 0,
+    "repaired": 0
+  },
+  "verdict": "FAIL"
+}
