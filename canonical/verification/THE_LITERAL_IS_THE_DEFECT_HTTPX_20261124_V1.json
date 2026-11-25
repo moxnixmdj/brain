@@ -1,0 +1,64 @@
+{
+ "schema": "THE_LITERAL_IS_THE_DEFECT_V1",
+ "repo": "httpx",
+ "commit": "e63b6594f2",
+ "module": "httpx._urlparse",
+ "relation": [
+  "",
+  ""
+ ],
+ "candidates": [
+  {
+   "refinement": "ESCAPE_DOTTED_QUAD",
+   "edits": 3,
+   "result": {
+    "error": null,
+    "count": 0,
+    "witness": [],
+    "cases": 1,
+    "collateral": [
+     [
+      "https://1.2.3.4/",
+      true
+     ],
+     [
+      "https://127.0.0.1:8080/",
+      true
+     ],
+     [
+      "https://example.com/",
+      true
+     ]
+    ]
+   },
+   "moved": true,
+   "cleared": true
+  }
+ ],
+ "parent": {
+  "error": null,
+  "count": 1,
+  "witness": [
+   [
+    "https://023b76x43144/",
+    "InvalidURL"
+   ]
+  ],
+  "cases": 1,
+  "collateral": [
+   [
+    "https://1.2.3.4/",
+    true
+   ],
+   [
+    "https://127.0.0.1:8080/",
+    true
+   ],
+   [
+    "https://example.com/",
+    true
+   ]
+  ]
+ },
+ "verdict": "LITERAL_REFINEMENT_CLEARS"
+}

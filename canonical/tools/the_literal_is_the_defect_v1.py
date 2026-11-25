@@ -39,6 +39,7 @@ from __future__ import annotations
 import argparse
 import itertools
 import json
+import os
 import pathlib
 import re
 import subprocess
@@ -67,6 +68,18 @@ REFINEMENTS: tuple[tuple[str, str, str], ...] = (
      r"[a-z0-9]+(?:-[a-z0-9]+)*"),
     # drop a negative lookahead that is inspectable only after consumption
     ("DROP_NEGATIVE_LOOKAHEAD", r"\(\?!--\)", r""),
+    # httpx e63b6594f2: an unescaped `.` inside a compiled pattern matches ANY character,
+    # so "023b76x43144" matched the IPv4-shape test and was rejected as an invalid IPv4
+    # address. Escaping the metacharacter is the minimal literal repair. Note the guard:
+    # the dot must sit between two literal character-class quantifiers, which is the shape
+    # of a dotted-quad. A blanket "escape every dot" rule would fire on every pattern in
+    # every repo, and most of them mean any-character on purpose.
+    # A lookahead, so the dot is CONSUMED and must be re-emitted escaped. My first
+    # version grouped "[0-9]+." and re-emitted it verbatim, so the pattern matched but
+    # the text came back unchanged -- "edits=1, moved=False", a fire that did nothing.
+    ("ESCAPE_DOTTED_QUAD",
+     r"(\[0-9\]\+)\.(?=\[0-9\])",
+     r"\1\\."),
     # anchors around an unanchored pattern
     ("ADD_ANCHORS", r're\.compile\(r"([^^"][^"]*)",', r're.compile(r"^\1$",'),
 )
@@ -155,8 +168,48 @@ print(json.dumps({"error": None, "count": len(bad), "witness": bad[:6],
                   "cases": len(REQUIRED), "collateral": collapsed}))
 '''
 
+IPV4_LIKE_PROBE = '''
+import json
+import httpx
+
+# The oracle is the ISSUE'S claim, not the patch. The issue is that a rare host name was
+# rejected as an invalid IPv4 address because the shape test used an unescaped ".".
+#   REQUIRED   a non-IPv4 host must survive parsing
+#   COLLATERAL real IPv4 literals must keep working -- reported, not asserted, because a
+#              refinement that escaped every dot would pass REQUIRED and destroy these.
+REQUIRED = [("https://023b76x43144/", "023b76x43144")]
+COLLATERAL = [("https://1.2.3.4/", "1.2.3.4"), ("https://127.0.0.1:8080/", "127.0.0.1"),
+              ("https://example.com/", "example.com")]
+
+bad, survived = [], []
+for case, want in REQUIRED:
+    try:
+        host = httpx.URL(case).host
+    except Exception as error:
+        bad.append((case, type(error).__name__))
+        continue
+    if host != want:
+        bad.append((case, host))
+for case, want in COLLATERAL:
+    try:
+        survived.append([case, httpx.URL(case).host == want])
+    except Exception as error:
+        survived.append([case, type(error).__name__])
+print(json.dumps({"error": None, "count": len(bad), "witness": bad[:6],
+                  "cases": len(REQUIRED), "collateral": survived}))
+'''
+
 
 def run_probe(tree: pathlib.Path, args: argparse.Namespace) -> dict[str, Any]:
+    if args.relation == "ipv4_like_host":
+        done = subprocess.run([sys.executable, "-c", IPV4_LIKE_PROBE], cwd=tree,
+                              capture_output=True, text=True, errors="replace",
+                              timeout=args.seconds,
+                              env={**os.environ, "PYTHONPATH": f"{tree}:{tree / 'src'}"})
+        try:
+            return json.loads(done.stdout.strip().splitlines()[-1])
+        except Exception:
+            return {"error": (done.stdout + done.stderr)[-400:]}
     code, extra = ((PORT_PROBE, []) if args.relation == "parses_leading_zero_port"
                    else (PROBE, [args.a, args.b, args.alphabet, str(args.maxlen),
                                  args.module]))
@@ -164,7 +217,12 @@ def run_probe(tree: pathlib.Path, args: argparse.Namespace) -> dict[str, Any]:
         [sys.executable, "-c", code, *extra],
         cwd=str(tree), capture_output=True, text=True, errors="replace",
         timeout=args.seconds, stdin=subprocess.DEVNULL,
-        env={**__import__("os").environ, "PYTHONPATH": "src:.",
+        # src-layout repos need "src:."; FLAT-layout repos (httpx) are shadowed by any
+        # installed copy, so the probe silently tests the wrong code. That happened: the
+        # ipv4_like_host probe reported the parent's failure on a tree that had already
+        # been refined, and the tool concluded NO_REFINEMENT_IN_FAMILY while the correct
+        # refinement had in fact fired. Put the tree first, and assert provenance.
+        env={**os.environ, "PYTHONPATH": f"{tree}:{tree / 'src'}",
              "PYTHONDONTWRITEBYTECODE": "1"})
     for line in reversed((done.stdout or "").strip().splitlines()):
         try:
@@ -182,7 +240,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--a", default="", help="predicate function (agrees only)")
     parser.add_argument("--b", default="", help="function it must agree with (agrees only)")
     parser.add_argument("--relation", default="agrees",
-                        choices=("agrees", "parses_leading_zero_port"))
+                        choices=("agrees", "parses_leading_zero_port", "ipv4_like_host"))
     parser.add_argument("--alphabet", default="a,1,-")
     parser.add_argument("--maxlen", type=int, default=4)
     parser.add_argument("--repos-root", type=pathlib.Path, default=DEFAULT_REPOS_ROOT)

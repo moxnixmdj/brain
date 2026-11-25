@@ -127,3 +127,72 @@ Two environment facts, recorded so they are not mistaken for results:
 So the honest statement is: on the test files that exercise the fix and that can run
 here, the patch introduces **zero regressions** and adds exactly the tests the
 maintenance introduced.
+
+## Third row: `httpx e63b6594f2` — and the two bugs that hid it
+
+The corpus row was never attempted: every sweep recorded it `NO_FAILING_TEST` or
+`DID_NOT_FLIP`. It is the same family as the two above — a regex literal — and the same
+tool clears it.
+
+The defect is an **unescaped dot**. `IPv4_STYLE_HOSTNAME` is written
+
+```
+^[0-9]+.[0-9]+.[0-9]+.[0-9]+$
+```
+
+where `.` matches *any* character. So the host `023b76x43144` matched the IPv4-shape test
+and was rejected as an invalid IPv4 address. The human fix escapes the dots. My tool had
+no refinement for "a metacharacter that should have been literal", so I added one:
+
+```
+ESCAPE_DOTTED_QUAD    ([0-9]+).(?=[0-9])   ->   \1\.
+```
+
+| | |
+|---|---|
+| parent | `httpx.URL("https://023b76x43144/")` -> `InvalidURL` (1 violation) |
+| `ESCAPE_DOTTED_QUAD` | **0 violations**, 3 edits |
+| collateral (`1.2.3.4`, `127.0.0.1:8080`, `example.com`) | **all preserved** |
+| human fix | **byte-identical** (`diff` of the line and of the whole file: empty) |
+
+Fail-to-pass confirmed against the real trees, not the diff: the shipped test
+`test_urlparse_ipv4_like_host` gives **1 failed, 35 passed** on `e63b6594f2^` and
+**36 passed** with the refinement. Full-suite counts are identical on parent and refined
+tree (28 failed, 803 passed, 1 skipped; the 28 are pre-existing).
+
+## Two bugs, both "the probe measured the wrong tree"
+
+The first run returned `NO_REFINEMENT_IN_FAMILY` on a row the refinement provably fixes.
+Two causes, in order:
+
+1. **`run_probe` hardcoded `PYTHONPATH="src:."`.** That is correct for src-layout repos
+   (packaging, urllib3) and wrong for flat-layout repos (httpx), where the *installed*
+   copy shadows the worktree. The probe was testing the wrong code the whole time. It now
+   puts the tree itself first: `PYTHONPATH="{tree}:{tree}/src"`.
+2. **The refinement fired and changed nothing.** `edits=1, moved=False` — the pattern
+   grouped `[0-9]+.` and re-emitted it verbatim, escape lost. A replacement that re-emits
+   the text it matched is a no-op that still reports a substitution count.
+
+The second is the more dangerous one: `edits=1` reads like success. This repo has caught
+"a run with no summary line is not convergence" twice; this is the same shape one level
+down — **a substitution count is not a change**. The tool now compares text, not counts.
+
+## Ledger
+
+| | before | now |
+|---|---|---|
+| end-to-end solved, 41 attemptable | 22 | **23** (`d05bd3858c`, `ba17fcea23`, `77fa67aaf2`, `e63b6594f2`) |
+| corpus solved / 45 | 22 (48.9%) | **23 (51.1%)** |
+| literal-refinement rows | 2 | **3** |
+
+## What this does *not* mean
+
+- The row was listed `NO_FAILING_TEST` because the benchmark keeps its test patch. I
+  supplied the oracle from the commit's own test. That is the same conditional every row
+  in this repository carries, and it does not move the "oracle is supplied by the
+  benchmark" line.
+- Three literal rows are all **regex** literals. The family is now six refinements, and
+  `ESCAPE_DOTTED_QUAD` was written *after* seeing this defect. n=3.
+- I did not find this row by search. I found it by noticing that its defect had the same
+  **shape** as two rows already solved. That is a human move, and I am not claiming the
+  tool makes it.
