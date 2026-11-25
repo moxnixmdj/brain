@@ -317,18 +317,27 @@ transcript — and a transcript is the *richest* oracle an issue can carry, beca
 prompt line states the call and the traceback states the expected outcome. After the
 fix:
 
+Then run over **all 45 rows** rather than only the 10 flagged `ORACLE_IN_ISSUE`, since
+the fenced-block classifier is conservative and a real reproducer can hide in a row it
+called `PROSE_ONLY`:
+
 ```
-REPRODUCER_DISCRIMINATES   3     3b0378dd66, cca32949f1, 77fa67aaf2
-NO_SEPARATION              4
-REPRODUCER_DOES_NOT_REACH  1
-NO_REPRODUCER_IN_ISSUE     2
+REPRODUCER_DISCRIMINATES   4     3b0378dd66, d05bd3858c, cca32949f1, 77fa67aaf2
+NO_SEPARATION              7
+REPRODUCER_DOES_NOT_REACH  4
+NO_REPRODUCER_IN_ISSUE    30
 ```
 
-Three fail-to-pass oracles, derived from prose, zero model calls. Two of the three
-(`3b0378dd66`, `cca32949f1`) were already solved by the union, so they add no capability.
-**The third, `urllib3 77fa67aaf2`, was one of the six unsolved rows** — the first time
-anything in this repository has produced a discriminating oracle on a row that no engine
-could previously enter.
+Four, not three: `jinja d05bd3858c` was invisible to the 10-row pass because the
+issue-level classifier had called it `PROSE_ONLY`. **Two of the four are on the six-row
+unsolved set** (`d05bd3858c`, `77fa67aaf2`); the other two were already solved by the
+union and add no capability.
+
+Four fail-to-pass oracles, derived from prose, zero model calls. Two (`3b0378dd66`,
+`cca32949f1`) were already solved by the union and add no capability. **The other two,
+`urllib3 77fa67aaf2` and `jinja d05bd3858c`, were both on the six-row unsolved set** —
+the first time anything in this repository has produced a discriminating oracle on a row
+that no engine could previously enter.
 
 ### End to end on that row
 
@@ -384,8 +393,8 @@ still absent (Wall 2, now located to a line and a node class).
 | claim | before | now |
 |---|---|---|
 | P(oracle) from issue text | unmeasured | **10/45 = 22.2%**, parser, 0 model calls |
-| of those, executable reproducibly | unmeasured | **3/10**, fail-to-pass verified |
-| new capable rows (unsolved + oracle) | 0 | **1** (`77fa67aaf2`) |
+| rows with a discriminating reproducer | unmeasured | **4/45**, fail-to-pass verified |
+| new capable rows (unsolved + oracle) | 0 | **2** (`77fa67aaf2`, `d05bd3858c`) |
 | end-to-end new solves | 0 | **0** — control VERIFIED, patch not generated |
 | rows with no oracle in parent | suspected | **43/45 = 95.6%**, benchmark requires 100% |
 | generator's reach on the new row | — | fails at a module-level regex constant, outside its 44 guard sites |
