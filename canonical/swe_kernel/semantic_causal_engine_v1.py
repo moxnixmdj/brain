@@ -4400,6 +4400,13 @@ def repair_project_causally(
             if skill_store is not None:
                 for morph, morph_src in skill_store.propose(site.source_text):
                     candidates.append((f"TREE_REWRITE_{morph.morphism_id[4:14]}", morph_src, ""))
+                # Delta replay: one learned *edit*, anchored on informative neighbours. The whole-body
+                # form above proposes nothing (its pattern is a single hole); this form carries the
+                # insertion and refuses where the anchors do not fit.
+                propose_delta = getattr(skill_store, "propose_delta", None)
+                if callable(propose_delta):
+                    for dlt, dlt_src in propose_delta(site.source_text):
+                        candidates.append((f"DELTA_{dlt.delta_id[3:13]}", dlt_src, ""))
             candidates = candidates[:12]
 
             for tag, cand_code, extra_imp in candidates:

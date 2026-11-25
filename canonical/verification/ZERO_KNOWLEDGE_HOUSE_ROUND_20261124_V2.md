@@ -511,3 +511,97 @@ Result: `STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] i
 raise or delete: `click@c53d373`/`click@fc518e4` assert on exit codes and on how many times a mocked call happened
 (`assert codes == [0, 0]`). The engine still has no family that reads an assertion's **literal expectation** and
 synthesizes a return/retry accordingly; that is where the next round starts.
+
+## Round V10 — the memory ablation, run for the first time: the skill store earns exactly nothing, and the reason is in the bytes
+
+`§6` requires a memory ablation, not a claim. Here it is, measured this environment, same driver, same commits, only
+the store differs (`BLIND_STORE_DIR` populated versus `BLIND_NO_STORE=1`):
+
+| commit | with store | without store |
+|---|---|---|
+| `pluggy@50585e0` | REPAIRED, 25 candidates, 22.83 s | REPAIRED, 25 candidates, 23.21 s |
+| `werkzeug@051fd663` | REPAIRED, 1 candidate, 18.28 s | REPAIRED, 1 candidate, 18.65 s |
+
+Identical. The store writes but never reads: every repair in this catalogue comes from mining the test in front of
+it, not from a single experience stored earlier. That is the honest result, and it contradicts the §3 hypothesis as
+stated ("we already solved instant learning").
+
+**Then I looked at why, and it is a serialization bug plus an anti-unification collapse — both measurable.**
+
+1. *The witness embedded a memory address.* A guard morphism learned on `pluggy@8051a4d` stored its hole's
+   before-half as `repr([<ast.Expr object at 0x7ff77c3d7070>, ...])`. `_dump` handled one AST node and fell through
+   to `repr` for a *list* of nodes, so the constraint contained an address that can never recur. Fixed: `_dump`
+   recurses over sequences, and the witness now reads `Expr(value=Constant(value='Unregister a plugin and all of
+   its hook implementations...'))`. Regression re-run after the fix: `pluggy@8051a4d` 1/6.48 s,
+   `werkzeug@884437ae` 21/70.64 s, `pyjwt@793a302` 6/28.00 s — unchanged.
+
+2. *Even fixed, it matches nothing, because the "generalised morphism" is one hole over the whole body.* Inspecting
+   the stored pattern: `pattern["T"]` is absent and `pattern["F"]` is empty — the morphism is `{"H": "?0"}`, i.e.
+   "the entire body is a hole". Its two-sided constraint is then "match this exact body", which is a raw trace
+   wearing the word *morphism*. Measured: `propose()` returns **0** rewrites on the body it was learned from, **0**
+   on a held-out same-family body in the same file, and **0** on the whole file text.
+
+**The design conclusion, and the rejected alternatives.** The store's unit of learning is the wrong unit. It stores
+*whole-body before → whole-body after*, and anti-unification can only see the difference as one hole; the natural
+representation of what was actually learned is a **delta**: an inserted statement list at a position, or a single
+statement replaced by one statement, with identifiers lifted to typed holes. Rejected in this round:
+- *Widening the pattern matcher* (`_tree_match` relaxation) — that would let a guard learned on `unregister` fire on
+  unrelated code without a witness, which is exactly the pattern-matching-in-disguise §9.5 warns about.
+- *Storing the raw diff text* — that is the raw trace the §9.2 filter forbids as the main asset.
+- *Keeping the store write-only and calling the ablation "no regression"* — that would be a silent zero.
+
+**Next bottleneck, now precise.** Replace the whole-body morphism with a **delta morphism**: `(position, inserted
+statements)` or `(statement, replacement)` with holes over identifiers, learned from the verified before/after pair;
+then the same ablation must be re-run and the transfer measured across repos and across languages, not asserted.
+
+Tally unchanged this round — **11/13 = 84.62%**, 0 regressions, `K3 = 0`.
+
+## Round V11 — the store gets a unit of learning that can actually travel
+
+V10 ended with a measured defect: the stored morphism was a whole body with a single hole over it, so
+`propose()` returned 0 rewrites on the body it was learned from. This round replaces the unit, and then
+measures whether the replacement changes any verdict.
+
+**What was built** (`canonical/swe_kernel/causal_nexus_v1.py`):
+
+- `_skeleton(node)` — an identifier- and value-blind dump of a statement: names become `_`, constants become their
+  type name. Anti-unification over identifiers is what makes an edit a morphism rather than a trace.
+- `DeltaMorphism` — `kind ∈ {insert, delete, replace}`, `prefix_anchor`, `suffix_anchor` (skeletons), `payload`,
+  provenance, `transfers`/`refutations`.
+- `learn_delta(before, after)` — finds the common prefix and suffix **by skeleton**, requires the difference to be one
+  contiguous edit in one statement list (two separate edits are refused), and anchors it on the *nearest informative*
+  statement on each side. Docstrings and `pass` are explicitly not anchors: an earlier version anchored a guard on a
+  docstring and it then applied to `pluggy.register`, a different function — that is the over-generalisation the rule
+  now blocks. No informative anchor → refuse.
+- `apply_delta(source, delta)` — finds the gap whose nearest informative neighbours have the stored skeletons and
+  performs the edit; returns `None` otherwise. Refusal, not a guess.
+- `SkillStoreV2` persists `deltas` beside `morphisms` (`learn()` now stores both) and exposes `propose_delta()`;
+  the engine's replay pass appends `DELTA_<id>` candidates after the whole-body ones.
+
+**Measured, single experience, held-out body** (the §6 test that had never been run):
+
+| step | result |
+|---|---|
+| learn a guard insertion from one body | 1 morphism + **1 delta**, `kind=insert`, payload = the guard |
+| reload the store from disk | 1 delta (survives process death) |
+| apply to a *different* body that shares the anchor shapes | **1 proposal**, guard inserted |
+| apply to an unrelated body (`for hook in self._hookcallers: ...`) | **0 proposals** (refused) |
+| apply to a different real function in the same file | refused |
+
+**Does it change the benchmark?** No — and the reason is mechanical, not mysterious: on `pluggy@50585e0` the delta
+candidate is appended after a list that is already longer than the replay cap (`candidates[:12]`), so it is dropped
+before it is ever cloned. Store-vs-empty on the same commit is still REPAIRED 25 candidates / 22.41 s with store and
+25 / 23.21 s without. The honest statement is therefore: *the unit of learning can travel now, but it does not yet
+outrank mined contract candidates, and the cap hides it.*
+
+**Rejected this round:** raising the candidate cap globally (it would multiply wall-clock time on every commit to
+buy attention for a mechanism with one verified instance); relaxing anchors to docstrings (measured to fire on an
+unrelated function); rewriting `propose()` in place (the two-sided whole-body constraint is a legitimate refusal
+mechanism for exact-replay cases and is still exercised by tests).
+
+**Next bottleneck.** Give deltas *priority* rather than tail position: replay deltas before mined contracts when the
+delta's origin matches the repository and its `transfers ≥ 1`, then re-run the store-vs-empty ablation and report
+whether the first experience shortens the search (fewer candidates, less wall-clock). Until that number exists, the
+instant-learning claim stays unverified.
+
+Tally unchanged: **11/13 = 84.62%**, 0 regressions, `K3 = 0`. Causal suite `14 passed`.

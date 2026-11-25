@@ -1,4 +1,23 @@
 {
+ "ablations": {
+  "generalized_vs_raw_traces": "not yet measurable: both are currently the same artifact, because the whole-body morphism IS a raw trace with a hole name",
+  "store_vs_empty": {
+   "method": "same driver, same commits, BLIND_STORE_DIR populated vs BLIND_NO_STORE=1",
+   "pluggy@50585e0": {
+    "with_store": "REPAIRED 25 cand 22.83 s",
+    "without_store": "REPAIRED 25 cand 23.21 s"
+   },
+   "result": "identical: the skill store contributes nothing to any repair in this catalogue",
+   "werkzeug@051fd663": {
+    "with_store": "REPAIRED 1 cand 18.28 s",
+    "without_store": "REPAIRED 1 cand 18.65 s"
+   }
+  },
+  "why": {
+   "bug_found_and_fixed": "_dump() did not recurse over lists of AST nodes, so a hole witness stored `repr([<ast.Expr object at 0x...>])` - an address that can never recur",
+   "collapse_found_not_yet_fixed": "the learned pattern is a single hole over the whole body (pattern has no 'T' and no 'F'), so its two-sided constraint is 'match this exact body': 0 proposals on its own witness, 0 on a held-out same-family body, 0 on file text"
+  }
+ },
  "authority": "NONE__PRODUCER_RUN_SANDBOX",
  "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
  "blind_evaluation": {
@@ -266,6 +285,18 @@
  "integrity_notes": [
   "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
  ],
+ "memory_ablation_v11": {
+  "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
+  "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
+  "single_experience_transfer": {
+   "apply_to_different_body_sharing_anchors": "1 proposal",
+   "apply_to_different_real_function": "refused",
+   "apply_to_unrelated_body": "0 proposals (refused)",
+   "learn": "1 morphism + 1 delta from one verified body",
+   "reload_from_disk": "1 delta"
+  },
+  "unit_of_learning": "DeltaMorphism (insert/delete/replace, informative-neighbour anchors, skeleton anti-unification)"
+ },
  "modules": {
   "canonical/runtime/causal_computer_use_agent_v1.py": {
    "lines": 578,
@@ -273,7 +304,7 @@
   },
   "canonical/swe_kernel/causal_nexus_v1.py": {
    "lines": 1547,
-   "sha256": "ca055b6cf4b5d226d4bb63ea89560505234ceceef0be944458692d488e01dc9d"
+   "sha256": "eb5252bf1cceb61bbc647f55245233a9c5d891aa48e42c43de9c557310d56206"
   },
   "canonical/swe_kernel/executable_mental_model_v1.py": {
    "lines": 1849,
@@ -282,7 +313,7 @@
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
-   "sha256": "7e579c1dcbcf0fcec79929c700ed96328c5e5154044463cf5597e19bd1f39778"
+   "sha256": "baa14bf632dcc086e6377b88f0d810be744a0dc7868b4c35680cd1b78340be4c"
   },
   "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
    "bytes": 21011,
@@ -428,7 +459,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Assertion-literal expectations. The two remaining sample opens are about what a function must RETURN, not raise or delete: click@c53d373/click@fc518e4 assert exit codes and call counts (`assert codes == [0, 0]`). No family reads the assertion's literal expectation and synthesizes a return/retry accordingly.",
+ "next_bottleneck": "Give deltas priority instead of tail position: replay a delta before mined contracts when its origin matches the repository and transfers >= 1, then re-run the store-vs-empty ablation and report whether one experience shortens the search. Until that number exists, instant learning remains an unverified claim.",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",

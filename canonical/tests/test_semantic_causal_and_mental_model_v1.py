@@ -29,6 +29,7 @@ import tarfile
 import tempfile
 
 import pytest
+import textwrap
 
 from canonical.swe_kernel.executable_mental_model_v1 import (
     CrossModalPetriNet,
@@ -1265,3 +1266,58 @@ def test_postcondition_names_the_container_the_mutator_must_purge(tmp_path: path
     )
     assert result.repaired is True, result.status
     assert result.status == "VERIFIED__STATE_CONSISTENCY"
+
+
+def test_delta_morphism_transfers_an_edit_and_refuses_a_stranger(tmp_path):
+    """A single experience must survive a reload and then apply to a *different* body.
+
+    Measured 2026-11-24: the whole-body morphism has a pattern with no "T" and no "F" -- one hole over
+    everything -- and proposed 0 rewrites even on its own witness. The delta form carries the edit and
+    anchors it on informative neighbours, so the same guard travels to a second function and refuses a
+    third one whose neighbours have a different shape.
+    """
+    from canonical.swe_kernel import causal_nexus_v1 as nx
+
+    store_path = tmp_path / "skills.json"
+    before = textwrap.dedent(
+        """
+        if name is None:
+            return None
+        self.items[:] = []
+        return None
+        """
+    )
+    after = textwrap.dedent(
+        """
+        if plugin is None and name is None:
+            raise TypeError("one of name or plugin")
+        if name is None:
+            return None
+        self.items[:] = []
+        return None
+        """
+    )
+    store = nx.SkillStoreV2(store_path)
+    learned = store.learn(before, after, origin="pluggy@8051a4d", diagnostic_class="SPEC_CONTRACT_GUARD")
+    assert learned is not None
+    assert len(store.deltas) == 1
+    delta = next(iter(store.deltas.values()))
+    assert delta.kind == "insert"
+    assert "one of name or plugin" in delta.payload
+
+    reloaded = nx.SkillStoreV2(store_path)          # the experience is external, not in-process
+    assert len(reloaded.deltas) == 1
+
+    twin = '"""Twin function, same neighbour shapes."""\nif name is None:\n    return None\nself.other[:] = []\nreturn None\n'
+    proposals = reloaded.propose_delta(twin)
+    assert len(proposals) == 1, "a delta that cannot travel is a raw trace with extra steps"
+    assert "one of name or plugin" in proposals[0][1]
+
+    stranger = textwrap.dedent(
+        """
+        for hook in self._hookcallers:
+            self._remove(hook)
+        return None
+        """
+    )
+    assert reloaded.propose_delta(stranger) == [], "an unanchored edit must refuse, not guess"
