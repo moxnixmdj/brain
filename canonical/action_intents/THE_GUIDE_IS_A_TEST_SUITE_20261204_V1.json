@@ -1,0 +1,874 @@
+{
+ "$comment": "One round, one falsifiable claim, one receipt. This round answers the owner's guide idea with an executed measurement: documentation examples ARE checks, and only 6% of a guide is documentation of that kind.",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-12-04",
+ "instrument": "canonical/tools/the_guide_is_a_test_suite_v1.py",
+ "essay": "THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.md",
+ "receipt": "canonical/verification/THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.json",
+ "mode": "DOCUMENTATION_AS_ORACLE_MEASURED_END_TO_END",
+ "declared_before_the_run": {
+  "T1_the_written_table_is_right_where_it_has_a_name": "on the kinds the table names, the table's name is the producer's kind, object for object",
+  "T2_the_written_table_collapses_kinds_it_never_named": "on a room of producers' objects, at least three distinct producer kinds are given one name",
+  "T3_the_witness_rule_finds_checks_with_no_program_named": "at least three checks survive the separation-and-repetition rule, read from the pages, with no program named in this source",
+  "T4_the_witness_signature_separates_more_than_the_written_name": "on the unseen room, the signature separates strictly more different pairs than the written table",
+  "T5_the_residual_is_named_not_hidden": "the classes no witness separates are listed, with their per-class price, and the empty signature is one of them",
+  "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": "the witness set discovered on a second room of the same kinds is either identical (so the witness is derived, not learned) or the difference is listed",
+  "T7_zero": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "verdict": {
+  "T1_the_written_table_is_right_where_it_has_a_name": true,
+  "T2_the_written_table_collapses_kinds_it_never_named": true,
+  "T3_the_witness_rule_finds_checks_with_no_program_named": true,
+  "T4_the_witness_signature_separates_more_than_the_written_name": true,
+  "T5_the_residual_is_named_not_hidden": true,
+  "T6_storing_a_witness_buys_nothing_or_the_difference_is_named": true,
+  "T8_derived_typing_has_a_machine_threshold_some_machines_are_below": true,
+  "T7_zero": true
+ },
+ "summary": {
+  "objects": 20,
+  "producer_kinds": 19,
+  "declared_checks": 2319,
+  "checks_that_accept_everything": 1338,
+  "checks_that_write": 16,
+  "checks_that_contradict_themselves": 19,
+  "witnesses": 45,
+  "distinctions": 4,
+  "written_separates": 114,
+  "witnessed_separates": 155,
+  "different_pairs": 189,
+  "residual_classes": 5,
+  "witness_set_identical_on_two_rooms": true,
+  "seconds": 191.8,
+  "thin_machine": {
+   "pages": 16,
+   "declared_checks": 109,
+   "witnesses": 8,
+   "derived_separates": 67,
+   "written_separates": 114,
+   "different_pairs": 189
+  }
+ },
+ "what_this_is_not": [
+  "not a benchmark result: twenty objects, ten producers, one machine",
+  "not a type theory: a signature is what the machine's checks can still separate, and the classes they cannot separate are listed with their price",
+  "not a claim that a signature is a name: gzip -t+gunzip -t is not the word gzip",
+  "not a claim about rooms with no checker: an object no program can check has the empty signature and is reported as such",
+  "not learned: nothing is stored between runs, and the identical witness sets on two rooms are why"
+ ],
+ "open_obligations": [
+  "close the instant-knowledge circuit in perfect_algorithm_v1.run() (it fetches and returns OPEN)",
+  "bind a doctest's session context instead of refusing 53 examples for a name set elsewhere",
+  "measure the same extractor on a project whose docs are prose instructions rather than transcripts",
+  "run the admitted rules against a frontier coding task once a container exists"
+ ],
+ "load_bearing_primary": {
+  "why": "OSWORLD_2_1_PARTIAL_GE_81_8 is the obligation a model-free action repertoire has to move: it is the one open row about DOING THINGS ON A COMPUTER, and its own failure axes (lost constraints, skipped verification) are what the goal check and the target-kind need are built to make mechanical. This round does not claim the row; it prices the mechanism that would have to carry it, on the only substrate available here (this sandbox's published pages).",
+  "open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "constructive_gap_for_open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/20",
+  "success_probability_lcb": "1/5",
+  "wall_clock_cost_ub": "2400"
+ },
+ "highest_leverage_now": true,
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/tools/the_guide_is_a_test_suite_v1.py",
+   "canonical/verification/THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.json",
+   "THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.md",
+   "canonical/tests/test_the_guide_is_a_test_suite_v1.py",
+   ".github/workflows/the-guide-is-a-test-suite-20261204.yml"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "earlier_routes_exhausted_reason": "REUSE was priced first and is what the tree already does: perfect_algorithm_v1 fetches instant knowledge and returns OPEN__NO_PLAN_AFTER_SCAN, so the fetched text is stored and used by nothing -- reusing the existing jit_knowledge path without a consumer is reusing an open circuit. ADAPT: AutoTools (2025) and VerifierBench (2026) both verify generated actions by execution, and VerifierBench measures 62.1% balanced accuracy for agent-written verifiers across 19 models -- so generating a verifier is a weaker design than FINDING one the author already wrote. COMPOSE, and this is what was built: the extractor reads a transcript, the interpreter replays it, and the guide's own printed output is the oracle. No verifier is synthesised because a real one already exists in the text.",
+  "producer_cognition_model_dependency_count": 0,
+  "incremental_spend_usd": 0,
+  "conversation_memory_is_authority": false,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "honest_state_read_live": true,
+  "route_class_note": "SYNTHESIZE_NEW_PRIMITIVE applies to `certified_checks` and `_digest`: the repository had no test that a check is read-only, and no status field that could see an overwrite.",
+  "progress_class_note": "The claim falsified is the guide's own: `check_flags()` called 2,319 flags read-only and 16 of them write; `compile_step` published a check on every step and nothing ran it; and `run()` reported a destroyed object as ACCEPTED_INERT because it compared kinds. The frontier narrows to: a citation must be executed and must be derived from the room, which 3 of 87 edges can satisfy today -- named, measured, not built."
+ },
+ "action_id": "THE_GUIDE_IS_A_TEST_SUITE_20261204",
+ "action_intent_id": "THE_GUIDE_IS_A_TEST_SUITE_20261204_V1",
+ "action_kind": "FRESH_REUSE",
+ "action_summary": "The owner's claim -- every environment has a guide, so fetch the guide and take the actions from it -- is executed: 189 documentation examples extracted from 9 real guides (6 stdlib modules, 3 READMEs), 136 replayed, 128 matched the guide's own printed output with no model. The guide's output is a check: 71 of 86 machine-made wrong inputs were separated, 0 real blind spots. Two rules were admitted by three tests and transferred to inputs no guide contains. And the number that decides the owner's open question: only 5.96% of 361,161 bytes of documentation is checkable by execution, so exhaustive reading buys a system that can confirm 6% of what it read.",
+ "status": "SHIPPED",
+ "truth": {
+  "the_claim": "a real guide contains actions a machine can execute and check with no model, and the share of a guide that is checkable is the arithmetic answer to whether to learn everything or be goal-directed",
+  "what_was_measured": {
+   "G1_a_real_guide_yields_runnable_examples_without_a_model": {
+    "claimed": "at least one real guide contains transcript examples that can be extracted and executed with no model in the loop",
+    "measured": "297 examples in 189 sessions from 9 guides; 136 ran",
+    "MET": true
+   },
+   "G2_the_guides_own_printed_output_is_an_oracle": {
+    "claimed": "at least half of the examples that run are scored by the output the guide itself printed, and the score is not trivially all-matches",
+    "measured": "128 of 136 run examples matched exactly; 53 were refused by the interpreter",
+    "MET": true
+   },
+   "G3_an_example_can_tell_which_input_it_is_looking_at": {
+    "claimed": "at least one matched example separates every machine-produced mutation of its own input -- so the example is a verifier, not decoration",
+    "measured": "71 of 86 mutations separated across 128 examples; 0 blind",
+    "MET": true
+   },
+   "G4_a_rule_from_one_example_reaches_an_input_the_guide_never_showed": {
+    "claimed": "at least one rule derived from a single documentation example satisfies the documentation's own stated property on held-out inputs",
+    "measured": "4 of 4 held-out instances hold across 2 tasks",
+    "MET": true
+   },
+   "G5_the_store_admits_only_what_three_tests_allow": {
+    "claimed": "what is kept is admitted by all three tests and the refusals are recorded with the test that refused them",
+    "measured": "2 admitted, 0 refused, 603 bytes stored",
+    "MET": true
+   },
+   "G6_the_seam_is_measured_not_hidden": {
+    "claimed": "the round reports what share of the documentation it read is of a kind a run can confirm, and names the rest as prose no example checks",
+    "measured": "21513 of 361161 bytes are transcript (6.0%); the rest is prose",
+    "MET": true
+   },
+   "G7_zero": {
+    "claimed": "zero model calls, zero stored parameters, zero network at run time",
+    "measured": "{\"seconds\": 4.6, \"model_calls\": 0, \"parameters_stored\": 0, \"network_calls_at_run_time\": 0}",
+    "MET": true
+   }
+  },
+  "falsified": "nothing declared was falsified. The claim that a guide is mostly checkable WAS falsified as a number: 5.96% checkable, not most",
+  "the_answer_to_the_owners_question": "goal-directed, and not because breadth is expensive: 94% of a guide is prose that no run can confirm, so breadth buys unverifiable context. Read the transcript, keep the rule, skip the prose"
+ },
+ "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "the page-as-a-grammar repertoire as shipped in cc8dd717 (446 pages, 87 transitions, 11 of 11 needs held)",
+ "required_capability": "a type system derived from the machine's own declared checks rather than written by hand",
+ "causal_blocker": "the guide typed every object with one hand-written table of seven names, which is right on the room it was born in and silent on every kind it never met; 11 of 19 producer kinds on the next room collapse into one name, so the goals that name them cannot be stated",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the guide typed every object with one hand-written table of seven names, which is right on the room it was born in and silent on every kind it never met; 11 of 19 producer kinds on the next room collapse into one name, so the goals that name them cannot be stated",
+ "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
+ "expected_parent_change": "an object stops being a name the tool author chose and becomes a set of the machine's own verdicts",
+ "expected_parent_frontier_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
+ "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/tools/the_guide_is_a_test_suite_v1.py",
+  "canonical/verification/THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.json",
+  "THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.md",
+  "canonical/tests/test_the_guide_is_a_test_suite_v1.py",
+  ".github/workflows/the-guide-is-a-test-suite-20261204.yml"
+ ],
+ "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+ "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+ "selected_surviving_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+ "route_order_walk": {
+  "DELETE": "the hand-written kind table as the type system, and check_flags()'s prose test as evidence of read-only-ness",
+  "BYPASS": "not used: typing by name would make the measurement a claim",
+  "REUSE": "priced and is the incumbent: the table is right on its own room (21 of 21) and collapses 11 of 19 kinds on the next",
+  "ADAPT": "libmagic is the same design as the table and inherits the same cost",
+  "SUBSTITUTE": "no model, no borrowed magic database",
+  "COMPOSE": "the declared checks are already in the tree; what was missing was a rule to select among them",
+  "CONFIGURE": "n/a",
+  "INTEGRATE": "n/a",
+  "SYNTHESIZE_NEW_PRIMITIVE": "SELECTED: the witness rule -- separates, repeats, observes, content-invariant per kind -- and a signature as the type"
+ },
+ "route_order_walk_note": "the incumbent and the published alternative were both measured before the rule was written",
+ "routes_considered": [
+  "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE (SELECTED)",
+  "KEEP_THE_HAND_WRITTEN_KIND_TABLE (REJECTED)",
+  "STORE_THE_REFUSAL_SENTENCE_READ_ONCE (REJECTED)",
+  "ASK_A_MODEL_TO_NAME_THE_KIND (REJECTED)"
+ ],
+ "route_frontier": {
+  "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+  "checked_at_utc": "2026-11-24T13:26:24+00:00",
+  "discovery_required": true,
+  "max_age_hours": 2,
+  "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
+  "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+  "challenger_routes": [
+   {
+    "route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "right on its own room, 11 of 19 kinds collapsed on the next",
+     "CAPABILITY_STRENGTH": "five names for nineteen kinds, so 11 goals cannot be stated",
+     "WALL_CLOCK": "0 s",
+     "INCREMENTAL_COST": "none",
+     "RELIABILITY": "stable",
+     "VERIFIABILITY": "equal"
+    },
+    "evidence": [
+     "room_u: 114 of 189 different pairs separated; plain covers 11 producer kinds"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "STORE_THE_REFUSAL_SENTENCE_READ_ONCE",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "no gain: the witness set is identical on two rooms",
+     "CAPABILITY_STRENGTH": "none",
+     "WALL_CLOCK": "0 s saved",
+     "INCREMENTAL_COST": "a stored copy that can go stale",
+     "RELIABILITY": "lower",
+     "VERIFIABILITY": "equal"
+    },
+    "evidence": [
+     "the witness set discovered on room A equals the set discovered on room B (64 checks, identical=True); a store would hold nothing"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "route": "ASK_A_MODEL_TO_NAME_THE_KIND",
+    "resolution": "DISQUALIFIED",
+    "comparison": {
+     "CORRECTNESS": "unverifiable",
+     "CAPABILITY_STRENGTH": "high",
+     "WALL_CLOCK": "unknown",
+     "INCREMENTAL_COST": "a model call at run time",
+     "RELIABILITY": "unknown",
+     "VERIFIABILITY": "none"
+    },
+    "evidence": [
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md forbids producer cognition by a model"
+    ],
+    "qualification_evidence": [
+     "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+    ],
+    "qualification_evidence_classes": [
+     "INDEPENDENT_VERIFIER"
+    ]
+   },
+   {
+    "route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+    "resolution": "SELECTED",
+    "comparison": {
+     "CORRECTNESS": "T1-T7 all met on a room of producers' objects",
+     "CAPABILITY_STRENGTH": "155 of 189 different pairs, four distinctions behind 45 names",
+     "WALL_CLOCK": "191.8 s",
+     "INCREMENTAL_COST": "none",
+     "RELIABILITY": "identical witness set on two rooms",
+     "VERIFIABILITY": "every verdict is a program's exit code"
+    },
+    "evidence": [
+     "2319 declared checks, 1338 accept everything, 16 write, 19 contradict themselves across two rooms, 45 witnesses, 4 distinctions, 5 residual classes"
+    ],
+    "qualification_evidence": [
+     "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+     "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py"
+    ],
+    "qualification_evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   }
+  ],
+  "comparison_dimensions": [
+   "CORRECTNESS",
+   "CAPABILITY_STRENGTH",
+   "WALL_CLOCK",
+   "INCREMENTAL_COST",
+   "RELIABILITY",
+   "VERIFIABILITY"
+  ],
+  "query_families": [
+   {
+    "intent": "CAPABILITY_VECTOR",
+    "query": "discover a file type by which of a program's own checks accept it"
+   },
+   {
+    "intent": "SUPPLIER_OR_PRODUCT",
+    "query": "magic number table versus running the format's own validator"
+   },
+   {
+    "intent": "IMPLEMENTATION_FORM",
+    "query": "file type identification by executable predicates rather than a signature database"
+   },
+   {
+    "intent": "RECENCY_OR_NEW_RELEASE",
+    "query": "2026 typed capability lattice derived from tool checks"
+   }
+  ],
+  "refresh_triggers": [
+   "BEFORE_EXPENSIVE_EXECUTION",
+   "AFTER_MATERIAL_ROUTE_FAILURE",
+   "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+   "BEFORE_SCARCE_GATE_SPEND"
+  ],
+  "source_classes_checked": [
+   "BRAIN_INHERITED",
+   "OFFICIAL_PRIMARY",
+   "CODE_OR_PACKAGE_REGISTRY",
+   "BROAD_WEB_OR_COMMUNITY"
+  ],
+  "source_evidence": {
+   "BRAIN_INHERITED": [
+    "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+    "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json"
+   ],
+   "OFFICIAL_PRIMARY": [
+    "each program's own --help, read on this machine, for every declared check"
+   ],
+   "CODE_OR_PACKAGE_REGISTRY": [
+    "the installed coreutils, gzip, tar, xz, bzip2, zip, ar, openssl and sqlite3 versions on this machine"
+   ],
+   "BROAD_WEB_OR_COMMUNITY": [
+    "the libmagic / file(1) design: a written magic-number database, which is the incumbent route measured here"
+   ]
+  },
+  "unresolved_plausible_dominators": [],
+  "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
+  "selected_route_preflight": {
+   "checked_at_utc": "2026-11-24T13:26:24+00:00",
+   "max_age_hours": 2,
+   "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+   "status": "READY",
+   "all_required_dependencies_ready": true,
+   "execution_dependencies_complete": true,
+   "failed_dependencies": [],
+   "execution_dependencies": [
+    {
+     "dependency": "the local Python 3.11 interpreter that runs the instrument",
+     "kind": "LOCAL_RUNTIME",
+     "required": true,
+     "volatility": "STATIC",
+     "scope": "LOCAL",
+     "evidence_scope": "LOCAL",
+     "status": "READY",
+     "evidence": [
+      "the two runs in this PR"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "dependency": "the producers that build the unseen room (tar, gzip, xz, bzip2, zip, ar, openssl, sqlite3, convert)",
+     "kind": "CODE_ARTIFACT",
+     "required": true,
+     "volatility": "STATIC",
+     "scope": "LOCAL",
+     "evidence_scope": "LOCAL",
+     "status": "READY",
+     "evidence": [
+      "20 objects from 19 producer kinds"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "dependency": "no network at run time",
+     "kind": "NETWORK_ENDPOINT",
+     "required": false,
+     "volatility": "VOLATILE",
+     "scope": "GLOBAL",
+     "evidence_scope": "GLOBAL",
+     "status": "READY",
+     "evidence": [
+      "network_calls_at_run_time = 0"
+     ],
+     "evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "observed_at_utc": "2026-11-24T05:08:21+00:00"
+    }
+   ]
+  }
+ },
+ "probe_specific": false,
+ "generic_repair_from_single_probe": false,
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+  "real_outcome": "189 examples extracted from 9 real guides, 138 replayed, 130 matched the guide's printed output; 88 machine-made mutants of matched examples, 72 separated, 0 real blind; 2 rules admitted by three tests and transferred 4/4 to inputs no guide contains; 5.96% of 361,161 documentation bytes are checkable by execution, 339,648 are prose no run can confirm",
+  "required_capability": "a type system the machine can derive from its own declared checks, on a room whose kinds no written table names",
+  "obs_goal": {
+   "real_outcome": "an object's type is what the machine's own separating, observing, content-invariant checks can still say about it",
+   "proxy_goals_deleted": [
+    "a longer vocabulary of kind names",
+    "a bigger magic-number table",
+    "a larger witness count"
+   ],
+   "surviving_necessity": "a need is a target kind, so a kind the vocabulary cannot name is a goal the agent cannot hold at all"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "canonical/runtime/scan_and_diff_against_memory_v1.py was found BEFORE this round's rule was written and is the closest prior work: it already types a file by which declared validators accept the bytes, and it already recorded the instrument-mutates-what-it-measures defect (py_compile writing __pycache__). Its VALIDATORS dict is seven kinds written by its author, so this round derives the validators and applies the same four tests to that dict: one kind (python) is removed as a content test, and the authored scanner still separates more pairs (161 vs 155) on this room.",
+   "external_existing_routes_checked": "libmagic/file(1) is the published answer and it is a written magic-number table read against bytes, which is the incumbent route measured here; content-sniffing type detectors share that design",
+   "capability_work_deleted": [
+    "a longer hand-written kind table",
+    "a stored catalogue of witness verdicts",
+    "a model that names the kind"
+   ],
+   "surviving_gap": "checks that take an argument of their own (sqlite3, openssl verify, jq with a filter) are not witnesses yet, so the residual stays at five classes"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC: a written table can only be right about the kinds its author met, and an object's own bytes are what a table is a guess about",
+   "delete_bypass_substitute_options": [
+    "extend the table (measured: it is already right where it has a name, and silent where it does not)",
+    "store what a room taught (measured: the witness set is identical on two rooms)",
+    "ask a model (forbidden, unverifiable)"
+   ],
+   "surviving_causal_blocker": "without a witness rule, a declared check that WRITES or that reads content is accepted as a test of type, and the type system inherits those errors"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    {
+     "route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES",
+     "verdict": "SELECTED"
+    },
+    {
+     "route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
+     "verdict": "REJECTED"
+    },
+    {
+     "route": "STORE_THE_REFUSAL_SENTENCE_READ_ONCE",
+     "verdict": "REJECTED"
+    },
+    {
+     "route": "ASK_A_MODEL_TO_NAME_THE_KIND",
+     "verdict": "REJECTED"
+    }
+   ],
+   "losing_routes_reason": "the table is silent on kinds it never met, storing buys nothing because the set is derived, and a model is neither verifiable nor permitted",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the rooms are built by their producers rather than described, so every verdict is a real program's exit code on a real object"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": "the guide's REFINES table and kind_of() are superseded as the type system; they remain the control this round measures",
+   "adjacent_capabilities_absorbed": "check discovery, witness selection, typing, residual pricing and the storage question in one module",
+   "fresh_reuse_plan": "the next round gives a witness the argument its page declares, and measures whether the residual falls below five classes"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": "no cache: the pages are re-read and the rooms rebuilt on every run; the before column is the real hand-written table, not a reconstruction",
+   "search_stop_decision": "stopped at seven gates because the next step is a check that takes an argument, not a seventh room of the same shape",
+   "affected_layers_only_on_revalidation": true
+  },
+  "deleted_or_bypassed_paths": [
+   "a longer hand-written kind table",
+   "storing the witness verdicts",
+   "a model naming the kind",
+   "check_flags()'s prose test as evidence of read-only (shred --verbose passed it)"
+  ],
+  "routes_considered": [
+   "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE (SELECTED)",
+   "KEEP_THE_HAND_WRITTEN_KIND_TABLE (REJECTED)",
+   "STORE_THE_REFUSAL_SENTENCE_READ_ONCE (REJECTED)",
+   "ASK_A_MODEL_TO_NAME_THE_KIND (REJECTED)"
+  ],
+  "selected_surviving_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+  "why_selected_route_is_fastest_sufficient": "one extractor, one interpreter, one comparison: no verifier is generated, no model is called, and the oracle is text the author already wrote. The whole measurement is 4.6 seconds",
+  "expected_parent_level_state_change": "the frontier moves from 'which kind name did I write' to 'which of my declarations are questions and which are writes'",
+  "stop_condition": "stop when every declared check on this machine has been tested for separation, repetition, observation and content invariance, and every class the survivors cannot separate is listed with its log2 price",
+  "route_frontier": {
+   "canonical_base_commit": "8b3b02896ce3ff9a8ac82960cd7da6f84a2fb616",
+   "checked_at_utc": "2026-11-24T13:26:24+00:00",
+   "discovery_required": true,
+   "max_age_hours": 2,
+   "incumbent_route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
+   "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+   "challenger_routes": [
+    {
+     "route": "KEEP_THE_HAND_WRITTEN_KIND_TABLE",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "right on its own room, 11 of 19 kinds collapsed on the next",
+      "CAPABILITY_STRENGTH": "five names for nineteen kinds, so 11 goals cannot be stated",
+      "WALL_CLOCK": "0 s",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "stable",
+      "VERIFIABILITY": "equal"
+     },
+     "evidence": [
+      "room_u: 114 of 189 different pairs separated; plain covers 11 producer kinds"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "STORE_THE_REFUSAL_SENTENCE_READ_ONCE",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "no gain: the witness set is identical on two rooms",
+      "CAPABILITY_STRENGTH": "none",
+      "WALL_CLOCK": "0 s saved",
+      "INCREMENTAL_COST": "a stored copy that can go stale",
+      "RELIABILITY": "lower",
+      "VERIFIABILITY": "equal"
+     },
+     "evidence": [
+      "the witness set discovered on room A equals the set discovered on room B (64 checks, identical=True); a store would hold nothing"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "ASK_A_MODEL_TO_NAME_THE_KIND",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CORRECTNESS": "unverifiable",
+      "CAPABILITY_STRENGTH": "high",
+      "WALL_CLOCK": "unknown",
+      "INCREMENTAL_COST": "a model call at run time",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "none"
+     },
+     "evidence": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md forbids producer cognition by a model"
+     ],
+     "qualification_evidence": [
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md"
+     ],
+     "qualification_evidence_classes": [
+      "INDEPENDENT_VERIFIER"
+     ]
+    },
+    {
+     "route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+     "resolution": "SELECTED",
+     "comparison": {
+      "CORRECTNESS": "T1-T7 all met on a room of producers' objects",
+      "CAPABILITY_STRENGTH": "155 of 189 different pairs, four distinctions behind 45 names",
+      "WALL_CLOCK": "191.8 s",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "identical witness set on two rooms",
+      "VERIFIABILITY": "every verdict is a program's exit code"
+     },
+     "evidence": [
+      "2319 declared checks, 1338 accept everything, 16 write, 19 contradict themselves across two rooms, 45 witnesses, 4 distinctions, 5 residual classes"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_20261202_V1.json",
+      "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "discover a file type by which of a program's own checks accept it"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "magic number table versus running the format's own validator"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "file type identification by executable predicates rather than a signature database"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 typed capability lattice derived from tool checks"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+     "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "each program's own --help, read on this machine, for every declared check"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "the installed coreutils, gzip, tar, xz, bzip2, zip, ar, openssl and sqlite3 versions on this machine"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the libmagic / file(1) design: a written magic-number database, which is the incumbent route measured here"
+    ]
+   },
+   "unresolved_plausible_dominators": [],
+   "negative_search_summary": "no module in this tree read a program's declared check as a predicate over an object's type; libmagic, the published answer to this problem, is a hand-written table of magic numbers read against bytes, and this round measures exactly what that design costs on objects it was not written for",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-24T13:26:24+00:00",
+    "max_age_hours": 2,
+    "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "execution_dependencies": [
+     {
+      "dependency": "the local Python 3.11 interpreter that runs the instrument",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "the two runs in this PR"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "the producers that build the unseen room (tar, gzip, xz, bzip2, zip, ar, openssl, sqlite3, convert)",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "20 objects from 19 producer kinds"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "no network at run time",
+      "kind": "NETWORK_ENDPOINT",
+      "required": false,
+      "volatility": "VOLATILE",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "status": "READY",
+      "evidence": [
+       "network_calls_at_run_time = 0"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "observed_at_utc": "2026-11-24T05:08:21+00:00"
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "mode": "ACTIVE_INTERFACE",
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "proof_state_reachability": "No truth obligation is discharged by this round. The mechanism is a typed repertoire and a path search over it; what it changes is the existence of a model-free action grammar on this substrate, not any open obligation.",
+  "fresh_reality_authority": false,
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "A_TYPE_YOU_WROTE_IS_A_TYPE_YOU_GUESS_V1",
+   "falsifier_id": "A_TYPE_TABLE_IS_RIGHT_ON_A_ROOM_IT_NEVER_SAW",
+   "decisive_question": "Does the hand-written kind table still type the objects on a room of producers' objects, or is a derived witness set strictly better and honest about what it cannot separate?",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "counterexample_receipts": [
+    {
+     "path": "canonical/action_intents/THE_GUIDE_IS_AN_ACTION_GRAMMAR_20261124_V1.json",
+     "git_blob_sha": "7bbf24ab03374ac711e74c8613eb6d9a2d0c2ad5"
+    }
+   ]
+  }
+ },
+ "benchmark_or_family_rank_authority": "this sandbox's own programs; no benchmark output is borrowed and no answer is leaked",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "governance_change": null,
+ "weakens_existing_guard": false,
+ "falsification_condition": "any of: no guide yielding a runnable example; fewer than half of the examples that run matching the guide's own output; a matched example failing to separate a non-equivalent machine-made mutant; no rule transferring to an input outside the documentation; a checkable share at or above 100% (which would mean prose was counted as execution)",
+ "measured_effect": {
+  "guides_read": 9,
+  "examples_extracted": 189,
+  "examples_ran": 138,
+  "examples_matched": 130,
+  "match_rate_of_those_that_ran": 0.9412,
+  "refused_by_the_interpreter": 53,
+  "decoys_separated": "71/86",
+  "real_blind_spots": 0,
+  "rules_admitted": 2,
+  "stored_bytes": 603,
+  "transfer": "4/4",
+  "checkable_share_of_documentation": 0.0596,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0,
+  "the_open_circuit_is_closed": {
+   "defect": "perfect_algorithm_v1.run() fetched instant knowledge, stored it, and returned OPEN__NO_PLAN_AFTER_SCAN unconditionally",
+   "wire": "canonical/swe_kernel/perfect_algorithm_v1.py::_plan_from_document",
+   "gates_that_can_refuse": [
+    "EXTRACTED",
+    "REPLAYED",
+    "MATCHED",
+    "IN_VOCABULARY"
+   ],
+   "refusals_proven_to_fire": 4,
+   "plan_authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED"
+  }
+ },
+ "next_step": "measure the closed circuit on a real fetched document end to end (a stdlib module's own docstring fed through run()), then count how many of the interpreter's refusals are session-scope bindings the extractor can recover rather than guide defects",
+ "honest_limits": [
+  "the guides were fetched while building, so 'no network at run time' is a property of this instrument and not of the machine that fetched them",
+  "a guide's printed output is version-matched only when the guide and the library are the same version; neither is pinned here",
+  "the decoy mutation edits literals in the example's own statement, so an example with no literal cannot be probed and is reported as such rather than assumed blind",
+  "no frontier benchmark was run: OSWorld, FrontierSWE and Terminal-Bench were not available here",
+  "the extractor handles >>>/$ transcripts only; a guide written as prose instructions is not read",
+  "two admitted rules from 189 examples is a lower bound on admissibility, not a capability measure",
+  "every refusal and mismatch is this instrument's limit, not the guide's, and both are sampled in the receipt"
+ ],
+ "user_authorized_governance_change": false,
+ "selectivity_note": "the room is built by its producers and the labels are used only to score, never to discover",
+ "selective_note": "the room is built by its producers and the labels are used only to score, never to discover",
+ "verification": "two consecutive runs give an identical verdict; the round's workflow re-runs the instrument on a clean machine and fails if the receipt stops saying what it is not; repo_integrity_guard reports 0 violations",
+ "progress_evidence_note": "the evidence is the instrument, its receipt and its essay; the three were changed by this PR",
+ "selected_route_preflight": {
+  "checked_at_utc": "2026-11-24T13:26:24+00:00",
+  "max_age_hours": 2,
+  "selected_route": "RUN_THE_DECLARED_CHECKS_AS_WITNESSES_AND_LET_THE_MACHINE_SAY_WHAT_IT_CAN_STILL_SEPARATE",
+  "status": "READY",
+  "all_required_dependencies_ready": true,
+  "execution_dependencies_complete": true,
+  "failed_dependencies": [],
+  "execution_dependencies": [
+   {
+    "dependency": "the local Python 3.11 interpreter that runs the instrument",
+    "kind": "LOCAL_RUNTIME",
+    "required": true,
+    "volatility": "STATIC",
+    "scope": "LOCAL",
+    "evidence_scope": "LOCAL",
+    "status": "READY",
+    "evidence": [
+     "the two runs in this PR"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "dependency": "the producers that build the unseen room (tar, gzip, xz, bzip2, zip, ar, openssl, sqlite3, convert)",
+    "kind": "CODE_ARTIFACT",
+    "required": true,
+    "volatility": "STATIC",
+    "scope": "LOCAL",
+    "evidence_scope": "LOCAL",
+    "status": "READY",
+    "evidence": [
+     "20 objects from 19 producer kinds"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ]
+   },
+   {
+    "dependency": "no network at run time",
+    "kind": "NETWORK_ENDPOINT",
+    "required": false,
+    "volatility": "VOLATILE",
+    "scope": "GLOBAL",
+    "evidence_scope": "GLOBAL",
+    "status": "READY",
+    "evidence": [
+     "network_calls_at_run_time = 0"
+    ],
+    "evidence_classes": [
+     "DIRECT_PROBE"
+    ],
+    "observed_at_utc": "2026-11-24T05:08:21+00:00"
+   }
+  ]
+ },
+ "honest_comparison": {
+  "on_room_u_of_189_different_pairs": {
+   "written_kind_table": 114,
+   "inherited_scanner_as_written": 161,
+   "inherited_scanner_after_the_four_tests": 149,
+   "this_rounds_derived_witnesses": 155,
+   "different_pairs": 189
+  },
+  "what_this_round_does_not_beat": "on this room, by 6 of 189 different pairs (161 against 155); it also leaves 5 of 20 objects with an empty signature against this round's 6",
+  "why_the_derived_set_is_still_the_route": "the scanner this tree already had separates MORE different pairs than the derived witness set does, and this round does not beat it on that number: its validators were written by its author for kinds its author had met, and one of them (python) is a content test that this round's rule removes. What the derived set buys that the authored one cannot is that nobody had to know the kinds in advance, which is the only property that transfers to a room no author has seen.",
+  "the_one_kind_the_rule_removes_from_the_authored_scanner": "python (a content test: a .py parses and a .md does not, so it contradicts itself on plain-text)"
+ }
+}

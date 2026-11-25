@@ -1,0 +1,85 @@
+{
+ "schema": "BRAIN_SCAN_RETRIEVE_FETCH_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "host": "/tmp/bbh",
+ "programs_on_host": 9,
+ "known_from_memory": 9,
+ "unknown_probed": 0,
+ "unreadable": 0,
+ "newly_learned": 0,
+ "memory_entries": 438,
+ "typed_after_visit": 9,
+ "compositions_proved": 4,
+ "compositions": [
+  {
+   "sink": "BASE32[TEXT]",
+   "chain": [
+    "base32"
+   ],
+   "inverse": [
+    "base32"
+   ],
+   "final_bytes": 219,
+   "source_bytes": 132,
+   "ok": true
+  },
+  {
+   "sink": "BASE64[TEXT]",
+   "chain": [
+    "base64"
+   ],
+   "inverse": [
+    "base64"
+   ],
+   "final_bytes": 179,
+   "source_bytes": 132,
+   "ok": true
+  },
+  {
+   "sink": "BUNZIP2[TEXT]",
+   "chain": [
+    "bunzip2"
+   ],
+   "ok": false,
+   "reason": "bunzip2 produced nothing"
+  },
+  {
+   "sink": "BZIP2[TEXT]",
+   "chain": [
+    "bzip2"
+   ],
+   "inverse": [
+    "bzip2"
+   ],
+   "final_bytes": 93,
+   "source_bytes": 132,
+   "ok": true
+  },
+  {
+   "sink": "GUNZIP[TEXT]",
+   "chain": [
+    "gunzip"
+   ],
+   "ok": false,
+   "reason": "gunzip produced nothing"
+  },
+  {
+   "sink": "GZIP[TEXT]",
+   "chain": [
+    "gzip"
+   ],
+   "inverse": [
+    "gzip"
+   ],
+   "final_bytes": 66,
+   "source_bytes": 132,
+   "ok": true
+  }
+ ],
+ "seconds": 0.045,
+ "cost_zeros": {
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters_stored": 0
+ }
+}

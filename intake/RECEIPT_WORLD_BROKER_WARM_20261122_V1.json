@@ -1,0 +1,48 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "evidence": [
+  "pyproject.toml"
+ ],
+ "evidence_digest": "30415f82bdbbc0691ec2b3d4a9f8f0b13e9cde8c6fa674f008862c505088552c",
+ "from_memory": true,
+ "goal": "run-tests",
+ "interpreter": {
+  "check": "requires-python '>=3.8' vs this interpreter 3.11",
+  "ok": true,
+  "version": "3.11.2"
+ },
+ "layout": {
+  "kind": "src-layout",
+  "packages": [
+   "tomli"
+  ]
+ },
+ "recheck": {
+  "exit_code": 0,
+  "ok": true,
+  "seconds": 0.6127
+ },
+ "requirements": {
+  "build_backend": "flit_core.buildapi",
+  "declared_deps": [],
+  "requires_python": ">=3.8"
+ },
+ "runner": {
+  "command": [
+   "/tmp/brainvenv/bin/python",
+   "-m",
+   "pytest",
+   "-q"
+  ],
+  "exit_code": 0,
+  "ok": true,
+  "reported_failed_or_errored": null,
+  "reported_passed": 14,
+  "seconds": 0.6127,
+  "tail": "..............      [100%]\n14 passed, 557 subtests passed in 0.23s\n"
+ },
+ "schema": "BRAIN_THE_ENVIRONMENT_BROKER_V1",
+ "seconds": 0.6142,
+ "tree": "/tmp/fresh_tomli",
+ "verdict": "ENVIRONMENT_BROKERED_FROM_MEMORY"
+}

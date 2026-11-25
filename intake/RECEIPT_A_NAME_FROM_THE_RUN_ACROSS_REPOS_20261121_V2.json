@@ -1,0 +1,33 @@
+{
+ "schema": "BRAIN_A_NAME_FROM_THE_RUN_ACROSS_REPOS_V2",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "matching": "by argument POSITION, not identifier -- the caller's name and the callee's parameter name are usually different, and a name match silently counts only the coincidences. V1 of this receipt used names and was WRONG.",
+ "definitions": {
+  "entered_and_single_typed": "callee entered during the suite and the argument had exactly one type",
+  "settled_by_a_value": "additionally the witnessed value is JSON-encodable, i.e. usable as a prober token"
+ },
+ "rows": [
+  {
+   "repo": "pypa/packaging",
+   "tag": "24.0",
+   "blocked_sites": 59,
+   "entered_and_single_typed": 40,
+   "settled_by_a_value": 14,
+   "settled_rate": 0.2373,
+   "suite": "26852 passed, 6 warnings in 36.96s"
+  },
+  {
+   "repo": "pallets/itsdangerous",
+   "tag": "2.1.2",
+   "blocked_sites": 10,
+   "entered_and_single_typed": 0,
+   "settled_by_a_value": 0,
+   "settled_rate": 0.0,
+   "suite": "297 passed in 0.95s"
+  }
+ ],
+ "totals": {
+  "blocked": 69,
+  "settled": 14
+ }
+}

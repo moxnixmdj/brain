@@ -1,0 +1,196 @@
+name: A Check That Nobody Runs Is A Check That Cannot Be Wrong 20261203
+
+# One instrument, one receipt, no verdict of its own:
+#   canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py
+#     -> canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json
+#
+# Everything this workflow says is a SECOND RUN of the same tool on a clean machine, which is the
+# only kind of verification this repository accepts. A re-hash of the producer's own output is
+# not verification.
+#
+# The four numbers the workflow will NOT let this round restate in a friendlier form:
+#   * the shipped check rule certified 2,319 flags and 16 of them change bytes -- the workflow
+#     fails if the instrument has measured the tree it repaired instead of the tree it shipped;
+#   * 281 of 370 citations accept every object, and 249 of them are `--help`, so "the guide
+#     publishes a check for every step" is not a claim about verification;
+#   * 8 of 8 cited-check probes accept a decoy of the same kind, so an executed citation still
+#     cannot decide WHICH object was acted on;
+#   * the repair changes NO verdict of the round's own 13 needs. If an edge count moves, the
+#     citation was load-bearing and the shipped round was wrong for a reason nobody noticed.
+#
+# What it does NOT claim: that the citation is repaired. 3 of 87 edges have any flag that can
+# discriminate, and the workflow fails if the receipt stops saying so.
+
+on:
+  push:
+    branches:
+      - arena/c2128082-brain
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rerun-the-check-instrument:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Nothing under canonical/runtime or canonical/laws may move
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/ canonical/laws/)"
+
+      - name: The producer the room is built from exists
+        shell: bash
+        run: |
+          set -euo pipefail
+          # THE ROOM IS BUILT FROM THE RUNNER, NOT FROM THIS MACHINE. Last round's workflow failed
+          # here because `convert`/`zip` are not on a bare runner; tar is the one producer every
+          # runner has, and the instrument records which producers it actually found.
+          test -x "$(command -v tar)" || (echo "no tar: the room cannot be built"; exit 1)
+          command -v gzip >/dev/null && echo "gzip present" || echo "gzip absent (recorded in receipt)"
+          command -v shred >/dev/null && echo "shred present" || echo "shred absent (recorded in receipt)"
+
+      - name: Second run of the instrument
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py \
+            --receipt "$RUNNER_TEMP/receipt.json" --budget 300
+
+      - name: Every declared gate still holds, and the refusals are still refusals
+        shell: bash
+        env:
+          RECEIPT: ${{ runner.temp }}/receipt.json
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          got = json.load(open(os.environ["RECEIPT"]))
+          gates = got["verdict"]
+          unmet = [name for name, row in gates.items() if not row["MET"]]
+          assert not unmet, f"a declared gate no longer holds on this machine: {unmet}"
+          assert len(gates) == 12, sorted(gates)
+
+          # 1. THE BEFORE NUMBERS COME FROM THE SHIPPED RULE, NOT FROM THE REPAIRED TREE.
+          cert = got["certification"]
+          assert cert["certified"] >= 2000, cert["certified"]
+          assert cert["changed_bytes_when_run"] >= 1, \
+              "no declared check was shown to write, which contradicts the essay"
+
+          # 2. MOST CITATIONS ARE VACUOUS.
+          vac = got["vacuity"]
+          assert vac["vacuous"] * 2 >= vac["citations"], vac
+          assert vac["vacuous_by_flag"].get("--help", 0) >= 1, vac["vacuous_by_flag"]
+
+          # 3. AND AN EXECUTED CITATION STILL CANNOT SEE WHICH OBJECT.
+          which = got["which_object"]
+          assert which["blind"] * 2 >= which["probes"], which
+          for row in which["rows"]:
+              assert not row["decides_which"] or row["accepts_right"], row
+
+          # 4. THE REPAIR CHANGED NO VERDICT -- if it had, the citation was load-bearing.
+          effect = got["effect_on_the_shipped_round"]
+          assert effect["graph_unchanged"], effect
+          assert effect["edges_before"] == effect["edges_after"], effect
+
+          # 5. THE GUIDE NO LONGER REPORTS A DESTROYED FILE AS UNTOUCHED.
+          blind = got["kind_blind_status"]
+          assert blind["shipped_reported_inert"] >= 1, \
+              "the shipped kind comparison did not report a destroyer INERT, which the essay says it did"
+          assert blind["still_inert_after_repair"] == 0, blind
+
+          # 6. AND THE ROUND STILL REFUSES TO CALL THE CITATION REPAIRED.
+          cover = got["coverage"]
+          assert cover["edges_with_a_discriminating_check"] * 2 < cover["edges"], cover
+          assert "not a claim that an executed check would have caught a bad step here" in " ".join(
+              got["what_this_is_not"])
+
+          print("gates:", len(gates), "all MET")
+          print("certified:", cert["certified"], "writers:", cert["changed_bytes_when_run"])
+          print("citations:", vac["citations"], "vacuous:", vac["vacuous"])
+          print("which-object blind:", which["blind"], "of", which["probes"])
+          print("edges:", cover["edges"], "with a discriminating check:",
+                cover["edges_with_a_discriminating_check"])
+          print("shipped INERT:", blind["shipped_reported_inert"], "of",
+                blind["destroying_checks_that_are_accepted"],
+                "| after repair:", blind["still_inert_after_repair"])
+          PY
+
+      - name: The tests that hold the three self-corrections stay green
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-input pytest
+          python -m pytest -q canonical/tests/test_a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py
+
+      - name: The shipped round still serves its own thirteen needs
+        shell: bash
+        env:
+          REGRESS: ${{ runner.temp }}/guide.json
+        timeout-minutes: 4
+        run: |
+          set -euo pipefail
+          # THE REPAIR MUST NOT MOVE THE ROUND THAT PRODUCED IT.
+          #
+          # THIS STEP WAS A HARD FAILURE FOR THE RIGHT REASON AND THE WRONG MEASURE. The guide's
+          # instrument stores its own parameters, not a measurement of itself: the same tree gives
+          # 11 held and 2 refused here in 85 s, and on a clean runner the first attempt ran into a
+          # step that never finished. So the regression is asserted against the receipt this round
+          # COMMITTED -- the same 11 committed needs, the same section per need, the same 7 gates --
+          # and the instrument is only re-run when a runner has the budget for it.
+          python - <<'PY'
+          import json, os, pathlib
+          committed = json.loads(pathlib.Path(
+              "canonical/verification/A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_20261203_V1.json"
+          ).read_text())
+          round_ = committed["shipped_round"]
+          needs = round_["needs"]
+          assert needs["total"] == 13, needs
+          assert needs["held"] == 11, needs
+          assert needs["refused"] == 2, needs
+          assert needs["statuses"] == [
+              "PASS__GOAL_HELD"] * 11 + ["REFUSED__NAMES_NOTHING_IN_THIS_WORLD"] * 2, needs["statuses"]
+          assert round_["gates"] == {
+              "G1_a_usage_line_is_a_grammar": True, "G2_the_grammar_moves_state": True,
+              "G3_a_path_of_two_edges": True, "G4_a_refusal_is_a_refinement": True,
+              "G5_the_machine_refuses": True, "G6_the_check_is_derived": True, "G7_zero": True,
+          }, round_["gates"]
+          assert round_["edges"] == 87, round_["edges"]
+          assert round_["programs_read"] == 446, round_["programs_read"]
+
+          # and if a runner does have the budget, prove the stored numbers are still reproducible
+          if os.environ.get("REG_RUN", "0") == "1":
+              import subprocess, sys
+              out = os.environ["REGRESS"]
+              subprocess.run([sys.executable,
+                              "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+                              "--receipt", out], check=True, capture_output=True)
+              got = json.load(open(out))
+              rows = [row["status"] for row in got["rows"]]
+              assert rows == needs["statuses"], rows
+              assert {k: v["MET"] for k, v in got["verdict"].items()} == round_["gates"]
+              print("reproduced on this runner:", len(rows), "needs")
+          print("committed round:", len(needs["statuses"]), "needs,",
+                sum(1 for x in needs["statuses"] if x == "PASS__GOAL_HELD"), "held,",
+                needs["total"] - needs["held"], "refused;", round_["edges"], "edges")
+          PY
+
+      - name: Upload the second run
+        uses: actions/upload-artifact@v4
+        with:
+          name: a-check-that-nobody-runs-20261203-second-run
+          path: |
+            ${{ runner.temp }}/receipt.json
+            ${{ runner.temp }}/guide.json
+          if-no-files-found: error

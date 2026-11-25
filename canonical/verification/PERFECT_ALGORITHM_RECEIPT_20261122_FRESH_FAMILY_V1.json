@@ -1,0 +1,51 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-22",
+  "honest_notes": [
+    "priors are observed facts about the instance that produced them",
+    "a fresh instance re-verifies every stored row against its own env",
+    "only root transitions that survive re-execution are trusted",
+    "stale rows are discarded, never silently used",
+    "the plan rule is persistent only when admitted on fresh instances; the fresh instance B does not offer one, so the honest outcome is refusal"
+  ],
+  "instance_a": {
+    "plan_length": 6,
+    "plan_rule_refused_reason": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+    "priors_saved": "PASS__PRIORS_SAVED",
+    "rule_persisted": "REFUSED__NOT_PERSISTED",
+    "walls": []
+  },
+  "instance_b": {
+    "memory_lookup": {
+      "matches": 0,
+      "rule_ids": []
+    },
+    "plan_length": 6,
+    "reached_after_execute": true,
+    "rule_persist_reason": "NO_FRESH_INSTANCES_OFFERED__NOT_PERSISTED",
+    "rule_persisted": "REFUSED__NOT_PERSISTED",
+    "scan": {
+      "duration_s": 0.0055,
+      "priors_stale_discarded": 43,
+      "priors_used": 3,
+      "root": "el-state-v2:9fe5eba54ad63f0327fc6dfa77edb23a7802311252c22314ac26ccd351466584",
+      "states_seen": 13,
+      "transitions_seen": 42
+    },
+    "walls": [
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ]
+  },
+  "schema": "PROJECT_BRAIN_PA_FRESH_FAMILY_RECEIPT_V1"
+}

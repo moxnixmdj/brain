@@ -1,0 +1,30 @@
+{
+  "base_checkpoint_commit": "623aee775780bba138ceb8bf731a099498b6249b",
+  "carrier_qualified": false,
+  "errors": 0,
+  "failed": 0,
+  "files_sha256": {
+    "canonical/runtime/repair_candidate_broker_v1.py": "e70cd6a989c426375c46b7216140cf265de604526779a0fbb0ef49a8b5218583",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6a5c1d8d67667f2f77ca31ea5924c3260b13045347ee36633d6d0d7b274a1bb5",
+    "canonical/tests/test_isolated_worktree_fixture_collector_v1.py": "e25af00a65e2404b59c8d05a06e32f581d045e6a8aa49a8f689a34ae680e22f4",
+    "canonical/tools/isolated_effect_receipt_verifier_v1.py": "9f15b07f9343f2b93f9dcc54e210c2d1cfd12962d381c086195ddae4294b5004",
+    "canonical/tools/isolated_worktree_fixture_collector_v1.py": "339f220aae89f4ad8f5e1445b1762f3867e6edee7a2cbf1a0e6cad9350718bd5",
+    "qualification_results/namespace_worktree_fixture_20261124.log": "8b6b0fb647a492dbf26a540b1b6735fa4e1afc664580b482d9eb8bc51b74adc4"
+  },
+  "independent_verification": false,
+  "limitations": [
+    "Controlled producer-run test fixtures only; no independent carrier verification.",
+    "Host scratch directory assumes no hostile external writer; two snapshots cannot prove all races absent.",
+    "Modified namespace setup and host libraries are not independently qualified.",
+    "Diff limited to existing UTF-8 text files with unchanged layout and modes.",
+    "Receipt is hashed, not signed or independently attested; not benchmark prediction authority."
+  ],
+  "official_benchmark_report": false,
+  "os": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "passed": 90,
+  "schema": "LOCAL_PRODUCER_RUN_WORKTREE_FIXTURE_DIAGNOSTIC_V1",
+  "skip_reason": "Host denied packet capture (CAP_NET_RAW); external egress not verified and observer not implemented.",
+  "skipped": 1,
+  "test_runtime_seconds": 41.985,
+  "tests_total": 91
+}

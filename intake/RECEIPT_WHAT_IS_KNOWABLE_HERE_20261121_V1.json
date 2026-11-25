@@ -1,0 +1,528 @@
+{
+ "schema": "BRAIN_WHAT_IS_KNOWABLE_HERE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "declared_before_the_runs": {
+  "W1": "every LOOK row carries the byte offset that proves it and is dropped if it no longer re-reads to the same bytes",
+  "W2": "answered + gaps equals the enumerated host; nothing leaves the books",
+  "W3": "memory stores one worked example per shape and reports the retention ratio as measured, however unflattering",
+  "W4": "perishability is measured by changing only the environment and re-asking; moving statements are never stored as facts",
+  "W5": "channel costs are compared in one unit (bytes of statement per second) so LOOK, ASK and WEB are directly comparable",
+  "W6": "at least one program whose own text contradicts its own parser is found by TEST, or TEST reports that it found none -- either way it runs",
+  "W7": "residency is measured: the fraction of ASK's claims already present verbatim in the artifact's own bytes",
+  "W8": "zero model calls, zero stored parameters, no network outside the priced WEB channel",
+  "W9": "the premise that a guide already exists is measured, not assumed: the package database's own documentation citations are checked against the files actually on disk"
+ },
+ "host": {
+  "path_dirs": [
+   "/usr/local/bin",
+   "/usr/bin",
+   "/bin",
+   "/usr/local/games",
+   "/usr/games"
+  ],
+  "mounts_visible": 25,
+  "names": 643,
+  "unique_executables": 492,
+  "bytes_on_disk": 284429075
+ },
+ "channels": {
+  "LOOK": {
+   "ms": 6342.9,
+   "statements": 395,
+   "bytes_read": 284429075,
+   "ms_per_statement": 16.058,
+   "note": "compiled-in text is a skeleton, not a manual"
+  },
+  "ASK": {
+   "ms": 3336.9,
+   "statements": 535,
+   "bytes": 797165,
+   "answered": 490,
+   "gaps": 2,
+   "gap_programs": [
+    "debconf-apt-progress",
+    "instmodsh"
+   ],
+   "ms_per_statement": 6.2372
+  },
+  "TEST": {
+   "probed": 90,
+   "verdicts": {
+    "ACCEPTS_BARE": 87,
+    "REQUIRES_ATTACHED_VALUE": 1,
+    "SELF_CONTRADICTION": 1,
+    "SKIPPED_DESTRUCTIVE_PROGRAM": 1
+   },
+   "findings": [
+    {
+     "program": "dpkg-genchanges",
+     "flag": "--build",
+     "verdict": "REQUIRES_ATTACHED_VALUE",
+     "note": "unknown option '--build'"
+    },
+    {
+     "program": "gcov-tool",
+     "flag": "--fullname",
+     "verdict": "SELF_CONTRADICTION",
+     "note": "unrecognized option '--fullname=BRAIN_PROBE'"
+    }
+   ]
+  },
+  "WEB": {
+   "ms_per_fetch": 255.2,
+   "bytes_per_fetch": [
+    4096,
+    4096,
+    4096
+   ],
+   "rows": [
+    {
+     "name": "npm-registry",
+     "url": "https://registry.npmjs.org/tar",
+     "status": "FETCHED",
+     "bytes": 4096,
+     "ms": 99.5
+    },
+    {
+     "name": "github-api",
+     "url": "https://api.github.com/repos/git/git",
+     "status": "FETCHED",
+     "bytes": 4096,
+     "ms": 419.8
+    },
+    {
+     "name": "github-codeload",
+     "url": "https://codeload.github.com/git/git/tar.gz/refs/heads/master",
+     "status": "FETCHED",
+     "bytes": 4096,
+     "ms": 246.4
+    }
+   ],
+   "measured": true,
+   "note": "fallback only; never lands a row"
+  }
+ },
+ "totality": {
+  "look_plus_ask_ms": 9679.8,
+  "statements": 930,
+  "ms_per_statement": 10.4084,
+  "bytes_per_s": 29466129.0,
+  "web_bytes_per_s": 16048.0,
+  "host_speedup_over_web": 1836.1,
+  "ask_ms_per_program": 6.78,
+  "web_ms_per_fetch": 255.2,
+  "per_program_speedup_over_web": 37.6,
+  "note": "web is a page about a version, not this host's contract; the comparison prices transport, not authority"
+ },
+ "residency": {
+  "programs_claiming_flags": 388,
+  "programs_whose_flags_are_in_their_own_bytes": 354,
+  "resident_fraction": 0.912,
+  "examples": [
+   "[",
+   "addpart",
+   "addr2line",
+   "apt-key",
+   "ar",
+   "arch",
+   "as",
+   "b2sum"
+  ]
+ },
+ "documentation": {
+  "sampled": 120,
+  "sampling": "every 4th executable in path order",
+  "programs_with_a_documentation_citation": 85,
+  "citations_made": 7432,
+  "citations_present_on_disk": 0,
+  "citations_absent": 7432,
+  "present_fraction": 0.0,
+  "programs_with_no_package_owner": 28,
+  "examples": [
+   {
+    "program": "[",
+    "package": "coreutils",
+    "cited": "/usr/share/man/man1/arch.1.gz",
+    "on_disk": false
+   },
+   {
+    "program": "apt",
+    "package": "apt",
+    "cited": "/usr/share/man/de/man1/apt-transport-http.1.gz",
+    "on_disk": false
+   },
+   {
+    "program": "apt-get",
+    "package": "apt",
+    "cited": "/usr/share/man/de/man1/apt-transport-http.1.gz",
+    "on_disk": false
+   },
+   {
+    "program": "arch",
+    "package": "coreutils",
+    "cited": "/usr/share/man/man1/arch.1.gz",
+    "on_disk": false
+   },
+   {
+    "program": "base32",
+    "package": "coreutils",
+    "cited": "/usr/share/man/man1/arch.1.gz",
+    "on_disk": false
+   },
+   {
+    "program": "chcon",
+    "package": "coreutils",
+    "cited": "/usr/share/man/man1/arch.1.gz",
+    "on_disk": false
+   }
+  ],
+  "ms": 2635.1
+ },
+ "probe_residue": {
+  "sampled": 492,
+  "sampling": "all",
+  "writers": [
+   {
+    "program": "as",
+    "flag": "--alternate",
+    "residue": [
+     "a.out"
+    ]
+   },
+   {
+    "program": "bzexe",
+    "flag": "--help",
+    "residue": [
+     "gz826248"
+    ]
+   },
+   {
+    "program": "pod2html",
+    "flag": "--backlink",
+    "residue": [
+     "pod2htmd.tmp"
+    ]
+   },
+   {
+    "program": "pygettext3",
+    "flag": "--add-location",
+    "residue": [
+     "messages.pot"
+    ]
+   },
+   {
+    "program": "script",
+    "flag": "--append",
+    "residue": [
+     "typescript"
+    ]
+   }
+  ],
+  "writer_count": 5,
+  "note": "each probe ran in a deleted scratch dir; nothing is left in the repository"
+ },
+ "memory": {
+  "shapes": [
+   {
+    "shape": [
+     "FLAG",
+     "ELF"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "[",
+     "statement": "--help --version"
+    }
+   },
+   {
+    "shape": [
+     "FLAG",
+     "SCRIPT"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "apt-key",
+     "statement": "--help --keyring"
+    }
+   },
+   {
+    "shape": [
+     "HAZARD",
+     "ELF"
+    ],
+    "channel": "LOOK",
+    "worked_example": {
+     "program": "bash",
+     "statement": "recursively"
+    }
+   },
+   {
+    "shape": [
+     "HAZARD",
+     "SCRIPT"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "bzless",
+     "statement": "own text names a hazard"
+    }
+   },
+   {
+    "shape": [
+     "TEXT",
+     "ELF"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "animate",
+     "statement": "animate: unable to open X server `' @ error/animate.c/AnimateImageCommand/350."
+    }
+   },
+   {
+    "shape": [
+     "TEXT",
+     "SCRIPT"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "bzcmp",
+     "statement": "Usage: bzcmp [cmp_options] file [file]"
+    }
+   },
+   {
+    "shape": [
+     "USAGE",
+     "ELF"
+    ],
+    "channel": "LOOK",
+    "worked_example": {
+     "program": "[",
+     "statement": "Usage: test EXPRESSION"
+    }
+   },
+   {
+    "shape": [
+     "USAGE",
+     "SCRIPT"
+    ],
+    "channel": "LOOK",
+    "worked_example": {
+     "program": "apt-key",
+     "statement": "Usage: apt-key [--keyring file] [command] [arguments]\""
+    }
+   },
+   {
+    "shape": [
+     "VERSION",
+     "ELF"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "apt",
+     "statement": "apt 2.6.1"
+    }
+   },
+   {
+    "shape": [
+     "VERSION",
+     "SCRIPT"
+    ],
+    "channel": "ASK",
+    "worked_example": {
+     "program": "h2xs",
+     "statement": "version: 1.23"
+    }
+   }
+  ],
+  "kept": 10,
+  "observed_statements": 930,
+  "dropped_repeats": 920,
+  "retention_ratio": 93.0,
+  "bytes_to_store": 1336,
+  "replay": {
+   "shape_hits": 535,
+   "miss_count": 0,
+   "misses": [],
+   "ask_ms_per_program": 6.78,
+   "shape_check_ms_per_program": 0.0008,
+   "speedup": 8587.8
+  }
+ },
+ "perishable": {
+  "sample": 24,
+  "sampling": "every 20th executable in path order",
+  "rows": [
+   {
+    "program": "[",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "bash",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "chcon",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "cpan",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "PERISHABLE"
+   },
+   {
+    "program": "delpart",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "dpkg-gencontrol",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "elfedit",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "free",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "gp-display-html",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "id",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "kill",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "logname",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "mcookie",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "nohup",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "pgrep",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "prlimit",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "realpath",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "scriptreplay",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "size",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "strings",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "systemd-firstboot",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "tee",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "uclampset",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   },
+   {
+    "program": "wget",
+    "before": "ANSWERED",
+    "after": "ANSWERED",
+    "verdict": "STABLE"
+   }
+  ],
+  "changed_environment": {
+   "HOME": "/nonexistent",
+   "LC_ALL": "C",
+   "TZ": "UTC",
+   "cwd": "/tmp/knowable_work"
+  },
+  "moved": [
+   "cpan"
+  ]
+ },
+ "verdict": {
+  "W1_look_rows_reread": true,
+  "W2_the_host_is_accounted_for": true,
+  "W3_retention_is_reported": true,
+  "W4_perishable_is_measured": true,
+  "W5_channels_compared_in_one_unit": true,
+  "W6_self_contradiction_hunted": true,
+  "W7_residency_is_measured": true,
+  "W8_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_outside_the_priced_web_channel": false
+  },
+  "W9_the_local_guide_is_checked": true,
+  "W10_probe_residue_is_contained": true
+ },
+ "all_criteria_met": true,
+ "seconds": 34.43
+}

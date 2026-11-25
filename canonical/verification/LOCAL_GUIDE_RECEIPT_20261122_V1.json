@@ -1,0 +1,65 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "date": "2026-11-22",
+  "direct_local_tier_measurements": [
+    {
+      "documents_found": 5,
+      "pass": false,
+      "query": "how to use grid world: exit the 4x4 grid",
+      "score": 2.0,
+      "status": "OPEN__LOCAL_GUIDE_NOT_FOUND",
+      "tokens": [
+        "grid",
+        "world",
+        "exit",
+        "4x4"
+      ]
+    },
+    {
+      "documents_found": 5,
+      "pass": true,
+      "query": "how to use dial lock: open the lock",
+      "score": 3.0,
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "tokens": [
+        "dial",
+        "lock",
+        "open"
+      ]
+    }
+  ],
+  "honest_notes": [
+    "the local tier reads the computer's own guides: offline, repo-relative, completeness-gated (never the web unless the caller asks)",
+    "a document answers only if ONE paragraph shares content tokens with the query -- 60% of content tokens, minimum 2",
+    "function words carry no conclusion: the repo's own docs do NOT honestly answer 'how to use grid world'",
+    "when the local tier misses, the receipt stays OPEN -- instant knowledge orients, it does not achieve"
+  ],
+  "integration": {
+    "goal": "exit the 4x4 grid (row y=1 walled, goal unreachable)",
+    "instant_knowledge": {
+      "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+      "complete": true,
+      "documents_returned": 1,
+      "local_guide": {
+        "authority": "EXTERNAL_LOCAL_DOCS_RETRIEVED",
+        "documents": [
+          {
+            "matched_terms": 4,
+            "path": "README.md",
+            "score": 4.0,
+            "snippet": "How to use a grid world: walk the grid with up, down, left, right.\nThe exit is the 4x4 grid's goal state at (3,3). Walk to (3,3) and you have exited the grid world.\nA successful exit returns the exit coordinate (3,3)."
+          }
+        ],
+        "score": 4.0,
+        "status": "PASS__LOCAL_GUIDE_FOUND"
+      },
+      "query": "how to use grid world: exit the 4x4 grid",
+      "status": "PASS__LOCAL_GUIDE_FOUND",
+      "tier": "local"
+    },
+    "pass": false,
+    "plan_status": "REFUSED__GOAL_NEVER_OBSERVED",
+    "status": "OPEN__NO_PLAN_AFTER_SCAN"
+  },
+  "schema": "PROJECT_BRAIN_LOCAL_GUIDE_RECEIPT_V1"
+}

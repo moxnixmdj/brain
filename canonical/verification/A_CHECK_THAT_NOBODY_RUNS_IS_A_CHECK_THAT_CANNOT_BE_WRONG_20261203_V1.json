@@ -1,0 +1,661 @@
+{
+ "schema": "BRAIN_A_CHECK_THAT_NOBODY_RUNS_IS_A_CHECK_THAT_CANNOT_BE_WRONG_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-12-03",
+ "mode": "A_CITATION_IS_A_CHECK_ONLY_IF_IT_IS_RUN_AND_CAN_TELL_WHICH",
+ "declared_before_the_run": {
+  "C1_the_shipped_rule_certifies_flags_that_write": "at least one flag the shipped rule calls a read-only check changes bytes when run against a real object",
+  "C2_the_citation_is_never_executed": "the check the guide attaches to a step is a receipt field and no goal verdict depends on it",
+  "C2b_most_citations_are_vacuous": "at least half of the citations the guide attaches accept EVERY object in the room and therefore say nothing about the object they are attached to",
+  "C2c_even_executed_survivors_mostly_cannot_separate_objects": "of the flags that survive the execution test, fewer than a third can separate one object in the room from another, so a repaired citation still cannot witness an action",
+  "C3_a_cited_check_cannot_tell_which_object_was_acted_on": "at least half of the checks the guide would cite accept a decoy of the same kind that the action never touched",
+  "C4_the_repair_removes_every_writer_without_naming_one": "the execution rule removes every flag that changed bytes, plus the destroyers the page's own vocabulary names, and names no program",
+  "C5_the_repair_changes_no_verdict_the_round_computed": "the citation is not read by the graph or the goal check, so repairing it changes what the round claims and no number it computed",
+  "C6_almost_none_of_the_surviving_citations_decides_which_object": "of the citations that survive the repair, fewer than a fifth decide WHICH object -- so the honest name for a repaired citation is a validity test, not a verification of the action",
+  "C8_a_discriminating_rule_leaves_the_graph_uncitable": "if a citation must discriminate, most of the graph's edges have no citation available at all -- so the repair cannot be 'cite a discriminating flag'",
+  "C9_the_guide_tells_the_operator_a_destroyed_file_was_not_touched": "at least one of the flags the shipped rule certified as read-only runs, destroys the bytes of the object it was given, and is reported back as ACCEPTED_INERT -- 'succeeded and changed nothing'",
+  "C10_the_byte_comparison_repairs_the_status": "after `run()` compares content instead of kinds, none of the destroyers the shipped comparison called INERT is still called INERT",
+  "C7_zero": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "verdict": {
+  "C1_the_shipped_rule_certifies_flags_that_write": {
+   "claimed": "at least one flag the shipped rule calls a read-only check changes bytes when run against a real object",
+   "measured": "16 of 2319 certified checks changed bytes over 4638 runs",
+   "MET": true
+  },
+  "C2_the_citation_is_never_executed": {
+   "claimed": "the check the guide attaches to a step is a receipt field and no goal verdict depends on it",
+   "measured": "370 pages would be cited; goal_holds() runs its own programs",
+   "MET": true
+  },
+  "C2b_most_citations_are_vacuous": {
+   "claimed": "at least half of the citations the guide attaches accept EVERY object in the room and therefore say nothing about the object they are attached to",
+   "measured": "281 of 370 cited flags accept every object; the most common is --help on 249 pages",
+   "MET": true
+  },
+  "C2c_even_executed_survivors_mostly_cannot_separate_objects": {
+   "claimed": "of the flags that survive the execution test, fewer than a third can separate one object in the room from another, so a repaired citation still cannot witness an action",
+   "measured": "8 of 439 survivors discriminate; 206 accept every object and 225 accept none",
+   "MET": true
+  },
+  "C3_a_cited_check_cannot_tell_which_object_was_acted_on": {
+   "claimed": "at least half of the checks the guide would cite accept a decoy of the same kind that the action never touched",
+   "measured": "8 of 8 probes accept the decoy: gzip -t, gzip -l, gunzip -t, tar -tf, tar -tvf",
+   "MET": true
+  },
+  "C4_the_repair_removes_every_writer_without_naming_one": {
+   "claimed": "the execution rule removes every flag that changed bytes, plus the destroyers the page's own vocabulary names, and names no program",
+   "measured": "22 removed of 2319 certified; shred removed=True, split removed=True",
+   "MET": true
+  },
+  "C5_the_repair_changes_no_verdict_the_round_computed": {
+   "claimed": "the citation is not read by the graph or the goal check, so repairing it changes what the round claims and no number it computed",
+   "measured": "edges before 87, after 87; citations 370 -> 363",
+   "MET": true
+  },
+  "C6_almost_none_of_the_surviving_citations_decides_which_object": {
+   "claimed": "of the citations that survive the repair, fewer than a fifth decide WHICH object -- so the honest name for a repaired citation is a validity test, not a verification of the action",
+   "measured": "0 of 363 surviving citations decide which",
+   "MET": true
+  },
+  "C8_a_discriminating_rule_leaves_the_graph_uncitable": {
+   "claimed": "if a citation must discriminate, most of the graph's edges have no citation available at all -- so the repair cannot be 'cite a discriminating flag'",
+   "measured": "3 of 87 edges have one; the programs that offer one are gzip, zcat",
+   "MET": true
+  },
+  "C9_the_guide_tells_the_operator_a_destroyed_file_was_not_touched": {
+   "claimed": "at least one of the flags the shipped rule certified as read-only runs, destroys the bytes of the object it was given, and is reported back as ACCEPTED_INERT -- 'succeeded and changed nothing'",
+   "measured": "7 of 8 accepted destroyers were reported INERT by the shipped comparison; statuses {'ACCEPTED_INERT': 7, 'ACCEPTED_CHANGED': 1}",
+   "MET": true
+  },
+  "C10_the_byte_comparison_repairs_the_status": {
+   "claimed": "after `run()` compares content instead of kinds, none of the destroyers the shipped comparison called INERT is still called INERT",
+   "measured": "after repair: {'ACCEPTED_CHANGED': 8}, 0 still INERT",
+   "MET": true
+  },
+  "C7_zero": {
+   "claimed": "zero model calls, zero stored parameters, zero network at run time",
+   "measured": "{\"model_calls\": 0, \"parameters_stored\": 0, \"network_calls_at_run_time\": 0}",
+   "MET": true
+  }
+ },
+ "pages_read": 446,
+ "certification": {
+  "rule": "a flag is a read-only check when the first word of its prose is one of list/show/print/display/test/check/verify/give and it takes no argument",
+  "certified": 2319,
+  "changed_bytes_when_run": 16,
+  "writer_detail": [
+   {
+    "check": "ln --verbose",
+    "changed": [
+     "a.txt"
+    ]
+   },
+   {
+    "check": "ln -v",
+    "changed": [
+     "a.txt"
+    ]
+   },
+   {
+    "check": "shred --verbose",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "shred -v",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "split --verbose",
+    "changed": [
+     "xaa"
+    ]
+   },
+   {
+    "check": "stream -help",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream -verbose",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream -version",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6 -help",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6 -verbose",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6 -version",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6.q16 -help",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6.q16 -verbose",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "stream-im6.q16 -version",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "wdctl --oneline",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   },
+   {
+    "check": "wdctl -O",
+    "changed": [
+     "notes/a.txt",
+     "payload.txt"
+    ]
+   }
+  ],
+  "runs": 4638,
+  "seconds": 23.2
+ },
+ "citation": {
+  "what_compile_step_attaches": "page['checks'][0] -- the alphabetically first flag the shipped rule certified",
+  "vacuous_citations": 281,
+  "vacuous_by_flag": {
+   "--help": 249,
+   "-help": 12,
+   "--bytes": 4,
+   "--author": 3,
+   "--completion-bash": 3,
+   "--dump-config": 2,
+   "--version": 1,
+   "--assert-help": 1
+  },
+  "pages_with_a_check": 370,
+  "is_it_ever_run": false,
+  "why_not": "goal_holds() runs its own named programs; the published check is a receipt field only",
+  "destroying_flags_cited_first": [
+   {
+    "program": "rm",
+    "cited": "--help",
+    "prose": "display this help and exit",
+    "first_word": "display"
+   },
+   {
+    "program": "shred",
+    "cited": "--help",
+    "prose": "display this help and exit",
+    "first_word": "display"
+   },
+   {
+    "program": "truncate",
+    "cited": "--help",
+    "prose": "display this help and exit",
+    "first_word": "display"
+   },
+   {
+    "program": "unlink",
+    "cited": "--help",
+    "prose": "display this help and exit",
+    "first_word": "display"
+   }
+  ]
+ },
+ "which_object": {
+  "probes": 8,
+  "blind": 8,
+  "decide_which": 0,
+  "stdout_differs_but_blind": 4,
+  "rows": [
+   {
+    "kind": "gzip",
+    "check": "gzip -t",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": false
+   },
+   {
+    "kind": "gzip",
+    "check": "gzip -l",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": false
+   },
+   {
+    "kind": "gzip",
+    "check": "gunzip -t",
+    "right": "payload.txt.gz",
+    "decoy": "other.txt.gz",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": false
+   },
+   {
+    "kind": "tar",
+    "check": "tar -tf",
+    "right": "right.tar",
+    "decoy": "decoy.tar",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": true
+   },
+   {
+    "kind": "tar",
+    "check": "tar -tvf",
+    "right": "right.tar",
+    "decoy": "decoy.tar",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": true
+   },
+   {
+    "kind": "zip",
+    "check": "unzip -t",
+    "right": "right.zip",
+    "decoy": "decoy.zip",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": true
+   },
+   {
+    "kind": "zip",
+    "check": "unzip -l",
+    "right": "right.zip",
+    "decoy": "decoy.zip",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": true
+   },
+   {
+    "kind": "json",
+    "check": "python3 -c import json,sys;json.load(open(sys.argv[1]))",
+    "right": "right.json",
+    "decoy": "decoy.json",
+    "accepts_right": true,
+    "accepts_decoy": true,
+    "decides_which": false,
+    "blind": true,
+    "stdout_differs": false
+   }
+  ]
+ },
+ "discrimination": {
+  "pages_measured": 50,
+  "survivors_measured": 439,
+  "discriminating": 8,
+  "accepts_nothing": 225,
+  "accepts_everything": 206,
+  "distinct_discriminating": [
+   "gzip --list",
+   "gzip --test",
+   "gzip -l",
+   "gzip -t",
+   "zcat --list",
+   "zcat --test",
+   "zcat -l",
+   "zcat -t"
+  ],
+  "distinct_programs_discriminating": [
+   "gzip",
+   "zcat"
+  ]
+ },
+ "vacuity": {
+  "citations": 370,
+  "vacuous": 281,
+  "vacuous_by_flag": {
+   "--help": 249,
+   "-help": 12,
+   "--bytes": 4,
+   "--author": 3,
+   "--completion-bash": 3,
+   "--dump-config": 2,
+   "--version": 1,
+   "--assert-help": 1
+  },
+  "vacuous_destroyers": [
+   "rm --help",
+   "shred --help",
+   "truncate --help",
+   "unlink --help"
+  ]
+ },
+ "repair": {
+  "rule": "RULE_RUN: the shipped rule, plus not a destroyer by name, not a write by the page's own vocabulary, and changes no bytes when actually run",
+  "removed": 22,
+  "removed_detail": [
+   {
+    "check": "ln --verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "ln -v",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "lsmem --split",
+    "why": "THE_PAGES_OWN_VOCABULARY_SAYS_IT_WRITES"
+   },
+   {
+    "check": "lsmem -S",
+    "why": "THE_PAGES_OWN_VOCABULARY_SAYS_IT_WRITES"
+   },
+   {
+    "check": "rm --help",
+    "why": "A_DESTROYER_BY_NAME"
+   },
+   {
+    "check": "shred --help",
+    "why": "A_DESTROYER_BY_NAME"
+   },
+   {
+    "check": "shred --verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "shred -v",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "split --verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream -help",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream -verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream -version",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6 -help",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6 -verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6 -version",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6.q16 -help",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6.q16 -verbose",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "stream-im6.q16 -version",
+    "why": "CHANGED_BYTES_WHEN_RUN"
+   },
+   {
+    "check": "truncate --help",
+    "why": "A_DESTROYER_BY_NAME"
+   },
+   {
+    "check": "unlink --help",
+    "why": "A_DESTROYER_BY_NAME"
+   }
+  ],
+  "survivors": 2297,
+  "shred_removed": true,
+  "split_removed": true,
+  "shred_citation_survived": false,
+  "split_citation_survived": false
+ },
+ "effect_on_the_shipped_round": {
+  "edges_before": 87,
+  "edges_after": 87,
+  "transitions_set_aside": {
+   "viewer": 48,
+   "not_stated": 72,
+   "no_directory_creation": 3
+  },
+  "citations_before": 370,
+  "citations_after": 363,
+  "citations_removed": [
+   "rm --help",
+   "shred --help",
+   "stream -help",
+   "stream-im6 -help",
+   "stream-im6.q16 -help",
+   "truncate --help",
+   "unlink --help"
+  ],
+  "graph_unchanged": true,
+  "note": "the citation is a field on the receipt and is never read by edges_of or by goal_holds, so a repaired citation changes what the round CLAIMS and no number it computes -- which is exactly why the defect could persist"
+ },
+ "usable_citations": {
+  "would_be_cited": 370,
+  "survive_the_repair": 363,
+  "of_those_decide_which_object": 0,
+  "deciding_checks_known_here": []
+ },
+ "coverage": {
+  "edges": 87,
+  "edges_with_a_discriminating_check": 3,
+  "programs_with_one": [
+   "gzip",
+   "zcat"
+  ],
+  "example_uncitable": [
+   "ar",
+   "as",
+   "base32",
+   "base64",
+   "basenc",
+   "cat",
+   "convert",
+   "convert-im6"
+  ]
+ },
+ "kind_blind_status": {
+  "destroying_checks_that_are_accepted": 8,
+  "shipped_reported_inert": 7,
+  "shipped_reported_changed": 1,
+  "shipped_status_counts": {
+   "ACCEPTED_INERT": 7,
+   "ACCEPTED_CHANGED": 1
+  },
+  "repaired_status_counts": {
+   "ACCEPTED_CHANGED": 8
+  },
+  "still_inert_after_repair": 0,
+  "examples": [
+   {
+    "check": "shred --verbose",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   },
+   {
+    "check": "shred -v",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   },
+   {
+    "check": "stream -help",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   },
+   {
+    "check": "stream-im6 -help",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   },
+   {
+    "check": "stream-im6.q16 -help",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   },
+   {
+    "check": "wdctl --oneline",
+    "accepted": true,
+    "bytes_destroyed": [
+     "payload.txt"
+    ],
+    "shipped_status": "ACCEPTED_INERT",
+    "repaired_status": "ACCEPTED_CHANGED"
+   }
+  ]
+ },
+ "cost": {
+  "seconds": 98.0,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "what_this_is_not": [
+  "not a benchmark result: one machine, 446 pages, a handful of artifact kinds",
+  "not a claim that the shipped round's eleven needs were wrong: every goal in it is checked by goal_holds(), which does run programs. The finding is about the citation",
+  "not a claim that an executed check would have caught a bad step here: none of the eleven needs took a wrong object, so the blindness is latent and measured on a room built to expose it",
+  "not a blacklist: naming shred and split would fail on the next machine, which is why the rule is execution plus the page's own vocabulary"
+ ],
+ "limits": [
+  "the which-object probes are four artifact kinds read from this machine's pages; a kind with no decoy here is not measured",
+  "a check that changes no bytes and accepts a decoy is BLIND, not wrong: it is a validity test, and the honest repair is to stop calling it a verification",
+  "the repaired rule is measured on this machine's pages; its behaviour on a machine whose pages print different vocabulary is not measured"
+ ],
+ "shipped_round": {
+  "what_it_is": "the round that owns the code this round repaired, re-run after the repair and recorded here need for need so a second machine can compare it",
+  "instrument": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+  "programs_read": 446,
+  "edges": 87,
+  "transitions_set_aside": {
+   "viewer": 48,
+   "not_stated": 72,
+   "no_directory_creation": 3
+  },
+  "needs": {
+   "total": 13,
+   "held": 11,
+   "refused": 2,
+   "statuses": [
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "PASS__GOAL_HELD",
+    "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+    "REFUSED__NAMES_NOTHING_IN_THIS_WORLD"
+   ],
+   "ids": [
+    "N01",
+    "N02",
+    "N03",
+    "N04",
+    "N05",
+    "N06",
+    "N07",
+    "N08",
+    "N09",
+    "N10",
+    "N11",
+    "H01",
+    "H02"
+   ]
+  },
+  "gates": {
+   "G1_a_usage_line_is_a_grammar": true,
+   "G2_the_grammar_moves_state": true,
+   "G3_a_path_of_two_edges": true,
+   "G4_a_refusal_is_a_refinement": true,
+   "G5_the_machine_refuses": true,
+   "G6_the_check_is_derived": true,
+   "G7_zero": true
+  },
+  "identical_to_the_round_before_the_repair": true,
+  "why_it_did_not_move": "the citation this round repaired is a receipt field that neither edges_of() nor goal_holds() reads, which is why the defect could persist"
+ }
+}

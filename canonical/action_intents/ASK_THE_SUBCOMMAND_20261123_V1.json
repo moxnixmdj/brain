@@ -1,0 +1,502 @@
+{
+ "action_id": "ASK_THE_SUBCOMMAND_20261123_V1",
+ "action_intent_id": "ASK_THE_SUBCOMMAND_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "The owner's proposal was: scan an environment, retrieve what you know and what you do NOT know, then close the gaps from instant knowledge. Every half already existed -- a census that scans, an instant-knowledge tier, an ignorance ledger, and a circuit that asks and closes -- and nothing joined them, so the deciding quantity (WHAT is not known) had never been measured. Measuring it found three defects. (1) `_own_text(prog)` asks `prog -h` and nothing else, so every subcommand operation was judged against the PARENT's help: measured, 38 of 38 admitted openssl subcommands print their own Usage: line and all 38 were reported as having none. (2) `verdict = NO_EFFECT` was assigned to any run that left the tree alone whatever its exit status, and the census's own sentence for it is 'exited cleanly and moved nothing: a value was computed, so this is a sensor' -- measured, 545 of 676 openssl rows carried exit 1 and every one was described that way. (3) the parent's one construction reason was applied to every narrower scope. Fixed and measured on the same 20 programs: SENSOR fell 880 -> 198 (sensor_delta 682) with the door count unchanged at 33, so 682 operations had been credited as capabilities the machine never demonstrated. What 'unknown' turns out to be is not 786 unknowns but five evidence-backed kinds, 772 of them DROVE_IT_WRONG -- we handed the program an argument it refused. The unit of ignorance is therefore a QUESTION and its worth is a count of the verdicts it decides, not a beta prior. LLM-IDEA's resolvable/certified-exhausted triage was added as an axis and returns a verdict the tree could not previously state: 786 rescuable, 0 exhausted, so no doubt in the tree is worth abandoning. Finally the doubt now persists: nothing on the census path had ever written to the ledger, which its own index entry describes as ranking what it does not know.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Three routes were measured and rejected rather than argued. (1) Re-scan every time: that is what the tree did, and the ledger sat at 82 gaps with 0 resolved. (2) A learned ranker (KBD's RL policy over entropy): the same quantity is a count of verdicts decided, so a policy would cost parameters to measure what the census's rows already say. (3) A generalised value-slot rule: written, measured, cost cp a door, reverted, and pinned by a test.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 11 new tests, 59 across four suites. One receipt: 20 programs, SENSOR 880 -> 198 at an unchanged 33 doors, 5 kinds, 786 rescuable / 0 exhausted, doubt persisted to the ledger. No independent identity has re-run any of it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+   "canonical/tools/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+   "canonical/tests/test_ask_the_subcommand_v1.py",
+   "canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
+   "intake/ASK_THE_SUBCOMMAND_20261123_V1.md",
+   "canonical/runtime/tool_census_v1.py"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::a doubt was never written down, so what the machine did not know was re-derived from nothing on every run and never ranked, joined, or closed",
+ "canonical_base_commit": "0bbdf5c06706f261ef254ae915d1170bba6d8198",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "claim": "a measured, persisted, triaged account of what the machine does not know",
+  "unlocks": "the agent can decide what to ask, and what to stop asking, without a model"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "a doubt was never written down, so what the machine did not know was re-derived from nothing on every run and never ranked, joined, or closed",
+ "date": "2026-11-23",
+ "expected_parent_change": "the machine can say what it does not know, in kinds, with a price per question, and the doubt survives the process.",
+ "expected_parent_frontier_change": "Ignorance becomes a measured, persistent, triaged object: each unbound operation is sorted into an evidence-backed kind, each question is priced by the number of verdicts it decides, and each doubt is marked rescuable or certified exhausted. The 682 false sensor credits are gone, so the capability figure the tree reports is one it can defend.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+  "All he should do basically is ask the right question and know all of the things that he should know about, from instant knowledge",
+  "The saving in the memory must not be only his action ... we should do generalization or something",
+  "should he be goal-directed or should he learn everything in all the environments",
+  "best part is no part",
+  "the most advanced coding actions ... let him experience them once and then he will learn them",
+  "our own model only, zero model calls at runtime"
+ ],
+ "falsification_condition": "The claim is false if any door is lost by the change in binding, OR if a row reported as NO_EFFECT carries a non-zero exit, OR if a kind contains an operation whose evidence cannot be checked against a document or a real run, OR if the doubt does not survive into the ledger.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "Asking correctly does not make an operation a door: 786 operations remain unknown, now for a true reason.",
+  "A kind is a belief about WHY a verdict is unknown, from documents and real exit codes, not a proof of what the operation does.",
+  "No operation outside the seeded directory was attempted, so a program needing a file elsewhere is still DROVE_IT_WRONG.",
+  "`_VALUE_SLOTS` remains a hand-written list; generalising it was tried, measured wrong (cost cp a door), reverted and pinned by a test.",
+  "The ledger ranks by p_useful/(1+cost), so a doubt blocking 772 operations ranks below one blocking 2; what_to_ask() is the action ordering and both are reported rather than merged.",
+  "Producer-run sandbox only. No independent identity has re-run any of it."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "OSWorld 2.0's authors diagnose frontier failure as weak recovery and maintenance of hidden state. A join that reads a goal as a demanded move of named relations, and knows which measured door produces that move, is the mechanism for choosing an action from state rather than guessing one. No benchmark task was run; no discharge is claimed.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": {
+  "all_trees_restored": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "doors_unchanged": 33,
+  "kinds": {
+   "DROVE_IT_WRONG": 772,
+   "SLOT_UNSUPPLIED": 14
+  },
+  "model_calls": 0,
+  "parameters": 0,
+  "programs": 20,
+  "resolvability": {
+   "CERTIFIED_EXHAUSTED": 0,
+   "RESOLVABLE_BY_DRIVING": 786
+  },
+  "seconds": 57.1,
+  "sensor_after": 198,
+  "sensor_before": 880,
+  "sensor_delta": 682,
+  "unbound_after": 786,
+  "unbound_before": 104
+ },
+ "next_step": "The 786 unknown operations are all RESOLVABLE_BY_DRIVING and none has been driven: the next wall is to drive them (a value slot needs a VALUE, not a filename) and measure how many become doors. That is a bounded, measurable question and it is where the capability actually is.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+  "canonical/tools/ask_the_subcommand_before_you_call_it_unbound_v1.py",
+  "canonical/tests/test_ask_the_subcommand_v1.py",
+  "canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
+  "intake/ASK_THE_SUBCOMMAND_20261123_V1.md",
+  "canonical/runtime/tool_census_v1.py"
+ ],
+ "real_outcome": "20 real programs, 1,038 classified operations: SENSOR 880 -> 198 (delta 682) and UNBOUND 104 -> 786 at an unchanged 33 doors, because failed runs and unread scopes had been counted as sensors. The unknown collapses to 5 kinds (772 DROVE_IT_WRONG, 14 SLOT_UNSUPPLIED) and is triaged 786 rescuable / 0 certified exhausted. Questions are ranked by verdicts decided, not by a prior. The doubt is written to the ledger and persists. 0 model calls, 0 parameters, 57 s.",
+ "recursive_obs": {
+  "canonical_base_commit": "0bbdf5c06706f261ef254ae915d1170bba6d8198",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "an RL ranker of doubt (KBD): the same quantity is a count, with no policy and no parameters",
+   "a second subcommand discovery pass: the census had already admitted them",
+   "a generalised value-slot rule: measured, cost cp a door, reverted and pinned by a test"
+  ],
+  "expected_parent_level_state_change": "Ignorance becomes a measured, persistent, triaged object: each unbound operation is sorted into an evidence-backed kind, each question is priced by the number of verdicts it decides, and each doubt is marked rescuable or certified exhausted. The 682 false sensor credits are gone, so the capability figure the tree reports is one it can defend.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "delete the doubt and re-scan each time (rejected: that is what the tree did, and 82 gaps stayed at 0 resolved)",
+    "bypass with a model that guesses what is unknown (rejected: a model call, and unverifiable)",
+    "substitute a learned ranker (rejected: parameters to compute a count)"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC: an unbound operation carried no evidence about WHY, so every doubt was the same kind and none could be ranked, triaged, or closed",
+   "surviving_causal_blocker": "a doubt was never written down, so what the machine did not know was re-derived from nothing on every run and never ranked, joined, or closed"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a learned ranker of doubt (KBD's RL policy): the same quantity is a count here",
+    "a second subcommand discovery pass: the census had already admitted them, and the second copy was worse"
+   ],
+   "existing_inherited_routes_checked": "ignorance_ledger_v1, ignorance_loop_v1, index_capability_evidence_v1, local_guide_v1, jit_knowledge_v1, cli_capability_acquisition_v1, empirical_cli_probe_v1 and where_the_missing_term_comes_from_v1 were all read BEFORE anything was written. The circuit already existed and was joined to the financial-QA path only; the instant tier already existed and was wired into perfect_algorithm_v1; the ledger already existed and nothing on the program path wrote to it. Nothing was rebuilt.",
+   "external_existing_routes_checked": "KBD (2603.21022) uses an RL policy rewarded by entropy reduction to find a knowledge boundary; LLM-IDEA (2610.11253) triages a plateau into capability limit / resolvable / certified exhausted; OSExpert-style exploration reports +20% performance inside a 120B model. The first is beaten on cost (a count, no policy), the second was adopted as an axis, the third is deterministic here at 0 model calls.",
+   "surviving_gap": "driving the 786 rescuable operations; reading a goal from words; any benchmark score"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a larger door count",
+    "a higher sensor count"
+   ],
+   "real_outcome": "Ignorance becomes a measured, persistent, triaged object: each unbound operation is sorted into an evidence-backed kind, each question is priced by the number of verdicts it decides, and each doubt is marked rescuable or certified exhausted. The 682 false sensor credits are gone, so the capability figure the tree reports is one it can defend.",
+   "surviving_necessity": "an agent that cannot say what it does not know cannot decide what to ask, and will re-derive the same doubt forever"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "signature, join, selectivity and held-out scoring in one module",
+   "downstream_work_to_delete_or_supersede": "the census's coarse change_kind is kept for reporting; the join reads the relation signature instead",
+   "fresh_reuse_plan": "the signature rides on the census's existing rows; nothing re-runs"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no cache: 20 programs re-measured in 57 s, and the BEFORE column is reproduced by restoring the old rule rather than quoted",
+   "search_stop_decision": "stopped at five kinds because each is decided by evidence already in hand; a sixth would have needed a guess, and the rescuable/exhausted axis is derived from the five rather than added as a sixth"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each either needed parameters, or a model call, or re-derived the doubt",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+     "why": "kinds from documents and exit codes; questions priced by verdicts decided; 682 false credits removed"
+    },
+    {
+     "rank": 2,
+     "route": "KBD_STYLE_RL_ENTROPY_RANKER",
+     "why": "measures the same quantity with a policy and parameters"
+    },
+    {
+     "rank": 3,
+     "route": "RE_SCAN_EVERY_TIME",
+     "why": "measured: 82 gaps, 0 resolved"
+    },
+    {
+     "rank": 4,
+     "route": "MODEL_GUESSES_THE_GAP",
+     "why": "a model call and unverifiable"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "the oracle is the programs themselves: every kind is decided from a document that was fetched and from an exit code that a real run produced, and the 11 tests re-derive both on the host."
+  },
+  "real_outcome": "20 real programs, 1,038 classified operations: SENSOR 880 -> 198 (delta 682) and UNBOUND 104 -> 786 at an unchanged 33 doors, because failed runs and unread scopes had been counted as sensors. The unknown collapses to 5 kinds (772 DROVE_IT_WRONG, 14 SLOT_UNSUPPLIED) and is triaged 786 rescuable / 0 certified exhausted. Questions are ranked by verdicts decided, not by a prior. The doubt is written to the ledger and persists. 0 model calls, 0 parameters, 57 s.",
+  "required_capability": "a measured, persisted, triaged account of what is unknown",
+  "route_frontier": {
+   "canonical_base_commit": "0bbdf5c06706f261ef254ae915d1170bba6d8198",
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "cannot transfer across contents",
+      "CORRECTNESS": "0.4677 precision, measured",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "measured leave-one-out precision 0.4677 on 62 rows",
+      "0.0 on the held-out mv requests"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "PER_CONTENT_CONDITION_MATCHING"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "coarse",
+      "CORRECTNESS": "cannot separate a rename from a delete",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "all five are commutative, so mv and rm of one file read identically",
+      "measured: 3 distinct move classes over 62 rows"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "THE_FIVE_RELATIONS_ALONE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "no more than membership",
+      "CORRECTNESS": "unverifiable on 62 rows",
+      "INCREMENTAL_COST": "fitted parameters",
+      "RELIABILITY": "unknown",
+      "VERIFIABILITY": "lower",
+      "WALL_CLOCK": "slower"
+     },
+     "evidence": [
+      "62 rows would fit any scorer perfectly and prove nothing",
+      "the constraints forbid a parameter fitted to the measurement"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_GOAL_PICKS_THE_DOOR_20261123_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "A_LEARNED_SCORER_OVER_DOORS"
+    }
+   ],
+   "checked_at_utc": "2026-11-23T22:54:28+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+   "max_age_hours": 2,
+   "negative_search_summary": "no existing mechanism joins a goal to a door using a relation signature measured by execution; the 2026 affordance literature predicts with a VLM, and the project's own planner assumes the goal state was already observed",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "goal conditioned affordance selection from measured transition effects"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "tool effect prediction from help text and execution"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "state change classification relations for filesystem actions"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 agent affordance benchmark unspecified preconditions ADAPT"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-23T22:54:28+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime",
+      "evidence": [
+       "59 tests pass across four suites on this host; the new suite is 11 tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "the four programs whose doors are joined",
+      "evidence": [
+       "59 tests pass across four suites on this host; the new suite is 11 tests"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "no network at join time",
+      "evidence": [
+       "the join made zero network calls"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T21:37:05+00:00",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/tools/the_vocabulary_is_the_artifact_v1.py (relation_value, five relations)",
+     "canonical/runtime/tool_census_v1.py (the 76 doors)",
+     "canonical/runtime/environment_learning_v1.py (shortest_plan, reused-not-rebuilt)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "DynAfford/ADAPT (ACL 2026): affordance prediction via a VLM",
+     "CreativityBench (2026): affordance reasoning is model-mediated"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "no package provides a goal-to-door join over measured effects"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "the programs' own --help declarations on this host",
+     "the project's A1-A5 verdict on the five relations"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   {
+    "route": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+    "verdict": "SELECTED",
+    "why": "sensor_delta 682, kinds 5, 786 rescuable / 0 exhausted, doubt persists"
+   },
+   {
+    "route": "KBD_STYLE_RL_ENTROPY_RANKER",
+    "verdict": "REJECTED",
+    "why": "a policy and parameters to compute a count"
+   },
+   {
+    "route": "RE_SCAN_EVERY_TIME",
+    "verdict": "REJECTED",
+    "why": "measured: 82 gaps, 0 resolved"
+   },
+   {
+    "route": "MODEL_GUESSES_THE_GAP",
+    "verdict": "REJECTED",
+    "why": "a model call, unverifiable"
+   }
+  ],
+  "selected_surviving_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+  "stop_condition": "A doubt recorded in one process is closed in another and the closing is credited from a real answer, re-run by an independent identity; until then the producer measurement stands alone.",
+  "why_selected_route_is_fastest_sufficient": "Sorting doubt into evidence-backed kinds and pricing each question by the verdicts it decides costs nothing: the documents and the exit codes already exist and the count is computed from the census's own rows. The alternative -- an RL policy rewarded by entropy reduction, as KBD does -- needs a policy and parameters to measure the same quantity. Ranked by a count, the worst offender needs three asks to cover most of 558 operations."
+ },
+ "required_capability": "a measured, persisted, triaged account of what is unknown",
+ "route_class": "COMPOSE",
+ "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+ "route_order_walk": {
+  "ADAPT": "The contract is read at the scope the operation runs in, so it adapts to any program with subcommands without a name list.",
+  "BYPASS": "Not used. Bypassing the ledger is what let 82 gaps stay at 0 resolved.",
+  "COMPOSE": "Selected: the census's own classify(), the ledger's note/resolve, and the existing instant-knowledge tier are reused; only the join is new.",
+  "INVENT": "Not used. A kind is decided from a document or a real exit code; nothing is guessed."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selected_surviving_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selectivity_note": "the control that keeps this honest is the REVERSE order: a two-step answer that both orders satisfied would not be a sequence at all",
+ "status": "PRODUCER_MEASURED__INDEPENDENT_VERIFICATION_OPEN",
+ "stop_condition": "A doubt recorded in one process is closed in another and the closing is credited from a real answer, re-run by an independent identity; until then the producer measurement stands alone.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "closing the 786 unknowns; reading a goal from words; any benchmark score; independent verification",
+  "what_is_real": "682 false sensor credits removed, the unknown collapsed to five evidence-backed kinds, a rescuable/exhausted triage, and doubt that persists across processes"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": {
+  "independent_verification": "OPEN",
+  "model_calls": 0,
+  "parameters": 0,
+  "receipt": "canonical/verification/ASK_THE_SUBCOMMAND_20261123_V1.json",
+  "tests": "canonical/tests/test_ask_the_subcommand_v1.py"
+ },
+ "weakens_existing_guard": false
+}

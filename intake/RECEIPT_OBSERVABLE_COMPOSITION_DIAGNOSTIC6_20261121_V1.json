@@ -1,0 +1,97 @@
+{
+ "schema": "BRAIN_OBSERVABLE_COMPOSITION_MEASUREMENT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "GREEDY_COMPOSITION_OF_TRACE_OBSERVABLES",
+ "max_observables": 6,
+ "declared_before_the_runs": {
+  "M1": "the composition is chosen from training runs only, with an inner validation split; outer held-out labels are not read during selection",
+  "M2": "the chosen composition increases cells beyond the best single observable",
+  "M3": "the chosen composition lowers the worst-case bill below 100",
+  "M4": "the final table is verdict-exact on untouched runs",
+  "M5": "zero model calls, zero stored parameters, zero network calls"
+ },
+ "base_projection": [
+  "decrements[probe_new_content]",
+  "holders_ever[probe_new_content]"
+ ],
+ "selected_observables": [
+  "final_cardinality",
+  "first_change[probe_new_content]",
+  "first_change[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+  "first_change[probe_new_contentprobe_new_contentprobe_new_content]"
+ ],
+ "steps": [
+  {
+   "position": 1,
+   "observable": "final_cardinality",
+   "train_cells": 14,
+   "inner_validation_undecided": 0,
+   "worst_case_bill": 164
+  },
+  {
+   "position": 2,
+   "observable": "first_change[probe_new_content]",
+   "train_cells": 23,
+   "inner_validation_undecided": 0,
+   "worst_case_bill": 155
+  },
+  {
+   "position": 3,
+   "observable": "first_change[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "train_cells": 28,
+   "inner_validation_undecided": 0,
+   "worst_case_bill": 150
+  },
+  {
+   "position": 4,
+   "observable": "first_change[probe_new_contentprobe_new_contentprobe_new_content]",
+   "train_cells": 30,
+   "inner_validation_undecided": 0,
+   "worst_case_bill": 148
+  }
+ ],
+ "verdict": {
+  "M1_selection_uses_only_training_labels": {
+   "train_runs": 178,
+   "inner_fit": 128,
+   "inner_validation": 50,
+   "held_out_runs": 53,
+   "MET": true
+  },
+  "M2_more_cells_than_best_single": {
+   "best_single_cells": 24,
+   "composition_cells": 30,
+   "MET": true
+  },
+  "M3_bill_below_one_hundred": {
+   "worst_case_bill": 148,
+   "MET": false
+  },
+  "M4_held_out_exactness": {
+   "undecided": 2,
+   "false_accepts": 0,
+   "false_rejects": 0,
+   "MET": false
+  },
+  "M5_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "all_criteria_met": false,
+ "cost": {
+  "seconds": 83.3,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "non_claims": [
+  "the held-out verdicts were consulted once, after selection",
+  "one CLI machine is not computer use and no benchmark score is claimed",
+  "the goal label is the project's portable judge, not a human judgment",
+  "independent verification is not claimed; authority is NONE"
+ ]
+}

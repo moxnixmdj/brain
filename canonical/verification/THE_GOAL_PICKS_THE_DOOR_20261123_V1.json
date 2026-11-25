@@ -1,0 +1,220 @@
+{
+ "agrees_with_project_vocabulary": {
+  "claim": "the join covers the two relations a content can be asked about; the other three are reported as unstateable, never guessed",
+  "expressed_by_the_four_conditions": [
+   "MULTISET",
+   "PAIRING"
+  ],
+  "outside_the_projection": [
+   "CARD",
+   "ORDER",
+   "IDENT"
+  ],
+  "rows_by_machine": {
+   "FILESYSTEM": 3,
+   "GIT": 2,
+   "SQLITE": 1,
+   "TARBALL": 2
+  }
+ },
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "distinct_moves": {
+  "count": 5,
+  "moves": [
+   {
+    "rows": 30,
+    "signature": {
+     "IDENT": "CHANGED",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "rows": 24,
+    "signature": {
+     "CARD": "DECREASED",
+     "IDENT": "CHANGED",
+     "LOT": "PARTIAL",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "rows": 6,
+    "signature": {
+     "CARD": "INCREASED",
+     "IDENT": "CHANGED",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "rows": 1,
+    "signature": {
+     "IDENT": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   },
+   {
+    "rows": 1,
+    "signature": {
+     "CARD": "INCREASED",
+     "IDENT": "CHANGED",
+     "LOT": "PARTIAL",
+     "MULTISET": "CHANGED",
+     "ORDER": "CHANGED",
+     "PAIRING": "CHANGED"
+    }
+   }
+  ]
+ },
+ "held_out": {
+  "answer_rate": 1.0,
+  "answered_from_other_tools": 54,
+  "per_program": {
+   "gzip": {
+    "answer_rate": 1.0,
+    "answered_from_other_tools": 33,
+    "candidates_considered": 23,
+    "evidence_rows": 29,
+    "held_out_tool": "gzip",
+    "mean_matches_per_request": 20.36,
+    "refused": 0,
+    "requests": 33
+   },
+   "rm": {
+    "answer_rate": 1.0,
+    "answered_from_other_tools": 21,
+    "candidates_considered": 41,
+    "evidence_rows": 41,
+    "held_out_tool": "rm",
+    "mean_matches_per_request": 3.0,
+    "refused": 0,
+    "requests": 21
+   }
+  },
+  "programs": [
+   "gzip",
+   "rm"
+  ],
+  "requests": 54
+ },
+ "honest_limits": [
+  "The answer rate is 1.0 and that number alone means little: the control shows some doors are matched by every candidate. `mv`'s move was matched by 59 of 59 candidates, so the join's answer there carries no information; `rm`'s move was matched by 3 of 47, which does. Both are reported per program, and the coverage is part of the result.",
+  "Only 5 distinct moves were found among 62 rows. The vocabulary is coarse: it says whether a move adds, removes, renames, rewrites or destroys, not what it did with the bytes. Two doors that both 'rewrite' are one move to this join.",
+  "A goal about MEANING (is this a valid PNG, is the text French, is the archive intact) is not expressible and is refused by name. That is a real limit of the five relations.",
+  "The census's door set varies between identical runs on git: measured 42, 40 and 42 doors across three runs of the same code. This is pre-existing in round 3, not introduced here, and it is why the fleet total for git is reported as a range.",
+  "Producer-run sandbox only. No independent identity re-ran any of it; truth.achieved stays false."
+ ],
+ "leave_one_out": {
+  "answer_rate": 0.9839,
+  "answered": 61,
+  "attempts": 62,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "note": "a refusal means no OTHER door made that move; it is the honest limit of predicting a move from a single run, not an error",
+  "per_move": [
+   {
+    "answered": 30,
+    "asked": 30,
+    "move": "{\"IDENT\": \"CHANGED\", \"MULTISET\": \"CHANGED\", \"ORDER\": \"CHANGED\", \"PAIRING\": \"CHANGED\"}",
+    "refused": 0
+   },
+   {
+    "answered": 24,
+    "asked": 24,
+    "move": "{\"CARD\": \"DECREASED\", \"IDENT\": \"CHANGED\", \"LOT\": \"PARTIAL\", \"MULTISET\": \"CHANGED\", \"ORDER\": \"CHANGED\", \"PAIRING\": \"CHANGED\"}",
+    "refused": 0
+   },
+   {
+    "answered": 6,
+    "asked": 6,
+    "move": "{\"CARD\": \"INCREASED\", \"IDENT\": \"CHANGED\", \"MULTISET\": \"CHANGED\", \"ORDER\": \"CHANGED\", \"PAIRING\": \"CHANGED\"}",
+    "refused": 0
+   },
+   {
+    "answered": 0,
+    "asked": 1,
+    "move": "{\"CARD\": \"INCREASED\", \"IDENT\": \"CHANGED\", \"LOT\": \"PARTIAL\", \"MULTISET\": \"CHANGED\", \"ORDER\": \"CHANGED\", \"PAIRING\": \"CHANGED\"}",
+    "refused": 1
+   },
+   {
+    "answered": 1,
+    "asked": 1,
+    "move": "{\"IDENT\": \"CHANGED\", \"PAIRING\": \"CHANGED\"}",
+    "refused": 0
+   }
+  ],
+  "refused": 1,
+  "schema": "PROJECT_BRAIN_GOAL_TO_DOOR_V1"
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "parameters": 0,
+ "rows": {
+  "census_doors": 54,
+  "project_machines": 8,
+  "skipped_unbound_placeholders": 0,
+  "total": 62
+ },
+ "schema": "PROJECT_BRAIN_GOAL_TO_DOOR_RECEIPT_V1",
+ "seconds": 2.062,
+ "the_unit": {
+  "door_is": "the move it was measured to make, on the same relations",
+  "goal_is": "a demanded move of one or more relations",
+  "join_is": "the door must move every relation the goal demands, same direction",
+  "relations": [
+   "CARD",
+   "MULTISET",
+   "ORDER",
+   "IDENT",
+   "PAIRING",
+   "LOT"
+  ],
+  "saved_row": "(tool, relation signature, artifact span)",
+  "saved_row_contains": "no path, no argv, no content, no example",
+  "the_one_invented_relation": {
+   "name": "LOT",
+   "why": "the project's five relations are commutative -- they are functions of a SET of pairs -- so `mv a b` and `rm a` were indistinguishable: both remove a name. LOT is a function of the STEP, not of a state: was every readable content still readable afterwards? It separates retention from destruction and needs no new observable, only the order of the two states the project already recorded."
+  }
+ },
+ "unstateable_goal": {
+  "expressible": [
+   "CARD",
+   "MULTISET",
+   "ORDER",
+   "IDENT",
+   "PAIRING",
+   "LOT"
+  ],
+  "not_expressible": [
+   "MEANING",
+   "VALIDITY",
+   "LANGUAGE",
+   "SEMANTIC_TYPE"
+  ],
+  "refused_by": "choose() returns UNSTATEABLE",
+  "why": "the five relations are functions of the attested structure; a goal about what the bytes MEAN is not a function of that structure, so no door can be matched to it by this join"
+ },
+ "what_generalizes": {
+  "doors_measured": 18,
+  "rate": 1.0,
+  "signature_identical_in_every_world": 18,
+  "unstable": [],
+  "worlds": 3
+ },
+ "what_was_wrong_first": {
+  "first_design": "per-content conditions (ABSENT/PRESENT/SAME/DIFFERENT)",
+  "measured": {
+   "distinct_moves": 5,
+   "held_out_answer_rate": 1.0,
+   "leave_one_out_answer_rate": 0.9839,
+   "signature_stable_across_3_worlds": "18/18"
+  },
+  "second_design": "the project's five relations, as a signature per door",
+  "third_design": "the five relations plus LOT, a function of the step not of a state",
+  "why": "all five relations are commutative -- functions of a SET of pairs -- so a rename and a delete of one file were identical, and MUCH of the surface collapsed into one class"
+ }
+}

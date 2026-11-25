@@ -1,0 +1,166 @@
+{
+ "schema": "BRAIN_RESIDUAL_IS_AN_ALIAS_NOT_A_QUESTION_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "COMPUTED_ALIAS_QUOTIENT_REPRICES_THE_GOAL_AND_TESTS_ITS_PREMISE_OFF_DISTRIBUTION",
+ "retracted_claim": "The round named 20261201 priced the residual at one question of the user. Its two statements are the same telescoping fact when the content starts absent; the bit was a counting artifact, not an intention the user must supply.",
+ "criteria_were_declared_before_the_receipt_run": true,
+ "declared_acceptance_before_the_receipt_run": {
+  "C1": "the goal's minimal class falls from two to one under the quotient",
+  "C2": "every proposed alias is observationally identical on all 555 runs",
+  "C3": "on a machine that starts with one copy, the pair separates and is not merged",
+  "C4": "no behaviour mask changes and unique statements do not decrease",
+  "C5": "zero model calls, zero stored parameters, zero network at run time"
+ },
+ "theorem": "-------------------------\nLet a_0 = k be the number of entries holding content c in the machine's initial\nreading, and let a_i be that number after step i.  The reader counts entries, so\nevery delta a_(i+1) - a_i is an integer.  The identity also needs the reader's\nincrements to be UNIT increments: one step adds at most one entry of c.  This is\nnot true of every machine -- a step can add two -- so it is computed from the\nexecuted runs and a content whose increments are not unit is never rewritten.\nDefine:\n\n    U(c)  = exactly one step raised the count, and no step lowered it\n    M(c)  = no step lowered the count\n    F(c,n)= the final count is n\n\n    U(c)  <==>  M(c) AND F(c, k+1)     (k = initial count; unit increments)\n\nProof.  U(c) implies no lowering and one raising step, so a_n = k + d for one\npositive integer d; under unit increments d = 1.  Conversely M(c) makes every\ndelta non-negative and F(c,k+1) makes their sum 1; integers that are non-negative\nand sum to 1 have exactly one positive term, which is U(c).  Without unit\nincrements the first half fails: one step from 0 to 2 raises once and ends at 2.",
+ "verdict": {
+  "C1_alias_removed_without_a_question": {
+   "before": 2,
+   "after": 1,
+   "questions_of_the_user": 0,
+   "MET": true
+  },
+  "C2_every_alias_observed_identical": {
+   "proposed": 3,
+   "verified": 3,
+   "MET": true
+  },
+  "C3_fourth_machine_respects_the_premise": {
+   "initial_count_of_probe_new": 1,
+   "masks": {
+    "created_once[probe_new_content]": 0,
+    "monotone[probe_new_content]": 16777215,
+    "final:count[probe_new_content]==1": 16777215
+   },
+   "pair_not_merged": true,
+   "initially_absent_content_merged": true,
+   "MET": true
+  },
+  "C4_behaviours_are_unchanged": {
+   "behaviours_before": 622,
+   "behaviours_after": 622,
+   "unique_before": 354,
+   "unique_after": 355,
+   "mean_class_before": 2.09,
+   "mean_class_after": 2.08,
+   "MET": true
+  },
+  "C5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "residual": {
+  "behaviours": 622,
+  "behaviours_with_a_unique_statement_before": 354,
+  "behaviours_with_a_unique_statement_after": 355,
+  "mean_class_before": 2.09,
+  "mean_class_after": 2.08,
+  "behaviours_still_ambiguous_after": 265,
+  "ambiguous_with_concatenated_reader_literals": 175,
+  "ambiguous_with_clean_literals": 90,
+  "example_clean_ambiguous_texts": [
+   "created_once[probe_seed_content]",
+   "final:count[probe_seed_content]==2",
+   "monotone[probe_seed_content] \u2227 two_copies[probe_seed_content]",
+   "two_copies[probe_seed_content] \u2227 final:has[seed]=probe_seed_content",
+   "precedence[has seed; has copy] \u2227 final:has[seed]=probe_seed_content",
+   "precedence[has seed2; has copy] \u2227 final:has[seed]=probe_seed_content"
+  ],
+  "largest_class_after": 38,
+  "example_ambiguous_texts": [
+   "at_least_once[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "created_once[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "two_copies[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]",
+   "final:card==7",
+   "final:count[probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content]==6",
+   "final:has[seed]=probe_seed_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_contentprobe_new_content"
+  ],
+  "goal_minimal_before": 2,
+  "goal_minimal_after": 1,
+  "goal_texts_before": [
+   "created_once[probe_new_content]",
+   "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+  ],
+  "goal_texts_after": [
+   "created_once[probe_new_content]"
+  ]
+ },
+ "prior_residual": {
+  "minimal_statements": 2,
+  "texts": [
+   "created_once[probe_new_content]",
+   "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+  ]
+ },
+ "aliases": [
+  {
+   "texts": [
+    "created_once[probe_new_content]",
+    "created_once[probe_new_content] \u2227 monotone[probe_new_content]",
+    "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "rule": "TELESCOPING_COUNT_V1",
+   "premise": "initial count of probe_new_content is 0",
+   "observed_identical": true
+  },
+  {
+   "texts": [
+    "created_once[probe_second_content]",
+    "created_once[probe_second_content] \u2227 monotone[probe_second_content]"
+   ],
+   "rule": "TELESCOPING_COUNT_V1",
+   "premise": "initial count of probe_second_content is 1",
+   "observed_identical": true
+  },
+  {
+   "texts": [
+    "created_once[probe_seed_content]",
+    "created_once[probe_seed_content] \u2227 monotone[probe_seed_content]",
+    "created_once[probe_seed_content] \u2227 final:count[probe_seed_content]==2",
+    "monotone[probe_seed_content] \u2227 final:count[probe_seed_content]==2"
+   ],
+   "rule": "TELESCOPING_COUNT_V1",
+   "premise": "initial count of probe_seed_content is 1",
+   "observed_identical": true
+  }
+ ],
+ "fourth_machine": {
+  "name": "PRELOADED",
+  "runs": 24,
+  "depth": 3,
+  "initial_counts": {
+   "probe_new_content": 1,
+   "probe_seed_content": 1,
+   "probe_third_content": 0
+  },
+  "aliases_proposed": 3,
+  "aliases_observed_identical": 3,
+  "probe_new_masks": {
+   "created_once[probe_new_content]": 0,
+   "monotone[probe_new_content]": 16777215,
+   "final:count[probe_new_content]==1": 16777215
+  }
+ },
+ "runs": {
+  "TARBALL": 231,
+  "FILESYSTEM": 196,
+  "SQLITE": 128
+ },
+ "terms": 244,
+ "cost": {
+  "seconds": 165.5,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "the identity is derived for integer entry counts, unit increments and a known, common initial reading; a machine that breaks a premise is refused before any merge",
+  "the quotient removes aliases inside the supplied grammar. Goals outside the grammar are still undecided, and other residuals in it may be genuine",
+  "no edit is synthesized and no benchmark is run; this prices what the goal means before an edit is attempted",
+  "the fourth machine is a new initial condition on a known tool family, not a new OS"
+ ]
+}

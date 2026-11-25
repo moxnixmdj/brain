@@ -1,0 +1,42 @@
+{
+  "all_criteria_met": true,
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "command": [
+    "/tmp/brainvenv/bin/python",
+    "-m",
+    "pytest",
+    "intake/tests/test_authorized_answer_intake_v1.py",
+    "-q"
+  ],
+  "criteria": {
+    "I1_missing_slot_asks_one_question": true,
+    "I2_authorized_answer_is_verified_by_real_guest_receipts": true,
+    "I3_untrusted_conflicting_stale_and_untyped_answers_fall_closed": true,
+    "I4_one_experience_is_external_persistable_and_deletable": true,
+    "I5_zero_model_calls_zero_stored_parameters_zero_spend": true
+  },
+  "does_not_claim": [
+    "a full OSWorld 2.1 task run",
+    "natural-language understanding beyond explicitly typed slots",
+    "independent verification or capability credit",
+    "a benchmark score or terminal claim"
+  ],
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "model_tokens_found": [],
+  "parameters_stored": 0,
+  "returncode": 0,
+  "schema": "BRAIN_AUTHORIZED_ANSWER_INTAKE_MEASUREMENT_V1",
+  "seconds": 0.617,
+  "sources": {
+    "intake/authorized_answer_intake_v1.py": "d7d09abfb4d1dbfde2846869766266830701021a075ef13fe692d47c4cdd4684",
+    "intake/tests/test_authorized_answer_intake_v1.py": "432bb2affa8838d9ec35994fddf3519928fe80ae597701c7635538b1ab849452"
+  },
+  "stderr_tail": [],
+  "stdout_tail": [
+    "...........                                                              [100%]",
+    "11 passed in 0.35s"
+  ],
+  "tests_failed": false,
+  "tests_passed": 11
+}

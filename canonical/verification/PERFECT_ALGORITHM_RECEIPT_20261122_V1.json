@@ -1,0 +1,31 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "code_repair_specialist": {
+    "fresh_defect_replay_passed": true,
+    "fresh_defect_replay_verdict": "PASS__REPLAYED_AND_REPAIRED",
+    "gate_preserved_count": 1,
+    "gate_repaired_count": 1,
+    "gate_verdict": "ADMIT",
+    "persist": true
+  },
+  "date": "2026-11-22",
+  "generic_loop": {
+    "outcome": "VERIFIED_NOT_PERSISTED",
+    "pass": true,
+    "plan_length": 6,
+    "priors_saved": "PASS__PRIORS_SAVED",
+    "reached_after_execute": true,
+    "rule_persisted": "REFUSED__NOT_PERSISTED",
+    "states_seen": 16,
+    "status": "PASS__PERFECT_ALGORITHM_RUN",
+    "stored_prior_states": 16,
+    "transitions_seen": 46
+  },
+  "honest_notes": [
+    "one experience is a hypothesis, not a rule; the receipt shows the plan is real",
+    "the rule is NOT persisted without fresh-instance evidence",
+    "priors are OBSERVED facts, saved unconditionally once verified",
+    "instant knowledge is external, never counted as capability"
+  ],
+  "schema": "PERFECT_ALGORITHM_RECEIPT_V1"
+}

@@ -1,0 +1,295 @@
+{
+  "action_id": "HARBOR_EXECUTION_BOUNDARY_REVIEW_20261124_V1",
+  "action_kind": "GOVERNANCE_GUARD",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "additional_scope_20261124": {
+    "alternatives": "Delete or disable heuristic probes forfeits existing functionality; adding a new planner does not fix restoration; adapt the existing probe and retain explicit failure.",
+    "baseline_reproduction": "two failed heuristic calls left the state at 2 rather than 0",
+    "causal_blocker": "Both right_question and the scan action selector leave the environment mutated when act or heuristic raises, and may continue after restore failure",
+    "no_credit": "producer-run regression only; no independent or frontier capability claim",
+    "real_outcome": "restore after every attempted probe and stop before additional probing or planning when restoration fails",
+    "route": "REUSE_AND_ADAPT_SHARED_REVERSIBLE_PROBE"
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/tests/test_harbor_container_boundary_v1.py",
+      "canonical/tests/test_perfect_algorithm_v1.py",
+      "canonical/tests/test_perfect_algorithm_probe_restore_v1.py",
+      "canonical/tests/test_harbor_container_solver_transport_v1.py",
+      "canonical/tests/test_harbor_docker_inspect_diagnostic_v1.py",
+      "canonical/tests/test_harbor_pro_patch_handoff_v1.py",
+      "canonical/tests/test_harbor_live_compose_diagnostic_v1.py",
+      "canonical/tests/test_harbor_pro_git_capture_v1.py",
+      "canonical/tests/test_harbor_experimental_vm_v1.py",
+      "canonical/tests/test_harbor_process_cleanup_worker_v1.py"
+    ],
+    "route_class": "REUSE"
+  },
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "HARBOR_SOLVER_EXECUTION_LOCUS_AND_FRESH_VERIFIER_NOT_YET_BOUND",
+  "container_transport_scope_20261124": {
+    "alternatives": "Do not call host solver; do not trust flags, writable uploads, or a mocked environment as isolation; do not emit an unverified patch or claim a verifier run.",
+    "causal_blocker": "Production container mount, network and verifier effects have not been verified; directory upload is not read-only.",
+    "real_outcome": "Remove host solve path and implement container-exec worker and mocked transport contract without admitting production runtime.",
+    "selected_route": "REUSE_HARBOR_EXEC_AND_CONTAINER_LOCAL_WORKER_WITH_PRODUCTION_REFUSAL",
+    "verification": "Mocked transport only. Real Docker execution, external verifier and SHA256-bound patch remain open."
+  },
+  "docker_inspect_diagnostic_scope_20261124": {
+    "limits": "Input may be fabricated; inspection is point-in-time; no Harbor exec identity binding, full egress proof, staging, patch, GPU support or verifier integration is established.",
+    "real_outcome": "Conservatively filter a supplied Docker inspect document and enumerate missing authority without dispatching a solver or opening production.",
+    "requested_progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "requested_progress_status": "NOT_ESTABLISHED__NO_REAL_CONTAINER_OR_INDEPENDENT_VERIFIER",
+    "route": "REUSE_DOCKER_HOST_INSPECT_AS_UNTRUSTED_DIAGNOSTIC",
+    "vm_smoke": "A standalone disposable Docker smoke checks a read-only bind and static inspect filter; it is not Harbor, not a solver, not a verifier and has not been run here."
+  },
+  "expected_parent_frontier_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim. Wire owner-opted disposable-VM dispatch with sampled Compose checks, best-effort process cleanup, Pro candidate capture and Terminal-Bench container handoff; no progress or verification claim.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/100",
+    "interpretation": "Uncalibrated conservative planning estimate, not a measured score, discharge or capability credit.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "1/100",
+    "wall_clock_cost_ub": 3600
+  },
+  "manual_github_smoke_workflow_20261124": {
+    "incremental_spend_usd": 0,
+    "limitations": "Workflow dispatch requires the workflow on the default branch; the current branch is not merged. Public standard runner compute is free per GitHub documentation, but artifact storage has shared allowance, and repository Actions permissions/billing settings are not visible here.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Official pristine-image Pro replay performed by the GitHub runner; later independent review must inspect actual run artifacts. Static workflow checks do not prove runtime isolation or benchmark success.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "route_order": "Delete automatic triggers and unneeded suites; reuse existing experimental Harbor VM and official pristine Pro replay; configure workflow_dispatch with read-only token and bounded task selection.",
+    "scope": "Add manual-only, bounded-input public Ubuntu runner workflow with pinned Brain, Harbor and Pro revisions; no dispatch or benchmark run this turn."
+  },
+  "owner_accepted_vm_residual_risk_20261124": {
+    "implemented": "Experimental production dispatch only under exact opt-in and suite; repeated Compose static checks, task-container process snapshot/cleanup, Pro candidate capture, ATIF-shaped audit and Terminal-Bench shared-container handoff. Independent runtime and score are unverified; local environment lacks Docker/Harbor.",
+    "incremental_spend_usd": 0,
+    "limits": "No local Docker or Harbor. Risk acceptance is not evidence of actual network isolation, quiescence, model capability or verifier independence. Unknown or uncertain command execution fails closed.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Official Pro pristine replay and Terminal-Bench verifier on an independent VM; mocked transport is not verification.",
+    "owner_request": "Opt-in experimental Harbor Docker dispatch after static Compose checks, best-effort process cleanup, Pro patch capture, and Terminal-Bench container verifier handoff; defer FrontierSWE. Owner accepts residual detached-process risk on disposable VM.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "route_order": "Delete host solver; bypass nested namespaces; reuse Harbor exec, Compose diagnostic, candidate diff handoff and official verifier. Adapt for owner-explicit experimental opt-in; no identity or egress guarantees inferred from an inspect sample."
+  },
+  "pr_check_reconciliation_20261124": {
+    "follow_up": "A local full-suite collection identified a new asyncio subprocess site outside the Root3 two-chokepoint inventory. Use the existing subprocess.run choke point in a worker thread with a kill-and-reap timeout; this remains an unverified Docker diagnostic, not an isolation claim. Local collection additionally exposed legacy site mappings and missing libGL; the exact main CI log is inaccessible from this sandbox.",
+    "incremental_spend_usd": 0,
+    "limitations": "Current-main full regression is a separate push job. Reconciliation does not establish benchmark success or runtime isolation.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Trusted main-branch PR checkers and CI results; local test results remain diagnostic, not independent capability evidence.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "route_order": "Delete the stale base reference; bypass no checks; reuse main validators and the model compiler. A merged tree and regenerated projection are necessary to resolve the actual conflict rather than choosing a stale side.",
+    "scope": "Refresh intent against current main, integrate current main and regenerate the derived unified model to resolve its conflict; reproduce PR checks and investigate the separate main-only regression."
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "982937ca46c38f698c70aa0806078c849f47c149",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Host solver invocation",
+      "Unverified fresh-verifier assumption"
+    ],
+    "expected_parent_level_state_change": "Preserve the execution boundary and expose the host-solver and verifier-protocol gaps without claiming verified integration. Also fail closed on reversible-probe restoration failures in the existing environment learner. Remove the host solve helper and exercise container-local transport while preserving the unqualified-production refusal. Add a diagnostic-only conservative Docker inspect filter that cannot authorize execution. Add an unqualified Pro patch-byte handoff and remove a prohibited fake-docker test. Sample the real Harbor Compose service ID around Docker inspection and allow only explicitly source-bound standard log mounts in the diagnostic; no production execution authorization. Add unqualified Git patch capture and transport into the Pro candidate handoff; no execution admission or benchmark claim. Wire owner-opted disposable-VM dispatch with sampled Compose checks, best-effort process cleanup, Pro candidate capture and Terminal-Bench container handoff; no progress or verification claim.",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "Reuse Harbor transport",
+        "Move solver into container",
+        "Replay patch in pristine image"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC_EXECUTION_BOUNDARY",
+      "surviving_causal_blocker": "No tested container-local solver and independently verified runtime configuration are available."
+    },
+    "obs_capability": {
+      "capability_work_deleted": [
+        "Duplicate fixture collector execution"
+      ],
+      "existing_inherited_routes_checked": [
+        "canonical/runtime/harbor_epistemic_agent_v1.py",
+        "canonical/runtime/harbor_environment_transport_v2.py",
+        "canonical/swe_kernel/perfect_algorithm_v1.py",
+        "canonical/runtime/environment_learning_v1.py"
+      ],
+      "external_existing_routes_checked": [
+        "Harbor DockerEnvironment",
+        "SWE-bench Pro V2 patch replay",
+        "px-eval separate verifier"
+      ],
+      "surviving_gap": "Container-local transport is under development; runtime confinement, readonly staging and benchmark verifier handoff remain unverified."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Treat a flag as isolation proof"
+      ],
+      "real_outcome": "A real agent only runs within a checked task container.",
+      "surviving_necessity": "Execution locus, mounts and verifier must be bound."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "Existing Harbor transport"
+      ],
+      "downstream_work_to_delete_or_supersede": [
+        "Nested namespace requirement when a Harbor-specific boundary is actually verified"
+      ],
+      "fresh_reuse_plan": "Reuse Harbor task transport only after runtime and mount isolation are checked."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "Reuse pinned upstream Harbor and Pro protocol source"
+      ],
+      "search_stop_decision": "Stop before unqualified execution; preserve findings and request an independent VM test."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "A flag and Harbor type cannot confine the host-side solver; container integration has not yet been tested on Docker.",
+      "routes_ranked": [
+        "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE",
+        "MOVE_SOLVER_INTO_CHECKED_CONTAINER",
+        "EXECUTE_SOLVER_ON_HOST"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Local regression tests are a guard only; a separately executed Docker contract test and the benchmark-specific fresh verifier remain necessary. Probe restoration regression uses a constructed stateful environment, not a real-computer safety or capability claim. Mocked transport checks placement and failure handling, not a real container or verifier. Adversarial Docker inspect documents exercise a diagnostic only and do not qualify a runtime. A reproducible disposable-Docker smoke is provided for an external VM but has not run in this sandbox. Remove fake docker command test: repository rule forbids fake docker; mocked environment.exec tests alone cannot establish real isolation. Pure identity parsing and mount-data controls do not validate real Docker Compose, isolation, capture or verifier results. Real local Git fixtures and a mocked environment.exec receipt do not establish task-container quiescence, isolation, provenance or official replay. Mocked exec and Compose results cannot establish Docker enforcement, process quiescence, agent success or official verifier outcomes."
+    },
+    "real_outcome": "Protect the host from a task-triggered solver while preparing Harbor integration.",
+    "required_capability": "Confined execution and independent verification of agent effects",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "Evidence preservation and a fail-closed governance guard; no external runtime or benchmark is executed."
+    },
+    "routes_considered": [
+      "Keep the execution gate",
+      "Container-local solver",
+      "Host solver"
+    ],
+    "selected_surviving_route": "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE",
+    "stop_condition": "Run focused tests and integrity guard; document missing Docker integration and independent verification; claim no benchmark or capability credit.",
+    "why_selected_route_is_fastest_sufficient": "It preserves the no-host-execution boundary while the user-requested integration is not yet testable here; it does not claim the integration is complete."
+  },
+  "requested_progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "requested_progress_class_status": "NOT_YET_ESTABLISHED__INDEPENDENT_EXECUTION_REQUIRED",
+  "requested_unverified_harbor_wiring_20261124": {
+    "correction": "Remove previous fake docker executable test because AGENTS.md prohibits fake docker, regardless of guard result.",
+    "incremental_spend_usd": 0,
+    "no_progress_claim": true,
+    "oracle": "independent operator running actual Docker VM and official benchmark verifiers",
+    "partial_scope": "Implement separately testable Pro candidate patch handoff, with caller-provided base comparison and SHA-256 integrity, without treating either as provenance or quiescence; production execution still refuses until live boundary and capture are bound.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "request": "opt-in container solver, base-bound patch and official verifier handoffs",
+    "route_order": "Delete unsafe host solve; bypass unneeded nested namespaces; reuse Harbor exec and official suite protocols; adapt diagnostic and capture. A flag alone cannot bind identity or prove egress; unsupported suite interfaces must fail closed."
+  },
+  "same_exec_capture_scope_20261124": {
+    "implemented_scope": "Non-authorizing candidate Git capture via temporary index, base HEAD checks and untrusted environment.exec response to the existing model.patch handoff. No worker quiescence or container identity proof; production remains closed.",
+    "incremental_spend_usd": 0,
+    "limits": "A process-visible hostname/cgroup may be spoofed or unavailable and cannot prove immutable container configuration, network enforcement or process quiescence. Captured metadata is supplied by untrusted task code; no gate or suite invocation is authorized by this scope.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Independent real Docker/Harbor and official pristine Pro replay, not local fixture or mock.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "requested": "Same-exec identity, mount, network, solver, quiescent base-bound patch capture and suite handoff.",
+    "route_order": "Delete host solver and any unsupported atomicity claim; bypass nested namespaces; reuse Harbor exec and Pro patch-byte handoff; adapt actual git capture in a disposable index."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "scoped_compose_and_pro_20261124": {
+    "implemented_scope": "Non-authorizing live Compose ID sampling and host-sourced standard-log allowlist. Solver admission, quiescence, patch capture, suite handoffs and real VM tests remain open.",
+    "incremental_spend_usd": 0,
+    "known_gap": "No Docker or Harbor executable here. Exact host mount sources and Compose identity must be bound; writable verifier logs are not independent evidence.",
+    "objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "oracle": "Independent operator running the real Docker/Harbor environment and the official verifier; local tests do not qualify or score the integration.",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "GOVERNANCE_GUARD_NO_PROGRESS_CLAIM",
+    "requested": "Bind Compose inspection, execute within checked container, capture quiescent base-bound patch, and hand off to Pro replay and Terminal-Bench verifiers; defer px-eval.",
+    "route_order": "Delete host solve; bypass nested namespaces; reuse Harbor Compose identity and existing static filter and candidate patch handoff. Avoid accepting mounts by target name alone or treating an opt-in as proof."
+  },
+  "status": "VERIFICATION_PENDING__NO_CAPABILITY_CREDIT",
+  "stop_condition": "Run focused tests and integrity guard; document missing Docker integration and independent verification; claim no benchmark or capability credit.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "ZERO CREDIT: preserve a factual boundary blocker for the Harbor evaluation route; no score or proof obligation discharged.",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "57581cfca3db44fb5007f0049aeb8a5f7b94c778",
+          "path": "canonical/runtime/brain_unified_model_v1.py"
+        },
+        {
+          "git_blob_sha": "145189a17bc82fb254c3b6a4f1de0d3ef33d2e40",
+          "path": "canonical/swe_kernel/upstream_routing_ledger_v1.py"
+        }
+      ],
+      "decisive_question": "Does the entry point keep the side-effecting host solver disabled until a container-local integration and benchmark-specific verifier are available?",
+      "falsifier_id": "HOST_SOLVER_OR_UNCHECKED_VERIFIER_ASSUMED_CONFINED",
+      "known_counterexamples_checked": true,
+      "proposal_id": "PRESERVE_FAIL_CLOSED_AND_RECORD_EVIDENCE"
+    }
+  },
+  "weakens_existing_guard": false
+}

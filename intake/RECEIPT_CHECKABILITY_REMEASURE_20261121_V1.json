@@ -1,0 +1,282 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "commits": [
+    {
+      "commit": "7a983f7f0068669ead9d4f7571be24d6c0d83eb9",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/__init__.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Bump for release",
+      "modules": [
+        {
+          "module": "packaging",
+          "state": "NOTHING_PUBLIC_TO_PROBE"
+        }
+      ],
+      "modules_probed": 0,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/__init__.py"
+      ],
+      "state": "NOTHING_PROBEABLE",
+      "tests_in_commit": false
+    },
+    {
+      "commit": "4d8534061364e3cbfee582192ab81a095ec2db51",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/_manylinux.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Add riscv64 as a supported manylinux architecture (#751)",
+      "modules": [
+        {
+          "callables": [
+            "platform_tags"
+          ],
+          "calls": 26,
+          "differences_unstable": 0,
+          "importable_at_fixed": 26,
+          "module": "packaging._manylinux",
+          "pins": []
+        }
+      ],
+      "modules_probed": 1,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/_manylinux.py"
+      ],
+      "state": "NO_DIFFERENCE_VISIBLE_FROM_THE_PUBLIC_SURFACE",
+      "tests_in_commit": false
+    },
+    {
+      "commit": "4dce7618f59d623512b21d846da3e072e86aaf2e",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/_manylinux.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Apply some ruff suggestions (#772)",
+      "modules": [
+        {
+          "callables": [
+            "platform_tags"
+          ],
+          "calls": 26,
+          "differences_unstable": 0,
+          "importable_at_fixed": 26,
+          "module": "packaging._manylinux",
+          "pins": []
+        }
+      ],
+      "modules_probed": 1,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/_manylinux.py"
+      ],
+      "state": "NO_DIFFERENCE_VISIBLE_FROM_THE_PUBLIC_SURFACE",
+      "tests_in_commit": false
+    },
+    {
+      "commit": "f13c298f0a623f3f7e01cc8395956b718d21503a",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/specifiers.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Clarify version split/join usage (#725)",
+      "modules": [
+        {
+          "callables": [
+            "InvalidSpecifier",
+            "BaseSpecifier",
+            "Specifier",
+            "SpecifierSet"
+          ],
+          "calls": 104,
+          "differences_unstable": 0,
+          "importable_at_fixed": 104,
+          "module": "packaging.specifiers",
+          "pins": []
+        }
+      ],
+      "modules_probed": 1,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/specifiers.py"
+      ],
+      "state": "NO_DIFFERENCE_VISIBLE_FROM_THE_PUBLIC_SURFACE",
+      "tests_in_commit": false
+    },
+    {
+      "commit": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/__init__.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Bump for development",
+      "modules": [
+        {
+          "module": "packaging",
+          "state": "NOTHING_PUBLIC_TO_PROBE"
+        }
+      ],
+      "modules_probed": 0,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/__init__.py"
+      ],
+      "state": "NOTHING_PROBEABLE",
+      "tests_in_commit": false
+    },
+    {
+      "commit": "b3a5d7d68991c040615d5345bb55f61de53ba176",
+      "doctests": {
+        "discriminating": 0,
+        "examples_run": 1,
+        "modules": [
+          {
+            "discriminates": false,
+            "fixed": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            },
+            "module": "src/packaging/__init__.py",
+            "parent": {
+              "collected": true,
+              "returncode": 1,
+              "tail": "/usr/bin/python3: No module named pytest\n"
+            }
+          }
+        ]
+      },
+      "message": "Bump for release",
+      "modules": [
+        {
+          "module": "packaging",
+          "state": "NOTHING_PUBLIC_TO_PROBE"
+        }
+      ],
+      "modules_probed": 0,
+      "pins": 0,
+      "repo": "pypa/packaging",
+      "sources": [
+        "src/packaging/__init__.py"
+      ],
+      "state": "NOTHING_PROBEABLE",
+      "tests_in_commit": false
+    }
+  ],
+  "external_confirmation": {
+    "existing_tests_cover_changed_python_lines": 0.27,
+    "paper": "arXiv 2607.18057 (July 2026), 4,882 agent-authored PRs",
+    "python_prs_with_no_changed_line_executed": 0.648,
+    "self_grading_is_not_verification": "Stack Overflow, 13 Nov 2026: of 1,000 AI-authored unit tests audited, 9.6% were useful verification checks",
+    "verification_bottleneck": "'the verification bottleneck is now the center of the workflow' (Nov 2026 industry analysis); Stanford CS329A (Aug 2026): 'verification is the bottleneck for self-improvement'"
+  },
+  "in_tree_prior": {
+    "memorisable_share_of_real_fixes": 0.04814,
+    "pool_is_badly_populated": "canonical/verification/OBSERVATIONAL_POOL_IS_EMPTY_BY_CONSTRUCTION_20261116_V1.json",
+    "reach_ceiling": "canonical/verification/REACH_OF_THE_GRAMMAR_20261116_V1.json",
+    "refuse_share_of_real_commits": 0.7142857142857143,
+    "witness_inversion_refusals": "canonical/verification/WITNESS_INVERSION_20261116_V1.json"
+  },
+  "incremental_spend_usd": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "schema": "BRAIN_CHECKABILITY_BY_DIFFERENTIAL_PIN_V1",
+  "states": {
+    "checkable": 0,
+    "commits": 14,
+    "pins": 0,
+    "probed": 3,
+    "untested": 6,
+    "with_tests": 8
+  },
+  "the_law": "C = CHECKABLE SHARE, and every other term is a multiplier on it: P(solved) = C x (IN-GRAMMAR + SYNTHESISABLE + MEMORISABLE) x VERIFICATION. Learning enlarges only MEMORISABLE, which is 4.814% of real fixes; it leaves C alone.",
+  "what_this_shows": "14 real commits were taken at both states. 8 changed code under test and shipped their own tests; 6 changed code and shipped none -- work that has no mechanical postcondition of its own. Of those, 3 could be driven through the module's own public surface and 0 yielded at least one STABLE differential pin: behaviour that is reproducible at the fixed state and different at the parent. That is 0.0% of the unguarded work converted into a check that exists without anybody writing a test -- a regression pin, never a proof of intent. The remaining 100.0% could not be converted by anything the artifact already contains, and that is the point: behaviour changes are input-specific, so the DISCRIMINATING INPUT is itself knowledge. It arrives with a test, with a demonstration, or with a stated intent -- and no amount of experience, search, synthesis or verification manufactures it. That input is the bottleneck."
+}

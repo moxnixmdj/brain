@@ -1,0 +1,656 @@
+{
+ "schema": "BRAIN_MODEL_CALL_SURFACE_AUDIT_V1",
+ "authority": "NONE__STATIC_ONLY__NO_AUDITED_MODULE_EXECUTED",
+ "repo_head": "d2c31c22d15e67da269ed4f5361c47303c118687",
+ "counts": {
+  "tracked_python_files": 6052,
+  "files_with_inference_endpoint_literal": 23,
+  "files_with_model_artifact_host": 14,
+  "files_with_any_endpoint_literal": 35
+ },
+ "entries": {
+  "ASTRA_GOAL_RUNTIME": {
+   "entry": "canonical/runtime/astra_runtime.py",
+   "entry_exists": true,
+   "static_closure_size": 709,
+   "static_inference_endpoint_files": [
+    "canonical/runtime/astra_runtime.py"
+   ],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {
+    "canonical/runtime/auto_capability_acquisition.py": {
+     "line": 6083,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/auto_capability_acquisition.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/auto_python_source_codec_acquisition.py": {
+     "line": 1079,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/auto_python_source_codec_acquisition.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/bound_capabilities/broad_objective_decompose.py": {
+     "line": 226,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/broad_objective_decompose.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/plain_goal_bound_grounding.py"
+    },
+    "canonical/runtime/bound_capabilities/concrete_execution_oracle.py": {
+     "line": 46,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/evidence_oracle_hypothesis_v1.py"
+    },
+    "canonical/runtime/bound_capabilities/docx_verify_ooxml.py": {
+     "line": 67,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/docx_verify_ooxml.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/docx_verify_ooxml_intent.py"
+    },
+    "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py": {
+     "line": 252,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/generic_evidence_claim_relation.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py"
+    },
+    "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py": {
+     "line": 86,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/objective_claim_operand_binding.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+    },
+    "canonical/runtime/bound_capabilities/python_source_symbol_index.py": {
+     "line": 162,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/python_source_symbol_index.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/python_crossfile_edit_choreograph.py"
+    },
+    "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py": {
+     "line": 33,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/python_repository_acceptance_measurement_v1.py"
+    },
+    "canonical/runtime/bound_capabilities/research_query_focus.py": {
+     "line": 86,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/bound_capabilities/research_query_focus.py",
+     "exists": true,
+     "from": "canonical/runtime/bound_capabilities/objective_relevance_bm25.py"
+    },
+    "canonical/runtime/capability_discovery.py": {
+     "line": 6083,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/capability_discovery.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/capability_planner.py": {
+     "line": 36,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/capability_planner.py",
+     "exists": true,
+     "from": "canonical/runtime/capability_proposal_generators.py"
+    },
+    "canonical/runtime/capability_proposal_generators.py": {
+     "line": 6083,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/capability_proposal_generators.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/certificate_gated_selected_route_router_v1.py": {
+     "line": 7363,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/composition_state_capsule_guard_v2.py": {
+     "line": 6083,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/composition_state_capsule_guard_v2.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/composition_state_capsule_v2.py": {
+     "line": 33,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/composition_state_capsule_v2.py",
+     "exists": true,
+     "from": "canonical/runtime/composition_state_capsule_guard_v2.py"
+    },
+    "canonical/runtime/continuous_obs_runtime.py": {
+     "line": 7486,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/continuous_obs_runtime.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/goal_compiler.py": {
+     "line": 151,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/goal_compiler.py",
+     "exists": true,
+     "from": "canonical/runtime/semantic_authorities.py"
+    },
+    "canonical/runtime/honesty_load_bearing_result_gate_v1.py": {
+     "line": 132,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/honesty_load_bearing_result_gate_v1.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/npm_package_utils.py": {
+     "line": 992,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/npm_package_utils.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/osworld_v21_browser_cdp_v1.py": {
+     "line": 198,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+     "exists": true,
+     "from": "canonical/runtime/browser_v1.py"
+    },
+    "canonical/runtime/promote_pending_binding.py": {
+     "line": 6595,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/promote_pending_binding.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/root3_typed_durable_admin_write_v1.py": {
+     "line": 89,
+     "kind": "RUNTIME_HELPER",
+     "target": "canonical/runtime/root3_typed_durable_admin_write_v1.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    },
+    "canonical/runtime/semantic_authorities.py": {
+     "line": 6083,
+     "kind": "SIBLING_MODULE_FILE",
+     "target": "canonical/runtime/semantic_authorities.py",
+     "exists": true,
+     "from": "canonical/runtime/astra_runtime.py"
+    }
+   },
+   "dynamic_targets_missing": [
+    "canonical/runtime/.py",
+    "canonical/runtime/cli_command.py",
+    "canonical/runtime/grounded_executable_composition.py",
+    "canonical/runtime/grounded_executable_composition_verify.py",
+    "canonical/runtime/objective_relevance_bm25.py",
+    "canonical/runtime/open_research_source_frontend.py",
+    "canonical/runtime/plain_goal_bound_grounding.py"
+   ],
+   "dynamic_closure_size": 716,
+   "combined_inference_endpoint_files": [
+    "canonical/runtime/astra_runtime.py"
+   ],
+   "combined_model_artifact_files": []
+  },
+  "OSWORLD_V21_V19_SUBJECT": {
+   "entry": "canonical/runtime/osworld_v21_brain_subject_v19.py",
+   "entry_exists": true,
+   "static_closure_size": 50,
+   "static_inference_endpoint_files": [],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {},
+   "dynamic_targets_missing": [],
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": []
+  },
+  "OSWORLD_V21_V3_SUBMISSION_ENTRYPOINT": {
+   "entry": "canonical/runtime/osworld_v21_submission_entrypoint_v3.py",
+   "entry_exists": true,
+   "static_closure_size": 24,
+   "static_inference_endpoint_files": [],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {},
+   "dynamic_targets_missing": [],
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": []
+  },
+  "RESEARCH_SOURCE_FRONTEND": {
+   "entry": "canonical/runtime/bound_capabilities/open_research_source_frontend.py",
+   "entry_exists": true,
+   "static_closure_size": 1,
+   "static_inference_endpoint_files": [],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {},
+   "dynamic_targets_missing": [
+    "canonical/runtime/bound_capabilities/.py"
+   ],
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": []
+  },
+  "ENVIRONMENT_BROKER": {
+   "entry": "canonical/swe_kernel/the_environment_broker_v1.py",
+   "entry_exists": true,
+   "static_closure_size": 3,
+   "static_inference_endpoint_files": [],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {},
+   "dynamic_targets_missing": [],
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": []
+  },
+  "SCAN_RETRIEVE_FETCH": {
+   "entry": "canonical/tools/scan_retrieve_fetch_v1.py",
+   "entry_exists": true,
+   "static_closure_size": 1,
+   "static_inference_endpoint_files": [],
+   "static_model_artifact_files": [],
+   "dynamic_targets": {},
+   "dynamic_targets_missing": [],
+   "dynamic_closure_size": 1,
+   "combined_inference_endpoint_files": [],
+   "combined_model_artifact_files": []
+  }
+ },
+ "instrument_self_matches": [
+  "canonical/tests/test_model_call_surface_audit_v1.py",
+  "canonical/tools/model_call_surface_audit_v1.py"
+ ],
+ "instrument_self_matches_unexpected": [],
+ "inference_endpoint_files": {
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/chat_completions_client.py": [
+   {
+    "line": 39,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "localhost:8000/v1"
+   },
+   {
+    "line": 77,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "localhost:8000/v1"
+   }
+  ],
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/clients/open_responses_client.py": [
+   {
+    "line": 441,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "localhost:8000/v1"
+   }
+  ],
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/__init__.py": [
+   {
+    "line": 1,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   }
+  ],
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/__main__.py": [
+   {
+    "line": 18,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   }
+  ],
+  "canonical/capabilities/internalized/professional_work/stirrup_247f24d/src/stirrup/integrations/slack/slack.py": [
+   {
+    "line": 272,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   }
+  ],
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/openrouter_model.py": [
+   {
+    "line": 60,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   }
+  ],
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/openrouter_response_model.py": [
+   {
+    "line": 32,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   },
+   {
+    "line": 42,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "openrouter.ai"
+   }
+  ],
+  "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/requesty_model.py": [
+   {
+    "line": 64,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "/v1/chat/completions"
+   }
+  ],
+  "canonical/runtime/astra_runtime.py": [
+   {
+    "line": 4941,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "text.pollinations.ai"
+   },
+   {
+    "line": 7160,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "text.pollinations.ai"
+   }
+  ],
+  "canonical/runtime/cognitive_decision_kernel.py": [
+   {
+    "line": 160,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8017/v1"
+   }
+  ],
+  "canonical/runtime/harbor_science_planner_v1.py": [
+   {
+    "line": 19,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 20,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/runtime/harbor_science_planner_v5.py": [
+   {
+    "line": 21,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 22,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/runtime/harbor_science_planner_v6.py": [
+   {
+    "line": 21,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 22,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/runtime/harbor_science_planner_v7.py": [
+   {
+    "line": 21,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 22,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/runtime/judge_v1.py": [
+   {
+    "line": 1,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8919/v1"
+   }
+  ],
+  "canonical/runtime/pointwise_jev_probe.py": [
+   {
+    "line": 130,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8017/v1"
+   }
+  ],
+  "canonical/runtime/root1_contrastive_semantic_candidate_runner_v1.py": [
+   {
+    "line": 99,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 152,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/tests/test_harbor_science_planner_v1.py": [
+   {
+    "line": 103,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/tests/test_model_call_surface_audit_v1.py": [
+   {
+    "line": 50,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "text.pollinations.ai"
+   },
+   {
+    "line": 52,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 60,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "api.openai.com"
+   },
+   {
+    "line": 62,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_root1_contrastive_semantic_candidate_runner_v1.py": [
+   {
+    "line": 25,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "/v1/chat/completions"
+   }
+  ],
+  "canonical/tests/test_tb_science_zero_exposure_multi_action_preflight_v1.py": [
+   {
+    "line": 58,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 59,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/tests/test_tb_science_zero_exposure_transport_preflight_v1.py": [
+   {
+    "line": 49,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 50,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   }
+  ],
+  "canonical/tools/model_call_surface_audit_v1.py": [
+   {
+    "line": 2,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   },
+   {
+    "line": 49,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "/v1/chat/completions"
+   }
+  ]
+ },
+ "model_artifact_files": {
+  "canonical/runtime/gdpval_public_220_imperative_directive_audit_v1.py": [
+   {
+    "line": 11,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/gdpval_public_220_list_continuation_replay_v2.py": [
+   {
+    "line": 9,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/gdpval_semantic_complement_localizer_v2.py": [
+   {
+    "line": 30,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/public_source_federation_v1.py": [
+   {
+    "line": 22,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/retrieval_live_provider_arena_v1.py": [
+   {
+    "line": 99,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/retrieval_live_provider_arena_v13.py": [
+   {
+    "line": 83,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/retrieval_live_provider_arena_v2.py": [
+   {
+    "line": 39,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/runtime/smaug_mini_delta_header_probe_v1.py": [
+   {
+    "line": 40,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_model_call_surface_audit_v1.py": [
+   {
+    "line": 50,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "text.pollinations.ai"
+   },
+   {
+    "line": 52,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "127.0.0.1:8080/v1"
+   },
+   {
+    "line": 60,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "api.openai.com"
+   },
+   {
+    "line": 62,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_retrieval_live_provider_arena_v1.py": [
+   {
+    "line": 12,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_retrieval_live_provider_arena_v2.py": [
+   {
+    "line": 6,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_retrieval_v3_adaptive_federation.py": [
+   {
+    "line": 97,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tests/test_root2_hle_opus55_tool_adapter_v1.py": [
+   {
+    "line": 64,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   }
+  ],
+  "canonical/tools/model_call_surface_audit_v1.py": [
+   {
+    "line": 2,
+    "class": "MODEL_ARTIFACT_HOST",
+    "literal": "huggingface.co"
+   },
+   {
+    "line": 49,
+    "class": "INFERENCE_ENDPOINT",
+    "literal": "/v1/chat/completions"
+   }
+  ]
+ },
+ "planner_flag_census": {
+  "missions": 321,
+  "planner_flag_true": 0,
+  "planner_flag_false": 4,
+  "planner_flag_absent": 317,
+  "missions_with_planner_flag_true": [],
+  "guard_mentions": [
+   {
+    "path": "canonical/runtime/enforce_goal_hierarchy.py",
+    "mentions": []
+   },
+   {
+    "path": "execution_guard/enforce_load_bearing_primary_pr.py",
+    "mentions": []
+   },
+   {
+    "path": "execution_guard/load_bearing_primary_admission.py",
+    "mentions": []
+   }
+  ],
+  "workflow_mentions": [],
+  "interpretation": "The planner switch is read from the mission step at run time. No committed mission sets it true; absence of the key means false. No guard rejects a mission that sets it, so the no-model boundary is a convention of the committed missions, not an enforced property of the runtime."
+ },
+ "limits": [
+  "STATIC_ONLY: a URL assembled from parts, read from an environment variable, or passed in by a caller is invisible to this audit.",
+  "IMPORT_OVER_APPROXIMATION: an import in a branch that never executes still counts.",
+  "NO_EXECUTION: nothing audited here ran, so no route is shown to work or to fail.",
+  "ENTRY_SCOPED: absence of an endpoint in one entry closure says nothing about another route, a notebook, a workflow, or a vendored tree loaded by an evaluator.",
+  "SELF_REFERENCE: this audit names endpoint patterns in its own source, so it appears in its own findings. Those matches are the classifier's regex text, never a request; instrument_self_matches names the files that do this instead of skipping them, and every other match is a file that could call."
+ ]
+}

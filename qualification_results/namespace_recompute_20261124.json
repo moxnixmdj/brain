@@ -1,0 +1,29 @@
+{
+  "base_checkpoint_commit": "5f917c6569947f69f1f002660dd2f34d41f4373a",
+  "carrier_qualified": false,
+  "errors": 0,
+  "failed": 0,
+  "files_sha256": {
+    "canonical/runtime/repair_candidate_broker_v1.py": "e70cd6a989c426375c46b7216140cf265de604526779a0fbb0ef49a8b5218583",
+    "canonical/runtime/zero_ambient_namespace_launcher_v1.py": "6a5c1d8d67667f2f77ca31ea5924c3260b13045347ee36633d6d0d7b274a1bb5",
+    "canonical/tests/test_isolated_worktree_fixture_collector_v1.py": "15086a4de4d60882f00c8bd02343c019fd824697279fcc985e109a53529e15d0",
+    "canonical/tests/test_namespace_carrier_host_observed_v1.py": "7c043fbb9468ad08a96ab81dec53e230a477df873bce3913e8b8f30326741464",
+    "canonical/tools/isolated_worktree_fixture_collector_v1.py": "1da459085b0555abeefd98fdcb56fa216f0c95803eac0173e34dc91e502f962a",
+    "canonical/tools/recompute_worktree_fixture_receipt_v1.py": "c3ee61e439c1991977a331092d621c4cc73d3d16150de963bf15d05ea13508b1",
+    "qualification_results/namespace_recompute_20261124.log": "82ece797fe731cf00ea784328bce121a9ae1e863e964ba5343a095fa003321e4"
+  },
+  "independent_attestation": false,
+  "limitations": [
+    "Producer-built separate process is not an independent verifier or signature.",
+    "External IPv4 probe uses reserved TEST-NET-1, host namespace and routing checks; no packet-capture or broad egress proof.",
+    "Fixture-only worktree; external host writer and kernel attacks remain outside the demonstrated guarantees.",
+    "Repair capability independent-evidence gate is still not satisfied; no Phase A admission or benchmark patch."
+  ],
+  "official_benchmark_report": false,
+  "os": "Linux-6.1.158+-x86_64-with-glibc2.36",
+  "passed": 95,
+  "schema": "LOCAL_PRODUCER_RUN_NETWORK_AND_RECOMPUTATION_DIAGNOSTIC_V1",
+  "skipped": 0,
+  "test_runtime_seconds": 48.886,
+  "tests_total": 95
+}

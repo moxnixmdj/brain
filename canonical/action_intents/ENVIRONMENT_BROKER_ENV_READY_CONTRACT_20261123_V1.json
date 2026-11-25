@@ -1,0 +1,552 @@
+{
+ "action_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
+ "action_intent_id": "ENVIRONMENT_BROKER_ENV_READY_CONTRACT_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Add the second closed goal contract to the world broker: env-ready, and close the bottleneck round 1 named. The broker could already answer run-tests, but every real repository it met needed an environment it did not have, and the refusal that followed was about the environment, not the task. env-ready demands: every dependency the environment declares is present, at a spec-satisfying version, in the isolated interpreter that environment will be asked in, and provable by execution. Host-first: anything the isolation already has costs a metadata read and an import, never a round trip. Otherwise the artifact comes from the machine-readable registry (pypi.org JSON), is hashed by us and compared against the registry's own published digest (two independent readers), installed from local bytes, and read back by import -- not just by version. Transitives are resolved from each verified wheel's own METADATA, marker-filtered, including the project's own extras, which is how requests' SOCKS tests pass. ROUND 2 changed what counts as a declaration: the reader is now stdlib tomllib throughout (a single quote inside a double-quoted requirement desynchronised the regex reader on tox), and it understands four shapes that five unseen repositories actually use -- extras installed by the project's own test environment (black's `.[d]`, 800 passed), dependency-groups with {include-group} (attrs), markers with inner quoted comparisons (tox), and extras declared as DATA in tox.toml (`extras = [ \"completion\" ]`, which is why tox's suite can import argcomplete and run 4253 tests instead of failing to collect). A plugin is armed by its host (PLUGIN_ARMED_IMPORTED_BY_HOST, deferred import) and the final gate now exempts exactly those records, so a plugin is not refused for the import its host owns. A suite may be run by the project's own declared command, not just `-m pytest`, and the isolation is the only thing asked. ROUND 2 also fixed the broker's worst honesty defect: it reported refusals ABOUT THE ENVIRONMENT for facts about THE PROJECT. attrs (1408 passed, one genuine py3.11 upstream failure) and tox (4253 passed, three errors from a missing system binary `man`) were both reported as REFUSE__NO_RUNNER_EXECUTED_CLEANLY. REFUSE__VERIFICATION_FAILED now means the suite RAN in the armed environment and did not exit cleanly; NO_RUNNER_EXECUTED_CLEANLY means nothing ran. A timeout is reported as a bound of ours, not as a verdict about either. The project installs itself from a staged copy so the tree is never written into, and .git is kept because hatch-vcs/setuptools-scm BUILD the version from history (measured: without tags tox cannot import its own generated tox/version.py). History therefore enters the evidence digest, so an environment armed without tags is a different environment and is re-derived rather than answered from a stale record. Memory is keyed by the evidence digest and never believed: a warm run re-reads every version and re-imports every module, and a tampered record is caught and re-derived.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "env-ready is not a new organ: it is the second closed contract on the existing world broker and it composes the existing isolation organ (environment_fit_v1) rather than re-implementing provisioning. A standalone fetch tool, an open-web search tier, npm support and sdist builds were each considered and rejected for this round.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: the broker gained a second closed goal contract and was exercised live on two unseen repositories (flask 494 passed, requests 619 passed in the armed isolation). No independent identity re-ran any of it.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/swe_kernel/the_environment_broker_v1.py",
+   "canonical/tests/test_broker_env_ready_v1.py",
+   "canonical/tools/env_ready_live_trial_v1.py",
+   "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+   "intake/THE_GUIDE_IS_THE_ENVIRONMENTS_OWN_DECLARATION_20261123_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The measured wall between this project and every real repository: an unarmed environment makes the agent's first honest answer 'I cannot ask this environment anything', and the environment's own declarations were never turned into a resolved, verified state. That gap is what made the web arm unexercised and GOAL unmeasured at the same time.",
+ "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The measured wall between this project and every real repository: an unarmed environment makes the agent's first honest answer 'I cannot ask this environment anything', and the environment's own declarations were never turned into a resolved, verified state. That gap is what made the web arm unexercised and GOAL unmeasured at the same time.",
+ "date": "2026-11-23",
+ "expected_parent_change": "The world broker can now arm an environment it has never seen from that environment's own declarations: each declared dependency is present at a spec-satisfying version in the isolation the environment will be asked in, with every artifact fetched from the machine-readable registry and hash-agreed against the registry's own published digest before installation, and proven by import rather than by the install's exit code. On two repositories never brokered before, the environment went from cold to a passing suite with zero model calls (flask 494 passed, requests 619 passed), and a warm arm costs a third of a second with no network at all.",
+ "expected_parent_frontier_change": "The world broker can now arm an environment it has never seen from that environment's own declarations: each declared dependency is present at a spec-satisfying version in the isolation the environment will be asked in, with every artifact fetched from the machine-readable registry and hash-agreed against the registry's own published digest before installation, and proven by import rather than by the install's exit code. On two repositories never brokered before, the environment went from cold to a passing suite with zero model calls (flask 494 passed, requests 619 passed), and a warm arm costs a third of a second with no network at all.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "All he should do is basically go into any new arbitrary environment in the computer and he doesn't know anything about anything",
+  "should he be goal-directed or should he learn everything in all the environments",
+  "best part is no part",
+  "our own model only, zero model calls at runtime"
+ ],
+ "falsification_condition": "Falsified if any warm arm returns a version or import state the interpreter contradicts, if any artifact's bytes disagree with the registry's published digest and installation proceeds anyway, or if a repository whose suite passes after arming shows a declared dependency absent. All three are tested; the live tamper case is the standing control.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": false,
+ "highest_leverage_note": "Two closed contracts either side of a real task now exist in one broker. The next leverage is the same contract shape where the guide is not a manifest at all -- GUI/DOM -- which is blocked in this sandbox (no display) and must be measured elsewhere, not claimed.",
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "Producer-run sandbox only. No independent verifier has reproduced any number here; truth.achieved stays false.",
+  "Two of five suites do not exit cleanly, and both are reported as such, not smoothed over: attrs has a genuine upstream failure on Python 3.11, and tox's man-page tests shell out to the system binary `man`, which this sandbox does not have. Neither is offered as a capability.",
+  "System binaries are not declarations. `man`, `node`, `gcc` are required by real suites and stated in no manifest; env-ready learns of them only by watching a suite fail. That tier is named as the next step, not built.",
+  "GUI/DOM arming remains blocked: no display in this sandbox.",
+  "A warm answer is re-executed, never believed, so the warm path is fast but not free: it still runs the project's own test command."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "load_bearing_note": "The success probability is a producer estimate for the measurement succeeding (it did), not for any frontier benchmark score moving.",
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/66",
+  "interpretation": "No open obligation is discharged by this producer-run measurement, and none is claimed to be. The causal path is constructive: Terminal-Bench 4.0 tasks of any size arrive as repositories whose environments must be armed before any suite can be asked, and the broker's inability to arm one was the standing wall in front of every one of them. That wall now has a measured, refusal-named solution on two unseen repositories. The unlock is stated as 1/66 -- one task's worth of an envelope -- because arming is a precondition for the benchmark, not a score on it.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "9/10",
+  "wall_clock_cost_ub": "1800"
+ },
+ "measured_effect": {
+  "repositories_armed": "5 of 5 unseen repositories arm from their own declarations (requests, flask, black, attrs, tox): cold 15.7-96.1 s, warm 0.367-1.273 s",
+  "suites_run_after_arming": "requests 619 passed, flask 494 passed, black 800 passed + 61 subtests (all ENVIRONMENT_BROKERED); attrs 1408 passed with 1 genuine upstream py3.11 failure; tox 4253 passed with 3 errors from a missing system binary (`man`). The last two are reported as REFUSE__VERIFICATION_FAILED -- a result about the project, explicitly not a claim about the environment.",
+  "declaration_shapes_read": "pyproject-only, dependency-groups with {include-group}, markers with inner quoted comparisons, extras declared in a command string, extras declared as data in tox.toml, multi-line arrays",
+  "before_round_2": "black refused (VERSION_CHECK_FAILED), tox refused (DECLARATION_NOT_UNDERSTOOD), attrs and tox reported the environment as refusing when the environment was fine and their own tests were not"
+ },
+ "next_step": "Close the gap this round measured: system binaries are not declarations. tox's own suite fails with FileNotFoundError: 'man', and no pyproject.toml states it. Build the declared-by-observation tier for executables -- derive the requirement from the suite's own evidence (subprocess targets, its CI workflow, its docs build), then verify it by execution (which + --version) exactly as imports are verified now, and report it as a third refusal vocabulary item rather than as a project failure. This is the same contract shape as GUI/DOM arming with the evidence source moved from manifest to observation; GUI/DOM itself stays blocked (no display in this sandbox).",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+ "progress_evidence_paths": [
+  "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json",
+  "canonical/swe_kernel/the_environment_broker_v1.py",
+  "canonical/tests/test_broker_env_ready_v1.py",
+  "canonical/tests/test_the_environment_broker_v1.py",
+  "canonical/tools/env_ready_live_trial_v1.py",
+  "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json"
+ ],
+ "real_outcome": "An environment the system has never seen is now armed from the environment's own declarations with two-reader digest agreement, proven by execution, remembered by evidence, and re-checked on every reuse -- and the other goal can then be asked in it.",
+ "recursive_obs": {
+  "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "second provisioning organ",
+   "open-web fetch tier",
+   "sdist builds",
+   "standalone fetch tool"
+  ],
+  "expected_parent_level_state_change": "The world broker can now arm an environment it has never seen from that environment's own declarations: each declared dependency is present at a spec-satisfying version in the isolation the environment will be asked in, with every artifact fetched from the machine-readable registry and hash-agreed against the registry's own published digest before installation, and proven by import rather than by the install's exit code. On two repositories never brokered before, the environment went from cold to a passing suite with zero model calls (flask 494 passed, requests 619 passed), and a warm arm costs a third of a second with no network at all.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "assume a standard dependency set",
+    "let run-tests install on failure"
+   ],
+   "intrinsic_or_path_specific": "path-specific: the declarations existed, the resolution to verified bytes did not",
+   "surviving_causal_blocker": "an unarmed environment makes every later goal unaskable, and arming was never a measurable object"
+  },
+  "obs_capability": {
+   "capability_work_deleted": [
+    "a second provisioning organ",
+    "an open-web fetch tier",
+    "sdist building"
+   ],
+   "existing_inherited_routes_checked": [
+    "environment_fit_v1.provision/satisfy",
+    "broker run-tests contract",
+    "jit_knowledge_v1 web tier",
+    "local_guide_v1"
+   ],
+   "external_existing_routes_checked": [
+    "pip/uv/poetry resolvers",
+    "pypi JSON API",
+    "PEP 440/508/517/427"
+   ],
+   "surviving_gap": "declaring what an environment needs was resolved by nothing in the tree to verified bytes"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "scanning the whole tree to infer missing packages",
+    "remembering package names as facts",
+    "trusting an install's exit code as readiness"
+   ],
+   "real_outcome": "an environment this system has never seen becomes one it can ask a task question in, provably",
+   "surviving_necessity": "the environment's own declarations, resolved to digest-verified bytes and confirmed by import"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "environment_fit_v1's isolation directory is reused, not re-implemented",
+   "downstream_work_to_delete_or_supersede": [
+    "the broker's single goal kind",
+    "its V1 cache schema"
+   ],
+   "fresh_reuse_plan": "the V2 cache re-checks on every reuse, so nothing inherited is believed"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": [
+    "the deep research already in intake/ was read, not re-run",
+    "the six live defects are recorded so they are not rediscovered"
+   ],
+   "search_stop_decision": "stopped when four route families had a disqualifying or non-dominating reason with evidence"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "deletion_first_order_note": "DELETE: the second provisioning organ, the open-web fetch tier, sdist building and a standalone fetch tool were all deleted before adding anything. BYPASS: anything the isolation already satisfies is bypassed with a metadata read and an import, never a round trip. REUSE: the isolation directory, TOML reader, test-group reader and the broker's evidence-digest cache are reused, not rebuilt. COMPOSE: only then was the second contract composed onto the existing broker.",
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "recorded per challenger in route_frontier",
+   "routes_ranked": [
+    "extend the broker with env-ready",
+    "let pip resolve",
+    "open web tier",
+    "sdist build",
+    "standalone tool"
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "existing_oracle_note": "the interpreter itself (import + importlib.metadata) and the registry's published sha256 for the exact bytes",
+   "synthetic_verification_necessity": "none for the live claims; stubs exist only to produce refusals the network cannot produce on demand"
+  },
+  "observed_at_utc": "2026-11-23T16:49:22+00:00",
+  "real_outcome": "flask 494 passed and requests 619 passed, exit 0, in isolations armed from their own declarations with zero model calls",
+  "required_capability": "resolve an environment's declared dependencies to digest-verified, importable state",
+  "route_frontier": {
+   "challenger_routes": [
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "equal reach",
+      "CORRECTNESS": "worse: trusts a plan, not the bytes",
+      "INCREMENTAL_COST": "0 parameters either way",
+      "RELIABILITY": "lower: a resolver output cannot be cross-checked per artifact",
+      "VERIFIABILITY": "weaker: no two-reader digest agreement per artifact",
+      "WALL_CLOCK": "similar or faster (parallel resolve)"
+     },
+     "evidence": [
+      "pip's own resolver already solves this, which is why it was a candidate",
+      "but a resolver's plan is a second model of a registry we can read directly"
+     ],
+     "qualification_evidence": [
+      "the live trial: --no-deps left pluggy absent while pytest reported 9.2.0"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "LET_PIP_RESOLVE_THE_WHOLE_TREE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "broad but unusable",
+      "CORRECTNESS": "unverifiable",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "none",
+      "WALL_CLOCK": "unbounded"
+     },
+     "evidence": [
+      "the sandbox egress allowlist admits only registries and GitHub",
+      "a prose page is not a statement a machine can check"
+     ],
+     "qualification_evidence": [
+      "intake/RECEIPT_OPEN_WEB_FRONTEND_BLOCKED_20261122_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "OPEN_WEB_SEARCH_AS_THE_FETCH_TIER"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "wider coverage",
+      "CORRECTNESS": "unverifiable bytes",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "none",
+      "WALL_CLOCK": "seconds to minutes per build"
+     },
+     "evidence": [
+      "an sdist has no registry-published digest to agree with in the same way a wheel does",
+      "building arbitrary source at arming time is arbitrary code execution, not arming"
+     ],
+     "qualification_evidence": [
+      "REFUSE__NO_COMPATIBLE_VERIFIED_ARTIFACT is a pinned test"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "DISQUALIFIED",
+     "route": "BUILD_SDIST_ONLY_RELEASES_FROM_SOURCE"
+    },
+    {
+     "comparison": {
+      "CAPABILITY_STRENGTH": "equal",
+      "CORRECTNESS": "equal",
+      "INCREMENTAL_COST": "a second surface to keep honest",
+      "RELIABILITY": "same",
+      "VERIFIABILITY": "split across two places",
+      "WALL_CLOCK": "same"
+     },
+     "evidence": [
+      "it would re-implement the broker's locate and verification stages",
+      "the broker already owns both and the second contract is one function"
+     ],
+     "qualification_evidence": [
+      "grep: only model_call_surface_audit_v1 referenced the broker before this round"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ],
+     "resolution": "NON_DOMINATING",
+     "route": "A_STANDALONE_FETCH_TOOL_BESIDE_THE_BROKER"
+    }
+   ],
+   "checked_at_utc": "2026-11-23T13:47:35+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "REFUSE_THE_ENVIRONMENT_AND_REPORT_THE_MISSING_DEPENDENCY (the pre-round broker)",
+   "max_age_hours": 6,
+   "negative_search_summary": "Four routes were searched and each lost for a reason recorded below: letting pip resolve the tree (trusts a resolver's plan instead of the bytes), an open-web search tier (the sandbox allowlist blocks general web and prose is not a machine-checkable statement), sdist builds (bytes with no published digest to agree with), and a standalone fetch tool (duplicates the broker's locate stage).",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "resolve and install declared python dependencies from a machine readable registry with digest verification"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "pip versus uv versus poetry dependency resolution for agents"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "wheel tag compatibility libc manylinux architecture matching"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "2026 pypi json api artifact digest verification"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-23T16:49:22+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3.11 runtime, venv and ensurepip",
+      "evidence": [
+       "this round: 40 broker tests pass in a local venv, and five isolated interpreters were created and armed (python 3.11)"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     },
+     {
+      "dependency": "pypi.org JSON registry",
+      "evidence": [
+       "re-probed for this round: pypi.org/pypi/requests/json answered, requests 2.34.2"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE",
+       "OFFICIAL_PRIMARY"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "files.pythonhosted.org artifact CDN",
+      "evidence": [
+       "re-probed for this round: artifact CDN reachable; every wheel in the five-repository trial was downloaded from it and its sha256 agreed with the registry's published digest"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "github.com for the trials' fresh clones",
+      "evidence": [
+       "re-probed for this round: five full-history clones (--filter=blob:none) of requests, flask, black, attrs and tox succeeded"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "NETWORK_ENDPOINT",
+      "observed_at_utc": "2026-11-23T16:49:22+00:00",
+      "required": true,
+      "scope": "GLOBAL",
+      "status": "READY",
+      "volatility": "VOLATILE"
+     },
+     {
+      "dependency": "the broker module this round extends",
+      "evidence": [
+       "canonical/swe_kernel/the_environment_broker_v1.py, exercised by 31 offline tests and five live repositories this round"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "LOCAL",
+      "kind": "CODE_ARTIFACT",
+      "required": true,
+      "scope": "LOCAL",
+      "status": "READY",
+      "volatility": "STATIC"
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 1,
+    "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+    "status": "READY",
+    "stop_condition": "the five named dependencies are each read as READY immediately before the live trial"
+   },
+   "selected_surviving_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/runtime/environment_fit_v1.py (provision/satisfy/best_test_command, isolated venv by path hash)",
+     "canonical/swe_kernel/the_environment_broker_v1.py (one closed contract and an evidence-digest cache)",
+     "intake/THE_WORLD_IS_A_GUIDE_BUT_THE_GUIDE_IS_NOT_THE_WORLD_20261122_V1.md (named this exact gap)",
+     "intake/RECEIPT_ENV_READY_LIVE_20261123_V1.json (this round's measurements)"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "Terminal-Bench 4.0 board read 2026-11-07: Opus 5.5 + Claude Code 64.8% +- 3.1% leads; Sonnet 5.5 61.8%; GPT-6 Astra and GPT-6.1 Sol 58.2%; Fable 5.1 57.9% (tbench.ai)",
+     "Terminal-Bench 2.x is saturated (87-92%) and not comparable to 3.0/4.0",
+     "OSWorld 2.1 partial-score obligation remains the GUI-surface target, unreachable here: no display"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "pypi.org itself, read live: 32 artifacts for requests, 14 for flask"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "PEP 440 version specifiers and PEP 503 normalized names",
+     "PEP 427 wheel tags; PEP 517 build-system table; PEP 508 requirement and marker grammar",
+     "pypi.org JSON API: releases[].digests.sha256 per artifact"
+    ]
+   },
+   "stop_condition": "both unseen repositories arm cold, re-arm warm without network, and their own suites pass in the armed isolation",
+   "unresolved_plausible_dominators": [],
+   "why_selected_route_is_fastest_sufficient": "The environment already states what it needs, so the unknown set is declared rather than searched. Arming costs one registry read and one artifact per missing declaration and is then remembered by evidence digest, so the second visit is a third of a second and no network. Nothing else in the tree resolves a declaration to verified bytes."
+  },
+  "routes_considered": [
+   "LET_PIP_RESOLVE_THE_WHOLE_TREE",
+   "OPEN_WEB_SEARCH_AS_THE_FETCH_TIER",
+   "BUILD_SDIST_ONLY_RELEASES_FROM_SOURCE",
+   "A_STANDALONE_FETCH_TOOL_BESIDE_THE_BROKER"
+  ],
+  "selected_surviving_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+  "stop_condition": "both unseen repositories arm cold, re-arm warm without network, and their own suites pass in the armed isolation",
+  "why_selected_route_is_fastest_sufficient": "The environment already states what it needs, so the unknown set is declared rather than searched. Arming costs one registry read and one artifact per missing declaration and is then remembered by evidence digest, so the second visit is a third of a second and no network. Nothing else in the tree resolves a declaration to verified bytes."
+ },
+ "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, compositional over any arbitrary environment, with local guides (README, tool --help, man pages, .md docs) read first and web as fallback",
+ "route_class": "COMPOSE",
+ "route_id": "ENV_READY_VIA_DECLARED_DEPENDENCIES_AND_TWO_READER_DIGEST",
+ "route_order_walk": {
+  "ADAPT": "The local tier now reads tool help and man pages first.",
+  "BYPASS": "Not used: trusting the web first is the failure mode.",
+  "COMPOSE": "Selected: the tool/man tiers are inside the existing local-guide path.",
+  "CONFIGURE": "No configuration added beyond tools/man_root/timeout_s parameters.",
+  "DELETE": "No mechanism deleted.",
+  "INTEGRATE": "Not yet claimed.",
+  "REUSE": "Selected: reuse the local-guide path.",
+  "SUBSTITUTE": "Not used.",
+  "SYNTHESIZE_NEW_PRIMITIVE": "Not selected: the tool/man tiers are a source, not a new engine."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+ "selected_surviving_route": "EXTEND_THE_EXISTING_WORLD_BROKER_WITH_A_SECOND_CLOSED_CONTRACT_ARMED_FROM_THE_ENVIRONMENTS_OWN_DECLARATIONS",
+ "status": "ROUND_2_CLOSED_BOTTLENECK_MEASURED_ON_FIVE_UNSEEN_REPOSITORIES",
+ "stop_condition": "both unseen repositories arm cold, re-arm warm without network, and their own suites pass in the armed isolation",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "Local instant knowledge reads, in order of directness, the named tool's own --help, then its man page, then the repo's .md guides -- offline, version-matched, completeness-gated; the web tier is asked only when the caller passes allow_instant_knowledge=True and the local tier misses.",
+  "what_is_false_in_the_claim": [
+   "that the local tier reads only the repo's .md guides",
+   "that a keyword match anywhere in a tool's --help or man page is a conclusion"
+  ]
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The tool/man tiers construct and admit the mechanism; no obligation moves.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "b10a317daf1161e7f36d87618fb0470600a1a205",
+     "path": "canonical/verification/LOCAL_GUIDE_RECEIPT_20261123_TOOL_MAN_TIER_V1.json"
+    }
+   ],
+   "decisive_question": "Does the tool/man tier answer from evidence, or from keyword matches?",
+   "falsifier_id": "THE_TOOL_MAN_TIER_IS_A_KEYWORD_MATCHER_NOT_A_GUIDE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_LOCAL_GUIDE_TOOL_MAN_TIER_V1"
+  }
+ },
+ "verification": {
+  "offline_tests": {
+   "file": "canonical/tests/test_broker_env_ready_v1.py",
+   "count": 31,
+   "result": "31 passed",
+   "added_round_2": [
+    "dev bound sorts below its release (`4.0 > 4dev`)",
+    "a marker excluding this interpreter is skipped, not fetched",
+    "a plugin is armed when its host is armed, not in isolation",
+    "a manifest is read by the standard parser, not by quoting rules",
+    "the project's own declared test command is used",
+    "extras declared as data in tox.toml are read, undeclared names not invented"
+   ]
+  },
+  "existing_suite": {
+   "file": "canonical/tests/test_the_environment_broker_v1.py",
+   "count": 9,
+   "result": "9 passed"
+  },
+  "live_trial": "intake/RECEIPT_ENV_READY_LIVE_20261123_V2.json (5 repositories, 820 s cold)",
+  "model_call_audit": "canonical/verification/MODEL_CALL_AUDIT_ENV_READY_20261123_V1.json (ENVIRONMENT_BROKER static=3 dynamic=1 inference_endpoint_files=0)",
+  "independent_verification": "OPEN"
+ },
+ "weakens_existing_guard": false
+}

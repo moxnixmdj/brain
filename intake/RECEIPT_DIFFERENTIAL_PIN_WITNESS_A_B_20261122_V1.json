@@ -1,0 +1,35 @@
+{
+ "schema": "BRAIN_DIFFERENTIAL_PIN_WITNESS_A_B_20261122_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "date": "2026-11-22",
+ "branch": "arena/67c67d7e-brain",
+ "question": "Do argument values observed at runtime in the passing suite, supplied as candidate tokens to the differential-pin instrument, raise its headline metric (real commits converted to checkable pins without any test) above 0?",
+ "method": "Same instrument (checkability_by_differential_pin_v1), same 4-repository corpus, same 6 commits across the pinned old/new releases, run twice: once with its built-in parse-only vocabulary (ARG_TOKENS + module_literals), once with that vocabulary widened by '='-prefixed literals drawn from the runtime witness records of pypa/packaging 24.0. Whole run re-executed with /tmp/pins/cache intact; no model calls; no network at measurement time.",
+ "baseline_states": {"commits": 6, "with_tests": 3, "untested": 3, "probed": 2, "checkable": 0, "pins": 0},
+ "witness_widened_states": {"commits": 6, "with_tests": 3, "untested": 3, "probed": 2, "checkable": 0, "pins": 0},
+ "witness_widened_verified_live": {"calls_to_module_literals": 3, "enlarged_alphabet_size": 22, "extra_tokens_injected": 24},
+ "targeted_check": {
+    "target": "pallets/itsdangerous 2.0.0 -> 2.1.2, itsdangerous.encoding base64_decode / want_bytes across the 2.1.2 diff window",
+    "change_in_window": "only 'raise BadData(...) from e' (explicit exception chaining) in encoding.py",
+    "parse_only_vocabulary": {"calls": 24, "parent_fixed_signature_differences": 0},
+    "parse_plus_witnessed_vocabulary": {"calls": 38, "parent_fixed_signature_differences": 0},
+    "why": "the observer records outcome/type/value_repr/message_shape only; an exception's __cause__ is not part of the pinned signature, so the single changed channel is invisible to the instrument no matter how good the alphabet is"
+ },
+ "inverse_experiment_flaw": {
+    "finding": "an earlier A/B in this session handed raw witnessed strings (e.g. '/usr/bin/python3', 'mañana') to the probe child as tokens; shape_value() has no dict entry for them and raised KeyError, killing the entire probe child -> PROBER_DIED for every call in the batch -> 0 pins by instrumentation failure, not by behaviour",
+    "correction": "vocabulary tokens whose text the probe should return verbatim must be '='-prefixed (the instrument's documented literal-string channel); rerunning the widened experiment with prefixed tokens restored probe coverage and still yielded 0 pins",
+    "shape_value": "canonical/swe_kernel/checkability_by_differential_pin_v1.py:127-143"
+ },
+ "instrument_defect_fixed": {
+    "defect": "calls were built as [token] * required -- every argument identical (the diagonal). No off-diagonal (arch, version) pair could ever be probed; measured 26 calls per module, 0 heterogeneous",
+    "fix": "_argument_tuples(): keeps the diagonal and adds a bounded off-diagonal (permutations of the vocabulary, capped at OFF_DIAGONAL_CAP=48)",
+    "effect_on_headline": "none in this corpus: the only public callable probed takes 1 required argument, so zero tuples are affected (importable_at_fixed=35/35 for packaging._manylinux verified)",
+    "verified": "required=2 -> 9 tuples, 6 heterogeneous (tested via unit-style check)"
+ },
+ "named_findings_not_fixed_this_round": [
+    "shape_value() crashes the whole probe child on an unknown non-prefixed token instead of marking that call; the built-in vocabulary construction always produces valid tokens, but any external widening must pre-normalise",
+    "the observation signature never records exc.__cause__/__context__, so exception-chaining changes (as in itsdangerous 2.1.2 encoding.py) cannot pin",
+    "probed public surface of the untested commits in this corpus is packaging._manylinux.platform_tags (1 required argument); the corpus never reaches the multi-argument functions the witness mostly settled"
+ ],
+ "decision": "STATE THE NULL. The witnessed runtime values do NOT move checkability_by_differential_pin_v1 off 0. The distinction that matters is census coverage (does an observed name settle to a value?) versus discriminative input (is there an input on which parent and fixed states differ observably?). The witness raises the former; the differential pin requires the latter, and on this corpus and instrument there is none. real_commit_repair_v1 was not re-run because it has no argument-value channel -- its vocabulary is edit-kind lessons extracted from diffs plus the failing test's trace slice; feeding it values would be a fabricated experiment, not a measurement."
+}

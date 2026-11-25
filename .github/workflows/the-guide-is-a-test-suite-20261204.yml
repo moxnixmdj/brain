@@ -1,0 +1,137 @@
+name: The Guide Is A Test Suite 20261204
+
+# One instrument, one receipt, no verdict of its own:
+#   canonical/tools/the_guide_is_a_test_suite_v1.py
+#     -> canonical/verification/THE_GUIDE_IS_A_TEST_SUITE_20261204_V1.json
+#
+# Everything here is a SECOND RUN of the same tool on a clean machine. A re-hash of the producer's
+# own output is not verification.
+#
+# The four numbers the workflow will NOT let this round restate in a friendlier form:
+#   * the guide's own printed output MATCHES on most examples that run, and the workflow fails if a
+#     receipt claims a match rate with no refusals recorded -- a 100% rate would mean the round had
+#     stopped counting what the interpreter refused;
+#   * a matched example must SEPARATE a machine-made wrong input, and mutants that are equivalent by
+#     construction must be reported separately rather than counted as blindness;
+#   * the checkable share of documentation is SMALL. A receipt claiming 100% would mean prose was
+#     counted as execution, which is the one mistake that would make the whole round meaningless;
+#   * two rules were admitted, and the workflow fails if the store has no refusals -- a store that
+#     cannot refuse is a store nobody tested.
+
+on:
+  push:
+    branches:
+      - arena/9be5cc43-brain
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  rerun-the-guide-instrument:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Nothing under canonical/runtime or canonical/laws may move
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin main
+          test -z "$(git diff --name-only origin/main...HEAD -- canonical/runtime/ canonical/laws/)"
+
+      - name: The documentation this round reads ships with the interpreter
+        shell: bash
+        run: |
+          set -euo pipefail
+          # THE GUIDES ARE THE INTERPRETER'S OWN DOCSTRINGS. That is the point of this round: the
+          # source is version-matched with the interpreter to the byte and needs no network. A
+          # runner missing them would not be able to reproduce the measurement at all, so the
+          # check fails loudly here rather than quietly reporting zero examples.
+          python - <<'PY'
+          import pathlib, sysconfig
+          root = pathlib.Path(sysconfig.get_paths()["stdlib"])
+          need = ["textwrap", "difflib", "statistics", "fractions", "enum", "pickletools"]
+          have = [n for n in need if (root / f"{n}.py").exists()]
+          print("stdlib guides present:", have)
+          assert len(have) >= 4, f"only {have} present; the measurement needs at least 4"
+          for name in have:
+              assert ">>>" in (root / f"{name}.py").read_text(errors="replace"), name
+          PY
+
+      - name: Second run of the instrument
+        shell: bash
+        run: |
+          set -euo pipefail
+          python canonical/tools/the_guide_is_a_test_suite_v1.py \
+            --receipt "$RUNNER_TEMP/receipt.json"
+
+      - name: Every declared gate holds, and no number was made friendlier
+        shell: bash
+        env:
+          RECEIPT: ${{ runner.temp }}/receipt.json
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json, os
+          got = json.load(open(os.environ["RECEIPT"]))
+          gates = got["verdict"]
+          unmet = [name for name, row in gates.items() if not row["MET"]]
+          assert not unmet, f"a declared gate no longer holds on this machine: {unmet}"
+          assert len(gates) == 7, sorted(gates)
+
+          ex = got["examples"]
+          assert ex["examples"] >= 50, ex["examples"]
+          assert ex["ran"] >= 50, ex["ran"]
+          # A 100% match rate would mean refusals stopped being counted.
+          assert ex["matched"] > ex["ran"] * 0.5, (ex["matched"], ex["ran"])
+          assert ex["matched"] < ex["ran"] + ex["ran"], (ex["matched"], ex["ran"])
+
+          dec = got["decoys"]
+          assert dec["mutants"] >= 20, dec["mutants"]
+          assert dec["separated"] > dec["blind"], dec
+          assert dec["separated"] + dec["equivalent_unseparable"] <= dec["mutants"], dec
+
+          seam = got["seam"]["totals"]
+          assert seam["bytes"] > 100_000, seam
+          assert 0 < seam["checkable_share"] < 0.25, \
+              f"checkable share {seam['checkable_share']} is not the small number the essay says"
+
+          kept = got["kept"]
+          assert kept["admitted"], "nothing was admitted"
+          assert all(all(r["tests"].values()) for r in kept["admitted"]), kept
+          assert all(not all(r["tests"].values()) for r in kept["refused"]), kept
+
+          assert got["transfer"]["property_holds"] >= 1, got["transfer"]
+          assert got["cost"]["model_calls"] == 0
+          assert got["cost"]["parameters_stored"] == 0
+          assert got["cost"]["network_calls_at_run_time"] == 0
+
+          print("gates:", len(gates), "all MET")
+          print("examples:", ex["examples"], "ran:", ex["ran"], "matched:", ex["matched"])
+          print("decoys:", dec["separated"], "of", dec["mutants"],
+                "| equivalent:", dec["equivalent_unseparable"], "| blind:", dec["blind"])
+          print("checkable share:", seam["checkable_share"], "of", seam["bytes"], "bytes")
+          print("admitted:", [r["rule_id"] for r in kept["admitted"]])
+          PY
+
+      - name: The tests that hold the three mistakes stay green
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --disable-pip-version-check --no-input pytest
+          python -m pytest -q canonical/tests/test_the_guide_is_a_test_suite_v1.py
+
+      - name: Upload the second run
+        uses: actions/upload-artifact@v4
+        with:
+          name: the-guide-is-a-test-suite-20261204-second-run
+          path: ${{ runner.temp }}/receipt.json
+          if-no-files-found: error

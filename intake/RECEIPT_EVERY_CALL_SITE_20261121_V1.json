@@ -1,0 +1,130 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "call_sites": 252,
+ "counts": {
+  "REFUSED__ARGUMENT_NOT_ENCODABLE": 58,
+  "REFUSED__ARITY_OVER_CAP": 6,
+  "REFUSED__KEYWORD_VALUE_NOT_ENCODABLE": 12,
+  "REFUSED__NAME_HAS_NO_TYPE": 131,
+  "REFUSED__STARRED_ARGUMENT": 2,
+  "USABLE": 43
+ },
+ "files_with_a_usable_site": 5,
+ "functions_with_a_vector": 15,
+ "refused_name_kinds": {
+  "Constant": 8,
+  "Name": 58
+ },
+ "schema": "BRAIN_EVERY_CALL_SITE_V1",
+ "tree": "/tmp/ckcache/pypa__packaging@24.0",
+ "usable_share": 0.1706,
+ "vectors": {
+  "_generic_abi": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_generic_platforms": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_get_config_var": [
+   {
+    "args": [
+     "@json:\"EXT_SUFFIX\""
+    ],
+    "kwargs": [
+     [
+      "warn",
+      "@json:true"
+     ]
+    ]
+   }
+  ],
+  "_get_glibc_version": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_glibc_version_string": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_glibc_version_string_confstr": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_glibc_version_string_ctypes": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_linux_platforms": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "_parse_project_urls": [
+   {
+    "args": [
+     "@json:[]"
+    ],
+    "kwargs": []
+   }
+  ],
+  "default_environment": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "generic_tags": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "interpreter_name": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "mac_platforms": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ],
+  "mock_interpreter_name": [
+   {
+    "args": [
+     "@json:\"cpython\""
+    ],
+    "kwargs": []
+   },
+   {
+    "args": [
+     "@json:\"CPython\""
+    ],
+    "kwargs": []
+   }
+  ],
+  "platform_tags": [
+   {
+    "args": [],
+    "kwargs": []
+   }
+  ]
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "schema": "BRAIN_COMPOSE_A_HOST_NEVER_SEEN_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "host": "/usr/bin",
+ "programs_on_host": 635,
+ "programs_typed": 225,
+ "seconds_to_type_the_host": 7.357,
+ "reachable_sinks": 11,
+ "attempts": [
+  {
+   "sink": "BASE32[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "base32"
+   ],
+   "inverse_chain": [
+    "base32",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [],
+    []
+   ],
+   "sizes": [
+    179,
+    292
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decode"
+    ],
+    [
+     "--decode"
+    ]
+   ],
+   "round_trip_exact": true,
+   "final_bytes": 132,
+   "source_bytes": 132
+  },
+  {
+   "sink": "BASE64[BASE32[TEXT]]",
+   "found": true,
+   "chain": [
+    "base32",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "base32"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [],
+    []
+   ],
+   "sizes": [
+    219,
+    296
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decode"
+    ],
+    [
+     "--decode"
+    ]
+   ],
+   "round_trip_exact": true,
+   "final_bytes": 132,
+   "source_bytes": 132
+  },
+  {
+   "sink": "BASE64[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [],
+    []
+   ],
+   "sizes": [
+    179,
+    244
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decode"
+    ],
+    [
+     "--decode"
+    ]
+   ],
+   "round_trip_exact": true,
+   "final_bytes": 132,
+   "source_bytes": 132
+  },
+  {
+   "sink": "BASENC[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "basenc"
+   ],
+   "inverse_chain": [
+    "basenc",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "STAGE_FAILED",
+   "forward_argv": [
+    [],
+    []
+   ],
+   "sizes": [
+    179,
+    0
+   ]
+  },
+  {
+   "sink": "BASE64[BASENC[TEXT]]",
+   "found": true,
+   "chain": [
+    "basenc",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "basenc"
+   ],
+   "inverse_found": true,
+   "forward_status": "STAGE_FAILED",
+   "forward_argv": [
+    []
+   ],
+   "sizes": [
+    0
+   ]
+  },
+  {
+   "sink": "BZCAT[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "bzcat"
+   ],
+   "inverse_chain": [
+    "bzcat",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "STAGE_FAILED",
+   "forward_argv": [
+    [],
+    [
+     "--stdout"
+    ]
+   ],
+   "sizes": [
+    179,
+    0
+   ]
+  },
+  {
+   "sink": "BASE64[BZCAT[TEXT]]",
+   "found": true,
+   "chain": [
+    "bzcat",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "bzcat"
+   ],
+   "inverse_found": true,
+   "forward_status": "STAGE_FAILED",
+   "forward_argv": [
+    [
+     "--stdout"
+    ]
+   ],
+   "sizes": [
+    0
+   ]
+  },
+  {
+   "sink": "BZIP2[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "bzip2"
+   ],
+   "inverse_chain": [
+    "bunzip2",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [],
+    [
+     "--stdout"
+    ]
+   ],
+   "sizes": [
+    179,
+    198
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decompress"
+    ],
+    [
+     "--decode"
+    ]
+   ],
+   "round_trip_exact": true,
+   "final_bytes": 132,
+   "source_bytes": 132
+  },
+  {
+   "sink": "BASE64[BZIP2[TEXT]]",
+   "found": true,
+   "chain": [
+    "bzip2",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "bunzip2"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [
+     "--stdout"
+    ],
+    []
+   ],
+   "sizes": [
+    93,
+    126
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decode"
+    ],
+    [
+     "--decompress"
+    ]
+   ],
+   "round_trip_exact": true,
+   "final_bytes": 132,
+   "source_bytes": 132
+  },
+  {
+   "sink": "BZLESS[BASE64[TEXT]]",
+   "found": true,
+   "chain": [
+    "base64",
+    "bzless"
+   ],
+   "inverse_chain": [
+    "bzless",
+    "base64"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [],
+    [
+     "--stdout"
+    ]
+   ],
+   "sizes": [
+    179,
+    25
+   ],
+   "back_status": "STAGE_FAILED",
+   "back_argv": [
+    [
+     "--decompress"
+    ],
+    [
+     "--decode"
+    ]
+   ],
+   "round_trip_exact": false
+  },
+  {
+   "sink": "BASE64[BZLESS[TEXT]]",
+   "found": true,
+   "chain": [
+    "bzless",
+    "base64"
+   ],
+   "inverse_chain": [
+    "base64",
+    "bzless"
+   ],
+   "inverse_found": true,
+   "forward_status": "OK",
+   "forward_argv": [
+    [
+     "--stdout"
+    ],
+    []
+   ],
+   "sizes": [
+    25,
+    37
+   ],
+   "back_status": "OK",
+   "back_argv": [
+    [
+     "--decode"
+    ],
+    [
+     "--decompress"
+    ]
+   ],
+   "round_trip_exact": false,
+   "final_bytes": 29,
+   "source_bytes": 132
+  }
+ ],
+ "round_trips_verified": 5,
+ "first_verified": {
+  "sink": "BASE32[BASE64[TEXT]]",
+  "found": true,
+  "chain": [
+   "base64",
+   "base32"
+  ],
+  "inverse_chain": [
+   "base32",
+   "base64"
+  ],
+  "inverse_found": true,
+  "forward_status": "OK",
+  "forward_argv": [
+   [],
+   []
+  ],
+  "sizes": [
+   179,
+   292
+  ],
+  "back_status": "OK",
+  "back_argv": [
+   [
+    "--decode"
+   ],
+   [
+    "--decode"
+   ]
+  ],
+  "round_trip_exact": true,
+  "final_bytes": 132,
+  "source_bytes": 132
+ },
+ "seconds": 7.749,
+ "workdir_was_isolated": true,
+ "cost_zeros": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls": 0,
+  "per_host_branches": 1
+ }
+}

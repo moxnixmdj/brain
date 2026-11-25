@@ -1,0 +1,81 @@
+{
+ "schema": "BRAIN_SCAN_RETRIEVE_FETCH_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "host": "/usr/bin",
+ "programs_on_host": 635,
+ "known_from_memory": 0,
+ "unknown_probed": 635,
+ "unreadable": 206,
+ "newly_learned": 429,
+ "memory_entries": 429,
+ "typed_after_visit": 429,
+ "compositions_proved": 3,
+ "compositions": [
+  {
+   "sink": "BASE32[TEXT]",
+   "chain": [
+    "base32"
+   ],
+   "inverse": [
+    "base32"
+   ],
+   "final_bytes": 219,
+   "source_bytes": 132,
+   "ok": true
+  },
+  {
+   "sink": "BASE64[TEXT]",
+   "chain": [
+    "base64"
+   ],
+   "inverse": [
+    "base64"
+   ],
+   "final_bytes": 179,
+   "source_bytes": 132,
+   "ok": true
+  },
+  {
+   "sink": "BASENC[TEXT]",
+   "chain": [
+    "basenc"
+   ],
+   "ok": false,
+   "reason": "basenc produced nothing"
+  },
+  {
+   "sink": "BUNZIP2[TEXT]",
+   "chain": [
+    "bunzip2"
+   ],
+   "ok": false,
+   "reason": "bunzip2 produced nothing"
+  },
+  {
+   "sink": "BZCAT[TEXT]",
+   "chain": [
+    "bzcat"
+   ],
+   "ok": false,
+   "reason": "bzcat produced nothing"
+  },
+  {
+   "sink": "BZIP2[TEXT]",
+   "chain": [
+    "bzip2"
+   ],
+   "inverse": [
+    "bzip2"
+   ],
+   "final_bytes": 93,
+   "source_bytes": 132,
+   "ok": true
+  }
+ ],
+ "seconds": 10.987,
+ "cost_zeros": {
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters_stored": 0
+ }
+}

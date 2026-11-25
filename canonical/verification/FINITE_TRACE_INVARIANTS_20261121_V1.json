@@ -1,0 +1,166 @@
+{
+ "schema": "BRAIN_FINITE_TRACE_INVARIANTS_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-21",
+ "mode": "DELETE_INERT_LITERALS_THEN_QUOTIENT_THE_REMAINING_GRAMMAR",
+ "baseline_receipt": "canonical/verification/TAR_READER_ARTIFACT_20261121_V1.json",
+ "criteria_were_declared_before_the_receipt_run": true,
+ "declared_acceptance_before_the_receipt_run": {
+  "I1": "at least one content has a computed constant-count premise on all machines",
+  "I2": "deleting inert terms strictly reduces ambiguous classes",
+  "I3": "goal stays identified and every alias is observed identical",
+  "I4": "a mutable content violates the premise and its terms separate on a real run",
+  "I5": "zero model calls, parameters and network at run time"
+ },
+ "verdict": {
+  "I1_constant_literals_are_computed": {
+   "inert_contents": [
+    "probe_second_content"
+   ],
+   "premises": {
+    "probe_seed_content": {
+     "initial": 1,
+     "maximum": 2,
+     "unit_increments": true,
+     "never_restored": true,
+     "bounded_at_initial_plus_one": true
+    },
+    "probe_second_content": {
+     "initial": 1,
+     "maximum": 1,
+     "unit_increments": true,
+     "never_restored": true,
+     "bounded_at_initial_plus_one": false
+    },
+    "probe_new_content": {
+     "initial": 0,
+     "maximum": 5,
+     "unit_increments": true,
+     "never_restored": false,
+     "bounded_at_initial_plus_one": false
+    }
+   },
+   "MET": true
+  },
+  "I2_deletion_reduces_ambiguity": {
+   "baseline_ambiguous": 147,
+   "before_deletion": 147,
+   "after_deletion": 137,
+   "terms_before": 143,
+   "terms_after": 133,
+   "MET": true
+  },
+  "I3_goal_stays_identified_without_a_false_merge": {
+   "aliases_proposed": 2,
+   "aliases_verified": 2,
+   "goal_before": 2,
+   "goal_after": 1,
+   "texts": [
+    "created_once[probe_new_content]"
+   ],
+   "MET": true
+  },
+  "I4_mutable_content_refutes_the_deletion": {
+   "premise": {
+    "initial": 1,
+    "maximum": 2,
+    "unit_increments": true,
+    "never_restored": false,
+    "bounded_at_initial_plus_one": true
+   },
+   "pair_observed_on_a_real_run": true,
+   "MET": true
+  },
+  "I5_zero": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls_at_run_time": 0,
+   "MET": true
+  }
+ },
+ "runs": {
+  "TARBALL": 231,
+  "FILESYSTEM": 196,
+  "SQLITE": 128
+ },
+ "mutable_runs": 38,
+ "constant_literals": [
+  "probe_second_content"
+ ],
+ "before_deletion": {
+  "behaviours": 301,
+  "unique_before": 151,
+  "unique_after": 152,
+  "ambiguous_before": 148,
+  "ambiguous_after": 147,
+  "mean_before": 3.3,
+  "mean_after": 3.3,
+  "largest_after": 46,
+  "goal_before": 2,
+  "goal_after": 1,
+  "goal_texts_after": [
+   "created_once[probe_new_content]"
+  ],
+  "example_ambiguous_texts": [
+   "at_least_once[probe_new_content]",
+   "at_least_once[probe_new_content] \u2227 never_removed[probe_second_content]",
+   "at_least_once[probe_new_content] \u2227 at_least_once[probe_second_content]",
+   "at_least_once[probe_new_content] \u2227 monotone[probe_second_content]",
+   "at_least_once[probe_new_content] \u2227 at_least_once[probe_seed_content]",
+   "at_least_once[probe_new_content] \u2227 final:count[probe_second_content]==1"
+  ]
+ },
+ "after_deletion": {
+  "behaviours": 275,
+  "unique_before": 135,
+  "unique_after": 136,
+  "ambiguous_before": 138,
+  "ambiguous_after": 137,
+  "mean_before": 3.39,
+  "mean_after": 3.38,
+  "largest_after": 46,
+  "goal_before": 2,
+  "goal_after": 1,
+  "goal_texts_after": [
+   "created_once[probe_new_content]"
+  ],
+  "example_ambiguous_texts": [
+   "at_least_once[probe_new_content]",
+   "at_least_once[probe_new_content] \u2227 at_least_once[probe_seed_content]"
+  ]
+ },
+ "aliases": [
+  {
+   "texts": [
+    "created_once[probe_new_content]",
+    "created_once[probe_new_content] \u2227 monotone[probe_new_content]",
+    "created_once[probe_new_content] \u2227 final:count[probe_new_content]==1",
+    "monotone[probe_new_content] \u2227 final:count[probe_new_content]==1"
+   ],
+   "premise": "initial count of probe_new_content is 0",
+   "observed_identical": true
+  },
+  {
+   "texts": [
+    "created_once[probe_seed_content]",
+    "created_once[probe_seed_content] \u2227 monotone[probe_seed_content]",
+    "created_once[probe_seed_content] \u2227 final:count[probe_seed_content]==2",
+    "monotone[probe_seed_content] \u2227 final:count[probe_seed_content]==2"
+   ],
+   "premise": "initial count of probe_seed_content is 1",
+   "observed_identical": true
+  }
+ ],
+ "cost": {
+  "seconds": 110.2,
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_calls_at_run_time": 0
+ },
+ "limits": [
+  "constant premises are decisions over executed runs at depths 5/4/4, not proofs about unbounded action sequences; a new action that changes the literal must be re-measured",
+  "deleting inert terms removes information-free statements; it does not resolve genuine ambiguity between mutable contents",
+  "no edit is synthesized and no benchmark is run; this prices the goal before an edit",
+  "the mutable machine is a changed argument on an existing tool, not a new OS"
+ ]
+}

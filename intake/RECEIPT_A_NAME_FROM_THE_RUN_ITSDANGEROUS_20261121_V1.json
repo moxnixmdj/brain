@@ -1,0 +1,115 @@
+{
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "blocked_sites": 10,
+ "conversion_rate": 0.0,
+ "converted": [],
+ "converted_sites": 0,
+ "distinct_blocked_callees": 4,
+ "interpreter": "/tmp/brainvenv/bin/python",
+ "pytest": "297 passed in 0.95s",
+ "schema": "BRAIN_A_NAME_GETS_ITS_VALUE_FROM_THE_RUN_V1",
+ "target_pairs_witnessed": 7,
+ "target_witness_sample": [
+  {
+   "key": "want_bytes|0",
+   "param": "s",
+   "types": {
+    "bytes": 6167,
+    "str": 888
+   },
+   "values": {
+    "str": [
+     "ma\u00f1ana",
+     "\u7121\u9650",
+     "12345",
+     "secret_key"
+    ]
+   }
+  },
+  {
+   "key": "want_bytes|1",
+   "param": "encoding",
+   "types": {
+    "str": 7055
+   },
+   "values": {
+    "str": [
+     "utf-8",
+     "ascii"
+    ]
+   }
+  },
+  {
+   "key": "want_bytes|2",
+   "param": "errors",
+   "types": {
+    "str": 7055
+   },
+   "values": {
+    "str": [
+     "strict",
+     "ignore"
+    ]
+   }
+  },
+  {
+   "key": "_make_keys_list|0",
+   "param": "secret_key",
+   "types": {
+    "bytes": 42,
+    "list": 650,
+    "str": 338
+   },
+   "values": {
+    "str": [
+     "secret_key",
+     "dev key",
+     "secret-key",
+     "a"
+    ]
+   }
+  },
+  {
+   "key": "is_text_serializer|0",
+   "param": "serializer",
+   "types": {
+    "module": 199,
+    "type": 82
+   },
+   "values": {}
+  },
+  {
+   "key": "coerce_str|0",
+   "param": "ref",
+   "types": {
+    "bytes": 18,
+    "str": 54
+   },
+   "values": {
+    "str": [
+     "{\"id\": 42}.0XLzuMAHP6Oh9cnQ27puUwvSw7g",
+     "{\"id\": 42}.TgPVoQ.go_XSHIC1FOMQN1sUJC45Z1lZRw",
+     "eyJpZCI6NDJ9.Z-HaNt236Oj5pFDPW25MouYkrcA",
+     ".eJxTShwFo2AUDHugBAD6Fns8.NYEsGZpsS7Gu_E4ck8v7NEZ78HQ"
+    ]
+   }
+  },
+  {
+   "key": "coerce_str|1",
+   "param": "s",
+   "types": {
+    "str": 72
+   },
+   "values": {
+    "str": [
+     "a",
+     ".",
+     ""
+    ]
+   }
+  }
+ ],
+ "tree": "/tmp/repos/pallets_itsdangerous@2.1.2",
+ "witness_reason": "OK",
+ "witnessed_pairs": 7
+}

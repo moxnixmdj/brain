@@ -1,0 +1,255 @@
+{
+ "schema": "BRAIN_PLANS_COMPOSE_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "declared_before_the_runs": {
+  "C1": "each program is typed from its own usage line and its own no-argument behaviour; no program is told its position or its neighbours",
+  "C2": "the pipeline's order is found by searching a graph of produced->consumed types, not written by hand; the found order is reported so it can be checked against the hand-written one",
+  "C3": "success is verified in the world: the final artifact decodes back to the exact bytes given to the first stage, every stage exits 0, and a repeat run is byte-identical",
+  "C4": "the impossible control yields NO_PATH with a stated reason; a composer that invents a chain for an unsatisfiable goal fails this criterion",
+  "C5": "zero model calls, zero stored parameters, no network, no carried examples",
+  "C9": "a lossy goal is reported as irreversible instead of being forced: if the sink begins with a formatter, the inverse search must find no path back to the source type, and that refusal is reported as a boundary rather than tuned into a success",
+  "C8": "a decompressor's type is the inverse of its own constructor, not a widening to TEXT; the first inverse search returned a true-but-useless path because gzip --decompress was typed as GZIP[_]->TEXT and that is recorded, not hidden",
+  "C7": "reversibility is checked by a searched inverse chain, not by a hand-picked decode flag: the inverse is found in the same graph and running it must return the exact original bytes",
+  "C6": "types are parameterised, because a filter is polymorphic in its payload (`gzip` compresses any bytes: X -> GZIP[X]); a sink that only composition can reach is therefore expressible, and a single program cannot reach it alone"
+ },
+ "types": {
+  "pygmentize": {
+   "program": "pygmentize",
+   "path": "/tmp/brainvenv/bin/pygmentize",
+   "roles": [],
+   "schemes": [
+    {
+     "from": "TEXT",
+     "to": [
+      "HTML",
+      "LATEX",
+      "ANSI"
+     ],
+     "polymorphic": false,
+     "why": "usage names a FORMATTER slot"
+    }
+   ],
+   "behavior": {
+    "consumes": true,
+    "produces": true,
+    "stdout_bytes": 2,
+    "returncode": 0,
+    "stderr": ""
+   },
+   "filter": true,
+   "vocabulary": {
+    "formatters": 35,
+    "lexers": 927
+   }
+  },
+  "base64": {
+   "program": "base64",
+   "path": "/usr/bin/base64",
+   "roles": [
+    "decompress"
+   ],
+   "schemes": [
+    {
+     "from": "ANY",
+     "to": "BASE64[_]",
+     "polymorphic": true,
+     "why": "encode: any bytes at all"
+    },
+    {
+     "from": "BASE64",
+     "to": "UNWRAP",
+     "polymorphic": false,
+     "why": "option table says 'decode data'; recovers the wrapped payload"
+    }
+   ],
+   "behavior": {
+    "consumes": true,
+    "produces": true,
+    "stdout_bytes": 5,
+    "returncode": 0,
+    "stderr": ""
+   },
+   "filter": true,
+   "vocabulary": {}
+  },
+  "gzip": {
+   "program": "gzip",
+   "path": "/usr/bin/gzip",
+   "roles": [
+    "decompress",
+    "keep",
+    "list",
+    "test",
+    "to_stdout"
+   ],
+   "schemes": [
+    {
+     "from": "ANY",
+     "to": "GZIP[_]",
+     "polymorphic": true,
+     "why": "compresses a byte stream without reading it"
+    },
+    {
+     "from": "GZIP",
+     "to": "UNWRAP",
+     "polymorphic": false,
+     "why": "option table says 'decompress'; recovers the wrapped payload"
+    }
+   ],
+   "behavior": {
+    "consumes": true,
+    "produces": true,
+    "stdout_bytes": 22,
+    "returncode": 0,
+    "stderr": ""
+   },
+   "filter": true,
+   "vocabulary": {}
+  }
+ },
+ "graph_trace": [
+  {
+   "program": "base64",
+   "from": "TEXT",
+   "to": "BASE64[TEXT]",
+   "why": "encode: any bytes at all"
+  },
+  {
+   "program": "gzip",
+   "from": "BASE64[TEXT]",
+   "to": "GZIP[BASE64[TEXT]]",
+   "why": "compresses a byte stream without reading it"
+  }
+ ],
+ "found_chain": [
+  "base64",
+  "gzip"
+ ],
+ "found_inverse": [
+  "gzip",
+  "base64"
+ ],
+ "inverse_trace": [
+  {
+   "program": "gzip",
+   "from": "GZIP[BASE64[TEXT]]",
+   "to": "BASE64[TEXT]",
+   "why": "option table says 'decompress'; recovers the wrapped payload"
+  },
+  {
+   "program": "base64",
+   "from": "BASE64[TEXT]",
+   "to": "TEXT",
+   "why": "option table says 'decode data'; recovers the wrapped payload"
+  }
+ ],
+ "hand_written_chain_for_comparison": [
+  "base64",
+  "gzip"
+ ],
+ "lossy_hand_written_chain": [
+  "pygmentize",
+  "base64",
+  "gzip"
+ ],
+ "order_matches_hand_written": true,
+ "result": {
+  "status": "EFFECT",
+  "reason": "ROUND_TRIP",
+  "stages": [
+   {
+    "program": "base64",
+    "argv": [],
+    "returncode": 0,
+    "bytes_in": 32,
+    "bytes_out": 45
+   },
+   {
+    "program": "gzip",
+    "argv": [],
+    "returncode": 0,
+    "bytes_in": 45,
+    "bytes_out": 65
+   }
+  ],
+  "inverse_stages": [
+   {
+    "program": "gzip",
+    "argv": [
+     "--decompress",
+     "--stdout"
+    ],
+    "returncode": 0,
+    "bytes_in": 65,
+    "bytes_out": 45
+   },
+   {
+    "program": "base64",
+    "argv": [
+     "--decode"
+    ],
+    "returncode": 0,
+    "bytes_in": 45,
+    "bytes_out": 32
+   }
+  ],
+  "final_bytes": 65,
+  "final_head": "\u001f�\b\u0000\u0000\u0000\u0000\u0000\u0000\u0003�r\u000f��twˎr���qv��\u000e���tvL����I�\b�L�t��t.N�LϷ�\u0002\u0000�Ne{-\u0000\u0000\u0000",
+  "envelope": {
+   "ansi": false,
+   "html": false,
+   "latex": false
+  },
+  "checks": {
+   "every_stage_exit_ok": true,
+   "final_non_empty": true,
+   "round_trip_exact": true,
+   "round_trip_bytes": 32
+  },
+  "chain": [
+   "base64",
+   "gzip"
+  ],
+  "inverse": [
+   "gzip",
+   "base64"
+  ]
+ },
+ "repeat_identical": true,
+ "impossible_goal": {
+  "name": "text-to-pdf",
+  "source": "TEXT",
+  "sink": "GZIP[PDF]",
+  "found": false,
+  "reason": "no chain of type schemes produces 'GZIP[PDF]' from 'TEXT'"
+ },
+ "lossy_goal": {
+  "sink": "GZIP[BASE64[ANSI]]",
+  "forward": [
+   "pygmentize",
+   "base64",
+   "gzip"
+  ],
+  "forward_found": true,
+  "inverse_found": false,
+  "inverse_chain": [],
+  "reason": "no inverse chain from 'GZIP[BASE64[ANSI]]' to 'TEXT'"
+ },
+ "verdict": {
+  "C1_types_from_each_program_alone": true,
+  "C2_order_found_not_written": true,
+  "C3_effect_verified_in_the_world": true,
+  "C4_impossible_goal_is_refused": true,
+  "C7_round_trip_is_byte_exact": true,
+  "C9_lossy_goal_is_refused_by_the_inverse": true,
+  "C8_inverse_is_typed_as_unwrap": true,
+  "C5_zeros": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_calls": 0,
+   "carried_examples": 0
+  }
+ },
+ "all_criteria_met": true,
+ "seconds": 0.37
+}

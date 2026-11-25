@@ -1,0 +1,172 @@
+{
+  "schema": "PROJECT_BRAIN_THE_DECLARATION_IS_THE_WHOLE_BINDING_RECEIPT_V1",
+  "action_id": "THE_DECLARATION_IS_THE_WHOLE_BINDING_20261123_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_ONLY",
+  "date": "2026-11-23",
+  "canonical_base_commit": "bbbe6af28d8437c40123e4b9a3c41bd75557b60e",
+  "the_claim": "The 786 operations round 6 called RESOLVABLE_BY_DRIVING were not unknown; they were unread. Each was unbound because ONE assumption in the binder contradicted a declaration the program had already printed. Reading the declaration moved the fleet from 33 doors to 57 with no program going down.",
+  "before_the_three_fixes": {
+    "DOOR": 57,
+    "SENSOR": 848,
+    "UNBOUND": 112
+  },
+  "after_the_three_fixes": {
+    "DOOR": 57,
+    "SENSOR": 284,
+    "UNBOUND": 676
+  },
+  "sensor_delta": 564,
+  "kinds_total": {
+    "DROVE_IT_WRONG": 654,
+    "NEEDS_CONSTRUCTION": 8,
+    "NOT_ASKED": 0,
+    "NO_DOCUMENT": 0,
+    "SLOT_UNSUPPLIED": 14
+  },
+  "resolvability_total": {
+    "CERTIFIED_EXHAUSTED": 0,
+    "RESOLVABLE_BY_ASKING": 0,
+    "RESOLVABLE_BY_DRIVING": 668,
+    "UNDETERMINED": 8
+  },
+  "the_five_assumptions_and_what_each_cost": [
+    {
+      "assumption": "bind assumed argv[1] is the flag",
+      "evidence": "openssl answered \"Invalid command 'cms=out.bin'\" about 62 times in a 120-row sample of 558 failures",
+      "fix": "_flag_index(argv, flag) looks the flag up instead of assuming its position",
+      "measured": "openssl doors 0 -> 12 before any other fix"
+    },
+    {
+      "assumption": "a usage line's own name and [options] are operands",
+      "evidence": "`asn1parse [options]` parsed to ['ASN1PARSE','OPTIONS'], so every openssl subcommand got a seed filename it refuses with \"Use -help for summary\" -- 143 of 258 sampled subcommand failures",
+      "fix": "the leading bare word is always the command; OPTION/OPTIONS are the options, punctuation-stripped",
+      "measured": "openssl failures 258 -> 115 in the same sample; three litter rows removed"
+    },
+    {
+      "assumption": "-offset +int declares nothing",
+      "evidence": "the spec regex accepted [A-Za-z0-9_|], so '+int' never parsed, the placeholder was None, and a filename went in: \"Can't parse \\\"in.txt\\\" as a number\"",
+      "fix": "accept the leading '+' -- it IS half the declaration",
+      "measured": "-offset=1, -length=1 bind as quantities"
+    },
+    {
+      "assumption": "a declared path flag is an artifact and nothing else",
+      "evidence": "`openssl x509 -out out.bin` reads an empty stdin and writes nothing; `-in infile  input file` and `-out outfile  output file` are two lines of the same help text",
+      "fix": "_declared_input_flag reads the ROLE from the description, the same way carrier() already reads the artifact role",
+      "measured": "x509/pkcs12/smime/aes-* bind a complete action; with a type-matched seed openssl doors 12 -> 14"
+    },
+    {
+      "assumption": "a passphrase is the caller's problem",
+      "evidence": "108 of 456 openssl failures were the program asking \"enter AES-128-CBC encryption password:\" and waiting; the same help text declares `-k val  Passphrase` and `-passin val  ... pass-phrase source`",
+      "fix": "_declared_passphrase reads the flag and its declared FORM (bare phrase vs pass: SOURCE)",
+      "measured": "openssl doors 12 -> 24, litter 14 -> 8"
+    }
+  ],
+  "the_join": "census() parsed each subcommand's contract and then dropped it, handing every sub-operation the PARENT's flags, so the binder could not see `-offset +int`. The row now carries `declared_flags` from the scope that declared it, and bind() reads the declaration off the row. This is the same join round 6 made for the document: an operation is bound against the text that describes it.",
+  "measured_fleet_15_programs": {
+    "script": "the same script and seeds from both sides; BEFORE produced by checking out bbbe6af2's module",
+    "before": {
+      "DOOR": 33,
+      "FAILED_NO_EFFECT": 759,
+      "NO_EFFECT": 192,
+      "LITTER": 1
+    },
+    "after": {
+      "DOOR": 57,
+      "FAILED_NO_EFFECT": 641,
+      "NO_EFFECT": 278,
+      "LITTER": 9
+    },
+    "per_program_doors_before_after": {
+      "cp": [
+        2,
+        2
+      ],
+      "mv": [
+        2,
+        2
+      ],
+      "rm": [
+        7,
+        7
+      ],
+      "gzip": [
+        12,
+        12
+      ],
+      "tar": [
+        4,
+        4
+      ],
+      "openssl": [
+        0,
+        24
+      ],
+      "grep": [
+        0,
+        0
+      ],
+      "sort": [
+        1,
+        1
+      ],
+      "find": [
+        1,
+        1
+      ],
+      "sed": [
+        1,
+        1
+      ],
+      "zip": [
+        0,
+        0
+      ],
+      "ln": [
+        0,
+        0
+      ],
+      "touch": [
+        0,
+        0
+      ],
+      "dd": [
+        0,
+        0
+      ],
+      "install": [
+        3,
+        3
+      ]
+    },
+    "regressions": 0
+  },
+  "litter_is_honest": {
+    "rows": [
+      "asn1parse -in in.txt -out=out.bin",
+      "dhparam -in in.txt -out=out.bin",
+      "ecparam -in in.txt -out=out.bin",
+      "pkeyparam -in in.txt -out=out.bin"
+    ],
+    "writerand_rows": 4,
+    "other": "tar --delete --file=out.bin in.txt",
+    "why_they_are_not_doors": "`openssl asn1parse -out=out.bin` creates out.bin BEFORE it reads its input, so a refused request still leaves a file and the tree changes. Verified by running each with and without -in: the file is left in both cases, and the command exits non-zero having done nothing the goal asked for. The census must never credit a run that refused the request and left a file behind, which is why these stay LITTER and are not counted as doors."
+  },
+  "what_this_does_not_say": [
+    "It does not say the remaining 676 unbound operations are close. They are 654 DROVE_IT_WRONG and 14 SLOT_UNSUPPLIED on the 20-program fleet; the dominant remaining mass on openssl is a real PRECONDITION (an asn1parse offset into a DER stream, a signed-certificate verification) rather than a binding defect.",
+    "It does not claim generalisation beyond the 15-program measurement. The mechanisms read declarations rather than program names, but that is an argument, not a measurement on unseen programs.",
+    "It does not resolve the four open questions from round 6. It answers the mechanical half of question 2: what to save is not the raw action but the DECLARATION the program printed, because the declaration is what survives a change of environment."
+  ],
+  "honest_limits": [
+    "the '-out alone reads stdin' composition was measured to pay only with a TYPE-MATCHED seed: with printable text it moved nothing, with a real DER certificate it moved doors 12 -> 14. The census's default seed is printable text, so this mechanism is under-measured by the standard trial.",
+    "_declared_passphrase supplies a literal passphrase into a trial's own temporary tree. That is a test fixture, never a credential: nothing is persisted and no real key is touched.",
+    "three openssl subcommands (asn1parse, dhparam, ecparam, pkeyparam) create their output file before validating, so four litter rows are intrinsic to them and cannot be converted into doors by any binding.",
+    "authority is NONE and the run is sandbox-only; this is a producer run and independent verification is OPEN"
+  ],
+  "questions_worth_asking": [
+    "which remaining failures are PRECONDITION (the program needs a state we have not built) rather than BINDING (the program declared something we have not read)? The taxonomy that separates them is the next measurement.",
+    "does the type of the seed belong in the declaration join? The program declares `-inform PEM|DER`, so it declares the type it expects; a census that reads that could write the seed in the form the program named."
+  ],
+  "model_calls": 0,
+  "network_calls": 0,
+  "parameters": 0
+}

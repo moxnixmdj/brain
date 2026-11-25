@@ -1,0 +1,495 @@
+{
+ "action_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
+ "action_intent_id": "THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Round 14 named PRECISION -- a local re-run of the tests an edit touches, 'never taken', worth 16 tasks -- and this round was to build that loop. It already exists. The harness that produced the 2026-11-13 receipt gates every candidate on the tests that should start passing before it spends the whole-module run, and it stops a candidate the moment one of them fails. Recomputed from that receipt's own rows: 258 candidates pass at least one new test, 13 reach the whole-module run, 10 resolve, and ZERO candidates that passed every new test were withheld from the neighbour tests. The 245 stopped candidates in 16 tasks are each partial by construction. The breakage cost is 3 tasks of 128, not 16. Round 14's number is retracted here and locked by test. The round then asked where a candidate's content comes from at all: all 93 tasks whose issue text carries no code line get no candidate, and the generator's only content channel is the code lines in the issue text. Of the 102 stuck tasks, the issue text names every new atom for 6; against the whole project at the base commit, 15 of 26 sampled changed files need only material the project already holds; and a trace of the failing test executes the file being changed for 13 of 26 tasks and reaches the changed line for 1. The material is present; the ARRANGEMENT is what is missing, and no zero-model oracle measured here can rank arrangements.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Three routes rejected by measurement. (1) Build the local neighbour re-run: it exists and withholds nothing. (2) Build a better ranker: ceiling +2 tasks of 128. (3) Build a transplant generator: the atoms are in the project but the arrangement is not, so it would propose thousands of arrangements with nothing to prefer one.",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only: 17 tests, every count recomputed from the 2026-11-13 receipt's own per_task rows or pinned as a measurement this round made, plus canonical/tools/the_content_channel_measured_v1.py which re-derives the two numbers that carry the conclusion. The retraction is the part most likely to be wrong, so it is tested directly: no candidate that passed every new test was stopped.",
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+   "canonical/tests/test_the_check_the_loop_throws_away_v1.py",
+   "canonical/tools/the_content_channel_measured_v1.py",
+   "intake/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.md"
+  ],
+  "route_class": "ADAPT",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false,
+  "route_id": null
+ },
+ "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::the machine can find the file (expert file at rank 1 for 0.400 of 500 tasks), can hold the material (17 of 26 sampled changed files need nothing the project does not already hold), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests; every zero-model signal tested this round (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement",
+ "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "retracted": "16 tasks lost to an untaken local re-run",
+  "measured": "3 tasks lost to a breakage, and the check is already taken",
+  "no_candidate_tasks_explained": "93 of 93 by an empty content channel",
+  "new_atoms_in_the_issue_text": "36 of 200 (18%)",
+  "project_holds_the_material": "17 of 26 sampled changed files need nothing new (15 held + 2 needing nothing)",
+  "trace_reaches_the_changed_line": "1 of 26"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "the machine can find the file (expert file at rank 1 for 0.400 of 500 tasks), can hold the material (17 of 26 sampled changed files need nothing the project does not already hold), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests; every zero-model signal tested this round (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement",
+ "date": "2026-11-24",
+ "expected_parent_change": "effort moves off precision (worth 3) and off coverage of the store (the material is there), and onto ranking arrangements of held material; the tree gains a receipt that corrects its own previous round.",
+ "expected_parent_frontier_change": "the frontier becomes: choose, among the arrangements of material the project already holds, without running the hidden tests",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "if any candidate that passed every test that should start passing had been stopped before the whole-module run, this round's retraction would be wrong and the 16 would stand. Recomputed from the receipt's own rows: zero.",
+ "generic_repair_from_single_probe": true,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "no benchmark was run this round; the judged numbers are the 2026-11-13 receipt's",
+  "the project-as-dictionary figures are every 4th of the 102 (26 tasks); the atom figures are over all 102",
+  "the trace figures are over the same 26, one tree per task",
+  "'held' is fix_shape_v1's own notion and errs towards held",
+  "producer-run sandbox only; no independent identity has re-run anything"
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "expected_obligation_discharge_lcb": "0",
+  "expected_obligation_unlock_lcb": "1/81",
+  "interpretation": "A benchmark receipt can contain a number nobody read off the rows. Round 14 quoted one, and it was wrong by a factor of five. The correction is not prose: it is a recomputation from the receipt's own per_task rows, and it changes what the next round should build. The lesson is the one the tree keeps paying for -- measure the artifact, not the story about it.",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "0.5",
+  "wall_clock_cost_ub": 1
+ },
+ "measured_effect": "retracted: PRECISION is 3 tasks of 128, not 16, and the check that was said to be untaken is already built and already holds (0 candidates that earned the whole-module run were withheld). measured instead: 93 of 93 tasks with no candidate write no code line in the issue text (the generator's only content channel); 6 of 102 fixes have every new name in the text and 36 of 200 atoms overall (18%); against the whole project at the base commit 17 of 26 sampled changed files need only material the project holds; a trace of the failing test never executes the changed file for 13 of 26 tasks and reaches the changed line for 1; 19 of 231 issues carry a runnable reproduction",
+ "next_step": "measure whether a public signal ranks arrangements of held material: the failing test's own output, the conventions of the neighbouring code, and the shape census already in the tree. If none ranks them, say so plainly and pay a test run per candidate -- affordable at under a second a run.",
+ "parent_capability": "tool_census_v1 + the refusal reader as shipped in caefcd5f",
+ "probe_specific": false,
+ "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+ "progress_evidence_paths": [
+  "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+  "canonical/tests/test_the_check_the_loop_throws_away_v1.py",
+  "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
+ ],
+ "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
+ "recursive_obs": {
+  "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "the 16-task PRECISION claim (deleted by recomputation)",
+   "a neighbour re-run loop (bypassed: it exists)",
+   "a reproduction reader (bypassed: 19 of 231)"
+  ],
+  "expected_parent_level_state_change": "the frontier becomes: choose, among the arrangements of material the project already holds, without running the hidden tests",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": [
+    "build a generator that transplants project source (rejected: the material is present but nothing ranks the arrangement; it would spend a round producing thousands of candidates with no preference)",
+    "build a learned ranker of arrangements (rejected: that is parameters trained by brute force, and the measured selection ceiling is 2 tasks)",
+    "treat the issue's code line as the fix (rejected by measurement: it is verbatim the added line for 60 of 231 tasks and was already the input to the generator)"
+   ],
+   "blocker_is": "no zero-model signal prefers one arrangement of already-held atoms over another",
+   "evidence_the_blocker_is_real": [
+    "17 of 26 sampled changed files need only what the project holds, so knowing is not the problem",
+    "a trace of the failing test reaches the changed line for 1 task in 26",
+    "258 candidates pass some new test and 10 resolve, so producing them is not the problem either"
+   ],
+   "intrinsic_or_path_specific": "INTRINSIC to these tasks as they are written: the issue names every new atom for 6 of 102, and neither a trace of the failing test nor the issue's own reproduction reaches the arrangement",
+   "surviving_causal_blocker": "the machine can find the file (expert file at rank 1 for 0.400 of 500 tasks), can hold the material (17 of 26 sampled changed files need nothing the project does not already hold), and can run the task's own tests in under a second -- but it has no signal that prefers one ARRANGEMENT of held atoms over another without the hidden tests; every zero-model signal tested this round (the issue's code lines, its reproduction, a trace of the failing test) fails to name the arrangement"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": "quoted_in_the_task_text_v1.code_lines, fix_shape_v1.shape/needs, the localisation receipt, the passing-patch shape census, the expert fix collector",
+   "capability_work_deleted": [
+    "a neighbour re-run loop (already exists in candidate_under_the_tasks_tests_measure_v1.of_candidate)",
+    "a ranker (ceiling +2 tasks)",
+    "a reproduction reader (19 of 231 tasks)"
+   ],
+   "what_was_added": "canonical/tools/the_content_channel_measured_v1.py, which re-derives the two numbers that carry this round's conclusion",
+   "external_existing_routes_checked": "automated program repair (learned models: outside the runtime), fault localisation by spectra and by execution trace (tested here and it reaches the changed line once in 26), mutation testing as a proxy oracle (costs a test run per mutant), and the benchmark's own shape census, already in the tree",
+   "surviving_gap": "a zero-model signal that ranks arrangements of already-held material; none of the routes checked provides one"
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "a higher resolved count this round",
+    "a new mechanism"
+   ],
+   "real_outcome": "a false number about the project's own loop was found, retracted and replaced with a measured one, and the next bottleneck moved",
+   "surviving_necessity": "the only necessity left is choosing among arrangements: 17 of 26 sampled changed files need nothing the project does not hold, so the next round can spend nothing on acquiring material and everything on preferring one arrangement of it"
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "the receipt's own rows, the code-line reader, the shape calculus and the expert-fix collector, none rebuilt",
+   "downstream_work_to_delete_or_supersede": "round 14's PRECISION framing is superseded by this round's retraction",
+   "fresh_reuse_plan": "the content-channel tool recomputes the channel and need figures from the statements and the expert records"
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "no benchmark was re-run: every judged number is read from the 2026-11-13 receipt; the new measurement is static and its tool re-ran in 143 s",
+   "search_stop_decision": "stopped at three channels (text, file/project, trace) because each was measurable with material already fetched, and each failed for a stated reason; a fourth would have needed a new run"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "each either already existed, or was worth under 2%, or had nothing to prefer one arrangement over another",
+   "routes_ranked": [
+    {
+     "rank": 1,
+     "route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
+     "why": "zero build, falsifies the premise, moves the bottleneck"
+    },
+    {
+     "rank": 2,
+     "route": "BUILD_A_LOCAL_NEIGHBOUR_TEST_RE_RUN",
+     "why": "already built"
+    },
+    {
+     "rank": 3,
+     "route": "BUILD_A_TRANSPLANT_GENERATOR_FROM_THE_PROJECT",
+     "why": "no preference over arrangements"
+    }
+   ]
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "none: the retraction is checked against the source receipt's own rows, and the new numbers against the benchmark's own statements, trees and pull requests"
+  },
+  "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
+  "required_capability": "the ability to prefer one arrangement of already-held material over another without the hidden tests",
+  "route_frontier": {
+   "canonical_base_commit": "50164e2b848072657d6e75e54141f19f70ad3864",
+   "challenger_routes": [
+    {
+     "route": "BUILD_A_LOCAL_NEIGHBOUR_TEST_RE_RUN",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "none added: the mechanism already exists in the judge",
+      "CORRECTNESS": "holds and withholds nothing",
+      "INCREMENTAL_COST": "the check already runs before every whole-module run",
+      "RELIABILITY": "n/a",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "already paid"
+     },
+     "evidence": [
+      "258 candidates pass at least one new test; 13 reach the whole-module run; 0 that passed ALL new tests were stopped",
+      "the breakage cost is 3 tasks of 128, named in the source receipt"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "BUILD_A_BETTER_RANKER_OF_CANDIDATES",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "under 2%",
+      "CORRECTNESS": "perfect ranking resolves 2 more of 128",
+      "INCREMENTAL_COST": "a ranker",
+      "RELIABILITY": "n/a",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "one submission 5, within twenty 7, so perfect selection is worth +2 tasks"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/WHERE_THE_SWE_BENCH_LOSS_IS_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "BUILD_A_TRANSPLANT_GENERATOR_FROM_THE_PROJECT",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "unbounded candidates, no preference",
+      "CORRECTNESS": "the material is present, the arrangement is not",
+      "INCREMENTAL_COST": "thousands of arrangements per site",
+      "RELIABILITY": "low",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "a test run each"
+     },
+     "evidence": [
+      "17 of 26 sampled changed files need only material the project holds; 69 of 112 need something new against the file alone"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    },
+    {
+     "route": "READ_THE_ISSUE_S_OWN_REPRODUCTION",
+     "resolution": "DISQUALIFIED",
+     "comparison": {
+      "CAPABILITY_STRENGTH": "narrow",
+      "CORRECTNESS": "the repro does fail and does show the value",
+      "INCREMENTAL_COST": "none",
+      "RELIABILITY": "n/a",
+      "VERIFIABILITY": "equal",
+      "WALL_CLOCK": "equal"
+     },
+     "evidence": [
+      "19 of 231 issues carry a runnable >>> reproduction; 3 of the 102 stuck tasks do"
+     ],
+     "qualification_evidence": [
+      "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json"
+     ],
+     "qualification_evidence_classes": [
+      "DIRECT_PROBE"
+     ]
+    }
+   ],
+   "checked_at_utc": "2026-11-24T14:52:12+00:00",
+   "comparison_dimensions": [
+    "CORRECTNESS",
+    "CAPABILITY_STRENGTH",
+    "WALL_CLOCK",
+    "INCREMENTAL_COST",
+    "RELIABILITY",
+    "VERIFIABILITY"
+   ],
+   "discovery_required": true,
+   "incumbent_route": "DECOMPOSE_THE_REAL_BENCHMARK_LOSS_BEFORE_BUILDING_AGAIN",
+   "max_age_hours": 24,
+   "negative_search_summary": "no zero-model oracle measured here ranks arrangements of already-held material: the issue's code line exists for 138 of 231 issues and its verbatim added line for 60, the reproduction for 19, and a trace of the failing test reaches the changed line for 1 task in 26. The literature route (see source_evidence) offers program repair by learned models, which is a model call and outside the product's runtime.",
+   "query_families": [
+    {
+     "intent": "CAPABILITY_VECTOR",
+     "query": "rank candidate program edits without the hidden tests, repair prioritisation"
+    },
+    {
+     "intent": "SUPPLIER_OR_PRODUCT",
+     "query": "automated program repair tools and benchmarks 2026"
+    },
+    {
+     "intent": "IMPLEMENTATION_FORM",
+     "query": "fault localisation by execution trace and mutation-based proxies"
+    },
+    {
+     "intent": "RECENCY_OR_NEW_RELEASE",
+     "query": "SWE-bench Verified failure analysis 2026"
+    }
+   ],
+   "refresh_triggers": [
+    "BEFORE_EXPENSIVE_EXECUTION",
+    "AFTER_MATERIAL_ROUTE_FAILURE",
+    "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+    "BEFORE_SCARCE_GATE_SPEND"
+   ],
+   "selected_route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
+   "selected_route_preflight": {
+    "all_required_dependencies_ready": true,
+    "checked_at_utc": "2026-11-24T14:52:12+00:00",
+    "execution_dependencies": [
+     {
+      "dependency": "local Python 3 runtime",
+      "kind": "LOCAL_RUNTIME",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "required": true,
+      "status": "READY",
+      "volatility": "STATIC",
+      "evidence": [
+       "17 tests pass in this round's suite; the four gate commands pass on this host"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "the benchmark's statements and the Django trees at each base commit",
+      "kind": "DATA_SOURCE",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "required": true,
+      "status": "READY",
+      "volatility": "STATIC",
+      "evidence": [
+       "231 statements and 231 expert records fetched, 231 trees archived; the content-channel tool re-ran over them"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "no network at measurement time",
+      "kind": "NETWORK_ENDPOINT",
+      "scope": "GLOBAL",
+      "evidence_scope": "GLOBAL",
+      "required": false,
+      "status": "READY",
+      "volatility": "VOLATILE",
+      "observed_at_utc": "2026-11-24T14:52:12+00:00",
+      "evidence": [
+       "every count in the receipt was produced from files already on disk"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     }
+    ],
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "max_age_hours": 2,
+    "selected_route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
+    "status": "READY"
+   },
+   "source_classes_checked": [
+    "BRAIN_INHERITED",
+    "OFFICIAL_PRIMARY",
+    "CODE_OR_PACKAGE_REGISTRY",
+    "BROAD_WEB_OR_COMMUNITY"
+   ],
+   "source_evidence": {
+    "BRAIN_INHERITED": [
+     "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json (the 231-task run)",
+     "canonical/verification/FILE_FOUND_FROM_TASK_TEXT_SWEBENCH_VERIFIED_20261112_V1.json (localisation, 500 tasks)",
+     "canonical/verification/PASSING_PATCH_SHAPE_SWEBENCH_VERIFIED_20261112_V1.json (12,317 passing patches classified by shape)",
+     "canonical/runtime/fix_shape_v1.py (the 'held' calculus used here)",
+     "canonical/runtime/quoted_in_the_task_text_v1.py (the code-line reader used here)"
+    ],
+    "OFFICIAL_PRIMARY": [
+     "hyang0129/onlycodes, problems/swe/swebench-verified (the statements and test patches the 2026-11-13 run names)",
+     "django/django at each task's base commit (the trees traced here)",
+     "the merged pull requests behind the 231 tasks, read by canonical/tools/expert_fix_pull_request_collector_v1.py"
+    ],
+    "CODE_OR_PACKAGE_REGISTRY": [
+     "api.github.com (the pull requests)",
+     "localhost Python 3.11"
+    ],
+    "BROAD_WEB_OR_COMMUNITY": [
+     "the project's own prior receipts are the primary evidence for this round; no external claim is used to support a number"
+    ]
+   },
+   "unresolved_plausible_dominators": []
+  },
+  "routes_considered": [
+   {
+    "route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
+    "verdict": "SELECTED",
+    "why": "the premise of the round was testable from a receipt already in the tree, and testing it withdrew the number that set the round"
+   },
+   {
+    "route": "BUILD_A_LOCAL_NEIGHBOUR_TEST_RE_RUN",
+    "verdict": "REJECTED",
+    "why": "already built; 0 candidates that earned the whole-module run were withheld"
+   },
+   {
+    "route": "BUILD_A_BETTER_RANKER_OF_CANDIDATES",
+    "verdict": "REJECTED",
+    "why": "measured ceiling +2 tasks of 128"
+   },
+   {
+    "route": "BUILD_A_TRANSPLANT_GENERATOR_FROM_THE_PROJECT",
+    "verdict": "REJECTED",
+    "why": "the atoms are held (17 of 26) and the arrangement is not; no signal prefers one arrangement"
+   },
+   {
+    "route": "READ_THE_ISSUE_S_REPRODUCTION",
+    "verdict": "REJECTED",
+    "why": "19 of 231 issues have one; 3 of the 102 stuck"
+   }
+  ],
+  "selected_surviving_route": "BUILD_THE_LOCAL_CHECK_THE_LOOP_WAS_SAID_TO_SKIP",
+  "stop_condition": "stop when the loss on a hard real benchmark is attributed to causes that each have a measured cost, and the next mechanism is chosen by that cost",
+  "why_selected_route_is_fastest_sufficient": "it costs no build: the check the previous round wanted already runs, so the round's whole spend was recomputing the receipt's own rows and measuring three zero-model channels over real trees"
+ },
+ "required_capability": "an honest decomposition of a real benchmark loss into separable causes, so the next rounds attack the cause that costs the most rather than the one that is easiest to build",
+ "route_class": "ADAPT",
+ "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+ "route_order_walk": {
+  "ADAPT": "SELECTED: the plan was redirected by measurement, since the natural next build had a measured ceiling of +2 tasks.",
+  "COMPOSE": "reuses two existing receipts and their own per-task records; nothing new was executed.",
+  "BYPASS": "Not used. Building a ranker would have optimised a 2% lever because it is the easiest thing to build.",
+  "INVENT": "Not used. No new benchmark run, no new generator, no new claim about either."
+ },
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selected_surviving_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+ "selectivity_note": "this round changes no mechanism and claims no capability; it withdraws a number and replaces it with a measured one.",
+ "status": "SHIPPED",
+ "stop_condition": "stop when the loss on a hard real benchmark is attributed to causes that each have a measured cost, and the next mechanism is chosen by that cost",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "closing the 786 unknowns; reading a goal from words; any benchmark score; independent verification",
+  "what_is_real": "682 false sensor credits removed, the unknown collapsed to five evidence-backed kinds, a rescuable/exhausted triage, and doubt that persists across processes"
+ },
+ "user_authorized_governance_change": false,
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+  "target_truth_obligations": [
+   "OSWORLD_2_1_PARTIAL_GE_81_8"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [
+    {
+     "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+     "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+    }
+   ],
+   "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+   "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "",
+   "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+  }
+ },
+ "verification": "canonical/tests/test_the_check_the_loop_throws_away_v1.py (17 tests, all pass)",
+ "weakens_existing_guard": false
+}

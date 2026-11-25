@@ -1,0 +1,79 @@
+{
+ "schema": "BRAIN_OPEN_WEB_FRONTEND_BLOCKED_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-22",
+ "branch": "arena/67c67d7e-brain",
+ "repo_head_at_run": "1f079cac7e7cbb946508dbc636f48d16b6c42875",
+ "question": "Does the in-tree open-research frontend actually retrieve, or does it only exist as code?",
+ "answer": "It exists, it runs, and in this sandbox its discovery backends are blocked by the network allowlist. Existence was never the missing part; a verified end-to-end run is.",
+ "method": {
+  "executed": "canonical/runtime/bound_capabilities/open_web_source_candidate_discovery.py:discover() called directly, and the two committed test files run under pytest.",
+  "not_executed": "No test or module was edited to make the network step pass. No mocked result is reported as a live result.",
+  "environment": {
+   "python": "3.11.2",
+   "egress_allowlist": [
+    "github.com",
+    "codeload.github.com",
+    "api.github.com",
+    "registry.npmjs.org",
+    "pypi.org",
+    "files.pythonhosted.org"
+   ]
+  }
+ },
+ "live_discovery_attempt": {
+  "objective": "RFC 9110 HTTP semantics official specification",
+  "query": "rfc 9110 http semantics official specification",
+  "seconds": 0.18,
+  "status": "DISCOVERY_UNAVAILABLE",
+  "candidate_count": 0,
+  "backend_errors": [
+   {"backend": "BING_RSS", "error_class": "URLError", "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"},
+   {"backend": "DUCKDUCKGO_HTML", "error_class": "URLError", "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"},
+   {"backend": "CROSSREF", "error_class": "URLError", "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"}
+  ],
+  "frontend_consequence": "SOURCE_DISCOVERY_BLOCKED, next_required_capability = MODEL_INDEPENDENT_OPEN_WEB_SOURCE_CANDIDATE_DISCOVERY_V1",
+  "model_dependency_count": 0
+ },
+ "control": {
+  "what": "A direct read of an allowlisted host in the same session.",
+  "url": "https://pypi.org/pypi/tomli/2.0.2/json",
+  "http_status": 200,
+  "seconds": 0.06,
+  "requires_python": ">=3.8",
+  "wheel_sha256": "2ebe24485c53d303f690b0ec092806a085f07af5a5aa1464f3931eec36caaa38",
+  "sdist_sha256": "d46d457a85337051c36524bc5349dd91b1877838e2979ac5ced3e710ed8a60ed",
+  "reading": "TLS and DNS work for allowlisted hosts, so the three identical SSL EOF failures are an egress-policy block, not a broken client and not a general network outage."
+ },
+ "preexisting_production_path": {
+  "caller": "canonical/runtime/astra_runtime.py::_run_open_research_source_frontend",
+  "pypi_path": "canonical/runtime/auto_pypi_library_acquisition.py::_pypi_release_metadata",
+  "committed_evidence_of_a_real_pypi_fetch": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-PYPI-ACQUIRE-BSON-002__AUTO_PYPI_LIBRARY_ACQUISITION.json",
+  "committed_evidence_status": "NO_COMPATIBLE_CONTRACT",
+  "note": "That receipt records a real metadata_url of the https://pypi.org/pypi/Exact/2.2.1/json shape. It shows the fetch happened; it does not show the acquisition succeeded."
+ },
+ "tests_as_they_stand": {
+  "command": "pytest canonical/tests/test_open_web_source_candidate_discovery.py canonical/tests/test_open_research_source_frontend.py -q",
+  "result": "5 failed, 5 passed",
+  "failures_at_base_commit": true,
+  "failures": [
+   {"test": "test_live_cross_domain_candidate_discovery", "why": "live network; three SSL EOF"},
+   {"test": "test_standard_objective_reaches_provenance_frontier", "why": "live network; three SSL EOF"},
+   {"test": "test_scientific_objective_reaches_provenance_frontier", "why": "live network; three SSL EOF"},
+   {"test": "test_query_is_objective_not_invented_recipe", "why": "stale assertion: expects the raw objective, but research_query_focus deliberately strips framing. Not a network failure and not caused by this branch."},
+   {"test": "test_verified_bounded_relevance_advances_only_to_extraction", "why": "stubbed loader map lacks 'objective_relevance_bm25' while the frontend loads it. Not a network failure and not caused by this branch."}
+  ],
+  "not_fixed_here": "Editing these tests would change what the tree measures without making the blocked route work. They are reported, not patched."
+ },
+ "correction_made_to_the_report": {
+  "path": "intake/THE_WORLD_IS_A_GUIDE_BUT_THE_GUIDE_IS_NOT_THE_WORLD_20261122_V1.md",
+  "sections": ["2.3", "the expansion-rule test (item 6)", "section 7 (honest state)"],
+  "claim_removed": "No web retrieval mechanism has ever been run in this tree. / the fetcher does not exist in-tree",
+  "replacement": "A fetcher exists and is called by astra_runtime; a live open-web attempt was made and blocked by the sandbox network allowlist; completed decision-quality research is unestablished."
+ },
+ "still_unestablished": [
+  "A run of discovery -> provenance -> relevance -> extraction -> claim binding that produced a verified decision.",
+  "That any of the three backends returns usable candidates from an environment with open egress.",
+  "Any factual-correctness, evidence-sufficiency, or decision-quality claim about this path."
+ ]
+}

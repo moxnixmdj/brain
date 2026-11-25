@@ -1,0 +1,30 @@
+test_base_commit_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_base_commit_tampering_is_refused) ... ok
+test_effect_bytes_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_effect_bytes_tampering_is_refused) ... ok
+test_effect_path_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_effect_path_tampering_is_refused) ... ok
+test_exact_patch_bytes_are_returned (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_exact_patch_bytes_are_returned) ... ok
+test_missing_empty_or_extra_effects_are_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_missing_empty_or_extra_effects_are_refused) ... ok
+test_patch_bytes_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_patch_bytes_tampering_is_refused) ... ok
+test_policy_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_policy_tampering_is_refused) ... ok
+test_receipt_digest_tampering_is_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_receipt_digest_tampering_is_refused) ... ok
+test_untrusted_or_invalid_effect_paths_are_refused (canonical.tests.test_isolated_effect_receipt_verifier_v1.ReceiptBytesTests.test_untrusted_or_invalid_effect_paths_are_refused) ... ok
+test_external_ip_egress_observed_by_host (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_external_ip_egress_observed_by_host) ... skipped 'no host-observed external egress monitor configured; NOT QUALIFIED'
+test_host_inspects_worker_environment (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_inspects_worker_environment) ... ok
+test_host_observes_cancellation_kills_descendants (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_cancellation_kills_descendants) ... FAIL
+test_host_observes_nested_input_mount_refusal (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_nested_input_mount_refusal) ... skipped 'no controlled pre-existing nested host mount fixture; NOT QUALIFIED'
+test_host_observes_runtime_python_environ (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_runtime_python_environ) ... skipped 'host /proc initial environ does not prove a later os.environ value; NOT QUALIFIED'
+test_host_observes_timeout_kills_all_observed_workers (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_timeout_kills_all_observed_workers) ... ok
+test_host_sentinels_and_local_listeners_observe_no_escape (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_sentinels_and_local_listeners_observe_no_escape) ... ok
+test_real_carrier_patch_effect_receipt (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_real_carrier_patch_effect_receipt) ... skipped 'no trusted post-quiescence collector or independent attestation exists; NOT QUALIFIED'
+
+======================================================================
+FAIL: test_host_observes_cancellation_kills_descendants (canonical.tests.test_namespace_carrier_host_observed_v1.HostObservedNamespaceTests.test_host_observes_cancellation_kills_descendants)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/user/brain/canonical/tests/test_namespace_carrier_host_observed_v1.py", line 266, in test_host_observes_cancellation_kills_descendants
+    self.assertFalse(survivors, 'host observed workers survive supervisor cancellation')
+AssertionError: [((4575, '126024'), 'S'), ((4551, '126018'), 'S')] is not false : host observed workers survive supervisor cancellation
+
+----------------------------------------------------------------------
+Ran 17 tests in 10.710s
+
+FAILED (failures=1, skipped=4)
