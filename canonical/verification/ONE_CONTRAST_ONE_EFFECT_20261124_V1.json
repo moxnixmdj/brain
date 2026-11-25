@@ -1,0 +1,122 @@
+{
+ "schema": "BRAIN_ONE_CONTRAST_ONE_EFFECT_V1",
+ "generated": "2026-11-25T12:59:25Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 51.1
+ },
+ "summary": {
+  "stats": {
+   "files": 135,
+   "modules_loaded": 61,
+   "modules_skipped_no_main_guard": 59,
+   "functions_seen": 591,
+   "single_arg_contrast_entries": 49,
+   "non_deterministic_excluded": 0
+  },
+  "entries_kept": 49,
+  "entries_dropped_identical_effect": 0,
+  "by_argument_position": {
+   "0": 36,
+   "2": 5,
+   "1": 7,
+   "5": 1
+  },
+  "sample_entries": [
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::convert",
+    "deterministic": true,
+    "argument": "sites",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RAISED:'FileNotFoundError'",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "action_replay_under_change_v1::first_changed_index",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:None",
+     "RETURNED:0"
+    ],
+    "position": 0
+   },
+   {
+    "function": "action_replay_under_change_v1::plan_of",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:[(0, 1, [])]"
+    ],
+    "position": 0
+   },
+   {
+    "function": "argument_construction_v1::measure",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'schema': 'BRAIN_ARGUMENT_CONSTRUCTION_V1', 'authority': 'NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT', 'model_calls': 0, 'network_calls': 0, 'incremental_spend_usd': 0, 'repos': [], 'totals': {'",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "causal_dependency_repair_v1::read_set_argv",
+    "deterministic": true,
+    "argument": "command",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:set()",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   }
+  ],
+  "verdicts": {
+   "contrast_entries_can_be_earned_by_execution": true,
+   "every_kept_entry_has_an_observed_difference": true,
+   "non_determinism_was_measured_not_assumed": true,
+   "the_entries_are_replayable_because_the_witness_is_concrete": true
+  },
+  "a_third_of_the_entries_are_exception_contrasts": 22,
+  "what_these_entries_are_not": "they are not causal claims about the function's internals, and they are not general: each is one argument position of one function observed at one pair of values. Their value is that they are earned, falsifiable and replayable -- which no syntactic feature in this project is."
+ }
+}
