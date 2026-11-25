@@ -1,0 +1,204 @@
+{
+ "schema": "BRAIN_PRICE_A_REFUSAL_ON_REAL_CODE_V1",
+ "generated": "2026-11-25T12:03:42Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 120.0
+ },
+ "summary": {
+  "files_scanned": 1200,
+  "functions_trained": 6854,
+  "functions_held_out": 3851,
+  "held_out_share": 0.35,
+  "split_by": "file, so no held-out function shares a file with a trained one",
+  "subsets_evaluated": 465,
+  "by_price": {
+   "1": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3541,
+    "predictions": 324,
+    "wrong": 14,
+    "refused": 3527,
+    "accuracy": 0.9586,
+    "coverage": 0.0841,
+    "runner_up_cost": 3549
+   },
+   "2": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3555,
+    "predictions": 324,
+    "wrong": 14,
+    "refused": 3527,
+    "accuracy": 0.9586,
+    "coverage": 0.0841,
+    "runner_up_cost": 3562
+   },
+   "5": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3597,
+    "predictions": 324,
+    "wrong": 14,
+    "refused": 3527,
+    "accuracy": 0.9586,
+    "coverage": 0.0841,
+    "runner_up_cost": 3601
+   },
+   "10": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3663,
+    "predictions": 258,
+    "wrong": 7,
+    "refused": 3593,
+    "accuracy": 0.9736,
+    "coverage": 0.067,
+    "runner_up_cost": 3666
+   },
+   "20": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3733,
+    "predictions": 258,
+    "wrong": 7,
+    "refused": 3593,
+    "accuracy": 0.9736,
+    "coverage": 0.067,
+    "runner_up_cost": 3735
+   },
+   "50": {
+    "best_subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3742,
+    "predictions": 109,
+    "wrong": 0,
+    "refused": 3742,
+    "accuracy": 1.0,
+    "coverage": 0.0283,
+    "runner_up_cost": 3742
+   },
+   "100": {
+    "best_subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3742,
+    "predictions": 109,
+    "wrong": 0,
+    "refused": 3742,
+    "accuracy": 1.0,
+    "coverage": 0.0283,
+    "runner_up_cost": 3742
+   }
+  },
+  "cross_machine": {
+   "groups": [
+    {
+     "name": "canonical",
+     "trained": 43628,
+     "held_out": 10907
+    },
+    {
+     "name": "execution_guard",
+     "trained": 390,
+     "held_out": 97
+    }
+   ],
+   "vocabularies": {
+    "canonical": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_RAISE",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "execution_guard": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "LINES"
+    ]
+   },
+   "within": {
+    "predictions": 380,
+    "wrong": 4,
+    "accuracy": 0.9896
+   },
+   "across": {
+    "predictions": 336,
+    "wrong": 7,
+    "refused": 10668,
+    "accuracy": 0.9796,
+    "coverage": 0.0305,
+    "pairs": 2
+   },
+   "caveats": [
+    "only 2 groups survived the >=200-function and >=40-file filters, so one ordered pair in each direction: 2 pairs total",
+    "the groups are wildly unequal (43,628 vs 390 trained functions); the small guard vocabulary contributes 380 of 380 within-group predictions, so 'within' is mostly one group",
+    "the vocabulary was chosen with the held-out 20% of its OWN group in the selection criterion, so the cross-group numbers are out-of-sample with respect to the SCORED group but not with respect to the choosing group",
+    "coverage is 3.05%, lower than any within-group number, so the accuracy figure is computed on 336 predictions, not on a broad sample"
+   ],
+   "what_this_means": "Return-shape behaviour IS portable across codebases at equal accuracy (0.9796 vs 0.9896) because the predicting relations are syntactic and the target is syntactic. That is the mirror image of the machine-world result (V15/V16), where transfer failed because the laws' keys named ground state. The mechanism is identical in both directions: a relation over SYNTAX crosses; a relation over GROUND NAMES does not. This is the first verified transfer of anything in this project, and it transfers a syntactic property -- not the causal structure the mission needs."
+  },
+  "verdicts": {
+   "a_vocabulary_crosses_codebases_at_all": true,
+   "cross_codebase_accuracy_matches_within_codebase": true,
+   "cross_codebase_coverage_is_single_digits": true,
+   "the_winning_vocabulary_is_the_same_at_every_price_ratio": false,
+   "the_winning_size_is_stable_across_a_100x_price_sweep": false,
+   "the_cheap_end_of_the_dial_wins_at_high_error_prices": false,
+   "a_real_corpus_produces_a_decisive_winner": false,
+   "the_transfer_mechanism_is_now_identified": true
+  },
+  "stability": {
+   "distinct_winning_subsets": 3,
+   "distinct_winning_sizes": [
+    4,
+    6
+   ]
+  }
+ }
+}

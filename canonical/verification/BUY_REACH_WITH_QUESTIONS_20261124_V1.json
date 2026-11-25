@@ -1,0 +1,816 @@
+{
+ "schema": "BRAIN_BUY_REACH_WITH_QUESTIONS_V1",
+ "generated": "2026-11-25T01:34:11Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 329.3
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "walk_transitions": 7,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 0,
+   "confirmed": 0,
+   "falsified": 0,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 16,
+   "held_out_transitions": 40,
+   "arm_A": {
+    "predictions": 4,
+    "wrong": 0,
+    "refused": 36
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 28
+   },
+   "probes": 13,
+   "confirmed": 8,
+   "falsified": 5,
+   "predictions_bought_per_probe": 0.615,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 14,
+   "held_out_transitions": 8,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "probes": 0,
+   "confirmed": 0,
+   "falsified": 0,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 37,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 39,
+   "held_out_transitions": 210,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 210
+   },
+   "arm_C": {
+    "predictions": 32,
+    "wrong": 8,
+    "refused": 178
+   },
+   "probes": 33,
+   "confirmed": 9,
+   "falsified": 24,
+   "predictions_bought_per_probe": 0.97,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 14,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 1,
+   "confirmed": 0,
+   "falsified": 1,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "TARBALL",
+   "walk_transitions": 7,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 0,
+   "confirmed": 0,
+   "falsified": 0,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 4,
+    "wrong": 0,
+    "refused": 0
+   },
+   "probes": 8,
+   "confirmed": 3,
+   "falsified": 5,
+   "predictions_bought_per_probe": 0.5,
+   "walk_steps": 40,
+   "seed": 13
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 29,
+   "held_out_transitions": 20,
+   "arm_A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 19
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 17
+   },
+   "probes": 6,
+   "confirmed": 4,
+   "falsified": 2,
+   "predictions_bought_per_probe": 0.333,
+   "walk_steps": 40,
+   "seed": 42
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 25,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 0,
+   "confirmed": 0,
+   "falsified": 0,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 42
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 40,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 1,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 40,
+   "seed": 42
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 38,
+   "held_out_transitions": 203,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 203
+   },
+   "arm_C": {
+    "predictions": 39,
+    "wrong": 16,
+    "refused": 164
+   },
+   "probes": 39,
+   "confirmed": 0,
+   "falsified": 39,
+   "predictions_bought_per_probe": 1.0,
+   "walk_steps": 40,
+   "seed": 42
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 15,
+   "held_out_transitions": 8,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "probes": 1,
+   "confirmed": 0,
+   "falsified": 1,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 40,
+   "seed": 42
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 25,
+   "held_out_transitions": 45,
+   "arm_A": {
+    "predictions": 5,
+    "wrong": 0,
+    "refused": 40
+   },
+   "arm_C": {
+    "predictions": 33,
+    "wrong": 1,
+    "refused": 12
+   },
+   "probes": 35,
+   "confirmed": 21,
+   "falsified": 14,
+   "predictions_bought_per_probe": 0.8,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 39,
+   "held_out_transitions": 24,
+   "arm_A": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 21
+   },
+   "arm_C": {
+    "predictions": 16,
+    "wrong": 0,
+    "refused": 8
+   },
+   "probes": 31,
+   "confirmed": 14,
+   "falsified": 17,
+   "predictions_bought_per_probe": 0.419,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 113,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 105,
+   "held_out_transitions": 210,
+   "arm_A": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181
+   },
+   "arm_C": {
+    "predictions": 55,
+    "wrong": 5,
+    "refused": 155
+   },
+   "probes": 35,
+   "confirmed": 5,
+   "falsified": 30,
+   "predictions_bought_per_probe": 0.743,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 1,
+   "confirmed": 0,
+   "falsified": 1,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 4,
+    "wrong": 1,
+    "refused": 0
+   },
+   "probes": 8,
+   "confirmed": 3,
+   "falsified": 5,
+   "predictions_bought_per_probe": 0.5,
+   "walk_steps": 120,
+   "seed": 13
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 59,
+   "held_out_transitions": 30,
+   "arm_A": {
+    "predictions": 6,
+    "wrong": 0,
+    "refused": 24
+   },
+   "arm_C": {
+    "predictions": 19,
+    "wrong": 1,
+    "refused": 11
+   },
+   "probes": 21,
+   "confirmed": 11,
+   "falsified": 10,
+   "predictions_bought_per_probe": 0.619,
+   "walk_steps": 120,
+   "seed": 42
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 62,
+   "held_out_transitions": 24,
+   "arm_A": {
+    "predictions": 5,
+    "wrong": 0,
+    "refused": 19
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 12
+   },
+   "probes": 27,
+   "confirmed": 12,
+   "falsified": 15,
+   "predictions_bought_per_probe": 0.259,
+   "walk_steps": 120,
+   "seed": 42
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 114,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 1,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 120,
+   "seed": 42
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 96,
+   "held_out_transitions": 203,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 203
+   },
+   "arm_C": {
+    "predictions": 41,
+    "wrong": 8,
+    "refused": 162
+   },
+   "probes": 40,
+   "confirmed": 7,
+   "falsified": 33,
+   "predictions_bought_per_probe": 1.025,
+   "walk_steps": 120,
+   "seed": 42
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 8,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 7
+   },
+   "probes": 3,
+   "confirmed": 0,
+   "falsified": 3,
+   "predictions_bought_per_probe": 0.333,
+   "walk_steps": 120,
+   "seed": 42
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 71,
+   "held_out_transitions": 55,
+   "arm_A": {
+    "predictions": 24,
+    "wrong": 0,
+    "refused": 31
+   },
+   "arm_C": {
+    "predictions": 32,
+    "wrong": 0,
+    "refused": 23
+   },
+   "probes": 12,
+   "confirmed": 8,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.667,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 48,
+   "held_out_transitions": 24,
+   "arm_A": {
+    "predictions": 8,
+    "wrong": 1,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 14,
+    "wrong": 1,
+    "refused": 10
+   },
+   "probes": 19,
+   "confirmed": 9,
+   "falsified": 10,
+   "predictions_bought_per_probe": 0.316,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 188,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 163,
+   "held_out_transitions": 210,
+   "arm_A": {
+    "predictions": 31,
+    "wrong": 1,
+    "refused": 179
+   },
+   "arm_C": {
+    "predictions": 62,
+    "wrong": 15,
+    "refused": 148
+   },
+   "probes": 37,
+   "confirmed": 1,
+   "falsified": 36,
+   "predictions_bought_per_probe": 0.838,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 1,
+   "confirmed": 0,
+   "falsified": 1,
+   "predictions_bought_per_probe": 0.0,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 4,
+    "wrong": 0,
+    "refused": 0
+   },
+   "probes": 8,
+   "confirmed": 3,
+   "falsified": 5,
+   "predictions_bought_per_probe": 0.5,
+   "walk_steps": 200,
+   "seed": 13
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 89,
+   "held_out_transitions": 55,
+   "arm_A": {
+    "predictions": 25,
+    "wrong": 0,
+    "refused": 30
+   },
+   "arm_C": {
+    "predictions": 32,
+    "wrong": 0,
+    "refused": 23
+   },
+   "probes": 21,
+   "confirmed": 8,
+   "falsified": 13,
+   "predictions_bought_per_probe": 0.333,
+   "walk_steps": 200,
+   "seed": 42
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 82,
+   "held_out_transitions": 28,
+   "arm_A": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 25
+   },
+   "arm_C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 18
+   },
+   "probes": 23,
+   "confirmed": 10,
+   "falsified": 13,
+   "predictions_bought_per_probe": 0.304,
+   "walk_steps": 200,
+   "seed": 42
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 190,
+   "held_out_transitions": 16,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 3,
+    "wrong": 1,
+    "refused": 13
+   },
+   "probes": 4,
+   "confirmed": 0,
+   "falsified": 4,
+   "predictions_bought_per_probe": 0.75,
+   "walk_steps": 200,
+   "seed": 42
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 153,
+   "held_out_transitions": 203,
+   "arm_A": {
+    "predictions": 22,
+    "wrong": 1,
+    "refused": 181
+   },
+   "arm_C": {
+    "predictions": 56,
+    "wrong": 8,
+    "refused": 147
+   },
+   "probes": 37,
+   "confirmed": 6,
+   "falsified": 31,
+   "predictions_bought_per_probe": 0.919,
+   "walk_steps": 200,
+   "seed": 42
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 8,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 7
+   },
+   "probes": 3,
+   "confirmed": 0,
+   "falsified": 3,
+   "predictions_bought_per_probe": 0.333,
+   "walk_steps": 200,
+   "seed": 42
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 12,
+   "held_out_transitions": 12,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 1,
+    "refused": 0
+   },
+   "probes": 20,
+   "confirmed": 14,
+   "falsified": 6,
+   "predictions_bought_per_probe": 0.6,
+   "walk_steps": 200,
+   "seed": 42
+  }
+ ],
+ "summary": {
+  "runs": 36,
+  "arm_A": {
+   "predictions": 166,
+   "wrong": 6,
+   "refused": 1594,
+   "held_out_transitions": 1760
+  },
+  "arm_C": {
+   "predictions": 512,
+   "wrong": 68,
+   "refused": 1248,
+   "held_out_transitions": 1760
+  },
+  "probes": 507,
+  "confirmed": 156,
+  "falsified": 351,
+  "by_walk": {
+   "40": {
+    "A_predictions": 5,
+    "A_wrong": 0,
+    "C_predictions": 96,
+    "C_wrong": 25,
+    "probes": 109
+   },
+   "120": {
+    "A_predictions": 48,
+    "A_wrong": 3,
+    "C_predictions": 187,
+    "C_wrong": 17,
+    "probes": 209
+   },
+   "200": {
+    "A_predictions": 113,
+    "A_wrong": 3,
+    "C_predictions": 229,
+    "C_wrong": 26,
+    "probes": 189
+   }
+  },
+  "verdicts": {
+   "questions_buy_reach": true,
+   "reach_more_than_doubles": true,
+   "questions_preserve_the_error_RATE": false,
+   "questions_preserve_SOUNDNESS": false,
+   "questions_pay_for_themselves": false
+  }
+ }
+}

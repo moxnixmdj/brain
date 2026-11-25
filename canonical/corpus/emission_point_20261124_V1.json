@@ -1,0 +1,152 @@
+{
+ "schema": "BRAIN_EMISSION_POINT_V1",
+ "generated": "2026-11-25T14:26:43Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "network_during_build": "git clone of pypa/packaging and hukkin/tomli",
+  "duration_s": 8.0
+ },
+ "summary": {
+  "tasks": 12,
+  "by_class": {
+   "REFUSED": 11,
+   "EMITTED__STILL_FAILING": 1
+  },
+  "by_failure_kind": {
+   "missing_ordering": 1,
+   "null": 3,
+   "assertion": 5,
+   "missing_keyword": 1,
+   "missing_key": 1,
+   "missing_attribute": 1
+  },
+  "solved": 0,
+  "resolve_rate": 0.0,
+  "emission_rate": 0.0833,
+  "verdicts": {
+   "the_system_emits_a_patch": true,
+   "the_system_solves_at_least_one": false,
+   "it_beats_the_zero_baseline": false,
+   "it_generalises": false
+  },
+  "reading": "The first emission point in this project. Every mechanism is keyed on the exception the interpreter reported and none mentions a repository, a task or a bug. REFUSED is a recorded outcome: the generator says which failure shape it did not recognise rather than emitting a guess.",
+  "what_this_does_not_show": "nothing about SWE-bench Pro or any frontier comparison. Twelve small single-node bugs in two repositories. Any solve here is a mechanism firing on a class of failure, not understanding.",
+  "what_was_built": "an emission point: the system now returns a unified diff. Two mechanisms survived contact with real code -- MISSING_KEYWORD (add the keyword to the entry point's signature and thread it to the state class that consumes it) and MISSING_ATTRIBUTE (initialise the missing attribute from the sibling collection the class already maintains). Both are keyed on the exception, neither mentions a repo, task or bug.",
+  "measured_against_v32": {
+   "v32_baseline": "0 of 12 solved, 0 of 12 emitted, 0 patches produced",
+   "v33": "0 of 12 solved, 1 of 12 emitted, 1 patch produced",
+   "the_only_moving_number": "emission, not resolution"
+  },
+  "the_four_refusals_that_are_mechanism_gaps": {
+   "missing_ordering (f8f16338)": "the class has no __init__ assigning _value, so the value to compare is in another attribute; the mechanism refused rather than guessing which",
+   "missing_attribute (d2fa9238)": "the class keeps no mutable sibling attribute to derive from",
+   "missing_key + assertions (9af551b5, 67ec7d10, 9f5249fb, 668da866, e83801f4)": "the failure states a fact about a VALUE the parser produced, not about a structure; changing it needs a behavioural edit inside the parse loop, which none of my structural mechanisms can express",
+   "no exception matched (959bb79c, a3b6a1f6, 31c85a18)": "the reported failure is an assertion or a mock-call mismatch with no structural signature"
+  },
+  "the_honest_conclusion": "one structural mechanism can open a signature; nothing here can change what a parser computes. The twelve tasks need behavioural edits at the site the traceback names, and that is the real Wall 2: not that the generator cannot reach the program, but that it has no operator that can express the change once it knows where to make it.",
+  "integrity_defect_caught_in_my_own_first_version": "the first run localised two tasks into tests/test_misc.py and benchmarks/resolver.py and edited them -- a patch to the test is a patch to the oracle. It also reported `git diff` over the whole tree, which included the oracle patch applied to make the node runnable. Both are fixed: is_writable() refuses any path under tests/ at the writer, test frames are excluded from localisation, and the reported diff is scoped to the edited file.",
+  "at_the_receipt_ceiling": "this branch now carries 40 receipt documents against the integrity guard's limit of 40, so no further receipt can be added until existing ones are compacted. That is the guard working: 33 rounds of instruments on one branch should be consolidated, not appended to. The next round must merge superseded receipts into one ledger before adding another."
+ },
+ "per_task": [
+  {
+   "class": "REFUSED",
+   "kind": null,
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+   "node": "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "missing_attribute",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "d2fa92384821919d48eab89bae087b950637d52a",
+   "node": "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "assertion",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "assertion",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "668da8662a112036e4850b68980790cb2d10dae9",
+   "node": "tests/test_markers.py"
+  },
+  {
+   "class": "REFUSED",
+   "kind": null,
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "a3b6a1f6c34182414558ad3628814cce1f039004",
+   "node": "tests/test_dependency_groups.py"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "missing_ordering",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+   "node": "tests/test_structures.py::test_infinity_self_comparison"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "assertion",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "pypa/packaging",
+   "sha": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+   "node": "tests/test_metadata.py::TestRawMetadata::test_complete"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "assertion",
+   "why": "the only edit found was inside run.py, and a patch to the test is a patch to the oracle",
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "node": "tests/test_error.py::test_module_name"
+  },
+  {
+   "class": "REFUSED",
+   "kind": null,
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "node": "tests/test_error.py::test_invalid_char_quotes"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "missing_key",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578d0bfa9823e986572735a7429ffdf79",
+   "node": "tests/test_misc.py::test_own_pyproject"
+  },
+  {
+   "class": "REFUSED",
+   "kind": "assertion",
+   "why": "no mechanism's precondition matched the reported failure",
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "node": "tests/test_error.py::test_line_and_col"
+  },
+  {
+   "class": "EMITTED__STILL_FAILING",
+   "kind": "missing_keyword",
+   "why": "loads() is called with keyword 'parse_float'; its signature omits it, and the value is now threaded to the object that consumes it",
+   "diff": "diff --git a/tomli/_parser.py b/tomli/_parser.py\nindex 04967f7..345d51f 100644\n--- a/tomli/_parser.py\n+++ b/tomli/_parser.py\n@@ -45,12 +45,12 @@ class TOMLDecodeError(ValueError):\n     \"\"\"An error raised if a document is not valid TOML.\"\"\"\n \n \n-def loads(s: str) -> Dict[str, Any]:  # noqa: C901\n+def loads(s: str, *, parse_float: Any = None) -> Dict[str, Any]:  # noqa: C901\n     # The spec allows converting \"\\r\\n\" to \"\\n\", even in string\n     # literals. Let's do so to simplify parsing.\n     s = s.replace(\"\\r\\n\", \"\\n\")\n \n-    state = ParseState(s)\n+    state = ParseState(s, parse_float=parse_float)\n \n     # Parse one statement at a time\n     # (typically means one line in TOML source)\n@@ -103,7 +103,8 @@ def loads(s: str) -> Dict[str, Any]:  # noqa: C901\n \n \n class ParseState:\n-    def __init__(self, src: str):\n+    def __init__(self, src: str, parse_float: Any = None):\n+        self.parse_float = parse_float\n         self.src: str = src\n         self.src_len = len(self.src)\n         self.pos: int = 0\n",
+   "diff_bytes": 1016,
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "node": "tests/test_misc.py::test_parse_float"
+  }
+ ]
+}

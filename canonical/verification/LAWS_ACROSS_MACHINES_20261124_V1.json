@@ -1,0 +1,232 @@
+{
+ "schema": "BRAIN_LAWS_ACROSS_MACHINES_V1",
+ "generated": "2026-11-25T03:15:08Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 73.0
+ },
+ "rows": [
+  {
+   "target": "LIST",
+   "source": "GIT",
+   "arm_A": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181
+   },
+   "probes": 16,
+   "alignment": {
+    "GIT_A3": "LS_A1",
+    "GIT_A5": "LS_A3",
+    "GIT_A1": "LS_A5",
+    "GIT_A2": "LS_A4",
+    "GIT_A4": "LS_A6"
+   },
+   "laws_imported": 6,
+   "crossable_laws": 3,
+   "source_laws": 6,
+   "key_misses": 3,
+   "score_B": {
+    "predictions": 5,
+    "wrong": 2,
+    "refused": 205
+   },
+   "score_C": {
+    "predictions": 42,
+    "wrong": 6,
+    "refused": 168
+   },
+   "held_out": 210
+  },
+  {
+   "target": "LIST",
+   "source": "GIT",
+   "arm_A": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181
+   },
+   "probes": 16,
+   "alignment": {
+    "GIT_A1": "LS_A4",
+    "GIT_A2": "LS_A5",
+    "GIT_A3": "LS_A6",
+    "GIT_A4": "LS_A3",
+    "GIT_A5": "LS_A1"
+   },
+   "laws_imported": 2,
+   "crossable_laws": 1,
+   "source_laws": 2,
+   "key_misses": 1,
+   "score_B": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 207
+   },
+   "score_C": {
+    "predictions": 42,
+    "wrong": 6,
+    "refused": 168
+   },
+   "held_out": 210
+  },
+  {
+   "target": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "TARBALL",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "TARBALL",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "SCRAMBLED",
+   "source": "GIT2",
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 1,
+   "alignment": {
+    "G2_A3": "SC_A1",
+    "G2_A4": "SC_A2",
+    "G2_A1": "SC_A3",
+    "G2_A2": "SC_A4"
+   },
+   "laws_imported": 10,
+   "crossable_laws": 3,
+   "source_laws": 10,
+   "key_misses": 7,
+   "score_B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "score_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "held_out": 4
+  },
+  {
+   "target": "SCRAMBLED",
+   "source": "GIT2",
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "probes": 1,
+   "alignment": {
+    "G2_A1": "SC_A2",
+    "G2_A2": "SC_A3",
+    "G2_A3": "SC_A4",
+    "G2_A4": "SC_A1"
+   },
+   "laws_imported": 10,
+   "crossable_laws": 3,
+   "source_laws": 10,
+   "key_misses": 7,
+   "score_B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "score_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "held_out": 4
+  }
+ ],
+ "summary": {
+  "pairs": [
+   "GIT:LIST",
+   "LIST:SQLITE",
+   "VAULT:TARBALL",
+   "GIT2:SCRAMBLED"
+  ],
+  "A_target_only": {
+   "predictions": 58,
+   "wrong": 6,
+   "refused": 370,
+   "accuracy": 0.9062,
+   "coverage": 0.1355
+  },
+  "B_transferred": {
+   "predictions": 5,
+   "wrong": 2,
+   "refused": 209,
+   "accuracy": 0.7143,
+   "coverage": 0.0234
+  },
+  "B_shuffled_alignment": {
+   "predictions": 3,
+   "wrong": 0,
+   "refused": 211,
+   "accuracy": 1.0,
+   "coverage": 0.014
+  },
+  "C_transferred_then_refined": {
+   "predictions": 42,
+   "wrong": 6,
+   "refused": 172,
+   "accuracy": 0.875,
+   "coverage": 0.1963
+  },
+  "C_shuffled_then_refined": {
+   "predictions": 42,
+   "wrong": 6,
+   "refused": 172,
+   "accuracy": 0.875,
+   "coverage": 0.1963
+  },
+  "laws_imported": 16,
+  "crossable_laws": 6,
+  "source_laws": 16,
+  "key_misses": 10,
+  "probes": 34,
+  "alignments": {
+   "LIST": {
+    "GIT_A3": "LS_A1",
+    "GIT_A5": "LS_A3",
+    "GIT_A1": "LS_A5",
+    "GIT_A2": "LS_A4",
+    "GIT_A4": "LS_A6"
+   },
+   "SQLITE": {},
+   "TARBALL": {},
+   "SCRAMBLED": {
+    "G2_A3": "SC_A1",
+    "G2_A4": "SC_A2",
+    "G2_A1": "SC_A3",
+    "G2_A2": "SC_A4"
+   }
+  },
+  "skipped": [
+   "SQLITE",
+   "TARBALL"
+  ],
+  "verdicts": {
+   "laws_cross_machines_at_all": true,
+   "transferred_laws_are_more_accurate_than_target_only": false,
+   "the_derived_alignment_beats_a_shuffled_one": false,
+   "transfer_plus_refinement_beats_target_only_on_reach": false,
+   "transfer_keeps_accuracy_above_nine_tenths": false,
+   "most_source_laws_have_no_counterpart_key_in_the_target": true,
+   "the_blocks_is_naming_not_evidence": true
+  }
+ }
+}

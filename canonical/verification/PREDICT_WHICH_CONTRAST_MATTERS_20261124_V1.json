@@ -1,0 +1,588 @@
+{
+ "schema": "BRAIN_PREDICT_WHICH_CONTRAST_MATTERS_V1",
+ "generated": "2026-11-25T13:28:53Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 446.2
+ },
+ "summary": {
+  "contrasts_considered": 40,
+  "contrasts_with_ground_truth": 28,
+  "base_rate_that_matters": 0.2857,
+  "train_n": 14,
+  "test_n": 14,
+  "learned_signal": "function_has_raise_ast",
+  "learned_train_accuracy": 0.6429,
+  "test": {
+   "learned": {
+    "correct": 11,
+    "n": 14,
+    "accuracy": 0.7857,
+    "positives": 3,
+    "flagged": 0,
+    "caught": 0,
+    "sensitivity": 0.0,
+    "precision": 0.0,
+    "majority_class_accuracy": 0.7857
+   },
+   "static_at_position": {
+    "correct": 7,
+    "n": 14,
+    "accuracy": 0.5,
+    "positives": 3,
+    "flagged": 10,
+    "caught": 3,
+    "sensitivity": 1.0,
+    "precision": 0.3,
+    "majority_class_accuracy": 0.7857
+   },
+   "always_does_not_matter": {
+    "correct": 11,
+    "n": 14,
+    "accuracy": 0.7857,
+    "positives": 3,
+    "flagged": 0,
+    "caught": 0,
+    "sensitivity": 0.0,
+    "precision": 0.0,
+    "majority_class_accuracy": 0.7857
+   },
+   "base_rate": 0.2857
+  },
+  "verdicts": {
+   "the_store_can_predict_which_contrast_matters": false,
+   "the_learned_rule_has_any_sensitivity": false,
+   "the_learned_rule_beats_the_static_rule": false,
+   "the_static_rule_is_the_only_rule_with_any_sensitivity": true,
+   "the_static_rule_is_precise_enough_to_use": false,
+   "the_learned_rule_is_just_at_position": false,
+   "there_is_too_little_ground_truth_to_decide": false,
+   "the_precision_of_the_only_working_rule_is_the_obstacle": true
+  },
+  "honest_reading": "THE STORE CARRIES EVIDENCE, NOT INFERENCE. Of 40 contrasts considered, 28 had ground truth from intervention; 4 of those 28 (14%) moved a test outcome. The best LEARNED single signal over the training half achieves held-out accuracy 0.7857 with sensitivity 0.0 and precision 0.0 -- it predicts 'does not matter' for every row and ties the majority classifier exactly. The one-line STATIC rule ('does it matter if a call site passes that position') catches 3 of 3 positives (sensitivity 1.0) at precision 0.30, which is real signal and too imprecise to act on. So: binding is proven (V27), prediction is not. An earlier version of this metric reported the 0.7857 as a success; it was the majority class, the same error this project made in V25.",
+  "rows": [
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 4
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_a_name_gets_its_value_from_the_run_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 3
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_action_replay_under_change_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 2
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_action_replay_under_change_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 94
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_sensor_request_is_computable_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 2
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_causal_dependency_repair_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 48
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_refusal_is_a_specification_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 40
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_answers_must_agree_with_each_other_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 5
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_computer_use_agent_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 4
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_history_induced_edit_grammar_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 58
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_anchored_frame_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_learned_skill_verdict_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 4
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_learned_skill_verdict_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 139
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_question_about_the_repository_is_answered_by_the_repository_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 8
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_observable_probe_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 3
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_operator_semantics_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 13
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_resolving_candidate_under_the_whole_suite_measure_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 26
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_h100_zero_learned_mechanism_synthesizer_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_operand_invention_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 5
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_renewable_action_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 5
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_structural_check_of_real_changes_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1
+    },
+    "matters": true,
+    "test_file": "canonical/tests/test_systematic_edit_supply_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 13
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_resolving_candidate_under_the_whole_suite_measure_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": true,
+     "at_position": true,
+     "effect_is_a_raise": true,
+     "side_changes": false,
+     "function_has_raise_ast": false,
+     "signature_arity": 5,
+     "call_sites": 1753
+    },
+    "matters": false,
+    "test_file": "canonical/tests/test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1.py"
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   },
+   {
+    "signals": {
+     "has_call_site": false,
+     "at_position": false,
+     "effect_is_a_raise": false,
+     "side_changes": true,
+     "function_has_raise_ast": false,
+     "signature_arity": 0,
+     "call_sites": 0
+    },
+    "matters": null,
+    "test_file": null
+   }
+  ]
+ }
+}

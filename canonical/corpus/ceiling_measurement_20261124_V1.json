@@ -1,0 +1,51 @@
+{
+ "schema": "BRAIN_CEILING_MEASUREMENT_V1",
+ "generated": "2026-11-25T16:14:43Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0
+ },
+ "the_question": "of the 28 mined tasks, which ones could the current operator family possibly reach, and does it reach them?",
+ "the_ceiling_subset": {
+  "rule": "the real fix changes at most 4 source lines and adds no function: the only shape a substitution-family operator could express",
+  "count": 6,
+  "solved": 0,
+  "resolve_rate": 0.0,
+  "candidates_tried_per_task": {
+   "8efde605": null,
+   "8c37b047": 12,
+   "b1c439b0": null,
+   "2aada00b": 12,
+   "d17cfaf0": null,
+   "2602dd07": 12
+  },
+  "with_localisation_seed": 0,
+  "localisation_top1": 4,
+  "localisation_within_five": 5
+ },
+ "what_the_six_actually_are": {
+  "2aada00b": "a regex quantifier [^\\s;)]* changed to + in specifiers.py -- one character",
+  "2602dd07": "a regex [^ \\t]+ changed to \\S+ in _tokenizer.py -- one character class",
+  "8c37b047": "add a two-line guard early in a function that raises InvalidLicenseExpression",
+  "8efde605": "bind an include_group variable one line above its use",
+  "b1c439b0": "replace cls.__dict__ with Metadata.__dict__ in two places",
+  "d17cfaf0": "add a three-line early return in a function"
+ },
+ "why_zero": [
+  "the operator family is keyed to exceptions named in the traceback; five of these six produce no source frame at all",
+  "the fixes are REGEX CHARACTER changes and early-return guards. Neither is a substitution of an expression that already exists, which is the only grammar the operators have",
+  "one operator (WRAP_EXCEPTION) fires on the three did-not-raise tasks, but it wraps a statement in a try/except where the real fix tightens a regex or adds a guard. The mechanism is expressible; the edit is in the wrong place and of the wrong kind"
+ ],
+ "the_error_i_corrected_this_round": {
+  "claim": "4 tasks need only dunder methods, which are formulaic",
+  "reality": "__getstate__ (46 lines), __replace__ (55 lines) and __init__ rewrites are API redesigns, not formulas",
+  "correction": "classifying by syntax (dunder vs plain) instead of by difficulty. Ninth comparator-of-convenience in this project."
+ },
+ "the_honest_reading": "the operators solve 0 of 6 tasks whose fixes are ONE TO FOUR LINES. That is not a localisation problem, not a small-sample problem, and not a search-budget problem. The family is keyed to exception types and to substituting expressions that already exist; real fixes are regex character changes, early-return guards, and attribute rebindings at a site nothing points to.",
+ "full_set_context": {
+  "examined": 28,
+  "solved": 0
+ },
+ "what_this_is_not": "a benchmark result and not a capability claim. Six tasks in one repository. No benchmark row exists or is claimed."
+}
