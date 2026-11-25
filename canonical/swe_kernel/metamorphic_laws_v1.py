@@ -33,6 +33,7 @@ __all__ = [
     "mutations_for",
     "package_error_classes",
     "StrippedList",
+    "NoneReversed",
     "safe_equal",
 ]
 
@@ -215,6 +216,25 @@ def check_error_inconsistency(
     return []
 
 
+class NoneReversed:
+    """An iterable whose optional `__reversed__` protocol is present but set to `None`.
+
+    That is the distinction Python actually makes and `hasattr` erases: the attribute exists, so
+    `hasattr` is True, but `reversed()` fails because the protocol is *absent by value*.
+    Measured need: `more_itertools.last()` used `hasattr(iterable, '__reversed__')`, so an object with
+    `__reversed__ = None` fell into the `reversed()` branch and returned the default instead of its
+    element. A list subclass never shows this, because `Sequence` short-circuits the check first.
+    """
+
+    __reversed__ = None  # type: ignore[assignment]
+
+    def __init__(self, items: Iterable[Any]) -> None:
+        self._items = list(items)
+
+    def __iter__(self):
+        return iter(self._items)
+
+
 class StrippedList(list):
     """A list with its optional protocols removed: no `__reversed__`, no `__len__`."""
 
@@ -225,31 +245,101 @@ class StrippedList(list):
 
 
 def _iterable_variants(value: Any) -> list[tuple[str, Any]]:
-    if not isinstance(value, (list, tuple)) or len(value) > 64:
+    """Bounded retypings of one argument.
+
+    Bounded because the argument may be infinite: `more_itertools` ships `count`, `repeat`, `cycle`, and
+    materializing one of those in a variant killed the whole run (exit -9, OOM). Sixty-four elements is
+    far past every threshold a correctness question turns on, and an argument that does not fit is left
+    alone rather than guessed at.
+    """
+    from itertools import islice
+
+    # A string is a container of characters, not a container: retyping it as an iterator of characters
+    # is not the same value in a different container, and `substrings_indexes(str, indexes)` duly raised
+    # `TypeError` on all three variants on the healthy tree. Only genuine collections are retyped.
+    if isinstance(value, (str, bytes, bytearray, dict)):
         return []
-    items = list(value)
-    out: list[tuple[str, Any]] = [("iterator", iter(items))]
+    try:
+        items = list(islice(iter(value), 65))
+    except Exception:
+        return []
+    if len(items) > 64:
+        return []
+    out: list[tuple[str, Any]] = [("iterator", iter(items)), ("none_reversed", NoneReversed(items))]
     if isinstance(value, list):
         out.append(("stripped", StrippedList(items)))
     return out
 
 
+def _outcome(thunk: Callable[[], Any]) -> tuple[str, Any]:
+    """Return the observable outcome of a call: a value or an exception *type*.
+
+    Comparing against "did it raise" alone is not a law: many suites call a function on an empty input
+    precisely to assert that it raises, so every retyped variant raises too and the law fires on the
+    healthy tree. Measured on more-itertools: `last([])` is tested for `ValueError`, and a raise-only
+    form reported three violations on both the buggy and the fixed commit.
+    """
+    try:
+        return ("ok", thunk())
+    except Exception as exc:  # noqa: BLE001 - the type is the observable
+        return ("raise", type(exc))
+
+
+_COMPARABLE = (str, bytes, bytearray, int, float, complex, bool, type(None), tuple, list, dict, set, frozenset)
+
+
+def _not_comparable(value: Any) -> bool:
+    """True when a result cannot be compared across two calls.
+
+    A generator is the case that matters: `distinct_permutations(list)` returns a live generator whose
+    repr differs every call, so identity-based equality reports a violation on the healthy tree. A lazy
+    result is "the same answer" when both calls are lazy — its contents were never evaluated.
+    """
+    if isinstance(value, _COMPARABLE) and not isinstance(value, (tuple, list)):
+        return False
+    if isinstance(value, (tuple, list)):
+        # A result is only as comparable as its leaves: `spy()` returns a tuple holding a live `_tee`,
+        # which never compares equal, and that was reported as a violation on the healthy tree.
+        return any(_not_comparable(item) for item in value)
+    return True
+
+
 def check_iterable_retyping(name: str, fn: Callable[..., Any], args: Sequence[Any]) -> list[Violation]:
     """The same elements in a different iterable must give the same answer.
 
-    A generator is a list; a list with `__reversed__` removed is still a sequence of the same items.
-    A function that depends on the *container* rather than the *contents* has smuggled a protocol it
-    never declared — `last(seq)` falling over when `__reversed__` is None is exactly that.
+    A generator is a list; a list with `__reversed__` set to None is still a sequence of the same
+    items. A function that depends on the *container* rather than the *contents* has smuggled a
+    protocol it never declared — `last(seq)` falling over when `__reversed__` is None is exactly that.
+
+    Differential, not absolute: the baseline call on the suite's own argument is the reference, so a
+    function that is *supposed* to raise on this input stays silent.
     """
     if len(args) != 1:
         return []
+    baseline = _outcome(lambda: fn(args[0]))
     out: list[Violation] = []
     for label, variant in _iterable_variants(args[0]):
-        try:
-            fn(*[variant])
-        except Exception as exc:
-            out.append(Violation("iterable_retyping", name, f"{label} form raised {type(exc).__name__}: {exc}"))
+        got = _outcome(lambda: fn(variant))
+        if got[0] == baseline[0] == "raise":
+            if got[1] is baseline[1]:
+                continue
+        elif got[0] == baseline[0] == "ok":
+            if _not_comparable(got[1]) or _not_comparable(baseline[1]) or safe_equal(got[1], baseline[1]):
+                continue
+        if got[0] == "raise":
+            detail = f"{label} form raised {got[1].__name__}: {_exc_text(label, fn, variant)}"
+        else:
+            detail = f"{label} form returned {got[1]!r} where {args[0]!r} returned {baseline[1]!r}"
+        out.append(Violation("iterable_retyping", name, detail))
     return out
+
+
+def _exc_text(label: str, fn: Callable[..., Any], variant: Any) -> str:
+    try:
+        fn(variant)
+    except Exception as exc:  # noqa: BLE001
+        return str(exc)
+    return ""
 
 
 def static_assert_validation(source: str, module_name: str = "") -> list[Violation]:

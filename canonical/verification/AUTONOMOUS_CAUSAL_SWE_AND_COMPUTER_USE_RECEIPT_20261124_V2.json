@@ -389,6 +389,36 @@
    "result": "REPAIRED blind, non-lifecycle defect"
   }
  },
+ "law_repair_v18": {
+  "more-itertools@cca32949f1": {
+   "candidate": "LAW_ITERABLE_RETYPING[last:hasattr->getattr(x,attr,None)]",
+   "defect": "hasattr() admits a protocol that is present and None, so last() returns its default instead of the element",
+   "false_positives_removed": [
+    "raise-only comparison (last([]) is supposed to raise)",
+    "string retyped into an iterator of its characters (substrings_indexes, healthy tree)",
+    "tuple containing a live _tee compared for equality (spy, healthy tree)",
+    "receiver substituted by a retyped shell (__repr__, healthy tree)"
+   ],
+   "hidden_test_after_patch": {
+    "buggy_unpatched": "1 failed, 543 passed",
+    "candidate": "544 passed",
+    "human_fix": "544 passed"
+   },
+   "law": "iterable_retyping (differential, with a NoneReversed variant)",
+   "law_on_buggy": "iterable_retyping: last, none_reversed form raised ValueError",
+   "law_on_candidate": "silent",
+   "law_on_fixed": "silent (checked before any candidate was generated)",
+   "suite_under_every_law_then_all": "543 passed each time (re-invocations never perturb a test)",
+   "trigger_gaps_fixed": [
+    "re-export aliasing: from .more import * bound an unwrapped name; alias sweep at collection_finish",
+    "budget starvation: per-law, per-argument-shape re-invocation pools",
+    "live-iterator replay: a copy of a consumed stream is the unbounded remainder (exit -9)",
+    "a law that raised was recorded as silence; law_errors now travels in the receipt"
+   ]
+  },
+  "regression_check": "werkzeug canonicality still discriminates: 'Bearer ' on buggy, 'Bearer' on fixed",
+  "test_absent_stream": "3 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1), 4 open"
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -475,20 +505,13 @@
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
-  "canonical/swe_kernel/law_repair_synthesis_v1.py": {
-   "purpose": "generate a patch from a law violation (canonicality, error discipline) with no test",
-   "sha256": "67bc43b9239a88037173c7991fc88f49f592f6fe958c3ab5ef5ec3238872f70e"
-  },
-  "canonical/swe_kernel/metamorphic_laws_v1.py": {
-   "sha256": "920fec5b529935c14a8bc79ad8599007770c3830928c8704322b90296f253001"
-  },
+  "canonical/swe_kernel/law_repair_synthesis_v1.py": "b04064983216b9eac8077712cb9fc72201070df2963287fbf23b26e02681192d",
+  "canonical/swe_kernel/metamorphic_laws_v1.py": "9813764f86f43982d104f2787941c7ceee226211f626995ee6fb280f211620e5",
   "canonical/swe_kernel/metamorphic_oracle_v1.py": {
    "purpose": "manufacture a failing assertion from the repository's own name/effect vocabulary; no model, no hidden test",
    "sha256": "3600755dfde982faefa23be9ddc982f9579df388504f4f413205d65cc7691716"
   },
-  "canonical/swe_kernel/metamorphic_plugin_v1.py": {
-   "sha256": "0507a7fe87fdad3746732fa82615c29f0f4ff770657b2bb9ae06b3d0920d247f"
-  },
+  "canonical/swe_kernel/metamorphic_plugin_v1.py": "503df8c6af38f60a32f092928a0726e1026054225e77e550d0ee881d134f7993",
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
@@ -503,6 +526,7 @@
    "purpose": "rank a repository's standing law violations by the issue text, or abstain",
    "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
   },
+  "canonical/tests/test_a_law_that_retypes_an_iterable_compares_outcomes_v1.py": "b6c8c4ff78878c782c8bdc4b3e2545decb72f6403a202c710031727eb725046d",
   "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
    "status": "1 passed"
   },
@@ -645,7 +669,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Carry the witness into the candidate: the violation's argument index and value travel to the generator, so the edit targets the site the witness came from rather than the site the issue name suggests. Gate: for pyjwt@793a302 a candidate must clear the law AND pass the hidden test, with the witness's argument index recorded and used.",
+ "next_bottleneck": "observation by omission: alias not wrapped, budget spent, iterator unusable, law crashed all read as no-defect. Now reported (law_errors/per_law/observed_calls). Still open: carry the witness (argument index and value) into the generator; pyjwt@793a302 clears the law and passes the hidden test with that index used.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,

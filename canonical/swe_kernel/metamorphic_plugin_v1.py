@@ -16,6 +16,7 @@ Two instrumentation points, and no third:
 from __future__ import annotations
 
 import importlib
+import copy
 import inspect
 import json
 import os
@@ -31,12 +32,14 @@ _STATE: dict[str, Any] = {
     "skipped": 0,
     "wrapped": [],
     "laws_enabled": [],
+    "law_errors": [],
 }
 _INSTANCES: list[Any] = []
 _WRAPPED: list[tuple[Any, str]] = []
 _IN_CHECK = [False]
-_MAX_REINVOKE = 400
+_MAX_REINVOKE = 1500  # per law, not global
 _MAX_PROBES = 4000
+_TRACE = bool(__import__("os").environ.get("META_TRACE"))
 
 
 def _env(name: str, default: str = "") -> str:
@@ -66,13 +69,62 @@ def _record(violation: Any) -> None:
         _STATE["violations"].append(dict(violation))
 
 
+def _replay(args: tuple) -> tuple | None:
+    """Deep-copied arguments for any law that calls the function again, or None if not replayable.
+
+    Two refusals, both measured:
+
+    1. Re-invoking with the suite's own objects is not observation, it is mutation. more-itertools'
+       tests hand live buffers to `prepend`-shaped methods, and building the mutated call from the live
+       args let `prepend("not-a-number")` land on the suite's instance and broke 14 tests.
+    2. A live iterator cannot be replayed *even after copying*, because the copy captures what is
+       **left** of the stream. `all_unique(prepend(3, count()))` is answered at the duplicate `3`; the
+       copy then holds `4, 5, 6, ...` with no duplicate in it, so the re-invocation never terminates and
+       the run is OOM-killed (exit -9). Deepcopy of an `itertools.chain` succeeds, which is exactly why
+       "copy it and hope" is not enough: the danger is the unbounded remainder, not the copy.
+    """
+    for value in args:
+        if hasattr(value, "__next__") and not hasattr(value, "__len__"):
+            return None
+    try:
+        copies = copy.deepcopy(list(args))
+    except Exception:
+        return None
+    return tuple(copies)
+
+
+def _arg_sig(args: tuple) -> str:
+    """A cheap structural signature of a call's arguments.
+
+    Budgeting by function name alone starves a law on the informative call: more-itertools' suite calls
+    `last()` more than twelve times, nearly all on an empty list (asserting `ValueError`), and the one
+    call carrying a real element was never examined. Budgeting by shape keeps one bucket per shape.
+    """
+    parts: list[str] = []
+    for value in args[:2]:
+        if isinstance(value, (list, tuple, set, frozenset, dict, str, bytes)):
+            parts.append(f"{type(value).__name__}[{len(value)}]")
+        else:
+            parts.append(type(value).__name__)
+    return "|".join(parts)
+
+
 def _budget(key: str, limit: int = 24) -> bool:
-    if _STATE["re_invocations"] >= _MAX_REINVOKE:
+    """Charge one re-invocation to `key`, capped per key and per law.
+
+    Per *law* because the pool is finite and shared: with one global cap, `canonicality` and
+    `idempotence` spending it on the first few hundred hot calls starved `iterable_retyping` entirely,
+    and the more-itertools defect was invisible even though the law fires on a direct call.
+    """
+    pool = key.split(":", 1)[0]
+    pools = _STATE.setdefault("per_law", {})
+    if pools.get(pool, 0) >= _MAX_REINVOKE:
         return False
     used = _STATE.setdefault("per_callable", {}).get(key, 0)
     if used >= limit:
         return False
     _STATE["per_callable"][key] = used + 1
+    pools[pool] = pools.get(pool, 0) + 1
     _STATE["re_invocations"] += 1
     return True
 
@@ -104,29 +156,38 @@ def _check_call(namespace: Any, owner: str, name: str, fn: Any, args: tuple, kwa
         for violation in laws.check_canonicality(name, result):
             _record(violation)
     if _want("idempotence") and _budget("idem:" + qual):
+        replay = _replay(args)
         try:
-            if result is not None:
-                for violation in laws.check_idempotence(name, fn, args, result):
+            if result is not None and replay is not None:
+                for violation in laws.check_idempotence(name, fn, replay, result):
                     _record(violation)
-        except Exception:
-            pass
+        except Exception as exc:
+            _STATE["law_errors"].append(f"idempotence:{name}:{type(exc).__name__}")
     if _want("round_trip") and args and _budget("rt:" + qual):
         inverse = _inverse_for(namespace, name)
-        if inverse is not None:
-            for violation in laws.check_round_trip(name, args, result, inverse):
+        replay = _replay(args)
+        if inverse is not None and replay is not None:
+            for violation in laws.check_round_trip(name, replay, result, inverse):
                 _record(violation)
-    if _want("iterable_retyping") and _budget("it:" + qual, limit=12):
+    # Retyping arguments is a statement about *data*, not about a receiver: substituting `self` with a
+    # retyped shell made `__repr__` "raise" on the healthy tree (AttributeError on the shell). The law
+    # therefore applies to module-level functions, where every argument is data.
+    if _want("iterable_retyping") and not owner and _budget(f"it:{qual}:{_arg_sig(args)}", limit=3):
+        replay = _replay(args)
         try:
-            for violation in laws.check_iterable_retyping(name, fn, args):
+            for violation in laws.check_iterable_retyping(name, fn, replay if replay is not None else ()):
                 _record(violation)
-        except Exception:
-            pass
+        except Exception as exc:
+            _STATE["law_errors"].append(f"iterable_retyping:{name}:{type(exc).__name__}")
     if _want("error_discipline") and args and _budget("err:" + qual, limit=12):
         errors = laws.package_error_classes(module_name, cache=_STATE.setdefault("errors", {}))
         if errors:
             outcomes: list[tuple[str, type | None]] = []
-            for idx, label, mutated in laws.mutations_for(args):
-                new_args = list(args)
+            replay = _replay(args)
+            for idx, label, mutated in laws.mutations_for(replay or ()):
+                # Must be the *copies*: building new_args from the live args let
+                # `prepend("not-a-number")` land on the suite's own instance and broke 14 tests.
+                new_args = list(replay or ())
                 new_args[idx] = mutated
                 try:
                     fn(*new_args, **kwargs)
@@ -163,6 +224,33 @@ def _make_wrapper(namespace: Any, owner: str, name: str, fn: Any, module_name: s
     return wrapper
 
 
+# Re-export aliases: `more_itertools/__init__.py` does `from .more import *`, so `mi.last` is the same
+# function object as `more_itertools.more.last` but a *different* module attribute. Patching only the
+# defining module left the name the suite actually calls unwrapped: measured on more-itertools, the
+# law saw zero calls and could not fire at all. Wrapping a definition is not enough; every alias of it
+# has to move with it.
+_ALIAS: dict[int, tuple[Any, Any]] = {}
+
+
+def _sweep_aliases() -> None:
+    """Point every module attribute that still holds an unwrapped original at its wrapper."""
+    if not _ALIAS:
+        return
+    for mod in list(sys.modules.values()):
+        try:
+            items = list(vars(mod).items())
+        except Exception:
+            continue
+        for name, value in items:
+            entry = _ALIAS.get(id(value))
+            if entry is None or entry[0] is not value or entry[1] is value:
+                continue
+            try:
+                setattr(mod, name, entry[1])
+            except Exception:
+                pass
+
+
 def _wrap_module(mod: Any) -> None:
     for attr_name in list(vars(mod)):
         attr = vars(mod)[attr_name]
@@ -170,7 +258,9 @@ def _wrap_module(mod: Any) -> None:
             if attr_name.startswith("_"):
                 continue
             try:
-                setattr(mod, attr_name, _make_wrapper(mod, "", attr_name, attr, mod.__name__))
+                wrapper = _make_wrapper(mod, "", attr_name, attr, mod.__name__)
+                setattr(mod, attr_name, wrapper)
+                _ALIAS[id(attr)] = (attr, wrapper)
                 _WRAPPED.append((mod, attr_name))
             except Exception:
                 pass
@@ -187,7 +277,9 @@ def _wrap_module(mod: Any) -> None:
             if meth_name.startswith("__") and meth_name not in {"__str__", "__repr__", "__bytes__"}:
                 continue
             try:
-                setattr(cls, meth_name, _make_wrapper(cls, cls_name, meth_name, meth, mod.__name__))
+                wrapper = _make_wrapper(cls, cls_name, meth_name, meth, mod.__name__)
+                setattr(cls, meth_name, wrapper)
+                _ALIAS[id(meth)] = (meth, wrapper)
                 _WRAPPED.append((cls, meth_name))
             except Exception:
                 pass
@@ -369,6 +461,14 @@ def pytest_configure(config) -> None:
                 except Exception:
                     _STATE["skipped"] += 1
         _wrap_module(mod)
+    _sweep_aliases()
+
+
+def pytest_collection_finish(session) -> None:
+    # The package `__init__` runs `from .more import *` while the test modules are imported, i.e.
+    # *after* `pytest_configure` wrapped the definitions. Sweep once more here, when every test module
+    # (and therefore every re-export) exists, or the suite calls the unwrapped alias and observes nothing.
+    _sweep_aliases()
 
 
 def pytest_runtest_teardown(item, nextitem) -> None:
@@ -447,8 +547,10 @@ def pytest_sessionfinish(session, exitstatus) -> None:
         "raw_count": len(_STATE["violations"]),
         "observed_calls": _STATE["observed_calls"],
         "re_invocations": _STATE["re_invocations"],
+        "per_law": dict(_STATE.get("per_law", {})),
         "probes": _STATE["probes"],
         "skipped": _STATE["skipped"],
+        "law_errors": sorted(set(_STATE.get("law_errors", [])))[:20],
         "wrapped": _STATE["wrapped"],
         "laws_enabled": _STATE["laws_enabled"],
         "import_errors": _STATE.get("import_errors", []),

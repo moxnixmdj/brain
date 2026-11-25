@@ -903,3 +903,67 @@ a neighbouring witness. The reframing is to let the law carry its witness into t
 index and value travel with the violation, so the generator edits the site the witness came from rather than the site the
 issue name suggests. Gate stated before the build: for `pyjwt@793a302`, a candidate must clear the law *and* pass the
 hidden test, with the witness's argument index recorded and used.
+
+## Round V18 — the third blind repair, and four trigger gaps that looked like silence
+
+`more-itertools@cca32949f1` ("fix `last()` when `__reversed__` is None") had no witness for two rounds. The dead end
+was recorded as "the direct reproduction did not reproduce". That was correct and incomplete: the probe was wrong.
+
+The defect is a *presence* question asked of a *value*. `hasattr(o, "__reversed__")` is True for an object whose
+optional protocol exists and is `None`, so `last()` took the `reversed()` branch, `TypeError` was swallowed by the
+surrounding handler, and the function returned its default instead of its element. A list subclass never shows it,
+because `isinstance(x, Sequence)` — tried first — returns before the guard. The probe was a list subclass. The law now
+carries a third variant, `NoneReversed`: an iterable that is **not** a `Sequence` and whose protocol is `None`.
+
+Getting from "the law is right" to "the oracle fires" took four separate faults, each of which had previously been
+indistinguishable from a clean tree:
+
+| fault | what it looked like | what it was |
+|---|---|---|
+| re-export aliasing | zero observations, `raw_count: 0` | `more_itertools/__init__.py` does `from .more import *`; the definition was wrapped, the name the suite calls was not |
+| budget starvation | law silent on a function it fires on directly | one global pool of 400 re-invocations, spent by `canonicality`/`idempotence` on hot calls |
+| live-iterator replay | run killed (exit -9, OOM) | `all_unique(prepend(3, count()))` is answered at the duplicate; the deep-copied *remainder* has no duplicate and never terminates |
+| a crashing law | silence | the law raised `NameError` and a broad `except Exception: pass` recorded nothing |
+
+Each is fixed at the level it belongs to, not per call site:
+
+- wrappers register `id(original) -> wrapper` and a sweep repoints every module attribute that still holds the
+  original, once after wrapping and once at `pytest_collection_finish` (when test modules have imported the re-exports);
+- the re-invocation budget is charged **per law** and **per argument shape**, so one law's appetite cannot silence
+  another's evidence;
+- `_replay` refuses any argument that is a live iterator without `__len__` (a copy of the remainder is not the argument
+  that was observed) and deep-copies everything else, so a mutated call can never land on the suite's own object;
+- `_STATE["law_errors"]` records law exceptions in the receipt, so a law that crashes is visible as a crash.
+
+Two more false positives were measured and removed while the law was live: a string is not retyped into an iterator of
+its characters (`substrings_indexes` raised `TypeError` on all three variants of the *healthy* tree), and a result is
+only compared when its leaves are comparable (`spy()` returns a tuple holding a live `_tee`). The law also compares
+**outcomes** against the baseline call rather than "did it raise": `last([])` is tested for `ValueError`, so a
+raise-only form fired on both trees. Retyping applies to module-level functions only — substituting a receiver with a
+retyped shell made `__repr__` "raise" on the healthy tree.
+
+The repair generator is one line of code and is derived from the witness, not from the test: a guard that admits a
+`None`-valued protocol must read the value, `getattr(x, attr, None)`.
+
+| condition | result |
+|---|---|
+| law fires on the buggy tree | **yes** — `iterable_retyping: last, none_reversed form raised ValueError` |
+| law silent on the human fix | **yes** — checked before any candidate was generated |
+| candidate clears the law | **yes** — same file, `hasattr` → `getattr(..., None)` |
+| the hidden test, overlaid *only after* the patch was chosen | buggy **1 failed** (`543 passed`) → candidate **544 passed**; human fix also **544 passed** |
+| the repository's own suite under every law, then all laws | **543 passed** each time (no re-invocation perturbs a test) |
+
+So `more-itertools@cca32949f1` is the third test-absent repair and the second whose law is not lifecycle or canonicality:
+a *value-vs-presence* law, a generator that reads the witness, and a human test that was never shown to the loop.
+The `werkzeug` canonicality path was re-checked after these shared-code changes and still discriminates
+(`'Bearer '` on the buggy tree, `'Bearer'` on the fixed one).
+
+**Recorded honestly:** test-absent stream **3 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`,
+`more-itertools@cca32949f1`), 4 open (`pluggy@8051a4d` no generator, `pyjwt@793a302` same function different argument,
+`click@05f6fd0`, `attrs@3b0378dd66`). Test-present tally unchanged: **11/13 = 84.62%**.
+
+**Next bottleneck.** The four gaps above share a shape: **the observation layer was lying by omission** — alias not
+wrapped, budget spent, iterator unusable, law crashed — and every one of them read as "no defect here". The layer now
+reports what it did not do (`law_errors`, `per_law`, `re_invocations`, `observed_calls`) rather than only what it found.
+The next item stays what V17 recorded and still blocks `pyjwt@793a302`: the violation must carry its witness (argument
+index and value) into the generator, and the candidate must clear the law *and* pass the hidden test with that index used.

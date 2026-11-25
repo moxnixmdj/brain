@@ -230,3 +230,55 @@ def _handler_names(node: ast.AST) -> list[str]:
             names.extend(_handler_names(element))
         return names
     return []
+
+
+def protocol_presence_candidates(
+    root: pathlib.Path | str,
+    function_name: str,
+    *,
+    target_file: str | None = None,
+) -> list[tuple[str, dict[str, bytes]]]:
+    """Rewrite `hasattr(x, "<attr>")` guards into `getattr(x, "<attr>", None)`.
+
+    The law's witness is an object whose optional protocol is present but `None`; `hasattr` is True
+    there and `reversed()` still fails, so the guard admits an object it cannot handle. This is the
+    minimal edit that makes the guard mean what it says, and it is derived from the witness rather than
+    from any test: the witness *is* a `None`-valued protocol.
+    """
+    base = pathlib.Path(root)
+    out: list[tuple[str, dict[str, bytes]]] = []
+    for path in _python_files(base):
+        if target_file and path.name != target_file:
+            continue
+        source = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            continue
+        lines = source.splitlines(keepends=True)
+        edits: list[tuple[int, int, str]] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name != function_name:
+                continue
+            for call in ast.walk(node):
+                if not (isinstance(call, ast.Call) and isinstance(call.func, ast.Name) and call.func.id == "hasattr"):
+                    continue
+                if len(call.args) != 2:
+                    continue
+                start = sum(len(l) for l in lines[: call.lineno - 1]) + call.col_offset
+                end = sum(len(l) for l in lines[: (call.end_lineno or call.lineno) - 1]) + (call.end_col_offset or 0)
+                original = source[start:end]
+                replacement = "getattr" + original[len("hasattr"):-1] + ", None)"
+                edits.append((start, end, replacement))
+        if not edits:
+            continue
+        patched = source
+        for start, end, replacement in sorted(edits, key=lambda e: e[0], reverse=True):
+            patched = patched[:start] + replacement + patched[end:]
+        try:
+            ast.parse(patched)
+        except SyntaxError:
+            continue
+        tag = f"LAW_ITERABLE_RETYPING[{function_name}:hasattr->getattr(x,attr,None)]"
+        out.append((tag, {path.relative_to(base).as_posix(): patched.encode("utf-8")}))
+    return out
