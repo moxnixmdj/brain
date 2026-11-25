@@ -1,0 +1,56 @@
+{
+ "schema": "THE_LITERAL_IS_THE_DEFECT_V1",
+ "repo": "urllib3",
+ "commit": "77fa67aaf2",
+ "module": "urllib3.util.url",
+ "relation": [
+  "",
+  ""
+ ],
+ "candidates": [
+  {
+   "refinement": "STRIP_PREFIX_QUANTIFIER",
+   "edits": 1,
+   "result": {
+    "error": null,
+    "count": 0,
+    "witness": [],
+    "cases": 6,
+    "collateral": [
+     [
+      "http://example.com:0",
+      null
+     ],
+     [
+      "http://example.com:0000",
+      null
+     ]
+    ]
+   },
+   "moved": true,
+   "cleared": true
+  }
+ ],
+ "parent": {
+  "error": null,
+  "count": 1,
+  "witness": [
+   [
+    "http://example.com:000001",
+    "LocationParseError"
+   ]
+  ],
+  "cases": 6,
+  "collateral": [
+   [
+    "http://example.com:0",
+    0
+   ],
+   [
+    "http://example.com:0000",
+    0
+   ]
+  ]
+ },
+ "verdict": "LITERAL_REFINEMENT_CLEARS"
+}
