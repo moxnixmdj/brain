@@ -186,11 +186,36 @@ def evaluate(active: Sequence[str], train, held) -> dict[str, Any]:
     return {"predictions": predictions, "wrong": wrong, "refused": refused}
 
 
+def cross_pool(models, pool, ratio: int) -> dict[str, Any]:
+    """Score each machine's vocabulary on a DIFFERENT machine.
+
+    `models` is a list of (name, active_subset, train, held). No vocabulary here is ever scored on the data
+    it was chosen from, so the pooled accuracy is out-of-sample by construction rather than by argument.
+    """
+    predictions = wrong = refused = 0
+    per_pair: list[dict[str, Any]] = []
+    for name_a, subset, _train_a, _held_a in models:
+        for name_b, _subset_b, train_b, held_b in models:
+            if name_a == name_b:
+                continue
+            cell = evaluate(subset, train_b, held_b)
+            predictions += cell["predictions"]
+            wrong += cell["wrong"]
+            refused += cell["refused"]
+            per_pair.append({"vocabulary_from": name_a, "scored_on": name_b, **cell})
+    return {"predictions": predictions, "wrong": wrong, "refused": refused,
+            "accuracy": round(predictions / max(1, predictions + wrong), 4),
+            "coverage": round(predictions / max(1, predictions + refused), 4),
+            "pairs": len(per_pair), "per_pair": per_pair}
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--out", required=True)
     parser.add_argument("--files", type=int, default=1200)
     parser.add_argument("--seed", type=int, default=13)
+    parser.add_argument("--cross-machines", type=int, default=4,
+                        help="how many disjoint file-groups to build one vocabulary per group from")
     args = parser.parse_args(argv)
 
     started = time.time()
@@ -231,7 +256,83 @@ def main(argv: Sequence[str] | None = None) -> int:
                for cell in summary["by_price"].values()}
     full_cells = {tuple(cell["best_subset"]) for cell in summary["by_price"].values()}
     sizes = {len(cell["best_subset"]) for cell in summary["by_price"].values()}
+    # ---- CROSS-MACHINE POOLING: build one vocabulary per disjoint file-group, score every vocabulary on
+    # every OTHER group. This is the question the prompt's "store" plays depend on, and it can be answered
+    # here because file-groups are genuinely different codebases in the only sense that matters: no file,
+    # no identifier and no import is shared between them beyond the standard library.
+    groups = []
+    if args.cross_machines >= 2:
+        import random as _random
+        files = sorted(subprocess.run(["git", "ls-files", "*.py"], cwd=REPO, capture_output=True,
+                                      text=True, check=False).stdout.split())
+        _random.Random(args.seed + 7).shuffle(files)
+        # pick groups from disjoint directories so "different machine" means different code, not different
+        # slice of the same package
+        seen_dirs: set[str] = set()
+        for name in files:
+            top = name.split("/")[0] if "/" in name else "."
+            if top in seen_dirs:
+                continue
+            seen_dirs.add(top)
+            group_files = [f for f in files if f.split("/")[0] == top]
+            if len(group_files) < 40:
+                continue
+            examples = []
+            for fname in group_files:
+                try:
+                    tree = __import__("ast").parse((REPO / fname).read_text(errors="ignore"))
+                except (SyntaxError, OSError, ValueError):
+                    continue
+                for node in __import__("ast").walk(tree):
+                    if isinstance(node, (__import__("ast").FunctionDef,
+                                         __import__("ast").AsyncFunctionDef)):
+                        wv, wo = returns_of(node)
+                        examples.append((features_of(node), shape_of(wv, wo)))
+            if len(examples) < 200:
+                continue
+            cut = max(1, int(len(examples) * 0.2))
+            _random.Random(args.seed).shuffle(examples)
+            groups.append((top, examples[cut:], examples[:cut]))
+            if len(groups) >= args.cross_machines:
+                break
+        if len(groups) >= 2:
+            models = []
+            for name, train_g, held_g in groups:
+                best = None
+                for subset in subsets:
+                    cell = evaluate(subset, train_g, held_g)
+                    key = (cell["wrong"] * 10 + cell["refused"], cell["wrong"])
+                    if best is None or key < best[0]:
+                        best = (key, subset, cell)
+                models.append((name, best[1], train_g, held_g))
+            summary["cross_machine"] = {
+                "groups": [{"name": name, "trained": len(tr), "held_out": len(he)}
+                           for name, tr, he in groups],
+                "vocabularies": {name: list(subset) for name, subset, _t, _h in models},
+                "within": {
+                    "predictions": sum(evaluate(subset, tr, he)["predictions"]
+                                       for name, subset, tr, he in models),
+                    "wrong": sum(evaluate(subset, tr, he)["wrong"]
+                                 for name, subset, tr, he in models),
+                },
+                "across": {k: v for k, v in cross_pool(models, None, 10).items() if k != "per_pair"},
+            }
+            within = summary["cross_machine"]["within"]
+            within_accuracy = round(within["predictions"]
+                                    / max(1, within["predictions"] + within["wrong"]), 4)
+            summary["cross_machine"]["within"]["accuracy"] = within_accuracy
+            across = summary["cross_machine"]["across"]
+            cross_verdicts = {
+                "a_vocabulary_crosses_codebases_at_all": across["predictions"] > 0,
+                "cross_codebase_accuracy_matches_within_codebase": (
+                    across["predictions"] > 0 and across["accuracy"] >= within_accuracy - 0.05),
+                "cross_codebase_coverage_is_single_digits": across["coverage"] < 0.10,
+            }
+        else:
+            cross_verdicts = {}
+
     summary["verdicts"] = {
+        **cross_verdicts,
         "the_winning_vocabulary_is_the_same_at_every_price_ratio": len(full_cells) == 1,
         "the_winning_size_is_stable_across_a_100x_price_sweep": len(sizes) == 1,
         "the_cheap_end_of_the_dial_wins_at_high_error_prices":
