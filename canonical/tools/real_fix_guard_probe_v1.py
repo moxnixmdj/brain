@@ -301,6 +301,158 @@ def environments(records: Sequence[Mapping[str, Any]],
 
 
 # --------------------------------------------------------------------------- #
+# literal repair inside an EXISTING guard
+# --------------------------------------------------------------------------- #
+#
+# Measured on this corpus: for 7 of the 27 tasks that state a raise requirement
+# the `raise <Exc>` is ALREADY PRESENT in the target function and does not fire.
+# So the repair is not an insertion -- it is the guard's own predicate, and
+# usually a LITERAL inside it or inside a module-level constant it names.
+#
+# canonicalize_name is the clean case, and the reason this is a bug CLASS rather
+# than a pattern: its guard is
+#     if validate and not _validate_regex.match(name):
+# with `_validate_regex = re.compile(r"^[-_.A-Za-z0-9]+$")`, and the test demands
+# that "hi\n" be rejected. In Python `$` matches immediately before a trailing
+# newline, so "hi\n" is accepted. The repair is `$` -> `\Z`. Nothing else
+# changes: every good name still matches.
+#
+# The search is therefore: find the guard, follow the names in its condition to
+# the module-level constants they come from, mutate the literals there, and let
+# the real test choose. No corpus of fixes, no model.
+
+#: regex-boundary repairs, in priority order. These are semantic, not textual:
+#: each one changes which strings a pattern accepts at a boundary.
+REGEX_BOUNDARY = (
+    ("dollar_to_Z", "$", r"\Z"),
+    ("Z_to_dollar", r"\Z", "$"),
+    ("anchor_start_add", None, "^"),
+    ("anchor_start_drop", "^", ""),
+    ("plus_to_star", "+", "*"),
+    ("star_to_plus", "*", "+"),
+)
+
+
+def _literal_mutations(value: str) -> list[tuple[str, str]]:
+    """(kind, replacement) for one string literal, from the language's semantics."""
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+
+    def add(kind: str, text: str) -> None:
+        if text != value and text not in seen:
+            seen.add(text)
+            out.append((kind, text))
+
+    for kind, old, new in REGEX_BOUNDARY:
+        if old is None:
+            if not value.startswith("^") and value:
+                add(kind, "^" + value)
+            continue
+        if old in value:
+            add(kind, value.replace(old, new))
+            add(kind + "_all", value.replace(old, new, 1))
+    # a trailing newline is the single most common boundary bug in this class
+    if value.endswith("\n"):
+        add("drop_trailing_newline", value[:-1])
+    return out
+
+
+def guard_node(tree: ast.AST, function: str, exc: str) -> ast.If | None:
+    """The `if` inside `function` whose body raises `exc`."""
+    exc_name = exc.split(".")[-1]
+    for fn in ast.walk(tree):
+        if not isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)) or fn.name != function:
+            continue
+        for node in ast.walk(fn):
+            if not isinstance(node, ast.If):
+                continue
+            for st in ast.walk(node):
+                if isinstance(st, ast.Raise) and st.exc is not None:
+                    if exc_name in ast.unparse(st.exc):
+                        return node
+    return None
+
+
+def condition_names(node: ast.AST) -> list[str]:
+    return [n.id for n in ast.walk(node) if isinstance(n, ast.Name)]
+
+
+def module_assignments(tree: ast.AST, names: Sequence[str]) -> dict[str, ast.Assign]:
+    """`NAME = ...` at module level, for the names the guard's condition uses."""
+    want = set(names)
+    out: dict[str, ast.Assign] = {}
+    for node in tree.body if isinstance(tree, ast.Module) else ast.walk(tree):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                if isinstance(target, ast.Name) and target.id in want:
+                    out[target.id] = node
+    return out
+
+
+def _string_literals(node: ast.AST) -> list[ast.Constant]:
+    return [n for n in ast.walk(node)
+            if isinstance(n, ast.Constant) and isinstance(n.value, str) and n.value]
+
+
+def _emit_literal(segment: str, replacement: str) -> str:
+    """Render `replacement` preserving the original literal's raw-ness.
+
+    `repr()` alone drops the `r` prefix, so a raw-string repair comes out as a
+    plain string with doubled backslashes. That is semantically identical but it
+    puts quoting churn in the diff and hides that the change is one character.
+    """
+    if segment[:1] in ("r", "R"):
+        for q in ('"', "'"):
+            if q not in replacement:
+                return f"r{q}{replacement}{q}"
+        return "r" + repr(replacement)
+    return repr(replacement)
+
+
+def _replace_span(source: str, node: ast.AST, replacement: str) -> str | None:
+    """Replace one literal's exact source span, preserving its raw-ness."""
+    lines = source.splitlines(keepends=True)
+    try:
+        sl, sc = int(node.lineno), int(node.col_offset)
+        el, ec = int(node.end_lineno), int(node.end_col_offset)
+    except (AttributeError, TypeError, ValueError):
+        return None
+    if not (1 <= sl <= el <= len(lines)):
+        return None
+    head = lines[sl - 1][:sc]
+    tail = lines[el - 1][ec:]
+    segment = ast.get_source_segment(source, node) or ""
+    return "".join(lines[: sl - 1] + [head + _emit_literal(segment, replacement) + tail]
+                   + lines[el:])
+
+
+def literal_candidates(before: str, function: str, exc: str,
+                       limit: int = 120) -> list[tuple[str, str]]:
+    """Every literal reachable from the guard, each with its language-derived repairs."""
+    try:
+        tree = ast.parse(before)
+    except SyntaxError:
+        return []
+    guard = guard_node(tree, function, exc)
+    if guard is None:
+        return []
+    sites: list[tuple[str, ast.AST]] = [("guard", guard)]
+    for name, assign in module_assignments(tree, condition_names(guard)).items():
+        sites.append((f"const:{name}", assign))
+
+    out: list[tuple[str, str]] = []
+    for where, node in sites:
+        for lit in _string_literals(node):
+            for kind, replacement in _literal_mutations(lit.value):
+                patched = _replace_span(before, lit, replacement)
+                if patched and patched != before:
+                    out.append((f"literal:{where}:{kind}:{lit.value!r}->{replacement!r}", patched))
+                    if len(out) >= limit:
+                        return out
+    return out
+
+
+# --------------------------------------------------------------------------- #
 # insertion
 # --------------------------------------------------------------------------- #
 
@@ -407,6 +559,46 @@ def probe(o: Oracle, t: Mapping[str, Any], *, budget: int = 256) -> dict[str, An
     return {**out, "verdict": "GUARD_DOES_NOT_SATISFY_THE_TEST", "expression": expr}
 
 
+def probe_literal(o: Oracle, t: Mapping[str, Any]) -> dict[str, Any]:
+    """Repair the LITERAL inside a guard that already exists.
+
+    The test names the exception; that identifies the guard. The guard's
+    condition names constants; those hold the literals. The real test chooses.
+    """
+    node = t["failed_nodes"][0]
+    test_file, _, test_name = node.partition("::")
+    out: dict[str, Any] = {"node": node}
+    req = requirement((o.path / test_file).read_text(encoding="utf-8"), test_name)
+    if req is None:
+        return {**out, "verdict": "NOT_A_GUARD_TASK"}
+    fn = target_in_source(t["before"], [req["call"]] if req.get("call") else [])
+    if not fn:
+        return {**out, "verdict": "NO_TARGET_FUNCTION", "requirement": req}
+    out.update({"requirement": req, "function": fn})
+
+    cands = literal_candidates(t["before"], fn, req["exc"])
+    out["candidates"] = len(cands)
+    if not cands:
+        return {**out, "verdict": "NO_LITERAL_REACHABLE"}
+
+    base = o.fail_set([test_file])
+    tried = 0
+    for kind, patched in cands:
+        tried += 1
+        o.write_source(t["source"], patched)
+        if not o.test(t["failed_nodes"])["passed"]:
+            continue
+        cand_fail = o.fail_set([test_file])
+        if cand_fail <= base:
+            o.write_source(t["source"], t["before"])
+            return {**out, "verdict": "REPAIRED", "expression": kind,
+                    "tried": tried, "file_subset_ok": True}
+        out["broke_own_file"] = kind
+        break
+    o.write_source(t["source"], t["before"])
+    return {**out, "verdict": "NO_LITERAL_REPAIRS_THE_TEST", "tried": tried}
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--corpus", default=str(CORPUS))
@@ -415,6 +607,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--offset", type=int, default=0)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--mode", default="guard", choices=["guard", "literal"])
     ns = ap.parse_args(argv)
 
     idxs = json.loads(pathlib.Path(ns.well_formed).read_text())[ns.offset:]
@@ -435,7 +628,7 @@ def main(argv: list[str] | None = None) -> int:
         o = oracles[slug]
         o.checkout(t["sha"])
         o.write_source(t["source"], t["before"])
-        res = probe(o, t)
+        res = probe_literal(o, t) if ns.mode == "literal" else probe(o, t)
         if res["verdict"] == "NOT_A_GUARD_TASK":
             continue
         res.update({"idx": i, "repo": slug, "sha": t["sha"][:10], "source": t["source"]})

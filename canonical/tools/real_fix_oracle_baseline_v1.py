@@ -108,11 +108,19 @@ class Oracle:
                                 "flit_core", "hatchling", "setuptools", "wheel",
                                 "poetry-core"],
                                check=False, capture_output=True, timeout=1200)
+                subprocess.run(["git", "checkout", "-f", "HEAD"], cwd=str(self.path),
+                               check=False, capture_output=True, timeout=600)
                 r = subprocess.run([self.py, "-m", "pip", "install", "-q", "-e", str(self.path)],
                                    capture_output=True, text=True, timeout=1800)
                 steps["install_rc"] = r.returncode
                 if r.returncode != 0:
                     steps["install_error"] = (r.stderr or r.stdout)[-400:]
+                # a --no-checkout clone has an EMPTY worktree, so `pip install -e .`
+                # cannot find pyproject.toml and the editable install fails
+                # silently -- every task then becomes ORACLE_DISAGREES for the
+                # wrong reason.  Populate the tree first.
+                subprocess.run(["git", "checkout", "-f", "HEAD"], cwd=str(self.path),
+                               check=False, capture_output=True, timeout=600)
                 steps["venv"] = True
             else:
                 steps["venv"] = False
