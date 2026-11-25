@@ -256,3 +256,49 @@ Rejected in this round, with reasons:
 - *Loosening the "whole suite must pass" acceptance to "the failing test now passes"* — measured on
   pluggy@8051a4d: the guard passes its target test and the commit is still broken, which is precisely the
   regression class the strict gate catches.
+
+## Round V4 — a test that states two contracts now gets both statements, in the order that decides the exception
+
+**What changed, in three parts, each forced by a measurement.**
+
+1. *Composition inside one test scope.* Contracts are grouped by the test function that states them, and a
+   scope's contracts are enforced **together** (`itertools.product` over that scope's guard families), instead of
+   one at a time. Contracts from different tests are still offered as singles.
+2. *Repo-native predicates, ranked by the contract's own words.* For a contract whose call argument is an object
+   (`pm.unregister(my)` → `ValueError("not registered")`), no literal exists, so the guard must come from the
+   repository: same-class methods of arity one. Predicates are ranked by token overlap between the method name and
+   the contract's expected message — `is_registered` ∩ *not registered* = 1 token, `add_hookspecs` = 0 — and every
+   predicate is also offered **conditioned** on another parameter being absent (`name is None and not …`), because
+   on a method with an optional selector the predicate is only true of one path.
+3. *Order is semantic.* The guard that calls nothing (`plugin is None and name is None`) is placed before any guard
+   that calls a sibling. Whoever runs first decides which exception `unregister()` raises, and only the
+   arity error is the contract.
+
+**What it earned on the blind benchmark: one commit.**
+
+| commit | before | after | note |
+|---|---|---|---|
+| pluggy@8051a4d | OPEN, 24 candidates, 19.8 s | **REPAIRED**, `VERIFIED__SPEC_CONTRACT_GUARD`, **1 candidate, 4.87 s** | `if plugin is None and name is None: raise TypeError("one of name or plugin")` then `if name is None and not self.is_registered(plugin): raise ValueError("not registered")` |
+| pyjwt@5fde08a | REPAIRED (2) | **would have regressed** → REPAIRED (8) | the new pass spent the whole candidate budget before the CEGIS pass could run; capped at `min(8, max_candidates//4)` |
+| the 9 previously verified | REPAIRED | **9/9 still REPAIRED** | re-run one by one under the new ordering, 0 regressions |
+| pluggy@50585e0, click@fc518e4, cJSON@9d1b229086, more-itertools@c629214 | OPEN | still OPEN | not contract-shaped failures |
+
+Tally: **10/13 graded (76.92%)**, 20 graded commits, 2 env-blocked, 0 regressions, causal suite `10 passed in 49.10 s`.
+
+**Correction of the previous round's diagnosis, recorded because it was wrong.** Round V3 claimed the second
+missing statement was a type guard in `register` for `pm.register(42, name='abc')`. Re-mining the fix commit's own
+tests shows `test_register` states **both** contracts on **`unregister`** — `unregister()` → `TypeError("one of name
+or plugin")` and `unregister(my)` → `ValueError("not registered")`. The earlier note pointed at the wrong method,
+which is why "compose the contracts of one test" — not "add a type-guard family" — was the mechanism that closed it.
+
+**Rejected in this round, with reasons.**
+- *Special-casing pluggy* (`if the method is named unregister …`) — the same patch shape appears in any optional-selector
+  API; the four failed proposals before the ordering fix show the search is what has to be right.
+- *Dropping predicates that score zero but look plausible* (`set_blocked`, `add_hookspecs`) — they are kept as
+  later candidates; the budget, not a rule, is what excludes them.
+- *Letting the spec pass own the candidate budget* — measured regression, not a precaution.
+
+**The next bottleneck, from the evidence.** Ten graded commits remain OPEN and none of them fails on an unraised
+exception. Their tests assert on a returned value, a log line, or post-call state, so `pytest.raises` mining is
+blind there. The next minable observable is the **assertion's own comparison** — the call under test and both sides
+of `==` / `is None` / `in` — and the family it needs is a value substitution, not a raise.

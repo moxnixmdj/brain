@@ -985,9 +985,10 @@ def test_spec_contract_guard_from_the_tests_own_raises(tmp_path: pathlib.Path) -
     )
     cpg = build_project_cpg(repo)
     guards = spc.synthesize_spec_guards(repo, cpg, [(repo / "tests" / "test_pm.py").read_text()])
-    assert len(guards) == 1
+    # The boundary literal leads; the repo-predicate variants are later candidates, not peers of it.
+    assert guards
     tag, fn_name, fn_cpg, patched = guards[0]
-    assert fn_name == "register" and "plugin is None" in tag
+    assert fn_name == "register" and "plugin is None" in tag and "self." not in tag
     text = patched.decode()
     assert "if plugin is None:" in text and 'raise TypeError("plugin must not be None")' in text
 
@@ -1007,3 +1008,73 @@ def test_spec_contract_guard_from_the_tests_own_raises(tmp_path: pathlib.Path) -
     assert result.status == "VERIFIED__SPEC_CONTRACT_GUARD"
     assert "plugin is None" in (result.mechanism or "")
     assert "if plugin is None:" in next(iter(result.patched_files.values()))
+
+
+def test_spec_contract_guard_set_is_composed_and_ordered(tmp_path: pathlib.Path) -> None:
+    """Two contracts in one test are one patch, and the guard that calls nothing runs first.
+
+    `unregister()` and `unregister(obj)` are two different demands on the same method. Enforcing
+    them separately can never pass, because the predicate guard answers *both* calls. The order is
+    semantic, not cosmetic: whichever guard runs first decides which exception the zero-argument
+    call raises.
+    """
+    from canonical.swe_kernel import causal_nexus_v1 as nx
+    from canonical.swe_kernel import spec_contract_synthesis_v1 as spc
+    from canonical.swe_kernel.semantic_causal_engine_v1 import build_project_cpg
+
+    repo = tmp_path / "compose_repo"
+    (repo / "pkg").mkdir(parents=True)
+    (repo / "tests").mkdir(parents=True)
+    (repo / "pkg" / "__init__.py").write_text("")
+    (repo / "pkg" / "pm.py").write_text(
+        "class PluginManager:\n"
+        "    def __init__(self):\n"
+        "        self._plugins = set()\n\n"
+        "    def register(self, plugin):\n"
+        "        self._plugins.add(plugin)\n"
+        "        return plugin\n\n"
+        "    def is_registered(self, plugin):\n"
+        "        return plugin in self._plugins\n\n"
+        "    def unregister(self, plugin=None, name=None):\n"
+        "        return None\n"
+    )
+    (repo / "tests" / "test_pm.py").write_text(
+        "import pytest\n"
+        "from pkg.pm import PluginManager\n\n"
+        "def test_unregister_states_both_contracts():\n"
+        "    pm = PluginManager()\n"
+        "    with pytest.raises(TypeError, match=\"one of name or plugin\"):\n"
+        "        pm.unregister()\n"
+        "    with pytest.raises(ValueError, match=\"not registered\"):\n"
+        "        pm.unregister(object())\n\n"
+        "def test_register_ok():\n"
+        "    pm = PluginManager()\n"
+        "    obj = object()\n"
+        "    assert pm.register(obj) is obj\n"
+    )
+    cpg = build_project_cpg(repo)
+    guards = spc.synthesize_spec_guards(repo, cpg, [(repo / "tests" / "test_pm.py").read_text()])
+    assert guards, "two co-required contracts must produce a composed proposal"
+    tag, fn_name, _fn_cpg, patched = guards[0]
+    assert fn_name == "unregister"
+    body = patched.decode()
+    nullity = body.index("if plugin is None and name is None:")
+    predicate = body.index("if name is None and not self.is_registered(plugin):")
+    assert nullity < predicate, "the guard that calls nothing must run before the predicate guard"
+    assert "SPEC_CONTRACT_SET" in tag
+
+    store_dir = pathlib.Path(tempfile.mkdtemp(prefix="spec-set-e2e-", dir=str(tmp_path)))
+    result = repair_project_causally(
+        repo,
+        [sys.executable, "-m", "pytest", "-q", "tests/test_pm.py"],
+        law_store=CausalLawStore(store_dir / "laws.json"),
+        skill_store=nx.SkillStoreV2(store_dir / "skills.json"),
+        invariant_store=nx.NegativeInvariantStore(store_dir / "invs.json"),
+        origin="spec_set_e2e",
+        max_sites=12,
+        max_candidates=16,
+    )
+    assert result.repaired is True, result.status
+    assert result.status == "VERIFIED__SPEC_CONTRACT_GUARD"
+    text = next(iter(result.patched_files.values()))
+    assert "one of name or plugin" in text and "not registered" in text

@@ -4175,8 +4175,10 @@ def repair_project_causally(
         # 3.4 Specification-contract pass — the test's own `pytest.raises` is the missing contract.
         #
         # A `DID NOT RAISE` failure has no wrong expression to blame: the program is missing a
-        # statement. The test states which exception it expects, for which call, on which argument;
-        # that is a specification, and the guard that enforces it is one line.
+        # statement. The test states which exception it expects, for which call, and with which
+        # argument; the guard that enforces it is one line. Guards accumulate: a guard that strictly
+        # shrinks the failing set is kept and the next one is stacked on top, because a real commit
+        # often states two contracts in the same method.
         spec_module = None
         if is_pytest:
             try:
@@ -4191,42 +4193,96 @@ def repair_project_causally(
                 if rel and rel not in seen_paths and (root / rel).is_file():
                     seen_paths.add(rel)
                     test_sources.append((root / rel).read_text(encoding="utf-8", errors="replace"))
-            for guard_sel in spec_module.synthesize_spec_guards(root, cpg, test_sources):
-                if evaluated >= max_candidates:
+            active_guards: dict[tuple[str, str], list[str]] = {}
+            active_tags: list[str] = []
+            cur_failed = set(initial_failed_nodes)
+
+            def _compose_guard_overrides() -> dict[str, bytes] | None:
+                files: dict[str, dict[str, bytes]] = {}
+                for (rel, _fname) in active_guards:
+                    files.setdefault(rel, {})
+                for (rel, _fname), _gtexts in active_guards.items():
+                    files.setdefault(rel, {})
+                per_rel: dict[str, bytes] = {}
+                for rel in files:
+                    per_rel[rel] = _raw_of(rel)
+                for (rel, fname), gtexts in active_guards.items():
+                    site = None
+                    for fn_cpg in cpg.functions.get(fname, []):
+                        if fn_cpg.rel_path != rel:
+                            continue
+                        site = next((st for st in fn_cpg.sites if st.kind == "func_body"), None)
+                        if site is not None:
+                            break
+                    if site is None:
+                        return None
+                    per_rel[rel] = _apply_site_patch(per_rel[rel], site, "".join(gtexts) + site.source_text)
+                for rel, raw in per_rel.items():
+                    if not _syntactically_valid(raw, "python", _raw_of(rel)):
+                        return None
+                return per_rel
+
+            # A quarter of the budget, never more than 8: test-stated contracts are a *cheap*
+            # first hypothesis, not the whole search. Spending the budget here starves the
+            # later UIR/nexus passes and turns a repair into an exhaustion (`pyjwt@5fde08a`).
+            spec_budget = min(8, max(2, max_candidates // 4))
+            spec_spent = 0
+            for guard_sel in spec_module.synthesize_spec_guards(
+                root, cpg, test_sources, max_candidates=24, prioritize=tuple(initial_failed_nodes),
+            ):
+                if evaluated >= max_candidates or spec_spent >= spec_budget:
                     break
+                spec_spent += 1
                 g_tag, g_fn, g_fn_cpg, g_patched = guard_sel
-                evaluated += 1
-                if not _verify_candidate({g_fn_cpg.rel_path: g_patched}):
+                body_site = next((st for st in g_fn_cpg.sites if st.kind == "func_body"), None)
+                if body_site is None:
                     continue
-                if skill_store is not None:
-                    body_site = next((st for st in g_fn_cpg.sites if st.kind == "func_body"), None)
-                    if body_site is not None:
-                        patched_body = g_patched[
-                            body_site.start_byte:
-                            len(g_patched) - (len((root / g_fn_cpg.rel_path).read_bytes()) - body_site.end_byte)
-                        ].decode("utf-8", errors="replace")
+                guard_text = g_patched[body_site.start_byte:
+                                       body_site.start_byte + (len(g_patched) - len(_raw_of(g_fn_cpg.rel_path)))]
+                key = (g_fn_cpg.rel_path, g_fn)
+                trial = {k: list(v) for k, v in active_guards.items()}
+                trial.setdefault(key, []).append(guard_text.decode("utf-8", errors="replace"))
+                saved = active_guards
+                active_guards = trial
+                overrides = _compose_guard_overrides()
+                if overrides is None:
+                    active_guards = saved
+                    continue
+                evaluated += 1
+                ok_full, _, out_full = _run_suite_in_scratch(root, norm_test_cmd, overrides)
+                if ok_full:
+                    final_tag = "+".join([*active_tags, g_tag])
+                    if skill_store is not None:
                         try:
                             skill_store.learn(
-                                body_site.source_text, patched_body, origin=origin,
-                                diagnostic_class="SPEC_CONTRACT_GUARD",
+                                body_site.source_text,
+                                "".join(active_guards[key]) + body_site.source_text,
+                                origin=origin, diagnostic_class="SPEC_CONTRACT_GUARD",
                             )
                         except Exception:
                             pass
-                patched_str = g_patched.decode("utf-8")
-                if apply_in_place:
-                    (root / g_fn_cpg.rel_path).write_bytes(g_patched)
-                return CausalRepairResult(
-                    repaired=True,
-                    status="VERIFIED__SPEC_CONTRACT_GUARD",
-                    rel_path=g_fn_cpg.rel_path,
-                    func_name=g_fn,
-                    mechanism=g_tag,
-                    patched_files={g_fn_cpg.rel_path: patched_str},
-                    causal_chain=[f"{g_fn_cpg.rel_path}:{g_fn}"],
-                    candidates_evaluated=evaluated,
-                    elapsed_ms=round((time.perf_counter_ns() - t0) / 1e6, 2),
-                    baseline_failure_excerpt=base_out[-400:],
-                )
+                    if apply_in_place:
+                        for rel, raw in overrides.items():
+                            (root / rel).write_bytes(raw)
+                    return CausalRepairResult(
+                        repaired=True,
+                        status="VERIFIED__SPEC_CONTRACT_GUARD",
+                        rel_path=g_fn_cpg.rel_path,
+                        func_name=g_fn,
+                        mechanism=final_tag,
+                        patched_files={rel: raw.decode("utf-8") for rel, raw in overrides.items()},
+                        causal_chain=[f"{g_fn_cpg.rel_path}:{g_fn}"],
+                        candidates_evaluated=evaluated,
+                        elapsed_ms=round((time.perf_counter_ns() - t0) / 1e6, 2),
+                        baseline_failure_excerpt=base_out[-400:],
+                    )
+                reg_nodes = _extract_pytest_failed_nodes(out_full)
+                shrinks = 0 < len(reg_nodes) < len(cur_failed) and set(reg_nodes).issubset(cur_failed)
+                if shrinks:
+                    active_tags.append(g_tag)
+                    cur_failed = set(reg_nodes)
+                else:
+                    active_guards = saved
 
         # 3.5 Causal Nexus pass — expected-value abduction + single-site counterfactual proof.
         #
