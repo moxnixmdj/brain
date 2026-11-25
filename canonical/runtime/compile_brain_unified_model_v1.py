@@ -876,15 +876,22 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
 _IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
 
 
-def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
-    """Index the runtime modules the model can *address* but cannot *execute*.
+# Roots whose Python is real project source an operator may need to find.
+# ``tests`` is scanned for the reverse-import graph above but is not offered as
+# addressable source: it is the oracle, and indexing it would let a goal be
+# answered with the test that is supposed to judge the answer.
+_SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel")
 
-    Measured, the capability registry reaches 291 of 2189 ``canonical/runtime``
-    modules. The honest response is not to promote the other 1898 to
-    capabilities -- only 407 of them are entry points, 39 are internal helpers
-    and 1452 are imported by nobody, so calling them capabilities would claim
-    execution that has never been observed. It is equally wrong to leave them
-    invisible, because they are real source an operator may need to find.
+
+def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+    """Index the source modules the model can *address* but cannot *execute*.
+
+    Measured, the capability registry reaches 395 of the 2627 modules under the
+    scanned source roots. The honest response is not to promote the rest to
+    capabilities -- most are entry scripts or helpers that no receipt ever
+    exercised, so calling them capabilities would claim execution that has
+    never been observed. It is equally wrong to leave them invisible, because
+    they are real source an operator may need to find.
 
     So this records them as *source*, with the distinction made explicit on
     every row: ``capability: false`` and a ``classification`` that says what the
@@ -892,6 +899,7 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     """
     # One reverse-import graph over the tree, so "imported by nobody" is a
     # measured fact rather than a guess.
+    _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
     py_files: list[Path] = []
     for name in ("canonical", "tests"):
@@ -909,62 +917,78 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
             importers.setdefault(mod.split(".")[0], set()).add(path.as_posix())
 
     rows: list[dict[str, Any]] = []
-    runtime_root = root / "canonical" / "runtime"
-    for path in sorted(runtime_root.rglob("*.py")):
-        if ".git" in path.parts:
+    # Every source root, not only ``canonical/runtime``. Measured before this
+    # change: ``find_source`` located 0 of 8 of the project's own SWE-kernel
+    # modules -- the 204 files that contain the repair, CEGIS and epistemic-loop
+    # machinery -- because the scan was hard-coded to one directory. The model
+    # could not answer "where is this?" about the code that implements its own
+    # solver. Scanning only ``runtime`` was never a decision the laws asked for;
+    # it was a directory literal that happened to be written first.
+    #
+    # The guarantee is unchanged and still strict: a row here is *addressable
+    # source*, never executable. ``capability`` stays False, ``solve()`` still
+    # cannot select it, and a module that *is* a capability is still excluded by
+    # ``covered`` before it can be indexed as non-executable source.
+    for source_root in _SOURCE_ROOTS:
+        base_dir = root / source_root
+        if not base_dir.is_dir():
             continue
-        rel = path.relative_to(root).as_posix()
-        if rel in covered:
-            continue
-        try:
-            raw = path.read_bytes()
-        except OSError:
-            continue
-        text = raw.decode("utf-8", errors="replace")
-        stem = path.stem
-        is_entry = "__main__" in text
-        n_importers = len(importers.get(stem, set()) - {rel})
-        classification = (
-            "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
-        )
+        for path in sorted(base_dir.rglob("*.py")):
+            if ".git" in path.parts or "__pycache__" in path.parts:
+                continue
+            rel = path.relative_to(root).as_posix()
+            if rel in covered or rel in _seen:
+                continue
+            _seen.add(rel)
+            try:
+                raw = path.read_bytes()
+            except OSError:
+                continue
+            text = raw.decode("utf-8", errors="replace")
+            stem = path.stem
+            is_entry = "__main__" in text
+            n_importers = len(importers.get(stem, set()) - {rel})
+            classification = (
+                "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
+            )
 
-        symbols: list[str] = []
-        summary = ""
-        try:
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore", DeprecationWarning)
-                tree = ast.parse(text)
-            for node in tree.body:
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                    symbols.append(node.name)
-            summary = (ast.get_docstring(tree) or "").strip().splitlines()
-            summary = summary[0][:240] if summary else ""
-        except (SyntaxError, ValueError, UnicodeDecodeError):
-            classification = "UNPARSEABLE"
+            symbols: list[str] = []
+            summary = ""
+            try:
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", DeprecationWarning)
+                    tree = ast.parse(text)
+                for node in tree.body:
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                        symbols.append(node.name)
+                summary = (ast.get_docstring(tree) or "").strip().splitlines()
+                summary = summary[0][:240] if summary else ""
+            except (SyntaxError, ValueError, UnicodeDecodeError):
+                classification = "UNPARSEABLE"
 
-        haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
-        rows.append(
-            {
-                "id": "source:" + rel,
-                "kind": "SOURCE_ADDRESSABLE_MODULE",
-                "path": rel,
-                "sha256": digest_bytes(raw),
-                "classification": classification,
-                # The load-bearing part: addressable is not executable.
-                "capability": False,
-                "executable_entry_point": is_entry,
-                "imported_by_count": n_importers,
-                "symbol_count": len(symbols),
-                "symbols": sorted(symbols)[:24],
-                "summary": summary,
-                # Term *counts*, matching the convention `knowledge` and
-                # `skills` already use, so the runtime can score this index with
-                # the same IDF weighting as `recall`. A flat set of terms made
-                # every row look equally about "v1" -- measured, "v1" occurs in
-                # 1132 of 1859 rows -- which is why raw overlap ranked noise.
-                "terms": _term_counts(haystack),
-            }
-        )
+            haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
+            rows.append(
+                {
+                    "id": "source:" + rel,
+                    "kind": "SOURCE_ADDRESSABLE_MODULE",
+                    "path": rel,
+                    "sha256": digest_bytes(raw),
+                    "classification": classification,
+                    # The load-bearing part: addressable is not executable.
+                    "capability": False,
+                    "executable_entry_point": is_entry,
+                    "imported_by_count": n_importers,
+                    "symbol_count": len(symbols),
+                    "symbols": sorted(symbols)[:24],
+                    "summary": summary,
+                    # Term *counts*, matching the convention `knowledge` and
+                    # `skills` already use, so the runtime can score this index with
+                    # the same IDF weighting as `recall`. A flat set of terms made
+                    # every row look equally about "v1" -- measured, "v1" occurs in
+                    # 1132 of 1859 rows -- which is why raw overlap ranked noise.
+                    "terms": _term_counts(haystack),
+                }
+            )
     return rows
 
 
