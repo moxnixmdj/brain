@@ -1,0 +1,1778 @@
+{
+ "schema": "BRAIN_A_LAW_CARRIES_ITS_REASON_V1",
+ "generated": "2026-11-25T00:00:31Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 38.59
+ },
+ "summary": {
+  "teachers": 9,
+  "pairs": 72,
+  "arms": {
+   "A_own": {
+    "predictions": 88,
+    "wrong": 0,
+    "laws": 0
+   },
+   "B_blind": {
+    "predictions": 336,
+    "wrong": 240,
+    "laws": 0
+   },
+   "C_verified_contrast": {
+    "predictions": 88,
+    "wrong": 0,
+    "laws": 6
+   },
+   "D_verified_existence": {
+    "predictions": 88,
+    "wrong": 0,
+    "laws": 56
+   }
+  },
+  "transfers": {
+   "offered": 272,
+   "accepted_contrast": 6,
+   "accepted_existence": 56
+  },
+  "verdicts": {
+   "the_check_admits_some_transfers": true,
+   "the_check_rejects_most_transfers": true,
+   "verified_transfers_are_sound": true,
+   "verified_transfers_beat_blind_inheritance": true,
+   "checking_the_contrast_beats_checking_existence": true
+  }
+ },
+ "per_pair": [
+  {
+   "teacher": "ARCHIVE2",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "ARCHIVE2",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "FILESYSTEM",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "GIT2",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "JOURNAL",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "LIST",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "SQLITE",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "TARBALL",
+   "student": "VAULT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "ARCHIVE2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "FILESYSTEM",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "GIT",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "B": {
+    "predictions": 5,
+    "wrong": 5,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "GIT2",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "B": {
+    "predictions": 8,
+    "wrong": 8,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "JOURNAL",
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "B": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   },
+   "D": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "LIST",
+   "A": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "B": {
+    "predictions": 21,
+    "wrong": 11,
+    "refused": 35
+   },
+   "C": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   },
+   "D": {
+    "predictions": 10,
+    "wrong": 0,
+    "refused": 46
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "SQLITE",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "teacher": "VAULT",
+   "student": "TARBALL",
+   "A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "D": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  }
+ ]
+}
