@@ -247,6 +247,50 @@ def _is_hole_name(node: ast.AST) -> str | None:
     return None
 
 
+def _holes_of(node: ast.AST) -> set[str]:
+    return {n.id for n in ast.walk(node) if _is_hole_name(n)}
+
+
+def _project_missing_holes(
+    env: dict[str, ast.AST],
+    hole_to_orig: Mapping[str, str] | None,
+    *roots: ast.AST | None,
+) -> None:
+    """Project de novo (after-only) holes from already-bound subtrees.
+
+    A hole that occurs ONLY in the after-pattern has no unification source;
+    it denotes a subtree that was already present elsewhere in the before
+    code (or inside a bound hole, e.g. the receiver inside a bound Call).
+    When exactly one DISTINCT structural form satisfies the origin string we
+    bind it; otherwise the hole stays unbound and the caller fails closed
+    (admission refuses the skill; replay skips the proposal).
+    """
+    for hid, orig_str in (hole_to_orig or {}).items():
+        if hid in env or not orig_str:
+            continue
+        seen: dict[str, ast.AST] = {}
+        for root in (*roots, *env.values()):
+            if root is None:
+                continue
+            for sub in ast.walk(root):
+                if isinstance(sub, (ast.Store,)):
+                    continue
+                try:
+                    s = ast.unparse(sub)
+                except Exception:
+                    continue
+                if s != orig_str:
+                    continue
+                ctx = getattr(sub, "ctx", None)
+                if ctx is not None and not isinstance(ctx, ast.Load):
+                    continue
+                key = _ast_dump_structural(sub)
+                if key not in seen:
+                    seen[key] = sub
+        if len(seen) == 1:
+            env[hid] = copy.deepcopy(next(iter(seen.values())))
+
+
 def _unify_ast(pattern: ast.AST, target: ast.AST, env: dict[str, ast.AST]) -> bool:
     """Structural AST unification with consistent hole bindings."""
     hid = _is_hole_name(pattern)
@@ -548,9 +592,13 @@ def induce_skill_from_verified_fix(
         return None
     b_pat, a_pat, hole_to_orig, hole_to_kind = abstracted
 
-    # Round-trip admission check: pattern MUST unify with b_node and instantiate a_node
+    # Round-trip admission check: pattern MUST unify with b_node (plus
+    # project de novo holes) and instantiate a_node EXACTLY.
     env: dict[str, ast.AST] = {}
     if not _unify_ast(b_pat, b_node, env):
+        return None
+    _project_missing_holes(env, hole_to_orig, b_node)
+    if _holes_of(a_pat) - env.keys():
         return None
     reconstructed = _instantiate_ast(a_pat, env)
     if _ast_dump_structural(reconstructed) != _ast_dump_structural(a_node):
@@ -612,6 +660,7 @@ def induce_skill_from_verified_fix(
         "before_pattern": b_code,
         "after_pattern": a_code,
         "hole_kinds": hole_to_kind,
+        "hole_to_orig": dict(hole_to_orig),
         "hole_dataflow": hole_dataflow,
         "required_hole_traits": required_traits,
         "support_hole_traits": support_traits,
@@ -682,6 +731,9 @@ def propose_from_skills(
         env: dict[str, ast.AST] = {}
         if not _unify_ast(b_pat, target_node, env):
             continue
+        _project_missing_holes(env, skill.get("hole_to_orig") or {}, target_node)
+        if _holes_of(a_pat) - env.keys():
+            continue  # de novo holes unprojectable: fail closed
 
         # Check runtime preconditions on bound holes
         req_traits = skill.get("required_hole_traits") or {}

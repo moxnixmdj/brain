@@ -30,6 +30,44 @@ def test_skill_store_refuses_foreign_identifier_grafting() -> None:
     assert store["skills"] == {}
 
 
+def test_multi_statement_guard_fallback_fix_crystallizes_into_skill() -> None:
+    """Iter 85 ablation criterion: a MULTI-STATEMENT fix (guard-clause deletion
+    plus an adjacent `return` rewrite) must crystallize into an admitted L2 skill —
+    before the de novo hole-projection fix, induce_skill_from_verified_fix returned
+    None for exactly this shape and the engine recorded learned_skill_id=None."""
+    before = (
+        "def compute(item):\n"
+        "    if item.handler is None:\n"
+        "        return None\n"
+        "    name = item.handler\n"
+        "    return name.upper()\n"
+    )
+    after = (
+        "def compute(item):\n"
+        "    name = item.handler\n"
+        "    return name.upper() if name else \"\"\n"
+    )
+    store = SKILL_STORE.new_store()
+    skill = SKILL_STORE.induce_skill_from_verified_fix(
+        store, before_source=before, after_source=after,
+        failure_context={"ast_position": "stmt"},
+    )
+    assert skill is not None
+    assert skill["mode"] == "blk"
+    assert skill["parameters_stored"] == 0
+    assert skill["external_model_dependency"] is False
+    assert skill.get("hole_to_orig"), "de novo hole provenance must be recorded"
+
+    # Admission is idempotent: re-inducing the same verified fix bumps support
+    # instead of minting a near-duplicate skill.
+    again = SKILL_STORE.induce_skill_from_verified_fix(
+        store, before_source=before, after_source=after,
+        failure_context={"ast_position": "stmt"},
+    )
+    assert again is not None and again["skill_id"] == skill["skill_id"]
+    assert int(again["support_count"]) == 2
+
+
 def test_skill_store_save_load_delete_and_refutation_narrowing() -> None:
     store = SKILL_STORE.new_store()
     before = "def f(item):\n    if item.handler:\n        return 1\n    return 0\n"
