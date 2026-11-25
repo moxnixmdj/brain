@@ -59,6 +59,7 @@ MAX_OUTPUT_CHARS = 16000
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 _KERNEL_FILES = (
     "canonical/swe_kernel/angelic_cegis_repair_v1.py",
+    "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
     "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
     "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
@@ -203,7 +204,7 @@ async def _transfer_verified_file(
 def _build_remote_runner_script() -> bytes:
     """Self-contained stdlib-only container runner invoking Brain's zero-model SWE + Terminal-Bench engine."""
     script = '''"""Container-side runner for Project Brain Zero-Model SWE & Terminal-Bench Engine (0 model calls)."""
-import base64, json, pathlib, sys
+import base64, json, pathlib, re, sys
 kernel_root = sys.argv[1]
 repo_root = sys.argv[2]
 test_target = sys.argv[3]
@@ -212,6 +213,7 @@ store_path = sys.argv[5] if len(sys.argv) > 5 and sys.argv[5] else ""
 goal_b64 = sys.argv[6] if len(sys.argv) > 6 and sys.argv[6] else ""
 sys.path.insert(0, kernel_root)
 from canonical.swe_kernel import angelic_cegis_repair_v1 as acr
+from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
 from canonical.swe_kernel import c_asan_cegis_repair_v1 as casan
 from canonical.swe_kernel import js_causal_cegis_repair_v1 as jsc
 from canonical.swe_kernel import universal_computer_agent_v1 as uca
@@ -296,9 +298,47 @@ elif test_target == "__TERMINAL_GOAL__":
     m1_res = {}
     issue_mode_tag = "ISSUE_ONLY_METAMORPHIC_SWE"
     if is_py_repo and not has_terminal_artifact:
-        m1_res = acr.repair_repo_from_issue_zero_leakage(
-            repo_root, goal_text, timeout_s=timeout_s, skill_store=store
+        # First try unified Wall 1 Metamorphic Witness + Wall 2 Type Habitation + Wall 3 Zipper
+        vis_tests = sorted(
+            p.relative_to(repo_p).as_posix()
+            for p in repo_p.rglob("test_*.py")
+            if ".git" not in p.parts and "_brain_metamorphic_witness" not in p.name
         )
+        if vis_tests:
+            # Prefer a visible test file whose name shares tokens with goal_text
+            g_lo = goal_text.lower()
+            ranked_vis = sorted(
+                vis_tests,
+                key=lambda rel: (-sum(1 for tok in re.findall(r"[a-z_]{3,}", pathlib.PurePosixPath(rel).stem.lower()) if tok in g_lo and tok != "test"), len(rel)),
+            )
+            u_res = mhz.repair_repo_unified_zero_model(
+                repo_root,
+                ranked_vis[0],
+                issue_text=goal_text,
+                timeout_s=max(10.0, float(timeout_s) * 0.65),
+                skill_store=store,
+                keep_patch_applied=True,
+            )
+            if u_res.get("repaired"):
+                mfiles = list(u_res.get("modified_files") or [])
+                m1_res = {
+                    "repaired": True,
+                    "method": u_res.get("mechanism") or "METAMORPHIC_HABITATION_ZIPPER_V1",
+                    "rule": u_res.get("description") or u_res.get("mechanism"),
+                    "patched_file": mfiles[0] if mfiles else "",
+                    "patched_files": {rf: (repo_p / rf).read_text(encoding="utf-8", errors="replace") for rf in mfiles if (repo_p / rf).is_file()},
+                    "patched_line": 0,
+                    "failing_nodeid": "",
+                    "learned_morphism_id": (u_res.get("admitted_morphisms") or [u_res.get("morphism_id")])[0] if (u_res.get("admitted_morphisms") or u_res.get("morphism_id")) else None,
+                    "oracle_synthesis": {"metamorphic_witness": u_res.get("metamorphic_witness")},
+                    "reason": None,
+                    "elapsed_ms": int(round(float(u_res.get("elapsed_s", 0.0)) * 1000.0)),
+                    "stats": {"candidates_tested": int(u_res.get("candidates_tested", 0))},
+                }
+        if not m1_res.get("repaired"):
+            m1_res = acr.repair_repo_from_issue_zero_leakage(
+                repo_root, goal_text, timeout_s=timeout_s, skill_store=store
+            )
     elif is_c_repo and not has_terminal_artifact:
         m1_res = casan.repair_c_repo_from_issue_zero_leakage(
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store
@@ -406,28 +446,33 @@ elif test_target == "__TERMINAL_GOAL__":
     print("BRAIN_ZM_SWE_RESULT:" + json.dumps(summary, sort_keys=True, default=str))
 else:
     store = uca.ExternalCausalLawStore(pathlib.Path(store_path)) if store_path else None
-    res = acr.repair_repo_angelic_cegis(repo_root, test_target, timeout_s=timeout_s, skill_store=store)
-    written = []
-    if res.get("repaired"):
-        pf_map = dict(res.get("patched_files") or {})
-        if not pf_map and res.get("patched_file") and res.get("patched_source"):
-            pf_map[str(res["patched_file"])] = str(res["patched_source"])
-        for rel_f, content_s in pf_map.items():
-            (pathlib.Path(repo_root) / rel_f).write_text(str(content_s), encoding="utf-8")
-            written.append(rel_f)
+    goal_text = base64.b64decode(goal_b64.encode("ascii")).decode("utf-8") if goal_b64 else ""
+    u_res = mhz.repair_repo_unified_zero_model(
+        repo_root,
+        test_target,
+        issue_text=goal_text or None,
+        timeout_s=float(timeout_s),
+        skill_store=store,
+        enable_angelic_fallback=True,
+        enable_zipper=True,
+        keep_patch_applied=True,
+    )
+    mfiles = list(u_res.get("modified_files") or [])
+    admitted = list(u_res.get("admitted_morphisms") or [])
+    learned_mid = admitted[0] if admitted else u_res.get("morphism_id")
     summary = {
         "mode": "SWE_BENCH_ZERO_MODEL",
-        "repaired": bool(res.get("repaired")),
-        "method": res.get("method"),
-        "rule": res.get("rule"),
-        "patched_file": res.get("patched_file"),
-        "patched_files_list": sorted(written),
-        "patched_line": res.get("patched_line"),
-        "failing_nodeid": res.get("failing_nodeid"),
-        "learned_morphism_id": res.get("learned_morphism_id"),
-        "reason": res.get("reason"),
-        "elapsed_ms": res.get("elapsed_ms"),
-        "stats": res.get("stats") or {},
+        "repaired": bool(u_res.get("repaired")),
+        "method": u_res.get("mechanism") or "METAMORPHIC_HABITATION_ZIPPER_V1",
+        "rule": u_res.get("description") or u_res.get("mechanism"),
+        "patched_file": mfiles[0] if mfiles else None,
+        "patched_files_list": sorted(mfiles),
+        "patched_line": 0,
+        "failing_nodeid": "",
+        "learned_morphism_id": learned_mid,
+        "reason": u_res.get("reason"),
+        "elapsed_ms": int(round(float(u_res.get("elapsed_s", 0.0)) * 1000.0)),
+        "stats": {"candidates_tested": int(u_res.get("candidates_tested", 0)), "passed": int(u_res.get("passed", 0))},
         "model_dependency_count": 0,
     }
     print("BRAIN_ZM_SWE_RESULT:" + json.dumps(summary, sort_keys=True))
