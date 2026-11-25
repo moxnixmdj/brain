@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "49adf5b9ef514299245c74807ce4388afae9edadaf1f366a36c5975611f8f8d2"
+  "value": "40c6b5d1237438d37b864666cb92fd40c29c85f2507ff13481b8dc005e751633"
  },
  "engines": [
   {
@@ -260789,7 +260789,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SIX_PASS_CAPABILITY_AUDIT_AND_THE_ZIPPER_V1_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0adfc8cec5aa4529ef05a9a1233f938b3c0c0df4ca0c6052eadf638ca626fd97",
+   "sha256": "47dc1256cdb144ac6f49d2326151d14da1514cfbf08b25535bffe48579822ce3",
    "status": "",
    "terms": {
     "1190": 1,

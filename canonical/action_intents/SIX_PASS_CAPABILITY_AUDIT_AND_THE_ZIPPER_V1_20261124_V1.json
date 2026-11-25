@@ -36,7 +36,7 @@
  },
  "benchmark_or_family_rank_authority": false,
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
- "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "capability_credit_delta": 0,
  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -67,7 +67,7 @@
  "measured_effect": "3.9% SWE-bench Verified vs 76.8% frontier; 2/89 blind real commits vs 0 baseline; 6/11 Terminal-Bench self-selected vs 82.7%; 0/10 global ASTRA predicates with 51/51 non-global; 0 of 595 public-runner verifications carry credit; 15 of 19 families route through an external model. Four corpus rows cleared byte-identically.",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
  "recursive_obs": {
-  "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "The 15-row comparison, superseded",
