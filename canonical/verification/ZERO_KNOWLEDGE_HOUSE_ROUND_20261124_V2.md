@@ -704,3 +704,43 @@ inverse, idempotence, aliasing, boundary) where each law names the observable it
 a violation into a candidate assertion for the existing engine. The acceptance test is stated before the build: on the
 same six commits with the hidden test deleted, at least three must produce a violation on the buggy tree and none on
 the fixed tree.
+
+## Round V14 — first repair in this catalogue performed with the test absent
+
+V13's oracle reported violations; it did not repair anything. This round closes the loop, and the loop closes on a
+real commit.
+
+**The chain, on `pluggy@50585e0` with its test file absent from the tree:**
+
+1. The shipped suite is green — 93 probes, and every assertion the repository contains passes.
+2. The oracle manufactures the violation: `PluginManager.unregister` → `list_plugin_distinfo` and
+   `list_plugin_distributions` still yield the object after the call.
+3. The violation becomes a `PostconditionContract(getter="list_plugin_distinfo", mutator="unregister",
+   deleted_arg="plugin")` — no test parsing anywhere in the path.
+4. `state_consistency_candidates` emits 4 purges (`__e[0]`/`__e[1]` × `plugin`/`name`).
+5. The **law** accepts candidate 0:
+   `STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]` — violations after: 0.
+6. Cross-check against the hidden test, which the loop never saw: overlay `testing/test_pluginmanager.py` from
+   `50585e0` onto the patched tree and run it → **220 passed**.
+
+Step 6 matters more than steps 1–5: the law picked, blind, exactly the patch the human test accepts. Two independent
+criteria — a law synthesized from the API's own vocabulary, and the commit's hidden test — agree on the same one-line
+fix, and the law reached it first.
+
+**What is and is not proven.**
+- Proven: the engine can now be driven from *nothing but the repository* on a commit whose defect is a lifecycle
+  violation; no test, no issue text, no model.
+- Not proven: transfer. The law applies to 1 of 6 commits in the blind set (V13 table); the five others have no
+  lifecycle verb in their vocabulary, so the chain has nothing to start from. Breadth is a *law library* problem, and
+  this round does not solve it.
+- Not claimed: any change to the test-present tally, which remains 11/13 = 84.62%. This is a second stream
+  (test-absent), currently **1/6 attempted, 1 repaired**, and it is reported separately so the two cannot be confused.
+
+**Frozen as a test** (`canonical/tests/test_oracle_drives_purge_synthesis_v1.py`, 1 passed): green suite → violation →
+contract → candidate → law accepts, with an assertion that the accepted tag contains the purge and that the shipped
+suite never mentions the defect.
+
+**Next bottleneck.** Breadth of the law library, indexed by defect class, each law naming the observable it constrains
+(lifecycle is done; round-trip inverse, idempotence, aliasing, charset/whitespace canonicality, error-type discipline
+are the measured gaps from the five silent commits), plus a *failure-type* law: on the pyjwt commit the defect is that a
+builtin exception escapes where the library defines its own hierarchy — that is an observable, not a heuristic.

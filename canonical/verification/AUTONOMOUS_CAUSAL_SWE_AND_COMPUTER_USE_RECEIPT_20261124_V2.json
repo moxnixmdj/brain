@@ -385,6 +385,9 @@
    "lines": 318,
    "sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
   },
+  "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
+   "status": "1 passed"
+  },
   "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
    "lines": 932,
    "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
@@ -524,12 +527,27 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Oracle law coverage, indexed by defect class: lifecycle (done), round-trip inverse, idempotence, aliasing, boundary - each naming the observable it constrains - plus the wiring that turns a violation into a candidate assertion for semantic_causal_engine_v1. Acceptance test stated in advance: on the same six commits with the hidden test deleted, at least three must violate on the buggy tree and be silent on the fixed tree.",
+ "next_bottleneck": "Breadth of the law library indexed by defect class: lifecycle (done), round-trip inverse, idempotence, aliasing, charset/whitespace canonicality, and error-type discipline (pyjwt: a builtin escaping where the library defines its own hierarchy is an observable, not a heuristic).",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
  "stored_world_facts_in_weights": 0,
+ "test_absent_stream_v14": {
+  "accepted": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
+  "chain": [
+   "green suite (93 probes)",
+   "oracle violation: unregister -> list_plugin_distinfo/distributions",
+   "PostconditionContract(list_plugin_distinfo, unregister, plugin)",
+   "4 purge candidates",
+   "law accepts candidate 0"
+  ],
+  "commit": "pluggy@50585e0",
+  "cross_check_with_hidden_test": "220 passed (test overlaid only after the patch was chosen)",
+  "setup": "tree at 50585e0^1; the commit's test file is absent",
+  "stream_tally": "1/6 attempted, 1 repaired; breadth limited by law coverage (V13 table)",
+  "unchanged": "test-present tally 11/13 = 84.62%, 0 regressions, K3 = 0"
+ },
  "tests": {
   "causal_suite": "13 passed in 63.09s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
   "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
