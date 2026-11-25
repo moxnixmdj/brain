@@ -102,3 +102,28 @@ oracle.
   no OSWorld or Terminal-Bench number. What exists is a 22/41 un-gated per-task record
   on single-line OSS fixes, with every solve conditional on an oracle that a real
   benchmark never supplies directly.
+
+## No regressions, measured against the human tree, not asserted
+
+A byte-identical patch is not a passing suite, so both were run against the real fixed
+tree as the control. Comparing parent to fixed:
+
+| row | parent (commit^) | fixed (commit) | reading |
+|---|---|---|---|
+| `packaging ba17fcea23` (tests/test_utils.py) | **68 passed** | **70 passed** | +2 are the fix's own `a--b` / `1--1` cases |
+| `urllib3 77fa67aaf2` (test/test_util.py + test/test_retry.py) | **12 failed, 373 passed** | **12 failed, 374 passed** | same 12 failures; +1 is the fix's own test |
+
+The 12 urllib3 failures are identical on both trees — clock-dependent
+`test_respect_retry_after_header_sleep` parametrisations, pre-existing.
+
+Two environment facts, recorded so they are not mistaken for results:
+
+- `test/contrib/test_socks.py` fails to collect on **both** trees (missing `socks`
+  dependency in this venv). An environment gap, not a regression.
+- The full urllib3 suite is **killed (exit 137) at the same 91% point on both trees** by
+  the sandbox memory limit. Pre-existing, symmetric, and therefore not evidence about
+  the patch in either direction.
+
+So the honest statement is: on the test files that exercise the fix and that can run
+here, the patch introduces **zero regressions** and adds exactly the tests the
+maintenance introduced.
