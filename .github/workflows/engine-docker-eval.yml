@@ -173,7 +173,10 @@ jobs:
             fi
             echo "IDS=$GITHUB_WORKSPACE/upstream/v2/hard51_ids.txt" >> "$GITHUB_ENV"
           else
-            head -n 3 upstream/v2/hard51_ids.txt > smoke3_ids.txt
+            # Smoke subset: three qutebrowser tasks -- real Python source, the
+            # smallest images in the HARD-51 set, and same-repo variety for the
+            # memory-ablation arm to have something to differ on.
+            grep -E '^instance_qutebrowser__' upstream/v2/hard51_ids.txt | head -n 3 > smoke3_ids.txt
             echo "IDS=$GITHUB_WORKSPACE/smoke3_ids.txt" >> "$GITHUB_ENV"
           fi
           echo "tasks in this shard run: $(grep -c '' "$IDS")" >> "$GITHUB_STEP_SUMMARY"
