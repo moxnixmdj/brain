@@ -80,7 +80,7 @@
    "repo": "click",
    "commit": "a3321c9ca14ddb951f04ac981f275b0de2f46208",
    "test": "tests/test_shell_completion.py",
-   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "stage": "DEMAND_MET",
    "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_shell_completion.py::test_source_uses_lf_line_endings",
    "site_line": 47,
@@ -92,49 +92,48 @@
    "identify_curve": null,
    "audit": null,
    "table": [],
-   "human_admissible": false,
+   "human_admissible": true,
    "contrast": {
     "rows": 3,
-    "admissible": 0,
-    "masks": {},
-    "human_mask": 3,
-    "human_mask_bits": "0b111"
+    "admissible": 1,
+    "masks": {
+     "7": 1
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
    },
    "frames": 4,
    "table_rows": 0,
-   "space_offered_before_survivors": 87694,
-   "survivors": 0,
-   "survivor_sources": [],
-   "human_expression_rank": null,
-   "verifications": 0,
-   "found": null,
-   "greens": [],
-   "green_count": 0,
-   "found_is_the_human_fix": false,
-   "parameters_stored": 0,
-   "seconds": 20.63,
-   "shift_attempts": [
+   "space_offered_before_survivors": 87666,
+   "survivors": 1,
+   "survivor_sources": [
+    "reference"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "echo(comp.source().encode(), nl=False)",
+    "ring": 0,
+    "source": "reference",
+    "preserves": 3,
+    "in_test_preserves": 0,
+    "mask": "0b111",
+    "tests_green": 54
+   },
+   "greens": [
     {
-     "line": 46,
-     "expression": "instruction == 'source'",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 48,
-     "expression": "0",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 44,
-     "expression": "comp_cls(cli, ctx_args, prog_name, complete_var)",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 50,
-     "expression": "instruction == 'complete'",
-     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
+     "expression": "echo(comp.source().encode(), nl=False)",
+     "rank": -1,
+     "source": "reference",
+     "tests_green": 54
     }
-   ]
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 25.74,
+   "shift_attempts": []
   },
   {
    "repo": "jinja",
@@ -387,8 +386,8 @@
    "repo": "click",
    "commit": "32ae2acd3474a57d2450ea849545b2e1258bf76a",
    "test": "tests/test_shell_completion.py",
-   "stage": "SPEC_DEMAND_FOUND_NOTHING",
-   "demand_provenance": "SPEC_LITERALS",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "BOUND_ASSERTION",
    "failing_test": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
    "site_line": 411,
    "site_finder": "diff_hunk",
@@ -398,50 +397,55 @@
    "count_contrasts": false,
    "identify_curve": null,
    "audit": null,
-   "table": [],
-   "human_admissible": false,
+   "table": [
+    {
+     "node": "tests/test_shell_completion.py::test_choice_case_sensitive[False-expect0]",
+     "relation": "FILTERED_SEQ",
+     "demand": "['au', 'al', 'bc']"
+    }
+   ],
+   "human_admissible": true,
    "contrast": {
     "rows": 12,
-    "admissible": 0,
-    "masks": {},
-    "human_mask": 0,
-    "human_mask_bits": "0b0"
+    "admissible": 1,
+    "masks": {
+     "4095": 1
+    },
+    "human_mask": 12,
+    "human_mask_bits": "0b111111111111"
    },
    "frames": 30,
-   "table_rows": 0,
-   "space_offered_before_survivors": 88974,
-   "survivors": 0,
-   "survivor_sources": [],
-   "human_expression_rank": null,
-   "verifications": 0,
-   "found": null,
-   "greens": [],
-   "green_count": 0,
-   "found_is_the_human_fix": false,
-   "parameters_stored": 0,
-   "seconds": 5.1,
-   "shift_attempts": [
+   "table_rows": 1,
+   "space_offered_before_survivors": 88963,
+   "survivors": 1,
+   "survivor_sources": [
+    "reference"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "[self.normalize_choice(choice, ctx) for choice in self.choices]",
+    "ring": 7,
+    "source": "reference",
+    "preserves": 12,
+    "in_test_preserves": 0,
+    "mask": "0b111111111111",
+    "tests_green": 54
+   },
+   "greens": [
     {
-     "line": 413,
-     "expression": "self.case_sensitive",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 414,
-     "expression": "(c for c in str_choices if c.startswith(incomplete))",
-     "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE"
-    },
-    {
-     "line": 416,
-     "expression": "incomplete.lower()",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 417,
-     "expression": "(c for c in str_choices if c.lower().startswith(incomplete))",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+     "expression": "[self.normalize_choice(choice, ctx) for choice in self.choices]",
+     "rank": -1,
+     "source": "reference",
+     "tests_green": 54
     }
-   ]
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 7.55,
+   "shift_attempts": []
   },
   {
    "repo": "click",
@@ -636,7 +640,7 @@
    "repo": "attrs",
    "commit": "13105a64f2de2e257a537ad20c06ffdd1c9d7f94",
    "test": "tests/test_converters.py",
-   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "stage": "DEMAND_MET",
    "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_converters.py::TestConverter::test_falsey_converter",
    "site_line": 2024,
@@ -648,49 +652,48 @@
    "identify_curve": null,
    "audit": null,
    "table": [],
-   "human_admissible": false,
+   "human_admissible": true,
    "contrast": {
-    "rows": 2,
-    "admissible": 0,
-    "masks": {},
+    "rows": 0,
+    "admissible": 1,
+    "masks": {
+     "0": 1
+    },
     "human_mask": 0,
     "human_mask_bits": "0b0"
    },
-   "frames": 31,
+   "frames": 27,
    "table_rows": 0,
-   "space_offered_before_survivors": 90351,
-   "survivors": 0,
-   "survivor_sources": [],
-   "human_expression_rank": null,
-   "verifications": 0,
-   "found": null,
-   "greens": [],
-   "green_count": 0,
-   "found_is_the_human_fix": false,
-   "parameters_stored": 0,
-   "seconds": 5.1,
-   "shift_attempts": [
+   "space_offered_before_survivors": 90345,
+   "survivors": 1,
+   "survivor_sources": [
+    "guard"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "a.converter is not None",
+    "ring": 8,
+    "source": "guard",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 11
+   },
+   "greens": [
     {
-     "line": 2025,
-     "expression": "Converter(a.converter)",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 2022,
-     "expression": "'self' if has_factory and a.default.takes_self else ''",
-     "stage": "NO_VALUE_MATCHES"
-    },
-    {
-     "line": 2021,
-     "expression": "isinstance(a.default, Factory)",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
-    },
-    {
-     "line": 2027,
-     "expression": "a.converter",
-     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+     "expression": "a.converter is not None",
+     "rank": -1,
+     "source": "guard",
+     "tests_green": 11
     }
-   ]
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 8.84,
+   "shift_attempts": []
   },
   {
    "repo": "attrs",

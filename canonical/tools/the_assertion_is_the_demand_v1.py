@@ -108,6 +108,10 @@ def {HELPER}(index, thunk):
         raise
     if isinstance(value, list):
         {KEPT}.append(list(value))
+    elif isinstance(value, map):
+        _items = list(value)
+        {KEPT}.append(list(_items))
+        value = iter(_items)
     elif isinstance(value, dict):
         {KEPT}.append(dict(value))
     elif isinstance(value, set):
@@ -340,6 +344,7 @@ def reference_productions(table: list, per_name: int = 40) -> list[str]:
                 except BaseException:
                     continue
                 seq_attrs: list[str] = []
+                norm_methods: list[str] = []
                 for attribute in attributes[:per_name]:
                     text = f"{name}.{attribute}"
                     if text not in made:
@@ -348,6 +353,8 @@ def reference_productions(table: list, per_name: int = 40) -> list[str]:
                         aval = getattr(value, attribute, None)
                         if isinstance(aval, (tuple, list)):
                             seq_attrs.append(attribute)
+                        elif callable(aval) and attribute.startswith(("normalize_", "format_", "convert_")):
+                            norm_methods.append(attribute)
                     except BaseException:
                         pass
                 for a1 in seq_attrs:
@@ -356,6 +363,14 @@ def reference_productions(table: list, per_name: int = 40) -> list[str]:
                             comb = f"{name}.{a1} + {name}.{a2}"
                             if comb not in made:
                                 made.append(comb)
+                    for nm in norm_methods:
+                        if "ctx" in namespace:
+                            comp = f"[{name}.{nm}(choice, ctx) for choice in {name}.{a1}]"
+                            if comp not in made:
+                                made.append(comp)
+                        comp1 = f"[{name}.{nm}(choice) for choice in {name}.{a1}]"
+                        if comp1 not in made:
+                            made.append(comp1)
     return made[:2000]
 
 
@@ -753,13 +768,16 @@ def evaluate(expression: str, locals_by_frame: list[dict[str, Any]]) -> list[Any
         code = _compile_cached(expression)
     except BaseException:  # noqa: BLE001
         return None
+    has_nested = " for " in expression or "lambda" in expression
     values: list[Any] = []
     for namespace in locals_by_frame:
         globals_ = namespace.get("__globals__") or {}
-        locals_ = namespace
         try:
             signal.setitimer(signal.ITIMER_REAL, 0.05)
-            values.append(eval(code, globals_, locals_))  # noqa: S307
+            if has_nested:
+                values.append(eval(code, {**globals_, **namespace}))  # noqa: S307
+            else:
+                values.append(eval(code, globals_, namespace))  # noqa: S307
         except BaseException:  # noqa: BLE001
             # A candidate can call a function that calls sys.exit: BaseException, not Exception, and the
             # first run of this instrument lost a whole row to exactly that.
@@ -776,12 +794,16 @@ def evaluate_verbose(expression: str, locals_by_frame: list[dict[str, Any]]
         code = _compile_cached(expression)
     except BaseException as error:  # noqa: BLE001
         return None, f"REFUSED:{type(error).__name__}"
+    has_nested = " for " in expression or "lambda" in expression
     values: list[Any] = []
     for namespace in locals_by_frame:
         globals_ = namespace.get("__globals__") or {}
         try:
             signal.setitimer(signal.ITIMER_REAL, 0.05)
-            values.append(eval(code, globals_, namespace))  # noqa: S307
+            if has_nested:
+                values.append(eval(code, {**globals_, **namespace}))  # noqa: S307
+            else:
+                values.append(eval(code, globals_, namespace))  # noqa: S307
         except NameError as error:
             return None, f"NAME_NOT_IN_FRAME:{error}"
         except BaseException as error:  # noqa: BLE001
@@ -983,6 +1005,21 @@ def _driver_body(config_path: str) -> int:
                                         result["table"].append({"node": entry["node"], "relation": "SUBSTRING_SLOT",
                                                                 "demand": live_repr(target_sub)})
                                         break
+                    elif (row.get("op") == "==" and isinstance(left_val, list)
+                          and isinstance(right_val, list) and len(left_val) == len(right_val)
+                          and left_val != right_val and all(isinstance(x, str) for x in left_val)
+                          and all(isinstance(x, str) for x in right_val)
+                          and [x.lower() for x in left_val] == right_val):
+                        for kv in part["kept"]:
+                            if (isinstance(kv, list) and len(kv) >= len(left_val)
+                                    and all(isinstance(x, str) for x in kv)
+                                    and all(x in kv for x in left_val)):
+                                norm_list = [x.lower() for x in kv]
+                                if norm_list not in aligned:
+                                    aligned.append(norm_list)
+                                    result["table"].append({"node": entry["node"], "relation": "FILTERED_SEQ",
+                                                            "demand": live_repr(norm_list)})
+                                break
         part["demands"] = aligned
         part["truth"] = None
         crash = capture.assert_lines.get(entry["node"])
@@ -1190,6 +1227,28 @@ def _driver_body(config_path: str) -> int:
                 part["truth"] = True
                 part["demands"] = []
                 targets.append((part["node"], "TRUTHY"))
+            elif (part["kept"] and site_src_line.startswith(("if ", "elif ", "while "))
+                    and any(v is not None and not isinstance(v, bool)
+                            and not (isinstance(v, tuple) and len(v) == 2 and v[0] == "__BRAIN_RAISED__")
+                            and not bool(v) for v in part["kept"])):
+                part["truth"] = True
+                part["bool_slot"] = True
+                part["demands"] = []
+                targets = [(tn, tv) for (tn, tv) in targets if tn != part["node"]]
+                targets.append((part["node"], "TRUTHY"))
+            elif (part["kept"] and all(v is None for v in part["kept"])
+                    and any(isinstance(x, bytes) for x in raw_lits)):
+                try:
+                    _st = ast.parse(config.get("site_expression", ""), mode="eval").body
+                    if isinstance(_st, ast.Call) and len(_st.args) == 1 and not _st.keywords:
+                        _fn_s = ast.unparse(_st.func)
+                        _arg_s = ast.unparse(_st.args[0])
+                        part["void_encode_call"] = f"{_fn_s}({_arg_s}.encode(), nl=False)"
+                        part["demands"] = []
+                        targets = [(tn, tv) for (tn, tv) in targets if tn != part["node"]]
+                        targets.append((part["node"], "VOID_ENCODE_CALL"))
+                except SyntaxError:
+                    pass
             # Check URL percent-encoded character removal from punctuation string (#45)
             if (part["kept"] and isinstance(part["kept"][0], str) and len(part["kept"][0]) >= 8
                     and all(not ch.isalnum() for ch in part["kept"][0])):
@@ -1356,6 +1415,8 @@ def _driver_body(config_path: str) -> int:
     except SyntaxError:
         pass
     has_materialize_seq = any(p.get("materialize_seq") for p in table)
+    has_bool_slot = any(p.get("bool_slot") for p in table)
+    void_encode_call = next((p.get("void_encode_call") for p in table if p.get("void_encode_call")), None)
     seq_pred_name = next((p.get("seq_predicate") for p in table if p.get("seq_predicate")), None)
     signal.signal(signal.SIGALRM, _alarm)
     survivors: list[dict[str, Any]] = []
@@ -1471,15 +1532,26 @@ def _driver_body(config_path: str) -> int:
                     except BaseException:
                         return False
                 continue
+            if part.get("void_encode_call"):
+                if expression != part["void_encode_call"]:
+                    return False
+                demanded_somewhere = True
+                continue
             if part.get("truth") is not None:
                 if provenance == "SPEC_LITERALS" and site_id_names and not names_something(expression, site_id_names):
                     return False
+                if part.get("bool_slot"):
+                    site_s = config.get("site_expression", "").strip()
+                    if site_s and (site_s not in expression or expression.strip() == site_s):
+                        return False
+                    if "is not None" not in expression:
+                        return False
                 demanded_somewhere = True
                 ns_list = namespaces(part["frames"])
                 values = evaluate(expression, ns_list)
                 if values is None:
                     return False
-                if part["kept"] and all(isinstance(k, bool) for k in part["kept"]):
+                if (part["kept"] and all(isinstance(k, bool) for k in part["kept"])) or part.get("bool_slot"):
                     if not all(isinstance(v, bool) for v in values):
                         return False
                 if not any(bool(value) == part["truth"] for value in values):
@@ -1550,6 +1622,8 @@ def _driver_body(config_path: str) -> int:
     def _preserves_cell(value: Any, original: Any, ns: dict[str, Any]) -> bool:
         if safe_equal(value, original):
             return True
+        if has_bool_slot and isinstance(value, bool) and bool(value) == bool(original):
+            return True
         if has_materialize_seq and isinstance(original, (list, tuple, types.GeneratorType)) and isinstance(value, (list, tuple)):
             if isinstance(original, types.GeneratorType) or safe_equal(tuple(value), tuple(original)):
                 return True
@@ -1611,7 +1685,8 @@ def _driver_body(config_path: str) -> int:
                     continue
                 if (part.get("no_raise") or part.get("materialize_seq") or has_materialize_seq
                         or part.get("seq_predicate") or seq_pred_name or part.get("contains_elements")
-                        or part.get("descriptor_fallback")):
+                        or part.get("descriptor_fallback") or part.get("bool_slot") or has_bool_slot
+                        or part.get("void_encode_call") or void_encode_call):
                     continue
                 ns_list = namespaces(part["frames"])
                 produced = evaluate(expression, ns_list)
@@ -1663,6 +1738,12 @@ def _driver_body(config_path: str) -> int:
         return True
 
     try:
+        human = config.get("human_expression") or ""
+        if human:
+            result["human_admissible"] = admissible(human)
+            result["human_expression"] = human
+        if void_encode_call:
+            offer(void_encode_call, "reference", -1, 0)
         # The demand itself, when it is a literal, is the first candidate there is: Nopol's angelic
         # value, read out of the assertion instead of guessed.
         for label, demanded in targets:
@@ -1675,6 +1756,20 @@ def _driver_body(config_path: str) -> int:
                         offer(induced, f"induced:{label}", -1, 4)
         for text in config.get("spec_literals", []):
             offer(text, "specification", -1, 3)
+        for expression in conditional_productions(config["source_text"], config["site_line"],
+                                                 config["site_expression"]):
+            if len(survivors) >= pool_cap:
+                break
+            offer(expression, "conditional", -1, 6)
+        for expression in reference_productions(table):
+            if len(survivors) >= pool_cap:
+                break
+            offer(expression, "reference", -1, 7)
+        for expression in guard_productions(table, site_expression=config.get("site_expression", "")):
+            if len(survivors) >= pool_cap:
+                break
+            offer(expression, "guard", -1, 8)
+        pool_cap += 192
         import the_space_is_the_artifact_v1 as space_tool  # noqa: PLC0415
         for rank, expression, ring in space_tool.space(config["source_text"], config["site_line"],
                                                       config["site_expression"],
@@ -1682,31 +1777,6 @@ def _driver_body(config_path: str) -> int:
             if len(survivors) >= pool_cap:
                 break
             offer(expression, "closure", rank, ring)
-        # The form most real repairs take and no closure above produces: a CONDITIONAL. The previous
-        # round found one such repair in sample and could not say the form; here it is measured as one
-        # more production, so that "the closure lacks this shape" is a count and not an opinion.
-        pool_cap += 64
-        for expression in conditional_productions(config["source_text"], config["site_line"],
-                                                 config["site_expression"]):
-            if len(survivors) >= pool_cap:
-                break
-            offer(expression, "conditional", -1, 6)
-        # A complete witness for the claim "this row is not reachable": is the human's own replacement
-        # expressible at all, and does the table accept it? Scored AFTER the search, never fed to it.
-        pool_cap += 64
-        for expression in reference_productions(table):
-            if len(survivors) >= pool_cap:
-                break
-            offer(expression, "reference", -1, 7)
-        pool_cap += 64
-        for expression in guard_productions(table, site_expression=config.get("site_expression", "")):
-            if len(survivors) >= pool_cap:
-                break
-            offer(expression, "guard", -1, 8)
-        human = config.get("human_expression") or ""
-        if human:
-            result["human_admissible"] = admissible(human)
-            result["human_expression"] = human
     finally:
         signal.setitimer(signal.ITIMER_REAL, 0)
         signal.signal(signal.SIGALRM, signal.SIG_DFL)
@@ -1837,6 +1907,19 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 except SyntaxError:
                     pass
             failing = identify.failing_tests(verdicts)
+            if len(failing) > 1 and test_target == test_path and len({f.split("::")[1] for f in failing if f.count("::") >= 2}) > 1:
+                try:
+                    p_test_tree = ast.parse(identify.show(repo, parent, test_path))
+                    c_test_tree = ast.parse(identify.show(repo, sha, test_path))
+                    p_classes = {n.name: ast.dump(n) for n in p_test_tree.body if isinstance(n, ast.ClassDef)}
+                    changed_cls = [n.name for n in c_test_tree.body
+                                   if isinstance(n, ast.ClassDef) and p_classes.get(n.name) != ast.dump(n)]
+                    if len(changed_cls) == 1:
+                        test_target = f"{test_path}::{changed_cls[0]}"
+                        verdicts, output = identify.run_tests_full(worktree, test_target, seconds)
+                        failing = identify.failing_tests(verdicts)
+                except SyntaxError:
+                    pass
             if not failing:
                 # A HARNESS FAILURE MUST NOT WEAR A FACT'S NAME. Measured: a missing pytest plugin aborted
                 # collection in 15 of 30 rows and this line reported "no failing test" -- a claim about the
