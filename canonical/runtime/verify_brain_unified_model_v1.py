@@ -1019,6 +1019,68 @@ def check_one_front_door(model: unified_model.UnifiedModel) -> dict[str, Any]:
 # --------------------------------------------------------------------------- driver
 
 
+def check_harvested(model: Mapping[str, Any]) -> dict[str, Any]:
+    """The discovered surface must be fresh, disjoint from admitted capability, and inert.
+
+    Three failure modes are worth an oracle each:
+
+    * a stale row -- the artifact names a file whose bytes have moved, so the
+      model describes a capability that no longer exists;
+    * a laundered row -- a discovered surface appearing in ``capabilities`` or
+      carrying ``admitted: true``, which would claim verification nobody ran;
+    * an unroutable row -- no trigger, or no invocation shape, so the row exists
+      and nothing can find or call it.
+    """
+    from canonical.runtime import live_integrated_brain_v1 as live_brain
+
+    rows = model.get("harvested_capabilities") or []
+    admitted = {str(k) for k in live_brain.load_verified_registry()}
+    admitted_paths = set()
+    for entry in (model.get("capabilities") or []):
+        prov = entry.get("provenance") or {}
+        for key in ("source_path", "adapter_path"):
+            if prov.get(key):
+                admitted_paths.add(str(prov[key]))
+
+    stale: list[str] = []
+    for row in rows:
+        path = ROOT / str(row.get("path") or "")
+        try:
+            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+        except OSError:
+            stale.append(str(row.get("path")))
+            continue
+        if digest != row.get("sha256"):
+            stale.append(str(row.get("path")))
+
+    laundered = [
+        str(row.get("id")) for row in rows
+        if row.get("admitted") is not False
+        or row.get("capability") is not False
+        or str(row.get("id")) in admitted
+        or str(row.get("path")) in admitted_paths
+    ]
+    unroutable = [
+        str(row.get("id")) for row in rows
+        if not row.get("triggers") or row.get("invocation") not in {"contract", "cli"}
+    ]
+    route_missing = [
+        str(row.get("id")) for row in rows
+        if not (ROOT / str(row.get("route") or "")).is_file()
+    ]
+    return _category("HARVESTED_SURFACE", [
+        _case("harvested_rows_exist", bool(rows), "CONTENT", {"rows": len(rows)}),
+        _case("harvested_rows_are_fresh", not stale, "SHA256_AGAINST_LIVE_FILES",
+              {"stale": stale[:10], "count": len(stale)}),
+        _case("harvested_rows_claim_no_admission", not laundered, "DISJOINTNESS",
+              {"laundered": laundered[:10], "count": len(laundered)}),
+        _case("harvested_rows_are_routable", not unroutable, "STRUCTURE",
+              {"unroutable": unroutable[:10], "count": len(unroutable)}),
+        _case("harvested_route_exists", not route_missing, "FILE_STAT",
+              {"missing": route_missing[:5], "count": len(route_missing)}),
+    ])
+
+
 def run_verification(
     *,
     seed: str | None = None,
@@ -1047,6 +1109,7 @@ def run_verification(
             check_negative_controls(front_door, text),
             check_model_dependence(model),
             check_one_front_door(front_door),
+            check_harvested(model),
         ]
     finally:
         shutil.rmtree(workdir, ignore_errors=True)
