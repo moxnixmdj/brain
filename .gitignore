@@ -50,3 +50,8 @@ canonical/tmp_*.json
 
 # Third-party benchmark clones (QuixBugs etc.). Never part of the project.
 .benchmarks/
+
+# Prose fetched from upstream manuals by `the_right_question_is_an_experiment_v1
+# --fetch-prose`. It is third-party documentation cached on this machine, keyed to the
+# upstream tarball sha256 recorded in the receipt: never part of the project.
+canonical/astra_runtime/state/prose_corpus_v1.json

@@ -31226,18 +31226,18 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 641,
+  "knowledge_documents": 643,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7296,
+  "research_index_records": 7308,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 462,
-  "source_index_modules": 2026
+  "source_index_modules": 2027
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "5f506695104dec4777d7db0d9dc4e02e2a6d23941b6624d56cd9977c7df06fcb"
+  "value": "05c9059cc4d49b5f14a281795f5091a022c7afad70ad60a9a0629edb76460a11"
  },
  "engines": [
   {
@@ -72874,6 +72874,84 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 14952,
+   "headings": [
+    "The Right Question Is an Experiment — 2026-11-24",
+    "1. The measurement",
+    "The store as a typed data-flow graph (semantic equivalence + CEGIS composition)",
+    "2. Verdict on the hypothesis",
+    "What is real",
+    "What is false",
+    "What is unproven",
+    "Why one experience is not permanent competence",
+    "3. The defects this round found in its own instrument",
+    "4. The single next bottleneck",
+    "5. What this is not"
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.md",
+   "sha256": "c5c8a34807746431edddbb8ae8486dd1acd8c1bd4cfe3229c86568e9aa9edbdf",
+   "summary": "**What this round asked.** The previous round (`THE_GUIDE_IS_A_TEST_SUITE_20261204_V1`) measured that 94% of documentation bytes are prose, not transcripts, and that prose was never read. This round reads it and asks the only question that can make a sentence checkable:",
+   "terms": {
+    "about": 8,
+    "admitted": 12,
+    "archive": 5,
+    "because": 6,
+    "before": 6,
+    "both": 6,
+    "bzip2": 9,
+    "canonical": 7,
+    "cat": 5,
+    "claim": 11,
+    "claims": 7,
+    "compressed": 6,
+    "compresses": 5,
+    "corpus": 9,
+    "decompresses": 6,
+    "directory": 11,
+    "each": 8,
+    "file": 18,
+    "gzip": 11,
+    "line": 8,
+    "lines": 6,
+    "model": 6,
+    "no": 6,
+    "not": 30,
+    "nothing": 7,
+    "now": 7,
+    "object": 6,
+    "one": 12,
+    "output": 7,
+    "program": 19,
+    "prose": 13,
+    "qualifier": 7,
+    "read": 6,
+    "refused": 7,
+    "relation": 15,
+    "room": 15,
+    "round": 7,
+    "same": 7,
+    "sentence": 7,
+    "sentences": 6,
+    "so": 7,
+    "sort": 8,
+    "tar": 9,
+    "tests": 7,
+    "text": 8,
+    "two": 6,
+    "witness": 15,
+    "wrong": 9
+   },
+   "title": "The Right Question Is an Experiment — 2026-11-24",
+   "title_terms": [
+    "2026-11-24",
+    "experiment",
+    "question",
+    "right"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 18373,
    "headings": [
     "The run already contains the intervention",
@@ -94854,6 +94932,89 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 40791,
+   "headings": [
+    "[UNVERIFIED TRANSFER -- READ THIS FIRST]",
+    "Zero-Knowledge-House round V2 — frame provenance closes one previously-open blind commit (8/13 → 9/13)",
+    "1. What I was asked to do, and how the prompt's own contradiction is resolved",
+    "2. Research: what already exists, project first",
+    "3. Verdict on §3 (does one experience teach an environment permanently?)",
+    "4. What I built, and what each mechanism is worth",
+    "5. Blind evaluation, per task, with the failures kept",
+    "6. The bottleneck that was crossed, and the one the evidence now names",
+    "7. What is not done, stated plainly",
+    "8. Round V3 — the statement bottleneck, attacked and only half-crossed",
+    "Round V4 — a test that states two contracts now gets both statements, in the order that decides the exception",
+    "Round V5 — the exception-containment mechanism, built, measured, and removed (earned nothing)",
+    "Round V6 — bind to the frame, not the name: real shrinking, still no repair",
+    "Round V7 — the last frame is not a frame, it is an assertion: `codes == [0, 0]`",
+    "Round V8 — contracts that name a *variable*, and a container field; plus a contamination disclosure",
+    "Round V9 — the test says what must be *deleted*, not what must be raised: 11/13"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/ZERO_KNOWLEDGE_HOUSE_ROUND_20261124_V2__from_1412289d.md",
+   "sha256": "e3928b42b1045a17124ffa36f9dfb70597f42ddb8ea51d4916f6ab02d8c25b66",
+   "summary": "> This document was written on `arena/1412289d-brain` and is preserved here as a primary > source, not as an established result. Its headline (9/13 blind commits) **could not be > reproduced** on this branch: > > * No runner script exists on its own branch that executes the 13-commit set. > * `click@05f6fd0`, its flagship, returns `OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX` >   when re-run here -",
+   "terms": {
+    "10": 17,
+    "13": 18,
+    "after": 14,
+    "candidate": 14,
+    "cjson": 16,
+    "click": 40,
+    "commit": 29,
+    "commits": 19,
+    "contract": 13,
+    "contracts": 15,
+    "engine": 20,
+    "failed": 16,
+    "failure": 14,
+    "first": 14,
+    "frame": 18,
+    "guard": 28,
+    "literal": 13,
+    "measured": 18,
+    "mechanism": 20,
+    "must": 17,
+    "name": 23,
+    "new": 19,
+    "no": 48,
+    "none": 22,
+    "not": 69,
+    "now": 14,
+    "one": 46,
+    "only": 17,
+    "open": 26,
+    "own": 28,
+    "pass": 20,
+    "passed": 17,
+    "pluggy": 18,
+    "pyjwt": 16,
+    "rather": 13,
+    "real": 15,
+    "repair": 13,
+    "repaired": 15,
+    "round": 24,
+    "same": 14,
+    "so": 23,
+    "statement": 19,
+    "still": 25,
+    "suite": 24,
+    "test": 36,
+    "tests": 15,
+    "than": 16,
+    "value": 13
+   },
+   "title": "[UNVERIFIED TRANSFER -- READ THIS FIRST]",
+   "title_terms": [
+    "first",
+    "read",
+    "transfer",
+    "unverified"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 9541,
    "headings": [
     "What actually blocks the front door, and the work item three of my rounds got wrong",
@@ -94962,10 +95123,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1443,
+  "included_source_count": 1445,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "0ece0b28b70d67bab4998765a006137fe48960d5bc7f3d9003754d12f9f0258f"
+  "source_tree_digest": "01b87a696f864ec1c597770b24c47ae88b6ce7fe84d0dc850ff2a86ace1846d0"
  },
  "research_index": [
   {
@@ -165212,6 +165373,26 @@
    "action_id": "",
    "capability": false,
    "date": "",
+   "id": "research:canonical/verification/AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AST_IR_ANTI_UNIFICATION_ABLATION_20261124_V1.json",
+   "schema": "BRAIN_AST_IR_ANTI_UNIFICATION_ABLATION_V1",
+   "sha256": "87f6bb2922f559568f34cf74de77496c2e1cf35deaa9b57a6e16d2a14656a060",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "ablation": 1,
+    "anti": 1,
+    "ast": 1,
+    "ir": 1,
+    "unification": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
    "id": "research:canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json",
@@ -165380,6 +165561,28 @@
     "public": 1,
     "route": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2__from_1412289d.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_20261124_V2__from_1412289d.json",
+   "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
+   "sha256": "be17b11ff5e09e53ae0caa4e91883d5fe5e574b3c342b14bc4517e788b290bb9",
+   "status": "",
+   "terms": {
+    "1412289d": 1,
+    "20261124": 1,
+    "autonomous": 1,
+    "causal": 1,
+    "computer": 1,
+    "receipt": 1,
+    "swe": 1,
+    "use": 1,
+    "v2": 1
    }
   },
   {
@@ -165602,7 +165805,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/A_SITE_IS_NOT_A_PRODUCTION_20261124_V1.json",
    "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
-   "sha256": "9fec2eb67e96e2160d6765ec603ae14a6ef080f94a9ebdfc57436bae1ab6a1ab",
+   "sha256": "20d93f4824b41b0f5117076d95ce5b260894ed9b935d3bf7f7e25c8783bbe2a0",
    "status": "",
    "terms": {
     "20261124": 1,
@@ -168335,6 +168538,24 @@
     "v1": 1,
     "v2": 1,
     "verify": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CAPABILITY_PREFLIGHT_RECEIPT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CAPABILITY_PREFLIGHT_RECEIPT_20261124_V1.json",
+   "schema": "BRAIN_CAPABILITY_PREFLIGHT_RECEIPT_V1",
+   "sha256": "c777a09c2e50ea39bf8c9bb3603c43782d8cc926383913a57c43a384be267e09",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "capability": 1,
+    "preflight": 1,
+    "receipt": 1,
+    "v1": 1
    }
   },
   {
@@ -172189,6 +172410,25 @@
     "route": 1,
     "tool": 1,
     "v2": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/CROSS_BRANCH_TRANSFER_RECEIPT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/CROSS_BRANCH_TRANSFER_RECEIPT_20261124_V1.json",
+   "schema": "BRAIN_CROSS_BRANCH_TRANSFER_RECEIPT_V1",
+   "sha256": "42ebf488e20aa28f0e154b35ca89b78043b6ca81445423807413b1087815eccb",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "branch": 1,
+    "cross": 1,
+    "receipt": 1,
+    "transfer": 1,
+    "v1": 1
    }
   },
   {
@@ -179771,6 +180011,25 @@
     "partial_burst_executed__read_only_verifications_live__zero_credit": 1,
     "receipt": 1,
     "shot": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/FRONTIER_UNIFIED_ENGINE_RECEIPT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FRONTIER_UNIFIED_ENGINE_RECEIPT_20261124_V1.json",
+   "schema": "BRAIN_FRONTIER_UNIFIED_ENGINE_V1",
+   "sha256": "3feec0c486944471f9f875a8f3a2717a3eee6aa5843cc8d68377edbb25f16261",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "engine": 1,
+    "frontier": 1,
+    "receipt": 1,
+    "unified": 1,
     "v1": 1
    }
   },
@@ -195292,6 +195551,24 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/PILLAR0_BRANCH_AUDIT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/PILLAR0_BRANCH_AUDIT_20261124_V1.json",
+   "schema": "BRAIN_PILLAR0_BRANCH_AUDIT_V1",
+   "sha256": "9c16c381dd81f64cd55dc1dd8d9bfb5e1f2b113f11d80cdd5ac4d82815811c67",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "audit": 1,
+    "branch": 1,
+    "pillar0": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-09",
    "id": "research:canonical/verification/PINNED_HTTPS_SOURCE_FRAGMENT_AUTHORITY_VERIFY_20261009_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -208900,6 +209177,63 @@
     "v1": 1,
     "verify": 1,
     "wake": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V1.json",
+   "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V1",
+   "sha256": "907543eb22861fc8d3b25c932b12319d8d8f728c373b5d3af9c7028e2d5aaf5f",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "closers": 1,
+    "receipt": 1,
+    "residual": 1,
+    "v1": 1,
+    "wall": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V2.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V2.json",
+   "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V2",
+   "sha256": "6cd5a4abe1730f314c1b0b9e45789d7e49b6f8302f1634a9d2ba96409623bae5",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "closers": 1,
+    "receipt": 1,
+    "residual": 1,
+    "v2": 1,
+    "wall": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "",
+   "id": "research:canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V3.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V3.json",
+   "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V3",
+   "sha256": "6a2a736fc6f12103104d32adb95a956b5064d403be028f32d50197f13565db07",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "closers": 1,
+    "receipt": 1,
+    "residual": 1,
+    "v3": 1,
+    "wall": 1
    }
   },
   {
@@ -224273,7 +224607,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_ASSERTION_IS_THE_DEMAND_20261119_V1.json",
    "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
-   "sha256": "24ef7d6b61fc42810e0233d1e67692086d964e0c0c8c8972a6349d6bfba62478",
+   "sha256": "6b3feedc819b9c289788274be4b8e68a0b829688978e84f193f44cde49925bc6",
    "status": "",
    "terms": {
     "20261119": 1,
@@ -224567,7 +224901,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_ENGINE_ON_EIGHTY_NINE_REAL_FIXES_20261123_V1.json",
    "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
-   "sha256": "3a64ea15413da3d25978bb25d08b1b7228d0fa7deb57e4b6c30aeabbcb3c291e",
+   "sha256": "0add4c53c8c8cbce66057773f3c21f039e790c93cdcda4419d1800e33c3c36b8",
    "status": "",
    "terms": {
     "20261123": 1,
@@ -224587,7 +224921,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/THE_ENGINE_ON_FORTY_FIVE_UNSEEN_FIXES_20261123_V1.json",
    "schema": "BRAIN_THE_ASSERTION_IS_THE_DEMAND_V1",
-   "sha256": "5ba348f75053530fc65e48b2ac767239ee08e4f157f4376dcc2da892815caf68",
+   "sha256": "e955aeebd3a76d69ccbf6b88fb9fe4689653fa46e88388e007d4ab7c9d0608b6",
    "status": "",
    "terms": {
     "20261123": 1,
@@ -225151,6 +225485,25 @@
    }
   },
   {
+   "action_id": "THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_THE_ORACLE_THAT_CANNOT_CHOOSE_V1",
+   "sha256": "78d8c0983e3f0482261d473794c2368a4cec208946b6579b39df6a3094ee57f4",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "cannot": 1,
+    "choose": 1,
+    "oracle": 1,
+    "the_oracle_that_cannot_choose_20261124_v1": 1,
+    "v1": 1
+   }
+  },
+  {
    "action_id": "",
    "capability": false,
    "date": "",
@@ -225441,6 +225794,24 @@
     "seed": 1,
     "v1": 1,
     "wider": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/verification/THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1.json",
+   "schema": "BRAIN_THE_RIGHT_QUESTION_IS_AN_EXPERIMENT_20261124_V1",
+   "sha256": "c431e1438e9fd0a286f327913ebdebb1d392662e90c52c67a4f975065463537b",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "experiment": 1,
+    "question": 1,
+    "right": 1,
+    "v1": 1
    }
   },
   {
@@ -264638,6 +265009,51 @@
    }
   },
   {
+   "action_id": "THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "6c009ecd454c12abce2fd69d641534c05ed7ac8f4922f7d2663ca1539b9ac25f",
+   "status": "SHIPPED",
+   "terms": {
+    "0.414": 1,
+    "0.460": 1,
+    "13": 1,
+    "14-16": 1,
+    "20261124": 1,
+    "42": 1,
+    "about": 1,
+    "across": 1,
+    "admits": 1,
+    "allowed": 1,
+    "arrangement": 1,
+    "ask_the_narrowest_scope_and_price_the_doubt_by_what_it_decides": 1,
+    "asked": 1,
+    "base": 1,
+    "cannot": 1,
+    "carries": 1,
+    "channel": 1,
+    "choose": 1,
+    "claim": 1,
+    "closes": 1,
+    "code": 1,
+    "completion": 1,
+    "config-parity": 1,
+    "conventions": 1,
+    "dedup": 1,
+    "demanded": 1,
+    "deprecation": 1,
+    "did": 1,
+    "either": 1,
+    "not": 3,
+    "oracle": 2,
+    "other": 2
+   }
+  },
+  {
    "action_id": "THE_ORDER_A_REQUEST_NAMES_IS_NOT_THE_DEFAULT_ORDER_V1_20261026_V1",
    "capability": false,
    "date": "2026-10-26T20:23:56Z",
@@ -284332,6 +284748,68 @@
     "generator": 1,
     "intervenable_decision_ancestors": 1,
     "minimal": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/causal_computer_use_agent_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/causal_computer_use_agent_v1.py",
+   "sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845",
+   "summary": "Zero-Knowledge-House computer-use / SWE agent: the seven-step loop, cut-vertex slicing,",
+   "symbol_count": 17,
+   "symbols": [
+    "GoalDirectedAgent",
+    "LoopReceipt",
+    "SelfPlayEpisode",
+    "SelfPlayLoop",
+    "SelfPlayReceipt",
+    "StepReceipt",
+    "_bfs_to_unmet",
+    "_commit_plan",
+    "_cow_execute_plan",
+    "_goal_cone",
+    "_marking_ok",
+    "_plan_verify_compress",
+    "_pred_satisfied",
+    "_words",
+    "broad_ingest_baseline",
+    "compare_acquisition_strategies",
+    "write_receipt"
+   ],
+   "terms": {
+    "agent": 2,
+    "bfs_to_unmet": 1,
+    "broad_ingest_baseline": 1,
+    "causal": 1,
+    "commit_plan": 1,
+    "compare_acquisition_strategies": 1,
+    "computer": 1,
+    "computer-use": 1,
+    "cow_execute_plan": 1,
+    "cut-vertex": 1,
+    "goal_cone": 1,
+    "goaldirectedagent": 1,
+    "loop": 1,
+    "loopreceipt": 1,
+    "marking_ok": 1,
+    "plan_verify_compress": 1,
+    "pred_satisfied": 1,
+    "selfplayepisode": 1,
+    "selfplayloop": 1,
+    "selfplayreceipt": 1,
+    "seven-step": 1,
+    "slicing": 1,
+    "stepreceipt": 1,
+    "swe": 1,
+    "use": 1,
+    "v1": 1,
+    "words": 1,
+    "write_receipt": 1,
+    "zero-knowledge-house": 1
    }
   },
   {
@@ -309051,7 +309529,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/local_guide_v1.py",
-   "sha256": "56e821db0076e558ee670f651f91208fbf3ac10e95ebada00c1ccefe0766bd4b",
+   "sha256": "57fb109381eceecb297fd7ac6d2bcc3b543ccda6b8b3beb04f3bbd39e3aeb495",
    "summary": "Local instant-knowledge source: the computer's own guides.",
    "symbol_count": 9,
    "symbols": [

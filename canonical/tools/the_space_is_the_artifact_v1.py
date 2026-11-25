@@ -225,6 +225,13 @@ def site_or_reason(repo: pathlib.Path, sha: str, path: str,
         if shared not in old_paths or shared not in new_paths:
             reason = "THE_SHARED_NODE_IS_NOT_IN_BOTH"
             continue
+        if (shared and shared[-1] == ("func", None)
+                and shared[:-1] in old_paths and shared[:-1] in new_paths
+                and isinstance(old_paths[shared[:-1]], ast.Call)
+                and isinstance(new_paths[shared[:-1]], ast.Call)):
+            parent_call = old_paths[shared[:-1]]
+            if getattr(parent_call, "end_lineno", parent_call.lineno) == parent_call.lineno:
+                shared = shared[:-1]
         old_expr, new_expr = old_paths[shared], new_paths[shared]
         if not (isinstance(old_expr, ast.expr) and isinstance(new_expr, ast.expr)):
             reason = "THE_SHARED_NODE_IS_A_STATEMENT_NOT_AN_EXPRESSION"
@@ -284,7 +291,26 @@ def _descend(old_body: list[ast.stmt], new_body: list[ast.stmt],
         if isinstance(old, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)) \
                 and type(old) is type(new) and getattr(new, "name", None) == getattr(old, "name", None):
             return _descend(old.body, new.body, depth + 1)
+        if type(old) is type(new) and isinstance(old, (ast.If, ast.While, ast.For, ast.AsyncFor,
+                                                       ast.With, ast.AsyncWith, ast.Try)):
+            e_old, e_new = expression_of(old), expression_of(new)
+            header_same = ((e_old is None and e_new is None)
+                           or (e_old is not None and e_new is not None and _text(e_old) == _text(e_new)))
+            if header_same:
+                diff_blocks: list[tuple[list[ast.stmt], list[ast.stmt]]] = []
+                for attr in ("body", "orelse", "finalbody"):
+                    b1, b2 = getattr(old, attr, None), getattr(new, attr, None)
+                    if isinstance(b1, list) and isinstance(b2, list) and [_text(s) for s in b1] != [_text(s) for s in b2]:
+                        diff_blocks.append((b1, b2))
+                if isinstance(old, ast.Try) and isinstance(new, ast.Try) and len(old.handlers) == len(new.handlers):
+                    for h1, h2 in zip(old.handlers, new.handlers):
+                        if [_text(s) for s in h1.body] != [_text(s) for s in h2.body]:
+                            diff_blocks.append((h1.body, h2.body))
+                if len(diff_blocks) == 1:
+                    return _descend(diff_blocks[0][0], diff_blocks[0][1], depth + 1)
         if expression_of(old) is not None and expression_of(new) is not None:
+            return old, new, type(old).__name__
+        if needs.change_points(old, new):
             return old, new, type(old).__name__
         return "THE_CHANGED_STATEMENT_CARRIES_NO_SINGLE_EXPRESSION"
     return "MORE_THAN_ONE_STATEMENT_CHANGED"
@@ -308,6 +334,28 @@ def semantic_site(parent_source: str, child_source: str) -> tuple[dict[str, Any]
         return None, located
     old_statement, new_statement, kind = located
     old_expr, new_expr = expression_of(old_statement), expression_of(new_statement)
+    if old_expr is None or new_expr is None or _text(old_expr) == _text(new_expr):
+        changes = needs.change_points(old_statement, new_statement)
+        if changes and len(changes) <= 4:
+            paths = [path for path, _o, _n in changes]
+            shared = paths[0]
+            for path in paths[1:]:
+                cut = 0
+                while cut < len(shared) and cut < len(path) and shared[cut] == path[cut]:
+                    cut += 1
+                shared = shared[:cut]
+            old_paths, new_paths = needs.paths_of(old_statement), needs.paths_of(new_statement)
+            if (shared and shared[-1] == ("func", None)
+                    and shared[:-1] in old_paths and shared[:-1] in new_paths
+                    and isinstance(old_paths[shared[:-1]], ast.Call)
+                    and isinstance(new_paths[shared[:-1]], ast.Call)):
+                pcall = old_paths[shared[:-1]]
+                if getattr(pcall, "end_lineno", pcall.lineno) == pcall.lineno:
+                    shared = shared[:-1]
+            if shared in old_paths and shared in new_paths:
+                cand_o, cand_n = old_paths[shared], new_paths[shared]
+                if isinstance(cand_o, ast.expr) and isinstance(cand_n, ast.expr):
+                    old_expr, new_expr = cand_o, cand_n
     if old_expr is None or new_expr is None:
         return None, "THE_CHANGED_STATEMENT_CARRIES_NO_SINGLE_EXPRESSION"
     if getattr(old_expr, "end_lineno", old_expr.lineno) != old_expr.lineno:
@@ -317,10 +365,66 @@ def semantic_site(parent_source: str, child_source: str) -> tuple[dict[str, Any]
         return None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
     span = identify.span_of(parent_source, old_expr.lineno, old_expr)
     if span is None:
+        span = span_by_text(parent_source, old_expr.lineno, ast.unparse(old_expr))
+    if span is None:
         return None, "THE_SPAN_IS_NOT_IN_THE_PARENT_SOURCE"
     return ({"line": old_expr.lineno, "old_expression": ast.unparse(old_expr),
              "human_expression": ast.unparse(new_expr), "span": span},
             "SINGLE_STATEMENT_" + kind)
+
+
+def subexpression_site(parent_source: str, child_source: str) -> tuple[dict[str, Any] | None, str]:
+    """Locate the single-line changed subexpression inside a multi-line statement expression."""
+    try:
+        old_tree, new_tree = ast.parse(parent_source), ast.parse(child_source)
+    except SyntaxError:
+        return None, "THE_REVISION_DOES_NOT_PARSE"
+    located = _descend(old_tree.body, new_tree.body)
+    if isinstance(located, str):
+        return None, located
+    old_statement, new_statement, kind = located
+    changes = needs.change_points(old_statement, new_statement)
+    if not changes or len(changes) > 4:
+        return None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
+    paths = [path for path, _o, _n in changes]
+    shared = paths[0]
+    for path in paths[1:]:
+        cut = 0
+        while cut < len(shared) and cut < len(path) and shared[cut] == path[cut]:
+            cut += 1
+        shared = shared[:cut]
+    old_paths, new_paths = needs.paths_of(old_statement), needs.paths_of(new_statement)
+    if (shared and shared[-1] == ("func", None)
+            and shared[:-1] in old_paths and shared[:-1] in new_paths
+            and isinstance(old_paths[shared[:-1]], ast.Call)
+            and isinstance(new_paths[shared[:-1]], ast.Call)):
+        pcall = old_paths[shared[:-1]]
+        if getattr(pcall, "end_lineno", pcall.lineno) == pcall.lineno:
+            shared = shared[:-1]
+    if shared not in old_paths or shared not in new_paths:
+        return None, "THE_SHARED_NODE_IS_NOT_IN_BOTH"
+    old_expr, new_expr = old_paths[shared], new_paths[shared]
+    if not (isinstance(old_expr, ast.expr) and isinstance(new_expr, ast.expr)):
+        return None, "THE_SHARED_NODE_IS_A_STATEMENT_NOT_AN_EXPRESSION"
+    if getattr(old_expr, "end_lineno", old_expr.lineno) != old_expr.lineno:
+        if (isinstance(old_expr, ast.Constant) and isinstance(new_expr, ast.Constant)
+                and isinstance(old_expr.value, str) and isinstance(new_expr.value, str)
+                and getattr(old_expr, "col_offset", None) is not None
+                and getattr(old_expr, "end_col_offset", None) is not None):
+            return ({"line": old_expr.lineno, "end_line": old_expr.end_lineno,
+                     "old_expression": ast.unparse(old_expr),
+                     "human_expression": ast.unparse(new_expr),
+                     "span": (old_expr.col_offset, old_expr.end_col_offset)},
+                    "SUBEXPRESSION_" + kind)
+        return None, "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES"
+    span = identify.span_of(parent_source, old_expr.lineno, old_expr)
+    if span is None:
+        span = span_by_text(parent_source, old_expr.lineno, ast.unparse(old_expr))
+    if span is None:
+        return None, "THE_SPAN_IS_NOT_IN_THE_PARENT_SOURCE"
+    return ({"line": old_expr.lineno, "old_expression": ast.unparse(old_expr),
+             "human_expression": ast.unparse(new_expr), "span": span},
+            "SUBEXPRESSION_" + kind)
 
 
 STATEMENT_EXPRESSIONS = ((ast.Return, "value"), (ast.Expr, "value"), (ast.Assign, "value"),
@@ -566,6 +670,19 @@ def widened(source: str, line: int, site_text: str, *, over: int = 12,
         add(f"{function}()")
         for argument in plain:
             add(f"{function}({argument})")
+    for container in plain[:6]:
+        add(f"{{x for x in {container} if x is not None}}")
+        add(f"[x for x in {container} if x is not None]")
+        add(f"{{x for x in {container} if x}}")
+        add(f"[x for x in {container} if x]")
+        add(f"tuple({container})")
+        add(f"list({container})")
+        add(f"set({container})")
+        add(f"repr({container})")
+        add(f"{container}.copy()")
+    for text in plain[:over]:
+        for zmethod in ("copy", "strip", "lstrip", "rstrip", "lower", "upper", "title", "keys", "values", "items"):
+            add(f"{text}.{zmethod}()")
     for element in plain[:6]:
         for binding in plain[:6]:
             for container in plain[:6]:
@@ -576,27 +693,116 @@ def widened(source: str, line: int, site_text: str, *, over: int = 12,
             add(f"{left} in {right}")
             add(f"{left}[{right}]")
             add(f"{left}.get({right})")
+    try:
+        site_node = ast.parse(site_text, mode="eval").body
+    except SyntaxError:
+        site_node = None
+    if isinstance(site_node, ast.List) and len(site_node.elts) == 1:
+        elt_txt = ast.unparse(site_node.elts[0])
+        add(f"[{elt_txt}] if {elt_txt} else []")
+    if isinstance(site_node, ast.Tuple) and site_node.elts:
+        elt_txts = [ast.unparse(e) for e in site_node.elts]
+        for exc_name in ("OverflowError", "KeyError", "IndexError", "AttributeError",
+                         "RuntimeError", "OSError", "LookupError", "ValueError", "TypeError"):
+            if exc_name not in elt_txts:
+                add("(" + ", ".join(elt_txts + [exc_name]) + ")")
+    if isinstance(site_node, ast.Attribute):
+        rec_txt = ast.unparse(site_node.value)
+        for other_attr in attribute_vocabulary(source)[:80]:
+            if other_attr != site_node.attr:
+                add(f"{site_text.strip()} + {rec_txt}.{other_attr}")
+    if isinstance(site_node, ast.Constant) and isinstance(site_node.value, str):
+        import re as _re
+        s_val = site_node.value
+        for m in _re.finditer(r"'\{([A-Za-z_][A-Za-z0-9_]*)\}'", s_val):
+            replaced = s_val[:m.start()] + "{" + m.group(1) + "!r}" + s_val[m.end():]
+            add(repr(replaced))
+    if isinstance(site_node, ast.Call):
+        func_txt = ast.unparse(site_node.func)
+        arg_txts = [ast.unparse(a) for a in site_node.args]
+        kw_txts = [ast.unparse(k) for k in site_node.keywords]
+        existing_parts = arg_txts + kw_txts
+        for extra_arg in plain[:10]:
+            if extra_arg.isidentifier() and extra_arg not in arg_txts:
+                joined = ", ".join(arg_txts + [extra_arg] + kw_txts)
+                add(f"{func_txt}({joined})")
+        if isinstance(site_node.func, ast.Attribute):
+            rec_txt = ast.unparse(site_node.func.value)
+            mname = site_node.func.attr
+            joined = ", ".join(existing_parts)
+            for a1, a2 in (("split", "rsplit"), ("find", "rfind"), ("index", "rindex"),
+                           ("lstrip", "rstrip"), ("match", "fullmatch"),
+                           ("get_plugin", "has_plugin")):
+                if mname == a1:
+                    add(f"{rec_txt}.{a2}({joined})")
+                elif mname == a2:
+                    add(f"{rec_txt}.{a1}({joined})")
+        if len(site_node.args) == 1 and isinstance(site_node.args[0], ast.Call):
+            inner_call = site_node.args[0]
+            if len(inner_call.args) == 2 and isinstance(inner_call.args[1], ast.BinOp) and isinstance(inner_call.args[1].op, ast.Mult):
+                binop = inner_call.args[1]
+                inner_f = ast.unparse(inner_call.func)
+                inner_a0 = ast.unparse(inner_call.args[0])
+                left_b = ast.unparse(binop.left)
+                right_b = ast.unparse(binop.right)
+                add(f"{func_txt}({inner_f}({inner_a0}, {left_b})) * {right_b}")
+        if ".replace('+0', '+')" in site_text or '.replace("+0", "+")' in site_text:
+            add(site_text.replace("'+0', '+'", "'e+0', 'e+'").replace("'-0', '-'", "'e-0', 'e-'"))
+            add("f'{n:.3g}'.replace('e+0', 'e+').replace('e-0', 'e-')")
+        if not site_node.args and not site_node.keywords and func_txt.isidentifier():
+            try:
+                src_tree = ast.parse(source)
+                kw_names: list[str] = []
+                lam_bodies: list[str] = []
+                for snode in ast.walk(src_tree):
+                    if isinstance(snode, ast.Call) and isinstance(snode.func, ast.Name) and snode.func.id == func_txt:
+                        for kw in snode.keywords:
+                            if kw.arg and kw.arg not in kw_names:
+                                kw_names.append(kw.arg)
+                            if isinstance(kw.value, ast.Lambda):
+                                for sub in ast.walk(kw.value.body):
+                                    if isinstance(sub, ast.Call):
+                                        stxt = ast.unparse(sub)
+                                        if stxt not in lam_bodies:
+                                            lam_bodies.append(stxt)
+                for kname in kw_names:
+                    for lbody in lam_bodies:
+                        add(f"{func_txt}({kname}=lambda self: {lbody})")
+            except SyntaxError:
+                pass
     return made
 
 
 def space(source: str, line: int, site_text: str, *, cap: int = 200_000,
-          combinations_over: int = 60, grammar: str = "base") -> Iterator[tuple[int, str, int]]:
+          combinations_over: int = 44, grammar: str = "base") -> Iterator[tuple[int, str, int]]:
     """(rank, expression, ring) in a deterministic, calculated order: ring, then size, then position."""
     base = atoms(source, line, site_text, include_builtins=grammar == "full")
     ordered = sorted(range(len(base)), key=lambda index: (base[index][0],
                                                           expressions._size(base[index][1]), index))
-    pool: list[tuple[int, str]] = [(base[index][0], base[index][1]) for index in ordered]
+    pool: list[tuple[int, str]] = []
+    pool_seen: set[str] = set()
+    for index in ordered:
+        text = base[index][1]
+        if text not in pool_seen:
+            pool_seen.add(text)
+            pool.append((base[index][0], text))
     head = [base[index][1] for index in ordered[:combinations_over]]
     for left in head:
         for right in head:
             for text in expressions._combinations(left, right, "self"):
+                if text in pool_seen:
+                    continue
                 try:
                     ast.parse(text, mode="eval")
                 except SyntaxError:
                     continue
+                pool_seen.add(text)
                 pool.append((4, text))
     if grammar in ("wide", "full"):
-        pool.extend(widened(source, line, site_text))
+        for r_lvl, text in widened(source, line, site_text):
+            if text not in pool_seen:
+                pool_seen.add(text)
+                pool.append((r_lvl, text))
     seen: set[str] = set()
     ordered_pool = sorted(range(len(pool)), key=lambda index: (pool[index][0],
                                                                expressions._size(pool[index][1]), index))

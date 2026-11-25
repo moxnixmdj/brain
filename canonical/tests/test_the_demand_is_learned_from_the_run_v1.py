@@ -142,3 +142,38 @@ def test_an_end_to_end_run_learns_existence_from_the_two_tests(tmp_path: pathlib
     assert row["rule"]["feature"] == "is_none", row.get("learned")
     assert row["rule"]["polarity"] is False
     assert row["flipped"] == ["tests/test_core.py::test_falsy"]
+
+
+def test_signature_arity_guard_is_learned_from_call_type_error(tmp_path: pathlib.Path) -> None:
+    repo = tmp_path / "proj_sig"
+    (repo / "proj").mkdir(parents=True)
+    (repo / "tests").mkdir()
+    (repo / "proj" / "__init__.py").write_text("", encoding="utf-8")
+    parent_src = (
+        "class Runner:\n"
+        "    @classmethod\n"
+        "    def gather(cls, fs, *, total=None):\n"
+        "        return list(fs)\n"
+    )
+    fixed_src = parent_src.replace("cls, fs, *,", "cls, *fs,")
+    test_src = (
+        "from proj.core import Runner\n\n\n"
+        "def test_keyword_only_default():\n"
+        "    assert Runner is not None\n\n\n"
+        "def test_gather_varargs():\n"
+        "    assert Runner.gather(1, 2, 3) == [1, 2, 3]\n"
+    )
+    (repo / "proj" / "core.py").write_text(parent_src, encoding="utf-8")
+    (repo / "tests" / "test_core.py").write_text(test_src, encoding="utf-8")
+    _git(repo, "init", "-q")
+    _commit(repo, "parent")
+
+    (repo / "proj" / "core.py").write_text(fixed_src, encoding="utf-8")
+    commit = _commit(repo, "accept varargs in gather")
+    row = learned.explore(repo, {"repo": "proj", "commit": commit,
+                                 "test": "tests/test_core.py", "sources": ["proj/core.py"]},
+                          seconds=90)
+    assert row["stage"] == "VERIFIED", row
+    assert row["replacement"] == "*fs"
+    assert row["flipped"] == ["tests/test_core.py::test_gather_varargs"]
+
