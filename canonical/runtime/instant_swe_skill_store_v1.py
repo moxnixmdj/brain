@@ -6,12 +6,22 @@ edited, or deleted without retraining.
 
 How one verified experience becomes a portable cross-repo skill:
   1. Given ONE verified (before_source, after_source, failure_context) repair,
-     locate the smallest changed AST node pair (expression OR statement).
+     locate the smallest changed AST region: a single changed expression/
+     statement (modes "expr"/"stmt") OR the minimal connected slice of
+     sibling statement lists whose length changed (mode "blk", e.g. an
+     `if X is None: return None` guard deleted while the adjacent `return`
+     was rewritten). Statement-block slices are anti-unified via
+     prefix/suffix structural alignment + largest-shared-subexpression hole
+     lifting (Refazer-style), so inter-statement dataflow becomes typed
+     holes rather than forcing single-statement matches.
   2. Alpha-canonicalize all local/bound names and shared subtrees into typed
      holes ($H0, $H1, ...) while preserving Python operators, structural AST
      forms, and built-in/constant tokens. Any foreign repo-specific identifier
      that does not appear in the before pattern is refused at admission time
      (preventing the foreign-name grafting defect measured in real_commit_repair_v1).
+  2b. Holes are annotated with computed dataflow tags (compared_none,
+      coalesced_default, returned, subscripted) inferred from pattern
+      structure -- a computed mechanism, not memorized knowledge.
   3. Attach the observed runtime/failure precondition traits (e.g. exception
      type, hole value traits such as falsey/not_none/not_bool, AST position).
   4. Admit the skill ONLY if it round-trips and reproduces the verified after
@@ -295,22 +305,171 @@ def _instantiate_ast(pattern: ast.AST, env: Mapping[str, ast.AST]) -> ast.AST:
 def _parse_fragment(code: str, mode: str) -> ast.AST:
     if mode == "expr":
         return ast.parse(code, mode="eval").body
+    if mode == "blk":
+        return ast.parse(code, mode="exec")
     mod = ast.parse(code, mode="exec")
     if len(mod.body) != 1:
         raise SkillStoreError("FRAGMENT_MUST_BE_SINGLE_NODE")
     return mod.body[0]
 
 
-def _smallest_changed_pair(
+def _hole_dataflow_tags(
+    before_root: ast.AST,
+    after_root: ast.AST,
+) -> dict[str, list[str]]:
+    """Compute dataflow tags for canonical holes from pattern structure.
+
+    Purely structural inference (no memorized facts):
+      * compared_none     -- hole appears as the left side of an ``is None`` test;
+      * isnull_compare    -- hole appears in any Compare against a None constant;
+      * coalesced_default -- hole appears in a BoolOp ``or`` with a constant default;
+      * returned          -- hole reaches a Return value;
+      * subscripted       -- hole is subscripted somewhere.
+    """
+    tags: dict[str, set[str]] = {}
+
+    def _tag(hole_id: str, label: str) -> None:
+        tags.setdefault(hole_id, set()).add(label)
+
+    def _holes_in(node: ast.AST) -> list[str]:
+        out: list[str] = []
+        for n in ast.walk(node):
+            hid = _is_hole_name(n)
+            if hid:
+                out.append(hid)
+        return out
+
+    for root in (before_root, after_root):
+        for n in ast.walk(root):
+            if isinstance(n, ast.Compare) and len(n.ops) == 1:
+                cmp0 = n.comparators[0]
+                if isinstance(cmp0, ast.Constant) and cmp0.value is None:
+                    for hid in _holes_in(n.left):
+                        _tag(hid, "compared_none")
+                        _tag(hid, "isnull_compare")
+            if isinstance(n, ast.BoolOp) and isinstance(n.op, ast.Or):
+                const_side = [v for v in n.values if isinstance(v, ast.Constant)]
+                if const_side:
+                    for v in n.values:
+                        if isinstance(v, ast.Constant):
+                            continue
+                        for hid in _holes_in(v):
+                            _tag(hid, "coalesced_default")
+            if isinstance(n, ast.Return) and n.value is not None:
+                for hid in _holes_in(n.value):
+                    _tag(hid, "returned")
+            if isinstance(n, ast.Subscript):
+                for hid in _holes_in(n.value):
+                    _tag(hid, "subscripted")
+
+    return {hid: sorted(v) for hid, v in tags.items()}
+
+
+_STATEMENT_LIST_FIELDS = frozenset({"body", "orelse", "finalbody"})
+
+
+def _find_stmt_list_length_mismatch(
+    b_root: ast.AST,
+    a_root: ast.AST,
+) -> list[tuple[str, ast.AST, ast.AST, list[ast.stmt], list[ast.stmt]]]:
+    """Collect statement-list fields whose LENGTH changed anywhere in the trees.
+
+    Walks the parallel trees node-by-node. Only same-typed positions are
+    traversed (a type change means the whole subtree is the diff, handled by
+    the single-node path). Returns at most a few hits; the caller fails closed
+    unless there is exactly one hit (unambiguous multi-statement edit).
+    """
+    hits: list[tuple[str, ast.AST, ast.AST, list[ast.stmt], list[ast.stmt]]] = []
+
+    def _walk(b_node: ast.AST, a_node: ast.AST) -> None:
+        if type(b_node) is not type(a_node):
+            return
+        for field_name, b_val in ast.iter_fields(b_node):
+            if field_name == "ctx":
+                continue
+            a_val = getattr(a_node, field_name, None)
+            if not (isinstance(b_val, list) and isinstance(a_val, list)):
+                continue
+            b_is_stmt_list = all(isinstance(x, ast.stmt) for x in b_val)
+            a_is_stmt_list = all(isinstance(x, ast.stmt) for x in a_val)
+            if (
+                field_name in _STATEMENT_LIST_FIELDS
+                and b_is_stmt_list
+                and a_is_stmt_list
+                and len(b_val) != len(a_val)
+            ):
+                hits.append((field_name, b_node, a_node, list(b_val), list(a_val)))
+                continue
+            if len(b_val) == len(a_val):
+                for bi, ai in zip(b_val, a_val):
+                    if isinstance(bi, ast.AST) and isinstance(ai, ast.AST):
+                        _walk(bi, ai)
+
+    _walk(b_root, a_root)
+    return hits
+
+
+def _trim_changed_slice(
+    b_list: list[ast.stmt],
+    a_list: list[ast.stmt],
+) -> tuple[list[ast.stmt], list[ast.stmt]]:
+    """Prefix/suffix-trim structurally identical statements."""
+    dumps_b = [_ast_dump_structural(s) for s in b_list]
+    dumps_a = [_ast_dump_structural(s) for s in a_list]
+    i = 0
+    while i < len(b_list) and i < len(a_list) and dumps_b[i] == dumps_a[i]:
+        i += 1
+    j = 0
+    while (
+        j < len(b_list) - i
+        and j < len(a_list) - i
+        and dumps_b[len(b_list) - 1 - j] == dumps_a[len(a_list) - 1 - j]
+    ):
+        j += 1
+    b_end = len(b_list) - j if j else len(b_list)
+    a_end = len(a_list) - j if j else len(a_list)
+    return b_list[i:b_end], a_list[i:a_end]
+
+
+def _as_module(stmts: list[ast.stmt]) -> ast.Module:
+    mod = ast.Module(body=[copy.deepcopy(s) for s in stmts], type_ignores=[])
+    ast.fix_missing_locations(mod)
+    return mod
+
+
+def _changed_region(
     before_source: str,
     after_source: str,
 ) -> tuple[ast.AST, ast.AST, str] | None:
-    """Find the smallest single changed AST node pair (expr or stmt)."""
+    """Locate the minimal connected changed AST region.
+
+    Returns (before_node, after_node, mode) with mode in {"expr", "stmt", "blk"}:
+      * "expr"/"stmt" -- a single smallest changed subtree (original behavior);
+      * "blk" -- ast.Module wrappers around the minimal connected slice of a
+        statement list whose length changed (e.g. guard-clause deletion with an
+        adjacent `return` rewrite).
+    Fails closed (None) when the trees disagree in more than one
+    length-mismatched statement list (ambiguous multi-hunk fix).
+    """
     try:
         b_tree = ast.parse(before_source)
         a_tree = ast.parse(after_source)
     except SyntaxError:
         return None
+
+    block_hits = _find_stmt_list_length_mismatch(b_tree, a_tree)
+    if len(block_hits) > 1:
+        return None
+    if len(block_hits) == 1:
+        _, _b_parent, _a_parent, b_list, a_list = block_hits[0]
+        b_slice, a_slice = _trim_changed_slice(b_list, a_list)
+        if not b_slice or not a_slice:
+            # Pure deletion/insertion blocks carry no cross-side dataflow holes;
+            # they fail the >=1 hole admission gate anyway, so refuse early.
+            return None
+        if len(b_slice) > 6 or len(a_slice) > 6:
+            return None
+        return _as_module(b_slice), _as_module(a_slice), "blk"
 
     def _descend(b_node: ast.AST, a_node: ast.AST) -> tuple[ast.AST, ast.AST] | None:
         if _ast_dump_structural(b_node) == _ast_dump_structural(a_node):
@@ -376,10 +535,14 @@ def induce_skill_from_verified_fix(
     Returns the admitted skill record, or None if the fix cannot be abstracted
     safely without foreign names or fails round-trip admission.
     """
-    found = _smallest_changed_pair(before_source, after_source)
+    found = _changed_region(before_source, after_source)
     if found is None:
         return None
     b_node, a_node, mode = found
+    if mode == "blk":
+        # Refuse rewrites that delete nothing/keep nothing
+        if not getattr(b_node, "body", None) or not getattr(a_node, "body", None):
+            return None
     abstracted = _abstract_pair(b_node, a_node)
     if abstracted is None:
         return None
@@ -400,6 +563,8 @@ def induce_skill_from_verified_fix(
     # Anti-overfit admission gate: never admit unconditional `pass` deletion of assignments
     if a_code == "pass" and isinstance(b_node, (ast.Assign, ast.AugAssign, ast.AnnAssign)):
         return None
+
+    hole_dataflow = _hole_dataflow_tags(b_pat, a_pat)
 
     # Map hole traits from original expression strings onto canonical hole IDs
     required_traits: dict[str, list[str]] = {}
@@ -428,6 +593,8 @@ def induce_skill_from_verified_fix(
     )
     skill_id = "skill_" + hashlib.sha256(sig_payload.encode("utf-8")).hexdigest()[:12]
 
+
+
     existing = store["skills"].get(skill_id)
     if existing is not None:
         existing["support_count"] = int(existing.get("support_count", 1)) + 1
@@ -445,6 +612,7 @@ def induce_skill_from_verified_fix(
         "before_pattern": b_code,
         "after_pattern": a_code,
         "hole_kinds": hole_to_kind,
+        "hole_dataflow": hole_dataflow,
         "required_hole_traits": required_traits,
         "support_hole_traits": support_traits,
         "exception_type_hint": exception_type,
@@ -616,3 +784,127 @@ def refute_skill(
     })
     skill["refutations"] = refutations[-20:]
     return {"status": "QUARANTINED", "skill_id": skill_id}
+
+
+# ---------------------------------------------------------------------------
+# Multi-statement block skills (mode "blk") — tree-rewrite morphisms
+# ---------------------------------------------------------------------------
+
+def _iter_stmt_lists(root: ast.AST) -> Iterable[list[ast.stmt]]:
+    """Yield every statement list appearing as a body/orelse/finalbody field."""
+    for node in ast.walk(root):
+        for field_name in ("body", "orelse", "finalbody"):
+            sub = getattr(node, field_name, None)
+            if (
+                isinstance(sub, list)
+                and sub
+                and all(isinstance(x, ast.stmt) for x in sub)
+            ):
+                yield sub
+
+
+def propose_block_skills(
+    store: Mapping[str, Any],
+    target_tree: ast.AST,
+    *,
+    site_lineno: int,
+    expr_traits: Mapping[str, Sequence[str]] | None = None,
+    exception_type: str = "",
+) -> list[dict[str, Any]]:
+    """Propose multi-statement block rewrites anchored at ``site_lineno``.
+
+    Slides a contiguous window of statements over every statement list in
+    ``target_tree``. Any window whose structural skeleton unifies with an
+    admitted block skill's before-pattern yields an instantiated after-block
+    splice. The window must CONTAIN ``site_lineno`` (fail-closed anchoring:
+    no site, no proposal).
+
+    Returns dicts with ``node`` (list of new stmts, deepcopied and located),
+    ``code`` (unparsed after-block), ``span`` = (start_lineno, end_lineno,
+    window_code, window_len) for the engine-side splice, ``bound_holes`` and
+    ``bound_traits``.
+    """
+    skills = [
+        s
+        for s in (store.get("skills") or {}).values()
+        if s.get("mode") == "blk" and s.get("status") != STATUS_QUARANTINED
+    ]
+    if not skills:
+        return []
+
+    proposals: list[dict[str, Any]] = []
+    seen_keys: set[str] = set()
+    ordered_skills = sorted(
+        skills,
+        key=lambda s: (
+            s.get("status") == STATUS_NARROWED,
+            int(s.get("support_count", 0)),
+            len(s.get("required_hole_traits") or {}),
+        ),
+        reverse=True,
+    )
+
+    for skill in ordered_skills:
+        exc_hint = str(skill.get("exception_type_hint") or "")
+        if exc_hint and exception_type and exc_hint != exception_type:
+            if exc_hint != "AssertionError":
+                continue
+        try:
+            b_pat = _parse_fragment(skill["before_pattern"], "blk")
+            a_pat = _parse_fragment(skill["after_pattern"], "blk")
+        except (SyntaxError, SkillStoreError):
+            continue
+        window_len = len(b_pat.body)
+        req_traits = skill.get("required_hole_traits") or {}
+
+        for stmt_list in _iter_stmt_lists(target_tree):
+            if len(stmt_list) < window_len:
+                continue
+            for i in range(len(stmt_list) - window_len + 1):
+                window = stmt_list[i : i + window_len]
+                start_ln = int(getattr(window[0], "lineno", 0) or 0)
+                end_ln = int(
+                    getattr(window[-1], "end_lineno", getattr(window[-1], "lineno", 0)) or 0
+                )
+                if not (start_ln <= int(site_lineno) <= end_ln):
+                    continue
+                b_mod = ast.Module(
+                    body=[copy.deepcopy(s) for s in window], type_ignores=[]
+                )
+                ast.fix_missing_locations(b_mod)
+                env: dict[str, ast.AST] = {}
+                if not _unify_ast(b_pat, b_mod, env):
+                    continue
+                # Check runtime preconditions on bound holes
+                precondition_ok = True
+                bound_traits: dict[str, list[str]] = {}
+                for hid, bound_ast in env.items():
+                    unparsed = ast.unparse(bound_ast)
+                    observed = set(str(t) for t in (expr_traits or {}).get(unparsed, ()))
+                    bound_traits[hid] = sorted(observed)
+                    needed = set(str(t) for t in req_traits.get(hid, ()))
+                    if needed and not needed.issubset(observed):
+                        precondition_ok = False
+                        break
+                if not precondition_ok:
+                    continue
+                inst = _instantiate_ast(a_pat, env)
+                new_stmts = list(inst.body)
+                inst_code = ast.unparse(inst)
+                window_code = ast.unparse(b_mod)
+                if inst_code == window_code:
+                    continue
+                sig = hashlib.sha256(inst_code.encode("utf-8")).hexdigest()[:16]
+                key = f"{skill['skill_id']}:{start_ln}:{sig}"
+                if key in seen_keys:
+                    continue
+                seen_keys.add(key)
+                proposals.append({
+                    "skill_id": skill["skill_id"],
+                    "node": new_stmts,
+                    "code": inst_code,
+                    "span": (start_ln, end_ln, window_code, window_len),
+                    "bound_holes": {k: ast.unparse(v) for k, v in env.items()},
+                    "bound_traits": bound_traits,
+                })
+    return proposals

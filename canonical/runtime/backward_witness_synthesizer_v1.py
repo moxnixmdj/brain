@@ -206,9 +206,20 @@ def backward_propagate_expression(
             results.append(expr)
 
     # ------------------------------------------------------------------
-    # 0. Direct Atom / Constant / Attribute Match (Depth-0 Base Case)
+    # 0. Direct Atom / Attribute Match (Depth-0 Base Case)
     # ------------------------------------------------------------------
+    # Spec-replay veto: a bare literal required by ALL failing assertions is NOT a
+    # function of the inputs. Substituting it for the output expression trivially
+    # satisfies the witnessed cases while being wrong everywhere else — that is
+    # reward-hacking the visible spec, never a repair. Frame identifiers and
+    # attributes (input-dependent laws, e.g. swapped-argument bugs) are kept.
     for h in _match_atom_or_const(expecteds, alphabets):
+        try:
+            _h_tree = ast.parse(h, mode="eval")
+        except SyntaxError:
+            continue
+        if isinstance(_h_tree.body, ast.Constant):
+            continue
         _emit(h)
     if results and _depth > 0:
         return results

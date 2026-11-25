@@ -1754,6 +1754,66 @@ def _replace_subexpr_in_tree(
         return None
 
 
+def _replace_block_in_tree(
+    tree: ast.Module,
+    start_lineno: int,
+    end_lineno: int,
+    window_code: str,
+    window_len: int,
+    new_stmts: list[ast.stmt],
+) -> str | None:
+    """Splice a multi-statement block replacement at [start_lineno, end_lineno].
+
+    Verifies the exact window by structural re-unparse before splicing
+    (fail-closed: any drift aborts).
+    """
+    clone = copy.deepcopy(tree)
+    replaced = False
+
+    def _rewrite_body(body: list[ast.stmt]) -> list[ast.stmt]:
+        nonlocal replaced
+        out: list[ast.stmt] = []
+        i = 0
+        while i < len(body):
+            if not replaced and i + window_len <= len(body):
+                slc = body[i : i + window_len]
+                first_ln = int(getattr(slc[0], "lineno", 0) or 0)
+                last_end = int(
+                    getattr(slc[-1], "end_lineno", getattr(slc[-1], "lineno", 0)) or 0
+                )
+                if first_ln == start_lineno and last_end == end_lineno:
+                    mod = ast.Module(
+                        body=[copy.deepcopy(s) for s in slc], type_ignores=[]
+                    )
+                    if ast.unparse(mod) == window_code:
+                        replaced = True
+                        out.extend(copy.deepcopy(new_stmts))
+                        i += window_len
+                        continue
+            st = body[i]
+            for field_name in ("body", "orelse", "finalbody"):
+                sub = getattr(st, field_name, None)
+                if isinstance(sub, list) and sub and isinstance(sub[0], ast.stmt):
+                    setattr(st, field_name, _rewrite_body(sub))
+            if isinstance(st, ast.Try):
+                for h in st.handlers:
+                    h.body = _rewrite_body(h.body)
+            out.append(st)
+            i += 1
+        return out
+
+    clone.body = _rewrite_body(clone.body)
+    if not replaced:
+        return None
+    ast.fix_missing_locations(clone)
+    try:
+        code = ast.unparse(clone) + "\n"
+        ast.parse(code)
+        return code
+    except SyntaxError:
+        return None
+
+
 def _replace_stmt_in_tree(
     tree: ast.Module,
     target_lineno: int,
@@ -4763,24 +4823,37 @@ def _synthesize_static_cone_and_truthiness_repairs(
             _bwr_transforms = _BWS_RET.backward_propagate_expression("__ret__", _bwr_examples, max_depth=2)
         except Exception:
             _bwr_transforms = []
-        # Anti-overfit guard: never emit a multi-char / digit-bearing `.replace(old, new)`
-        # synthesized from a single assertion pair (e.g. `.replace('0.000-', '-0.0000')`).
+        # Anti-overfit guard: never emit a multi-char / digit-bearing affix or replace
+        # constant synthesized from a single assertion pair (e.g. `.replace('0.000-', '-0.0000')`
+        # or `.removeprefix('ss@')`). One witness cannot justify a literal; the transform
+        # must come from a structural law (rstrip/strip/affix classes over MULTIPLE pairs,
+        # or replace/affix with short structural constants like '\\n'/' ').
         if len(_bwr_pairs) == 1:
             _bwr_filtered: list[str] = []
             for _tr in _bwr_transforms:
-                if ".replace(" in _tr:
-                    _m_rep = re.search(r"\.replace\(([^,]+),\s*([^)]+)\)", _tr)
-                    if _m_rep:
-                        try:
-                            _r_old = ast.literal_eval(_m_rep.group(1).strip())
-                            _r_new = ast.literal_eval(_m_rep.group(2).strip())
-                            if isinstance(_r_old, str) and isinstance(_r_new, str):
-                                if any(ch.isdigit() for ch in _r_old + _r_new) or (
-                                    len(_r_old) > 2 and any(ch.isalnum() for ch in _r_old)
-                                ):
-                                    continue
-                        except Exception:
-                            pass
+                _overfit = False
+                for _pat in (
+                    r"\.replace\(([^,]+),\s*([^)]+)\)",
+                    r"\.removeprefix\(([^)]*)\)",
+                    r"\.removesuffix\(([^)]*)\)",
+                ):
+                    _m_aff = re.search(_pat, _tr)
+                    if not _m_aff:
+                        continue
+                    try:
+                        _consts = [ast.literal_eval(g.strip()) for g in _m_aff.groups()]
+                    except Exception:
+                        continue
+                    if not all(isinstance(c, str) for c in _consts):
+                        continue
+                    _joined = "".join(_consts)
+                    if any(ch.isdigit() for ch in _joined) or (
+                        len(_joined) > 2 and any(ch.isalnum() for ch in _joined)
+                    ):
+                        _overfit = True
+                        break
+                if _overfit:
+                    continue
                 _bwr_filtered.append(_tr)
             _bwr_transforms = _bwr_filtered
         # Prefer narrower/safer string trims (`rstrip`/`lstrip`) before broad `strip` when both satisfy
@@ -10880,6 +10953,35 @@ def synthesize_candidates(
                                             hole_traits=traits,
                                         )
                                     )
+            # Tier 0c: Multi-statement block skills (tree-rewrite morphisms,
+            # mode "blk"). One exposure to a verified multi-statement repair
+            # crystallizes a typed dataflow morphism; anchored at the failing
+            # site; splice verifies the exact window before splicing.
+            for prop in SKILL_STORE.propose_block_skills(
+                skill_store,
+                tree,
+                site_lineno=site.lineno,
+                expr_traits=traits,
+                exception_type=exc_type,
+            ):
+                _s0, _s1, _scode, _slen = prop["span"]
+                code = _replace_block_in_tree(
+                    tree, _s0, _s1, _scode, _slen, prop["node"]
+                )
+                if code:
+                    push(
+                        PatchCandidate(
+                            file=site.file,
+                            lineno=site.lineno,
+                            tier="TIER0_SKILL_RECALL",
+                            description=f"skill:{prop['skill_id']}->blk:{prop['code']}"[:200],
+                            patched_source=code,
+                            skill_id=prop["skill_id"],
+                            skill_bound_traits=prop["bound_traits"],
+                            ast_position="blk",
+                            hole_traits=traits,
+                        )
+                    )
 
     # ------------------------------------------------------------------
     # Tier 3b (High-Precision Fast-Path): Epistemic Static-Cone & Structural Laws
@@ -12536,6 +12638,125 @@ def _cegis_refine_entry_guard(
 # Stage 4: End-to-End Closed-Loop Solve + Strict Verification + Skill Learning
 # ---------------------------------------------------------------------------
 
+
+def _boundary_fuzz_gate(
+    cand: "PatchCandidate",
+    orig_source: str,
+    *,
+    boundary_fuzz_reject: bool,
+    negative_store: dict[str, Any] | None,
+) -> dict[str, Any] | None:
+    """CoW boundary-mutation invariance gate on a fully verified candidate.
+
+    Returns the fuzz report, or None when the candidate is REJECTED
+    (boundary_fuzz_reject=True and a NEW exception class appeared on a
+    boundary input). Fail-open on internal fuzzer errors (an UNAVAILABLE
+    report is recorded; a verified fix is never blocked by fuzzer failure).
+    """
+    try:
+        rep = RCCE.fuzz_patched_module_sources(orig_source, cand.patched_source)
+    except Exception as exc:
+        rep = {
+            "schema": RCCE.SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_UNAVAILABLE",
+            "verdict": "UNAVAILABLE",
+            "error": f"{type(exc).__name__}: {exc}",
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    if boundary_fuzz_reject and rep.get("verdict") == "NEW_EXCEPTION":
+        if negative_store is not None:
+            RCCE.record_negative_invariant(
+                negative_store,
+                scope="swe_patch",
+                reason="BOUNDARY_FUZZ_NEW_EXCEPTION",
+                file_rel=cand.file,
+                lineno=cand.lineno,
+                tier=cand.tier,
+                forbidden_pattern=cand.description,
+                regressed_tests=[str(c) for c in rep.get("new_exception_cases", [])],
+            )
+        return None
+    return rep
+
+
+def _boundary_fuzz_gate_patched_files(
+    patched_files: Mapping[str, str],
+    *,
+    src_root: pathlib.Path,
+    boundary_fuzz_reject: bool,
+    negative_store: dict[str, Any] | None,
+    lineno_map: Mapping[str, int] | None = None,
+    tier: str = "",
+    description: str = "",
+) -> dict[str, Any] | None:
+    """CoW boundary-mutation invariance gate on a COMPOSED (multi-file / spliced) verified patch.
+
+    Runs the boundary-mutation fuzzer once per patched file, against that
+    file's pristine original source read from `src_root`. Aggregates a single
+    report. Returns None only when boundary_fuzz_reject=True and at least one
+    file exhibits a NEW exception class (negative invariants recorded per
+    offending file). Fail-open per file on fuzzer/IO errors (UNAVAILABLE
+    report recorded; a verified fix is never blocked by fuzzer failure).
+    """
+    per_file: dict[str, dict[str, Any]] = {}
+    new_exc_files: list[str] = []
+    for rel, patched in patched_files.items():
+        try:
+            orig = (src_root / rel).read_text(encoding="utf-8")
+        except Exception as exc:
+            per_file[rel] = {
+                "schema": RCCE.SCHEMA,
+                "modality": "cow_boundary_invariance",
+                "status": "FUZZ_UNAVAILABLE",
+                "verdict": "UNAVAILABLE",
+                "error": f"read:{type(exc).__name__}: {exc}",
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+            continue
+        try:
+            rep = RCCE.fuzz_patched_module_sources(orig, patched)
+        except Exception as exc:
+            rep = {
+                "schema": RCCE.SCHEMA,
+                "modality": "cow_boundary_invariance",
+                "status": "FUZZ_UNAVAILABLE",
+                "verdict": "UNAVAILABLE",
+                "error": f"{type(exc).__name__}: {exc}",
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        per_file[rel] = rep
+        if rep.get("verdict") == "NEW_EXCEPTION":
+            new_exc_files.append(rel)
+    if boundary_fuzz_reject and new_exc_files:
+        if negative_store is not None:
+            for rel in new_exc_files:
+                rep = per_file[rel]
+                RCCE.record_negative_invariant(
+                    negative_store,
+                    scope="swe_patch",
+                    reason="BOUNDARY_FUZZ_NEW_EXCEPTION",
+                    file_rel=rel,
+                    lineno=int((lineno_map or {}).get(rel, 0) or 0),
+                    tier=tier,
+                    forbidden_pattern=description or f"composed_boundary_fuzz({rel})",
+                    regressed_tests=[str(c) for c in rep.get("new_exception_cases", [])],
+                )
+        return None
+    return {
+        "schema": RCCE.SCHEMA,
+        "modality": "cow_boundary_invariance",
+        "status": "FUZZ_COMPOSED",
+        "verdict": "NEW_EXCEPTION" if new_exc_files else "CLEAN",
+        "files": per_file,
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+
 def solve_repository(
     repo_root: str | pathlib.Path,
     test_targets: Sequence[str],
@@ -12552,6 +12773,8 @@ def solve_repository(
     max_compose_depth: int = 2,
     readonly_files: Sequence[str] | None = None,
     negative_store: dict[str, Any] | None = None,
+    boundary_fuzz: bool = True,
+    boundary_fuzz_reject: bool = False,
 ) -> dict[str, Any]:
     """Run the full zero-LLM causal-angelic repair loop on an isolated copy of `repo_root`.
 
@@ -12563,6 +12786,9 @@ def solve_repository(
     src_root = pathlib.Path(repo_root).resolve()
     if skill_store is not None:
         skill_store.setdefault("skills", {})
+    _neg_store = negative_store
+    if _neg_store is None and isinstance(skill_store, dict) and "l3_negative_invariants" in skill_store:
+        _neg_store = skill_store["l3_negative_invariants"]
 
     with tempfile.TemporaryDirectory(prefix="brain_swe_") as tmp_dir:
         wt = pathlib.Path(tmp_dir) / "wt"
@@ -12742,6 +12968,16 @@ def solve_repository(
                         tofile=f"b/{cand.file}",
                     )
                 )
+                boundary_fuzz_report = None
+                if boundary_fuzz:
+                    boundary_fuzz_report = _boundary_fuzz_gate(
+                        cand,
+                        orig_source,
+                        boundary_fuzz_reject=boundary_fuzz_reject,
+                        negative_store=_neg_store,
+                    )
+                    if boundary_fuzz_report is None:
+                        continue  # boundary fuzz veto: record L3 invariant & keep searching
                 alaw = (skill_store.get("ast_rewrite_laws") or {}).get(cand.skill_id) if skill_store else None
                 if alaw is not None:
                     alaw["verified_count"] = int(alaw.get("verified_count", 1)) + 1
@@ -12758,6 +12994,7 @@ def solve_repository(
                     "regressions": 0,
                     "total_passed_after": sum(1 for v in full_verdicts.values() if v == "PASSED"),
                     "learned_skill_id": cand.skill_id,
+                    "boundary_fuzz": boundary_fuzz_report,
                 }
                 return {
                     "schema": SCHEMA,
@@ -12814,7 +13051,7 @@ def solve_repository(
         # Screen deterministic structural laws BEFORE running angelic_probe so monolith suites
         # verify in seconds instead of spending 15-60s on unnecessary probes!
         pre_tested_keys: set[tuple[str, str]] = set()
-        hp_best_per_file: dict[str, tuple[set[str], PatchCandidate, str]] = {}
+        hp_top_per_file: dict[str, list[tuple[set[str], PatchCandidate, str, int]]] = {}
         hp_cands = synthesize_candidates(
             wt,
             loc,
@@ -12829,9 +13066,6 @@ def solve_repository(
                 if c.file.replace("\\", "/").lstrip("./") not in _ro_norm
                 and pathlib.Path(c.file).name not in _ro_bases
             ]
-        _neg_store = negative_store
-        if _neg_store is None and isinstance(skill_store, dict) and "l3_negative_invariants" in skill_store:
-            _neg_store = skill_store["l3_negative_invariants"]
         splice_deferred: list[tuple[str, PatchCandidate]] = []
         for cand in hp_cands:
             if _neg_store is not None and RCCE.check_negative_invariants(
@@ -12882,9 +13116,10 @@ def solve_repository(
                             fast_ok = True
                 if not fast_ok:
                     if max_compose_depth > 1 and fast_flipped_n >= 1:
-                        prev_bf = hp_best_per_file.get(cand.file)
-                        if prev_bf is None or fast_flipped_n > len(prev_bf[0]):
-                            hp_best_per_file[cand.file] = (fast_flipped_set, cand, orig_source)
+                        _lst = hp_top_per_file.setdefault(cand.file, [])
+                        _lst.append((set(fast_flipped_set), cand, orig_source, fast_flipped_n))
+                        _lst.sort(key=lambda e: -len(e[0]))
+                        del _lst[4:]
                         partial_pool.append((fast_flipped_n, cand, orig_source))
                         partial_pool.sort(key=lambda x: -x[0])
                         if len(partial_pool) > 6:
@@ -12959,6 +13194,16 @@ def solve_repository(
                         tofile=f"b/{cand.file}",
                     )
                 )
+                boundary_fuzz_report = None
+                if boundary_fuzz:
+                    boundary_fuzz_report = _boundary_fuzz_gate(
+                        cand,
+                        orig_source,
+                        boundary_fuzz_reject=boundary_fuzz_reject,
+                        negative_store=_neg_store,
+                    )
+                    if boundary_fuzz_report is None:
+                        continue  # boundary fuzz veto: record L3 invariant & keep searching
                 learned_skill = None
                 if learn_into_store and skill_store is not None:
                     exc_type = ""
@@ -13019,6 +13264,7 @@ def solve_repository(
                     "regressions": 0,
                     "total_passed_after": sum(1 for v in full_verdicts.values() if v == "PASSED"),
                     "learned_skill_id": learned_skill["skill_id"] if learned_skill else None,
+                    "boundary_fuzz": boundary_fuzz_report,
                 }
                 return {
                     "schema": SCHEMA,
@@ -13052,98 +13298,165 @@ def solve_repository(
         # Stage 1.5b: Instant Disjoint-File Multi-File Composition (`SWE-bench Pro` multi-file fast path!)
         # If 2+ distinct files each flipped a subset of `target_flips` whose union covers all failing tests,
         # verify their atomic multi-file union directly before running Stage 2 angelic probes!
-        if max_compose_depth > 1 and len(hp_best_per_file) >= 2:
-            union_flips: set[str] = set()
-            for fset, _, _ in hp_best_per_file.values():
-                union_flips.update(fset)
-            if set(target_flips).issubset(union_flips):
-                # Greedy minimal set-cover over distinct files
-                remaining_t = set(target_flips)
-                chosen_files: list[tuple[PatchCandidate, str]] = []
-                for _f, (fset, fc, forig) in sorted(hp_best_per_file.items(), key=lambda kv: -len(kv[1][0])):
-                    if fset & remaining_t:
-                        chosen_files.append((fc, forig))
-                        remaining_t -= fset
-                    if not remaining_t:
+        # Ranked component-verified search: dedup the per-file pools, score every UNIQUE
+        # single-file candidate against the full suite once (flips x regressions), then verify
+        # unions coverage-first / regressions-first (cap 8 verifies). The fast screen only runs
+        # the failing targets, so regression information does not exist until a full suite pass;
+        # without this step a single regressing pick could forfeit an otherwise-valid disjoint
+        # composition whose clean counterpart exists in the same pool.
+        if max_compose_depth > 1 and len(hp_top_per_file) >= 2:
+            import itertools as _itertools
+
+            hp_unique_per_file: dict[str, list[tuple[set[str], PatchCandidate, str, int]]] = {}
+            for _f, _lst in hp_top_per_file.items():
+                _seen: set[str] = set()
+                _uniq: list[tuple[set[str], PatchCandidate, str, int]] = []
+                for _e in _lst:
+                    _k = _e[1].patched_source
+                    if _k in _seen:
+                        continue
+                    _seen.add(_k)
+                    _uniq.append(_e)
+                hp_unique_per_file[_f] = _uniq
+
+            # Score each unique single-file candidate once against the full suite.
+            single_scores: dict[int, tuple[set[str], list[str]]] = {}
+            _single_budget = 10
+            for _f, _lst in hp_unique_per_file.items():
+                for _e in _lst:
+                    if _single_budget <= 0:
                         break
-                if len(chosen_files) >= 2 and not remaining_t:
+                    _key = id(_e[1])
                     full_verifications += 1
-                    verify_wt = pathlib.Path(tmp_dir) / f"verify_mf_{full_verifications}"
+                    _single_budget -= 1
+                    verify_wt = pathlib.Path(tmp_dir) / f"verify_mf_single_{full_verifications}"
                     copy_worktree(src_root, verify_wt)
-                    for fc, _ in chosen_files:
-                        (verify_wt / fc.file).write_text(fc.patched_source, encoding="utf-8")
+                    (verify_wt / _e[1].file).write_text(_e[1].patched_source, encoding="utf-8")
                     full_verdicts, _, _ = run_verdicts(
                         verify_wt, test_targets, python_exe=python_exe, timeout_s=max(timeout_s, 60.0)
                     )
-                    all_flipped, regressions, _ = _eval_verdicts(full_verdicts, verify_wt, target_flips)
+                    _af, _regs, _rem = _eval_verdicts(full_verdicts, verify_wt, target_flips)
                     shutil.rmtree(verify_wt, ignore_errors=True)
-                    if all_flipped and not regressions:
-                        combined_diff = "".join(
-                            "".join(
-                                difflib.unified_diff(
-                                    forig.splitlines(keepends=True),
-                                    fc.patched_source.splitlines(keepends=True),
-                                    fromfile=f"a/{fc.file}",
-                                    tofile=f"b/{fc.file}",
-                                )
-                            )
-                            for fc, forig in chosen_files
+                    single_scores[_key] = (set(_e[0]) - set(_rem), _regs)
+
+            def _rank_key(_e: tuple) -> tuple[int, int]:
+                _cov, _regs = single_scores.get(id(_e[1]), (set(_e[0]), ["?"]))
+                return (-len(_cov), len(_regs))
+
+            _files_items = sorted(hp_unique_per_file.items(), key=lambda kv: -len(kv[1][0][0]))
+            _ranked_lists = [sorted(lst, key=_rank_key) for _, lst in _files_items]
+            _all_combos = list(_itertools.product(*_ranked_lists))
+            _valid_combos = [
+                c
+                for c in _all_combos
+                if set(target_flips).issubset(set().union(*[e[0] for e in c]))
+            ]
+
+            def _combo_key(_c: tuple) -> tuple[int, int]:
+                _cov = len(set().union(*[single_scores.get(id(e[1]), (set(e[0]),))[0] for e in _c]))
+                _regs = sum(len(single_scores.get(id(e[1]), (None, ["?"]))[1]) for e in _c)
+                return (-_cov, _regs)
+
+            _valid_combos.sort(key=_combo_key)
+            best_combo: tuple[tuple, dict[str, str]] | None = None
+            for _combo in _valid_combos[:8]:
+                full_verifications += 1
+                verify_wt = pathlib.Path(tmp_dir) / f"verify_mf_{full_verifications}"
+                copy_worktree(src_root, verify_wt)
+                for _e in _combo:
+                    (verify_wt / _e[1].file).write_text(_e[1].patched_source, encoding="utf-8")
+                full_verdicts, _, _ = run_verdicts(
+                    verify_wt, test_targets, python_exe=python_exe, timeout_s=max(timeout_s, 60.0)
+                )
+                all_flipped, regressions, _ = _eval_verdicts(full_verdicts, verify_wt, target_flips)
+                shutil.rmtree(verify_wt, ignore_errors=True)
+                if all_flipped and not regressions:
+                    _pf_map = {e[1].file: e[1].patched_source for e in _combo}
+                    _bf_report = None
+                    if boundary_fuzz:
+                        _bf_report = _boundary_fuzz_gate_patched_files(
+                            _pf_map,
+                            src_root=src_root,
+                            boundary_fuzz_reject=boundary_fuzz_reject,
+                            negative_store=_neg_store,
+                            lineno_map={e[1].file: e[1].lineno for e in _combo},
+                            tier="COMPOSED_ANGELIC_PROGRESS",
+                            description=" + ".join(e[1].description for e in _combo),
                         )
-                        fc0 = chosen_files[0][0]
-                        winner = {
-                            "file": fc0.file,
-                            "files": [fc.file for fc, _ in chosen_files],
-                            "compose_depth": len(chosen_files),
-                            "composed_patches": [
-                                {
-                                    "file": fc.file,
-                                    "lineno": fc.lineno,
-                                    "tier": fc.tier,
-                                    "description": fc.description,
-                                }
-                                for fc, _ in chosen_files
-                            ],
-                            "lineno": fc0.lineno,
-                            "tier": "COMPOSED_ANGELIC_PROGRESS",
-                            "description": " + ".join(f"{fc.file}:{fc.description}" for fc, _ in chosen_files),
-                            "skill_id_used": None,
-                            "attempt": attempts,
-                            "diff": combined_diff,
-                            "patched_source": fc0.patched_source,
-                            "patched_files": {fc.file: fc.patched_source for fc, _ in chosen_files},
-                            "flipped_tests": target_flips,
-                            "regressions": 0,
-                            "total_passed_after": sum(1 for v in full_verdicts.values() if v == "PASSED"),
-                            "learned_skill_id": None,
+                        if _bf_report is None:
+                            continue  # boundary fuzz veto: record L3 invariant & keep searching
+                    best_combo = (_combo, full_verdicts, _bf_report)
+                    break
+            if best_combo is not None:
+                combo, full_verdicts, composed_boundary_fuzz = best_combo
+                chosen_files = [(e[1], e[2]) for e in combo]
+                combined_diff = "".join(
+                    "".join(
+                        difflib.unified_diff(
+                            forig.splitlines(keepends=True),
+                            fc.patched_source.splitlines(keepends=True),
+                            fromfile=f"a/{fc.file}",
+                            tofile=f"b/{fc.file}",
+                        )
+                    )
+                    for fc, forig in chosen_files
+                )
+                fc0 = chosen_files[0][0]
+                winner = {
+                    "file": fc0.file,
+                    "files": [fc.file for fc, _ in chosen_files],
+                    "compose_depth": len(chosen_files),
+                    "composed_patches": [
+                        {
+                            "file": fc.file,
+                            "lineno": fc.lineno,
+                            "tier": fc.tier,
+                            "description": fc.description,
                         }
-                        return {
-                            "schema": SCHEMA,
-                            "authority": AUTHORITY,
-                            "status": "VERIFIED",
-                            "verified": True,
-                            "failing_tests": loc.failing_tests,
-                            "passing_tests_count": len(loc.passing_tests),
-                            "localized_sites_top5": [
-                                {
-                                    "file": s.file,
-                                    "lineno": s.lineno,
-                                    "weight": s.weight,
-                                    "ochiai": s.ochiai,
-                                    "tb_boost": s.tb_boost,
-                                }
-                                for s in loc.sites[:5]
-                            ],
-                            "angelic_probes_run": 0,
-                            "angelic_witnesses": [],
-                            "candidates_generated": len(hp_cands),
-                            "attempts": attempts,
-                            "full_verifications": full_verifications,
-                            "refuted_skills": refuted_skills,
-                            "winner": winner,
-                            "model_calls": 0,
-                            "parameters_stored": 0,
-                            "seconds": round(time.monotonic() - t0, 3),
+                        for fc, _ in chosen_files
+                    ],
+                    "lineno": fc0.lineno,
+                    "tier": "COMPOSED_ANGELIC_PROGRESS",
+                    "description": " + ".join(f"{fc.file}:{fc.description}" for fc, _ in chosen_files),
+                    "skill_id_used": None,
+                    "attempt": attempts,
+                    "diff": combined_diff,
+                    "patched_source": fc0.patched_source,
+                    "patched_files": {fc.file: fc.patched_source for fc, _ in chosen_files},
+                    "flipped_tests": target_flips,
+                    "regressions": 0,
+                    "total_passed_after": sum(1 for v in full_verdicts.values() if v == "PASSED"),
+                    "learned_skill_id": None,
+                    "boundary_fuzz": composed_boundary_fuzz,
+                }
+                return {
+                    "schema": SCHEMA,
+                    "authority": AUTHORITY,
+                    "status": "VERIFIED",
+                    "verified": True,
+                    "failing_tests": loc.failing_tests,
+                    "passing_tests_count": len(loc.passing_tests),
+                    "localized_sites_top5": [
+                        {
+                            "file": s.file,
+                            "lineno": s.lineno,
+                            "weight": s.weight,
+                            "ochiai": s.ochiai,
+                            "tb_boost": s.tb_boost,
                         }
+                        for s in loc.sites[:5]
+                    ],
+                    "angelic_probes_run": 0,
+                    "angelic_witnesses": [],
+                    "candidates_generated": len(hp_cands),
+                    "attempts": attempts,
+                    "full_verifications": full_verifications,
+                    "refuted_skills": refuted_skills,
+                    "winner": winner,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                    "seconds": round(time.monotonic() - t0, 3),
+                }
 
         # Stage 2: Fast counterfactual angelic probing
         witnesses, probes_run = angelic_probe(
@@ -13422,6 +13735,16 @@ def solve_repository(
                         tofile=f"b/{cand.file}",
                     )
                 )
+                boundary_fuzz_report = None
+                if boundary_fuzz:
+                    boundary_fuzz_report = _boundary_fuzz_gate(
+                        cand,
+                        orig_source,
+                        boundary_fuzz_reject=boundary_fuzz_reject,
+                        negative_store=_neg_store,
+                    )
+                    if boundary_fuzz_report is None:
+                        continue  # boundary fuzz veto: record L3 invariant & keep searching
                 learned_skill = None
                 if learn_into_store and skill_store is not None:
                     exc_type = ""
@@ -13482,6 +13805,7 @@ def solve_repository(
                     "regressions": 0,
                     "total_passed_after": sum(1 for v in full_verdicts.values() if v == "PASSED"),
                     "learned_skill_id": learned_skill["skill_id"] if learned_skill else None,
+                    "boundary_fuzz": boundary_fuzz_report,
                 }
                 break
             elif cand.skill_id and refute_failed_skills and skill_store is not None:
@@ -13526,6 +13850,20 @@ def solve_repository(
                     _sp_flip, _sp_reg, _ = _eval_verdicts(_sp_fv, _sp_wt, target_flips)
                     shutil.rmtree(_sp_wt, ignore_errors=True)
                     if _sp_flip and not _sp_reg:
+                        _sp_pf = {_sp_cand.file: _sp["patched_source"]}
+                        _sp_bf = None
+                        if boundary_fuzz:
+                            _sp_bf = _boundary_fuzz_gate_patched_files(
+                                _sp_pf,
+                                src_root=src_root,
+                                boundary_fuzz_reject=boundary_fuzz_reject,
+                                negative_store=_neg_store,
+                                lineno_map={_sp_cand.file: int(_sp["lineno"])},
+                                tier="TIER3_DUAL_PROGRAM_SPLICE",
+                                description=f"dual_program_splice(L{_sp['lineno']})",
+                            )
+                            if _sp_bf is None:
+                                continue  # boundary fuzz veto: record L3 invariant & keep searching
                         _sp_diff = "".join(
                             difflib.unified_diff(
                                 _sp_orig.splitlines(keepends=True),
@@ -13547,6 +13885,7 @@ def solve_repository(
                             "regressions": 0,
                             "total_passed_after": sum(1 for v in _sp_fv.values() if v == "PASSED"),
                             "learned_skill_id": None,
+                            "boundary_fuzz": _sp_bf,
                         }
                         break
 
@@ -13603,6 +13942,22 @@ def solve_repository(
                         comp_all_flipped, comp_regs, _ = _eval_verdicts(comp_verdicts, verify_comp_wt, target_flips)
                         shutil.rmtree(verify_comp_wt, ignore_errors=True)
                         if comp_all_flipped and not comp_regs:
+                            _c_bf = None
+                            if boundary_fuzz:
+                                _c_bf = _boundary_fuzz_gate_patched_files(
+                                    composed_files,
+                                    src_root=src_root,
+                                    boundary_fuzz_reject=boundary_fuzz_reject,
+                                    negative_store=_neg_store,
+                                    lineno_map={p_cand.file: p_cand.lineno},
+                                    tier="COMPOSED_ANGELIC_PROGRESS",
+                                    description=" + ".join(
+                                        [p_cand.description]
+                                        + [str(sp.get("description", "")) for sp in sub_patches]
+                                    ),
+                                )
+                                if _c_bf is None:
+                                    continue  # boundary fuzz veto: record L3 invariant & keep searching
                             diffs = []
                             for rel_f, patched_txt in composed_files.items():
                                 orig_f = (src_root / rel_f).read_text(encoding="utf-8")
@@ -13642,6 +13997,7 @@ def solve_repository(
                                 "regressions": 0,
                                 "total_passed_after": sum(1 for v in comp_verdicts.values() if v == "PASSED"),
                                 "learned_skill_id": sub_w.get("learned_skill_id"),
+                                "boundary_fuzz": _c_bf,
                             }
                 shutil.rmtree(frontier_wt, ignore_errors=True)
 
@@ -13713,6 +14069,22 @@ def solve_repository(
                         comp_all_flipped, comp_regs, _ = _eval_verdicts(comp_verdicts, verify_cs_wt, target_flips)
                         shutil.rmtree(verify_cs_wt, ignore_errors=True)
                         if comp_all_flipped and not comp_regs:
+                            _cs_bf = None
+                            if boundary_fuzz:
+                                _cs_bf = _boundary_fuzz_gate_patched_files(
+                                    composed_files,
+                                    src_root=src_root,
+                                    boundary_fuzz_reject=boundary_fuzz_reject,
+                                    negative_store=_neg_store,
+                                    lineno_map={p_cand.file: p_cand.lineno},
+                                    tier="COMPOSED_CAUSAL_SHIFT_PROGRESS",
+                                    description=" + ".join(
+                                        [p_cand.description]
+                                        + [str(sp.get("description", "")) for sp in sub_patches]
+                                    ),
+                                )
+                                if _cs_bf is None:
+                                    continue  # boundary fuzz veto: record L3 invariant & keep searching
                             diffs = []
                             for rel_f, patched_txt in composed_files.items():
                                 orig_f = (src_root / rel_f).read_text(encoding="utf-8")
@@ -13752,6 +14124,7 @@ def solve_repository(
                                 "regressions": 0,
                                 "total_passed_after": sum(1 for v in comp_verdicts.values() if v == "PASSED"),
                                 "learned_skill_id": sub_w.get("learned_skill_id"),
+                                "boundary_fuzz": _cs_bf,
                             }
                 shutil.rmtree(frontier_cs_wt, ignore_errors=True)
 

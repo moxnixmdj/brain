@@ -1841,3 +1841,439 @@ def delete_negative_invariant(store: dict[str, Any], invariant_id: str) -> bool:
         return True
     return False
 
+
+
+# ===========================================================================
+# 8. BOUNDARY-MUTATION INVARIANCE FUZZING (1ms CoW Differential Fuzzing)
+# ===========================================================================
+# Frontier models pass the visible suite while shipping hidden edge-case
+# regressions (None, empty, -0, control bytes). Here a candidate patch that is
+# GREEN on the suite is forked in 1ms CoW children against a grid of type
+# boundary values; any NEW exception class introduced by the patch is caught
+# before a single byte is committed. Output-value changes are EXPECTED for a
+# genuine bug fix and are reported, never rejected. Only NEW CRASH CLASSES
+# with `verdict == "NEW_EXCEPTION"` trigger rejection (opt-in).
+
+_BOUNDARY_INTS = [0, -0, 1, -1, 2, -2, 127, 128, 255, 256, -256, 2**31 - 1, -(2**31), 10**9]
+_BOUNDARY_FLOATS = [0.0, -0.0, 1.5, -2.5, 1e308, -1e308, float("inf"), float("-inf"), float("nan")]
+_BOUNDARY_STRS = [
+    "", " ", "a", "A", "0", "-0", "\x00", "\x04", "\x1a", "\x7f",
+    "\x1b[31m", "é", "🙂", "1e309", "None", "true",
+]
+_BOUNDARY_BYTES = [b"", b"\x00", b"\x04", b"\x1a", b"\x7f", b"a", b"\xff" * 16]
+_BOUNDARY_BOOLS = [True, False]
+_BOUNDARY_LISTS = [[], [0], [-1], [None, 0], [0, 1, 2], list(range(64))]
+_BOUNDARY_DICTS = [{}, {"a": 1}, {"a": None}, {"": ""}]
+
+
+def _boundary_pool_for(annotation: str | None, default_repr: str | None) -> list[Any]:
+    low = (annotation or "").lower()
+    pools: list[list[Any]] = []
+    matched = False
+    if "int" in low and "bool" not in low:
+        pools.append(_BOUNDARY_INTS); matched = True
+    if "float" in low or "complex" in low:
+        pools.append(_BOUNDARY_FLOATS); matched = True
+    if "bytes" in low or "bytearray" in low:
+        pools.append(_BOUNDARY_BYTES); matched = True
+    if "str" in low:
+        pools.append(_BOUNDARY_STRS); matched = True
+    if "bool" in low:
+        pools.append(_BOUNDARY_BOOLS); matched = True
+    if "list" in low or "sequence" in low or "tuple" in low or "iterable" in low:
+        pools.append(_BOUNDARY_LISTS); matched = True
+    if "dict" in low or "mapping" in low:
+        pools.append(_BOUNDARY_DICTS); matched = True
+    if "optional" in low or "none" in low or not matched:
+        pools.append([None])
+        if not matched:
+            # Unannotated: probe a compact cross-type boundary pool so
+            # int/str/bool/None traps (e.g. int('0') + '0') are still exercised.
+            pools.append([0, -0, 1, -1, "", "0", "-0", "1.5", "\x04", "a", True, False, b""])
+    if default_repr is not None:
+        try:
+            dval = ast.literal_eval(default_repr)
+        except Exception:
+            dval = None
+        else:
+            pools.insert(0, [dval])
+    out: list[Any] = []
+    for pool in pools:
+        for item in pool:
+            if not any(_boundary_value_eq(item, x) for x in out):
+                out.append(item)
+    return out
+
+
+def _boundary_value_eq(a: Any, b: Any) -> bool:
+    try:
+        if type(a) is not type(b):
+            return False
+        if isinstance(a, float) and (a != a or b != b):  # NaN != NaN
+            return a != a and b != b
+        return a == b
+    except Exception:
+        return False
+
+
+def synthesize_boundary_grid(
+    param_specs: Sequence[Mapping[str, Any]],
+    *,
+    max_cases: int = 64,
+) -> list[tuple[Any, ...]]:
+    """Synthesize a boundary-value argument grid from parameter specs.
+
+    ``param_specs``: list of dicts with keys ``name`` and optional
+    ``annotation`` (string) and ``default_repr`` (source-level default repr).
+    Returns up to ``max_cases`` argument tuples (cartesian, evenly strided
+    sample when the full product exceeds the cap).
+    """
+    pools: list[list[Any]] = []
+    for spec in param_specs:
+        pools.append(_boundary_pool_for(spec.get("annotation"), spec.get("default_repr")))
+    if not pools:
+        return []
+    grid: list[tuple[Any, ...]] = [()]
+    for pool in pools:
+        nxt: list[tuple[Any, ...]] = []
+        for partial in grid:
+            for item in pool:
+                nxt.append(partial + (item,))
+        grid = nxt
+        if len(grid) > max_cases * 4:  # keep memory bounded, stride later
+            grid = grid[:: max(1, len(grid) // (max_cases * 4))]
+    if len(grid) > max_cases:
+        stride = len(grid) / max_cases
+        grid = [grid[int(i * stride)] for i in range(max_cases)]
+    return grid
+
+
+def _boundary_safe_repr(val: Any, limit: int = 80) -> str:
+    try:
+        if val is None:
+            return "None"
+        r = repr(val)
+    except Exception:
+        r = f"<{type(val).__name__}>"
+    return r[:limit]
+
+
+def cow_boundary_fuzz_invariance(
+    orig_callable: Callable[..., Any],
+    patched_callable: Callable[..., Any],
+    grid: Sequence[tuple[Any, ...]],
+    *,
+    timeout_s: float = 10.0,
+    label: str = "fn",
+) -> dict[str, Any]:
+    """Run original and patched callables over a boundary grid.
+
+    Each case forks ONE Copy-on-Write child (1ms class), the child runs BOTH
+    callables in total isolation and pipes back compact JSON. Invariants:
+      * ``value_changed`` -- both returned, values differ (EXPECTED for bug fixes);
+      * ``lost_exception`` -- original crashed, patched returns (usually the FIX);
+      * ``new_exception``  -- patched crashes where original did NOT raise that
+        exception class. This is the hidden-grading-test failure mode.
+    Verdict is ``NEW_EXCEPTION`` iff any ``new_exception`` case exists, else ``OK``.
+    """
+    t0 = time.monotonic()
+    cases = list(grid)
+    results: list[dict[str, Any]] = []
+    for idx, case in enumerate(cases):
+        r_fd, w_fd = os.pipe()
+        pid = os.fork()
+        if pid == 0:
+            os.close(r_fd)
+            out: dict[str, Any] = {"idx": idx}
+            for tag, fn in (("orig", orig_callable), ("patched", patched_callable)):
+                try:
+                    val = fn(*case)
+                    out[tag] = {"ok": True, "repr": _boundary_safe_repr(val)}
+                except BaseException as exc:  # noqa: BLE001 — isolation is the point
+                    out[tag] = {"ok": False, "exc": type(exc).__name__}
+            try:
+                os.write(w_fd, json.dumps(out).encode("utf-8"))
+            finally:
+                os.close(w_fd)
+                os._exit(0)
+        os.close(w_fd)
+        deadline = time.monotonic() + timeout_s / max(1, len(cases))
+        chunks = bytearray()
+        while True:
+            ready, _, _ = select.select([r_fd], [], [], 0.25)
+            if not ready:
+                if time.monotonic() > deadline:
+                    break
+                continue
+            chunk = os.read(r_fd, 65536)
+            if not chunk:
+                break
+            chunks.extend(chunk)
+        os.close(r_fd)
+        try:
+            os.waitpid(pid, 0)
+        except ChildProcessError:
+            pass
+        if chunks:
+            try:
+                rec = json.loads(bytes(chunks).decode("utf-8"))
+            except Exception:
+                rec = {"idx": idx, "orig": {"ok": False, "exc": "DECODE_ERROR"},
+                       "patched": {"ok": False, "exc": "DECODE_ERROR"}}
+        else:
+            rec = {"idx": idx, "orig": {"ok": False, "exc": "TIMEOUT_OR_CRASH"},
+                   "patched": {"ok": False, "exc": "TIMEOUT_OR_CRASH"}}
+        rec["case"] = [_boundary_safe_repr(v, 24) for v in case]
+        results.append(rec)
+
+    same = value_changed = lost_exception = 0
+    new_exception_cases: list[dict[str, Any]] = []
+    for rec in results:
+        o, p = rec.get("orig", {}), rec.get("patched", {})
+        if o.get("ok") and p.get("ok"):
+            if o.get("repr") == p.get("repr"):
+                same += 1
+            else:
+                value_changed += 1
+                rec["kind"] = "value_changed"
+        elif not o.get("ok") and p.get("ok"):
+            lost_exception += 1
+            rec["kind"] = "lost_exception"
+        elif not p.get("ok") and (o.get("ok") or o.get("exc") != p.get("exc")):
+            new_exception_cases.append(
+                {"case": rec.get("case"), "orig": o, "patched": p}
+            )
+            rec["kind"] = "new_exception"
+        else:
+            same += 1
+            rec["kind"] = "both_crash_same"
+
+    verdict = "NEW_EXCEPTION" if new_exception_cases else "OK"
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "modality": "cow_boundary_invariance",
+        "label": label,
+        "status": verdict,
+        "verdict": verdict,
+        "cases": len(results),
+        "same": same,
+        "value_changed": value_changed,
+        "lost_exception": lost_exception,
+        "new_exception": len(new_exception_cases),
+        "new_exception_cases": [str(c)[:120] for c in new_exception_cases],
+        "results": results,
+        "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+
+def _enclosing_function_at(tree: ast.AST, lineno: int) -> ast.FunctionDef | ast.AsyncFunctionDef | None:
+    best: ast.FunctionDef | ast.AsyncFunctionDef | None = None
+    best_span = 1 << 30
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            lo = int(getattr(node, "lineno", 0) or 0)
+            hi = int(getattr(node, "end_lineno", lo) or lo)
+            if lo <= int(lineno) <= hi and (hi - lo) < best_span:
+                best = node
+                best_span = hi - lo
+    return best
+
+
+def _first_changed_lineno(before: str, after: str) -> int:
+    before_lines = before.splitlines()
+    after_lines = after.splitlines()
+    sm = difflib.SequenceMatcher(a=before_lines, b=after_lines, autojunk=False)
+    for tag, i1, _i2, _j1, _j2 in sm.get_opcodes():
+        if tag != "equal":
+            return i1 + 1
+    return 1
+
+
+def fuzz_patched_module_sources(
+    orig_source: str,
+    patched_source: str,
+    changed_lineno: int | None = None,
+    *,
+    max_cases: int = 64,
+    timeout_s: float = 15.0,
+) -> dict[str, Any]:
+    """Engine-facing boundary fuzz for a single-file patch.
+
+    Writes both sources to temp modules, imports them inside ONE forked child
+    (import-time side effects / crashes are contained), locates the enclosing
+    function of the minimal changed hunk in BOTH trees, synthesizes the
+    boundary grid from the patched signature, and runs the CoW fuzz.
+    Returns a compact JSON-serializable report; never raises.
+    """
+    t0 = time.monotonic()
+    changed_ln = changed_lineno if changed_lineno else _first_changed_lineno(
+        orig_source, patched_source
+    )
+    try:
+        orig_tree = ast.parse(orig_source)
+        patched_tree = ast.parse(patched_source)
+    except SyntaxError as exc:
+        return {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_UNAVAILABLE",
+            "verdict": "UNAVAILABLE",
+            "error": f"SyntaxError: {exc}",
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    orig_fn = _enclosing_function_at(orig_tree, changed_ln)
+    patched_fn = _enclosing_function_at(patched_tree, changed_ln)
+    if patched_fn is None or orig_fn is None or patched_fn.name != orig_fn.name:
+        return {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_SKIPPED_NO_ENCLOSING_FUNCTION",
+            "verdict": "UNAVAILABLE",
+            "function": getattr(patched_fn, "name", None),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    param_specs: list[dict[str, Any]] = []
+    positional = patched_fn.args.posonlyargs + patched_fn.args.args
+    defaults = patched_fn.args.defaults
+    first_default = len(positional) - len(defaults)
+    for idx, arg in enumerate(positional):
+        if arg.arg in ("self", "cls"):
+            return {
+                "schema": SCHEMA,
+                "modality": "cow_boundary_invariance",
+                "status": "FUZZ_SKIPPED_METHOD",
+                "verdict": "UNAVAILABLE",
+                "function": patched_fn.name,
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        ann = ast.unparse(arg.annotation) if arg.annotation is not None else None
+        d_repr = None
+        d_idx = idx - first_default
+        if d_idx >= 0:
+            d_repr = ast.unparse(defaults[d_idx])
+        param_specs.append({"name": arg.arg, "annotation": ann, "default_repr": d_repr})
+    if not param_specs:
+        return {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_SKIPPED_NO_POSITIONAL_PARAMS",
+            "verdict": "UNAVAILABLE",
+            "function": patched_fn.name,
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    grid = synthesize_boundary_grid(param_specs, max_cases=max_cases)
+    if not grid:
+        return {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_SKIPPED_NO_GRID",
+            "verdict": "UNAVAILABLE",
+            "function": patched_fn.name,
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    # Import both versions inside ONE outer CoW child (contain import side effects).
+    r_fd, w_fd = os.pipe()
+    pid = os.fork()
+    if pid == 0:
+        os.close(r_fd)
+        report: dict[str, Any]
+        try:
+            import importlib.util
+            import tempfile
+
+            def _load(name: str, source: str):
+                with tempfile.NamedTemporaryFile(
+                    mode="w", suffix=".py", prefix=name, delete=False, encoding="utf-8"
+                ) as fh:
+                    fh.write(source)
+                    tmp_path = fh.name
+                spec = importlib.util.spec_from_file_location(name, tmp_path)
+                mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(mod)
+                try:
+                    os.unlink(tmp_path)
+                except OSError:
+                    pass
+                return mod
+
+            uniq = hashlib.sha256((orig_source + patched_source).encode("utf-8")).hexdigest()[:16]
+            orig_mod = _load(f"brain_fuzz_orig_{uniq}", orig_source)
+            patched_mod = _load(f"brain_fuzz_patched_{uniq}", patched_source)
+            orig_call = getattr(orig_mod, patched_fn.name)
+            patched_call = getattr(patched_mod, patched_fn.name)
+            report = cow_boundary_fuzz_invariance(
+                orig_call, patched_call, grid, timeout_s=timeout_s, label=patched_fn.name
+            )
+            report["function"] = patched_fn.name
+            report["grid_cases"] = len(grid)
+        except BaseException as exc:  # noqa: BLE001 — containment by design
+            report = {
+                "schema": SCHEMA,
+                "modality": "cow_boundary_invariance",
+                "status": "FUZZ_UNAVAILABLE",
+                "verdict": "UNAVAILABLE",
+                "error": f"{type(exc).__name__}: {exc}",
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+        try:
+            os.write(w_fd, json.dumps(report).encode("utf-8"))
+        except Exception:
+            pass
+        os.close(w_fd)
+        os._exit(0)
+
+    os.close(w_fd)
+    chunks = bytearray()
+    deadline = time.monotonic() + timeout_s + 5.0
+    while True:
+        ready, _, _ = select.select([r_fd], [], [], 0.25)
+        if ready:
+            chunk = os.read(r_fd, 65536)
+            if not chunk:
+                break
+            chunks.extend(chunk)
+        elif time.monotonic() > deadline:
+            break
+    os.close(r_fd)
+    try:
+        os.waitpid(pid, 0)
+    except ChildProcessError:
+        pass
+    if not chunks:
+        return {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_CRASH_OR_TIMEOUT",
+            "verdict": "UNAVAILABLE",
+            "function": patched_fn.name,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    try:
+        report = json.loads(bytes(chunks).decode("utf-8"))
+    except Exception:
+        report = {
+            "schema": SCHEMA,
+            "modality": "cow_boundary_invariance",
+            "status": "FUZZ_CRASH_OR_TIMEOUT",
+            "verdict": "UNAVAILABLE",
+            "error": "DECODE_ERROR",
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+    report["changed_lineno"] = int(changed_ln)
+    report["elapsed_ms"] = round((time.monotonic() - t0) * 1000.0, 2)
+    # Drop verbose per-case rows from the compact receipt; keep counts + cases.
+    report.pop("results", None)
+    return report
