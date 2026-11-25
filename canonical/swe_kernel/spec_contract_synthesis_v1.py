@@ -777,7 +777,188 @@ def compose_frame_containments(
     return per_rel or None
 
 
+# --------------------------------------------------------------------------------------------------
+# Postcondition contracts: the test asserts what a getter must return after a mutator ran.
+# --------------------------------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class PostconditionContract:
+    """`X.getter() == <expected>` after `X.mutator(arg)`: the mutator owes the getter a consistent view."""
+
+    getter: str
+    mutator: str
+    deleted_arg: str
+    node_id: str
+
+    def as_dict(self) -> dict[str, Any]:
+        return {"getter": self.getter, "mutator": self.mutator,
+                "deleted_arg": self.deleted_arg, "node_id": self.node_id}
+
+
+def _is_literal(node: ast.AST) -> bool:
+    return isinstance(node, (ast.Constant, ast.JoinedStr)) or (
+        isinstance(node, (ast.List, ast.Tuple, ast.Dict, ast.Set))
+        and all(isinstance(e, ast.Constant) for e in ast.iter_child_nodes(node))
+    )
+
+
+def mine_postcondition_contracts(test_source: str, node_id: str) -> list[PostconditionContract]:
+    """Find "after this call, that getter must no longer list it" in the test that failed.
+
+    Only the test's own text is read. The compared call names the getter; the last preceding call on
+    the same object that took a *variable* (not a literal) names the mutator and the object it
+    removed. Which container backs the getter is a question for the project, not for this miner.
+    """
+    try:
+        tree = ast.parse(test_source)
+    except SyntaxError:
+        return []
+    wanted = node_id.split("::")[-1].split("[")[0].split(".")[-1]
+    scopes: list[tuple[str, ast.AST]] = []
+    for top in tree.body:
+        if isinstance(top, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            scopes.append((top.name, top))
+        elif isinstance(top, ast.ClassDef):
+            for sub in top.body:
+                if isinstance(sub, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    scopes.append((f"{top.name}.{sub.name}", sub))
+
+    out: list[PostconditionContract] = []
+    for scope_name, scope in scopes:
+        if wanted and scope_name.split(".")[-1] != wanted:
+            continue
+        calls = sorted(
+            [n for n in ast.walk(scope) if isinstance(n, ast.Call)],
+            key=lambda n: (n.lineno, n.col_offset),
+        )
+        compared: list[ast.Call] = []
+        for node in ast.walk(scope):
+            if isinstance(node, (ast.Compare, ast.Assert)):
+                for sub in ast.walk(node):
+                    if isinstance(sub, ast.Call) and not sub.args:
+                        compared.append(sub)
+        for getter_call in compared:
+            func = getter_call.func
+            if not isinstance(func, ast.Attribute):
+                continue
+            receiver = ast.unparse(func.value)[:60]
+            def _bound_arg(call: ast.Call) -> str | None:
+                """The first variable the call hands over, positionally or by keyword."""
+                for candidate in list(call.args) + [kw.value for kw in call.keywords]:
+                    if not _is_literal(candidate):
+                        return ast.unparse(candidate)[:60]
+                return None
+
+            preceding = [
+                c for c in calls
+                if c.lineno <= getter_call.lineno and isinstance(c.func, ast.Attribute)
+                and ast.unparse(c.func.value)[:60] == receiver and (c.args or c.keywords)
+            ]
+            if preceding:
+                # Prefer a call that hands over a variable; fall back to any call with arguments,
+                # because `unregister(name='a')` passes a literal that the project turns into an object.
+                with_vars = [c for c in preceding if _bound_arg(c) is not None]
+                if with_vars:
+                    preceding = with_vars
+            if not preceding:
+                continue
+            mutator = preceding[-1]
+            out.append(PostconditionContract(
+                getter=func.attr, mutator=mutator.func.attr,
+                deleted_arg=_bound_arg(mutator) or "", node_id=scope_name,
+            ))
+    return out
+
+
+def _returned_self_attributes(text: str, func_name: str) -> list[str]:
+    """`self.<attr>` names inside the getter's own `return` expressions: the container it exposes."""
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return []
+    names: list[str] = []
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == func_name:
+            for sub in ast.walk(node):
+                if not isinstance(sub, (ast.Return, ast.Yield)):
+                    continue
+                for inner in ast.walk(sub):
+                    if (isinstance(inner, ast.Attribute) and isinstance(inner.value, ast.Name)
+                            and inner.value.id == "self" and inner.attr not in names):
+                        names.append(inner.attr)
+    return names
+
+
+def state_consistency_candidates(
+    project_root: pathlib.Path | str,
+    cpg: "scm.ProjectCPG",
+    contract: PostconditionContract,
+    *,
+    max_candidates: int = 8,
+) -> list[tuple[str, str, bytes]]:
+    """Purge the bookkeeping a mutator forgot, inside the mutator the test named.
+
+    The getter's own `return` names the container; the test's last preceding call names the mutator;
+    and the object to drop is one of that mutator's parameters *by the time it returns* (a mutator may
+    receive a name and resolve it to an object, as `unregister(name=...)` does). Rather than infer
+    which parameter holds the object, each is offered as the key and the suite decides. The purge is a
+    statement contract — delete the surplus entry — not a guard that refuses the operation.
+    """
+    root = pathlib.Path(project_root).resolve()
+    fns = [f for f in cpg.functions.get(contract.mutator, []) if f.language == "python"]
+    if len(fns) != 1:
+        return []  # ambiguous mutator: refused
+    fn = fns[0]
+    text = (root / fn.rel_path).read_text(errors="replace")
+    attrs = _returned_self_attributes(text, contract.getter)
+    params = [p for p in _param_names(fn) if p not in ("self", "cls")]
+    if not attrs or not params:
+        return []
+    lines = text.splitlines(True)
+    if fn.end_line - 1 >= len(lines):
+        return []
+    body_indent = ""
+    for probe in lines[fn.start_line - 1: fn.end_line]:
+        stripped = probe.lstrip()
+        if stripped.startswith(("def ", "async def ")):
+            body_indent = probe[: len(probe) - len(stripped)] + "    "
+            break
+    # Insert BEFORE the function's own top-level `return`: appending after it would be dead code,
+    # which is exactly how the first attempt at this measured "no change".
+    insert_at = fn.end_line
+    try:
+        tree_fn = ast.parse(text)
+    except SyntaxError:
+        tree_fn = None
+    if tree_fn is not None:
+        for node in ast.walk(tree_fn):
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name == fn.name:
+                for stmt in node.body:
+                    if isinstance(stmt, ast.Return):
+                        insert_at = stmt.lineno - 1
+                        break
+                break
+    out: list[tuple[str, str, bytes]] = []
+    for attr in attrs:
+        for key in params:
+            for idx in (0, 1):
+                purge = (f"{body_indent}self.{attr}[:] = [__e for __e in self.{attr} "
+                         f"if __e[{idx}] is not {key}]\n")
+                patched = "".join(lines[:insert_at]) + purge + "".join(lines[insert_at:])
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
+                    continue
+                tag = f"STATE_CONSISTENCY[{contract.mutator}:purge self.{attr} where __e[{idx}] is not {key}]"
+                out.append((tag, fn.rel_path, patched.encode()))
+                if len(out) >= max_candidates:
+                    return out
+    return out
+
 __all__ = [
+    "PostconditionContract",
+    "mine_postcondition_contracts",
+    "state_consistency_candidates",
     "EscapeContract",
     "mine_escape_contracts",
     "EscapeFrame",

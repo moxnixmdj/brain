@@ -1185,3 +1185,83 @@ def test_contract_binds_through_the_tests_constructor_and_reads_a_container_fiel
     )
     assert result.repaired is True, result.status
     assert result.status == "VERIFIED__SPEC_CONTRACT_GUARD"
+
+
+def test_postcondition_names_the_container_the_mutator_must_purge(tmp_path: pathlib.Path) -> None:
+    """A failing `assert getter() == [...]` after a mutator is a *statement* contract: delete the entry.
+
+    Nothing about the repository is assumed. The compared call names the getter, the call before it
+    names the mutator, and the getter's own `return` names the container. The purge has to go before
+    the mutator's `return` — appending it there measured as dead code, and the suite said so.
+    """
+    from canonical.swe_kernel import causal_nexus_v1 as nx
+    from canonical.swe_kernel import spec_contract_synthesis_v1 as spc
+    from canonical.swe_kernel.semantic_causal_engine_v1 import build_project_cpg
+
+    repo = tmp_path / "purge_repo"
+    (repo / "pkg").mkdir(parents=True)
+    (repo / "tests").mkdir(parents=True)
+    (repo / "pkg" / "__init__.py").write_text("")
+    (repo / "pkg" / "registry.py").write_text(
+        "class Registry:\n"
+        "    def __init__(self):\n"
+        "        self._name2plugin = {}\n"
+        "        self._entries = []\n"
+        "\n"
+        "    def add(self, plugin, dist):\n"
+        "        self._entries.append((plugin, dist))\n"
+        "        self._name2plugin[dist] = plugin\n"
+        "\n"
+        "    def entries(self):\n"
+        "        return list(self._entries)\n"
+        "\n"
+        "    def drop(self, plugin):\n"
+        "        self._name2plugin.pop(plugin, None)\n"
+        "        return plugin\n"
+    )
+    (repo / "tests" / "test_registry.py").write_text(
+        "from pkg.registry import Registry\n"
+        "\n"
+        "\n"
+        "class Api:\n"
+        "    pass\n"
+        "\n"
+        "\n"
+        "def test_drop_purges_entries():\n"
+        "    reg = Registry()\n"
+        "    a = Api()\n"
+        "    b = Api()\n"
+        "    reg.add(a, 'da')\n"
+        "    reg.add(b, 'db')\n"
+        "    reg.drop(a)\n"
+        "    assert reg.entries() == [(b, 'db')]\n"
+    )
+    contract = spc.mine_postcondition_contracts(
+        (repo / "tests" / "test_registry.py").read_text(),
+        "tests/test_registry.py::test_drop_purges_entries",
+    )[0]
+    assert (contract.getter, contract.mutator) == ("entries", "drop")
+
+    cpg = build_project_cpg(repo)
+    cands = spc.state_consistency_candidates(repo, cpg, contract)
+    assert cands, "the container behind the getter must be found from its own return"
+    tag, _rel, patched = cands[0]
+    text = patched.decode()
+    assert "self._entries[:]" in text and "is not plugin" in text
+    body = text.split("def drop", 1)[1]
+    assert body.index("self._name2plugin.pop") < body.index("self._entries[:]") < body.index("return plugin"), \
+        "the purge lands before the mutator's own return, never after it (dead code)"
+
+    store = pathlib.Path(tempfile.mkdtemp(prefix="purge-e2e-", dir=str(tmp_path)))
+    result = repair_project_causally(
+        repo,
+        [sys.executable, "-m", "pytest", "-q", "tests/test_registry.py"],
+        law_store=CausalLawStore(store / "laws.json"),
+        skill_store=nx.SkillStoreV2(store / "skills.json"),
+        invariant_store=nx.NegativeInvariantStore(store / "invs.json"),
+        origin="purge_e2e",
+        max_sites=12,
+        max_candidates=16,
+    )
+    assert result.repaired is True, result.status
+    assert result.status == "VERIFIED__STATE_CONSISTENCY"

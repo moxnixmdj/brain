@@ -455,3 +455,59 @@ adding a new failure — which is correct, but each individual guard here *moves
 The measured gap is that the engine composes guards by prefixed insertion on one function and never composes **two
 contracts that apply to the same parameter across sibling methods**; the sweep data for that is in the 64-proposal run
 above.
+
+## Round V9 — the test says what must be *deleted*, not what must be raised: 11/13
+
+**Environment restated, because the numbers changed when it did.** This session began in a fresh sandbox: Python
+3.11.2, pytest 9.2.0, no `tree_sitter`, no `z3`, no `hypothesis`, no `markupsafe`, no `ephemeral_port_reserve`.
+Two commits that had been REPAIRED read OPEN until the substrate the repository itself pins was restored
+(`tree_sitter==0.20.4`, `tree_sitter_languages==1.10.2` — see `canonical/runtime/tree_sitter_swe_kernel_v1.py`).
+The evidence, not the assertion:
+
+| first reading | cause | after repair |
+|---|---|---|
+| `cJSON@b2890c8d76` `OPEN__NO_CAUSAL_SITES_IN_CPG` (0 candidates) | CPG parsed **7** functions, all Python under `tests/unity/auto/` — no C parser installed | 946 functions, REPAIRED (2 candidates, 11.2 s) |
+| `werkzeug@051fd663` ENV_BLOCKED | `ModuleNotFoundError: ephemeral_port_reserve`, then `markupsafe` | REPAIRED (1, 13.6 s) |
+| `attrs@3b0378dd66` ENV_BLOCKED | `ModuleNotFoundError: hypothesis` | REPAIRED (30, 29.9 s) |
+| causal suite `test_six_language_uir_convergence_z3_and_memory_ablation` | `No module named 'z3'` | 13 passed |
+
+Every number below is from this environment, and the ten previously verified commits were each re-run **after** the
+new pass was installed.
+
+**The new mechanism: postcondition state consistency.** `pluggy@50585e0` fails with
+`assert pm.list_plugin_distributions() == [(b, dist)]` — nothing must be *raised*, something must be *deleted*. The
+engine now mines that:
+
+1. the call being compared names the **getter** (`list_plugin_distributions`);
+2. the last call on the same object before the assertion names the **mutator** (`pm.unregister(name='a')` — a
+   keyword argument, which the first version of the miner rejected);
+3. the getter's own `return` names the **container** (`return list(self._plugin_distinfo)`);
+4. the purge is emitted for each parameter of the mutator, before its own `return`, and the suite decides.
+
+Result: `STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]`,
+**REPAIRED, 25 candidates, 22.4 s, suite 220 passed**. Tally **10/13 → 11/13 = 84.62%**, 0 regressions.
+
+**Two failed attempts inside this round, kept because they cost real time and taught the rule.**
+- The purge was first appended at the function's `end_line` — *after* its `return`. Measured: `1 failed, 77 passed`,
+  unchanged. Dead code looks exactly like a wrong hypothesis; the insertion point is part of the mechanism.
+- The miner first required a *variable* argument, so `unregister(name='a')` (a literal keyword) was invisible and no
+  contract was mined at all (`contracts: []`). Literal keyword arguments are now accepted, with variable arguments
+  preferred when both exist.
+
+**Rejected.**
+- *Special-casing dictionary/list bookkeeping in pluggy* — the family is derived from the getter's `return` and the
+  test's own call order; nothing names pluggy.
+- *Guessing the tuple index* — `__e[0]` and `__e[1]` are both offered; the suite refutes the wrong one (measured:
+  `__e[1]` happens to pass here because the second element is a string, `__e[0]` is the real contract).
+
+**Still OPEN (measured this round, same environment):** `pyjwt@af8181c` (24, 43.7 s), `click@c53d373` (24, 170.1 s),
+`click@fc518e4` (27, 41.4 s), `click@f67c2bb` (24, 82.4 s), `cJSON@9d1b229086`, `cJSON@6d9f244`,
+`more-itertools@c629214` (contaminated, unclaimed). Regressions: **none** — `pluggy@8051a4d` 1/6.2 s,
+`click@05f6fd0` 1/13.0 s, `werkzeug@051fd663` 1/18.7 s, `pyjwt@5fde08a` 8/72.4 s, `pyjwt@793a302` 6/28.7 s,
+`cJSON@b2890c8d76` 2/11.2 s, `cJSON@be749d7efa` 5/15.5 s, `more-itertools@cca32949f1` 5/19.3 s,
+`attrs@3b0378dd66` 30/26.5 s, `werkzeug@884437ae` 21/65.2 s.
+
+**Next bottleneck.** The two remaining *sample* opens are both about what a function must *return*, not what it must
+raise or delete: `click@c53d373`/`click@fc518e4` assert on exit codes and on how many times a mocked call happened
+(`assert codes == [0, 0]`). The engine still has no family that reads an assertion's **literal expectation** and
+synthesizes a return/retry accordingly; that is where the next round starts.

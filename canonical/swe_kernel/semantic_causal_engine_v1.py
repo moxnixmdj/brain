@@ -4512,6 +4512,52 @@ def repair_project_causally(
                         baseline_failure_excerpt=base_out[-400:],
                     )
 
+        # 3.9b Postcondition state consistency — a test asserts what a getter returns AFTER a mutator
+        # ran. The getter names its container, the call before the assertion names the mutator, and the
+        # mutator owes that container a deletion. Statement contract, not a guard.
+        if spec_module is not None:
+            post_contracts: list[Any] = []
+            for node in list(initial_failed_nodes)[:3]:
+                for src in test_sources:
+                    try:
+                        post_contracts.extend(spec_module.mine_postcondition_contracts(src, node))
+                    except Exception:
+                        continue
+            seen_contracts: set[tuple[str, str]] = set()
+            post_spent = 0
+            for contract in post_contracts:
+                key = (contract.getter, contract.mutator)
+                if key in seen_contracts:
+                    continue
+                seen_contracts.add(key)
+                try:
+                    cands = spec_module.state_consistency_candidates(root, cpg, contract)
+                except Exception:
+                    cands = []
+                for p_tag, p_rel, p_patched in cands:
+                    if evaluated >= max_candidates + 8 or post_spent >= 8:
+                        break
+                    post_spent += 1
+                    evaluated += 1
+                    p_overrides = {p_rel: p_patched}
+                    ok_full, _, out_full = _run_suite_in_scratch(root, norm_test_cmd, p_overrides)
+                    if ok_full:
+                        if apply_in_place:
+                            for rel, raw in p_overrides.items():
+                                (root / rel).write_bytes(raw)
+                        return CausalRepairResult(
+                            repaired=True,
+                            status="VERIFIED__STATE_CONSISTENCY",
+                            rel_path=p_rel,
+                            func_name=contract.mutator,
+                            mechanism=p_tag,
+                            patched_files={rel: raw.decode("utf-8") for rel, raw in p_overrides.items()},
+                            causal_chain=[f"{p_rel}:{contract.mutator}"],
+                            candidates_evaluated=evaluated,
+                            elapsed_ms=round((time.perf_counter_ns() - t0) / 1e6, 2),
+                            baseline_failure_excerpt=base_out[-400:],
+                        )
+
         # 3.9 Last-resort: frame-bound exception containment.
         #
         # Every earlier pass is done, so this cannot displace a repair that already worked: it only
