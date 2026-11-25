@@ -1,0 +1,342 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "environment_limits_recorded_not_hidden": {
+    "click/tests/test_deprecations.py": "requires installed package metadata for `click`; the engine runs click from the source tree, so this file errors identically before and after any repair",
+    "click/tests/test_stream_lifecycle.py": "does not terminate under this sandbox",
+    "werkzeug": "three test files need `ephemeral_port_reserve` (a dev-server fixture); the same three files are unmeasurable at baseline, so they are excluded from both sides of the comparison and named in every row's suite_admission record"
+  },
+  "independent_verified": false,
+  "mechanisms": {
+    "ASSERT_CONTRACT_TO_TYPED_RAISE": "`assert cond, message` on a public API is replaced by a typed raise, with the exception type mined from the contract's own words",
+    "EMPTY_CONTAINER_PREFIX_ARM": "a trailing formatted payload can be empty; the prefix-only arm is derived by deleting the payload from the same f-string",
+    "NONE_GUARD_TO_TRUTHINESS": "a name the class annotates as `X | Sequence[X] | None` is guarded by presence while the code elsewhere treats empty and absent as one state",
+    "OPTIONAL_TUPLE_SHAPE_COMPLETION": "a method declared to return a row returns None when one optional text is absent, though the row itself always exists",
+    "PARSER_DEGENERATE_NONE_REFUSAL": "a number parsed inside a marker arm is a cardinality, and a cardinality of zero selects nothing, so the parser's own failure value is returned",
+    "POSTCONDITION_STATE_PURGE": "the class declares exactly one sequence-of-pairs; the mutator that removes the key must drop the pairing before its own success return",
+    "TERMINAL_ACTION_RETRY_POLICY": "an outcome decided before reporting survives an interrupt inside reporting: messages are best-effort, the terminal action is retried",
+    "UNION_STR_SEQUENCE_FORMAT_COMPLETION": "a union-typed attribute is rendered as a scalar; the dispatch is completed from the annotation and the separator a sibling already uses"
+  },
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "protocol": "single-parent commits from three external repositories; ONLY the fix commit's test files are copied onto a /dev/shm worktree of the parent; no source diff, patch, commit message, or issue text is read by the engine; a repair counts only when the copied tests pass AND the project's own suite fails no more than it did on the untouched parent",
+  "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V1",
+  "surfaces": {
+    "admission": "the copied test file must pass AND the project's own suite must fail no more than it failed on the untouched parent tree",
+    "answer_key_never_read": [
+      "the commit's source diff",
+      "the commit's message",
+      "the linked issue",
+      "the fix commit's own source"
+    ],
+    "files_changed_by_the_engine": "exactly one source file per wall",
+    "tests_copied_from_the_fix_commit": "only *.py under the project's test roots"
+  },
+  "totals": {
+    "evaluations_total": 11,
+    "open": 0,
+    "regressions_introduced": 1,
+    "verified": 7,
+    "walls": 7,
+    "walls_repaired_in_one_evaluation": 5
+  },
+  "wall_results": {
+    "cases": 7,
+    "open": [],
+    "protocol": "single-parent commits from three external repositories; ONLY the fix commit's test files are copied onto a /dev/shm worktree of the parent; no source diff, patch, commit message, or issue text is read by the engine; a repair counts only when the copied tests pass AND the project's own suite fails no more than it did on the untouched parent",
+    "rows": [
+      {
+        "baseline_failures": 1,
+        "candidates_offered": 3,
+        "commit": "05f6fd0",
+        "eval_seconds": 40.84,
+        "evaluations": 1,
+        "final_failures": 0,
+        "fix_test_files": [
+          "tests/test_arguments.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "Command.help: str | None",
+              "guard text: self.help is None",
+              "declared return: `tuple[str, str] | None`",
+              "sibling row shape: `return (self.make_metavar(ctx), self.help)`",
+              "absent payload field: `self.help`"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 3807,
+            "mechanism": "NONE_GUARD_TO_TRUTHINESS+OPTIONAL_TUPLE_SHAPE_COMPLETION"
+          }
+        ],
+        "mechanism": "NONE_GUARD_TO_TRUTHINESS+OPTIONAL_TUPLE_SHAPE_COMPLETION",
+        "regressions": 0,
+        "repo": "click",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 1061,
+          "baseline_failures": 1062,
+          "excluded_files": [],
+          "measured_files": 39
+        },
+        "wall": "an undocumented argument must still get a help row",
+        "wall_id": "click@05f6fd0"
+      },
+      {
+        "baseline_failures": 9,
+        "candidates_offered": 35,
+        "commit": "c53d373",
+        "eval_seconds": 47.54,
+        "evaluations": 3,
+        "final_failures": 0,
+        "fix_test_files": [
+          "tests/test_options.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: self.envvar is not None",
+              "class annotation: str | cabc.Sequence[str] | None",
+              "sibling separator: ', '",
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: envvar is None",
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: envvar is not None",
+              "Context.show_default: bool | None",
+              "guard text: self.show_default is not None"
+            ],
+            "failures_after": 1,
+            "failures_before": 9,
+            "lineno": 3273,
+            "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS"
+          },
+          {
+            "evidence": [
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: self.envvar is not None",
+              "class annotation: str | cabc.Sequence[str] | None",
+              "sibling separator: ', '",
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: envvar is None",
+              "Parameter.envvar: str | cabc.Sequence[str] | None",
+              "guard text: envvar is not None"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 3273,
+            "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS"
+          }
+        ],
+        "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS",
+        "regressions": 0,
+        "repo": "click",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 1061,
+          "baseline_failures": 1070,
+          "excluded_files": [],
+          "measured_files": 39
+        },
+        "wall": "empty envvar == absent envvar, and a sequence envvar names every member",
+        "wall_id": "click@c53d373"
+      },
+      {
+        "baseline_failures": 5,
+        "candidates_offered": 1,
+        "commit": "fc518e4",
+        "eval_seconds": 38.5,
+        "evaluations": 1,
+        "final_failures": 0,
+        "fix_test_files": [
+          "tests/test_abort_interrupt.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "4 terminal exit call(s) in `Command.main`",
+              "7 reporting/terminal site(s) made interrupt-safe",
+              "policy: a decided outcome wins; reporting is best effort; the exit is retried"
+            ],
+            "failures_after": 0,
+            "failures_before": 5,
+            "lineno": 1484,
+            "mechanism": "TERMINAL_ACTION_RETRY_POLICY"
+          }
+        ],
+        "mechanism": "TERMINAL_ACTION_RETRY_POLICY",
+        "regressions": 0,
+        "repo": "click",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 1061,
+          "baseline_failures": 1066,
+          "excluded_files": [
+            "tests/test_types"
+          ],
+          "measured_files": 31
+        },
+        "wall": "a second interrupt while reporting must not replace the decided outcome",
+        "wall_id": "click@fc518e4"
+      },
+      {
+        "baseline_failures": 1,
+        "candidates_offered": 2,
+        "commit": "051fd663",
+        "eval_seconds": 204.4,
+        "evaluations": 1,
+        "final_failures": 0,
+        "fix_test_files": [
+          "tests/test_http.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "trailing payload expression: `dump_header(self.parameters)`",
+              "prefix-only rendering: `{self.type.title()}`"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 311,
+            "mechanism": "EMPTY_CONTAINER_PREFIX_ARM"
+          }
+        ],
+        "mechanism": "EMPTY_CONTAINER_PREFIX_ARM",
+        "regressions": 0,
+        "repo": "werkzeug",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 0,
+          "baseline_failures": 1,
+          "excluded_files": [
+            "tests/middleware/test_http_proxy.py",
+            "tests/test_debug.py",
+            "tests/test_serving.py"
+          ],
+          "measured_files": 22
+        },
+        "wall": "an empty parameter payload must not leave a trailing separator",
+        "wall_id": "werkzeug@051fd66"
+      },
+      {
+        "baseline_failures": 1,
+        "candidates_offered": 2,
+        "commit": "0c419f95",
+        "eval_seconds": 204.16,
+        "evaluations": 1,
+        "final_failures": 0,
+        "fix_test_files": [
+          "tests/test_http.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "the function signals failure by returning `None`",
+              "`begin` is parsed inside the `'-'` arm, so it is a cardinality"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 879,
+            "mechanism": "PARSER_DEGENERATE_NONE_REFUSAL"
+          }
+        ],
+        "mechanism": "PARSER_DEGENERATE_NONE_REFUSAL",
+        "regressions": 0,
+        "repo": "werkzeug",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 0,
+          "baseline_failures": 1,
+          "excluded_files": [
+            "tests/middleware/test_http_proxy.py",
+            "tests/test_debug.py",
+            "tests/test_serving.py"
+          ],
+          "measured_files": 22
+        },
+        "wall": "a suffix cardinality of zero selects nothing and must be refused",
+        "wall_id": "werkzeug@0c419f9"
+      },
+      {
+        "baseline_failures": 1,
+        "candidates_offered": 7,
+        "commit": "8051a4d",
+        "eval_seconds": 2.12,
+        "evaluations": 1,
+        "final_failures": 0,
+        "fix_test_files": [
+          "testing/test_pluginmanager.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "contract message: 'one of name or plugin needs to be specified'",
+              "the message names an arity/argument contract",
+              "contract message: 'plugin is not registered'",
+              "the message names a state predicate",
+              "`self._plugin_distinfo` is declared as a sequence of pairs",
+              "`PluginManager.unregister` removes the registry entry but leaves the pairing untouched",
+              "purge key: the mutator's own parameter `plugin`"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 289,
+            "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE"
+          }
+        ],
+        "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
+        "regressions": 0,
+        "repo": "pluggy",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 0,
+          "baseline_failures": 1,
+          "excluded_files": [],
+          "measured_files": 9
+        },
+        "wall": "two co-required contracts inside one test: arity and state",
+        "wall_id": "pluggy@8051a4d"
+      },
+      {
+        "baseline_failures": 1,
+        "candidates_offered": 8,
+        "commit": "50585e0",
+        "eval_seconds": 2.85,
+        "evaluations": 3,
+        "final_failures": 0,
+        "fix_test_files": [
+          "testing/test_pluginmanager.py"
+        ],
+        "hops": [
+          {
+            "evidence": [
+              "contract message: 'one of name or plugin needs to be specified'",
+              "the message names an arity/argument contract",
+              "`self._plugin_distinfo` is declared as a sequence of pairs",
+              "`PluginManager.unregister` removes the registry entry but leaves the pairing untouched",
+              "purge key: the mutator's own parameter `plugin`"
+            ],
+            "failures_after": 0,
+            "failures_before": 1,
+            "lineno": 292,
+            "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE"
+          }
+        ],
+        "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
+        "regressions": 1,
+        "repo": "pluggy",
+        "status": "VERIFIED",
+        "suite_admission": {
+          "after_repair_failures": 0,
+          "baseline_failures": 1,
+          "excluded_files": [],
+          "measured_files": 9
+        },
+        "wall": "the recorded distribution must be dropped with the plugin",
+        "wall_id": "pluggy@50585e0"
+      }
+    ],
+    "verified": 7
+  },
+  "what_this_closes": "Round 1412289d closed 11 of 13 blind OSS commits and left four OPEN for statement-shaped reasons, and its own containment attempt for click@fc518e4 measured 'every family: 5 failed, 3 passed - unchanged from baseline; patched statements proved not to be on the raising path'. This receipt measures eight general mechanisms against those walls plus three more that the same round recorded as repaired but whose repairs were never re-run against a whole project suite."
+}
