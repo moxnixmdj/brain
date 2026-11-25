@@ -8,6 +8,19 @@ This document exists to answer one question honestly: **at each capability, who 
 It is not a parity claim, and it deliberately counts our failures at the same resolution
 as our successes.
 
+> **CORRECTION APPENDED 2026-11-25.** The inventory above is **incomplete** and three of
+> its entries are wrong. The real census is four levels — **19 families / 12 components /
+> 11 measured specs / ~10 benchmark insertions** — not the 15 rows below. In particular:
+> **15 of the 19 families route through an external model**, only 4 are model-free, and
+> the system's own audit says **about 2,200 runtime modules have never been read**. Two
+> measured capabilities were missing from the ledger and I ran both to 500/500 today
+> (`FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1`, `FILE_QUESTION_TAUGHT_WORDS_V1`), and
+> "long-horizon autonomy: no measurement" below is **false** — there is a measured
+> same-identity supervisor with checkpoint continuity. Read
+> `THE_CAPABILITY_CENSUS_CORRECTED_20261125_V1.md` for the correction; the verdicts that
+> survive are the externally-comparable ones (3.9%, 2.7%, 6/11), and 0 of our measurable
+> capabilities are referee-signed, so the creditable ceiling is zero by our own law.
+
 ---
 
 ## 0. The thing that governs every verdict below
