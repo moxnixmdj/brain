@@ -90,9 +90,11 @@ import dataclasses
 from dataclasses import dataclass, field
 import hashlib
 import json
+import os
 import pathlib
 import re
 import sys
+import tempfile
 import textwrap
 import time
 from typing import Any, Iterable, Mapping, Sequence
@@ -227,7 +229,11 @@ def extract_value_obligations(failure_text: str, *, limit: int = 24) -> list[Val
             # `None` as the *expected* value carries no goal residual (it is what a missing
             # implementation already produces); only non-None expectations specify anything.
             continue
-        key = (left[:120], repr(val)[:120])
+        node_for_key = _current_test_node(lines, i)
+        # Two renderings of the same assertion (traceback line and summary line) are ONE obligation.
+        # Support for a data-shaped value must therefore be counted over distinct test nodes, or a
+        # single failing test would appear to corroborate itself.
+        key = (node_for_key or left[:60], repr(val)[:120])
         if key in seen:
             continue
         seen.add(key)
@@ -511,7 +517,8 @@ def is_canonical_default(value: Any) -> bool:
     `()`, `''`, `b''`, `[]`, `{}`, `set()`, `0`, `1`, `-1`, `0.0`, `True`, `False` and shallow
     containers of those are the values a *total function* returns when it has nothing: they are
     part of the language's surface, not part of the test's data. Anything else (a metavar such as
-    `'SRC'`, a payload, a fixture id) is test data, and using it as a repair would be laundering.
+    `'SRC'`, a one-character flag, a payload, a fixture id) is test data; the only way it may enter
+    a repair is through `frame_substituted_source`, which proves the site itself produced it.
     """
     if value is None:
         return True
@@ -519,7 +526,7 @@ def is_canonical_default(value: Any) -> bool:
         return True
     if isinstance(value, (int, float)) and value in _CANONICAL_SCALARS:
         return True
-    if isinstance(value, (str, bytes)) and len(value) <= 1:
+    if isinstance(value, (str, bytes)) and value in ("", b""):
         return True
     if isinstance(value, (tuple, list, set, frozenset)):
         return all(is_canonical_default(v) for v in value)
@@ -549,6 +556,8 @@ def synthesize_nexus_repairs(
     observed_value: Any = _REFUSED,
     cpg: scm.ProjectCPG | None = None,
     supporting_obligations: int = 1,
+    frame_exprs: Mapping[str, Any] | None = None,
+    prefer_names: Sequence[str] = (),
 ) -> list[tuple[str, str, str]]:
     """Turn a proven nexus into candidate expressions that *produce* the missing value.
 
@@ -562,13 +571,36 @@ def synthesize_nexus_repairs(
     exp_src = witness.forced_source
     if not exp_src or _literal_value(exp_src) is _REFUSED:
         return []
-    admitted, _reason = data_literal_gate(witness_expected(witness), supporting_obligations=supporting_obligations)
-    if not admitted:
+    expected_value = witness_expected(witness)
+    admitted, _reason = data_literal_gate(expected_value, supporting_obligations=supporting_obligations)
+    frame_src: str | None = None
+    if frame_exprs:
+        # Provenance beats permission: when every non-default component of the wanted value is
+        # produced by an expression the site's own scope evaluates, no test data enters the program
+        # text and the laundering gate does not apply.
+        frame_src, _frame_reason = frame_substituted_source(
+            expected_value, frame_exprs, prefer_names=prefer_names,
+        )
+    if not admitted and frame_src is None:
         return []
     out: list[tuple[str, str, str]] = []
     seen: set[str] = set()
 
+    if frame_src is not None:
+        for tag, tpl in _FALLBACK_TEMPLATES:
+            cand = tpl.format(orig=orig, exp=frame_src)
+            try:
+                ast.parse(cand, mode="eval")
+            except SyntaxError:
+                continue
+            if cand not in seen:
+                seen.add(cand)
+                out.append(("NEXUS_FRAME_SUBSTITUTED_FALLBACK", cand, ""))
+        out = out[:3]  # provenance-based candidates first; they are the only ones that generalise
+
     for tag, tpl in _FALLBACK_TEMPLATES:
+        if not admitted:
+            break
         cand = tpl.format(orig=orig, exp=exp_src)
         try:
             ast.parse(cand, mode="eval")
@@ -1284,7 +1316,9 @@ __all__ = [
     "angelic_nexus_blame",
     "candidate_features",
     "differential_boundary_scan",
+    "derive_frame_expressions",
     "extract_value_obligations",
+    "frame_substituted_source",
     "data_literal_gate",
     "infer_transducer",
     "is_canonical_default",
@@ -1294,3 +1328,220 @@ __all__ = [
     "patch_invariance_verdict",
     "synthesize_nexus_repairs",
 ]
+
+
+# ================================================================================================== #
+# 8. Frame provenance: where did the expected value come from?
+#
+# The laundering gate refuses a test's own data as repair material -- correctly. But click@05f6fd0 shows
+# exactly why that is not the end of the story: the value `('SRC', '')` is not *data*, it is
+# `(self.make_metavar(ctx), '')` -- a value the enclosing object computes for itself. The test publishes
+# the value; the frame holds the provenance. This section recovers that provenance mechanically.
+#
+# The recorder runs the instrumented site once in a `/dev/shm` clone and, for every object in scope,
+# records the primitive-valued attributes and the primitive results of calling its own public methods
+# on the primitive locals. Nothing is looked up in a table of known libraries: the candidate expressions
+# are built from the object's own `dir()` and the repo's own call sites, then kept only if they
+# reproduce the wanted component exactly.
+# ================================================================================================== #
+
+_DERIVE_RT = '''
+import json, os
+_LOG = os.environ.get("BRAIN_DERIVE_LOG", "")
+_PRI = (int, float, str, bool, list, tuple, dict, type(None))
+
+
+def _rec(expr, value):
+    if not _LOG:
+        return
+    try:
+        with open(_LOG, "a", encoding="utf-8") as f:
+            f.write(json.dumps({"expr": expr, "value": value}, default=repr) + "\\n")
+    except Exception:
+        pass
+
+
+def _derive(val, loc):
+    budget = 24
+    for name, obj in list(loc.items()):
+        if isinstance(obj, _PRI) or budget <= 0:
+            continue
+        prim_locals = [(k, v) for k, v in loc.items() if isinstance(v, _PRI) and not k.startswith("__")]
+        obj_locals = [(k, v) for k, v in loc.items() if not isinstance(v, _PRI) and not k.startswith("__")]
+        for attr in dir(obj):
+            if budget <= 0:
+                return val
+            if attr.startswith("_"):
+                continue
+            budget -= 1
+            try:
+                member = getattr(obj, attr)
+            except Exception:
+                continue
+            if isinstance(member, _PRI):
+                _rec(f"{name}.{attr}", member)
+                if isinstance(member, (str, bytes)):
+                    for meth in ("upper", "lower", "strip"):
+                        try:
+                            produced = getattr(member, meth)()
+                        except Exception:
+                            continue
+                        if isinstance(produced, _PRI) and produced != member:
+                            _rec(f"{name}.{attr}.{meth}()", produced)
+            elif callable(member):
+                bound = False
+                for argname, argval in prim_locals[:3]:
+                    try:
+                        produced = member(argval)
+                    except Exception:
+                        continue
+                    if isinstance(produced, _PRI):
+                        _rec(f"{name}.{attr}({argname})", produced)
+                        bound = True
+                        break
+                if not bound:
+                    # Object locals are legal arguments too -- the metavar of an argument is a
+                    # function of its *context*, which is an object and not a primitive.
+                    for oname, oval in obj_locals[:2]:
+                        if oval is obj:
+                            continue
+                        try:
+                            produced = member(oval)
+                        except Exception:
+                            continue
+                        if isinstance(produced, _PRI):
+                            _rec(f"{name}.{attr}({oname})", produced)
+                            bound = True
+                            break
+                if not bound:
+                    try:
+                        produced = member()
+                    except Exception:
+                        continue
+                    if isinstance(produced, _PRI):
+                        _rec(f"{name}.{attr}()", produced)
+    return val
+'''
+
+_HOOK_NAME = "__brain_derive__"
+
+
+def derive_frame_expressions(
+    project_root: pathlib.Path | str,
+    site: "scm.CausalSite",
+    focused_cmd: Sequence[str],
+    *,
+    timeout_s: float = 8.0,
+) -> dict[str, Any]:
+    """Return `{expression_text: value}` for every in-scope expression that produced a primitive.
+
+    The probe is read-only with respect to the real tree: it runs in a fresh `os.link` clone in
+    `/dev/shm` with a bytecode prefix in that clone, exactly like every other verification here.
+    """
+    if site.language != "python" or site.kind not in _FORCED_KINDS:
+        return {}
+    root = pathlib.Path(project_root).resolve()
+    orig = (root / site.rel_path).read_bytes()
+    wrapped = (
+        f"__import__('_brain_derive_rt')._derive("
+        f"__import__('_brain_derive_rt')._hook(({site.source_text}), locals()), locals())"
+    )
+    patched = scm._apply_site_patch(orig, site, wrapped)  # noqa: SLF001
+    if not scm._syntactically_valid(patched, "python", orig):  # noqa: SLF001
+        return {}
+    rt = _DERIVE_RT.encode("utf-8") + b"\n\ndef _hook(val, loc):\n    return val\n"
+    with tempfile.TemporaryDirectory(prefix="brain-derive-", dir=str(scm._shm_root())) as td:  # noqa: SLF001
+        log = pathlib.Path(td) / "derived.jsonl"
+        prev = os.environ.get("BRAIN_DERIVE_LOG")
+        os.environ["BRAIN_DERIVE_LOG"] = str(log)
+        try:
+            scm._run_suite_in_scratch(  # noqa: SLF001
+                root, focused_cmd,
+                {site.rel_path: patched, "_brain_derive_rt.py": rt},
+                timeout_s=timeout_s,
+            )
+        finally:
+            if prev is None:
+                os.environ.pop("BRAIN_DERIVE_LOG", None)
+            else:
+                os.environ["BRAIN_DERIVE_LOG"] = prev
+        if not log.is_file():
+            return {}
+        out: dict[str, Any] = {}
+        for line in log.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                rec = json.loads(line)
+            except ValueError:
+                continue
+            expr = str(rec.get("expr") or "")
+            if expr and expr not in out:
+                out[expr] = rec.get("value")
+        return out
+
+
+def _component_source(
+    component: Any,
+    frame_exprs: Mapping[str, Any],
+    prefer_names: Sequence[str] = (),
+) -> str | None:
+    """Emit the provenance expression for one leaf of the expected value, or `None`.
+
+    Ranking prefers an expression that calls something the *repository itself* defines
+    (`self.make_metavar(ctx)`) over one that calls a builtin (`self.name.upper()`). Both are proven by
+    the frame, but the repo's own vocabulary is the one that means what the program means.
+    """
+    if is_canonical_default(component):
+        return repr(component)
+    matches = [expr for expr, val in frame_exprs.items()
+               if type(val) is type(component) and val == component]
+    if not matches:
+        return None
+    preferred = [e for e in matches if any(f"{name}(" in e for name in prefer_names)]
+    if preferred:
+        matches = preferred
+    matches.sort(key=lambda e: (e.count("("), len(e)))
+    return matches[0]
+
+
+def frame_substituted_source(
+    expected: Any,
+    frame_exprs: Mapping[str, Any],
+    *,
+    prefer_names: Sequence[str] = (),
+) -> tuple[str | None, str]:
+    """Rebuild the expected value out of the frame's own expressions.
+
+    Every non-default component must be reproduced by an expression the site's own scope evaluates.
+    If even one is unmatched the whole substitution is refused: a partial rebuild would re-introduce
+    the test's data through the back door.
+    """
+    if not frame_exprs:
+        return None, "NO_FRAME_EVIDENCE"
+    if isinstance(expected, tuple):
+        parts = [_component_source(el, frame_exprs, prefer_names) for el in expected]
+        if any(p is None for p in parts):
+            return None, "COMPONENT_NOT_IN_FRAME"
+        body = ", ".join(parts)
+        if len(parts) == 1:
+            body += ","
+        return f"({body})", "FRAME_SUBSTITUTED"
+    if isinstance(expected, list):
+        parts = [_component_source(el, frame_exprs, prefer_names) for el in expected]
+        if any(p is None for p in parts):
+            return None, "COMPONENT_NOT_IN_FRAME"
+        return "[" + ", ".join(parts) + "]", "FRAME_SUBSTITUTED"
+    if isinstance(expected, dict):
+        pairs = []
+        for key, val in expected.items():
+            ksrc = _component_source(key, frame_exprs, prefer_names)
+            vsrc = _component_source(val, frame_exprs, prefer_names)
+            if ksrc is None or vsrc is None:
+                return None, "COMPONENT_NOT_IN_FRAME"
+            pairs.append(f"{ksrc}: {vsrc}")
+        return "{" + ", ".join(pairs) + "}", "FRAME_SUBSTITUTED"
+    src = _component_source(expected, frame_exprs, prefer_names)
+    if src is None:
+        return None, "COMPONENT_NOT_IN_FRAME"
+    return src, "FRAME_SUBSTITUTED"

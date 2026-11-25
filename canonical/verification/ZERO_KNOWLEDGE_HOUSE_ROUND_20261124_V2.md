@@ -1,4 +1,4 @@
-# Zero-Knowledge-House round V2 — new mechanisms, unchanged blind score, named next bottleneck
+# Zero-Knowledge-House round V2 — frame provenance closes one previously-open blind commit (8/13 → 9/13)
 
 **2026-11-24** · branch `arena/1412289d-brain` · base `c4f529eb086d3a11e6e8d3479f24176a9e2d590f`
 **Authority: NONE__PRODUCER_RUN_SANDBOX.** No capability credit, no benchmark credit, no ownership credit.
@@ -93,10 +93,20 @@ No new dependency, no parameter, no model. Eleven mechanisms, all exercised by e
 | 9 | Seven-step loop with per-step receipts | `causal_computer_use_agent_v1.py` | gzip goal reached, prediction error `0`, bystander byte-identical | no |
 | 10 | Goal-directed vs broad-ingest, same goal, fresh workspaces | `causal_computer_use_agent_v1.py` | goal-directed `1` probe / `11.9 ms` vs broad `3` probes / `23.7 ms` | n/a |
 | 11 | Offline self-play over unsolved failures | `causal_computer_use_agent_v1.py` | 2 episodes: 1 solved with a crystallized skill, 1 honestly open | n/a |
+| 12 | Frame provenance: rebuild the wanted value out of expressions the site's own scope evaluates, preferring names the *repository* defines | `causal_nexus_v1.py` + engine | click@05f6fd0 repaired blind in 10.88 s, 1 candidate, yielding `(None or (self.make_metavar(ctx), ''))` — no `'SRC'` literal in the patch | **yes** |
 
-**Honest total:** not one of these eleven mechanisms repaired a single previously-open OSS commit. The blind
-score is `8/13` before and `8/13` after. Everything new is proven on its own fixtures and in the store's real
-behaviour on real runs, not on the benchmark.
+**Honest total:** eleven of the twelve mechanisms earned nothing on the blind benchmark; the twelfth earned
+exactly one commit. In stage A (mechanisms 1–11) the score was `8/13`, identical to V1 — I wrote that down
+rather than presenting the new machinery as progress. Adding mechanism 12 moved it to `9/13 = 69.23%`, and
+that is the only movement: click@05f6fd0, one commit, via provenance rather than breadth.
+
+Two findings inside that mechanism are worth more than the commit itself. First, a data-shaped expected value
+cannot be used as repair material, and the first version of the gate was too permissive in two ways that the
+blind run exposed: duplicate renderings of the *same* assertion (traceback line plus summary line) were counted
+as two corroborating tests, and single-character strings were treated as canonical defaults. Both are now
+closed, and both were found by measuring rather than by reasoning. Second, the frame recorder had to be widened
+twice — to attributes, then to calls taking *object* locals as arguments — before `make_metavar(ctx)` was even
+visible. The provenance was one field away from the value the whole time; the instrument was what was missing.
 
 ---
 
@@ -107,7 +117,7 @@ no source diff, patch, commit message, or issue text is read; a repair counts on
 passes on a clean `/dev/shm` clone with the answer key absent. Same 13-commit sample as V1, re-run end to end
 with the upgraded engine, plus 9 previously-unseen commits.
 
-**Verified (8):** more-itertools@cca32949f1 (`UIR_DESCRIPTOR_NONNULL_GETATTR`), attrs@3b0378dd66
+**Verified (9):** click@05f6fd0 (`NEXUS_FRAME_SUBSTITUTED_FALLBACK`), more-itertools@cca32949f1 (`UIR_DESCRIPTOR_NONNULL_GETATTR`), attrs@3b0378dd66
 (`UIR_DEFENSIVE_SEQ_COPY`), werkzeug@884437ae (`UIR_BOOL_CONJUNCT_TO_IMPLIES`), werkzeug@051fd663
 (`UIR_STR_TRAILING_DELIM_STRIP`), pyjwt@5fde08a (`UIR_EXCEPT_LATTICE_JOIN`), pyjwt@793a302
 (`VERIFIED__MULTI_SITE_COMPOSITIONAL_CEGIS`, 3 sites), cJSON@b2890c8d76 (`CEGIS_NULL_PTR_PRECONDITION`),
@@ -115,12 +125,11 @@ cJSON@be749d7efa (`CEGIS_CALL_ARG_NULL_SHORTCIRCUIT_OR`). Zero regressions versu
 commit after the change (attrs needed its documented `max_sites=28 / max_candidates=64` budget; at a reduced
 budget it correctly reports `OPEN`).
 
-**Open (12), with the reason each one is open:**
+**Open (4 in the original 13 + 7 previously-unseen), with the reason each one is open:**
 
 | commit | why it is still open |
 |---|---|
 | pyjwt@af8181c | rejecting an empty HMAC key: needs a *new guard*, not a new value; 3 L3 refutations recorded |
-| click@05f6fd0 | wants `('SRC','')`; the value is known but its **provenance** is not, so the laundering gate refuses it (see §6) |
 | click@c53d373 | prompt/abort interaction across several statements |
 | click@fc518e4 | interrupt handling during abort reporting; 2 L3 refutations |
 | click@f67c2bb | help-text abbreviation rules; 8 L3 refutations |
@@ -147,24 +156,34 @@ budget it correctly reports `OPEN`).
 
 ---
 
-## 6. The single next bottleneck, named by the evidence rather than chosen by taste
+## 6. The bottleneck that was crossed, and the one the evidence now names
 
-click@05f6fd0 is the cleanest signal in the whole set. The failure publishes exactly the value it wants
-(`('SRC','')`), the counterfactual probe can prove the site, and the repair is one line — and it is still
-refused, correctly, because a fallback to a *test's own data* would be laundering. The missing ingredient is
-not search, not a grammar, and not more compute: it is **provenance of the expected value**.
+**Crossed.** click@05f6fd0 published the value it wanted (`('SRC','')`); the counterfactual probe could prove
+the site; the repair was one line — and it was refused, correctly, because a fallback to a *test's own data*
+is laundering. The missing ingredient was never search, grammar, or compute: it was **provenance**. The
+mechanism now records every in-scope expression that produced a primitive (attributes, calls over primitive
+*and object* locals, primitive method chains), rebuilds the wanted value out of those expressions, prefers the
+ones the repository itself declares, and refuses the whole substitution if a single component is unmatched.
+The result on the real commit was `(None or (self.make_metavar(ctx), ''))` — the idiomatic repair — with no
+test data in the program text.
 
-The move that dissolves it (§10 style): recover each non-default component of the expected literal from the
-site's own live frame — the locals, `self` attributes, and pure project helpers that were in scope when the
-wrong value was produced — and emit the **name** instead of the literal. `'SRC'` is the metavar the enclosing
-`Argument` computes; a name-emitting fallback (`or (self.make_metavar(ctx), '')`) is sound, generalizes to any
-context, and passes the laundering gate because the test's data never enters the program text.
+**Now named by the evidence.** The engine can name the value it needs; it still cannot *invent the statement
+that carries it*. pluggy@50585e0 wants a new bookkeeping assignment, pluggy@8051a4d wants a new precondition,
+more-itertools@c629214 wants a guard plus a body change, and cJSON@9d1b229086 wants a memory-safety fix. Four
+out of four are statement-level, not expression-level.
+
+The next move (§10 style): **statement-level differential synthesis.** At a proven nexus, mine the project's
+own statement shapes (the guard, assignment and early-return forms the file already uses), splice the one whose
+postcondition is the proven value, and prove it with the same one-execution CoW counterfactual before any full
+suite run. Statement shapes come from the repo, so nothing is invented from a fixed grammar; the postcondition
+comes from the frame, so nothing is invented from test data.
 
 Rejected alternatives, and why:
-- *More candidate shapes / bigger `max_candidates`* — the five remaining Python failures each need a new
-  statement or a new guard; breadth cannot reach them. Measured: `32` candidates on click@05f6fd0, all wrong.
-- *Dropping the laundering gate* — would have "solved" click@05f6fd0 by hard-coding `('SRC','')`. That is
-  exactly the reward hack §1.10 forbids, and it would break on the next argument.
+- *More candidate shapes / bigger `max_candidates`* — measured: `32` candidates on click@05f6fd0 before the
+  provenance mechanism, all wrong; `24` on each of the four remaining Python failures, all wrong.
+- *Dropping the laundering gate* — would have "solved" click@05f6fd0 by hard-coding `('SRC','')`. That is the
+  reward hack §1.10 forbids, and it breaks on the next argument. It was measurably wrong twice before the gate
+  was tightened, which is why the gate is now stricter than it started.
 - *Widening the UIR law grammar with hand-written families* — the rule-accumulation trap §9.3 names.
 - *A learned model of expected values* — a model call at runtime. Forbidden, and unnecessary: the frame already
   contains the answer.
@@ -173,12 +192,14 @@ Rejected alternatives, and why:
 
 ## 7. What is not done, stated plainly
 
-- §6 DONE is **not** met: the system performs on a hard blind sample of real commits (8/13) but not on the
+- §6 DONE is **not** met: the system performs on a hard blind sample of real commits (9/13) but not on the
   hardest open benchmarks, and no single-experience transfer across environments has been re-measured this round.
 - No SWE-bench Pro, Terminal-Bench 4.0, or OSWorld-2 score is claimed. Those run in containers; this sandbox has
   no Docker, no Harbor, and no VM support, and `.github/workflows/frontier_smoke_eval.yml` is a manual
   default-branch workflow pinned to `ref: e974b5a0…`, so this branch cannot dispatch it.
 - The L3 store's *pruning* benefit inside a single run is not yet measured; only its recording behaviour and its
   unit-level filter are. It is reported as unmeasured rather than assumed.
+- 11 of 20 graded commits remain open. The frame mechanism closed one commit; it did not move the class of
+  statement-level failures at all, and it should not be presented as if it had.
 - Statement-level morphisms are Python-only in this version; the C/C++/JS path still uses expression-level UIR
   laws. That is a real limitation, not a rounding error.

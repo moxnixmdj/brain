@@ -4183,12 +4183,19 @@ def repair_project_causally(
                 witnesses = nexus.angelic_nexus_blame(
                     root, sites, base_out, focused_cmd, obligations=obls, max_sites=8,
                 )
-                for w in witnesses:
+                for w_idx, w in enumerate(witnesses):
                     support = sum(
                         1 for o in obls if repr(o.expected_value)[:200] == w.forced_value_repr[:200]
                     )
+                    # Frame provenance is the expensive part, so it is computed for the proven
+                    # nexus only. It is what lets a data-shaped value become a repair: the site
+                    # must be shown to produce that value itself.
+                    frame_exprs = (
+                        nexus.derive_frame_expressions(root, w.site, focused_cmd) if w_idx == 0 else {}
+                    )
                     for tag, cand_code, extra_imp in nexus.synthesize_nexus_repairs(
                         w.site, w, cpg=cpg, supporting_obligations=max(1, support),
+                        frame_exprs=frame_exprs, prefer_names=tuple(cpg.functions)[:400],
                     ):
                         if evaluated >= max_candidates:
                             break

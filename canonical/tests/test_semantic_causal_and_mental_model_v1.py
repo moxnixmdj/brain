@@ -869,3 +869,64 @@ def test_cut_vertex_slicing_and_seven_step_loop(tmp_path: pathlib.Path) -> None:
     assert statuses["good"] == "VERIFIED__ANGELIC_NEXUS_FALLBACK"
     assert statuses["passing"] == "REFUSED__BASELINE_ALREADY_PASSING"
     assert play.skills >= 1
+
+
+def test_frame_provenance_turns_a_data_value_into_a_sound_repair(tmp_path: pathlib.Path) -> None:
+    """The value a test publishes is only usable when the site itself is shown to produce it.
+
+    This is the mechanism that closed `click@05f6fd0` blind: the wanted `('SRC', '')` is refused as a
+    literal (it is the test's data) and rebuilt as `(self.make_metavar(ctx), '')` from the live frame,
+    preferring the repository's own method over a builtin that happens to agree.
+    """
+    from canonical.swe_kernel import causal_nexus_v1 as nx
+
+    # -- 1. Pure substitution rules.
+    frame = {"self.name": "src", "self.make_metavar(ctx)": "SRC", "self.name.upper()": "SRC"}
+    src, reason = nx.frame_substituted_source(("SRC", ""), frame)
+    assert reason == "FRAME_SUBSTITUTED" and src == "(self.name.upper(), '')"
+    preferred, _ = nx.frame_substituted_source(("SRC", ""), frame, prefer_names=("make_metavar",))
+    assert preferred == "(self.make_metavar(ctx), '')"
+    assert nx.frame_substituted_source(("SRC", "missing"), frame)[0] is None
+    assert nx.frame_substituted_source(("SRC", ""), {})[0] is None
+    # A one-character value is data, not a canonical default.
+    assert nx.is_canonical_default("X") is False
+
+    # -- 2. End to end, on a repository shaped like click's `Argument`.
+    repo = tmp_path / "frame_repo"
+    (repo / "demo").mkdir(parents=True)
+    (repo / "tests").mkdir(parents=True)
+    (repo / "demo" / "__init__.py").write_text("")
+    (repo / "demo" / "app.py").write_text(
+        "class Argument:\n"
+        "    def __init__(self, name):\n"
+        "        self.name = name\n"
+        "        self.help = \"\"\n\n"
+        "    def make_metavar(self, ctx):\n"
+        "        return self.name.upper()\n\n"
+        "    def get_help_record(self, ctx):\n"
+        "        return None\n"
+    )
+    (repo / "tests" / "test_app.py").write_text(
+        "from types import SimpleNamespace\n"
+        "from demo.app import Argument\n\n"
+        "def test_help_record_never_none():\n"
+        "    arg = Argument(\"src\")\n"
+        "    assert arg.get_help_record(SimpleNamespace()) == (\"SRC\", \"\")\n"
+    )
+    store_dir = pathlib.Path(tempfile.mkdtemp(prefix="frame-e2e-", dir=str(tmp_path)))
+    result = repair_project_causally(
+        repo,
+        [sys.executable, "-m", "pytest", "-q", "tests/test_app.py"],
+        law_store=CausalLawStore(store_dir / "laws.json"),
+        skill_store=nx.SkillStoreV2(store_dir / "skills.json"),
+        invariant_store=nx.NegativeInvariantStore(store_dir / "invs.json"),
+        origin="frame_e2e",
+        max_sites=12,
+        max_candidates=16,
+    )
+    assert result.repaired is True
+    assert result.status == "VERIFIED__ANGELIC_NEXUS_FALLBACK"
+    assert (result.mechanism or "").startswith("NEXUS_FRAME_SUBSTITUTED_FALLBACK")
+    patched = next(iter(result.patched_files.values()))
+    assert "(self.make_metavar(ctx), '')" in patched
+    assert "\"SRC\"" not in patched and "'SRC'" not in patched  # the test's data never enters the code
