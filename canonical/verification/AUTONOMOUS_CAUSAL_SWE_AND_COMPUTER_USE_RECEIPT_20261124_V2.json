@@ -1,0 +1,316 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "blind_evaluation": {
+    "environment_blocked_open": 2,
+    "open": 12,
+    "open_tasks": [
+      {
+        "candidates_evaluated": 26,
+        "commit": "af8181c",
+        "environment_blocked": false,
+        "note": "3 L3 refutations recorded",
+        "repo": "pyjwt",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 32,
+        "commit": "05f6fd0",
+        "environment_blocked": false,
+        "note": "nexus witness available but expected value ('SRC','') refused by the data-literal gate",
+        "repo": "click",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 40,
+        "commit": "c53d373",
+        "environment_blocked": false,
+        "note": "carried over from V1",
+        "repo": "click",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 19,
+        "commit": "fc518e4",
+        "environment_blocked": false,
+        "note": "2 L3 refutations recorded",
+        "repo": "click",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "f67c2bb",
+        "environment_blocked": false,
+        "note": "8 L3 refutations recorded",
+        "repo": "click",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 7,
+        "commit": "9d1b229086",
+        "environment_blocked": false,
+        "note": "ASan abort",
+        "repo": "cJSON",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 18,
+        "commit": "6d9f244",
+        "environment_blocked": false,
+        "note": "ASan heap overflow in cJSON_Utils",
+        "repo": "cJSON",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "50585e0",
+        "environment_blocked": false,
+        "note": "",
+        "repo": "pluggy",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "8051a4d",
+        "environment_blocked": false,
+        "note": "",
+        "repo": "pluggy",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "c629214",
+        "environment_blocked": false,
+        "note": "3 L3 refutations recorded",
+        "repo": "more-itertools",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "cf2cdf0",
+        "environment_blocked": true,
+        "note": "collection error: no module named 'pretend'",
+        "repo": "packaging",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "candidates_evaluated": 24,
+        "commit": "6c4c680f",
+        "environment_blocked": true,
+        "note": "collection error: werkzeug.exceptions.default_exceptions absent at parent",
+        "repo": "werkzeug",
+        "status": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      }
+    ],
+    "protocol": "single-parent commits from 8 external repos; ONLY test files are copied from the fix commit; no source diff, patch, or commit message is read; a fix counts only when the project's own suite passes on a clean /dev/shm clone with the answer key absent",
+    "resolve_rate": 0.6154,
+    "sample": 13,
+    "verified": 8,
+    "verified_tasks": [
+      {
+        "candidates_evaluated": 5,
+        "commit": "cca32949f1",
+        "engine_ms": 11409.84,
+        "mechanism": "UIR_DESCRIPTOR_NONNULL_GETATTR",
+        "repo": "more-itertools",
+        "suite_evidence": "543 passed + 1 target"
+      },
+      {
+        "candidates_evaluated": 30,
+        "commit": "3b0378dd66",
+        "engine_ms": 23785.44,
+        "mechanism": "UIR_DEFENSIVE_SEQ_COPY",
+        "repo": "attrs",
+        "suite_evidence": "full suite incl. 1 pre-existing failure"
+      },
+      {
+        "candidates_evaluated": 15,
+        "commit": "884437ae",
+        "engine_ms": 27260.28,
+        "mechanism": "UIR_BOOL_CONJUNCT_TO_IMPLIES",
+        "repo": "werkzeug",
+        "suite_evidence": "149 passed + target"
+      },
+      {
+        "candidates_evaluated": 1,
+        "commit": "051fd663",
+        "engine_ms": 24610.73,
+        "mechanism": "UIR_STR_TRAILING_DELIM_STRIP",
+        "repo": "werkzeug",
+        "suite_evidence": "123 passed + target"
+      },
+      {
+        "candidates_evaluated": 2,
+        "commit": "5fde08a",
+        "engine_ms": 21581.39,
+        "mechanism": "UIR_EXCEPT_LATTICE_JOIN",
+        "repo": "pyjwt",
+        "suite_evidence": "143 passed + 2 targets"
+      },
+      {
+        "candidates_evaluated": 6,
+        "commit": "793a302",
+        "engine_ms": 25187.2,
+        "mechanism": "VERIFIED__MULTI_SITE_COMPOSITIONAL_CEGIS (3x UIR_EXCEPT_LATTICE_JOIN)",
+        "repo": "pyjwt",
+        "suite_evidence": "84 passed + 12 targets"
+      },
+      {
+        "candidates_evaluated": 2,
+        "commit": "b2890c8d76",
+        "engine_ms": 5516.63,
+        "mechanism": "CEGIS_NULL_PTR_PRECONDITION",
+        "repo": "cJSON",
+        "suite_evidence": "ASan+UBSan binary"
+      },
+      {
+        "candidates_evaluated": 5,
+        "commit": "be749d7efa",
+        "engine_ms": 9579.85,
+        "mechanism": "CEGIS_CALL_ARG_NULL_SHORTCIRCUIT_OR",
+        "repo": "cJSON",
+        "suite_evidence": "ASan+UBSan binary"
+      }
+    ],
+    "zero_regression_vs_v1": true
+  },
+  "branch": "arena/1412289d-brain",
+  "generated_at_utc": "2026-11-25T01:53:07Z",
+  "honest_verdict": [
+    "The blind resolve rate on this 13-commit sample did not move: 8/13 before and 8/13 after.",
+    "Not one of the eleven new mechanisms earned a previously-open OSS commit in this round.",
+    "The one place they fired on real code was the L3 store, which recorded 19 executed refutations across five commits; its pruning effect within a single run is not yet measured.",
+    "Two of the twelve open commits cannot be graded in this sandbox at all (missing 'pretend'; an API that does not exist at the parent).",
+    "Every one of the five remaining gradeable Python failures needs a new value, a new statement, or a memory-safety fix that no expression-level law can express. That is the next bottleneck, not a matter of more search.",
+    "DONE per \u00a76 is not met. No SWE-bench Pro, Terminal-Bench 4.0 or OSWorld-2 container score is claimed, because none was run."
+  ],
+  "incremental_spend_usd": 0.0,
+  "modules": {
+    "canonical/runtime/causal_computer_use_agent_v1.py": {
+      "lines": 578,
+      "sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845"
+    },
+    "canonical/swe_kernel/causal_nexus_v1.py": {
+      "lines": 1296,
+      "sha256": "f2f0019f5a88434acfb288f73199db505097c8bfba66da4b3dafc01f813a2adf"
+    },
+    "canonical/swe_kernel/executable_mental_model_v1.py": {
+      "lines": 1849,
+      "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
+    },
+    "canonical/swe_kernel/semantic_causal_engine_v1.py": {
+      "lines": 4405,
+      "sha256": "46fd44d0e6970e9227a47dc99bd065cf5e7f8af4aa654bd6d02fbc6b19cea09f"
+    },
+    "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
+      "lines": 871,
+      "sha256": "dc90424d5aaded5eb0c6bd209d478a2770216e88bada9e19c87628f6c9cfedbe"
+    }
+  },
+  "new_mechanisms": [
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "unit: 4/4 obligation forms recovered, identity/inconsistent transducers refused; e2e: drives the nexus repair",
+      "id": "EXPECTED_VALUE_ABDUCTION",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "parse (actual, expected) literal pairs published by the failing assertion; expected side is the goal residual"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "e2e fixture: status VERIFIED__ANGELIC_NEXUS_FALLBACK in 4.58 s, 1 candidate, verified by the project's own pytest",
+      "id": "SINGLE_SITE_COUNTERFACTUAL_BLAME",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "force the expected literal at one suspect site in an isolated CoW clone; a site that closes every failing test is a proven nexus"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "('SRC','') refused; () admitted; 3 admitted only with 2 supporting obligations. This is why click@05f6fd0 stays open.",
+      "id": "TEST_VALUE_LAUNDERING_GATE",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "a forced value may seed a repair only if it is a canonical default or is demanded by >=2 independent obligations"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "b'\\x04'->b'^D' round-trips both ways; position mode 1:1 map; identity and conflicting pairs refused",
+      "id": "BIDIRECTIONAL_LENS_FST",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "fit a minimal consistent transliteration or token table and compile it to str/bytes.translate or a .replace chain; emit the inverse or report non-invertibility"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "learns a 2-statement guard-to-fallback fix and replays it on identifier-renamed and differently-named files; refuses a changed guard body; delete leaves an empty store",
+      "id": "TREE_REWRITE_MORPHISM_L2",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "statement-level Plotkin anti-unification with identifier alpha-abstraction; two-sided hole constraints; JSON store with provenance, staleness probe, O(1) delete"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "unit: blocks recorded shape, ignores other tags, O(1) removal; live blind runs recorded 0-8 refutations per commit (click@f67c2bb: 8)",
+      "id": "NEGATIVE_SPACE_INVARIANT_L3",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "not_yet_measured": "the end-to-end candidate saving from pruning during a single blind run",
+      "verified_here": true,
+      "what": "record the structural shape of every refuted candidate as a filter applied before compilation"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "predicted fallback divergence accepted; a silent constant replacement rejected with UNPREDICTED_DIVERGENCE:26",
+      "id": "BOUNDARY_INVARIANCE_FUZZ",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "execute before/after over a 40-value boundary corpus; every divergence must be one the obligation predicted"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "chain a->b->c->d with a dead-end branch yields checkpoints [{a,b},{a,b,c}] and 3 slices; a diamond correctly yields none",
+      "id": "CUT_VERTEX_SUBGOAL_SLICING",
+      "module": "canonical/swe_kernel/executable_mental_model_v1.py",
+      "verified_here": true,
+      "what": "Tarjan articulation points over the bounded marking graph; slice a plan at tokens every path must pass"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "gzip goal reached on a real workspace, prediction error 0, bystander README byte-identical, runtime_model_calls 0",
+      "id": "SEVEN_STEP_LOOP",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "goal -> scan -> recall -> acquire -> predict/act -> verify -> compress, with per-step receipts"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "goal-directed 1 probe / 11.9 ms vs broad ingest 3 probes / 23.7 ms, both reaching the goal",
+      "id": "GOAL_DIRECTED_VS_BROAD_INGEST",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "same goal, identical fresh workspaces, both acquisition arms measured"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "2-episode run: 1 solved (VERIFIED__ANGELIC_NEXUS_FALLBACK), 1 honestly open (REFUSED__BASELINE_ALREADY_PASSING)",
+      "id": "OFFLINE_SELF_PLAY",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "run unsolved failures through the solver, crystallize verified fixes, refute near misses"
+    }
+  ],
+  "next_bottleneck": {
+    "evidence_that_this_is_the_bottleneck": "click@05f6fd0 wants ('SRC','') where 'SRC' is exactly the metavar the enclosing argument computes; a name-emitting fallback would be sound and would pass the gate",
+    "mechanism": "frame-substituted fallback: recover each non-default component of the expected literal from the site's own live frame (locals, self attributes, and pure project helpers) and emit the name instead of the literal",
+    "statement": "the expected value is available but its *provenance* is not, so the laundering gate must refuse it"
+  },
+  "runtime_model_calls": 0,
+  "runtime_network_calls": 0,
+  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
+  "stored_world_facts_in_weights": 0,
+  "tests": {
+    "causal_suite": "7 passed in 33.21 s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+    "combined_kernel": "75 passed, 1 failed in 45.97 s across 8 kernel test modules",
+    "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
+    "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree without any of these files; status FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT"
+  }
+}
