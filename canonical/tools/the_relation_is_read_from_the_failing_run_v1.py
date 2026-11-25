@@ -330,7 +330,12 @@ def run_pytest():
         # `Attribute` before `.init` existed -- `AttributeError: 'Attribute' object has
         # no attribute 'init'` -- and without this the row reported NO_RELATION, i.e. it
         # blamed the project for the instrument's own edit.
-        facts["the_probe_broke_the_run"] = True
+        # A WARNING IS NOT A CRASH. pytest here turns warnings into errors, so
+        # `HypothesisWarning` arrived through this handler and the row was reported as
+        # THE_PROBE_BROKE_THE_RUN -- my own honesty machinery telling a lie about itself.
+        # Only an error that prevented the run from producing a verdict counts.
+        if not issubclass(type(error).__name__, object) or "Warning" not in type(error).__name__:
+            facts["the_probe_broke_the_run"] = True
         return 3
 
 if _trace:
