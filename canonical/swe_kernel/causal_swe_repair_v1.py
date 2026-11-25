@@ -227,18 +227,30 @@ def run_pytest_verdicts(
     ]
     env = _clean_env(worktree)
     started = time.perf_counter()
+    proc = subprocess.Popen(
+        cmd,
+        cwd=str(worktree),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True,
+        errors="replace",
+        stdin=subprocess.DEVNULL,
+        env=env,
+        start_new_session=True,
+    )
     try:
-        done = subprocess.run(
-            cmd,
-            cwd=str(worktree),
-            capture_output=True,
-            text=True,
-            errors="replace",
-            stdin=subprocess.DEVNULL,
-            timeout=timeout_s,
-            env=env,
-        )
+        stdout_s, stderr_s = proc.communicate(timeout=timeout_s)
+        done = subprocess.CompletedProcess(cmd, proc.returncode, stdout_s, stderr_s)
     except subprocess.TimeoutExpired:
+        try:
+            import signal
+            os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+        except Exception:
+            proc.kill()
+        try:
+            proc.communicate(timeout=3.0)
+        except Exception:
+            pass
         return {
             "ok": False,
             "timeout": True,

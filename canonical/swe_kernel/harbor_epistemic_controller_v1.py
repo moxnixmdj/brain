@@ -95,7 +95,7 @@ def solve_harbor_cycle(
             "actions": [
                 {
                     "type": "terminal_exec",
-                    "args": {"command": safe_cmd, "timeout_sec": 60},
+                    "args": {"command": safe_cmd, "timeout_sec": 120},
                 }
             ],
         }
@@ -106,11 +106,11 @@ def solve_harbor_cycle(
         disc = _parse_last_json(str(last_obs.get("stdout") or ""))
         ecosystems = disc.get("ecosystems") if isinstance(disc.get("ecosystems"), Mapping) else {}
         ranked_tests = disc.get("ranked_tests") if isinstance(disc.get("ranked_tests"), list) else []
-        if ecosystems.get("python") and ranked_tests:
+        if ecosystems.get("python"):
             raw_cmd = (
                 "env -i PATH=/opt/miniconda3/envs/testbed/bin:/opt/conda/envs/testbed/bin:"
                 "/usr/local/bin:/usr/bin:/bin HOME=/tmp "
-                f"python3 -I -B {RUNNER_SCRIPT} --phase repair --timeout-s 130"
+                f"python3 -I -B {RUNNER_SCRIPT} --phase repair --timeout-s 80"
             )
             safe_cmd = validate_environment_command(raw_cmd)
             return {
@@ -127,7 +127,7 @@ def solve_harbor_cycle(
                 "actions": [
                     {
                         "type": "terminal_exec",
-                        "args": {"command": safe_cmd, "timeout_sec": 160},
+                        "args": {"command": safe_cmd, "timeout_sec": 180},
                     }
                 ],
             }

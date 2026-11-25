@@ -126,13 +126,18 @@ def _rank_candidate_tests(repo_root: pathlib.Path, clues: dict[str, list[str]]) 
     test_files: list[tuple[int, str]] = []
     idents = set(clues.get("identifiers", ())[:16])
     src_stems = {pathlib.Path(s).stem.removeprefix("_") for s in src_clues}
+    scan_deadline = time.perf_counter() + 12.0
 
     for root_dir, dirs, files in os.walk(repo_root):
+        if time.perf_counter() >= scan_deadline:
+            break
         dirs[:] = [
             d for d in dirs
             if not d.startswith(".") and d not in {"node_modules", "__pycache__", "build", "dist", "venv", ".venv"}
         ]
         for fname in files:
+            if time.perf_counter() >= scan_deadline:
+                break
             if not (fname.startswith("test_") and fname.endswith(".py")) and not fname.endswith("_test.py"):
                 continue
             fpath = pathlib.Path(root_dir) / fname
@@ -195,27 +200,20 @@ def phase_discover(instruction: str) -> dict[str, Any]:
     return state
 
 
-def _clean_untracked_in_repo(repo_root: pathlib.Path) -> None:
-    """Remove any `.pytest_cache` or `__pycache__` artifacts if unignored so git capture stays clean."""
+def _clean_untracked_in_repo(repo_root: pathlib.Path, *, revert_tracked: bool = False) -> None:
+    """Restore tracked files when no repair verified and purge all unignored untracked files (`git clean -fd`)."""
     try:
-        st = subprocess.run(
-            ["git", "-C", str(repo_root), "status", "--porcelain"],
+        if revert_tracked:
+            subprocess.run(
+                ["git", "-C", str(repo_root), "checkout", "--", "."],
+                capture_output=True,
+                timeout=20,
+            )
+        subprocess.run(
+            ["git", "-C", str(repo_root), "clean", "-fd"],
             capture_output=True,
-            text=True,
-            timeout=15,
+            timeout=20,
         )
-        if st.returncode == 0:
-            for line in st.stdout.splitlines():
-                if line.startswith("?? "):
-                    rel = line[3:].strip()
-                    target = (repo_root / rel).resolve()
-                    if repo_root in target.parents and (
-                        "__pycache__" in rel or ".pytest_cache" in rel or rel.endswith(".pyc")
-                    ):
-                        if target.is_dir():
-                            shutil.rmtree(target, ignore_errors=True)
-                        elif target.is_file():
-                            target.unlink(missing_ok=True)
     except Exception:
         pass
 
@@ -398,7 +396,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             failing_target = str(witness_info["witness_path"])
 
     if failing_target is None:
-        _clean_untracked_in_repo(repo_root)
+        _clean_untracked_in_repo(repo_root, revert_tracked=True)
         _reap_children()
         return {
             "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
@@ -409,7 +407,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             "model_calls": 0,
         }
 
-    rem_budget = max(15.0, timeout_s - (time.perf_counter() - t0) - 5.0)
+    rem_budget = min(45.0, max(15.0, timeout_s - (time.perf_counter() - t0) - 15.0))
     mem = SWERepairMemory(MEM_PATH)
     skill_store = AdmissionFilteredSkillStore(SKILL_PATH, mode="generalized")
     outcome = repair_worktree(
@@ -421,16 +419,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         budget_s=rem_budget,
     )
     WITNESS_TEST_PATH.unlink(missing_ok=True)
-    if not outcome.get("pass"):
-        try:
-            subprocess.run(
-                ["git", "-C", str(repo_root), "checkout", "--", "."],
-                capture_output=True,
-                timeout=15,
-            )
-        except Exception:
-            pass
-    _clean_untracked_in_repo(repo_root)
+    _clean_untracked_in_repo(repo_root, revert_tracked=not bool(outcome.get("pass")))
     reaped = _reap_children()
     return {
         "status": outcome.get("status"),

@@ -196,6 +196,7 @@ jobs:
           (jobs / 'smoke_audit.json').write_text(json.dumps(report, indent=2) + '\n')
           print(json.dumps(report, indent=2))
           if issues or len(ids) != int(__import__('os').environ['TASK_LIMIT']):
+              print(f"::error::smoke_audit_failed issues={issues} rows={rows}", flush=True)
               sys.exit(1)
           PY
 
