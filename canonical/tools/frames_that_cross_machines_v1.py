@@ -211,12 +211,54 @@ def build_vault(root: pathlib.Path) -> Machine:
     ), read, reset)
 
 
+def build_scrambled(root: pathlib.Path) -> Machine:
+    """A machine whose atom ROLES are deliberately permuted: the counterpart of the others.
+
+    `A_CONTAST_IS_A_PROBE` rests on resolving an experiment by role -- `GIT_A4` means nothing on VAULT,
+    but `A4` does, because every machine in this family fills slot A4 with the same kind of atom. If
+    its 95.3% portability came from that convention rather than from the procedure itself, a machine
+    that permutes its roles will collapse it.
+
+    Here the atoms do the family's work in a PERMUTED order. It exists to falsify the round's own
+    claim, so it is built to be as uncooperative as possible while remaining a real machine.
+    """
+
+    lines = root / "scrambled.txt"
+
+    def reset() -> None:
+        for path in list(root.iterdir()):
+            if path.is_file():
+                path.unlink()
+        lines.write_text("\n".join((ALPHA, BETA, GAMMA)) + "\n", encoding="utf-8")
+
+    def read() -> list[tuple[str, str]]:
+        if not lines.exists():
+            return []
+        body = lines.read_text(encoding="utf-8").splitlines()
+        return [(str(index), content) for index, content in enumerate(body)]
+
+    def write(*lines_to_write: str) -> dict[str, Any]:
+        return _write_via_sh(str(lines), *lines_to_write)
+
+    return Machine("SCRAMBLED", root, (
+        # the roles are shifted by two: what is A3 elsewhere is A1 here, and so on
+        Atom("SC_A1", ((("sort", "-o", str(lines), str(lines)), None),)),
+        Atom("SC_A2", ((("tac", str(lines)), None), (("sort", "-o", str(lines)), None))),
+        Atom("SC_A3", (((f"sh", "-c", f"printf '%s\\n' {DELTA} >> {lines}"), None),)),
+        Atom("SC_A4", ((("head", "-n", "-1", str(lines)), None),
+                       (("sort", "-o", str(lines)), None))),
+    ), read, reset)
+
+
 NEW_MACHINES: dict[str, Callable[[pathlib.Path], Machine]] = {
     "GIT2": build_git2,
     "ARCHIVE2": build_archive2,
     "LIST": build_list,
     "JOURNAL": build_journal,
     "VAULT": build_vault,
+    # a deliberate counterpart: its roles do not line up with the rest of the family, so it is the
+    # control for any claim that rests on role correspondence
+    "SCRAMBLED": build_scrambled,
 }
 REUSED_MACHINES = dict(base.MACHINES)
 
