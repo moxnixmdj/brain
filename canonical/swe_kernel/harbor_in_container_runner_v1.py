@@ -200,8 +200,32 @@ def phase_discover(instruction: str) -> dict[str, Any]:
     return state
 
 
-def _clean_untracked_in_repo(repo_root: pathlib.Path, *, revert_tracked: bool = False) -> None:
-    """Restore tracked files when no repair verified and purge all unignored untracked files (`git clean -fd`)."""
+def _list_untracked(repo_root: pathlib.Path) -> set[str]:
+    try:
+        st = subprocess.run(
+            ["git", "-C", str(repo_root), "status", "--porcelain", "-uall"],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        if st.returncode == 0:
+            return {
+                ln[3:].strip()
+                for ln in st.stdout.splitlines()
+                if ln.startswith("?? ") and ln[3:].strip()
+            }
+    except Exception:
+        pass
+    return set()
+
+
+def _clean_untracked_in_repo(
+    repo_root: pathlib.Path,
+    *,
+    revert_tracked: bool = False,
+    pre_untracked: set[str] | None = None,
+) -> None:
+    """Restore tracked files when no repair verified and remove only newly created untracked entries."""
     try:
         if revert_tracked:
             subprocess.run(
@@ -209,11 +233,21 @@ def _clean_untracked_in_repo(repo_root: pathlib.Path, *, revert_tracked: bool = 
                 capture_output=True,
                 timeout=20,
             )
-        subprocess.run(
-            ["git", "-C", str(repo_root), "clean", "-fd"],
-            capture_output=True,
-            timeout=20,
-        )
+        cur_untracked = _list_untracked(repo_root)
+        baseline = pre_untracked if pre_untracked is not None else set()
+        for rel in sorted(cur_untracked):
+            if pre_untracked is not None and rel in baseline:
+                continue
+            if pre_untracked is None and not (
+                "__pycache__" in rel or ".pytest_cache" in rel or rel.endswith(".pyc")
+            ):
+                continue
+            target = (repo_root / rel).resolve()
+            if repo_root in target.parents:
+                if target.is_dir():
+                    shutil.rmtree(target, ignore_errors=True)
+                else:
+                    target.unlink(missing_ok=True)
     except Exception:
         pass
 
@@ -357,9 +391,10 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
     repo_root = pathlib.Path(state["repo_root"])
     py_exe = str(state["python_exe"])
     ranked_tests: list[str] = list(state.get("ranked_tests") or [])
+    pre_untracked = _list_untracked(repo_root)
 
     if not state.get("ecosystems", {}).get("python"):
-        _clean_untracked_in_repo(repo_root)
+        _clean_untracked_in_repo(repo_root, pre_untracked=pre_untracked)
         _reap_children()
         return {
             "status": "OPEN__NO_PYTHON_FAILING_TARGET_IDENTIFIED",
@@ -376,63 +411,90 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
     )
     from canonical.swe_kernel.petri_cow_splicing_engine_v1 import AdmissionFilteredSkillStore
 
-    failing_target: str | list[str] | None = None
-    witness_info: dict[str, Any] = {"compiled": False}
-    for cand_t in ranked_tests[:4]:
-        if time.perf_counter() - t0 > timeout_s * 0.30:
-            break
-        verd = run_pytest_verdicts(repo_root, cand_t, python_exe=py_exe, timeout_s=20.0)
-        if verd.get("failing"):
-            failing_target = cand_t
-            break
+    import signal
 
-    if failing_target is None:
-        witness_info = compile_issue_witness_test(
-            str(state.get("instruction") or ""),
+    def _alarm_handler(_signum: int, _frame: Any) -> None:
+        raise TimeoutError("HARBOR_REPAIR_WATCHDOG_EXPIRED")
+
+    prev_handler = signal.signal(signal.SIGALRM, _alarm_handler)
+    signal.alarm(max(20, int(timeout_s) + 15))
+    try:
+        failing_target: str | list[str] | None = None
+        witness_info: dict[str, Any] = {"compiled": False}
+        for cand_t in ranked_tests[:4]:
+            if time.perf_counter() - t0 > timeout_s * 0.30:
+                break
+            verd = run_pytest_verdicts(repo_root, cand_t, python_exe=py_exe, timeout_s=15.0)
+            if verd.get("failing"):
+                failing_target = cand_t
+                break
+
+        if failing_target is None:
+            witness_info = compile_issue_witness_test(
+                str(state.get("instruction") or ""),
+                repo_root,
+                py_exe,
+            )
+            if witness_info.get("compiled"):
+                failing_target = str(witness_info["witness_path"])
+
+        if failing_target is None:
+            _clean_untracked_in_repo(repo_root, revert_tracked=True, pre_untracked=pre_untracked)
+            _reap_children()
+            return {
+                "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
+                "probed_tests": ranked_tests[:4],
+                "witness_compiler": witness_info,
+                "pass": False,
+                "wall_s": round(time.perf_counter() - t0, 3),
+                "model_calls": 0,
+            }
+
+        rem_budget = min(38.0, max(12.0, timeout_s - (time.perf_counter() - t0) - 15.0))
+        mem = SWERepairMemory(MEM_PATH)
+        skill_store = AdmissionFilteredSkillStore(SKILL_PATH, mode="generalized")
+        outcome = repair_worktree(
             repo_root,
-            py_exe,
+            failing_target,
+            python_exe=py_exe,
+            memory=mem,
+            skill_store=skill_store,
+            budget_s=rem_budget,
         )
-        if witness_info.get("compiled"):
-            failing_target = str(witness_info["witness_path"])
-
-    if failing_target is None:
-        _clean_untracked_in_repo(repo_root, revert_tracked=True)
-        _reap_children()
+        WITNESS_TEST_PATH.unlink(missing_ok=True)
+        _clean_untracked_in_repo(
+            repo_root,
+            revert_tracked=not bool(outcome.get("pass")),
+            pre_untracked=pre_untracked,
+        )
+        reaped = _reap_children()
         return {
-            "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
-            "probed_tests": ranked_tests[:4],
-            "witness_compiler": witness_info,
-            "pass": False,
+            "status": outcome.get("status"),
+            "pass": bool(outcome.get("pass")),
+            "failing_target": failing_target,
+            "winning_mechanism": outcome.get("winning_mechanism"),
+            "learned_skill_id": outcome.get("learned_skill_id"),
+            "repaired_file": outcome.get("repaired_file"),
+            "repaired_line": outcome.get("repaired_line"),
+            "reaped_children": reaped,
             "wall_s": round(time.perf_counter() - t0, 3),
             "model_calls": 0,
         }
-
-    rem_budget = min(45.0, max(15.0, timeout_s - (time.perf_counter() - t0) - 15.0))
-    mem = SWERepairMemory(MEM_PATH)
-    skill_store = AdmissionFilteredSkillStore(SKILL_PATH, mode="generalized")
-    outcome = repair_worktree(
-        repo_root,
-        failing_target,
-        python_exe=py_exe,
-        memory=mem,
-        skill_store=skill_store,
-        budget_s=rem_budget,
-    )
-    WITNESS_TEST_PATH.unlink(missing_ok=True)
-    _clean_untracked_in_repo(repo_root, revert_tracked=not bool(outcome.get("pass")))
-    reaped = _reap_children()
-    return {
-        "status": outcome.get("status"),
-        "pass": bool(outcome.get("pass")),
-        "failing_target": failing_target,
-        "winning_mechanism": outcome.get("winning_mechanism"),
-        "learned_skill_id": outcome.get("learned_skill_id"),
-        "repaired_file": outcome.get("repaired_file"),
-        "repaired_line": outcome.get("repaired_line"),
-        "reaped_children": reaped,
-        "wall_s": round(time.perf_counter() - t0, 3),
-        "model_calls": 0,
-    }
+    except BaseException as exc:
+        WITNESS_TEST_PATH.unlink(missing_ok=True)
+        _clean_untracked_in_repo(repo_root, revert_tracked=True, pre_untracked=pre_untracked)
+        reaped = _reap_children()
+        return {
+            "status": "OPEN__WATCHDOG_OR_CONTAINER_ABORT",
+            "reason": f"{type(exc).__name__}:{str(exc)[:120]}",
+            "pass": False,
+            "reaped_children": reaped,
+            "wall_s": round(time.perf_counter() - t0, 3),
+            "model_calls": 0,
+        }
+    finally:
+        signal.alarm(0)
+        signal.signal(signal.SIGALRM, prev_handler)
 
 
 def main() -> int:

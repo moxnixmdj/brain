@@ -171,9 +171,7 @@ _VERDICT_AFTER = re.compile(
 
 
 def _clean_env(worktree: pathlib.Path) -> dict[str, str]:
-    """Purge `__pycache__` and put `worktree/src` + `worktree` strictly ahead of site-packages."""
-    for cache in worktree.rglob("__pycache__"):
-        shutil.rmtree(cache, ignore_errors=True)
+    """Configure `PYTHONPATH` (`worktree/src` + `worktree` ahead of site-packages) with `/tmp` pycache."""
     py_paths = []
     if (worktree / "src").is_dir():
         py_paths.append(str(worktree / "src"))
@@ -1779,6 +1777,7 @@ def repair_worktree(
         t0 = time.perf_counter()
         for rel_p, new_src in file_patches.items():
             (worktree / rel_p).write_text(new_src, encoding="utf-8")
+            shutil.rmtree((worktree / rel_p).parent / "__pycache__", ignore_errors=True)
         try:
             full = run_pytest_verdicts(
                 worktree, test_target, python_exe=python_exe, timeout_s=40.0
@@ -1843,7 +1842,10 @@ def repair_worktree(
                     direct_mods.add(rp.removeprefix("src/").removesuffix(".py").replace("/", "."))
                 hop2_mods: set[str] = set(direct_mods)
                 src_root = worktree / "src" if (worktree / "src").is_dir() else worktree
-                for py_p in src_root.rglob("*.py"):
+                scan_dl = time.perf_counter() + 2.5
+                for idx_py, py_p in enumerate(src_root.rglob("*.py")):
+                    if idx_py >= 600 or time.perf_counter() >= scan_dl:
+                        break
                     rel_py = py_p.relative_to(worktree).as_posix()
                     if rel_py.startswith(("tests/", "test/", "testing/")) or py_p.stat().st_size > 180_000:
                         continue
@@ -1862,7 +1864,9 @@ def repair_worktree(
                 for td_name in ("tests", "test", "testing"):
                     td_p = worktree / td_name
                     if td_p.is_dir():
-                        for tf_cand in sorted(td_p.rglob("test_*.py")):
+                        for idx_tf, tf_cand in enumerate(td_p.rglob("test_*.py")):
+                            if idx_tf >= 600 or time.perf_counter() >= scan_dl:
+                                break
                             r_tf = tf_cand.relative_to(worktree).as_posix()
                             if r_tf not in all_test_candidates:
                                 all_test_candidates.append(r_tf)

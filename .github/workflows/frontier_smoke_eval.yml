@@ -169,6 +169,8 @@ jobs:
               src_dir, src = producers[task]
               dst_dir, dst = replays[task]
               if src.get('exception_info') is not None or dst.get('exception_info') is not None:
+                  row['src_exc'] = str(src.get('exception_info'))[:240]
+                  row['dst_exc'] = str(dst.get('exception_info'))[:240]
                   issues.append(f'{task}:trial_exception')
               patch = src_dir / 'agent' / 'model.patch'
               trace_path = src_dir / 'agent' / 'brain_epistemic_trace.json'
