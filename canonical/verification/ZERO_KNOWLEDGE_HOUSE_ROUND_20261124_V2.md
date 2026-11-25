@@ -744,3 +744,64 @@ suite never mentions the defect.
 (lifecycle is done; round-trip inverse, idempotence, aliasing, charset/whitespace canonicality, error-type discipline
 are the measured gaps from the five silent commits), plus a *failure-type* law: on the pyjwt commit the defect is that a
 builtin exception escapes where the library defines its own hierarchy — that is an observable, not a heuristic.
+
+## Round V15 — the law library, and the acceptance gate I wrote in advance fails at 1/6
+
+V13/V14 shipped one law (lifecycle) and I wrote the next gate before building: *on the same six commits with the
+hidden test deleted, at least three must fire on the buggy tree and be silent on the fixed tree.* This round builds six
+laws and runs that gate. **The gate fails: 1 of 6.**
+
+**What was built.** `canonical/swe_kernel/metamorphic_laws_v1.py` — each law names the observable it constrains:
+`remove_argument_vanishes` (lifecycle), `string_canonicality` (a presented header/token must be whitespace-clean),
+`round_trip` (`decode(encode(x)) == x`), `idempotence`, `iterable_retyping` (a generator is a list; a list with
+`__reversed__` removed is still the same elements), `error_discipline`.
+`canonical/swe_kernel/metamorphic_plugin_v1.py` — the instrumentation: wraps module functions *and* class methods
+(plus `__str__`/`__repr__`, where header values are actually produced), re-invokes with boundary mutations under a
+budget, and probes lifecycle at teardown.
+
+**The gate, measured** (buggy = `sha^1`, fixed = `sha^1` + non-test diff, hidden test absent from both):
+
+| commit | buggy | fixed | discriminates | laws that fired |
+|---|---|---|---|---|
+| `pluggy@50585e0` | **6** | **0** | **yes** | `remove_argument_vanishes` |
+| `pluggy@8051a4d` | 2 | 2 | no | `remove_argument_vanishes` (belongs to a *later* commit) |
+| `pyjwt@793a302` | 4 | 4 | no | `error_discipline`, `round_trip` (pre-existing in the library) |
+| `werkzeug@051fd663` | 0 | 0 | no | none |
+| `more-itertools@cca32949f1` | 0 | 0 | no | none |
+| `attrs@3b0378dd66` | 0 | 0 | no | none |
+| `click@05f6fd0` | 0 | 0 | no | none |
+
+**What the failure taught, in order of importance.**
+
+1. *A noisy law is a lie, and measurement caught it.* The first `error_discipline` said "a builtin escaping a library
+   that defines an error hierarchy is a defect". It fired on **6 of 6** commits, identically on buggy and fixed trees
+   (`PluginManager._hookexec`, `Argument._parse_decls`, `make_class`, …) — because most functions legitimately raise
+   `TypeError`, and a package-wide error class says nothing about a particular one. It was replaced by the
+   *inconsistency* observable: the same function must not answer malformed input sometimes with its own error and
+   sometimes with a bare builtin. That removed all the noise and left exactly one signal — `pyjwt.decode` raises
+   `PyJWTError` for one malformed claim and `TypeError` for another — except that signal is **pre-existing in the
+   library** and the commit does not change it.
+2. *Attribution, not breadth, is the binding constraint.* Two of the six commits (pluggy `8051a4d`, pyjwt `793a302`)
+   produce real violations on both trees. The law is right; the mapping "this violation is what *this* commit fixes" is
+   missing. A blind oracle has no commit, no diff, no issue — so it reports the repository's standing debt, not the
+   task's.
+3. *Coverage is still thin, and one gap is mechanical.* `werkzeug@051fd663` (trailing whitespace in `WWW-Authenticate`)
+   stayed silent even after `__str__` became observable: the passing suite never presents a bearer header string
+   through the touched module, so the law has nothing to inspect. That is a *trigger* problem — the law is right and
+   never sees the object — not a law problem.
+
+**Rejected this round, with reasons.** Relaxing `string_canonicality` to "any returned string is whitespace-clean"
+(it would fire on every wrapped log message); treating "a builtin escaped" as a violation again (measured above);
+adding a law per commit after reading its test (that is the rule accumulation §9.3 forbids, and it would be
+hand-solving the tests); claiming the delta/purge chain from V14 generalises (it does not — it is one commit deep).
+
+**Frozen as tests:** the oracle fires and is silent on the correct mutator, and the full blind chain
+(violation → contract → purge → law accepts → the accepted candidate purges the *right* container, since a purge that
+silences one getter while another still leaks is rejected). 4 passed.
+
+**Next bottleneck, stated as a gate before the build:** *attribution* — given several standing violations and no
+commit, choose the one the task is about. The reframing available from the repo alone is **violation ordering by
+dependency**: a violation that only appears *after* another object is exercised (or that disappears when the other is
+disabled) is downstream. The measurable form: on the two commits above, the violating pair must be ranked correctly
+against a control set of untouched commits, i.e. the commit's own defect must rank first among standing violations in
+at least half the cases, and never last.

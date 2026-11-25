@@ -17,19 +17,19 @@ BUGGY = textwrap.dedent(
         """A registry whose unregister forgets to purge the distribution list."""
 
         def __init__(self):
-            self._plugins = {}
+            self._plugins = []
             self._distinfo = []
 
         def register(self, plugin, name=None):
-            self._plugins[name or plugin.__class__.__name__] = plugin
+            self._plugins.append(plugin)
             return name
 
         def unregister(self, plugin=None, name=None):
-            self._plugins.pop(name or plugin.__class__.__name__, None)
+            self._plugins[:] = [p for p in self._plugins if p is not plugin]
             return None
 
         def get_plugins(self):
-            return dict(self._plugins)
+            return list(self._plugins)
 
         def list_plugin_distinfo(self):
             return list(self._distinfo)
@@ -37,8 +37,8 @@ BUGGY = textwrap.dedent(
 )
 
 FIXED = BUGGY.replace(
-    "        self._plugins.pop(name or plugin.__class__.__name__, None)\n        return None",
-    "        self._plugins.pop(name or plugin.__class__.__name__, None)\n"
+    "        self._plugins[:] = [p for p in self._plugins if p is not plugin]\n        return None",
+    "        self._plugins[:] = [p for p in self._plugins if p is not plugin]\n"
     "        self._distinfo[:] = [e for e in self._distinfo if e[0] is not plugin]\n"
     "        return None",
 )
@@ -58,7 +58,7 @@ SUITE = textwrap.dedent(
         reg = Registry()
         p = Plugin()
         reg.register(p, name="p")
-        assert reg.get_plugins()["p"] is p
+        assert reg.get_plugins() == [p]
         reg._distinfo.append((p, "dist"))
         assert reg.list_plugin_distinfo() == [(p, "dist")]
     """
@@ -79,7 +79,7 @@ def test_oracle_fires_on_a_mutator_that_leaves_the_object_behind(tmp_path):
     root = _repo(tmp_path, BUGGY)
     run = mo.violations_from_run(root, ["pkg.registry"], ["-q", "tests/"])
     assert run.get("exitstatus") == 0, "the shipped suite passes; that is the whole difficulty"
-    laws = {(v["method"], v["getter"]) for v in run.violations}
+    laws = {(v["where"], v["getter"]) for v in run.violations}
     assert ("Registry.unregister", "list_plugin_distinfo") in laws
     assert run.get("probes", 0) > 0, "the call must be manufactured, not observed"
 

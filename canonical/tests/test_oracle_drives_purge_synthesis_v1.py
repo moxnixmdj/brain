@@ -17,19 +17,19 @@ MODULE = textwrap.dedent(
     '''
     class Registry:
         def __init__(self):
-            self._plugins = {}
+            self._plugins = []
             self._distinfo = []
 
         def register(self, plugin, name=None):
-            self._plugins[name or plugin.__class__.__name__] = plugin
+            self._plugins.append(plugin)
             return name
 
         def unregister(self, plugin=None, name=None):
-            self._plugins.pop(name or plugin.__class__.__name__, None)
+            self._plugins[:] = [p for p in self._plugins if p is not plugin]
             return None
 
         def get_plugins(self):
-            return dict(self._plugins)
+            return list(self._plugins)
 
         def list_plugin_distinfo(self):
             return self._distinfo
@@ -50,7 +50,7 @@ SUITE = textwrap.dedent(
         p = Plugin()
         reg.register(p, name="p")
         reg._distinfo.append((p, "dist"))
-        assert reg.get_plugins()["p"] is p
+        assert reg.get_plugins() == [p]
     """
 )
 
@@ -73,18 +73,21 @@ def test_violation_becomes_a_contract_whose_purge_the_law_accepts(tmp_path):
     assert hits, "the oracle must notice without being shown the failing test"
 
     cpg = build_project_cpg(root)
-    contract = scs.PostconditionContract(
-        getter=hits[0]["getter"], mutator="unregister", deleted_arg="plugin", node_id="Registry.unregister",
-    )
-    candidates = scs.state_consistency_candidates(root, cpg, contract, max_candidates=8)
-    assert candidates, "the violation must be actionable, not merely reported"
-
+    # Every getter the law named is a candidate container; acceptance is judged against the *whole*
+    # violation set, so a purge that silences one getter while another still leaks is rejected.
+    getters = sorted({v["getter"] for v in hits})
     accepted = None
-    for tag, rel_path, blob in candidates:
-        (root / rel_path).write_bytes(blob)
-        after = mo.violations_from_run(root, ["pkg.registry"], ["-q", "tests/"])
-        if not after.violations:
-            accepted = tag
+    for getter in getters:
+        contract = scs.PostconditionContract(
+            getter=getter, mutator="unregister", deleted_arg="plugin", node_id="Registry.unregister",
+        )
+        for tag, rel_path, blob in scs.state_consistency_candidates(root, cpg, contract, max_candidates=8):
+            (root / rel_path).write_bytes(blob)
+            after = mo.violations_from_run(root, ["pkg.registry"], ["-q", "tests/"])
+            if not after.violations:
+                accepted = tag
+                break
+        if accepted:
             break
-    assert accepted is not None, "at least one synthesized purge must satisfy the law"
-    assert "purge self._distinfo" in accepted
+    assert accepted is not None, "at least one synthesized purge must clear every violation"
+    assert "purge self._distinfo" in accepted, "silencing one getter while another leaks is not a repair"

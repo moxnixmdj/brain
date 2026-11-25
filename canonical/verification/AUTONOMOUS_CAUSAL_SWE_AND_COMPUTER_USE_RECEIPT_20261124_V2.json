@@ -285,6 +285,63 @@
  "integrity_notes": [
   "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
  ],
+ "law_library_v15": {
+  "gate_declared_in_advance": ">=3 of 6 commits must fire on the buggy tree and be silent on the fixed tree",
+  "gate_result": "FAILED: 1 of 6",
+  "laws": [
+   "remove_argument_vanishes",
+   "string_canonicality",
+   "round_trip",
+   "idempotence",
+   "iterable_retyping",
+   "error_discipline"
+  ],
+  "per_commit": {
+   "attrs@3b0378dd66": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "why": "no law fires on the exercised path"
+   },
+   "click@05f6fd0": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "why": "no law fires on the exercised path"
+   },
+   "more-itertools@cca32949f1": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "why": "no law fires on the exercised path"
+   },
+   "pluggy@50585e0": {
+    "buggy": 6,
+    "discriminates": true,
+    "fixed": 0
+   },
+   "pluggy@8051a4d": {
+    "buggy": 2,
+    "discriminates": false,
+    "fixed": 2,
+    "why": "violation belongs to a later commit"
+   },
+   "pyjwt@793a302": {
+    "buggy": 4,
+    "discriminates": false,
+    "fixed": 4,
+    "why": "error_discipline inconsistency is pre-existing in the library"
+   },
+   "werkzeug@051fd663": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "why": "trigger: suite never presents the header string"
+   }
+  },
+  "rejected_by_measurement": "the first error_discipline law ('a builtin escaped a library with an error hierarchy') fired on 6/6 commits identically on both trees; replaced by the inconsistency observable",
+  "tests": "canonical/tests/test_metamorphic_oracle_v1.py + test_oracle_drives_purge_synthesis_v1.py, 4 passed"
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -371,9 +428,15 @@
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
+  "canonical/swe_kernel/metamorphic_laws_v1.py": {
+   "sha256": "920fec5b529935c14a8bc79ad8599007770c3830928c8704322b90296f253001"
+  },
   "canonical/swe_kernel/metamorphic_oracle_v1.py": {
    "purpose": "manufacture a failing assertion from the repository's own name/effect vocabulary; no model, no hidden test",
    "sha256": "3600755dfde982faefa23be9ddc982f9579df388504f4f413205d65cc7691716"
+  },
+  "canonical/swe_kernel/metamorphic_plugin_v1.py": {
+   "sha256": "0507a7fe87fdad3746732fa82615c29f0f4ff770657b2bb9ae06b3d0920d247f"
   },
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
@@ -527,7 +590,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Breadth of the law library indexed by defect class: lifecycle (done), round-trip inverse, idempotence, aliasing, charset/whitespace canonicality, and error-type discipline (pyjwt: a builtin escaping where the library defines its own hierarchy is an observable, not a heuristic).",
+ "next_bottleneck": "Attribution, not breadth: several standing violations and no commit to attribute them to. Gate stated before the build: on pluggy@8051a4d and pyjwt@793a302 the commit's own defect must rank first among the repository's standing violations in at least half the cases and never last, against a control set of untouched commits.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
