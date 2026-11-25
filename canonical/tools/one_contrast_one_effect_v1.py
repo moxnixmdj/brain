@@ -292,6 +292,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         "entries_dropped_identical_effect": len(entries) - len(real),
         "by_argument_position": positions,
         "sample_entries": real[:6],
+        # ALL entries, so downstream instruments do not have to re-harvest (and so a 6-entry sample cannot
+        # be mistaken for the whole store -- the previous pull-left in the predictor used 6 of 49)
+        "entries": real,
         "verdicts": {
             "contrast_entries_can_be_earned_by_execution": len(real) > 20,
             "every_kept_entry_has_an_observed_difference": all(

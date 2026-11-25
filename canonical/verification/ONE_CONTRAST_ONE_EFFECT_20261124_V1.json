@@ -1,6 +1,6 @@
 {
  "schema": "BRAIN_ONE_CONTRAST_ONE_EFFECT_V1",
- "generated": "2026-11-25T12:59:25Z",
+ "generated": "2026-11-25T13:06:00Z",
  "cost": {
   "model_calls": 0,
   "stored_parameters": 0,
@@ -106,6 +106,694 @@
     "effect": [
      "RETURNED:set()",
      "RAISED:'TypeError'"
+    ],
+    "position": 0
+   }
+  ],
+  "entries": [
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::convert",
+    "deterministic": true,
+    "argument": "sites",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RAISED:'FileNotFoundError'",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "action_replay_under_change_v1::first_changed_index",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:None",
+     "RETURNED:0"
+    ],
+    "position": 0
+   },
+   {
+    "function": "action_replay_under_change_v1::plan_of",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:[(0, 1, [])]"
+    ],
+    "position": 0
+   },
+   {
+    "function": "argument_construction_v1::measure",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'schema': 'BRAIN_ARGUMENT_CONSTRUCTION_V1', 'authority': 'NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT', 'model_calls': 0, 'network_calls': 0, 'incremental_spend_usd': 0, 'repos': [], 'totals': {'",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "causal_dependency_repair_v1::read_set_argv",
+    "deterministic": true,
+    "argument": "command",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:set()",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "change_shape_census_v1::census",
+    "deterministic": true,
+    "argument": "grammar",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:{'schema': 'BRAIN_CHANGE_SHAPE_CENSUS_V1', 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'sites': 0, 'shapes': {},",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "change_shape_census_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:0",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "change_shape_census_v1::shape_of",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:'STRUCTURAL_OTHER'",
+     "RETURNED:'VALUE_OR_OPERATOR_SUBSTITUTION'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "checkability_by_differential_pin_v1::run_corpus",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'probed': 0, 'checkable': 0, 'pins': 0}, 'commits': []}",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "computer_use_agent_v1::connect_instant_knowledge",
+    "deterministic": true,
+    "argument": "goal",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'goal': '', 'model_calls': 0, 'network_calls': 0, 'knowledge_source': 'unified_model_index__read_from_disk_at_query_time', 'recall': [], 'environment_terms': []}",
+     "RETURNED:{'goal': 'a', 'model_calls': 0, 'network_calls': 0, 'knowledge_source': 'unified_model_index__read_from_disk_at_query_time', 'recall': [], 'environment_terms': []}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "every_call_site_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:0",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "history_induced_edit_grammar_v1::induce_grammar",
+    "deterministic": true,
+    "argument": "context_depth",
+    "witness": [
+     "2",
+     "-1"
+    ],
+    "effect": [
+     "RAISED:'TypeError'",
+     "RAISED:'ValueError'"
+    ],
+    "position": 1
+   },
+   {
+    "function": "instruction_contract_for_code_v1::compile_contract",
+    "deterministic": true,
+    "argument": "instruction",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'instruction': '', 'module': '', 'clauses': [], 'refusals': [{'refusal': 'REFUSED__NO_VALUE_IN_THE_INSTRUCTION', 'why': 'the sentence names nothing checkable'}]}",
+     "RETURNED:{'instruction': 'a', 'module': '', 'clauses': [], 'refusals': [{'refusal': 'REFUSED__NO_VALUE_IN_THE_INSTRUCTION', 'why': 'the sentence names nothing checkable'}]}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "instruction_contract_for_code_v1::run_corpus",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'compiled': 0, 'refused': 0, 'discriminating': 0, 'vacuous': 0, 'wrong_at_fixed': 0}, 'refusal_census': {}, 'commits': []}",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "learned_skill_verdict_v1::admission_decision",
+    "deterministic": true,
+    "argument": "bundle_path",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RAISED:'IsADirectoryError'",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 1
+   },
+   {
+    "function": "learned_skill_verdict_v1::certify_bundle",
+    "deterministic": true,
+    "argument": "bundle_path",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RAISED:'IsADirectoryError'",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 1
+   },
+   {
+    "function": "learned_skill_verdict_v1::load_skills",
+    "deterministic": true,
+    "argument": "bundle_path",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RAISED:'IsADirectoryError'",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "learned_skill_verdict_v1::outside_digests",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:['52629f897362fdfa5982a3283e957bb81e77e933f519ee806c589897f129b124']"
+    ],
+    "position": 0
+   },
+   {
+    "function": "one_demonstration_reach_v1::request_for",
+    "deterministic": true,
+    "argument": "path",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'path0': '', 'str1': '', 'str0': ''}",
+     "RETURNED:{'path0': 'a', 'str1': '', 'str0': ''}"
+    ],
+    "position": 1
+   },
+   {
+    "function": "operand_invention_v1::bind",
+    "deterministic": true,
+    "argument": "term",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:''",
+     "RETURNED:'a'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "operand_invention_v1::builtins_scope",
+    "deterministic": true,
+    "argument": "name",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:''",
+     "RETURNED:'a'"
+    ],
+    "position": 1
+   },
+   {
+    "function": "operand_invention_v1::scope_names",
+    "deterministic": true,
+    "argument": "source",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:['a']"
+    ],
+    "position": 0
+   },
+   {
+    "function": "operator_semantics_v1::run_probe",
+    "deterministic": true,
+    "argument": "op",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'language': '', 'operator': '', 'ran': False, 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR', 'reason': 'NO_EXECUTABLE_QUESTION_FOR_'}",
+     "RETURNED:{'language': '', 'operator': 'a', 'ran': False, 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR', 'reason': 'NO_EXECUTABLE_QUESTION_FOR_a'}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "operator_semantics_v1::semantics",
+    "deterministic": true,
+    "argument": "op",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'operator': '', 'observations': {}, 'raw': {'cxx': {'language': 'cxx', 'operator': '', 'ran': False, 'reason': 'NO_EXECUTABLE_QUESTION_FOR_', 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_FOR",
+     "RETURNED:{'operator': 'a', 'observations': {}, 'raw': {'cxx': {'language': 'cxx', 'operator': 'a', 'ran': False, 'reason': 'NO_EXECUTABLE_QUESTION_FOR_a', 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_"
+    ],
+    "position": 0
+   },
+   {
+    "function": "pins_from_the_reverted_part_v1::module_of",
+    "deterministic": true,
+    "argument": "source_rel",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RAISED:'ValueError'",
+     "RETURNED:'a'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "predictive_contract_v1::judge",
+    "deterministic": true,
+    "argument": "exit_code",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RAISED:'TypeError'",
+     "RETURNED:{'verdict': 'VIOLATED', 'reasons': ['nonzero_exit:1'], 'covered': True}"
+    ],
+    "position": 5
+   },
+   {
+    "function": "real_commit_repair_v1::changed_span",
+    "deterministic": true,
+    "argument": "before",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:[(0, 1)]"
+    ],
+    "position": 0
+   },
+   {
+    "function": "renewable_action_v1::witnesses",
+    "deterministic": true,
+    "argument": "value_cap",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:['empty_str']"
+    ],
+    "position": 1
+   },
+   {
+    "function": "site_by_intervention_v1::run_corpus",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'site_named': 0, 'site_named_and_discriminating': 0, 'site_named_but_change_did_not_move_it': 0, 'site_named_but_wrong_at_the_fixed_s",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "skill_recheck_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:2",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "structural_check_of_real_changes_v1::judge_one_module",
+    "deterministic": true,
+    "argument": "module",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{'module': '', 'functions_offered': 0, 'state': 'NO_PUBLIC_STRUCTURE'}",
+     "RETURNED:{'module': 'a', 'functions_offered': 0, 'state': 'NO_PUBLIC_STRUCTURE'}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "structural_check_of_real_changes_v1::run_corpus",
+    "deterministic": true,
+    "argument": "limit",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'judged': 0, 'checkable': 0, 'kills': 0, 'laws_confirmed': 0, 'organ_failed': 0, 'only_totality': 0}, 'commits': []}",
+     "RAISED:'TypeError'"
+    ],
+    "position": 2
+   },
+   {
+    "function": "systematic_edit_supply_v1::abstract",
+    "deterministic": true,
+    "argument": "line",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:('', ())",
+     "RETURNED:('\\x00ID0', (('ID', 'a'),))"
+    ],
+    "position": 0
+   },
+   {
+    "function": "test_suite_admission_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:0",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_callers_were_never_asked_v1::module_of",
+    "deterministic": true,
+    "argument": "source_rel",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:''",
+     "RETURNED:'a'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_ceiling_of_learn_once_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:0",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::fallback_modules",
+    "deterministic": true,
+    "argument": "name",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:['']",
+     "RETURNED:['a']"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::marker_ok",
+    "deterministic": true,
+    "argument": "marker",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:True",
+     "RETURNED:None"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::normalize_name",
+    "deterministic": true,
+    "argument": "name",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:''",
+     "RETURNED:'a'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::parse_requirement",
+    "deterministic": true,
+    "argument": "raw",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:{}",
+     "RETURNED:{'raw': 'a', 'name': 'a', 'normalized': 'a', 'specifier': '', 'extras': [], 'marker': ''}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::python_floor_ok",
+    "deterministic": true,
+    "argument": "requirement",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:(True, 'no requires-python declared')",
+     "RETURNED:(True, \"requires-python 'a' not understood; not refusing on it\")"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::specifier_satisfied",
+    "deterministic": true,
+    "argument": "version",
+    "witness": [
+     "'ab'",
+     "'0'"
+    ],
+    "effect": [
+     "RETURNED:False",
+     "RETURNED:True"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_environment_broker_v1::version_key",
+    "deterministic": true,
+    "argument": "text",
+    "witness": [
+     "'ab'",
+     "'0'"
+    ],
+    "effect": [
+     "RETURNED:None",
+     "RETURNED:(0, (0,), (3, 0), -1, inf)"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_refuse_share_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RAISED:'FileNotFoundError'",
+     "RAISED:'AttributeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "the_smallest_question_that_makes_this_checkable_v1::tokens_of",
+    "deterministic": true,
+    "argument": "statement",
+    "witness": [
+     "'ab'",
+     "'0'"
+    ],
+    "effect": [
+     "RETURNED:{'quoted': [], 'exceptions': [], 'numbers': [], 'identifiers': []}",
+     "RETURNED:{'quoted': [], 'exceptions': [], 'numbers': ['0'], 'identifiers': []}"
+    ],
+    "position": 0
+   },
+   {
+    "function": "verified_lesson_pipeline_v1::main",
+    "deterministic": true,
+    "argument": "argv",
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "effect": [
+     "RETURNED:0",
+     "RAISED:'TypeError'"
+    ],
+    "position": 0
+   },
+   {
+    "function": "vocabulary_growth_v1::noise_floor",
+    "deterministic": true,
+    "argument": "repeats",
+    "witness": [
+     "0",
+     "1"
+    ],
+    "effect": [
+     "RETURNED:{'repeats': 0, 'raw_mtime_field_fires': 0, 'raw_field_is_reliable': True, 'verdict': 'the raw field fires on every repeat here, but it still carries an unstable value, so a predicate rather t",
+     "RETURNED:{'repeats': 1, 'raw_mtime_field_fires': 1, 'raw_field_is_reliable': True, 'verdict': 'the raw field fires on every repeat here, but it still carries an unstable value, so a predicate rather t"
+    ],
+    "position": 1
+   },
+   {
+    "function": "what_the_verifier_actually_pins_v1::hunks",
+    "deterministic": true,
+    "argument": "defective",
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "effect": [
+     "RETURNED:[]",
+     "RETURNED:[{'tag': 'delete', 'old': (0, 1), 'new': (0, 0), 'removed': 'a', 'added': ''}]"
     ],
     "position": 0
    }
