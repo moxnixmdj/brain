@@ -42,8 +42,11 @@ ARMS = ("causal", "nop", "oracle")
 # in this set is a benchmark failure (it ran and scored 0) but is NOT evidence about the
 # solver, so both readings are reported side by side.
 HARNESS_SIDE = frozenset(
-    {"HARNESS_ERROR", "NO_AGENT_REPORT", "UPLOAD_BLOCKED", "TREE_TOO_BIG", "EMPTY_TREE", "NOT_RUN"}
+    {"HARNESS_ERROR", "UPLOAD_BLOCKED", "TREE_TOO_BIG", "EMPTY_TREE", "NOT_RUN"}
 )
+# The control arms are harbor's own factory agents (nop, oracle), which never write our
+# agent report. Treating their silence as a harness fault would fail every clean run.
+CAUSAL_ONLY_SIDE = frozenset({"NO_AGENT_REPORT"})
 
 COPIED = (
     "resolved",
@@ -73,11 +76,12 @@ def _n_real(rep: dict[str, Any]) -> int:
     return sum(1 for v in (rep.get("tasks") or {}).values() if _row_is_real(v))
 
 
-def _attribution(rep: dict[str, Any]) -> dict[str, Any]:
+def _attribution(rep: dict[str, Any], *, arm: str = "causal") -> dict[str, Any]:
     """Split a measured rate into what the engine decided and what the harness decided."""
+    side = HARNESS_SIDE | (CAUSAL_ONLY_SIDE if arm == "causal" else frozenset())
     rows = [r for r in (rep.get("tasks") or {}).values() if _row_is_real(r)]
-    engine_rows = [r for r in rows if str(r.get("agent_status")) not in HARNESS_SIDE]
-    harness_rows = [r for r in rows if str(r.get("agent_status")) in HARNESS_SIDE]
+    engine_rows = [r for r in rows if str(r.get("agent_status")) not in side]
+    harness_rows = [r for r in rows if str(r.get("agent_status")) in side]
     resolved_engine = sum(1 for r in engine_rows if r.get("resolved"))
     n_eng = int(rep.get("n_expected") or 0)
     return {
@@ -165,7 +169,7 @@ def build_receipt(report: dict[str, Any], *, date: str) -> dict[str, Any]:
                     f"NOP_GATE: doing nothing resolved {resolved}/{n}, so the tests accept an "
                     "unmodified tree and a 0/N causal score would be meaningless anyway."
                 )
-    attribution = {arm: _attribution(rep) for arm, rep in arms_in.items()}
+    attribution = {arm: _attribution(rep, arm=arm) for arm, rep in arms_in.items()}
     if produced:
         # A control arm whose own trial died in the harness is not clean evidence, and a
         # causal arm with no engine-attributable trial measured nothing about the solver.
@@ -226,6 +230,7 @@ def build_receipt(report: dict[str, Any], *, date: str) -> dict[str, Any]:
         "gates_recomputed_here": gates,
         "control_rows": counts,
         "attribution": attribution,
+        "harness_side_statuses": sorted(HARNESS_SIDE | CAUSAL_ONLY_SIDE),
         "gates_reported_by_harness": report.get("gates") or {},
         "arms": arms_out,
         "n_shard_reports_read": report.get("n_reports_read"),

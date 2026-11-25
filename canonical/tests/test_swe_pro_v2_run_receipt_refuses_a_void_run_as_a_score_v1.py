@@ -200,6 +200,9 @@ def test_a_harness_error_trial_is_counted_as_measured_but_not_as_an_engine_verdi
     assert att["measured_resolve_rate_pct"] == 50.0, "the benchmark counts what ran"
     assert att["resolve_rate_pct_engine_attributable"] == 100.0, "the engine's own record is 1 of 1"
     assert rec["claimable_as_a_benchmark_number"] is True
+    assert rec["attribution"]["nop"]["harness_side"] == 0, (
+        "harbor's factory control agents write no engine report; that is expected, not dirt"
+    )
     # and a run whose every trial died in the harness has no engine number at all
     all_bad = json.loads(json.dumps(MEASURED))
     for tid in ("t0", "t1"):
