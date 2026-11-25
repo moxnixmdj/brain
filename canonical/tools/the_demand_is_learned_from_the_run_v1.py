@@ -820,8 +820,18 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, seconds: int) -> dict[
         if added.returncode != 0:
             return {**row, "stage": "WORKTREE_FAILED"}
         try:
-            (worktree / test_path).write_text(identify.show(repo, commit, test_path),
-                                              encoding="utf-8")
+            if entry.get("oracle_file"):
+                # A benchmark applies a TEST PATCH: the oracle is supplied, not restored
+                # from the fix commit. An oracle derived from the issue text (see
+                # run_the_reproducer_the_user_wrote_v1.py) arrives this way, because it
+                # exists nowhere in the repository's history.
+                oracle_path = pathlib.Path(entry["oracle_file"])
+                (worktree / test_path).parent.mkdir(parents=True, exist_ok=True)
+                (worktree / test_path).write_text(oracle_path.read_text(encoding="utf-8"),
+                                                  encoding="utf-8")
+            else:
+                (worktree / test_path).write_text(identify.show(repo, commit, test_path),
+                                                  encoding="utf-8")
             baseline = run_tests(worktree, [test_path], seconds)
             # An empty verdict map (collection error, missing dependency, strict
             # config warning) or a timeout is NOT evidence that the parent passes.

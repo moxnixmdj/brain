@@ -148,7 +148,7 @@ def one(entry: dict[str, Any]) -> dict[str, Any]:
     verdict, reasons = classify(body)
     row.update({"verdict": verdict, "sources": pull_meta[:6],
                 "body_chars": len(body), "reasons": reasons,
-                "fetched": pull_meta[:6],
+                "fetched": pull_meta[:6], "body_text": body[:20000],
                 "has_fence": "```" in body})
     if pulls:
         row["pr"] = pulls[0].get("html_url", "")

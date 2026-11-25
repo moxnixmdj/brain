@@ -302,3 +302,90 @@ excerpt**, and the residual synthesis problem is *reachability*: the excerpt sup
 the expected value and the code site, but not the triggering call. That is a far
 smaller search than "write the hidden test", and it is the only route in this repository
 with a measured non-zero rate behind it.
+
+## The route is real but it stops at Wall 2 — and now I can say exactly where
+
+Following the demonstration above, the same mechanism was automated
+(`run_the_reproducer_the_user_wrote_v1.py`) and run over all 10 `ORACLE_IN_ISSUE` rows.
+It extracts fenced code from the issue, **including REPL transcripts**, executes each
+block on the parent and on the fix with `PYTHONPATH="src:."`, and keeps only blocks
+whose verdicts differ.
+
+First run reported 2 discriminating blocks. That was wrong again, for the fourth time in
+this document: I had `if ">>>" in block: continue`, which discarded every REPL
+transcript — and a transcript is the *richest* oracle an issue can carry, because the
+prompt line states the call and the traceback states the expected outcome. After the
+fix:
+
+```
+REPRODUCER_DISCRIMINATES   3     3b0378dd66, cca32949f1, 77fa67aaf2
+NO_SEPARATION              4
+REPRODUCER_DOES_NOT_REACH  1
+NO_REPRODUCER_IN_ISSUE     2
+```
+
+Three fail-to-pass oracles, derived from prose, zero model calls. Two of the three
+(`3b0378dd66`, `cca32949f1`) were already solved by the union, so they add no capability.
+**The third, `urllib3 77fa67aaf2`, was one of the six unsolved rows** — the first time
+anything in this repository has produced a discriminating oracle on a row that no engine
+could previously enter.
+
+### End to end on that row
+
+1. **Oracle.** The issue carries `urllib3.util.parse_url("http://example.com:000001")`
+   with the traceback. Pasted into a test asserting `url.port == 1`.
+2. **Provenance-checked fail-to-pass** (no venv contamination, `PYTHONPATH=src:.`):
+
+   | tree | head | result |
+   |---|---|---|
+   | `fe39ebfb` (parent) | `Use the typing namespace...` | **FAILED** — `urllib3.exceptions.LocationParseError` |
+   | `77fa67aa` (fix) | `Strip leading zeros from ports` | **passed** |
+3. **PASS_TO_PASS anchor.** The engine requires one (`NO_PASSING_TEST` without it), so a
+   second assertion was added from the issue's own sentence *"Shouldn't be a problem"*:
+   `parse_url("http://example.com:8080").port == 8080`.
+4. **Engine run** (`the_demand_is_learned_from_the_run_v1.py`, with a new `oracle_file`
+   corpus field so a supplied test patch can be applied the way a benchmark applies it):
+
+```
+stage            NO_SEPARATING_RULE
+control          VERIFIED   (applying the human fix flips the issue-derived oracle)
+guard_sites      44
+observations     33
+attempts         0
+seconds          4.36
+```
+
+**The control is `VERIFIED`.** The oracle built from the issue text is validated by the
+human fix — that is the strongest statement available that the derived oracle is correct
+and not a self-deception. And the engine learns **no rule at all** from it.
+
+### Why, exactly
+
+The human fix is one character, on line 66 of `src/urllib3/util/url.py`:
+
+```diff
+-_HOST_PORT_PAT = ("^(%s|%s|%s)(?::([0-9]{0,5}))?$") % (
++_HOST_PORT_PAT = ("^(%s|%s|%s)(?::0*([0-9]{0,5}))?$") % (
+```
+
+The engine's 44 guard sites are `if`/`elif`/`while`/boolean-clause decisions. The
+defective expression is a **module-level regex constant**. The nearest guard — line 427,
+`host, port = _HOST_PORT_RE.match(host_port).groups()` — is *correct* code; the fault is
+in a string it reads. So this row is not a guard-rule problem and not a literal problem:
+**it is a constant-refinement problem outside the searched node class**, which is the
+measured form of Wall 2 that the incoming plan's Idea 2 (type-habitation mining) does
+not address, because mining sibling idioms cannot invent `0*` inside a regex.
+
+So the honest ledger for this row is: oracle now exists (new capability, measured), patch
+still absent (Wall 2, now located to a line and a node class).
+
+## Ledger for this session
+
+| claim | before | now |
+|---|---|---|
+| P(oracle) from issue text | unmeasured | **10/45 = 22.2%**, parser, 0 model calls |
+| of those, executable reproducibly | unmeasured | **3/10**, fail-to-pass verified |
+| new capable rows (unsolved + oracle) | 0 | **1** (`77fa67aaf2`) |
+| end-to-end new solves | 0 | **0** — control VERIFIED, patch not generated |
+| rows with no oracle in parent | suspected | **43/45 = 95.6%**, benchmark requires 100% |
+| generator's reach on the new row | — | fails at a module-level regex constant, outside its 44 guard sites |
