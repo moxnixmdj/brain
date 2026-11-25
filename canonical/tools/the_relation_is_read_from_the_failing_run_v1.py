@@ -79,6 +79,7 @@ _PATTERNS: list = [set()]
 _BINDING_SPANS: list = [[]]
 _LINES: list = [[]]
 _UNPACKED: list = [set()]
+_IN_FSTRING: list = [set()]
 _CHAINS: list = [{}]
 MAX_VERIFICATIONS = 8
 
@@ -458,6 +459,24 @@ def _if_chains(tree: ast.AST) -> dict[int, list[tuple[int, str]]]:
             if others:
                 chains.setdefault(lineno, others)
     return chains
+
+
+def _inside_fstring_ids(tree: ast.AST) -> set[int]:
+    """Ids of every node that lives inside an f-string replacement field.
+
+    In Python 3.11 the column offsets of nodes inside a `JoinedStr` are relative to the
+    replacement field, not to the line, so splicing at them corrupts the source instead of
+    wrapping the expression. Measured on click 1b0e19f5: `f"{' '.join(p)} {rv}"` was
+    rewritten to `' '.join__brain_rel__(` and the row reported
+    `AttributeError: 'str' object has no attribute 'join__brain_rel__'` -- an error the
+    probe invented, inside the project's own exception path.
+    A site inside an f-string is refused: there is no offset this tool can trust there."""
+    ids: set[int] = set()
+    for node in ast.walk(tree):
+        if isinstance(node, ast.JoinedStr):
+            for inner in ast.walk(node):
+                ids.add(id(inner))
+    return ids
 
 
 def _unpacked_ids(tree: ast.AST) -> set[int]:
@@ -867,6 +886,7 @@ def sites_in(source: str) -> list[Site]:
     _BINDING_SPANS[0] = _probe_binding_spans(tree)
     _LINES[0] = source.splitlines()
     _UNPACKED[0] = _unpacked_ids(tree)
+    _IN_FSTRING[0] = _inside_fstring_ids(tree)
     _LINES[0] = source.splitlines()
     _CHAINS[0] = _if_chains(tree)
     _RAISE_LINES[0] = [node.lineno for node in ast.walk(tree) if isinstance(node, ast.Raise)]
@@ -890,7 +910,7 @@ def sites_in(source: str) -> list[Site]:
         line = getattr(node, "lineno", None)
         if line is None or id(node) in unsafe or not _lambda_safe(node):
             return
-        if id(node) in _UNPACKED[0]:
+        if id(node) in _UNPACKED[0] or id(node) in _IN_FSTRING[0]:
             return
         # `a, b` cannot stand inside `lambda:` -- `lambda: a, b` is a TUPLE whose first
         # element is the lambda, so the probe returns `a` alone and a function that
