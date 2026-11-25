@@ -72,7 +72,10 @@ def test_every_flagged_receipt_in_the_repo_is_resolved_or_the_guard_fails():
     ledger = summary["defect_ledger"]
     assert ledger["unresolved"] == [], "an unresolved finding must fail the run, not be waived"
     assert ledger["flagged"] == ledger["resolved"]
-    assert ledger["flagged"] >= 17, "the guard must have found real defects, not zero by construction"
+    # 17 when the guard shipped; 15 after V32 deleted two receipts that were superseded by their own V2 and
+    # kept alive only by their ledger entries. The floor tracks the receipts that exist, so the assertion is
+    # "the guard found real defects" and not "the repo still holds documents I already removed".
+    assert ledger["flagged"] >= 15, "the guard must have found real defects, not zero by construction"
 
 
 def test_the_partly_material_finding_is_named_not_buried():
