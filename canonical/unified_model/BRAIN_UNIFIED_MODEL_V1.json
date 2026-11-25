@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "37aff761fb563a6bd3ac2cc707af19e9ee7123c4ab346d6e000a7d5fb1434066"
+  "value": "fe0a92c36c18cb0a5f91cafedfb4372e7b8659bec7e73130edc0ba68fca97b76"
  },
  "engines": [
   {
@@ -262062,7 +262062,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "dbe67cdc8c85e97d031b163ef65295c6339dc9aed743b61a3ca6fae9fc3ba371",
+   "sha256": "68b9eba64c449bdc39742b5f41a0172fa3b4259f4f4f5f2b372c1d42bbbeaa63",
    "status": "SHIPPED",
    "terms": {
     "0.414": 1,
