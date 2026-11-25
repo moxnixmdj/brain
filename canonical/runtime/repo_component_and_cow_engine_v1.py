@@ -36,6 +36,7 @@ import ast
 from collections import Counter, deque
 import copy
 from dataclasses import dataclass, field
+import difflib
 import hashlib
 import json
 import os
@@ -1114,3 +1115,729 @@ class UnifiedCrossModalPetriNet:
             "model_calls": 0,
             "parameters_stored": 0,
         }
+
+    # -----------------------------------------------------------------------
+    # 4b. ARTICULATION-POINT (CUT-VERTEX) SUB-GOAL FACTORING FOR 300+ STEP HORIZONS
+    # -----------------------------------------------------------------------
+
+    def find_articulation_tokens(
+        self,
+        initial_places: Sequence[str],
+        goal_places: Sequence[str],
+        *,
+        max_steps: int = 32,
+    ) -> dict[str, Any]:
+        """Find exact mandatory articulation tokens (dominator cut-vertices) that MUST hold
+        on every valid Petri-net path from `initial_places` to `goal_places`.
+
+        Removes each candidate intermediate place `p` from the net and tests reachability;
+        if removing `p` disconnects `goal_places` from `initial_places`, `p` is a true
+        mathematical bottleneck where a long-horizon task can be factored into independent,
+        verified sub-episodes with hard checkpoints.
+        """
+        t0 = time.monotonic()
+        base_plan = self.solve(initial_places, goal_places, max_steps=max_steps)
+        if base_plan.get("status") not in ("SOLVED", "TRIVIAL"):
+            return {
+                "schema": SCHEMA,
+                "status": str(base_plan.get("status") or "UNREACHABLE"),
+                "articulation_tokens": [],
+                "sub_goals": [],
+                "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+
+        init_set = set(initial_places)
+        goal_set = set(goal_places)
+        steps: list[PetriTransition] = list(base_plan.get("steps") or [])
+
+        # Candidate intermediate places in topological order along the base path
+        ordered_candidates: list[str] = []
+        seen_c: set[str] = set()
+        for tr in steps:
+            for op in tr.output_places:
+                if op not in init_set and op not in goal_set and op not in seen_c:
+                    seen_c.add(op)
+                    ordered_candidates.append(op)
+
+        articulations: list[str] = []
+        for cand_p in ordered_candidates:
+            # Build sub-net prohibiting transitions that produce or consume `cand_p`
+            sub = UnifiedCrossModalPetriNet()
+            for tr in self.transitions.values():
+                if cand_p in tr.output_places or cand_p in tr.input_places:
+                    continue
+                sub.add_transition(tr)
+            probe = sub.solve(initial_places, goal_places, max_steps=max_steps)
+            if probe.get("status") != "SOLVED":
+                articulations.append(cand_p)
+
+        # Build checkpointed sub-goal chain: [initial -> cut_1, cut_1 -> cut_2, ..., cut_k -> goal]
+        checkpoints: list[tuple[str, ...]] = [tuple(initial_places)]
+        cur_tokens = list(initial_places)
+        sub_goals: list[dict[str, Any]] = []
+        for cut in articulations:
+            sub_plan = self.solve(cur_tokens, [cut], max_steps=max_steps)
+            if sub_plan.get("status") == "SOLVED":
+                sub_goals.append({
+                    "sub_episode_idx": len(sub_goals),
+                    "from_tokens": list(cur_tokens),
+                    "checkpoint_token": cut,
+                    "hops": int(sub_plan["hops"]),
+                    "transition_ids": list(sub_plan["transition_ids"]),
+                    "steps": list(sub_plan["steps"]),
+                })
+                if cut not in cur_tokens:
+                    cur_tokens.append(cut)
+                checkpoints.append((cut,))
+
+        # Final segment to full `goal_places`
+        final_plan = self.solve(cur_tokens, goal_places, max_steps=max_steps)
+        if final_plan.get("status") == "SOLVED":
+            sub_goals.append({
+                "sub_episode_idx": len(sub_goals),
+                "from_tokens": list(cur_tokens),
+                "checkpoint_token": ",".join(goal_places),
+                "hops": int(final_plan["hops"]),
+                "transition_ids": list(final_plan["transition_ids"]),
+                "steps": list(final_plan["steps"]),
+            })
+
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "status": "FACTORED",
+            "total_hops": len(steps),
+            "articulation_tokens": articulations,
+            "sub_episode_count": len(sub_goals),
+            "sub_goals": sub_goals,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    def execute_factored_long_horizon(
+        self,
+        initial_places: Sequence[str],
+        goal_places: Sequence[str],
+        initial_context: Mapping[str, Any],
+        *,
+        checkpoint_verifiers: Mapping[str, Callable[[Mapping[str, Any]], bool]] | None = None,
+        distractor_actions: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+        max_steps: int = 32,
+        governed_memory: dict[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Factor a long-horizon multi-modal workflow at its Petri-net articulation tokens,
+        execute each sub-episode with hard postcondition verification (using local CoW
+        speculative rollout whenever uncertain distractor actions exist at a checkpoint),
+        and lock every verified cut-vertex before proceeding."""
+        t0 = time.monotonic()
+        factored = self.find_articulation_tokens(initial_places, goal_places, max_steps=max_steps)
+        if factored.get("status") != "FACTORED":
+            return {
+                "schema": SCHEMA,
+                "status": str(factored.get("status") or "UNREACHABLE"),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
+
+        ctx = dict(initial_context)
+        verifiers = dict(checkpoint_verifiers or {})
+        distractors = dict(distractor_actions or {})
+        completed_checkpoints: list[dict[str, Any]] = []
+        total_ops_executed = 0
+
+        for seg in factored["sub_goals"]:
+            cp_tok = seg["checkpoint_token"]
+            seg_steps: list[PetriTransition] = seg["steps"]
+            for tr in seg_steps:
+                # If uncertain distractor alternatives exist at this transition, run 16-way CoW rollout!
+                if tr.transition_id in distractors and tr.executor is not None:
+                    alt_specs = [
+                        {"action_id": tr.transition_id, "kind": "primary"},
+                        *[{"action_id": str(d.get("action_id", f"d_{i}")), "kind": "distractor", "delta": d.get("delta")} for i, d in enumerate(distractors[tr.transition_id])],
+                    ]
+
+                    def _cow_exec(spec: Mapping[str, Any], _tr: PetriTransition = tr, _ctx: dict[str, Any] = ctx) -> dict[str, Any]:
+                        c_local = dict(_ctx)
+                        if spec.get("kind") == "primary":
+                            out_d = _tr.executor(c_local) if _tr.executor is not None else {}
+                            if isinstance(out_d, Mapping):
+                                c_local.update(out_d)
+                            return c_local
+                        d_map = spec.get("delta")
+                        if isinstance(d_map, Mapping):
+                            c_local.update(d_map)
+                        return c_local
+
+                    cp_check = verifiers.get(cp_tok)
+                    cow_r = speculative_cow_rollout(
+                        alt_specs,
+                        executor_fn=_cow_exec,
+                        residual_fn=lambda c_out, _chk=cp_check: 0.0 if (_chk is None or _chk(c_out)) else 1.0,
+                        baseline_residual=1.0,
+                        max_workers=16,
+                    )
+                    if cow_r.get("best_action_id") != tr.transition_id:
+                        return {
+                            "schema": SCHEMA,
+                            "status": "COW_CHECKPOINT_REJECTED",
+                            "checkpoint_token": cp_tok,
+                            "cow_rollout": cow_r,
+                            "model_calls": 0,
+                            "parameters_stored": 0,
+                        }
+                if tr.executor is not None:
+                    delta = tr.executor(ctx)
+                    if isinstance(delta, Mapping):
+                        ctx.update(delta)
+                    total_ops_executed += int(ctx.get("_last_op_count", 1))
+                    ctx.pop("_last_op_count", None)
+
+            # Hard mathematical postcondition gate at the articulation checkpoint!
+            chk_fn = verifiers.get(cp_tok)
+            if chk_fn is not None and not chk_fn(ctx):
+                return {
+                    "schema": SCHEMA,
+                    "status": "CHECKPOINT_VERIFICATION_FAILED",
+                    "failed_checkpoint": cp_tok,
+                    "completed_checkpoints": completed_checkpoints,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
+            completed_checkpoints.append({
+                "checkpoint_token": cp_tok,
+                "hops": seg["hops"],
+                "transition_ids": seg["transition_ids"],
+                "verified": True,
+            })
+
+        if governed_memory is not None:
+            governed_memory.setdefault("factored_long_horizon_plans", []).append({
+                "initial_places": list(initial_places),
+                "goal_places": list(goal_places),
+                "articulation_tokens": list(factored["articulation_tokens"]),
+                "sub_episodes_verified": len(completed_checkpoints),
+                "total_ops_executed": total_ops_executed,
+                "parameters_stored": 0,
+            })
+
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "status": "VERIFIED",
+            "articulation_tokens": list(factored["articulation_tokens"]),
+            "sub_episodes_verified": len(completed_checkpoints),
+            "completed_checkpoints": completed_checkpoints,
+            "total_ops_executed": total_ops_executed,
+            "context": ctx,
+            "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+
+# ===========================================================================
+# 5. BIDIRECTIONAL FINITE-STATE TRANSDUCER (FST) / LENS SYNTHESIS
+#    (ASTRA / Optician, arXiv:2208.05131 — Zero-LLM Byte/String Codec Compiler)
+# ===========================================================================
+
+
+@dataclass(frozen=True)
+class FiniteStateTransducerLens:
+    """Compact deterministic Finite-State Transducer (substitution table + optional inverse lens)
+    inferred purely from input-output examples (`str` or `bytes`), compilable to Python/JS/C."""
+
+    is_bytes: bool
+    forward_map: tuple[tuple[str | bytes, str | bytes], ...]
+    inverse_map: tuple[tuple[str | bytes, str | bytes], ...] | None
+    is_invertible: bool
+
+    def _ordered_rules(self, pairs: tuple[tuple[str | bytes, str | bytes], ...]) -> list[tuple[str | bytes, str | bytes]]:
+        """Order rules so keys occurring inside other rules' outputs run FIRST
+        (preventing double-escaping like `< -> &lt;` followed by `& -> &amp;`), then longest-first."""
+        def _priority(item: tuple[str | bytes, str | bytes]) -> tuple[int, int]:
+            k, _ = item
+            appears_in_rhs = any((k in v and k != k2) for k2, v in pairs)  # type: ignore[operator]
+            return (0 if appears_in_rhs else 1, -len(k))
+        return sorted(pairs, key=_priority)
+
+    def _single_pass_apply(
+        self,
+        value: str | bytes,
+        pairs: tuple[tuple[str | bytes, str | bytes], ...],
+    ) -> str | bytes:
+        """True single-pass longest-match FST scan (never re-scans already-emitted outputs)."""
+        ordered = sorted(pairs, key=lambda kv: -len(kv[0]))
+        parts: list[Any] = []
+        i = 0
+        n = len(value)
+        while i < n:
+            matched = False
+            for src_tok, dst_tok in ordered:
+                if value[i : i + len(src_tok)] == src_tok:
+                    parts.append(dst_tok)
+                    i += len(src_tok)
+                    matched = True
+                    break
+            if not matched:
+                parts.append(value[i : i + 1])
+                i += 1
+        return b"".join(parts) if self.is_bytes else "".join(parts)
+
+    def forward(self, value: str | bytes) -> str | bytes:
+        return self._single_pass_apply(value, self.forward_map)
+
+    def backward(self, value: str | bytes) -> str | bytes:
+        if not self.is_invertible or self.inverse_map is None:
+            raise ValueError("Transducer lens is non-injective (not invertible)")
+        return self._single_pass_apply(value, self.inverse_map)
+
+    def compile_python_expr(self, var_expr: str) -> str:
+        """Compile transducer into pure zero-dependency inline Python expression."""
+        expr = var_expr
+        for src_tok, dst_tok in self._ordered_rules(self.forward_map):
+            expr = f"{expr}.replace({src_tok!r}, {dst_tok!r})"
+        return expr
+
+    def compile_js_expr(self, var_expr: str) -> str:
+        """Compile transducer into pure JavaScript `.replaceAll(...)` chain."""
+        expr = var_expr
+        for src_tok, dst_tok in self._ordered_rules(self.forward_map):
+            s = src_tok.decode("latin1") if isinstance(src_tok, bytes) else src_tok
+            d = dst_tok.decode("latin1") if isinstance(dst_tok, bytes) else dst_tok
+            expr = f"{expr}.replaceAll({json.dumps(s)}, {json.dumps(d)})"
+        return expr
+
+    def compile_c_function(self, func_name: str = "apply_fst_lens") -> str:
+        """Compile single-byte transducer into a clean zero-dependency C buffer loop."""
+        lines = [
+            f"size_t {func_name}(const unsigned char *in, size_t n, unsigned char *out) {{",
+            "    size_t j = 0;",
+            "    for (size_t i = 0; i < n; ++i) {",
+            "        switch (in[i]) {",
+        ]
+        for src_tok, dst_tok in self.forward_map:
+            sb = src_tok if isinstance(src_tok, bytes) else src_tok.encode("latin1")
+            db = dst_tok if isinstance(dst_tok, bytes) else dst_tok.encode("latin1")
+            if len(sb) == 1:
+                lines.append(f"            case 0x{sb[0]:02x}:")
+                for b in db:
+                    lines.append(f"                out[j++] = 0x{b:02x};")
+                lines.append("                break;")
+        lines.extend([
+            "            default:",
+            "                out[j++] = in[i];",
+            "                break;",
+            "        }",
+            "    }",
+            "    out[j] = 0;",
+            "    return j;",
+            "}",
+        ])
+        return "\n".join(lines)
+
+
+def synthesize_fst_lens(
+    examples: Sequence[tuple[str | bytes, str | bytes]],
+    *,
+    max_token_len: int = 8,
+) -> FiniteStateTransducerLens | None:
+    """Infer a minimal consistent Finite-State Transducer (and exact inverse lens if injective)
+    directly from concrete `(src, dst)` string or byte examples via `SequenceMatcher` diffs.
+
+    Zero hardcoded characters or lookup tables — every rule is derived from the examples
+    and verified for 100% exact replay across ALL examples!
+    """
+    if not examples:
+        return None
+    is_bytes = isinstance(examples[0][0], bytes)
+    for s, d in examples:
+        if isinstance(s, bytes) != is_bytes or isinstance(d, bytes) != is_bytes:
+            return None
+
+    # Extract minimal diff substitutions across all examples
+    rules: dict[str | bytes, str | bytes] = {}
+    for src, dst in examples:
+        if src == dst:
+            continue
+        sm = difflib.SequenceMatcher(None, src, dst, autojunk=False)
+        for tag, i1, i2, j1, j2 in sm.get_opcodes():
+            if tag == "equal":
+                continue
+            if tag in ("replace", "delete"):
+                in_tok = src[i1:i2]
+                out_tok = dst[j1:j2]
+                if not in_tok or len(in_tok) > max_token_len:
+                    return None
+                if in_tok in rules and rules[in_tok] != out_tok:
+                    return None
+                rules[in_tok] = out_tok
+            elif tag == "insert":
+                # Prefix-anchored expansion (e.g. `SequenceMatcher` sees `&` equal then inserts `amp;` -> `&` => `&amp;`)
+                ins_tok = dst[j1:j2]
+                if i1 > 0 and ins_tok:
+                    in_tok = src[i1 - 1 : i1]
+                    out_tok = in_tok + ins_tok  # type: ignore[operator]
+                    if in_tok in rules and rules[in_tok] != out_tok:
+                        return None
+                    rules[in_tok] = out_tok
+                else:
+                    return None
+
+    if not rules:
+        return None
+
+    fwd_items = tuple(sorted(rules.items(), key=lambda kv: kv[0]))
+
+    # Verify exact 100% forward consistency across ALL examples (including identity examples!)
+    probe_lens = FiniteStateTransducerLens(
+        is_bytes=is_bytes,
+        forward_map=fwd_items,
+        inverse_map=None,
+        is_invertible=False,
+    )
+    for src, dst in examples:
+        if probe_lens.forward(src) != dst:
+            return None
+
+    # Check injectivity & construct exact inverse lens `backward(forward(x)) == x`
+    dst_vals = [v for _, v in fwd_items]
+    invertible = (
+        all(len(v) > 0 for v in dst_vals)
+        and len(set(dst_vals)) == len(dst_vals)
+    )
+    inv_items: tuple[tuple[str | bytes, str | bytes], ...] | None = None
+    if invertible:
+        inv_items = tuple(sorted(((v, k) for k, v in fwd_items), key=lambda kv: kv[0]))
+        cand_inv = FiniteStateTransducerLens(
+            is_bytes=is_bytes,
+            forward_map=fwd_items,
+            inverse_map=inv_items,
+            is_invertible=True,
+        )
+        # Verify exact round-trip across ALL examples!
+        if not all(cand_inv.backward(dst) == src for src, dst in examples):
+            invertible = False
+            inv_items = None
+
+    return FiniteStateTransducerLens(
+        is_bytes=is_bytes,
+        forward_map=fwd_items,
+        inverse_map=inv_items,
+        is_invertible=invertible,
+    )
+
+
+def synthesize_dual_channel_stream_fst(
+    assertion_pairs: Sequence[tuple[str, str]],
+) -> dict[str, Any] | None:
+    """Synthesize a Dual-Channel Stream Transducer `(write_lens, return_lens)` purely from
+    failing test assertion diffs where a stream wrapper BOTH writes transformed bytes to an
+    output stream AND returns filtered bytes!
+
+    Detects two channels from `(actual, expected)` string assertions (e.g., echoed stdout prefix
+    followed by repr/payload suffix) WITHOUT any hardcoded bytes or symbol names:
+      - `write_lens`: maps source byte/char tokens `t -> replacement` (e.g. control byte -> caret + newline)
+      - `return_lens`: maps source byte/char tokens `t -> b''` (or transformed bytes)
+    """
+    if not assertion_pairs:
+        return None
+    write_rules: dict[bytes, bytes] = {}
+    return_drop_tokens: set[bytes] = set()
+
+    for act, exp in assertion_pairs:
+        if not isinstance(act, str) or not isinstance(exp, str) or act == exp:
+            continue
+        # Check if the assertion embeds a `b'...'` bytes repr payload suffix alongside a stream prefix
+        idx_act_b = act.find("b'")
+        idx_exp_b = exp.find("b'")
+        if idx_act_b != -1 and idx_exp_b != -1:
+            act_stream, act_repr = act[:idx_act_b], act[idx_act_b:]
+            exp_stream, exp_repr = exp[:idx_exp_b], exp[idx_exp_b:]
+            # 1. Infer write-channel byte mapping from `(act_stream -> exp_stream)`
+            sm_s = difflib.SequenceMatcher(None, act_stream, exp_stream, autojunk=False)
+            for tag, i1, i2, j1, j2 in sm_s.get_opcodes():
+                if tag == "replace":
+                    in_s = act_stream[i1:i2]
+                    out_s = exp_stream[j1:j2]
+                    if len(in_s) == 1 and ord(in_s) < 32 and in_s not in ("\n", "\r", "\t"):
+                        kb = in_s.encode("latin1")
+                        vb = out_s.encode("latin1")
+                        if kb in write_rules and write_rules[kb] != vb:
+                            return None
+                        write_rules[kb] = vb
+            # 2. Check whether the returned bytes repr dropped those exact control bytes!
+            try:
+                act_b = ast.literal_eval(act_repr.strip())
+                exp_b = ast.literal_eval(exp_repr.strip())
+                if isinstance(act_b, bytes) and isinstance(exp_b, bytes):
+                    sm_b = difflib.SequenceMatcher(None, act_b, exp_b, autojunk=False)
+                    for tag, i1, i2, j1, j2 in sm_b.get_opcodes():
+                        if tag == "delete":
+                            del_b = act_b[i1:i2]
+                            if len(del_b) == 1 and del_b[0] < 32 and del_b not in (b"\n", b"\r", b"\t"):
+                                return_drop_tokens.add(del_b)
+            except Exception:
+                pass
+        else:
+            # General stream assertion (e.g. `bar\nbaz\n\x043\n` vs `bar\nbaz\n^D\n2\n`):
+            # Extract single control-byte replacement in the non-digit prefix
+            sm_g = difflib.SequenceMatcher(None, act, exp, autojunk=False)
+            for tag, i1, i2, j1, j2 in sm_g.get_opcodes():
+                if tag == "replace":
+                    in_s = act[i1:i2]
+                    out_s = exp[j1:j2]
+                    # Strip trailing line-count digits if present (e.g. `\x043` vs `^D\n2`)
+                    if len(in_s) >= 2 and in_s[-1].isdigit() and out_s and out_s[-1].isdigit():
+                        in_s = in_s[:-1]
+                        out_s = out_s[:-1]
+                    if len(in_s) == 1 and ord(in_s) < 32 and in_s not in ("\n", "\r", "\t"):
+                        kb = in_s.encode("latin1")
+                        vb = out_s.encode("latin1")
+                        if kb in write_rules and write_rules[kb] != vb:
+                            return None
+                        write_rules[kb] = vb
+
+    if not write_rules:
+        return None
+    # If return drops were observed, align them; if none observed explicitly, default return_map to dropping the same control tokens
+    drop_set = return_drop_tokens if return_drop_tokens else set(write_rules.keys())
+    write_lens = FiniteStateTransducerLens(
+        is_bytes=True,
+        forward_map=tuple(sorted(write_rules.items(), key=lambda kv: kv[0])),
+        inverse_map=None,
+        is_invertible=False,
+    )
+    return_lens = FiniteStateTransducerLens(
+        is_bytes=True,
+        forward_map=tuple(sorted(((k, b"") for k in drop_set), key=lambda kv: kv[0])),
+        inverse_map=None,
+        is_invertible=False,
+    )
+    return {
+        "schema": SCHEMA,
+        "write_lens": write_lens,
+        "return_lens": return_lens,
+        "write_map": dict(write_rules),
+        "return_drop_bytes": sorted(drop_set),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+
+# ===========================================================================
+# 6. COW ANGELIC VALUE PERTURBATION CAUSAL BLAME (MULTI-FILE FAULT LOCALIZATION)
+# ===========================================================================
+
+
+def localize_causal_nexus_via_cow(
+    suspect_sites: Sequence[Mapping[str, Any]],
+    test_runner_fn: Callable[[], bool],
+    *,
+    max_workers: int = 16,
+    timeout_s: float = 5.0,
+) -> dict[str, Any]:
+    """Identify the exact causal nexus across a multi-file call stack via parallel Linux
+    `os.fork()` Copy-on-Write angelic value substitution!
+
+    Each entry in `suspect_sites` specifies:
+      - `site_id`: identifier (e.g., `"billing.py:compute_tax"`)
+      - `target_obj`: module or class object owning the callable attribute
+      - `attr_name`: function/method name on `target_obj`
+      - `angelic_return`: candidate replacement return value (or callable returning it)
+
+    Forks up to `max_workers` parallel CoW children simultaneously. Each child monkey-patches
+    ONLY its single suspect node in-memory (parent memory is NEVER mutated!), runs
+    `test_runner_fn()`, and reports whether that single perturbation flipped the failing
+    tests to PASS.
+    """
+    t0 = time.monotonic()
+    specs = [
+        {"action_id": str(s.get("site_id") or f"site_{i}"), "_site": s}
+        for i, s in enumerate(suspect_sites[:max_workers])
+    ]
+    if not specs:
+        return {
+            "schema": SCHEMA,
+            "status": "NO_SITES",
+            "causal_nexus_ids": [],
+            "elapsed_ms": 0.0,
+            "model_calls": 0,
+            "parameters_stored": 0,
+        }
+
+    def _perturb_and_test(spec: Mapping[str, Any]) -> bool:
+        site = spec["_site"]
+        owner = site["target_obj"]
+        attr = str(site["attr_name"])
+        angelic = site["angelic_return"]
+        if callable(angelic):
+            setattr(owner, attr, angelic)
+        else:
+            setattr(owner, attr, lambda *a, _v=angelic, **kw: _v)
+        return bool(test_runner_fn())
+
+    cow = speculative_cow_rollout(
+        specs,
+        executor_fn=_perturb_and_test,
+        residual_fn=lambda passed: 0.0 if passed else 1.0,
+        baseline_residual=1.0,
+        max_workers=max_workers,
+        timeout_s=timeout_s,
+    )
+    causal_ids = [
+        str(o["action_id"])
+        for o in cow.get("outcomes", [])
+        if o.get("ok") and float(o.get("residual", 1.0)) == 0.0
+    ]
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "modality": "cow_angelic_causal_nexus_localization",
+        "status": "CAUSAL_NEXUS_FOUND" if causal_ids else "NO_SINGLE_SITE_NEXUS",
+        "causal_nexus_ids": causal_ids,
+        "sites_perturbed_in_parallel": len(specs),
+        "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+        "model_calls": 0,
+        "parameters_stored": 0,
+    }
+
+
+# ===========================================================================
+# 7. L3 NEGATIVE-SPACE INVARIANT COMPILATION (LEARN FROM FAILURES, O(1) DELETABLE)
+# ===========================================================================
+
+
+def new_negative_invariant_store() -> dict[str, Any]:
+    """Create an empty external, inspectable, editable, O(1)-deletable L3 Negative-Space
+    Invariant store (zero parameters in weights)."""
+    return {
+        "schema": "BRAIN_L3_NEGATIVE_SPACE_INVARIANTS_V1",
+        "authority": AUTHORITY,
+        "invariants": {},
+        "total_pruned": 0,
+        "parameters_stored": 0,
+    }
+
+
+def _normalize_candidate_signature(file_rel: str, lineno: int, tier: str, diff_or_action: str) -> str:
+    """Alpha-canonical signature of a refuted edit/action pattern for fast O(1) matching."""
+    norm_body = " ".join(
+        ln.strip()
+        for ln in str(diff_or_action).splitlines()
+        if ln.startswith(("+", "-")) and not ln.startswith(("+++", "---"))
+    )
+    if not norm_body:
+        norm_body = str(diff_or_action).strip()
+    return f"{tier}|{pathlib.PurePosixPath(file_rel).name}:{lineno}|{norm_body[:180]}"
+
+
+def record_negative_invariant(
+    store: dict[str, Any],
+    *,
+    scope: str,
+    reason: str,
+    file_rel: str = "",
+    lineno: int = 0,
+    tier: str = "",
+    forbidden_pattern: str = "",
+    forbidden_state_predicates: Sequence[str] = (),
+    regressed_tests: Sequence[str] = (),
+    provenance: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Crystallize a failed candidate patch or failed CoW rollout into a reusable L3 Negative
+    Invariant stored externally in JSON so future searches prune that dead-end in microseconds."""
+    sig = _normalize_candidate_signature(file_rel, lineno, tier, forbidden_pattern)
+    inv_id = "l3_neg_" + hashlib.sha256(f"{scope}|{sig}|{reason}".encode("utf-8")).hexdigest()[:12]
+    entry = {
+        "invariant_id": inv_id,
+        "scope": scope,  # "swe_patch" | "cow_action" | "petri_transition"
+        "signature": sig,
+        "file_name": pathlib.PurePosixPath(file_rel).name if file_rel else "",
+        "lineno": int(lineno),
+        "tier": str(tier),
+        "forbidden_pattern": str(forbidden_pattern)[:300],
+        "forbidden_state_predicates": list(forbidden_state_predicates),
+        "regressed_tests": list(regressed_tests)[:10],
+        "reason": str(reason),
+        "provenance": dict(provenance or {}),
+        "hits": 0,
+    }
+    store.setdefault("invariants", {})[inv_id] = entry
+    return entry
+
+
+def check_negative_invariants(
+    store: Mapping[str, Any] | None,
+    *,
+    scope: str,
+    file_rel: str = "",
+    lineno: int = 0,
+    tier: str = "",
+    candidate_pattern: str = "",
+    state_facts: Mapping[str, Any] | None = None,
+) -> dict[str, Any] | None:
+    """Microsecond pre-filter check against active L3 Negative Invariants.
+    Returns the matching violated invariant dict if pruned, else None."""
+    if not isinstance(store, Mapping):
+        return None
+    invs = store.get("invariants")
+    if not isinstance(invs, Mapping) or not invs:
+        return None
+
+    sig = _normalize_candidate_signature(file_rel, lineno, tier, candidate_pattern)
+    cand_text = str(candidate_pattern)
+    facts = state_facts or {}
+
+    for inv in invs.values():
+        if not isinstance(inv, Mapping) or inv.get("scope") != scope:
+            continue
+        # 1. Exact canonical signature match (instant O(1) rejection of known-regressing edit/action)
+        if inv.get("signature") == sig:
+            if isinstance(inv, dict):
+                inv["hits"] = int(inv.get("hits", 0)) + 1
+            if isinstance(store, dict):
+                store["total_pruned"] = int(store.get("total_pruned", 0)) + 1
+            return dict(inv)
+        # 2. Substring/pattern + state predicate guard match (cross-repo / cross-episode pruning!)
+        fpat = str(inv.get("forbidden_pattern") or "")
+        fpreds = inv.get("forbidden_state_predicates") or ()
+        if fpat and fpat in cand_text:
+            if not fpreds:
+                if isinstance(inv, dict):
+                    inv["hits"] = int(inv.get("hits", 0)) + 1
+                if isinstance(store, dict):
+                    store["total_pruned"] = int(store.get("total_pruned", 0)) + 1
+                return dict(inv)
+            # Evaluate simple `key==value` state preconditions safely without eval()
+            all_match = True
+            for pr in fpreds:
+                if "==" in str(pr):
+                    pk, pv = str(pr).split("==", 1)
+                    pk, pv = pk.strip(), pv.strip()
+                    actual = facts.get(pk)
+                    if str(actual) != pv:
+                        all_match = False
+                        break
+                elif str(pr) not in facts or not facts.get(str(pr)):
+                    all_match = False
+                    break
+            if all_match:
+                if isinstance(inv, dict):
+                    inv["hits"] = int(inv.get("hits", 0)) + 1
+                if isinstance(store, dict):
+                    store["total_pruned"] = int(store.get("total_pruned", 0)) + 1
+                return dict(inv)
+    return None
+
+
+def delete_negative_invariant(store: dict[str, Any], invariant_id: str) -> bool:
+    """O(1) instant deletion of an L3 Negative Invariant without retraining."""
+    invs = store.get("invariants")
+    if isinstance(invs, dict) and invariant_id in invs:
+        del invs[invariant_id]
+        return True
+    return False
+

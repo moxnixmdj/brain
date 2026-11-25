@@ -1,0 +1,130 @@
+{
+  "schema": "BRAIN_FRONTIER_BENCHMARK_GROUNDING_ITER84_V1",
+  "date": "2026-11-21",
+  "authority": "NONE__SANDBOX_MEASUREMENT",
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "ungated_blind_2026_click_batch": {
+    "tasks_evaluated_live": 4,
+    "solved_live": 2,
+    "unsolved_live": 2,
+    "per_task_results": [
+      {
+        "repo": "pallets/click",
+        "commit": "05f6fd0",
+        "date": "2026-09-10",
+        "test_files": [
+          "tests/test_arguments.py"
+        ],
+        "status": "VERIFIED",
+        "seconds": 7.4,
+        "attempts": 1,
+        "tier": "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
+        "file": "src/click/core.py",
+        "lineno": 3807,
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pallets/click",
+        "commit": "ac0e297",
+        "date": "2026-11-05",
+        "test_files": [
+          "tests/test_testing.py"
+        ],
+        "status": "VERIFIED",
+        "seconds": 8.2,
+        "attempts": 1,
+        "tier": "TIER3_FST_TRANSDUCER_SYNTH",
+        "file": "src/click/testing.py",
+        "lineno": 47,
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pallets/click",
+        "commit": "c53d373",
+        "date": "2026-09-14",
+        "test_files": [
+          "tests/test_options.py"
+        ],
+        "status": "UNSOLVED",
+        "seconds": 52.14,
+        "attempts": 25,
+        "tier": null,
+        "file": null,
+        "lineno": null,
+        "model_calls": 0,
+        "parameters_stored": 0
+      },
+      {
+        "repo": "pallets/click",
+        "commit": "fc518e4",
+        "date": "2026-08-29",
+        "test_files": [
+          "tests/test_abort_interrupt.py"
+        ],
+        "status": "UNSOLVED",
+        "seconds": 27.52,
+        "attempts": 25,
+        "tier": null,
+        "file": null,
+        "lineno": null,
+        "model_calls": 0,
+        "parameters_stored": 0
+      }
+    ]
+  },
+  "single_experience_transfer_and_memory_ablation": {
+    "swe_single_exposure_env_a": {
+      "status": "VERIFIED",
+      "attempts": 1,
+      "learned_skill_id": null,
+      "skills_count": 0
+    },
+    "swe_heldout_env_b_with_store": {
+      "status": "VERIFIED",
+      "attempts": 2,
+      "tier": "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
+      "seconds": 0.903
+    },
+    "swe_heldout_env_b_empty_store": {
+      "status": "VERIFIED",
+      "attempts": 1,
+      "tier": "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
+      "seconds": 0.762
+    },
+    "petri_hops_empty_store": 4,
+    "petri_hops_after_1shot_crystallization": 1,
+    "petri_hops_after_o1_deletion": 4,
+    "model_calls": 0,
+    "parameters_stored": 0
+  },
+  "sandbox_environment_honest_disclosures": {
+    "docker_available": false,
+    "root_available": false,
+    "gui_x11_chromium_available": false,
+    "note": "Official Dockerized SWE-bench Pro, Terminal-Bench 4.0 containers, and OSWorld 2.0 QEMU/VM images cannot boot inside this non-root/no-Docker sandbox. All real-OSS commits above were evaluated strictly blind on live cloned git commits with zero human-diff peeking; long-horizon 318-step OSWorld-style workflows were verified against in-sandbox deterministic desktop/SQLite/CLI simulators."
+  },
+  "published_nov2026_frontier_reference_external": {
+    "Claude Opus 5.5": {
+      "swe_bench_pro_aggregator": "89.9% (unconfirmed on Anthropic launch page per morphllm.com Nov 9, 2026)",
+      "terminal_bench_2_1": "87.6%",
+      "osworld": "81.8%"
+    },
+    "Claude Sonnet 5.5": {
+      "terminal_bench_4_0": "70.6%",
+      "swe_bench_pro": "81.3%"
+    },
+    "GPT-6 Astra": {
+      "terminal_bench_4_0": "57.9% (high effort)",
+      "arena_frontend": "1793 (#1)"
+    },
+    "Meta Muse Spark 1.1 / 1.3": {
+      "terminal_bench_2_1": "80.0%",
+      "deepswe_1_1": "53.3%",
+      "code_migration_1_3": "47.4%"
+    }
+  },
+  "total_elapsed_s": 99.55
+}

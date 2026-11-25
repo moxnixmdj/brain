@@ -332,3 +332,269 @@ def test_06_none_guard_default_fallthrough_live_swe_solve(tmp_path: pathlib.Path
     assert res["status"] == "VERIFIED"
     assert res["model_calls"] == 0
     assert res["winner"]["tier"] == "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH"
+
+
+def test_07_bidirectional_fst_lens_roundtrip_and_polyglot_compile() -> None:
+    """Infer an invertible bidirectional Finite-State Transducer lens purely from
+    input-output examples, prove exact round-trip `backward(forward(x)) == x`, and
+    compile to native Python, JavaScript, and C code (model_calls == 0)."""
+    examples = [
+        ("a&b", "a&amp;b"),
+        ("<tag>", "&lt;tag&gt;"),
+        ("x < y & z > 0", "x &lt; y &amp; z &gt; 0"),
+        ("plain text", "plain text"),
+    ]
+    lens = RCCE.synthesize_fst_lens(examples)
+    assert lens is not None
+    assert lens.is_invertible is True
+    assert len(lens.forward_map) == 3
+
+    # Exact forward + backward round-trip on UNSEEN held-out strings!
+    unseen = "if (a < b && c > d) return <ok>;"
+    encoded = lens.forward(unseen)
+    assert encoded == "if (a &lt; b &amp;&amp; c &gt; d) return &lt;ok&gt;;"
+    assert lens.backward(encoded) == unseen
+
+    # Verify compiled Python, JS, and C targets
+    py_expr = lens.compile_python_expr("s")
+    assert eval(py_expr, {"s": unseen}) == encoded
+    js_expr = lens.compile_js_expr("s")
+    assert ".replaceAll(" in js_expr
+    c_code = lens.compile_c_function("escape_xml_fst")
+    assert "switch (in[i])" in c_code and "case 0x26:" in c_code
+
+
+def test_08_dual_channel_stream_fst_live_swe_solve(tmp_path: pathlib.Path) -> None:
+    """Prove `TIER3_FST_TRANSDUCER_SYNTH` generalizes to arbitrary unseen control bytes
+    (`\\x03 -> ^C\\n`, `\\x07 -> ^G\\n`) and unseen class/method names on Attempt #1."""
+    (tmp_path / "pipewrap.py").write_text(
+        "class TeeReader:\n"
+        "    def __init__(self, src, sink):\n"
+        "        self._src = src\n"
+        "        self._sink = sink\n"
+        "        self._muted = False\n"
+        "\n"
+        "    def _mirror(self, chunk: bytes) -> bytes:\n"
+        "        if not self._muted:\n"
+        "            self._sink.write(chunk)\n"
+        "        return chunk\n"
+        "\n"
+        "    def read(self) -> bytes:\n"
+        "        return self._mirror(self._src.read())\n"
+        "\n"
+        "    def readlines(self) -> list[bytes]:\n"
+        "        return [self._mirror(x) for x in self._src.readlines()]\n"
+        "\n"
+        "    def __iter__(self):\n"
+        "        return iter(self._mirror(x) for x in self._src)\n",
+        encoding="utf-8",
+    )
+    (tmp_path / "test_pipewrap.py").write_text(
+        "import io\n"
+        "from pipewrap import TeeReader\n"
+        "\n"
+        "def _run(raw: bytes) -> str:\n"
+        "    sink = io.BytesIO()\n"
+        "    tr = TeeReader(io.BytesIO(raw), sink)\n"
+        "    got = tr.read()\n"
+        "    return f\"{sink.getvalue().decode('latin1')}{got!r}\\n\"\n"
+        "\n"
+        "def test_ctrl_c():\n"
+        "    assert _run(b'hi\\n\\x03') == \"hi\\n^C\\nb'hi\\\\n'\\n\"\n"
+        "\n"
+        "def test_ctrl_g():\n"
+        "    assert _run(b'hi\\n\\x07') == \"hi\\n^G\\nb'hi\\\\n'\\n\"\n"
+        "\n"
+        "def test_lines_skip_ctrl_only():\n"
+        "    sink = io.BytesIO()\n"
+        "    tr = TeeReader(io.BytesIO(b'a\\nb\\n\\x03'), sink)\n"
+        "    lines = tr.readlines()\n"
+        "    assert f\"{sink.getvalue().decode('latin1')}{len(lines)}\\n\" == 'a\\nb\\n^C\\n2\\n'\n",
+        encoding="utf-8",
+    )
+    res = SWE.solve_repository(
+        tmp_path,
+        ["test_pipewrap.py"],
+        python_exe=sys.executable,
+        max_candidates=20,
+        timeout_s=30.0,
+    )
+    assert res["status"] == "VERIFIED", res
+    assert res["model_calls"] == 0
+    assert res["winner"]["tier"] == "TIER3_FST_TRANSDUCER_SYNTH"
+    assert res["attempts"] == 1
+
+
+def test_09_articulation_point_subgoal_slicing_318_steps_through_one_front_door(tmp_path: pathlib.Path) -> None:
+    """Factor a 318-operation OSWorld-2.0 style workflow at its Petri-net articulation
+    tokens (cut-vertices), run local CoW rollout against distractors at an uncertain
+    checkpoint, and verify 0 drift through ONE Front Door (`open_model().solve`)."""
+    pnet = RCCE.UnifiedCrossModalPetriNet()
+    # Segment 1 (100 ops): GUI login + batch ingest -> cut-vertex `cut:ingested_100`
+    pnet.add_transition(
+        RCCE.PetriTransition(
+            transition_id="gui:batch_ingest_100",
+            modality="gui",
+            input_places=("os:desktop_ready",),
+            output_places=("cut:ingested_100",),
+            executor=lambda ctx: {"rows_ingested": 100, "_last_op_count": 100},
+        )
+    )
+    # Segment 2 (110 ops): SQLite transform -> cut-vertex `cut:normalized_210`
+    pnet.add_transition(
+        RCCE.PetriTransition(
+            transition_id="sqlite:normalize_110",
+            modality="sqlite",
+            input_places=("cut:ingested_100",),
+            output_places=("cut:normalized_210",),
+            executor=lambda ctx: {"rows_normalized": ctx["rows_ingested"] + 110, "_last_op_count": 110},
+        )
+    )
+    # Segment 3 (108 ops): CLI audit + release -> goal `os:release_verified`
+    pnet.add_transition(
+        RCCE.PetriTransition(
+            transition_id="cli:audit_release_108",
+            modality="cli",
+            input_places=("cut:normalized_210",),
+            output_places=("os:release_verified",),
+            executor=lambda ctx: {"released": True, "audit_count": ctx["rows_normalized"] + 108, "_last_op_count": 108},
+        )
+    )
+
+    gov_mem: dict = {}
+    model = BUM.open_model()
+    r = model.solve(
+        "Execute 318-step desktop/SQLite/CLI release with Petri-net articulation checkpoints",
+        mode="EPISTEMIC",
+        inputs={
+            "workspace": str(tmp_path),
+            "governed_memory": gov_mem,
+            "petri_net_spec": {
+                "petri_net": pnet,
+                "initial_places": ["os:desktop_ready"],
+                "goal_places": ["os:release_verified"],
+                "factor_articulations": True,
+                "initial_context": {},
+                "checkpoint_verifiers": {
+                    "cut:ingested_100": lambda c: c.get("rows_ingested") == 100,
+                    "cut:normalized_210": lambda c: c.get("rows_normalized") == 210,
+                    "os:release_verified": lambda c: c.get("released") is True and c.get("audit_count") == 318,
+                },
+                "distractor_actions": {
+                    "sqlite:normalize_110": [
+                        {"action_id": f"bad_norm_{i}", "delta": {"rows_normalized": -1}}
+                        for i in range(8)
+                    ]
+                },
+            },
+        },
+    )
+    assert r["pass"] is True, r
+    assert r["model_calls"] == 0
+    er = r["epistemic_result"]
+    assert er["modality"] == "articulation_factored_long_horizon_petri_net"
+    fe = er["factored_execution"]
+    assert fe["articulation_tokens"] == ["cut:ingested_100", "cut:normalized_210"]
+    assert fe["sub_episodes_verified"] == 3
+    assert fe["total_ops_executed"] == 318
+    assert fe["context"]["audit_count"] == 318
+
+
+def test_10_cow_angelic_causal_nexus_multifile_localization() -> None:
+    """Isolate the exact single root-cause node in a 3-layer call stack where all 3
+    functions execute on every failing call (`ochiai == 1.0`), using parallel Linux
+    `os.fork()` CoW angelic value perturbation with zero parent memory mutation."""
+    class LayerA:
+        @staticmethod
+        def parse_amount(raw: str) -> int:
+            return int(raw.strip())
+
+    class LayerB:
+        @staticmethod
+        def apply_discount(amount: int) -> int:
+            # BUG: subtracts 20 instead of 10!
+            return amount - 20
+
+    class LayerC:
+        @staticmethod
+        def final_bill(raw: str) -> int:
+            return LayerB.apply_discount(LayerA.parse_amount(raw)) + 5
+
+    def _failing_test() -> bool:
+        # Expects (100 - 10) + 5 == 95; currently returns 85!
+        return LayerC.final_bill(" 100 ") == 95 and LayerC.final_bill(" 50 ") == 45
+
+    assert _failing_test() is False
+
+    rep = RCCE.localize_causal_nexus_via_cow(
+        [
+            {"site_id": "layer_a.py:parse_amount", "target_obj": LayerA, "attr_name": "parse_amount", "angelic_return": 100},
+            {
+                "site_id": "layer_b.py:apply_discount",
+                "target_obj": LayerB,
+                "attr_name": "apply_discount",
+                "angelic_return": lambda amt: amt - 10,
+            },
+            {"site_id": "layer_c.py:final_bill", "target_obj": LayerC, "attr_name": "final_bill", "angelic_return": 95},
+        ],
+        test_runner_fn=_failing_test,
+    )
+    assert rep["status"] == "CAUSAL_NEXUS_FOUND"
+    assert rep["model_calls"] == 0
+    assert rep["causal_nexus_ids"] == ["layer_b.py:apply_discount"]
+    # Proof parent memory was NEVER mutated by CoW children!
+    assert LayerB.apply_discount(100) == 80
+
+
+def test_11_l3_negative_space_invariants_pruning_ablation_and_o1_deletion() -> None:
+    """Verify L3 Negative-Space Invariant compilation shrinks search space across episodes
+    (empty store vs L3 store ablation) and supports O(1) instant deletion without retraining."""
+    neg = RCCE.new_negative_invariant_store()
+    assert neg["parameters_stored"] == 0
+
+    # Ablation A: Empty store allows the bad candidate through
+    assert RCCE.check_negative_invariants(
+        neg,
+        scope="cow_action",
+        candidate_pattern="mutate_global_wrapper_defaults",
+        state_facts={"subcommand_isolated": True},
+    ) is None
+
+    # Learn L3 Negative Invariant from a single regression failure!
+    inv = RCCE.record_negative_invariant(
+        neg,
+        scope="cow_action",
+        reason="EFFECT_CONTRACT_VIOLATION",
+        forbidden_pattern="mutate_global_wrapper_defaults",
+        forbidden_state_predicates=["subcommand_isolated==True"],
+        regressed_tests=["test_subcommand_isolation"],
+    )
+    iid = inv["invariant_id"]
+
+    # Ablation B: Populated L3 store prunes the dead-end in microseconds when condition holds...
+    hit = RCCE.check_negative_invariants(
+        neg,
+        scope="cow_action",
+        candidate_pattern="call mutate_global_wrapper_defaults(ctx)",
+        state_facts={"subcommand_isolated": True},
+    )
+    assert hit is not None and hit["invariant_id"] == iid
+    assert neg["total_pruned"] == 1
+
+    # ...while still PERMITTING it when the state precondition does NOT hold!
+    assert RCCE.check_negative_invariants(
+        neg,
+        scope="cow_action",
+        candidate_pattern="call mutate_global_wrapper_defaults(ctx)",
+        state_facts={"subcommand_isolated": False},
+    ) is None
+
+    # Ablation C: O(1) instant deletion removes the invariant immediately without retraining!
+    assert RCCE.delete_negative_invariant(neg, iid) is True
+    assert RCCE.check_negative_invariants(
+        neg,
+        scope="cow_action",
+        candidate_pattern="call mutate_global_wrapper_defaults(ctx)",
+        state_facts={"subcommand_isolated": True},
+    ) is None
+

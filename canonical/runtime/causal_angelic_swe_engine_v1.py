@@ -5075,6 +5075,191 @@ def _synthesize_static_cone_and_truthiness_repairs(
                 )
                 _rc_added += 1
 
+    # 12b-fst. Bidirectional Finite-State Transducer (FST) / Stream Lens Synthesis
+    # (`TIER3_FST_TRANSDUCER_SYNTH` — ASTRA / Optician style, zero hardcoded chars/symbols):
+    # Infers consistent byte/string substitution transducers directly from failing assertion
+    # `(actual, expected)` diffs, handling both single-channel return codecs AND dual-channel
+    # stream wrappers (`<stream>.write(v)` + `return v` + sibling empty-chunk filtering).
+    _fst_str_pairs = [(str(_a), str(_e)) for _a, _e in _bwr_pairs if isinstance(_a, str) and isinstance(_e, str)]
+    if _fst_str_pairs:
+        # Case A: Single-channel return FST (>= 2 examples to prevent single-example overfitting)
+        if len(_fst_str_pairs) >= 2:
+            _sc_lens = RCCE.synthesize_fst_lens(_fst_str_pairs)
+            if _sc_lens is not None:
+                _fst_sc_added = 0
+                for s in loc.sites[:8]:
+                    if _fst_sc_added >= 3:
+                        break
+                    _ffp = worktree / s.file
+                    if not _ffp.is_file():
+                        continue
+                    try:
+                        _fsrc = _ffp.read_text(encoding="utf-8", errors="ignore")
+                        _ftree = ast.parse(_fsrc)
+                    except Exception:
+                        continue
+                    _flines = _fsrc.splitlines(keepends=True)
+                    for _nd in ast.walk(_ftree):
+                        if isinstance(_nd, ast.Return) and _nd.value is not None and int(getattr(_nd, "lineno", 0)) == s.lineno:
+                            if int(getattr(_nd, "end_lineno", s.lineno)) != s.lineno:
+                                continue
+                            _orig_r = ast.get_source_segment(_fsrc, _nd.value)
+                            if not _orig_r:
+                                continue
+                            _comp_expr = _sc_lens.compile_python_expr(f"({_orig_r})")
+                            _rline = _flines[s.lineno - 1]
+                            _rind = _rline[: len(_rline) - len(_rline.lstrip())]
+                            _nc_fst = "".join(_flines[: s.lineno - 1]) + f"{_rind}return {_comp_expr}\n" + "".join(_flines[s.lineno:])
+                            try:
+                                ast.parse(_nc_fst)
+                                add_cand(
+                                    s.file,
+                                    s.lineno,
+                                    "TIER3_FST_TRANSDUCER_SYNTH",
+                                    f"fst_return_lens(L{s.lineno}:{len(_sc_lens.forward_map)} rules)",
+                                    _nc_fst,
+                                )
+                                _fst_sc_added += 1
+                            except SyntaxError:
+                                pass
+                            break
+
+        # Case B: Dual-Channel Stream Transducer (`<stream>.write(v)` + `return v` + empty-chunk drop)
+        _dc_fst = RCCE.synthesize_dual_channel_stream_fst(_fst_str_pairs)
+        if _dc_fst is not None:
+            _w_lens: RCCE.FiniteStateTransducerLens = _dc_fst["write_lens"]
+            _r_lens: RCCE.FiniteStateTransducerLens = _dc_fst["return_lens"]
+            _dc_seen: set[tuple[str, int]] = set()
+            for s in loc.sites[:14]:
+                _dfp = worktree / s.file
+                if not _dfp.is_file():
+                    continue
+                try:
+                    _dsrc = _dfp.read_text(encoding="utf-8", errors="ignore")
+                    _dtree = ast.parse(_dsrc)
+                except Exception:
+                    continue
+                _dlines = _dsrc.splitlines(keepends=True)
+                for _cls in ast.walk(_dtree):
+                    if not isinstance(_cls, ast.ClassDef):
+                        continue
+                    for _fn in _cls.body:
+                        if not isinstance(_fn, ast.FunctionDef):
+                            continue
+                        _fln = int(getattr(_fn, "lineno", 0))
+                        _fend = int(getattr(_fn, "end_lineno", _fln))
+                        if not (_fln <= s.lineno <= _fend):
+                            continue
+                        if (s.file, _fln) in _dc_seen:
+                            continue
+                        # Find `<stream>.write(<var>)` and `return <var>` in this method!
+                        _write_call: ast.Call | None = None
+                        _write_var: str | None = None
+                        _ret_stmt: ast.Return | None = None
+                        for _sub in ast.walk(_fn):
+                            if (
+                                isinstance(_sub, ast.Call)
+                                and isinstance(_sub.func, ast.Attribute)
+                                and _sub.func.attr == "write"
+                                and len(_sub.args) == 1
+                                and isinstance(_sub.args[0], ast.Name)
+                            ):
+                                _write_call = _sub
+                                _write_var = _sub.args[0].id
+                            elif isinstance(_sub, ast.Return) and isinstance(_sub.value, ast.Name):
+                                _ret_stmt = _sub
+                        if (
+                            _write_call is None
+                            or _ret_stmt is None
+                            or not _write_var
+                            or not isinstance(_ret_stmt.value, ast.Name)
+                            or _ret_stmt.value.id != _write_var
+                        ):
+                            continue
+                        _dc_seen.add((s.file, _fln))
+                        _w_ln = int(getattr(_write_call, "lineno", 0))
+                        _r_ln = int(getattr(_ret_stmt, "lineno", 0))
+                        if not (1 <= _w_ln <= len(_dlines) and 1 <= _r_ln <= len(_dlines)):
+                            continue
+                        _w_expr = _w_lens.compile_python_expr(_write_var)
+                        _r_expr = _r_lens.compile_python_expr(_write_var)
+                        _patched_lines = list(_dlines)
+                        # Rewrite `.write(var)` -> `.write(<write_fst(var)>)`
+                        _patched_lines[_w_ln - 1] = _patched_lines[_w_ln - 1].replace(
+                            f".write({_write_var})", f".write({_w_expr})", 1
+                        )
+                        # Rewrite `return var` -> `return <return_fst(var)>`
+                        _rl = _patched_lines[_r_ln - 1]
+                        _rind = _rl[: len(_rl) - len(_rl.lstrip())]
+                        _patched_lines[_r_ln - 1] = f"{_rind}return {_r_expr}\n"
+
+                        # Variant 1: Dual-channel stream rewrite + sibling empty-chunk filtering on
+                        # `[self.<m>(x) for x in <iter>]` and `iter(self.<m>(x) for x in <iter>)` in same class
+                        # (pure AST inspection — handles nested `()` calls like `self._input.readlines()`!)
+                        _mname = _fn.name
+                        _patched_with_filter = list(_patched_lines)
+                        _filter_changed = False
+                        for _sib in _cls.body:
+                            if not isinstance(_sib, ast.FunctionDef) or _sib.name == _mname:
+                                continue
+                            for _comp in ast.walk(_sib):
+                                if not isinstance(_comp, (ast.ListComp, ast.GeneratorExp)):
+                                    continue
+                                if len(_comp.generators) != 1 or _comp.generators[0].ifs:
+                                    continue
+                                _gen = _comp.generators[0]
+                                _elt = _comp.elt
+                                if not (
+                                    isinstance(_elt, ast.Call)
+                                    and isinstance(_elt.func, ast.Attribute)
+                                    and isinstance(_elt.func.value, ast.Name)
+                                    and _elt.func.value.id == "self"
+                                    and _elt.func.attr == _mname
+                                    and len(_elt.args) == 1
+                                    and isinstance(_elt.args[0], ast.Name)
+                                    and isinstance(_gen.target, ast.Name)
+                                    and _elt.args[0].id == _gen.target.id
+                                ):
+                                    continue
+                                _cln = int(getattr(_comp, "lineno", 0))
+                                _cend = int(getattr(_comp, "end_lineno", _cln))
+                                if _cln != _cend or not (1 <= _cln <= len(_patched_with_filter)):
+                                    continue
+                                _v_it = _gen.target.id
+                                _it_src = ast.unparse(_gen.iter)
+                                _old_comp_src = ast.get_source_segment(_dsrc, _comp)
+                                if not _old_comp_src:
+                                    continue
+                                _inner_new = f"_fst_c for {_v_it} in {_it_src} if (_fst_c := self.{_mname}({_v_it}))"
+                                _new_comp_src = f"[{_inner_new}]" if isinstance(_comp, ast.ListComp) else f"({_inner_new})"
+                                if _old_comp_src in _patched_with_filter[_cln - 1]:
+                                    _patched_with_filter[_cln - 1] = _patched_with_filter[_cln - 1].replace(
+                                        _old_comp_src, _new_comp_src, 1
+                                    )
+                                    _filter_changed = True
+                                elif _old_comp_src.strip("()") in _patched_with_filter[_cln - 1]:
+                                    _patched_with_filter[_cln - 1] = _patched_with_filter[_cln - 1].replace(
+                                        _old_comp_src.strip("()"), _inner_new, 1
+                                    )
+                                    _filter_changed = True
+
+                        for _cand_ls, _tag in (
+                            (_patched_with_filter, "dual_channel_stream_fst+empty_filter") if _filter_changed else (_patched_lines, "dual_channel_stream_fst"),
+                            (_patched_lines, "dual_channel_stream_fst"),
+                        ):
+                            _nc_dc = "".join(_cand_ls)
+                            try:
+                                ast.parse(_nc_dc)
+                                add_cand(
+                                    s.file,
+                                    _w_ln,
+                                    "TIER3_FST_TRANSDUCER_SYNTH",
+                                    f"{_tag}(L{_w_ln}:{len(_w_lens.forward_map)} rules)",
+                                    _nc_dc,
+                                )
+                            except SyntaxError:
+                                pass
+
     # 12c. Python Builtin Exception-Hierarchy Widening + Subprocess-Resilient Sibling Repair
     # (`TIER3_EXCEPTION_HIERARCHY_WIDEN`):
     # When a failing test/subprocess output exercises a wider Python builtin exception class
@@ -10714,6 +10899,7 @@ def synthesize_candidates(
         "TIER3_BOOL_IMPLICATION_WEAKEN",
         "TIER3_NONE_GUARD_DEFAULT_FALLTHROUGH",
         "TIER3_REPO_COMPONENT_SYNTH",
+        "TIER3_FST_TRANSDUCER_SYNTH",
         "TIER3_DUAL_PROGRAM_SPLICE",
         "TIER3_SIBLING_GUARD_CONJUNCT",
         "TIER3_MAP_REPEAT_COMMUTE",
@@ -12365,6 +12551,7 @@ def solve_repository(
     provenance: Mapping[str, Any] | None = None,
     max_compose_depth: int = 2,
     readonly_files: Sequence[str] | None = None,
+    negative_store: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Run the full zero-LLM causal-angelic repair loop on an isolated copy of `repo_root`.
 
@@ -12642,8 +12829,20 @@ def solve_repository(
                 if c.file.replace("\\", "/").lstrip("./") not in _ro_norm
                 and pathlib.Path(c.file).name not in _ro_bases
             ]
+        _neg_store = negative_store
+        if _neg_store is None and isinstance(skill_store, dict) and "l3_negative_invariants" in skill_store:
+            _neg_store = skill_store["l3_negative_invariants"]
         splice_deferred: list[tuple[str, PatchCandidate]] = []
         for cand in hp_cands:
+            if _neg_store is not None and RCCE.check_negative_invariants(
+                _neg_store,
+                scope="swe_patch",
+                file_rel=cand.file,
+                lineno=cand.lineno,
+                tier=cand.tier,
+                candidate_pattern=cand.description,
+            ) is not None:
+                continue
             pre_tested_keys.add((cand.file, cand.patched_source))
             attempts += 1
             file_path = wt / cand.file
@@ -12740,6 +12939,17 @@ def solve_repository(
                     # Occam's Razor: defer Dual-Program Splicing until all direct (0-regression)
                     # candidates have been tried, so cleaner 1-line algebraic fixes always win first!
                     splice_deferred.append((orig_source, cand))
+                    if _neg_store is not None:
+                        RCCE.record_negative_invariant(
+                            _neg_store,
+                            scope="swe_patch",
+                            reason="FULL_SUITE_REGRESSION",
+                            file_rel=cand.file,
+                            lineno=cand.lineno,
+                            tier=cand.tier,
+                            forbidden_pattern=cand.description,
+                            regressed_tests=list(regressions),
+                        )
             if all_flipped and not regressions:
                 diff = "".join(
                     difflib.unified_diff(

@@ -5063,6 +5063,27 @@ def solve_arbitrary_environment(
             for tr in (petri_net_spec.get("transitions") or ()):
                 if isinstance(tr, RCCE.PetriTransition):
                     pnet.add_transition(tr)
+        if petri_net_spec.get("factor_articulations"):
+            fac_res = pnet.execute_factored_long_horizon(
+                petri_net_spec.get("initial_places") or (),
+                petri_net_spec.get("goal_places") or (),
+                petri_net_spec.get("initial_context") or {},
+                checkpoint_verifiers=petri_net_spec.get("checkpoint_verifiers"),
+                distractor_actions=petri_net_spec.get("distractor_actions"),
+                max_steps=int(petri_net_spec.get("max_steps") or 32),
+                governed_memory=governed_memory,
+            )
+            _f_ok = fac_res.get("status") == "VERIFIED"
+            return {
+                "schema": SCHEMA,
+                "authority": AUTHORITY,
+                "modality": "articulation_factored_long_horizon_petri_net",
+                "status": "VERIFIED" if _f_ok else str(fac_res.get("status") or "UNREACHABLE"),
+                "factored_execution": fac_res,
+                "elapsed_ms": round((time.monotonic() - t0) * 1000.0, 2),
+                "model_calls": 0,
+                "parameters_stored": 0,
+            }
         plan = pnet.solve(
             petri_net_spec.get("initial_places") or (),
             petri_net_spec.get("goal_places") or (),

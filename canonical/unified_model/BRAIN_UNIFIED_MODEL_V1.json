@@ -31228,7 +31228,7 @@
   "engines": 26,
   "knowledge_documents": 595,
   "receipt_backed_capabilities": 294,
-  "research_index_records": 7213,
+  "research_index_records": 7214,
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 454,
@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "e4c2ebda2c154ff2209ad39052c4802e2e038cf4dcd541ea58736d29dc48ff1e"
+  "value": "f6c77895b72923ccd326f6b3f8c45cbc48e227029d46e2713025c6b787883872"
  },
  "engines": [
   {
@@ -164733,7 +164733,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_20261121_V1.json",
    "schema": "BRAIN_CAUSAL_ANGELIC_AND_UNIFIED_CU_BENCHMARK_V1",
-   "sha256": "016ff15cc569b5cc2c267fd612ac3010a202d7dc327737c7ba5e374aa778f8ad",
+   "sha256": "c48599d04280ea8951b133adc37d62b1b92ab8065a82c855e2882d809435c365",
    "status": "",
    "terms": {
     "20261121": 1,
@@ -175949,6 +175949,25 @@
     "sprite": 1,
     "v1": 1,
     "verification": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-21",
+   "id": "research:canonical/verification/FRONTIER_BENCHMARK_GROUNDING_ITER84_20261121_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/FRONTIER_BENCHMARK_GROUNDING_ITER84_20261121_V1.json",
+   "schema": "BRAIN_FRONTIER_BENCHMARK_GROUNDING_ITER84_V1",
+   "sha256": "7721103d6cf33f631d89be01def12fc4043b208cfd1937f2acaa7902bdf13758",
+   "status": "",
+   "terms": {
+    "20261121": 1,
+    "benchmark": 1,
+    "frontier": 1,
+    "grounding": 1,
+    "iter84": 1,
+    "v1": 1
    }
   },
   {
@@ -278342,7 +278361,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/causal_angelic_swe_engine_v1.py",
-   "sha256": "de31ce97891bc794c6f032abc841240afa372c2678ee76100344fd7565623102",
+   "sha256": "aeab52163f6424c478cb7acfba4df2a3b8a60a7da5c9df7b69b6f8ec0c05f3a1",
    "summary": "Unified Causal-Angelic Real-Repo SWE Repair Engine (Zero Model Calls, Zero Stored Weights).",
    "symbol_count": 45,
    "symbols": [
@@ -325470,10 +325489,11 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/repo_component_and_cow_engine_v1.py",
-   "sha256": "87c51ca3c83b7234031533a25f8f3ff047719150cf0d0090a8ed84c57d1963a7",
+   "sha256": "467ade927bae6af10b0182624705e2a5700fff744e67982bd1f9909e27919801",
    "summary": "Repo-Native Component Mining, Dual-Program Splicing, 16-Way CoW Speculative Rollouts,",
-   "symbol_count": 13,
+   "symbol_count": 22,
    "symbols": [
+    "FiniteStateTransducerLens",
     "PetriTransition",
     "RepoComponentMorphism",
     "UnifiedCrossModalPetriNet",
@@ -325481,26 +325501,41 @@
     "_infer_param_types",
     "_infer_return_type_from_body",
     "_norm_type_str",
+    "_normalize_candidate_signature",
     "_rel_to_import_module",
     "_unwrap_frame_envs",
+    "check_negative_invariants",
+    "delete_negative_invariant",
+    "localize_causal_nexus_via_cow",
     "mine_repo_components_as_morphisms",
+    "new_negative_invariant_store",
+    "record_negative_invariant",
     "speculative_cow_rollout",
     "splice_dual_programs",
+    "synthesize_dual_channel_stream_fst",
+    "synthesize_fst_lens",
     "synthesize_repo_component_return_candidates"
    ],
    "terms": {
     "16-way": 1,
+    "check_negative_invariants": 1,
     "component": 2,
     "cow": 2,
+    "delete_negative_invariant": 1,
     "dual-program": 1,
     "engine": 1,
     "find_changed_statement_pair": 1,
+    "finitestatetransducerlens": 1,
     "infer_param_types": 1,
     "infer_return_type_from_body": 1,
+    "localize_causal_nexus_via_cow": 1,
     "mine_repo_components_as_morphisms": 1,
     "mining": 1,
+    "new_negative_invariant_store": 1,
     "norm_type_str": 1,
+    "normalize_candidate_signature": 1,
     "petritransition": 1,
+    "record_negative_invariant": 1,
     "rel_to_import_module": 1,
     "repo": 1,
     "repo-native": 1,
@@ -325510,6 +325545,8 @@
     "speculative_cow_rollout": 1,
     "splice_dual_programs": 1,
     "splicing": 1,
+    "synthesize_dual_channel_stream_fst": 1,
+    "synthesize_fst_lens": 1,
     "synthesize_repo_component_return_candidates": 1,
     "unifiedcrossmodalpetrinet": 1,
     "unwrap_frame_envs": 1,
@@ -338986,7 +339023,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/universal_epistemic_kernel_v1.py",
-   "sha256": "cc0e4de6065b87b758693df756c1e5055aa321913edd1061c510fcc62777b2cf",
+   "sha256": "666f876110199b68692b36a94111fca887fcda149c10eef528ade5e55735fc39",
    "summary": "Universal Epistemic Kernel v1 — ONE minimal, zero-LLM, zero-weight algorithm",
    "symbol_count": 63,
    "symbols": [
