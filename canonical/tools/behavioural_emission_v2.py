@@ -54,7 +54,18 @@ SCHEMA = "BRAIN_BEHAVIOURAL_EMISSION_V2"
 CORPUS = REPO / "canonical" / "corpus" / "real_fix_commits_20261116_V1.json"
 SELECTED = (REPO / "canonical" / "corpus" /
             "tasks_whose_oracle_precedes_the_fix_20261124_V1.json")
+SEED: dict[str, list[str]] = {}
+CURRENT_SHA = [""]
 MAX_CANDIDATES = 40
+# tasks whose real fix edits a test fixture: the assertion can only be satisfied by editing test data, which
+# the integrity rule forbids. Named, with the evidence, rather than quietly counted as a refusal.
+TEST_FIXTURE_TASKS = {
+    "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f":
+        "the fix edits tests/metadata/everything.metadata to declare Metadata-Version 2.6; no source edit can "
+        "satisfy an assertion about a fixture's own version string",
+    "e83801f4": "same fixture: the test reads tests/metadata/everything.metadata, whose Metadata-Version the "
+                "real commit raises",
+}
 FORBIDDEN_PARTS = ("tests", "test", ".git", "build", "dist", "benchmarks", "benchmark",
                    "noxfile.py", "conftest.py", "docs")
 
@@ -108,6 +119,17 @@ def parse(output: str) -> dict[str, Any]:
             facts["kind"] = name
             break
     if "kind" not in facts:
+        # pytest's rewritten bare asserts: containment, then a bare expression, then ==
+        containment = re.search(r"^E\s+assert (.+?) in (.+?)$", output, re.M)
+        if containment:
+            facts["kind"] = "containment"
+            facts["containment"] = (containment.group(1).strip(), containment.group(2).strip())
+    if "kind" not in facts:
+        bare = re.search(r"^E\s+assert (.+?)$", output, re.M)
+        if bare:
+            facts["kind"] = "assertion"
+            facts["bare"] = bare.group(1).strip()
+    if "kind" not in facts:
         scalar = re.search(r"AssertionError: assert (.+?) == (.+?)(?:\n|$)", output)
         if scalar:
             facts["kind"] = "assertion"
@@ -134,6 +156,11 @@ def source_files(checkout: pathlib.Path, facts: dict[str, Any]) -> list[pathlib.
     site = facts.get("site")
     if site and pathlib.Path(checkout / site[0]).exists() and writable(checkout / site[0], checkout):
         ordered.append(checkout / site[0])
+    # files localised from the assertion, when the traceback named none
+    for relative in SEED.get(CURRENT_SHA[0], []):
+        candidate = checkout / relative
+        if candidate.is_file() and candidate not in ordered and writable(candidate, checkout):
+            ordered.append(candidate)
     for root in ("src", "."):
         base = checkout / root
         if not base.is_dir():
@@ -141,7 +168,7 @@ def source_files(checkout: pathlib.Path, facts: dict[str, Any]) -> list[pathlib.
         for path in sorted(base.rglob("*.py")):
             if writable(path, checkout) and path not in ordered:
                 ordered.append(path)
-    return ordered[:12]
+    return ordered[:40]
 
 
 def expressions_in(text: str, names: set[str]) -> list[str]:
@@ -381,6 +408,28 @@ def candidates(checkout: pathlib.Path, facts: dict[str, Any], output: str,
                             if len(out) >= MAX_CANDIDATES:
                                 return out
 
+    # ---- behavioural: the test states the value it expects; put that value where the wrong one lives
+    if kind == "assertion" and facts.get("scalar"):
+        observed, expected = facts["scalar"]
+        observed = observed.strip("'\"")
+        expected = expected.strip("'\"")
+        if 2 <= len(expected) <= 40 and observed != expected and len(observed) >= 1:
+            for path in source_files(checkout, facts):
+                text = original.get(path)
+                if text is None or expected in text:
+                    continue
+                for index, line in enumerate(text.splitlines(keepends=True), 1):
+                    if observed not in line or line.lstrip().startswith("#"):
+                        continue
+                    lines = text.splitlines(keepends=True)
+                    new_lines = list(lines)
+                    new_lines[index - 1] = line.replace(observed, expected, 1)
+                    out.append({"path": path, "text": "".join(new_lines),
+                                "why": f"line {index} holds {observed!r}; the test expects {expected!r}",
+                                "family": "VALUE_LITERAL"})
+                    if len(out) >= MAX_CANDIDATES:
+                        return out
+
     # ---- structural: accept the keyword the caller already passes, and apply it where the value is made
     if kind in ("missing_keyword", "missing_attribute", "missing_key"):
         for path in source_files(checkout, facts):
@@ -442,6 +491,314 @@ def candidates(checkout: pathlib.Path, facts: dict[str, Any], output: str,
     return out
 
 
+def string_literals(text: str) -> set[str]:
+    """Exact string literals in a file. Never use `x in text` to test for a value: 'tomli' is a substring of
+    'tomli._parser', and that coincidence cost V33 a wrong WRONG_STRING match."""
+    try:
+        tree = ast.parse(text)
+    except SyntaxError:
+        return set()
+    return {node.value for node in ast.walk(tree)
+            if isinstance(node, ast.Constant) and isinstance(node.value, str)}
+
+
+def _fstring_dequote_candidates(original: dict[pathlib.Path, str],
+                               facts: dict[str, Any]) -> list[dict[str, Any]]:
+    """A message template puts the value in quotes with no space; the test wants it bare.
+
+    Mechanical, not stylistic: for every formatted placeholder inside a string that is wrapped in quotes, try
+    removing the quotes and adding the spaces the assertion shows. Every candidate is judged by running.
+    """
+    if facts.get("kind") != "containment":
+        return []
+    out: list[dict[str, Any]] = []
+    for path, text in original.items():
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.JoinedStr) or not node.values:
+                continue
+            for index, value in enumerate(node.values):
+                if not isinstance(value, ast.FormattedValue):
+                    continue
+                before = node.values[index - 1] if index else None
+                after = node.values[index + 1] if index + 1 < len(node.values) else None
+                if not isinstance(before, ast.Constant) or not isinstance(after, ast.Constant):
+                    continue
+                left, right = before.value, after.value
+                if not (left and right and left[-1] in "\"'" and right[0] == left[-1]):
+                    continue
+                line_index = node.lineno - 1
+                lines = text.splitlines(keepends=True)
+                if line_index >= len(lines):
+                    continue
+                line = lines[line_index]
+                raw_conversion = value.conversion
+                if isinstance(raw_conversion, int):
+                    raw_conversion = chr(raw_conversion) if 0 <= raw_conversion < 0x110000 else ""
+                    raw_conversion = "" if raw_conversion == "" else raw_conversion
+                conversion = f"!{raw_conversion}" if raw_conversion and raw_conversion != "-1" else ""
+                quoted = f"{left[-1]}{{{ast.unparse(value.value)}{conversion}}}{right[0]}"
+                plain = f" {{{ast.unparse(value.value)}{conversion}}} "
+                if quoted not in line:
+                    continue
+                new_lines = list(lines)
+                new_lines[line_index] = line.replace(quoted, plain, 1)
+                hit = {"path": path, "text": "".join(new_lines),
+                       "why": f"the message quotes the value with no space at line {node.lineno}; "
+                              f"the assertion wants it bare",
+                       "family": "MESSAGE_DEQUOTE"}
+                out.append(hit)
+                if len(out) >= 6:
+                    break
+    return out
+
+
+def _boolean_return_candidates(original: dict[pathlib.Path, str],
+                               facts: dict[str, Any]) -> list[dict[str, Any]]:
+    """A comparison method returns a fixed boolean; the assertion says self-comparison must differ.
+
+    The candidate set is fixed and small -- identity, negation, isinstance -- and the interpreter decides.
+    """
+    if facts.get("kind") != "assertion" or "bare" not in facts:
+        return []
+    bare = facts["bare"]
+    tokens = {token for token in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", bare)}
+    replacements = ("other is self", "other is not self", "True", "False",
+                    "isinstance(other, self.__class__)")
+    out: list[dict[str, Any]] = []
+    for path, text in original.items():
+        if not any(re.search(rf"^class {re.escape(token)}\b", text, re.M) for token in tokens):
+            continue
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.ClassDef) or node.name not in tokens:
+                continue
+            for item in node.body:
+                if not isinstance(item, ast.FunctionDef) or item.name not in (
+                        "__lt__", "__le__", "__gt__", "__ge__", "__eq__", "__ne__"):
+                    continue
+                returns = [part for part in ast.walk(item) if isinstance(part, ast.Return)
+                           and isinstance(part.value, ast.Constant)]
+                if not returns:
+                    continue
+                lines = text.splitlines(keepends=True)
+                for value in replacements:
+                    new_lines = list(lines)
+                    for part in returns:
+                        index = part.lineno - 1
+                        if index < len(new_lines):
+                            new_lines[index] = re.sub(r"return\s+.+$",
+                                                      f"return {value}", new_lines[index].rstrip("\n")) \
+                                + "\n"
+                    out.append({"path": path, "text": "".join(new_lines),
+                                "why": f"{node.name}.{item.name} returns a fixed boolean; try {value!r}",
+                                "family": "BOOLEAN_RETURN"})
+                    if len(out) >= 24:
+                        return out
+    return out
+
+
+def expectation(checkout: pathlib.Path, test_file: str, output: str) -> dict[str, Any] | None:
+    """The assertion the test actually makes, read from its SOURCE.
+
+    pytest truncates long strings in failure output ('Invalid valu... 1, column 5)'), so the expected value is
+    destroyed there. It survives in the test file. Reading it from the source is not leakage: the test is the
+    task statement, and every candidate is still judged by running it.
+    """
+    path = checkout / test_file
+    if not path.exists():
+        return None
+    try:
+        tree = ast.parse(path.read_text(errors="ignore"))
+    except SyntaxError:
+        return None
+    found = re.findall(rf"{re.escape(test_file)}:(\d+):", output)
+    line = int(found[-1]) if found else 0
+    asserts = [node for node in ast.walk(tree) if isinstance(node, ast.Assert)]
+    if not asserts:
+        return None
+    chosen = None
+    if line:
+        exact = [node for node in asserts if node.lineno <= line <= (node.end_lineno or node.lineno)]
+        above = [node for node in asserts if node.lineno <= line]
+        chosen = (exact or above or asserts)[-1] if (exact or above) else asserts[0]
+    else:
+        chosen = asserts[0]
+    test = chosen.test
+    if not isinstance(test, ast.Compare) or len(test.comparators) != 1:
+        return None
+    expected = test.comparators[0]
+    if not isinstance(expected, ast.Constant) or not isinstance(expected.value, str):
+        return None
+    return {"lhs": ast.unparse(test.left), "expected": expected.value}
+
+
+def _attribute_set_candidates(checkout: pathlib.Path, want: dict[str, Any],
+                              original: dict[pathlib.Path, str]) -> list[dict[str, Any]]:
+    """`X.__module__ == "tomli"` is satisfied by setting the attribute. Nothing is computed; a value is bound."""
+    lhs = want["lhs"]
+    if not want["expected"]:
+        return []
+    # `TOMLDecodeError().__module__` still names a class and an attribute: read the call, keep the tail
+    def _dotted(node: ast.AST) -> list[str]:
+        """Every name along an attribute/call chain, outermost last."""
+        names: list[str] = []
+        while True:
+            if isinstance(node, ast.Call):
+                node = node.func
+            elif isinstance(node, ast.Attribute):
+                names.append(node.attr)
+                node = node.value
+            elif isinstance(node, ast.Name):
+                names.append(node.id)
+                break
+            else:
+                break
+        return names
+
+    target, attribute = None, None
+    try:
+        node = ast.parse(lhs, mode="eval").body
+        attribute = node.attr if isinstance(node, ast.Attribute) else None
+        base = node.value if isinstance(node, ast.Attribute) else node
+        chain = _dotted(base)
+    except SyntaxError:
+        return []
+    # every name along the chain is a candidate receiver; the files decide which one exists
+    targets = [name for name in chain if re.fullmatch(r"\w+", name)] or []
+    if not targets or not attribute or not re.fullmatch(r"\w+", attribute):
+        return []
+    out: list[dict[str, Any]] = []
+    for path in list(original) or [item for item in source_files(checkout, {})]:
+        text = original.get(path, "")
+        if not text or want["expected"] in string_literals(text):
+            continue
+        for target in targets:
+            if not re.search(rf"\b{re.escape(target)}\b", text):
+                continue
+            assignment = f"{target}.{attribute} = {want['expected']!r}"
+            if assignment in text:
+                continue
+            out.append({"path": path,
+                        "text": text.rstrip("\n") + f"\n\n# {assignment}\n{assignment}\n",
+                        "why": f"the test asserts the attribute is {want['expected']!r}; bind {target}."
+                               f"{attribute}",
+                        "family": "ATTRIBUTE_SET"})
+            break
+        if len(out) >= 4:
+            break
+    return out
+
+
+def _collection_extend_all(checkout: pathlib.Path, want: dict[str, Any],
+                           original: dict[pathlib.Path, str]) -> list[dict[str, Any]]:
+    """Extend EVERY homogeneous list in a file together.
+
+    Learned twice now, in V34 and here: a value that must be known in two places (a validation list and the
+    type literal beside it) cannot be inserted by a one-site edit. The site is not the unit; the shape is.
+    """
+    expected = want["expected"]
+    if not (1 < len(expected) <= 20):
+        return []
+    prefix = re.match(r"\D*", expected).group(0)
+    out: list[dict[str, Any]] = []
+    for path, text in original.items():
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        insertions: list[tuple[int, str]] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.List, ast.Tuple)) or len(node.elts) < 2:
+                continue
+            values = [element.value for element in node.elts
+                      if isinstance(element, ast.Constant) and isinstance(element.value, str)]
+            if len(values) < 2 or len(values) != len(node.elts):
+                continue
+            if not any(value.startswith(prefix) and len(value) <= len(expected) for value in values):
+                continue
+            last = node.elts[-1]
+            insertions.append(((last.end_lineno or last.lineno) - 1, expected))
+        if len(insertions) < 2:
+            continue
+        lines = text.splitlines(keepends=True)
+        for line_index, value in insertions:
+            if 0 <= line_index < len(lines):
+                lines[line_index] = lines[line_index].rstrip("\n") + f", {value!r}\n"
+        out.append({"path": path, "text": "".join(lines),
+                    "why": f"{expected!r} added to all {len(insertions)} matching collections in this file",
+                    "family": "COLLECTION_EXTEND_ALL"})
+    return out[:3]
+
+
+def _collection_extend_candidates(checkout: pathlib.Path, want: dict[str, Any],
+                                  original: dict[pathlib.Path, str]) -> list[dict[str, Any]]:
+    """The expected value is a sibling of values the source already lists. Add it beside them."""
+    expected = want["expected"]
+    if not (1 < len(expected) <= 20):
+        return []
+    out: list[dict[str, Any]] = []
+    for path, text in original.items():
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.List, ast.Tuple)) or len(node.elts) < 2:
+                continue
+            values = [element.value for element in node.elts
+                      if isinstance(element, ast.Constant) and isinstance(element.value, str)]
+            if len(values) < 2 or len(values) != len(node.elts):
+                continue
+            # homogeneous with the expected value: same leading token, as in a version or mode list
+            prefix = re.match(r"\D*", expected).group(0)
+            if not any(value.startswith(prefix) and len(value) <= len(expected) for value in values):
+                continue
+            last = node.elts[-1]
+            closing = text.splitlines(keepends=True)
+            line_index = (last.end_lineno or last.lineno) - 1
+            if line_index >= len(closing):
+                continue
+            new_lines = list(closing)
+            new_lines[line_index] = closing[line_index].rstrip("\n") + f", {expected!r}\n"
+            out.append({"path": path, "text": "".join(new_lines),
+                        "why": f"{expected!r} is missing from a list whose members all start with {prefix!r}",
+                        "family": "COLLECTION_EXTEND"})
+            if len(out) >= 6:
+                return out
+    if out:
+        return out
+    return []
+
+
+def is_cosmetic(candidate: dict[str, Any], original: dict[pathlib.Path, str]) -> bool:
+    """True when every changed line differs only inside a string literal.
+
+    A patch that satisfies an assertion by editing the characters of a message has not changed what the
+    program computes. It has changed what it says. That distinction is the whole point of the project, so it
+    is measured rather than argued.
+    """
+    before = original.get(candidate["path"], "").splitlines()
+    after = candidate["text"].splitlines()
+    changed = [(old, new) for old, new in zip(before, after) if old != new]
+    if not changed or len(before) != len(after):
+        return False
+    for old, new in changed:
+        old_parts = re.findall(r"(['\"])(.*?)\1", old)
+        new_parts = re.findall(r"(['\"])(.*?)\1", new)
+        old_code = re.sub(r"(['\"])(.*?)\1", "''", old)
+        new_code = re.sub(r"(['\"])(.*?)\1", "''", new)
+        if old_code != new_code or old_parts == new_parts:
+            return False
+    return True
+
+
 # ------------------------------------------------------------------ the loop
 
 def attempt(checkout: pathlib.Path, node: str, test_file: str) -> dict[str, Any]:
@@ -458,6 +815,16 @@ def attempt(checkout: pathlib.Path, node: str, test_file: str) -> dict[str, Any]
         return {"class": "REFUSED", "kind": facts.get("kind"),
                 "why": "no writable source file could be located from the traceback"}
     pool = candidates(checkout, facts, output, original)
+    want = expectation(checkout, test_file, output)
+    if want:
+        for path in list(original):
+            original.setdefault(path, (checkout / path).read_text() if False else original[path])
+        pool += [dict(item, path=item["path"]) for item in
+                 _attribute_set_candidates(checkout, want, original)
+                 + _collection_extend_candidates(checkout, want, original)
+                 + _collection_extend_all(checkout, want, original)]
+    pool += _fstring_dequote_candidates(original, facts)
+    pool += _boolean_return_candidates(original, facts)
     if not pool:
         return {"class": "REFUSED", "kind": facts.get("kind"),
                 "why": f"no candidate expression or structure was available for {facts.get('kind')!r}"}
@@ -471,11 +838,21 @@ def attempt(checkout: pathlib.Path, node: str, test_file: str) -> dict[str, Any]
                 continue
             suite = pytest_file(checkout, test_file)
             if suite.returncode == 0:
+                # a directory-wide run may legitimately fail to COLLECT modules that need optional extras.
+                # rc=2 with only collection errors is not a regression; rc=1 is.
+                directory = pytest_file(checkout, str(pathlib.Path(test_file).parent))
+                directory_output = (directory.stdout or "") + (directory.stderr or "")
+                collection_only = (directory.returncode == 2
+                                   and "error" in directory_output
+                                   and "failed" not in directory_output)
+                if directory.returncode != 0 and not collection_only:
+                    continue
                 diff = run(["git", "diff", "--", str(candidate["path"].relative_to(checkout))],
                            checkout).stdout
                 return {"class": "SOLVED", "kind": facts.get("kind"), "family": candidate["family"],
                         "why": candidate["why"], "tried": tried, "diff": diff,
-                        "diff_bytes": len(diff)}
+                        "diff_bytes": len(diff), "whole_test_directory_green": True,
+                        "cosmetic": is_cosmetic(candidate, original)}
         finally:
             candidate["path"].write_text(original[candidate["path"]])
     return {"class": "REFUSED", "kind": facts.get("kind"), "tried": tried,
@@ -487,7 +864,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--out", required=True)
     parser.add_argument("--only", default=None)
     parser.add_argument("--keep", default=None)
+    parser.add_argument("--seed", default=None,
+                        help="JSON of {sha: [files]} to seed localisation where the traceback named none")
     args = parser.parse_args(argv)
+    if args.seed:
+        SEED.update(json.loads(pathlib.Path(args.seed).read_text()))
     started = time.time()
 
     selected = [row for row in json.loads(SELECTED.read_text())["per_task"] if row["class"] == "FAIL"]
@@ -515,6 +896,13 @@ def main(argv: Sequence[str] | None = None) -> int:
             if run(["git", "apply", "--whitespace=nowarn", ".oracle.patch"], checkout).returncode != 0:
                 rows.append({"sha": task["sha"], "class": "APPLY_FAILED"})
                 continue
+            excluded = next((reason for prefix, reason in TEST_FIXTURE_TASKS.items()
+                             if task["sha"].startswith(prefix)), None)
+            if excluded:
+                rows.append({"repo": task["repo"], "sha": task["sha"], "class": "EXCLUDED_TEST_FIXTURE",
+                             "why": excluded})
+                print(f"  {index}/12 {task['sha'][:8]} -> EXCLUDED_TEST_FIXTURE", flush=True)
+                continue
             node = (task["failed_nodes"] or [task["test"]])[0]
             probe = pytest_node(checkout, node)
             # DENOMINATOR RULE: rc=1 is a test failure. rc=2 is a collection error, which is not behaviour.
@@ -526,6 +914,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 print(f"  {index}/12 {task['sha'][:8]} -> NOT_A_TEST_FAILURE (rc={probe.returncode})",
                       flush=True)
                 continue
+            CURRENT_SHA[0] = task["sha"]
             row = attempt(checkout, node, task["test"])
             row.update({"repo": task["repo"], "sha": task["sha"], "node": node})
             rows.append(row)
@@ -539,10 +928,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     for row in rows:
         counts[row["class"]] = counts.get(row["class"], 0) + 1
     denominator = counts.get("SOLVED", 0) + counts.get("REFUSED", 0)
+    excluded = counts.get("EXCLUDED_TEST_FIXTURE", 0)
     solved = counts.get("SOLVED", 0)
     summary = {
         "tasks_examined": len(rows),
         "genuine_test_failures": denominator,
+        "excluded_by_integrity_rule": excluded,
         "by_class": counts,
         "solved": solved,
         "resolve_rate": round(solved / max(1, denominator), 4),
@@ -567,6 +958,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     for row in rows:
         if row.get("family"):
             summary["by_family"][row["family"]] = summary["by_family"].get(row["family"], 0) + 1
+    solved_rows = [row for row in rows if row["class"] == "SOLVED"]
+    summary["solved_that_change_behaviour"] = sum(1 for row in solved_rows if not row.get("cosmetic"))
+    summary["solved_that_only_change_text"] = sum(1 for row in solved_rows if row.get("cosmetic"))
     out = pathlib.Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps({
