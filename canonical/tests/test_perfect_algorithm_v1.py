@@ -595,3 +595,214 @@ def strict_spec_fn(tmp):
     def strict_spec(_source, point):
         return point < 100
     return strict_spec
+
+
+# --------------------------------------------------------------------------- #
+# Trajectory re-verification of non-root priors (new).
+#
+# PREDICTIONS, written before the confirmatory run:
+#   T1  On the SAME instance the trajectory policy keeps every recorded row.
+#   T2  On a DIFFERENT instance it keeps strictly more than root-only, and
+#       strictly less than everything -- it is not a rubber stamp.
+#   T3  A transition that the new instance does not have is discarded by BOTH
+#       policies (the fail-closed property is not weakened).
+#   T4  Transition-count conservation holds for every policy on every instance:
+#       discarded == total - kept.  A prior can never be silently inflated.
+#   T5  On an environment with no shared structure at all nothing is kept.
+#   T6  A stale subtree is dropped whole: the row AND everything under it.
+#   T7  The default ``run()`` behaviour is byte-identical to before (root only).
+# --------------------------------------------------------------------------- #
+
+class _Grid:
+    """4x4 grid world; ``blocked`` closes the (0,0)->(1,0) edge."""
+
+    def __init__(self, blocked: bool = False):
+        self.blocked = blocked
+        self.pos = (0, 0)
+
+    def reset(self):
+        self.pos = (0, 0)
+
+    def state(self):
+        return self.pos
+
+    def act(self, action):
+        x, y = self.pos
+        dx, dy = {"up": (0, -1), "down": (0, 1),
+                  "left": (-1, 0), "right": (1, 0)}[action]
+        nx, ny = x + dx, y + dy
+        if self.blocked and (nx, ny) == (1, 0):
+            return
+        if 0 <= nx < 4 and 0 <= ny < 4:
+            self.pos = (nx, ny)
+
+
+_ACTIONS = ["up", "down", "left", "right"]
+
+
+def _learned_grid():
+    out = pa.scan(_Grid(), _ACTIONS, budget=80, max_depth=4, seed=0)
+    return out["learned"]["model"], out["root"]
+
+
+def _kept(rows):
+    return sum(len(r) for r in rows.values())
+
+
+def test_t1_same_instance_keeps_every_recorded_row():
+    model, _root = _learned_grid()
+    kept, discarded = pa.verify_priors(_Grid(), model, trajectories=True)
+    assert _kept(kept) == _kept(model)
+    assert discarded == 0
+
+
+def test_t2_a_different_instance_keeps_more_than_root_only_but_less_than_all():
+    model, _root = _learned_grid()
+    root_only, _ = pa.verify_priors(_Grid(blocked=True), model)
+    traj, _ = pa.verify_priors(_Grid(blocked=True), model, trajectories=True)
+    assert _kept(traj) > _kept(root_only)
+    assert _kept(traj) < _kept(model)
+
+
+def test_t3_a_missing_transition_is_discarded_by_both_policies():
+    model, root = _learned_grid()
+    env = _Grid(blocked=True)
+    root_only, _ = pa.verify_priors(env, model)
+    traj, _ = pa.verify_priors(env, model, trajectories=True)
+    assert "right" not in root_only.get(root, {})
+    assert "right" not in traj.get(root, {})
+    # and the transition that IS still there is kept by the better policy
+    assert "up" in traj.get(root, {})
+
+
+def test_t4_transition_count_is_conserved_for_every_policy():
+    model, _root = _learned_grid()
+    total = _kept(model)
+    for env in (_Grid(), _Grid(blocked=True)):
+        for trajectories in (False, True):
+            kept, discarded = pa.verify_priors(env, model, trajectories=trajectories)
+            assert discarded == total - _kept(kept), (trajectories, discarded)
+
+
+def test_t5_an_unrelated_environment_keeps_nothing():
+    class Alien:
+        def reset(self):
+            self.pos = (9, 9)
+
+        def state(self):
+            return self.pos
+
+        def act(self, _action):
+            self.pos = (9, 9)
+
+    model, _root = _learned_grid()
+    kept, discarded = pa.verify_priors(Alien(), model, trajectories=True)
+    assert _kept(kept) == 0
+    assert discarded == _kept(model)
+
+
+def test_t6_a_stale_subtree_is_dropped_whole():
+    class Rewired:
+        """Root is intact but everything one step past it moved."""
+
+        def reset(self):
+            self.pos = (0, 0)
+
+        def state(self):
+            return self.pos
+
+        def act(self, action):
+            self.pos = (2, 2)
+
+    model, root = _learned_grid()
+    kept, discarded = pa.verify_priors(Rewired(), model, trajectories=True)
+    # nothing replays, so nothing is kept -- not even a hollow root row
+    assert kept == {}
+    assert discarded == _kept(model)
+    assert root not in kept
+
+
+def test_t7_default_run_still_uses_root_only():
+    """``run()`` must not change behaviour for existing callers."""
+    import inspect
+    src = inspect.getsource(pa.verify_priors)
+    assert "trajectories: bool = False" in src
+    run_src = inspect.getsource(pa.run)
+    assert "verify_trajectories: bool = False" in run_src
+
+
+# --------------------------------------------------------------------------- #
+# DeltaSim plan screening (new).
+#
+# PREDICTIONS, written before the confirmatory run:
+#   D1  A viable plan is reported viable, with one receipt row per step.
+#   D2  A plan whose first step breaks an invariant is REFUSED at step 0 and
+#       names the invariant -- without the environment being touched.
+#   D3  A plan that leaves the learned model is refused, not extrapolated.
+#   D4  Screening is opt-in: the default call has no ``plan_sim`` key.
+#   D5  The simulator never calls the environment (no reset/act side effects).
+# --------------------------------------------------------------------------- #
+
+class _SpyGrid(_Grid):
+    def __init__(self):
+        super().__init__()
+        self.calls = []
+
+    def reset(self):
+        self.calls.append("reset")
+        super().reset()
+
+    def act(self, action):
+        self.calls.append(("act", action))
+        super().act(action)
+
+
+def test_d1_a_viable_plan_is_reported_viable():
+    out = pa.scan(_Grid(), _ACTIONS, budget=40, max_depth=3, seed=0)
+    res = pa.plan(out["learned"], lambda o: o == (2, 0), out["observations"], screen=True)
+    assert res["plan"] == ["right", "right"]
+    assert res["plan_sim"]["viable"] is True
+    assert len(res["plan_sim"]["steps"]) == 2
+    assert all(s["raised"] is False and s["violated"] == [] for s in res["plan_sim"]["steps"])
+
+
+def test_d2_an_invariant_break_is_refused_at_the_offending_step():
+    out = pa.scan(_Grid(), _ACTIONS, budget=40, max_depth=3, seed=0)
+    res = pa.plan(out["learned"], lambda o: o == (2, 0), out["observations"], screen=True,
+                  invariants=[("never_x1", lambda f: f.get("0", 0.0) != 1.0)])
+    assert res["status"] == "REFUSED__PLAN_FAILS_DELTA_SIMULATION"
+    assert res["plan_sim"]["viable"] is False
+    assert res["plan_sim"]["at_step"] == 0
+    assert res["plan_sim"]["reason"] == ["never_x1"]
+
+
+def test_d3_a_plan_that_leaves_the_model_is_refused():
+    out = pa.scan(_Grid(), _ACTIONS, budget=40, max_depth=3, seed=0)
+    res = pa.screen_plan(out["learned"], ["right", "flying-carpet"])
+    assert res["viable"] is None
+    assert res["status"] == "REFUSED__PLAN_LEAVES_THE_MODEL"
+    assert res["at_step"] == 1
+
+
+def test_d4_screening_is_opt_in():
+    out = pa.scan(_Grid(), _ACTIONS, budget=40, max_depth=3, seed=0)
+    plain = pa.plan(out["learned"], lambda o: o == (2, 0), out["observations"])
+    assert "plan_sim" not in plain
+    assert plain["status"] == "PASS__PLAN_COMPUTED"
+
+
+def test_d5_the_simulator_never_touches_the_environment():
+    spy = _SpyGrid()
+    out = pa.scan(spy, _ACTIONS, budget=40, max_depth=3, seed=0)
+    spy.calls.clear()
+    pa.plan(out["learned"], lambda o: o == (2, 0), out["observations"], screen=True,
+            invariants=[("never_x1", lambda f: f.get("0", 0.0) != 1.0)])
+    assert spy.calls == [], "screening must be pure memory"
+
+
+def test_d6_a_goal_score_is_reported_without_being_trusted():
+    out = pa.scan(_Grid(), _ACTIONS, budget=40, max_depth=3, seed=0)
+    res = pa.plan(out["learned"], lambda o: o == (2, 0), out["observations"], screen=True,
+                  goal_score=lambda f: -f.get("0", 0.0))
+    assert res["plan_sim"]["goal_score"] == -2.0
+    assert res["status"] == "PASS__PLAN_COMPUTED"
