@@ -273,7 +273,8 @@ def declared_probe_args(root: str, capability_id: str, module_sha: str,
 
 
 def _probe_invoke(
-    fn: Any, root: str, capability_id: str, module_sha: str, instance_index: int = 0
+    fn: Any, root: str, capability_id: str, module_sha: str, instance_index: int = 0,
+    probe_args: Mapping[str, Any] | None = None
 ) -> tuple[Any, dict[str, Any]]:
     """Run the adapter, preferring the empty-arg probe and falling back to declared args.
 
@@ -281,6 +282,9 @@ def _probe_invoke(
     every receipt the lane already issued still issues identically, and only
     adapters that the empty call cannot exercise gain one.
     """
+    if isinstance(probe_args, Mapping):
+        supplied = dict(probe_args)
+        return fn(supplied, root), supplied
     try:
         return fn({}, root), {}
     except BaseException:  # noqa: BLE001 - the empty probe is a first attempt, not a verdict
@@ -377,8 +381,15 @@ def verification_path_for(receipt_path: str) -> str:
 
 def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
                         root: str, ran_by: str, kind: str = "contract",
-                        instance_index: int = 0) -> dict[str, Any] | None:
-    """Run one capability and return its receipt. Returns None if it did not run."""
+                        instance_index: int = 0,
+                        probe_args: Mapping[str, Any] | None = None) -> dict[str, Any] | None:
+    """Run one capability and return its receipt. Returns None if it did not run.
+
+    ``probe_args`` is for callers that already know the invocation: a harvested
+    surface has had no registry row to derive `${input.*}` values from, so its
+    caller supplies them.  Everything else keeps the empty-args-first probe
+    unchanged, which is why no existing receipt changes meaning.
+    """
     started = time.perf_counter()
     module_sha = sha256_file(os.path.join(root, module_path))
     if kind == "cli":
@@ -440,7 +451,8 @@ def execute_and_receipt(capability_id: str, module_path: str, entrypoint: str,
             if not callable(fn):
                 return None
             result, invoked = _probe_invoke(invoke_with_snapshot, root, capability_id,
-                                            module_sha, instance_index)
+                                            module_sha, instance_index,
+                                            probe_args=probe_args)
         finally:
             signal.alarm(0)
     except BaseException:  # noqa: BLE001 - a failed probe is data, not an error
