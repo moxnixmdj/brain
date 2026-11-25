@@ -1,0 +1,194 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "evaluations_total": 16,
+  "generalisation_beyond_the_registry": {
+    "closed": 1,
+    "of": 5,
+    "reading": "1 of 5 unseen walls closed. That is the honest transfer rate of this engine, and it is the number to quote. The registry's 11/11 is a set the author selected; the unseen rate is what a user would experience.",
+    "tested": [
+      "click@c4dd0cd",
+      "click@762c97e",
+      "click@271effb",
+      "werkzeug@e43d440c",
+      "werkzeug@3d27209c"
+    ]
+  },
+  "generated": "2026-11-24",
+  "honestly_open": 0,
+  "independent_verified": false,
+  "mechanisms": 13,
+  "open_walls": [],
+  "parameters_stored": 0,
+  "protocol": "single-parent commits from three external repositories; ONLY the fix commit's test files are copied onto a /dev/shm worktree of the parent; no source diff, patch, commit message, or issue text is read by the engine; a repair counts only when the copied tests pass AND the project's own suite fails no more than it did on the untouched parent",
+  "regressions_introduced_into_a_project_suite": 0,
+  "rows": [
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 3,
+      "commit": "05f6fd0",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "NONE_GUARD_TO_TRUTHINESS+OPTIONAL_TUPLE_SHAPE_COMPLETION",
+      "regressions": 0,
+      "repo": "click",
+      "status": "VERIFIED",
+      "wall": "an undocumented argument must still get a help row",
+      "wall_id": "click@05f6fd0"
+    },
+    {
+      "baseline_failures": 9,
+      "candidates_offered": 35,
+      "commit": "c53d373",
+      "evaluations": 3,
+      "final_failures": 0,
+      "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS",
+      "regressions": 0,
+      "repo": "click",
+      "status": "VERIFIED",
+      "wall": "empty envvar == absent envvar, and a sequence envvar names every member",
+      "wall_id": "click@c53d373"
+    },
+    {
+      "baseline_failures": 5,
+      "candidates_offered": 1,
+      "commit": "fc518e4",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "TERMINAL_ACTION_RETRY_POLICY",
+      "regressions": 0,
+      "repo": "click",
+      "status": "VERIFIED",
+      "wall": "a second interrupt while reporting must not replace the decided outcome",
+      "wall_id": "click@fc518e4"
+    },
+    {
+      "baseline_failures": 3,
+      "candidates_offered": 1,
+      "commit": "047adef",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "ORDER_PRESERVING_DEDUP_PARITY",
+      "regressions": 0,
+      "repo": "click",
+      "status": "VERIFIED",
+      "wall": "help option names must keep declaration order: `set()` is used where the returned list order is part of the contract",
+      "wall_id": "click@047adef"
+    },
+    {
+      "baseline_failures": 10,
+      "candidates_offered": 3,
+      "commit": "7996a89",
+      "evaluations": 2,
+      "final_failures": 0,
+      "mechanism": "CONFIG_PARITY_FROM_REPO_IDIOM+STATED_REQUIREMENT_KEYWORD_COMPLETION",
+      "regressions": 0,
+      "repo": "click",
+      "status": "VERIFIED",
+      "wall": "wrapping must not break hyphenated words: the repo states this policy in `utils.py` and omits it at the `TextWrapper` construction in `formatting.py`",
+      "wall_id": "click@7996a89"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 1,
+      "commit": "21b45dbd",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "DEMANDED_DEPRECATION_EMISSION",
+      "regressions": 0,
+      "repo": "werkzeug",
+      "status": "VERIFIED",
+      "wall": "a public method the test wraps in `pytest.deprecated_call()` must emit a DeprecationWarning, which it currently does not",
+      "wall_id": "werkzeug@21b45db"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 2,
+      "commit": "051fd663",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "EMPTY_CONTAINER_PREFIX_ARM",
+      "regressions": 0,
+      "repo": "werkzeug",
+      "status": "VERIFIED",
+      "wall": "an empty parameter payload must not leave a trailing separator",
+      "wall_id": "werkzeug@051fd66"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 2,
+      "commit": "0c419f95",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "PARSER_DEGENERATE_NONE_REFUSAL",
+      "regressions": 0,
+      "repo": "werkzeug",
+      "status": "VERIFIED",
+      "wall": "a suffix cardinality of zero selects nothing and must be refused",
+      "wall_id": "werkzeug@0c419f9"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 1,
+      "commit": "884437ae",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "DOCSTRING_DEFAULT_UNGATING",
+      "regressions": 0,
+      "repo": "werkzeug",
+      "status": "VERIFIED",
+      "wall": "a documented default that is only reachable behind a feature flag",
+      "wall_id": "werkzeug@884437a"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 7,
+      "commit": "8051a4d",
+      "evaluations": 1,
+      "final_failures": 0,
+      "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
+      "regressions": 0,
+      "repo": "pluggy",
+      "status": "VERIFIED",
+      "wall": "two co-required contracts inside one test: arity and state",
+      "wall_id": "pluggy@8051a4d"
+    },
+    {
+      "baseline_failures": 1,
+      "candidates_offered": 8,
+      "commit": "50585e0",
+      "evaluations": 3,
+      "final_failures": 0,
+      "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
+      "regressions": 1,
+      "repo": "pluggy",
+      "status": "VERIFIED",
+      "wall": "the recorded distribution must be dropped with the plugin",
+      "wall_id": "pluggy@50585e0"
+    }
+  ],
+  "runtime_model_calls": 0,
+  "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V3",
+  "supersedes": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V2 (10/10)",
+  "the_mechanism": {
+    "fired": [
+      "werkzeug@21b45dbd"
+    ],
+    "form_from": "the repository's own idiom: warnings.warn(..., DeprecationWarning, stacklevel=2)",
+    "name": "DEMANDED_DEPRECATION_EMISSION",
+    "refusal_reading": "Both refusals are correct. e43d440c needs a property plus an __init__ change, and 3d27209c needs IRI encoding on the location setter. Neither is a bare deprecation demand, so no candidate fires. A mechanism that fired on everything would be worth less than one that fires on its shape and stops.",
+    "refused_on": [
+      "werkzeug@e43d440c",
+      "werkzeug@3d27209c"
+    ],
+    "requirement_from": "the fix commit's test: `with pytest.deprecated_call(): response.freeze()`"
+  },
+  "verified": 11,
+  "verified_in_one_evaluation": 8,
+  "walls_declared": 11,
+  "what_changed_since_v2": {
+    "new_mechanism": "DEMANDED_DEPRECATION_EMISSION",
+    "new_wall": "werkzeug@21b45dbd",
+    "walls": "10 -> 11",
+    "why_it_matters": "This wall was NOT in the registry when the receipt said 10/10. It was found by scanning unseen werkzeug commits for evidence shapes, and it closed on the first evaluation. It is the first wall in this file that was chosen by a scan rather than by the author's judgement, which is the only sense in which the registry number has begun to mean something beyond itself."
+  }
+}

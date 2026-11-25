@@ -1,0 +1,4156 @@
+{
+ "schema": "BRAIN_CAPABILITY_AUDIT_V1",
+ "generated": "2026-11-25T13:52:14Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 0.6
+ },
+ "summary": {
+  "capabilities_named": 447,
+  "by_kind": {
+   "BOUND_CAPABILITY": 153,
+   "RECEIPT_BACKED_CAPABILITY": 294
+  },
+  "by_registry_status": {
+   "VERIFIED_BOUND_CAPABILITY": 153,
+   "RECEIPT_BACKED_PENDING_PROMOTION": 294
+  },
+  "adapter_module_imports": 434,
+  "entrypoint_callable": 434,
+  "evidence_file_exists": 387,
+  "module_AND_evidence_both_present": 374,
+  "module_import_failed": 13,
+  "evidence_missing": 60,
+  "share_fully_backed": 0.8367,
+  "verdicts": {
+   "the_447_figure_is_the_number_of_names_in_the_registry": true,
+   "the_447_figure_is_the_number_of_working_capabilities": false,
+   "a_majority_are_fully_backed": true,
+   "most_are_pending_rather_than_promoted": true,
+   "the_registry_is_substantially_real": true,
+   "the_registry_is_complete": false
+  },
+  "reading": "447 is the number of capability NAMES the registry carries, and 434 of them import with a callable entrypoint and 374 have BOTH a callable entrypoint and an evidence file on disk (83.7%). That is stronger than expected: this is a real registry, not a list of promises. It is still not 447 working capabilities -- 294 are RECEIPT_BACKED_PENDING_PROMOTION, 60 point at an evidence file that does not exist, and 13 adapter modules do not import. The operational problem is not the count but the reach: 415 of the 447 never win a real issue, because the median capability carries 7 index terms.",
+  "what_this_does_not_show": "that any capability produces a correct result on a hard task. This checks that the adapter imports, the entrypoint is callable, and the evidence artefact exists. It does not re-execute the evidence.",
+  "sample_of_unbacked": [
+   {
+    "id": "auto.apt.zint",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "auto.npm.dfinity-cbor",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "auto.npm.msgpack-msgpack",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "auto.npm.shelacek-ubjson",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "auto.pypi.bson-modern",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "auto.pypi.msgpack",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "code.multilanguage.parse.tree_sitter.v1",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": "canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
+    "evidence_exists": false
+   },
+   {
+    "id": "code.polyglot.transform_and_verify.v1",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "document.convert.markdown_pdf.pandoc_weasyprint",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   },
+   {
+    "id": "evidence.claim_relation.generic_units.stdlib",
+    "kind": "BOUND_CAPABILITY",
+    "registry_status": "VERIFIED_BOUND_CAPABILITY",
+    "module_imports": true,
+    "entrypoint_callable": true,
+    "evidence_path": null,
+    "evidence_exists": false
+   }
+  ],
+  "note_on_my_own_first_run": "the first version of this audit omitted canonical.runtime.bound_capabilities from its module search, where 261 of the 262 adapters live, and reported 119 importable capabilities. It was wrong by 315. Recorded rather than deleted, because it is the same defect class as V21/V23/V27/V28: the tool was convenient and the number was wrong."
+ },
+ "per_capability": [
+  {
+   "id": "archive.tar_gz.create_from_manifest",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "archive.verify.tar_gz.gnu",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MANIFEST-ARCHIVE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "auto.apt.zint",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "auto.npm.dfinity-cbor",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "auto.npm.msgpack-msgpack",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "auto.npm.shelacek-ubjson",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "auto.pypi.bson-modern",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "auto.pypi.msgpack",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "brain.module.function.invoke",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/aa_briefcase_component_summary_noninversion_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_aa_briefcase_component_summary_noninversion_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/accepted_pure_route_static_reachability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_accepted_pure_route_static_reachability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/authority_epoch_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_authority_epoch_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bounded_explicit_categorical_support_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bounded_explicit_categorical_support_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_brain_witness_contamination_admissibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_active_query_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_active_query_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_characteristic_active_query_task_generator_v10.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_characteristic_active_query_task_generator_v10.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_discrete_sequence_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_discrete_sequence_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_domain_free_active_query_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_domain_free_active_query_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_hblind_active_query_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_hblind_active_query_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_microkernel_v3_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_microkernel_v3_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_scalar_exact_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_scalar_exact_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_sequence_characteristic_set_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_sequence_characteristic_set_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_strong_accounting_and_persistence_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_v10_characteristic_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v10_characteristic_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_v11_generated_characteristic_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v11_generated_characteristic_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v12_generated_characteristic_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_v13_stateless_characteristic_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v13_stateless_characteristic_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_bytes_v14_zero_overhead_totality_task_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coding_static_verified_capability_route_theorem_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/composition_behavioral_bridge_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_composition_behavioral_bridge_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/composition_cross_step_no_bypass_audit_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_composition_cross_step_no_bypass_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/composition_cross_step_no_bypass_audit_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_composition_cross_step_no_bypass_audit_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/continuity_root3_fixed_entry_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_continuity_root3_fixed_entry_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/continuity_root3_selected_route_reachability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_continuity_root3_selected_route_reachability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coverage_cc_r1_professional_r12_semantic_reality_containment_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_26_zero_reality_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_26_zero_reality_frontier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_26_zero_reality_frontier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_26_zero_reality_frontier_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_26_zero_reality_frontier_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_27_zero_reality_frontier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_27_zero_reality_frontier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_30_obligation_pointer_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_30_obligation_pointer_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_accepted_five_d_reduction_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_accepted_five_d_reduction_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o11_objective_acceptance_law_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o11_proof_instantiation_search_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o11_proof_instantiation_search_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_objective_acceptance_law_gate_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o_proof_instantiation_search_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_proof_instantiation_search_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_reuse_transmutation_bridge_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_o_reuse_transmutation_bridge_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_escape_oq_frontier_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_escape_oq_frontier_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_one_shot_projection_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_one_shot_projection_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_projection_consistency_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_projection_consistency_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_state_obs_reducer.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_state_obs_reducer.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v11_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v11_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v13_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v13_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v3_k6_v4_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v3_k6_v4_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v6_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v6_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v7_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v7_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v8_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v8_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/current_terminal_authority_v9_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_current_terminal_authority_v9_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_constructive_scope_information_nogo_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/cursorbench_observable_trace_scope_lift_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_observable_trace_scope_lift_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/cursorbench_public_score_nonidentifiability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_public_score_nonidentifiability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_three_region_complement_nonidentifiability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/cursorbench_two_region_complement_nonidentifiability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_cursorbench_two_region_complement_nonidentifiability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/direct_e2e_selected_cell_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_direct_e2e_selected_cell_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/domain_behavior_universe_anchor_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_domain_behavior_universe_anchor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/dual_judgment_general_substrate_role_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_dual_judgment_general_substrate_role_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/dual_judgment_source_gate_activation_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_dual_judgment_source_gate_activation_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_active_gap_b_causal_reclassification_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_gap_a_policy_cover_adapter_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_gap_a_policy_cover_adapter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_progress_13_route_manifest_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_13_route_manifest_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_progress_shared_gap_audit_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_shared_gap_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_progress_shared_gap_audit_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_shared_gap_audit_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_progress_shared_gap_audit_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_progress_shared_gap_audit_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_escape_tb_science_current_route_reclassification_v2_verify.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/exact_symbolic_selected_leaf_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_exact_symbolic_selected_leaf_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/external_benchmark_dominance_compiler_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_external_benchmark_dominance_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/finance_direct_source_coverage_audit_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finance_direct_source_coverage_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/finance_semantic_zero_reality_fixed_point_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finance_semantic_zero_reality_fixed_point_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/finance_shared_semantic_residual_reconciliation_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finance_shared_semantic_residual_reconciliation_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_finite_probe_nonidentifiability_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_five_primitive_role_single_semantic_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_five_public_bar_observable_target_scope_closure_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/future_matched_scope_nontransport_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_future_matched_scope_nontransport_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/global_retrieval_authority_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_global_retrieval_authority_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/h100_chartreader_detector_budget_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_h100_chartreader_detector_budget_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/h100_unichart_storage_feasibility_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_h100_unichart_storage_feasibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/honesty_root3_shared_boundary_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_honesty_root3_shared_boundary_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/honesty_selected_cover_locality_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_honesty_selected_cover_locality_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/honesty_target_semantic_bridge_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_honesty_target_semantic_bridge_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/if_scope_finite_protocol_binding_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_if_scope_finite_protocol_binding_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/k6_current_authority_reconciliation_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_current_authority_reconciliation_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_decision_refinement_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_positive_adequacy_cover_theorem_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_positive_cover_semantic_residual_v4_verifier.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/k6_target_relative_decision_quotient_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_k6_target_relative_decision_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_active15_plus_one_noarg_pointwise_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_frozen_schema19_envelope_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_frozen_schema19_envelope_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_generator24_extra_parametric_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_generator24_extra_parametric_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_if_public_description_inverter_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_public_description_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_reference_free_compound_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_if_score_bound_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_score_bound_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_if_single_checker_solver_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_if_single_checker_solver_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_langdetect_balanced_decorator_invariance_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_composition_archetypes_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_composition_archetypes_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_composition_partition_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_composition_partition_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_contract_composer_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_contract_composer_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_contract_composer_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_contract_composer_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_general_composer_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_general_composer_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_joint_candidate_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_joint_candidate_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_joint_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_lexical_slot_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_numeric_quotient_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_numeric_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_pointwise_optimal_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_pointwise_optimal_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_pointwise_solver_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_pointwise_solver_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_punkt_context_quotient_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_slot_feasibility_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_slot_feasibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_special_composer_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_special_composer_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy15_universal_semantic_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy25_prompt_contract_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy25_prompt_inverter_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy25_prompt_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_composition_shape_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_composition_shape_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_ifeval_prompt_inverter_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_single_constraint_witness_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_legacy_visible_constraint_compiler_v4.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_legacy_visible_constraint_compiler_v4.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_ngram_reference_free_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_ngram_reference_free_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_pointwise_minimum_cut_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_pointwise_minimum_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_pointwise_optimality_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_pointwise_optimality_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_post_sacrifice_parametric_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_prompt_contract_synthesizer_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_prompt_contract_synthesizer_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_punkt_parameter_independence_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_punkt_parameter_independence_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_release_schema_scope_bridge_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_release_schema_scope_bridge_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_release_unconditional_schema_envelope_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_release_unconditional_schema_envelope_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_root1_reused_core_selector_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_root1_reused_core_selector_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_schema19_pointwise_candidate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_schema19_pointwise_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_archetypes_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_archetypes_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_channel_factorization_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_channel_factorization_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_extension_kernel_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_extension_kernel_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_language_exception_carrier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_language_exception_carrier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_language_exception_carrier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_language_exception_carrier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_mandatory_footprint_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_footprint_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_mandatory_footprint_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_footprint_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_mandatory_loss_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_mandatory_loss_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_semantic_kernel_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_semantic_kernel_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_semantic_unsat_kernel_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_semantic_unsat_kernel_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_livebench_union25_sound_lower_bound_hitting_set_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/observable_policy_cover_executor_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_observable_policy_cover_executor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/openai_math_astra_calibration_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_openai_math_astra_calibration_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/openai_math_frontier_corpus_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_openai_math_frontier_corpus_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/opus55_target_identity_truth_lock_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_opus55_target_identity_truth_lock_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p1_universal_scope_restoration_v9.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_universal_scope_restoration_v9.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p1_v5_terminal_scope_admissibility_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_v5_terminal_scope_admissibility_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p1_v7_direct_surface_scope_transport_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_v7_direct_surface_scope_transport_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p1_zero_reality_exhaustion_gate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p1_zero_reality_exhaustion_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_binary_decision_grounded_expression_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_decision_grounded_expression_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_binary_explicit_source_membership_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_explicit_source_membership_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_binary_explicit_top_law_region_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_explicit_top_law_region_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_binary_objective_decision_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_binary_objective_decision_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_bound_binary_real_context_membership_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bound_binary_real_context_membership_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_bound_relevance_cegar_loop_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bound_relevance_cegar_loop_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bounded_objective_role_presentation_compiler_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_bounded_objective_role_relevance_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_bounded_objective_role_relevance_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_exact_dependency_relevance_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_exact_dependency_relevance_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_explicit_weighted_salience_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_explicit_weighted_salience_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_mechanically_closed_common_policy_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_mechanically_closed_common_policy_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_nonbinding_capacity_common_policy_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_policy_influence_relevance_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_policy_influence_relevance_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v10.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v10.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v11.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v11.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v12.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v12.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v4.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v4.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v5.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v5.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v6.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v6.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v7.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v7.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v8.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v8.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_real_context_v3_admission_v9.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_real_context_v3_admission_v9.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_required_claim_grounded_realization_cell_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_required_claim_grounded_realization_cell_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_robust_policy_adequacy_cegar_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_robust_policy_adequacy_cegar_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/p3_source_positive_selection_cell_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_p3_source_positive_selection_cell_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/prewave_direct_proof_preflight.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_prewave_direct_proof_preflight.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_declared_system_subject_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_declared_system_subject_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_leaf_binder_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_leaf_binder_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_p1_router_v5.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v5.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_p1_router_v6.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v6.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_p1_router_v7.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v7.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_p1_router_v8.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v8.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_p1_router_v9.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_p1_router_v9.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r10_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r11_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r12_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r1_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r1_root_subject_binding_verify_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r1_root_subject_binding_verify_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r1_root_subject_binding_verify_v4.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r1_root_subject_binding_verify_v4.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r2_candidate_branch_basis_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r2_candidate_branch_basis_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r2_root_subject_binding_verify_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r3_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r3_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r4_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r4_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r5_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r5_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r6_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r6_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r7_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r8_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_r9_root_subject_binding_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_quality_semantic_shared_blocker_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_quality_semantic_shared_blocker_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_c3_lossless_composition_projection_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_c8_nonvacuity_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_c8_nonvacuity_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v2_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_cc_r3_truth_reconciliation_v2_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_cc_r3_truth_reconciliation_v3_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_material_defeater_totality_route_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_safe_meta_composition_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_safe_meta_composition_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_semantic_cc_r3_contract_decomposition_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_semantic_cc_r3_contract_decomposition_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_professional_r12_semantic_cc_r3_reuse_cut_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/python_request_acceptance_union_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_python_request_acceptance_union_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_r2_finance_normalized_source_universe_direct_adequacy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/reached_escape_live_no_bypass_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_reached_escape_live_no_bypass_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_recovery_opus55_zero_reality_acceptance_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/retrieval_live_event_ledger_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_retrieval_live_event_ledger_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root1_contrastive_semantic_gate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root1_contrastive_semantic_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root2_external_task_entrypoint_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root2_external_task_entrypoint_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_effect_membrane_e1_current_byte_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_effect_membrane_e1_current_byte_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_matched_superportfolio_minimum_reality_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_minimum_action_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_post_synthesis_reconciliation_verifier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_seven_class_one_substrate_policy_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_seven_class_one_substrate_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/root3_target_population_coalescence_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_root3_target_population_coalescence_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/runtime_cognition_credit_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_runtime_cognition_credit_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_extracted_xbrl_instance_source_native_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_inline_xbrl_fasb_release_metadata_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_concept_semantics_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_cross_filing_stability_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_issuer_extension_cross_filing_stability_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_cross_filing_stability_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_fact_semantics_bind_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/seed_preserving_instruction_postprocessor_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_seed_preserving_instruction_postprocessor_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/seed_preserving_instruction_postprocessor_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_seed_preserving_instruction_postprocessor_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/selected_bounded_support_truth_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_bounded_support_truth_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/selected_support_truth_certificate_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/selected_support_truth_certificate_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/selected_support_truth_certificate_v4.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v4.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/selected_support_truth_certificate_v5.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_selected_support_truth_certificate_v5.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/shared_channel_dominator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_shared_channel_dominator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/structured_method_universal_correctness_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_structured_method_universal_correctness_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_certified_visible_support_policy_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_certified_visible_support_policy_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_certified_visible_support_policy_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_certified_visible_support_policy_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_lossless_scope_decomposition_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_required_claim_coverage_ceiling_lift_verifier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/synthesis_zero_required_uncertainty_policy_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_synthesis_zero_required_uncertainty_policy_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/target_role_escape_frontier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_target_role_escape_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tb4_omc_cloud_candidate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tb4_omc_cloud_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tb_science_opus55_target_freshness_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tb_science_opus55_target_freshness_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_authority_epoch_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_authority_epoch_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_candidate_donor_independence_audit_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_candidate_donor_independence_audit_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_causal_depth_controller_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_causal_depth_controller_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_four_invariant_controller_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_four_invariant_controller_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v3_candidate.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v3_candidate.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v5.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v5.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v6.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v6.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_frontier_factorizer_v6_candidate.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_frontier_factorizer_v6_candidate.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_minimum_causal_depth_guard_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_minimum_causal_depth_guard_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_projection_consistency_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_projection_consistency_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_scope_quarantine_propagation_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_scope_quarantine_propagation_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/terminal_selection_kernel_guard.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_terminal_selection_kernel_guard.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_acceptance_promotion_integrator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_acceptance_reduction_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_acceptance_reduction_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_dynamic_refinement_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_dynamic_refinement_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_frozen_scope_completeness_discharge_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_observability_partition_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_observability_partition_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_retrieval_authority_gate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_retrieval_authority_gate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_universal_scope_certificate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/tool_discovery_universal_scope_formalism_cut_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_tool_discovery_universal_scope_formalism_cut_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/unified_trace_policy_generator_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_unified_trace_policy_generator_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_unknown_domain_two_behavior_shared_semantic_frontier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v12_target_law_uncertainty_residual_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v13_db_existing_evidence_saturation_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v13_db_existing_evidence_saturation_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v13_finance_uncovered_scope_routing_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v13_native_artifact_mechanical_selected_cell_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v2.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_db_existing_evidence_saturation_verifier_v2.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v14_db_existing_evidence_saturation_verifier_v3.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_db_existing_evidence_saturation_verifier_v3.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_p2_professional_top_law_selected_cell_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v14_synthesis_unsupported_claim_cell_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v15_finance_two_leaf_piecewise_route_cut_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v15_live_residual_scheduler_authority_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v15_live_residual_scheduler_authority_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/v9_route_bundle_triage_verifier_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_v9_route_bundle_triage_verifier_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/verify_cad_zero_reality_blocker_reconciliation_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_verify_cad_zero_reality_blocker_reconciliation_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/verify_terminal_scheduling_v11_candidate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_verify_terminal_scheduling_v11_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/runtime/verify_terminal_scheduling_v12_candidate_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_runtime_verify_terminal_scheduling_v12_candidate_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/verification/p3_nonbinding_v9_compositional_replay_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_p3_nonbinding_v9_compositional_replay_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_run_long_horizon_continuity_v1.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "canonical/verification/verify_image_ocr_tesseract_reuse.py.auto.v1",
+   "kind": "RECEIPT_BACKED_CAPABILITY",
+   "registry_status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical_verification_verify_image_ocr_tesseract_reuse.py.auto.v1__EXECUTION_RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.axis_title_unit_binding.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_AXIS_TITLE_UNIT_BINDING_V1_INDEPENDENT_VERIFY_20261012.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.curve_value_query.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_CURVE_VALUE_QUERY_V1_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.curve_x_at_y_query.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_CURVE_X_AT_Y_QUERY_V1_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.direct_curve_label_family_rank.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_DIRECT_CURVE_LABEL_FAMILY_RANK_V1_SPRITE_INDEPENDENT_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.legend_style_binding.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_LEGEND_STYLE_BINDING_V1_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.raster.scene_graph.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHART_RASTER_SCENE_GRAPH_V1_INDEPENDENT_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.read.binary_phase_solvus.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "chart.read.legend_linear_intersection.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/CHARTOGRAPHY_BRAIN_NATIVE_CURRENT_V3_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "code.impact.tree_sitter.testselect.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_IMPACT_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "code.index.tree_sitter.incremental.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_INCREMENTAL_INDEX_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "code.multilanguage.parse.tree_sitter.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "code.patch.tree_sitter.verify.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_CODE_TREE_SITTER_PATCH_VERIFY_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "code.polyglot.transform_and_verify.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "decision.synthesis.typed.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "decision.synthesis.verify.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_EVIDENCE_DECISION_REMOTE_VERIFICATION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "document.convert.markdown_pdf.pandoc_weasyprint",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "docx.document.create.python_docx",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "docx.document.create_from_json_record",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-JSON-ROUNDTRIP-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "docx.document.verify.intent_ooxml",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-INTENT-CHAIN-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "docx.document.verify.ooxml",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DOCX-LIBRARY-BINDING-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "evidence.claim_relation.generic_units.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "evidence.claim_spec.bind.explicit_comparison.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "evidence.oracle.concrete_execution.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_EVIDENCE_ORACLE_CONCRETE_EXECUTION_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "evidence.oracle.hypothesis_property.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_EVIDENCE_ORACLE_HYPOTHESIS_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "execution.pipeline.8stage.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_EXECUTION_PIPELINE_8STAGE_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "file.copy.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-COPY-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "file.line.appended.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-APPEND-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "file.question.taught_words.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-QUESTION-TAUGHT-WORDS-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "file.rename.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-FILE-RENAME-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "finance.saccr.credit.addon.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "git.history.bisect_regression.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "git.repository.operate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-GIT-REPOSITORY-OPERATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "http.json.fetch_from_state",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-HTTP-JSON-FROM-STATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "image.code.decode.zbarimg",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ZBAR-MULTIFORMAT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "image.extract.ocr.tesseract",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/governance/TESSERACT_OCR_DEPENDENCY_ACCOUNTING_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "image.qr.generate.qrencode",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-QR-GENERIC-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "json.file.write",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "json.query.jq",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "knowledge.consistency.assess",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-CONFLICT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "knowledge.json.fetch.external",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-SUPPORT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "knowledge.status.assert",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-STALE-PLAIN-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "knowledge.support.materialize",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-JIT-KNOWLEDGE-ACTION-GATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "math.numeric_expression.sympy",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "orchestration.verify.bridge_enumeration.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_ORCHESTRATION_BRIDGE_ENUMERATION_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "pdf.extract.ocr.tesseract",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-OCR-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "pdf.extract.text.pypdf",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-RUNTIME-BOUND-PDF-TEXT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "plain_goal.bound_capability.grounding.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "plain_goal.bound_capability.grounding.verify.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_PLAIN_GOAL_BOUND_GROUNDING_ACQUISITION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "professional.artifact.visual_observer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": false,
+   "entrypoint_callable": false,
+   "evidence_path": "canonical/verification/PROFESSIONAL_ARTIFACT_VISUAL_OBSERVER_V1_VERIFY_20261011.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "pypi.provenance.audit_live_artifact",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYPI-PROVENANCE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.contract.check.crosshair.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.contract.issue_orchestration.fusion.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_CONTRACT_ISSUE_ORCHESTRATION_FUSION_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.evidence.contract.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_EVIDENCE_CONTRACT_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.fault.localize.dynamic.dataflow.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_DYNAMIC_FAULT_LOCALIZER_V1_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.fault.patch.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_FAULT_PATCH_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.fault.provenance.fusion.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_FAULT_PROVENANCE_FUSION_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.fault.provenance.interprocedural.value.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.feature.implement_function_spec.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.issue.natural_language.parse_edit_intent.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-NLISSUE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.orchestration.symbol.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_ORCHESTRATION_SYMBOL_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.patch.review.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PATCH_REVIEW_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.patch.search.test_guided.ast.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.pipeline.allowlist_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PIPELINE_ALLOWLIST_GATE_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.pr.land.composer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PR_LAND_COMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.provenance.coupling.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_PROVENANCE_COUPLING_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.refactor.add_parameter.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.refactor.extract_function.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-EXTRACT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.refactor.inline_helper.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.refactor.move_function.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.refactor.move_symbol.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.refactor.rename_parameter.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REFACTOR-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.refactor.rename_symbol.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-RENAMESYM-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.refactor.test_scaffold.fusion.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_REFACTOR_TEST_SCAFFOLD_FUSION_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.repo.diff_apply_full_testgate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-APPLYGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.repo.pr_realize.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-REALIZE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.repository.acceptance.measure.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.review.diff_coverage_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-COVGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.review.diff_mutation_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-MUTGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.review.diff_perf_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PERFGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.review.diff_security_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.review.diff_static_triage.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DIFFTRIAGE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.review.diff_type_gate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TYPEGATE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.issue_to_pr.orchestrate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-ISSUE2PR-002__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.repair.apply.verified.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.software.repair.guided.provenance.coupled.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.software.repair.loop.coupled.ast.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_COUPLED_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.repair.loop.strict_progress.ast.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_STRICT_PROGRESS_REPAIR_LOOP_V1_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.repair.loop.test_guided.ast.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_SOFTWARE_REPAIR_LOOP_V1_FOCUSED_REPLAY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.repair.measured_acceptance.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.software.repair.route.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.software.repair.semantic_acceptance.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.software.request.semantic_behavior.compile.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/PYTHON_SOFTWARE_REQUEST_SEMANTIC_ACCEPTANCE_V9_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.add_function.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.source.add_parameter.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.source.audit.ast",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SOURCE-AUDIT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.change_impact.testselect.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CHANGE-IMPACT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.complexity.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.source.crossfile_edit.choreograph.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-CROSSFILE-EDIT-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.dead_code.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.source.definition_count.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.source.secret_scan.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SECRET-SCAN-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.symbols.index.ast",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-SYMBOL-INDEX-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.symbols.resolve.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-SYMBOL-RESOLVE-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.taint_flow.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TAINT-FLOW-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.source.test_adequacy.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.swe.transform_and_synthesize.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.symbol.resolve.standalone.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_SYMBOL_RESOLVE_STANDALONE_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.task.acceptance.measured.objective.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.test.pipeline.verifier.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_PYTHON_TEST_PIPELINE_VERIFIER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.tests.advance.mutation_kill.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.tests.audit.unittest",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-PYTHON-TEST-AUDIT-005__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.tests.generate.scaffold.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-TESTGEN-001__RECEIPT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "python.tests.mutation_score.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.tests.synthesize.pynguin.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "python.vcs.merge_conflict.resolve.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "shell.command.run",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "software.analysis.diagnose_and_architect.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "software.evidence.synthesis.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_EVIDENCE_SYNTHESIS_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "software.hardcore.closing.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.hardcore.final.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_FINAL_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "software.hardcore.kernel.orchestrate.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_KERNEL_ORCHESTRATE_V1_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.hardcore.swe.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_SWE_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "software.patch.synthesize.cegis.z3.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_PATCH_CEGIS_Z3_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "software.repair.choreograph.crossfile.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_CHOREOGRAPH_V1_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.repair.loop.cegis_hypothesis.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REPAIR_LOOP_CEGIS_HYPOTHESIS_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.review.gate.composer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_GATE_COMPOSER_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.review.synthesis.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_REVIEW_SYNTHESIS_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "software.synthesis.grid_induction.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_SYNTHESIS_GRID_INDUCTION_V1_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "software.test.contract.supercomposer.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_SOFTWARE_TEST_CONTRACT_SUPERCOMPOSER_V1_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "source.authority.identity.ror",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_ROR_SOURCE_AUTHORITY_IDENTITY_PROMOTION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "source.candidates.enumerate.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "source.evidence.extract.objective_grounded.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/capabilities/obsolescence/MODEL_INDEPENDENT_GENERIC_EVIDENCE_EXTRACTION_MODERN_CONTAINER_REQUALIFICATION_20260930_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "source.objective_relevance.rank.bm25",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "sqlite.table.create_from_json_records",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "sqlite.table.verify_against_json_records",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "structured.decision_evidence.locate.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-DECISION-EVIDENCE-LOCATE-001__RESULT.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "task.acceptance.objective.lossless.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/RAW_TASK_OBJECTIVE_ACCEPTANCE_EXECUTOR_V1_INDEPENDENT_VERIFY_20261011_V1.json",
+   "evidence_exists": true
+  },
+  {
+   "id": "terminal.kstar.root.assess.stdlib",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "test.slice.never_miss.v1",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/verification/HARDCORE_VERIFY_TEST_SLICE_NEVER_MISS_V1.json",
+   "evidence_exists": false
+  },
+  {
+   "id": "text.file.write",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "web.browser.rendered.capture.chromedriver",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "web.release.verify.independent_http",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "xlsx.table.create_from_json_records",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "xlsx.table.verify_against_json_records",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": null,
+   "evidence_exists": false
+  },
+  {
+   "id": "yaml.to_json.yq",
+   "kind": "BOUND_CAPABILITY",
+   "registry_status": "VERIFIED_BOUND_CAPABILITY",
+   "module_imports": true,
+   "entrypoint_callable": true,
+   "evidence_path": "canonical/astra_runtime/evidence/ASTRA-VERIFY-YAML-JSON-YQ-001__RECEIPT.json",
+   "evidence_exists": true
+  }
+ ]
+}

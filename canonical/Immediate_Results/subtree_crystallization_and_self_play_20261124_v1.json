@@ -1,0 +1,94 @@
+{
+  "bidirectional_fst_control_byte_repo": {
+    "crystallized_law_id": null,
+    "elapsed_ms": 1698.58,
+    "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+    "simulations": 4,
+    "solved": true,
+    "unified_diff": "--- a/stream_echo.py\n+++ b/stream_echo.py\n@@ -1,3 +1,3 @@\n def render_terminal_echo(raw_chunk: bytes) -> str:\n     text = raw_chunk.decode(\"latin1\")\n-    return text\n+    return ''.join('^^' if c == '^' else ('^?' if ord(c) == 127 else ('^' + chr(ord(c) + 64) if (0 <= ord(c) < 32 and c not in '\\n\\r\\t') else c)) for c in ((text)))\n"
+  },
+  "checkpointed_360_step_articulation_horizon": {
+    "articulation_cuts": 12,
+    "completed": true,
+    "episode_count": 12,
+    "rollbacks_performed": 1,
+    "steps_replayed_on_rollback": 30,
+    "total_steps": 360,
+    "verdict": "HORIZON_COMPLETED_WITH_CUT_CONTRACTS"
+  },
+  "cow_64_boundary_fuzzer": {
+    "bad_patch_crashes_caught": 7,
+    "bad_patch_refuted": true,
+    "cases_per_run": 64,
+    "good_patch_passed": true,
+    "two_runs_total_ms": 10.441
+  },
+  "memorized_world_weights": 0,
+  "model_calls": 0,
+  "schema": "BRAIN_SUBTREE_CRYSTALLIZATION_AND_SELF_PLAY_RECEIPT_20261124_V1",
+  "self_play_and_upstream_crystallization": {
+    "harvested_law_count": 2,
+    "harvested_negative_invariant_count": 0,
+    "held_out_cold": [
+      {
+        "elapsed_ms": 1963.06,
+        "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+        "repo": "held_out_arg_formatter",
+        "simulations": 5,
+        "solved": true
+      },
+      {
+        "elapsed_ms": 1790.91,
+        "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+        "repo": "held_out_quota_engine",
+        "simulations": 4,
+        "solved": true
+      }
+    ],
+    "held_out_warm": [
+      {
+        "elapsed_ms": 1322.64,
+        "mechanism": "SEMANTIC_LAW_RECALL:uir_law_6efc5c047e37",
+        "recalled_from_store": true,
+        "repo": "held_out_arg_formatter",
+        "simulations": 3,
+        "solved": true
+      },
+      {
+        "elapsed_ms": 1385.38,
+        "mechanism": "SEMANTIC_LAW_RECALL:uir_law_b0ccab63e452",
+        "recalled_from_store": true,
+        "repo": "held_out_quota_engine",
+        "simulations": 3,
+        "solved": true
+      }
+    ],
+    "model_calls": 0,
+    "simulation_reduction_pct": 33.33,
+    "total_cold_simulations": 9,
+    "total_warm_simulations": 6,
+    "training_harvest": [
+      {
+        "crystallized_law_id": "uir_law_6efc5c047e37",
+        "epistemic_verdict": "EQUIVALENT_UNDER_PRECONDITION",
+        "repo": "click_05f6fd0df4",
+        "simulations": 54,
+        "solved": true
+      },
+      {
+        "crystallized_law_id": null,
+        "epistemic_verdict": "EQUIVALENT_UNDER_PRECONDITION",
+        "repo": "werkzeug_051fd66352",
+        "simulations": 18,
+        "solved": true
+      },
+      {
+        "crystallized_law_id": "uir_law_b0ccab63e452",
+        "epistemic_verdict": "EQUIVALENT_UNDER_PRECONDITION",
+        "repo": "train_discount_seed",
+        "simulations": 4,
+        "solved": true
+      }
+    ]
+  }
+}

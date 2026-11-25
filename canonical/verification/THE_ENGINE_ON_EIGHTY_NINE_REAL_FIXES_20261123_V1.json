@@ -170,9 +170,12 @@
    "repo": "packaging",
    "commit": "b1c439b0f1fb1a8c541a5f0770946983c5d38b8c",
    "test": "tests/test_metadata.py",
-   "stage": "NO_VALUE_MATCHES",
+   "stage": "SPEC_DEMAND_FOUND_NOTHING",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
    "site_line": 856,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "cls",
    "human_expression": "Metadata",
    "count_contrasts": false,
@@ -182,39 +185,46 @@
    "human_admissible": false,
    "contrast": {
     "rows": 12,
-    "admissible": 24,
-    "masks": {
-     "0": 24
-    },
+    "admissible": 0,
+    "masks": {},
     "human_mask": 12,
     "human_mask_bits": "0b111111111111"
    },
    "frames": 142,
    "table_rows": 0,
-   "space_offered_before_survivors": 2839,
-   "survivors": 24,
-   "survivor_sources": [
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure",
-    "closure"
-   ],
+   "space_offered_before_survivors": 88766,
+   "survivors": 0,
+   "survivor_sources": [],
    "human_expression_rank": null,
-   "verifications": 10,
+   "verifications": 0,
    "found": null,
    "greens": [],
    "green_count": 0,
    "found_is_the_human_fix": false,
    "parameters_stored": 0,
-   "seconds": 13.58
+   "seconds": 4.82,
+   "shift_attempts": [
+    {
+     "line": 858,
+     "expression": "InvalidMetadata(key, f'unrecognized field: {key!r}')",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 859,
+     "expression": "collector.error(exc)",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 852,
+     "expression": "metadata_version",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    },
+    {
+     "line": 850,
+     "expression": "fields_to_check",
+     "stage": "SPEC_DEMAND_FOUND_NOTHING"
+    }
+   ]
   },
   {
    "repo": "packaging",
@@ -250,13 +260,59 @@
    "repo": "packaging",
    "commit": "0625596e502163179b9a82796aee82c178efc16d",
    "test": "tests/test_utils.py",
-   "stage": "NO_ASSERTION_DEMAND",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
    "site_line": 76,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "'(\\\\d+)(.*)'",
+   "human_expression": "'(\\\\d+)(.*)\\\\Z'",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 1,
+    "masks": {
+     "0": 1
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
    "frames": 1,
-   "pytest_code": 1,
-   "seconds": 1.17
+   "table_rows": 0,
+   "space_offered_before_survivors": 84403,
+   "survivors": 1,
+   "survivor_sources": [
+    "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "'(\\\\d+)(.*)\\\\Z'",
+    "ring": 0,
+    "source": "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 79
+   },
+   "greens": [
+    {
+     "expression": "'(\\\\d+)(.*)\\\\Z'",
+     "rank": -1,
+     "source": "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+     "tests_green": 79
+    }
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 5.25
   },
   {
    "repo": "packaging",
@@ -516,13 +572,59 @@
    "repo": "packaging",
    "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
    "test": "tests/test_utils.py",
-   "stage": "NO_ASSERTION_DEMAND",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
    "site_line": 69,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "'^[\\\\w._]+$'",
+   "human_expression": "'^[\\\\w._]+\\\\Z'",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 1,
+    "masks": {
+     "0": 1
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
    "frames": 1,
-   "pytest_code": 1,
-   "seconds": 1.34
+   "table_rows": 0,
+   "space_offered_before_survivors": 84397,
+   "survivors": 1,
+   "survivor_sources": [
+    "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "'^[\\\\w._]+\\\\Z'",
+    "ring": 0,
+    "source": "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 75
+   },
+   "greens": [
+    {
+     "expression": "'^[\\\\w._]+\\\\Z'",
+     "rank": -1,
+     "source": "demand:tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+     "tests_green": 75
+    }
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 5.48
   },
   {
    "repo": "packaging",
@@ -1274,121 +1376,138 @@
    "repo": "packaging",
    "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
    "test": "tests/test_utils.py",
-   "stage": "NO_VALUE_MATCHES",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
    "site_line": 61,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "'[a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9]'",
    "human_expression": "'[a-z0-9]+(?:-[a-z0-9]+)*'",
    "count_contrasts": false,
    "identify_curve": null,
    "audit": null,
    "table": [],
-   "human_admissible": null,
-   "contrast": null,
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 1,
+    "masks": {
+     "0": 1
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
    "frames": 1,
    "table_rows": 0,
-   "space_offered_before_survivors": 0,
-   "survivors": 0,
-   "survivor_sources": [],
-   "human_expression_rank": null,
-   "verifications": 0,
-   "found": null,
-   "greens": [],
-   "green_count": 0,
-   "found_is_the_human_fix": false,
+   "space_offered_before_survivors": 84384,
+   "survivors": 1,
+   "survivor_sources": [
+    "demand:tests/test_utils.py::test_is_normalized_name[a--b-a-b]"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "'[a-z0-9]+(?:-[a-z0-9]+)*'",
+    "ring": 0,
+    "source": "demand:tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 70
+   },
+   "greens": [
+    {
+     "expression": "'[a-z0-9]+(?:-[a-z0-9]+)*'",
+     "rank": -1,
+     "source": "demand:tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+     "tests_green": 70
+    }
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
    "parameters_stored": 0,
-   "seconds": 1.7
+   "seconds": 5.29
   },
   {
    "repo": "packaging",
    "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
    "test": "tests/test_direct_url.py",
-   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "BOUND_ASSERTION",
    "failing_test": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
    "site_line": 86,
-   "site_expression": "netloc.split",
-   "table": [],
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
+   "site_expression": "netloc.split('@', 1)",
+   "human_expression": "netloc.rsplit('@', 1)",
+   "count_contrasts": false,
+   "identify_curve": null,
    "audit": null,
-   "prose_refused": 0,
-   "refusals": [
+   "table": [
     {
      "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
-     "side": "right",
-     "demanded": "'https://g.c/user/repo.git'",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "relation": "SUBSTRING_SLOT",
+     "demand": "'g.c'"
     },
     {
      "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
-     "side": "left",
-     "demanded": "'https://ss@g.c/user/repo.git'",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
-     "side": "right",
-     "demanded": "(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.git\\n  + https:...",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
-     "side": "left",
-     "demanded": "AssertionError(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.g...",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "relation": "SUBSTRING_SLOT",
+     "demand": "'g.c'"
     },
     {
      "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
-     "side": "right",
-     "demanded": "'https://g.c/user/repo.git'",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "relation": "SUBSTRING_SLOT",
+     "demand": "'g.c'"
     },
     {
      "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
-     "side": "left",
-     "demanded": "'https://ss@g.c/user/repo.git'",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
-     "side": "right",
-     "demanded": "(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.git\\n  + https:...",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password",
-     "side": "left",
-     "demanded": "AssertionError(\"assert 'https://ss@g.c/user/repo.git' == 'https://g.c/user/repo.git'\\n  \\n  - https://g.c/user/repo.g...",
-     "produced": [
-      "<built-in method split of str object at 0x7fca320bab70>"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "relation": "SUBSTRING_SLOT",
+     "demand": "'g.c'"
     }
    ],
-   "greens": [],
-   "green_count": 0,
-   "survivors": 0,
+   "human_admissible": true,
+   "contrast": {
+    "rows": 11,
+    "admissible": 1,
+    "masks": {
+     "2047": 1
+    },
+    "human_mask": 11,
+    "human_mask_bits": "0b11111111111"
+   },
+   "frames": 13,
+   "table_rows": 4,
+   "space_offered_before_survivors": 85600,
+   "survivors": 1,
+   "survivor_sources": [
+    "closure"
+   ],
+   "human_expression_rank": 82968,
+   "verifications": 1,
+   "found": {
+    "rank": 82968,
+    "expression": "netloc.rsplit('@', 1)",
+    "ring": 5,
+    "source": "closure",
+    "preserves": 11,
+    "in_test_preserves": 0,
+    "mask": "0b11111111111",
+    "tests_green": 37
+   },
+   "greens": [
+    {
+     "expression": "netloc.rsplit('@', 1)",
+     "rank": 82968,
+     "source": "closure",
+     "tests_green": 37
+    }
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
    "parameters_stored": 0,
-   "seconds": 1.77
+   "seconds": 5.25
   },
   {
    "repo": "packaging",
@@ -1433,38 +1552,70 @@
    "repo": "packaging",
    "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
    "test": "tests/test_metadata.py",
-   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
    "site_line": 635,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "list(charset)",
-   "table": [],
+   "human_expression": "charset",
+   "count_contrasts": false,
+   "identify_curve": null,
    "audit": null,
-   "prose_refused": 0,
-   "refusals": [
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
-     "side": "right",
-     "demanded": "('Regex pattern did not match.\\n  Expected regex: \\'iso-8859-1\\'\\n  Actual message: \"\\'description-content-type\\' can...",
-     "produced": [
-      "['i', 's', 'o', '-', '8', '8', '5', '9', '-', '1']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+   "table": [],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 2,
+    "admissible": 206,
+    "masks": {
+     "3": 206
     },
+    "human_mask": 2,
+    "human_mask_bits": "0b11"
+   },
+   "frames": 3,
+   "table_rows": 0,
+   "space_offered_before_survivors": 88146,
+   "survivors": 24,
+   "survivor_sources": [
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure",
+    "closure"
+   ],
+   "human_expression_rank": 1,
+   "verifications": 1,
+   "found": {
+    "rank": 1,
+    "expression": "charset",
+    "ring": 0,
+    "source": "closure",
+    "preserves": 2,
+    "in_test_preserves": 0,
+    "mask": "0b11",
+    "tests_green": 295
+   },
+   "greens": [
     {
-     "node": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
-     "side": "left",
-     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \\'iso-8859-1\\'\\n  Actual message: \"\\'description-cont...",
-     "produced": [
-      "['i', 's', 'o', '-', '8', '8', '5', '9', '-', '1']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "expression": "charset",
+     "rank": 1,
+     "source": "closure",
+     "tests_green": 295
     }
    ],
-   "greens": [],
-   "green_count": 0,
-   "survivors": 0,
+   "green_count": 1,
+   "found_is_the_human_fix": true,
    "parameters_stored": 0,
-   "seconds": 2.93
+   "seconds": 6.11
   },
   {
    "repo": "packaging",
@@ -1721,13 +1872,59 @@
    "repo": "packaging",
    "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
    "test": "tests/test_utils.py",
-   "stage": "NO_ASSERTION_DEMAND",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
    "site_line": 38,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "'^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$'",
+   "human_expression": "'^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\\\Z'",
+   "count_contrasts": false,
+   "identify_curve": null,
+   "audit": null,
+   "table": [],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 1,
+    "masks": {
+     "0": 1
+    },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
    "frames": 1,
-   "pytest_code": 1,
-   "seconds": 1.22
+   "table_rows": 0,
+   "space_offered_before_survivors": 84448,
+   "survivors": 1,
+   "survivor_sources": [
+    "demand:tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+   ],
+   "human_expression_rank": -1,
+   "verifications": 1,
+   "found": {
+    "rank": -1,
+    "expression": "'^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\\\Z'",
+    "ring": 0,
+    "source": "demand:tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 60
+   },
+   "greens": [
+    {
+     "expression": "'^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\\\Z'",
+     "rank": -1,
+     "source": "demand:tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+     "tests_green": 60
+    }
+   ],
+   "green_count": 1,
+   "found_is_the_human_fix": true,
+   "parameters_stored": 0,
+   "seconds": 5.43
   },
   {
    "repo": "packaging",
@@ -1739,74 +1936,70 @@
    "repo": "packaging",
    "commit": "a716c52b5f3ca9b4a512f538b80ced8ee01b2775",
    "test": "tests/test_metadata.py",
-   "stage": "NO_RELATION_BETWEEN_THE_DEMAND_AND_THE_SITE",
+   "stage": "DEMAND_MET",
+   "demand_provenance": "SPEC_LITERALS",
    "failing_test": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
    "site_line": 592,
+   "site_finder": "diff_hunk",
+   "shifted_from_line": null,
    "site_expression": "value",
-   "table": [],
+   "human_expression": "dynamic_field",
+   "count_contrasts": false,
+   "identify_curve": null,
    "audit": null,
-   "prose_refused": 0,
-   "refusals": [
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
-     "side": "right",
-     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'name\\' is not allowed\"\\n  Actual message: \"[\\'name\\'] is not all...",
-     "produced": [
-      "['name']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+   "table": [],
+   "human_admissible": true,
+   "contrast": {
+    "rows": 0,
+    "admissible": 60,
+    "masks": {
+     "0": 60
     },
+    "human_mask": 0,
+    "human_mask_bits": "0b0"
+   },
+   "frames": 3,
+   "table_rows": 0,
+   "space_offered_before_survivors": 87002,
+   "survivors": 24,
+   "survivor_sources": [
+    "closure",
+    "closure",
+    "closure",
+    "induced:tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+    "guard",
+    "guard",
+    "guard",
+    "guard",
+    "guard",
+    "guard",
+    "guard",
+    "guard"
+   ],
+   "human_expression_rank": 118,
+   "verifications": 1,
+   "found": {
+    "rank": 118,
+    "expression": "dynamic_field",
+    "ring": 1,
+    "source": "closure",
+    "preserves": 0,
+    "in_test_preserves": 0,
+    "mask": "0b0",
+    "tests_green": 187
+   },
+   "greens": [
     {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
-     "side": "left",
-     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'name\\' is not allowed\"\\n  Actual message: \"[\\'name...",
-     "produced": [
-      "['name']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
-     "side": "right",
-     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'version\\' is not allowed\"\\n  Actual message: \"[\\'version\\'] is n...",
-     "produced": [
-      "['version']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
-     "side": "left",
-     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'version\\' is not allowed\"\\n  Actual message: \"[\\'v...",
-     "produced": [
-      "['version']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]",
-     "side": "right",
-     "demanded": "('Regex pattern did not match.\\n  Expected regex: \"\\'metadata-version\\' is not allowed\"\\n  Actual message: \"[\\'metada...",
-     "produced": [
-      "['metadata-version']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
-    },
-    {
-     "node": "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]",
-     "side": "left",
-     "demanded": "AssertionError('Regex pattern did not match.\\n  Expected regex: \"\\'metadata-version\\' is not allowed\"\\n  Actual messa...",
-     "produced": [
-      "['metadata-version']"
-     ],
-     "reason": "NO_SLOT_IS_SHARED_WITH_WHAT_THE_SITE_PRODUCED"
+     "expression": "dynamic_field",
+     "rank": 118,
+     "source": "closure",
+     "tests_green": 187
     }
    ],
-   "greens": [],
-   "green_count": 0,
-   "survivors": 0,
+   "green_count": 1,
+   "found_is_the_human_fix": true,
    "parameters_stored": 0,
-   "seconds": 1.67
+   "seconds": 6.09
   },
   {
    "repo": "packaging",

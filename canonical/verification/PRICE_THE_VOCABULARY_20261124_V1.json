@@ -1,0 +1,349 @@
+{
+ "schema": "BRAIN_PRICE_THE_VOCABULARY_V1",
+ "generated": "2026-11-25T03:35:52Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 160.8
+ },
+ "summary": {
+  "machines": 10,
+  "walk_steps": 120,
+  "held_out_share": 0.35,
+  "baseline": {
+   "predictions": 77,
+   "wrong": 16,
+   "refused": 71,
+   "accuracy": 0.828,
+   "coverage": 0.5203
+  },
+  "singles": {
+   "ROWS_1": {
+    "predictions": 77,
+    "wrong": 16,
+    "refused": 71,
+    "accuracy": 0.828,
+    "coverage": 0.5203,
+    "reach_gained": 0,
+    "wrong_added": 0,
+    "price": null
+   },
+   "HAS_MANY_ROWS": {
+    "predictions": 77,
+    "wrong": 16,
+    "refused": 71,
+    "accuracy": 0.828,
+    "coverage": 0.5203,
+    "reach_gained": 0,
+    "wrong_added": 0,
+    "price": null
+   },
+   "CONTENT_SORTED": {
+    "predictions": 68,
+    "wrong": 10,
+    "refused": 80,
+    "accuracy": 0.8718,
+    "coverage": 0.4595,
+    "reach_gained": -9,
+    "wrong_added": -6,
+    "price": null
+   },
+   "IDENT_SORTED": {
+    "predictions": 79,
+    "wrong": 16,
+    "refused": 69,
+    "accuracy": 0.8316,
+    "coverage": 0.5338,
+    "reach_gained": 2,
+    "wrong_added": 0,
+    "price": 0.0
+   },
+   "HAS_REPEATED_IDENT_LENGTH": {
+    "predictions": 79,
+    "wrong": 16,
+    "refused": 69,
+    "accuracy": 0.8316,
+    "coverage": 0.5338,
+    "reach_gained": 2,
+    "wrong_added": 0,
+    "price": 0.0
+   }
+  },
+  "verdicts": {
+   "some_predicate_buys_reach_at_low_price": true,
+   "the_best_subset_beats_the_baseline_vocabulary": true,
+   "no_added_predicate_helps": false,
+   "a_single_predicate_buys_reach_at_zero_price": true,
+   "the_optimism_is_real_selected_subset_beats_baseline_out_of_sample": true,
+   "subset_selection_gains_do_not_survive_out_of_sample": false,
+   "the_chosen_subset_is_unstable_across_folds": true
+  },
+  "predicates_worth_their_price": [
+   "IDENT_SORTED",
+   "HAS_REPEATED_IDENT_LENGTH"
+  ],
+  "best_subset": {
+   "subset": [
+    "CONTENT_SORTED",
+    "HAS_MANY_ROWS",
+    "HAS_REPEATED_IDENT_LENGTH",
+    "ROWS_3"
+   ],
+   "predictions": 99,
+   "wrong": 9,
+   "refused": 49,
+   "accuracy": 0.9167,
+   "coverage": 0.6689
+  },
+  "full_data_selection_is_optimistic": true,
+  "leave_one_machine_out": {
+   "baseline": {
+    "predictions": 77,
+    "wrong": 16,
+    "refused": 71,
+    "accuracy": 0.828,
+    "coverage": 0.5203
+   },
+   "selected_subset": {
+    "predictions": 93,
+    "wrong": 12,
+    "refused": 55,
+    "accuracy": 0.8857,
+    "coverage": 0.6284
+   },
+   "choices": [
+    {
+     "machine": "ARCHIVE2",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "FILESYSTEM",
+     "chosen": [
+      "ALL_CONTENT_UNIQUE",
+      "CONTENT_SORTED",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "GIT",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "IDENT_SORTED",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "GIT2",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "IDENT_SORTED"
+     ]
+    },
+    {
+     "machine": "JOURNAL",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "LIST",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS"
+     ]
+    },
+    {
+     "machine": "SCRAMBLED",
+     "chosen": [
+      "ALL_CONTENT_UNIQUE",
+      "CONTENT_SORTED",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "SQLITE",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "TARBALL",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    },
+    {
+     "machine": "VAULT",
+     "chosen": [
+      "CONTENT_SORTED",
+      "HAS_MANY_ROWS",
+      "HAS_REPEATED_IDENT_LENGTH",
+      "ROWS_3"
+     ]
+    }
+   ],
+   "note": "the subset is chosen on nine machines and scored on the tenth, so the gain here is out-of-sample; compare it against the full-data best_subset, which is not."
+  },
+  "sweep_size": 1023,
+  "sweep": [
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_MANY_ROWS",
+     "HAS_REPEATED_IDENT_LENGTH",
+     "ROWS_3"
+    ],
+    "predictions": 99,
+    "wrong": 9,
+    "refused": 49,
+    "accuracy": 0.9167,
+    "coverage": 0.6689
+   },
+   {
+    "subset": [
+     "ALL_CONTENT_UNIQUE",
+     "CONTENT_SORTED",
+     "HAS_REPEATED_IDENT_LENGTH",
+     "ROWS_3"
+    ],
+    "predictions": 88,
+    "wrong": 8,
+    "refused": 60,
+    "accuracy": 0.9167,
+    "coverage": 0.5946
+   },
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_DUPLICATE_CONTENT",
+     "HAS_REPEATED_IDENT_LENGTH",
+     "ROWS_3"
+    ],
+    "predictions": 88,
+    "wrong": 8,
+    "refused": 60,
+    "accuracy": 0.9167,
+    "coverage": 0.5946
+   },
+   {
+    "subset": [
+     "ALL_CONTENT_UNIQUE",
+     "CONTENT_SORTED",
+     "HAS_DUPLICATE_CONTENT",
+     "HAS_REPEATED_IDENT_LENGTH",
+     "ROWS_3"
+    ],
+    "predictions": 88,
+    "wrong": 8,
+    "refused": 60,
+    "accuracy": 0.9167,
+    "coverage": 0.5946
+   },
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_MANY_ROWS",
+     "HAS_REPEATED_IDENT_LENGTH",
+     "ROWS_2"
+    ],
+    "predictions": 97,
+    "wrong": 9,
+    "refused": 51,
+    "accuracy": 0.9151,
+    "coverage": 0.6554
+   },
+   {
+    "subset": [
+     "ALL_CONTENT_UNIQUE",
+     "CONTENT_SORTED",
+     "ROWS_3"
+    ],
+    "predictions": 85,
+    "wrong": 8,
+    "refused": 63,
+    "accuracy": 0.914,
+    "coverage": 0.5743
+   },
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_DUPLICATE_CONTENT",
+     "ROWS_3"
+    ],
+    "predictions": 85,
+    "wrong": 8,
+    "refused": 63,
+    "accuracy": 0.914,
+    "coverage": 0.5743
+   },
+   {
+    "subset": [
+     "ALL_CONTENT_UNIQUE",
+     "CONTENT_SORTED",
+     "HAS_DUPLICATE_CONTENT",
+     "ROWS_3"
+    ],
+    "predictions": 85,
+    "wrong": 8,
+    "refused": 63,
+    "accuracy": 0.914,
+    "coverage": 0.5743
+   },
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_MANY_ROWS",
+     "ROWS_3"
+    ],
+    "predictions": 95,
+    "wrong": 9,
+    "refused": 53,
+    "accuracy": 0.9135,
+    "coverage": 0.6419
+   },
+   {
+    "subset": [
+     "CONTENT_SORTED",
+     "HAS_MANY_ROWS",
+     "IDENT_SORTED"
+    ],
+    "predictions": 105,
+    "wrong": 10,
+    "refused": 43,
+    "accuracy": 0.913,
+    "coverage": 0.7095
+   }
+  ],
+  "stability": {
+   "most_common_subset": [
+    "CONTENT_SORTED",
+    "HAS_MANY_ROWS",
+    "HAS_REPEATED_IDENT_LENGTH",
+    "ROWS_3"
+   ],
+   "folds_choosing_it": 5,
+   "folds": 10,
+   "CONTENT_SORTED_appears_in_folds": 10,
+   "reading": "the choice is unstable (5 of 10 folds agree), so the SUBSET is not a finding. The out-of-sample gain is still a finding, because each fold's choice was made without the machine it was scored on. What carries the gain is not one particular subset."
+  }
+ }
+}

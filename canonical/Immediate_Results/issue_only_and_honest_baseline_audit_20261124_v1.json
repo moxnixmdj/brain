@@ -1,0 +1,106 @@
+{
+  "schema": "ISSUE_ONLY_ZERO_LEAKAGE_SWE_AND_HONEST_BASELINE_AUDIT_20261124_V1",
+  "generated_utc": "2026-11-24T00:00:00Z",
+  "model_calls": 0,
+  "issue_only_zero_test_leakage_swe": {
+    "total_cases": 2,
+    "solved_and_passed_held_out_upstream_suite": 2,
+    "cases": [
+      {
+        "case_id": "werkzeug@051fd66352_issue_only",
+        "base_commit_only": true,
+        "held_out_upstream_test_checkout_until_post_solve": true,
+        "solved_by_abduced_oracle": true,
+        "zero_test_leakage_in_patch": true,
+        "held_out_upstream_test_suite_passed": true,
+        "held_out_pytest_summary": "124 passed in 0.29s",
+        "simulations": 9,
+        "elapsed_ms": 7947.13,
+        "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+        "crystallized_law_id": null,
+        "modified_files": [
+          "src/werkzeug/datastructures/auth.py"
+        ],
+        "model_calls": 0
+      },
+      {
+        "case_id": "click@05f6fd0df4_issue_only",
+        "base_commit_only": true,
+        "held_out_upstream_test_checkout_until_post_solve": true,
+        "solved_by_abduced_oracle": true,
+        "zero_test_leakage_in_patch": true,
+        "held_out_upstream_test_suite_passed": true,
+        "held_out_pytest_summary": "116 passed in 0.21s",
+        "simulations": 48,
+        "elapsed_ms": 33603.47,
+        "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+        "crystallized_law_id": "uir_law_6efc5c047e37",
+        "modified_files": [
+          "src/click/core.py"
+        ],
+        "model_calls": 0
+      }
+    ],
+    "law_store_compaction": {
+      "before": 1,
+      "after": 1,
+      "pruned": 0
+    }
+  },
+  "honest_suite_baseline_20261103_audit": {
+    "source_file": "canonical/verification/HONEST_SUITE_BASELINE_20261103_V1.json",
+    "files_with_failures_or_errors": 344,
+    "failing_cases_total": 1026,
+    "failure_buckets": {
+      "ASSERTION": 793,
+      "OTHER": 113,
+      "CURRENTNESS_GUARD__DRIFT": 53,
+      "IMPORT_ERROR": 43,
+      "MISSING_FILE": 5,
+      "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT": 16,
+      "NETWORK": 3
+    },
+    "confinement_or_source_gate_deliberate_refusals": 0
+  },
+  "live_github_actions_harbor_docker_smoke": {
+    "workflow": ".github/workflows/frontier_smoke_eval.yml",
+    "branch": "arena/06dc079e-brain",
+    "head_sha": "33f591f8",
+    "run_id": 45537959351,
+    "job_id": 138949134648,
+    "harbor_revision": "39c2219a41b3caa7a689cef1882263b5a93ae93f",
+    "swe_bench_pro_revision": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "docker_confinement": {
+      "network_mode": "none",
+      "ipc": "private",
+      "cap_drop": [
+        "ALL"
+      ],
+      "brain_mount": "/opt/brain-ro:ro"
+    },
+    "selected_count": 2,
+    "issues": [],
+    "rows": [
+      {
+        "task": "instance_NodeBB__NodeBB-8168c6c40707478f71b8af60300830fe554c778c-vf2cf3cbd463b7ad942381f1c6d077626485a1e9e",
+        "producer_present": true,
+        "replay_present": true,
+        "patch_bytes": 0,
+        "agent_status": "BLOCKED_NO_MODEL_PROPOSAL",
+        "rewards": {
+          "reward": 0.0
+        }
+      },
+      {
+        "task": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "producer_present": true,
+        "replay_present": true,
+        "patch_bytes": 0,
+        "agent_status": "BLOCKED_NO_MODEL_PROPOSAL",
+        "rewards": {
+          "reward": 0.0
+        }
+      }
+    ]
+  }
+}

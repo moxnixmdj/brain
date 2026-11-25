@@ -1,0 +1,1087 @@
+{
+  "benchmark": "single_line_fix_commits_20261123_V1_blind_15_to_44",
+  "date": "2026-11-24",
+  "prior_engine_blind_solved": 0,
+  "prior_engine_blind_total": 30,
+  "cogs_blind_solved": 5,
+  "cogs_blind_exact_file_match": 3,
+  "cogs_blind_exact_line_match": 3,
+  "cogs_blind_total": 30,
+  "solve_rate_pct": 16.67,
+  "model_calls": 0,
+  "learned_parameters": 0,
+  "file_or_line_hints_given": 0,
+  "frozen_engine_sha256_pre": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "bb273e44524707a160ecc44c0abe5de3dbdb9879de1593bb20e8adffe438ce6c",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "2d0566ba01984a9782ef747034167ca6f1cae3e53728caac081cba9b7a248274",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "frozen_engine_sha256_post": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "bb273e44524707a160ecc44c0abe5de3dbdb9879de1593bb20e8adffe438ce6c",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "2d0566ba01984a9782ef747034167ca6f1cae3e53728caac081cba9b7a248274",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "hashes_identical": true,
+  "crystallized_laws_count": 1,
+  "total_wall_sec": 914.01,
+  "results": [
+    {
+      "task_index": 15,
+      "repo": "more-itertools",
+      "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+      "test": "tests/test_more.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 185,
+      "candidates_executed_in_sandbox": 4,
+      "elapsed_sec": 19.01,
+      "human_sources": [
+        "more_itertools/more.py"
+      ],
+      "modified_files": [
+        "more_itertools/more.py"
+      ],
+      "exact_file_match": true,
+      "exact_line_match": true,
+      "unified_diff": "--- a/more_itertools/more.py\n+++ b/more_itertools/more.py\n@@ -4279,7 +4279,7 @@\n     seenset_add = seenset.add\n     seenlist = []\n     seenlist_add = seenlist.append\n-    for element in map(key, iterable) if key else iterable:\n+    for element in map(key, iterable) if key is not None else iterable:\n         try:\n             if element in seenset:\n                 return False\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L4282: `key` -> `key is not None`"
+      }
+    },
+    {
+      "task_index": 16,
+      "repo": "more-itertools",
+      "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+      "test": "tests/test_recipes.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 0,
+      "candidates_executed_in_sandbox": 1,
+      "elapsed_sec": 12.19,
+      "human_sources": [
+        "more_itertools/recipes.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
+        ],
+        "candidate_files": [
+          "more_itertools/recipes.py"
+        ],
+        "queued_candidates": 0
+      }
+    },
+    {
+      "task_index": 17,
+      "repo": "more-itertools",
+      "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+      "test": "tests/test_more.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 249,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 11.55,
+      "human_sources": [
+        "more_itertools/more.py"
+      ],
+      "modified_files": [
+        "more_itertools/more.py"
+      ],
+      "exact_file_match": true,
+      "exact_line_match": true,
+      "unified_diff": "--- a/more_itertools/more.py\n+++ b/more_itertools/more.py\n@@ -283,7 +283,7 @@\n         if isinstance(iterable, Sequence):\n             return iterable[-1]\n         # Work around https://bugs.python.org/issue38525\n-        if hasattr(iterable, '__reversed__'):\n+        if hasattr(iterable, '__reversed__') and not iterable:\n             return next(reversed(iterable))\n         return deque(iterable, maxlen=1)[-1]\n     except (IndexError, TypeError, StopIteration):\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L286: `hasattr(iterable, '__reversed__')` -> `hasattr(iterable, '__reversed__') and not iterable`"
+      }
+    },
+    {
+      "task_index": 18,
+      "repo": "more-itertools",
+      "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+      "test": "tests/test_more.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2,
+      "candidates_executed_in_sandbox": 3,
+      "elapsed_sec": 3.69,
+      "human_sources": [
+        "more_itertools/more.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_more.py::SlicedTests::test_numpy_like_array"
+        ],
+        "candidate_files": [
+          "more_itertools/more.py",
+          "more_itertools/recipes.py"
+        ],
+        "queued_candidates": 2
+      }
+    },
+    {
+      "task_index": 19,
+      "repo": "packaging",
+      "commit": "0625596e502163179b9a82796aee82c178efc16d",
+      "test": "tests/test_utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2542,
+      "candidates_executed_in_sandbox": 29,
+      "elapsed_sec": 14.25,
+      "human_sources": [
+        "src/packaging/utils.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 98
+      }
+    },
+    {
+      "task_index": 20,
+      "repo": "packaging",
+      "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+      "test": "tests/test_direct_url.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 831,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.05,
+      "human_sources": [
+        "src/packaging/direct_url.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+          "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+        ],
+        "candidate_files": [
+          "src/packaging/direct_url.py",
+          "src/packaging/pylock.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 24
+      }
+    },
+    {
+      "task_index": 21,
+      "repo": "packaging",
+      "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+      "test": "tests/test_markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1545,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 28.84,
+      "human_sources": [
+        "src/packaging/_tokenizer.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
+        ],
+        "candidate_files": [
+          "src/packaging/_tokenizer.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 92
+      }
+    },
+    {
+      "task_index": 22,
+      "repo": "packaging",
+      "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+      "test": "tests/test_utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 144,
+      "candidates_executed_in_sandbox": 10,
+      "elapsed_sec": 6.78,
+      "human_sources": [
+        "src/packaging/utils.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py",
+          "src/packaging/markers.py"
+        ],
+        "queued_candidates": 9
+      }
+    },
+    {
+      "task_index": 23,
+      "repo": "packaging",
+      "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+      "test": "tests/test_metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1348,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 17.08,
+      "human_sources": [
+        "src/packaging/metadata.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 33
+      }
+    },
+    {
+      "task_index": 24,
+      "repo": "packaging",
+      "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+      "test": "tests/test_utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2026,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 15.86,
+      "human_sources": [
+        "src/packaging/utils.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 82
+      }
+    },
+    {
+      "task_index": 25,
+      "repo": "packaging",
+      "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+      "test": "tests/test_pylock_select.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3668,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 7.98,
+      "human_sources": [
+        "src/packaging/pylock.py"
+      ],
+      "modified_files": [
+        "src/packaging/pylock.py"
+      ],
+      "exact_file_match": true,
+      "exact_line_match": true,
+      "unified_diff": "--- a/src/packaging/pylock.py\n+++ b/src/packaging/pylock.py\n@@ -836,7 +836,7 @@\n         # #. If :ref:`pylock-environments` is specified, check that at least one of the\n         #    environment marker expressions is satisfied; an error MUST be raised if no\n         #    expression is satisfied.\n-        if self.environments:\n+        if self.environments is not None:\n             for env_marker in self.environments:\n                 if env_marker.evaluate(\n                     cast(\"dict[str, str]\", environment or {}), context=\"requirement\"\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L839: `self.environments` -> `self.environments is not None`"
+      }
+    },
+    {
+      "task_index": 26,
+      "repo": "packaging",
+      "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+      "test": "tests/test_utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 41,
+      "candidates_executed_in_sandbox": 35,
+      "elapsed_sec": 19.32,
+      "human_sources": [
+        "src/packaging/utils.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+          "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 7
+      }
+    },
+    {
+      "task_index": 27,
+      "repo": "packaging",
+      "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+      "test": "tests/test_requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2271,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 119.4,
+      "human_sources": [
+        "packaging/_parser.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_no_word_boundary",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op"
+        ],
+        "candidate_files": [
+          "packaging/_parser.py",
+          "packaging/_tokenizer.py",
+          "packaging/markers.py",
+          "packaging/requirements.py",
+          "packaging/specifiers.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 121
+      }
+    },
+    {
+      "task_index": 28,
+      "repo": "pluggy",
+      "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+      "test": "testing/test_pluginmanager.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 27,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 4.3,
+      "human_sources": [
+        "src/pluggy/_manager.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "scripts/release.py",
+          "scripts/towncrier-draft-to-file.py",
+          "src/pluggy/_callers.py",
+          "src/pluggy/_hooks.py",
+          "src/pluggy/_manager.py",
+          "src/pluggy/_result.py"
+        ],
+        "queued_candidates": 12
+      }
+    },
+    {
+      "task_index": 29,
+      "repo": "pluggy",
+      "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+      "test": "testing/test_details.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2797,
+      "candidates_executed_in_sandbox": 11,
+      "elapsed_sec": 9.68,
+      "human_sources": [
+        "src/pluggy/_manager.py"
+      ],
+      "modified_files": [
+        "src/pluggy/_execution.py"
+      ],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "--- a/src/pluggy/_execution.py\n+++ b/src/pluggy/_execution.py\n@@ -162,7 +162,7 @@\n         # run all wrapper post-yield blocks\n         for teardown in reversed(teardowns):\n             try:\n-                if exception is not None:\n+                if exception is not None and not exception:\n                     try:\n                         teardown.throw(exception)\n                     except RuntimeError as re:\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L165: `exception is not None` -> `exception is not None and not exception`"
+      }
+    },
+    {
+      "task_index": 30,
+      "repo": "pluggy",
+      "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+      "test": "testing/test_pluginmanager.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1969,
+      "candidates_executed_in_sandbox": 20,
+      "elapsed_sec": 14.67,
+      "human_sources": [
+        "src/pluggy/_manager.py"
+      ],
+      "modified_files": [
+        "src/pluggy/_result.py"
+      ],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "--- a/src/pluggy/_result.py\n+++ b/src/pluggy/_result.py\n@@ -97,7 +97,7 @@\n         __tracebackhide__ = True\n         exc = self._exception\n         tb = self._traceback\n-        if exc is None:\n+        if exc is None or exc is not None:\n             return cast(ResultType, self._result)\n         else:\n             raise exc.with_traceback(tb)\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L100: `exc is None` -> `exc is None or exc is not None`"
+      }
+    },
+    {
+      "task_index": 31,
+      "repo": "starlette",
+      "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+      "test": "tests/middleware/test_cors.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 22,
+      "candidates_executed_in_sandbox": 23,
+      "elapsed_sec": 14.65,
+      "human_sources": [
+        "starlette/middleware/cors.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "starlette/applications.py",
+          "starlette/middleware/cors.py",
+          "starlette/responses.py",
+          "starlette/testclient.py",
+          "starlette/concurrency.py",
+          "starlette/config.py"
+        ],
+        "queued_candidates": 1
+      }
+    },
+    {
+      "task_index": 32,
+      "repo": "tqdm",
+      "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+      "test": "tests/py37_asyncio.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 229,
+      "candidates_executed_in_sandbox": 62,
+      "elapsed_sec": 84.11,
+      "human_sources": [
+        "tqdm/asyncio.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/py37_asyncio.py::test_gather"
+        ],
+        "candidate_files": [
+          "tqdm/std.py",
+          "tqdm/asyncio.py",
+          "tqdm/contrib/discord.py",
+          "tqdm/contrib/telegram.py",
+          "tqdm/utils.py",
+          "tqdm/notebook.py"
+        ],
+        "queued_candidates": 1
+      }
+    },
+    {
+      "task_index": 33,
+      "repo": "tqdm",
+      "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+      "test": "tests/tests_tqdm.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 102,
+      "candidates_executed_in_sandbox": 60,
+      "elapsed_sec": 45.52,
+      "human_sources": [
+        "tqdm/std.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/tests_tqdm.py::test_format_num"
+        ],
+        "candidate_files": [
+          "tqdm/_monitor.py",
+          "tqdm/_tqdm_pandas.py",
+          "tqdm/asyncio.py",
+          "tqdm/std.py",
+          "tqdm/utils.py",
+          "tqdm/contrib/discord.py"
+        ],
+        "queued_candidates": 11
+      }
+    },
+    {
+      "task_index": 34,
+      "repo": "urllib3",
+      "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+      "test": "test/with_dummyserver/test_socketlevel.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 23,
+      "candidates_executed_in_sandbox": 23,
+      "elapsed_sec": 239.6,
+      "human_sources": [
+        "src/urllib3/response.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<timeout>"
+        ],
+        "candidate_files": [
+          "dummyserver/handlers.py",
+          "dummyserver/https_proxy.py",
+          "dummyserver/proxy.py",
+          "dummyserver/server.py",
+          "dummyserver/testcase.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 8
+      }
+    },
+    {
+      "task_index": 35,
+      "repo": "urllib3",
+      "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+      "test": "test/test_retry.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 426,
+      "candidates_executed_in_sandbox": 32,
+      "elapsed_sec": 22.52,
+      "human_sources": [
+        "src/urllib3/util/retry.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
+        ],
+        "candidate_files": [
+          "src/urllib3/exceptions.py",
+          "src/urllib3/response.py",
+          "src/urllib3/util/response.py",
+          "src/urllib3/util/retry.py",
+          "dummyserver/handlers.py",
+          "dummyserver/proxy.py"
+        ],
+        "queued_candidates": 3
+      }
+    },
+    {
+      "task_index": 36,
+      "repo": "urllib3",
+      "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+      "test": "test/test_util.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 826,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 21.4,
+      "human_sources": [
+        "src/urllib3/util/url.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
+        ],
+        "candidate_files": [
+          "dummyserver/handlers.py",
+          "dummyserver/https_proxy.py",
+          "dummyserver/proxy.py",
+          "dummyserver/server.py",
+          "dummyserver/testcase.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 19
+      }
+    },
+    {
+      "task_index": 37,
+      "repo": "werkzeug",
+      "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+      "test": "tests/test_test.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 4723,
+      "candidates_executed_in_sandbox": 31,
+      "elapsed_sec": 25.05,
+      "human_sources": [
+        "src/werkzeug/utils.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_test.py::test_redirects_are_tracked"
+        ],
+        "candidate_files": [
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/wrappers/response.py",
+          "src/werkzeug/formparser.py",
+          "src/werkzeug/sansio/utils.py",
+          "src/werkzeug/test.py",
+          "src/werkzeug/utils.py"
+        ],
+        "queued_candidates": 236
+      }
+    },
+    {
+      "task_index": 38,
+      "repo": "werkzeug",
+      "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+      "test": "tests/test_security.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 54,
+      "candidates_executed_in_sandbox": 49,
+      "elapsed_sec": 14.23,
+      "human_sources": [
+        "src/werkzeug/security.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/werkzeug/security.py",
+          "src/werkzeug/datastructures/headers.py",
+          "src/werkzeug/datastructures/mixins.py",
+          "src/werkzeug/sansio/request.py",
+          "src/werkzeug/urls.py",
+          "src/werkzeug/debug/__init__.py"
+        ],
+        "queued_candidates": 6
+      }
+    },
+    {
+      "task_index": 39,
+      "repo": "werkzeug",
+      "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+      "test": "tests/test_local.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 54,
+      "candidates_executed_in_sandbox": 54,
+      "elapsed_sec": 15.81,
+      "human_sources": [
+        "src/werkzeug/local.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/_reloader.py",
+          "src/werkzeug/datastructures.py",
+          "src/werkzeug/debug/__init__.py",
+          "src/werkzeug/debug/console.py",
+          "src/werkzeug/debug/repr.py"
+        ],
+        "queued_candidates": 1
+      }
+    },
+    {
+      "task_index": 40,
+      "repo": "werkzeug",
+      "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+      "test": "tests/test_routing.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 79,
+      "candidates_executed_in_sandbox": 74,
+      "elapsed_sec": 21.17,
+      "human_sources": [
+        "src/werkzeug/routing/rules.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/werkzeug/datastructures.py",
+          "src/werkzeug/exceptions.py",
+          "src/werkzeug/routing/exceptions.py",
+          "src/werkzeug/test.py",
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/debug/console.py"
+        ],
+        "queued_candidates": 6
+      }
+    },
+    {
+      "task_index": 41,
+      "repo": "werkzeug",
+      "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+      "test": "tests/test_security.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 849,
+      "candidates_executed_in_sandbox": 28,
+      "elapsed_sec": 39.57,
+      "human_sources": [
+        "src/werkzeug/security.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_security.py::test_pbkdf2"
+        ],
+        "candidate_files": [
+          "src/werkzeug/security.py",
+          "src/werkzeug/datastructures/mixins.py",
+          "src/werkzeug/sansio/request.py",
+          "src/werkzeug/debug/__init__.py",
+          "src/werkzeug/middleware/shared_data.py",
+          "src/werkzeug/utils.py"
+        ],
+        "queued_candidates": 38
+      }
+    },
+    {
+      "task_index": 42,
+      "repo": "werkzeug",
+      "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+      "test": "tests/test_http.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 83,
+      "candidates_executed_in_sandbox": 77,
+      "elapsed_sec": 22.2,
+      "human_sources": [
+        "src/werkzeug/_internal.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/test.py",
+          "src/werkzeug/datastructures.py",
+          "src/werkzeug/debug/console.py",
+          "src/werkzeug/http.py",
+          "src/werkzeug/local.py"
+        ],
+        "queued_candidates": 7
+      }
+    },
+    {
+      "task_index": 43,
+      "repo": "werkzeug",
+      "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+      "test": "tests/test_useragents.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 56,
+      "candidates_executed_in_sandbox": 52,
+      "elapsed_sec": 14.62,
+      "human_sources": [
+        "src/werkzeug/useragents.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "bench/wzbench.py",
+          "src/werkzeug/_compat.py",
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/_reloader.py",
+          "src/werkzeug/datastructures.py",
+          "src/werkzeug/debug/__init__.py"
+        ],
+        "queued_candidates": 5
+      }
+    },
+    {
+      "task_index": 44,
+      "repo": "werkzeug",
+      "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+      "test": "tests/test_routing.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 47,
+      "candidates_executed_in_sandbox": 48,
+      "elapsed_sec": 14.94,
+      "human_sources": [
+        "src/werkzeug/urls.py"
+      ],
+      "modified_files": [],
+      "exact_file_match": false,
+      "exact_line_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/werkzeug/exceptions.py",
+          "src/werkzeug/routing/exceptions.py",
+          "src/werkzeug/test.py",
+          "src/werkzeug/_internal.py",
+          "src/werkzeug/datastructures/accept.py",
+          "src/werkzeug/datastructures/auth.py"
+        ],
+        "queued_candidates": 0
+      }
+    }
+  ]
+}

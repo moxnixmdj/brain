@@ -1,0 +1,760 @@
+{
+  "schema": "BLIND_PACKAGING_TOMLI_DIFFERENTIAL_WITNESS_EVAL_20261124_V1",
+  "generated_utc": "2026-11-24T12:00:00Z",
+  "model_calls": 0,
+  "incremental_spend_usd": 0.0,
+  "source_diff_leakage": false,
+  "corpus_repos": [
+    [
+      "pypa/packaging",
+      "21.0",
+      "24.0"
+    ],
+    [
+      "pallets/itsdangerous",
+      "2.0.0",
+      "2.1.2"
+    ],
+    [
+      "pypa/pyproject-hooks",
+      "0.0.1",
+      "1.2.0"
+    ],
+    [
+      "hukkin/tomli",
+      "1.0.0",
+      "2.0.2"
+    ]
+  ],
+  "total_commits_evaluated": 30,
+  "witness_inversion_v1_standalone_solved": 0,
+  "unmodified_causal_cegis_probe_solved": 0,
+  "unified_cogs_differential_witness_solved": 6,
+  "solve_rate_pct": 20.0,
+  "crystallized_laws_count": 2,
+  "tasks": [
+    {
+      "repo": "pypa/packaging",
+      "commit": "a2b3e346b03c0446df2ab8e7f9c997d65495dc6d",
+      "parent": "992b3991b4797cf85802d8b44521273061e51840",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 820,
+      "elapsed_s": 5.28,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "7e4f2588923e647bb7c3d5b350473e39e4b279d4",
+      "parent": "8e49113181b7f586a58c48338e3cafc6bb4f495f",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 2,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1407,
+      "elapsed_s": 6.74,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "c52d2b30465ace6d11f54c01b6ea30419a94b5ef",
+      "parent": "cc0c65cb43537491ba468da1ba9b9f49c932d9eb",
+      "tests": [
+        "tests/test_specifiers.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+      "simulations": 13,
+      "candidates_in_memory": 3183,
+      "elapsed_s": 9.79,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": "uir_law_5e3064259652",
+      "verified_diff": "--- a/src/packaging/specifiers.py\n+++ b/src/packaging/specifiers.py\n@@ -422,7 +422,7 @@\n             # prospective version or not.\n             shortened_prospective = padded_prospective[: len(split_spec)]\n \n-            return shortened_prospective == split_spec\n+            return split_spec[:len(shortened_prospective)] == shortened_prospective\n         else:\n             # Convert our spec string into a Version\n             spec_version = Version(spec)\n"
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "524b701c6e30fc4da9355117367273f591c6de72",
+      "parent": "b509bef6a4573595b23a97ecbfe569000918157f",
+      "tests": [
+        "tests/test_utils.py"
+      ],
+      "baseline_failing_count": 2,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 38,
+      "candidates_in_memory": 1063,
+      "elapsed_s": 5.93,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "c1346dfdafecffc30ca777ac004ed2898e60e34e",
+      "parent": "7e68d828f265ef05cf4cd3b5def9baffef8c2968",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 14,
+      "candidates_in_memory": 13,
+      "elapsed_s": 3.45,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "e5a7893a99d64acb18ca8eec8848daa026c1c4de",
+      "parent": "3030822b0b06a43fbbb2710da7b0846d1bebd2ba",
+      "tests": [
+        "tests/test_musllinux.py"
+      ],
+      "baseline_failing_count": 3,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 857,
+      "elapsed_s": 4.09,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "1277904652c497ec84560a830a2e01d434358818",
+      "parent": "2f80de7fd2a8bc199dadf5cf3f5f302a17084792",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 4,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1223,
+      "elapsed_s": 5.29,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "e8f839f7400253998a07a993420ae308bb4f159d",
+      "parent": "538cd15c7d73d5a7466f8343e256923e77ab7113",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 2994,
+      "elapsed_s": 12.14,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+      "parent": "30d4a1c5fb5a6c32d6d725f97935330960ce5d15",
+      "tests": [
+        "tests/test_markers.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1577,
+      "elapsed_s": 8.98,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "7013a6048fe13f5c937de33179763100a57d7658",
+      "parent": "28c1a05d571d15a3c54c1dedc2ce0e503d486697",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 3,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+      "simulations": 7,
+      "candidates_in_memory": 1074,
+      "elapsed_s": 4.85,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": "--- a/src/packaging/tags.py\n+++ b/src/packaging/tags.py\n@@ -120,7 +120,7 @@\n \n \n def _normalize_string(string: str) -> str:\n-    return string.replace(\".\", \"_\").replace(\"-\", \"_\")\n+    return string.replace(\".\", \"_\").replace(\"-\", \"_\").replace(' ', '_')\n \n \n def _abi3_applies(python_version: PythonVersion) -> bool:\n"
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "a6c9bc4dce968f7bfc05e4a93137f65ce4564be9",
+      "parent": "7722044f4b0f689eec8cb89afc8d3e4bb8e62908",
+      "tests": [
+        "tests/test_specifiers.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "SEMANTIC_LAW_RECALL:uir_law_5e3064259652",
+      "simulations": 6,
+      "candidates_in_memory": 10,
+      "elapsed_s": 3.78,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": "uir_law_5e3064259652",
+      "verified_diff": "--- a/src/packaging/specifiers.py\n+++ b/src/packaging/specifiers.py\n@@ -418,9 +418,8 @@\n             # Shorten the prospective version to be the same length as the spec\n             # so that we can determine if the specifier is a prefix of the\n             # prospective version or not.\n-            shortened_prospective = padded_prospective[: len(split_spec)]\n-\n-            return shortened_prospective == split_spec\n+            shortened_prospective = padded_prospective[:len(split_spec)]\n+            return split_spec[:len(shortened_prospective)] == shortened_prospective\n         else:\n             # Convert our spec string into a Version\n             spec_version = Version(spec)\n"
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "96d85be0e3d1d0f7fa42ce0cf41cdcce884fa8e0",
+      "parent": "5d7f0200b4cedf74da1a28a5c32d219e4e5f5252",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 5,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1561,
+      "elapsed_s": 11.05,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "068a0b5975a95a5cc30262599ca29bb6ceabe4af",
+      "parent": "f4463e2e0edb016d7e5843471cbe050eff5d50f1",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1836,
+      "elapsed_s": 11.41,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "f4463e2e0edb016d7e5843471cbe050eff5d50f1",
+      "parent": "e9bcc1d4b3534d4b9236c0507987ba17e4b3399c",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 4,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1949,
+      "elapsed_s": 11.68,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "5c70ed4f983c4b27e67c34fe67266e1514484bf0",
+      "parent": "30554f503a5368aabf6ee571bd9cdf29d5f00c12",
+      "tests": [
+        "tests/test_markers.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 973,
+      "elapsed_s": 6.64,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "ddf54e1c7eed60406de14615556650633e84799c",
+      "parent": "150c9a6e73e05165900ffb52e1fa72e2188df0c0",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 4,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1796,
+      "elapsed_s": 11.28,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "08d8af08fdf9bac223d3af22a1ace16356e3f643",
+      "parent": "5333ef4154d1f363de8fd5c5f80c41dc8932c3f2",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 21,
+      "candidates_in_memory": 1514,
+      "elapsed_s": 10.23,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+      "parent": "cb093310093edf691bc2dd263d623b660335c79a",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 3,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1243,
+      "elapsed_s": 10.47,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "cb093310093edf691bc2dd263d623b660335c79a",
+      "parent": "b41326dbe197d404e82a0850f622d32d6196c3b7",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 2,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1266,
+      "elapsed_s": 10.64,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "7930b73d5815f475028a2600c47fb340ad72f40c",
+      "parent": "258d252c33c825838788f2d4267b6cc585cddb3e",
+      "tests": [
+        "tests/test_requirements.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1649,
+      "elapsed_s": 9.1,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "e184feef1a28a5c574ec41f5c263a3a573861f5a",
+      "parent": "8c6a45e20857db912d397afb489832d9528a84c8",
+      "tests": [
+        "tests/test_specifiers.py"
+      ],
+      "baseline_failing_count": 4,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+      "simulations": 10,
+      "candidates_in_memory": 4255,
+      "elapsed_s": 9.52,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": "--- a/packaging/specifiers.py\n+++ b/packaging/specifiers.py\n@@ -408,7 +408,7 @@\n                 split_spec, shortened_prospective\n             )\n \n-            return padded_prospective == padded_spec\n+            return padded_prospective[:len(split_spec)] == split_spec\n         else:\n             # Convert our spec string into a Version\n             spec_version = Version(spec)\n"
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "cb21fc7b9e07f79987d6bc1f9a3d31f46eb46a92",
+      "parent": "3223f8ca4ed2b2aa431c7ff9e526f6e543dea2f4",
+      "tests": [
+        "tests/test_specifiers.py"
+      ],
+      "baseline_failing_count": 2,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 2717,
+      "elapsed_s": 16.55,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "1b836b7029eabd70fe3ac0ffe1c9de88cf831c61",
+      "parent": "93852765222ba7b408a83de9d755924df627fc81",
+      "tests": [
+        "tests/test_specifiers.py"
+      ],
+      "baseline_failing_count": 4,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 195,
+      "elapsed_s": 4.59,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "pypa/packaging",
+      "commit": "b8b2f8aa47c0676628f336487a31f602bea0c857",
+      "parent": "12800518fc4045ae2112c98f039a1a065cda24d0",
+      "tests": [
+        "tests/test_tags.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 2964,
+      "elapsed_s": 6.96,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+      "parent": "facdab0f5aacc5eb223753c42604d5de7bdaee9d",
+      "tests": [
+        "tests/test_error.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+      "simulations": 6,
+      "candidates_in_memory": 8,
+      "elapsed_s": 2.44,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": "uir_law_482e0e05ed5d",
+      "verified_diff": "--- a/src/tomli/_parser.py\n+++ b/src/tomli/_parser.py\n@@ -71,6 +71,8 @@\n \n     # The spec allows converting \"\\r\\n\" to \"\\n\", even in string\n     # literals. Let's do so to simplify parsing.\n+    if not isinstance(__s, str):\n+        raise TypeError(f\"Expected str object, not '{type(__s).__qualname__}'\")\n     src = __s.replace(\"\\r\\n\", \"\\n\")\n     pos = 0\n     out = Output(NestedDict(), Flags())\n"
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+      "parent": "0eaf93dd85934636f727c43f413a13e06509d2d6",
+      "tests": [
+        "tests/test_error.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 2468,
+      "elapsed_s": 5.38,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "8b962e13490a569d4aab90076451def23ed6c6d8",
+      "parent": "e4da05c35a41a4d53fce7af292b94506b1ea68a7",
+      "tests": [
+        "tests/test_misc.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 17,
+      "candidates_in_memory": 10,
+      "elapsed_s": 3.82,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+      "parent": "8917fe3c3fc61a28163f5f78edcad2efc574a274",
+      "tests": [
+        "tests/test_error.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": true,
+      "mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+      "simulations": 12,
+      "candidates_in_memory": 13,
+      "elapsed_s": 3.03,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": "--- a/tomli/__init__.py\n+++ b/tomli/__init__.py\n@@ -4,3 +4,4 @@\n __version__ = \"1.2.1\"  # DO NOT EDIT THIS LINE MANUALLY. LET bump2version UTILITY DO IT\n \n from tomli._parser import TOMLDecodeError, load, loads\n+TOMLDecodeError.__module__ = 'tomli'\n"
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+      "parent": "a8c87f6e8b687e54ff34ccf331f64cb819ccbf2f",
+      "tests": [
+        "tests/test_error.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1247,
+      "elapsed_s": 4.96,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    },
+    {
+      "repo": "hukkin/tomli",
+      "commit": "9af551b578d0bfa9823e986572735a7429ffdf79",
+      "parent": "ca8e97a3c2c4506b02cf3ac11775a7ebed966898",
+      "tests": [
+        "tests/test_misc.py"
+      ],
+      "baseline_failing_count": 1,
+      "witness_inversion_v1_baseline_solved": false,
+      "unified_cogs_solved": false,
+      "mechanism": "NONE",
+      "simulations": 22,
+      "candidates_in_memory": 1467,
+      "elapsed_s": 7.72,
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "crystallized_law_id": null,
+      "verified_diff": ""
+    }
+  ],
+  "crystallized_laws": [
+    {
+      "law_id": "uir_law_482e0e05ed5d",
+      "defect_uir_kind": "UIR_TREE_REWRITE_MORPHISM",
+      "transform_operator": "APPLY_BOUND_AST_SUBTREE_MORPHISM",
+      "precondition_signature": {
+        "lhs_ast_pattern": "__HVAR_0__ = __HEXPR_0__",
+        "rhs_ast_pattern": "if not isinstance(__HPARAM_0__, str):\n    raise TypeError(f\"Expected str object, not '{type(__HPARAM_0__).__qualname__}'\")\n__HVAR_0__ = __HEXPR_0__",
+        "lhs_stmt_count": 1,
+        "rhs_stmt_count": 2,
+        "entry_anchored": true,
+        "min_param_arity": 1,
+        "pure_only_holes": [],
+        "required_domain_literals": [],
+        "effect_contract": {
+          "P": [
+            "AST_SLICE:__H_0__ = __H_1__"
+          ],
+          "O": [
+            "AST_SUBTREE_STRUCTURE",
+            "DATAFLOW_HOLE_BINDINGS",
+            "IMPACT_CONE_TESTS"
+          ],
+          "A": [
+            "REWRITE_AST_SLICE:__H_0__ = __H_1__=>if not isinstance(__H_0__, str):\n    raise TypeError(f\"Expected str object, not '{type(__H_0__).__qualname__}'\")\n__H_1__ = __H_2__"
+          ],
+          "V": "PYTEST_IMPACT_CONE_AND_COW_BOUNDARY_FUZZ",
+          "F_remove": [
+            "AST_SLICE:__H_0__ = __H_1__"
+          ],
+          "F_establish": [
+            "AST_SLICE:if not isinstance(__H_0__, str):\n    raise TypeError(f\"Expected str object, not '{type(__H_0__).__qualname__}'\")\n__H_1__ = __H_2__"
+          ]
+        }
+      },
+      "learned_from_language": "python",
+      "sabotage_verified": true,
+      "contrast_verified": true,
+      "evidence_digest": "318f57a30d0ce678",
+      "metadata": {}
+    },
+    {
+      "law_id": "uir_law_5e3064259652",
+      "defect_uir_kind": "UIR_TREE_REWRITE_MORPHISM",
+      "transform_operator": "APPLY_BOUND_AST_SUBTREE_MORPHISM",
+      "precondition_signature": {
+        "lhs_ast_pattern": "__HVAR_0__ = __HEXPR_0__\nreturn __HVAR_0__ == __HVAR_1__",
+        "rhs_ast_pattern": "__HVAR_0__ = __HEXPR_0__\nreturn __HVAR_1__[:len(__HVAR_0__)] == __HVAR_0__",
+        "lhs_stmt_count": 2,
+        "rhs_stmt_count": 2,
+        "entry_anchored": false,
+        "min_param_arity": 0,
+        "pure_only_holes": [],
+        "required_domain_literals": [],
+        "effect_contract": {
+          "P": [
+            "AST_SLICE:__H_0__ = __H_1__\nreturn __H_0__ == __H_2__"
+          ],
+          "O": [
+            "AST_SUBTREE_STRUCTURE",
+            "DATAFLOW_HOLE_BINDINGS",
+            "IMPACT_CONE_TESTS"
+          ],
+          "A": [
+            "REWRITE_AST_SLICE:__H_0__ = __H_1__\nreturn __H_0__ == __H_2__=>__H_0__ = __H_1__\nreturn __H_2__[:len(__H_0__)] == __H_0__"
+          ],
+          "V": "PYTEST_IMPACT_CONE_AND_COW_BOUNDARY_FUZZ",
+          "F_remove": [
+            "AST_SLICE:__H_0__ = __H_1__\nreturn __H_0__ == __H_2__"
+          ],
+          "F_establish": [
+            "AST_SLICE:__H_0__ = __H_1__\nreturn __H_2__[:len(__H_0__)] == __H_0__"
+          ]
+        }
+      },
+      "learned_from_language": "python",
+      "sabotage_verified": true,
+      "contrast_verified": true,
+      "evidence_digest": "8ef872099c00ca5d",
+      "metadata": {}
+    }
+  ],
+  "commit_to_commit_law_transfer_and_ablation": {
+    "source_discovery_commit": "c52d2b3046465257e11f35024e9fb46489965ea2",
+    "target_recall_commit": "a6c9bc4dce789c136f85cf28cd9fe9a646224e07",
+    "crystallized_law_id": "uir_law_5e3064259652",
+    "with_law_recall_mechanism": "SEMANTIC_LAW_RECALL:uir_law_5e3064259652",
+    "with_law_recall_simulations": 6,
+    "remove_law_returned": true,
+    "after_remove_law_mechanism": "COGS_LIVE_DIFFERENTIAL_WITNESS_INVERSION",
+    "after_remove_law_simulations": 21,
+    "zero_weight_updates": true
+  }
+}

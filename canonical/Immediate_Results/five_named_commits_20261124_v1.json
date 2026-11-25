@@ -1,0 +1,78 @@
+{
+  "schema": "BRAIN_FIVE_NAMED_COMMITS_EVAL_20261124_V1",
+  "runtime_model_calls": 0,
+  "memorized_world_weights": 0,
+  "source_diff_leakage": false,
+  "baseline_solved": 0,
+  "upgraded_solved": 2,
+  "total_tasks": 5,
+  "zero_hint_top2_file_localization": "5/5 (100.0%)",
+  "tasks": [
+    {
+      "repo": "click",
+      "sha": "05f6fd0df4ecbd104eb7a229f9f185c2484dee69",
+      "test_target": "tests/test_arguments.py",
+      "baseline_solved": false,
+      "upgraded_solved": true,
+      "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+      "localized_buggy_file_rank": 1,
+      "elapsed_s": 38.51,
+      "sandbox_simulations": 54,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "verified_diff": "--- a/src/click/core.py\n+++ b/src/click/core.py\n@@ -3804,10 +3804,8 @@\n     def get_help_record(self, ctx: Context) -> tuple[str, str] | None:\n-        if self.help is None:\n-            return None\n-\n-        return self.make_metavar(ctx), self.help\n+\n+        return (self.make_metavar(ctx), self.help or '')\n"
+    },
+    {
+      "repo": "werkzeug",
+      "sha": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "test_target": "tests/test_http.py",
+      "baseline_solved": false,
+      "upgraded_solved": true,
+      "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+      "localized_buggy_file_rank": 1,
+      "elapsed_s": 15.36,
+      "sandbox_simulations": 16,
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "verified_diff": "--- a/src/werkzeug/datastructures/auth.py\n+++ b/src/werkzeug/datastructures/auth.py\n@@ -308,7 +308,7 @@\n-        return f\"{self.type.title()} {dump_header(self.parameters)}\"\n+        return (f'{self.type.title()} {dump_header(self.parameters)}').rstrip()\n"
+    },
+    {
+      "repo": "click",
+      "sha": "c53d3732b98c764932e146c007146ad402acb229",
+      "test_target": "tests/test_options.py",
+      "baseline_solved": false,
+      "upgraded_solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "localized_buggy_file_rank": 2,
+      "elapsed_s": 144.02,
+      "sandbox_simulations": 84,
+      "honest_failure_reason": "Requires coordinated multi-site envvar empty-string filtering across both Option.resolve_envvar_value/get_help_record and Option.get_error_hint in src/click/core.py exceeding the 72-simulation fast-gate budget."
+    },
+    {
+      "repo": "click",
+      "sha": "fc518e41218b447e875fe27244ae692c269bcb77",
+      "test_target": "tests/test_abort_interrupt.py",
+      "baseline_solved": false,
+      "upgraded_solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "localized_buggy_file_rank": 2,
+      "elapsed_s": 77.31,
+      "sandbox_simulations": 82,
+      "honest_failure_reason": "BaseException tracer fix rescued src/click/core.py into top-2 localization (from unlocalized in baseline), but handling secondary KeyboardInterrupt raised inside Command.main's except/exit cleanup blocks requires outer try/except block wrapping beyond single-statement Petri transitions."
+    },
+    {
+      "repo": "werkzeug",
+      "sha": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "test_target": "tests/test_routing.py",
+      "baseline_solved": false,
+      "upgraded_solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "localized_buggy_file_rank": 2,
+      "elapsed_s": 38.35,
+      "sandbox_simulations": 74,
+      "honest_failure_reason": "Localized src/werkzeug/routing/map.py at rank #2, but domain_matching=False relative URL construction in MapAdapter.build spans multiple conditional state assignments across url_scheme/server_name."
+    }
+  ]
+}

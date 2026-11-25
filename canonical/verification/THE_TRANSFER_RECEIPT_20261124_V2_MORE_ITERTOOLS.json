@@ -1,0 +1,114 @@
+{
+  "arms": {
+    "EMPTY": {
+      "arm": "EMPTY",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "62411c16",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "71e070b3",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "PRESENCE",
+          "repo": "more-itertools",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "b0aa91ef",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "cca32949",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "d3665d6b",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        }
+      ],
+      "rows": 5,
+      "skills_admitted": 0,
+      "skills_refused": 0,
+      "verified": 1,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "71e070b3"
+      ]
+    },
+    "GENERAL": {
+      "arm": "GENERAL",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "62411c16",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "71e070b3",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "PRESENCE",
+          "repo": "more-itertools",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "b0aa91ef",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_EDIT_SURVIVED_THE_PROJECT_SUITE"
+        },
+        {
+          "commit": "cca32949",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "d3665d6b",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "more-itertools",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        }
+      ],
+      "rows": 5,
+      "skills_admitted": 1,
+      "skills_refused": 0,
+      "verified": 1,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "71e070b3"
+      ]
+    }
+  },
+  "authority": "measured on the 45-row corpus; every number below is a printed receipt",
+  "schema": "THE_STORE_IS_THE_ONLY_THING_THAT_LEARNS_V1"
+}

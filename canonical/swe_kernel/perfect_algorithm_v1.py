@@ -541,77 +541,151 @@ def _importable(name: str) -> bool:
         return False
 
 
+def _flatten_document_text(text: Any) -> str:
+    """Extract plain text from string, dict, or list of retrieved guide documents."""
+    if isinstance(text, str):
+        return text
+    if isinstance(text, Mapping):
+        parts = []
+        for k in ("text", "body", "content", "snippet", "description", "usage"):
+            v = text.get(k)
+            if isinstance(v, str) and v.strip():
+                parts.append(v)
+        return "\n\n".join(parts)
+    if isinstance(text, (list, tuple)):
+        parts = [_flatten_document_text(x) for x in text]
+        return "\n\n".join(p for p in parts if p.strip())
+    return ""
+
+
+def _extract_shell_transcripts(text: str) -> list[tuple[str, list[str]]]:
+    """Parse `$ cmd` + expected stdout lines from shell guides/manpages."""
+    sessions: list[tuple[str, list[str]]] = []
+    lines = text.splitlines()
+    i = 0
+    while i < len(lines):
+        raw = lines[i].strip()
+        if raw.startswith("$ ") and len(raw) > 2:
+            cmd = raw[2:].strip()
+            expected: list[str] = []
+            j = i + 1
+            while j < len(lines):
+                nxt = lines[j].strip()
+                if not nxt or nxt.startswith(("$ ", ">>> ", "```", "# ")):
+                    break
+                expected.append(lines[j].rstrip())
+                j += 1
+            if cmd and expected:
+                sessions.append((cmd, expected))
+            i = j
+        else:
+            i += 1
+    return sessions
+
+
 def _plan_from_document(text: Any, actions: Sequence[Any], goal: str) -> dict[str, Any]:
     """Turn fetched documentation into a plan, using only what the document itself vouches for.
 
     Four gates, each of which can refuse, and the refusal is reported with its name:
-      EXTRACTED     the text yielded at least one transcript example;
-      REPLAYED      at least one example ran;
+      EXTRACTED     the text yielded at least one transcript example (`>>>` pycon OR `$ ` shell);
+      REPLAYED      at least one example ran in an isolated scratch room;
       MATCHED       at least one example reproduced the output the document printed;
       IN_VOCABULARY at least one matched command uses a program the plan space already offers.
 
-    The last gate is the one that keeps a guide from widening the action space behind the caller's
-    back: documentation says what EXISTS on a machine, not what this call may DO. A command that
-    matched and is outside the caller's actions is reported as SEEN_NOT_PERMITTED and is not planned.
+    The last gate keeps a guide from widening the action space behind the caller's back:
+    documentation says what EXISTS on a machine, not what this call may DO. A command outside
+    the caller's actions is never executed (for shell) or planned (for pycon), and is reported
+    as SEEN_NOT_PERMITTED.
     """
-    if isinstance(text, (list, tuple)):
-        text = "\n\n".join(str(x) for x in text)
-    if not isinstance(text, str) or ">>>" not in text:
+    text = _flatten_document_text(text)
+    has_pycon = ">>>" in text
+    shell_sessions = _extract_shell_transcripts(text) if text else []
+    if not text or (not has_pycon and not shell_sessions):
         return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
                 "gate": "EXTRACTED", "examples": 0}
+    import shlex as _shlex
+    import subprocess as _subprocess
     import tempfile as _tempfile
 
-    try:
-        from canonical.tools.the_guide_is_a_test_suite_v1 import (
-            _python_example_ok, as_sessions, compare, transcripts)
-    except Exception as error:  # noqa: BLE001
-        return {"status": "REFUSED__EXTRACTOR_UNAVAILABLE", "error": str(error)[:200]}
-    block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
-    sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
-    if not sessions:
-        return {"status": "REFUSED__NO_TRANSCRIPT_IN_THE_DOCUMENT",
-                "gate": "EXTRACTED", "examples": 0}
-    # THE VOCABULARY IS PROGRAMS, NOT WHOLE COMMANDS. `statistics.median([1])` and
-    # `statistics.median([2, 3, 4, 5])` are the same program, and the plan space offers the program.
     def _program(expression: str) -> str:
-        found = re.match(r"[A-Za-z_][\w.]*", expression.strip())
+        found = re.match(r"[A-Za-z_./-][\w./-]*", expression.strip())
         return found.group(0) if found else ""
 
     offered = {_program(str(action)) for action in actions if str(action).strip()}
     offered.discard("")
     matched: list[dict[str, Any]] = []
     seen: list[str] = []
-    with _tempfile.TemporaryDirectory(prefix="document-room-") as where:
-        room = pathlib.Path(where)
-        for session in sessions:
-            # WHICH NAMESPACE? The document says so. `testmod` knows it because it was handed a
-            # module; a fetched document is not, so it is read off the transcript: a command written
-            # `statistics.median(...)` belongs to a session whose namespace is `statistics`. A name
-            # that is not importable is left alone rather than guessed, and the refusal is counted.
-            head = session["_statement"].split("(")[0].strip().split(".")[0].strip()
-            namespace = head if _importable(head) else None
-            got = _python_example_ok(session, room, module=namespace)
-            if not got.get("ok"):
-                continue
-            verdict = compare(got["got"], session["expected"])
-            if not verdict["matches"]:
-                continue
-            command = session["_statement"]
-            if _program(command) not in offered:
-                seen.append(command[:120])
-                continue
-            matched.append({"statement": command[:200], "expected": session["expected"][:2],
-                            "check": verdict["verdict"]})
+    total_sessions = 0
+
+    # Path A: Python `>>>` transcripts
+    if has_pycon:
+        try:
+            from canonical.tools.the_guide_is_a_test_suite_v1 import (
+                _python_example_ok, as_sessions, compare, transcripts)
+            block = {"language": "pycon", "first_line": 1, "text": text, "module_scope": False}
+            py_sessions = as_sessions(transcripts([block])[0]) if transcripts([block]) else []
+            total_sessions += len(py_sessions)
+            with _tempfile.TemporaryDirectory(prefix="document-room-") as where:
+                room = pathlib.Path(where)
+                for session in py_sessions:
+                    head = session["_statement"].split("(")[0].strip().split(".")[0].strip()
+                    namespace = head if _importable(head) else None
+                    got = _python_example_ok(session, room, module=namespace)
+                    if not got.get("ok"):
+                        continue
+                    verdict = compare(got["got"], session["expected"])
+                    if not verdict["matches"]:
+                        continue
+                    command = session["_statement"]
+                    if _program(command) not in offered:
+                        seen.append(command[:120])
+                        continue
+                    matched.append({"statement": command[:200], "expected": session["expected"][:2],
+                                    "check": verdict["verdict"]})
+        except Exception as error:  # noqa: BLE001
+            if not shell_sessions:
+                return {"status": "REFUSED__EXTRACTOR_UNAVAILABLE", "error": str(error)[:200]}
+
+    # Path B: Shell `$ cmd` transcripts (strictly restricted to `offered` vocabulary, shell=False!)
+    if shell_sessions:
+        total_sessions += len(shell_sessions)
+        with _tempfile.TemporaryDirectory(prefix="document-shell-room-") as where:
+            for cmd, expected in shell_sessions[:16]:
+                try:
+                    argv = _shlex.split(cmd)
+                except ValueError:
+                    continue
+                if not argv:
+                    continue
+                prog = argv[0]
+                if prog not in offered:
+                    seen.append(cmd[:120])
+                    continue
+                # Reject shell metacharacters since we run shell=False on single commands
+                if any(tok in ("|", "&&", "||", ";", ">", ">>", "<") for tok in argv):
+                    continue
+                try:
+                    proc = _subprocess.run(
+                        argv, cwd=where, capture_output=True, text=True, timeout=5.0, shell=False
+                    )
+                except Exception:
+                    continue
+                got_lines = [ln.rstrip() for ln in proc.stdout.splitlines()]
+                exp_lines = [ln.rstrip() for ln in expected]
+                if proc.returncode == 0 and got_lines == exp_lines:
+                    matched.append({"statement": cmd[:200], "expected": exp_lines[:2],
+                                    "check": "EXACT_SHELL_REPLAY"})
+
     if not matched:
         if seen:
             return {"status": "REFUSED__NOTHING_MATCHED_INSIDE_THE_PLAN_SPACE",
                     "gate": "IN_VOCABULARY", "seen_not_permitted": seen[:8],
-                    "sessions": len(sessions)}
+                    "sessions": total_sessions}
         return {"status": "REFUSED__NOTHING_REPRODUCED_THE_DOCUMENTS_OUTPUT",
-                "gate": "MATCHED", "sessions": len(sessions)}
+                "gate": "MATCHED", "sessions": total_sessions}
     return {"status": "PASS__PLAN_FROM_A_DOCUMENT", "gate": "IN_VOCABULARY",
             "plan": [row["statement"] for row in matched],
-            "matched": matched[:8], "sessions": len(sessions),
+            "matched": matched[:8], "sessions": total_sessions,
             "authority": "EXTERNAL_DOCUMENT_REPLAYED_AND_SELF_CHECKED",
             "why_this_plan": ("each step is a command the document printed, replayed in a scratch "
                               "room, whose output matched the document's own printed answer")}
@@ -805,6 +879,7 @@ def run(env: Any, goal: str, actions: Sequence[Any],
                                     else "OPEN__INSTANT_KNOWLEDGE_INCOMPLETE")
                 instant["query"] = query
                 instant["documents_returned"] = int(fetched.get("document_count") or 0)
+                instant["documents"] = list(fetched.get("documents") or [])
                 instant["complete"] = bool(fetched.get("complete"))
                 instant["sources_answered"] = list(fetched.get("sources_answered") or [])
                 instant["kinds_answered"] = list(fetched.get("kinds_answered") or [])
@@ -842,8 +917,10 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         # The guide is EXTERNAL knowledge and stays labelled so: every plan row carries the
         # authority of the document it came from, and none of this is counted as capability.
         receipts["steps"]["instant_knowledge"] = instant
+        local_docs = ((instant.get("local_guide") or {}).get("documents")
+                      if isinstance(instant.get("local_guide"), Mapping) else None)
         retrieved = (instant.get("text") or instant.get("documents")
-                     or instant.get("body") or "")
+                     or local_docs or instant.get("body") or "")
         closed = _plan_from_document(retrieved, actions, goal)
         receipts["steps"]["document_as_test_suite"] = closed
         if closed.get("status") == "PASS__PLAN_FROM_A_DOCUMENT":
@@ -1329,3 +1406,136 @@ def _verify_priors_by_trajectory(env: Any, prior_rows: Mapping[str, Mapping[str,
             kept.add(key)
     discarded = total - sum(len(r) for r in verified.values())
     return verified, discarded
+
+
+# --------------------------------------------------------------------------- #
+# 8. FOUR-LEAP SEMANTIC GENERALIZATION ENTRYPOINTS
+#    (Causal Data-Flow Graph + Universal SemanticIR + CEGIS + Executable Mental Model)
+# --------------------------------------------------------------------------- #
+
+def solve_code_semantically(
+    files: Mapping[str, str],
+    *,
+    entry_func: str,
+    entry_file: str | None = None,
+    failing_cases: Sequence[tuple[Sequence[Any], Any]] = (),
+    passing_cases: Sequence[tuple[Sequence[Any], Any]] = (),
+    real_oracle: Any = None,
+    neighbor_oracle: Any = None,
+    skill_store: Any = None,
+    language_overrides: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Run the unified 4-Leap SemanticProgramEngine (zero model calls, zero syntax rules)."""
+    from canonical.swe_kernel import cegis_semantic_synthesizer_v1 as syn
+
+    engine = syn.SemanticProgramEngine(skill_store=skill_store)
+    return engine.repair_multi_file_program(
+        files,
+        entry_func=entry_func,
+        entry_file=entry_file,
+        failing_cases=failing_cases,
+        passing_cases=passing_cases,
+        real_oracle=real_oracle,
+        neighbor_oracle=neighbor_oracle,
+        language_overrides=language_overrides,
+    )
+
+
+def plan_and_execute_with_mental_model(
+    model: Any,
+    env_step: Any,
+    env_observe: Any,
+    goal_pred: Any,
+    *,
+    safety_invariant: Any = None,
+    max_replans: int = 6,
+    max_depth: int = 8,
+) -> dict[str, Any]:
+    """Simulate action trajectories in `EnvironmentMentalModel` before mutating real state,
+    blocking unsafe states and refining transition laws on counterexamples (CEGAR).
+    """
+    return model.execute_with_cegar(
+        env_step=env_step,
+        env_observe=env_observe,
+        goal_pred=goal_pred,
+        safety_invariant=safety_invariant,
+        max_replans=max_replans,
+        max_depth=max_depth,
+    )
+
+
+def solve_universal_computer_goal(
+    env: Any,
+    goal_text: str,
+    *,
+    law_store_path: Any = None,
+    max_steps: int = 12,
+) -> dict[str, Any]:
+    """Run the zero-model, zero-knowledge-house UniversalComputerAgent on a live terminal or web-DOM env."""
+    from canonical.swe_kernel import universal_computer_agent_v1 as uca
+
+    agent = uca.UniversalComputerAgent(law_store_path=law_store_path)
+    if isinstance(env, uca.RealWebDOMEnv):
+        return agent.solve_web_dom_goal(env, goal_text, max_steps=max_steps)
+    return agent.solve_terminal_goal(env, goal_text, max_steps=max_steps)
+
+
+# --------------------------------------------------------------------------- #
+# Unified Causal Scan -> Memory U-IR Diff -> CoW Mental Model + COGS Inventor #
+# --------------------------------------------------------------------------- #
+
+
+def solve_causal_environment(
+    repo_or_env_root: pathlib.Path | str,
+    *,
+    language: str = "python",
+    test_target: str | None = None,
+    custom_test_cmd: list[str] | None = None,
+    law_store_path: pathlib.Path | None = None,
+    enable_law_crystallization: bool = True,
+    sandbox_budget: int = 36,
+    timeout_sec: float = 25.0,
+) -> dict[str, Any]:
+    """Unified entry point for arbitrary unseen software repositories and executable
+    workspaces:
+      1. Goal-directed causal scan (multi-language U-IR + interprocedural lineage),
+      2. Diff against external Semantic Causal Law Store (`SEMANTIC_CAUSAL_LAWS_V1.json`),
+      3. Simulate & invent multi-statement / cross-file fixes via ObsEGraph + Z3 inside
+         the Zero-Copy CoW Executable Mental Model (`model_calls = 0`, `weights = 0`),
+      4. Crystallize newly verified laws into inspectable external memory.
+    """
+    from canonical.swe_kernel.causal_cegis_inventor_v1 import CausalCEGISInventor
+
+    root_path = pathlib.Path(repo_or_env_root).resolve()
+    inventor = CausalCEGISInventor(
+        law_store_path=law_store_path,
+        enable_law_crystallization=enable_law_crystallization,
+        sandbox_budget=sandbox_budget,
+    )
+    res = inventor.solve_repository(
+        root_path,
+        language=language,
+        test_target=test_target,
+        custom_test_cmd=custom_test_cmd,
+        timeout_sec=timeout_sec,
+    )
+    return {
+        "schema": SCHEMA,
+        "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+        "model_calls": 0,
+        "memorized_world_weights": 0,
+        "solved": res.solved,
+        "stage": res.stage,
+        "mechanism": res.mechanism,
+        "modified_files": res.modified_files,
+        "unified_diff": res.unified_diff,
+        "sabotage_verified": res.sabotage_verified,
+        "overfit_falsifier_passed": res.overfit_falsifier_passed,
+        "neighbor_impact_passed": res.neighbor_impact_passed,
+        "crystallized_law_id": res.crystallized_law_id,
+        "candidates_evaluated_in_memory": res.candidates_evaluated_in_memory,
+        "candidates_executed_in_sandbox": res.candidates_executed_in_sandbox,
+        "source_tree_unchanged": res.source_tree_unchanged,
+        "elapsed_ms": res.elapsed_ms,
+        "diagnostics": res.diagnostics,
+    }

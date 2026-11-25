@@ -1,0 +1,298 @@
+{
+ "schema": "BRAIN_WHERE_CONJUNCTIONS_STOP_PAYING_V1",
+ "generated": "2026-11-25T11:30:44Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 61.7
+ },
+ "summary": {
+  "machines": [
+   "ARCHIVE2",
+   "FILESYSTEM",
+   "GIT",
+   "GIT2",
+   "JOURNAL",
+   "LIST",
+   "SCRAMBLED",
+   "SQLITE",
+   "TARBALL",
+   "VAULT"
+  ],
+  "candidate_predicates": [
+   "ALL_CONTENT_UNIQUE",
+   "CONTENT_LENGTH_UNIFORM",
+   "CONTENT_SORTED",
+   "HAS_DIGIT_CONTENT",
+   "HAS_DUPLICATE_CONTENT",
+   "HAS_EMPTY_CONTENT",
+   "HAS_MANY_ROWS",
+   "IDENT_LENGTH_UNIFORM",
+   "IDENT_SORTED",
+   "ROWS_1",
+   "ROWS_2",
+   "ROWS_3",
+   "ROWS_4"
+  ],
+  "incumbent_vocabulary": [
+   "HAS_DUPLICATE_CONTENT",
+   "ALL_CONTENT_UNIQUE",
+   "ROWS_2",
+   "ROWS_3",
+   "ROWS_4"
+  ],
+  "incumbent_scored_on_all_machines": {
+   "predictions": 75,
+   "wrong": 12,
+   "refused": 73,
+   "accuracy": 0.8621,
+   "coverage": 0.5068
+  },
+  "curve": [
+   {
+    "size": 1,
+    "predictions": 94,
+    "wrong": 12,
+    "refused": 54,
+    "accuracy": 0.8868,
+    "coverage": 0.6351
+   },
+   {
+    "size": 2,
+    "predictions": 87,
+    "wrong": 15,
+    "refused": 61,
+    "accuracy": 0.8529,
+    "coverage": 0.5878
+   },
+   {
+    "size": 3,
+    "predictions": 89,
+    "wrong": 19,
+    "refused": 59,
+    "accuracy": 0.8241,
+    "coverage": 0.6014
+   },
+   {
+    "size": 4,
+    "predictions": 83,
+    "wrong": 8,
+    "refused": 65,
+    "accuracy": 0.9121,
+    "coverage": 0.5608
+   },
+   {
+    "size": 5,
+    "predictions": 76,
+    "wrong": 6,
+    "refused": 72,
+    "accuracy": 0.9268,
+    "coverage": 0.5135
+   },
+   {
+    "size": 6,
+    "predictions": 76,
+    "wrong": 6,
+    "refused": 72,
+    "accuracy": 0.9268,
+    "coverage": 0.5135
+   },
+   {
+    "size": 7,
+    "predictions": 89,
+    "wrong": 6,
+    "refused": 59,
+    "accuracy": 0.9368,
+    "coverage": 0.6014
+   },
+   {
+    "size": 8,
+    "predictions": 76,
+    "wrong": 7,
+    "refused": 72,
+    "accuracy": 0.9157,
+    "coverage": 0.5135
+   }
+  ],
+  "margins": [
+   {
+    "from_size": 1,
+    "to_size": 2,
+    "coverage_gain": -0.0473,
+    "accuracy_gain": -0.0339
+   },
+   {
+    "from_size": 2,
+    "to_size": 3,
+    "coverage_gain": 0.0136,
+    "accuracy_gain": -0.0288
+   },
+   {
+    "from_size": 3,
+    "to_size": 4,
+    "coverage_gain": -0.0406,
+    "accuracy_gain": 0.088
+   },
+   {
+    "from_size": 4,
+    "to_size": 5,
+    "coverage_gain": -0.0473,
+    "accuracy_gain": 0.0147
+   },
+   {
+    "from_size": 5,
+    "to_size": 6,
+    "coverage_gain": 0.0,
+    "accuracy_gain": 0.0
+   },
+   {
+    "from_size": 6,
+    "to_size": 7,
+    "coverage_gain": 0.0879,
+    "accuracy_gain": 0.01
+   },
+   {
+    "from_size": 7,
+    "to_size": 8,
+    "coverage_gain": -0.0879,
+    "accuracy_gain": -0.0211
+   }
+  ],
+  "fold_moves": [
+   {
+    "from_size": 1,
+    "to_size": 2,
+    "folds_changing_choice": 10,
+    "folds_improving": 1,
+    "folds": 10
+   },
+   {
+    "from_size": 2,
+    "to_size": 3,
+    "folds_changing_choice": 10,
+    "folds_improving": 1,
+    "folds": 10
+   },
+   {
+    "from_size": 3,
+    "to_size": 4,
+    "folds_changing_choice": 10,
+    "folds_improving": 3,
+    "folds": 10
+   },
+   {
+    "from_size": 4,
+    "to_size": 5,
+    "folds_changing_choice": 10,
+    "folds_improving": 0,
+    "folds": 10
+   },
+   {
+    "from_size": 5,
+    "to_size": 6,
+    "folds_changing_choice": 10,
+    "folds_improving": 0,
+    "folds": 10
+   },
+   {
+    "from_size": 6,
+    "to_size": 7,
+    "folds_changing_choice": 10,
+    "folds_improving": 1,
+    "folds": 10
+   },
+   {
+    "from_size": 7,
+    "to_size": 8,
+    "folds_changing_choice": 10,
+    "folds_improving": 0,
+    "folds": 10
+   }
+  ],
+  "noise_floor": {
+   "pooled_predictions_per_point": 93.6,
+   "standard_error_at_p_0.9": 0.031,
+   "reading": "a coverage gain smaller than this SE is not distinguishable from noise on this test set"
+  },
+  "derived_stopping_point": {
+   "largest_size_with_a_real_gain": 7,
+   "best_size_by_coverage_then_accuracy": 1,
+   "rule": "stop adding predicates once no adjacent step yields a coverage gain above the noise floor; the stopping point is read off the curve, never chosen"
+  },
+  "verdicts": {
+   "more_vocabulary_eventually_stops_paying": true,
+   "the_gain_curve_has_an_interior_maximum": false,
+   "the_fold_choice_is_unstable_at_large_sizes": true,
+   "a_stopping_point_is_derivable_from_the_curve": true,
+   "the_incumbent_is_beaten_out_of_sample": true,
+   "the_vocabulary_is_a_precision_dial_not_a_reach_lever": true,
+   "coverage_does_not_improve_with_more_predicates": true,
+   "accuracy_improves_with_more_predicates": true
+  },
+  "pareto_front": [
+   {
+    "size": 7,
+    "accuracy": 0.9368,
+    "coverage": 0.6014,
+    "predictions": 89,
+    "wrong": 6
+   },
+   {
+    "size": 1,
+    "accuracy": 0.8868,
+    "coverage": 0.6351,
+    "predictions": 94,
+    "wrong": 12
+   }
+  ],
+  "pareto_note": "The vocabulary is a DIAL, not a choice. Adding predicates splits keys finer: accuracy rises and coverage falls, because a finer key is more often one the held-out state's walk never produced. Every point on this front is out-of-sample. Which point to take is a preference (cost of a wrong prediction vs cost of a refusal), not a fact the data can settle.",
+  "accuracy_trend": {
+   "by_size": [
+    [
+     1,
+     0.8868
+    ],
+    [
+     2,
+     0.8529
+    ],
+    [
+     3,
+     0.8241
+    ],
+    [
+     4,
+     0.9121
+    ],
+    [
+     5,
+     0.9268
+    ],
+    [
+     6,
+     0.9268
+    ],
+    [
+     7,
+     0.9368
+    ],
+    [
+     8,
+     0.9157
+    ]
+   ],
+   "smallest": 0.8868,
+   "largest_size": 8,
+   "at_largest_size": 0.9157,
+   "monotone_increasing": false,
+   "reading": "accuracy rises with vocabulary size almost monotonically and by more than the noise floor, while coverage does not rise at all. So added vocabulary buys PRECISION, and the earlier claim that it buys REACH was wrong.",
+   "best_accuracy": {
+    "size": 7,
+    "accuracy": 0.9368
+   },
+   "gain_from_best_to_single": 0.05,
+   "note_on_flatness": "sizes 4-8 sit in a 0.916-0.937 band whose spread is the size of the standard error (0.031), so the only accuracy difference worth naming is best (0.9368) versus the single-predicate vocabulary (0.8868): +5.0 points for six more predicates."
+  }
+ }
+}
