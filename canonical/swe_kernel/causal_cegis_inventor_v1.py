@@ -44,6 +44,12 @@ from canonical.swe_kernel.repo_component_petri_v1 import (
 from canonical.swe_kernel.differential_witness_inversion_v1 import (
     synthesize_live_differential_witness_repairs,
 )
+from canonical.swe_kernel.metamorphic_habitation_zipper_v1 import (
+    abduce_metamorphic_oracle,
+    extract_innermost_repo_failure_file,
+    propagate_relational_zipper_hop,
+    synthesize_type_habitation_and_guard_repairs,
+)
 from canonical.swe_kernel.universal_semantic_ir_v1 import (
     DEFAULT_LAW_STORE_PATH,
     IGNORED_DIRS,
@@ -516,11 +522,15 @@ class ExecutableMentalModel:
         pytest_args = [
             *targets[:10],
             "-v" if multi else "-q",
-            "--tb=no",
+            "--tb=line",
             "-p",
             "no:cacheprovider",
             "-W",
             "ignore",
+            "-o",
+            "filterwarnings=ignore",
+            "-o",
+            "asyncio_default_fixture_loop_scope=function",
         ]
         zproc = self._ensure_zygote()
         if zproc is not None and zproc.stdin is not None and zproc.stdout is not None:
@@ -537,7 +547,17 @@ class ExecutableMentalModel:
                     rc = int(resp.get("rc", 1))
                     out_txt = str(resp.get("stdout") or "")
                     if not multi:
-                        return rc == 0, None
+                        if rc == 0:
+                            return True, None
+                        return False, TestRunVerdict(
+                            passed=False,
+                            returncode=rc,
+                            outcomes={targets[0]: "FAILED"},
+                            failing_tests=[targets[0]],
+                            passing_tests=[],
+                            output=out_txt[-1600:],
+                            elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 2),
+                        )
                     outcomes_z: dict[str, str] = {}
                     for line in out_txt.splitlines():
                         s = line.strip()
@@ -577,7 +597,17 @@ class ExecutableMentalModel:
                 timeout=timeout_sec,
             )
             if not multi:
-                return proc.returncode == 0, None
+                if proc.returncode == 0:
+                    return True, None
+                return False, TestRunVerdict(
+                    passed=False,
+                    returncode=proc.returncode,
+                    outcomes={targets[0]: "FAILED"},
+                    failing_tests=[targets[0]],
+                    passing_tests=[],
+                    output=((proc.stdout or "") + "\n" + (proc.stderr or ""))[-1600:],
+                    elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 2),
+                )
             outcomes: dict[str, str] = {}
             for line in (proc.stdout or "").splitlines():
                 s = line.strip()
@@ -630,6 +660,10 @@ class ExecutableMentalModel:
                 "no:cacheprovider",
                 "-W",
                 "ignore",
+                "-o",
+                "filterwarnings=ignore",
+                "-o",
+                "asyncio_default_fixture_loop_scope=function",
             ]
             env = self._python_env()
         elif self.language in {"javascript", "typescript"}:
@@ -2014,7 +2048,8 @@ class CausalCEGISInventor:
             def _try_abduce_from_issue() -> TestRunVerdict | None:
                 if norm_lang != "python" or not problem_statement:
                     return None
-                for cand_repro in extract_candidate_repro_tests_from_issue(repo_root, problem_statement):
+                cand_repros = list(extract_candidate_repro_tests_from_issue(repo_root, problem_statement))
+                for cand_repro in cand_repros:
                     repro_path = mental.cow_root / abduced_repro_rel
                     repro_path.write_text(cand_repro, encoding="utf-8")
                     mental.test_target = abduced_repro_rel
@@ -2032,6 +2067,34 @@ class CausalCEGISInventor:
                     )
                     if not v_try.passed and v_try.failing_tests and not bad_frag and has_real_signal:
                         return v_try
+                    if repro_path.exists():
+                        repro_path.unlink()
+                    mental.test_target = test_target
+
+                # Pillar 1: Metamorphic Witness Splitter (`abduce_metamorphic_oracle`)
+                # When prose contains no verbatim repro snippet, probe attributed modules for
+                # algebraic / representation / aliasing metamorphic law violations.
+                for meta_repro in abduce_metamorphic_oracle(
+                    cow_root=mental.cow_root,
+                    pycache_dir=mental.pycache_dir,
+                    py_exe=mental.py_exe,
+                    py_env=mental._python_env(),
+                    problem_statement=problem_statement,
+                    timeout_sec=min(10.0, timeout_sec),
+                ):
+                    repro_path = mental.cow_root / abduced_repro_rel
+                    repro_path.write_text(meta_repro, encoding="utf-8")
+                    mental.test_target = abduced_repro_rel
+                    v_meta = mental.run_oracle(
+                        specific_target=abduced_repro_rel,
+                        timeout_sec=min(8.0, timeout_sec),
+                    )
+                    bad_frag_m = any(
+                        err_tok in v_meta.output
+                        for err_tok in ("SyntaxError", "IndentationError", "ModuleNotFoundError", "ImportError")
+                    )
+                    if not v_meta.passed and v_meta.failing_tests and not bad_frag_m:
+                        return v_meta
                     if repro_path.exists():
                         repro_path.unlink()
                     mental.test_target = test_target
@@ -2409,13 +2472,15 @@ class CausalCEGISInventor:
                     if p_extra not in test_file_paths:
                         test_file_paths.append(p_extra)
 
+                py_fast_law_targets = [t for t in baseline.failing_tests[:10] if not t.startswith("<")]
+                law_recall_checks = 0
                 for fn_ord_idx, (r_fn, fn_nm, fl_no) in enumerate(loc_fns_ordered[:18]):
                     fp_fn = repo_root / r_fn
                     if not fp_fn.is_file():
                         continue
                     orig_b_fn = fp_fn.read_bytes()
                     orig_s_fn = orig_b_fn.decode("utf-8", errors="replace")
-                    if self.law_store.laws:
+                    if self.law_store.laws and law_recall_checks < 6:
                         for law, patched_b_fn, desc_fn in self.law_store.match_and_compile_candidates(
                             orig_b_fn,
                             norm_lang,
@@ -2423,13 +2488,26 @@ class CausalCEGISInventor:
                             target_func_name=fn_nm,
                             runtime_hint={"assertion_literals": spec_literals},
                         ):
+                            if law_recall_checks >= 6:
+                                break
                             mem_eval_total += 1
+                            law_recall_checks += 1
+                            law_fp = {r_fn: patched_b_fn.decode("utf-8", errors="replace")}
+                            mental.apply_overrides(law_fp)
+                            law_q_ok, _ = mental.run_fast_gate(
+                                specific_targets=py_fast_law_targets,
+                                modified_rels=[r_fn],
+                                timeout_sec=min(4.5, timeout_sec),
+                            )
+                            mental.restore_originals([r_fn])
+                            if not law_q_ok:
+                                continue
                             v_fn_res = self._verify_and_finalize_patch(
                                 mental=mental,
                                 causal_graph=causal_graph,
                                 repo_root=repo_root,
                                 baseline=baseline,
-                                file_patches={r_fn: patched_b_fn.decode("utf-8", errors="replace")},
+                                file_patches=law_fp,
                                 mechanism=f"SEMANTIC_LAW_RECALL:{law.law_id}",
                                 description=desc_fn,
                                 norm_lang=norm_lang,
@@ -2488,6 +2566,24 @@ class CausalCEGISInventor:
                     single_file_Queue.extend(w_cands[:6])
                     if w_cands[6:]:
                         per_site_buckets.append((-2, w_cands[6:]))  # type: ignore[arg-type]
+
+                # Pillar 2: Module-Global Def-Use Regex Slice, Live Boolean Guard Separation &
+                # Codebase Type-Habitation Idioms (`COGS_TYPE_HABITATION_AND_GUARD_SEPARATION`)
+                h_cands, h_eval_cnt = synthesize_type_habitation_and_guard_repairs(
+                    cow_root=mental.cow_root,
+                    pycache_dir=mental.pycache_dir,
+                    py_exe=mental.py_exe,
+                    py_env=mental._python_env(),
+                    failing_tests=baseline.failing_tests,
+                    passing_tests=baseline.passing_tests,
+                    baseline_output=baseline.output,
+                    timeout_sec=min(14.0, max(timeout_sec, 10.0)),
+                )
+                mem_eval_total += h_eval_cnt
+                if h_cands:
+                    single_file_Queue.extend(h_cands[:8])
+                    if h_cands[8:]:
+                        per_site_buckets.append((-2, h_cands[8:]))  # type: ignore[arg-type]
 
                 for rel_path, line_no, _ in combined_ranked[:110]:
                     if (rel_path, line_no) in visited_sites:
@@ -2628,6 +2724,8 @@ class CausalCEGISInventor:
             # retain partial-progress patches for Phase 3 Coupled Multi-File / Multi-Hunk Beam!
             seen_patch_hashes: set[str] = set()
             partial_progress_beam: list[tuple[dict[str, str], int, list[str], str]] = []
+            zipper_bridge_seeds: list[tuple[dict[str, str], list[str], str, str]] = []
+            known_repo_py_files = set(causal_graph.functions_by_file.keys())
             base_fail_cnt = len(baseline.failing_tests)
             py_fast_targets = (
                 [t for t in baseline.failing_tests[:10] if not t.startswith("<")]
@@ -2635,11 +2733,12 @@ class CausalCEGISInventor:
                 else None
             )
 
-            single_hunk_cap = (
-                max(12, self.sandbox_budget - max(6, self.sandbox_budget // 5))
+            single_hunk_cap = mental.simulations_run + (
+                max(14, self.sandbox_budget - max(6, self.sandbox_budget // 5))
                 if self.sandbox_budget >= 20
                 else self.sandbox_budget + 2
             )
+            splice_attempts = 0
             for file_patches, mech, desc in single_file_Queue:
                 if mental.simulations_run >= single_hunk_cap:
                     break
@@ -2688,8 +2787,10 @@ class CausalCEGISInventor:
                     if (
                         norm_lang == "python"
                         and len(file_patches) == 1
-                        and mental.simulations_run < self.sandbox_budget + 6
+                        and splice_attempts < 2
+                        and mental.simulations_run < single_hunk_cap + 4
                     ):
+                        splice_attempts += 1
                         rel_only, cand_only = next(iter(file_patches.items()))
                         orig_only = (repo_root / rel_only).read_text(encoding="utf-8", errors="replace")
                         mental.apply_overrides(file_patches)
@@ -2740,6 +2841,19 @@ class CausalCEGISInventor:
                         partial_progress_beam.append(
                             (file_patches, len(quick_v.failing_tests), list(quick_v.failing_tests), desc)
                         )
+                        if norm_lang == "python" and len(zipper_bridge_seeds) < 3:
+                            zipper_bridge_seeds.append(
+                                (file_patches, list(quick_v.failing_tests), quick_v.output, desc)
+                            )
+                    elif norm_lang == "python" and len(file_patches) == 1 and len(zipper_bridge_seeds) < 3:
+                        sec_rel = extract_innermost_repo_failure_file(
+                            quick_v.output, known_repo_py_files, exclude_test_target=mental.test_target
+                        )
+                        prim_rel = next(iter(file_patches.keys()))
+                        if sec_rel is not None and sec_rel != prim_rel:
+                            zipper_bridge_seeds.append(
+                                (file_patches, list(quick_v.failing_tests or baseline.failing_tests[:2]), quick_v.output, desc)
+                            )
                     elif norm_lang != "python" and base_native_prog is not None:
                         cand_prog = _extract_native_crash_progress(quick_v.output, repo_root)
                         if cand_prog is not None and (
@@ -2758,6 +2872,50 @@ class CausalCEGISInventor:
             # ------------------------------------------------------------------
             # PHASE 3: Coupled Multi-File & Same-File Orthogonal Multi-Hunk Beam
             # ------------------------------------------------------------------
+            if norm_lang == "python" and zipper_bridge_seeds:
+                for z_patch, z_fails, z_out, _ in zipper_bridge_seeds[:2]:
+                    if mental.simulations_run >= self.sandbox_budget + 10:
+                        break
+                    z_cands, z_eval_cnt = propagate_relational_zipper_hop(
+                        mental=mental,
+                        root_patch=z_patch,
+                        secondary_failing_tests=z_fails,
+                        passing_tests=baseline.passing_tests,
+                        secondary_output=z_out,
+                    )
+                    mem_eval_total += z_eval_cnt
+                    for z_merged, z_mech, z_desc in z_cands:
+                        if mental.simulations_run >= self.sandbox_budget + 10:
+                            break
+                        zh = hashlib.sha256(
+                            json.dumps(z_merged, sort_keys=True).encode("utf-8")
+                        ).hexdigest()[:16]
+                        if zh in seen_patch_hashes:
+                            continue
+                        seen_patch_hashes.add(zh)
+                        mental.apply_overrides(z_merged)
+                        zq_ok, _ = mental.run_fast_gate(
+                            specific_targets=py_fast_targets,
+                            modified_rels=list(z_merged.keys()),
+                            timeout_sec=min(4.5, timeout_sec),
+                        )
+                        mental.restore_originals(list(z_merged.keys()))
+                        if zq_ok:
+                            zv_res = self._verify_and_finalize_patch(
+                                mental=mental,
+                                causal_graph=causal_graph,
+                                repo_root=repo_root,
+                                baseline=baseline,
+                                file_patches=z_merged,
+                                mechanism=z_mech,
+                                description=z_desc,
+                                norm_lang=norm_lang,
+                                mem_eval_total=mem_eval_total,
+                                t0=t0,
+                            )
+                            if zv_res is not None:
+                                return zv_res
+
             if norm_lang != "python" and native_horizon_seeds:
                 native_horizon_seeds.sort(key=lambda s: (-s[1][0], -s[1][3]))
                 curr_p, curr_prog, curr_d = native_horizon_seeds[0]

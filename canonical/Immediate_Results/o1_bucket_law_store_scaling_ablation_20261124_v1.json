@@ -1,0 +1,46 @@
+{
+  "schema": "BRAIN_O1_BUCKET_LAW_STORE_SCALING_ABLATION_V1",
+  "date_utc": "2026-11-24",
+  "model_calls": 0,
+  "memorized_world_weights": 0,
+  "scaling_rows": [
+    {
+      "law_count": 1,
+      "bucket_count_before_remove": 1,
+      "median_match_ms": 0.2723,
+      "p95_match_ms": 0.3996,
+      "hits_before_remove_law": 1,
+      "remove_law_ok": true,
+      "hits_after_remove_law": 0
+    },
+    {
+      "law_count": 10,
+      "bucket_count_before_remove": 6,
+      "median_match_ms": 0.2581,
+      "p95_match_ms": 0.3355,
+      "hits_before_remove_law": 1,
+      "remove_law_ok": true,
+      "hits_after_remove_law": 0
+    },
+    {
+      "law_count": 100,
+      "bucket_count_before_remove": 6,
+      "median_match_ms": 0.2514,
+      "p95_match_ms": 0.3102,
+      "hits_before_remove_law": 1,
+      "remove_law_ok": true,
+      "hits_after_remove_law": 0
+    },
+    {
+      "law_count": 500,
+      "bucket_count_before_remove": 6,
+      "median_match_ms": 0.2687,
+      "p95_match_ms": 0.3156,
+      "hits_before_remove_law": 1,
+      "remove_law_ok": true,
+      "hits_after_remove_law": 0
+    }
+  ],
+  "median_latency_ratio_500_over_10_laws": 1.04,
+  "o1_sublinear_verified": true
+}
