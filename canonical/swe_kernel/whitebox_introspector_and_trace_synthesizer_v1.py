@@ -627,37 +627,45 @@ def _extract_test_guard_signals(test_files: Sequence[pathlib.Path]) -> tuple[lis
             ttree = ast.parse(tf.read_text(encoding="utf-8", errors="replace"))
         except (OSError, SyntaxError):
             continue
-        pending_exc: str | None = None
-        for sub in ast.walk(ttree):
-            if isinstance(sub, ast.Constant) and type(sub.value) is int and sub.value == 0:
-                has_zero = True
-            elif isinstance(sub, ast.UnaryOp) and isinstance(sub.op, ast.USub) and isinstance(sub.operand, ast.Constant):
-                if isinstance(sub.operand.value, (int, float)) and sub.operand.value > 0:
-                    has_neg = True
-            elif isinstance(sub, ast.Call):
-                fname = (
-                    sub.func.id if isinstance(sub.func, ast.Name)
-                    else (sub.func.attr if isinstance(sub.func, ast.Attribute) else "")
-                )
-                if fname in ("assertRaises", "assertRaisesRegex", "raises") and sub.args:
-                    exc_arg = sub.args[0]
-                    ename = exc_arg.id if isinstance(exc_arg, ast.Name) else ""
-                    if ename in known_excs:
-                        msg_lit: str | None = None
-                        if len(sub.args) >= 2 and isinstance(sub.args[1], ast.Constant) and isinstance(sub.args[1].value, str):
-                            msg_lit = sub.args[1].value
-                        for kw in sub.keywords:
-                            if kw.arg == "match" and isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
-                                msg_lit = kw.value.value
-                        pair = (ename, msg_lit)
-                        if pair not in exc_specs:
-                            exc_specs.append(pair)
-                        pending_exc = ename
-                elif fname == "assertIn" and sub.args and isinstance(sub.args[0], ast.Constant) and isinstance(sub.args[0].value, str):
-                    if pending_exc:
-                        pair = (pending_exc, sub.args[0].value)
-                        if pair not in exc_specs:
-                            exc_specs.insert(0, pair)
+        test_scopes = [
+            fn for fn in ast.walk(ttree)
+            if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)) and fn.name.startswith("test")
+        ] or [ttree]
+        for scope in test_scopes:
+            scope_exc: str | None = None
+            scope_assert_in: list[str] = []
+            for sub in ast.walk(scope):
+                if isinstance(sub, ast.Constant) and type(sub.value) is int and sub.value == 0:
+                    has_zero = True
+                elif isinstance(sub, ast.UnaryOp) and isinstance(sub.op, ast.USub) and isinstance(sub.operand, ast.Constant):
+                    if isinstance(sub.operand.value, (int, float)) and sub.operand.value > 0:
+                        has_neg = True
+                elif isinstance(sub, ast.Call):
+                    fname = (
+                        sub.func.id if isinstance(sub.func, ast.Name)
+                        else (sub.func.attr if isinstance(sub.func, ast.Attribute) else "")
+                    )
+                    if fname in ("assertRaises", "assertRaisesRegex", "raises") and sub.args:
+                        exc_arg = sub.args[0]
+                        ename = exc_arg.id if isinstance(exc_arg, ast.Name) else ""
+                        if ename in known_excs:
+                            msg_lit: str | None = None
+                            if len(sub.args) >= 2 and isinstance(sub.args[1], ast.Constant) and isinstance(sub.args[1].value, str):
+                                msg_lit = sub.args[1].value
+                            for kw in sub.keywords:
+                                if kw.arg == "match" and isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str):
+                                    msg_lit = kw.value.value
+                            pair = (ename, msg_lit)
+                            if pair not in exc_specs:
+                                exc_specs.append(pair)
+                            scope_exc = ename
+                    elif fname == "assertIn" and sub.args and isinstance(sub.args[0], ast.Constant) and isinstance(sub.args[0].value, str):
+                        scope_assert_in.append(sub.args[0].value)
+            if scope_exc and scope_assert_in:
+                for msg_s in scope_assert_in:
+                    pair = (scope_exc, msg_s)
+                    if pair not in exc_specs:
+                        exc_specs.insert(0, pair)
     return exc_specs, has_zero, has_neg
 
 
@@ -681,8 +689,26 @@ def test_driven_precondition_guard_candidates(
     out: list[tuple[str, str]] = []
     seen: set[str] = set()
 
-    for node in tree.body:
-        if not isinstance(node, ast.FunctionDef) or not node.body or not node.args.args:
+    def _is_direct_generator(fn_ast: ast.FunctionDef) -> bool:
+        stack: list[ast.AST] = list(fn_ast.body)
+        while stack:
+            cur = stack.pop()
+            if isinstance(cur, (ast.Yield, ast.YieldFrom)):
+                return True
+            if isinstance(cur, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Lambda)):
+                continue
+            stack.extend(ast.iter_child_nodes(cur))
+        return False
+
+    fn_nodes: list[ast.FunctionDef] = []
+    for top in tree.body:
+        if isinstance(top, ast.FunctionDef):
+            fn_nodes.append(top)
+        elif isinstance(top, ast.ClassDef):
+            fn_nodes.extend(m for m in top.body if isinstance(m, ast.FunctionDef))
+
+    for node in fn_nodes:
+        if not node.body or not node.args.args:
             continue
         if allowed_functions is not None and node.name not in allowed_functions:
             continue
@@ -710,8 +736,14 @@ def test_driven_precondition_guard_candidates(
             bound_param = params[1] if len(params) >= 2 else params[0]
 
         indent = " " * exec_stmt.col_offset
-        is_gen = any(isinstance(sub, (ast.Yield, ast.YieldFrom)) for sub in ast.walk(node))
-        zero_ret = "return" if is_gen else "return []"
+        is_gen = _is_direct_generator(node)
+        uses_iter_protocol = any(
+            isinstance(sub, ast.Call)
+            and isinstance(sub.func, ast.Name)
+            and sub.func.id in {"iter", "islice", "takewhile", "map", "zip"}
+            for sub in ast.walk(node)
+        )
+        zero_rets = ["return"] if is_gen else (["return iter(())", "return []"] if uses_iter_protocol else ["return []", "return iter(())"])
         insert_idx = exec_stmt.lineno - 1
 
         primary_exc, primary_msg = exc_specs[0] if exc_specs else ("ValueError", None)
@@ -723,16 +755,17 @@ def test_driven_precondition_guard_candidates(
 
         guard_blocks: list[tuple[str, list[str]]] = []
         if has_neg and has_zero:
-            guard_blocks.append((
-                "guard_neg_raise_and_zero_return",
-                [
-                    f"{indent}if {bound_param} is not None and {bound_param} < 0:\n",
-                    f"{indent}    {raise_expr}\n",
-                    f"{indent}if {bound_param} == 0:\n",
-                    f"{indent}    {zero_ret}\n",
-                    "\n",
-                ],
-            ))
+            for z_idx, zero_ret in enumerate(zero_rets):
+                guard_blocks.append((
+                    f"guard_neg_raise_and_zero_return_{z_idx}",
+                    [
+                        f"{indent}if {bound_param} is not None and {bound_param} < 0:\n",
+                        f"{indent}    {raise_expr}\n",
+                        f"{indent}if {bound_param} == 0:\n",
+                        f"{indent}    {zero_ret}\n",
+                        "\n",
+                    ],
+                ))
         if has_neg or exc_specs:
             guard_blocks.append((
                 "guard_neg_raise",
@@ -742,13 +775,14 @@ def test_driven_precondition_guard_candidates(
                 ],
             ))
         if has_zero:
-            guard_blocks.append((
-                "guard_zero_early_return",
-                [
-                    f"{indent}if {bound_param} == 0:\n",
-                    f"{indent}    {zero_ret}\n",
-                ],
-            ))
+            for z_idx, zero_ret in enumerate(zero_rets):
+                guard_blocks.append((
+                    f"guard_zero_early_return_{z_idx}",
+                    [
+                        f"{indent}if {bound_param} == 0:\n",
+                        f"{indent}    {zero_ret}\n",
+                    ],
+                ))
 
         for label, glines in guard_blocks:
             cand = "".join(lines[:insert_idx]) + "".join(glines) + "".join(lines[insert_idx:])
