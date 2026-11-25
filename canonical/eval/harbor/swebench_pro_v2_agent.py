@@ -110,8 +110,17 @@ class NetworkRefusedByHarness(urllib.error.URLError):
     unreachable-is-a-fact path) could not recognise our refusal. A refusal raised here must
     travel through exactly the same handling as a real transport failure, or the guard would
     be a new failure mode rather than a constraint. Covers
-    in-process sockets and `urlopen`; a subprocess the engine spawns is its own process and
-    is not covered, which is why the attempt count is an enforcement record, not a sandbox.
+    A subprocess the engine spawns is its own process and is not covered by anything here.
+
+    Mechanism, as of the integrity guard's `STDLIB_MONKEYPATCH` rule: this refusal used to be
+    installed by assigning `_refuse_connect` / `_refuse_create` onto `socket.socket.connect` and
+    `socket.create_connection` for the duration of the trial. That is a hijack of the standard
+    library for every caller in the process — a collector thread, another worker, a test runner
+    sharing the interpreter would all have answered to the harness — and the guard is right to
+    refuse it. Enforcement of egress now belongs to the environment (`--network none`), and it is
+    *measured* here by `observe_egress` rather than asserted; what stays in-process is the part
+    that carried the information, namely naming a transport refusal so a plumbing failure cannot
+    be scored as a capability result. See `network_guard`.
     """
 
 
@@ -144,12 +153,70 @@ def _is_local_endpoint(target: Any) -> bool:
     return False  # unix socket objects pass a str/bytes address above; anything else: refuse
 
 
-def network_guard(enabled: bool):
-    """Context manager: refuse (and count) in-process outbound connects while enabled."""
-    import contextlib
+_EGRESS_REFUSAL_SIGNS = (
+    "refused",
+    "unreachable",
+    "network is down",
+    "no route to host",
+    "name or service not known",
+    "nodename nor servname",
+    "temporary failure in name resolution",
+    "operation timed out",
+    "connection reset",
+)
+
+_EGRESS_PROBE_TARGET = ("1.1.1.1", 53)
+
+
+def _reason_text(exc: BaseException) -> str:
+    inner = getattr(exc, "reason", None)
+    return f"{type(inner or exc).__name__}: {inner or exc}"[:200]
+
+
+def _looks_like_egress_refusal(exc: BaseException) -> bool:
+    """Transport-level facts only, so the guard can never launder an engine bug into a harness message.
+
+    `URLError(ConnectionRefusedError(...))`, `EHOSTUNREACH`, a failed name lookup: those are the
+    environment talking. A `ConnectionError` the engine raised itself for its own reasons carries
+    none of these signs and is left exactly as it was raised.
+    """
+    text = _reason_text(exc).lower()
+    return any(sign in text for sign in _EGRESS_REFUSAL_SIGNS)
+
+
+def observe_egress(timeout_s: float = 1.0) -> dict[str, Any]:
+    """Ask the sandbox whether egress is closed instead of promising it.
+
+    Returns `{"observed": "REFUSED" | "AVAILABLE" | "ERROR", "detail": ...}`. `REFUSED` is the
+    only state in which "no external knowledge entered this trial" is an observed fact; `AVAILABLE`
+    says the isolation claim would have been about our intent rather than the environment, and that
+    is recorded in the report next to the score rather than hidden in a mechanism.
+    """
     import socket
-    import urllib.parse
-    import urllib.request
+
+    try:
+        sock = socket.create_connection(_EGRESS_PROBE_TARGET, timeout=timeout_s)
+    except OSError as exc:
+        return {"observed": "REFUSED", "detail": _reason_text(exc)[:160]}
+    except Exception as exc:  # pragma: no cover - a probe that cannot be built is not a pass
+        return {"observed": "ERROR", "detail": _reason_text(exc)[:160]}
+    try:
+        sock.close()
+    finally:
+        return {"observed": "AVAILABLE", "detail": f"reached {_EGRESS_PROBE_TARGET[0]}:{_EGRESS_PROBE_TARGET[1]}"}
+
+
+def network_guard(enabled: bool):
+    """Context manager: name and count the transport refusals that escape a trial while enabled.
+
+    Returns `(guard, attempts)` with the same shape as before, and deliberately does *not* rebind
+    `socket.socket.connect`, `socket.create_connection` or `urllib.request.urlopen` — see
+    `NetworkRefusedByHarness`. Egress is closed by the container and observed by `observe_egress`;
+    this guard makes sure that when a trial dies on the network anyway, the run says *why* in a
+    class the report already understands, instead of logging a bare `URLError` as a harness error
+    and scoring a plumbing failure as a zero.
+    """
+    import contextlib
 
     attempts: list[str] = []
     if not enabled:
@@ -160,47 +227,19 @@ def network_guard(enabled: bool):
 
         return _noop(), attempts
 
-    real_connect = socket.socket.connect
-    real_create = socket.create_connection
-    real_open = urllib.request.urlopen
-
-    def _refuse_connect(self, *a, **k):  # noqa: ANN001 - monkeypatch target
-        target = a[0] if a else None
-        if _is_local_endpoint(target):
-            return real_connect(self, *a, **k)
-        attempts.append(f"socket.connect:{target!r}"[:160])
-        raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
-
-    def _refuse_create(address, *a, **k):
-        if _is_local_endpoint(address):
-            return real_create(address, *a, **k)
-        attempts.append(f"create_connection:{address!r}"[:160])
-        raise NetworkRefusedByHarness("outbound connect refused: harness set allow_web=False")
-
-    def _refuse_open(url, *a, **k):
-        try:
-            full = getattr(url, "full_url", url)
-        except Exception:  # pragma: no cover - defensive against odd url objects
-            full = url
-        host = urllib.parse.urlparse(str(full)).hostname
-        if _is_local_endpoint(host):
-            return real_open(url, *a, **k)
-        attempts.append(f"urlopen:{full!r}"[:160])
-        raise NetworkRefusedByHarness("network fetch refused: harness set allow_web=False")
-
     @contextlib.contextmanager
-    def _guard():
-        socket.socket.connect = _refuse_connect  # type: ignore[method-assign]
-        socket.create_connection = _refuse_create  # type: ignore[assignment]
-        urllib.request.urlopen = _refuse_open  # type: ignore[assignment]
+    def _classify():
         try:
             yield
-        finally:
-            socket.socket.connect = real_connect  # type: ignore[method-assign]
-            socket.create_connection = real_create  # type: ignore[assignment]
-            urllib.request.urlopen = real_open  # type: ignore[assignment]
+        except (urllib.error.URLError, OSError) as exc:
+            if _looks_like_egress_refusal(exc):
+                attempts.append(f"transport-refusal:{_reason_text(exc)}"[:160])
+                raise NetworkRefusedByHarness(
+                    "outbound attempt refused by the environment while allow_web=False"
+                ) from exc
+            raise
 
-    return _guard(), attempts
+    return _classify(), attempts
 
 
 def _sha256_bytes(data: bytes) -> str:
@@ -396,11 +435,13 @@ def run_engine_on_tree(
     before = snapshot_tree(tree)
 
     guard, net_attempts = network_guard(not inputs_allow_web)
+    # the isolation claim is an observation about the sandbox, not a property of this file
+    egress_probe = observe_egress()
 
     inputs: dict[str, Any] = {
         "workspace": str(tree),
         "python_exe": python_exe or sys.executable,
-        # one source of truth: the guard enforces exactly what the engine is told
+        # one source of truth: the flag the engine is told is the flag the guard reports on
         "allow_web": bool(inputs_allow_web),  # default False: zero-knowledge house
         "timeout_s": float(timeout_s),
     }
@@ -409,13 +450,27 @@ def run_engine_on_tree(
     if store is not None:
         inputs["skill_store"] = store
 
-    with guard:
-        if solver is not None:
-            result = solver(instruction=instruction, tree=tree, inputs=inputs)
-        else:
-            from canonical.runtime.brain_unified_model_v1 import open_model
+    # the catch sits outside the guard on purpose: the guard converts at its own __exit__, so a
+    # try *inside* it would never see the converted refusal -- the nesting is the whole contract
+    try:
+        with guard:
+            if solver is not None:
+                result = solver(instruction=instruction, tree=tree, inputs=inputs)
+            else:
+                from canonical.runtime.brain_unified_model_v1 import open_model
 
-            result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+                result = open_model().solve(instruction[:40000], inputs=inputs, mode="EPISTEMIC")
+    except NetworkRefusedByHarness as exc:
+        # A trial that died on the network still has to arrive as a complete row, carrying the
+        # reason. Letting the exception escape would land it in the shard collector as a bare
+        # HARNESS_ERROR -- indistinguishable from our own plumbing breaking -- which is the
+        # confusion this guard was written to remove. So the refusal is named in the status.
+        result = {
+            "status": "NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT",
+            "pass": False,
+            "patch": {},
+            "explanation": str(exc),
+        }
 
     edits_reported = extract_engine_edits(result if isinstance(result, Mapping) else {})
     applied_by = "tree-mutation"
@@ -455,7 +510,12 @@ def run_engine_on_tree(
         # tree_changed=None and fell back to harbor's timestamps for wall time.
         "network_attempts": len(net_attempts),
         "network_attempt_samples": net_attempts[:3],
-        "network_guard": "enforced" if not inputs_allow_web else "open",
+        "network_guard": "container-enforced__harness-classifies" if not inputs_allow_web else "open",
+        "egress_probe": egress_probe,
+        # None, not False, when the run allowed the web: absence of a constraint is not a pass
+        "external_knowledge_isolated": (
+            egress_probe["observed"] == "REFUSED" if not inputs_allow_web else None
+        ),
         "tree_changed": bool(diff.get("modified") or diff.get("added") or diff.get("removed")),
         "wall_seconds": round(time.monotonic() - t0, 3),
         "notes": [

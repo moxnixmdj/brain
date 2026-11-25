@@ -359,66 +359,82 @@ def test_aggregate_merges_shard_reports_by_task_union() -> None:
     assert "| causal | 2 | 2 | 100.0 | 0 | 0.0 | 5.0 | None | 0 |" in md
 
 
-def test_network_guard_enforces_allow_web_and_counts_attempts() -> None:
-    """`allow_web: False` must be enforced, not requested — and the enforcement is visible.
+def test_network_guard_names_a_transport_refusal_without_hijacking_the_stdlib() -> None:
+    """`allow_web: False` must be *visible* in the report, and the harness must not own the process.
 
-    Found by a real run: one task's trial died with `URLError: Connection refused` from a
-    fallback `urlopen` inside the engine, i.e. a capability question became a plumbing
-    failure and the score was 0 for a reason that says nothing about the engine.
+    The first version enforced the flag by reassigning `socket.socket.connect` and
+    `socket.create_connection` for the duration of the trial. That made every other caller in the
+    interpreter answer to the harness, and the repo's integrity guard rejects stdlib rebinding for
+    exactly that reason. What the guard still owes a reader is the distinction this file exists to
+    keep: an engine that scored 0 because the network refused it is a different fact from an engine
+    that scored 0 because it found nothing.
     """
     import socket
+    import urllib.error
 
-    guard, attempts = AG.network_guard(True)
-    with guard:
-        with pytest.raises(AG.NetworkRefusedByHarness):
-            urllib.request.urlopen("http://example.invalid/x")  # noqa: S310
-        with pytest.raises(AG.NetworkRefusedByHarness):
-            socket.create_connection(("example.invalid", 80))
-    assert len(attempts) == 2, attempts
-    # the guard lifts: a real loopback connect succeeds again, both after the guard and
-    # while a disabled guard is "active" (no patching at all in that case)
-    srv = socket.socket()
-    srv.bind(("127.0.0.1", 0))
-    srv.listen(4)
-    try:
-        socket.create_connection(srv.getsockname(), timeout=2).close()
-        guard_off, attempts_off = AG.network_guard(False)
-        with guard_off:
-            socket.create_connection(srv.getsockname(), timeout=2).close()
-        # and a *refusing* guard does block a non-local address, which is what makes the
-        # two passes above evidence about the guard rather than about ordering
-        guard2, attempts2 = AG.network_guard(True)
-        with guard2, pytest.raises(AG.NetworkRefusedByHarness):
-            socket.create_connection(("93.184.216.34", 80), timeout=2)
-    finally:
-        srv.close()
-    assert attempts_off == []
-    assert len(attempts2) == 1
+    real_connect = socket.socket.connect
+    real_create = socket.create_connection
+    real_open = urllib.request.urlopen
+
+    # the standard library is untouched while the guard is "active" -- this is the pin that
+    # keeps the old mechanism from creeping back in behind a green test suite
+    guard0, attempts0 = AG.network_guard(True)
+    with guard0:
+        assert socket.socket.connect is real_connect
+        assert socket.create_connection is real_create
+        assert urllib.request.urlopen is real_open
+    assert attempts0 == []
+    # a guard is one region, not a global state: each use is its own context
+    guard1, attempts1 = AG.network_guard(True)
+    with pytest.raises(AG.NetworkRefusedByHarness):
+        with guard1:
+            raise urllib.error.URLError(ConnectionRefusedError("[Errno 111] Connection refused"))
+    assert len(attempts1) == 1, attempts1
+    assert "transport-refusal" in attempts1[0] and "ConnectionRefusedError" in attempts1[0], attempts1
+    # a failure that already has a name is passed through unconverted
+    guard2, attempts2 = AG.network_guard(True)
+    with pytest.raises(ValueError):
+        with guard2:
+            raise ValueError("engine bug, not the network")
+    # a disabled guard neither wraps nor counts anything
+    guard_off, attempts_off = AG.network_guard(False)
+    with guard_off:
+        reached = True
+    assert attempts_off == [] and reached
 
 
-def test_the_guard_blocks_the_web_and_leaves_the_environment_alone() -> None:
+def test_egress_is_observed_rather_than_asserted() -> None:
+    """`observe_egress` answers a question about the sandbox; it must not decide one about the run.
+
+    Which of the three answers this machine gives depends on the container, so the test pins the
+    shape and the honesty of the reporting, not the environment's state. What matters is that the
+    report can say `REFUSED` only when a connect was actually tried and refused.
+    """
+    obs = AG.observe_egress(timeout_s=1.0)
+    assert obs["observed"] in {"REFUSED", "AVAILABLE", "ERROR"}, obs
+    assert isinstance(obs["detail"], str) and obs["detail"], obs
+    # the classifier agrees with the probe about what counts as the environment talking
+    if obs["observed"] == "REFUSED":
+        assert AG._looks_like_egress_refusal(ConnectionRefusedError(obs["detail"].split(": ", 1)[-1]))
+
+
+def test_the_guard_leaves_the_environment_alone() -> None:
     """`allow_web` = no external knowledge. Loopback is the environment, not the web."""
-    
+
     assert AG._is_local_endpoint("127.0.0.1") and AG._is_local_endpoint(("localhost", 8000))
     assert AG._is_local_endpoint(("::1", 80)) and AG._is_local_endpoint("/run/x.sock")
     assert not AG._is_local_endpoint(("pypi.org", 443)) and not AG._is_local_endpoint("8.8.8.8")
-    # a live local service is reachable through the guard; an external name is not
+    # a live local service stays reachable with the guard on, because nothing intercepts it now
     srv = socket.socket()
     srv.bind(("127.0.0.1", 0))
     srv.listen(2)
-    port = srv.getsockname()[1]
     guard, attempts = AG.network_guard(True)
     try:
         with guard:
-            s = socket.create_connection(("127.0.0.1", port), timeout=2)
-            s.close()
-            with pytest.raises(AG.NetworkRefusedByHarness):
-                urllib.request.urlopen(f"http://example.invalid:{port}/", timeout=2)  # noqa: S310
-            with pytest.raises(AG.NetworkRefusedByHarness):
-                socket.create_connection(("93.184.216.34", 80), timeout=1)
+            socket.create_connection(srv.getsockname(), timeout=2).close()
     finally:
         srv.close()
-    assert len(attempts) == 2, attempts
+    assert attempts == [], "the environment is not a violation, and is not counted as one"
 
 
 def test_run_engine_reports_the_guard_and_the_solver_sees_the_same_flag(tmp_path) -> None:
@@ -430,18 +446,24 @@ def test_run_engine_reports_the_guard_and_the_solver_sees_the_same_flag(tmp_path
 
     def solver(*, instruction, tree, inputs):  # noqa: ANN001 - test stand-in
         seen.update(inputs)
-        import urllib.request
+        import urllib.error
 
-        with pytest.raises(AG.NetworkRefusedByHarness):
-            urllib.request.urlopen("http://example.invalid/y")  # noqa: S310
-        return {"status": "NO_DEFECT_EVIDENCE", "patch": {}}
+        # synthetic, not a real lookup: what the environment says when egress is closed is its
+        # business; what the harness must do with it is ours
+        raise urllib.error.URLError(ConnectionRefusedError("[Errno 111] Connection refused"))
 
     rep = AG.run_engine_on_tree(
         instruction="fix it", tree=tree, store_path=None, solver=solver, timeout_s=5.0
     )
-    assert seen["allow_web"] is False, "the engine is told exactly what the harness enforces"
-    assert rep["network_guard"] == "enforced"
-    assert rep["network_attempts"] == 1 and "urlopen" in rep["network_attempt_samples"][0]
+    assert seen["allow_web"] is False, "the engine is told exactly what the harness reports on"
+    assert rep["network_guard"] == "container-enforced__harness-classifies"
+    assert rep["engine_result_status"] == "NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT", rep
+    assert rep["network_attempts"] == 1 and "transport-refusal" in rep["network_attempt_samples"][0]
+    assert rep["egress_probe"]["observed"] in {"REFUSED", "AVAILABLE", "ERROR"}
+    # isolated is a claim about the sandbox: it is True only under a REFUSED probe
+    assert rep["external_knowledge_isolated"] is (rep["egress_probe"]["observed"] == "REFUSED")
+    # the sample names what happened and where it came from, which is the point of the guard
+    assert "Connection refused" in rep["network_attempt_samples"][0]
     # and an open-web run records that it was open instead of pretending otherwise
     rep2 = AG.run_engine_on_tree(
         instruction="fix it", tree=tree, store_path=None, solver=lambda **kw: {"status": "X"},
@@ -684,7 +706,10 @@ def test_the_guard_refusal_is_a_transport_failure_so_callers_already_handle_it()
     with guard:
         code, body = esac._http_json_request("http://example.invalid:80/spec.json", timeout_s=2.0)
     assert code == 0 and body["error"] == "unreachable", body
-    assert len(attempts) == 1, "and the attempt is still counted, not swallowed"
+    # narrower than before, and honestly so: a transport error the caller already turned into a
+    # fact never escapes to the guard, so `attempts` counts escaped refusals, not all egress.
+    # The isolation fact is carried by `egress_probe` / the container, which is where it belongs.
+    assert attempts == []
 
 
 def test_the_engine_s_own_account_of_a_refusal_reaches_the_committed_report() -> None:

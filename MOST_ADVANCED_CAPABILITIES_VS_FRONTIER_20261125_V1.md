@@ -290,3 +290,33 @@ Row-by-row, the two documents agree on everything that matters and differ on one
   `THE_ASSERTION_IS_NOT_A_SPECIFICATION` on why the plan's foundation does not hold.
 - **What to take from this one:** the derived denominator (§5b), the frontier classes we do not track at all and the
   198 claim lanes nobody enumerated (§5c), and the receipt that turns a 0 % into a measurement (§5d).
+
+### 5g. The harness's "no network" line is now an observation, because the mechanism that asserted it was removed
+
+`canonical/eval/harbor/swebench_pro_v2_agent.py` enforced `allow_web: False` by rebinding
+`socket.socket.connect` and `socket.create_connection` for the duration of each trial. The repo's integrity
+guard rejected that (`[STDLIB_MONKEYPATCH]`, 4 violations, and it is right: every other caller in the
+interpreter — collector threads, the test runner, a second worker — was answering to the harness). The
+mechanism is now: **egress is closed by the container and *measured* by `observe_egress()`**, which returns
+`REFUSED | AVAILABLE | ERROR` from an actual connect attempt; `network_guard()` keeps only the part that
+carried information, converting an escaped transport error into `NetworkRefusedByHarness` and counting it;
+and `run_engine_on_tree` turns that into a complete row whose status reads
+`NETWORK_REFUSED__NOT_A_CAPABILITY_RESULT` rather than an anonymous `HARNESS_ERROR`.
+
+What this does to the claims in this document:
+
+- `what_this_run_did_prove` says *"the engine ran with no network and no hosted model call"* for the run in
+  §5d. That run predates this change, so the claim rested partly on a promise the harness made about itself.
+  It stays in the record as written, because the run's own receipt is not edited after the fact; from the
+  next run the same sentence is backed by `egress_probe` in the row itself, and the report field is renamed
+  to say who enforced what: `network_guard: "container-enforced__harness-classifies"`.
+- `network_attempts` narrowed: it now counts transport refusals that **escape** the engine. The old guard
+  also counted attempts the engine swallowed and handled as a fact (`esac._http_json_request` returning
+  `unreachable`). That test was updated to assert the new, narrower meaning instead of being deleted, and
+  the swallowed-attempt case is exactly what an in-process patch could see and a boundary classifier cannot.
+  Nothing in the tree claimed a score from the count, so no verdict in §1 moves.
+- Deliberately not done in this sitting: failing the trial closed when the probe says `AVAILABLE`. The
+  sandbox here has no docker daemon (`docker_daemon_available: false`, recorded by the very suite in §5e), so
+  that change would go to CI untested and could turn all 51 rows into a new error class. The field that would
+  carry it (`external_knowledge_isolated`) is already emitted, so the fail-closed step is a behavior change
+  on top of existing evidence, not a missing piece of evidence.
