@@ -1078,3 +1078,77 @@ defect), `attrs@3b0378dd66` (the observer cannot instrument the construction it 
 and family the traceback named) and **targets that survive instrumenting** — a repository whose API is built by
 metaprogramming from its own module functions cannot be watched this way, and the honest answer is to say so at admission
 time rather than after a law run.
+
+## Round V20a — the branches exist, and the split brain is now one tree
+
+**A claim in my own record was wrong, and re-verification caught it.** Earlier rounds recorded "19 of 20 named hashes
+ABSENT; only `main` and this branch exist", and branch unification was written off as impossible. The *commit ids* are
+indeed absent locally, but the work is on the remote as `refs/heads/arena/<hash>-brain`: 104 such branches exist, and
+seven of the ones the plan names (`aab1b545`, `b81b2217`, `06dc079e`, `f7ec1162`, `50c05c04`, `39d26eb4`, `cd5bfaaa`,
+`d86a0174`, `4260e934`) share this branch's exact base commit `c4f529eb`. Two of them (`aab1b545`, `b81b2217`) have a
+different lineage and are not mergeable without a rebase; the rest are.
+
+Measured before merging, with `git merge-tree` (non-destructive): seven branches, **zero conflicts against this branch**
+and **zero shared files** with the 19 commits of law-repair work here — they are disjoint subsystems off one base.
+
+| merge | conflicts | resolution |
+|---|---|---|
+| `d86a0174` (CLI machine prober), `cd5bfaaa` (headless CDP) | none | — |
+| `06dc079e` (COGS U-IR) | 1: `perfect_algorithm_v1.py` | kept the incoming local-guide retrieval source, which is a superset |
+| `39d26eb4` (inverse-pair round trip) | none | — |
+| `4260e934` | 2: workflow `TASK_LIMIT`, model digest | took the larger limit (3); see below |
+| `50c05c04` (syntactic lifting), `f7ec1162` (semantic graph + Laplace bridge) | none | — |
+
+Two decisions worth recording:
+
+- **The pinned runtime was left at HEAD.** `4260e934` adds an 8-line Harbor dispatch hook inside
+  `canonical/runtime/brain_unified_model_v1.py`. The file is pinned and must not be edited, so the hook is *not* applied.
+  The unified-architecture suite passes without it (19/19), which is the evidence that the pin costs nothing today; the
+  hook stays recorded here rather than silently acquired by a merge.
+- **The model digest was recomputed.** `BRAIN_UNIFIED_MODEL_V1.json` defines its digest as the canonical JSON of the
+  object without the digest block. With seven branches' engines and capabilities merged in, the old value no longer
+  matched and every model load raised `MODEL_DIGEST_MISMATCH` (3 tests). Recomputing is the defined operation:
+  `dd4359fc → ba94733a`, and the suite goes from 3 failed to 19 passed.
+
+The tree now carries, in one binary: the law/oracle repair library (this branch), `zygote_worker_pool_v1`,
+`repo_component_and_cow_engine_v1`, `universal_semantic_ir_v1`, `typed_invention_v1`, `petri_cow_splicing_engine_v1`,
+`differential_witness_inversion_v1`, `instant_swe_skill_store_v1`, the CLI-machine prober and the CDP bridge —
+294 added files. Sampled after merging: **44/44** merged-engine tests pass, **19/19** unified-architecture tests pass, and
+this branch's **22/22** law tests still pass.
+
+## Round V20b — `pluggy@8051a4d` repaired: the item that had *no generator*
+
+This was the standing "no generator" gap: the `assert_validation` law fires on `PluginManager.unregister` lines 289 and
+291, and no generator could decide **which** exception each assert should become. Both the plan's "repo-native component
+mining" and first principles point at the same answer, and the AST already contains it:
+
+- `assert plugin is not None` tests a **live parameter** — the caller omitted a required input — so `TypeError`.
+- `assert name is not None` tests a **local**, `name = self.get_name(plugin)` — the call was well formed and the value is
+  wrong — so `ValueError`.
+
+`name` is *also* a parameter of `unregister`, so a name-only rule types both `TypeError`; the first candidate did exactly
+that. **Rebinding order** separates them: a parameter that was rebound above the assert no longer holds the caller's
+value. The module's own vocabulary three lines up agrees (`raise TypeError("plugin must not be None")` beside
+`raise ValueError(...)`), which is the repo-native corroboration the plan asks for, obtained without any model.
+
+| condition | result |
+|---|---|
+| law on the buggy tree | 2 `assert_validation` violations (lines 289, 291) |
+| candidate clears the law | **yes** — no assert survives at either named site; `TypeError` at 289, `ValueError` at 291 |
+| the fix's tests, overlaid only after the patch was chosen | **75 passed** |
+| the buggy tree with the same tests | **1 failed** (`test_register`: expected `TypeError`/`ValueError`, got `AssertionError`) |
+
+One honest note: the **old** visible test asserts the buggy contract itself
+(`with pytest.raises(AssertionError, match=r"not registered")`), so any correct repair breaks the visible suite; the fix
+commit updates that test in the same commit. The candidate was chosen before those tests were read, and the numbers above
+are the post-choice measurement.
+
+**Recorded honestly:** test-absent stream **5 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`,
+`more-itertools@cca32949f1`, `pyjwt@793a302`, `pluggy@8051a4d`), 2 open with named reasons — `click@05f6fd0` (no law
+observes "always return a help record for an `Argument`") and `attrs@3b0378dd66` (the observer cannot instrument a
+library that builds its classes out of its own module functions). Test-present tally unchanged: **11/13 = 84.62%**.
+
+**Next bottleneck.** With one tree, the next question is whether the *merged* engines close the two remaining items where
+the law library alone could not: an oracle for `click@05f6fd0` has to come from a mechanism that can *state* a
+postcondition the suite never checks (`typed_invention_v1` / `differential_witness_inversion_v1` are candidates), and
+`attrs` needs admission-time refusal rather than a law.

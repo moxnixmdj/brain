@@ -292,3 +292,121 @@ def protocol_presence_candidates(
         tag = f"LAW_ITERABLE_RETYPING[{function_name}:hasattr->getattr(x,attr,None)]"
         out.append((tag, {path.relative_to(base).as_posix(): patched.encode("utf-8")}))
     return out
+
+
+def assert_to_raise_candidates(
+    root: pathlib.Path | str,
+    sites: Sequence[tuple[str, int]] | None = None,
+    *,
+    max_candidates: int = 3,
+) -> list[tuple[str, dict[str, bytes]]]:
+    """Turn `assert cond, msg` in a public function into `if not cond: raise E(msg)`.
+
+    The `static_assert_validation` law names the site; the remaining choice is *which* exception, and that
+    is not free. Python's own convention decides it, and the repository corroborates it:
+
+    - the condition tests a **parameter** — the caller did not supply a required input — `TypeError`;
+    - the condition tests a **local** derived from state (a lookup that came back empty, a membership test)
+      — the call was well formed but its value is wrong — `ValueError`.
+
+    Measured on pluggy `8051a4d^1`: `assert plugin is not None` (parameter) became `TypeError`, and
+    `assert name is not None` where `name = self.get_name(plugin)` (local) became `ValueError`, matching
+    the module's own vocabulary three lines above (`raise TypeError("plugin must not be None")` next to
+    `raise ValueError(...)`).
+
+    `sites` restricts the edit to the functions the law named, as `(function, lineno)` pairs; without it
+    every public single-family assert in the tree is converted, which is a wider edit than the evidence.
+    """
+    base = pathlib.Path(root)
+    wanted: dict[str, set[int]] | None = None
+    if sites:
+        wanted = {}
+        for function, line in sites:
+            wanted.setdefault(function, set()).add(int(line))
+    out: list[tuple[str, dict[str, bytes]]] = []
+    for path in _python_files(base):
+        source = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            continue
+        lines = source.splitlines(keepends=True)
+        edits: list[tuple[int, int, str]] = []
+        applied: list[str] = []
+        for node in ast.walk(tree):
+            if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) or node.name.startswith("_"):
+                continue
+            if wanted is not None and node.name not in wanted:
+                continue
+            params = {a.arg for a in list(node.args.args) + list(node.args.kwonlyargs)
+                      + list(node.args.posonlyargs)} - {"self", "cls"}
+            bound_at = _binding_lines(node)
+            for inner in ast.walk(node):
+                if not isinstance(inner, ast.Assert):
+                    continue
+                if wanted is not None and inner.lineno not in wanted[node.name]:
+                    continue
+                mentioned = {sub.id for sub in ast.walk(inner.test) if isinstance(sub, ast.Name)}
+                # A name that is a parameter *and* was rebound above this line no longer holds the caller's
+                # value: `name = self.get_name(plugin)` makes `assert name is not None` a statement about a
+                # lookup result, not about a missing argument. Measured on pluggy: both asserts were typed
+                # `TypeError` until rebinding order was taken into account, and only one of them should be.
+                live_params = {n for n in mentioned & params
+                               if not any(line < inner.lineno for line in bound_at.get(n, ()))}
+                family = "TypeError" if live_params else "ValueError"
+                if not live_params and not (mentioned & set(bound_at)):
+                    continue  # neither a live parameter nor a local: leave it alone
+                start = sum(len(l) for l in lines[: inner.lineno - 1]) + inner.col_offset
+                end = sum(len(l) for l in lines[: (inner.end_lineno or inner.lineno) - 1]) + (
+                    inner.end_col_offset or 0)
+                condition = ast.get_source_segment(source, inner.test) or ""
+                message = ast.get_source_segment(source, inner.msg) if inner.msg is not None else None
+                indent = " " * inner.col_offset
+                if message is not None:
+                    body = f"if not ({condition}):\n{indent}    raise {family}({message})"
+                else:
+                    body = f"if not ({condition}):\n{indent}    raise {family}()"
+                edits.append((start, end, body))
+                applied.append(f"{node.name}:{inner.lineno}->{family}")
+        if not edits:
+            continue
+        patched = source
+        for start, end, body in sorted(edits, key=lambda e: e[0], reverse=True):
+            patched = patched[:start] + body + patched[end:]
+        try:
+            ast.parse(patched)
+        except SyntaxError:
+            continue
+        tag = "LAW_STATIC_ASSERT_VALIDATION[assert->raise at " + ", ".join(sorted(applied)[:max_candidates]) + "]"
+        out.append((tag, {path.relative_to(base).as_posix(): patched.encode("utf-8")}))
+    return out
+
+
+def _binding_lines(function: ast.AST) -> dict[str, list[int]]:
+    """Every name the function binds itself, with the line of each binding.
+
+    The lines matter, not just the set: a parameter that is rebound above an `assert` is not the caller's
+    value any more, and the exception family depends on that distinction.
+    """
+    bound: dict[str, list[int]] = {}
+
+    def note(target: ast.AST, line: int) -> None:
+        for sub in ast.walk(target):
+            if isinstance(sub, ast.Name):
+                bound.setdefault(sub.id, []).append(line)
+
+    for node in ast.walk(function):
+        if isinstance(node, ast.Assign):
+            for target in node.targets:
+                note(target, node.lineno)
+        elif isinstance(node, ast.AnnAssign):
+            note(node.target, node.lineno)
+        elif isinstance(node, (ast.For, ast.AsyncFor)):
+            note(node.target, node.lineno)
+        elif isinstance(node, ast.comprehension):
+            note(node.target, node.iter.lineno)
+        elif isinstance(node, (ast.With, ast.AsyncWith)):
+            for item in node.items:
+                if item.optional_vars is not None:
+                    note(item.optional_vars, node.lineno)
+    return bound

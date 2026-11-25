@@ -471,6 +471,23 @@
   },
   "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open with named reasons (pluggy@8051a4d no generator, click@05f6fd0 no law, attrs@3b0378dd66 not observable)"
  },
+ "law_repair_v20": {
+  "pluggy@8051a4d": {
+   "caveat": "the old visible test asserts the buggy contract (pytest.raises(AssertionError)); the fix commit updates it, which is why the visible suite fails for any correct repair",
+   "defect": "argument validation by assert disappears under python -O (lines 289, 291 of _manager.py)",
+   "family_rule": "live parameter -> TypeError; local or rebound parameter -> ValueError",
+   "generator": "assert_to_raise_candidates \u2014 assert becomes if not cond: raise E(msg), where E is chosen from the AST",
+   "hidden_test_after_patch": {
+    "buggy_unpatched": "1 failed, 74 passed",
+    "candidate": "75 passed"
+   },
+   "law": "static_assert_validation (fires: 2 violations)",
+   "law_on_candidate": "silent (no assert survives at either named site)",
+   "repo_corroboration": "the same file raises TypeError('plugin must not be None') for a None-ness condition beside ValueError(...) for value conditions",
+   "why_the_first_candidate_failed": "a name-only rule typed both asserts TypeError; `name` is a parameter too, and only rebinding order (name = self.get_name(plugin) on the line above) makes it a local"
+  },
+  "test_absent_stream": "5 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d), 2 open (click@05f6fd0 no law; attrs@3b0378dd66 unobservable)"
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -557,7 +574,7 @@
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
-  "canonical/swe_kernel/law_repair_synthesis_v1.py": "8054d9db2c81913f6a9109456b3a6a0fef28ef93682a54c002f2969c1e681203",
+  "canonical/swe_kernel/law_repair_synthesis_v1.py": "86f2438ddda4289425912bd4d9051f23473b53cceeef15a004667053a6d760ea",
   "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
   "canonical/swe_kernel/metamorphic_oracle_v1.py": "af2261d69022b4a7470c5a05a3402109b0a6ecc9c58c895570be8ec8d64117a3",
   "canonical/swe_kernel/metamorphic_plugin_v1.py": "a7854c13f77b72e2de6a14a8c90c0f5484105c1f036a79a7709ba96033163208",
@@ -576,6 +593,7 @@
    "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
   },
   "canonical/tests/test_a_law_that_retypes_an_iterable_compares_outcomes_v1.py": "b6c8c4ff78878c782c8bdc4b3e2545decb72f6403a202c710031727eb725046d",
+  "canonical/tests/test_a_missing_argument_is_a_type_error_and_a_missing_value_is_a_value_error_v1.py": "efe5f0ffc6a97978b79e2c4b8429afa9d51117a1cd1dc4d0a8523fa971651aa2",
   "canonical/tests/test_a_value_inside_a_document_is_attacker_controlled_v1.py": "0bcd1483b7a12d87efad5d2ff0245bce5122eadcae68439acb3ce637f4dac426",
   "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
    "status": "1 passed"
@@ -583,7 +601,8 @@
   "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
    "lines": 932,
    "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
-  }
+  },
+  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "853e0b0418dad91fb5615190b1406a34e27fe887c805cacdf4a7559cb6c97fc1"
  },
  "new_mechanisms": [
   {
@@ -719,7 +738,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "witness-targeted synthesis: the witness now carries site/claim/family/argument index, but the generator still broadens n handlers in the witness's file and lets the law cut. Editing exactly the function the traceback named with exactly the family the exception was is what would have made the pyjwt candidate minimal.",
+ "next_bottleneck": "with one tree, test whether the merged engines can state a postcondition the suite never checks (click@05f6fd0 via typed_invention / differential_witness_inversion), and add admission-time refusal for metaprogramming libraries that cannot be instrumented (attrs).",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
@@ -745,5 +764,33 @@
   "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
   "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
   "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
+ },
+ "unification_v20": {
+  "added_files": 294,
+  "conflicts": {
+   ".github/workflows/frontier_smoke_eval.yml": "TASK_LIMIT 2 -> 3",
+   "BRAIN_UNIFIED_MODEL_V1.json digest": "recomputed after merging: dd4359fc -> ba94733a; the digest is defined as the canonical JSON without the digest block",
+   "perfect_algorithm_v1.py": "kept the incoming local-guide retrieval source (superset)"
+  },
+  "corrected_claim": "earlier rounds recorded all named hashes absent and unification impossible; the commit ids are absent but the branches exist as refs/heads/arena/<hash>-brain (104 of them), and 7 named branches share this branch's base c4f529eb",
+  "merged": [
+   "d86a0174",
+   "cd5bfaaa",
+   "06dc079e",
+   "39d26eb4",
+   "4260e934",
+   "50c05c04",
+   "f7ec1162"
+  ],
+  "not_mergeable_without_rebase": [
+   "aab1b545",
+   "b81b2217"
+  ],
+  "pinned_file_decision": "canonical/runtime/brain_unified_model_v1.py kept at HEAD; the 8-line Harbor dispatch hook from 4260e934 is recorded, not applied (19/19 architecture tests pass without it)",
+  "tests_after": {
+   "law_suite": "22 passed",
+   "merged_engines": "44 passed",
+   "unified_architecture": "19 passed (3 failed before the digest recompute)"
+  }
  }
 }
