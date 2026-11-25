@@ -604,14 +604,32 @@ def _module_dotted_name(repo_root: pathlib.Path, file_path: pathlib.Path) -> lis
     return names
 
 
+DEFAULT_PARALLEL_SHARDS = 16
+
+
+def partition_candidates(
+    candidates: Sequence[Mapping[str, str]], shards: int
+) -> list[list[tuple[int, Mapping[str, str]]]]:
+    """Round-robin partition with global indices preserved for winner attribution."""
+    if shards < 1:
+        raise ValueError("shards must be >= 1")
+    count = min(int(shards), len(candidates)) or 1
+    parts: list[list[tuple[int, Mapping[str, str]]]] = [[] for _ in range(count)]
+    for index, candidate in enumerate(candidates):
+        parts[index % count].append((index, candidate))
+    return [part for part in parts if part]
+
+
 def evaluate_patch_batch_in_cow_zygote(
     repo_root: pathlib.Path,
     patch_candidates: Sequence[Mapping[str, str]],
     impacted_tests: Sequence[pathlib.Path],
     *,
     zygote: ZygotePrewarmedPool | None = None,
+    parallel_shards: int = DEFAULT_PARALLEL_SHARDS,
+    timeout_s: float = 30.0,
 ) -> dict[str, Any]:
-    """Evaluate a batch of single-file or multi-file patch maps `{rel_path: new_src}` inside one CoW fork."""
+    """Evaluate patch maps in parallel CoW forks; first verified candidate wins."""
     repo = pathlib.Path(repo_root).resolve()
     test_payloads = [
         (tf.relative_to(repo).as_posix(), tf.read_text(encoding="utf-8", errors="replace"))
@@ -622,7 +640,9 @@ def evaluate_patch_batch_in_cow_zygote(
         for _, t_src in test_payloads
     ) or (repo / "conftest.py").is_file() or (repo / "testing" / "conftest.py").is_file() or (repo / "tests" / "conftest.py").is_file()
 
-    def _batch_worker() -> dict[str, Any]:
+    def _batch_worker_for(
+        candidates: Sequence[tuple[int, Mapping[str, str]]], repo: pathlib.Path
+    ) -> dict[str, Any]:
         import contextlib
         import io as _io
 
@@ -663,7 +683,8 @@ def evaluate_patch_batch_in_cow_zygote(
                         orig_disk_texts[rp] = (repo / rp).read_text(encoding="utf-8")
 
         checked = 0
-        for idx, patch_map in enumerate(patch_candidates):
+        outcomes: list[dict[str, Any]] = []
+        for idx, (global_idx, patch_map) in enumerate(candidates):
             checked += 1
             if needs_pytest_runner and pytest_mod is not None:
                 try:
@@ -714,11 +735,13 @@ def evaluate_patch_batch_in_cow_zygote(
                     for rel_p in patch_map:
                         if rel_p in orig_disk_texts:
                             cow_write_text(repo / rel_p, orig_disk_texts[rel_p])
+                outcomes.append({"index": global_idx, "passed": bool(all_passed)})
                 if all_passed:
                     return {
                         "found": True,
-                        "winning_index": idx,
+                        "winning_index": global_idx,
                         "candidates_evaluated": checked,
+                        "outcomes": outcomes,
                         "worker_eval_ms": round((time.perf_counter_ns() - t_start) / 1e6, 3),
                     }
                 continue
@@ -821,11 +844,13 @@ def evaluate_patch_batch_in_cow_zygote(
                 else:
                     sys.modules[k] = old_v
 
+            outcomes.append({"index": global_idx, "passed": bool(all_passed)})
             if all_passed:
                 return {
                     "found": True,
-                    "winning_index": idx,
+                    "winning_index": global_idx,
                     "candidates_evaluated": checked,
+                    "outcomes": outcomes,
                     "worker_eval_ms": round((time.perf_counter_ns() - t_start) / 1e6, 3),
                 }
 
@@ -833,11 +858,56 @@ def evaluate_patch_batch_in_cow_zygote(
             "found": False,
             "winning_index": -1,
             "candidates_evaluated": checked,
+            "outcomes": outcomes,
             "worker_eval_ms": round((time.perf_counter_ns() - t_start) / 1e6, 3),
         }
 
     pool = zygote or ZygotePrewarmedPool()
-    return pool.run_isolated(_batch_worker)
+    if parallel_shards <= 1 or len(patch_candidates) <= 1:
+        return pool.run_isolated(
+            lambda: _batch_worker_for(list(enumerate(patch_candidates)), repo)
+        )
+
+    shards = partition_candidates(patch_candidates, parallel_shards)
+    scratch: list[tempfile.TemporaryDirectory[str]] = []
+    try:
+        shard_repos: list[pathlib.Path] = []
+        for _ in shards:
+            if needs_pytest_runner:
+                scratch.append(tempfile.TemporaryDirectory())
+                clone = pathlib.Path(scratch[-1].name) / "repo"
+                create_zero_copy_cow_workspace(repo, clone)
+                shard_repos.append(clone)
+            else:
+                shard_repos.append(repo)
+        parallel = pool.run_parallel_sharded(
+            [
+                (lambda part=part, target=target: _batch_worker_for(part, target))
+                for part, target in zip(shards, shard_repos)
+            ],
+            winner_predicate=lambda result: bool(result.get("found")),
+            timeout_s=timeout_s,
+        )
+        results = parallel.get("results", [])
+        winner = parallel.get("winner") or {}
+        merged: list[dict[str, Any]] = []
+        for result in results:
+            merged.extend(result.get("outcomes") or [])
+        merged.sort(key=lambda item: int(item.get("index", -1)))
+        return {
+            "found": bool(parallel.get("found_winner")),
+            "winning_index": int(winner.get("winning_index", -1)),
+            "outcomes": merged,
+            "candidates_evaluated": sum(
+                int(result.get("candidates_evaluated", 0)) for result in results
+            ),
+            "worker_eval_ms": float(parallel.get("elapsed_ms", 0.0)),
+            "parallel_shards": len(shards),
+            "siblings_cancelled": int(parallel.get("siblings_cancelled", 0)),
+        }
+    finally:
+        for handle in scratch:
+            handle.cleanup()
 
 
 def _repo_top_level_pkg_names(repo_root: pathlib.Path) -> set[str]:

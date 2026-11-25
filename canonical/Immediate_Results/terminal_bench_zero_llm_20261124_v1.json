@@ -1,0 +1,205 @@
+{
+  "results": [
+    {
+      "task": "hello-world",
+      "agent_committed": true,
+      "mechanism": "SPECULATIVE_COW_ARTIFACT_SYNTHESIS",
+      "probes": 2,
+      "skill_status": "REJECTED__TASK_SPECIFIC_LITERAL_PAYLOAD",
+      "official_pytest_passed": true,
+      "elapsed_ms": 194.57,
+      "details": {
+        "output": "hello.txt"
+      },
+      "grade_tail": "..                                                                       [100%]\n2 passed in 0.09s"
+    },
+    {
+      "task": "fix-permissions",
+      "agent_committed": true,
+      "mechanism": "SPECULATIVE_COW_SHELL_TOMOGRAPHY",
+      "probes": 5,
+      "skill_status": "ADMITTED_S92:cc9bb027d782",
+      "official_pytest_passed": true,
+      "elapsed_ms": 35.09,
+      "details": {
+        "winner": "chmod_entry_exec",
+        "delta": {
+          "created_files": [],
+          "deleted_files": [],
+          "modified_content": [],
+          "modified_mode": [
+            "process_data.sh"
+          ],
+          "sqlite_deltas": {},
+          "ui_deltas": {},
+          "noop": false
+        }
+      },
+      "grade_tail": ".                                                                        [100%]\n1 passed in 0.11s"
+    },
+    {
+      "task": "countdown-game",
+      "agent_committed": true,
+      "mechanism": "EXACT_RATIONAL_ARITHMETIC_SEARCH",
+      "probes": 2,
+      "skill_status": "REJECTED__TASK_SPECIFIC_LITERAL_PAYLOAD",
+      "official_pytest_passed": true,
+      "elapsed_ms": 15.27,
+      "details": {
+        "expression": "(3 + 8) * ((11 - 19) - (25 - 75))",
+        "target": 462,
+        "output": "output.txt"
+      },
+      "grade_tail": "..                                                                       [100%]\n2 passed in 0.10s"
+    },
+    {
+      "task": "sqlite-db-truncate",
+      "agent_committed": true,
+      "mechanism": "SQLITE_BTREE_LEAF_FORENSICS",
+      "probes": 2,
+      "skill_status": "BUILTIN_RFC_LAW",
+      "official_pytest_passed": true,
+      "elapsed_ms": 1.9,
+      "details": {
+        "db": "trunc.db",
+        "recovered_rows": 10,
+        "output": "recover.json"
+      },
+      "grade_tail": ".                                                                        [100%]\n1 passed in 0.10s"
+    },
+    {
+      "task": "blind-maze-explorer-5x5",
+      "agent_committed": true,
+      "mechanism": "INTERACTIVE_MEALY_BFS_DISCOVERY",
+      "probes": 2,
+      "skill_status": "ADMITTED_S92:eb10899b3435",
+      "official_pytest_passed": true,
+      "elapsed_ms": 88.4,
+      "details": {
+        "steps_taken": 28,
+        "outputs": [
+          "maze_map.txt"
+        ],
+        "recalled_prior_skill": false
+      },
+      "grade_tail": "..                                                                       [100%]\n2 passed in 0.11s"
+    },
+    {
+      "task": "blind-maze-explorer-algorithm",
+      "agent_committed": true,
+      "mechanism": "INTERACTIVE_MEALY_BFS_SKILL_RECALL",
+      "probes": 1,
+      "skill_status": "REJECTED__ZERO_PREDICTION_ERROR_SURPRISE",
+      "official_pytest_passed": true,
+      "elapsed_ms": 4759.37,
+      "details": {
+        "steps_taken": 1996,
+        "outputs": [
+          "output/1.txt",
+          "output/2.txt",
+          "output/3.txt",
+          "output/4.txt",
+          "output/5.txt",
+          "output/6.txt",
+          "output/7.txt",
+          "output/8.txt",
+          "output/9.txt",
+          "output/10.txt"
+        ],
+        "recalled_prior_skill": true
+      },
+      "grade_tail": "...........                                                              [100%]\n11 passed in 0.25s"
+    },
+    {
+      "task": "analyze-access-logs",
+      "agent_committed": false,
+      "mechanism": "UNSOLVED_HONEST_LIMIT",
+      "probes": 0,
+      "skill_status": "NONE",
+      "official_pytest_passed": false,
+      "elapsed_ms": 0.9,
+      "details": {
+        "reason": "Outside verifiable zero-LLM structural solvers; refused without guessing"
+      },
+      "grade_tail": "ort_generation - AssertionError: rep...\nFAILED ../test_outputs_local.py::test_top_urls - FileNotFoundError: [Errno 2]...\nFAILED ../test_outputs_local.py::test_report_format - FileNotFoundError: [Err...\n3 failed in 0.16s"
+    },
+    {
+      "task": "jsonl-aggregator",
+      "agent_committed": false,
+      "mechanism": "UNSOLVED_HONEST_LIMIT",
+      "probes": 0,
+      "skill_status": "NONE",
+      "official_pytest_passed": false,
+      "elapsed_ms": 204.03,
+      "details": {
+        "reason": "Outside verifiable zero-LLM structural solvers; refused without guessing"
+      },
+      "grade_tail": "r_7sc3akb3/app/aggregates.json').exists\n=========================== short test summary info ============================\nFAILED ../test_outputs_local.py::test_expected_output - AssertionError: aggre...\n1 failed in 0.14s"
+    },
+    {
+      "task": "log-summary-date-ranges",
+      "agent_committed": false,
+      "mechanism": "UNSOLVED_HONEST_LIMIT",
+      "probes": 0,
+      "skill_status": "NONE",
+      "official_pytest_passed": false,
+      "elapsed_ms": 0.48,
+      "details": {
+        "reason": "Outside verifiable zero-LLM structural solvers; refused without guessing"
+      },
+      "grade_tail": "mmary info ============================\nFAILED ../test_outputs_local.py::test_summary_file_exists - AssertionError: F...\nFAILED ../test_outputs_local.py::test_summary_structure_and_counts - FileNotF...\n2 failed in 0.13s"
+    },
+    {
+      "task": "regex-log",
+      "agent_committed": false,
+      "mechanism": "UNSOLVED_HONEST_LIMIT",
+      "probes": 0,
+      "skill_status": "NONE",
+      "official_pytest_passed": false,
+      "elapsed_ms": 0.3,
+      "details": {
+        "reason": "Outside verifiable zero-LLM structural solvers; refused without guessing"
+      },
+      "grade_tail": "gex-log_vai67peh/app/regex.txt').exists\n=========================== short test summary info ============================\nFAILED ../test_outputs_local.py::test_regex_matches_dates - AssertionError: R...\n1 failed in 0.11s"
+    },
+    {
+      "task": "assign-seats",
+      "agent_committed": false,
+      "mechanism": "UNSOLVED_HONEST_LIMIT",
+      "probes": 0,
+      "skill_status": "NONE",
+      "official_pytest_passed": false,
+      "elapsed_ms": 1.91,
+      "details": {
+        "reason": "Outside verifiable zero-LLM structural solvers; refused without guessing"
+      },
+      "grade_tail": "mmary info ============================\nFAILED ../test_outputs_local.py::test_results_file_exists - AssertionError: F...\nFAILED ../test_outputs_local.py::test_results_has_correct_pairs - FileNotFoun...\n2 failed in 0.14s"
+    }
+  ],
+  "admitted_skills": [
+    {
+      "skill_id": "cc9bb027d782",
+      "domain": "shell_repair",
+      "parameterized_template": "chmod u+rx \"?target_rel\"",
+      "concrete_witness": "chmod u+rx \"process_data.sh\"",
+      "provenance_task": "fix-permissions",
+      "world_fingerprint": "8ddbe81d9ea00b85",
+      "staleness_probe_kind": "cow_dry_run",
+      "probes_required_at_discovery": 5,
+      "verified_reuses": 0,
+      "invalidated_stale": false
+    },
+    {
+      "skill_id": "eb10899b3435",
+      "domain": "interactive_bfs",
+      "parameterized_template": "explore_grid(?workspace_root/?target_rel, prefix='move ')",
+      "concrete_witness": "explore_grid(/tmp/tb_blind-maze-explorer-5x5_a5o_wlf8/app/maze_game.sh, prefix='move ')",
+      "provenance_task": "blind-maze-explorer-5x5",
+      "world_fingerprint": "213930677c7e7d68",
+      "staleness_probe_kind": "cow_dry_run",
+      "probes_required_at_discovery": 2,
+      "verified_reuses": 0,
+      "invalidated_stale": false
+    }
+  ]
+}

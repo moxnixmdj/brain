@@ -52,6 +52,7 @@ FAIL_EMPTY = "FAIL_CLOSED__LOCAL_GUIDE_EMPTY_QUERY"
 _SKIP = {".git", "node_modules", "build", "dist", "out", ".next", ".venv",
          "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache"}
 _MAX_FILES = 500
+_MAX_TEXT = 200_000
 _MAX_SNIPPETS = 5
 _MAN_SECTIONS = (1, 2, 3, 4, 5, 6, 7, 8)
 _DEFAULT_MAN_ROOT = "/usr/share/man"
@@ -118,17 +119,25 @@ def _content_hits(text: str, tokens: Sequence[str]) -> list[str]:
             if re.search(r"\b" + re.escape(t) + r"\b", lower)]
 
 
-def _best_paragraph(text: str, tokens: Sequence[str]) -> tuple[int, str] | None:
-    """The single paragraph sharing the most content tokens with the query.
-    The paragraph is the candidate guide; whether the candidate is enough is
-    decided by the completeness gate, not by this function."""
-    best: tuple[int, str] | None = None
+def _best_paragraph(text: str, tokens: Sequence[str],
+                    weights: Mapping[str, float] | None = None
+                    ) -> tuple[float, frozenset[str], str] | None:
+    """The single paragraph sharing the most query tokens with the query, WEIGHTED.
+
+    The weight of a token is how rare it is across the documents read. A raw count made
+    "user" (in every paragraph) worth as much as "greet" (in one), so a paragraph that answered
+    the question in its two specific words scored below a paragraph that mentioned two common
+    ones, and the guide was reported not found. Weighing by rarity does not add a rule: it
+    removes one, because the count was the rule that was wrong.
+    """
+    best: tuple[float, frozenset[str], str] | None = None
     for para in re.split(r"\n\s*\n", text):
         hits = _content_hits(para, tokens)
         if not hits:
             continue
-        if best is None or len(hits) > best[0]:
-            best = (len(hits), para.strip()[:600])
+        score = sum((weights or {}).get(hit, 1.0) for hit in hits)
+        if best is None or score > best[0]:
+            best = (score, frozenset(hits), para.strip()[:600])
     return best
 
 
@@ -225,6 +234,10 @@ def lookup(query: str, *, root: Path | str | None = None,
     root_path = Path(root) if root is not None else _default_root()
 
     md_docs: list[dict[str, Any]] = []
+    # PASS 1 reads every candidate and records WHICH tokens each paragraph matched. Nothing is
+    # accepted yet: the weight of a token is its rarity across the documents read, and that is
+    # not known until they have all been read.
+    candidates: list[tuple[Path, str, tuple[float, frozenset[str], str]]] = []
     try:
         for p in _local_guide_files(root_path):
             if time.time() - started > deadline_s:
@@ -234,25 +247,48 @@ def lookup(query: str, *, root: Path | str | None = None,
             except Exception:
                 continue
             best = _best_paragraph(text, tokens)
-            if best is None or best[0] < md_needed:
+            if best is None or best[0] < 1:
                 continue
-            score, snippet = best
-            try:
-                rel = str(p.relative_to(root_path))
-            except ValueError:
-                rel = str(p)
-            md_docs.append({
-                "path": rel,
-                "source": "local_md",
-                "score": float(score),
-                "matched_terms": score,
-                "snippet": snippet,
-            })
+            candidates.append((p, text, best))
     except Exception as e:  # noqa: BLE001
         return {"schema": SCHEMA, "status": OPEN_NOT_FOUND, "pass": False,
                 "query": q, "score": 0.0, "documents": [],
                 "error": str(e)[:200],
                 "authority": "NONE__LOCAL_GUIDE_UNAVAILABLE"}
+
+    # RARITY IS THE WEIGHT. `df` counts in how many candidate paragraphs a token appears; a
+    # token in every paragraph carries no information about which one answers the question.
+    df: dict[str, int] = {}
+    for _, _, (_, hits, _) in candidates:
+        for hit in hits:
+            df[hit] = df.get(hit, 0) + 1
+    weights = {token: 1.0 / (1 + df.get(token, 0)) for token in tokens}
+    # the rarest token that appears AT ALL. A token absent from every paragraph has df 0 and
+    # would always win the minimum, which would make the gate ask for a word nobody wrote.
+    present = [token for token in tokens if df.get(token, 0) > 0]
+    rarest = min(present, key=lambda token: (df.get(token, 0), token)) if present else ""
+    for p, text, (score, hits, snippet) in candidates:
+        # TWO TOKENS, AND ONE OF THEM THE RARE ONE. The old gate asked for 60% of the query,
+        # which refused a paragraph that answered the question in its two specific words. This
+        # asks for the word that makes the question specific plus one more, so "one isolated
+        # keyword anywhere" is still a thin hit.
+        if len(hits) < 2 or (rarest and rarest not in hits):
+            continue
+        try:
+            rel = str(p.relative_to(root_path))
+        except ValueError:
+            rel = str(p)
+        md_docs.append({
+            "path": rel,
+            "source": "local_md",
+            "score": float(score),
+            "matched_terms": len(hits),
+            "snippet": snippet,
+            # The snippet is a paragraph; the CALLER needs the document. A fetcher that
+            # returns only a summary cannot feed an extractor, which is why the circuit
+            # stayed open while `lookup` alone reported PASS.
+            "text": text[:_MAX_TEXT],
+        })
 
     tool_docs: list[dict[str, Any]] = []
     if tools:
@@ -264,8 +300,8 @@ def lookup(query: str, *, root: Path | str | None = None,
             help_out = _tool_help_text(tool, timeout_s=timeout_s)
             if help_out is not None:
                 best = _best_paragraph(help_out["text"], tokens)
-                if best is not None and best[0] >= tool_needed:
-                    score, snippet = best
+                if best is not None and len(best[1]) >= tool_needed:
+                    score, snippet = best[0], best[2]
                     tool_docs.append({
                         "path": f"{tool_name} --help",
                         "source": "tool_help",
@@ -274,13 +310,14 @@ def lookup(query: str, *, root: Path | str | None = None,
                         "matched_terms": score,
                         "snippet": snippet,
                         "exit_code": help_out.get("exit_code"),
+                        "text": str(help_out.get("text") or "")[:_MAX_TEXT],
                     })
                     continue
             man_out = _man_page_text(tool_name, Path(man_root) if man_root is not None else Path(_DEFAULT_MAN_ROOT))
             if man_out is not None:
                 best = _best_paragraph(man_out["text"], tokens)
-                if best is not None and best[0] >= tool_needed:
-                    score, snippet = best
+                if best is not None and len(best[1]) >= tool_needed:
+                    score, snippet = best[0], best[2]
                     tool_docs.append({
                         "path": f"{tool} man page ({man_out.get('path')})",
                         "source": "man_page",
@@ -289,6 +326,7 @@ def lookup(query: str, *, root: Path | str | None = None,
                         "matched_terms": score,
                         "snippet": snippet,
                         "sections": man_out.get("sections"),
+                        "text": str(man_out.get("text") or "")[:_MAX_TEXT],
                     })
 
     # tool-guide documents are the direct answer for a named tool; they outrank

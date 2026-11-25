@@ -74,13 +74,51 @@ def test_command(worktree: pathlib.Path, test_file: str) -> list[str]:
     # `-o asyncio_default_fixture_loop_scope=function` is not cosmetic: tqdm sets
     # `filterwarnings = error`, and pytest-asyncio's unset-scope warning then escalates to
     # INTERNALERROR, so the suite cannot run at all and every tqdm row reads as "no oracle".
-    return [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider",
-            "-o", "asyncio_default_fixture_loop_scope=function"]
+    command = [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider"]
+    _util = __import__("importlib.util", fromlist=["util"])
+    if _util.find_spec("pytest_asyncio") is not None:
+        command.extend(["-o", "asyncio_default_fixture_loop_scope=function"])
+    return command
 
 
 def failing_tests(verdicts: dict[str, str]) -> list[str]:
     """The tests that actually failed, in file order. Skips and timeouts are not failures."""
     return [name for name, verdict in verdicts.items() if verdict in FAILURE_VERDICTS]
+
+
+def assert_module_provenance(worktree: pathlib.Path, module: str,
+                             seconds: int = 30) -> dict[str, object]:
+    """Prove the suite is importing the worktree, not an installed copy.
+
+    Five src-layout packages in this corpus (click, packaging, pluggy, urllib3, attr)
+    are also installed from PyPI into the driver venv at versions that differ from the
+    corpus commits. `PYTHONPATH="src:."` is what makes the worktree win; without it
+    every patch would be compiled into `src/` and never imported, and the suite would
+    report PASSED against a different version of the library. Measured directly:
+
+        packaging worktree, no PYTHONPATH   -> site-packages/packaging
+        packaging worktree, PYTHONPATH=src:. -> <worktree>/src/packaging
+
+    This function turns that silent failure mode into a loud one. It is cheap (one
+    interpreter start) and should be run on at least one row per repository.
+    """
+    probe = "import %s as m; print('PROVENANCE=' + (m.__file__ or ''))" % module
+    try:
+        done = subprocess.run([sys.executable, "-c", probe], cwd=worktree,
+                              capture_output=True, text=True, errors="replace",
+                              timeout=seconds, stdin=subprocess.DEVNULL,
+                              env={**__import__("os").environ, **fresh_bytecode(worktree)})
+    except subprocess.TimeoutExpired:
+        return {"ok": False, "reason": "timeout", "module": module}
+    location = ""
+    for line in (done.stdout or "").splitlines():
+        if line.startswith("PROVENANCE="):
+            location = line.split("=", 1)[1].strip()
+    inside = bool(location) and pathlib.Path(location).resolve().is_relative_to(
+        worktree.resolve())
+    return {"ok": inside, "module": module, "location": location,
+            "reason": "imports the worktree" if inside else
+                      ("imports " + (location or "unknown") + " -- CONTAMINATED")}
 
 
 def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
@@ -99,7 +137,10 @@ def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
     """
     for cache in worktree.rglob("__pycache__"):
         shutil.rmtree(cache, ignore_errors=True)
-    return {"PYTHONPATH": "src:.", "PYTHONDONTWRITEBYTECODE": "1",
+    ambient = __import__("os").environ.get("PYTHONPATH", "")
+    _os = __import__("os")
+    pythonpath = "src:." + (_os.pathsep + ambient if ambient else "")
+    return {"PYTHONPATH": pythonpath, "PYTHONDONTWRITEBYTECODE": "1",
             "PYTHONPYCACHEPREFIX": str(worktree / ".brain_pycache")}
 
 
@@ -174,6 +215,8 @@ def parse_line(text: str) -> ast.Module:
     if text.lstrip().startswith("elif "):
         # `elif` is not a statement on its own; as `if` it is the same node shape and the same test.
         text = text.lstrip().replace("elif ", "if ", 1)
+    if text.lstrip().startswith("except ") and text.rstrip().endswith(":"):
+        return ast.parse(f"try:\n    pass\n{text.strip()}\n    pass\n")
     try:
         return ast.parse(text)
     except SyntaxError:
@@ -185,7 +228,7 @@ def parse_line(text: str) -> ast.Module:
         try:
             return ast.parse("{" + text.strip().rstrip(",") + "}")
         except SyntaxError:
-            raise
+            return ast.parse(f"def _f({text.strip().rstrip(',')}):\n    pass\n")
 
 
 def enclosing_class(source: str, line: int) -> ast.ClassDef | None:
@@ -373,7 +416,8 @@ def candidates_at(source: str, site_line: int, site_text: str, *, budget: int = 
     return produced
 
 
-def replace_site(source: str, site_line: int, start_col: int, end_col: int, expression: str) -> str | None:
+def replace_site(source: str, site_line: int, start_col: int, end_col: int, expression: str,
+                 end_line: int | None = None) -> str | None:
     """Put `expression` where the old sub-expression was, by column, not by matching its text.
 
     Literal matching failed on `default_value == ""`: the AST unparses the constant with single quotes
@@ -384,10 +428,16 @@ def replace_site(source: str, site_line: int, start_col: int, end_col: int, expr
     index = site_line - 1
     if index < 0 or index >= len(lines):
         return None
-    line = lines[index]
-    if end_col > len(line):
-        return None
-    lines[index] = line[:start_col] + expression + line[end_col:]
+    if end_line is not None and end_line > site_line:
+        end_idx = end_line - 1
+        if end_idx >= len(lines) or end_col > len(lines[end_idx]):
+            return None
+        lines[index:end_line] = [lines[index][:start_col] + expression + lines[end_idx][end_col:]]
+    else:
+        line = lines[index]
+        if end_col > len(line):
+            return None
+        lines[index] = line[:start_col] + expression + line[end_col:]
     patched = "".join(lines)
     try:
         ast.parse(patched)

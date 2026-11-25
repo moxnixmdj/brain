@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-24",
+  "engine_sha256": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "e9a8439bf2a69353b2a797c2949cb915fe8a59d9b9b813b65bc1efbe2eec0299",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "340816adc7f23d69a9a45fcbdcc70ab2472dfcc9be62fb8b990b741acda7c26b",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "four_language_uir_fingerprint": {
+    "c": "3324a3eb53141f15414f80af",
+    "python": "3324a3eb53141f15414f80af",
+    "javascript": "3324a3eb53141f15414f80af",
+    "rust": "3324a3eb53141f15414f80af",
+    "all_four_identical": true
+  },
+  "cjson_real_cve_cwe476": {
+    "commit": "b2890c8d76",
+    "solved": true,
+    "mechanism": "COGS_UIR_Z3_INVENTION",
+    "sabotage_verified": true,
+    "crystallized_law_id": "uir_law_6e054af54b35",
+    "elapsed_ms": 3170.65,
+    "unified_diff": "--- a/cJSON.c\n+++ b/cJSON.c\n@@ -410,6 +410,7 @@\n /* don't ask me, but the original cJSON_SetNumberValue returns an integer or double */\n CJSON_PUBLIC(double) cJSON_SetNumberHelper(cJSON *object, double number)\n {\n+    if (object == NULL) { return __builtin_nan(\"\"); }\n     if (number >= INT_MAX)\n     {\n         object->valueint = INT_MAX;\n"
+  },
+  "cross_language_c_to_python_to_js_transfer": {
+    "c_cold_invention": {
+      "solved": true,
+      "mechanism": "COGS_UIR_Z3_INVENTION",
+      "crystallized_law_id": "uir_law_d5b08aa0c3aa",
+      "sandbox_runs": 4,
+      "elapsed_ms": 425.18
+    },
+    "python_zero_trace_recall": {
+      "solved": true,
+      "mechanism": "SEMANTIC_LAW_RECALL:uir_law_d5b08aa0c3aa",
+      "sandbox_runs": 3,
+      "elapsed_ms": 2407.34
+    },
+    "javascript_zero_trace_recall": {
+      "solved": true,
+      "mechanism": "SEMANTIC_LAW_RECALL:uir_law_d5b08aa0c3aa",
+      "sandbox_runs": 3,
+      "elapsed_ms": 281.96
+    }
+  },
+  "coupled_multifile_beam": {
+    "solved": true,
+    "mechanism": "COGS_COUPLED_MULTIFILE_BEAM",
+    "modified_files": [
+      "pipeline/aggregator.py",
+      "pipeline/loader.py"
+    ],
+    "sabotage_verified": true,
+    "overfit_falsifier_passed": true,
+    "source_tree_unchanged": true,
+    "elapsed_ms": 3898.21,
+    "unified_diff": "--- a/pipeline/aggregator.py\n+++ b/pipeline/aggregator.py\n@@ -1,2 +1,4 @@\n def compute_mean(total, count):\n+    if count == 0:\n+        return 0\n     return total / count\n--- a/pipeline/loader.py\n+++ b/pipeline/loader.py\n@@ -1,2 +1,4 @@\n def parse_header(hdr):\n+    if hdr is None:\n+        return None\n     return hdr.strip()\n"
+  }
+}

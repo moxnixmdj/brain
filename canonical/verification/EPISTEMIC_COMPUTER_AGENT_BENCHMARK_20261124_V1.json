@@ -1,0 +1,508 @@
+{
+  "benchmark_wall_seconds": 58.4222,
+  "date": "2026-11-24",
+  "experiment_1_goal_directed_room_learning": {
+    "empty_memory_control_unread_rate": 1.0,
+    "episodes": 8,
+    "goal_directed": {
+      "corrupt_decoys_caught": "8/8",
+      "judges_earned_count": 3,
+      "probes_by_episode": [
+        3,
+        3,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total_probes": 6,
+      "total_seconds": 3.5766,
+      "valid_verified": "8/8",
+      "warm_episodes_zero_probes": 6
+    },
+    "lazy_trap_audit": {
+      "admitted_kinds": [
+        "bplist",
+        "bz2",
+        "elf",
+        "gzip",
+        "json",
+        "pdf",
+        "png",
+        "python",
+        "sqlite",
+        "tar",
+        "utf8_text",
+        "wav",
+        "xml",
+        "xz",
+        "zip"
+      ],
+      "lazy_traps_refused": [
+        "py:bz2:lazy_open",
+        "py:lzma:lazy_open",
+        "py:sqlite3:connect_lazy"
+      ],
+      "refused_total": 20
+    },
+    "probe_reduction_ratio": 0.25,
+    "upfront_all_baseline": {
+      "judges_earned_count": 8,
+      "probes_by_episode": [
+        24,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total_probes": 24,
+      "total_seconds": 7.7006
+    }
+  },
+  "experiment_2_cli_action_grammar": {
+    "cold_episode": {
+      "binaries_probed": 6,
+      "pass": true,
+      "recalled_from_memory": 0,
+      "seconds": 0.1715
+    },
+    "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
+    "warm_unseen_episodes": {
+      "binaries_probed_total": 0,
+      "passed": "4/4",
+      "raw_argv_replay_control_passed": "0/4"
+    }
+  },
+  "experiment_3_w3c_aria_osworld_gui_transfer": {
+    "apps_evaluated": 6,
+    "mean_steps_v1_cold": 6.0,
+    "mean_steps_v2_warm": 5.0,
+    "naive_aria_without_state_diff_control_pass": "0/6",
+    "store_audit": {
+      "gui_workflows_count": 6,
+      "parameters_stored": 0,
+      "raw_coordinates_saved": 0,
+      "raw_xpath_saved": 0
+    },
+    "v1_cold_pass": "6/6",
+    "v1_lying_aria_traps_bypassed": 6,
+    "v2_raw_xy_coordinate_replay_control_pass": "0/6",
+    "v2_raw_xy_destructive_wipe_triggered": "6/6",
+    "v2_unseen_redesign_schema_transfer_pass": "6/6"
+  },
+  "experiment_4_blind_unseen_swe_commits": {
+    "aggregate_unseen_heldout": {
+      "fake_repairs_after_canary_gate": 0,
+      "top5_file_localization": "40/49 (81.6%)",
+      "total_commits_attempted": 57,
+      "total_reproducible_in_sandbox": 49,
+      "verified_genuine_repairs": "2/49 (4.1%)"
+    },
+    "calibration_attrs_seen": {
+      "exact_human_match_commits": [
+        "attrs@3b0378dd66"
+      ],
+      "localized_top5_file": 4,
+      "total": 4,
+      "verified_full_suite_repairs": 1
+    },
+    "heldout_unseen_fresh_round2_after_canary_freeze": {
+      "localized_top5_file": 6,
+      "repos": [
+        "werkzeug",
+        "urllib3",
+        "jinja",
+        "tqdm",
+        "httpx",
+        "starlette"
+      ],
+      "total_reproducible": 13,
+      "total_tasks": 17,
+      "verified_genuine_repairs": 0
+    },
+    "heldout_unseen_general_20261116": {
+      "localized_top5_file": 11,
+      "repos": [
+        "pypa/packaging",
+        "hukkin/tomli",
+        "pallets/itsdangerous"
+      ],
+      "total_reproducible": 12,
+      "total_tasks": 16,
+      "verified_genuine_repairs": 0
+    },
+    "heldout_unseen_single_line_round1": {
+      "false_positive_caught_by_runner_canary_audit": 1,
+      "localized_top5_file": 23,
+      "repos": [
+        "click",
+        "more-itertools",
+        "packaging",
+        "pluggy"
+      ],
+      "retracted_and_blocked_by_canary": {
+        "cause": "self-hosting pytest imported mutated pluggy._callers; blocked permanently by dual unittest+pytest verify_runner_canary",
+        "commit": "pluggy@4326ced299"
+      },
+      "total_reproducible": 24,
+      "verified_commits": [
+        {
+          "commit": "packaging@b80e6eb0a6",
+          "cross_module_tests_passed": 61705,
+          "exact_human_diff_match": true,
+          "family": "FALSY_NON_NONE_GUARD"
+        },
+        {
+          "commit": "packaging@8af75907bf",
+          "cross_module_tests_passed": 61541,
+          "exact_human_diff_match": false,
+          "family": "GUARD_DISJUNCTIVE_RELAXATION"
+        }
+      ],
+      "verified_genuine_repairs": 2
+    },
+    "prior_repo_engine_baseline": {
+      "real_fix_commits_20261116": "0/89",
+      "single_line_20261123_unseen_non_attrs": "0/41 (even with exact git diff line hand-held)"
+    },
+    "protocol": "git_stripped_worktree_parent_plus_test_only__zero_sha_zero_diff_zero_model_calls",
+    "v2_first_principles_mental_cegis_full_corpus": {
+      "calibration_attrs_seen": {
+        "localized_top5_file": 4,
+        "rate": "2/4 (50.0%, up from 1/4 = 25.0% in V1)",
+        "reproducible": 4,
+        "total": 4,
+        "verified_commits": [
+          {
+            "broad_tests_passed": 1337,
+            "commit": "attrs@3b0378dd66",
+            "exact_human_diff_match": true,
+            "mechanism": "ITERATOR_MATERIALIZATION"
+          },
+          {
+            "broad_tests_passed": 1288,
+            "commit": "attrs@a08bfb90ef",
+            "mechanism": "MEMBERSHIP_SET_EXTENSION",
+            "semantic_ir_equivalent_to_human_diff": true
+          }
+        ],
+        "verified_genuine_repairs": 2
+      },
+      "corpora_evaluated_completely": [
+        "canonical/corpus/single_line_fix_commits_20261123_V1.json (45/45 commits, 11 repos)",
+        "canonical/corpus/real_fix_commits_20261116_V1.json (89/89 commits, 3 repos; 127 unique commits total)"
+      ],
+      "mental_simulation_telemetry_across_115_reproducible_commits": {
+        "candidates_pruned_before_execution": 356262,
+        "disk_writes_during_cow_synthesis": 0,
+        "in_memory_expression_simulations": 1440593,
+        "measured_cow_vs_cold_pytest_speedup_packaging_20_tests": {
+          "cold_pytest_subprocess_ms": 492.47,
+          "cow_fork_ms": 2.33,
+          "speedup_factor": 211.6
+        },
+        "os_fork_cow_ram_test_suite_simulations": 33605
+      },
+      "unseen_heldout_12_repos_deduplicated": {
+        "fake_repairs_remaining_after_4layer_referee": 0,
+        "false_repair_classes_caught_and_eliminated": [
+          {
+            "class": "SELF_HOSTING_RUNNER_LOBOTOMY",
+            "example": "pluggy@4326ced299",
+            "gate": "verify_runner_canary (dual unittest + pytest decoy failure check)"
+          },
+          {
+            "class": "PYTHON_BOOL_IS_INT_TYPE_PUNNING",
+            "example": "more-itertools@cca32949f1 (`default != 0` == 1 via `isinstance(True, int)`)",
+            "gate": "SemanticMeaningIR sort-discipline gate blocking boolean replacements on non-boolean expressions"
+          },
+          {
+            "class": "CROSS_MODULE_CALLER_REGRESSION",
+            "example": "packaging@258202ed7f (`src/packaging/utils.py` passed `test_utils.py` but broke `test_metadata.py`)",
+            "gate": "IncrementalSemanticGraph + src/-layout reverse-import impacted test referee"
+          },
+          {
+            "class": "NON_BASEEXCEPTION_CATCH_TYPEERROR_SIDE_EFFECT",
+            "example": "tomli@8b962e1349 (`type(exc_type).__name__ == 'type'` -> `except type:` raising Python VM TypeError)",
+            "gate": "getattr(exc_type, '__name__') fix + uppercase BaseException class invariant"
+          }
+        ],
+        "reproducible_in_sandbox": 111,
+        "top5_causal_file_localization": "105/111 (94.6%, up from 40/49 = 81.6% in V1)",
+        "unique_commits_attempted": 123,
+        "verified_commits": [
+          {
+            "commit": "packaging@b80e6eb0a6",
+            "exact_human_diff_match": true,
+            "mechanism": "FALSY_NON_NONE_GUARD",
+            "split": "heldout_unseen_single_line"
+          },
+          {
+            "commit": "packaging@8af75907bf",
+            "exact_human_diff_match": false,
+            "mechanism": "GUARD_DISJUNCTIVE_RELAXATION",
+            "split": "heldout_unseen_single_line"
+          },
+          {
+            "broad_tests_passed": 146,
+            "commit": "packaging@022ae6c6fe",
+            "mechanism": "GUARD_DISJUNCTIVE_RELAXATION",
+            "repaired_file": "src/packaging/metadata.py",
+            "split": "virgin_unseen_general_20261116"
+          }
+        ],
+        "verified_genuine_repairs": "3/111 (2.7% across full general+single-line; 2/37 = 5.4% unseen single-line + 1 virgin multi-line general commit where V1 solved 0)",
+        "virgin_general_30_localization": "30/30 (100.0%)"
+      }
+    }
+  },
+  "experiment_5_first_principles_mental_cegis_4leaps": {
+    "leap2_loop_comprehension_stream_canonical_equiv": true,
+    "leap2_python_to_javascript_semantic_transfer": true,
+    "leap3_coupled_two_file_cegis_verified": true,
+    "leap4_destructive_cli_blocked_in_shadow": true,
+    "leap4_destructive_gui_wipe_blocked_in_shadow": true,
+    "leap4_inert_aria_decoy_pruned_in_shadow": true,
+    "leap4_safe_gui_plan_admitted": true
+  },
+  "experiment_6_petri_cow_splicing_and_ablations": {
+    "admission_filter_and_memory_ablations": {
+      "ablation_disabled_empty_store_hits": "0/4",
+      "ablation_generalized_store_hits": "4/4",
+      "ablation_raw_traces_store_hits": "1/4",
+      "foreign_ident_unbound_rejected": true,
+      "staleness_drift_revalidated": true,
+      "valid_skill_admitted": true
+    },
+    "cross_modal_petri_net": {
+      "pass": true,
+      "steps_executed": 4,
+      "surfaces_chained": [
+        "GUI_ARIA",
+        "SQLITE_QUERY",
+        "PYTHON_TRANSFORM",
+        "CLI_EXEC"
+      ]
+    },
+    "speculative_16way_cow_world_tomography": {
+      "branches_forked": 16,
+      "mealy_transitions_compiled": 16,
+      "wall_ms": 46.02,
+      "winner_action": "heal_gateway_and_unlock_settings",
+      "zero_base_disk_mutation": true
+    },
+    "v3_petri_splicing_swe_delta": {
+      "additional_petri_verified_repairs": [
+        {
+          "certified_genuine": true,
+          "commit": "pluggy@e108fa4490",
+          "exact_ast_human_match": true,
+          "mechanism": "PETRI_RECV_METHOD_SWAP:self.get_plugin->has_plugin"
+        },
+        {
+          "certified_genuine": true,
+          "commit": "packaging@553582d916",
+          "mechanism": "PETRI_UNWRAP:list(charset)->charset"
+        }
+      ],
+      "hop2_reverse_import_referee_false_positives": 0,
+      "named_5_commits_evaluated": [
+        {
+          "certified_genuine": true,
+          "commit": "click@05f6fd0",
+          "mechanism": "PETRI_SIBLING_RETURN_COALESCE",
+          "split": "repo_documented_calibration",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "PASS__VERIFIED_REPAIR"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "click@c53d373",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__MULTI_HUNK_23_LINES"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "click@fc518e4",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__ASYNC_SIGINT_TEARDOWN_76_LINES"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "werkzeug@884437ae",
+          "localized_top5": false,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__BOOLEAN_IMPLICATION_RESTRUCTURE"
+        },
+        {
+          "certified_genuine": false,
+          "commit": "werkzeug@051fd663",
+          "localized_top5": true,
+          "split": "unseen_named_hard",
+          "v2_baseline": "OPEN",
+          "v3_petri_splice": "OPEN__EARLY_RETURN_METHOD_INSERTION"
+        }
+      ]
+    }
+  },
+  "experiment_7_v4_subtree_fuzzer_petri320_and_harbor": {
+    "bidirectional_codec_lens": {
+      "caret_control_bytes_roundtrip_verified": true
+    },
+    "cow_64way_boundary_fuzzer": {
+      "boundary_cases_tested": 39,
+      "caught_empty_string_index_regression": true,
+      "wall_ms": 15.965
+    },
+    "harbor_front_door_epistemic_dispatch": {
+      "capability_id": "swe.harbor.epistemic_cycle.v1",
+      "model_calls": 0,
+      "pass": true,
+      "task_completion_claimed": false,
+      "validated_action_kind": "exec"
+    },
+    "long_horizon_320_step_petri_dominator_slicer": {
+      "cut_vertices_discovered": 320,
+      "ok": true,
+      "steps_executed": 320,
+      "wall_ms": 945.519
+    },
+    "multistatement_subtree_anti_unification": {
+      "ablation_disabled": "0/5",
+      "ablation_generalized_python_js_rust": "5/5",
+      "ablation_raw_traces": "1/5",
+      "learned_skill_id": "sub_b7afd77421fc",
+      "o1_skill_removal_verified": true
+    },
+    "v4_swe_repair_and_blind_localization_summary": {
+      "click_ac0e297_blind_unseen": {
+        "localized_rank1_file": "src/click/testing.py",
+        "post_eval_root_cause": "3-method split-stream PTY EOF discipline (`_echo` writes `^D\\n` to stdout while stripping `\\x04` from stdin + `readlines`/`__iter__` filter empty chunks)",
+        "split": "unseen_virgin",
+        "v3_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v4_status": "OPEN__NO_CANDIDATE_VERIFIED"
+      },
+      "false_positive_repairs": 0,
+      "new_virgin_unseen_localization": {
+        "more_itertools_collected_rank1_localized": "2/2",
+        "packaging_collected_rank1_localized": "3/3",
+        "pluggy_collected_top5_localized": "3/3",
+        "pyjwt_rank1_localized": "4/6",
+        "pyjwt_top5_localized": "5/6"
+      },
+      "total_genuine_oss_repairs_across_splits": 9,
+      "werkzeug_051fd663_calibration_post_v3": {
+        "exact_human_ast_match": true,
+        "learned_skill_id": "sub_4813a6185091",
+        "mechanism": "PETRI_NET_SYNTHESIS:EARLY_RETURN_PETRI_GUARD",
+        "pass1_wall_s": 14.34,
+        "pass2_subtree_reuse_wall_s": 8.64,
+        "split": "calibration_audited_post_v3",
+        "v3_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v4_status": "PASS__VERIFIED_REPAIR"
+      }
+    }
+  },
+  "experiment_8_v5_issue_witness_self_play_and_virgin_swe": {
+    "issue_witness_compiler_zero_failing_worktree": {
+      "held_out_replay_pass": true,
+      "pre_existing_failures": 0,
+      "repaired": true,
+      "untracked_files_in_app": 0,
+      "winning_mechanism": "SUBTREE_SKILL_REUSE"
+    },
+    "self_play_distiller_and_compactor": {
+      "alpha_equivalent_subtrees_merged": 1,
+      "compacted_subtree_count": 1,
+      "episode_admitted": true,
+      "kernel_identity_preserved": true
+    },
+    "v5_unseen_virgin_swe_evaluation": {
+      "more_itertools_71e070b": {
+        "issue_only_harbor_replay_verified": true,
+        "learned_skill_id": "sub_64b76cf04b3f",
+        "patch": "key -> key is not None at more_itertools/more.py:4282",
+        "split": "unseen_virgin",
+        "v4_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v5_status": "PASS__VERIFIED_REPAIR"
+      },
+      "non_tautology_and_negative_witness_guards": {
+        "blocked_overfitted_candidates_on_undercovered_suites": 3,
+        "false_positive_repairs": 0
+      },
+      "reproducible_virgin_commits_rank1_localized": "10/16 (62.5%)",
+      "reproducible_virgin_commits_top5_localized": "16/16 (100.0%)",
+      "total_genuine_oss_repairs_across_splits": 10
+    }
+  },
+  "experiment_9_v6_metamorphic_habitation_zipper_fst_and_o1_index": {
+    "o1_fp64_skill_index_and_surgical_law_deletion_ablation": {
+      "disabled_store_pass": false,
+      "generalized_with_law_pass": true,
+      "memorized_raw_traces_pass": false,
+      "n10_ms_per_query": 0.2597,
+      "n1200_ms_per_query": 0.4378,
+      "reused_skill_id": "sub_23bd7d3fa6a7",
+      "sub_2ms_at_1200_skills": true,
+      "surgical_law_deleted_pass": false
+    },
+    "turn6_unseen_oss_12commit_apples_to_apples_ledger": {
+      "diff_audit_false_positives": 0,
+      "v5_frozen_baseline_wall1_green_parent_batch_a": "0/6 (0.0%)",
+      "v5_frozen_baseline_wall2_batch_a_genuine": "1/6 (16.7%; attrs@a08bfb90 + 1 rejected dead-branch collapse on cca32949)",
+      "v6_wall1_green_parent_batch_a_heldout_verified": "3/6 (50.0%)",
+      "v6_wall1_green_parent_solved_commits": [
+        "more-itertools@62411c16 (ACTIVE_RETURN_ALIAS_INDEPENDENCE -> byte-exact fd9e4af `head.copy()`)",
+        "more-itertools@cca32949 (DISABLED_DUNDER_FALLBACK_EQUIVALENCE -> `getattr(iterable, '__reversed__', None) is not None`)",
+        "packaging@ba17fcea23 (PREDICATE_CANONICALIZER_FIXED_POINT -> `^[a-z0-9]+(-[a-z0-9]+)*$`)"
+      ],
+      "v6_wall2_batch_a_genuine_diff_audited": "6/6 (100.0%)",
+      "v6_wall2_solved_commits": [
+        "more-itertools@62411c16 (TYPE_HABITED_CONTAINER_COPY_ISOLATION, byte-exact git blob fd9e4af)",
+        "more-itertools@cca32949 (TYPE_HABITED_ATTR_VALUE_GUARD, O(1) fast path preserved)",
+        "packaging@ba17fcea23 (REGEX_FIXED_POINT_REFINEMENT, exact PEP 503 fixed-point language)",
+        "jinja@d05bd3858c (CALLEE_LIVE_PARAM_THREADING, byte-exact git blob e5b5a00)",
+        "attrs@a08bfb90 (MEMBERSHIP_SET_EXTENSION, exact dunder set)",
+        "pluggy@e108fa44 (CFG_EARLY_EXIT_NON_NONE_GUARD, exact `self.has_plugin` semantics)"
+      ],
+      "v6_wall3_multi_file_coupled_top4_localization": "5/5 runnable (100.0%)"
+    },
+    "wall1_green_parent_metamorphic_witness_and_fst_lens": {
+      "held_out_adversarial_roundtrip_pass": true,
+      "relation": "BIDIRECTIONAL_CODEC_ROUNDTRIP_EQUIVALENCE",
+      "repaired": true,
+      "winning_mechanism": "DEMAND_EXPRESSION_ALIGNMENT",
+      "witness_compiled": true
+    },
+    "wall2_dead_branch_complexity_guard": {
+      "dead_branch_collapse_blocked": true
+    },
+    "wall3_def_use_relational_zipper_two_file_ablation": {
+      "repaired_files": [
+        "pkg/loader.py",
+        "pkg/runner.py"
+      ],
+      "winning_mechanism": "DEF_USE_RELATIONAL_ZIPPER",
+      "with_zipper_pass": true,
+      "without_zipper_pass": false
+    }
+  },
+  "invariants": {
+    "api_spend_usd": 0.0,
+    "model_calls": 0,
+    "parameters_stored": 0,
+    "raw_coordinates_saved": 0,
+    "raw_trajectories_saved": 0
+  },
+  "schema": "EPISTEMIC_COMPUTER_AGENT_BENCHMARK_20261124_V1"
+}

@@ -1,0 +1,36 @@
+{
+ "counts": {
+  "NEW_CALLABLE": 12,
+  "DELETE": 7,
+  "MIXED_SWAP": 24,
+  "NEW_GUARD": 18,
+  "CONSTANT_ONLY": 6,
+  "NEW_STATEMENT": 17,
+  "RENAME_OR_REORDER": 3
+ },
+ "n": 87,
+ "inverse_hits": [
+  [
+   "pypa/packaging",
+   "46167dcd",
+   [
+    "__reduce_ex__",
+    "_intervals_from_state",
+    "_intervals_state",
+    "_point_from_state",
+    "_point_state",
+    "_restore_version_range"
+   ]
+  ]
+ ],
+ "covered": 56,
+ "coverage": {
+  "MIXED_SWAP": "existing grammar (python_test_guided_patch_search_v1)",
+  "NEW_GUARD": "distinction_creation_v1 (built 2026-11-24)",
+  "NEW_CALLABLE": "inverse_completion_v1 when the callable is an inverse pair",
+  "DELETE": "distinction_creation_v1.clause_to_delete (built 2026-11-24)",
+  "CONSTANT_ONLY": "existing grammar CONSTANT_REPLACE family",
+  "RENAME_OR_REORDER": "NOT COVERED (can_rename_a_name: false)",
+  "NEW_STATEMENT": "PARTIAL (wrapping only, no new statement)"
+ }
+}

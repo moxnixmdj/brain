@@ -1,0 +1,87 @@
+{
+  "schema": "BRAIN_METAMORPHIC_TEST_ABSENT_OSS_RECEIPT_V1",
+  "date_utc": "2026-11-24",
+  "model_calls": 0,
+  "memorized_world_weights": 0,
+  "protocol": "PURE_PARENT_COMMIT_ZERO_POSTFIX_TESTS_DURING_SOLVE__HELDOUT_HUMAN_TEST_OVERLAID_POST_SELECTION_ONLY",
+  "cases_total": 4,
+  "before_6436e61f_prose_only_solved": 0,
+  "metamorphic_oracles_abduced": 4,
+  "heldout_human_suite_verified_solved": 2,
+  "rows": [
+    {
+      "repo": "werkzeug",
+      "commit": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "parent_commit": "795f4eaf6ef1fdc2fd1d7114c61ad384ede4322c",
+      "heldout_test": "tests/test_http.py",
+      "prose_only_issue": "WWWAuthenticate to_header leaves trailing whitespace in WWW-Authenticate bearer header when parameters are empty.",
+      "parent_visible_suite_green": true,
+      "before_prose_without_code_solved": false,
+      "metamorphic_oracle_abduced": true,
+      "solver_selected_patch": true,
+      "heldout_human_test_passed_post_selection": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_REPO_COMPONENT_PETRI_NET",
+      "modified_files": [
+        "src/werkzeug/datastructures/auth.py"
+      ],
+      "unified_diff": "--- a/src/werkzeug/datastructures/auth.py\n+++ b/src/werkzeug/datastructures/auth.py\n@@ -308,7 +308,7 @@\n \n             return f\"Digest {', '.join(items)}\"\n \n-        return f\"{self.type.title()} {dump_header(self.parameters)}\"\n+        return (f'{self.type.title()} {dump_header(self.parameters)}').rstrip()\n \n     def __str__(self) -> str:\n         return self.to_header()\n",
+      "elapsed_sec": 28.85
+    },
+    {
+      "repo": "more-itertools",
+      "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+      "parent_commit": "c834d6e4a0c4280b7b7750cb0de8dd8acb3d4c2c",
+      "heldout_test": "tests/test_more.py",
+      "prose_only_issue": "fix last() when __reversed__ is None",
+      "parent_visible_suite_green": true,
+      "before_prose_without_code_solved": false,
+      "metamorphic_oracle_abduced": true,
+      "solver_selected_patch": true,
+      "heldout_human_test_passed_post_selection": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_TYPE_HABITATION_AND_GUARD_SEPARATION",
+      "modified_files": [
+        "more_itertools/more.py"
+      ],
+      "unified_diff": "--- a/more_itertools/more.py\n+++ b/more_itertools/more.py\n@@ -283,7 +283,7 @@\n         if isinstance(iterable, Sequence):\n             return iterable[-1]\n         # Work around https://bugs.python.org/issue38525\n-        if hasattr(iterable, '__reversed__'):\n+        if (getattr(iterable, '__reversed__', None) is not None):\n             return next(reversed(iterable))\n         return deque(iterable, maxlen=1)[-1]\n     except (IndexError, TypeError, StopIteration):\n",
+      "elapsed_sec": 6.5
+    },
+    {
+      "repo": "packaging",
+      "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+      "parent_commit": "033854a05229074ddb191d67da1f8e0165e665da",
+      "heldout_test": "tests/test_utils.py",
+      "prose_only_issue": "Correct regex for metadata 'name' format",
+      "parent_visible_suite_green": true,
+      "before_prose_without_code_solved": false,
+      "metamorphic_oracle_abduced": true,
+      "solver_selected_patch": true,
+      "heldout_human_test_passed_post_selection": false,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_TYPE_HABITATION_AND_GUARD_SEPARATION",
+      "modified_files": [
+        "src/packaging/utils.py"
+      ],
+      "unified_diff": "--- a/src/packaging/utils.py\n+++ b/src/packaging/utils.py\n@@ -38,7 +38,7 @@\n     r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$\", re.IGNORECASE\n )\n _canonicalize_regex = re.compile(r\"[-_.]+\")\n-_normalized_regex = re.compile(r\"^([a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9])$\")\n+_normalized_regex = re.compile(r\"^([a-z0-9]|[a-z0-9]([a-z0-9-](?!--))*[a-z0-9])\\Z\")\n # PEP 427: The build number must start with a digit.\n _build_tag_regex = re.compile(r\"(\\d+)(.*)\")\n \n",
+      "elapsed_sec": 6.68
+    },
+    {
+      "repo": "pluggy",
+      "commit": "50585e07949e7d48f89a21e8e200fdcb2cfe8617",
+      "parent_commit": "78e3f45d6c18a6efe6c46a2a79b63073f45a44bd",
+      "heldout_test": "testing/test_pluginmanager.py",
+      "prose_only_issue": "Drop entry-point distribution info when unregistering a plugin",
+      "parent_visible_suite_green": true,
+      "before_prose_without_code_solved": false,
+      "metamorphic_oracle_abduced": true,
+      "solver_selected_patch": false,
+      "heldout_human_test_passed_post_selection": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "modified_files": [],
+      "unified_diff": "",
+      "elapsed_sec": 9.45
+    }
+  ]
+}

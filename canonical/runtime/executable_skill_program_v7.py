@@ -78,6 +78,26 @@ def _episode(raw:Mapping[str,Any])->dict[str,Any]:
 def _skeleton(steps)->tuple:
     return tuple((x["op"],tuple(x["inputs"]),tuple(x["outputs"])) for x in normalize_steps(steps))
 
+def _semantic_ir(steps,pre,post):
+    """Universal Meaning Graph digest for a program, or None if unavailable.
+
+    Diagnostic only. It answers "do these two programs mean the same thing?"
+    across syntax differences. It never widens the admission gate below: a
+    candidate is still induced only from an identical executable skeleton, and
+    still cannot self-verify.
+    """
+    try:
+        from canonical.runtime.perfect_algorithm_v1 import umg_for_skill_induction
+        ir=umg_for_skill_induction(steps,pre,post)
+    except Exception:
+        return None
+    if not isinstance(ir,Mapping):
+        return None
+    return {
+        "semantic_ir_sha256":_s(ir.get("digest") or ir.get("semantic_ir_sha256")),
+        "semantic_ir_node_count":len(ir.get("nodes") or ()),
+    }
+
 def candidate_digest(*,source_episode_ids,steps,preconditions,postconditions,invalidators)->str:
     body=json.dumps({
         "source_episode_ids":sorted(source_episode_ids),
@@ -124,6 +144,7 @@ def induce_candidate(episodes:Sequence[Mapping[str,Any]])->dict[str,Any]:
         "postconditions":sorted(common_post),
         "invalidators":sorted(all_invalid),
         "candidate_sha256":digest,
+        "semantic_ir":_semantic_ir(steps,sorted(common_pre),sorted(common_post)),
         "verified_skill":False,
         "reuse_authorized":False,
         "candidate_only":True,

@@ -1,0 +1,3230 @@
+{
+  "benchmark": "real_fix_commits_20261116_V1_all_89_blind",
+  "date": "2026-11-24",
+  "prior_engine_solved": 0,
+  "prior_engine_total": 89,
+  "cogs_v1_1_solved": 2,
+  "cogs_v1_1_exact_file_match": 2,
+  "cogs_v1_1_law_recalls": 0,
+  "cogs_v1_1_total": 89,
+  "solve_rate_pct": 2.25,
+  "z3_contingency_gate_enabled": true,
+  "model_calls": 0,
+  "learned_parameters": 0,
+  "file_or_line_hints_given": 0,
+  "frozen_engine_sha256_pre": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "bb273e44524707a160ecc44c0abe5de3dbdb9879de1593bb20e8adffe438ce6c",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "e8e6b97953a889ce434a77a6c16b5749f20b71c20a52affa1e3659c8d286434f",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "frozen_engine_sha256_post": {
+    "canonical/swe_kernel/universal_semantic_ir_v1.py": "bb273e44524707a160ecc44c0abe5de3dbdb9879de1593bb20e8adffe438ce6c",
+    "canonical/swe_kernel/causal_cegis_inventor_v1.py": "e8e6b97953a889ce434a77a6c16b5749f20b71c20a52affa1e3659c8d286434f",
+    "canonical/swe_kernel/perfect_algorithm_v1.py": "8d857186e5a10920f3dd9309c6a0e693b017fbc90cab230c60a2178830337e43"
+  },
+  "hashes_identical": true,
+  "crystallized_laws_count": 0,
+  "total_wall_sec": 2365.79,
+  "results": [
+    {
+      "task_index": 0,
+      "repo": "pypa/packaging",
+      "sha": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+      "parent": "ecf963ad0dccf246d1e774c7ede599241e9205b0",
+      "test": "tests/test_ranges.py",
+      "human_source": "src/packaging/ranges.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1605,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.57,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]",
+          "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-deepcopy]",
+          "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-<lambda>0]",
+          "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-<lambda>1]",
+          "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-<lambda>2]"
+        ],
+        "candidate_files": [
+          "src/packaging/_ranges.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/requirements.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 40
+      }
+    },
+    {
+      "task_index": 1,
+      "repo": "pypa/packaging",
+      "sha": "5a7d3386d2777180a381eb947f21293124ce8df5",
+      "parent": "a00861f4cb12f5705a95e277862cdcd7387abfde",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1800,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.0,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>= 1]",
+          "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring, >=1]",
+          "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[ (===arbitrarystring,>= 1)]",
+          "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>= 1 ; python_version >= '3']"
+        ],
+        "candidate_files": [
+          "src/packaging/_tokenizer.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/_parser.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 72
+      }
+    },
+    {
+      "task_index": 2,
+      "repo": "pypa/packaging",
+      "sha": "8efde605cc2666f4ab75e028b578b395ba288401",
+      "parent": "8e21512a575ff7cab33e15f77d5f67f278271f07",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3713,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 14.89,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-Group1-group1]",
+          "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-GROUP1-group1]",
+          "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[a.b-A_B-a-b]",
+          "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[a_b-A.B-a-b]"
+        ],
+        "candidate_files": [
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/ranges.py"
+        ],
+        "queued_candidates": 22
+      }
+    },
+    {
+      "task_index": 3,
+      "repo": "pypa/packaging",
+      "sha": "7d0611d420c80d4da99eb5c254e7c4acdbabbe30",
+      "parent": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1858,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.8,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra == \"gpu\"-extras0-True]",
+          "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra == \"gpu\"-extras1-False]",
+          "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra == \"gpu\"-extras2-False]",
+          "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra != \"gpu\"-extras3-True]",
+          "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra != \"gpu\"-extras4-False]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/utils.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py"
+        ],
+        "queued_candidates": 128
+      }
+    },
+    {
+      "task_index": 4,
+      "repo": "pypa/packaging",
+      "sha": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+      "parent": "a03bde12d560b16b175c336c373040347773ce03",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1591,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.62,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::test_chaining_associativity_and_str",
+          "tests/test_markers.py::test_long_chain_round_trips[and_]",
+          "tests/test_markers.py::test_long_chain_round_trips[or_]",
+          "tests/test_markers.py::test_chain_keeps_mixed_groups"
+        ],
+        "candidate_files": [
+          "src/packaging/_tokenizer.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/utils.py",
+          "noxfile.py",
+          "src/packaging/_elffile.py"
+        ],
+        "queued_candidates": 95
+      }
+    },
+    {
+      "task_index": 5,
+      "repo": "pypa/packaging",
+      "sha": "a03bde12d560b16b175c336c373040347773ce03",
+      "parent": "cd91074b050056e2013c08611370abb4138165e7",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3837,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 27.59,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[pickle]",
+          "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[copy]",
+          "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[deepcopy]",
+          "tests/test_requirements.py::test_pickle_requirement_state",
+          "tests/test_requirements.py::test_pickle_requirement_26_4_format_preserves_inner_prereleases"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_ranges.py"
+        ],
+        "queued_candidates": 142
+      }
+    },
+    {
+      "task_index": 6,
+      "repo": "pypa/packaging",
+      "sha": "cd91074b050056e2013c08611370abb4138165e7",
+      "parent": "15d35165020680d21772aea2a552c00dab30ed11",
+      "test": "tests/test_ranges.py",
+      "human_source": "src/packaging/ranges.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5166,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.73,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-False]",
+          "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-True]",
+          "tests/test_ranges.py::TestPrereleaseRegion::test_overlapping_literal_opt_in_survives_narrowing"
+        ],
+        "candidate_files": [
+          "src/packaging/_ranges.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/requirements.py"
+        ],
+        "queued_candidates": 206
+      }
+    },
+    {
+      "task_index": 7,
+      "repo": "pypa/packaging",
+      "sha": "8c37b0476f9406aa4578b853bbbcf7af1967d703",
+      "parent": "7f843b213ba9a19b6d2d45be5c1be2397443996b",
+      "test": "tests/test_licenses.py",
+      "human_source": "src/packaging/licenses/__init__.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3711,
+      "candidates_executed_in_sandbox": 12,
+      "elapsed_sec": 10.89,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom]",
+          "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[licenseref-Custom\\u212a]",
+          "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom AND MIT]",
+          "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[MIT OR LicenseRef-\\u212austom]",
+          "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[MIT AND (LicenseRef-\\u212austom OR Apache-2.0)]"
+        ],
+        "candidate_files": [
+          "src/packaging/licenses/__init__.py",
+          "tasks/licenses.py",
+          "src/packaging/metadata.py",
+          "src/packaging/dependency_groups.py",
+          "tasks/pickle_compat.py",
+          "src/packaging/errors.py"
+        ],
+        "queued_candidates": 12
+      }
+    },
+    {
+      "task_index": 8,
+      "repo": "pypa/packaging",
+      "sha": "b1c439b0f1fb1a8c541a5f0770946983c5d38b8c",
+      "parent": "984e438362464a05da2a4fa31f0497ad7654c4db",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5216,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.36,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
+          "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-True]",
+          "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[True-False]",
+          "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[True-True]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 1177
+      }
+    },
+    {
+      "task_index": 9,
+      "repo": "pypa/packaging",
+      "sha": "31b2d0131910196c9ef494a6ce2d0b12354efad6",
+      "parent": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3248,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 14.43,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_included_group_errors",
+          "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_include_cycle"
+        ],
+        "candidate_files": [
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/ranges.py"
+        ],
+        "queued_candidates": 81
+      }
+    },
+    {
+      "task_index": 10,
+      "repo": "pypa/packaging",
+      "sha": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+      "parent": "80fe325abd60f27b7879efe7caef115ca65a76d7",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1945,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 17.89,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-extras]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-dependency_groups]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-not in-extras]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-not in-dependency_groups]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[doc-in-extras]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 157
+      }
+    },
+    {
+      "task_index": 11,
+      "repo": "pypa/packaging",
+      "sha": "2d57ce2b15a85be2c2b07ad5831ed4921429edcb",
+      "parent": "6973aafb53dd00ae0e0bd767f884996bb11d2e99",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5288,
+      "candidates_executed_in_sandbox": 21,
+      "elapsed_sec": 14.57,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+          "tests/test_dependency_groups.py::test_cycle_error_uses_path_of_current_resolve_call",
+          "tests/test_dependency_groups.py::test_cached_group_is_not_validated_again"
+        ],
+        "candidate_files": [
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/ranges.py"
+        ],
+        "queued_candidates": 20
+      }
+    },
+    {
+      "task_index": 12,
+      "repo": "pypa/packaging",
+      "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+      "parent": "7464e38990e0e140206051d8ebadd1c2f83239e6",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2747,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 21.38,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::test_replace",
+          "tests/test_requirements.py::test_replace_validates_and_normalizes",
+          "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[False]",
+          "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[True]",
+          "tests/test_requirements.py::test_replace_keeps_subclass"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/_tokenizer.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 109
+      }
+    },
+    {
+      "task_index": 13,
+      "repo": "pypa/packaging",
+      "sha": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+      "parent": "0625596e502163179b9a82796aee82c178efc16d",
+      "test": "tests/test_licenses.py",
+      "human_source": "src/packaging/licenses/__init__.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3342,
+      "candidates_executed_in_sandbox": 16,
+      "elapsed_sec": 12.47,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[LicenseRef-mit OR licenseref-MIT-LicenseRef-mit OR LicenseRef-mit]",
+          "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[licenseref-MIT AND LicenseRef-mit-LicenseRef-MIT AND LicenseRef-MIT]",
+          "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[(LICENSEREF-Foo OR licenseref-foo) AND MIT AND LicenseRef-FOO-(LicenseRef-Foo OR LicenseRef-Foo) AND MIT AND LicenseRef-Foo]"
+        ],
+        "candidate_files": [
+          "src/packaging/licenses/__init__.py",
+          "tasks/licenses.py",
+          "src/packaging/metadata.py",
+          "src/packaging/dependency_groups.py",
+          "tasks/pickle_compat.py",
+          "src/packaging/errors.py"
+        ],
+        "queued_candidates": 16
+      }
+    },
+    {
+      "task_index": 14,
+      "repo": "pypa/packaging",
+      "sha": "0625596e502163179b9a82796aee82c178efc16d",
+      "parent": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2542,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.31,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 98
+      }
+    },
+    {
+      "task_index": 15,
+      "repo": "pypa/packaging",
+      "sha": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+      "parent": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2424,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.15,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+          "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected"
+        ],
+        "candidate_files": [
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/ranges.py"
+        ],
+        "queued_candidates": 89
+      }
+    },
+    {
+      "task_index": 16,
+      "repo": "pypa/packaging",
+      "sha": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+      "parent": "f7c930eb18b556930564c1131fde78e576352ddc",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 19,
+      "candidates_executed_in_sandbox": 19,
+      "elapsed_sec": 11.3,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"plain\"-plain]",
+          "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"C:/Program Files/Python\"-C:/Program Files/Python]",
+          "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"/Users/name\"-/Users/name]",
+          "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"/home/name\"-/home/name]",
+          "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"a/b/c\"-a/b/c]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 19
+      }
+    },
+    {
+      "task_index": 17,
+      "repo": "pypa/packaging",
+      "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+      "parent": "1f334c04c6918789974207733f194e11a47698f5",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1208,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.47,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files5]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 40
+      }
+    },
+    {
+      "task_index": 18,
+      "repo": "pypa/packaging",
+      "sha": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+      "parent": "23669b1b69fb5fffbc773a68fc099166fc847356",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/_tokenizer.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1322,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 64.41,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name @ https://example.com/name.whl-\\n]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name @ https://example.com/name.whl-\\r]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name @ https://example.com/name.whl-\\r\\n]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_url_embeds_line_break[\\n]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_url_embeds_line_break[\\r]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 24
+      }
+    },
+    {
+      "task_index": 19,
+      "repo": "pypa/packaging",
+      "sha": "23669b1b69fb5fffbc773a68fc099166fc847356",
+      "parent": "7b898d9f0b343ca06993157fc328d7caad51d5c2",
+      "test": "tests/test_pylock_select.py",
+      "human_source": "src/packaging/pylock.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3091,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 17.91,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_pylock_select.py::test_unknown_extras",
+          "tests/test_pylock_select.py::test_unknown_groups",
+          "tests/test_pylock_select.py::test_unknown_groups_default_groups"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/pylock.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py"
+        ],
+        "queued_candidates": 266
+      }
+    },
+    {
+      "task_index": 20,
+      "repo": "pypa/packaging",
+      "sha": "55cbf1b9426f44455fa1a9e0836f1fc082cc8452",
+      "parent": "4840c3a6817fbd0831f7e520c9a55367472a4a08",
+      "test": "tests/test_ranges.py",
+      "human_source": "src/packaging/_ranges.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 721,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 12.64,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_ranges.py::TestUnboundedEnds::test_lower_spellings_are_one_bound",
+          "tests/test_ranges.py::TestUnboundedEnds::test_upper_spellings_are_one_bound",
+          "tests/test_ranges.py::TestUnboundedEnds::test_lower_ends_order_as_one_value",
+          "tests/test_ranges.py::TestUnboundedEnds::test_upper_ends_order_as_one_value"
+        ],
+        "candidate_files": [
+          "src/packaging/_ranges.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 59
+      }
+    },
+    {
+      "task_index": 21,
+      "repo": "pypa/packaging",
+      "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+      "parent": "3db4261366eebeb802574458dd037b3e13515e2e",
+      "test": "tests/test_pylock_select.py",
+      "human_source": "src/packaging/pylock.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3668,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 8.25,
+      "modified_files": [
+        "src/packaging/pylock.py"
+      ],
+      "exact_file_match": true,
+      "unified_diff": "--- a/src/packaging/pylock.py\n+++ b/src/packaging/pylock.py\n@@ -836,7 +836,7 @@\n         # #. If :ref:`pylock-environments` is specified, check that at least one of the\n         #    environment marker expressions is satisfied; an error MUST be raised if no\n         #    expression is satisfied.\n-        if self.environments:\n+        if self.environments is not None:\n             for env_marker in self.environments:\n                 if env_marker.evaluate(\n                     cast(\"dict[str, str]\", environment or {}), context=\"requirement\"\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L839: `self.environments` -> `self.environments is not None`"
+      }
+    },
+    {
+      "task_index": 22,
+      "repo": "pypa/packaging",
+      "sha": "2d873eb6002021a8c007c933fbdab58b37a5079b",
+      "parent": "413d006fadf5b9b14d78ad444201d8189bff8c64",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 6051,
+      "candidates_executed_in_sandbox": 45,
+      "elapsed_sec": 47.5,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\rAgain]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\u2028Again]",
+          "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_carriage_return",
+          "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\r]",
+          "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\x0b]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 468
+      }
+    },
+    {
+      "task_index": 23,
+      "repo": "pypa/packaging",
+      "sha": "826426fc88773515fab149a5f6bde85761e57fbb",
+      "parent": "b62954b62d04f58a939d2856c67ebe4de32cdb5d",
+      "test": "tests/test_pylock_select.py",
+      "human_source": "src/packaging/pylock.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2213,
+      "candidates_executed_in_sandbox": 39,
+      "elapsed_sec": 25.51,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_pylock_select.py::test_empty_tags_selects_sdist_instead_of_host_compatible_wheel",
+          "tests/test_pylock_select.py::test_empty_tags_rejects_wheel_only_lock"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/pylock.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py"
+        ],
+        "queued_candidates": 188
+      }
+    },
+    {
+      "task_index": 24,
+      "repo": "pypa/packaging",
+      "sha": "fe18f139c5b3d73cd9fdd9b25f1eda1b6fd7ba15",
+      "parent": "9c652e4b4ced3c94f133a1b91c726023f0950b4f",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2406,
+      "candidates_executed_in_sandbox": 53,
+      "elapsed_sec": 362.27,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_specifier_set_rejects_parsed_specifier",
+          "tests/test_requirements.py::test_pickle_requirement_setstate_rejects_invalid_string[demo===x,y]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/_tokenizer.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 74
+      }
+    },
+    {
+      "task_index": 25,
+      "repo": "pypa/packaging",
+      "sha": "9c652e4b4ced3c94f133a1b91c726023f0950b4f",
+      "parent": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+      "test": "tests/test_pylock_select.py",
+      "human_source": "src/packaging/pylock.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3783,
+      "candidates_executed_in_sandbox": 39,
+      "elapsed_sec": 26.82,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-predicate-false]",
+          "tests/test_pylock_select.py::test_prefer_sdist_predicate[sdist-predicate-true]",
+          "tests/test_pylock_select.py::test_prefer_sdist_predicate[sdist-predicate-true-incompatible-wheel]",
+          "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-no-sdist]",
+          "tests/test_pylock_select.py::test_prefer_sdist_predicate[sdist-only-predicate-false]"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/pylock.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py"
+        ],
+        "queued_candidates": 88
+      }
+    },
+    {
+      "task_index": 26,
+      "repo": "pypa/packaging",
+      "sha": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+      "parent": "9c6f09ba6b313a561d6a64d988647ff3115e82ae",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2072,
+      "candidates_executed_in_sandbox": 47,
+      "elapsed_sec": 29.24,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 82
+      }
+    },
+    {
+      "task_index": 27,
+      "repo": "pypa/packaging",
+      "sha": "206834025040aca6f8a2fdfc4039dbfa2a9861a6",
+      "parent": "5b583e309996a085ad3b5b045f3bf50a09c11b58",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5442,
+      "candidates_executed_in_sandbox": 45,
+      "elapsed_sec": 41.82,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+          "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+          "tests/test_metadata.py::TestMetadata::test_from_email_collects_required_fields_after_unparsed_known_header",
+          "tests/test_metadata.py::TestMetadata::test_from_email_collects_unknown_and_invalid_fields"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 51
+      }
+    },
+    {
+      "task_index": 28,
+      "repo": "pypa/packaging",
+      "sha": "abf000549c2ec5b31357046498d6e4f0f9d7d743",
+      "parent": "58c6cd700bdfd33cb3ebfbb9ad5d8cfde4e82f08",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3269,
+      "candidates_executed_in_sandbox": 45,
+      "elapsed_sec": 39.66,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+          "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=utf-8]",
+          "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain; charset=Utf-8]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 76
+      }
+    },
+    {
+      "task_index": 29,
+      "repo": "pypa/packaging",
+      "sha": "9d0ec47b36a1bcdf705b397b84cd89272410a00d",
+      "parent": "1a9c4cb6b6aac7fb6137fcdc4f440af912d8d87f",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3356,
+      "candidates_executed_in_sandbox": 40,
+      "elapsed_sec": 36.14,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n folded]",
+          "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; charset=\"unterminated]",
+          "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; {b}]",
+          "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; a}b]",
+          "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain; x*]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 202
+      }
+    },
+    {
+      "task_index": 30,
+      "repo": "pypa/packaging",
+      "sha": "458b0ae53e5a4261df851657d147e590b4546eb2",
+      "parent": "30824d9e3b33372a81af5e7a1d7e2ceb95e348c6",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1547,
+      "candidates_executed_in_sandbox": 40,
+      "elapsed_sec": 32.74,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text"
+        ],
+        "candidate_files": [
+          "src/packaging/version.py",
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 40
+      }
+    },
+    {
+      "task_index": 31,
+      "repo": "pypa/packaging",
+      "sha": "30824d9e3b33372a81af5e7a1d7e2ceb95e348c6",
+      "parent": "cf100d20e09c270cb6e19e72edbd0d40728de501",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2135,
+      "candidates_executed_in_sandbox": 35,
+      "elapsed_sec": 19.67,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_resolution_collects_invalid_requirement_with_sibling_errors"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 50
+      }
+    },
+    {
+      "task_index": 32,
+      "repo": "pypa/packaging",
+      "sha": "4c663c9ef5e1ec4f64b01ea9a61c981890a56407",
+      "parent": "c411a96fea8dd0091db7044c52d26bfb2e70cfa8",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1627,
+      "candidates_executed_in_sandbox": 44,
+      "elapsed_sec": 107.76,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[extras]",
+          "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[dependency_groups]",
+          "tests/test_markers.py::TestMarker::test_membership_value_str_normalization_negated[extras]",
+          "tests/test_markers.py::TestMarker::test_membership_value_str_normalization_negated[dependency_groups]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 116
+      }
+    },
+    {
+      "task_index": 33,
+      "repo": "pypa/packaging",
+      "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+      "parent": "2b6726cec7bd55fd3adda07054d0a41288d44eba",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2695,
+      "candidates_executed_in_sandbox": 48,
+      "elapsed_sec": 310.64,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::test_requirement_slots"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_ranges.py"
+        ],
+        "queued_candidates": 92
+      }
+    },
+    {
+      "task_index": 34,
+      "repo": "pypa/packaging",
+      "sha": "a0661b5f5c8838af81c5098b2a564e62852decb4",
+      "parent": "d3e7f5d96da0c27103324cb9fb349b54e753a877",
+      "test": "tests/test_direct_url.py",
+      "human_source": "src/packaging/direct_url.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 443,
+      "candidates_executed_in_sandbox": 15,
+      "elapsed_sec": 8.87,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:relative]",
+          "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:./relative]",
+          "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:]",
+          "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file://relative]",
+          "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file://localhost]"
+        ],
+        "candidate_files": [
+          "src/packaging/direct_url.py",
+          "src/packaging/pylock.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 7
+      }
+    },
+    {
+      "task_index": 35,
+      "repo": "pypa/packaging",
+      "sha": "2c688aa15f65da80defa27e8c91d3bb82a4b5dd6",
+      "parent": "1b00eeffc6bec070c10e7e6ecf03c03f9789eed2",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1625,
+      "candidates_executed_in_sandbox": 40,
+      "elapsed_sec": 95.23,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-extras]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-dependency_groups]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[!=-extras]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[!=-dependency_groups]",
+          "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[>=-extras]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 131
+      }
+    },
+    {
+      "task_index": 36,
+      "repo": "pypa/packaging",
+      "sha": "1b00eeffc6bec070c10e7e6ecf03c03f9789eed2",
+      "parent": "e808c8aa0ed5d471f524d648904322ccd1c420e4",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2532,
+      "candidates_executed_in_sandbox": 36,
+      "elapsed_sec": 31.36,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[False]",
+          "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[True]"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 6
+      }
+    },
+    {
+      "task_index": 37,
+      "repo": "pypa/packaging",
+      "sha": "0a85b41e24c9b55b83f05ae696d73e8294a5b094",
+      "parent": "c4fb81ff6eba16fdd24d50e9d9d002fdbece6dd4",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2465,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 18.15,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::test_str_preserves_nested_group_precedence"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 148
+      }
+    },
+    {
+      "task_index": 38,
+      "repo": "pypa/packaging",
+      "sha": "c4fb81ff6eba16fdd24d50e9d9d002fdbece6dd4",
+      "parent": "2af7404a8fc03b74e778d0a4d8aa90cb9fafdbf3",
+      "test": "tests/test_ranges.py",
+      "human_source": "src/packaging/ranges.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3457,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.25,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_ranges.py::TestSetAlgebra::test_difference_requires_matching_policy",
+          "tests/test_ranges.py::TestSetRelations::test_literal_range_subset"
+        ],
+        "candidate_files": [
+          "src/packaging/_ranges.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 129
+      }
+    },
+    {
+      "task_index": 39,
+      "repo": "pypa/packaging",
+      "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+      "parent": "fb82782df51f9a33bf9d2a489361a3784bb739ff",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2251,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 14.34,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-py3-none-any.whl]",
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-200-py3-none-any.whl]",
+          "tests/test_utils.py::test_parse_sdist_invalid_filename[-1.0.tar.gz]",
+          "tests/test_utils.py::test_parse_sdist_invalid_filename[-1.0.zip]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 92
+      }
+    },
+    {
+      "task_index": 40,
+      "repo": "pypa/packaging",
+      "sha": "fbea07c1f23f182141ca4e2aacf5f82d1c6c9f45",
+      "parent": "d2fa92384821919d48eab89bae087b950637d52a",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1236,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.06,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release_without_spaces"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 42
+      }
+    },
+    {
+      "task_index": 41,
+      "repo": "pypa/packaging",
+      "sha": "d2fa92384821919d48eab89bae087b950637d52a",
+      "parent": "dec2caffa063d77dd40627fd9baf7a0f9cff227a",
+      "test": "tests/test_ranges.py",
+      "human_source": "src/packaging/ranges.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3247,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.14,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy"
+        ],
+        "candidate_files": [
+          "src/packaging/_ranges.py",
+          "src/packaging/ranges.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 171
+      }
+    },
+    {
+      "task_index": 42,
+      "repo": "pypa/packaging",
+      "sha": "fbd0d4b4b83ba492ec9d5dd4eaa8e8df33288b1f",
+      "parent": "5d3d16451e77e2e4b7f5224c9812f308b6ac3cb0",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2382,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.7,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all---blue]]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[crazy-bunches]-fishtank[cRazy_BUnches]]"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_ranges.py"
+        ],
+        "queued_candidates": 90
+      }
+    },
+    {
+      "task_index": 43,
+      "repo": "pypa/packaging",
+      "sha": "e80f70f8b164ee4b0ef7634aafe8c6cc4ce00ca3",
+      "parent": "0d799f1ae4ae15be8636ffb514dc014aa81c0b8e",
+      "test": "tests/test_direct_url.py",
+      "human_source": "src/packaging/direct_url.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 827,
+      "candidates_executed_in_sandbox": 18,
+      "elapsed_sec": 9.78,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[FILE:///home/myproject]",
+          "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[File:///home/myproject]",
+          "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[file:/home/myproject]"
+        ],
+        "candidate_files": [
+          "src/packaging/direct_url.py",
+          "src/packaging/pylock.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 28
+      }
+    },
+    {
+      "task_index": 44,
+      "repo": "pypa/packaging",
+      "sha": "b19df947aa03658c776e44c3005b9c860d5b5c8d",
+      "parent": "d406cb4dd392d883beb8f25f83dd8f7179b6d504",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1753,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 17.32,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 145
+      }
+    },
+    {
+      "task_index": 45,
+      "repo": "pypa/packaging",
+      "sha": "07265129295b4b95b9143b50e3ce4709f31a8c49",
+      "parent": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1369,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.37,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+          "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 106
+      }
+    },
+    {
+      "task_index": 46,
+      "repo": "pypa/packaging",
+      "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+      "parent": "e64c20eb7a854c72710d4c962bc8a95f343230e6",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2182,
+      "candidates_executed_in_sandbox": 10,
+      "elapsed_sec": 7.78,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item0-InvalidDependencyGroupObject-Invalid dependency group item:]",
+          "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item1-TypeError-include-group value is not a string]"
+        ],
+        "candidate_files": [
+          "src/packaging/dependency_groups.py",
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 9
+      }
+    },
+    {
+      "task_index": 47,
+      "repo": "pypa/packaging",
+      "sha": "d8e08df11bfa50e987375546eda1f0ee3f27bd41",
+      "parent": "664f049980f1873c458de72a449003b83173f445",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2667,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.16,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo==1.0.0-foo==1.0.0.0]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo>=1.0-foo>=1.0.0]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo[a]==1.0.0; python_version>=\"3.8\"-foo[a]==1.0.0.0; python_version>=\"3.8\"]"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_ranges.py"
+        ],
+        "queued_candidates": 108
+      }
+    },
+    {
+      "task_index": 48,
+      "repo": "pypa/packaging",
+      "sha": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+      "parent": "283811bffee5da95bda6d5332cb88f8b231187a2",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 7,
+      "candidates_executed_in_sandbox": 8,
+      "elapsed_sec": 5.14,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+          "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py"
+        ],
+        "queued_candidates": 7
+      }
+    },
+    {
+      "task_index": 49,
+      "repo": "pypa/packaging",
+      "sha": "08bb047794f4e70b157dacef4538b3a6e3492743",
+      "parent": "28c299e8a823600dd66d4adeb7c7cc98e11089d2",
+      "test": "tests/test_direct_url.py",
+      "human_source": "src/packaging/direct_url.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 831,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 11.73,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+          "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+        ],
+        "candidate_files": [
+          "src/packaging/direct_url.py",
+          "src/packaging/pylock.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 24
+      }
+    },
+    {
+      "task_index": 50,
+      "repo": "pypa/packaging",
+      "sha": "5c163f5382fb6cba408b7c42efb8a03ffa041f4b",
+      "parent": "20262cf73c9a3b55eea0ce305fb5a8111911ef3c",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2453,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.35,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[True]",
+          "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[False]",
+          "tests/test_requirements.py::test_pickle_requirement_new_format_preserves_prereleases"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_ranges.py"
+        ],
+        "queued_candidates": 112
+      }
+    },
+    {
+      "task_index": 51,
+      "repo": "pypa/packaging",
+      "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+      "parent": "b1b483c2863b11d31d7353a3c6b27070ba1687ea",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 4767,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 18.53,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestRawMetadata::test_complete",
+          "tests/test_metadata.py::TestMetadata::test_from_email",
+          "tests/test_metadata.py::TestMetadata::test_required_fields",
+          "tests/test_metadata.py::TestMetadata::test_raw_data_not_mutated",
+          "tests/test_metadata.py::TestMetadata::test_caching"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 109
+      }
+    },
+    {
+      "task_index": 52,
+      "repo": "pypa/packaging",
+      "sha": "668da8662a112036e4850b68980790cb2d10dae9",
+      "parent": "f294d529e2634798a98fd9cee6708307a5c1792c",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 35,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.92,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 35
+      }
+    },
+    {
+      "task_index": 53,
+      "repo": "pypa/packaging",
+      "sha": "98b4bfb6828baaf01081aa3a123302fe3020b63a",
+      "parent": "76cc6298254887e17d6b39df0425a4b6c2f1714a",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1728,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.2,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::test_and_operator_evaluates_true",
+          "tests/test_markers.py::test_and_operator_str_equality",
+          "tests/test_markers.py::test_or_operator_evaluates_true",
+          "tests/test_markers.py::test_or_operator_str_equality",
+          "tests/test_markers.py::test_operator_rejects_non_marker"
+        ],
+        "candidate_files": [
+          "src/packaging/_tokenizer.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/specifiers.py"
+        ],
+        "queued_candidates": 137
+      }
+    },
+    {
+      "task_index": 54,
+      "repo": "pypa/packaging",
+      "sha": "a3b6a1f6c34182414558ad3628814cce1f039004",
+      "parent": "c4d2b3a440873410e92bbb3d247606f978cd3f69",
+      "test": "tests/test_dependency_groups.py",
+      "human_source": "src/packaging/dependency_groups.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 0,
+      "candidates_executed_in_sandbox": 1,
+      "elapsed_sec": 2.53,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/requirements.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/utils.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 0
+      }
+    },
+    {
+      "task_index": 55,
+      "repo": "pypa/packaging",
+      "sha": "c4d2b3a440873410e92bbb3d247606f978cd3f69",
+      "parent": "2f933f2a60e7b84d503b84a1713a8d112cfe49c1",
+      "test": "tests/test_direct_url.py",
+      "human_source": "src/packaging/direct_url.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 67,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.61,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "noxfile.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py"
+        ],
+        "queued_candidates": 67
+      }
+    },
+    {
+      "task_index": 56,
+      "repo": "pypa/packaging",
+      "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+      "parent": "00b7e7585715c808687ca2be0cd5fffefc38408f",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1348,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.74,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+        ],
+        "candidate_files": [
+          "src/packaging/errors.py",
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 33
+      }
+    },
+    {
+      "task_index": 57,
+      "repo": "pypa/packaging",
+      "sha": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+      "parent": "4339d3a0028348e21863664e6022e3cff20c3411",
+      "test": "tests/test_structures.py",
+      "human_source": "src/packaging/_structures.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2,
+      "candidates_executed_in_sandbox": 3,
+      "elapsed_sec": 3.06,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_structures.py::test_infinity_self_comparison",
+          "tests/test_structures.py::test_negative_infinity_self_comparison"
+        ],
+        "candidate_files": [
+          "src/packaging/_structures.py",
+          "src/packaging/version.py"
+        ],
+        "queued_candidates": 2
+      }
+    },
+    {
+      "task_index": 58,
+      "repo": "pypa/packaging",
+      "sha": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+      "parent": "8f13a4309aa620bf643cd508304f783b456e8c49",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2930,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.74,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-- @ https://url ]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]- @ https://url ]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a,b]- @ https://url ]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a1,b1,b2]- @ https://url ]",
+          "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[; python_version == \"3.11\"-- @ https://url ]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/_tokenizer.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 117
+      }
+    },
+    {
+      "task_index": 59,
+      "repo": "pypa/packaging",
+      "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+      "parent": "3f83dea9b60e660e464535a1019d2de62723884f",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/licenses/__init__.py",
+      "solved": true,
+      "stage": "VERIFIED_CAUSAL_REPAIR",
+      "mechanism": "COGS_OBSEGRAPH_GUARD_SYNTHESIS",
+      "sabotage_verified": true,
+      "overfit_falsifier_passed": true,
+      "neighbor_impact_passed": true,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2273,
+      "candidates_executed_in_sandbox": 15,
+      "elapsed_sec": 12.82,
+      "modified_files": [
+        "src/packaging/licenses/__init__.py"
+      ],
+      "exact_file_match": true,
+      "unified_diff": "--- a/src/packaging/licenses/__init__.py\n+++ b/src/packaging/licenses/__init__.py\n@@ -90,7 +90,7 @@\n             python_tokens.append(\"False\")\n         elif token == \"with\":\n             python_tokens.append(\"or\")\n-        elif token == \"(\" and python_tokens and python_tokens[-1] not in {\"or\", \"and\"}:\n+        elif token == \"(\" and python_tokens and python_tokens[-1] not in {\"or\", \"and\"} and not token:\n             message = f\"Invalid license expression: {raw_license_expression!r}\"\n             raise InvalidLicenseExpression(message)\n         elif token == \")\" and python_tokens and python_tokens[-1] == \"(\":\n",
+      "diagnostics": {
+        "description": "ObsEGraph branch synthesis L93: `token == \"(\" and python_tokens and python_tokens[-1] not in {\"or\", \"and\"}` -> `token == \"(\" and python_tokens and python_tokens[-1] not in {\"or\", \"and\"} and not token`"
+      }
+    },
+    {
+      "task_index": 60,
+      "repo": "pypa/packaging",
+      "sha": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+      "parent": "25b1f44e0e9e1a7ccce330c457ba64a74f973836",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5236,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 17.17,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestRawMetadata::test_complete",
+          "tests/test_metadata.py::TestMetadata::test_from_email",
+          "tests/test_metadata.py::TestMetadata::test_from_email_empty_import_name",
+          "tests/test_metadata.py::TestMetadata::test_required_fields",
+          "tests/test_metadata.py::TestMetadata::test_raw_data_not_mutated"
+        ],
+        "candidate_files": [
+          "noxfile.py",
+          "src/packaging/_elffile.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py",
+          "src/packaging/_parser.py",
+          "src/packaging/_structures.py"
+        ],
+        "queued_candidates": 128
+      }
+    },
+    {
+      "task_index": 61,
+      "repo": "pypa/packaging",
+      "sha": "3b20e0fd026f90c0f7094e083d09a70bef86d051",
+      "parent": "888eb1452625196985701e2727c5416b70e969fd",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3001,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 14.95,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadataWriting::test_write_metadata",
+          "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_description",
+          "tests/test_metadata.py::TestMetadataWriting::test_multiline_license",
+          "tests/test_metadata.py::TestMetadataWriting::test_large",
+          "tests/test_metadata.py::TestMetadataWriting::test_modern_license"
+        ],
+        "candidate_files": [
+          "src/packaging/metadata.py",
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py"
+        ],
+        "queued_candidates": 144
+      }
+    },
+    {
+      "task_index": 62,
+      "repo": "pypa/packaging",
+      "sha": "888eb1452625196985701e2727c5416b70e969fd",
+      "parent": "d08417c707d2d5355c85d58e588a1cbefcb3f432",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2314,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.67,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_on_missing_version_after_op",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_on_missing_op_after_name",
+          "tests/test_requirements.py::TestRequirementParsing::test_error_on_random_char_after_specifier"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 91
+      }
+    },
+    {
+      "task_index": 63,
+      "repo": "pypa/packaging",
+      "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+      "parent": "033854a05229074ddb191d67da1f8e0165e665da",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 144,
+      "candidates_executed_in_sandbox": 10,
+      "elapsed_sec": 5.99,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py",
+          "src/packaging/markers.py"
+        ],
+        "queued_candidates": 9
+      }
+    },
+    {
+      "task_index": 64,
+      "repo": "pypa/packaging",
+      "sha": "2680259b4fa88885962e1b6f1cca9d92a3e605ca",
+      "parent": "f89652be562e2acd45d4def18977fd9057937c38",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/licenses/__init__.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 4117,
+      "candidates_executed_in_sandbox": 25,
+      "elapsed_sec": 22.13,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) or mit]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit and ( )]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) or mit and ( )]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[( ) with ( ) or mit]",
+          "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit with ( ) with ( ) or mit]"
+        ],
+        "candidate_files": [
+          "src/packaging/licenses/__init__.py",
+          "src/packaging/metadata.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py"
+        ],
+        "queued_candidates": 106
+      }
+    },
+    {
+      "task_index": 65,
+      "repo": "pypa/packaging",
+      "sha": "a716c52b5f3ca9b4a512f538b80ced8ee01b2775",
+      "parent": "2b06f90cbe2ffbde64ea23ca36c96c35e2aca05a",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 336,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 12.73,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+          "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
+          "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]"
+        ],
+        "candidate_files": [
+          "src/packaging/metadata.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py"
+        ],
+        "queued_candidates": 32
+      }
+    },
+    {
+      "task_index": 66,
+      "repo": "pypa/packaging",
+      "sha": "c385b58c4d0e4d66f5c8273ebb155801c92aadf3",
+      "parent": "ead9d34f9b6a5e504a4563d9246f76d37a112e85",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1746,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 20.05,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_python_full_version_untagged_user_provided"
+        ],
+        "candidate_files": [
+          "src/packaging/specifiers.py",
+          "src/packaging/version.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/_tokenizer.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 123
+      }
+    },
+    {
+      "task_index": 67,
+      "repo": "pypa/packaging",
+      "sha": "3e67fc775e93166600c84a5183ab6a86afff84b5",
+      "parent": "32deafe8668a2130a3366b98154914d188f3718e",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/markers.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1554,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.7,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_python_full_version_untagged"
+        ],
+        "candidate_files": [
+          "src/packaging/specifiers.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "src/packaging/version.py",
+          "src/packaging/_tokenizer.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 119
+      }
+    },
+    {
+      "task_index": 68,
+      "repo": "pypa/packaging",
+      "sha": "09f131b326453f18a217fe34f4f7a77603b545db",
+      "parent": "f13c298f0a623f3f7e01cc8395956b718d21503a",
+      "test": "tests/test_metadata.py",
+      "human_source": "src/packaging/metadata.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 391,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.07,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]",
+          "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author_email]",
+          "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[classifiers]",
+          "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[description]",
+          "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[description_content_type]"
+        ],
+        "candidate_files": [
+          "src/packaging/metadata.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py"
+        ],
+        "queued_candidates": 55
+      }
+    },
+    {
+      "task_index": 69,
+      "repo": "pypa/packaging",
+      "sha": "524b701c6e30fc4da9355117367273f591c6de72",
+      "parent": "b509bef6a4573595b23a97ecbfe569000918157f",
+      "test": "tests/test_utils.py",
+      "human_source": "src/packaging/utils.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1320,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 12.26,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_utils.py::test_parse_wheel_invalid_filename[foobar-1.x-py3-none-any.whl]",
+          "tests/test_utils.py::test_parse_sdist_invalid_filename[foo-1.x.tar.gz]"
+        ],
+        "candidate_files": [
+          "src/packaging/tags.py",
+          "src/packaging/utils.py",
+          "src/packaging/version.py",
+          "src/packaging/_manylinux.py",
+          "src/packaging/_musllinux.py",
+          "src/packaging/markers.py"
+        ],
+        "queued_candidates": 56
+      }
+    },
+    {
+      "task_index": 70,
+      "repo": "pypa/packaging",
+      "sha": "e8f839f7400253998a07a993420ae308bb4f159d",
+      "parent": "538cd15c7d73d5a7466f8343e256923e77ab7113",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 3445,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 23.22,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]"
+        ],
+        "candidate_files": [
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py",
+          "src/packaging/_parser.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 182
+      }
+    },
+    {
+      "task_index": 71,
+      "repo": "pypa/packaging",
+      "sha": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+      "parent": "63f4cfe679fb3d9322e56d8569207ecff4735238",
+      "test": "tests/test_requirements.py",
+      "human_source": "src/packaging/requirements.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1552,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.21,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-package]",
+          "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-pAcKaGe]",
+          "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-Package]",
+          "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-foo-bar.quux_bAz]",
+          "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-installer]"
+        ],
+        "candidate_files": [
+          "src/packaging/_parser.py",
+          "src/packaging/_tokenizer.py",
+          "src/packaging/markers.py",
+          "src/packaging/requirements.py",
+          "src/packaging/specifiers.py",
+          "noxfile.py"
+        ],
+        "queued_candidates": 45
+      }
+    },
+    {
+      "task_index": 72,
+      "repo": "pypa/packaging",
+      "sha": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+      "parent": "30d4a1c5fb5a6c32d6d725f97935330960ce5d15",
+      "test": "tests/test_markers.py",
+      "human_source": "src/packaging/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2046,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 27.35,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_markers.py::TestMarker::test_parses_invalid[(python_version == \"2.7\") with random text]"
+        ],
+        "candidate_files": [
+          "src/packaging/_tokenizer.py",
+          "src/packaging/_parser.py",
+          "src/packaging/markers.py",
+          "noxfile.py",
+          "src/packaging/specifiers.py",
+          "src/packaging/utils.py"
+        ],
+        "queued_candidates": 133
+      }
+    },
+    {
+      "task_index": 73,
+      "repo": "pallets/itsdangerous",
+      "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+      "parent": "93ae366874bbd4f69d90495c45b2cd336387496c",
+      "test": "tests/test_itsdangerous/test_serializer.py",
+      "human_source": "src/itsdangerous/signer.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2,
+      "candidates_executed_in_sandbox": 3,
+      "elapsed_sec": 3.43,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "src/itsdangerous/exc.py",
+          "src/itsdangerous/serializer.py",
+          "src/itsdangerous/signer.py",
+          "src/itsdangerous/encoding.py",
+          "src/itsdangerous/timed.py",
+          "src/itsdangerous/url_safe.py"
+        ],
+        "queued_candidates": 2
+      }
+    },
+    {
+      "task_index": 74,
+      "repo": "hukkin/tomli",
+      "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+      "parent": "c3299981db699cacabbd6edd0e32934f5e3e600b",
+      "test": "tests/test_misc.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2084,
+      "candidates_executed_in_sandbox": 11,
+      "elapsed_sec": 9.13,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_misc.py::TestMiscellaneous::test_inline_array_recursion_limit"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "scripts/use_setuptools.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 15
+      }
+    },
+    {
+      "task_index": 75,
+      "repo": "hukkin/tomli",
+      "sha": "e1fdb94bc998377f1c2545c7cd4f70ff2a3fb4e4",
+      "parent": "c20c49113890c226ffb27a67befe20d14fcf0c73",
+      "test": "tests/test_misc.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1927,
+      "candidates_executed_in_sandbox": 21,
+      "elapsed_sec": 13.54,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "scripts/use_setuptools.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 25
+      }
+    },
+    {
+      "task_index": 76,
+      "repo": "hukkin/tomli",
+      "sha": "9eb2125ef49071e673d42e383b5221a268665193",
+      "parent": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+      "test": "tests/test_data.py",
+      "human_source": "src/tomli/_re.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2190,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.34,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_data.py::TestData::test_valid"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "scripts/use_setuptools.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 89
+      }
+    },
+    {
+      "task_index": 77,
+      "repo": "hukkin/tomli",
+      "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+      "parent": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+      "test": "tests/test_data.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1966,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 15.91,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_data.py::TestData::test_valid"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "scripts/use_setuptools.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 88
+      }
+    },
+    {
+      "task_index": 78,
+      "repo": "hukkin/tomli",
+      "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+      "parent": "38297f82cd0ef067f1afd2ffb8dfa73b65c398da",
+      "test": "tests/test_data.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2012,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 14.93,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_data.py::TestData::test_valid"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "scripts/use_setuptools.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 82
+      }
+    },
+    {
+      "task_index": 79,
+      "repo": "hukkin/tomli",
+      "sha": "d1d6a8571b06b18005af8bf9078c1d37de5353e1",
+      "parent": "59ed9efb3d6bb7ec71454601a72088b0a6853b8c",
+      "test": "tests/test_error.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 4.08,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+          "tests/test_error.py::TestError::test_tomldecodeerror"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 5
+      }
+    },
+    {
+      "task_index": 80,
+      "repo": "hukkin/tomli",
+      "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+      "parent": "facdab0f5aacc5eb223753c42604d5de7bdaee9d",
+      "test": "tests/test_error.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 5,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 4.06,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::TestError::test_type_error"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 5
+      }
+    },
+    {
+      "task_index": 81,
+      "repo": "hukkin/tomli",
+      "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+      "parent": "0eaf93dd85934636f727c43f413a13e06509d2d6",
+      "test": "tests/test_error.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 2289,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.61,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::TestError::test_invalid_parse_float"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 81
+      }
+    },
+    {
+      "task_index": 82,
+      "repo": "hukkin/tomli",
+      "sha": "8b962e13490a569d4aab90076451def23ed6c6d8",
+      "parent": "e4da05c35a41a4d53fce7af292b94506b1ea68a7",
+      "test": "tests/test_misc.py",
+      "human_source": "src/tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 6,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 4.3,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_misc.py::TestMiscellaneous::test_incorrect_load"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "src/tomli/_parser.py",
+          "src/tomli/_re.py"
+        ],
+        "queued_candidates": 6
+      }
+    },
+    {
+      "task_index": 83,
+      "repo": "hukkin/tomli",
+      "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+      "parent": "8917fe3c3fc61a28163f5f78edcad2efc574a274",
+      "test": "tests/test_error.py",
+      "human_source": "tomli/__init__.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 7,
+      "candidates_executed_in_sandbox": 8,
+      "elapsed_sec": 4.83,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::test_module_name"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "fuzzer/fuzz.py",
+          "tomli/_parser.py",
+          "tomli/_re.py"
+        ],
+        "queued_candidates": 7
+      }
+    },
+    {
+      "task_index": 84,
+      "repo": "hukkin/tomli",
+      "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+      "parent": "a8c87f6e8b687e54ff34ccf331f64cb819ccbf2f",
+      "test": "tests/test_error.py",
+      "human_source": "tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1294,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 13.46,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::test_invalid_char_quotes"
+        ],
+        "candidate_files": [
+          "tomli/_parser.py",
+          "tomli/_re.py",
+          "benchmark/run.py",
+          "fuzzer/fuzz.py"
+        ],
+        "queued_candidates": 137
+      }
+    },
+    {
+      "task_index": 85,
+      "repo": "hukkin/tomli",
+      "sha": "9af551b578d0bfa9823e986572735a7429ffdf79",
+      "parent": "ca8e97a3c2c4506b02cf3ac11775a7ebed966898",
+      "test": "tests/test_misc.py",
+      "human_source": "tomli/__init__.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 1845,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 16.43,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_misc.py::test_own_pyproject"
+        ],
+        "candidate_files": [
+          "tomli/_parser.py",
+          "benchmark/run.py"
+        ],
+        "queued_candidates": 174
+      }
+    },
+    {
+      "task_index": 86,
+      "repo": "hukkin/tomli",
+      "sha": "9655d330043253c2d10e10865af9f1e56b32feb6",
+      "parent": "992b0f2113a56722968392a17330763100ee3af9",
+      "test": "tests/test_flags.py",
+      "human_source": "tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 6,
+      "candidates_executed_in_sandbox": 6,
+      "elapsed_sec": 4.63,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "<suite>"
+        ],
+        "candidate_files": [
+          "tomli/_parser.py",
+          "benchmark/run.py"
+        ],
+        "queued_candidates": 6
+      }
+    },
+    {
+      "task_index": 87,
+      "repo": "hukkin/tomli",
+      "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+      "parent": "20c9901ca976db8914cbe7ca42afb118ae667a82",
+      "test": "tests/test_error.py",
+      "human_source": "tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 7683,
+      "candidates_executed_in_sandbox": 24,
+      "elapsed_sec": 22.03,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_error.py::test_line_and_col",
+          "tests/test_error.py::test_missing_value"
+        ],
+        "candidate_files": [
+          "tomli/_parser.py",
+          "benchmark/run.py"
+        ],
+        "queued_candidates": 260
+      }
+    },
+    {
+      "task_index": 88,
+      "repo": "hukkin/tomli",
+      "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+      "parent": "37a543b74bb1633478aea9f3a6a450a550bdeb63",
+      "test": "tests/test_misc.py",
+      "human_source": "tomli/_parser.py",
+      "solved": false,
+      "stage": "UNSOLVED_WITHIN_BUDGET",
+      "mechanism": "NONE",
+      "sabotage_verified": false,
+      "overfit_falsifier_passed": false,
+      "neighbor_impact_passed": false,
+      "source_tree_unchanged": true,
+      "candidates_evaluated_in_memory": 6,
+      "candidates_executed_in_sandbox": 7,
+      "elapsed_sec": 4.32,
+      "modified_files": [],
+      "exact_file_match": false,
+      "unified_diff": "",
+      "diagnostics": {
+        "baseline_failing": [
+          "tests/test_misc.py::test_parse_float"
+        ],
+        "candidate_files": [
+          "benchmark/run.py",
+          "tomli/_parser.py"
+        ],
+        "queued_candidates": 6
+      }
+    }
+  ]
+}

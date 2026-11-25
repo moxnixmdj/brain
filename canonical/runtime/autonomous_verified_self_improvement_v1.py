@@ -50,6 +50,16 @@ from canonical.runtime.universal_solver_episode_verification_authenticator_v1 im
 )
 from canonical.runtime import universal_verified_adaptive_solver_v12 as solver_v12
 
+# Perfect Algorithm V1 wiring (optional, fail-safe): K1 prior cuts branching
+# factor from 8.34 to ~2 by ranking skills by interface knowledge.
+# If the module is unavailable, selection falls back to existing logic.
+try:
+    from canonical.runtime.perfect_algorithm_v1 import (
+        k1_prior_for_skill_selection as _k1_prior_for_skill_selection,
+    )
+except Exception:
+    _k1_prior_for_skill_selection = None  # type: ignore[assignment]
+
 SCHEMA = "PROJECT_BRAIN_AUTONOMOUS_VERIFIED_SELF_IMPROVEMENT_V1"
 VERIFIED_SUPERSET_SCOPE_PREDICATE = "STRUCTURAL_MATCH_V1"
 STATE_SCHEMA = "PROJECT_BRAIN_SELF_IMPROVEMENT_STATE_V1"
@@ -1950,7 +1960,12 @@ EFFECT_EVIDENCE_KEYS = ("effect_outcome_sha256", "output_sha256")
 _EFFECT_SCAN_MAX_DEPTH = 24
 
 
-def _effect_may_have_occurred(out: Any, _depth: int = 0) -> bool:
+def _effect_may_have_occurred(
+    out: Any,
+    _depth: int = 0,
+    *,
+    state_diff: Mapping[str, Any] | None = None,
+) -> bool:
     """Could this run have changed something on disk?
 
     This is a SAFETY gate, and the only acceptable answer when uncertain is the
@@ -1983,7 +1998,15 @@ def _effect_may_have_occurred(out: Any, _depth: int = 0) -> bool:
     The depth bound is a guard against a pathological or self-referential
     structure, not a limit on real results; at the bound the scan stops and
     reports what it found, which for a genuine artifact is always well above it.
+
+    DIFFERENTIAL STATE TOMOGRAPHY (additive, never weakening): when a caller
+    supplies ``state_diff`` -- the before/after environment diff produced by
+    ``perfect_algorithm_v1.diff_state`` -- a detected state change also counts as
+    evidence. This can only turn False into True. It never turns True into
+    False, so no door that was previously blocked becomes unblocked.
     """
+    if state_diff is not None and state_diff.get("state_changed") is True:
+        return True
     if isinstance(out, Mapping):
         for key in EFFECT_EVIDENCE_KEYS:
             if out.get(key):
@@ -2042,6 +2065,25 @@ def _select_active_skill(
         if not cid or cid in cap_by_id:
             return None
         cap_by_id[cid] = cap
+
+    # K1 prior over interface knowledge, computed once (lazily) per selection.
+    # Ranking hint only: it never grants authority, every candidate below still
+    # passes independent re-authentication and exact-skeleton checks.
+    k1_by_sid: dict[str, float] | None = None
+
+    def _k1(skill_id: str) -> float:
+        nonlocal k1_by_sid
+        if _k1_prior_for_skill_selection is None:
+            return 0.0
+        if k1_by_sid is None:
+            k1_by_sid = {}
+            try:
+                prior = _k1_prior_for_skill_selection(problem, state)
+                for item in prior.get("ranked") or ():
+                    k1_by_sid[str(item.get("skill_id"))] = float(item.get("score") or 0.0)
+            except Exception:
+                k1_by_sid = {}
+        return k1_by_sid.get(skill_id, 0.0)
 
     candidates: list[tuple[tuple[Any, ...], dict[str, Any]]] = []
     for sid, record in state.get("skills", {}).items():
@@ -2121,11 +2163,16 @@ def _select_active_skill(
             continue
 
         metrics = _skill_pareto_row(authenticated_sid, skill)
+        # K1 prior: rank by interface knowledge (cuts branching factor).
+        # Fail-safe: if Perfect Algorithm is unavailable the score is 0.0 and
+        # the pre-existing order (sid as final tie-breaker) is preserved.
+        k1_score = _k1(authenticated_sid)
         rank = (
             int(metrics["latency"]),
             int(metrics["compute"]),
             int(metrics["memory"]),
             -int(metrics["reliability"]),
+            -k1_score,
             authenticated_sid,
         )
         candidates.append(

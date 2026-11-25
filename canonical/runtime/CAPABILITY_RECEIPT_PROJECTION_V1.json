@@ -1,5 +1,5 @@
 {
- "count": 305,
+ "count": 308,
  "entries": {
   "brain.module.function.invoke": {
    "action_template": {
@@ -43,6 +43,141 @@
     },
     "producer_independent": false,
     "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__brain.module.function.invoke__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.binding_pin_is_current_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "binding_pin_is_current_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "binding",
+    "pin",
+    "current"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/binding_pin_is_current_v1.py",
+    "path": "canonical/runtime/binding_pin_is_current_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "98890960cdc84921192122496581a2c8339bac30c58b909ab9e8d4aa68602cd4",
+    "observed_effect": {
+     "pass": false,
+     "status": "BOUND_CAPABILITY_CLAIMS_A_PIN_THAT_IS_NOT_TRUE"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.binding_pin_is_current_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.capability_selection_retrieval_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "capability_id": "canonical.runtime.capability_selection_retrieval_v1.hidden.v1"
+    },
+    "expect": {
+     "field": "status",
+     "type": "field_nonempty"
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "capability_selection_retrieval_v1",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "capability",
+    "selection",
+    "retrieval"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.capability_selection_retrieval_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/capability_selection_retrieval_v1.py",
+    "path": "canonical/runtime/capability_selection_retrieval_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "212ec1108d8489de711310d61cb3e80ce7a0aa2b95c99ebc78bb080edb2c996f",
+    "observed_effect": {
+     "status": "NOT_SELECTED"
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.capability_selection_retrieval_v1.hidden.v1__EXECUTION_RECEIPT.json"
+   }
+  },
+  "canonical.runtime.tool_census_v1.hidden.v1": {
+   "action_template": {
+    "args": {
+     "argv": [
+      "python3",
+      "canonical/runtime/tool_census_v1.py"
+     ],
+     "capability_id": "canonical.runtime.tool_census_v1.hidden.v1",
+     "timeout_s": 60
+    },
+    "expect": {
+     "field": "returncode",
+     "type": "field_equals",
+     "value": 0
+    },
+    "type": "invoke_capability"
+   },
+   "adapter_module": "cli_command",
+   "cost": 1,
+   "entrypoint": "run",
+   "incremental_spend_usd": 0,
+   "keywords": [
+    "tool",
+    "census"
+   ],
+   "platforms": [
+    "linux"
+   ],
+   "provides": [
+    "canonical.runtime.tool_census_v1.hidden.v1"
+   ],
+   "requires": [],
+   "source": {
+    "adapter_path": "canonical/runtime/bound_capabilities/cli_command.py",
+    "path": "canonical/runtime/tool_census_v1.py",
+    "type": "repository_python_source"
+   },
+   "status": "RECEIPT_BACKED_PENDING_PROMOTION",
+   "verification": {
+    "model_dependency_count": 0,
+    "module_sha256": "3fdff3b36e2c7c45ea72a19a6df6a9ee3438d2e1cef5f2ee10dcf0802b57e320",
+    "observed_effect": {
+     "returncode": 0
+    },
+    "producer_independent": false,
+    "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.tool_census_v1.hidden.v1__EXECUTION_RECEIPT.json"
    }
   },
   "canonical/experiments/run_command_manpage_semantics_diagnostic_001.py.auto.v1": {
@@ -15039,5 +15174,6 @@
    }
   }
  },
+ "harvested_entries": 3,
  "schema": "PROJECT_BRAIN_CAPABILITY_RECEIPT_PROJECTION_V1"
 }

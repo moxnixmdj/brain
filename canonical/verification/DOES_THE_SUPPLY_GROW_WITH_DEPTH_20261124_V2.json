@@ -1,0 +1,720 @@
+{
+ "schema": "BRAIN_DOES_THE_SUPPLY_GROW_WITH_DEPTH_V2",
+ "generated": "2026-11-25T03:08:00Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 337.0
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "depth": 2,
+   "pool": "walk",
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 2,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 10,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 2,
+   "pool": "walk",
+   "states": 7,
+   "transitions": 20,
+   "held_out": 20,
+   "questions": 25,
+   "per_100_states": 357.14,
+   "arm_A": {
+    "predictions": 3,
+    "wrong": 0,
+    "refused": 17
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 8
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 2,
+   "pool": "walk",
+   "states": 6,
+   "transitions": 12,
+   "held_out": 4,
+   "questions": 8,
+   "per_100_states": 133.33,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 4,
+    "wrong": 1,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 2,
+   "pool": "walk",
+   "states": 7,
+   "transitions": 12,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 14.29,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 2,
+   "pool": "walk",
+   "states": 33,
+   "transitions": 49,
+   "held_out": 35,
+   "questions": 3,
+   "per_100_states": 9.09,
+   "arm_A": {
+    "predictions": 6,
+    "wrong": 1,
+    "refused": 29
+   },
+   "arm_C": {
+    "predictions": 7,
+    "wrong": 1,
+    "refused": 28
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 2,
+   "pool": "walk",
+   "states": 6,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 2,
+   "pool": "walk",
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 2,
+   "pool": "walk",
+   "states": 3,
+   "transitions": 8,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 2,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 12,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 25.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "depth": 3,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 3,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 20,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 3,
+   "pool": "walk",
+   "states": 30,
+   "transitions": 60,
+   "held_out": 60,
+   "questions": 29,
+   "per_100_states": 96.67,
+   "arm_A": {
+    "predictions": 14,
+    "wrong": 0,
+    "refused": 46
+   },
+   "arm_C": {
+    "predictions": 42,
+    "wrong": 0,
+    "refused": 18
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 3,
+   "pool": "walk",
+   "states": 19,
+   "transitions": 36,
+   "held_out": 36,
+   "questions": 31,
+   "per_100_states": 163.16,
+   "arm_A": {
+    "predictions": 9,
+    "wrong": 2,
+    "refused": 27
+   },
+   "arm_C": {
+    "predictions": 27,
+    "wrong": 2,
+    "refused": 9
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 3,
+   "pool": "walk",
+   "states": 15,
+   "transitions": 28,
+   "held_out": 16,
+   "questions": 3,
+   "per_100_states": 20.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 2,
+    "wrong": 0,
+    "refused": 14
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 3,
+   "pool": "walk",
+   "states": 136,
+   "transitions": 231,
+   "held_out": 210,
+   "questions": 16,
+   "per_100_states": 11.76,
+   "arm_A": {
+    "predictions": 29,
+    "wrong": 3,
+    "refused": 181
+   },
+   "arm_C": {
+    "predictions": 42,
+    "wrong": 6,
+    "refused": 168
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 3,
+   "pool": "walk",
+   "states": 10,
+   "transitions": 24,
+   "held_out": 4,
+   "questions": 1,
+   "per_100_states": 10.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 3,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 3,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 12,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 3,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 16,
+   "held_out": 12,
+   "questions": 8,
+   "per_100_states": 200.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 5,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "depth": 4,
+   "pool": "walk",
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "depth": 4,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 20,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "GIT",
+   "depth": 4,
+   "pool": "walk",
+   "states": 113,
+   "transitions": 200,
+   "held_out": 200,
+   "questions": 37,
+   "per_100_states": 32.74,
+   "arm_A": {
+    "predictions": 24,
+    "wrong": 0,
+    "refused": 176
+   },
+   "arm_C": {
+    "predictions": 125,
+    "wrong": 0,
+    "refused": 75
+   }
+  },
+  {
+   "machine": "GIT2",
+   "depth": 4,
+   "pool": "walk",
+   "states": 70,
+   "transitions": 116,
+   "held_out": 116,
+   "questions": 47,
+   "per_100_states": 67.14,
+   "arm_A": {
+    "predictions": 11,
+    "wrong": 0,
+    "refused": 105
+   },
+   "arm_C": {
+    "predictions": 77,
+    "wrong": 0,
+    "refused": 39
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "depth": 4,
+   "pool": "walk",
+   "states": 31,
+   "transitions": 60,
+   "held_out": 44,
+   "questions": 5,
+   "per_100_states": 16.13,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 44
+   },
+   "arm_C": {
+    "predictions": 2,
+    "wrong": 0,
+    "refused": 42
+   }
+  },
+  {
+   "machine": "LIST",
+   "depth": 4,
+   "pool": "walk",
+   "states": 519,
+   "transitions": 952,
+   "held_out": 924,
+   "questions": 43,
+   "per_100_states": 8.29,
+   "arm_A": {
+    "predictions": 92,
+    "wrong": 12,
+    "refused": 832
+   },
+   "arm_C": {
+    "predictions": 154,
+    "wrong": 22,
+    "refused": 770
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "depth": 4,
+   "pool": "walk",
+   "states": 15,
+   "transitions": 40,
+   "held_out": 16,
+   "questions": 2,
+   "per_100_states": 13.33,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 16
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "depth": 4,
+   "pool": "walk",
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "depth": 4,
+   "pool": "walk",
+   "states": 5,
+   "transitions": 16,
+   "held_out": 0,
+   "questions": 0,
+   "per_100_states": 0.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   },
+   "arm_C": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 0
+   }
+  },
+  {
+   "machine": "VAULT",
+   "depth": 4,
+   "pool": "walk",
+   "states": 4,
+   "transitions": 16,
+   "held_out": 12,
+   "questions": 8,
+   "per_100_states": 200.0,
+   "arm_A": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_C": {
+    "predictions": 12,
+    "wrong": 5,
+    "refused": 0
+   }
+  }
+ ],
+ "summary": {
+  "by_depth": {
+   "2": {
+    "machines": 10,
+    "states": 76,
+    "questions": 38,
+    "questions_per_100_states": 50.0,
+    "A_predictions": 9,
+    "A_wrong": 1,
+    "C_predictions": 23,
+    "C_wrong": 2,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.92
+   },
+   "3": {
+    "machines": 10,
+    "states": 230,
+    "questions": 88,
+    "questions_per_100_states": 38.26,
+    "A_predictions": 52,
+    "A_wrong": 5,
+    "C_predictions": 125,
+    "C_wrong": 13,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.9058
+   },
+   "4": {
+    "machines": 10,
+    "states": 771,
+    "questions": 142,
+    "questions_per_100_states": 18.42,
+    "A_predictions": 127,
+    "A_wrong": 12,
+    "C_predictions": 370,
+    "C_wrong": 27,
+    "machines_out_of_questions": 10,
+    "C_accuracy": 0.932
+   }
+  },
+  "condition_pool": "walk",
+  "verdicts": {
+   "the_supply_is_monotone_in_depth": true,
+   "the_supply_grows_by_more_than_a_third": true,
+   "the_density_does_not_collapse": false,
+   "deeper_exploration_is_worth_more_questions": false,
+   "the_supply_is_finite_at_every_depth": true,
+   "the_supply_scales_sublinearly": true,
+   "the_supply_scales_with_a_measurable_exponent": true,
+   "accuracy_after_acquisition_falls_with_depth": false
+  },
+  "budget": 400,
+  "scaling": {
+   "states": [
+    76,
+    230,
+    771
+   ],
+   "questions": [
+    38,
+    88,
+    142
+   ],
+   "exponents": [
+    0.758,
+    0.396
+   ],
+   "mean_exponent": 0.577,
+   "density_per_100_states": [
+    50.0,
+    38.26,
+    18.42
+   ],
+   "interpretation": "questions ~ states**0.58: sublinear, but far closer to linear than the leaked run suggested (0.41)"
+  },
+  "pool_comparison": {
+   "leaked_full_pool": {
+    "2": {
+     "questions": 51,
+     "C_accuracy": 0.678
+    },
+    "3": {
+     "questions": 72,
+     "C_accuracy": 0.6184
+    },
+    "4": {
+     "questions": 131,
+     "C_accuracy": 0.5959
+    }
+   },
+   "correct_walk_pool": {
+    "2": {
+     "questions": 38,
+     "C_accuracy": 0.92
+    },
+    "3": {
+     "questions": 88,
+     "C_accuracy": 0.9058
+    },
+    "4": {
+     "questions": 142,
+     "C_accuracy": 0.932
+    }
+   },
+   "what_changed": "the leak made acquisition look like it COLLAPSES with depth (0.678 -> 0.596). With the correct vocabulary it does not collapse at all: 0.920 -> 0.906 -> 0.932. The 'collapse' was the learner being scored against a vocabulary it was handed but had not earned."
+  }
+ },
+ "supersedes": "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V1.json",
+ "why_v2_exists": "V1 built its condition vocabulary from the FULL depth enumeration. The vocabulary is a feature set the learner must obtain from what it observed, so drawing it from unvisited states hands the learner world facts it could not have -- the forbidden shape, smuggled in through features rather than weights. Every earlier receipt in this project draws it from the walk. V2 does the same."
+}

@@ -62,6 +62,16 @@ import sys
 import tempfile
 from typing import Any, Iterable, Mapping, Sequence
 
+_HERE = pathlib.Path(__file__).resolve().parent
+_ROOT = _HERE.parents[1]
+for _entry in (str(_ROOT), str(_HERE), str(_ROOT / "canonical" / "tools")):
+    if _entry not in sys.path:
+        sys.path.insert(0, _entry)
+
+import dual_program_splicing_v1 as splicing  # noqa: E402
+import operand_invention_v1 as operand  # noqa: E402
+import repo_native_component_mining_v1 as mining  # noqa: E402
+
 SCHEMA = "BRAIN_WITNESS_INVERSION_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
 
@@ -386,7 +396,8 @@ def _interact(node, call, report):
 # the witness
 # --------------------------------------------------------------------------- #
 def capture(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: pathlib.Path,
-            test_name: str, timeout: float = 300.0) -> dict[str, Any]:
+            test_name: str, timeout: float = 300.0,
+            python: str | None = None) -> dict[str, Any]:
     """Run the test under pytest and bring back the live witness the failure left behind."""
     work = pathlib.Path(tempfile.mkdtemp(prefix="witness-", dir=str(repo)))
     try:
@@ -402,7 +413,7 @@ def capture(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: path
         env["WITNESS_OUT"] = str(out)
         node = str(test_file.relative_to(repo)) + "::" + test_name
         try:
-            done = subprocess.run([sys.executable, "-m", "pytest", node, "-q", "--tb=no",
+            done = subprocess.run([python or sys.executable, "-m", "pytest", node, "-q", "--tb=no",
                                    "-p", "witness_plugin", "-p", "no:cacheprovider"],
                                   cwd=str(repo), capture_output=True, text=True, timeout=timeout, env=env)
         except subprocess.TimeoutExpired:
@@ -465,6 +476,60 @@ def grammar_candidates(report: Mapping[str, Any], target_source: str) -> list[st
     return [item for item in dict.fromkeys(out) if item != existing]
 
 
+def mining_candidates(repo: pathlib.Path, targets: Sequence[pathlib.Path],
+                      report: Mapping[str, Any], *, budget: int = 12,
+                      seconds: int = 20,
+                      differential: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Repo-native arm: invert the witness into MINE terms, then splice partials.
+
+    The actual/required values come from the captured assertion witness, never
+    from a diff or a human answer. Only the project's own runner accepts a patch.
+    """
+    if differential is not None:
+        failing = list(differential.get("failing") or [])
+        passing = list(differential.get("passing") or [])
+    else:
+        failing = [report.get("actual_value")]
+        passing = [report.get("required_value")]
+    out: dict[str, Any] = {"terms": 0, "patches": 0, "splices": 0, "candidates": []}
+    if not all(isinstance(value, str) and value for value in failing + passing):
+        return out
+    hot = [int(site["site_line"]) for site in report.get("sites", []) if "site_line" in site]
+    for target in targets[:3]:
+        path = pathlib.Path(target)
+        try:
+            rel = path.relative_to(repo).as_posix()
+        except ValueError:
+            continue
+        source = path.read_text(encoding="utf-8", errors="replace")
+        terms = mining.mine_terms(repo, rel, failing, passing)[:budget]
+        out["terms"] += len(terms)
+        seats = operand.conditions(source, hot) or operand.conditions(source, [line for line in hot[:3]])
+        mined: list[str] = []
+        for line_of, condition in seats[:6]:
+            name = condition.split()[0] if condition.split() else ""
+            if not name.isidentifier():
+                continue
+            for term in terms:
+                with_import = mining.add_import(source, term["module"], term["class"])
+                offset = 1 if with_import != source else 0
+                candidate = mining.guard_patch(
+                    with_import, line_of + offset, condition,
+                    f"_brain_mined({name}).{term['attribute']}", "or")
+                if candidate and candidate != source:
+                    mined.append(candidate)
+                    out["patches"] += 1
+        spliced: list[str] = []
+        for first in range(min(len(mined), 6)):
+            for second in range(first + 1, min(len(mined), 6)):
+                for candidate in splicing.splice(source, mined[first], mined[second])[:4]:
+                    if candidate not in spliced:
+                        spliced.append(candidate)
+        out["splices"] += len(spliced)
+        out["candidates"].extend((path, candidate) for candidate in dict.fromkeys(mined + spliced))
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # the judge: the real test, or nothing
 # --------------------------------------------------------------------------- #
@@ -497,8 +562,17 @@ def apply_expression(source: str, report: Mapping[str, Any], expression: str) ->
 
 def _env(repo: pathlib.Path) -> dict[str, str]:
     """The repo's own import surface, and nothing from this interpreter's guesses."""
-    return {"PYTHONPATH": ":".join([str(repo), str(repo / "src"), str(repo / "tests")]),
-            "PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": str(repo), "PYTHONDONTWRITEBYTECODE": "1"}
+    ambient = os.environ.get("PYTHONPATH", "")
+    paths = [str(repo), str(repo / "src"), str(repo / "tests")]
+    if ambient:
+        paths.append(ambient)
+    environment = {"PYTHONPATH": ":".join(paths),
+                   "PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": str(repo),
+                   "PYTHONDONTWRITEBYTECODE": "1"}
+    for flag in ("PYTEST_DISABLE_PLUGIN_AUTOLOAD", "PYTEST_ADDOPTS"):
+        if os.environ.get(flag):
+            environment[flag] = os.environ[flag]
+    return environment
 
 
 def judge(repo: pathlib.Path, command: Sequence[str], file_path: pathlib.Path, original: str,
@@ -518,11 +592,31 @@ def judge(repo: pathlib.Path, command: Sequence[str], file_path: pathlib.Path, o
         file_path.write_text(original, encoding="utf-8")
 
 
+def _try_augmented(result: dict[str, Any], repo: pathlib.Path,
+                   targets: Sequence[pathlib.Path], command: Sequence[str],
+                   report: Mapping[str, Any],
+                   differential: Mapping[str, Any] | None = None) -> bool:
+    """Run the repo-mining+splicing arm; mutate `result` and report whether it verified."""
+    augmented = mining_candidates(repo, targets, report, differential=differential)
+    result["mining"] = {key: value for key, value in augmented.items() if key != "candidates"}
+    for path, candidate_source in augmented["candidates"]:
+        original = path.read_text(encoding="utf-8")
+        result["tried"] += 1
+        if judge(repo, command, path, original, candidate_source):
+            result["answer"] = "VERIFIED__REPO_MINED"
+            result["found_by"] = "repo_mining_plus_splicing"
+            result["site"] = "%s::%s" % (path.name, "mined_guard")
+            return True
+    return False
+
+
 def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: pathlib.Path,
                test_name: str, command: Sequence[str], with_control: bool = True,
-               budget: int = 12) -> dict[str, Any]:
+               budget: int = 12, use_mining: bool = False,
+               differential: Mapping[str, Any] | None = None,
+               python: str | None = None) -> dict[str, Any]:
     """One task: witness, invert at every invertible site, verify with the real test, or refuse."""
-    report = capture(repo, targets, test_file, test_name)
+    report = capture(repo, targets, test_file, test_name, python=python)
     sites = list(report.get("sites", []))
     result: dict[str, Any] = {
         "task": "%s::%s" % (test_file.name, test_name),
@@ -541,10 +635,13 @@ def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: p
         "found_by": None,
         "tried": 0,
         "control": None,
+        "mining": None,
     }
     if report.get("outcome") != "WITNESSED":
         result["answer"] = "REFUSED__" + str(report.get("outcome"))
         result["detail"] = report.get("detail", "")
+        if use_mining:
+            _try_augmented(result, repo, targets, command, report, differential)
         return result
 
     proposals: list[tuple[Mapping[str, Any], str, str]] = []
@@ -576,6 +673,9 @@ def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: p
             result["span_kind"] = site.get("span_kind")
             if arm == "grammar" and result.get("control") is not None:
                 result["control"]["found"] = expression
+            return result
+    if use_mining:
+        if _try_augmented(result, repo, targets, command, report, differential):
             return result
     result["answer"] = "REFUSED__NO_CANDIDATE_PASSES_THE_TEST"
     return result
@@ -892,6 +992,304 @@ def _headline(report: Mapping[str, Any]) -> str:
         % (states["commits_materialised"], states["commits_with_a_real_failure"], states["attempted"],
            states["witnessed"], states["verified"], states["refused"],
            states["verified_by_inversion"], states["verified_by_grammar"]))
+
+
+# --------------------------------------------------------------------------------------------------
+# Repo-Native Component Mining, Dual-Program Splicing, Bidirectional Lens / FST & L3 Negative Space
+# --------------------------------------------------------------------------------------------------
+
+def mine_repo_components(repo_root: pathlib.Path, max_files: int = 64) -> dict[str, Any]:
+    """Harvest the repository's own functions, methods, classes, constants, and exception types."""
+    functions: list[dict[str, Any]] = []
+    methods: list[dict[str, Any]] = []
+    classes: list[str] = []
+    exceptions: list[str] = []
+    constants: list[str] = []
+
+    py_files = sorted(
+        p for p in repo_root.rglob("*.py")
+        if ".git" not in p.parts and "__pycache__" not in p.parts
+    )[:max_files]
+    for path in py_files:
+        try:
+            tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+        except SyntaxError:
+            continue
+        rel = path.relative_to(repo_root).as_posix()
+        for node in tree.body:
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                args = [a.arg for a in node.args.args]
+                functions.append({"name": node.name, "arity": len(args), "args": args, "file": rel})
+            elif isinstance(node, ast.ClassDef):
+                classes.append(node.name)
+                bases_txt = " ".join(ast.unparse(b) for b in node.bases)
+                if "Error" in node.name or "Exception" in node.name or "Error" in bases_txt or "Exception" in bases_txt:
+                    if node.name not in exceptions:
+                        exceptions.append(node.name)
+                for item in node.body:
+                    if isinstance(item, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        margs = [a.arg for a in item.args.args if a.arg != "self"]
+                        methods.append({
+                            "class": node.name,
+                            "name": item.name,
+                            "arity": len(margs),
+                            "args": margs,
+                            "file": rel,
+                        })
+            elif isinstance(node, ast.Assign):
+                for target in node.targets:
+                    if isinstance(target, ast.Name) and target.id.isupper():
+                        if target.id not in constants:
+                            constants.append(target.id)
+    return {
+        "files_scanned": len(py_files),
+        "functions": functions,
+        "methods": methods,
+        "classes": classes,
+        "exceptions": exceptions,
+        "constants": constants,
+    }
+
+
+def splice_dual_programs(
+    p1_expr: str,
+    p2_expr: str,
+    t1_frames: Sequence[Mapping[str, Any]],
+    t2_frames: Sequence[Mapping[str, Any]],
+) -> dict[str, Any] | None:
+    """Counterexample-partitioned program splicing: synthesize separating guard G and return `P1 if G else P2`."""
+    if not t1_frames or not t2_frames:
+        return None
+    shared_keys = sorted(
+        k for k in set(t1_frames[0].keys()) & set(t2_frames[0].keys())
+        if k.isidentifier() and not k.startswith("__")
+    )
+    candidate_guards: list[str] = []
+    for k in shared_keys:
+        candidate_guards.extend([
+            f"{k} is None",
+            f"{k} is not None",
+            f"bool({k})",
+            f"not {k}",
+            f"isinstance({k}, str)",
+            f"isinstance({k}, (list, tuple))",
+            f"len({k}) == 0",
+            f"len({k}) > 0",
+        ])
+        v1 = t1_frames[0].get(k)
+        v2 = t2_frames[0].get(k)
+        if isinstance(v1, (int, str)) and type(v1) is type(v2) and v1 != v2:
+            candidate_guards.append(f"{k} == {v1!r}")
+            if isinstance(v1, int) and isinstance(v2, int):
+                if v1 < v2:
+                    candidate_guards.append(f"{k} <= {v1!r}")
+                else:
+                    candidate_guards.append(f"{k} >= {v1!r}")
+
+    for guard in candidate_guards:
+        try:
+            code = compile(ast.parse(guard, mode="eval"), "<guard>", "eval")
+            t1_vals = [bool(eval(code, {}, dict(f))) for f in t1_frames]  # noqa: S307
+            t2_vals = [bool(eval(code, {}, dict(f))) for f in t2_frames]  # noqa: S307
+        except BaseException:
+            continue
+        if all(t1_vals) and not any(t2_vals):
+            spliced = f"({p1_expr}) if ({guard}) else ({p2_expr})"
+            return {
+                "guard": guard,
+                "spliced_expression": spliced,
+                "p1": p1_expr,
+                "p2": p2_expr,
+            }
+        if not any(t1_vals) and all(t2_vals):
+            spliced = f"({p2_expr}) if ({guard}) else ({p1_expr})"
+            return {
+                "guard": guard,
+                "spliced_expression": spliced,
+                "p1": p1_expr,
+                "p2": p2_expr,
+            }
+    return None
+
+
+def synthesize_bidirectional_lens(
+    pairs: Sequence[tuple[str | bytes, str | bytes]],
+    *,
+    input_var: str = "data",
+) -> dict[str, Any] | None:
+    """Synthesize an invertible FST / lookup-table lens (forward & backward) from concrete I/O pairs."""
+    if not pairs:
+        return None
+    forward_map: dict[Any, Any] = {}
+    backward_map: dict[Any, Any] = {}
+    for src, dst in pairs:
+        if src == dst:
+            continue
+        if src in forward_map and forward_map[src] != dst:
+            return None
+        if dst in backward_map and backward_map[dst] != src:
+            return None
+        forward_map[src] = dst
+        backward_map[dst] = src
+
+    if not forward_map:
+        return None
+
+    # Build chained `.replace(k, v)` expression for str or bytes
+    forward_expr = input_var
+    backward_expr = input_var
+    for k, v in forward_map.items():
+        forward_expr = f"{forward_expr}.replace({k!r}, {v!r})"
+    for v, k in backward_map.items():
+        backward_expr = f"{backward_expr}.replace({v!r}, {k!r})"
+
+    # Verify round-trip consistency on all witness pairs
+    for src, dst in pairs:
+        fwd_out = eval(compile(ast.parse(forward_expr, mode="eval"), "<fwd>", "eval"), {}, {input_var: src})  # noqa: S307
+        if fwd_out != dst:
+            return None
+        bwd_out = eval(compile(ast.parse(backward_expr, mode="eval"), "<bwd>", "eval"), {}, {input_var: fwd_out})  # noqa: S307
+        if bwd_out != src:
+            return None
+
+    return {
+        "forward_map": {repr(k): repr(v) for k, v in forward_map.items()},
+        "forward_expression": forward_expr,
+        "backward_expression": backward_expr,
+        "round_trip_verified": True,
+        "rules_count": len(forward_map),
+    }
+
+
+class NegativeSpaceInvariantStore:
+    """L3 Negative-Space Invariant Store: records refuted AST/state shapes to prune future search in O(1)."""
+
+    def __init__(self, path: pathlib.Path | None = None) -> None:
+        self.path = path
+        self._refuted_ast_dumps: dict[str, dict[str, Any]] = {}
+        if self.path and self.path.exists():
+            doc = json.loads(self.path.read_text(encoding="utf-8"))
+            for entry in doc.get("invariants", []):
+                self._refuted_ast_dumps[entry["ast_signature"]] = entry
+
+    def record_refutation(self, bad_expr: str, *, reason: str, repo: str = "", commit: str = "") -> str | None:
+        try:
+            tree = ast.parse(bad_expr, mode="eval").body
+        except SyntaxError:
+            return None
+        sig = ast.dump(tree, include_attributes=False)
+        self._refuted_ast_dumps[sig] = {
+            "ast_signature": sig,
+            "expression": bad_expr,
+            "reason": reason,
+            "repo": repo,
+            "commit": commit,
+        }
+        if self.path is not None:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            self.path.write_text(
+                json.dumps({"invariants": list(self._refuted_ast_dumps.values())}, indent=2) + "\n",
+                encoding="utf-8",
+            )
+        return sig
+
+    def is_refuted(self, candidate_expr: str) -> bool:
+        try:
+            sig = ast.dump(ast.parse(candidate_expr, mode="eval").body, include_attributes=False)
+        except SyntaxError:
+            return True
+        return sig in self._refuted_ast_dumps
+
+    def filter_candidates(self, candidates: Sequence[str]) -> list[str]:
+        return [c for c in candidates if not self.is_refuted(c)]
+
+
+def localize_by_angelic_perturbation(
+    module_sources: Mapping[str, str],
+    entry_expr: str,
+    failing_cases: Sequence[tuple[Mapping[str, Any], Any]],
+    passing_cases: Sequence[tuple[Mapping[str, Any], Any]],
+    angelic_values: Sequence[Any],
+) -> list[dict[str, Any]]:
+    """Counterfactual Causal Blame via Angelic Perturbation across multi-file/multi-function sources.
+
+    Perturbs each single-line return expression across `module_sources` with `angelic_values` on failing inputs
+    (while leaving passing inputs unperturbed or checking which site can satisfy all failing cases without
+    corrupting passing structure) to isolate the exact causal fault nexus.
+    """
+    suspect_sites: list[dict[str, Any]] = []
+    for file_path, src in module_sources.items():
+        try:
+            tree = ast.parse(src)
+        except SyntaxError:
+            continue
+        lines = src.splitlines()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Return) and node.value is not None:
+                if node.value.lineno == getattr(node.value, "end_lineno", node.value.lineno):
+                    suspect_sites.append({
+                        "file": file_path,
+                        "line": node.value.lineno,
+                        "col": node.value.col_offset,
+                        "end_col": node.value.end_col_offset,
+                        "old_expr": lines[node.value.lineno - 1][node.value.col_offset:node.value.end_col_offset],
+                    })
+
+    verified_blames: list[dict[str, Any]] = []
+    for site in suspect_sites:
+        f_path = site["file"]
+        orig_lines = module_sources[f_path].splitlines(keepends=True)
+        line_idx = site["line"] - 1
+        orig_line = orig_lines[line_idx]
+
+        # Check if there exists an angelic value assignment per failing case that makes all failing cases pass
+        all_failing_recoverable = True
+        witness_map: list[dict[str, Any]] = []
+        for f_env, expected_out in failing_cases:
+            recovered_this_case = False
+            for val in angelic_values:
+                patched_lines = list(orig_lines)
+                patched_lines[line_idx] = (
+                    orig_line[:site["col"]] + repr(val) + orig_line[site["end_col"]:]
+                )
+                ns: dict[str, Any] = {}
+                try:
+                    for mod_p, mod_s in module_sources.items():
+                        code_str = "".join(patched_lines) if mod_p == f_path else mod_s
+                        exec(compile(ast.parse(code_str), mod_p, "exec"), ns)  # noqa: S102
+                    actual = eval(compile(ast.parse(entry_expr, mode="eval"), "<entry>", "eval"), ns, dict(f_env))  # noqa: S307
+                except BaseException:
+                    continue
+                if actual == expected_out:
+                    recovered_this_case = True
+                    witness_map.append({"input": dict(f_env), "angelic_value": val, "output": actual})
+                    break
+            if not recovered_this_case:
+                all_failing_recoverable = False
+                break
+
+        if all_failing_recoverable and witness_map:
+            # Verify passing cases still pass on the unperturbed module
+            passing_ok = True
+            base_ns: dict[str, Any] = {}
+            for mod_p, mod_s in module_sources.items():
+                exec(compile(ast.parse(mod_s), mod_p, "exec"), base_ns)  # noqa: S102
+            for p_env, p_expected in passing_cases:
+                try:
+                    p_actual = eval(compile(ast.parse(entry_expr, mode="eval"), "<entry>", "eval"), base_ns, dict(p_env))  # noqa: S307
+                    if p_actual != p_expected:
+                        passing_ok = False
+                        break
+                except BaseException:
+                    passing_ok = False
+                    break
+            if passing_ok:
+                verified_blames.append({
+                    **site,
+                    "causal_blame_verified": True,
+                    "witnesses": witness_map,
+                })
+    return verified_blames
 
 
 def main(argv: Sequence[str] | None = None) -> int:

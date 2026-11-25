@@ -1,0 +1,65 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "generated": "2026-11-24",
+  "how_it_was_verified": "Each probe asserts a KNOWN ANSWER in a fresh interpreter (z3 must return sat for x>3; tree-sitter must parse a function with no error nodes; gcc must compile an ASan binary that then aborts on a deliberate overflow). Importing alone is not accepted, and absence is reported with its own state label.",
+  "measured": {
+    "c_compiler_with_sanitizers": "PRESENT_AND_EXERCISED",
+    "tree_sitter_c": "PRESENT_AND_EXERCISED",
+    "tree_sitter_runtime": "PRESENT_AND_EXERCISED",
+    "z3_smt_solver": "PRESENT_AND_EXERCISED"
+  },
+  "negative_cases_tested": [
+    "an absent critical module -> REFUSED__CRITICAL_DEPENDENCY_ABSENT",
+    "an importable but broken module -> PRESENT_BUT_BROKEN (a different diagnosis)",
+    "an absent non-critical module -> OK, run continues"
+  ],
+  "note_on_runtime_policy": "These are BUILD-AND-VERIFY capabilities, not runtime inference. The mission forbids runtime dependence on another model; a SAT solver and a parser are neither. They are declared here so their absence can never be mistaken for a result, which is the failure this file was written for.",
+  "parameters_stored": 0,
+  "refusal": "OK__ALL_CRITICAL_PRESENT",
+  "rows": [
+    {
+      "available": true,
+      "critical": true,
+      "exercised": true,
+      "module": "z3",
+      "name": "z3_smt_solver",
+      "probe_output": "z3-sat-known-answer-ok",
+      "silent_failure_signature": "checked=False from z3_verify_uir_safety",
+      "why": "semantic_causal_engine_v1 gates its safety proof on z3 and returns checked=False when it is missing. A caller reading only `safe` cannot tell."
+    },
+    {
+      "available": true,
+      "critical": true,
+      "exercised": true,
+      "module": "tree_sitter",
+      "name": "tree_sitter_runtime",
+      "probe_output": "tree-sitter-python-parse-ok",
+      "silent_failure_signature": "OPEN__NO_CAUSAL_SITES_IN_CPG",
+      "why": "the CPG localiser reports OPEN__NO_CAUSAL_SITES_IN_CPG when it cannot parse, which is the same output a genuinely site-free project produces."
+    },
+    {
+      "available": true,
+      "critical": false,
+      "exercised": true,
+      "module": "tree_sitter_c",
+      "name": "tree_sitter_c",
+      "probe_output": "tree-sitter-c-parse-ok",
+      "silent_failure_signature": "OPEN__NO_CAUSAL_SITES_IN_CPG (C/C++ only)",
+      "why": "the C/C++ half of the polyglot CPG silently yields no sites without it."
+    },
+    {
+      "available": true,
+      "critical": false,
+      "exercised": true,
+      "module": "gcc",
+      "name": "c_compiler_with_sanitizers",
+      "probe_output": "asan-known-answer-ok",
+      "silent_failure_signature": "UNGRADED memory-safety wall",
+      "why": "the memory-safety walls (cJSON) are verified by ASan/UBSan; without a compiler the wall is ungraded, not passed."
+    }
+  ],
+  "runtime_model_calls": 0,
+  "schema": "BRAIN_CAPABILITY_PREFLIGHT_RECEIPT_V1",
+  "the_rule": "A run whose output will be quoted must refuse to produce a number when a critical capability is not PRESENT_AND_EXERCISED. The point is not that the dependency is required; it is that its absence must not be reported in the same words as a successful search.",
+  "why_this_exists": "Measured, twice, in this repository: semantic_causal_engine_v1 returns checked=False without z3 and OPEN__NO_CAUSAL_SITES_IN_CPG without tree-sitter. Both strings are also what a real, successful search can return. A missing dependency was therefore indistinguishable from an honest negative, and a published claim (9/13 blind commits) had no way to reveal which one it was."
+}

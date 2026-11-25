@@ -1,0 +1,825 @@
+{
+ "schema": "DOES_THE_ISSUE_CONTAIN_THE_ORACLE_V1",
+ "question": "on how many of the 45 real fix commits does the issue/PR body already carry an executable fragment a test can be built from?",
+ "method": "regex over fenced code blocks; zero model calls",
+ "counts": {
+  "ORACLE_IN_ISSUE": 10,
+  "PROSE_ONLY": 35
+ },
+ "rate": {
+  "ORACLE_IN_ISSUE": 0.2222,
+  "PROSE_ONLY": 0.7778
+ },
+ "rows": [
+  {
+   "repo": "attrs",
+   "commit": "1c962d15a7",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1410",
+    "issue#1354"
+   ],
+   "body_chars": 1558,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#1410",
+    "issue#1354"
+   ],
+   "body_text": "Fixes #1354\r\n\n\nMention what argument has both annotation and type argument (#1410)\n\n* Mention what argument has both annotation and type argument\n\nFixes #1354\n\nCo-authored-by: SoundsSerious\n<10334493+SoundsSerious@users.noreply.github.com>\n\n* Add news fragment\n\nunhelpful message \"ValueError: Type annotation and type argument cannot both be present\"\nGetting this message because I both have the type annotation and type defined on a custom attribute class which is reasonable considering the ambiguity.\r\n\r\nHowever I think the message itself could be more helpful by displaying the name of the attribute to eliminate the variable hunt.\r\n\r\nMy suggested change is:\r\n\r\nhttps://github.com/python-attrs/attrs/blob/2afd663bf40e4a8209986accdfb1e2d53afc15e2/src/attr/_make.py#L2354\r\n```python\r\n    @classmethod\r\n    def from_counting_attr(cls, name, ca, type=None):\r\n        # type holds the annotated value. deal with conflicts:\r\n        if type is None:\r\n            type = ca.type\r\n        elif ca.type is not None:\r\n            raise ValueError(\r\n                f\"Type annotation and type argument for {name} cannot both be present\"\r\n            )\r\n        inst_dict = {\r\n            k: getattr(ca, k)\r\n            for k\r\n            in Attribute.__slots__\r\n            if k not in (\r\n                \"name\", \"validator\", \"default\", \"type\", \"convert\",\r\n            )  # exclude methods and deprecated alias\r\n        }\r\n        return cls(\r\n            name=name, validator=ca._validator, default=ca._default, type=type,\r\n            **inst_dict\r\n        )\r\n ```",
+   "has_fence": true,
+   "pr": "https://github.com/python-attrs/attrs/pull/1410"
+  },
+  {
+   "repo": "attrs",
+   "commit": "3b0378dd66",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1417",
+    "issue#1416"
+   ],
+   "body_chars": 9294,
+   "reasons": [
+    "traceback",
+    "call"
+   ],
+   "fetched": [
+    "pr#1417",
+    "issue#1416"
+   ],
+   "body_text": "This worked on 25.1.0 but was inadvertently broken by #1401\n\nFixes #1416\n\n# Pull Request Check List\n\n<!--\nThis is just a friendly reminder about the most common mistakes.\nPlease make sure that you tick all boxes.\nBut please read our [contribution guide](https://github.com/python-attrs/attrs/blob/main/.github/CONTRIBUTING.md) at least once, it will save you unnecessary review cycles!\n\nIf an item doesn't apply to your pull request, **check it anyway** to make it apparent that there's nothing left to do.\nIf your pull request is a documentation fix or a trivial typo, feel free to delete the whole thing.\n-->\n\n- [x] Do **not** open pull requests from your `main` branch \u2013 **use a separate branch**!\n  - There's a ton of footguns waiting if you don't heed this warning. You can still go back to your project, create a branch from your main branch, push it, and open the pull request from the new branch.\n  - This is not a pre-requisite for your pull request to be accepted, but **you have been warned**.\n- [x] Added **tests** for changed code.\n  Our CI fails if coverage is not 100%.\n- [ ] New features have been added to our [Hypothesis testing strategy](https://github.com/python-attrs/attrs/blob/main/tests/strategies.py).\n- [ ] Changes or additions to public APIs are reflected in our type stubs (files ending in ``.pyi``).\n    - [ ] ...and used in the stub test file `tests/typing_example.py`.\n    - [ ] If they've been added to `attr/__init__.pyi`, they've *also* been re-imported in `attrs/__init__.pyi`.\n- [ ] Updated **documentation** for changed code.\n    - [ ] New functions/classes have to be added to `docs/api.rst` by hand.\n    - [ ] Changes to the signatures of `@attr.s()` and `@attrs.define()` have to be added by hand too.\n    - [ ] Changed/added classes/methods/functions have appropriate `versionadded`, `versionchanged`, or `deprecated` [directives](http://www.sphinx-doc.org/en/stable/markup/para.html#directive-versionadded).\n          The next version is the second number in the current release + 1.\n          The first number represents the current year.\n          So if the current version on PyPI is 22.2.0, the next version is gonna be 22.3.0.\n          If the next version is the first in the new year, it'll be 23.1.0.\n      - [ ] If something changed that affects both `attrs.define()` and `attr.s()`, you have to add version directives to both.\n- [ ] Documentation in `.rst` and `.md` files is written using [semantic newlines](https://rhodesmill.org/brandon/2012/one-sentence-per-line/).\n- [ ] Changes (and possible deprecations) have news fragments in [`changelog.d`](https://github.com/python-attrs/attrs/blob/main/changelog.d).\n- [x] Consider granting [push permissions to the PR branch](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/allowing-changes-to-a-pull-request-branch-created-from-a-fork), so maintainers can fix minor issues themselves without pestering you.\n\n<!--\nIf you have *any* questions to *any* of the points above, just **submit and ask**!\nThis checklist is here to *help* you, not to deter you from contributing!\n-->\n\n\nCope with `field_transformer` being a generator (#1417)\n\n* Cope with `field_transformer` being a generator\n\nThis worked on 25.1.0 but was inadvertently broken by #1401\n\n* Update src/attr/_make.py\n\nCo-authored-by: Ash Berlin-Taylor <ash_github@firemirror.com>\n\n---------\n\nCo-authored-by: Hynek Schlawack <hs@ox.cx>\n\nCreating a Subclassed instance now errors with `got an unexpected keyword argument`\nWe just noticed this in Airflow CI on upgrading to 25.2.0.\n\nThe error is\n\n```\nERROR    airflow.models.dagbag.DagBag:dagbag.py:394 Failed to import: /opt/airflow/airflow/example_dags/example_dynamic_task_mapping.py\nTraceback (most recent call last):\n  File \"/opt/airflow/airflow/models/dagbag.py\", line 384, in parse\n    loader.exec_module(new_module)\n  File \"<frozen importlib._bootstrap_external>\", line 999, in exec_module\n  File \"<frozen importlib._bootstrap>\", line 488, in _call_with_frames_removed\n  File \"/opt/airflow/airflow/example_dags/example_dynamic_task_mapping.py\", line 27, in <module>\n    with DAG(dag_id=\"example_dynamic_task_mapping\", schedule=None, start_date=datetime(2022, 3, 4)) as dag:\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: DAG.__init__() got an unexpected keyword argument 'dag_id'\n```\n\n(Yes, I know your view on subclassing. I don't disagree either)\n\nMinimal repro case:\n\n```python\nimport attrs\n\ndef _all_after_dag_id_to_kw_only(cls, fields: list[attrs.Attribute]):\n    i = iter(fields)\n    f = next(i)\n    if f.name != \"dag_id\":\n        raise RuntimeError(\"dag_id was not the first field\")\n    yield f\n\n    for f in i:\n        yield f.evolve(kw_only=True)\n\n\n@attrs.define(field_transformer=_all_after_dag_id_to_kw_only)\nclass Base:\n    dag_id: str\n    has_default: str = \"default\"\n\n\n@attrs.define()\nclass Subclass(Base):\n    other: bool\n\n\nx = Subclass(dag_id=\"foo\", other=False)\n\nprint(repr(x))\nprint(attrs.__version__)\n```\n\nhttps://github.com/python-attrs/attrs/pull/1401 might have caused it\n\nMight do, yes, but the minimal example is not failing, so it's some quirk of what we are doing in Airflow\n\ncc @jamesmurphy-mc \n\npls provide a repro and I'll see if I can do anything before leaving for my vacation tomorrow afternoon\n\nI updated the example to include `help(Subclass.__init__)`;\n\nOn 25.1.0 we see this:\n```\n__init__(self, dag_id: str, other: bool, *, has_default: str = 'default') -> None\n    Method generated by attrs for class Subclass.\n```\n\nOn 25.2.0 we see this:\n```\n__init__(self, other: bool) -> None\n    Method generated by attrs for class Subclass.\n```\n\n@hynek No rush at all!, we are happy to pin to !latest for now\n\nI have got a simple reproducer. Let me try that.\n\ncc @sscherfke for good measure\n\n@tirkarthi I've got a reproducer now. Top post has been updated.\n\n@ashb Thanks, I got the same one but didn't to subclass.\n\n```python\nimport attrs\n\ndef _all_after_dag_id_to_kw_only(cls, fields: list[attrs.Attribute]):\n    i = iter(fields)\n    f = next(i)\n    if f.name != \"dag_id\":\n        raise RuntimeError(\"dag_id was not the first field\")\n    yield f\n\n    for f in i:\n        yield f.evolve(kw_only=True)\n\n\n@attrs.define(repr=False, field_transformer=_all_after_dag_id_to_kw_only, slots=False)\nclass DAG:\n    dag_id: str = attrs.field(kw_only=False, validator=attrs.validators.instance_of(str))\n\n\ndag = DAG(dag_id=\"test\")\nprint(dag)\n```\n\n```\n(.venv) \u279c  airflow git:(main) \u2717 python /tmp/attrs_repro.py\n<__main__.DAG object at 0x7f69c5305bd0>\n(.venv) \u279c  airflow git:(main) \u2717 pip install attrs==25.2.0\nCollecting attrs==25.2.0\n  Downloading attrs-25.2.0-py3-none-any.whl.metadata (11 kB)\nDownloading attrs-25.2.0-py3-none-any.whl (64 kB)\n   \u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501\u2501 64.0/64.0 kB 1.5 MB/s eta 0:00:00\nInstalling collected packages: attrs\n  Attempting uninstall: attrs\n    Found existing installation: attrs 25.1.0\n    Uninstalling attrs-25.1.0:\n      Successfully uninstalled attrs-25.1.0\nERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.\nydb 3.18.15 requires protobuf<5.0.0,>=3.13.0, but you have protobuf 5.29.3 which is incompatible.\nSuccessfully installed attrs-25.2.0\n\n[notice] A new release of pip is available: 24.0 -> 25.0.1\n[notice] To update, run: pip install --upgrade pip\n(.venv) \u279c  airflow git:(main) \u2717 python /tmp/attrs_repro.py \nTraceback (most recent call last):\n  File \"/tmp/attrs_repro.py\", line 19, in <module>\n    dag = DAG(dag_id=\"test\")\n          ^^^^^^^^^^^^^^^^^^\nTypeError: DAG.__init__() got an unexpected keyword argument 'dag_id'\n```\n\nWalking up the stack to where the field transformer is called, I notice that base_attrs is an empty list, even though collect_mro is true. \nDebugging continues!\n\n`print(inspect.signature(DAG))`\n\nOn 24.2.0 : `(dag_id: str) -> None`\nOn 25.2.0 : `() -> None`\n\n\n\nOh, this might be part of the problem, Base.__attrs_attrs__ is empty when a field transformer is used:\n\n```python\n\nimport attrs\n\nprint(f\"{attrs.__version__=}\")\ndef _all_after_dag_id_to_kw_only(cls, fields: list[attrs.Attribute]):\n    i = iter(fields)\n    f = next(i)\n    if f.name != \"dag_id\":\n        raise RuntimeError(\"dag_id was not the first field\")\n    yield f\n\n    for f in i:\n        yield f.evolve(kw_only=True)\n\n\n@attrs.define(field_transformer=_all_after_dag_id_to_kw_only)\nclass Base:\n    dag_id: str\n    has_default: str = \"default\"\n\nprint(attrs.fields(Base))\n```\n\nPrints:\n\n```\nattrs.__version__='25.2.0'\n()\n```\n\nAhhh, got it.\n\nThe issue is that the field transformer is defined as a generator, so it's exhausted once looking for the `a.init` and `a.kw_only` args, then it's empty in the uses elsewhere in `_transform_attr` \n\n> Ahhh, got it.\n\n\ud83c\udf89\n\n> The issue is that the field transformer is defined as a generator, so it's exhausted once looking for the `a.init` and `a.kw_only` args, then it's empty in the uses elsewhere in `_transform_attr`\n\nWithout being able to look at the code: sounds like we should be able to convert it to a tuple on first use? Quick PRs with tests welcome. ;)\n\nYup, that was exactly my plan, `inspect.isgenerator()` + tuple.\n\n25.3.0 is live and I am gone",
+   "has_fence": true,
+   "pr": "https://github.com/python-attrs/attrs/pull/1417"
+  },
+  {
+   "repo": "attrs",
+   "commit": "a08bfb90ef",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "issue#1136"
+   ],
+   "body_chars": 6566,
+   "reasons": [
+    "traceback"
+   ],
+   "fetched": [
+    "issue#1136"
+   ],
+   "body_text": "Un-deprecate __version__ for now\n\nFixes #1136\n\nPackage complains about `attr.__version__` but the alternative does not work\nConsider:\r\n\r\n```python\r\n>>> import attr\r\n>>> attr.__version__\r\n<stdin>:1: DeprecationWarning: Accessing attr.__version__ is deprecated and will be removed in a future release. Use importlib.metadata directly to query for attrs's packaging metadata.\r\n'23.1.0'\r\n```\r\n\r\nBut the code wanting to get the version number from `attr` can't do this:\r\n\r\n```python\r\n>>> import importlib.metadata as M\r\n>>> M.version(\"attr\")\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"/Users/timj/work/lsstsw/miniconda/envs/lsst-scipipe-6.0.0/lib/python3.10/importlib/metadata/__init__.py\", line 996, in version\r\n    return distribution(distribution_name).version\r\n  File \"/Users/timj/work/lsstsw/miniconda/envs/lsst-scipipe-6.0.0/lib/python3.10/importlib/metadata/__init__.py\", line 969, in distribution\r\n    return Distribution.from_name(distribution_name)\r\n  File \"/Users/timj/work/lsstsw/miniconda/envs/lsst-scipipe-6.0.0/lib/python3.10/importlib/metadata/__init__.py\", line 548, in from_name\r\n    raise PackageNotFoundError(name)\r\nimportlib.metadata.PackageNotFoundError: No package metadata was found for attr\r\n```\r\n\r\nThis is fundamentally because there is no metadata for the `attr` package because it's all in the `attrs` package but the `attrs` package installs code into two separate namespaces and has no way of registering that fact with the installer.\r\n\r\nThe reason this is a problem for me is that we have some code that gathers version information for our running scientific pipeline code so that we can recreate the environment and have provenance information. The code doing this can't tell that `attr` is actually part of `attrs` and realizes that `importlib.metadata` does not work, so it falls back to `__version__`. This then results in a warning. I'm not sure what the solution is but thought I should mention the problem.\r\n\n\nHmm, how would your approach work with packages that are fundamentally named differently than the import name? Like the whole generation of packages that prepended their name with `python-` or `py`? E.g. `python-dateutil`? *attrs* is a bit special because the names are very similar, but in the end the name could be also `python-attr`\u2026\n\nWe don't know anything about PyPI distributions. We are scanning `sys.modules` and then asking the toplevel package names what their version is. We try with `__version__` and `importlib.metadata.version()` but for the case of `attr` we get a warning saying that `__version__` isn't allowed and `importlib.metadata` doesn't work either because we can't work out that `attr` has no metadata and should be looking for `attrs`. \r\n\r\nIt does sound like it's a fool's errand though. Python shifting to asking people to use `importlib.metdata.version` rather than `__version__` means there is a fundamental disconnect between versioning of a module and versioning of a package. I don't understand how `__version__` can be deprecated in this scenario. `python-dateutil` is a killer argument for `importlib.metadata` being hard to use unless you know the name of the pypi package -- how can people even work that out programmatically if all they know is that they've imported `dateutil`?\n\nIf the problem is not wanting to have to keep `__version__` updated, can you consider an alternative? In many of our packages we do something like this in the `__init__.py`:\r\n\r\n\r\n```python\r\nfrom importlib.metadata import PackageNotFoundError, version\r\n\r\n__version__: str\r\n\r\ntry:\r\n    __version__ = version(\"attrs\")\r\nexcept PacakgeNotFoundError:\r\n    # package is not installed\r\n    __version__ = \"0.0.0\"\r\n```\r\n\r\n\n\nI'm afraid you're a bit on a lost cause here, since looking at `__version__` is kinda deprecated.\r\n\r\nWhether or not _attrs_ removes it is one thing, but newer projects are less likely to have that attribute increasingly. Also how do you handle name-spaced packages like [`zope.interface`](https://pypi.org/project/zope.interface/) vs [`zope.sqlalchemy`](https://pypi.org/project/zope.sqlalchemy/)? There's a lot of sharp edges waiting for you.\r\n\r\nHave tried coming up with a solution that lists installed packages (i.e. the equivalent of `pip list`) and then inspect those? This is Python packaging, so there won't be one nice solution, but betting on `__version__` that the community is largely moving away from doesn't seem ideal.\n\nOkay. I can't find a PEP deprecating `__version__` but maybe I'm not looking in the right place. We want to know the versions of the packages we are using, not all the packages that are installed, so `pip list` isn't going to work for us. Sounds like I'm wasting my time even trying to work it out.\r\n\r\nFor namespaced packages I look for the version in `zope` first and if I find one I use that. Then if there is no version I look for the version in `zope.interface`. This seems to work reasonably well modulo the complete disconnect between PyPI package names and python modules.\n\nI'm sorry if I'm being obnoxious but the thing is: there's no PEP for `__version__` either.\r\n\r\nAs far as I know, it's mentioned en passant in PEP 8 and was part of a PEP that got ultimately rejected: https://peps.python.org/pep-0396/\r\n\r\nI'm not trying to be difficult here and postponing the removal is literally no work for me at all. It just seems to me that you're running on borrowed time here.\r\n\r\nI'll remove the `__version__` deprecation for now, but can't promise it will stay forever.\n\nThanks. I see that `pydoc` does use `__version__` to determine the version number when reporting documentation so there is still usage in python core for it.\n\n[`importlib.metadata.packages_distributions()`](https://docs.python.org/3/library/importlib.metadata.html#mapping-import-to-distribution-packages) gives you a mapping between importable modules and distribution packages.\r\n\r\nIf you have a import name and want to get the distribution package metadata (i.e. the actually versioned entity), you can use this API or its backport in [`importlib-metadata`](https://pypi.org/project/importlib-metadata/):\r\n\r\n```diff\r\n [project]\r\n ...\r\n dependencies = [\r\n+  'importlib_metadata; python_version < \"3.10\"',\r\n ]\r\n```\r\n\r\n```py\r\ntry:\r\n    from importlib.metadata import packages_distributions\r\nexcept ImportError:\r\n    from importlib_metadata import packages_distributions\r\n```\r\n\r\nAs said: `__version__` is merely a convention and not guaranteed to be there, following a certain format, be of type `str`, or in any other way usable. Don\u2019t use it.",
+   "has_fence": true
+  },
+  {
+   "repo": "attrs",
+   "commit": "a572c3a4c5",
+   "verdict": "PROSE_ONLY",
+   "sources": [],
+   "body_chars": 47,
+   "reasons": [],
+   "fetched": [],
+   "body_text": "Allow field(on_setattr=NO_OP) on frozen classes",
+   "has_fence": false
+  },
+  {
+   "repo": "click",
+   "commit": "1b0e19f505",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2972",
+    "issue#2971"
+   ],
+   "body_chars": 1496,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#2972",
+    "issue#2971"
+   ],
+   "body_text": "Add a check for if `envvar` is `None` before appending to the error hint text.\r\n\r\nfixes #2971\n\nDon't include envvar in error hint when envvar not configured\n\nError hint shows env var when one doesn't exist\n#2696 added the environment variable to the error hint when `show_envvar` is set. However, it does not check to see if an `envvar` exists.\n\nclick-test.py\n```python\nimport click\n\n@click.command()\n@click.option(\"--foo\", envvar=\"FOO\", show_envvar=True, type=click.types.BOOL)\n@click.option(\"--bar\", show_envvar=True, type=click.types.INT)\ndef main(foo: bool, bar: int) -> None:\n    print(f\"{foo=} {bar=}\")\n\nif __name__ == '__main__':\n    main()\n```\n\nExamples of running this file where each argument is invalid. And one example of the help output.\n```\n$ python ./click-test.py --bar aaa\nUsage: click-test.py [OPTIONS]\nTry 'click-test.py --help' for help.\n\nError: Invalid value for '--bar' (env var: 'None'): 'aaa' is not a valid integer.\n$ python ./click-test.py --foo aaa\nUsage: click-test.py [OPTIONS]\nTry 'click-test.py --help' for help.\n\nError: Invalid value for '--foo' (env var: 'FOO'): 'aaa' is not a valid boolean.\n$ python ./click-test.py --help\nUsage: click-test.py [OPTIONS]\n\nOptions:\n  --foo BOOLEAN  [env var: FOO]\n  --bar INTEGER\n  --help         Show this message and exit.\n```\n\nI would expect the error hint for `--bar` to act like the help output by not displaying any information about an environment variable.\n\nEnvironment:\n\n- Python version: 3.10.12\n- Click version: 8.2.1\n",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2972"
+  },
+  {
+   "repo": "click",
+   "commit": "3f91d2154e",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2728",
+    "issue#2697"
+   ],
+   "body_chars": 1493,
+   "reasons": [
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#2728",
+    "issue#2697"
+   ],
+   "body_text": "Fixes an issue where an invalid `click.Path` parameter, which contains a `\\n`, will result in an error that prints out on multiple lines.\r\n\r\nfixes #2697\r\n\n\nPrevent multiline error message on invalid path\n\nBroken message about invalid argument value for template \"File ... is a directory\"\n**User Actions**\r\n```sh\r\nmkdir $'my\\ndir'\r\nmy-tool $'my\\ndir'\r\n```\r\n\r\n**Expected Output**\r\n```\r\nInvalid value for 'PATH': File 'my\\ndir' is a directory.\r\n```\r\n\r\n\r\n**Actual Output**\r\n```\r\nInvalid value for 'PATH': File 'my\r\ndir' is a directory.\r\n```\r\n\r\n\r\n**Code**\r\n```python\r\nfrom pathlib import Path\r\nfrom typing import Annotated\r\n\r\nimport typer\r\n\r\n\r\ndef main(path: Annotated[Path, typer.Argument(dir_okay=False)]) -> None:\r\n    pass\r\n\r\n\r\nif __name__ == '__main__':\r\n    typer.run(main)\r\n```\r\n\r\n**Cause**\r\nYou clearly forgot `!r` on [this](https://github.com/pallets/click/blob/f8857cb03268b5b952b88b2acb3e11d9f0f7b6e4/src/click/types.py#L896) line and are using quotes instead.\r\n\r\nJust compare these lines in [click.types](https://github.com/pallets/click/blob/f8857cb03268b5b952b88b2acb3e11d9f0f7b6e4/src/click/types.py#L870-L928):\r\n```python\r\n_(\"{name} {filename!r} does not exist.\").format(\r\n_(\"{name} {filename!r} is a file.\").format(\r\n_(\"{name} '{filename}' is a directory.\").format(\r\n_(\"{name} {filename!r} is not readable.\").format(\r\n_(\"{name} {filename!r} is not writable.\").format(\r\n_(\"{name} {filename!r} is not executable.\").format(\r\n```\r\n\n\nI'm going to work on this at the PyCon 2024 sprints.",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2728"
+  },
+  {
+   "repo": "click",
+   "commit": "40830087dd",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1990",
+    "issue#1978"
+   ],
+   "body_chars": 1251,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1990",
+    "issue#1978"
+   ],
+   "body_text": "- fixes #1978. Feel like the best way to resolve is to _not_ set a \"required\" flag to False if not present\r\n\r\nChecklist:\r\n\r\n- [x] Add tests that demonstrate the correct behavior of the change. Tests should fail without the change.\r\n- [ ] Add or update relevant docs, in the docs folder and in code.\r\n- [x] Add an entry in `CHANGES.rst` summarizing the change and linking to the issue.\r\n- [ ] Add `.. versionchanged::` entries in any relevant code docs.\r\n- [x] Run `pre-commit` hooks and fix any issues.\r\n- [x] Run `pytest` and `tox`, no tests failed.\r\n\n\nenforce required flag\n\n`required=True` does not work for flags\nWhen using a flag option, setting `required=True` has no effect unless I also include `default=None`. I would expect there to be no default if the flag is required.\r\n\r\n\r\n**Steps to reproduce:**\r\n```\r\nimport click\r\n\r\n@click.command()\r\n@click.option('--foo/--no_foo', is_flag=True, required=True)\r\ndef bar(foo):\r\n    pass\r\n\r\nif __name__ == '__main__':\r\n    bar()\r\n\r\n```\r\n\r\n`python test.py` runs without raising an error.\r\n\r\nI would expect `python test.py` to raise:\r\n```\r\nUsage: test.py [OPTIONS]\r\nTry 'test.py --help' for help.\r\n\r\nError: Missing option '--foo'.\r\n```\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.9.5\r\n- Click version: 8.0.1\r\n",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1990"
+  },
+  {
+   "repo": "click",
+   "commit": "42ee8a1f60",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1551"
+   ],
+   "body_chars": 3024,
+   "reasons": [
+    "traceback",
+    "assertion",
+    "call"
+   ],
+   "fetched": [
+    "pr#1551"
+   ],
+   "body_text": "Hi,\r\n\r\nI have encountered an issue when using a Command object without any options.\r\nAs I wanted to prevent the '[OPTION]' from appearing in the Usage line, I tried to set the options_metavar parameter to None but got an exception.\r\n\r\nI also tried to set it as an empty string rather than None, there's no exception then but the behavior isn't perfect neither as it prints a double space in the Usage row (the double space is between the filename and the argument)\r\n\r\nHere's a code snippet to reproduce the issue with None\r\n\r\n```python\r\n@click.command(\"foo\", options_metavar=None)\r\n@click.argument(\"bar\")\r\ndef cli():\r\n    pass\r\n```\r\n\r\n### Expected Behavior\r\nRunning the above, I expected to see\r\n```bash\r\n$ python foobar.py --help\r\nUsage: foobar.py BAR\r\n\r\nOptions:\r\n  --help  Show this message and exit.\r\n```\r\n\r\n### Actual Behavior\r\nAn error is raised as the formatter was expecting a string instead of a None.\r\n\r\n```pytb\r\nTraceback (most recent call last):\r\n  File \"foobar.py\", line 8, in <module>\r\n    cli()\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 829, in __call__\r\n    return self.main(*args, **kwargs)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 781, in main\r\n    with self.make_context(prog_name, args, **extra) as ctx:\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 700, in make_context\r\n    self.parse_args(ctx, args)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 1048, in parse_args\r\n    value, args = param.handle_parse_result(ctx, opts, args)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 1630, in handle_parse_result\r\n    value = invoke_param_callback(self.callback, ctx, self, value)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 123, in invoke_param_callback\r\n    return callback(ctx, param, value)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 950, in show_help\r\n    echo(ctx.get_help(), color=ctx.color)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 570, in get_help\r\n    return self.command.get_help(self)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 975, in get_help\r\n    self.format_help(ctx, formatter)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 1001, in format_help\r\n    self.format_usage(ctx, formatter)\r\n  File \"/home/romain/projects/apps/myprss/.venv/lib/python3.7/site-packages/click/core.py\", line 923, in format_usage\r\n    formatter.write_usage(ctx.command_path, \" \".join(pieces))\r\nTypeError: sequence item 0: expected str instance, NoneType found\r\n```\r\n\r\n### Environment\r\n\r\n* Python version: 3.7.4\r\n* Click version: 7.1.2\r\n\n\nfix formatting with empty options_metavar",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1551"
+  },
+  {
+   "repo": "click",
+   "commit": "4a337ea913",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1615",
+    "issue#1422"
+   ],
+   "body_chars": 2039,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1615",
+    "issue#1422"
+   ],
+   "body_text": "Fixes #1422 \n\nuse canonical command name instead of matched name\n\nGenerated help with aliased group shows abbreviated command in usage\nThe typical AliasGroup class overrides the get_command method and returns a matching sub command; however, when help is displayed, the usage information shows the matched abbreviated subcommand instead of the full subcommand name. After debugging, I found that the context.info_name contains the the abbreviated sub command name. I think when a sub-command context is being created, it should use the full command name for this field rather than what the user typed.\n\nI believe line 1280 in core.py should be:\r\n\r\n        return cmd.name, cmd, args[1:]\r\n\r\ninstead of:\r\n\r\n        return cmd_name, cmd, args[1:]\r\n\n\nIn an attempt to reproduce this issue, I have tried the following example:\r\n``` python\r\n# main.py\r\nclass AliasedGroup(click.Group):\r\n    def get_command(self, ctx, cmd_name):\r\n        rv = click.Group.get_command(self, ctx, cmd_name)\r\n        if rv is not None:\r\n            return rv\r\n        matches = [x for x in self.list_commands(ctx)\r\n                   if x.startswith(cmd_name)]\r\n        if not matches:\r\n            return None\r\n        elif len(matches) == 1:\r\n            return click.Group.get_command(self, ctx, matches[0])\r\n        ctx.fail('Too many matches: %s' % ', '.join(sorted(matches)))\r\n\r\n@click.command(cls=AliasedGroup)\r\ndef cli():\r\n    pass\r\n@cli.command()\r\ndef push():\r\n    click.echo('this is push')\r\n@cli.command()\r\ndef pop():\r\n    click.echo('this is pop')\r\n\r\nif __name__ == '__main__':\r\n    cli()\r\n```\r\n``` bash\r\n$ python main.py pu --help\r\nUsage: main.py push [OPTIONS]\r\n\r\nOptions:\r\n  --help  Show this message and exit.\r\n```\r\nBased on the above input/output, I am getting the full name of the `push` subcommand in the Usage part. Therefore, I was not able to reproduce the issue, @davidism. \n\nAfter triple checking, the example does reproduce the issue, there was some confusion over a few things being worked on at the same time.\n\nReverted in #1915, see #1895",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/1615"
+  },
+  {
+   "repo": "click",
+   "commit": "bf1e8be90c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2730",
+    "issue#2632"
+   ],
+   "body_chars": 3564,
+   "reasons": [
+    "call",
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#2730",
+    "issue#2632"
+   ],
+   "body_text": "In latest main, when a flag option is used with `show_default=True` and a `default_map` is passed, `--help` shows the default value in the decorator and not the value in the default map.\r\n\r\nThis PR does two things:\r\n\r\n- Adds unit tests to demonstrate the bug\r\n- Removes the bug from core\r\n\r\nfixes #2632\r\n\n\nshow correct value for flag default when using default_map\n\nFlag option with secondary opts: show_default=True does not show value from default_map in \"help\" output\nI'm setting the `default_map` from a config file, and it seems the values from the `default_map` are not correctly shown in the `--help` output if I set `show_default=True` on my option.\r\n\r\nMy Option looks like this:\r\n\r\n```python\r\n@click.option(\r\n    \"--long/--short\",\r\n    \"-l/-s\",\r\n    is_flag=True,\r\n    show_default=True,\r\n    help=\"show additional information like size and creation date\",\r\n)\r\n```\r\n\r\nI initialize the `default_map` with a custom command class that I attach via the `@click.command` decorator like this `@click.command(cls=ConfigAwareCommand)`\r\n\r\n```python\r\nfrom click import Command as _Command\r\n\r\n\r\nclass ConfigAwareCommand(_Command):\r\n    def __init__(self, *args, **kwargs):\r\n        kwargs[\"context_settings\"] = {\r\n            \"default_map\": CONFIG.get_cli_command_defaults(kwargs[\"name\"])\r\n        }\r\n        super().__init__(*args, **kwargs)\r\n\r\n```\r\n\r\nThe `default_map` value is in my example `{'long': True}`. In the `--help` output, the default value is shown like this\r\n\r\n```\r\n  -l, --long / -s, --short        show additional information like size and\r\n                                  creation date  [default: short]\r\n```\r\n\r\nWhen executing the command, the default value from the `default_map` is used correctly (`long` defaults to `True`).\r\n\r\nDuring debugging, I might have found the culprit inside [src/click/core.py](https://github.com/pallets/click/blob/main/src/click/core.py#L2746)\r\n\r\n```python\r\n            elif self.is_bool_flag and self.secondary_opts:\r\n                # For boolean flags that have distinct True/False opts,\r\n                # use the opt without prefix instead of the value.\r\n                default_string = _split_opt(\r\n                    (self.opts if self.default else self.secondary_opts)[0]\r\n                )[1]\r\n```\r\n\r\nAs you can see, `self.default` is used instead of the `default_value` variable that is initialized [further above](https://github.com/pallets/click/blob/main/src/click/core.py#L2720) this code snippet.\r\n\r\nIf I change the part of the code above and use `default_value` instead of `self.default` the help output shows the correct default values from the `default_map`.\r\n\r\n```python\r\n            elif self.is_bool_flag and self.secondary_opts:\r\n                # For boolean flags that have distinct True/False opts,\r\n                # use the opt without prefix instead of the value.\r\n                default_string = _split_opt(\r\n                    (self.opts if default_value else self.secondary_opts)[0]\r\n                )[1]\r\n```\r\n\r\nI am not sure if I do something wrong or if this is indeed a bug.\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.10.12\r\n- Click version: 8.1.7\r\n\n\nHi, I'm at PyCon 2024 and picked up this issue.  I wrote a unit tests to re-produce this issue and I believe this is a bug in latest main.  I also think the OP is correct about what is causing it, when I replace `self.default` with `default_value` in this line of `core.py` the tests pass: https://github.com/pallets/click/blob/9f63c3b477d444245b0cc21ac23c28f6e8f4c385/src/click/core.py#L2725\n\n@aenglander please review.  Thanks!",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/2730"
+  },
+  {
+   "repo": "click",
+   "commit": "d340b0c120",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#3299",
+    "issue#3298"
+   ],
+   "body_chars": 2570,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#3299",
+    "issue#3298"
+   ],
+   "body_text": "Fix #3298 by checking against a speculative empty string.\r\n\r\nThat not unreasonable given the hard-coded nature of the empty string.\n\nFix speculative speculative empty string check\n\nCloses #3298\n\nsemver.Version as default causing an error\nAny instance of `semver.Version` set as `default` in an option will lead to an error when Click tries to show it in the help text.\nThe problem seems to be that `Version` allows comparison to strings, and Click, when building the help text, tries to check the default value against an empty string `\"\"`, which cannot be parsed by `semver.Version`:\n\n```\n  File \".venv/lib/python3.12/site-packages/click/core.py\", line 3091, in get_help_extra\n    elif default_value == \"\":\n         ^^^^^^^^^^^^^^^^^^^\n  File \".venv/lib/python3.12/site-packages/semver/version.py\", line 52, in wrapper\n    return operator(self, other)\n           ^^^^^^^^^^^^^^^^^^^^^\n  File \".venv/lib/python3.12/site-packages/semver/version.py\", line 467, in __eq__\n    return self.compare(other) == 0\n           ^^^^^^^^^^^^^^^^^^^\n  File \".venv/lib/python3.12/site-packages/semver/version.py\", line 394, in compare\n    other = cls.parse(other)\n            ^^^^^^^^^^^^^^^^\n  File \".venv/lib/python3.12/site-packages/semver/version.py\", line 644, in parse\n    raise ValueError(f\"{version} is not valid SemVer string\")\nValueError:  is not valid SemVer string\n```\n\nThis can be replicated with the following code by trying to print the help text:\n\n<details>\n\n```python\nimport click\nfrom semver import Version\n\n\nclass SemverType(click.ParamType):\n    name = \"semver\"\n\n    def convert(self, value: str | Version, param: click.Parameter | None, ctx: click.Context | None) -> Version:\n        if isinstance(value, Version):\n            return value\n\n        try:\n            return Version.parse(value)\n        except ValueError as e:\n            raise self.fail(str(e), param, ctx) from e\n\n\n@click.command()\n@click.option(\n    \"--version\",\n    type=SemverType(),\n    default=Version(1, 0, 0),\n    show_default=True,\n)\ndef cli(version: Version | None) -> None:\n    print(version)\n\n\nif __name__ == \"__main__\":\n    cli()\n```\n\n</details>\n\nBy quickly inspecting the code, I'd say this could be fixed by checking whether `default_value` is actually a string before comparing it to `\"\"`. \n\nEnvironment:\n\n- Python version: 3.12\n- Click version: 8.3.1\n- semver version: 3.0.4\n\n\nThat's not unreasonable, as the empty string check is indeed a bit brutal. I am exploring the consequences at: https://github.com/pallets/click/pull/3299\n\nGood to see there is already an open PR for it! ",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/click/pull/3299"
+  },
+  {
+   "repo": "httpx",
+   "commit": "e63b6594f2",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2886"
+   ],
+   "body_chars": 783,
+   "reasons": [],
+   "fetched": [
+    "pr#2886"
+   ],
+   "body_text": "# Summary\r\n\r\nThe ``encode_host`` method used the regular expression in the variable IPv4_STYLE_HOSTNAME. This was before:\r\n``r\"^[0-9]+.[0-9]+.[0-9]+.[0-9]+$\"`` which wrongly allows hostnames like ``023b76x43144`` to pas as a ipv4 address. This is now fixed by changed the url to ``r\"^[0-9]+\\.[0-9]+\\.[0-9]+\\.[0-9]+$\"``\r\n\r\n# Checklist\r\n\r\n- [x] I understand that this PR may be closed in case there was no previous discussion. (This doesn't apply to typos!)\r\n- [x] I've added a test for each change that was introduced, and I tried as much as possible to make a single atomic change.\r\n- [ ] I've updated the documentation accordingly.: Not applicable IMHO\r\n\n\nFix encode host (#2886)\n\n* Fix requiring dot literal rather than any character in IPv4\r\n\r\n* Add check to prevent future errors",
+   "has_fence": false,
+   "pr": "https://github.com/encode/httpx/pull/2886"
+  },
+  {
+   "repo": "jinja",
+   "commit": "2eb4542cba",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1984",
+    "issue#1921"
+   ],
+   "body_chars": 7138,
+   "reasons": [
+    "traceback",
+    "call"
+   ],
+   "fetched": [
+    "pr#1984",
+    "issue#1921"
+   ],
+   "body_text": "What was done:\r\n\r\n- handle the case where a string passed to the int filter would cause an OverflowError when float() is called. E.g. `'1e100000`. \r\n- add a new test case to `test_int()`\r\n- add entry in CHANGES.rst\r\n\r\nfixes #1921 \r\n\n\nint filter handles OverflowError to handle scientific notation\n\nThe `int` filter throws `OverflowError` when the incoming string looks like scientific notation\nSo I'm using the `int` filter with a default of `None` to filter out list items that look like numbers. It worked with the test data but broke as I tried to use it for more.\r\n\r\nHaving `{{ '31e1170' | int }}` should be the minimum repro. And adding any non-default `base` will probably yield the same behavior.\r\n\r\nContext: I'm improving a Towncrier template to allow for non-number references (such as commit messages) to be used (and linked) in changelogs. For this, I need to extract parts of the original list of things (that come from filenames \u2014 this is a part of the Towncrier logic; it's non-customizable) into separate lists \u2014 integers (PR/issue numbers), commits (strings of length 7, 8 or 40 that only have chars from the range `[0-9a-f]`) and the rest.\r\nTo perform the first filtering step, I use `| map('int', default=None) | select('integer') | map('string')`, basically turning everything non-integer into `None` and rejecting later in the chain.\r\nThen, I reject the found numbers from the original list, and attempt checking the items for length and using the same `int` filter but with `base=16` to get things that look like commits, I put them into their own list and add the rest to yet another one.\r\nAfter that, I can render those separately.\r\n\r\nMy test filenames looked differently, which is why I didn't initially catch the problem. It was luck that allowed me to stumble on this bug. I was confused at first, but then I realized that `<integer>E<integer>` is a scientific notation. When I checked the source @ https://github.com/pallets/jinja/blob/d594969/src/jinja2/filters.py#L961, it became clear whether the problem is coming from:\r\n```pycon\r\n>>> float('31e1170')\r\ninf\r\n```\r\n\r\nOh, and the traceback is:\r\n```python-traceback\r\nTraceback (most recent call last):\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 955, in do_int\r\n    return int(value, base)\r\nValueError: invalid literal for int() with base 10: '31e1170'\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/runpy.py\", line 194, in _run_module_as_main\r\n    return _run_code(code, main_globals, None,\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/runpy.py\", line 87, in _run_code\r\n    exec(code, run_globals)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/towncrier/__main__.py\", line 6, in <module>\r\n    cli()\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/click/core.py\", line 1157, in __call__\r\n    return self.main(*args, **kwargs)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/click/core.py\", line 1078, in main\r\n    rv = self.invoke(ctx)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/click/core.py\", line 1688, in invoke\r\n    return _process_result(sub_ctx.command.invoke(sub_ctx))\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/click/core.py\", line 1434, in invoke\r\n    return ctx.invoke(self.callback, **ctx.params)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/click/core.py\", line 783, in invoke\r\n    return __callback(*args, **kwargs)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/towncrier/build.py\", line 123, in _main\r\n    return __main(\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/towncrier/build.py\", line 234, in __main\r\n    rendered = render_fragments(\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/towncrier/_builder.py\", line 303, in render_fragments\r\n    res = jinja_template.render(\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py\", line 1301, in render\r\n    self.environment.handle_exception()\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py\", line 936, in handle_exception\r\n    raise rewrite_traceback_stack(source=source)\r\n  File \"<template>\", line 18, in top-level template code\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/async_utils.py\", line 45, in wrapper\r\n    return normal_func(*args, **kwargs)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 1324, in sync_do_list\r\n    return list(value)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 1467, in sync_do_map\r\n    for item in value:\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 1764, in select_or_reject\r\n    for item in value:\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 1468, in sync_do_map\r\n    yield func(item)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 1712, in func\r\n    return context.environment.call_filter(\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py\", line 564, in call_filter\r\n    return self._filter_test_common(\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/environment.py\", line 545, in _filter_test_common\r\n    return func(*args, **kwargs)\r\n  File \"/opt/hostedtoolcache/Python/3.8.18/x64/lib/python3.8/site-packages/jinja2/filters.py\", line 961, in do_int\r\n    return int(float(value))\r\nOverflowError: cannot convert float infinity to integer\r\n```\r\n_(https://github.com/aio-libs/multidict/actions/runs/7360938745/job/20037695667#step:8:103)_\r\n\r\nThis is the template change for more context: https://github.com/aio-libs/multidict/commit/946e61a5410524fe2572ffa94cc22369cdf84a58#diff-6b766c7833e9e98b72d0413f3b72569683a45bed7406bd31900466a8704205e5R19\r\n\r\nSolution?\r\nI think that it should be either adding `OverflowError` to the exceptions in the inner try-except here https://github.com/pallets/jinja/blob/d594969/src/jinja2/filters.py#L962 or having `if base != 10: return default` right before that inner try-except.\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.8.18 (which shouldn't matter)\r\n- Jinja version: unclear from the logs, likely the last one on PyPI as of today \u2014 it seems like the implementation on the current `main` has this bug, anyway\n\n@davidism do you think this might deserve a `bug` label?\n\nWe don't use those labels. Either it's a bug or a feature, and that's obvious from their description and milestone when assigned. \n\nAh, I see. I just saw that some issues are labeled and it confused me: https://github.com/pallets/jinja/labels/bug.\n\nI am working on this at the Pycon 2024 sprints",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/jinja/pull/1984"
+  },
+  {
+   "repo": "jinja",
+   "commit": "d05bd3858c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1762",
+    "issue#1624"
+   ],
+   "body_chars": 1707,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1762",
+    "issue#1624"
+   ],
+   "body_text": "This bugfix allows `pass_context` to be used by tests in combination with `select`, which was previously failing because `select` did not pass the context object, and thus the context would remain `None`. \r\n\r\nFixes #1624.\r\n\r\nRegarding the request for updating `CHANGES.rst`: should I add a new version number (i.e. 3.1.3) to the document for this bugfix? I'm assuming that `3.1.x` is the correct target branch for this PR, but I wasn't entirely sure.\r\n\r\nChecklist:\r\n\r\n- [x] Add tests that demonstrate the correct behavior of the change. Tests should fail without the change.\r\n- [x] Add or update relevant docs, in the docs folder and in code.\r\n- [ ] Add an entry in `CHANGES.rst` summarizing the change and linking to the issue.\r\n- [ ] Add `.. versionchanged::` entries in any relevant code docs.\r\n- [x] Run `pre-commit` hooks and fix any issues.\r\n- [x] Run `pytest` and `tox`, no tests failed.\r\n\n\nPass context when using select\n\nCan't use a test decorated with `@pass_context` in `select`\nWhen used from `select`, tests that are decorated with `@pass_context` fail with the error:\r\n\r\n> jinja2.exceptions.TemplateRuntimeError: Attempted to invoke a context test without context.\r\n\r\nFor example:\r\n\r\n```python\r\nfrom jinja2 import Environment, pass_context\r\n\r\ndef main():\r\n    env = Environment()\r\n    env.tests[\"foo\"] = is_foo\r\n    output = env.from_string(\"\"\"\r\n\r\n    works: {{ \"foo\" is foo }}\r\n\r\n    {%- for x in [\"one\", \"foo\" ] | select(\"foo\") %}\r\n    fails: {{ x }}\r\n    {%- endfor %}\r\n\r\n    \"\"\").render({})\r\n    print(output)\r\n\r\n\r\n@pass_context\r\ndef is_foo(ctx, s):\r\n    return s == \"foo\"\r\n\r\n\r\nif __name__ == \"__main__\":\r\n    main()\r\n```\r\n\r\nEnvironment:\r\n\r\n- Python version: 3.10\r\n- Jinja version: 3.0.3\r\n",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/jinja/pull/1762"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "62411c1618",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#412",
+    "issue#409"
+   ],
+   "body_chars": 1455,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#412",
+    "issue#409"
+   ],
+   "body_text": "`spy` returns an list and an iterable, part of which contains all\r\nelements of the list. The problem was the iterable contained the\r\nlist within and changing the list changed the iterable.\r\n\r\nThis commit decouples the iterable from returned list and that\r\nmakes it immutable.\r\n\r\nfixes #409\n\nFix spy to make returned iterable immutable\n\n`spy` returns an list and an iterable, part of which contains all\nelements of the list. The problem was the iterable contained the\nlist within and changing the list changed the iterable.\n\nThis commit decouples the iterable from returned list and that\nmakes it immutable.\n\nfixes #409\n\nspy: changing the result list changes the returned iterable\nChanging the result list of `spy` also alters the iterable.\r\n\r\n```python\r\nIn [1]: from more_itertools import spy\r\n\r\nIn [2]: it = range(10)\r\n\r\nIn [3]: head, it = spy(it, 3)\r\n\r\nIn [4]: head[1] = 'bad'\r\n\r\nIn [5]: list(it)\r\nOut[5]: [0, 'bad', 2, 3, 4, 5, 6, 7, 8, 9]\r\n```\r\n\r\n I think it is a case of implementation details leaking out.\n\n> I think it is a case of implementation details leaking out.\r\n\r\nI think you're right - would you rather see this called out in docs, or return `head.copy()` [here](https://github.com/more-itertools/more-itertools/blob/d6e773411087fa494991d7a8ad81e6a9ad5ddd56/more_itertools/more.py#L932)?\n\nAs it is a simple fix, I think returning `head.copy()` is the better option.\n\nAre you up for making a PR with that change, plus a test?\n\nI'll make one.",
+   "has_fence": true,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/412"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "71e070b35d",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1311"
+   ],
+   "body_chars": 851,
+   "reasons": [],
+   "fetched": [
+    "pr#1311"
+   ],
+   "body_text": "### Issue reference\nno issue, trivial bug. same fix as #1309, applied to `all_unique`.\n\n### Changes\n`all_unique` applies the key with `map(key, iterable) if key else iterable`, so a falsey callable (e.g. one whose `__bool__` returns false) is silently ignored. it now checks `key is not None`, like the other `key` functions in `more.py`.\n\n- regression test with a falsey key\n- changelog entry under unreleased\n\n### Checks and tests\n- new test fails without the fix (`True != False`) and passes with it\n- `python -m unittest`: 934 tests ok\n- `ruff format --check .` and `ruff check more_itertools tests`: clean\n\n\nfix: honour a falsey key in all_unique\n\nall_unique applied the key with `map(key, iterable) if key else iterable`, so a falsey callable was silently ignored. it now checks `key is not None` like the other key functions, same fix as #1309.",
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1311"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "b0aa91efbb",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1117"
+   ],
+   "body_chars": 98,
+   "reasons": [],
+   "fetched": [
+    "pr#1117"
+   ],
+   "body_text": "The `repeat` keyword argument should be usable with iterator inputs.\n\nFix random_product() as well",
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1117"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "cca32949f1",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#1028",
+    "issue#1001"
+   ],
+   "body_chars": 1962,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#1028",
+    "issue#1001"
+   ],
+   "body_text": "Fixes #1001 by swapping `hasattr` with `getattr`.\r\n\r\nWe might consider a stronger check that `iterable.__reversed__` is callable, but that seems unnecessary given expected usage.\n\nfix last() when __reversed__ is None\n\nlast() fails if __reversed__ is None, which is the case for the Mapping abc\nUsing `last()` on this class:\n```\nfrom collections.abc import Mapping\nfrom more_itertools import last\nclass MyMapping(Mapping):\n    def __getitem__(self, key):\n        return 1\n    def __iter__(self):\n        return iter([1])\n    def __len__(self):\n        return 1\n\nprint(last(iter(MyMapping())))\nlast(MyMapping())\n```\n\nfails with:\n```\nTraceback (most recent call last):\n  File \"/nix/store/q3zqcqwmybfda7895g91d75pzbaqj6s5-python3-3.9.20-env/lib/python3.9/site-packages/more_itertools/more.py\", line 271, in last\n    return next(reversed(iterable))\nTypeError: 'MyMapping' object is not reversible\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/ibriquem/ws/pyshl/repro.py\", line 12, in <module>\n    last(MyMapping())\n  File \"/nix/store/q3zqcqwmybfda7895g91d75pzbaqj6s5-python3-3.9.20-env/lib/python3.9/site-packages/more_itertools/more.py\", line 275, in last\n    raise ValueError(\nValueError: last() was called on an empty iterable, and no default value was provided.\n```\n\nWhile it works if you first call `iter()` on the object.\n\nThis is because `__reversed__` is set to None by the Mapping base class:\nhttps://github.com/python/cpython/blob/4f28afe5456d8ed4a6fe0099337487043e29c912/Lib/_collections_abc.py#L792\n\nI'd expect it to work.\n\nMaybe [this code](https://github.com/more-itertools/more-itertools/blob/569e0ad654a85c77581b318305edc2eb7c4068ae/more_itertools/more.py#L274) could be changed from:\n```\nif hasattr(iterable, '__reversed__'):\n```\nto:\n```\nif getattr(iterable, '__reversed__', None) is not None:\n```\n\n\nI accept a PR that implements this change and a test - thanks for the report!",
+   "has_fence": true,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/1028"
+  },
+  {
+   "repo": "more-itertools",
+   "commit": "d3665d6ba2",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#373"
+   ],
+   "body_chars": 155,
+   "reasons": [],
+   "fetched": [
+    "pr#373"
+   ],
+   "body_text": "This is https://github.com/erikrose/more-itertools/pull/372 with the tests modified such that they don't pull in numpy.\n\nMake sliced work with numpy arrays",
+   "has_fence": false,
+   "pr": "https://github.com/more-itertools/more-itertools/pull/373"
+  },
+  {
+   "repo": "packaging",
+   "commit": "0625596e50",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1427"
+   ],
+   "body_chars": 3885,
+   "reasons": [
+    "call",
+    "call"
+   ],
+   "fetched": [
+    "pr#1427"
+   ],
+   "body_text": "`_build_tag_regex` in `src/packaging/utils.py` is not anchored, and `.` does not match a newline, so a build part containing a newline matches with its suffix silently truncated:\n\n```python\n>>> parse_wheel_filename(\"foo-1.0-1\\nabc-py3-none-any.whl\")\n# build == (1, \"\")      <- \"abc\" discarded, no error\n```\n\n`parse_wheel_filename` only checks that the regex matched, so a truncated build tag is indistinguishable from a valid one \u2014 the returned tag does not describe the file. PEP 427 escapes every component with `re.sub(\"[^\\w\\d.]+\", \"_\", component)`, so a newline cannot legitimately occur in a build tag.\n\n**This is the same defect #1341 fixed for the name component of this same function**, where `_wheel_name_regex` went from `$` to `\\Z`. The build tag was left unanchored, which leaves the function internally inconsistent: I checked all eleven line boundaries (`\\n \\r \\r\\n \\v \\f \\x1c \\x1d \\x1e \\x85 \\u2028 \\u2029`) against each position, and the name and version positions reject every one of them, while the build position accepts `1\\n` and returns `(1, \"\")`. So I am framing this as finishing #1341 rather than as a new issue \u2014 happy for it to be closed as a duplicate if that reads better to you.\n\nAnchoring with `\\Z` cannot reject anything that was previously rejected: a leading-newline variant such as `a\\n1` was already refused, because `\\d+` cannot match `a`.\n\nThe two new cases go into the existing `test_parse_wheel_filename` invalid list. On the base commit:\n\n```\n$ pytest tests/test_utils.py -q -k parse_wheel_invalid_filename\n>       with pytest.raises(InvalidWheelFilename):\nE       Failed: DID NOT RAISE InvalidWheelFilename\nfilename   = 'foo-1.0-1\\nabc-py3-none-any.whl'\n2 failed, 14 passed, 63 deselected\n```\n\nWith the patch:\n\n- `tests/test_utils.py` \u2014 79 passed\n- `pytest tests/` \u2014 62436 passed, 1 skipped (Linux-only)\n- `ruff check` / `ruff format --check` clean on both files\n- `src/packaging/utils.py` stays at 100% statement and branch coverage; the change adds no new line and the test reuses the existing raise path\n\nTwo things I deliberately left alone:\n\n- **`\\r` and the other line boundaries are still accepted** in the build suffix \u2014 they are *kept*, not dropped (`build=(1, '\\rabc')`). The thorough fix is to require the suffix to match PEP 427's `[\\w\\d.]` escape class like the name does, but that is a behavior change beyond a bug fix, so I think it belongs in an issue rather than here.\n- **No `docs/versionhistory.rst` entry.** `docs/development/submitting-patches.rst` says fixes \"are usually batched to :doc:`/changelog` before release based on PRs\", and the entries under `**UNRELEASED**` credit authors as \"PR by @\u2026\" in maintainer-written batches. Say the word if you would rather have it in the PR.\n\n\nfix: anchor the wheel build tag regex to the end of the part (#1427)\n\n* fix: anchor the wheel build tag regex to the end of the part\n\n_build_tag_regex was unanchored, and '.' does not match a newline, so a\nbuild part like '1\\nabc' matched with the suffix silently cut at the\nnewline: parse_wheel_filename() returned build=(1, '') for\n'foo-1.0-1\\nabc-py3-none-any.whl' and discarded the rest of the part\nwithout raising. The caller only checks that the regex matched, so a\ntruncated build tag is indistinguishable from a valid one.\n\nThis is the same defect class that #1341 fixed for the name component of\nthe same function, where _wheel_name_regex was changed from '$' to '\\Z';\nthe build tag was left unanchored. Anchoring it makes the two components\nconsistent, and the name and version positions already reject every line\nboundary.\n\nCo-Authored-By: opencode <opencode@users.noreply.github.com>\n\n* Apply batched suggestions from code review\n\nCo-authored-by: Henry Schreiner <HenrySchreinerIII@gmail.com>\n\n---------\n\nCo-authored-by: opencode <opencode@users.noreply.github.com>\nCo-authored-by: Henry Schreiner <HenrySchreinerIII@gmail.com>",
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/1427"
+  },
+  {
+   "repo": "packaging",
+   "commit": "08bb047794",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1218"
+   ],
+   "body_chars": 518,
+   "reasons": [],
+   "fetched": [
+    "pr#1218"
+   ],
+   "body_text": "When calling `DirectUrl.to_dict()`, the user and password are stripped from the url:\r\n```python\r\n\"https://user:pass@example.com/repo.git\"\r\n# becomes\r\n\"https://example.com/repo.git\"\r\n```\r\n\r\nHowever, since it does it by calling `split` on the `@` symbol, this might happen:\r\n```python\r\n\"https://user:p@ss@example.com/repo.git\"\r\n# becomes\r\n\"https://ss@example.com/repo.git\"\r\n```\r\n\r\nThis PR fixes that by calling `rsplit()` instead of `split()`\r\n\r\ncc @miketheman \n\nfix: DirectUrl auth stripping with @ in passwords (#1218)",
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/1218"
+  },
+  {
+   "repo": "packaging",
+   "commit": "189a76d54d",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1345"
+   ],
+   "body_chars": 716,
+   "reasons": [],
+   "fetched": [
+    "pr#1345"
+   ],
+   "body_text": "## Summary\n\n- require the shared `Requirement` and `Marker` tokenizer to match the true end of input\n- cover trailing line breaks while preserving trailing horizontal whitespace\n\n## Rationale\n\nPython's `$` anchor also matches immediately before one final newline, so otherwise complete requirements and markers could silently accept an LF suffix. Using `\\Z` makes the tokenizer's existing `END` rule unambiguous and follows the strict-anchor correction made for wheel names in #1341.\n\n## Verification\n\n- `uv run --group test pytest tests/test_markers.py tests/test_requirements.py -q` - 7,638 passed\n- Ruff check and format check on changed files\n- `git diff --check`\n\n\nfix(parser): require true end of input (#1345)",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1345"
+  },
+  {
+   "repo": "packaging",
+   "commit": "258202ed7f",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#925"
+   ],
+   "body_chars": 772,
+   "reasons": [],
+   "fetched": [
+    "pr#925"
+   ],
+   "body_text": "The current regex permits strings that end in the newline character, which is counter to what the description for the field states (\"ASCII letters and numbers, period, underscore and hyphen\").\r\n\r\nThis updates the regex to use `\\Z` instead of `$` to match at the end of the string and exclude newline characters.\r\n\r\nCorresponding update to the spec is here: https://github.com/pypa/packaging.python.org/pull/1898.\n\nCorrect regex for metadata 'name' format (#925)\n\nThe current regex permits strings that end in the newline character, which is counter to what the description for the field states (\"ASCII letters and numbers, period, underscore and hyphen\").\n\nThis updates the rexex to use `\\Z` instead of `$` to match at the end of the string and exclude newline characters.",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/925"
+  },
+  {
+   "repo": "packaging",
+   "commit": "553582d916",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1121"
+   ],
+   "body_chars": 141,
+   "reasons": [],
+   "fetched": [
+    "pr#1121"
+   ],
+   "body_text": "charset is a string, so calling list on it produces `[\"i\", \"s\", \"o\", \"-\", \"8\", ...]`\n\nfix(metadata): charset error message formatting (#1121)",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1121"
+  },
+  {
+   "repo": "packaging",
+   "commit": "8af75907bf",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1341"
+   ],
+   "body_chars": 57,
+   "reasons": [],
+   "fetched": [
+    "pr#1341"
+   ],
+   "body_text": "fix: wheel filename regex for \\n at end of string (#1341)",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1341"
+  },
+  {
+   "repo": "packaging",
+   "commit": "b80e6eb0a6",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1362"
+   ],
+   "body_chars": 683,
+   "reasons": [],
+   "fetched": [
+    "pr#1362"
+   ],
+   "body_text": "`Pylock.select()` currently treats an explicitly empty `environments` sequence like an omitted one and skips environment validation. This lets selection continue even though the lock declares no supported environment.\n\nThis distinguishes `None` from an empty sequence. An empty sequence now reaches the existing loop `else` and raises `PylockSelectError`, while an omitted `environments` field remains unrestricted.\n\nTests: `PYTHONPATH=src pytest tests/test_pylock_select.py -q` (29 passed); full suite (62,424 passed, 1 skipped, 427 deselected).\n\n\nfix(pylock): respect explicitly empty environments in select() (#1362)\n\nCo-authored-by: r266-tech <r266-tech@users.noreply.github.com>",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1362"
+  },
+  {
+   "repo": "packaging",
+   "commit": "ba17fcea23",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1230"
+   ],
+   "body_chars": 1188,
+   "reasons": [],
+   "fetched": [
+    "pr#1230"
+   ],
+   "body_text": "`is_normalized_name()` is documented to return `True` iff `canonicalize_name` would roundtrip the name unchanged. It currently returns `True` for a single-char-flanked collapsed double hyphen, e.g. `a--b` / `1--1`, even though `canonicalize_name(\"a--b\") == \"a-b\"` \u2014 so they don't roundtrip, contradicting the docstring and PEP 503.\n\n**Cause:** in `_normalized_regex`, the negative lookahead `(?!--)` sits *after* the consumed character, so on a hyphen it inspects the next two chars instead of (this hyphen + the next one), letting a single interior `--` through.\n\n**Fix:** replace the pattern with the equivalent `[a-z0-9]+(?:-[a-z0-9]+)*` (alphanumeric runs joined by single hyphens), dropping the error-prone lookahead. `re.ASCII` and the `fullmatch` call site are unchanged. Verified by exhaustive enumeration over `{a,1,-}` up to length 7: the new pattern diverges from the old one *only* on previously-accepted names that fail to roundtrip (now correctly rejected) \u2014 no name the old pattern correctly accepted changes. Added `a--b`/`1--1` regression cases (they fail on `main`, pass with the fix).\n\nfix(utils): is_normalized_name rejects collapsed double-hyphen names (a--b) (#1230)",
+   "has_fence": false,
+   "pr": "https://github.com/pypa/packaging/pull/1230"
+  },
+  {
+   "repo": "packaging",
+   "commit": "e7ce051e91",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#624",
+    "issue#336",
+    "issue#432",
+    "issue#529"
+   ],
+   "body_chars": 14847,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#624",
+    "issue#336",
+    "issue#432",
+    "issue#529"
+   ],
+   "body_text": "Closes #336\r\nCloses #432\r\nCloses #529\r\nCloses #592\r\nCloses #593\r\nCloses #618\r\nCloses #619\r\nCloses #621\r\nCloses #622\r\nCloses #623\r\n\r\nThis builds upon #484.\r\n\r\nThe main change here is couple the tokenisation with the parsing, with the regex matches being done based on what the parser is expecting. This should make the tokenisation parts *much* faster. This now explicitly handles whitespace as a token (explicitly \"consuming\" it during parsing), and parses markers as a part of the parsing a requirement string (instead of delegating to `Marker`) to provide better syntax error messages.\r\n\r\nI also took the opportunity to improve the error messages presented by this, to more clearly indicate what went wrong and provide contextual information about the syntax error to the caller (in an exception).\r\n\r\nDemo of the error messages:\r\n\r\n```\r\npackaging.requirements.InvalidRequirement: Expected closing RIGHT_BRACKET\r\n    package[a ; python_version <= '3.2'\r\n           ~~~^\r\n```\r\n```\r\npackaging.requirements.InvalidRequirement: Expected end or semicolon (after URL and whitespace)\r\n    package @ https://example.com/; python_version <= '3.2'\r\n              ~~~~~~~~~~~~~~~~~~~~~~^\r\n```\r\n```\r\npackaging.requirements.InvalidRequirement: Expected end or semicolon (after name and no valid version specifier)\r\n    package#\r\n           ^\r\n```\r\n```\r\npackaging.requirements.InvalidRequirement: Expected version after operator\r\n    package==random\r\n             ^\r\n```\r\n\r\n/cc @hrnciar for inputs and thoughts!\r\n\n\nFix a typo in an error message\n\nThe listed operators were incorrect.\n\nRequirement parser does not support arbitrary equality in legacy parentheses format\nThese all work as expected:\r\n\r\n```pycon\r\n>>> Requirement('foo==1.0')\r\n<Requirement('foo==1.0')>\r\n>>> Requirement('foo===1.0')\r\n<Requirement('foo===1.0')>\r\n>>> Requirement('foo (==1.0)')\r\n<Requirement('foo==1.0')>\r\n```\r\n\r\nBut not this:\r\n\r\n```pycon\r\n>>> Requirement('foo (===1.0)')\r\nTraceback (most recent call last):\r\n  File \"packaging/requirements.py\", line 98, in __init__\r\n    req = REQUIREMENT.parseString(requirement_string)\r\n  File \"pyparsing.py\", line 1955, in parseString\r\n    raise exc\r\n  File \"pyparsing.py\", line 3814, in parseImpl\r\n    raise ParseException(instring, loc, self.errmsg, self)\r\npyparsing.ParseException: Expected stringEnd, found '('  (at char 4), (line:1, col:5)\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"packaging/requirements.py\", line 100, in __init__\r\n    raise InvalidRequirement(\r\npackaging.requirements.InvalidRequirement: Parse error at \"'(===1.0)'\": Expected stringEnd\r\n```\r\n\n\nThe issue is that this operator matches everything after it that is not whitespace as the version:\r\n\r\n```\r\n>>> Requirement('foo===1.0)').specifier\r\n<SpecifierSet('===1.0)')>\r\n```\r\n\r\nYou'd need to do this instead::\r\n\r\n```\r\n>>> Requirement('foo (===1.0 )').specifier\r\n===1.0\r\n<SpecifierSet('===1.0')>\r\n```\r\n\r\nSee here: https://github.com/pypa/packaging/blob/59e14881910bf836c43b7d319ea08ab321ccfb39/packaging/specifiers.py#L328-L338\r\n\r\nI'm not sure this is a bug.\n\nI\u2019d say it is. `foo (===1.0` is not a valid requirement, so The requirement parser should not pass in the closing parenthesis to the specifier parser if there\u2019s an opening one. IOW for `Requirement('foo (===1.0)')`, `Specifier` should get `===1.0` instead of `===1.0)`.\n\nThe behavior @uranusjr's suggesting makes sense to me and IMO if the standards say otherwise, we should update them.\n\nI'm facing this issue while installing the wheel that built with arbitrary equal for dependency in `requirements.txt`. There is a traceback on `pip install`:\r\n```\r\nERROR: Exception:\r\nTraceback (most recent call last):\r\n  File \"/usr/lib/python2.7/site-packages/pip/_internal/cli/base_command.py\", line 228, in _main\r\n    status = self.run(options, args)\r\n  File \"/usr/lib/python2.7/site-packages/pip/_internal/cli/req_command.py\", line 182, in wrapper\r\n    return func(self, options, args)\r\n  File \"/usr/lib/python2.7/site-packages/pip/_internal/commands/install.py\", line 324, in run\r\n    reqs, check_supported_wheels=not options.target_dir\r\n  File \"/usr/lib/python2.7/site-packages/pip/_internal/resolution/legacy/resolver.py\", line 183, in resolve\r\n    discovered_reqs.extend(self._resolve_one(requirement_set, req))\r\n  File \"/usr/lib/python2.7/site-packages/pip/_internal/resolution/legacy/resolver.py\", line 437, in _resolve_one\r\n    set(req_to_install.extras) - set(dist.extras)\r\n  File \"/usr/lib/python2.7/site-packages/pip/_vendor/pkg_resources/__init__.py\", line 2978, in extras\r\n    return [dep for dep in self._dep_map if dep]\r\n  File \"/usr/lib/python2.7/site-packages/pip/_vendor/pkg_resources/__init__.py\", line 3023, in _dep_map\r\n    self.__dep_map = self._compute_dependencies()\r\n  File \"/usr/lib/python2.7/site-packages/pip/_vendor/pkg_resources/__init__.py\", line 3033, in _compute_dependencies\r\n    reqs.extend(parse_requirements(req))\r\n  File \"/usr/lib/python2.7/site-packages/pip/_vendor/pkg_resources/__init__.py\", line 3094, in parse_requirements\r\n    yield Requirement(line)\r\n  File \"/usr/lib/python2.7/site-packages/pip/_vendor/pkg_resources/__init__.py\", line 3103, in __init__\r\n    raise RequirementParseError(str(e))\r\nRequirementParseError: Parse error at \"'(===1.1.'\": Expected stringEnd\r\n```\r\n\r\nAs I understand pep440 correctly, arbitrary equality is using not only for \"escape hatch\", but also for comparing versions without taking into account local versions (https://www.python.org/dev/peps/pep-0440/#arbitrary-equality) which may be useful and should not break `pip install`.\r\n\n\nGental ping since this is surfaced in pip again recently. #353 is a reasonable fix to this IMO.\n\nHello, any news on this ?\n\nI don\u2019t think anyone is actively working on this. Feel free to dive into the parser code.\n\nWell the question is related to the fact you indicate #353 is a reasonable fix for this so I was wondering if there were plans to merge it ?\n\n> I was wondering if there were plans to merge it?\r\n\r\nProbably not, I guess? I don\u2019t have permissions to merge PRs here and can\u2019t definitely answer this.\r\n\r\nThe change is reasonable, but far from perfect. The correct logic should only detect the opening parenthesis after the package identifier, and remove the closing one only if there is an opening parenthesis at the correct location. This is likely doable with some parser logic changes, but I have not looked into actually trying it myself. This is very low priority, to be honest.\n\nOk, I might take a look at the open PR and try to iron it out\r\n\r\nCheers\n\nhttps://github.com/pypa/packaging/pull/353/ is a PR to fix this. Does the approach seem reasonable to people?\n\nNow that we have a hand-crafted parser, I\u2019d actually expect it be able to handle parenthesis-matching directly.\n\n#624 does that updating, and makes it possible to use this format.\r\n\r\n```py\r\n\u276f echo 'name(===arbitrarystring)' | python -c \"from packaging.requirements import Requirement; print(vars(Requirement(input())))\"\r\n{'name': 'name', 'url': None, 'extras': set(), 'specifier': <SpecifierSet('===arbitrarystring')>, 'marker': None}\r\n\u276f echo ' name ( === arbitrarystring ) ' | python -c \"from packaging.requirements import Requirement; print(vars(Requirement(input())))\" \r\n{'name': 'name', 'url': None, 'extras': set(), 'specifier': <SpecifierSet('===arbitrarystring')>, 'marker': None}\r\n```\r\n\n\nInvalidRequirement: name@ git+...@branch; (python_version==\"...\") and extra == \"...\"\nHello. I found a requirement that packaging deems invalid but I am not sure why.\r\n\r\nThis is happening on 20.4, 20.9 and main branch @ 73507464faca545d83b748929e60ec67c0cb50b1.\r\n\r\nI see what I believe is a proper requirement generated by https://github.com/sqlobject/sqlobject/blob/3.9.1/setup.py#L118-L121 as:\r\n\r\n```\r\n[oursql:python_version==\"2.7\"]\r\noursql@ git+https://github.com/sqlobject/oursql.git@master\r\n\r\n[oursql:python_version>=\"3.4\"]\r\noursql3@ git+https://github.com/sqlobject/oursql.git@py3k\r\n```\r\n\r\nParsed by `importlib.metadata.PathDistribution.requires` as:\r\n\r\n```\r\noursql@ git+https://github.com/sqlobject/oursql.git@master; (python_version==\"2.7\") and extra == \"oursql\"\r\noursql3@ git+https://github.com/sqlobject/oursql.git@py3k; (python_version>=\"3.4\") and extra == \"oursql\"\r\n```\r\n\r\nFailing with:\r\n\r\n```\r\n>>> from packaging.requirements import Requirement\r\n>>> Requirement('oursql@ git+https://github.com/sqlobject/oursql.git@master; (python_version==\"2.7\") and extra == \"oursql\"')\r\nTraceback (most recent call last):\r\n  File \"/home/churchyard/Dokumenty/pypa/packaging/packaging/requirements.py\", line 102, in __init__\r\n    req = REQUIREMENT.parseString(requirement_string)\r\n  File \"/usr/lib/python3.9/site-packages/pyparsing.py\", line 1955, in parseString\r\n    raise exc\r\n  File \"/usr/lib/python3.9/site-packages/pyparsing.py\", line 3814, in parseImpl\r\n    raise ParseException(instring, loc, self.errmsg, self)\r\npyparsing.ParseException: Expected stringEnd, found '('  (at char 60), (line:1, col:61)\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"/home/churchyard/Dokumenty/pypa/packaging/packaging/requirements.py\", line 104, in __init__\r\n    raise InvalidRequirement(\r\npackaging.requirements.InvalidRequirement: Parse error at \"'(python_'\": Expected stringEnd\r\n```\r\n\r\nWhat's wrong with this requirement?\n\nLooks like the current parsing definition does not allow you to put parentheses around a marker expression without a boolean operator (`and` or `or`):\r\n\r\nhttps://github.com/pypa/packaging/blob/73507464faca545d83b748929e60ec67c0cb50b1/packaging/markers.py#L134-L136\r\n\r\nThis is wrong because it is allowed by [PEP 508](https://www.python.org/dev/peps/pep-0508/#grammar):\r\n\r\n```\r\nurl_req       = (name:n wsp* extras?:e wsp* urlspec:v (wsp+ | end) quoted_marker?:m\r\n                 -> (n, e or [], v, m))\r\nquoted_marker = ';' wsp* marker\r\nmarker        = marker_or\r\nmarker_or     = marker_and wsp* 'or' marker_and\r\n              | marker_and\r\nmarker_and    = marker_expr wsp* 'and' marker_expr\r\n              | marker_expr\r\nmarker_expr   = marker_var marker_op marker_var\r\n              | wsp* '(' marker wsp* ')'\r\n```\r\n\r\nwhere\r\n\r\n```\r\n; (python_version==\"2.7\") and extra == \"oursql\"\r\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ quoted_marker\r\n  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ marker -> marker_or -> marker_and\r\n  ^^^^^^^^^^^^^^^^^^^^^^^                       marker_expr\r\n   ^^^^^^^^^^^^^^^^^^^^^                        marker -> marker_or -> marker_and -> marker_expr\r\n   ^^^^^^^^^^^^^--^^^^^\r\n   marker_var   ^ marker_var\r\n                |\r\n             marker_op\r\n```\r\n\r\nSo this is a bug in `packaging`\u2019s parser. `MARKER_ATOM` should allow `LPAREN + MARKER_ITEM + RPAREN`.\n\n> ```\r\n> oursql@ git+https://github.com/sqlobject/oursql.git@master; (python_version==\"2.7\") and extra == \"oursql\"\r\n> oursql3@ git+https://github.com/sqlobject/oursql.git@py3k; (python_version>=\"3.4\") and extra == \"oursql\"\r\n> ```\r\n\r\nThese aren't valid requirements. In #624, these error out appropriately as:\r\n\r\n```\r\npackaging.requirements.InvalidRequirement: Expected end or semicolon (after URL and whitespace)\r\n    oursql@ git+https://github.com/sqlobject/oursql.git@master; (python_version==\"2.7\") and extra == \"oursql\"\r\n            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^\r\n```\r\n\r\nAgain, with #624, Adding whitespace after the URL correctly parses this as:\r\n\r\n```\r\n{'name': 'oursql', 'url': 'git+https://github.com/sqlobject/oursql.git@master', 'extras': set(), 'specifier': <SpecifierSet('')>, 'marker': <Marker('python_version == \"2.7\" and extra == \"oursql\"')>}\r\n```\r\n\n\nSo I think this is no longer relevant after the parser rewrite?\n\nIt is -- #624 makes the additional changes needed to fix this issue.\n\nPresent a clearer error message when the user misses a space before `;` in marker\nCurrently, if you try to use:\r\n\r\n```\r\ntomli @ https://github.com/hukkin/tomli/archive/master.zip; python_version < '3.11'\r\n```\r\n\r\nThe error you get is:\r\n\r\n```py\r\n>>> Requirement(\"tomli @ https://github.com/hukkin/tomli/archive/master.zip; python_version < '3.11'\")\r\nTraceback (most recent call last):\r\n  File \"/Users/pradyunsg/Developer/github/packaging/.venv/lib/python3.11/site-packages/packaging/requirements.py\", line 102, in __init__\r\n    req = REQUIREMENT.parseString(requirement_string)\r\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\n  File \"/Users/pradyunsg/Developer/github/packaging/.venv/lib/python3.11/site-packages/pyparsing/core.py\", line 1141, in parse_string\r\n    raise exc.with_traceback(None)\r\npyparsing.exceptions.ParseException: Expected string_end, found 'python'  (at char 60), (line:1, col:61)\r\n\r\nDuring handling of the above exception, another exception occurred:\r\n\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"/Users/pradyunsg/Developer/github/packaging/.venv/lib/python3.11/site-packages/packaging/requirements.py\", line 104, in __init__\r\n    raise InvalidRequirement(\r\npackaging.requirements.InvalidRequirement: Parse error at \"'python_v'\": Expected string_end\r\n```\r\n\r\nIt would be good if it presented an error that suggested adding a ` ` (space) before the semicolon.\n\nI think this was supposed to refer to `packaging.requirements` as:\r\n```\r\ntomli @ https://github.com/hukkin/tomli/archive/master.zip ; python_version < '3.11'\r\n```\r\nis not a valid marker string.\r\nAssuming that's true, I made #592 to fix the issue.\n\nIn #624, these cases get an error like:\r\n\r\n```\r\npackaging.requirements.InvalidRequirement: Expected end or semicolon (after URL and whitespace)\r\n    package @ https://example.com/; python_version <= '3.2'\r\n              ~~~~~~~~~~~~~~~~~~~~~~^\r\n```\n\nCould the arrow's position be adjusted so that it points at the semicolon's position (since that's where the space is missing)? I think that it pointing at the first letter of the marker is confusing.\r\n\r\n// #592 also hints directly that it might be the space between URL and semicolon that's missing while in your error it IMO seems a bit less clear. But I guess users will probably be able to figure it out just fine anyway so I wouldn't say it's a big deal.\n\nYea, I flip-flopped on those aspects (I _think_ that might actually be visible in the force-push history), and ended up on this style since it was consistent with how \"bad\" versions specifiers ended up being handled:\r\n\r\n```\r\npackaging.requirements.InvalidRequirement: Expected end or semicolon (after version specifier)\r\n     name ==0.this.is.a.bad.version ; python_version == \"1.0\"\r\n          ~~~^\r\n```\r\n\n\nGranted all of the options we have at hand are improvements over the current variant. :)\r\n\r\n```\r\npackaging.requirements.InvalidRequirement: Parse error at \"'python_v'\": Expected string_end\r\n```",
+   "has_fence": true,
+   "pr": "https://github.com/pypa/packaging/pull/624"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "4326ced299",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#481"
+   ],
+   "body_chars": 75,
+   "reasons": [],
+   "fetched": [
+    "pr#481"
+   ],
+   "body_text": "PluginManager.get_plugins no longer returns None for blocked plugins (#481)",
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/481"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "6abdcf6ca1",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#743"
+   ],
+   "body_chars": 1185,
+   "reasons": [],
+   "fetched": [
+    "pr#743"
+   ],
+   "body_text": "## Summary\n\nMake `warn_on_impl_args` inspect hook implementation parameters that have defaults as well as required parameters.\n\n## Motivation\n\n`HookImpl` stores required parameters in `argnames` and defaulted parameters in `kwargnames`. The current warning check only scans `argnames`, so a plugin that keeps a deprecated argument working by giving it a default receives no deprecation warning. This contradicts the documented contract that any implementation requesting a configured deprecated argument triggers its warning.\n\n## Changes\n\n- Include `hookimpl.kwargnames` in the warning lookup.\n- Add a regression test covering a deprecated hook argument with a default.\n\nThis intentionally starts emitting warnings for the previously silent defaulted-argument case, which is the documented purpose of `warn_on_impl_args`.\n\n## Testing\n\n- Base `origin/main` with the new regression: failed because no warning was emitted.\n- `uv run pytest`: 202 passed.\n- `uv run pre-commit run -a`: all hooks passed.\n\nA towncrier fragment will be added after the PR number is assigned.\n\nMerge pull request #743 from feiiiiii5/fix-warn-defaulted-args\n\nWarn for deprecated hookimpl arguments with defaults",
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/743"
+  },
+  {
+   "repo": "pluggy",
+   "commit": "e108fa4490",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#755"
+   ],
+   "body_chars": 1418,
+   "reasons": [],
+   "fetched": [
+    "pr#755"
+   ],
+   "body_text": "`load_setuptools_entrypoints()` checks whether an entry-point plugin is already registered by evaluating the object returned by `get_plugin()`. If that plugin is falsey, a second scan loads it again and `register()` raises `ValueError`. A registered plugin whose `__bool__` raises also makes the scan fail.\n\nUse the existing `has_plugin()` presence check instead. Extend the current entry-point instantiation test over truthy, falsey, and raising-`__bool__` plugins, and verify the loader is called only once. Registration, blocked-name handling, and `unregister()` behavior are unchanged.\n\nValidation on Windows CPython 3.12.14:\n- Before the fix: the regression had 2 failed / 1 passed (duplicate registration and unexpected truthiness evaluation).\n- `uv run pytest`: 204 passed.\n- `uv run pre-commit run -a`: passed, including mypy; formatted files were reread.\n- Official `tox run -e docs`: passed with Sphinx `-W`.\n- Source distribution and wheel built successfully; `twine check` passed for both.\n- Independent agent review found no blockers and independently ran the plugin-manager tests: 75 passed.\n\nAI-assisted contribution: reproduction, implementation, and validation were performed with Codex, followed by an independent agent review. No manual human review is claimed. This was found during source inspection, not a production incident.\n\n\nfix: skip registered entrypoint plugins without checking truthiness",
+   "has_fence": false,
+   "pr": "https://github.com/pytest-dev/pluggy/pull/755"
+  },
+  {
+   "repo": "starlette",
+   "commit": "20973f2ed3",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#801",
+    "issue#800"
+   ],
+   "body_chars": 1618,
+   "reasons": [],
+   "fetched": [
+    "pr#801",
+    "issue#800"
+   ],
+   "body_text": "This patches a security vulnerability with CORS Middleware. By using a regular expression `match`, it leaves it to the implementer to ensure that the passed-in regex properly handles start/end of the string. The example documentation shows `https://.*\\.example\\.org`, which, when used with `match`, would return True for `https://.*\\.example\\.org.evil.com`.\r\n\r\nCloses #800\n\nSecurity patch: Updating CORS origin regex to use a full regex match (#801)\n\n* Updating CORS origin regex to use a full regex match\r\n\r\n* Reformatting unittest based on linting\n\nDangerous example regex for CORS Middleware?\nLooking at the docs for CORS Middlware here: https://www.starlette.io/middleware/#corsmiddleware , under the `allow_origin_regex` attribute, the example value is `https://.*\\.example\\.org`.\r\n\r\nHowever, based on the handler code for this at https://github.com/encode/starlette/blob/ab86530eddfcf56e0f7e5ca56f6ab69c15594a7d/starlette/middleware/cors.py#L90 , it appears `https://www.example.org.hacker.com` would pass as a valid origin, right?\r\n\r\nIt seems like the example should be `https://.*\\.example\\.org$`, yes?\n\nI don\u2019t recall if it\u2019s automatically anchored. Might be?\n\nHuh, I don't follow you.\r\n\r\nEither the documentation needs to be updated to show a safe example, or (the better solution), would be to update https://github.com/encode/starlette/blob/ab86530eddfcf56e0f7e5ca56f6ab69c15594a7d/starlette/middleware/cors.py#L90 to do `fullmatch` instead of `match`\n\nMy question was if it was already a full match. (Which yeah, it really ought to be)\n\nI created a PR for this https://github.com/encode/starlette/pull/801",
+   "has_fence": false,
+   "pr": "https://github.com/Kludex/starlette/pull/801"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "223561a83b",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1212"
+   ],
+   "body_chars": 538,
+   "reasons": [],
+   "fetched": [
+    "pr#1212"
+   ],
+   "body_text": "Intended as a drop-in replacement of the stdlib `asyncio.gather()`, it would be much reasonable if the function interface is consistent with that of `asyncio.gather()` as well.\r\n\r\nIt also ensures that our interface doesn't violate the least-surprising principle. It would have been surprising and frustrating for a user to wanting to use `tqdm_asyncio.gather()` as a drop-in replacement to the stdlib `asyncio.gather()` but ending up being bitten by the trivial inconsistency.\n\n`asyncio.gather` API consistency with stdlib\n\n- closes #1212",
+   "has_fence": false,
+   "pr": "https://github.com/tqdm/tqdm/pull/1212"
+  },
+  {
+   "repo": "tqdm",
+   "commit": "b38a9221c4",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1549"
+   ],
+   "body_chars": 602,
+   "reasons": [],
+   "fetched": [
+    "pr#1549"
+   ],
+   "body_text": "- `pandas`: add `DataFrame.progress_map`\r\n- fix `format_num` negative fractions missing leading zero (#1549 <- #1548)\r\n- `notebook`: fix HTML padding (#1506)\r\n- `keras`: fix resuming training when `verbose>=2` (#1508)\r\n- misc: fix Python 3.12 `DeprecationWarning` on `import` (#1519)\r\n- linting: use f-strings (#1549)\r\n- tests\r\n  + fix `pandas` warnings\r\n  + fix `asv` (https://github.com/airspeed-velocity/asv/issues/1323)\r\n  + fix macos `notebook` docstring indentation\r\n- CI: bump actions (#1549)\r\n\r\n---\r\n\r\n- fixes #1548\r\n- closes #1506\r\n- closes #1508\r\n- closes #1519\n\nfix format_num\n\n- fixes #1548",
+   "has_fence": false,
+   "pr": "https://github.com/tqdm/tqdm/pull/1549"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "4714836a66",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#3012"
+   ],
+   "body_chars": 130,
+   "reasons": [],
+   "fetched": [
+    "pr#3012"
+   ],
+   "body_text": "Closes https://github.com/urllib3/urllib3/issues/3009\n\nContinue reading the response stream if there is buffered decompressed data",
+   "has_fence": false,
+   "pr": "https://github.com/urllib3/urllib3/pull/3012"
+  },
+  {
+   "repo": "urllib3",
+   "commit": "644124ecd0",
+   "verdict": "PROSE_ONLY",
+   "sources": [],
+   "body_chars": 43,
+   "reasons": [],
+   "fetched": [],
+   "body_text": "Merge pull request from GHSA-v845-jxx5-vc9f",
+   "has_fence": false
+  },
+  {
+   "repo": "urllib3",
+   "commit": "77fa67aaf2",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#2806",
+    "issue#2804"
+   ],
+   "body_chars": 1977,
+   "reasons": [
+    "traceback",
+    "raises",
+    "call"
+   ],
+   "fetched": [
+    "pr#2806",
+    "issue#2804"
+   ],
+   "body_text": "fixed parsing for ports with more than 5 ascii digits (i.e. lots of leading zeros). I've changed the regexp to strip leading zeros from the port in a non-capturing group.\r\n\r\nAlso added a test.\r\n\r\ncloses: #2804\n\nStrip leading zeros from ports\n\nutil.parse_url improperly rejects port numbers with more than 5 digits\n### `util.parse_url` improperly rejects port numbers with more than 5 digits\r\nThe RFC 3986 and 3987 definition of a port number:\r\n`port = *DIGIT`\r\n\r\nThe WHATWG definition of a port number:\r\n\"\"\"\r\nA URL-port string must be one of the following:\r\n- the empty string\r\n- one or more [ASCII digits](https://infra.spec.whatwg.org/#ascii-digit) representing a decimal number no greater than 2^16 \u2212 1.\r\n\r\n\"\"\"\r\n\r\n`urllib3`'s URL parser improperly rejects port numbers that are within the unsigned 16-bit integer range, but consist of more than 5 digits because of leading `0` characters.\r\n\r\n### Environment\r\n```python\r\n>>> print(\"OS\", platform.platform())\r\nOS Linux-6.0.7-arch1-1-x86_64-with-glibc2.36\r\n>>> print(\"Python\", platform.python_version())\r\nPython 3.10.8\r\n>>> print(\"urllib3\", urllib3.__version__)\r\nurllib3 2.0.0.dev0\r\n```\r\n\r\n### Steps to Reproduce\r\n```python3\r\n>>> import urllib3\r\n>>> urllib3.util.parse_url(\"http://example.com:000001\") # Shouldn't be a problem.\r\nTraceback (most recent call last):\r\n  File \"<REDACTED>/urllib3/util/url.py\", line 425, in parse_url\r\n    host, port = _HOST_PORT_RE.match(host_port).groups()  # type: ignore[union-attr]\r\nAttributeError: 'NoneType' object has no attribute 'groups'\r\n\r\nThe above exception was the direct cause of the following exception:\r\n\r\nTraceback (most recent call last):\r\n  File \"<stdin>\", line 1, in <module>\r\n  File \"<REDACTED>/urllib3/util/url.py\", line 451, in parse_url\r\n    raise LocationParseError(source_url) from e\r\nurllib3.exceptions.LocationParseError: Failed to parse: http://example.com:000001\r\n>>> # But it was!\r\n```\r\n\r\nI've tested out 7 or 8 other URL parsers, and none of them have this behavior.",
+   "has_fence": true,
+   "pr": "https://github.com/urllib3/urllib3/pull/2806"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "285af2c465",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#3092"
+   ],
+   "body_chars": 2046,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#3092"
+   ],
+   "body_text": "See https://github.com/pallets/flask/issues/5895. `303` switches all methods to `GET` (except `HEAD`), unlike `301`/`302` which only switches `POST`. With `301`, HTMX and other libraries that use the full range of methods will cause incorrect behavior after making an API call that redirects to a result. For example, `DELETE /users/123` that returns a redirect to `/users`, the redirect will also be `DELETE /users` instead of `GET /users`. Just as `307` is used for routing redirects to always preserve the method, `303` is used for redirects after mutations to always _not_ preserve the method.\r\n\r\nThis also fixes some behaviors in the test client's redirect handling:\r\n\r\n- More headers about the request body are cleared, following https://fetch.spec.whatwg.org/#http-redirect-fetch.\r\n- Fixed an issue I inadvertently added when I made a previous fix for `input_stream` handling,  which caused the form and files data to not be cleared on redirect.\r\n- _All_ files in the multidict are closed when calling `EnvironBuilder.close`, not only the first file associated with each key.\r\n- `305` is no longer handled as a redirect, it hasn't been part of the HTTP spec for a long time.\r\n- The test client only switches `301`/`302` `POST` to `GET`, not other methods.\r\n\r\n---\r\n\r\nIn fixing the file closing oversight, I noticed that how `EnvironBuilder` handles `form`, `files`, `input_stream`, and `close` is really weird. `close` sets `closed = True`, so subsequent calls to `close` don't run again, but the builder is still completely usable in a closed state. `input_stream` is not closed, presumably since it's assumed to be managed externally, and we do have some tests that currently rely on that property. I don't know what to do about all this, but something I'll think about.\r\n\r\nI also noticed that we commonly use the pattern\r\n\r\n```python\r\nbuilder = EnvironBuilder(...)\r\n\r\ntry:\r\n    return builder.get_environ()\r\nfinally:\r\n    builder.close()\r\n```\r\n\r\nWhich suggests we should make `EnvironBuilder` a context manager.\n\nredirect defaults to 303",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/3092"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "351b73196c",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2612",
+    "issue#2611"
+   ],
+   "body_chars": 1161,
+   "reasons": [],
+   "fetched": [
+    "pr#2612",
+    "issue#2611"
+   ],
+   "body_text": "Increase default work factor for PBKDF2 from 260,000 to 600,000 iterations to match [an OWASP recommendation](https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2).\r\n\r\n- fixes #2611\r\n\r\nChecklist:\r\n\r\n- [x] Add tests that demonstrate the correct behavior of the change. Tests should fail without the change.\r\n- [ ] Add or update relevant docs, in the docs folder and in code.\r\n- [x] Add an entry in `CHANGES.rst` summarizing the change and linking to the issue.\r\n- [ ] Add `.. versionchanged::` entries in any relevant code docs.\r\n- [x] Run `pre-commit` hooks and fix any issues.\r\n- [x] Run `pytest` and `tox`, no tests failed.\r\n\n\nincrease PBKDF2 default to 600,000 iterations\n\nIncrease default work factor for PBKDF2 to 600,000 iterations\nhttps://github.com/pallets/werkzeug/blob/bba2109e276ab876b8d64e2b967412cb6da1d865/src/werkzeug/security.py#L12\r\n\r\nThe value has not been updated for a few years. I propose increasing it to the same number as the next release of Django will use.\r\n\r\nSee https://github.com/django/django/pull/16521 and https://cheatsheetseries.owasp.org/cheatsheets/Password_Storage_Cheat_Sheet.html#pbkdf2.",
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2612"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "352cd71679",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2042"
+   ],
+   "body_chars": 303,
+   "reasons": [],
+   "fetched": [
+    "pr#2042"
+   ],
+   "body_text": "Some fixes to issues I've found testing the 2.0 release candidate, 2.0.0rc1 .\n\nRestore the previous Werkzeug LocalProxy __class__ behaviour\n\nThis ensures that Flask doesn't error when isinstance checking against\nsomething other than a LocalProsy itself, see\nhttps://github.com/pallets/flask/issues/3909.",
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2042"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "3a408edffd",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2470"
+   ],
+   "body_chars": 720,
+   "reasons": [],
+   "fetched": [
+    "pr#2470"
+   ],
+   "body_text": "Checklist:\r\n\r\n- [x] Add tests that demonstrate the correct behavior of the change. Tests should fail without the change.\r\n- [x] Add or update relevant docs, in the docs folder and in code.\r\n- [x] Add an entry in `CHANGES.rst` summarizing the change and linking to the issue.\r\n- [x] Add `.. versionchanged::` entries in any relevant code docs.\r\n- [x] Run `pre-commit` hooks and fix any issues.\r\n- [x] Run `pytest` and `tox`, no tests failed.\r\n\n\nBugfix ensure that the entire part is matched\n\nPreviously the router would accept a partial match of a part, which is\ncontrary to how the router is meant to work. For example if the rule\nto be matched was `d+` the router would match `2dfd` as `2` and\nsilently forget the rest.",
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2470"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "763609ae21",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#2971",
+    "issue#2969"
+   ],
+   "body_chars": 250,
+   "reasons": [],
+   "fetched": [
+    "pr#2971",
+    "issue#2969"
+   ],
+   "body_text": "fixes #2969 \n\nincrease pbkdf2 iterations\n\nincrease pbkdf2 iterations\nThis needs to be bumped regularly to account for faster computers. Django now sets it to 1,000,000: https://github.com/django/django/commit/04a208d7f19f393ad92ba7cef31842318be2d38a.",
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/2971"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "8f8507b462",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1965"
+   ],
+   "body_chars": 1955,
+   "reasons": [],
+   "fetched": [
+    "pr#1965"
+   ],
+   "body_text": "**NOTE: I did not see any special contact address for security issues. Seeing as this is a quite low severity issue I am just opening a public ticket. Feel free to delete if this is not the right thing to do.**\r\n\r\nBrowsers assign special meaning to cookies prefixed with either `__Secure-` or `__Host-`. Due to the unquoting of cookie keys done by Werkzeurg this protection can be bypassed by creating a cookie with these prefixes inside quotes. The browses will not enforce the requirements needed by those prefixes while the server will not be able to differentiate between the unsecure quoted cookie and the more secure unquoted cookie.\r\n\r\nWhile the cookie [spec](https://tools.ietf.org/html/rfc6265#section-4.1.1) encourages encoding the cookie value it does not specify anything with regard to cookie name and the character set for the cookie name is more restricted.\r\n\r\nThis issue was brought up for the Rails platform recently which is what prompted me to see what other platforms have the same or similar issues. See that investigation for more information:\r\n\r\nhttps://hackerone.com/reports/895727\r\n\r\nI have created what I hope to be a POC of this issue at:\r\n\r\nhttps://github.com/eric1234/werkzeug-cookie-prefix-poc\r\n\r\nThis commit changes the code so that only the value is unquoted and the key is not. If someone provides a quoted key then the\r\nquote will become part of the cookie name.\r\n\r\nChecklist:\r\n\r\n- [X] Add tests that demonstrate the correct behavior of the change. Tests should fail without the change.\r\n- [X] Add or update relevant docs, in the docs folder and in code.\r\n- [X] Add an entry in `CHANGES.rst` summarizing the change and linking to the issue.\r\n- [X] Add `.. versionchanged::` entries in any relevant code docs.\r\n- [X] Run `pre-commit` hooks and fix any issues.\r\n- [X] Run `pytest` and `tox`, no tests failed.\r\n\n\ndon't unquote cookie name\n\nThis was against RFC 6265 and potentially allowed setting __Secure\nprefixed cookies.",
+   "has_fence": false,
+   "pr": "https://github.com/pallets/werkzeug/pull/1965"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d03b977797",
+   "verdict": "PROSE_ONLY",
+   "sources": [
+    "pr#1798",
+    "issue#1797"
+   ],
+   "body_chars": 1844,
+   "reasons": [
+    "call"
+   ],
+   "fetched": [
+    "pr#1798",
+    "issue#1797"
+   ],
+   "body_text": "Resolves #1797\n\nAdd new \"edg\" identifier for Edge in UserAgentPreparser\nResolves #1797\n\nNew Microsoft Edge User Agent\n## Background\r\nMicrosoft Edge now based on Chromium and the user agent string is updated.\r\n`Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68`\r\n\r\n## Simple Code\r\n```python\r\n@app.route('/browser')\r\ndef browser():\r\n    from flask import request\r\n    ua = request.user_agent\r\n    return jsonify({\r\n        'browser': ua.browser,\r\n        'platform': ua.platform,\r\n        'user_agent': ua.string,\r\n        'version': ua.version,\r\n    })\r\n```\r\n\r\n## Expected Result\r\n```json\r\n{\r\n  \"browser\": \"edge\", \r\n  \"platform\": \"windows\", \r\n  \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68\", \r\n  \"version\": \"81.0.416.68\"\r\n}\r\n```\r\n\r\n| Key | Value |\r\n| --- | --- |\r\n| browser | **edge** |\r\n| platform | windows |\r\n| user_agent | Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68 |\r\n| version | **81.0.416.68** |\r\n\r\n\r\n## Actual Result\r\n```json\r\n{\r\n  \"browser\": \"chrome\", \r\n  \"platform\": \"windows\", \r\n  \"user_agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68\", \r\n  \"version\": \"81.0.4044.129\"\r\n}\r\n```\r\n\r\n| Key | Value |\r\n| --- | --- |\r\n| browser | **chrome** |\r\n| platform | windows |\r\n| user_agent | Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.129 Safari/537.36 Edg/81.0.416.68 |\r\n| version | **81.0.4044.129** |\r\n\r\n## Environment\r\n- Windows 10 Pro 1909\r\n- Python 3.6.6\r\n- Werkzeug 0.16.1\r\n- Flask 1.1.1\r\n\r\n### Related Issues\r\n#818, #1556",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/1798"
+  },
+  {
+   "repo": "werkzeug",
+   "commit": "d0f040a65b",
+   "verdict": "ORACLE_IN_ISSUE",
+   "sources": [
+    "pr#2661",
+    "issue#2657"
+   ],
+   "body_chars": 4848,
+   "reasons": [
+    "assertion",
+    "call"
+   ],
+   "fetched": [
+    "pr#2661",
+    "issue#2657"
+   ],
+   "body_text": "The `urlencode` helper used when building URLs in the router and test client treated `+` as safe, but it has special meaning in query strings and should be percent-encoded.\r\n\r\nfixes #2657 \n\nquote plus in urls\n\nplus (+) in query args converted to space\n# Summary\r\n\r\nIn #2608 some functions were changed to use `urllib.parse.quote`. Note that there exists `urllib.parse.quote_plus`, which is almost the same, but handles the plus and space characters differently. I suspect, but am not certain, that werkzeug should be using `quote_plus` instead of `quote`. \r\n\r\nCode that was working for me yesterday with the older version of werkzeug is now not working with the newest version.\r\n\r\n\r\n# Minimum Working Example\r\n\r\n## Steps to reproduce\r\n\r\n```\r\nfrom flask import Flask, jsonify, request\r\nimport re\r\n\r\napp = Flask(__name__)\r\n\r\n@app.route('/v1/telemetry', methods=['GET'])\r\ndef telemetry():\r\n    print(f\"telemetry received\")\r\n    print(f\"telemetry received args {request.args}\")\r\n    mystr = request.args['mystr']\r\n    print(f\"telemetry received {mystr}\")\r\n    pat = r\"[a-z]\\+[a-z]\"\r\n    assert re.match(pat, mystr)\r\n    \r\n    # XSS vulnerable of course\r\n    # this is just a MWE\r\n    return jsonify({'echo': mystr})\r\n\r\napp.testing = True\r\napp.debug = True\r\n\r\n\r\nclient = app.test_client()\r\nresp = client.get('/v1/telemetry', query_string={'mystr': 'a+b'}) \r\nassert resp.status_code == 200\r\nassert resp.json['echo'] == 'a+b'\r\n\r\n```\r\n\r\n```\r\npip3 install werkzeug==2.3.0 flask\r\n```\r\n\r\n```\r\npython3 main.py\r\n```\r\n\r\n## Expected behavior\r\n\r\nScript runs without error. The assertions passes.\r\n\r\n## Actual Behavior\r\n\r\n```\r\nTraceback (most recent call last):\r\n  File \"main.py\", line 23, in <module>\r\n    resp = client.get('/v1/telemetry', query_string={'mystr': 'a+b'}) \r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/werkzeug/test.py\", line 1241, in get\r\n    return self.open(*args, **kw)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/testing.py\", line 227, in open\r\n    response = super().open(\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/werkzeug/test.py\", line 1195, in open\r\n    response = self.run_wsgi_app(request.environ, buffered=buffered)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/werkzeug/test.py\", line 1069, in run_wsgi_app\r\n    rv = run_wsgi_app(self.application, environ, buffered=buffered)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/werkzeug/test.py\", line 1343, in run_wsgi_app\r\n    app_rv = app(environ, start_response)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 2552, in __call__\r\n    return self.wsgi_app(environ, start_response)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 2532, in wsgi_app\r\n    response = self.handle_exception(e)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 2529, in wsgi_app\r\n    response = self.full_dispatch_request()\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 1825, in full_dispatch_request\r\n    rv = self.handle_user_exception(e)\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 1823, in full_dispatch_request\r\n    rv = self.dispatch_request()\r\n  File \"/home/ec2-user/environment/scratch/schemathesis/venv/lib/python3.8/site-packages/flask/app.py\", line 1799, in dispatch_request\r\n    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)\r\n  File \"main.py\", line 13, in telemetry\r\n    assert re.match(pat, mystr)\r\nAssertionError\r\n```\r\n\r\nIf you downgrade to the previous version of werkzeug:\r\n\r\n```\r\npip3 install werkzeug==2.2.3\r\n```\r\n\r\nThen it does work.\r\n(The script runs without throwing any exceptions)\r\n\r\n# Environment\r\n\r\n- Python version: 3.8.11\r\n- Werkzeug version: \r\n  -  2.2.3 - works\r\n  -  2.3.0 - doesn't work\r\n\r\n\r\n\r\n\n\nThis bit me too by breaking base64 encoded payloads by replacing `+` with space. No changes on my end besides upgrade from 2.2.0 to 2.3. \n\nJust confirming that I'm seeing this too. The bug affects 2.3.0 and does not exist in 2.2.3. Other special characters are still being properly escaped.\r\n\r\nAn example to demonstrate one of the problems that it causes:\r\n\r\n```python3\r\nfrom flask import Flask, url_for, request\r\n\r\napp = Flask(__name__)\r\n\r\n\r\n@app.route('/')\r\ndef hello_world():\r\n    return f'{url_for(\"hello_world\", **request.args)}'\r\n\r\n```\r\n\r\nIf I make a request to /?plus=1%2B1, I'd expect this to generate the same URL in response, but I actually get a literal plus in the URL instead of the escaped plus.",
+   "has_fence": true,
+   "pr": "https://github.com/pallets/werkzeug/pull/2661"
+  }
+ ]
+}

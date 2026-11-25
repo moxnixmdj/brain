@@ -876,15 +876,72 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
 _IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
 
 
-def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
-    """Index the runtime modules the model can *address* but cannot *execute*.
+# Roots whose Python is real project source an operator may need to find.
+# ``tests`` is scanned for the reverse-import graph above but is not offered as
+# addressable source: it is the oracle, and indexing it would let a goal be
+# answered with the test that is supposed to judge the answer.
+_SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel")
 
-    Measured, the capability registry reaches 291 of 2189 ``canonical/runtime``
-    modules. The honest response is not to promote the other 1898 to
-    capabilities -- only 407 of them are entry points, 39 are internal helpers
-    and 1452 are imported by nobody, so calling them capabilities would claim
-    execution that has never been observed. It is equally wrong to leave them
-    invisible, because they are real source an operator may need to find.
+
+def _harvested_rows(root: Path, admitted_paths: set[str] | None = None) -> list[dict[str, Any]]:
+    """Executable surfaces the registry cannot see, derived from the tree itself.
+
+    Measured on this checkout: 625 modules carry an invocation shape (a
+    ``run(args, root)`` contract or a program entry point), are absent from both
+    registries and from the receipt projection, and are therefore invisible to
+    ``source_index`` too -- ``source_index`` only walks ``canonical/runtime``, and
+    462 of the 625 live outside it (``canonical/tools`` 322,
+    ``canonical/swe_kernel`` 94, ``execution_guard`` 25).
+
+    This is a *description*, not an admission.  Every row says
+    ``admitted: false``; execution goes through the harvested-capability runtime,
+    which issues a receipt and still cannot promote anything, because the loader
+    requires an independent identity with signed OIDC claims to re-run it.
+    """
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from canonical.tools import harvest_hidden_capabilities_v1 as census
+
+    admitted_paths = admitted_paths or set()
+    rows: list[dict[str, Any]] = []
+    for row in census.harvested_rows(root):
+        # A bound capability may record only `adapter_module`, never a path, so the
+        # census cannot know that `bound_capabilities/<stem>.py` is already declared.
+        # The compiler can: it resolves that adapter itself.  Without this filter five
+        # modules appeared both as admitted capabilities and as discovered surfaces --
+        # the same file claiming two different statuses in one artifact.
+        if row["path"] in admitted_paths:
+            continue
+        rows.append({
+            "id": row["id"],
+            "kind": "HARVESTED_EXECUTABLE_SURFACE",
+            "path": row["path"],
+            "sha256": row["sha256"],
+            "invocation": row["kind"],
+            "entrypoint": row["entrypoint"],
+            "declared_capability_id": row.get("declared_capability_id"),
+            "declared_inputs": row.get("declared_inputs") or [],
+            "declared_result_fields": row.get("declared_result_fields") or [],
+            "summary": row.get("doc") or "",
+            "triggers": row["triggers"],
+            # The load-bearing distinction, on every row.
+            "admitted": False,
+            "capability": False,
+            "admission_state": "DISCOVERED_NOT_ADMITTED",
+            "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+        })
+    return rows
+
+
+def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+    """Index the source modules the model can *address* but cannot *execute*.
+
+    Measured, the capability registry reaches 395 of the 2627 modules under the
+    scanned source roots. The honest response is not to promote the rest to
+    capabilities -- most are entry scripts or helpers that no receipt ever
+    exercised, so calling them capabilities would claim execution that has
+    never been observed. It is equally wrong to leave them invisible, because
+    they are real source an operator may need to find.
 
     So this records them as *source*, with the distinction made explicit on
     every row: ``capability: false`` and a ``classification`` that says what the
@@ -892,6 +949,7 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     """
     # One reverse-import graph over the tree, so "imported by nobody" is a
     # measured fact rather than a guess.
+    _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
     py_files: list[Path] = []
     for name in ("canonical", "tests"):
@@ -909,62 +967,78 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
             importers.setdefault(mod.split(".")[0], set()).add(path.as_posix())
 
     rows: list[dict[str, Any]] = []
-    runtime_root = root / "canonical" / "runtime"
-    for path in sorted(runtime_root.rglob("*.py")):
-        if ".git" in path.parts:
+    # Every source root, not only ``canonical/runtime``. Measured before this
+    # change: ``find_source`` located 0 of 8 of the project's own SWE-kernel
+    # modules -- the 204 files that contain the repair, CEGIS and epistemic-loop
+    # machinery -- because the scan was hard-coded to one directory. The model
+    # could not answer "where is this?" about the code that implements its own
+    # solver. Scanning only ``runtime`` was never a decision the laws asked for;
+    # it was a directory literal that happened to be written first.
+    #
+    # The guarantee is unchanged and still strict: a row here is *addressable
+    # source*, never executable. ``capability`` stays False, ``solve()`` still
+    # cannot select it, and a module that *is* a capability is still excluded by
+    # ``covered`` before it can be indexed as non-executable source.
+    for source_root in _SOURCE_ROOTS:
+        base_dir = root / source_root
+        if not base_dir.is_dir():
             continue
-        rel = path.relative_to(root).as_posix()
-        if rel in covered:
-            continue
-        try:
-            raw = path.read_bytes()
-        except OSError:
-            continue
-        text = raw.decode("utf-8", errors="replace")
-        stem = path.stem
-        is_entry = "__main__" in text
-        n_importers = len(importers.get(stem, set()) - {rel})
-        classification = (
-            "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
-        )
+        for path in sorted(base_dir.rglob("*.py")):
+            if ".git" in path.parts or "__pycache__" in path.parts:
+                continue
+            rel = path.relative_to(root).as_posix()
+            if rel in covered or rel in _seen:
+                continue
+            _seen.add(rel)
+            try:
+                raw = path.read_bytes()
+            except OSError:
+                continue
+            text = raw.decode("utf-8", errors="replace")
+            stem = path.stem
+            is_entry = "__main__" in text
+            n_importers = len(importers.get(stem, set()) - {rel})
+            classification = (
+                "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
+            )
 
-        symbols: list[str] = []
-        summary = ""
-        try:
-            with warnings.catch_warnings():
-                warnings.simplefilter("ignore", DeprecationWarning)
-                tree = ast.parse(text)
-            for node in tree.body:
-                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                    symbols.append(node.name)
-            summary = (ast.get_docstring(tree) or "").strip().splitlines()
-            summary = summary[0][:240] if summary else ""
-        except (SyntaxError, ValueError, UnicodeDecodeError):
-            classification = "UNPARSEABLE"
+            symbols: list[str] = []
+            summary = ""
+            try:
+                with warnings.catch_warnings():
+                    warnings.simplefilter("ignore", DeprecationWarning)
+                    tree = ast.parse(text)
+                for node in tree.body:
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                        symbols.append(node.name)
+                summary = (ast.get_docstring(tree) or "").strip().splitlines()
+                summary = summary[0][:240] if summary else ""
+            except (SyntaxError, ValueError, UnicodeDecodeError):
+                classification = "UNPARSEABLE"
 
-        haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
-        rows.append(
-            {
-                "id": "source:" + rel,
-                "kind": "SOURCE_ADDRESSABLE_MODULE",
-                "path": rel,
-                "sha256": digest_bytes(raw),
-                "classification": classification,
-                # The load-bearing part: addressable is not executable.
-                "capability": False,
-                "executable_entry_point": is_entry,
-                "imported_by_count": n_importers,
-                "symbol_count": len(symbols),
-                "symbols": sorted(symbols)[:24],
-                "summary": summary,
-                # Term *counts*, matching the convention `knowledge` and
-                # `skills` already use, so the runtime can score this index with
-                # the same IDF weighting as `recall`. A flat set of terms made
-                # every row look equally about "v1" -- measured, "v1" occurs in
-                # 1132 of 1859 rows -- which is why raw overlap ranked noise.
-                "terms": _term_counts(haystack),
-            }
-        )
+            haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
+            rows.append(
+                {
+                    "id": "source:" + rel,
+                    "kind": "SOURCE_ADDRESSABLE_MODULE",
+                    "path": rel,
+                    "sha256": digest_bytes(raw),
+                    "classification": classification,
+                    # The load-bearing part: addressable is not executable.
+                    "capability": False,
+                    "executable_entry_point": is_entry,
+                    "imported_by_count": n_importers,
+                    "symbol_count": len(symbols),
+                    "symbols": sorted(symbols)[:24],
+                    "summary": summary,
+                    # Term *counts*, matching the convention `knowledge` and
+                    # `skills` already use, so the runtime can score this index with
+                    # the same IDF weighting as `recall`. A flat set of terms made
+                    # every row look equally about "v1" -- measured, "v1" occurs in
+                    # 1132 of 1859 rows -- which is why raw overlap ranked noise.
+                    "terms": _term_counts(haystack),
+                }
+            )
     return rows
 
 
@@ -1220,6 +1294,19 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         if row["provenance"].get("source_path")
     )
     source_index = _source_index_rows(base, covered_paths)
+    admitted_paths: set[str] = set()
+    for row in capabilities:
+        for key in ("source_path", "adapter_path"):
+            value = row["provenance"].get(key)
+            if isinstance(value, str):
+                admitted_paths.add(value)
+    harvested = _harvested_rows(base, admitted_paths)
+    # `source_index` now scans `canonical/swe_kernel` as well as `canonical/runtime`,
+    # so some harvested rows are already findable there.  Say so on the row instead
+    # of hiding the executable half: findable and callable are different facts.
+    indexed_paths = {row["path"] for row in source_index}
+    for row in harvested:
+        row["also_in_source_index"] = row["path"] in indexed_paths
 
     # The research record behind the capabilities: governance decisions,
     # verification receipts, action intents. Records, not capabilities -- see
@@ -1246,6 +1333,8 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             included_sources.append((evidence_path, evidence_sha))
     for row in knowledge + skills:
         included_sources.append((str(row["path"]), str(row["sha256"])))
+    for row in harvested:
+        included_sources.append((row["path"], row["sha256"]))
     for rel in (FABRIC_PATH, REGISTRY_PATH):
         path = base / rel
         if path.is_file():
@@ -1262,6 +1351,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "skills": skills,
         "knowledge": knowledge,
         "source_index": source_index,
+        "harvested_capabilities": harvested,
         "research_index": research_index,
         "grammar": grammar,
         "counts": {
@@ -1276,6 +1366,14 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "skills": len(skills),
             "knowledge_documents": len(knowledge),
             "source_index_modules": len(source_index),
+            "harvested_capabilities": len(harvested),
+            "harvested_contract_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "contract"
+            ),
+            "harvested_program_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "cli"
+            ),
+            "harvested_admitted": sum(1 for row in harvested if row["admitted"]),
             "source_index_entry_points": sum(
                 1 for row in source_index if row["classification"] == "ENTRY_POINT"
             ),
@@ -1306,6 +1404,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
             "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
             "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF",
+            "HARVESTED_SURFACE_IS_DISCOVERED_NOT_ADMITTED__EXECUTION_ISSUES_A_RECEIPT_AND_PROMOTES_NOTHING",
         ],
     }
     model["digest"] = {

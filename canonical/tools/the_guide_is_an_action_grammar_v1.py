@@ -94,6 +94,8 @@ for path in (str(TOOLS), str(REPO)):
     if path not in sys.path:
         sys.path.insert(0, path)
 
+from canonical.swe_kernel import effect_witness_v1 as ew  # noqa: E402
+
 SCHEMA = "BRAIN_THE_GUIDE_IS_AN_ACTION_GRAMMAR_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX"
 
@@ -758,7 +760,8 @@ def kind_of(path: pathlib.Path) -> str:
     if stat.S_ISREG(mode) and mode & 0o111:
         return "executable"
     try:
-        head = path.open("rb").read(8192)
+        with path.open("rb") as handle:
+            head = handle.read(8192)
     except OSError:
         return "missing"
     if head.startswith(COMPRESSED_MAGIC):
@@ -1347,7 +1350,17 @@ def run(argv: Sequence[str], root: pathlib.Path, *, deadline: float = RUN_DEADLI
     after_bytes = _digest(root)
     bytes_changed = [rel for rel in sorted(set(before_bytes) | set(after_bytes))
                      if before_bytes.get(rel) != after_bytes.get(rel)]
+    # A page's cited flag is not a check of the object the step acted on. The
+    # object-bound witness is computed from the argv and the two byte digests
+    # instead; it is recorded next to the citation, not in place of it, so the
+    # old gates stay comparable. `THE_CHECK_NAMES_ITS_OBJECT_V1` measures what
+    # binding buys on decoys and held-out producers.
+    _w = ew.witness_of_run(argv, before_bytes, after_bytes)
+    witness = {"schema": ew.SCHEMA, "role": _w["role"],
+               "subjects": _w["subjects"], "changed": _w["changed"],
+               "unexpected_changed": _w["unexpected_changed"]}
     return {"accepted": code == 0, "code": code, "stdout": text_out, "stderr": text_err,
+            "witness": witness,
             "changed": before != after or bool(bytes_changed),
             "changed_kinds": before != after,
             "bytes_changed": bytes_changed[:8],
@@ -1445,11 +1458,13 @@ def attempt(step: dict[str, Any], root: pathlib.Path, *, need: str,
             got.get("stderr") or "", current.get("declared") or {},
             out_kind=current.get("out_kind"), wanted_role=current.get("verb"))
         log.append({"effort": effort, "argv": current["argv"], "accepted": got["accepted"],
-                    "changed": got.get("changed"), "clause": clause,
+                    "changed": got.get("changed"), "witness": got.get("witness"),
+                    "clause": clause,
                     "stderr": (got.get("stderr") or "")[:200]})
         if got["accepted"]:
             return {"status": "ACCEPTED_CHANGED" if got["changed"] else "ACCEPTED_INERT",
-                    "log": log, "step": current, "run": got}
+                    "log": log, "step": current, "run": got,
+                    "witness": got.get("witness")}
         if effort == rounds or not clause or clause["form"] == "UNREAD":
             return {"status": "REFUSED_UNREAD" if clause and clause["form"] == "UNREAD"
                     else "REFUSED_NO_REPAIR", "log": log, "step": current, "run": got,
@@ -1942,6 +1957,7 @@ def execute_path(path: Sequence[dict[str, Any]], need: dict[str, Any], root: pat
                     "in_kind": edge["in_kind"], "out_kind": edge["out_kind"],
                     "in_value": step.get("in_value"), "out_flag": step.get("out_flag"),
                     "status": result["status"], "created": created,
+                    "witness": result.get("witness"),
                     "goal": goal, "attempts": result.get("log"),
                     "check": step.get("check")})
         if goal["held"]:
@@ -2157,6 +2173,12 @@ def measure(*, wall_budget: float = PAGE_WALL_BUDGET, depth: int = 2) -> dict[st
                                               if r["status"] == "PASS__GOAL_HELD"
                                               and len(r.get("path") or []) >= 2),
             "roster": roster,
+            "steps_with_object_bound_witness": sum(
+                1 for r in rows for step in (r.get("steps") or [])
+                if (step.get("witness") or {}).get("subjects")),
+            "steps_with_unnamed_effect": sum(
+                1 for r in rows for step in (r.get("steps") or [])
+                if (step.get("witness") or {}).get("unexpected_changed")),
             "model_calls": 0, "parameters_stored": 0, "network_calls_at_run_time": 0,
         },
         "needs_carry_no_program": needs_carry_no_program(),
