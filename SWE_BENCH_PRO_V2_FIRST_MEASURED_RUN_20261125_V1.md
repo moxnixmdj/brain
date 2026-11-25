@@ -1,178 +1,186 @@
-# SWE-bench Pro V2: the first measured run is 0/3, and the harness is what makes that readable
+# SWE-bench Pro V2, HARD-51: the engine resolves 0 of 51, and 44 of those 51 are one specific kind of 0
 
-*Round dated 2026-11-25. Receipt: `canonical/verification/SWE_PRO_V2_SMOKE3_20261125_V1.json`.
-Tools: `canonical/eval/harbor/swe_pro_v2_ci.py`, `canonical/eval/harbor/swebench_pro_v2_agent.py`,
-`canonical/tools/swe_pro_v2_run_receipt_v1.py`. Tests: 23 green (receipt 5, harness 16, kernel shape-laws 2).
-One real CI run, 3 official tasks × 3 arms, inside the pinned official container images,
-0 model calls, $0.00, 22 m 45 s of runner time.*
-
----
-
-## 0. The answer on one page
-
-Step 3 of the last plan said: *fire the GitHub Actions Docker eval and publish hard, reproducible
-$0.00-spend numbers next to the frontier scores.* It fired, four times, and this is what came back.
-
-| measured | result |
-|---|---|
-| benchmark | SWE-bench Pro **V2**, `v2/hard51_ids.txt` subset — 3 qutebrowser tasks (a smoke set, not the set) |
-| container images | `ghcr.io/scaleapi/swe-bench_pro-v2:<instance>`, pulled anonymously, upstream pinned at `31a20c7` |
-| who graded | each task's **own** verifier, inside the task's own container. Nothing in this repo grades a fix |
-| **causal arm (our engine)** | **0 / 3 resolved (0.0 %)** — and 0 / 2 when the one trial that died in the harness is excluded |
-| `nop` control | 0 / 3 ✓ (the tests are not free) |
-| `oracle` control (reference patch) | 3 / 3 ✓ (the tests are not impossible) |
-| gates in the same job config | `oracle_gate_pass: PASS`, `nop_gate_pass: PASS` |
-| model calls, cost | **0, $0.00**, asserted per trial by the agent and re-summed by the collector |
-| engine wall time | 3.54 s per task recorded (see §4 — this number is under audit) |
-| what the engine actually did | 1 × `EDITS_UPLOADED` (its own status said `PASS`, 1 file changed, verifier said 0.0), 1 × `NO_EDITS` (`FAIL_CLOSED`), 1 × `HARNESS_ERROR` |
-| is §6 met | **NO.** Not close |
-
-The result is a zero. It is the kind of zero that is worth having: produced by official images,
-official tests, with both controls green, in a job anyone can re-run from this branch. Three
-earlier runs of the same harness also printed `0 / 3` — and meant *nothing*, because no trial
-had been read at all. §2 is about telling those two zeros apart, which turned out to be the
-harder engineering problem than making the engine patch anything.
+*Rounds dated 2026-11-25. Receipts: `canonical/verification/SWE_PRO_V2_SMOKE3_20261125_V1.json` (smoke),
+and the aggregate report of the 51-task run at `canonical/eval/results/swe-bench-pro-v2/swe-pro-v2-hard51-latest.json`
+(eval commit `42111ea2`, results commit for run `20261125T162816Z`).
+Tools: `canonical/eval/harbor/swebench_pro_v2_agent.py`, `canonical/eval/harbor/swe_pro_v2_ci.py`,
+`canonical/tools/swe_pro_v2_run_receipt_v1.py`. Tests this round: 26 + 5 + 2 green.
+Every number below comes from a CI run on GitHub's runners against the pinned official images.
+Nothing here is simulated, and nothing here is a success claim.*
 
 ---
 
-## 1. Two zeros that look identical and are not
+## 0. The measurement
 
-```
-run 45635668245   causal 0/3   nop 0/3   oracle 0/3   ←  oracle 0/3 is IMPOSSIBLE upstream (642/642 certified)
-run 45644331703   causal 0/3   nop 0/3   oracle 3/3   ←  the first number that means 0/3
-```
+51 tasks — the whole `v2/hard51_ids.txt` set, vendored and byte-diffed against upstream at the pinned
+release `31a20c7` — three arms, 6 shards, one attempt each, official container images, each task graded
+by **its own** test inside its own container.
 
-In the first three runs every job was green and every arm scored nothing. The only field that
-distinguished them was a control that could not possibly fail — the reference patch — and it took
-two more rounds of instrumentation to find why the report couldn't say so itself:
+| arm | resolved | rate | model calls | cost | trial wall s | engine wall s |
+|---|---|---|---|---|---|---|
+| **causal (our engine, un-gated)** | **0 / 51** | **0.0 %** | **0** | **$0.00** | 7818.5 | 878.1 (≈17.2 s/task) |
+| `nop` (do nothing) | 0 / 51 | 0.0 % | 0 | $0.00 | 6900.0 | — |
+| `oracle` (upstream's reference patch) | **50 / 51** | 98.0 % | 0 | $0.00 | 7411.3 | — |
 
-- the collector counted its **own `NOT_RUN` placeholders** as reported rows, so the machine-readable
-  report of a void run said `run_produced_number: true` while the markdown was right to shout;
-- harbor builds a trial's name from the task name **truncated to 32 characters**
-  (`models/trial/config.py: generate_trial_name() → f"{task_name[:32].rstrip('_-')}__{ShortUUID(7)}"`)
-  while the manifest ids are 105 characters (`…-v<sha>`). Keying trials by the name in
-  `result.json` produced three real rows under three names the manifest didn't recognise, and all
-  three expected ids fell back to placeholders. `n_reported: 3` and `missing_trials: 3` simultaneously.
+`nop_gate_pass: PASS`. `oracle_gate_pass: **FAIL**` — and that FAIL is load-bearing, see §4.
 
-The fix is not "match harder": `resolve_task_id` accepts an exact id, then an **unambiguous** prefix
-relation in either direction, and anything left over is kept as an extra row and listed under
-`unmatched_trial_keys`, with a named section in the markdown. A scored trial can no longer be
-silently dropped, and an ambiguous one is reported as unresolved rather than guessed.
+**Therefore this is not yet a quotable benchmark score.** By the rule this project wrote for itself, a
+causal number is interpretable only if the reference patch resolves *every* task in the same job
+configuration. 50/51 is not 51/51, so the correct public sentence is:
 
-## 2. The receipt, because a table is not a claim
+> the engine scored 0 / 51 on SWE-bench Pro V2 HARD-51 in a run whose oracle control came within one
+> errored trial of certification; the number is honest, the certification is not yet complete.
 
-`canonical/tools/swe_pro_v2_run_receipt_v1.py` decides *whether a run may be quoted at all*. It
-recomputes produced-ness from per-task rows instead of trusting the report's flag (§1 is exactly
-what happens when a receipt inherits a wrong flag), nulls out `resolved` and `resolve_rate_pct`
-when no trial was read, and states its rule in one line: **quotable ⇔ rows were read and the
-reason list is empty.** Reasons it will emit: `NO_TRIAL_DATA`, `ORACLE_GATE`, `NOP_GATE`,
-`MODEL_CALLS`, `COST`, `ATTRIBUTION`, `*_CONTROL_DIRTIED`.
+What the 0 is made of — this is the part that is worth more than the rate:
 
-On the void runs it said `NO_MEASUREMENT__HARNESS_ONLY`, and it refused to also accuse the controls
-of being broken, because they were never exercised. On this run it says
-`OFFICIAL_TASK_VERDICTS__GATES_PASSED`, `claimable: true`, `reasons: []`.
+| what the engine did | trials | of which resolved |
+|---|---|---|
+| `NO_EDITS` — refused to write anything (`FAIL_CLOSED` in 43 cases) | 44 | 0 |
+| `EDITS_UPLOADED` — patched, and its own status said `PASS` | 3 | **0** |
+| `HARNESS_ERROR` — our guard aborted the trial (§3) | 4 | 0 |
 
-## 3. What the 0/3 says about the engine
+Engine-attributable denominator: 47. **0 / 47.** A refusal and a wrong patch score identically, and the
+run says which is which.
 
-One row of the three is a genuine engine result, and it is the interesting one:
+## 1. The three tasks where the engine actually tried
 
-- the engine **produced a patch and believed it**: `engine_result_status: PASS`, one file rewritten
-  via `tree-mutation`, uploaded into the container — and the task's own tests said `0.0`.
-- that is the same failure mode §9.5 warns about in a different costume: our internal check is not
-  the hidden oracle. The engine's `PASS` means "my reconstruction of the demand is satisfied", not
-  "the graded behaviour is satisfied". Nothing about this run supports the claim that a self-check
-  substitutes for the task's test.
-- `FAIL_CLOSED` on the second task is the new shape-law doing its job: with a green suite and no
-  defect evidence it refused to write anything, rather than emitting a guess. Correct behaviour,
-  and it still scores 0. Refusal is not a patch.
-- `HARNESS_ERROR` on the third is ours, not the engine's: counted in the benchmark rate, excluded
-  from the engine's own denominator, and the cause is now captured (this run pre-dated the field).
+| repo | files changed | engine's self-status | verifier | engine seconds |
+|---|---|---|---|---|
+| teleport (Go) | 1 | `PASS` | 0.0 | 132.1 |
+| webclients (TypeScript) | 1 | `PASS` | 0.0 | 254.3 |
+| qutebrowser (Python) | 1 | `PASS` | 0.0 | 53.0 |
 
-3 tasks of 51 is not a resolve rate for anything. It is a proof that the measurement pipeline
-works, on the hardest open set we could actually run, and a first real counterexample for the
-engine's self-judgement.
+Three patches, each one file, each one *accepted by the engine's own verification and rejected by the
+task's*. This is §9.5's warning measured rather than asserted: an internal check that "the demand I
+reconstructed is satisfied" is not the hidden oracle, and a `PASS` from inside the house is worth nothing
+on a board. It is also the cleanest statement of the gap: **when the engine acts, it is confidently
+wrong; when it does not act, it is honestly stuck.** Both are 0.0, and only one of them is respectable.
 
-## 4. Open, unresolved, stated plainly
+## 2. 44 refusals are Wall 1, at benchmark scale, with a distribution
 
-- **Wall time.** The causal arm reports 3.54 s mean trial wall; the `nop` control reports 48.62 s
-  under the same configuration. One of those is not what it looks like. `agent_seconds` (engine time)
-  and harbor's trial span are now separate columns and separate totals, so the next run says which
-  is which instead of averaging two quantities into one. Until then **no speed claim is made** —
-  neither 0.35 s nor 3.5 s is quotable from this evidence.
-- **Diagnosed on the following run** (`080753b7`): the `HARNESS_ERROR` was
-  `URLError: <urlopen error [Errno 111] Connection refused>` — a fallback path inside the engine
-  reached for the network even though `inputs["allow_web"] = False` was set. So the flag was
-  *declared* and not *enforced*, and one trial's capability question turned into a plumbing error
-  that scored 0 for a reason that says nothing about the solver. The harness now refuses
-  outbound connects in-process while `allow_web` is false, counts the attempts, and prints the
-  count in the report (`network_guard: enforced`, `network_attempts: N`). What is still open is
-  *which* engine path needed the fetch, and that answer is in §4b.
-- `materialize` writes task dirs whose names differ from the ids in the manifest's own report keys
-  (105-char `-v<sha>` form). Reconciled by tolerant matching; still worth pinning at the source.
-- n = 1 trial per task. No variance estimate.
-- The `hard51` list is vendored and re-diffed against upstream `31a20c7` in CI (byte-identical,
-  verified twice), but the 51-task number itself has not been run yet.
+Per-repo breakdown of `NO_EDITS`:
 
-## 4b. The fetch was never about the web
+| repo | tasks | refused | patched | harness error |
+|---|---|---|---|---|
+| ansible (Python) | 8 | 7 | 0 | 1 |
+| openlibrary (Python) | 8 | 8 | 0 | 0 |
+| flipt (Go) | 7 | 5 | 0 | 2 |
+| teleport (Go) | 6 | 5 | 1 | 0 |
+| webclients (TS) | 5 | 4 | 1 | 0 |
+| element-web (TS) | 4 | 4 | 0 | 0 |
+| vuls (Go) | 4 | 4 | 0 | 0 |
+| qutebrowser (Python) | 4 | 2 | 1 | 1 |
+| navidrome (Go) | 3 | 3 | 0 | 0 |
+| NodeBB (JS) | 1 | 1 | 0 | 0 |
+| tutanota (TS) | 1 | 1 | 0 | 0 |
 
-The guard found the path, and the path was not a knowledge lookup: `_http_json_request` in
-`canonical/runtime/epistemic_scan_acquire_compress_v1.py` probes the *environment's own* HTTP
-service (`/openapi.json`, `/token`) as part of learning an API by observation. Nothing was
-listening inside the runner, so the transport raised `URLError: [Errno 111]`, the function had a
-handler for `HTTPError` (a response) and none for `URLError` (no response), and the exception aborted
-the whole solve.
+Every one of those refusals carries the same note: `store: STORE_FILE_ABSENT`, `engine said:
+FAIL_CLOSED`. Two facts follow, and they are the reason this run is worth having.
 
-Two laws fall out of that, and they are not the same law:
+1. **The refusal is the shape-law, not a crash.** With the instruction and a green suite there is no
+   failing test to bind a demand to, and the engine now refuses instead of guessing (`NO_DEFECT_EVIDENCE`
+   / `ALREADY_PASSING__NO_PATCH`, the behaviour pinned in
+   `canonical/tests/test_workspace_shape_selects_swe_modality_and_no_patch_fails_closed_v1.py`). The
+   benchmark showed the law firing 43 out of 43 times it applied. Correct behaviour, 0.0 score.
+2. **This run is the ablated-store condition, whether or not it was meant to be.** `STORE_FILE_ABSENT`
+   means every task started with no external knowledge: the store did not exist for shard jobs, so
+   the 0/51 is *the empty-store arm* of the §6 memory ablation, not "the system with its memory". The
+   with-store arm has not been measured yet, and no claim in this file may be read as if it had.
 
-1. **An unreachable service is a fact, not an error.** `_http_json_request` now returns
-   `(0, {"error": "unreachable", "reason": …, "url": …})` for `URLError`/`OSError`, so the gap stays
-   open and the rest of the solve continues; a 401 or a 404 is still returned as the response it is,
-   because a reply *is* evidence. Tests: `test_unreachable_service_is_a_fact_not_an_error_v1.py` (5,
-   including a live loopback server proving real replies are not swallowed and a raw `OSError` case).
-2. **`allow_web` means no external knowledge, not no IPC.** The first version of the harness guard
-   refused *every* outbound connect, which would have blocked the engine from probing a service it
-   started itself — a capability quietly deleted in the name of a constraint. The guard now refuses
-   non-loopback addresses only, decided on the literal address (no DNS: resolving a name in order to
-   decide would itself be a lookup), and treats unix socket paths as local. That distinction is the
-   test `test_the_guard_blocks_the_web_and_leaves_the_environment_alone`.
+So the bottleneck is not the generator's reach, it is the absence of a selection gradient — the exact
+thing "Metamorphic Witness Splitters" (Idea 1 of the current plan) exists to manufacture from the
+repo's own passing tests. This run prices that work: without a failing test the engine writes nothing
+in 86 % of real hard tasks, and the score is 0.0 %.
 
-Worth stating precisely, because it changes the verdict on the engine: the probe is not a
-hallucinated endpoint. `acquire_missing_knowledge` only reaches for `http_spec` when the scan
-manifest *declares* `http.base_url` and the goal vocabulary is about HTTP — so the environment
-declared a service and the service was not there. The correct handling of "declared but dead" is
-exactly what fix (1) now does: record it, keep the gap open, spend nothing more on it.
+## 3. What our own instrumentation did to the number (and the fix)
 
-## 5. Corrections to what earlier rounds asserted
+Four trials died as `HARNESS_ERROR` with `NetworkRefusedByHarness: outbound connect refused`. That is
+the harness's `allow_web=False` guard — added one commit earlier to *enforce* what the engine had only
+been told — refusing an outbound connect made by the acquisition layer.
 
-| earlier claim | status now |
+The two fixes composed badly, and the run is what proved it: `_http_json_request` was just taught that
+"no reply from the network" is a fact about the environment (returns `(0, {"error": "unreachable"})`),
+but it recognises that fact only as a `urllib.error.URLError`, and my refusal derived from
+`RuntimeError`. So the guard invented a new failure mode instead of being a constraint. It now derives
+from `URLError`, and a refusal is handled by exactly the code path a real transport failure uses, while
+still being counted in `network_attempts`. Test:
+`test_the_guard_refusal_is_a_transport_failure_so_callers_already_handle_it`.
+
+Read narrowly: 4 of 51 trials were lost to our plumbing, 47 were the engine's, and the rate is 0 either
+way. Read honestly: an instrument that changes what it measures has to be measured too, and it costs 8 %
+of the sample here.
+
+## 4. Why the oracle gate is at 50/51, and why that is not a technicality
+
+The one failing oracle trial is `instance_gravitational__teleport-f432a71a…`: `reward: None`,
+`exception: RuntimeError`, 21.5 s — the trial *errored*, it did not grade a gold patch as wrong.
+Upstream's `v2/GATE.md` certifies the reference patch 642/642 on their own runner (Modal, 50
+concurrent). On GitHub runners, one Go-monorepo control trial did not complete.
+
+The gate rule refuses to let that pass as "close enough". If a control arm can lose a trial to the
+environment, then a 0 in the causal arm is not known to mean "the tests rejected the patch" — it might
+mean "this runner could not run this task". The gate is what distinguishes a score from an artifact of
+the rig, so it fails closed at 50/51 and the run is marked not certifiable. Re-running to obtain a
+clean 51/51 is the next measurement step, not a rephrasing of this one.
+
+## 5. Corrections, in this round's own wake
+
+| claim | status |
 |---|---|
-| "run the eval by `workflow_dispatch`" | **failed here**: this sandbox's token gets HTTP 403 on dispatch. Eval mode is armed by a one-shot marker file consumed by the aggregate job, so a push queues exactly one run |
-| "add a `swe-bench-pro-v2-eval.yml` workflow" | **dead**: this repo carries 728 workflow files and new ones do not register (404 on the API). The jobs live in the registered `engine-docker-eval.yml` |
-| "Terminal-Bench 4.0" | **corrected**: 4.1 is current (released 2026-11-09, regrades 4.0 trials) |
-| "Harbor, whatever is installed" | **pinned**: 0.22.0, the version upstream's own `v2/GATE.md` certified the images with |
-| frontier scores from aggregator sites (Muse Spark 1.1 61.5 %, Opus 5.5 64.8 / 99.4 etc.) | **unverified third-party**, different sets and cut-offs; not comparable to our 0/3 and never placed beside it as if they were |
-| "engine is un-gated and ready for the benchmark" | **partly false**: it is un-gated and it runs, and it resolves 0 of 2 attributable tasks. §6 is not met; §11.1 (live numbers beside the frontier) now exists as a mechanism with one measurement in it |
+| "the harness can run the official benchmark" | **verified now**, end to end, 153 trials in one run, artifacts and per-task verdicts committed by CI |
+| "the causal arm's 3.54 s/trial vs nop's 48.6 s discrepancy is engine speed" | **resolved by splitting the columns**: harbor trial wall and `agent_seconds` are separate; engine time is ≈17.2 s/task at scale, trial wall ≈153 s/task |
+| "0/3 on a smoke subset" | superseded by 0/51; the smoke set is kept as the harness's own regression case |
+| "the guard enforces no-network without side effects" | **false as first written** — see §3, fixed by deriving from `URLError` |
+| "Terminal-Bench 4.0" | still corrected: 4.1 is current (2026-11-09); not yet run by us at all |
+| "§6 is met" | **NO.** Zero resolve rate, store ablated, one benchmark, no unseen-environment single-experience transfer measured on it |
 
-## 6. Rejected alternatives, and why
+## 6. Rejected readings of this run
 
-- **Report `0/3` as "SWE-bench Pro: 0 %"** — that would be a lie in the other direction: 3 tasks
-  from a 51-task subset of a 642-task benchmark is not a benchmark score. The title of this file is
-  the claim; nothing larger is made.
-- **Retry the dispatch API with a different scope, or create a new workflow file** — both measured
-  as unavailable, and the marker path is already built, tested and used five times.
-- **Have the aggregate job "fix" the truncation mismatch by string-similarity heuristics** — a
-  fuzzy match between a task and its own grading is exactly the leakage-shaped hole §6 forbids.
-  Prefix matching is exact-or-nothing and ambiguous cases are reported, not resolved.
-- **Let `status: PASS` from the engine count toward a fix** — the harness has never accepted the
-  agent's word for anything; only `verifier/reward.txt` / `verifier_result` sets `resolved`.
+- **Reporting "0 % on SWE-bench Pro"** as if it were a leaderboard row: 51 tasks of a 642-task set,
+  one attempt each, empty store, oracle short of certification. Quotable only with all four qualifiers.
+- **Reporting "43/51 refusals = the fail-closed law works, so really 43/43 correct"** — a refusal that
+  scores 0.0 is a failure against the benchmark. The law being respected is not a result; it is the
+  reason the number is clean rather than contaminated by guesses.
+- **Retrying the run until the oracle hits 51/51 and treating the first non-certifiable run as void** —
+  the re-run has to report both, or the gate is decoration.
+- **Seeding the store with knowledge mined from these very repos** to lift the score: that would
+  warehouse the benchmark inside the external store, which §2's boundary forbids as squarely as it
+  forbids putting it in weights. Store content must come from the house's own experience, and the
+  ablation must say which arm is which.
 
 ---
 
 ## Next, in order
 
-1. re-run smoke3 with the attribution and error fields live (one marker commit) — confirms the
-   `HARNESS_ERROR` cause and the wall-time split;
-2. `swe-pro-v2-hard51` at `shards=6`, all three arms — the first number with a real denominator;
-3. take the two failure shapes (`PASS`-but-rejected, `FAIL_CLOSED`) back to the engine as the
-   bottleneck they actually are: the self-check is not the oracle, and a refusal to patch scores 0
-   exactly like a wrong patch does.
+1. re-run `swe-pro-v2-hard51` with the `URLError` composition fix and `conditions` plumbing, aiming at
+   an oracle 51/51 and zero guard-induced `HARNESS_ERROR`s; report both runs side by side if the second
+   is still short;
+2. the store arm of the ablation — and the one temptation this run creates must be refused in writing,
+   see §7;
+3. Wall 1 as the target it now demonstrably is: a green suite must be turned into a failing oracle from
+   the repo's own tests and the instruction's relational words, with no hidden test in sight. The 44
+   refusals are the baseline that work has to move, and 0/47 engine-attributable is the floor.
+
+## 7. Why this run's store will not be fed back into the same 51 tasks
+
+The agent already writes its store back (`store_saved`, `skills_newly_admissible` per trial), so the
+cheapest possible way to raise the next score is to commit the stores from run N and mount them for
+run N+1 on the same tasks. That must not be done, and the reason is not squeamishness:
+
+a skill crystallised from an attempt at task X is a cached *patch for X*. Re-presenting X with that
+entry in the store turns the benchmark into a lookup — the exact thing §2 forbids for weights,
+forbidden here for the store, because the store is part of the shipped system. The boundary test in
+§2 is "can it be added and removed without retraining", not "is it in a .py file"; a store seeded
+from the test set passes that test and fails the mission.
+
+What is legitimate, and what will be measured instead:
+
+- **same run, later tasks:** within one run, tasks are attempted in a fixed order and each shard's
+  store accumulates as it goes, so any lift is transfer between *different* tasks (and the report
+  shows which tasks admitted skills). That effect is already in the 0/51: 43 admissions were possible
+  and 43 refusals followed.
+- **cross-set transfer:** a store grown on one set of repositories (self-play on passing tests, §9.4.4,
+  or a first pass on a disjoint slice of the 642) evaluated on a **disjoint** set. Any transfer claim
+  in this project must be of this shape, or it is not a transfer claim.
+- **ablation:** empty store vs grown store on the same disjoint evaluation set, reported as a pair.
+  Run 20261125T162816Z is the empty arm, and only the empty arm.

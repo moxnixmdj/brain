@@ -664,3 +664,24 @@ def test_conditions_travel_with_the_shard_report_so_a_budget_is_never_implicit()
         assert merged["conditions"]["engine_timeout_s"] == 240
         md = "\n".join(CI.to_markdown({"causal": merged}, benchmark="B", commit="c"))
         assert "Measured under: `engine_timeout_s=240`, `n_shards=6`" in md
+
+
+def test_the_guard_refusal_is_a_transport_failure_so_callers_already_handle_it() -> None:
+    """Measured: as a plain RuntimeError the guard itself created 4 HARNESS_ERRORs.
+
+    The 51-task run showed the two fixes failing to compose — the acquisition layer treats
+    "no reply" as a fact about the environment, but only for `urllib.error.URLError`, so a
+    refusal raised by the harness escaped as an error. It must be indistinguishable, to the
+    caller, from a connection that was refused by the network.
+    """
+    import urllib.error
+
+    assert issubclass(AG.NetworkRefusedByHarness, urllib.error.URLError)
+
+    from canonical.runtime import epistemic_scan_acquire_compress_v1 as esac
+
+    guard, attempts = AG.network_guard(True)
+    with guard:
+        code, body = esac._http_json_request("http://example.invalid:80/spec.json", timeout_s=2.0)
+    assert code == 0 and body["error"] == "unreachable", body
+    assert len(attempts) == 1, "and the attempt is still counted, not swallowed"

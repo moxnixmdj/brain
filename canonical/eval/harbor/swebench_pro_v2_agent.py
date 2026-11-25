@@ -33,6 +33,7 @@ import shutil
 import sys
 import tempfile
 import time
+import urllib.error
 from typing import Any, Callable, Iterable, Mapping
 
 # ---------------------------------------------------------------------------
@@ -92,7 +93,7 @@ _TEXT_SUFFIXES = frozenset(
 )
 
 
-class NetworkRefusedByHarness(RuntimeError):
+class NetworkRefusedByHarness(urllib.error.URLError):
     """Raised in place of an outbound connect while the harness has ``allow_web`` off.
 
     The engine is *told* it has no network (`inputs["allow_web"] = False`), and on one
@@ -102,8 +103,13 @@ class NetworkRefusedByHarness(RuntimeError):
     the trial was scored 0 for the wrong reason.
 
     Enforcing the flag is the honest version of declaring it: nothing depends on remembering
-    to check the flag at every call site, the count of refused attempts is reported, and the
-    engine gets a typed error of its own language instead of a transport error. Covers
+    to check the flag at every call site, and the count of refused attempts is reported.
+    It subclasses `urllib.error.URLError` deliberately — the first version derived from
+    `RuntimeError` and turned four trials into `HARNESS_ERROR` on the 51-task run, because
+    code that already handles "no reply from the network" (the acquisition layer's
+    unreachable-is-a-fact path) could not recognise our refusal. A refusal raised here must
+    travel through exactly the same handling as a real transport failure, or the guard would
+    be a new failure mode rather than a constraint. Covers
     in-process sockets and `urlopen`; a subprocess the engine spawns is its own process and
     is not covered, which is why the attempt count is an enforcement record, not a sandbox.
     """
