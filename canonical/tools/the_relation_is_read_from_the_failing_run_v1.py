@@ -804,6 +804,37 @@ def _render_distance(site: "Site", wanted: Mapping[str, Any]) -> int:
     return 10 ** 5 - hits * 1000
 
 
+def _add_end_anchor_edit(text: str) -> str | None:
+    """Add `\Z` to a pattern that relies on implicit trailing matching.
+
+    Two DIFFERENT repairs live in this family and both are readable off the run:
+      - REPLACE `$` with `\Z`  (a `$` also matches before a trailing newline)
+      - ADD `\Z` where there is no end anchor at all, so `(.*)` stops swallowing a
+        trailing newline. Measured: packaging 0625596e, whose pattern is
+        `re.compile(r"(\d+)(.*)", re.ASCII)` and whose fix is
+        `re.compile(r"(\d+)(.*)\Z", re.ASCII)`. The first version of the relation only
+        handled the replacement, so this row -- the exact sibling of an already-verified
+        row six lines below it -- could not be read at all.
+    Only a pattern with neither `$` nor `\Z` and a greedy tail is a candidate: adding an
+    anchor to a pattern that already constrains its end is a guess, not a derivation."""
+    if not text:
+        return None
+    match = re.search(r"""(r)(["'])(.*?)\2""", text)
+    if not match:
+        return None
+    body = match.group(3)
+    if body.endswith(chr(92) + "Z") or body.endswith("$") or body.endswith(chr(92) + "z"):
+        return None
+    # The ONLY signature is an unanchored greedy tail: `.*` / `.+`, bare or inside a final
+    # capture group, as in the measured `(\d+)(.*)`. An earlier version also admitted any
+    # body ending in `)`, which made this fire on 4 sites in packaging 189a76d5 and
+    # DISPLACED that row's correct ANCHOR replacement -- a row that had been verified.
+    # Adding a relation that costs a verified row is not progress.
+    if not re.search(r"(\.[*+]|\(.*\))\s*$", body):
+        return None
+    return text[:match.end(3)] + chr(92) + "Z" + text[match.end(3):]
+
+
 def _end_anchor_edit(text: str) -> str | None:
     """`re.compile(r"$")` -> `re.compile(r"\\Z")`, splicing INSIDE the literal.
 
@@ -1446,7 +1477,7 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
         # the run itself said an exception failed to arrive.
         if (site.kind == "regex" and str(wanted.get("source") or "") == "did_not_raise"):
             literal_here = _regex_literal_from_text(site.text)
-            repaired_here = _end_anchor_edit(expression)
+            repaired_here = _end_anchor_edit(expression) or _add_end_anchor_edit(expression)
             if literal_here and repaired_here:
                 out.append({"relation": "END_ANCHOR", "site": site.index, "line": site.line,
                             "expression": expression, "edit": repaired_here,
@@ -1751,7 +1782,12 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
         # `re.compile(r"$")` -> `re.compile(r"\Z")` in `_tokenizer.py`.
         # Only `$` at the END of the literal is a candidate: `$` in the middle is an
         # ordinary anchor for something else, and rewriting it would be a guess.
-        repaired = _end_anchor_edit(expression)
+        # BOTH REPAIRS, on the sampled path as well as the unsampled one. The unsampled
+        # path was fixed first and this one was missed, so packaging 0625596e -- a pattern
+        # that needs an anchor ADDED, and whose sampled Pattern object made the engine
+        # take this branch -- produced no hypothesis while its sibling six lines below
+        # verified. A relation that works on one of its two entry paths is half a relation.
+        repaired = _end_anchor_edit(expression) or _add_end_anchor_edit(expression)
         literal = _regex_literal_from_text(site.text)
         if repaired and literal:
             out.append({"relation": "END_ANCHOR", "site": site.index, "line": site.line,
