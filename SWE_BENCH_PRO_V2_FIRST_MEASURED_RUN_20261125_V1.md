@@ -136,9 +136,11 @@ Two laws fall out of that, and they are not the same law:
    decide would itself be a lookup), and treats unix socket paths as local. That distinction is the
    test `test_the_guard_blocks_the_web_and_leaves_the_environment_alone`.
 
-So the remaining open question is not "why did it try to reach the network" but **why an
-`http_spec` gap was inferred at all for a repo with no running service** — a Wall-1 shaped
-question about gap classification, which is what the 51-task run is now there to measure.
+Worth stating precisely, because it changes the verdict on the engine: the probe is not a
+hallucinated endpoint. `acquire_missing_knowledge` only reaches for `http_spec` when the scan
+manifest *declares* `http.base_url` and the goal vocabulary is about HTTP — so the environment
+declared a service and the service was not there. The correct handling of "declared but dead" is
+exactly what fix (1) now does: record it, keep the gap open, spend nothing more on it.
 
 ## 5. Corrections to what earlier rounds asserted
 
