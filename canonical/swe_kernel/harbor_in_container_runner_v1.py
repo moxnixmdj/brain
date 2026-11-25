@@ -392,6 +392,378 @@ def compile_issue_witness_test(
     }
 
 
+def synthesize_metamorphic_green_witness(
+    instruction: str,
+    repo_root: pathlib.Path,
+    py_exe: str,
+    *,
+    out_path: pathlib.Path = WITNESS_TEST_PATH,
+) -> dict[str, Any]:
+    """Active Counterfactual Metamorphic Witness Splitter (Wall 1: 100%-green parent suite).
+
+    When `instruction` contains only prose (no doctest / fenced repro) and existing tests are
+    100% green, scan non-test modules matching identifiers in `instruction` and execute three
+    active counterfactual algebraic probes in an isolated child process:
+      1. `ACTIVE_RETURN_ALIAS_INDEPENDENCE`: mutating one returned mutable container (`list`/`dict`/`set`)
+         of a composite return tuple must not corrupt sibling returned iterables/values.
+      2. `PREDICATE_CANONICALIZER_FIXED_POINT`: when `is_<X>(g)` agrees with `canonicalize_<X>(g) == g`
+         across baseline valid strings, any string `p` with `is_<X>(p) is True` must satisfy `canonicalize_<X>(p) == p`.
+      3. `FALSY_CALLABLE_KEY_EQUIVALENCE`: optional `key=None` callable parameters must treat a
+         `__bool__() == False` callable identically to an equivalent truthy callable.
+    """
+    from canonical.swe_kernel.causal_swe_repair_v1 import _clean_env, run_pytest_verdicts
+
+    out_path.unlink(missing_ok=True)
+    if not instruction.strip():
+        return {"compiled": False, "reason": "empty_instruction"}
+
+    tokens = {
+        tok
+        for tok in re.findall(r"[A-Za-z_][A-Za-z0-9_]{2,40}", instruction)
+        if tok.lower() not in {"the", "and", "for", "with", "when", "fix", "make", "that", "from", "this", "none", "true", "false"}
+    }
+    if not tokens:
+        return {"compiled": False, "reason": "no_identifier_tokens"}
+
+    src_base = repo_root / "src" if (repo_root / "src").is_dir() else repo_root
+    cand_targets: list[tuple[str, str, str | None]] = []
+    scan_dl = time.perf_counter() + 2.5
+    for idx_f, py_p in enumerate(src_base.rglob("*.py")):
+        if idx_f >= 400 or time.perf_counter() >= scan_dl:
+            break
+        rel_src = py_p.relative_to(src_base).as_posix()
+        if any(p.startswith(("test", ".")) for p in rel_src.split("/")):
+            continue
+        if py_p.stat().st_size > 220_000:
+            continue
+        try:
+            tree = ast.parse(py_p.read_text(encoding="utf-8", errors="ignore"))
+        except SyntaxError:
+            continue
+        fn_defs = {
+            st.name: st for st in tree.body if isinstance(st, ast.FunctionDef) and not st.name.startswith("_")
+        }
+        if not fn_defs:
+            continue
+        mod_dotted = rel_src.removesuffix(".py").replace("/", ".")
+        if mod_dotted.endswith(".__init__"):
+            mod_dotted = mod_dotted.removesuffix(".__init__")
+        for fn_nm in sorted(fn_defs):
+            matched_tok = (fn_nm in tokens) or (py_p.stem in {t.lower() for t in tokens} and fn_nm.startswith("is_"))
+            if not matched_tok:
+                continue
+            sib_canon: str | None = None
+            if fn_nm.startswith("is_"):
+                for c_nm in fn_defs:
+                    if c_nm.startswith(("canonicalize_", "normalize_")):
+                        sib_canon = c_nm
+                        break
+            cand_targets.append((mod_dotted, fn_nm, sib_canon))
+            if len(cand_targets) >= 6:
+                break
+        if len(cand_targets) >= 6:
+            break
+
+    if not cand_targets:
+        return {"compiled": False, "reason": "no_matching_repo_functions"}
+
+    probe_script = textwrap.dedent(
+        """
+        import copy, importlib, inspect, json, sys
+
+        targets = json.loads(sys.argv[1])
+        out_witness = None
+
+        for mod_name, fn_name, sib_canon in targets:
+            try:
+                mod = importlib.import_module(mod_name)
+                fn = getattr(mod, fn_name)
+            except Exception:
+                continue
+
+            # Probe 1: Predicate-Canonicalizer Fixed-Point Commutativity (`is_X` vs `canonicalize_X`)
+            if sib_canon and hasattr(mod, sib_canon):
+                canon_fn = getattr(mod, sib_canon)
+                green_seeds = ["alpha", "alpha-beta", "pkg1", "simple-name"]
+                verified_green = []
+                law_holds_on_green = True
+                for g in green_seeds:
+                    try:
+                        if fn(g) is True:
+                            if canon_fn(g) == g:
+                                verified_green.append(g)
+                            else:
+                                law_holds_on_green = False
+                    except Exception:
+                        pass
+                if law_holds_on_green and len(verified_green) >= 2:
+                    for p in ("a--b", "a__b", "a..b", "a---b"):
+                        try:
+                            if fn(p) is True and canon_fn(p) != p:
+                                out_witness = {
+                                    "relation": "PREDICATE_CANONICALIZER_FIXED_POINT",
+                                    "target": f"{mod_name}.{fn_name}",
+                                    "code": (
+                                        "import unittest\\n"
+                                        f"from {mod_name} import {fn_name}, {sib_canon}\\n\\n"
+                                        "class TestMetamorphicWitness(unittest.TestCase):\\n"
+                                        "    def test_metamorphic_fixed_point_violation(self):\\n"
+                                        f"        self.assertNotEqual({sib_canon}({p!r}), {p!r})\\n"
+                                        f"        self.assertFalse({fn_name}({p!r}))\\n\\n"
+                                        "    def test_metamorphic_valid_controls(self):\\n"
+                                        f"        self.assertTrue({fn_name}({verified_green[0]!r}))\\n"
+                                        f"        self.assertTrue({fn_name}({verified_green[1]!r}))\\n"
+                                        f"        self.assertFalse({fn_name}('Invalid_Upper'))\\n"
+                                    ),
+                                }
+                                break
+                        except Exception:
+                            pass
+                if out_witness:
+                    break
+
+            # Probe 2: Active Return-Alias Independence (`r1, r2 = fn(seed)` -> mutating `r1` must not corrupt `r2`)
+            try:
+                sig = inspect.signature(fn)
+                req_pos = [
+                    p for p in sig.parameters.values()
+                    if p.default is inspect.Parameter.empty
+                    and p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+                ]
+                seed_arg_sets = []
+                if len(req_pos) <= 1:
+                    seed_arg_sets.append(([10, 20, 30, 40],))
+                    seed_arg_sets.append(([10, 20, 30, 40], 2))
+                elif len(req_pos) == 2:
+                    seed_arg_sets.append(([10, 20, 30, 40], 2))
+                for s_args in seed_arg_sets:
+                    try:
+                        r_clean = fn(*copy.deepcopy(s_args))
+                    except Exception:
+                        continue
+                    if not isinstance(r_clean, tuple) or len(r_clean) != 2:
+                        continue
+                    if isinstance(r_clean[0], list) and len(r_clean[0]) >= 1 and hasattr(r_clean[1], "__iter__"):
+                        clean_head = list(r_clean[0])
+                        clean_seq = list(r_clean[1])
+                        r_mut = fn(*copy.deepcopy(s_args))
+                        r_mut[0][0] = "__BRAIN_MUTATED_HEAD__"
+                        mut_seq = list(r_mut[1])
+                        if mut_seq != clean_seq:
+                            out_witness = {
+                                "relation": "ACTIVE_RETURN_ALIAS_INDEPENDENCE",
+                                "target": f"{mod_name}.{fn_name}",
+                                "code": (
+                                    "import unittest\\n"
+                                    f"from {mod_name} import {fn_name}\\n\\n"
+                                    "class TestMetamorphicWitness(unittest.TestCase):\\n"
+                                    "    def test_metamorphic_return_alias_isolation(self):\\n"
+                                    f"        head, it_out = {fn_name}(*{s_args!r})\\n"
+                                    "        head[0] = '__BRAIN_MUTATED_HEAD__'\\n"
+                                    f"        self.assertEqual(list(it_out), {clean_seq!r})\\n\\n"
+                                    "    def test_metamorphic_unmutated_control(self):\\n"
+                                    f"        head, it_out = {fn_name}(*{s_args!r})\\n"
+                                    f"        self.assertEqual(head, {clean_head!r})\\n"
+                                    f"        self.assertEqual(list(it_out), {clean_seq!r})\\n"
+                                ),
+                            }
+                            break
+                if out_witness:
+                    break
+            except Exception:
+                pass
+
+            # Probe 3: Falsy-Callable `key` Parameter Equivalence
+            try:
+                sig = inspect.signature(fn)
+                if "key" in sig.parameters:
+                    class _FalsyKey:
+                        def __bool__(self):
+                            return False
+                        def __call__(self, x):
+                            return x % 2
+                    req_n = sum(
+                        1 for p in sig.parameters.values()
+                        if p.default is inspect.Parameter.empty
+                        and p.kind in (inspect.Parameter.POSITIONAL_ONLY, inspect.Parameter.POSITIONAL_OR_KEYWORD)
+                    )
+                    pos_call = ([1, 2, 3, 4],) if req_n <= 1 else ([1, 2, 3, 4], 2)
+                    truthy_out = list(fn(*copy.deepcopy(pos_call), key=lambda x: x % 2))
+                    falsy_out = list(fn(*copy.deepcopy(pos_call), key=_FalsyKey()))
+                    if falsy_out != truthy_out:
+                        out_witness = {
+                            "relation": "FALSY_CALLABLE_KEY_EQUIVALENCE",
+                            "target": f"{mod_name}.{fn_name}",
+                            "code": (
+                                "import unittest\\n"
+                                f"from {mod_name} import {fn_name}\\n\\n"
+                                "class _FalsyKey:\\n"
+                                "    def __bool__(self): return False\\n"
+                                "    def __call__(self, x): return x % 2\\n\\n"
+                                "class TestMetamorphicWitness(unittest.TestCase):\\n"
+                                "    def test_metamorphic_falsy_key_callable(self):\\n"
+                                f"        self.assertEqual(list({fn_name}(*{pos_call!r}, key=_FalsyKey())), {truthy_out!r})\\n\\n"
+                                "    def test_metamorphic_truthy_key_control(self):\\n"
+                                f"        self.assertEqual(list({fn_name}(*{pos_call!r}, key=lambda x: x % 2)), {truthy_out!r})\\n"
+                            ),
+                        }
+                        break
+            except Exception:
+                pass
+
+            # Probe 4: Disabled Optional Dunder Protocol Equivalence (`__reversed__ = None`)
+            # In Python's data model, setting an optional protocol attribute (`__reversed__`) to `None`
+            # explicitly disables that protocol and MUST behave identically to omitting it (`__iter__` fallback)!
+            try:
+                class _PlainIterOnly:
+                    def __init__(self, data):
+                        self._data = list(data)
+                    def __iter__(self):
+                        return iter(self._data)
+
+                class _DisabledReversedIter:
+                    __reversed__ = None
+                    def __init__(self, data):
+                        self._data = list(data)
+                    def __iter__(self):
+                        return iter(self._data)
+
+                plain_val = fn(_PlainIterOnly([1, 2, 3]))
+                if hasattr(plain_val, "__iter__") and not isinstance(plain_val, (str, bytes, list, tuple, dict, set)):
+                    plain_val = list(plain_val)
+                if isinstance(plain_val, (int, float, str, bytes, bool, list, tuple)):
+                    crashed_or_diff = False
+                    try:
+                        dis_val = fn(_DisabledReversedIter([1, 2, 3]))
+                        if hasattr(dis_val, "__iter__") and not isinstance(dis_val, (str, bytes, list, tuple, dict, set)):
+                            dis_val = list(dis_val)
+                        crashed_or_diff = (dis_val != plain_val)
+                    except Exception:
+                        crashed_or_diff = True
+                    if crashed_or_diff:
+                        wrap_call = f"list({fn_name}(x))" if isinstance(plain_val, list) else f"{fn_name}(x)"
+                        out_witness = {
+                            "relation": "DISABLED_DUNDER_FALLBACK_EQUIVALENCE",
+                            "target": f"{mod_name}.{fn_name}",
+                            "code": (
+                                "import unittest\\n"
+                                f"from {mod_name} import {fn_name}\\n\\n"
+                                "class _PlainIterOnly:\\n"
+                                "    def __init__(self, d): self._d = list(d)\\n"
+                                "    def __iter__(self): return iter(self._d)\\n\\n"
+                                "class _DisabledReversedIter:\\n"
+                                "    __reversed__ = None\\n"
+                                "    def __init__(self, d): self._d = list(d)\\n"
+                                "    def __iter__(self): return iter(self._d)\\n\\n"
+                                "class TestMetamorphicWitness(unittest.TestCase):\\n"
+                                "    def test_metamorphic_disabled_reversed_protocol(self):\\n"
+                                "        x = _DisabledReversedIter([1, 2, 3])\\n"
+                                f"        self.assertEqual({wrap_call}, {plain_val!r})\\n\\n"
+                                "    def test_metamorphic_plain_iter_control(self):\\n"
+                                "        x = _PlainIterOnly([1, 2, 3])\\n"
+                                f"        self.assertEqual({wrap_call}, {plain_val!r})\\n"
+                            ),
+                        }
+                        break
+            except Exception:
+                pass
+
+            # Probe 5: Bidirectional Codec / Serializer Round-Trip Equivalence (`dec(enc(x)) == x`)
+            try:
+                inv_pairs = [
+                    ("encode", "decode"), ("escape", "unescape"),
+                    ("quote", "unquote"), ("format", "parse"), ("dumps", "loads"),
+                ]
+                sibling_dec = None
+                enc_fn_obj = None
+                dec_fn_obj = None
+                enc_nm = ""
+                dec_nm = ""
+                for p_enc, p_dec in inv_pairs:
+                    if fn_name == p_enc or fn_name.startswith(p_enc + "_"):
+                        suf = fn_name[len(p_enc):]
+                        cand_d = getattr(mod, p_dec + suf, None)
+                        if callable(cand_d):
+                            enc_fn_obj, dec_fn_obj, enc_nm, dec_nm = fn, cand_d, fn_name, p_dec + suf
+                            break
+                    elif fn_name == p_dec or fn_name.startswith(p_dec + "_"):
+                        suf = fn_name[len(p_dec):]
+                        cand_e = getattr(mod, p_enc + suf, None)
+                        if callable(cand_e):
+                            enc_fn_obj, dec_fn_obj, enc_nm, dec_nm = cand_e, fn, p_enc + suf, fn_name
+                            break
+                if enc_fn_obj is not None and dec_fn_obj is not None:
+                    ctrl_ok = (dec_fn_obj(enc_fn_obj("abc")) == "abc")
+                    if ctrl_ok:
+                        for w_rt in ('a"b', r"a\\b", 'a\\"b', "a\\nb", "a%25b", "a=b&c=d", ""):
+                            try:
+                                enc_w = enc_fn_obj(w_rt)
+                                rt_val = dec_fn_obj(enc_w)
+                                broke = (rt_val != w_rt)
+                                non_id_line = (
+                                    f"        self.assertNotEqual({enc_nm}({w_rt!r}), {w_rt!r})\\n"
+                                    if enc_w != w_rt
+                                    else ""
+                                )
+                            except Exception:
+                                broke = True
+                                non_id_line = ""
+                            if broke:
+                                out_witness = {
+                                    "relation": "BIDIRECTIONAL_CODEC_ROUNDTRIP_EQUIVALENCE",
+                                    "target": f"{mod_name}.{enc_nm}/{dec_nm}",
+                                    "code": (
+                                        "import unittest\\n"
+                                        f"from {mod_name} import {enc_nm}, {dec_nm}\\n\\n"
+                                        "class TestMetamorphicWitness(unittest.TestCase):\\n"
+                                        "    def test_metamorphic_roundtrip_boundary(self):\\n"
+                                        f"{non_id_line}"
+                                        f"        self.assertEqual({dec_nm}({enc_nm}({w_rt!r})), {w_rt!r})\\n\\n"
+                                        "    def test_metamorphic_roundtrip_control(self):\\n"
+                                        f"        self.assertEqual({dec_nm}({enc_nm}('abc')), 'abc')\\n"
+                                    ),
+                                }
+                                break
+                if out_witness:
+                    break
+            except Exception:
+                pass
+
+        print(json.dumps(out_witness or {}))
+        """
+    ).strip()
+
+    try:
+        done = subprocess.run(
+            [py_exe, "-c", probe_script, json.dumps(cand_targets)],
+            cwd=str(repo_root),
+            env=_clean_env(repo_root),
+            capture_output=True,
+            text=True,
+            timeout=10.0,
+        )
+        if done.returncode != 0 or not done.stdout.strip():
+            return {"compiled": False, "reason": "probe_no_violation"}
+        res_obj = json.loads(done.stdout.strip().splitlines()[-1])
+        if not res_obj or not res_obj.get("code"):
+            return {"compiled": False, "reason": "no_metamorphic_violation_detected"}
+        out_path.write_text(str(res_obj["code"]), encoding="utf-8")
+        verd = run_pytest_verdicts(repo_root, str(out_path), python_exe=py_exe, timeout_s=10.0)
+        if not verd.get("failing") or not verd.get("passing"):
+            out_path.unlink(missing_ok=True)
+            return {"compiled": False, "reason": "metamorphic_witness_did_not_separate"}
+        return {
+            "compiled": True,
+            "relation": res_obj.get("relation"),
+            "target": res_obj.get("target"),
+            "witness_path": str(out_path),
+            "failing_nodes": list(verd.get("failing") or []),
+        }
+    except Exception:
+        out_path.unlink(missing_ok=True)
+        return {"compiled": False, "reason": "probe_exception"}
+
+
 def phase_repair(timeout_s: float) -> dict[str, Any]:
     t0 = time.perf_counter()
     if not STATE_PATH.is_file():
@@ -444,6 +816,12 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
                 repo_root,
                 py_exe,
             )
+            if not witness_info.get("compiled"):
+                witness_info = synthesize_metamorphic_green_witness(
+                    str(state.get("instruction") or ""),
+                    repo_root,
+                    py_exe,
+                )
             if witness_info.get("compiled"):
                 failing_target = str(witness_info["witness_path"])
 
@@ -470,7 +848,18 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             skill_store=skill_store,
             budget_s=rem_budget,
         )
+        # If repaired against a synthesized `/tmp` witness, also verify existing ranked unit test file!
+        if outcome.get("pass") and witness_info.get("compiled") and ranked_tests:
+            reg_chk = run_pytest_verdicts(repo_root, ranked_tests[0], python_exe=py_exe, timeout_s=15.0)
+            if reg_chk.get("failing"):
+                outcome = {
+                    **outcome,
+                    "status": "REGRESSED_EXISTING_SUITE_AFTER_WITNESS_REPAIR",
+                    "pass": False,
+                }
         WITNESS_TEST_PATH.unlink(missing_ok=True)
+        if witness_info.get("witness_path"):
+            pathlib.Path(str(witness_info["witness_path"])).unlink(missing_ok=True)
         _clean_untracked_in_repo(
             repo_root,
             revert_tracked=not bool(outcome.get("pass")),
@@ -491,6 +880,8 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         }
     except BaseException as exc:
         WITNESS_TEST_PATH.unlink(missing_ok=True)
+        if isinstance(locals().get("witness_info"), dict) and witness_info.get("witness_path"):
+            pathlib.Path(str(witness_info["witness_path"])).unlink(missing_ok=True)
         _clean_untracked_in_repo(repo_root, revert_tracked=True, pre_untracked=pre_untracked)
         reaped = _reap_children()
         return {

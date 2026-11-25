@@ -417,6 +417,108 @@ class V4SubtreeFuzzerHarborTests(unittest.TestCase):
         ]
         self.assertTrue(all("key == stripped" not in c and "stripped == key" not in c for c in cands))
 
+    def test_v6_metamorphic_habitation_fst_zipper_and_o1_surgical_ablation(self) -> None:
+        import subprocess
+        from canonical.swe_kernel.causal_swe_repair_v1 import repair_worktree
+        from canonical.swe_kernel.first_principles_mental_cegis_v1 import (
+            _has_new_dead_branch_equivalence,
+            _synthesize_callee_param_threading,
+        )
+        from canonical.swe_kernel.harbor_in_container_runner_v1 import synthesize_metamorphic_green_witness
+        from canonical.swe_kernel.petri_cow_splicing_engine_v1 import (
+            AdmissionFilteredSkillStore,
+            BidirectionalFSTLensSynthesizer,
+            CodebaseTypeHabitationMiner,
+            compute_structural_fp64,
+        )
+
+        # 1. FP64 renaming invariance
+        fp_a = compute_structural_fp64("if alpha is None:\n    return 0\nreturn alpha + 1\n")
+        fp_b = compute_structural_fp64("if beta_val is None:\n    return 0\nreturn beta_val + 1\n")
+        self.assertEqual(fp_a, fp_b)
+
+        # 2. Dead-branch complexity regression guard
+        orig_code = "def f(x):\n    if hasattr(x, '__reversed__'):\n        return next(reversed(x))\n    return slow(x)\n"
+        bad_code = "def f(x):\n    if hasattr(x, '__reversed__'):\n        return slow(x)\n    return slow(x)\n"
+        good_code = "def f(x):\n    if getattr(x, '__reversed__', None) is not None:\n        return next(reversed(x))\n    return slow(x)\n"
+        self.assertTrue(_has_new_dead_branch_equivalence(orig_code, bad_code))
+        self.assertFalse(_has_new_dead_branch_equivalence(orig_code, good_code))
+
+        # 3. Type-Habitation (`head.copy()` + `getattr(..., None) is not None`) & Callee Live-Param Threading
+        with tempfile.TemporaryDirectory(prefix="v6_unit_") as td:
+            import pathlib
+            wt = pathlib.Path(td)
+            mod_src = (
+                "def helper_dispatch(env, name, val, context=None):\n"
+                "    return (name, val, context)\n\n"
+                "def outer_entry(env, context, item):\n"
+                "    return helper_dispatch(env, 'k', item)\n"
+            )
+            (wt / "mod.py").write_text(mod_src, encoding="utf-8")
+            import ast
+            tr = ast.parse(mod_src)
+            threaded = _synthesize_callee_param_threading(wt, "mod.py", mod_src, tr, 5, [{"context": {"t": "Obj"}}])
+            self.assertTrue(any("helper_dispatch(env, 'k', item, context)" in p[0] for p in threaded))
+
+            spy_src = "def spy(it):\n    head = [1, 2]\n    return head, iter(head)\n"
+            spy_tr = ast.parse(spy_src)
+            ret_st = spy_tr.body[0].body[1]
+            hab = CodebaseTypeHabitationMiner.synthesize_stmt_habitation_rewrites(
+                wt, "spy.py", spy_src, ret_st, [{"head": {"t": "list"}}]
+            )
+            self.assertTrue(any("head.copy()" in p[0] for p in hab))
+
+            # 4. Bidirectional FST Lens (`(f2 o f1)^-1 = f1^-1 o f2^-1`)
+            fst_src = (
+                "def escape_q(s):\n"
+                "    return s.replace('\"', '\\\\\"').replace('\\\\', '\\\\\\\\')\n"
+                "def unescape_q(s):\n"
+                "    return s.replace('\\\\\"', '\"').replace('\\\\\\\\', '\\\\')\n"
+            )
+            fst_repairs = BidirectionalFSTLensSynthesizer.synthesize_lens_repairs(fst_src, ast.parse(fst_src))
+            self.assertTrue(any(r[2] == "FST_MISSING_INVERSE_TRANSITION" for r in fst_repairs))
+
+            # 5. Wall-1 Metamorphic Witness Splitter (`ACTIVE_RETURN_ALIAS_INDEPENDENCE`) on 100%-green worktree
+            alias_wt = wt / "alias_repo"
+            (alias_wt / "pkg").mkdir(parents=True)
+            (alias_wt / "tests").mkdir(parents=True)
+            (alias_wt / "pkg" / "__init__.py").write_text(
+                "from itertools import chain\n"
+                "def peek_head(iterable):\n"
+                "    it = iter(iterable)\n"
+                "    head = [next(it)]\n"
+                "    return head, chain(head, it)\n",
+                encoding="utf-8",
+            )
+            (alias_wt / "tests" / "test_pkg.py").write_text(
+                "import unittest\n"
+                "from pkg import peek_head\n"
+                "class T(unittest.TestCase):\n"
+                "    def test_basic(self):\n"
+                "        h, full = peek_head([10, 20])\n"
+                "        self.assertEqual((h, list(full)), ([10], [10, 20]))\n",
+                encoding="utf-8",
+            )
+            subprocess.run(["git", "init", "-q"], cwd=alias_wt, check=True)
+            subprocess.run(["git", "config", "user.email", "t@t.io"], cwd=alias_wt, check=True)
+            subprocess.run(["git", "config", "user.name", "t"], cwd=alias_wt, check=True)
+            subprocess.run(["git", "add", "."], cwd=alias_wt, check=True)
+            subprocess.run(["git", "commit", "-q", "-m", "init"], cwd=alias_wt, check=True)
+
+            import sys
+            w_alias = synthesize_metamorphic_green_witness(
+                "pkg.peek_head returns a head list that aliases the chained iterator when mutated.",
+                alias_wt,
+                sys.executable,
+            )
+            self.assertTrue(w_alias["compiled"])
+            self.assertEqual(w_alias["relation"], "ACTIVE_RETURN_ALIAS_INDEPENDENCE")
+            wp = pathlib.Path(w_alias["witness_path"])
+            rep_alias = repair_worktree(alias_wt, str(wp), python_exe=sys.executable, budget_s=25.0)
+            wp.unlink(missing_ok=True)
+            self.assertTrue(rep_alias["pass"])
+            self.assertIn("head.copy()", (alias_wt / "pkg" / "__init__.py").read_text(encoding="utf-8"))
+
 
 if __name__ == "__main__":
     unittest.main()

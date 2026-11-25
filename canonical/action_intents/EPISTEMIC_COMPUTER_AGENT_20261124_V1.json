@@ -291,7 +291,7 @@
           "route": "DIFF_HINTED_SINGLE_SITE_SCALAR_SYNTHESIS"
         }
       ],
-      "checked_at_utc": "2026-11-25T14:30:20Z",
+      "checked_at_utc": "2026-11-25T21:03:26Z",
       "comparison_dimensions": [
         "CORRECTNESS",
         "CAPABILITY_STRENGTH",
@@ -331,7 +331,7 @@
       "selected_route": "ZERO_MODEL_GOAL_DIRECTED_EPISTEMIC_AGENT_V1",
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-25T14:30:20Z",
+        "checked_at_utc": "2026-11-25T21:03:26Z",
         "execution_dependencies": [
           {
             "dependency": "local Python 3.11 stdlib runtime and CLI utilities (`tar`, `gzip`, `bzip2`, `xz`)",

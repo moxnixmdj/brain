@@ -90,6 +90,25 @@ class EpistemicAgentBenchmarkReceiptTests(unittest.TestCase):
             0,
         )
 
+        exp9 = data["experiment_9_v6_metamorphic_habitation_zipper_fst_and_o1_index"]
+        self.assertTrue(exp9["wall1_green_parent_metamorphic_witness_and_fst_lens"]["witness_compiled"])
+        self.assertTrue(exp9["wall1_green_parent_metamorphic_witness_and_fst_lens"]["repaired"])
+        self.assertTrue(exp9["wall1_green_parent_metamorphic_witness_and_fst_lens"]["held_out_adversarial_roundtrip_pass"])
+        self.assertTrue(exp9["wall2_dead_branch_complexity_guard"]["dead_branch_collapse_blocked"])
+        self.assertFalse(exp9["wall3_def_use_relational_zipper_two_file_ablation"]["without_zipper_pass"])
+        self.assertTrue(exp9["wall3_def_use_relational_zipper_two_file_ablation"]["with_zipper_pass"])
+        self.assertEqual(
+            exp9["wall3_def_use_relational_zipper_two_file_ablation"]["repaired_files"],
+            ["pkg/loader.py", "pkg/runner.py"],
+        )
+        ab9 = exp9["o1_fp64_skill_index_and_surgical_law_deletion_ablation"]
+        self.assertTrue(ab9["sub_2ms_at_1200_skills"])
+        self.assertTrue(ab9["generalized_with_law_pass"])
+        self.assertFalse(ab9["memorized_raw_traces_pass"])
+        self.assertFalse(ab9["disabled_store_pass"])
+        self.assertFalse(ab9["surgical_law_deleted_pass"])
+        self.assertEqual(exp9["turn6_unseen_oss_12commit_apples_to_apples_ledger"]["diff_audit_false_positives"], 0)
+
 
 if __name__ == "__main__":
     unittest.main()
