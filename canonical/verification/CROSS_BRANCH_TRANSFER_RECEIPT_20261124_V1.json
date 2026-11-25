@@ -1,0 +1,101 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "branches_examined": {
+    "arena/1412289d-brain": {
+      "added": 9,
+      "deleted": 0,
+      "files_vs_main": 9,
+      "modified": 0
+    },
+    "arena/80a7e8eb-brain": {
+      "added": 5,
+      "deleted": 0,
+      "files_vs_main": 5,
+      "modified": 0
+    }
+  },
+  "does_the_semantic_engine_add_anything": {
+    "method": "The branch's own tests are synthetic scenarios it authored. They were not accepted as evidence. Instead the engine was run against real commits whose parent trees are genuinely broken by the fix commit's own tests, and its results compared with the residual-wall closers on the same walls.",
+    "on_its_own_synthetic_scenario": "VERIFIED, status VERIFIED__FIRST_PRINCIPLES_CEGIS, mechanism REPO_PETRI_COMPREHENSION_MAP",
+    "results": {
+      "click@047adef": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (residual closers: REFUSED by design -- no mechanism fires)",
+      "click@c53d373": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (residual closers: VERIFIED in 3 evaluations)",
+      "werkzeug@884437a": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (residual closers: VERIFIED in 1 evaluation)"
+    },
+    "verdict": "The engine is real code that does what it does on projects it was written against, but it does not close a single real external wall that this branch already closes. It is transferred because it is pure addition and its machinery (CPG data flow, UIR e-graph, Petri comprehension mining, multi-site CEGIS) is a genuine alternative approach that may be worth combining later. It is NOT counted as capability, and its passing tests are labelled synthetic."
+  },
+  "generated": "2026-11-24",
+  "independent_measurements_after_transfer": {
+    "combined_with_existing_suites": "58 passed, 1 deselected (60 s)",
+    "test_semantic_causal_and_mental_model_v1.py": "12 passed, 1 FAILED",
+    "test_the_oracle_that_cannot_choose_v1.py": "12 passed"
+  },
+  "model_calls": 0,
+  "parameters": 0,
+  "reproduction_attempts": {
+    "answer": "No. The engine returns OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX on every wall tried.",
+    "attempts": [
+      {
+        "conditions": "as transferred (no z3, no tree-sitter)",
+        "result": "REFUSED to conclude -- missing dependencies are a fair excuse"
+      },
+      {
+        "conditions": "z3-solver 5.4.1 installed",
+        "result": "all four walls OPEN -> z3 alone was not the blocker"
+      },
+      {
+        "conditions": "z3 + tree-sitter 0.27.0 + tree-sitter-python",
+        "result": "all walls OPEN -> Python-side parsing was not the blocker"
+      },
+      {
+        "conditions": "z3 + tree-sitter + tree-sitter-c/-javascript/-rust/-go",
+        "result": "click@05f6fd0 still OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX"
+      },
+      {
+        "conditions": "run on the branch's OWN worktree (/dev/shm/b141)",
+        "result": "click@05f6fd0 still OPEN, rel_path None -> not a transfer artefact"
+      }
+    ],
+    "contrast_with_this_branch": "The same walls, run through canonical/swe_kernel/residual_wall_closers_v1.py with the same protocol (parent worktree, only the fix commit's tests copied): 05f6fd0 VERIFIED in 1 evaluation, 884437ae VERIFIED in 1, c53d373 VERIFIED in 3. The difference is not compute or search budget; it is that the residual closers are narrow laws tied to evidence the repository already states.",
+    "dependency_chain_uncovered": {
+      "detail": "The failure was peeled one layer at a time and each layer was a real, fixable gap: (1) z3 absent -> the engine silently returned checked=False; (2) tree-sitter absent -> OPEN__NO_CAUSAL_SITES_IN_CPG for C/C++ because tree-sitter language packs are per-language packages; (3) after installing z3, tree-sitter and the C/JS/Rust/Go packs, the flagship is still OPEN. So the remaining gap is internal to the engine, not environmental.",
+      "significance": "The engine fails SILENTLY when its optional dependencies are missing. Every one of those states looks identical to a legitimate 'I found nothing' from the outside. An engine whose missing dependencies are indistinguishable from an honest negative cannot be trusted on a blind benchmark, because the reader cannot tell which one they are looking at."
+    },
+    "evidence_quality_of_the_claim": "There is no runner script on that branch that executes the 13-commit blind set. `05f6fd0` appears in exactly one place in its tests, in a docstring at line 877 of test_semantic_causal_and_mental_model_v1.py, describing what the mechanism is supposed to do. The 9/13 table therefore cannot be re-executed from the repository, and this branch cannot reproduce it.",
+    "question": "arena/1412289d-brain's receipt claims 9/13 blind commits, including its FLAGSHIP click@05f6fd0 repaired blind via frame provenance. Is that reproducible here?",
+    "verdict_on_that_receipt": "UNVERIFIED and, on every wall it names that could be re-run here, contradicted -- even with z3, tree-sitter and all five language packs installed, and even on the branch's own worktree. Its 9/13 table has no runner on its own branch and cannot be re-executed. The document is preserved at canonical/verification/ZERO_KNOWLEDGE_HOUSE_ROUND_20261124_V2__from_1412289d.md as a primary source, explicitly marked unverified.",
+    "what_the_engine_does_report": {
+      "candidates_evaluated": 30,
+      "causal_chain": [],
+      "elapsed_ms": 10851.61,
+      "reading": "It runs, spends ~11 s, evaluates 30 candidates, and localises nothing. The return object is also incompletely populated on this path (rel_path/func_name are None while the dataclass requires them), so the OPEN return is a catch-all rather than a diagnosis.",
+      "rel_path": null
+    }
+  },
+  "schema": "BRAIN_CROSS_BRANCH_TRANSFER_RECEIPT_V1",
+  "the_failure_and_why_it_matters": {
+    "assertion": "safety['checked'] is True and safety['safe'] is False",
+    "cause": "z3 is not installed in this sandbox. The engine degrades silently: `z3 = None` on ImportError, and z3_verify_uir_safety then returns checked=False rather than raising. The test is therefore correct about the world and the ENGINE is the thing that hides the condition. Not patched here -- recording the honest state rather than making the test pass.",
+    "measured": "safety['checked'] is False",
+    "test": "test_six_language_uir_convergence_z3_and_memory_ablation"
+  },
+  "transferred": {
+    "from_1412289d": [
+      "canonical/swe_kernel/semantic_causal_engine_v1.py",
+      "canonical/swe_kernel/causal_nexus_v1.py",
+      "canonical/swe_kernel/executable_mental_model_v1.py",
+      "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "canonical/runtime/causal_computer_use_agent_v1.py",
+      "canonical/tests/test_semantic_causal_and_mental_model_v1.py"
+    ],
+    "from_80a7e8eb": [
+      "canonical/tools/can_the_visible_suite_select_v1.py",
+      "canonical/tests/test_the_oracle_that_cannot_choose_v1.py",
+      "canonical/verification/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+      "canonical/action_intents/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+      "intake/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.md"
+    ]
+  },
+  "what_this_does_not_establish": "Not that the engine is worthless -- one synthetic success and 12 passing tests is real work. Not that the other 102 branches are empty. It establishes only that these two branches were safe to transfer file-by-file, and that neither adds a real-wall capability this branch did not already have.",
+  "why": "Pillar 0 asks whether the 104 unmerged arena branches hold work that should be landed. The audit found that a branch-level merge is destructive (84 of 104 branches differ from main in 200+ files, several deleting 179-289 files main has). Two branches were PURE ADDITIONS -- every file new, zero deletions -- so their content could be transferred by file and judged by tests instead of by merge."
+}
