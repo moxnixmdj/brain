@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "ff5d67b92b40aff99ea8550740603afe5ddb17232ab66bca4297a0b176e22552"
+  "value": "28b7ffdf9dae4274595be1ccebf387040c0e7e24c9a61297ad54a92231d75849"
  },
  "engines": [
   {
@@ -260859,7 +260859,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
-   "sha256": "ecfa87891264a16e34e79819f6412d5a7bcdb9a1a6fe9bca51d480825c574380",
+   "sha256": "dac802a85d7a56a201a5ce5c3ade0ae83f40b21105531927a4996c1d38c2b3db",
    "status": "",
    "terms": {
     "20261124": 1,

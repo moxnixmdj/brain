@@ -3,7 +3,7 @@
  "action_id": "MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1",
  "action_kind": "GOVERNANCE_GUARD",
  "date": "2026-11-24",
- "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "agent_orientation": {
   "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
@@ -56,7 +56,7 @@
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
  "recursive_obs": {
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
-  "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
   "real_outcome": "MEASURED__GENERATION_SOLVES_0_OF_28_WIDER_TASKS_0_OF_6_CEILING_TASKS_0_OF_3_CALIBRATION_TASKS_AND_0_OF_6_IN_THE_BLIND_EDIT_SEARCH__FILE_LEVEL_LOCALISATION_HITS_TOP_ONE_ON_17_OF_28_WHILE_LINE_LEVEL_LOCALISATION_HITS_THE_CORRECT_LINE_FIRST_ON_1_OF_28",
   "required_capability": "LOCALISE_THE_EXACT_EDIT_POSITION_INSIDE_AN_UNSEEN_CODEBASE_AND_THEN_PRODUCE_A_PATCH_THAT_PASSES_AN_ORACLE_TEST_NEVER_READ_BY_THE_SOLVER",
   "obs_goal": {
