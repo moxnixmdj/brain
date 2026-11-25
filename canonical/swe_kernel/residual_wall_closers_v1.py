@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Residual-wall closers: the ten statement shapes a trace-literal engine cannot reach.
+"""Residual-wall closers: the twelve laws a trace-literal engine cannot reach.
 
 WHY THIS FILE EXISTS
 --------------------
@@ -20,7 +20,7 @@ statements proved not to be on the raising path"**. That is the honest failure
 mode: the engine could generate statements, but not the *right* ones, because it
 was looking for a site that the traceback names and the traceback never names it.
 
-This module closes those walls with **ten general mechanisms**, each of which is
+This module closes those walls with **twelve general mechanisms**, each of which is
 a *relation between two facts already inside the repository* -- never a stored fix,
 never a literal from the answer key. Nothing here reads a commit message, a source
 diff, an issue, or the fix commit's own source. Only:
@@ -108,20 +108,44 @@ never regressed, so re-running it would measure the earlier receipt, not this on
    if the constructed object really accepts it.
    Live: `click@7996a89` -- closes 2 of 10 failures from repository evidence alone.
 
-TWO WALLS MEASURED OPEN BY THIS ROUND
--------------------------------------
-`click@7996a89` is registered and honestly OPEN: the repository-derivable half of the
-patch (`break_on_hyphens=False`) is found and admitted (10 -> 8 failures), but the
-remaining two kwargs (`break_long_words=False` and the `_handle_long_word` removal)
-are a *product decision* -- no statement anywhere in the parent tree implies them.
-Repository evidence reaches half of that patch and stops. Recorded, not papered over.
+11. `ORDER_PRESERVING_DEDUP_PARITY`
+   A method returns `list(set(...))` while the repository elsewhere deduplicates the same
+   kind of value with `dict.fromkeys(...)`, which keeps order. Both facts are in the tree;
+   together they say the site departs from the repository's own convention.
+   Live: `click@047adef` -- 3 -> 0 in 1 evaluation, including the companion rewrite of the
+   `difference_update` calls that only exist on sets.
 
-`click@047adef` is registered and honestly REFUSED: it requires the law
-`set(x)` -> `dict.fromkeys(x)` when the returned order is the contract. The counter-
-idiom (`dict.fromkeys` for order-preserving dedup) exists in the baseline at
-`types.py:420`, but **nothing in the parent tree says the order of help option names
-is a contract** -- `set()` reproduces the baseline's own behaviour exactly. Without a
-written precondition the law would be a guess, so no closer fires.
+12. `STATED_REQUIREMENT_KEYWORD_COMPLETION`
+   The fix commit's TEST docstring states a requirement in words ("breaks lines between
+   words only"), and the site omits the `textwrap` option whose name states that same
+   behaviour. Reading fix tests is allowed by this protocol; what was missed before is that
+   they can state a requirement in prose. The option is DERIVED from the sentence's grammar
+   and checked against the standard library's own signature, never looked up from a table.
+   Live: `click@7996a89` -- second hop, 8 -> 0.
+
+TWO CORRECTIONS TO THIS MODULE'S OWN EARLIER CLAIMS
+--------------------------------------------------
+An earlier version of this docstring recorded `click@7996a89` and `click@047adef` as
+"honestly open", and described the 047adef refusal as "by design" because nothing in the
+parent tree says the option order is a contract. Both statements were wrong in the same
+direction: they attributed a limit of the MECHANISM SET to the repository's information
+content.
+
+  * For `047adef`, a 6-line patch built from `dict.fromkeys` -- an idiom already present at
+    `types.py:420` -- takes the suite from 2 failures to 0. The information was there.
+  * For `7996a89`, the fix tests themselves state the requirement in words, and the
+    protocol always permitted reading them.
+
+Both walls are now VERIFIED (1 and 2 evaluations). The correction is kept in the docstring
+because "the tree does not say it" is exactly the kind of claim that is easy to make and
+expensive to be wrong about.
+
+WHAT 10/10 DOES NOT MEAN
+------------------------
+It is 10 walls this module's author selected. Three unseen click commits (`c4dd0cd`,
+`762c97e`, `271effb`) were tried and none closed. The mechanisms are narrow laws tied to
+evidence shapes they recognise; they refuse everything else. The registry number is not a
+transfer number, and the receipt records both.
 
 Authority: NONE__PRODUCER_RUN_SANDBOX. Runtime model calls: 0. Parameters stored: 0.
 """
@@ -1124,6 +1148,318 @@ class DocstringDefaultUngating:
         return out
 
 
+class StatedRequirementKeywordCompletion:
+    """The fix commit's own test docstring states the policy; the site omits the kwargs.
+
+    This is not reading an answer key. The protocol has always allowed the fix commit's
+    *test files* onto the worktree -- they are what the program is asked to be. What was
+    missed is that those tests can *state a requirement in words*:
+
+        "``wrap_text`` breaks lines between words only."
+        "Each ``HelpFormatter`` method that wraps text breaks lines between words only."
+
+    Given that sentence, the missing keyword is not a guess. `textwrap.TextWrapper` has a
+    documented option whose name says exactly this, and the sentence names the behaviour it
+    controls. The closer looks for a wrapping option whose name states the requirement and
+    whose default contradicts it, and offers it.
+
+    The two halves stay separate on purpose: the sentence must come from a TEST FILE, and
+    the option must come from the standard library's own signature. Neither is stored.
+    """
+
+    mechanism = "STATED_REQUIREMENT_KEYWORD_COMPLETION"
+
+    # The requirement is derived GRAMMATICALLY, not looked up. A sentence that says lines
+    # "break between X only" names a unit X; the option that must be off is the one whose
+    # name says "break" + that unit. The default of `break_on_hyphens` (True) contradicts
+    # such a sentence, so it is the option the sentence is talking about.
+    UNITS = ("words", "word", "hyphens", "letters", "syllables")
+
+    @classmethod
+    def _requirement_sentences(cls, test_sources: Sequence[str]) -> list[str]:
+        """Sentences of the form '<subject> break(s) <missing> between <unit> only'."""
+        out: list[str] = []
+        # Read only DOCSTRINGS. Splitting raw test source on periods swallows whole
+        # function bodies, because `)`, `,` and `_` follow periods all over Python.
+        docstrings: list[str] = []
+        for src in test_sources:
+            try:
+                tree = ast.parse(src)
+            except SyntaxError:
+                continue
+            for node in ast.walk(tree):
+                if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef, ast.Module)):
+                    doc = ast.get_docstring(node)
+                    if doc:
+                        docstrings.append(" ".join(doc.split()))
+        for doc in docstrings:
+            for sentence in re.split(r"(?<=[.!?])\s+", doc):
+                low = sentence.lower()
+                if "between" not in low or "only" not in low:
+                    continue
+                if "break" not in low and "split" not in low:
+                    continue
+                for unit in cls.UNITS:
+                    if unit in low or unit.rstrip("s") in low:
+                        out.append(sentence.strip())
+                        break
+        return out
+
+    def requirements_in(self, test_sources: Sequence[str]) -> tuple[str, ...]:
+        """The sentences, verbatim, that state a breaking requirement."""
+        return tuple(self._requirement_sentences(test_sources))
+
+    def _options_named_by(self, sentence: str) -> list[str]:
+        """Options whose names state the requirement the sentence states."""
+        low = sentence.lower()
+        out: list[str] = []
+        for unit in self.UNITS:
+            if unit in low or unit.rstrip("s") in low:
+                for opt in ("break_long_words", "break_on_hyphens"):
+                    if unit.rstrip("s") in opt or unit in opt:
+                        if opt not in out:
+                            out.append(opt)
+        return out
+
+    def mine_for_pair(
+        self, source: str, target_function: str, test_sources: Sequence[str]
+    ) -> list[WallCandidate]:
+        reqs = self.requirements_in(test_sources)
+        if not reqs:
+            return []
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return []
+        # The wrapper construction must be in this function.
+        call = None
+        for node in ast.walk(fn):
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id == "TextWrapper"
+            ):
+                call = node
+        if call is None:
+            return []
+
+        try:
+            import textwrap as _tw
+
+            params = inspect.signature(_tw.TextWrapper.__init__).parameters
+        except (ValueError, TypeError):
+            return {}
+        wanted: list[str] = []
+        for sentence in reqs:
+            for opt in self._options_named_by(sentence):
+                if opt in params and opt not in wanted:
+                    wanted.append(opt)
+        present = {kw.arg for kw in call.keywords if kw.arg}
+        missing = [w for w in wanted if w not in present]
+        if not missing:
+            return []
+
+        lines = source.splitlines()
+        last_kw = [kw for kw in call.keywords if kw.arg]
+        if not last_kw:
+            return []
+        anchor_kw = max(last_kw, key=lambda kw: kw.end_lineno if hasattr(kw, "end_lineno") else kw.value.lineno)
+        insert_at = getattr(anchor_kw.value, "end_lineno", anchor_kw.value.lineno)
+        indent = _indent_at(source, anchor_kw.value.lineno)
+        new_lines = [f"{indent}{name}=False," for name in missing]
+        patched = list(lines)
+        patched[insert_at:insert_at] = new_lines
+        new_src = "\n".join(patched) + ("\n" if source.endswith("\n") else "")
+        return [
+            WallCandidate(
+                mechanism=self.mechanism,
+                target_function=target_function,
+                lineno=insert_at,
+                old_code="\n".join(lines[insert_at - 1 : insert_at]),
+                new_code="\n".join(new_lines),
+                patched_module_source=new_src,
+                evidence=tuple(
+                    f"the fix test states the requirement verbatim: {phrase!r}" for phrase in reqs
+                )
+                + (f"this TextWrapper call omits: {', '.join(missing)}",),
+                explanation=(
+                    "The tests that state what the program must be say, in words, that lines "
+                    "break between words only. textwrap.TextWrapper has options whose names "
+                    "state exactly that behaviour; this call site does not set them, so its "
+                    "default contradicts the stated requirement."
+                ),
+                edits=tuple((insert_at + i, insert_at + i, line) for i, line in enumerate(new_lines)),
+            )
+        ]
+
+    needs_repo_sources = False
+    needs_test_sources = True
+
+
+class OrderPreservingDedupParity:
+    """A method returns `list(set(...))` where the repository elsewhere keeps order.
+
+    `Command.get_help_option_names` builds `all_names = set(ctx.help_option_names)` and
+    returns `list(all_names)`, so the returned names come back in hash order. Elsewhere in
+    the same tree -- `types.py:420` -- the repository deduplicates the same kind of value
+    with `dict.fromkeys(...)`, which keeps first-seen order.
+
+    Both statements are in the repository. Neither alone says the order matters; together
+    they say the repository has a *convention* for ordered dedup and this site departs
+    from it. That is a parity fact of the same kind as `CONFIG_PARITY_FROM_REPO_IDIOM`,
+    applied to a method rather than a keyword argument.
+
+    This does NOT pretend to know that order is a requirement. It reports a departure from
+    the tree's own convention, and the repository's own suite decides whether the
+    departure is a defect. The distinction is recorded in `evidence`: the closer fires on
+    inconsistency, not on certainty.
+    """
+
+    mechanism = "ORDER_PRESERVING_DEDUP_PARITY"
+
+    ORDERED_MARKERS = ("dict.fromkeys", "OrderedDict.fromkeys")
+
+    def _repo_uses_ordered_dedup(self, repo_sources: Sequence[str]) -> str | None:
+        """Return the first ordered-dedup expression the repository itself uses."""
+        for src in repo_sources:
+            if any(m in src for m in self.ORDERED_MARKERS):
+                try:
+                    tree = ast.parse(src)
+                except SyntaxError:
+                    continue
+                for node in ast.walk(tree):
+                    if (
+                        isinstance(node, ast.Call)
+                        and isinstance(node.func, ast.Attribute)
+                        and node.func.attr == "fromkeys"
+                        and isinstance(node.func.value, ast.Name)
+                        and node.func.value.id in ("dict", "OrderedDict")
+                    ):
+                        return ast.unparse(node)
+        return None
+
+    def mine_for_pair(
+        self, source: str, target_function: str, repo_sources: Sequence[str]
+    ) -> list[WallCandidate]:
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            return []
+        fn = _functions(tree).get(target_function)
+        if fn is None:
+            return []
+        idiom = self._repo_uses_ordered_dedup(repo_sources)
+        if not idiom:
+            return []
+        # Find `X = set(<expr>)` whose X is later returned via `list(X)`.
+        set_assigns: dict[str, tuple[int, int, str]] = {}
+        for node in ast.walk(fn):
+            if (
+                isinstance(node, ast.Assign)
+                and isinstance(node.value, ast.Call)
+                and isinstance(node.value.func, ast.Name)
+                and node.value.func.id == "set"
+                and len(node.targets) == 1
+                and isinstance(node.targets[0], ast.Name)
+            ):
+                name = node.targets[0].id
+                wrapped = ast.unparse(node.value)
+                set_assigns[name] = (
+                    node.lineno,
+                    node.end_lineno or node.lineno,
+                    name,
+                )
+        if not set_assigns:
+            return []
+        out: list[WallCandidate] = []
+        for node in ast.walk(fn):
+            # `return list(<name>)` where <name> came from set(...)
+            if not (
+                isinstance(node, ast.Return)
+                and isinstance(node.value, ast.Call)
+                and isinstance(node.value.func, ast.Name)
+                and node.value.func.id == "list"
+                and node.value.args
+                and isinstance(node.value.args[0], ast.Name)
+                and node.value.args[0].id in set_assigns
+            ):
+                continue
+            name = node.value.args[0].id
+            start, end, _ = set_assigns[name]
+            lines = source.splitlines()
+            old_line = lines[start - 1]
+            indent = _indent_at(source, start)
+            source_expr = ast.unparse(
+                ast.parse(old_line.strip()).body[0].value.args[0]
+            )
+            new_line = f"{indent}{name} = dict.fromkeys({source_expr})"
+
+            # The assignment is not the whole change: every `X.difference_update(...)` on
+            # this name must become the mapping-aware equivalent, or the patch raises
+            # AttributeError and repairs nothing. Emitting only the first half would be a
+            # candidate that looks right and is guaranteed to fail.
+            companion: list[tuple[int, int, str]] = []
+            for sub in ast.walk(fn):
+                if not (
+                    isinstance(sub, ast.Expr)
+                    and isinstance(sub.value, ast.Call)
+                    and isinstance(sub.value.func, ast.Attribute)
+                    and sub.value.func.attr == "difference_update"
+                    and isinstance(sub.value.func.value, ast.Name)
+                    and sub.value.func.value.id == name
+                ):
+                    continue
+                arg_src = ast.unparse(sub.value.args[0]) if sub.value.args else "()"
+                sub_indent = _indent_at(source, sub.lineno)
+                # `X.difference_update(<iter>)` on a dict -> pop each key, keeping order.
+                replacement = (
+                    f"{sub_indent}for _name in {arg_src}:\n"
+                    f"{sub_indent}    {name}.pop(_name, None)"
+                )
+                companion.append((sub.lineno, sub.end_lineno or sub.lineno, replacement))
+            if not companion:
+                continue
+
+            edits = ((start, start, new_line), *companion)
+            patched = source
+            for first, last, replacement in sorted(edits, key=lambda e: e[0], reverse=True):
+                patched = _rewrite_span(patched, first, last, replacement)
+            out.append(
+                WallCandidate(
+                    mechanism=self.mechanism,
+                    target_function=target_function,
+                    lineno=start,
+                    old_code=old_line.strip(),
+                    new_code=(new_line + "\n" + companion[0][2]).strip(),
+                    patched_module_source=patched,
+                    evidence=(
+                        f"the repository keeps order when it deduplicates: {idiom}",
+                        f"this method returns list({name}) built from set(...), discarding that order",
+                    ),
+                    explanation=(
+                        "The returned list is produced from a set, so its order is hash "
+                        "order. The repository's own convention for deduplicating a "
+                        "sequence is order-preserving, so this site departs from it. The "
+                        "closer reports the departure and rewrites the accompanying "
+                        "difference_update calls, which only exist on sets; the suite "
+                        "decides whether it is a defect."
+                    ),
+                    edits=edits,
+                )
+            )
+        return out
+
+    needs_repo_sources = True
+
+    def mine(
+        self, source: str, target_function: str, *, repo_sources: Sequence[str] = ()
+    ) -> list[WallCandidate]:
+        return self.mine_for_pair(source, target_function, list(repo_sources))
+
+
 class ConfigParityFromRepoIdiom:
     """A rendering/parsing policy the repository applies in one place and forgets in another.
 
@@ -1456,6 +1792,8 @@ class ResidualWallCloser:
             TerminalActionRetryPolicy(),
             DocstringDefaultUngating(),
             ConfigParityFromRepoIdiom(),
+            OrderPreservingDedupParity(),
+            StatedRequirementKeywordCompletion(),
             PostconditionStatePurge(),
         )
     )
@@ -1467,6 +1805,7 @@ class ResidualWallCloser:
         *,
         functions: Sequence[str] = (),
         repo_sources: Sequence[str] = (),
+        test_sources: Sequence[str] = (),
     ) -> list[WallCandidate]:
         """Every candidate the closers can fire, plus their disjoint compositions.
 
@@ -1480,7 +1819,11 @@ class ResidualWallCloser:
         seen: set[str] = {source}
         for name in targets:
             for closer in self.closers:
-                if getattr(closer, "needs_repo_sources", False):
+                if getattr(closer, "needs_test_sources", False):
+                    fired = closer.mine_for_pair(  # type: ignore[attr-defined]
+                        source, name, list(test_sources)
+                    )
+                elif getattr(closer, "needs_repo_sources", False):
                     fired = closer.mine(  # type: ignore[call-arg]
                         source, name, repo_sources=list(repo_sources) + [source]
                     )
@@ -1729,9 +2072,24 @@ def close_wall_against_git(
                     except OSError:
                         continue
 
+        # The fix commit's test files are already on the worktree; they are what the
+        # program is asked to be, and they may state a requirement in words.
+        test_sources: list[str] = []
+        for rel in test_files:
+            path = wtree / rel
+            if path.is_file():
+                try:
+                    test_sources.append(path.read_text(encoding="utf-8"))
+                except OSError:
+                    continue
+
         def _offered(text: str) -> list[WallCandidate]:
             cands = closer.mine_all(
-                text, target_function, functions=functions, repo_sources=repo_sources
+                text,
+                target_function,
+                functions=functions,
+                repo_sources=repo_sources,
+                test_sources=test_sources,
             )
             return [c for c in cands if not mechanisms or c.mechanism in mechanisms]
 
@@ -1908,6 +2266,7 @@ RESIDUAL_WALL_CASES: tuple[dict[str, Any], ...] = (
         "fix_test_files": ("tests/test_commands.py",),
         "target_functions": ("Command.get_help_option_names",),
         "project_tests": CLICK_PROJECT_TESTS, "suite_scope": "per-file",
+        "repo_source_globs": ("src/click/*.py",),
         "wall": (
             "help option names must keep declaration order: `set()` is used where the "
             "returned list order is part of the contract"

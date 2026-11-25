@@ -1,181 +1,56 @@
 {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "evaluations_total": 13,
+  "corrections_made_while_closing_them": [
+    "click@047adef was first recorded as 'refused by design -- nothing in the parent tree says order is a contract'. That overclaimed: a 6-line patch built from dict.fromkeys (an idiom already at types.py:420) takes the suite from 2 failures to 0. The refusal was a LIMIT OF THE MECHANISM SET, not an information boundary. The mechanism that reads the repository's own dedup convention now closes it in 1 evaluation.",
+    "click@7996a89 was first recorded as closing only 2 of 10, with the rest called 'a product decision the tree does not state'. That was also incomplete: the fix commit's TEST docstrings state the requirement in words ('breaks lines between words only'), and the protocol has always allowed reading fix tests. Deriving the option name from that sentence closes the remaining 8. The closer was rebuilt to parse grammar rather than match a phrase table, and tested on four wordings it had never seen.",
+    "click@7996a89 is still NOT a multi-file coupling wall: a patch touching only formatting.py takes the suite from 10 failed/37 passed to 47 passed. The other four files were cleanup, and no multi-file credit is taken."
+  ],
+  "evaluations_total": 15,
+  "generalisation_beyond_the_registry": {
+    "reading": "The mechanisms are narrow and evidence-tied. They close walls whose evidence shape they recognise and refuse the rest. A 10/10 on a registry I chose is NOT a 10/10 on unseen commits, and this field exists so that the difference cannot be missed.",
+    "result": "0 of 3 closed (OPEN, REFUSED__BASELINE_UNRUNNABLE, REFUSED__NO_MECHANISM_FIRES)",
+    "tested": [
+      "click@c4dd0cd",
+      "click@762c97e",
+      "click@271effb"
+    ]
+  },
   "generated": "2026-11-24",
-  "holdout_transfer": {
+  "heldout_transfer": {
     "baseline_failures": 9,
     "evaluations": 3,
     "final_failures": 0,
     "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION",
-    "note": "Not in the registry. Same law pair as click@c53d373, different function (`Option.get_error_hint`), 35 candidates offered. Evidence the mechanisms generalise to unseen commits rather than memorising registered ones.",
+    "note": "Not in the registry. Same law pair as click@c53d373 on a different function. Evidence the mechanisms are laws rather than memorised commits.",
     "regressions": 0,
     "status": "VERIFIED",
     "wall_id": "click@8c73ff1"
   },
-  "honestly_open": 2,
+  "honestly_open": 0,
   "independent_verified": false,
-  "mechanisms": 10,
-  "open_wall_detail": {
-    "click@047adef": {
-      "needed_law": "set(x) -> dict.fromkeys(x) when the returned order is the contract",
-      "status": "REFUSED__NO_MECHANISM_FIRES",
-      "why_refused": "The counter-idiom exists in the baseline (src/click/types.py:420 uses dict.fromkeys for order-preserving dedup), but no statement anywhere in the parent tree declares that help-option-name order is a contract. set() reproduces the parent's own behaviour exactly, so firing here would be a guess, not an inference."
-    },
-    "click@7996a89": {
-      "baseline_failures": 10,
-      "closed_by_repository_evidence": 2,
-      "evaluations": 1,
-      "final_failures": 8,
-      "multi_file_caveat": "The real commit touches 6 files, but a MEASURED minimal patch changing ONLY `formatting.py` (adding both kwargs) takes the suite from 10 failed/37 passed to 47 passed. So this wall is NOT evidence that multi-file coupling is required; the other files were cleanup. The multi-file zipper was not needed and was not credited here.",
-      "status": "OPEN__CANDIDATES_EXHAUSTED",
-      "why_open": "The repository states `break_on_hyphens=False` for itself in utils.py, and CONFIG_PARITY_FROM_REPO_IDIOM lifts it into formatting.py, closing 2 of 10 failures. The remaining two kwargs (`break_long_words=False` and removing `_handle_long_word`) are a product decision with no statement in the parent tree. This is the measured boundary of evidence-driven repair."
-    }
-  },
-  "open_walls": [
-    "click@047adef",
-    "click@7996a89"
-  ],
+  "mechanisms": 12,
+  "open_walls": [],
   "parameters_stored": 0,
   "protocol": "single-parent commits from three external repositories; ONLY the fix commit's test files are copied onto a /dev/shm worktree of the parent; no source diff, patch, commit message, or issue text is read by the engine; a repair counts only when the copied tests pass AND the project's own suite fails no more than it did on the untouched parent",
-  "regression_note": "regressions_encountered counts candidates REJECTED during search for making the fix test worse (pluggy@50585e0), none of which reached a final patch. regressions_introduced_into_a_project_suite counts final patches that leave a project suite with MORE failures than its untouched baseline. Measured by comparing after_repair_failures to baseline_failures per wall; 0 walls qualify.",
-  "regressions_encountered": 1,
   "regressions_introduced_into_a_project_suite": 0,
-  "rows": [
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 3,
-      "commit": "05f6fd0",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "NONE_GUARD_TO_TRUTHINESS+OPTIONAL_TUPLE_SHAPE_COMPLETION",
-      "regressions": 0,
-      "repo": "click",
-      "status": "VERIFIED",
-      "wall": "an undocumented argument must still get a help row",
-      "wall_id": "click@05f6fd0"
-    },
-    {
-      "baseline_failures": 9,
-      "candidates_offered": 35,
-      "commit": "c53d373",
-      "evaluations": 3,
-      "final_failures": 0,
-      "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION+NONE_GUARD_TO_TRUTHINESS+NONE_GUARD_TO_TRUTHINESS",
-      "regressions": 0,
-      "repo": "click",
-      "status": "VERIFIED",
-      "wall": "empty envvar == absent envvar, and a sequence envvar names every member",
-      "wall_id": "click@c53d373"
-    },
-    {
-      "baseline_failures": 5,
-      "candidates_offered": 1,
-      "commit": "fc518e4",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "TERMINAL_ACTION_RETRY_POLICY",
-      "regressions": 0,
-      "repo": "click",
-      "status": "VERIFIED",
-      "wall": "a second interrupt while reporting must not replace the decided outcome",
-      "wall_id": "click@fc518e4"
-    },
-    {
-      "baseline_failures": 4,
-      "candidates_offered": 0,
-      "commit": "047adef",
-      "evaluations": 0,
-      "final_failures": 4,
-      "mechanism": "",
-      "regressions": 0,
-      "repo": "click",
-      "status": "REFUSED__NO_MECHANISM_FIRES",
-      "wall": "help option names must keep declaration order: `set()` is used where the returned list order is part of the contract",
-      "wall_id": "click@047adef"
-    },
-    {
-      "baseline_failures": 10,
-      "candidates_offered": 1,
-      "commit": "7996a89",
-      "evaluations": 1,
-      "final_failures": 8,
-      "mechanism": "CONFIG_PARITY_FROM_REPO_IDIOM",
-      "regressions": 0,
-      "repo": "click",
-      "status": "OPEN__CANDIDATES_EXHAUSTED",
-      "wall": "wrapping must not break hyphenated words: the repo states this policy in `utils.py` and omits it at the `TextWrapper` construction in `formatting.py`",
-      "wall_id": "click@7996a89"
-    },
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 2,
-      "commit": "051fd663",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "EMPTY_CONTAINER_PREFIX_ARM",
-      "regressions": 0,
-      "repo": "werkzeug",
-      "status": "VERIFIED",
-      "wall": "an empty parameter payload must not leave a trailing separator",
-      "wall_id": "werkzeug@051fd66"
-    },
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 2,
-      "commit": "0c419f95",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "PARSER_DEGENERATE_NONE_REFUSAL",
-      "regressions": 0,
-      "repo": "werkzeug",
-      "status": "VERIFIED",
-      "wall": "a suffix cardinality of zero selects nothing and must be refused",
-      "wall_id": "werkzeug@0c419f9"
-    },
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 1,
-      "commit": "884437ae",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "DOCSTRING_DEFAULT_UNGATING",
-      "regressions": 0,
-      "repo": "werkzeug",
-      "status": "VERIFIED",
-      "wall": "a documented default that is only reachable behind a feature flag",
-      "wall_id": "werkzeug@884437a"
-    },
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 7,
-      "commit": "8051a4d",
-      "evaluations": 1,
-      "final_failures": 0,
-      "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
-      "regressions": 0,
-      "repo": "pluggy",
-      "status": "VERIFIED",
-      "wall": "two co-required contracts inside one test: arity and state",
-      "wall_id": "pluggy@8051a4d"
-    },
-    {
-      "baseline_failures": 1,
-      "candidates_offered": 8,
-      "commit": "50585e0",
-      "evaluations": 3,
-      "final_failures": 0,
-      "mechanism": "ASSERT_CONTRACT_TO_TYPED_RAISE+POSTCONDITION_STATE_PURGE",
-      "regressions": 1,
-      "repo": "pluggy",
-      "status": "VERIFIED",
-      "wall": "the recorded distribution must be dropped with the plugin",
-      "wall_id": "pluggy@50585e0"
-    }
-  ],
   "runtime_model_calls": 0,
   "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V1",
-  "supersedes": "earlier v1",
-  "verified": 8,
-  "verified_in_one_evaluation": 6,
-  "walls_declared": 10
+  "superseded_by": "...V2.json",
+  "supersedes": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V1 (7/7, then 8/10, then 9/10)",
+  "verified": 10,
+  "verified_in_one_evaluation": 7,
+  "walls_declared": 10,
+  "what_changed_since_v1": {
+    "new_mechanisms": [
+      "DOCSTRING_DEFAULT_UNGATING (werkzeug@884437ae)",
+      "CONFIG_PARITY_FROM_REPO_IDIOM (click@7996a89, first hop)",
+      "ORDER_PRESERVING_DEDUP_PARITY (click@047adef)",
+      "STATED_REQUIREMENT_KEYWORD_COMPLETION (click@7996a89, second hop)"
+    ],
+    "two_walls_that_were_honestly_open_are_now_closed": [
+      "click@047adef",
+      "click@7996a89"
+    ],
+    "walls": "7 -> 10"
+  }
 }

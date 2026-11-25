@@ -30,9 +30,11 @@ from canonical.swe_kernel.residual_wall_closers_v1 import (
     EmptyContainerPrefixArm,
     NoneGuardToTruthiness,
     OptionalTupleShapeCompletion,
+    OrderPreservingDedupParity,
     ParserDegenerateNoneRefusal,
     PostconditionStatePurge,
     ResidualWallCloser,
+    StatedRequirementKeywordCompletion,
     TerminalActionRetryPolicy,
     UnionStrSequenceFormatCompletion,
     _negate,
@@ -624,6 +626,114 @@ def shorten(text, n):
         self.assertEqual(closer.mine_for_pair(already, "fill", [self.SIBLING, already]), [])
 
 
+
+class OrderPreservingDedupParityTests(unittest.TestCase):
+    """The convention has to be in the repository, or the closer must not fire."""
+
+    TARGET = """
+def names(ctx, params):
+    all_names = set(ctx.help_option_names)
+    for param in params:
+        all_names.difference_update(param.opts)
+    return list(all_names)
+"""
+
+    SIBLING = """
+def metavars(choices):
+    return "|".join([*dict.fromkeys(choices)])
+"""
+
+    def test_departure_from_the_repositorys_own_convention_is_reported(self) -> None:
+        cands = OrderPreservingDedupParity().mine_for_pair(
+            self.TARGET, "names", [self.SIBLING, self.TARGET]
+        )
+        self.assertEqual(len(cands), 1)
+        c = cands[0]
+        self.assertIn("dict.fromkeys", c.new_code)
+        self.assertTrue(any("dict.fromkeys" in e for e in c.evidence))
+
+    def test_the_companion_rewrite_is_included_not_omitted(self) -> None:
+        """Emitting only the assignment produces a candidate guaranteed to raise."""
+        cands = OrderPreservingDedupParity().mine_for_pair(
+            self.TARGET, "names", [self.SIBLING, self.TARGET]
+        )
+        patched = cands[0].patched_module_source
+        self.assertNotIn("difference_update", patched)
+        self.assertIn("pop(", patched)
+        # and the result still parses
+        import ast as _ast
+        _ast.parse(patched)
+
+    def test_no_convention_in_the_repository_means_no_candidate(self) -> None:
+        cands = OrderPreservingDedupParity().mine_for_pair(
+            self.TARGET, "names", [self.TARGET]
+        )
+        self.assertEqual(cands, [])
+
+    def test_an_already_ordered_site_is_left_alone(self) -> None:
+        already = self.TARGET.replace("set(ctx.help_option_names)",
+                                      "dict.fromkeys(ctx.help_option_names)")
+        cands = OrderPreservingDedupParity().mine_for_pair(
+            already, "names", [self.SIBLING, already]
+        )
+        self.assertEqual(cands, [])
+
+
+
+class StatedRequirementKeywordCompletionTests(unittest.TestCase):
+    """The requirement must be DERIVED from grammar, not looked up from a phrase table."""
+
+    TARGET = """
+def render(text, width):
+    wrapper = TextWrapper(width, replace_whitespace=False)
+    return wrapper.fill(text)
+"""
+
+    def _req(self, doc: str):
+        return StatedRequirementKeywordCompletion().requirements_in(
+            [f'def t():\n    """{doc}"""\n']
+        )
+
+    def test_wording_it_has_never_seen_is_understood(self) -> None:
+        # four different phrasings, one law; none of these sentences is in the code
+        for doc in (
+            "Lines split between words only.",
+            "Text breaks between hyphens only, never mid-word.",
+            "The wrapper should break between words only.",
+            "\\`\\`wrap_text\\`\\` breaks lines between words only.",
+        ):
+            self.assertTrue(self._req(doc), doc)
+
+    def test_an_unrelated_test_states_no_requirement(self) -> None:
+        self.assertEqual(self._req("assert 1 == 1"), ())
+
+    def test_a_sentence_that_does_not_say_only_is_not_a_requirement(self) -> None:
+        self.assertEqual(self._req("Lines may break between words."), ())
+
+    def test_it_fires_on_a_target_it_has_never_seen(self) -> None:
+        cands = StatedRequirementKeywordCompletion().mine_for_pair(
+            self.TARGET, "render", ['def t():\n    """Lines split between words only."""\n']
+        )
+        self.assertEqual(len(cands), 1)
+        self.assertIn("break_long_words=False", cands[0].new_code)
+
+    def test_a_hyphen_requirement_names_the_hyphen_option(self) -> None:
+        cands = StatedRequirementKeywordCompletion().mine_for_pair(
+            self.TARGET, "render",
+            ['def t():\n    """Text breaks between hyphens only."""\n'],
+        )
+        self.assertEqual(len(cands), 1)
+        self.assertIn("break_on_hyphens=False", cands[0].new_code)
+
+    def test_silence_without_a_stated_requirement(self) -> None:
+        self.assertEqual(
+            StatedRequirementKeywordCompletion().mine_for_pair(
+                self.TARGET, "render", ["def t():\n    assert 1 == 1\n"]
+            ),
+            [],
+        )
+
+
 class HonestOpenWallTests(unittest.TestCase):
     """A wall the engine cannot close must be registered, not quietly dropped."""
 
@@ -632,13 +742,16 @@ class HonestOpenWallTests(unittest.TestCase):
         self.assertIn("click@7996a89", ids)
         self.assertIn("click@047adef", ids)
 
-    def test_the_config_parity_wall_declares_the_repository_globs(self) -> None:
-        case = next(c for c in RESIDUAL_WALL_CASES if c["wall_id"] == "click@7996a89")
-        self.assertEqual(case["repo_source_globs"], ("src/click/*.py",))
-        # Every other wall works from its own file alone.
-        for other in RESIDUAL_WALL_CASES:
-            if other["wall_id"] != "click@7996a89":
-                self.assertEqual(other.get("repo_source_globs", ()), ())
+    def test_only_the_walls_that_need_repo_evidence_declare_globs(self) -> None:
+        needs_repo = {
+            c["wall_id"] for c in RESIDUAL_WALL_CASES if c.get("repo_source_globs")
+        }
+        self.assertEqual(needs_repo, {"click@7996a89", "click@047adef"})
+        for case in RESIDUAL_WALL_CASES:
+            if case["wall_id"] in needs_repo:
+                self.assertEqual(case["repo_source_globs"], ("src/click/*.py",))
+            else:
+                self.assertEqual(case.get("repo_source_globs", ()), ())
 
 
 
