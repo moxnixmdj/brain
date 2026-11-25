@@ -25,7 +25,7 @@ import time
 from typing import Any, Mapping, Sequence
 
 
-_ASAN_FRAME_RE = re.compile(r"#\d+\s+0x[0-9a-fA-F]+\s+in\s+([A-Za-z_][A-Za-z0-9_]*)\s+([^:\s]+):(\d+)")
+_ASAN_FRAME_RE = re.compile(r"#\d+\s+0x[0-9a-fA-F]+\s+in\s+([A-Za-z_][A-Za-z0-9_:~<>]*)(?:\([^)]*\)(?:\s+const)?)?\s+([^:\s]+):(\d+)")
 _UBSAN_LINE_RE = re.compile(r"^([^:\s]+):(\d+):(\d+):\s+runtime error:\s+(.+)$", re.M)
 _UNITY_FAIL_RE = re.compile(r"^([^:\s]+):(\d+):([^:\s]+):FAIL:\s*(.*)$", re.M)
 _DEREF_CHAIN_RE = re.compile(r"\b([A-Za-z_][A-Za-z0-9_]*(?:\s*->\s*[A-Za-z_][A-Za-z0-9_]*)+)")
@@ -44,6 +44,10 @@ _C_KEYWORDS = frozenset(
 
 def _find_c_compiler() -> str | None:
     return shutil.which("gcc") or shutil.which("cc") or shutil.which("clang")
+
+
+def _find_cpp_compiler() -> str | None:
+    return shutil.which("g++") or shutil.which("c++") or shutil.which("clang++")
 
 
 def _detect_already_included_c_sources(
@@ -98,10 +102,16 @@ def compile_and_run_c_asan(
     t0 = time.monotonic()
     already_inc = _detect_already_included_c_sources(root, c_sources, include_dirs)
     effective_sources = [s for s in c_sources if pathlib.Path(s).name not in already_inc] or list(c_sources)
+    is_cpp = any(str(s).endswith((".cpp", ".cc", ".cxx")) for s in effective_sources)
+    if is_cpp:
+        cxx = _find_cpp_compiler()
+        if not cxx:
+            return {"compiled": False, "passed": False, "reason": "NO_CPP_COMPILER", "model_calls": 0}
+        cc = cxx
 
     with tempfile.TemporaryDirectory(prefix="brain_casan_") as td:
         bin_path = pathlib.Path(td) / "test_bin"
-        cmd = [cc, "-g", "-O0", "-w"]
+        cmd = [cc, "-std=c++17", "-g", "-O0", "-w"] if is_cpp else [cc, "-g", "-O0", "-w"]
         if use_sanitizers:
             cmd.append("-fsanitize=address,undefined")
         for inc in include_dirs:
@@ -269,9 +279,9 @@ def _find_enclosing_c_function(source: str, target_line: int) -> dict[str, Any] 
                     break
                 depth -= 1
         if open_idx != -1:
-            # Verify this `{` is at top-level function scope (indented <= 2 spaces or preceded by `)`!)
+            # Verify this `{` is at top-level function/method scope (handles C++ `const`/`noexcept`/`override`)
             sig_region = "\n".join(lines[max(0, open_idx - 5) : open_idx + 1])
-            if re.search(r"\)\s*\{", sig_region) and not re.search(
+            if re.search(r"\)(?:\s*(?:const|noexcept|override|final))*\s*\{", sig_region) and not re.search(
                 r"\b(?:if|for|while|switch|else)\s*\([^)]*\)\s*\{", lines[open_idx]
             ):
                 # Check previous non-empty line isn't `if (...)` / `for (...)` / `while (...)`
@@ -312,7 +322,7 @@ def _find_enclosing_c_function(source: str, target_line: int) -> dict[str, Any] 
     sig_lines: list[str] = []
     for i in range(open_idx, sig_start - 1, -1):
         s = lines[i].strip()
-        if not s or s.startswith(("/*", "*", "//", "#")) or s.endswith((";", "}")):
+        if not s or s.startswith(("/*", "*", "//", "#")) or s.endswith((";", "}", ":")):
             if sig_lines:
                 break
             continue
@@ -321,7 +331,7 @@ def _find_enclosing_c_function(source: str, target_line: int) -> dict[str, Any] 
     sig_txt = " ".join(sig_lines)
     sig_head = sig_txt.split("{", 1)[0].strip()
 
-    m_fn = re.search(r"^(.*?)\b([A-Za-z_][A-Za-z0-9_]*)\s*\(([^)]*)\)\s*$", sig_head)
+    m_fn = re.search(r"^(.*?)\b([A-Za-z_][A-Za-z0-9_:~]*)\s*\(([^)]*)\)(?:\s*const)?\s*$", sig_head)
     if not m_fn:
         return None
     ret_type = re.sub(r"\s+", " ", m_fn.group(1)).strip()

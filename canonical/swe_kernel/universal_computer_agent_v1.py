@@ -230,6 +230,7 @@ class ExternalCausalLawStore:
         self.procedure_policy: dict[str, dict[str, Any]] = {}
         self.admission_stats: dict[str, Any] = {"admitted": 0, "rejected": 0, "reasons": {}}
         self._tree_index: dict[tuple[str, str, str], list[str]] = {}
+        self._tree_sig_index: dict[str, str] = {}
         if self.path is not None and self.path.exists():
             self.load()
 
@@ -309,14 +310,24 @@ class ExternalCausalLawStore:
                 keys.append(("stmt_slice", rname, "*"))
         return keys
 
+    @staticmethod
+    def _tree_morphism_sig(d: Mapping[str, Any]) -> str:
+        return json.dumps(
+            {"k": d.get("target_kind"), "p": d.get("pattern_sexps"), "r": d.get("replacement_sexps")},
+            sort_keys=True,
+        )
+
     def _rebuild_tree_index(self) -> None:
         idx: dict[tuple[str, str, str], list[str]] = {}
+        sig_idx: dict[str, str] = {}
         for mid, raw in self.tree_morphisms.items():
             tk = str(raw.get("target_kind", "stmt_slice"))
             pats = raw.get("pattern_sexps") or []
             key = self._sexp_structural_key(tk, pats[0] if pats else {})
             idx.setdefault(key, []).append(mid)
+            sig_idx[self._tree_morphism_sig(raw)] = mid
         self._tree_index = idx
+        self._tree_sig_index = sig_idx
 
     def load(self) -> None:
         if self.path is None or not self.path.exists():
@@ -370,17 +381,18 @@ class ExternalCausalLawStore:
     # --- L2 Multi-Statement AST Tree-Rewrite Morphisms (O(1) admit / recall / delete) ---
 
     def admit_tree_morphism(self, morphism: Any) -> dict[str, Any]:
-        """Admit a verified `TreeRewriteMorphism` into the external JSON store (deduplicated)."""
+        """Admit a verified `TreeRewriteMorphism` into the external JSON store (O(1) deduplicated)."""
         d = morphism.to_dict() if hasattr(morphism, "to_dict") else dict(morphism)
         mid = str(d["morphism_id"])
-        sig = json.dumps({"k": d.get("target_kind"), "p": d.get("pattern_sexps"), "r": d.get("replacement_sexps")}, sort_keys=True)
-        for oid, existing in self.tree_morphisms.items():
-            esig = json.dumps({"k": existing.get("target_kind"), "p": existing.get("pattern_sexps"), "r": existing.get("replacement_sexps")}, sort_keys=True)
-            if esig == sig and oid != mid:
-                existing["verified_count"] = int(existing.get("verified_count", 1)) + 1
-                self.save()
-                return {"admitted": True, "deduplicated_into": oid, "morphism_id": oid}
+        sig = self._tree_morphism_sig(d)
+        oid = self._tree_sig_index.get(sig)
+        if oid is not None and oid != mid and oid in self.tree_morphisms:
+            existing = self.tree_morphisms[oid]
+            existing["verified_count"] = int(existing.get("verified_count", 1)) + 1
+            self.save()
+            return {"admitted": True, "deduplicated_into": oid, "morphism_id": oid}
         self.tree_morphisms[mid] = d
+        self._tree_sig_index[sig] = mid
         tk = str(d.get("target_kind", "stmt_slice"))
         pats = d.get("pattern_sexps") or []
         key = self._sexp_structural_key(tk, pats[0] if pats else {})
@@ -463,6 +475,9 @@ class ExternalCausalLawStore:
                 bucket.remove(morphism_id)
                 if not bucket:
                     self._tree_index.pop(key, None)
+            sig = self._tree_morphism_sig(raw)
+            if self._tree_sig_index.get(sig) == morphism_id:
+                self._tree_sig_index.pop(sig, None)
             self.save()
         return existed
 
@@ -893,8 +908,8 @@ def compile_natural_language_goal(
             g.target_files.append(ft)
     # Also detect `into <file>` / `produce <file>` / `create <file>` / `save to <file>`
     for m in re.finditer(r"\b(?:into|to|produce|create|output|write)\s+['\"]?([A-Za-z0-9_./-]+\.[A-Za-z0-9.]+)['\"]?", goal_text, re.I):
-        f = m.group(1)
-        if f not in g.target_files:
+        f = m.group(1).rstrip(".")
+        if f and f not in g.target_files:
             g.target_files.append(f)
 
     # Protect existing input/important files by default unless instruction explicitly says delete/remove

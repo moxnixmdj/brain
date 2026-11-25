@@ -216,15 +216,16 @@ from canonical.swe_kernel import c_asan_cegis_repair_v1 as casan
 from canonical.swe_kernel import js_causal_cegis_repair_v1 as jsc
 from canonical.swe_kernel import universal_computer_agent_v1 as uca
 
-if test_target.endswith(".c"):
+if test_target.endswith((".c", ".cc", ".cpp", ".cxx")):
     store = uca.ExternalCausalLawStore(pathlib.Path(store_path)) if store_path else None
     repo_p = pathlib.Path(repo_root)
+    c_exts = (".c", ".cc", ".cpp", ".cxx")
     root_cs = sorted(
-        p.relative_to(repo_p).as_posix() for p in repo_p.glob("*.c")
+        p.relative_to(repo_p).as_posix() for ext in c_exts for p in repo_p.glob(f"*{ext}")
         if "test" not in p.name.lower() and "int main(" not in p.read_text(encoding="utf-8", errors="replace")
     )
     src_cs = root_cs or sorted(
-        p.relative_to(repo_p).as_posix() for p in repo_p.rglob("*.c")
+        p.relative_to(repo_p).as_posix() for ext in c_exts for p in repo_p.rglob(f"*{ext}")
         if "test" not in p.as_posix().lower() and ".git" not in p.parts
     )
     c_sources = list(src_cs) + [test_target]
@@ -255,7 +256,7 @@ if test_target.endswith(".c"):
         "model_dependency_count": 0,
     }
     print("BRAIN_ZM_SWE_RESULT:" + json.dumps(summary, sort_keys=True))
-elif test_target.endswith((".js", ".mjs", ".cjs")):
+elif test_target.endswith((".js", ".mjs", ".cjs", ".ts", ".mts", ".cts")):
     store = uca.ExternalCausalLawStore(pathlib.Path(store_path)) if store_path else None
     repo_p = pathlib.Path(repo_root)
     res = jsc.repair_js_repo_causal_cegis(repo_root, test_target, timeout_s=timeout_s, skill_store=store)
@@ -290,6 +291,7 @@ elif test_target == "__TERMINAL_GOAL__":
         or ((repo_p / "src").is_dir() and any((repo_p / "src").rglob("*.py")))
     )
     is_c_repo = (not is_py_repo) and any(repo_p.glob("*.h")) and any(repo_p.glob("*.c"))
+    is_js_repo = (not is_py_repo) and (not is_c_repo) and (repo_p / "package.json").is_file()
     has_terminal_artifact = any(tok in goal_text.lower() for tok in (".db", ".sqlite", ".csv", "export ", "sqlite", "archive", ".tar", ".zip"))
     m1_res = {}
     issue_mode_tag = "ISSUE_ONLY_METAMORPHIC_SWE"
@@ -302,6 +304,11 @@ elif test_target == "__TERMINAL_GOAL__":
             repo_root, goal_text, timeout_s=timeout_s, skill_store=store
         )
         issue_mode_tag = "ISSUE_ONLY_C_ASAN_SWE"
+    elif is_js_repo and not has_terminal_artifact:
+        m1_res = jsc.repair_js_repo_from_issue_zero_leakage(
+            repo_root, goal_text, timeout_s=timeout_s, skill_store=store
+        )
+        issue_mode_tag = "ISSUE_ONLY_JS_SWE"
     if m1_res.get("repaired"):
         written = []
         pf_map = dict(m1_res.get("patched_files") or {})
@@ -619,7 +626,11 @@ async def run_zero_model_swe_harbor_goal(
         }
 
     # 4. Independent container verification cycle & 5. Diff/state inspection cycle
-    issue_only_swe = str(solver_result.get("mode") or "") in ("ISSUE_ONLY_METAMORPHIC_SWE", "ISSUE_ONLY_C_ASAN_SWE")
+    issue_only_swe = str(solver_result.get("mode") or "") in (
+        "ISSUE_ONLY_METAMORPHIC_SWE",
+        "ISSUE_ONLY_C_ASAN_SWE",
+        "ISSUE_ONLY_JS_SWE",
+    )
     c_asan_swe = str(solver_result.get("mode") or "") == "C_ASAN_UBSAN_SWE"
     js_v8_swe = str(solver_result.get("mode") or "") == "JS_V8_CAUSAL_SWE"
     if terminal_bench_mode and not issue_only_swe:
