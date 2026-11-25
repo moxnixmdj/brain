@@ -17,12 +17,14 @@
   "clean": false,
   "defect_counts": {
     "DANGLING_ADAPTER": 0,
+    "FAMILY_ROUTE_FILE_MISSING": 0,
     "MISSING_VERIFICATION_RECEIPT": 8,
     "UNENROLLED_CERTIFIED_CAPABILITY": 0,
     "UNSATISFIABLE_REQUIRES": 25
   },
   "defects": {
     "DANGLING_ADAPTER": [],
+    "FAMILY_ROUTE_FILE_MISSING": [],
     "MISSING_VERIFICATION_RECEIPT": [
       "code.multilanguage.parse.tree_sitter.v1 -> canonical/verification/HARDCORE_VERIFY_CODE_MULTILANGUAGE_PARSE_TREE_SITTER_V1_V1.json",
       "software.hardcore.closing.supercomposer.v1 -> canonical/verification/HARDCORE_VERIFY_SOFTWARE_HARDCORE_ULTIMATE_SUPERCOMPOSER_V1_V1.json",
@@ -103,6 +105,48 @@
       "structured.decision_evidence.locate.stdlib"
     ],
     "REGISTRY_VS_SNAPSHOT_DIVERGENCE_note": "by design: the snapshot is a floor and the merge is a union, so divergence cannot delete a row -- it is drift to read, not a defect to block"
+  },
+  "family_route_verdicts": {
+    "INVENTORY_ONLY__NOT_DISPATCH_SHAPE": 3,
+    "RECEIPTED__NO_INDEPENDENT_VERIFICATION": 1
+  },
+  "family_routes": {
+    "COMPLEX_MULTI_TOOL_AGENCY": {
+      "bound_by_other_rows": [],
+      "dispatch_shape": false,
+      "independent_verification": false,
+      "inventory_status": "UNVERIFIED_INVENTORY",
+      "producer_receipt": true,
+      "route": "canonical/runtime/matched_agency_stateful_case_v2.py",
+      "verdict": "RECEIPTED__NO_INDEPENDENT_VERIFICATION"
+    },
+    "SELF_VERIFICATION_DEBUGGING_AND_RECOVERY": {
+      "bound_by_other_rows": [],
+      "dispatch_shape": false,
+      "independent_verification": false,
+      "inventory_status": "UNVERIFIED_INVENTORY",
+      "producer_receipt": false,
+      "route": "canonical/runtime/trajectory_failure_typed_ir_candidate_v7.py",
+      "verdict": "INVENTORY_ONLY__NOT_DISPATCH_SHAPE"
+    },
+    "SUBAGENT_DELEGATION_AND_COORDINATION": {
+      "bound_by_other_rows": [],
+      "dispatch_shape": false,
+      "independent_verification": false,
+      "inventory_status": "UNVERIFIED_INVENTORY",
+      "producer_receipt": false,
+      "route": "canonical/runtime/delegation_whole_scope_candidate_v2.py",
+      "verdict": "INVENTORY_ONLY__NOT_DISPATCH_SHAPE"
+    },
+    "TOOL_DISCOVERY_SELECTION_AND_LEARNING": {
+      "bound_by_other_rows": [],
+      "dispatch_shape": false,
+      "independent_verification": false,
+      "inventory_status": "UNVERIFIED_INVENTORY",
+      "producer_receipt": false,
+      "route": "canonical/runtime/tool_discovery_information_safe_candidate.py",
+      "verdict": "INVENTORY_ONLY__NOT_DISPATCH_SHAPE"
+    }
   },
   "native_kind_rows": 2,
   "native_kind_rows_ids": [

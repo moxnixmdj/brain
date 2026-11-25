@@ -184,7 +184,7 @@ independent `ast` recount that caught the understated entry-point number); and o
 data-driven instead of pinned to one run's verdict — it went stale the moment CI overwrote
 `swe-pro-v2-hard51-latest.json` with a void report, which is itself the lesson about pinning numbers in
 tests. **56 passed** across the six files at that point; the count after section 6 is 65 across eight.
-`capability_fabric_v1.py --check` passed then on digest `4b30be2ade766931`, and after section 6 on `c35123f79cfbf3f0`.
+`capability_fabric_v1.py --check` passed then on digest `4b30be2ade766931`, and after section 6 on `7e9412f672577beb`.
 HARD-51 re-armed (`RUN_SWE_PRO_V2`, 6 shards, 240 s engine budget) against the fixed collector CLI.
 
 ## 6. Execution: the enrollment, and what the instruments said back
@@ -202,6 +202,22 @@ corrections rather than repairs. `canonical/tools/capability_enroll_certified_v1
 | a `truecap.*` row in `AUTONOMOUS_CAPABILITY_EXTENDED_REGISTRY_V1.json` | 9 | registration in the one file `capability_receipt_lane_v1.discover()` reads, in the same dialect as `brain.module.function.invoke` — the only prior example of a bound-capability adapter registered for receipting |
 
 That last artifact is what turns "documented" into "reachable". `autonomous_capability_inventory_v1` scans `canonical/**/*.py` and *excludes* `canonical/runtime/bound_capabilities/**`, so an adapter is invisible to the inventory by design; the curated bound registry is the other door, and that is exactly the file where a status may not be self-granted. The extended registry is the seam in between — a row there is not an admission claim (`_receipt_admits` ignores `status` entirely and reads evidence), it is a declaration that the lane should look. Measured consequence: `lane.discover(".")` returns 816 candidates including all nine `truecap.*` ids as `("contract", "run")`, so the workflow that mints producer receipts will execute these adapters with no CI edit. Registering them also freezes the file, which is the point of the generator's own guard: `main()` raises "Refusing to overwrite promoted entries" if any row is not `UNVERIFIED_INVENTORY`, so a declared capability cannot be re-derived away by the next inventory run.
+
+The gate now counts the *other* capability class too, because "every advanced capability" is not only the
+nine kernels. `OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json` holds 19 families; 4 of them name a Python
+module as their `verified_route` (`matched_agency_stateful_case_v2.py`, `delegation_whole_scope_candidate_v2.py`,
+`tool_discovery_information_safe_candidate.py`, `trajectory_failure_typed_ir_candidate_v7.py`), and the gate grades
+each against evidence rather than against a label: 1 has a producer receipt but no independent verification
+(`RECEIPTED__NO_INDEPENDENT_VERIFICATION`), 3 are `INVENTORY_ONLY__NOT_DISPATCH_SHAPE` — an `.auto.v1`
+inventory row exists, which means the file was *seen*, and none of the four speaks `run(args, root)`, so
+`lane.discover()` cannot execute them and nothing can be admitted about them. **0 of 4 admitted.** That is
+the remaining half of the answer to "is everything in one model", and it is not closed by wrapping those four
+in adapters: they have no generator and no oracles, so a wrapper would be an envelope around an unmeasured
+claim — exactly the shape this repo keeps re-measuring as its own failure. What closes them is one spec per
+family under `canonical/capabilities/true/specs/` (falsifiable claim, instance generator, independent oracles,
+mutation test), after which the enrollment tool picks them up with no new machinery. The gate prints the
+verdict ladder on every run so the number cannot be quietly forgotten, and one test refuses to pass if a
+family route ever appears ADMITTED while its evidence still says otherwise.
 
 One property worth naming, found by regenerating the fixtures: all nine generators are seed-stable in
 structure, but the four DOCX instances embed zip-member timestamps, so their bytes differ per process. The
@@ -257,12 +273,13 @@ The stopping rule, item by item, as of this commit:
 3. *every `requires` edge certified or declared ambient* — **met for the nine**: `requires: []`, with the
    fixture named under `ambient_preconditions` and sha256-pinned by the queue entry. The remaining 25
    belong to pre-existing rows and are item 4.
-4. *`capability_fabric_v1.py --check` passes* — **met**, digest `c35123f79cfbf3f0`: 5,915 modules,
+4. *`capability_fabric_v1.py --check` passes* — **met**, digest `7e9412f672577beb`: 5,915 modules,
    3,544 components, 3,022 singletons, 2,690 runnable entry points of which 580 expose a `main()`.
 
-**66 tests pass** across the eight files that cover this work, 9 of them new
-(`test_measured_capabilities_are_enrolled_into_the_one_registry_v1.py`), including one that calls the receipt
-lane's own `discover()` and one that runs `git hash-object` against the certified blob.
+**67 tests pass** across the eight files that cover this work, 10 of them new: 9 in
+`test_measured_capabilities_are_enrolled_into_the_one_registry_v1.py` — including one that calls the receipt
+lane's own `discover()` and one that runs `git hash-object` against the certified blob — plus the family-route
+census test, whose bite is that an ADMITTED verdict may not appear unless the evidence files say so.
 
 What "100 % sure" means here, stated so it can be refuted. It means: every advanced capability the repo
 measures now has exactly one row-shape in the one queue the root consumes; the row's predicates came

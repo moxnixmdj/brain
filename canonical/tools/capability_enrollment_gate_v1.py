@@ -59,7 +59,10 @@ DEFECT_ORDER = (
     "UNSATISFIABLE_REQUIRES",
     "UNENROLLED_CERTIFIED_CAPABILITY",
 )
-FACT_ORDER = ("REGISTRY_VS_SNAPSHOT_DIVERGENCE",)
+FACT_ORDER = ("REGISTRY_VS_SNAPSHOT_DIVERGENCE", "OWNED_FAMILY_ROUTES")
+DEFECT_ORDER = DEFECT_ORDER + ("FAMILY_ROUTE_FILE_MISSING",)
+MATRIX = "canonical/capabilities/opus55/OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json"
+ROUTE_PY = __import__("re").compile(r"canonical/[A-Za-z0-9_./-]+\.py")
 
 
 def _read(path: pathlib.Path) -> dict[str, Any]:
@@ -220,6 +223,7 @@ def build(root: pathlib.Path, registry: pathlib.Path, snapshot: pathlib.Path,
     # Only probe the real root: `live_integrated_brain_v1` reads its own module-level ROOT, so pointing
     # the probe at a fixture root would answer with the repository's counts and call that a measurement.
     admitted: Any = None
+    admitted_ids: set[str] = set()
     admission_error: str | None = None
     if (root / "canonical/runtime/live_integrated_brain_v1.py").is_file():
         try:
@@ -227,12 +231,76 @@ def build(root: pathlib.Path, registry: pathlib.Path, snapshot: pathlib.Path,
             if str(root) not in sys.path:
                 sys.path.insert(0, str(root))
             from canonical.runtime import live_integrated_brain_v1 as brain  # type: ignore[import-not-found]
-            admitted = len(brain.load_verified_registry())
+            admitted_ids = set(brain.load_verified_registry())
+            admitted = len(admitted_ids)
         except Exception as exc:  # a probe that cannot run is a fact about the probe, not a defect
             admission_error = f"{type(exc).__name__}: {str(exc)[:160]}"
     else:
         admission_error = "skipped: not the repository root"
+    # The other capability class in this repo: the ownership matrix's VERIFIED_OWNED families, whose
+    # "capability" is a route module plus a public-runner verification record rather than a harness
+    # spec. Enrollment cannot be *granted* here -- a wrapper around code with no generator and no
+    # oracle would be a claim with nothing behind it -- but the gap must be visible where it can be
+    # counted, or it is forgotten. Measured today: 4 named route modules, all present, all reachable
+    # only as `UNVERIFIED_INVENTORY` rows, and none speaking `run(args, root)`, so the receipt lane
+    # cannot execute them at all. That is the honest denominator for "every advanced capability is in
+    # one model": 9 measured kernels enrolled and receiptable, 4 owned-family routes that need a spec
+    # and an envelope before any registry can hold them truthfully.
+    families: dict[str, Any] = {}
+    missing_routes: list[str] = []
+    matrix_path = root / MATRIX
+    if matrix_path.is_file():
+        try:
+            rows_m = _read(matrix_path).get("rows") or []
+        except (OSError, ValueError):
+            rows_m = []
+        for fr in rows_m:
+            if not isinstance(fr, Mapping):
+                continue
+            for rel in sorted(set(ROUTE_PY.findall(json.dumps(fr)))):
+                if not (root / rel).is_file():
+                    missing_routes.append(f"{fr.get('family')} -> {rel}")
+                    continue
+                cid_auto = f"{rel}.auto.v1"
+                safe = "".join(c if c.isalnum() or c in "._-" else "_" for c in cid_auto)
+                receipt = (root / "canonical/astra_runtime/evidence"
+                           / f"CAPABILITY__{safe}__EXECUTION_RECEIPT.json").is_file()
+                indep = (root / "canonical/astra_runtime/evidence"
+                         / f"CAPABILITY__{safe}__INDEPENDENT_VERIFICATION.json").is_file()
+                curated = sorted(
+                    cid for cid, r in rows.items()
+                    if cid != cid_auto and rel in {str(((r.get("source") or {}).get(k) or ""))
+                                                    for k in ("path", "adapter_path")}
+                )
+                try:
+                    import sys
+                    if str(root) not in sys.path:
+                        sys.path.insert(0, str(root))
+                    from canonical.runtime import capability_receipt_lane_v1 as lane  # type: ignore
+                    shape = lane.contract_shape(str(root / rel))
+                except Exception:
+                    shape = None
+                if cid_auto in admitted_ids or any(c in admitted_ids for c in curated):
+                    verdict = "ADMITTED"
+                elif receipt:
+                    verdict = "RECEIPTED__NO_INDEPENDENT_VERIFICATION" if not indep else "IN_PROJECTION"
+                elif curated:
+                    verdict = "ENROLLED_NOT_RECEIPTED"
+                elif shape is not None:
+                    verdict = "INVENTORY_ONLY__ADAPTABLE"
+                else:
+                    verdict = "INVENTORY_ONLY__NOT_DISPATCH_SHAPE"
+                families[str(fr.get("family"))] = {
+                    "route": rel,
+                    "inventory_status": (extended.get(cid_auto) or {}).get("status"),
+                    "producer_receipt": receipt,
+                    "independent_verification": indep,
+                    "bound_by_other_rows": curated,
+                    "dispatch_shape": bool(shape),
+                    "verdict": verdict,
+                }
     defects = {
+        "FAMILY_ROUTE_FILE_MISSING": missing_routes,
         "DANGLING_ADAPTER": dangling,
         "MISSING_VERIFICATION_RECEIPT": missing_receipts,
         "UNSATISFIABLE_REQUIRES": unsatisfiable,
@@ -257,6 +325,9 @@ def build(root: pathlib.Path, registry: pathlib.Path, snapshot: pathlib.Path,
         "certified_capabilities": len(certified),
         "certified_registry_bound": registry_bound,
         "certified_pending_binding_only": pending_only,
+        "family_routes": families,
+        "family_route_verdicts": {v["verdict"]: sum(1 for x in families.values() if x["verdict"] == v["verdict"])
+                                  for v in families.values()},
         "facts": {"REGISTRY_VS_SNAPSHOT_DIVERGENCE": divergence,
                   "REGISTRY_VS_SNAPSHOT_DIVERGENCE_note": (
                       "by design: the snapshot is a floor and the merge is a union, so divergence "
@@ -324,6 +395,11 @@ def to_markdown(r: Mapping[str, Any]) -> str:
     L.append(f"- provides vocabulary {r['distinct_provides']}, requires vocabulary {r['distinct_requires']}")
     L.append(f"- rows dispatched as the declared native kind `{r['defects'] and 'runtime_native_action'}`: "
              f"{r['native_kind_rows']} (no adapter file expected; listed, not counted as a defect)")
+    verdicts = r.get("family_route_verdicts") or {}
+    if r.get("family_routes") is not None:
+        L.append(f"- `OWNED_FAMILY_ROUTES` (fact): ownership-matrix route modules, {len(r['family_routes'])} named, "
+                 + ", ".join(f"{k} {v}" for k, v in sorted(verdicts.items()))
+                 + " -- an inventory row is not enrollment; only ADMITTED means the root can dispatch it")
     L.append(f"- harness-certified capabilities: {r['certified_capabilities']} — registry-bound "
              f"{len(r['certified_registry_bound'])}, pending binding only "
              f"{len(r['certified_pending_binding_only'])} ({', '.join(r['certified_pending_binding_only'])}), "
@@ -332,6 +408,7 @@ def to_markdown(r: Mapping[str, Any]) -> str:
     L.append("| defect class | count | what it means for 'one model' |")
     L.append("|---|---|---|")
     meaning = {
+        "FAMILY_ROUTE_FILE_MISSING": "an owned capability family cites a route module that is not in the tree",
         "DANGLING_ADAPTER": "the dispatch table names code that is not in the tree",
         "MISSING_VERIFICATION_RECEIPT": "admission rule 2 is cited but the evidence file is gone",
         "UNSATISFIABLE_REQUIRES": "a planner can never satisfy these preconditions from registered work",

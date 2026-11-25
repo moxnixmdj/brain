@@ -172,6 +172,43 @@ def test_cli_exit_code_is_the_defect_verdict(tmp_path: pathlib.Path) -> None:
     assert run() == 0, "with a provider for y, the fixture is genuinely clean"
 
 
+def test_owned_family_routes_are_counted_and_not_confused_with_enrollment() -> None:
+    """The other capability class in the repo: ownership-matrix families whose route is a module.
+
+    A `.auto.v1` inventory row means the file was seen, not that the brain can run it. The receipt lane
+    only executes modules that speak `run(args, root) -> dict`, so today all four named route modules are
+    reachable-but-unenrollable, and the gate has to say so rather than let "it is in the registry" slide.
+    """
+    r = gate.build(ROOT, LIVE, SNAPSHOT, LEDGER, ADAPTERS)
+    census = r["family_routes"]
+    assert len(census) == 4, sorted(census)
+    assert r["family_route_verdicts"] == {"INVENTORY_ONLY__NOT_DISPATCH_SHAPE": 3,
+                                         "RECEIPTED__NO_INDEPENDENT_VERIFICATION": 1}, r["family_route_verdicts"]
+    assert "ADMITTED" not in r["family_route_verdicts"], (
+        "if an owned-family route ever becomes admitted, that is real news: the point of this test is "
+        "that none of them are dispatchable today, and a green here must mean the tree changed, not that "
+        "the rule got looser"
+    )
+    for fam, v in census.items():
+        assert v["inventory_status"] == "UNVERIFIED_INVENTORY", f"{fam}: {v['inventory_status']}"
+        assert v["bound_by_other_rows"] == [], f"{fam}: bound by {v['bound_by_other_rows']}"
+        assert v["producer_receipt"] is (fam == "COMPLEX_MULTI_TOOL_AGENCY"), f"{fam}: {v['producer_receipt']}"
+        if v["producer_receipt"]:
+            assert v["independent_verification"] is False, f"{fam}: receipt got independent too"
+        else:
+            assert not v["dispatch_shape"], f"{fam}: no receipt but a valid dispatch shape -- recheck the ladder"
+    assert r["defects"]["FAMILY_ROUTE_FILE_MISSING"] == []
+    # The bite, on a fixture: a family citing a module that is not in the tree is a defect, not a fact.
+    f = _fixture(tmp_path := pathlib.Path("/tmp/gate-family-fixture"), {})
+    matrix = f["root"] / "canonical/capabilities/opus55"
+    matrix.mkdir(parents=True, exist_ok=True)
+    (matrix / "OPUS_5_5_CAPABILITY_OWNERSHIP_MATRIX_V1.json").write_text(json.dumps(
+        {"rows": [{"family": "MADE_UP", "verified_route": {"path": "canonical/runtime/nope_v1.py"}}]}),
+        encoding="utf-8")
+    r2 = gate.build(f["root"], f["registry"], f["snapshot"], f["ledger"], f["adapters"])
+    assert r2["defects"]["FAMILY_ROUTE_FILE_MISSING"] == ["MADE_UP -> canonical/runtime/nope_v1.py"]
+
+
 def test_a_root_without_specs_or_queue_unenrolls_all_nine(tmp_path: pathlib.Path) -> None:
     """The bite: the good numbers above come from files, not from a rule that stopped looking.
 
