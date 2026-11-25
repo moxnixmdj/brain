@@ -82,13 +82,33 @@ def classify(entry: Mapping[str, Any], repos_root: pathlib.Path, root: pathlib.P
         return {"repo": repo_name, "commit": str(entry["commit"])[:8],
                 "verdict": "HARNESS", "why": "worktree could not be made"}
 
+    # THE SAME PROTOCOL THE ENGINE USES. Most of these commits ADD their regression test
+    # alongside the fix, so the test does not exist at the parent. Overlaying the fixed
+    # test file onto the parent tree is what makes the row a fail-to-pass target at all,
+    # and NOT doing it here made this script report TEST_ABSENT for rows the engine
+    # legitimately verifies. A denominator that measures a different experiment than the
+    # one being reported is worse than no denominator.
+    if file_part and not file_part.endswith(".py") is False:
+        shown = subprocess.run(["git", "-C", str(repo), "show", f"{entry['commit']}:{file_part}"],
+                               capture_output=True, text=True, errors="replace")
+        if shown.returncode == 0 and shown.stdout:
+            target = wt / file_part
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_text(shown.stdout, encoding="utf-8")
+
     code_alone, out_alone = _pytest(wt, [test])
     if code_alone == 0:
         verdict, why = "PASSES", "the named test passes on the parent commit, alone"
-    elif code_alone == 124 or "HARNESS:" in out_alone or code_alone == 5:
+    elif code_alone in (4, 5) or "no tests ran" in out_alone or "not found:" in out_alone:
+        # THE TEST DOES NOT EXIST YET. Most of these commits ADD their regression test
+        # alongside the fix, so at the parent there is nothing to fail. This is neither a
+        # pass nor a miss -- the row is not runnable as a repair target at all, and calling
+        # it FAILS was a bug in this very script: pytest exits 4 for "not found", which is
+        # non-zero, and the first version read every non-zero exit as a failure.
+        verdict, why = "TEST_ABSENT", "the named test does not exist at the parent commit"
+    elif code_alone == 124 or "HARNESS:" in out_alone:
         verdict, why = "HARNESS", ("timeout" if code_alone == 124
-                                   else ("no tests collected" if code_alone == 5
-                                         else out_alone.strip().splitlines()[-1][:160]))
+                                   else out_alone.strip().splitlines()[-1][:160])
     else:
         verdict, why = "FAILS_ALONE", "fails on the parent commit, alone"
 

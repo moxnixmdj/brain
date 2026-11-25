@@ -316,6 +316,14 @@ def run_pytest():
         return int(getattr(result, "value", result))
     except BaseException as error:
         facts["pytest_internal_error"] = f"{type(error).__name__}: {error}"[:400]
+        # A crash inside the harness is NOT a fact about the project. It is the probe
+        # having changed the program, and the row must say so instead of falling through
+        # to "no relation could be read". Measured: attrs 3b0378dd, where refusing one
+        # tuple site shifted evaluation order and the probe read a half-built
+        # `Attribute` before `.init` existed -- `AttributeError: 'Attribute' object has
+        # no attribute 'init'` -- and without this the row reported NO_RELATION, i.e. it
+        # blamed the project for the instrument's own edit.
+        facts["the_probe_broke_the_run"] = True
         return 3
 
 if _trace:
@@ -464,9 +472,16 @@ def _unpacked_ids(tree: ast.AST) -> set[int]:
         if isinstance(node, ast.Assign):
             targets = list(node.targets)
         elif isinstance(node, (ast.For, ast.AsyncFor)):
-            targets = [node.iter]
+            # `for name, value in EXPR` -- the ITERABLE is the expression a probe must
+            # not substitute, and the earlier form put it in `targets` where a Tuple
+            # check could never match it (a For's iterable is not a tuple literal), so
+            # it was never refused. Measured: attrs 3b0378dd line 2553, an `iterable`
+            # site whose substitution broke a pickle path.
+            ids.add(id(node.iter))
+            targets = []
         elif isinstance(node, ast.comprehension):
-            targets = [node.iter]
+            ids.add(id(node.iter))
+            targets = []
         elif isinstance(node, (ast.With, ast.AsyncWith)):
             targets = [item.context_expr for item in node.items]
         for target in targets:
@@ -617,6 +632,46 @@ class _NoLinkedPattern(Exception):
 
     It exists because the alternative -- `return out` -- silently disabled every relation
     that came after it for an entire site kind."""
+
+
+_ONE_SHOT = frozenset({"zip", "map", "filter", "enumerate", "reversed", "iter"})
+
+
+def _one_shot_iterator_argument(node: ast.AST) -> bool:
+    """Is this expression a one-shot iterator built here and handed straight to a call?
+
+    `zip(a, b)` evaluated once is exhausted. A probe evaluates it in order to sample it,
+    so the caller gets the empty remainder. Any such span is refused: there is no way to
+    observe a one-shot value without spending it, and spending it is not observing."""
+    if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id in _ONE_SHOT:
+        return True
+    # ANYWHERE inside the span: `self._setattrs(zip(...))` consumes the zip just as
+    # surely as `zip(...)` alone, and refusing only the inner node left the outer call
+    # doing the damage.
+    for inner in ast.walk(node):
+        if (isinstance(inner, ast.Call) and isinstance(inner.func, ast.Name)
+                and inner.func.id in _ONE_SHOT):
+            return True
+    return False
+
+
+def _calls_bare_super(node: ast.AST) -> bool:
+    """Does this span use a zero-argument `super()` anywhere inside it?
+
+    Zero-argument `super()` is compiled against an implicit `__class__` cell taken from
+    the enclosing FUNCTION. Put the same expression inside a lambda and the cell is not
+    there, so the call raises `RuntimeError: super(): no arguments` -- an error the
+    probe invented and the project never had.
+
+    Refusing only a bare `super()` site was not enough: `super().__init__(message)` is a
+    `call` site, and instrumenting it produced that RuntimeError as the row's failing
+    message (measured: packaging 553582d9). Any span that CALLS a bare super() must be
+    refused, at any depth."""
+    for inner in ast.walk(node):
+        if (isinstance(inner, ast.Call) and isinstance(inner.func, ast.Name)
+                and inner.func.id == "super" and not inner.args):
+            return True
+    return False
 
 
 def _end_anchor_edit(text: str) -> str | None:
@@ -849,7 +904,16 @@ def sites_in(source: str) -> list[Site]:
         # call raises `RuntimeError: super(): no arguments` -- an error the probe created
         # and the project would never have raised (measured: click d340b0c1, whose row then
         # carried the probe's own exception as the project's failing message).
-        if isinstance(node, ast.Call) and isinstance(node.func, ast.Name) and node.func.id == "super" and not node.args:
+        if _calls_bare_super(node):
+            return
+        if _one_shot_iterator_argument(node):
+            # `self._setattrs(zip(self.__slots__, state))`: the probe would sample the
+            # zip, and sampling CONSUMES it, so the real call receives an exhausted
+            # iterator. The failure that follows is the probe's, not the project's --
+            # measured on attrs 3b0378dd, where `AttributeError: 'Attribute' object has
+            # no attribute 'init'` was the end of a pickle path that read nothing.
+            # An expression that BUILDS a one-shot iterator and feeds it straight into a
+            # call cannot be observed without changing it, so it is not a site.
             return
         # a walrus ANYWHERE inside the expression is equally fatal (the site is the
         # Compare `(value := ...) is None`, not the NamedExpr itself)
@@ -1909,6 +1973,16 @@ def explore(entry: Mapping[str, Any], *, repos_root: pathlib.Path, seconds: int 
                 row.update(traced)
                 return row
             facts = traced.get("facts") or {}
+            # FIRST, BEFORE ANYTHING IS READ OUT OF THIS RUN: did our probes break it?
+            # A crashed harness can still leave samples behind, so those samples would
+            # be turned into hypotheses and tried against the project -- every one of them
+            # a guess about a program that never ran. Measured on attrs 3b0378dd: the row
+            # produced 8 confident hypotheses, at 8 lines that had nothing to do with the
+            # fix, because the instrument had raised AttributeError inside attrs.
+            if facts.get("the_probe_broke_the_run"):
+                row.update({"stage": "THE_PROBE_BROKE_THE_RUN",
+                            "why": str(facts.get("pytest_internal_error"))[:300]})
+                return row
             wanted = demanded_values(facts)
             row["demand"] = {"source": wanted.get("source"),
                              "exception": wanted.get("exception"),
@@ -2007,7 +2081,16 @@ def explore(entry: Mapping[str, Any], *, repos_root: pathlib.Path, seconds: int 
                 # the probe is consumed once more, so the defect disappears). That must
                 # be reported as what it is -- a probe that changed the program -- not
                 # as a fact about the project.
-                instrumented_verdict = (traced.get("facts") or {}).get("reports") or []
+                traced_facts = traced.get("facts") or {}
+                if traced_facts.get("the_probe_broke_the_run"):
+                    # The harness crashed INSIDE the project while our probes were
+                    # installed. That is the instrument's defect, never a verdict about
+                    # the project, and it must not be allowed to fall through to
+                    # NO_RELATION where it reads as "the run said nothing useful".
+                    row.update({"stage": "THE_PROBE_BROKE_THE_RUN",
+                                "why": str(traced_facts.get("pytest_internal_error"))[:300]})
+                    return row
+                instrumented_verdict = traced_facts.get("reports") or []
                 made_it_pass = (bool(instrumented_verdict)
                                 and not [1 for _item, outcome in instrumented_verdict
                                          if outcome == "failed"])
