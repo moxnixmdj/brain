@@ -1,0 +1,38 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "declared_before_the_run": {
+    "N1": "every applied edit is generated from a runtime-observed empty value or expected output shape",
+    "N2": "composed candidates are accepted only by the whole test file",
+    "N3": "no diff, gold patch, model, network or stored parameter is read"
+  },
+  "generated_at_utc": "2026-11-25T17:12:34Z",
+  "rows": [
+    {
+      "evaluations": 0,
+      "generators": {
+        "guards": 0,
+        "normalizations": 0,
+        "returns": 0,
+        "serializers": 0,
+        "structure": 0,
+        "value_pairs": 2
+      },
+      "payloads": 43,
+      "proposals": 0,
+      "repo": "pallets/click",
+      "seconds": 13.9,
+      "sha": "7996a89c5a4ce1c451e2e1c9c5a00eb0c844d4ce",
+      "stage": "COMPARED",
+      "verified": false
+    }
+  ],
+  "schema": "PROJECT_BRAIN_MULTI_PRODUCER_NORMALIZATION_V1",
+  "summary": {
+    "model_calls": 0,
+    "network_calls": 0,
+    "parameters_stored": 0,
+    "rows": 1,
+    "verified": 0
+  },
+  "verdict": "FAIL"
+}

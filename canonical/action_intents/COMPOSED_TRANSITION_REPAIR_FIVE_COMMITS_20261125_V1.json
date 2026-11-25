@@ -1,0 +1,192 @@
+{
+  "action_id": "COMPOSED_TRANSITION_REPAIR_FIVE_COMMITS_20261125_V1",
+  "action_intent_id": "COMPOSED_TRANSITION_REPAIR_FIVE_COMMITS_20261125_V1",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "action_summary": "Generate composed source-derived repairs for five pinned real failures, replay them with a separate runner, and record 0/2 on two unseen commits.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "A separate replay implementation verified 5/5 generated candidates in fresh worktrees; independent personnel verification remains open.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/multi_producer_normalization_v1.py",
+      "canonical/verification/MULTI_PRODUCER_NORMALIZATION_20261124_V9.json",
+      "canonical/verification/INDEPENDENT_REPLAY_FIVE_20261124_V1.json",
+      "canonical/verification/UNSEEN_COMMIT_F67C2BB_20261124_V1.json",
+      "canonical/verification/UNSEEN_COMMIT_7996A89_20261124_V1.json",
+      "THE_REPAIR_IS_A_COMPOSITION_OF_OBSERVED_TRANSITIONS_20261124_V1.md"
+    ],
+    "route_class": "COMPOSE"
+  },
+  "benchmark_or_family_rank_authority": "NONE__FIVE_PINNED_COMMITS_AND_TWO_UNSEEN_COMMITS",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EMPTY_VALUE_CROSSES_PRODUCERS__REPAIR_REQUIRES_COMPOSED_TRANSITIONS_AND_WHOLE_FILE_VERIFICATION",
+  "canonical_base_commit": "145556966aa4c524c67108fd5001426e22c0d63a",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "EMPTY_VALUE_CROSSES_PRODUCERS__REPAIR_REQUIRES_COMPOSED_TRANSITIONS_AND_WHOLE_FILE_VERIFICATION",
+  "date": "2026-11-24",
+  "expected_parent_change": "canonical/verification/ gains audit documents; canonical/tools/ gains measured tools; canonical/tests/ gains pinned tests; identify_a_real_bugs_fix_v1.py gains a provenance guard.",
+  "expected_parent_frontier_change": "FIVE_PINNED_REAL_FAILURES_GENERATED_AND_REPLAYED__TWO_UNSEEN_COMMITS_REMAIN_AT_ZERO",
+  "explicit_user_authorization": "Owner instruction this session, repeated four times, then 'merge all of your work.' The repetition is the authorization: earlier answers had sampled and the owner required a measured census, and required it landed in main.",
+  "falsification_condition": "FALSIFIED if any generated candidate passes only in the generator process, if a whole test file does not pass in a fresh replay, or if the two unseen commits are counted as repaired.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0.0,
+    "expected_obligation_unlock_lcb": 0.1,
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.5,
+    "wall_clock_cost_ub": 1.0
+  },
+  "measured_effect": "5/5 pinned commits verified by generator and independent replay (676, 116, 8, 150, 124 passing tests); 0/2 unseen commits; zero model calls, network calls, stored parameters or gold-patch reads.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "recursive_obs": {
+    "canonical_base_commit": "145556966aa4c524c67108fd5001426e22c0d63a",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Single-guard repair loop, insufficient on five commits",
+      "Naive literal insertion, 0 verified",
+      "Unranked candidate budget that lost a correct candidate"
+    ],
+    "expected_parent_level_state_change": "FIVE_PINNED_REAL_FAILURES_GENERATED_AND_REPLAYED__TWO_UNSEEN_COMMITS_REMAIN_AT_ZERO",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "Single guards and literal substitution were tried and deleted as sufficient mechanisms.",
+      "intrinsic_or_path_specific": "Path specific: empty values crossed producers, so one guard could not repair the file.",
+      "surviving_causal_blocker": "EMPTY_VALUE_CROSSES_PRODUCERS__REPAIR_REQUIRES_COMPOSED_TRANSITIONS_AND_WHOLE_FILE_VERIFICATION"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "Guard-only repair was rejected after whole-file verification.",
+      "existing_inherited_routes_checked": "Witness inversion, literal generation, producer localization, mining and splicing were read and reused.",
+      "external_existing_routes_checked": "No web or model output was used as runtime capability.",
+      "surviving_gap": "Two unseen commits produced zero proposals; transfer is unproven."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Counting proposals instead of passing whole test files"
+      ],
+      "real_outcome": "Five pinned real failures repaired by generated, replayed candidates; two unseen commits remain unrepaired.",
+      "surviving_necessity": "No existing repository component composed transition edits from runtime observations."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "Tomography, value localization, splicing and pytest contrast were reused.",
+      "downstream_work_to_delete_or_supersede": "The empty-payload guard-only loop is superseded by the composed loop.",
+      "fresh_reuse_plan": "All generators, tests and receipts are committed for replay."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Candidate scores are cached in receipts; no store is read at runtime.",
+      "search_stop_decision": "Search stops when the whole test file passes or the bounded candidate search is exhausted."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "New primitives would not address a composition failure; the observed transitions were already derived.",
+      "routes_ranked": [
+        "REUSE",
+        "COMPOSE",
+        "SYNTHESIZE_NEW_PRIMITIVE"
+      ]
+    },
+    "obs_solution_ranked_note": "deletion-first order applied before any implementation was written",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": false
+    },
+    "real_outcome": "Five pinned real failures repaired by generated, replayed candidates; two unseen commits remain unrepaired.",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "EVIDENCE_PRESERVATION: this action records measurements already made and spends nothing on a route, so there is no challenger route to discover before execution.",
+      "selected_route": "COMPOSE_OBSERVED_TRANSITIONS_WITH_TEST_RANKED_SPLICING"
+    },
+    "routes_considered": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "ADAPT",
+      "SUBSTITUTE",
+      "COMPOSE"
+    ],
+    "selected_surviving_route": "COMPOSE_OBSERVED_TRANSITIONS_WITH_TEST_RANKED_SPLICING",
+    "stop_condition": "STOP when the five pinned candidates are independently replayed, the two unseen probes are recorded, and no \u00a76 claim is made from a development set.",
+    "why_selected_route_is_fastest_sufficient": "The bottleneck was composition of observed transitions, not new primitives; composing and testing existing generators was the shortest sufficient route."
+  },
+  "resolution": "SELECTED",
+  "route_id": "COMPOSED_TRANSITION_REPAIR_FIVE_COMMITS_20261125_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "COMPOSE_OBSERVED_TRANSITIONS_WITH_TEST_RANKED_SPLICING",
+  "stop_condition": "STOP when the five pinned candidates are independently replayed, the two unseen probes are recorded, and no \u00a76 claim is made from a development set.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "Each obligation is reachable from committed files: the census documents name the families and their executors, the leadger and 595 verification receipts ground the credit count at zero, and the runtime tiering is reproducible by AST scan over the committed tree.",
+    "target_truth_obligations": [
+      "NAME_EVERY_CAPABILITY_FAMILY_AND_ITS_EXECUTOR",
+      "STATE_EVERY_FRONTIER_WINNER_WITH_ITS_MARGIN",
+      "MEASURE_THE_RESIDUAL_TIER_INSTEAD_OF_ASSERTING_COVERAGE",
+      "SEPARATE_MEASURED_SANDBOX_FROM_REFEREE_SIGNED_PUBLIC_RUNNER_CREDIT"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Does the census survive the same adversarial check it applies to the branch, namely that every number traces to a receipt and not to a self-claim?",
+      "falsifier_id": "FABRICATED_RECEIPT_AUDIT",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "Three fabricated receipts were found during the census itself and are named and excluded rather than cited, so no surviving claim in the census rests on one.",
+      "proposal_id": "SIX_PASS_CENSUS_BEATS_SINGLE_PASS_SELF_CLAIM"
+    }
+  }
+}
