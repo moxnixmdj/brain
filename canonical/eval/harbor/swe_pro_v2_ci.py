@@ -144,15 +144,27 @@ def split_shards(ids: list[str], n_shards: int) -> list[list[str]]:
     return [s for s in shards if s]
 
 
-def iter_trial_results(jobs_dir: pathlib.Path):
-    """Yield (trial_dir, parsed result) for every trial result.json under a jobs dir.
+def _looks_like_trial(data: Any) -> bool:
+    return bool(
+        isinstance(data, dict)
+        and "task_name" in data
+        and any(
+            k in data
+            for k in ("trial_name", "verifier_result", "agent_result", "exception_info")
+        )
+    )
 
-    Located by content, not by depth: a trial result is a JSON object keyed by
-    ``task_name`` that also carries one of the per-trial payloads
-    (trial_name / verifier_result / agent_result / exception_info). A job-level
-    ``result.json`` (job_name + counts) is therefore skipped. Pinning an assumed
-    directory layout instead would let a harness that DID run trials be reported as
-    "no data".
+
+def iter_trial_results(jobs_dir: pathlib.Path):
+    """Yield (trial_dir, parsed trial result) for a Harbor jobs directory.
+
+    Located by content, not by depth. Two on-disk shapes are accepted because which
+    one exists depends on how the run was invoked: a per-trial ``result.json``
+    (a ``TrialResult`` object), and a job-level ``result.json`` carrying the same
+    objects in its ``trial_results`` list. Recognising only the first shape made a
+    run in which harbor reported ``Trials 3 / Exceptions 0`` and
+    ``oracle Mean 1.000`` come out as "no data" — a harness bug dressed up as a
+    benchmark result.
     """
     jobs_dir = pathlib.Path(jobs_dir)
     if not jobs_dir.is_dir():
@@ -162,10 +174,16 @@ def iter_trial_results(jobs_dir: pathlib.Path):
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
             continue
-        if not isinstance(data, dict) or "task_name" not in data:
-            continue
-        if any(k in data for k in ("trial_name", "verifier_result", "agent_result", "exception_info")):
+        if _looks_like_trial(data):
             yield path.parent, data
+            continue
+        if isinstance(data, dict) and isinstance(data.get("trial_results"), list):
+            for entry in data["trial_results"]:
+                if not _looks_like_trial(entry):
+                    continue
+                trial_name = str(entry.get("trial_name") or "")
+                cand = path.parent / trial_name if trial_name else path.parent
+                yield (cand if cand.is_dir() else path.parent), entry
 
 
 def _reward(trial_dir: pathlib.Path, result: dict[str, Any]) -> float | None:
@@ -241,7 +259,7 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
                 "engine_notes": rep.get("notes") or [],
                 "seconds": secs,
                 "store_ablated": rep.get("store_ablated"),
-                "trial_dir": td.name,
+                "trial_dir": str(res.get("trial_name") or td.name),
             }
 
     ordered = {tid: per_task.get(tid, {"reward": None, "resolved": False, "agent_status": "NOT_RUN", "n_files_changed": 0}) for tid in expected_ids}

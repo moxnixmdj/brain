@@ -438,3 +438,40 @@ def test_collect_finds_trials_regardless_of_nesting_depth() -> None:
         # and a jobs dir that does not exist at all is 'no data', not a crash
         rep2 = CI.collect([root / "nope"], arm="causal", expected_ids=["t0"])
         assert rep2["n_reported"] == 0 and rep2["resolved"] == 0
+
+
+def test_collect_reads_job_level_trial_results_when_no_per_trial_file_exists() -> None:
+    """Harbor's own summary pointed at <jobs>/<job>/result.json; that file is enough."""
+    with tempfile.TemporaryDirectory() as tmp:
+        job = pathlib.Path(tmp) / "jobs" / "causal-s0"
+        job.mkdir(parents=True)
+        (job / "result.json").write_text(
+            json.dumps(
+                {
+                    "job_name": "causal-s0",
+                    "n_total_trials": 2,
+                    "stats": {"mean": 0.5},
+                    "trial_results": [
+                        {
+                            "task_name": "t0",
+                            "trial_name": "t0__aaa",
+                            "verifier_result": {"rewards": {"reward": 1.0}},
+                            "agent_result": {"model_calls": 0, "cost_usd": 0.0},
+                        },
+                        {
+                            "task_name": "t1",
+                            "trial_name": "t1__bbb",
+                            "verifier_result": {"rewards": {"reward": 0.0}},
+                            "exception_info": None,
+                        },
+                    ],
+                }
+            ),
+            encoding="utf-8",
+        )
+        rep = CI.collect([pathlib.Path(tmp) / "jobs"], arm="causal", expected_ids=["t0", "t1", "t2"])
+        assert rep["n_reported"] == 2, rep
+        assert rep["resolved"] == 1
+        assert rep["missing_trials"] == ["t2"]
+        assert rep["tasks"]["t0"]["resolved"] is True
+        assert rep["tasks"]["t0"]["trial_dir"] == "t0__aaa"

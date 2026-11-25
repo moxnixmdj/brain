@@ -326,6 +326,21 @@ jobs:
           set -uo pipefail
           mkdir -p "$W/out"
           echo "harbor_exit=$(cat "$W/harbor-exit.txt" 2>/dev/null || echo NOFILE)" > "$W/out/status.env"
+          # Record the real on-disk shape of the jobs tree. Two runs of this harness
+          # produced "no trial data" while harbor's own summary reported trials and
+          # rewards, so the collector's assumption about the layout — not the
+          # benchmark — is the suspect. This file is committed under diagnostics/.
+          {
+            echo "W=$W"
+            find "$W/jobs" -maxdepth 3 2>/dev/null | head -80
+            echo "--- result.json files ---"
+            find "$W/jobs" -name result.json 2>/dev/null | head -20
+            echo "--- keys of the first result.json found ---"
+            for f in $(find "$W/jobs" -name result.json 2>/dev/null | head -3); do
+              echo "## $f"
+              python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(sorted(d) if isinstance(d,dict) else type(d))' "$f" 2>&1 | head -5
+            done
+          } > "$W/out/$ARM-s$SHARD.layout.txt" 2>&1 || true
           python -m canonical.eval.harbor.swe_pro_v2_ci collect \
             --jobs-dir "$W/jobs" \
             --manifest "$W/manifest.json" \
@@ -409,7 +424,7 @@ jobs:
           echo '--- report ---'
           head -80 out/report.md
           mkdir -p out/diagnostics
-          for f in $(find dl -name '*.meta.json' -o -name 'status.env' 2>/dev/null | sort); do cp "$f" out/diagnostics/ 2>/dev/null || true; done
+          for f in $(find dl -name '*.meta.json' -o -name 'status.env' -o -name '*.layout.txt' 2>/dev/null | sort); do cp "$f" out/diagnostics/ 2>/dev/null || true; done
           for f in $(find dl -name 'harbor-tail.log' 2>/dev/null | sort); do tail -c 40000 "$f" > "out/diagnostics/$(basename $(dirname "$f"))-$(basename "$f")" 2>/dev/null || true; done
           ls out/diagnostics 2>/dev/null | head -20 || true
 
