@@ -537,7 +537,9 @@ class RepoNativePetriMiner:
                 old_m = orig_node.func.attr
                 call_arity = len(orig_node.args)
                 arg_txts = [ast.unparse(a) for a in orig_node.args]
-                if require_bool:
+                if require_bool and (
+                    old_m == "get" or old_m.startswith(("get_", "find", "lookup", "resolve", "match", "search"))
+                ):
                     _propose(f"({orig_expr}) is not None", 4, "PETRI_CALL_IS_NOT_NONE")
                 for tr in self.methods_for_types(var_types.get(recv_v, [])):
                     if tr.surface != "PYTHON_METHOD" or tr.name == old_m:
@@ -2543,4 +2545,116 @@ def _attach_long_horizon_petri_slicer() -> None:
 
 
 _attach_long_horizon_petri_slicer()
+
+
+def _attach_store_compactor() -> None:
+    def compact_and_deduplicate(self: AdmissionFilteredSkillStore) -> dict[str, int]:
+        """Deduplicate α-equivalent L2 expression/subtree skills & L3 negative invariants."""
+        total_before = len(self.records)
+        sub_before = sum(1 for r in self.records.values() if r.skill_id.startswith("sub_") or "\n" in r.concrete_after)
+        by_ir: dict[tuple[str, str, str], VerifiedSkillRecord] = {}
+        for sid in sorted(self.records):
+            rec = self.records[sid]
+            if rec.stale:
+                continue
+            key = (rec.domain, rec.lhs_ir_sexpr, rec.rhs_ir_sexpr)
+            if key not in by_ir:
+                by_ir[key] = rec
+            else:
+                kept = by_ir[key]
+                seen_w = {json.dumps(w, sort_keys=True) for w in kept.witness_inputs}
+                for w in rec.witness_inputs:
+                    wj = json.dumps(w, sort_keys=True)
+                    if wj not in seen_w and len(kept.witness_inputs) < 12:
+                        kept.witness_inputs.append(w)
+                        seen_w.add(wj)
+                kept.mdl_gain_bytes = max(kept.mdl_gain_bytes, rec.mdl_gain_bytes)
+                kept.version += 1
+        self.records = {r.skill_id: r for r in by_ir.values()}
+        sub_after = sum(1 for r in self.records.values() if r.skill_id.startswith("sub_") or "\n" in r.concrete_after)
+
+        neg_recs: dict[str, NegativeSpaceInvariant] = getattr(self, "negative_invariants", {})
+        neg_before = len(neg_recs)
+        by_neg: dict[tuple[str, str, str], NegativeSpaceInvariant] = {}
+        for nid in sorted(neg_recs):
+            nrec = neg_recs[nid]
+            nkey = (nrec.domain, nrec.target_ast_shape, nrec.forbidden_delta_op)
+            if nkey not in by_neg:
+                by_neg[nkey] = nrec
+        if hasattr(self, "negative_invariants"):
+            self.negative_invariants = {r.invariant_id: r for r in by_neg.values()}  # type: ignore[attr-defined]
+
+        self.save()
+        return {
+            "expr_before": total_before,
+            "expr_after": len(self.records),
+            "expr_merged": total_before - len(self.records),
+            "subtree_before": sub_before,
+            "subtree_after": sub_after,
+            "subtree_merged": sub_before - sub_after,
+            "negative_before": neg_before,
+            "negative_after": len(getattr(self, "negative_invariants", {})),
+            "negative_merged": neg_before - len(getattr(self, "negative_invariants", {})),
+        }
+
+    AdmissionFilteredSkillStore.compact_and_deduplicate = compact_and_deduplicate  # type: ignore[attr-defined]
+
+
+_attach_store_compactor()
+
+
+class SelfPlaySkillDistiller:
+    """Zero-cost CPU self-play skill harvester with kernel identity & boundary-fuzzer gates."""
+
+    def __init__(
+        self,
+        store: AdmissionFilteredSkillStore,
+        kernel_paths: Sequence[pathlib.Path] = (),
+    ) -> None:
+        self.store = store
+        self.kernel_paths = [pathlib.Path(p).resolve() for p in kernel_paths if pathlib.Path(p).is_file()]
+        self._baseline_hashes = {str(p): _sha256_bytes(p.read_bytes()) for p in self.kernel_paths}
+
+    def verify_kernel_identity(self) -> bool:
+        return all(
+            p.is_file() and _sha256_bytes(p.read_bytes()) == self._baseline_hashes[str(p)]
+            for p in self.kernel_paths
+        )
+
+    def harvest_subtree_episode(
+        self,
+        *,
+        domain: str,
+        before_block: str,
+        after_block: str,
+        verified_by_suite: bool,
+        probes_before_success: int,
+        raw_episode_bytes: int,
+        source_fingerprint: str = "",
+    ) -> dict[str, Any]:
+        if not self.verify_kernel_identity():
+            return {"ok": False, "status": "ABORTED__KERNEL_IDENTITY_DRIFT"}
+        ok, detail = self.store.try_admit_subtree(  # type: ignore[attr-defined]
+            domain=domain,
+            concrete_before=before_block,
+            concrete_after=after_block,
+            verified=verified_by_suite,
+            goal_relevant=True,
+            probes_before_success=max(1, probes_before_success),
+            raw_episode_bytes=raw_episode_bytes,
+            source_fingerprint=source_fingerprint or _sha256_text(before_block)[:16],
+            witness_inputs=[{"self_play": True}],
+            revalidation_probe={"source_fp": source_fingerprint or _sha256_text(before_block)[:16]},
+        )
+        compaction = self.store.compact_and_deduplicate()  # type: ignore[attr-defined]
+        id_after = self.verify_kernel_identity()
+        return {
+            "ok": ok and id_after,
+            "admitted": ok,
+            "skill_or_reason": detail,
+            "compaction": compaction,
+            "kernel_identity_preserved": id_after,
+            "model_calls": 0,
+        }
+
 

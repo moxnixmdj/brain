@@ -82,12 +82,22 @@ OPERATOR_FAMILIES: tuple[str, ...] = (
 class SWERepairMemory:
     """Tracks empirical `p_useful / (1 + mean_cost_s)` per semantic operator family."""
 
-    def __init__(self) -> None:
+    def __init__(self, store_path: pathlib.Path | str | None = None) -> None:
+        self.store_path = pathlib.Path(store_path) if store_path is not None else None
         self.stats: dict[str, dict[str, Any]] = {
             fam: {"trials": 0, "verified": 0, "regressions": 0, "cost_s": 0.1}
             for fam in OPERATOR_FAMILIES
         }
         self.schemas: list[dict[str, Any]] = []
+        if self.store_path is not None and self.store_path.is_file():
+            try:
+                raw = json.loads(self.store_path.read_text(encoding="utf-8"))
+                if isinstance(raw.get("stats"), dict):
+                    self.stats.update(raw["stats"])
+                if isinstance(raw.get("schemas"), list):
+                    self.schemas = raw["schemas"]
+            except Exception:
+                pass
 
     def priority_score(self, family: str) -> float:
         row = self.stats.get(family) or {"trials": 0, "verified": 0, "regressions": 0, "cost_s": 0.1}
@@ -175,7 +185,7 @@ def _clean_env(worktree: pathlib.Path) -> dict[str, str]:
         **os.environ,
         "PYTHONPATH": os.pathsep.join(py_paths),
         "PYTHONDONTWRITEBYTECODE": "1",
-        "PYTHONPYCACHEPREFIX": str(worktree / ".brain_nocache"),
+        "PYTHONPYCACHEPREFIX": str(pathlib.Path(tempfile.gettempdir()) / "brain_nocache"),
     }
 
 
@@ -1008,16 +1018,29 @@ def synthesize_candidates(
                                         ))
 
         for node in ast.walk(search_root):
-            if getattr(node, "lineno", None) != lineno:
+            n_ln = getattr(node, "lineno", None)
+            if n_ln != lineno and not (isinstance(node, ast.IfExp) and n_ln is not None and n_ln <= lineno):
                 continue
 
             # --- FAMILY 2: GUARD PROJECTION, MEMBERSHIP, BOUNDARY, CONJUNCTIVE/DISJUNCTIVE ---
-            if isinstance(node, (ast.If, ast.While)):
-                # 2a. Falsy non-None (`if x` -> `if x is not None` or `if a.attr` -> `if a.attr is not None`)
+            if isinstance(node, (ast.If, ast.While, ast.IfExp)):
+                none_params: set[str] = set()
+                if fn_node is not None:
+                    p_args = list(fn_node.args.args)
+                    p_defs = list(fn_node.args.defaults)
+                    for pa, pd in zip(p_args[len(p_args) - len(p_defs) :], p_defs):
+                        if isinstance(pd, ast.Constant) and pd.value is None:
+                            none_params.add(pa.arg)
+                    for ka, kd in zip(fn_node.args.kwonlyargs, fn_node.args.kw_defaults):
+                        if isinstance(kd, ast.Constant) and kd.value is None:
+                            none_params.add(ka.arg)
+                # 2a. Falsy non-None (`if x` -> `if x is not None` or `a if key else b` -> `a if key is not None else b`)
                 for sub in _boolean_atoms_in_guard(node.test):
                     if isinstance(sub, (ast.Name, ast.Attribute)):
                         sub_txt = _unparse(sub)
-                        observed_falsy = _expr_was_falsy_non_none(sub, f_frames)
+                        observed_falsy = _expr_was_falsy_non_none(sub, f_frames) or (
+                            isinstance(sub, ast.Name) and sub.id in none_params
+                        )
                         if observed_falsy or isinstance(sub, ast.Attribute):
                             patched = replace_ast_node_source(src, sub, f"{sub_txt} is not None")
                             if patched:
@@ -1141,7 +1164,7 @@ def synthesize_candidates(
                         not did_not_raise_excs
                         or any(exc_name in _unparse(b) for exc_name in did_not_raise_excs)
                     )
-                    for b in node.body
+                    for b in (node.body if isinstance(node.body, list) else ())
                 )
                 for pred_true_on_fail in discriminators["true_on_fail_false_on_pass"][:6]:
                     if _is_degenerate_guard_extension(node.test, pred_true_on_fail):
@@ -1453,7 +1476,7 @@ def _discriminating_predicates(
 
 def repair_worktree(
     worktree: pathlib.Path,
-    test_target: str,
+    test_target: str | Sequence[str],
     *,
     python_exe: str | None = None,
     memory: SWERepairMemory | None = None,
@@ -1465,6 +1488,7 @@ def repair_worktree(
     started = time.perf_counter()
     memory = memory if memory is not None else SWERepairMemory()
     worktree = pathlib.Path(worktree).resolve()
+    primary_test_str = test_target if isinstance(test_target, str) else str(test_target[0])
 
     # 1. Baseline suite run: confirm there is a real failure and record passing baseline!
     baseline = run_pytest_verdicts(
@@ -1497,7 +1521,7 @@ def repair_worktree(
         worktree,
         failing_nodes,
         passing_nodes,
-        default_test_file=test_target,
+        default_test_file=primary_test_str,
         pytest_output=baseline.get("output", ""),
         python_exe=python_exe,
         timeout_s=min(25.0, max(8.0, budget_s * 0.35)),
@@ -1508,7 +1532,7 @@ def repair_worktree(
         worktree,
         failing_nodes,
         passing_nodes,
-        test_target,
+        primary_test_str,
         python_exe=python_exe,
         timeout_s=min(25.0, max(8.0, budget_s - (time.perf_counter() - started))),
     )
@@ -1575,7 +1599,7 @@ def repair_worktree(
     structural_cands = synthesize_candidates(worktree, trace_data, ranked_sites, memory)
 
     with fpm.CoWProgramSimulator(
-        worktree, failing_nodes, passing_nodes, default_test_file=test_target, python_exe=python_exe
+        worktree, failing_nodes, passing_nodes, default_test_file=primary_test_str, python_exe=python_exe
     ) as cow_sim:
         # 3a. Multi-Statement AST Subtree Skill Retrieval (`O(1)`-removable external skill store)
         if skill_store is not None and getattr(skill_store, "mode", "generalized") != "disabled":
@@ -1792,13 +1816,15 @@ def repair_worktree(
                     (worktree / rel_p).write_text(originals[rel_p], encoding="utf-8")
                 continue
 
-            # Cross-module reverse-import impacted test referee (`IncrementalSemanticGraph` + `src/`-layout import scan)!
-            base_test_rel = test_target.split("::")[0]
-            if budget_s - (time.perf_counter() - started) > 8.0:
+            # Cross-module reverse-import & stem-matched impacted test referee (`IncrementalSemanticGraph` + `src/`-layout scan)!
+            # Always enforced (never skipped near timeout!) so degenerate patches cannot sneak past narrow single-test targets.
+            base_test_rel = primary_test_str.split("::")[0]
+            if True:
                 imp = isg.query_impacted_tests(worktree, ".", list(file_patches.keys()))
                 cand_tests: list[str] = []
                 if imp.get("exact_hit"):
                     cand_tests.extend(imp.get("impacted_tests") or [])
+                edited_stems = {pathlib.Path(rp).stem.removeprefix("_") for rp in file_patches}
                 # Also scan 2-hop `src/`-stripped dotted module names (`utils.py` -> `metadata.py` -> `test_metadata.py`)!
                 direct_mods: set[str] = set()
                 for rp in file_patches:
@@ -1828,6 +1854,13 @@ def repair_worktree(
                             r_tf = tf_cand.relative_to(worktree).as_posix()
                             if r_tf not in all_test_candidates:
                                 all_test_candidates.append(r_tf)
+                # Prioritize exact stem-matched unit test files (`main.py` -> `tests/test_main.py`) first!
+                for tf_rel in all_test_candidates:
+                    if tf_rel == base_test_rel or tf_rel in cand_tests:
+                        continue
+                    tf_stem = pathlib.Path(tf_rel).stem.removeprefix("test_").removesuffix("_test")
+                    if tf_stem in edited_stems:
+                        cand_tests.insert(0, tf_rel)
                 for tf_rel in all_test_candidates:
                     if tf_rel == base_test_rel or tf_rel in cand_tests:
                         continue

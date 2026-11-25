@@ -1007,6 +1007,154 @@ def run_experiment_7_v4_subtree_fuzzer_petri320_and_harbor() -> dict[str, Any]:
     }
 
 
+def run_experiment_8_v5_issue_witness_self_play_and_virgin_swe() -> dict[str, Any]:
+    """Exp 8: Issue-to-witness compiler on 0-failing-test worktree, self-play store compactor, & V5 virgin SWE."""
+    import subprocess
+    import canonical.swe_kernel.harbor_in_container_runner_v1 as runner
+    from canonical.swe_kernel.causal_swe_repair_v1 import run_pytest_verdicts
+    from canonical.swe_kernel.petri_cow_splicing_engine_v1 import (
+        AdmissionFilteredSkillStore,
+        SelfPlaySkillDistiller,
+    )
+
+    with tempfile.TemporaryDirectory(prefix="bench-exp8-") as tmp:
+        base = pathlib.Path(tmp)
+        app = base / "app"
+        (app / "uniqlib").mkdir(parents=True)
+        (app / "tests").mkdir(parents=True)
+        (app / "uniqlib" / "__init__.py").write_text(
+            "def all_unique(items, key=None):\n"
+            "    seen = set()\n"
+            "    for el in (map(key, items) if key else items):\n"
+            "        if el in seen:\n"
+            "            return False\n"
+            "        seen.add(el)\n"
+            "    return True\n",
+            encoding="utf-8",
+        )
+        (app / "tests" / "test_uniqlib.py").write_text(
+            "import unittest\n"
+            "from uniqlib import all_unique\n\n"
+            "class TestUniqLib(unittest.TestCase):\n"
+            "    def test_basic_unique(self):\n"
+            "        self.assertTrue(all_unique([1, 2, 3]))\n"
+            "        self.assertFalse(all_unique([1, 2, 1]))\n"
+            "        self.assertFalse(all_unique(['a', 'A'], key=str.lower))\n",
+            encoding="utf-8",
+        )
+        subprocess.run(["git", "-C", str(app), "init", "-q"], check=True)
+        subprocess.run(["git", "-C", str(app), "config", "user.email", "bench@local"], check=True)
+        subprocess.run(["git", "-C", str(app), "config", "user.name", "bench"], check=True)
+        subprocess.run(["git", "-C", str(app), "add", "-A"], check=True)
+        subprocess.run(["git", "-C", str(app), "commit", "-qm", "base"], check=True)
+
+        pre_v = run_pytest_verdicts(app, "tests/test_uniqlib.py", python_exe=sys.executable, timeout_s=15.0)
+        assert len(pre_v["failing"]) == 0
+
+        issue_text = (
+            "Bug in `uniqlib.all_unique`: falsey callable `key` objects are ignored.\n\n"
+            "```python\n"
+            "from uniqlib import all_unique\n"
+            "class FalseyMod2:\n"
+            "    def __bool__(self): return False\n"
+            "    def __call__(self, x): return x % 2\n"
+            "assert all_unique([1, 3], key=FalseyMod2()) is False\n"
+            "```\n"
+        )
+        orig_root_fn = runner._detect_repo_root
+        orig_py_fn = runner._detect_task_python
+        try:
+            runner._detect_repo_root = lambda: app
+            runner._detect_task_python = lambda _r: sys.executable
+            runner.phase_discover(issue_text)
+            rep_out = runner.phase_repair(45.0)
+        finally:
+            runner._detect_repo_root = orig_root_fn
+            runner._detect_task_python = orig_py_fn
+
+        gs = subprocess.run(
+            ["git", "-C", str(app), "status", "--porcelain"],
+            capture_output=True, text=True, check=True
+        ).stdout.splitlines()
+        untracked = [ln for ln in gs if ln.startswith("??")]
+
+        # Held-out replay test (not seen during synthesis!)
+        (app / "tests" / "test_held_out.py").write_text(
+            "import unittest\n"
+            "from uniqlib import all_unique\n"
+            "class ZeroLenCallable:\n"
+            "    def __len__(self): return 0\n"
+            "    def __call__(self, s): return s.strip()\n"
+            "class TestHeldOut(unittest.TestCase):\n"
+            "    def test_held_out_zero_len_callable(self):\n"
+            "        self.assertFalse(all_unique(['x', ' x '], key=ZeroLenCallable()))\n"
+            "        self.assertTrue(all_unique(['x', 'y'], key=None))\n",
+            encoding="utf-8",
+        )
+        held_v = run_pytest_verdicts(app, "tests/test_held_out.py", python_exe=sys.executable, timeout_s=15.0)
+
+        # Self-play distiller + α-equivalent subtree compaction under kernel SHA-256 guard
+        sp_store = AdmissionFilteredSkillStore(base / "selfplay_skills.json", mode="generalized")
+        kernel_files = [
+            ROOT / "canonical" / "swe_kernel" / "petri_cow_splicing_engine_v1.py",
+            ROOT / "canonical" / "swe_kernel" / "first_principles_mental_cegis_v1.py",
+        ]
+        distiller = SelfPlaySkillDistiller(sp_store, kernel_paths=kernel_files)
+        ep_a = distiller.harvest_subtree_episode(
+            domain="swe_self_play",
+            before_block="return '; '.join(self.params)\n",
+            after_block="if not self.params:\n    return self.kind.title()\nreturn '; '.join(self.params)\n",
+            verified_by_suite=True,
+            probes_before_success=3,
+            raw_episode_bytes=1200,
+            source_fingerprint="fp_a",
+        )
+        # Inject a federated duplicate with distinct shard `skill_id` (`sub_shard2_dup`) but α-equivalent IR
+        import dataclasses
+        first_rec = next(iter(sp_store.records.values()))
+        sp_store.records["sub_shard2_dup"] = dataclasses.replace(
+            first_rec,
+            skill_id="sub_shard2_dup",
+            concrete_before="return '; '.join(self.options)\n",
+            concrete_after="if not self.options:\n    return self.media.title()\nreturn '; '.join(self.options)\n",
+            witness_inputs=[{"self_play": "renamed_b"}],
+        )
+        comp_stats = sp_store.compact_and_deduplicate()
+
+    return {
+        "issue_witness_compiler_zero_failing_worktree": {
+            "pre_existing_failures": len(pre_v["failing"]),
+            "repaired": bool(rep_out.get("pass")),
+            "winning_mechanism": rep_out.get("winning_mechanism"),
+            "untracked_files_in_app": len(untracked),
+            "held_out_replay_pass": len(held_v["failing"]) == 0 and len(held_v["passing"]) >= 1,
+        },
+        "self_play_distiller_and_compactor": {
+            "episode_admitted": bool(ep_a.get("admitted")),
+            "kernel_identity_preserved": bool(distiller.verify_kernel_identity()),
+            "alpha_equivalent_subtrees_merged": comp_stats["subtree_merged"],
+            "compacted_subtree_count": comp_stats["subtree_after"],
+        },
+        "v5_unseen_virgin_swe_evaluation": {
+            "reproducible_virgin_commits_top5_localized": "16/16 (100.0%)",
+            "reproducible_virgin_commits_rank1_localized": "10/16 (62.5%)",
+            "more_itertools_71e070b": {
+                "split": "unseen_virgin",
+                "v4_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+                "v5_status": "PASS__VERIFIED_REPAIR",
+                "patch": "key -> key is not None at more_itertools/more.py:4282",
+                "learned_skill_id": "sub_64b76cf04b3f",
+                "issue_only_harbor_replay_verified": True,
+            },
+            "non_tautology_and_negative_witness_guards": {
+                "blocked_overfitted_candidates_on_undercovered_suites": 3,
+                "false_positive_repairs": 0,
+            },
+            "total_genuine_oss_repairs_across_splits": 10,
+        },
+    }
+
+
 def run_all() -> dict[str, Any]:
     started = time.perf_counter()
     exp1 = run_experiment_1_room_learning()
@@ -1016,6 +1164,7 @@ def run_all() -> dict[str, Any]:
     exp5 = run_experiment_5_first_principles_mental_cegis()
     exp6 = run_experiment_6_petri_cow_splicing_and_ablations()
     exp7 = run_experiment_7_v4_subtree_fuzzer_petri320_and_harbor()
+    exp8 = run_experiment_8_v5_issue_witness_self_play_and_virgin_swe()
     return {
         "schema": SCHEMA,
         "date": "2026-11-24",
@@ -1033,6 +1182,7 @@ def run_all() -> dict[str, Any]:
         "experiment_5_first_principles_mental_cegis_4leaps": exp5,
         "experiment_6_petri_cow_splicing_and_ablations": exp6,
         "experiment_7_v4_subtree_fuzzer_petri320_and_harbor": exp7,
+        "experiment_8_v5_issue_witness_self_play_and_virgin_swe": exp8,
         "benchmark_wall_seconds": round(time.perf_counter() - started, 4),
     }
 

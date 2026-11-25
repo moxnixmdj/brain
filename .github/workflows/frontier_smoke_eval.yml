@@ -11,7 +11,7 @@ on:
       task_limit:
         description: Number of HARD-51 tasks to run in file order (1-51)
         required: true
-        default: '2'
+        default: '3'
         type: string
 
 permissions:
@@ -28,7 +28,7 @@ jobs:
       - name: Validate task limit
         shell: bash
         env:
-          TASK_LIMIT: ${{ inputs.task_limit || '2' }}
+          TASK_LIMIT: ${{ inputs.task_limit || '3' }}
         run: |
           set -euo pipefail
           if [[ ! "$TASK_LIMIT" =~ ^([1-9]|[1-4][0-9]|5[01])$ ]]; then

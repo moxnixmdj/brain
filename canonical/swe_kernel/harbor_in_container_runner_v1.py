@@ -11,7 +11,9 @@ Constraints:
 from __future__ import annotations
 
 import argparse
+import ast
 import base64
+import doctest
 import json
 import os
 import pathlib
@@ -19,6 +21,7 @@ import re
 import shutil
 import subprocess
 import sys
+import textwrap
 import time
 from typing import Any
 
@@ -29,6 +32,7 @@ if str(BRAIN_ROOT) not in sys.path:
 STATE_PATH = pathlib.Path("/tmp/brain_harbor_epistemic_state_v1.json")
 MEM_PATH = pathlib.Path("/tmp/brain_harbor_swe_memory_v1.json")
 SKILL_PATH = pathlib.Path("/tmp/brain_harbor_skill_store_v1.json")
+WITNESS_TEST_PATH = pathlib.Path("/tmp/brain_issue_witness_test.py")
 
 
 def _reap_children() -> int:
@@ -181,6 +185,7 @@ def phase_discover(instruction: str) -> dict[str, Any]:
         },
         "clues": clues,
         "ranked_tests": ranked_tests,
+        "instruction": instruction[:20000],
         "instruction_chars": len(instruction),
         "discover_wall_s": round(time.perf_counter() - t0, 3),
         "model_calls": 0,
@@ -215,6 +220,137 @@ def _clean_untracked_in_repo(repo_root: pathlib.Path) -> None:
         pass
 
 
+def _repo_top_packages(repo_root: pathlib.Path) -> set[str]:
+    pkgs: set[str] = set()
+    for base in (repo_root, repo_root / "src"):
+        if not base.is_dir():
+            continue
+        for child in base.iterdir():
+            if child.is_dir() and (child / "__init__.py").is_file() and not child.name.startswith((".", "test")):
+                pkgs.add(child.name)
+            elif child.is_file() and child.suffix == ".py" and not child.name.startswith(("test_", "setup", "conftest")):
+                pkgs.add(child.stem)
+    return pkgs
+
+
+def compile_issue_witness_test(
+    instruction: str,
+    repo_root: pathlib.Path,
+    py_exe: str,
+    *,
+    out_path: pathlib.Path = WITNESS_TEST_PATH,
+) -> dict[str, Any]:
+    """Compile executable doctests & fenced Python repro blocks from `instruction` into `/tmp`."""
+    from canonical.swe_kernel.causal_swe_repair_v1 import run_pytest_verdicts
+
+    out_path.unlink(missing_ok=True)
+    if not instruction.strip():
+        return {"compiled": False, "reason": "empty_instruction"}
+
+    top_pkgs = _repo_top_packages(repo_root)
+    test_funcs: list[str] = []
+
+    # 1. Extract stdlib doctest `>>>` blocks that specify concrete expected output (and aren't prose tracebacks of broken pseudocode)
+    try:
+        examples = doctest.DocTestParser().get_examples(instruction)
+    except Exception:
+        examples = []
+    if examples and any(ex.want.strip() and "Traceback" not in ex.want for ex in examples):
+        src_lines: list[str] = []
+        has_assert = False
+        for ex in examples:
+            s_clean = ex.source.rstrip("\n")
+            want_clean = ex.want.strip()
+            if want_clean and "Traceback" not in want_clean and "\n" not in s_clean and not s_clean.lstrip().startswith((
+                "import ", "from ", "def ", "class ", "for ", "while ", "if ", "with ", "try:", "@"
+            )):
+                # Check if `s_clean` is an expression vs assignment/statement
+                try:
+                    ast.parse(s_clean, mode="eval")
+                    ast.parse(want_clean, mode="eval")
+                    src_lines.append(f"assert ({s_clean}) == ({want_clean})")
+                    has_assert = True
+                    continue
+                except SyntaxError:
+                    pass
+            src_lines.append(s_clean)
+        cand_block = "\n".join(src_lines)
+        try:
+            tree_dt = ast.parse(cand_block)
+            imported_roots = {
+                (n.module.split(".")[0] if isinstance(n, ast.ImportFrom) and n.module else "")
+                for n in ast.walk(tree_dt)
+            } | {
+                alias.name.split(".")[0]
+                for n in ast.walk(tree_dt)
+                if isinstance(n, ast.Import)
+                for alias in n.names
+            }
+            if has_assert and (not top_pkgs or (imported_roots & top_pkgs)):
+                body = textwrap.indent(cand_block, "        ")
+                test_funcs.append(f"    def test_issue_doctest_witness(self):\n{body}\n")
+        except SyntaxError:
+            pass
+
+    # 2. Extract fenced ```python / ```py reproduction blocks
+    fence_re = re.compile(r"```(?:python|py)\s*\n(.*?)```", re.DOTALL | re.IGNORECASE)
+    for idx, match in enumerate(fence_re.finditer(instruction)):
+        raw_code = textwrap.dedent(match.group(1)).strip()
+        if not raw_code or len(raw_code) > 4000:
+            continue
+        try:
+            b_tree = ast.parse(raw_code)
+        except SyntaxError:
+            continue
+        imported_roots = set()
+        has_assert_or_raises = False
+        for node in ast.walk(b_tree):
+            if isinstance(node, ast.Import):
+                for al in node.names:
+                    imported_roots.add(al.name.split(".")[0])
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported_roots.add(node.module.split(".")[0])
+            elif isinstance(node, ast.Assert):
+                has_assert_or_raises = True
+            elif isinstance(node, ast.Attribute) and node.attr in ("raises", "assertRaises", "assertEqual"):
+                has_assert_or_raises = True
+        if top_pkgs and not (imported_roots & top_pkgs):
+            continue
+        indented = textwrap.indent(raw_code, "        ")
+        if any(isinstance(st, ast.FunctionDef) and st.name.startswith("test_") for st in b_tree.body):
+            calls = "\n".join(
+                f"        {st.name}()"
+                for st in b_tree.body
+                if isinstance(st, ast.FunctionDef) and st.name.startswith("test_") and len(st.args.args) == 0
+            )
+            if calls:
+                test_funcs.append(f"    def test_issue_fenced_{idx}(self):\n{indented}\n{calls}\n")
+        elif has_assert_or_raises or len(b_tree.body) >= 2:
+            test_funcs.append(f"    def test_issue_fenced_{idx}(self):\n{indented}\n")
+
+    if not test_funcs:
+        return {"compiled": False, "reason": "no_executable_witness_in_instruction"}
+
+    full_witness_src = "import unittest\n\n\nclass TestBrainIssueWitness(unittest.TestCase):\n" + "\n".join(test_funcs)
+    out_path.write_text(full_witness_src, encoding="utf-8")
+    verd = run_pytest_verdicts(repo_root, str(out_path), python_exe=py_exe, timeout_s=15.0)
+    out_txt = verd.get("output", "")
+    # Reject incomplete snippets that fail due to missing imports / undefined placeholder names
+    invalid_markers = ("ModuleNotFoundError:", "ImportError:", "NameError:", "SyntaxError:", "IndentationError:")
+    if not verd.get("failing") or any(m in out_txt for m in invalid_markers):
+        out_path.unlink(missing_ok=True)
+        return {
+            "compiled": False,
+            "reason": "witness_did_not_reproduce_clean_failure",
+            "failing_count": len(verd.get("failing") or []),
+        }
+    return {
+        "compiled": True,
+        "witness_path": str(out_path),
+        "failing_nodes": list(verd.get("failing") or []),
+    }
+
+
 def phase_repair(timeout_s: float) -> dict[str, Any]:
     t0 = time.perf_counter()
     if not STATE_PATH.is_file():
@@ -224,7 +360,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
     py_exe = str(state["python_exe"])
     ranked_tests: list[str] = list(state.get("ranked_tests") or [])
 
-    if not state.get("ecosystems", {}).get("python") or not ranked_tests:
+    if not state.get("ecosystems", {}).get("python"):
         _clean_untracked_in_repo(repo_root)
         _reap_children()
         return {
@@ -242,9 +378,10 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
     )
     from canonical.swe_kernel.petri_cow_splicing_engine_v1 import AdmissionFilteredSkillStore
 
-    failing_target: str | None = None
+    failing_target: str | list[str] | None = None
+    witness_info: dict[str, Any] = {"compiled": False}
     for cand_t in ranked_tests[:4]:
-        if time.perf_counter() - t0 > timeout_s * 0.35:
+        if time.perf_counter() - t0 > timeout_s * 0.30:
             break
         verd = run_pytest_verdicts(repo_root, cand_t, python_exe=py_exe, timeout_s=20.0)
         if verd.get("failing"):
@@ -252,11 +389,21 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             break
 
     if failing_target is None:
+        witness_info = compile_issue_witness_test(
+            str(state.get("instruction") or ""),
+            repo_root,
+            py_exe,
+        )
+        if witness_info.get("compiled"):
+            failing_target = str(witness_info["witness_path"])
+
+    if failing_target is None:
         _clean_untracked_in_repo(repo_root)
         _reap_children()
         return {
             "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
             "probed_tests": ranked_tests[:4],
+            "witness_compiler": witness_info,
             "pass": False,
             "wall_s": round(time.perf_counter() - t0, 3),
             "model_calls": 0,
@@ -273,6 +420,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         skill_store=skill_store,
         budget_s=rem_budget,
     )
+    WITNESS_TEST_PATH.unlink(missing_ok=True)
     if not outcome.get("pass"):
         try:
             subprocess.run(

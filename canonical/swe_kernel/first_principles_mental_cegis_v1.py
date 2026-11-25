@@ -1296,10 +1296,15 @@ def _parse_assertion_expected_literals(pytest_output: str) -> list[Any]:
 
 def _normalize_node_ids(nodes: Sequence[str], default_test_file: str = "") -> list[str]:
     base_file = default_test_file.split("::")[0] if default_test_file else ""
+    base_name = os.path.basename(base_file) if base_file.startswith("/") else ""
     out: list[str] = []
     for n in nodes:
         if "::" in n:
-            out.append(n)
+            head, tail = n.split("::", 1)
+            if base_name and (head == base_name or head.endswith("/" + base_name)):
+                out.append(f"{base_file}::{tail}")
+            else:
+                out.append(n)
             continue
         m_ut = re.match(r"^([A-Za-z_]\w*)\s+\((?:[\w\.]+\.)?([A-Za-z_]\w*)(?:\.\1)?\)$", n.strip())
         if m_ut and base_file:
@@ -2494,8 +2499,20 @@ def synthesize_discriminating_predicates(
 
     for i, v1 in enumerate(var_names[:6]):
         for v2 in var_names[i + 1 : 6]:
+            # Skip incidental normalization/substring-view equality (`key == stripped` even under 80-char frame truncation)
+            is_strip_alias = bool(all_envs) and any(
+                isinstance(e.get(v1), (str, bytes))
+                and isinstance(e.get(v2), (str, bytes))
+                and e.get(v1) != e.get(v2)
+                and min(len(e.get(v1)), len(e.get(v2))) >= 6
+                and (e.get(v2)[:12] in e.get(v1) or e.get(v1)[:12] in e.get(v2))
+                for e in all_envs
+                if v1 in e and v2 in e
+            )
+            if not is_strip_alias:
+                atomic_preds.extend([f"{v1} == {v2}", f"{v1} != {v2}"])
             atomic_preds.extend([
-                f"{v1} == {v2}", f"{v1} != {v2}", f"{v1} < {v2}", f"{v1} <= {v2}",
+                f"{v1} < {v2}", f"{v1} <= {v2}",
                 f"{v1} >= len({v2})", f"{v1} in {v2}", f"{v1} not in {v2}",
             ])
 
@@ -2639,8 +2656,10 @@ def synthesize_expressions_bottom_up(
     d1_cands: list[str] = [
         f"tuple({orig_expr})", f"list({orig_expr})", f"bool({orig_expr})", f"not ({orig_expr})",
     ]
-    if not isinstance(orig_ast, ast.Constant):
-        d1_cands.extend([f"({orig_expr}) is not None", f"({orig_expr}) is None"])
+    if isinstance(orig_ast, (ast.Name, ast.Attribute, ast.Subscript)):
+        ok_orig, vec_orig = mental.eval_expr_vector(orig_expr, all_envs)
+        if ok_orig and any(sig[0] == "NoneType" for sig in vec_orig):
+            d1_cands.extend([f"({orig_expr}) is not None", f"({orig_expr}) is None"])
     for t in d0:
         sample_vals = [env.get(t) for env in all_envs if t in env]
         if any(isinstance(x, str) for x in sample_vals):
@@ -2648,11 +2667,15 @@ def synthesize_expressions_bottom_up(
                 d1_cands.append(f"{t}.{m}()")
             d1_cands.extend([f"{t}.replace('_', '-')", f"{t}.replace('-', '_')"])
         if any(isinstance(x, (str, list, tuple, bytes)) for x in sample_vals):
-            d1_cands.extend([f"len({t})", f"{t}[1:]", f"{t}[:-1]", f"tuple({t})", f"list({t})"])
+            d1_cands.extend([f"len({t})", f"tuple({t})", f"list({t})"])
+            if "[" in orig_expr or any(k in orig_expr for k in ("strip", "removeprefix", "removesuffix", "slice")):
+                d1_cands.extend([f"{t}[1:]", f"{t}[:-1]"])
         if any(isinstance(x, (int, float)) and not isinstance(x, bool) for x in sample_vals):
             d1_cands.extend([f"{t} + 1", f"{t} - 1", f"max(0, {t})", f"abs({t})"])
-        if t in var_names[:8]:
-            d1_cands.extend([f"{t} is not None", f"{t} is None", f"{t} or ''", f"{t} or ()", f"{t} or 0"])
+        if t in var_names[:8] and t in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", orig_expr):
+            d1_cands.extend([f"{t} or ''", f"{t} or ()", f"{t} or 0"])
+            if any(x is None for x in sample_vals):
+                d1_cands.extend([f"{t} is not None", f"{t} is None"])
 
     for m_fn in module_names[:8]:
         if m_fn in mental.globals_ns and callable(mental.globals_ns[m_fn]):
@@ -2663,19 +2686,31 @@ def synthesize_expressions_bottom_up(
     def _mentions_var(txt: str) -> bool:
         return any(tok in var_set for tok in re.findall(r"[A-Za-z_][A-Za-z0-9_]*", txt))
 
+    _LITERAL_CONST_TXTS = {"True", "False", "None", "''", '""', "0", "()", "[]", "{}"}
     small_terms = [t for t in d0 if len(t) <= 32][:14]
     for i, lhs in enumerate(small_terms):
         for rhs in small_terms[i + 1 :]:
             if not _mentions_var(lhs) and not _mentions_var(rhs):
                 continue
+            is_sub_view = bool(all_envs) and any(
+                isinstance(e.get(lhs), (str, bytes))
+                and isinstance(e.get(rhs), (str, bytes))
+                and e.get(lhs) != e.get(rhs)
+                and min(len(e.get(lhs)), len(e.get(rhs))) >= 6
+                and (e.get(rhs)[:12] in e.get(lhs) or e.get(lhs)[:12] in e.get(rhs))
+                for e in all_envs
+                if lhs in e and rhs in e
+            )
+            if not is_sub_view:
+                d1_cands.extend([f"{lhs} == {rhs}", f"{lhs} != {rhs}"])
             d1_cands.extend([
-                f"{lhs} == {rhs}", f"{lhs} != {rhs}",
                 f"{lhs} < {rhs}", f"{lhs} <= {rhs}",
                 f"{lhs} in {rhs}", f"{lhs} not in {rhs}",
                 f"{rhs} in {lhs}", f"{rhs} not in {lhs}",
-                f"({lhs}) and ({rhs})", f"({lhs}) or ({rhs})",
                 f"{lhs} + {rhs}", f"{lhs} - {rhs}",
             ])
+            if lhs.strip() not in _LITERAL_CONST_TXTS and rhs.strip() not in _LITERAL_CONST_TXTS:
+                d1_cands.extend([f"({lhs}) and ({rhs})", f"({lhs}) or ({rhs})"])
     for v in var_names[:6]:
         d1_cands.extend([
             f"({orig_expr}) and ({v} is not None)",
@@ -2707,9 +2742,24 @@ def synthesize_expressions_bottom_up(
             continue
         if require_bool and any(x[0] != "bool" for x in vec):
             continue
-        # Sort-discipline gate: never replace a non-boolean value expression with a boolean
-        # predicate (blocks Python's `True == 1` / `False == 0` bool-is-int punning!).
+        # Symmetric sort-discipline gate: never replace a non-boolean value expression with a
+        # boolean predicate OR replace a boolean predicate (`not hasattr(...)`) with a non-boolean object (`main`)!
         if not require_bool and not orig_is_bool and all(x[0] == "bool" for x in vec):
+            mental.candidates_pruned += 1
+            continue
+        if orig_is_bool and any(x[0] != "bool" for x in vec):
+            mental.candidates_pruned += 1
+            continue
+        # Anti-constant-collapse gate: never collapse a non-constant expression (`path`)
+        # into an empty/null constant across all frames (`(path) and ('')`).
+        if (
+            not require_bool
+            and not isinstance(orig_ast, ast.Constant)
+            and vec
+            and len(set(vec)) == 1
+            and vec[0] in (("str", ""), ("int", 0), ("NoneType", None), ("tuple", ()))
+            and (not pass_envs or orig_vec != vec)
+        ):
             mental.candidates_pruned += 1
             continue
         if (
@@ -2793,6 +2843,15 @@ class AngelicCEGISSynthesizer:
             elif isinstance(node, ast.ClassDef):
                 if any("Error" in ast.unparse(b) or "Exception" in ast.unparse(b) for b in node.bases) or node.name.endswith(("Error", "Exception", "Invalid", "InvalidVersion")):
                     exc_classes.append(node.name)
+            elif isinstance(node, ast.ImportFrom):
+                for alias in node.names:
+                    bound_nm = alias.asname or alias.name
+                    if bound_nm != "*" and (
+                        bound_nm.endswith(("Error", "Exception", "Invalid", "InvalidVersion"))
+                        or (node.module and "exception" in node.module.lower())
+                    ):
+                        if bound_nm not in exc_classes:
+                            exc_classes.append(bound_nm)
             elif isinstance(node, ast.FunctionDef) and len(node.args.args) == 1 and len(node.body) <= 6:
                 try:
                     code = compile(ast.Module(body=[node], type_ignores=[]), "<mod_helper>", "exec")
@@ -2874,6 +2933,7 @@ class AngelicCEGISSynthesizer:
             if len(selected_sites) >= 28:
                 break
 
+        tested_bool_spans: set[tuple[str, int, int]] = set()
         for site_row in selected_sites:
             if time.perf_counter() >= deadline_monotonic:
                 break
@@ -2922,14 +2982,28 @@ class AngelicCEGISSynthesizer:
                         bool_sites_with_line.append((sub.test, lineno))
 
             # Control-dependence escalation: if `lineno` is inside an `if`/`else` branch body,
-            # also abduct its immediate governing `if <cond>:` header!
+            # also abduct its immediate governing `if <cond>:` header AND preceding sibling `if`/`IfExp`
+            # conditions in `enclosing_fn` (e.g. `if key:` / `x if key else y` before `return`!).
             for enc_if in enclosing_ifs:
                 bool_sites_with_line.append((enc_if.test, enc_if.lineno))
                 if isinstance(enc_if.test, ast.BoolOp):
                     for bv in enc_if.test.values[:2]:
                         bool_sites_with_line.append((bv, enc_if.lineno))
+            if enclosing_fn is not None:
+                for fn_sub in ast.walk(enclosing_fn):
+                    if isinstance(fn_sub, ast.If) and fn_sub.lineno <= lineno:
+                        bool_sites_with_line.append((fn_sub.test, fn_sub.lineno))
+                    elif isinstance(fn_sub, ast.IfExp) and fn_sub.lineno <= lineno:
+                        bool_sites_with_line.append((fn_sub.test, fn_sub.lineno))
 
-            for cond_expr, cond_ln in bool_sites_with_line[:5]:
+            dedup_bool_sites: list[tuple[ast.expr, int]] = []
+            for b_expr, b_ln in bool_sites_with_line:
+                span_k = (rel_f, b_expr.lineno, getattr(b_expr, "col_offset", 0))
+                if span_k not in tested_bool_spans:
+                    tested_bool_spans.add(span_k)
+                    dedup_bool_sites.append((b_expr, b_ln))
+
+            for cond_expr, cond_ln in dedup_bool_sites[:6]:
                 if time.perf_counter() >= deadline_monotonic or not self.sim.ready:
                     break
                 cond_prof = self.graph.sites.get((rel_f, cond_ln)) or prof
@@ -2957,16 +3031,57 @@ class AngelicCEGISSynthesizer:
                         if time.perf_counter() >= deadline_monotonic:
                             break
                         target_vals = [angelic_bool] * len(cond_mental.fail_envs)
-                        cands = synthesize_expressions_bottom_up(
-                            cond_mental,
-                            orig_expr=orig_cond_txt,
-                            fail_envs=cond_mental.fail_envs,
-                            pass_envs=active_pass_envs,
-                            target_fail_values=target_vals if cond_mental.fail_envs else None,
-                            module_names=helper_names,
-                            assertion_literals=self.graph.assertion_expected_literals,
-                            max_terms=20,
+                        cands: list[tuple[str, IRNode]] = (
+                            synthesize_expressions_bottom_up(
+                                cond_mental,
+                                orig_expr=orig_cond_txt,
+                                fail_envs=cond_mental.fail_envs,
+                                pass_envs=active_pass_envs,
+                                target_fail_values=target_vals if cond_mental.fail_envs else None,
+                                module_names=helper_names,
+                                assertion_literals=self.graph.assertion_expected_literals,
+                                max_terms=20,
+                            )
+                            if len(active_pass_envs) >= 1
+                            else []
                         )
+                        # Live-runtime truthiness <-> None-identity lattice refinement with
+                        # strict Non-Tautology Nullable-Subject Guard:
+                        # ONLY refine `Name` / `Attribute` subjects that are genuinely nullable
+                        # (either an optional `param=None` in `enclosing_fn` or observed `None` in `pass_envs`),
+                        # NEVER boolean calls/comparisons like `x.startswith(...) is not None` (tautology)!
+                        none_default_params: set[str] = set()
+                        if enclosing_fn is not None:
+                            pos_args = list(enclosing_fn.args.args)
+                            pos_defs = list(enclosing_fn.args.defaults)
+                            for p_arg, p_def in zip(pos_args[len(pos_args) - len(pos_defs) :], pos_defs):
+                                if isinstance(p_def, ast.Constant) and p_def.value is None:
+                                    none_default_params.add(p_arg.arg)
+                            for kw_arg, kw_def in zip(enclosing_fn.args.kwonlyargs, enclosing_fn.args.kw_defaults):
+                                if isinstance(kw_def, ast.Constant) and kw_def.value is None:
+                                    none_default_params.add(kw_arg.arg)
+                        inner_subj = (
+                            cond_expr.operand
+                            if isinstance(cond_expr, ast.UnaryOp) and isinstance(cond_expr.op, ast.Not)
+                            else cond_expr
+                        )
+                        if isinstance(inner_subj, (ast.Name, ast.Attribute)):
+                            subj_txt = ast.unparse(inner_subj)
+                            ok_pass_s, pass_s_vec = cond_mental.eval_expr_vector(subj_txt, active_pass_envs)
+                            observed_none_in_pass = ok_pass_s and any(sig[0] == "NoneType" for sig in pass_s_vec)
+                            is_nullable_param = isinstance(inner_subj, ast.Name) and inner_subj.id in none_default_params
+                            if is_nullable_param or observed_none_in_pass:
+                                target_check = (
+                                    f"{subj_txt} is None"
+                                    if (isinstance(cond_expr, ast.UnaryOp) and isinstance(cond_expr.op, ast.Not) and angelic_bool is False)
+                                    or (not isinstance(cond_expr, ast.UnaryOp) and angelic_bool is False)
+                                    else f"{subj_txt} is not None"
+                                )
+                                try:
+                                    lb_ir = SemanticMeaningIR.lift_expr(ast.parse(target_check, mode="eval").body)
+                                    cands.append((target_check, lb_ir))
+                                except SyntaxError:
+                                    pass
                         for p_txt, _ in petri.synthesize_petri_candidates(
                             rel_file=rel_f,
                             orig_expr=orig_cond_txt,
@@ -2980,12 +3095,36 @@ class AngelicCEGISSynthesizer:
                                 cands.append((p_txt, p_ir))
                             except SyntaxError:
                                 pass
-                        disc_preds = synthesize_discriminating_predicates(
-                            cond_mental,
-                            fail_envs=cond_mental.fail_envs,
-                            pass_envs=active_pass_envs,
-                            site_constants=site_constants,
-                            max_preds=12,
+                        norm_alias_pairs: set[frozenset[str]] = set()
+                        if enclosing_fn is not None:
+                            for fn_asgn in ast.walk(enclosing_fn):
+                                lhs_nm = None
+                                rhs_val = None
+                                if isinstance(fn_asgn, ast.Assign) and len(fn_asgn.targets) == 1 and isinstance(fn_asgn.targets[0], ast.Name):
+                                    lhs_nm, rhs_val = fn_asgn.targets[0].id, fn_asgn.value
+                                elif isinstance(fn_asgn, ast.AnnAssign) and isinstance(fn_asgn.target, ast.Name) and fn_asgn.value is not None:
+                                    lhs_nm, rhs_val = fn_asgn.target.id, fn_asgn.value
+                                elif isinstance(fn_asgn, ast.NamedExpr) and isinstance(fn_asgn.target, ast.Name):
+                                    lhs_nm, rhs_val = fn_asgn.target.id, fn_asgn.value
+                                if lhs_nm and rhs_val is not None and any(
+                                    isinstance(c_n, ast.Call)
+                                    and isinstance(c_n.func, ast.Attribute)
+                                    and c_n.func.attr in ("strip", "lstrip", "rstrip", "lower", "upper")
+                                    for c_n in ast.walk(rhs_val)
+                                ):
+                                    for rhs_n in ast.walk(rhs_val):
+                                        if isinstance(rhs_n, ast.Name) and rhs_n.id != lhs_nm:
+                                            norm_alias_pairs.add(frozenset((lhs_nm, rhs_n.id)))
+                        disc_preds = (
+                            synthesize_discriminating_predicates(
+                                cond_mental,
+                                fail_envs=cond_mental.fail_envs,
+                                pass_envs=active_pass_envs,
+                                site_constants=site_constants,
+                                max_preds=12,
+                            )
+                            if len(active_pass_envs) >= 1
+                            else []
                         )
                         for d_expr, _ in disc_preds:
                             stun_expr = (
@@ -2998,6 +3137,15 @@ class AngelicCEGISSynthesizer:
                                 cands.append((stun_expr, stun_ir))
                             except SyntaxError:
                                 pass
+                        if norm_alias_pairs:
+                            cands = [
+                                (ct, ci) for (ct, ci) in cands
+                                if not any(
+                                    f"{a} == {b}" in ct or f"{b} == {a}" in ct or f"{a} != {b}" in ct or f"{b} != {a}" in ct
+                                    for pair in norm_alias_pairs
+                                    for a, b in [tuple(pair)]
+                                )
+                            ]
                         # Sort strictly by minimal MDL cost so concise sub-expression fixes (`converter is not None`) win!
                         cands.sort(key=lambda item: len(item[0]))
 
@@ -3131,15 +3279,19 @@ class AngelicCEGISSynthesizer:
                                 target_fail_vals = [inv_val]
                                 break
 
-                expr_cands = synthesize_expressions_bottom_up(
-                    mental,
-                    orig_expr=orig_v_txt,
-                    fail_envs=mental.fail_envs,
-                    pass_envs=active_pass_envs,
-                    target_fail_values=target_fail_vals,
-                    module_names=helper_names,
-                    assertion_literals=self.graph.assertion_expected_literals,
-                    max_terms=20,
+                expr_cands = (
+                    synthesize_expressions_bottom_up(
+                        mental,
+                        orig_expr=orig_v_txt,
+                        fail_envs=mental.fail_envs,
+                        pass_envs=active_pass_envs,
+                        target_fail_values=target_fail_vals,
+                        module_names=helper_names,
+                        assertion_literals=self.graph.assertion_expected_literals,
+                        max_terms=20,
+                    )
+                    if (len(active_pass_envs) >= 1 or target_fail_vals is not None)
+                    else []
                 )
                 if target_fail_vals is not None and not expr_cands:
                     expr_cands = synthesize_expressions_bottom_up(
@@ -3515,32 +3667,59 @@ class AngelicCEGISSynthesizer:
                     if entry_stmt.lineno not in target_insert_lines:
                         target_insert_lines.append(entry_stmt.lineno)
 
-                    entry_candidates: list[tuple[str, str, str, int]] = []
+                    builtin_excs = ("ValueError", "TypeError", "KeyError")
+                    in_scope_excs: list[str] = []
+                    for exp_e in self.graph.expected_exceptions:
+                        if exp_e in mod_excs or exp_e in builtin_excs:
+                            if exp_e not in in_scope_excs:
+                                in_scope_excs.append(exp_e)
+                    for me in (*mod_excs[:4], *builtin_excs):
+                        if me not in in_scope_excs:
+                            in_scope_excs.append(me)
+
+                    entry_candidates: list[tuple[str, str, str, int, str]] = []
                     for ins_ln in target_insert_lines:
                         for g_expr in sep_guards[:4]:
                             if "==" in g_expr and "None" not in g_expr and "0" not in g_expr and "''" not in g_expr:
                                 continue
+                            # If test suite explicitly expected an exception (`DID NOT RAISE`), prioritize guarded `raise`!
+                            if self.graph.expected_exceptions:
+                                for exc_nm in in_scope_excs[:4]:
+                                    g_src = _insert_before_line(lines, ins_ln, [f"if {g_expr}:", f"    raise {exc_nm}()"])
+                                    try:
+                                        ast.parse(g_src)
+                                        entry_candidates.append((g_expr, f"raise {exc_nm}()", g_src, ins_ln, "PETRI_GUARDED_RAISE"))
+                                    except SyntaxError:
+                                        continue
                             for r_expr in petri_returns[:8]:
                                 g_src = _insert_before_line(lines, ins_ln, [f"if {g_expr}:", f"    return {r_expr}"])
                                 try:
                                     ast.parse(g_src)
-                                    entry_candidates.append((g_expr, r_expr, g_src, ins_ln))
+                                    entry_candidates.append((g_expr, f"return {r_expr}", g_src, ins_ln, "EARLY_RETURN_PETRI_GUARD"))
                                 except SyntaxError:
                                     continue
+                            if not self.graph.expected_exceptions:
+                                for exc_nm in in_scope_excs[:2]:
+                                    g_src = _insert_before_line(lines, ins_ln, [f"if {g_expr}:", f"    raise {exc_nm}()"])
+                                    try:
+                                        ast.parse(g_src)
+                                        entry_candidates.append((g_expr, f"raise {exc_nm}()", g_src, ins_ln, "PETRI_GUARDED_RAISE"))
+                                    except SyntaxError:
+                                        continue
                     if entry_candidates:
                         batch_out = self.sim.simulate_patches_parallel(
-                            [{rel_f: ec[2]} for ec in entry_candidates[:16]]
+                            [{rel_f: ec[2]} for ec in entry_candidates[:18]]
                         )
-                        for (g_expr, r_expr, g_src, ins_ln), b_res in zip(entry_candidates[:16], batch_out):
+                        for (g_expr, act_expr, g_src, ins_ln, sub_mech), b_res in zip(entry_candidates[:18], batch_out):
                             if b_res.get("ok"):
                                 verified_in_sim.append(CandidatePatch(
-                                    description=f"Method Petri guard `if {g_expr}: return {r_expr}` at {rel_f}:{ins_ln}",
+                                    description=f"Method Petri guard `if {g_expr}: {act_expr}` at {rel_f}:{ins_ln}",
                                     file_patches={rel_f: g_src},
                                     primary_file=rel_f,
                                     primary_line=ins_ln,
-                                    mechanism="PETRI_NET_SYNTHESIS:EARLY_RETURN_PETRI_GUARD",
-                                    semantic_delta_ir=f"METHOD_ENTRY_GUARD({g_expr} => {r_expr})",
-                                    mdl_cost=len(g_expr) + len(r_expr) + 10,
+                                    mechanism=f"PETRI_NET_SYNTHESIS:{sub_mech}",
+                                    semantic_delta_ir=f"METHOD_ENTRY_GUARD({g_expr} => {act_expr})",
+                                    mdl_cost=len(g_expr) + len(act_expr) + 8,
                                 ))
                                 break
 
@@ -3631,6 +3810,91 @@ class AngelicCEGISSynthesizer:
                                 mechanism="BIDIRECTIONAL_CODEC_LENS",
                                 semantic_delta_ir=f"CODEC_STREAM_LENS({c_desc})",
                                 mdl_cost=len(c_desc) + 6,
+                            ))
+                            break
+
+            # Crash-Site Exception Translation & Graceful Recovery (`PETRI_EXCEPTION_TRANSLATION`)
+            # + Runtime Type-Lattice `isinstance` Widening (`TYPE_LATTICE_ISINSTANCE_JOIN`)
+            if not verified_in_sim and enclosing_fn is not None and self.sim.ready and time.perf_counter() < deadline_monotonic:
+                exc_and_type_cands: list[tuple[str, str, int, str]] = []
+                seen_crash_excs = [
+                    ex_nm for ex_nm in prof.crash_exceptions
+                    if ex_nm and ex_nm not in ("AssertionError", "SystemExit", "KeyboardInterrupt", "BaseException", "Exception")
+                ]
+                if seen_crash_excs and stmt.lineno == getattr(stmt, "end_lineno", stmt.lineno) and 1 <= stmt.lineno <= len(lines):
+                    raw_ln = lines[stmt.lineno - 1]
+                    ind_m = re.match(r"^([ \t]*)", raw_ln)
+                    ind = ind_m.group(1) if ind_m else ""
+                    stmt_body_txt = raw_ln.strip()
+                    for c_exc in seen_crash_excs[:2]:
+                        # 1. Translate internal crash to expected domain exception
+                        for exp_e in [*self.graph.expected_exceptions, *mod_excs[:3]]:
+                            if exp_e != c_exc and (exp_e in mod_excs or exp_e in ("ValueError", "TypeError", "KeyError")):
+                                wrapped = (
+                                    f"{ind}try:\n"
+                                    f"{ind}    {stmt_body_txt}\n"
+                                    f"{ind}except {c_exc} as _exc:\n"
+                                    f"{ind}    raise {exp_e}(str(_exc)) from _exc\n"
+                                )
+                                cand_src = "".join(lines[: stmt.lineno - 1]) + wrapped + "".join(lines[stmt.lineno :])
+                                try:
+                                    ast.parse(cand_src)
+                                    exc_and_type_cands.append((f"try ... except {c_exc}: raise {exp_e}", cand_src, stmt.lineno, "PETRI_EXCEPTION_TRANSLATION"))
+                                except SyntaxError:
+                                    pass
+                        # 2. Graceful neutral return on empty/boundary crash when no exception was expected
+                        if not self.graph.expected_exceptions:
+                            for neut in ("None", "''", "()", "[]", "False"):
+                                wrapped = (
+                                    f"{ind}try:\n"
+                                    f"{ind}    {stmt_body_txt}\n"
+                                    f"{ind}except {c_exc}:\n"
+                                    f"{ind}    return {neut}\n"
+                                )
+                                cand_src = "".join(lines[: stmt.lineno - 1]) + wrapped + "".join(lines[stmt.lineno :])
+                                try:
+                                    ast.parse(cand_src)
+                                    exc_and_type_cands.append((f"try ... except {c_exc}: return {neut}", cand_src, stmt.lineno, "PETRI_EXCEPTION_TRANSLATION"))
+                                except SyntaxError:
+                                    pass
+
+                # 3. Runtime Type-Lattice `isinstance(x, T)` -> `isinstance(x, (T, T_obs))` join
+                safe_type_names = {"bytes", "bytearray", "memoryview", "str", "int", "float", "tuple", "list", "dict", "set"}
+                if eff_pos_envs:
+                    for c_sub in ast.walk(enclosing_fn):
+                        if (
+                            isinstance(c_sub, ast.Call)
+                            and isinstance(c_sub.func, ast.Name)
+                            and c_sub.func.id == "isinstance"
+                            and len(c_sub.args) == 2
+                        ):
+                            subj_txt = ast.unparse(c_sub.args[0])
+                            tspec_txt = ast.unparse(c_sub.args[1])
+                            ok_subj, vec_subj = mental.eval_expr_vector(subj_txt, eff_pos_envs[:2])
+                            if ok_subj and vec_subj:
+                                obs_t = vec_subj[0][0]
+                                if obs_t in safe_type_names and obs_t not in tspec_txt:
+                                    if isinstance(c_sub.args[1], ast.Tuple):
+                                        inner = ", ".join(ast.unparse(el) for el in c_sub.args[1].elts)
+                                        new_iso = f"isinstance({subj_txt}, ({inner}, {obs_t}))"
+                                    else:
+                                        new_iso = f"isinstance({subj_txt}, ({tspec_txt}, {obs_t}))"
+                                    patched_iso = _replace_ast_span_in_source(src, c_sub, new_iso)
+                                    if patched_iso:
+                                        exc_and_type_cands.append((new_iso, patched_iso, c_sub.lineno, "TYPE_LATTICE_ISINSTANCE_JOIN"))
+
+                if exc_and_type_cands:
+                    et_batch = self.sim.simulate_patches_parallel([{rel_f: ec[1]} for ec in exc_and_type_cands[:12]])
+                    for (et_desc, et_src, et_ln, et_mech), et_res in zip(exc_and_type_cands[:12], et_batch):
+                        if et_res.get("ok"):
+                            verified_in_sim.append(CandidatePatch(
+                                description=f"{et_mech} `{et_desc}` at {rel_f}:{et_ln}",
+                                file_patches={rel_f: et_src},
+                                primary_file=rel_f,
+                                primary_line=et_ln,
+                                mechanism=f"PETRI_NET_SYNTHESIS:{et_mech}",
+                                semantic_delta_ir=f"{et_mech}({et_desc})",
+                                mdl_cost=len(et_desc) + 8,
                             ))
                             break
 

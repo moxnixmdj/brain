@@ -325,6 +325,94 @@ class V4SubtreeFuzzerHarborTests(unittest.TestCase):
         self.assertFalse(loop_res["task_completion_claimed"])
         self.assertEqual(loop_res["cycles"], 3)
 
+    def test_v5_issue_witness_compiler_doctest_and_fenced_repro(self) -> None:
+        import sys
+        import canonical.swe_kernel.harbor_in_container_runner_v1 as runner
+
+        with tempfile.TemporaryDirectory() as tmp:
+            repo = pathlib.Path(tmp) / "repo"
+            (repo / "calcmod").mkdir(parents=True)
+            (repo / "calcmod" / "__init__.py").write_text(
+                "def normalize_key(items, key=None):\n"
+                "    return [key(x) if key else x for x in items]\n",
+                encoding="utf-8",
+            )
+            # Broken pseudocode snippet with undefined identifier MUST be rejected cleanly
+            bad_res = runner.compile_issue_witness_test(
+                "```python\nfrom calcmod import normalize_key\nassert normalize_key(undefined_var) == []\n```",
+                repo,
+                sys.executable,
+                out_path=pathlib.Path(tmp) / "bad_witness.py",
+            )
+            self.assertFalse(bad_res["compiled"])
+
+            # Valid doctest witness reproducing genuine failure on falsey callable `key`
+            good_out = pathlib.Path(tmp) / "good_witness.py"
+            good_res = runner.compile_issue_witness_test(
+                ">>> from calcmod import normalize_key\n"
+                ">>> class F:\n"
+                "...     def __bool__(self): return False\n"
+                "...     def __call__(self, v): return v * 10\n"
+                ">>> normalize_key([2, 3], key=F())\n"
+                "[20, 30]\n",
+                repo,
+                sys.executable,
+                out_path=good_out,
+            )
+            self.assertTrue(good_res["compiled"])
+            self.assertGreaterEqual(len(good_res["failing_nodes"]), 1)
+            good_out.unlink(missing_ok=True)
+
+    def test_v5_self_play_distiller_compactor_and_non_tautology_guards(self) -> None:
+        import dataclasses
+        from canonical.swe_kernel.first_principles_mental_cegis_v1 import (
+            ProgramStateMentalModel,
+            synthesize_expressions_bottom_up,
+        )
+        from canonical.swe_kernel.petri_cow_splicing_engine_v1 import SelfPlaySkillDistiller
+
+        with tempfile.TemporaryDirectory() as tmp:
+            st_path = pathlib.Path(tmp) / "skills.json"
+            store = AdmissionFilteredSkillStore(st_path, mode="generalized")
+            k_file = pathlib.Path(__file__).resolve()
+            distiller = SelfPlaySkillDistiller(store, kernel_paths=[k_file])
+            ep = distiller.harvest_subtree_episode(
+                domain="swe",
+                before_block="return '; '.join(self.params)\n",
+                after_block="if not self.params:\n    return self.kind.title()\nreturn '; '.join(self.params)\n",
+                verified_by_suite=True,
+                probes_before_success=2,
+                raw_episode_bytes=900,
+            )
+            self.assertTrue(ep["admitted"])
+            self.assertTrue(ep["kernel_identity_preserved"])
+            base_rec = next(iter(store.records.values()))
+            store.records["sub_dup_shard"] = dataclasses.replace(
+                base_rec,
+                skill_id="sub_dup_shard",
+                witness_inputs=[{"shard": 2}],
+            )
+            comp = store.compact_and_deduplicate()
+            self.assertEqual(comp["subtree_merged"], 1)
+            self.assertEqual(len(store.records), 1)
+
+        # Symmetric sort-discipline + substring-view alias filter
+        mental = ProgramStateMentalModel(
+            [{"locals": {"key": "b'rawsecret'", "stripped": "b'rawsecret'", "flag": False}}],
+            [{"locals": {"key": "b'-----BEGIN PEM-----\\n'", "stripped": "b'-----BEGIN PEM-----'", "flag": True}}],
+        )
+        cands = [
+            c_txt
+            for c_txt, _ in synthesize_expressions_bottom_up(
+                mental,
+                orig_expr="flag",
+                fail_envs=mental.fail_envs,
+                pass_envs=mental.pass_envs,
+                target_fail_values=[True],
+            )
+        ]
+        self.assertTrue(all("key == stripped" not in c and "stripped == key" not in c for c in cands))
+
 
 if __name__ == "__main__":
     unittest.main()

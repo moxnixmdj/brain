@@ -1,5 +1,5 @@
 {
-  "benchmark_wall_seconds": 24.642,
+  "benchmark_wall_seconds": 27.0191,
   "date": "2026-11-24",
   "experiment_1_goal_directed_room_learning": {
     "empty_memory_control_unread_rate": 1.0,
@@ -18,7 +18,7 @@
         0
       ],
       "total_probes": 6,
-      "total_seconds": 2.9392,
+      "total_seconds": 3.0113,
       "valid_verified": "8/8",
       "warm_episodes_zero_probes": 6
     },
@@ -61,7 +61,7 @@
         0
       ],
       "total_probes": 24,
-      "total_seconds": 6.3455
+      "total_seconds": 6.5555
     }
   },
   "experiment_2_cli_action_grammar": {
@@ -69,7 +69,7 @@
       "binaries_probed": 6,
       "pass": true,
       "recalled_from_memory": 0,
-      "seconds": 0.1698
+      "seconds": 0.1739
     },
     "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
     "warm_unseen_episodes": {
@@ -292,7 +292,7 @@
     "speculative_16way_cow_world_tomography": {
       "branches_forked": 16,
       "mealy_transitions_compiled": 16,
-      "wall_ms": 50.78,
+      "wall_ms": 41.18,
       "winner_action": "heal_gateway_and_unlock_settings",
       "zero_base_disk_mutation": true
     },
@@ -362,7 +362,7 @@
     "cow_64way_boundary_fuzzer": {
       "boundary_cases_tested": 39,
       "caught_empty_string_index_regression": true,
-      "wall_ms": 13.242
+      "wall_ms": 10.274
     },
     "harbor_front_door_epistemic_dispatch": {
       "capability_id": "swe.harbor.epistemic_cycle.v1",
@@ -375,7 +375,7 @@
       "cut_vertices_discovered": 320,
       "ok": true,
       "steps_executed": 320,
-      "wall_ms": 889.743
+      "wall_ms": 863.103
     },
     "multistatement_subtree_anti_unification": {
       "ablation_disabled": "0/5",
@@ -411,6 +411,38 @@
         "v3_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
         "v4_status": "PASS__VERIFIED_REPAIR"
       }
+    }
+  },
+  "experiment_8_v5_issue_witness_self_play_and_virgin_swe": {
+    "issue_witness_compiler_zero_failing_worktree": {
+      "held_out_replay_pass": true,
+      "pre_existing_failures": 0,
+      "repaired": true,
+      "untracked_files_in_app": 0,
+      "winning_mechanism": "FALSY_NON_NONE_GUARD"
+    },
+    "self_play_distiller_and_compactor": {
+      "alpha_equivalent_subtrees_merged": 1,
+      "compacted_subtree_count": 1,
+      "episode_admitted": true,
+      "kernel_identity_preserved": true
+    },
+    "v5_unseen_virgin_swe_evaluation": {
+      "more_itertools_71e070b": {
+        "issue_only_harbor_replay_verified": true,
+        "learned_skill_id": "sub_64b76cf04b3f",
+        "patch": "key -> key is not None at more_itertools/more.py:4282",
+        "split": "unseen_virgin",
+        "v4_baseline": "OPEN__NO_CANDIDATE_VERIFIED",
+        "v5_status": "PASS__VERIFIED_REPAIR"
+      },
+      "non_tautology_and_negative_witness_guards": {
+        "blocked_overfitted_candidates_on_undercovered_suites": 3,
+        "false_positive_repairs": 0
+      },
+      "reproducible_virgin_commits_rank1_localized": "10/16 (62.5%)",
+      "reproducible_virgin_commits_top5_localized": "16/16 (100.0%)",
+      "total_genuine_oss_repairs_across_splits": 10
     }
   },
   "invariants": {

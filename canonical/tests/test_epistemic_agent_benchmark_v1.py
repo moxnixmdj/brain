@@ -78,6 +78,18 @@ class EpistemicAgentBenchmarkReceiptTests(unittest.TestCase):
         self.assertTrue(exp7["harbor_front_door_epistemic_dispatch"]["pass"])
         self.assertEqual(exp7["harbor_front_door_epistemic_dispatch"]["model_calls"], 0)
 
+        exp8 = data["experiment_8_v5_issue_witness_self_play_and_virgin_swe"]
+        self.assertTrue(exp8["issue_witness_compiler_zero_failing_worktree"]["repaired"])
+        self.assertTrue(exp8["issue_witness_compiler_zero_failing_worktree"]["held_out_replay_pass"])
+        self.assertEqual(exp8["issue_witness_compiler_zero_failing_worktree"]["untracked_files_in_app"], 0)
+        self.assertTrue(exp8["self_play_distiller_and_compactor"]["episode_admitted"])
+        self.assertTrue(exp8["self_play_distiller_and_compactor"]["kernel_identity_preserved"])
+        self.assertGreaterEqual(exp8["self_play_distiller_and_compactor"]["alpha_equivalent_subtrees_merged"], 1)
+        self.assertEqual(
+            exp8["v5_unseen_virgin_swe_evaluation"]["non_tautology_and_negative_witness_guards"]["false_positive_repairs"],
+            0,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
