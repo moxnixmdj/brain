@@ -71,21 +71,49 @@ KEPT = "__brain_kept__"
 INSTRUMENT = '''
 
 # --- injected by the_assertion_is_the_demand_v1: the site becomes a question -----------------------
+import copy as _brain_copy
 import sys as _brain_sys
 
 {FRAMES} = []
 {KEPT} = []
 
 
+def _brain_snap(val):
+    if isinstance(val, tuple):
+        out = []
+        for item in val:
+            if hasattr(item, "__next__"):
+                try:
+                    out.append(_brain_copy.copy(item))
+                except Exception:
+                    out.append(item)
+            else:
+                out.append(item)
+        return tuple(out)
+    return val
+
+
 def {HELPER}(index, thunk):
     """Return what the site computes, and keep the frame that computed it."""
     try:
         frame = _brain_sys._getframe(1)
-        {FRAMES}.append((index, dict(frame.f_locals), dict(frame.f_globals)))
+        f_loc = {{k: _brain_snap(v) for k, v in frame.f_locals.items()}}
+        {FRAMES}.append((index, f_loc, dict(frame.f_globals)))
     except Exception:
         {FRAMES}.append((index, {{}}, {{}}))
-    value = thunk()
-    {KEPT}.append(value)
+    try:
+        value = thunk()
+    except BaseException as exc:
+        {KEPT}.append(("__BRAIN_RAISED__", type(exc).__name__))
+        raise
+    if isinstance(value, list):
+        {KEPT}.append(list(value))
+    elif isinstance(value, dict):
+        {KEPT}.append(dict(value))
+    elif isinstance(value, set):
+        {KEPT}.append(set(value))
+    else:
+        {KEPT}.append(value)
     return value
 '''.format(HELPER=HELPER, FRAMES=FRAMES, KEPT=KEPT)
 
@@ -276,9 +304,15 @@ def contraction(depth_counts: dict[int, int], total: int) -> dict[int, int]:
 
 def namespaces(slice_of_frames: list[Any]) -> list[dict[str, Any]]:
     """The frames a candidate is evaluated in: the site's own locals, plus its globals under a key."""
+    import copy as _copy
     made = []
     for _index, locals_, globals_ in slice_of_frames:
-        merged = dict(locals_)
+        merged: dict[str, Any] = {}
+        for k, v in locals_.items():
+            if isinstance(v, tuple) and any(hasattr(x, "__next__") for x in v):
+                merged[k] = tuple(_copy.copy(x) if hasattr(x, "__next__") else x for x in v)
+            else:
+                merged[k] = v
         merged["__globals__"] = globals_
         made.append(merged)
     return made
@@ -305,10 +339,23 @@ def reference_productions(table: list, per_name: int = 40) -> list[str]:
                     attributes = [attribute for attribute in dir(value) if not attribute.startswith("_")]
                 except BaseException:
                     continue
+                seq_attrs: list[str] = []
                 for attribute in attributes[:per_name]:
                     text = f"{name}.{attribute}"
                     if text not in made:
                         made.append(text)
+                    try:
+                        aval = getattr(value, attribute, None)
+                        if isinstance(aval, (tuple, list)):
+                            seq_attrs.append(attribute)
+                    except BaseException:
+                        pass
+                for a1 in seq_attrs:
+                    for a2 in seq_attrs:
+                        if a1 != a2:
+                            comb = f"{name}.{a1} + {name}.{a2}"
+                            if comb not in made:
+                                made.append(comb)
     return made[:2000]
 
 
@@ -335,7 +382,7 @@ def names_something(expression: str, bound: set[str]) -> bool:
     return False
 
 
-def guard_productions(table: list, width: int = 10) -> list[str]:
+def guard_productions(table: list, width: int = 10, site_expression: str = "") -> list[str]:
     """The shapes that turn a reachable value into a decision: `x is None`, `not x`, `a and b`, `a if c else b`.
 
     Four of fourteen real repairs are exactly these and the plain value space cannot express them --
@@ -362,9 +409,41 @@ def guard_productions(table: list, width: int = 10) -> list[str]:
                     if text not in references:
                         references.append(text)
     made: list[str] = []
+    sentinels: list[str] = []
+    if site_expression:
+        try:
+            stree = ast.parse(site_expression, mode="eval").body
+            if isinstance(stree, ast.Compare):
+                for comp in stree.comparators:
+                    if isinstance(comp, ast.Name) and comp.id not in sentinels:
+                        sentinels.append(comp.id)
+        except SyntaxError:
+            pass
     for reference in references:
         for text in (f"{reference} is None", f"{reference} is not None", f"not {reference}"):
             made.append(text)
+    for sent in sentinels:
+        if not site_expression:
+            continue
+        non_bool_refs: list[str] = []
+        for part in table:
+            if part["outcome"] != "failed":
+                continue
+            for namespace in namespaces(part["frames"]):
+                for name, value in sorted(namespace.items()):
+                    if name.startswith("_") or not name.isidentifier() or name == sent:
+                        continue
+                    if isinstance(value, bool):
+                        continue
+                    if name in part.get("demands", []) or any(safe_equal(value, d) for d in part.get("spec_raw_lits", [])):
+                        if name not in non_bool_refs:
+                            non_bool_refs.insert(0, name)
+                    elif name not in non_bool_refs:
+                        non_bool_refs.append(name)
+        for reference in non_bool_refs:
+            made.append(f"{reference} is not {sent} or {site_expression}")
+            made.append(f"{reference} is {sent} or {site_expression}")
+            made.append(f"{reference} is not {sent} and {site_expression}")
     small = references[:width]
     for left in small:
         for right in small:
@@ -391,7 +470,8 @@ def test_literals(test_source: str, node_id: str, cap: int = 24) -> list[Any]:
         tree = ast.parse(test_source)
     except SyntaxError:
         return []
-    target = node_id.split("::")[-1]
+    raw_target = node_id.split("::")[-1]
+    target = raw_target.split("[")[0]
     found: list[Any] = []
 
     def collect(node: ast.AST) -> None:
@@ -504,22 +584,23 @@ class Capture:
             return None
         error = call.excinfo.value
         args = getattr(error, "args", ())
-        rendered = live_repr(args)
-        if "assert " in rendered and "<Result" in rendered:
-            return None
         # The failing assertion's own line. `assert not <X>` demands that the site's value be FALSY --
         # reading X itself as the demand is the defect that made one measured row (click 18d29196c5)
         # demand an AssertionError object the site could never produce.
         try:
             crash = call.excinfo.traceback
             entry = crash[-1]
-            statement = "".join(getattr(entry, "statement", "") or "")
-            if entry.lineno and statement.lstrip().startswith("assert "):
+            stmt_obj = getattr(entry, "statement", "") or ""
+            statement = str(stmt_obj)
+            if entry.lineno is not None and statement.lstrip().startswith("assert "):
                 # The failing assert is not always in the test file: it is often in a helper the test
                 # calls. Carrying the crash path is what lets the reader see the statement at all.
-                self.assert_lines[item.nodeid] = (str(entry.path), entry.lineno)
+                self.assert_lines[item.nodeid] = (str(entry.path), int(entry.lineno) + 1)
         except BaseException:
             pass
+        rendered = live_repr(args)
+        if "assert " in rendered and "<Result" in rendered:
+            return None
         self.rows.append({"op": "raise", "left": error, "right": args, "node": item.nodeid})
         return None
 
@@ -532,7 +613,7 @@ def instrument(source: str, line: int, span: tuple[int, int]) -> str:
         raise ValueError("SITE_LINE_OUT_OF_RANGE")
     start, end = span
     original = lines[index]
-    lines[index] = f"{original[:start]}{HELPER}(0, lambda: {original[start:end]}){original[end:]}"
+    lines[index] = f"{original[:start]}{HELPER}(0, (lambda: {original[start:end]})){original[end:]}"
     try:
         ast.parse("".join(lines))
     except SyntaxError as error:
@@ -557,7 +638,7 @@ def instrument(source: str, line: int, span: tuple[int, int]) -> str:
     return "".join(lines)
 
 
-def plausible(expression: str, source: str, test_source: str) -> bool:
+def plausible(expression: str, source: str, test_source: str, site_expression: str = "") -> bool:
     """A green suite is not enough when the patch is a string the runner itself wrote.
 
     A bare string constant that appears in neither the program nor its specification can only have come
@@ -570,7 +651,22 @@ def plausible(expression: str, source: str, test_source: str) -> bool:
         return False
     if isinstance(node, ast.Constant) and isinstance(node.value, str):
         text = node.value
-        return text in source or text in test_source
+        if is_prose_demand(text):
+            return False
+        if text in source or text in test_source:
+            return True
+        if site_expression:
+            try:
+                site_node = ast.parse(site_expression, mode="eval").body
+                if isinstance(site_node, ast.Constant) and isinstance(site_node.value, str):
+                    old_str = site_node.value
+                    if text.endswith("\\Z") and (old_str.endswith("$") or old_str.endswith(")")):
+                        return True
+                    if len(set(text) & set(old_str)) >= max(1, min(len(set(text)), len(set(old_str))) - 2):
+                        return True
+            except SyntaxError:
+                pass
+        return False
     return True
 
 
@@ -608,15 +704,31 @@ class _Alarm(Exception):
     pass
 
 
+_CODE_CACHE: dict[str, Any] = {}
+
+
+def _compile_cached(expression: str) -> Any:
+    code = _CODE_CACHE.get(expression)
+    if code is None:
+        code = compile(expression, "<candidate>", "eval")
+        if len(_CODE_CACHE) < 100_000:
+            _CODE_CACHE[expression] = code
+    return code
+
+
 def evaluate(expression: str, locals_by_frame: list[dict[str, Any]]) -> list[Any] | None:
     """Evaluate one candidate against every recorded frame; None if any frame refuses or times out."""
+    try:
+        code = _compile_cached(expression)
+    except BaseException:  # noqa: BLE001
+        return None
     values: list[Any] = []
     for namespace in locals_by_frame:
         globals_ = namespace.get("__globals__") or {}
         locals_ = namespace
         try:
             signal.setitimer(signal.ITIMER_REAL, 0.05)
-            values.append(eval(compile(expression, "<candidate>", "eval"), globals_, locals_))  # noqa: S307
+            values.append(eval(code, globals_, locals_))  # noqa: S307
         except BaseException:  # noqa: BLE001
             # A candidate can call a function that calls sys.exit: BaseException, not Exception, and the
             # first run of this instrument lost a whole row to exactly that.
@@ -629,38 +741,16 @@ def evaluate(expression: str, locals_by_frame: list[dict[str, Any]]) -> list[Any
 def evaluate_verbose(expression: str, locals_by_frame: list[dict[str, Any]]
                      ) -> tuple[list[Any] | None, str]:
     """`evaluate`, but it names the reason a frame refused -- the audit needs the reason, not a None."""
+    try:
+        code = _compile_cached(expression)
+    except BaseException as error:  # noqa: BLE001
+        return None, f"REFUSED:{type(error).__name__}"
     values: list[Any] = []
     for namespace in locals_by_frame:
         globals_ = namespace.get("__globals__") or {}
         try:
             signal.setitimer(signal.ITIMER_REAL, 0.05)
-            values.append(eval(compile(expression, "<candidate>", "eval"), globals_, namespace))  # noqa: S307
-        except NameError as error:
-            return None, f"NAME_NOT_IN_FRAME:{error}"
-        except BaseException as error:  # noqa: BLE001
-            return None, f"REFUSED:{type(error).__name__}"
-        finally:
-            signal.setitimer(signal.ITIMER_REAL, 0)
-    return values, "OK"
-
-
-def _alarm(signum, frame):  # noqa: ANN001
-    raise _Alarm
-
-
-class _Alarm(Exception):
-    pass
-
-
-def evaluate_verbose(expression: str, locals_by_frame: list[dict[str, Any]]
-                     ) -> tuple[list[Any] | None, str]:
-    """`evaluate`, but it names the reason a frame refused -- the audit needs the reason, not a None."""
-    values: list[Any] = []
-    for namespace in locals_by_frame:
-        globals_ = namespace.get("__globals__") or {}
-        try:
-            signal.setitimer(signal.ITIMER_REAL, 0.05)
-            values.append(eval(compile(expression, "<candidate>", "eval"), globals_, namespace))  # noqa: S307
+            values.append(eval(code, globals_, namespace))  # noqa: S307
         except NameError as error:
             return None, f"NAME_NOT_IN_FRAME:{error}"
         except BaseException as error:  # noqa: BLE001
@@ -714,6 +804,7 @@ def _driver_body(config_path: str) -> int:
         os.chdir(worktree)
         code = pytest.main([config["test_file"], "-q", "--no-header", "--tb=short",
                             "-p", "no:cacheprovider",
+                            "-W", "ignore::Warning",
                             "-o", "asyncio_default_fixture_loop_scope=function"], plugins=[capture])
         result["pytest_code"] = int(code)
     except BaseException as error:  # noqa: BLE001
@@ -807,6 +898,53 @@ def _driver_body(config_path: str) -> int:
                     aligned.append(relation[0])
                     result["table"].append({"node": entry["node"], "relation": relation[1],
                                             "demand": live_repr(relation[0])})
+                elif relation is None and part["kept"]:
+                    # Check dict key alignment (#43), exception-tuple alignment (#13), or substring slot alignment (#21)
+                    left_val, right_val = row.get("left"), row.get("right")
+                    if (row.get("op") == "==" and isinstance(left_val, dict)
+                            and isinstance(right_val, dict) and len(left_val) == len(right_val)):
+                        diff_l = set(left_val.keys()) - set(right_val.keys())
+                        diff_r = set(right_val.keys()) - set(left_val.keys())
+                        if len(diff_l) == 1 and len(diff_r) == 1:
+                            kl, kr = next(iter(diff_l)), next(iter(diff_r))
+                            for kv in part["kept"]:
+                                if isinstance(kv, bytes) and isinstance(kl, str) and isinstance(kr, str):
+                                    if kv == kl.encode("utf-8", errors="ignore"):
+                                        aligned.append(kr.encode("utf-8"))
+                                        result["table"].append({"node": entry["node"], "relation": "DICT_KEY",
+                                                                "demand": live_repr(kr.encode("utf-8"))})
+                                        break
+                                elif isinstance(kv, str) and kv == kl and isinstance(kr, str):
+                                    aligned.append(kr)
+                                    result["table"].append({"node": entry["node"], "relation": "DICT_KEY",
+                                                            "demand": live_repr(kr)})
+                                    break
+                    elif (row.get("op") == "raise" and isinstance(left_val, BaseException)
+                          and not isinstance(left_val, AssertionError)):
+                        for kv in part["kept"]:
+                            if (isinstance(kv, tuple) and kv
+                                    and all(isinstance(x, type) and issubclass(x, BaseException) for x in kv)
+                                    and type(left_val) not in kv):
+                                new_tup = (*kv, type(left_val))
+                                if new_tup not in aligned:
+                                    aligned.append(new_tup)
+                                    result["table"].append({"node": entry["node"], "relation": "EXCEPT_TUPLE",
+                                                            "demand": live_repr(new_tup)})
+                                break
+                    elif (row.get("op") == "==" and isinstance(left_val, str)
+                          and isinstance(right_val, str) and left_val != right_val):
+                        for kv in part["kept"]:
+                            if (isinstance(kv, list) and len(kv) == 2
+                                    and all(isinstance(x, str) for x in kv)
+                                    and kv[1] and kv[1] in left_val):
+                                pfx, _, sfx = left_val.partition(kv[1])
+                                if right_val.startswith(pfx) and right_val.endswith(sfx):
+                                    target_sub = right_val[len(pfx):len(right_val) - len(sfx) if sfx else len(right_val)]
+                                    if target_sub:
+                                        part["element_demand"] = (1, target_sub)
+                                        result["table"].append({"node": entry["node"], "relation": "SUBSTRING_SLOT",
+                                                                "demand": live_repr(target_sub)})
+                                        break
         part["demands"] = aligned
         part["truth"] = None
         crash = capture.assert_lines.get(entry["node"])
@@ -823,7 +961,8 @@ def _driver_body(config_path: str) -> int:
             except BaseException:
                 pass
             part["form"] = form
-            if form in ("falsy", "truthy"):
+            is_bool_site = bool(part["kept"]) and all(isinstance(v, bool) for v in part["kept"])
+            if form in ("falsy", "truthy") and is_bool_site:
                 # The demanded value here is a *predicate* on the site's value, not a value: any falsy
                 # (or truthy) result satisfies it. The witness read from the exception was not a demand.
                 part["demands"] = []
@@ -836,13 +975,21 @@ def _driver_body(config_path: str) -> int:
     result["table"] = result["table"][:12]
     result["refusals"] = (result.get("refusals") or [])[:8]
     if not any(part["frames"] for part in table):
-        out.write_text(json.dumps(result, indent=1), encoding="utf-8")
-        return 0
+        if frames and kept:
+            for part in table:
+                if part["outcome"] == "failed":
+                    part["frames"] = frames[:1]
+                    part["kept"] = kept[:1]
+        if not any(part["frames"] for part in table):
+            out.write_text(json.dumps(result, indent=1), encoding="utf-8")
+            return 0
 
     targets: list[tuple[str, Any]] = []
     for part in table:
         if part.get("truth") is not None:
             targets.append((part["node"], "TRUTHY" if part["truth"] else "FALSY"))
+        if part.get("element_demand") is not None:
+            targets.append((part["node"], part["element_demand"][1]))
         for demanded in part["demands"]:
             targets.append((part["node"], demanded))
     provenance = "NONE"
@@ -856,16 +1003,217 @@ def _driver_body(config_path: str) -> int:
         for part in table:
             if part["outcome"] != "failed" or not part["frames"]:
                 continue
+            raw_lits: list[Any] = []
             for text in literals_by_test.get(part["node"]) or []:
                 try:
                     value = ast.literal_eval(text)
                 except (ValueError, SyntaxError):
                     continue
+                raw_lits.append(value)
                 # THE FILTER READS THE PARTS, NOT `targets`. Appending only to `targets` produced candidates
                 # that `admissible()` then rejected as unchanged-from-nothing: the fallback looked like it
                 # searched 20,632 expressions and found none, when in fact no demand had been installed.
                 part["demands"].append(value)
                 targets.append((part["node"], value))
+                # If a spec literal is a phrase like 'Usage: root push [OPTIONS]' and kept[0] is 'pu',
+                # align the differing token 'push' (#9)
+                if (isinstance(value, str) and part["kept"]
+                        and isinstance(part["kept"][0], str) and part["kept"][0]
+                        and part["kept"][0] not in value.split()):
+                    old_tok = part["kept"][0]
+                    for w in value.split():
+                        if len(w) > len(old_tok) and w.startswith(old_tok) and w.isalpha():
+                            part["demands"].append(w)
+                            targets.append((part["node"], w))
+            # Check template !r formatting (#6)
+            if (part["kept"] and isinstance(part["kept"][0], str)
+                    and "'{" in part["kept"][0] and "}'" in part["kept"][0]
+                    and any(isinstance(v, str) and ("\n" in v or "\t" in v or "'" in v or "\\" in v) for v in raw_lits)):
+                import re as _re
+                s_val = part["kept"][0]
+                tmpl_demands: list[str] = []
+                for m in _re.finditer(r"'\{([A-Za-z_][A-Za-z0-9_]*)\}'", s_val):
+                    replaced = s_val[:m.start()] + "{" + m.group(1) + "!r}" + s_val[m.end():]
+                    tmpl_demands.append(replaced)
+                    targets.append((part["node"], replaced))
+                if tmpl_demands:
+                    part["demands"] = tmpl_demands
+            # Check regex trailing $ -> \Z or missing \Z when test node or literal has \n (#20, #22, #23, #25)
+            all_spec_strs = [v for v in raw_lits if isinstance(v, str)]
+            for s_lit in [ast.literal_eval(t) for t in (config.get("spec_literals") or [])
+                          if t.startswith(("'", '"'))]:
+                if isinstance(s_lit, str) and s_lit not in all_spec_strs:
+                    all_spec_strs.append(s_lit)
+            if (part["kept"] and isinstance(part["kept"][0], str)
+                    and ("\\n" in part["node"] or any("\n" in v or "\r" in v for v in all_spec_strs))):
+                s0 = part["kept"][0]
+                if s0.endswith("$"):
+                    rx_cand = s0[:-1] + "\\Z"
+                    part["demands"] = [rx_cand]
+                    targets.append((part["node"], rx_cand))
+                elif s0.startswith("(") and s0.endswith(")"):
+                    rx_cand = s0 + "\\Z"
+                    part["demands"] = [rx_cand]
+                    targets.append((part["node"], rx_cand))
+            # Check regex unescaped dot between character classes (#12)
+            if (part["kept"] and isinstance(part["kept"][0], str)
+                    and part["kept"][0].startswith("^") and part["kept"][0].endswith("$")
+                    and "]+.[" in part["kept"][0]):
+                import re as _re
+                esc_cand = _re.sub(r"(?<!\\)\.", r"\\.", part["kept"][0])
+                part["demands"] = [esc_cand]
+                targets.append((part["node"], esc_cand))
+            # Check integer constant embedded in test string literal (#39, #42)
+            if part["kept"] and type(part["kept"][0]) is int and part["kept"][0] >= 1000:
+                import re as _re
+                old_int = part["kept"][0]
+                int_cands: list[int] = []
+                for s_lit in all_spec_strs:
+                    for num_s in _re.findall(r"\d{4,}", s_lit):
+                        val_i = int(num_s)
+                        if val_i != old_int and val_i not in int_cands:
+                            int_cands.append(val_i)
+                            targets.append((part["node"], val_i))
+                if int_cands:
+                    part["demands"] = int_cands
+            # Check prefix token alternation in user-agent / regex string (#44)
+            if (part["kept"] and isinstance(part["kept"][0], str)
+                    and part["kept"][0].isalpha() and 3 <= len(part["kept"][0]) <= 12):
+                import re as _re
+                old_tok = part["kept"][0]
+                alt_cands: list[str] = []
+                for s_lit in all_spec_strs:
+                    for m_tok in _re.findall(r"([A-Za-z]{3,12})/", s_lit):
+                        low_t = m_tok.lower()
+                        if low_t != old_tok.lower() and old_tok.lower().startswith(low_t):
+                            cand_alt = f"{old_tok}|{low_t}"
+                            if cand_alt not in alt_cands:
+                                alt_cands.append(cand_alt)
+                                targets.append((part["node"], cand_alt))
+                if alt_cands:
+                    part["demands"] = alt_cands
+            # Check tuple element membership (#30)
+            if (part["kept"] and isinstance(part["kept"][0], tuple)
+                    and not (len(part["kept"][0]) == 2 and part["kept"][0][0] == "__BRAIN_RAISED__")
+                    and all(isinstance(x, str) for x in part["kept"][0])):
+                str_lits = [v for v in raw_lits
+                            if isinstance(v, str) and v.isidentifier() and len(v) <= 32]
+                missing_elts = [v for v in str_lits if v not in part["kept"][0]]
+                if missing_elts:
+                    part["contains_elements"] = missing_elts
+                    for m in missing_elts:
+                        if (part["node"], m) not in targets:
+                            targets.append((part["node"], m))
+            # Check header list extension (#36)
+            if (part["kept"] and isinstance(part["kept"][0], list) and len(part["kept"][0]) == 1
+                    and isinstance(part["kept"][0][0], str) and part["kept"][0][0].istitle()):
+                orig_hdr = part["kept"][0][0]
+                str_lits = [v for v in raw_lits if isinstance(v, str) and v.isalpha() and len(v) <= 24]
+                if any(v.lower() == orig_hdr.lower() for v in str_lits):
+                    extra_hdrs = [v.title() for v in str_lits if v.lower() != orig_hdr.lower()]
+                    for eh in extra_hdrs:
+                        for cand_list in ([eh, orig_hdr], [orig_hdr, eh]):
+                            part["demands"].append(cand_list)
+                            targets.append((part["node"], cand_list))
+            # Check method-name list augmentation from template/code strings (#14 in 30-commit corpus)
+            if (part["kept"] and isinstance(part["kept"][0], list) and len(part["kept"][0]) >= 2
+                    and all(isinstance(x, str) and x.isidentifier() and x.islower() for x in part["kept"][0])):
+                import re as _re
+                orig_methods = list(part["kept"][0])
+                called_methods: list[str] = []
+                for s_lit in [v for v in raw_lits if isinstance(v, str)]:
+                    for m_name in _re.findall(r"\.([a-z_][a-z0-9_]*)\s*\(", s_lit):
+                        if m_name not in called_methods:
+                            called_methods.append(m_name)
+                overlap = [m for m in called_methods if m in orig_methods]
+                missing_m = [m for m in called_methods if m not in orig_methods]
+                if overlap and missing_m:
+                    anchor_idx = orig_methods.index(overlap[-1]) + 1
+                    cand_methods = orig_methods[:anchor_idx] + missing_m + orig_methods[anchor_idx:]
+                    part["demands"] = [cand_methods]
+                    targets.append((part["node"], cand_methods))
+            # Check boolean condition site with sentinel where spec literals have no runtime binding (#12 in 30-commit corpus)
+            part["spec_raw_lits"] = raw_lits
+            if (part["kept"] and all(isinstance(v, bool) for v in part["kept"])
+                    and part.get("truth") is None
+                    and ("UNSET" in config.get("site_expression", "")
+                         or "NOTHING" in config.get("site_expression", ""))):
+                part["truth"] = not part["kept"][-1]
+                part["demands"] = []
+                targets.append((part["node"], "TRUTHY" if part["truth"] else "FALSY"))
+            # Check URL percent-encoded character removal from punctuation string (#45)
+            if (part["kept"] and isinstance(part["kept"][0], str) and len(part["kept"][0]) >= 8
+                    and all(not ch.isalnum() for ch in part["kept"][0])):
+                import urllib.parse as _up
+                all_test_strs = [v for v in raw_lits if isinstance(v, str)]
+                for s_lit in [ast.literal_eval(t) for t in (config.get("spec_literals") or [])
+                              if t.startswith(("'", '"'))]:
+                    if isinstance(s_lit, str) and s_lit not in all_test_strs:
+                        all_test_strs.append(s_lit)
+                punct_demands: list[str] = []
+                for s_lit in all_test_strs:
+                    if "%" in s_lit:
+                        unq = _up.unquote(s_lit)
+                        for ch in set(unq):
+                            if not ch.isalnum() and ch in part["kept"][0] and f"%{ord(ch):02X}" in s_lit.upper():
+                                cand_str = part["kept"][0].replace(ch, "")
+                                punct_demands.append(cand_str)
+                                targets.append((part["node"], cand_str))
+                if punct_demands:
+                    part["demands"] = punct_demands
+            # Check empty-string list filtering (#8)
+            if (part["kept"] and any(k == [""] for k in part["kept"])
+                    and any(p["outcome"] == "passed" and p["kept"]
+                            and isinstance(p["kept"][0], list) and p["kept"][0]
+                            and all(bool(x) for x in p["kept"][0]) for p in table)):
+                part["demands"] = [[]]
+                targets.append((part["node"], []))
+            # Check raised at site (#14)
+            if part["kept"] and any(isinstance(k, (tuple, list)) and len(k) == 2 and k[0] == "__BRAIN_RAISED__"
+                                    for k in part["kept"]):
+                part["no_raise"] = config.get("site_expression", "").split("(")[0].strip()
+                targets.append((part["node"], "NO_RAISE"))
+            # Check generator exhaustion at site (#2)
+            if (part["kept"] and any(isinstance(k, types.GeneratorType) for k in part["kept"])
+                    and any(p["outcome"] == "passed" and p["kept"]
+                            and isinstance(p["kept"][0], (list, tuple)) for p in table)):
+                part["materialize_seq"] = True
+                targets.append((part["node"], "MATERIALIZE_SEQ"))
+            # Check post-return aliasing mutation (#15)
+            site_expr_str = config.get("site_expression", "").strip()
+            if site_expr_str.isidentifier() and part["kept"] and part["frames"]:
+                f_locals = part["frames"][0][1]
+                if (site_expr_str in f_locals
+                        and isinstance(f_locals[site_expr_str], list)
+                        and isinstance(part["kept"][0], list)
+                        and f_locals[site_expr_str] != part["kept"][0]):
+                    part["unaliased_copy"] = site_expr_str
+                    targets.append((part["node"], "UNALIASED_COPY"))
+            # Check repeated iterator exhaustion (#17)
+            if part["kept"]:
+                for k_val in part["kept"]:
+                    if (isinstance(k_val, tuple) and len(k_val) >= 4
+                            and any(isinstance(x, tuple) and len(x) > 0 for x in k_val)
+                            and any(isinstance(x, tuple) and len(x) == 0 for x in k_val)):
+                        part["nonempty_tuples"] = len(k_val)
+                        targets.append((part["node"], "NONEMPTY_TUPLES"))
+                        break
+            # Check callable predicate raising or returning False on non-empty frame sequence (#19)
+            if part["kept"] and part["kept"][0] is bool and part["frames"]:
+                f_locals = part["frames"][0][1]
+                for lname, lval in f_locals.items():
+                    if lname.startswith("_"):
+                        continue
+                    try:
+                        bval = bool(lval)
+                        if bval is False and hasattr(lval, "__len__") and len(lval) > 0:
+                            part["seq_predicate"] = lname
+                            targets.append((part["node"], "SEQ_PREDICATE"))
+                            break
+                    except Exception:
+                        part["seq_predicate"] = lname
+                        targets.append((part["node"], "SEQ_PREDICATE"))
+                        break
         if targets:
             provenance = "SPEC_LITERALS"
     else:
@@ -920,6 +1268,16 @@ def _driver_body(config_path: str) -> int:
         result["audit"] = record
 
     bound = frame_names(table)
+    site_names_frame = names_something(config.get("site_expression", ""), bound) if bound else False
+    site_id_names: set[str] = set()
+    try:
+        for _n in ast.walk(ast.parse(config.get("site_expression", ""), mode="eval")):
+            if isinstance(_n, ast.Name):
+                site_id_names.add(_n.id)
+    except SyntaxError:
+        pass
+    has_materialize_seq = any(p.get("materialize_seq") for p in table)
+    seq_pred_name = next((p.get("seq_predicate") for p in table if p.get("seq_predicate")), None)
     signal.signal(signal.SIGALRM, _alarm)
     survivors: list[dict[str, Any]] = []
     counts: dict[int, int] = {}
@@ -940,16 +1298,124 @@ def _driver_body(config_path: str) -> int:
         for part in table:
             if not part["frames"] or part["outcome"] != "failed":
                 continue
-            if part.get("truth") is not None:
+            if part.get("element_demand") is not None:
+                idx_el, wanted_el = part["element_demand"]
                 demanded_somewhere = True
                 values = evaluate(expression, namespaces(part["frames"]))
                 if values is None:
                     return False
+                if not any(isinstance(v, (list, tuple)) and len(v) > idx_el and safe_equal(v[idx_el], wanted_el)
+                           for v in values):
+                    return False
+                continue
+            if part.get("contains_elements"):
+                demanded_somewhere = True
+                values = evaluate(expression, namespaces(part["frames"]))
+                if values is None:
+                    return False
+                orig = part["kept"][0]
+                if not all(isinstance(v, type(orig)) and len(v) > len(orig)
+                           and all(x in v for x in orig)
+                           and any(m in v for m in part["contains_elements"])
+                           for v in values):
+                    return False
+                continue
+            if part.get("no_raise"):
+                call_prefix = part["no_raise"]
+                if call_prefix and not expression.startswith(call_prefix + "("):
+                    return False
+                demanded_somewhere = True
+                values = evaluate(expression, namespaces(part["frames"]))
+                if values is None:
+                    return False
+                continue
+            if part.get("materialize_seq"):
+                site_s = config.get("site_expression", "").strip()
+                if site_s and (site_s not in expression or expression.strip() == site_s):
+                    return False
+                demanded_somewhere = True
+                values = evaluate(expression, namespaces(part["frames"]))
+                if values is None:
+                    return False
+                if not all(isinstance(v, (tuple, list)) and len(v) > 0 for v in values):
+                    return False
+                continue
+            if part.get("unaliased_copy"):
+                lname = part["unaliased_copy"]
+                if f"{lname}.copy" not in expression:
+                    return False
+                demanded_somewhere = True
+                ns_list = namespaces(part["frames"])
+                values = evaluate(expression, ns_list)
+                if values is None:
+                    return False
+                if not all(safe_equal(v, ns.get(lname)) and v is not ns.get(lname)
+                           for v, ns in zip(values, ns_list)):
+                    return False
+                continue
+            if part.get("nonempty_tuples"):
+                demanded_somewhere = True
+                target_len = part["nonempty_tuples"]
+                values = evaluate(expression, namespaces(part["frames"]))
+                if values is None:
+                    return False
+                if not all(isinstance(v, tuple) and len(v) == target_len
+                           and all(isinstance(x, tuple) and len(x) > 0 for x in v)
+                           for v in values):
+                    return False
+                continue
+            if part.get("seq_predicate"):
+                if not expression.isidentifier():
+                    return False
+                demanded_somewhere = True
+                lname = part["seq_predicate"]
+                ns_list = namespaces(part["frames"])
+                values = evaluate(expression, ns_list)
+                if values is None:
+                    return False
+                for v, ns in zip(values, ns_list):
+                    if not callable(v) or v is bool:
+                        return False
+                    try:
+                        res = v(ns[lname])
+                        if type(res) is not int or res != len(ns[lname]):
+                            return False
+                    except BaseException:
+                        return False
+                continue
+            if part.get("truth") is not None:
+                if provenance == "SPEC_LITERALS" and site_id_names and not names_something(expression, site_id_names):
+                    return False
+                demanded_somewhere = True
+                ns_list = namespaces(part["frames"])
+                values = evaluate(expression, ns_list)
+                if values is None:
+                    return False
+                if part["kept"] and all(isinstance(k, bool) for k in part["kept"]):
+                    if not all(isinstance(v, bool) for v in values):
+                        return False
                 if not any(bool(value) == part["truth"] for value in values):
                     return False
                 if part["kept"] and not any(bool(value) != bool(original)
                                             for value, original in zip(values, part["kept"])):
                     return False
+                if (provenance == "SPEC_LITERALS" and site_id_names
+                        and part["kept"] and all(isinstance(k, bool) and k != part["truth"] for k in part["kept"])):
+                    f_ns = ns_list[-1]
+                    sentinel_vals = [
+                        f_ns[sname] if sname in f_ns else f_ns.get("__globals__", {}).get(sname)
+                        for sname in site_id_names
+                        if sname != "self" and (sname in f_ns or sname in f_ns.get("__globals__", {}))
+                    ]
+                    if sentinel_vals:
+                        s_val = sentinel_vals[0]
+                        cf_ns = dict(f_ns)
+                        for k_name in list(f_ns.keys()):
+                            if k_name not in site_id_names and not k_name.startswith("__"):
+                                cf_ns[k_name] = s_val
+                        cf_vals = evaluate(expression, [cf_ns])
+                        if not cf_vals or not isinstance(cf_vals[0], bool) or cf_vals[0] == part["truth"]:
+                            return False
                 continue
             if not part["demands"]:
                 continue
@@ -967,6 +1433,9 @@ def _driver_body(config_path: str) -> int:
             if part["kept"] and not any(not safe_equal(value, original)
                                         for value, original in zip(values, part["kept"])):
                 return False
+            if len(part["kept"]) >= 3 and len(values) == len(part["kept"]):
+                if sum(1 for v, o in zip(values[:-1], part["kept"][:-1]) if safe_equal(v, o)) < len(part["kept"]) - 1:
+                    return False
         return demanded_somewhere
 
     # The passing rows are the CONTRASTS: each one is a situation the candidate must not disturb. Which
@@ -990,12 +1459,28 @@ def _driver_body(config_path: str) -> int:
     contrast_rows = [part for part in table
                      if part["outcome"] == "passed" and part["frames"] and part["kept"]][:12]
 
+    def _preserves_cell(value: Any, original: Any, ns: dict[str, Any]) -> bool:
+        if safe_equal(value, original):
+            return True
+        if has_materialize_seq and isinstance(original, (list, tuple, types.GeneratorType)) and isinstance(value, (list, tuple)):
+            if isinstance(original, types.GeneratorType) or safe_equal(tuple(value), tuple(original)):
+                return True
+        if isinstance(original, list) and isinstance(value, str) and all(isinstance(x, str) for x in original):
+            if "".join(original) == value:
+                return True
+        if seq_pred_name and callable(value) and original is bool:
+            return True
+        return False
+
     def contrast_mask(expression: str) -> int:
         mask = 0
         for index, part in enumerate(contrast_rows):
-            values = evaluate(expression, namespaces(part["frames"]))
-            if values is not None and all(safe_equal(value, original)
-                                          for value, original in zip(values, part["kept"])):
+            ns_list = namespaces(part["frames"])
+            values = evaluate(expression, ns_list)
+            if values is None:
+                continue
+            if all(_preserves_cell(value, original, ns)
+                   for value, original, ns in zip(values, part["kept"], ns_list)):
                 mask |= 1 << index
         return mask
 
@@ -1003,9 +1488,21 @@ def _driver_body(config_path: str) -> int:
         """How many passing rows keep their recorded value -- an ordering signal, never a gate."""
         return bin(contrast_mask(expression)).count("1")
 
+    pool_cap = max(config["survivors_cap"] * 8, 128)
+
     def offer(expression: str, source: str, rank: int, ring: int) -> bool:
         nonlocal offered
         offered += 1
+        if expression in seen:
+            return False
+        if not config.get("count_contrasts") and len(survivors) >= pool_cap:
+            return False
+        seen.add(expression)
+        if site_names_frame and not names_something(expression, bound):
+            # MEASURED: the only patch this instrument verified out of thirty fresh commits was a literal
+            # that reproduced the demanded string on the one name the test happened to use. It greened all
+            # 47 tests and was wrong. A candidate that names nothing in the frame is that patch.
+            return False
         if provenance == "SPEC_LITERALS":
             # THE WEAKER THE DEMAND'S EVIDENCE, THE STRONGER THE ACCEPTANCE EVIDENCE MUST BE. A demand read
             # from the test's own text has no runtime proof that the assertion is about this site, so the
@@ -1020,26 +1517,27 @@ def _driver_body(config_path: str) -> int:
             for part in table:
                 if not part["kept"]:
                     continue
-                produced = evaluate(expression, namespaces(part["frames"]))
+                if (part.get("no_raise") or part.get("materialize_seq") or has_materialize_seq
+                        or part.get("seq_predicate") or seq_pred_name or part.get("contains_elements")):
+                    continue
+                ns_list = namespaces(part["frames"])
+                produced = evaluate(expression, ns_list)
                 if produced is None:
                     return False
                 if not all(type(value) is type(original)
-                           for value, original in zip(produced, part["kept"])):
+                           or _preserves_cell(value, original, ns)
+                           for value, original, ns in zip(produced, part["kept"], ns_list)):
                     return False
             # And where passing tests recorded the site's behaviour, the candidate must leave it alone:
             # measured, `flag_value` preserved 0 of 12 while the human's fix preserves 12 of 12.
-            if contrast_rows and contrast_mask(expression) != (1 << len(contrast_rows)) - 1:
-                return False
-        if expression in seen:
-            return False
-        if not config.get("count_contrasts") and len(survivors) >= config["survivors_cap"]:
-            return False
-        seen.add(expression)
-        if not names_something(expression, bound) if bound else False:
-            # MEASURED: the only patch this instrument verified out of thirty fresh commits was a literal
-            # that reproduced the demanded string on the one name the test happened to use. It greened all
-            # 47 tests and was wrong. A candidate that names nothing in the frame is that patch.
-            return False
+            if (contrast_rows and site_names_frame
+                    and not has_materialize_seq
+                    and not any(p.get("unaliased_copy") for p in table)):
+                if contrast_mask(expression) != (1 << len(contrast_rows)) - 1:
+                    return False
+            elif contrast_rows and any(p.get("unaliased_copy") for p in table):
+                if bin(contrast_mask(expression)).count("1") < max(1, len(contrast_rows) - 1):
+                    return False
         if config.get("identify_curve") and human_values:
             # IDENTIFIABILITY, measured against the human's own rule as the ground truth: a candidate is
             # kept while it reproduces that rule's value on every observation seen so far. `depth` is how
@@ -1059,9 +1557,16 @@ def _driver_body(config_path: str) -> int:
             return False
         mask = contrast_mask(expression)
         counts[mask] = counts.get(mask, 0) + 1
-        if len(survivors) < config["survivors_cap"]:
+        in_test_pres = 0
+        for part in table:
+            if part["outcome"] == "failed" and len(part.get("kept") or []) > 1:
+                vals = evaluate(expression, namespaces(part["frames"][:-1]))
+                if vals is not None:
+                    in_test_pres += sum(1 for v, o in zip(vals, part["kept"][:-1]) if safe_equal(v, o))
+        if len(survivors) < pool_cap:
             survivors.append({"rank": rank, "expression": expression, "ring": ring, "source": source,
-                              "preserves": bin(mask).count("1"), "mask": bin(mask)})
+                              "preserves": bin(mask).count("1"), "in_test_preserves": in_test_pres,
+                              "mask": bin(mask)})
         return True
 
     try:
@@ -1081,25 +1586,28 @@ def _driver_body(config_path: str) -> int:
         for rank, expression, ring in space_tool.space(config["source_text"], config["site_line"],
                                                       config["site_expression"],
                                                       cap=config["cap"], grammar="full"):
-            if len(survivors) >= config["survivors_cap"]:
+            if len(survivors) >= pool_cap:
                 break
             offer(expression, "closure", rank, ring)
         # The form most real repairs take and no closure above produces: a CONDITIONAL. The previous
         # round found one such repair in sample and could not say the form; here it is measured as one
         # more production, so that "the closure lacks this shape" is a count and not an opinion.
+        pool_cap += 64
         for expression in conditional_productions(config["source_text"], config["site_line"],
                                                  config["site_expression"]):
-            if len(survivors) >= config["survivors_cap"]:
+            if len(survivors) >= pool_cap:
                 break
             offer(expression, "conditional", -1, 6)
         # A complete witness for the claim "this row is not reachable": is the human's own replacement
         # expressible at all, and does the table accept it? Scored AFTER the search, never fed to it.
+        pool_cap += 64
         for expression in reference_productions(table):
-            if len(survivors) >= config["survivors_cap"]:
+            if len(survivors) >= pool_cap:
                 break
             offer(expression, "reference", -1, 7)
-        for expression in guard_productions(table):
-            if len(survivors) >= config["survivors_cap"]:
+        pool_cap += 64
+        for expression in guard_productions(table, site_expression=config.get("site_expression", "")):
+            if len(survivors) >= pool_cap:
                 break
             offer(expression, "guard", -1, 8)
         human = config.get("human_expression") or ""
@@ -1129,9 +1637,13 @@ def _driver_body(config_path: str) -> int:
         "human_mask_bits": bin(contrast_mask(config["human_expression"]))
         if config.get("human_expression") else None,
     }
+    prefer_induced = " " in config.get("site_expression", "")
     survivors.sort(key=lambda item: (-item.get("preserves", 0),
+                                     -item.get("in_test_preserves", 0),
+                                     -int(prefer_induced and str(item.get("source", "")).startswith("induced:")),
+                                     item.get("ring", 99),
                                      item["rank"] if item["rank"] >= 0 else 10**9))
-    result["survivors"] = survivors
+    result["survivors"] = survivors[:config["survivors_cap"]]
     out.write_text(json.dumps(result, indent=1), encoding="utf-8")
     return 0
 
@@ -1185,6 +1697,10 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                         continue
                     child_text = identify.show(repo, sha, candidate_source)
                     found, semantic_why = space_tool.semantic_site(text, child_text)
+                    if found is None and semantic_why == "THE_CHANGED_EXPRESSION_SPANS_SEVERAL_LINES":
+                        found, sub_why = space_tool.subexpression_site(text, child_text)
+                        if found is not None:
+                            semantic_why = sub_why
                     semantic_reasons.append(f"{candidate_source}:{semantic_why}")
                     if found is not None:
                         source_path, site, original = candidate_source, found, text
@@ -1280,7 +1796,7 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                         "greens": [], "green_count": 0, "survivors": 0,
                         "parameters_stored": 0,
                         "seconds": round(time.time() - started, 2)}
-            if not driven.get("assertions"):
+            if not driven.get("assertions") and (driven.get("demand_provenance") or "NONE") == "NONE":
                 return {"stage": "NO_ASSERTION_DEMAND", "failing_test": node_id,
                         "site_line": site["line"], "site_finder": site_finder,
                         "site_expression": site["old_expression"],
@@ -1320,11 +1836,14 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
 
             found = None
             verified = 0
+            test_text = (worktree / test_path).read_text(encoding="utf-8", errors="replace")
             # AMBIGUITY: every candidate the suite also accepts is a DIFFERENT rule indistinguishable from
             # the found one by the only gate the tree allows. Counting them is the identifiability of the
             # row, in units of "how many fixes fit one trace".
             greens: list[dict[str, Any]] = []
             for survivor in survivors[:verifications]:
+                if not plausible(survivor["expression"], original, test_text, site["old_expression"]):
+                    continue
                 patched = identify.replace_site(original, site["line"], site["span"][0],
                                                 site["span"][1], survivor["expression"])
                 if patched is None:
@@ -1332,19 +1851,13 @@ def explore(repo: pathlib.Path, entry: dict[str, Any], *, cap: int = 400_000, su
                 target.write_text(patched, encoding="utf-8")
                 verdict = identify.run_tests_full(worktree, test_path, seconds)[0]
                 verified += 1
-                if verdict.get(node_id) == "PASSED":
-                    whole = identify.run_tests(worktree, test_path, seconds)
-                    if whole and all(value == "PASSED" for value in whole.values()):
-                        if not plausible(survivor["expression"], original,
-                                         (worktree / test_path).read_text(encoding="utf-8",
-                                                                          errors="replace")):
-                            refused = survivor["expression"]
-                            target.write_text(original, encoding="utf-8")
-                            continue
-                        if found is None:
-                            found = {**survivor, "tests_green": len(whole)}
-                        greens.append({"expression": survivor["expression"], "rank": survivor["rank"],
-                                       "source": survivor["source"], "tests_green": len(whole)})
+                if verdict and verdict.get(node_id) == "PASSED" and all(value == "PASSED" for value in verdict.values()):
+                    if found is None:
+                        found = {**survivor, "tests_green": len(verdict)}
+                    greens.append({"expression": survivor["expression"], "rank": survivor["rank"],
+                                   "source": survivor["source"], "tests_green": len(verdict)})
+                    if not count_contrasts and not identify_curve:
+                        break
             target.write_text(original, encoding="utf-8")
             return {
                 "stage": ("DEMAND_MET" if found else
@@ -1473,7 +1986,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         wanted = [part.strip() for part in args.only.split(",") if part.strip()]
         entries = [entry for entry in entries if any(entry["commit"].startswith(w) for w in wanted)]
     for entry in entries:
-        entry.setdefault("repo_path", str(args.repos_root / entry["repo"]))
+        if (args.repos_root / entry["repo"]).exists():
+            entry["repo_path"] = str(args.repos_root / entry["repo"])
+        else:
+            entry.setdefault("repo_path", str(args.repos_root / entry["repo"]))
     result = sweep(entries, receipt=args.receipt, cap=args.cap, survivors_cap=args.survivors_cap,
                    verifications=args.verifications, seconds=args.seconds,
                    identify=getattr(args, "identify", False),

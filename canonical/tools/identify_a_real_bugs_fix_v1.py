@@ -174,6 +174,8 @@ def parse_line(text: str) -> ast.Module:
     if text.lstrip().startswith("elif "):
         # `elif` is not a statement on its own; as `if` it is the same node shape and the same test.
         text = text.lstrip().replace("elif ", "if ", 1)
+    if text.lstrip().startswith("except ") and text.rstrip().endswith(":"):
+        return ast.parse(f"try:\n    pass\n{text.strip()}\n    pass\n")
     try:
         return ast.parse(text)
     except SyntaxError:

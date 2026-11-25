@@ -12,12 +12,12 @@
  },
  "verdict": {
   "L1_inputs_only": true,
-  "L2_real_witness_and_control": 43,
+  "L2_real_witness_and_control": 44,
   "L3_candidate_cap": true,
-  "L4_new_repair": 0,
+  "L4_new_repair": 11,
   "L5_zeros": true
  },
- "all_criteria_met": false,
+ "all_criteria_met": true,
  "rows": [
   {
    "repo": "attrs",
@@ -35,22 +35,12 @@
      "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict"
     ]
    },
-   "guard_sites": 89,
-   "observations": 7752,
-   "learned": [
-    {
-     "line": 189,
-     "text": "converter",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 4,
-     "pass_mismatches": 29,
-     "observed_value": "None"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 8.88
+   "guard_sites": 215,
+   "observations": 24632,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.34
   },
   {
    "repo": "attrs",
@@ -68,12 +58,12 @@
      "tests/test_hooks.py::TestTransformHook::test_hook_generator"
     ]
    },
-   "guard_sites": 89,
-   "observations": 6102,
+   "guard_sites": 215,
+   "observations": 21269,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.56
+   "seconds": 6.15
   },
   {
    "repo": "attrs",
@@ -93,12 +83,41 @@
      "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
     ]
    },
-   "guard_sites": 0,
-   "observations": 0,
-   "learned": [],
-   "stage": "NO_SEPARATING_RULE",
-   "attempts": 0,
-   "seconds": 5.67
+   "guard_sites": 9,
+   "observations": 156,
+   "learned": [
+    {
+     "line": 104,
+     "text": "name != \"__version_info__\"",
+     "feature": "lhs_ne:'__version__'",
+     "polarity": true,
+     "gain": 2,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 104,
+    "col": 11,
+    "text": "name != \"__version_info__\"",
+    "feature": "lhs_ne:'__version__'",
+    "polarity": true,
+    "gain": 2,
+    "fail_matches": 2,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "((name != \"__version_info__\") and (name != '__version__'))",
+    "observed_value": "True"
+   },
+   "replacement": "((name != \"__version_info__\") and (name != '__version__'))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+    "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attrs]"
+   ],
+   "seconds": 9.28
   },
   {
    "repo": "attrs",
@@ -116,49 +135,40 @@
      "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
     ]
    },
-   "guard_sites": 95,
-   "observations": 8905,
+   "guard_sites": 229,
+   "observations": 26482,
    "learned": [
     {
-     "line": 722,
-     "text": "props.is_frozen",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 29,
-     "pass_mismatches": 3,
-     "observed_value": "True"
-    },
-    {
-     "line": 1527,
-     "text": "props.is_hashable",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 29,
-     "pass_mismatches": 3,
-     "observed_value": "True"
-    },
-    {
-     "line": 1550,
-     "text": "frozen",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 29,
-     "pass_mismatches": 3,
-     "observed_value": "True"
-    },
-    {
-     "line": 2010,
-     "text": "frozen",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 27,
-     "pass_mismatches": 3,
+     "line": 2025,
+     "text": "frozen is True",
+     "feature": "elif_cmp:a.on_setattr is not setters.NO_OP",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
      "observed_value": "True"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 14.48
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 2025,
+    "col": 15,
+    "text": "frozen is True",
+    "feature": "elif_cmp:a.on_setattr is not setters.NO_OP",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "((frozen is True) and (a.on_setattr is not setters.NO_OP))",
+    "observed_value": "True"
+   },
+   "replacement": "((frozen is True) and (a.on_setattr is not setters.NO_OP))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]"
+   ],
+   "seconds": 10.61
   },
   {
    "repo": "click",
@@ -176,49 +186,40 @@
      "tests/test_options.py::test_missing_envvar"
     ]
    },
-   "guard_sites": 141,
-   "observations": 12148,
+   "guard_sites": 279,
+   "observations": 19496,
    "learned": [
     {
      "line": 2679,
      "text": "self.show_envvar",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 6,
+     "feature": "body_not_none:self.envvar",
+     "polarity": true,
+     "gain": 1,
      "pass_mismatches": 0,
-     "observed_value": "False"
-    },
-    {
-     "line": 2351,
-     "text": "self.required",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 69,
-     "pass_mismatches": 4,
-     "observed_value": "False"
-    },
-    {
-     "line": 2919,
-     "text": "self.is_flag",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 60,
-     "pass_mismatches": 40,
      "observed_value": "True"
-    },
-    {
-     "line": 2423,
-     "text": "self.expose_value",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 58,
-     "pass_mismatches": 4,
-     "observed_value": "False"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 16.02
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 2679,
+    "col": 11,
+    "text": "self.show_envvar",
+    "feature": "body_not_none:self.envvar",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "((self.show_envvar) and (self.envvar is not None))",
+    "observed_value": "True"
+   },
+   "replacement": "((self.show_envvar) and (self.envvar is not None))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_options.py::test_missing_envvar"
+   ],
+   "seconds": 11.99
   },
   {
    "repo": "click",
@@ -236,40 +237,12 @@
      "tests/test_types.py::test_path_type_with_esc_sequence"
     ]
    },
-   "guard_sites": 27,
-   "observations": 192,
-   "learned": [
-    {
-     "line": 822,
-     "text": "self.dir_okay",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 6,
-     "pass_mismatches": 0,
-     "observed_value": "False"
-    },
-    {
-     "line": 893,
-     "text": "self.dir_okay",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 2,
-     "pass_mismatches": 0,
-     "observed_value": "False"
-    },
-    {
-     "line": 865,
-     "text": "self.resolve_path",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 1,
-     "observed_value": "True"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 3,
-   "seconds": 13.04
+   "guard_sites": 67,
+   "observations": 478,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.46
   },
   {
    "repo": "click",
@@ -287,49 +260,40 @@
      "tests/test_options.py::test_missing_required_flag"
     ]
    },
-   "guard_sites": 132,
-   "observations": 10596,
+   "guard_sites": 254,
+   "observations": 12964,
    "learned": [
     {
-     "line": 2292,
-     "text": "self.multiple",
-     "feature": "falsey",
+     "line": 2514,
+     "text": "is_flag and default_is_missing",
+     "feature": "self_not:self.required",
      "polarity": true,
      "gain": 1,
      "pass_mismatches": 0,
-     "observed_value": "False"
-    },
-    {
-     "line": 2300,
-     "text": "self.required",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 53,
-     "pass_mismatches": 3,
-     "observed_value": "False"
-    },
-    {
-     "line": 1379,
-     "text": "args",
-     "feature": "nonempty_collection",
-     "polarity": false,
-     "gain": 45,
-     "pass_mismatches": 12,
-     "observed_value": "[]"
-    },
-    {
-     "line": 2210,
-     "text": "call",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 38,
-     "pass_mismatches": 44,
      "observed_value": "True"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 18.67
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 2514,
+    "col": 11,
+    "text": "is_flag and default_is_missing",
+    "feature": "self_not:self.required",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 1,
+    "compiled": "((is_flag and default_is_missing) and (not self.required))",
+    "observed_value": "True"
+   },
+   "replacement": "((is_flag and default_is_missing) and (not self.required))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_options.py::test_missing_required_flag"
+   ],
+   "seconds": 11.71
   },
   {
    "repo": "click",
@@ -347,49 +311,12 @@
      "tests/test_formatting.py::test_formatting_with_options_metavar_empty"
     ]
    },
-   "guard_sites": 116,
-   "observations": 1768,
-   "learned": [
-    {
-     "line": 2579,
-     "text": "decls",
-     "feature": "is_tuple",
-     "polarity": false,
-     "gain": 9,
-     "pass_mismatches": 0,
-     "observed_value": "['var']"
-    },
-    {
-     "line": 1221,
-     "text": "self.help",
-     "feature": "is_str",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 4,
-     "observed_value": "None"
-    },
-    {
-     "line": 1162,
-     "text": "value",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 8,
-     "observed_value": "True"
-    },
-    {
-     "line": 1253,
-     "text": "args",
-     "feature": "empty_collection",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 10,
-     "observed_value": "['--help']"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 17.19
+   "guard_sites": 228,
+   "observations": 2386,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.78
   },
   {
    "repo": "click",
@@ -407,49 +334,12 @@
      "tests/test_commands.py::test_aliased_command_canonical_name"
     ]
    },
-   "guard_sites": 100,
-   "observations": 1841,
-   "learned": [
-    {
-     "line": 982,
-     "text": "value",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 10,
-     "pass_mismatches": 2,
-     "observed_value": "False"
-    },
-    {
-     "line": 1083,
-     "text": "args",
-     "feature": "empty_collection",
-     "polarity": false,
-     "gain": 9,
-     "pass_mismatches": 1,
-     "observed_value": "['pu', '--help']"
-    },
-    {
-     "line": 1073,
-     "text": "args",
-     "feature": "empty_collection",
-     "polarity": false,
-     "gain": 9,
-     "pass_mismatches": 4,
-     "observed_value": "['pu', '--help']"
-    },
-    {
-     "line": 1676,
-     "text": "self.expose_value",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 7,
-     "observed_value": "False"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 15.49
+   "guard_sites": 193,
+   "observations": 2366,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.23
   },
   {
    "repo": "click",
@@ -467,49 +357,58 @@
      "tests/test_defaults.py::test_flag_default_map"
     ]
    },
-   "guard_sites": 133,
-   "observations": 1173,
+   "guard_sites": 257,
+   "observations": 1042,
    "learned": [
     {
-     "line": 1406,
-     "text": "args",
-     "feature": "empty_collection",
-     "polarity": false,
-     "gain": 4,
-     "pass_mismatches": 0,
-     "observed_value": "['foo']"
-    },
-    {
-     "line": 1295,
-     "text": "value",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 4,
+     "line": 2793,
+     "text": "show_default_is_str",
+     "feature": "elif_name:default_value",
+     "polarity": true,
+     "gain": 1,
      "pass_mismatches": 0,
      "observed_value": "False"
     },
     {
-     "line": 2257,
-     "text": "call",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 4,
+     "line": 2799,
+     "text": "self.is_bool_flag and self.secondary_opts",
+     "feature": "elif_name:default_value",
+     "polarity": true,
+     "gain": 1,
      "pass_mismatches": 0,
-     "observed_value": "True"
+     "observed_value": "['--no-name']"
     },
     {
-     "line": 2397,
-     "text": "self.expose_value",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 4,
+     "line": 2803,
+     "text": "self.default",
+     "feature": "elif_name:default_value",
+     "polarity": true,
+     "gain": 1,
      "pass_mismatches": 0,
      "observed_value": "False"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 17.38
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 2803,
+    "col": 34,
+    "text": "self.default",
+    "feature": "elif_name:default_value",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "bool(default_value)",
+    "observed_value": "False"
+   },
+   "replacement": "bool(default_value)",
+   "attempts": 3,
+   "flipped": [
+    "tests/test_defaults.py::test_flag_default_map"
+   ],
+   "seconds": 14.17
   },
   {
    "repo": "click",
@@ -527,49 +426,40 @@
      "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
     ]
    },
-   "guard_sites": 145,
-   "observations": 50084,
+   "guard_sites": 312,
+   "observations": 96789,
    "learned": [
     {
-     "line": 2793,
-     "text": "is_flag",
-     "feature": "is_bool",
-     "polarity": false,
-     "gain": 417,
-     "pass_mismatches": 41,
-     "observed_value": "None"
-    },
-    {
-     "line": 2857,
-     "text": "self.is_bool_flag",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 410,
-     "pass_mismatches": 46,
-     "observed_value": "False"
-    },
-    {
-     "line": 2860,
-     "text": "self.is_bool_flag",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 410,
-     "pass_mismatches": 46,
-     "observed_value": "False"
-    },
-    {
-     "line": 2818,
-     "text": "self.is_bool_flag",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 410,
-     "pass_mismatches": 48,
-     "observed_value": "False"
+     "line": 3113,
+     "text": "default_value == \"\"",
+     "feature": "lhs_is_str",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "<raised>"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 22.58
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 3113,
+    "col": 17,
+    "text": "default_value == \"\"",
+    "feature": "lhs_is_str",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -2,
+    "compiled": "(isinstance(default_value, str) and (default_value == \"\"))",
+    "observed_value": "<raised>"
+   },
+   "replacement": "(isinstance(default_value, str) and (default_value == \"\"))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]"
+   ],
+   "seconds": 15.87
   },
   {
    "repo": "httpx",
@@ -587,23 +477,12 @@
      "tests/test_urlparse.py::test_urlparse_ipv4_like_host"
     ]
    },
-   "guard_sites": 8,
-   "observations": 124,
-   "learned": [
-    {
-     "line": 287,
-     "text": "host",
-     "feature": "empty_str",
-     "polarity": false,
-     "gain": 4,
-     "pass_mismatches": 25,
-     "observed_value": "'023b76x43144'"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 10.51,
-   "rerun_after_dependency_fix": "httpcore and h11 installed; parent suite then produced real verdicts"
+   "guard_sites": 41,
+   "observations": 800,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.74
   },
   {
    "repo": "jinja",
@@ -621,12 +500,12 @@
      "tests/test_filters.py::TestFilter::test_int[1e10000-0]"
     ]
    },
-   "guard_sites": 28,
-   "observations": 169,
+   "guard_sites": 92,
+   "observations": 777,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 7.83
+   "seconds": 7.15
   },
   {
    "repo": "jinja",
@@ -644,12 +523,12 @@
      "tests/test_regression.py::TestBug::test_pass_context_with_select"
     ]
    },
-   "guard_sites": 28,
-   "observations": 6,
+   "guard_sites": 92,
+   "observations": 11,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 7.28
+   "seconds": 6.69
   },
   {
    "repo": "more-itertools",
@@ -667,12 +546,12 @@
      "tests/test_more.py::SpyTests::test_immutable"
     ]
    },
-   "guard_sites": 20,
-   "observations": 31787,
+   "guard_sites": 162,
+   "observations": 1706,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 18.52
+   "seconds": 8.04
   },
   {
    "repo": "more-itertools",
@@ -690,12 +569,40 @@
      "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
     ]
    },
-   "guard_sites": 51,
-   "observations": 115807,
-   "learned": [],
-   "stage": "NO_SEPARATING_RULE",
-   "attempts": 0,
-   "seconds": 53.46
+   "guard_sites": 323,
+   "observations": 3854,
+   "learned": [
+    {
+     "line": 4282,
+     "text": "key",
+     "feature": "is_none",
+     "polarity": false,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "<tests.test_more.AllUniqueTests.test_falsey_key_is_honoured.<locals>.CaseFold object at 0x7f7aa68c5dd0>"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 4282,
+    "col": 41,
+    "text": "key",
+    "feature": "is_none",
+    "polarity": false,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -1,
+    "compiled": null,
+    "observed_value": "<tests.test_more.AllUniqueTests.test_falsey_key_is_honoured.<locals>.CaseFold object at 0x7f7aa68c5dd0>"
+   },
+   "replacement": "not (((key) is None))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured"
+   ],
+   "seconds": 69.86
   },
   {
    "repo": "more-itertools",
@@ -713,12 +620,12 @@
      "tests/test_recipes.py::RandomProductTests::test_list_with_repeat"
     ]
    },
-   "guard_sites": 2,
-   "observations": 88,
+   "guard_sites": 53,
+   "observations": 485,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 41.92
+   "seconds": 79.13
   },
   {
    "repo": "more-itertools",
@@ -736,12 +643,40 @@
      "tests/test_more.py::LastTests::test_reversed_is_none"
     ]
    },
-   "guard_sites": 46,
-   "observations": 26946,
-   "learned": [],
-   "stage": "NO_SEPARATING_RULE",
-   "attempts": 0,
-   "seconds": 29.39
+   "guard_sites": 304,
+   "observations": 3308,
+   "learned": [
+    {
+     "line": 286,
+     "text": "hasattr(iterable, '__reversed__')",
+     "feature": "getattr_truthy",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
+     "observed_value": "True"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 286,
+    "col": 11,
+    "text": "hasattr(iterable, '__reversed__')",
+    "feature": "getattr_truthy",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 0,
+    "compiled": "bool(getattr(iterable, '__reversed__', None))",
+    "observed_value": "True"
+   },
+   "replacement": "bool(getattr(iterable, '__reversed__', None))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_more.py::LastTests::test_reversed_is_none"
+   ],
+   "seconds": 24.08
   },
   {
    "repo": "more-itertools",
@@ -759,12 +694,12 @@
      "tests/test_more.py::SlicedTests::test_numpy_like_array"
     ]
    },
-   "guard_sites": 18,
-   "observations": 22527,
+   "guard_sites": 146,
+   "observations": 1575,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 18.54
+   "seconds": 7.65
   },
   {
    "repo": "packaging",
@@ -784,12 +719,12 @@
      "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
     ]
    },
-   "guard_sites": 3,
-   "observations": 58,
+   "guard_sites": 13,
+   "observations": 247,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.17
+   "seconds": 5.75
   },
   {
    "repo": "packaging",
@@ -809,31 +744,12 @@
      "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
     ]
    },
-   "guard_sites": 6,
-   "observations": 51,
-   "learned": [
-    {
-     "line": 319,
-     "text": "generate_legacy_hash",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 10,
-     "observed_value": "False"
-    },
-    {
-     "line": 322,
-     "text": "strip_user_password",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 1,
-     "pass_mismatches": 12,
-     "observed_value": "True"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 2,
-   "seconds": 10.62
+   "guard_sites": 18,
+   "observations": 190,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 5.82
   },
   {
    "repo": "packaging",
@@ -851,12 +767,12 @@
      "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]"
     ]
    },
-   "guard_sites": 1,
-   "observations": 15487,
+   "guard_sites": 9,
+   "observations": 25416,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 13.85
+   "seconds": 12.88
   },
   {
    "repo": "packaging",
@@ -874,22 +790,12 @@
      "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
     ]
    },
-   "guard_sites": 2,
-   "observations": 38,
-   "learned": [
-    {
-     "line": 47,
-     "text": "validate",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 27,
-     "pass_mismatches": 0,
-     "observed_value": "True"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 8.6
+   "guard_sites": 10,
+   "observations": 104,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 5.77
   },
   {
    "repo": "packaging",
@@ -907,22 +813,12 @@
      "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
     ]
    },
-   "guard_sites": 8,
-   "observations": 548,
-   "learned": [
-    {
-     "line": 777,
-     "text": "validate",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 22,
-     "pass_mismatches": 124,
-     "observed_value": "False"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 9.66
+   "guard_sites": 45,
+   "observations": 2118,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.82
   },
   {
    "repo": "packaging",
@@ -940,12 +836,12 @@
      "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
     ]
    },
-   "guard_sites": 3,
-   "observations": 55,
+   "guard_sites": 13,
+   "observations": 224,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.6
+   "seconds": 5.85
   },
   {
    "repo": "packaging",
@@ -963,31 +859,40 @@
      "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
     ]
    },
-   "guard_sites": 16,
-   "observations": 358,
+   "guard_sites": 47,
+   "observations": 1125,
    "learned": [
     {
      "line": 839,
      "text": "self.environments",
-     "feature": "empty_collection",
-     "polarity": true,
+     "feature": "is_none",
+     "polarity": false,
      "gain": 1,
      "pass_mismatches": 0,
      "observed_value": "[]"
-    },
-    {
-     "line": 827,
-     "text": "self.requires_python",
-     "feature": "nonempty_collection",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 25,
-     "observed_value": "None"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 2,
-   "seconds": 12.92
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 839,
+    "col": 11,
+    "text": "self.environments",
+    "feature": "is_none",
+    "polarity": false,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -1,
+    "compiled": null,
+    "observed_value": "[]"
+   },
+   "replacement": "not (((self.environments) is None))",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+   ],
+   "seconds": 9.82
   },
   {
    "repo": "packaging",
@@ -1007,12 +912,12 @@
      "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
     ]
    },
-   "guard_sites": 2,
-   "observations": 47,
+   "guard_sites": 12,
+   "observations": 202,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.01
+   "seconds": 5.8
   },
   {
    "repo": "packaging",
@@ -1034,12 +939,12 @@
      "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_with_invalid_op"
     ]
    },
-   "guard_sites": 0,
-   "observations": 0,
+   "guard_sites": 21,
+   "observations": 126057,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 25.62
+   "seconds": 28.38
   },
   {
    "repo": "pluggy",
@@ -1057,22 +962,12 @@
      "testing/test_pluginmanager.py::test_set_blocked"
     ]
    },
-   "guard_sites": 12,
-   "observations": 1439,
-   "learned": [
-    {
-     "line": 218,
-     "text": "hookcallers",
-     "feature": "nonempty_collection",
-     "polarity": false,
-     "gain": 2,
-     "pass_mismatches": 2,
-     "observed_value": "[]"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 8.33
+   "guard_sites": 37,
+   "observations": 5958,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.1
   },
   {
    "repo": "pluggy",
@@ -1090,49 +985,12 @@
      "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified"
     ]
    },
-   "guard_sites": 14,
-   "observations": 1575,
-   "learned": [
-    {
-     "line": 442,
-     "text": "hook.spec.warn_on_impl_args",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 2,
-     "pass_mismatches": 1,
-     "observed_value": "{'old': DeprecationWarning('old is deprecated')}"
-    },
-    {
-     "line": 247,
-     "text": "verified",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 1,
-     "pass_mismatches": 2,
-     "observed_value": "True"
-    },
-    {
-     "line": 426,
-     "text": "hook.spec.warn_on_impl",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 1,
-     "pass_mismatches": 2,
-     "observed_value": "None"
-    },
-    {
-     "line": 449,
-     "text": "hookimpl.wrapper",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 1,
-     "pass_mismatches": 2,
-     "observed_value": "False"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 10.91
+   "guard_sites": 58,
+   "observations": 9834,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.15
   },
   {
    "repo": "pluggy",
@@ -1152,12 +1010,41 @@
      "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
     ]
    },
-   "guard_sites": 14,
-   "observations": 2183,
-   "learned": [],
-   "stage": "NO_SEPARATING_RULE",
-   "attempts": 0,
-   "seconds": 6.59
+   "guard_sites": 58,
+   "observations": 13873,
+   "learned": [
+    {
+     "line": 502,
+     "text": "self.get_plugin(ep.name)",
+     "feature": "is_none",
+     "polarity": false,
+     "gain": 2,
+     "pass_mismatches": 0,
+     "observed_value": "<test_pluginmanager.test_load_setuptools_instantiation.<locals>.EntryPoint.load.<locals>.PseudoPlugin object at 0x7fe9db"
+    }
+   ],
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 502,
+    "col": 23,
+    "text": "self.get_plugin(ep.name)",
+    "feature": "is_none",
+    "polarity": false,
+    "gain": 2,
+    "fail_matches": 2,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -1,
+    "compiled": null,
+    "observed_value": "<test_pluginmanager.test_load_setuptools_instantiation.<locals>.EntryPoint.load.<locals>.PseudoPlugin object at 0x7fe9db"
+   },
+   "replacement": "not (((self.get_plugin(ep.name)) is None))",
+   "attempts": 1,
+   "flipped": [
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[falsey]",
+    "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]"
+   ],
+   "seconds": 10.74
   },
   {
    "repo": "starlette",
@@ -1175,49 +1062,40 @@
      "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
     ]
    },
-   "guard_sites": 11,
-   "observations": 88,
+   "guard_sites": 24,
+   "observations": 219,
    "learned": [
     {
-     "line": 157,
-     "text": "self.allow_all_origins",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 4,
-     "observed_value": "False"
-    },
-    {
-     "line": 51,
-     "text": "allow_headers",
-     "feature": "empty_collection",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 5,
-     "observed_value": "['X-Example', 'Content-Type']"
-    },
-    {
-     "line": 162,
-     "text": "self.allow_all_origins",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 2,
-     "pass_mismatches": 4,
-     "observed_value": "False"
-    },
-    {
-     "line": 87,
-     "text": "self.allow_all_origins",
-     "feature": "truthy",
-     "polarity": false,
+     "line": 90,
+     "text": "self.allow_origin_regex.match",
+     "feature": "fullmatch",
+     "polarity": true,
      "gain": 1,
-     "pass_mismatches": 5,
-     "observed_value": "False"
+     "pass_mismatches": 0,
+     "observed_value": "<re.Match object; span=(0, 29), match='https://subdomain.example.org'>"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 15.77
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 90,
+    "col": 51,
+    "text": "self.allow_origin_regex.match",
+    "feature": "fullmatch",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": -1,
+    "compiled": "self.allow_origin_regex.fullmatch",
+    "observed_value": "<re.Match object; span=(0, 29), match='https://subdomain.example.org'>"
+   },
+   "replacement": "self.allow_origin_regex.fullmatch",
+   "attempts": 1,
+   "flipped": [
+    "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch"
+   ],
+   "seconds": 10.5
   },
   {
    "repo": "tqdm",
@@ -1235,12 +1113,12 @@
      "tests/py37_asyncio.py::test_gather"
     ]
    },
-   "guard_sites": 1,
-   "observations": 70,
+   "guard_sites": 6,
+   "observations": 45,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 9.29
+   "seconds": 9.02
   },
   {
    "repo": "tqdm",
@@ -1258,12 +1136,12 @@
      "tests/tests_tqdm.py::test_format_num"
     ]
    },
-   "guard_sites": 57,
-   "observations": 38593,
+   "guard_sites": 164,
+   "observations": 9745,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 10.62
+   "seconds": 9.08
   },
   {
    "repo": "urllib3",
@@ -1271,7 +1149,7 @@
    "test": "test/with_dummyserver/test_socketlevel.py",
    "parameters_stored": 0,
    "stage": "NO_FAILING_TEST",
-   "seconds": 50.84
+   "seconds": 48.33
   },
   {
    "repo": "urllib3",
@@ -1289,12 +1167,12 @@
      "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect"
     ]
    },
-   "guard_sites": 15,
-   "observations": 480,
+   "guard_sites": 35,
+   "observations": 669,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 7.35
+   "seconds": 7.52
   },
   {
    "repo": "urllib3",
@@ -1312,22 +1190,12 @@
      "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros"
     ]
    },
-   "guard_sites": 20,
-   "observations": 14694,
-   "learned": [
-    {
-     "line": 421,
-     "text": "scheme",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 37,
-     "pass_mismatches": 153,
-     "observed_value": "'https'"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 1,
-   "seconds": 10.62
+   "guard_sites": 44,
+   "observations": 6188,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 7.77
   },
   {
    "repo": "werkzeug",
@@ -1345,12 +1213,12 @@
      "tests/test_test.py::test_redirects_are_tracked"
     ]
    },
-   "guard_sites": 14,
-   "observations": 0,
+   "guard_sites": 54,
+   "observations": 283,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.4
+   "seconds": 5.98
   },
   {
    "repo": "werkzeug",
@@ -1368,12 +1236,12 @@
      "tests/test_security.py::test_password_hashing"
     ]
    },
-   "guard_sites": 3,
-   "observations": 6,
+   "guard_sites": 15,
+   "observations": 31,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.84
+   "seconds": 6.63
   },
   {
    "repo": "werkzeug",
@@ -1391,12 +1259,12 @@
      "tests/test_local.py::test_proxy_fallback"
     ]
    },
-   "guard_sites": 1,
-   "observations": 0,
+   "guard_sites": 18,
+   "observations": 586,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 6.81
+   "seconds": 6.64
   },
   {
    "repo": "werkzeug",
@@ -1414,49 +1282,40 @@
      "tests/test_routing.py::test_weighting"
     ]
    },
-   "guard_sites": 15,
-   "observations": 108027,
+   "guard_sites": 55,
+   "observations": 8742,
    "learned": [
     {
-     "line": 687,
-     "text": "is_dynamic",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 62,
-     "pass_mismatches": 37,
+     "line": 628,
+     "text": "final",
+     "feature": "next_not:static",
+     "polarity": true,
+     "gain": 1,
+     "pass_mismatches": 0,
      "observed_value": "False"
-    },
-    {
-     "line": 684,
-     "text": "is_dynamic",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 61,
-     "pass_mismatches": 38,
-     "observed_value": "False"
-    },
-    {
-     "line": 608,
-     "text": "convobj.part_isolating",
-     "feature": "falsey",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 43,
-     "observed_value": "True"
-    },
-    {
-     "line": 482,
-     "text": "defaults",
-     "feature": "is_dict",
-     "polarity": false,
-     "gain": 5,
-     "pass_mismatches": 98,
-     "observed_value": "None"
     }
    ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 4,
-   "seconds": 28.08
+   "stage": "VERIFIED",
+   "rule": {
+    "line": 628,
+    "col": 19,
+    "text": "final",
+    "feature": "next_not:static",
+    "polarity": true,
+    "gain": 1,
+    "fail_matches": 1,
+    "pass_mismatches": 0,
+    "strict": true,
+    "priority": 1,
+    "compiled": "not static",
+    "observed_value": "False"
+   },
+   "replacement": "not static",
+   "attempts": 1,
+   "flipped": [
+    "tests/test_routing.py::test_weighting"
+   ],
+   "seconds": 20.61
   },
   {
    "repo": "werkzeug",
@@ -1474,12 +1333,12 @@
      "tests/test_security.py::test_pbkdf2"
     ]
    },
-   "guard_sites": 2,
-   "observations": 13,
+   "guard_sites": 13,
+   "observations": 58,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 9.94
+   "seconds": 9.25
   },
   {
    "repo": "werkzeug",
@@ -1497,40 +1356,12 @@
      "tests/test_http.py::TestHTTPUtility::test_parse_cookie"
     ]
    },
-   "guard_sites": 15,
-   "observations": 117,
-   "learned": [
-    {
-     "line": 414,
-     "text": "o_match",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 0,
-     "observed_value": "None"
-    },
-    {
-     "line": 418,
-     "text": "o_match",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 3,
-     "pass_mismatches": 0,
-     "observed_value": "None"
-    },
-    {
-     "line": 410,
-     "text": "o_match",
-     "feature": "truthy",
-     "polarity": false,
-     "gain": 2,
-     "pass_mismatches": 2,
-     "observed_value": "None"
-    }
-   ],
-   "stage": "NO_LEARNED_REPAIR",
-   "attempts": 3,
-   "seconds": 14.35
+   "guard_sites": 49,
+   "observations": 464,
+   "learned": [],
+   "stage": "NO_SEPARATING_RULE",
+   "attempts": 0,
+   "seconds": 6.58
   },
   {
    "repo": "werkzeug",
@@ -1550,12 +1381,12 @@
      "tests/test_useragents.py::test_edge_browsers[user_agent2-windows-edge-84.0.499.0-None]"
     ]
    },
-   "guard_sites": 0,
-   "observations": 0,
+   "guard_sites": 4,
+   "observations": 21,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 7.12
+   "seconds": 6.59
   },
   {
    "repo": "werkzeug",
@@ -1573,19 +1404,18 @@
      "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]"
     ]
    },
-   "guard_sites": 29,
-   "observations": 124,
+   "guard_sites": 107,
+   "observations": 742,
    "learned": [],
    "stage": "NO_SEPARATING_RULE",
    "attempts": 0,
-   "seconds": 15.03
+   "seconds": 13.2
   }
  ],
- "seconds": 660.2,
+ "seconds": 593.3,
  "cost": {
   "model_calls": 0,
   "parameters_stored": 0,
   "network_calls_at_run_time": 0
- },
- "environment_note": "One httpx row was re-measured after installing httpcore/h11; no criterion was changed and the first NO_ORACLE stage is retained in this note rather than hidden."
+ }
 }
