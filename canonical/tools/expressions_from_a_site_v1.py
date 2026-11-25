@@ -71,6 +71,9 @@ def base_terms(source: str, function_name: str, site_text: str,
 
 
 
+_SIZE_CACHE: dict[str, int] = {}
+
+
 def _size(text: str) -> int:
     """How many expression nodes the text contains -- not how many AST nodes.
 
@@ -79,11 +82,17 @@ def _size(text: str) -> int:
     number admits only constants, and a local can never become material: that is how `max(longest,
     length + 1)` was declared inexpressible with all three of its parts sitting at the site.
     """
+    cached = _SIZE_CACHE.get(text)
+    if cached is not None:
+        return cached
     try:
         body = ast.parse(text, mode="eval").body
+        result = sum(1 for node in ast.walk(body) if isinstance(node, ast.expr))
     except SyntaxError:
-        return 10 ** 6
-    return sum(1 for node in ast.walk(body) if isinstance(node, ast.expr))
+        result = 10 ** 6
+    if len(_SIZE_CACHE) < 250_000:
+        _SIZE_CACHE[text] = result
+    return result
 
 
 def attribute_terms(source: str, contexts: Sequence[dict[str, Any]]) -> list[str]:
