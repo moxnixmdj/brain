@@ -307,6 +307,10 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}/brain
         run: |
+          # Opt out of the runner's `bash -e` on the FIRST line: before this, the diagnostic
+          # commands above the harbor call could themselves have killed the step and taken
+          # the shard's evidence with them.
+          set +e
           set -uo pipefail
           echo "--- harbor CLI surface (for diagnosing usage errors) ---"
           harbor --help 2>&1 | head -40 || true
@@ -338,6 +342,7 @@ jobs:
         working-directory: brain
         if: always() && env.SKIP != 'true'
         run: |
+          set +e
           set -uo pipefail
           mkdir -p "$W/out"
           echo "harbor_exit=$(cat "$W/harbor-exit.txt" 2>/dev/null || echo NOFILE)" > "$W/out/status.env"
@@ -371,15 +376,24 @@ jobs:
             echo "--- manifest ids (first 3) ---"
             python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); ids=[t["instance_id"] for t in d.get("tasks",[])]; print(ids[:3])' "$W/manifest.json" 2>&1 | head -3
           } > "$W/out/$ARM-s$SHARD.layout.txt" 2>&1 || true
+          # Every argument on one logical line: the three --note lines below lost their
+          # trailing backslashes, so `collect` ran without --out, exited 2, and `bash -e`
+          # aborted the step before the fallback could write -- which is how run
+          # 45663363378 published zero reports while harbor had exited 0 with 9 trials.
           python -m canonical.eval.harbor.swe_pro_v2_ci collect \
             --jobs-dir "$W/jobs" \
             --manifest "$W/manifest.json" \
             --arm "$ARM" \
-            --note engine_timeout_s="$AGENT_TIMEOUT_S"
-            --note n_shards="$N_SHARDS"
-            --note eval_commit="$GITHUB_SHA"
-            --out "$W/out/$ARM-s$SHARD.json" \
-            || { echo '{"arm":"'"$ARM"'","error":"COLLECT_FAILED"}' > "$W/out/$ARM-s$SHARD.json"; true; }
+            --note engine_timeout_s="$AGENT_TIMEOUT_S" \
+            --note n_shards="$N_SHARDS" \
+            --note eval_commit="$GITHUB_SHA" \
+            --out "$W/out/$ARM-s$SHARD.json"
+          cx=$?
+          if [ "$cx" != "0" ] || [ ! -s "$W/out/$ARM-s$SHARD.json" ]; then
+            echo "::error::collect failed (exit $cx) for $ARM shard $SHARD"
+            printf '{"arm":"%s","error":"COLLECT_FAILED","exit_code":"%s"}\n' "$ARM" "$cx" \
+              > "$W/out/$ARM-s$SHARD.json"
+          fi
           cp "$W/store-$ARM-s$SHARD.json" "$W/out/store-snapshot.json" 2>/dev/null || true
           tail -c 150000 "$W/harbor-$ARM-s$SHARD.log" > "$W/out/harbor-tail.log" 2>/dev/null || true
           # Machine-readable diagnostics: the exit code plus the last lines of the
@@ -399,6 +413,10 @@ jobs:
           DIAG
           echo "--- collected ---"
           head -c 2000 "$W/out/$ARM-s$SHARD.json" || true
+          # The evidence is published, so the step may now report the failure honestly
+          # instead of dying before it. Exit codes are for humans; the artifact is for truth.
+          if grep -q COLLECT_FAILED "$W/out/$ARM-s$SHARD.json" 2>/dev/null; then exit 1; fi
+          exit 0
 
       - name: Upload shard artifact
         if: always() && env.SKIP != 'true'
@@ -448,6 +466,7 @@ jobs:
             printf '%s\n' '{"schema":"brain.bench_eval_report.v1","arms":{},"run_produced_number":false,"run_failed":true,"note":"NO SHARD REPORTS: every shard failed before collect; this run produced no benchmark number"}' > out/report.json
             printf '%s\n' "# SWE-bench Pro V2 — engine eval" "" "No shard report was produced. This run generated **no** benchmark number." > out/report.md
             echo "RUN_FAILED=true" >> "$GITHUB_ENV"
+            export RUN_FAILED=true
           else
             args=()
             for f in "${reports[@]}"; do args+=(--reports "$f"); done

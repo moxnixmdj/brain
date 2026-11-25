@@ -275,8 +275,9 @@
         "PRIORITY_SHIFT_INVARIANCE"
       ],
       "instances": 2000,
-      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__c3b3fba957043735.json",
-      "measured_utc": "2026-10-14T18:21:07Z",
+      "kernel_git_blob_shas": {},
+      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
+      "measured_utc": "2026-11-25T18:28:31Z",
       "oracle_classes": {
         "EVENT_LOG_INTEGRITY": "PROPERTY",
         "LEASE_EXCLUSIVITY": "PROPERTY",
@@ -292,7 +293,7 @@
         "NO guarantee about state files written by anything other than the supervisor itself"
       ],
       "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "ce869c9a7261633021c4b2f0e1501243f6faa042",
+      "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
       "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
