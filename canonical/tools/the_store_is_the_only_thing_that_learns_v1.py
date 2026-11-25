@@ -379,10 +379,13 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--seconds", type=int, default=120)
     parser.add_argument("--arms", default="EMPTY,GENERAL,RAW")
     parser.add_argument("--limit", type=int, default=0)
+    parser.add_argument("--repo", default="", help="only rows from this repository")
     args = parser.parse_args(argv)
 
     corpus = json.loads(args.commits.read_text())
     entries = corpus["tasks"]
+    if args.repo:
+        entries = [e for e in entries if e["repo"] == args.repo]
     if args.limit:
         entries = entries[:args.limit]
     repos = sorted({e["repo"] for e in entries})

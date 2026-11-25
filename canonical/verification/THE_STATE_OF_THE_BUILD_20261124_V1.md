@@ -2,8 +2,11 @@
 
 **Date:** 2026-11-24
 **Branch:** `arena/94363358-brain`, from `c4f529eb`
-**Receipts:** `/tmp/rel/g11.json` (final sweep), `/tmp/rel/denominator_fixed.json` (denominator),
-`/tmp/rel/ablation.json` (three-arm ablation)
+**Receipts (all committed alongside this file):**
+`THE_FINAL_SWEEP_RECEIPT_20261124_V2.json` (45 rows, 8 verified, 1530.4 s),
+`THE_DENOMINATOR_RECEIPT_20261124_V1.json` (41 attemptable of 45),
+`THE_ABLATION_RECEIPT_20261124_V1.json` (three arms, delta +0),
+`THE_TRANSFER_RECEIPT_20261124_V1.json` (packaging 4/9 vs 4/9, row-for-row identical)
 
 ---
 
@@ -27,6 +30,35 @@ that does not exist at the parent commit even after the engine's own overlay pro
 (`TEST_ABSENT`). Counting them as misses would understate the tool; counting only the 8
 would overstate it. 8/41 = 19.5%. The naive 8/45 = 17.8% is the number to quote if a
 single figure is wanted, and both are reported.
+
+---
+
+## 2b. The transfer test: the same bug, four times, in one repository
+
+The strongest possible test of single-experience learning with the material available is
+already in this corpus: **four separate `$` → `\Z` anchor fixes in `packaging`**
+(`189a76d5`, `258202ed`, `8af75907`, `0625596e`) plus two `$`-anchored fixes more. If a
+store is going to transfer anywhere, it is here.
+
+Receipt: `THE_TRANSFER_RECEIPT_20261124_V1.json`, packaging's nine rows:
+
+| arm | verified | skills admitted | row-by-row agreement |
+|---|---|---|---|
+| EMPTY | 4/9 | 0 | — |
+| GENERAL | 4/9 | 4 | **identical, row for row** |
+
+**The store added four admitted skills and changed not one outcome.** Both arms solved the
+same four rows (`189a76d5`, `258202ed`, `8af75907`, `b80e6eb0`) and failed the same five.
+
+The explanation is not that transfer is impossible. It is that these rows are already
+solved by the first attempt, before any skill could be consulted — the engine derives
+`\Z` directly from the run's own rejected string. A store cannot improve on a relation that
+already fires. **The corpus has no row where the store could have helped**, which is a
+fact about the corpus, not a defence of the store.
+
+The honest statement of what would falsify the current conclusion: a corpus of rows that
+the EMPTY arm *fails* and that share an answer with a row it *passes*. That does not exist
+here, and building it is the next real experiment — not more store machinery.
 
 ---
 
@@ -106,7 +138,7 @@ observing.** The other three are "a branch that gives up must not give up for ev
 | criterion | status | evidence |
 |---|---|---|
 | own weights, zero model calls | **PARTIAL** | no model is called (`model_calls=0` is true because none exists); "own weights" is unresolved — the runtime is a Python program with an inspectable store |
-| instant-knowledge store | **FAILS AS A MEMORY** | built, runs, and changes no outcome (§2 above) |
+| instant-knowledge store | **FAILS AS A MEMORY** | built, runs, admits 4 skills on packaging, and changes **0** outcomes row for row (§2b) |
 | hardest SWE benchmark | **NOT MET** | 8/41 on a 45-row corpus of real single-line fixes; no SWE-bench Pro or Terminal-Bench run has ever executed here |
 | hardest computer-use benchmark | **NOT MET** | no GUI perception exists; `computer_use_agent_v1` selects from a 10-row shell table by keyword overlap |
 | never-seen environments | **NOT MET** | no adapter exists |
@@ -121,7 +153,10 @@ observing.** The other three are "a branch that gives up must not give up for ev
 
 From the final sweep's 45 rows:
 
-1. **NO_EDIT_SURVIVED (16 rows, 36%)** — the largest group. An edit was generated and the
+1. **NO_RELATION_READ (17 rows, 38%)** and **NO_EDIT_SURVIVED (11 rows, 24%)** — the two
+   largest groups; gating SIBLING_DISJUNCT moved 5 rows out of NO_EDIT_SURVIVED and the
+   sweep time from 2164 s to 1530 s with no loss of verified rows.
+   The largest group until now was **NO_EDIT_SURVIVED (16 rows, 36%)** — An edit was generated and the
    project's suite rejected it. This is where the store *should* help and does not, because
    the store lacks the generative move.
 2. **NO_RELATION_READ (12 rows, 27%)** — the run's facts did not license any relation I have.
