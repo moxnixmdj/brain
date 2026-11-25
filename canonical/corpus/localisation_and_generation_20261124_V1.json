@@ -1,0 +1,106 @@
+{
+ "schema": "BRAIN_LOCALISATION_AND_GENERATION_V1",
+ "generated": "2026-11-25T15:41:42Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "localisation_s": 12.7,
+  "generation_s": 17.9
+ },
+ "part_one_localisation": {
+  "question": "where does the edit go, when the failure names no source file?",
+  "measured_against": "the files the real commit changed, with tests, docs and changelogs removed",
+  "frame_baseline_V34": {
+   "any": 0,
+   "top1": 0,
+   "found_nothing": 10
+  },
+  "assertion_symbols": {
+   "top1": 3,
+   "any": 3,
+   "found_nothing": 6
+  },
+  "combined_ranked": {
+   "top1": 8,
+   "any_at_5": 10,
+   "found_nothing": 0
+  },
+  "by_source": {
+   "from_assertion_symbols_or_literals": 9,
+   "from_the_largest_module_prior": 1,
+   "from_reachability": 8,
+   "blind": 0
+  },
+  "honest_note": "frame localisation found nothing on 10 of 10. It did not fail to find the fix; on 7 of 10 there was no frame inside the source tree at all, only a bare assert in a test."
+ },
+ "part_two_generation": {
+  "question": "does better localisation buy capability?",
+  "tasks_examined": 12,
+  "not_a_test_failure": 2,
+  "excluded_by_integrity_rule": 2,
+  "denominator": 8,
+  "solved": 3,
+  "resolve_rate": 0.375,
+  "solved_that_change_behaviour": 2,
+  "solved_that_only_change_text": 1,
+  "by_family": {
+   "ATTRIBUTE_SET": 1,
+   "MESSAGE_DEQUOTE": 1,
+   "KEYWORD_APPLY_ALL": 1
+  }
+ },
+ "the_two_that_change_behaviour": [
+  {
+   "sha": "96dfe2ce",
+   "family": "ATTRIBUTE_SET",
+   "what": "bind TOMLDecodeError.__module__ = 'tomli'",
+   "matches_upstream": "partly: upstream writes the same assignment, but in tomli/__init__.py rather than in _parser.py. Same semantic effect, different home."
+  },
+  {
+   "sha": "5ab9ec92",
+   "family": "KEYWORD_APPLY_ALL",
+   "what": "accept, thread and apply parse_float at all three float() sites",
+   "matches_upstream": "structurally yes: same function, same constructor, same call site, same three sites. Style differs."
+  }
+ ],
+ "the_one_that_only_changes_text": {
+  "sha": "31c85a18",
+  "family": "MESSAGE_DEQUOTE",
+  "what": "the message becomes 'Found invalid character  'X' ' -- a double space",
+  "why_it_counts": "its assertion is a containment check on a message, so a whitespace change passes it. Nothing the parser computes changed. This is pattern-matching in disguise and is recorded as such."
+ },
+ "ablation_store_vs_empty": {
+  "with_localisation_seed": 3,
+  "with_empty_store": 3,
+  "difference": 0,
+  "why": "both repositories are small enough that the block scan already reaches every source file, so a seed cannot add what is already there. Localisation 0 -> 8/10 top-1 bought zero solves on this set. The binding constraint is generation, not localisation."
+ },
+ "excluded_by_integrity_rule_detail": {
+  "9f5249fb": "the real fix edits tests/metadata/everything.metadata to declare Metadata-Version 2.6; the assertion is about a fixture's own version string",
+  "e83801f4": "same fixture",
+  "note": "excluded rather than counted as refusals: satisfying them requires editing test data, which the integrity rule forbids"
+ },
+ "the_six_remaining_refusals": {
+  "959bb79c": "the assertion is about how many times _resolve is called (unittest.mock spy); no value or structure is named",
+  "d2fa9238": "control-flow restructuring of union(); the expected behaviour is a policy propagating through _build",
+  "f8f16338": "needs __le__/__ge__ to return identity comparisons in a class whose methods return constants; the boolean operator tried and could not find a single-line form",
+  "9af551b5": "add a module docstring plus an attribute the test reads via tomli.__doc__",
+  "67ec7d10": "every raise must be wrapped in a suffix_location() helper that does not exist yet in the file",
+  "31c85a18": "solved, but only cosmetically"
+ },
+ "defects_found_by_executing_this_round": [
+  "frame-only localisation was blind on 7 of 10 tasks and reported it as 'refused' rather than 'could not see'",
+  "a silent line fallback to 1 turned a missed regex into assert-less analysis",
+  "`'tomli' in text` matched 'tomli._parser' and suppressed the one candidate that worked -- the same substring family as V33's WRONG_STRING",
+  "a name chain was resolved by picking one end instead of trying every name",
+  "an inverted guard skipped exactly the files that needed editing",
+  "pytest truncates expected strings, so the expected value was being read from destroyed text",
+  "one-site edits cannot fix a value that must appear in two lists (second time this has happened)",
+  "a directory test run returned environment collection errors and was counted as a regression",
+  "an f-string with a !r conversion was matched by plain text and the wrong message was edited",
+  "a whitespace-only patch was accepted as a solve until a measure for it existed"
+ ],
+ "what_this_is": "three of eight single-node bugs in two small repositories, with every candidate patch verified by running the tests. It is not a benchmark result and no benchmark row exists or is claimed.",
+ "what_this_is_not": "evidence of generalisation. The remaining five failures are the evidence that matters: they need code to be restructured, helpers that do not exist, or module-level attributes added -- none of which the current operator set can express."
+}

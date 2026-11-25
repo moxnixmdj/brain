@@ -1,0 +1,33 @@
+{
+ "schema": "BRAIN_BLIND_EDIT_SEARCH_V1",
+ "generated": "2026-11-25T16:37:08Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0
+ },
+ "the_hypothesis": "replace one hand-written operator per bug family with ONE generic mechanism that enumerates minimal edits in the file's own vocabulary; if it works, nothing needs to be written per task",
+ "the_mechanism": "localise one file, then apply five blind edit forms -- FLIP (token to its documented opposite), BIND (bind an unbound name to an expression already in the file), GUARD (insert the test's own condition negated, raising the exception it names), REBIND (swap a name for one sharing its tail), QUANTIFIER (a * + or ? inside a string literal changes). Nothing knows what a regex, a licence or a requirement is.",
+ "measured": {
+  "tasks": "the same 6-task ceiling subset whose fixes are at most four source lines",
+  "solved": 0,
+  "resolve_rate": 0.0,
+  "candidates_tried_per_task": 60,
+  "mean_pool_size": 60.0,
+  "duration_s": 115
+ },
+ "calibration": {
+  "what": "the same mechanism on the 3 tasks the hand-written operator set is known to solve",
+  "solved": 0,
+  "reading": "a blind search that cannot re-find a known answer is not evidence about the difficulty of the targets; it is evidence that the mechanism is weaker than the thing it replaces"
+ },
+ "what_went_wrong_along_the_way": [
+  "the quantifier operator only edited literals that round-trip through prefix+quote+value+quote, so it silently skipped every f-string message in the file -- including the one it was written for. Found only because a calibration existed.",
+  "candidate order was family-major, so the noisy FLIP family could exhaust the whole 60-candidate budget before a precise family ran. Fixed by interleaving.",
+  "a python quoting error mangled the first patch of the literal scanner before it applied; the file still imported, so nothing failed loudly."
+ ],
+ "what_this_establishes": "blind minimal edits over a whole file, with a 60-candidate budget, solve nothing on either the ceiling subset or the known-solvable calibration set. The vocabulary is too coarse and the position of the edit within the file is not reachable by token-level search.",
+ "what_this_does_not_establish": "that generic search is impossible. It establishes that THIS generic search does not work, which is enough to stop building it and is more than was known before.",
+ "the_one_thing_that_has_held_for_seven_rounds": "localisation from the assertion: 17 of 28 top-1, 27 within five, no model calls. Every generation mechanism tried on top of it has failed to convert that into a solve.",
+ "no_benchmark_row": "No SWE-bench, Terminal-Bench or OSWorld task has been attempted. No benchmark row exists or is claimed."
+}

@@ -1,0 +1,504 @@
+{
+ "schema": "BRAIN_FAIL_TO_PASS_TASKS_V1",
+ "generated": "2026-11-25T15:49:56Z",
+ "rule": "a commit that changes both a test file and a source file, where the added test fails on the parent as a genuine TEST FAILURE (pytest rc=1) with the checkout on PYTHONPATH",
+ "cost": {
+  "model_calls": 0,
+  "network_at_run_time": 0
+ },
+ "mined": 28,
+ "previously_examined": 23,
+ "never_examined": 5,
+ "rejection_counts": {
+  "pypa/packaging": {
+   "NO_TEST_AND_SOURCE_PAIR": 60,
+   "RC_2": 19,
+   "NO_ADDED_TEST_FUNCTION": 11,
+   "RC_0": 7
+  },
+  "hukkin/tomli": {
+   "NO_TEST_AND_SOURCE_PAIR": 102,
+   "NO_ADDED_TEST_FUNCTION": 10,
+   "RC_0": 3
+  }
+ },
+ "tasks": [
+  {
+   "repo": "pypa/packaging",
+   "sha": "f91ea7931fa551eb498ca2cdf5644dbbf20bcbc6",
+   "parent": "dec6213e562b69ffb680d5b9a82a899fafe4dc02",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestMarker::test_invalid_marker_defers_argument_formatting"
+   ],
+   "added_test_functions": [
+    "test_invalid_marker_defers_argument_formatting",
+    "test_error_subclass_can_initialize_context"
+   ],
+   "source_files": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "f1c57155f97329b1723b3c088dd664f9294f3d25",
+   "parent": "0efe21aa398df645c259ee31e54a8a4400b1fc6b",
+   "test": "tests/test_direct_url.py",
+   "failed_nodes": [
+    "tests/test_direct_url.py::test_pickle_old_dict_state_loads[direct_url0]"
+   ],
+   "added_test_functions": [
+    "test_pickle_roundtrip",
+    "test_pickle_old_dict_state_loads",
+    "test_pickle_old_dict_state_wrong_keys",
+    "test_pickle_from_older_version_loads",
+    "test_pickle_roundtrip",
+    "test_pickle_old_dict_state_loads",
+    "test_pickle_from_older_version_loads"
+   ],
+   "source_files": [
+    "src/packaging/_structures.py",
+    "src/packaging/direct_url.py",
+    "src/packaging/pylock.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "0efe21aa398df645c259ee31e54a8a4400b1fc6b",
+   "parent": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestMarker::test_invalid_marker_syntax_details"
+   ],
+   "added_test_functions": [
+    "test_invalid_marker_syntax_details",
+    "test_invalid_marker_manual_construction",
+    "test_error_syntax_details",
+    "test_error_details_absent_for_non_syntax_error",
+    "test_error_details_pickle",
+    "test_error_manual_construction"
+   ],
+   "source_files": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+   "parent": "ecf963ad0dccf246d1e774c7ede599241e9205b0",
+   "test": "tests/test_ranges.py",
+   "failed_nodes": [
+    "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]"
+   ],
+   "added_test_functions": [
+    "test_copy_and_pickle_preserve_state",
+    "test_copy_and_pickle_subclass_state",
+    "test_pickle_has_no_private_references",
+    "test_copy_and_pickle_extra_slots",
+    "test_copy_and_pickle_state_hooks",
+    "test_copy_and_pickle_recreate_transient_state",
+    "test_copy_and_pickle_preserve_default_setstate",
+    "test_copy_and_pickle_bind_getstate",
+    "test_copy_and_pickle_preserve_custom_reduction"
+   ],
+   "source_files": [
+    "src/packaging/ranges.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc2666f4ab75e028b578b395ba288401",
+   "parent": "8e21512a575ff7cab33e15f77d5f67f278271f07",
+   "test": "tests/test_dependency_groups.py",
+   "failed_nodes": [
+    "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-Group1-group1]"
+   ],
+   "added_test_functions": [
+    "test_cyclic_include_self_with_unnormalized_spelling"
+   ],
+   "source_files": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420c80d4da99eb5c254e7c4acdbabbe30",
+   "parent": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra == \"gpu\"-extras0-True]"
+   ],
+   "added_test_functions": [
+    "test_marker_evaluation",
+    "test_undefined_operator",
+    "test_prepared"
+   ],
+   "source_files": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+   "parent": "a03bde12d560b16b175c336c373040347773ce03",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::test_chaining_associativity_and_str"
+   ],
+   "added_test_functions": [
+    "test_long_chain_round_trips",
+    "test_chain_keeps_mixed_groups"
+   ],
+   "source_files": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d560b16b175c336c373040347773ce03",
+   "parent": "cd91074b050056e2013c08611370abb4138165e7",
+   "test": "tests/test_requirements.py",
+   "failed_nodes": [
+    "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[pickle]"
+   ],
+   "added_test_functions": [
+    "test_requirement_copy_preserves_inner_prereleases",
+    "test_pickle_requirement_state",
+    "test_pickle_requirement_setstate_rejects_bad_prereleases",
+    "test_pickle_requirement_26_4_format_preserves_inner_prereleases"
+   ],
+   "source_files": [
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "cd91074b050056e2013c08611370abb4138165e7",
+   "parent": "15d35165020680d21772aea2a552c00dab30ed11",
+   "test": "tests/test_ranges.py",
+   "failed_nodes": [
+    "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-False]"
+   ],
+   "added_test_functions": [
+    "test_named_literal_prerelease_inside_union_bounds",
+    "test_overlapping_literal_opt_in_survives_narrowing",
+    "test_union_does_not_turn_rejected_literal_into_opt_in"
+   ],
+   "source_files": [
+    "src/packaging/ranges.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f9406aa4578b853bbbcf7af1967d703",
+   "parent": "7f843b213ba9a19b6d2d45be5c1be2397443996b",
+   "test": "tests/test_licenses.py",
+   "failed_nodes": [
+    "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom]"
+   ],
+   "added_test_functions": [
+    "test_licenseref_rejects_kelvin_sign",
+    "test_ascii_licenseref_preserves_spelling"
+   ],
+   "source_files": [
+    "src/packaging/licenses/__init__.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1fb1a8c541a5f0770946983c5d38b8c",
+   "parent": "984e438362464a05da2a4fa31f0497ad7654c4db",
+   "test": "tests/test_metadata.py",
+   "failed_nodes": [
+    "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]"
+   ],
+   "added_test_functions": [
+    "test_subclass_round_trip"
+   ],
+   "source_files": [
+    "src/packaging/metadata.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "31b2d0131910196c9ef494a6ce2d0b12354efad6",
+   "parent": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "test": "tests/test_dependency_groups.py",
+   "failed_nodes": [
+    "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_included_group_errors"
+   ],
+   "added_test_functions": [
+    "test_malformed_group_does_not_hide_included_group_errors",
+    "test_malformed_group_does_not_hide_include_cycle"
+   ],
+   "source_files": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "parent": "80fe325abd60f27b7879efe7caef115ca65a76d7",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-extras]"
+   ],
+   "added_test_functions": [
+    "test_set_valued_marker_rejects_string"
+   ],
+   "source_files": [
+    "src/packaging/markers.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15a85be2c2b07ad5831ed4921429edcb",
+   "parent": "6973aafb53dd00ae0e0bd767f884996bb11d2e99",
+   "test": "tests/test_dependency_groups.py",
+   "failed_nodes": [
+    "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once"
+   ],
+   "added_test_functions": [
+    "test_cycle_error_uses_path_of_current_resolve_call",
+    "test_cached_group_is_not_validated_again"
+   ],
+   "source_files": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "5706b87c213ab3171a6dfbd5e9ff91259d19931c",
+   "parent": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestMarker::test_repeated_serialization_reuses_the_string[python_version >= \"3.10\" and sys_platform == \"linux\"]"
+   ],
+   "added_test_functions": [
+    "test_repeated_serialization_reuses_the_string",
+    "test_combined_markers_have_their_own_serialization",
+    "test_reinitialization_discards_cached_serialization",
+    "test_restoring_state_discards_cached_serialization",
+    "test_pickle_contains_only_the_expression",
+    "test_marker_serialization_reuses_the_string",
+    "test_requirement_serialization_uses_replaced_marker"
+   ],
+   "source_files": [
+    "src/packaging/markers.py",
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "parent": "7464e38990e0e140206051d8ebadd1c2f83239e6",
+   "test": "tests/test_requirements.py",
+   "failed_nodes": [
+    "tests/test_requirements.py::test_replace"
+   ],
+   "added_test_functions": [
+    "test_replace",
+    "test_replace_validates_and_normalizes",
+    "test_replace_keeps_inner_specifier_prereleases",
+    "test_replace_keeps_subclass",
+    "test_replace_subclass_with_init_state",
+    "test_copy_replace"
+   ],
+   "source_files": [
+    "src/packaging/requirements.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2aada00b158feb36109d77dc91d62baa91f7d400",
+   "parent": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+   "test": "tests/test_requirements.py",
+   "failed_nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_on_missing_arbitrary_version[foo===]"
+   ],
+   "added_test_functions": [
+    "test_nonempty_arbitrary_version",
+    "test_error_on_missing_arbitrary_version",
+    "test_empty_arbitrary_version_invalid"
+   ],
+   "source_files": [
+    "src/packaging/specifiers.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+   "parent": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_licenses.py",
+   "failed_nodes": [
+    "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[LicenseRef-mit OR licenseref-MIT-LicenseRef-mit OR LicenseRef-mit]"
+   ],
+   "added_test_functions": [
+    "test_licenseref_case_variants_use_first_spelling"
+   ],
+   "source_files": [
+    "src/packaging/licenses/__init__.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+   "parent": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+   "test": "tests/test_dependency_groups.py",
+   "failed_nodes": [
+    "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once"
+   ],
+   "added_test_functions": [
+    "test_diamond_shaped_dependencies_result_in_one_error",
+    "test_error_in_later_sibling_include_is_collected"
+   ],
+   "source_files": [
+    "src/packaging/dependency_groups.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+   "parent": "f7c930eb18b556930564c1131fde78e576352ddc",
+   "test": "tests/test_markers.py",
+   "failed_nodes": [
+    "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"plain\"-plain]"
+   ],
+   "added_test_functions": [
+    "test_process_python_str_skips_literal_eval_for_plain_string",
+    "test_process_python_str_uses_literal_eval_for_complex_string"
+   ],
+   "source_files": [
+    "src/packaging/_parser.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "parent": "23669b1b69fb5fffbc773a68fc099166fc847356",
+   "test": "tests/test_requirements.py",
+   "failed_nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name @ https://example.com/name.whl-\\n]"
+   ],
+   "added_test_functions": [
+    "test_error_when_url_embeds_line_break"
+   ],
+   "source_files": [
+    "src/packaging/_tokenizer.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69fb5fffbc773a68fc099166fc847356",
+   "parent": "7b898d9f0b343ca06993157fc328d7caad51d5c2",
+   "test": "tests/test_pylock_select.py",
+   "failed_nodes": [
+    "tests/test_pylock_select.py::test_unknown_extras"
+   ],
+   "added_test_functions": [
+    "test_unknown_extras",
+    "test_unknown_groups",
+    "test_unknown_groups_default_groups"
+   ],
+   "source_files": [
+    "src/packaging/pylock.py"
+   ]
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b9426f44455fa1a9e0836f1fc082cc8452",
+   "parent": "4840c3a6817fbd0831f7e520c9a55367472a4a08",
+   "test": "tests/test_ranges.py",
+   "failed_nodes": [
+    "tests/test_ranges.py::TestUnboundedEnds::test_lower_spellings_are_one_bound"
+   ],
+   "added_test_functions": [
+    "test_lower_spellings_are_one_bound",
+    "test_upper_spellings_are_one_bound",
+    "test_lower_ends_order_as_one_value",
+    "test_upper_ends_order_as_one_value"
+   ],
+   "source_files": [
+    "src/packaging/_ranges.py"
+   ]
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc998377f1c2545c7cd4f70ff2a3fb4e4",
+   "parent": "c20c49113890c226ffb27a67befe20d14fcf0c73",
+   "test": "tests/test_misc.py",
+   "failed_nodes": [
+    "tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit"
+   ],
+   "added_test_functions": [
+    "test_key_recursion_limit"
+   ],
+   "source_files": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b06b18005af8bf9078c1d37de5353e1",
+   "parent": "59ed9efb3d6bb7ec71454601a72088b0a6853b8c",
+   "test": "tests/test_error.py",
+   "failed_nodes": [
+    "tests/test_error.py::TestError::test_deprecated_tomldecodeerror"
+   ],
+   "added_test_functions": [
+    "test_deprecated_tomldecodeerror",
+    "test_tomldecodeerror"
+   ],
+   "source_files": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "parent": "facdab0f5aacc5eb223753c42604d5de7bdaee9d",
+   "test": "tests/test_error.py",
+   "failed_nodes": [
+    "tests/test_error.py::TestError::test_type_error"
+   ],
+   "added_test_functions": [
+    "test_type_error"
+   ],
+   "source_files": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "parent": "0eaf93dd85934636f727c43f413a13e06509d2d6",
+   "test": "tests/test_error.py",
+   "failed_nodes": [
+    "tests/test_error.py::TestError::test_invalid_parse_float"
+   ],
+   "added_test_functions": [
+    "test_invalid_parse_float"
+   ],
+   "source_files": [
+    "src/tomli/_parser.py"
+   ]
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "8b962e13490a569d4aab90076451def23ed6c6d8",
+   "parent": "e4da05c35a41a4d53fce7af292b94506b1ea68a7",
+   "test": "tests/test_misc.py",
+   "failed_nodes": [
+    "tests/test_misc.py::TestMiscellaneous::test_incorrect_load"
+   ],
+   "added_test_functions": [
+    "test_incorrect_load"
+   ],
+   "source_files": [
+    "src/tomli/_parser.py"
+   ]
+  }
+ ]
+}

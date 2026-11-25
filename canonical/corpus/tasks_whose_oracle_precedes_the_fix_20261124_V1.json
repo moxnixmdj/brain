@@ -1,0 +1,1047 @@
+{
+ "schema": "BRAIN_TASKS_WHOSE_ORACLE_PRECEDES_THE_FIX_V1",
+ "generated": "2026-11-25T14:08:02Z",
+ "source": "canonical/corpus/real_fix_commits_20261116_V1.json",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "network_during_build": "git clone of the public repos named in the corpus",
+  "duration_s": 34.5
+ },
+ "summary": {
+  "tasks_in_corpus": 89,
+  "by_class": {
+   "PASS": 54,
+   "COLLECTION": 23,
+   "FAIL": 12
+  },
+  "genuine_fail_to_pass_tasks": 12,
+  "usable_share": 0.1348,
+  "verdicts": {
+   "the_corpus_as_stored_overstates_the_testable_tasks": true,
+   "a_majority_are_genuinely_testable": false,
+   "the_recorded_failed_nodes_can_be_failing_nodes": true
+  },
+  "reading": "Each task is reduced by one question: does the test the commit added still fail when it is moved back onto the parent? Only those are fail-to-pass tasks. COLLECTION means the test needs the fix to import, so no solver can be measured on it, and PASS means it was never a bug.",
+  "what_this_does_not_show": "that any solver can solve the genuine tasks. This establishes the task set. The next object is the same list run against a solver."
+ },
+ "per_task": [
+  {
+   "repo": "pypa/packaging",
+   "sha": "46167dcdb1c8ae42c2dd72d3fdb91564be65a0db",
+   "test": "tests/test_ranges.py",
+   "nodes": [
+    "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-copy]",
+    "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-deepcopy]",
+    "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-<lambda>0]",
+    "tests/test_ranges.py::test_copy_and_pickle_preserve_state[False--None-<lambda>1]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.39s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "5a7d3386d2777180a381eb947f21293124ce8df5",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>=",
+    "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,",
+    "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[",
+    "tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version[===arbitrarystring,>="
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.19s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_requirements.py::TestRequirementParsing::test_nonempty_arbitrary_version | (no match in any of [<Class TestRequirementParsing>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "8efde605cc2666f4ab75e028b578b395ba288401",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-Group1-group1]",
+    "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[group1-GROUP1-group1]",
+    "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[a.b-A_B-a-b]",
+    "tests/test_dependency_groups.py::test_cyclic_include_self_with_unnormalized_spelling[a_b-A.B-a-b]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.08s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "7d0611d420c80d4da99eb5c254e7c4acdbabbe30",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra",
+    "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra",
+    "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra",
+    "tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation[set-extra"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.12s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_markers.py::TestExtraSetEvaluation::test_marker_evaluation | (no match in any of [<Class TestExtraSetEvaluation>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "491af5d517cdf6d72c2cf754f6eafd247ab8f559",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::test_chaining_associativity_and_str",
+    "tests/test_markers.py::test_long_chain_round_trips[and_]",
+    "tests/test_markers.py::test_long_chain_round_trips[or_]",
+    "tests/test_markers.py::test_chain_keeps_mixed_groups"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.12s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a03bde12d560b16b175c336c373040347773ce03",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[pickle]",
+    "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[copy]",
+    "tests/test_requirements.py::test_requirement_copy_preserves_inner_prereleases[deepcopy]",
+    "tests/test_requirements.py::test_pickle_requirement_state"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.18s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "cd91074b050056e2013c08611370abb4138165e7",
+   "test": "tests/test_ranges.py",
+   "nodes": [
+    "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-False]",
+    "tests/test_ranges.py::TestPrereleaseRegion::test_named_literal_prerelease_inside_union_bounds[None-True]",
+    "tests/test_ranges.py::TestPrereleaseRegion::test_overlapping_literal_opt_in_survives_narrowing"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.37s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "8c37b0476f9406aa4578b853bbbcf7af1967d703",
+   "test": "tests/test_licenses.py",
+   "nodes": [
+    "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom]",
+    "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[licenseref-Custom\\u212a]",
+    "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[LicenseRef-\\u212austom",
+    "tests/test_licenses.py::test_licenseref_rejects_kelvin_sign[MIT"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "b1c439b0f1fb1a8c541a5f0770946983c5d38b8c",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-False]",
+    "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[False-True]",
+    "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[True-False]",
+    "tests/test_metadata.py::TestMetadata::test_subclass_round_trip[True-True]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.12s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "31b2d0131910196c9ef494a6ce2d0b12354efad6",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_included_group_errors",
+    "tests/test_dependency_groups.py::test_malformed_group_does_not_hide_include_cycle"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.07s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "bddb69038b25b974bdf27d06d500dc05b1f8f97e",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-extras]",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-in-dependency_groups]",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-not",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_rejects_string[-not"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.15s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2d57ce2b15a85be2c2b07ad5831ed4921429edcb",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+    "tests/test_dependency_groups.py::test_cycle_error_uses_path_of_current_resolve_call",
+    "tests/test_dependency_groups.py::test_cached_group_is_not_validated_again"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.06s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "4b243af94ff6885c89b8acd7a22fc5714b18cb96",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::test_replace",
+    "tests/test_requirements.py::test_replace_validates_and_normalizes",
+    "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[False]",
+    "tests/test_requirements.py::test_replace_keeps_inner_specifier_prereleases[True]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.20s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2c87a33f665828b7aa0f650b1b50243b3ab95695",
+   "test": "tests/test_licenses.py",
+   "nodes": [
+    "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[LicenseRef-mit",
+    "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[licenseref-MIT",
+    "tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling[(LICENSEREF-Foo"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.02s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_licenses.py::test_licenseref_case_variants_use_first_spelling | (no match in any of [<Module test_licenses.py>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "0625596e502163179b9a82796aee82c178efc16d",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\nabc-py3-none-any.whl]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "959bb79c06cb883bf1ecd1ddc94a079294907e0f",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once",
+    "tests/test_dependency_groups.py::test_error_in_later_sibling_include_is_collected"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.11s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d17cfaf0b77a5690f03087359e7c8d665a3c728d",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"plain\"-plain]",
+    "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"C:/Program",
+    "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"/Users/name\"-/Users/name]",
+    "tests/test_markers.py::TestNode::test_process_python_str_skips_literal_eval_for_plain_string[\"/home/name\"-/home/name]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.09s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "022ae6c6fe5c2ef9615875d0ecfab1ae4024720f",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files4]",
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_files[license_files5]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.15s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2602dd07d8bd5d6c54a3ce0e212f52eb2e127f3e",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break[name",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_url_embeds_line_break[\\n]"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.17s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_requirements.py::TestRequirementParsing::test_error_when_suffixed_with_line_break | (no match in any of [<Class TestRequirementParsing>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "23669b1b69fb5fffbc773a68fc099166fc847356",
+   "test": "tests/test_pylock_select.py",
+   "nodes": [
+    "tests/test_pylock_select.py::test_unknown_extras",
+    "tests/test_pylock_select.py::test_unknown_groups",
+    "tests/test_pylock_select.py::test_unknown_groups_default_groups"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "55cbf1b9426f44455fa1a9e0836f1fc082cc8452",
+   "test": "tests/test_ranges.py",
+   "nodes": [
+    "tests/test_ranges.py::TestUnboundedEnds::test_lower_spellings_are_one_bound",
+    "tests/test_ranges.py::TestUnboundedEnds::test_upper_spellings_are_one_bound",
+    "tests/test_ranges.py::TestUnboundedEnds::test_lower_ends_order_as_one_value",
+    "tests/test_ranges.py::TestUnboundedEnds::test_upper_ends_order_as_one_value"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.33s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+   "test": "tests/test_pylock_select.py",
+   "nodes": [
+    "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2d873eb6002021a8c007c933fbdab58b37a5079b",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\rAgain]",
+    "tests/test_metadata.py::TestMetadata::test_invalid_summary[Hello\\u2028Again]",
+    "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_carriage_return",
+    "tests/test_metadata.py::TestMetadataWriting::test_headers_fold_every_line_boundary[\\r]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.14s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "826426fc88773515fab149a5f6bde85761e57fbb",
+   "test": "tests/test_pylock_select.py",
+   "nodes": [
+    "tests/test_pylock_select.py::test_empty_tags_selects_sdist_instead_of_host_compatible_wheel",
+    "tests/test_pylock_select.py::test_empty_tags_rejects_wheel_only_lock"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "fe18f139c5b3d73cd9fdd9b25f1eda1b6fd7ba15",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_specifier_set_rejects_parsed_specifier",
+    "tests/test_requirements.py::test_pickle_requirement_setstate_rejects_invalid_string[demo===x,y]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.18s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9c652e4b4ced3c94f133a1b91c726023f0950b4f",
+   "test": "tests/test_pylock_select.py",
+   "nodes": [
+    "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-predicate-false]",
+    "tests/test_pylock_select.py::test_prefer_sdist_predicate[sdist-predicate-true]",
+    "tests/test_pylock_select.py::test_prefer_sdist_predicate[sdist-predicate-true-incompatible-wheel]",
+    "tests/test_pylock_select.py::test_prefer_sdist_predicate[compatible-wheel-no-sdist]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "206834025040aca6f8a2fdfc4039dbfa2a9861a6",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_from_email_unparsed",
+    "tests/test_metadata.py::TestMetadata::test_from_email_collects_unparsed_and_invalid_fields",
+    "tests/test_metadata.py::TestMetadata::test_from_email_collects_required_fields_after_unparsed_known_header",
+    "tests/test_metadata.py::TestMetadata::test_from_email_collects_unknown_and_invalid_fields"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.13s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "abf000549c2ec5b31357046498d6e4f0f9d7d743",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_from_email_description_content_type_lowercase_charset",
+    "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain;",
+    "tests/test_metadata.py::TestMetadata::test_valid_description_content_type[text/plain;"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.12s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9d0ec47b36a1bcdf705b397b84cd89272410a00d",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain\\n",
+    "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain;",
+    "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain;",
+    "tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors[text/plain;"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.11s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_metadata.py::TestMetadata::test_from_email_wraps_description_content_type_parse_errors | (no match in any of [<Class TestMetadata>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "458b0ae53e5a4261df851657d147e590b4546eb2",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_version_with_placeholder_text"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.15s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "30824d9e3b33372a81af5e7a1d7e2ceb95e348c6",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_resolution_collects_invalid_requirement_with_sibling_errors"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.06s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "4c663c9ef5e1ec4f64b01ea9a61c981890a56407",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[extras]",
+    "tests/test_markers.py::TestMarker::test_membership_value_str_normalization[dependency_groups]",
+    "tests/test_markers.py::TestMarker::test_membership_value_str_normalization_negated[extras]",
+    "tests/test_markers.py::TestMarker::test_membership_value_str_normalization_negated[dependency_groups]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.14s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d5fedc90bba333ed0962ba5dfb7072d38f2c1d84",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::test_requirement_slots"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.18s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a0661b5f5c8838af81c5098b2a564e62852decb4",
+   "test": "tests/test_direct_url.py",
+   "nodes": [
+    "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:relative]",
+    "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:./relative]",
+    "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file:]",
+    "tests/test_direct_url.py::test_dir_info_url_requires_absolute_file_url[file://relative]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2c688aa15f65da80defa27e8c91d3bb82a4b5dd6",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-extras]",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[==-dependency_groups]",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[!=-extras]",
+    "tests/test_markers.py::TestMarker::test_set_valued_marker_on_lhs_raises_undefined_comparison[!=-dependency_groups]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.14s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "1b00eeffc6bec070c10e7e6ecf03c03f9789eed2",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[False]",
+    "tests/test_metadata.py::TestRawMetadata::test_description_multipart_payload[True]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.13s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "0a85b41e24c9b55b83f05ae696d73e8294a5b094",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::test_str_preserves_nested_group_precedence"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.10s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "c4fb81ff6eba16fdd24d50e9d9d002fdbece6dd4",
+   "test": "tests/test_ranges.py",
+   "nodes": [
+    "tests/test_ranges.py::TestSetAlgebra::test_difference_requires_matching_policy",
+    "tests/test_ranges.py::TestSetRelations::test_literal_range_subset"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.19s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "84833cc16be84bc7f1d9f64e2818afe0dd48aade",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[-1.0-200-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_sdist_invalid_filename[-1.0.tar.gz]",
+    "tests/test_utils.py::test_parse_sdist_invalid_filename[-1.0.zip]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "fbea07c1f23f182141ca4e2aacf5f82d1c6c9f45",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[==]",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release[!=]",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_when_prefix_match_uses_post_release_without_spaces"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.19s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d2fa92384821919d48eab89bae087b950637d52a",
+   "test": "tests/test_ranges.py",
+   "nodes": [
+    "tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_ranges.py::TestSetAlgebra::test_union_full_preserves_autodetected_prerelease_policy | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.16s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "fbd0d4b4b83ba492ec9d5dd4eaa8e8df33288b1f",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[urllib3[secure]-urllib3[SECURE]]",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all_blue]]",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[all-blue]-fishtank[all---blue]]",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[fishtank[crazy-bunches]-fishtank[cRazy_BUnches]]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.18s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "e80f70f8b164ee4b0ef7634aafe8c6cc4ce00ca3",
+   "test": "tests/test_direct_url.py",
+   "nodes": [
+    "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[FILE:///home/myproject]",
+    "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[File:///home/myproject]",
+    "tests/test_direct_url.py::test_dir_info_url_scheme_file_case_insensitive[file:/home/myproject]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "b19df947aa03658c776e44c3005b9c860d5b5c8d",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_missing_environment_key_raises_undefined_environment_name"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.17s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "07265129295b4b95b9143b50e3ce4709f31a8c49",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_extra_compared_to_variable_not_normalized",
+    "tests/test_markers.py::TestMarker::test_nested_extra_str_normalization"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.16s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "349abfad0688f42eb835ed8a10380d6cbf6940e7",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item0-InvalidDependencyGroupObject-Invalid",
+    "tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance[item1-TypeError-include-group"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.06s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_dependency_groups.py::test_malformed_group_entries_are_not_cached_on_resolver_instance | (no match in any of [<Module test_dependency_groups.py>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "d8e08df11bfa50e987375546eda1f0ee3f27bd41",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo==1.0.0-foo==1.0.0.0]",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo>=1.0-foo>=1.0.0]",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[foo[a]==1.0.0;"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.19s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_is_normalized_name[a--b-a-b]",
+    "tests/test_utils.py::test_is_normalized_name[1--1-1-1]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "08bb047794f4e70b157dacef4538b3a6e3492743",
+   "test": "tests/test_direct_url.py",
+   "nodes": [
+    "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+    "tests/test_direct_url.py::test_to_dict_strip_url_with_at_in_password"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "5c163f5382fb6cba408b7c42efb8a03ffa041f4b",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[True]",
+    "tests/test_requirements.py::test_pickle_requirement_preserves_prereleases[False]",
+    "tests/test_requirements.py::test_pickle_requirement_new_format_preserves_prereleases"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.19s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "9f5249fba27e63745cc9a6bc3f2a7b8f47220a8f",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestRawMetadata::test_complete",
+    "tests/test_metadata.py::TestMetadata::test_from_email",
+    "tests/test_metadata.py::TestMetadata::test_required_fields",
+    "tests/test_metadata.py::TestMetadata::test_raw_data_not_mutated"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_metadata.py::TestRawMetadata::test_complete - AssertionErro... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.15s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "668da8662a112036e4850b68980790cb2d10dae9",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_markers.py::TestDefaultEnvironment::test_multidigit_minor_version | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed, 16 passed in 0.22s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "98b4bfb6828baaf01081aa3a123302fe3020b63a",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::test_and_operator_evaluates_true",
+    "tests/test_markers.py::test_and_operator_str_equality",
+    "tests/test_markers.py::test_or_operator_evaluates_true",
+    "tests/test_markers.py::test_or_operator_str_equality"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.12s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_markers.py::test_and_operator_evaluates_true"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a3b6a1f6c34182414558ad3628814cce1f039004",
+   "test": "tests/test_dependency_groups.py",
+   "nodes": [
+    "tests/test_dependency_groups.py"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_dependency_groups.py::test_expand_contract_model_only_does_inner_lookup_once | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed, 4 passed in 0.12s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "c4d2b3a440873410e92bbb3d247606f978cd3f69",
+   "test": "tests/test_direct_url.py",
+   "nodes": [
+    "tests/test_direct_url.py"
+   ],
+   "class": "PASS",
+   "detail": "...................................                                      [100%] | 35 passed in 0.04s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.11s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "f8f16338e10d5d509ea2a29e0f0cf56baf4be565",
+   "test": "tests/test_structures.py",
+   "nodes": [
+    "tests/test_structures.py::test_infinity_self_comparison",
+    "tests/test_structures.py::test_negative_infinity_self_comparison"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_structures.py::test_infinity_self_comparison - TypeError: '... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.03s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "6da1c50d1354284da3b1cfe3ba6cf495162421ee",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[--",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a]-",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a,b]-",
+    "tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr[-[a1,b1,b2]-"
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.17s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_requirements.py::TestRequirementBehaviour::test_str_and_repr | (no match in any of [<Class TestRequirementBehaviour>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a1f705642e50b79da6be83fb0f6149daa32fc7cc",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT))-((MIT))]",
+    "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((",
+    "tests/test_metadata.py::TestMetadata::test_valid_license_expression[((MIT"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.11s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "e83801f455b056b5bafd6b69a9db1aacdc807bb6",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestRawMetadata::test_complete",
+    "tests/test_metadata.py::TestMetadata::test_from_email",
+    "tests/test_metadata.py::TestMetadata::test_from_email_empty_import_name",
+    "tests/test_metadata.py::TestMetadata::test_required_fields"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_metadata.py::TestRawMetadata::test_complete - assert 26 == 28 | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.13s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "3b20e0fd026f90c0f7094e083d09a70bef86d051",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadataWriting::test_write_metadata",
+    "tests/test_metadata.py::TestMetadataWriting::test_write_metadata_with_description",
+    "tests/test_metadata.py::TestMetadataWriting::test_multiline_license",
+    "tests/test_metadata.py::TestMetadataWriting::test_large"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.11s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "888eb1452625196985701e2727c5416b70e969fd",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementParsing::test_error_no_space_after_url",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_on_legacy_version_outside_triple_equals",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_on_missing_version_after_op",
+    "tests/test_requirements.py::TestRequirementParsing::test_error_on_missing_op_after_name"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.17s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "2680259b4fa88885962e1b6f1cca9d92a3e605ca",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[(",
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[mit",
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[(",
+    "tests/test_metadata.py::TestMetadata::test_invalid_license_expression[("
+   ],
+   "class": "COLLECTION",
+   "detail": "no tests ran in 0.11s | ERROR: not found: /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_metadata.py::TestMetadata::test_invalid_license_expression | (no match in any of [<Class TestMetadata>])"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "a716c52b5f3ca9b4a512f538b80ced8ee01b2775",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[name]",
+    "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[version]",
+    "tests/test_metadata.py::TestMetadata::test_disallowed_dynamic[metadata-version]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.09s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "c385b58c4d0e4d66f5c8273ebb155801c92aadf3",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_python_full_version_untagged_user_provided"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.08s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_markers.py::TestMarker::test_python_full_version_untagged_user_provided"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "3e67fc775e93166600c84a5183ab6a86afff84b5",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_python_full_version_untagged"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.07s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_markers.py::TestMarker::test_python_full_version_untagged"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "09f131b326453f18a217fe34f4f7a77603b545db",
+   "test": "tests/test_metadata.py",
+   "nodes": [
+    "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author]",
+    "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[author_email]",
+    "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[classifiers]",
+    "tests/test_metadata.py::TestMetadata::test_optional_defaults_to_none[description]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.09s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "524b701c6e30fc4da9355117367273f591c6de72",
+   "test": "tests/test_utils.py",
+   "nodes": [
+    "tests/test_utils.py::test_parse_wheel_invalid_filename[foobar-1.x-py3-none-any.whl]",
+    "tests/test_utils.py::test_parse_sdist_invalid_filename[foo-1.x.tar.gz]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.02s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "e8f839f7400253998a07a993420ae308bb4f159d",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::TestRequirementBehaviour::test_equivalent_reqs_equal_hashes_unequal_strings[scikit-learn==1.0.1-scikit_learn==1.0.1]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.19s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "fe8f0bb99c41c5e3a8c2395d4e849c1eff72949c",
+   "test": "tests/test_requirements.py",
+   "nodes": [
+    "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-package]",
+    "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-pAcKaGe]",
+    "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-Package]",
+    "tests/test_requirements.py::test_basic_valid_requirement_parsing[-None-gopher:/foo/com--extras0-foo-bar.quux_bAz]"
+   ],
+   "class": "PASS",
+   "detail": ".                                                                        [100%] | 1 passed in 0.15s"
+  },
+  {
+   "repo": "pypa/packaging",
+   "sha": "55584fb5ca327ba38b74ca5c668125caaebd9a5d",
+   "test": "tests/test_markers.py",
+   "nodes": [
+    "tests/test_markers.py::TestMarker::test_parses_invalid[(python_version"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.05s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/pypa__packaging/tests/test_markers.py::TestMarker::test_parses_invalid"
+  },
+  {
+   "repo": "pallets/itsdangerous",
+   "sha": "7f4dcf83a07bb3d53f4e0e65ef1b43327b4cca90",
+   "test": "tests/test_itsdangerous/test_serializer.py",
+   "nodes": [
+    "tests/test_itsdangerous/test_serializer.py"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!! | 1 error in 0.10s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "1e6e869aa9dbbddc492608944e82d9ad5397280f",
+   "test": "tests/test_misc.py",
+   "nodes": [
+    "tests/test_misc.py::TestMiscellaneous::test_inline_array_recursion_limit"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_misc.py::TestMiscellaneous::test_inline_array_recursion_limit"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "e1fdb94bc998377f1c2545c7cd4f70ff2a3fb4e4",
+   "test": "tests/test_misc.py",
+   "nodes": [
+    "tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_misc.py::TestMiscellaneous::test_key_recursion_limit"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "9eb2125ef49071e673d42e383b5221a268665193",
+   "test": "tests/test_data.py",
+   "nodes": [],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!! | 1 error in 0.08s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "12314bde5b89a8bdc32de7403a2a4cf786187bbc",
+   "test": "tests/test_data.py",
+   "nodes": [],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!! | 1 error in 0.09s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "2a2aa62f1bc71b89b74d41dd2ab67b5dd24bc129",
+   "test": "tests/test_data.py",
+   "nodes": [],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!! | 1 error in 0.09s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "d1d6a8571b06b18005af8bf9078c1d37de5353e1",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::TestError::test_deprecated_tomldecodeerror",
+    "tests/test_error.py::TestError::test_tomldecodeerror"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_error.py::TestError::test_deprecated_tomldecodeerror"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "4e245a4bbbefed99e550e196095ea65c851cf31d",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::TestError::test_type_error"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_error.py::TestError::test_type_error"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "794c8e50d676f1e8e081914eb77e4a48a4f6a20b",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::TestError::test_invalid_parse_float"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_error.py::TestError::test_invalid_parse_float"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "8b962e13490a569d4aab90076451def23ed6c6d8",
+   "test": "tests/test_misc.py",
+   "nodes": [
+    "tests/test_misc.py::TestMiscellaneous::test_incorrect_load"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 error in 0.02s | ERROR: found no collectors for /tmp/brain-corpus-p3gtfmj2/hukkin__tomli/tests/test_misc.py::TestMiscellaneous::test_incorrect_load"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "96dfe2cef79eb4c2a441d5b1b36c3ef357372c9f",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::test_module_name"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_error.py::test_module_name - AssertionError: assert 'tomli.... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.03s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "31c85a18468adbb5f2e892aa96cf0930ac04f93c",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::test_invalid_char_quotes"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_error.py::test_invalid_char_quotes - assert \" '\\\\n' \" in 'F... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.02s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "9af551b578d0bfa9823e986572735a7429ffdf79",
+   "test": "tests/test_misc.py",
+   "nodes": [
+    "tests/test_misc.py::test_own_pyproject"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_misc.py::test_own_pyproject - KeyError: 'project' | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.03s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "9655d330043253c2d10e10865af9f1e56b32feb6",
+   "test": "tests/test_flags.py",
+   "nodes": [
+    "tests/test_flags.py"
+   ],
+   "class": "COLLECTION",
+   "detail": "!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!! | 1 error in 0.10s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "67ec7d10528bd7b00ff1fc62da9a8a1e06406179",
+   "test": "tests/test_error.py",
+   "nodes": [
+    "tests/test_error.py::test_line_and_col",
+    "tests/test_error.py::test_missing_value"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_error.py::test_line_and_col - AssertionError: assert 'Inval... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.03s"
+  },
+  {
+   "repo": "hukkin/tomli",
+   "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+   "test": "tests/test_misc.py",
+   "nodes": [
+    "tests/test_misc.py::test_parse_float"
+   ],
+   "class": "FAIL",
+   "detail": "FAILED tests/test_misc.py::test_parse_float - TypeError: loads() got an unexp... | !!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!! | 1 failed in 0.02s"
+  }
+ ],
+ "why_this_lives_with_the_corpus": "this is a manifest of which corpus entries are usable tasks, not a claim about the system. Placing it beside the corpus it describes keeps one artifact per question: the corpus says what the commits are, this says which of them can be tested, and the verification receipt says what the system did with the testable ones."
+}

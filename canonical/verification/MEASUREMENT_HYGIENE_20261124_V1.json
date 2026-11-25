@@ -1,17 +1,17 @@
 {
  "schema": "BRAIN_MEASUREMENT_HYGIENE_GUARD_V1",
- "generated": "2026-11-25T13:56:40Z",
+ "generated": "2026-11-25T14:09:10Z",
  "cost": {
   "model_calls": 0,
   "stored_parameters": 0,
   "network_at_run_time": 0,
-  "duration_s": 0.18
+  "duration_s": 0.19
  },
  "summary": {
-  "receipts_examined": 2988,
-  "receipts_policed": 35,
+  "receipts_examined": 2990,
+  "receipts_policed": 37,
   "receipts_exempt": 2953,
-  "clean": 20,
+  "clean": 22,
   "findings_by_rule": {
    "MAJORITY_CLASS_WITHOUT_BASELINE": 14,
    "ACCURACY_WITHOUT_SENSITIVITY": 15,
