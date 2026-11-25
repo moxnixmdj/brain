@@ -320,3 +320,66 @@ and **six chosen by me because I recognised their shape**. The tools decide *whe
 edit goes once the shape is known; they do not decide *which row to try*. A benchmark of
 1,865 problems is not reached by a person noticing that a defect looks like one they have
 seen. That gap is the honest result, and it is unchanged by the count.
+
+## Seventh row: `packaging e7ce051e91` — and the row that is not like the others
+
+The message omitted `in` from its list of valid marker operators:
+
+```
+Expected marker operator, one of <=, <, !=, ==, >=, >, ~=, ===, not, not in
+                                                                ^ 'in' is missing
+```
+
+The one-line source edit is byte-identical to the human fix, and the fix's own tests pass
+on my refined tree (3 failed on the parent, **4703 passed** with the edit).
+
+**But the source edit alone breaks the parent's suite.**
+
+| tree | full suite |
+|---|---|
+| parent | **26042 passed** |
+| refined, parent's tests | **3 failed, 26039 passed** |
+
+The 3 failures are `test_error_invalid_marker_notin_without_whitespace`,
+`test_error_when_no_word_boundary`, `test_error_invalid_marker_with_invalid_op` — the
+three tests the human commit also edited, because each asserts the exact error string.
+
+### Why this row is different, and why that matters more than the count
+
+Every previous row had a source edit that **kept the parent's suite green** and turned a
+new test green. This one turns a new test green by making three old tests red, and the
+human's own commit had to carry the test change alongside the source change.
+
+That is a genuine category difference:
+
+- For rows 1–6 the oracle could be applied **after** the fix and the patch validated
+  against the parent's tests as a control.
+- For this row the source fix and the test edit are **one atomic change**. There is no
+  tree that satisfies both old and new tests, so "the suite is green" cannot be used as a
+  validity condition at all.
+
+A benchmark that scores only the source patch would mark the correct fix as a regression.
+This repository has recorded that shape before; here it is concrete, with a commit that
+proves it.
+
+### The ledger question
+
+I am **not** counting this as a solve in the 25, and I am not removing it either. It is
+recorded separately as:
+
+> **1 row where the correct source patch is red against the parent's own suite** —
+> reachable, byte-identical, and *unscorable* without the test patch.
+
+That is a cleaner statement than another integer. It also explains something the ledger
+could not: 3 of the 45 rows have a `DID_NOT_FLIP` or `NO_FALSEY_GUARD` stage not because
+the repair is unreachable, but because a correct repair is *invisible* to a suite that
+asserts the old behaviour.
+
+## Final ledger for this document
+
+| | count |
+|---|---|
+| rows cleared, byte-identical, parent suite stays green | **6** |
+| rows cleared, byte-identical, parent suite goes red (unscorable without test patch) | **1** |
+| total corpus, attemptable | 25 of 41 (**61.0%**) |
+| total corpus, all rows | 25 of 45 (**55.6%**) |
