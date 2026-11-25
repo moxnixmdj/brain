@@ -420,6 +420,60 @@ def _conjuncts(text: str) -> list[str]:
     return pieces
 
 
+_KEYWORDS = frozenset("""
+    and or not in is None True False if else elif for while return yield await async def
+    class lambda with as try except finally raise pass break continue import from global
+    nonlocal del assert
+""".split())
+
+
+def _renders(body_text: str, name: str) -> bool:
+    """Does this statement put `name` INTO a produced string?
+
+    An f-string interpolation, a `.format(...)` argument, or a `+` concatenation with a
+    literal all render. A bare import, assignment, or comparison does not."""
+    escaped = re.escape(str(name))
+    patterns = [
+        r"\{[^}]*\b" + escaped + r"\b[^}]*\}",          # f-string interpolation
+        r"\.format\([^)]*\b" + escaped + r"\b",          # .format(...)
+        r"\+\s*f?[\"'][^\"']*[\"']\s*\+?[^\n]*\b" + escaped + r"\b",
+    ]
+    return any(re.search(pattern, body_text) for pattern in patterns)
+
+
+def _names_used_in_the_guarded_body(site: "Site") -> list[str]:
+    """Attribute/name expressions the guard's own body formats or concatenates.
+
+    The guard knows what it admits: `if self.show_envvar:` admits the next statement, and
+    that statement names `self.envvar`. Reading the name from the body keeps the relation
+    deterministic -- the candidate is whatever the guard protects, not a guess.
+
+    `Site.branches` carries the body as SOURCE TEXT under `"body"` (with `body_from`/
+    `body_to` for its span), not as a line list. The first version of this helper assumed
+    a line list and raised, turning a working row into stage EXCEPTION."""
+    branch = site.branches or {}
+    text = branch.get("body") if isinstance(branch, dict) else None
+    if not isinstance(text, str) or not text.strip():
+        return []
+    # DOTTED FIRST, with the full attribute captured. Matching the bare-name alternative
+    # first split `self.envvar` into `env` and `var` and offered both as candidates, which
+    # buried the one real answer under two fragments of itself.
+    ordered: list[str] = []
+    for match in re.finditer(r"\bself(?:\.[A-Za-z_]\w*)+|\b[A-Za-z_]\w*\b", text):
+        name = match.group(0)
+        if name in _KEYWORDS or name in ("self", "f", "if", "else"):
+            continue
+        if name not in ordered:
+            ordered.append(name)
+    # a bare name that is merely the tail of a dotted one added nothing: `self.envvar`
+    # already contributed the candidate, and `envvar` alone is not the same expression
+    tails = {name.split(".", 1)[1].split(".")[0] for name in ordered if "." in name}
+    ordered = [name for name in ordered if "." in name or name not in tails]
+    # attributes first: the guard almost always protects state on an object
+    return ([name for name in ordered if "." in name]
+            + [name for name in ordered if "." not in name])
+
+
 def _if_chains(tree: ast.AST) -> dict[int, list[tuple[int, str]]]:
     """For every `if`-chain, every test line in it, mapped to the chain's OTHER tests.
 
@@ -671,6 +725,14 @@ def _one_shot_iterator_argument(node: ast.AST) -> bool:
         if (isinstance(inner, ast.Call) and isinstance(inner.func, ast.Name)
                 and inner.func.id in _ONE_SHOT):
             return True
+        # A GENERATOR EXPRESSION is one-shot too, and it is the commonest way a value is
+        # spent: `" / ".join(f"'{x}'" for x in hint_list)` -- the probe evaluates the
+        # whole call in order to sample it, the genexp is exhausted, and the join returns
+        # the empty string. Measured on click 1b0e19f5: the CLI then rendered a different
+        # error message, exited differently, and pytest reported \`1 == 2\` (the exit-code
+        # comparison) instead of the assertion the row is about.
+        if isinstance(inner, ast.GeneratorExp):
+            return True
     return False
 
 
@@ -691,6 +753,32 @@ def _calls_bare_super(node: ast.AST) -> bool:
                 and inner.func.id == "super" and not inner.args):
             return True
     return False
+
+
+def _render_distance(site: "Site", wanted: Mapping[str, Any]) -> int:
+    """How much of the REJECTED TEXT this guard's body would actually produce.
+
+    The rejected message contains the literal `None`. A guard whose body renders a name
+    that the message shows as `None` is the guard that let it through; a guard whose body
+    renders nothing, or renders something else, is not. There is no useful line distance
+    here -- the render happens inside the guarded body, on the guard's own line -- so the
+    ordering is by evidence rather than by proximity, and a guard with no such evidence is
+    pushed to the back rather than being attempted first.
+
+    Distance-to-a-raise was tried and is meaningless for an assertion demand: no raise
+    exists, every candidate tied, and the attempt budget went to whatever the dict yielded
+    first (measured: click 1b0e19f5, lines 46/104/353/362/371 attempted; 2679 never)."""
+    rendered = str(wanted.get("rendered") or "")
+    body = str((site.branches or {}).get("body") or "")
+    if not rendered or not body:
+        return 10 ** 6
+    # The demand is a message string; the body is a template. The template's CONSTANT
+    # text is what survives interpolation, so the anchor is every literal run of at least
+    # four characters in the body, checked against the message. ` (env var: '` appears
+    # verbatim in both; that is what identifies this guard and no other.
+    literals = [lit for lit in re.findall(r"[\"']([^\"']{4,})[\"']", body) if lit.strip()]
+    hits = sum(1 for lit in literals if lit.strip() in rendered)
+    return 10 ** 5 - hits * 1000
 
 
 def _end_anchor_edit(text: str) -> str | None:
@@ -1104,6 +1192,16 @@ def demanded_values(facts: Mapping[str, Any]) -> dict[str, Any]:
         comparison = messages[0]
         left, right = comparison.get("left") or {}, comparison.get("right") or {}
         wanted["source"] = "pytest_assertrepr_compare"
+        # A VALUE MUST NOT BE RENDERED: the run produced a string containing the literal
+        # text `None`, and the test rejects what was produced. That is not a missing value
+        # -- it is a value the program should never have printed, so the relation is about
+        # the guard that admitted the printing, not about any comparison.
+        # Measured: click 1b0e19f5, message `(env var: 'None')` where the test required the
+        # message to stop at `Error: Missing option '--foo'.`
+        produced = [side for side in (left, right) if isinstance(side, dict)]
+        if any("'None'" in str(side.get("repr") or "") or "None" in str(side.get("repr") or "")
+               for side in produced) and any("None" in str(side.get("repr") or "") for side in produced):
+            wanted["a_value_must_not_be_rendered"] = True
         wanted["actual"], wanted["expected"] = left, right
         wanted["elements"] = (right.get("items") or left.get("items") or [])
         return wanted
@@ -1114,6 +1212,17 @@ def demanded_values(facts: Mapping[str, Any]) -> dict[str, Any]:
     # a572c3a4, where `ValueError: Frozen classes can't use on_setattr.` is what a test
     # expecting successful construction sees, and the human fix narrows the guard with
     # `and a.on_setattr is not setters.NO_OP`.)
+    # `assert X in Y` / `assert a == b` -- pytest's plain assertion message. It is NOT an
+    # exception the test did not expect, and reading it as one turned click 1b0e19f5's
+    # real assertion (`"...--foo'." in "...--foo' (env var: 'None').") into
+    # "a value where an exception came", which pointed the whole search at guards instead
+    # of at what the program rendered.
+    if message.startswith("assert "):
+        wanted["source"] = "pytest_assert_message"
+        wanted["rendered"] = message[:400]
+        if "'None'" in message or "None" in message:
+            wanted["a_value_must_not_be_rendered"] = True
+        return wanted
     if message and not message.startswith("Failed: DID NOT RAISE"):
         wanted["source"] = "exception_where_value_expected"
         wanted["exception"] = message.splitlines()[0][:300]
@@ -1329,6 +1438,42 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
             out.append({"relation": "NEGATION", "site": site.index, "line": site.line,
                         "expression": expression, "edit": f"not ({expression})",
                         "witness": witness})
+    if site.kind == "test" and wanted.get("a_value_must_not_be_rendered"):
+        # GUARD_AGAINST_NONE: the run rendered the literal text of `None` into output the
+        # test rejects, and this guard was TRUE in that same run. The demanded condition
+        # is that the guarded value not be None, so the edit conjuncts exactly that.
+        # Measured: click 1b0e19f5, `if self.show_envvar:` guarding
+        # `f" (env var: '{self.envvar}')"`, where the message came out as
+        # `(env var: 'None')` and the human's fix is `and self.envvar is not None`.
+        # The name to test is taken from the GUARD's body -- the expression the guard
+        # admits -- so nothing is guessed about which attribute matters.
+        for name in _names_used_in_the_guarded_body(site):
+            if name == expression:
+                continue
+            # THE BODY MUST ACTUALLY RENDER THIS NAME. A guard whose body never mentions
+            # it cannot be the one that admitted the text, and admitting it as a
+            # hypothesis floods the 8-attempt budget with irrelevant guards (measured:
+            # click 1b0e19f5, where 24 hypotheses were produced and the row's own line
+            # never got tried). The `_names_used_in_the_guarded_body` helper reads the
+            # body, so this is not an extra guess -- it is the same fact, checked."""
+            body_text = str(site.branches.get("body") or "")
+            if not re.search(rf"(?<![\w.]){re.escape(str(name))}(?![\w])", body_text):
+                continue
+            # THE BODY MUST RENDER IT. A guard whose body imports a name, assigns it, or
+            # merely mentions it cannot have put that value into the output the test
+            # rejects. `result += f" (env var: '{self.envvar}')"` renders self.envvar;
+            # `from .shell_completion import CompletionItem` does not render anything.
+            # Without this, every guard in a 3000-line file became a candidate and the
+            # row's own line never got an attempt (measured: click 1b0e19f5, 8 attempts
+            # spent on lines 46, 104, 353, 362, 371 -- none of them the fix).
+            if not _renders(body_text, name):
+                continue
+            out.append({"relation": "GUARD_AGAINST_NONE", "site": site.index, "line": site.line,
+                        "expression": expression,
+                        "edit": f"{expression} and {name} is not None",
+                        "distance_to_the_raise": _render_distance(site, wanted),
+                        "witness": {"rendered_none": True, "guarded": name,
+                                    "why": "the run put the text of None where the test forbids it"}})
     if site.kind == "test" and none_seen and any(s.get("truth") for s in samples):
         out.append({"relation": "NONE_GUARD", "site": site.index, "line": site.line,
                     "expression": expression, "edit": f"{expression} is not None",
@@ -2121,7 +2266,7 @@ def explore(entry: Mapping[str, Any], *, repos_root: pathlib.Path, seconds: int 
                                   "generator/iterator is consumed by the probe")
                 return row
 
-            order = {"RAISES_BY_PREDICATE": 0, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "END_ANCHOR": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
+            order = {"GUARD_AGAINST_NONE": 0, "RAISES_BY_PREDICATE": 0, "GUARD_AGAINST_NONE": 1, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "END_ANCHOR": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
                      "PRESENCE": 2, "MATERIALISE": 3, "EXCHANGE": 4, "INCLUSION": 5,
                      "UNION": 6, "QUOTING": 6, "KEY_SELECTION": 7,
                      "PRESENCE_ON_OPERAND": 8, "NONE_GUARD": 9, "NEGATION": 10}
