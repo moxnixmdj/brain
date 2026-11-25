@@ -1,0 +1,417 @@
+{
+  "attemptable": 41,
+  "counts": {
+    "FAILS_ALONE": 40,
+    "FAILS_IN_FILE": 1,
+    "TEST_ABSENT": 4
+  },
+  "rows": [
+    {
+      "alone_rc": 1,
+      "commit": "1c962d15",
+      "file_rc": 1,
+      "repo": "attrs",
+      "test": "tests/test_annotations.py::TestAnnotations::test_catches_basic_type_conflict",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "3b0378dd",
+      "file_rc": 1,
+      "repo": "attrs",
+      "test": "tests/test_hooks.py::TestTransformHook::test_hook_generator",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "a08bfb90",
+      "file_rc": 1,
+      "repo": "attrs",
+      "test": "tests/test_packaging.py::TestLegacyMetadataHack::test_version[attr]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "a572c3a4",
+      "file_rc": 1,
+      "repo": "attrs",
+      "test": "tests/test_setattr.py::TestSetAttr::test_frozen_on_setattr_nops[nop1]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "1b0e19f5",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_options.py::test_missing_envvar",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "3f91d215",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_types.py::test_path_type_with_esc_sequence",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "40830087",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_options.py::test_missing_required_flag",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "42ee8a1f",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_formatting.py::test_formatting_with_options_metavar_empty",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "4a337ea9",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_commands.py::test_aliased_command_canonical_name",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "bf1e8be9",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_defaults.py::test_flag_default_map",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "d340b0c1",
+      "file_rc": 1,
+      "repo": "click",
+      "test": "tests/test_options.py::test_show_default_with_empty_string[non-string-comparable-object]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "e63b6594",
+      "file_rc": 1,
+      "repo": "httpx",
+      "test": "tests/test_urlparse.py::test_urlparse_ipv4_like_host",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "2eb4542c",
+      "file_rc": 1,
+      "repo": "jinja",
+      "test": "tests/test_filters.py::TestFilter::test_int[1e10000-0]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "d05bd385",
+      "file_rc": 1,
+      "repo": "jinja",
+      "test": "tests/test_regression.py::TestBug::test_pass_context_with_select",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "62411c16",
+      "file_rc": 1,
+      "repo": "more-itertools",
+      "test": "tests/test_more.py::SpyTests::test_immutable",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "71e070b3",
+      "file_rc": 1,
+      "repo": "more-itertools",
+      "test": "tests/test_more.py::AllUniqueTests::test_falsey_key_is_honoured",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "b0aa91ef",
+      "file_rc": 1,
+      "repo": "more-itertools",
+      "test": "tests/test_recipes.py::RandomProductTests::test_list_with_repeat",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "cca32949",
+      "file_rc": 1,
+      "repo": "more-itertools",
+      "test": "tests/test_more.py::LastTests::test_reversed_is_none",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "d3665d6b",
+      "file_rc": 1,
+      "repo": "more-itertools",
+      "test": "tests/test_more.py::SlicedTests::test_numpy_like_array",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "0625596e",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo-1.0-1\\n-py3-none-any.whl]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "08bb0477",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_direct_url.py::test_strip_url[https://user:pa@ss@g.c/user/repo.git-safe_user_passwords2-https://g.c/user/repo.git]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "189a76d5",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_markers.py::TestMarker::test_parses_invalid_trailing_line_break[\\n]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "258202ed",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_utils.py::test_canonicalize_name_invalid[hi\\n-hi\\n]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "553582d9",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_metadata.py::TestMetadata::test_invalid_charset_error_message",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "8af75907",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_utils.py::test_parse_wheel_invalid_filename[foo\\n-1.0-py3-none-any.whl]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "b80e6eb0",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_pylock_select.py::test_lock_no_matching_env[environments0]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "ba17fcea",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_utils.py::test_is_normalized_name[1--1-1-1]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "e7ce051e",
+      "file_rc": 1,
+      "repo": "packaging",
+      "test": "tests/test_requirements.py::TestRequirementParsing::test_error_invalid_marker_notin_without_whitespace",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "4326ced2",
+      "file_rc": 1,
+      "repo": "pluggy",
+      "test": "testing/test_pluginmanager.py::test_set_blocked",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "6abdcf6c",
+      "file_rc": 1,
+      "repo": "pluggy",
+      "test": "testing/test_details.py::test_warn_when_deprecated_args_with_defaults_specified",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "e108fa44",
+      "file_rc": 1,
+      "repo": "pluggy",
+      "test": "testing/test_pluginmanager.py::test_load_setuptools_instantiation[bool-raises]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 4,
+      "commit": "20973f2e",
+      "file_rc": 2,
+      "repo": "starlette",
+      "test": "tests/middleware/test_cors.py::test_cors_allow_origin_regex_fullmatch",
+      "verdict": "TEST_ABSENT",
+      "why": "the named test does not exist at the parent commit"
+    },
+    {
+      "alone_rc": 3,
+      "commit": "223561a8",
+      "file_rc": 3,
+      "repo": "tqdm",
+      "test": "tests/py37_asyncio.py::test_gather",
+      "verdict": "TEST_ABSENT",
+      "why": "the named test does not exist at the parent commit"
+    },
+    {
+      "alone_rc": 3,
+      "commit": "b38a9221",
+      "file_rc": 3,
+      "repo": "tqdm",
+      "test": "tests/tests_tqdm.py::test_format_num",
+      "verdict": "TEST_ABSENT",
+      "why": "the named test does not exist at the parent commit"
+    },
+    {
+      "alone_rc": 0,
+      "commit": "4714836a",
+      "file_rc": -9,
+      "repo": "urllib3",
+      "test": "test/with_dummyserver/test_socketlevel.py::TestSSL::test_ssl_failed_fingerprint_verification",
+      "verdict": "FAILS_IN_FILE",
+      "why": "passes alone but fails with its file"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "644124ec",
+      "file_rc": 1,
+      "repo": "urllib3",
+      "test": "test/test_retry.py::TestRetry::test_retry_default_remove_headers_on_redirect",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "77fa67aa",
+      "file_rc": 1,
+      "repo": "urllib3",
+      "test": "test/test_util.py::TestUtil::test_parse_url_remove_leading_zeros",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "285af2c4",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_test.py::test_redirects_are_tracked",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "351b7319",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_security.py::test_password_hashing",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "352cd716",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_local.py::test_proxy_fallback",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "3a408edf",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_routing.py::test_weighting",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "763609ae",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_security.py::test_pbkdf2",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "8f8507b4",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_http.py::TestHTTPUtility::test_parse_cookie",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    },
+    {
+      "alone_rc": 4,
+      "commit": "d03b9777",
+      "file_rc": 4,
+      "repo": "werkzeug",
+      "test": "tests/test_useragents.py::test_edge_browsers[user_agent1-windows-edge-81.0.416.68-None]",
+      "verdict": "TEST_ABSENT",
+      "why": "the named test does not exist at the parent commit"
+    },
+    {
+      "alone_rc": 1,
+      "commit": "d0f040a6",
+      "file_rc": 1,
+      "repo": "werkzeug",
+      "test": "tests/test_routing.py::test_build_append_unknown_dict[1+2-?v=1%2B2]",
+      "verdict": "FAILS_ALONE",
+      "why": "fails on the parent commit, alone"
+    }
+  ],
+  "schema": "THE_DENOMINATOR_IS_MEASURED_NOT_ASSUMED_V1",
+  "total": 45
+}
