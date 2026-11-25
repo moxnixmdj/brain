@@ -1054,6 +1054,14 @@ def run(env: Any, goal: str, actions: Sequence[Any],
         retrieved = (instant.pop("document_text", None) or instant.get("text")
                      or instant.get("documents") or instant.get("body") or "")
         receipts["steps"]["instant_knowledge"] = instant
+        local_docs = ((instant.get("local_guide") or {}).get("documents") or [])
+        local_docs_text = "\n\n".join(
+            str(d.get("text") or d.get("body") or d.get("excerpt") or "")
+            for d in local_docs
+            if isinstance(d, Mapping)
+        )
+        retrieved = (instant.get("text") or instant.get("documents")
+                     or instant.get("body") or local_docs_text or "")
         closed = _plan_from_document(retrieved, actions, goal)
         receipts["steps"]["document_as_test_suite"] = closed
         if closed.get("status") == "PASS__PLAN_FROM_A_DOCUMENT":
@@ -1424,3 +1432,65 @@ def verify_priors(env: Any, prior_rows: Mapping[str, Mapping[str, str]],
     non_root_rows = sum(len(r or {}) for k, r in prior_rows.items() if k != root_key)
     discarded = dropped + non_root_rows
     return verified, discarded
+
+
+# --------------------------------------------------------------------------- #
+# Unified Causal Scan -> Memory U-IR Diff -> CoW Mental Model + COGS Inventor #
+# --------------------------------------------------------------------------- #
+
+
+def solve_causal_environment(
+    repo_or_env_root: pathlib.Path | str,
+    *,
+    language: str = "python",
+    test_target: str | None = None,
+    custom_test_cmd: list[str] | None = None,
+    law_store_path: pathlib.Path | None = None,
+    enable_law_crystallization: bool = True,
+    sandbox_budget: int = 36,
+    timeout_sec: float = 25.0,
+) -> dict[str, Any]:
+    """Unified entry point for arbitrary unseen software repositories and executable
+    workspaces:
+      1. Goal-directed causal scan (multi-language U-IR + interprocedural lineage),
+      2. Diff against external Semantic Causal Law Store (`SEMANTIC_CAUSAL_LAWS_V1.json`),
+      3. Simulate & invent multi-statement / cross-file fixes via ObsEGraph + Z3 inside
+         the Zero-Copy CoW Executable Mental Model (`model_calls = 0`, `weights = 0`),
+      4. Crystallize newly verified laws into inspectable external memory.
+    """
+    from canonical.swe_kernel.causal_cegis_inventor_v1 import CausalCEGISInventor
+
+    root_path = pathlib.Path(repo_or_env_root).resolve()
+    inventor = CausalCEGISInventor(
+        law_store_path=law_store_path,
+        enable_law_crystallization=enable_law_crystallization,
+        sandbox_budget=sandbox_budget,
+    )
+    res = inventor.solve_repository(
+        root_path,
+        language=language,
+        test_target=test_target,
+        custom_test_cmd=custom_test_cmd,
+        timeout_sec=timeout_sec,
+    )
+    return {
+        "schema": SCHEMA,
+        "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+        "model_calls": 0,
+        "memorized_world_weights": 0,
+        "solved": res.solved,
+        "stage": res.stage,
+        "mechanism": res.mechanism,
+        "modified_files": res.modified_files,
+        "unified_diff": res.unified_diff,
+        "sabotage_verified": res.sabotage_verified,
+        "overfit_falsifier_passed": res.overfit_falsifier_passed,
+        "neighbor_impact_passed": res.neighbor_impact_passed,
+        "crystallized_law_id": res.crystallized_law_id,
+        "candidates_evaluated_in_memory": res.candidates_evaluated_in_memory,
+        "candidates_executed_in_sandbox": res.candidates_executed_in_sandbox,
+        "source_tree_unchanged": res.source_tree_unchanged,
+        "elapsed_ms": res.elapsed_ms,
+        "diagnostics": res.diagnostics,
+    }
+

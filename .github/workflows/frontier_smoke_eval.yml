@@ -25,7 +25,7 @@ jobs:
       - name: Validate task limit
         shell: bash
         env:
-          TASK_LIMIT: ${{ inputs.task_limit }}
+          TASK_LIMIT: ${{ inputs.task_limit || '2' }}
         run: |
           set -euo pipefail
           if [[ ! "$TASK_LIMIT" =~ ^([1-9]|[1-4][0-9]|5[01])$ ]]; then
@@ -35,7 +35,7 @@ jobs:
           echo "TASK_LIMIT=$TASK_LIMIT" >> "$GITHUB_ENV"
           mkdir -p "$GITHUB_WORKSPACE/runs/jobs"
           {
-            echo 'Brain revision: e974b5a0366bf6096623818e0448ab825d84b794'
+            echo "Brain revision: ${{ github.sha }}"
             echo 'Harbor revision: 39c2219a41b3caa7a689cef1882263b5a93ae93f'
             echo 'SWE-bench Pro revision: 66f92766bba642462d4bbe5479e83f91f9211862'
             echo "Selected task count: $TASK_LIMIT"
@@ -48,7 +48,7 @@ jobs:
       - name: Check out requested Brain revision
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
-          ref: e974b5a0366bf6096623818e0448ab825d84b794
+          ref: ${{ github.sha }}
           path: brain
           persist-credentials: false
 
@@ -116,6 +116,49 @@ jobs:
             --ak "source_job=$GITHUB_WORKSPACE/runs/jobs/brain-pro-smoke" \
             --job-name brain-pro-smoke-regrade
 
+      - name: Run official Terminal-Bench 4.0 Harbor Docker smoke (suite=terminal-bench-4)
+        id: tb4_smoke
+        if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
+        working-directory: runs
+        shell: bash
+        env:
+          BRAIN_ALLOW_EXTERNAL_HARBOR_VM_EVAL: '1'
+        run: |
+          set -euo pipefail
+          git clone --no-checkout https://github.com/harbor-framework/terminal-bench.git "$GITHUB_WORKSPACE/tb4-repo"
+          git -C "$GITHUB_WORKSPACE/tb4-repo" checkout --detach 452bf305c6daa62fc59061d22133a7cbc7c1572e
+          mkdir -p "$GITHUB_WORKSPACE/tb4-smoke"
+          for tname in wal-recovery-ordering session-window-debug; do
+            cp -R "$GITHUB_WORKSPACE/tb4-repo/tasks/$tname" "$GITHUB_WORKSPACE/tb4-smoke/$tname"
+          done
+          BRAIN_MOUNTS="$(python -c 'import json,os; print(json.dumps([{"type":"bind","source":os.environ["BRAIN"],"target":"/opt/brain-ro","read_only":True}]))')"
+          harbor run -p "$GITHUB_WORKSPACE/tb4-smoke" -e docker -n 1 \
+            -a canonical.runtime.harbor_epistemic_agent_v1:HarborEpistemicAgent \
+            --ak suite=terminal-bench-4 --ak repo_root=/app --ak "brain_source=$BRAIN" \
+            --mounts "$BRAIN_MOUNTS" \
+            --extra-docker-compose "$GITHUB_WORKSPACE/brain-no-network-compose.yaml" \
+            --job-name brain-tb4-smoke || true
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          jobs = Path('jobs').resolve()
+          tb_rows = []
+          for p in sorted((jobs / 'brain-tb4-smoke').glob('*/result.json')):
+              res = json.loads(p.read_text())
+              tr_p = p.parent / 'agent' / 'brain_epistemic_trace.json'
+              tr = json.loads(tr_p.read_text()) if tr_p.is_file() else {}
+              tb_rows.append({
+                  'task': res.get('task_name'),
+                  'exception': res.get('exception_info'),
+                  'agent_status': tr.get('status'),
+                  'external_status': tr.get('external_harbor_vm_eval_status'),
+                  'rewards': (res.get('verifier_result') or {}).get('rewards'),
+              })
+          tb_audit = {'tb4_rev': '452bf305c6daa62fc59061d22133a7cbc7c1572e', 'rows': tb_rows}
+          (jobs / 'tb4_audit.json').write_text(json.dumps(tb_audit, indent=2) + '\n')
+          print(f"::warning title=HARBOR_TB4_AUDIT::{json.dumps(tb_audit, separators=(',', ':'))}")
+          PY
+
       - name: Reject unsafe artifact paths
         id: artifact_safety
         if: ${{ always() }}
@@ -174,6 +217,7 @@ jobs:
                   trace = json.loads(trace_path.read_text())
                   replay = json.loads(replay_path.read_text())
                   row['patch_bytes'] = patch.stat().st_size
+                  row['agent_status'] = trace.get('status')
                   if trace.get('patch_emitted') is not True or trace.get('external_harbor_vm_eval_status') != 'EXPERIMENTAL_DISPATCH__UNVERIFIED':
                       issues.append(f'{task}:producer_did_not_publish_patch')
                   if row['patch_bytes']:
@@ -186,9 +230,12 @@ jobs:
               verifier = dst.get('verifier_result')
               if not isinstance(verifier, dict) or not isinstance(verifier.get('rewards'), dict) or not verifier['rewards']:
                   issues.append(f'{task}:verifier_result_missing')
+              else:
+                  row['rewards'] = verifier.get('rewards')
           report = {'selected_count': len(ids), 'rows': rows, 'issues': issues,
                     'note': 'Artifact completeness only; no capability or benchmark success claim.'}
           (jobs / 'smoke_audit.json').write_text(json.dumps(report, indent=2) + '\n')
+          print(f"::warning title=HARBOR_SMOKE_AUDIT::{json.dumps(report, separators=(',', ':'))}")
           print(json.dumps(report, indent=2))
           if issues or len(ids) != int(__import__('os').environ['TASK_LIMIT']):
               sys.exit(1)

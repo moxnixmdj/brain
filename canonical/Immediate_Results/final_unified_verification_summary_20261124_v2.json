@@ -1,0 +1,102 @@
+{
+  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V3",
+  "branch": "arena/06dc079e-brain",
+  "model_calls": 0,
+  "inference_spend_usd": 0.0,
+  "memorized_world_facts_in_weights": 0,
+  "automated_pytest_verification": {
+    "suites": 12,
+    "passed": 135,
+    "subtests_passed": 8,
+    "failed": 0,
+    "repo_integrity_guard": "rules=17 violations=0 -> PASS"
+  },
+  "verified_swe_benchmarks": {
+    "blind_packaging_tomli_differential_witness_corpus": {
+      "artifact": "canonical/Immediate_Results/blind_packaging_tomli_differential_witness_20261124_v1.json",
+      "witness_inversion_v1_standalone_baseline": "0/30 (0.0%)",
+      "unmodified_causal_cegis_baseline": "0/12 (0.0%)",
+      "unified_cogs_differential_witness_v1": "6/30 (20.0%)",
+      "solved_commits": [
+        "pypa/packaging@c52d2b3046 (13 sims -> crystallizes uir_law_5e3064259652)",
+        "pypa/packaging@7013a6048f (7 sims, 4.47s, 8251 pytest cases passed)",
+        "pypa/packaging@a6c9bc4dce (6 sims via SEMANTIC_LAW_RECALL:uir_law_5e3064259652 -> 21 sims after surgical remove_law)",
+        "pypa/packaging@e184feef1a (10 sims, 8.73s, 2670 pytest cases passed)",
+        "hukkin/tomli@4e245a4bbb (6 sims, 2.37s -> crystallizes PEP-570 posonly uir_law_482e0e05ed5d)",
+        "hukkin/tomli@96dfe2cef7 (6-12 sims, public re-export __module__ invariant)"
+      ]
+    },
+    "historical_boltons_more_itertools_curriculum": {
+      "artifact": "canonical/Immediate_Results/historical_boltons_more_itertools_transfer_20261124_v1.json",
+      "baseline_before_unification": "0/4 (0.0%)",
+      "unified_cogs_v2": "4/4 (100.0%)",
+      "held_out_external_audit_passed": "4/4 (100.0%)",
+      "cross_issue_law_transfer": {
+        "teacher": "ichunked_zero (more-itertools, 5644-line more.py) -> uir_law_d14dfdade03f",
+        "held_out_student": "chunked_even_zero -> SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f (1st localized candidate)",
+        "o1_surgical_memory_deletion_ablation": "canonical/Immediate_Results/external_memory_surgical_ablation_20261124_v1.json"
+      }
+    },
+    "davegamble_cjson_real_c_commits_blind": {
+      "artifact": "canonical/Immediate_Results/blind_cjson_real_commits_unified_cogs_20261124_v2.json",
+      "baseline_v1": "0/13 (0.0%)",
+      "unified_cogs_v2": "2/13 (15.38%)",
+      "frozen_engine_hashes_identical": true,
+      "solved_commits": [
+        {
+          "commit": "b2890c8d76bbb64e710585ebc0a917196b9c67e7",
+          "subject": "fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)",
+          "simulations": 4,
+          "elapsed_sec": 3.23,
+          "mechanism": "COGS_UIR_Z3_INVENTION",
+          "crystallized_law_id": "uir_law_6e054af54b35",
+          "exact_file_match": true
+        },
+        {
+          "commit": "2f6fc7f0f28b4dab68a3d7fcf447beabefd04afb",
+          "subject": "fix several null pointer problems on allocation failure (#526)",
+          "simulations": 19,
+          "elapsed_sec": 12.65,
+          "mechanism": "COGS_COUPLED_MULTIFILE_INVENTION",
+          "crystallized_law_id": "uir_law_6e054af54b35",
+          "exact_file_match": true
+        }
+      ]
+    },
+    "upstream_click_werkzeug_blind_and_issue_only": {
+      "blind_with_tests": "2/6 (33.33%) solved (werkzeug@051fd66352 in 9 sims, click@05f6fd0df4 in 54 sims; 4/4 remaining localized to rank #2-#4)",
+      "issue_only_zero_test_leakage_base_commit": "2/2 verified solves (werkzeug@051fd66352~1 -> 124/124 held-out tests passed; click@05f6fd0df4~1 -> 116/116 held-out tests passed)"
+    }
+  },
+  "verified_terminal_and_docker_harbor_benchmarks": {
+    "terminal_bench_local_official_verifiers": "6/11 (54.55%) passed, 6/6 (100.0%) committed precision, +60.0% generalized skill probe reduction",
+    "github_actions_docker_harbor_runs": [
+      {
+        "run_id": 45537959351,
+        "job_id": 138949134648,
+        "suite": "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent)",
+        "conclusion": "success",
+        "issues": [],
+        "rewards": [0.0, 0.0]
+      },
+      {
+        "run_id": 45549795585,
+        "job_id": 138987969469,
+        "suites": [
+          "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], 0 trial exceptions)",
+          "terminal-bench-2@2fd12b88 (suite=terminal-bench-4)"
+        ],
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45621009866,
+        "job_id": 139228822848,
+        "suites": [
+          "swebench-pro-v2@66f92766 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], rewards=[0.0, 0.0])",
+          "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e (official Terminal-Bench 4.0 v4.0.0: session-window-debug & wal-recovery-ordering -> exception=null, external_status=EXPERIMENTAL_DISPATCH__UNVERIFIED, baked offline verifiers executed cleanly under network_mode:none with rewards=[0.0, 0.0])"
+        ],
+        "conclusion": "success"
+      }
+    ]
+  }
+}

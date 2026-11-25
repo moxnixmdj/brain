@@ -1,0 +1,79 @@
+{
+  "schema": "HISTORICAL_UPSTREAM_BOLTONS_MORE_ITERTOOLS_TRANSFER_20261124_V1",
+  "model_calls": 0,
+  "baseline_before_unification_solved": 0,
+  "after_unification_solved": 4,
+  "total_cases": 4,
+  "cold_chunked_even_zero": {
+    "simulations": 5,
+    "elapsed_ms": 4285.05,
+    "mechanism": "COGS_REVERSE_PRECONDITION_SYNTHESIS"
+  },
+  "warm_chunked_even_zero_after_ichunked": {
+    "family": "zero_consumption",
+    "case_id": "chunked_even_zero",
+    "solved": true,
+    "corpus_passed": true,
+    "held_out_external_audit_passed": true,
+    "simulations": 5,
+    "elapsed_ms": 19882.08,
+    "crystallized_law_id": "uir_law_b0ccab63e452",
+    "mechanism": "SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f",
+    "model_calls": 0
+  },
+  "cases": [
+    {
+      "family": "boundary",
+      "case_id": "bits_capacity",
+      "solved": true,
+      "corpus_passed": true,
+      "held_out_external_audit_passed": true,
+      "simulations": 9,
+      "elapsed_ms": 3124.93,
+      "crystallized_law_id": "uir_law_0d9cbe454542",
+      "mechanism": "COGS_RELATIONAL_BOUNDARY_SYNTHESIS",
+      "model_calls": 0
+    },
+    {
+      "family": "boundary",
+      "case_id": "unit_boundary",
+      "solved": true,
+      "corpus_passed": true,
+      "held_out_external_audit_passed": true,
+      "simulations": 11,
+      "elapsed_ms": 3673.39,
+      "crystallized_law_id": "uir_law_6eca4feb18f1",
+      "mechanism": "COGS_RELATIONAL_BOUNDARY_SYNTHESIS",
+      "model_calls": 0
+    },
+    {
+      "family": "zero_consumption",
+      "case_id": "ichunked_zero",
+      "solved": true,
+      "corpus_passed": true,
+      "held_out_external_audit_passed": true,
+      "simulations": 6,
+      "elapsed_ms": 21779.58,
+      "crystallized_law_id": "uir_law_d14dfdade03f",
+      "mechanism": "COGS_REVERSE_PRECONDITION_SYNTHESIS",
+      "model_calls": 0
+    },
+    {
+      "family": "zero_consumption",
+      "case_id": "chunked_even_zero",
+      "solved": true,
+      "corpus_passed": true,
+      "held_out_external_audit_passed": true,
+      "simulations": 5,
+      "elapsed_ms": 19882.08,
+      "crystallized_law_id": "uir_law_b0ccab63e452",
+      "mechanism": "SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f",
+      "model_calls": 0
+    }
+  ],
+  "compaction": {
+    "before": 4,
+    "after": 4,
+    "pruned": 0
+  }
+}
