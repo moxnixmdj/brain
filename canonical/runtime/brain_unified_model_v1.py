@@ -948,6 +948,37 @@ class UnifiedModel:
         inputs = dict(inputs or {})
         if requested == "RECALL":
             return self.recall(goal)
+        if requested == "EPISTEMIC":
+            ws_arg = cwd or inputs.get("workspace_dir") or inputs.get("repo_dir")
+            if ws_arg is not None:
+                from canonical.swe_kernel import cross_modal_tomography_petri_v1 as _cmtp
+                from canonical.swe_kernel import epistemic_admission_and_self_play_v1 as _easp
+
+                store_obj = inputs.get("store")
+                if isinstance(store_obj, (str, Path)):
+                    store_obj = _easp.EpistemicStoreV1(Path(store_obj))
+                elif not isinstance(store_obj, _easp.EpistemicStoreV1):
+                    store_obj = _easp.EpistemicStoreV1()
+                ep_res = _cmtp.solve_epistemic_workspace_cow(
+                    workspace_dir=Path(ws_arg),
+                    goal_text=str(goal or ""),
+                    store=store_obj,
+                    pytest_targets=inputs.get("pytest_targets"),
+                    suspect_files=inputs.get("suspect_files"),
+                    timeout_s=float(inputs.get("timeout_s", 35.0)),
+                )
+                return {
+                    "schema": SOLUTION_SCHEMA,
+                    "authority": "NONE",
+                    "non_claims": list(NON_CLAIMS),
+                    "mode": "EPISTEMIC",
+                    "goal": goal,
+                    "status": ep_res.get("status", "UNSOLVED"),
+                    "pass": bool(ep_res.get("pass")),
+                    "epistemic_result": ep_res,
+                    "model_calls": 0,
+                    "parameters_stored": 0,
+                }
         if requested == "SOLVE_OR_LEARN":
             return self.act_or_learn(
                 goal,
