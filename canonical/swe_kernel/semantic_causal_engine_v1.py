@@ -4521,6 +4521,10 @@ def repair_project_causally(
         # Pareto: a containment is kept only if the failing set strictly shrinks, and the run stops
         # the moment the suite is green.
         if spec_module is not None:
+            # An elicitation attempt (re-run each failing node with --tb=long) was measured here and
+            # changed nothing on click@fc518e4: even a long traceback does not show the raise site,
+            # because the interrupt is raised inside the test's own `sys.exit` replacement. Removed
+            # rather than kept as dead runtime (round V7 of the report).
             try:
                 frames = spec_module.mine_escape_frames(base_out, root)
             except Exception:

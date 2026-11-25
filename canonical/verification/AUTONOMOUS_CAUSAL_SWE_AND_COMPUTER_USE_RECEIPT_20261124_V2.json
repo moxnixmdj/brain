@@ -139,6 +139,11 @@
   },
   "stage_f_frame_bound_containment": {
    "earned_a_blind_oss_commit": false,
+   "elicitation_attempt": {
+    "result": "no change (click@fc518e4 OPEN, 27 candidates); removed",
+    "what": "re-run each failing node with --tb=long to elicit the missing frame",
+    "why": "the interrupt is raised inside the test's own sys.exit replacement, so no project frame names it; and the test's second assertion `assert codes == [0, 0]` demands a RETRY, not containment"
+   },
    "measured": {
     "click@f67c2bb": "OPEN",
     "click@fc518e4": "5 -> 2 -> 1 failures (shrink, no repair)",
@@ -242,7 +247,7 @@
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
-   "sha256": "1f6365275e852733de3efdc65139746595a1e9842f21dc58975351f751801f5e"
+   "sha256": "cbd9a90ff9e91ecbec29e2b059e492d95e85c98af4cf67462c6b8a0a4a154390"
   },
   "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
    "bytes": 21011,
@@ -372,7 +377,7 @@
    "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
   }
  ],
- "next_bottleneck": "The frame oracle is incomplete: the residual click@fc518e4 failure raises at core.py:1627, which appears in no traceback pytest printed (short tracebacks hide raise sites). Elicit the missing frames - re-run the failing node in isolation for an unfiltered traceback, and contain the project's own exit calls - rather than adding another guard family.",
+ "next_bottleneck": "Assertion mining. Two independent witnesses now: click@fc518e4 needs `assert codes == [0, 0]` (retry the interrupted statement, a count) and more-itertools@c629214 needs overflow-free comparison for ranges above sys.maxsize (substitute len(self) with the class's own arithmetic). The engine can prove a candidate but has no candidate family derived from the assertion's own comparison.",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",

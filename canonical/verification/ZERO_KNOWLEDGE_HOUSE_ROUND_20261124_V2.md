@@ -371,3 +371,41 @@ candidate 4.74 s; `attrs@3b0378dd66` 30 candidates 23.41 s re-verified with the 
 `11 passed in 51.05 s`. The pass is kept — not because it earns, but because it is Pareto-guarded (a candidate is
 accepted only on a strict shrink of the failing set and never on "looks plausible"), costs nothing to commits that
 already verify, and removes three of four failures on the one commit it reaches. It is recorded as unearned.
+
+## Round V7 — the last frame is not a frame, it is an assertion: `codes == [0, 0]`
+
+The obvious successor to V6 — re-run each failing node with `--tb=long` to elicit the missing frame — was
+implemented and **measured to change nothing** on `click@fc518e4` (OPEN, 27 candidates). Reading the test that
+still fails explains why, and it is not a traceback problem at all:
+
+```python
+def interrupted_exit(code=None):     # monkeypatched over sys.exit
+    codes.append(code)
+    if len(codes) == 1:
+        raise KeyboardInterrupt
+    real_exit(code)
+...
+assert _exit_code(cli, RecordingStderr(), monkeypatch) == 0
+assert codes == [0, 0]
+```
+
+The interrupt is raised inside the *test's own* replacement for `sys.exit`, so no project frame names it. And the
+second assertion states the real contract: the interrupted exit **must be retried**, not merely contained —
+`codes` has to reach `[0, 0]`. A `try/except: pass` yields `[0]`, which is why every containment variant in V5 and
+V6 stopped one test short, however precisely it was bound. The elicitation loop was removed again rather than kept
+as dead runtime; the pass keeps the behaviour that measured as real (strict shrink, never a false repair).
+
+**The next bottleneck, now stated with two independent witnesses.** The engine still cannot read the *assertion*:
+
+| commit | assertion that states the fix | family it demands |
+|---|---|---|
+| `click@fc518e4` | `assert codes == [0, 0]` | retry the interrupted statement (a count, not a boolean) |
+| `more-itertools@c629214` | `self.assertEqual(range1 == range2, expected)` for ranges above `sys.maxsize` | overflow-free comparison: substitute `len(self)` with the class's own arithmetic (`_stop - _start`) |
+
+Both are the same missing mechanism: mine the assertion's comparison (call under test, left and right operands, and
+literal expectations), then synthesize a *value* or a *control-flow* statement that makes it hold — the CEGIS
+engine can already prove a candidate, it just has no candidate family derived from assertions. That is where the
+next round starts.
+
+`click@fc518e4`, `click@f67c2bb`, `pyjwt@af8181c`, `pluggy@50585e0`, `more-itertools@c629214`, `cJSON@6d9f244`,
+`cJSON@9d1b229086`, `click@c53d373` remain OPEN. Tally **10/13 = 76.92%**.
