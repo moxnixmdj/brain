@@ -255,3 +255,38 @@ route to `universal_epistemic_kernel_v1` (every pre-existing front-door test in 
 after the merge), while a bare `cwd` or the COW keys route to main's workspace solver, which is what main's own test
 pins. Neither side's contract was edited; `mode="EPISTEMIC"` is now a dispatcher with two documented arms, and `brain_unified_model_v1.py`
 says so at the branch point.
+
+### 5f. The tree now contains a second ours-vs-frontier document, and it disagrees — so here is the reconciliation
+
+`canonical/tools/FRONTIER_COMPARISON_20261124_V1.md` arrived with main while this merge was being resolved. It
+compares the same two things, over 15 rows, and reaches **frontier 11 / ours 4** where this document reaches
+**ours 10 / frontier 7 / 3 unranked**. Do not average these. The difference is the **scoring rule, not the data**:
+
+| | theirs | this document |
+|---|---|---|
+| a row where one side has a number and the other has none | awarded to the side with the number | `UNRANKED` — a missing measurement is not a loss |
+| our exactness / cost / determinism properties | counted as 4 rows, called *properties not capabilities* | counted as capability rows, because they are falsifiable claims |
+| their finding, in their words | "we win on what we *are*; they win on what we can *do*" | the same pattern: we win exactly where a claim is cheaply and completely falsifiable |
+
+Row-by-row, the two documents agree on everything that matters and differ on one row each:
+
+- **Row 1 is not a contradiction.** They report **0/3** (the `smoke3` report), this document reports **0/51** claimable
+  (§5d, the `hard51` report) — the same engine, different n, both `0.0 %`. Their frontier figure is 89.9 % (Opus 5.5),
+  ours is 99.4 % (Opus 5, board 2026-11-06); both are vendor/board numbers, neither was reproduced here, and at a
+  margin of 90–99 points the split does not move the verdict.
+- **They have a nonzero self-score that this document lacks — and it is not evidenced in the tree.** Their
+  SWE-bench Verified `5/128 = 3.9 %` appears only in their prose: an exhaustive scan of all 10,540 `canonical/**/*.json` files finds no report
+  with `n_tasks: 128` or `resolved: 5`. That matters for what §5d claims. "The first claimable number is 0.0 %" is true
+  of numbers claimable *under a harbor receipt*; if 5/128 is real it must be minted as an artifact with gates before it
+  can be quoted as a score, and until then it is an anecdote — in their favour, which is why it is recorded here rather
+  than left out.
+- **Their oracle measurement undercuts any comfort in our own gates.** `ccd0d333` mutated only the lines the upstream
+  fix changed and re-ran the same failing tests: 16 of 36 mutants **survived (44.44 %)**. So the test-suite oracle is
+  permissive, not harsh — which makes our `0.0 %` harder to explain away, and means nobody should read "oracle arm
+  51/51" as evidence that the oracle discriminates. Our harness gates say the run was *measured*, not that the
+  verifier is sharp; sharpening it is `canonical/tools/oracle_strengthening_v1.py`'s job, not the receipt's.
+- **What to take from theirs:** the real-corpus forensics this document does not have — 10 of 2,422 candidates resolve
+  (0.41 %), 44 % of tasks never get a candidate, perfect selection worth ≤ +2 of 128, and `PASTED_PLAN_VERIFICATION` /
+  `THE_ASSERTION_IS_NOT_A_SPECIFICATION` on why the plan's foundation does not hold.
+- **What to take from this one:** the derived denominator (§5b), the frontier classes we do not track at all and the
+  198 claim lanes nobody enumerated (§5c), and the receipt that turns a 0 % into a measurement (§5d).

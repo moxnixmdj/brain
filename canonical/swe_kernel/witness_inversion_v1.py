@@ -386,7 +386,8 @@ def _interact(node, call, report):
 # the witness
 # --------------------------------------------------------------------------- #
 def capture(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: pathlib.Path,
-            test_name: str, timeout: float = 300.0) -> dict[str, Any]:
+            test_name: str, timeout: float = 300.0,
+            python: str | None = None) -> dict[str, Any]:
     """Run the test under pytest and bring back the live witness the failure left behind."""
     work = pathlib.Path(tempfile.mkdtemp(prefix="witness-", dir=str(repo)))
     try:
@@ -402,7 +403,7 @@ def capture(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: path
         env["WITNESS_OUT"] = str(out)
         node = str(test_file.relative_to(repo)) + "::" + test_name
         try:
-            done = subprocess.run([sys.executable, "-m", "pytest", node, "-q", "--tb=no",
+            done = subprocess.run([python or sys.executable, "-m", "pytest", node, "-q", "--tb=no",
                                    "-p", "witness_plugin", "-p", "no:cacheprovider"],
                                   cwd=str(repo), capture_output=True, text=True, timeout=timeout, env=env)
         except subprocess.TimeoutExpired:
@@ -520,9 +521,9 @@ def judge(repo: pathlib.Path, command: Sequence[str], file_path: pathlib.Path, o
 
 def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: pathlib.Path,
                test_name: str, command: Sequence[str], with_control: bool = True,
-               budget: int = 12) -> dict[str, Any]:
+               budget: int = 12, python: str | None = None) -> dict[str, Any]:
     """One task: witness, invert at every invertible site, verify with the real test, or refuse."""
-    report = capture(repo, targets, test_file, test_name)
+    report = capture(repo, targets, test_file, test_name, python=python)
     sites = list(report.get("sites", []))
     result: dict[str, Any] = {
         "task": "%s::%s" % (test_file.name, test_name),
