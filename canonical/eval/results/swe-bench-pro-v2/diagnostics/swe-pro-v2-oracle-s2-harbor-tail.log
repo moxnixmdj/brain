@@ -1,7 +1,7 @@
 Tip: There are many benchmarks available in Harbor's registry.
 Run `harbor datasets list` to see all available datasets.
 
-  9/9 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:39:43 0:00:00
+  9/9 Mean: 1.000 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 0:41:25 0:00:00
 
 adhoc • oracle
 ┏━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━┓
@@ -17,7 +17,7 @@ adhoc • oracle
 └────────┴───────┘
 
 Job Info
-Total runtime: 39m 43s
+Total runtime: 41m 25s
 Results written to 
 /home/runner/work/brain/brain/work-oracle-2/jobs/swe-pro-v2-oracle-s2/result.jso
 n
