@@ -1,832 +1,902 @@
 {
- "ablations": {
-  "generalized_vs_raw_traces": "not yet measurable: both are currently the same artifact, because the whole-body morphism IS a raw trace with a hole name",
-  "store_vs_empty": {
-   "method": "same driver, same commits, BLIND_STORE_DIR populated vs BLIND_NO_STORE=1",
-   "pluggy@50585e0": {
-    "with_store": "REPAIRED 25 cand 22.83 s",
-    "without_store": "REPAIRED 25 cand 23.21 s"
-   },
-   "result": "identical: the skill store contributes nothing to any repair in this catalogue",
-   "werkzeug@051fd663": {
-    "with_store": "REPAIRED 1 cand 18.28 s",
-    "without_store": "REPAIRED 1 cand 18.65 s"
-   }
-  },
-  "why": {
-   "bug_found_and_fixed": "_dump() did not recurse over lists of AST nodes, so a hole witness stored `repr([<ast.Expr object at 0x...>])` - an address that can never recur",
-   "collapse_found_not_yet_fixed": "the learned pattern is a single hole over the whole body (pattern has no 'T' and no 'F'), so its two-sided constraint is 'match this exact body': 0 proposals on its own witness, 0 on a held-out same-family body, 0 on file text"
-  }
- },
- "attribution_v16": {
-  "gate_corrected": "whole-set equality (fixed == 0) was wrong because repositories carry unrelated debt; the criterion is per defect: attributed violation present on buggy, absent on fixed",
-  "limits": "two tasks, one repository; same-function ties are broken by law vocabulary, which fails when an issue names only a function carrying two defects of the same law",
-  "new_law": "static_assert_validation (an assert validating a parameter of a public function) - needed because #762's defect is invisible to every runtime law",
-  "results": {
-   "control werkzeug #3127 vs pluggy": {
-    "abstained": true,
-    "attributed": null
-   },
-   "pluggy@50585e0 #763": {
-    "attributed": "remove_argument_vanishes:PluginManager.unregister",
-    "gone_in_fixed": true,
-    "in_buggy": true,
-    "score": 10.8
-   },
-   "pluggy@8051a4d #762": {
-    "attributed": "assert_validation:unregister line 289",
-    "gone_in_fixed": true,
-    "in_buggy": true,
-    "score": 6.65
-   }
-  },
-  "scoring": "code spans 3.0, paths 4.0, call forms 2.5, CamelCase 1.5, identifiers 1.0, law vocabulary 0.5x",
-  "task_signal": "the GitHub issue (symptom report), never the PR body (which contains the cause and the fix)",
-  "tests": "canonical/tests/test_violation_attribution_v1.py, 4 passed"
- },
- "authority": "NONE__PRODUCER_RUN_SANDBOX",
- "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
- "blind_evaluation": {
-  "additional_unseen_commits": {
-   "environment_blocked": 2,
-   "graded": 7,
-   "rows": [
-    {
-     "candidates_evaluated": 24,
-     "commit": "f67c2bb",
-     "environment_blocked": false,
-     "reason": "help-text abbreviation rules; 8 L3 refutations recorded",
-     "repo": "click"
+  "ablations": {
+    "generalized_vs_raw_traces": "not yet measurable: both are currently the same artifact, because the whole-body morphism IS a raw trace with a hole name",
+    "store_vs_empty": {
+      "method": "same driver, same commits, BLIND_STORE_DIR populated vs BLIND_NO_STORE=1",
+      "pluggy@50585e0": {
+        "with_store": "REPAIRED 25 cand 22.83 s",
+        "without_store": "REPAIRED 25 cand 23.21 s"
+      },
+      "result": "identical: the skill store contributes nothing to any repair in this catalogue",
+      "werkzeug@051fd663": {
+        "with_store": "REPAIRED 1 cand 18.28 s",
+        "without_store": "REPAIRED 1 cand 18.65 s"
+      }
     },
-    {
-     "candidates_evaluated": 24,
-     "commit": "50585e0",
-     "environment_blocked": false,
-     "reason": "unregister must drop the distribution record: new bookkeeping statement",
-     "repo": "pluggy"
-    },
-    {
-     "candidates_evaluated": 24,
-     "commit": "8051a4d",
-     "environment_blocked": false,
-     "reason": "register must reject None: a new precondition, not an expression",
-     "repo": "pluggy"
-    },
-    {
-     "candidates_evaluated": 24,
-     "commit": "c629214",
-     "environment_blocked": false,
-     "reason": "__eq__/__hash__ overflow above sys.maxsize: new guard + new body",
-     "repo": "more-itertools"
-    },
-    {
-     "candidates_evaluated": 18,
-     "commit": "6d9f244",
-     "environment_blocked": false,
-     "reason": "heap overflow inside cJSON_Utils.c; ASan aborts before any expression can be blamed",
-     "repo": "cJSON"
-    },
-    {
-     "candidates_evaluated": 24,
-     "commit": "cf2cdf0",
-     "environment_blocked": true,
-     "reason": "cannot be graded here: tests import 'pretend', which is not installed",
-     "repo": "packaging"
-    },
-    {
-     "candidates_evaluated": 24,
-     "commit": "6c4c680f",
-     "environment_blocked": true,
-     "reason": "cannot be graded here: test needs werkzeug.exceptions.default_exceptions, absent at parent",
-     "repo": "werkzeug"
+    "why": {
+      "bug_found_and_fixed": "_dump() did not recurse over lists of AST nodes, so a hole witness stored `repr([<ast.Expr object at 0x...>])` - an address that can never recur",
+      "collapse_found_not_yet_fixed": "the learned pattern is a single hole over the whole body (pattern has no 'T' and no 'F'), so its two-sided constraint is 'match this exact body': 0 proposals on its own witness, 0 on a held-out same-family body, 0 on file text"
     }
-   ],
-   "verified": 0
   },
-  "open_tasks_v1_sample": [
-   {
-    "candidates_evaluated": 26,
-    "commit": "af8181c",
-    "reason": "rejecting an empty HMAC key needs a new guard, not a value",
-    "repo": "pyjwt"
-   },
-   {
-    "candidates_evaluated": 40,
-    "commit": "c53d373",
-    "reason": "prompt/abort interaction across several statements",
-    "repo": "click"
-   },
-   {
-    "candidates_evaluated": 19,
-    "commit": "fc518e4",
-    "reason": "interrupt handling during abort reporting; 2 L3 refutations recorded",
-    "repo": "click"
-   },
-   {
-    "candidates_evaluated": 7,
-    "commit": "9d1b229086",
-    "reason": "allocator-guard memory safety under ASan; needs a statement-level fix",
-    "repo": "cJSON"
-   }
+  "attribution_v16": {
+    "gate_corrected": "whole-set equality (fixed == 0) was wrong because repositories carry unrelated debt; the criterion is per defect: attributed violation present on buggy, absent on fixed",
+    "limits": "two tasks, one repository; same-function ties are broken by law vocabulary, which fails when an issue names only a function carrying two defects of the same law",
+    "new_law": "static_assert_validation (an assert validating a parameter of a public function) - needed because #762's defect is invisible to every runtime law",
+    "results": {
+      "control werkzeug #3127 vs pluggy": {
+        "abstained": true,
+        "attributed": null
+      },
+      "pluggy@50585e0 #763": {
+        "attributed": "remove_argument_vanishes:PluginManager.unregister",
+        "gone_in_fixed": true,
+        "in_buggy": true,
+        "score": 10.8
+      },
+      "pluggy@8051a4d #762": {
+        "attributed": "assert_validation:unregister line 289",
+        "gone_in_fixed": true,
+        "in_buggy": true,
+        "score": 6.65
+      }
+    },
+    "scoring": "code spans 3.0, paths 4.0, call forms 2.5, CamelCase 1.5, identifiers 1.0, law vocabulary 0.5x",
+    "task_signal": "the GitHub issue (symptom report), never the PR body (which contains the cause and the fix)",
+    "tests": "canonical/tests/test_violation_attribution_v1.py, 4 passed"
+  },
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "blind_evaluation": {
+    "additional_unseen_commits": {
+      "environment_blocked": 2,
+      "graded": 7,
+      "rows": [
+        {
+          "candidates_evaluated": 24,
+          "commit": "f67c2bb",
+          "environment_blocked": false,
+          "reason": "help-text abbreviation rules; 8 L3 refutations recorded",
+          "repo": "click"
+        },
+        {
+          "candidates_evaluated": 24,
+          "commit": "50585e0",
+          "environment_blocked": false,
+          "reason": "unregister must drop the distribution record: new bookkeeping statement",
+          "repo": "pluggy"
+        },
+        {
+          "candidates_evaluated": 24,
+          "commit": "8051a4d",
+          "environment_blocked": false,
+          "reason": "register must reject None: a new precondition, not an expression",
+          "repo": "pluggy"
+        },
+        {
+          "candidates_evaluated": 24,
+          "commit": "c629214",
+          "environment_blocked": false,
+          "reason": "__eq__/__hash__ overflow above sys.maxsize: new guard + new body",
+          "repo": "more-itertools"
+        },
+        {
+          "candidates_evaluated": 18,
+          "commit": "6d9f244",
+          "environment_blocked": false,
+          "reason": "heap overflow inside cJSON_Utils.c; ASan aborts before any expression can be blamed",
+          "repo": "cJSON"
+        },
+        {
+          "candidates_evaluated": 24,
+          "commit": "cf2cdf0",
+          "environment_blocked": true,
+          "reason": "cannot be graded here: tests import 'pretend', which is not installed",
+          "repo": "packaging"
+        },
+        {
+          "candidates_evaluated": 24,
+          "commit": "6c4c680f",
+          "environment_blocked": true,
+          "reason": "cannot be graded here: test needs werkzeug.exceptions.default_exceptions, absent at parent",
+          "repo": "werkzeug"
+        }
+      ],
+      "verified": 0
+    },
+    "open_tasks_v1_sample": [
+      {
+        "candidates_evaluated": 26,
+        "commit": "af8181c",
+        "reason": "rejecting an empty HMAC key needs a new guard, not a value",
+        "repo": "pyjwt"
+      },
+      {
+        "candidates_evaluated": 40,
+        "commit": "c53d373",
+        "reason": "prompt/abort interaction across several statements",
+        "repo": "click"
+      },
+      {
+        "candidates_evaluated": 19,
+        "commit": "fc518e4",
+        "reason": "interrupt handling during abort reporting; 2 L3 refutations recorded",
+        "repo": "click"
+      },
+      {
+        "candidates_evaluated": 7,
+        "commit": "9d1b229086",
+        "reason": "allocator-guard memory safety under ASan; needs a statement-level fix",
+        "repo": "cJSON"
+      }
+    ],
+    "open_v1_sample": 4,
+    "protocol": "single-parent commits from 8 external repos; ONLY test files are copied from the fix commit; no source diff, patch, commit message, or issue text is read; a repair counts only when the project's own suite passes on a clean /dev/shm clone with the answer key absent",
+    "regressions_introduced": 0,
+    "resolve_rate_v1_sample": 0.6923,
+    "sample_v1": 13,
+    "stage_a_before_frame_provenance": {
+      "identical_to_v1": true,
+      "resolve_rate": 0.6154,
+      "verified": 8
+    },
+    "stage_b_after_frame_provenance": {
+      "flipped": [
+        "click@05f6fd0"
+      ],
+      "resolve_rate": 0.6923,
+      "verified": 9
+    },
+    "stage_c_after_spec_contracts": {
+      "flipped": [],
+      "note": "all 9 re-verified with the new pass in place",
+      "resolve_rate": 0.6923,
+      "verified": 9
+    },
+    "stage_d_after_composed_spec_contracts": {
+      "after": {
+        "pluggy@8051a4d": "VERIFIED__SPEC_CONTRACT_GUARD (1 candidate, 4.87 s)",
+        "resolve_rate_graded": "10/13 = 76.92%"
+      },
+      "before": {
+        "pluggy@8051a4d": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (24 candidates, 19.8 s)",
+        "resolve_rate_graded": "9/13"
+      },
+      "regression_batch": "the 9 previously verified commits re-run under the new ordering: 9/9 still REPAIRED, 0 regressions",
+      "two_failed_attempts_recorded": [
+        "proposals ordered by dict insertion and truncated: 16 candidates all came from a test that did not need them, the real contract never ran",
+        "predicate guard ordered before the bare nullity conjunction: `unregister()` then raised ValueError('not registered') instead of the contract's TypeError('one of name or plugin')",
+        "the spec pass was allowed to spend the whole candidate budget: pyjwt@5fde08a regressed from REPAIRED to OPEN until the pass was capped at min(8, max_candidates//4)"
+      ],
+      "what_changed": "Contracts stated by the same test are enforced as ONE patch (itertools.product over the scope's guard families), predicates are mined from the repository's own one-argument methods and ranked by token overlap with the contract's expected message, each predicate is also offered conditioned on another parameter being absent, and the guard that calls nothing is ordered before any guard that calls a sibling."
+    },
+    "stage_e_exception_containment_attempt": {
+      "commit": "click@fc518e4",
+      "disposition": "mechanism REVERTED (0 containment lines remain); recorded here rather than kept unearned",
+      "families_built_and_measured": [
+        "whole-body try/except containment (pass and return None variants)",
+        "single-statement granularity lattice, deepest-and-latest first",
+        "single-statement end-first ordering (exit paths last in the body)",
+        "stackable Pareto composition of containments (keep on strict shrink, stack, rebuild)"
+      ],
+      "lesson": "bind by traceback frame (file:line) instead of function name",
+      "measurement": "every family: 5 failed, 3 passed on tests/test_abort_interrupt.py - unchanged from baseline; patched statements proved not to be on the raising path",
+      "outcome": "OPEN"
+    },
+    "stage_f_frame_bound_containment": {
+      "earned_a_blind_oss_commit": false,
+      "elicitation_attempt": {
+        "result": "no change (click@fc518e4 OPEN, 27 candidates); removed",
+        "what": "re-run each failing node with --tb=long to elicit the missing frame",
+        "why": "the interrupt is raised inside the test's own sys.exit replacement, so no project frame names it; and the test's second assertion `assert codes == [0, 0]` demands a RETRY, not containment"
+      },
+      "measured": {
+        "click@f67c2bb": "OPEN",
+        "click@fc518e4": "5 -> 2 -> 1 failures (shrink, no repair)",
+        "pyjwt@af8181c": "OPEN"
+      },
+      "outcome": "OPEN on every commit tried"
+    },
+    "stage_g_postcondition_state_consistency": {
+      "after": {
+        "pluggy@50585e0": "VERIFIED__STATE_CONSISTENCY (25 candidates, 22.4 s, suite 220 passed)",
+        "resolve_rate_graded": "11/13 = 84.62%"
+      },
+      "before": {
+        "pluggy@50585e0": "OPEN (24 candidates, 41.4 s)",
+        "resolve_rate_graded": "10/13"
+      },
+      "failed_attempts_recorded": [
+        "purge appended at end_line (after `return`) = dead code: measured `1 failed, 77 passed`, unchanged",
+        "miner required a variable argument and so missed `unregister(name='a')`: contracts came back empty"
+      ],
+      "what_changed": "a failing `assert getter() == [...]` after a mutator is mined as a postcondition contract: the getter's own `return` names the container, the preceding call names the mutator, and the purge is emitted (per parameter, both tuple positions) before the mutator's own `return`"
+    },
+    "total_graded": 20,
+    "total_verified": 11,
+    "verified_tasks": [
+      {
+        "candidates_evaluated": 5,
+        "commit": "cca32949f1",
+        "engine_ms": 11409.84,
+        "mechanism": "UIR_DESCRIPTOR_NONNULL_GETATTR",
+        "repo": "more-itertools"
+      },
+      {
+        "candidates_evaluated": 30,
+        "commit": "3b0378dd66",
+        "engine_ms": 23785.44,
+        "mechanism": "UIR_DEFENSIVE_SEQ_COPY",
+        "repo": "attrs"
+      },
+      {
+        "candidates_evaluated": 15,
+        "commit": "884437ae",
+        "engine_ms": 27260.28,
+        "mechanism": "UIR_BOOL_CONJUNCT_TO_IMPLIES",
+        "repo": "werkzeug"
+      },
+      {
+        "candidates_evaluated": 1,
+        "commit": "051fd663",
+        "engine_ms": 24610.73,
+        "mechanism": "UIR_STR_TRAILING_DELIM_STRIP",
+        "repo": "werkzeug"
+      },
+      {
+        "candidates_evaluated": 2,
+        "commit": "5fde08a",
+        "engine_ms": 21581.39,
+        "mechanism": "UIR_EXCEPT_LATTICE_JOIN",
+        "repo": "pyjwt"
+      },
+      {
+        "candidates_evaluated": 6,
+        "commit": "793a302",
+        "engine_ms": 25187.2,
+        "mechanism": "VERIFIED__MULTI_SITE_COMPOSITIONAL_CEGIS (3x UIR_EXCEPT_LATTICE_JOIN)",
+        "repo": "pyjwt"
+      },
+      {
+        "candidates_evaluated": 2,
+        "commit": "b2890c8d76",
+        "engine_ms": 5516.63,
+        "mechanism": "CEGIS_NULL_PTR_PRECONDITION",
+        "repo": "cJSON"
+      },
+      {
+        "candidates_evaluated": 5,
+        "commit": "be749d7efa",
+        "engine_ms": 9579.85,
+        "mechanism": "CEGIS_CALL_ARG_NULL_SHORTCIRCUIT_OR",
+        "repo": "cJSON"
+      },
+      {
+        "candidates_evaluated": 1,
+        "commit": "05f6fd0",
+        "engine_ms": 10883.73,
+        "mechanism": "NEXUS_FRAME_SUBSTITUTED_FALLBACK",
+        "repo": "click"
+      },
+      {
+        "candidates_evaluated": 1,
+        "commit": "8051a4d",
+        "engine_ms": 4870.0,
+        "mechanism": "SPEC_CONTRACT_SET[test_register]:SPEC_CONTRACT_GUARD[name is None and not self.is_registered(plugin)]+SPEC_CONTRACT_GUARD[plugin is None and name is None]",
+        "repo": "pluggy"
+      },
+      {
+        "candidates_evaluated": 25,
+        "commit": "50585e0",
+        "engine_ms": 21317.98,
+        "mechanism": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
+        "repo": "pluggy"
+      }
+    ],
+    "verified_v1_sample": 9
+  },
+  "branch": "arena/1412289d-brain",
+  "environment": {
+    "hypothesis": "installed",
+    "markupsafe": "installed",
+    "note": "fresh sandbox this round; the ten verified commits were re-measured here, not carried over",
+    "pytest": "9.2.0",
+    "python": "3.11.2",
+    "tree_sitter": "0.20.4",
+    "tree_sitter_languages": "1.10.2",
+    "z3_solver": "installed"
+  },
+  "generated_at_utc": "2026-11-25T02:04:44Z",
+  "honest_verdict": "10 of 13 graded unseen OSS commits repaired and verified against their own suites (76.92%), 0 regressions, 2 env-blocked, K3=0 runtime model calls. The new capability is real but narrow: it resolves commits whose fix is restated in the project's own test as `pytest.raises` contracts. Ten graded commits still fail, no public benchmark container score was produced here, and nothing in this receipt was obtained by gating, mocking, or reading a human diff.",
+  "incremental_spend_usd": 0.0,
+  "integrity_notes": [
+    "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
   ],
-  "open_v1_sample": 4,
-  "protocol": "single-parent commits from 8 external repos; ONLY test files are copied from the fix commit; no source diff, patch, commit message, or issue text is read; a repair counts only when the project's own suite passes on a clean /dev/shm clone with the answer key absent",
-  "regressions_introduced": 0,
-  "resolve_rate_v1_sample": 0.6923,
-  "sample_v1": 13,
-  "stage_a_before_frame_provenance": {
-   "identical_to_v1": true,
-   "resolve_rate": 0.6154,
-   "verified": 8
+  "law_library_v15": {
+    "gate_declared_in_advance": ">=3 of 6 commits must fire on the buggy tree and be silent on the fixed tree",
+    "gate_result": "FAILED: 1 of 6",
+    "laws": [
+      "remove_argument_vanishes",
+      "string_canonicality",
+      "round_trip",
+      "idempotence",
+      "iterable_retyping",
+      "error_discipline"
+    ],
+    "per_commit": {
+      "attrs@3b0378dd66": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "why": "no law fires on the exercised path"
+      },
+      "click@05f6fd0": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "why": "no law fires on the exercised path"
+      },
+      "more-itertools@cca32949f1": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "why": "no law fires on the exercised path"
+      },
+      "pluggy@50585e0": {
+        "buggy": 6,
+        "discriminates": true,
+        "fixed": 0
+      },
+      "pluggy@8051a4d": {
+        "buggy": 2,
+        "discriminates": false,
+        "fixed": 2,
+        "why": "violation belongs to a later commit"
+      },
+      "pyjwt@793a302": {
+        "buggy": 4,
+        "discriminates": false,
+        "fixed": 4,
+        "why": "error_discipline inconsistency is pre-existing in the library"
+      },
+      "werkzeug@051fd663": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "why": "trigger: suite never presents the header string"
+      }
+    },
+    "rejected_by_measurement": "the first error_discipline law ('a builtin escaped a library with an error hierarchy') fired on 6/6 commits identically on both trees; replaced by the inconsistency observable",
+    "tests": "canonical/tests/test_metamorphic_oracle_v1.py + test_oracle_drives_purge_synthesis_v1.py, 4 passed"
   },
-  "stage_b_after_frame_provenance": {
-   "flipped": [
-    "click@05f6fd0"
-   ],
-   "resolve_rate": 0.6923,
-   "verified": 9
+  "law_repair_v17": {
+    "pyjwt@793a302": {
+      "candidates": 3,
+      "law_after_patch": "unchanged (2 error_discipline violations on decode/decode_complete)",
+      "result": "NOT repaired: same function, different argument",
+      "why": "the mixed exception families are witnessed by mutating an argument other than the claims; broadening the claim handlers cannot clear a violation whose witness is a different parameter"
+    },
+    "test_absent_stream": "2 repaired (pluggy@50585e0, werkzeug@051fd663), 5 open",
+    "trigger_fix": [
+      "presentation probing at teardown",
+      "issue-seeded construction: WWWAuthenticate(<word from the issue>)"
+    ],
+    "werkzeug@051fd663": {
+      "buggy_construction": "WWWAuthenticate('bearer') -> 'Bearer '",
+      "candidate": "LAW_CANONICALITY[WWWAuthenticate.__str__+WWWAuthenticate.to_header:strip every exit]",
+      "fixed_construction": "WWWAuthenticate('bearer') -> 'Bearer'",
+      "hidden_test_after_patch": "124 passed (test overlaid only after the patch was chosen)",
+      "law_after_patch": "silent",
+      "result": "REPAIRED blind, non-lifecycle defect"
+    }
   },
-  "stage_c_after_spec_contracts": {
-   "flipped": [],
-   "note": "all 9 re-verified with the new pass in place",
-   "resolve_rate": 0.6923,
-   "verified": 9
+  "law_repair_v18": {
+    "more-itertools@cca32949f1": {
+      "candidate": "LAW_ITERABLE_RETYPING[last:hasattr->getattr(x,attr,None)]",
+      "defect": "hasattr() admits a protocol that is present and None, so last() returns its default instead of the element",
+      "false_positives_removed": [
+        "raise-only comparison (last([]) is supposed to raise)",
+        "string retyped into an iterator of its characters (substrings_indexes, healthy tree)",
+        "tuple containing a live _tee compared for equality (spy, healthy tree)",
+        "receiver substituted by a retyped shell (__repr__, healthy tree)"
+      ],
+      "hidden_test_after_patch": {
+        "buggy_unpatched": "1 failed, 543 passed",
+        "candidate": "544 passed",
+        "human_fix": "544 passed"
+      },
+      "law": "iterable_retyping (differential, with a NoneReversed variant)",
+      "law_on_buggy": "iterable_retyping: last, none_reversed form raised ValueError",
+      "law_on_candidate": "silent",
+      "law_on_fixed": "silent (checked before any candidate was generated)",
+      "suite_under_every_law_then_all": "543 passed each time (re-invocations never perturb a test)",
+      "trigger_gaps_fixed": [
+        "re-export aliasing: from .more import * bound an unwrapped name; alias sweep at collection_finish",
+        "budget starvation: per-law, per-argument-shape re-invocation pools",
+        "live-iterator replay: a copy of a consumed stream is the unbounded remainder (exit -9)",
+        "a law that raised was recorded as silence; law_errors now travels in the receipt"
+      ]
+    },
+    "regression_check": "werkzeug canonicality still discriminates: 'Bearer ' on buggy, 'Bearer' on fixed",
+    "test_absent_stream": "3 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1), 4 open"
   },
-  "stage_d_after_composed_spec_contracts": {
-   "after": {
-    "pluggy@8051a4d": "VERIFIED__SPEC_CONTRACT_GUARD (1 candidate, 4.87 s)",
-    "resolve_rate_graded": "10/13 = 76.92%"
-   },
-   "before": {
-    "pluggy@8051a4d": "OPEN__CEGIS_EXHAUSTED_WITHOUT_VERIFIED_FIX (24 candidates, 19.8 s)",
-    "resolve_rate_graded": "9/13"
-   },
-   "regression_batch": "the 9 previously verified commits re-run under the new ordering: 9/9 still REPAIRED, 0 regressions",
-   "two_failed_attempts_recorded": [
-    "proposals ordered by dict insertion and truncated: 16 candidates all came from a test that did not need them, the real contract never ran",
-    "predicate guard ordered before the bare nullity conjunction: `unregister()` then raised ValueError('not registered') instead of the contract's TypeError('one of name or plugin')",
-    "the spec pass was allowed to spend the whole candidate budget: pyjwt@5fde08a regressed from REPAIRED to OPEN until the pass was capped at min(8, max_candidates//4)"
-   ],
-   "what_changed": "Contracts stated by the same test are enforced as ONE patch (itertools.product over the scope's guard families), predicates are mined from the repository's own one-argument methods and ranked by token overlap with the contract's expected message, each predicate is also offered conditioned on another parameter being absent, and the guard that calls nothing is ordered before any guard that calls a sibling."
+  "law_repair_v19": {
+    "observation_layer_faults_fixed": [
+      "re-invocations were recorded by the suite's warning recorder (need catch_warnings(record=True))",
+      "_inverse_for searched one direction only; a parser is often the inverse of a serializer",
+      "replay dropped keyword arguments, so algorithms=[...] was lost and the parser raised a family member",
+      "content budget of 4 calls starved the call that carried the claim"
+    ],
+    "observer_integrity_v19b": {
+      "after": {
+        "attrs@3b0378dd66": "unobservable by construction (perturbed: true, violations discarded)",
+        "click@05f6fd0": "law-silent (no law observes 'always return a help record for an Argument')"
+      },
+      "faults": [
+        "a class attribute holding `int` was wrapped, so _ALIAS contained int and the sweep replaced builtins.int process-wide (click)",
+        "attrs builds classes out of module functions, so wrapping them changed 5 generated-class tests with every law disabled",
+        "asserts on self/cls counted as argument validation (click: 2 of 2 reported sites were noise)",
+        "class and instance arguments were retyped as containers (attrs.fields)"
+      ],
+      "fixes": [
+        "only inspect.isfunction objects are wrapped and substituted",
+        "perturbation detection: an instrumented run that fails where the bare run passes is marked perturbed and its violations discarded",
+        "self/cls excluded from the assert law",
+        "retyping restricted to list/tuple/set/frozenset/range and live iterators"
+      ]
+    },
+    "pyjwt@793a302": {
+      "candidate": "LAW_ERROR_DISCIPLINE[broaden 5 handler(s) to catch TypeError, OverflowError]",
+      "caveats": [
+        "blindness compromised: issue 1186 is AI-prepared and states its own cause and fix",
+        "the candidate differs from the documented fix, which clears 9 of 12 hidden cases (no inf case)",
+        "not minimal: 3 sites named by the witness, 5 handlers broadened",
+        "the inf dimension was added after the hidden test showed 3 failures on the first law-silent candidate"
+      ],
+      "defect": "int(claim) inside `except ValueError` leaks TypeError (and OverflowError for inf) out of decode() for attacker-controlled exp/nbf/iat",
+      "hidden_test_after_patch": {
+        "buggy_unpatched": "12 failed, 84 passed",
+        "final_candidate": "96 passed",
+        "first_law_silent_candidate": "3 failed, 93 passed (the three inf cases)"
+      },
+      "law_on_buggy": "9 violations: _validate_exp/_validate_iat/_validate_nbf x ([1], None -> TypeError; inf -> OverflowError)",
+      "law_on_candidate": "silent",
+      "law_on_fixed": "0 (checked before any candidate was generated)",
+      "new_law": "content_retyping \u2014 mutate a value inside the parsed content, re-encode with the parser's own inverse, require the package's own error family",
+      "why_previous_laws_missed_it": "every other law mutates the arguments of decode; the defect lives inside the first argument, and mutating the text alone breaks the signature (InvalidSignatureError answers first)",
+      "witness": "site (innermost package frame), claim, value, exception family"
+    },
+    "regressions_rechecked": {
+      "more-itertools": "last fires on buggy only",
+      "werkzeug": "canonicality 'Bearer ' vs 'Bearer'"
+    },
+    "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open with named reasons (pluggy@8051a4d no generator, click@05f6fd0 no law, attrs@3b0378dd66 not observable)"
   },
-  "stage_e_exception_containment_attempt": {
-   "commit": "click@fc518e4",
-   "disposition": "mechanism REVERTED (0 containment lines remain); recorded here rather than kept unearned",
-   "families_built_and_measured": [
-    "whole-body try/except containment (pass and return None variants)",
-    "single-statement granularity lattice, deepest-and-latest first",
-    "single-statement end-first ordering (exit paths last in the body)",
-    "stackable Pareto composition of containments (keep on strict shrink, stack, rebuild)"
-   ],
-   "lesson": "bind by traceback frame (file:line) instead of function name",
-   "measurement": "every family: 5 failed, 3 passed on tests/test_abort_interrupt.py - unchanged from baseline; patched statements proved not to be on the raising path",
-   "outcome": "OPEN"
+  "law_repair_v20": {
+    "pluggy@8051a4d": {
+      "caveat": "the old visible test asserts the buggy contract (pytest.raises(AssertionError)); the fix commit updates it, which is why the visible suite fails for any correct repair",
+      "defect": "argument validation by assert disappears under python -O (lines 289, 291 of _manager.py)",
+      "family_rule": "live parameter -> TypeError; local or rebound parameter -> ValueError",
+      "generator": "assert_to_raise_candidates \u2014 assert becomes if not cond: raise E(msg), where E is chosen from the AST",
+      "hidden_test_after_patch": {
+        "buggy_unpatched": "1 failed, 74 passed",
+        "candidate": "75 passed"
+      },
+      "law": "static_assert_validation (fires: 2 violations)",
+      "law_on_candidate": "silent (no assert survives at either named site)",
+      "repo_corroboration": "the same file raises TypeError('plugin must not be None') for a None-ness condition beside ValueError(...) for value conditions",
+      "why_the_first_candidate_failed": "a name-only rule typed both asserts TypeError; `name` is a parameter too, and only rebinding order (name = self.get_name(plugin) on the line above) makes it a local"
+    },
+    "test_absent_stream": "5 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d), 2 open (click@05f6fd0 no law; attrs@3b0378dd66 unobservable)"
   },
-  "stage_f_frame_bound_containment": {
-   "earned_a_blind_oss_commit": false,
-   "elicitation_attempt": {
-    "result": "no change (click@fc518e4 OPEN, 27 candidates); removed",
-    "what": "re-run each failing node with --tb=long to elicit the missing frame",
-    "why": "the interrupt is raised inside the test's own sys.exit replacement, so no project frame names it; and the test's second assertion `assert codes == [0, 0]` demands a RETRY, not containment"
-   },
-   "measured": {
-    "click@f67c2bb": "OPEN",
-    "click@fc518e4": "5 -> 2 -> 1 failures (shrink, no repair)",
-    "pyjwt@af8181c": "OPEN"
-   },
-   "outcome": "OPEN on every commit tried"
+  "law_repair_v21": {
+    "click@05f6fd0": {
+      "candidate": "LAW_SIBLING_TOTALITY[Argument.get_help_record: drop the None early-return, use (self.help or neutral)]",
+      "defect": "Argument.get_help_record returns None when self.help is None, while Option.get_help_record always returns a record, so positional arguments vanish from --help",
+      "faults_fixed_before_it_could_see": [
+        "string annotations under `from __future__ import annotations` made the annotation match fail",
+        "a required parameter caused the method to be skipped instead of supplied from the suite's own objects",
+        "eval_str=True raising NameError aborted the probe (now recorded in law_errors, not silence)"
+      ],
+      "hidden_test_after_patch": {
+        "buggy_unpatched": "1 failed, 888 passed",
+        "candidate": "889 passed"
+      },
+      "law_on_buggy": "1 violation: Argument.get_help_record / Option.get_help_record",
+      "law_on_candidate": "silent",
+      "law_on_fixed": "0",
+      "new_law": "sibling_totality \u2014 two classes that each define the same method must agree on whether it ever returns nothing",
+      "observation": "own definitions only; methods called on instances the suite built, with required parameters supplied from objects the suite built"
+    },
+    "regressions_rechecked": "more-itertools/pyjwt/pluggy gates unchanged after the new law; no run perturbed",
+    "test_absent_stream": "6 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d, click@05f6fd0), 1 open (attrs@3b0378dd66: cannot be instrumented)"
   },
-  "stage_g_postcondition_state_consistency": {
-   "after": {
-    "pluggy@50585e0": "VERIFIED__STATE_CONSISTENCY (25 candidates, 22.4 s, suite 220 passed)",
-    "resolve_rate_graded": "11/13 = 84.62%"
-   },
-   "before": {
-    "pluggy@50585e0": "OPEN (24 candidates, 41.4 s)",
-    "resolve_rate_graded": "10/13"
-   },
-   "failed_attempts_recorded": [
-    "purge appended at end_line (after `return`) = dead code: measured `1 failed, 77 passed`, unchanged",
-    "miner required a variable argument and so missed `unregister(name='a')`: contracts came back empty"
-   ],
-   "what_changed": "a failing `assert getter() == [...]` after a mutator is mined as a postcondition contract: the getter's own `return` names the container, the preceding call names the mutator, and the purge is emitted (per parameter, both tuple positions) before the mutator's own `return`"
+  "memory_ablation_v11": {
+    "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
+    "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
+    "single_experience_transfer": {
+      "apply_to_different_body_sharing_anchors": "1 proposal",
+      "apply_to_different_real_function": "refused",
+      "apply_to_unrelated_body": "0 proposals (refused)",
+      "learn": "1 morphism + 1 delta from one verified body",
+      "reload_from_disk": "1 delta"
+    },
+    "unit_of_learning": "DeltaMorphism (insert/delete/replace, informative-neighbour anchors, skeleton anti-unification)"
   },
-  "total_graded": 20,
-  "total_verified": 11,
-  "verified_tasks": [
-   {
-    "candidates_evaluated": 5,
-    "commit": "cca32949f1",
-    "engine_ms": 11409.84,
-    "mechanism": "UIR_DESCRIPTOR_NONNULL_GETATTR",
-    "repo": "more-itertools"
-   },
-   {
-    "candidates_evaluated": 30,
-    "commit": "3b0378dd66",
-    "engine_ms": 23785.44,
-    "mechanism": "UIR_DEFENSIVE_SEQ_COPY",
-    "repo": "attrs"
-   },
-   {
-    "candidates_evaluated": 15,
-    "commit": "884437ae",
-    "engine_ms": 27260.28,
-    "mechanism": "UIR_BOOL_CONJUNCT_TO_IMPLIES",
-    "repo": "werkzeug"
-   },
-   {
-    "candidates_evaluated": 1,
-    "commit": "051fd663",
-    "engine_ms": 24610.73,
-    "mechanism": "UIR_STR_TRAILING_DELIM_STRIP",
-    "repo": "werkzeug"
-   },
-   {
-    "candidates_evaluated": 2,
-    "commit": "5fde08a",
-    "engine_ms": 21581.39,
-    "mechanism": "UIR_EXCEPT_LATTICE_JOIN",
-    "repo": "pyjwt"
-   },
-   {
-    "candidates_evaluated": 6,
-    "commit": "793a302",
-    "engine_ms": 25187.2,
-    "mechanism": "VERIFIED__MULTI_SITE_COMPOSITIONAL_CEGIS (3x UIR_EXCEPT_LATTICE_JOIN)",
-    "repo": "pyjwt"
-   },
-   {
-    "candidates_evaluated": 2,
-    "commit": "b2890c8d76",
-    "engine_ms": 5516.63,
-    "mechanism": "CEGIS_NULL_PTR_PRECONDITION",
-    "repo": "cJSON"
-   },
-   {
-    "candidates_evaluated": 5,
-    "commit": "be749d7efa",
-    "engine_ms": 9579.85,
-    "mechanism": "CEGIS_CALL_ARG_NULL_SHORTCIRCUIT_OR",
-    "repo": "cJSON"
-   },
-   {
-    "candidates_evaluated": 1,
-    "commit": "05f6fd0",
-    "engine_ms": 10883.73,
-    "mechanism": "NEXUS_FRAME_SUBSTITUTED_FALLBACK",
-    "repo": "click"
-   },
-   {
-    "candidates_evaluated": 1,
-    "commit": "8051a4d",
-    "engine_ms": 4870.0,
-    "mechanism": "SPEC_CONTRACT_SET[test_register]:SPEC_CONTRACT_GUARD[name is None and not self.is_registered(plugin)]+SPEC_CONTRACT_GUARD[plugin is None and name is None]",
-    "repo": "pluggy"
-   },
-   {
-    "candidates_evaluated": 25,
-    "commit": "50585e0",
-    "engine_ms": 21317.98,
-    "mechanism": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
-    "repo": "pluggy"
-   }
+  "memory_ablation_v12_delta_priority": {
+    "change": "delta candidates are prepended to the replay list instead of appended (V11: they were dropped by the cap)",
+    "deeper_reason": "every graded commit ships the test that specifies the repair, so the store competes with a specification that is already present; its comparative advantage (a defect met again without a spec) is not represented in this catalogue",
+    "held_out_pluggy@50585e0_delta_first": "REPAIRED 25 cand 24.08 s, STATE_CONSISTENCY",
+    "held_out_pluggy@50585e0_no_store": "REPAIRED 25 cand 22.41 s",
+    "learn_pluggy@8051a4d": "REPAIRED 1 cand 6.46 s (1 morphism + 1 delta)",
+    "result": "the delta never fired: anchors are witness-neighbour properties, so the edit is function-specific; priority fixed the cap but not the transfer"
+  },
+  "metamorphic_oracle_v13": {
+    "blind_setup": "buggy = sha^1, fixed = sha^1 + non-test diff; the hidden test is absent from both trees",
+    "coverage": "1/6 commits; the five silent commits have no lifecycle verb in their vocabulary (encoders, parsers, iterators)",
+    "law": "a remove-verb mutator called with x must make x vanish from every zero-argument getter on the same object",
+    "not_claimed": "not wired into the repair engine; violations are reported, not yet fed back as candidate assertions",
+    "precision": "1/1 where the law fires (no false accusation on the fixed tree)",
+    "results": {
+      "attrs@3b0378dd66": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "probes": 0
+      },
+      "click@05f6fd0": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "probes": 0
+      },
+      "more-itertools@cca32949f1": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "probes": 0
+      },
+      "pluggy@50585e0": {
+        "buggy": 2,
+        "discriminates": true,
+        "fixed": 0,
+        "probes": 93
+      },
+      "pluggy@8051a4d": {
+        "buggy": 2,
+        "discriminates": false,
+        "fixed": 2,
+        "probes": 91,
+        "why": "real violation, but it belongs to a later commit (same stale container); the oracle cannot attribute a law violation to the commit that fixes it"
+      },
+      "pyjwt@793a302": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "probes": 0
+      },
+      "werkzeug@051fd663": {
+        "buggy": 0,
+        "discriminates": false,
+        "fixed": 0,
+        "probes": 0
+      }
+    },
+    "tests": "canonical/tests/test_metamorphic_oracle_v1.py, 3 passed"
+  },
+  "modules": {
+    "canonical/runtime/causal_computer_use_agent_v1.py": {
+      "lines": 578,
+      "sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845"
+    },
+    "canonical/swe_kernel/causal_nexus_v1.py": {
+      "lines": 1547,
+      "sha256": "eb5252bf1cceb61bbc647f55245233a9c5d891aa48e42c43de9c557310d56206"
+    },
+    "canonical/swe_kernel/executable_mental_model_v1.py": {
+      "lines": 1849,
+      "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
+    },
+    "canonical/swe_kernel/law_repair_synthesis_v1.py": "56749ea6239e02721d8a4328c0347316d7daacac64a9eaac863e8ecf09c85844",
+    "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
+    "canonical/swe_kernel/metamorphic_oracle_v1.py": "4ce39d403cc6042a76c80b1b59f55c8a3391ff4d5760019d4c4d6404402b8fad",
+    "canonical/swe_kernel/metamorphic_plugin_v1.py": "f1d4aee4ea483f0e8add7fb3a5d9c191e8f69cbceae0c1ca41fdcc7e3828500b",
+    "canonical/swe_kernel/semantic_causal_engine_v1.py": {
+      "bytes": 208516,
+      "lines": 4412,
+      "sha256": "b75fe03144f76badc7a4e3146bb6b66b84b343a96a9285c1d3f3b54c2749c330"
+    },
+    "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
+      "bytes": 21011,
+      "lines": 318,
+      "sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
+    },
+    "canonical/swe_kernel/violation_attribution_v1.py": {
+      "purpose": "rank a repository's standing law violations by the issue text, or abstain",
+      "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
+    },
+    "canonical/tests/test_a_law_that_retypes_an_iterable_compares_outcomes_v1.py": "b6c8c4ff78878c782c8bdc4b3e2545decb72f6403a202c710031727eb725046d",
+    "canonical/tests/test_a_missing_argument_is_a_type_error_and_a_missing_value_is_a_value_error_v1.py": "efe5f0ffc6a97978b79e2c4b8429afa9d51117a1cd1dc4d0a8523fa971651aa2",
+    "canonical/tests/test_a_value_inside_a_document_is_attacker_controlled_v1.py": "0bcd1483b7a12d87efad5d2ff0245bce5122eadcae68439acb3ce637f4dac426",
+    "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
+      "status": "1 passed"
+    },
+    "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
+      "lines": 932,
+      "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
+    },
+    "canonical/tests/test_two_overrides_of_one_name_must_agree_on_returning_nothing_v1.py": "784c95f671ef7e08662d85c71a1626f7938ccf5174d1df7fd3c583f900f14fd9",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "853e0b0418dad91fb5615190b1406a34e27fe887c805cacdf4a7559cb6c97fc1",
+    "canonical/swe_kernel/induced_edit_basis_v1.py": {
+      "lines": 941,
+      "sha256": "806c7517c7b1feb972bb7be4b41c52149860cb5d8f34d3cbd640d0334428fea6"
+    }
+  },
+  "new_mechanisms": [
+    {
+      "blind_diagnosis": "pluggy@8051a4d: the correct guard WAS synthesized and applied, and the suite still failed because that commit also requires a type-level contract on the same method (`pm.register(42, name='abc')` must raise ValueError). One commit, two contracts; the pass currently stops after one.",
+      "earned_a_blind_oss_commit": false,
+      "evidence": "fixture end to end: status VERIFIED__SPEC_CONTRACT_GUARD, guard `if plugin is None: raise TypeError(\"plugin must not be None\")` inserted into the owning method; unit: both contract forms mined",
+      "id": "SPEC_CONTRACT_GUARD",
+      "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "verified_here": true,
+      "what": "mine the test's own `pytest.raises(Exc, match=...)` plus the literal it calls with, bind the callee to a project function through the CPG by name and arity, and emit the one-line guard-and-raise that enforces it; refuse non-boundary literals, ambiguous callees, and any guard the project's own suite does not accept"
+    },
+    {
+      "earned_a_blind_oss_commit": true,
+      "evidence": "click@05f6fd0 repaired blind in 10.88 s with 1 candidate, yielding (None or (self.make_metavar(ctx), '')) -- no 'SRC' literal in the patch",
+      "id": "FRAME_SUBSTITUTED_FALLBACK",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "record every in-scope expression that produced a primitive value (attributes, zero/one-arg public methods over primitive and object locals, primitive method chains); rebuild the wanted value out of those expressions, preferring names the repository itself defines"
+    },
+    {
+      "earned_a_blind_oss_commit": true,
+      "evidence": "4/4 obligation forms recovered; duplicate-rendering support inflation found and closed",
+      "id": "EXPECTED_VALUE_ABDUCTION",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "parse (actual, expected) literal pairs published by the failing assertion; dedupe renderings of the same assertion so one test cannot corroborate itself"
+    },
+    {
+      "earned_a_blind_oss_commit": true,
+      "evidence": "click@05f6fd0 proved in one probe; fixture case closes in 4.58 s with 1 candidate",
+      "id": "SINGLE_SITE_COUNTERFACTUAL_BLAME",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "force the expected value at one suspect site in an isolated CoW clone; a site that closes every failing test is a proven nexus, not a ranked suspicion"
+    },
+    {
+      "earned_a_blind_oss_commit": true,
+      "evidence": "('SRC','') refused as data; one-character strings demoted to data; () admitted",
+      "id": "TEST_VALUE_LAUNDERING_GATE",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "a forced value may seed a repair only if it is a canonical default, demanded by >=2 distinct test nodes, or fully reconstructible from the site's own frame"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "b'\\x04'->b'^D' round-trips; identity and conflicting pairs refused",
+      "id": "BIDIRECTIONAL_LENS_FST",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "fit a minimal consistent transliteration or token table; compile to translate/replace; emit the inverse or report non-invertibility"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "learns a 2-statement guard-to-fallback fix, replays on renamed identifiers, refuses a changed guard body; click@05f6fd0 also crystallized 1 morphism",
+      "id": "TREE_REWRITE_MORPHISM_L2",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "statement-level Plotkin anti-unification with identifier alpha-abstraction and two-sided holes; JSON store with provenance, staleness probe and O(1) delete"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "unit: blocks recorded shape, ignores other tags, O(1) removal; live runs recorded 19 refutations across 5 commits (click@f67c2bb: 8)",
+      "id": "NEGATIVE_SPACE_INVARIANT_L3",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "not_yet_measured": "the candidate saving from pruning inside a single run",
+      "verified_here": true,
+      "what": "record the structural shape of every refuted candidate as a pre-compilation filter"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "predicted fallback accepted; silent constant replacement rejected",
+      "id": "BOUNDARY_INVARIANCE_FUZZ",
+      "module": "canonical/swe_kernel/causal_nexus_v1.py",
+      "verified_here": true,
+      "what": "execute before/after over a 40-value boundary corpus; every divergence must be predicted"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "chain with a dead-end branch yields 3 slices; a diamond yields none",
+      "id": "CUT_VERTEX_SUBGOAL_SLICING",
+      "module": "canonical/swe_kernel/executable_mental_model_v1.py",
+      "verified_here": true,
+      "what": "Tarjan articulation points over the bounded marking graph; slice plans at tokens every path needs"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "gzip goal reached, prediction error 0, bystander byte-identical, runtime_model_calls 0",
+      "id": "SEVEN_STEP_LOOP",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "goal -> scan -> recall -> acquire -> predict/act -> verify -> compress with per-step receipts"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "goal-directed 1 probe / 11.9 ms vs broad ingest 3 probes / 23.7 ms",
+      "id": "GOAL_DIRECTED_VS_BROAD_INGEST",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "same goal, identical fresh workspaces, both acquisition arms measured"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "2-episode run: 1 solved, 1 honestly open",
+      "id": "OFFLINE_SELF_PLAY",
+      "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+      "verified_here": true,
+      "what": "run unsolved failures through the solver, crystallize verified fixes, refute near misses"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "click@fc518e4: 5 failed -> 2 (single frame _compat.py:542) -> 1 (stacked with core.py:1569); no further frame shrinks; 4 commits measured (click@fc518e4, click@f67c2bb, pyjwt@af8181c, plus 2 regressions), 0 repairs",
+      "id": "FRAME_CONTAINMENT",
+      "known_blind_spot": "the residual click failure raises at core.py:1627, a line that appears in NO traceback pytest printed - the oracle is only as complete as the report",
+      "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "placement": "last-resort pass, after every other pass, so it cannot displace a verified repair",
+      "verified_here": true,
+      "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
+    },
+    {
+      "earned_a_blind_oss_commit": false,
+      "evidence": "pyjwt@af8181c: 2 failures -> 1 (411 passed, 1 failed) with the guard the engine now synthesizes; a 64-proposal sweep (193 s) finds nothing green, so the commit stays OPEN",
+      "id": "CONTRACT_BINDING_BY_TEST_EVIDENCE",
+      "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "verified_here": true,
+      "what": "receiver class inferred from the test's own `algo = Algo(...)` assignment; guard family for a boundary value nested in a container literal (`obj.get('k') == ''`); exception raised under the name the target module actually binds"
+    },
+    {
+      "disposition": "REMOVED after measurement: zero candidates produced on pyjwt@af8181c, cJSON@6d9f244, pluggy@50585e0 and click@f67c2bb; zero repairs",
+      "earned_a_blind_oss_commit": false,
+      "id": "RAISING_SITE_SUBSTITUTION",
+      "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+      "verified_here": true,
+      "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
+    }
   ],
-  "verified_v1_sample": 9
- },
- "branch": "arena/1412289d-brain",
- "environment": {
-  "hypothesis": "installed",
-  "markupsafe": "installed",
-  "note": "fresh sandbox this round; the ten verified commits were re-measured here, not carried over",
-  "pytest": "9.2.0",
-  "python": "3.11.2",
-  "tree_sitter": "0.20.4",
-  "tree_sitter_languages": "1.10.2",
-  "z3_solver": "installed"
- },
- "generated_at_utc": "2026-11-25T02:04:44Z",
- "honest_verdict": "10 of 13 graded unseen OSS commits repaired and verified against their own suites (76.92%), 0 regressions, 2 env-blocked, K3=0 runtime model calls. The new capability is real but narrow: it resolves commits whose fix is restated in the project's own test as `pytest.raises` contracts. Ten graded commits still fail, no public benchmark container score was produced here, and nothing in this receipt was obtained by gating, mocking, or reading a human diff.",
- "incremental_spend_usd": 0.0,
- "integrity_notes": [
-  "more-itertools@c629214 is CONTAMINATED: its human diff was printed during diagnosis (round V8). It is still OPEN, is not re-evaluated, and is not claimed in any tally; the graded denominator stays 13."
- ],
- "law_library_v15": {
-  "gate_declared_in_advance": ">=3 of 6 commits must fire on the buggy tree and be silent on the fixed tree",
-  "gate_result": "FAILED: 1 of 6",
-  "laws": [
-   "remove_argument_vanishes",
-   "string_canonicality",
-   "round_trip",
-   "idempotence",
-   "iterable_retyping",
-   "error_discipline"
-  ],
-  "per_commit": {
-   "attrs@3b0378dd66": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "why": "no law fires on the exercised path"
-   },
-   "click@05f6fd0": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "why": "no law fires on the exercised path"
-   },
-   "more-itertools@cca32949f1": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "why": "no law fires on the exercised path"
-   },
-   "pluggy@50585e0": {
-    "buggy": 6,
-    "discriminates": true,
-    "fixed": 0
-   },
-   "pluggy@8051a4d": {
-    "buggy": 2,
-    "discriminates": false,
-    "fixed": 2,
-    "why": "violation belongs to a later commit"
-   },
-   "pyjwt@793a302": {
-    "buggy": 4,
-    "discriminates": false,
-    "fixed": 4,
-    "why": "error_discipline inconsistency is pre-existing in the library"
-   },
-   "werkzeug@051fd663": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "why": "trigger: suite never presents the header string"
-   }
+  "next_bottleneck": {
+    "item": "rule accumulation over the repaired corpus",
+    "state": "insertion edits now enter the basis; the six hand repairs can be re-expressed as induced templates",
+    "next": "re-run the six repaired commits from induced templates only (no hand-written candidate) and appraise each induced patch against the hidden tests, one commit at a time"
   },
-  "rejected_by_measurement": "the first error_discipline law ('a builtin escaped a library with an error hierarchy') fired on 6/6 commits identically on both trees; replaced by the inconsistency observable",
-  "tests": "canonical/tests/test_metamorphic_oracle_v1.py + test_oracle_drives_purge_synthesis_v1.py, 4 passed"
- },
- "law_repair_v17": {
-  "pyjwt@793a302": {
-   "candidates": 3,
-   "law_after_patch": "unchanged (2 error_discipline violations on decode/decode_complete)",
-   "result": "NOT repaired: same function, different argument",
-   "why": "the mixed exception families are witnessed by mutating an argument other than the claims; broadening the claim handlers cannot clear a violation whose witness is a different parameter"
+  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
+  "refusal_v22": {
+    "attrs@3b0378dd66": {
+      "contract": "status REFUSED with plain_exitstatus recorded, violations discarded, CLI exit 3",
+      "isolation": {
+        "class methods skipped": "3 failed",
+        "everything wrapped": "5 failed",
+        "module functions skipped": "2 failed"
+      },
+      "verdict": "REFUSED__OBSERVER_CHANGES_THE_PROGRAM",
+      "why": "attrs builds its public classes out of the module's own functions, so a wrapper becomes part of the constructed class"
+    },
+    "test_absent_stream": "6 repaired, 1 refused"
   },
-  "test_absent_stream": "2 repaired (pluggy@50585e0, werkzeug@051fd663), 5 open",
-  "trigger_fix": [
-   "presentation probing at teardown",
-   "issue-seeded construction: WWWAuthenticate(<word from the issue>)"
-  ],
-  "werkzeug@051fd663": {
-   "buggy_construction": "WWWAuthenticate('bearer') -> 'Bearer '",
-   "candidate": "LAW_CANONICALITY[WWWAuthenticate.__str__+WWWAuthenticate.to_header:strip every exit]",
-   "fixed_construction": "WWWAuthenticate('bearer') -> 'Bearer'",
-   "hidden_test_after_patch": "124 passed (test overlaid only after the patch was chosen)",
-   "law_after_patch": "silent",
-   "result": "REPAIRED blind, non-lifecycle defect"
+  "runtime_model_calls": 0,
+  "runtime_network_calls": 0,
+  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
+  "stored_world_facts_in_weights": 0,
+  "test_absent_stream_v14": {
+    "accepted": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
+    "chain": [
+      "green suite (93 probes)",
+      "oracle violation: unregister -> list_plugin_distinfo/distributions",
+      "PostconditionContract(list_plugin_distinfo, unregister, plugin)",
+      "4 purge candidates",
+      "law accepts candidate 0"
+    ],
+    "commit": "pluggy@50585e0",
+    "cross_check_with_hidden_test": "220 passed (test overlaid only after the patch was chosen)",
+    "setup": "tree at 50585e0^1; the commit's test file is absent",
+    "stream_tally": "1/6 attempted, 1 repaired; breadth limited by law coverage (V13 table)",
+    "unchanged": "test-present tally 11/13 = 84.62%, 0 regressions, K3 = 0"
+  },
+  "tests": {
+    "causal_suite": "13 passed in 63.09s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+    "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
+    "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
+    "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
+  },
+  "unification_v20": {
+    "added_files": 294,
+    "conflicts": {
+      ".github/workflows/frontier_smoke_eval.yml": "TASK_LIMIT 2 -> 3",
+      "BRAIN_UNIFIED_MODEL_V1.json digest": "recomputed after merging: dd4359fc -> ba94733a; the digest is defined as the canonical JSON without the digest block",
+      "perfect_algorithm_v1.py": "kept the incoming local-guide retrieval source (superset)"
+    },
+    "corrected_claim": "earlier rounds recorded all named hashes absent and unification impossible; the commit ids are absent but the branches exist as refs/heads/arena/<hash>-brain (104 of them), and 7 named branches share this branch's base c4f529eb",
+    "merged": [
+      "d86a0174",
+      "cd5bfaaa",
+      "06dc079e",
+      "39d26eb4",
+      "4260e934",
+      "50c05c04",
+      "f7ec1162"
+    ],
+    "not_mergeable_without_rebase": [
+      "aab1b545",
+      "b81b2217"
+    ],
+    "pinned_file_decision": "canonical/runtime/brain_unified_model_v1.py kept at HEAD; the 8-line Harbor dispatch hook from 4260e934 is recorded, not applied (19/19 architecture tests pass without it)",
+    "tests_after": {
+      "law_suite": "22 passed",
+      "merged_engines": "44 passed",
+      "unified_architecture": "19 passed (3 failed before the digest recompute)"
+    }
+  },
+  "insertion_basis_v23": {
+    "question": "can a repair written by hand be induced from one demonstration and transferred to held-out sites",
+    "mechanism_reused": "canonical/swe_kernel/induced_edit_basis_v1.py (induce_templates, induce_node_templates, candidates_from_node_templates) -- nothing rebuilt",
+    "demonstration": "more-itertools@cca32949f1 last(): hasattr(iterable, '__reversed__') -> getattr(..., None)",
+    "blindness": {
+      "node_diff_row": "LITERAL Name hasattr->getattr, context ('Call',)",
+      "leaf_row": "NON_EXECUTABLE Call.args (never applicable)",
+      "cause": "_sites walks paths of the defective tree; a node present only in the repaired tree has no path, so an insertion cannot be a difference"
+    },
+    "transfer_measured_by_execution": {
+      "witnesses": [
+        "attribute present and truthy",
+        "attribute present and None",
+        "attribute absent"
+      ],
+      "correctness_rule": "agrees with the original on ordinary and absent, differs only on the None-valued class",
+      "sites_scanned": 41,
+      "rename_only": {
+        "matched": 33,
+        "correct": 0,
+        "regressions": 32
+      },
+      "insertion_rung_ctx1": {
+        "matched": 17,
+        "correct": 17,
+        "regressions": 0
+      },
+      "insertion_rung_ctx0": {
+        "matched": 33,
+        "correct": 32,
+        "regressions": 0
+      },
+      "example_regression": "werkzeug/wsgi.py: hasattr(self.file, 'seekable') -> getattr(self.file, 'seekable') changed absent-attribute behaviour from False to AttributeError"
+    },
+    "new_rung": {
+      "function": "induce_insertion_templates(pairs, *, context_depth=1, abstract_untouched=True)",
+      "template": "hasattr(__brain_hole_0__, __brain_hole_1__) -> getattr(__brain_hole_0__, __brain_hole_1__, None)",
+      "rule": "promote the differing position to the smallest enclosing node whose field length changed; abstract untouched subterms into shared holes; applies to removal as well"
+    },
+    "expressible_case_boundary": {
+      "demonstrations": [
+        "pyjwt _validate_iat",
+        "pyjwt _validate_nbf"
+      ],
+      "induced": "RELATIONAL Name ('Try','ExceptHandler'): __brain_hole_0__ -> (__brain_hole_0__, TypeError, OverflowError)",
+      "held_out": "_validate_exp",
+      "candidates": 1,
+      "equals_human_fix_under_ast_dump": true,
+      "execution": "buggy tree with induced patch spliced in: 432 passed, 4 skipped -- identical to the unpatched baseline"
+    },
+    "claim_scope": "soundness of transfer, not necessity: no test in the scanned trees exercises the None-valued class at those sites, so the 32 correct patches are behaviour-preserving edits, not proven fixes",
+    "stream": {
+      "repaired": 6,
+      "refused": 1,
+      "test_present": "11/13 = 84.62%"
+    },
+    "tests": {
+      "file": "canonical/tests/test_insertion_edits_enter_the_basis_v1.py",
+      "passed": 8,
+      "combined_with_neighbours": "29 passed"
+    }
   }
- },
- "law_repair_v18": {
-  "more-itertools@cca32949f1": {
-   "candidate": "LAW_ITERABLE_RETYPING[last:hasattr->getattr(x,attr,None)]",
-   "defect": "hasattr() admits a protocol that is present and None, so last() returns its default instead of the element",
-   "false_positives_removed": [
-    "raise-only comparison (last([]) is supposed to raise)",
-    "string retyped into an iterator of its characters (substrings_indexes, healthy tree)",
-    "tuple containing a live _tee compared for equality (spy, healthy tree)",
-    "receiver substituted by a retyped shell (__repr__, healthy tree)"
-   ],
-   "hidden_test_after_patch": {
-    "buggy_unpatched": "1 failed, 543 passed",
-    "candidate": "544 passed",
-    "human_fix": "544 passed"
-   },
-   "law": "iterable_retyping (differential, with a NoneReversed variant)",
-   "law_on_buggy": "iterable_retyping: last, none_reversed form raised ValueError",
-   "law_on_candidate": "silent",
-   "law_on_fixed": "silent (checked before any candidate was generated)",
-   "suite_under_every_law_then_all": "543 passed each time (re-invocations never perturb a test)",
-   "trigger_gaps_fixed": [
-    "re-export aliasing: from .more import * bound an unwrapped name; alias sweep at collection_finish",
-    "budget starvation: per-law, per-argument-shape re-invocation pools",
-    "live-iterator replay: a copy of a consumed stream is the unbounded remainder (exit -9)",
-    "a law that raised was recorded as silence; law_errors now travels in the receipt"
-   ]
-  },
-  "regression_check": "werkzeug canonicality still discriminates: 'Bearer ' on buggy, 'Bearer' on fixed",
-  "test_absent_stream": "3 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1), 4 open"
- },
- "law_repair_v19": {
-  "observation_layer_faults_fixed": [
-   "re-invocations were recorded by the suite's warning recorder (need catch_warnings(record=True))",
-   "_inverse_for searched one direction only; a parser is often the inverse of a serializer",
-   "replay dropped keyword arguments, so algorithms=[...] was lost and the parser raised a family member",
-   "content budget of 4 calls starved the call that carried the claim"
-  ],
-  "observer_integrity_v19b": {
-   "after": {
-    "attrs@3b0378dd66": "unobservable by construction (perturbed: true, violations discarded)",
-    "click@05f6fd0": "law-silent (no law observes 'always return a help record for an Argument')"
-   },
-   "faults": [
-    "a class attribute holding `int` was wrapped, so _ALIAS contained int and the sweep replaced builtins.int process-wide (click)",
-    "attrs builds classes out of module functions, so wrapping them changed 5 generated-class tests with every law disabled",
-    "asserts on self/cls counted as argument validation (click: 2 of 2 reported sites were noise)",
-    "class and instance arguments were retyped as containers (attrs.fields)"
-   ],
-   "fixes": [
-    "only inspect.isfunction objects are wrapped and substituted",
-    "perturbation detection: an instrumented run that fails where the bare run passes is marked perturbed and its violations discarded",
-    "self/cls excluded from the assert law",
-    "retyping restricted to list/tuple/set/frozenset/range and live iterators"
-   ]
-  },
-  "pyjwt@793a302": {
-   "candidate": "LAW_ERROR_DISCIPLINE[broaden 5 handler(s) to catch TypeError, OverflowError]",
-   "caveats": [
-    "blindness compromised: issue 1186 is AI-prepared and states its own cause and fix",
-    "the candidate differs from the documented fix, which clears 9 of 12 hidden cases (no inf case)",
-    "not minimal: 3 sites named by the witness, 5 handlers broadened",
-    "the inf dimension was added after the hidden test showed 3 failures on the first law-silent candidate"
-   ],
-   "defect": "int(claim) inside `except ValueError` leaks TypeError (and OverflowError for inf) out of decode() for attacker-controlled exp/nbf/iat",
-   "hidden_test_after_patch": {
-    "buggy_unpatched": "12 failed, 84 passed",
-    "final_candidate": "96 passed",
-    "first_law_silent_candidate": "3 failed, 93 passed (the three inf cases)"
-   },
-   "law_on_buggy": "9 violations: _validate_exp/_validate_iat/_validate_nbf x ([1], None -> TypeError; inf -> OverflowError)",
-   "law_on_candidate": "silent",
-   "law_on_fixed": "0 (checked before any candidate was generated)",
-   "new_law": "content_retyping \u2014 mutate a value inside the parsed content, re-encode with the parser's own inverse, require the package's own error family",
-   "why_previous_laws_missed_it": "every other law mutates the arguments of decode; the defect lives inside the first argument, and mutating the text alone breaks the signature (InvalidSignatureError answers first)",
-   "witness": "site (innermost package frame), claim, value, exception family"
-  },
-  "regressions_rechecked": {
-   "more-itertools": "last fires on buggy only",
-   "werkzeug": "canonicality 'Bearer ' vs 'Bearer'"
-  },
-  "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open with named reasons (pluggy@8051a4d no generator, click@05f6fd0 no law, attrs@3b0378dd66 not observable)"
- },
- "law_repair_v20": {
-  "pluggy@8051a4d": {
-   "caveat": "the old visible test asserts the buggy contract (pytest.raises(AssertionError)); the fix commit updates it, which is why the visible suite fails for any correct repair",
-   "defect": "argument validation by assert disappears under python -O (lines 289, 291 of _manager.py)",
-   "family_rule": "live parameter -> TypeError; local or rebound parameter -> ValueError",
-   "generator": "assert_to_raise_candidates \u2014 assert becomes if not cond: raise E(msg), where E is chosen from the AST",
-   "hidden_test_after_patch": {
-    "buggy_unpatched": "1 failed, 74 passed",
-    "candidate": "75 passed"
-   },
-   "law": "static_assert_validation (fires: 2 violations)",
-   "law_on_candidate": "silent (no assert survives at either named site)",
-   "repo_corroboration": "the same file raises TypeError('plugin must not be None') for a None-ness condition beside ValueError(...) for value conditions",
-   "why_the_first_candidate_failed": "a name-only rule typed both asserts TypeError; `name` is a parameter too, and only rebinding order (name = self.get_name(plugin) on the line above) makes it a local"
-  },
-  "test_absent_stream": "5 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d), 2 open (click@05f6fd0 no law; attrs@3b0378dd66 unobservable)"
- },
- "law_repair_v21": {
-  "click@05f6fd0": {
-   "candidate": "LAW_SIBLING_TOTALITY[Argument.get_help_record: drop the None early-return, use (self.help or neutral)]",
-   "defect": "Argument.get_help_record returns None when self.help is None, while Option.get_help_record always returns a record, so positional arguments vanish from --help",
-   "faults_fixed_before_it_could_see": [
-    "string annotations under `from __future__ import annotations` made the annotation match fail",
-    "a required parameter caused the method to be skipped instead of supplied from the suite's own objects",
-    "eval_str=True raising NameError aborted the probe (now recorded in law_errors, not silence)"
-   ],
-   "hidden_test_after_patch": {
-    "buggy_unpatched": "1 failed, 888 passed",
-    "candidate": "889 passed"
-   },
-   "law_on_buggy": "1 violation: Argument.get_help_record / Option.get_help_record",
-   "law_on_candidate": "silent",
-   "law_on_fixed": "0",
-   "new_law": "sibling_totality \u2014 two classes that each define the same method must agree on whether it ever returns nothing",
-   "observation": "own definitions only; methods called on instances the suite built, with required parameters supplied from objects the suite built"
-  },
-  "regressions_rechecked": "more-itertools/pyjwt/pluggy gates unchanged after the new law; no run perturbed",
-  "test_absent_stream": "6 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d, click@05f6fd0), 1 open (attrs@3b0378dd66: cannot be instrumented)"
- },
- "memory_ablation_v11": {
-  "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
-  "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
-  "single_experience_transfer": {
-   "apply_to_different_body_sharing_anchors": "1 proposal",
-   "apply_to_different_real_function": "refused",
-   "apply_to_unrelated_body": "0 proposals (refused)",
-   "learn": "1 morphism + 1 delta from one verified body",
-   "reload_from_disk": "1 delta"
-  },
-  "unit_of_learning": "DeltaMorphism (insert/delete/replace, informative-neighbour anchors, skeleton anti-unification)"
- },
- "memory_ablation_v12_delta_priority": {
-  "change": "delta candidates are prepended to the replay list instead of appended (V11: they were dropped by the cap)",
-  "deeper_reason": "every graded commit ships the test that specifies the repair, so the store competes with a specification that is already present; its comparative advantage (a defect met again without a spec) is not represented in this catalogue",
-  "held_out_pluggy@50585e0_delta_first": "REPAIRED 25 cand 24.08 s, STATE_CONSISTENCY",
-  "held_out_pluggy@50585e0_no_store": "REPAIRED 25 cand 22.41 s",
-  "learn_pluggy@8051a4d": "REPAIRED 1 cand 6.46 s (1 morphism + 1 delta)",
-  "result": "the delta never fired: anchors are witness-neighbour properties, so the edit is function-specific; priority fixed the cap but not the transfer"
- },
- "metamorphic_oracle_v13": {
-  "blind_setup": "buggy = sha^1, fixed = sha^1 + non-test diff; the hidden test is absent from both trees",
-  "coverage": "1/6 commits; the five silent commits have no lifecycle verb in their vocabulary (encoders, parsers, iterators)",
-  "law": "a remove-verb mutator called with x must make x vanish from every zero-argument getter on the same object",
-  "not_claimed": "not wired into the repair engine; violations are reported, not yet fed back as candidate assertions",
-  "precision": "1/1 where the law fires (no false accusation on the fixed tree)",
-  "results": {
-   "attrs@3b0378dd66": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "probes": 0
-   },
-   "click@05f6fd0": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "probes": 0
-   },
-   "more-itertools@cca32949f1": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "probes": 0
-   },
-   "pluggy@50585e0": {
-    "buggy": 2,
-    "discriminates": true,
-    "fixed": 0,
-    "probes": 93
-   },
-   "pluggy@8051a4d": {
-    "buggy": 2,
-    "discriminates": false,
-    "fixed": 2,
-    "probes": 91,
-    "why": "real violation, but it belongs to a later commit (same stale container); the oracle cannot attribute a law violation to the commit that fixes it"
-   },
-   "pyjwt@793a302": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "probes": 0
-   },
-   "werkzeug@051fd663": {
-    "buggy": 0,
-    "discriminates": false,
-    "fixed": 0,
-    "probes": 0
-   }
-  },
-  "tests": "canonical/tests/test_metamorphic_oracle_v1.py, 3 passed"
- },
- "modules": {
-  "canonical/runtime/causal_computer_use_agent_v1.py": {
-   "lines": 578,
-   "sha256": "f447e2041865687d151eb9a05dd4a4297824e9622daa7a44ce90f75df209c845"
-  },
-  "canonical/swe_kernel/causal_nexus_v1.py": {
-   "lines": 1547,
-   "sha256": "eb5252bf1cceb61bbc647f55245233a9c5d891aa48e42c43de9c557310d56206"
-  },
-  "canonical/swe_kernel/executable_mental_model_v1.py": {
-   "lines": 1849,
-   "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
-  },
-  "canonical/swe_kernel/law_repair_synthesis_v1.py": "56749ea6239e02721d8a4328c0347316d7daacac64a9eaac863e8ecf09c85844",
-  "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
-  "canonical/swe_kernel/metamorphic_oracle_v1.py": "4ce39d403cc6042a76c80b1b59f55c8a3391ff4d5760019d4c4d6404402b8fad",
-  "canonical/swe_kernel/metamorphic_plugin_v1.py": "f1d4aee4ea483f0e8add7fb3a5d9c191e8f69cbceae0c1ca41fdcc7e3828500b",
-  "canonical/swe_kernel/semantic_causal_engine_v1.py": {
-   "bytes": 208516,
-   "lines": 4412,
-   "sha256": "b75fe03144f76badc7a4e3146bb6b66b84b343a96a9285c1d3f3b54c2749c330"
-  },
-  "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
-   "bytes": 21011,
-   "lines": 318,
-   "sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
-  },
-  "canonical/swe_kernel/violation_attribution_v1.py": {
-   "purpose": "rank a repository's standing law violations by the issue text, or abstain",
-   "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
-  },
-  "canonical/tests/test_a_law_that_retypes_an_iterable_compares_outcomes_v1.py": "b6c8c4ff78878c782c8bdc4b3e2545decb72f6403a202c710031727eb725046d",
-  "canonical/tests/test_a_missing_argument_is_a_type_error_and_a_missing_value_is_a_value_error_v1.py": "efe5f0ffc6a97978b79e2c4b8429afa9d51117a1cd1dc4d0a8523fa971651aa2",
-  "canonical/tests/test_a_value_inside_a_document_is_attacker_controlled_v1.py": "0bcd1483b7a12d87efad5d2ff0245bce5122eadcae68439acb3ce637f4dac426",
-  "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
-   "status": "1 passed"
-  },
-  "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
-   "lines": 932,
-   "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
-  },
-  "canonical/tests/test_two_overrides_of_one_name_must_agree_on_returning_nothing_v1.py": "784c95f671ef7e08662d85c71a1626f7938ccf5174d1df7fd3c583f900f14fd9",
-  "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "853e0b0418dad91fb5615190b1406a34e27fe887c805cacdf4a7559cb6c97fc1"
- },
- "new_mechanisms": [
-  {
-   "blind_diagnosis": "pluggy@8051a4d: the correct guard WAS synthesized and applied, and the suite still failed because that commit also requires a type-level contract on the same method (`pm.register(42, name='abc')` must raise ValueError). One commit, two contracts; the pass currently stops after one.",
-   "earned_a_blind_oss_commit": false,
-   "evidence": "fixture end to end: status VERIFIED__SPEC_CONTRACT_GUARD, guard `if plugin is None: raise TypeError(\"plugin must not be None\")` inserted into the owning method; unit: both contract forms mined",
-   "id": "SPEC_CONTRACT_GUARD",
-   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
-   "verified_here": true,
-   "what": "mine the test's own `pytest.raises(Exc, match=...)` plus the literal it calls with, bind the callee to a project function through the CPG by name and arity, and emit the one-line guard-and-raise that enforces it; refuse non-boundary literals, ambiguous callees, and any guard the project's own suite does not accept"
-  },
-  {
-   "earned_a_blind_oss_commit": true,
-   "evidence": "click@05f6fd0 repaired blind in 10.88 s with 1 candidate, yielding (None or (self.make_metavar(ctx), '')) -- no 'SRC' literal in the patch",
-   "id": "FRAME_SUBSTITUTED_FALLBACK",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "record every in-scope expression that produced a primitive value (attributes, zero/one-arg public methods over primitive and object locals, primitive method chains); rebuild the wanted value out of those expressions, preferring names the repository itself defines"
-  },
-  {
-   "earned_a_blind_oss_commit": true,
-   "evidence": "4/4 obligation forms recovered; duplicate-rendering support inflation found and closed",
-   "id": "EXPECTED_VALUE_ABDUCTION",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "parse (actual, expected) literal pairs published by the failing assertion; dedupe renderings of the same assertion so one test cannot corroborate itself"
-  },
-  {
-   "earned_a_blind_oss_commit": true,
-   "evidence": "click@05f6fd0 proved in one probe; fixture case closes in 4.58 s with 1 candidate",
-   "id": "SINGLE_SITE_COUNTERFACTUAL_BLAME",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "force the expected value at one suspect site in an isolated CoW clone; a site that closes every failing test is a proven nexus, not a ranked suspicion"
-  },
-  {
-   "earned_a_blind_oss_commit": true,
-   "evidence": "('SRC','') refused as data; one-character strings demoted to data; () admitted",
-   "id": "TEST_VALUE_LAUNDERING_GATE",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "a forced value may seed a repair only if it is a canonical default, demanded by >=2 distinct test nodes, or fully reconstructible from the site's own frame"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "b'\\x04'->b'^D' round-trips; identity and conflicting pairs refused",
-   "id": "BIDIRECTIONAL_LENS_FST",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "fit a minimal consistent transliteration or token table; compile to translate/replace; emit the inverse or report non-invertibility"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "learns a 2-statement guard-to-fallback fix, replays on renamed identifiers, refuses a changed guard body; click@05f6fd0 also crystallized 1 morphism",
-   "id": "TREE_REWRITE_MORPHISM_L2",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "statement-level Plotkin anti-unification with identifier alpha-abstraction and two-sided holes; JSON store with provenance, staleness probe and O(1) delete"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "unit: blocks recorded shape, ignores other tags, O(1) removal; live runs recorded 19 refutations across 5 commits (click@f67c2bb: 8)",
-   "id": "NEGATIVE_SPACE_INVARIANT_L3",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "not_yet_measured": "the candidate saving from pruning inside a single run",
-   "verified_here": true,
-   "what": "record the structural shape of every refuted candidate as a pre-compilation filter"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "predicted fallback accepted; silent constant replacement rejected",
-   "id": "BOUNDARY_INVARIANCE_FUZZ",
-   "module": "canonical/swe_kernel/causal_nexus_v1.py",
-   "verified_here": true,
-   "what": "execute before/after over a 40-value boundary corpus; every divergence must be predicted"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "chain with a dead-end branch yields 3 slices; a diamond yields none",
-   "id": "CUT_VERTEX_SUBGOAL_SLICING",
-   "module": "canonical/swe_kernel/executable_mental_model_v1.py",
-   "verified_here": true,
-   "what": "Tarjan articulation points over the bounded marking graph; slice plans at tokens every path needs"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "gzip goal reached, prediction error 0, bystander byte-identical, runtime_model_calls 0",
-   "id": "SEVEN_STEP_LOOP",
-   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
-   "verified_here": true,
-   "what": "goal -> scan -> recall -> acquire -> predict/act -> verify -> compress with per-step receipts"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "goal-directed 1 probe / 11.9 ms vs broad ingest 3 probes / 23.7 ms",
-   "id": "GOAL_DIRECTED_VS_BROAD_INGEST",
-   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
-   "verified_here": true,
-   "what": "same goal, identical fresh workspaces, both acquisition arms measured"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "2-episode run: 1 solved, 1 honestly open",
-   "id": "OFFLINE_SELF_PLAY",
-   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
-   "verified_here": true,
-   "what": "run unsolved failures through the solver, crystallize verified fixes, refute near misses"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "click@fc518e4: 5 failed -> 2 (single frame _compat.py:542) -> 1 (stacked with core.py:1569); no further frame shrinks; 4 commits measured (click@fc518e4, click@f67c2bb, pyjwt@af8181c, plus 2 regressions), 0 repairs",
-   "id": "FRAME_CONTAINMENT",
-   "known_blind_spot": "the residual click failure raises at core.py:1627, a line that appears in NO traceback pytest printed - the oracle is only as complete as the report",
-   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
-   "placement": "last-resort pass, after every other pass, so it cannot displace a verified repair",
-   "verified_here": true,
-   "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
-  },
-  {
-   "earned_a_blind_oss_commit": false,
-   "evidence": "pyjwt@af8181c: 2 failures -> 1 (411 passed, 1 failed) with the guard the engine now synthesizes; a 64-proposal sweep (193 s) finds nothing green, so the commit stays OPEN",
-   "id": "CONTRACT_BINDING_BY_TEST_EVIDENCE",
-   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
-   "verified_here": true,
-   "what": "receiver class inferred from the test's own `algo = Algo(...)` assignment; guard family for a boundary value nested in a container literal (`obj.get('k') == ''`); exception raised under the name the target module actually binds"
-  },
-  {
-   "disposition": "REMOVED after measurement: zero candidates produced on pyjwt@af8181c, cJSON@6d9f244, pluggy@50585e0 and click@f67c2bb; zero repairs",
-   "earned_a_blind_oss_commit": false,
-   "id": "RAISING_SITE_SUBSTITUTION",
-   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
-   "verified_here": true,
-   "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
-  }
- ],
- "next_bottleneck": "attrs is the limit of wrapping: observe only published names (__all__) and retry; if it still perturbs, refuse such a repository at admission time instead of reporting a clean tree.",
- "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
- "refusal_v22": {
-  "attrs@3b0378dd66": {
-   "contract": "status REFUSED with plain_exitstatus recorded, violations discarded, CLI exit 3",
-   "isolation": {
-    "class methods skipped": "3 failed",
-    "everything wrapped": "5 failed",
-    "module functions skipped": "2 failed"
-   },
-   "verdict": "REFUSED__OBSERVER_CHANGES_THE_PROGRAM",
-   "why": "attrs builds its public classes out of the module's own functions, so a wrapper becomes part of the constructed class"
-  },
-  "test_absent_stream": "6 repaired, 1 refused"
- },
- "runtime_model_calls": 0,
- "runtime_network_calls": 0,
- "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
- "stored_world_facts_in_weights": 0,
- "test_absent_stream_v14": {
-  "accepted": "STATE_CONSISTENCY[unregister:purge self._plugin_distinfo where __e[0] is not plugin]",
-  "chain": [
-   "green suite (93 probes)",
-   "oracle violation: unregister -> list_plugin_distinfo/distributions",
-   "PostconditionContract(list_plugin_distinfo, unregister, plugin)",
-   "4 purge candidates",
-   "law accepts candidate 0"
-  ],
-  "commit": "pluggy@50585e0",
-  "cross_check_with_hidden_test": "220 passed (test overlaid only after the patch was chosen)",
-  "setup": "tree at 50585e0^1; the commit's test file is absent",
-  "stream_tally": "1/6 attempted, 1 repaired; breadth limited by law coverage (V13 table)",
-  "unchanged": "test-present tally 11/13 = 84.62%, 0 regressions, K3 = 0"
- },
- "tests": {
-  "causal_suite": "13 passed in 63.09s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
-  "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
-  "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
-  "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
- },
- "unification_v20": {
-  "added_files": 294,
-  "conflicts": {
-   ".github/workflows/frontier_smoke_eval.yml": "TASK_LIMIT 2 -> 3",
-   "BRAIN_UNIFIED_MODEL_V1.json digest": "recomputed after merging: dd4359fc -> ba94733a; the digest is defined as the canonical JSON without the digest block",
-   "perfect_algorithm_v1.py": "kept the incoming local-guide retrieval source (superset)"
-  },
-  "corrected_claim": "earlier rounds recorded all named hashes absent and unification impossible; the commit ids are absent but the branches exist as refs/heads/arena/<hash>-brain (104 of them), and 7 named branches share this branch's base c4f529eb",
-  "merged": [
-   "d86a0174",
-   "cd5bfaaa",
-   "06dc079e",
-   "39d26eb4",
-   "4260e934",
-   "50c05c04",
-   "f7ec1162"
-  ],
-  "not_mergeable_without_rebase": [
-   "aab1b545",
-   "b81b2217"
-  ],
-  "pinned_file_decision": "canonical/runtime/brain_unified_model_v1.py kept at HEAD; the 8-line Harbor dispatch hook from 4260e934 is recorded, not applied (19/19 architecture tests pass without it)",
-  "tests_after": {
-   "law_suite": "22 passed",
-   "merged_engines": "44 passed",
-   "unified_architecture": "19 passed (3 failed before the digest recompute)"
-  }
- }
 }

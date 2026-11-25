@@ -1219,3 +1219,79 @@ the instrument's, and nothing from that run can be mistaken for a clean tree.
 **Recorded honestly:** test-absent stream **6 repaired, 1 refused** (`attrs@3b0378dd66`). Test-present tally unchanged:
 **11/13 = 84.62%**. All five gates re-checked after the change: `more-itertools`, `pyjwt` and `click` fire exactly one
 law on the buggy tree and none on the fixed one; `pluggy` fires `assert_validation`; no run is perturbed.
+
+## Round V23 — the repair the basis could not see: an argument that has to appear
+
+Six repairs ago this round stopped being a description of repairs and became a corpus of them, and the obvious next
+question is whether the basis can *induce* what was written by hand. The mechanism already in the tree
+(`canonical/swe_kernel/induced_edit_basis_v1.py`) was audited first, and it is the right one: `differing_positions`,
+`induce_templates`, `induce_node_templates` and `candidates_from_node_templates` are an anti-unifier with holes and an
+applicator. Nothing was rebuilt.
+
+One demonstration was taken from the corpus: `more-itertools@cca32949f1`, where
+
+```python
+if hasattr(iterable, '__reversed__'):      # true for an object that DEFINES __reversed__ = None
+    return next(reversed(iterable))        # ... and reversed() then raises TypeError
+```
+
+is repaired to `getattr(iterable, '__reversed__', None)`. Induction on that single pair returns two rows, and together
+they are the whole finding:
+
+| row | content | what it can do |
+| --- | --- | --- |
+| node diff | `LITERAL` on `Name`: `hasattr` -> `getattr`, context `('Call',)` | renames the callee, does not add the argument |
+| leaf basis | `NON_EXECUTABLE` on `Call.args` | cannot be applied at all |
+
+The repair — the argument that has to **appear** — is in neither. The cause is structural: `_sites` walks paths of the
+defective tree, so a node that exists only in the repaired tree has no path, is never visited, and an **insertion cannot
+be a difference**. The originality of the blindness was measured by applying the reachable half at real sites.
+
+Applying the rename template at every `hasattr(obj, 'name')` site in five unrelated trees (`werkzeug`, `pyjwt`, `click`,
+`pluggy`, `attrs`, tests excluded) and deciding each patch by **execution** on three witnesses — attribute present and
+truthy, present but `None`, and absent:
+
+| transfer | sites matched | correct | regressions |
+| --- | --- | --- | --- |
+| rename only (what the basis could express) | 33 | 0 | **32** |
+| insertion rung, context depth 1 | 17 | **17** | 0 |
+| insertion rung, context depth 0 | 33 | **32** | 0 |
+
+"Correct" is not a judgement here: the transferred condition must agree with `hasattr` on the ordinary witness and on
+the absent-attribute witness, and differ only on the `None`-valued witness. The rename-only transfer fails that at
+**32 of 33** sites, because `getattr(x, 'c')` raises `AttributeError` exactly where `hasattr(x, 'c')` returned `False` —
+it removes the guard the code is written to use. That is why the rung is not an improvement in taste.
+
+The rung itself, added to the same module rather than beside it:
+
+```python
+induce_insertion_templates(pairs, *, context_depth=1, abstract_untouched=True)
+# hasattr(__brain_hole_0__, __brain_hole_1__) -> getattr(__brain_hole_0__, __brain_hole_1__, None)
+```
+
+It promotes the differing position to the smallest enclosing node whose field **length** changed, makes that node the
+pattern (so the added child is inside it), and abstracts the subterms the edit did not touch into shared holes. The
+abstraction is deliberately more general than the least generalization of one example, which is a choice, not a
+derivation: with a single demonstration nothing distinguishes `iterable` from `other`, so the only non-arbitrary rule is
+"untouched subterms are variables", and `abstract_untouched=False` is kept as the concrete mode. The same rule covers
+**removal**, since it is about length, not direction.
+
+Where a fix *is* expressible the older rungs already transfer, and that boundary is now measured too. The `pyjwt` repair
+changed three exception handlers in one file; taught on `_validate_iat` and `_validate_nbf` only, induction produces
+
+```
+RELATIONAL  Name  ('Try', 'ExceptHandler')   __brain_hole_0__ -> (__brain_hole_0__, TypeError, OverflowError)
+```
+
+and at the held-out `_validate_exp` it yields **exactly one** candidate, which is the human fix under
+`ast.dump` equality. Splices into the buggy tree and run: **432 passed, 4 skipped — identical to the unpatched
+baseline**, so the induced patch is accepted where the hand-written one was tested.
+
+**Recorded honestly:** this measures *soundness* of transfer, not *necessity*. The 32 correct patches preserve behaviour
+on every witness except the `None`-valued one; no repository test in those trees exercises that class at those sites, so
+nothing here claims they were bugs that had to be fixed. What is claimed, and measured, is narrower and sufficient for
+rule accumulation: the edit that the basis can express was **harmful at 32 of 33 sites**, the edit that carries the
+repair was **not expressible at all**, and with the insertion rung the single demonstration transfers without changing
+behaviour anywhere it should not.
+
+Stream tally unchanged: **6 repaired, 1 refused**; test-present **11/13 = 84.62%**.
