@@ -300,6 +300,18 @@ def test_speculative_cow_rollout_and_articulation_subgoals() -> None:
         )
         assert horizon["status"] == "HORIZON_COMPLETE"
         assert horizon["checkpoints_verified"] == 2
+
+        from canonical.swe_kernel.computer_use_agent_v1 import UnifiedCrossModalPetriNet
+
+        net = UnifiedCrossModalPetriNet()
+        net.add_transition("click_export_btn", "GUI", ["DomTree"], "SqlitePath", lambda dom: str(root / "in.txt"))
+        net.add_transition("query_rows", "SQLITE", ["SqlitePath"], "RawRows", lambda p: pathlib.Path(p).read_text().splitlines())
+        net.add_transition("normalize_rows", "PYTHON", ["RawRows"], "NormalizedPatch", lambda rows: sorted(r.strip() for r in rows if r.strip()))
+        net.add_transition("verify_cli", "CLI", ["NormalizedPatch"], "VerifiedReceipt", lambda rows: f"VERIFIED:{len(rows)}")
+        cryst = net.execute_and_crystallize("cross_modal_export_verify", {"DomTree": "<button id='export'/>"}, "VerifiedReceipt")
+        assert cryst["status"] == "VERIFIED_AND_CRYSTALLIZED"
+        assert cryst["morphism"]["modalities"] == ["GUI", "SQLITE", "PYTHON", "CLI"]
+        assert cryst["goal_value"].startswith("VERIFIED:")
     finally:
         shutil.rmtree(root, ignore_errors=True)
 

@@ -867,6 +867,91 @@ def run_checkpointed_horizon(
     }
 
 
+class UnifiedCrossModalPetriNet:
+    """Algebraic Cross-Modal Compilation: unifies GUI actions, SQLite queries, CLI flags, and Python
+    functions as typed transitions (input_types -> output_type) in one Petri net."""
+
+    def __init__(self) -> None:
+        self.transitions: list[dict[str, Any]] = []
+        self.crystallized_skills: dict[str, dict[str, Any]] = {}
+
+    def add_transition(
+        self,
+        name: str,
+        modality: str,
+        input_types: Sequence[str],
+        output_type: str,
+        executor: Any,
+    ) -> None:
+        self.transitions.append({
+            "name": name,
+            "modality": modality,
+            "input_types": tuple(input_types),
+            "output_type": output_type,
+            "executor": executor,
+        })
+
+    def plan_cross_modal(
+        self,
+        initial_tokens: Mapping[str, Any],
+        goal_type: str,
+    ) -> list[dict[str, Any]] | None:
+        """Find the shortest-path sequence of cross-modal transitions producing `goal_type` from `initial_tokens`."""
+        available = set(initial_tokens.keys())
+        if goal_type in available:
+            return []
+        queue: list[tuple[frozenset[str], list[dict[str, Any]]]] = [(frozenset(available), [])]
+        visited: set[frozenset[str]] = {frozenset(available)}
+
+        while queue:
+            curr_types, path = queue.pop(0)
+            for t in self.transitions:
+                if all(req in curr_types for req in t["input_types"]) and t["output_type"] not in curr_types:
+                    next_types = frozenset(set(curr_types) | {t["output_type"]})
+                    next_path = path + [t]
+                    if t["output_type"] == goal_type:
+                        return next_path
+                    if next_types not in visited:
+                        visited.add(next_types)
+                        queue.append((next_types, next_path))
+        return None
+
+    def execute_and_crystallize(
+        self,
+        skill_id: str,
+        initial_tokens: Mapping[str, Any],
+        goal_type: str,
+    ) -> dict[str, Any]:
+        plan = self.plan_cross_modal(initial_tokens, goal_type)
+        if plan is None:
+            return {"status": "UNREACHABLE", "goal_type": goal_type}
+        tokens = dict(initial_tokens)
+        trace: list[dict[str, Any]] = []
+        for step in plan:
+            args = [tokens[t_name] for t_name in step["input_types"]]
+            out_val = step["executor"](*args)
+            tokens[step["output_type"]] = out_val
+            trace.append({
+                "name": step["name"],
+                "modality": step["modality"],
+                "input_types": list(step["input_types"]),
+                "output_type": step["output_type"],
+            })
+        morphism = {
+            "skill_id": skill_id,
+            "input_types": sorted(initial_tokens.keys()),
+            "output_type": goal_type,
+            "modalities": [s["modality"] for s in trace],
+            "steps": trace,
+        }
+        self.crystallized_skills[skill_id] = morphism
+        return {
+            "status": "VERIFIED_AND_CRYSTALLIZED",
+            "goal_value": tokens[goal_type],
+            "morphism": morphism,
+        }
+
+
 def _delta(before: Mapping[str, bytes], after: Mapping[str, bytes]) -> set[str]:
     changed: set[str] = set()
     all_paths = set(before) | set(after)

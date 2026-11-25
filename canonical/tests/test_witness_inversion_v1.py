@@ -351,3 +351,16 @@ def test_repo_native_component_mining_dual_splicing_and_bidirectional_lens(tmp_p
     assert store.is_refuted("x - 1") is False
     assert store.filter_candidates(["x + 1", "x - 1"]) == ["x - 1"]
 
+    blames = W.localize_by_angelic_perturbation(
+        module_sources={
+            "a.py": "def step_a(x):\n    return x - 1\n",
+            "b.py": "def step_b(x):\n    return step_a(x) * 2\n",
+        },
+        entry_expr="step_b(x)",
+        failing_cases=[({"x": 3}, 8), ({"x": 5}, 12)],
+        passing_cases=[],
+        angelic_values=[4, 6],
+    )
+    assert any(b["file"] == "a.py" and b["old_expr"] == "x - 1" for b in blames)
+
+

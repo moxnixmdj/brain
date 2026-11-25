@@ -1249,6 +1249,31 @@ class MorphismSkillStore:
     def get(self, skill_id: str) -> SubtreeMorphism | None:
         return self._items.get(skill_id)
 
+    def compact(self, refuted_families: Sequence[str] = ()) -> dict[str, int]:
+        """Deduplicate overlapping morphisms by (family, holes, fallback_literal) and prune refuted ones."""
+        before_count = len(self._items)
+        refuted_set = set(refuted_families)
+        seen_signatures: dict[tuple[Any, ...], SubtreeMorphism] = {}
+        pruned_refuted = 0
+        deduplicated = 0
+        for m in list(self._items.values()):
+            if m.family in refuted_set:
+                pruned_refuted += 1
+                continue
+            sig = (m.family, m.holes, m.fallback_literal)
+            if sig in seen_signatures:
+                deduplicated += 1
+                continue
+            seen_signatures[sig] = m
+        self._items = {m.skill_id: m for m in seen_signatures.values()}
+        self._flush()
+        return {
+            "before_count": before_count,
+            "after_count": len(self._items),
+            "deduplicated": deduplicated,
+            "pruned_refuted": pruned_refuted,
+        }
+
     def __len__(self) -> int:
         return len(self._items)
 

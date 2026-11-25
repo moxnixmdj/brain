@@ -173,6 +173,14 @@ def test_multi_statement_subtree_anti_unification_and_o1_deletion(tmp_path):
     assert "if token_str is None" not in replayed
     assert "(token_str or '').strip()" in replayed
 
+    # Compaction deduplicates overlapping morphisms and prunes refuted families
+    m_dup = S.induce_subtree_morphism(before_a, after_a, source_repo="other_repo", source_commit="99999999")
+    assert m_dup is not None
+    store.add(m_dup)
+    assert len(store) == 2
+    comp_res = store.compact()
+    assert comp_res["deduplicated"] == 1 and len(store) == 1
+
     # O(1) deletion without retraining
     assert store.delete(sid) is True
     assert len(store) == 0 and store.get(sid) is None
