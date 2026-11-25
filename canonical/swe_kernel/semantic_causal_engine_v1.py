@@ -4405,8 +4405,14 @@ def repair_project_causally(
                 # insertion and refuses where the anchors do not fit.
                 propose_delta = getattr(skill_store, "propose_delta", None)
                 if callable(propose_delta):
-                    for dlt, dlt_src in propose_delta(site.source_text):
-                        candidates.append((f"DELTA_{dlt.delta_id[3:13]}", dlt_src, ""))
+                    # Priority, not tail position: a measured single experience is tried first. Tail
+                    # position meant the cap dropped every delta before it could be cloned (V11).
+                    delta_cands = [
+                        (f"DELTA_{dlt.delta_id[3:13]}", dlt_src, "")
+                        for dlt, dlt_src in propose_delta(site.source_text)
+                    ]
+                    if delta_cands:
+                        candidates = delta_cands + candidates
             candidates = candidates[:12]
 
             for tag, cand_code, extra_imp in candidates:

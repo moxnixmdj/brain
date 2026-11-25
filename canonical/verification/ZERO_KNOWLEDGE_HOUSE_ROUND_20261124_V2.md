@@ -605,3 +605,30 @@ whether the first experience shortens the search (fewer candidates, less wall-cl
 instant-learning claim stays unverified.
 
 Tally unchanged: **11/13 = 84.62%**, 0 regressions, `K3 = 0`. Causal suite `14 passed`.
+
+## Round V12 — deltas get priority, and the measurement says why they still do not transfer
+
+V11's bottleneck was mechanical (deltas were appended past the replay cap). Deltas now go **first**: the replay pass
+prepends `DELTA_<id>` candidates, so a measured single experience is tried before mined contracts.
+
+| run | verdict | candidates | wall | mechanism |
+|---|---|---|---|---|
+| learn (`pluggy@8051a4d`) | REPAIRED | 1 | 6.46 s | `SPEC_CONTRACT_SET[test_register]...` (1 morphism + 1 delta) |
+| held-out (`pluggy@50585e0`), delta-first | REPAIRED | 25 | 24.08 s | `STATE_CONSISTENCY[unregister:purge ...]` |
+| held-out, no store | REPAIRED | 25 | 22.41 s | same |
+
+Same verdict, same candidate count, ~1.7 s slower — inside the noise of this harness but not a win. **The delta never
+fired**, and the reason is structural, not a ranking problem: the learned edit is anchored on the neighbours of
+`register` in the witness, and the held-out defect is in `unregister`. The anchors made the morphism *safe*
+(`apply_delta` refuses a stranger, measured in the suite) and simultaneously made it *function-specific*, so nothing
+transfers across functions even in the same repository.
+
+That is the second half of the §9.2 question answered by measurement rather than by argument: **an edit anchored on
+its witness's neighbours is a morphism over bodies, not over defects.** Transfer needs a *positional* delta — "insert
+this guard at the top of a body whose first informative statement calls the same callee as the witness's" — where the
+anchor is a property of the defect class (a body whose second statement is a registry lookup) rather than a property of
+the one function that happened to be fixed first. This round did not build it; it is recorded as the next step, with
+its acceptance test written before the implementation: learn from `pluggy@8051a4d`, then propose on
+`pluggy@50585e0`'s `unregister` **without** being told the function name.
+
+Tally unchanged: **11/13 = 84.62%**, 0 regressions, `K3 = 0`.

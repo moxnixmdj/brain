@@ -297,6 +297,13 @@
   },
   "unit_of_learning": "DeltaMorphism (insert/delete/replace, informative-neighbour anchors, skeleton anti-unification)"
  },
+ "memory_ablation_v12_delta_priority": {
+  "change": "delta candidates are prepended to the replay list instead of appended (V11: they were dropped by the cap)",
+  "held_out_pluggy@50585e0_delta_first": "REPAIRED 25 cand 24.08 s, STATE_CONSISTENCY",
+  "held_out_pluggy@50585e0_no_store": "REPAIRED 25 cand 22.41 s",
+  "learn_pluggy@8051a4d": "REPAIRED 1 cand 6.46 s (1 morphism + 1 delta)",
+  "result": "the delta never fired: anchors are witness-neighbour properties, so the edit is function-specific; priority fixed the cap but not the transfer"
+ },
  "modules": {
   "canonical/runtime/causal_computer_use_agent_v1.py": {
    "lines": 578,
@@ -313,7 +320,7 @@
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
-   "sha256": "baa14bf632dcc086e6377b88f0d810be744a0dc7868b4c35680cd1b78340be4c"
+   "sha256": "b75fe03144f76badc7a4e3146bb6b66b84b343a96a9285c1d3f3b54c2749c330"
   },
   "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
    "bytes": 21011,
@@ -459,7 +466,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Give deltas priority instead of tail position: replay a delta before mined contracts when its origin matches the repository and transfers >= 1, then re-run the store-vs-empty ablation and report whether one experience shortens the search. Until that number exists, instant learning remains an unverified claim.",
+ "next_bottleneck": "Positional delta: 'insert this guard at the top of a body whose first informative statement calls the same callee as the witness's' -- anchored on a property of the defect class, not on the one function fixed first. Acceptance test written first: learn on pluggy@8051a4d, then propose on pluggy@50585e0's unregister without being told the function name.",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
