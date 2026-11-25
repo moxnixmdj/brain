@@ -644,6 +644,98 @@ def induce_node_templates(pairs: Iterable[tuple[str, str, str]], *, context_dept
     return sorted(folded.values(), key=lambda t: (t.kind != "RELATIONAL", -t.support, t.template_id()))
 
 
+def _arity_of(node: ast.AST) -> dict[str, int]:
+    """List-valued field lengths, for the fields where an insertion can hide."""
+    return {name: len(value) for name, value in ast.iter_fields(node) if isinstance(value, list)}
+
+
+def _abstract_equal_pair(old: ast.AST, new: ast.AST, counter: list[int]) -> None:
+    """Replace leaves the edit did not touch with one shared hole per position, in place.
+
+    This is deliberately MORE general than the least generalization of a single demonstration:
+    with one example, nothing distinguishes `x` from `y` in `f(x) -> g(x, None)`, so the only
+    non-arbitrary choice is to treat the untouched subterms as variables and the touched ones as
+    constants. Whether that generalization is right is not argued here -- it is measured, by
+    applying the template somewhere else and executing the result.
+    """
+    for field, value in ast.iter_fields(old):
+        other = getattr(new, field, None)
+        if isinstance(value, ast.AST) and isinstance(other, ast.AST):
+            if _opaque(value) == _opaque(other) and isinstance(value, ast.expr):
+                hole_name = f"{HOLE_PREFIX}{counter[0]}__"
+                counter[0] += 1
+                setattr(old, field, _hole(hole_name))
+                setattr(new, field, _hole(hole_name))
+            else:
+                _abstract_equal_pair(value, other, counter)
+        elif isinstance(value, list) and isinstance(other, list):
+            # Lengths may differ -- that IS the insertion -- so take the common prefix and leave
+            # the added tail alone; a hole there would abstract away the very edit being taught.
+            for index, (left, right) in enumerate(zip(value, other)):
+                if isinstance(left, ast.AST) and isinstance(right, ast.AST):
+                    if _opaque(left) == _opaque(right) and isinstance(left, ast.expr):
+                        hole_name = f"{HOLE_PREFIX}{counter[0]}__"
+                        counter[0] += 1
+                        value[index] = _hole(hole_name)
+                        other[index] = _hole(hole_name)
+                    else:
+                        _abstract_equal_pair(left, right, counter)
+
+
+def induce_insertion_templates(pairs: Iterable[tuple[str, str, str]], *, context_depth: int = 1,
+                              abstract_untouched: bool = True) -> list[NodeTemplate]:
+    """The third rung: edits that ADD or REMOVE a child, which the node diff cannot see at all.
+
+    Measured blindness this exists to remove (V23): `_sites` walks paths of the defective tree, so a
+    node that exists only in the repaired tree has no path and is never visited. `hasattr(x, 'c')`
+    -> `getattr(x, 'c', None)` therefore entered the basis as the callee rename alone (root `Name`,
+    LITERAL, travels nowhere) plus a NON_EXECUTABLE `Call.args` row that can never be applied. The
+    repair -- the argument that has to appear -- was unreachable by construction, and applying the
+    reachable half at held-out sites raised AttributeError where `hasattr` had returned False.
+
+    The fix is to promote the differing position to the smallest enclosing node whose field LENGTH
+    changed, and to make that whole node the pattern, so the inserted child is inside it.
+    """
+    if context_depth < 0 or context_depth > 8:
+        raise ValueError("CONTEXT_DEPTH_OUT_OF_RANGE")
+    folded: dict[tuple, NodeTemplate] = {}
+    for name, defective, repaired in pairs:
+        old_tree = _strip_docstrings(_parse(defective, "DEFECTIVE"))
+        new_tree = _strip_docstrings(_parse(repaired, "REPAIRED"))
+        sites = [(ancestry, path, node, parent) for ancestry, path, node, parent, _f in _sites(old_tree)
+                 if parent is not None]
+        arity_sites: list[tuple[tuple, tuple, ast.AST, ast.AST]] = []
+        for ancestry, path, node, _parent in sites:
+            other = _resolve(new_tree, path)
+            if other is None or type(other) is not type(node):
+                continue
+            if _arity_of(node) != _arity_of(other):
+                arity_sites.append((ancestry, path, node, other))
+        arity_paths = [path for _a, path, _n, _o in arity_sites]
+        smallest = [(ancestry, path, node, other) for ancestry, path, node, other in arity_sites
+                    if not any(len(q) > len(path) and q[:len(path)] == path for q in arity_paths)]
+        for ancestry, path, node, other in smallest:
+            mode = "EXPR" if isinstance(node, ast.expr) else "STMT"
+            pat_old, pat_new = copy.deepcopy(node), copy.deepcopy(other)
+            if abstract_untouched:
+                _abstract_equal_pair(pat_old, pat_new, [0])
+            old_pattern, new_pattern = ast.unparse(pat_old), ast.unparse(pat_new)
+            kind = "RELATIONAL" if HOLE_PREFIX in old_pattern else "LITERAL"
+            context = tuple(ancestry[-context_depth:]) if context_depth else ()
+            candidate = NodeTemplate(kind=kind, mode=mode, root_type=type(node).__name__,
+                                     context=context, old_pattern=old_pattern,
+                                     new_pattern=new_pattern, support=1, taught_by=(name,))
+            key = (candidate.kind, candidate.mode, candidate.root_type, candidate.context,
+                   candidate.old_pattern, candidate.new_pattern)
+            if key in folded:
+                existing = folded[key]
+                candidate = dataclasses.replace(
+                    existing, support=existing.support + 1,
+                    taught_by=tuple(sorted(set(existing.taught_by) | {name})))
+            folded[key] = candidate
+    return sorted(folded.values(), key=lambda t: (t.kind != "RELATIONAL", -t.support, t.template_id()))
+
+
 def _parse_pattern(text: str, mode: str) -> ast.AST | None:
     try:
         if mode == "EXPR":

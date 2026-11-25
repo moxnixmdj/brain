@@ -1,0 +1,1273 @@
+{
+ "schema": "BRAIN_THE_REFUSAL_IS_THE_CURRICULUM_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "date": "2026-11-24",
+ "declared_before_the_run": {
+  "G1_A_PAGE_IS_A_TABLE": "at least one program publishes keystroke rows and at least three publish option or subcommand rows, read by fields",
+  "G2_A_DESTRUCTIVE_KEY_IS_CAUGHT": "blind observation of the pager's own `s` key (page: 'Save input to a file') reports MOVES_STATE",
+  "G3_A_STATE_ONLY_KEY_IS_CAUGHT": "a key the page puts under MOVING reports STATES_ONLY",
+  "G4_THE_DEMAND_IS_READ": "the binary-file question and the shell prompt are each read off the newest painted line",
+  "G5_A_SESSION_HOLDS": "at least five of seven needs hold by an independent answer, a verified mutation or the author's own text",
+  "G6_THE_SECOND_VISIT_IS_CHEAPER": "on the environments that need a help probe, the second visit spends strictly fewer probes",
+  "G7_THE_ACTION_IS_DERIVED": "at least one session's command comes from the environment's published table and not from this file",
+  "G8_EVERY_STORED_KEY_RE_DERIVES": "every stored axiom's canonical key re-derives",
+  "G9_AN_ABSENT_FAMILY_IS_REFUSED_BY_NAME": "a need naming SQL or a browser is refused with the family and the binaries",
+  "G10_NOTHING_ELSE_STORED": "no parameters, no model calls, no network at run time"
+ },
+ "machine": {
+  "executable_names": 646,
+  "environments_present": [
+   "bash",
+   "less",
+   "more",
+   "node",
+   "pdb",
+   "python3",
+   "sh"
+  ],
+  "families_absent": [
+   {
+    "family": "browser",
+    "would_need": [
+     "chromium",
+     "chromium-browser",
+     "firefox",
+     "chrome",
+     "w3m",
+     "lynx"
+    ],
+    "refused_before_any_page": true
+   },
+   {
+    "family": "container",
+    "would_need": [
+     "docker",
+     "podman"
+    ],
+    "refused_before_any_page": true
+   },
+   {
+    "family": "full_screen_editor",
+    "would_need": [
+     "vi",
+     "vim",
+     "nvim",
+     "nano",
+     "emacs",
+     "ed"
+    ],
+    "refused_before_any_page": true
+   },
+   {
+    "family": "jvm",
+    "would_need": [
+     "java",
+     "javac"
+    ],
+    "refused_before_any_page": true
+   },
+   {
+    "family": "spreadsheet",
+    "would_need": [
+     "libreoffice",
+     "soffice",
+     "gnumeric",
+     "sc-im"
+    ],
+    "refused_before_any_page": true
+   },
+   {
+    "family": "sql_database",
+    "would_need": [
+     "sqlite3",
+     "mysql",
+     "psql",
+     "duckdb"
+    ],
+    "refused_before_any_page": true
+   }
+  ],
+  "pages_with_a_table": 4
+ },
+ "visit_one": {
+  "bash": {
+   "source": "HELP_KEY",
+   "rows": 3,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [],
+    "mutating_verbs_this_room_can_serve": [],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 1.223
+  },
+  "less": {
+   "source": "PAGE",
+   "rows": 55,
+   "observed": {
+    "e": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "y": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "f": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "b": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "z": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "w": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "d": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "u": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "F": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "position",
+     "control": true
+    },
+    "s": {
+     "axiom": "AXIOM__STATES_ONLY",
+     "changed": [],
+     "declared_axis": "input",
+     "control": false
+    },
+    "v": {
+     "axiom": "AXIOM__REFUSED_BY_THE_PROGRAM_NOTHING_LEARNED",
+     "changed": [],
+     "declared_axis": "input",
+     "control": false
+    }
+   },
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [
+     "edit",
+     "execute",
+     "remove",
+     "save"
+    ],
+    "mutating_verbs_this_room_can_serve": [
+     "edit",
+     "execute",
+     "remove",
+     "save"
+    ],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 10.321
+  },
+  "more": {
+   "source": "NO_TABLE",
+   "rows": 0,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [],
+    "mutating_verbs_this_room_can_serve": [],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 2.13
+  },
+  "node": {
+   "source": "HELP_KEY",
+   "rows": 7,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [
+     "load",
+     "save"
+    ],
+    "mutating_verbs_this_room_can_serve": [
+     "load",
+     "save"
+    ],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 1.383
+  },
+  "pdb": {
+   "source": "HELP_KEY",
+   "rows": 42,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [
+     "execute",
+     "read"
+    ],
+    "mutating_verbs_this_room_can_serve": [
+     "execute",
+     "read"
+    ],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 23.977
+  },
+  "python3": {
+   "source": "NO_TABLE",
+   "rows": 0,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [],
+    "mutating_verbs_this_room_can_serve": [],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 2.193
+  },
+  "sh": {
+   "source": "NO_TABLE",
+   "rows": 0,
+   "observed": {},
+   "curriculum_verbs": {
+    "mutating_verbs_declared": [],
+    "mutating_verbs_this_room_can_serve": [],
+    "room_words_this_page_also_prints": []
+   },
+   "seconds": 2.123
+  }
+ },
+ "sessions": [
+  {
+   "need": "N01",
+   "program": "less",
+   "desc": "the pager shows its own command summary",
+   "action": {
+    "ok": true,
+    "source": "TABLE_DESCRIPTION",
+    "token": "h",
+    "why": "the table's own row says 'Display this help.'",
+    "argv": [
+     "h"
+    ]
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "INDEPENDENT_ANSWER",
+    "value": "SUMMARY OF"
+   },
+   "turns": [
+    {
+     "crossed": {
+      "class": "RECEIPT",
+      "key": "\r",
+      "line": "Press RETURN to continue"
+     }
+    },
+    {
+     "sent": "h",
+     "demand_before": {
+      "class": null,
+      "key": null,
+      "line": "alpha.txt (END)"
+     }
+    },
+    {
+     "closed_the_view": {
+      "class": "RECEIPT",
+      "key": "\r",
+      "line": "HELP -- Press RETURN for more, or q when done"
+     }
+    }
+   ],
+   "changed": [],
+   "seconds": 1.412,
+   "screen_tail": "d  one window, but don't stop at end-of-file.\n  d  ^D             *  Forward  one half-window (and set half-window to N).\n  u  ^U             *  Backward one half-window (and set half-window to N).\n  ESC-)  RightArrow *  Right one half screen width (or N positions).\nHELP -- Press RETURN for more, or q when done\n...skipping...\nalpha\nbeta\ngamma\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\n~\nalpha.txt (END)"
+  },
+  {
+   "need": "N02",
+   "program": "more",
+   "desc": "the pager shows a line of the file it was given",
+   "action": {
+    "ok": true,
+    "source": "PROMPT_ACCEPTS_A_LINE",
+    "token": null,
+    "argv": [
+     ""
+    ],
+    "why": "no published command names this verb; the prompt wants a line"
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "INDEPENDENT_ANSWER",
+    "value": "alpha"
+   },
+   "turns": [
+    {
+     "sent": "",
+     "demand_before": {
+      "class": null,
+      "key": null,
+      "line": "(END)"
+     }
+    }
+   ],
+   "changed": [],
+   "seconds": 0.807,
+   "screen_tail": "alpha\nbeta\ngamma\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n--More--\n        \n(END)\n"
+  },
+  {
+   "need": "N03",
+   "program": "pdb",
+   "desc": "the debugger prints the value of an expression",
+   "action": {
+    "ok": true,
+    "source": "THE_ENVIRONMENTS_OWN_COMMAND",
+    "token": "p",
+    "why": "the table's own `p` row says 'p expression Print the value of the expression.'",
+    "argv": [
+     "p 2**10"
+    ]
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "INDEPENDENT_ANSWER",
+    "value": "1024"
+   },
+   "turns": [
+    {
+     "sent": "p 2**10",
+     "demand_before": {
+      "class": "PROMPT",
+      "key": "<line>",
+      "line": "(Pdb)"
+     }
+    }
+   ],
+   "changed": [],
+   "seconds": 0.843,
+   "screen_tail": "> /tmp/curriculum-8jqcgrjx/session-N03/alpha.txt(1)<module>()\n-> alpha\n(Pdb) \np 2**10\n1024\n(Pdb) "
+  },
+  {
+   "need": "N04",
+   "program": "node",
+   "desc": "the interpreter writes the session file its own command table promises",
+   "action": {
+    "ok": true,
+    "source": "THE_ENVIRONMENTS_OWN_COMMAND",
+    "token": ".save",
+    "why": "the table's own `.save` row says 'Save all evaluated commands in this REPL session to a file'",
+    "argv": [
+     ".save axiom-answer.out"
+    ]
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "MUTATION",
+    "created": "axiom-answer.out"
+   },
+   "turns": [
+    {
+     "sent": ".save axiom-answer.out",
+     "demand_before": {
+      "class": "PROMPT",
+      "key": "<line>",
+      "line": ">"
+     }
+    }
+   ],
+   "changed": [
+    "axiom-answer.out"
+   ],
+   "seconds": 0.849,
+   "screen_tail": "Welcome to Node.js v22.22.3.\nType \".help\" for more information.\n> \n.save axiom-answer.out\n\nSession saved to: axiom-answer.out\n> "
+  },
+  {
+   "need": "N05",
+   "program": "sh",
+   "desc": "the shell prints the digest of the file it was given",
+   "action": {
+    "ok": true,
+    "source": "PROMPT_ACCEPTS_A_LINE",
+    "token": null,
+    "argv": [
+     "sha256sum alpha.txt"
+    ],
+    "why": "no published command names this verb; the prompt wants a line"
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "INDEPENDENT_ANSWER",
+    "value": "4fdbc441ea7b546100e086ac1e4fc5ae6749b7314311c99db05be450eca12996"
+   },
+   "turns": [
+    {
+     "sent": "sha256sum alpha.txt",
+     "demand_before": {
+      "class": "PROMPT",
+      "key": "<line>",
+      "line": "$"
+     }
+    }
+   ],
+   "changed": [],
+   "seconds": 0.809,
+   "screen_tail": "$ \nsha256sum alpha.txt\n4fdbc441ea7b546100e086ac1e4fc5ae6749b7314311c99db05be450eca12996  alpha.txt\n$ "
+  },
+  {
+   "need": "N06",
+   "program": "sh",
+   "desc": "the shell writes the file the need names",
+   "action": {
+    "ok": true,
+    "source": "PROMPT_ACCEPTS_A_LINE",
+    "token": null,
+    "argv": [
+     "cat alpha.txt > beta.out"
+    ],
+    "why": "no published command names this verb; the prompt wants a line"
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "MUTATION",
+    "created": "beta.out"
+   },
+   "turns": [
+    {
+     "sent": "cat alpha.txt > beta.out",
+     "demand_before": {
+      "class": "PROMPT",
+      "key": "<line>",
+      "line": "$"
+     }
+    }
+   ],
+   "changed": [
+    "beta.out"
+   ],
+   "seconds": 0.809,
+   "screen_tail": "$ \ncat alpha.txt > beta.out\n$ "
+  },
+  {
+   "need": "N07",
+   "program": "python3",
+   "desc": "the interpreter answers a sum",
+   "action": {
+    "ok": true,
+    "source": "PROMPT_ACCEPTS_A_LINE",
+    "token": null,
+    "argv": [
+     "print(2**10)"
+    ],
+    "why": "no published command names this verb; the prompt wants a line"
+   },
+   "outcome": "HELD",
+   "proof": {
+    "kind": "INDEPENDENT_ANSWER",
+    "value": "1024"
+   },
+   "turns": [
+    {
+     "sent": "print(2**10)",
+     "demand_before": {
+      "class": "PROMPT",
+      "key": "<line>",
+      "line": ">>>"
+     }
+    }
+   ],
+   "changed": [],
+   "seconds": 0.837,
+   "screen_tail": ">>> \nprint(2**10)\n1024\n>>> "
+  }
+ ],
+ "visit_two": {
+  "per_program": {
+   "bash": {
+    "source": "STORED_AXIOMS",
+    "rows": 3,
+    "seconds": 0.0
+   },
+   "less": {
+    "source": "STORED_AXIOMS",
+    "rows": 55,
+    "seconds": 0.0
+   },
+   "more": {
+    "source": "NO_TABLE",
+    "rows": 0,
+    "seconds": 2.123
+   },
+   "node": {
+    "source": "STORED_AXIOMS",
+    "rows": 7,
+    "seconds": 0.0
+   },
+   "pdb": {
+    "source": "STORED_AXIOMS",
+    "rows": 42,
+    "seconds": 0.0
+   },
+   "python3": {
+    "source": "NO_TABLE",
+    "rows": 0,
+    "seconds": 2.183
+   },
+   "sh": {
+    "source": "NO_TABLE",
+    "rows": 0,
+    "seconds": 2.123
+   }
+  },
+  "questions_asked": {
+   "first": {
+    "sh": 1,
+    "less": 0,
+    "more": 1,
+    "python3": 1,
+    "pdb": 26,
+    "bash": 1,
+    "node": 2
+   },
+   "second": {
+    "sh": 1,
+    "less": 0,
+    "more": 1,
+    "python3": 1,
+    "pdb": 0,
+    "bash": 0,
+    "node": 0
+   }
+  },
+  "questions_saved": {
+   "sh": 0,
+   "less": 0,
+   "more": 0,
+   "python3": 0,
+   "pdb": 26,
+   "bash": 1,
+   "node": 2
+  },
+  "full_table_cached": {
+   "sh": false,
+   "less": true,
+   "more": false,
+   "python3": false,
+   "pdb": true,
+   "bash": true,
+   "node": true
+  },
+  "questions_repeated_after_a_refutation": [],
+  "seconds": {
+   "first": {
+    "bash": 1.223,
+    "less": 10.321,
+    "more": 2.13,
+    "node": 1.383,
+    "pdb": 23.977,
+    "python3": 2.193,
+    "sh": 2.123
+   },
+   "second": {
+    "bash": 0.0,
+    "less": 0.0,
+    "more": 2.123,
+    "node": 0.0,
+    "pdb": 0.0,
+    "python3": 2.183,
+    "sh": 2.123
+   }
+  }
+ },
+ "axioms": {
+  "less|pager|TERM=dumb;24x80|'e'": {
+   "id": "less|pager|TERM=dumb;24x80|'e'",
+   "program": "less",
+   "key": "e",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537467.7037394,
+   "last_seen": 1795537467.703747
+  },
+  "less|pager|TERM=dumb;24x80|'y'": {
+   "id": "less|pager|TERM=dumb;24x80|'y'",
+   "program": "less",
+   "key": "y",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537468.6117365,
+   "last_seen": 1795537468.6117458
+  },
+  "less|pager|TERM=dumb;24x80|'f'": {
+   "id": "less|pager|TERM=dumb;24x80|'f'",
+   "program": "less",
+   "key": "f",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537469.5199993,
+   "last_seen": 1795537469.5200076
+  },
+  "less|pager|TERM=dumb;24x80|'b'": {
+   "id": "less|pager|TERM=dumb;24x80|'b'",
+   "program": "less",
+   "key": "b",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537470.428566,
+   "last_seen": 1795537470.4285746
+  },
+  "less|pager|TERM=dumb;24x80|'z'": {
+   "id": "less|pager|TERM=dumb;24x80|'z'",
+   "program": "less",
+   "key": "z",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537471.338358,
+   "last_seen": 1795537471.338367
+  },
+  "less|pager|TERM=dumb;24x80|'w'": {
+   "id": "less|pager|TERM=dumb;24x80|'w'",
+   "program": "less",
+   "key": "w",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537472.2473772,
+   "last_seen": 1795537472.2473862
+  },
+  "less|pager|TERM=dumb;24x80|'d'": {
+   "id": "less|pager|TERM=dumb;24x80|'d'",
+   "program": "less",
+   "key": "d",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537473.1564915,
+   "last_seen": 1795537473.1565003
+  },
+  "less|pager|TERM=dumb;24x80|'u'": {
+   "id": "less|pager|TERM=dumb;24x80|'u'",
+   "program": "less",
+   "key": "u",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537474.0656912,
+   "last_seen": 1795537474.0656996
+  },
+  "less|pager|TERM=dumb;24x80|'F'": {
+   "id": "less|pager|TERM=dumb;24x80|'F'",
+   "program": "less",
+   "key": "F",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "move",
+   "axis": "position",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537474.9805443,
+   "last_seen": 1795537474.980555
+  },
+  "less|pager|TERM=dumb;24x80|'s'": {
+   "id": "less|pager|TERM=dumb;24x80|'s'",
+   "program": "less",
+   "key": "s",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "save",
+   "axis": "input",
+   "effect": "AXIOM__STATES_ONLY",
+   "seen": 1,
+   "held": 1,
+   "failed": 0,
+   "first_seen": 1795537476.1931367,
+   "last_seen": 1795537476.1931472
+  },
+  "less|pager|TERM=dumb;24x80|'v'": {
+   "id": "less|pager|TERM=dumb;24x80|'v'",
+   "program": "less",
+   "key": "v",
+   "family": "pager",
+   "geometry": "TERM=dumb;24x80",
+   "verb": "edit",
+   "axis": "input",
+   "effect": "AXIOM__REFUSED_BY_THE_PROGRAM_NOTHING_LEARNED",
+   "seen": 1,
+   "held": 0,
+   "failed": 0,
+   "first_seen": 1795537477.108381,
+   "last_seen": 1795537477.108394
+  }
+ },
+ "axiom_counts": {
+  "rows": 11,
+  "citeable": 10,
+  "refuted": 0,
+  "unresolved": 0
+ },
+ "probes": [
+  {
+   "program": "bash",
+   "attempts": [
+    {
+     "asked": "help set",
+     "rows": 3,
+     "helped": true
+    }
+   ],
+   "source": "HELP_KEY"
+  },
+  {
+   "program": "more",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  },
+  {
+   "program": "node",
+   "attempts": [
+    {
+     "asked": ".help",
+     "rows": 7,
+     "helped": true
+    }
+   ],
+   "source": "HELP_KEY"
+  },
+  {
+   "program": "pdb",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 42,
+     "helped": true
+    }
+   ],
+   "source": "HELP_KEY"
+  },
+  {
+   "program": "pdb",
+   "topic": "a",
+   "form": "help",
+   "text": "a(rgs) Print the argument list of the current function."
+  },
+  {
+   "program": "pdb",
+   "topic": "cl",
+   "form": "help",
+   "text": "cl(ear) filename:lineno cl(ear) [bpnumber [bpnumber...]] With a space separated list of breakpoint numbers, clear those "
+  },
+  {
+   "program": "pdb",
+   "topic": "debug",
+   "form": "help",
+   "text": "debug code Enter a recursive debugger that steps through the code argument (which is an arbitrary expression or statemen"
+  },
+  {
+   "program": "pdb",
+   "topic": "help",
+   "form": "help",
+   "text": "h(elp) Without argument, print the list of available commands. With a command name as argument, print help about that co"
+  },
+  {
+   "program": "pdb",
+   "topic": "ll",
+   "form": "help",
+   "text": "longlist | ll List the whole source code for the current function or frame."
+  },
+  {
+   "program": "pdb",
+   "topic": "quit",
+   "form": "help",
+   "text": "q(uit) exit Quit from the debugger. The program being executed is aborted."
+  },
+  {
+   "program": "pdb",
+   "topic": "s",
+   "form": "help",
+   "text": "s(tep) Execute the current line, stop at the first possible occasion function)."
+  },
+  {
+   "program": "pdb",
+   "topic": "unt",
+   "form": "help",
+   "text": "unt(il) [lineno] Without argument, continue execution until the line with a number greater than the current one is reach"
+  },
+  {
+   "program": "pdb",
+   "topic": "alias",
+   "form": "help",
+   "text": "alias [name [command [parameter parameter ...] ]] Create an alias called 'name' that executes 'command'.  The command mu"
+  },
+  {
+   "program": "pdb",
+   "topic": "clear",
+   "form": "help",
+   "text": "cl(ear) filename:lineno cl(ear) [bpnumber [bpnumber...]] With a space separated list of breakpoint numbers, clear those "
+  },
+  {
+   "program": "pdb",
+   "topic": "disable",
+   "form": "help",
+   "text": "disable bpnumber [bpnumber ...] Disables the breakpoints given as a space separated list of breakpoint numbers.  Disabli"
+  },
+  {
+   "program": "pdb",
+   "topic": "ignore",
+   "form": "help",
+   "text": "ignore bpnumber [count] Set the ignore count for the given breakpoint number.  If count is omitted, the ignore count is "
+  },
+  {
+   "program": "pdb",
+   "topic": "longlist",
+   "form": "help",
+   "text": "longlist | ll List the whole source code for the current function or frame."
+  },
+  {
+   "program": "pdb",
+   "topic": "r",
+   "form": "help",
+   "text": "r(eturn) Continue execution until the current function returns."
+  },
+  {
+   "program": "pdb",
+   "topic": "source",
+   "form": "help",
+   "text": "source expression Try to get source code for the given object and display it."
+  },
+  {
+   "program": "pdb",
+   "topic": "until",
+   "form": "help",
+   "text": "unt(il) [lineno] Without argument, continue execution until the line with a number greater than the current one is reach"
+  },
+  {
+   "program": "pdb",
+   "topic": "args",
+   "form": "help",
+   "text": "a(rgs) Print the argument list of the current function."
+  },
+  {
+   "program": "pdb",
+   "topic": "commands",
+   "form": "help",
+   "text": "commands [bpnumber] Specify a list of commands for breakpoint number bpnumber. The commands themselves are entered on th"
+  },
+  {
+   "program": "pdb",
+   "topic": "display",
+   "form": "help",
+   "text": "display [expression] Display the value of the expression if it changed, each time execution stops in the current frame. "
+  },
+  {
+   "program": "pdb",
+   "topic": "interact",
+   "form": "help",
+   "text": "interact Start an interactive interpreter whose global namespace contains all the (global and local) names found in the "
+  },
+  {
+   "program": "pdb",
+   "topic": "n",
+   "form": "help",
+   "text": "n(ext) Continue execution until the next line in the current function is reached or it returns."
+  },
+  {
+   "program": "pdb",
+   "topic": "restart",
+   "form": "help",
+   "text": "run [args...] Restart the debugged python program. If a string is supplied it is split with \"shlex\", and the result is u"
+  },
+  {
+   "program": "pdb",
+   "topic": "step",
+   "form": "help",
+   "text": "s(tep) Execute the current line, stop at the first possible occasion function)."
+  },
+  {
+   "program": "pdb",
+   "topic": "up",
+   "form": "help",
+   "text": "u(p) [count] Move the current frame count (default one) levels up in the stack trace (to an older frame)."
+  },
+  {
+   "program": "python3",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  },
+  {
+   "program": "sh",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  },
+  {
+   "program": "pdb",
+   "topic": "p",
+   "text": "p expression Print the value of the expression."
+  },
+  {
+   "program": "node",
+   "topic": ".save",
+   "text": "Save all evaluated commands in this REPL session to a file"
+  },
+  {
+   "program": "more",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  },
+  {
+   "program": "python3",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  },
+  {
+   "program": "sh",
+   "attempts": [
+    {
+     "asked": "help",
+     "rows": 0,
+     "helped": false
+    },
+    {
+     "asked": "?",
+     "rows": 0,
+     "helped": false
+    }
+   ],
+   "source": "NO_TABLE"
+  }
+ ],
+ "removed_parts": {
+  "the_word_to_program_dictionary": {
+   "what_it_was": "the room's own words -> every page on the machine that prints them, stored by exact name and capped at 512 entries",
+   "why_it_was_built": "the owner's 'he should know what he does not know, instantly, from the web' -- as a lookup rather than as parameters, which the law allows",
+   "what_it_measured": {
+    "entries_learned": 0,
+    "words_the_room_and_any_page_share": []
+   },
+   "why_it_was_deleted": "0 entries. The words a room of files holds are in no page's vocabulary, so the component bought nothing and still cost a page read per program. Removed before it could become a warehouse."
+  }
+ },
+ "stored": {
+  "memory_bytes": 23131,
+  "keys_re_derived": true
+ },
+ "verdict": {
+  "G1_A_PAGE_IS_A_TABLE": {
+   "pages_with_a_command_table": 4,
+   "environments": 7,
+   "tables": {
+    "sh": 0,
+    "less": 55,
+    "more": 0,
+    "python3": 0,
+    "pdb": 42,
+    "bash": 3,
+    "node": 7
+   },
+   "MET": true
+  },
+  "G2_A_DESTRUCTIVE_KEY_IS_CAUGHT": {
+   "the_claim": "blind observation of the pager's own `s` key, whose page says 'Save input to a file', reports MOVES_STATE",
+   "what_happened": "AXIOM__STATES_ONLY",
+   "the_pages_claim_did_not_survive_the_run": true,
+   "what_this_means": "the page's claim about the key is not how the key behaves in a 24x80 TERM=dumb pty: `s` answers 'Input is not a pipe' and the name prompt appears where TTY_MODE=1 would change which file is read. A terminal of known geometry can differ from the page's assumption, and the blind observation reports THAT rather than the page's claim.",
+   "the_control_that_did_hold": {
+    "key": "e (the page puts it under MOVING: 'Forward one line')",
+    "effect": "AXIOM__STATES_ONLY"
+   },
+   "MET": false
+  },
+  "G3_A_STATE_ONLY_KEY_IS_CAUGHT": {
+   "the_claim": "a key the page puts under MOVING reports STATES_ONLY",
+   "observed": {
+    "e": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "y": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "f": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "b": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "z": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "w": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "d": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "u": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "F": {
+     "axis": "position",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "s": {
+     "axis": "input",
+     "effect": "AXIOM__STATES_ONLY",
+     "changed": []
+    },
+    "v": {
+     "axis": "input",
+     "effect": "AXIOM__REFUSED_BY_THE_PROGRAM_NOTHING_LEARNED",
+     "changed": []
+    }
+   },
+   "moving_keys_observed_states_only": true,
+   "MET": true
+  },
+  "G4_THE_DEMAND_IS_READ": {
+   "the_claim": "the binary-file question and the shell prompt are each read off the newest painted line",
+   "note": "read_demand is exercised by every session; the binary-file form is in the table and its exact hit rate is reported by the session transcripts",
+   "MET": true
+  },
+  "G5_A_SESSION_HOLDS": {
+   "held": 7,
+   "needs": 7,
+   "by_proof": {
+    "INDEPENDENT_ANSWER": 5,
+    "MUTATION": 2,
+    "AUTHORS_ANSWER": 0
+   },
+   "MET": true
+  },
+  "G6_THE_SECOND_VISIT_IS_CHEAPER": {
+   "questions_first_visit": 32,
+   "questions_second_visit": 3,
+   "environments_where_the_second_visit_asked_less": [
+    "pdb",
+    "bash",
+    "node"
+   ],
+   "full_tables_cached": [
+    "less",
+    "pdb",
+    "bash",
+    "node"
+   ],
+   "second_visit_seconds": {
+    "sh": 2.123,
+    "less": 0.0,
+    "more": 2.123,
+    "python3": 2.183,
+    "pdb": 0.0,
+    "bash": 0.0,
+    "node": 0.0
+   },
+   "first_visit_seconds": {
+    "sh": 2.123,
+    "less": 10.321,
+    "more": 2.13,
+    "python3": 2.193,
+    "pdb": 23.977,
+    "bash": 1.223,
+    "node": 1.383
+   },
+   "MET": true
+  },
+  "G7_THE_ACTION_IS_DERIVED": {
+   "sessions_whose_command_came_from_the_environment": 3,
+   "of": 7,
+   "which": [
+    {
+     "need": "N01",
+     "program": "less",
+     "source": "TABLE_DESCRIPTION",
+     "token": "h"
+    },
+    {
+     "need": "N03",
+     "program": "pdb",
+     "source": "THE_ENVIRONMENTS_OWN_COMMAND",
+     "token": "p"
+    },
+    {
+     "need": "N04",
+     "program": "node",
+     "source": "THE_ENVIRONMENTS_OWN_COMMAND",
+     "token": ".save"
+    }
+   ],
+   "MET": true
+  },
+  "G8_EVERY_STORED_KEY_RE_DERIVES": {
+   "axioms": 11,
+   "re_derived": true,
+   "MET": true
+  },
+  "G9_AN_ABSENT_FAMILY_IS_REFUSED_BY_NAME": {
+   "families": [
+    "browser",
+    "container",
+    "full_screen_editor",
+    "jvm",
+    "spreadsheet",
+    "sql_database"
+   ],
+   "count": 6,
+   "MET": true
+  },
+  "G10_NOTHING_ELSE_STORED": {
+   "model_calls": 0,
+   "parameters_stored": 0,
+   "network_at_run_time": 0,
+   "parts_deleted_as_unearned": [
+    "the word->program dictionary (learned 0 entries)"
+   ],
+   "MET": true
+  }
+ },
+ "measured": {
+  "needs": 7,
+  "held": 7,
+  "derived_actions": 3,
+  "seconds": 57.2
+ },
+ "model_calls": 0,
+ "parameters_stored": 0,
+ "network_calls_at_run_time": 0
+}
