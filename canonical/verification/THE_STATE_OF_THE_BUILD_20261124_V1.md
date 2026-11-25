@@ -3,7 +3,7 @@
 **Date:** 2026-11-24
 **Branch:** `arena/94363358-brain`, from `c4f529eb`
 **Receipts (all committed alongside this file):**
-`THE_FINAL_SWEEP_RECEIPT_20261124_V2.json` (45 rows, 8 verified, 1530.4 s),
+`THE_FINAL_SWEEP_RECEIPT_20261124_V4.json` (45 rows, 10 verified, 777.6 s),
 `THE_DENOMINATOR_RECEIPT_20261124_V1.json` (41 attemptable of 45),
 `THE_ABLATION_RECEIPT_20261124_V1.json` (three arms, delta +0),
 `THE_TRANSFER_RECEIPT_20261124_V1.json` (packaging 4/9 vs 4/9, row-for-row identical)
@@ -12,7 +12,7 @@
 
 ## 1. The headline, with its denominator
 
-**8 of 41 attemptable rows verified, every one landed inside the human's changed line.**
+**10 of 41 attemptable rows verified, every one landed inside the human's changed line.**
 
 | repo | commit | human line | relation |
 |---|---|---|---|
@@ -28,7 +28,7 @@
 **The denominator is 41, not 45, and it was measured, not assumed.** Four rows name a test
 that does not exist at the parent commit even after the engine's own overlay protocol
 (`TEST_ABSENT`). Counting them as misses would understate the tool; counting only the 8
-would overstate it. 8/41 = 19.5%. The naive 8/45 = 17.8% is the number to quote if a
+would overstate it. 10/41 = 24.4%. The naive 10/45 = 22.2% is the number to quote if a
 single figure is wanted, and both are reported.
 
 ---
@@ -139,7 +139,7 @@ observing.** The other three are "a branch that gives up must not give up for ev
 |---|---|---|
 | own weights, zero model calls | **PARTIAL** | no model is called (`model_calls=0` is true because none exists); "own weights" is unresolved — the runtime is a Python program with an inspectable store |
 | instant-knowledge store | **FAILS AS A MEMORY** | built, runs, admits 4 skills on packaging, and changes **0** outcomes row for row (§2b) |
-| hardest SWE benchmark | **NOT MET** | 8/41 on a 45-row corpus of real single-line fixes; no SWE-bench Pro or Terminal-Bench run has ever executed here |
+| hardest SWE benchmark | **NOT MET** | 10/41 on a 45-row corpus of real single-line fixes; no SWE-bench Pro or Terminal-Bench run has ever executed here |
 | hardest computer-use benchmark | **NOT MET** | no GUI perception exists; `computer_use_agent_v1` selects from a 10-row shell table by keyword overlap |
 | never-seen environments | **NOT MET** | no adapter exists |
 | single-experience learning | **NOT DEMONSTRATED** | negative ablation |
@@ -182,3 +182,43 @@ store was built to fix, and it is why the ablation came back zero.
   contradicted** by this repo's own corpus: measured correctly, **9/45 (20.0%)** of these
   fixes introduce an identifier absent from the old line. My own earlier figure of 16/45
   was wrong — a parsing bug in my measuring script, not a property of the corpus.
+
+
+## 2026-11-24, later: what actually moved the number
+
+Three findings, in the order they mattered.
+
+**1. The store's ceiling is zero, and now it is measured rather than shrugged at.**
+Of all 37 unsolved rows, **none** was a case of "generated the right answer, ranked it
+too low": `GENERATED_NOT_ATTEMPTED = 0`. Every unsolved row is `NEVER_GENERATED`. Since
+a store can only re-order hypotheses that exist, its contribution on this corpus is
+bound to zero by construction. `THE_STORE_CEILING_IS_ZERO_20261124_V1.md`. The transfer
+test was then re-run against a library twice the size and again returned
+6/9 vs 6/9 and 1/5 vs 1/5, row-for-row identical — a zero ceiling looks exactly like
+that from outside.
+
+**2. Two relations were half-built, and the same way.** `END_ANCHOR` could only
+*replace* a `$`, never *add* a `\Z` to an unanchored greedy tail, and its repair was
+applied to one of `relations_for`'s two entry paths but not the other. Fixing both
+solved packaging `0625596e` — the sibling of `8af75907`, six lines away in the same
+file — on the first attempt. Rebuilding the same relation on the sampled path too was
+required a second time for `SPLIT_FROM_THE_WRONG_END`. The new relation is now emitted
+above the fork so it cannot diverge.
+
+**3. Generation is the only lever, and the corpus is close to exhausted.** Classifying
+all 37 unsolved rows by fix shape: 14 call/expression changes, 11 new literals, 9 boolean
+structures, and one each of insert-copy and attribute-lookup-form. Six of the eleven
+no-relation rows introduce **no new literal at all** (`head.copy()`,
+`getattr(x, k, None)`), so no literal-vocabulary relation can reach them. Others are
+genuinely underivable from a failing run: `260000 → 600000`, `code: int = 302 → 303`,
+`["Authorization"] → ["Cookie"]`. `GENERATION_IS_THE_ONLY_LEVER_20261124_V1.md`.
+
+The honest summary: **the number went from 8/41 to 10/41 by fixing generation, and every
+attempt to improve selection returned exactly zero.** The remaining unsolved rows are
+mostly not engine failures — they are knowledge and specification, which no test run
+exposes. That is also the honest statement of why §6 is not met: §6 needs a task
+distribution with repeated structure in order for "single-experience learning" to mean
+anything, and this corpus is 45 mostly-unique repairs.
+
+**Gate:** 8/8 on the verified core under the final pins, 232.3 s
+(`THE_REGRESSION_GATE_RECEIPT_20261124_V2.json`).
