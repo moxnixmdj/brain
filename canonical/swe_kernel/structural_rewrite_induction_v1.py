@@ -867,6 +867,14 @@ def apply_ast_morphism(
                 cp = copy.deepcopy(node)
                 cp.func.attr = "rsplit"
                 return ast.unparse(cp)
+            if node.func.attr == "partition":
+                cp = copy.deepcopy(node)
+                cp.func.attr = "rpartition"
+                return ast.unparse(cp)
+            if node.func.attr == "find":
+                cp = copy.deepcopy(node)
+                cp.func.attr = "rfind"
+                return ast.unparse(cp)
             if node.func.attr == "match":
                 cp = copy.deepcopy(node)
                 cp.func.attr = "fullmatch"
