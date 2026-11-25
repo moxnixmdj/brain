@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import base64
 import json
+import re
 import shlex
 from typing import Any, Mapping
 
@@ -73,7 +74,7 @@ def solve_harbor_cycle(
 
     # Cycle 1: Environment tomography + candidate test target discovery
     if cycle <= 1 or len(observations) == 0:
-        clipped_task = harbor_task[:4500].encode("utf-8", errors="ignore")
+        clipped_task = harbor_task[:2400].encode("utf-8", errors="ignore")
         b64_task = base64.b64encode(clipped_task).decode("ascii")
         raw_cmd = (
             "env -i PATH=/opt/miniconda3/envs/testbed/bin:/opt/conda/envs/testbed/bin:"
@@ -110,7 +111,7 @@ def solve_harbor_cycle(
             raw_cmd = (
                 "env -i PATH=/opt/miniconda3/envs/testbed/bin:/opt/conda/envs/testbed/bin:"
                 "/usr/local/bin:/usr/bin:/bin HOME=/tmp "
-                f"python3 -I -B {RUNNER_SCRIPT} --phase repair --timeout-s 80"
+                f"python3 -I -B -W ignore {RUNNER_SCRIPT} --phase repair --timeout-s 80"
             )
             safe_cmd = validate_environment_command(raw_cmd)
             return {

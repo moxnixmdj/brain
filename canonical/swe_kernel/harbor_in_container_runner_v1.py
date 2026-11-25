@@ -197,7 +197,16 @@ def phase_discover(instruction: str) -> dict[str, Any]:
     }
     STATE_PATH.write_text(json.dumps(state, indent=2, sort_keys=True), encoding="utf-8")
     _reap_children()
-    return state
+    return {
+        "schema": state["schema"],
+        "repo_root": state["repo_root"],
+        "python_exe": state["python_exe"],
+        "ecosystems": state["ecosystems"],
+        "ranked_tests": ranked_tests[:6],
+        "instruction_chars": len(instruction),
+        "discover_wall_s": state["discover_wall_s"],
+        "model_calls": 0,
+    }
 
 
 def _list_untracked(repo_root: pathlib.Path) -> set[str]:
@@ -504,11 +513,19 @@ def main() -> int:
     parser.add_argument("--timeout-s", type=float, default=120.0)
     args = parser.parse_args()
 
-    if args.phase == "discover":
-        instr = base64.b64decode(args.instruction_b64.encode("ascii")).decode("utf-8", errors="replace") if args.instruction_b64 else ""
-        out = phase_discover(instr)
-    else:
-        out = phase_repair(args.timeout_s)
+    # Keep runner stderr strictly empty so `observations[*]["stderr"]` never inflates
+    # Harbor's 64 KB `MAX_WORKER_REQUEST_BYTES` budget on multi-cycle large-instruction tasks.
+    devnull = open(os.devnull, "w", encoding="utf-8")
+    sys.stderr = devnull
+    try:
+        if args.phase == "discover":
+            instr = base64.b64decode(args.instruction_b64.encode("ascii")).decode("utf-8", errors="replace") if args.instruction_b64 else ""
+            out = phase_discover(instr)
+        else:
+            out = phase_repair(args.timeout_s)
+    finally:
+        sys.stderr = sys.__stderr__
+        devnull.close()
     print(json.dumps(out, sort_keys=True), flush=True)
     return 0
 

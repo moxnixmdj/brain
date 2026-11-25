@@ -320,7 +320,11 @@ class V4SubtreeFuzzerHarborTests(unittest.TestCase):
                 return SimpleNamespace(return_code=0, stdout="{}\n", stderr="")
 
         mock_env = ContainerMockEnv()
-        loop_res = asyncio.run(harbor_agent.run_epistemic_goal("Fix auth.py to_header()", mock_env))
+        # Exercise full 3-cycle Harbor loop on a 24,000-byte monorepo issue prompt (`> 23,642` bytes of
+        # `ansible-40ade1f8`) to verify `MAX_WORKER_REQUEST_BYTES == 64_000` is never exceeded!
+        large_instruction = "Fix auth.py to_header()\n" + ("Detailed monorepo context line for Ansible task.\n" * 490)
+        self.assertGreater(len(large_instruction.encode("utf-8")), 23642)
+        loop_res = asyncio.run(harbor_agent.run_epistemic_goal(large_instruction, mock_env))
         self.assertEqual(loop_res["status"], "FINISHED__MODEL_PROPOSED__VERIFIER_DECIDES")
         self.assertFalse(loop_res["task_completion_claimed"])
         self.assertEqual(loop_res["cycles"], 3)
