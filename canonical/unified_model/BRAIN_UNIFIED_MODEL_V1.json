@@ -31357,12 +31357,12 @@
   "capabilities": 449,
   "engines": 26,
   "harvested_admitted": 0,
-  "harvested_capabilities": 622,
+  "harvested_capabilities": 624,
   "harvested_contract_surfaces": 40,
-  "harvested_program_surfaces": 582,
-  "knowledge_documents": 735,
+  "harvested_program_surfaces": 584,
+  "knowledge_documents": 736,
   "receipt_backed_capabilities": 296,
-  "research_index_records": 7393,
+  "research_index_records": 7394,
   "routing_tokens": 2379,
   "skills": 18,
   "source_index_entry_points": 558,
@@ -31371,7 +31371,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4011234d42b94e7c090eb313a94def6a24ebc1e67fa6f974fa9e60278b006124"
+  "value": "aab443dd7cb4a1f4aa9a07e90a1a48f14f3a260b4e4ee8fcf955b8b3810bed84"
  },
  "engines": [
   {
@@ -51126,6 +51126,50 @@
     "lesson",
     "transfer",
     "probe"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.defer_transfer_calibration_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/defer_transfer_calibration_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "a50cc212bea9e403ca26544de19eec1ad447aca294f540e52d0993ad06eaabbb",
+   "summary": "Does the DEFER form transfer, or does it fire only on the task that suggested it?",
+   "triggers": [
+    "defer",
+    "transfer",
+    "calibration"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.deferred_definition_form_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/deferred_definition_form_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "cb85223c0878a694bec692459535b9a6200e1b66305f742711ad81efd14c3f13",
+   "summary": "The site was right and both the value and its form were wrong.",
+   "triggers": [
+    "deferred",
+    "definition",
+    "form"
    ]
   },
   {
@@ -74561,6 +74605,83 @@
     "showing",
     "time",
     "worth"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 6300,
+   "headings": [
+    "One solve, at the design point",
+    "What I set out to do",
+    "The defect, isolated",
+    "Why the obvious repairs all fail",
+    "The one genuine solve",
+    "The calibration, and why it overrules the celebration",
+    "A contamination I must disclose",
+    "Six bugs in my own instruments, all caught by measuring",
+    "What this round establishes",
+    "The next lever, stated plainly"
+   ],
+   "kind": "DOCUMENT",
+   "path": "ONE_SOLVE_AT_THE_DESIGN_POINT_20261124_V41.md",
+   "sha256": "c811b08e3792ffc2059665597ebbe8cb40320a9f7956da09b552585219537da8",
+   "summary": "Date: 2026-11-24 · V41 · branch `arena/1ac14ac1-brain`",
+   "terms": {
+    "23": 2,
+    "27": 5,
+    "89": 2,
+    "above": 2,
+    "all": 5,
+    "but": 3,
+    "calibration": 3,
+    "class": 5,
+    "construction": 3,
+    "derived": 3,
+    "design": 4,
+    "detector": 3,
+    "emitted": 3,
+    "engine": 5,
+    "fail": 5,
+    "fail-to-pass": 4,
+    "failed": 3,
+    "failure": 5,
+    "file": 4,
+    "fires": 3,
+    "fix": 4,
+    "form": 13,
+    "green": 4,
+    "init": 3,
+    "module": 4,
+    "no": 6,
+    "not": 18,
+    "nothing": 3,
+    "one": 7,
+    "only": 4,
+    "point": 3,
+    "previous": 3,
+    "property": 4,
+    "repair": 4,
+    "round": 6,
+    "self": 5,
+    "so": 5,
+    "solve": 4,
+    "source": 3,
+    "still": 3,
+    "str": 6,
+    "target": 3,
+    "task": 6,
+    "tasks": 5,
+    "test": 7,
+    "traceback": 4,
+    "until": 3,
+    "would": 3
+   },
+   "title": "One solve, at the design point",
+   "title_terms": [
+    "design",
+    "one",
+    "point",
+    "solve"
    ]
   },
   {
@@ -116500,10 +116621,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2163,
+  "included_source_count": 2166,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "3afbec0ae4e0ad29fdad1f53e7aa7ed08525de1c9add842d8a74c9b7081d0b2f"
+  "source_tree_digest": "760232145f2799323212331fd27dccd6b2effe0966caeeecb3651c2d1728e064"
  },
  "research_index": [
   {
@@ -276575,6 +276696,31 @@
     "verified": 1,
     "verified_episodes_6_to_7_and_parked_success_learning_1_to_0_measured_on_a_tree_wiped_of_every_untracked_artifact__the_new_episode_is_the_three_step_chain_structured_decision_evidence_locate_stdlib_then_decision_synthesis_typed_stdlib_then_decision_synthesis_verify_stdlib__acceptance_holds_at_11_and_selection_at_21_of_23": 1,
     "write_a_real_second_implementation_that_re_establishes_every_load_bearing_claim_through_a_mechanism_the_producer_does_not_use__candidate_set_from_git_grep_l_digests_from_sha256sum_canonical_form_and_counts_from_jq_and_decidability_by_re_running_the_consumers_own_validator_on_bytes_reopened_from_disk__then_record_the_measured_result_as_evidence_rather_than_asserting_a_flag": 1
+   }
+  },
+  {
+   "action_id": "DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41",
+   "capability": false,
+   "date": "2026-11-24",
+   "id": "research:canonical/action_intents/DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/DEFER_FORM_FOR_ZERO_CANDIDATE_EMISSION_20261124_V41.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+   "sha256": "6f62d64b19af8938a51cfee776c21f306faf0dc07d6ae5f4763f4856d17610f6",
+   "status": "",
+   "terms": {
+    "20261124": 1,
+    "a_definition_level_defer_form_now_solves_1_of_27_mined_fail_to_pass_tasks_with_the_target_flipping_and_the_whole_test_module_green__and_the_calibration_records_that_the_one_solve_is_the_design_point_so_transfer_is_none": 1,
+    "candidate": 1,
+    "defer": 1,
+    "defer_form_for_zero_candidate_emission_20261124_v41": 1,
+    "derive_one_definition_level_defer_form_from_the_traceback_and_calibrate_it_before_reporting": 1,
+    "emission": 1,
+    "form": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "the_engine_emits_zero_candidates_from_a_correctly_localised_site_because_its_operators_substitute_expressions_that_already_exist_and_this_repair_requires_changing_what_kind_of_thing_the_attribute_is": 1,
+    "v41": 1,
+    "zero": 1
    }
   },
   {
