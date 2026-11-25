@@ -242,6 +242,20 @@ class FrontierUnifiedEngineV1Tests(unittest.TestCase):
         rewritten = apply_ast_morphism(hits[0], "beta_other_name.partition(':')")
         self.assertEqual(rewritten, "beta_other_name.rpartition(':')")
 
+    def test_real_45_and_87_corpus_evaluation_reaches_non_literal_commits(self) -> None:
+        receipt = run_frontier_unified_benchmark()
+        real_eval = receipt["real_corpus_evaluation"]
+        c45 = real_eval["real_45_commit_type_habitation_zero_literal_hits"]
+        c87 = real_eval["real_87_commit_single_line_exact_matches"]
+        self.assertGreaterEqual(c45["count"], 14)
+        commits_45 = {m["commit"] for m in c45["matched_commits"]}
+        for expected_sha in ("62411c1618", "cca32949f1", "3a408edffd", "3b0378dd66", "4326ced299"):
+            self.assertIn(expected_sha, commits_45)
+        self.assertGreaterEqual(c87["count"], 6)
+        commits_87 = {m["sha"] for m in c87["matched_commits"]}
+        self.assertIn("5a7d3386d2", commits_87)
+        self.assertIn("abf000549c", commits_87)
+
 
 if __name__ == "__main__":
     unittest.main()

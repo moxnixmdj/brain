@@ -1,6 +1,6 @@
 {
   "authority": "NONE__PRODUCER_RUN_SANDBOX",
-  "elapsed_seconds": 0.0261,
+  "elapsed_seconds": 0.0273,
   "independent_verified": false,
   "model_calls": 0,
   "parameters_stored": 0,
@@ -221,6 +221,193 @@
     "fingerprint_key": "75f210d595b57cbf",
     "o1_hits_after_delete": 0,
     "surgical_o1_delete_succeeded": true
+  },
+  "real_corpus_evaluation": {
+    "real_45_commit_type_habitation_zero_literal_hits": {
+      "count": 14,
+      "matched_commits": [
+        {
+          "candidate_rank": 1,
+          "commit": "3b0378dd66",
+          "index": 1,
+          "new_line": "attrs = tuple(field_transformer(cls, attrs))",
+          "old_line": "attrs = field_transformer(cls, attrs)",
+          "repo": "attrs"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "62411c1618",
+          "index": 14,
+          "new_line": "return head.copy(), chain(head, it)",
+          "old_line": "return head, chain(head, it)",
+          "repo": "more-itertools"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "71e070b35d",
+          "index": 15,
+          "new_line": "for element in map(key, iterable) if key is not None else iterable:",
+          "old_line": "for element in map(key, iterable) if key else iterable:",
+          "repo": "more-itertools"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "cca32949f1",
+          "index": 17,
+          "new_line": "if getattr(iterable, '__reversed__', None):",
+          "old_line": "if hasattr(iterable, '__reversed__'):",
+          "repo": "more-itertools"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "08bb047794",
+          "index": 20,
+          "new_line": "user_pass, netloc_no_user_pass = netloc.rsplit(\"@\", 1)",
+          "old_line": "user_pass, netloc_no_user_pass = netloc.split(\"@\", 1)",
+          "repo": "packaging"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "189a76d54d",
+          "index": 21,
+          "new_line": "\"END\": re.compile(r\"\\Z\"),",
+          "old_line": "\"END\": re.compile(r\"$\"),",
+          "repo": "packaging"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "258202ed7f",
+          "index": 22,
+          "new_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z\", re.IGNORECASE",
+          "old_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$\", re.IGNORECASE",
+          "repo": "packaging"
+        },
+        {
+          "candidate_rank": 2,
+          "commit": "8af75907bf",
+          "index": 24,
+          "new_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+\\Z\", re.UNICODE)",
+          "old_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+$\", re.UNICODE)",
+          "repo": "packaging"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "b80e6eb0a6",
+          "index": 25,
+          "new_line": "if self.environments is not None:",
+          "old_line": "if self.environments:",
+          "repo": "packaging"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "4326ced299",
+          "index": 28,
+          "new_line": "return {x for x in self._name2plugin.values() if x is not None}",
+          "old_line": "return set(self._name2plugin.values())",
+          "repo": "pluggy"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "e108fa4490",
+          "index": 30,
+          "new_line": "or self.has_plugin(ep.name)",
+          "old_line": "or self.get_plugin(ep.name)",
+          "repo": "pluggy"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "223561a83b",
+          "index": 32,
+          "new_line": "async def gather(cls, *fs, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+          "old_line": "async def gather(cls, fs, *, loop=None, timeout=None, total=None, **tqdm_kwargs):",
+          "repo": "tqdm"
+        },
+        {
+          "candidate_rank": 2,
+          "commit": "3a408edffd",
+          "index": 40,
+          "new_line": "if not static:",
+          "old_line": "if final:",
+          "repo": "werkzeug"
+        },
+        {
+          "candidate_rank": 1,
+          "commit": "8f8507b462",
+          "index": 42,
+          "new_line": "yield key, _cookie_unquote(value)",
+          "old_line": "yield _cookie_unquote(key), _cookie_unquote(value)",
+          "repo": "werkzeug"
+        }
+      ]
+    },
+    "real_87_commit_single_line_exact_matches": {
+      "count": 6,
+      "matched_commits": [
+        {
+          "new_line": "if token is None or not token.text:",
+          "old_line": "if token is None or not token.text or \"===\" in token.text:",
+          "repo": "pypa/packaging",
+          "sha": "5a7d3386d2",
+          "source": "src/packaging/_parser.py"
+        },
+        {
+          "new_line": "if self.environments is not None:",
+          "old_line": "if self.environments:",
+          "repo": "pypa/packaging",
+          "sha": "b80e6eb0a6",
+          "source": "src/packaging/pylock.py"
+        },
+        {
+          "new_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+\\Z\", re.UNICODE)",
+          "old_line": "_wheel_name_regex = re.compile(r\"^[\\w._]+$\", re.UNICODE)",
+          "repo": "pypa/packaging",
+          "sha": "8af75907bf",
+          "source": "src/packaging/utils.py"
+        },
+        {
+          "new_line": "if charset.lower() != \"utf-8\":",
+          "old_line": "if charset != \"UTF-8\":",
+          "repo": "pypa/packaging",
+          "sha": "abf000549c",
+          "source": "src/packaging/metadata.py"
+        },
+        {
+          "new_line": "user_pass, netloc_no_user_pass = netloc.rsplit(\"@\", 1)",
+          "old_line": "user_pass, netloc_no_user_pass = netloc.split(\"@\", 1)",
+          "repo": "pypa/packaging",
+          "sha": "08bb047794",
+          "source": "src/packaging/direct_url.py"
+        },
+        {
+          "new_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])\\Z\", re.IGNORECASE",
+          "old_line": "r\"^([A-Z0-9]|[A-Z0-9][A-Z0-9._-]*[A-Z0-9])$\", re.IGNORECASE",
+          "repo": "pypa/packaging",
+          "sha": "258202ed7f",
+          "source": "src/packaging/utils.py"
+        }
+      ]
+    },
+    "three_way_memory_ablation_45_commits": {
+      "empty_store": {
+        "memory_hits": 0,
+        "total_candidates_evaluated": 2566240,
+        "transfer_rate": 0.0
+      },
+      "generalized_ast_ir_morphism_store": {
+        "candidates_evaluated_on_hits": 23,
+        "cross_repo_hits": 14,
+        "empty_store_candidates_saved": 1124297,
+        "memory_hits": 23,
+        "multi_commit_family_population": 26,
+        "multi_commit_family_transfer_rate": 0.8846,
+        "transfer_rate": 0.5111
+      },
+      "raw_trace_store": {
+        "cross_repo_hits": 0,
+        "memory_hits": 0,
+        "transfer_rate": 0.0
+      }
+    }
   },
   "schema": "BRAIN_FRONTIER_UNIFIED_ENGINE_V1"
 }
