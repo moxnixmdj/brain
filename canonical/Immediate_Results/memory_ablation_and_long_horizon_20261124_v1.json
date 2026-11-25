@@ -1,0 +1,49 @@
+{
+  "memory_ablation_3way": {
+    "empty": {
+      "env_A_solved": true,
+      "env_A_probes": 5,
+      "env_B_solved": true,
+      "env_B_probes": 5,
+      "probes_saved_on_transfer": 0,
+      "skills_stored": 0,
+      "stored_template": null,
+      "stale_invalidated_on_drift": false,
+      "recalled_after_invalidation": 0
+    },
+    "raw_trace": {
+      "env_A_solved": true,
+      "env_A_probes": 5,
+      "env_B_solved": true,
+      "env_B_probes": 6,
+      "probes_saved_on_transfer": -1,
+      "skills_stored": 2,
+      "stored_template": "sed -i \"s/\\r$//\" \"pipelines/ingest_alpha.sh\" && chmod u+rx \"pipelines/ingest_alpha.sh\"",
+      "stale_invalidated_on_drift": true,
+      "recalled_after_invalidation": 0
+    },
+    "generalized_s92": {
+      "env_A_solved": true,
+      "env_A_probes": 5,
+      "env_B_solved": true,
+      "env_B_probes": 2,
+      "probes_saved_on_transfer": 3,
+      "skills_stored": 1,
+      "stored_template": "sed -i \"s/\\r$//\" \"?target_rel\" && chmod u+rx \"?target_rel\"",
+      "stale_invalidated_on_drift": true,
+      "recalled_after_invalidation": 0
+    }
+  },
+  "long_horizon_360_step_cross_modal_petri": {
+    "planned_steps": 360,
+    "modalities_exercised": [
+      "cli",
+      "sqlite",
+      "ui"
+    ],
+    "goal_achieved": true,
+    "step1_and_standing_constraints_preserved_at_step_360": true,
+    "trap_shortcuts_rejected": 120,
+    "planning_elapsed_ms": 0.84
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "EXTERNAL_MEMORY_SURGICAL_DELETION_ABLATION_20261124_V1",
+  "model_calls": 0,
+  "retraining_steps": 0,
+  "step1_teacher_ichunked_zero": {
+    "solved": true,
+    "mechanism": "COGS_REVERSE_PRECONDITION_SYNTHESIS",
+    "crystallized_law_id": "uir_law_d14dfdade03f",
+    "simulations": 5
+  },
+  "step2_held_out_chunked_even_with_law": {
+    "solved": true,
+    "mechanism": "SEMANTIC_LAW_RECALL:uir_law_d14dfdade03f",
+    "simulations": 4
+  },
+  "step3_surgical_remove_law": {
+    "removed_law_id": "uir_law_d14dfdade03f",
+    "remove_returned": true,
+    "remaining_law_ids": []
+  },
+  "step4_held_out_chunked_even_after_law_deletion": {
+    "solved": true,
+    "mechanism": "COGS_REVERSE_PRECONDITION_SYNTHESIS",
+    "simulations": 5
+  }
+}
