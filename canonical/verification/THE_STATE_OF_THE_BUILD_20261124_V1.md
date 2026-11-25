@@ -222,3 +222,59 @@ anything, and this corpus is 45 mostly-unique repairs.
 
 **Gate:** 8/8 on the verified core under the final pins, 232.3 s
 (`THE_REGRESSION_GATE_RECEIPT_20261124_V2.json`).
+
+
+## 2026-11-24, final state: 19/45, and three of my own conclusions were wrong
+
+Headline: **19 verified of 41 attemptable = 46.3%**, in one driver, in ~20 minutes
+(`THE_UNION_RECEIPT_20261124_V2.json`). 13 rows by the guard-probe engine
+(`the_demand_is_learned_from_the_run_v1`, learned from pass/fail separation at probed
+guard sites), 6 by the relation engine (`the_relation_is_read_from_the_failing_run_v1`,
+runtime values and source literals), overlap 4.
+
+### The claim that was false
+
+Pillar 0 of the incoming plan rested on `arena/aab1b545-brain` reaching "45/45 = 100%".
+That branch's own committed receipt says **VERIFIED 13, NO_SEPARATING_RULE 31,
+NO_FAILING_TEST 1**. The claim fails by 32 rows. Its `L2: 44` is not a verification
+count either.
+
+### The engine behind that claim was the best thing in the repository
+
+Rejecting the claim did not dispose of the engine. It probes every boolean guard's value
+as type-level features, records which pytest node reached it, and names a repair by which
+feature **separates failing nodes from passing ones**; the human edit only validates the
+judge. Checked in source, then reproduced from a clean worktree with this branch's own
+corpus and clones: 3/4 of my missed rows verified in 29.3 s on the first candidate.
+
+### Three conclusions of mine that the measurements overturned
+
+1. **"Generation is the only lever and the corpus is nearly exhausted."** Half right.
+   Generation is still the lever, but the corpus was nowhere near exhausted — it needed a
+   second kind of evidence, not a wider vocabulary.
+2. **"`cca32949` and `3a408edf` are not derivable from a failing run."** Both now verify,
+   along with `a08bfb90`, `e108fa44`, `d340b0c1`, `bf1e8be9`, `40830087`, `223561a8`. What
+   I had actually measured was that their *vocabulary* (`copy`, `getattr`) is absent from
+   the run. Vocabulary reach and **decision separability** are different walls; only the
+   first is real.
+3. **"The store changes nothing, so the corpus has no lever left."** The store conclusion
+   survives (its ceiling is still zero, and `GENERATED_NOT_ATTEMPTED` was still 0 for the
+   generator that existed when I measured it). The inference from it did not.
+
+### The cheapest win was never an engine problem
+
+Ten rows were reporting `NO_ORACLE` or `NO_PASSING_TEST` — harness verdicts, not engine
+verdicts. Two of them needed `markupsafe` and `requests`, neither of which was pinned
+because the 45-commit corpus contains no row that imports them. With those installed,
+`3a408edf` and `20973f2e` became **verified**, not merely attemptable. A stage name that
+means "no evidence was produced" had been sitting in the failure column as if it meant
+"the engine cannot do this".
+
+### Where this leaves §6
+
+Still not met, and the distance is unchanged in kind: this is 19 of 41 single-line repairs
+in 11 Python repositories. No container benchmark has run (Docker is absent; the GitHub
+Actions route remains untested), no computer-use task has been attempted, and the frontier
+sits at 63.6–70.6% on Terminal-Bench 4.0. What changed is that the number doubled and the
+reason is understood: a second evidence channel (guard decisions) plus a repaired
+harness, not a bigger search grammar.
