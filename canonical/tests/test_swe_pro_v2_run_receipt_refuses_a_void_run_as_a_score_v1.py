@@ -186,3 +186,27 @@ def test_cli_writes_the_receipt_and_reads_only_the_committed_report(tmp_path) ->
     assert written["claimable_as_a_benchmark_number"] is True
     # the tool must not mutate the input report
     assert json.loads(rep.read_text(encoding="utf-8")) == MEASURED
+
+
+def test_a_harness_error_trial_is_counted_as_measured_but_not_as_an_engine_verdict() -> None:
+    """0/3 and 0/2 are both true statements, and the receipt must carry both."""
+    m = json.loads(json.dumps(MEASURED))
+    m["arms"]["causal"]["tasks"]["t1"]["agent_status"] = "HARNESS_ERROR"
+    m["arms"]["causal"]["tasks"]["t1"]["error"] = "RuntimeError: exec refused"
+    rec = rc.build_receipt(m, date="x")
+    att = rec["attribution"]["causal"]
+    assert att["harness_side"] == 1 and att["engine_attributable"] == 1
+    assert att["harness_side_statuses"] == ["HARNESS_ERROR"]
+    assert att["measured_resolve_rate_pct"] == 50.0, "the benchmark counts what ran"
+    assert att["resolve_rate_pct_engine_attributable"] == 100.0, "the engine's own record is 1 of 1"
+    assert rec["claimable_as_a_benchmark_number"] is True
+    # and a run whose every trial died in the harness has no engine number at all
+    all_bad = json.loads(json.dumps(MEASURED))
+    for tid in ("t0", "t1"):
+        all_bad["arms"]["causal"]["tasks"][tid]["agent_status"] = "UPLOAD_BLOCKED"
+        all_bad["arms"]["causal"]["tasks"][tid]["resolved"] = False
+    all_bad["arms"]["causal"]["resolved"] = 0
+    all_bad["arms"]["oracle"]["tasks"]["t0"]["agent_status"] = "HARNESS_ERROR"
+    rec2 = rc.build_receipt(all_bad, date="x")
+    assert rec2["attribution"]["causal"]["resolve_rate_pct_engine_attributable"] is None
+    assert rec2["claimable_as_a_benchmark_number"] is False

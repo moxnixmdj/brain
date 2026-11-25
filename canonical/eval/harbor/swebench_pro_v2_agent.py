@@ -304,6 +304,16 @@ def run_engine_on_tree(
         "store_saved": store_saved,
         "timeout_s": float(timeout_s),
         "allow_web": False,
+        # Field names the shard collector reads. They are aliases of data already
+        # computed above, not new measurement: without them the report showed
+        # tree_changed=None and fell back to harbor's timestamps for wall time.
+        "tree_changed": bool(diff.get("modified") or diff.get("added") or diff.get("removed")),
+        "wall_seconds": round(time.monotonic() - t0, 3),
+        "notes": [
+            f"store: {store_note or 'NO_STORE'}",
+            f"engine said: {str((result or {}).get('status') or 'UNKNOWN')}",
+        ]
+        + [str(s) for s in (((result or {}).get("explanation") or "") .split("\n") if isinstance((result or {}).get("explanation"), str) else [])][:3],
     }
 
 

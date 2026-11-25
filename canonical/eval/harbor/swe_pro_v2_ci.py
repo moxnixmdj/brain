@@ -288,15 +288,23 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
             start = res.get("started_at")
             end = res.get("finished_at")
             secs: float | None = None
-            if rep.get("wall_seconds") is not None:
-                secs = float(rep["wall_seconds"])
-            elif start and end:  # pragma: no cover - ISO parse kept simple
+            # `agent_seconds` is what our engine spent; `secs` is harbor's own trial
+            # span (container start, agent, verifier). The first smoke run averaged
+            # 3.54 s/trial for the causal arm against 48.6 s for the nop control, which
+            # is only readable if the two quantities stay in separate columns.
+            agent = rep.get("wall_seconds")
+            if agent is None:
+                agent = rep.get("seconds")
+            agent_seconds = round(float(agent), 3) if agent is not None else None
+            if start and end:  # pragma: no cover - ISO parse kept simple
                 try:
                     from datetime import datetime
 
                     secs = round((datetime.fromisoformat(str(end).replace("Z", "+00:00")) - datetime.fromisoformat(str(start).replace("Z", "+00:00"))).total_seconds(), 3)
                 except Exception:
                     secs = None
+            if secs is None:
+                secs = agent_seconds
             n_changed = len((rep.get("changed") or {}).get("modified") or []) + len((rep.get("changed") or {}).get("added") or [])
             per_task[tid] = {
                 "reward": reward,
@@ -311,7 +319,12 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
                 "tree_changed": rep.get("tree_changed"),
                 "store_saved": rep.get("store_saved"),
                 "engine_notes": rep.get("notes") or [],
+                "error": rep.get("error"),
+                "engine_pass": rep.get("engine_pass"),
+                "skills_newly_admissible": rep.get("skills_newly_admissible"),
+                "store_note": rep.get("store_note"),
                 "seconds": secs,
+                "agent_seconds": agent_seconds,
                 "store_ablated": rep.get("store_ablated"),
                 "trial_dir": str(res.get("trial_name") or td.name),
             }
@@ -340,6 +353,7 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
         "wall_seconds_total": round(sum(secs), 2) if secs else None,
         "wall_seconds_mean": round(sum(secs) / len(secs), 2) if secs else None,
         "engine_statuses": status_tally(ordered),
+        "agent_wall_seconds_total": round(sum(a, 4), 3) if (a := [v["agent_seconds"] for v in ordered.values() if isinstance(v.get("agent_seconds"), (int, float))]) else None,
         "tasks": ordered,
     }
 
@@ -424,6 +438,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
         "cost_usd_total": round(sum(float(v.get("cost_usd") or 0.0) for v in ordered.values()), 4),
         "wall_seconds_total": round(sum(secs), 2) if secs else None,
         "wall_seconds_mean": round(sum(secs) / len(secs), 2) if secs else None,
+        "agent_wall_seconds_total": round(sum(a, 4), 3) if (a := [v["agent_seconds"] for v in ordered.values() if isinstance(v.get("agent_seconds"), (int, float))]) else None,
         "engine_statuses": status_tally(ordered),
         "tasks": ordered,
     }
@@ -444,7 +459,7 @@ def to_markdown(
         "- Resolve decisions come from each task's own verifier inside the official container image.",
         "- `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.",
         "",
-        "| arm | resolved | tasks | resolve % | model calls | cost USD | wall s (total) | wall s (mean) | missing trials |",
+        "| arm | resolved | tasks | resolve % | model calls | cost USD | trial wall s (total) | engine s (total) | missing trials |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
     for arm in ARMS:
@@ -460,7 +475,7 @@ def to_markdown(
                 mc=rep["model_calls_total"],
                 cost=rep["cost_usd_total"],
                 wt=rep["wall_seconds_total"],
-                wm=rep["wall_seconds_mean"],
+                wm=rep.get("agent_wall_seconds_total"),
                 miss=rep["n_missing_trial"],
             )
         )
@@ -494,14 +509,30 @@ def to_markdown(
         "",
         "## Per-task (causal arm)",
         "",
-        "| task | reward | resolved | agent status | engine status | files changed |",
-        "|---|---|---|---|---|---|",
+        "| task | reward | resolved | agent status | engine status | engine pass | files | harness error |",
+        "|---|---|---|---|---|---|---|---|",
     ]
     for tid, t in (causal.get("tasks") or {}).items():
         lines.append(
             f"| `{tid[:56]}` | {t.get('reward')} | {'yes' if t.get('resolved') else 'no'} "
-            f"| {t.get('agent_status')} | {t.get('engine_status')} | {t.get('n_files_changed')} |"
+            f"| {t.get('agent_status')} | {t.get('engine_status')} | {t.get('engine_pass')} "
+            f"| {t.get('n_files_changed')} | {(str(t.get('error'))[:48] if t.get('error') else '')} |"
         )
+    not_engine = sum(
+        1
+        for t in (causal.get("tasks") or {}).values()
+        if t.get("agent_status")
+        in ("HARNESS_ERROR", "NO_AGENT_REPORT", "UPLOAD_BLOCKED", "TREE_TOO_BIG", "EMPTY_TREE", "NOT_RUN")
+    )
+    if not_engine:
+        lines += [
+            "",
+            f"**{not_engine} of {causal.get('n_expected')} causal trials are not attributable to the engine** "
+            "(harness error, blocked upload, or no trial read). The measured rate stays "
+            f"0/{causal.get('n_expected')} as a benchmark number — a run counts what actually ran, failures "
+            f"included — but the engine-attributable denominator is {causal.get('n_expected') - not_engine}, "
+            "and that is the number to quote about the engine.",
+        ]
     stray = sorted({k for rep in arm_reports.values() for k in (rep.get("unmatched_trial_keys") or [])})
     if stray and any(rep.get("n_missing_trial") for rep in arm_reports.values()):
         lines += [

@@ -350,7 +350,9 @@ def test_aggregate_merges_shard_reports_by_task_union() -> None:
     # A nop arm that resolves anything means the grader is broken: the gate says so.
     assert "`oracle_gate_pass`: **PASS**" in md
     assert "`nop_gate_pass`: **FAIL**" in md
-    assert "| causal | 2 | 2 | 100.0 | 0 | 0.0 | 5.0 | 2.5 | 0 |" in md
+    # 5.0 is harbor's trial wall; the engine-seconds column stays None here because the
+    # fixture wrote no agent report — the two quantities must never be conflated.
+    assert "| causal | 2 | 2 | 100.0 | 0 | 0.0 | 5.0 | None | 0 |" in md
 
 
 def test_upload_falls_back_to_root_exec_and_reports_it() -> None:

@@ -38,6 +38,13 @@ ARMS = ("causal", "nop", "oracle")
 
 # Fields copied verbatim from the shard reports. A value that is absent upstream stays
 # absent here — inventing a default would be inventing a measurement.
+# Agent statuses that mean the harness, not the engine, decided the outcome. A trial
+# in this set is a benchmark failure (it ran and scored 0) but is NOT evidence about the
+# solver, so both readings are reported side by side.
+HARNESS_SIDE = frozenset(
+    {"HARNESS_ERROR", "NO_AGENT_REPORT", "UPLOAD_BLOCKED", "TREE_TOO_BIG", "EMPTY_TREE", "NOT_RUN"}
+)
+
 COPIED = (
     "resolved",
     "n_expected",
@@ -64,6 +71,27 @@ def _row_is_real(row: dict[str, Any]) -> bool:
 
 def _n_real(rep: dict[str, Any]) -> int:
     return sum(1 for v in (rep.get("tasks") or {}).values() if _row_is_real(v))
+
+
+def _attribution(rep: dict[str, Any]) -> dict[str, Any]:
+    """Split a measured rate into what the engine decided and what the harness decided."""
+    rows = [r for r in (rep.get("tasks") or {}).values() if _row_is_real(r)]
+    engine_rows = [r for r in rows if str(r.get("agent_status")) not in HARNESS_SIDE]
+    harness_rows = [r for r in rows if str(r.get("agent_status")) in HARNESS_SIDE]
+    resolved_engine = sum(1 for r in engine_rows if r.get("resolved"))
+    n_eng = int(rep.get("n_expected") or 0)
+    return {
+        "n_expected": n_eng,
+        "rows_read": len(rows),
+        "engine_attributable": len(engine_rows),
+        "harness_side": len(harness_rows),
+        "harness_side_statuses": sorted({str(r.get("agent_status")) for r in harness_rows}),
+        "resolved_engine_attributable": resolved_engine,
+        "resolve_rate_pct_engine_attributable": (
+            round(100.0 * resolved_engine / len(engine_rows), 2) if engine_rows else None
+        ),
+        "measured_resolve_rate_pct": rep.get("resolve_rate_pct") if _n_real(rep) else None,
+    }
 
 
 def _gates(arms: dict[str, dict[str, Any]]) -> dict[str, bool]:
@@ -137,7 +165,25 @@ def build_receipt(report: dict[str, Any], *, date: str) -> dict[str, Any]:
                     f"NOP_GATE: doing nothing resolved {resolved}/{n}, so the tests accept an "
                     "unmodified tree and a 0/N causal score would be meaningless anyway."
                 )
-    causal = arms_in.get("causal") or {}
+    attribution = {arm: _attribution(rep) for arm, rep in arms_in.items()}
+    if produced:
+        # A control arm whose own trial died in the harness is not clean evidence, and a
+        # causal arm with no engine-attributable trial measured nothing about the solver.
+        c = attribution.get("causal") or {}
+        if c.get("rows_read") and not c.get("engine_attributable"):
+            reasons.append(
+                f"ATTRIBUTION: all {c['rows_read']} causal trials ended in harness-side "
+                f"statuses {c.get('harness_side_statuses')}, so this run measured nothing about "
+                "the engine even though the verifier did score them."
+            )
+        for arm in ("nop", "oracle"):
+            a = attribution.get(arm) or {}
+            if a.get("harness_side"):
+                reasons.append(
+                    f"{arm.upper()}_CONTROL_DIRTIED: {a['harness_side']} of its trials carry "
+                    f"harness-side statuses {a.get('harness_side_statuses')}, so the {arm} gate "
+                    "is not clean evidence that the tests discriminate."
+                )
     for arm, rep in arms_in.items():
         if int(rep.get("model_calls_total") or 0) != 0:
             reasons.append(f"MODEL_CALLS: {arm} recorded {rep.get('model_calls_total')} model calls.")
@@ -146,9 +192,9 @@ def build_receipt(report: dict[str, Any], *, date: str) -> dict[str, Any]:
     if report.get("run_failed"):
         reasons.append("RUN_FAILED: the eval job reported failure; no shard report was committed.")
 
-    claimable = produced and gates.get("oracle_gate_pass") and gates.get("nop_gate_pass") and not any(
-        r.startswith(("MODEL_CALLS", "COST")) for r in reasons
-    )
+    # One rule, so the verdict and the explanation can never drift apart: a number is
+    # quotable exactly when the run produced rows and nothing on this list is true.
+    claimable = produced and not reasons
 
     what_it_did_prove: list[str] = []
     if produced:
@@ -179,6 +225,7 @@ def build_receipt(report: dict[str, Any], *, date: str) -> dict[str, Any]:
         "why_not_claimable": reasons,
         "gates_recomputed_here": gates,
         "control_rows": counts,
+        "attribution": attribution,
         "gates_reported_by_harness": report.get("gates") or {},
         "arms": arms_out,
         "n_shard_reports_read": report.get("n_reports_read"),
