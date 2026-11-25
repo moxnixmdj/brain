@@ -464,7 +464,203 @@ def synthesize_spec_guards(
     return proposals
 
 
+# --------------------------------------------------------------------------------------------------
+# Frame-bound containment: the suite prints WHERE it raised, so do not bind by name.
+# --------------------------------------------------------------------------------------------------
+
+_ESCAPE_RE = re.compile(
+    r"([A-Z][A-Za-z_]*(?:Error|Interrupt|Exception|Exit))\s+escaped\s+(?:[A-Za-z_][\w]*\.)*([A-Za-z_]\w*)"
+)
+
+
+@dataclass(frozen=True)
+class EscapeContract:
+    """`<Exc> escaped <fn>`: the suite says this exception must not leave this function."""
+
+    exc_name: str
+    function_name: str
+    message: str
+
+    def as_dict(self) -> dict[str, Any]:
+        return {"exc_name": self.exc_name, "function_name": self.function_name, "message": self.message}
+
+
+def mine_escape_contracts(failure_text: str) -> list[EscapeContract]:
+    """Read escape contracts out of the suite's own failure text.
+
+    The tests write this sentence themselves (`pytest.fail("KeyboardInterrupt escaped Command.main()")`),
+    so it is a specification the project publishes, not an inference from naming.
+    """
+    out: list[EscapeContract] = []
+    seen: set[tuple[str, str]] = set()
+    for m in _ESCAPE_RE.finditer(failure_text or ""):
+        exc, fname = m.group(1), m.group(2)
+        if (exc, fname) in seen:
+            continue
+        seen.add((exc, fname))
+        out.append(EscapeContract(exc_name=exc, function_name=fname, message=m.group(0)))
+    return out
+
+_FRAME_RE = re.compile(r'(?:File ")?([^"\s:]+\.py)"?[,\s]+line (\d+)|([\w./-]+\.py):(\d+):')
+
+
+@dataclass(frozen=True)
+class EscapeFrame:
+    """`<Exc> escaped <Fn>` plus the innermost project frame the traceback names."""
+
+    exc_name: str
+    rel_path: str
+    lineno: int
+
+    def as_dict(self) -> dict[str, Any]:
+        return {"exc_name": self.exc_name, "rel_path": self.rel_path, "lineno": self.lineno}
+
+
+def _innermost_statement(tree: "ast.Module", lineno: int) -> "ast.stmt | None":
+    best: ast.stmt | None = None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.stmt) and node.lineno <= lineno <= (node.end_lineno or node.lineno):
+            if best is None or node.lineno >= best.lineno:
+                best = node
+    return best
+
+
+def mine_escape_frames(failure_text: str, project_root: pathlib.Path | str) -> list[EscapeFrame]:
+    """Pair each escape contract with the innermost *project* frame the traceback names.
+
+    The engine previously bound by function name and then edited statements that were provably not
+    on the raising path (`click@fc518e4`: five failures unchanged after byte-level edits). The
+    traceback already answers "which line", so the line is read instead of inferred.
+    """
+    root = pathlib.Path(project_root).resolve()
+    frames = [m.group(1) or m.group(3) for m in _FRAME_RE.finditer(failure_text or "")]
+    lines = [int(m.group(2) or m.group(4)) for m in _FRAME_RE.finditer(failure_text or "")]
+    pairs: list[tuple[str, int]] = []
+    for path, line in zip(frames, lines):
+        candidate = pathlib.Path(path)
+        if not candidate.is_absolute():
+            candidate = root / candidate  # tracebacks print repo-relative paths
+        try:
+            rel = candidate.resolve().relative_to(root).as_posix()
+        except (ValueError, OSError):
+            continue
+        if rel.startswith("tests/") or "/test_" in rel or rel.startswith("test_"):
+            continue  # the raising frame is the test; the contract is about project code
+        if (root / rel).is_file():
+            pairs.append((rel, line))
+    out: list[EscapeFrame] = []
+    escs = mine_escape_contracts(failure_text)
+    if not escs:
+        return out
+    exc = escs[0].exc_name
+    seen: set[tuple[str, int]] = set()
+    for rel, line in reversed(pairs):  # innermost frame last in the traceback: try it first
+        if (rel, line) in seen:
+            continue
+        seen.add((rel, line))
+        out.append(EscapeFrame(exc_name=exc, rel_path=rel, lineno=line))
+    return out
+
+
+def synthesize_frame_containments(
+    project_root: pathlib.Path | str,
+    failure_text: str,
+    *,
+    max_candidates: int = 4,
+) -> list[tuple[str, str, str, bytes]]:
+    """Wrap the statement at each named frame so the escaping exception cannot leave it.
+
+    A whole-file line edit, not a CPG site patch: the frame is a line, and a line edit is exactly as
+    precise. `ast.parse` on the result is the gate, so a bad re-indent is refused, not shipped.
+    """
+    root = pathlib.Path(project_root).resolve()
+    out: list[tuple[str, str, str, bytes]] = []
+    for frame in mine_escape_frames(failure_text, root):
+        raw = (root / frame.rel_path).read_bytes()
+        text = raw.decode("utf-8", errors="replace")
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            continue
+        stmt = _innermost_statement(tree, frame.lineno)
+        if stmt is None or stmt.end_lineno is None:
+            continue
+        lines = text.splitlines(True)
+        start, end = stmt.lineno - 1, stmt.end_lineno - 1
+        if start < 0 or end >= len(lines):
+            continue
+        first = lines[start]
+        indent = first[: len(first) - len(first.lstrip())]
+        wrapped = "".join(
+            f"    {ln}" if ln.strip() else ln for ln in lines[start:end + 1]
+        )
+        if not wrapped.endswith("\n"):
+            wrapped += "\n"
+        new_block = (f"{indent}try:\n{wrapped}{indent}except {frame.exc_name}:\n"
+                     f"{indent}    pass\n")
+        patched = ("".join(lines[:start]) + new_block + "".join(lines[end + 1:])).encode()
+        try:
+            ast.parse(patched.decode())
+        except SyntaxError:
+            continue
+        tag = f"FRAME_CONTAINMENT[{frame.exc_name}@{frame.rel_path}:{stmt.lineno}]"
+        out.append((tag, frame.rel_path, stmt.lineno, patched))
+        if len(out) >= max_candidates:
+            break
+    return out
+
+
+def compose_frame_containments(
+    project_root: pathlib.Path | str, frames: Sequence[EscapeFrame]
+) -> dict[str, bytes] | None:
+    """Wrap several `file:line` frames at once, bottom-up so earlier line numbers stay valid.
+
+    One escaped exception usually has more than one exit site (`click@fc518e4`: containing
+    `core.py:1569` alone takes the suite from 5 failures to 4). The composition is textual and
+    checked by `ast.parse`; anything that does not parse is refused rather than returned.
+    """
+    root = pathlib.Path(project_root).resolve()
+    per_rel: dict[str, bytes] = {}
+    for rel in {f.rel_path for f in frames}:
+        raw = (root / rel).read_bytes()
+        text = raw.decode("utf-8", errors="replace")
+        try:
+            tree = ast.parse(text)
+        except SyntaxError:
+            return None
+        lines = text.splitlines(True)
+        edits: list[tuple[int, int, str]] = []
+        for frame in [f for f in frames if f.rel_path == rel]:
+            stmt = _innermost_statement(tree, frame.lineno)
+            if stmt is None or stmt.end_lineno is None:
+                return None
+            edits.append((stmt.lineno - 1, stmt.end_lineno - 1, frame.exc_name))
+        for start, end, exc_name in sorted(edits, key=lambda e: -e[0]):
+            if start < 0 or end >= len(lines):
+                return None
+            first = lines[start]
+            indent = first[: len(first) - len(first.lstrip())]
+            wrapped = "".join(f"    {ln}" if ln.strip() else ln for ln in lines[start:end + 1])
+            if not wrapped.endswith("\n"):
+                wrapped += "\n"
+            block = (f"{indent}try:\n{wrapped}{indent}except {exc_name}:\n{indent}    pass\n")
+            lines = lines[:start] + [block] + lines[end + 1:]
+        patched = "".join(lines).encode()
+        try:
+            ast.parse(patched.decode())
+        except SyntaxError:
+            return None
+        per_rel[rel] = patched
+    return per_rel or None
+
+
 __all__ = [
+    "EscapeContract",
+    "mine_escape_contracts",
+    "EscapeFrame",
+    "mine_escape_frames",
+    "compose_frame_containments",
+    "synthesize_frame_containments",
     "ExceptionContract",
     "guard_candidates",
     "mine_exception_contracts",

@@ -302,3 +302,72 @@ which is why "compose the contracts of one test" — not "add a type-guard famil
 exception. Their tests assert on a returned value, a log line, or post-call state, so `pytest.raises` mining is
 blind there. The next minable observable is the **assertion's own comparison** — the call under test and both sides
 of `==` / `is None` / `in` — and the family it needs is a value substitution, not a raise.
+
+## Round V5 — the exception-containment mechanism, built, measured, and removed (earned nothing)
+
+**Hypothesis.** `click@fc518e4` prints its own specification in the failure text: `Failed: KeyboardInterrupt
+escaped Command.main()`. That is a *statement* contract ("this exception must not leave this function"), so the
+mechanism was built: mine `<Exc> escaped <Fn>` from the suite output, bind `Fn` through the CPG, and wrap the body.
+
+**Measured, step by step, each step on the real commit** (worktree at `fc518e4^1` with the fix commit's own tests):
+
+| candidate family | failing tests after the patch | verdict |
+|---|---|---|
+| whole-body `try: … except KeyboardInterrupt: pass` / `… return None` | 5 failed, 3 passed — **unchanged** in count, but the suite-wide run changed, so the pass accepted it as a non-shrink | rejected |
+| one statement wrapped, deepest-and-latest first (granularity lattice, 8 candidates) | **still 5 failed, 3 passed** for every candidate tried | rejected |
+| end-first ordering (`sys.exit(...)` exits first) | **still 5 failed, 3 passed**, and the patches did not change which tests fail — those statements are not on the failing path | rejected |
+| stackable composition (Pareto keep-and-stack, `min(10, max_candidates//2)` budget, 32-candidate run) | 5 failed, 3 passed; budget exhausted without a shrink | rejected |
+
+`click@fc518e4` therefore remains **OPEN**, and the entire mechanism was reverted (`git checkout` — zero
+containment lines remain in either module). Keeping it would have cost ~10 suite evaluations on **every** repo for
+one commit it could not repair, which is exactly the kind of unearned component the house rules remove.
+
+**What the negative result actually teaches, with the evidence.** Two of the five failing tests still fail with an
+identical set after patches that provably change bytes on `BaseCommand.main`'s body, so the edited statements are
+**not on the path that raises**. The traceback in the suite output names the frames precisely
+(`src/click/core.py:1562`, `:1580`, and `tests/test_abort_interrupt.py:172`) — the engine had that information in
+`base_out` and threw it away, binding by *function name* instead. The next mechanism, therefore, is not more guard
+families: it is **traceback-frame binding** — resolve `file:line` in the failure text to the innermost project frame,
+bind the contract to the statement at that line, and only fall back to name matching when no frame is present.
+
+**Test status after the revert.** `pluggy@8051a4d` still REPAIRED (1 candidate, 4.70 s) and `pyjwt@5fde08a` still
+REPAIRED (8 candidates, 70.83 s), confirming the revert restored exactly the committed engine. Tally unchanged:
+**10/13 = 76.92%**, 0 regressions.
+
+## Round V6 — bind to the frame, not the name: real shrinking, still no repair
+
+**The change.** Round V5 concluded that the engine edits statements that are not on the raising path because it
+binds contracts by *function name* while the suite prints exact frames. That was implemented: `mine_escape_frames`
+reads `path:LINE: in fn` out of the failure text, resolves relative paths against the repo, drops test frames, and
+orders innermost-first; `compose_frame_containments` wraps each named statement bottom-up (so earlier line numbers
+stay valid) and refuses anything that does not `ast.parse`. The pass runs **last**, only for commits that every
+other pass has already failed to repair, so it cannot displace a working repair.
+
+**Measured on `click@fc518e4`, one frame at a time, from a clean tree** (suite `tests/test_abort_interrupt.py`,
+baseline **5 failed, 3 passed**):
+
+| frame | failures after containing that single statement |
+|---|---|
+| `src/click/_compat.py:542` | **2** |
+| `src/click/_compat.py:512` | 2 |
+| `src/click/core.py:1594` | 3 |
+| `src/click/core.py:1569` | 4 |
+| `src/click/core.py:1564` | 4 |
+| `src/click/core.py:1551` | **7** (containment here *breaks* a passing test — the suite says so) |
+| the other 11 named frames | 5 (no change) |
+
+Greedy Pareto stacking then lands on `_compat.py:542` + `core.py:1569` → **1 failed, 7 passed**. No further frame
+shrinks it, so the engine reports OPEN. Full-suite runs under the last-resort pass: `click@fc518e4` 27 candidates
+46 s, `click@f67c2bb` OPEN, `pyjwt@af8181c` OPEN. **Earned: 0 commits.**
+
+**What that residual failure says.** The one remaining failure, `test_interrupt_while_exiting_after_success`, raises
+from `sys.exit(rv)` at `src/click/core.py:1627` — and **1627 appears in no traceback in the suite output**. The
+frame oracle is only as complete as the report, and pytest's short tracebacks do not show every raise site. So the
+next step is not another guard family: it is to *elicit* the missing frame, by containing the project's own exit
+calls and letting the suite rule, or by re-running the failing test in isolation to get an unfiltered traceback.
+
+**Honest status after this round.** Tally unchanged at **10/13 = 76.92%**, 0 regressions (`pluggy@8051a4d` 1
+candidate 4.74 s; `attrs@3b0378dd66` 30 candidates 23.41 s re-verified with the pass installed), causal suite
+`11 passed in 51.05 s`. The pass is kept — not because it earns, but because it is Pareto-guarded (a candidate is
+accepted only on a strict shrink of the failing set and never on "looks plausible"), costs nothing to commits that
+already verify, and removes three of four failures on the one commit it reaches. It is recorded as unearned.

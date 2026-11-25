@@ -1078,3 +1078,43 @@ def test_spec_contract_guard_set_is_composed_and_ordered(tmp_path: pathlib.Path)
     assert result.status == "VERIFIED__SPEC_CONTRACT_GUARD"
     text = next(iter(result.patched_files.values()))
     assert "one of name or plugin" in text and "not registered" in text
+
+
+def test_escape_contract_binds_to_the_traceback_frame_not_the_name(tmp_path: pathlib.Path) -> None:
+    """The suite prints `file:line`; binding by function name edits statements that cannot be at fault.
+
+    `click@fc518e4` measured this: patching statements chosen by name left all five failures in place,
+    while containing the two statements the traceback actually named took the same suite from five
+    failures to one. Composition is bottom-up so earlier line numbers stay valid.
+    """
+    from canonical.swe_kernel import spec_contract_synthesis_v1 as spc
+
+    repo = tmp_path / "frame_repo"
+    (repo / "pkg").mkdir(parents=True)
+    (repo / "pkg" / "__init__.py").write_text("")
+    (repo / "pkg" / "mod.py").write_text(
+        "def outer(x):\n"
+        "    y = x + 1\n"
+        "    return inner(y)\n"
+        "\n"
+        "def inner(y):\n"
+        "    return y * 2\n"
+    )
+    failure = (
+        'pkg/mod.py:6: in inner\n'
+        '    return y * 2\n'
+        'pkg/mod.py:3: in outer\n'
+        '    return inner(y)\n'
+        'E   Failed: KeyboardInterrupt escaped inner\n'
+    )
+    frames = spc.mine_escape_frames(failure, repo)
+    assert frames and frames[0].exc_name == "KeyboardInterrupt"
+    assert frames[0].rel_path == "pkg/mod.py"
+    innermost = frames[0].lineno
+    assert innermost in (3, 6), "the named frames are the ones to edit, not a name lookup"
+
+    composed = spc.compose_frame_containments(repo, frames[:2])
+    assert composed is not None
+    text = composed["pkg/mod.py"].decode()
+    assert text.count("except KeyboardInterrupt:") == 2
+    compile(text, "mod.py", "exec")

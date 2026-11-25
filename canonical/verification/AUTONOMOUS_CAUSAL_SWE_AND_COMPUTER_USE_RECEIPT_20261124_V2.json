@@ -124,6 +124,28 @@
    ],
    "what_changed": "Contracts stated by the same test are enforced as ONE patch (itertools.product over the scope's guard families), predicates are mined from the repository's own one-argument methods and ranked by token overlap with the contract's expected message, each predicate is also offered conditioned on another parameter being absent, and the guard that calls nothing is ordered before any guard that calls a sibling."
   },
+  "stage_e_exception_containment_attempt": {
+   "commit": "click@fc518e4",
+   "disposition": "mechanism REVERTED (0 containment lines remain); recorded here rather than kept unearned",
+   "families_built_and_measured": [
+    "whole-body try/except containment (pass and return None variants)",
+    "single-statement granularity lattice, deepest-and-latest first",
+    "single-statement end-first ordering (exit paths last in the body)",
+    "stackable Pareto composition of containments (keep on strict shrink, stack, rebuild)"
+   ],
+   "lesson": "bind by traceback frame (file:line) instead of function name",
+   "measurement": "every family: 5 failed, 3 passed on tests/test_abort_interrupt.py - unchanged from baseline; patched statements proved not to be on the raising path",
+   "outcome": "OPEN"
+  },
+  "stage_f_frame_bound_containment": {
+   "earned_a_blind_oss_commit": false,
+   "measured": {
+    "click@f67c2bb": "OPEN",
+    "click@fc518e4": "5 -> 2 -> 1 failures (shrink, no repair)",
+    "pyjwt@af8181c": "OPEN"
+   },
+   "outcome": "OPEN on every commit tried"
+  },
   "total_graded": 20,
   "total_verified": 10,
   "verified_tasks": [
@@ -220,12 +242,12 @@
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
-   "sha256": "351c7afe9482e4044d405f4d719b860876eace94934de98a0f5980f35611c3f9"
+   "sha256": "1f6365275e852733de3efdc65139746595a1e9842f21dc58975351f751801f5e"
   },
   "canonical/swe_kernel/spec_contract_synthesis_v1.py": {
    "bytes": 21011,
    "lines": 318,
-   "sha256": "12714befcd85c7d1fcd20436054ed78eff9604a9752be46db9554bbb71b2f16a"
+   "sha256": "72027eca679be72ceff3a9e4f3a13bdd9880984914d2fa3a4a56357ca0386334"
   },
   "canonical/tests/test_semantic_causal_and_mental_model_v1.py": {
    "lines": 932,
@@ -338,15 +360,25 @@
    "module": "canonical/runtime/causal_computer_use_agent_v1.py",
    "verified_here": true,
    "what": "run unsolved failures through the solver, crystallize verified fixes, refute near misses"
+  },
+  {
+   "earned_a_blind_oss_commit": false,
+   "evidence": "click@fc518e4: 5 failed -> 2 (single frame _compat.py:542) -> 1 (stacked with core.py:1569); no further frame shrinks; 4 commits measured (click@fc518e4, click@f67c2bb, pyjwt@af8181c, plus 2 regressions), 0 repairs",
+   "id": "FRAME_CONTAINMENT",
+   "known_blind_spot": "the residual click failure raises at core.py:1627, a line that appears in NO traceback pytest printed - the oracle is only as complete as the report",
+   "module": "canonical/swe_kernel/spec_contract_synthesis_v1.py",
+   "placement": "last-resort pass, after every other pass, so it cannot displace a verified repair",
+   "verified_here": true,
+   "what": "mine `<Exc> escaped <fn>` plus every `path:LINE: in fn` frame from the suite's own failure text, bind the contract to the innermost project statement (not the function name), wrap it in try/except, and stack wheels bottom-up only on a strict shrink of the failing set"
   }
  ],
- "next_bottleneck": "The remaining 10 open commits are not contract-shaped: their tests assert on returned values, logged text, or state after a call, so `pytest.raises` mining has nothing to read. The next observable to mine is the assertion's own comparison (both sides, and the call under test), and the guard family it needs is a value substitution rather than a raise.",
+ "next_bottleneck": "The frame oracle is incomplete: the residual click@fc518e4 failure raises at core.py:1627, which appears in no traceback pytest printed (short tracebacks hide raise sites). Elicit the missing frames - re-run the failing node in isolation for an unfiltered traceback, and contain the project's own exit calls - rather than adding another guard family.",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
  "schema": "AUTONOMOUS_CAUSAL_SWE_AND_COMPUTER_USE_RECEIPT_V2",
  "stored_world_facts_in_weights": 0,
  "tests": {
-  "causal_suite": "10 passed in 49.10s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
+  "causal_suite": "11 passed in 51.05s (canonical/tests/test_semantic_causal_and_mental_model_v1.py)",
   "combined_kernel": "75 passed, 1 failed, 45.97 s across 8 kernel test modules",
   "integrity_guard": "repo-integrity-guard: mode=static+diff base=c4f529eb086d rules=17 violations=0 -> PASS",
   "preexisting_failure": "test_incremental_semantic_graph_and_swe_upgrades_v1.py::test_navigation_and_complexity_deliver_answers fails identically at base c4f529eb in a clean worktree containing none of these files"
