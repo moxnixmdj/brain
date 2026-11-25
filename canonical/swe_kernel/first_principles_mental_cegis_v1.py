@@ -1394,7 +1394,7 @@ def collect_causal_dataflow_graph(
                         ),
                         pn,
                     ),
-                )[:24]
+                )[:10]
             ),
         }
         try:
@@ -1456,6 +1456,26 @@ def collect_causal_dataflow_graph(
                     graph.cross_process_events += int(count)
             except (OSError, ValueError, KeyError):
                 pass
+
+    # Always ensure exact traceback / symptom sites from pytest `--tb=short` are present in `graph.sites`
+    # even if `sys.settrace` hit `timeout_s` on a heavy template/compiler test file!
+    for sym_rel, sym_ln in list(graph.symptom_sites):
+        if (sym_rel, sym_ln) not in graph.sites and (wt / sym_rel).is_file():
+            fn_nm = ""
+            try:
+                t_sym = ast.parse((wt / sym_rel).read_text(encoding="utf-8", errors="ignore"))
+                for n_sym in ast.walk(t_sym):
+                    if isinstance(n_sym, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        if n_sym.lineno <= sym_ln <= getattr(n_sym, "end_lineno", n_sym.lineno):
+                            fn_nm = n_sym.name
+            except SyntaxError:
+                pass
+            prof_sym = graph.sites.setdefault(
+                (sym_rel, sym_ln),
+                SiteProfile(rel_file=sym_rel, lineno=sym_ln, func_name=fn_nm),
+            )
+            prof_sym.fail_hits = max(1, prof_sym.fail_hits)
+            prof_sym.in_crash_stack = True
 
     for rel_f in {rf for (rf, _) in graph.sites}:
         _add_intra_ast_def_use_edges(graph, rel_f, wt / rel_f)
@@ -2785,6 +2805,154 @@ def synthesize_expressions_bottom_up(
     return [(expr, ir) for _, _, _, expr, ir in results[:max_terms]]
 
 
+def _count_dead_branch_equivalences(code_src: str) -> int:
+    """Count degenerate `if cond: return X` followed immediately by `return X` (or `if cond: B else: B`)."""
+    try:
+        mod = ast.parse(code_src)
+    except SyntaxError:
+        return 0
+    count = 0
+    for node in ast.walk(mod):
+        body_list = getattr(node, "body", None)
+        if not isinstance(body_list, list):
+            continue
+        for idx, st in enumerate(body_list):
+            if not isinstance(st, ast.If):
+                continue
+            if st.body and st.orelse:
+                if [ast.dump(x) for x in st.body] == [ast.dump(x) for x in st.orelse]:
+                    count += 1
+            elif len(st.body) == 1 and isinstance(st.body[0], ast.Return) and idx + 1 < len(body_list):
+                nxt = body_list[idx + 1]
+                if isinstance(nxt, ast.Return) and ast.dump(st.body[0]) == ast.dump(nxt):
+                    count += 1
+    return count
+
+
+def _has_new_dead_branch_equivalence(orig_src: str, cand_src: str) -> bool:
+    return _count_dead_branch_equivalences(cand_src) > _count_dead_branch_equivalences(orig_src)
+
+
+def _synthesize_callee_param_threading(
+    worktree: pathlib.Path,
+    rel_f: str,
+    src: str,
+    tree: ast.Module,
+    lineno: int,
+    fail_frames: Sequence[Mapping[str, Any]] = (),
+) -> list[tuple[str, str, str]]:
+    """At a Call site on a fault/causal frame, thread the unique live scope parameter omitted by the call."""
+    calls_at_line: list[ast.Call] = []
+    lexical_names: set[str] = {
+        str(k)
+        for ff in fail_frames[:3]
+        for k in ff.keys()
+        if isinstance(k, str) and k.isidentifier()
+    }
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            end_ln = getattr(node, "end_lineno", node.lineno)
+            if node.lineno <= lineno <= end_ln:
+                for a in (*node.args.posonlyargs, *node.args.args, *node.args.kwonlyargs):
+                    lexical_names.add(a.arg)
+                if node.args.vararg:
+                    lexical_names.add(node.args.vararg.arg)
+                if node.args.kwarg:
+                    lexical_names.add(node.args.kwarg.arg)
+                for sub_n in ast.walk(node):
+                    if isinstance(sub_n, ast.Name) and isinstance(sub_n.ctx, ast.Store):
+                        if getattr(sub_n, "lineno", lineno + 1) < lineno:
+                            lexical_names.add(sub_n.id)
+        elif isinstance(node, ast.Call):
+            c_ln = getattr(node, "lineno", -1)
+            c_end = getattr(node, "end_lineno", c_ln)
+            if c_ln <= lineno <= c_end:
+                calls_at_line.append(node)
+
+    if not calls_at_line or not lexical_names:
+        return []
+
+    pkg_dir = (worktree / rel_f).parent
+    pkg_trees: list[ast.Module] = [tree]
+    if pkg_dir.is_dir():
+        for idx_p, sib_p in enumerate(sorted(pkg_dir.glob("*.py"))):
+            if idx_p >= 60:
+                break
+            if sib_p.resolve() == (worktree / rel_f).resolve() or sib_p.stat().st_size > 220_000:
+                continue
+            try:
+                pkg_trees.append(ast.parse(sib_p.read_text(encoding="utf-8", errors="ignore")))
+            except SyntaxError:
+                continue
+
+    out: list[tuple[str, str, str]] = []
+    for call in calls_at_line[:4]:
+        if any(isinstance(a, ast.Starred) for a in call.args) or any(kw.arg is None for kw in call.keywords):
+            continue
+        is_method_call = isinstance(call.func, ast.Attribute)
+        callee_nm = (
+            call.func.attr if isinstance(call.func, ast.Attribute)
+            else (call.func.id if isinstance(call.func, ast.Name) else "")
+        )
+        if not callee_nm or callee_nm in _SAFE_PURE_BUILTINS:
+            continue
+
+        matched_defs: list[ast.FunctionDef | ast.AsyncFunctionDef] = []
+        for mod_t in pkg_trees:
+            for dnode in ast.walk(mod_t):
+                if isinstance(dnode, (ast.FunctionDef, ast.AsyncFunctionDef)) and dnode.name == callee_nm:
+                    matched_defs.append(dnode)
+
+        for dnode in matched_defs[:4]:
+            pos_args = [a.arg for a in (*dnode.args.posonlyargs, *dnode.args.args)]
+            n_pos_defs = len(dnode.args.defaults)
+            if is_method_call and pos_args and pos_args[0] in ("self", "cls"):
+                pos_args = pos_args[1:]
+            if len(call.args) > len(pos_args):
+                continue
+            # Parameters with defaults (optional parameters omitted at call site)
+            opt_pos_start = max(0, len(pos_args) - n_pos_defs)
+            opt_pos = pos_args[opt_pos_start:]
+            kw_only_opt = [
+                ka.arg
+                for ka, kd in zip(dnode.args.kwonlyargs, dnode.args.kw_defaults)
+                if kd is not None
+            ]
+            supplied = set(pos_args[: len(call.args)]) | {kw.arg for kw in call.keywords if kw.arg}
+            omitted_opt = [p for p in (*opt_pos, *kw_only_opt) if p not in supplied]
+            cand_params = [p for p in omitted_opt if p in lexical_names and p not in ("self", "cls")]
+            if len(cand_params) != 1:
+                continue
+            chosen = cand_params[0]
+            orig_call_txt = ast.unparse(call)
+            new_call_forms: list[str] = []
+            # If `chosen` is the exact next positional slot and call has no keywords, try positional first!
+            if len(call.args) < len(pos_args) and pos_args[len(call.args)] == chosen and not call.keywords:
+                pos_call = ast.Call(
+                    func=call.func,
+                    args=[*call.args, ast.Name(id=chosen, ctx=ast.Load())],
+                    keywords=[],
+                )
+                new_call_forms.append(ast.unparse(pos_call))
+            kw_call = ast.Call(
+                func=call.func,
+                args=list(call.args),
+                keywords=[*call.keywords, ast.keyword(arg=chosen, value=ast.Name(id=chosen, ctx=ast.Load()))],
+            )
+            kw_txt = ast.unparse(kw_call)
+            if kw_txt not in new_call_forms:
+                new_call_forms.append(kw_txt)
+            for nc_txt in new_call_forms:
+                patched = _replace_ast_span_in_source(src, call, nc_txt)
+                if patched and patched != src:
+                    out.append((
+                        patched,
+                        "CALLEE_LIVE_PARAM_THREADING",
+                        f"thread live `{chosen}` into `{orig_call_txt}` -> `{nc_txt}`",
+                    ))
+    return out
+
+
 class AngelicCEGISSynthesizer:
     """Zero-template Compositional Angelic Abduction + Bottom-Up Observational CEGIS + STUN Engine."""
 
@@ -2813,6 +2981,7 @@ class AngelicCEGISSynthesizer:
         best_span = 10**9
         enclosing_fn: ast.FunctionDef | ast.AsyncFunctionDef | None = None
         enclosing_ifs: list[tuple[int, ast.If]] = []
+        seen_if_ids: set[int] = set()
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 end_ln = getattr(node, "end_lineno", node.lineno)
@@ -2825,10 +2994,35 @@ class AngelicCEGISSynthesizer:
                     if span <= best_span:
                         best_stmt = node
                         best_span = span
-                    if isinstance(node, ast.If) and node.lineno < lineno:
+                    if isinstance(node, ast.If) and node.lineno < lineno and id(node) not in seen_if_ids:
+                        seen_if_ids.add(id(node))
                         enclosing_ifs.append((lineno - node.lineno, node))
+            # CFG Control-Dependence: include preceding early-exit `If` statements (`return`/`continue`/
+            # `break`/`raise` with no `else`) in the same statement list that control-dominate `lineno`!
+            for attr_blk in ("body", "orelse", "finalbody"):
+                stmts = getattr(node, attr_blk, None)
+                if not isinstance(stmts, list) or len(stmts) < 2:
+                    continue
+                for idx_s, st_item in enumerate(stmts):
+                    if not isinstance(st_item, ast.stmt) or not hasattr(st_item, "lineno"):
+                        continue
+                    s_end = getattr(st_item, "end_lineno", st_item.lineno)
+                    if st_item.lineno <= lineno <= s_end:
+                        for prev_st in stmts[max(0, idx_s - 4) : idx_s]:
+                            if (
+                                isinstance(prev_st, ast.If)
+                                and not prev_st.orelse
+                                and prev_st.body
+                                and isinstance(
+                                    prev_st.body[-1],
+                                    (ast.Return, ast.Continue, ast.Break, ast.Raise),
+                                )
+                                and id(prev_st) not in seen_if_ids
+                            ):
+                                seen_if_ids.add(id(prev_st))
+                                enclosing_ifs.append((max(1, lineno - prev_st.lineno), prev_st))
         enclosing_ifs.sort(key=lambda item: item[0])
-        return best_stmt, enclosing_fn, [if_n for _, if_n in enclosing_ifs[:2]]
+        return best_stmt, enclosing_fn, [if_n for _, if_n in enclosing_ifs[:3]]
 
     def _module_safe_globals(self, tree: ast.Module) -> tuple[dict[str, Any], list[str], list[str]]:
         ns: dict[str, Any] = {}
@@ -2887,6 +3081,7 @@ class AngelicCEGISSynthesizer:
 
         from canonical.swe_kernel.petri_cow_splicing_engine_v1 import (
             BackwardWitnessAndDualSplicer,
+            CodebaseTypeHabitationMiner,
             RepoNativePetriMiner,
         )
 
@@ -2966,6 +3161,44 @@ class AngelicCEGISSynthesizer:
                 and not isinstance(n.value, bool)
             ]
             mental = ProgramStateMentalModel(prof.fail_frames, prof.pass_frames, extra_globals=mod_globals)
+
+            # ------------------------------------------------------------------
+            # A0. CODEBASE TYPE-HABITATION & CALLEE LIVE-PARAMETER THREADING (WALL 2)
+            # ------------------------------------------------------------------
+            if self.sim.ready and time.perf_counter() < deadline_monotonic:
+                hab_queue: list[tuple[str, str, str]] = []
+                for target_st in [stmt, *enclosing_ifs[:1]]:
+                    for p_src_h, mech_h, desc_h in CodebaseTypeHabitationMiner.synthesize_stmt_habitation_rewrites(
+                        self.worktree, rel_f, src, target_st, prof.fail_frames
+                    ):
+                        if not _has_new_dead_branch_equivalence(src, p_src_h):
+                            hab_queue.append((p_src_h, mech_h, desc_h))
+                from canonical.swe_kernel.petri_cow_splicing_engine_v1 import BidirectionalFSTLensSynthesizer
+
+                for p_src_l, _, mech_l, desc_l in BidirectionalFSTLensSynthesizer.synthesize_lens_repairs(src, tree):
+                    hab_queue.append((p_src_l, mech_l, desc_l))
+                for p_src_c, mech_c, desc_c in _synthesize_callee_param_threading(
+                    self.worktree, rel_f, src, tree, lineno, prof.fail_frames
+                ):
+                    hab_queue.append((p_src_c, mech_c, desc_c))
+                if hab_queue:
+                    hab_res = self.sim.simulate_patches_parallel([{rel_f: it[0]} for it in hab_queue[:12]])
+                    for (p_src_h, mech_h, desc_h), r_h in zip(hab_queue[:12], hab_res):
+                        if r_h.get("ok"):
+                            verified_in_sim.append(CandidatePatch(
+                                description=f"{desc_h} at {rel_f}:{lineno}",
+                                file_patches={rel_f: p_src_h},
+                                primary_file=rel_f,
+                                primary_line=lineno,
+                                mechanism=mech_h,
+                                semantic_delta_ir=f"{mech_h}@{lineno}",
+                                mdl_cost=len(desc_h),
+                            ))
+                            break
+                if verified_in_sim:
+                    self.mental_simulations += mental.simulations_run
+                    self.mental_pruned += mental.candidates_pruned
+                    break
 
             # ------------------------------------------------------------------
             # A. ANGELIC BRANCH & CONTROL-DEPENDENT ENCLOSING-IF ABDUCTION + CEGIS
@@ -3350,7 +3583,7 @@ class AngelicCEGISSynthesizer:
                 eval_queue: list[tuple[str, IRNode, str, str]] = []
                 for c_txt, c_ir, mech in merged_cands[:24]:
                     p_src = _replace_ast_span_in_source(src, v_node, c_txt)
-                    if p_src:
+                    if p_src and not _has_new_dead_branch_equivalence(src, p_src):
                         eval_queue.append((c_txt, c_ir, mech, p_src))
 
                 partial_fail_passers: list[tuple[str, list[dict[str, Any]]]] = []

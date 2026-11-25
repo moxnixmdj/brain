@@ -1,0 +1,56 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corrections_made_while_closing_them": [
+    "click@047adef was first recorded as 'refused by design -- nothing in the parent tree says order is a contract'. That overclaimed: a 6-line patch built from dict.fromkeys (an idiom already at types.py:420) takes the suite from 2 failures to 0. The refusal was a LIMIT OF THE MECHANISM SET, not an information boundary. The mechanism that reads the repository's own dedup convention now closes it in 1 evaluation.",
+    "click@7996a89 was first recorded as closing only 2 of 10, with the rest called 'a product decision the tree does not state'. That was also incomplete: the fix commit's TEST docstrings state the requirement in words ('breaks lines between words only'), and the protocol has always allowed reading fix tests. Deriving the option name from that sentence closes the remaining 8. The closer was rebuilt to parse grammar rather than match a phrase table, and tested on four wordings it had never seen.",
+    "click@7996a89 is still NOT a multi-file coupling wall: a patch touching only formatting.py takes the suite from 10 failed/37 passed to 47 passed. The other four files were cleanup, and no multi-file credit is taken."
+  ],
+  "evaluations_total": 15,
+  "generalisation_beyond_the_registry": {
+    "reading": "The mechanisms are narrow and evidence-tied. They close walls whose evidence shape they recognise and refuse the rest. A 10/10 on a registry I chose is NOT a 10/10 on unseen commits, and this field exists so that the difference cannot be missed.",
+    "result": "0 of 3 closed (OPEN, REFUSED__BASELINE_UNRUNNABLE, REFUSED__NO_MECHANISM_FIRES)",
+    "tested": [
+      "click@c4dd0cd",
+      "click@762c97e",
+      "click@271effb"
+    ]
+  },
+  "generated": "2026-11-24",
+  "heldout_transfer": {
+    "baseline_failures": 9,
+    "evaluations": 3,
+    "final_failures": 0,
+    "mechanism": "NONE_GUARD_TO_TRUTHINESS+UNION_STR_SEQUENCE_FORMAT_COMPLETION",
+    "note": "Not in the registry. Same law pair as click@c53d373 on a different function. Evidence the mechanisms are laws rather than memorised commits.",
+    "regressions": 0,
+    "status": "VERIFIED",
+    "wall_id": "click@8c73ff1"
+  },
+  "honestly_open": 0,
+  "independent_verified": false,
+  "mechanisms": 12,
+  "open_walls": [],
+  "parameters_stored": 0,
+  "protocol": "single-parent commits from three external repositories; ONLY the fix commit's test files are copied onto a /dev/shm worktree of the parent; no source diff, patch, commit message, or issue text is read by the engine; a repair counts only when the copied tests pass AND the project's own suite fails no more than it did on the untouched parent",
+  "regressions_introduced_into_a_project_suite": 0,
+  "runtime_model_calls": 0,
+  "schema": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_V1",
+  "superseded_by": "...V2.json",
+  "supersedes": "BRAIN_RESIDUAL_WALL_CLOSERS_RECEIPT_20261124_V1 (7/7, then 8/10, then 9/10)",
+  "verified": 10,
+  "verified_in_one_evaluation": 7,
+  "walls_declared": 10,
+  "what_changed_since_v1": {
+    "new_mechanisms": [
+      "DOCSTRING_DEFAULT_UNGATING (werkzeug@884437ae)",
+      "CONFIG_PARITY_FROM_REPO_IDIOM (click@7996a89, first hop)",
+      "ORDER_PRESERVING_DEDUP_PARITY (click@047adef)",
+      "STATED_REQUIREMENT_KEYWORD_COMPLETION (click@7996a89, second hop)"
+    ],
+    "two_walls_that_were_honestly_open_are_now_closed": [
+      "click@047adef",
+      "click@7996a89"
+    ],
+    "walls": "7 -> 10"
+  }
+}

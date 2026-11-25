@@ -1,0 +1,20 @@
+{
+  "schema": "BRAIN_ONE_ROW_TWO_GENERATORS_V1",
+  "rows": [
+    {
+      "repo": "werkzeug",
+      "commit": "884437aef93e543ebaff3b9cdbe857ee47e7e00c",
+      "demand_stage": "NO_SEPARATING_RULE",
+      "solved_by": null,
+      "stage": "NO_SEPARATING_RULE"
+    },
+    {
+      "repo": "werkzeug",
+      "commit": "051fd66352cf8b3f0797249858068dedaead6d39",
+      "demand_stage": "NO_SEPARATING_RULE",
+      "solved_by": null,
+      "stage": "NO_SEPARATING_RULE"
+    }
+  ],
+  "seconds": 14.48
+}

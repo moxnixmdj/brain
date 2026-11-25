@@ -1,0 +1,331 @@
+{
+  "action_id": "THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1",
+  "action_intent_id": "THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1",
+  "action_kind": "RECONCILE_FRONTIER",
+  "action_summary": "Round 15 ended on the question it could not answer: what signal prefers one ARRANGEMENT of atoms the project already holds over another, without the hidden tests? This round tests the only oracle an agent is allowed to consult, and finds it cannot choose. On django__django-16527 the expert change is one leaf (has_change_permission -> has_add_permission); a generator reading only the file produces it, and it is GREEN under the repository's own 7-test module -- as are 33 other arrangements out of 80 sampled. The hidden new test is then applied, to a separate copy, only after the green set is fixed: 0 of the 34 pass it, while the expert's change does and the unmodified file does not. django__django-15741 repeats it: the expert's one inserted line (format_type = str(format_type)) is generated, is green, and 0 of the 8 green candidates pass the hidden test, with the same valid oracle. So the wall is not generation (both expert changes are produced), not style (fixed, and the change went green), and not the green candidates being wrong -- they are genuinely green; the repository's suite is a REGRESSION oracle and is blind to WHICH change was asked for. Seven defects were found in this round's own instrument and are recorded, including two that produced plausible wrong numbers: a replacement pool truncated alphabetically, and a killed run that left its litter in the tree so the next run reported 0 green of 80 against 34. No task is resolved here and no capability is claimed.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "Routes rejected by measurement before this round: (1) the local neighbour re-run -- it exists and withholds nothing (round 15); (2) a better ranker over patch shape -- ceiling +2 tasks of 128; (3) a transplant generator -- the atoms are present (23 of 26 files introduce no new name) but the arrangement is what is missing. This round closes the last of those: the repository's own tests cannot choose between arrangements.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox only. 12 tests. The leakage guard is itself tested: the search function does not take the fail-to-pass list, and the only thing read from the test patch is the module label.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+    "progress_evidence_paths": [
+      "canonical/verification/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+      "canonical/tests/test_the_oracle_that_cannot_choose_v1.py",
+      "intake/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.md",
+      "canonical/tools/can_the_visible_suite_select_v1.py"
+    ],
+    "route_class": "ADAPT",
+    "route_id": null,
+    "scope_complete_discharge": false,
+    "terminal_achieved": false
+  },
+  "benchmark_or_family_rank_authority": "the census's own fleet measurement; no benchmark output is borrowed and no answer is leaked",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The allowed oracle carries no information about WHICH arrangement was asked for. Every other channel measured across rounds 14-16 (shape of other patches: 0.460 vs base 0.414; trace of the failing test; the code line in the issue text; the module's own conventions) either fails to rank or does not exist for the task at hand. The green set is a regression filter and admits 42% of a file's single-name rearrangements.",
+  "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The allowed oracle carries no information about WHICH arrangement was asked for. Every other channel measured across rounds 14-16 (shape of other patches: 0.460 vs base 0.414; trace of the failing test; the code line in the issue text; the module's own conventions) either fails to rank or does not exist for the task at hand. The green set is a regression filter and admits 42% of a file's single-name rearrangements.",
+  "date": "2026-11-24",
+  "expected_parent_change": "effort moves off precision (worth 3) and off coverage of the store (the material is there), and onto ranking arrangements of held material; the tree gains a receipt that corrects its own previous round.",
+  "expected_parent_frontier_change": "the repair kernel gains 4 mechanisms it did not have (config-parity, order-preserving dedup, stated-requirement completion, demanded deprecation), 2 walls move from honestly-open to VERIFIED, 1 new wall found by scanning closes, and one published 9/13 claim is recorded as not reproducible",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "falsification_condition": "If a zero-model, allowed signal separates the expert's arrangement from the other green arrangements on these two tasks, then this round's claim is false and the wall was the search after all. The check is cheap: the green sets and their labels are in the receipt's tool, and the expert's arrangement is known.",
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "highest_leverage_now": true,
+  "honest_limits": [
+    "TWO tasks. A demonstration with a valid oracle on both, not a rate over SWE-bench.",
+    "the green RATE is a sample (80 evenly spaced of 7,945 and 24,924); the ZERO hidden-green is exact over the green set found",
+    "the generator copies no comment it did not find, so a candidate can differ from the expert patch textually while being the same program",
+    "no task resolved, no capability claimed, capability_credit_delta 0"
+  ],
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "A benchmark receipt can contain a number nobody read off the rows. Round 14 quoted one, and it was wrong by a factor of five. The correction is not prose: it is a recomputation from the receipt's own per_task rows, and it changes what the next round should build. The lesson is the one the tree keeps paying for -- measure the artifact, not the story about it.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "measured_effect": {
+    "capability_credit_delta": 0,
+    "claim_falsified": "a repository's own tests select the change that was asked for",
+    "django__django-15741": {
+      "green": 8,
+      "green_share": 0.1,
+      "green_that_pass_the_hidden_test": 0,
+      "hidden_oracle_valid": {
+        "expert": true,
+        "unmodified": false
+      },
+      "scored": 80,
+      "space": 24924
+    },
+    "django__django-16527": {
+      "green": 34,
+      "green_share": 0.425,
+      "green_that_pass_the_hidden_test": 0,
+      "hidden_oracle_valid": {
+        "expert": true,
+        "unmodified": false
+      },
+      "scored": 80,
+      "space": 7945
+    },
+    "expert_change_generated_by_the_tool": 2,
+    "model_calls": 0,
+    "parameters": 0,
+    "spend_usd": 0,
+    "tasks_measured": 2
+  },
+  "next_step": "Measure which allowed signal separates a green arrangement that is the change from one that is not. Three untested and cheap: (1) the issue text's description of ABSENT code, since feature requests describe behaviour rather than quote a line; (2) the convention of the immediately neighbouring code as a prior over which atom belongs in which slot; (3) whether any EXISTING test touches the changed behaviour at all -- a suite that passes is worth less than a test that touches the line.",
+  "parent_capability": "tool_census_v1 + the refusal reader as shipped in caefcd5f",
+  "probe_specific": false,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+    "canonical/verification/THE_CHECK_THE_LOOP_THROWS_AWAY_20261124_V1.json",
+    "canonical/tests/test_the_check_the_loop_throws_away_v1.py",
+    "canonical/verification/CANDIDATE_UNDER_THE_TASKS_TESTS_SWEBENCH_VERIFIED_DJANGO_20261113_V1.json"
+  ],
+  "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
+  "recursive_obs": {
+    "canonical_base_commit": "181b54fce3fad0241781dd40184b15a5f2b98fa1",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "bulk 104-branch merge",
+      "wholesale semantic engine adoption"
+    ],
+    "expected_parent_level_state_change": "the repair kernel gains 4 mechanisms it did not have (config-parity, order-preserving dedup, stated-requirement completion, demanded deprecation), 2 walls move from honestly-open to VERIFIED, 1 new wall found by scanning closes, and one published 9/13 claim is recorded as not reproducible",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": [
+        "bulk branch merge rejected as destructive"
+      ],
+      "intrinsic_or_path_specific": "intrinsic",
+      "surviving_causal_blocker": "the mechanism set is narrow by design"
+    },
+    "obs_blocker_text": "narrow mechanisms",
+    "obs_capability": {
+      "capability_work_deleted": [
+        "the duplicate semantic engine"
+      ],
+      "existing_inherited_routes_checked": true,
+      "external_existing_routes_checked": true,
+      "surviving_gap": "1 of 5 unseen walls closes"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "benchmark score",
+        "commit count"
+      ],
+      "real_outcome": "11/11 measured walls VERIFIED",
+      "surviving_necessity": "every wall is a real external commit"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": [
+        "oracle negative result"
+      ],
+      "downstream_work_to_delete_or_supersede": "none",
+      "fresh_reuse_plan": "combine the CPG machinery later if it starts closing real walls"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": [
+        "re-measuring the registry from scratch"
+      ],
+      "search_stop_decision": "stop when 0 walls are open and 87 tests pass"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "all three losing routes were measured or found destructive, not assumed",
+      "routes_ranked": [
+        "keep only the 12 mechanisms this branch already measured",
+        "adopt arena/1412289d's semantic_causal_engine_v1 wholesale",
+        "merge the 104 arena branches",
+        "transfer the 2 pure-addition branches file-by-file and judge them by tests"
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "synthetic tests cover the mechanisms; only real commits count as walls"
+    },
+    "real_outcome": "a repair engine whose 11 measured walls close with 0 open, and whose own limits are recorded with the same care as its results",
+    "required_capability": "close statement-shaped external walls using only the parent tree and the fix commit's test files",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "RECONCILE_FRONTIER: this action reconciles an existing frontier rather than selecting a new one"
+    },
+    "routes_considered": [
+      "keep only the 12 mechanisms this branch already measured",
+      "adopt arena/1412289d's semantic_causal_engine_v1 wholesale",
+      "merge the 104 arena branches",
+      "transfer the 2 pure-addition branches file-by-file and judge them by tests"
+    ],
+    "selected_route_preflight": {
+      "all_required_dependencies_ready": true,
+      "checked_at_utc": "2026-11-25T21:33:52Z",
+      "execution_dependencies": [
+        {
+          "dependency": "python_stdlib_ast",
+          "evidence": "the engine parses and rewrites real repository source",
+          "evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "evidence_scope": "GLOBAL",
+          "kind": "EXECUTION_SUBSTRATE"
+        },
+        {
+          "dependency": "gcc_with_address_sanitizer",
+          "evidence": "canonical/tools/an_absence_must_be_live_v1.py -- probe compiles an ASan binary and requires it to abort on a deliberate overflow",
+          "evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "evidence_scope": "GLOBAL",
+          "kind": "VERIFIER"
+        },
+        {
+          "dependency": "z3_smt_solver",
+          "evidence": "known-answer probe: solver must return sat for x>3",
+          "evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "evidence_scope": "SCOPED",
+          "kind": "VERIFIER"
+        },
+        {
+          "dependency": "tree_sitter_and_language_packs",
+          "evidence": "known-answer probe: must parse a function with no error nodes",
+          "evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "evidence_scope": "SCOPED",
+          "kind": "VERIFIER"
+        },
+        {
+          "dependency": "pytest_and_corpus_repos",
+          "evidence": "11 walls re-measured end to end with the fix commit's tests only",
+          "evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "evidence_scope": "GLOBAL",
+          "kind": "EXECUTION_SUBSTRATE"
+        }
+      ],
+      "execution_dependencies_complete": true,
+      "failed_dependencies": [],
+      "max_age_hours": 2,
+      "selected_route": "transfer the 2 pure-addition branches file-by-file and judge them by tests",
+      "status": "READY"
+    },
+    "selected_surviving_route": "transfer the 2 pure-addition branches file-by-file and judge them by tests",
+    "stop_condition": "Stop when the transferred engine's own tests pass, the 11-wall registry is re-measured end to end with 0 open, and a preflight exists that refuses to report a result when a critical dependency is ABSENT rather than failing.",
+    "why_selected_route_is_fastest_sufficient": "only route with measured, non-destructive evidence"
+  },
+  "required_capability": "an honest decomposition of a real benchmark loss into separable causes, so the next rounds attack the cause that costs the most rather than the one that is easiest to build",
+  "route_class": "ADAPT",
+  "route_id": "SORT_DOUBT_INTO_EVIDENCE_BACKED_KINDS_AND_ASK_BY_INFORMATION_GAIN",
+  "route_order_walk": {
+    "ADAPT": "SELECTED: the plan was redirected by measurement, since the natural next build had a measured ceiling of +2 tasks.",
+    "BYPASS": "Not used. Building a ranker would have optimised a 2% lever because it is the easiest thing to build.",
+    "COMPOSE": "reuses two existing receipts and their own per-task records; nothing new was executed.",
+    "INVENT": "Not used. No new benchmark run, no new generator, no new claim about either."
+  },
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+  "selected_surviving_route": "ASK_THE_NARROWEST_SCOPE_AND_PRICE_THE_DOUBT_BY_WHAT_IT_DECIDES",
+  "selectivity_note": "this round changes no mechanism and claims no capability; it withdraws a number and replaces it with a measured one.",
+  "status": "SHIPPED",
+  "stop_condition": "Stop when the transferred engine's own tests pass, the 11-wall registry is re-measured end to end with 0 open, and a preflight exists that refuses to report a result when a critical dependency is ABSENT rather than failing.",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "truth": {
+    "achieved": false,
+    "what_is_not": "closing the 786 unknowns; reading a goal from words; any benchmark score; independent verification",
+    "what_is_real": "682 false sensor credits removed, the unknown collapsed to five evidence-backed kinds, a rescuable/exhausted triage, and doubt that persists across processes"
+  },
+  "user_authorized_governance_change": false,
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No truth obligation is discharged by this round. The loop is a mechanism \u2014 scan, right question, plan, verify, generalize, admit, persist, replay \u2014 which is obligation-adjacent; the honest statement is that this changes the existence of an honest goal-directed loop, not any open obligation.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Does the loop actually persist a generalization from fresh evidence \u2014 or does it claim to when it only shows one goal-reaching trace?",
+      "falsifier_id": "THE_LOOP_PERSISTED_A_RULE_FROM_ONE_EXPERIENCE",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "PERFECT_ALGORITHM_COMPOSED_LOOP_V1"
+    }
+  },
+  "verification": {
+    "independent_verification_completed": false,
+    "note": "producer-run sandbox only; the leakage guard is a test, not a promise",
+    "receipt": "canonical/verification/THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1.json",
+    "tests": "canonical/tests/test_the_oracle_that_cannot_choose_v1.py",
+    "tests_passed": 12
+  },
+  "weakens_existing_guard": false
+}

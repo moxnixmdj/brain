@@ -1,0 +1,86 @@
+{
+ "schema": "PROJECT_BRAIN_THE_ORACLE_THAT_CANNOT_CHOOSE_V1",
+ "action_id": "THE_ORACLE_THAT_CANNOT_CHOOSE_20261124_V1",
+ "authority": "MEASURED__RUNS_THE_TASKS_OWN_VISIBLE_TESTS_AND_ONLY_AFTERWARDS_SCORES_WITH_THE_HIDDEN_ONES",
+ "date": "2026-11-24",
+ "canonical_base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
+ "model_calls": 0,
+ "parameters": 0,
+ "spend_usd": 0,
+ "why_this_round_exists": "The round before ended on one question it could not answer: what signal prefers one ARRANGEMENT of atoms the project already holds over another, without the hidden tests? It had measured that 23 of 26 sampled changed files introduce no name the project does not already hold, and that the one public signal it could test without a model (the shape other patches used) failed at 0.460 against a base rate of 0.414. This round tests the only remaining oracle an agent is permitted to consult, and finds that it cannot choose.",
+ "the_question": "Among the arrangements of the atoms a file already holds, how many keep the repository's OWN existing tests green, and how many of those are the change that was asked for?",
+ "integrity_before_anything": "In SWE-bench the task's new tests are hidden. Consulting them while searching is leakage. So the search and the green filter run on a PRISTINE tree -- the task's tests never applied -- and the hidden tests are applied only afterwards, to a separate copy, to score the set the search produced. canonical/tools/can_the_visible_suite_select_v1.py takes the hidden test patch only to derive the module labels the repository's own suites live in; `measure()` does not receive the fail-to-pass list at all.",
+ "what_was_built": {
+  "tool": "canonical/tools/can_the_visible_suite_select_v1.py",
+  "what_it_generates": "arrangements of the atoms the file already holds, in four families, each generated FROM the program rather than from a list of known fixes: LEAF (a name becomes another name the file spells), OPERATOR (one operator for another of its class), BIND (a name is rebound to a built-in applied to itself, at the top of its function or immediately before the statement that consumes it), and PUT_IN / TAKE_OUT (one statement of the function copied beside another, or removed).",
+  "what_it_asks_of_an_arrangement": "only whether the repository's own tests still pass. Never whether it is the change asked for."
+ },
+ "measured": {
+  "django__django-16527": {
+   "expert_change": "`and has_change_permission` -> `and has_add_permission` in submit_row (one leaf)",
+   "space": 7945,
+   "scored": 80,
+   "stride": 99,
+   "green_under_the_repository_s_own_tests": 34,
+   "share_green": 0.425,
+   "expert_reached_by": "leaf:has_change_permission->has_add_permission",
+   "green_that_ALSO_pass_the_hidden_new_test": 0,
+   "hidden_oracle_is_valid": {
+    "with_the_expert_change": true,
+    "unmodified": false
+   }
+  },
+  "django__django-15741": {
+   "expert_change": "one inserted line, `format_type = str(format_type)`, immediately before the statement that consumes it",
+   "space": 24924,
+   "scored": 80,
+   "stride": 311,
+   "green_under_the_repository_s_own_tests": 8,
+   "share_green": 0.1,
+   "expert_reached_by": "bind:get_format:format_type=str@115",
+   "green_that_ALSO_pass_the_hidden_new_test": 0,
+   "hidden_oracle_is_valid": {
+    "with_the_expert_change": true,
+    "unmodified": false
+   }
+  }
+ },
+ "the_answer": "The oracle an agent is ALLOWED to use cannot choose. On these two tasks the expert's own change is green -- the repository's tests never rejected it -- and so are 33 (of 80) and 7 (of 80) arrangements that are not it. Not one of those alternatives passes the hidden new test, and the hidden oracle is shown to be valid on both (green with the expert's change, red without). So the green set is a mix of the right answer and wrong answers that this oracle cannot separate, and selecting from it without the hidden tests is selection at chance among survivors.",
+ "why_this_is_the_measured_wall": {
+  "it_is_not_generation": "both expert changes are produced by a generator that reads only the file: 1 leaf, 1 inserted line",
+  "it_is_not_style": "the first version let `ast.unparse` reformat the file, so a one-name exchange arrived as a 134-line diff and every style test failed; after that was fixed the expert's change became green",
+  "it_is_not_the_wrong_green": "a green candidate is genuinely green: the repository's own tests really do pass. They are simply blind to which change was asked for.",
+  "it_is_information": "the hidden test is the only thing that separates 34 survivors, and an agent may not see it"
+ },
+ "what_this_falsifies": [
+  "That a repository's own test suite is an oracle for a change request. It is an oracle for REGRESSION only, and it admits 42% of a file's single-name rearrangements on the task measured here.",
+  "That the arrangement problem is a search problem. Both expert changes were in the space; the space was never the issue.",
+  "That 'run the tests and keep what passes' -- the loop this project has proposed three times -- can select the change that was asked for. It keeps what does not break, which is a different and much larger set."
+ ],
+ "defects_this_round_found_in_its_own_instrument": [
+  "the replacement pool was the file's first 24 names alphabetically, so the expert's own target (`has_add_permission`, 25th) was never tried: 0 of 0 rather than 0 of 1",
+  "`NodeTransformer` over a shared tree mutated it in place, so candidate N carried candidates 1..N-1: 205 candidates, every one naming the target",
+  "comparing candidates to the expert by BYTES reported 'not reachable' for a change that was, because candidates are unparsed and a patch is not",
+  "`ast.unparse` over the module, then over the edited function, reformatted quoting, so a one-name exchange was a 60-to-134-line diff and every style test rejected it",
+  "the BIND family inserted into the function's docstring because it took the first line of an unparsed body",
+  "the insertion site was computed for the function, once, from the wrong name, so the 'before the consumer' site never fired",
+  "a run cut off by the sandbox's time limit left a wrong candidate in the tree, and the next run reported 0 green of 80 against 34 -- a plausible number that was entirely the previous run's litter. The tool now restores the file on every exit path, including a kill."
+ ],
+ "limits": [
+  "TWO tasks. This is not a rate over SWE-bench; it is a demonstration with a valid oracle on both, and the claim is about the KIND of oracle, which does not depend on the count.",
+  "the green sets come from 80 evenly-spaced arrangements of 7,945 and 24,924; the green RATE is a sample, the zero hidden-green is exact over the green set that was found",
+  "the generator produces no source containing a comment it did not copy, so a candidate can differ from the expert's patch textually while being the same program",
+  "one machine, one language, Python 3.11, Django only"
+ ],
+ "what_this_round_does_NOT_do": [
+  "It does not run SWE-bench. No task is resolved here and no capability is claimed.",
+  "It does not propose a ranker. That is the next round's question and it has not been answered.",
+  "It does not claim the repository's tests are useless: they caught the reformatting, which is exactly regression."
+ ],
+ "the_next_bottleneck": "A signal that separates 'this arrangement is the change that was asked for' from 'this arrangement breaks nothing'. The measurements say it cannot come from the tests, from the patch shapes other tasks used, or from the issue's quoted code. Three candidates remain untested and each is cheap: (1) the issue text's own DESCRIPTION of absent code -- feature requests say what should happen rather than quoting a line; (2) the convention of the immediately neighbouring code, as a prior over which atom belongs in which slot; (3) mutation of the changed site against the tests that DO exist, to see whether any existing test touches the behaviour at all -- a test that touches it is worth more than a suite that passes.",
+ "machine": {
+  "python": "3.11",
+  "cores": 2
+ },
+ "network": "github.com, codeload.github.com and api.github.com only, to fetch the benchmark's own statements, the Django trees and the merged pull requests. Nothing is fetched at measurement time."
+}

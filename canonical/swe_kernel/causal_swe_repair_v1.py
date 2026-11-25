@@ -468,6 +468,7 @@ def _new_rec():
     return {
         "outcome": "unknown",
         "lines": [],
+        "_tail": [],
         "frames_by_site": {},
         "exceptions": [],
         "iterators_seen": [],
@@ -490,31 +491,37 @@ def _tracer(frame, event, arg):
     lineno = frame.f_lineno
     site_key = f"{rel}:{lineno}"
     if event == "line":
-        if len(rec["lines"]) < 4000:
+        is_new_site = site_key not in rec["frames_by_site"]
+        if is_new_site and len(rec["lines"]) < 6000:
             rec["lines"].append([rel, lineno, frame.f_code.co_name])
+        tail = rec["_tail"]
+        if len(tail) >= 160:
+            tail.pop(0)
+        tail.append([rel, lineno, frame.f_code.co_name])
         bucket = rec["frames_by_site"].setdefault(site_key, [])
-        if len(bucket) < 4:
+        if len(bucket) < 3:
             snap = _snap_locals(frame.f_locals)
             bucket.append(snap)
             for vname, vinfo in snap.items():
-                if vinfo["falsy_non_none"] and len(rec["falsy_non_none_sites"]) < 40:
+                if vinfo["falsy_non_none"] and len(rec["falsy_non_none_sites"]) < 48:
                     rec["falsy_non_none_sites"].append({"site": site_key, "var": vname, "repr": vinfo["repr"], "type": vinfo["type"]})
-                if vinfo["is_iterator"] and len(rec["iterators_seen"]) < 40:
+                if vinfo["is_iterator"] and len(rec["iterators_seen"]) < 48:
                     rec["iterators_seen"].append({"site": site_key, "var": vname, "type": vinfo["type"]})
     elif event == "return":
         if arg is not None and hasattr(arg, "__iter__") and hasattr(arg, "__next__") and not isinstance(arg, (str, bytes, dict, list, tuple, set, frozenset)):
-            if len(rec["iterators_seen"]) < 40:
+            if len(rec["iterators_seen"]) < 48:
                 rec["iterators_seen"].append({"site": site_key, "var": "<return>", "type": type(arg).__name__})
     elif event == "exception":
         exc_type, exc_val, _ = arg
-        if len(rec["exceptions"]) < 20:
-            rec["exceptions"].append({
-                "site": site_key,
-                "func": frame.f_code.co_name,
-                "exc_type": getattr(exc_type, "__name__", str(exc_type)),
-                "exc_msg": str(exc_val)[:200],
-                "locals": _snap_locals(frame.f_locals),
-            })
+        if len(rec["exceptions"]) >= 28:
+            rec["exceptions"].pop(0)
+        rec["exceptions"].append({
+            "site": site_key,
+            "func": frame.f_code.co_name,
+            "exc_type": getattr(exc_type, "__name__", str(exc_type)),
+            "exc_msg": str(exc_val)[:200],
+            "locals": _snap_locals(frame.f_locals),
+        })
     return _tracer
 
 try:
@@ -622,6 +629,10 @@ else:
                             records[nid]["did_not_raise"] = m.group(1)
                         records[nid]["crash"] = {"exc_type": "Failure", "exc_msg": tb_str[-300:], "proj_traceback": []}
 
+for _r in records.values():
+    _tl = _r.pop("_tail", [])
+    if _tl:
+        _r["lines"].extend(_tl)
 pathlib.Path(cfg["out"]).write_text(json.dumps({"records": records}), encoding="utf-8")
 '''
 
@@ -635,9 +646,14 @@ def collect_causal_trace(
     python_exe: str | None = None,
     timeout_s: float = 45.0,
 ) -> dict[str, Any]:
-    """Run the 1-pass dynamic tracer on failing tests + up to 12 passing contrast tests."""
+    """Run the 1-pass dynamic tracer on failing tests + up to 8 lexically closest passing contrast tests."""
     py = python_exe or sys.executable
-    selected_nodes = list(failing_nodes[:4]) + list(passing_nodes[:12])
+    fail_toks = {tok for fn in failing_nodes[:4] for tok in re.findall(r"[a-z0-9]+", fn.lower())}
+    ranked_pass = sorted(
+        passing_nodes,
+        key=lambda pn: (-len(set(re.findall(r"[a-z0-9]+", pn.lower())) & fail_toks), pn),
+    )[:8]
+    selected_nodes = list(failing_nodes[:4]) + ranked_pass
     # Only pass `::` node IDs directly to pytest; unittest fallback uses `test_target`
     pytest_nodes = [n for n in selected_nodes if "::" in n] or [test_target]
     with tempfile.TemporaryDirectory(prefix="brain-trace-") as tmp:
@@ -900,6 +916,7 @@ def synthesize_candidates(
     ranked_sites: Sequence[Mapping[str, Any]],
     memory: SWERepairMemory,
     *,
+    python_exe: str | None = None,
     max_sites: int = 24,
     max_candidates: int = 48,
 ) -> list[PatchCandidate]:
@@ -978,7 +995,9 @@ def synthesize_candidates(
 
     def _emit(cand: PatchCandidate) -> None:
         key = (cand.rel_path, cand.new_source)
-        if key not in seen_patches:
+        if key not in seen_patches and not fpm._has_new_dead_branch_equivalence(
+            (_get_file(cand.rel_path) or ("", None, None))[0], cand.new_source
+        ):
             seen_patches.add(key)
             candidates.append(cand)
 
@@ -1003,6 +1022,26 @@ def synthesize_candidates(
         fn_node = _enclosing_function(tree, lineno)
         search_root: ast.AST = fn_node if fn_node is not None else tree
 
+        # --- FAMILY 1B: CODEBASE TYPE-HABITATION (runs at every ranked line + CFG guards!) ---
+        from canonical.swe_kernel.petri_cow_splicing_engine_v1 import CodebaseTypeHabitationMiner
+
+        stmt_at_ln, _, enc_ifs_ln = fpm.AngelicCEGISSynthesizer._find_enclosing_stmt_and_func(tree, lineno)
+        for t_st in ([stmt_at_ln, *enc_ifs_ln[:2]] if stmt_at_ln is not None else list(enc_ifs_ln[:2])):
+            if t_st is None:
+                continue
+            for p_src_h, mech_h, desc_h in CodebaseTypeHabitationMiner.synthesize_stmt_habitation_rewrites(
+                worktree, rel, src, t_st, f_frames
+            ):
+                _emit(PatchCandidate(
+                    family="FALSY_NON_NONE_GUARD" if "GUARD" in mech_h else "DEMAND_EXPRESSION_ALIGNMENT",
+                    rel_path=rel,
+                    lineno=getattr(t_st, "lineno", lineno),
+                    description=desc_h,
+                    new_source=p_src_h,
+                    abstract_shape=mech_h,
+                    heuristic_bonus=site_bonus + 3.2,
+                ))
+
         # --- FAMILY 1: ITERATOR MATERIALIZATION (`x = fn(...)` -> `tuple(fn(...))`) ---
         if fn_node and (rel, fn_node.name) not in visited_funcs:
             visited_funcs.add((rel, fn_node.name))
@@ -1026,6 +1065,193 @@ def synthesize_candidates(
                                             abstract_shape=f"$VAR = {wrapper}($CALL)",
                                             heuristic_bonus=site_bonus + 2.5,
                                         ))
+
+            # Finite-State Transducer Fixed-Point Image Refinement:
+            # Whenever a module pairs a boolean validator `is_*` with a sibling `canonicalize_*`/`normalize_*`
+            # transducer, execute `(v_fn, c_fn)` on a finite probe basis `W_probe`, observe the canonical
+            # separator & case-fold directly from `c_fn`'s runtime outputs, and synthesize the exact fixed-point
+            # regular expression `R_image` verified on `W_probe` against `bool(v_fn(w)) and (c_fn(w) == w)`!
+            if (rel, "<fst_fixed_point>") not in visited_funcs:
+                visited_funcs.add((rel, "<fst_fixed_point>"))
+                is_validators = [
+                    st for st in tree.body if isinstance(st, ast.FunctionDef) and st.name.startswith("is_")
+                ]
+                canon_fns = [
+                    st
+                    for st in tree.body
+                    if isinstance(st, ast.FunctionDef) and st.name.startswith(("canonicalize_", "normalize_"))
+                ]
+                if is_validators and canon_fns:
+                    mod_parts = list((worktree / rel).relative_to(worktree).parts)
+                    if mod_parts and mod_parts[0] == "src":
+                        mod_parts = mod_parts[1:]
+                    if mod_parts and mod_parts[-1].endswith(".py"):
+                        mod_parts[-1] = mod_parts[-1][:-3]
+                    if mod_parts and mod_parts[-1] == "__init__":
+                        mod_parts = mod_parts[:-1]
+                    mod_qual = ".".join(mod_parts)
+                    probe_words = [
+                        "", "a", "z", "0", "a1", "a-b", "a-b-c", "a1-b2-c3",
+                        "a--b", "a---b", "a_b", "a__b", "a.b", "a..b", "a._-b",
+                        "A", "A-b", "a-B", "-a", "a-", "_a", "a_", ".a", "a.",
+                        "a:b", "a/b", "a b",
+                    ]
+                    probe_py = (
+                        "import importlib, json, sys\n"
+                        "mod_n, v_names, c_names, words = json.loads(sys.argv[1])\n"
+                        "m = importlib.import_module(mod_n)\n"
+                        "out = []\n"
+                        "for vn in v_names:\n"
+                        "    vf = getattr(m, vn, None)\n"
+                        "    if not callable(vf): continue\n"
+                        "    for cn in c_names:\n"
+                        "        cf = getattr(m, cn, None)\n"
+                        "        if not callable(cf): continue\n"
+                        "        try:\n"
+                        "            vw = {w: bool(vf(w)) for w in words}\n"
+                        "            cw = {w: str(cf(w)) for w in words}\n"
+                        "            out.append({'v': vn, 'c': cn, 'vw': vw, 'cw': cw})\n"
+                        "        except Exception:\n"
+                        "            pass\n"
+                        "print(json.dumps(out))\n"
+                    )
+                    probe_pairs: list[dict[str, Any]] = []
+                    if mod_qual:
+                        try:
+                            pr_done = subprocess.run(
+                                [
+                                    python_exe or sys.executable,
+                                    "-c",
+                                    probe_py,
+                                    json.dumps([
+                                        mod_qual,
+                                        [f.name for f in is_validators],
+                                        [f.name for f in canon_fns],
+                                        probe_words,
+                                    ]),
+                                ],
+                                cwd=str(worktree),
+                                env=_clean_env(worktree),
+                                capture_output=True,
+                                text=True,
+                                timeout=4.0,
+                            )
+                            if pr_done.returncode == 0 and pr_done.stdout.strip():
+                                probe_pairs = json.loads(pr_done.stdout.strip().splitlines()[-1])
+                        except Exception:
+                            probe_pairs = []
+
+                    mod_regexes: dict[str, ast.Call] = {}
+                    for top_st in tree.body:
+                        if isinstance(top_st, (ast.Assign, ast.AnnAssign)):
+                            tgt = (
+                                top_st.targets[0]
+                                if isinstance(top_st, ast.Assign) and len(top_st.targets) == 1
+                                else getattr(top_st, "target", None)
+                            )
+                            val_n = top_st.value
+                            if isinstance(tgt, ast.Name) and isinstance(val_n, ast.Call) and val_n.args:
+                                mod_regexes[tgt.id] = val_n
+
+                    for pair_info in probe_pairs:
+                        vn = str(pair_info["v"])
+                        vw: dict[str, bool] = pair_info["vw"]
+                        cw: dict[str, str] = pair_info["cw"]
+                        # Must currently violate fixed-point (`v(w)` True while `c(w) != w`)!
+                        if not any(vw.get(w) and cw.get(w) != w for w in probe_words):
+                            continue
+                        c_double = cw.get("a--b", "")
+                        canon_sep = c_double[1] if len(c_double) == 3 and c_double[0] == "a" and c_double[2] == "b" else "-"
+                        alnum_cls = (
+                            "[a-z0-9]"
+                            if cw.get("A") == "a"
+                            else ("[A-Z0-9]" if cw.get("a") == "A" else "[A-Za-z0-9]")
+                        )
+                        esc_sep = "-" if canon_sep == "-" else re.escape(canon_sep)
+                        img_pat = f"^{alnum_cls}+({esc_sep}{alnum_cls}+)*$"
+                        try:
+                            img_cre = re.compile(img_pat)
+                        except re.error:
+                            continue
+                        if not all(
+                            bool(img_cre.match(w)) == (bool(vw.get(w)) and cw.get(w) == w)
+                            for w in probe_words
+                        ):
+                            continue
+                        v_fn = next((f for f in is_validators if f.name == vn), None)
+                        if v_fn is None:
+                            continue
+                        other_fn_names_used = {
+                            n.id
+                            for top_st in tree.body
+                            if isinstance(top_st, ast.FunctionDef) and top_st is not v_fn
+                            for n in ast.walk(top_st)
+                            if isinstance(n, ast.Name)
+                        }
+                        emitted_re = False
+                        for n in ast.walk(v_fn):
+                            if isinstance(n, ast.Name) and n.id in mod_regexes and n.id not in other_fn_names_used:
+                                call_node = mod_regexes[n.id]
+                                fn_callee = _unparse(call_node.func)
+                                patched_re = replace_ast_node_source(src, call_node, f"{fn_callee}({img_pat!r})")
+                                if patched_re:
+                                    emitted_re = True
+                                    _emit(PatchCandidate(
+                                        family="DEMAND_EXPRESSION_ALIGNMENT",
+                                        rel_path=rel,
+                                        lineno=call_node.lineno,
+                                        description=f"compute exact FST fixed-point regex image `{img_pat}` for `{n.id}`",
+                                        new_source=patched_re,
+                                        abstract_shape="REGEX_FIXED_POINT_REFINEMENT",
+                                        heuristic_bonus=site_bonus + 4.2,
+                                    ))
+                        if not emitted_re and v_fn.args.args:
+                            p0 = v_fn.args.args[0].arg
+                            ret_stmts = [st for st in v_fn.body if isinstance(st, ast.Return) and st.value is not None]
+                            if len(ret_stmts) == 1 and ("import re" in src or "from re " in src):
+                                patched_ret = replace_ast_node_source(
+                                    src, ret_stmts[0].value, f"re.match({img_pat!r}, {p0}) is not None"
+                                )
+                                if patched_ret:
+                                    _emit(PatchCandidate(
+                                        family="DEMAND_EXPRESSION_ALIGNMENT",
+                                        rel_path=rel,
+                                        lineno=ret_stmts[0].lineno,
+                                        description=f"compute exact FST fixed-point regex image `{img_pat}` in `{v_fn.name}`",
+                                        new_source=patched_ret,
+                                        abstract_shape="REGEX_FIXED_POINT_REFINEMENT",
+                                        heuristic_bonus=site_bonus + 4.2,
+                                    ))
+
+        # Bidirectional FST Lens Synthesis (`dec(enc(x)) == x` round-trip repairs on codec/escape/format pairs)
+        if (rel, "<fst_lens>") not in visited_funcs:
+            visited_funcs.add((rel, "<fst_lens>"))
+            from canonical.swe_kernel.petri_cow_splicing_engine_v1 import BidirectionalFSTLensSynthesizer
+
+            for p_src_l, ln_l, mech_l, desc_l in BidirectionalFSTLensSynthesizer.synthesize_lens_repairs(src, tree):
+                _emit(PatchCandidate(
+                    family="DEMAND_EXPRESSION_ALIGNMENT",
+                    rel_path=rel,
+                    lineno=ln_l,
+                    description=desc_l,
+                    new_source=p_src_l,
+                    abstract_shape=mech_l,
+                    heuristic_bonus=site_bonus + 4.0,
+                ))
+
+        # Also check callee live-parameter threading at exact `lineno` (even inside nested lambdas!)
+        for p_src_c, mech_c, desc_c in fpm._synthesize_callee_param_threading(
+            worktree, rel, src, tree, lineno, f_frames
+        ):
+            _emit(PatchCandidate(
+                family="DEMAND_EXPRESSION_ALIGNMENT",
+                rel_path=rel,
+                lineno=lineno,
+                description=desc_c,
+                new_source=p_src_c,
+                abstract_shape=mech_c,
+                heuristic_bonus=site_bonus + 3.6,
+            ))
 
         for node in ast.walk(search_root):
             n_ln = getattr(node, "lineno", None)
@@ -1493,6 +1719,7 @@ def repair_worktree(
     skill_store: Any | None = None,
     budget_s: float = 90.0,
     max_verifications: int = 20,
+    _allow_zipper: bool = True,
 ) -> dict[str, Any]:
     """Autonomously localize, synthesize, and verify a bug repair in `worktree` (ZERO diff leakage)."""
     started = time.perf_counter()
@@ -1534,7 +1761,7 @@ def repair_worktree(
         default_test_file=primary_test_str,
         pytest_output=baseline.get("output", ""),
         python_exe=python_exe,
-        timeout_s=min(25.0, max(8.0, budget_s * 0.35)),
+        timeout_s=min(12.0, max(5.0, budget_s * 0.22)),
     )
     dfg_ranked_sites = dfg.rank_causal_sites(len(failing_nodes))
 
@@ -1544,7 +1771,7 @@ def repair_worktree(
         passing_nodes,
         primary_test_str,
         python_exe=python_exe,
-        timeout_s=min(25.0, max(8.0, budget_s - (time.perf_counter() - started))),
+        timeout_s=min(12.0, max(5.0, budget_s * 0.22)),
     )
     local_sites = localize_suspicious_sites(trace_data)
 
@@ -1606,7 +1833,9 @@ def repair_worktree(
         "cross_process_events": dfg.cross_process_events,
     }
 
-    structural_cands = synthesize_candidates(worktree, trace_data, ranked_sites, memory)
+    structural_cands = synthesize_candidates(
+        worktree, trace_data, ranked_sites, memory, python_exe=python_exe
+    )
 
     with fpm.CoWProgramSimulator(
         worktree, failing_nodes, passing_nodes, default_test_file=primary_test_str, python_exe=python_exe
@@ -1668,9 +1897,14 @@ def repair_worktree(
 
         if dfg_ranked_sites and not sim_verified_patches:
             cegis = fpm.AngelicCEGISSynthesizer(worktree, dfg, cow_sim)
+            # Always reserve >= 30% of `budget_s` for structural CoW screening + Step 4 clean-process verification!
+            cegis_deadline = min(
+                deadline - max(10.0, budget_s * 0.30),
+                time.perf_counter() + max(6.0, budget_s * 0.32),
+            )
             cegis_winners = cegis.run_cegis(
                 dfg_ranked_sites,
-                deadline_monotonic=min(deadline, time.perf_counter() + max(8.0, budget_s * 0.45)),
+                deadline_monotonic=max(time.perf_counter() + 2.0, cegis_deadline),
             )
             mental_stats["mental_simulations"] = cegis.mental_simulations
             mental_stats["mental_pruned"] = cegis.mental_pruned
@@ -1690,8 +1924,15 @@ def repair_worktree(
                     fam = "FALSY_NON_NONE_GUARD"
                 elif "tuple(" in cw.description and "Stream materialization" in cw.description:
                     fam = "ITERATOR_MATERIALIZATION"
-                elif " in (" in cw.description or " in {" in cw.description or " not in (" in cw.description:
+                elif (
+                    " in (" in cw.description
+                    or " in {" in cw.description
+                    or " not in (" in cw.description
+                    or ("!=" in cw.description and "and not (" in cw.description and "==" in cw.description)
+                ):
                     fam = "MEMBERSHIP_SET_EXTENSION"
+                elif cw.mechanism == "ANGELIC_BRANCH_CEGIS" and "->" in cw.description and ") or (" in cw.description.split("->", 1)[-1]:
+                    fam = "GUARD_DISJUNCTIVE_RELAXATION"
                 sim_verified_patches.append({
                     "file_patches": dict(cw.file_patches),
                     "primary_file": cw.primary_file,
@@ -1703,6 +1944,7 @@ def repair_worktree(
                 })
 
         # Screen supplementary structural/demand candidates in CoW RAM (~2 ms, 0 disk writes!)
+        partial_cow_cands: list[PatchCandidate] = []
         if cow_sim.ready:
             for sc in structural_cands[: max(64, max_verifications * 3)]:
                 if time.perf_counter() >= deadline:
@@ -1714,7 +1956,7 @@ def repair_worktree(
                     continue
                 sres = cow_sim.simulate_patch({sc.rel_path: sc.new_source})
                 if sres.get("ok"):
-                    sim_verified_patches.append({
+                    entry_sc = {
                         "file_patches": {sc.rel_path: sc.new_source},
                         "primary_file": sc.rel_path,
                         "primary_line": sc.lineno,
@@ -1722,11 +1964,22 @@ def repair_worktree(
                         "mechanism": sc.family,
                         "description": sc.description,
                         "abstract_shape": sc.abstract_shape,
-                    })
-            # Import-time decorator/metaclass fallback (`@attr.s`, `@dataclass`, class-body descriptors
-            # execute at import time before `os.fork()`): always reserve tail slots for top-6 structural
-            # candidates in case earlier CoW-screened candidates regress on the full suite!
-            for sc in structural_cands[:6]:
+                    }
+                    # Prefer general structural repairs (`ITERATOR_MATERIALIZATION`, `MEMBERSHIP_SET_EXTENSION`)
+                    # ahead of literal-return `STUN_GUARD_SYNTHESIS` guards!
+                    stun_idx = next(
+                        (i_p for i_p, p_e in enumerate(sim_verified_patches) if p_e.get("mechanism") == "STUN_GUARD_SYNTHESIS"),
+                        None,
+                    )
+                    if stun_idx is not None and sc.family in {"ITERATOR_MATERIALIZATION", "MEMBERSHIP_SET_EXTENSION"}:
+                        sim_verified_patches.insert(stun_idx, entry_sc)
+                    else:
+                        sim_verified_patches.append(entry_sc)
+                elif _allow_zipper and len(partial_cow_cands) < 3:
+                    pmask = list(sres.get("passed_fail_mask") or [])
+                    if len(pmask) >= 2 and 1 <= sum(1 for x in pmask if x) < len(pmask):
+                        partial_cow_cands.append(sc)
+            for sc in [*partial_cow_cands, *structural_cands[:6]]:
                 if not any(p["file_patches"] == {sc.rel_path: sc.new_source} for p in sim_verified_patches):
                     sim_verified_patches.append({
                         "file_patches": {sc.rel_path: sc.new_source},
@@ -1765,6 +2018,7 @@ def repair_worktree(
     # 4. Cold Clean-Process Full-Suite Referee + Runner Canary (`0` trust in simulation alone!)
     originals: dict[str, str] = {}
     attempts: list[dict[str, Any]] = []
+    zipper_seeds: list[tuple[int, int, dict[str, Any], list[str]]] = []
 
     for idx, item in enumerate(sim_verified_patches[:max_verifications]):
         if time.perf_counter() - started > budget_s:
@@ -1784,6 +2038,14 @@ def repair_worktree(
             )
             regressed = bool(full["failing"]) or len(full["passing"]) < len(passing_nodes)
             if regressed:
+                # Record partial-progress seed for Def-Use Relational Zipper (Wall 3):
+                # If `item` strictly fixed >= 1 original failing test (or ALL original failing tests)
+                # while leaving 1..3 remaining/secondary failures, propagate a 2nd hop along call edges!
+                cur_fails = list(full.get("failing") or [])
+                orig_fail_set = set(failing_nodes)
+                fixed_orig = len(orig_fail_set - set(cur_fails))
+                if _allow_zipper and fixed_orig >= 1 and 1 <= len(cur_fails) <= 3:
+                    zipper_seeds.append((fixed_orig, -len(cur_fails), item, cur_fails))
                 memory.record_outcome(
                     item["family"],
                     verified=False,
@@ -1904,6 +2166,8 @@ def repair_worktree(
                         pre_set = set(pre_sib.get("failing") or [])
                         new_sib_regressions = [f for f in sib_fails if f not in pre_set]
                         if new_sib_regressions:
+                            if _allow_zipper and 1 <= len(new_sib_regressions) <= 3:
+                                zipper_seeds.append((len(failing_nodes), -len(new_sib_regressions), item, list(new_sib_regressions)))
                             memory.record_outcome(
                                 item["family"],
                                 verified=False,
@@ -2014,6 +2278,217 @@ def repair_worktree(
 
     for rel_path, orig_src in originals.items():
         (worktree / rel_path).write_text(orig_src, encoding="utf-8")
+        shutil.rmtree((worktree / rel_path).parent / "__pycache__", ignore_errors=True)
+
+    target_rel_list = [
+        str(t).split("::")[0]
+        for t in ([test_target] if isinstance(test_target, str) else list(test_target))
+    ]
+
+    def _resolve_node_test_file(node_id: str) -> str:
+        head = node_id.split("::")[0]
+        if head.endswith(".py"):
+            return head
+        # `unittest` node format in Python 3.11+: `"test_method (pkg.test_module.ClassName.test_method)"`
+        m_ut = re.search(r"\(([\w.]+)\)", node_id)
+        if m_ut:
+            dotted_parts = m_ut.group(1).split(".")
+            for part_tok in dotted_parts:
+                for cand_t in target_rel_list:
+                    if pathlib.Path(cand_t).stem == part_tok:
+                        return cand_t
+                for td_nm in ("tests", "test", "testing", "."):
+                    cand_p = worktree / td_nm / f"{part_tok}.py"
+                    if cand_p.is_file():
+                        return cand_p.relative_to(worktree).as_posix()
+        return ""
+
+    # 5A. Petri Articulation-Point Multi-Test-File Checkpoint Composition (Wall 3):
+    # When failing tests span 2..3 distinct test modules `[T_1, ..., T_k]` and joint single-site synthesis
+    # found no single-file fix, solve each failing module sequentially into a speculative checkpoint `P_1 o ... o P_k`
+    # and accept ONLY if the full union suite + runner canary passes!
+    distinct_fail_files = sorted({rf for rf in (_resolve_node_test_file(n) for n in failing_nodes) if rf})
+    if (
+        _allow_zipper
+        and not zipper_seeds
+        and 2 <= len(distinct_fail_files) <= 3
+        and (budget_s - (time.perf_counter() - started)) > 16.0
+    ):
+        saved_t_blobs: dict[str, bytes] = {}
+        for t_arg in ([test_target] if isinstance(test_target, str) else list(test_target)):
+            t_rel = str(t_arg).split("::")[0]
+            if (worktree / t_rel).is_file():
+                saved_t_blobs[t_rel] = (worktree / t_rel).read_bytes()
+        composed_files: list[str] = []
+        composed_descs: list[str] = []
+        verified_art = False
+        try:
+            for idx_art, tf_part in enumerate(distinct_fail_files):
+                rem_art = budget_s - (time.perf_counter() - started)
+                if rem_art < 8.0:
+                    composed_files.clear()
+                    break
+                per_hop_b = max(8.0, (rem_art - 4.0) / max(1, len(distinct_fail_files) - idx_art))
+                hop_res = repair_worktree(
+                    worktree,
+                    tf_part,
+                    python_exe=python_exe,
+                    memory=memory,
+                    skill_store=skill_store,
+                    budget_s=min(28.0, per_hop_b),
+                    max_verifications=8,
+                    _allow_zipper=False,
+                )
+                if not hop_res.get("pass"):
+                    if hop_res.get("status") == "REFUSED__NO_FAILING_TEST_AT_START" and composed_files:
+                        continue
+                    composed_files.clear()
+                    break
+                rf_h = str(hop_res.get("repaired_file") or "")
+                if rf_h and rf_h not in composed_files:
+                    composed_files.append(rf_h)
+                composed_descs.append(str(hop_res.get("description") or rf_h))
+            if composed_files:
+                joint_res = run_pytest_verdicts(
+                    worktree, test_target, python_exe=python_exe, timeout_s=30.0
+                )
+                if (
+                    not joint_res.get("failing")
+                    and len(joint_res.get("passing") or []) >= len(passing_nodes)
+                    and verify_runner_canary(worktree, python_exe=python_exe)
+                ):
+                    verified_art = True
+                    return {
+                        "schema": SCHEMA,
+                        "authority": AUTHORITY,
+                        "status": "PASS__VERIFIED_REPAIR",
+                        "pass": True,
+                        "winning_rank": len(attempts) + 1,
+                        "winning_family": "ARTICULATION_CHECKPOINT_ZIPPER",
+                        "winning_mechanism": "ARTICULATION_CHECKPOINT_ZIPPER",
+                        "learned_skill_id": None,
+                        "repaired_file": composed_files[0],
+                        "repaired_files": sorted(composed_files),
+                        "repaired_line": 1,
+                        "description": " + ".join(composed_descs),
+                        "abstract_shape": "ARTICULATION_CHECKPOINT_ZIPPER",
+                        "semantic_delta_ir": "ARTICULATION_CHECKPOINT_ZIPPER",
+                        "tests_passing_before": len(passing_nodes),
+                        "tests_failing_before": len(failing_nodes),
+                        "tests_passing_after": len(joint_res["passing"]),
+                        "tests_failing_after": 0,
+                        "candidates_generated": total_generated,
+                        "verifications_run": len(attempts) + len(composed_files),
+                        "mental_model_stats": mental_stats,
+                        "top_localized_sites": ranked_sites[:5],
+                        "top_localized_files": top_localized_files,
+                        "attempts": attempts[:10],
+                        "seconds": round(time.perf_counter() - started, 4),
+                        "model_calls": 0,
+                        "parameters_stored": 0,
+                    }
+        finally:
+            if not verified_art:
+                subprocess.run(
+                    ["git", "-C", str(worktree), "checkout", "--", "."],
+                    capture_output=True,
+                    timeout=15,
+                )
+                for t_rel, t_bytes in saved_t_blobs.items():
+                    (worktree / t_rel).write_bytes(t_bytes)
+
+    # 5B. Def-Use Relational Zipper (Wall 3 Multi-File / Multi-Site Coupled Propagation):
+    # Propagate top partial-progress root patch `P_1` into a bounded 2nd-hop synthesis on remaining
+    # caller/callee failures `rem_fails`, accepting `P_1 U P_2` ONLY if the entire combined suite passes!
+    if _allow_zipper and zipper_seeds and (budget_s - (time.perf_counter() - started)) > 10.0:
+        zipper_seeds.sort(key=lambda t: (-t[0], -t[1]))
+        seen_zip_patches: set[tuple[tuple[str, str], ...]] = set()
+        for _, _, root_item, rem_fails in zipper_seeds[:2]:
+            rem_budget_z = budget_s - (time.perf_counter() - started)
+            if rem_budget_z < 8.0:
+                break
+            fp_sig = tuple(sorted(root_item["file_patches"].items()))
+            if fp_sig in seen_zip_patches:
+                continue
+            seen_zip_patches.add(fp_sig)
+            for rel_p, new_src in root_item["file_patches"].items():
+                if rel_p not in originals:
+                    originals[rel_p] = (worktree / rel_p).read_text(encoding="utf-8")
+                (worktree / rel_p).write_text(new_src, encoding="utf-8")
+                shutil.rmtree((worktree / rel_p).parent / "__pycache__", ignore_errors=True)
+            try:
+                rem_test_files = sorted({rf for rf in (_resolve_node_test_file(n) for n in rem_fails) if rf})
+                hop2_target: str | Sequence[str] = (
+                    rem_test_files[0] if len(rem_test_files) == 1 else (rem_test_files or test_target)
+                )
+                hop2 = repair_worktree(
+                    worktree,
+                    hop2_target,
+                    python_exe=python_exe,
+                    memory=memory,
+                    skill_store=skill_store,
+                    budget_s=min(24.0, rem_budget_z - 3.0),
+                    max_verifications=8,
+                    _allow_zipper=False,
+                )
+                if hop2.get("pass"):
+                    union_targets = sorted({
+                        *( [test_target] if isinstance(test_target, str) else list(test_target) ),
+                        *rem_test_files,
+                    })
+                    final_check = run_pytest_verdicts(
+                        worktree, union_targets, python_exe=python_exe, timeout_s=30.0
+                    )
+                    if (
+                        not final_check.get("failing")
+                        and len(final_check.get("passing") or []) >= len(passing_nodes)
+                        and verify_runner_canary(worktree, python_exe=python_exe)
+                    ):
+                        combined_files = sorted({
+                            *root_item["file_patches"].keys(),
+                            *(hop2.get("repaired_files") or [hop2.get("repaired_file")]),
+                        })
+                        return {
+                            "schema": SCHEMA,
+                            "authority": AUTHORITY,
+                            "status": "PASS__VERIFIED_REPAIR",
+                            "pass": True,
+                            "winning_rank": len(attempts) + 1,
+                            "winning_family": "DEF_USE_RELATIONAL_ZIPPER",
+                            "winning_mechanism": "DEF_USE_RELATIONAL_ZIPPER",
+                            "learned_skill_id": hop2.get("learned_skill_id"),
+                            "repaired_file": root_item["primary_file"],
+                            "repaired_files": combined_files,
+                            "repaired_line": root_item["primary_line"],
+                            "description": f"Zipper[{root_item['description']} ==> {hop2.get('description')}]",
+                            "abstract_shape": "DEF_USE_RELATIONAL_ZIPPER",
+                            "semantic_delta_ir": "DEF_USE_RELATIONAL_ZIPPER",
+                            "tests_passing_before": len(passing_nodes),
+                            "tests_failing_before": len(failing_nodes),
+                            "tests_passing_after": len(final_check["passing"]),
+                            "tests_failing_after": 0,
+                            "candidates_generated": total_generated + int(hop2.get("candidates_generated", 0)),
+                            "verifications_run": len(attempts) + int(hop2.get("verifications_run", 1)),
+                            "mental_model_stats": mental_stats,
+                            "top_localized_sites": ranked_sites[:5],
+                            "top_localized_files": top_localized_files,
+                            "attempts": attempts[:10],
+                            "seconds": round(time.perf_counter() - started, 4),
+                            "model_calls": 0,
+                            "parameters_stored": 0,
+                        }
+                # Revert ANY modifications made by hop1 or aborted hop2
+                subprocess.run(
+                    ["git", "-C", str(worktree), "checkout", "--", "."],
+                    capture_output=True,
+                    timeout=15,
+                )
+                for rel_path, orig_src in originals.items():
+                    (worktree / rel_path).write_text(orig_src, encoding="utf-8")
+                    shutil.rmtree((worktree / rel_path).parent / "__pycache__", ignore_errors=True)
+            except Exception:
+                for rel_path, orig_src in originals.items():
+                    (worktree / rel_path).write_text(orig_src, encoding="utf-8")
 
     return {
         "schema": SCHEMA,

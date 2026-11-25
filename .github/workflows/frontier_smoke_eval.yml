@@ -41,6 +41,7 @@ jobs:
             echo "Brain revision: ${{ github.sha }}"
             echo 'Harbor revision: 39c2219a41b3caa7a689cef1882263b5a93ae93f'
             echo 'SWE-bench Pro revision: 66f92766bba642462d4bbe5479e83f91f9211862'
+            echo 'Terminal-Bench 4.1 revision: 4070d6cef56a7d20cb5dc98d5e10ada88a6b9440'
             echo "Selected task count: $TASK_LIMIT"
             echo 'First task: public verifier test names previously disclosed.'
             echo 'Producer and replay results are not independently reviewed.'
@@ -119,7 +120,7 @@ jobs:
             --ak "source_job=$GITHUB_WORKSPACE/runs/jobs/brain-pro-smoke" \
             --job-name brain-pro-smoke-regrade
 
-      - name: Run official Terminal-Bench 4.0 Harbor Docker smoke (suite=terminal-bench-4)
+      - name: Run official Terminal-Bench 4.1 Harbor Docker smoke (suite=terminal-bench-4)
         id: tb4_smoke
         if: ${{ !cancelled() && steps.prepare.outcome == 'success' }}
         working-directory: runs
@@ -129,7 +130,7 @@ jobs:
         run: |
           set -euo pipefail
           git clone --no-checkout https://github.com/harbor-framework/terminal-bench.git "$GITHUB_WORKSPACE/tb4-repo"
-          git -C "$GITHUB_WORKSPACE/tb4-repo" checkout --detach 452bf305c6daa62fc59061d22133a7cbc7c1572e
+          git -C "$GITHUB_WORKSPACE/tb4-repo" checkout --detach 4070d6cef56a7d20cb5dc98d5e10ada88a6b9440
           mkdir -p "$GITHUB_WORKSPACE/tb4-smoke"
           for tname in wal-recovery-ordering session-window-debug; do
             cp -R "$GITHUB_WORKSPACE/tb4-repo/tasks/$tname" "$GITHUB_WORKSPACE/tb4-smoke/$tname"
@@ -157,7 +158,7 @@ jobs:
                   'external_status': tr.get('external_harbor_vm_eval_status'),
                   'rewards': (res.get('verifier_result') or {}).get('rewards'),
               })
-          tb_audit = {'tb4_rev': '452bf305c6daa62fc59061d22133a7cbc7c1572e', 'rows': tb_rows}
+          tb_audit = {'tb41_rev': '4070d6cef56a7d20cb5dc98d5e10ada88a6b9440', 'rows': tb_rows}
           (jobs / 'tb4_audit.json').write_text(json.dumps(tb_audit, indent=2) + '\n')
           print(f"::warning title=HARBOR_TB4_AUDIT::{json.dumps(tb_audit, separators=(',', ':'))}")
           PY

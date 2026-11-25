@@ -1,5 +1,5 @@
 {
-  "benchmark_wall_seconds": 27.0191,
+  "benchmark_wall_seconds": 58.4222,
   "date": "2026-11-24",
   "experiment_1_goal_directed_room_learning": {
     "empty_memory_control_unread_rate": 1.0,
@@ -18,7 +18,7 @@
         0
       ],
       "total_probes": 6,
-      "total_seconds": 3.0113,
+      "total_seconds": 3.5766,
       "valid_verified": "8/8",
       "warm_episodes_zero_probes": 6
     },
@@ -61,7 +61,7 @@
         0
       ],
       "total_probes": 24,
-      "total_seconds": 6.5555
+      "total_seconds": 7.7006
     }
   },
   "experiment_2_cli_action_grammar": {
@@ -69,7 +69,7 @@
       "binaries_probed": 6,
       "pass": true,
       "recalled_from_memory": 0,
-      "seconds": 0.1739
+      "seconds": 0.1715
     },
     "out_of_world_refusal": "REFUSED__NAMES_NOTHING_IN_THIS_WORLD",
     "warm_unseen_episodes": {
@@ -292,7 +292,7 @@
     "speculative_16way_cow_world_tomography": {
       "branches_forked": 16,
       "mealy_transitions_compiled": 16,
-      "wall_ms": 41.18,
+      "wall_ms": 46.02,
       "winner_action": "heal_gateway_and_unlock_settings",
       "zero_base_disk_mutation": true
     },
@@ -362,7 +362,7 @@
     "cow_64way_boundary_fuzzer": {
       "boundary_cases_tested": 39,
       "caught_empty_string_index_regression": true,
-      "wall_ms": 10.274
+      "wall_ms": 15.965
     },
     "harbor_front_door_epistemic_dispatch": {
       "capability_id": "swe.harbor.epistemic_cycle.v1",
@@ -375,7 +375,7 @@
       "cut_vertices_discovered": 320,
       "ok": true,
       "steps_executed": 320,
-      "wall_ms": 863.103
+      "wall_ms": 945.519
     },
     "multistatement_subtree_anti_unification": {
       "ablation_disabled": "0/5",
@@ -419,7 +419,7 @@
       "pre_existing_failures": 0,
       "repaired": true,
       "untracked_files_in_app": 0,
-      "winning_mechanism": "FALSY_NON_NONE_GUARD"
+      "winning_mechanism": "SUBTREE_SKILL_REUSE"
     },
     "self_play_distiller_and_compactor": {
       "alpha_equivalent_subtrees_merged": 1,
@@ -443,6 +443,58 @@
       "reproducible_virgin_commits_rank1_localized": "10/16 (62.5%)",
       "reproducible_virgin_commits_top5_localized": "16/16 (100.0%)",
       "total_genuine_oss_repairs_across_splits": 10
+    }
+  },
+  "experiment_9_v6_metamorphic_habitation_zipper_fst_and_o1_index": {
+    "o1_fp64_skill_index_and_surgical_law_deletion_ablation": {
+      "disabled_store_pass": false,
+      "generalized_with_law_pass": true,
+      "memorized_raw_traces_pass": false,
+      "n10_ms_per_query": 0.2597,
+      "n1200_ms_per_query": 0.4378,
+      "reused_skill_id": "sub_23bd7d3fa6a7",
+      "sub_2ms_at_1200_skills": true,
+      "surgical_law_deleted_pass": false
+    },
+    "turn6_unseen_oss_12commit_apples_to_apples_ledger": {
+      "diff_audit_false_positives": 0,
+      "v5_frozen_baseline_wall1_green_parent_batch_a": "0/6 (0.0%)",
+      "v5_frozen_baseline_wall2_batch_a_genuine": "1/6 (16.7%; attrs@a08bfb90 + 1 rejected dead-branch collapse on cca32949)",
+      "v6_wall1_green_parent_batch_a_heldout_verified": "3/6 (50.0%)",
+      "v6_wall1_green_parent_solved_commits": [
+        "more-itertools@62411c16 (ACTIVE_RETURN_ALIAS_INDEPENDENCE -> byte-exact fd9e4af `head.copy()`)",
+        "more-itertools@cca32949 (DISABLED_DUNDER_FALLBACK_EQUIVALENCE -> `getattr(iterable, '__reversed__', None) is not None`)",
+        "packaging@ba17fcea23 (PREDICATE_CANONICALIZER_FIXED_POINT -> `^[a-z0-9]+(-[a-z0-9]+)*$`)"
+      ],
+      "v6_wall2_batch_a_genuine_diff_audited": "6/6 (100.0%)",
+      "v6_wall2_solved_commits": [
+        "more-itertools@62411c16 (TYPE_HABITED_CONTAINER_COPY_ISOLATION, byte-exact git blob fd9e4af)",
+        "more-itertools@cca32949 (TYPE_HABITED_ATTR_VALUE_GUARD, O(1) fast path preserved)",
+        "packaging@ba17fcea23 (REGEX_FIXED_POINT_REFINEMENT, exact PEP 503 fixed-point language)",
+        "jinja@d05bd3858c (CALLEE_LIVE_PARAM_THREADING, byte-exact git blob e5b5a00)",
+        "attrs@a08bfb90 (MEMBERSHIP_SET_EXTENSION, exact dunder set)",
+        "pluggy@e108fa44 (CFG_EARLY_EXIT_NON_NONE_GUARD, exact `self.has_plugin` semantics)"
+      ],
+      "v6_wall3_multi_file_coupled_top4_localization": "5/5 runnable (100.0%)"
+    },
+    "wall1_green_parent_metamorphic_witness_and_fst_lens": {
+      "held_out_adversarial_roundtrip_pass": true,
+      "relation": "BIDIRECTIONAL_CODEC_ROUNDTRIP_EQUIVALENCE",
+      "repaired": true,
+      "winning_mechanism": "DEMAND_EXPRESSION_ALIGNMENT",
+      "witness_compiled": true
+    },
+    "wall2_dead_branch_complexity_guard": {
+      "dead_branch_collapse_blocked": true
+    },
+    "wall3_def_use_relational_zipper_two_file_ablation": {
+      "repaired_files": [
+        "pkg/loader.py",
+        "pkg/runner.py"
+      ],
+      "winning_mechanism": "DEF_USE_RELATIONAL_ZIPPER",
+      "with_zipper_pass": true,
+      "without_zipper_pass": false
     }
   },
   "invariants": {

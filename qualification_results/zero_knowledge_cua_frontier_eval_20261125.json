@@ -1,0 +1,559 @@
+{
+  "authority": "NONE",
+  "date_utc": "2026-11-25",
+  "live_epistemic_store_after_suite_c": {
+    "l2_compaction": {
+      "active_remaining": 3,
+      "removed_duplicates": 0
+    },
+    "summary": {
+      "active_l2_skills": 3,
+      "active_l3_negative_invariants": 2,
+      "model_calls": 0,
+      "parameters_stored": 0,
+      "schema": "BRAIN_EXTERNAL_EPISTEMIC_STORE_V1",
+      "structural_index_buckets": 3,
+      "total_l2_skills": 3
+    }
+  },
+  "runtime_constraints_verified": {
+    "external_llm_vlm_calls": 0,
+    "parameters_stored_world_knowledge": 0,
+    "store_inspectable_editable_versioned": true
+  },
+  "schema": "BRAIN_ZERO_KNOWLEDGE_FRONTIER_EVAL_20261125_V1",
+  "suite_a_swebench_pro_v2_hard51": {
+    "contaminated_excluded": [
+      "instance_NodeBB__NodeBB-8168c6c424262f5eb4fb0730fb0ad2abff3f49be-vnan"
+    ],
+    "docker_daemon_available": false,
+    "hard51_total_manifest": 51,
+    "inspected_uncontaminated_python_tasks": 4,
+    "per_task": [
+      {
+        "base_image": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "contaminated_excluded": false,
+        "docker_daemon_available": false,
+        "instance_id": "instance_ansible__ansible-40ade1f84b8bb10a63576b0ac320c13f57c87d34-v6382ea168a93d80a64aab1fbd8c4f02dc5ada5bf",
+        "instruction_chars": 23642,
+        "instruction_present": true,
+        "model_calls": 0,
+        "status": "BLOCKED_BY_MISSING_DOCKER_AND_GHCR_ALLOWLIST"
+      },
+      {
+        "base_image": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86",
+        "contaminated_excluded": false,
+        "docker_daemon_available": false,
+        "instance_id": "instance_ansible__ansible-b748edea457a4576847a10275678127895d2f02f-v1055803c3a812189a1133297f7f5468579283f86",
+        "instruction_chars": 5139,
+        "instruction_present": true,
+        "model_calls": 0,
+        "status": "BLOCKED_BY_MISSING_DOCKER_AND_GHCR_ALLOWLIST"
+      },
+      {
+        "base_image": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2",
+        "contaminated_excluded": false,
+        "docker_daemon_available": false,
+        "instance_id": "instance_ansible__ansible-c1f2df47538b884a43320f53e787197793b105e8-v906c969b551b346ef54a2c0b41e04f632b7b73c2",
+        "instruction_chars": 9666,
+        "instruction_present": true,
+        "model_calls": 0,
+        "status": "BLOCKED_BY_MISSING_DOCKER_AND_GHCR_ALLOWLIST"
+      },
+      {
+        "base_image": "ghcr.io/scaleapi/swe-bench_pro-v2:instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+        "contaminated_excluded": false,
+        "docker_daemon_available": false,
+        "instance_id": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+        "instruction_chars": 4599,
+        "instruction_present": true,
+        "model_calls": 0,
+        "status": "BLOCKED_BY_MISSING_DOCKER_AND_GHCR_ALLOWLIST"
+      }
+    ]
+  },
+  "suite_b_terminal_bench_v4": {
+    "baseline_passed": 0,
+    "benchmark_commit": "452bf305c6daa62fc59061d22133a7cbc7c1572e",
+    "docker_daemon_available": false,
+    "per_task": [
+      {
+        "baseline_epistemic_without_cwd_status": "FAIL_CLOSED",
+        "baseline_ms": 95.74,
+        "baseline_open_model_status": "FAIL_CLOSED",
+        "baseline_oracle_pass": false,
+        "disclosure": "BLIND_QUARANTINED_ORACLE",
+        "model_calls": 0,
+        "oracle_summary": "unshare_chroot:27 errors in 0.58s",
+        "task_id": "terminal-bench@v4.0.0:cargo-flight-dispatch",
+        "unified_actions": [],
+        "unified_epistemic_front_door_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+        "unified_ms": 5.05,
+        "unified_oracle_pass": false
+      },
+      {
+        "baseline_epistemic_without_cwd_status": "FAIL_CLOSED",
+        "baseline_ms": 4.87,
+        "baseline_open_model_status": "FAIL_CLOSED",
+        "baseline_oracle_pass": false,
+        "disclosure": "BLIND_QUARANTINED_ORACLE",
+        "model_calls": 0,
+        "oracle_summary": "unshare_chroot:25 failed in 0.19s",
+        "task_id": "terminal-bench@v4.0.0:wal-recovery-ordering",
+        "unified_actions": [],
+        "unified_epistemic_front_door_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+        "unified_ms": 2.64,
+        "unified_oracle_pass": false
+      },
+      {
+        "baseline_epistemic_without_cwd_status": "FAIL_CLOSED",
+        "baseline_ms": 3.01,
+        "baseline_open_model_status": "FAIL_CLOSED",
+        "baseline_oracle_pass": false,
+        "disclosure": "BLIND_QUARANTINED_ORACLE",
+        "model_calls": 0,
+        "oracle_summary": "unshare_chroot:1 error in 0.10s",
+        "task_id": "terminal-bench@v4.0.0:batched-eval-parity",
+        "unified_actions": [],
+        "unified_epistemic_front_door_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+        "unified_ms": 7.51,
+        "unified_oracle_pass": false
+      },
+      {
+        "baseline_epistemic_without_cwd_status": "FAIL_CLOSED",
+        "baseline_ms": 3.21,
+        "baseline_open_model_status": "FAIL_CLOSED",
+        "baseline_oracle_pass": false,
+        "disclosure": "BLIND_QUARANTINED_ORACLE",
+        "model_calls": 0,
+        "oracle_summary": "unshare_chroot:1 error in 0.08s",
+        "task_id": "terminal-bench@v4.0.0:fin-saccr-rwa",
+        "unified_actions": [],
+        "unified_epistemic_front_door_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+        "unified_ms": 0.46,
+        "unified_oracle_pass": false
+      },
+      {
+        "baseline_epistemic_without_cwd_status": "FAIL_CLOSED",
+        "baseline_ms": 3.08,
+        "baseline_open_model_status": "FAIL_CLOSED",
+        "baseline_oracle_pass": false,
+        "disclosure": "BLIND_QUARANTINED_ORACLE",
+        "model_calls": 0,
+        "oracle_summary": "unshare_chroot:12 passed, 2 errors in 0.04s",
+        "task_id": "terminal-bench@v4.0.0:photonic-waveguide-routing",
+        "unified_actions": [
+          "pytest_repair:COLLECTION_OR_IMPORT_ERROR"
+        ],
+        "unified_epistemic_front_door_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION",
+        "unified_ms": 189.99,
+        "unified_oracle_pass": false
+      }
+    ],
+    "total_native_tasks_evaluated": 5,
+    "unified_passed": 0
+  },
+  "suite_c_real_upstream_commits_py_and_c": {
+    "baseline_solved": 0,
+    "blind_baseline_solved": 0,
+    "blind_only_total": 0,
+    "blind_unified_solved": 0,
+    "per_task": [],
+    "total_tasks": 0,
+    "unified_solved": 0
+  },
+  "suite_d_osworld_320_step_and_acquisition": {
+    "acquisition_strategy_head_to_head": {
+      "broad_ingest": {
+        "bytes_read": 33304,
+        "elapsed_ms": 0.268,
+        "goal_hits": 1,
+        "hits_per_kb": 0.0307,
+        "probes_executed": 40
+      },
+      "goal_directed_lazy": {
+        "bytes_read": 106,
+        "elapsed_ms": 0.057,
+        "goal_hits": 1,
+        "hits_per_kb": 9.6604,
+        "probes_executed": 1
+      },
+      "winner_by_efficiency": "GOAL_DIRECTED_LAZY"
+    },
+    "osworld_v2_manifest_verified": {
+      "local_kvm_available": false,
+      "release": "osworld-v2.1.json",
+      "tasks_total": 108,
+      "vm_provider_required": "AWS Ubuntu x86_64 1920x1080 (us-east-1)"
+    },
+    "workflow_320_step_comparison": {
+      "flat_unsliced_no_cow": {
+        "elapsed_ms": 0.01,
+        "failure_reason": "destructive_modal_dialog_dismissed_state",
+        "status": "FAILED_HORIZON_TRAP",
+        "steps_completed_before_failure": 0
+      },
+      "l3_invariants_crystallized_during_rollout": 1,
+      "petri_cut_vertex_plus_16way_cow": {
+        "all_cut_vertices_discovered": 319,
+        "authority": "NONE",
+        "checkpoints_verified": 10,
+        "cow_parallel_forks_executed": 208,
+        "elapsed_ms": 238.59,
+        "max_sub_episode_length": 32,
+        "model_calls": 0,
+        "parameters_stored": 0,
+        "schema": "BRAIN_CROSS_MODAL_TOMOGRAPHY_PETRI_V1",
+        "status": "VERIFIED",
+        "steps_executed": 320,
+        "sub_episodes_count": 10
+      }
+    }
+  },
+  "suite_e_single_experience_transfer_and_ablations": {
+    "cow_differential_boundary_fuzzing": {
+      "boundary_cases_tested": 64,
+      "fuzz_elapsed_ms": 6.84,
+      "safe_patch_accepted": true,
+      "tempting_overfit_patch_refuted": true,
+      "tempting_overfit_refutation_reason": "BOUNDARY_CRASH:ZeroDivisionError"
+    },
+    "memory_ablations_4way": [
+      {
+        "elapsed_ms": 0.23,
+        "l3_candidates_pruned": 0,
+        "mode": "EMPTY_STORE",
+        "total_oracle_evaluations": 24,
+        "zero_search_instant_transfers": "0/4"
+      },
+      {
+        "elapsed_ms": 0.145,
+        "l3_candidates_pruned": 0,
+        "mode": "RAW_TRACES_ONLY",
+        "total_oracle_evaluations": 24,
+        "zero_search_instant_transfers": "0/4"
+      },
+      {
+        "elapsed_ms": 0.508,
+        "l3_candidates_pruned": 0,
+        "mode": "GENERALIZED_L2_ONLY",
+        "total_oracle_evaluations": 4,
+        "zero_search_instant_transfers": "4/4"
+      },
+      {
+        "elapsed_ms": 0.26,
+        "l3_candidates_pruned": 0,
+        "mode": "FULL_L2_PLUS_L3_NEGATIVE",
+        "total_oracle_evaluations": 4,
+        "zero_search_instant_transfers": "4/4"
+      }
+    ],
+    "multi_statement_subtree_anti_unification": {
+      "admitted": true,
+      "o1_surgical_delete_verified": true,
+      "skill_id": "l2_tree_b21cc8d5c46f1b6a",
+      "unbound_holes": [],
+      "zero_search_heldout_replay_verified": true
+    },
+    "single_experience_cross_language_transfer": {
+      "c_asan_buggy_failed_first": true,
+      "c_asan_zero_shot_transfer_verified": true,
+      "javascript_node_buggy_failed_first": true,
+      "javascript_node_zero_shot_transfer_verified": true,
+      "source_exposure": "Python (`idx <= n_items -> idx < n_items`)"
+    },
+    "single_experience_cross_ui_transfer": {
+      "learned_dhash": "ffffffffffffffff",
+      "source_exposure": "HTML DOM + icon at (4, 4)",
+      "target_environment": "Pure-Canvas 2D pixel buffer (no DOM, no A11y, relocated to (42, 24) + distractor icon)",
+      "widgets_segmented_on_target": 2,
+      "zero_shot_relocated_target_matched": true
+    },
+    "supervised_ddmin_self_play": {
+      "ddmin_oracle_calls": 7,
+      "initial_trace_len": 16,
+      "lease_status": "CLAIMED",
+      "shrunk_counterexample_len": 1,
+      "solved_count": 1,
+      "tasks_total": 1
+    },
+    "version_drift_quarantine": {
+      "after_breaking_drift_active_hits": 0,
+      "post_drift_skill_status": "QUARANTINED__STALE_ON_VERSION_DRIFT",
+      "same_version_active_hits": 1
+    }
+  },
+  "suite_f_hard_unseen_frontier_regimes": {
+    "idea4_transactional_cow_rollout_guard": {
+      "committed": true,
+      "committed_branch": "safe_ledger_commit",
+      "elapsed_ms": 9.2,
+      "l3_negative_invariants_recorded": 1,
+      "real_workspace_protected_intact": true
+    },
+    "idea5_blackbox_binary_byte_jacobian": {
+      "baseline_rc": 0,
+      "control_sensitive_offsets": [
+        0,
+        1,
+        2
+      ],
+      "crash_offsets_discovered": [
+        2
+      ],
+      "elapsed_ms": 28.32,
+      "output_taint_offsets": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "idea6_adversarial_mutant_kill_self_play": {
+      "admitted_skill_ids": [
+        "l2_tree_24bc70ea29708caf",
+        "l2_tree_55c260a9eda72d3d"
+      ],
+      "elapsed_ms": 4.62,
+      "model_calls": 0,
+      "mutants_generated": 2,
+      "mutants_killed": 2,
+      "parameters_stored": 0,
+      "skills_admitted": 2,
+      "status": "OK"
+    },
+    "o1_structural_fingerprint_scaling_1_to_1000": {
+      "1": {
+        "avg_lookup_us": 88.91,
+        "bucket_hits": 1,
+        "distinct_index_buckets": 1,
+        "store_size": 1,
+        "target_skill_recalled": true
+      },
+      "10": {
+        "avg_lookup_us": 79.49,
+        "bucket_hits": 1,
+        "distinct_index_buckets": 10,
+        "store_size": 10,
+        "target_skill_recalled": true
+      },
+      "100": {
+        "avg_lookup_us": 91.03,
+        "bucket_hits": 1,
+        "distinct_index_buckets": 100,
+        "store_size": 100,
+        "target_skill_recalled": true
+      },
+      "1000": {
+        "avg_lookup_us": 89.45,
+        "bucket_hits": 1,
+        "distinct_index_buckets": 1000,
+        "store_size": 1000,
+        "target_skill_recalled": true
+      }
+    },
+    "wall1_zero_oracle_green_repo_repairs": {
+      "cases": [
+        {
+          "commit": "793a302795",
+          "heldout_human_test_suite_passed": false,
+          "model_calls": 0,
+          "parameters_stored": 0,
+          "pre_fix_suite_100pct_green": false,
+          "repo": "pyjwt",
+          "status": "BLOCKED_BY_SANDBOX_GITHUB_TLS_EOF"
+        },
+        {
+          "commit": "c629214760",
+          "heldout_human_test_suite_passed": false,
+          "model_calls": 0,
+          "parameters_stored": 0,
+          "pre_fix_suite_100pct_green": false,
+          "repo": "more-itertools",
+          "status": "BLOCKED_BY_SANDBOX_GITHUB_TLS_EOF"
+        },
+        {
+          "commit": "fbd55137fe",
+          "heldout_human_test_suite_passed": false,
+          "model_calls": 0,
+          "parameters_stored": 0,
+          "pre_fix_suite_100pct_green": false,
+          "repo": "more-itertools",
+          "status": "BLOCKED_BY_SANDBOX_GITHUB_TLS_EOF"
+        },
+        {
+          "commit": "HEAD",
+          "heldout_human_test_suite_passed": true,
+          "mechanism": "except_clone_family_widen(OverflowError+TypeErrorx1)",
+          "metamorphic_witnesses_synthesized": 2,
+          "model_calls": 0,
+          "pre_fix_suite_100pct_green": true,
+          "repo": "offline_toklib_green_suite",
+          "status": "VERIFIED"
+        }
+      ],
+      "upstream_cases_evaluated": 4,
+      "verified_and_passed_heldout_human_suite": 1
+    },
+    "wall3_coupled_multifile_relational_zipper": {
+      "coupled_2hop_mechanism": "relational_zipper(entry_guard_boundary_return -> bidirectional_lens:affine_transducer(prefix='', delta=+32, suffix=''))",
+      "coupled_2hop_status": "VERIFIED",
+      "coupled_patched_files": [
+        "zpkg/consumer.py",
+        "zpkg/producer.py"
+      ],
+      "elapsed_ms": 127.52,
+      "single_file_1hop_status": "UNSOLVED"
+    }
+  },
+  "suite_g_unseen_repos_and_supervised_self_play": {
+    "baseline_solved": 0,
+    "cross_repo_boltons_skill_transfer": {
+      "elapsed_ms": 119.94,
+      "mechanism": "guard_is_not_none",
+      "status": "VERIFIED",
+      "structural_lookup_ms": 0.1687,
+      "zero_angelic_probes_used": false
+    },
+    "honest_suite_baseline_audit": {
+      "baseline_cases": 16361,
+      "baseline_passed": 15255,
+      "failure_buckets": {
+        "ASSERTION": 793,
+        "CURRENTNESS_GUARD__DRIFT": 53,
+        "CURRENTNESS_GUARD__SOURCE_BLOB_DRIFT": 16,
+        "IMPORT_ERROR": 43,
+        "MISSING_FILE": 5,
+        "NETWORK": 3,
+        "OTHER": 113
+      },
+      "files_with_failures_or_errors": 344
+    },
+    "model_calls": 0,
+    "per_commit": [
+      {
+        "status": "REPO_MISSING",
+        "task_id": "mahmoud/boltons@ec1ff9f672"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "mahmoud/boltons@1cdc0e9d36"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "mahmoud/boltons@970051b664"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "mahmoud/boltons@efff866a3b"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "python-attrs/attrs@97f8d17565"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "python-attrs/attrs@af9c510912"
+      },
+      {
+        "status": "REPO_MISSING",
+        "task_id": "python-attrs/attrs@ce89f5d11f"
+      }
+    ],
+    "pypi_release_transitions": {
+      "baseline_solved": 0,
+      "per_release": [
+        {
+          "baseline_solved": false,
+          "elapsed_ms": 11859.7,
+          "learned_skill_id": "l2_tree_7eb2b8c83cb67dfc",
+          "mechanism": "guard_exclude_str_bytes_from_abc",
+          "model_calls": 0,
+          "release_pair": "pyjwt:2.10.0->2.10.1",
+          "test_file": "tests/test_api_jwt.py",
+          "unified_solved": true,
+          "unified_status": "VERIFIED"
+        },
+        {
+          "baseline_solved": false,
+          "elapsed_ms": 1075.64,
+          "learned_skill_id": null,
+          "mechanism": null,
+          "model_calls": 0,
+          "release_pair": "boltons:25.0.0->26.0.0",
+          "test_file": "tests/test_dictutils.py",
+          "unified_solved": false,
+          "unified_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION"
+        },
+        {
+          "baseline_solved": false,
+          "elapsed_ms": 639.84,
+          "learned_skill_id": null,
+          "mechanism": null,
+          "model_calls": 0,
+          "release_pair": "attrs:25.3.0->25.4.0",
+          "test_file": "tests/test_forward_references.py",
+          "unified_solved": false,
+          "unified_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION"
+        },
+        {
+          "baseline_solved": false,
+          "elapsed_ms": 1661.2,
+          "learned_skill_id": null,
+          "mechanism": null,
+          "model_calls": 0,
+          "release_pair": "click:8.1.8->8.2.0",
+          "test_file": "tests/test_types.py",
+          "unified_solved": false,
+          "unified_status": "ABSTAINED__NO_VERIFIED_LOCAL_POSTCONDITION"
+        }
+      ],
+      "total": 4,
+      "unified_solved": 1
+    },
+    "supervised_self_play_batch": {
+      "authority": "NONE",
+      "elapsed_ms": 4.83,
+      "l2_skills_added": 1,
+      "l2_total": 3,
+      "l3_negative_invariants_added": 0,
+      "l3_total": 2,
+      "model_calls": 0,
+      "parameters_stored": 0,
+      "results": [
+        {
+          "ddmin_oracle_calls": 0,
+          "lease_status": "CLAIMED",
+          "model_calls": 0,
+          "mutants_killed": 0,
+          "shrunk_len": null,
+          "skills_admitted": 0,
+          "status": "UNSOLVED",
+          "task_id": "selfplay_harvest_clamp"
+        },
+        {
+          "ddmin_oracle_calls": 0,
+          "lease_status": "CLAIMED",
+          "model_calls": 0,
+          "mutants_killed": 1,
+          "shrunk_len": null,
+          "skills_admitted": 1,
+          "status": "VERIFIED",
+          "task_id": "selfplay_harvest_meta"
+        }
+      ],
+      "schema": "BRAIN_EPISTEMIC_ADMISSION_AND_SELF_PLAY_V1",
+      "solved_count": 1,
+      "tasks_total": 2,
+      "unsolved_count": 1
+    },
+    "total_unseen_commits": 7,
+    "unified_epistemic_front_door_solved": 0,
+    "unseen_repos_evaluated": [
+      "mahmoud/boltons",
+      "python-attrs/attrs"
+    ]
+  },
+  "total_elapsed_s": 270.41
+}

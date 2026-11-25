@@ -1,0 +1,77 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "conclusion": "Pillar 0 is not 'merge 104 branches'. Branch-level merges would be destructive: the nearest branches still differ by roughly 50 files, and the large ones delete 179-289 files that main has. Any transfer of work must be per-file, chosen by content, and judged by tests -- which is exactly the discipline already applied to the repair engine. A bulk merge was never on the table and is now measured out.",
+  "corrections_recorded": [
+    "Pass 1 reported 'arena/0eb6c191-brain differs in 0 files'. The branch object does not exist locally (it was deleted after PR #7069 merged), so two failing commands produced empty output that was read as agreement. The squash claim now rests only on the commit message, which is what it actually is.",
+    "Pass 2 reported 'readable: 0' for all 104 branches because `git branch -r` indents each line by two spaces and the leading whitespace was kept when building ref names. Every lookup was malformed. Fixed by stripping before use; the numbers here come from the corrected pass."
+  ],
+  "generated": "2026-11-24",
+  "headline": "main holds a single commit. None of the 104 live arena branches has a tree identical to it, and 84 of them differ in 200+ files. The branches share a different root (a6ef30b89f, 'Establish private Project Brain staging substrate'), so git reports them ~23,000 commits ahead of main while they are really a parallel lineage.",
+  "measurements": {
+    "arena_branches_scanned": 104,
+    "branch_distance_from_main": {
+      "0": 0,
+      "1-49": 16,
+      "200+": 84,
+      "50-199": 4
+    },
+    "branches_missing_objects": [],
+    "branches_with_readable_tree": 104,
+    "branches_with_tree_identical_to_main": [],
+    "closest_branches_to_main": [
+      [
+        "arena/80a7e8eb-brain",
+        5
+      ],
+      [
+        "arena/b1f9c237-brain",
+        8
+      ],
+      [
+        "arena/1412289d-brain",
+        9
+      ],
+      [
+        "arena/d86a0174-brain",
+        13
+      ],
+      [
+        "arena/0964738f-brain",
+        14
+      ],
+      [
+        "arena/839ba1ac-brain",
+        15
+      ],
+      [
+        "arena/cd5bfaaa-brain",
+        17
+      ],
+      [
+        "arena/94363358-brain",
+        19
+      ],
+      [
+        "arena/ff868e2a-brain",
+        22
+      ],
+      [
+        "arena/39d26eb4-brain",
+        23
+      ],
+      [
+        "arena/4260e934-brain",
+        23
+      ],
+      [
+        "arena/06dc079e-brain",
+        26
+      ]
+    ],
+    "main_commit_count": 1,
+    "my_branch_commits_not_on_main": 18
+  },
+  "method": "git plumbing only; every command's exit code recorded so a failure cannot be read as a zero.",
+  "schema": "BRAIN_PILLAR0_BRANCH_AUDIT_V1",
+  "what_this_does_not_establish": "Not evidence that the branches lack useful work, nor that their contents conflict. Only that a bulk merge is destructive and that 'unmerged' is not 'pending'."
+}

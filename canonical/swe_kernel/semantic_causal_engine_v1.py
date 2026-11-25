@@ -4400,19 +4400,6 @@ def repair_project_causally(
             if skill_store is not None:
                 for morph, morph_src in skill_store.propose(site.source_text):
                     candidates.append((f"TREE_REWRITE_{morph.morphism_id[4:14]}", morph_src, ""))
-                # Delta replay: one learned *edit*, anchored on informative neighbours. The whole-body
-                # form above proposes nothing (its pattern is a single hole); this form carries the
-                # insertion and refuses where the anchors do not fit.
-                propose_delta = getattr(skill_store, "propose_delta", None)
-                if callable(propose_delta):
-                    # Priority, not tail position: a measured single experience is tried first. Tail
-                    # position meant the cap dropped every delta before it could be cloned (V11).
-                    delta_cands = [
-                        (f"DELTA_{dlt.delta_id[3:13]}", dlt_src, "")
-                        for dlt, dlt_src in propose_delta(site.source_text)
-                    ]
-                    if delta_cands:
-                        candidates = delta_cands + candidates
             candidates = candidates[:12]
 
             for tag, cand_code, extra_imp in candidates:

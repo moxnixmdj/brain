@@ -656,17 +656,8 @@ def _sole_name(expr_text: str) -> str | None:
 # ================================================================================================== #
 
 def _dump(node: Any) -> str:
-    """A stable textual witness of a node, including *lists of nodes*.
-
-    A hole's before-half is often a statement list, not one node. `repr([<ast.If ...>])` embeds a
-    memory address, so such a morphism could never match again — measured: a guard morphism learned
-    on `pluggy@8051a4d` proposed 0 rewrites on the next pluggy commit. Recursing over sequences keeps
-    the witness address-free and the store replayable.
-    """
     if isinstance(node, ast.AST):
         return ast.dump(node, annotate_fields=True, include_attributes=False)
-    if isinstance(node, (list, tuple)):
-        return "[" + ", ".join(_dump(n) for n in node) + "]"
     return repr(node)
 
 
@@ -868,162 +859,6 @@ class TreeRewriteMorphism:
         )
 
 
-class _Skeleton(ast.NodeTransformer):
-    """Identifier- and value-blind view of a statement: the shape, not the names.
-
-    Anti-unification over identifiers is the whole point of a morphism; comparing raw dumps binds a
-    learned edit to the exact names of the witness, which is a raw trace.
-    """
-
-    def visit_Name(self, node: ast.Name) -> ast.AST:  # noqa: N802 - ast API
-        return ast.copy_location(ast.Name(id="_", ctx=node.ctx), node)
-
-    def visit_Constant(self, node: ast.Constant) -> ast.AST:  # noqa: N802 - ast API
-        return ast.copy_location(ast.Constant(value=type(node.value).__name__), node)
-
-
-def _skeleton(node: ast.AST) -> str:
-    import copy as _copy
-
-    return ast.dump(_Skeleton().visit(_copy.deepcopy(node)), annotate_fields=True, include_attributes=False)
-
-
-@dataclass
-class DeltaMorphism:
-    """One *edit*, not one body: insert / delete / replace at a structurally anchored position.
-
-    The anchor is the sibling statement's skeleton, so the edit travels to any function whose
-    neighbouring statement has the same shape, and refuses when it does not.
-    """
-
-    delta_id: str
-    kind: str                       # insert | delete | replace
-    prefix_anchor: str = ""         # skeleton of the statement immediately before the edit
-    suffix_anchor: str = ""         # skeleton of the statement immediately after the edit
-    payload: str = ""               # dedented source of the inserted/replacement statements
-    language: str = "python"
-    origin: str = ""
-    diagnostic_class: str = ""
-    transfers: int = 0
-    refutations: int = 0
-
-    def to_dict(self) -> dict[str, Any]:
-        return dataclasses.asdict(self)
-
-    @staticmethod
-    def from_dict(d: Mapping[str, Any]) -> "DeltaMorphism":
-        return DeltaMorphism(
-            delta_id=str(d["delta_id"]), kind=str(d["kind"]),
-            prefix_anchor=str(d.get("prefix_anchor") or ""),
-            suffix_anchor=str(d.get("suffix_anchor") or ""),
-            payload=str(d.get("payload") or ""), language=str(d.get("language") or "python"),
-            origin=str(d.get("origin") or ""), diagnostic_class=str(d.get("diagnostic_class") or ""),
-            transfers=int(d.get("transfers") or 0), refutations=int(d.get("refutations") or 0),
-        )
-
-
-def _is_informative(node: ast.AST) -> bool:
-    """A docstring or `pass` is not an anchor: every function in the repo would match it."""
-    if isinstance(node, ast.Expr) and isinstance(getattr(node, "value", None), ast.Constant):
-        return not isinstance(node.value.value, str)
-    return not isinstance(node, ast.Pass)
-
-
-def _nearest(flags: list[bool], i: int, step: int) -> int | None:
-    """Index of the nearest informative statement strictly before (`step=-1`) / at-or-after (`step=1`) `i`."""
-    j = i - 1 if step < 0 else i
-    while 0 <= j < len(flags):
-        if flags[j]:
-            return j
-        j += step
-    return None
-
-
-def learn_delta(before_src: str, after_src: str, *, origin: str = "", diagnostic_class: str = "") -> "DeltaMorphism | None":
-    """Compute the single structural edit between two verified bodies, or refuse.
-
-    The edit is anchored on the *nearest informative statement* on each side, with docstrings and
-    `pass` skipped: anchoring on a docstring is how a learned guard ends up firing on every function
-    in the repository, which is the failure this rule exists to prevent.
-    """
-    try:
-        b = ast.parse(textwrap.dedent(before_src)).body
-        a = ast.parse(textwrap.dedent(after_src)).body
-    except SyntaxError:
-        return None
-    bsk = [_skeleton(x) for x in b]
-    ask = [_skeleton(x) for x in a]
-    prefix = 0
-    while prefix < min(len(b), len(a)) and bsk[prefix] == ask[prefix]:
-        prefix += 1
-    suffix = 0
-    while (suffix < min(len(b), len(a)) - prefix
-           and bsk[len(b) - 1 - suffix] == ask[len(a) - 1 - suffix]):
-        suffix += 1
-    a_mid = a[prefix:len(a) - suffix]
-    b_mid = b[prefix:len(b) - suffix]
-    if not a_mid and not b_mid:
-        return None
-    if not b_mid:
-        kind = "insert"
-    elif not a_mid:
-        kind = "delete"
-    elif len(a_mid) == 1 and len(b_mid) == 1:
-        kind = "replace"
-    else:
-        return None  # two independent edits are not one morphism
-    payload = "\n".join(ast.unparse(x) for x in (b_mid if kind == "delete" else a_mid))
-    bflags = [_is_informative(x) for x in b]
-    before_idx = _nearest(bflags, prefix, -1)
-    after_idx = _nearest(bflags, len(b) - suffix, 1)
-    prefix_anchor = bsk[before_idx] if before_idx is not None else ""
-    suffix_anchor = bsk[after_idx] if after_idx is not None else ""
-    if not prefix_anchor and not suffix_anchor:
-        return None  # no informative anchor: the edit would fire anywhere
-    blob = json.dumps({"k": kind, "p": prefix_anchor, "s": suffix_anchor, "pl": payload},
-                      sort_keys=True, separators=(",", ":"))
-    return DeltaMorphism(
-        delta_id="dm_" + hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16],
-        kind=kind, prefix_anchor=prefix_anchor, suffix_anchor=suffix_anchor,
-        payload=payload, origin=origin, diagnostic_class=diagnostic_class,
-    )
-
-
-def apply_delta(source_text: str, delta: "DeltaMorphism") -> str | None:
-    """Apply an edit at the gap its informative anchors describe; `None` when they do not fit."""
-    try:
-        body = ast.parse(textwrap.dedent(source_text)).body
-    except SyntaxError:
-        return None
-    skel = [_skeleton(x) for x in body]
-    flags = [_is_informative(x) for x in body]
-    for i in range(len(body) + 1):
-        bi = _nearest(flags, i, -1)
-        ai = _nearest(flags, i, 1)
-        if (skel[bi] if bi is not None else "") != delta.prefix_anchor:
-            continue
-        if (skel[ai] if ai is not None else "") != delta.suffix_anchor:
-            continue
-        try:
-            payload = ast.parse(textwrap.dedent(delta.payload)).body if delta.kind != "delete" else []
-        except SyntaxError:
-            return None
-        new_body = list(body)
-        if delta.kind == "insert":
-            new_body[i:i] = payload
-        elif delta.kind == "delete":
-            new_body = new_body[:i] + new_body[i + 1:]
-        else:
-            if i >= len(new_body):
-                return None
-            new_body[i:i + 1] = payload
-        try:
-            return ast.unparse(ast.Module(body=new_body, type_ignores=[]))
-        except Exception:
-            return None
-    return None
-
-
 class SkillStoreV2:
     """External, JSON, `O(1)`-editable store of statement-level tree-rewrite morphisms.
 
@@ -1040,10 +875,6 @@ class SkillStoreV2:
         default_p = ROOT / "canonical" / "astra_runtime" / "tmp" / "tree_rewrite_morphism_store_v1.json"
         self.path = pathlib.Path(path) if path else default_p
         self.morphisms: dict[str, TreeRewriteMorphism] = {}
-        # Delta morphisms: one *edit* anchored on informative neighbours, instead of one whole body.
-        # Measured 2026-11-24: the whole-body form has a pattern with no "T" and no "F" (a single hole
-        # over everything), so it proposed 0 rewrites even on the body it was learned from.
-        self.deltas: dict[str, DeltaMorphism] = {}
         self.refusal_counts: dict[str, int] = {}
         if self.path.is_file():
             self._load()
@@ -1052,9 +883,6 @@ class SkillStoreV2:
         try:
             raw = json.loads(self.path.read_text(encoding="utf-8"))
             if isinstance(raw, Mapping) and raw.get("schema") == SKILL_STORE_SCHEMA:
-                for item in raw.get("deltas") or []:
-                    dlt = DeltaMorphism.from_dict(item)
-                    self.deltas[dlt.delta_id] = dlt
                 for item in raw.get("morphisms") or []:
                     m = TreeRewriteMorphism.from_dict(item)
                     self.morphisms[m.morphism_id] = m
@@ -1070,8 +898,6 @@ class SkillStoreV2:
             "morphism_count": len(self.morphisms),
             "refusal_counts": self.refusal_counts,
             "morphisms": [m.to_dict() for m in sorted(self.morphisms.values(), key=lambda x: x.morphism_id)],
-            "delta_count": len(self.deltas),
-            "deltas": [d.to_dict() for d in sorted(self.deltas.values(), key=lambda x: x.delta_id)],
         }
         tmp = self.path.with_suffix(".tmp")
         tmp.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
@@ -1154,9 +980,6 @@ class SkillStoreV2:
             hole_before_dumps=hole_before,
         )
         self.morphisms[mid] = m
-        delta = learn_delta(before_src, after_src, origin=origin, diagnostic_class=diagnostic_class)
-        if delta is not None:
-            self.deltas.setdefault(delta.delta_id, delta)
         self.save()
         return m
 
@@ -1194,19 +1017,6 @@ class SkillStoreV2:
             if len(proposals) >= limit:
                 break
         return proposals
-
-    def propose_delta(self, source_text: str, *, limit: int = 8) -> list[tuple[DeltaMorphism, str]]:
-        """Every delta whose informative anchors fit this body, applied. Refusals are silent."""
-        out: list[tuple[DeltaMorphism, str]] = []
-        for dlt in sorted(self.deltas.values(), key=lambda x: (x.transfers - x.refutations, x.delta_id), reverse=True):
-            if dlt.refutations > dlt.transfers:
-                continue
-            new_src = apply_delta(source_text, dlt)
-            if new_src and new_src.strip() and new_src.strip() != textwrap.dedent(source_text).strip():
-                out.append((dlt, new_src))
-            if len(out) >= limit:
-                break
-        return out
 
     def mark_transfer(self, morphism_id: str) -> None:
         m = self.morphisms.get(morphism_id)

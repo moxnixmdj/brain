@@ -1106,22 +1106,59 @@ class SemanticCausalLawStore:
     def __init__(self, store_path: pathlib.Path | None = None) -> None:
         self.store_path = pathlib.Path(store_path or DEFAULT_LAW_STORE_PATH)
         self.laws: list[SemanticCausalLaw] = []
+        self._bucket_index: dict[str, list[SemanticCausalLaw]] = {}
+        self._parsed_morphism_cache: dict[str, tuple[list[ast.stmt], list[ast.stmt]]] = {}
         self._load()
+
+    def _law_bucket_key(self, law: SemanticCausalLaw) -> str:
+        if law.defect_uir_kind == "UIR_TREE_REWRITE_MORPHISM":
+            cached = self._parsed_morphism_cache.get(law.law_id)
+            if cached is None:
+                lhs_src = str(law.precondition_signature.get("lhs_ast_pattern") or "")
+                rhs_src = str(law.precondition_signature.get("rhs_ast_pattern") or "")
+                try:
+                    lhs_b = ast.parse(lhs_src).body
+                    rhs_b = ast.parse(rhs_src).body
+                    cached = (lhs_b, rhs_b)
+                    self._parsed_morphism_cache[law.law_id] = cached
+                except SyntaxError:
+                    return "MORPH:INVALID"
+            lhs_b, _ = cached
+            if not lhs_b:
+                return "MORPH:EMPTY"
+            sig_names = ":".join(type(s).__name__ for s in lhs_b)
+            return f"MORPH:{len(lhs_b)}:{sig_names}"
+        return f"UIR:{law.defect_uir_kind}"
+
+    def _rebuild_index(self) -> None:
+        idx: dict[str, list[SemanticCausalLaw]] = {}
+        live_ids = {l.law_id for l in self.laws}
+        for stale_k in list(self._parsed_morphism_cache.keys()):
+            if stale_k not in live_ids:
+                del self._parsed_morphism_cache[stale_k]
+        for law in self.laws:
+            bkey = self._law_bucket_key(law)
+            idx.setdefault(bkey, []).append(law)
+        self._bucket_index = idx
 
     def _load(self) -> None:
         if not self.store_path.exists():
             self.laws = []
+            self._rebuild_index()
             return
         raw = json.loads(self.store_path.read_text(encoding="utf-8"))
         self.laws = [SemanticCausalLaw.from_dict(item) for item in (raw.get("laws") or [])]
+        self._rebuild_index()
 
     def save(self) -> None:
+        self._rebuild_index()
         self.store_path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             "schema": LAW_STORE_SCHEMA,
             "model_calls": 0,
             "memorized_world_weights": 0,
             "law_count": len(self.laws),
+            "bucket_count": len(self._bucket_index),
             "laws": [law.to_dict() for law in self.laws],
         }
         self.store_path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -1237,21 +1274,61 @@ class SemanticCausalLawStore:
         target_func_name: str | None = None,
         runtime_hint: dict[str, Any] | None = None,
     ) -> list[tuple[SemanticCausalLaw, bytes, str]]:
-        """Diff target source's U-IR against stored Semantic Laws and compile candidate
-        repairs into the target language's native syntax."""
+        """Diff target source's U-IR against stored Semantic Laws via O(1) structural
+        bucket lookup and single-parse AST reuse."""
+        if len(self._bucket_index) == 0 and self.laws:
+            self._rebuild_index()
         norm_lang = "cpp" if language in {"c", "cpp", "c++"} else language
         u_fns = lower_source_to_uir(source_bytes, norm_lang, rel_path=rel_path)
         results: list[tuple[SemanticCausalLaw, bytes, str]] = []
 
-        for law in self.laws:
-            if (
-                target_func_name is None
-                and law.precondition_signature.get("entry_anchored")
-                and len(u_fns) > 12
-            ):
+        parsed_py_tree: ast.Module | None = None
+        py_fn_buckets: dict[str, set[str]] = {}
+        if norm_lang == "python" and any(k.startswith("MORPH:") for k in self._bucket_index):
+            try:
+                src_text = source_bytes.decode("utf-8", errors="replace")
+                parsed_py_tree = ast.parse(src_text)
+                morph_lens = {
+                    int(k.split(":")[1])
+                    for k in self._bucket_index
+                    if k.startswith("MORPH:") and len(k.split(":")) >= 3 and k.split(":")[1].isdigit()
+                }
+                for nd in ast.walk(parsed_py_tree):
+                    if isinstance(nd, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                        if target_func_name and nd.name != target_func_name:
+                            continue
+                        bset = py_fn_buckets.setdefault(nd.name, set())
+                        for s_list in _iter_stmt_lists(nd):
+                            for wlen in morph_lens:
+                                if len(s_list) < wlen:
+                                    continue
+                                for si in range(len(s_list) - wlen + 1):
+                                    sig_nm = ":".join(type(s).__name__ for s in s_list[si : si + wlen])
+                                    bset.add(f"MORPH:{wlen}:{sig_nm}")
+            except SyntaxError:
+                parsed_py_tree = None
+
+        for ufn in u_fns:
+            if target_func_name and ufn.name != target_func_name:
                 continue
-            for ufn in u_fns:
-                if target_func_name and ufn.name != target_func_name:
+            candidate_bucket_keys: list[str] = [f"UIR:{ k }" for k in dict.fromkeys(n.kind for n in ufn.nodes)]
+            if norm_lang == "python":
+                candidate_bucket_keys.extend(sorted(py_fn_buckets.get(ufn.name, set())))
+
+            matched_laws: list[SemanticCausalLaw] = []
+            seen_law_ids: set[str] = set()
+            for bkey in candidate_bucket_keys:
+                for law in self._bucket_index.get(bkey, ()):
+                    if law.law_id not in seen_law_ids:
+                        seen_law_ids.add(law.law_id)
+                        matched_laws.append(law)
+
+            for law in matched_laws:
+                if (
+                    target_func_name is None
+                    and law.precondition_signature.get("entry_anchored")
+                    and len(u_fns) > 12
+                ):
                     continue
                 compiled = compile_law_to_function(
                     law=law,
@@ -1259,6 +1336,8 @@ class SemanticCausalLawStore:
                     source_bytes=source_bytes,
                     language=norm_lang,
                     runtime_hint=runtime_hint,
+                    parsed_py_tree=parsed_py_tree,
+                    preparsed_morphism=self._parsed_morphism_cache.get(law.law_id),
                 )
                 for patched_bytes, desc in compiled:
                     if patched_bytes != source_bytes:
@@ -1273,6 +1352,8 @@ def compile_law_to_function(
     source_bytes: bytes,
     language: str,
     runtime_hint: dict[str, Any] | None = None,
+    parsed_py_tree: ast.Module | None = None,
+    preparsed_morphism: tuple[list[ast.stmt], list[ast.stmt]] | None = None,
 ) -> list[tuple[bytes, str]]:
     """Lower a language-neutral SemanticCausalLaw into concrete target-language bytes."""
     out: list[tuple[bytes, str]] = []
@@ -1495,6 +1576,8 @@ def compile_law_to_function(
             precond=law.precondition_signature,
             law_id=law.law_id,
             runtime_hint=runtime_hint,
+            parsed_py_tree=parsed_py_tree,
+            preparsed_morphism=preparsed_morphism,
         ):
             out.append((patched_bytes, desc))
 
@@ -1963,24 +2046,28 @@ def apply_ast_subtree_morphism(
     precond: dict[str, Any],
     law_id: str,
     runtime_hint: dict[str, Any] | None = None,
+    parsed_py_tree: ast.Module | None = None,
+    preparsed_morphism: tuple[list[ast.stmt], list[ast.stmt]] | None = None,
 ) -> list[tuple[bytes, str]]:
     lhs_src = str(precond.get("lhs_ast_pattern") or "")
     rhs_src = str(precond.get("rhs_ast_pattern") or "")
     if not lhs_src or not rhs_src:
         return []
 
+    src_text = source_bytes.decode("utf-8", errors="replace")
     req_lits = list(precond.get("required_domain_literals") or [])
     if req_lits:
         hint_lits = {repr(x) for x in ((runtime_hint or {}).get("assertion_literals") or [])}
-        src_text = source_bytes.decode("utf-8", errors="replace")
         if not all((lit in hint_lits or lit in src_text) for lit in req_lits):
             return []
 
     try:
-        lhs_stmts = ast.parse(lhs_src).body
-        rhs_stmts = ast.parse(rhs_src).body
-        src_text = source_bytes.decode("utf-8", errors="replace")
-        tree = ast.parse(src_text)
+        if preparsed_morphism is not None:
+            lhs_stmts, rhs_stmts = preparsed_morphism
+        else:
+            lhs_stmts = ast.parse(lhs_src).body
+            rhs_stmts = ast.parse(rhs_src).body
+        tree = parsed_py_tree if parsed_py_tree is not None else ast.parse(src_text)
     except SyntaxError:
         return []
 

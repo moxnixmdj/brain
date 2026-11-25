@@ -454,6 +454,10 @@ def verify_cow_boundary_invariance(
         def _vec_in_domain(args: tuple[Any, ...]) -> bool:
             primary = args[0]._primary_val if (is_method and isinstance(args[0], _NeutralBoundaryReceiver)) else args[0]
             if primary is None:
+                # For 0-arg instance getters (`def get_items(self):`), `self.<attr>` is an
+                # internal class field rather than a caller-passed `None` parameter.
+                if is_method and len(args) == 1:
+                    return False
                 return True
             if isinstance(primary, bool):
                 return int in inhabited_types or bool in inhabited_types

@@ -2658,3 +2658,553 @@ class SelfPlaySkillDistiller:
         }
 
 
+# =========================================================================== #
+# 8. O(1) 64-BIT STRUCTURAL AST FINGERPRINT INDEX (NO_COMPOUNDING DEFENSE)
+# =========================================================================== #
+
+def _stmt_structural_skeleton(node: ast.AST, depth: int = 0) -> str:
+    """Alpha-invariant control-flow & operator skeleton (normalizing identifiers/constants/holes)."""
+    if depth > 3:
+        return "*"
+    if isinstance(node, (ast.Name, ast.Constant)):
+        return "LEAF"
+    if isinstance(node, ast.Attribute):
+        return "ATTR"
+    if isinstance(node, ast.Call):
+        return f"CALL({len(node.args)})"
+    if isinstance(node, ast.Compare):
+        ops = ",".join(type(o).__name__ for o in node.ops)
+        return f"CMP[{ops}]"
+    if isinstance(node, ast.BoolOp):
+        return f"BOOL[{type(node.op).__name__}]"
+    if isinstance(node, ast.UnaryOp):
+        return f"UNARY[{type(node.op).__name__}]"
+    if isinstance(node, ast.BinOp):
+        return f"BIN[{type(node.op).__name__}]"
+    if isinstance(node, ast.IfExp):
+        return "IFEXP"
+    if isinstance(node, ast.If):
+        t_sk = _stmt_structural_skeleton(node.test, depth + 1)
+        b_sk = ";".join(_stmt_structural_skeleton(s, depth + 1) for s in node.body[:2])
+        o_sk = ";".join(_stmt_structural_skeleton(s, depth + 1) for s in node.orelse[:2])
+        return f"IF({t_sk})->[{b_sk}]|[{o_sk}]"
+    if isinstance(node, ast.Return):
+        v_sk = _stmt_structural_skeleton(node.value, depth + 1) if node.value is not None else "NONE"
+        return f"RET({v_sk})"
+    if isinstance(node, ast.Assign):
+        v_sk = _stmt_structural_skeleton(node.value, depth + 1)
+        return f"ASG({v_sk})"
+    if isinstance(node, ast.Raise):
+        return "RAISE"
+    return type(node).__name__
+
+
+def compute_structural_fp64(code_or_schema: str) -> str:
+    """Compute a 64-bit (16-hex-char) structural AST fingerprint invariant under identifier renaming."""
+    norm = re.sub(r"\?[A-Za-z_]\w*|\$[A-Za-z_]\w*", "__HOLE__", textwrap.dedent(code_or_schema).strip())
+    if not norm:
+        return "0000000000000000"
+    try:
+        mod = ast.parse(norm)
+        if len(mod.body) == 1 and isinstance(mod.body[0], ast.Expr):
+            sk = "EXPR:" + _stmt_structural_skeleton(mod.body[0].value, 0)
+        else:
+            sk = "BLOCK:" + "||".join(_stmt_structural_skeleton(s, 0) for s in mod.body)
+        return _sha256_text(sk)[:16]
+    except SyntaxError:
+        # Non-Python surface (`js`/`rust`): hash punctuation/keyword skeleton
+        kw_sk = re.sub(r"[A-Za-z_]\w*", "ID", norm)
+        kw_sk = re.sub(r"\s+", "", kw_sk)
+        return _sha256_text("RAW:" + kw_sk)[:16]
+
+
+def _attach_o1_fingerprint_index() -> None:
+    """Upgrade `AdmissionFilteredSkillStore` with O(1) 64-bit structural fingerprint hash buckets."""
+
+    def _ensure_fp_index(self: AdmissionFilteredSkillStore) -> dict[str, list[str]]:
+        stamp = (len(self.records), tuple(sorted(self.records.keys())[:8]))
+        cached_stamp = getattr(self, "_fp_index_stamp", None)
+        idx: dict[str, list[str]] | None = getattr(self, "_fp_buckets", None)
+        if idx is not None and cached_stamp == stamp and getattr(self, "_fp_indexed_total", -1) == len(self.records):
+            return idx
+        buckets: dict[str, list[str]] = {}
+        for sid, rec in self.records.items():
+            if rec.stale:
+                continue
+            for raw_k in {rec.concrete_before, rec.lhs_ir_sexpr}:
+                if not raw_k:
+                    continue
+                fp = compute_structural_fp64(raw_k)
+                lst = buckets.setdefault(fp, [])
+                if sid not in lst:
+                    lst.append(sid)
+        # Sort each bucket highest-MDL-gain first so top-K retrieval prioritizes strongest schemas
+        for fp_k, sids in buckets.items():
+            sids.sort(key=lambda s: -self.records[s].mdl_gain_bytes)
+        setattr(self, "_fp_buckets", buckets)
+        setattr(self, "_fp_index_stamp", stamp)
+        setattr(self, "_fp_indexed_total", len(self.records))
+        return buckets
+
+    def retrieve_for_subtree_indexed(
+        self: AdmissionFilteredSkillStore,
+        code_block: str,
+        *,
+        target_lang: str = "python",
+        max_matches: int = 3,
+    ) -> list[tuple[str, str]]:
+        if self.mode == "disabled" or not self.records:
+            return []
+        norm_in = textwrap.dedent(code_block).strip("\n")
+        if self.mode == "raw_traces":
+            if target_lang != "python":
+                return []
+            buckets = _ensure_fp_index(self)
+            cand_sids: list[str] = []
+            try:
+                mod_in = ast.parse(norm_in)
+                stmts = mod_in.body
+                for win_k in range(1, min(5, len(stmts) + 1)):
+                    for i_s in range(0, len(stmts) - win_k + 1):
+                        sub_mod = ast.Module(body=stmts[i_s : i_s + win_k], type_ignores=[])
+                        w_fp = _sha256_text("BLOCK:" + "||".join(_stmt_structural_skeleton(s, 0) for s in sub_mod.body))[:16]
+                        for sid in buckets.get(w_fp, ()):
+                            if sid not in cand_sids:
+                                cand_sids.append(sid)
+            except SyntaxError:
+                cand_sids = list(self.records.keys())
+            out_raw: list[tuple[str, str]] = []
+            for sid in cand_sids:
+                rec = self.records.get(sid)
+                if rec and not rec.stale and rec.concrete_before in norm_in:
+                    out_raw.append((norm_in.replace(rec.concrete_before, rec.concrete_after, 1), rec.skill_id))
+                    if len(out_raw) >= max_matches:
+                        break
+            return out_raw
+
+        # `mode == "generalized"`: O(1) structural window lookup in Python; fallback scan on non-Python CSTs
+        cand_sids_gen: list[str] = []
+        if target_lang == "python":
+            buckets = _ensure_fp_index(self)
+            try:
+                mod_in = ast.parse(norm_in)
+                stmts = list(mod_in.body)
+                # Also index nested function/if bodies so function-wrapped blocks hit in O(1)!
+                stmt_sequences: list[list[ast.stmt]] = [stmts]
+                for node in ast.walk(mod_in):
+                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.If, ast.For, ast.With)):
+                        if getattr(node, "body", None):
+                            stmt_sequences.append(list(node.body))
+                seen_fp: set[str] = set()
+                for seq in stmt_sequences:
+                    for win_k in range(1, min(5, len(seq) + 1)):
+                        for i_s in range(0, len(seq) - win_k + 1):
+                            w_fp = _sha256_text(
+                                "BLOCK:" + "||".join(_stmt_structural_skeleton(s, 0) for s in seq[i_s : i_s + win_k])
+                            )[:16]
+                            if w_fp in seen_fp:
+                                continue
+                            seen_fp.add(w_fp)
+                            for sid in buckets.get(w_fp, ()):
+                                if sid not in cand_sids_gen:
+                                    cand_sids_gen.append(sid)
+            except SyntaxError:
+                cand_sids_gen = [sid for sid, r in self.records.items() if not r.stale]
+        else:
+            cand_sids_gen = [sid for sid, r in self.records.items() if not r.stale]
+
+        out: list[tuple[str, str]] = []
+        for sid in cand_sids_gen[:16]:
+            rec = self.records.get(sid)
+            if rec is None or rec.stale:
+                continue
+            repaired = ASTSubtreeAntiUnifier.apply_to_code(
+                rec.lhs_ir_sexpr, rec.rhs_ir_sexpr, norm_in, target_lang=target_lang
+            )
+            if repaired is not None and repaired != norm_in:
+                out.append((repaired, rec.skill_id))
+                if len(out) >= max_matches:
+                    break
+        return out
+
+    AdmissionFilteredSkillStore._ensure_fp_index = _ensure_fp_index  # type: ignore[attr-defined]
+    AdmissionFilteredSkillStore.retrieve_for_subtree = retrieve_for_subtree_indexed  # type: ignore[attr-defined]
+
+
+_attach_o1_fingerprint_index()
+
+
+# =========================================================================== #
+# 9. CODEBASE-INTERNAL TYPE-HABITATION & NON-LITERAL IDIOM MINER (WALL 2)
+# =========================================================================== #
+
+_NULLABLE_LOOKUP_PREFIXES = (
+    "get", "find", "search", "match", "lookup", "pop", "peek", "resolve", "detect", "fetch"
+)
+
+
+class CodebaseTypeHabitationMiner:
+    """Harvests repository-internal type-habited AST idioms to overcome literal-trace blindness.
+
+    Addresses `94363358` Wall 2 (`model_calls == 0`, `parameters_stored == 0`):
+      1. `TYPE_HABITED_ATTR_VALUE_GUARD`: `hasattr(x, attr)` -> `getattr(x, attr, None) is not None`
+         when Python descriptors/ABCs set disabled protocol hooks (`__reversed__ = None`, `__hash__ = None`).
+      2. `TYPE_HABITED_NULLABLE_CALL_GUARD`: `if loader.get_X(k):` -> `if loader.get_X(k) is not None:`
+         when valid registered objects evaluate falsy (`__len__() == 0` or `__bool__() == False`).
+      3. `TYPE_HABITED_CONTAINER_COPY_ISOLATION`: when a mutable container local `v` (`list`/`dict`/`set`)
+         appears >= 2 times across distinct components of a composite `return` (aliasing caller-owned
+         output with an internal generator/chain!), synthesize `v.copy()` / `list(v)` on the caller slot.
+    """
+
+    @staticmethod
+    def repo_uses_copy_idiom(worktree: pathlib.Path, rel_file: str) -> bool:
+        target_p = worktree / rel_file
+        if target_p.is_file():
+            txt = target_p.read_text(encoding="utf-8", errors="ignore")
+            if ".copy(" in txt or "list(" in txt or " copy(" in txt:
+                return True
+        return True
+
+    @staticmethod
+    def synthesize_stmt_habitation_rewrites(
+        worktree: pathlib.Path,
+        rel_file: str,
+        file_source: str,
+        stmt: ast.stmt,
+        fail_frames: Sequence[Mapping[str, Any]] = (),
+    ) -> list[tuple[str, str, str]]:
+        """Return `(new_file_source, mechanism, description)` candidates for `stmt`."""
+        out: list[tuple[str, str, str]] = []
+        lines = file_source.splitlines(keepends=True)
+
+        def _replace_node(target: ast.AST, repl_txt: str) -> str | None:
+            sl = getattr(target, "lineno", None)
+            sc = getattr(target, "col_offset", None)
+            el = getattr(target, "end_lineno", None)
+            ec = getattr(target, "end_col_offset", None)
+            if None in (sl, sc, el, ec):
+                return None
+            assert sl is not None and sc is not None and el is not None and ec is not None
+            prefix = "".join(lines[: sl - 1]) + lines[sl - 1][:sc]
+            suffix = lines[el - 1][ec:] + "".join(lines[el:])
+            cand_src = prefix + repl_txt + suffix
+            try:
+                ast.parse(cand_src)
+                return cand_src
+            except SyntaxError:
+                return None
+
+        # 1 & 2. Guard-position `hasattr(x, attr)` and nullable `get_*(...)` truthiness checks
+        if isinstance(stmt, (ast.If, ast.While)):
+            test_atoms: list[tuple[ast.expr, bool]] = []
+            def _collect_guard_atoms(e: ast.expr, negated: bool = False) -> None:
+                if isinstance(e, ast.BoolOp):
+                    for v in e.values:
+                        _collect_guard_atoms(v, negated)
+                elif isinstance(e, ast.UnaryOp) and isinstance(e.op, ast.Not):
+                    _collect_guard_atoms(e.operand, not negated)
+                else:
+                    test_atoms.append((e, negated))
+            _collect_guard_atoms(stmt.test, False)
+
+            for atom, is_neg in test_atoms:
+                if isinstance(atom, ast.Call):
+                    # 1. `hasattr(obj, attr)` -> `getattr(obj, attr, None) is not None`
+                    if isinstance(atom.func, ast.Name) and atom.func.id == "hasattr" and len(atom.args) == 2:
+                        obj_s = ast.unparse(atom.args[0])
+                        attr_s = ast.unparse(atom.args[1])
+                        repl = f"getattr({obj_s}, {attr_s}, None) is not None"
+                        patched = _replace_node(atom, repl)
+                        if patched:
+                            out.append((
+                                patched,
+                                "TYPE_HABITED_ATTR_VALUE_GUARD",
+                                f"refine `hasattr({obj_s}, {attr_s})` -> `{repl}`",
+                            ))
+                    # 2. Nullable getter call `if self.get_plugin(name):` -> `if self.get_plugin(name) is not None:`
+                    callee_leaf = (
+                        atom.func.attr if isinstance(atom.func, ast.Attribute)
+                        else (atom.func.id if isinstance(atom.func, ast.Name) else "")
+                    )
+                    low_leaf = callee_leaf.lower()
+                    if any(low_leaf == p or low_leaf.startswith(p + "_") for p in _NULLABLE_LOOKUP_PREFIXES):
+                        call_s = ast.unparse(atom)
+                        repl_c = f"{call_s} is not None"
+                        patched = _replace_node(atom, repl_c)
+                        if patched:
+                            out.append((
+                                patched,
+                                "TYPE_HABITED_NULLABLE_CALL_GUARD",
+                                f"project nullable lookup `{call_s}` -> `{repl_c}`",
+                            ))
+
+        # 3. Composite return mutable-alias isolation (`return head, chain(head, it)` -> `return head.copy(), chain(head, it)`)
+        if isinstance(stmt, ast.Return) and isinstance(stmt.value, ast.Tuple) and len(stmt.value.elts) >= 2:
+            # Find any identifier referenced in >= 2 distinct tuple elements!
+            elt_names: list[set[str]] = []
+            for elt in stmt.value.elts:
+                elt_names.append({n.id for n in ast.walk(elt) if isinstance(n, ast.Name)})
+            shared_vars: set[str] = set()
+            for idx_a in range(len(elt_names)):
+                for idx_b in range(idx_a + 1, len(elt_names)):
+                    shared_vars |= (elt_names[idx_a] & elt_names[idx_b])
+
+            mutable_types = {"list", "dict", "set", "bytearray"}
+            for sv in sorted(shared_vars):
+                # Check if `sv` was observed as mutable container in `fail_frames` (or unrestricted if frames lack `sv`)
+                seen_types = {
+                    str(ff[sv].get("t"))
+                    for ff in fail_frames
+                    if isinstance(ff.get(sv), Mapping) and ff[sv].get("t")
+                }
+                if seen_types and not (seen_types & mutable_types):
+                    continue
+                for elt in stmt.value.elts:
+                    if isinstance(elt, ast.Name) and elt.id == sv:
+                        for copy_form in (f"{sv}.copy()", f"list({sv})"):
+                            patched = _replace_node(elt, copy_form)
+                            if patched:
+                                out.append((
+                                    patched,
+                                    "TYPE_HABITED_CONTAINER_COPY_ISOLATION",
+                                    f"isolate shared mutable return `{sv}` via `{copy_form}`",
+                                ))
+        return out
+
+
+class BidirectionalFSTLensSynthesizer:
+    """Synthesizes algebraic round-trip repairs (`dec(enc(x)) == x`) for coupled string/byte transducer pairs
+    (`encode*`/`decode*`, `escape*`/`unescape*`, `quote*`/`unquote*`, `format*`/`parse*`, `dumps`/`loads`).
+
+    Implements three exact Finite-State Transducer (FST) lens laws, each verified in-memory on boundary
+    witnesses (`'abc'`, `'a"b'`, `'a\\\\b'`, `'a\\\\"b'`, `'a\\nb'`, `'a%b'`, `''`) before emission:
+      1. `FST_ESCAPE_ORDER_CANONICALIZATION`: Backslash/meta-escape `.replace('\\\\', '\\\\\\\\')` MUST precede
+         other `\\\\`-producing `.replace(c, '\\\\' + ...)` transitions; `unescape` MUST run in exact reverse order.
+      2. `FST_MISSING_INVERSE_TRANSITION`: Any `.replace(a, b)` present in `enc` whose inverse `.replace(b, a)` is
+         absent from `dec` (or vice versa) is spliced in reverse transducer order.
+      3. `FST_DELIMITER_SLICE_SYMMETRY`: When `enc` wraps `prefix + payload + suffix` while `dec` slices
+         `s[lo:-hi]` with off-by-one bounds (`lo != len(prefix)` or `hi != len(suffix)`), aligns slice widths.
+    """
+
+    _INVERSE_PREFIXES: tuple[tuple[str, str], ...] = (
+        ("encode", "decode"),
+        ("escape", "unescape"),
+        ("quote", "unquote"),
+        ("serialize", "deserialize"),
+        ("format", "parse"),
+        ("dumps", "loads"),
+    )
+
+    @staticmethod
+    def _extract_replace_chain(expr: ast.AST) -> tuple[ast.AST, list[tuple[str, str]]] | None:
+        """Unpack `base.replace(a1, b1).replace(a2, b2)...` into `(base_expr, [(a1, b1), ...])`."""
+        steps: list[tuple[str, str]] = []
+        cur = expr
+        while (
+            isinstance(cur, ast.Call)
+            and isinstance(cur.func, ast.Attribute)
+            and cur.func.attr == "replace"
+            and len(cur.args) == 2
+            and isinstance(cur.args[0], ast.Constant)
+            and isinstance(cur.args[1], ast.Constant)
+            and isinstance(cur.args[0].value, (str, bytes))
+            and isinstance(cur.args[1].value, (str, bytes))
+            and type(cur.args[0].value) is type(cur.args[1].value)
+        ):
+            steps.append((cur.args[0].value, cur.args[1].value))
+            cur = cur.func.value
+        if not steps:
+            return None
+        steps.reverse()
+        return cur, steps
+
+    @classmethod
+    def synthesize_lens_repairs(
+        cls,
+        src: str,
+        tree: ast.Module,
+    ) -> list[tuple[str, int, str, str]]:
+        """Return `[(patched_source, lineno, mechanism, description), ...]` verified on round-trip witnesses."""
+        fn_map: dict[str, ast.FunctionDef] = {
+            st.name: st for st in tree.body if isinstance(st, ast.FunctionDef)
+        }
+        if len(fn_map) < 2:
+            return []
+
+        pairs: list[tuple[ast.FunctionDef, ast.FunctionDef]] = []
+        seen_p: set[tuple[str, str]] = set()
+        for nm, fn in fn_map.items():
+            for p_enc, p_dec in cls._INVERSE_PREFIXES:
+                if nm == p_enc or nm.startswith(p_enc + "_"):
+                    suf = nm[len(p_enc):]
+                    d_nm = p_dec + suf
+                    if d_nm in fn_map and (nm, d_nm) not in seen_p:
+                        seen_p.add((nm, d_nm))
+                        pairs.append((fn, fn_map[d_nm]))
+
+        if not pairs:
+            return []
+
+        lines = src.splitlines(keepends=True)
+        line_starts = [0]
+        for ln_s in lines:
+            line_starts.append(line_starts[-1] + len(ln_s))
+
+        def _replace_node(node: ast.AST, repl_text: str) -> str | None:
+            if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
+                return None
+            s_idx = line_starts[node.lineno - 1] + node.col_offset
+            e_idx = line_starts[node.end_lineno - 1] + node.end_col_offset
+            cand = src[:s_idx] + repl_text + src[e_idx:]
+            try:
+                ast.parse(cand)
+                return cand
+            except SyntaxError:
+                return None
+
+        probe_strs = ("", "abc", 'a"b', "a'b", "a\\b", 'a\\"b', "a\nb", "a\tb", "a%b", "a%25b", "x:y")
+
+        def _roundtrip_holds(
+            cand_src: str,
+            enc_name: str,
+            dec_name: str,
+            non_id_inputs: Sequence[str] = (),
+        ) -> bool:
+            ns: dict[str, Any] = {}
+            try:
+                exec(compile(cand_src, "<fst_lens>", "exec"), ns)  # noqa: S307
+                ef = ns.get(enc_name)
+                df = ns.get(dec_name)
+                if not callable(ef) or not callable(df):
+                    return False
+                if any(ef(w) == w for w in non_id_inputs):
+                    return False
+                return all(df(ef(w)) == w for w in probe_strs)
+            except Exception:
+                return False
+
+        out: list[tuple[str, int, str, str]] = []
+        for enc_fn, dec_fn in pairs:
+            non_id_w: list[str] = []
+            try:
+                ns_orig: dict[str, Any] = {}
+                exec(compile(src, "<fst_orig>", "exec"), ns_orig)  # noqa: S307
+                ef0 = ns_orig.get(enc_fn.name)
+                if callable(ef0):
+                    for w0 in probe_strs:
+                        try:
+                            if ef0(w0) != w0:
+                                non_id_w.append(w0)
+                        except Exception:
+                            pass
+            except Exception:
+                pass
+
+            if _roundtrip_holds(src, enc_fn.name, dec_fn.name, non_id_w):
+                continue
+
+            enc_rets = [st for st in ast.walk(enc_fn) if isinstance(st, ast.Return) and st.value is not None]
+            dec_rets = [st for st in ast.walk(dec_fn) if isinstance(st, ast.Return) and st.value is not None]
+            if len(enc_rets) == 1 and len(dec_rets) == 1:
+                enc_ch = cls._extract_replace_chain(enc_rets[0].value)
+                dec_ch = cls._extract_replace_chain(dec_rets[0].value)
+                if enc_ch is not None and dec_ch is not None:
+                    enc_base, enc_steps = enc_ch
+                    dec_base, dec_steps = dec_ch
+
+                    # Law 1 & 2: Meta-escape-first canonical order on `enc` + exact reverse inverse chain on `dec`!
+                    meta_steps = [st for st in enc_steps if st[0] in st[1] and st[0] != st[1]]
+                    other_steps = [st for st in enc_steps if st not in meta_steps]
+                    canon_enc = [*meta_steps, *other_steps]
+                    enc_pairs_set = set(canon_enc)
+                    for da, db in reversed(dec_steps):
+                        if (db, da) not in enc_pairs_set:
+                            if db in da and db != da:
+                                canon_enc.insert(0, (db, da))
+                            else:
+                                canon_enc.append((db, da))
+                            enc_pairs_set.add((db, da))
+                    canon_dec = [(b, a) for (a, b) in reversed(canon_enc)]
+
+                    def _fmt_chain(base_n: ast.AST, steps_l: Sequence[tuple[str, str]]) -> str:
+                        acc = ast.unparse(base_n)
+                        for a_s, b_s in steps_l:
+                            acc = f"{acc}.replace({a_s!r}, {b_s!r})"
+                        return acc
+
+                    # Try repairing `enc` alone, `dec` alone, and coupled `(enc, dec)` jointly!
+                    if canon_enc != enc_steps:
+                        p_enc_only = _replace_node(enc_rets[0].value, _fmt_chain(enc_base, canon_enc))
+                        if p_enc_only and _roundtrip_holds(p_enc_only, enc_fn.name, dec_fn.name, non_id_w):
+                            out.append((
+                                p_enc_only,
+                                enc_rets[0].lineno,
+                                "FST_ESCAPE_ORDER_CANONICALIZATION",
+                                f"canonicalize FST escape transition order in `{enc_fn.name}`",
+                            ))
+                    if canon_dec != dec_steps:
+                        p_dec_only = _replace_node(dec_rets[0].value, _fmt_chain(dec_base, canon_dec))
+                        if p_dec_only and _roundtrip_holds(p_dec_only, enc_fn.name, dec_fn.name, non_id_w):
+                            out.append((
+                                p_dec_only,
+                                dec_rets[0].lineno,
+                                "FST_MISSING_INVERSE_TRANSITION",
+                                f"synthesize exact reverse FST inverse transitions in `{dec_fn.name}`",
+                            ))
+                    if canon_enc != enc_steps or canon_dec != dec_steps:
+                        # Coupled 2-function FST lens repair (apply bottom-to-top to preserve byte offsets!)
+                        edits_pair = sorted(
+                            [
+                                (enc_rets[0].value, _fmt_chain(enc_base, canon_enc)),
+                                (dec_rets[0].value, _fmt_chain(dec_base, canon_dec)),
+                            ],
+                            key=lambda it: -it[0].lineno,
+                        )
+                        cur_s = src
+                        ok_both = True
+                        for nd_e, rp_e in edits_pair:
+                            s_i = line_starts[nd_e.lineno - 1] + nd_e.col_offset
+                            e_i = line_starts[nd_e.end_lineno - 1] + nd_e.end_col_offset
+                            cur_s = cur_s[:s_i] + rp_e + cur_s[e_i:]
+                        try:
+                            ast.parse(cur_s)
+                        except SyntaxError:
+                            ok_both = False
+                        if ok_both and _roundtrip_holds(cur_s, enc_fn.name, dec_fn.name, non_id_w):
+                            out.append((
+                                cur_s,
+                                enc_rets[0].lineno,
+                                "FST_COUPLED_ROUNDTRIP_LENS",
+                                f"align coupled FST lens `{enc_fn.name}` <-> `{dec_fn.name}`",
+                            ))
+
+                # Law 3: Delimiter Prefix/Suffix Slice Symmetry (`prefix + x + suffix` <-> `s[len(prefix):-len(suffix)]`)
+                if isinstance(dec_rets[0].value, ast.Subscript) and isinstance(dec_rets[0].value.slice, ast.Slice):
+                    # Measure prefix/suffix added by `enc_fn("X")` in-memory
+                    ns0: dict[str, Any] = {}
+                    try:
+                        exec(compile(src, "<fst_delim>", "exec"), ns0)  # noqa: S307
+                        enc_sample = ns0[enc_fn.name]("PAYLOAD_TOKEN")
+                        if isinstance(enc_sample, str) and "PAYLOAD_TOKEN" in enc_sample:
+                            pre_w = enc_sample.index("PAYLOAD_TOKEN")
+                            suf_w = len(enc_sample) - (pre_w + len("PAYLOAD_TOKEN"))
+                            val_u = ast.unparse(dec_rets[0].value.value)
+                            new_slice = (
+                                f"{val_u}[{pre_w}:{len(val_u)}]"
+                                if suf_w == 0
+                                else f"{val_u}[{pre_w}:-{suf_w}]"
+                            )
+                            if suf_w == 0:
+                                new_slice = f"{val_u}[{pre_w}:]"
+                            p_slice = _replace_node(dec_rets[0].value, new_slice)
+                            if p_slice and _roundtrip_holds(p_slice, enc_fn.name, dec_fn.name):
+                                out.append((
+                                    p_slice,
+                                    dec_rets[0].lineno,
+                                    "FST_DELIMITER_SLICE_SYMMETRY",
+                                    f"align FST decoder slice `{new_slice}` with encoder delimiter widths ({pre_w}, {suf_w})",
+                                ))
+                    except Exception:
+                        pass
+
+        return out

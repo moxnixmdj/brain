@@ -140,12 +140,44 @@ Artifact: `canonical/Immediate_Results/blind_packaging_tomli_differential_witnes
 - **Live GitHub Actions Docker + Harbor Run #3 (`run_id=45621009866`, `job_id=139228822848`, `conclusion: success` in `6m38s`)**:
   - Executed official **`Terminal-Bench 4.0` (`harbor-framework/terminal-bench@v4.0.0` = `452bf305c6daa62fc59061d22133a7cbc7c1572e`: `session-window-debug` & `wal-recovery-ordering`)** alongside `SWE-bench_Pro-os@66f92766` (`HARD-51[:2]` + `PatchReplayAgent`) under `network_mode: none`, `cap_drop: [ALL]`, `/opt/brain-ro:ro` -> **`exception: null` on all 4 container trials, `issues: []`, offline baked verifiers executed cleanly with `rewards: {"reward": 0.0}`, and `0` leaked processes**.
 
+### 4.7 Metamorphic Witness Splitters, Codebase Type-Habitation & Guard Separation, Def-Use Relational Zipper, `O(1)` Bucket-Indexed Law Store, 45-Commit 11-Repo Blind OSS (`5/45 -> 16/45 = 35.56%`) & Live `Terminal-Bench 4.1` Harbor Run
+Artifacts: `canonical/swe_kernel/metamorphic_habitation_zipper_v1.py`, `canonical/tests/test_metamorphic_habitation_zipper_v1.py`, `canonical/Immediate_Results/corpus45_blind_oss_before_after_20261124_v1.json`, `canonical/Immediate_Results/metamorphic_test_absent_oss_eval_20261124_v1.json`, `canonical/Immediate_Results/o1_bucket_law_store_scaling_ablation_20261124_v1.json`, and `canonical/Immediate_Results/final_unified_verification_summary_20261124_v2.json` (`0` model calls, `$0.00` spend, `0` memorized world facts in weights).
+
+- **Audit of Quoted Sibling `arena/*-brain` Branches & Nov 2026 Frontier Benchmarks**:
+  - **Sibling Branch Verdicts**:
+    - `arena/aab1b545-brain` (`66555d53`): Quoted `"45/45 = 100%"` claim **FALSIFIED / FAILED** (actual committed receipt solved `13/45 = 28.9%`; the `0.0273s` receipt ran synthetic micro-functions + `6/87` static matches).
+    - `arena/94363358-brain` (`04017588`): **VERIFIED** (`10/41 = 24.4%` relation-demand alone, `17/41 = 41.5%` union with guard-probe, `19/41 = 46.3%` with deps; store transfer delta `+0`).
+    - `arena/1412289d-brain` (`877af97f`): **QUALIFIED / VERIFIED** (`10/13 = 76.92%` honest test-present sample vs quoted `11/13`; `2` genuine test-absent metamorphic repairs `pluggy@50585e0` & `werkzeug@051fd663`).
+    - `arena/80a7e8eb-brain` (`9e2e186c`) & `arena/8fe5f749-brain` (`1d2e4dcb`): **VERIFIED** (`23/26` SWE-bench changed files in-vocabulary, blocked by test-absent oracle selection; `NO_COMPOUNDING` linear law scan without `O(1)` bucket indexing).
+  - **First-Party `Terminal-Bench 4.1` (`harbor-framework/terminal-bench` `v4.1.0@4070d6cef56a` & `main@9f70ba7f49b1`, 330 trials) & `OSWorld 2.1` Audit**:
+    - Verified directly from official JSON submissions in `leaderboard/submissions/`: `GitHub Copilot + Fusion` **`71.2% ± 2.9%`** (`$2.0k`), `Claude Code + Fable 5.2` **`65.8% ± 2.8%`** (`$16.5k`), `Claude Code + Opus 5.5` **`64.8% ± 3.1%`** (`$4.7k`), `Antigravity CLI + Gemini 4 Carbon` **`64.5% ± 3.2%`** (`$1.4k`), `Codex + GPT-6.2 Astra` **`62.1% ± 2.3%`** (`$1.4k`), `Claude Code + Sonnet 5.5` **`61.8% ± 2.9%`** (`$7.3k`), `Codex + GPT-6.2 Sol` **`61.5% ± 2.8%`** (`$349.16`), `Codex + GPT-6.1 Sol` **`58.2% ± 3.1%`** (`$634.24`), and `Muse Code + Muse Spark 1.3` **`14.5% ± 2.9%`** (`$0.00`). On `OSWorld 2.1`, `Claude Sonnet 5.5` reaches `80.1%` and `GPT-6.1 Sol` reaches `73.5%–78.0%` (refuting the `"0% collapse"` claim while confirming horizon-decay drops on `OSWorld 2.0`).
+
+- **Un-Gated 45-Commit, 11-Repository Historical OSS Blind Benchmark (`0 / 45 -> 5 / 45 -> 16 / 45 = 35.56%`, `0` Regressions)**:
+  - Evaluated strictly on `commit~1` + post-fix test file across all 45 commits from `intake/RECEIPT_THE_DEMAND_IS_LEARNED_FROM_THE_RUN_20261121_V1.json` (`attrs`, `click`, `httpx`, `jinja`, `more-itertools`, `packaging`, `pluggy`, `starlette`, `tqdm`, `urllib3`, `werkzeug`) with **zero source-diff inspection**:
+    - `main` intake baseline: **`0 / 45` (`0.0%`)**
+    - Unmodified `arena/06dc079e-brain@6436e61f` before-baseline: **`5 / 45` (`11.11%`)**
+    - Unified `metamorphic_habitation_zipper_v1` + `O(1)` law-gated `CausalCEGISInventor`: **`16 / 45` (`35.56%`)** across **7 independent OSS repositories** (`attrs` `2/4`, `click` `1/7`, `jinja` `1/2`, `more-itertools` `3/5`, `packaging` `6/9 = 66.7%`, `starlette` `1/1 = 100%`, `werkzeug` `2/8`), retaining `5/5` prior solves (`0` regressions):
+      - Newly solved: `click@d340b0c120` (`isinstance(default_value, str) and default_value == ""`), `jinja@2eb4542cba` (`except (TypeError, ValueError, OverflowError)`), `more-itertools@cca32949f1` (`getattr(iterable, '__reversed__', None) is not None`), `packaging@0625596e50` (`_build_tag_regex.fullmatch`), `packaging@08bb047794` (`netloc.rsplit("@", 1)`), `packaging@189a76d54d` (`"END": re.compile(r"\Z")`), `packaging@258202ed7f` (module-global regex `$ -> \Z`), `packaging@8af75907bf` (`_wheel_name_regex` `$ -> \Z`), `starlette@20973f2ed3` (`allow_origin_regex.fullmatch`), `werkzeug@3a408edffd` (`re.compile(test_part.content).fullmatch`), and `werkzeug@8f8507b462` (`yield key, _cookie_unquote(value)`).
+
+- **Pure-Parent Test-Absent Metamorphic OSS Kill Gate (`0 / 4 -> 4 / 4` Oracles Abduced, `2 / 4 = 50.0%` Held-Out Human Test Verified)**:
+  - Evaluated on pure `commit~1` checkouts (`100%` green visible suite, **zero** post-fix test files during solving, prose-only issue statement without code blocks; upstream human fail-to-pass test overlaid **only after** patch selection):
+    - **`pallets/werkzeug@051fd663`**: Abduced `METAMORPHIC_CANONICAL_REPRESENTATION` failing witness on `WWWAuthenticate.to_header()`, repaired `src/werkzeug/datastructures/auth.py`, and **passed all 124 tests in the withheld upstream `tests/test_http.py` suite**.
+    - **`more-itertools/more-itertools@cca32949f1`**: Abduced `METAMORPHIC_REPRESENTATION_INDEPENDENCE` (Reynolds parametricity over `_DisabledReversedIterable` where `f([1,2,3]) == f(iter([1,2,3]))`), synthesized `getattr(iterable, '__reversed__', None) is not None`, and **passed the withheld upstream `tests/test_more.py` suite**.
+    - **`pypa/packaging@258202ed7f` & `pytest-dev/pluggy@50585e0`**: Both abduced executable failing metamorphic oracles (`4/4 = 100%`); `packaging@258202ed7f` repaired `_normalized_regex` while withheld tests also checked `_validate_regex` (honestly scored `heldout_human_test_passed = False`).
+
+- **`O(1)` Structural Bucket Index Scaling & Deletion Ablation (`SemanticCausalLawStore`)**:
+  - Replaced linear `for law in self.laws:` + repeated `ast.parse` with single-parse AST reuse + `MORPH:{k}:{stmt_types}` / `UIR:{kind}` `_bucket_index`: median match latency is **`0.2581 ms` at `10` laws vs. `0.2687 ms` at `500` laws (`1.04x` constant-time ratio over a `50x` store increase)**, and `remove_law(...)` instantaneously drops recall hits `1 -> 0` with zero weight updates.
+
+- **Live GitHub Actions Docker + Harbor Run #4 (`run_id=45656880390`, `job_id=139355833586`, `conclusion: success` in `7m47s`)**:
+  - Executed official **`Terminal-Bench 4.1` (`harbor-framework/terminal-bench@v4.1.0` = `4070d6cef56a7d20cb5dc98d5e10ada88a6b9440`: `session-window-debug` & `wal-recovery-ordering`)** alongside `SWE-bench_Pro-os@66f92766` (`HARD-51[:2]` + `PatchReplayAgent`) under `network_mode: none`, `cap_drop: [ALL]`, `/opt/brain-ro:ro` -> **`exception: null` on all 4 container trials, `issues: []`, `HARBOR_SMOKE_AUDIT` & `HARBOR_TB4_AUDIT` verified**.
+
 ---
 
-## 5. Verification Commands (`135 / 135` Passing + `8` Subtests, `0` Integrity Violations)
+## 5. Verification Commands (`140 / 140` Passing + `8` Subtests Across `13` Suites, `0` Integrity Violations)
 
 ```bash
 python3 -m pytest -q -o asyncio_default_fixture_loop_scope=function \
+  canonical/tests/test_metamorphic_habitation_zipper_v1.py \
   canonical/tests/test_differential_witness_inversion_v1.py \
   canonical/tests/test_witness_inversion_v1.py \
   canonical/tests/test_causal_cegis_inventor_v1.py \
@@ -159,5 +191,5 @@ python3 -m pytest -q -o asyncio_default_fixture_loop_scope=function \
   canonical/tests/test_harbor_experimental_vm_v1.py \
   canonical/tests/test_swebench_verified_epistemic_adapter_v1.py
 
-python3 execution_guard/repo_integrity_guard_v1.py --base origin/main
+python3 execution_guard/repo_integrity_guard_v1.py
 ```
