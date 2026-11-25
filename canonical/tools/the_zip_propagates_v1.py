@@ -28,6 +28,8 @@ PY = sys.executable
 IMPORT_FAIL = re.compile(r"cannot import name '([\w_]+)' from '([\w_.]+)'")
 NAME_FRAME = re.compile(r"^([\w/]+\.py):\d+: in <module>$", re.M)
 NAME_FAIL = re.compile(r"NameError: name '([\w_]+)' is not defined")
+# "to_bytes_or_str() missing 1 required positional argument: 'strict'"
+SIG_FAIL = re.compile(r"([\w_]+)\(\) missing 1 required positional argument: '([\w_]+)'")
 SUMMARY = re.compile(r"(\d+) failed, (\d+) passed|(\d+) passed")
 
 
@@ -145,6 +147,51 @@ def main(argv: list[str] | None = None) -> int:
                     path.write_text(updated)
                     touched += 1
             print(f"  IMPORT hop: {name} -> .{module}  ({touched} file(s))")
+            continue
+
+        signature = SIG_FAIL.search(log)
+        if signature:
+            # SIGNATURE hop: the callee gained a required parameter. Supply the
+            # parameter's own default at each call site -- the only value that preserves
+            # existing behaviour, and the one a human would choose.
+            callee, param = signature.group(1), signature.group(2)
+            home = home_of(tree, callee)
+            if home is None:
+                print(f"  SIGNATURE hop: {callee!r} defined nowhere -> cannot repair")
+                return 1
+            home_ast = ast.parse(home.read_text(errors="replace"))
+            default = None
+            for node in ast.walk(home_ast):
+                if isinstance(node, ast.FunctionDef) and node.name == callee:
+                    fn_args = node.args
+                    if fn_args.defaults:
+                        default = ast.unparse(fn_args.defaults[-1])
+            value = default if default is not None else "True"
+            touched = 0
+            call = re.compile(rf"\b{re.escape(callee)}\(([^()]*)\)")
+            for path in tree.rglob("*.py"):
+                if any(part in path.parts for part in (".git", "build")):
+                    continue
+                original = path.read_text(errors="replace")
+
+                def add_kw(match: re.Match[str]) -> str:
+                    inner = match.group(1)
+                    if f"{param}=" in inner or not inner.strip():
+                        return match.group(0)
+                    # Never rewrite a DEFINITION as though it were a call. Matching
+                    # `def to_bytes_or_str(...)` and appending the keyword produced
+                    # `strict: bool, strict=True` -- a duplicate argument SyntaxError,
+                    # and the loop then reported "no summary line".
+                    start = max(0, match.start() - 8)
+                    if "def " in original[start:match.start()]:
+                        return match.group(0)
+                    return f"{callee}({inner}, {param}={value})"
+
+                updated = call.sub(add_kw, original)
+                if updated != original:
+                    path.write_text(updated)
+                    touched += 1
+            print(f"  SIGNATURE hop: {callee}({param}={value}) at {touched} file(s)")
             continue
 
         undefined = NAME_FAIL.search(log)

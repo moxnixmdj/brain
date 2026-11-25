@@ -129,3 +129,62 @@ That is the correct minimal diff, produced without knowing anything about the fi
 
 Each of the three was found by watching the loop fail in a specific, diagnosable way. None
 was guessed.
+
+## Third case: a signature change, and the boundary of "observable debt"
+
+Moving a function tests one propagation shape. A real fix more often changes a
+**signature**. Both were tested:
+
+| root edit | suite immediately after | why |
+|---|---|---|
+| add `strict: bool = True` (optional) | **28 failed, 1386 passed — unchanged** | backward-compatible: existing calls stay valid |
+| add `strict: bool` (required) | **34 failed, 1380 passed** | every existing call is now a `TypeError` |
+
+That pair is worth keeping. **A backward-compatible change creates no observable debt at
+all**, and no propagation loop — however clever — has anything to propagate. The debt
+exists only when the old form stops working.
+
+For the required-parameter case the failure is unusually precise:
+
+```
+httpx/_models.py:135: TypeError: to_bytes_or_str() missing 1 required positional
+                      argument: 'strict'
+```
+
+Callee, missing parameter, file and line, all named. A SIGNATURE hop was added: append
+`{param}={value}` at each call site, taking the parameter's own default when it has one.
+
+| stage | result |
+|---|---|
+| after the signature change | 34 failed, 1380 passed |
+| hop 1 | `to_bytes_or_str(strict=True)` at 1 file |
+| hop 2 | **28 failed, 1386 passed** — baseline |
+
+Stable on re-run. Third hop type, same shape: one precise failure, one mechanical repair,
+green.
+
+## Four hop types, each validated
+
+| hop | triggered by | repair | validated |
+|---|---|---|---|
+| IMPORT | `ImportError: cannot import name 'X' from 'M'` | redirect symbol to its new home | yes, 2 cases |
+| DEPENDENCY | `NameError` in the new module | import the missing name into it | yes, 1 case |
+| SIGNATURE | `missing 1 required positional argument` | supply the parameter at each call | yes, 1 case |
+| (per-symbol granularity) | two-symbol thrash over 8 hops | rewrite per symbol, not per line | yes, 1 case |
+
+## Four bugs in my own loop, all found by it failing
+
+Recorded because each is the kind a real patcher would hit:
+
+1. `args` rebound to an AST node inside the loop, clobbering the argparse namespace —
+   `'arguments' object has no attribute 'seconds'` on iteration 2.
+2. The signature hop matched `def to_bytes_or_str(...)` and appended a keyword to the
+   **definition**, producing `strict: bool, strict=True` and a duplicate-argument
+   `SyntaxError`.
+3. `--tb=line` prints `path:N: Error` with no frame text, so the dependency hop's frame
+   regex found nothing and it self-imported the symbol into its own module.
+4. A run with no summary line was read as convergence (now return code 3).
+
+Considered together with the three design corrections in the section above, that is seven
+distinct failures before the loop did anything correct. The tool is small; the failure
+modes were not.

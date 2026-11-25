@@ -132,3 +132,27 @@ def test_case_b_two_importers_one_hop(parent_tree):
     assert re.search(r"from \._utils import[^\n]*\bto_bytes\b", auth) or \
         "from ._utils import to_bytes" in auth
     assert re.search(r"from \._utils import[^\n]*to_bytes_or_str", models)
+
+
+def test_case_c_signature_change(parent_tree):
+    """A REQUIRED parameter added to an executed function. Every existing call is a
+    TypeError until each site is repaired. The failure names both the callee and the
+    missing parameter, which is enough to place the repair mechanically.
+
+    Note recorded while building this: adding the parameter WITH a default leaves the
+    suite green (28/1386 unchanged) -- a backward-compatible change creates no
+    observable debt at all. Only a required parameter does."""
+    tree = parent_tree
+    utils = tree / "httpx/_utils.py"
+    text = utils.read_text(encoding="utf-8")
+    patched = text.replace(
+        "match_type_of: typing.AnyStr) -> typing.AnyStr:",
+        "match_type_of: typing.AnyStr, strict: bool) -> typing.AnyStr:")
+    assert patched != text, "signature anchor not found"
+    utils.write_text(patched, encoding="utf-8")
+
+    red = counts(suite(tree))
+    assert red is not None and red[0] > BASELINE[0], f"must break, got {red}"
+    done = run_loop(tree)
+    assert counts(suite(tree)) == BASELINE, done.stdout[-600:]
+    assert "strict=True" in (tree / "httpx/_models.py").read_text(encoding="utf-8")
