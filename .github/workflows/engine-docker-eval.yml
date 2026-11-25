@@ -336,10 +336,25 @@ jobs:
             echo "--- result.json files ---"
             find "$W/jobs" -name result.json 2>/dev/null | head -20
             echo "--- keys of the first result.json found ---"
-            for f in $(find "$W/jobs" -name result.json 2>/dev/null | head -3); do
+            for f in $(find "$W/jobs" -name result.json 2>/dev/null | head -4); do
               echo "## $f"
               python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); print(sorted(d) if isinstance(d,dict) else type(d))' "$f" 2>&1 | head -5
+              # the VALUES the collector keys on, verbatim: names and reward only
+              python3 - "$f" <<'VALS'
+          import json, pathlib, sys
+          d = json.loads(pathlib.Path(sys.argv[1]).read_text())
+          rows = d.get("trial_results") or [d]
+          for r in rows[:4]:
+              if not isinstance(r, dict):
+                  continue
+              print("  task_name=", repr(r.get("task_name")))
+              print("  trial_name=", repr(r.get("trial_name")))
+              print("  task_id=", repr(r.get("task_id")))
+              print("  verifier_result=", json.dumps(r.get("verifier_result"))[:200])
+          VALS
             done
+            echo "--- manifest ids (first 3) ---"
+            python3 -c 'import json,sys; d=json.load(open(sys.argv[1])); ids=[t["instance_id"] for t in d.get("tasks",[])]; print(ids[:3])' "$W/manifest.json" 2>&1 | head -3
           } > "$W/out/$ARM-s$SHARD.layout.txt" 2>&1 || true
           python -m canonical.eval.harbor.swe_pro_v2_ci collect \
             --jobs-dir "$W/jobs" \

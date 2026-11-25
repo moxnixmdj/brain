@@ -497,3 +497,55 @@ def test_collect_reads_job_level_trial_results_when_no_per_trial_file_exists() -
         assert rep["missing_trials"] == ["t2"]
         assert rep["tasks"]["t0"]["resolved"] is True
         assert rep["tasks"]["t0"]["trial_dir"] == "t0__aaa"
+
+
+def test_truncated_harbor_trial_names_still_map_to_the_manifest_id() -> None:
+    """Harbor cuts trial directory names at 32 chars; the task is not thereby unknown.
+
+    This is the bug that made three real, scored trials read as 'no data': the collector
+    keyed trials by the name in result.json and compared it to the manifest id, which
+    differ exactly by that truncation.
+    """
+    long_id = "instance_qutebrowser__qutebrowser-3e21c8214a998cb1058def"
+    truncated = long_id[:32]  # instance_qutebrowser__qutebrowse
+    with tempfile.TemporaryDirectory() as tmp:
+        td = pathlib.Path(tmp) / "jobs" / "job" / f"{truncated}__42E7bj6"
+        td.mkdir(parents=True)
+        (td / "verifier").mkdir()
+        (td / "verifier" / "reward.txt").write_text("1.0\n", encoding="utf-8")
+        (td / "result.json").write_text(
+            json.dumps({"task_name": truncated, "trial_name": f"{truncated}__42E7bj6"}), encoding="utf-8"
+        )
+        assert CI.resolve_task_id(CI.trial_keys(td, {"task_name": truncated}), [long_id]) == long_id
+        rep = CI.collect([pathlib.Path(tmp) / "jobs"], arm="causal", expected_ids=[long_id])
+        assert rep["n_reported"] == 1, rep
+        assert rep["resolved"] == 1
+        assert rep["missing_trials"] == []
+        assert rep["tasks"][long_id]["trial_dir"] == f"{truncated}__42E7bj6"
+        # two ids sharing a 32-char prefix stay ambiguous rather than guessing one:
+        # the trial keeps its own key, so it shows up as an extra row instead of a wrong one.
+        other = truncated + "-ffffffffffffffffffffffffffff"
+        got = CI.resolve_task_id([truncated], [long_id, other])
+        assert got == truncated
+
+
+def test_a_trial_the_manifest_cannot_name_is_reported_instead_of_dropped() -> None:
+    """Losing the row is what turned three scored trials into 'no data'."""
+    with tempfile.TemporaryDirectory() as tmp:
+        td = pathlib.Path(tmp) / "jobs" / "job" / "whatever__zzzzzzz"
+        td.mkdir(parents=True)
+        (td / "result.json").write_text(
+            json.dumps({"task_name": "whatever", "trial_name": "whatever__zzzzzzz",
+                        "verifier_result": {"rewards": {"reward": 1.0}}}),
+            encoding="utf-8",
+        )
+        rep = CI.collect([pathlib.Path(tmp) / "jobs"], arm="causal", expected_ids=["a", "b"])
+        assert rep["unmatched_trial_keys"] == ["whatever"]
+        assert rep["missing_trials"] == ["a", "b"]
+        assert rep["n_reported"] == 1, "the stray row counts as data that exists"
+        assert rep["tasks"]["whatever"]["resolved"] is True
+        assert rep["tasks"]["a"]["agent_status"] == "NOT_RUN"
+        md = "\n".join(CI.to_markdown({"causal": rep}, benchmark="B", commit="c"))
+        assert "Names the manifest did not recognise" in md
+        merged = CI.merge_arm_reports([rep])
+        assert merged["unmatched_trial_keys"] == ["whatever"]

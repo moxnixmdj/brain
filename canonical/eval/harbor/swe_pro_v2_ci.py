@@ -224,11 +224,65 @@ def _agent_report(trial_dir: pathlib.Path) -> dict[str, Any]:
     return {}
 
 
+def trial_keys(trial_dir: pathlib.Path, res: dict[str, Any]) -> list[str]:
+    """Every name a trial answers to, most authoritative first.
+
+    Harbor builds its trial directory from the task name truncated to 32 characters
+    (`instance_qutebrowser__qutebrowser-3e21c…` becomes the directory
+    `instance_qutebrowser__qutebrowse__42E7bj6`), so a task id read back from the
+    trial path or even from ``task_name`` need not equal the id in the manifest. All
+    of the plausible spellings are collected and matched tolerantly below.
+    """
+    out: list[str] = []
+    for raw in (
+        res.get("task_name"),
+        (res.get("task_id") or {}).get("path") if isinstance(res.get("task_id"), dict) else res.get("task_id"),
+        res.get("trial_name"),
+        trial_dir.name,
+    ):
+        if not raw:
+            continue
+        s = str(raw)
+        if "/" in s:
+            s = s.rstrip("/").rsplit("/", 1)[-1]
+        if "__" in s:  # strip harbor's per-trial suffix: <task>__<6 chars>
+            head = s.rsplit("__", 1)[0]
+            if head:
+                out.append(head)
+        out.append(s)
+    seen: list[str] = []
+    for s in out:
+        if s and s not in seen:
+            seen.append(s)
+    return seen
+
+
+def resolve_task_id(keys: list[str], expected_ids: list[str]) -> str:
+    """Which manifest id this trial belongs to, tolerating truncation.
+
+    Exact match wins. Otherwise a key that is a prefix of exactly one expected id is
+    accepted — that is what a 32-character harbor name looks like next to a 54-character
+    instance id. An ambiguous or unmatched trial keeps its own first key so it still
+    appears in the report as an unexplained extra row instead of silently vanishing.
+    """
+    expected = list(dict.fromkeys(expected_ids))
+    for k in keys:
+        if k in expected:
+            return k
+    for k in keys:
+        if len(k) < 12:
+            continue
+        hits = [e for e in expected if e.startswith(k) or k.startswith(e)]
+        if len(hits) == 1:
+            return hits[0]
+    return keys[0] if keys else "UNKNOWN_TRIAL"
+
+
 def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str]) -> dict[str, Any]:
     per_task: dict[str, Any] = {}
     for jd in jobs_dirs:
         for td, res in iter_trial_results(pathlib.Path(jd)):
-            tid = str(res.get("task_name") or td.name)
+            tid = resolve_task_id(trial_keys(td, res), expected_ids)
             reward = _reward(td, res)
             rep = _agent_report(td)
             start = res.get("started_at")
@@ -263,6 +317,11 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
             }
 
     ordered = {tid: per_task.get(tid, {"reward": None, "resolved": False, "agent_status": "NOT_RUN", "n_files_changed": 0}) for tid in expected_ids}
+    # A trial whose name resolves to nothing in the manifest is kept as an extra row:
+    # dropping it is how three scored trials became "no data" here.
+    unmatched = [k for k in per_task if k not in set(expected_ids)]
+    for k in sorted(unmatched):
+        ordered[k] = per_task[k]
     n = len(expected_ids)
     resolved = sum(1 for v in ordered.values() if v.get("resolved"))
     missing = [tid for tid in expected_ids if tid not in per_task]
@@ -273,6 +332,7 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
         "n_reported": len(per_task),
         "n_missing_trial": len(missing),
         "missing_trials": missing,
+        "unmatched_trial_keys": sorted(unmatched),
         "resolved": resolved,
         "resolve_rate_pct": round(100.0 * resolved / n, 2) if n else 0.0,
         "model_calls_total": sum(int(v.get("model_calls") or 0) for v in ordered.values()),
@@ -345,6 +405,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
             if cur is None or (cur.get("agent_status") == "NOT_RUN" and row.get("agent_status") != "NOT_RUN"):
                 tasks[tid] = dict(row)
     expected.sort()
+    unmatched = sorted({k for rep in reports for k in (rep.get("unmatched_trial_keys") or [])})
     ordered = {tid: tasks.get(tid, {"reward": None, "resolved": False, "agent_status": "NOT_RUN", "n_files_changed": 0}) for tid in expected}
     resolved = sum(1 for v in ordered.values() if v.get("resolved"))
     secs = [v["seconds"] for v in ordered.values() if isinstance(v.get("seconds"), (int, float))]
@@ -355,6 +416,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
         "n_reported": sum(1 for v in ordered.values() if row_is_real(v)),
         "n_missing_trial": sum(1 for v in ordered.values() if v.get("agent_status") == "NOT_RUN"),
         "missing_trials": [t for t, v in ordered.items() if v.get("agent_status") == "NOT_RUN"],
+        "unmatched_trial_keys": unmatched,
         "n_shard_reports": len(reports),
         "resolved": resolved,
         "resolve_rate_pct": round(100.0 * resolved / len(expected), 2) if expected else 0.0,
@@ -440,6 +502,18 @@ def to_markdown(
             f"| `{tid[:56]}` | {t.get('reward')} | {'yes' if t.get('resolved') else 'no'} "
             f"| {t.get('agent_status')} | {t.get('engine_status')} | {t.get('n_files_changed')} |"
         )
+    stray = sorted({k for rep in arm_reports.values() for k in (rep.get("unmatched_trial_keys") or [])})
+    if stray and any(rep.get("n_missing_trial") for rep in arm_reports.values()):
+        lines += [
+            "",
+            "### Names the manifest did not recognise (read this before the table above)",
+            "",
+            "Trials ran and were scored, but their task names do not match the ids the job "
+            "asked for — harbor builds a trial's name from the task name truncated to 32 "
+            "characters. The resolve rate is therefore about those rows, not about the "
+            "manifest, and the mismatch must be reconciled before any number is quoted: "
+            + ", ".join(f"`{s}`" for s in stray[:8]),
+        ]
     tally = (causal.get("engine_statuses") or {}) if causal else {}
     if tally:
         lines += [
