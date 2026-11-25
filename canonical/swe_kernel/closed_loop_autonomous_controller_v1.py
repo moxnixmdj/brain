@@ -1554,11 +1554,21 @@ def _solve_or_learn_impl(
             if repo_target is None and work_cwd != pathlib.Path(__file__).resolve().parents[2] and any(work_cwd.rglob("test_*.py")):
                 repo_target = work_cwd
             if repo_target is not None:
-                return {"schema": SCHEMA, "task_id": task_id, "pass": False,
-                        "status": computer_boundary.STATUS, "failure_class": computer_boundary.FAILURE_CLASS,
-                        "executed": True if front_res.get("executed") is True else None,
-                        "side_effects_may_exist": True, "semantic_acceptance_complete": False,
-                        "tier_used": "repository_repair_execution_not_admitted"}
+                # LEAP 1-3 read-only analysis.  This is NOT an execution path and
+                # grants no authority: every kernel below only READS source text
+                # and reasons in memory.  No candidate is applied, no test is run,
+                # and the refusal below is returned unconditionally either way.
+                out = {"schema": SCHEMA, "task_id": task_id, "pass": False,
+                       "status": computer_boundary.STATUS,
+                       "failure_class": computer_boundary.FAILURE_CLASS,
+                       "executed": True if front_res.get("executed") is True else None,
+                       "side_effects_may_exist": True,
+                       "semantic_acceptance_complete": False,
+                       "tier_used": "repository_repair_execution_not_admitted"}
+                analysis = _read_only_repository_analysis(repo_target, goal)
+                if analysis is not None:
+                    out["read_only_analysis"] = analysis
+                return out
                 # Phase 3C fast path: `< 180 ms` Zero-Copy CoW + Impact-Sliced + STUN/Guard + Coupled 2-File Zygote Engine
                 try:
                     from canonical.swe_kernel.cow_impact_repair_engine_v1 import (
@@ -1811,6 +1821,106 @@ def inspect_local_repo_for_goal(goal: str, repo_or_module: str | pathlib.Path) -
         "callable_count": len(surface.get("callables") or []),
         "top_candidates": ranked,
     }
+
+
+def _read_only_repository_analysis(repo_target: pathlib.Path,
+                                   goal: str) -> dict[str, Any] | None:
+    """Leap 1-3, applied to a repository the controller may NOT execute in.
+
+    Deliberately boring about authority: every step is a pure read of source
+    text plus in-memory reasoning.  A failure anywhere in here degrades to
+    ``None`` -- the caller's refusal stands unchanged, and the analysis can
+    never become the reason a repair is admitted.
+    """
+    try:
+        from canonical.swe_kernel.producer_lineage_graph_v1 import (
+            build_lineage_graph,
+        )
+        from canonical.swe_kernel import guarded_meaning_ir_v1 as mir
+        from canonical.swe_kernel import angelic_cegis_v1 as cegis
+
+        repo_target = pathlib.Path(repo_target)
+        graph = build_lineage_graph(repo_target)
+        d = graph.to_dict()
+        funcs = sorted(graph.functions())
+
+        # ---- Leap 2: cross-language meaning dedup over the same repo ------
+        lowered: dict[str, Any] = {}
+        targets: list[tuple[str, str]] = []
+        try:
+            for path in sorted(repo_target.rglob("*.py"))[:64]:
+                if any(part in {".git", "__pycache__", ".tox", "node_modules",
+                                ".venv", "build", "dist"} for part in path.parts):
+                    continue
+                mod = mir.lower_file(path)
+                if not mod.defs:
+                    continue
+                rel = str(path.relative_to(repo_target))
+                lowered[rel] = len(mod.defs)
+                if len(targets) < 256:
+                    targets.append((rel, path.read_text(encoding="utf-8", errors="replace")))
+        except Exception:
+            pass
+
+        # ---- Leap 3: is the target harvestable at all? -------------------
+        # Spec abduction needs a resolvable scope (params/locals/attributes) and
+        # witness inputs.  Neither is fabricated here: we only report how many
+        # functions COULD be targeted, and stop.
+        harvestable = 0
+        considered = 0
+        try:
+            for rel, source in targets:
+                for fn in mir.lower_file(repo_target / rel).defs:
+                    considered += 1
+                    try:
+                        scope = cegis.harvest_scope(source, target=fn.function)
+                    except Exception:
+                        scope = None
+                    if scope is not None and scope.names():
+                        harvestable += 1
+                    if considered >= 256:
+                        break
+                if considered >= 256:
+                    break
+        except Exception:
+            pass
+
+        return {
+            "schema": "PROJECT_BRAIN_READ_ONLY_REPOSITORY_ANALYSIS_V1",
+            "authority": "none",
+            "executed": False,
+            "applied": False,
+            "repo": str(repo_target),
+            "leap_1_producer_lineage": {
+                "functions": len(funcs),
+                "nodes": d.get("nodes"),
+                "edges": d.get("edges"),
+                "edge_kinds": list(d.get("edge_kinds") or []),
+                "sample_functions": funcs[:12],
+            },
+            "leap_2_meaning_ir": {
+                "modules_lowered": len(lowered),
+                "defs_per_module": dict(list(lowered.items())[:12]),
+            },
+            "leap_3_cegis": {
+                "functions_considered": considered,
+                "harvestable_targets": harvestable,
+                "witnesses_supplied": 0,
+                "candidates_admitted": 0,
+                "note": ("spec abduction needs witness inputs; none are supplied, so "
+                         "zero candidates are admitted.  This is a feasibility "
+                         "count, not a repair claim."),
+            },
+            "leap_4_delta_sim": {
+                "available": True,
+                "note": "no plan is simulated: no plan has been admitted",
+            },
+        }
+    except Exception as exc:  # noqa: BLE001 - analysis must never mask a refusal
+        return {"schema": "PROJECT_BRAIN_READ_ONLY_REPOSITORY_ANALYSIS_V1",
+                "authority": "none", "executed": False, "applied": False,
+                "error": f"{type(exc).__name__}",
+                "note": "read-only analysis unavailable; refusal unchanged"}
 
 
 def solve_or_learn_isolated(request: Mapping[str, Any] | str, **kwargs: Any) -> dict[str, Any]:

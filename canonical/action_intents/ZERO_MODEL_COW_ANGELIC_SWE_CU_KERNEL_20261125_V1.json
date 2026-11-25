@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/swe_kernel/perfect_algorithm_v1.py + canonical/swe_kernel/verified_skill_crystallizer_v1.py",
-  "canonical_base_commit": "8c7803500710d64345cc95c0584114dfc4323d0f",
+  "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "cold subprocess pytest evaluation (~1.5-3.7s/candidate) starves zero-model repair search budgets, and prior kernels lacked general contrastive separating-guard synthesis, algebraic differential lenses, polyglot C/JS causal CEGIS, transactional CoW speculative terminal execution, Petri-net cut-vertex checkpointing, pure-canvas blind GUI tomography, and issue-scoped zero-leakage metamorphic/docstring oracle abduction",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::cold subprocess pytest evaluation (~1.5-3.7s/candidate) starves zero-model repair search budgets, and prior kernels lacked general contrastive separating-guard synthesis, algebraic differential lenses, polyglot C/JS causal CEGIS, transactional CoW speculative terminal execution, Petri-net cut-vertex checkpointing, pure-canvas blind GUI tomography, and issue-scoped zero-leakage metamorphic/docstring oracle abduction",
@@ -132,7 +132,7 @@
     "wall_clock_cost_ub": 1
   },
   "recursive_obs": {
-    "canonical_base_commit": "8c7803500710d64345cc95c0584114dfc4323d0f",
+    "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "repo-specific keyword repair tables (rejected under rule 9.3)",
@@ -247,7 +247,7 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "8c7803500710d64345cc95c0584114dfc4323d0f",
+      "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
       "checked_at_utc": "2026-11-25T20:58:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,

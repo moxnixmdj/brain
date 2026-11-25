@@ -31237,7 +31237,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "669f04c8a3bd51a91fb0093cfbb7e4f9103ebc4bc8cdfb82b78006da2115128a"
+  "value": "d053a90bcefd1582269bf4aca44a89b326e7620edfa2e6b326c256970c1d9d81"
  },
  "engines": [
   {
@@ -266817,7 +266817,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/ZERO_MODEL_COW_ANGELIC_SWE_CU_KERNEL_20261125_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a13f1f861f7ea3702d09a83971f525fe8f3a167136de6399763821dc3c1b4fd8",
+   "sha256": "32b52bb87e1ba4ee693a03eca9f2f1cd7b91adc812403bd79c9c2beaea4b62bf",
    "status": "SHIPPED",
    "terms": {
     "1.5-3.7s": 1,
