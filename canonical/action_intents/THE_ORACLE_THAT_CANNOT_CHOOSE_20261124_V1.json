@@ -119,7 +119,7 @@
   ],
   "real_outcome": "the round's premise was falsified by the tree's own receipt: the check it was going to build already exists and withholds nothing, so the number that justified it (16 tasks) is withdrawn and replaced by a measured 3. The bottleneck moved from PRECISION to the ranking of arrangements of already-held material, and the next round's question changed because of it.",
   "recursive_obs": {
-    "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
+    "canonical_base_commit": "181b54fce3fad0241781dd40184b15a5f2b98fa1",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "bulk 104-branch merge",
@@ -203,7 +203,7 @@
     ],
     "selected_route_preflight": {
       "all_required_dependencies_ready": true,
-      "checked_at_utc": "2026-11-25T21:24:27Z",
+      "checked_at_utc": "2026-11-25T21:33:52Z",
       "execution_dependencies": [
         {
           "dependency": "python_stdlib_ast",
