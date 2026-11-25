@@ -62,6 +62,16 @@ import sys
 import tempfile
 from typing import Any, Iterable, Mapping, Sequence
 
+_HERE = pathlib.Path(__file__).resolve().parent
+_ROOT = _HERE.parents[1]
+for _entry in (str(_ROOT), str(_HERE), str(_ROOT / "canonical" / "tools")):
+    if _entry not in sys.path:
+        sys.path.insert(0, _entry)
+
+import dual_program_splicing_v1 as splicing  # noqa: E402
+import operand_invention_v1 as operand  # noqa: E402
+import repo_native_component_mining_v1 as mining  # noqa: E402
+
 SCHEMA = "BRAIN_WITNESS_INVERSION_V1"
 AUTHORITY = "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT"
 
@@ -465,6 +475,60 @@ def grammar_candidates(report: Mapping[str, Any], target_source: str) -> list[st
     return [item for item in dict.fromkeys(out) if item != existing]
 
 
+def mining_candidates(repo: pathlib.Path, targets: Sequence[pathlib.Path],
+                      report: Mapping[str, Any], *, budget: int = 12,
+                      seconds: int = 20,
+                      differential: Mapping[str, Any] | None = None) -> dict[str, Any]:
+    """Repo-native arm: invert the witness into MINE terms, then splice partials.
+
+    The actual/required values come from the captured assertion witness, never
+    from a diff or a human answer. Only the project's own runner accepts a patch.
+    """
+    if differential is not None:
+        failing = list(differential.get("failing") or [])
+        passing = list(differential.get("passing") or [])
+    else:
+        failing = [report.get("actual_value")]
+        passing = [report.get("required_value")]
+    out: dict[str, Any] = {"terms": 0, "patches": 0, "splices": 0, "candidates": []}
+    if not all(isinstance(value, str) and value for value in failing + passing):
+        return out
+    hot = [int(site["site_line"]) for site in report.get("sites", []) if "site_line" in site]
+    for target in targets[:3]:
+        path = pathlib.Path(target)
+        try:
+            rel = path.relative_to(repo).as_posix()
+        except ValueError:
+            continue
+        source = path.read_text(encoding="utf-8", errors="replace")
+        terms = mining.mine_terms(repo, rel, failing, passing)[:budget]
+        out["terms"] += len(terms)
+        seats = operand.conditions(source, hot) or operand.conditions(source, [line for line in hot[:3]])
+        mined: list[str] = []
+        for line_of, condition in seats[:6]:
+            name = condition.split()[0] if condition.split() else ""
+            if not name.isidentifier():
+                continue
+            for term in terms:
+                with_import = mining.add_import(source, term["module"], term["class"])
+                offset = 1 if with_import != source else 0
+                candidate = mining.guard_patch(
+                    with_import, line_of + offset, condition,
+                    f"_brain_mined({name}).{term['attribute']}", "or")
+                if candidate and candidate != source:
+                    mined.append(candidate)
+                    out["patches"] += 1
+        spliced: list[str] = []
+        for first in range(min(len(mined), 6)):
+            for second in range(first + 1, min(len(mined), 6)):
+                for candidate in splicing.splice(source, mined[first], mined[second])[:4]:
+                    if candidate not in spliced:
+                        spliced.append(candidate)
+        out["splices"] += len(spliced)
+        out["candidates"].extend((path, candidate) for candidate in dict.fromkeys(mined + spliced))
+    return out
+
+
 # --------------------------------------------------------------------------- #
 # the judge: the real test, or nothing
 # --------------------------------------------------------------------------- #
@@ -497,8 +561,17 @@ def apply_expression(source: str, report: Mapping[str, Any], expression: str) ->
 
 def _env(repo: pathlib.Path) -> dict[str, str]:
     """The repo's own import surface, and nothing from this interpreter's guesses."""
-    return {"PYTHONPATH": ":".join([str(repo), str(repo / "src"), str(repo / "tests")]),
-            "PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": str(repo), "PYTHONDONTWRITEBYTECODE": "1"}
+    ambient = os.environ.get("PYTHONPATH", "")
+    paths = [str(repo), str(repo / "src"), str(repo / "tests")]
+    if ambient:
+        paths.append(ambient)
+    environment = {"PYTHONPATH": ":".join(paths),
+                   "PATH": "/usr/local/bin:/usr/bin:/bin", "HOME": str(repo),
+                   "PYTHONDONTWRITEBYTECODE": "1"}
+    for flag in ("PYTEST_DISABLE_PLUGIN_AUTOLOAD", "PYTEST_ADDOPTS"):
+        if os.environ.get(flag):
+            environment[flag] = os.environ[flag]
+    return environment
 
 
 def judge(repo: pathlib.Path, command: Sequence[str], file_path: pathlib.Path, original: str,
@@ -518,9 +591,28 @@ def judge(repo: pathlib.Path, command: Sequence[str], file_path: pathlib.Path, o
         file_path.write_text(original, encoding="utf-8")
 
 
+def _try_augmented(result: dict[str, Any], repo: pathlib.Path,
+                   targets: Sequence[pathlib.Path], command: Sequence[str],
+                   report: Mapping[str, Any],
+                   differential: Mapping[str, Any] | None = None) -> bool:
+    """Run the repo-mining+splicing arm; mutate `result` and report whether it verified."""
+    augmented = mining_candidates(repo, targets, report, differential=differential)
+    result["mining"] = {key: value for key, value in augmented.items() if key != "candidates"}
+    for path, candidate_source in augmented["candidates"]:
+        original = path.read_text(encoding="utf-8")
+        result["tried"] += 1
+        if judge(repo, command, path, original, candidate_source):
+            result["answer"] = "VERIFIED__REPO_MINED"
+            result["found_by"] = "repo_mining_plus_splicing"
+            result["site"] = "%s::%s" % (path.name, "mined_guard")
+            return True
+    return False
+
+
 def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: pathlib.Path,
                test_name: str, command: Sequence[str], with_control: bool = True,
-               budget: int = 12) -> dict[str, Any]:
+               budget: int = 12, use_mining: bool = False,
+               differential: Mapping[str, Any] | None = None) -> dict[str, Any]:
     """One task: witness, invert at every invertible site, verify with the real test, or refuse."""
     report = capture(repo, targets, test_file, test_name)
     sites = list(report.get("sites", []))
@@ -541,10 +633,13 @@ def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: p
         "found_by": None,
         "tried": 0,
         "control": None,
+        "mining": None,
     }
     if report.get("outcome") != "WITNESSED":
         result["answer"] = "REFUSED__" + str(report.get("outcome"))
         result["detail"] = report.get("detail", "")
+        if use_mining:
+            _try_augmented(result, repo, targets, command, report, differential)
         return result
 
     proposals: list[tuple[Mapping[str, Any], str, str]] = []
@@ -576,6 +671,9 @@ def synthesize(repo: pathlib.Path, targets: Sequence[pathlib.Path], test_file: p
             result["span_kind"] = site.get("span_kind")
             if arm == "grammar" and result.get("control") is not None:
                 result["control"]["found"] = expression
+            return result
+    if use_mining:
+        if _try_augmented(result, repo, targets, command, report, differential):
             return result
     result["answer"] = "REFUSED__NO_CANDIDATE_PASSES_THE_TEST"
     return result

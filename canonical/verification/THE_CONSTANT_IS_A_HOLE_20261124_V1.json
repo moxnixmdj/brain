@@ -1,0 +1,2571 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus": {
+    "commits": 15,
+    "repository": "marshmallow",
+    "selection": "sha absent from every existing receipt and corpus file; one source and one test file; oracle executes",
+    "shards": 3
+  },
+  "declared_before_the_run": {
+    "C1": "at least one fresh real commit is VERIFIED by a generated literal that was absent from the parent source",
+    "C2": "no verified candidate breaks a test that passed on the parent",
+    "C3": "the generator never reads the commit diff or the human edit before the verdict",
+    "C4": "zero parameters stored, zero model calls, zero network calls",
+    "C5": "every counted row has a real failing test and a whole-file execution"
+  },
+  "gates": {
+    "C1": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C5": true
+  },
+  "generated_at_utc": "2026-11-24T22:15:38Z",
+  "rows": [
+    {
+      "candidates": 60,
+      "commit": "5761beab3985d654d712f9326e08bfb2e2ec9c4c",
+      "executed_lines": 129,
+      "failing": "tests/test_fields.py::TestPluckFiekd::test_pluck_empty_data_key[False]",
+      "failing_count": 2,
+      "failing_share": 0.0182,
+      "failing_test": "tests/test_fields.py::TestPluckFiekd::test_pluck_empty_data_key[False]",
+      "holes": 7,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 178.1,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_fields.py",
+      "tested": 60,
+      "tests": 110,
+      "tests_in_file": 110,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'/'@0",
+          "new": "/.",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'/'@1",
+          "new": "./",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert':'@0",
+          "new": ":.",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert':'@1",
+          "new": ".:",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'['@0",
+          "new": "[.",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'['@1",
+          "new": ".[",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert']'@0",
+          "new": "].",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert']'@1",
+          "new": ".]",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'_'@0",
+          "new": "_.",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]",
+            "tests/test_fields.py::TestListNested::test_list_nested_only_exclude_dump_only_load_only_propagated_to_nested[load_only]",
+            "tests/test_fields.py::TestTupleNested::test_tuple_nested_only_exclude_dump_only_load_only_propagated_to_nested[dump_only]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "616:23",
+          "how": "insert'_'@1",
+          "new": "._",
+          "old": ".",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "219:69",
+          "how": "insert'.'@0",
+          "new": ".validate",
+          "old": "validate",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "219:69",
+          "how": "insert'.'@1",
+          "new": "v.alidate",
+          "old": "validate",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "7dff08fcb7fb40d2772728bb8d8a76b5beff3200",
+      "executed_lines": 136,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_timedelta_field_deserialization[nan]",
+      "failing_count": 1,
+      "failing_share": 0.0025,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_timedelta_field_deserialization[nan]",
+      "holes": 15,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 110.8,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 396,
+      "tests_in_file": 396,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@0",
+          "new": ".dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@1",
+          "new": "d.ump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@2",
+          "new": "du.mp_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@3",
+          "new": "dum.p_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@4",
+          "new": "dump._only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@5",
+          "new": "dump_.only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@6",
+          "new": "dump_o.nly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@7",
+          "new": "dump_on.ly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@8",
+          "new": "dump_onl.y",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'.'@9",
+          "new": "dump_only.",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'/'@0",
+          "new": "/dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 395,
+          "fixed": true,
+          "hole": "2095:15",
+          "how": "insert'/'@1",
+          "new": "d/ump_only",
+          "old": "dump_only",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "902f99c4151d1f0c4c3b8e8dfbafc7b6a76aeaa6",
+      "executed_lines": 57,
+      "failing": "tests/test_validate.py::test_url_absolute_valid[http://example.org#fragment]",
+      "failing_count": 4,
+      "failing_share": 0.0181,
+      "failing_test": "tests/test_validate.py::test_url_absolute_valid[http://example.org#fragment]",
+      "holes": 24,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 21.1,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "VERIFIED",
+      "test": "tests/test_validate.py",
+      "tested": 2,
+      "tests": 221,
+      "tests_in_file": 221,
+      "tried": [
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "160:28",
+          "how": "class+' '",
+          "new": "(?:/?|[/? ]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": true,
+          "hole": "160:28",
+          "how": "class+'#'",
+          "new": "(?:/?|[/?#]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        }
+      ],
+      "verified": {
+        "absent_from_parent_source": true,
+        "broken": [],
+        "hole": "160:28",
+        "how": "class+'#'",
+        "new": "(?:/?|[/?#]\\S+)\\Z",
+        "old": "(?:/?|[/?]\\S+)\\Z",
+        "tests": 221
+      }
+    },
+    {
+      "candidates": 60,
+      "commit": "f07eadc87dfac25ed505d5cd9d186920f2682733",
+      "executed_lines": 15,
+      "failing": "tests/test_validate.py::test_email_idn_invalid[user@-m\\xfcnchen.de]",
+      "failing_count": 2,
+      "failing_share": 0.0092,
+      "failing_test": "tests/test_validate.py::test_email_idn_invalid[user@-m\\xfcnchen.de]",
+      "holes": 5,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 232.4,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_validate.py",
+      "tested": 60,
+      "tests": 217,
+      "tests_in_file": 217,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert' '@0",
+          "new": " @",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert' '@1",
+          "new": "@ ",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'-'@0",
+          "new": "-@",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'-'@1",
+          "new": "@-",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'.'@0",
+          "new": ".@",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'.'@1",
+          "new": "@.",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'/'@0",
+          "new": "/@",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'/'@1",
+          "new": "@/",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert':'@0",
+          "new": ":@",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert':'@1",
+          "new": "@:",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'['@0",
+          "new": "[@",
+          "old": "@",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_valid[niceandsimple@example.com]",
+            "tests/test_validate.py::test_email_valid[NiCeAnDsImPlE@eXaMpLe.CoM]",
+            "tests/test_validate.py::test_email_valid[very.common@example.com]"
+          ],
+          "broken_count": 30,
+          "fixed": false,
+          "hole": "288:46",
+          "how": "insert'['@1",
+          "new": "@[",
+          "old": "@",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "c1e727e16bed9851c6e77dde0119ee2d4f1ba08d",
+      "executed_lines": 43,
+      "failing": "tests/test_validate.py::test_url_idn_valid[https://\\u09a4\\u09cc\\u09b9\\u09bf\\u09a6\\u09c1\\u09b0.\\u09ac\\u09be\\u0982\\u09b2\\u09be]",
+      "failing_count": 6,
+      "failing_share": 0.029,
+      "failing_test": "tests/test_validate.py::test_url_idn_valid[https://\\u09a4\\u09cc\\u09b9\\u09bf\\u09a6\\u09c1\\u09b0.\\u09ac\\u09be\\u0982\\u09b2\\u09be]",
+      "holes": 16,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 199.4,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_validate.py",
+      "tested": 60,
+      "tests": 207,
+      "tests_in_file": 207,
+      "tried": [
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "140:28",
+          "how": "class+' '",
+          "new": "(?:/?|[/? ]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "140:28",
+          "how": "class+'#'",
+          "new": "(?:/?|[/?#]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_relative_invalid[../icons/logo.gif]",
+            "tests/test_validate.py::test_url_relative_invalid[../.../g]",
+            "tests/test_validate.py::test_url_relative_invalid[...]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "140:28",
+          "how": "class+'.'",
+          "new": "(?:/?|[/?.]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "140:28",
+          "how": "class+'='",
+          "new": "(?:/?|[/?=]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "140:28",
+          "how": "class+'_'",
+          "new": "(?:/?|[/?_]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "129:20",
+          "how": "class+' '",
+          "new": "(?:[a-z0-9\\.\\-\\+ ]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "129:20",
+          "how": "class+'#'",
+          "new": "(?:[a-z0-9\\.\\-\\+#]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "129:20",
+          "how": "class+'='",
+          "new": "(?:[a-z0-9\\.\\-\\+=]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "129:20",
+          "how": "class+'_'",
+          "new": "(?:[a-z0-9\\.\\-\\+_]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "132:20",
+          "how": "class+' '",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=: ]|%[0-9a-f]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "132:20",
+          "how": "class+'#'",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:#]|%[0-9a-f]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "132:20",
+          "how": "class+'/'",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:/]|%[0-9a-f]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "024b5d09e9f026f0f96d220e243be69346687ce0",
+      "executed_lines": 137,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[mro]",
+      "failing_count": 3,
+      "failing_share": 0.0078,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_enum_field_by_symbol_rejects_non_member_attributes[mro]",
+      "holes": 10,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 101.9,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 385,
+      "tests_in_file": 385,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@0",
+          "new": ".dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@1",
+          "new": "d.ump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@2",
+          "new": "du.mp_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@3",
+          "new": "dum.p_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@4",
+          "new": "dump._only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@5",
+          "new": "dump_.only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@6",
+          "new": "dump_o.nly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@7",
+          "new": "dump_on.ly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@8",
+          "new": "dump_onl.y",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@9",
+          "new": "dump_only.",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'/'@0",
+          "new": "/dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 382,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'/'@1",
+          "new": "d/ump_only",
+          "old": "dump_only",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "252090c7c707166cf4fcfcdc73eb4376b7bbc4b7",
+      "executed_lines": 213,
+      "failing": "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestValidation::test_nested_partial_tuple_with_data_key",
+      "holes": 20,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 254.8,
+      "sources": [
+        "src/marshmallow/schema.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 382,
+      "tests_in_file": 382,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'.'@0",
+          "new": ".Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'.'@1",
+          "new": "M.eta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'.'@2",
+          "new": "Me.ta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'.'@3",
+          "new": "Met.a",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'.'@4",
+          "new": "Meta.",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'/'@0",
+          "new": "/Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'/'@1",
+          "new": "M/eta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'/'@2",
+          "new": "Me/ta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'/'@3",
+          "new": "Met/a",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert'/'@4",
+          "new": "Meta/",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert':'@0",
+          "new": ":Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:01:39 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:01:39]"
+          ],
+          "broken_count": 2,
+          "fixed": false,
+          "hole": "106:25",
+          "how": "insert':'@1",
+          "new": "M:eta",
+          "old": "Meta",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "65374df0c31cdc45acc4435741779298201306a2",
+      "executed_lines": 16,
+      "failing": "tests/test_validate.py::test_oneof_options",
+      "failing_count": 1,
+      "failing_share": 0.005,
+      "failing_test": "tests/test_validate.py::test_oneof_options",
+      "holes": 11,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 207.1,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_validate.py",
+      "tested": 60,
+      "tests": 199,
+      "tests_in_file": 199,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_repr"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "hole": "31:40",
+          "how": "insert'.'@0",
+          "new": ".",
+          "old": "",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_repr"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "hole": "31:40",
+          "how": "insert'/'@0",
+          "new": "/",
+          "old": "",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_repr"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "hole": "31:40",
+          "how": "insert':'@0",
+          "new": ":",
+          "old": "",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_email_repr"
+          ],
+          "broken_count": 1,
+          "fixed": false,
+          "hole": "31:40",
+          "how": "insert'_'@0",
+          "new": "_",
+          "old": "",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'.'@0",
+          "new": ".<",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'.'@1",
+          "new": "<.",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'/'@0",
+          "new": "/<",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'/'@1",
+          "new": "</",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert':'@0",
+          "new": ":<",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert':'@1",
+          "new": "<:",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'_'@0",
+          "new": "_<",
+          "old": "<",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_repr",
+            "tests/test_validate.py::test_email_repr",
+            "tests/test_validate.py::test_range_repr"
+          ],
+          "broken_count": 10,
+          "fixed": false,
+          "hole": "33:15",
+          "how": "insert'_'@1",
+          "new": "<_",
+          "old": "<",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "070dde08bad456e743a0d2e1842c142a799a9568",
+      "executed_lines": 118,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_with_required",
+      "holes": 13,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 106.1,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 381,
+      "tests_in_file": 381,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@0",
+          "new": ".dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@1",
+          "new": "d.ump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@2",
+          "new": "du.mp_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@3",
+          "new": "dum.p_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@4",
+          "new": "dump._only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@5",
+          "new": "dump_.only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@6",
+          "new": "dump_o.nly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@7",
+          "new": "dump_on.ly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@8",
+          "new": "dump_onl.y",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'.'@9",
+          "new": "dump_only.",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'/'@0",
+          "new": "/dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 380,
+          "fixed": true,
+          "hole": "2048:15",
+          "how": "insert'/'@1",
+          "new": "d/ump_only",
+          "old": "dump_only",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "19ca8dce2d5bde94509a4a89e495f35c695442d5",
+      "executed_lines": 137,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_none_allows_none_value",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_constant_none_allows_none_value",
+      "holes": 11,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 89.9,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 380,
+      "tests_in_file": 380,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@0",
+          "new": ".dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@1",
+          "new": "d.ump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@2",
+          "new": "du.mp_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@3",
+          "new": "dum.p_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@4",
+          "new": "dump._only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@5",
+          "new": "dump_.only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@6",
+          "new": "dump_o.nly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@7",
+          "new": "dump_on.ly",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@8",
+          "new": "dump_onl.y",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'.'@9",
+          "new": "dump_only.",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'/'@0",
+          "new": "/dump_only",
+          "old": "dump_only",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[String]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Integer]",
+            "tests/test_deserialization.py::TestDeserializingNone::test_fields_allow_none_deserialize_to_none[Boolean]"
+          ],
+          "broken_count": 379,
+          "fixed": true,
+          "hole": "2039:15",
+          "how": "insert'/'@1",
+          "new": "d/ump_only",
+          "old": "dump_only",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "2bf3ae6ac656c977ec10808b5eb0e7480ced0311",
+      "executed_lines": 102,
+      "failing": "tests/test_schema.py::test_nested_many_should_override_schema_many_case1",
+      "failing_count": 2,
+      "failing_share": 0.0099,
+      "failing_test": "tests/test_schema.py::test_nested_many_should_override_schema_many_case1",
+      "holes": 5,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 209.8,
+      "sources": [
+        "src/marshmallow/fields.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_schema.py",
+      "tested": 60,
+      "tests": 203,
+      "tests_in_file": 203,
+      "tried": [
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'.'",
+          "new": "type[set.]",
+          "old": "type[set]",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'/'",
+          "new": "type[set/]",
+          "old": "type[set]",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+':'",
+          "new": "type[set:]",
+          "old": "type[set]",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'_'",
+          "new": "type[set_]",
+          "old": "type[set]",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'1'",
+          "new": "type[set1]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'2'",
+          "new": "type[set2]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'a'",
+          "new": "type[seta]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'c'",
+          "new": "type[setc]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'d'",
+          "new": "type[setd]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'h'",
+          "new": "type[seth]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'i'",
+          "new": "type[seti]",
+          "old": "type[set]",
+          "priority": 152
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "541:40",
+          "how": "class+'l'",
+          "new": "type[setl]",
+          "old": "type[set]",
+          "priority": 152
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "a45329dfde2f46bcea67b384912b21ca39fcfbd6",
+      "executed_lines": 17,
+      "failing": "tests/test_validate.py::test_url_custom_scheme_case_insensitive",
+      "failing_count": 1,
+      "failing_share": 0.0052,
+      "failing_test": "tests/test_validate.py::test_url_custom_scheme_case_insensitive",
+      "holes": 3,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 234.9,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_validate.py",
+      "tested": 60,
+      "tests": 191,
+      "tests_in_file": 191,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'.'@0",
+          "new": ".://",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'.'@1",
+          "new": ":.//",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'.'@2",
+          "new": ":/./",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'.'@3",
+          "new": "://.",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'_'@0",
+          "new": "_://",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'_'@1",
+          "new": ":_//",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'_'@2",
+          "new": ":/_/",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_invalid[foo://example.org]",
+            "tests/test_validate.py::test_url_custom_scheme",
+            "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]"
+          ],
+          "broken_count": 8,
+          "fixed": true,
+          "hole": "206:11",
+          "how": "insert'_'@3",
+          "new": "://_",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_valid[http://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[https://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[ftp://example.org]"
+          ],
+          "broken_count": 46,
+          "fixed": false,
+          "hole": "207:33",
+          "how": "insert'.'@0",
+          "new": ".://",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_valid[http://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[https://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[ftp://example.org]"
+          ],
+          "broken_count": 46,
+          "fixed": false,
+          "hole": "207:33",
+          "how": "insert'.'@1",
+          "new": ":.//",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_valid[http://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[https://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[ftp://example.org]"
+          ],
+          "broken_count": 46,
+          "fixed": false,
+          "hole": "207:33",
+          "how": "insert'.'@2",
+          "new": ":/./",
+          "old": "://",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_absolute_valid[http://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[https://example.org]",
+            "tests/test_validate.py::test_url_absolute_valid[ftp://example.org]"
+          ],
+          "broken_count": 46,
+          "fixed": false,
+          "hole": "207:33",
+          "how": "insert'.'@3",
+          "new": "://.",
+          "old": "://",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "2b84b56e9a80d07b65d74811673e8e5cf46cd0f1",
+      "executed_lines": 0,
+      "failing": "tests/test_deserialization.py::TestFieldDeserialization::test_function_field_deserialization_missing_with_length_validator",
+      "failing_count": 1,
+      "failing_share": 0.0026,
+      "failing_test": "tests/test_deserialization.py::TestFieldDeserialization::test_function_field_deserialization_missing_with_length_validator",
+      "holes": 4,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 228.9,
+      "sources": [
+        "src/marshmallow/constants.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_deserialization.py",
+      "tested": 60,
+      "tests": 379,
+      "tests_in_file": 379,
+      "tried": [
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@0",
+          "new": ".exclude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@1",
+          "new": "e.xclude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@2",
+          "new": "ex.clude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@3",
+          "new": "exc.lude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@4",
+          "new": "excl.ude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@5",
+          "new": "exclu.de",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@6",
+          "new": "exclud.e",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'.'@7",
+          "new": "exclude.",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'/'@0",
+          "new": "/exclude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'/'@1",
+          "new": "e/xclude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'/'@2",
+          "new": "ex/clude",
+          "old": "exclude",
+          "priority": 32
+        },
+        {
+          "broken": [
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[22:07:27 2026-11-24]",
+            "tests/test_deserialization.py::TestFieldDeserialization::test_invalid_datetime_deserialization[11-24-2026 22:07:27]",
+            "tests/test_deserialization.py::test_deserialize_raises_exception_if_input_type_is_incorrect[True-exclude]"
+          ],
+          "broken_count": 7,
+          "fixed": false,
+          "hole": "3:24",
+          "how": "insert'/'@3",
+          "new": "exc/lude",
+          "old": "exclude",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "76bc28ae74e723760d54f097290ba85e717d5fe4",
+      "executed_lines": 40,
+      "failing": "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]",
+      "failing_count": 5,
+      "failing_share": 0.0263,
+      "failing_test": "tests/test_validate.py::test_url_accepts_valid_file_urls[file:///tmp/tmp1234]",
+      "holes": 13,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 147.4,
+      "sources": [
+        "src/marshmallow/validate.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_validate.py",
+      "tested": 60,
+      "tests": 190,
+      "tests_in_file": 190,
+      "tried": [
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "155:28",
+          "how": "class+' '",
+          "new": "(?:/?|[/? ]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "155:28",
+          "how": "class+'%'",
+          "new": "(?:/?|[/?%]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [
+            "tests/test_validate.py::test_url_relative_invalid[../icons/logo.gif]",
+            "tests/test_validate.py::test_url_relative_invalid[../.../g]",
+            "tests/test_validate.py::test_url_relative_invalid[...]"
+          ],
+          "broken_count": 6,
+          "fixed": false,
+          "hole": "155:28",
+          "how": "class+'.'",
+          "new": "(?:/?|[/?.]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "155:28",
+          "how": "class+'_'",
+          "new": "(?:/?|[/?_]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 182
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "144:20",
+          "how": "class+' '",
+          "new": "(?:[a-z0-9\\.\\-\\+ ]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "144:20",
+          "how": "class+'%'",
+          "new": "(?:[a-z0-9\\.\\-\\+%]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "144:20",
+          "how": "class+'_'",
+          "new": "(?:[a-z0-9\\.\\-\\+_]*)://",
+          "old": "(?:[a-z0-9\\.\\-\\+]*)://",
+          "priority": 181
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "147:20",
+          "how": "class+' '",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=: ]|%[0-9a-f]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "147:20",
+          "how": "class+'/'",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:/]|%[0-9a-f]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "147:20",
+          "how": "class+' '",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f ]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "147:20",
+          "how": "class+'/'",
+          "new": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f/]{2})*@)?",
+          "old": "(?:(?:[a-z0-9\\-._~!$&'()*+,;=:]|%[0-9a-f]{2})*@)?",
+          "priority": 180
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "155:28",
+          "how": "class+'0'",
+          "new": "(?:/?|[/?0]\\S+)\\Z",
+          "old": "(?:/?|[/?]\\S+)\\Z",
+          "priority": 152
+        }
+      ],
+      "verified": null
+    },
+    {
+      "candidates": 60,
+      "commit": "94234acd1a98e5fd8b21ba3e8f78ac87a4996949",
+      "executed_lines": 276,
+      "failing": "tests/test_decorators.py::test_post_load_method_that_appends_to_data",
+      "failing_count": 1,
+      "failing_share": 0.0263,
+      "failing_test": "tests/test_decorators.py::test_post_load_method_that_appends_to_data",
+      "holes": 29,
+      "keep": true,
+      "repo": "marshmallow",
+      "seconds": 111.2,
+      "sources": [
+        "src/marshmallow/schema.py"
+      ],
+      "stage": "NO_GENERATED_LITERAL_PASSED",
+      "test": "tests/test_decorators.py",
+      "tested": 60,
+      "tests": 38,
+      "tests_in_file": 38,
+      "tried": [
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'.'@0",
+          "new": ".Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'.'@1",
+          "new": "M.eta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'.'@2",
+          "new": "Me.ta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'.'@3",
+          "new": "Met.a",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'.'@4",
+          "new": "Meta.",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'/'@0",
+          "new": "/Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'/'@1",
+          "new": "M/eta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'/'@2",
+          "new": "Me/ta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'/'@3",
+          "new": "Met/a",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert'/'@4",
+          "new": "Meta/",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert':'@0",
+          "new": ":Meta",
+          "old": "Meta",
+          "priority": 32
+        },
+        {
+          "broken": [],
+          "broken_count": 0,
+          "fixed": false,
+          "hole": "104:25",
+          "how": "insert':'@1",
+          "new": "M:eta",
+          "old": "Meta",
+          "priority": 32
+        }
+      ],
+      "verified": null
+    }
+  ],
+  "schema": "PROJECT_BRAIN_THE_CONSTANT_IS_A_HOLE_V1",
+  "summary": {
+    "candidate_executions": 842,
+    "model_calls": 0,
+    "network_calls": 0,
+    "novel_verified": 1,
+    "parameters_stored": 0,
+    "rows": 15,
+    "seconds": 2433.8,
+    "verified": 1
+  },
+  "verdict": "PASS",
+  "what_this_is_not": [
+    "not a benchmark: 15 real commits in one repository, producer-run, no independent verifier",
+    "not general SWE: a narrow generator over constants on executed lines",
+    "not trained: the candidates are calculated from failing inputs and existing literals"
+  ]
+}

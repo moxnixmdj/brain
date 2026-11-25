@@ -74,8 +74,11 @@ def test_command(worktree: pathlib.Path, test_file: str) -> list[str]:
     # `-o asyncio_default_fixture_loop_scope=function` is not cosmetic: tqdm sets
     # `filterwarnings = error`, and pytest-asyncio's unset-scope warning then escalates to
     # INTERNALERROR, so the suite cannot run at all and every tqdm row reads as "no oracle".
-    return [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider",
-            "-o", "asyncio_default_fixture_loop_scope=function"]
+    command = [sys.executable, "-m", "pytest", test_file, "-v", "--tb=no", "-p", "no:cacheprovider"]
+    _util = __import__("importlib.util", fromlist=["util"])
+    if _util.find_spec("pytest_asyncio") is not None:
+        command.extend(["-o", "asyncio_default_fixture_loop_scope=function"])
+    return command
 
 
 def failing_tests(verdicts: dict[str, str]) -> list[str]:
@@ -99,7 +102,10 @@ def fresh_bytecode(worktree: pathlib.Path) -> dict[str, str]:
     """
     for cache in worktree.rglob("__pycache__"):
         shutil.rmtree(cache, ignore_errors=True)
-    return {"PYTHONPATH": "src:.", "PYTHONDONTWRITEBYTECODE": "1",
+    ambient = __import__("os").environ.get("PYTHONPATH", "")
+    _os = __import__("os")
+    pythonpath = "src:." + (_os.pathsep + ambient if ambient else "")
+    return {"PYTHONPATH": pythonpath, "PYTHONDONTWRITEBYTECODE": "1",
             "PYTHONPYCACHEPREFIX": str(worktree / ".brain_pycache")}
 
 

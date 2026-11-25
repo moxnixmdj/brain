@@ -1,0 +1,460 @@
+{
+  "authority": "NONE__PRODUCER_RUN_SANDBOX",
+  "corpus": {
+    "acquisition": "pytest item.callspec.params",
+    "commits": 12,
+    "repository": "pallets/click",
+    "shards": 3
+  },
+  "declared_before_the_run": {
+    "M1": "at least one fresh real commit is verified by a guard using a component mined elsewhere in its repository",
+    "M2": "treatment (mined components) beats or equals the imported-module control at the same trial cap",
+    "M3": "no verified patch breaks a stable passing test",
+    "M4": "no commit diff or human edit is read by the miner",
+    "M5": "zero parameters stored, zero model calls, zero network calls"
+  },
+  "gates": {
+    "M1": false,
+    "M2": true,
+    "M3": true,
+    "M4": true,
+    "M5": true
+  },
+  "generated_at_utc": "2026-11-24T23:41:45Z",
+  "rows": [
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 14,
+      "commit": "ac6a2acfdb4550c35ce69ce54db502ba96c96324",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_shell_completion.py::test_nested_group"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0238,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 5.2,
+      "sources": [
+        "src/click/shell_completion.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_shell_completion.py",
+      "tests": [
+        "tests/test_shell_completion.py"
+      ],
+      "tests_in_file": 42,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 34,
+      "commit": "4271fe283dc9365563aebb369ada8d20eee015a8",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_types.py::test_choice_get_invalid_choice_message"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.025,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 4.8,
+      "sources": [
+        "src/click/types.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_types.py",
+      "tests": [
+        "tests/test_types.py"
+      ],
+      "tests_in_file": 40,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 14,
+      "commit": "1787497713fa389435ed732c9b26274c3cdc458d",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_arguments.py::test_envvar_flag_value"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0263,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 6.1,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_arguments.py",
+      "tests": [
+        "tests/test_arguments.py"
+      ],
+      "tests_in_file": 38,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 72,
+      "commit": "1b524bb30d0bd39528369c7029b9296e7663cf19",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_options.py::test_missing_envvar"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0084,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 7.9,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_options.py",
+      "tests": [
+        "tests/test_options.py"
+      ],
+      "tests_in_file": 119,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 67,
+      "commit": "a6e0d2936891030f5092c9869c7391104f6721d9",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_termui.py::test_false_show_default_cause_no_default_display_in_prompt"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0152,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 4.9,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_termui.py",
+      "tests": [
+        "tests/test_termui.py"
+      ],
+      "tests_in_file": 66,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 5,
+      "acquired_passing": 0,
+      "collected_nodes": 72,
+      "commit": "1a4d8c1bb1e8f8e214ede7223bd2c05dc2ce006a",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_options.py::test_usage_show_choices[text choices]",
+        "tests/test_options.py::test_usage_show_choices[int choices]",
+        "tests/test_options.py::test_usage_show_choices[float choices]",
+        "tests/test_options.py::test_usage_show_choices[bool choices]"
+      ],
+      "failing_count": 10,
+      "failing_share": 0.0813,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [
+        "metavars"
+      ],
+      "repo": "click",
+      "seconds": 6.4,
+      "sources": [
+        "src/click/types.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_options.py",
+      "tests": [
+        "tests/test_options.py"
+      ],
+      "tests_in_file": 123,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 67,
+      "commit": "61f8101f4e0d02cb902ef17853fa35ad88185265",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_options.py::test_show_default_with_empty_string"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0088,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 7.1,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_options.py",
+      "tests": [
+        "tests/test_options.py"
+      ],
+      "tests_in_file": 113,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 8,
+      "commit": "422e211018e9ef8ff9a840878464d35c4c6519ac",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_commands.py::test_abort_exceptions_with_disabled_standalone_mode[EOFError]",
+        "tests/test_commands.py::test_abort_exceptions_with_disabled_standalone_mode[KeyboardInterrupt]"
+      ],
+      "failing_count": 2,
+      "failing_share": 0.08,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 4.6,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_commands.py",
+      "tests": [
+        "tests/test_commands.py"
+      ],
+      "tests_in_file": 25,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 2,
+      "acquired_passing": 7,
+      "collected_nodes": 75,
+      "commit": "0de3704747c1399d019f1d94caeefe20123b6ef0",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_utils.py::test_detect_program_name[example--example]"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0105,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [
+        "expected",
+        "main",
+        "path"
+      ],
+      "repo": "click",
+      "seconds": 8.1,
+      "sources": [
+        "src/click/utils.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_utils.py",
+      "tests": [
+        "tests/test_utils.py"
+      ],
+      "tests_in_file": 95,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 14,
+      "commit": "e002dbc40ceb6a7e78dbe5e5868744690ba3120f",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_shell_completion.py::test_add_completion_class",
+        "tests/test_shell_completion.py::test_add_completion_class_with_name",
+        "tests/test_shell_completion.py::test_add_completion_class_decorator"
+      ],
+      "failing_count": 3,
+      "failing_share": 0.075,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 5.8,
+      "sources": [
+        "src/click/shell_completion.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_shell_completion.py",
+      "tests": [
+        "tests/test_shell_completion.py"
+      ],
+      "tests_in_file": 40,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 0,
+      "acquired_passing": 0,
+      "collected_nodes": 74,
+      "commit": "742a5521c4e219c8413a9a0478f752b54ad6d9ea",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_utils.py::test_expand_args"
+      ],
+      "failing_count": 1,
+      "failing_share": 0.0106,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [],
+      "repo": "click",
+      "seconds": 4.9,
+      "sources": [
+        "setup.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_utils.py",
+      "tests": [
+        "tests/test_utils.py"
+      ],
+      "tests_in_file": 94,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    },
+    {
+      "acquired_failing": 1,
+      "acquired_passing": 2,
+      "collected_nodes": 68,
+      "commit": "daa2d8e44332f66f09be83a9872218fde318bb8d",
+      "control": {
+        "trials": 0,
+        "verdict": "NO_TERM_PASSED"
+      },
+      "control_terms": 0,
+      "failing": [
+        "tests/test_options.py::test_invalid_flag_combinations[kwargs2-'multiple' is not valid with 'is_flag', use 'count'.]",
+        "tests/test_options.py::test_invalid_flag_combinations[kwargs2-'multiple'"
+      ],
+      "failing_count": 2,
+      "failing_share": 0.0175,
+      "keep": true,
+      "mined_terms": 0,
+      "parameters": [
+        "message"
+      ],
+      "repo": "click",
+      "seconds": 5.1,
+      "sources": [
+        "src/click/core.py"
+      ],
+      "stage": "COMPARED",
+      "test": "tests/test_options.py",
+      "tests": [
+        "tests/test_options.py"
+      ],
+      "tests_in_file": 114,
+      "treatment": {
+        "trials": 0,
+        "verdict": "NO_MINED_TERM"
+      }
+    }
+  ],
+  "schema": "PROJECT_BRAIN_REPO_NATIVE_COMPONENT_MINING_V1",
+  "summary": {
+    "control_verified": 0,
+    "model_calls": 0,
+    "network_calls": 0,
+    "parameters_stored": 0,
+    "rows": 12,
+    "seconds": 70.9,
+    "treatment_verified": 0
+  },
+  "verdict": "FAIL"
+}
