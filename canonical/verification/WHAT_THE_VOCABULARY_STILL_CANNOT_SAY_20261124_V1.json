@@ -1,0 +1,419 @@
+{
+ "schema": "BRAIN_WHAT_THE_VOCABULARY_STILL_CANNOT_SAY_V1",
+ "generated": "2026-11-25T03:22:50Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 50.0
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "FILESYSTEM",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "GIT",
+   "held_out": 50,
+   "covered": 35,
+   "refused": 15,
+   "refusals_with_same_atom_and_single_effect": 2,
+   "context_dependent_atoms": {
+    "GIT_A1": {
+     "refused_states": 5,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "ADD_DUPLICATE+REUSES_CONTENT"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ]
+    },
+    "GIT_A3": {
+     "refused_states": 2,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "HAS_DUPLICATE_CONTENT|ROWS_4"
+     ]
+    },
+    "GIT_A4": {
+     "refused_states": 6,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "HAS_DUPLICATE_CONTENT|ROWS_4"
+     ]
+    }
+   },
+   "guard_atoms": {
+    "GIT_A3": {
+     "refused_states": 2,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "HAS_DUPLICATE_CONTENT|ROWS_4"
+     ],
+     "fires_as": [
+      "ADD_AND_DELETE+REUSES_CONTENT"
+     ],
+     "reading": "the atom declines to fire unless a precondition holds"
+    },
+    "GIT_A4": {
+     "refused_states": 6,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "HAS_DUPLICATE_CONTENT|ROWS_4"
+     ],
+     "fires_as": [
+      "ADD_AND_DELETE+REUSES_CONTENT"
+     ],
+     "reading": "the atom declines to fire unless a precondition holds"
+    }
+   },
+   "genuinely_dependent_atoms": {
+    "GIT_A1": {
+     "refused_states": 5,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "ADD_DUPLICATE+REUSES_CONTENT"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ],
+     "reading": "two different effects, both firing"
+    }
+   },
+   "context_dependent_count": 3,
+   "guard_count": 2,
+   "genuinely_dependent_count": 1,
+   "context_dependent_separable_by_current_keys": 1
+  },
+  {
+   "machine": "GIT2",
+   "held_out": 28,
+   "covered": 18,
+   "refused": 10,
+   "refusals_with_same_atom_and_single_effect": 2,
+   "context_dependent_atoms": {
+    "G2_A1": {
+     "refused_states": 4,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "ADD_DUPLICATE+REUSES_CONTENT"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ]
+    },
+    "G2_A4": {
+     "refused_states": 4,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ]
+    }
+   },
+   "guard_atoms": {
+    "G2_A4": {
+     "refused_states": 4,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ],
+     "fires_as": [
+      "ADD_AND_DELETE+REUSES_CONTENT"
+     ],
+     "reading": "the atom declines to fire unless a precondition holds"
+    }
+   },
+   "genuinely_dependent_atoms": {
+    "G2_A1": {
+     "refused_states": 4,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "ADD_DUPLICATE+REUSES_CONTENT"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE|ROWS_2",
+      "ALL_CONTENT_UNIQUE|ROWS_3"
+     ],
+     "reading": "two different effects, both firing"
+    }
+   },
+   "context_dependent_count": 2,
+   "guard_count": 1,
+   "genuinely_dependent_count": 1,
+   "context_dependent_separable_by_current_keys": 0
+  },
+  {
+   "machine": "JOURNAL",
+   "held_out": 16,
+   "covered": 12,
+   "refused": 4,
+   "refusals_with_same_atom_and_single_effect": 4,
+   "context_dependent_atoms": {},
+   "guard_atoms": {},
+   "genuinely_dependent_atoms": {},
+   "context_dependent_count": 0,
+   "guard_count": 0,
+   "genuinely_dependent_count": 0,
+   "context_dependent_separable_by_current_keys": 0
+  },
+  {
+   "machine": "LIST",
+   "held_out": 210,
+   "covered": 149,
+   "refused": 61,
+   "refusals_with_same_atom_and_single_effect": 52,
+   "context_dependent_atoms": {
+    "LS_A1": {
+     "refused_states": 9,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE",
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "ALL_CONTENT_UNIQUE|ROWS_4"
+     ]
+    }
+   },
+   "guard_atoms": {
+    "LS_A1": {
+     "refused_states": 9,
+     "distinct_effects": 2,
+     "effects": [
+      "ADD_AND_DELETE+REUSES_CONTENT",
+      "NO_CHANGE"
+     ],
+     "keys_seen": [
+      "ALL_CONTENT_UNIQUE",
+      "ALL_CONTENT_UNIQUE|ROWS_3",
+      "ALL_CONTENT_UNIQUE|ROWS_4"
+     ],
+     "fires_as": [
+      "ADD_AND_DELETE+REUSES_CONTENT"
+     ],
+     "reading": "the atom declines to fire unless a precondition holds"
+    }
+   },
+   "genuinely_dependent_atoms": {},
+   "context_dependent_count": 1,
+   "guard_count": 1,
+   "genuinely_dependent_count": 0,
+   "context_dependent_separable_by_current_keys": 0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "held_out": 4,
+   "covered": 1,
+   "refused": 3,
+   "refusals_with_same_atom_and_single_effect": 3,
+   "context_dependent_atoms": {},
+   "guard_atoms": {},
+   "genuinely_dependent_atoms": {},
+   "context_dependent_count": 0,
+   "guard_count": 0,
+   "genuinely_dependent_count": 0,
+   "context_dependent_separable_by_current_keys": 0
+  },
+  {
+   "machine": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "TARBALL",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "VAULT",
+   "held_out": 4,
+   "covered": 4,
+   "refused": 0,
+   "refusals_with_same_atom_and_single_effect": 0,
+   "context_dependent_atoms": {},
+   "guard_atoms": {},
+   "genuinely_dependent_atoms": {},
+   "context_dependent_count": 0,
+   "guard_count": 0,
+   "genuinely_dependent_count": 0,
+   "context_dependent_separable_by_current_keys": 0
+  }
+ ],
+ "summary": {
+  "machines": 6,
+  "skipped": [
+   "ARCHIVE2",
+   "FILESYSTEM",
+   "SQLITE",
+   "TARBALL"
+  ],
+  "held_out": 312,
+  "covered": 219,
+  "refused": 93,
+  "coverage": 0.7019,
+  "refusals_a_narrower_law_would_already_cover": 63,
+  "context_dependent_atoms": 6,
+  "context_dependent_separable_by_current_keys": 1,
+  "guard_atoms": 4,
+  "genuinely_dependent_atoms_count": 2,
+  "verdicts": {
+   "most_refusals_are_a_narrow_vocabulary_not_a_missing_one": true,
+   "some_atom_effects_really_depend_on_unrepresented_context": true,
+   "the_current_keys_already_separate_some_of_them": true,
+   "most_context_dependence_is_a_guard_not_a_predicate": true,
+   "the_vocabulary_gap_is_small_and_named": true
+  },
+  "work_order": {
+   "guards": {
+    "GIT": {
+     "GIT_A3": {
+      "refused_states": 2,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "NO_CHANGE"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE|ROWS_3",
+       "HAS_DUPLICATE_CONTENT|ROWS_4"
+      ],
+      "fires_as": [
+       "ADD_AND_DELETE+REUSES_CONTENT"
+      ],
+      "reading": "the atom declines to fire unless a precondition holds"
+     },
+     "GIT_A4": {
+      "refused_states": 6,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "NO_CHANGE"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE|ROWS_2",
+       "ALL_CONTENT_UNIQUE|ROWS_3",
+       "HAS_DUPLICATE_CONTENT|ROWS_4"
+      ],
+      "fires_as": [
+       "ADD_AND_DELETE+REUSES_CONTENT"
+      ],
+      "reading": "the atom declines to fire unless a precondition holds"
+     }
+    },
+    "GIT2": {
+     "G2_A4": {
+      "refused_states": 4,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "NO_CHANGE"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE|ROWS_2",
+       "ALL_CONTENT_UNIQUE|ROWS_3"
+      ],
+      "fires_as": [
+       "ADD_AND_DELETE+REUSES_CONTENT"
+      ],
+      "reading": "the atom declines to fire unless a precondition holds"
+     }
+    },
+    "LIST": {
+     "LS_A1": {
+      "refused_states": 9,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "NO_CHANGE"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE",
+       "ALL_CONTENT_UNIQUE|ROWS_3",
+       "ALL_CONTENT_UNIQUE|ROWS_4"
+      ],
+      "fires_as": [
+       "ADD_AND_DELETE+REUSES_CONTENT"
+      ],
+      "reading": "the atom declines to fire unless a precondition holds"
+     }
+    }
+   },
+   "genuinely_dependent": {
+    "GIT": {
+     "GIT_A1": {
+      "refused_states": 5,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "ADD_DUPLICATE+REUSES_CONTENT"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE|ROWS_2",
+       "ALL_CONTENT_UNIQUE|ROWS_3"
+      ],
+      "reading": "two different effects, both firing"
+     }
+    },
+    "GIT2": {
+     "G2_A1": {
+      "refused_states": 4,
+      "distinct_effects": 2,
+      "effects": [
+       "ADD_AND_DELETE+REUSES_CONTENT",
+       "ADD_DUPLICATE+REUSES_CONTENT"
+      ],
+      "keys_seen": [
+       "ALL_CONTENT_UNIQUE|ROWS_2",
+       "ALL_CONTENT_UNIQUE|ROWS_3"
+      ],
+      "reading": "two different effects, both firing"
+     }
+    }
+   }
+  }
+ }
+}
