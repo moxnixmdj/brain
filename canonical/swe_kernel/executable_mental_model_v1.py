@@ -1847,3 +1847,18 @@ class CrossModalPetriNet:
                 queue.append((nxt_marking, new_path))
         return None
 
+
+# ======================================================================================
+# MERGE NOTE -- two different modules shared this filename.
+#
+# This file implements the cross-modal mental model: environment facts, the relational
+# action store, and the cross-modal Petri net. A separate branch delivered a different
+# module under the same name: the executable IR simulator with abstract analysis and
+# CEGAR planning. Neither is a subset of the other -- they share ZERO definitions -- and
+# both are imported by real tests, so neither can be dropped.
+#
+# The simulator keeps its own file and its symbols are re-exported here, so a caller
+# written against either version finds what it asks for. Nothing is shadowed because the
+# two sets of names are disjoint.
+# ======================================================================================
+from canonical.swe_kernel.executable_simulator_mental_model_v1 import *  # noqa: F401,F403,E402

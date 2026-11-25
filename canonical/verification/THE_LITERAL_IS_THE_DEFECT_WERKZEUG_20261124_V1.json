@@ -1,0 +1,64 @@
+{
+ "schema": "THE_LITERAL_IS_THE_DEFECT_V1",
+ "repo": "werkzeug",
+ "commit": "d0f040a65b",
+ "module": "werkzeug.urls",
+ "relation": [
+  "",
+  ""
+ ],
+ "candidates": [
+  {
+   "refinement": "SAFE_SET_DROP_PLUS",
+   "edits": 1,
+   "result": {
+    "error": null,
+    "count": 0,
+    "witness": [],
+    "cases": 1,
+    "collateral": [
+     [
+      "a b",
+      true
+     ],
+     [
+      "plain",
+      true
+     ],
+     [
+      "a/b",
+      true
+     ]
+    ]
+   },
+   "moved": true,
+   "cleared": true
+  }
+ ],
+ "parent": {
+  "error": null,
+  "count": 1,
+  "witness": [
+   [
+    "1+2",
+    "/?v=1+2"
+   ]
+  ],
+  "cases": 1,
+  "collateral": [
+   [
+    "a b",
+    true
+   ],
+   [
+    "plain",
+    true
+   ],
+   [
+    "a/b",
+    true
+   ]
+  ]
+ },
+ "verdict": "LITERAL_REFINEMENT_CLEARS"
+}

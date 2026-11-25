@@ -1,0 +1,192 @@
+{
+ "action_id": "SIX_PASS_CAPABILITY_AUDIT_AND_THE_ZIPPER_V1_20261124_V1",
+ "action_intent_id": "SIX_PASS_CAPABILITY_AUDIT_AND_THE_ZIPPER_V1_20261124_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "action_summary": "Six passes of capability audit plus a no-model propagation loop. The audit answers one question with measured evidence: which capabilities exist, who executes each, and who wins. It corrected itself five times, each edition naming what the last got wrong. The zipper repaired a real 9-hop rename and cleared four corpus rows byte-identically.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/verification/SIXTH_PASS_MEASURING_THE_UNREVIEWED_20261125_V5.md",
+   "canonical/verification/FIFTH_PASS_THE_94_FILE_DELTA_20261125_V4.md",
+   "canonical/verification/EVERY_CAPABILITY_AGAINST_THE_FRONTIER_20261125_V2.md",
+   "canonical/verification/THE_BRANCH_CLAIMS_AUDITED_20261124_V1.md"
+  ],
+  "route_class": "REUSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+ "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+ "date": "2026-11-24",
+ "expected_parent_change": "canonical/verification/ gains audit documents; canonical/tools/ gains measured tools; canonical/tests/ gains pinned tests; identify_a_real_bugs_fix_v1.py gains a provenance guard.",
+ "expected_parent_frontier_change": "The capability inventory stops being a set of branch self-claims and becomes a measured census: 2238 runtime modules tiered into 1190 production-imported, 836 test-only and 212 orphan; 19 capability families each routed to a named executor; 595 public-runner verifications each checked for capability credit. The frontier verdict is stated per capability in the same row as the losing margin.",
+ "explicit_user_authorization": "Owner instruction this session, repeated four times, then 'merge all of your work.' The repetition is the authorization: earlier answers had sampled and the owner required a measured census, and required it landed in main.",
+ "falsification_condition": "FALSIFIED if any cited capability number rests on a branch self-claim rather than a receipt, or if any capability marked OWNED routes through a model or external service.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "TB_SCIENCE_GE_58_7",
+   "AUTOMATIONBENCH_GE_40"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/4",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": "1"
+ },
+ "measured_effect": "3.9% SWE-bench Verified vs 76.8% frontier; 2/89 blind real commits vs 0 baseline; 6/11 Terminal-Bench self-selected vs 82.7%; 0/10 global ASTRA predicates with 51/51 non-global; 0 of 595 public-runner verifications carry credit; 15 of 19 families route through an external model. Four corpus rows cleared byte-identically.",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "recursive_obs": {
+  "canonical_base_commit": "4dd33ced715d674eb53340928db1fc50905319b2",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "The 15-row comparison, superseded",
+   "The first census, corrected in place",
+   "Three fabricated receipts, excluded from citation"
+  ],
+  "expected_parent_level_state_change": "The capability inventory stops being a set of branch self-claims and becomes a measured census: 2238 runtime modules tiered into 1190 production-imported, 836 test-only and 212 orphan; 19 capability families each routed to a named executor; 595 public-runner verifications each checked for capability credit. The frontier verdict is stated per capability in the same row as the losing margin.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Deletion first was applied to the claim audit: fabricated receipts were deleted as admissible evidence instead of being substituted with a caveat.",
+   "intrinsic_or_path_specific": "Path specific: the blocker was that no measured census existed, not that measurement is impossible.",
+   "surviving_causal_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "Two prior answers were deleted: the 15-row comparison and the first census, because both had sampled and were wrong in named places.",
+   "existing_inherited_routes_checked": "The ledger, the 11 specs, the 19-family audit, astra closure JSONs, 321 missions and the 595 public-runner receipts were all read as existing routes.",
+   "external_existing_routes_checked": "Frontier numbers were taken from published harness results for SWE-bench Verified, Terminal-Bench 2.0, OSWorld-Verified, GAIA and HLE rather than re-measured.",
+   "surviving_gap": "No mechanism existed to produce a fix for a repository the system had never seen; the propagation loop fills only the narrow part of that gap that error text can express."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "Branch headline counts accepted as evidence.",
+    "Sampling a subset of refs and asserting completeness.",
+    "Citing a capability as owned without naming its executor."
+   ],
+   "real_outcome": "Answer which capabilities exist, who executes each, and who wins, from receipts rather than branch claims.",
+   "surviving_necessity": "No prior artifact enumerated executor routes per family, so the question could not be answered by reuse."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "The change-impact selector and the corpus runner were absorbed into the census as executors rather than counted separately.",
+   "downstream_work_to_delete_or_supersede": "The earlier 15-row answer and the first census are superseded by the later documents, which say so in their own text.",
+   "fresh_reuse_plan": "The tools and tests are committed so a later pass re-runs them instead of rebuilding them."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "The AST scan result is committed so the tiering need not be recomputed to be inspected.",
+   "search_stop_decision": "Search stops when the union of refs is bounded and read; the residual behavioural tier is named rather than chased, because covering behaviour is unbounded."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Re-running frontier harnesses was rejected as unaffordable and unnecessary, since the question is a comparison and the published numbers are the comparable line.",
+   "routes_ranked": [
+    "REUSE the existing ledger, specs and receipts, then fill only the missing executor column",
+    "SUBSTITUTE reasoning-by-assertion with an AST scan over every module in the tree",
+    "COMPOSE the frontier numbers from published harness results instead of re-running them",
+    "INTEGRATE a new propagation loop only for the narrow repair surface that error text can express"
+   ]
+  },
+  "obs_solution_ranked_note": "deletion-first order applied before any implementation was written",
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "The zipper is verified against real historical commits with the parent suite as oracle; no synthetic oracle was accepted for a solve claim."
+  },
+  "real_outcome": "A per-capability frontier verdict grounded in receipts, plus a no-model propagation loop that repairs real renames.",
+  "required_capability": "A measured census of every capability surface and its executor, with a frontier margin per capability.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "EVIDENCE_PRESERVATION: this action records measurements already made and spends nothing on a route, so there is no challenger route to discover before execution."
+  },
+  "routes_considered": [
+   "REUSE existing ledger and receipts",
+   "AST scan the whole tree",
+   "COMPOSE published frontier results",
+   "INTEGRATE a new propagation loop"
+  ],
+  "selected_surviving_route": "REUSE existing receipts, then AST-scan every module, then compose the frontier comparison from published harness results.",
+  "stop_condition": "STOP when every capability family has a named executor and a frontier verdict with its margin, when every branch in the union of refs has been read rather than sampled, and when the answer to whether these are all of them is a measured count with its residual tier stated instead of an assertion. Achieved: the residual is 836 test-only plus 212 orphan modules, named and counted, and full coverage is reported as structurally unavailable.",
+  "why_selected_route_is_fastest_sufficient": "It answers the question from artifacts already on disk and a published baseline, with no frontier spend, and it is falsifiable because every number carries a path."
+ },
+ "resolution": "SELECTED",
+ "route_id": "SIX_PASS_CAPABILITY_AUDIT_AND_THE_ZIPPER_V1_20261124_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "SIX_PASS_CAPABILITY_AUDIT_AND_THE_ZIPPER_V1_20261124_V1",
+ "stop_condition": "STOP when every capability family has a named executor and a frontier verdict with its margin, when every branch in the union of refs has been read rather than sampled, and when the answer to whether these are all of them is a measured count with its residual tier stated instead of an assertion. Achieved: the residual is 836 test-only plus 212 orphan modules, named and counted, and full coverage is reported as structurally unavailable.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "Each obligation is reachable from committed files: the census documents name the families and their executors, the leadger and 595 verification receipts ground the credit count at zero, and the runtime tiering is reproducible by AST scan over the committed tree.",
+  "target_truth_obligations": [
+   "NAME_EVERY_CAPABILITY_FAMILY_AND_ITS_EXECUTOR",
+   "STATE_EVERY_FRONTIER_WINNER_WITH_ITS_MARGIN",
+   "MEASURE_THE_RESIDUAL_TIER_INSTEAD_OF_ASSERTING_COVERAGE",
+   "SEPARATE_MEASURED_SANDBOX_FROM_REFEREE_SIGNED_PUBLIC_RUNNER_CREDIT"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does the census survive the same adversarial check it applies to the branch, namely that every number traces to a receipt and not to a self-claim?",
+   "falsifier_id": "FABRICATED_RECEIPT_AUDIT",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "Three fabricated receipts were found during the census itself and are named and excluded rather than cited, so no surviving claim in the census rests on one.",
+   "proposal_id": "SIX_PASS_CENSUS_BEATS_SINGLE_PASS_SELF_CLAIM"
+  }
+ }
+}

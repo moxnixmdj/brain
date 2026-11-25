@@ -1,0 +1,70 @@
+{
+ "schema": "THE_LITERAL_IS_THE_DEFECT_V1",
+ "repo": "packaging",
+ "commit": "ba17fcea23",
+ "module": "packaging.utils",
+ "relation": [
+  "is_normalized_name",
+  "canonicalize_name"
+ ],
+ "candidates": [
+  {
+   "refinement": "ALNUM_RUN_HYPHEN_JOIN",
+   "edits": 1,
+   "result": {
+    "error": null,
+    "count": 0,
+    "witness": [],
+    "cases": 54
+   },
+   "moved": true,
+   "cleared": true
+  },
+  {
+   "refinement": "DROP_NEGATIVE_LOOKAHEAD",
+   "edits": 1,
+   "result": {
+    "error": null,
+    "count": 4,
+    "witness": [
+     "a--a",
+     "a--1",
+     "1--a",
+     "1--1"
+    ],
+    "cases": 54
+   },
+   "moved": false,
+   "cleared": false
+  },
+  {
+   "refinement": "ADD_ANCHORS",
+   "edits": 2,
+   "result": {
+    "error": null,
+    "count": 4,
+    "witness": [
+     "a--a",
+     "a--1",
+     "1--a",
+     "1--1"
+    ],
+    "cases": 54
+   },
+   "moved": false,
+   "cleared": false
+  }
+ ],
+ "parent": {
+  "error": null,
+  "count": 4,
+  "witness": [
+   "a--a",
+   "a--1",
+   "1--a",
+   "1--1"
+  ],
+  "cases": 54
+ },
+ "verdict": "LITERAL_REFINEMENT_CLEARS"
+}
