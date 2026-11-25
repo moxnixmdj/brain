@@ -1,0 +1,766 @@
+{
+ "schema": "BRAIN_RAISE_THE_CONTRAST_DENSITY_V1",
+ "generated": "2026-11-25T01:11:23Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 41.59
+ },
+ "summary": {
+  "machines": 10,
+  "steps": 40,
+  "seeds": [
+   13,
+   42,
+   7
+  ],
+  "RANDOM": {
+   "transitions": 641,
+   "usable_laws": 4,
+   "density_per_100": 0.624,
+   "machines_with_any": 2
+  },
+  "TARGETED": {
+   "transitions": 295,
+   "usable_laws": 0,
+   "density_per_100": 0.0,
+   "machines_with_any": 0
+  },
+  "COVERAGE": {
+   "transitions": 609,
+   "usable_laws": 7,
+   "density_per_100": 1.149,
+   "machines_with_any": 3
+  },
+  "verdicts": {
+   "targeted_raises_density_over_random": false,
+   "targeted_raises_availability": false,
+   "coverage_raises_density_over_random": true,
+   "coverage_raises_availability": true,
+   "targeted_is_worse_than_random": true
+  }
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 7,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 17,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 15,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 6,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 3,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 13,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 14,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "ARCHIVE2",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 12,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 13,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 13,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 16,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 4,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 4,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 15,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 17,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "FILESYSTEM",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 16,
+   "usable_laws": 1,
+   "density_per_100": 6.25
+  },
+  {
+   "machine": "GIT",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 29,
+   "usable_laws": 1,
+   "density_per_100": 3.448
+  },
+  {
+   "machine": "GIT",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 28,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 16,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 22,
+   "usable_laws": 1,
+   "density_per_100": 4.545
+  },
+  {
+   "machine": "GIT",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 22,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 18,
+   "usable_laws": 1,
+   "density_per_100": 5.556
+  },
+  {
+   "machine": "GIT2",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 14,
+   "usable_laws": 1,
+   "density_per_100": 7.143
+  },
+  {
+   "machine": "GIT2",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 25,
+   "usable_laws": 1,
+   "density_per_100": 4.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 25,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 9,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 3,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 23,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 22,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "GIT2",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 27,
+   "usable_laws": 1,
+   "density_per_100": 3.704
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 37,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 40,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 39,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 22,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 31,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 38,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 38,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "JOURNAL",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 39,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 39,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 38,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 37,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 28,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 17,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 35,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "LIST",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 36,
+   "usable_laws": 4,
+   "density_per_100": 11.111
+  },
+  {
+   "machine": "LIST",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 34,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 14,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 15,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 9,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 8,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 7,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 7,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SCRAMBLED",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 13,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 19,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 29,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 38,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 6,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 3,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 21,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 23,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "SQLITE",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 25,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 7,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 17,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 15,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 6,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 3,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 13,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 14,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "TARBALL",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 12,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "RANDOM",
+   "seed": 13,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "RANDOM",
+   "seed": 42,
+   "transitions": 11,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "RANDOM",
+   "seed": 7,
+   "transitions": 9,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "TARGETED",
+   "seed": 13,
+   "transitions": 8,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "TARGETED",
+   "seed": 42,
+   "transitions": 7,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "TARGETED",
+   "seed": 7,
+   "transitions": 3,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "COVERAGE",
+   "seed": 13,
+   "transitions": 10,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "COVERAGE",
+   "seed": 42,
+   "transitions": 9,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  },
+  {
+   "machine": "VAULT",
+   "policy": "COVERAGE",
+   "seed": 7,
+   "transitions": 12,
+   "usable_laws": 0,
+   "density_per_100": 0.0
+  }
+ ]
+}
