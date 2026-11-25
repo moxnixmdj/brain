@@ -1,0 +1,296 @@
+{
+ "schema": "BRAIN_LEARN_THE_GUARD_V1",
+ "generated": "2026-11-25T03:26:14Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 50.9
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "FILESYSTEM",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 120,
+   "blocked_witnesses": 89,
+   "guards_learned": 13,
+   "guards_with_two_witnesses": 10,
+   "held_out": 55,
+   "A_no_guards": {
+    "predictions": 35,
+    "wrong": 22,
+    "refused": 20,
+    "accuracy": 0.614,
+    "coverage": 0.6364
+   },
+   "B_guards": {
+    "predictions": 35,
+    "wrong": 27,
+    "refused": 20,
+    "accuracy": 0.5645,
+    "coverage": 0.6364
+   },
+   "C_guards_strict": {
+    "predictions": 35,
+    "wrong": 25,
+    "refused": 20,
+    "accuracy": 0.5833,
+    "coverage": 0.6364
+   },
+   "D_guards_fallback_only": {
+    "predictions": 35,
+    "wrong": 22,
+    "refused": 20,
+    "accuracy": 0.614,
+    "coverage": 0.6364
+   }
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 120,
+   "blocked_witnesses": 78,
+   "guards_learned": 12,
+   "guards_with_two_witnesses": 11,
+   "held_out": 28,
+   "A_no_guards": {
+    "predictions": 18,
+    "wrong": 10,
+    "refused": 10,
+    "accuracy": 0.6429,
+    "coverage": 0.6429
+   },
+   "B_guards": {
+    "predictions": 18,
+    "wrong": 11,
+    "refused": 10,
+    "accuracy": 0.6207,
+    "coverage": 0.6429
+   },
+   "C_guards_strict": {
+    "predictions": 18,
+    "wrong": 11,
+    "refused": 10,
+    "accuracy": 0.6207,
+    "coverage": 0.6429
+   },
+   "D_guards_fallback_only": {
+    "predictions": 18,
+    "wrong": 10,
+    "refused": 10,
+    "accuracy": 0.6429,
+    "coverage": 0.6429
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 120,
+   "blocked_witnesses": 28,
+   "guards_learned": 1,
+   "guards_with_two_witnesses": 1,
+   "held_out": 16,
+   "A_no_guards": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   },
+   "B_guards": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   },
+   "C_guards_strict": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   },
+   "D_guards_fallback_only": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   }
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 120,
+   "blocked_witnesses": 31,
+   "guards_learned": 13,
+   "guards_with_two_witnesses": 6,
+   "held_out": 210,
+   "A_no_guards": {
+    "predictions": 149,
+    "wrong": 4,
+    "refused": 61,
+    "accuracy": 0.9739,
+    "coverage": 0.7095
+   },
+   "B_guards": {
+    "predictions": 149,
+    "wrong": 21,
+    "refused": 61,
+    "accuracy": 0.8765,
+    "coverage": 0.7095
+   },
+   "C_guards_strict": {
+    "predictions": 149,
+    "wrong": 4,
+    "refused": 61,
+    "accuracy": 0.9739,
+    "coverage": 0.7095
+   },
+   "D_guards_fallback_only": {
+    "predictions": 149,
+    "wrong": 4,
+    "refused": 61,
+    "accuracy": 0.9739,
+    "coverage": 0.7095
+   }
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 120,
+   "blocked_witnesses": 64,
+   "guards_learned": 4,
+   "guards_with_two_witnesses": 3,
+   "held_out": 4,
+   "A_no_guards": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "B_guards": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "C_guards_strict": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "D_guards_fallback_only": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "TARBALL",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 120,
+   "blocked_witnesses": 95,
+   "guards_learned": 7,
+   "guards_with_two_witnesses": 7,
+   "held_out": 12,
+   "A_no_guards": {
+    "predictions": 12,
+    "wrong": 6,
+    "refused": 0,
+    "accuracy": 0.6667,
+    "coverage": 1.0
+   },
+   "B_guards": {
+    "predictions": 12,
+    "wrong": 6,
+    "refused": 0,
+    "accuracy": 0.6667,
+    "coverage": 1.0
+   },
+   "C_guards_strict": {
+    "predictions": 12,
+    "wrong": 6,
+    "refused": 0,
+    "accuracy": 0.6667,
+    "coverage": 1.0
+   },
+   "D_guards_fallback_only": {
+    "predictions": 12,
+    "wrong": 6,
+    "refused": 0,
+    "accuracy": 0.6667,
+    "coverage": 1.0
+   }
+  }
+ ],
+ "summary": {
+  "machines": 6,
+  "skipped": [
+   "ARCHIVE2",
+   "FILESYSTEM",
+   "SQLITE",
+   "TARBALL"
+  ],
+  "blocked_witnesses": 385,
+  "guards_learned": 50,
+  "guards_with_two_witnesses": 38,
+  "held_out": 325,
+  "A_no_guards": {
+   "predictions": 227,
+   "wrong": 42,
+   "refused": 98,
+   "accuracy": 0.8439,
+   "coverage": 0.6985
+  },
+  "B_guards": {
+   "predictions": 227,
+   "wrong": 65,
+   "refused": 98,
+   "accuracy": 0.7774,
+   "coverage": 0.6985
+  },
+  "C_guards_strict": {
+   "predictions": 227,
+   "wrong": 46,
+   "refused": 98,
+   "accuracy": 0.8315,
+   "coverage": 0.6985
+  },
+  "D_guards_fallback_only": {
+   "predictions": 227,
+   "wrong": 42,
+   "refused": 98,
+   "accuracy": 0.8439,
+   "coverage": 0.6985
+  },
+  "verdicts": {
+   "guards_raise_coverage": false,
+   "guards_cost_no_accuracy": false,
+   "guards_do_not_trade_coverage_for_accuracy": false,
+   "a_guard_needs_two_witnesses": true,
+   "guards_used_only_as_a_fallback_cover_refusals": false,
+   "guards_used_only_as_a_fallback_cost_nothing": true,
+   "the_guard_and_the_law_cannot_share_a_key": true,
+   "the_walk_contains_blocked_witnesses": true
+  },
+  "note": "B uses every blocked witness as a guard; C requires two. If C is much better than B, a single no-op is noise; if they are equal, one blocked observation is enough."
+ }
+}
