@@ -177,6 +177,7 @@ jobs:
                   trace = json.loads(trace_path.read_text())
                   replay = json.loads(replay_path.read_text())
                   row['patch_bytes'] = patch.stat().st_size
+                  row['agent_status'] = trace.get('status')
                   if trace.get('patch_emitted') is not True or trace.get('external_harbor_vm_eval_status') != 'EXPERIMENTAL_DISPATCH__UNVERIFIED':
                       issues.append(f'{task}:producer_did_not_publish_patch')
                   if row['patch_bytes']:
@@ -189,9 +190,12 @@ jobs:
               verifier = dst.get('verifier_result')
               if not isinstance(verifier, dict) or not isinstance(verifier.get('rewards'), dict) or not verifier['rewards']:
                   issues.append(f'{task}:verifier_result_missing')
+              else:
+                  row['rewards'] = verifier.get('rewards')
           report = {'selected_count': len(ids), 'rows': rows, 'issues': issues,
                     'note': 'Artifact completeness only; no capability or benchmark success claim.'}
           (jobs / 'smoke_audit.json').write_text(json.dumps(report, indent=2) + '\n')
+          print(f"::warning title=HARBOR_SMOKE_AUDIT::{json.dumps(report, separators=(',', ':'))}")
           print(json.dumps(report, indent=2))
           if issues or len(ids) != int(__import__('os').environ['TASK_LIMIT']):
               sys.exit(1)
