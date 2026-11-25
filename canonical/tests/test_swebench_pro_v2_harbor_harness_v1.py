@@ -685,3 +685,48 @@ def test_the_guard_refusal_is_a_transport_failure_so_callers_already_handle_it()
         code, body = esac._http_json_request("http://example.invalid:80/spec.json", timeout_s=2.0)
     assert code == 0 and body["error"] == "unreachable", body
     assert len(attempts) == 1, "and the attempt is still counted, not swallowed"
+
+
+def test_the_engine_s_own_account_of_a_refusal_reaches_the_committed_report() -> None:
+    """`resolved` says nothing about why; the run must be plannable against, not just scored."""
+    diag = AG.engine_diagnosis(
+        {
+            "status": "FAIL_CLOSED",
+            "patch": {},
+            "epistemic_result": {
+                "modality": "swe_codebase",
+                "status": "NO_DEFECT_EVIDENCE",
+                "mode": "ALREADY_PASSING__NO_PATCH",
+                "gaps_queried": [f"gap-{i}" for i in range(30)],
+                "elapsed_ms": 1234.5,
+                "explanation": "x" * 500,
+            },
+        }
+    )
+    assert diag["mode"] == "ALREADY_PASSING__NO_PATCH"
+    assert diag["status"] == "NO_DEFECT_EVIDENCE"
+    assert diag["n_gaps_queried"] == 30 and len(diag["gaps_queried"]) == 8, "bounded, not truncated silently"
+    assert len(diag["explanation"]) <= 200
+    assert diag["patch_files"] == 0
+    # and a result that is not the kernel's shape still yields something, not a crash
+    assert AG.engine_diagnosis({"status": "PASS", "patch": {"a.py": "x"}}) == {
+        "status": "PASS",
+        "patch_files": 1,
+    }
+
+    ids = ["t0"]
+    with tempfile.TemporaryDirectory() as tmp:
+        td = pathlib.Path(tmp) / "jobs" / "j" / "t0__x"
+        (td / "agent").mkdir(parents=True)
+        (td / "result.json").write_text(
+            json.dumps({"task_name": "t0", "verifier_result": {"rewards": {"reward": 0.0}}}), encoding="utf-8"
+        )
+        (td / "agent" / "causal_engine_report.json").write_text(
+            json.dumps({"status": "NO_EDITS", "engine_result_status": "FAIL_CLOSED", "engine_diagnosis": diag}),
+            encoding="utf-8",
+        )
+        rep = CI.collect([pathlib.Path(tmp) / "jobs"], arm="causal", expected_ids=ids)
+        assert rep["tasks"]["t0"]["diagnosis"]["mode"] == "ALREADY_PASSING__NO_PATCH"
+        md = "\n".join(CI.to_markdown({"causal": rep}, benchmark="B", commit="c"))
+        assert "Why the trials ended the way they did" in md
+        assert "ALREADY_PASSING__NO_PATCH" in md and "gap-0" in md

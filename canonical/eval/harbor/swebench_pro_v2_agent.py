@@ -304,6 +304,35 @@ def apply_edits(tree: pathlib.Path, edits: Mapping[str, str], *, before: Mapping
     return written
 
 
+def engine_diagnosis(result: Any, *, max_items: int = 8) -> dict[str, Any]:
+    """What the engine says about WHY, shrunk to what a report can carry.
+
+    The benchmark's interesting column is not `resolved`; it is the reason a trial
+    produced no patch. The kernel reports that as `mode` / `status` / `gaps_queried`
+    inside `epistemic_result`, so it is copied out here — bounded, because a shard report
+    is committed to git and read by a human. A run whose refusals are undifferentiated is
+    a run that cannot be planned against.
+    """
+    inner = result.get("epistemic_result") if isinstance(result, dict) else None
+    src = inner if isinstance(inner, dict) else (result if isinstance(result, dict) else {})
+    out: dict[str, Any] = {}
+    for key in ("modality", "status", "mode", "reason", "explanation", "elapsed_ms"):
+        v = src.get(key)
+        if isinstance(v, str):
+            out[key] = v[:200]
+        elif v is not None and not isinstance(v, (list, dict)):
+            out[key] = v
+    for key in ("gaps_queried", "gaps", "unknowns"):
+        v = src.get(key)
+        if isinstance(v, (list, tuple, set, dict)):
+            items = list(v)[:max_items]
+            out[key] = [str(i)[:120] for i in items]
+            out[f"n_{key}"] = len(v)
+    if isinstance(result, dict):
+        out["patch_files"] = len(result.get("patch") or {})
+    return out
+
+
 def load_store(path: str | pathlib.Path | None) -> tuple[dict[str, Any], str]:
     """Load the external skill store. Returns (store, provenance_note).
 
@@ -405,6 +434,7 @@ def run_engine_on_tree(
 
     return {
         "engine_result_status": str((result or {}).get("status") or "UNKNOWN"),
+        "engine_diagnosis": engine_diagnosis(result if isinstance(result, Mapping) else {}),
         "engine_pass": bool((result or {}).get("pass")),
         "changed": diff,
         "edits_applied_by": applied_by,

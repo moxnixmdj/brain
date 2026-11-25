@@ -330,6 +330,7 @@ def collect(
                 "tree_changed": rep.get("tree_changed"),
                 "store_saved": rep.get("store_saved"),
                 "engine_notes": rep.get("notes") or [],
+                "diagnosis": rep.get("engine_diagnosis") or {},
                 "error": rep.get("error"),
                 "network_attempts": rep.get("network_attempts"),
                 "network_guard": rep.get("network_guard"),
@@ -567,6 +568,24 @@ def to_markdown(
             "characters. The resolve rate is therefore about those rows, not about the "
             "manifest, and the mismatch must be reconciled before any number is quoted: "
             + ", ".join(f"`{s}`" for s in stray[:8]),
+        ]
+    modes: dict[str, int] = {}
+    gap_terms: list[str] = []
+    for t in (causal.get("tasks") or {}).values():
+        diag = t.get("diagnosis") or {}
+        if diag.get("mode") or diag.get("reason"):
+            key = str(diag.get("mode") or diag.get("reason"))[:60]
+            modes[key] = modes.get(key, 0) + 1
+        for g in (diag.get("gaps_queried") or [])[:2]:
+            if g not in gap_terms:
+                gap_terms.append(str(g))
+    if modes:
+        lines += [
+            "",
+            "### Why the trials ended the way they did (engine's own account, not ours)",
+            "",
+            ", ".join(f"`{k}`×{v}" for k, v in sorted(modes.items(), key=lambda kv: -kv[1]))
+            + (". Gaps it went looking for: " + ", ".join(f"`{g}`" for g in gap_terms[:6]) if gap_terms else "."),
         ]
     tally = (causal.get("engine_statuses") or {}) if causal else {}
     if tally:
