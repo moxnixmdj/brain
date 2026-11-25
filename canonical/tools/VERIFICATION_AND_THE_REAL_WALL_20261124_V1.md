@@ -136,11 +136,20 @@ Then the shape census over those 70:
 | shape | count | share |
 |---|---:|---:|
 | **LARGE** (multi-hunk, >3 lines each side) | **55** | **79%** |
+
+> **CORRECTION (see `REQUIRED_REPAIR_SIZE_20261124_V1.md`).** This row measures the
+> **upstream diff**, not the required repair. Delta-debugging the patch itself gives
+> **median 2 statements touched** (35.8% touch exactly one) and **80.6% of repairs add
+> no statement at all**. The 79% figure is correct as a fact about what fix authors
+> wrote and wrong as a fact about what the tests require. Do not quote it without this
+> qualification.
 | SMALL_BLOCK (≤3 lines each side) | 7 | 10% |
 | ONE_LINE_REPLACE | 7 | 10% |
 | ONE_LINE_ADD | 1 | 1% |
 
-**79% of real fixes are multi-hunk and structural.** The largest is 99 lines
+**79% of upstream diffs are multi-hunk and structural** — but the *required* repair is
+median **2 statements** (`REQUIRED_REPAIR_SIZE_20261124_V1.md`). The line-count figure
+survives minimisation; the statement-count figure does not. The largest is 99 lines
 added and 49 removed.
 
 That is the finding that decides the plan. Every mechanism in the field — mine
