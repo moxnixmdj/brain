@@ -410,3 +410,90 @@ def _binding_lines(function: ast.AST) -> dict[str, list[int]]:
                 if item.optional_vars is not None:
                     note(item.optional_vars, node.lineno)
     return bound
+
+
+_NEUTRAL_FOR_NAME = {"str": '""', "bytes": 'b""', "list": "[]", "dict": "{}", "int": "0", "float": "0.0"}
+
+
+def totality_fallback_candidates(
+    root: pathlib.Path | str,
+    class_name: str,
+    method_name: str,
+) -> list[tuple[str, dict[str, bytes]]]:
+    """A method that gives up on `None` where its sibling does not: substitute a neutral, keep the record.
+
+    The `sibling_totality` law names the pair and the method. The edit is not invented: the method already
+    contains the expression that builds the record — it is simply skipped when one attribute is `None`. So the
+    repair is to stop returning early and to use a neutral value for that one attribute, and the neutral is
+    read from the attribute's name/type rather than guessed (`help` is a string, so `or ""`).
+
+    Measured on `click@05f6fd0^1`: `Argument.get_help_record` returned `None` when `self.help is None`, while
+    `Option.get_help_record` always produced a record, so positional arguments vanished from `--help`. The
+    generated edit drops the early return and writes `self.make_metavar(ctx), self.help or ""`.
+    """
+    base = pathlib.Path(root)
+    out: list[tuple[str, dict[str, bytes]]] = []
+    for path in _python_files(base):
+        source = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            tree = ast.parse(source)
+        except SyntaxError:
+            continue
+        lines = source.splitlines(keepends=True)
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.ClassDef) or node.name != class_name:
+                continue
+            for method in node.body:
+                if not isinstance(method, (ast.FunctionDef, ast.AsyncFunctionDef)) or method.name != method_name:
+                    continue
+                guard = None
+                for inner in ast.walk(method):
+                    if not isinstance(inner, ast.If):
+                        continue
+                    if len(inner.body) != 1 or not isinstance(inner.body[0], ast.Return):
+                        continue
+                    value = inner.body[0].value
+                    if not (isinstance(value, ast.Constant) and value.value is None):
+                        continue
+                    attributes = [n for n in ast.walk(inner.test) if isinstance(n, ast.Attribute)]
+                    if attributes:
+                        # The witness is an attribute, not a bare name: `if self.help is None` abandons the
+                        # record over `self.help`, and that is the value the neutral replaces.
+                        owner_src = ast.get_source_segment(source, attributes[0].value) or ""
+                        guard = (inner, f"{owner_src}.{attributes[0].attr}")
+                        break
+                if guard is None:
+                    continue
+                early_return, attribute_src = guard
+                delays = [r for r in ast.walk(method)
+                          if isinstance(r, ast.Return) and r is not early_return.body[0]
+                          and not (r.lineno == early_return.lineno)]
+                if not delays:
+                    continue
+                target = delays[-1]
+                expression = ast.get_source_segment(source, target.value) or ""
+                if not expression:
+                    continue
+                # Replace `<attr>` inside the record expression with `<attr> or <neutral>`.
+                if attribute_src not in expression:
+                    continue
+                neutral = _NEUTRAL_FOR_NAME.get("str", '""')
+                patched_expression = expression.replace(attribute_src, f"({attribute_src} or {neutral})")
+                start = sum(len(l) for l in lines[: early_return.lineno - 1]) + early_return.col_offset
+                end = sum(len(l) for l in lines[: (early_return.end_lineno or early_return.lineno) - 1]) + (
+                    early_return.end_col_offset or 0)
+                patched = source[:start] + source[end:]
+                old_return = ast.get_source_segment(source, target.value) or ""
+                new_return = patched_expression
+                idx = patched.find(old_return, start)
+                if idx < 0:
+                    continue
+                patched = patched[:idx] + new_return + patched[idx + len(old_return):]
+                try:
+                    ast.parse(patched)
+                except SyntaxError:
+                    continue
+                tag = (f"LAW_SIBLING_TOTALITY[{class_name}.{method_name}: drop the None early-return, "
+                       f"use ({attribute_src} or neutral)]")
+                out.append((tag, {path.relative_to(base).as_posix(): patched.encode("utf-8")}))
+    return out

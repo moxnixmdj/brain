@@ -64,6 +64,7 @@ LAWS = (
     "idempotence",                # normalize(normalize(x)) == normalize(x)
     "iterable_retyping",          # a generator is a list; a list without __reversed__ is still a list
     "content_retyping",           # a claim re-encoded by the parser's own inverse is still a claim
+    "sibling_totality",           # two overrides of one method name must agree on returning nothing
     "error_discipline",           # a malformed value raises through the library's own hierarchy
     "assert_validation",          # a public function must not validate arguments with `assert`
 )

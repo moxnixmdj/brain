@@ -1152,3 +1152,54 @@ library that builds its classes out of its own module functions). Test-present t
 the law library alone could not: an oracle for `click@05f6fd0` has to come from a mechanism that can *state* a
 postcondition the suite never checks (`typed_invention_v1` / `differential_witness_inversion_v1` are candidates), and
 `attrs` needs admission-time refusal rather than a law.
+
+## Round V21 — `click@05f6fd0`: the law is a disagreement between two overrides
+
+This was the standing "no law" item. Its defect (positional arguments without help text vanish from `--help`, while
+options are always listed) is invisible to every law so far, because nothing in the suite fails and no argument
+mutation changes it. It is visible from a different relation: **the module contradicts itself**.
+
+`Option.get_help_record()` always produces a record — a hidden option is the only exception, and that is explicit.
+`Argument.get_help_record()` returned `None` whenever `self.help is None`. Two overrides of one method name, in one
+module, disagreeing about whether the method can return nothing. That is the whole law:
+
+    sibling_totality: two classes that each define the same method must agree on whether it ever returns nothing.
+
+The observation is not a shape but behaviour: only *own* definitions count (an override is a decision; an inherited
+method is the same code), and the methods are called on instances **the suite itself built**, with required parameters
+filled from objects the suite itself built (`get_help_record(self, ctx)` gets a `Context` from the run). Three faults
+had to be fixed before it could see anything, all of them the same kind of blindness the earlier rounds kept finding:
+
+| fault | what it looked like |
+|---|---|
+| `from __future__ import annotations` | every annotation is a string, so `isinstance(annotation, type)` was false and a required `ctx: Context` matched nothing — zero observations |
+| a required parameter | the method was skipped rather than supplied; the suite already had dozens of `Context`s |
+| `eval_str=True` can raise `NameError` | annotations naming a symbol that is not importable at runtime (`CompletionItem`) aborted the whole probe; recorded now as `law_errors: NameError` rather than silence |
+
+| condition | result |
+|---|---|
+| law on `05f6fd0^1` | **1 violation**: `Argument.get_help_record / Option.get_help_record` |
+| law on the human fix | **0** |
+| candidate clears the law | **yes** |
+| the fix's tests, overlaid only after the patch was chosen | **889 passed** |
+| the buggy tree with the same tests | **1 failed** (`test_argument_get_help_record_never_none[None]`) |
+
+The repair is also read off the witness, not invented: the method already contains the expression that builds the
+record and abandons it over one attribute, so the edit drops the early `return None` and substitutes a neutral for that
+attribute — `self.make_metavar(ctx), (self.help or "")`. The attribute comes from the guard's own condition, and the
+neutral is fixed by the attribute's type.
+
+**Recorded honestly:** test-absent stream **6 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`,
+`more-itertools@cca32949f1`, `pyjwt@793a302`, `pluggy@8051a4d`, `click@05f6fd0`), **1 open**: `attrs@3b0378dd66`, which
+the observer cannot instrument at all (it builds its classes out of its own module functions, so wrapping them changes
+what it constructs — 5 tests fail with every law disabled, and the run is now reported as `perturbed`, not as clean).
+
+Re-checked after the new law and generator: `more-itertools` still fires `iterable_retyping` on the buggy tree only,
+`pyjwt` still fires `content_retyping` on the buggy tree only, `pluggy` still fires `assert_validation`, and no run is
+perturbed.
+
+**Next bottleneck.** `attrs` is the honest limit of this whole method: a library whose public classes are *built* by its
+own module functions cannot be wrapped, because the wrapper becomes part of the class. The remaining lever is to observe
+only the surface the module actually publishes (`__all__` / public names) and to re-attempt `attrs` under that
+restriction; if it still perturbs, the correct answer is admission-time refusal — a repository the method cannot watch
+should be refused when it is picked up, not reported as clean after a law run that changed the program.

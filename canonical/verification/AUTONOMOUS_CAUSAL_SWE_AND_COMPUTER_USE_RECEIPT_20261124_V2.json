@@ -488,6 +488,28 @@
   },
   "test_absent_stream": "5 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d), 2 open (click@05f6fd0 no law; attrs@3b0378dd66 unobservable)"
  },
+ "law_repair_v21": {
+  "click@05f6fd0": {
+   "candidate": "LAW_SIBLING_TOTALITY[Argument.get_help_record: drop the None early-return, use (self.help or neutral)]",
+   "defect": "Argument.get_help_record returns None when self.help is None, while Option.get_help_record always returns a record, so positional arguments vanish from --help",
+   "faults_fixed_before_it_could_see": [
+    "string annotations under `from __future__ import annotations` made the annotation match fail",
+    "a required parameter caused the method to be skipped instead of supplied from the suite's own objects",
+    "eval_str=True raising NameError aborted the probe (now recorded in law_errors, not silence)"
+   ],
+   "hidden_test_after_patch": {
+    "buggy_unpatched": "1 failed, 888 passed",
+    "candidate": "889 passed"
+   },
+   "law_on_buggy": "1 violation: Argument.get_help_record / Option.get_help_record",
+   "law_on_candidate": "silent",
+   "law_on_fixed": "0",
+   "new_law": "sibling_totality \u2014 two classes that each define the same method must agree on whether it ever returns nothing",
+   "observation": "own definitions only; methods called on instances the suite built, with required parameters supplied from objects the suite built"
+  },
+  "regressions_rechecked": "more-itertools/pyjwt/pluggy gates unchanged after the new law; no run perturbed",
+  "test_absent_stream": "6 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302, pluggy@8051a4d, click@05f6fd0), 1 open (attrs@3b0378dd66: cannot be instrumented)"
+ },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
   "generalized_vs_raw_traces": "now distinguishable: the skeleton-anchored delta is a generalized edit (applies to a held-out body), the whole-body morphism is a trace (0 proposals on its own witness)",
@@ -574,10 +596,10 @@
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
-  "canonical/swe_kernel/law_repair_synthesis_v1.py": "86f2438ddda4289425912bd4d9051f23473b53cceeef15a004667053a6d760ea",
+  "canonical/swe_kernel/law_repair_synthesis_v1.py": "56749ea6239e02721d8a4328c0347316d7daacac64a9eaac863e8ecf09c85844",
   "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
   "canonical/swe_kernel/metamorphic_oracle_v1.py": "af2261d69022b4a7470c5a05a3402109b0a6ecc9c58c895570be8ec8d64117a3",
-  "canonical/swe_kernel/metamorphic_plugin_v1.py": "a7854c13f77b72e2de6a14a8c90c0f5484105c1f036a79a7709ba96033163208",
+  "canonical/swe_kernel/metamorphic_plugin_v1.py": "f1d4aee4ea483f0e8add7fb3a5d9c191e8f69cbceae0c1ca41fdcc7e3828500b",
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,
@@ -602,6 +624,7 @@
    "lines": 932,
    "sha256": "10c48c5da2a850b541579273e08476018e5a4a1f3275e01981ce6fd997f29548"
   },
+  "canonical/tests/test_two_overrides_of_one_name_must_agree_on_returning_nothing_v1.py": "784c95f671ef7e08662d85c71a1626f7938ccf5174d1df7fd3c583f900f14fd9",
   "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "853e0b0418dad91fb5615190b1406a34e27fe887c805cacdf4a7559cb6c97fc1"
  },
  "new_mechanisms": [
@@ -738,7 +761,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "with one tree, test whether the merged engines can state a postcondition the suite never checks (click@05f6fd0 via typed_invention / differential_witness_inversion), and add admission-time refusal for metaprogramming libraries that cannot be instrumented (attrs).",
+ "next_bottleneck": "attrs is the limit of wrapping: observe only published names (__all__) and retry; if it still perturbs, refuse such a repository at admission time instead of reporting a clean tree.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,

@@ -514,10 +514,125 @@ def pytest_collection_finish(session) -> None:
     _sweep_aliases()
 
 
+_MISSING = object()
+
+
+def _signature(fn: Any) -> inspect.Signature:
+    """The signature with annotations resolved when possible, unevaluated otherwise."""
+    try:
+        return inspect.signature(fn, eval_str=True)
+    except Exception:
+        return inspect.signature(fn)
+
+
+def _supply(parameter: Any, pool: Sequence[Any]) -> Any:
+    """An object the suite itself built, suitable for one required parameter (or `_MISSING`)."""
+    annotation = parameter.annotation
+    if annotation is not parameter.empty and isinstance(annotation, type):
+        for obj in pool:
+            try:
+                if isinstance(obj, annotation):
+                    return obj
+            except TypeError:  # `typing.Any` and friends refuse isinstance
+                continue
+    for obj in pool:
+        if type(obj).__name__.lower() == str(parameter.name).lower():
+            return obj
+    return _MISSING
+
+
+def _sibling_totality(instances: list[Any]) -> None:
+    """Two classes that each define the same method must agree on whether it ever returns nothing.
+
+    A method name is a promise, and a promise made twice in one module has one meaning. `click` broke it:
+    `Option.get_help_record()` always returns a record (the option is listed in help even with no help text),
+    while `Argument.get_help_record()` returned `None` whenever `self.help is None`, so positional arguments
+    silently vanished from the help output. No test said that; the two implementations did, by disagreeing.
+
+    Only *own* definitions count — an override is a decision, an inherited method is the same code — and only
+    zero-argument methods on instances the suite actually built, so this observes behaviour rather than shapes.
+    """
+    by_module: dict[str, list[Any]] = {}
+    for obj in instances:
+        by_module.setdefault(type(obj).__module__, []).append(obj)
+    for objects in by_module.values():
+        by_class: dict[type, list[Any]] = {}
+        for obj in objects:
+            by_class.setdefault(type(obj), []).append(obj)
+        if len(by_class) < 2:
+            continue
+        own: dict[type, set[str]] = {}
+        for cls in by_class:
+            names: set[str] = set()
+            for name, value in vars(cls).items():
+                if name.startswith("_"):
+                    continue
+                fn = value.__func__ if isinstance(value, (staticmethod, classmethod)) else value
+                if not callable(fn):
+                    continue
+                try:
+                    # `eval_str=True`: under `from __future__ import annotations` every annotation is a
+                    # string, so `isinstance(annotation, type)` is false and a required `ctx: Context`
+                    # matches nothing. That alone made the probe blind to `click`. Resolution can name a
+                    # symbol that is not importable at runtime (`CompletionItem`), which is not a reason to
+                    # lose the method: fall back to the unevaluated signature.
+                    try:
+                        params = inspect.signature(fn, eval_str=True).parameters
+                    except Exception:
+                        params = inspect.signature(fn).parameters
+                except (TypeError, ValueError):
+                    continue
+                required = [p for p in list(params.values())[1:]
+                            if p.default is p.empty and p.kind in (p.POSITIONAL_ONLY, p.POSITIONAL_OR_KEYWORD)]
+                # A required parameter is not a reason to skip the method: the suite builds those objects
+                # too. `click`'s `get_help_record(self, ctx)` needs a `Context`, and the run already has
+                # dozens. Supply what the suite itself produced; if nothing matches, leave the method alone.
+                if required and not all(_supply(p_, objects) is not _MISSING for p_ in required):
+                    continue
+                names.add(name)
+            own[cls] = names
+        classes = list(by_class)
+        for i, first in enumerate(classes):
+            for second in classes[i + 1:]:
+                for name in sorted(own[first] & own[second]):
+                    results: dict[str, bool | None] = {}
+                    for cls in (first, second):
+                        for obj in by_class[cls][:3]:
+                            args = []
+                            try:
+                                for p_ in list(_signature(vars(cls).get(name) or getattr(cls, name)).parameters.values())[1:]:
+                                    if p_.kind not in (p_.POSITIONAL_ONLY, p_.POSITIONAL_OR_KEYWORD):
+                                        continue
+                                    if p_.default is not p_.empty:
+                                        break
+                                    args.append(_supply(p_, objects))
+                                produced = getattr(obj, name)(*args)
+                            except Exception:
+                                continue
+                            results[cls.__name__] = produced is not None
+                            if produced is not None:
+                                break
+                    if len(results) == 2 and len(set(results.values())) == 2:
+                        # The pair is named canonically, so the same disagreement observed with the instances
+                        # in either order is one row, not two.
+                        pair = " / ".join(sorted([f"{first.__name__}.{name}", f"{second.__name__}.{name}"]))
+                        _record({
+                            "law": "sibling_totality",
+                            "where": pair,
+                            "detail": ("one implementation always produces a value and the other returns None "
+                                       f"for the same method: {dict(sorted(results.items()))}"),
+                        })
+
+
 def pytest_runtest_teardown(item, nextitem) -> None:
     prefixes = [t.split(".")[0] for t in _TARGETS]
     live = [obj for obj in _INSTANCES if type(obj).__module__.split(".")[0] in prefixes]
     _INSTANCES[:] = []
+    if _want("sibling_totality") and _budget("sib:teardown", limit=200):
+        try:
+            _sibling_totality(live)
+        except Exception as exc:
+            _STATE["law_errors"].append(f"sibling_totality:{type(exc).__name__}:{str(exc)[:60]}")
     for obj in live:
         try:
             _probe(obj)
