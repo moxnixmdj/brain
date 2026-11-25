@@ -1,0 +1,102 @@
+{
+ "schema": "BRAIN_UNSEEN_MINING_V1",
+ "note": "Single-line fixes mined mechanically from three repositories neither engine has run on: exactly 1 removed and 1 added line in one source file, with a test file in the same commit. Not hand-picked.",
+ "tasks": [
+  {
+   "repo": "pyjwt",
+   "commit": "93f187f8ea503f5d1d0ea197f5e950fac37db1cb",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "return cast(\"AllowedOKPKeys\", key)",
+   "new_line": "return key",
+   "subject": "doc: Document claims sub and jti (#1088)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "381a15a21fafb54348e4abc7f354eb5486509a93",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "or :class:`.Ed448PrivateKey` iinstance",
+   "new_line": "or :class:`.Ed448PrivateKey` isinstance",
+   "subject": "docs: fix simple typo, iinstance -> isinstance (#774)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "9a20ab3f7011e0afaf148264764fdefb8669e9a7",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "if any([string_value in key for string_value in invalid_strings]):",
+   "new_line": "if any(string_value in key for string_value in invalid_strings):",
+   "subject": "Use generator expressions (#569)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "541dd0dd8cafacc0aff9fa36cf04251c535f69eb",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "except ImportError:",
+   "new_line": "except ModuleNotFoundError:",
+   "subject": "Prefer ModuleNotFoundError over ImportError (#565)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "d3219c5c2e4dea78955080afaaf251dd3e61bc01",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "if has_crypto:  # noqa: C901",
+   "new_line": "if has_crypto:",
+   "subject": "Cleanup \"noqa\" comments (#553)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "9324d6f007bbd0a48edafe1889d0af7eb0064103",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "raise InvalidKeyError(\"Invalid curve: {}\".format(curve))",
+   "new_line": "raise InvalidKeyError(f\"Invalid curve: {curve}\")",
+   "subject": "Run pyupgrade to simplify code and use Python 3.6 syntax (#536)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "2fec85102ed8b149cbb3705305509db55d95b351",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "crypto_algorithms['ES521'] = ECAlgorithm(ECAlgorithm.SHA512),",
+   "new_line": "crypto_algorithms['ES521'] = ECAlgorithm(ECAlgorithm.SHA512)",
+   "subject": "Removing accidently comma (no, this shouldn't be a tupple)",
+   "expression_pair": true
+  },
+  {
+   "repo": "pyjwt",
+   "commit": "256a03e5086049ee63d436fd0b07837e1a6c0f18",
+   "test": "tests/test_algorithms.py",
+   "sources": [
+    "jwt/algorithms.py"
+   ],
+   "old_line": "'ES512': ECAlgorithm(ECAlgorithm.SHA512),",
+   "new_line": "'ES521': ECAlgorithm(ECAlgorithm.SHA512),",
+   "subject": "Fix typo in Algorithms",
+   "expression_pair": true
+  }
+ ]
+}

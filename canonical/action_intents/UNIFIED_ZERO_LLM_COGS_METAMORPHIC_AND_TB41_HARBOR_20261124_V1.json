@@ -1,0 +1,190 @@
+{
+ "action_id": "UNIFIED_ZERO_LLM_COGS_METAMORPHIC_AND_TB41_HARBOR_20261124_V1",
+ "action_intent_id": "UNIFIED_ZERO_LLM_COGS_METAMORPHIC_AND_TB41_HARBOR_20261124_V1",
+ "action_kind": "EVIDENCE_PRESERVATION",
+ "action_summary": "Integrate and preserve verified zero-LLM SWE and Computer-Use repair engines plus measured historical OSS and air-gapped Docker Harbor receipts: Universal Semantic IR with O(1) bucket-indexed law store, Causal Obsegraph and live-frame Differential Witness Inversion, Metamorphic Witness Splitter (M1-M6) for 100% green parent commits, Codebase Type-Habitation and Guard-Separation Miner, Def-Use Relational Zipper, and official Terminal-Bench 4.1 (v4.1.0@4070d6cef56a) Harbor container smoke evaluation.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "CAUSAL_OBSEGRAPH_AND_UNIVERSAL_SEMANTIC_LAWS_20261124_V1.md",
+   "canonical/Immediate_Results/corpus45_blind_oss_before_after_20261124_v1.json",
+   "canonical/Immediate_Results/metamorphic_test_absent_oss_eval_20261124_v1.json",
+   "canonical/Immediate_Results/o1_bucket_law_store_scaling_ablation_20261124_v1.json"
+  ],
+  "route_class": "COMPOSE"
+ },
+ "benchmark_or_family_rank_authority": false,
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::ZERO_LLM_METAMORPHIC_HABITATION_ZIPPER_AND_O1_LAW_INDEX_20261124",
+ "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+ "date": "2026-11-24",
+ "expected_parent_change": "canonical/swe_kernel/ gains universal_semantic_ir_v1.py, causal_cegis_inventor_v1.py, differential_witness_inversion_v1.py, metamorphic_habitation_zipper_v1.py, repo_component_petri_v1.py, speculative_cow_petri_agent_v1.py, and cow_lens_fuzz_and_negative_space_v1.py; canonical/tests/ gains 4 regression and ablation suites; canonical/Immediate_Results/ gains verified historical OSS and Harbor evaluation receipts; .github/workflows/frontier_smoke_eval.yml upgrades Harbor smoke to official Terminal-Bench 4.1 (v4.1.0@4070d6cef56a).",
+ "expected_parent_frontier_change": "Zero-LLM repository repair moves from 0/45 on main to 16/45 (35.56%) across 7 real historical OSS repositories without source-diff leakage, abduces 4/4 failing metamorphic oracles on pure-parent (commit~1) green suites with 2/4 (50.0%) passing withheld upstream human suites, indexes SemanticCausalLawStore in O(1) structural buckets (1.04x latency ratio at 500 vs 10 laws), and executes air-gapped Docker Harbor trials on official Terminal-Bench 4.1.",
+ "explicit_user_authorization": "Owner instruction this session: 'merge all of your work' after full verification of the blind 45-commit OSS corpus, pure-parent metamorphic test-absent OSS kill gate, O(1) law-store scaling ablation, and live GitHub Actions Terminal-Bench 4.1 Harbor run.",
+ "falsification_condition": "FALSIFIED if any solver path invokes an LLM or external network endpoint, if removing a crystallized law via remove_law fails to revert recall hits, if O(1) bucket-indexed law matching scales linearly with law count, or if any reported historical OSS solve fails its upstream pytest suite.",
+ "governance_change": false,
+ "highest_leverage_now": true,
+ "incremental_spend_usd": 0,
+ "load_bearing_primary": {
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "TB_SCIENCE_GE_58_7",
+   "AUTOMATIONBENCH_GE_40"
+  ],
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/4",
+  "open_obligation_ids": [],
+  "scope_complete_discharge": false,
+  "success_probability_lcb": "1",
+  "wall_clock_cost_ub": "1"
+ },
+ "measured_effect": "Verified at $0.00 spend and 0 model calls: 16/45 (35.56%) across 7 repos on the 45-commit historical OSS blind corpus vs 0/45 on main; 2/4 (50.0%) held-out human-suite verified on pure-parent test-absent commits (4/4 failing metamorphic oracles abduced); 6/30 (20.0%) on packaging+tomli blind corpus; 4/4 (100%) on boltons+more-itertools with remove_law ablation; 2/13 (15.38%) on DaveGamble/cJSON under ASan+UBSan; 1.04x latency ratio from 10 to 500 laws; live GitHub Actions Harbor Run 45656880390 green on Terminal-Bench 4.1 (4070d6cef56a) + SWE-bench Pro (66f92766).",
+ "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "recursive_obs": {
+  "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "deleted_or_bypassed_paths": [
+   "Linear O(|L|) law scanning with repeated AST parsing replaced by single-parse O(1) structural bucket index",
+   "Standalone static-literal witness_inversion_v1 limitations bypassed via live-frame differential witness inversion without mutating the pinned file",
+   "Fabricated sibling branch 45/45 self-claim audited and rejected in favor of un-gated 45-commit execution"
+  ],
+  "expected_parent_level_state_change": "Zero-LLM repository repair moves from 0/45 on main to 16/45 (35.56%) across 7 real historical OSS repositories without source-diff leakage, abduces 4/4 failing metamorphic oracles on pure-parent (commit~1) green suites with 2/4 (50.0%) passing withheld upstream human suites, indexes SemanticCausalLawStore in O(1) structural buckets (1.04x latency ratio at 500 vs 10 laws), and executes air-gapped Docker Harbor trials on official Terminal-Bench 4.1.",
+  "obs_blocker": {
+   "delete_bypass_substitute_options": "Deleted linear law-store AST re-parsing and un-gated recall candidates; substituted static literal witness parsing with live-frame execution snapshots and algebraic metamorphic witness splitters.",
+   "intrinsic_or_path_specific": "Path specific: green parent suites lacked failing test witnesses until algebraic metamorphic laws (M1-M6) were probed against live module callables.",
+   "surviving_causal_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE"
+  },
+  "obs_capability": {
+   "capability_work_deleted": "Removed un-gated law-recall short-circuits and synthetic receiver domain false positives in CoW boundary fuzzing.",
+   "existing_inherited_routes_checked": "Audited witness_inversion_v1.py, perfect_algorithm_v1.py, harbor_container_solver_worker_v1.py, and all 15 sibling arena/*-brain branches.",
+   "external_existing_routes_checked": "Audited first-party harbor-framework/terminal-bench v4.1.0 (4070d6cef56a) and main (9f70ba7f49b1) JSON submissions and SWE-bench_Pro-os (66f92766).",
+   "surviving_gap": "Multi-file architectural synthesis (29/45 corpus45 commits) and arbitrary English feature specs without algebraic symmetries remain open blockers."
+  },
+  "obs_goal": {
+   "proxy_goals_deleted": [
+    "Synthetic micro-function self-benchmarks masquerading as real OSS commit repair",
+    "Oracle leakage from post-fix test diffs when claiming test-absent repair",
+    "Unverified branch claims accepted without inspecting git commits and receipts"
+   ],
+   "real_outcome": "Verified zero-LLM repair across real historical multi-repo OSS commits (both test-present and pure-parent test-absent), O(1) external law memory scaling, and air-gapped Docker Harbor execution on official Terminal-Bench 4.1.",
+   "surviving_necessity": "No module on main combined live-frame witness inversion, algebraic metamorphic oracle abduction on green commits, type-habitation guard mining, relational zipper propagation, and O(1) bucket-indexed U-IR law recall."
+  },
+  "obs_inherited_system": {
+   "adjacent_capabilities_absorbed": "Integrated differential_witness_inversion_v1, metamorphic_habitation_zipper_v1, cow_lens_fuzz_and_negative_space_v1, and universal_semantic_ir_v1 under CausalCEGISInventor and perfect_algorithm_v1.solve_causal_environment.",
+   "downstream_work_to_delete_or_supersede": "Upgraded .github/workflows/frontier_smoke_eval.yml from Terminal-Bench v4.0.0 to v4.1.0 (4070d6cef56a).",
+   "fresh_reuse_plan": "All engines, 140+ regression tests, and evaluation harnesses are committed under canonical/swe_kernel/, canonical/tests/, and canonical/tools/ for deterministic zero-spend reuse."
+  },
+  "obs_obs": {
+   "affected_layers_only_on_revalidation": true,
+   "analysis_steps_deleted_or_cached": "Single-parse AST caching and O(1) _bucket_index eliminate repeated AST parsing across candidate checks.",
+   "search_stop_decision": "Stop when all 45 blind OSS commits, 4 pure-parent test-absent OSS commits, 500-law scaling ablation, 140 core pytest tests, and live Terminal-Bench 4.1 GitHub Actions Docker run complete cleanly."
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "implementation_still_necessary": true,
+   "losing_routes_reason": "Pure static template enumeration without live call-frame snapshots or metamorphic splitters scored 0/30 on packaging+tomli and 0/4 on green parent commits.",
+   "routes_ranked": [
+    "DELETE linear AST re-parsing and un-gated recall",
+    "REUSE existing Harbor air-gapped Docker transport and pinned witness_inversion_v1 contracts",
+    "COMPOSE live-frame differential witness inversion, metamorphic splitters M1-M6, type-habitation guard mining, and relational zipper propagation",
+    "INTEGRATE O(1) bucket-indexed SemanticCausalLawStore into CausalCEGISInventor"
+   ]
+  },
+  "obs_solution_ranked_note": "deletion-first order applied before implementation",
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "Real upstream historical OSS repositories (11 repos, 45 commits + 4 pure-parent withheld-test commits + cJSON + packaging/tomli + boltons/more-itertools) and official Harbor Docker images were used for all headline measurements."
+  },
+  "real_outcome": "16/45 blind historical OSS commits solved, 2/4 pure-parent test-absent OSS commits verified against withheld human tests, 1.04x O(1) law matching at 500 laws, and green Terminal-Bench 4.1 Harbor CI.",
+  "required_capability": "Zero-LLM causal fault localization, metamorphic witness abduction, type-habitation synthesis, and O(1) external semantic law recall.",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "EVIDENCE_PRESERVATION: preserves completed zero-spend code, tests, and measured benchmark receipts on the branch for merge into main."
+  },
+  "routes_considered": [
+   "REUSE standalone witness_inversion_v1 only",
+   "COMPOSE live-frame differential witness inversion + metamorphic witness splitters + type-habitation miner + relational zipper + O(1) U-IR law index"
+  ],
+  "selected_surviving_route": "COMPOSE live-frame differential witness inversion, metamorphic witness splitters (M1-M6), codebase type-habitation & guard separation, relational zipper propagation, and O(1) bucket-indexed U-IR law recall.",
+  "stop_condition": "STOP when corpus45 blind OSS, pure-parent metamorphic OSS, O(1) 500-law scaling ablation, 140 core regression tests, unified-model 33/33 verification, and live Terminal-Bench 4.1 Harbor Docker smoke pass with zero integrity violations. Achieved.",
+  "why_selected_route_is_fastest_sufficient": "Executes entirely in local CPU memory and air-gapped Docker sandboxes at $0.00 spend with deterministic verification."
+ },
+ "resolution": "SELECTED",
+ "route_id": "UNIFIED_ZERO_LLM_COGS_METAMORPHIC_AND_TB41_HARBOR_20261124_V1",
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "UNIFIED_ZERO_LLM_COGS_METAMORPHIC_AND_TB41_HARBOR_20261124_V1",
+ "stop_condition": "STOP when corpus45 blind OSS, pure-parent metamorphic OSS, O(1) 500-law scaling ablation, 140 core regression tests, unified-model 33/33 verification, and live Terminal-Bench 4.1 Harbor Docker smoke pass with zero integrity violations. Achieved.",
+ "terminal_credit_delta": 0,
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "v22_prewrite_admission": {
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "currentness": {
+   "accepted_families": 5,
+   "meta_envelope_open_count": 8,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "terminal": false,
+   "total_open_truth_obligations": 30,
+   "unresolved_atomic": 22
+  },
+  "fresh_reality_authority": false,
+  "interface": "EXTERNAL_RESULT_OR_ACCESS",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "Every reported metric is reproducible from committed code and receipts in canonical/swe_kernel/, canonical/tests/, canonical/Immediate_Results/, and GitHub Actions Harbor Run 45656880390.",
+  "target_truth_obligations": [
+   "REPAIR_REAL_HISTORICAL_OSS_COMMITS_AT_ZERO_MODEL_CALLS",
+   "ABDUCE_FAILING_METAMORPHIC_ORACLES_ON_GREEN_PARENT_COMMITS",
+   "INDEX_EXTERNAL_SEMANTIC_LAWS_IN_O1_STRUCTURAL_BUCKETS",
+   "VERIFY_AIR_GAPPED_HARBOR_DOCKER_EXECUTION_ON_TERMINAL_BENCH_41"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "counterexample_receipts": [],
+   "decisive_question": "Does the unified zero-LLM solver repair unseen historical OSS commits (both test-present and pure-parent test-absent) and maintain constant-time law matching at 500 laws without model calls or source-diff leakage?",
+   "falsifier_id": "BLIND_HISTORICAL_OSS_AND_WITHHELD_HUMAN_SUITE_KILL_GATE",
+   "known_counterexamples_checked": true,
+   "no_known_counterexample_reason": "All 29/45 unsolved corpus45 commits and 2/4 unsolved held-out test-absent commits are recorded verbatim in the receipts as open structural blockers rather than hidden.",
+   "proposal_id": "UNIFIED_COGS_METAMORPHIC_HABITATION_ZIPPER_V1"
+  }
+ }
+}

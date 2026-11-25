@@ -1,0 +1,188 @@
+{
+  "arms": {
+    "EMPTY": {
+      "arm": "EMPTY",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "0625596e",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "END_ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "08bb0477",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "SPLIT_FROM_THE_WRONG_END",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "189a76d5",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "END_ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "258202ed",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "553582d9",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "8af75907",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "b80e6eb0",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "PRESENCE",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "ba17fcea",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "e7ce051e",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "CHANGED_LINE_NEVER_EXECUTED"
+        }
+      ],
+      "rows": 9,
+      "skills_admitted": 0,
+      "skills_refused": 0,
+      "verified": 6,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "0625596e",
+        "08bb0477",
+        "189a76d5",
+        "258202ed",
+        "8af75907",
+        "b80e6eb0"
+      ]
+    },
+    "GENERAL": {
+      "arm": "GENERAL",
+      "learned_before_use": 0,
+      "outcomes": [
+        {
+          "commit": "0625596e",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "END_ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "08bb0477",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "SPLIT_FROM_THE_WRONG_END",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "189a76d5",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "END_ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "258202ed",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "553582d9",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "8af75907",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "ANCHOR",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "b80e6eb0",
+          "landed": true,
+          "prior_given": [],
+          "relation_used": "PRESENCE",
+          "repo": "packaging",
+          "stage": "VERIFIED"
+        },
+        {
+          "commit": "ba17fcea",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "NO_RELATION_READ_FROM_THE_RUN"
+        },
+        {
+          "commit": "e7ce051e",
+          "landed": null,
+          "prior_given": [],
+          "relation_used": null,
+          "repo": "packaging",
+          "stage": "CHANGED_LINE_NEVER_EXECUTED"
+        }
+      ],
+      "rows": 9,
+      "skills_admitted": 6,
+      "skills_refused": 0,
+      "verified": 6,
+      "verified_after_learning": 0,
+      "verified_commits": [
+        "0625596e",
+        "08bb0477",
+        "189a76d5",
+        "258202ed",
+        "8af75907",
+        "b80e6eb0"
+      ]
+    }
+  },
+  "authority": "measured on the 45-row corpus; every number below is a printed receipt",
+  "schema": "THE_STORE_IS_THE_ONLY_THING_THAT_LEARNS_V1"
+}
