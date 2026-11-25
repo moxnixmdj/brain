@@ -1,64 +1,118 @@
 W=/home/runner/work/brain/brain/work-causal-0
 /home/runner/work/brain/brain/work-causal-0/jobs
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/artifacts
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/config.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/agent
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/verifier
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/lock.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/result.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/trial.log
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/artifacts
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/config.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/agent
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/verifier
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/lock.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/result.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/trial.log
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/job.log
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/artifacts
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/config.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/agent
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/verifier
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/lock.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/result.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/trial.log
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/trial.log
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/config.json
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/lock.json
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/artifacts
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/config.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/agent
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/verifier
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/lock.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/trial.log
 --- result.json files ---
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/result.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/result.json
-/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_gravitational__teleport__iGkLF2c/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_NodeBB__NodeBB-8168c6c4__ULUVfbx/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_element-hq__element-web__KAWH8Zb/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_ansible__ansible-d72025__W894Qwq/result.json
 /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.json
+/home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_protonmail__webclients__3aeuH4Q/result.json
 --- keys of the first result.json found ---
-## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__9UEuh2p/result.json
+## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_flipt-io__flipt-cd18e54__xnwoEmq/result.json
 ['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367'
-  trial_name= 'instance_qutebrowser__qutebrowse__9UEuh2p'
-  task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_qutebrowser__qutebrowser-3e21c8214a998cb1058defd15aabb24617a76402-v5fc38aaf22415ab0b70567368332beee7955b367'}
+  task_name= 'swebench-pro/instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1'
+  trial_name= 'instance_flipt-io__flipt-cd18e54__xnwoEmq'
+  task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_flipt-io__flipt-cd18e54a0371fa222304742c6312e9ac37ea86c1'}
   verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5rXHTe9/result.json
+## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__6uQn57d/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59'
+  trial_name= 'instance_internetarchive__openli__6uQn57d'
+  task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_internetarchive__openlibrary-0dc5b20fa186f9714f8a838178597e69f549d026-v2d9a6c849c60ed19fd0858ce9e40b7cc8e097e59'}
+  verifier_result= {"rewards": {"reward": 0.0}}
+## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_internetarchive__openli__RU7oiTz/result.json
+['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
+  task_name= 'swebench-pro/instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91'
+  trial_name= 'instance_internetarchive__openli__RU7oiTz'
+  task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_internetarchive__openlibrary-a48fd6ba9482c527602bc081491d9e8ae6e8226c-vfa6ff903cb27f336e17654595dd900fa943dcd91'}
+  verifier_result= {"rewards": {"reward": 0.0}}
+## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__vSJYWC4/result.json
 ['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
   task_name= 'swebench-pro/instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d'
-  trial_name= 'instance_qutebrowser__qutebrowse__5rXHTe9'
+  trial_name= 'instance_qutebrowser__qutebrowse__vSJYWC4'
   task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_qutebrowser__qutebrowser-deeb15d6f009b3ca0c3bd503a7cef07462bd16b4-v363c8a7e5ccdf6968fc7ab84a2053ac78036691d'}
   verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/instance_qutebrowser__qutebrowse__5LYKvvW/result.json
-['agent_execution', 'agent_info', 'agent_result', 'agent_setup', 'config', 'environment_setup', 'exception_info', 'finished_at', 'id', 'source', 'started_at', 'step_results', 'task_checksum', 'task_id', 'task_name', 'trial_name', 'trial_uri', 'verifier', 'verifier_environment_mode', 'verifier_result']
-  task_name= 'swebench-pro/instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171'
-  trial_name= 'instance_qutebrowser__qutebrowse__5LYKvvW'
-  task_id= {'path': '/home/runner/work/brain/brain/work-causal-0/tasks/instance_qutebrowser__qutebrowser-c09e1439f145c66ee3af574386e277dd2388d094-v2ef375ac784985212b1805e1d0431dc8f1b3c171'}
-  verifier_result= {"rewards": {"reward": 0.0}}
-## /home/runner/work/brain/brain/work-causal-0/jobs/swe-pro-v2-causal-s0/result.json
-['finished_at', 'id', 'n_total_trials', 'started_at', 'stats', 'updated_at']
-  task_name= None
-  trial_name= None
-  task_id= None
-  verifier_result= null
 --- manifest ids (first 3) ---
 Traceback (most recent call last):
   File "<string>", line 1, in <module>
