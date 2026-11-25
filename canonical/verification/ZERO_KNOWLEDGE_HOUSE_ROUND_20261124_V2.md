@@ -646,3 +646,61 @@ measurable here", not "the store works".
 
 This also sets the priority for the next stream, ahead of the positional delta: **a held-out-defect stream** — fix
 commit A, then present commit B's *failing trace only* and ask for the repair without its test file.
+
+## Round V13 — the oracle that cannot choose: a test the repository never wrote, and how far it reaches
+
+V10–V12 ended on one sentence: *every graded commit ships the test that specifies the repair*, so the store competes
+with a specification already in the prompt, and the ablations read null. That is "the oracle that cannot choose": on a
+task where the hidden test is not given and the visible suite is green, the engine has no selection gradient at all.
+
+This round builds an oracle out of the repository's own vocabulary — no model, no sight of the hidden test.
+
+**The law.** A method's name is a promise about observable state: a *remove-verb* mutator (`unregister`, `remove`,
+`discard`, `delete`, `detach`, `pop`, `purge`, …) called with `x` must make `x` disappear from every zero-argument
+getter on the same object. The suite is then used only as a source of live objects — never as the oracle.
+
+**Two failed attempts, both informative:**
+
+1. *Observation only.* Wrap the mutators, check the law around every call the passing suite makes. Result on
+   `pluggy@50585e0^1`: 332 mutator calls observed, **0** remove-law violations, and `unregister` never called at all —
+   because the only caller of `unregister` in that repository is the hidden test. You cannot observe a call that is
+   never made.
+2. *Weak instance registry.* Probing at teardown over weak references missed exactly the objects that matter (a
+   test-local registry is unreachable by teardown). Strong references fixed it; the synthetic test caught this, not
+   the real repos.
+
+**The version that works** prods instead of watching: at each test's teardown the getters are read, an element is
+taken out of them, and the remove-verb is *called with that element*; the law then says it must vanish. Two
+implementation details cost a round each and are recorded because they will bite again: a wrapper must carry
+`__wrapped__` or `inspect.signature` sees `(*a, **k)` and the arity filter silently drops every method; and
+`unregister(self, plugin=None, name=None)` is a one-argument mutator with *two* defaulted parameters, so "exactly one
+required parameter" hid it completely.
+
+**Measured across six real commits, hidden test absent from both trees** (buggy = `sha^1`, fixed = `sha^1` + the
+commit's non-test diff, same passing suite in both):
+
+| commit | probes | violations buggy | violations fixed | discriminates |
+|---|---|---|---|---|
+| `pluggy@50585e0` | 93 | **2** (`PluginManager.unregister` → `list_plugin_distinfo`, `list_plugin_distributions`) | **0** | **yes** |
+| `pluggy@8051a4d` | 91 | 2 | 2 | no — the violation is real but belongs to the *later* commit (same stale container), so the oracle cannot attribute it to this fix |
+| `click@05f6fd0` | 0 | 0 | 0 | no applicable vocabulary |
+| `werkzeug@051fd663` | 0 | 0 | 0 | no applicable vocabulary |
+| `pyjwt@793a302` | 0 | 0 | 0 | no applicable vocabulary |
+| `more-itertools@cca32949f1` | 0 | 0 | 0 | no applicable vocabulary |
+| `attrs@3b0378dd66` | 0 | 0 | 0 | no applicable vocabulary |
+
+So: **precision 1/1 where it fires, coverage 1/6.** Zero false accusations on the one commit it was pointed at, and
+silence — not noise — on the five algorithmic defects whose vocabulary (encoders, parsers, iterators) contains no
+lifecycle verb at all.
+
+**What this is not.** It is not yet wired into the repair engine: it reports violations, it does not yet feed them to
+`semantic_causal_engine_v1` as synthesized failing assertions. Claiming a repair-rate improvement from this round would
+be exactly the dishonesty §9.5 warns about. The tests freeze the two behaviours that exist —
+`canonical/tests/test_metamorphic_oracle_v1.py`: fires on a mutator that leaves the object behind (with the shipped
+suite green), silent once the mutator purges, and name-only vocabulary classification.
+
+**Next bottleneck.** Law *coverage*, not law count: an oracle library indexed by defect class (lifecycle, round-trip
+inverse, idempotence, aliasing, boundary) where each law names the observable it constrains, plus the wiring that turns
+a violation into a candidate assertion for the existing engine. The acceptance test is stated before the build: on the
+same six commits with the hidden test deleted, at least three must produce a violation on the buggy tree and none on
+the fixed tree.

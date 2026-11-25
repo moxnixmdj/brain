@@ -305,6 +305,59 @@
   "learn_pluggy@8051a4d": "REPAIRED 1 cand 6.46 s (1 morphism + 1 delta)",
   "result": "the delta never fired: anchors are witness-neighbour properties, so the edit is function-specific; priority fixed the cap but not the transfer"
  },
+ "metamorphic_oracle_v13": {
+  "blind_setup": "buggy = sha^1, fixed = sha^1 + non-test diff; the hidden test is absent from both trees",
+  "coverage": "1/6 commits; the five silent commits have no lifecycle verb in their vocabulary (encoders, parsers, iterators)",
+  "law": "a remove-verb mutator called with x must make x vanish from every zero-argument getter on the same object",
+  "not_claimed": "not wired into the repair engine; violations are reported, not yet fed back as candidate assertions",
+  "precision": "1/1 where the law fires (no false accusation on the fixed tree)",
+  "results": {
+   "attrs@3b0378dd66": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "probes": 0
+   },
+   "click@05f6fd0": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "probes": 0
+   },
+   "more-itertools@cca32949f1": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "probes": 0
+   },
+   "pluggy@50585e0": {
+    "buggy": 2,
+    "discriminates": true,
+    "fixed": 0,
+    "probes": 93
+   },
+   "pluggy@8051a4d": {
+    "buggy": 2,
+    "discriminates": false,
+    "fixed": 2,
+    "probes": 91,
+    "why": "real violation, but it belongs to a later commit (same stale container); the oracle cannot attribute a law violation to the commit that fixes it"
+   },
+   "pyjwt@793a302": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "probes": 0
+   },
+   "werkzeug@051fd663": {
+    "buggy": 0,
+    "discriminates": false,
+    "fixed": 0,
+    "probes": 0
+   }
+  },
+  "tests": "canonical/tests/test_metamorphic_oracle_v1.py, 3 passed"
+ },
  "modules": {
   "canonical/runtime/causal_computer_use_agent_v1.py": {
    "lines": 578,
@@ -317,6 +370,10 @@
   "canonical/swe_kernel/executable_mental_model_v1.py": {
    "lines": 1849,
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
+  },
+  "canonical/swe_kernel/metamorphic_oracle_v1.py": {
+   "purpose": "manufacture a failing assertion from the repository's own name/effect vocabulary; no model, no hidden test",
+   "sha256": "3600755dfde982faefa23be9ddc982f9579df388504f4f413205d65cc7691716"
   },
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
@@ -467,7 +524,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Positional delta: 'insert this guard at the top of a body whose first informative statement calls the same callee as the witness's' -- anchored on a property of the defect class, not on the one function fixed first. Acceptance test written first: learn on pluggy@8051a4d, then propose on pluggy@50585e0's unregister without being told the function name.",
+ "next_bottleneck": "Oracle law coverage, indexed by defect class: lifecycle (done), round-trip inverse, idempotence, aliasing, boundary - each naming the observable it constrains - plus the wiring that turns a violation into a candidate assertion for semantic_causal_engine_v1. Acceptance test stated in advance: on the same six commits with the hidden test deleted, at least three must violate on the buggy tree and be silent on the fixed tree.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
