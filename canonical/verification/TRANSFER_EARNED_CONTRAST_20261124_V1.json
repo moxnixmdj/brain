@@ -1,0 +1,3286 @@
+{
+ "schema": "BRAIN_TRANSFER_EARNED_CONTRAST_V1",
+ "generated": "2026-11-25T13:35:37Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 5.6
+ },
+ "summary": {
+  "witness_pair": [
+   "",
+   "a"
+  ],
+  "modules_probed": 55,
+  "functions_labelled": 417,
+  "raised_rate": 0.1127,
+  "cross_module_pairs": 7522,
+  "observed_agreement": 0.6304,
+  "null_agreement_mean": 0.6253,
+  "null_agreement_sd": 0.0087,
+  "gap_over_null": 0.0051,
+  "gap_in_null_sds": 0.59,
+  "sensitivity_to_the_rare_class": 0.8136,
+  "per_module": {
+   "a_name_gets_its_value_from_the_run_v1": {
+    "functions": 4,
+    "raised": 1
+   },
+   "action_replay_under_change_v1": {
+    "functions": 9,
+    "raised": 1
+   },
+   "argument_construction_v1": {
+    "functions": 8,
+    "raised": 1
+   },
+   "capability_law_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "case_witness_v1": {
+    "functions": 8,
+    "raised": 1
+   },
+   "causal_dependency_repair_v1": {
+    "functions": 4,
+    "raised": 1
+   },
+   "change_shape_census_v1": {
+    "functions": 3,
+    "raised": 1
+   },
+   "checkability_by_differential_pin_v1": {
+    "functions": 8,
+    "raised": 0
+   },
+   "computer_use_agent_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "computer_use_check_density_v1": {
+    "functions": 1,
+    "raised": 0
+   },
+   "demonstration_sufficiency_v1": {
+    "functions": 8,
+    "raised": 1
+   },
+   "distinguishing_projection_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "environment_basis_v1": {
+    "functions": 4,
+    "raised": 1
+   },
+   "every_call_site_v1": {
+    "functions": 4,
+    "raised": 0
+   },
+   "history_induced_edit_grammar_v1": {
+    "functions": 12,
+    "raised": 4
+   },
+   "instruction_contract_for_code_v1": {
+    "functions": 9,
+    "raised": 0
+   },
+   "learned_skill_verdict_v1": {
+    "functions": 23,
+    "raised": 0
+   },
+   "one_demonstration_basin_v1": {
+    "functions": 13,
+    "raised": 0
+   },
+   "one_demonstration_identifies_v1": {
+    "functions": 8,
+    "raised": 1
+   },
+   "one_demonstration_reach_v1": {
+    "functions": 11,
+    "raised": 0
+   },
+   "operand_invention_v1": {
+    "functions": 16,
+    "raised": 1
+   },
+   "operator_semantics_v1": {
+    "functions": 6,
+    "raised": 0
+   },
+   "oracle_density_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "passing_repairs_version_space_v1": {
+    "functions": 4,
+    "raised": 2
+   },
+   "pins_from_the_reverted_part_v1": {
+    "functions": 7,
+    "raised": 2
+   },
+   "predictive_contract_v1": {
+    "functions": 7,
+    "raised": 0
+   },
+   "reach_of_the_grammar_v1": {
+    "functions": 8,
+    "raised": 3
+   },
+   "reach_the_changed_site_v1": {
+    "functions": 4,
+    "raised": 1
+   },
+   "real_commit_repair_v1": {
+    "functions": 9,
+    "raised": 3
+   },
+   "renewable_action_v1": {
+    "functions": 10,
+    "raised": 2
+   },
+   "scenario_observation_v1": {
+    "functions": 7,
+    "raised": 1
+   },
+   "site_by_intervention_v1": {
+    "functions": 6,
+    "raised": 1
+   },
+   "skill_precondition_presence_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "skill_recheck_v1": {
+    "functions": 5,
+    "raised": 0
+   },
+   "skill_recurrence_curve_v1": {
+    "functions": 2,
+    "raised": 0
+   },
+   "skill_scope_acquisition_v1": {
+    "functions": 9,
+    "raised": 2
+   },
+   "skill_scope_ledger_v1": {
+    "functions": 7,
+    "raised": 2
+   },
+   "skill_sequence_verify_v1": {
+    "functions": 2,
+    "raised": 0
+   },
+   "standing_facts_v1": {
+    "functions": 6,
+    "raised": 3
+   },
+   "structural_check_of_real_changes_v1": {
+    "functions": 7,
+    "raised": 0
+   },
+   "swe_self_improvement_bridge_v1": {
+    "functions": 3,
+    "raised": 0
+   },
+   "systematic_edit_supply_v1": {
+    "functions": 9,
+    "raised": 1
+   },
+   "test_suite_admission_v1": {
+    "functions": 5,
+    "raised": 0
+   },
+   "the_callers_were_never_asked_v1": {
+    "functions": 8,
+    "raised": 1
+   },
+   "the_environment_broker_v1": {
+    "functions": 36,
+    "raised": 0
+   },
+   "the_operation_is_the_missing_dimension_v1": {
+    "functions": 7,
+    "raised": 2
+   },
+   "the_premise_is_the_sense_v1": {
+    "functions": 11,
+    "raised": 1
+   },
+   "the_refuse_share_v1": {
+    "functions": 6,
+    "raised": 0
+   },
+   "the_repository_is_the_seed_corpus_v1": {
+    "functions": 8,
+    "raised": 2
+   },
+   "the_smallest_question_that_makes_this_checkable_v1": {
+    "functions": 7,
+    "raised": 1
+   },
+   "verified_lesson_pipeline_v1": {
+    "functions": 5,
+    "raised": 1
+   },
+   "vocabulary_growth_v1": {
+    "functions": 12,
+    "raised": 0
+   },
+   "what_the_condition_wants_v1": {
+    "functions": 5,
+    "raised": 1
+   },
+   "what_the_verifier_actually_pins_v1": {
+    "functions": 7,
+    "raised": 1
+   },
+   "witness_inversion_v1": {
+    "functions": 14,
+    "raised": 0
+   }
+  },
+  "verdicts": {
+   "agreement_is_above_chance": false,
+   "the_effect_is_idiosyncratic_to_the_function": true,
+   "there_is_enough_rare_class_to_measure": true,
+   "single_experience_transfer_exists": false
+  },
+  "reading": "Single-experience transfer does not exist for this knowledge, and the measurement is large enough to say so. 417 functions across 55 import-safe modules, all probed with one fixed witness pair, 7,522 cross-module pairs: observed agreement 0.6304 against a within-module-permuted null of 0.6253 +- 0.0087, a gap of +0.0051 (0.59 sigma). Knowing what a contrast did to one function therefore tells you almost nothing about another: the agreement that looks real is the label mix, since most functions return a value and never raise. This closes the line V26 opened. Entries are earned, they bind (V27), they cannot predict by shape (V28) and they do not transfer across modules (here)."
+ },
+ "per_function": {
+  "a_name_gets_its_value_from_the_run_v1": [
+   {
+    "module": "a_name_gets_its_value_from_the_run_v1",
+    "name": "blocked_sites",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "a_name_gets_its_value_from_the_run_v1",
+    "name": "convert",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "a_name_gets_its_value_from_the_run_v1",
+    "name": "run",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "a_name_gets_its_value_from_the_run_v1",
+    "name": "witness",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "action_replay_under_change_v1": [
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "apply_skill",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "edit_landed",
+    "kind": "NONE",
+    "effect": "RETURNED:False",
+    "arity": 3
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "eligible_sites",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "first_changed_index",
+    "kind": "VALUE",
+    "effect": "RETURNED:None -> RETURNED:0",
+    "arity": 2
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "measure_pair",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "plan_of",
+    "kind": "VALUE",
+    "effect": "RETURNED:[] -> RETURNED:[(0, 1, [])]",
+    "arity": 2
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "replay_plan",
+    "kind": "RAISED",
+    "effect": "RETURNED:'' -> RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "action_replay_under_change_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "argument_construction_v1": [
+   {
+    "module": "argument_construction_v1",
+    "name": "construct",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "isinstance0",
+    "kind": "NONE",
+    "effect": "RETURNED:False",
+    "arity": 1
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RETURNED:{'schema': 'BRAIN_ARGUMENT_CONSTRUCTION_V1', 'authority': 'NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT', 'model_calls': 0, 'network_calls': 0, 'incremental_spend_usd': 0, 'repos': [], 'totals': {'",
+    "arity": 3
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "measure_repo",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "mined_vectors",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "module_constants",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "observe",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "argument_construction_v1",
+    "name": "summarise",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'totals': {'callables': 0, 'ALREADY_OBSERVABLE_IN_ROUND_6': 0, 'BECAME_OBSERVABLE': 0, 'REFUSED__NO_MINEABLE_CALL_SITE': 0, 'REFUSED__EVERY_CALL_SITE_IS_UNENCODABLE': 0, 'REFUSED__MINED_BUT_",
+    "arity": 1
+   }
+  ],
+  "capability_law_v1": [
+   {
+    "module": "capability_law_v1",
+    "name": "compose",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "capability_law_v1",
+    "name": "pins_from",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "capability_law_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "case_witness_v1": [
+   {
+    "module": "case_witness_v1",
+    "name": "capture",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "collect_cases",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_CASE_WITNESS_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 'states'",
+    "arity": 2
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "partition",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "sibling_cases",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "sites_in",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "case_witness_v1",
+    "name": "solve_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "causal_dependency_repair_v1": [
+   {
+    "module": "causal_dependency_repair_v1",
+    "name": "read_set_argv",
+    "kind": "RAISED",
+    "effect": "RETURNED:set() -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "causal_dependency_repair_v1",
+    "name": "read_set_intervention",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "causal_dependency_repair_v1",
+    "name": "run_chain",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'NotADirectoryError'",
+    "arity": 4
+   },
+   {
+    "module": "causal_dependency_repair_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "change_shape_census_v1": [
+   {
+    "module": "change_shape_census_v1",
+    "name": "census",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_CHANGE_SHAPE_CENSUS_V1', 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'sites': 0, 'shapes': {},",
+    "arity": 1
+   },
+   {
+    "module": "change_shape_census_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "change_shape_census_v1",
+    "name": "shape_of",
+    "kind": "VALUE",
+    "effect": "RETURNED:'STRUCTURAL_OTHER' -> RETURNED:'VALUE_OR_OPERATOR_SUBSTITUTION'",
+    "arity": 2
+   }
+  ],
+  "checkability_by_differential_pin_v1": [
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "commits_touching_sources",
+    "kind": "VALUE",
+    "effect": "RAISED:'FileNotFoundError' -> RAISED:'NotADirectoryError'",
+    "arity": 3
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "doctest_checkability",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "measure",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "module_literals",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "pins_for_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "probe",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "public_callables",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "checkability_by_differential_pin_v1",
+    "name": "run_corpus",
+    "kind": "NONE",
+    "effect": "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'probed': 0, 'checkable': 0, 'pins': 0}, 'commits': []}",
+    "arity": 4
+   }
+  ],
+  "computer_use_agent_v1": [
+   {
+    "module": "computer_use_agent_v1",
+    "name": "admit_before_persist",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 7
+   },
+   {
+    "module": "computer_use_agent_v1",
+    "name": "connect_instant_knowledge",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'goal': '', 'model_calls': 0, 'network_calls': 0, 'knowledge_source': 'unified_model_index__read_from_disk_at_query_time', 'recall': [], 'environment_terms': []} -> RETURNED:{'goal': 'a', 'm",
+    "arity": 4
+   },
+   {
+    "module": "computer_use_agent_v1",
+    "name": "synthesize_state_key",
+    "kind": "VALUE",
+    "effect": "RAISED:'FileNotFoundError' -> RAISED:'NotADirectoryError'",
+    "arity": 3
+   }
+  ],
+  "computer_use_check_density_v1": [
+   {
+    "module": "computer_use_check_density_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "demonstration_sufficiency_v1": [
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "apply",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "decide",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "experiment_table",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "observe",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "signature",
+    "kind": "RAISED",
+    "effect": "RETURNED:'' -> RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "space",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "sufficiency",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "demonstration_sufficiency_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "distinguishing_projection_v1": [
+   {
+    "module": "distinguishing_projection_v1",
+    "name": "combine",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "distinguishing_projection_v1",
+    "name": "project",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "distinguishing_projection_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "environment_basis_v1": [
+   {
+    "module": "environment_basis_v1",
+    "name": "environment_terms",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "environment_basis_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "environment_basis_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_ENVIRONMENT_BASIS_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 'st",
+    "arity": 2
+   },
+   {
+    "module": "environment_basis_v1",
+    "name": "repair_with_basis",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "every_call_site_v1": [
+   {
+    "module": "every_call_site_v1",
+    "name": "defined_functions",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "every_call_site_v1",
+    "name": "mine",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "every_call_site_v1",
+    "name": "module_tree",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "every_call_site_v1",
+    "name": "parameter_types",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   }
+  ],
+  "history_induced_edit_grammar_v1": [
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "enclosing_function",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "induce_grammar",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "load_corpus",
+    "kind": "RAISED",
+    "effect": "RAISED:'IsADirectoryError' -> RETURNED:(None, {})",
+    "arity": 1
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "localized_candidates",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_HISTORY_INDUCED_EDIT_GRAMMAR_V1', 'rows': [], 'totals': {'tasks': 0, 'states': {}, 'solved': 0, 'solved_fraction': 0.0, 'oracle_fires': 0, 'oracle_fires_fraction': 0.0, 'tri",
+    "arity": 3
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "run_test",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "solve_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "summarise",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_HISTORY_INDUCED_EDIT_GRAMMAR_V1', 'rows': [], 'totals': {'tasks': 0, 'states': {}, 'solved': 0, 'solved_fraction': 0.0, 'oracle_fires': 0, 'oracle_fires_fraction': 0.0, 'tri",
+    "arity": 1
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "template_fires_at",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "traceback_site",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 2
+   },
+   {
+    "module": "history_induced_edit_grammar_v1",
+    "name": "try_candidate",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   }
+  ],
+  "instruction_contract_for_code_v1": [
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "compile_contract",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'instruction': '', 'module': '', 'clauses': [], 'refusals': [{'refusal': 'REFUSED__NO_VALUE_IN_THE_INSTRUCTION', 'why': 'the sentence names nothing checkable'}]} -> RETURNED:{'instruction': ",
+    "arity": 3
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "direction_of",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "ground",
+    "kind": "NONE",
+    "effect": "RETURNED:{'grounded': False, 'refusal': 'REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT'}",
+    "arity": 2
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "ground_sites",
+    "kind": "NONE",
+    "effect": "RETURNED:([], 'REFUSED__THE_NAMED_VALUE_IS_NOT_IN_THE_ENVIRONMENT')",
+    "arity": 2
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "judge_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "judge_contract",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "measure",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "named_values",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "instruction_contract_for_code_v1",
+    "name": "run_corpus",
+    "kind": "NONE",
+    "effect": "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'compiled': 0, 'refused': 0, 'discriminating': 0, 'vacuous': 0, 'wrong_at_fixed': 0}, 'refusal_census': {}, 'commits': []}",
+    "arity": 4
+   }
+  ],
+  "learned_skill_verdict_v1": [
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "admission_decision",
+    "kind": "NONE",
+    "effect": "RAISED:'IsADirectoryError'",
+    "arity": 4
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "adversarial_programs",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "another_symbol",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "candidate_requests",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "certify",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "certify_bundle",
+    "kind": "NONE",
+    "effect": "RAISED:'IsADirectoryError'",
+    "arity": 5
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "claim_roles",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "concrete_postcondition",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "exercise",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "find_an_accepted_request",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "impostor_source",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "independent_check",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "judge",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "load_skills",
+    "kind": "VALUE",
+    "effect": "RAISED:'IsADirectoryError' -> RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "outside_digests",
+    "kind": "VALUE",
+    "effect": "RETURNED:[] -> RETURNED:['52629f897362fdfa5982a3283e957bb81e77e933f519ee806c589897f129b124']",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "request_from_goal",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "request_tuple",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "run_program",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "source_with_request",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "stored_request_shape",
+    "kind": "NONE",
+    "effect": "RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "learned_skill_verdict_v1",
+    "name": "witness_postcondition",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   }
+  ],
+  "one_demonstration_basin_v1": [
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "acceptable",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "analyse",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "best_demonstration",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "distances",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "explore",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "feedback_observable",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "goal_a_two",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "goal_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "goal_pair",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "path_to",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "run_plan",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_basin_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "one_demonstration_identifies_v1": [
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "collect",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "facts_of",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "one_demonstration",
+    "kind": "NONE",
+    "effect": "RETURNED:{'status': 'NO_APPLICABLE_SITE_IN_THE_POOL'}",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "oracle",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "separation_report",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'status': 'NO_APPLICABLE_SITE'} -> RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "split",
+    "kind": "NONE",
+    "effect": "RETURNED:([], [])",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_identifies_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "one_demonstration_reach_v1": [
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "all_sites",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "family_skill",
+    "kind": "NONE",
+    "effect": "RAISED:'KeyError'",
+    "arity": 1
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "measure_all",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "reason_class",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "reason_key",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "request_for",
+    "kind": "NONE",
+    "effect": "RETURNED:{'path0': '', 'str1': '', 'str0': ''}",
+    "arity": 4
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "run_site",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "sample",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "sites_in_file",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "one_demonstration_reach_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "operand_invention_v1": [
+   {
+    "module": "operand_invention_v1",
+    "name": "bind",
+    "kind": "VALUE",
+    "effect": "RETURNED:'' -> RETURNED:'a'",
+    "arity": 3
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "builtins_scope",
+    "kind": "NONE",
+    "effect": "RETURNED:''",
+    "arity": 2
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "conditions",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "differential",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "failed_index",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "hot_lines",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "imported_modules",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "invent",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_OPERAND_INVENTION_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 'st",
+    "arity": 2
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "operands",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "parametrized_values",
+    "kind": "NONE",
+    "effect": "RETURNED:{}",
+    "arity": 1
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "rewritten",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 5
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "scope_names",
+    "kind": "VALUE",
+    "effect": "RETURNED:[] -> RETURNED:['a']",
+    "arity": 1
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "separating_terms",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 4
+   },
+   {
+    "module": "operand_invention_v1",
+    "name": "sites_from_parameter",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "operator_semantics_v1": [
+   {
+    "module": "operator_semantics_v1",
+    "name": "audit_frozen_list",
+    "kind": "NONE",
+    "effect": "RETURNED:{'schema': 'PROJECT_BRAIN_OPERATOR_SEMANTICS_V1', 'authority': 'NONE__SANDBOX_EXECUTION_NOT_A_LANGUAGE_STANDARD', 'claim_under_audit': 'operators in GENERALIZABLE mean the same thing across p",
+    "arity": 1
+   },
+   {
+    "module": "operator_semantics_v1",
+    "name": "may_generalize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "operator_semantics_v1",
+    "name": "resolve",
+    "kind": "NONE",
+    "effect": "RETURNED:('', None)",
+    "arity": 1
+   },
+   {
+    "module": "operator_semantics_v1",
+    "name": "run_probe",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'language': '', 'operator': '', 'ran': False, 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_FOR_THIS_OPERATOR', 'reason': 'NO_EXECUTABLE_QUESTION_FOR_'} -> RETURNED:{'language': '', 'operator",
+    "arity": 2
+   },
+   {
+    "module": "operator_semantics_v1",
+    "name": "semantics",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'operator': '', 'observations': {}, 'raw': {'cxx': {'language': 'cxx', 'operator': '', 'ran': False, 'reason': 'NO_EXECUTABLE_QUESTION_FOR_', 'verdict': 'UNDECIDED_NO_EXECUTABLE_QUESTION_FOR",
+    "arity": 1
+   },
+   {
+    "module": "operator_semantics_v1",
+    "name": "toolchain",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   }
+  ],
+  "oracle_density_v1": [
+   {
+    "module": "oracle_density_v1",
+    "name": "clone",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "oracle_density_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "oracle_density_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "passing_repairs_version_space_v1": [
+   {
+    "module": "passing_repairs_version_space_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "passing_repairs_version_space_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_PASSING_REPAIRS_VERSION_SPACE_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'ta",
+    "arity": 1
+   },
+   {
+    "module": "passing_repairs_version_space_v1",
+    "name": "passing_repairs",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "passing_repairs_version_space_v1",
+    "name": "question_from_repairs",
+    "kind": "RAISED",
+    "effect": "RETURNED:None -> RAISED:'TypeError'",
+    "arity": 3
+   }
+  ],
+  "pins_from_the_reverted_part_v1": [
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "calls_from_the_test",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_PINS_FROM_THE_REVERTED_PART_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'task",
+    "arity": 2
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "module_of",
+    "kind": "RAISED",
+    "effect": "RAISED:'ValueError' -> RETURNED:'a'",
+    "arity": 1
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "outcomes",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "pins_from_the_reverted_part_v1",
+    "name": "pin_part",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   }
+  ],
+  "predictive_contract_v1": [
+   {
+    "module": "predictive_contract_v1",
+    "name": "acquire",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "derive_clauses",
+    "kind": "VALUE",
+    "effect": "RETURNED:[{'name': 'derived_byte_map', 'params': {'map': {}}}] -> RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "holds",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "intervenes",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "judge",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "predict",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "predictive_contract_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "reach_of_the_grammar_v1": [
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "grammar_shapes",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'source': 'canonical/runtime/bound_capabilities/python_test_guided_patch_search_v1.py', 'families': ['BINOP_SWAP', 'BOOL_SWAP', 'CALL_FUNC_SWAP', 'COMPARE_SWAP', 'CONSTANT_REPLACE', 'DROPPED",
+    "arity": 1
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "load",
+    "kind": "NONE",
+    "effect": "RAISED:'KeyError'",
+    "arity": 1
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "piece_operator",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "piece_provenance",
+    "kind": "NONE",
+    "effect": "RETURNED:'N'",
+    "arity": 1
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "provenance_and_kinds",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'pieces': 0, 'provenance': {}, 'never_seen_share': 0.0, 'made_by_another_task_share': 0.0, 'operator_kinds': {}, 'recording_says_made_by_another_task': 0, 'structural_share': 0.0, 'meaning':",
+    "arity": 1
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "reach_curve",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'tasks': 0, 'pieces': 0, 'covered_while_streaming': 0, 'coverage_while_streaming': 0.0, 'coverage_with_all_other_tasks_seen': 0.0, 'asymptote_pieces': 0, 'by_experience_quartile': [], 'opera",
+    "arity": 2
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "repair_by_membership",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "reach_of_the_grammar_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "reach_the_changed_site_v1": [
+   {
+    "module": "reach_the_changed_site_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "reach_the_changed_site_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "reach_the_changed_site_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_REACH_THE_CHANGED_SITE_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0",
+    "arity": 2
+   },
+   {
+    "module": "reach_the_changed_site_v1",
+    "name": "reach_part",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 8
+   }
+  ],
+  "real_commit_repair_v1": [
+   {
+    "module": "real_commit_repair_v1",
+    "name": "changed_span",
+    "kind": "VALUE",
+    "effect": "RETURNED:[] -> RETURNED:[(0, 1)]",
+    "arity": 2
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "entries_named_by_test",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "functions_in",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "learn_lessons",
+    "kind": "VALUE",
+    "effect": "RETURNED:(<canonical.runtime.edit_kind_learning_v1.Lessons object at 0x7fcc12ded010>, 0) -> RETURNED:(<canonical.runtime.edit_kind_learning_v1.Lessons object at 0x7fcc12ded390>, 0)",
+    "arity": 2
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_REAL_COMMIT_REPAIR_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 's",
+    "arity": 3
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "repair_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "summarise",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_REAL_COMMIT_REPAIR_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 's",
+    "arity": 1
+   },
+   {
+    "module": "real_commit_repair_v1",
+    "name": "touches",
+    "kind": "RAISED",
+    "effect": "RETURNED:False -> RAISED:'ValueError'",
+    "arity": 2
+   }
+  ],
+  "renewable_action_v1": [
+   {
+    "module": "renewable_action_v1",
+    "name": "arms_for",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "measure_module",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "measure_repo",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "observe",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "package_modules",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "signatures",
+    "kind": "NONE",
+    "effect": "RETURNED:{}",
+    "arity": 1
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "split",
+    "kind": "VALUE",
+    "effect": "RETURNED:([], []) -> RETURNED:(['a'], [])",
+    "arity": 1
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "summarise",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'totals': {'callables': 0, 'STABLE': 0, 'CAUGHT': 0, 'BLIND': 0, 'EXCLUDED_UNSTABLE': 0, 'NEVER_OBSERVED_AT_OLD': 0, 'NO_ARM': 0, 'modules': 0, 'modules_failed': 0, 'modules_excluded_import'",
+    "arity": 1
+   },
+   {
+    "module": "renewable_action_v1",
+    "name": "witnesses",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   }
+  ],
+  "scenario_observation_v1": [
+   {
+    "module": "scenario_observation_v1",
+    "name": "classify",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "observe_repo",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "package_root",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "run_suite",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "summarise",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'modules': 0, 'modules_measured': 0, 'callables': 0, 'modules_with_incomplete_suite': 0, 'round6_unexercised': 0, 'reached_unexercised': 0, 'moved_unexercised': 0, 'moves': {}, 'module_state",
+    "arity": 1
+   },
+   {
+    "module": "scenario_observation_v1",
+    "name": "tests_root",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "site_by_intervention_v1": [
+   {
+    "module": "site_by_intervention_v1",
+    "name": "candidate_sites",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "site_by_intervention_v1",
+    "name": "counterfactuals",
+    "kind": "NONE",
+    "effect": "RETURNED:['']",
+    "arity": 2
+   },
+   {
+    "module": "site_by_intervention_v1",
+    "name": "intervene",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "site_by_intervention_v1",
+    "name": "judge_instruction",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "site_by_intervention_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'states': {}, 'verdict_census': {}, 'commits': [], 'schema': 'BRAIN_SITE_BY_INTERVENTION_V1', 'authority': 'NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT', 'model_calls': 0, 'network_calls': 0, 'in",
+    "arity": 1
+   },
+   {
+    "module": "site_by_intervention_v1",
+    "name": "run_corpus",
+    "kind": "NONE",
+    "effect": "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'site_named': 0, 'site_named_and_discriminating': 0, 'site_named_but_change_did_not_move_it': 0, 'site_named_but_wrong_at_the_fixed_s",
+    "arity": 3
+   }
+  ],
+  "skill_precondition_presence_v1": [
+   {
+    "module": "skill_precondition_presence_v1",
+    "name": "comparison_operator",
+    "kind": "NONE",
+    "effect": "RETURNED:()",
+    "arity": 1
+   },
+   {
+    "module": "skill_precondition_presence_v1",
+    "name": "defect_is_present",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "skill_precondition_presence_v1",
+    "name": "gate",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   }
+  ],
+  "skill_recheck_v1": [
+   {
+    "module": "skill_recheck_v1",
+    "name": "recheck",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "skill_recheck_v1",
+    "name": "recheck_bundle",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'schema': 'PROJECT_BRAIN_SKILL_RECHECK_V1', 'authority': 'NONE', 'bundle': '.', 'error': 'BUNDLE_ABSENT', 'rules': [], 'counts': {}} -> RETURNED:{'schema': 'PROJECT_BRAIN_SKILL_RECHECK_V1', ",
+    "arity": 1
+   },
+   {
+    "module": "skill_recheck_v1",
+    "name": "recheck_store",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'schema': 'PROJECT_BRAIN_SKILL_RECHECK_V1', 'authority': 'NONE', 'db': '.', 'error': 'DB_ABSENT', 'rules': [], 'counts': {}} -> RETURNED:{'schema': 'PROJECT_BRAIN_SKILL_RECHECK_V1', 'authori",
+    "arity": 1
+   },
+   {
+    "module": "skill_recheck_v1",
+    "name": "render_witness",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "skill_recheck_v1",
+    "name": "self_witness",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "skill_recurrence_curve_v1": [
+   {
+    "module": "skill_recurrence_curve_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "skill_recurrence_curve_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "skill_scope_acquisition_v1": [
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "admits",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'admitted': True, 'basis': 'NO_IDENTIFIED_REQUIREMENT__NOTHING_TO_WITHHOLD_ON', 'missing': []} -> RETURNED:{'admitted': False, 'basis': 'IDENTIFIED_REQUIREMENT_ABSENT', 'missing': ['a']}",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "buy_scope",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "constant_facts",
+    "kind": "RAISED",
+    "effect": "RETURNED:frozenset() -> RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "facts_at_offset",
+    "kind": "NONE",
+    "effect": "RETURNED:frozenset()",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "firing_sites",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "observable_facts",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "observe",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "scope_of",
+    "kind": "RAISED",
+    "effect": "RETURNED:Boundary(schema='PROJECT_BRAIN_APPLICABILITY_V1', status='UNDETERMINED__NO_CONTRASTING_OUTCOME', required=None, most_general=(), most_specific=(), survivor_count=0, successes=0, failures=0, c",
+    "arity": 1
+   },
+   {
+    "module": "skill_scope_acquisition_v1",
+    "name": "site_facts",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   }
+  ],
+  "skill_scope_ledger_v1": [
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "evidence_pairs",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "field_verdicts",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "firing_signature",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "ledger",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "perturb",
+    "kind": "RAISED",
+    "effect": "RETURNED:{} -> RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "price_next_probe",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'priced': False, 'probe': None, 'gain_bits': 0.0, 'reason': 'NO_SURVIVORS_TO_SPLIT__NO_EVIDENCE'} -> RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "skill_scope_ledger_v1",
+    "name": "scope_of",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   }
+  ],
+  "skill_sequence_verify_v1": [
+   {
+    "module": "skill_sequence_verify_v1",
+    "name": "verify_all_pairs",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "skill_sequence_verify_v1",
+    "name": "verify_sequence",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   }
+  ],
+  "standing_facts_v1": [
+   {
+    "module": "standing_facts_v1",
+    "name": "at_risk",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "standing_facts_v1",
+    "name": "chain",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'NotADirectoryError'",
+    "arity": 3
+   },
+   {
+    "module": "standing_facts_v1",
+    "name": "establish",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "standing_facts_v1",
+    "name": "revalidate",
+    "kind": "RAISED",
+    "effect": "RETURNED:([], []) -> RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "standing_facts_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "standing_facts_v1",
+    "name": "touched",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "structural_check_of_real_changes_v1": [
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "commits_touching_sources",
+    "kind": "VALUE",
+    "effect": "RAISED:'FileNotFoundError' -> RAISED:'NotADirectoryError'",
+    "arity": 3
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "judge_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "judge_one_module",
+    "kind": "VALUE",
+    "effect": "RETURNED:{'module': '', 'functions_offered': 0, 'state': 'NO_PUBLIC_STRUCTURE'} -> RETURNED:{'module': 'a', 'functions_offered': 0, 'state': 'NO_PUBLIC_STRUCTURE'}",
+    "arity": 3
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "measure",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "module_literals",
+    "kind": "NONE",
+    "effect": "RETURNED:{'str': [], 'int': []}",
+    "arity": 2
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "module_name_for",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "structural_check_of_real_changes_v1",
+    "name": "run_corpus",
+    "kind": "NONE",
+    "effect": "RETURNED:{'states': {'commits': 0, 'with_tests': 0, 'untested': 0, 'judged': 0, 'checkable': 0, 'kills': 0, 'laws_confirmed': 0, 'organ_failed': 0, 'only_totality': 0}, 'commits': []}",
+    "arity": 4
+   }
+  ],
+  "swe_self_improvement_bridge_v1": [
+   {
+    "module": "swe_self_improvement_bridge_v1",
+    "name": "build_formal_swe_problem",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "swe_self_improvement_bridge_v1",
+    "name": "execute_swe_coding_episode",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 11
+   },
+   {
+    "module": "swe_self_improvement_bridge_v1",
+    "name": "make_python_unittest_verifier",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   }
+  ],
+  "systematic_edit_supply_v1": [
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "abstract",
+    "kind": "VALUE",
+    "effect": "RETURNED:('', ()) -> RETURNED:('\\x00ID0', (('ID', 'a'),))",
+    "arity": 1
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "evaluate",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'commits_in_corpus': 0, 'scanned': 0, 'by_rung': {'shape_only': {'pairs': 0, 'outcomes': {'verbatim': 0, 'exact': 0, 'constant_differs': 0, 'rebound_wrong': 0, 'conflict': 0, 'mismatch': 0},",
+    "arity": 1
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "extract",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "induce",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "parse_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "read_corpus",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "siblings",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "systematic_edit_supply_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   }
+  ],
+  "test_suite_admission_v1": [
+   {
+    "module": "test_suite_admission_v1",
+    "name": "amplify",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "test_suite_admission_v1",
+    "name": "build_fixture",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "test_suite_admission_v1",
+    "name": "confirm_candidates",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "test_suite_admission_v1",
+    "name": "evaluate",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "test_suite_admission_v1",
+    "name": "next_assertions",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   }
+  ],
+  "the_callers_were_never_asked_v1": [
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "candidates_for",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "defined_names",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "harvest_call_sites",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "judge_part",
+    "kind": "NONE",
+    "effect": "RETURNED:{'state': 'REFUSED__NO_LITERAL_CALL_SITE', 'candidates': 0}",
+    "arity": 5
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_THE_CALLERS_WERE_NEVER_ASKED_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'kill_criterion",
+    "arity": 2
+   },
+   {
+    "module": "the_callers_were_never_asked_v1",
+    "name": "module_of",
+    "kind": "VALUE",
+    "effect": "RETURNED:'' -> RETURNED:'a'",
+    "arity": 1
+   }
+  ],
+  "the_environment_broker_v1": [
+   {
+    "module": "the_environment_broker_v1",
+    "name": "arm",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "broker",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "build_with_wheel_package",
+    "kind": "NONE",
+    "effect": "RETURNED:False",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "choose_artifact",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "declared_entry_point_hosts",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "declared_extras_in",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "declared_table",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "declared_test_commands",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "detect_layout",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "evidence_digest",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "existing_isolation_python",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "fallback_modules",
+    "kind": "VALUE",
+    "effect": "RETURNED:[''] -> RETURNED:['a']",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "fetch_bytes_urllib",
+    "kind": "NONE",
+    "effect": "RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "fetch_json_urllib",
+    "kind": "NONE",
+    "effect": "RAISED:'ValueError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "group_own_extras",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "install_project",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "installed_versions",
+    "kind": "NONE",
+    "effect": "RETURNED:{}",
+    "arity": 4
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "isolation_python",
+    "kind": "NONE",
+    "effect": "RAISED:'Refusal'",
+    "arity": 3
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "load_memory",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "marker_ok",
+    "kind": "VALUE",
+    "effect": "RETURNED:True -> RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "normalize_name",
+    "kind": "VALUE",
+    "effect": "RETURNED:'' -> RETURNED:'a'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "own_extras",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "parse_requirement",
+    "kind": "VALUE",
+    "effect": "RETURNED:{} -> RETURNED:{'raw': 'a', 'name': 'a', 'normalized': 'a', 'specifier': '', 'extras': [], 'marker': ''}",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "plugin_host",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "probe_imports",
+    "kind": "NONE",
+    "effect": "RETURNED:{}",
+    "arity": 5
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "python_floor_ok",
+    "kind": "VALUE",
+    "effect": "RETURNED:(True, 'no requires-python declared') -> RETURNED:(True, \"requires-python 'a' not understood; not refusing on it\")",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "read_declarations",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "read_toml_project",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "requires_dist",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "run_check",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "runner_candidates",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "save_memory",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "sets_up_a_distribution",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "specifier_satisfied",
+    "kind": "NONE",
+    "effect": "RETURNED:False",
+    "arity": 2
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "top_level_modules",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 1
+   },
+   {
+    "module": "the_environment_broker_v1",
+    "name": "version_key",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 1
+   }
+  ],
+  "the_operation_is_the_missing_dimension_v1": [
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "judge_part",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_THE_OPERATION_IS_THE_MISSING_DIMENSION_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'kill",
+    "arity": 3
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "probe_state",
+    "kind": "NONE",
+    "effect": "RETURNED:[]",
+    "arity": 3
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "seeds_from_calls",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_operation_is_the_missing_dimension_v1",
+    "name": "selects_operation",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   }
+  ],
+  "the_premise_is_the_sense_v1": [
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "actions_for_plan",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "actions_refusal_only",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "brute_force_minimum",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "cells",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "decision_consistent",
+    "kind": "RAISED",
+    "effect": "RETURNED:False -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "fact_value",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "observations",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "observations_raw",
+    "kind": "NONE",
+    "effect": "RAISED:'KeyError'",
+    "arity": 2
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "plan_domain",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_premise_is_the_sense_v1",
+    "name": "undecidable_states",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   }
+  ],
+  "the_refuse_share_v1": [
+   {
+    "module": "the_refuse_share_v1",
+    "name": "is_test_path",
+    "kind": "NONE",
+    "effect": "RETURNED:False",
+    "arity": 1
+   },
+   {
+    "module": "the_refuse_share_v1",
+    "name": "measure",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_refuse_share_v1",
+    "name": "measure_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'FileNotFoundError'",
+    "arity": 5
+   },
+   {
+    "module": "the_refuse_share_v1",
+    "name": "parse_summary",
+    "kind": "NONE",
+    "effect": "RETURNED:{'failed': 0, 'passed': 0, 'errors': 0}",
+    "arity": 1
+   },
+   {
+    "module": "the_refuse_share_v1",
+    "name": "run",
+    "kind": "VALUE",
+    "effect": "RAISED:'IndexError' -> RAISED:'FileNotFoundError'",
+    "arity": 3
+   },
+   {
+    "module": "the_refuse_share_v1",
+    "name": "suite_verdict",
+    "kind": "NONE",
+    "effect": "RAISED:'FileNotFoundError'",
+    "arity": 2
+   }
+  ],
+  "the_repository_is_the_seed_corpus_v1": [
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "calls_from",
+    "kind": "RAISED",
+    "effect": "RETURNED:[] -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "distil",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "executed_lines_by_the_suite",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "harvest_documents",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "judge",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 8
+   },
+   {
+    "module": "the_repository_is_the_seed_corpus_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_THE_REPOSITORY_IS_THE_SEED_CORPUS_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': ",
+    "arity": 2
+   }
+  ],
+  "the_smallest_question_that_makes_this_checkable_v1": [
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "judge_part",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 7
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_THE_SMALLEST_QUESTION_THAT_MAKES_THIS_CHECKABLE_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verificatio",
+    "arity": 3
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "names_the_change",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "statement_from_git",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "the_smallest_question_that_makes_this_checkable_v1",
+    "name": "tokens_of",
+    "kind": "NONE",
+    "effect": "RETURNED:{'quoted': [], 'exceptions': [], 'numbers': [], 'identifiers': []}",
+    "arity": 2
+   }
+  ],
+  "verified_lesson_pipeline_v1": [
+   {
+    "module": "verified_lesson_pipeline_v1",
+    "name": "apply_localized_skill_with_locus",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 9
+   },
+   {
+    "module": "verified_lesson_pipeline_v1",
+    "name": "execution_locus_facts",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "verified_lesson_pipeline_v1",
+    "name": "learn_execution_locus_scope",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'PROJECT_BRAIN_APPLICABILITY_V1', 'status': 'UNDETERMINED__NO_CONTRASTING_OUTCOME', 'required': None, 'most_general': [], 'most_specific': [], 'survivor_count': 0, 'successes': 0, ",
+    "arity": 1
+   },
+   {
+    "module": "verified_lesson_pipeline_v1",
+    "name": "propose_execution_locus_candidates",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "verified_lesson_pipeline_v1",
+    "name": "trace_project_target",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   }
+  ],
+  "vocabulary_growth_v1": [
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "diagnose",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "disk_paths",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "evidence",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "grow_compose",
+    "kind": "VALUE",
+    "effect": "RAISED:'IndexError' -> RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "grow_observable",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "grow_set_valued",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "grow_stop",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "holds",
+    "kind": "NONE",
+    "effect": "RAISED:'ValueError'",
+    "arity": 3
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "noise_floor",
+    "kind": "NONE",
+    "effect": "RETURNED:{'repeats': 0, 'raw_mtime_field_fires': 0, 'raw_field_is_reliable': True, 'verdict': 'the raw field fires on every repeat here, but it still carries an unstable value, so a predicate rather t",
+    "arity": 2
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "run_once",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 4
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "summarize",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "vocabulary_growth_v1",
+    "name": "view",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 3
+   }
+  ],
+  "what_the_condition_wants_v1": [
+   {
+    "module": "what_the_condition_wants_v1",
+    "name": "audit_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "what_the_condition_wants_v1",
+    "name": "harvest",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 6
+   },
+   {
+    "module": "what_the_condition_wants_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "what_the_condition_wants_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_WHAT_THE_CONDITION_WANTS_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks':",
+    "arity": 2
+   },
+   {
+    "module": "what_the_condition_wants_v1",
+    "name": "what_the_condition_wants",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 8
+   }
+  ],
+  "what_the_verifier_actually_pins_v1": [
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "headline",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 1
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "hunks",
+    "kind": "VALUE",
+    "effect": "RETURNED:[] -> RETURNED:[{'tag': 'delete', 'old': (0, 1), 'new': (0, 0), 'removed': 'a', 'added': ''}]",
+    "arity": 2
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "is_behavioural",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "measure",
+    "kind": "RAISED",
+    "effect": "RETURNED:{'schema': 'BRAIN_VERIFIER_PINNING_V1', 'rows': [], 'model_calls': 0, 'network_calls': 0, 'authority': 'NONE -- sandbox measurement, not independent verification', 'totals': {'tasks': 0, 'sta",
+    "arity": 3
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "pin_task",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "revert",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   },
+   {
+    "module": "what_the_verifier_actually_pins_v1",
+    "name": "typing_only",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   }
+  ],
+  "witness_inversion_v1": [
+   {
+    "module": "witness_inversion_v1",
+    "name": "apply_expression",
+    "kind": "NONE",
+    "effect": "RETURNED:None",
+    "arity": 3
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "candidate_commits",
+    "kind": "VALUE",
+    "effect": "RAISED:'FileNotFoundError' -> RAISED:'NotADirectoryError'",
+    "arity": 4
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "capture",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'NotADirectoryError'",
+    "arity": 5
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "closure_demo",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "discover_tasks",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 2
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "fetch",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "grammar_candidates",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 2
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "invert",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 1
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "judge",
+    "kind": "NONE",
+    "effect": "RAISED:'AttributeError'",
+    "arity": 6
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "materialise",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 4
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "measure",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'ValueError'",
+    "arity": 1
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "run_corpus",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 5
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "synthesize",
+    "kind": "VALUE",
+    "effect": "RAISED:'TypeError' -> RAISED:'NotADirectoryError'",
+    "arity": 7
+   },
+   {
+    "module": "witness_inversion_v1",
+    "name": "tasks_from_commit",
+    "kind": "NONE",
+    "effect": "RAISED:'TypeError'",
+    "arity": 3
+   }
+  ]
+ }
+}

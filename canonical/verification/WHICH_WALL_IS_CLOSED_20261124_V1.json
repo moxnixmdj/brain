@@ -1,0 +1,42 @@
+{
+ "schema": "BRAIN_WHICH_WALL_IS_CLOSED_V1",
+ "generated": "2026-11-25T13:51:31Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 0.1
+ },
+ "summary": {
+  "instances": 80,
+  "wall_1_front_door": {
+   "refused": 52,
+   "accepted": 28,
+   "refusal_rate": 0.65,
+   "distinct_winner_capabilities": 32,
+   "top_winner_share": 0.15
+  },
+  "routing_concentration": {
+   "capabilities": 447,
+   "index_terms": 1729,
+   "median_terms_per_capability": 7,
+   "capabilities_that_never_win_a_real_issue": 415,
+   "share_that_never_win": 0.9284,
+   "thin_capabilities_at_or_under_8_terms": 307
+  },
+  "wall_2_back_door": {
+   "status": "BLOCKED_CONTAINER_SOLVER_UNAVAILABLE",
+   "proposed_actions": null,
+   "patch_emitted": false
+  },
+  "verdicts": {
+   "the_front_door_refuses_a_majority_of_real_issues": true,
+   "the_router_is_a_32_way_decision_wearing_447_arms": true,
+   "most_capabilities_never_win_a_real_issue": true,
+   "the_back_door_emits_no_action_without_a_container": true,
+   "fixing_the_front_door_alone_would_change_no_outcome": true
+  },
+  "reading": "Wall 1 is a real defect: 65% of real issues are refused before any work, and the confidence signal rises as content falls. Wall 2 is the binding constraint: with no container the transport returns BLOCKED_NO_MODEL_PROPOSAL and emits no patch. Because wall 2 is closed, raising wall-1 acceptance from 28/80 to 80/80 changes no measured outcome -- so the honest next object is the generator, not the gate. The concentration numbers say where the generator would have to live: 415 of 447 capabilities never win a real issue and the median capability carries 7 index terms, so the routing table is 447 labels over a 32-way decision.",
+  "what_this_does_not_show": "any benchmark score, any solved task, any patch. Wall 2 is measured with NO container attached, which proves the transport fails closed without one; it does not prove the container-side solver fails when one IS attached. The published CI smoke run is the evidence for that, and it recorded BLOCKED_NO_MODEL_PROPOSAL with patch_bytes 0 for both tasks it ran."
+ }
+}

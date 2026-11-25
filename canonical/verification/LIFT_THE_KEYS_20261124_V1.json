@@ -1,0 +1,292 @@
+{
+ "schema": "BRAIN_LIFT_THE_KEYS_V1",
+ "generated": "2026-11-25T03:17:58Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 71.5
+ },
+ "rows": [
+  {
+   "target": "LIST",
+   "source": "GIT",
+   "source_laws": 21,
+   "imported": 21,
+   "target_atoms": 7,
+   "source_atoms": 5,
+   "held_out": 210,
+   "B": {
+    "predictions": 37,
+    "wrong": 32,
+    "refused": 173,
+    "accuracy": 0.5362,
+    "coverage": 0.1762
+   },
+   "C": {
+    "predictions": 174,
+    "wrong": 34,
+    "refused": 36,
+    "accuracy": 0.8365,
+    "coverage": 0.8286
+   },
+   "A": {
+    "predictions": 149,
+    "wrong": 4,
+    "refused": 61,
+    "accuracy": 0.9739,
+    "coverage": 0.7095
+   },
+   "probes": 0
+  },
+  {
+   "target": "LIST",
+   "source": "GIT",
+   "source_laws": 21,
+   "imported": 21,
+   "target_atoms": 7,
+   "source_atoms": 5,
+   "held_out": 210,
+   "B": {
+    "predictions": 37,
+    "wrong": 36,
+    "refused": 173,
+    "accuracy": 0.5068,
+    "coverage": 0.1762
+   },
+   "C": {
+    "predictions": 174,
+    "wrong": 38,
+    "refused": 36,
+    "accuracy": 0.8208,
+    "coverage": 0.8286
+   },
+   "A": {
+    "predictions": 149,
+    "wrong": 4,
+    "refused": 61,
+    "accuracy": 0.9739,
+    "coverage": 0.7095
+   },
+   "probes": 0
+  },
+  {
+   "target": "SCRAMBLED",
+   "source": "GIT2",
+   "source_laws": 23,
+   "imported": 23,
+   "target_atoms": 4,
+   "source_atoms": 4,
+   "held_out": 4,
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 0.0,
+    "coverage": 0.0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "probes": 0
+  },
+  {
+   "target": "SCRAMBLED",
+   "source": "GIT2",
+   "source_laws": 23,
+   "imported": 23,
+   "target_atoms": 4,
+   "source_atoms": 4,
+   "held_out": 4,
+   "B": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 0.0,
+    "coverage": 0.0
+   },
+   "C": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "A": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 3,
+    "accuracy": 1.0,
+    "coverage": 0.25
+   },
+   "probes": 0
+  },
+  {
+   "target": "JOURNAL",
+   "source": "LIST",
+   "source_laws": 31,
+   "imported": 18,
+   "target_atoms": 4,
+   "source_atoms": 7,
+   "held_out": 16,
+   "B": {
+    "predictions": 13,
+    "wrong": 10,
+    "refused": 3,
+    "accuracy": 0.5652,
+    "coverage": 0.8125
+   },
+   "C": {
+    "predictions": 13,
+    "wrong": 10,
+    "refused": 3,
+    "accuracy": 0.5652,
+    "coverage": 0.8125
+   },
+   "A": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   },
+   "probes": 0
+  },
+  {
+   "target": "JOURNAL",
+   "source": "LIST",
+   "source_laws": 31,
+   "imported": 18,
+   "target_atoms": 4,
+   "source_atoms": 7,
+   "held_out": 16,
+   "B": {
+    "predictions": 13,
+    "wrong": 13,
+    "refused": 3,
+    "accuracy": 0.5,
+    "coverage": 0.8125
+   },
+   "C": {
+    "predictions": 13,
+    "wrong": 13,
+    "refused": 3,
+    "accuracy": 0.5,
+    "coverage": 0.8125
+   },
+   "A": {
+    "predictions": 12,
+    "wrong": 0,
+    "refused": 4,
+    "accuracy": 1.0,
+    "coverage": 0.75
+   },
+   "probes": 0
+  },
+  {
+   "target": "ARCHIVE2",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "ARCHIVE2",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  },
+  {
+   "target": "SQLITE",
+   "skipped": "walk covered every reachable state"
+  }
+ ],
+ "summary": {
+  "pairs": [
+   "GIT:LIST",
+   "GIT2:SCRAMBLED",
+   "LIST:JOURNAL",
+   "VAULT:ARCHIVE2",
+   "GIT:SQLITE"
+  ],
+  "skipped": [
+   "ARCHIVE2",
+   "ARCHIVE2",
+   "SQLITE",
+   "SQLITE"
+  ],
+  "A_target_only": {
+   "predictions": 162,
+   "wrong": 4,
+   "refused": 68,
+   "accuracy": 0.9759,
+   "coverage": 0.7043
+  },
+  "B_lifted_transfer": {
+   "predictions": 50,
+   "wrong": 42,
+   "refused": 180,
+   "accuracy": 0.5435,
+   "coverage": 0.2174
+  },
+  "B_lifted_shuffled": {
+   "predictions": 50,
+   "wrong": 49,
+   "refused": 180,
+   "accuracy": 0.5051,
+   "coverage": 0.2174
+  },
+  "C_lifted_combined": {
+   "predictions": 188,
+   "wrong": 44,
+   "refused": 42,
+   "accuracy": 0.8103,
+   "coverage": 0.8174
+  },
+  "C_lifted_shuffled": {
+   "predictions": 188,
+   "wrong": 51,
+   "refused": 42,
+   "accuracy": 0.7866,
+   "coverage": 0.8174
+  },
+  "source_laws": 75,
+  "imported": 62,
+  "verdicts": {
+   "lifting_lets_laws_cross": true,
+   "lifting_beats_its_own_shuffled_null": false,
+   "lifted_transfer_beats_target_learning_on_reach": false,
+   "lifted_transfer_matches_target_learning": false,
+   "combined_beats_target_only": false,
+   "lifting_removes_the_key_miss_problem": false,
+   "lifting_lifts_the_ceiling_within_a_machine": true,
+   "lifting_transfers_between_machines": false
+  },
+  "same_machine_baseline": {
+   "note": "The transfer arms are only interpretable against how the SAME lifting does within one machine, on the identical five-pair set.",
+   "unlifted_target_only": {
+    "predictions": 58,
+    "wrong": 6,
+    "accuracy": 0.9062,
+    "coverage": 0.1261
+   },
+   "lifted_target_only": {
+    "predictions": 162,
+    "wrong": 4,
+    "accuracy": 0.9759,
+    "coverage": 0.7043
+   },
+   "source": "LAWS_ACROSS_MACHINES_20261124_V1.json (A arm, same pairs)"
+  }
+ }
+}

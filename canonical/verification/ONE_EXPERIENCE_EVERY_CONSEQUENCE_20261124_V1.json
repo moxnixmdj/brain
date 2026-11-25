@@ -1,0 +1,1587 @@
+{
+  "schema": "BRAIN_ONE_EXPERIENCE_EVERY_CONSEQUENCE_V1",
+  "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+  "date": "2026-11-24T22:39:13Z",
+  "learned": {
+    "ARCHIVE2": {
+      "atom_count": 4,
+      "transitions": 12,
+      "held_out": 3,
+      "conditions_admitted": 42,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_WRONG": 0,
+          "predictions_refused": 3,
+          "sound": true,
+          "coverage": 0.0,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 12,
+          "literals_refused_by_a_failing_probe": 0,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 4,
+          "generalized_predictions_RIGHT": 1,
+          "generalized_predictions_WRONG": 3,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "FILESYSTEM": {
+      "atom_count": 5,
+      "transitions": 20,
+      "held_out": 5,
+      "conditions_admitted": 34,
+      "scores": {
+        "one_shot": {
+          "operators": 5,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 5,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 15,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 5,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 15,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 5,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 3,
+          "predictions_made": 1,
+          "predictions_WRONG": 1,
+          "predictions_refused": 4,
+          "sound": false,
+          "coverage": 0.2,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 5,
+          "predictions_made": 0,
+          "predictions_refused": 5,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 14,
+          "literals_refused_by_a_failing_probe": 1,
+          "probe_executions": 15
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 1,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 1,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 3,
+          "generalized_predictions_RIGHT": 1,
+          "generalized_predictions_WRONG": 2,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "GIT": {
+      "atom_count": 5,
+      "transitions": 45,
+      "held_out": 11,
+      "conditions_admitted": 68,
+      "scores": {
+        "one_shot": {
+          "operators": 5,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 11,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 24,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 11,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 34,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 11,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 28,
+          "predictions_made": 5,
+          "predictions_WRONG": 5,
+          "predictions_refused": 6,
+          "sound": false,
+          "coverage": 0.455,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 5,
+          "predictions_made": 0,
+          "predictions_refused": 11,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 0,
+          "literals_refused_by_a_failing_probe": 47,
+          "probe_executions": 15
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 25,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "GIT2": {
+      "atom_count": 4,
+      "transitions": 24,
+      "held_out": 6,
+      "conditions_admitted": 54,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 18,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 18,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 9,
+          "predictions_made": 0,
+          "predictions_WRONG": 0,
+          "predictions_refused": 6,
+          "sound": true,
+          "coverage": 0.0,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 0,
+          "literals_refused_by_a_failing_probe": 12,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 9,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "JOURNAL": {
+      "atom_count": 4,
+      "transitions": 28,
+      "held_out": 7,
+      "conditions_admitted": 75,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 7,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 19,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 7,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 21,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 7,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 15,
+          "predictions_made": 2,
+          "predictions_WRONG": 2,
+          "predictions_refused": 5,
+          "sound": false,
+          "coverage": 0.286,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 7,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 12,
+          "literals_refused_by_a_failing_probe": 0,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 14,
+          "generalized_predictions_RIGHT": 2,
+          "generalized_predictions_WRONG": 12,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "LIST": {
+      "atom_count": 7,
+      "transitions": 231,
+      "held_out": 57,
+      "conditions_admitted": 388,
+      "scores": {
+        "one_shot": {
+          "operators": 7,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 57,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 35,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 57,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 70,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 57,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 46,
+          "predictions_made": 23,
+          "predictions_WRONG": 23,
+          "predictions_refused": 34,
+          "sound": false,
+          "coverage": 0.404,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 7,
+          "predictions_made": 0,
+          "predictions_refused": 57,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 21,
+          "literals_refused_by_a_failing_probe": 0,
+          "probe_executions": 21
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 46,
+          "generalized_predictions_RIGHT": 2,
+          "generalized_predictions_WRONG": 44,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "SQLITE": {
+      "atom_count": 4,
+      "transitions": 12,
+      "held_out": 3,
+      "conditions_admitted": 30,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 2,
+          "predictions_made": 0,
+          "predictions_WRONG": 0,
+          "predictions_refused": 3,
+          "sound": true,
+          "coverage": 0.0,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 11,
+          "literals_refused_by_a_failing_probe": 1,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 1,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 1,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 2,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 2,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "TARBALL": {
+      "atom_count": 4,
+      "transitions": 12,
+      "held_out": 3,
+      "conditions_admitted": 30,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 9,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_WRONG": 0,
+          "predictions_refused": 3,
+          "sound": true,
+          "coverage": 0.0,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 3,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 11,
+          "literals_refused_by_a_failing_probe": 1,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 1,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 1,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 4,
+          "generalized_predictions_RIGHT": 1,
+          "generalized_predictions_WRONG": 3,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    },
+    "VAULT": {
+      "atom_count": 4,
+      "transitions": 24,
+      "held_out": 6,
+      "conditions_admitted": 40,
+      "scores": {
+        "one_shot": {
+          "operators": 4,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "five_shot": {
+          "operators": 18,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "ten_shot": {
+          "operators": 18,
+          "guard_literals_dropped": 0,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0
+        },
+        "induction_from_last_round": {
+          "operators": 10,
+          "predictions_made": 1,
+          "predictions_WRONG": 1,
+          "predictions_refused": 5,
+          "sound": false,
+          "coverage": 0.167,
+          "note": "guards from the previous round's induction, scored on the same held-out set"
+        },
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": true,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "one_shot_probed": {
+          "operators": 4,
+          "predictions_made": 0,
+          "predictions_refused": 6,
+          "predictions_right": 0,
+          "predictions_WRONG": 0,
+          "sound": true,
+          "coverage": 0.0,
+          "literals_kept_after_a_passing_probe": 5,
+          "literals_refused_by_a_failing_probe": 7,
+          "probe_executions": 12
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 1,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 1,
+          "unreachable_probe_states": 0,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 8,
+          "generalized_predictions_RIGHT": 2,
+          "generalized_predictions_WRONG": 6,
+          "unreachable_probe_states": 1,
+          "sound_under_generalization": false,
+          "holdout_coverage_is_structurally_zero": true
+        }
+      },
+      "ambiguities": 0
+    }
+  },
+  "results": {
+    "summary": {
+      "machines": 9,
+      "problems": 27,
+      "soundness": {
+        "one_shot": {
+          "predictions": 0,
+          "WRONG": 0,
+          "refused": 101,
+          "sound_everywhere": true
+        },
+        "five_shot": {
+          "predictions": 0,
+          "WRONG": 0,
+          "refused": 101,
+          "sound_everywhere": true
+        },
+        "ten_shot": {
+          "predictions": 0,
+          "WRONG": 0,
+          "refused": 101,
+          "sound_everywhere": true
+        },
+        "one_shot_probed": {
+          "predictions": 0,
+          "WRONG": 0,
+          "refused": 101,
+          "sound_everywhere": true
+        },
+        "induction_from_last_round": {
+          "predictions": 32,
+          "WRONG": 32,
+          "refused": 69,
+          "sound_everywhere": false
+        }
+      },
+      "generalization_under_fire": {
+        "one_shot_under_fire": {
+          "generalized_predictions_tested": 0,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 0
+        },
+        "one_shot_probed_under_fire": {
+          "generalized_predictions_tested": 4,
+          "generalized_predictions_RIGHT": 0,
+          "generalized_predictions_WRONG": 4
+        },
+        "generalized_method_last_round": {
+          "generalized_predictions_tested": 81,
+          "generalized_predictions_RIGHT": 9,
+          "generalized_predictions_WRONG": 72
+        }
+      },
+      "plans": {
+        "safe_one_shot": {
+          "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION": 21,
+          "PLAN_FOUND_AND_VERIFIED": 6
+        },
+        "safe_ten_shot": {
+          "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION": 20,
+          "PLAN_FOUND_AND_VERIFIED": 7
+        },
+        "forward_search": {
+          "PLAN_FOUND": 24,
+          "NO_PLAN_AT_THIS_DEPTH": 1,
+          "OUT_OF_BUDGET": 2
+        }
+      },
+      "plans_verified": {
+        "safe_one_shot": 6,
+        "safe_ten_shot": 7,
+        "forward_search": 24
+      },
+      "refusals": {
+        "safe_one_shot": 21,
+        "safe_ten_shot": 20
+      },
+      "verdicts": {
+        "the_safe_table_is_never_wrong": true,
+        "the_previous_induction_was_wrong_this_many_times": 32,
+        "the_probe_generalizer_was_wrong_this_many_times": 0,
+        "probe_generalizer_is_unsound_and_must_not_be_shipped": true
+      }
+    },
+    "rows": [
+      {
+        "machine": "ARCHIVE2",
+        "goal": [
+          "CARD count_is 5",
+          "CARD equals 5"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "AR_A1",
+            "AR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "ARCHIVE2",
+        "goal": [
+          "CARD count_is 5",
+          "CARD[IDENT=beta_two_fresh] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "AR_A1",
+            "AR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "ARCHIVE2",
+        "goal": [
+          "CARD count_is 5",
+          "CARD[IDENT=beta_two_fresh] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "AR_A1",
+            "AR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "FILESYSTEM",
+        "goal": [
+          "CARD count_is 4",
+          "CARD equals 4"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "FS_A1",
+            "FS_A4"
+          ],
+          "executions": 14
+        }
+      },
+      {
+        "machine": "FILESYSTEM",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=gamma_three] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "FS_A1",
+            "FS_A4"
+          ],
+          "executions": 14
+        }
+      },
+      {
+        "machine": "FILESYSTEM",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=gamma_three] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "FS_A1",
+            "FS_A4"
+          ],
+          "executions": 14
+        }
+      },
+      {
+        "machine": "GIT",
+        "goal": [
+          "CARD count_is 3",
+          "CARD equals 3"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "GIT_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "GIT",
+        "goal": [
+          "CARD count_is 3",
+          "CARD[CONTENT=gamma_three] count_is 1"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "GIT_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "GIT",
+        "goal": [
+          "CARD count_is 3",
+          "CARD[CONTENT=gamma_three] equals 1"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "GIT_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "GIT2",
+        "goal": [
+          "CARD count_is 2",
+          "CARD equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "G2_A2"
+          ],
+          "executions": 3
+        }
+      },
+      {
+        "machine": "GIT2",
+        "goal": [
+          "CARD count_is 2",
+          "IDENT equals ('ff3d70e9621e3913d5b5d8b2bad4ad30e11d0e33', '7751292cf3ed0d33ee465d04ec4490f2ee5ba3e4')"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "NO_PLAN_AT_THIS_DEPTH",
+          "executions": 229
+        }
+      },
+      {
+        "machine": "GIT2",
+        "goal": [
+          "CARD count_is 2",
+          "MULTISET equals (('alpha_one', 1), ('beta_two', 1))"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "G2_A2"
+          ],
+          "executions": 3
+        }
+      },
+      {
+        "machine": "JOURNAL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD equals 4"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A2"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "JOURNAL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=alpha_one] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A3"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "JOURNAL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=alpha_one] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A3"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "JN_A1"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "LIST",
+        "goal": [
+          "CARD count_is 2",
+          "CARD equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "LS_A3"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "LS_A3"
+          ],
+          "executions": 4
+        }
+      },
+      {
+        "machine": "LIST",
+        "goal": [
+          "CARD count_is 2",
+          "CARD[CONTENT=alpha_one] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 23
+        },
+        "forward_search": {
+          "status": "OUT_OF_BUDGET",
+          "executions": 901
+        }
+      },
+      {
+        "machine": "LIST",
+        "goal": [
+          "CARD count_is 2",
+          "CARD[CONTENT=alpha_one] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 23
+        },
+        "forward_search": {
+          "status": "OUT_OF_BUDGET",
+          "executions": 901
+        }
+      },
+      {
+        "machine": "SQLITE",
+        "goal": [
+          "CARD count_is 4",
+          "CARD equals 4"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "SQL_A1",
+            "SQL_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "SQLITE",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=gamma_three] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "SQL_A1",
+            "SQL_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "SQLITE",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[CONTENT=gamma_three] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "SQL_A1",
+            "SQL_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "TARBALL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD equals 4"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "TAR_A1",
+            "TAR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "TARBALL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[IDENT=beta_two_fresh] count_is 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "TAR_A1",
+            "TAR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "TARBALL",
+        "goal": [
+          "CARD count_is 4",
+          "CARD[IDENT=beta_two_fresh] equals 2"
+        ],
+        "safe_one_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "safe_ten_shot": {
+          "status": "REFUSED__GOAL_OUTSIDE_THE_MEASURED_REGION",
+          "plan": [],
+          "executions": 0,
+          "model_states": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "TAR_A1",
+            "TAR_A1"
+          ],
+          "executions": 7
+        }
+      },
+      {
+        "machine": "VAULT",
+        "goal": [
+          "CARD count_is 3",
+          "CARD equals 3"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VT_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VT_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "VAULT_A2"
+          ],
+          "executions": 2
+        }
+      },
+      {
+        "machine": "VAULT",
+        "goal": [
+          "CARD count_is 3",
+          "IDENT equals ('a.txt', 'a.txt.gz', 'b.txt')"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VT_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VT_A1"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "VT_A1"
+          ],
+          "executions": 5
+        }
+      },
+      {
+        "machine": "VAULT",
+        "goal": [
+          "CARD count_is 3",
+          "IDENT equals ('a.txt', 'b.txt', 'b.txt.gz')"
+        ],
+        "safe_one_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VAULT_A2"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "safe_ten_shot": {
+          "status": "PLAN_FOUND_AND_VERIFIED",
+          "plan": [
+            "VAULT_A2"
+          ],
+          "executions": 1,
+          "steps": 1
+        },
+        "forward_search": {
+          "status": "PLAN_FOUND",
+          "plan": [
+            "VAULT_A2"
+          ],
+          "executions": 2
+        }
+      }
+    ]
+  },
+  "cost": {
+    "model_calls": 0,
+    "stored_parameters": 0,
+    "network_at_run_time": 0,
+    "duration_s": 146.83
+  }
+}
