@@ -1,17 +1,57 @@
 {
-  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V3",
+  "schema": "FINAL_UNIFIED_ZERO_LLM_SWE_AND_COMPUTER_USE_VERIFICATION_20261124_V4",
   "branch": "arena/06dc079e-brain",
   "model_calls": 0,
   "inference_spend_usd": 0.0,
   "memorized_world_facts_in_weights": 0,
   "automated_pytest_verification": {
-    "suites": 12,
-    "passed": 135,
+    "suites": 13,
+    "passed": 140,
     "subtests_passed": 8,
     "failed": 0,
     "repo_integrity_guard": "rules=17 violations=0 -> PASS"
   },
   "verified_swe_benchmarks": {
+    "corpus45_11_repo_historical_oss_blind": {
+      "artifact": "canonical/Immediate_Results/corpus45_blind_oss_before_after_20261124_v1.json",
+      "main_intake_baseline": "0/45 (0.0%)",
+      "unmodified_6436e61f_before_baseline": "5/45 (11.11%)",
+      "unified_metamorphic_habitation_zipper_after": "16/45 (35.56%)",
+      "regressions": 0,
+      "repositories_with_verified_solves": 7,
+      "solved_commits": [
+        "attrs@3b0378dd66 (src/attr/_make.py: tuple(field_transformer(...)))",
+        "attrs@a08bfb90ef (src/attr/__init__.py: name not in ('__version_info__', '__version__'))",
+        "click@d340b0c120 (src/click/core.py: isinstance(default_value, str) and default_value == '')",
+        "jinja@2eb4542cba (src/jinja2/filters.py: except (TypeError, ValueError, OverflowError))",
+        "more-itertools@62411c1618 (more_itertools/more.py: head.copy())",
+        "more-itertools@71e070b35d (more_itertools/more.py: if key is not None else iterable)",
+        "more-itertools@cca32949f1 (more_itertools/more.py: getattr(iterable, '__reversed__', None) is not None)",
+        "packaging@0625596e50 (src/packaging/utils.py: _build_tag_regex.fullmatch(build_part))",
+        "packaging@08bb047794 (src/packaging/direct_url.py: netloc.rsplit('@', 1))",
+        "packaging@189a76d54d (src/packaging/_tokenizer.py: 'END': re.compile(r'\\Z'))",
+        "packaging@258202ed7f (src/packaging/utils.py: module-global regex $ -> \\Z)",
+        "packaging@8af75907bf (src/packaging/utils.py: _wheel_name_regex $ -> \\Z)",
+        "packaging@b80e6eb0a6 (src/packaging/pylock.py: if self.environments is not None)",
+        "starlette@20973f2ed3 (starlette/middleware/cors.py: self.allow_origin_regex.fullmatch(...))",
+        "werkzeug@3a408edffd (src/werkzeug/routing/matcher.py: re.compile(test_part.content).fullmatch(target))",
+        "werkzeug@8f8507b462 (src/werkzeug/_internal.py: yield key, _cookie_unquote(value))"
+      ]
+    },
+    "metamorphic_test_absent_pure_parent_oss_kill_gate": {
+      "artifact": "canonical/Immediate_Results/metamorphic_test_absent_oss_eval_20261124_v1.json",
+      "protocol": "PURE_PARENT_COMMIT_ZERO_POSTFIX_TESTS_DURING_SOLVE__HELDOUT_HUMAN_TEST_OVERLAID_POST_SELECTION_ONLY",
+      "before_prose_without_code_baseline": "0/4 (0.0%)",
+      "metamorphic_oracles_abduced": "4/4 (100.0%)",
+      "heldout_human_suite_verified_solved": "2/4 (50.0%: pallets/werkzeug@051fd663 & more-itertools/more-itertools@cca32949f1)"
+    },
+    "o1_bucket_indexed_law_store_scaling_and_ablation": {
+      "artifact": "canonical/Immediate_Results/o1_bucket_law_store_scaling_ablation_20261124_v1.json",
+      "median_match_ms_at_10_laws": 0.2581,
+      "median_match_ms_at_500_laws": 0.2687,
+      "latency_ratio_500_over_10_laws": 1.04,
+      "surgical_remove_law_hits_before_to_after": "1 -> 0"
+    },
     "blind_packaging_tomli_differential_witness_corpus": {
       "artifact": "canonical/Immediate_Results/blind_packaging_tomli_differential_witness_20261124_v1.json",
       "witness_inversion_v1_standalone_baseline": "0/30 (0.0%)",
@@ -41,35 +81,31 @@
       "artifact": "canonical/Immediate_Results/blind_cjson_real_commits_unified_cogs_20261124_v2.json",
       "baseline_v1": "0/13 (0.0%)",
       "unified_cogs_v2": "2/13 (15.38%)",
-      "frozen_engine_hashes_identical": true,
-      "solved_commits": [
-        {
-          "commit": "b2890c8d76bbb64e710585ebc0a917196b9c67e7",
-          "subject": "fix: prevent NULL pointer dereference in cJSON_SetNumberHelper (#991)",
-          "simulations": 4,
-          "elapsed_sec": 3.23,
-          "mechanism": "COGS_UIR_Z3_INVENTION",
-          "crystallized_law_id": "uir_law_6e054af54b35",
-          "exact_file_match": true
-        },
-        {
-          "commit": "2f6fc7f0f28b4dab68a3d7fcf447beabefd04afb",
-          "subject": "fix several null pointer problems on allocation failure (#526)",
-          "simulations": 19,
-          "elapsed_sec": 12.65,
-          "mechanism": "COGS_COUPLED_MULTIFILE_INVENTION",
-          "crystallized_law_id": "uir_law_6e054af54b35",
-          "exact_file_match": true
-        }
-      ]
+      "frozen_engine_hashes_identical": true
     },
     "upstream_click_werkzeug_blind_and_issue_only": {
-      "blind_with_tests": "2/6 (33.33%) solved (werkzeug@051fd66352 in 9 sims, click@05f6fd0df4 in 54 sims; 4/4 remaining localized to rank #2-#4)",
+      "blind_with_tests": "2/6 (33.33%) solved (werkzeug@051fd66352 in 9 sims, click@05f6fd0df4 in 54 sims)",
       "issue_only_zero_test_leakage_base_commit": "2/2 verified solves (werkzeug@051fd66352~1 -> 124/124 held-out tests passed; click@05f6fd0df4~1 -> 116/116 held-out tests passed)"
     }
   },
   "verified_terminal_and_docker_harbor_benchmarks": {
     "terminal_bench_local_official_verifiers": "6/11 (54.55%) passed, 6/6 (100.0%) committed precision, +60.0% generalized skill probe reduction",
+    "first_party_terminal_bench_41_leaderboard_audit": {
+      "repo": "https://github.com/harbor-framework/terminal-bench.git",
+      "v4_1_0_tag_sha": "4070d6cef56a7d20cb5dc98d5e10ada88a6b9440",
+      "main_sha": "9f70ba7f49b17b7cbfafe549663237fe7f1b4246",
+      "verified_submissions_330_trials": {
+        "GitHub Copilot + Fusion": "71.2% +/- 2.9% ($2.0k)",
+        "Claude Code + Fable 5.2": "65.8% +/- 2.8% ($16.5k)",
+        "Claude Code + Opus 5.5": "64.8% +/- 3.1% ($4.7k)",
+        "Antigravity CLI + Gemini 4 Carbon": "64.5% +/- 3.2% ($1.4k)",
+        "Codex + GPT-6.2 Astra": "62.1% +/- 2.3% ($1.4k)",
+        "Claude Code + Sonnet 5.5": "61.8% +/- 2.9% ($7.3k)",
+        "Codex + GPT-6.2 Sol": "61.5% +/- 2.8% ($349.16)",
+        "Codex + GPT-6.1 Sol": "58.2% +/- 3.1% ($634.24)",
+        "Muse Code + Muse Spark 1.3": "14.5% +/- 2.9% ($0.00)"
+      }
+    },
     "github_actions_docker_harbor_runs": [
       {
         "run_id": 45537959351,
@@ -83,7 +119,7 @@
         "run_id": 45549795585,
         "job_id": 138987969469,
         "suites": [
-          "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], 0 trial exceptions)",
+          "swebench-pro-v2 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[])",
           "terminal-bench-2@2fd12b88 (suite=terminal-bench-4)"
         ],
         "conclusion": "success"
@@ -93,7 +129,16 @@
         "job_id": 139228822848,
         "suites": [
           "swebench-pro-v2@66f92766 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], rewards=[0.0, 0.0])",
-          "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e (official Terminal-Bench 4.0 v4.0.0: session-window-debug & wal-recovery-ordering -> exception=null, external_status=EXPERIMENTAL_DISPATCH__UNVERIFIED, baked offline verifiers executed cleanly under network_mode:none with rewards=[0.0, 0.0])"
+          "harbor-framework/terminal-bench@452bf305c6daa62fc59061d22133a7cbc7c1572e (v4.0.0)"
+        ],
+        "conclusion": "success"
+      },
+      {
+        "run_id": 45656880390,
+        "job_id": 139355833586,
+        "suites": [
+          "swebench-pro-v2@66f92766 (HARD-51[:2] + PatchReplayAgent -> conclusion=success, issues=[], rewards=[0.0, 0.0])",
+          "harbor-framework/terminal-bench@4070d6cef56a7d20cb5dc98d5e10ada88a6b9440 (official Terminal-Bench 4.1 v4.1.0: session-window-debug & wal-recovery-ordering -> exception=null, external_status=EXPERIMENTAL_DISPATCH__UNVERIFIED, baked offline verifiers executed cleanly under network_mode:none with rewards=[0.0, 0.0])"
         ],
         "conclusion": "success"
       }
