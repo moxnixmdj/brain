@@ -147,7 +147,21 @@ def violations_from_run(
         return PluginRun(violations=[], raw_count=0, mutator_calls=0, wrapped_classes=[], timeout=True, tail="")
     if not out.is_file():
         return PluginRun(violations=[], raw_count=0, mutator_calls=0, wrapped_classes=[], tail=tail, collected=False)
+    if proc.returncode != 0:
+        # An observer that changes the program is not an observer. `attrs` builds classes *out of* module
+        # functions, so wrapping them changes the generated classes: five of its tests fail with every law
+        # disabled. A wrapped run that fails where the bare run passes proves the instrumentation is at
+        # fault, and any law output from it is worthless — so say so instead of reporting it.
+        plain = subprocess.run(
+            [python, "-m", "pytest", "-p", "no:cacheprovider", "-q", *pytest_args],
+            cwd=str(root), env={k: v for k, v in env.items() if not k.startswith("META_")} | {"PYTHONPATH": os.pathsep.join([brain_root, str(root), str(root / "src")])},
+            capture_output=True, text=True, timeout=timeout_s)
     data = json.loads(out.read_text(encoding="utf-8"))
+    if proc.returncode != 0:
+        data["baseline_exitstatus"] = plain.returncode
+        data["perturbed"] = plain.returncode == 0
+        if data["perturbed"]:
+            data["violations"] = []
     data["tail"] = tail
     data["collected"] = True
     return PluginRun(data)

@@ -1041,3 +1041,40 @@ change in this round and still discriminates (`last` on the buggy tree, absent o
 by *file sweep*: it broadens n handlers in the file the witness named and lets the law cut. Witness-targeted synthesis —
 edit exactly the function the traceback named, with exactly the family the exception was — is the same idea carried one
 step further, and it is what would have made the pyjwt candidate minimal.
+
+## Round V19b — the observer must not change the program
+
+With `pyjwt` and `more-itertools` closed, the three open items were re-run against the enlarged law set. Two of them
+would not even start, and the reason was the instrument, not the code:
+
+| tree | what happened | why |
+|---|---|---|
+| `click@05f6fd0^1` | `TypeError: isinstance() arg 2 must be a type` inside the standard library's `logging` | a class attribute that happened to hold `int` was wrapped as a method, so `_ALIAS` contained `int` and the alias sweep replaced **`builtins.int`** process-wide |
+| `attrs@3b0378dd66^1` | 5 tests fail with **every law disabled** | `attrs` builds classes *out of* module functions; a wrapper assigned as a generated `__init__`/`__repr__` changes the class the library constructs |
+
+Three fixes, each at the level it belongs to:
+
+- **only functions are wrapped and substituted.** A class attribute holding a builtin (`int`, a C method descriptor) is
+  not a method of this module, and a type is never ours to substitute. This one mattered: it replaced `int` for the whole
+  process.
+- **perturbation is now detected, not assumed.** When the instrumented run fails, the oracle re-runs the same suite
+  without the plugin; if the bare run passes, the run is marked `perturbed: true` and its violations are discarded.
+  `attrs` is now reported as what it is — a repository this method cannot observe — instead of as a clean tree.
+- **two false-positive classes removed**: an `assert` about `self`/`cls` is an internal invariant, not argument
+  validation (click reported two such sites in a commit with a different defect), and only genuine containers and live
+  iterators are retyped (a class is not a container; `attrs.fields(SomeClass)` was "retyped" into a list of its
+  attributes and the library's own, correct `TypeError` was reported as a violation).
+
+After the fixes, `click@05f6fd0^1` is **law-silent** — its defect (always returning a help record for an `Argument`) is
+one nothing in the library observes — and `attrs@3b0378dd66^1` is **unobservable by construction**. Both are recorded as
+open, with reasons, rather than as repairs.
+
+**Recorded honestly:** test-absent stream **4 repaired** (`pluggy@50585e0`, `werkzeug@051fd663`,
+`more-itertools@cca32949f1`, `pyjwt@793a302`), 3 open with named reasons: `pluggy@8051a4d` (the `assert` law fires but no
+generator can choose between `TypeError` and `ValueError` without the hidden test), `click@05f6fd0` (no law observes the
+defect), `attrs@3b0378dd66` (the observer cannot instrument the construction it is watching).
+
+**Next bottleneck.** Unchanged from V19, now with a second half: witness-targeted synthesis (edit exactly the function
+and family the traceback named) and **targets that survive instrumenting** — a repository whose API is built by
+metaprogramming from its own module functions cannot be watched this way, and the honest answer is to say so at admission
+time rather than after a law run.

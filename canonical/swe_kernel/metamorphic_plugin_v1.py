@@ -279,6 +279,8 @@ def _sweep_aliases() -> None:
         except Exception:
             continue
         for name, value in items:
+            if not inspect.isfunction(value):
+                continue  # types and builtins are never ours to substitute
             entry = _ALIAS.get(id(value))
             if entry is None or entry[0] is not value or entry[1] is value:
                 continue
@@ -307,7 +309,11 @@ def _wrap_module(mod: Any) -> None:
             continue
         for meth_name in list(vars(cls)):
             meth = vars(cls)[meth_name]
-            if not callable(meth) or isinstance(meth, (staticmethod, classmethod)):
+            # A *function*, not merely something callable: a class attribute that happens to hold a builtin
+            # (`int`, a C method) is not a method of this module, and wrapping it put the wrapper into
+            # `_ALIAS`, where the sweep then replaced `builtins.int` with a Python function and broke the
+            # whole process (`isinstance(level, int)` raised inside the standard library's logging).
+            if not inspect.isfunction(meth) or isinstance(meth, (staticmethod, classmethod)):
                 continue
             # `__str__` is where a header value is actually produced; skipping every dunder made the
             # canonicality law blind to exactly the objects it was written for.

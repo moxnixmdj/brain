@@ -426,6 +426,24 @@
    "replay dropped keyword arguments, so algorithms=[...] was lost and the parser raised a family member",
    "content budget of 4 calls starved the call that carried the claim"
   ],
+  "observer_integrity_v19b": {
+   "after": {
+    "attrs@3b0378dd66": "unobservable by construction (perturbed: true, violations discarded)",
+    "click@05f6fd0": "law-silent (no law observes 'always return a help record for an Argument')"
+   },
+   "faults": [
+    "a class attribute holding `int` was wrapped, so _ALIAS contained int and the sweep replaced builtins.int process-wide (click)",
+    "attrs builds classes out of module functions, so wrapping them changed 5 generated-class tests with every law disabled",
+    "asserts on self/cls counted as argument validation (click: 2 of 2 reported sites were noise)",
+    "class and instance arguments were retyped as containers (attrs.fields)"
+   ],
+   "fixes": [
+    "only inspect.isfunction objects are wrapped and substituted",
+    "perturbation detection: an instrumented run that fails where the bare run passes is marked perturbed and its violations discarded",
+    "self/cls excluded from the assert law",
+    "retyping restricted to list/tuple/set/frozenset/range and live iterators"
+   ]
+  },
   "pyjwt@793a302": {
    "candidate": "LAW_ERROR_DISCIPLINE[broaden 5 handler(s) to catch TypeError, OverflowError]",
    "caveats": [
@@ -451,7 +469,7 @@
    "more-itertools": "last fires on buggy only",
    "werkzeug": "canonicality 'Bearer ' vs 'Bearer'"
   },
-  "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open"
+  "test_absent_stream": "4 repaired (pluggy@50585e0, werkzeug@051fd663, more-itertools@cca32949f1, pyjwt@793a302), 3 open with named reasons (pluggy@8051a4d no generator, click@05f6fd0 no law, attrs@3b0378dd66 not observable)"
  },
  "memory_ablation_v11": {
   "benchmark_effect": "none yet: the DELTA_ candidate is appended past the replay cap (candidates[:12]) and is dropped before cloning; store-vs-empty on pluggy@50585e0 is 25 cand / 22.41 s vs 25 / 23.21 s",
@@ -540,9 +558,9 @@
    "sha256": "26750bb79676bf4aece1127267a27a7df8a34292171ef16326f36d3f8292b8a3"
   },
   "canonical/swe_kernel/law_repair_synthesis_v1.py": "8054d9db2c81913f6a9109456b3a6a0fef28ef93682a54c002f2969c1e681203",
-  "canonical/swe_kernel/metamorphic_laws_v1.py": "2b2007ced1e71ddec4276c06fe2cd134bbab7c0e43a550b1cf422318ab96630a",
-  "canonical/swe_kernel/metamorphic_oracle_v1.py": "8b930c77d4b34818c43ad261302ffda94965160b726824f675ec97ae00e03eb6",
-  "canonical/swe_kernel/metamorphic_plugin_v1.py": "c3dfe5d9e77b46b2a8d61abe2436551d8bd1f23b72d67ce2c8101b2b6e8a9b24",
+  "canonical/swe_kernel/metamorphic_laws_v1.py": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
+  "canonical/swe_kernel/metamorphic_oracle_v1.py": "af2261d69022b4a7470c5a05a3402109b0a6ecc9c58c895570be8ec8d64117a3",
+  "canonical/swe_kernel/metamorphic_plugin_v1.py": "a7854c13f77b72e2de6a14a8c90c0f5484105c1f036a79a7709ba96033163208",
   "canonical/swe_kernel/semantic_causal_engine_v1.py": {
    "bytes": 208516,
    "lines": 4412,

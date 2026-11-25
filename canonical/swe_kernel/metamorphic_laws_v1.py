@@ -257,7 +257,13 @@ def _iterable_variants(value: Any) -> list[tuple[str, Any]]:
     # A string is a container of characters, not a container: retyping it as an iterator of characters
     # is not the same value in a different container, and `substrings_indexes(str, indexes)` duly raised
     # `TypeError` on all three variants on the healthy tree. Only genuine collections are retyped.
-    if isinstance(value, (str, bytes, bytearray, dict)):
+    # Only genuine containers and live iterators are retyped. A class is not a container, and neither is an
+    # arbitrary instance: `attrs.fields(cls)` and `fields(instance)` were both "retyped" into a list of
+    # attributes, and the function's own `TypeError` ("Passed object must be a class") was reported as a
+    # violation on code that is behaving exactly as documented.
+    is_container = isinstance(value, (list, tuple, set, frozenset, range))
+    is_live_iterator = hasattr(value, "__next__") and not isinstance(value, type)
+    if not (is_container or is_live_iterator):
         return []
     try:
         items = list(islice(iter(value), 65))
@@ -364,6 +370,10 @@ def static_assert_validation(source: str, module_name: str = "") -> list[Violati
         if node.name.startswith("_"):
             continue
         params = {a.arg for a in list(node.args.args) + list(node.args.kwonlyargs) + list(node.args.posonlyargs)}
+        # `self`/`cls` are not arguments a caller supplies, so an assert about them is an internal
+        # invariant, not validation. Measured on click: two of the three sites the law reported were
+        # asserts on `self`, in a commit whose defect had nothing to do with either.
+        params -= {"self", "cls"}
         if not params:
             continue
         for inner in ast.walk(node):
