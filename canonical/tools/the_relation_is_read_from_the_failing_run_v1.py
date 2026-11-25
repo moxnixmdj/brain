@@ -1192,6 +1192,8 @@ def demanded_values(facts: Mapping[str, Any]) -> dict[str, Any]:
         comparison = messages[0]
         left, right = comparison.get("left") or {}, comparison.get("right") or {}
         wanted["source"] = "pytest_assertrepr_compare"
+        if (str(left.get("type")) == "str" and str(right.get("type")) == "str"):
+            wanted["both_sides_are_strings"] = True
         # A VALUE MUST NOT BE RENDERED: the run produced a string containing the literal
         # text `None`, and the test rejects what was produced. That is not a missing value
         # -- it is a value the program should never have printed, so the relation is about
@@ -1217,12 +1219,21 @@ def demanded_values(facts: Mapping[str, Any]) -> dict[str, Any]:
     # real assertion (`"...--foo'." in "...--foo' (env var: 'None').") into
     # "a value where an exception came", which pointed the whole search at guards instead
     # of at what the program rendered.
-    if message.startswith("assert "):
+    # pytest sometimes prefixes the exception TYPE: `AssertionError: assert 'a' in 'b'`.
+    # Testing `startswith("assert ")` missed every one of those and classified a plain
+    # string assertion as "a value where an exception came", which then routed a
+    # rendered-output failure into guard narrowing (measured: click 42ee8a1f, eight
+    # sibling attempts, none verifiable, because no boolean can remove a stray space).
+    body_message = re.sub(r"^[A-Za-z_.]*Error: ", "", message, count=1).strip()
+    if body_message.startswith("assert "):
         wanted["source"] = "pytest_assert_message"
-        wanted["rendered"] = message[:400]
-        if "'None'" in message or "None" in message:
+        wanted["rendered"] = body_message[:400]
+        if re.search(r"'[^']*'\s+in\s+'[^']*'", body_message):
+            wanted["both_sides_are_strings"] = True
+        if "None" in body_message:
             wanted["a_value_must_not_be_rendered"] = True
         return wanted
+
     if message and not message.startswith("Failed: DID NOT RAISE"):
         wanted["source"] = "exception_where_value_expected"
         wanted["exception"] = message.splitlines()[0][:300]
@@ -1636,6 +1647,14 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
         # the ones nearest the guard
         named = re.findall(r"[A-Za-z_][\w.]*", str(wanted.get("exception") or ""))
         ranked: list[tuple[int, int, str]] = []
+        # A RENDERED-OUTPUT failure is not a guard failure. `assert 'Usage: cli VAR' in
+        # 'Usage: cli  VAR'` is about a string being built with one space too many; no
+        # conjunction of booleans can make it stop, and offering eight of them spent the
+        # whole budget on click 42ee8a1f (measured: 8 sibling attempts, none verified).
+        # The distinguisher is the run's OWN demand: when the two sides of a failed
+        # assertion are both strings, the defect is in production, not in control flow.
+        if wanted.get("both_sides_are_strings"):
+            conjuncts = []
         for other_line, other_text in conjuncts:
             if not other_text or other_text == expression:
                 continue
@@ -1643,6 +1662,17 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
                 if piece == expression or piece in expression:
                     continue
                 hits = sum(1 for name in named if name in piece)
+                # THE CONJUNCT MUST NAME SOMETHING THE FAILURE NAMES. On attrs a572c3a4
+                # the demanded exception is "Frozen classes can't use on_setattr." and the
+                # winning conjunct is `a.on_setattr is not setters.NO_OP` -- they share
+                # `on_setattr`. Across the corpus this is the whole difference: of 87
+                # SIBLING_DISJUNCT attempts, the 76 whose conjunct shared NO identifier
+                # with the failure's own message were all wasted, and the one that
+                # verified was not among them. A conjunct with no such link is not a
+                # relation, it is a syntactic coincidence, and offering it burns the
+                # 8-attempt budget on 14 of the 16 rows that then fail.
+                if not hits:
+                    continue
                 ranked.append((-hits, abs(other_line - site.line), piece))
         ranked.sort()
         for _score, _distance, piece in ranked[:2]:
