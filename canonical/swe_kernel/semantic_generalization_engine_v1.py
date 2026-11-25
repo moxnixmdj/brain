@@ -481,6 +481,313 @@ _MAX_ARGS_RES = [
     re.compile(r"(?:at\s+most|maximum\s+of|a\s+maximum\s+of|max(?:imum)?\s+of|no\s+more\s+than)\s+(\d+)\s*(?:parameters|params?|arguments|args?)", re.IGNORECASE),
     re.compile(r"with\s+(\d+)\s+or\s+fewer\s+(?:parameters|params?|arguments|args?)", re.IGNORECASE),
 ]
+
+# ---------------------------------------------------------------------------
+# The modifier ledger — a sentence that changes WHICH items are meant must
+# either have that change GROUNDED (computed, and verified against a separate
+# fixture) or the request must be REFUSED. It may never be answered with the
+# unfiltered set.
+#
+# Why this exists (measured 2026-11-25 on c4f529eb, worktree untouched):
+#   * "how many unique lines in a.txt"  -> PASS, total line count. The truth is
+#     the distinct count. The repository had already written down that this
+#     answer is wrong (test_an_ordinary_sentence_runs_the_command_it_states_v1,
+#     class TestTheLinesThatRepeatAreNotAnsweredWithTheLinesThatDoNot), and a
+#     second test, test_acquisition_to_execution_engine_v1, was red because of
+#     it: it expected 8 and was served 16.
+#   * "count the top-level functions in x.py" -> the modifier was dropped, the
+#     nested method was counted, and PASS was returned.
+#   * "list the lines in a.txt" -> the concept was bound from the FILENAME
+#     ("items.txt") instead of from what the sentence asked, and a list of
+#     lines was returned to a sentence that asked for a count.
+#
+# So the defect was never that the engine could not compute these; it was that
+# an ungrounded word silently became a narrowing that was thrown away. Each
+# row below is the CONCRETE predicate for one modifier, not a synonym table:
+# the key is the canonical filter, the guard says when it can even be
+# evaluated, and the fixture makes it observable. A word with no row is
+# unknown by construction and therefore refused — the ledger's default is
+# refusal, not silence.
+# ---------------------------------------------------------------------------
+
+FILTER_KINDS: tuple[str, ...] = (
+    "distinct", "duplicate", "blank", "non_empty", "longer_than",
+    "shorter_than", "numbered", "comment", "top_level", "nested",
+    "has_call", "has_parameter",
+)
+
+#: The concept the filter is applied to. `same` means "whatever the sentence
+#: already bound" — e.g. "distinct functions" and "distinct lines" are the same
+#: operation on different selections.
+_MODIFIER_CONCEPT: dict[str, str] = {
+    "distinct": "same", "duplicate": "same", "blank": "same", "non_empty": "same",
+    "longer_than": "same", "shorter_than": "same", "numbered": "same",
+    "comment": "line",
+    "top_level": "function", "nested": "function",
+    "has_call": "function", "has_parameter": "function",
+}
+
+#: Refusal wording per key. This is the sentence the caller reads when the
+#: engine can compute the request but not this modifier; a refusal that does
+#: not say what it could not do is how the earlier defects stayed invisible.
+MODIFIER_REFUSAL: dict[str, str] = {
+    "distinct": "the distinct/unique set is not the full selection; no grounded distinct reducer for this concept",
+    "duplicate": "the repeat set is not the distinct set; no grounded repeat reducer for this concept",
+    "blank": "empty/blank filtering is not implemented for this concept",
+    "non_empty": "non-empty filtering is not implemented for this concept",
+    "longer_than": "a length threshold is not implemented for this concept",
+    "shorter_than": "a length threshold is not implemented for this concept",
+    "numbered": "line numbering is not implemented for this concept",
+    "comment": "comment classification is not implemented for this domain",
+    "top_level": "top-level definition selection is not implemented for this concept",
+    "nested": "nested definition selection is not implemented for this concept",
+    "has_call": "call-graph membership selection is not implemented for this concept",
+    "has_parameter": "parameter-presence selection is not implemented for this concept",
+}
+
+#: Ordered, first-match-wins phrase patterns. Later patterns are the ones that
+#: carry a number; the number is parsed separately and must be present.
+_MODIFIER_PATTERNS: tuple[tuple[re.Pattern[str], str], ...] = tuple(
+    (re.compile(p, re.IGNORECASE), key) for p, key in [
+        (r"\bnon[-\s_]?empty\b|\bnot\s+(?:empty|blank)\b|\bwith\s+(?:content|something)\b", "non_empty"),
+        (r"\bblank\b|\bempty\s+lines?\b|\bwhitespace[-\s]only\b|\bempty\b", "blank"),
+        (r"\b(?:duplicate|duplicated|duplicates|repeated|repeating|repeat)\b", "duplicate"),
+        (r"\b(?:unique|distinct|deduplicated|dedup|different)\b", "distinct"),
+        (r"\b(?:numbered|with\s+line\s+numbers?|line[-\s]numbers?)\b", "numbered"),
+        (r"\bcomments?\b|\bcommented\b", "comment"),
+        (r"\b(?:top[-\s]level|module[-\s]level|free|global)\b", "top_level"),
+        (r"\b(?:nested|inner|inner[-\s]function|closure)\b", "nested"),
+        (r"\b(?:that\s+)?(?:makes?|made|has|have|having|with|contains?|calls?)\s+(?:a\s+|any\s+|some\s+)?calls?\b|\bthat\s+call", "has_call"),
+        (r"\b(?:that\s+)?(?:takes?|take|accepts?|accept|with|has|have|having)\s+(?:a\s+|any\s+|some\s+)?(?:parameters?|params?|arguments?|args?)\b", "has_parameter"),
+        (r"\b(?:longer|more|greater|bigger|larger|wider)\s+than\b|\bover\s+\d+|\bexceeding\b", "longer_than"),
+        (r"\b(?:shorter|fewer|less|smaller|narrower)\s+than\b|\bunder\s+\d+|\bbelow\b", "shorter_than"),
+    ]
+)
+
+_THRESHOLD_RE = re.compile(r"\b(?:than|over|under|below|above|exceeding|exceeds?)\s+(\d+)\b|\b(\d+)\s*(?:characters?|chars?|letters?|bytes?|words?|lines?)\s+or\s+(?:more|fewer|less)\b", re.IGNORECASE)
+
+_FILTER_ANCHORS: dict[str, dict[str, int]] = {"text": {"distinct": 3}}
+
+#: The fixture each filter is verified against. It is deliberately NOT the
+#: positive fixture: making the filter visible on a source that already has a
+#: hand-computed answer is what turns "the code ran" into "the filter means
+#: what the word means".
+FILTER_FIXTURES: dict[str, dict[str, str]] = {
+    "text": {
+        "distinct": "apple\nbanana\napple\ncherry\nbanana\napple\n",
+        "blank": "a\n\nb\n   \nc\n",
+        "non_empty": "a\n\nb\n   \nc\n",
+        "longer_than": "aaaa\nbb\ncccccc\nd\n",
+        "shorter_than": "aaaa\nbb\ncccccc\nd\n",
+    },
+}
+
+#: Hand-computed answers for FILTER_FIXTURES, keyed by (domain, filter key).
+#: A filter with no anchor cannot be verified and so cannot be served; the
+#: verdict below proves every FILTER_KINDS row is either anchored or refused.
+FILTER_FIXTURE_EXPECT: dict[tuple[str, str], int] = {
+    ("text", "distinct"): 3,
+    ("text", "blank"): 2,
+    ("text", "non_empty"): 3,
+    ("text", "longer_than"): 2,   # "than" with no number is refused, so this
+                                  # anchor is only reachable with a threshold;
+                                  # see the threshold handling in _apply_filter.
+    ("text", "shorter_than"): 2,
+}
+
+
+_QUOTED_RE = re.compile(r"\u0060[^\u0060]*\u0060|\"[^\"]*\"|'[^']*'")
+
+
+def _without_quoted(text: str) -> str:
+    """Modifier words are read from prose, never from a quoted payload.
+
+    A sentence that asks to WRITE a string containing the word "empty" is not
+    asking to filter by emptiness; the quoted span is data, not a predicate.
+    """
+    return _QUOTED_RE.sub(" ", text)
+
+
+_UNIT_TAIL_RE = re.compile(
+    r"^\s*(?:characters?|chars?|letters?|bytes?|words?|lines?|statements?)\b", re.IGNORECASE)
+
+
+def _resolve_spans(text: str, hits: list[tuple[int, int, str]]) -> list[tuple[int, int, str]]:
+    """Leftmost-longest, overlap-free resolution of every span any slot matched.
+
+    One resolver, used by the modifier ledger, the residual scan and the
+    concept binding, because those three must agree about which words were
+    consumed. When they disagreed, a word was both "used" and "ignored".
+    """
+    hits = sorted(hits, key=lambda h: (h[0], -(h[1] - h[0])))
+    chosen: list[tuple[int, int, str]] = []
+    consumed_until = -1
+    for start, end, key in hits:
+        if start < consumed_until:
+            continue
+        chosen.append((start, end, key))
+        consumed_until = end
+    return chosen
+
+
+def _modifier_phrase_present(goal: str) -> list[tuple[str, str]]:
+    """Every (key, matched phrase) the sentence uses, first-match wins.
+
+    Matching is overlap-free and left to right: once a span of the sentence has
+    been consumed by one modifier, a later pattern may not re-read it. Without
+    this, "the non-empty lines" matched `non_empty` and then matched `blank`
+    on the "empty lines" inside it -- a sentence read as both a narrowing and
+    its own negation.
+    """
+    # A filename is a slot, not prose: "Are there any functions in empty.py?"
+    # asks about a FILE NAMED empty, it does not ask to filter blank lines. The
+    # same blanking that keeps a quoted payload out keeps the path out.
+    text = _blank_spans(_without_quoted(goal), measurements=False)
+    hits = [(m.start(), m.end(), key)
+            for pattern, key in _MODIFIER_PATTERNS
+            for m in pattern.finditer(text) if m.end() > m.start()]
+    out: list[tuple[str, str]] = []
+    seen: set[str] = set()
+    for start, end, key in _resolve_spans(text, hits):
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append((key, text[start:end]))
+    return out
+
+
+def _threshold_span_end(goal: str) -> int:
+    m = _THRESHOLD_RE.search(goal)
+    return m.end() if m else 0
+
+
+def _threshold_in(goal: str) -> int | None:
+    m = _THRESHOLD_RE.search(goal)
+    if not m:
+        return None
+    return int(m.group(1) or m.group(2))
+
+
+_RESIDUAL_STOPWORDS = frozenset("""
+a an the of in on at to for from with without by as is are was were be been being do does did
+done have has had having that this these those it its and or not no any some all each every
+please how many much number count counts counted tally total list lists listed show shows
+enumerate display name names which what what's who whom whose identify per type kind via using
+file files path paths line lines word words character characters code source python module
+statement statements block blocks function functions method methods class classes def defs
+loop loops import imports return returns try except raise raises call calls assignment
+assignments assert asserts assertion assertions comprehension comprehensions decorator
+decorators docstring docstrings parameter parameters param params argument arguments arg args
+heading headings header headers section sections bullet bullets item items link links entry
+entries key keys object objects array arrays row rows column columns cell cells if elif else
+while async await also than over under below above longer shorter more fewer less greater
+smaller bigger larger wider narrower exactly only same touch touching change changing edit
+editing modify modifying write writing read reading open opening parse parsing inspect
+inspecting analyze analyzing do don't doesn't using user asked asks want wants need needs
+value values element elements thing things occur occurring appears appearing exists existing
+present overall instance instances copy copies happened happen
+""".split())
+
+
+def _blank_spans(goal: str, modifiers: bool = False, measurements: bool = True) -> str:
+    """The sentence with every span a SLOT consumed replaced by a space.
+
+    Two callers with two needs, and the difference is load-bearing:
+      * concept binding (`modifiers=True`): modifiers, thresholds and their
+        units are consumed too, so "longer than 4 characters" cannot make
+        `character` the thing a question about LINES is counting;
+      * modifier detection (`modifiers=False`): modifiers are exactly what is
+        being looked for, so they must stay. Only filenames and quoted payloads
+        are blanked -- a file named "empty.py" is not a request to filter blanks.
+    """
+    spans: list[tuple[int, int]] = []
+
+    def _mark(rx: re.Pattern[str]) -> None:
+        for m in rx.finditer(goal):
+            if m.end() > m.start():
+                spans.append((m.start(), m.end()))
+
+    hits: list[tuple[int, int, str]] = []
+    if modifiers:
+        for pattern, key in _MODIFIER_PATTERNS:
+            for m in pattern.finditer(goal):
+                if m.end() > m.start():
+                    hits.append((m.start(), m.end(), key))
+    for rx in (_MIN_ARGS_RES + _MAX_ARGS_RES):
+        for m in rx.finditer(goal):
+            hits.append((m.start(), m.end(), "args"))
+    if measurements:
+        for m in _THRESHOLD_RE.finditer(goal):
+            hits.append((m.start(), m.end(), "threshold"))
+            # the unit of measure belongs to the modifier that uses it, never to
+            # the concept the sentence asks about
+            tail = _UNIT_TAIL_RE.match(goal[m.end():])
+            if tail:
+                hits.append((m.end(), m.end() + tail.end(), "threshold"))
+    for rx in (_NEGATION_RE, _NAME_PREFIX_RE, _NAME_SUFFIX_RE, _NAME_CONTAINS_RE,
+               _PUBLIC_RE, _PRIVATE_RE, _FILE_RE, _QUOTED_RE):
+        for m in rx.finditer(goal):
+            hits.append((m.start(), m.end(), "slot"))
+    chosen = _resolve_spans(goal, hits)
+    merged = [(start, end) for start, end, _k in chosen]
+    parts: list[str] = []
+    cursor = 0
+    for start, end in merged:
+        parts.append(goal[cursor:start])
+        parts.append(" ")
+        cursor = end
+    parts.append(goal[cursor:])
+    return "".join(parts)
+
+
+def _residual_tokens(goal: str) -> list[str]:
+    """Words in the sentence that are neither a bound slot nor a known modifier
+    phrase. They are exactly the words whose meaning was thrown away."""
+    spans: list[tuple[int, int]] = []
+    def _mark(rx: re.Pattern[str]) -> None:
+        for m in rx.finditer(goal):
+            if m.end() > m.start():
+                spans.append((m.start(), m.end()))
+    for pattern, _key in _MODIFIER_PATTERNS:
+        _mark(pattern)
+    for rx in (_MIN_ARGS_RES + _MAX_ARGS_RES):
+        _mark(rx)
+    for rx in (_THRESHOLD_RE, _NEGATION_RE, _OP_COUNT_RE, _OP_BREAKDOWN_RE,
+               _OP_EXISTS_RE, _OP_COMPARE_RE, _OP_LIST_RE, _NAME_PREFIX_RE,
+               _NAME_SUFFIX_RE, _NAME_CONTAINS_RE, _PUBLIC_RE, _PRIVATE_RE, _FILE_RE):
+        _mark(rx)
+    for pattern, _c in _CONCEPT_PATTERNS:
+        _mark(pattern)
+    _mark(_METHOD_BARE_RE)
+    # Quoted payloads are data the sentence wants written or matched, not a
+    # request of their own, so they are never residual.
+    _mark(_QUOTED_RE)
+    spans.sort()
+    merged: list[tuple[int, int]] = []
+    for start, end in spans:
+        if merged and start <= merged[-1][1]:
+            merged[-1] = (merged[-1][0], max(merged[-1][1], end))
+        else:
+            merged.append((start, end))
+    text_parts: list[str] = []
+    cursor = 0
+    for start, end in merged:
+        text_parts.append(goal[cursor:start])
+        text_parts.append(" ")
+        cursor = end
+    text_parts.append(goal[cursor:])
+    text = "".join(text_parts)
+    out: list[str] = []
+    for token in re.findall(r"[A-Za-z][A-Za-z'\-]*", text):
+        low = token.lower().strip("'-")
+        if not low or low in _RESIDUAL_STOPWORDS:
+            continue
+        if len(low) == 1:
+            continue
+        if low.endswith("'s"):
+            low = low[:-2]
+        out.append(low)
+    return out
 _NAME_PREFIX_RE = re.compile(r"(?:named|prefixed\s+with|name\s+prefix(?:\s+of|\s*[:=])?|starts?\s+with)\s*['\"`]?([A-Za-z_][A-Za-z0-9_]*)", re.IGNORECASE)
 _NAME_SUFFIX_RE = re.compile(r"(?:suffix(?:ed)?\s+with|end(?:s|ing)?\s+with)\s*['\"`]?([A-Za-z_][A-Za-z0-9_]*)", re.IGNORECASE)
 _NAME_CONTAINS_RE = re.compile(r"(?:containing|name\s+contains?|substring)\s*['\"`]?([A-Za-z_][A-Za-z0-9_]*)", re.IGNORECASE)
@@ -501,6 +808,9 @@ class SemanticTaskAST:
     notes: list[str]
     raw_goal: str
     unparsed_qualifiers: list[str] = field(default_factory=list)
+    filters: list[dict[str, Any]] = field(default_factory=list)
+    residual: list[str] = field(default_factory=list)
+    concepts_named: list[str] = field(default_factory=list)
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -513,7 +823,47 @@ class SemanticTaskAST:
             "notes": list(self.notes),
             "raw_goal": self.raw_goal,
             "unparsed_qualifiers": list(self.unparsed_qualifiers),
+            "filters": [dict(f) for f in self.filters],
+            "residual": list(self.residual),
+            "concepts_named": list(self.concepts_named),
         }
+
+
+def _concept_hits(text: str) -> list[tuple[int, int, str]]:
+    """Every concept word the sentence names, one label per resolved span.
+
+    Used to notice a SECOND concept, not to pick one: picking is the binder's
+    job and stays where it is. Each span gets the label the BINDER would give
+    that phrase, so the notice and the binding cannot disagree about the same
+    words -- which is how "methods" was reported as both `method` and
+    `function`, and "function calls" as both `call` and `function`.
+    """
+    hits: list[tuple[int, int, str]] = []
+    for pattern, candidate in _CONCEPT_PATTERNS:
+        for m in pattern.finditer(text):
+            phrase = m.group(0).strip().lower()
+            if not phrase:
+                continue
+            label = candidate
+            if re.match(r"async[\s_]", phrase):
+                label = "async_function"
+            elif re.fullmatch(r"methods?", phrase):
+                label = "method"
+            elif re.fullmatch(r"functions?", phrase):
+                # "function calls" / "function call sites" is the `call` concept
+                tail = text[m.end():m.end() + 12].lstrip().lower()
+                if tail.startswith(("call", "site")):
+                    continue
+            hits.append((m.start(), m.end(), label))
+    hits.sort(key=lambda h: (h[0], -(h[1] - h[0])))
+    chosen: list[tuple[int, int, str]] = []
+    taken: list[tuple[int, int]] = []
+    for start, end, key in hits:
+        if any(start < e and s2 < end for s2, e in taken):
+            continue
+        taken.append((start, end))
+        chosen.append((start, end, key))
+    return chosen
 
 
 def _domain_for_target(path: str) -> str | None:
@@ -563,7 +913,12 @@ def parse_task(goal: str) -> SemanticTaskAST:
         operation = "unknown"
         notes.append("no operation verb recognized")
 
-    # --- concept ---
+    # --- concept (read from the part of the sentence no other slot consumed) ---
+    # A filename binds the DOMAIN ("items.txt" is text). It must never bind the
+    # concept: that is how "count the lines in items.txt" and "count the words in
+    # items.txt" both became line counts, and how "list the lines" was answered
+    # from the extension.
+    concept_text = _blank_spans(text, modifiers=True)
     concept = "unknown"
     allowed = _DOMAIN_CONCEPTS.get(domain)  # None when no target was found: unfiltered, refused later anyway
 
@@ -572,9 +927,9 @@ def parse_task(goal: str) -> SemanticTaskAST:
 
     async_match = re.search(
         r"\basync[\s_]+(?:def[\s_]+|function[\s_]+|method[\s_]+)?(?:functions?|methods?|defs?|subroutines?)\b",
-        text, re.IGNORECASE,
+        concept_text, re.IGNORECASE,
     )
-    bare_method = _METHOD_BARE_RE.search(text)
+    bare_method = _METHOD_BARE_RE.search(concept_text)
     if async_match and _allowed("async_function"):
         concept = "async_function"
     elif bare_method and _allowed("method"):
@@ -585,10 +940,15 @@ def parse_task(goal: str) -> SemanticTaskAST:
                 continue
             if not _allowed(candidate):
                 continue
-            m = pattern.search(text)
+            m = pattern.search(concept_text)
             if m:
                 concept = candidate
                 break
+    # If the sentence names no concept of its own but the CONCEPT WORD ITSELF is
+    # present inside a consumed span (a quoted phrase, a threshold unit), the
+    # sentence is still incoherent: there is nothing to count. Falling back to
+    # the word in the consumed span is what made "longer than 4 characters"
+    # count characters. So an unbound concept stays unbound and is refused.
     # breakdown needs no concept: it distributes over all domain concepts
     if concept == "unknown" and operation == "breakdown":
         concept = "all"
@@ -598,6 +958,33 @@ def parse_task(goal: str) -> SemanticTaskAST:
     # 'function calls' phrasing belongs to 'call', not 'function'
     if re.search(r"\bfunction\s+calls\b", text, re.IGNORECASE):
         concept = "call"
+
+    # --- every concept the sentence names, so a second one is REFUSED not lost --
+    # "count functions and classes in x.py" answered 4 (the function count) and
+    # dropped `classes`. "list functions and methods" answered the METHODS only.
+    # Only one concept can be served, so naming two is a request this engine
+    # cannot answer -- and it may not answer half of it as if that were the
+    # whole. Sorted for determinism; the primary concept is kept first.
+    # Start from the binder's own decision when it is a concept in its own right.
+    # The bare-`method` re-binding above is a PRECEDENCE artefact: "functions and
+    # methods" binds `method`, but the sentence named two things and the refusal
+    # has to see both. So the binder's kind is kept, and every named span is
+    # added beside it.
+    # Only a concept in SELECTION position is a second request. A concept named
+    # inside a QUALIFIER ("functions with a docstring") is a property of the one
+    # thing being counted, and is already bound as a qualifier -- it must not be
+    # read as a second count.
+    qualifier_spans = [(m.start(), m.end()) for rx in (
+        _HAS_DECORATOR_RE, _HAS_DOCSTRING_RE, _NAME_PREFIX_RE, _NAME_SUFFIX_RE,
+        _NAME_CONTAINS_RE) for m in rx.finditer(text)]
+    concepts_named = [concept] if concept not in ("unknown", "all") else []
+    for start, end, candidate in _concept_hits(concept_text):
+        if candidate == "async_function" or not _allowed(candidate):
+            continue
+        if any(start < qe and qs < end for qs, qe in qualifier_spans):
+            continue
+        if candidate not in concepts_named:
+            concepts_named.append(candidate)
 
     # --- qualifiers ---
     qualifiers: dict[str, Any] = {}
@@ -639,6 +1026,47 @@ def parse_task(goal: str) -> SemanticTaskAST:
     ):
         unparsed_qualifiers.append("argument_count")
 
+    # --- modifiers (the ledger) ---
+    # Every phrase that changes WHICH items are meant becomes an explicit
+    # filter. Grounded rows are executed and verified; ungrounded rows are
+    # refused. Both exits are honest; silently dropping the word was neither.
+    filters: list[dict[str, Any]] = []
+    threshold = _threshold_in(text)
+    for key, phrase in _modifier_phrase_present(text):
+        if key in ("distinct", "distinct") and phrase.lower().startswith("different"):
+            # "different" is often a comparison word ("how are X different");
+            # it is only the distinct set when a file and a count/list is asked.
+            continue
+        spec: dict[str, Any] = {"key": key, "phrase": phrase}
+        if key in ("longer_than", "shorter_than"):
+            spec["n"] = threshold
+            # Read the unit from the words IMMEDIATELY after the number: "longer
+            # than 4 characters" measures characters. Reading "lines" from
+            # anywhere in the sentence made every threshold a line-count, so the
+            # filter measured the wrong quantity while reporting PASS.
+            after = text[_threshold_span_end(text):] if threshold is not None else ""
+            if re.match(r"\s*(?:lines?|statements?)\b", after, re.IGNORECASE):
+                spec["unit"] = "lines"
+            elif re.match(r"\s*(?:words?)\b", after, re.IGNORECASE):
+                spec["unit"] = "words"
+            elif re.match(r"\s*(?:characters?|chars?|letters?|bytes?)\b", after, re.IGNORECASE):
+                spec["unit"] = "characters"
+            else:
+                spec["unit"] = "unspecified"
+        filters.append(spec)
+    grounded_filters: list[dict[str, Any]] = []
+    for spec in filters:
+        if spec.get("unit") == "unspecified":
+            unparsed_qualifiers.append(
+                f"{spec['key']}: the sentence gives a threshold with no unit, so the quantity to measure is a guess")
+            continue
+        if _filter_is_grounded(domain, str(spec["key"])) and spec.get("n", 0) is not None:
+            grounded_filters.append(spec)
+        else:
+            unparsed_qualifiers.append(f"{spec['key']}: {MODIFIER_REFUSAL.get(str(spec['key']), 'not implemented')}")
+
+    residual = _residual_tokens(text)
+
     # --- confidence ---
     confidence = 0.2
     if operation != "unknown":
@@ -661,6 +1089,9 @@ def parse_task(goal: str) -> SemanticTaskAST:
         notes=notes,
         raw_goal=text,
         unparsed_qualifiers=unparsed_qualifiers,
+        filters=grounded_filters,
+        residual=residual,
+        concepts_named=concepts_named,
     )
 
 
@@ -696,6 +1127,8 @@ def synthesize_plan(task: SemanticTaskAST) -> dict[str, Any]:
         pipeline += ["PARSE_UNKNOWN"]
     if task.qualifiers:
         pipeline.append("FILTER_QUALIFIERS")
+    for spec in task.filters:
+        pipeline.append(f"FILTER_{str(spec['key']).upper()}")
     pipeline.append(f"REDUCE_{task.operation.upper()}")
     return {
         "schema": PLAN_SCHEMA,
@@ -704,6 +1137,7 @@ def synthesize_plan(task: SemanticTaskAST) -> dict[str, Any]:
         "domain": task.domain,
         "targets": list(task.targets),
         "qualifiers": dict(task.qualifiers),
+        "filters": [dict(spec) for spec in task.filters],
         "pipeline": pipeline,
     }
 
@@ -869,6 +1303,32 @@ def _apply_qualifiers(nodes: list[ast.AST], qualifiers: Mapping[str, Any], conce
 _ARG_QUALIFIERS = ("min_args", "max_args")
 _NAME_QUALIFIERS = ("public", "private", "name_prefix", "name_suffix", "name_contains", "has_decorator", "has_docstring")
 _ALL_QUALIFIER_KEYS = _ARG_QUALIFIERS + _NAME_QUALIFIERS
+
+
+#: What each operation can answer per concept. `count` and `exists` answer any
+#: selection; `compare` needs an arity; `list` is the narrow one -- naming the
+#: lines of a file or the words of a paragraph is not a listing of definitions,
+#: and the file extension used to supply that concept silently.
+_LISTABLE_CONCEPTS = frozenset({
+    "function", "async_function", "class", "method", "if_statement", "for_loop",
+    "while_loop", "loop", "import", "return_statement", "try_block",
+    "raise_statement", "call", "assignment", "assertion", "comprehension",
+    "decorator", "docstring", "parameter", "heading", "section", "code_block",
+    "bullet", "link", "entry", "key", "row", "column", "all",
+})
+
+
+def _operation_concept_gap(operation: str, concept: str) -> str | None:
+    if operation in ("count", "exists", "breakdown"):
+        return None
+    if operation == "compare":
+        return None
+    if operation == "list":
+        if concept in _LISTABLE_CONCEPTS:
+            return None
+        return (f"a listing of {concept!r} is not implemented; the verb and the noun in the "
+                f"sentence name different work (the file extension alone is not a request)")
+    return None
 
 
 def _check_qualifier_applicability(concept: str, domain: str, qualifiers: Mapping[str, Any]) -> None:
@@ -1149,12 +1609,81 @@ def _breakdown(domain: str, text: str) -> dict[str, int]:
     return {c: len(_select_concept_in_source(domain, c, text)) for c in concepts}
 
 
+def _apply_filter_items(items: list[Any], concept: str, spec: Mapping[str, Any]) -> list[Any]:
+    """Apply ONE modifier to a selection. Pure, deterministic, exact.
+
+    A filter that cannot be evaluated on these items is a QualifierFailure —
+    never a pass-through. That is the whole point of the ledger: the only
+    exits are "computed" and "refused", and "computed" is separately verified.
+    """
+    key = str(spec["key"])
+    if key in ("distinct",):
+        if concept not in ("line", "word", "character", "cell", "heading", "link", "key", "column"):
+            raise QualifierFailure(f"{MODIFIER_REFUSAL[key]} ({concept})")
+        seen: list[Any] = []
+        for item in items:
+            if item not in seen:
+                seen.append(item)
+        return seen
+    if key == "duplicate":
+        if concept not in ("line", "word", "character", "cell"):
+            raise QualifierFailure(f"{MODIFIER_REFUSAL[key]} ({concept})")
+        counts = Counter(items)
+        first: list[Any] = []
+        for item in items:
+            if counts[item] > 1 and item not in first:
+                first.append(item)
+        return first
+    if key == "blank":
+        if concept not in ("line",):
+            raise QualifierFailure(f"{MODIFIER_REFUSAL[key]} ({concept})")
+        return [item for item in items if not str(item).strip()]
+    if key == "non_empty":
+        if concept not in ("line",):
+            raise QualifierFailure(f"{MODIFIER_REFUSAL[key]} ({concept})")
+        return [item for item in items if str(item).strip()]
+    if key in ("longer_than", "shorter_than"):
+        bound = spec.get("n")
+        if not isinstance(bound, int) or bound < 0:
+            raise QualifierFailure(f"{MODIFIER_REFUSAL[key]}: no threshold number in the sentence")
+        if spec.get("unit") == "words":
+            measure = [len(_TEXT_WORD_RE.findall(str(item))) for item in items]
+        elif spec.get("unit") == "lines" and concept in PY_CONCEPTS:
+            measure = [max(0, int(getattr(item, "end_lineno", 0) or 0) - int(getattr(item, "lineno", 0) or 0) + 1) for item in items]
+        else:
+            measure = [len(str(item)) if not isinstance(item, ast.AST) else _node_source_span(item) for item in items]
+        keep = [item for item, m in zip(items, measure) if (m > bound if key == "longer_than" else m < bound)]
+        return keep
+    raise QualifierFailure(MODIFIER_REFUSAL.get(key, f"filter {key!r} is not implemented"))
+
+
+def _node_source_span(node: ast.AST) -> int:
+    start = int(getattr(node, "lineno", 0) or 0)
+    end = int(getattr(node, "end_lineno", 0) or 0)
+    return max(0, end - start + 1) if start and end else 0
+
+
+def _filter_is_grounded(domain: str, key: str) -> bool:
+    """A filter is servable only if there is a fixture that can see it IN THIS
+    DOMAIN. The fixture is what distinguishes "the filter ran" from "the filter
+    was dropped", so a filter with no fixture is not servable however easy the
+    code looks."""
+    if _MODIFIER_CONCEPT.get(key) is None:
+        return False
+    if key in ("longer_than", "shorter_than"):
+        # any positive threshold is computable; the anchor is derived from the
+        # fixture by the same rule the plan uses, so it cannot drift from it
+        return bool(FILTER_FIXTURES.get(domain, {}).get(key))
+    return (domain, key) in FILTER_FIXTURE_EXPECT
+
+
 def _run_plan(plan: Mapping[str, Any], sources: Mapping[str, str]) -> dict[str, Any]:
     """Execute a synthesized plan over in-memory sources. Pure & deterministic."""
     domain = str(plan["domain"])
     concept = str(plan["concept"])
     operation = str(plan["operation"])
     qualifiers = dict(plan.get("qualifiers") or {})
+    filters = list(plan.get("filters") or [])
     targets = list(sources)
 
     per_target: dict[str, list[Any]] = {}
@@ -1165,10 +1694,23 @@ def _run_plan(plan: Mapping[str, Any], sources: Mapping[str, str]) -> dict[str, 
         if domain == "python_ast" and qualifiers:
             tree = ast.parse(text)
             items = _apply_qualifiers(items, qualifiers, concept)
+        for spec in filters:
+            items = _apply_filter_items(items, concept, spec)
         per_target[target] = items
         per_target_items[target] = _describe_items(domain, concept, text, items)
 
     total = sum(len(v) for v in per_target.values())
+    # The UNFILTERED total is the count the same selection would have had with
+    # no filter. It is computed here, in the interpreter, so the verifier can
+    # compare against something the filter is not in a position to fake.
+    unfiltered_total = 0
+    if filters:
+        for target in targets:
+            text = sources[target]
+            base = _select_concept_in_source(domain, concept, text)
+            if domain == "python_ast" and qualifiers:
+                base = _apply_qualifiers(base, qualifiers, concept)
+            unfiltered_total += len(base)
 
     if operation == "count":
         answer: Any = total
@@ -1211,6 +1753,8 @@ def _run_plan(plan: Mapping[str, Any], sources: Mapping[str, str]) -> dict[str, 
         "targets": targets,
         "per_target_counts": {t: len(v) for t, v in per_target.items()},
         "total_matches": total,
+        "unfiltered_matches": unfiltered_total if filters else total,
+        "filters_applied": [dict(spec) for spec in filters],
     }
 
 
@@ -1567,10 +2111,27 @@ class CausalMechanismVerifier:
         self.concept = str(self.plan["concept"])
         self.operation = str(self.plan["operation"])
         self.qualifiers = dict(self.plan.get("qualifiers") or {})
+        self.filters = [dict(f) for f in (self.plan.get("filters") or [])]
 
     # -- fixtures per domain --------------------------------------------------
     def _positive_fixture(self) -> tuple[dict[str, str], dict[str, Any]]:
-        """Returns (sources, expectation). expectation carries count/list keys."""
+        """Returns (sources, expectation). expectation carries count/list keys.
+
+        A filter that is invisible on the fixture cannot be verified by it: the
+        old fixture had no repeated line and no blank line, so "distinct" and
+        "blank" were both no-ops there and the probe passed on a program that
+        ignored them. The fixture is now chosen from FILTER_FIXTURES whenever
+        the plan carries a filter, with a hand-computed answer.
+        """
+        if self.filters:
+            spec = self.filters[0]
+            key = str(spec["key"])
+            fixture = FILTER_FIXTURES.get(self.domain, {}).get(key)
+            expect = FILTER_FIXTURE_EXPECT.get((self.domain, key))
+            # A threshold filter is anchored by the SAME rule it computes, so it
+            # needs a fixture but no hand-written number.
+            if fixture is not None and (expect is not None or key in ("longer_than", "shorter_than")):
+                return self._filtered_positive_fixture(fixture, key, spec, expect or 0)
         domain = self.domain
         concept = self.concept
         if concept == "all":  # breakdown distributes over every domain concept
@@ -1606,6 +2167,36 @@ class CausalMechanismVerifier:
         if domain == "text":
             return {"__probe__.txt": TEXT_FIXTURE}, {"count": TEXT_FIXTURE_EXPECT[concept], "names": None}
         raise CausalVerificationFailure("positive_intervention_probe", f"no fixture for domain {domain!r}")
+
+    def _filtered_positive_fixture(self, fixture: str, key: str,
+                                   spec: Mapping[str, Any], expect: int) -> tuple[dict[str, str], dict[str, Any]]:
+        """A fixture on which this filter MUST change the answer, plus the
+        unfiltered count as a second anchor.
+
+        Two numbers are returned so the probe can assert BOTH directions: the
+        filtered plan yields `count`, and the same plan with the filter removed
+        yields `unfiltered`. A program that ignores the filter passes the first
+        check by luck only if the two numbers are equal -- and they are chosen
+        not to be. On the distinct fixture: 6 lines -> 3 distinct.
+        """
+        total = len(fixture.splitlines()) if self.domain == "text" else expect
+        count = expect
+        # `unfiltered` was reaching the probe as None here, so the second
+        # direction of the check silently did nothing on this path.
+        unfiltered = total
+        if key in ("longer_than", "shorter_than"):
+            # Derive the anchor with the SAME measure the plan uses, so a
+            # threshold can never be verified against a different quantity than
+            # the one it computes.
+            bound = int(spec.get("n") or 0)
+            items = _apply_filter_items(
+                fixture.splitlines(), "line", {**dict(spec), "n": bound}
+            )
+            count = len(items)
+        if key in ("blank", "non_empty"):
+            lines = fixture.splitlines()
+            count = sum(1 for l in lines if (not l.strip()) == (key == "blank"))
+        return {"__probe__.txt": fixture}, {"count": count, "unfiltered": unfiltered, "names": None}
 
     def _null_sources(self) -> tuple[dict[str, str] | None, int | None]:
         if self.concept == "all":
@@ -1679,6 +2270,16 @@ class CausalMechanismVerifier:
         got_count = self._count_in(self.plan, sources)
         passed = got_count == expected_count
         detail = f"do(source:=fixture): expected count {expected_count}, got {got_count}"
+        # A filter must CHANGE the answer on the fixture it is verified against.
+        # Otherwise the probe cannot tell "the filter ran" from "the filter was
+        # dropped", which is exactly how `unique` and `blank` passed before.
+        if self.filters and expectation.get("unfiltered") is not None:
+            unfiltered = int(expectation["unfiltered"])
+            got_unfiltered = self._count_in({**self.plan, "filters": []}, sources)
+            visible = got_unfiltered == unfiltered and got_unfiltered != expected_count
+            detail += (f"; do(remove filter): expected {unfiltered}, got {got_unfiltered}"
+                       f" ({'visible' if visible else 'NOT VISIBLE - the filter would certify nothing'})")
+            passed = passed and visible
         result = {"probe": "positive_intervention_probe", "applicable": True, "passed": passed, "detail": detail}
 
         if self.operation == "list" and passed:
@@ -1781,6 +2382,32 @@ class CausalMechanismVerifier:
             "probes": probes,
             "all_passed": bool(pre["all_passed"]) and all(p["passed"] for p in probes),
         }
+
+
+def _second_opinion_filtered_count(domain: str, concept: str, text: str,
+                                   filters: Sequence[Mapping[str, Any]]) -> int:
+    """Count the filtered selection a SECOND way, from the raw text.
+
+    The plan path selects items, then filters them. This path derives the same
+    selection directly from the text with the stdlib only, so agreement is
+    evidence that the selector and the filter compose -- rather than the filter
+    being a label the interpreter prints while doing nothing. It is a different
+    derivation, not a second opinion from another model: same bytes, different
+    route, no model.
+    """
+    if domain != "text":
+        raise QualifierFailure("second opinion is implemented for the text domain only")
+    if concept == "line":
+        items: list[Any] = text.splitlines()
+    elif concept == "word":
+        items = _TEXT_WORD_RE.findall(text)
+    elif concept == "character":
+        items = list(text)
+    else:
+        raise QualifierFailure(f"second opinion has no selector for {concept!r}")
+    for spec in filters:
+        items = _apply_filter_items(items, concept, spec)
+    return len(items)
 
 
 def verify_postconditions(operation: str, answer: Any) -> dict[str, Any]:
@@ -2099,6 +2726,44 @@ class GeneralizationEngine:
                 elapsed_ms=elapsed(),
             )
 
+        # --- honesty gate 6b: a concept the operation cannot answer ---
+        # "list the lines in a.txt" was answered from the FILE EXTENSION: the
+        # filename bound the concept `line`, the verb bound the operation `list`,
+        # and the engine returned a list of lines to a sentence that asked for a
+        # count. A verb that has no answer for a concept must say so.
+        incoherent = _operation_concept_gap(task.operation, task.concept)
+        if incoherent:
+            return _fail_closed(
+                "FAIL_CLOSED__OPERATION_CONCEPT_INCOHERENT", goal, task=task, policy=policy_prediction,
+                detail=incoherent, elapsed_ms=elapsed(),
+            )
+
+        # --- honesty gate 6b2: two concepts, one answer ---
+        # The engine serves one selection. A sentence naming two is a request
+        # for two answers; answering the higher-priority one and dropping the
+        # other is the same defect as dropping a modifier, one level up.
+        if len(task.concepts_named) > 1:
+            return _fail_closed(
+                "FAIL_CLOSED__MULTIPLE_CONCEPTS_NAMED", goal, task=task, policy=policy_prediction,
+                detail="the sentence asks about more than one kind of thing ("
+                       + ", ".join(task.concepts_named)
+                       + "); this engine serves one selection per request and will not answer half of it",
+                elapsed_ms=elapsed(),
+            )
+
+        # --- honesty gate 6c: words that bound to nothing ---
+        # Every word the sentence used that no slot consumed. One of them is
+        # what "top-level" and "unique" and "blank" were: a narrowing that was
+        # silently dropped. Refusing is the only honest exit until the word has
+        # a grounded row in the modifier ledger.
+        if task.residual:
+            return _fail_closed(
+                "FAIL_CLOSED__UNBOUND_QUALIFIER", goal, task=task, policy=policy_prediction,
+                detail="the sentence narrows the request with words that bound to no grounded predicate: "
+                       + ", ".join(task.residual),
+                elapsed_ms=elapsed(),
+            )
+
         # --- honesty gate 7: qualifiers are meaningless for a whole-file breakdown ---
         if task.operation == "breakdown" and task.qualifiers:
             return _fail_closed(
@@ -2156,6 +2821,34 @@ class GeneralizationEngine:
                 "FAIL_CLOSED__TARGET_NOT_FOUND", goal, task=task, policy=policy_prediction,
                 detail=str(exc), elapsed_ms=elapsed(), extra={"plan": plan},
             )
+
+        # --- second opinion on the real bytes (only when a filter narrowed the set) ---
+        # The probes above run on a fixture. This runs on the caller's actual
+        # file, by a separate derivation, and must agree with the plan's count.
+        # Without it, "the filter exists" and "the filter was applied" are the
+        # same claim again -- on a different file.
+        if task.filters:
+            try:
+                expected_real = _second_opinion_filtered_count(
+                    task.domain, task.concept,
+                    "\n".join(sources[t] for t in task.targets) if len(task.targets) == 1
+                    else "\n".join(sources[t] for t in task.targets),
+                    task.filters,
+                )
+            except QualifierFailure as exc:
+                return _fail_closed(
+                    "FAIL_CLOSED__SECOND_DERIVATION_UNAVAILABLE", goal, task=task,
+                    policy=policy_prediction, detail=str(exc), elapsed_ms=elapsed(),
+                    extra={"plan": plan},
+                )
+            got_real = int(payload.get("total_matches", -1))
+            if got_real != expected_real:
+                return _fail_closed(
+                    "FAIL_CLOSED__SECOND_DERIVATION_DISAGREES", goal, task=task,
+                    policy=policy_prediction,
+                    detail=f"plan counted {got_real}, an independent derivation over the same bytes counted {expected_real}",
+                    elapsed_ms=elapsed(), extra={"plan": plan},
+                )
 
         # --- postconditions ---
         post = verify_postconditions(task.operation, payload["answer"])
