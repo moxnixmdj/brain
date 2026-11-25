@@ -1,0 +1,1588 @@
+{
+ "schema": "BRAIN_WHEN_TO_STOP_ASKING_V1",
+ "generated": "2026-11-25T02:27:22Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 366.0
+ },
+ "rows": [
+  {
+   "machine": "GIT",
+   "walk_transitions": 28,
+   "held_out_transitions": 35,
+   "probes": 30,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 8,
+   "predictions_final": 23,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 8,
+   "correct_final": 23,
+   "history_tail": [
+    {
+     "probe": 25,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    },
+    {
+     "probe": 26,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    },
+    {
+     "probe": 27,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    },
+    {
+     "probe": 28,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    },
+    {
+     "probe": 29,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    },
+    {
+     "probe": 30,
+     "accuracy": 1.0,
+     "predictions": 23,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 33,
+   "held_out_transitions": 45,
+   "probes": 26,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 12,
+   "predictions_final": 26,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 12,
+   "correct_final": 26,
+   "history_tail": [
+    {
+     "probe": 21,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    },
+    {
+     "probe": 22,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    },
+    {
+     "probe": 23,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    },
+    {
+     "probe": 24,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    },
+    {
+     "probe": 25,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    },
+    {
+     "probe": 26,
+     "accuracy": 1.0,
+     "predictions": 26,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 32,
+   "held_out_transitions": 35,
+   "probes": 4,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 10,
+   "predictions_final": 11,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 10,
+   "correct_final": 11,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 1.0,
+     "predictions": 10,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 1.0,
+     "predictions": 10,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 1.0,
+     "predictions": 10,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 1.0,
+     "predictions": 10,
+     "wrong": 0
+    },
+    {
+     "probe": 4,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 43,
+   "held_out_transitions": 36,
+   "probes": 29,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.8,
+   "accuracy_final": 0.9259,
+   "predictions_start": 10,
+   "predictions_final": 27,
+   "wrong_start": 2,
+   "wrong_final": 2,
+   "correct_start": 8,
+   "correct_final": 25,
+   "history_tail": [
+    {
+     "probe": 24,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    },
+    {
+     "probe": 25,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    },
+    {
+     "probe": 26,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    },
+    {
+     "probe": 27,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    },
+    {
+     "probe": 28,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    },
+    {
+     "probe": 29,
+     "accuracy": 0.9259,
+     "predictions": 27,
+     "wrong": 2
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 39,
+   "held_out_transitions": 24,
+   "probes": 29,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 0.9333,
+   "predictions_start": 2,
+   "predictions_final": 15,
+   "wrong_start": 0,
+   "wrong_final": 1,
+   "correct_start": 2,
+   "correct_final": 14,
+   "history_tail": [
+    {
+     "probe": 24,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    },
+    {
+     "probe": 25,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    },
+    {
+     "probe": 26,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    },
+    {
+     "probe": 27,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    },
+    {
+     "probe": 28,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    },
+    {
+     "probe": 29,
+     "accuracy": 0.9333,
+     "predictions": 15,
+     "wrong": 1
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 41,
+   "held_out_transitions": 36,
+   "probes": 6,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.7778,
+   "accuracy_final": 0.8,
+   "predictions_start": 9,
+   "predictions_final": 10,
+   "wrong_start": 2,
+   "wrong_final": 2,
+   "correct_start": 7,
+   "correct_final": 8,
+   "history_tail": [
+    {
+     "probe": 1,
+     "accuracy": 0.7778,
+     "predictions": 9,
+     "wrong": 2
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.7778,
+     "predictions": 9,
+     "wrong": 2
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.7778,
+     "predictions": 9,
+     "wrong": 2
+    },
+    {
+     "probe": 4,
+     "accuracy": 0.7778,
+     "predictions": 9,
+     "wrong": 2
+    },
+    {
+     "probe": 5,
+     "accuracy": 0.7778,
+     "predictions": 9,
+     "wrong": 2
+    },
+    {
+     "probe": 6,
+     "accuracy": 0.8,
+     "predictions": 10,
+     "wrong": 2
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 113,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 0,
+   "predictions_final": 2,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 2,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 1.0,
+     "predictions": 2,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 113,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 0,
+   "predictions_final": 2,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 2,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 1.0,
+     "predictions": 2,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 113,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 0,
+   "predictions_final": 2,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 2,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 1.0,
+     "predictions": 2,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 105,
+   "held_out_transitions": 210,
+   "probes": 16,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.8966,
+   "accuracy_final": 0.8571,
+   "predictions_start": 29,
+   "predictions_final": 42,
+   "wrong_start": 3,
+   "wrong_final": 6,
+   "correct_start": 26,
+   "correct_final": 36,
+   "history_tail": [
+    {
+     "probe": 11,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 12,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 13,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 14,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 15,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 16,
+     "accuracy": 0.8571,
+     "predictions": 42,
+     "wrong": 6
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 105,
+   "held_out_transitions": 210,
+   "probes": 16,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.8966,
+   "accuracy_final": 0.8571,
+   "predictions_start": 29,
+   "predictions_final": 42,
+   "wrong_start": 3,
+   "wrong_final": 6,
+   "correct_start": 26,
+   "correct_final": 36,
+   "history_tail": [
+    {
+     "probe": 11,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 12,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 13,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 14,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 15,
+     "accuracy": 0.9189,
+     "predictions": 37,
+     "wrong": 3
+    },
+    {
+     "probe": 16,
+     "accuracy": 0.8571,
+     "predictions": 42,
+     "wrong": 6
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 105,
+   "held_out_transitions": 210,
+   "probes": 7,
+   "stopped_because": "accuracy_turned_negative",
+   "accuracy_start": 0.8966,
+   "accuracy_final": 0.8966,
+   "predictions_start": 29,
+   "predictions_final": 29,
+   "wrong_start": 3,
+   "wrong_final": 3,
+   "correct_start": 26,
+   "correct_final": 26,
+   "history_tail": [
+    {
+     "probe": 2,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    },
+    {
+     "probe": 4,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    },
+    {
+     "probe": 5,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    },
+    {
+     "probe": 6,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    },
+    {
+     "probe": 7,
+     "accuracy": 0.8966,
+     "predictions": 29,
+     "wrong": 3
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "VAULT",
+   "walk_transitions": 10,
+   "held_out_transitions": 4,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 13,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 59,
+   "held_out_transitions": 60,
+   "probes": 33,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 15,
+   "predictions_final": 35,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 15,
+   "correct_final": 35,
+   "history_tail": [
+    {
+     "probe": 28,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    },
+    {
+     "probe": 29,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    },
+    {
+     "probe": 30,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    },
+    {
+     "probe": 31,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    },
+    {
+     "probe": 32,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    },
+    {
+     "probe": 33,
+     "accuracy": 1.0,
+     "predictions": 35,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 83,
+   "held_out_transitions": 55,
+   "probes": 23,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 16,
+   "predictions_final": 29,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 16,
+   "correct_final": 29,
+   "history_tail": [
+    {
+     "probe": 18,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    },
+    {
+     "probe": 19,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    },
+    {
+     "probe": 20,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    },
+    {
+     "probe": 21,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    },
+    {
+     "probe": 22,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    },
+    {
+     "probe": 23,
+     "accuracy": 1.0,
+     "predictions": 29,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "GIT",
+   "walk_transitions": 63,
+   "held_out_transitions": 55,
+   "probes": 6,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 10,
+   "predictions_final": 13,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 10,
+   "correct_final": 13,
+   "history_tail": [
+    {
+     "probe": 1,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    },
+    {
+     "probe": 4,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    },
+    {
+     "probe": 5,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    },
+    {
+     "probe": 6,
+     "accuracy": 1.0,
+     "predictions": 13,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 62,
+   "held_out_transitions": 24,
+   "probes": 27,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 4,
+   "predictions_final": 11,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 4,
+   "correct_final": 11,
+   "history_tail": [
+    {
+     "probe": 22,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    },
+    {
+     "probe": 23,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    },
+    {
+     "probe": 24,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    },
+    {
+     "probe": 25,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    },
+    {
+     "probe": 26,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    },
+    {
+     "probe": 27,
+     "accuracy": 1.0,
+     "predictions": 11,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 69,
+   "held_out_transitions": 36,
+   "probes": 27,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 4,
+   "predictions_final": 16,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 4,
+   "correct_final": 16,
+   "history_tail": [
+    {
+     "probe": 22,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    },
+    {
+     "probe": 23,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    },
+    {
+     "probe": 24,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    },
+    {
+     "probe": 25,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    },
+    {
+     "probe": 26,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    },
+    {
+     "probe": 27,
+     "accuracy": 1.0,
+     "predictions": 16,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "GIT2",
+   "walk_transitions": 62,
+   "held_out_transitions": 24,
+   "probes": 9,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 1.0,
+   "accuracy_final": 1.0,
+   "predictions_start": 5,
+   "predictions_final": 7,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 5,
+   "correct_final": 7,
+   "history_tail": [
+    {
+     "probe": 4,
+     "accuracy": 1.0,
+     "predictions": 6,
+     "wrong": 0
+    },
+    {
+     "probe": 5,
+     "accuracy": 1.0,
+     "predictions": 6,
+     "wrong": 0
+    },
+    {
+     "probe": 6,
+     "accuracy": 1.0,
+     "predictions": 6,
+     "wrong": 0
+    },
+    {
+     "probe": 7,
+     "accuracy": 1.0,
+     "predictions": 6,
+     "wrong": 0
+    },
+    {
+     "probe": 8,
+     "accuracy": 1.0,
+     "predictions": 6,
+     "wrong": 0
+    },
+    {
+     "probe": 9,
+     "accuracy": 1.0,
+     "predictions": 7,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 114,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 114,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "JOURNAL",
+   "walk_transitions": 114,
+   "held_out_transitions": 16,
+   "probes": 3,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 96,
+   "held_out_transitions": 203,
+   "probes": 4,
+   "stopped_because": "accuracy_turned_negative",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.6667,
+   "predictions_start": 0,
+   "predictions_final": 3,
+   "wrong_start": 0,
+   "wrong_final": 1,
+   "correct_start": 0,
+   "correct_final": 2,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 2,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 3,
+     "accuracy": 0.6667,
+     "predictions": 3,
+     "wrong": 1
+    },
+    {
+     "probe": 4,
+     "accuracy": 0.6667,
+     "predictions": 3,
+     "wrong": 1
+    }
+   ],
+   "seed": 42,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 96,
+   "held_out_transitions": 203,
+   "probes": 27,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.9231,
+   "predictions_start": 0,
+   "predictions_final": 26,
+   "wrong_start": 0,
+   "wrong_final": 2,
+   "correct_start": 0,
+   "correct_final": 24,
+   "history_tail": [
+    {
+     "probe": 22,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    },
+    {
+     "probe": 23,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    },
+    {
+     "probe": 24,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    },
+    {
+     "probe": 25,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    },
+    {
+     "probe": 26,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    },
+    {
+     "probe": 27,
+     "accuracy": 0.9231,
+     "predictions": 26,
+     "wrong": 2
+    }
+   ],
+   "seed": 42,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "LIST",
+   "walk_transitions": 96,
+   "held_out_transitions": 203,
+   "probes": 21,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.8333,
+   "predictions_start": 0,
+   "predictions_final": 12,
+   "wrong_start": 0,
+   "wrong_final": 2,
+   "correct_start": 0,
+   "correct_final": 10,
+   "history_tail": [
+    {
+     "probe": 16,
+     "accuracy": 0.75,
+     "predictions": 8,
+     "wrong": 2
+    },
+    {
+     "probe": 17,
+     "accuracy": 0.8333,
+     "predictions": 12,
+     "wrong": 2
+    },
+    {
+     "probe": 18,
+     "accuracy": 0.8333,
+     "predictions": 12,
+     "wrong": 2
+    },
+    {
+     "probe": 19,
+     "accuracy": 0.8333,
+     "predictions": 12,
+     "wrong": 2
+    },
+    {
+     "probe": 20,
+     "accuracy": 0.8333,
+     "predictions": 12,
+     "wrong": 2
+    },
+    {
+     "probe": 21,
+     "accuracy": 0.8333,
+     "predictions": 12,
+     "wrong": 2
+    }
+   ],
+   "seed": 42,
+   "arm": "PER_ATOM"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 8,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "ADAPTIVE"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 8,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "FIXED"
+  },
+  {
+   "machine": "SCRAMBLED",
+   "walk_transitions": 17,
+   "held_out_transitions": 8,
+   "probes": 1,
+   "stopped_because": "nothing_left_to_ask",
+   "accuracy_start": 0.0,
+   "accuracy_final": 0.0,
+   "predictions_start": 0,
+   "predictions_final": 0,
+   "wrong_start": 0,
+   "wrong_final": 0,
+   "correct_start": 0,
+   "correct_final": 0,
+   "history_tail": [
+    {
+     "probe": 0,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    },
+    {
+     "probe": 1,
+     "accuracy": 0.0,
+     "predictions": 0,
+     "wrong": 0
+    }
+   ],
+   "seed": 42,
+   "arm": "PER_ATOM"
+  }
+ ],
+ "summary": {
+  "runs": 33,
+  "budget": 200,
+  "patience": 2,
+  "ADAPTIVE": {
+   "runs": 11,
+   "probes": 148,
+   "predictions_start": 66,
+   "predictions_final": 143,
+   "wrong_final": 9,
+   "correct_start": 61,
+   "correct_final": 134,
+   "stopped": {
+    "accuracy_turned_negative": 1,
+    "nothing_left_to_ask": 10
+   },
+   "accuracy_final": 0.9371,
+   "mean_probes": 13.5
+  },
+  "FIXED": {
+   "runs": 11,
+   "probes": 157,
+   "predictions_start": 63,
+   "predictions_final": 156,
+   "wrong_final": 9,
+   "correct_start": 60,
+   "correct_final": 147,
+   "stopped": {
+    "nothing_left_to_ask": 11
+   },
+   "accuracy_final": 0.9423,
+   "mean_probes": 14.3
+  },
+  "PER_ATOM": {
+   "runs": 11,
+   "probes": 62,
+   "predictions_start": 63,
+   "predictions_final": 84,
+   "wrong_final": 7,
+   "correct_start": 58,
+   "correct_final": 77,
+   "stopped": {
+    "accuracy_turned_negative": 1,
+    "nothing_left_to_ask": 10
+   },
+   "accuracy_final": 0.9167,
+   "mean_probes": 5.6
+  },
+  "accuracy_start": 1.0,
+  "verdicts": {
+   "the_adaptive_loop_stops_itself": true,
+   "the_adaptive_loop_buys_reach": true,
+   "the_adaptive_loop_keeps_its_accuracy": true,
+   "stopping_costs_almost_no_reach": true,
+   "stopping_costs_no_accuracy": false,
+   "stopping_saves_most_of_the_budget": false,
+   "the_fixed_arm_pays_for_its_extra_reach_in_errors": false,
+   "stopping_per_atom_is_worse_than_stopping_on_accuracy": true,
+   "the_question_supply_is_the_limit_not_the_budget": true
+  }
+ }
+}

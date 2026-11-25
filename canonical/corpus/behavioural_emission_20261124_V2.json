@@ -1,0 +1,51 @@
+{
+ "schema": "BRAIN_BEHAVIOURAL_EMISSION_V2_RECEIPT",
+ "generated": "2026-11-25T15:24:41Z",
+ "the_denominator_was_wrong_three_times": {
+  "89": "the corpus read as a task set (V32)",
+  "12": "after requiring the added test to fail at the parent (V32)",
+  "10": "after requiring the failure to be a TEST failure, not a collection error, with the checkout on PYTHONPATH (V34)",
+  "what_the_two_dropped_rows_were": "pypa/packaging 668da866 and a3b6a1f6 both return pytest rc=2 at their parent: the added test fails to IMPORT, so no behaviour was ever under test. 668da866 additionally PASSES at its parent once the checkout shadows the installed wheel correctly -- it was never a reproduction."
+ },
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 9.7
+ },
+ "measured": {
+  "tasks_examined": 12,
+  "genuine_test_failures": 10,
+  "solved": 1,
+  "resolve_rate": 0.1,
+  "by_class": {
+   "REFUSED": 9,
+   "NOT_A_TEST_FAILURE": 2,
+   "SOLVED": 1
+  },
+  "by_family": {
+   "KEYWORD_APPLY_ALL": 1
+  }
+ },
+ "the_one_solved": {
+  "repo": "hukkin/tomli",
+  "sha": "5ab9ec926d9dc1ef79e66215edd51285371fe8a0",
+  "node": "tests/test_misc.py::test_parse_float",
+  "operator": "KEYWORD_APPLY_ALL",
+  "candidates_tried": 1,
+  "how": "the traceback names loads() and the keyword parse_float. The operator accepts it, threads it through the constructor loads() already calls, and applies it at every site in the file that already builds the value the keyword names (float). The interpreter chooses among sites; I do not.",
+  "diff_is_structurally_identical_to_the_real_fix": "the upstream commit changes the same four things in the same file: the signature, the ParseState constructor, the one call site that passes it, and the same three float() constructions. It differs in style (ParseFloat alias, default float rather than None, direct call rather than `or float`). This was verified by reading the upstream diff after the run, not before.",
+  "honest_caveat": "this is the task the operator was built around. Its shape -- a keyword accepted but unused -- determined what the operator looks for. Four tasks in this set share that shape and three were still refused, so the operator is not tuned to the answer, but a 1/10 built on the first task attempted is not evidence of general ability."
+ },
+ "the_nine_refusals": {
+  "why_they_are_refusals_and_not_failures": "a refusal means no candidate existed or none turned the node green. Nothing was guessed and nothing was claimed.",
+  "by_cause": {
+   "assertion_without_a_locatable_source_frame": 5,
+   "no_matchable_exception_at_all": 2,
+   "missing_key_with_no_dict_literal_to_extend": 1,
+   "missing_keyword_where_accepting_the_keyword_is_not_enough": 1
+  }
+ },
+ "what_this_is": "the first task this system has ever solved. One. Ten were examined. No benchmark row exists or is claimed; this is ten small single-node bugs in two repositories, and the search is verified by running the test rather than by understanding the code.",
+ "what_this_is_not": "not evidence of generalisation. Not a benchmark result. The nine refusals are the measurement that matters more than the one solve."
+}

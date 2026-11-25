@@ -1,0 +1,64 @@
+{
+ "schema": "BRAIN_WIDER_TASK_SET_V1",
+ "generated": "2026-11-25T15:52:59Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0
+ },
+ "why_this_round_exists": "every conclusion for four rounds rested on 8 tasks in 2 repositories; picking the next operator from 8 tasks is guessing",
+ "the_wider_set": {
+  "mined": 28,
+  "previously_examined": 23,
+  "never_examined": 5,
+  "rule": "a commit changing both a test file and a source file, where the added test fails on the parent as a genuine TEST FAILURE (pytest rc=1) with the checkout on PYTHONPATH",
+  "source": "canonical/corpus/fail_to_pass_tasks_20261124_V1.json"
+ },
+ "localisation_on_28": {
+  "frames_top1": 3,
+  "frames_blind": 24,
+  "assertion_symbols_top1": 5,
+  "combined_top1": 17,
+  "combined_within_five": 27,
+  "note": "17/28 top-1 and 27/28 within five on tasks never used to build the localiser. The V35 localisation result holds on the wider set."
+ },
+ "generation_on_28": {
+  "solved": 0,
+  "denominator": 28,
+  "resolve_rate": 0.0,
+  "no_candidate_produced": 27,
+  "candidates_were_tried_on": 1,
+  "with_localisation_seed": 0,
+  "with_empty_store": 0
+ },
+ "the_shrinkage": {
+  "v35_reported": "3 solved of 8",
+  "on_a_wider_set": "0 solved of 28",
+  "explanation": "the 8-task set was used to design the operators. Two of the three solves in it were reached after watching those exact tasks fail and adding an operator for them. On 20 tasks never used for design, the same operators solve nothing.",
+  "honest_statement": "V35's 3/8 is a fit to the tasks it was built on, not a capability estimate. The shrinkage is the measurement, and it is the most important number in this round."
+ },
+ "what_kind_of_change_the_28_need": {
+  "invents_a_new_function": 11,
+  "edit_of_5_to_20_lines": 8,
+  "edit_of_at_most_4_lines": 6,
+  "edit_of_more_than_20_lines": 3,
+  "reading": "39% of the set requires code that does not exist anywhere in the file to be written. The operators substitute, extend, wrap or rebind what is already there. They are aimed at 6 of 28."
+ },
+ "operators_added_and_why_they_failed": [
+  {
+   "family": "WRAP_EXCEPTION",
+   "target": "the test expects exception X; a statement silently succeeds or raises the wrong type",
+   "signal": "pytest states the expected type in assertRaises(...) / DID NOT RAISE",
+   "outcome": "tried on the task that states it and failed: the real fix installs a decorator that validates the callable's return, not a try/except around the call site. The mechanism was expressible; the semantics were not."
+  }
+ ],
+ "defects_found_this_round": [
+  "the miner ran pytest with sys.executable, which has no pytest, so every task was rejected as 'No module named pytest' and the run reported 0 fail-to-pass",
+  "the miner read git log from a detached checkout left on an old commit, silently mining 7 tasks instead of 28",
+  "failed node ids were split on spaces, truncating class-based nodes to the class name and losing the test",
+  "a manual check used PYTHONPATH=. on a commit that predates the src/ layout, producing a fake ModuleNotFoundError",
+  "pytest's assertRaises failure is an AssertionError, not a DID NOT RAISE, so the wrong-exception signal had to be read from the traceback rather than the summary"
+ ],
+ "what_this_is": "a wider, reproducible fail-to-pass set and an honest generation result on it. Zero solved in 28.",
+ "what_this_is_not": "a benchmark result. Two pure-Python repositories with small, recent histories. No SWE-bench, Terminal-Bench or OSWorld task has been attempted, and no benchmark row exists or is claimed."
+}

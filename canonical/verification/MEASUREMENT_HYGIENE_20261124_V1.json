@@ -1,0 +1,160 @@
+{
+ "schema": "BRAIN_MEASUREMENT_HYGIENE_GUARD_V1",
+ "generated": "2026-11-25T14:09:10Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 0.19
+ },
+ "summary": {
+  "receipts_examined": 2990,
+  "receipts_policed": 37,
+  "receipts_exempt": 2953,
+  "clean": 22,
+  "findings_by_rule": {
+   "MAJORITY_CLASS_WITHOUT_BASELINE": 14,
+   "ACCURACY_WITHOUT_SENSITIVITY": 15,
+   "RATIO_WITHOUT_DENOMINATOR": 2
+  },
+  "offenders": [
+   {
+    "file": "ASK_WHAT_YOU_WILL_BE_TESTED_ON_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "COVERAGE_VERSUS_WALK_LENGTH_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "DOES_DENSITY_PREDICT_ACCURACY_20261124_V2.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "DOES_SYNTAX_PREDICT_OUTCOME_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V2.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY",
+     "RATIO_WITHOUT_DENOMINATOR"
+    ]
+   },
+   {
+    "file": "LAWS_ACROSS_MACHINES_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "LEARN_THE_GUARD_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "LIFT_THE_KEYS_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "PRICE_A_REFUSAL_ON_REAL_CODE_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "PRICE_A_REFUSAL_ON_REAL_CODE_20261124_V2.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "PRICE_THE_VOCABULARY_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "PROVENANCE_NOT_SHAPE_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "THE_WIDTH_OF_A_GUARD_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   },
+   {
+    "file": "WHEN_TO_STOP_ASKING_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY",
+     "RATIO_WITHOUT_DENOMINATOR"
+    ]
+   },
+   {
+    "file": "WHERE_CONJUNCTIONS_STOP_PAYING_20261124_V1.json",
+    "status": "POLICED",
+    "findings": [
+     "MAJORITY_CLASS_WITHOUT_BASELINE",
+     "ACCURACY_WITHOUT_SENSITIVITY"
+    ]
+   }
+  ],
+  "verdicts": {
+   "every_policed_receipt_passes": false,
+   "every_flagged_receipt_is_resolved_in_the_ledger": true,
+   "the_guard_finds_at_least_one_real_defect": true,
+   "the_rules_are_specific": true
+  },
+  "defect_ledger": {
+   "flagged": 15,
+   "resolved": 15,
+   "unresolved": [],
+   "material": [
+    "PRICE_A_REFUSAL_ON_REAL_CODE_20261124_V2.json"
+   ],
+   "note": "each flagged receipt is either resolved here with a reason its number is not a base-rate artefact, or listed as unresolved. Nothing is silently waived: the rules stay failing for unresolved receipts."
+  },
+  "reading": "This guard found real defects in this project's own receipts on its first run. That is the point: the four misreads were invisible to the instruments that produced them, and this file is the instrument that would have caught all four."
+ }
+}

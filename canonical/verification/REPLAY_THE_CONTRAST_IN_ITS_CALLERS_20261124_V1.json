@@ -1,0 +1,210 @@
+{
+ "schema": "BRAIN_REPLAY_THE_CONTRAST_IN_ITS_CALLERS_V1",
+ "generated": "2026-11-25T13:02:29Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 23.0
+ },
+ "summary": {
+  "contrasts_tested": 4,
+  "test_files_run": [
+   "canonical/tests/test_a_name_gets_its_value_from_the_run_v1.py",
+   "canonical/tests/test_causal_dependency_repair_v1.py",
+   "canonical/tests/test_chase_no_stopping_short_v1.py",
+   "canonical/tests/test_edit_kind_choice_measure_v1.py"
+  ],
+  "outcomes_that_moved_under_intervention": 2,
+  "controls_that_moved": 0,
+  "admissible_trials": 4,
+  "admissible_and_moved": 2,
+  "moved_detail": [
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::convert",
+    "test_file": "canonical/tests/test_a_name_gets_its_value_from_the_run_v1.py",
+    "baseline": "11 passed, 0 failed, 0 errors",
+    "swapped": "5 passed, 6 failed, 0 errors"
+   },
+   {
+    "function": "causal_dependency_repair_v1::read_set_argv",
+    "test_file": "canonical/tests/test_causal_dependency_repair_v1.py",
+    "baseline": "11 passed, 0 failed, 0 errors",
+    "swapped": "10 passed, 1 failed, 0 errors"
+   }
+  ],
+  "trials": [
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::convert",
+    "test_file": "canonical/tests/test_a_name_gets_its_value_from_the_run_v1.py",
+    "argument": "sites",
+    "position": 0,
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "baseline": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "control_same_wrapper": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "swapped_to_other_witness": {
+     "exit": 1,
+     "passed": 5,
+     "failed": 6,
+     "errors": 0,
+     "summary": "5 passed, 6 failed, 0 errors"
+    },
+    "swapped_from_other_witness": {
+     "exit": 1,
+     "passed": 5,
+     "failed": 6,
+     "errors": 0,
+     "summary": "5 passed, 6 failed, 0 errors"
+    },
+    "outcome_moved": true,
+    "control_moved": false,
+    "baseline_is_green": true
+   },
+   {
+    "function": "a_name_gets_its_value_from_the_run_v1::main",
+    "test_file": "canonical/tests/test_edit_kind_choice_measure_v1.py",
+    "argument": "argv",
+    "position": 0,
+    "witness": [
+     "[]",
+     "[0]"
+    ],
+    "baseline": {
+     "exit": 0,
+     "passed": 26,
+     "failed": 0,
+     "errors": 0,
+     "summary": "26 passed, 0 failed, 0 errors"
+    },
+    "control_same_wrapper": {
+     "exit": 0,
+     "passed": 26,
+     "failed": 0,
+     "errors": 0,
+     "summary": "26 passed, 0 failed, 0 errors"
+    },
+    "swapped_to_other_witness": {
+     "exit": 0,
+     "passed": 26,
+     "failed": 0,
+     "errors": 0,
+     "summary": "26 passed, 0 failed, 0 errors"
+    },
+    "swapped_from_other_witness": {
+     "exit": 0,
+     "passed": 26,
+     "failed": 0,
+     "errors": 0,
+     "summary": "26 passed, 0 failed, 0 errors"
+    },
+    "outcome_moved": false,
+    "control_moved": false,
+    "baseline_is_green": true
+   },
+   {
+    "function": "argument_construction_v1::measure",
+    "test_file": "canonical/tests/test_chase_no_stopping_short_v1.py",
+    "argument": "limit",
+    "position": 2,
+    "witness": [
+     "0",
+     "1"
+    ],
+    "baseline": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "control_same_wrapper": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "swapped_to_other_witness": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "swapped_from_other_witness": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "outcome_moved": false,
+    "control_moved": false,
+    "baseline_is_green": true
+   },
+   {
+    "function": "causal_dependency_repair_v1::read_set_argv",
+    "test_file": "canonical/tests/test_causal_dependency_repair_v1.py",
+    "argument": "command",
+    "position": 0,
+    "witness": [
+     "''",
+     "'a'"
+    ],
+    "baseline": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "control_same_wrapper": {
+     "exit": 0,
+     "passed": 11,
+     "failed": 0,
+     "errors": 0,
+     "summary": "11 passed, 0 failed, 0 errors"
+    },
+    "swapped_to_other_witness": {
+     "exit": 1,
+     "passed": 10,
+     "failed": 1,
+     "errors": 0,
+     "summary": "10 passed, 1 failed, 0 errors"
+    },
+    "swapped_from_other_witness": {
+     "exit": 1,
+     "passed": 10,
+     "failed": 1,
+     "errors": 0,
+     "summary": "10 passed, 1 failed, 0 errors"
+    },
+    "outcome_moved": true,
+    "control_moved": false,
+    "baseline_is_green": true
+   }
+  ],
+  "verdicts": {
+   "the_control_is_clean": true,
+   "some_test_depends_on_the_recorded_behaviour": true,
+   "every_contrast_reaches_a_test_that_cares": false,
+   "the_store_is_inert_against_this_suite": false
+  },
+  "honest_reading": "An outcome that moves proves the test DEPENDS on the recorded behaviour. An outcome that does not move proves only that this test file does not exercise that argument at that position -- it does not show the entry is wrong. Both counts are reported."
+ }
+}

@@ -1,0 +1,161 @@
+{
+ "schema": "BRAIN_PRICE_A_REFUSAL_ON_REAL_CODE_V1",
+ "generated": "2026-11-25T11:34:11Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 15.7
+ },
+ "summary": {
+  "files_scanned": 1200,
+  "functions_trained": 7282,
+  "functions_held_out": 3538,
+  "held_out_share": 0.35,
+  "split_by": "file, so no held-out function shares a file with a trained one",
+  "subsets_evaluated": 465,
+  "by_price": {
+   "1": {
+    "best_subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3282,
+    "predictions": 268,
+    "wrong": 12,
+    "refused": 3270,
+    "accuracy": 0.9571,
+    "coverage": 0.0757,
+    "runner_up_cost": 3285
+   },
+   "2": {
+    "best_subset": [
+     "DEPTH",
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3294,
+    "predictions": 268,
+    "wrong": 12,
+    "refused": 3270,
+    "accuracy": 0.9571,
+    "coverage": 0.0757,
+    "runner_up_cost": 3295
+   },
+   "5": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_IF",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "LINES"
+    ],
+    "cost": 3323,
+    "predictions": 255,
+    "wrong": 8,
+    "refused": 3283,
+    "accuracy": 0.9696,
+    "coverage": 0.0721,
+    "runner_up_cost": 3325
+   },
+   "10": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3354,
+    "predictions": 224,
+    "wrong": 4,
+    "refused": 3314,
+    "accuracy": 0.9825,
+    "coverage": 0.0633,
+    "runner_up_cost": 3363
+   },
+   "20": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_LOOP",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3394,
+    "predictions": 224,
+    "wrong": 4,
+    "refused": 3314,
+    "accuracy": 0.9825,
+    "coverage": 0.0633,
+    "runner_up_cost": 3424
+   },
+   "50": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_RAISE",
+     "HAS_TRY",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3472,
+    "predictions": 116,
+    "wrong": 1,
+    "refused": 3422,
+    "accuracy": 0.9915,
+    "coverage": 0.0328,
+    "runner_up_cost": 3472
+   },
+   "100": {
+    "best_subset": [
+     "HAS_ASSERT",
+     "HAS_TRY",
+     "HAS_YIELD",
+     "LINES"
+    ],
+    "cost": 3477,
+    "predictions": 61,
+    "wrong": 0,
+    "refused": 3477,
+    "accuracy": 1.0,
+    "coverage": 0.0172,
+    "runner_up_cost": 3477
+   }
+  },
+  "verdicts": {
+   "the_winning_vocabulary_is_the_same_at_every_price_ratio": false,
+   "the_winning_size_is_stable_across_a_100x_price_sweep": false,
+   "the_cheap_end_of_the_dial_wins_at_high_error_prices": false,
+   "a_real_corpus_produces_a_decisive_winner": false,
+   "the_corpus_resists_rather_than_informing": true,
+   "the_cost_spread_across_a_100x_price_sweep_is_under_10_percent": true,
+   "accuracy_and_coverage_trade_strictly": true
+  },
+  "stability": {
+   "distinct_winning_subsets": 5,
+   "distinct_winning_sizes": [
+    4,
+    5,
+    6
+   ]
+  },
+  "the_curve_that_matters": {
+   "coverage_at_price_1": 0.0757,
+   "coverage_at_price_100": 0.0172,
+   "coverage_falls_as_the_error_price_rises": true,
+   "accuracy_at_price_1": 0.9571,
+   "accuracy_at_price_100": 1.0,
+   "verdict": "On real code the dial is nearly all refusal and the choice of point is a rounding error: every price ratio from 1 to 100 costs 3282-3477 units, a 5.9% spread, against a corpus of 3538 held-out functions of which at most 268 are ever predicted. Paying 100x more for an error buys 12 fewer errors and 207 more refusals. The vocabulary is not the binding constraint on real code -- it covers under 8% of it -- so no cost model can rescue the choice, and the earlier hope that a real corpus would fix the dial externally is refuted."
+  }
+ }
+}

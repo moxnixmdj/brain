@@ -1,0 +1,279 @@
+{
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_V1",
+ "action_id": "MEASURE_WHAT_A_ZERO_MODEL_CALL_SOLVER_REACHES_20261124_V1",
+ "action_kind": "GOVERNANCE_GUARD",
+ "date": "2026-11-24",
+ "canonical_base_commit": "698075d86207c6245f9ecd97cc02d0037baab471",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "laws_read_this_session": [
+   "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+   "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+   "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+   "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+   "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+   "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+   "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+   "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+   "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+   "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+   "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+   "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+   "AGENTS.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "INDEPENDENT_FALSIFICATION_OF_A_FALSE_GENERAL_CLAIM",
+  "progress_evidence_paths": [
+   "canonical/corpus/wider_task_set_20261124_V1.json",
+   "canonical/corpus/ceiling_measurement_20261124_V1.json",
+   "canonical/corpus/blind_edit_search_20261124_V1.json",
+   "canonical/corpus/line_localisation_20261124_V1.json"
+  ],
+  "route_class": "INTEGRATE"
+ },
+ "highest_leverage_now": true,
+ "benchmark_or_family_rank_authority": false,
+ "capability_credit_delta": 0,
+ "terminal_credit_delta": 0,
+ "incremental_spend_usd": 0,
+ "user_authorized_governance_change": false,
+ "weakens_existing_guard": false,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "parent_capability": "CANONICAL_TOOL_AND_CORPUS_MEASUREMENT_SEVEN_ROUNDS",
+ "causal_blocker": "EVERY_GENERATION_MECHANISM_BUILT_IN_SEVEN_ROUNDS_FAILED_TO_CONVERT_THE_ONE_COMPONENT_THAT_GENERALISES_FILE_LOCALISATION_INTO_A_SOLVE_AND_NO_ROUND_HAD_MEASURED_WHERE_IN_A_FILE_THE_EDIT_BELONGS_SO_THE_FAILURE_WAS_OVER_DETERMINED",
+ "expected_parent_change": "NO_PARENT_CHANGE_CLAIMED__MEASUREMENT_FAILS_A_FALSE_GENERAL_CLAIM_INSTEAD_OF_ASSERTING_A_GAIN",
+ "expected_parent_frontier_change": "A_FALSE_GENERAL_CLAIM_IS_NOW_FALSIFIED_BY_COMMITTED_RECEIPTS__THE_SOLVER_IS_MEASURED_AT_0_OF_28_TASKS_ON_THE_WIDER_SET_0_OF_6_ON_THE_CEILING_SET_AND_0_OF_3_ON_THE_CALIBRATION_SET_WHILE_FILE_LEVEL_LOCALISATION_REACHES_TOP_ONE_ON_17_OF_28_AND_LINE_LEVEL_LOCALISATION_REACHES_THE_CORRECT_LINE_FIRST_ON_1_OF_28__SO_THE_ROUNDS_THAT_FOLLOW_CAN_NO_LONGER_TREAT_GENERATION_AS_THE_ONLY_MISSING_COMPONENT",
+ "falsification_condition": "A_DIFFERENT_LINE_RANKER_OR_GENERATION_MECHANISM_SOLVING_THESE_TASKS_WITHOUT_LOOKING_AT_THE_COMMIT_WOULD_FALSIFY_THE_NEGATIVE_RESULTS",
+ "stop_condition": "NO_MODEL_CALLS_NO_STORED_PARAMETERS_NO_NETWORK_AT_RUN_TIME_NO_ORACLE_COMMIT_CONTENT_READ_BY_THE_SOLVER_AND_NO_BENCHMARK_ROW_CLAIMED_UNTIL_A_SOLVE_IS_MEASURED",
+ "prior_work_reused": "CANONICAL_TOOLS_FROM_ROUNDS_V31_TO_V38",
+ "selected_route": "INTEGRATE",
+ "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::EVERY_GENERATION_MECHANISM_BUILT_IN_SEVEN_ROUNDS_FAILED_TO_CONVERT_THE_ONE_COMPONENT_THAT_GENERALISES_FILE_LOCALISATION_INTO_A_SOLVE_AND_NO_ROUND_HAD_MEASURED_WHERE_IN_A_FILE_THE_EDIT_BELONGS_SO_THE_FAILURE_WAS_OVER_DETERMINED",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "recursive_obs": {
+  "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+  "canonical_base_commit": "698075d86207c6245f9ecd97cc02d0037baab471",
+  "real_outcome": "MEASURED__GENERATION_SOLVES_0_OF_28_WIDER_TASKS_0_OF_6_CEILING_TASKS_0_OF_3_CALIBRATION_TASKS_AND_0_OF_6_IN_THE_BLIND_EDIT_SEARCH__FILE_LEVEL_LOCALISATION_HITS_TOP_ONE_ON_17_OF_28_WHILE_LINE_LEVEL_LOCALISATION_HITS_THE_CORRECT_LINE_FIRST_ON_1_OF_28",
+  "required_capability": "LOCALISE_THE_EXACT_EDIT_POSITION_INSIDE_AN_UNSEEN_CODEBASE_AND_THEN_PRODUCE_A_PATCH_THAT_PASSES_AN_ORACLE_TEST_NEVER_READ_BY_THE_SOLVER",
+  "obs_goal": {
+   "real_outcome": "MEASURED__GENERATION_SOLVES_0_OF_28_WIDER_TASKS_0_OF_6_CEILING_TASKS_0_OF_3_CALIBRATION_TASKS_AND_0_OF_6_IN_THE_BLIND_EDIT_SEARCH__FILE_LEVEL_LOCALISATION_HITS_TOP_ONE_ON_17_OF_28_WHILE_LINE_LEVEL_LOCALISATION_HITS_THE_CORRECT_LINE_FIRST_ON_1_OF_28",
+   "proxy_goals_deleted": [
+    "SCORE_ON_A_BENCHMARK_ROW_WE_CANNOT_RUN",
+    "A_LOCALISATION_HIT_COUNTED_AS_A_SOLVE",
+    "MAJORITY_CLASS_ACCURACY",
+    "COVERAGE_OF_TOKENS"
+   ],
+   "surviving_necessity": "THE_ONLY_MEASUREMENT_THAT_COUNTS_IS_A_FAIL_TO_PASS_TEST_FLIPPING_FROM_FAILING_TO_PASSING_WITHOUT_THE_SOLVER_READING_THE_FIX_COMMIT"
+  },
+  "obs_capability": {
+   "existing_inherited_routes_checked": [
+    "canonical/tools/assertion_localisation_v1.py",
+    "canonical/tools/minimal_edit_search_v1.py",
+    "canonical/tools/line_localisation_v1.py"
+   ],
+   "external_existing_routes_checked": [
+    "LIVE_ROUTE_FRONTIER_RECORDED_IN_route_frontier"
+   ],
+   "capability_work_deleted": [
+    "SHAPE_RANKER_DELETED_AFTER_IT_MADE_LOCALISATION_WORSE",
+    "FILE_ORDER_BY_FUSION_STRENGTH_DELETED",
+    "A_SIXTH_EDIT_FORM_REFUSED_BECAUSE_IT_WOULD_BE_PER_EXAMPLE_FITTING"
+   ],
+   "surviving_gap": "NO_EMISSION_MECHANISM_HAS_CONVERTED_A_LOCALISED_POSITION_INTO_A_PASSING_PATCH"
+  },
+  "obs_blocker": {
+   "intrinsic_or_path_specific": "INTRINSIC_AT_LINE_GRANULARITY__THE_RANKER_IS_MEASURED_AT_1_OF_28_ON_TRUTH_LINES_WHOSE_MEDIAN_IS_20_LINES_INSIDE_FILES_THAT_ARE_ONLY_RANKED_CORRECTLY_AT_RANK_ONE_17_OF_28_TIMES",
+   "delete_bypass_substitute_options": [
+    "DELETE_THE_RANKER",
+    "BYPASS_LOCALISATION_AND_EDIT_THE_WHOLE_FILE",
+    "SUBSTITUTE_A_MODEL_CALL",
+    "BORROW_THE_FIX_FROM_THE_COMMIT"
+   ],
+   "surviving_causal_blocker": "THE_SYSTEM_HAS_NO_POSITION_TO_REACH__GENERATION_FAILURES_WERE_DOWNSTREAM_OF_A_LINE_LEVEL_LOCALISATION_FLOOR_AND_THAT_FLOOR_IS_NOW_MEASURED_RATHER_THAN_ASSUMED"
+  },
+  "obs_solution": {
+   "deletion_first_order_applied": [
+    "DELETE",
+    "BYPASS",
+    "REUSE",
+    "SUBSTITUTE",
+    "WHITE_BOX_HARVEST",
+    "COMPOSE",
+    "CONFIGURE",
+    "INTEGRATE"
+   ],
+   "routes_ranked": [
+    "DELETE_THE_SHAPE_RANKER_AND_FILE_ORDERING",
+    "REUSE_THE_EXISTING_ASSERTION_LOCALISER",
+    "INTEGRATE_A_LINE_LEVEL_RANKER_OVER_THE_EXISTING_SIGNALS"
+   ],
+   "losing_routes_reason": "DELETION_ALONE_REMOVED_A_NET_NEGATIVE_RANKER_BUT_LEFT_THE_LINE_LEVEL_FLOOR_UNCHANGED__REUSE_IS_WHAT_WAS_BUILT__INTEGRATION_IS_THE_SELECTED_ROUTE",
+   "implementation_still_necessary": true
+  },
+  "obs_verification": {
+   "direct_real_effect_verification_considered": true,
+   "existing_oracle_considered": true,
+   "synthetic_verification_necessity": "NONE__THE_ORACLE_IS_EACH_TASKS_OWN_FAIL_TO_PASS_TEST_WHICH_THE_SOLVER_NEVER_READS"
+  },
+  "obs_inherited_system": {
+   "downstream_work_to_delete_or_supersede": [
+    "THE_ASSUMPTION_THAT_GENERATION_WAS_THE_STANDALONE_BLOCKER"
+   ],
+   "adjacent_capabilities_absorbed": [
+    "ASSERTION_LOCALISATION_IS_NOW_THE_REACH_SIGNAL_OF_THE_LINE_RANKER_RATHER_THAN_A_SEPARATE_PRODUCT"
+   ],
+   "fresh_reuse_plan": "THE_WIDER_TASK_SET_AND_THE_REAL_FIX_COMMITS_CORPUS_ARE_REUSED_ACROSS_EVERY_ROUND_WITHOUT_REBUILDING_THEM"
+  },
+  "obs_obs": {
+   "analysis_steps_deleted_or_cached": [
+    "SIX_RANKER_VARIANTS_MEASURED_ONCE_AND_FIVE_DELETED",
+    "PER_EXAMPLE_FITTING_REFUSED"
+   ],
+   "search_stop_decision": "STOP_ADDING_RANKERS_WHEN_THE_LAST_ADDITION_REDUCED_TOP_ONE_HITS_FROM_ONE_TO_ZERO_AND_ONLY_REPORT_THE_SURVIVING_FIVE_SIGNALS",
+   "affected_layers_only_on_revalidation": true
+  },
+  "routes_considered": [
+   "DELETE_THE_SHAPE_RANKER_AND_FILE_ORDERING",
+   "REUSE_THE_EXISTING_ASSERTION_LOCALISER",
+   "INTEGRATE_A_LINE_LEVEL_RANKER_OVER_THE_EXISTING_SIGNALS",
+   "WHITE_BOX_HARVEST_THE_FIX_FROM_THE_COMMIT"
+  ],
+  "deleted_or_bypassed_paths": [
+   "READING_THE_FIX_COMMIT",
+   "A_MODEL_CALL_AT_RUNTIME",
+   "A_STORED_GOLDEN_PATCH",
+   "COUNTING_A_LOCALISATION_HIT_AS_A_SOLVE"
+  ],
+  "selected_surviving_route": "RANK_ASSERTION_ADJACENT_LINES_BY_REACH_SIBLING_AND_NAMED_SIGNALS",
+  "why_selected_route_is_fastest_sufficient": "IT_IS_THE_ONLY_ROUTE_THAT_PRODUCES_A_POSITION_INSIDE_A_FILE_WITHOUT_READING_THE_FIX_COMMIT_OR_CALLING_A_MODEL_AND_IT_REUSES_SIGNALS_ALREADY_IN_THE_TREE",
+  "expected_parent_level_state_change": "A_FALSE_GENERAL_CLAIM_IS_NOW_FALSIFIED_BY_COMMITTED_RECEIPTS__THE_SOLVER_IS_MEASURED_AT_0_OF_28_TASKS_ON_THE_WIDER_SET_0_OF_6_ON_THE_CEILING_SET_AND_0_OF_3_ON_THE_CALIBRATION_SET_WHILE_FILE_LEVEL_LOCALISATION_REACHES_TOP_ONE_ON_17_OF_28_AND_LINE_LEVEL_LOCALISATION_REACHES_THE_CORRECT_LINE_FIRST_ON_1_OF_28__SO_THE_ROUNDS_THAT_FOLLOW_CAN_NO_LONGER_TREAT_GENERATION_AS_THE_ONLY_MISSING_COMPONENT",
+  "stop_condition": "NO_MODEL_CALLS_NO_STORED_PARAMETERS_NO_NETWORK_AT_RUN_TIME_NO_ORACLE_COMMIT_CONTENT_READ_BY_THE_SOLVER_AND_NO_BENCHMARK_ROW_CLAIMED_UNTIL_A_SOLVE_IS_MEASURED",
+  "route_frontier": {
+   "discovery_required": false,
+   "not_applicable_reason": "GOVERNANCE_GUARD_ACTION__THE_ROUND_ADDS_NO_CAPABILITY_SURFACE_SO_THERE_IS_NO_ROUTE_TO_DISCOVER__THE_EXISTING_RANKER_SIGNALS_WERE_ALREADY_INVENTORIED_AND_FOUR_OF_SIX_MEASURED_AND_DELETED",
+   "selected_route": "RANK_ASSERTION_ADJACENT_LINES_BY_REACH_SIBLING_AND_NAMED_SIGNALS",
+   "selected_route_preflight": {
+    "checked_at_utc": "2026-11-24T00:00:00Z",
+    "max_age_hours": 2,
+    "status": "READY",
+    "all_required_dependencies_ready": true,
+    "execution_dependencies_complete": true,
+    "failed_dependencies": [],
+    "selected_route": "RANK_ASSERTION_ADJACENT_LINES_BY_REACH_SIBLING_AND_NAMED_SIGNALS",
+    "execution_dependencies": [
+     {
+      "dependency": "PYTHON_STDLIB_AND_GIT",
+      "kind": "LOCAL_RUNTIME",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "LOCAL_MEASUREMENT_RUNS_TWICE_WITH_IDENTICAL_RESULTS"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ]
+     },
+     {
+      "dependency": "THE_PROJECTS_OWN_COMMITTED_CORPORA",
+      "kind": "DATA_SOURCE",
+      "required": true,
+      "volatility": "STATIC",
+      "scope": "LOCAL",
+      "evidence_scope": "LOCAL",
+      "status": "READY",
+      "evidence": [
+       "canonical/corpus/real_fix_commits_20261116_V1.json",
+       "canonical/corpus/wider_task_set_20261124_V1.json"
+      ],
+      "evidence_classes": [
+       "BRAIN_INHERITED"
+      ]
+     }
+    ]
+   }
+  }
+ },
+ "v22_prewrite_admission": {
+  "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+  "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+  "currentness": {
+   "accepted_families": 5,
+   "open_families": 14,
+   "proved_atomic": 14,
+   "unresolved_atomic": 22,
+   "root1_positive_gap_count": 0,
+   "root2_touching_count": 17,
+   "root3_touching_count": 8,
+   "meta_envelope_open_count": 8,
+   "total_open_truth_obligations": 30,
+   "terminal": false
+  },
+  "fresh_reality_authority": false,
+  "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+  "mode": "ACTIVE_INTERFACE",
+  "proof_state_reachability": "SANDBOX_MEASUREMENT_ONLY_ON_THE_PROJECTS_OWN_COMMITTED_CORPORA__NO_EXTERNAL_BENCHMARK_EXECUTED_AND_NO_TRUTH_OBLIGATION_REACHED_A_PROOF_STATE",
+  "target_truth_obligations": [
+   "AUTOMATIONBENCH_GE_40",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "CODING_CURSORBENCH_GE_57_8",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_TB4_GE_66_4",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "HLE_TOOLS_GE_67_7",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "PROWORK_GDPVAL_GE_1846",
+   "TB_SCIENCE_GE_58_7"
+  ],
+  "terminal_credit_delta": 0,
+  "tournament": {
+   "proposal_id": "A_FOURTEEN_ROUND_ZERO_MODEL_CALL_SOLVER_HAS_NEVER_SOLVED_AN_UNSEEN_TASK_V1",
+   "falsifier_id": "ONE_UNSEEN_FAIL_TO_PASS_TASK_SOLVED_WITHOUT_READING_THE_FIX_COMMIT",
+   "decisive_question": "DOES_THE_MEASURED_SOLVER_SOLVE_ANY_UNSEEN_TASK_OR_DOES_IT_ONLY_LOCATE_AND_THEN_FAIL_TO_GENERATE",
+   "known_counterexamples_checked": true,
+   "counterexample_receipts": [],
+   "no_known_counterexample_reason": "NO_COUNTEREXAMPLE_EXISTS_IN_ANY_OF_THE_REPOS_COMMITTED_RECEIPTS__V34_V36_V37_V38_AND_V39_EACH_MEASURE_ZERO_SOLVES_AND_THE_ONLY_HITS_RECORDED_ARE_LOCALISATION_HITS_NOT_SOLVES__A_SOLVE_WOULD_HAVE_BEEN_A_COUNTEREXAMPLE_TO_THIS_CLAIM_AND_NONE_WAS_OBSERVED"
+  }
+ },
+ "explicit_user_authorization": "MERGE_ALL_WORK_REQUESTED_BY_THE_USER",
+ "load_bearing_primary": {
+  "open_obligation_ids": [],
+  "constructive_gap_for_open_obligation_ids": [
+   "CODING_TB4_GE_66_4",
+   "CODING_FRONTIERCODE_GE_54_4",
+   "CODING_CURSORBENCH_GE_57_8",
+   "PROWORK_GDPVAL_GE_1846",
+   "PROWORK_AA_BRIEFCASE_GE_1822__SHARED_MEASUREMENT_WITH_ARTIFACT",
+   "AUTOMATIONBENCH_GE_40",
+   "HLE_TOOLS_GE_67_7",
+   "TB_SCIENCE_GE_58_7",
+   "CHARTOGRAPHY_TOOLS_GE_89",
+   "OSWORLD_2_1_PARTIAL_GE_81_8",
+   "FINANCE_ACCOUNTING_INDEX_GE_61",
+   "FINANCE_AGENT_V2_GE_58_59",
+   "MYSTERYMECHANISM_INTRINSIC_OPUS55_NONINFERIORITY_OR_STRONGER"
+  ],
+  "scope_complete_discharge": false,
+  "expected_obligation_discharge_lcb": 0,
+  "expected_obligation_unlock_lcb": "1/13",
+  "success_probability_lcb": "1/2",
+  "wall_clock_cost_ub": 1,
+  "interpretation": "DISCHARGES_NOTHING_AND_MOVES_0_OF_13_OPEN_OBLIGATIONS__THE_RESULT_IS_THAT_FILE_LEVEL_LOCALISATION_GENERALISES_AT_17_OF_28_WHILE_GENERATION_SOLVES_0_OF_28_AND_0_OF_6_TASKS_WHOSE_FIXES_ARE_FOUR_LINES_OR_FEWER_AND_LINE_LEVEL_LOCALISATION_REACHES_THE_CORRECT_LINE_FIRST_IN_0_OF_16_TASKS_WHERE_THE_FILE_WAS_CORRECT_WHICH_IS_REPORTED_RATHER_THAN_DISGUISED"
+ },
+ "capability_law_compliance": {
+  "true_capability_test_law": "NO_CAPABILITY_IS_CLAIMED__THIS_ROUND_ESTABLISHES_NEGATIVE_RESULTS__GENERATION_SOLVES_0_OF_28_AND_FILE_LEVEL_LOCALISATION_AT_17_OF_28_IS_A_MEASUREMENT_NOT_A_CAPABILITY_STATEMENT",
+  "external_knowledge_boundary": "NO_RUNTIME_MODEL_CALL__NO_RETRIEVAL_SERVICE_AT_RUNTIME__ZERO_STORED_PARAMETERS",
+  "resource_bounded_bytes": "NEW_ARTIFACTS_ARE_JSON_RECEIPTS_AND_PYTHON_TOOLS_UNDER_FIVE_HUNDRED_LINES_EACH"
+ },
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "governance_change": false
+}

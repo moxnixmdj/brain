@@ -1,0 +1,1379 @@
+{
+ "schema": "BRAIN_ACQUIRE_THE_SECOND_WITNESS_V1",
+ "generated": "2026-11-24T23:53:33Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 23.56
+ },
+ "rows": [
+  {
+   "machine": "ARCHIVE2",
+   "held_out_transitions": 4,
+   "laws_proposed": 18,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 15
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "held_out_transitions": 3,
+   "laws_proposed": 50,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 4,
+    "confirmed": 0,
+    "falsified": 4,
+    "laws": 2
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 2,
+    "laws": 4
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "laws": 46
+   }
+  },
+  {
+   "machine": "GIT",
+   "held_out_transitions": 3,
+   "laws_proposed": 72,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 1
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "laws": 1
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "laws": 66
+   }
+  },
+  {
+   "machine": "GIT2",
+   "held_out_transitions": 2,
+   "laws_proposed": 64,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 3,
+    "confirmed": 3,
+    "falsified": 0,
+    "laws": 4
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 0,
+    "laws": 1
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "laws": 64
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "held_out_transitions": 7,
+   "laws_proposed": 180,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7,
+    "laws": 150
+   }
+  },
+  {
+   "machine": "LIST",
+   "held_out_transitions": 10,
+   "laws_proposed": 162,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 10
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 10
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 10,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 10,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 2,
+    "wrong": 2,
+    "refused": 8,
+    "laws": 137
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "held_out_transitions": 3,
+   "laws_proposed": 96,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "laws": 80
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "held_out_transitions": 4,
+   "laws_proposed": 18,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 15
+   }
+  },
+  {
+   "machine": "VAULT",
+   "held_out_transitions": 4,
+   "laws_proposed": 36,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 30
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "held_out_transitions": 2,
+   "laws_proposed": 90,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "laws": 75
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "held_out_transitions": 5,
+   "laws_proposed": 48,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 2,
+    "wrong": 2,
+    "refused": 3,
+    "laws": 40
+   }
+  },
+  {
+   "machine": "GIT",
+   "held_out_transitions": 7,
+   "laws_proposed": 142,
+   "arm_A_sample_only": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_C_acquired": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 9,
+    "confirmed": 4,
+    "falsified": 5,
+    "laws": 6
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 1,
+    "laws": 3
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 3,
+    "wrong": 2,
+    "refused": 4,
+    "laws": 134
+   }
+  },
+  {
+   "machine": "GIT2",
+   "held_out_transitions": 7,
+   "laws_proposed": 126,
+   "arm_A_sample_only": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_C_acquired": {
+    "predictions": 2,
+    "wrong": 1,
+    "refused": 5,
+    "probes": 9,
+    "confirmed": 4,
+    "falsified": 5,
+    "laws": 6
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 2,
+    "laws": 4
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 4,
+    "wrong": 3,
+    "refused": 3,
+    "laws": 119
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "held_out_transitions": 11,
+   "laws_proposed": 174,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "laws": 145
+   }
+  },
+  {
+   "machine": "LIST",
+   "held_out_transitions": 7,
+   "laws_proposed": 154,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7,
+    "probes": 6,
+    "confirmed": 0,
+    "falsified": 6,
+    "laws": 4
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 7,
+    "probes": 0,
+    "laws": 4
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 1,
+    "wrong": 1,
+    "refused": 6,
+    "laws": 133
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "held_out_transitions": 8,
+   "laws_proposed": 126,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "laws": 105
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "held_out_transitions": 2,
+   "laws_proposed": 90,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "laws": 75
+   }
+  },
+  {
+   "machine": "VAULT",
+   "held_out_transitions": 2,
+   "laws_proposed": 50,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "probes": 1,
+    "laws": 1
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 2,
+    "laws": 45
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "held_out_transitions": 1,
+   "laws_proposed": 84,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "laws": 70
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "held_out_transitions": 4,
+   "laws_proposed": 62,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 4,
+    "confirmed": 0,
+    "falsified": 4,
+    "laws": 2
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 2
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 56
+   }
+  },
+  {
+   "machine": "GIT",
+   "held_out_transitions": 8,
+   "laws_proposed": 120,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 1,
+    "confirmed": 0,
+    "falsified": 1,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 8,
+    "laws": 100
+   }
+  },
+  {
+   "machine": "GIT2",
+   "held_out_transitions": 6,
+   "laws_proposed": 114,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "laws": 95
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "held_out_transitions": 9,
+   "laws_proposed": 180,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9,
+    "laws": 150
+   }
+  },
+  {
+   "machine": "LIST",
+   "held_out_transitions": 12,
+   "laws_proposed": 142,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12,
+    "probes": 8,
+    "confirmed": 2,
+    "falsified": 6,
+    "laws": 2
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 12,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 3,
+    "wrong": 3,
+    "refused": 9,
+    "laws": 121
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "held_out_transitions": 6,
+   "laws_proposed": 192,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "laws": 160
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "held_out_transitions": 1,
+   "laws_proposed": 84,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 1,
+    "laws": 70
+   }
+  },
+  {
+   "machine": "VAULT",
+   "held_out_transitions": 3,
+   "laws_proposed": 36,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 3,
+    "laws": 30
+   }
+  },
+  {
+   "machine": "ARCHIVE2",
+   "held_out_transitions": 4,
+   "laws_proposed": 72,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 60
+   }
+  },
+  {
+   "machine": "FILESYSTEM",
+   "held_out_transitions": 5,
+   "laws_proposed": 60,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 1,
+    "wrong": 1,
+    "refused": 4,
+    "laws": 50
+   }
+  },
+  {
+   "machine": "GIT",
+   "held_out_transitions": 5,
+   "laws_proposed": 131,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 5,
+    "confirmed": 3,
+    "falsified": 2,
+    "laws": 6
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 1,
+    "laws": 4
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "laws": 121
+   }
+  },
+  {
+   "machine": "GIT2",
+   "held_out_transitions": 6,
+   "laws_proposed": 107,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 5,
+    "confirmed": 4,
+    "falsified": 1,
+    "laws": 6
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "probes": 1,
+    "laws": 3
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 6,
+    "laws": 106
+   }
+  },
+  {
+   "machine": "JOURNAL",
+   "held_out_transitions": 11,
+   "laws_proposed": 168,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 11,
+    "laws": 140
+   }
+  },
+  {
+   "machine": "LIST",
+   "held_out_transitions": 9,
+   "laws_proposed": 144,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9,
+    "probes": 16,
+    "confirmed": 2,
+    "falsified": 14,
+    "laws": 6
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 9,
+    "probes": 6,
+    "laws": 10
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 1,
+    "wrong": 0,
+    "refused": 8,
+    "laws": 126
+   }
+  },
+  {
+   "machine": "SQLITE",
+   "held_out_transitions": 5,
+   "laws_proposed": 120,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 5,
+    "laws": 100
+   }
+  },
+  {
+   "machine": "TARBALL",
+   "held_out_transitions": 4,
+   "laws_proposed": 72,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 60
+   }
+  },
+  {
+   "machine": "VAULT",
+   "held_out_transitions": 4,
+   "laws_proposed": 36,
+   "arm_A_sample_only": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_B_no_card_laws": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4
+   },
+   "arm_C_acquired": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "confirmed": 0,
+    "falsified": 0,
+    "laws": 0
+   },
+   "arm_C_raw_no_precondition": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "probes": 0,
+    "laws": 0
+   },
+   "arm_D_acquired_without_the_requirement": {
+    "predictions": 0,
+    "wrong": 0,
+    "refused": 4,
+    "laws": 30
+   }
+  }
+ ],
+ "summary": {
+  "machines": 36,
+  "arm_A": {
+   "predictions": 2,
+   "wrong": 0
+  },
+  "arm_B": {
+   "predictions": 0,
+   "wrong": 0
+  },
+  "arm_C": {
+   "predictions": 3,
+   "wrong": 1,
+   "probes": 71,
+   "confirmed": 22,
+   "falsified": 49
+  },
+  "arm_C_raw": {
+   "predictions": 2,
+   "wrong": 0,
+   "probes": 14
+  },
+  "arm_D": {
+   "predictions": 17,
+   "wrong": 14
+  },
+  "verdicts": {
+   "acquisition_finds_second_witnesses": true,
+   "acquisition_also_falsifies_laws": true,
+   "acquiring_witnesses_raises_reach": true,
+   "acquiring_witnesses_stays_sound": false,
+   "a_probe_that_must_fit_adds_54_percent_error": false,
+   "the_cardinality_requirement_does_work": true
+  }
+ }
+}

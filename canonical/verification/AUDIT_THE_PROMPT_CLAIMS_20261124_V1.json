@@ -1,0 +1,274 @@
+{
+ "schema": "BRAIN_AUDIT_THE_PROMPT_CLAIMS_V1",
+ "generated": "2026-11-25T11:32:17Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 5.2
+ },
+ "summary": {
+  "repo_commits": 25,
+  "python_files_tracked": 6173,
+  "identifiers": [
+   {
+    "claim": "__CST_ID0__",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "FOREIGN_IDENT_UNBOUND",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "BELIEFWEAVER",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "BRAIN_POLYGLOT_CST_SKILL_STORE_V1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "verified_skill_crystallizer_ir_bridge_v1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 0
+   },
+   {
+    "claim": "CUMentalWorldModel",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 3
+   },
+   {
+    "claim": "epistemic_scan_acquire_compress_v1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 3
+   },
+   {
+    "claim": "typed_invention_v1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 3
+   },
+   {
+    "claim": "same_identity_supervisor",
+    "status": "VERIFIED__CODE_FILE_EXISTS",
+    "files_named_after_it": [
+     "canonical/capabilities/true/generators/same_identity_supervisor_gen_v1.py",
+     "canonical/capabilities/true/oracles/same_identity_supervisor_oracles_v1.py",
+     "canonical/runtime/same_identity_supervisor.py",
+     "canonical/runtime/same_identity_supervisor_credited_v1.py",
+     "canonical/tests/test_same_identity_supervisor.py"
+    ],
+    "mentioned_in_code_not_mine": 14,
+    "mentioned_in_my_reports": 3
+   },
+   {
+    "claim": "consistency_vs_equivalence",
+    "status": "VERIFIED__CODE_FILE_EXISTS",
+    "files_named_after_it": [
+     "canonical/swe_kernel/consistency_vs_equivalence_v1.py",
+     "canonical/tests/test_consistency_vs_equivalence_v1.py"
+    ],
+    "mentioned_in_code_not_mine": 6,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "zygote_worker_pool_v1",
+    "status": "VERIFIED__CODE_FILE_EXISTS",
+    "files_named_after_it": [
+     "canonical/swe_kernel/zygote_worker_pool_v1.py"
+    ],
+    "mentioned_in_code_not_mine": 22,
+    "mentioned_in_my_reports": 4
+   },
+   {
+    "claim": "repo_component_and_cow_engine_v1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 13
+   },
+   {
+    "claim": "instant_swe_skill_store_v1",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 13
+   },
+   {
+    "claim": "UnifiedCrossModalPetriNet",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 13
+   },
+   {
+    "claim": "MealyAPICompiler",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 2
+   },
+   {
+    "claim": "epistemic_doc_compiler",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "witness_inversion_v1",
+    "status": "VERIFIED__CODE_FILE_EXISTS",
+    "files_named_after_it": [
+     "canonical/swe_kernel/witness_inversion_v1.py",
+     "canonical/tests/test_witness_inversion_v1.py"
+    ],
+    "mentioned_in_code_not_mine": 11,
+    "mentioned_in_my_reports": 2
+   },
+   {
+    "claim": "calculate_separating_projection",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 1
+   },
+   {
+    "claim": "MultiLayerSnapshot",
+    "status": "UNVERIFIED__MENTIONED_IN_CODE_ONLY",
+    "files_named_after_it": [],
+    "mentioned_in_code_not_mine": 1,
+    "mentioned_in_my_reports": 2
+   }
+  ],
+  "commits": [
+   {
+    "claim": "209bbc6c",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "92b6db85",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "d6c1661a",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "ac0e297",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "c53d373",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "05f6fd0",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "884437ae",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "fc518e4",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   },
+   {
+    "claim": "051fd663",
+    "status": "FAILED__NOT_A_COMMIT",
+    "git_object_type": "absent"
+   }
+  ],
+  "figures": [
+   {
+    "claim": "75.2",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 6,
+    "mentioned_in_my_reports": 7,
+    "prompt_says": "share of real SWE-bench hunks outside fixed mutation grammars"
+   },
+   {
+    "claim": "344",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 24,
+    "mentioned_in_my_reports": 28,
+    "prompt_says": "failing HONEST_SUITE_BASELINE cases"
+   },
+   {
+    "claim": "0.35",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 39,
+    "mentioned_in_my_reports": 12,
+    "prompt_says": "runtime seconds"
+   },
+   {
+    "claim": "447",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 27,
+    "mentioned_in_my_reports": 9,
+    "prompt_says": "verified capabilities"
+   },
+   {
+    "claim": "226",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 25,
+    "mentioned_in_my_reports": 16,
+    "prompt_says": "hand-written tricks"
+   },
+   {
+    "claim": "244",
+    "status": "UNVERIFIED__APPEARS_ELSEWHERE_TOO",
+    "mentioned_in_code_not_mine": 56,
+    "mentioned_in_my_reports": 22,
+    "prompt_says": "verified post-training OSS commits"
+   }
+  ],
+  "tallies": {
+   "identifiers_verified_as_code_files": 4,
+   "identifiers_failed": 0,
+   "commits_verified": 0,
+   "commits_failed": 9,
+   "figures_unverified": 6
+  },
+  "components_that_do_exist": [
+   "same_identity_supervisor",
+   "consistency_vs_equivalence",
+   "zygote_worker_pool_v1",
+   "witness_inversion_v1"
+  ],
+  "verdicts": {
+   "no_claimed_commit_hash_resolves": true,
+   "no_claimed_engine_exists_as_a_module": false,
+   "the_repo_cannot_have_244_commits_if_it_has_fewer": true,
+   "most_claimed_engines_exist_only_as_mentions": true,
+   "some_claimed_components_do_exist_as_code": true
+  }
+ }
+}
