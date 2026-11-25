@@ -198,7 +198,22 @@ class Store:
         named = [tok for tok in _IDENTIFIER.findall(transformation)
                  if tok in _PROJECT_SYMBOLS and tok not in builtin_names]
         carries_literal = bool(_STRING.search(transformation))
+        # THE GENERATIVE MOVE, not the relation's name. The ablation measured that
+        # storing `relation: MATERIALISE` changes no outcome, because the engine's
+        # difficulty is producing the right relation at all, not choosing among relations
+        # it already has. What transfers is the MOVE: which kind of fact in the run
+        # licensed which shape of edit. That is what is recorded here, and what a prior
+        # can act on -- it tells the engine a fact-to-edit mapping it may not have
+        # generated, not a name it already ranks.
+        witness = verified.get("witness") or {}
+        fact_kinds = sorted({key for key in witness
+                             if key not in ("why", "found_in", "pattern")})
         skill = {
+            "move": {
+                "from_fact": fact_kinds,
+                "to_edit_family": edit_family(relation, edit),
+                "site_kind": str(verified.get("site_kind") or ""),
+            },
             "relation": relation,
             "demand": demand_shape(row.get("demand") or {}),
             "guard_shape": shape_of_line(str(verified.get("expression") or "")),
@@ -317,6 +332,15 @@ def run_arm(entries: Sequence[Mapping[str, Any]], *, arm: str, repos_root: pathl
             prior = store.prior_for(entry.get("demand") or {}, arm=arm,
                                     raw_key=f"{entry.get('repo')}:{entry.get('commit')}")
         ENGINE.PREFERRED_RELATIONS = tuple(prior) if prior else ()
+        # AND THE MOVES. A name only reorders; a move can license a relation the engine
+        # would not otherwise propose. Without this the store is a filing cabinet, which
+        # is exactly what the first ablation measured (delta +0 in both arms).
+        ENGINE.STORED_MOVES = tuple(
+            {"from_fact": skill.get("move", {}).get("from_fact"),
+             "to_edit_family": skill.get("move", {}).get("to_edit_family"),
+             "guard_shape": skill.get("guard_shape")}
+            for skill in store.skills
+        ) if arm == "GENERAL" else ()
         row = ENGINE.explore(entry, repos_root=repos_root, seconds=seconds)
         if arm != "EMPTY":
             store.admit(row, human_line_text=entry.get("old_line"))

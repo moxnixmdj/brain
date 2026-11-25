@@ -91,6 +91,12 @@ MAX_VERIFICATIONS = 8
 # the engine's search order is the only thing a store is allowed to touch.
 PREFERRED_RELATIONS: tuple[str, ...] = ()
 
+# THE MOVES A STORE HAS LEARNED, as fact->edit mappings. A relation NAME only reorders a
+# search the engine would have run anyway; a MOVE can license a relation the engine would
+# not have proposed, because it says which kind of fact in this run is worth reading.
+# Empty means the engine is on its own.
+STORED_MOVES: tuple[Mapping[str, Any], ...] = ()
+
 
 # --------------------------------------------------------------------------- #
 # child: one instrumented run. Live objects in, one JSON answer out.
@@ -753,6 +759,18 @@ def _calls_bare_super(node: ast.AST) -> bool:
                 and inner.func.id == "super" and not inner.args):
             return True
     return False
+
+
+def _stored_conjunct(move: Mapping[str, Any]) -> str:
+    """The guard shape a stored move recorded, ready to be conjoined.
+
+    A move whose conjunct cannot be reconstructed is not applied: guessing would turn the
+    store into a source of unverified edits, which is exactly what the admission filter
+    exists to prevent."""
+    shape = str(move.get("guard_shape") or "")
+    if shape and "<id>" not in shape and shape != "True":
+        return shape
+    return ""
 
 
 def _render_distance(site: "Site", wanted: Mapping[str, Any]) -> int:
@@ -1736,6 +1754,26 @@ def relations_for(site: Site, samples: Sequence[Mapping[str, Any]], wanted: Mapp
                         "witness": {"demand": "the exception that did not come",
                                     "pattern": literal[:120],
                                     "why": "$ also matches before a trailing newline; \\Z does not"}})
+    # A STORED MOVE. The store says: a fact of this KIND licensed an edit of this
+    # FAMILY before. If this run HAS such a fact and this site has not been read for it,
+    # the move licenses the relation -- the engine would not have proposed it, because
+    # its own order never asked this question of this site.
+    for move in STORED_MOVES:
+        kinds = set(move.get("from_fact") or [])
+        family = move.get("to_edit_family")
+        if "value_type" in kinds and family == "family:materialise" and site.kind == "call":
+            if any(str(sample.get("type")) in _ONE_SHOT or "<generator" in str(sample.get("repr"))
+                   for sample in samples):
+                out.append({"relation": "STORED_MOVE", "site": site.index, "line": site.line,
+                            "expression": expression, "edit": f"tuple({expression})",
+                            "witness": {"moved_from": sorted(kinds),
+                                        "why": "a stored move said this fact kind licenses this edit"}})
+        if "context" in kinds and family == "family:conjunction" and site.kind == "test":
+            out.append({"relation": "STORED_MOVE", "site": site.index, "line": site.line,
+                        "expression": expression,
+                        "edit": f"{expression} and {_stored_conjunct(move) or 'True'}",
+                        "witness": {"moved_from": sorted(kinds),
+                                    "why": "a stored move said a guard family answered this before"}})
     if site.kind == "format_string":
         # A DETERMINISTIC, EDITED-STRING relation: the run handed back a string the
         # test rejected, and the demanded string differs from it. The edit is read by
@@ -2296,7 +2334,7 @@ def explore(entry: Mapping[str, Any], *, repos_root: pathlib.Path, seconds: int 
                                   "generator/iterator is consumed by the probe")
                 return row
 
-            order = {"GUARD_AGAINST_NONE": 0, "RAISES_BY_PREDICATE": 0, "GUARD_AGAINST_NONE": 1, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "END_ANCHOR": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
+            order = {"STORED_MOVE": 0, "GUARD_AGAINST_NONE": 0, "RAISES_BY_PREDICATE": 0, "GUARD_AGAINST_NONE": 1, "ANCHOR": 1, "SIBLING_DISJUNCT": 1, "END_ANCHOR": 1, "GUARD_NARROWING": 2, "NONE_LEAK": 1, "FLIP": 2,
                      "PRESENCE": 2, "MATERIALISE": 3, "EXCHANGE": 4, "INCLUSION": 5,
                      "UNION": 6, "QUOTING": 6, "KEY_SELECTION": 7,
                      "PRESENCE_ON_OPERAND": 8, "NONE_GUARD": 9, "NEGATION": 10}
