@@ -28,7 +28,7 @@ PY = sys.executable
 IMPORT_FAIL = re.compile(r"cannot import name '([\w_]+)' from '([\w_.]+)'")
 NAME_FRAME = re.compile(r"^([\w/]+\.py):\d+: in <module>$", re.M)
 NAME_FAIL = re.compile(r"NameError: name '([\w_]+)' is not defined")
-SUMMARY = re.compile(r"\d+ (?:passed|failed)")
+SUMMARY = re.compile(r"(\d+) failed, (\d+) passed|(\d+) passed")
 
 
 def run(tree: pathlib.Path, seconds: int) -> str:
@@ -128,19 +128,35 @@ def main(argv: list[str] | None = None) -> int:
             if home is None:
                 print(f"  DEPENDENCY hop: {name!r} defined nowhere -> cannot repair")
                 return 1
-            owner = NAME_FRAME.search(log)
-            target = tree / owner.group(1) if owner else home
-            if not target.exists():
-                target = home
+            # Destination = the file containing the dangling reference. Take the
+            # innermost traceback frame before the NameError, and never the module that
+            # already defines the symbol (that produces a self-import loop -- observed).
+            frames = re.findall(r"^([\w/]+\.py):(\d+): ", log, re.M)
+            target = None
+            for path_text, _line in reversed(frames):
+                candidate = tree / path_text
+                if candidate.exists() and candidate.resolve() != home.resolve():
+                    target = candidate
+                    break
+            if target is None:
+                print(f"  DEPENDENCY hop: {name!r} has no reference site outside its own "
+                      f"module -> nothing to repair")
+                return 2
             module = import_path(tree, home)
             insert_import(target, f"from .{module} import {name}")
             print(f"  DEPENDENCY hop: {name} imported into "
                   f"{target.relative_to(tree)} from .{module}")
             continue
 
-        failed = [line for line in log.splitlines() if line.startswith("FAILED")]
-        print(f"  converged. FAILED lines: {len(failed)}")
-        for line in failed[:5]:
+        # A run that collected nothing prints no summary line. Treating that as
+        # convergence is the same lie this repo has caught six times; it must be an
+        # explicit failure here.
+        if not found:
+            print("  NO SUMMARY LINE -- tests did not run. Not convergence.")
+            return 3
+        failed_lines = [line for line in log.splitlines() if line.startswith("FAILED")]
+        print(f"  converged: {found[-1]}; FAILED lines: {len(failed_lines)}")
+        for line in failed_lines[:5]:
             print("   ", line[:110])
         return 0
 
