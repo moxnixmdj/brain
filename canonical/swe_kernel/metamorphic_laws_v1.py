@@ -12,6 +12,7 @@ repositories without a per-repository rule.
 
 from __future__ import annotations
 
+import ast
 import re
 import sys
 from typing import Any, Callable, Iterable, Mapping, Sequence
@@ -28,6 +29,7 @@ __all__ = [
     "check_error_inconsistency",
     "classify_exception",
     "check_iterable_retyping",
+    "static_assert_validation",
     "mutations_for",
     "package_error_classes",
     "StrippedList",
@@ -247,6 +249,46 @@ def check_iterable_retyping(name: str, fn: Callable[..., Any], args: Sequence[An
             fn(*[variant])
         except Exception as exc:
             out.append(Violation("iterable_retyping", name, f"{label} form raised {type(exc).__name__}: {exc}"))
+    return out
+
+
+def static_assert_validation(source: str, module_name: str = "") -> list[Violation]:
+    """A public function must not validate its arguments with `assert`.
+
+    `assert` is not validation in a library: under `python -O` it is not code. Measured need: pluggy's
+    `unregister()` checked "one of name or plugin" and "plugin is not registered" with `assert`, so
+    `pm.unregister()` returned `None` under `-O` instead of raising. That defect is invisible to every
+    runtime law — the suite never runs with `-O`, and the assertion is silent when it *passes*.
+
+    The rule is narrow on purpose: an `assert` that mentions a parameter of a public function. An
+    internal invariant about a local is left alone.
+    """
+    try:
+        tree = ast.parse(source)
+    except SyntaxError:
+        return []
+    out: list[Violation] = []
+    for node in ast.walk(tree):
+        if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            continue
+        if node.name.startswith("_"):
+            continue
+        params = {a.arg for a in list(node.args.args) + list(node.args.kwonlyargs) + list(node.args.posonlyargs)}
+        if not params:
+            continue
+        for inner in ast.walk(node):
+            if not isinstance(inner, ast.Assert):
+                continue
+            mentioned = {
+                sub.id for sub in ast.walk(inner.test) if isinstance(sub, ast.Name)
+            } & params
+            if mentioned:
+                out.append(Violation(
+                    "assert_validation",
+                    f"{node.name} (line {inner.lineno})",
+                    f"argument validation by assert on {sorted(mentioned)} disappears under python -O",
+                    module=module_name,
+                ))
     return out
 
 

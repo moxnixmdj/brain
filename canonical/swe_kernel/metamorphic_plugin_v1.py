@@ -327,6 +327,17 @@ def pytest_configure(config) -> None:
         except Exception:
             _STATE.setdefault("import_errors", []).append(modname)
             continue
+        if _want("assert_validation"):
+            path = getattr(mod, "__file__", None)
+            if path and path.endswith(".py"):
+                try:
+                    from canonical.swe_kernel import metamorphic_laws_v1 as laws_mod
+                    source = open(path, "r", encoding="utf-8", errors="replace").read()
+                    for violation in laws_mod.static_assert_validation(source, modname):
+                        violation["where"] = f"{modname}.{violation['where']}"
+                        _record(violation)
+                except Exception:
+                    _STATE["skipped"] += 1
         _wrap_module(mod)
 
 

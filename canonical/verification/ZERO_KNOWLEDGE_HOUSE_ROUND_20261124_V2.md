@@ -805,3 +805,49 @@ dependency**: a violation that only appears *after* another object is exercised 
 disabled) is downstream. The measurable form: on the two commits above, the violating pair must be ranked correctly
 against a control set of untouched commits, i.e. the commit's own defect must rank first among standing violations in
 at least half the cases, and never last.
+
+## Round V16 — attribution, with a task signal that is not the fix
+
+V15 ended with the claim that attribution, not breadth, was the binding constraint, and with a gate. This round tests the
+gate — and first had to answer a question the gate depends on: **what may count as the task signal?**
+
+The honest answer is the *issue*, not the pull request. I fetched both for the commits in the blind set, and the
+difference is exactly the leakage boundary: PR #767's body states the cause and the fix ("the private `_plugin_distinfo`
+list … becomes `_name2dist`"), while issue #763 is a symptom report ("`unregister()` never removes those entries. After
+unregistering, `list_plugin_distinfo()` … still list the plugin"). Attribution uses only the issue. (Aside recorded for
+integrity: #767's body says it was written with an AI coding tool upstream. That is a fact about the ground truth we are
+graded against, not about our runtime, which makes zero model calls.)
+
+**Built:** `canonical/swe_kernel/violation_attribution_v1.py` — lexical-structural scoring between issue text and each
+standing violation: code spans 3.0, file paths 4.0, `name(` call forms 2.5, CamelCase 1.5, plain identifiers 1.0; the
+law's own vocabulary at half weight, because "assert" or "trailing whitespace" names a law rather than a symbol. Ties
+are broken by the violation's order — a tie means the issue does not separate them, and inventing a separator is a guess.
+
+**Also built, because the measurement demanded it:** `static_assert_validation`. Issue #762's defect — `unregister()`
+validating with `assert`, so the check vanishes under `python -O` — is invisible to every runtime law: the suite never
+runs with `-O`, and an assert that *passes* is silent. It is a static law: an `assert` inside a public function whose
+test mentions one of that function's parameters.
+
+**This forced me to correct my own gate.** "Fixed tree has zero violations" was the wrong criterion: a repository
+carries unrelated debt, so a correct fix cannot zero the set. The truthful criterion is per defect: *the attributed
+violation is present on the buggy tree and absent on the fixed tree.*
+
+| task | issue (symptom text only) | attributed violation | in buggy | gone in fixed |
+|---|---|---|---|---|
+| `pluggy@50585e0` | #763: "list_plugin_distinfo() keeps unregistered plugins" | `remove_argument_vanishes` on `PluginManager.unregister` (score 10.8, evidence: `unregister`, `list_plugin_distinfo`) | yes | **yes** |
+| `pluggy@8051a4d` | #762: "unregister() argument validation relies on assert" | `assert_validation` on `unregister` line 289 (score 6.65, evidence: `unregister`) | yes | **yes** |
+| control: werkzeug #3127 against pluggy's violations | "WWW-Authenticate trailing white-space" | **abstains** (every score 0) | — | — |
+
+**2 of 2 attributed correctly, and the control abstains.** That is the first time in this stream that the system picks,
+from text alone, which of a repository's standing defects a task is about — and the choice is then confirmed by the
+fix deleting exactly that violation.
+
+**What is still missing, stated as the next gate.** Attribution is a *chooser*; the generator behind it still only
+handles lifecycle. The next gate: for `pyjwt@793a302` (error discipline: `TypeError` escaping where `PyJWTError` is
+promised) and `werkzeug@051fd663` (canonicality: a trailing space in a presented header), a synthesized candidate must
+(a) be accepted by its own law on the buggy tree, (b) be silent on the fixed tree, and (c) not be accepted by the other
+law — three conditions, so a candidate cannot pass by being indiscriminately helpful.
+
+**Rejected this round:** using the PR/commit text as the task signal (it contains the fix — measured above); embedding
+similarity for attribution (it is a model call in the runtime path, forbidden by §2); breaking same-function ties by
+file order or line number (measured to pick the wrong defect for #762 before law vocabulary was added).

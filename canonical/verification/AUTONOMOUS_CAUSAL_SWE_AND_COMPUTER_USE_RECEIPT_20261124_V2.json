@@ -18,6 +18,32 @@
    "collapse_found_not_yet_fixed": "the learned pattern is a single hole over the whole body (pattern has no 'T' and no 'F'), so its two-sided constraint is 'match this exact body': 0 proposals on its own witness, 0 on a held-out same-family body, 0 on file text"
   }
  },
+ "attribution_v16": {
+  "gate_corrected": "whole-set equality (fixed == 0) was wrong because repositories carry unrelated debt; the criterion is per defect: attributed violation present on buggy, absent on fixed",
+  "limits": "two tasks, one repository; same-function ties are broken by law vocabulary, which fails when an issue names only a function carrying two defects of the same law",
+  "new_law": "static_assert_validation (an assert validating a parameter of a public function) - needed because #762's defect is invisible to every runtime law",
+  "results": {
+   "control werkzeug #3127 vs pluggy": {
+    "abstained": true,
+    "attributed": null
+   },
+   "pluggy@50585e0 #763": {
+    "attributed": "remove_argument_vanishes:PluginManager.unregister",
+    "gone_in_fixed": true,
+    "in_buggy": true,
+    "score": 10.8
+   },
+   "pluggy@8051a4d #762": {
+    "attributed": "assert_validation:unregister line 289",
+    "gone_in_fixed": true,
+    "in_buggy": true,
+    "score": 6.65
+   }
+  },
+  "scoring": "code spans 3.0, paths 4.0, call forms 2.5, CamelCase 1.5, identifiers 1.0, law vocabulary 0.5x",
+  "task_signal": "the GitHub issue (symptom report), never the PR body (which contains the cause and the fix)",
+  "tests": "canonical/tests/test_violation_attribution_v1.py, 4 passed"
+ },
  "authority": "NONE__PRODUCER_RUN_SANDBOX",
  "base_commit": "c4f529eb086d3a11e6e8d3479f24176a9e2d590f",
  "blind_evaluation": {
@@ -448,6 +474,10 @@
    "lines": 318,
    "sha256": "b194ef6b03d0c2fa126fadb51be32f14f34e23b14a4bf3d3bdb3ad76ed5b9e04"
   },
+  "canonical/swe_kernel/violation_attribution_v1.py": {
+   "purpose": "rank a repository's standing law violations by the issue text, or abstain",
+   "sha256": "e72426d362051bc3da807bbf96f626781678dd8ba552e8757ade90afea6a2e95"
+  },
   "canonical/tests/test_oracle_drives_purge_synthesis_v1.py": {
    "status": "1 passed"
   },
@@ -590,7 +620,7 @@
    "what": "replace the call in the raising statement with the enclosing class's own attribute whose name overlaps the call's name (token overlap, no table)"
   }
  ],
- "next_bottleneck": "Attribution, not breadth: several standing violations and no commit to attribute them to. Gate stated before the build: on pluggy@8051a4d and pyjwt@793a302 the commit's own defect must rank first among the repository's standing violations in at least half the cases and never last, against a control set of untouched commits.",
+ "next_bottleneck": "Generation for non-lifecycle laws. Gate stated before the build: for pyjwt@793a302 (error discipline) and werkzeug@051fd663 (canonicality), a synthesized candidate must be accepted by its own law on the buggy tree, silent on the fixed tree, and NOT accepted by the other law.",
  "next_stream": "held-out-defect stream: fix commit A, then present commit B's failing trace only, without its test file, and ask for the repair",
  "runtime_model_calls": 0,
  "runtime_network_calls": 0,
