@@ -260,3 +260,63 @@ recurring lesson: **scope rules, not pattern rules.**
   22 attempts and a recorded demand (`more-itertools`, `AssertionError: True != False`).
   Neither was unreachable — both were *routed wrong*, and the existing family was applied
   to the wrong shape.
+
+## Sixth row: `werkzeug d0f040a65b` — a character in a set, not a pattern
+
+```python
+return urlencode(items, safe="!$'()*+,/:;?@", encoding=encoding)
+                                         ^ '+' does not belong here
+```
+
+In a query string `+` means *space*. Leaving it in the safe set meant `1+2` was emitted
+verbatim and any conforming reader would decode it to `1 2`. The human fix drops one
+character.
+
+| | |
+|---|---|
+| parent | `build("index", values={"v": "1+2"})` -> `/?v=1+2` (1 violation) |
+| `SAFE_SET_DROP_PLUS` | **0 violations**, 1 edit |
+| collateral (`a b` -> `a+b`, `plain`, `a/b`) | **all preserved** |
+| human fix | **byte-identical** |
+| shipped test | 1 failed on `d0f040a65b^`, **10 passed** refined |
+| full suite | **1 failed, 851 passed, 1 skipped, 24 errors — identical on parent and refined tree** |
+
+The 24 errors are `test_serving` environment failures (`AttributeError` from a missing
+`watchdog` server dependency), present identically on both trees; the 1 failure is the
+same on both. Symmetric, so not evidence either way — recorded rather than claimed.
+
+### The scope rule again
+
+`safe=` appears **25 times** in werkzeug. Deleting characters from string literals
+wherever they occur is vandalism. What makes this exact:
+
+> the failure names the function (`_urlencode`); inside that function there is exactly
+> **one** `safe=` keyword with a string literal, and it contains the offending character.
+
+One candidate, verified by walking the AST. Fourth scope rule this session.
+
+### A collateral assertion I got wrong, for the third time in this repo
+
+My first probe asserted `"a b"` -> `/?v=a%20b`. It is `/?v=a+b` — on the parent, on the
+human fix and on the refinement, all three. I had generalised from a different encoder.
+The probe scored a **correct** refinement as a regression, exactly as in
+`THE_LITERAL_IS_THE_DEFECT` with the urllib3 `:0` port, and for exactly the same reason:
+**asserting what I expected the patch to do instead of measuring what it does.** Fixed by
+measuring all three trees before writing the expectation.
+
+## Ledger after six rows
+
+| | at session start | now |
+|---|---|---|
+| end-to-end solved, 41 attemptable | 19 | **25** |
+| corpus solved / 45 | 19 (42.2%) | **25 (55.6%)** |
+| constant-refinement rows | 0 | **6** |
+| solved blind, no model call | 0 | **6** |
+
+## The one honest sentence about all six
+
+Six rows cleared, six byte-identical patches, six with verified fail-to-pass oracles —
+and **six chosen by me because I recognised their shape**. The tools decide *where* the
+edit goes once the shape is known; they do not decide *which row to try*. A benchmark of
+1,865 problems is not reached by a person noticing that a defect looks like one they have
+seen. That gap is the honest result, and it is unchanged by the count.

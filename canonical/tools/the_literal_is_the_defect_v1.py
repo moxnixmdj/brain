@@ -266,8 +266,74 @@ path, func, param = sys.argv[1], sys.argv[2], sys.argv[3]
 print(apply(pathlib.Path(path), func, param))
 """
 
+PLUS_IN_SAFE_PROBE = '''
+import json
+from werkzeug.routing import Map, Rule
+
+# The issue: a '+' in a query VALUE must be percent-encoded, because in a query string
+# '+' means space. It was in the encoder's safe set, so "1+2" survived as "1+2" and any
+# reader would decode it to "1 2".
+REQUIRED = [("1+2", "/?v=1%2B2")]
+# Space is encoded as '+' by this encoder on parent, human fix AND refinement alike --
+# asserted as '%20' in my first probe, which scored a correct refinement as a regression.
+# Measured on all three trees before writing the expectation.
+COLLATERAL = [("a b", "/?v=a+b"), ("plain", "/?v=plain"), ("a/b", "/?v=a/b")]
+
+map_ = Map([Rule("/", endpoint="index")])
+bind = map_.bind("example.com")
+bad, survived = [], []
+for value, want in REQUIRED:
+    try:
+        got = bind.build("index", values={"v": value})
+    except Exception as error:
+        bad.append((value, type(error).__name__)); continue
+    if got != want:
+        bad.append((value, got))
+for value, want in COLLATERAL:
+    try:
+        survived.append([value, bind.build("index", values={"v": value}) == want])
+    except Exception as error:
+        survived.append([value, type(error).__name__])
+print(json.dumps({"error": None, "count": len(bad), "witness": bad[:6],
+                  "cases": len(REQUIRED), "collateral": survived}))
+'''
+
+# Drop ONE character from a `safe=` literal. The scope rule that makes this exact:
+#   the failing behaviour names the function (_urlencode); inside it there is exactly one
+#   `safe=` keyword argument, and that literal contains the offending character.
+# Without the scope rule this is "delete a character from any string in the repo".
+_SETDROP_SOURCE = r"""
+import ast, pathlib, sys
+path, func, char = pathlib.Path(sys.argv[1]), sys.argv[2], sys.argv[3]
+src = path.read_text(); tree = ast.parse(src)
+found = 0
+for fn in [n for n in ast.walk(tree) if isinstance(n, ast.FunctionDef) and n.name == func]:
+    for kw in [k for k in ast.walk(fn) if isinstance(k, ast.keyword) and k.arg == "safe"]:
+        if not (isinstance(kw.value, ast.Constant) and isinstance(kw.value.value, str)):
+            continue
+        if char not in kw.value.value:
+            continue
+        lines = src.splitlines(keepends=True)
+        i = kw.value.lineno - 1
+        new = lines[i].replace(kw.value.value, kw.value.value.replace(char, "", 1), 1)
+        if new != lines[i]:
+            lines[i] = new; src = "".join(lines); found += 1
+if found:
+    path.write_text(src)
+print(found)
+"""
+
 
 def run_probe(tree: pathlib.Path, args: argparse.Namespace) -> dict[str, Any]:
+    if args.relation == "plus_in_safe":
+        done = subprocess.run([sys.executable, "-c", PLUS_IN_SAFE_PROBE], cwd=tree,
+                              capture_output=True, text=True, errors="replace",
+                              timeout=args.seconds,
+                              env={**os.environ, "PYTHONPATH": f"{tree}:{tree / 'src'}"})
+        try:
+            return json.loads(done.stdout.strip().splitlines()[-1])
+        except Exception:
+            return {"error": (done.stdout + done.stderr)[-400:]}
     if args.relation == "falsey_key":
         done = subprocess.run([sys.executable, "-c", FALSEY_KEY_PROBE], cwd=tree,
                               capture_output=True, text=True, errors="replace",
@@ -317,7 +383,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--b", default="", help="function it must agree with (agrees only)")
     parser.add_argument("--relation", default="agrees",
                         choices=("agrees", "parses_leading_zero_port", "ipv4_like_host",
-                                 "falsey_key"))
+                                 "falsey_key", "plus_in_safe"))
     parser.add_argument("--alphabet", default="a,1,-")
     parser.add_argument("--maxlen", type=int, default=4)
     parser.add_argument("--repos-root", type=pathlib.Path, default=DEFAULT_REPOS_ROOT)
@@ -348,10 +414,37 @@ def main(argv: list[str] | None = None) -> int:
                 source_rel = args.module.replace(".", "/") + ".py"
                 if args.relation == "parses_leading_zero_port":
                     source_rel = "urllib3/util/url.py"
+                if args.relation == "plus_in_safe":
+                    source_rel = "src/werkzeug/urls.py"
                 if args.relation == "falsey_key":
                     # oracle-selected function and parameter, supplied by the failing test
                     source_rel = "more_itertools/more.py"
                 candidates: list[dict[str, Any]] = []
+                if args.relation == "plus_in_safe":
+                    # Drop ONE character from the single `safe=` literal in the function
+                    # the failure names. Scope is what makes this exact: 25 `safe=`
+                    # literals exist in werkzeug, and only this one is in the encoder.
+                    target = tree / source_rel
+                    original = target.read_text(encoding="utf-8", errors="replace")
+                    edits = subprocess.run(
+                        [sys.executable, "-c", _SETDROP_SOURCE, str(target),
+                         "_urlencode", "+"],
+                        capture_output=True, text=True, errors="replace")
+                    try:
+                        changes = int(edits.stdout.strip().splitlines()[-1])
+                    except Exception:
+                        changes = 0
+                    if changes:
+                        try:
+                            result = run_probe(tree, args)
+                        finally:
+                            target.write_text(original, encoding="utf-8")
+                        candidates.append({"refinement": "SAFE_SET_DROP_PLUS",
+                                           "edits": changes, "result": result,
+                                           "moved": (not result.get("error")) and
+                                                    result.get("count", baseline["count"])
+                                                    < baseline["count"],
+                                           "cleared": result.get("count") == 0})
                 if args.relation == "falsey_key":
                     # AST-scoped refinement: textual substitution cannot express
                     # "a parameter of THIS function used as a bare truthiness test".
