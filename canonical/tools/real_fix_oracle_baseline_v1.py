@@ -40,6 +40,7 @@ Usage
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import os
 import pathlib
@@ -531,6 +532,72 @@ def witness_candidates(before: str, repo_path: pathlib.Path, *,
 ARMS["witness"] = witness_candidates
 
 
+# --------------------------------------------------------------------------- #
+# path-enumerated literal repair
+# --------------------------------------------------------------------------- #
+#
+# Measured (real_fix_provenance_census_v1.py): the modified function is on the
+# executed path for 50/68 tasks, and the path holds only ~21 functions.  Ranking
+# by depth is useless (top-1 accuracy 0%), but the repair sits at median rank 6,
+# so ENUMERATING the path and letting the real test choose covers half the corpus
+# at k=5 without solving localisation at all.
+#
+# So: trace the failing node, take the functions it actually entered, mutate the
+# literals inside each, and hand every variant to the harness to judge.  Nothing
+# here sees `after`, and nothing decides -- the test does.
+
+def path_candidates(before: str, repo_path: pathlib.Path, *,
+                    oracle: Oracle | None = None, task: Mapping[str, Any] | None = None,
+                    top_k: int = 6, per_function: int = 24,
+                    limit: int = 160) -> list[tuple[str, str]]:
+    """Literal mutations inside the functions the failing test actually entered."""
+    if oracle is None or task is None:
+        return []
+    sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
+    try:
+        import real_fix_provenance_census_v1 as P
+        import real_fix_guard_probe_v1 as G
+    except Exception:
+        return []
+    calls = P.trace(oracle, task["failed_nodes"][0])
+    if not calls:
+        return []
+    # deepest first: the wrong value usually originates deep, even if depth alone
+    # cannot name the site (measured top-1 = 0%)
+    ranked = sorted({c["function"] for c in calls},
+                    key=lambda f: -max((c["depth"] for c in calls if c["function"] == f),
+                                       default=0))[:top_k]
+
+    try:
+        tree = ast.parse(before)
+    except SyntaxError:
+        return []
+    out: list[tuple[str, str]] = []
+    for fn_name in ranked:
+        node = next((n for n in ast.walk(tree)
+                     if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))
+                     and n.name == fn_name), None)
+        if node is None:
+            continue
+        emitted = 0
+        for lit in G._string_literals(node):
+            for kind, replacement in G._literal_mutations(lit.value):
+                patched = G._replace_span(before, lit, replacement)
+                if patched and patched != before:
+                    out.append((f"path:{fn_name}:{kind}:{lit.value!r}->{replacement!r}", patched))
+                    emitted += 1
+                    if emitted >= per_function or len(out) >= limit:
+                        break
+            if emitted >= per_function or len(out) >= limit:
+                break
+        if len(out) >= limit:
+            break
+    return out
+
+
+ARMS["path"] = path_candidates
+
+
 def apply_candidate(before: str, kind: str, payload: str,
                     repo_path: pathlib.Path | None = None) -> str:
     """Materialise a candidate edit.  Unknown kinds are refused, not guessed."""
@@ -661,7 +728,7 @@ def run(corpus: pathlib.Path, workdir: pathlib.Path, *, arm: str | None,
             try:
                 if arm == "local":
                     cands = gen(t["before"], o.path, failure_output=first["output"])
-                elif arm == "witness":
+                elif arm in ("witness", "path"):
                     cands = gen(t["before"], o.path, oracle=o, task=t)
                 else:
                     cands = gen(t["before"], o.path)
@@ -672,7 +739,7 @@ def run(corpus: pathlib.Path, workdir: pathlib.Path, *, arm: str | None,
                     break
                 tried += 1
                 o.write_source(t["source"], t["before"])
-                patched = (payload if kind.startswith("witness:")
+                patched = (payload if kind.startswith(("witness:", "path:"))
                            else apply_candidate(t["before"], kind, payload, repo_path=o.path))
                 if arm != "local":
                     if patched == t["before"]:
@@ -732,7 +799,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     ap.add_argument("--corpus", default=str(CORPUS))
     ap.add_argument("--workdir", default=str(DEFAULT_WORKDIR))
     ap.add_argument("--arm", default=None,
-                    choices=[None, "blind", "local", "witness"])
+                    choices=[None, "blind", "local", "witness", "path"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--offset", type=int, default=0,
                     help="skip the first N corpus tasks (sliced runs)")
