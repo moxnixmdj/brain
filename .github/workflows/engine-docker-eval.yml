@@ -314,8 +314,23 @@ jobs:
           echo "--- job config ---"
           cat "$W/cfgs/job-$SHARD.yaml"
           echo "--- run ---"
+          # GitHub runs every step under `bash -e`, so a nonzero harbor exit aborted the step
+          # before its exit code was recorded: the shard produced no report and the run lost those
+          # tasks' verdicts for a reason the report could not name (measured: nop shard 2 failed
+          # exactly this way). A transient pull failure is retried once; either way the code is
+          # recorded and the shard artifacts survive to the aggregate.
+          set +e
           harbor run -c "$W/cfgs/job-$SHARD.yaml" -q 2>&1 | tee "$W/harbor-$ARM-s$SHARD.log"
-          echo "${PIPESTATUS[0]}" > "$W/harbor-exit.txt"
+          hx=${PIPESTATUS[0]}
+          if [ "$hx" != "0" ]; then
+            echo "::warning::harbor exited $hx for $ARM shard $SHARD; retrying this shard once"
+            echo "=== RETRY after exit $hx ===" >> "$W/harbor-$ARM-s$SHARD.log"
+            harbor run -c "$W/cfgs/job-$SHARD.yaml" -q 2>&1 | tee -a "$W/harbor-$ARM-s$SHARD.log"
+            hx2=${PIPESTATUS[0]}
+            if [ "$hx2" = "0" ]; then hx=0; else hx="$hx,$hx2"; fi
+          fi
+          set -e
+          echo "$hx" > "$W/harbor-exit.txt"
           docker system prune -af >/dev/null 2>&1 || true
           df -h / | tail -1
 
@@ -364,7 +379,7 @@ jobs:
             --note n_shards="$N_SHARDS"
             --note eval_commit="$GITHUB_SHA"
             --out "$W/out/$ARM-s$SHARD.json" \
-            || echo '{"arm":"'"$ARM"'","error":"COLLECT_FAILED"}' > "$W/out/$ARM-s$SHARD.json"
+            || { echo '{"arm":"'"$ARM"'","error":"COLLECT_FAILED"}' > "$W/out/$ARM-s$SHARD.json"; true; }
           cp "$W/store-$ARM-s$SHARD.json" "$W/out/store-snapshot.json" 2>/dev/null || true
           tail -c 150000 "$W/harbor-$ARM-s$SHARD.log" > "$W/out/harbor-tail.log" 2>/dev/null || true
           # Machine-readable diagnostics: the exit code plus the last lines of the
@@ -445,6 +460,22 @@ jobs:
             --report out/report.json --out out/receipt.json \
             --date "$(date -u +%Y-%m-%d)" || echo "RECEIPT_FAILED=true" >> "$GITHUB_ENV"
           python3 -c 'import json;d=json.load(open("out/receipt.json"));print(json.dumps({"claimable":d["claimable_as_a_benchmark_number"],"authority":d["authority"],"why":d["why_not_claimable"]},indent=1))' >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
+          # A shard that errored qualifies the run; it must not void the other 17.
+          failed_shards=""
+          for f in $(find dl -name '*-s*.json' -type f 2>/dev/null | sort); do
+            grep -q '"error": *"COLLECT_FAILED"' "$f" 2>/dev/null && failed_shards="$failed_shards $(basename "$f" .json)"
+          done
+          if [ -n "$failed_shards" ]; then
+            python3 - "$failed_shards" <<'INCOMPLETE'
+          import json, pathlib, sys
+          names = [s for s in sys.argv[1].split() if s]
+          path = pathlib.Path("out/report.json")
+          d = json.loads(path.read_text(encoding="utf-8"))
+          d["incomplete_shards"] = names
+          path.write_text(json.dumps(d, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+          INCOMPLETE
+            { echo ""; echo "## Incomplete shards in this run"; echo ""; echo "These shard artifacts reported a collection error, so their tasks are counted as missing rather than resolved — the run is qualified, not discarded:"; echo ""; for s in $failed_shards; do echo "- \`$s\`"; done; } >> out/report.md
+          fi
           echo '--- report ---'
           head -80 out/report.md
           mkdir -p out/diagnostics
