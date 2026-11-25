@@ -121,3 +121,92 @@ means a fix (it never does); that the 0/51 is a benchmark score (the receipt ref
 `OFFICIAL_TASK_VERDICTS__GATES_NOT_PASSED`); that unmerged branches contribute capability (they
 contribute candidates); or that a `MEASURED_SANDBOX` row is credit — under
 `canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md` it is reproducibility, not ownership.
+
+## 5. Re-read 2026-11-21: the frontier column moved, and the enumeration got a real denominator
+
+The table above was written in one sitting with the bars it could read that day. Re-reading the public
+boards now changes several of them, and the changes are not in our favour — so they are recorded here
+rather than left in a stale table that still reads as current.
+
+| capability bar | §1 said | now (source, date) | effect on the verdict |
+|---|---|---|---|
+| SWE-bench Pro V2 (642 tasks) | 61.50 % ± 3.10 official leader, board stale since 2026-07-09 | **99.4 %** Claude Opus 5 (llmlearner board 2026-11-06; modelmenu 2026-11-06; llmbenchmark 2026-11-15 lists 17 models, median 95.8 %) | row 1 stays FRONTIER, and the benchmark has stopped discriminating: 17 models within 12 points, top three within 0.3 |
+| Terminal-Bench 4.1 | 71.2 % Copilot Fusion | **71.21 %** Copilot Fusion, 65.76 % Claude Opus 5.5 / Fable 5.2 (tbench.ai snapshot 2026-11-19/20); Codex + GPT-6.2 Astra 62.1 %; Gemini 4 Hydrogen 57 % self-reported | row 3 unchanged; still FRONTIER |
+| METR 50 % horizon | ~40 h Astra / 39 h Opus 5.5 | **40 h** (13–2,645) and **39 h** (12–1,253), verifiable-only ≤27 h; METR states anything above 16 h is past what its suite can measure reliably | row 4 unchanged, with the caveat strengthened — the 1 h gap is meaningless inside overlapping CIs |
+| OSWorld 2.0 | best 20.6 % | official board best **44.33 % binary** (Claude Opus 5 max effort, board 2026-09-17); vendor-reported **81.8 % partial** (Opus 5.5 v2.1, 2026-09-22); OSWorld-Verified 86.1 % vs 72.36 % human baseline | row 5 moves *further* away; and `OSWORLD_2_1_PARTIAL_GE_81_8` is exactly that vendor number — our own bar is pinned to a self-report |
+| GDPval-AA v2.1 | leader 1846 Elo | **1,866.3** Claude Opus 5.5, 1,858.1 Kimi K3.1 Pro, 1,857.1 Muse Wonder Full (Artificial Analysis board 2026-11-04) | row 6: our open truth `PROWORK_GDPVAL_GE_1846` is a stale target — beating it would no longer mean beating the frontier |
+| ARC-AGI-2 | 77.1 % (Gemini 3.1 Pro) | **95.8 %** GPT-6.2 Astra (BenchLM, captured 2026-11-20, 317 configs, "top models clustered within 0.8 points") | row 9: the gap widens; the board is saturating too |
+| GPQA Diamond | 94.3 % | **96.0 %** GPT-6 Astra (developersdigest, verified 2026-11-07) | row 9 unchanged in direction |
+
+Lesson recorded so the next reader does not trust a table like this one: **a frontier column has a shelf
+life measured in weeks.** Any comparison document in this repo older than ~30 days should be re-read
+before its numbers are quoted, and the `canonical/governance/*ACCEPTANCE_TRUTH*` bars — which are frozen
+comparisons (`CODING_TB4_GE_66_4`, `PROWORK_GDPVAL_GE_1846`, `AUTOMATIONBENCH_GE_40`, `HLE_TOOLS_GE_67_7`,
+`TB_SCIENCE_GE_58_7`, `CHARTOGRAPHY_TOOLS_GE_89`, `OSWORLD_2_1_PARTIAL_GE_81_8`, `FINANCE_*`) — inherit the
+same staleness. The terminal-objective ledger's own `hard_nonclaims` already forbid claiming those 19 are
+proved, which is the only reason staleness is a measurement problem rather than a integrity one.
+
+### 5b. The denominator, finally measured rather than described
+
+The question "do you know *all* of our capabilities" has a mechanical answer now, and it is not a list:
+
+| layer | count | what it can and cannot support |
+|---|---|---|
+| harness-measured true capabilities | **9**, all `fresh_pass_rate 1.0000`, n=2000–3000, blob == HEAD (re-verified by `git hash-object` this sitting) | the only class with independent oracles + mutation tests; `authority: NONE__MEASURED_SANDBOX` until CI re-runs |
+| curated bound-capability rows (`VERIFIED_BOUND_CAPABILITY`) | **153 rows across 87 distinct effect classes** | breadth: python.source 13, python.software 10, python.refactor 8, chart.raster 6, python.review 6, python.tests 5, docx.document 4, python.fault 4, software.hardcore 4, auto.npm 3, pdf/xlsx/sqlite/chart.read/decision.synthesis/evidence.oracle 2 each, +63 classes with 1 |
+| …of which cite a receipt that exists | **92** | the rest: 8 cite a receipt that is **missing**, 41 carry a `verification` block with **no** `receipt_path`, 12 carry no `verification` block at all — so 61 of 153 "VERIFIED" rows rest on the snapshot floor, not on an evidence file |
+| registry sources the root merges | live 145, snapshot 146, extended 2,319, projection 305 → 2,472 merged, **447 admitted** | "one registry" is real; the other 2,025 are declarations awaiting receipts |
+| inventory rows (a file was seen) | **2,309** `UNVERIFIED_INVENTORY` | not capabilities: 0 executed, and `bound_capabilities/**` is excluded from it by design |
+| pending bindings queued | **16** (7 acquisition, 9 true-capability) | registered for receipting; none admitted |
+| ownership-matrix families | **19**: 7 VERIFIED_OWNED_EQUAL_OR_BETTER, 8 EXTERNAL_CAPABILITY_SPECIMEN_FOUND, 2 OWNED_COMPONENT_NOT_FULL_FAMILY, 2 BRAIN_CONFIGURED_VERIFICATION_PENDING | the vs-frontier layer; **4** families name a Python route module, of which 0 are admitted and 3 do not even speak `run(args, root)` |
+| acquired internalized source trees | 4 trees, 124 modules (software_engineering 71, professional_work 37, causal_falsification 10, artifact_creation 6) | code we hold, mostly unenrolled |
+| laws / obsolescence records / frontier claim files | 59 / 105 / 11 | the governance surface that decides what may be claimed |
+| graph facts | 5,915 modules, 3,544 components, 3,022 singletons, 4,627 modules with no importer in `canonical/`, 1,993 distinct `SCHEMA`; reachability ENTRY_POINT 566 / IN_USE 547 / ISLAND 1,457 / TEST_ONLY 534 / TEST 2,811 | the honest answer to "all of them": **most of the tree is not a capability**, it is unreferenced code, and 1,457 modules are unreachable from any entry point |
+| unmerged branches | 6,969, ≥100 open PRs | zero credit, by the rule that an unmerged claim is a claim |
+
+### 5c. Second re-read, same sitting: both columns were narrower than the tables implied
+
+§1 answers "us vs the boards they publish". It does not answer "us vs everything they can do", and the gap is
+measurable from our own files. Method: keyword census over the 289 JSON files under
+`canonical/capabilities/frontier`, `canonical/capabilities/opus55`, `canonical/governance` (1,128,919 bytes).
+
+| frontier capability class, absent from §1 | their number | our tracking, in hits |
+|---|---|---|
+| long-context retrieval (MRCR 1M) | 83.5 % DeepSeek V4 Pro (self-reported, board 2026-11-13); ~74 % at 512K–1M; Opus 4.6 76 % → 4.7 **32.2 %** | `MRCR` 0, `context window` 0 |
+| offensive cyber / exploit work | CyberGym 81.9 % GLM-5.3, 81 % Kimi K3; Opus 5 card (2026-07-24): ExploitGym, ExploitBench, OSS-Fuzz, Firefox 147, CyScenarioBench, UK AISI range | `Cybench` 0, `CyberGym` 0 |
+| prompt-injection robustness | attack success 0.31 % / 0.29 % / 0.45 %; **0.18 %** with injection probes | `prompt injection` 0 as a bar; a `PROFESSIONAL_GOODHART_PROMPT_INJECTION_...HOLDOUT` lane exists and I quoted neither side |
+| realtime speech / audio / video | shipped, scored on their own evals | 1 lane (`SATB_AUDIO_TRANSCRIPTION`, rank 19). The 110 "voice" hits are the word *Invoiced* — substring counting is not a census |
+| deep research, medical, legal, paid-work agency, MCP interop, test-time compute, parallel tool use | all published and ranked | `BrowseComp` 0, `SWE-Lancer` 0, `test-time compute` 0, `parallel tool` 0; HealthBench 2 files, `MCP` 26 mentions, none of them a bar |
+
+Two verdict consequences, not cosmetics:
+
+1. **Two §1 rows should not be ranked at all.** Injection/Goodhart and long-context retrieval: they publish
+   numbers, we hold no measured bar. `UNRANKED`, and my earlier draft risked reading `US` on both by default.
+2. **The abstention row changed its argument.** Opus 4.6 → 4.7 gave up ~44 points of MRCR retrieval to buy
+   refuse-rather-than-fabricate. So the symmetric statement is: *they can trade capability for honesty; we have no
+   capability to trade.* Our `US` there is exactness at a scope narrow enough that the trade never appears.
+
+Our column was incomplete in the opposite direction. `canonical/capabilities/opus55/` holds **276 claim files in
+198 filename-derived claim lanes**, **63 of them domain-engineering lanes** with no public bar for anyone
+(FreeCAD spring clip and impeller, WDM photonic design, FDTD, cargo flight dispatch, CRISPR policy, JEVOS
+bioinformatics, VBA userform porting, data anonymization, layout-config recreation, RCAEval root-cause).
+Credit accounting over those 276: **214 carry an explicit `ZERO_*` credit limiter, 22 carry a `VERIFIED`/`PASS`
+status without one, 40 other**; **316 evidence pointers resolve, 8 do not**. The 22-and-8 pair is the follow-up.
+
+**Effect on the headline tally:** 10 / 7 / 3 was computed over the *scoreable* subset. Including the domain tier it
+is roughly **10 / 7 / ~66 undecidable** — most of our surface sits where neither side can be scored, and presenting
+the scoreable part as the whole flattered our win rate.
+
+**Instrument warning, aimed at our own confidence:** Anthropic retired CyberGym as *saturated*, and re-scoring shows
+the grader misattributes bugs ("agents lose credit for triggering the intended vulnerability and gain credit for a
+different one"). A frontier bar can be **unsound**, not merely stale. The shelf-life rule generalizes: before quoting
+either column, check that the instrument is still in use by the party that reports it.
+
+Two items this section creates, both mechanical: (a) `capability_fabric_v1.py` does not read
+`canonical/capabilities/opus55/` at all, so the census that answers "all of them" silently excludes 198 claim lanes;
+(b) the frontier side needs the symmetric instrument — a `frontier_fabric` census enumerating their classes from
+primary sources (system-card evaluation sections + the boards we hold bars against), recording per class: tracked /
+barred / held. Then the honest answer becomes "we cover N of M enumerated classes, here are the M−N we don't".
+Caveat on the numbers above: 276 files and 19 matrix families are hard counts; **198 is derived by stripping
+filename suffixes**, and reconciling it with the 19-family ownership matrix is exactly the drift the instrument
+should remove.
