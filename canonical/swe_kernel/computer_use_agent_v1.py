@@ -724,6 +724,148 @@ class ComputerUseAgent:
         report["result"] = "AGENT_LOOP_COMPLETE"
         return report
 
+    def speculative_cow_rollout(
+        self,
+        candidate_commands: Sequence[str],
+        goal_predicates: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        """Fork candidate commands in isolated Copy-on-Write shadow workspaces, score by goal-residual reduction,
+        and commit only the strictly winning branch to self.environment_root."""
+        import shutil
+        import tempfile
+
+        before_residual = sum(1 for pred in goal_predicates.values() if not pred(self.environment_root))
+        branches: list[dict[str, Any]] = []
+        best_branch: dict[str, Any] | None = None
+
+        for idx, cmd in enumerate(candidate_commands):
+            with tempfile.TemporaryDirectory(prefix=f"cow_branch_{idx}_") as tmp_dir:
+                shadow_root = pathlib.Path(tmp_dir) / "workspace"
+                shutil.copytree(self.environment_root, shadow_root)
+                before_snap = _files(shadow_root)
+                rc, output = _run_in(shadow_root, cmd)
+                after_snap = _files(shadow_root)
+                delta_paths = sorted(_delta(before_snap, after_snap))
+                after_residual = sum(1 for pred in goal_predicates.values() if not pred(shadow_root))
+                reduction = before_residual - after_residual
+                branch_info = {
+                    "branch_index": idx,
+                    "command": cmd,
+                    "returncode": rc,
+                    "output": output[:500],
+                    "delta_files": delta_paths,
+                    "before_residual": before_residual,
+                    "after_residual": after_residual,
+                    "residual_reduction": reduction,
+                }
+                branches.append(branch_info)
+                if rc == 0 and reduction > 0:
+                    if best_branch is None or reduction > best_branch["residual_reduction"]:
+                        best_branch = branch_info
+
+        committed = False
+        if best_branch is not None:
+            self.act(best_branch["command"])
+            committed = True
+
+        return {
+            "before_residual": before_residual,
+            "branches_evaluated": len(branches),
+            "branches": branches,
+            "winning_branch": best_branch,
+            "committed": committed,
+        }
+
+
+def find_articulation_subgoals(
+    edges: Sequence[tuple[str, str]],
+    start_state: str,
+    goal_state: str,
+) -> list[str]:
+    """Compute exact dominator / cut-vertex articulation subgoals that lie on EVERY valid path
+    from start_state to goal_state in a directed transition graph."""
+    adj: dict[str, list[str]] = {}
+    nodes: set[str] = {start_state, goal_state}
+    for u, v in edges:
+        adj.setdefault(u, []).append(v)
+        nodes.add(u)
+        nodes.add(v)
+
+    def _reachable(src: str, dst: str, forbidden: str | None = None) -> bool:
+        if src == forbidden or dst == forbidden:
+            return False
+        seen = {src}
+        queue = [src]
+        while queue:
+            curr = queue.pop(0)
+            if curr == dst:
+                return True
+            for nxt in adj.get(curr, ()):
+                if nxt != forbidden and nxt not in seen:
+                    seen.add(nxt)
+                    queue.append(nxt)
+        return False
+
+    if not _reachable(start_state, goal_state):
+        return []
+
+    # Collect states that lie on at least one valid path from start_state to goal_state
+    on_valid_path = [
+        n for n in nodes
+        if n not in (start_state, goal_state)
+        and _reachable(start_state, n)
+        and _reachable(n, goal_state)
+    ]
+
+    # A state `c` is an articulation cut-vertex iff removing `c` disconnects start_state from goal_state
+    cut_vertices = [
+        c for c in on_valid_path
+        if not _reachable(start_state, goal_state, forbidden=c)
+    ]
+
+    # Order cut-vertices topologically along the path from start_state to goal_state
+    return sorted(
+        cut_vertices,
+        key=lambda c: sum(1 for other in cut_vertices if other != c and _reachable(other, c)),
+    )
+
+
+def run_checkpointed_horizon(
+    agent: ComputerUseAgent,
+    sub_episodes: Sequence[Mapping[str, Any]],
+) -> dict[str, Any]:
+    """Execute a long-horizon workflow factored at Petri-net articulation checkpoints, locking in
+    each verified subgoal invariant before advancing to the next segment."""
+    completed_checkpoints: list[dict[str, Any]] = []
+    for idx, ep in enumerate(sub_episodes):
+        checkpoint_id = str(ep["checkpoint_id"])
+        command = str(ep["command"])
+        validator = ep["validator"]
+        act_res = agent.act(command)
+        verified = bool(validator(agent.environment_root))
+        reval = agent.revalidate(len(agent.steps))
+        all_preserved = not bool(reval.get("invalidated"))
+        entry = {
+            "segment_index": idx,
+            "checkpoint_id": checkpoint_id,
+            "command": command,
+            "returncode": act_res["returncode"],
+            "checkpoint_verified": verified,
+            "standing_facts_preserved": all_preserved,
+        }
+        completed_checkpoints.append(entry)
+        if not verified or not all_preserved:
+            return {
+                "status": "HALTED_AT_CHECKPOINT",
+                "failed_checkpoint": checkpoint_id,
+                "checkpoints": completed_checkpoints,
+            }
+    return {
+        "status": "HORIZON_COMPLETE",
+        "checkpoints_verified": len(completed_checkpoints),
+        "checkpoints": completed_checkpoints,
+    }
+
 
 def _delta(before: Mapping[str, bytes], after: Mapping[str, bytes]) -> set[str]:
     changed: set[str] = set()

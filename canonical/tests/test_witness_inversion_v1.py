@@ -311,3 +311,43 @@ def test_run_corpus_reports_the_denominator_it_started_from():
     report = {"states": states, "tasks": []}
     report["by_arm"] = {"witness_inversion": 0, "grammar_control": 0}
     assert W._headline(report).startswith("0 real fix commits")
+
+
+def test_repo_native_component_mining_dual_splicing_and_bidirectional_lens(tmp_path):
+    """Repo-native component mining, dual-program splicing, bidirectional lens FST, and L3 negative-space store."""
+    (tmp_path / "pkg.py").write_text(
+        "DEFAULT_DELIM = ':'\n"
+        "class ParseError(ValueError):\n    pass\n"
+        "def normalize_key(key, strict=False):\n    return key.strip().lower()\n",
+        encoding="utf-8",
+    )
+    comp = W.mine_repo_components(tmp_path)
+    assert any(f["name"] == "normalize_key" and f["arity"] == 2 for f in comp["functions"])
+    assert "ParseError" in comp["exceptions"]
+    assert "DEFAULT_DELIM" in comp["constants"]
+
+    spliced = W.splice_dual_programs(
+        "default_val",
+        "x.strip()",
+        [{"x": None, "default_val": ""}],
+        [{"x": "  abc  ", "default_val": ""}],
+    )
+    assert spliced is not None
+    assert spliced["guard"] == "x is None"
+    assert eval(spliced["spliced_expression"], {}, {"x": None, "default_val": "fallback"}) == "fallback"
+    assert eval(spliced["spliced_expression"], {}, {"x": " hi ", "default_val": "fallback"}) == "hi"
+
+    lens = W.synthesize_bidirectional_lens(
+        [(b"\x04", b"^D"), (b"\x1a", b"^Z"), (b"normal", b"normal")],
+        input_var="buf",
+    )
+    assert lens is not None
+    assert lens["round_trip_verified"] is True
+    assert lens["rules_count"] == 2
+
+    store = W.NegativeSpaceInvariantStore(tmp_path / "l3_neg.json")
+    store.record_refutation("x + 1", reason="regression_failure", repo="demo", commit="abc")
+    assert store.is_refuted("x + 1") is True
+    assert store.is_refuted("x - 1") is False
+    assert store.filter_candidates(["x + 1", "x - 1"]) == ["x - 1"]
+
