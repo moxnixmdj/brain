@@ -247,6 +247,108 @@ def _is_hole_name(node: ast.AST) -> str | None:
     return None
 
 
+def _candidate_local_names(window: ast.AST) -> dict[str, tuple[int, int]]:
+    """Name ids BOUND inside `window`, keyed by name -> first-binding position.
+
+    Only plain-name bindings count (Assign/AugAssign/AnnAssign name targets,
+    for/comprehension targets, walrus, `with ... as x`). Attribute/subscript
+    targets bind their base name elsewhere and are intentionally ignored.
+    """
+    out: dict[str, tuple[int, int]] = {}
+
+    def _add(nid: str, node: ast.AST) -> None:
+        pos = (int(getattr(node, "lineno", 0) or 0), int(getattr(node, "col_offset", 0) or 0))
+        cur = out.get(nid)
+        if cur is None or pos < cur:
+            out[nid] = pos
+
+    for node in ast.walk(window):
+        if isinstance(node, (ast.Assign, ast.AugAssign, ast.AnnAssign)):
+            for tgt in node.targets if isinstance(node, ast.Assign) else [node.target]:
+                if isinstance(tgt, ast.Name):
+                    _add(tgt.id, tgt)
+        elif isinstance(node, (ast.For, ast.AsyncFor)):
+            for sub in ast.walk(node.target):
+                if isinstance(sub, ast.Name):
+                    _add(sub.id, sub)
+        elif isinstance(node, ast.NamedExpr):
+            if isinstance(node.target, ast.Name):
+                _add(node.target.id, node.target)
+        elif isinstance(node, ast.comprehension):
+            for sub in ast.walk(node.target):
+                if isinstance(sub, ast.Name):
+                    _add(sub.id, sub)
+        elif isinstance(node, ast.withitem) and node.optional_vars is not None:
+            for sub in ast.walk(node.optional_vars):
+                if isinstance(sub, ast.Name):
+                    _add(sub.id, sub)
+        elif isinstance(node, ast.arg):
+            # Params/comprehension-iteration args bind names not owned by the
+            # window: they must never be renamed. Mark as blocked.
+            _add(_PARAM_PREFIX + node.arg, node)
+    return out
+
+
+def _private_local_names(window: ast.AST, full_tree: ast.AST) -> list[str]:
+    """Window-private names: bound inside `window`, referenced ONLY inside it.
+
+    Such names can be alpha-renamed (locally) without changing program meaning,
+    which is what lets a multi-statement skill learned with one local variable
+    spelling replay on a repo that spells it differently. Privacy is measured by
+    Name-occurrence counts (window count == whole-file count), so it is exact for
+    copies and shared trees alike. Param/`arg` bindings, `except E as e` names and
+    global/nonlocal declarations are excluded (fail closed).
+    """
+    cand = _candidate_local_names(window)
+    blocked: set[str] = set()
+    for node in ast.walk(window):
+        if isinstance(node, (ast.Global, ast.Nonlocal)):
+            blocked |= set(node.names)
+        elif isinstance(node, ast.ExceptHandler) and node.name:
+            blocked.add(node.name)
+    win_occ: dict[str, int] = {}
+    file_occ: dict[str, int] = {}
+    for node in ast.walk(window):
+        if isinstance(node, ast.Name):
+            win_occ[node.id] = win_occ.get(node.id, 0) + 1
+    for node in ast.walk(full_tree):
+        if isinstance(node, ast.Name):
+            file_occ[node.id] = file_occ.get(node.id, 0) + 1
+    scored: list[tuple[tuple[int, int], str]] = []
+    for nid, pos in cand.items():
+        if nid.startswith(_PARAM_PREFIX) or nid in blocked:
+            continue
+        wins = win_occ.get(nid, 0)
+        # Private iff the file never references the name outside the window
+        if wins and wins == file_occ.get(nid, 0):
+            scored.append((pos, nid))
+    scored.sort()
+    return [nid for _, nid in scored]
+
+
+_ALPHA_SEP = "__BRAIN_ALPHA_"
+_PARAM_PREFIX = "__BRAIN_PARAM__:"
+
+
+def _alpha_rename(node: ast.AST, mapping: Mapping[str, str]) -> ast.AST:
+    """Rename Name ids per `mapping`, capture-free via a placeholder pass."""
+    if not mapping:
+        return node
+    placeholders = {
+        value: f"{_ALPHA_SEP}{i}__" for i, value in enumerate(sorted(set(mapping.values())))
+    }
+    from_placeholder = {p: v for v, p in placeholders.items()}
+    clone = copy.deepcopy(node)
+    for n in ast.walk(clone):
+        if isinstance(n, ast.Name) and n.id in mapping:
+            n.id = placeholders[mapping[n.id]]
+    for n in ast.walk(clone):
+        if isinstance(n, ast.Name) and n.id in from_placeholder:
+            n.id = from_placeholder[n.id]
+    ast.fix_missing_locations(clone)
+    return clone
+
+
 def _holes_of(node: ast.AST) -> set[str]:
     return {n.id for n in ast.walk(node) if _is_hole_name(n)}
 
@@ -614,6 +716,22 @@ def induce_skill_from_verified_fix(
 
     hole_dataflow = _hole_dataflow_tags(b_pat, a_pat)
 
+    # Window-private local names (blk mode): replay may alpha-rename these so a
+    # skill learned with one variable spelling transfers to repos that spell
+    # the same dataflow differently. Computed conservatively over the FULL
+    # before/after sources; empty list = exact-name matching only.
+    alpha_locals: list[str] = []
+    if mode == "blk":
+        try:
+            _b_full = ast.parse(before_source)
+            _a_full = ast.parse(after_source)
+            _lb = _private_local_names(b_node, _b_full)
+            _la = _private_local_names(a_node, _a_full)
+            if _lb and _lb == _la:
+                alpha_locals = _lb
+        except (SyntaxError, RecursionError):
+            alpha_locals = []
+
     # Map hole traits from original expression strings onto canonical hole IDs
     required_traits: dict[str, list[str]] = {}
     support_traits: dict[str, list[str]] = {}
@@ -661,6 +779,7 @@ def induce_skill_from_verified_fix(
         "after_pattern": a_code,
         "hole_kinds": hole_to_kind,
         "hole_to_orig": dict(hole_to_orig),
+        "alpha_locals": alpha_locals,
         "hole_dataflow": hole_dataflow,
         "required_hole_traits": required_traits,
         "support_hole_traits": support_traits,
@@ -924,13 +1043,42 @@ def propose_block_skills(
                     body=[copy.deepcopy(s) for s in window], type_ignores=[]
                 )
                 ast.fix_missing_locations(b_mod)
+                pat_locals = [str(x) for x in (skill.get("alpha_locals") or [])]
+                alpha_map: dict[str, str] = {}
+                if pat_locals:
+                    tgt_locals = _private_local_names(b_mod, target_tree)
+                    if len(tgt_locals) == len(pat_locals):
+                        alpha_map = dict(zip(tgt_locals, pat_locals))
+                        # Refuse a rename that would capture a name the window
+                        # already reads without binding it itself.
+                        free_ids = {
+                            n.id
+                            for n in ast.walk(b_mod)
+                            if isinstance(n, ast.Name)
+                            and n.id not in tgt_locals
+                        }
+                        if free_ids & set(pat_locals):
+                            alpha_map = {}
+                unify_src = (
+                    _alpha_rename(b_mod, alpha_map) if alpha_map else b_mod
+                )
                 env: dict[str, ast.AST] = {}
-                if not _unify_ast(b_pat, b_mod, env):
+                if not _unify_ast(b_pat, unify_src, env):
                     continue
-                # Check runtime preconditions on bound holes
+                # De novo (after-only) holes have no before-side occurrence to
+                # bind: project them from the already-bound subtrees, and refuse
+                # the proposal if any hole stays unbound (fail closed).
+                _project_missing_holes(env, skill.get("hole_to_orig") or {}, b_mod)
+                if _holes_of(a_pat) - env.keys():
+                    continue
+                # Check runtime preconditions on bound holes. Trait keys are
+                # read in TARGET space, so undo the alpha-rename for lookups.
+                _inv_alpha = {v: k for k, v in alpha_map.items()}
                 precondition_ok = True
                 bound_traits: dict[str, list[str]] = {}
                 for hid, bound_ast in env.items():
+                    if _inv_alpha:
+                        bound_ast = _alpha_rename(bound_ast, _inv_alpha)
                     unparsed = ast.unparse(bound_ast)
                     observed = set(str(t) for t in (expr_traits or {}).get(unparsed, ()))
                     bound_traits[hid] = sorted(observed)
@@ -941,6 +1089,8 @@ def propose_block_skills(
                 if not precondition_ok:
                     continue
                 inst = _instantiate_ast(a_pat, env)
+                if alpha_map:
+                    inst = _alpha_rename(inst, {v: k for k, v in alpha_map.items()})
                 new_stmts = list(inst.body)
                 inst_code = ast.unparse(inst)
                 window_code = ast.unparse(b_mod)
@@ -956,7 +1106,10 @@ def propose_block_skills(
                     "node": new_stmts,
                     "code": inst_code,
                     "span": (start_ln, end_ln, window_code, window_len),
-                    "bound_holes": {k: ast.unparse(v) for k, v in env.items()},
+                    "bound_holes": {
+                        k: ast.unparse(_alpha_rename(v, _inv_alpha) if _inv_alpha else v)
+                        for k, v in env.items()
+                    },
                     "bound_traits": bound_traits,
                 })
     return proposals

@@ -1,7 +1,9 @@
 """Tests for the zero-model Causal-Angelic SWE Engine & External Instant Skill Store."""
 from __future__ import annotations
 
+import os
 import pathlib
+import subprocess
 import sys
 import tempfile
 
@@ -208,6 +210,123 @@ def test_angelic_branch_repair_and_one_shot_cross_repo_skill_transfer() -> None:
         assert res_b_deleted["verified"] is True
         assert res_b_deleted["winner"]["tier"] != "TIER0_SKILL_RECALL"
         assert res_b_deleted["winner"]["skill_id_used"] is None
+
+
+def test_multi_statement_blk_skill_transfers_to_unseen_repo_in_one_attempt() -> None:
+    """Iter 85 STEP 1 acceptance: a MULTI-STATEMENT (mode "blk") skill crystallized
+    from one verified fix in Repo A must repair an UNSEEN Repo B — different package,
+    different local variable spelling, different method — in a single attempt, with
+    zero model calls and zero regressions.
+
+    The "verified fix" exposure is honest rather than assumed: the after-source is
+    checked against Repo A's own test suite (subprocess pytest) before the skill is
+    induced, so the skill is admitted only from a fix that actually passes.
+    """
+    a_before = (
+        "def format_label(holder):\n"
+        "    if holder.name is None:\n"
+        "        return None\n"
+        "    name = holder.name\n"
+        "    return name.upper()\n"
+    )
+    a_after = (
+        "def format_label(holder):\n"
+        "    name = holder.name\n"
+        "    return name.upper() if name else \"\"\n"
+    )
+    a_tests = (
+        "from types import SimpleNamespace\n"
+        "from labels.core import format_label\n\n"
+        "def test_missing_name_falls_back():\n"
+        "    assert format_label(SimpleNamespace(name=None)) == \"\"\n\n"
+        "def test_empty_name_falls_back():\n"
+        "    assert format_label(SimpleNamespace(name=\"\")) == \"\"\n\n"
+        "def test_normal():\n"
+        "    assert format_label(SimpleNamespace(name=\"abc\")) == \"ABC\"\n"
+    )
+
+    with tempfile.TemporaryDirectory() as tmp:
+        root = pathlib.Path(tmp)
+        _write_files(
+            root / "repo_a_fixed",
+            {
+                "src/labels/__init__.py": "",
+                "src/labels/core.py": a_after,
+                "tests/test_core.py": a_tests,
+            },
+        )
+        # The fix really passes Repo A's suite (that is what makes it a verified fix).
+        proc = subprocess.run(
+            [sys.executable, "-m", "pytest", "-q", "tests"],
+            cwd=root / "repo_a_fixed",
+            capture_output=True,
+            text=True,
+            env={**os.environ, "PYTHONPATH": "src"},
+        )
+        assert proc.returncode == 0, proc.stdout + proc.stderr
+
+        store = SKILL_STORE.new_store()
+        skill = SKILL_STORE.induce_skill_from_verified_fix(
+            store,
+            before_source=a_before,
+            after_source=a_after,
+            failure_context={"ast_position": "stmt"},
+            provenance={"repo": "repo_a"},
+        )
+        assert skill is not None and skill["mode"] == "blk"
+        # Window-private locals are recorded so replay can alpha-rename them.
+        assert skill["alpha_locals"] == ["name"]
+
+        # Unseen Repo B: same dataflow shape, nothing else in common.
+        _write_files(
+            root / "repo_b",
+            {
+                "src/reports/__init__.py": "",
+                "src/reports/render.py": (
+                    "def render_row(meta):\n"
+                    "    if meta.title is None:\n"
+                    "        return None\n"
+                    "    title = meta.title\n"
+                    "    return title.strip()\n"
+                ),
+                "tests/test_render.py": (
+                    "from types import SimpleNamespace\n"
+                    "from reports.render import render_row\n\n"
+                    "def test_missing_title_falls_back():\n"
+                    "    assert render_row(SimpleNamespace(title=None)) == \"\"\n\n"
+                    "def test_normal():\n"
+                    "    assert render_row(SimpleNamespace(title=\"  x  \")) == \"x\"\n"
+                ),
+            },
+        )
+        res_b = ENGINE.solve_repository(
+            root / "repo_b",
+            ["tests/test_render.py"],
+            skill_store=store,
+            learn_into_store=False,
+            python_exe=sys.executable,
+        )
+        assert res_b["verified"] is True
+        assert res_b["model_calls"] == 0
+        assert res_b["parameters_stored"] == 0
+        winner = res_b["winner"]
+        assert winner["tier"] == "TIER0_SKILL_RECALL"
+        assert winner["attempt"] == 1
+        assert winner["regressions"] == 0
+        assert winner["skill_id_used"] == skill["skill_id"]
+        assert winner["skill_ast_position"] == "blk"
+
+        # Memory ablation: drop the one skill and the multi-statement repair is no
+        # longer reachable as a skill recall (the store is load-bearing).
+        assert SKILL_STORE.delete_skill(store, skill["skill_id"]) is True
+        res_ablated = ENGINE.solve_repository(
+            root / "repo_b",
+            ["tests/test_render.py"],
+            skill_store=store,
+            learn_into_store=False,
+            python_exe=sys.executable,
+        )
+        assert (res_ablated.get("winner") or {}).get("tier") != "TIER0_SKILL_RECALL"
 
 
 def test_multiline_enclosing_branch_hoist_repair() -> None:
