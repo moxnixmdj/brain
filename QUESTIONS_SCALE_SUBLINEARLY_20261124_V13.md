@@ -1,3 +1,10 @@
+> **RETRACTED IN PART — see `THE_LEAK_20261124_V14.md`.**
+> This report's tool built its condition vocabulary from the FULL depth enumeration rather than from the
+> walk, i.e. from states the learner never visited. The growth of the question supply and its sublinear
+> shape survive; **the exponent (0.41) and every accuracy figure and mechanism below do not.** Under the
+> correct vocabulary, accuracy after acquisition is flat in depth (0.920 / 0.906 / 0.932), not falling.
+> Kept unedited below so the retraction has something to point at.
+
 # QUESTIONS SCALE SUBLINEARLY — the first law in this work with a measurable exponent, and it is bad news
 ### 2026-11-24 · branch `arena/50c05c04-brain` · 0 model calls · 0 stored parameters · 0 network
 

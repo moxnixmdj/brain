@@ -56,7 +56,19 @@ SCHEMA = "BRAIN_DOES_THE_SUPPLY_GROW_WITH_DEPTH_V1"
 PROJECTION_ORDER = ("IDENT", "CARD", "CONTENT_COUNTS", "IDENT_CONTENT_COUNTS")
 
 
-def measure(name: str, depth: int, walk_steps: int, budget: int, seed: int) -> dict[str, Any]:
+def measure(name: str, depth: int, walk_steps: int, budget: int, seed: int,
+            pool: str = "walk") -> dict[str, Any]:
+    """`pool` selects where the condition vocabulary comes from.
+
+    "walk" (default, correct): only states the walk actually visited. The vocabulary must be something
+        the learner could have observed. A real environment cannot be enumerated, so drawing the
+        vocabulary from the full enumeration hands the learner knowledge it would not have -- that is
+        the §2 forbidden shape, a parameter that warehouses world facts, smuggled in through the
+        feature set rather than through the weights.
+    "full": every enumerated state. Measured only to show what it changes; NOT the harness.
+
+    Why this matters: the two pools disagree about the SIGN of the depth trend.
+    """
     with tempfile.TemporaryDirectory() as tmp:
         root = pathlib.Path(tmp) / name
         root.mkdir(parents=True)
@@ -69,7 +81,8 @@ def measure(name: str, depth: int, walk_steps: int, budget: int, seed: int) -> d
         states = sorted({tuple(before) for _i, before, _a in full}
                         | {tuple(after) for _i, _b, after in full})
         walked = walker.budgeted_walk(machine, atoms, walk_steps, seed)
-        conditions = pop.condition_pool([b for _i, b, _a in full])
+        conditions = pop.condition_pool(
+            [b for _i, b, _a in (walked if pool == "walk" else full)])
         seen = {before for _i, before, _a in walked}
         held = [(ident, before, after) for ident, before, after in full if before not in seen]
 
@@ -117,7 +130,7 @@ def measure(name: str, depth: int, walk_steps: int, budget: int, seed: int) -> d
             "predictions": 0, "wrong": 0, "refused": 0}
 
         return {
-            "machine": name, "depth": depth, "states": len(states),
+            "machine": name, "depth": depth, "pool": pool, "states": len(states),
             "transitions": len(full), "held_out": len(held),
             "questions": probes,
             "per_100_states": round(100.0 * probes / max(1, len(states)), 2),
@@ -132,6 +145,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--walk-steps", type=int, default=120)
     parser.add_argument("--budget", type=int, default=400)
     parser.add_argument("--machines", nargs="*")
+    parser.add_argument("--conditions", choices=["walk", "full"], default="walk")
     args = parser.parse_args(argv)
 
     started = time.time()
@@ -139,7 +153,8 @@ def main(argv: Sequence[str] | None = None) -> int:
     rows: list[dict[str, Any]] = []
     for depth in args.depths:
         for name in names:
-            rows.append(measure(name, depth, args.walk_steps, args.budget, 13))
+            rows.append(measure(name, depth, args.walk_steps, args.budget, 13,
+                                pool=args.conditions))
 
     by_depth: dict[int, dict[str, Any]] = {}
     for depth in args.depths:
@@ -159,7 +174,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                                              if row["questions"] < args.budget),
         }
         cell = by_depth[depth]
-        total = cell["C_predictions"] + cell["C_wrong"]
         cell["C_accuracy"] = round(cell["C_predictions"]
                                    / max(1, cell["C_predictions"] + cell["C_wrong"]), 4)
 
@@ -169,6 +183,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     densest = max(depths_sorted, key=lambda d: by_depth[d]["questions_per_100_states"])
     summary = {
         "by_depth": {str(depth): cell for depth, cell in by_depth.items()},
+        "condition_pool": args.conditions,
         "verdicts": {
             "the_supply_is_monotone_in_depth": grows,
             "the_supply_grows_by_more_than_a_third":

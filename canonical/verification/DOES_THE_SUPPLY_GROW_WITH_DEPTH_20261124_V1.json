@@ -654,6 +654,9 @@
     "depth_6_states_if_trend_holds": 2546.7,
     "depth_6_questions_if_trend_holds": 238.3
    }
-  }
- }
+  },
+  "condition_pool": "full"
+ },
+ "superseded_by": "DOES_THE_SUPPLY_GROW_WITH_DEPTH_20261124_V2.json",
+ "provenance_defect": "The condition vocabulary was built from the FULL depth enumeration (pop.condition_pool over every enumerated state) instead of from the walk. That hands the learner states it never visited -- a parameter warehousing world facts, arrived at through the feature set rather than the weights. Everything in this receipt was produced under that defect and must not be cited; V2 re-runs it with pool='walk'."
 }
