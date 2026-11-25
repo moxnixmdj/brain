@@ -360,6 +360,9 @@ jobs:
             --jobs-dir "$W/jobs" \
             --manifest "$W/manifest.json" \
             --arm "$ARM" \
+            --note engine_timeout_s="$AGENT_TIMEOUT_S"
+            --note n_shards="$N_SHARDS"
+            --note eval_commit="$GITHUB_SHA"
             --out "$W/out/$ARM-s$SHARD.json" \
             || echo '{"arm":"'"$ARM"'","error":"COLLECT_FAILED"}' > "$W/out/$ARM-s$SHARD.json"
           cp "$W/store-$ARM-s$SHARD.json" "$W/out/store-snapshot.json" 2>/dev/null || true
@@ -436,6 +439,12 @@ jobs:
               --benchmark "${{ needs.swe-mode.outputs.label }}" \
               --commit "${{ github.sha }}"
           fi
+          # The claim decision is produced here, by CI, from the same rows — not by a
+          # human reading the table afterwards.
+          python -m canonical.tools.swe_pro_v2_run_receipt_v1 \
+            --report out/report.json --out out/receipt.json \
+            --date "$(date -u +%Y-%m-%d)" || echo "RECEIPT_FAILED=true" >> "$GITHUB_ENV"
+          python3 -c 'import json;d=json.load(open("out/receipt.json"));print(json.dumps({"claimable":d["claimable_as_a_benchmark_number"],"authority":d["authority"],"why":d["why_not_claimable"]},indent=1))' >> "$GITHUB_STEP_SUMMARY" 2>/dev/null || true
           echo '--- report ---'
           head -80 out/report.md
           mkdir -p out/diagnostics
@@ -458,6 +467,10 @@ jobs:
             cp "out/report.$ext" "$dir/$mode-$ts.$ext"
             cp "out/report.$ext" "$dir/$mode-latest.$ext"
           done
+          if [ -f out/receipt.json ]; then
+            cp out/receipt.json "$dir/$mode-receipt.json"
+            git add "$dir/$mode-receipt.json" || true
+          fi
           if [ "${{ github.event_name }}" = "push" ]; then
             # one-shot marker: consumed by the run it armed
             git rm -q --ignore-unmatch canonical/eval/harbor/RUN_SWE_PRO_V2 || true

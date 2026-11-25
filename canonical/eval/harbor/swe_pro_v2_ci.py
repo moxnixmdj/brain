@@ -28,7 +28,7 @@ import json
 import pathlib
 import shutil
 import sys
-from typing import Any
+from typing import Any, Mapping
 
 AGENT_IMPORT_PATH = "canonical.eval.harbor.swebench_pro_v2_agent:CausalEngineAgent"
 REQUIRED_TASK_FILES = ("instruction.md", "task.toml")
@@ -278,7 +278,18 @@ def resolve_task_id(keys: list[str], expected_ids: list[str]) -> str:
     return keys[0] if keys else "UNKNOWN_TRIAL"
 
 
-def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str]) -> dict[str, Any]:
+def collect(
+    jobs_dirs: list[pathlib.Path],
+    *,
+    arm: str,
+    expected_ids: list[str],
+    notes: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """`notes` records the conditions a number was measured under (budgets, flags).
+
+    A resolve rate means nothing without the budget it was produced under, and the
+    aggregate runs as a different job, so each shard has to carry its own conditions.
+    """
     per_task: dict[str, Any] = {}
     for jd in jobs_dirs:
         for td, res in iter_trial_results(pathlib.Path(jd)):
@@ -348,6 +359,7 @@ def collect(jobs_dirs: list[pathlib.Path], *, arm: str, expected_ids: list[str])
         "n_missing_trial": len(missing),
         "missing_trials": missing,
         "unmatched_trial_keys": sorted(unmatched),
+        "conditions": dict(notes or {}),
         "resolved": resolved,
         "resolve_rate_pct": round(100.0 * resolved / n, 2) if n else 0.0,
         "model_calls_total": sum(int(v.get("model_calls") or 0) for v in ordered.values()),
@@ -422,6 +434,9 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
                 tasks[tid] = dict(row)
     expected.sort()
     unmatched = sorted({k for rep in reports for k in (rep.get("unmatched_trial_keys") or [])})
+    conditions: dict[str, Any] = {}
+    for rep in reports:
+        conditions.update(rep.get("conditions") or {})
     ordered = {tid: tasks.get(tid, {"reward": None, "resolved": False, "agent_status": "NOT_RUN", "n_files_changed": 0}) for tid in expected}
     resolved = sum(1 for v in ordered.values() if v.get("resolved"))
     secs = [v["seconds"] for v in ordered.values() if isinstance(v.get("seconds"), (int, float))]
@@ -433,6 +448,7 @@ def merge_arm_reports(reports: list[dict[str, Any]]) -> dict[str, Any]:
         "n_missing_trial": sum(1 for v in ordered.values() if v.get("agent_status") == "NOT_RUN"),
         "missing_trials": [t for t, v in ordered.items() if v.get("agent_status") == "NOT_RUN"],
         "unmatched_trial_keys": unmatched,
+        "conditions": conditions,
         "n_shard_reports": len(reports),
         "resolved": resolved,
         "resolve_rate_pct": round(100.0 * resolved / len(expected), 2) if expected else 0.0,
@@ -461,6 +477,11 @@ def to_markdown(
         "- Resolve decisions come from each task's own verifier inside the official container image.",
         "- `nop` must resolve 0/N and `oracle` must resolve N/N or the causal number is not interpretable.",
         "",
+        *(
+            ["- Measured under: " + ", ".join(f"`{k}={v}`" for k, v in sorted(conditions.items()))]
+            if (conditions := {k: v for rep in arm_reports.values() for k, v in (rep.get("conditions") or {}).items()})
+            else []
+        ),
         "| arm | resolved | tasks | resolve % | model calls | cost USD | trial wall s (total) | engine s (total) | missing trials |",
         "|---|---|---|---|---|---|---|---|---|",
     ]
@@ -652,7 +673,16 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.cmd == "collect":
         manifest = json.loads(pathlib.Path(args.manifest).read_text(encoding="utf-8"))
-        rep = collect([pathlib.Path(p) for p in args.jobs_dir], arm=args.arm, expected_ids=list(manifest["tasks"]))
+        notes: dict[str, Any] = {}
+        for raw in args.note:
+            k, sep, v = raw.partition("=")
+            if not sep:
+                raise SystemExit(f"--note expects KEY=VALUE, got {raw!r}")
+            try:
+                notes[k.strip()] = int(v)
+            except ValueError:
+                notes[k.strip()] = v
+        rep = collect([pathlib.Path(p) for p in args.jobs_dir], arm=args.arm, expected_ids=list(manifest["tasks"]), notes=notes)
         pathlib.Path(args.out).write_text(json.dumps(rep, indent=2, sort_keys=True), encoding="utf-8")
         print(json.dumps({k: rep[k] for k in ("arm", "resolved", "n_expected", "resolve_rate_pct", "model_calls_total", "cost_usd_total")}))
         return 0
@@ -682,6 +712,7 @@ def main(argv: list[str] | None = None) -> int:
             "benchmark": args.benchmark,
             "commit": args.commit,
             "gates": compute_gates(reports),
+            "conditions": {k: v for rep in reports.values() for k, v in (rep.get("conditions") or {}).items()},
             "shard_diagnostics": diagnostics,
             "note": "Resolve decisions come from each task's own verifier inside the "
             "official container image. Merged across shards by task union.",

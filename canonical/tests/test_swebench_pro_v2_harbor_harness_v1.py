@@ -646,3 +646,21 @@ def test_a_trial_the_manifest_cannot_name_is_reported_instead_of_dropped() -> No
         assert "Names the manifest did not recognise" in md
         merged = CI.merge_arm_reports([rep])
         assert merged["unmatched_trial_keys"] == ["whatever"]
+
+
+def test_conditions_travel_with_the_shard_report_so_a_budget_is_never_implicit() -> None:
+    """A resolve rate measured with a 240 s engine budget is not the same claim as 900 s."""
+    ids = ["t0"]
+    with tempfile.TemporaryDirectory() as tmp:
+        jobs = pathlib.Path(tmp) / "jobs"
+        td = jobs / "job" / "t0__x"
+        td.mkdir(parents=True)
+        (td / "result.json").write_text(
+            json.dumps({"task_name": "t0", "verifier_result": {"rewards": {"reward": 0.0}}}), encoding="utf-8"
+        )
+        rep = CI.collect([jobs], arm="causal", expected_ids=ids, notes={"engine_timeout_s": 240, "n_shards": 6})
+        assert rep["conditions"] == {"engine_timeout_s": 240, "n_shards": 6}
+        merged = CI.merge_arm_reports([rep])
+        assert merged["conditions"]["engine_timeout_s"] == 240
+        md = "\n".join(CI.to_markdown({"causal": merged}, benchmark="B", commit="c"))
+        assert "Measured under: `engine_timeout_s=240`, `n_shards=6`" in md
