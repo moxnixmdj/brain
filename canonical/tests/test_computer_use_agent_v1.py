@@ -241,3 +241,77 @@ def _files_state(root: pathlib.Path) -> dict[str, bytes]:
         rel = path.relative_to(root).as_posix()
         out[rel] = path.read_bytes()
     return out
+
+
+def test_speculative_cow_rollout_and_articulation_subgoals() -> None:
+    """Speculative CoW rollouts evaluate candidate actions in shadow workspaces without side effects,
+    and Petri-net articulation subgoals factor long-horizon workflows at exact cut-vertices."""
+    from canonical.swe_kernel.computer_use_agent_v1 import (
+        find_articulation_subgoals,
+        run_checkpointed_horizon,
+    )
+
+    edges = [
+        ("S0", "A1"),
+        ("S0", "A2"),
+        ("A1", "C1"),
+        ("A2", "C1"),
+        ("C1", "B1"),
+        ("C1", "B2"),
+        ("B1", "C2"),
+        ("B2", "C2"),
+        ("C2", "GOAL"),
+    ]
+    cuts = find_articulation_subgoals(edges, "S0", "GOAL")
+    assert cuts == ["C1", "C2"]
+
+    root = _seeded_root()
+    try:
+        agent = ComputerUseAgent(root)
+        rollout = agent.speculative_cow_rollout(
+            candidate_commands=[
+                "rm -f in.txt",
+                "cp in.txt out.dat",
+            ],
+            goal_predicates={
+                "in_preserved": lambda r: (r / "in.txt").is_file(),
+                "out_created": lambda r: (r / "out.dat").is_file(),
+            },
+        )
+        assert rollout["committed"] is True
+        assert rollout["winning_branch"]["command"] == "cp in.txt out.dat"
+        assert (root / "in.txt").is_file()
+        assert (root / "out.dat").is_file()
+
+        horizon = run_checkpointed_horizon(
+            agent,
+            [
+                {
+                    "checkpoint_id": "C1",
+                    "command": "sort out.dat > sorted.dat",
+                    "validator": lambda r: (r / "sorted.dat").is_file(),
+                },
+                {
+                    "checkpoint_id": "C2",
+                    "command": "wc -l < sorted.dat > count.txt",
+                    "validator": lambda r: (r / "count.txt").is_file(),
+                },
+            ],
+        )
+        assert horizon["status"] == "HORIZON_COMPLETE"
+        assert horizon["checkpoints_verified"] == 2
+
+        from canonical.swe_kernel.computer_use_agent_v1 import UnifiedCrossModalPetriNet
+
+        net = UnifiedCrossModalPetriNet()
+        net.add_transition("click_export_btn", "GUI", ["DomTree"], "SqlitePath", lambda dom: str(root / "in.txt"))
+        net.add_transition("query_rows", "SQLITE", ["SqlitePath"], "RawRows", lambda p: pathlib.Path(p).read_text().splitlines())
+        net.add_transition("normalize_rows", "PYTHON", ["RawRows"], "NormalizedPatch", lambda rows: sorted(r.strip() for r in rows if r.strip()))
+        net.add_transition("verify_cli", "CLI", ["NormalizedPatch"], "VerifiedReceipt", lambda rows: f"VERIFIED:{len(rows)}")
+        cryst = net.execute_and_crystallize("cross_modal_export_verify", {"DomTree": "<button id='export'/>"}, "VerifiedReceipt")
+        assert cryst["status"] == "VERIFIED_AND_CRYSTALLIZED"
+        assert cryst["morphism"]["modalities"] == ["GUI", "SQLITE", "PYTHON", "CLI"]
+        assert cryst["goal_value"].startswith("VERIFIED:")
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+

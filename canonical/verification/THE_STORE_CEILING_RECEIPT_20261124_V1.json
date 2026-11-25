@@ -1,0 +1,460 @@
+{
+  "results": [
+    {
+      "commit": "1c962d15a743a3c18401f0c788f0fd0cb3d9acf8",
+      "repo": "attrs",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        2494
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "3b0378dd66d33ebddb52be85b8c4aac6a914b1a2",
+      "repo": "attrs",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        451
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "a08bfb90ef5104675d96b427858063a638774484",
+      "repo": "attrs",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        104
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "a572c3a4c558a8b9b48cf989fcd956ab1a279439",
+      "repo": "attrs",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        2025
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "1b0e19f50595a07957bd96a600c37cd44b7e0cc3",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        2679
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "3f91d2154ebc47651f0cd9798250a03821473521",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        895
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "40830087dd9e9023dbcf75befe0ca9056127a064",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        2514
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "42ee8a1f6011e0f4a8a19c34a545f3eb7ae978fa",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1142
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "4a337ea913515e8e98e425d70701ea4fb091830e",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1349
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "bf1e8be90c46428f8bf8b45f295af80cfaf2e188",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        2803
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "d340b0c1202284a1b9d0ca892549208527d586ce",
+      "repo": "click",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        3113
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "e63b6594f2863b7c8274eb0991ebc6cad63661f7",
+      "repo": "httpx",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        90
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "2eb4542cbab101910d220229a8f09c94f76c19d1",
+      "repo": "jinja",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1002
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "d05bd3858c3f4990e91201dae058147caf317462",
+      "repo": "jinja",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1783
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "62411c1618493f94b16901746c34e72ad415061e",
+      "repo": "more-itertools",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        935
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "71e070b35d8c136484e91189719c2a4eccd36fc3",
+      "repo": "more-itertools",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        4282
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "b0aa91efbb452eeb8ffa0447047519c6e84d5292",
+      "repo": "more-itertools",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        583
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "cca32949f12d473fd823e37a5530c30d2faa1332",
+      "repo": "more-itertools",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        286
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "d3665d6ba2eec8cb95e9744c2085fb40af1e962b",
+      "repo": "more-itertools",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1064
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "0625596e502163179b9a82796aee82c178efc16d",
+      "repo": "packaging",
+      "verdict": "EXPRESSIBLE_ON_THE_HUMAN_LINE",
+      "human_lines": [
+        76
+      ],
+      "relations": [
+        "END_ANCHOR"
+      ],
+      "n_expressible": 1
+    },
+    {
+      "commit": "08bb047794f4e70b157dacef4538b3a6e3492743",
+      "repo": "packaging",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        86
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "189a76d54d64899adbca907c2a3efa5b6befdb28",
+      "repo": "packaging",
+      "verdict": "EXPRESSIBLE_ON_THE_HUMAN_LINE",
+      "human_lines": [
+        92
+      ],
+      "relations": [
+        "END_ANCHOR"
+      ],
+      "n_expressible": 1
+    },
+    {
+      "commit": "258202ed7f796bdb8a65252a66c3fbd3e69e97f6",
+      "repo": "packaging",
+      "verdict": "EXPRESSIBLE_ELSEWHERE_ONLY",
+      "human_lines": [
+        38
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "553582d9162c761e4ab97ccc6cea43ac14ff2a8b",
+      "repo": "packaging",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        635
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "8af75907bf1140071a6a706874fcf1d73cc39c71",
+      "repo": "packaging",
+      "verdict": "EXPRESSIBLE_ON_THE_HUMAN_LINE",
+      "human_lines": [
+        69
+      ],
+      "relations": [
+        "END_ANCHOR"
+      ],
+      "n_expressible": 1
+    },
+    {
+      "commit": "b80e6eb0a6c0f61dcaa9b1587f3aab370263dc65",
+      "repo": "packaging",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        839
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "ba17fcea2367a70cba21d6bfb0931ae476ee8583",
+      "repo": "packaging",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        61
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "e7ce051e9191c461e0a536a84c4d66a87518de66",
+      "repo": "packaging",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        330
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "4326ced299cc37f4abc57c22c6298362b5379602",
+      "repo": "pluggy",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        294
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "6abdcf6ca167f5d61297b5d86e22f3dd058031b3",
+      "repo": "pluggy",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        443
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "e108fa4490564b9f252fe7a8a4d1969f6f996641",
+      "repo": "pluggy",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        502
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "20973f2ed31f4fe7faca988f8590fe3eaf70541e",
+      "repo": "starlette",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        90
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "223561a83bcc0cca961b6b42403424b995c6e916",
+      "repo": "tqdm",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        71
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "b38a9221c4b2723a82d8b186c0fd8e7b05771a12",
+      "repo": "tqdm",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        437
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "4714836a667eb4837d005eb89d34fae60b9dc6cc",
+      "repo": "urllib3",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        934
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "644124ecd0b6e417c527191f866daa05a5a2056d",
+      "repo": "urllib3",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        190
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "77fa67aaf2dc18962fa9234d47400c8a6fc1edf4",
+      "repo": "urllib3",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        66
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "285af2c465d0737e77f33bab6d29775fcd53b667",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        236
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "351b73196ca30c26ef2a7b492508d89da370c07f",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        12
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "352cd7167984f805daf226966f38f8dfeb991313",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        574
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "3a408edffde8a006a644d9c2d7bd32973421b924",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        628
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "763609ae21a1d8d649ca19f30c61257fbee670c1",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        10
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "8f8507b4623b8a2faba1e69c0da815887a54b810",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        444
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "d03b97779720c614287d2aef0f075ee4a1391c5b",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        50
+      ],
+      "relations": [],
+      "n_expressible": 0
+    },
+    {
+      "commit": "d0f040a65bfc39c52930f0ea0ca0a9d465bc5043",
+      "repo": "werkzeug",
+      "verdict": "NOT_EXPRESSIBLE",
+      "human_lines": [
+        1370
+      ],
+      "relations": [],
+      "n_expressible": 0
+    }
+  ]
+}

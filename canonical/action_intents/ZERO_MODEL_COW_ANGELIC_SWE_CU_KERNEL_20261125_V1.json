@@ -1,0 +1,476 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "ZERO_MODEL_COW_ANGELIC_SWE_CU_KERNEL_20261125_V1",
+  "action_intent_id": "ZERO_MODEL_COW_ANGELIC_SWE_CU_KERNEL_20261125_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "date": "2026-11-25",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/swe_kernel/perfect_algorithm_v1.py + canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+  "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "cold subprocess pytest evaluation (~1.5-3.7s/candidate) starves zero-model repair search budgets, and prior kernels lacked general contrastive separating-guard synthesis, algebraic differential lenses, polyglot C/JS causal CEGIS, transactional CoW speculative terminal execution, Petri-net cut-vertex checkpointing, pure-canvas blind GUI tomography, and issue-scoped zero-leakage metamorphic/docstring oracle abduction",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::cold subprocess pytest evaluation (~1.5-3.7s/candidate) starves zero-model repair search budgets, and prior kernels lacked general contrastive separating-guard synthesis, algebraic differential lenses, polyglot C/JS causal CEGIS, transactional CoW speculative terminal execution, Petri-net cut-vertex checkpointing, pure-canvas blind GUI tomography, and issue-scoped zero-leakage metamorphic/docstring oracle abduction",
+  "action_summary": "Add zero-model (model_calls == 0, $0.00 spend, zero external model calls) SWE and computer-use kernels: Copy-on-Write prewarmed os.fork() pytest zygote server (87-160ms/eval), differential Ochiai spectrum tracing, live angelic branch-flip separating-guard synthesis, algebraic differential lenses (literal delta, percent-encoding safe-charset, caret FST, call-wrapper and f-string unwrap, sibling parameter propagation), 4-channel zero-leakage issue-only metamorphic/docstring oracle abduction, multi-file relational zipper propagation, C/C++17 gcc+ASan and JS/TS causal CEGIS, transactional CoW terminal execution with negative-effect blocking, Petri-net dominator cut-vertex checkpointing, pure-canvas RGB GUI tomography, external inspectable O(1)-deletable L2+L3 law store, Harbor SWE and OSWorld 2.1 zero-model adapters, plus 111 passing unit/integration/zero-model-AST tests.",
+  "expected_parent_change": "Zero-model fail-to-pass repair on the 45-commit real OSS dev corpus improves from 20/45 (44.44%) to 41/45 (91.11%, 41/41 non-tomli, 0 regressions), pristine-parent zero-leakage issue-only held-out pass reaches 5/8 (62.5%), untouched blind unseen 2026 OSS commits reach 5/19 (26.32%), real C ASan repairs solve cJSON@6d9f244 (UAF) and cJSON@b2890c8 (NULL-deref, including issue-only held-out pass), 320-step adversarial FS+SQLite checkpointed execution completes 100% vs 0% open-loop, and 3-way memory ablation reaches 10/10 vs 0/10 raw trace / 0/10 empty store with O(1) deletion.",
+  "expected_parent_frontier_change": "The frontier bottleneck advances to brand-new precondition-guard/exception-raising statement insertion synthesis (5/5 unsolved pyjwt blind commits) and multi-line algorithmic spec synthesis (4/4 remaining tomli commits), plus containerized execution on official SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 harnesses.",
+  "required_capability": "General zero-model program synthesis, fault localization, zero-leakage oracle abduction, polyglot repair, transactional CoW computer use, and inspectable O(1)-deletable external skill generalization.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+    "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+    "canonical/swe_kernel/universal_computer_agent_v1.py",
+    "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
+    "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
+    "canonical/runtime/osworld_v21_zero_model_policy_v1.py",
+    "canonical/tests/test_cow_angelic_zygote_v1.py",
+    "canonical/tests/test_metamorphic_habitation_zipper_v1.py",
+    "canonical/tests/test_memory_ablation_and_transfer_v1.py",
+    "canonical/tests/test_harbor_swe_zero_model_agent_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "route_id": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+  "selected_route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+  "selected_surviving_route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+  "route_order_walk": {
+    "DELETE": "Rejected repo-specific rule tables (e.g., residual_wall_closers_v1.py) and unscoped module-wide docstring probing that hijacked unrelated functions.",
+    "BYPASS": "Not sufficient: cold subprocess pytest could not be bypassed without an in-memory os.fork() CoW zygote server.",
+    "REUSE": "Reused perfect_algorithm_v1.py, verified_skill_crystallizer_v1.py, and existing repo AST/pytest verification infrastructure.",
+    "ADAPT": "Adapted metamorphic_habitation_zipper_v1.py and harbor_swe_zero_model_agent_v1.py to integrate CoW zygote batching, Ochiai spectra, and zero-leakage oracles.",
+    "COMPOSE": "Composed CoW zygote + Ochiai spectrum + angelic separating guards + algebraic lenses + relational zipper + external L2+L3 law store.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "SELECTED: built cow_angelic_zygote_v1.py, metamorphic_habitation_zipper_v1.py, universal_computer_agent_v1.py, c_asan_cegis_repair_v1.py, js_causal_cegis_repair_v1.py, and zero-model Harbor/OSWorld adapters with zero model calls."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+      "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+      "canonical/swe_kernel/universal_computer_agent_v1.py",
+      "canonical/tests/test_cow_angelic_zygote_v1.py",
+      "canonical/tests/test_metamorphic_habitation_zipper_v1.py",
+      "canonical/tests/test_memory_ablation_and_transfer_v1.py"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE alone could not eliminate 1.5-3.7s cold pytest starvation or synthesize live angelic separating guards, algebraic differential lenses, C/JS causal CEGIS repairs, CoW transactional terminal isolation, Petri cut-vertex recovery, or blind canvas GUI tomography at model_calls == 0; existing perfect_algorithm_v1.py and verified_skill_crystallizer_v1.py were reused and extended rather than duplicated.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox evaluation only (111 passed across 8 zero-model pytest files; 41/45 OSS dev corpus; 5/19 untouched blind 2026 commits; 5/8 zero-leakage issue-only held-out; 2/4 real cJSON ASan commits; 320-step FS+SQLite checkpointed CU; 10/10 vs 0/10 memory ablation). Official containerized SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 runs remain pending external container infrastructure.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ]
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox evaluation on real OSS repositories and synthetic clean-room test suites; no borrowed model outputs and no hidden test leakage during issue-only synthesis.",
+  "capability_credit_delta": {
+    "oss_dev_corpus45_before": "20/45 (44.44%)",
+    "oss_dev_corpus45_after": "41/45 (91.11%, 41/41 non-tomli, 0 regressions)",
+    "oss_blind_unseen_2026_19": "5/19 (26.32%: pyjwt 3/8, boltons 1/8, click 1/3)",
+    "wall1_zero_leakage_issue_only_heldout": "5/8 (62.5%, witness abduced 7/8)",
+    "cjson_asan_real_commits": "cJSON@6d9f244 UAF F2P PASS (1.32s); cJSON@b2890c8 NULL-deref F2P PASS (1.79s) + Issue-Only Held-Out ASan PASS (1.99s)",
+    "long_horizon_320_step_cu": "Checkpointed PASS (4 local rollbacks, 32 SQLite rows) vs Open-Loop FAIL",
+    "memory_ablation_shifted_envs": "Generalized L2 10/10 vs Raw Trace 0/10 vs Empty Store 0/10; O(1) delete 0 residual hits"
+  },
+  "measured_effect": "111 passed / 0 failed across 8 branch pytest suites (including zero-model AST import audit); 41/45 real OSS dev corpus fail-to-pass (up from 20/45, 0 regressions); 5/19 untouched blind 2026 unseen OSS commits; 5/8 zero-leakage issue-only held-out passes; real C ASan UAF + NULL-deref repairs on DaveGamble/cJSON; 320-step checkpointed computer-use recovery, CoW terminal trap blocking, live HTTP DOM, blind RGB canvas tomography, and 10/10 vs 0/10 3-way memory ablation.",
+  "real_outcome": "Shipped general, zero-model (model_calls == 0) CoW-Zygote + Angelic Separating-Guard + Algebraic Differential Lens + Polyglot CEGIS + CoW/Petri/Tomography CU kernels with clean tests and honest blind generalization receipts showing both real gains and remaining frontier gaps.",
+  "falsification_condition": "Falsified if any credited kernel imports or invokes an external model (AST audit fails), if any test leaks hidden commit tests during Wall-1 issue-only runs, if CoW zygote mutations leak onto disk, or if deleted L2/L3 laws still trigger after O(1) deletion and disk reload.",
+  "stop_condition": "Stop this PR once all 8 zero-model pytest suites pass, repo_integrity_guard passes with 0 violations, drift/load-bearing/orientation checks pass, and blind generalization limits are honestly documented.",
+  "next_step": "Build general precondition-guard / exception-raising statement insertion synthesis (for the 5 unsolved pyjwt blind commits) and run Harbor/OSWorld 2.1 zero-model adapters on official containerized SWE-bench Pro, Terminal-Bench 4.0, and OSWorld 2.1 benchmarks.",
+  "honest_limits": [
+    "Untouched blind unseen 2026 OSS pass rate is 5/19 (26.32%), below frontier SWE-bench Pro scores.",
+    "Multi-line algorithmic feature/spec synthesis (4 tomli commits) and new guard-plus-raise statement insertions (5 pyjwt commits) remain unsolved.",
+    "Official containerized SWE-bench Pro, Terminal-Bench 4.0, and OSWorld 2.1 harnesses could not be executed inside this sandbox (no Docker/VM/Chromium runtime).",
+    "All evaluations are producer-run sandbox measurements; no independent verifier has re-run them yet."
+  ],
+  "selectivity_note": "Strictly general algorithmic mechanisms verified by AST zero-model audit; zero repo-specific rule tables and zero changes to terminal_truth or protected paths.",
+  "verification": "pytest (111 passed, 0 failed across 8 branch test suites) + execution_guard/repo_integrity_guard_v1.py (rules=17 violations=0 -> PASS) + execution_guard/agent_orientation_check_v1.py (CONSISTENT)",
+  "truth": {
+    "achieved": false,
+    "what_is_real": "General zero-model CoW pytest zygote, Ochiai spectrum, live angelic separating guards, algebraic differential lenses, polyglot C/JS CEGIS, 4-channel zero-leakage oracle abduction, CoW terminal / Petri 320-step / blind canvas CU engines, and external inspectable O(1)-deletable L2+L3 law store (111 passing tests).",
+    "what_is_not": "Frontier parity on blind unseen SWE (26.32% blind vs 61.5%-93.0% frontier), official containerized SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 runs, or independent verification."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Adds verified zero-model SWE and computer-use execution primitives (CoW zygote, angelic separating guards, algebraic lenses, polyglot CEGIS, CoW/Petri/tomography CU, and Harbor/OSWorld adapters) without claiming premature discharge of any open terminal truth obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "repo-specific keyword repair tables (rejected under rule 9.3)",
+      "unscoped module-wide docstring probing (removed after hijacking unrelated functions)",
+      "cold per-candidate subprocess pytest startup (bypassed via prewarmed os.fork() CoW zygote)"
+    ],
+    "expected_parent_level_state_change": "The frontier bottleneck advances to brand-new precondition-guard/exception-raising statement insertion synthesis (5/5 unsolved pyjwt blind commits) and multi-line algorithmic spec synthesis (4/4 remaining tomli commits), plus containerized execution on official SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 harnesses.",
+    "real_outcome": "Zero-model CoW zygote, angelic separating guards, algebraic differential lenses, polyglot C/JS CEGIS, transactional CoW/Petri/canvas CU, and O(1)-deletable external L2+L3 store shipped with 111 passing tests and honest blind limits.",
+    "required_capability": "Fast zero-model program repair, zero-leakage oracle abduction, transactional CoW computer use, and inspectable O(1)-deletable external generalization.",
+    "selected_surviving_route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+    "stop_condition": "Stop this PR once all 8 zero-model pytest suites pass, repo_integrity_guard passes with 0 violations, drift/load-bearing/orientation checks pass, and blind generalization limits are honestly documented.",
+    "why_selected_route_is_fastest_sufficient": "Prewarmed os.fork() CoW evaluation cuts candidate cost 10x-25x while unifying spectrum tracing, angelic branch flipping, algebraic lenses, and zero-leakage oracles in one minimal zero-model module.",
+    "obs_blocker": {
+      "blocker_is": "Cold pytest evaluation starvation plus missing general separating-guard, algebraic-lens, polyglot ASan/JS CEGIS, and transactional CoW/Petri/tomography primitives",
+      "delete_bypass_substitute_options": [
+        "Per-repo keyword rule tables (rejected: violates generality and fails blind unseen repos)",
+        "External LLM/VLM calls at runtime (forbidden by NO_MODEL_PRODUCER_COGNITION law)",
+        "Raw trace replay without generalization (rejected: measured 0/10 on shifted unseen environments)"
+      ],
+      "evidence_the_blocker_is_real": [
+        "Cold subprocess pytest took 392-3764ms per candidate vs 87-160ms under os.fork() CoW zygote",
+        "Iter W lost 6/45 commits to timeout starvation; CoW zygote + algebraic lenses recovered all 6 and lifted corpus45 from 20/45 to 41/45",
+        "Raw trace replay scored 0/10 on shifted unseen CLI envs vs 10/10 for generalized external L2 laws"
+      ],
+      "intrinsic_or_path_specific": "INTRINSIC to zero-model synthesis and long-horizon execution without external LLM guidance",
+      "surviving_causal_blocker": "cold subprocess pytest evaluation (~1.5-3.7s/candidate) starves zero-model repair search budgets, and prior kernels lacked general contrastive separating-guard synthesis, algebraic differential lenses, polyglot C/JS causal CEGIS, transactional CoW speculative terminal execution, Petri-net cut-vertex checkpointing, pure-canvas blind GUI tomography, and issue-scoped zero-leakage metamorphic/docstring oracle abduction"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "canonical/swe_kernel/perfect_algorithm_v1.py, canonical/swe_kernel/verified_skill_crystallizer_v1.py, canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py, canonical/swe_kernel/consistency_vs_equivalence_v1.py",
+      "capability_work_deleted": [
+        "repo-specific keyword rules (not copied from residual_wall_closers_v1.py)",
+        "unscoped docstring probing across unrelated module functions"
+      ],
+      "what_was_added": "cow_angelic_zygote_v1.py, metamorphic_habitation_zipper_v1.py, universal_computer_agent_v1.py, c_asan_cegis_repair_v1.py, js_causal_cegis_repair_v1.py, angelic_cegis_repair_v1.py, reverse_tomography_algebra_v1.py, harbor_swe_zero_model_agent_v1.py, osworld_v21_zero_model_policy_v1.py, and 8 clean-room test suites",
+      "external_existing_routes_checked": "Angelix angelic forests, S3 syntax/semantic ranking, DDMT metamorphic delta debugging (Jul 2026), GuideSyn anti-unification OE synthesis (ICSE 2026)",
+      "surviving_gap": "Brand-new precondition-guard/exception-raising statement insertion synthesis, multi-line algorithmic spec synthesis, and containerized execution on official SWE-bench Pro / Terminal-Bench 4.0 / OSWorld 2.1 harnesses"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "benchmark score chasing with per-repo rules",
+        "claiming DONE before blind unseen generalization and official containerized benchmarks are met"
+      ],
+      "real_outcome": "Measurable zero-model capability gains on real OSS Python/C commits, zero-leakage issue-only held-out repair, 320-step checkpointed CU, and 3-way memory ablation with honest reporting of untouched blind limits",
+      "surviving_necessity": "General statement-insertion synthesis and containerized official benchmark runs"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "perfect_algorithm_v1.py Wall-4 safe doc replay and verified_skill_crystallizer_v1.py anti-unification reused directly",
+      "downstream_work_to_delete_or_supersede": "cold subprocess-only pytest candidate loops superseded by PytestCoWZygoteServer with clean-disk final verification",
+      "fresh_reuse_plan": "harbor_swe_zero_model_agent_v1.py bundles all SWE kernel modules for containerized SWE-bench Pro / Terminal-Bench runs"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "prewarmed zygote imports pytest once per repo and isolates candidate forks in memory without redundant disk/pycache rebuilds",
+      "search_stop_decision": "stopped after running full 45-commit dev corpus, 19-commit untouched blind unseen 2026 corpus, 8-commit Wall-1 zero-leakage eval, 4 real cJSON C+ASan commits, 320-step CU, and 3-way memory ablation"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Per-repo rules fail blind generalization; raw trace replay scores 0/10 on shifted envs; external LLMs violate zero-model law",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+          "why": "Purely general, model_calls == 0, 10x-25x CoW speedup, verified on real OSS Python/C and 320-step CU"
+        },
+        {
+          "rank": 2,
+          "route": "COLD_SUBPROCESS_CEGIS_ONLY",
+          "why": "Starves search budgets (20/45 vs 41/45)"
+        },
+        {
+          "rank": 3,
+          "route": "RAW_TRACE_MEMORY_REPLAY",
+          "why": "0/10 on shifted unseen environments"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "Clean-room synthetic unit tests verify isolation, Ochiai ranking, O(1) deletion, and AST zero-model compliance alongside real upstream git OSS commits"
+    },
+    "routes_considered": [
+      {
+        "route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+        "verdict": "SELECTED",
+        "why": "General zero-model mechanisms with 10x-25x CoW speedup, verified across Python/C/JS/CLI/Web/Canvas and 3-way memory ablation"
+      },
+      {
+        "route": "REPO_SPECIFIC_RULE_ACCUMULATION",
+        "verdict": "REJECTED",
+        "why": "Violates generality (rule 9.3) and does not transfer to unseen repos"
+      },
+      {
+        "route": "RAW_TRACE_REPLAY_STORE",
+        "verdict": "REJECTED",
+        "why": "Measured 0/10 on shifted unseen CLI envs and False on renamed cross-repo AST transfer"
+      },
+      {
+        "route": "COLD_SUBPROCESS_PYTEST_ONLY",
+        "verdict": "REJECTED",
+        "why": "1.5-3.7s per candidate caused timeout starvation on 6/45 OSS commits"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "0b5ede3b6c01e2d1a5a0390e68dffee9f713c7b2",
+      "checked_at_utc": "2026-11-25T20:58:00+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "COLD_SUBPROCESS_CEGIS_ONLY",
+      "selected_route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "COLD_SUBPROCESS_CEGIS_ONLY",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "20/45 dev corpus vs 41/45 with CoW zygote + angelic separating guards + algebraic lenses",
+            "CORRECTNESS": "misses boolean separating guards, codec/f-string lenses, and C ASan",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "budget starvation on slow test suites",
+            "VERIFIABILITY": "equal",
+            "WALL_CLOCK": "10x-25x slower per candidate"
+          },
+          "evidence": [
+            "Dev corpus45: BEFORE 20/45 (44.44%) vs AFTER 41/45 (91.11%, 0 regressions)"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_cow_angelic_zygote_v1.py",
+            "canonical/tests/test_metamorphic_habitation_zipper_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "RAW_TRACE_REPLAY_STORE",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "0/10 on shifted unseen environments vs 10/10 for generalized external L2 laws",
+            "CORRECTNESS": "breaks on any renamed path or identifier",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "brittle",
+            "VERIFIABILITY": "equal",
+            "WALL_CLOCK": "equal"
+          },
+          "evidence": [
+            "3-way memory ablation: Empty 0/10, Raw Trace 0/10, Generalized L2 10/10; cross-repo Python & C AST transfer True vs False raw diff"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_memory_ablation_and_transfer_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        },
+        {
+          "route": "REPO_SPECIFIC_RULE_ACCUMULATION",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "overfits known repos, zero transfer to unseen repos",
+            "CORRECTNESS": "violates generality law",
+            "INCREMENTAL_COST": "unbounded rule bloat",
+            "RELIABILITY": "low",
+            "VERIFIABILITY": "low",
+            "WALL_CLOCK": "n/a"
+          },
+          "evidence": [
+            "Audit found residual_wall_closers_v1.py embedded repo-specific keyword tables; rejected without copying"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_cow_angelic_zygote_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "External frontier SWE/CU approaches rely on large LLMs/VLMs ($600-$7,300 per Terminal-Bench 4.0 run), which are forbidden by NO_MODEL_PRODUCER_COGNITION. Among zero-model routes, combining CoW fork evaluation with Ochiai spectra, Angelix-style angelic branch inversion, GuideSyn-style anti-unification, DDMT-style metamorphic oracles, and transactional CoW/Petri execution dominates all tested zero-model baselines.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "SWE-bench Pro Terminal-Bench 4.0 OSWorld 2.0 2.1 frontier leaderboard November 2026"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "metamorphic testing delta debugging without test oracles DDMT 2026"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "anti-unification observational equivalence program synthesis GuideSyn ICSE 2026"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "angelic execution program repair separating guard synthesis Angelix S3"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/swe_kernel/perfect_algorithm_v1.py",
+          "canonical/swe_kernel/verified_skill_crystallizer_v1.py",
+          "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+          "canonical/verification/HONEST_SUITE_BASELINE_20261014_V1.json"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "upstream git repos: attrs, boltons, cJSON, click, jinja, more-itertools, packaging, pluggy, pyjwt, starlette, tomli, werkzeug",
+          "DDMT (arXiv:2607.00929), GuideSyn (ICSE 2026), Angelix (ICSE 2016), S3 (ESEC/FSE 2017)"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "local Python 3.11 + pytest 9.2 + gcc -fsanitize=address"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Nov 2026 leaderboard verification for SWE-bench Pro, Terminal-Bench 4.0, and OSWorld 2.0/2.1"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-25T20:58:00+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "ZERO_MODEL_COW_ANGELIC_SYNTHESIS_AND_EXTERNAL_L2_L3_STORE",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "local Python 3.11 + pytest + gcc ASan",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "111 passed / 0 failed across 8 branch zero-model pytest suites; gcc -fsanitize=address verified on DaveGamble/cJSON"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "repository integrity and orientation guards",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py rules=17 violations=0 -> PASS; agent_orientation_check_v1.py CONSISTENT"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "zero external model endpoints at runtime",
+            "kind": "NETWORK_ENDPOINT",
+            "scope": "GLOBAL",
+            "evidence_scope": "GLOBAL",
+            "required": false,
+            "status": "READY",
+            "volatility": "VOLATILE",
+            "observed_at_utc": "2026-11-25T20:58:00+00:00",
+            "evidence": [
+              "AST audit verified 0 LLM SDK imports and model_calls == 0 across all shipped kernels"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR ships reusable zero-model SWE and computer-use execution primitives plus honest blind evaluation evidence while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Do purely general zero-model CoW zygote, angelic separating guards, algebraic differential lenses, polyglot CEGIS, and external L2+L3 generalization transfer to unseen real OSS repos and shifted environments without model calls or per-repo rules?",
+      "falsifier_id": "ZERO_MODEL_BLIND_UNSEEN_AND_MEMORY_ABLATION_FALSIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "ZERO_MODEL_COW_ANGELIC_SWE_CU_KERNEL_V1"
+    }
+  }
+}
