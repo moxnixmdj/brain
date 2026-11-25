@@ -323,6 +323,7 @@ class UnifiedModel:
 
         self._unrunnable: dict[str, list[str]] | None = None
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._harvested_cache: dict[str, dict[str, Any]] | None = None
         self._source_df_cache: dict[str, int] | None = None
         self._research_index_cache: dict[str, dict[str, Any]] | None = None
         self._research_df_cache: dict[str, int] | None = None
@@ -335,6 +336,19 @@ class UnifiedModel:
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
         if not _core_only:
             self._hydrate_secondary_indexes()
+
+    def harvested_surfaces(self) -> list[dict[str, Any]]:
+        """Every discovered surface the tree carries but no registry declares."""
+        if self._harvested_cache is None:
+            self._hydrate_secondary_indexes()
+        return [dict(row) for row in (self._harvested_cache or {}).values()]
+
+    def find_harvested(self, capability_id: str) -> dict[str, Any] | None:
+        """One discovered surface by id, or None. Never returns a capability."""
+        if self._harvested_cache is None:
+            self._hydrate_secondary_indexes()
+        row = (self._harvested_cache or {}).get(str(capability_id))
+        return dict(row) if row else None
 
     def _ensure_full_model(self) -> dict[str, Any]:
         if self._model_loaded is None:
@@ -359,6 +373,15 @@ class UnifiedModel:
                 src_df[str(term)] = src_df.get(str(term), 0) + 1
         self._source_df_cache = src_df
 
+        # Discovered executable surfaces.  Listed, never routed: `route()` and
+        # `solve()` stay on admitted capability, and calling one is an explicit
+        # request through harvested_capability_runtime_v1, which issues evidence
+        # and promotes nothing.
+        self._harvested_cache = {
+            str(row["id"]): dict(row)
+            for row in full.get("harvested_capabilities") or []
+            if isinstance(row, Mapping) and row.get("id")
+        }
         self._research_index_cache = {
             str(row["path"]): dict(row)
             for row in full.get("research_index") or []
