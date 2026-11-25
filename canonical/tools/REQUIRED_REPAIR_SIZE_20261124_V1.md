@@ -90,6 +90,11 @@ The correct statement has three parts, each measured:
 mismatches and `DID NOT RAISE <Exc>`: the failing line is **in the test**, and the repair
 site is wherever the wrong value was computed. A traceback cannot name that line.
 
+> **CORRECTION (§6 of `THE_ASSERTION_IS_NOT_A_SPECIFICATION_20261124_V1.md`).** At least 7
+> of these 14 are **not** missing guards: the `raise <Exc>` is already present in the target
+> function and does not fire, so the repair is its predicate or literal. The label below is
+> the *failure message* shape, not the repair shape.
+
 **(b) The dominant failure shape is a missing guard.** Merged classification:
 
 | repair shape | tasks | share |

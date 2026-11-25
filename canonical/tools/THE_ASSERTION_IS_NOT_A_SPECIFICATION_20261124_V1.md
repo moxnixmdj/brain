@@ -145,3 +145,77 @@ cannot be the source, and by how much.
 - **This is a negative result about one mechanism, not about the corpus.** The corpus is
   usable: the oracle runs, the localisation split is measured, and the repair-size census in
   `REQUIRED_REPAIR_SIZE_20261124_V1.md` says 35.8% of repairs are single-statement.
+
+---
+
+## §6 The follow-on experiment: synthesise the guard the test demands
+
+§3 ended with the cheapest open opportunity in the corpus: 14 tasks state a first-order
+requirement — *this input must raise `<Exc>`* — and nothing consumes it. So the next probe
+(`real_fix_guard_probe_v1.py`) attacks exactly that, using only parts that already exist:
+trace the offending call and every other call to the same function in the same test file to
+get a witness set (one must-raise, N must-not-raise), hand it to
+`angelic_cegis_v1.synthesize_guard` (which already harvests a frame's vocabulary and
+CEGIS-verifies a predicate), insert `if <pred>: raise <Exc>()`, and let the real test judge.
+
+**27 tasks** state a `pytest.raises` requirement in the failing test. Verdicts:
+
+| verdict | n | meaning |
+|---|---|---|
+| `NO_BAD_FRAME_RECORDED` | 12 | the function that must raise is not entered from the failing test — it is a wrapper, a constructor, or lives in another module, so there is no witness to synthesise from |
+| `NO_TARGET_FUNCTION` | 5 | the requirement's call could not be resolved to a function |
+| `NO_GUARD_ADMITTED` | 9 | a witness set existed (up to 88 must-not-raise) and **no predicate over the harvested vocabulary separated the one bad frame from the good ones** |
+| `GUARD_DOES_NOT_SATISFY_THE_TEST` | 1 | a guard was admitted by CEGIS and **rejected by the real test** |
+
+**0/27 repaired.** Two defects were found and fixed in the probe itself while getting there, and
+both are recorded because they are the kind that silently produce false negatives:
+
+1. **The witness must be captured at ENTRY, not at return.** The guard is inserted at the top of
+   the function, so a local assigned further down the body is not in scope there. Capturing at
+   return harvested `value` from `canonicalize_name` (whose parameter is `name`), CEGIS admitted
+   `value is not None and validate`, and the real test rejected it with `UnboundLocalError`.
+   **The harness caught a candidate the module's own admission had passed** — which is the
+   whole reason the judge is not the generator.
+2. **The split between must-raise and must-not-raise must be by *which test produced the
+   frame*, not by whether it raised.** On a `DID NOT RAISE` task the offending frame by
+   definition does not raise, so splitting on `raised` puts every bad frame in the good set and
+   reports `NO_BAD_FRAME_RECORDED` while having recorded it.
+
+### The finding that matters: the guard is usually already there
+
+| | n |
+|---|---|
+| tasks stating a raise requirement | 27 |
+| **the `raise <Exc>` is already present in the target function** | **7** |
+| of those, string literals inside the function (candidate repair sites) | 2–14 |
+
+For those 7 the repair is **not** guard insertion — the guard exists and does not fire. It is
+the guard's *predicate or literal* that is wrong. Task 61 is the clean case:
+
+```python
+def canonicalize_name(name: str, *, validate: bool = False) -> NormalizedName:
+    if validate and not _validate_regex.match(name):        # <- guard already present
+        raise InvalidName(f"name is invalid: {name!r}")
+```
+
+The test demands `canonicalize_name("hi\n", validate=True)` raise `InvalidName`. The guard is
+there; `_validate_regex` simply does not reject a newline. **The repair is a regex literal.**
+
+So the `MISSING_GUARD` label in `REQUIRED_REPAIR_SIZE_20261124_V1.md` §2(b) is wrong for at
+least 7 of the 14: they are **wrong-literal-in-an-existing-guard**, which is a different and
+far more tractable class. The failing input is named by the test; the guard is identified by
+the required exception; the search is over literals in that one predicate; and it is checkable
+by running the real test. That is a first-order search with a real oracle, and it needs no
+corpus and no model.
+
+### What is now measured, in one line each
+
+- assertion inversion: 7/70 produce candidates, 0/70 pass, and it produces them **only where
+  the specification carries ~1 bit** (§2);
+- guard synthesis from a stated requirement: 0/27, blocked by 12 unreachable frames and 9
+  unsynthesizable predicates;
+- and the reason the second is blocked is that **7 of the 14 are not missing guards at all** —
+  they are wrong literals in guards that already exist.
+
+**None of this is a capability claim.** The next mechanism is literal repair inside an
+existing guard, driven by the stated exception and the named failing input; it is not built.
