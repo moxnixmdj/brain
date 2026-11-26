@@ -75,28 +75,21 @@ NON_CLAIMS = (
     "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
 )
 
-
 ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
-
 
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
-
 # --------------------------------------------------------------------------- bytes
-
 
 def canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
-
 def digest_value(value: Any) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
-
 def artifact_digest(model: Mapping[str, Any]) -> str:
     return digest_value({k: v for k, v in model.items() if k != "digest"})
-
 
 def tokenize(text: str) -> list[str]:
     out: list[str] = []
@@ -107,14 +100,12 @@ def tokenize(text: str) -> list[str]:
         out.append(token)
     return out
 
-
 # The compiler's own repository-path scanner, character class and all: a path
 # literal is two or more "/"-joined segments. Kept byte-for-byte in step with
 # ``goal_compiler._repo_paths_uncached`` -- if the two ever disagree, coverage is
 # measured over words the caller never asked with.
 _PATH_LITERAL = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
 _URL_LITERAL = re.compile(r"https?://[^\s)\]}>]+")
-
 
 def path_literals(text: str, root: str | Path | None = None) -> list[str]:
     """The spans of ``text`` that name a real artifact, in sentence order.
@@ -151,7 +142,6 @@ def path_literals(text: str, root: str | Path | None = None) -> list[str]:
         found.append(match.group(0))
     return found
 
-
 def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
     """The caller's ASK: the sentence with its stated path literals blanked out.
 
@@ -178,19 +168,15 @@ def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
             ask = ask.replace(literal, " ")
     return tokenize(ask)
 
-
 # --------------------------------------------------------------------------- loading
-
 
 _VERIFIED_BLOB_DIGESTS: dict[str, str] = {}
 _VERIFIED_DIGEST_TO_RAW_SHA: dict[str, str] = {}
 _OPEN_MODEL_MEM_CACHE: dict[tuple[str, int, int], "UnifiedModel"] = {}
 _MMAP_CSR_MEM_CACHE: dict[tuple[str, str], Any] = {}
 
-
 def _core_cache_dir() -> Path:
     return ROOT / "canonical" / "astra_runtime" / "tmp"
-
 
 def _get_mmap_csr(section: str, raw_sha: str) -> Any | None:
     if not raw_sha:
@@ -210,7 +196,6 @@ def _get_mmap_csr(section: str, raw_sha: str) -> Any | None:
         return reader
     except Exception:
         return None
-
 
 def load_model(
     path: str | Path | None = None,
@@ -262,7 +247,6 @@ def load_model(
         _VERIFIED_DIGEST_TO_RAW_SHA[str(declared)] = raw_sha
     return model
 
-
 def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
     id_tokens = set(tokenize(cid))
     return {
@@ -270,7 +254,6 @@ def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
         for t in (row.get("triggers") or [])
         if str(t) not in id_tokens and len(str(t)) > 3
     }
-
 
 def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
@@ -336,7 +319,6 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         "knowledge_len": len(knw_rows),
     }
 
-
 class _LazyMarshalDict(dict):
     """`dict` subclass backed by per-entry `marshal` blobs so `open_model()` skips 18,000+ nested dict allocations."""
 
@@ -375,7 +357,6 @@ class _LazyMarshalDict(dict):
 
     def copy(self) -> dict[str, Any]:
         return dict(self.items())
-
 
 def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], bytes, bytes]:
     """Split `<1.5 KB` Tier-0 boot header, `~85 KB` Tier-1 pre-scaled route tables, and Tier-2 full capability blobs."""
@@ -472,7 +453,6 @@ def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], by
     }
     return hdr, marshal.dumps(route_payload), marshal.dumps(tables_payload)
 
-
 def _write_hot_tier_files(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]) -> dict[str, Any]:
     hdr, route_bytes, tables_bytes = _pack_hot_marshal_tiers(core)
     pid = os.getpid()
@@ -490,7 +470,6 @@ def _write_hot_tier_files(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]
     except OSError:
         return {**hdr, "_route_blob": route_bytes, "_tables_blob": tables_bytes}
     return hdr_disk
-
 
 def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_map = {
@@ -593,14 +572,11 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
         "knowledge_title_postings": {k: tuple(v) for k, v in knw_title_postings.items()},
     }
 
-
 # --------------------------------------------------------------------------- model
-
 
 from canonical.runtime.wave41_rung3_proposer_jitrl_continual_flywheel_v1 import (
     Wave40To42UnifiedModelMixin as _Wave40To42UnifiedModelMixin,
 )
-
 
 class UnifiedModel(_Wave40To42UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
@@ -883,15 +859,6 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         self._index_dict = value
 
     @property
-    def _capability_id_terms(self) -> dict[str, frozenset[str]]:
-        self._ensure_full_tables()
-        if self._cap_id_terms_sets is None:
-            self._cap_id_terms_sets = {
-                cid: frozenset(t) for cid, t in (self._cap_id_terms_raw or {}).items()
-            }
-        return self._cap_id_terms_sets
-
-    @property
     def _scaled_index(self) -> dict[str, tuple[tuple[str, float], ...]]:
         self._ensure_route_tables()
         return self._scaled_index_map  # type: ignore[return-value]
@@ -900,11 +867,6 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
     def _exact_id_lookup(self) -> dict[str, str]:
         self._ensure_route_tables()
         return self._exact_id_lookup_map  # type: ignore[return-value]
-
-    @property
-    def _cid_folded_pairs(self) -> tuple[tuple[str, str], ...]:
-        self._ensure_route_tables()
-        return self._cid_folded_pairs_tup  # type: ignore[return-value]
 
     @property
     def _cid_dot_pairs(self) -> tuple[tuple[str, str], ...]:
@@ -1492,13 +1454,6 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         self._knowledge_postings_cache = dict(sec["knowledge_postings"])
         self._knowledge_title_postings_cache = dict(sec["knowledge_title_postings"])
 
-    def _hydrate_secondary_indexes(self) -> None:
-        if self._source_index_cache is not None and self._research_index_cache is not None and self._knowledge_cache is not None:
-            return
-        full = self._ensure_full_model()
-        sec = _extract_secondary_indexes(full, self._raw_sha256)
-        self._apply_secondary_bundle(sec)
-
     @property
     def model(self) -> dict[str, Any]:
         return self._ensure_full_model()
@@ -1519,11 +1474,6 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         return self._extended_source_index_cache  # type: ignore[return-value]
 
     @property
-    def _extended_source_df(self) -> dict[str, int]:
-        self._ensure_extended_source_index()
-        return self._extended_source_df_cache  # type: ignore[return-value]
-
-    @property
     def research_index(self) -> dict[str, dict[str, Any]]:
         self._ensure_research_index()
         return self._research_index_cache  # type: ignore[return-value]
@@ -1542,16 +1492,6 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
     def _knowledge_df(self) -> dict[str, int]:
         self._ensure_knowledge()
         return self._knowledge_df_cache  # type: ignore[return-value]
-
-    @property
-    def _knowledge_lengths(self) -> list[int]:
-        self._ensure_knowledge()
-        return self._knowledge_lengths_cache  # type: ignore[return-value]
-
-    @property
-    def _avg_length(self) -> float:
-        self._ensure_knowledge()
-        return self._avg_length_cache  # type: ignore[return-value]
 
     # ------------------------------------------------------------------ status
 
@@ -5262,6 +5202,42 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             admitted_capabilities_visible=len(self.capabilities),
         )
 
+    def solve_swe_cold_start(
+        self,
+        issue_text: str,
+        repo_root: str | Path,
+        *,
+        timeout_s: float = 30.0,
+        keep_patch_applied: bool = False,
+        skill_store_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Wave 45: the door a person actually knocks on.
+
+        A repository and a sentence. The adapter scans, binds test targets and candidate files
+        from evidence (issue terms + import graph), then hands the bound problem to
+        `solve_swe_repo_native`. Zero model calls; a refusal names what is missing instead of
+        guessing.
+        """
+        res = self.boundary_router.route_swe_cold_start(
+            issue_text=issue_text,
+            repo_root=repo_root,
+            timeout_s=timeout_s,
+            keep_patch_applied=keep_patch_applied,
+            skill_store_path=skill_store_path,
+        )
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="SWE_COLD_START",
+            goal=f"swe_cold_start:{repo_root}",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            tier=res.get("tier"),
+            reason=res.get("reason"),
+            binding=res.get("binding"),
+            elapsed_s=res.get("elapsed_s"),
+            payload=res,
+        )
+
     def solve_swe_repo_native(
         self,
         repo_root: str | Path,
@@ -5277,6 +5253,7 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
         residual_proposer: Any = None,
         keep_patch_applied: bool = False,
         timeout_s: float = 30.0,
+        skill_store_path: str | Path | None = None,
     ) -> dict[str, Any]:
         """Wave 23: Repo-Native Multi-File SWE Engine (`0D` × 7 hidden SWE superweapons + CoW Zygote + online crystallization)."""
         res = self.boundary_router.route_swe_repo_native_multifile(
@@ -5292,6 +5269,7 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             residual_proposer=residual_proposer,
             keep_patch_applied=keep_patch_applied,
             timeout_s=timeout_s,
+            skill_store_path=skill_store_path,
         )
         passed = bool(res.get("pass"))
         return self._envelope(
@@ -6901,12 +6879,9 @@ class UnifiedModel(_Wave40To42UnifiedModelMixin):
             limit=int(limit),
         )
 
-
 # --------------------------------------------------------------------------- helpers
 
-
 _VERSION_FAMILY_RE = re.compile(r"^(.+?)(?:_v(\d+))(\.[^.]+)$", re.IGNORECASE)
-
 
 def dedupe_version_families(rows: Sequence[Mapping[str, Any]], *, path_key: str = "path") -> list[dict[str, Any]]:
     """Wave 31 Elon's Law: collapse superseded `*_v1..v(N-1).ext` siblings so the latest version wins."""
@@ -6935,7 +6910,6 @@ def dedupe_version_families(rows: Sequence[Mapping[str, Any]], *, path_key: str 
         merged.append((first_idx, d))
     merged.sort(key=lambda item: item[0])
     return [d for _i, d in merged]
-
 
 def _missing_declared_dependencies(
     row: Mapping[str, Any],
@@ -6979,13 +6953,11 @@ def _missing_declared_dependencies(
             missing.append(name)
     return sorted(set(missing))
 
-
 def _normalise_capability_id(value: str) -> str:
     cid = str(value or "").strip()
     if cid.startswith("bound:"):
         cid = cid[len("bound:"):]
     return cid
-
 
 def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
     wanted = [t.casefold() for t in terms]
@@ -7003,14 +6975,11 @@ def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
         return ""
     return best[:limit]
 
-
 _DEFAULT_TARGET_PATH = (ROOT / DEFAULT_ARTIFACT).resolve()
 _DEFAULT_TARGET_KEY = str(_DEFAULT_TARGET_PATH)
 
-
 def _stat_cache_path() -> Path:
     return _core_cache_dir() / "unified_model_stat_v1.marshal"
-
 
 def _read_stat_sha(target_key: str, st: os.stat_result) -> str | None:
     """Salsa/Git racy-clean stat -> raw_sha256 fast path (skips 13.45 MB read+SHA256 on boot)."""
@@ -7037,7 +7006,6 @@ def _read_stat_sha(target_key: str, st: os.stat_result) -> str | None:
         return None
     return None
 
-
 def _write_stat_sha(target_key: str, st: os.stat_result, raw_sha: str) -> None:
     try:
         cdir = _core_cache_dir()
@@ -7060,7 +7028,6 @@ def _write_stat_sha(target_key: str, st: os.stat_result, raw_sha: str) -> None:
         tmp_f.replace(p)
     except OSError:
         pass
-
 
 def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path | None = None) -> None:
     """Emit SHA-256-verified `.core.marshal` + 5 isolated per-section sidecars + FTS5 SQLite + Salsa stat cache."""
@@ -7226,7 +7193,6 @@ def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path 
             _write_stat_sha(str(resolved), st, raw_sha)
     except Exception:
         pass
-
 
 def open_model(
     path: str | Path | None = None, *, root: str | Path | None = None
@@ -7407,9 +7373,7 @@ def open_model(
     _OPEN_MODEL_MEM_CACHE[mem_key] = inst
     return inst
 
-
 load_unified_model = open_model
-
 
 def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:
     """Return the binary-marshaled adapter AST index without parsing the full 14 MB JSON."""
@@ -7425,7 +7389,6 @@ def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:
             idx = inst._core_meta.get("adapter_ast_index") or ((inst.model.get("grammar") or {}).get("adapter_ast_index") or {})
     return idx if isinstance(idx, dict) else dict(idx)
 
-
 def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict[str, Any] | None:
     """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
     try:
@@ -7439,12 +7402,9 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
     except Exception:
         return None
 
-
 # --------------------------------------------------------------------------- cli
 
-
 SOVEREIGN_ZERO_LLM_MODEL_SPEC = "canonical.runtime.brain_unified_model_v1:brain_model_callable"
-
 
 def __getattr__(name: str) -> Any:
     if name in ('SovereignZeroLLMPlanner', '_SOVEREIGN_PLANNER', 'brain_model_callable'):
@@ -7453,10 +7413,8 @@ def __getattr__(name: str) -> Any:
         return getattr(_szp, name)
     raise AttributeError(f'module {__name__!r} has no attribute {name!r}')
 
-
 def _print(payload: Any) -> None:
     print(json.dumps(payload, indent=1, sort_keys=True, ensure_ascii=False))
-
 
 def main(argv: list[str] | None = None) -> int:
     import argparse
@@ -7527,7 +7485,6 @@ def main(argv: list[str] | None = None) -> int:
     )
     _print(out)
     return 0 if out.get("pass") or out.get("operation") == "RECALL" else 1
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
