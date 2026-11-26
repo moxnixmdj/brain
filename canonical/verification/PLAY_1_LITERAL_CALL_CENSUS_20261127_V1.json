@@ -1,0 +1,3561 @@
+{
+ "attempted": 406,
+ "chance_for_an_exact_target": 0.00118,
+ "claim_limit": "A survivor is a call that twice produced the same output. It is not a claim that the module is correct, that its output is meaningful, or that the test asserts what the adapter assumes -- none of these tests was run. Producer-run, one sandbox.",
+ "exact_targets": 15,
+ "kill_floor": 0.4,
+ "method": {
+  "admission": "the call is executed twice in a fresh interpreter, cwd in a temp dir, and must agree",
+  "arguments": "literals only, taken from a call in the module's own same-stem test file",
+  "selection": "first 406 SOURCE_ONLY ledger rows, sorted by path",
+  "timeout_seconds": 5.0
+ },
+ "model_calls": 0,
+ "network_calls": 0,
+ "outcomes": {
+  "CALL_ERROR": 26,
+  "NO_LITERAL_CALL_IN_TEST": 233,
+  "NO_PUBLIC_FUNCTION": 18,
+  "NO_TEST_FILE": 114,
+  "SURVIVES": 15
+ },
+ "rows": [
+  {
+   "module": "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "a_goal_that_needs_two_moves_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "a_refusal_is_a_specification_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_internal_only_certification_gate_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_internal_only_certification_gate_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_minimum_information_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aa_briefcase_top_support_collapse_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acceptance_quotient_simulation_v5.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "acceptance_quotient_simulation_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/acquired_operator_memory_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "acquired_operator_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/aimed_action_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "aimed_action_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/answer_memory_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "answer_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/answer_shape_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "answer_shape_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/applicability_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "applicability_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/apt_metadata_snapshot_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "apt_metadata_snapshot_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/associative_memory_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "associative_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/astra_hidden_visual_executor.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "astra_hidden_visual_executor",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/astra_runtime.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "astra_runtime",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/attested_state_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "attested_state_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/authenticated_context_concept_bridge_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "authenticated_context_concept_bridge_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/authenticated_pareto_scheduler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "authenticated_pareto_scheduler_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/auto_apt_cli_acquisition.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "auto_apt_cli_acquisition",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/auto_capability_acquisition.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "auto_capability_acquisition",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/auto_github_source_acquisition.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "auto_github_source_acquisition",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/auto_npm_library_acquisition.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "auto_npm_library_acquisition",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/auto_pypi_library_acquisition.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "auto_pypi_library_acquisition",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "not-json"
+   ],
+   "call": "parse_search_payload('not-json')",
+   "deterministic": true,
+   "entrypoint": "parse_search_payload",
+   "module": "canonical/runtime/automationbench_owned_policy_kernel_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "7eebc90e07ed8e30ca77a5e97aa48d13",
+   "run1": {
+    "digest": "4f53cda18c2baa0c",
+    "kind": "list",
+    "ok": true,
+    "preview": "[]",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "4f53cda18c2baa0c",
+    "kind": "list",
+    "ok": true,
+    "preview": "[]",
+    "seconds": 0.034
+   },
+   "stem": "automationbench_owned_policy_kernel_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/automationbench_owned_policy_kernel_v1.py",
+    "query": "test api search payload parsing is fail closed: parse_search_payload('not-json')"
+   },
+   "test": "test_api_search_payload_parsing_is_fail_closed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/automationbench_stirrup_client_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "automationbench_stirrup_client_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/autonomous_verified_self_improvement_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "autonomous_verified_self_improvement_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/benchmark_capability_dominance_scheduler_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "benchmark_capability_dominance_scheduler_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/benchmark_witness_elimination_compiler_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "benchmark_witness_elimination_compiler_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/benchmark_witness_elimination_compiler_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "benchmark_witness_elimination_compiler_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/bounded_semantic_relation_proof_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "bounded_semantic_relation_proof_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "brain_owned_semantic_relation_edge_registry_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v2.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "brain_owned_semantic_relation_edge_registry_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v3.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "brain_owned_semantic_relation_edge_registry_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v4.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "brain_owned_semantic_relation_edge_registry_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brain_unified_model_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "brain_unified_model_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/bridge_enumeration_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "bridge_enumeration_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/brokered_workspace_execution_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "brokered_workspace_execution_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/browser_goal_grounding_recovery_candidate.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "browser_goal_grounding_recovery_candidate",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/browser_goal_grounding_recovery_proof.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "browser_goal_grounding_recovery_proof",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/browser_state_information_safe_proof.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "browser_state_information_safe_proof",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/browser_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "browser_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ],
+    [
+     0,
+     1
+    ],
+    2,
+    2,
+    99
+   ],
+   "call": "finite_countermodel([0, 1], [0, 1], [0, 1], 2, 2, 99)",
+   "deterministic": true,
+   "entrypoint": "finite_countermodel",
+   "module": "canonical/runtime/bytes_open_domain_equivalence_cut_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "60ed5c3da201bd9371ff296666350151",
+   "run1": {
+    "digest": "c78ceaeaee6f39b7",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"finite_observations_insufficient_for_global_equivalence\": true, \"observed_equal\": true, \"schema\": \"PROJECT_BRAIN_BYTES_OPEN_DOMAIN_EQUIVALENCE_CUT_V1\", \"unseen_differs\": true, \"unseen_input\": 2}",
+    "seconds": 0.03
+   },
+   "run2": {
+    "digest": "c78ceaeaee6f39b7",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"finite_observations_insufficient_for_global_equivalence\": true, \"observed_equal\": true, \"schema\": \"PROJECT_BRAIN_BYTES_OPEN_DOMAIN_EQUIVALENCE_CUT_V1\", \"unseen_differs\": true, \"unseen_input\": 2}",
+    "seconds": 0.03
+   },
+   "stem": "bytes_open_domain_equivalence_cut_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/bytes_open_domain_equivalence_cut_v1.py",
+    "query": "test finite observations do not imply global equivalence: finite_countermodel([0, 1], [0, 1], [0, 1], 2, 2, 99)"
+   },
+   "test": "test_finite_observations_do_not_imply_global_equivalence",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/bytes_sequence_equivalence_presentation_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "bytes_sequence_equivalence_presentation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/c_load_bearing_state_quotient_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "c_load_bearing_state_quotient_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cad_partspec.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "cad_partspec",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/cad_t0_oracle_adapter.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "cad_t0_oracle_adapter",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/canonical_apply_transaction_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "canonical_apply_transaction_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/canonical_tree_attestation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "canonical_tree_attestation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_forge_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "capability_forge_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_parallel_frontier_post_composition_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_parallel_frontier_post_composition_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_parallel_frontier_post_composition_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_parallel_frontier_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_parallel_frontier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_parallel_frontier_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_parallel_frontier_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_planner.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_planner",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_proof_compression_optimizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_proof_compression_optimizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/capability_receipt_lane_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "capability_receipt_lane_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/causal_candidate_generator.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "causal_candidate_generator",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/causal_computer_use_agent_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "causal_computer_use_agent_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/causal_residual_ranker.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "causal_residual_ranker",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/certificate_gated_selected_route_router_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certificate_gated_selected_route_router_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "preflight()",
+   "deterministic": false,
+   "entrypoint": "preflight",
+   "module": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v2.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.033
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.033
+   },
+   "stem": "certificate_gated_selected_route_runtime_entrypoint_v2",
+   "surface": "OK",
+   "test": "test_v1_canary_registry_remains_compatible",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "preflight()",
+   "deterministic": false,
+   "entrypoint": "preflight",
+   "module": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v3.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.034
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.033
+   },
+   "stem": "certificate_gated_selected_route_runtime_entrypoint_v3",
+   "surface": "OK",
+   "test": "test_symbolic_registry_preflight_is_fail_closed_and_not_global_cover",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certificate_gated_selected_route_runtime_entrypoint_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/certificate_gated_selected_route_runtime_entrypoint_v5.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certificate_gated_selected_route_runtime_entrypoint_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/certified_document_effect_field_edge_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certified_document_effect_field_edge_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/certified_reached_escape_repair_dispatch_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certified_reached_escape_repair_dispatch_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/certified_reached_escape_repair_executor_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certified_reached_escape_repair_executor_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/certified_reached_escape_state_constructor_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "certified_reached_escape_state_constructor_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cli_capability_acquisition_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cli_capability_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cli_contract_inference.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "cli_contract_inference",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/compile_brain_unified_model_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "compile_brain_unified_model_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/composer_route_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "composer_route_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/composition_critical_invariant_aggregator_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "composition_critical_invariant_aggregator_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "empty_capsule()",
+   "deterministic": true,
+   "entrypoint": "empty_capsule",
+   "module": "canonical/runtime/composition_state_capsule_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "c94339fd7affa6f73e374e7e1adf846c",
+   "run1": {
+    "digest": "55eabcc9e0ff5137",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"genesis_hash\": \"913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8\", \"head_hash\": \"913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8\", \"records\": [], \"schema\": \"PROJECT_",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "55eabcc9e0ff5137",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"genesis_hash\": \"913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8\", \"head_hash\": \"913f6b7819ac44d5bc897e407c0691de5e45afa1ad796e69d4dbd8adc91ceea8\", \"records\": [], \"schema\": \"PROJECT_",
+    "seconds": 0.035
+   },
+   "stem": "composition_state_capsule_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/composition_state_capsule_v1.py",
+    "query": "seed: empty_capsule()"
+   },
+   "test": "seed",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "empty_capsule()",
+   "deterministic": true,
+   "entrypoint": "empty_capsule",
+   "module": "canonical/runtime/composition_state_capsule_v2.py",
+   "outcome": "SURVIVES",
+   "receipt": "021d5048ab5254f4efd70193be283c1f",
+   "run1": {
+    "digest": "d7b071f1dafb6c73",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"genesis_hash\": \"1d619eb131e3ba371aa1a28f130168a31b4871793bd70121e4dcb49695ebbe1b\", \"head_hash\": \"1d619eb131e3ba371aa1a28f130168a31b4871793bd70121e4dcb49695ebbe1b\", \"records\": [], \"schema\": \"PROJECT_",
+    "seconds": 0.034
+   },
+   "run2": {
+    "digest": "d7b071f1dafb6c73",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"genesis_hash\": \"1d619eb131e3ba371aa1a28f130168a31b4871793bd70121e4dcb49695ebbe1b\", \"head_hash\": \"1d619eb131e3ba371aa1a28f130168a31b4871793bd70121e4dcb49695ebbe1b\", \"records\": [], \"schema\": \"PROJECT_",
+    "seconds": 0.035
+   },
+   "stem": "composition_state_capsule_v2",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/composition_state_capsule_v2.py",
+    "query": "seed: empty_capsule()"
+   },
+   "test": "seed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/computer_env_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "computer_env_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/computer_execution_boundary_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "computer_execution_boundary_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/confined_crossfile_qualification_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "confined_crossfile_qualification_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/confinement_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "confinement_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/consequence_table_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "consequence_table_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/continuation_preference_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "continuation_preference_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001",
+    101,
+    4
+   ],
+   "call": "generate_case('STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001', 101, 4)",
+   "deterministic": true,
+   "entrypoint": "generate_case",
+   "module": "canonical/runtime/contract_native_proof_suites.py",
+   "outcome": "SURVIVES",
+   "receipt": "97d585c470921ec29917790e00409aed",
+   "run1": {
+    "digest": "30b80ef6e8140116",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"_oracle\": {\"hidden_probes\": [{\"F0\": -6, \"F1\": -9, \"F2\": 3, \"F3\": 13, \"F4\": 6, \"F5\": 0, \"F6\": -5}, {\"F0\": 4, \"F1\": -1, \"F2\": -4, \"F3\": 9, \"F4\": 1, \"F5\": 2, \"F6\": -5}, {\"F0\": -9, \"F1\": 2, \"F2\": 3, \"F3",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "30b80ef6e8140116",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"_oracle\": {\"hidden_probes\": [{\"F0\": -6, \"F1\": -9, \"F2\": 3, \"F3\": 13, \"F4\": 6, \"F5\": 0, \"F6\": -5}, {\"F0\": 4, \"F1\": -1, \"F2\": -4, \"F3\": 9, \"F4\": 1, \"F5\": 2, \"F6\": -5}, {\"F0\": -9, \"F1\": 2, \"F2\": 3, \"F3",
+    "seconds": 0.034
+   },
+   "stem": "contract_native_proof_suites",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/contract_native_proof_suites.py",
+    "query": "test structured method omission is killed: generate_case('STRUCTURED_METHOD_COMPLETE_CALCULATION_GRAPH_001', 101, 4)"
+   },
+   "test": "test_structured_method_omission_is_killed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r1_professional_r12_semantic_verify_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r1_professional_r12_semantic_verify_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r1_r3_promotion_reality_containment_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "coverage_cc_r1_r3_promotion_reality_containment_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r2_professional_r12_semantic_verify_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r2_professional_r12_semantic_verify_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r2_r3_promotion_mission_soundness_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "coverage_cc_r2_r3_promotion_mission_soundness_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_universal_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r3_professional_r12_semantic_verify_universal_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r3_professional_r12_semantic_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r3_professional_r12_semantic_verify_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r3_professional_r12_semantic_verify_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_professional_r12_semantic_verify_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "coverage_cc_r3_professional_r12_semantic_verify_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/coverage_cc_r3_r3_promotion_safety_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "coverage_cc_r3_r3_promotion_safety_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/creature_runtime_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "creature_runtime_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/creature_stakes_and_initiative_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "creature_stakes_and_initiative_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_effect_calculus_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cross_document_effect_calculus_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_effect_hypothesis_worldset_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cross_document_effect_hypothesis_worldset_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "cross_document_effect_hypothesis_worldset_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_effect_semantic_lattice_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "cross_document_effect_semantic_lattice_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_residual_effect_frontier_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cross_document_residual_effect_frontier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cross_document_residual_effect_frontier_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "cross_document_residual_effect_frontier_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/curriculum_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "curriculum_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cursorbench_typed_acceptance_dependency_provenance_atom_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cursorbench_typed_acceptance_dependency_provenance_atom_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/cursorbench_typed_acceptance_source_coverage_atoms_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "cursorbench_typed_acceptance_source_coverage_atoms_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/decision_discriminator_v3.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "decision_discriminator_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/declared_input_derivation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "declared_input_derivation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/decomposition_law_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "decomposition_law_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/delegation_dynamic_reassignment_proof.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "delegation_dynamic_reassignment_proof",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/delegation_receipt_history_candidate_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "delegation_receipt_history_candidate_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/delegation_receipt_history_candidate_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "delegation_receipt_history_candidate_v4",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "verify()",
+   "deterministic": false,
+   "entrypoint": "verify",
+   "module": "canonical/runtime/delegation_universal_scope_certificate_v2.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "('canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json', 'f8b661abf7cb1b628aa14d966658394b80093879', 'eb4bca0fe6a015d49d2854998fbe046c979c7ea9')",
+    "error": "AssertionError",
+    "ok": false,
+    "seconds": 0.036
+   },
+   "run2": {
+    "detail": "('canonical/governance/OPUS55_TERMINAL_PROOF_PROTOCOLS_V1.json', 'f8b661abf7cb1b628aa14d966658394b80093879', 'eb4bca0fe6a015d49d2854998fbe046c979c7ea9')",
+    "error": "AssertionError",
+    "ok": false,
+    "seconds": 0.035
+   },
+   "stem": "delegation_universal_scope_certificate_v2",
+   "surface": "OK",
+   "test": "test_live_exact_sources_derive_candidate_universal_scope_proof",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/delegation_whole_scope_proof_v2.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "delegation_whole_scope_proof_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/direct_route_terminal_executors_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "direct_route_terminal_executors_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/distributional_target_upper_envelope_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "distributional_target_upper_envelope_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/documentation_mining_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "documentation_mining_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/docx_surgical_text_patch.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "docx_surgical_text_patch",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/dom_state_environment_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "dom_state_environment_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/domain_behavioral_quotient_v2_repair_verifier.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "domain_behavioral_quotient_v2_repair_verifier",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/domain_mapping_truth_certificate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "domain_mapping_truth_certificate_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    [
+     [
+      [
+       1,
+       2
+      ],
+      3.0
+     ]
+    ]
+   ],
+   "call": "observed_domain([((1, 2), 3.0)])",
+   "deterministic": true,
+   "entrypoint": "observed_domain",
+   "module": "canonical/runtime/domain_of_verification_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "aae42847ccd9d333660cc247e87546d9",
+   "run1": {
+    "digest": "b61e0a5d46c72e07",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"hi\": null, \"lo\": null, \"why\": \"this module reasons one input at a time; 2 were supplied\"}",
+    "seconds": 0.042
+   },
+   "run2": {
+    "digest": "b61e0a5d46c72e07",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"hi\": null, \"lo\": null, \"why\": \"this module reasons one input at a time; 2 were supplied\"}",
+    "seconds": 0.042
+   },
+   "stem": "domain_of_verification_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/domain_of_verification_v1.py",
+    "query": "test a two input domain is refused loudly: Fifth instance this session of an input-shape disagreement; it must not fail silently."
+   },
+   "test": "test_a_two_input_domain_is_refused_loudly",
+   "test_doc": "Fifth instance this session of an input-shape disagreement; it must not fail silently."
+  },
+  {
+   "module": "canonical/runtime/drawing_perspective_registration.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "drawing_perspective_registration",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/edit_kind_learning_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "edit_kind_learning_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/effect_broker_contract_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "effect_broker_contract_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/enforce_goal_hierarchy.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "enforce_goal_hierarchy",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/environment_learning_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "environment_learning_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/environment_reuse_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "environment_reuse_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/escape_progress_shared_gap_audit_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "escape_progress_shared_gap_audit_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/evidence_demand_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "evidence_demand_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/evidence_state.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "evidence_state",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/executable_skill_program_v7.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "executable_skill_program_v7",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/existing_receipt_semantic_candidate_miner_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "existing_receipt_semantic_candidate_miner_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/experience_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "experience_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/explicit_recovery_planner.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "explicit_recovery_planner",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/external_hard_slice_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "external_hard_slice_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_bounded_finance_authority_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "fibo_q2_2026_bounded_finance_authority_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "fibo_q2_2026_full_release_authority_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/field_scoped_authority_projection_gate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "field_scoped_authority_projection_gate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/field_scoped_work_unit_validity_guard_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "field_scoped_work_unit_validity_guard_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/finality_gate_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "finality_gate_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/finance_agent_v2_keyless_public_tools_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "finance_agent_v2_keyless_public_tools_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "finance_agent_v2_zero_spend_adapter_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/finance_bounded_concept_registry_verify_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "finance_bounded_concept_registry_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "100",
+    "10"
+   ],
+   "call": "terminal_value_exit_multiple('100', '10')",
+   "deterministic": true,
+   "entrypoint": "terminal_value_exit_multiple",
+   "module": "canonical/runtime/finance_quantitative_algebra_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "5ca09f2a978baf9354bc902eb67ace37",
+   "run1": {
+    "digest": "ea33dc847d962e75",
+    "kind": "Decimal",
+    "ok": true,
+    "preview": "\"1000\"",
+    "seconds": 0.038
+   },
+   "run2": {
+    "digest": "ea33dc847d962e75",
+    "kind": "Decimal",
+    "ok": true,
+    "preview": "\"1000\"",
+    "seconds": 0.035
+   },
+   "stem": "finance_quantitative_algebra_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/finance_quantitative_algebra_v1.py",
+    "query": "test dcf exit multiple path: terminal_value_exit_multiple('100', '10')"
+   },
+   "test": "test_dcf_exit_multiple_path",
+   "test_doc": ""
+  },
+  {
+   "args": [
+    [
+     {
+      "input": [
+       [
+        1,
+        0
+       ],
+       [
+        0,
+        1
+       ]
+      ],
+      "output": [
+       [
+        2,
+        0
+       ],
+       [
+        0,
+        2
+       ]
+      ]
+     }
+    ]
+   ],
+   "call": "induce([{'input': [[1, 0], [0, 1]], 'output': [[2, 0], [0, 2]]}])",
+   "deterministic": false,
+   "entrypoint": "induce",
+   "module": "canonical/runtime/finite_affine_grid_operator_inducer_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.043
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.05
+   },
+   "stem": "finite_affine_grid_operator_inducer_v1",
+   "surface": "OK",
+   "test": "test_non_affine_recolor_has_no_operator",
+   "test_doc": ""
+  },
+  {
+   "args": [
+    [
+     "CROP_NONZERO",
+     "FLIP_HORIZONTAL"
+    ],
+    [
+     [
+      0,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      8,
+      9,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   ],
+   "call": "predict(['CROP_NONZERO', 'FLIP_HORIZONTAL'], [[0, 0, 0, 0], [0, 8, 9, 0], [0, 0, 0, 0]])",
+   "deterministic": false,
+   "entrypoint": "predict",
+   "module": "canonical/runtime/finite_grid_program_inducer_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.063
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.039
+   },
+   "stem": "finite_grid_program_inducer_v1",
+   "surface": "OK",
+   "test": "test_discovers_two_step_crop_then_flip",
+   "test_doc": ""
+  },
+  {
+   "args": [
+    [
+     {
+      "input": [
+       [
+        1,
+        2
+       ],
+       [
+        3,
+        4
+       ]
+      ],
+      "output": [
+       [
+        9,
+        9
+       ],
+       [
+        9,
+        9
+       ]
+      ]
+     }
+    ]
+   ],
+   "call": "induce([{'input': [[1, 2], [3, 4]], 'output': [[9, 9], [9, 9]]}])",
+   "deterministic": false,
+   "entrypoint": "induce",
+   "module": "canonical/runtime/finite_index_grid_operator_inducer_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.043
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.052
+   },
+   "stem": "finite_index_grid_operator_inducer_v1",
+   "surface": "OK",
+   "test": "test_non_index_color_change_has_no_operator",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/flywheel_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "flywheel_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/gdpval_objective_artifact_criteria_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "gdpval_objective_artifact_criteria_v2",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    []
+   ],
+   "call": "localize_rows([])",
+   "deterministic": false,
+   "entrypoint": "localize_rows",
+   "module": "canonical/runtime/gdpval_semantic_complement_localizer_v2.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.098
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.08
+   },
+   "stem": "gdpval_semantic_complement_localizer_v2",
+   "surface": "OK",
+   "test": "test_complete_population_guard_fails_closed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/generic_goal_tool_effect_planner_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "generic_goal_tool_effect_planner_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/github_public_retrieval_provider_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "github_public_retrieval_provider_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/global_retrieval_controller_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "global_retrieval_controller_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/goal_compiler.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "goal_compiler",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/goal_front_compiler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "goal_front_compiler_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/goal_to_door_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "goal_to_door_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    [
+     {
+      "input": [
+       [
+        1,
+        0
+       ]
+      ],
+      "output": [
+       [
+        1
+       ],
+       [
+        0
+       ]
+      ]
+     }
+    ]
+   ],
+   "call": "induce([{'input': [[1, 0]], 'output': [[1], [0]]}])",
+   "deterministic": false,
+   "entrypoint": "induce",
+   "module": "canonical/runtime/grid_delta_rule_inducer_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.059
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.041
+   },
+   "stem": "grid_delta_rule_inducer_v1",
+   "surface": "OK",
+   "test": "test_shape_change_is_explicitly_unsupported",
+   "test_doc": ""
+  },
+  {
+   "args": [
+    [
+     {
+      "input": [
+       [
+        1,
+        0
+       ]
+      ],
+      "output": [
+       [
+        1
+       ],
+       [
+        0
+       ]
+      ]
+     }
+    ]
+   ],
+   "call": "induce([{'input': [[1, 0]], 'output': [[1], [0]]}])",
+   "deterministic": false,
+   "entrypoint": "induce",
+   "module": "canonical/runtime/grid_delta_rule_inducer_v2.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.042
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.038
+   },
+   "stem": "grid_delta_rule_inducer_v2",
+   "surface": "OK",
+   "test": "test_shape_change_remains_explicitly_out_of_scope",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/gui_room_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "gui_room_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/h100_compiled_macro_chain_search_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_compiled_macro_chain_search_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_complete_unary_chain_search_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_complete_unary_chain_search_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_expression_tree_symbolic_regression_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_expression_tree_symbolic_regression_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_generic_patch_search_transfer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_generic_patch_search_transfer_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    [
+     {
+      "cue": "a",
+      "fields": [
+       "x"
+      ]
+     },
+     {
+      "cue": "b",
+      "fields": [
+       "y"
+      ]
+     }
+    ],
+    {
+     "anchors": {
+      "input": "same",
+      "target": "same"
+     },
+     "edges": []
+    }
+   ],
+   "call": "induce_roles([{'cue': 'a', 'fields': ['x']}, {'cue': 'b', 'fields': ['y']}], {'anchors': {'input': 'same', 'target': 'same'}, 'edges': []})",
+   "deterministic": false,
+   "entrypoint": "induce_roles",
+   "module": "canonical/runtime/h100_jit_lexical_role_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "ROLE_ANCHORS_COLLIDE",
+    "error": "JITLexicalRoleError",
+    "ok": false,
+    "seconds": 0.034
+   },
+   "run2": {
+    "detail": "ROLE_ANCHORS_COLLIDE",
+    "error": "JITLexicalRoleError",
+    "ok": false,
+    "seconds": 0.031
+   },
+   "stem": "h100_jit_lexical_role_v1",
+   "surface": "OK",
+   "test": "test_anchor_collision_rejected",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/h100_jit_primitive_acquisition_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_jit_primitive_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_lexical_no_evidence_indistinguishability_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_lexical_no_evidence_indistinguishability_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "fresh_term",
+    [
+     {
+      "relation_phrases": [
+       "predictor variable"
+      ],
+      "source_id": "s",
+      "term": "fresh_term"
+     }
+    ]
+   ],
+   "call": "resolve_source_relations('fresh_term', [{'term': 'fresh_term', 'source_id': 's', 'relation_phrases': ['predictor variable']}])",
+   "deterministic": true,
+   "entrypoint": "resolve_source_relations",
+   "module": "canonical/runtime/h100_lexical_source_fallback_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "ded32dc8c576165a8ae20a9d589236bc",
+   "run1": {
+    "digest": "09bf8206ee451e6a",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"external_frontier_model_calls\": 0, \"external_learned_capability_calls\": 0, \"hard_nonclaim\": \"FINITE_SOURCE_RELATION_BRIDGE_IS_NOT_OPEN_WORLD_LEXICAL_COVERAGE\", \"mapped_relation_phrases\": [\"predictor",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "09bf8206ee451e6a",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"external_frontier_model_calls\": 0, \"external_learned_capability_calls\": 0, \"hard_nonclaim\": \"FINITE_SOURCE_RELATION_BRIDGE_IS_NOT_OPEN_WORLD_LEXICAL_COVERAGE\", \"mapped_relation_phrases\": [\"predictor",
+    "seconds": 0.033
+   },
+   "stem": "h100_lexical_source_fallback_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/h100_lexical_source_fallback_v1.py",
+    "query": "test runtime is term generic: resolve_source_relations('fresh_term', [{'term': 'fresh_term', 'source_id': 's', 'relation_phrases': ['predictor variable']}])"
+   },
+   "test": "test_runtime_is_term_generic",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/h100_oewn_lexical_acquisition_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_oewn_lexical_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_safe_stdlib_operator_acquisition_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_safe_stdlib_operator_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_event_memory_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_event_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_mechanism_synthesizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_mechanism_synthesizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_parametric_unary_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_parametric_unary_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_polynomial_patch_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "h100_zero_learned_polynomial_patch_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_role_induction_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_role_induction_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "Inputs: a, b; values are listed."
+   ],
+   "call": "induce_semantic_roles('Inputs: a, b; values are listed.')",
+   "deterministic": true,
+   "entrypoint": "induce_semantic_roles",
+   "module": "canonical/runtime/h100_zero_learned_semantic_paraphrase_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "a3fac569449ba0fbedc2162e51f17ae3",
+   "run1": {
+    "digest": "67d0a9f6f4bd9169",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"external_frontier_model_calls\": 0, \"external_learned_capability_calls\": 0, \"hard_nonclaim\": \"FINITE_ONTOLOGY_ABSTENTION_IS_NOT_OPEN_WORLD_SEMANTICS\", \"inputs\": [], \"persistent_learned_bytes\": 0, \"ra",
+    "seconds": 0.037
+   },
+   "run2": {
+    "digest": "67d0a9f6f4bd9169",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"external_frontier_model_calls\": 0, \"external_learned_capability_calls\": 0, \"hard_nonclaim\": \"FINITE_ONTOLOGY_ABSTENTION_IS_NOT_OPEN_WORLD_SEMANTICS\", \"inputs\": [], \"persistent_learned_bytes\": 0, \"ra",
+    "seconds": 0.056
+   },
+   "stem": "h100_zero_learned_semantic_paraphrase_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/h100_zero_learned_semantic_paraphrase_v1.py",
+    "query": "test one sided role cue abstains: induce_semantic_roles('Inputs: a, b; values are listed.')"
+   },
+   "test": "test_one_sided_role_cue_abstains",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_tool_trace_normalizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_tool_trace_normalizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_transfer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_transfer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_unknown_domain_direct_candidate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "h100_zero_learned_unknown_domain_direct_candidate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/h100_zero_learned_unknown_domain_direct_candidate_v2.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "h100_zero_learned_unknown_domain_direct_candidate_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_pro_patch_handoff_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "harbor_pro_patch_handoff_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_agent_v10.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_agent_v10",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_agent_v11.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_agent_v11",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_agent_v12.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_agent_v12",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_agent_v13.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_agent_v13",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_dna_storage_agent_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "harbor_science_dna_storage_agent_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_evidence_store_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_evidence_store_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_planner_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "harbor_science_planner_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_planner_v5.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_planner_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_planner_v6.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_planner_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_planner_v7.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_planner_v7",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_science_zero_model_agent_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "harbor_science_zero_model_agent_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/harbor_swe_zero_model_agent_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "harbor_swe_zero_model_agent_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    {
+     "a": 0.5,
+     "b": 0.5
+    },
+    {
+     "a": "1/2",
+     "b": "1/2"
+    }
+   ],
+   "call": "hidden_evaluator_universal_noninferiority({'a': 0.5, 'b': 0.5}, {'a': '1/2', 'b': '1/2'})",
+   "deterministic": false,
+   "entrypoint": "hidden_evaluator_universal_noninferiority",
+   "module": "canonical/runtime/hidden_evaluator_dominance_boundary_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "probabilities must be exact rational literals",
+    "error": "TypeError",
+    "ok": false,
+    "seconds": 0.054
+   },
+   "run2": {
+    "detail": "probabilities must be exact rational literals",
+    "error": "TypeError",
+    "ok": false,
+    "seconds": 0.05
+   },
+   "stem": "hidden_evaluator_dominance_boundary_v1",
+   "surface": "OK",
+   "test": "test_float_probabilities_rejected",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/hidden_evaluator_top_support_dominance_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hidden_evaluator_top_support_dominance_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_evidence_candidate_synthesis_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_evidence_candidate_synthesis_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_evidence_candidate_synthesis_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_evidence_candidate_synthesis_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_exact_retrieval_span_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_exact_retrieval_span_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_image_observation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_image_observation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_native_open_web_fallback_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_native_open_web_fallback_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_native_question_contract_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_native_question_contract_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_native_question_contract_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_native_question_contract_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hle_quarantine_builder_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "hle_quarantine_builder_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "Explanation: reason\nAnswer: canonical\nConfidence: 77%",
+    "canonical"
+   ],
+   "call": "strict_reference_verdict('Explanation: reason\\nAnswer: canonical\\nConfidence: 77%', 'canonical')",
+   "deterministic": false,
+   "entrypoint": "strict_reference_verdict",
+   "module": "canonical/runtime/hle_strict_reference_scorer.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.04
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.039
+   },
+   "stem": "hle_strict_reference_scorer",
+   "surface": "OK",
+   "test": "test_exact_reference_passes",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/hle_wikipedia_bing_transport_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hle_wikipedia_bing_transport_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/honesty_ledger_first_emission_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "honesty_ledger_first_emission_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/html_svg_diagram_mechanics_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "html_svg_diagram_mechanics_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/hybrid_evaluator_dominance_cut_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "hybrid_evaluator_dominance_cut_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/if_scope_finite_wave_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "if_scope_finite_wave_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/ignorance_loop_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "ignorance_loop_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/incumbent_dominance_search_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "incumbent_dominance_search_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/independent_npm_codec_verifier.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "independent_npm_codec_verifier",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/independent_pypi_codec_verifier.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "independent_pypi_codec_verifier",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/information_theoretic_externality_gate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "information_theoretic_externality_gate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/inspect_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "inspect_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/instruction_contract_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "instruction_contract_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "main()",
+   "deterministic": false,
+   "entrypoint": "main",
+   "module": "canonical/runtime/instruction_policy_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "2",
+    "error": "SystemExit",
+    "ok": false,
+    "seconds": 0.087
+   },
+   "run2": {
+    "detail": "2",
+    "error": "SystemExit",
+    "ok": false,
+    "seconds": 0.05
+   },
+   "stem": "instruction_policy_v1",
+   "surface": "OK",
+   "test": "test_unknown",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/jit_knowledge_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "jit_knowledge_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "evaluate_materiality_counterfactual()",
+   "deterministic": false,
+   "entrypoint": "evaluate_materiality_counterfactual",
+   "module": "canonical/runtime/judgment_control_envelope_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.036
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.031
+   },
+   "stem": "judgment_control_envelope_v1",
+   "surface": "OK",
+   "test": "test_materiality_counterfactual_passes",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "global_cardinality_false_sufficiency_counterexample()",
+   "deterministic": true,
+   "entrypoint": "global_cardinality_false_sufficiency_counterexample",
+   "module": "canonical/runtime/k6_conditional_policy_cover_cut_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "b785d7001524e03b05804695b21af678",
+   "run1": {
+    "digest": "76dba4ea6a1590fc",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"S\": 2, \"construction_valid\": true, \"exact_conditional_bits\": 1, \"exact_conditional_states\": 2, \"global_cardinality_zero_lower_bound_trigger\": true, \"global_tau\": 2}",
+    "seconds": 0.038
+   },
+   "run2": {
+    "digest": "76dba4ea6a1590fc",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"S\": 2, \"construction_valid\": true, \"exact_conditional_bits\": 1, \"exact_conditional_states\": 2, \"global_cardinality_zero_lower_bound_trigger\": true, \"global_tau\": 2}",
+    "seconds": 0.035
+   },
+   "stem": "k6_conditional_policy_cover_cut_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/k6_conditional_policy_cover_cut_v1.py",
+    "query": "test global cardinality is not sufficient for zero persistence: global_cardinality_false_sufficiency_counterexample()"
+   },
+   "test": "test_global_cardinality_is_not_sufficient_for_zero_persistence",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "universal_policy_case()",
+   "deterministic": true,
+   "entrypoint": "universal_policy_case",
+   "module": "canonical/runtime/k6_minimum_adequate_policy_cover_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "a1d5403eab2bbd323ced268cf12bf025",
+   "run1": {
+    "digest": "bbac9e1492bd3a3e",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"assignment_valid\": true, \"bits\": 0, \"cover\": [\"common\"], \"tau\": 1}",
+    "seconds": 0.036
+   },
+   "run2": {
+    "digest": "bbac9e1492bd3a3e",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"assignment_valid\": true, \"bits\": 0, \"cover\": [\"common\"], \"tau\": 1}",
+    "seconds": 0.035
+   },
+   "stem": "k6_minimum_adequate_policy_cover_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/k6_minimum_adequate_policy_cover_v1.py",
+    "query": "test universal common policy requires no new separator: universal_policy_case()"
+   },
+   "test": "test_universal_common_policy_requires_no_new_separator",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/kg_semantic_reconciler.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "kg_semantic_reconciler",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/law_synthesis_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "law_synthesis_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/live_brain_route_admission_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "live_brain_route_admission_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/live_brain_runtime_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "live_brain_runtime_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    {
+     "capability_inputs": {},
+     "initial_facts": [
+      "manifest.json.available"
+     ],
+     "target_effects": [
+      "archive.tar_gz.create_from_manifest"
+     ],
+     "task_id": "LIVE_BRAIN_MISSING_INPUTS_001"
+    }
+   ],
+   "call": "run({'task_id': 'LIVE_BRAIN_MISSING_INPUTS_001', 'initial_facts': ['manifest.json.available'], 'target_effects': ['archive.tar_gz.create_from_manifest'], 'capability_inputs': {}})",
+   "deterministic": false,
+   "entrypoint": "run",
+   "module": "canonical/runtime/live_integrated_brain_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.064
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.041
+   },
+   "stem": "live_integrated_brain_v1",
+   "surface": "OK",
+   "test": "test_missing_inputs_localizes_task_contract_compilation_gap",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "evaluate()",
+   "deterministic": false,
+   "entrypoint": "evaluate",
+   "module": "canonical/runtime/livebench_if_generic_isolation_thin_adapter_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.032
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.032
+   },
+   "stem": "livebench_if_generic_isolation_thin_adapter_v1",
+   "surface": "OK",
+   "test": "test_current_state_is_exactly_seven_of_eight",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy15_exact_postvalidator_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "livebench_legacy15_exact_postvalidator_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/livebench_legacy25_single_contract_witness_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "livebench_legacy25_single_contract_witness_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/livebench_ngram_overlap_whitespace_invariant_constructor_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "livebench_ngram_overlap_whitespace_invariant_constructor_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/livebench_ratio_overlap_public_prompt_solver_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "livebench_ratio_overlap_public_prompt_solver_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/local_guide_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "local_guide_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/m3_structured_effect_induction.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "m3_structured_effect_induction",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "construct_nonidentifiability_witness()",
+   "deterministic": false,
+   "entrypoint": "construct_nonidentifiability_witness",
+   "module": "canonical/runtime/m5_causal_identifiability.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.04
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.035
+   },
+   "stem": "m5_causal_identifiability",
+   "surface": "OK",
+   "test": "test_same_observations_distinct_causes",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/margin_bare_nonidentifiability_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "margin_bare_nonidentifiability_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/matched_coding_debug_tool_discovery_fresh_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "matched_coding_debug_tool_discovery_fresh_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "run_all()",
+   "deterministic": false,
+   "entrypoint": "run_all",
+   "module": "canonical/runtime/matched_coding_debug_tool_discovery_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.043
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.042
+   },
+   "stem": "matched_coding_debug_tool_discovery_v1",
+   "surface": "OK",
+   "test": "test_all_four_coding_debug_tool_discovery_cases_pass",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/matched_executable_atom_semantics_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "matched_executable_atom_semantics_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    "subprocess.Popen",
+    []
+   ],
+   "call": "classify_audit_event('subprocess.Popen', ())",
+   "deterministic": false,
+   "entrypoint": "classify_audit_event",
+   "module": "canonical/runtime/material_effect_reference_monitor_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.046
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.043
+   },
+   "stem": "material_effect_reference_monitor_v1",
+   "surface": "OK",
+   "test": "test_audit_event_classifier_catches_material_channels",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/mechanism_discovery_v6.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "mechanism_discovery_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/meta_learning_policy_v9.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "meta_learning_policy_v9",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/meta_strategy_abstraction_v9.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "meta_strategy_abstraction_v9",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/minimum_capability_certificate_cover_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "minimum_capability_certificate_cover_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "verify_information_cut()",
+   "deterministic": false,
+   "entrypoint": "verify_information_cut",
+   "module": "canonical/runtime/minimum_capability_kernel_information_cut_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.036
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.035
+   },
+   "stem": "minimum_capability_kernel_information_cut_v1",
+   "surface": "OK",
+   "test": "test_information_cut_verifier",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/module_invocation_evidence_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "module_invocation_evidence_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/mortality_and_triage_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "mortality_and_triage_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "mysterymechanism_sparse_symbolic_adapter_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/mysterymechanism_sparse_symbolic_adapter_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "mysterymechanism_sparse_symbolic_adapter_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/native_artifact_render_preservation_proof_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "native_artifact_render_preservation_proof_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/objective_oracle_dominance_compiler.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "objective_oracle_dominance_compiler",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/objective_route_promotion_transition.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "objective_route_promotion_transition",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/observation_refutation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "observation_refutation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/oewn_release_sense_universe_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "oewn_release_sense_universe_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/one_shot_reality_closure_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "one_shot_reality_closure_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/operator_acquisition_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "operator_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/option_preserving_capability_optimizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "option_preserving_capability_optimizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_residual_compiler_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "opus55_acceptance_residual_compiler_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/opus55_acceptance_residual_compiler_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "opus55_acceptance_residual_compiler_v3",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    [
+     [
+      1,
+      1
+     ]
+    ],
+    [
+     [
+      1,
+      1,
+      1
+     ]
+    ],
+    [
+     [
+      1
+     ]
+    ]
+   ],
+   "call": "reconstruct_visual_hull([[1, 1]], [[1, 1, 1]], [[1]])",
+   "deterministic": false,
+   "entrypoint": "reconstruct_visual_hull",
+   "module": "canonical/runtime/orthographic_visual_hull.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.042
+   },
+   "run2": {
+    "detail": "'NoneType' object has no attribute '__dict__'",
+    "error": "AttributeError",
+    "ok": false,
+    "seconds": 0.039
+   },
+   "stem": "orthographic_visual_hull",
+   "surface": "OK",
+   "test": "test_dimension_mismatch_fails_closed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/osworld_computer_surface_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_computer_surface_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_sensor_request_bridge_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_sensor_request_bridge_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    {
+     "actions": [
+      {
+       "type": "CLICK",
+       "x": 100,
+       "y": 200
+      }
+     ],
+     "response": "click target"
+    }
+   ],
+   "call": "compile_actions({'response': 'click target', 'actions': [{'type': 'CLICK', 'x': 100, 'y': 200}]})",
+   "deterministic": false,
+   "entrypoint": "compile_actions",
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.044
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.041
+   },
+   "stem": "osworld_v21_brain_agent_adapter_v1",
+   "surface": "OK",
+   "test": "test_action_compilation_exact_pyautogui_surface",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v2.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v2",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v3.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v3",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v4.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v4",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v5.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v5",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v6.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v6",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v7.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v7",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_brain_agent_adapter_v8.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_brain_agent_adapter_v8",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_browser_cdp_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_browser_cdp_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "args": [
+    {
+     "type": "BROWSER_OPEN_URL",
+     "url": "https://example.com/a"
+    }
+   ],
+   "call": "compile_browser_op({'type': 'BROWSER_OPEN_URL', 'url': 'https://example.com/a'})",
+   "deterministic": true,
+   "entrypoint": "compile_browser_op",
+   "module": "canonical/runtime/osworld_v21_browser_ops_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "4bb6facc1467ebd13cb5ef792221762e",
+   "run1": {
+    "digest": "0f4c1577383a1740",
+    "kind": "str",
+    "ok": true,
+    "preview": "\"import asyncio,json,urllib.request,websockets\\nasync def _brain_cdp():\\n    targets=json.load(urllib.request.urlopen('http://127.0.0.1:1337/json/list',timeout=5))\\n    pages=[t for t in targets if t.",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "0f4c1577383a1740",
+    "kind": "str",
+    "ok": true,
+    "preview": "\"import asyncio,json,urllib.request,websockets\\nasync def _brain_cdp():\\n    targets=json.load(urllib.request.urlopen('http://127.0.0.1:1337/json/list',timeout=5))\\n    pages=[t for t in targets if t.",
+    "seconds": 0.033
+   },
+   "stem": "osworld_v21_browser_ops_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/osworld_v21_browser_ops_v1.py",
+    "query": "test open url compiles to fixed cdp bridge: compile_browser_op({'type': 'BROWSER_OPEN_URL', 'url': 'https://example.com/a'})"
+   },
+   "test": "test_open_url_compiles_to_fixed_cdp_bridge",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_constraint_guard_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_constraint_guard_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_generic_policy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_v21_generic_policy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_generic_policy_v2.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_generic_policy_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_generic_policy_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_v21_generic_policy_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_gui_goal_verifier_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_gui_goal_verifier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_app_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_app_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_browser_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_browser_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_code_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_code_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_guest_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_guest_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_media_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_media_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_host_web_app_ops_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_host_web_app_ops_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_local_qwen_policy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_v21_local_qwen_policy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_positioned_ocr_observer_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_positioned_ocr_observer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_qwen35_planner_v1.py",
+   "outcome": "NO_PUBLIC_FUNCTION",
+   "stem": "osworld_v21_qwen35_planner_v1",
+   "surface": "NO_PUBLIC_FUNCTION"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_web_app_policy_overlay_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_v21_web_app_policy_overlay_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_v21_workflow_policy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v10.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v10",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v2.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v4.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v6.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v7.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v7",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v8.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v8",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_workflow_policy_v9.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_workflow_policy_v9",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_v21_zero_model_policy_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "osworld_v21_zero_model_policy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/osworld_verified_task_ledger_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "osworld_verified_task_ledger_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "stochastic_reliability_countermodel()",
+   "deterministic": true,
+   "entrypoint": "stochastic_reliability_countermodel",
+   "module": "canonical/runtime/outcome_frontier_stochastic_countermodel_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "2f2fa591afe5e747734bba25cc34f53b",
+   "run1": {
+    "digest": "b05013bd47eb737d",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"brain_success_probability\": 0.51, \"countermodel_valid\": true, \"opus_success_probability\": 0.99, \"point_frontier_simulation_passes\": true, \"same_outcome_support\": true, \"same_point_pareto_frontier\": ",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "b05013bd47eb737d",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"brain_success_probability\": 0.51, \"countermodel_valid\": true, \"opus_success_probability\": 0.99, \"point_frontier_simulation_passes\": true, \"same_outcome_support\": true, \"same_point_pareto_frontier\": ",
+    "seconds": 0.034
+   },
+   "stem": "outcome_frontier_stochastic_countermodel_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/outcome_frontier_stochastic_countermodel_v1.py",
+    "query": "test same support can hide large reliability gap: stochastic_reliability_countermodel()"
+   },
+   "test": "test_same_support_can_hide_large_reliability_gap",
+   "test_doc": ""
+  },
+  {
+   "args": [
+    "import requests\n"
+   ],
+   "call": "audit_source('import requests\\n')",
+   "deterministic": false,
+   "entrypoint": "audit_source",
+   "module": "canonical/runtime/ownership_promotion_compiler_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.041
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.038
+   },
+   "stem": "ownership_promotion_compiler_v1",
+   "surface": "OK",
+   "test": "test_external_provider_import_fails_closed",
+   "test_doc": ""
+  },
+  {
+   "args": [],
+   "call": "v4_dropped_provenance_counterexample()",
+   "deterministic": false,
+   "entrypoint": "v4_dropped_provenance_counterexample",
+   "module": "canonical/runtime/p1_composite_proof_counterexample_audit_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.034
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.031
+   },
+   "stem": "p1_composite_proof_counterexample_audit_v1",
+   "surface": "OK",
+   "test": "test_v4_drop_provenance_mutation_survives_current_scorer",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/p1_composite_proof_role_verifier_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "p1_composite_proof_role_verifier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/p1_shared_failure_semantics_batch_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "p1_shared_failure_semantics_batch_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/p1_v5_direct_surface_scope_superset_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "p1_v5_direct_surface_scope_superset_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "evaluate()",
+   "deterministic": false,
+   "entrypoint": "evaluate",
+   "module": "canonical/runtime/p1_v6_derived_only_counterexample_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.032
+   },
+   "run2": {
+    "detail": "No module named 'canonical'",
+    "error": "ModuleNotFoundError",
+    "ok": false,
+    "seconds": 0.03
+   },
+   "stem": "p1_v6_derived_only_counterexample_v1",
+   "surface": "OK",
+   "test": "test_v6_overclaims_derived_only_failure_and_its_repair_does_not_rescue",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/p2_membership_residual_localizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "p2_membership_residual_localizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/perfect_algorithm_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "perfect_algorithm_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/permanence_amplifies_check_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "permanence_amplifies_check_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/picker_answer_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "picker_answer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/procedure_memory_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "procedure_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_quality_semantic_admission_binder_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_quality_semantic_admission_binder_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_r12_safe_certification_disposition_claim_verify_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_r12_safe_certification_disposition_claim_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_r12_v9_policy_cover_totality_semantic_verify_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_r12_v9_policy_cover_totality_semantic_verify_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_r12_v9_policy_cover_totality_semantic_verify_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_identity_carrier_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_semantic_identity_carrier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_identity_carrier_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_semantic_identity_carrier_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_totality_claim_pack_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_semantic_totality_claim_pack_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/professional_semantic_v10_totality_compiler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "professional_semantic_v10_totality_compiler_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/program_synthesis_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "program_synthesis_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_domain_mapping_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_carrying_domain_mapping_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_live_manifest_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_carrying_live_manifest_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_carrying_semantic_refinement_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_carrying_semantic_refinement_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_carrying_semantic_refinement_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v4.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "proof_carrying_semantic_refinement_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v5.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "proof_carrying_semantic_refinement_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_carrying_semantic_refinement_v6.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "proof_carrying_semantic_refinement_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/proof_obligation_delta_compiler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "proof_obligation_delta_compiler_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/provisional_repair_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "provisional_repair_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/public_source_federation_executor_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "public_source_federation_executor_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/python_library_contract_inference.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "python_library_contract_inference",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_authority_candidate_materialization_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_authority_candidate_materialization_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_basis_discriminator_repair_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_basis_discriminator_repair_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_direct_route_dynamic_admission_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "r2_direct_route_dynamic_admission_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_docx_json_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_docx_json_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_existing_policy_adequacy_repair_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_existing_policy_adequacy_repair_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_markdown_pdf_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_markdown_pdf_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_pypi_provenance_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_pypi_provenance_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_regcap_authority_candidate_adapter_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_regcap_authority_candidate_adapter_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_ror_authority_identity_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_ror_authority_identity_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_semantic_residual_ledger_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_semantic_residual_ledger_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_structured_binary_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_structured_binary_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r2_structured_table_direct_adequacy_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r2_structured_table_direct_adequacy_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_checkpoint_reconstruction_success_adapter_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_checkpoint_reconstruction_success_adapter_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_deterministic_mapping_guard_patch_author_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_deterministic_mode_guard_patch_author_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_distinguishing_evidence_acquisition_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_distinguishing_evidence_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_improvement_queue_driver_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_improvement_queue_driver_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_independent_learning_verifier_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_independent_learning_verifier_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_retained_distinguishing_evidence_provider_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_retained_distinguishing_evidence_provider_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_structural_bound_rule_acquisition_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "r3_structural_bound_rule_acquisition_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_structural_bound_success_adapter_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "r3_structural_bound_success_adapter_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_success_adapter_patch_author_wrapper_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_success_adapter_patch_author_wrapper_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/r3_success_adapter_patch_firewall_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "r3_success_adapter_patch_firewall_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/raw_goal_trace_acceptance_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "raw_goal_trace_acceptance_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "raw_task_acceptance_residual_localizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/reached_escape_finite_totality_certificate_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "reached_escape_finite_totality_certificate_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/reached_escape_repair_cycle_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "reached_escape_repair_cycle_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/recursive_abstraction_v5.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "recursive_abstraction_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/referent_dependence_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "referent_dependence_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/regcap_four_way_authority_candidate_observation_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "regcap_four_way_authority_candidate_observation_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/regcap_local_appositive_identity_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "regcap_local_appositive_identity_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/regression_sweep_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "regression_sweep_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    55563006776
+   ],
+   "call": "planned_chunk_count(55563006776)",
+   "deterministic": true,
+   "entrypoint": "planned_chunk_count",
+   "module": "canonical/runtime/release_chunk_archive_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "4c705cfa37bc18b74336329e2a29c52b",
+   "run1": {
+    "digest": "624b60c58c9d8bfb",
+    "kind": "int",
+    "ok": true,
+    "preview": "30",
+    "seconds": 0.036
+   },
+   "run2": {
+    "digest": "624b60c58c9d8bfb",
+    "kind": "int",
+    "ok": true,
+    "preview": "30",
+    "seconds": 0.033
+   },
+   "stem": "release_chunk_archive_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/release_chunk_archive_v1.py",
+    "query": "test asset limit is strictly respected: planned_chunk_count(55563006776)"
+   },
+   "test": "test_asset_limit_is_strictly_respected",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/requirement_graph_kernel.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "requirement_graph_kernel",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/research_control_information_safe_proof.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "research_control_information_safe_proof",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/reserve_bare_nonidentifiability_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "reserve_bare_nonidentifiability_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/residual_witness_backend_router_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "residual_witness_backend_router_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/residual_witness_retrieval_compiler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "residual_witness_retrieval_compiler_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [],
+   "call": "compile_registry()",
+   "deterministic": false,
+   "entrypoint": "compile_registry",
+   "module": "canonical/runtime/root3_child_process_channel_registry_v1.py",
+   "outcome": "CALL_ERROR",
+   "run1": {
+    "detail": "ASTRA_RUNTIME_BLOB_DRIFT",
+    "error": "ChildProcessRegistryError",
+    "ok": false,
+    "seconds": 0.039
+   },
+   "run2": {
+    "detail": "ASTRA_RUNTIME_BLOB_DRIFT",
+    "error": "ChildProcessRegistryError",
+    "ok": false,
+    "seconds": 0.037
+   },
+   "stem": "root3_child_process_channel_registry_v1",
+   "surface": "OK",
+   "test": "test_current_whole_runtime_child_process_universe_is_exactly_18",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/root3_declared_artifact_finalizer_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "root3_declared_artifact_finalizer_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/root3_effect_broker_bridge_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "root3_effect_broker_bridge_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/safe_adaptive_experiment_synthesizer_v6.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "safe_adaptive_experiment_synthesizer_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/same_identity_supervisor.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "same_identity_supervisor",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/same_identity_supervisor_credited_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "same_identity_supervisor_credited_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/scan_and_diff_against_memory_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "scan_and_diff_against_memory_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/scientific_semantic_compiler_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "scientific_semantic_compiler_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/self_prediction_baseline_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "self_prediction_baseline_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/self_prediction_calibration_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "self_prediction_calibration_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/semantic_operator_counterfactuals.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "semantic_operator_counterfactuals",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/semantic_pair_nonidentifiability_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "semantic_pair_nonidentifiability_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/semantic_relation_entailment_dag_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "semantic_relation_entailment_dag_v1",
+   "surface": "OK"
+  },
+  {
+   "args": [
+    {
+     "truth_kind": "MAGIC_TRUTH"
+    }
+   ],
+   "call": "evaluate({'truth_kind': 'MAGIC_TRUTH'})",
+   "deterministic": true,
+   "entrypoint": "evaluate",
+   "module": "canonical/runtime/semantic_truth_dispatch_v1.py",
+   "outcome": "SURVIVES",
+   "receipt": "d200dbe52a553ebf303f7a2ce98e3a74",
+   "run1": {
+    "digest": "f53e4ebd3e5871f2",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"pass\": false, \"predicate_truth\": \"UNKNOWN\", \"reason\": \"TRUTH_KIND_UNSUPPORTED:MAGIC_TRUTH\", \"schema\": \"PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1\", \"status\": \"FAIL_CLOSED\", \"terminal_authority\": false",
+    "seconds": 0.035
+   },
+   "run2": {
+    "digest": "f53e4ebd3e5871f2",
+    "kind": "dict",
+    "ok": true,
+    "preview": "{\"pass\": false, \"predicate_truth\": \"UNKNOWN\", \"reason\": \"TRUTH_KIND_UNSUPPORTED:MAGIC_TRUTH\", \"schema\": \"PROJECT_BRAIN_SEMANTIC_TRUTH_DISPATCH_V1\", \"status\": \"FAIL_CLOSED\", \"terminal_authority\": false",
+    "seconds": 0.032
+   },
+   "stem": "semantic_truth_dispatch_v1",
+   "surface": "OK",
+   "target": {
+    "module": "canonical/runtime/semantic_truth_dispatch_v1.py",
+    "query": "test unknown kind fails closed: evaluate({'truth_kind': 'MAGIC_TRUTH'})"
+   },
+   "test": "test_unknown_kind_fails_closed",
+   "test_doc": ""
+  },
+  {
+   "module": "canonical/runtime/settlement_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "settlement_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/shared_decision_primitives.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "shared_decision_primitives",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/skill_receipt_authenticator_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "skill_receipt_authenticator_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_deontic_extension_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_deontic_extension_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_participial_disposition_proof_v1.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_participial_disposition_proof_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_regcap_context_proof_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_regcap_context_proof_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_edge_authority_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_edge_authority_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v1.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v1",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v10.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v10",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v11.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v11",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v12.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v12",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v13.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v13",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v14.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v14",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v14_registry_base.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v14_registry_base",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v15.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v15",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v15_registry_base.py",
+   "outcome": "NO_TEST_FILE",
+   "stem": "source_aligned_semantic_proof_v15_registry_base",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v2.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v2",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v3.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v3",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v4.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v4",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v5.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v5",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v6.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v6",
+   "surface": "OK"
+  },
+  {
+   "module": "canonical/runtime/source_aligned_semantic_proof_v7.py",
+   "outcome": "NO_LITERAL_CALL_IN_TEST",
+   "stem": "source_aligned_semantic_proof_v7",
+   "surface": "OK"
+  }
+ ],
+ "schema": "PROJECT_BRAIN_AST_ADAPTER_DERIVATION_V1",
+ "survival_rate": 0.037,
+ "survivors": 15,
+ "verdict": "KILLED"
+}

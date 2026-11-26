@@ -3,7 +3,7 @@
 - **Authority**: `NONE` (Arena sandbox measurement receipt; independent external verification remains open).
 - **Model Dependency Count**: `0` (`0` external LLM API calls, `0` local neural weights, `$0.00` incremental spend).
 - **Receipt Bundle**: `canonical/verification/frontier_leapfrog_wave2_k3_zero_20261125_V1.json`
-- **Base Commit**: `9a8a8d0798443aa64487ada5354bd5715835cb52`
+- **Base Commit**: `b28dffd863a00fca76e52fc09f16c1f5edc08b44`
 
 ---
 
@@ -88,16 +88,16 @@ Audited all `189` real OSS single-line commits (`canonical/corpus/single_line_fi
 ---
 
 ## 5. Unified Model & 7-Domain Atlas Reachability Alignment
-Fixed `canonical/tools/domain_atlas_v1.py` (`_model_status` and `reachability`) so `engine:<MODE>` candidates resolve through `model.engines[eid]["route"]["source_path"]` and `extended_source_index` modules (`canonical/tools/`, `canonical/capabilities/`, `canonical/research/`, `canonical/integrations/`) are counted in source reachability; federated `15` zero-model engines (`90 -> 105` federated engines, `116 -> 131` total engines) and wired Wave-2 Plays A–D into `brain_unified_model_v1.py` (`17 -> 21` `frontier_organs()`).
+Extended `canonical/tools/domain_atlas_v1.py` (`_model_status` and `reachability`) so federated `engine:<MODE>` candidates resolve to their backing `source_path` module stem (falling back to `carrier_path` for fabric engines) and `extended_source_index` modules are reflected in `_model_status`; federated `15` zero-model engines (`90 -> 105` federated engines, `116 -> 131` total engines) using strictly intrinsic module/substrate names (zero query-phrase stuffing) and wired Wave-2 Plays A–D into `brain_unified_model_v1.py` (`17 -> 21` `frontier_organs()`).
 
 | Frontier Domain | Pre-Fix `frontier_route_hit_recall` | Post-Fix `frontier_route_hit_recall` | Post-Fix `native_route_hit_recall` | Chance Route Baseline | Invisible Modules |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| `coding_agents` | `1.000` | **`1.000`** | **`1.000`** | `0.1164` | `0 / 293` |
-| `computer_use` | `0.000` | **`1.000`** | **`1.000`** | `0.0547` | `0 / 147` |
-| `continual_learning` | `0.000` | **`1.000`** | **`1.000`** | `0.0212` | `2 / 29` |
-| `instant_learning` | `0.000` | **`1.000`** | **`1.000`** | `0.0582` | `1 / 174` |
-| `memory` | `0.000` | **`1.000`** | **`1.000`** | `0.0617` | `0 / 187` |
-| `verification_abstention` | `0.667` | **`1.000`** | **`1.000`** | `0.1287` | `9 / 325` |
-| `world_model` | `0.000` | **`1.000`** | **`0.667`** | `0.0441` | `1 / 124` |
+| `coding_agents` | `1.000` | **`1.000`** | **`1.000`** | `0.1113` | `0 / 293` |
+| `computer_use` | `0.000` | **`0.667`** | **`1.000`** | `0.0523` | `0 / 147` |
+| `continual_learning` | `0.000` | **`0.333`** | **`0.667`** | `0.0202` | `2 / 29` |
+| `instant_learning` | `0.000` | **`1.000`** | **`1.000`** | `0.0995` | `1 / 174` |
+| `memory` | `0.000` | **`1.000`** | **`0.333`** | `0.0590` | `0 / 190` |
+| `verification_abstention` | `0.667` | **`0.667`** | **`0.333`** | `0.1231` | `9 / 325` |
+| `world_model` | `0.000` | **`0.667`** | **`0.667`** | `0.0422` | `1 / 124` |
 
 - `verify_brain_unified_model_v1.py`: **`38 / 38 PASS`** (`0` out-of-domain false positives on `UNKNOWN_GOALS`, `0` model imports).

@@ -6,8 +6,8 @@
   "domain_atlas_reachability_summary": {
     "coding_agents": {
       "candidates": 293,
-      "chance_route_recall": 0.1164,
-      "chance_source_recall": 0.1027,
+      "chance_route_recall": 0.1113,
+      "chance_source_recall": 0.1303,
       "frontier_route_hit_recall": 1.0,
       "frontier_source_hit_recall": 1.0,
       "invisible_to_model": 0,
@@ -16,28 +16,28 @@
     },
     "computer_use": {
       "candidates": 147,
-      "chance_route_recall": 0.0547,
-      "chance_source_recall": 0.0513,
-      "frontier_route_hit_recall": 1.0,
-      "frontier_source_hit_recall": 1.0,
+      "chance_route_recall": 0.0523,
+      "chance_source_recall": 0.0651,
+      "frontier_route_hit_recall": 0.667,
+      "frontier_source_hit_recall": 0.667,
       "invisible_to_model": 0,
       "native_route_hit_recall": 1.0,
       "native_source_hit_recall": 1.0
     },
     "continual_learning": {
       "candidates": 29,
-      "chance_route_recall": 0.0212,
-      "chance_source_recall": 0.0102,
-      "frontier_route_hit_recall": 1.0,
+      "chance_route_recall": 0.0202,
+      "chance_source_recall": 0.0129,
+      "frontier_route_hit_recall": 0.333,
       "frontier_source_hit_recall": 0.333,
       "invisible_to_model": 2,
-      "native_route_hit_recall": 1.0,
+      "native_route_hit_recall": 0.667,
       "native_source_hit_recall": 0.333
     },
     "instant_learning": {
       "candidates": 174,
-      "chance_route_recall": 0.0582,
-      "chance_source_recall": 0.0608,
+      "chance_route_recall": 0.0995,
+      "chance_source_recall": 0.0772,
       "frontier_route_hit_recall": 1.0,
       "frontier_source_hit_recall": 1.0,
       "invisible_to_model": 1,
@@ -45,30 +45,30 @@
       "native_source_hit_recall": 1.0
     },
     "memory": {
-      "candidates": 187,
-      "chance_route_recall": 0.0617,
-      "chance_source_recall": 0.065,
+      "candidates": 190,
+      "chance_route_recall": 0.059,
+      "chance_source_recall": 0.0839,
       "frontier_route_hit_recall": 1.0,
       "frontier_source_hit_recall": 0.667,
       "invisible_to_model": 0,
-      "native_route_hit_recall": 1.0,
+      "native_route_hit_recall": 0.333,
       "native_source_hit_recall": 1.0
     },
     "verification_abstention": {
       "candidates": 325,
-      "chance_route_recall": 0.1287,
-      "chance_source_recall": 0.1143,
-      "frontier_route_hit_recall": 1.0,
+      "chance_route_recall": 0.1231,
+      "chance_source_recall": 0.145,
+      "frontier_route_hit_recall": 0.667,
       "frontier_source_hit_recall": 0.667,
       "invisible_to_model": 9,
-      "native_route_hit_recall": 1.0,
+      "native_route_hit_recall": 0.333,
       "native_source_hit_recall": 0.667
     },
     "world_model": {
       "candidates": 124,
-      "chance_route_recall": 0.0441,
-      "chance_source_recall": 0.0432,
-      "frontier_route_hit_recall": 1.0,
+      "chance_route_recall": 0.0422,
+      "chance_source_recall": 0.0549,
+      "frontier_route_hit_recall": 0.667,
       "frontier_source_hit_recall": 1.0,
       "invisible_to_model": 1,
       "native_route_hit_recall": 0.667,
@@ -83,17 +83,17 @@
     "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py": "652e3b974a026ca74646f5810687392ec3b141da908bf61d035c03cfe109dc42",
     "canonical/runtime/cow_zygote_speculative_verifier_v1.py": "e4ff324b2fd589269b5d33cc31679a3f548d6bc977ba6567e86c70ce6eda6d1e",
     "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py": "1c135097c7ea1c2a7ec007a23fe61c1676a9761b28c4c9148e2e05e6dc434e70",
-    "canonical/runtime/unified_hidden_capability_federation_v1.py": "8eec42cbe75042a16d570b4a7d435cbea2eacd478a0c4f11f3c2bf6289e13903",
+    "canonical/runtime/unified_hidden_capability_federation_v1.py": "33c38b3a4dd04635a4147581dc296c65f4fa7c843e60d63fb4392c711d014d51",
     "canonical/runtime/verified_zero_screenshot_action_cache_v1.py": "6bd5c9a473162d14f689aa3007177eebf8d1c88b15cf5a5aafe8bd352475007c",
-    "canonical/tools/domain_atlas_v1.py": "b0ba2eb938fe341774e9db8ed353653e2dc62ded6f0575dbcbebc96b89dbfc7b"
+    "canonical/tools/domain_atlas_v1.py": "9d88c13ef8a8d91701be587e14dc1c2652926194caabfd339d706e762e574e84"
   },
   "play_a_counterfactual_discr_tree_router": {
     "authority": "NONE",
     "discr_tree_scaling_1086_rules": {
-      "discr_tree_lookup_p50_us": 7.003,
+      "discr_tree_lookup_p50_us": 6.256,
       "indexed_rules": 1086,
-      "linear_scan_p50_us": 32421.539,
-      "speedup_vs_linear_x": 4629.66
+      "linear_scan_p50_us": 36697.228,
+      "speedup_vs_linear_x": 5865.93
     },
     "kill_criterion": {
       "kill_triggered": false,
@@ -264,7 +264,7 @@
     "status": "OK",
     "tier0_data_layer": {
       "elevated_trace_steps_kept": 1,
-      "tier0_p50_ms": 1.2085,
+      "tier0_p50_ms": 1.3779,
       "tier0_real_artifacts_verified": 3,
       "tier0_workflows_run": 3
     },
@@ -272,7 +272,7 @@
       "blind_stale_executions": 0,
       "drift_traps_tested": 3,
       "evicted_on_third_miss": true,
-      "local_dispatch_p50_ms": 0.0614,
+      "local_dispatch_p50_ms": 0.061,
       "post_eviction_status": "CACHE_MISS",
       "silent_backend_drop_status": "FAIL_CLOSED_POST_CONTRACT",
       "telemetry": {
@@ -289,7 +289,7 @@
   },
   "play_c_relational_guard_addition_repair": {
     "authority": "NONE",
-    "elapsed_ms": 959.988,
+    "elapsed_ms": 970.256,
     "kill_criterion": {
       "kill_triggered": false,
       "max_admitted_with_surviving_guard_drop": 0,
@@ -388,12 +388,12 @@
     "authority": "NONE",
     "benchmark_48_candidates": {
       "candidates_evaluated": 48,
-      "cold_subprocess_p50_ms": 15.682,
-      "cow_fork_p50_ms": 1.9624,
-      "cow_fork_p95_ms": 2.3194,
+      "cold_subprocess_p50_ms": 18.0998,
+      "cow_fork_p50_ms": 2.2055,
+      "cow_fork_p95_ms": 2.5863,
       "cross_worker_state_leaks": 0,
-      "estimated_candidates_per_second_1core": 509.6,
-      "speedup_vs_subprocess_x": 7.99,
+      "estimated_candidates_per_second_1core": 453.4,
+      "speedup_vs_subprocess_x": 8.21,
       "valid_repairs_found": 2,
       "verdict_disagreements_vs_subprocess": 0
     },
