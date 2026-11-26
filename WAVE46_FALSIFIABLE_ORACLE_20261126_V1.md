@@ -619,3 +619,70 @@ not fail, a benchmark whose rows already passed, a classifier whose labels moved
 with the regexes, and a harness that measured its own process state. Each was
 found by trying to break my own result rather than by reading the code, and two of
 them were my results from earlier in the same session.
+
+---
+
+# Wave 46h — The stated-output guard, implemented and measured
+
+## 24. What was built
+
+`§22` sharpened the guard to: *if the sentence names an output path and no file
+exists there at completion, drop the certification.* Implemented as
+`_refuse_unwritten_stated_output` in `live_integrated_brain_v1`, reusing the
+door's existing refusal vocabulary (`FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN`
+sits beside `FAIL_CLOSED__STATED_ANSWER_NOT_PROVIDED`).
+
+## 25. Three wrong attempts, each caught by measurement not reading
+
+1. **Guarded the wrong return site.** The first version patched the single-goal
+   return. It had no effect. A spy on the helper showed **0 calls**: the
+   compound-goal branch sets the same certified status and returns *earlier*
+   (L1307). Patching one of two sites that emit the same verdict is the same class
+   of error as the original bug.
+2. **Built on the wrong predicate.** I reused the door's `_stated_paths`, which
+   reports paths the sentence names *and the tree already contains* — exactly
+   wrong for an output file, which by definition does not exist yet. It returned
+   `[]` and the guard silently never fired. The extraction is now its own regex
+   over the stated target.
+3. **Trusted a flattering harness.** Re-running the 23-goal sweep showed
+   "0/23 certified", which looked like a clean win. It is the *same invalid
+   harness* discarded in `§20` — after it runs one goal, every later run in the
+   process fails with `FAIL__LIVE_CONTROLLER_EXECUTION`, so 0/23 measures harness
+   breakage, not the guard. Not used as evidence.
+
+## 26. Evidence the guard works, and does not over-refuse
+
+Direct, single-goal, in the repo's own door:
+
+| case | before | after |
+|---|---|---|
+| fault localization asking for `<dir>/r.json`, absent | `PASS__..._EXACT_SEMANTIC_ACCEPTANCE_VERIFIED`, `pass=True` | `FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN`, `pass=False` |
+| same, with `r.json` actually written | pass | pass (untouched) |
+| goal with no write verb | pass | pass (untouched) |
+| already-failing result | its own failure | unchanged |
+
+Four unit tests pin those four rows, plus three "must not be refused" rows.
+
+Regression: `test_wave46` **37/37**; `test_front_door_selection_parity_v1` 25/25;
+`test_raw_goal_archive_compound_acceptance_v1` 13/13;
+`test_raw_goal_exact_literal_acceptance_v1` 3/3; plus the
+spine / leapfrog / six-moves / asymmetric suites green.
+`test_acceptance_clause_front_door_v1` (3F) and
+`test_front_door_task_bound_contracts_v1` (1E) fail **identically at base
+`ac5c1015`** — pre-existing, not caused by this change.
+
+## 27. What this does and does not fix
+
+**Fixes:** the door can no longer certify a run that skipped a file the sentence
+explicitly asked for. That is one concrete lie removed from the success signal.
+
+**Does not fix:** the mutation-score misroute. A sentence asking for a mutation
+score still selects `source.objective_relevance.rank.bm25`, and now it may fail
+the output guard only because it wrote no file — the *selection* defect is
+untouched. The ownership predicate `§17` describes is still missing, and it is
+still the right next step: the guard I can implement today is a postcondition
+check, not a semantic ownership check. Saying otherwise would be the overclaim I
+already had to retract once in `§19`.
+
+Status after this wave: 37/37 on the wave-46 suite, eight suites green, all
+pushed. Frontier benchmarks still unrun (`docker` absent), Hard-51 0/51, §6 unmet.

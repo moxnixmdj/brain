@@ -453,6 +453,64 @@ class FormatVersusDataTests(unittest.TestCase):
         self.assertEqual(reason, "TEST_LITERAL_LEAK")
 
 
+class StatedOutputPostconditionTests(unittest.TestCase):
+    """A sentence that names a file to write must not certify without it.
+
+    Measured 2026-11-26 in a clean process: "Localize the fault in the python
+    source root <dir> using the tests and write the report to <dir>/r.json"
+    returned PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED while
+    r.json was never created in either the fixture dir or ROOT. Semantic
+    acceptance cannot certify a run whose own stated output is absent.
+    """
+
+    GOAL = "Localize the fault in {d} using the tests and write the report to {d}/r.json"
+
+    def test_a_written_stated_output_is_not_refused(self) -> None:
+        from canonical.runtime import live_integrated_brain_v1 as lib
+
+        with tempfile.TemporaryDirectory() as td:
+            target = pathlib.Path(td) / "r.json"
+            target.write_text("{}", encoding="utf-8")
+            goal = self.GOAL.format(d=td)
+            self.assertEqual(lib._stated_output_paths_unwritten(goal, lib.ROOT), [])
+            result = {"pass": True, "status": "PASS__X"}
+            self.assertFalse(lib._refuse_unwritten_stated_output(result, goal, lib.ROOT))
+            self.assertEqual(result["status"], "PASS__X")
+
+    def test_an_absent_stated_output_is_refused(self) -> None:
+        from canonical.runtime import live_integrated_brain_v1 as lib
+
+        with tempfile.TemporaryDirectory() as td:
+            goal = self.GOAL.format(d=td)
+            self.assertEqual(
+                lib._stated_output_paths_unwritten(goal, lib.ROOT), [f"{td}/r.json"]
+            )
+            result = {"pass": True, "status": "PASS__RAW_GOAL_EXECUTED_AND_EXACT_SEMANTIC_ACCEPTANCE_VERIFIED"}
+            self.assertTrue(lib._refuse_unwritten_stated_output(result, goal, lib.ROOT))
+            self.assertFalse(result["pass"])
+            self.assertEqual(result["status"], "FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN")
+
+    def test_a_goal_that_writes_nothing_is_untouched(self) -> None:
+        """No write verb, no postcondition: the guard must not invent one."""
+        from canonical.runtime import live_integrated_brain_v1 as lib
+
+        goal = "Localize the fault in /tmp/nowhere using the tests"
+        result = {"pass": True, "status": "PASS__X"}
+        self.assertFalse(lib._refuse_unwritten_stated_output(result, goal, lib.ROOT))
+        self.assertEqual(result["status"], "PASS__X")
+
+    def test_a_failing_result_is_not_relabelled(self) -> None:
+        """The guard demotes a certified pass; it must not touch honest failures."""
+        from canonical.runtime import live_integrated_brain_v1 as lib
+
+        with tempfile.TemporaryDirectory() as td:
+            result = {"pass": False, "status": "FAIL__SOMETHING_ELSE"}
+            self.assertFalse(
+                lib._refuse_unwritten_stated_output(result, self.GOAL.format(d=td), lib.ROOT)
+            )
+            self.assertEqual(result["status"], "FAIL__SOMETHING_ELSE")
+
+
 class ModelArtefactCurrentnessTests(unittest.TestCase):
     """A digest is a claim about a specific tree; it must match one."""
 
