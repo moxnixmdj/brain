@@ -108,6 +108,7 @@
     "finance_agent_v2_keyless_public_tools_v1",
     "first_principles_mental_cegis_v1",
     "force_the_value_and_see_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "futamura_leapfrog_kernel_v1",
@@ -313,9 +314,9 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 309,
+   "candidates": 310,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 110,
+   "harvested_all": 111,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -760,7 +761,7 @@
      ],
      "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
      "score": 24.5,
-     "sha256": "f3a502a700dbc31b",
+     "sha256": "4184dc83766c368a",
      "source_index": true,
      "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
@@ -1500,6 +1501,7 @@
     "derived_value_measure_v1",
     "domain_mapping_truth_certificate_v1",
     "exact_stated_geometry_measure_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "futamura_leapfrog_kernel_v1",
     "gradient_free_law_consolidation_v1",
@@ -1523,9 +1525,9 @@
     "verified_skill_crystallizer_v1",
     "wave40_dark_matter_frontier_kernel_v1"
    ],
-   "candidates": 38,
+   "candidates": 39,
    "frontier_function": "keep improving without forgetting or drifting",
-   "harvested_all": 13,
+   "harvested_all": 14,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -1654,7 +1656,7 @@
      ],
      "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
      "score": 8.75,
-     "sha256": "f3a502a700dbc31b",
+     "sha256": "4184dc83766c368a",
      "source_index": true,
      "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
@@ -1715,7 +1717,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "5be50569fac77eea",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1988,6 +1990,7 @@
     "finite_index_grid_operator_inducer_v1",
     "first_principles_mental_cegis_v1",
     "forged_binding_and_macro_spine_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "futamura_leapfrog_kernel_v1",
     "generalization_rung_gradient_v1",
@@ -2126,9 +2129,9 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 190,
+   "candidates": 191,
    "frontier_function": "adapt from one episode without touching weights",
-   "harvested_all": 69,
+   "harvested_all": 70,
    "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -2173,7 +2176,7 @@
      ],
      "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
      "score": 29.75,
-     "sha256": "f3a502a700dbc31b",
+     "sha256": "4184dc83766c368a",
      "source_index": true,
      "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
@@ -2353,7 +2356,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 22.25,
-     "sha256": "5be50569fac77eea",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2708,6 +2711,7 @@
     "force_the_value_and_see_v1",
     "forged_binding_and_macro_spine_v1",
     "frames_that_cross_machines_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "futamura_leapfrog_kernel_v1",
     "github_public_retrieval_provider_v1",
@@ -2841,9 +2845,9 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 200,
+   "candidates": 201,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 52,
+   "harvested_all": 53,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -3024,7 +3028,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.5,
-     "sha256": "5be50569fac77eea",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3219,7 +3223,7 @@
      ],
      "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
      "score": 12.75,
-     "sha256": "f3a502a700dbc31b",
+     "sha256": "4184dc83766c368a",
      "source_index": true,
      "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
@@ -3463,6 +3467,7 @@
     "finance_bounded_concept_registry_verify_v1",
     "finite_probe_nonidentifiability_certificate_v1",
     "first_principles_mental_cegis_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "futamura_leapfrog_kernel_v1",
@@ -3684,9 +3689,9 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 340,
+   "candidates": 341,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 62,
+   "harvested_all": 63,
    "harvested_executable_top": 4,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -4109,7 +4114,7 @@
      ],
      "path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
      "score": 14.75,
-     "sha256": "f3a502a700dbc31b",
+     "sha256": "4184dc83766c368a",
      "source_index": true,
      "summary": "Unified Five-Pillar Frontier Kernel V1 \u2014 Zero-Adapter, Sub-Millisecond `K3 = 0` Unification."
     },
@@ -4244,6 +4249,7 @@
     "finite_grid_program_inducer_v1",
     "finite_index_grid_operator_inducer_v1",
     "first_principles_mental_cegis_v1",
+    "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
     "frontier_unified_engine_v1",
     "futamura_leapfrog_kernel_v1",
@@ -4334,9 +4340,9 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 139,
+   "candidates": 140,
    "frontier_function": "predict what an action does before doing it",
-   "harvested_all": 42,
+   "harvested_all": 43,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
@@ -4699,7 +4705,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "5be50569fac77eea",
+     "sha256": "93c79f7b439f15b2",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4841,13 +4847,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3335,
+ "modules_scanned": 3336,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1977,
-   "chance_source_recall": 0.1362,
+   "chance_route_recall": 0.1988,
+   "chance_source_recall": 0.1366,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4994,7 +5000,7 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0635,
+   "chance_route_recall": 0.0634,
    "chance_source_recall": 0.0676,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5139,8 +5145,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0548,
-   "chance_source_recall": 0.0168,
+   "chance_route_recall": 0.0562,
+   "chance_source_recall": 0.0172,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 1.0,
@@ -5286,8 +5292,8 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1688,
-   "chance_source_recall": 0.0836,
+   "chance_route_recall": 0.17,
+   "chance_source_recall": 0.084,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5434,8 +5440,8 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.1356,
-   "chance_source_recall": 0.0875,
+   "chance_route_recall": 0.1369,
+   "chance_source_recall": 0.088,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5582,8 +5588,8 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.1977,
-   "chance_source_recall": 0.1503,
+   "chance_route_recall": 0.1988,
+   "chance_source_recall": 0.1508,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5728,8 +5734,8 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.114,
-   "chance_source_recall": 0.061,
+   "chance_route_recall": 0.1153,
+   "chance_source_recall": 0.0615,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5854,8 +5860,8 @@
      "route_hit": true,
      "routed_hit": [
       "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
-      "engine:LEAPFROG_W40_ONESHOT_VERSION_SPACE_LEARNER",
-      "engine:AUTONOMOUS_AWAKE_LOOP"
+      "engine:LEAPFROG_W40_FRONTIER_BENCH_HARNESS",
+      "engine:LEAPFROG_W40_ONESHOT_VERSION_SPACE_LEARNER"
      ],
      "routed_top": [
       "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
