@@ -31357,9 +31357,9 @@
   "capabilities": 449,
   "engines": 26,
   "harvested_admitted": 0,
-  "harvested_capabilities": 626,
+  "harvested_capabilities": 627,
   "harvested_contract_surfaces": 40,
-  "harvested_program_surfaces": 586,
+  "harvested_program_surfaces": 587,
   "knowledge_documents": 738,
   "receipt_backed_capabilities": 296,
   "research_index_records": 7396,
@@ -31371,7 +31371,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "590620830ebfc75669b044d0b77c1fa0d20b39382ba306bd20da8ac25576e038"
+  "value": "87648059e01634c134d7c374a41fd9b9917bbfa389da31ed7bb32b10d06ba0f8"
  },
  "engines": [
   {
@@ -116841,10 +116841,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2170,
+  "included_source_count": 2171,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "05df6a9df9f12528a9af31cebdab3bf156db073df571071aa31b8c80509c607f"
+  "source_tree_digest": "2d58ae52eb616c2b85512a81ee8e88862d11a823a85365bba17f5781a0466e90"
  },
  "research_index": [
   {
