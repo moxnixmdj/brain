@@ -1126,6 +1126,38 @@ def _synthesize_move3_candidates_for_file(
                             ast.fix_missing_locations(t_copy)
                             _emit("asymptotic_loop_set_hoist", ast.unparse(t_copy))
 
+    # Channel 6 (PR #7049 `NAME_SCOPE`): Attribute -> In-Scope Local/Module Field (`__spec__.parent` -> `parent`)
+    try:
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import generate_name_scope_candidates
+
+        for ns_tag, ns_src in generate_name_scope_candidates(orig_src, focus_lines=focus_lines, max_candidates=12):
+            _emit(ns_tag, ns_src)
+    except Exception:
+        pass
+
+    # Channel 7 (Unwired `oe_sygus_synthesizer_v1`): Live-Frame Observational-Equivalence SyGuS
+    if m_eq and frame_records:
+        try:
+            from canonical.runtime import oe_sygus_synthesizer_v1 as sgs
+
+            exp_v = ast.literal_eval(m_eq.group(2).strip())
+            last_fr = frame_records[-1]
+            locs_r = dict(last_fr.get("locals_repr") or {})
+            env_d: dict[str, Any] = {}
+            for k, rv in locs_r.items():
+                try:
+                    env_d[k] = ast.literal_eval(str(rv))
+                except Exception:
+                    continue
+            if env_d:
+                for row in sgs.synthesize_value_expressions([(env_d, exp_v)], lang="python", max_results=6):
+                    expr_py = str(row["code"])
+                    for node in all_nodes:
+                        if isinstance(node, ast.Return) and node.value is not None:
+                            _emit(f"oe_sygus_return:{expr_py}", mhz._splice_ast_node(orig_src, node, f"return {expr_py}"))
+        except Exception:
+            pass
+
     return cands
 
 
