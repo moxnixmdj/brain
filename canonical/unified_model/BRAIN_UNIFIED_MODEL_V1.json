@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "f7e37642f7bc7a750e80efe66c95e4d0738f7c051d6796657e4b807e5be5308c"
+  "value": "8d0cbbbdfd0d42f8e2563ae9f6ee1d7496533f6a2a5c860a267c665b76b1036e"
  },
  "engines": [
   {
@@ -322429,7 +322429,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/UNIFICATION_WAVE2_RUNTIME_MODEL_SPINES_20261124_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "6e950473a7fd0a8222a844feb1f8ef64fe024ae02e54bff96b112e64989f65c5",
+   "sha256": "6db42be068366157af499a48cac082f43c43de036b11be3b6b11f3f665c336e2",
    "status": "SHIPPED",
    "terms": {
     "0e": 1,
