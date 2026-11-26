@@ -1,0 +1,12 @@
+{"e": 0, "i": 0, "phase": "before", "turns_seen": 82, "statements_grounded": 8, "seconds_since_start": 0.013328, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 1, "phase": "before", "turns_seen": 82, "statements_grounded": 8, "seconds_since_start": 0.013661, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 2, "phase": "before", "turns_seen": 82, "statements_grounded": 8, "seconds_since_start": 0.013855, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 3, "phase": "before", "turns_seen": 82, "statements_grounded": 8, "seconds_since_start": 0.01409, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 4, "phase": "before", "turns_seen": 82, "statements_grounded": 8, "seconds_since_start": 0.014263, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 0, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.017253, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 1, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.017468, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 2, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.017655, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 3, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.01796, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 4, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.018163, "answer": "James", "status": "SUPPORTED", "key": "fact:partner", "evidence_ids": ["3b000a8cabad867e47459b88d0e99495d8bf2ad96d399ac9be93d8b26c380f88"]}
+{"e": 0, "i": 5, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.018521, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}
+{"e": 0, "i": 6, "phase": "after", "turns_seen": 97, "statements_grounded": 10, "seconds_since_start": 0.018694, "answer": "Uncertain", "status": "NO_UNIQUE_SLOT"}

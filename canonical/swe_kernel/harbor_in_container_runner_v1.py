@@ -23,6 +23,7 @@ import subprocess
 import sys
 import textwrap
 import time
+import zlib
 from typing import Any
 
 BRAIN_ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -113,64 +114,15 @@ def _extract_instruction_clues(instruction: str) -> dict[str, list[str]]:
     return {"py_paths": py_paths[:12], "identifiers": identifiers}
 
 
-def _rank_candidate_tests(repo_root: pathlib.Path, clues: dict[str, list[str]]) -> list[str]:
-    explicit_tests: list[str] = []
-    src_clues: list[str] = []
-    for rel in clues.get("py_paths", ()):
-        if (repo_root / rel).is_file():
-            if "test" in pathlib.Path(rel).name.lower() or rel.startswith(("tests/", "test/")):
-                explicit_tests.append(rel)
-            else:
-                src_clues.append(rel)
-
-    test_files: list[tuple[int, str]] = []
-    idents = set(clues.get("identifiers", ())[:16])
-    src_stems = {pathlib.Path(s).stem.removeprefix("_") for s in src_clues}
-    scan_deadline = time.perf_counter() + 12.0
-
-    for root_dir, dirs, files in os.walk(repo_root):
-        if time.perf_counter() >= scan_deadline:
-            break
-        dirs[:] = [
-            d for d in dirs
-            if not d.startswith(".") and d not in {"node_modules", "__pycache__", "build", "dist", "venv", ".venv"}
-        ]
-        for fname in files:
-            if time.perf_counter() >= scan_deadline:
-                break
-            if not (fname.startswith("test_") and fname.endswith(".py")) and not fname.endswith("_test.py"):
-                continue
-            fpath = pathlib.Path(root_dir) / fname
-            rel_p = fpath.relative_to(repo_root).as_posix()
-            score = 0
-            stem = fpath.stem.removeprefix("test_").removesuffix("_test")
-            if stem in src_stems:
-                score += 20
-            try:
-                if fpath.stat().st_size <= 200_000:
-                    txt = fpath.read_text(encoding="utf-8", errors="ignore")
-                    for ident in idents:
-                        if ident in txt:
-                            score += 3
-            except OSError:
-                pass
-            if score > 0 or len(test_files) < 8:
-                test_files.append((score, rel_p))
-
-    test_files.sort(key=lambda item: (-item[0], item[1]))
-    ranked = list(explicit_tests)
-    for _, rp in test_files[:8]:
-        if rp not in ranked:
-            ranked.append(rp)
-    return ranked[:6]
-
-
 def phase_discover(instruction: str) -> dict[str, Any]:
     t0 = time.perf_counter()
     repo_root = _detect_repo_root()
     py_exe = _detect_task_python(repo_root)
     clues = _extract_instruction_clues(instruction)
-    ranked_tests = _rank_candidate_tests(repo_root, clues)
+    from canonical.runtime.bound_capabilities import objective_relevance_bm25 as ranker
+    from canonical.swe_kernel.goal_native_probe_v1 import select
+    acquisition = select(repo_root, instruction, False, ranker, clues['py_paths'])
+    ranked_tests = acquisition['selected']
 
     # detect primary ecosystem
     has_py = bool(ranked_tests) or (repo_root / "pyproject.toml").is_file() or (repo_root / "setup.py").is_file()
@@ -190,7 +142,8 @@ def phase_discover(instruction: str) -> dict[str, Any]:
         },
         "clues": clues,
         "ranked_tests": ranked_tests,
-        "instruction": instruction[:20000],
+        "acquisition": acquisition,
+        "instruction": instruction,
         "instruction_chars": len(instruction),
         "discover_wall_s": round(time.perf_counter() - t0, 3),
         "model_calls": 0,
@@ -203,6 +156,7 @@ def phase_discover(instruction: str) -> dict[str, Any]:
         "python_exe": state["python_exe"],
         "ecosystems": state["ecosystems"],
         "ranked_tests": ranked_tests[:6],
+        "acquisition": acquisition,
         "instruction_chars": len(instruction),
         "discover_wall_s": state["discover_wall_s"],
         "model_calls": 0,
@@ -789,6 +743,7 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         SWERepairMemory,
         repair_worktree,
         run_pytest_verdicts,
+        _regression_check,
     )
     from canonical.swe_kernel.petri_cow_splicing_engine_v1 import AdmissionFilteredSkillStore
 
@@ -802,11 +757,30 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
     try:
         failing_target: str | list[str] | None = None
         witness_info: dict[str, Any] = {"compiled": False}
+        originals_checked: dict[str, dict] = {}
+        from canonical.swe_kernel import goal_native_probe_v1 as subject
+        from canonical.swe_kernel.causal_swe_repair_v1 import _clean_env
+        names = subject.named_symbols(str(state.get('instruction') or ''))
+        relevance = {}
         for cand_t in ranked_tests[:4]:
             if time.perf_counter() - t0 > timeout_s * 0.30:
                 break
             verd = run_pytest_verdicts(repo_root, cand_t, python_exe=py_exe, timeout_s=15.0)
-            if verd.get("failing"):
+            originals_checked[cand_t] = verd
+            if verd.get("returncode") == 1 and verd.get("failing"):
+                if names:
+                    try:
+                        proc = subprocess.run([py_exe, '-B', subject.__file__, cand_t, json.dumps(names)],
+                            cwd=repo_root, env=_clean_env(repo_root), capture_output=True, timeout=15)
+                        if proc.returncode: raise ValueError('observer failure')
+                        observed = json.loads(proc.stdout.rsplit(b'BRAIN_NATIVE_PROBE:', 1)[-1])
+                        reached = set(observed['failed_nodes_reaching_subject'])
+                        relevance[cand_t] = {'exit':observed['exit'], 'reached':len(reached)}
+                        if observed['exit'] != 1 or not set(verd['failing']).issubset(reached):
+                            continue  # no repair from unrelated or unobserved failures
+                    except (OSError, ValueError, KeyError, subprocess.TimeoutExpired) as exc:
+                        relevance[cand_t] = {'error': type(exc).__name__}
+                        continue
                 failing_target = cand_t
                 break
 
@@ -825,12 +799,16 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             if witness_info.get("compiled"):
                 failing_target = str(witness_info["witness_path"])
 
+        probed = [{"target": name, "exit": v.get("returncode"), "timeout": bool(v.get("timeout")),
+                   "passing": len(v['passing']), "failing": len(v['failing'])}
+                  for name, v in originals_checked.items()]
         if failing_target is None:
             _clean_untracked_in_repo(repo_root, revert_tracked=True, pre_untracked=pre_untracked)
             _reap_children()
             return {
-                "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
-                "probed_tests": ranked_tests[:4],
+                "status": ("OPEN__NO_FAILING_WITNESS_OBSERVED" if any(v["ok"] for v in originals_checked.values())
+                           else "OPEN__NO_USABLE_NATIVE_TEST_RESULT_OR_WITNESS"),
+                "probed_tests": list(originals_checked), "probe_outcomes": probed, "named_subject_checks": relevance,
                 "witness_compiler": witness_info,
                 "pass": False,
                 "wall_s": round(time.perf_counter() - t0, 3),
@@ -847,14 +825,16 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             memory=mem,
             skill_store=skill_store,
             budget_s=rem_budget,
+            admit_skills=not witness_info.get("compiled"),  # a deleted /tmp test cannot revalidate a skill
         )
         # If repaired against a synthesized `/tmp` witness, also verify existing ranked unit test file!
         if outcome.get("pass") and witness_info.get("compiled") and ranked_tests:
             reg_chk = run_pytest_verdicts(repo_root, ranked_tests[0], python_exe=py_exe, timeout_s=15.0)
-            if reg_chk.get("failing"):
+            reason = _regression_check(originals_checked.get(ranked_tests[0], {}), reg_chk)
+            if reason:
                 outcome = {
                     **outcome,
-                    "status": "REGRESSED_EXISTING_SUITE_AFTER_WITNESS_REPAIR",
+                    "status": reason + "__AFTER_WITNESS_REPAIR",
                     "pass": False,
                 }
         WITNESS_TEST_PATH.unlink(missing_ok=True)
@@ -872,6 +852,9 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
             "failing_target": failing_target,
             "winning_mechanism": outcome.get("winning_mechanism"),
             "learned_skill_id": outcome.get("learned_skill_id"),
+            "reused_skill_id": outcome.get("reused_skill_id"),
+            "subtree_admission": outcome.get("subtree_admission"),
+            "probe_outcomes": probed, "named_subject_checks": relevance,
             "repaired_file": outcome.get("repaired_file"),
             "repaired_line": outcome.get("repaired_line"),
             "reaped_children": reaped,
@@ -897,10 +880,25 @@ def phase_repair(timeout_s: float) -> dict[str, Any]:
         signal.signal(signal.SIGALRM, prev_handler)
 
 
+def _instruction_text(body: str, *, compressed: bool) -> str:
+    data = base64.b64decode(body, validate=True)
+    limit = 64_000
+    if compressed:
+        obj = zlib.decompressobj()
+        data = obj.decompress(data, limit + 1)
+        if not obj.eof or obj.unused_data:
+            raise ValueError('INCOMPLETE_OR_OVERSIZED_INSTRUCTION')
+    if len(data) > limit:
+        raise ValueError('INSTRUCTION_TOO_LARGE')
+    return data.decode('utf-8')
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--phase", choices=("discover", "repair"), required=True)
-    parser.add_argument("--instruction-b64", default="")
+    payload = parser.add_mutually_exclusive_group()
+    payload.add_argument("--instruction-b64", default="")
+    payload.add_argument("--instruction-zlib-b64", default="")
     parser.add_argument("--timeout-s", type=float, default=120.0)
     args = parser.parse_args()
 
@@ -910,7 +908,8 @@ def main() -> int:
     sys.stderr = devnull
     try:
         if args.phase == "discover":
-            instr = base64.b64decode(args.instruction_b64.encode("ascii")).decode("utf-8", errors="replace") if args.instruction_b64 else ""
+            instr = _instruction_text(args.instruction_zlib_b64 or args.instruction_b64,
+                                      compressed=bool(args.instruction_zlib_b64))
             out = phase_discover(instr)
         else:
             out = phase_repair(args.timeout_s)

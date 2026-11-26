@@ -5217,7 +5217,9 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
                 str(inputs["candidate_patch_source"]),
                 str(inputs["test_suite_source"]),
             )
-            return _ok(mode, "COW_CANDIDATE_PATCH_EVALUATED", verdict)
+            if verdict['verdict'] != 'PASS':
+                return _fail(mode, 'COW_CANDIDATE_'+verdict['verdict'], result=verdict)
+            return _ok(mode, 'COW_SELECTED_ASSERTIONS_PASSED', verdict)
         res = m.run(inputs, ROOT)
         if res.get("status") != "OK":
             return _fail(mode, f"COW_VERIFIER_KILLED:{res.get('status')}", result=res)
@@ -6186,76 +6188,19 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         return _ok(mode, "MENDEL_RED_QUEEN_EVOLVED", res) if res.get("pass") else _fail(mode, "MENDEL_NO_ADMITTED_HYBRID", res)
 
     if mode == "LEAPFROG_W39_CLM_RRF_MEMORY_BUS":
-        from canonical.runtime.wave39_leapfrog_unification_v1 import CLMRRFMemoryEngine
+        from canonical.runtime.wave39_leapfrog_unification_v1 import CLMRRFMemoryEngine, dispatch_clm_rrf_operation
 
         eng = inputs.get("engine") or CLMRRFMemoryEngine()
         op = str(inputs.get("operation") or "RETRIEVE_4WAY_RRF_BUDGETED").upper()
-        if op == "WRITE_SURPRISE_GATED":
-            res = eng.write_surprise_gated(
-                record_id=str(inputs["record_id"]),
-                key=str(inputs["key"]),
-                verbatim_text=str(inputs["verbatim_text"]),
-                payload=inputs.get("payload"),
-                valid_from=inputs.get("valid_from"),
-                origin_token=str(inputs.get("origin_token", "TRUSTED_VERIFIER")),
-                min_surprise=float(inputs.get("min_surprise", 0.25)),
-                entities=inputs.get("entities") or (),
-                source_code=str(inputs.get("source_code", "")),
-            )
-        elif op == "CLM_OFFLOAD":
-            res = eng.clm_offload(
-                str(inputs["context_text"]),
-                workspace_dir=inputs["workspace_dir"],
-                label=str(inputs.get("label", "working_ctx")),
-                min_bytes=int(inputs.get("min_bytes", 128)),
-            )
-        elif op == "CLM_GREP_RESTORE":
-            res = eng.clm_grep_restore(
-                inputs["offload_ref"],
-                pattern=inputs.get("pattern"),
-                max_chars=int(inputs.get("max_chars", 2000)),
-            )
-        else:
-            res = eng.retrieve_4way_rrf_budgeted(
-                str(inputs.get("query") or goal),
-                char_budget=int(inputs.get("char_budget", 1200)),
-                top_k=int(inputs.get("top_k", 5)),
-                rrf_k=int(inputs.get("rrf_k", 60)),
-                query_source_code=str(inputs.get("query_source_code", "")),
-                query_entities=inputs.get("query_entities") or (),
-                at_time=inputs.get("at_time"),
-            )
-        return _ok(mode, f"CLM_RRF_{op}", res) if res.get("pass") else _fail(mode, f"CLM_RRF_{op}_FAILED", res)
+        res = dispatch_clm_rrf_operation(eng, op, inputs, fallback_goal=goal)
+        return _ok(mode, f"CLM_RRF_{op}", res) if res.get("pass") else _fail(mode, f"CLM_RRF_{op}_FAILED", result=res)
 
     if mode == "LEAPFROG_W39_PARTIAL_ROUTING_AND_JITRL":
-        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+        from canonical.runtime.wave39_leapfrog_unification_v1 import dispatch_partial_routing_operation
 
         op = str(inputs.get("operation") or "JITRL_MODULATE").upper()
-        if op == "SKILLTTA_SYNTHESIZE":
-            res = PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
-                inputs["target_task"],
-                verified_traces=inputs.get("verified_traces") or (),
-                top_k=int(inputs.get("top_k", 3)),
-            )
-        elif op == "PARTIAL_ROUTE":
-            res = PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
-                inputs.get("subtasks") or (),
-                compiled_skills=inputs.get("compiled_skills"),
-                symbolic_solver=inputs.get("symbolic_solver"),
-                mendel_solver=inputs.get("mendel_solver"),
-                pluggable_proposer=inputs.get("pluggable_proposer"),
-                delta_threshold=float(inputs.get("delta_threshold", 0.55)),
-                episodic_receipts=inputs.get("episodic_receipts") or (),
-                beta=float(inputs.get("beta", 0.5)),
-            )
-        else:
-            res = PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
-                inputs["prior_logits"],
-                state_signature=str(inputs.get("state_signature") or goal),
-                episodic_receipts=inputs.get("episodic_receipts") or (),
-                beta=float(inputs.get("beta", 1.0)),
-            )
-        return _ok(mode, f"PARTIAL_JITRL_{op}", res) if res.get("pass") else _fail(mode, f"PARTIAL_JITRL_{op}_FAILED", res)
+        res = dispatch_partial_routing_operation(op, inputs, fallback_goal=goal)
+        return _ok(mode, f"PARTIAL_JITRL_{op}", res) if res.get("pass") else _fail(mode, f"PARTIAL_JITRL_{op}_FAILED", result=res)
 
     if mode == "LEAPFROG_W40_EPISTEMIC_SWE_EGRAPH_CEGIS":
         from canonical.runtime.wave40_dark_matter_frontier_kernel_v1 import EpistemicSWEAndEGraphKernel

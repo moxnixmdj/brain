@@ -1,0 +1,4155 @@
+{
+  "kind": "producer-run on pinned public practice game engine; not a leaderboard or private grade",
+  "env_tree_sha256": "bf57484673964be96b1a3fa160f4d0ba5b731ffd33fa8aa1d074113ad7778152",
+  "toolkit": {
+    "arc-agi": "0.9.9",
+    "arcengine": "0.9.3",
+    "toolkit_python": "3.12.12"
+  },
+  "producer_manifest": {
+    "canonical/runtime/brain_unified_model_v1.py": "cf3bb500480ae17d93fd673af1b21406d5028eebb62d8bd1a32b0e791213ffed",
+    "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "0111c1d87e4efbdc304a880248be0a41c0ab20a489cf223e63b856e4903930f2",
+    "canonical/runtime/creature_runtime_v1.py": "f239e5d5b4e30e7ae83e11823bde197f437d0b18211d63914bf8265a68a17721",
+    "canonical/runtime/environment_learning_v1.py": "8e89a69304f4eee9cc2bcfc9d70a0d15a2f7510f2ebc9117799b536f81f6f534",
+    "canonical/runtime/systematic_exploration_v1.py": "1f19cba07292638c9de34cd186b5659b882c2cf418388d599e7a46fbb07a15e2",
+    "canonical/runtime/frame_program_v1.py": "1451f5d2c04269152f9e044d7b6585bd0d01ca8f7ebdf756e6683e0cefb212c2",
+    "canonical/tools/screen_port_worker_v1.py": "f9c41d3cf6dbe25fa64d63e4168ec43a97b001cb4b377bb40cbbe41c82a54f21"
+  },
+  "one_teacher": "a3850719dffddc88049e3a5c671c4d32eeb89aca077bf19c1941e0d9d681a163",
+  "preparation_plan_length": 17,
+  "storage": {
+    "raw": {
+      "json_bytes": 1450,
+      "zlib_json_bytes": 883
+    },
+    "lifted": {
+      "json_bytes": 1492,
+      "zlib_json_bytes": 400
+    },
+    "db_before_retraction": 45056
+  },
+  "retrieval": [
+    {
+      "arm": "empty",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "status": "UNKNOWN_UNSEEN"
+    },
+    {
+      "arm": "raw",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "status": "SUPPORTED"
+    },
+    {
+      "arm": "deleted",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "status": "UNKNOWN_LOST_SUPPORT"
+    }
+  ],
+  "rows": [
+    {
+      "arm": "empty",
+      "condition": "teacher",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.37689
+    },
+    {
+      "arm": "empty",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.24508
+    },
+    {
+      "arm": "empty",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 16,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 16,
+          "experiment_acts": 16,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 16,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.24783
+    },
+    {
+      "arm": "empty",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.58111
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44225
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.55189
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.63068
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44001
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.71659
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.58477
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.50253
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.49943
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.549
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40278
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.52717
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46011
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.45369
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47192
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.54421
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.72234
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.88183
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.60825
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43159
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.56652
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.33317
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.28628
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.39072
+    },
+    {
+      "arm": "empty",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.351
+    },
+    {
+      "arm": "raw",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "PREDICTED_TERMINAL_OBSERVED",
+          "actions": 17,
+          "confirmed_transitions": 17,
+          "terminal_revalidated": true
+        },
+        "cold": null
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.26066
+    },
+    {
+      "arm": "raw",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 16,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 16,
+          "experiment_acts": 16,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 16,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.26839
+    },
+    {
+      "arm": "raw",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.60422
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47292
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.5019
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.71705
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47694
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.77877
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.59511
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40868
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40542
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.59931
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.27162
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41745
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.37797
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.23128
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.38195
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41345
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.60427
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.9215
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.6026
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41387
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.59405
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.32304
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.21827
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "INAPPLICABLE_PROGRAM",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false,
+          "detail": "version, display size or remaining budget mismatch"
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4103
+    },
+    {
+      "arm": "raw",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.26803
+    },
+    {
+      "arm": "lifted",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "PREDICTED_TERMINAL_OBSERVED",
+          "actions": 17,
+          "confirmed_transitions": 17,
+          "terminal_revalidated": true
+        },
+        "cold": null
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.30133
+    },
+    {
+      "arm": "lifted",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "PREDICTED_TERMINAL_OBSERVED",
+          "actions": 17,
+          "confirmed_transitions": 17,
+          "terminal_revalidated": true
+        },
+        "cold": null
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.30545
+    },
+    {
+      "arm": "lifted",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.67866
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.47914
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.59129
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.76541
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.46712
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.79106
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.63193
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44837
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42067
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.55762
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.29525
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44236
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.39891
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.22379
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.3924
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42159
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.56344
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.75112
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.55922
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.40384
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4761
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.30486
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.21252
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "INAPPLICABLE_PROGRAM",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false,
+          "detail": "version, display size or remaining budget mismatch"
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.24797
+    },
+    {
+      "arm": "lifted",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "ENTRY_MISMATCH",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.24537
+    },
+    {
+      "arm": "deleted",
+      "condition": "exact",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 17,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 17,
+          "experiment_acts": 17,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 17,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.26084
+    },
+    {
+      "arm": "deleted",
+      "condition": "migrated",
+      "game": "lp85-305b61c3",
+      "level_at_start": 0,
+      "budget": 34,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": true,
+        "spent": 16,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "PASS__GOAL_OBSERVED_DURING_SYSTEMATIC_EXPLORATION",
+          "budget_spent": 16,
+          "experiment_acts": 16,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 16,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.24318
+    },
+    {
+      "arm": "deleted",
+      "condition": "next_level",
+      "game": "lp85-305b61c3",
+      "level_at_start": 1,
+      "budget": 76,
+      "preparation_actions": 17,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 76,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 76,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 1,
+        "actions": 93,
+        "score": 2.7777777777777777
+      },
+      "wall_seconds": 0.60517
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ar25-0c556536",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4681
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "bp35-0a0ad940",
+      "level_at_start": 0,
+      "budget": 42,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 42,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 42,
+          "experiment_acts": 41,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 42,
+        "score": 0.0
+      },
+      "wall_seconds": 0.50279
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "cd82-fb555c5d",
+      "level_at_start": 0,
+      "budget": 110,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 110,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 110,
+          "experiment_acts": 109,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 110,
+        "score": 0.0
+      },
+      "wall_seconds": 0.63759
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "cn04-2fe56bfb",
+      "level_at_start": 0,
+      "budget": 58,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 58,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 58,
+          "experiment_acts": 58,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 58,
+        "score": 0.0
+      },
+      "wall_seconds": 0.43136
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "dc22-fdcac232",
+      "level_at_start": 0,
+      "budget": 118,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 118,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 118,
+          "experiment_acts": 118,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 118,
+        "score": 0.0
+      },
+      "wall_seconds": 0.6846
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ft09-0d8bbf25",
+      "level_at_start": 0,
+      "budget": 86,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 86,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 86,
+          "experiment_acts": 86,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 86,
+        "score": 0.0
+      },
+      "wall_seconds": 0.57716
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "g50t-5849a774",
+      "level_at_start": 0,
+      "budget": 156,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 156,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 156,
+          "experiment_acts": 155,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 156,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44752
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ka59-38d34dbb",
+      "level_at_start": 0,
+      "budget": 56,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 56,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 56,
+          "experiment_acts": 56,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 56,
+        "score": 0.0
+      },
+      "wall_seconds": 0.44473
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "lf52-271a04aa",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 64,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.572
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "ls20-9607627b",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.26164
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "m0r0-492f87ba",
+      "level_at_start": 0,
+      "budget": 60,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 60,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 60,
+          "experiment_acts": 60,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 60,
+        "score": 0.0
+      },
+      "wall_seconds": 0.4563
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "r11l-495a7899",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 44,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.37324
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "re86-8af5384d",
+      "level_at_start": 0,
+      "budget": 52,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 52,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 52,
+          "experiment_acts": 52,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 52,
+        "score": 0.0
+      },
+      "wall_seconds": 0.24594
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "s5i5-18d95033",
+      "level_at_start": 0,
+      "budget": 40,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 40,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 40,
+          "experiment_acts": 40,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 40,
+        "score": 0.0
+      },
+      "wall_seconds": 0.37584
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sb26-7fbdac44",
+      "level_at_start": 0,
+      "budget": 36,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 36,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 36,
+          "experiment_acts": 36,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 36,
+        "score": 0.0
+      },
+      "wall_seconds": 0.42338
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sc25-635fd71a",
+      "level_at_start": 0,
+      "budget": 72,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 72,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 72,
+          "experiment_acts": 71,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 72,
+        "score": 0.0
+      },
+      "wall_seconds": 0.64232
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sk48-d8078629",
+      "level_at_start": 0,
+      "budget": 122,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 122,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 122,
+          "experiment_acts": 122,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 122,
+        "score": 0.0
+      },
+      "wall_seconds": 0.87158
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "sp80-589a99af",
+      "level_at_start": 0,
+      "budget": 78,
+      "preparation_actions": 0,
+      "actual_resets": 2,
+      "producer": {
+        "advanced": false,
+        "spent": 78,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 78,
+          "experiment_acts": 76,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 78,
+        "score": 0.0
+      },
+      "wall_seconds": 0.76441
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "su15-1944f8ab",
+      "level_at_start": 0,
+      "budget": 44,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 44,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 44,
+          "experiment_acts": 43,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 44,
+        "score": 0.0
+      },
+      "wall_seconds": 0.41918
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tn36-ef4dde99",
+      "level_at_start": 0,
+      "budget": 64,
+      "preparation_actions": 0,
+      "actual_resets": 1,
+      "producer": {
+        "advanced": false,
+        "spent": 64,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 64,
+          "experiment_acts": 63,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 64,
+        "score": 0.0
+      },
+      "wall_seconds": 0.69878
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tr87-cd924810",
+      "level_at_start": 0,
+      "budget": 108,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 108,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 108,
+          "experiment_acts": 108,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 108,
+        "score": 0.0
+      },
+      "wall_seconds": 0.34357
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "tu93-0768757b",
+      "level_at_start": 0,
+      "budget": 38,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 38,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 38,
+          "experiment_acts": 38,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 38,
+        "score": 0.0
+      },
+      "wall_seconds": 0.21887
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "vc33-5430563c",
+      "level_at_start": 0,
+      "budget": 14,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 14,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 14,
+          "experiment_acts": 14,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 14,
+        "score": 0.0
+      },
+      "wall_seconds": 0.2673
+    },
+    {
+      "arm": "deleted",
+      "condition": "other_game",
+      "game": "wa30-ee6fef47",
+      "level_at_start": 0,
+      "budget": 142,
+      "preparation_actions": 0,
+      "actual_resets": 0,
+      "producer": {
+        "advanced": false,
+        "spent": 142,
+        "replay": {
+          "reason": "NO_ENTRY",
+          "actions": 0,
+          "confirmed_transitions": 0,
+          "terminal_revalidated": false
+        },
+        "cold": {
+          "status": "OPEN__ACTION_BUDGET_EXHAUSTED_GOAL_NOT_OBSERVED",
+          "budget_spent": 142,
+          "experiment_acts": 142,
+          "travel_acts": 0,
+          "surprises": 0
+        }
+      },
+      "scorecard": {
+        "levels_completed": 0,
+        "actions": 142,
+        "score": 0.0
+      },
+      "wall_seconds": 0.26251
+    }
+  ]
+}

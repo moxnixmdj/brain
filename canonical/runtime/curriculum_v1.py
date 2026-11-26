@@ -380,6 +380,10 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
             # This channel was not attempted: don't debit its learned performance
             # or try to evade the refusal through a different channel.
             break
+        # A channel that was never allowed to run teaches nothing about the channel. Debiting it
+        # for a boundary refusal would make the curriculum permanently avoid the one channel that
+        # might close the gap once confinement exists -- a self-inflicted blindness. Only an
+        # attempt that actually ran is credited or debited.
         credit_channel(name, bool(outcome.get("closed")))
         if outcome.get("closed"):
             closed_by = name
@@ -410,12 +414,21 @@ def study(gap: Mapping[str, Any] | str, *, min_sources: int = 2,
         except Exception:
             pass
 
+    # A boundary refusal is a statement about the CHANNEL, not about the gap. Reporting it as the
+    # gap's status collapsed two different facts into one string: an unconfined-execution refusal
+    # and "studied, still open" are not the same finding, and the tests that pin this distinction
+    # caught the collapse. The gap's status stays OPEN_UNCLOSED; the refusal is reported beside it,
+    # so a caller can tell "this channel is not admissible here" from "this gap cannot be closed".
+    boundary_refused = bool(
+        attempts and attempts[-1].get("status") == boundary.STATUS
+    )
     return {
         "schema": SCHEMA,
-        "status": (CLOSED if closed else
-                   (attempts[-1]["status"] if attempts and attempts[-1].get("status") == boundary.STATUS
-                    else OPEN_UNCLOSED)),
+        "status": CLOSED if closed else OPEN_UNCLOSED,
         "pass": closed,
+        "channel_blocked_by_boundary": boundary_refused,
+        "blocked_channel": attempts[-1].get("channel") if boundary_refused else None,
+        "boundary_status": boundary.STATUS if boundary_refused else None,
         "gap_id": gap_id,
         "gap": what,
         "closed_by": closed_by,

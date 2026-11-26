@@ -29,7 +29,7 @@ frontier mechanisms into `UnifiedModel`, `Creature`, and `unified_hidden_capabil
      CoW speculative verification trial ONLY where hypotheses disagree (`BY_TRIAL`), with zero
      mutation of parent memory.
 5. `CLMRRFMemoryEngine`:
-   - Verbatim-first immutable archival + `Nemori` free-energy surprise-gated admission + `TMA-NM` HMAC origin seal,
+   - Verbatim-first immutable archival + `Nemori` free-energy surprise-gated admission + `TMA-NM` origin hash commitment,
    - 4-way Reciprocal Rank Fusion (`Hindsight`-style: lexical BM25 + structural AST + bi-temporal entity graph +
      origin trust) strictly bounded by an explicit character budget (`Beyond Memory Leaderboards`),
    - `CLM` file-mirrored editable working context (`clm_offload`, `clm_grep_restore`, `clm_audit`) with SHA-256 tamper verification.
@@ -940,12 +940,19 @@ class CLMRRFMemoryEngine:
         verbatim_text: str,
         payload: Mapping[str, Any] | None = None,
         valid_from: float | None = None,
-        origin_token: str = "RUNTIME_VERIFIED",
+        origin_token: str = "UNTRUSTED_EXTERNAL",
         min_surprise: float = 0.25,
         entities: Sequence[str] = (),
         source_code: str = "",
     ) -> dict[str, Any]:
-        """Nemori surprise-gated verbatim-first write sealed with TMA-NM HMAC-SHA256 origin binding."""
+        """Nemori surprise-gated verbatim-first write with a SHA-256 commitment to the declared origin."""
+        # Distinguish a user utterance from a verifier. The backing bus uses
+        # different class names; never elevate an unknown spelling to verifier.
+        origin_cls = {"USER_DIRECT": "TRUSTED_USER", "RUNTIME_OBSERVATION": "DERIVED_INTERNAL",
+                      "UNTRUSTED_RETRIEVAL": "UNTRUSTED_EXTERNAL"}.get(origin_token, origin_token)
+        if origin_cls not in ("TRUSTED_VERIFIER", "TRUSTED_USER", "DERIVED_INTERNAL", "UNTRUSTED_EXTERNAL"):
+            return {"schema": SCHEMA, "engine": "LEAPFROG_W39_CLM_RRF_MEMORY_BUS", "pass": False,
+                    "admitted": False, "status": "UNKNOWN_ORIGIN_CLASS", "model_calls": MODEL_CALLS}
         toks = set(_tokenize_lower(verbatim_text))
         ast_toks = set(_extract_ast_tokens(source_code)) if source_code else set(_extract_ast_tokens(verbatim_text))
         ent_set = {str(e).lower() for e in entities if str(e).strip()}
@@ -984,12 +991,7 @@ class CLMRRFMemoryEngine:
         full_payload["_verbatim_sha256"] = _sha256_text(verbatim_text)
         full_payload["_verbatim_len"] = len(verbatim_text)
 
-        # Write through TMA-NM cryptographic origin-binding on VerificationFirstMemoryBus!
-        origin_cls = (
-            origin_token
-            if origin_token in ("TRUSTED_VERIFIER", "RUNTIME_OBSERVATION", "USER_DIRECT", "UNTRUSTED_RETRIEVAL")
-            else "TRUSTED_VERIFIER"
-        )
+        # Hash binds the declared origin; it is not an independent attestation.
         tma_res = self.memory_bus.write_origin_bound_record(
             record_id=record_id,
             key=key,
@@ -1097,13 +1099,12 @@ class CLMRRFMemoryEngine:
             for tok in rec["lexical_tokens"]:
                 df[tok] = df.get(tok, 0) + 1
 
+        # Hash-randomized set iteration and ordinary float addition made equal
+        # evidence differ by one ulp across new processes, breaking tie groups.
+        idf = {t: math.log(1.0 + (n_docs + 0.5) / (df.get(t, 0) + 0.5)) for t in q_lex}
+
         def _lex_score(rec: dict[str, Any]) -> float:
-            score = 0.0
-            for tok in q_lex:
-                if tok in rec["lexical_tokens"]:
-                    idf = math.log(1.0 + (n_docs + 0.5) / (df.get(tok, 0) + 0.5))
-                    score += idf
-            return score
+            return math.fsum(idf[t] for t in q_lex & rec["lexical_tokens"])
 
         # Channel 2: Structural AST/identifier overlap
         def _ast_score(rec: dict[str, Any]) -> float:
@@ -1127,20 +1128,29 @@ class CLMRRFMemoryEngine:
             trust = 1.0 if rec["origin_token"] == "TRUSTED_VERIFIER" else 0.5
             return trust + 0.2 * float(rec.get("surprise_score", 0.0))
 
-        channels = {
-            "lexical": sorted(eligible, key=lambda r: (-_lex_score(r), r["record_id"])),
-            "structural_ast": sorted(eligible, key=lambda r: (-_ast_score(r), r["record_id"])),
-            "temporal_entity": sorted(eligible, key=lambda r: (-_temporal_entity_score(r), r["record_id"])),
-            "origin_trust": sorted(eligible, key=lambda r: (-_trust_score(r), r["record_id"])),
-        }
-
-        rrf_scores: dict[str, float] = {r["record_id"]: 0.0 for r in eligible}
-        channel_ranks: dict[str, dict[str, int]] = {r["record_id"]: {} for r in eligible}
-        for cname, ranked in channels.items():
-            for rank_idx, rec in enumerate(ranked, 1):
-                rid = rec["record_id"]
-                rrf_scores[rid] += 1.0 / float(int(rrf_k) + rank_idx)
-                channel_ranks[rid][cname] = rank_idx
+        channels = {"lexical": _lex_score, "structural_ast": _ast_score,
+                    "temporal_entity": _temporal_entity_score, "origin_trust": _trust_score}
+        if int(rrf_k) < 0:
+            raise ValueError("rrf_k must be nonnegative")
+        rrf_scores = {r["record_id"]: 0.0 for r in eligible}
+        channel_ranks: dict[str, dict[str, float]] = {rid: {} for rid in rrf_scores}
+        for cname, score in channels.items():
+            groups: dict[float, list[str]] = {}
+            for rec in eligible:
+                groups.setdefault(score(rec), []).append(rec["record_id"])
+            first = 1
+            for value in sorted(groups, reverse=True):
+                ids = groups[value]
+                stop = first + len(ids)
+                # Expected reciprocal vote under all permutations of the tie.
+                # No sorting by record ID *inside a channel*: a constant channel
+                # then adds one constant to every candidate and cannot decide.
+                vote = sum(1.0 / (int(rrf_k) + i) for i in range(first, stop)) / len(ids)
+                mid = (first + stop - 1) / 2
+                for rid in ids:
+                    rrf_scores[rid] += vote
+                    channel_ranks[rid][cname] = mid
+                first = stop
 
         ranked_ids = sorted(rrf_scores.keys(), key=lambda rid: (-rrf_scores[rid], rid))
         budget = max(32, int(char_budget))
@@ -1592,7 +1602,95 @@ class PartialRoutingJitRLSkillTTAEngine:
         }
 
 
+class UnsupportedWave39Operation(ValueError):
+    """An explicit engine operation did not match an advertised entry point."""
+
+
+def dispatch_clm_rrf_operation(
+    eng: CLMRRFMemoryEngine, operation: str, p: Mapping[str, Any], *, fallback_goal: str | None = None,
+) -> dict[str, Any]:
+    """Decode the public payload once, including its untrusted-by-default write origin.
+
+    A model call must name a supported operation. The federation supplies a
+    fallback goal to preserve its existing default of retrieving by goal.
+    """
+    op = str(operation).upper()
+    if op == "WRITE_SURPRISE_GATED":
+        return eng.write_surprise_gated(
+            record_id=str(p["record_id"]),
+            key=str(p["key"]),
+            verbatim_text=str(p["verbatim_text"]),
+            payload=p.get("payload"),
+            valid_from=p.get("valid_from"),
+            origin_token=str(p.get("origin_token", "UNTRUSTED_EXTERNAL")),
+            min_surprise=float(p.get("min_surprise", 0.25)),
+            entities=p.get("entities") or (),
+            source_code=str(p.get("source_code", "")),
+        )
+    if op == "CLM_OFFLOAD":
+        return eng.clm_offload(
+            str(p["context_text"]),
+            workspace_dir=p["workspace_dir"],
+            label=str(p.get("label", "working_ctx")),
+            min_bytes=int(p.get("min_bytes", 128)),
+        )
+    if op == "CLM_GREP_RESTORE":
+        return eng.clm_grep_restore(
+            p["offload_ref"],
+            pattern=p.get("pattern"),
+            max_chars=int(p.get("max_chars", 2000)),
+        )
+    if op == "RETRIEVE_4WAY_RRF_BUDGETED" or fallback_goal is not None:
+        query = p.get("query", "") if fallback_goal is None else p.get("query") or fallback_goal
+        return eng.retrieve_4way_rrf_budgeted(
+            str(query),
+            char_budget=int(p.get("char_budget", 1200)),
+            top_k=int(p.get("top_k", 5)),
+            rrf_k=int(p.get("rrf_k", 60)),
+            query_source_code=str(p.get("query_source_code", "")),
+            query_entities=p.get("query_entities") or (),
+            at_time=p.get("at_time"),
+        )
+    raise UnsupportedWave39Operation(f"Unsupported CLM/RRF memory operation: {operation}")
+
+
+def dispatch_partial_routing_operation(
+    operation: str, p: Mapping[str, Any], *, fallback_goal: str | None = None,
+) -> dict[str, Any]:
+    """Strict for explicit model calls; the federation defaults to modulation by goal."""
+    op = str(operation).upper()
+    if op == "SKILLTTA_SYNTHESIZE":
+        return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
+            p["target_task"],
+            verified_traces=p.get("verified_traces") or (),
+            top_k=int(p.get("top_k", 3)),
+        )
+    if op == "PARTIAL_ROUTE":
+        return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
+            p.get("subtasks") or (),
+            compiled_skills=p.get("compiled_skills"),
+            symbolic_solver=p.get("symbolic_solver"),
+            mendel_solver=p.get("mendel_solver"),
+            pluggable_proposer=p.get("pluggable_proposer"),
+            delta_threshold=float(p.get("delta_threshold", 0.55)),
+            episodic_receipts=p.get("episodic_receipts") or (),
+            beta=float(p.get("beta", 0.5)),
+        )
+    if op == "JITRL_MODULATE" or fallback_goal is not None:
+        signature = p.get("state_signature", "") if fallback_goal is None else p.get("state_signature") or fallback_goal
+        return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
+            p["prior_logits"],
+            state_signature=str(signature),
+            episodic_receipts=p.get("episodic_receipts") or (),
+            beta=float(p.get("beta", 1.0)),
+        )
+    raise UnsupportedWave39Operation(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+
+
 __all__ = [
+    "UnsupportedWave39Operation",
+    "dispatch_clm_rrf_operation",
+    "dispatch_partial_routing_operation",
     "SCHEMA",
     "MODEL_CALLS",
     "RedQueenMendelEvolver",

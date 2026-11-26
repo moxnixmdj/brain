@@ -17,10 +17,10 @@ containers) into a self-contained, zero-leakage speculative patch + mutant verif
      - Evaluates each candidate patch or adversarial mutant inside an isolated `os.fork()`
        child sharing read-only memory pages via kernel Copy-on-Write, with an isolated
        per-worker scratch path inside `tempfile.TemporaryDirectory()`, writing a compact
-       framed JSON verdict over `os.pipe()` and exiting immediately via `os._exit(0)`.
-     - Guarantees ZERO cross-worker global-state, environment-variable, sys.modules, or
-       filesystem contamination even when a malicious/buggy candidate mutates globals,
-       `os.environ`, or writes scratch files.
+       JSON verdict through the bounded reset-probe worker.
+     - Fork isolates Python memory. The scratch cwd isolates ordinary relative writes;
+       it is NOT filesystem, network or hostile-code confinement. Use trusted sources
+       inside an OS-isolated room. No measurement on timeout, crash or missing test.
 
   3. Head-to-Head Measured Benchmark vs. Cold `subprocess.run([sys.executable, ...])`:
      - Evaluates 48 candidate AST repairs + mutation probes (including intentionally poison
@@ -44,7 +44,6 @@ import json
 import os
 import pathlib
 import statistics
-import struct
 import subprocess
 import sys
 import tempfile
@@ -109,32 +108,6 @@ def select_impacted_tests(
     }
 
 
-def _write_pipe_msg(fd: int, obj: Mapping[str, Any]) -> None:
-    raw = json.dumps(obj, separators=(",", ":")).encode("utf-8")
-    pkt = struct.pack(">I", len(raw)) + raw
-    mv = memoryview(pkt)
-    sent = 0
-    while sent < len(mv):
-        sent += os.write(fd, mv[sent:])
-
-
-def _read_pipe_msg(fd: int) -> dict[str, Any]:
-    hdr = bytearray()
-    while len(hdr) < 4:
-        chunk = os.read(fd, 4 - len(hdr))
-        if not chunk:
-            raise EOFError("COW_PIPE_HEADER_EOF")
-        hdr.extend(chunk)
-    (length,) = struct.unpack(">I", bytes(hdr))
-    body = bytearray()
-    while len(body) < length:
-        chunk = os.read(fd, length - len(body))
-        if not chunk:
-            raise EOFError("COW_PIPE_BODY_EOF")
-        body.extend(chunk)
-    return json.loads(body.decode("utf-8"))
-
-
 class CowZygoteSpeculativeVerifier:
     """Warm template process evaluating candidate patches via isolated POSIX `os.fork()` CoW children."""
 
@@ -148,61 +121,34 @@ class CowZygoteSpeculativeVerifier:
         candidate_id: str,
         candidate_module_source: str,
         scratch_root: pathlib.Path,
+        *,
+        timeout_s: float = 1.0,
     ) -> dict[str, Any]:
+        from canonical.swe_kernel.reset_probe_v1 import predict
         t0 = time.perf_counter_ns()
-        r_fd, w_fd = os.pipe()
-        worker_dir = scratch_root / f"worker_{candidate_id}"
-        worker_dir.mkdir(parents=True, exist_ok=True)
-
-        pid = os.fork()
-        if pid == 0:
-            # Child process: isolated Copy-on-Write address space!
-            os.close(r_fd)
-            passed = False
-            failed_test: str | None = None
-            err_type: str | None = None
+        with tempfile.TemporaryDirectory(prefix='cow_case_', dir=scratch_root) as work:
+            def evaluate(_):
+                os.chdir(work)
+                os.environ['TMPDIR'] = work
+                ns = {'__name__':'candidate_under_test', 'WORKER_SCRATCH':work}
+                exec(compile(candidate_module_source,'<candidate_patch>','exec'),ns,ns)
+                exec(self._compiled_tests,ns,ns)
+                tested=[]
+                for name in self.selected_test_names:
+                    fn=ns.get(name)
+                    if not callable(fn):raise ValueError('missing test')
+                    tested.append(name)
+                    try:fn()
+                    except AssertionError:
+                        return {'passed':False,'failed_test':name,'tested':tested,'error_type':'AssertionError'}
+                    except Exception as e:
+                        return {'passed':None,'failed_test':name,'tested':tested,'error_type':type(e).__name__}
+                return {'passed':True if tested else None, 'tested':tested,'failed_test':None,'error_type':None}
             try:
-                os.environ["TMPDIR"] = str(worker_dir)
-                ns: dict[str, Any] = {"__name__": "candidate_under_test", "WORKER_SCRATCH": str(worker_dir)}
-                exec(compile(candidate_module_source, "<candidate_patch>", "exec"), ns, ns)
-                exec(self._compiled_tests, ns, ns)
-                passed = True
-                for tname in self.selected_test_names:
-                    try:
-                        ns[tname]()
-                    except Exception as t_exc:
-                        passed = False
-                        failed_test = tname
-                        err_type = type(t_exc).__name__
-                        break
-            except Exception as c_exc:
-                passed = False
-                err_type = type(c_exc).__name__
-
-            try:
-                _write_pipe_msg(
-                    w_fd,
-                    {
-                        "candidate_id": candidate_id,
-                        "passed": passed,
-                        "failed_test": failed_test,
-                        "error_type": err_type,
-                    },
-                )
-            finally:
-                os.close(w_fd)
-                os._exit(0)
-
-        # Parent process
-        os.close(w_fd)
-        try:
-            verdict = _read_pipe_msg(r_fd)
-        finally:
-            os.close(r_fd)
-            os.waitpid(pid, 0)
-        elapsed_ms = (time.perf_counter_ns() - t0) / 1_000_000.0
-        verdict["elapsed_ms"] = round(elapsed_ms, 4)
-        return verdict
+                verdict=predict(evaluate,None,timeout=timeout_s)
+            except (ValueError,OSError) as exc:
+                verdict={'passed':None,'tested':[], 'failed_test':None, 'error_type':str(exc)[:120]}
+        return {**verdict,'candidate_id':candidate_id,'elapsed_ms':round((time.perf_counter_ns()-t0)/1e6,4)}
 
 
 def evaluate_candidate_cold_subprocess(
@@ -250,18 +196,33 @@ def verify_candidate_patch_cow(
     test_suite_source: str,
     *,
     candidate_id: str = "cand_00",
+    timeout_s: float = 1.0,
 ) -> dict[str, Any]:
-    """Slice impacted tests from the AST diff and verify `candidate_patch_source` inside a CoW `os.fork()` child."""
-    slice_info = select_impacted_tests(original_module_source, candidate_patch_source, test_suite_source)
-    verifier = CowZygoteSpeculativeVerifier(
-        base_module_source=original_module_source,
-        test_source=test_suite_source,
-        selected_test_names=slice_info["selected_tests"],
-    )
-    verdict = verifier.evaluate_candidate(candidate_id, candidate_patch_source)
-    verdict["selected_tests"] = slice_info["selected_tests"]
-    verdict["reduction_ratio"] = slice_info["reduction_ratio"]
-    return verdict
+    """Screen trusted standalone functions. No fixtures, imports or class suites.
+
+    A slice verdict concerns only the assertions called. Project pytest is the
+    authority on project behavior; inability to run a slice is not a rejection.
+    """
+    try:
+        tree = ast.parse(test_suite_source)
+        before,after = ast.parse(original_module_source),ast.parse(candidate_patch_source)
+    except SyntaxError:
+        return {'verdict':'UNMEASURED','reason':'SYNTAX','tested':[]}
+    if not all(isinstance(n,ast.FunctionDef) and not n.decorator_list for n in tree.body) or any(
+            n.args.args or n.args.posonlyargs or n.args.kwonlyargs or n.args.vararg or n.args.kwarg
+            for n in tree.body if n.name.startswith('test_')):
+        return {'verdict':'UNMEASURED','reason':'NEEDS_PROJECT_RUNNER','tested':[]}
+    def definitions(module):
+        return {n.name:ast.dump(n) for n in module.body if isinstance(n,ast.FunctionDef)}
+    a,b=definitions(before),definitions(after)
+    changed=sorted(k for k in a.keys()|b.keys() if a.get(k)!=b.get(k))
+    selected=select_impacted_tests(candidate_patch_source,test_suite_source,changed)
+    if not selected['selected_tests'] or timeout_s<=0:
+        return {'verdict':'UNMEASURED','reason':'NO_TEST_OR_BUDGET','tested':[]}
+    verifier = CowZygoteSpeculativeVerifier(test_suite_source,selected['selected_tests'])
+    with tempfile.TemporaryDirectory() as td:
+        row=verifier.evaluate_candidate_cow(candidate_id,candidate_patch_source,pathlib.Path(td),timeout_s=timeout_s)
+    return {**selected,**row,'verdict':{True:'PASS',False:'FAIL',None:'UNMEASURED'}[row['passed']]}
 
 
 def run_cow_speculative_benchmark() -> dict[str, Any]:

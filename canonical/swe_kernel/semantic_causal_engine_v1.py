@@ -4295,6 +4295,7 @@ def repair_project_causally(
         # The failing assertion publishes the value it wanted. Forcing that literal at one suspect
         # site in an isolated CoW clone is one executed counterfactual per (site, obligation) and
         # proves exactly which site owes the value, instead of ranking sites by suspicion.
+        admission_refusals: list[dict[str, Any]] = []
         if nexus is not None and is_pytest and initial_failed_nodes:
             obls = nexus.extract_value_obligations(base_out)
             if obls:
@@ -4321,6 +4322,19 @@ def repair_project_causally(
                         patched_bytes = _apply_site_patch(orig_b, w.site, cand_code, extra_import=extra_imp)
                         if not _syntactically_valid(patched_bytes, w.site.language, orig_b):
                             continue
+                        # Admission before evaluation. A rewrite that passes the suite because it
+                        # embedded the witness's own data is not a repair; it is a lookup that will
+                        # never transfer, and crystallising it poisons the skill store. Reproduced
+                        # live 2026-11-26: `return ((user or '') and 'bob')` was accepted as a fix.
+                        if w.site.language == "python":
+                            from canonical.swe_kernel import repair_admission_v1 as _admission
+                            _adm_ok, _adm_reason, _adm_ev = _admission.admits_repair(
+                                patched_bytes.decode("utf-8", errors="replace"),
+                                orig_b.decode("utf-8", errors="replace"),
+                            )
+                            if not _adm_ok:
+                                admission_refusals.append({"reason": _adm_reason, **_adm_ev})
+                                continue
                         evaluated += 1
                         if _verify_candidate({w.site.rel_path: patched_bytes}):
                             if origin and skill_store is not None:
@@ -4339,6 +4353,7 @@ def repair_project_causally(
                                 rel_path=w.site.rel_path,
                                 func_name=w.site.func_name,
                                 mechanism=f"{tag}|forced={w.forced_value_repr[:60]}",
+                                admission_refusals=admission_refusals[:8],
                                 patched_files={w.site.rel_path: patched_str},
                                 causal_chain=list(w.site.causal_chain),
                                 candidates_evaluated=evaluated,

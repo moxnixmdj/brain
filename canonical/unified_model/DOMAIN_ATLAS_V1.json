@@ -234,6 +234,8 @@
     "referent_dependence_v1",
     "refusal_acquire_retry_v1",
     "relational_guard_addition_symbolic_repair_v1",
+    "repair_admission_v1",
+    "repair_journal_v1",
     "repo_component_petri_v1",
     "repo_native_component_mining_v1",
     "requirement_graph_kernel",
@@ -320,14 +322,14 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 316,
+   "candidates": 318,
    "frontier_function": "resolve a repository issue from a text description",
    "harvested_all": 112,
    "harvested_executable_top": 6,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 296,
+   "indexed_all": 298,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -347,7 +349,7 @@
      ],
      "path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
      "score": 41.25,
-     "sha256": "4ea7233429ee740a",
+     "sha256": "de17d977021fc4f6",
      "source_index": true,
      "summary": "Unified Zero-Model SWE Wall-Closers V1: Metamorphic Witness Splitter, Codebase"
     },
@@ -367,7 +369,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 36.0,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -407,7 +409,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
      "score": 35.25,
-     "sha256": "867a257b75c2dc40",
+     "sha256": "435c77752cc3239a",
      "source_index": true,
      "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
     },
@@ -572,6 +574,26 @@
      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
     },
     {
+     "adapter_module_match": false,
+     "anchored": 15.0,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "localiz@symbol",
+      "patch@symbol",
+      "repair@symbol",
+      "swe@symbol",
+      "diff@doc",
+      "ast@symbol"
+     ],
+     "path": "canonical/swe_kernel/causal_swe_repair_v1.py",
+     "score": 33.5,
+     "sha256": "309aea6d845f5028",
+     "source_index": true,
+     "summary": "Zero-Leakage Causal SWE Repair Engine."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 15.75,
      "harvested": false,
@@ -587,7 +609,7 @@
      ],
      "path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
      "score": 33.25,
-     "sha256": "695c6dbe9b51a17f",
+     "sha256": "62f4babdbf45b92a",
      "source_index": true,
      "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,"
     },
@@ -610,26 +632,6 @@
      "sha256": "0b80eb8a50b5229c",
      "source_index": true,
      "summary": "Unified Zero-LLM Frontier-Surpassing Engine (V1)."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 13.5,
-     "harvested": false,
-     "matched": [
-      "repair@doc",
-      "swe@doc",
-      "localiz@symbol",
-      "patch@symbol",
-      "repair@symbol",
-      "swe@symbol",
-      "diff@doc",
-      "ast@symbol"
-     ],
-     "path": "canonical/swe_kernel/causal_swe_repair_v1.py",
-     "score": 32.0,
-     "sha256": "d3a6843df35324b4",
-     "source_index": true,
-     "summary": "Zero-Leakage Causal SWE Repair Engine."
     },
     {
      "adapter_module_match": true,
@@ -690,6 +692,26 @@
      "sha256": "b22c755fe0ad8c0d",
      "source_index": true,
      "summary": "Wave 41 & Wave 42: Pluggable Rung-3 Proposer + Live JitRL + TTPO/OPSD"
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 4.5,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "patch@doc",
+      "swe@doc",
+      "repair@symbol",
+      "fault@doc",
+      "oracle@doc",
+      "synthes@doc",
+      "candidate@doc"
+     ],
+     "path": "canonical/swe_kernel/repair_admission_v1.py",
+     "score": 26.0,
+     "sha256": "3cacd287ac051539",
+     "source_index": true,
+     "summary": "Repair Admission Gate (`repair_admission_v1`)."
     },
     {
      "adapter_module_match": false,
@@ -810,26 +832,6 @@
      "sha256": "4bd50f721dfd5452",
      "source_index": true,
      "summary": "Wave 40 Dark-Matter Frontier Kernel (K3=0, $0 spend)."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 10.5,
-     "harvested": false,
-     "matched": [
-      "ast@doc",
-      "diff@doc",
-      "patch@symbol",
-      "ast@symbol",
-      "dataflow@symbol",
-      "diff@symbol",
-      "mutant@symbol",
-      "patch@doc"
-     ],
-     "path": "canonical/swe_kernel/recursive_self_architect_v1.py",
-     "score": 24.5,
-     "sha256": "0f9fa4298191aa33",
-     "source_index": true,
-     "summary": "Recursive Self-Architecting Engine (`K3 = 0`, `$0` spend, `0` host `exec()`)."
     }
    ],
    "vendored_donors_excluded": 2
@@ -884,6 +886,7 @@
     "finite_affine_grid_operator_inducer_v1",
     "first_principles_mental_cegis_v1",
     "follow_the_pointer_v1",
+    "frame_program_v1",
     "fresh_quartic_unify_repair_v17",
     "frontier_seven_moves_runtime_v1",
     "global_extrapolation_chase_spine_v1",
@@ -993,14 +996,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 157,
+   "candidates": 158,
    "frontier_function": "drive a GUI it has never seen",
    "harvested_all": 29,
-   "harvested_executable_top": 6,
+   "harvested_executable_top": 7,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 149,
+   "indexed_all": 150,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1342,6 +1345,25 @@
     },
     {
      "adapter_module_match": false,
+     "anchored": 15.0,
+     "harvested": true,
+     "matched": [
+      "browser@symbol",
+      "gui@symbol",
+      "osworld@symbol",
+      "screen@symbol",
+      "screenshot@symbol",
+      "app@symbol",
+      "tab@symbol"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 15.0,
+     "sha256": "008271f7c63331ff",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1470,26 +1492,6 @@
      "sha256": "5b5231eec6e91a4a",
      "source_index": true,
      "summary": "The operand for places: an action of the answer's SHAPE, derived from the page, not listed."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.0,
-     "harvested": false,
-     "matched": [
-      "osworld@symbol",
-      "browser@doc",
-      "osworld@doc",
-      "chrome@doc",
-      "web@symbol",
-      "app@doc",
-      "web@doc",
-      "app@symbol"
-     ],
-     "path": "canonical/runtime/osworld_v21_host_web_app_ops_v1.py",
-     "score": 13.5,
-     "sha256": "5ca8ea43ac7b5c2f",
-     "source_index": true,
-     "summary": "Strict product-native web application operations for OSWorld 2.1."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1511,6 +1513,7 @@
     "creature_runtime_v1",
     "derived_value_measure_v1",
     "domain_mapping_truth_certificate_v1",
+    "epistemic_admission_and_self_play_v1",
     "exact_stated_geometry_measure_v1",
     "frontier_bench_v1",
     "frontier_seven_moves_runtime_v1",
@@ -1537,14 +1540,14 @@
     "wave40_dark_matter_frontier_kernel_v1",
     "wave45_46_anytime_valid_quotient_metamorphic_hcu_v1"
    ],
-   "candidates": 40,
+   "candidates": 41,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 14,
    "harvested_executable_top": 10,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 35,
+   "indexed_all": 36,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1668,7 +1671,7 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 9.0,
-     "sha256": "282eb2afe100ee7d",
+     "sha256": "ce593e90204393a2",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
@@ -1722,6 +1725,39 @@
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 7.5,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "expire@symbol",
+      "revis@symbol",
+      "update@symbol"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 7.5,
+     "sha256": "008271f7c63331ff",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 7.5,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "forget@symbol",
+      "revis@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 7.5,
+     "sha256": "f41f8a6a38555d24",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
@@ -1734,37 +1770,6 @@
      "sha256": "d248643cd4ceb629",
      "source_index": true,
      "summary": "Memory that decides for itself what is worth keeping."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.75,
-     "harvested": true,
-     "matched": [
-      "consolidat@symbol",
-      "drift@symbol",
-      "expire@symbol",
-      "update@symbol"
-     ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
-     "score": 6.75,
-     "sha256": "ce2f43a697ba255c",
-     "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.75,
-     "harvested": true,
-     "matched": [
-      "consolidat@symbol",
-      "drift@symbol",
-      "forget@symbol"
-     ],
-     "path": "canonical/runtime/creature_runtime_v1.py",
-     "score": 6.75,
-     "sha256": "3d706b6d49c9ace9",
-     "source_index": true,
-     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
@@ -1826,7 +1831,7 @@
      ],
      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
      "score": 6.25,
-     "sha256": "1deeebb29a840f58",
+     "sha256": "441bb8c335e65e3c",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
     },
@@ -1916,7 +1921,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
      "score": 4.5,
-     "sha256": "ae472d40dd308416",
+     "sha256": "7b032e420a1323fd",
      "source_index": true,
      "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`)."
     },
@@ -2149,16 +2154,17 @@
     "what_transfers_to_a_second_host_v1",
     "what_transfers_v1",
     "witness_inversion_v1",
+    "witnessed_browser_v1",
     "world_binding_v1"
    ],
-   "candidates": 196,
+   "candidates": 197,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 70,
    "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 193,
+   "indexed_all": 194,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2298,7 +2304,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 25.75,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -2338,7 +2344,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 24.5,
-     "sha256": "ce2f43a697ba255c",
+     "sha256": "008271f7c63331ff",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2598,7 +2604,7 @@
      ],
      "path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
      "score": 19.0,
-     "sha256": "bc9dfd665ff9203e",
+     "sha256": "ac2d36a67cf99489",
      "source_index": true,
      "summary": "Semantic-Causal Program Understanding, Universal Meaning E-Graph & Angelic CEGIS Engine."
     },
@@ -2811,8 +2817,10 @@
     "r3_independent_learning_verifier_v1",
     "raw_goal_trace_acceptance_v1",
     "reach_of_the_grammar_v1",
+    "receiver_cli_contrast_v1",
     "recursive_self_architect_v1",
     "release_chunk_archive_v1",
+    "repair_journal_v1",
     "research_control_information_safe_proof",
     "residual_witness_backend_router_v1",
     "reverse_tomography_algebra_v1",
@@ -2872,14 +2880,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 206,
+   "candidates": 208,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 54,
+   "harvested_all": 55,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 199,
+   "indexed_all": 201,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2944,6 +2952,26 @@
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 12.75,
+     "harvested": true,
+     "matched": [
+      "episod@symbol",
+      "recall@symbol",
+      "context@symbol",
+      "memory@symbol",
+      "recall@doc",
+      "receipt@symbol",
+      "retriev@doc",
+      "trace@symbol"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 17.75,
+     "sha256": "008271f7c63331ff",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
@@ -2960,6 +2988,26 @@
      "sha256": "d248643cd4ceb629",
      "source_index": true,
      "summary": "Memory that decides for itself what is worth keeping."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 15.75,
+     "harvested": true,
+     "matched": [
+      "episod@symbol",
+      "recall@symbol",
+      "remember@symbol",
+      "history@symbol",
+      "ledger@symbol",
+      "memory@symbol",
+      "receipt@symbol",
+      "trace@symbol"
+     ],
+     "path": "canonical/runtime/creature_runtime_v1.py",
+     "score": 16.25,
+     "sha256": "f41f8a6a38555d24",
+     "source_index": true,
+     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
@@ -2997,7 +3045,7 @@
      ],
      "path": "canonical/tools/history_template_repair_v1.py",
      "score": 16.25,
-     "sha256": "51426227d88f6b8c",
+     "sha256": "a077a3811a7b358c",
      "source_index": true,
      "summary": "If weights may hold no world knowledge, where does the CONTENT of an added line come from?"
     },
@@ -3022,26 +3070,6 @@
     },
     {
      "adapter_module_match": true,
-     "anchored": 9.0,
-     "harvested": false,
-     "matched": [
-      "episod@symbol",
-      "retriev@symbol",
-      "trace@doc",
-      "compact@symbol",
-      "store@doc",
-      "compress@doc",
-      "memory@doc",
-      "provenance@doc"
-     ],
-     "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
-     "score": 16.0,
-     "sha256": "1deeebb29a840f58",
-     "source_index": true,
-     "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
-    },
-    {
-     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -3061,6 +3089,26 @@
      "summary": "Zero-Knowledge-House computer-use / SWE agent: the seven-step loop, cut-vertex slicing,"
     },
     {
+     "adapter_module_match": true,
+     "anchored": 8.25,
+     "harvested": false,
+     "matched": [
+      "episod@symbol",
+      "retriev@symbol",
+      "trace@doc",
+      "compact@symbol",
+      "store@doc",
+      "compress@doc",
+      "memory@doc",
+      "provenance@doc"
+     ],
+     "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+     "score": 15.75,
+     "sha256": "441bb8c335e65e3c",
+     "source_index": true,
+     "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 3.75,
      "harvested": true,
@@ -3078,26 +3126,6 @@
      "sha256": "08b60fb6c239ff69",
      "source_index": true,
      "summary": "Scan a host, retrieve what is already known, fetch only what is not."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 10.5,
-     "harvested": true,
-     "matched": [
-      "recall@symbol",
-      "context@symbol",
-      "memory@symbol",
-      "recall@doc",
-      "receipt@symbol",
-      "retriev@doc",
-      "trace@symbol",
-      "index@doc"
-     ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
-     "score": 15.5,
-     "sha256": "ce2f43a697ba255c",
-     "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
     {
      "adapter_module_match": true,
@@ -3347,29 +3375,9 @@
      ],
      "path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
      "score": 12.0,
-     "sha256": "694aba2283badc83",
+     "sha256": "0cd0fda3e53b927d",
      "source_index": true,
      "summary": "Wave 39 Frontier-Leapfrog Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": true,
-     "matched": [
-      "recall@doc",
-      "recall@symbol",
-      "projec@doc",
-      "store@doc",
-      "memory@doc",
-      "projec@symbol",
-      "store@symbol",
-      "summar@symbol"
-     ],
-     "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
-     "score": 12.0,
-     "sha256": "f4b3f35cb5db7d07",
-     "source_index": true,
-     "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
     }
    ],
    "vendored_donors_excluded": 2
@@ -3831,7 +3839,7 @@
      ],
      "path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
      "score": 22.75,
-     "sha256": "694aba2283badc83",
+     "sha256": "0cd0fda3e53b927d",
      "source_index": true,
      "summary": "Wave 39 Frontier-Leapfrog Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL."
     },
@@ -3871,7 +3879,7 @@
      ],
      "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
      "score": 19.5,
-     "sha256": "1deeebb29a840f58",
+     "sha256": "441bb8c335e65e3c",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
     },
@@ -3891,7 +3899,7 @@
      ],
      "path": "canonical/swe_kernel/causal_nexus_v1.py",
      "score": 19.25,
-     "sha256": "ca055b6cf4b5d226",
+     "sha256": "3fe354afac608848",
      "source_index": true,
      "summary": "Causal Nexus: expected-value abduction, single-site counterfactual blame, lens synthesis,"
     },
@@ -3911,7 +3919,7 @@
      ],
      "path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
      "score": 18.5,
-     "sha256": "b40387183c81fd89",
+     "sha256": "2ea067a8cc0f65af",
      "source_index": true,
      "summary": "Unified Unfamiliar-Name Frontier Leapfrog Engine (`K3 = 0`, `$0` spend, Elon's First Law)."
     },
@@ -3951,7 +3959,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 17.5,
-     "sha256": "3d706b6d49c9ace9",
+     "sha256": "f41f8a6a38555d24",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4276,6 +4284,7 @@
     "cross_modal_tomography_petri_v1",
     "deep_understanding_engine_v1",
     "demonstration_sufficiency_v1",
+    "dialogue_slice_v1",
     "docx_exact_text_edit_oracles_v1",
     "docx_span_edit_oracles_v1",
     "domain_of_verification_v1",
@@ -4330,6 +4339,7 @@
     "r3_independent_learning_verifier_v1",
     "raw_goal_trace_acceptance_v1",
     "research_tool_loader_v1",
+    "reset_probe_v1",
     "reverse_tomography_algebra_v1",
     "root3_declared_artifact_finalizer_v1",
     "rule_scope_learning_v1",
@@ -4379,14 +4389,14 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 143,
+   "candidates": 145,
    "frontier_function": "predict what an action does before doing it",
-   "harvested_all": 43,
+   "harvested_all": 44,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 24,
-   "indexed_all": 139,
+   "indexed_all": 141,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -4431,26 +4441,6 @@
     },
     {
      "adapter_module_match": true,
-     "anchored": 8.25,
-     "harvested": false,
-     "matched": [
-      "transition@doc",
-      "rollout@symbol",
-      "transition@symbol",
-      "effect@doc",
-      "residual@doc",
-      "effect@symbol",
-      "predict@doc",
-      "residual@symbol"
-     ],
-     "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
-     "score": 20.75,
-     "sha256": "1deeebb29a840f58",
-     "source_index": true,
-     "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
-    },
-    {
-     "adapter_module_match": true,
      "anchored": 6.75,
      "harvested": false,
      "matched": [
@@ -4468,6 +4458,26 @@
      "sha256": "d32a7badda8dc0bf",
      "source_index": true,
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
+    },
+    {
+     "adapter_module_match": true,
+     "anchored": 8.25,
+     "harvested": false,
+     "matched": [
+      "transition@doc",
+      "rollout@symbol",
+      "transition@symbol",
+      "effect@doc",
+      "residual@doc",
+      "effect@symbol",
+      "predict@doc",
+      "residual@symbol"
+     ],
+     "path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+     "score": 19.75,
+     "sha256": "441bb8c335e65e3c",
+     "source_index": true,
+     "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
     },
     {
      "adapter_module_match": true,
@@ -4665,7 +4675,7 @@
      ],
      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
      "score": 15.5,
-     "sha256": "79d42df1b4a72fcd",
+     "sha256": "06798ebc3687ee51",
      "source_index": true,
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
     },
@@ -4784,7 +4794,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "ce2f43a697ba255c",
+     "sha256": "008271f7c63331ff",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4888,7 +4898,7 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3344,
+ "modules_scanned": 3379,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
@@ -5067,8 +5077,8 @@
      "source_hit": true,
      "source_top": [
       "canonical/runtime/browser_state_information_safe_candidate.py",
-      "canonical/runtime/aimed_action_v1.py",
-      "canonical/runtime/gui_room_v1.py"
+      "canonical/runtime/witnessed_browser_v1.py",
+      "canonical/runtime/aimed_action_v1.py"
      ]
     },
     {
@@ -5187,8 +5197,8 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0625,
-   "chance_source_recall": 0.0176,
+   "chance_route_recall": 0.0639,
+   "chance_source_recall": 0.018,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 1.0,
@@ -5335,7 +5345,7 @@
   },
   "instant_learning": {
    "chance_route_recall": 0.1986,
-   "chance_source_recall": 0.086,
+   "chance_source_recall": 0.0859,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -5483,7 +5493,7 @@
   },
   "memory": {
    "chance_route_recall": 0.1653,
-   "chance_source_recall": 0.0899,
+   "chance_source_recall": 0.0903,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5508,8 +5518,8 @@
      "source_hit": true,
      "source_top": [
       "canonical/runtime/property_v1.py",
-      "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-      "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py"
+      "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
+      "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py"
      ]
     },
     {
@@ -5623,15 +5633,15 @@
      "source_hit": true,
      "source_top": [
       "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-      "canonical/runtime/executable_skill_program_v7.py",
-      "canonical/runtime/universal_verified_adaptive_solver_v4.py"
+      "canonical/swe_kernel/repair_journal_v1.py",
+      "canonical/runtime/bytes_v14_single_artifact_compact_v14.py"
      ]
     }
    ]
   },
   "verification_abstention": {
    "chance_route_recall": 0.2278,
-   "chance_source_recall": 0.153,
+   "chance_source_recall": 0.1521,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5777,7 +5787,7 @@
   },
   "world_model": {
    "chance_route_recall": 0.1361,
-   "chance_source_recall": 0.0626,
+   "chance_source_recall": 0.0631,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,

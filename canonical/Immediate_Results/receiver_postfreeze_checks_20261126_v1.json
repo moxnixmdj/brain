@@ -1,0 +1,1086 @@
+{
+  "schema": "POST_FREEZE_CLICK_COMPATIBILITY_V1",
+  "authority": "none; historical transplanted requirement, not a hard benchmark or independent task",
+  "date_utc": "2026-11-26",
+  "pregrade_commit": "90c9997f",
+  "grader": "canonical/tools/grade_frozen_click_transfer_v1.py; installed exact receiver, fresh copies, pytest native defaults, independent process per arm/surface, 120s wall per run",
+  "locked_evaluator_requirements": [
+    "iniconfig==2.3.0 --hash=sha256:f631c04d2c48c52b84d0d0549c99ff3859c98df65b3101406327ecc7d53fbf12",
+    "packaging==26.0 --hash=sha256:b36f1fef9334a5588b4166f8bcd26a14e521f2b55e6b9de3aaa80d3ff7a37529",
+    "pluggy==1.6.0 --hash=sha256:e920276dd6813095e9377c0bc5566d94c932c33b27a3e3945d8389c374dd4746",
+    "pygments==2.20.0 --hash=sha256:81a9e26dd42fd28a23a2d169d86d7ac03b46e2f8b59ed4698fb4785f946d0176",
+    "pytest==9.0.2 --hash=sha256:711ffd45bf766d5264d487b917733b453d917afd2b0ad65223959f59089f875b"
+  ],
+  "rows": [
+    {
+      "offset": 1,
+      "source_manifest_sha256": "000e1c6930b01a55c727076904b6d61995a0434150521f5c0dc575126fb6f760",
+      "candidate": {
+        "empty": null,
+        "raw_traces": {
+          "path": "core.py",
+          "sha256": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d"
+        },
+        "generalized": {
+          "path": "core.py",
+          "sha256": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689"
+        }
+      },
+      "initial_pytest_9_2": {
+        "empty": {
+          "native": {
+            "exit": 0,
+            "seconds": 6.333,
+            "log_sha256": "4e0016d04b33ee66ea09569bf386340c266a769119d51e945ba6a7031b708322",
+            "status": "RAN",
+            "counts": {
+              "passed": 2060,
+              "xfailed": 1,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "2060 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.25s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.515,
+            "log_sha256": "b9294287a8def729623571dd76fabed7238b607016413c612418d6c49bc3d29f",
+            "status": "RAN",
+            "counts": {
+              "passed": 112,
+              "failure": 4
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.287,
+            "log_sha256": "efba053b0a9f965bcf4d45bc464cc3a7f6e0ef233c76a958b1a3dd339bbfc3c7",
+            "status": "RAN",
+            "counts": {
+              "passed": 2057,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 2057 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.21s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.466,
+            "log_sha256": "c0438eaf9757c6a886085a6be8742cce278a7d63a575953db46ad10bae656156",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.435,
+            "log_sha256": "3dabdfecb158762b7fe2e0d085535dbfdb875282666af136fb5e0970199ee556",
+            "status": "RAN",
+            "counts": {
+              "passed": 2057,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 2057 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.36s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.515,
+            "log_sha256": "c0438eaf9757c6a886085a6be8742cce278a7d63a575953db46ad10bae656156",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 16,
+      "source_manifest_sha256": "587f1c4e69807125802fbc540617039cbada3b4d1935fad3779b08157fd2dd39",
+      "candidate": {
+        "empty": null,
+        "raw_traces": {
+          "path": "core.py",
+          "sha256": "460e722589206e152686ee1e7160a78596702244ca9f36d698c1be5326436fc3"
+        },
+        "generalized": {
+          "path": "core.py",
+          "sha256": "b267d6d15279029e3601ddca98dfa55f41c780e9d6f9ef847224929ffe4aad7d"
+        }
+      },
+      "initial_pytest_9_2": {
+        "empty": {
+          "native": {
+            "exit": 0,
+            "seconds": 6.189,
+            "log_sha256": "fa3f39600295d70652345aa9cde1ee5dacf30693a0c7c53d057252330e9216fc",
+            "status": "RAN",
+            "counts": {
+              "passed": 1915,
+              "xfailed": 1,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "1915 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.08s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.515,
+            "log_sha256": "f8f03d02b59ffb64f84b2e5a1b78b111385196802753f269c72230819f4f0fef",
+            "status": "RAN",
+            "counts": {
+              "passed": 112,
+              "failure": 4
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.135,
+            "log_sha256": "ecfbd7bb3edddf736d0f46b4d5cfb9d8ddc42bd2575f6eefc33cde24f7c4a592",
+            "status": "RAN",
+            "counts": {
+              "passed": 1912,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 1912 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.04s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "c0438eaf9757c6a886085a6be8742cce278a7d63a575953db46ad10bae656156",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.285,
+            "log_sha256": "4685d0b13d28795e98a83bc8f0264410c1155bc97ff163ffa734a25f52cd4cfc",
+            "status": "RAN",
+            "counts": {
+              "passed": 1912,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 1912 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.14s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "8d103b6c976d5a6c70b0be6d46312694b9f193e72d88d4308ffdc359154c740b",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 64,
+      "source_manifest_sha256": "ab813db719aead96eace0648db2bb8a5cd4060087b9ca910533380a3867ba947",
+      "candidate": {
+        "empty": null,
+        "raw_traces": null,
+        "generalized": null
+      },
+      "initial_pytest_9_2": {
+        "empty": {
+          "native": {
+            "exit": 2,
+            "seconds": 3.074,
+            "log_sha256": "5247f2f1638e255afa6f716de7f5a735244750ff6ccd1eabdfe686a29e6e75a1",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "30000 deselected, 1 error in 2.14s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.567,
+            "log_sha256": "6db0aee4eabcd3f36811f775f4fd91699307c8078aad42d128b91b5963cd705b",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 2,
+            "seconds": 3.026,
+            "log_sha256": "dc05fd9e60e88e955bb4f32d1afaa9d3bbd5f17815e1a7164b0fbdfaebdf9cd6",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "30000 deselected, 1 error in 2.16s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "c488b4f5e86c475813e56f00224bd4b77ee29ebdb925986c9b1456925668bf78",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 2,
+            "seconds": 2.973,
+            "log_sha256": "230e76ec1e7d2c1a9b93587da08a8fc6f86bca97cd96f831f641ab8b31a84643",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "30000 deselected, 1 error in 2.08s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "c488b4f5e86c475813e56f00224bd4b77ee29ebdb925986c9b1456925668bf78",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        }
+      },
+      "locked_pytest_9_0_2": {
+        "empty": {
+          "native": {
+            "exit": 0,
+            "seconds": 5.683,
+            "log_sha256": "717d38a0d91c1068147daae89c923b2151793a8a69424c7e705ecf7e74d0c9b5",
+            "status": "RAN",
+            "counts": {
+              "passed": 1488,
+              "xfailed": 1,
+              "skipped": 23
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "1488 passed, 23 skipped, 30000 deselected, 1 xfailed in 4.19s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.515,
+            "log_sha256": "10beb6b090170998f93eb28ee03bd4c6470dbce29e49a368c92fbddbeb65a5c4",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 0,
+            "seconds": 5.784,
+            "log_sha256": "5ce30b86e4f037129023bdca18c75daf8569c0cb310af03ea13d13d89192c135",
+            "status": "RAN",
+            "counts": {
+              "passed": 1488,
+              "xfailed": 1,
+              "skipped": 23
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "1488 passed, 23 skipped, 30000 deselected, 1 xfailed in 4.27s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "10beb6b090170998f93eb28ee03bd4c6470dbce29e49a368c92fbddbeb65a5c4",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 0,
+            "seconds": 5.631,
+            "log_sha256": "b785e493f9eadd7ecb7aa1473af2d42eb475a957e7533c323bf11237c8e89d66",
+            "status": "RAN",
+            "counts": {
+              "passed": 1488,
+              "xfailed": 1,
+              "skipped": 23
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "1488 passed, 23 skipped, 30000 deselected, 1 xfailed in 4.16s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "10beb6b090170998f93eb28ee03bd4c6470dbce29e49a368c92fbddbeb65a5c4",
+            "status": "RAN",
+            "counts": {
+              "passed": 101,
+              "failure": 15
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        }
+      },
+      "initial_incomplete_cause": "pytest.PytestRemovedIn10Warning: Passing a non-Collection iterable to parametrize is deprecated; collection failed under unmodified project warning policy."
+    },
+    {
+      "offset": 4,
+      "source_manifest_sha256": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2",
+      "candidate": {
+        "empty": null,
+        "raw_traces": {
+          "path": "core.py",
+          "sha256": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d"
+        },
+        "generalized": {
+          "path": "core.py",
+          "sha256": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689"
+        }
+      },
+      "initial_pytest_9_2": {
+        "empty": {
+          "native": {
+            "exit": 0,
+            "seconds": 6.789,
+            "log_sha256": "23911c9816dbea5a36b06bddda253c2d8b042ad1ac66e92499803d577b30cf87",
+            "status": "RAN",
+            "counts": {
+              "passed": 2059,
+              "xfailed": 1,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "2059 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.73s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.517,
+            "log_sha256": "e24a4e5ac91cd384126cc8569c5c6296ee0922feeb6e51bdd3d31eaf0ddaf90c",
+            "status": "RAN",
+            "counts": {
+              "passed": 112,
+              "failure": 4
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.535,
+            "log_sha256": "c0aa8c80c92569c8b278f6818e45b79fcedfa6a63024671190118bec658c9101",
+            "status": "RAN",
+            "counts": {
+              "passed": 2056,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 2056 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.46s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "20dc798268c394dcc1ab45ed76aaa924317db95a70db4347871f526ecd1cf39d",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.695,
+            "log_sha256": "7d828f12d491b978d6cea155cb10809e9f4b6d5783d4174ac77e26cb153f17db",
+            "status": "RAN",
+            "counts": {
+              "passed": 2056,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 2056 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.54s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.567,
+            "log_sha256": "eea869ca90ee380197c6a77815fbae1311a0196cc94118f32722f2c86c1cfe0f",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "offset": 32,
+      "source_manifest_sha256": "98292befcd4ee48d463a02b12fa59221d1b7438c7a1083caec1f928b1cd05146",
+      "candidate": {
+        "empty": null,
+        "raw_traces": {
+          "path": "core.py",
+          "sha256": "26215735d66c634fe05823a934b46cabe191775a8d753a392f09c545bc02ce92"
+        },
+        "generalized": {
+          "path": "core.py",
+          "sha256": "3a4035c06815abdae7bd16f84c9d4c299f4a4cc3ae83c0c728082f76d4a9ca57"
+        }
+      },
+      "initial_pytest_9_2": {
+        "empty": {
+          "native": {
+            "exit": 2,
+            "seconds": 3.225,
+            "log_sha256": "3144a318e7549476cc46fa3437ff5e9838919822c90d1dd1ee6f3f3f159077d6",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "31000 deselected, 1 error in 2.30s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "f8f03d02b59ffb64f84b2e5a1b78b111385196802753f269c72230819f4f0fef",
+            "status": "RAN",
+            "counts": {
+              "passed": 112,
+              "failure": 4
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 2,
+            "seconds": 3.326,
+            "log_sha256": "af57c1ce5d2c3a50833c0005631cca942490c8d27a27af7e39ccaef8aec238f4",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "31000 deselected, 1 error in 2.40s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.515,
+            "log_sha256": "eea869ca90ee380197c6a77815fbae1311a0196cc94118f32722f2c86c1cfe0f",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 2,
+            "seconds": 3.377,
+            "log_sha256": "541f0396ef5614778cb373f937e54b1b0ffebe5374b4073d42e220ebc21b26a1",
+            "status": "INCOMPLETE",
+            "counts": {
+              "error": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "31000 deselected, 1 error in 2.51s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.517,
+            "log_sha256": "c0438eaf9757c6a886085a6be8742cce278a7d63a575953db46ad10bae656156",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        }
+      },
+      "locked_pytest_9_0_2": {
+        "empty": {
+          "native": {
+            "exit": 0,
+            "seconds": 6.083,
+            "log_sha256": "03ab136a093d5aeb88c7f93e4f8115fc766bb24b27335571abfdc1c4c72c7faf",
+            "status": "RAN",
+            "counts": {
+              "passed": 1672,
+              "xfailed": 1,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "1672 passed, 24 skipped, 31000 deselected, 1 xfailed in 4.53s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "9e4a225b61bead681efc8643964e7b5f77b0440dc395ef326041af547af17385",
+            "status": "RAN",
+            "counts": {
+              "passed": 112,
+              "failure": 4
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 0,
+              "first_six": []
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            }
+          }
+        },
+        "raw_traces": {
+          "native": {
+            "exit": 1,
+            "seconds": 7.044,
+            "log_sha256": "b3a165f882a09a1f8b9a0df95d04fbd386fdf5f34a0e03cc558ef7fda6291ab6",
+            "status": "RAN",
+            "counts": {
+              "passed": 1669,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 1669 passed, 24 skipped, 31000 deselected, 1 xfailed in 4.98s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.567,
+            "log_sha256": "dcec981b653b5921aae1826ea9b0e5d751dda7f718cc863550fc2cb410fa8999",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        },
+        "generalized": {
+          "native": {
+            "exit": 1,
+            "seconds": 6.741,
+            "log_sha256": "e5955b619eba65aa26fc2a480577fbaebe22c6d541b5b23156a67737f3df7e42",
+            "status": "RAN",
+            "counts": {
+              "passed": 1669,
+              "xfailed": 1,
+              "failure": 3,
+              "skipped": 24
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 3,
+              "first_six": [
+                "tests.test_formatting::test_formatting_custom_type_metavar",
+                "tests.test_formatting::test_wrapping_long_command_name",
+                "tests.test_formatting::test_wrapping_long_options_strings"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 0,
+              "first_six": []
+            },
+            "pytest_summary": "3 failed, 1669 passed, 24 skipped, 31000 deselected, 1 xfailed in 5.00s"
+          },
+          "teacher_check": {
+            "exit": 1,
+            "seconds": 0.516,
+            "log_sha256": "c0438eaf9757c6a886085a6be8742cce278a7d63a575953db46ad10bae656156",
+            "status": "RAN",
+            "counts": {
+              "passed": 115,
+              "failure": 1
+            },
+            "same_test_names_as_empty": true,
+            "lost_passes": {
+              "count": 1,
+              "first_six": [
+                "tests.test_arguments::test_argument_help_undocumented_arguments_only_no_section"
+              ]
+            },
+            "failures_to_pass": {
+              "count": 4,
+              "first_six": [
+                "tests.test_arguments::test_argument_get_help_record_never_none[None]",
+                "tests.test_arguments::test_argument_help_deprecated_without_help_lists_all",
+                "tests.test_arguments::test_argument_help_empty_string_lists_all",
+                "tests.test_arguments::test_argument_help_lists_undocumented_arguments"
+              ]
+            }
+          }
+        }
+      },
+      "initial_incomplete_cause": "pytest.PytestRemovedIn10Warning: Passing a non-Collection iterable to parametrize is deprecated; collection failed under unmodified project warning policy."
+    }
+  ],
+  "cross_project": {
+    "repo": "fastapi/typer",
+    "version": "0.29.3",
+    "status": "NO_PROPOSAL, NO_MATCHED_GRADE"
+  }
+}

@@ -656,8 +656,20 @@ def _sole_name(expr_text: str) -> str | None:
 # ================================================================================================== #
 
 def _dump(node: Any) -> str:
+    """Stable structural dump used as a hole's witness.
+
+    A hole can hold a whole statement list (the common case: `if x is None: return None` versus
+    `return (x or {}).get(...)` differ as *lists of statements*). `repr(list_of_nodes)` returns
+    `<ast.If object at 0x7f...>` -- a memory address. That address was being persisted as the
+    hole's witness, so `_tree_match` could never reproduce it: every stored morphism was
+    unreplayable, including on its own witness. Measured 2026-11-26: `SkillStoreV2.propose()`
+    returned `[]` for the very source it had just learned from. Recursive dumping fixes the
+    witness without changing the learned shape.
+    """
     if isinstance(node, ast.AST):
         return ast.dump(node, annotate_fields=True, include_attributes=False)
+    if isinstance(node, (list, tuple)):
+        return "[" + ",".join(_dump(x) for x in node) + "]"
     return repr(node)
 
 
@@ -731,21 +743,124 @@ def _restore_names(node: Any, restore: Mapping[str, str]) -> Any:
     return node
 
 
-def _au(a: Any, b: Any, holes: dict[str, tuple[Any, Any]]) -> dict[str, Any]:
+def _blind_string_constants(node: Any) -> Any:
+    """Copy of `node` with every non-empty string **constant** replaced by its occurrence index.
+
+    A hole in a statement-level morphism usually contains data: `record["name"]`. The key is
+    data; the shape around it is law. Binding by exact literal welds the morphism to its own
+    witness, which is the failure measured on 2026-11-26 (`propose()` returned `[]` for the very
+    source it had just learned from, and for every held-out variant).
+
+    Occurrence-index blinding keeps the *structure* of data-bearing regions comparable while
+    letting the concrete value come from the target at build time. Only string constants are
+    blinded: a number is often a structural constant (`-1` sentinel, `0` base case), and
+    identifiers are already alpha-renamed by `_alpha_rename`, so blinding them would confuse a
+    role with a value.
+    """
+
+    def _walk(a: Any, counter: list[int]) -> Any:
+        if isinstance(a, ast.Constant) and isinstance(a.value, str) and a.value:
+            tag = f"\x00S{counter[0]}"
+            counter[0] += 1
+            return ast.Constant(value=tag)
+        if isinstance(a, ast.AST):
+            new = copy.deepcopy(a)
+            for f in a._fields:
+                setattr(new, f, _walk(getattr(a, f, None), counter))
+            return new
+        if isinstance(a, list):
+            return [_walk(x, counter) for x in a]
+        return a
+
+    return _walk(node, [0])
+
+
+#: Fields whose value is a *declared* name rather than data. Two sides that agree on the name
+#: prove nothing about it, so it is a slot: a law learned on `get_name` must be able to fire on
+#: `read_nickname`. Without this the morphism was welded to the witness's function name.
+#:
+#: Deliberately NOT included: `Attribute.attr` (`.get` is structure, not a name: abstracting it
+#: produced `.get_name(...)` in an early version of this fix) and `Name.id` (already
+#: alpha-renamed by `_alpha_rename`).
+_DECLARED_NAME_SITES: frozenset[tuple[str, str]] = frozenset({
+    ("FunctionDef", "name"),
+    ("AsyncFunctionDef", "name"),
+    ("ClassDef", "name"),
+    ("arg", "arg"),
+})
+
+
+def _declared_names(node: Any) -> list[str]:
+    """Declared names in the exact walk order `_au` visits them.
+
+    Order matters: slot `?d{k}` must resolve to the k-th declared name of the target, so this
+    walk mirrors `_au`'s own recursion (same fields, same sequence). A divergence here silently
+    binds a function name to a parameter, which produced `.get_name('name', '')` in testing.
+    """
+    out: list[str] = []
+
+    def _walk(a: Any, parent: str | None) -> None:
+        if isinstance(a, ast.AST):
+            for f in a._fields:
+                val = getattr(a, f, None)
+                if (type(a).__name__, f) in _DECLARED_NAME_SITES and isinstance(val, str):
+                    if val and not val.startswith("__"):
+                        out.append(val)
+                    continue
+                _walk(val, type(a).__name__)
+            return
+        if isinstance(a, (list, tuple)):
+            for x in a:
+                _walk(x, parent)
+
+    _walk(node, None)
+    return out
+
+
+def _au(
+    a: Any,
+    b: Any,
+    holes: dict[str, tuple[Any, Any]],
+    field: str | None = None,
+) -> dict[str, Any]:
     """Plotkin anti-unification over AST *statements and expressions*.
 
     Differing subtrees of the same shape become holes that remember both sides; differing
     subtrees of different shape become a single hole holding the whole subtree on each side.
+    Declared names (function/attribute/parameter names) are always holes, even when identical,
+    because agreement between the two sides says nothing about the next repository.
     """
+    if (
+        field is not None
+        and isinstance(a, str)
+        and a == b
+        and a
+        and not a.startswith("__")
+    ):
+        # `?d{k}` keeps declared-name slots separately numbered, so slot k always means "the
+        # k-th declared name of whatever structure this pattern matches".
+        k = sum(1 for key in holes if key.startswith("?d"))
+        name = f"?d{k}"
+        holes[name] = (a, b)
+        return {"H": name}
     if isinstance(a, ast.AST) and isinstance(b, ast.AST) and type(a) is type(b) and a._fields == b._fields:
         fields: dict[str, Any] = {}
         for f in a._fields:
-            fields[f] = _au(getattr(a, f, None), getattr(b, f, None), holes)
+            site = (type(a).__name__, f) if (type(a).__name__, f) in _DECLARED_NAME_SITES else None
+            fields[f] = _au(getattr(a, f, None), getattr(b, f, None), holes, field=site[1] if site else None)
         return {"T": type(a).__name__, "F": fields}
     if isinstance(a, list) and isinstance(b, list) and len(a) == len(b):
         return {"L": [_au(x, y, holes) for x, y in zip(a, b)]}
     if isinstance(a, ast.AST) and isinstance(b, ast.AST) and type(a) is type(b) and _dump(a) == _dump(b):
-        return {"T": type(a).__name__, "F": {f: _au(getattr(a, f, None), getattr(b, f, None), holes) for f in a._fields}}
+        return {"T": type(a).__name__, "F": {
+            f: _au(
+                getattr(a, f, None),
+                getattr(b, f, None),
+                holes,
+                field=f if (type(a).__name__, f) in _DECLARED_NAME_SITES else None,
+            )
+            for f in a._fields
+        }}
     if a == b and not isinstance(a, ast.AST) and not isinstance(b, ast.AST):
         return {"V": a}
     if a is None and b is None:
@@ -781,9 +896,30 @@ def _tree_match(
     """
     if "H" in pat:
         name = pat["H"]
+        # Two kinds of slot are bound from the TARGET rather than compared against the witness:
+        #   `?d{k}` declared names (a law must fire on a differently named function)
+        #   `@lit{k}` string literals (a law must fire on a differently keyed record)
+        # Their witness value proves nothing about the next repository, so comparing against it
+        # would refuse every held-out instance. Everything else is still pinned to its witness.
+        if name.startswith("?d"):
+            if name in binding and str(binding[name]) != str(node):
+                return False
+            binding[name] = node
+            return True
+        if name.startswith("@lit"):
+            if name in binding:
+                want = binding[name]
+                got = node.value if isinstance(node, ast.Constant) else node
+                return got == want
+            binding[name] = node.value if isinstance(node, ast.Constant) else node
+            return True
         expected = (before_dumps or {}).get(name)
-        if expected is not None and _dump(node) != expected:
-            return False
+        if expected is not None:
+            if isinstance(node, str):
+                if node != expected:
+                    return False
+            elif _dump(_blind_string_constants(node)) != expected:
+                return False
         if name in binding:
             return _dump(binding[name]) == _dump(node)
         binding[name] = node
@@ -801,7 +937,12 @@ def _tree_match(
 
 def _tree_build(pat: dict[str, Any], binding: Mapping[str, Any]) -> Any:
     if "H" in pat:
-        return copy.deepcopy(binding[pat["H"]])
+        name = pat["H"]
+        if name in binding:
+            return copy.deepcopy(binding[name])
+        # An unbound literal slot means the target lacked the value this law needs; building it
+        # anyway would emit a placeholder into source text.
+        raise KeyError(f"unbound_slot:{name}")
     if "L" in pat:
         return [_tree_build(p, binding) for p in pat["L"]]
     if "V" in pat:
@@ -835,6 +976,11 @@ class TreeRewriteMorphism:
     witness_after: str = ""
     name_restore: dict[str, str] = field(default_factory=dict)
     hole_before_dumps: dict[str, str] = field(default_factory=dict)
+    # Consistent literal holes: literals that occupy the *same role* on both sides of the learned
+    # pair (`name` in `record["name"]` -> `.get("name", "")`). They are bound at apply time, so the
+    # morphism learned on `read_name(record)` also fires on `read_nickname(rec)`. The concrete
+    # value stays in `literal_witness` so the entry is still inspectable and refutable (§9.2).
+    literal_witness: dict[str, Any] = field(default_factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         return dataclasses.asdict(self)
@@ -856,7 +1002,94 @@ class TreeRewriteMorphism:
             witness_after=str(d.get("witness_after") or ""),
             name_restore=dict(d.get("name_restore") or {}),
             hole_before_dumps=dict(d.get("hole_before_dumps") or {}),
+            literal_witness=dict(d.get("literal_witness") or {}),
         )
+
+
+def _string_literals(node: Any) -> list[str]:
+    """Every non-empty string literal outside function/class names, in source order."""
+    out: list[str] = []
+
+    def _walk(a: Any) -> None:
+        if isinstance(a, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            # Walk the body but never the function's own name: a morphism must not rewrite what
+            # it is called on.
+            for st in a.body:
+                _walk(st)
+            for d in a.decorator_list:
+                _walk(d)
+            return
+        if isinstance(a, ast.ClassDef):
+            for st in a.body:
+                _walk(st)
+            return
+        if isinstance(a, ast.Constant) and isinstance(a.value, str) and a.value:
+            out.append(a.value)
+            return
+        if isinstance(a, ast.AST):
+            for f in a._fields:
+                _walk(getattr(a, f, None))
+            return
+        if isinstance(a, (list, tuple)):
+            for x in a:
+                _walk(x)
+
+    _walk(node)
+    return out
+
+
+def _collect_consistent_literals(before_body: Any, after_body: Any) -> dict[str, Any]:
+    """Find literals the fix did NOT change. Those are slots, not constants.
+
+    Why this exists
+    ---------------
+    `SkillStoreV2` learns `if record is None: return None; return record["name"]` ->
+    `return (record or {}).get("name", "")`. Anti-unification abstracts the *identifiers*, so
+    the morphism already fires on `rec` as well as `record`. It cannot abstract `"name"`,
+    because anti-unification only creates holes where the two sides differ -- and the fix
+    leaves the key alone. But a key that survives the fix is precisely what differs in the next
+    repository, so without this step the morphism is welded to its own witness.
+
+    Rule (deliberately narrow, §1.5 remove-before-add):
+      * only **string** literals become slots (never numbers, never `True`/`False`: a magic
+        number inside arithmetic is not a field name and abstracting it invites nonsense);
+      * the literal must appear the **same number of times** on both sides, so its role is
+        unambiguous;
+      * it must not be a dunder, a dotted module path, or a file extension (syntax, not data).
+
+    The concrete value is retained in `literal_witness`, so the entry stays inspectable and
+    refutable (§9.2: provenance + re-validation probe). A slot never removes the requirement
+    that the rest of the shape match, so the morphism still cannot fire on unrelated code.
+    """
+    before = _string_literals(before_body)
+    after = _string_literals(after_body)
+    slots: dict[str, Any] = {}
+    for val in after:
+        if val.startswith("__") and val.endswith("__"):
+            continue
+        if "/" in val or val.startswith("."):
+            continue
+        if before.count(val) != after.count(val) or after.count(val) == 0:
+            continue
+        slot = f"@lit{len(slots)}"
+        if val not in slots.values():
+            slots[slot] = val
+    return slots
+
+
+def _replace_literals_in_dump(node: Any, slots: Mapping[str, Any]) -> Any:
+    """Rewrite a dumped pattern so every literal slot becomes a bindable `H` hole."""
+    if "V" in node:
+        val = node["V"]
+        for slot, lit in slots.items():
+            if val == lit and type(val) is type(lit):
+                return {"H": slot}
+        return node
+    if "L" in node:
+        return {"L": [_replace_literals_in_dump(x, slots) for x in node["L"]]}
+    if "H" in node:
+        return node
+    return {"T": node["T"], "F": {f: _replace_literals_in_dump(v, slots) for f, v in node["F"].items()}}
 
 
 class SkillStoreV2:
@@ -954,10 +1187,25 @@ class SkillStoreV2:
         alpha_holes = frozenset(name for name, (bv, av) in holes.items() if _alpha_pair(bv, av))
         rep = _after_view(pat, holes, alpha_holes)
 
-        hole_before = {name: _dump(bv) for name, (bv, _av) in holes.items()}
+        # Literal abstraction: a key/flag the fix did NOT change is a slot, not a constant.
+        lit_slots = _collect_consistent_literals(b_alpha, a_alpha)
+        if lit_slots and len(lit_slots) <= self.MAX_HOLES:
+            pat = _replace_literals_in_dump(pat, lit_slots)
+            rep = _replace_literals_in_dump(rep, lit_slots)
+
+        # A hole holding a bare identifier is stored as that identifier, not as its `ast.Name`
+        # dump: `_au` descends into `Name.id`, so `?0` arrives as the string `'__b0'` while
+        # `_tree_match` hands the whole `ast.Name` node back. The mismatch made every stored
+        # morphism unmatchable. Compare like with like.
+        def _hole_dump(bv: Any) -> str:
+            if isinstance(bv, str):
+                return bv
+            return _dump(_blind_string_constants(bv))
+
+        hole_before = {name: _hole_dump(bv) for name, (bv, _av) in holes.items()}
         blob = json.dumps(
-            {"pat": pat, "rep": rep, "r": created_after, "hb": hole_before},
-            sort_keys=True, separators=(",", ":"),
+            {"pat": pat, "rep": rep, "r": created_after, "hb": hole_before, "lit": lit_slots},
+            sort_keys=True, separators=(",", ":"), default=str,
         )
         mid = "trm_" + hashlib.sha256(blob.encode("utf-8")).hexdigest()[:16]
         existing = self.morphisms.get(mid)
@@ -978,6 +1226,7 @@ class SkillStoreV2:
             witness_after=textwrap.dedent(after_src)[:600],
             name_restore=dict(created_after),
             hole_before_dumps=hole_before,
+            literal_witness=dict(lit_slots),
         )
         self.morphisms[mid] = m
         self.save()
@@ -1005,7 +1254,33 @@ class SkillStoreV2:
             for placeholder, orig in tgt_names.items():
                 restore[placeholder] = orig
                 restore[placeholder.replace("__b", "__a", 1)] = orig
-            if any(k not in restore for k in _placeholders_in(m.replacement)):
+            # Literal slots are bound from the TARGET by `_tree_match`, never from the witness:
+            # that is what lets `"name"` in the taught repo become `"nick"` in a held-out repo.
+            # They still need to be recognised as legitimate placeholders here.
+            lit_slots = dict(getattr(m, "literal_witness", {}) or {})
+            # Bind literal slots by occurrence against the TARGET: the Nth string constant of the
+            # target plays the Nth slot of the learned pair. This is what turns a witness-bound
+            # key (`record["name"]` -> `.get("name", "")`) into a transferable law
+            # (`rec["nick"]` -> `.get("nick", "")`). Refused, not guessed, when the target has
+            # fewer string constants than the morphism needs.
+            if lit_slots:
+                tgt_strings = _string_literals(body)
+                for slot in lit_slots:
+                    idx = int(slot.replace("@lit", ""))
+                    if idx < len(tgt_strings):
+                        binding[slot] = tgt_strings[idx]
+            # Declared-name slots are bound the same way, from the target's own vocabulary. A law
+            # learned on `get_name(user)` therefore fires on `read_nickname(rec)`: the structure
+            # carried the knowledge, the names never did.
+            if any(slot.startswith("?d") for slot in _placeholders_in(m.pattern)):
+                tgt_names = _declared_names(body)
+                for slot in _placeholders_in(m.pattern):
+                    if not slot.startswith("?d"):
+                        continue
+                    idx = int(slot[2:])
+                    if idx < len(tgt_names):
+                        binding[slot] = tgt_names[idx]
+            if any(k not in restore and k not in lit_slots for k in _placeholders_in(m.replacement)):
                 continue
             try:
                 new_body = _restore_names(_tree_build(m.replacement, binding), restore)

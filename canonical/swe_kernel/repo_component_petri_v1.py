@@ -3,7 +3,7 @@
 Breaks the fixed-grammar ceiling (`THE_SPACE_IS_THE_ARTIFACT` 75.2% wall) with zero model calls:
 1. Mines repository-native methods, functions, exception types, called test target symbols, and
    specification literals from the 2-hop causal neighborhood around a localized fault site
-   (cached per `(repo_root, rel_path)` so AST mining runs once per file in ~20ms).
+   (read at the current revision; a pathname is not a component version).
 2. Builds a bounded Type-Transition Petri Net over live runtime frame tokens (`locals`, `self.<attr>`,
    iterable element types) + higher-order collection/string/optional/exception functors:
    - Mapped repo-method comprehensions: `[el.m(*args) for el in seq]`,
@@ -41,13 +41,6 @@ _SAFE_EXCEPTION_NAMES = frozenset(
 _ITERABLE_TYPE_NAMES = frozenset(
     {"list", "tuple", "set", "frozenset", "dict_keys", "dict_values", "generator", "iterator"}
 )
-
-# Per-(repo_root_str, rel_path) module component cache to avoid redundant AST/import scans
-_FILE_COMPONENT_CACHE: dict[
-    tuple[str, str],
-    tuple[list["RepoCallableComponent"], dict[str, list["RepoCallableComponent"]], set[str]],
-] = {}
-
 
 class RepoCallableComponent:
     """Typed callable component mined from the target file or its 1-hop semantic graph."""
@@ -208,11 +201,6 @@ def _mine_file_level_components(
     parsed_tree: ast.AST,
     semantic_graph: IncrementalSemanticGraph | None = None,
 ) -> tuple[list[RepoCallableComponent], dict[str, list[RepoCallableComponent]], set[str]]:
-    cache_key = (str(repo_root), rel_path)
-    cached = _FILE_COMPONENT_CACHE.get(cache_key)
-    if cached is not None:
-        return cached
-
     module_functions: list[RepoCallableComponent] = []
     methods_by_class: dict[str, list[RepoCallableComponent]] = {}
     class_bases: dict[str, list[str]] = {}
@@ -334,11 +322,7 @@ def _mine_file_level_components(
                         existing.add(b_comp.name)
                         methods_by_class.setdefault(cls_name, []).append(b_comp)
 
-    res = (module_functions[:28], methods_by_class, in_scope_exceptions)
-    if len(_FILE_COMPONENT_CACHE) > 256:
-        _FILE_COMPONENT_CACHE.clear()
-    _FILE_COMPONENT_CACHE[cache_key] = res
-    return res
+    return module_functions[:28], methods_by_class, in_scope_exceptions
 
 
 def mine_repo_neighborhood_components(

@@ -75,28 +75,21 @@ NON_CLAIMS = (
     "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
 )
 
-
 ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
-
 
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
-
 # --------------------------------------------------------------------------- bytes
-
 
 def canonical_json(value: Any) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
-
 def digest_value(value: Any) -> str:
     return hashlib.sha256(canonical_json(value).encode("utf-8")).hexdigest()
 
-
 def artifact_digest(model: Mapping[str, Any]) -> str:
     return digest_value({k: v for k, v in model.items() if k != "digest"})
-
 
 def tokenize(text: str) -> list[str]:
     out: list[str] = []
@@ -107,14 +100,12 @@ def tokenize(text: str) -> list[str]:
         out.append(token)
     return out
 
-
 # The compiler's own repository-path scanner, character class and all: a path
 # literal is two or more "/"-joined segments. Kept byte-for-byte in step with
 # ``goal_compiler._repo_paths_uncached`` -- if the two ever disagree, coverage is
 # measured over words the caller never asked with.
 _PATH_LITERAL = re.compile(r"(?:[A-Za-z0-9_.-]+/)+[A-Za-z0-9_.-]+")
 _URL_LITERAL = re.compile(r"https?://[^\s)\]}>]+")
-
 
 def path_literals(text: str, root: str | Path | None = None) -> list[str]:
     """The spans of ``text`` that name a real artifact, in sentence order.
@@ -151,7 +142,6 @@ def path_literals(text: str, root: str | Path | None = None) -> list[str]:
         found.append(match.group(0))
     return found
 
-
 def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
     """The caller's ASK: the sentence with its stated path literals blanked out.
 
@@ -178,19 +168,15 @@ def ask_tokens(text: str, root: str | Path | None = None) -> list[str]:
             ask = ask.replace(literal, " ")
     return tokenize(ask)
 
-
 # --------------------------------------------------------------------------- loading
-
 
 _VERIFIED_BLOB_DIGESTS: dict[str, str] = {}
 _VERIFIED_DIGEST_TO_RAW_SHA: dict[str, str] = {}
 _OPEN_MODEL_MEM_CACHE: dict[tuple[str, int, int], "UnifiedModel"] = {}
 _MMAP_CSR_MEM_CACHE: dict[tuple[str, str], Any] = {}
 
-
 def _core_cache_dir() -> Path:
     return ROOT / "canonical" / "astra_runtime" / "tmp"
-
 
 def _get_mmap_csr(section: str, raw_sha: str) -> Any | None:
     if not raw_sha:
@@ -210,7 +196,6 @@ def _get_mmap_csr(section: str, raw_sha: str) -> Any | None:
         return reader
     except Exception:
         return None
-
 
 def load_model(
     path: str | Path | None = None,
@@ -262,7 +247,6 @@ def load_model(
         _VERIFIED_DIGEST_TO_RAW_SHA[str(declared)] = raw_sha
     return model
 
-
 def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
     id_tokens = set(tokenize(cid))
     return {
@@ -270,7 +254,6 @@ def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
         for t in (row.get("triggers") or [])
         if str(t) not in id_tokens and len(str(t)) > 3
     }
-
 
 def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
@@ -336,7 +319,6 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         "knowledge_len": len(knw_rows),
     }
 
-
 class _LazyMarshalDict(dict):
     """`dict` subclass backed by per-entry `marshal` blobs so `open_model()` skips 18,000+ nested dict allocations."""
 
@@ -375,7 +357,6 @@ class _LazyMarshalDict(dict):
 
     def copy(self) -> dict[str, Any]:
         return dict(self.items())
-
 
 def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], bytes, bytes]:
     """Split `<1.5 KB` Tier-0 boot header, `~85 KB` Tier-1 pre-scaled route tables, and Tier-2 full capability blobs."""
@@ -472,7 +453,6 @@ def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], by
     }
     return hdr, marshal.dumps(route_payload), marshal.dumps(tables_payload)
 
-
 def _write_hot_tier_files(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]) -> dict[str, Any]:
     hdr, route_bytes, tables_bytes = _pack_hot_marshal_tiers(core)
     pid = os.getpid()
@@ -490,7 +470,6 @@ def _write_hot_tier_files(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]
     except OSError:
         return {**hdr, "_route_blob": route_bytes, "_tables_blob": tables_bytes}
     return hdr_disk
-
 
 def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_map = {
@@ -593,14 +572,19 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
         "knowledge_title_postings": {k: tuple(v) for k, v in knw_title_postings.items()},
     }
 
-
 # --------------------------------------------------------------------------- model
 
 
-from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import (
-    Wave49To50UnifiedModelMixin as _Wave49To50UnifiedModelMixin,
-)
-
+# The full installation includes Waves 40-50; blind worker mounts deliberately omit them.
+try:
+    from canonical.runtime.wave49_50_structural_ast_repair_and_titan_adjudication_v1 import (
+        Wave49To50UnifiedModelMixin as _Wave49To50UnifiedModelMixin,
+    )
+    _Wave40To42UnifiedModelMixin = _Wave49To50UnifiedModelMixin
+except ModuleNotFoundError as exc:
+    if not str(exc.name or "").startswith("canonical.runtime.wave4"):
+        raise
+    _Wave49To50UnifiedModelMixin = _Wave40To42UnifiedModelMixin = object
 
 class UnifiedModel(_Wave49To50UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
@@ -614,6 +598,8 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         _target_path: Path | None = None,
         _artifact_path: Path | None = None,
     ):
+        if _Wave40To42UnifiedModelMixin is object and model.get("model_id") != "brain-harbor-cold":
+            raise UnifiedModelError("FULL_MODEL_WAVE_PROVIDER_MISSING")
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._target_path: Path | None = _target_path or _artifact_path
         self._artifact_path: Path | None = self._target_path
@@ -883,15 +869,6 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         self._index_dict = value
 
     @property
-    def _capability_id_terms(self) -> dict[str, frozenset[str]]:
-        self._ensure_full_tables()
-        if self._cap_id_terms_sets is None:
-            self._cap_id_terms_sets = {
-                cid: frozenset(t) for cid, t in (self._cap_id_terms_raw or {}).items()
-            }
-        return self._cap_id_terms_sets
-
-    @property
     def _scaled_index(self) -> dict[str, tuple[tuple[str, float], ...]]:
         self._ensure_route_tables()
         return self._scaled_index_map  # type: ignore[return-value]
@@ -900,11 +877,6 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
     def _exact_id_lookup(self) -> dict[str, str]:
         self._ensure_route_tables()
         return self._exact_id_lookup_map  # type: ignore[return-value]
-
-    @property
-    def _cid_folded_pairs(self) -> tuple[tuple[str, str], ...]:
-        self._ensure_route_tables()
-        return self._cid_folded_pairs_tup  # type: ignore[return-value]
 
     @property
     def _cid_dot_pairs(self) -> tuple[tuple[str, str], ...]:
@@ -1492,13 +1464,6 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         self._knowledge_postings_cache = dict(sec["knowledge_postings"])
         self._knowledge_title_postings_cache = dict(sec["knowledge_title_postings"])
 
-    def _hydrate_secondary_indexes(self) -> None:
-        if self._source_index_cache is not None and self._research_index_cache is not None and self._knowledge_cache is not None:
-            return
-        full = self._ensure_full_model()
-        sec = _extract_secondary_indexes(full, self._raw_sha256)
-        self._apply_secondary_bundle(sec)
-
     @property
     def model(self) -> dict[str, Any]:
         return self._ensure_full_model()
@@ -1519,11 +1484,6 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         return self._extended_source_index_cache  # type: ignore[return-value]
 
     @property
-    def _extended_source_df(self) -> dict[str, int]:
-        self._ensure_extended_source_index()
-        return self._extended_source_df_cache  # type: ignore[return-value]
-
-    @property
     def research_index(self) -> dict[str, dict[str, Any]]:
         self._ensure_research_index()
         return self._research_index_cache  # type: ignore[return-value]
@@ -1542,16 +1502,6 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
     def _knowledge_df(self) -> dict[str, int]:
         self._ensure_knowledge()
         return self._knowledge_df_cache  # type: ignore[return-value]
-
-    @property
-    def _knowledge_lengths(self) -> list[int]:
-        self._ensure_knowledge()
-        return self._knowledge_lengths_cache  # type: ignore[return-value]
-
-    @property
-    def _avg_length(self) -> float:
-        self._ensure_knowledge()
-        return self._avg_length_cache  # type: ignore[return-value]
 
     # ------------------------------------------------------------------ status
 
@@ -2720,7 +2670,13 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         is_goal: Any = None,
         **kwargs: Any,
     ) -> dict[str, Any]:
-        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        """Explore either a declared indexed-screen port or the existing abstract environment."""
+        if kwargs.get('surface') == 'indexed_screen':
+            from canonical.runtime.frame_program_v1 import explore_screen
+            kwargs.pop('surface')
+            if actions or is_goal is not None:
+                raise ValueError('a screen supplies its own offered actions and advancement feedback')
+            return explore_screen(env, **kwargs)
         from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
 
         return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
@@ -2841,6 +2797,12 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
     ) -> dict[str, Any]:
         requested = str(mode or "AUTO").strip().upper()
         inputs = dict(inputs or {})
+        if requested == "LIVE_BROWSER_STEP":
+            return self._epistemic_envelope(requested, goal, self.live_browser_step(goal, **inputs))
+        if requested == "REPO_NATIVE_SWE":
+            if inputs.get("residual_proposer") is not None:
+                return self._failure(goal, "REFUSED__MODEL_FREE_ROUTE")
+            return self.solve_swe_repo_native(inputs.pop("repo_root", cwd), **inputs)
         if requested == "RECALL":
             return self.recall(goal)
         # Unified Hidden-Arsenal fast rungs (addressable via explicit mode or AUTO structured inputs)
@@ -2896,6 +2858,16 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
                 inputs["goal_tree"] = inputs.pop("eggmind_goal_tree")
             pil = _ASYM_SOLVE_MODES.get(requested, str(inputs.pop("pillar", "AUTO")))
             return self._epistemic_envelope(requested, goal, self.asymmetric_leapfrog(goal, pillar=pil, inputs=inputs))
+
+        if requested == "EPISTEMIC" and "harbor_task" in inputs:
+            # The Harbor transport asks for a proposal, not workspace effects.
+            # Never route a malformed cycle to the ordinary workspace solver.
+            from canonical.swe_kernel.harbor_epistemic_controller_v1 import (
+                is_harbor_epistemic_envelope, solve_harbor_cycle,
+            )
+            if is_harbor_epistemic_envelope(inputs):
+                return solve_harbor_cycle(goal, inputs=inputs, model_digest=self.digest)
+            return self._failure(goal, "INVALID_HARBOR_CYCLE_ENVELOPE")
 
         if requested in ("EPISTEMIC", "PORTFOLIO"):
             if callable(inputs.get("mealy_oracle")):
@@ -5262,6 +5234,42 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             admitted_capabilities_visible=len(self.capabilities),
         )
 
+    def solve_swe_cold_start(
+        self,
+        issue_text: str,
+        repo_root: str | Path,
+        *,
+        timeout_s: float = 30.0,
+        keep_patch_applied: bool = False,
+        skill_store_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Wave 45: the door a person actually knocks on.
+
+        A repository and a sentence. The adapter scans, binds test targets and candidate files
+        from evidence (issue terms + import graph), then hands the bound problem to
+        `solve_swe_repo_native`. Zero model calls; a refusal names what is missing instead of
+        guessing.
+        """
+        res = self.boundary_router.route_swe_cold_start(
+            issue_text=issue_text,
+            repo_root=repo_root,
+            timeout_s=timeout_s,
+            keep_patch_applied=keep_patch_applied,
+            skill_store_path=skill_store_path,
+        )
+        passed = bool(res.get("pass"))
+        return self._envelope(
+            operation="SWE_COLD_START",
+            goal=f"swe_cold_start:{repo_root}",
+            status=str(res.get("status") or ("PASS" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            tier=res.get("tier"),
+            reason=res.get("reason"),
+            binding=res.get("binding"),
+            elapsed_s=res.get("elapsed_s"),
+            payload=res,
+        )
+
     def solve_swe_repo_native(
         self,
         repo_root: str | Path,
@@ -5269,6 +5277,8 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         test_targets: Sequence[str] | None = None,
         candidate_files: Sequence[str] | None = None,
         in_run_repair_vocab: Mapping[str, Any] | None = None,
+        repair_store: str | Path | None = None,
+        learn_verified: bool = True,
         prior_demonstrations: Sequence[tuple[str, str, str]] = (),
         witness_envs: Sequence[Mapping[str, Any]] | None = None,
         witness_targets: Sequence[Any] | None = None,
@@ -5277,6 +5287,7 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         residual_proposer: Any = None,
         keep_patch_applied: bool = False,
         timeout_s: float = 30.0,
+        skill_store_path: str | Path | None = None,
     ) -> dict[str, Any]:
         """Wave 23: Repo-Native Multi-File SWE Engine (`0D` × 7 hidden SWE superweapons + CoW Zygote + online crystallization)."""
         res = self.boundary_router.route_swe_repo_native_multifile(
@@ -5284,6 +5295,7 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             test_targets=test_targets,
             candidate_files=candidate_files,
             in_run_repair_vocab=in_run_repair_vocab,
+            repair_store=repair_store, learn_verified=learn_verified,
             prior_demonstrations=prior_demonstrations,
             witness_envs=witness_envs,
             witness_targets=witness_targets,
@@ -5292,6 +5304,7 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             residual_proposer=residual_proposer,
             keep_patch_applied=keep_patch_applied,
             timeout_s=timeout_s,
+            skill_store_path=skill_store_path,
         )
         passed = bool(res.get("pass"))
         return self._envelope(
@@ -6087,13 +6100,32 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
 
         return uul.lift_protocol_and_verify_effect(**kwargs)
 
+    def live_browser_episode(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import episode
+        return episode(room, goal, **kwargs)
+
+    def live_browser_step(self, goal: str, *, room: Any, **kwargs: Any) -> dict[str, Any]:
+        from canonical.runtime.witnessed_browser_v1 import step
+        return step(room, goal, **kwargs)
+
+    def revision_memory(self, path: str | Path, operation: str, **payload: Any) -> dict[str, Any]:
+        from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
+        store = RevisionStore(path)
+        if operation in ('ingest_turn', 'answer_question'):
+            from canonical.runtime.dialogue_revision_reader_v1 import DialogueReader
+            reader = DialogueReader(store)
+            if operation == 'ingest_turn':
+                return {'statements_grounded': reader.ingest(**payload)}
+            return reader.answer(**payload)
+        return store.apply(operation, payload)
+
     def semiring_jtms_memory_cycle(
         self,
         *,
         chain_count: int = 24,
         chain_depth: int = 4,
     ) -> dict[str, Any]:
-        """Move 3: Why-Provenance Semiring `(2^(2^V), union, join)` over `Z`-set DBSP (`100%` `MEME` Cascade & Absence)."""
+        """Move 3: Structured chain retraction control, not a score on MEME conversations."""
         from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
 
         return uul.run_meme_semiring_benchmark(chain_count=chain_count, chain_depth=chain_depth)
@@ -6814,45 +6846,12 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Verbatim-first 4-way RRF budgeted retrieval + Nemori surprise gating + CLM file-mirrored context + TMA-NM."""
-        eng = self._get_clm_rrf_memory_engine()
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "WRITE_SURPRISE_GATED":
-            return eng.write_surprise_gated(
-                record_id=str(p["record_id"]),
-                key=str(p["key"]),
-                verbatim_text=str(p["verbatim_text"]),
-                payload=p.get("payload"),
-                valid_from=p.get("valid_from"),
-                origin_token=str(p.get("origin_token", "TRUSTED_VERIFIER")),
-                min_surprise=float(p.get("min_surprise", 0.25)),
-                entities=p.get("entities") or (),
-                source_code=str(p.get("source_code", "")),
-            )
-        if op == "RETRIEVE_4WAY_RRF_BUDGETED":
-            return eng.retrieve_4way_rrf_budgeted(
-                str(p.get("query", "")),
-                char_budget=int(p.get("char_budget", 1200)),
-                top_k=int(p.get("top_k", 5)),
-                rrf_k=int(p.get("rrf_k", 60)),
-                query_source_code=str(p.get("query_source_code", "")),
-                query_entities=p.get("query_entities") or (),
-                at_time=p.get("at_time"),
-            )
-        if op == "CLM_OFFLOAD":
-            return eng.clm_offload(
-                str(p["context_text"]),
-                workspace_dir=p["workspace_dir"],
-                label=str(p.get("label", "working_ctx")),
-                min_bytes=int(p.get("min_bytes", 128)),
-            )
-        if op == "CLM_GREP_RESTORE":
-            return eng.clm_grep_restore(
-                p["offload_ref"],
-                pattern=p.get("pattern"),
-                max_chars=int(p.get("max_chars", 2000)),
-            )
-        raise UnifiedModelError(f"Unsupported CLM/RRF memory operation: {operation}")
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
+
+        try:
+            return wave39.dispatch_clm_rrf_operation(self._get_clm_rrf_memory_engine(), operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def partial_route_with_jitrl(
         self,
@@ -6860,35 +6859,12 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Wave 39: Closed-form JitRL logit modulation + SkillTTA dynamic skill synthesis + Intra-task Partial Routing."""
-        from canonical.runtime.wave39_leapfrog_unification_v1 import PartialRoutingJitRLSkillTTAEngine
+        from canonical.runtime import wave39_leapfrog_unification_v1 as wave39
 
-        p = dict(payload or {})
-        op = str(operation).upper()
-        if op == "JITRL_MODULATE":
-            return PartialRoutingJitRLSkillTTAEngine.jitrl_modulate_logits(
-                p["prior_logits"],
-                state_signature=str(p.get("state_signature", "")),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 1.0)),
-            )
-        if op == "SKILLTTA_SYNTHESIZE":
-            return PartialRoutingJitRLSkillTTAEngine.skilltta_synthesize(
-                p["target_task"],
-                verified_traces=p.get("verified_traces") or (),
-                top_k=int(p.get("top_k", 3)),
-            )
-        if op == "PARTIAL_ROUTE":
-            return PartialRoutingJitRLSkillTTAEngine.partial_route_subtasks(
-                p.get("subtasks") or (),
-                compiled_skills=p.get("compiled_skills"),
-                symbolic_solver=p.get("symbolic_solver"),
-                mendel_solver=p.get("mendel_solver"),
-                pluggable_proposer=p.get("pluggable_proposer"),
-                delta_threshold=float(p.get("delta_threshold", 0.55)),
-                episodic_receipts=p.get("episodic_receipts") or (),
-                beta=float(p.get("beta", 0.5)),
-            )
-        raise UnifiedModelError(f"Unsupported Partial-Routing/JitRL operation: {operation}")
+        try:
+            return wave39.dispatch_partial_routing_operation(operation, payload or {})
+        except wave39.UnsupportedWave39Operation as exc:
+            raise UnifiedModelError(str(exc)) from exc
 
     def self_verify_harvested_surfaces(self, *, limit: int = 40) -> dict[str, Any]:
         """Wave 39: Live offline AST + SHA-256 + public-entrypoint audit over `harvested_capabilities`."""
@@ -6901,12 +6877,9 @@ class UnifiedModel(_Wave49To50UnifiedModelMixin):
             limit=int(limit),
         )
 
-
 # --------------------------------------------------------------------------- helpers
 
-
 _VERSION_FAMILY_RE = re.compile(r"^(.+?)(?:_v(\d+))(\.[^.]+)$", re.IGNORECASE)
-
 
 def dedupe_version_families(rows: Sequence[Mapping[str, Any]], *, path_key: str = "path") -> list[dict[str, Any]]:
     """Wave 31 Elon's Law: collapse superseded `*_v1..v(N-1).ext` siblings so the latest version wins."""
@@ -6935,7 +6908,6 @@ def dedupe_version_families(rows: Sequence[Mapping[str, Any]], *, path_key: str 
         merged.append((first_idx, d))
     merged.sort(key=lambda item: item[0])
     return [d for _i, d in merged]
-
 
 def _missing_declared_dependencies(
     row: Mapping[str, Any],
@@ -6979,13 +6951,11 @@ def _missing_declared_dependencies(
             missing.append(name)
     return sorted(set(missing))
 
-
 def _normalise_capability_id(value: str) -> str:
     cid = str(value or "").strip()
     if cid.startswith("bound:"):
         cid = cid[len("bound:"):]
     return cid
-
 
 def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
     wanted = [t.casefold() for t in terms]
@@ -7003,14 +6973,11 @@ def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
         return ""
     return best[:limit]
 
-
 _DEFAULT_TARGET_PATH = (ROOT / DEFAULT_ARTIFACT).resolve()
 _DEFAULT_TARGET_KEY = str(_DEFAULT_TARGET_PATH)
 
-
 def _stat_cache_path() -> Path:
     return _core_cache_dir() / "unified_model_stat_v1.marshal"
-
 
 def _read_stat_sha(target_key: str, st: os.stat_result) -> str | None:
     """Salsa/Git racy-clean stat -> raw_sha256 fast path (skips 13.45 MB read+SHA256 on boot)."""
@@ -7037,7 +7004,6 @@ def _read_stat_sha(target_key: str, st: os.stat_result) -> str | None:
         return None
     return None
 
-
 def _write_stat_sha(target_key: str, st: os.stat_result, raw_sha: str) -> None:
     try:
         cdir = _core_cache_dir()
@@ -7060,7 +7026,6 @@ def _write_stat_sha(target_key: str, st: os.stat_result, raw_sha: str) -> None:
         tmp_f.replace(p)
     except OSError:
         pass
-
 
 def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path | None = None) -> None:
     """Emit SHA-256-verified `.core.marshal` + 5 isolated per-section sidecars + FTS5 SQLite + Salsa stat cache."""
@@ -7226,7 +7191,6 @@ def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path 
             _write_stat_sha(str(resolved), st, raw_sha)
     except Exception:
         pass
-
 
 def open_model(
     path: str | Path | None = None, *, root: str | Path | None = None
@@ -7407,9 +7371,7 @@ def open_model(
     _OPEN_MODEL_MEM_CACHE[mem_key] = inst
     return inst
 
-
 load_unified_model = open_model
-
 
 def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:
     """Return the binary-marshaled adapter AST index without parsing the full 14 MB JSON."""
@@ -7425,7 +7387,6 @@ def adapter_ast_index_map(path: Path | str | None = None) -> dict[str, Any]:
             idx = inst._core_meta.get("adapter_ast_index") or ((inst.model.get("grammar") or {}).get("adapter_ast_index") or {})
     return idx if isinstance(idx, dict) else dict(idx)
 
-
 def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict[str, Any] | None:
     """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
     try:
@@ -7439,12 +7400,9 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
     except Exception:
         return None
 
-
 # --------------------------------------------------------------------------- cli
 
-
 SOVEREIGN_ZERO_LLM_MODEL_SPEC = "canonical.runtime.brain_unified_model_v1:brain_model_callable"
-
 
 def __getattr__(name: str) -> Any:
     if name in ('SovereignZeroLLMPlanner', '_SOVEREIGN_PLANNER', 'brain_model_callable'):
@@ -7453,10 +7411,8 @@ def __getattr__(name: str) -> Any:
         return getattr(_szp, name)
     raise AttributeError(f'module {__name__!r} has no attribute {name!r}')
 
-
 def _print(payload: Any) -> None:
     print(json.dumps(payload, indent=1, sort_keys=True, ensure_ascii=False))
-
 
 def main(argv: list[str] | None = None) -> int:
     import argparse
@@ -7527,7 +7483,6 @@ def main(argv: list[str] | None = None) -> int:
     )
     _print(out)
     return 0 if out.get("pass") or out.get("operation") == "RECALL" else 1
-
 
 if __name__ == "__main__":
     raise SystemExit(main())

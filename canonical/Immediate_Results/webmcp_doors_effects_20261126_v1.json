@@ -1,0 +1,838 @@
+{
+  "kind": "post-freeze local readback, not an official WebMCP or OSWorld grade",
+  "site": "GoogleChromeLabs/webmcp-tools@f3faa835f3fdeab42e41b055209d6954b192f653",
+  "pages_sha256": {
+    "forest.html": "9ca44ec37feda75ff9e5bd9f3ef7ce476a13c22f87b99899f16ea86dde6014e6",
+    "index.html": "ea407c1c0e17331fa09051d935afe8fd9bfd2108a2da96300b072b93731a1c41",
+    "magic.html": "b539b283576c6aaa307beb26c665831b7891a4865ab0b6ed8dd8314c5150d0f3",
+    "ocean.html": "a83955ae13080cb45f7c195f25772b742aad16fa6409bff84df803daaa1a1eeb"
+  },
+  "capture_sha256": "698d6939ec8b8f8f0e2854da2360260ec592e4a6ffa084269921a8230c45d6f5",
+  "rows": [
+    {
+      "index": 8,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.936,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.222,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.646,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.249,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.973,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 2.192,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.67,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "The Coral Cove",
+          "Wheee! Look at me go!"
+        ],
+        [
+          "The Coral Cove",
+          "You can't see me..."
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.797,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.976,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 2.009,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.652,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.538,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.958,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.931,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.665,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.232,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.984,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.925,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.691,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.504,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Whispering Woods",
+          "Careful where you step, human..."
+        ]
+      ],
+      "effect": false,
+      "seconds": 2.002,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Whispering Woods",
+          "Careful where you step, human..."
+        ]
+      ],
+      "effect": false,
+      "seconds": 2.006,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.711,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Whispering Woods",
+          "Careful where you step, human..."
+        ],
+        [
+          "The Whispering Woods",
+          "I am the keeper of the ferns."
+        ]
+      ],
+      "effect": true,
+      "seconds": 2.248,
+      "calibrated": true
+    }
+  ],
+  "initial_immediate_readback": [
+    {
+      "index": 8,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.537,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.55,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 9.5,
+      "calibrated": true
+    },
+    {
+      "index": 8,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 1.621,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.544,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.58,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 9.465,
+      "calibrated": true
+    },
+    {
+      "index": 9,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Coral Cove",
+          "Blub! Do you like my garden?"
+        ],
+        [
+          "The Coral Cove",
+          "Wheee! Look at me go!"
+        ],
+        [
+          "The Coral Cove",
+          "You can't see me..."
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 9.682,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.476,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ]
+      ],
+      "effect": false,
+      "seconds": 9.446,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.429,
+      "calibrated": true
+    },
+    {
+      "index": 10,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 1.624,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.459,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.464,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 9.437,
+      "calibrated": true
+    },
+    {
+      "index": 11,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ]
+      ],
+      "effect": true,
+      "seconds": 1.567,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.449,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.456,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.424,
+      "calibrated": true
+    },
+    {
+      "index": 12,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Wizard's Attic",
+          "The room is too dark to see much."
+        ],
+        [
+          "The Wizard's Attic",
+          "The owl blinks at the sudden light!"
+        ],
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": true,
+      "seconds": 1.653,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "original",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.506,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "scoped",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": null,
+      "error": "missing same-origin visible heading",
+      "seconds": 1.496,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "noop",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ]
+      ],
+      "effect": false,
+      "seconds": 1.447,
+      "calibrated": true
+    },
+    {
+      "index": 13,
+      "arm": "positive_ui",
+      "states": [
+        [
+          "Choose a Door",
+          ""
+        ],
+        [
+          "The Whispering Woods",
+          "Careful where you step, human..."
+        ],
+        [
+          "The Whispering Woods",
+          "I am the keeper of the ferns."
+        ]
+      ],
+      "effect": true,
+      "seconds": 1.562,
+      "calibrated": true
+    }
+  ]
+}

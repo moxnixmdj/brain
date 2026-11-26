@@ -3140,7 +3140,7 @@ def _synthesize_immediate_from_traces(
     return None
 
 
-_DEFAULT_POLICY_ORGAN_TEMPLATE: ExecutableOrgan | None = None
+_DEFAULT_POLICY_ORGAN_TEMPLATE: dict[str, Any] | None = None
 
 
 def compile_policy_organ(
@@ -3167,7 +3167,7 @@ def compile_policy_organ(
         and not combiner_src
     )
     if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is not None:
-        return copy.deepcopy(_DEFAULT_POLICY_ORGAN_TEMPLATE)
+        return ExecutableOrgan.from_row(copy.deepcopy(_DEFAULT_POLICY_ORGAN_TEMPLATE))
     observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
     imm_src = (learned_immediate or "").strip()
     comb_src = (combiner_src or "").strip()
@@ -3258,7 +3258,8 @@ def compile_policy_organ(
     if observed or imm_src or comb_src:
         organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0) + (4 if comb_src else 0))
     if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is None:
-        _DEFAULT_POLICY_ORGAN_TEMPLATE = copy.deepcopy(organ)
+        # Cache data, not a live execution namespace containing Python modules.
+        _DEFAULT_POLICY_ORGAN_TEMPLATE = copy.deepcopy(organ.as_row())
     return organ
 
 

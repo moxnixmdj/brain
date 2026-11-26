@@ -1450,6 +1450,17 @@ class SemiringProvenanceJTMSMemory:
         if not witness_sha:
             return {"accepted": False, "reason": "UNWITNESSED_WRITE_REFUSED"}
         t0 = time.perf_counter()
+        triple = (subj, rel, obj)
+        if premise_id is not None and premise_id in self.premises:
+            known = self.premises[premise_id]
+            if not known["active"] or known["triple"] != triple or known["witness_sha"] != witness_sha:
+                return {"accepted": False, "reason": "PREMISE_ID_CONFLICT"}
+        existing = self.extensional_by_triple.get(triple)
+        if existing is not None:
+            # This view retracts by triple, not witness. Do not add an orphan
+            # alternative monomial when we observe the SAME triple twice.
+            return {"accepted": True, "premise_id": existing, "tx": self.tx_clock,
+                    "duplicate": True, "cascaded_retractions": [], "elapsed_us": 0.0}
         self.tx_clock += 1
         cascaded_retractions: list[tuple[str, str, str]] = []
 
@@ -1650,6 +1661,7 @@ def run_meme_semiring_benchmark(*, chain_count: int = 24, chain_depth: int = 4) 
     return {
         "schema": SCHEMA,
         "operation": "SEMIRING_JTMS_MEME_BENCHMARK",
+        "input_kind": "GENERATED_TYPED_CHAINS", "official_meme_score": None,
         "pass": cascade_acc == 1.0 and absence_acc == 1.0 and diamond_acc == 1.0,
         "chains_tested": chain_count,
         "hops_per_chain": chain_depth,
@@ -1683,8 +1695,12 @@ def minimax_interrogate_version_space(
     """
     from canonical.runtime import finite_minimax_decision_region_v1 as drd
 
+    from canonical.swe_kernel.reset_probe_v1 import predict
+
     t0 = time.perf_counter()
     world_ids = sorted(hypotheses.keys())
+    if len(world_ids) > 16 or len(candidate_probes)>64:
+        return {"pass": False, "status": "FINITE_PROBE_BUDGET_EXCEEDED", "model_calls": 0}
     if not world_ids:
         return {
             "schema": SCHEMA,
@@ -1719,13 +1735,16 @@ def minimax_interrogate_version_space(
             continue
         inp = p_spec.get("input")
         probe_inputs_by_id[oid] = inp
-        cost = float(p_spec.get("cost_units", 1.0))
+        cost = p_spec.get("cost_units", 1.0)
+        if type(cost) not in (int, float) or not math.isfinite(cost) or cost < 0:
+            return {"pass": False,"status": "INVALID_PROBE_COST","model_calls": 0}
         outcomes: dict[str, Any] = {}
         for wid in world_ids:
             try:
-                outcomes[wid] = hypotheses[wid](inp)
-            except Exception as exc:
-                outcomes[wid] = f"ERR:{type(exc).__name__}"
+                outcomes[wid] = predict(hypotheses[wid], inp)
+            except (OSError, ValueError) as exc:
+                return {"pass": False, "status": "UNMEASURED_PREDICTION", "world": wid,
+                        "probe": oid, "error": str(exc), "model_calls": 0}
         safe_observations.append(
             {
                 "observation_id": oid,
@@ -1791,7 +1810,11 @@ def minimax_interrogate_version_space(
         next_oid = sub_plan.get("first_observation_id")
         if not next_oid:
             break
-        obs_val = true_oracle(probe_inputs_by_id[next_oid])
+        try:
+            obs_val = json.loads(json.dumps(true_oracle(probe_inputs_by_id[next_oid]), allow_nan=False, sort_keys=True))
+        except Exception as exc:
+            return {"pass": False,"status":"UNMEASURED_ORACLE","error":str(exc)[:200],
+                    "executed_probes":executed_probes,"model_calls":0}
         obs_row = next(r for r in safe_observations if r["observation_id"] == next_oid)
         surviving = {wid for wid in surviving if repr(obs_row["outcomes"][wid]) == repr(obs_val)}
         executed_probes.append(
@@ -1810,6 +1833,9 @@ def minimax_interrogate_version_space(
         "schema": SCHEMA,
         "operation": "MINIMAX_INTERROGATE_VERSION_SPACE",
         "pass": bool(plan.get("pass")) and (true_oracle is None or bool(resolved_policies)),
+        "status": ("PLAN_ONLY" if true_oracle is None else "IDENTIFIED_IN_DECLARED_SPACE" if resolved_policies else "OUTSIDE_DECLARED_SPACE"),
+        "identification_scope": "declared finite worlds and observation menu only",
+        "cow_predictions": len(safe_observations)*len(world_ids),
         "initial_world_count": len(world_ids),
         "surviving_worlds": sorted(surviving),
         "resolved_policy_ids": resolved_policies,

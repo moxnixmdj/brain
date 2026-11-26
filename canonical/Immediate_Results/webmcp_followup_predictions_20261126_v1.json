@@ -1,0 +1,949 @@
+{
+  "rows": [
+    {
+      "suite": "doors",
+      "index": 8,
+      "goal": "Open second door, then return to the hallway",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open second door, then return to the hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor2",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "cfd72d594fc49d102b9be4f74740337dd0315adcd8b65276cab1ce63cd323c93",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.698
+    },
+    {
+      "suite": "doors",
+      "index": 9,
+      "goal": "Open second door, then ask to dance with him and play hide & seek, finally return to the hallway",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open second door, then ask to dance with him and play hide & seek, finally return to the hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor2",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "848683d57f08ed43adc654db9aa0be7a604bccb5b50f55353e46e9a7eabba332",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.556
+    },
+    {
+      "suite": "doors",
+      "index": 10,
+      "goal": "Open third door, then return to hallway",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door, then return to hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "6e9817350eaa8fb8b942b4b66c00abfbb0721457a1a868e726163423482846c0",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.59
+    },
+    {
+      "suite": "doors",
+      "index": 11,
+      "goal": "Open third door, then cast light",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door, then cast light",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "abb498166912e9bc31d28cb558c1d30c5298f6f1290afb585229c36a72c92c91",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.622
+    },
+    {
+      "suite": "doors",
+      "index": 12,
+      "goal": "Open third door, then cast light, and finally return to hallway",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door, then cast light, and finally return to hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "6e9817350eaa8fb8b942b4b66c00abfbb0721457a1a868e726163423482846c0",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.541
+    },
+    {
+      "suite": "doors",
+      "index": 13,
+      "goal": "Open first door, new tools will become available, then use a tool to talk to the animal and ask what it is.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open first door, new tools will become available, then use a tool to talk to the animal and ask what it is.",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor1",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "0ffa0e905b056d8c161a2096895853f2e459e3f5dd0e161ef73fc39a25525b95",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "c720c5d2bec0196339d6865493e3313b4eac3e6b05a59e53f005431a02e1270f",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.574
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 8,
+      "goal": "What area do I have selected right now?",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "What area do I have selected right now?",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.498
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 9,
+      "goal": "Select the 6 by 6 area at (29, 29) and replace it with a white cross, where W is #ffffff: '..WW..', '..WW..', 'WWWWWW', 'WWWWWW', '..WW..', '..WW..'.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Select the 6 by 6 area at (29, 29) and replace it with a white cross, where W is #ffffff: '..WW..', '..WW..', 'WWWWWW', 'WWWWWW', '..WW..', '..WW..'.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.609
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 10,
+      "goal": "Select the 16 by 16 area at (24, 24) and replace it with this SVG: <svg viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='#ff004d'/></svg>",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Select the 16 by 16 area at (24, 24) and replace it with this SVG: <svg viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='#ff004d'/></svg>",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.593
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 11,
+      "goal": "Lasso-select the area with corners (30, 40), (58, 38), (54, 60), and (34, 58), and fill it with random grass noise using #2b8a3e and #40c057.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Lasso-select the area with corners (30, 40), (58, 38), (54, 60), and (34, 58), and fill it with random grass noise using #2b8a3e and #40c057.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.579
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 12,
+      "goal": "Add a new layer called Clouds and set its opacity to 50%.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Add a new layer called Clouds and set its opacity to 50%.",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "add_layer",
+            "args": {
+              "position": 50
+            },
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c",
+          "schema_digest": "4313bb09b4bfcc8a96c1da3694a3542d9f00929523109b23e93f98421ce2f856",
+          "output": "{\"ok\":true,\"id\":\"L2\",\"index\":1,\"name\":\"Layer 2\"}",
+          "after": "acebaa1de75dc62f5d33df0a54230259ceb7d5d7f243fa4c1e40bfac647b53fd",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.695
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 13,
+      "goal": "Add a layer called Scratch, then delete it.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Add a layer called Scratch, then delete it.",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:39233",
+          "channel": "webmcp",
+          "action": {
+            "name": "delete_layer",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c",
+          "schema_digest": "4c36b8ece2051a3981f8c8b21698139eefc80be6ee39ec082bb4d423e2bb9c09",
+          "output": "{\"ok\":false,\"error\":\"Cannot delete the only layer\"}",
+          "after": "ec76b40663019bf34cd24c99165f0db603c26c36a65762c77bc9752b486b9fef",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.66
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 14,
+      "goal": "Switch to the PICO-8 palette, add #2b8a3e to it, and set my primary color to #ff004d and my secondary color to #1d2b53.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Switch to the PICO-8 palette, add #2b8a3e to it, and set my primary color to #ff004d and my secondary color to #1d2b53.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.57
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 15,
+      "goal": "Draw a filled #ff7b5c 8 by 8 square at (4, 4), undo it, and then redo it.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Draw a filled #ff7b5c 8 by 8 square at (4, 4), undo it, and then redo it.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.675
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 16,
+      "goal": "Draw a #5ee0e6 line from (0, 0) to (63, 63), then clear the whole canvas.",
+      "arm": "original",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Draw a #5ee0e6 line from (0, 0) to (63, 63), then clear the whole canvas.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:39233",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "43e53b86926a8c06ecca6e18a295748ca818444a659a791d742c74b4cde7c51c"
+        }
+      ],
+      "transitions": [],
+      "elapsed_s": 1.579
+    },
+    {
+      "suite": "doors",
+      "index": 8,
+      "goal": "Open second door, then return to the hallway",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open second door",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor2",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "ec2e78efcfe9214359a68971c6f387544f95f52480613fbb678b2284485236c0",
+          "changed": true
+        },
+        {
+          "pass": false,
+          "goal": "return to the hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "returnToHallway",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "27497e82e361eb1ed3988f7a2553f0d4d383a58b551f6337783b7c46c9664ff0",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "d1d78ac4ecd07454a3751f3b9b3ede00908d5e1a72708f67c5dc61d4cbc1f65a",
+          "changed": true
+        }
+      ],
+      "transitions": [
+        {
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "after": "ec2e78efcfe9214359a68971c6f387544f95f52480613fbb678b2284485236c0",
+          "newly_available": "returnToHallway"
+        }
+      ],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.709
+    },
+    {
+      "suite": "doors",
+      "index": 9,
+      "goal": "Open second door, then ask to dance with him and play hide & seek, finally return to the hallway",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open second door",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor2",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "ec2e78efcfe9214359a68971c6f387544f95f52480613fbb678b2284485236c0",
+          "changed": true
+        },
+        {
+          "pass": false,
+          "goal": "ask to dance with him and play hide & seek, finally return to the hallway",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "returnToHallway",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "27497e82e361eb1ed3988f7a2553f0d4d383a58b551f6337783b7c46c9664ff0",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "d1d78ac4ecd07454a3751f3b9b3ede00908d5e1a72708f67c5dc61d4cbc1f65a",
+          "changed": true
+        }
+      ],
+      "transitions": [
+        {
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "after": "ec2e78efcfe9214359a68971c6f387544f95f52480613fbb678b2284485236c0",
+          "newly_available": "returnToHallway"
+        }
+      ],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.605
+    },
+    {
+      "suite": "doors",
+      "index": 10,
+      "goal": "Open third door, then return to hallway",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "99dfab726b017f59c94654ff4012b518b074d4cd242c5a4db8684144c3c3d0c5",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.648
+    },
+    {
+      "suite": "doors",
+      "index": 11,
+      "goal": "Open third door, then cast light",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "99dfab726b017f59c94654ff4012b518b074d4cd242c5a4db8684144c3c3d0c5",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 9.607
+    },
+    {
+      "suite": "doors",
+      "index": 12,
+      "goal": "Open third door, then cast light, and finally return to hallway",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open third door",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor3",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "99dfab726b017f59c94654ff4012b518b074d4cd242c5a4db8684144c3c3d0c5",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 9.495
+    },
+    {
+      "suite": "doors",
+      "index": 13,
+      "goal": "Open first door, new tools will become available, then use a tool to talk to the animal and ask what it is.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Open first door, new tools will become available",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "openDoor1",
+            "args": {},
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 3,
+          "before": "f4452b7b75a8aaddea3d19016212c18e5ec57075f4330105b241ec5d4a2d877d",
+          "schema_digest": "c8a1ac469a826ea3547ac220c7bbfdcd6b58080d4ec596ff2a0149c5ccb9b699",
+          "output": null,
+          "after": "045a48747068e8d29af967bdba82aa1ec0d6be7690bcfbc07ac1f84f48653e36",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.553
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 8,
+      "goal": "What area do I have selected right now?",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "What area do I have selected right now?",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.623
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 9,
+      "goal": "Select the 6 by 6 area at (29, 29) and replace it with a white cross, where W is #ffffff: '..WW..', '..WW..', 'WWWWWW', 'WWWWWW', '..WW..', '..WW..'.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Select the 6 by 6 area at (29, 29) and replace it with a white cross, where W is #ffffff: '..WW..', '..WW..', 'WWWWWW', 'WWWWWW', '..WW..', '..WW..'.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.596
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 10,
+      "goal": "Select the 16 by 16 area at (24, 24) and replace it with this SVG: <svg viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='#ff004d'/></svg>",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Select the 16 by 16 area at (24, 24) and replace it with this SVG: <svg viewBox='0 0 16 16'><circle cx='8' cy='8' r='6' fill='#ff004d'/></svg>",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.593
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 11,
+      "goal": "Lasso-select the area with corners (30, 40), (58, 38), (54, 60), and (34, 58), and fill it with random grass noise using #2b8a3e and #40c057.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Lasso-select the area with corners (30, 40), (58, 38), (54, 60), and (34, 58), and fill it with random grass noise using #2b8a3e and #40c057.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.716
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 12,
+      "goal": "Add a new layer called Clouds and set its opacity to 50%.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Add a new layer called Clouds and set its opacity to 50%.",
+          "status": "ACTION_WITHOUT_VERIFIED_GOAL",
+          "origin": "http://127.0.0.1:36379",
+          "channel": "webmcp",
+          "action": {
+            "name": "add_layer",
+            "args": {
+              "position": 50
+            },
+            "route": "schema"
+          },
+          "executed": true,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950",
+          "schema_digest": "4313bb09b4bfcc8a96c1da3694a3542d9f00929523109b23e93f98421ce2f856",
+          "output": "{\"ok\":true,\"id\":\"L2\",\"index\":1,\"name\":\"Layer 2\"}",
+          "after": "7dea0ca2cea213a43819597a3135b1e3aaf22e5ea8f35768ea520a3c3172ca17",
+          "changed": true
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.723
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 13,
+      "goal": "Add a layer called Scratch, then delete it.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Add a layer called Scratch",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.837
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 14,
+      "goal": "Switch to the PICO-8 palette, add #2b8a3e to it, and set my primary color to #ff004d and my secondary color to #1d2b53.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Switch to the PICO-8 palette, add #2b8a3e to it, and set my primary color to #ff004d and my secondary color to #1d2b53.",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 1,
+      "model_calls": 0,
+      "elapsed_s": 1.636
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 15,
+      "goal": "Draw a filled #ff7b5c 8 by 8 square at (4, 4), undo it, and then redo it.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Draw a filled #ff7b5c 8 by 8 square at (4, 4), undo it",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 9.647
+    },
+    {
+      "suite": "pixel-art-studio",
+      "index": 16,
+      "goal": "Draw a #5ee0e6 line from (0, 0) to (63, 63), then clear the whole canvas.",
+      "arm": "scoped",
+      "steps": [
+        {
+          "pass": false,
+          "goal": "Draw a #5ee0e6 line from (0, 0) to (63, 63)",
+          "status": "NO_GROUNDING",
+          "origin": "http://127.0.0.1:36379",
+          "channel": null,
+          "action": null,
+          "executed": false,
+          "model_calls": 0,
+          "goal_verified": false,
+          "api": true,
+          "tool_count": 25,
+          "before": "3cf9bb19bc54ed1d0fc48f679535a4365366ffb9272f2dc4ff2d8be1c02a6950"
+        }
+      ],
+      "transitions": [],
+      "pass": false,
+      "clause_count": 2,
+      "model_calls": 0,
+      "elapsed_s": 1.587
+    }
+  ]
+}
