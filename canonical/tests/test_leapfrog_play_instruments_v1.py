@@ -6,7 +6,9 @@ instrument is shown working on cases where the answer is known:
   1. the bucketed law store must actually return the right law (a fast index that
      returns nothing is worse than a slow one), and its removal control must key on
      the law id -- a control that keys on the projection key passes a broken store;
-  2. the refusal ledger must count a refusal nested inside `commits[].modules[]`,
+  2. the mutation probe (Play 6) must rewrite operators at their own AST spans and never
+     inside a string, must be deterministic, and must leave every module byte-identical;
+  3. the refusal ledger must count a refusal nested inside `commits[].modules[]`,
      must not count the empty `"refusal": ""` placeholder, and must count bare
      `REFUSED` as an untyped reason rather than as evidence of checkability.
 """
@@ -21,6 +23,7 @@ import tempfile
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parents[2]))
 
 from canonical.tools import measure_law_store_flat_lookup_v1 as L  # noqa: E402
+from canonical.tools import mutation_admission_probe_v1 as M  # noqa: E402
 from canonical.tools import refusal_ledger_v1 as R  # noqa: E402
 
 
@@ -96,3 +99,51 @@ def test_ledger_non_success_denominator_is_separate_from_decision_share():
     assert ledger["decisions_recorded"] == 3
     assert ledger["refusal_share"] == round(1 / 3, 4)
     assert ledger["refusal_share_of_non_success"] == 0.5
+
+
+def test_mutants_are_ast_spans_not_regex_rewrites():
+    """A mutation must change one operator at its own span, and never inside a string."""
+    source = (
+        "def f(x):\n"
+        '    """usage: f <repo> [module]"""\n'
+        "    if x < 3 and not x:\n"
+        "        return x == 3\n"
+        "    return 0\n"
+        '\n'
+        'if __name__ == "__main__":\n'
+        "    print(f(1) == 0)\n"
+    )
+    got = M.mutants(source, 12, seed=0)
+    kinds = {c["mutator"] for c in got}
+    assert "cmp_<" in kinds and "bool_swap" in kinds and "drop_not" in kinds
+    for candidate in got:
+        assert candidate["before"] != candidate["after"]
+        # One line differs, and it is the candidate's own line.
+        before_lines = source.splitlines()
+        after_lines = candidate["text"].splitlines()
+        assert len(before_lines) == len(after_lines)
+        diff = [i for i, (a, b) in enumerate(zip(before_lines, after_lines)) if a != b]
+        assert diff == [candidate["line"] - 1]
+        assert '"""' not in candidate["after"], "mutation reached a string literal"
+        assert "__main__" not in candidate["after"], "mutation reached the CLI guard"
+
+
+def test_mutant_generation_is_deterministic():
+    source = (M.ROOT / "canonical/swe_kernel/rule_expiry_v1.py").read_text(encoding="utf-8")
+    first = M.mutants(source, 6, seed=len(source))
+    second = M.mutants(source, 6, seed=len(source))
+    assert [(c["mutator"], c["line"], c["after"]) for c in first] == \
+           [(c["mutator"], c["line"], c["after"]) for c in second]
+
+
+def test_probe_counts_only_discriminating_kills_and_restores_bytes(tmp_path=None):
+    """Integration probe: baseline runs, one mutant, file restored exactly."""
+    result = M.probe_module(M.ROOT / "canonical/swe_kernel/rule_expiry_v1.py", limit=1,
+                            timeout=180.0, baseline_repeats=1)
+    assert result["restored_exactly"] is True
+    assert result["baseline_tests_ran"] and result["baseline_tests_ran"] > 0
+    assert len(result["mutants"]) == 1
+    kill = result["mutants"][0]
+    # A kill only counts when the suite actually ran and the module still imported.
+    if kill["killed"] and (kill["import_failure"] or not kill["tests_ran"]):
+        assert kill["discriminating"] is False
