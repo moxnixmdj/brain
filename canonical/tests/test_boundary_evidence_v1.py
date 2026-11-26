@@ -66,3 +66,38 @@ class InstructionTransportTests(unittest.TestCase):
         res = solve_harbor_cycle(bad, inputs={'harbor_task': bad, 'cycle': 1, 'observations': []})
         self.assertFalse(res['pass'])
         self.assertNotIn('actions', res)
+
+
+def test_legacy_fuzzer_counts_observations_not_a_padded_budget(tmp_path):
+    import sys
+    from canonical.swe_kernel import angelic_lens_cow_repair_v1 as lens
+
+    name, rel = 'trial_rates_92aa', 'trial_rates_92aa.py'
+    original = 'def f(x): return x\n'
+    (tmp_path / rel).write_text(original)
+    original_path = sys.path[:]
+    try:
+        lens._load_modules_from_sources(tmp_path, {rel: original})
+        def check(src, frames, parent=original):
+            return lens.fuzz_verify_patch_cow(project_root=tmp_path, rel_path=rel, func_name='f',
+                                              orig_source=parent, patched_source=src, pass_envs=frames)
+        for frames in ([], [{'other': 1}]):
+            r = check(original, frames)
+            assert r['status'] == 'UNMEASURED' and r['fuzz_passed'] is False
+            assert r['exact_calls_tested'] == r['boundary_cases_tested'] == 0
+        dead = check('import os\ndef f(x): os._exit(0)\n', [{'x': 0}])
+        assert dead['status'] == 'UNMEASURED' and dead['fuzz_passed'] is False
+        assert dead['boundary_cases_tested'] == 0 < dead['boundary_cases_generated']
+        drift = check('def f(x): return False\n', [{'x': 0}])
+        assert (drift['status'], drift['failure_reason']) == ('COUNTEREXAMPLE', 'PASS_ENV_REGRESSION')
+        drift = check('def f(x): x.append(1); return 1\n', [{'x': []}], 'def f(x): return 1\n')
+        assert drift['status'] == 'COUNTEREXAMPLE'
+        untestable = check(original, [{'x': 0}], 'def f(x): raise ValueError()\n')
+        assert untestable['fuzz_passed'] is False and untestable['boundary_cases_tested'] == 0
+        identical = check(original, [{'x': True}, {'x': True}])
+        assert identical['status'] == 'PASSED_FINITE_CHECKS'
+        assert identical['boundary_cases_generated'] == identical['boundary_cases_tested'] == 1
+        assert identical['exact_calls_tested'] == 1
+    finally:
+        sys.path[:] = original_path
+        sys.modules.pop(name, None)
