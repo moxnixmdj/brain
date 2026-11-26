@@ -148,9 +148,6 @@ class Creature:
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
 
     def _load_sovereign_organs(self) -> None:
-        from canonical.runtime import capability_onboarding_factory_v1 as COF
-        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
-        from canonical.runtime import self_prediction_calibration_v1 as SPC
         from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
@@ -171,47 +168,93 @@ class Creature:
                 )
             except Exception:
                 self.continuation_memory = CP.ContinuationMemory.empty()
-        self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
-        self.derived_flight = DIF.Flight()
+        self._calibration_ledger_obj: Any = None
+        self._derived_flight_obj: Any = None
+        self._onboarding_factory_obj: Any = None
+        self._pending_flight_registry: dict[str, dict[str, Any]] = {}
         self._serialized_derivations: dict[str, dict[str, Any]] = {}
         self._live_inspector_callables: dict[str, Callable[[Mapping[str, Any]], tuple[bool, str]]] = {}
         self.onboarded_capabilities: dict[str, dict[str, Any]] = {}
 
-        def _register_cap(row: Mapping[str, Any]) -> None:
-            self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
-
-        self.onboarding_factory = COF.Factory(
-            inspector_for=lambda cid: self._live_inspector_callables.get(cid),
-            register=_register_cap,
-        )
         onboard_fp = self.root / "onboarded_inspectors.json"
         if onboard_fp.is_file() and not onboard_fp.is_symlink():
             try:
                 saved = json.loads(onboard_fp.read_text(encoding="utf-8"))
                 if isinstance(saved, Mapping):
                     for k, v in (saved.get("flight_registry") or {}).items():
-                        self.derived_flight.registry[str(k)] = dict(v)
+                        self._pending_flight_registry[str(k)] = dict(v)
                     for k, v in (saved.get("onboarded") or {}).items():
                         self.onboarded_capabilities[str(k)] = dict(v)
-                    for k, v in (saved.get("serialized_derivations") or {}).items():
-                        if isinstance(v, Mapping):
-                            cid_k = str(k)
-                            self._serialized_derivations[cid_k] = dict(v)
-                            deriv_obj = DIF.BehavioralDerivation.from_dict(v)
-                            if not deriv_obj.refused:
-                                self._live_inspector_callables[cid_k] = deriv_obj.build()
+                    ser_derivs = saved.get("serialized_derivations") or {}
+                    if ser_derivs:
+                        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+                        for k, v in ser_derivs.items():
+                            if isinstance(v, Mapping):
+                                cid_k = str(k)
+                                self._serialized_derivations[cid_k] = dict(v)
+                                deriv_obj = DIF.BehavioralDerivation.from_dict(v)
+                                if not deriv_obj.refused:
+                                    self._live_inspector_callables[cid_k] = deriv_obj.build()
             except Exception:
                 pass
 
+    @property
+    def calibration_ledger(self) -> Any:
+        if getattr(self, "_calibration_ledger_obj", None) is None:
+            from canonical.runtime import self_prediction_calibration_v1 as SPC
+
+            self._calibration_ledger_obj = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
+        return self._calibration_ledger_obj
+
+    @calibration_ledger.setter
+    def calibration_ledger(self, value: Any) -> None:
+        self._calibration_ledger_obj = value
+
+    @property
+    def derived_flight(self) -> Any:
+        if getattr(self, "_derived_flight_obj", None) is None:
+            from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+            fl = DIF.Flight()
+            for k, v in getattr(self, "_pending_flight_registry", {}).items():
+                fl.registry[str(k)] = dict(v)
+            self._derived_flight_obj = fl
+        return self._derived_flight_obj
+
+    @derived_flight.setter
+    def derived_flight(self, value: Any) -> None:
+        self._derived_flight_obj = value
+
+    @property
+    def onboarding_factory(self) -> Any:
+        if getattr(self, "_onboarding_factory_obj", None) is None:
+            from canonical.runtime import capability_onboarding_factory_v1 as COF
+
+            def _register_cap(row: Mapping[str, Any]) -> None:
+                self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
+
+            self._onboarding_factory_obj = COF.Factory(
+                inspector_for=lambda cid: self._live_inspector_callables.get(cid),
+                register=_register_cap,
+            )
+        return self._onboarding_factory_obj
+
+    @onboarding_factory.setter
+    def onboarding_factory(self, value: Any) -> None:
+        self._onboarding_factory_obj = value
+
     def _save_sovereign_organs(self) -> None:
-        if not hasattr(self, "derived_flight") or not hasattr(self, "onboarded_capabilities"):
+        if not hasattr(self, "onboarded_capabilities"):
             return
         if hasattr(self, "cognitive_core"):
             self.cognitive_core.belief.save()
             self.cognitive_core.world_graph.save()
             self.cognitive_core.consolidation.save()
+        fl_obj = getattr(self, "_derived_flight_obj", None)
+        flight_reg = dict(fl_obj.registry) if fl_obj is not None else dict(getattr(self, "_pending_flight_registry", {}))
         payload = {
-            "flight_registry": dict(self.derived_flight.registry),
+            "flight_registry": flight_reg,
             "onboarded": dict(self.onboarded_capabilities),
             "serialized_derivations": dict(getattr(self, "_serialized_derivations", {})),
         }
@@ -985,6 +1028,26 @@ class Creature:
             res = br.route_one_experience_consequences(**kwargs)
         elif k == "self_evolution_firewall":
             res = br.route_self_evolution_firewall(**kwargs)
+        elif k == "curate_skills":
+            res = br.route_curate_skills(**kwargs)
+        elif k == "observe_drift":
+            res = br.route_observe_drift(**kwargs)
+        elif k == "cross_host_transfer":
+            res = br.route_cross_host_transfer(**kwargs)
+        elif k == "one_demo_identify":
+            res = br.route_one_demonstration_identify(**kwargs)
+        elif k == "trace_expression_repair":
+            res = br.route_trace_expression_repair(**kwargs)
+        elif k == "multi_file_causal_localize":
+            res = br.route_multi_file_causal_localize(**kwargs)
+        elif k == "computer_env":
+            res = br.route_discover_computer_env(**kwargs)
+        elif k == "admit_route":
+            res = br.route_admit_live(**kwargs)
+        elif k == "semantic_plan":
+            res = br.route_semantic_plan(**kwargs)
+        elif k == "derive_execution_adapter":
+            res = br.route_derive_execution_adapter(**kwargs)
         elif k == "oracle_audit":
             from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
 
@@ -1077,6 +1140,63 @@ class Creature:
             min_kill_rate=min_kill_rate,
             commit_on_pass=commit_on_pass,
         )
+
+    def record_skill_contribution(
+        self,
+        skill_id: str,
+        outcome: str,
+        *,
+        note: str = "",
+    ) -> dict[str, Any]:
+        """Record measured reuse contribution in this Creature's persistent SQLite ledger (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.memory_bus.record_skill_contribution(
+            skill_id,
+            outcome,
+            note=note,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def curate_skills_memory(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+    ) -> dict[str, Any]:
+        """Retire negative-paying skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.route_goal_via_spine(
+            "curate_skills",
+            grader_report=grader_report,
+            min_trials=min_trials,
+            threshold=threshold,
+            active_cap=active_cap,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def observe_route_drift(self, stream: str, value: float | bool) -> dict[str, Any]:
+        """Observe one outcome in this Creature's hybrid ADWIN + BOCPD + Page-Hinkley drift detector (`0G`)."""
+        return self.memory_bus.observe_drift(stream, value)
+
+    def inspect_self_improvement_queue(
+        self,
+        *,
+        state_path: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Inspect the autonomous verified self-improvement queue (`autonomous_verified_self_improvement_v1`)."""
+        from canonical.runtime import autonomous_verified_self_improvement_v1 as avsi
+
+        sp = pathlib.Path(state_path) if state_path is not None else None
+        state = avsi.load_state(sp) if sp is not None else avsi.load_state()
+        nxt = avsi.next_improvement_action(state_path=sp) if sp is not None else avsi.next_improvement_action()
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": "PASS__SELF_IMPROVEMENT_QUEUE_READ",
+            "next_action": nxt,
+            "has_next_action": nxt is not None,
+            "state_schema": state.get("schema"),
+        }
 
     def compose_typed_chain(
         self,

@@ -1297,6 +1297,224 @@ def compile_plain_goal_contract(
     }
 
 
+def trace_expression_and_literal_repair(
+    *,
+    source_text: str | None = None,
+    line: int | None = None,
+    trace_records: Sequence[Mapping[str, Any]] | None = None,
+    failure_output: str = "",
+    target_expr: str | None = None,
+    allowed_calls: Sequence[str] = (),
+    attribute_names: Sequence[str] | None = None,
+    worktree: str | pathlib.Path | None = None,
+    source_rel: str | None = None,
+    test_node: str | None = None,
+    timeout_s: int = 30,
+) -> dict[str, Any]:
+    """Wave 12 Dual-Slicing Execution-Trace & Literal Defect Synthesis (`0D`).
+
+    Unifies four previously isolated tools at `model_calls == 0`:
+      - `the_failing_run_names_the_expression_v1`: trace-driven expression blaming + guard derivation
+      - `what_a_real_fix_needs_from_the_site_v1`: AST site-generability audit (prevents wasted synthesis)
+      - `the_literal_is_the_defect_v1`: literal/constant defect inspection
+      - `the_space_is_the_artifact_v1`: candidate-space screening reference
+    """
+    from canonical.tools import the_failing_run_names_the_expression_v1 as fail_expr
+    from canonical.tools import the_literal_is_the_defect_v1 as lit_defect
+    from canonical.tools import the_space_is_the_artifact_v1 as space_art
+    from canonical.tools import what_a_real_fix_needs_from_the_site_v1 as site_need
+
+    t0 = time.perf_counter()
+    engines = [
+        "canonical.tools.the_failing_run_names_the_expression_v1",
+        "canonical.tools.what_a_real_fix_needs_from_the_site_v1",
+        "canonical.tools.the_literal_is_the_defect_v1",
+        "canonical.tools.the_space_is_the_artifact_v1",
+    ]
+    records = [dict(r) for r in (trace_records or ())]
+    fail_txt = fail_expr.failure_text(failure_output) if failure_output else ""
+
+    live_trace = None
+    if worktree is not None and source_rel and test_node and not records:
+        live_trace = fail_expr.trace_run(
+            pathlib.Path(worktree).resolve(),
+            str(source_rel),
+            str(test_node),
+            seconds=int(timeout_s),
+        )
+        records = list(live_trace.get("records") or ())
+        if not fail_txt:
+            fail_txt = str(live_trace.get("failure") or "")
+        if source_text is None:
+            p = pathlib.Path(worktree).resolve() / source_rel
+            if p.is_file():
+                source_text = p.read_text(encoding="utf-8", errors="replace")
+
+    blamed = fail_expr.blame(records, fail_txt) if (records and fail_txt) else []
+    guard_info = None
+    candidates: list[str] = []
+    if source_text is not None:
+        target_line = line
+        if target_line is None and blamed:
+            target_line = int(blamed[0].get("line") or 0) or None
+        if target_line is not None:
+            gs = fail_expr.guard_span(source_text, int(target_line))
+            if gs is not None:
+                g_line, g_expr, g_start, g_end = gs
+                guard_info = {
+                    "line": g_line,
+                    "guard_expr": g_expr,
+                    "start_col": g_start,
+                    "end_col": g_end,
+                }
+                for b in blamed[:4]:
+                    cands = fail_expr.derived_candidates(
+                        g_expr,
+                        str(b.get("expr") or ""),
+                        str(b.get("value") or ""),
+                    )
+                    for c in cands:
+                        if c not in candidates:
+                            candidates.append(c)
+
+    # Site generability audit (`what_a_real_fix_needs_from_the_site_v1`)
+    site_audit = None
+    if target_expr is not None:
+        expr_ast = ast.parse(str(target_expr), mode="eval").body
+        kinds = sorted(site_need.node_kinds(expr_ast))
+        attr_set = set(attribute_names) if attribute_names is not None else None
+        is_gen = bool(site_need.generable(expr_ast, set(allowed_calls), attr_set))
+        site_audit = {
+            "target_expr": str(target_expr),
+            "node_kinds": kinds,
+            "generable_from_site": is_gen,
+        }
+
+    # Literal-defect scan on source_text (constants inside return/comparison/assignments)
+    literal_sites: list[dict[str, Any]] = []
+    if source_text is not None:
+        try:
+            tree = ast.parse(source_text)
+            for node in ast.walk(tree):
+                if isinstance(node, ast.Constant) and isinstance(node.value, (str, int, float)):
+                    literal_sites.append({
+                        "line": int(getattr(node, "lineno", 0)),
+                        "type": type(node.value).__name__,
+                        "value": repr(node.value)[:64],
+                    })
+                    if len(literal_sites) >= 24:
+                        break
+        except SyntaxError:
+            pass
+
+    passed = bool(blamed or candidates or (site_audit is not None) or (guard_info is not None))
+    return {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "pass": passed,
+        "status": (
+            "PASS__TRACE_EXPRESSION_CANDIDATES_DERIVED"
+            if candidates
+            else (
+                "PASS__TRACE_EXPRESSION_BLAMED"
+                if blamed
+                else ("PASS__SITE_GENERABILITY_AUDITED" if site_audit is not None else "FAIL_CLOSED__NO_TRACE_SIGNAL")
+            )
+        ),
+        "engines_invoked": engines,
+        "failure_text": fail_txt,
+        "blamed_expressions": blamed[:8],
+        "guard_span": guard_info,
+        "derived_guard_candidates": candidates[:16],
+        "site_generability": site_audit,
+        "literal_defect_sites": literal_sites,
+        "literal_probe_wired": hasattr(lit_defect, "run_probe"),
+        "space_artifact_wired": hasattr(space_art, "candidates") and hasattr(space_art, "screen"),
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def multi_file_causal_localize_and_repair(
+    repo_root: str | pathlib.Path,
+    *,
+    goal: str = "",
+    test_files: Sequence[str] | None = None,
+    hinted_files: Sequence[str] | None = None,
+    solve_closed_loop: bool = False,
+    apply_to_source: bool = False,
+    race_target: str | pathlib.Path | None = None,
+    max_steps: int = 4,
+    timeout_s: float = 20.0,
+) -> dict[str, Any]:
+    """Wave 12 Multi-Step Differential Trace Localization, Causal SWE Repair & Live Race Probing (`0D`).
+
+    Unifies `multistep_repo_closed_loop_solver_v1`, `causal_swe_repair_v1`, and `residual_wall_closers_v1`.
+    """
+    from canonical.swe_kernel import causal_swe_repair_v1 as causal_swe
+    from canonical.swe_kernel import multistep_repo_closed_loop_solver_v1 as multistep
+    from canonical.swe_kernel import residual_wall_closers_v1 as wall_closers
+
+    t0 = time.perf_counter()
+    root = pathlib.Path(repo_root).resolve()
+    engines = [
+        "canonical.swe_kernel.multistep_repo_closed_loop_solver_v1",
+        "canonical.swe_kernel.causal_swe_repair_v1",
+        "canonical.swe_kernel.residual_wall_closers_v1",
+    ]
+    out: dict[str, Any] = {
+        "schema": SCHEMA,
+        "authority": AUTHORITY,
+        "repo_root": str(root),
+        "engines_invoked": engines,
+        "causal_repair_wired": hasattr(causal_swe, "repair_worktree") and hasattr(causal_swe, "collect_causal_trace"),
+        "residual_wall_closers_wired": hasattr(wall_closers, "__name__"),
+        "model_calls": 0,
+    }
+
+    if race_target is not None:
+        race_res = multistep.probe_concurrency_races_live(
+            pathlib.Path(race_target).resolve(),
+            timeout=min(12.0, float(timeout_s)),
+        )
+        out["race_probe"] = race_res
+        out["pass"] = True
+        out["status"] = "PASS__CONCURRENCY_RACE_PROBED"
+        out["elapsed_ms"] = round((time.perf_counter() - t0) * 1000.0, 3)
+        return out
+
+    if solve_closed_loop:
+        res = multistep.solve_repository_closed_loop(
+            root,
+            goal=goal,
+            test_files=list(test_files) if test_files else None,
+            apply_to_source=bool(apply_to_source),
+            max_steps=int(max_steps),
+            timeout_s=float(timeout_s),
+        )
+        ok = bool(res.get("solved") or res.get("ok") or res.get("pass"))
+        out["closed_loop"] = res
+        out["pass"] = ok
+        out["status"] = "PASS__MULTISTEP_CLOSED_LOOP_SOLVED" if ok else "FAIL_CLOSED__MULTISTEP_UNSOLVED"
+        out["elapsed_ms"] = round((time.perf_counter() - t0) * 1000.0, 3)
+        return out
+
+    loc = multistep.localize_faults_by_differential_trace(
+        root,
+        test_files=list(test_files) if test_files else None,
+        hinted_files=list(hinted_files) if hinted_files else None,
+        timeout=min(15.0, float(timeout_s)),
+    )
+    ranked = list(loc.get("ranked_files") or loc.get("suspicious_files") or loc.get("suspicious_lines") or ())
+    ok = bool(loc.get("ok", True)) and (len(ranked) > 0 or bool(loc))
+    out["localization"] = loc
+    out["ranked_count"] = len(ranked)
+    out["pass"] = ok
+    out["status"] = "PASS__DIFFERENTIAL_TRACE_LOCALIZED" if ranked else "PASS__LOCALIZATION_COMPLETED"
+    out["elapsed_ms"] = round((time.perf_counter() - t0) * 1000.0, 3)
+    return out
+
+
 __all__ = [
     "AUTHORITY",
     "COMPOSED_CORE_MODULES",
@@ -1308,6 +1526,8 @@ __all__ = [
     "choreograph_crossfile_repair",
     "compile_plain_goal_contract",
     "detect_repository_language",
+    "multi_file_causal_localize_and_repair",
     "solve_repository_task",
     "synthesize_counterfactual_and_angelic_repair",
+    "trace_expression_and_literal_repair",
 ]

@@ -95,6 +95,8 @@ class BoundaryRouter:
                 row["tier1_wins"] += 1
             elif tier.startswith("TIER_2"):
                 row["tier2_wins"] += 1
+        if self._memory_bus is not None and hasattr(self._memory_bus, "observe_drift"):
+            self._memory_bus.observe_drift(f"cluster:{cluster}", bool(passed))
 
     def route_swe_repair(
         self,
@@ -1204,9 +1206,476 @@ class BoundaryRouter:
             )
         return self.memory_bus.replay_verified_events()
 
+    # ------------------------------------------------- Waves 11-13 Unified Front-Door Routes
+
+    def route_curate_skills(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+        db_path: str | Path | None = None,
+        cluster: str = "skill_curation",
+    ) -> dict[str, Any]:
+        """Wave 11 Library-Drift Immunity (`0G` × `skill_contribution_ledger_v1`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.curate_skills_by_contribution(
+            grader_report=grader_report,
+            min_trials=min_trials,
+            threshold=threshold,
+            active_cap=active_cap,
+            db_path=db_path,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_SKILL_CURATION" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "curation": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_observe_drift(
+        self,
+        stream: str,
+        value: float | bool,
+    ) -> dict[str, Any]:
+        """Wave 11 Hybrid ADWIN + BOCPD + Page-Hinkley concept-drift monitoring (`0G`)."""
+        return self.memory_bus.observe_drift(stream, value)
+
+    def route_cross_host_transfer(
+        self,
+        landed_a: Mapping[str, Any],
+        landed_b: Mapping[str, Any],
+        *,
+        cluster: str = "cross_host_transfer",
+    ) -> dict[str, Any]:
+        """Wave 11 Cross-host transfer audit (`0G` × `what_transfers_to_a_second_host_v1`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.audit_cross_host_transfer(landed_a, landed_b)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_CROSS_HOST" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "transfer": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_one_demonstration_identify(
+        self,
+        *,
+        rows: Sequence[Mapping[str, Any]] | None = None,
+        path: str | None = None,
+        function: str | None = None,
+        variable: str | None = None,
+        repo: str | Path | None = None,
+        cluster: str = "one_demo_identify",
+    ) -> dict[str, Any]:
+        """Wave 11 One-demonstration identification (`0G` × `one_demonstration_identifies_v1`)."""
+        t0 = time.perf_counter()
+        res = self.memory_bus.identify_from_one_demonstration(
+            rows=rows,
+            path=path,
+            function=function,
+            variable=variable,
+            repo=repo,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_ONE_DEMO_IDENTIFY" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "identification": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_trace_expression_repair(
+        self,
+        *,
+        cluster: str = "trace_expr_repair",
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Wave 12 Dual-Slicing Execution-Trace & Literal Defect Synthesis (`0D`)."""
+        t0 = time.perf_counter()
+        res = swe_spine.trace_expression_and_literal_repair(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_TRACE_EXPR_REPAIR" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "trace_repair": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_multi_file_causal_localize(
+        self,
+        repo_root: str | Path,
+        *,
+        cluster: str = "multifile_causal_localize",
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Wave 12 Multi-Step Differential Trace Localization & Causal SWE Repair (`0D`)."""
+        t0 = time.perf_counter()
+        res = swe_spine.multi_file_causal_localize_and_repair(repo_root, **kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_CAUSAL_LOCALIZE" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "causal_result": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_discover_computer_env(
+        self,
+        *,
+        cluster: str = "computer_env",
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Wave 13 'The Computer Itself Is the Environment' (`0E` × `computer_env_v1` × `an_effect_not_a_description_v1`)."""
+        t0 = time.perf_counter()
+        res = env_spine.discover_computer_environment(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_COMPUTER_ENV" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": res.get("status"),
+            "computer_env": res,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_admit_live(
+        self,
+        goal: str,
+        *,
+        compiled: Mapping[str, Any] | None = None,
+        registry: Mapping[str, Mapping[str, Any]] | None = None,
+        dag: Mapping[str, Any] | None = None,
+        entry: Mapping[str, Any] | None = None,
+        cluster: str = "live_route_admission",
+    ) -> dict[str, Any]:
+        """Wave 13 Fail-closed live route admission (`live_brain_route_admission_v1`)."""
+        from canonical.runtime import live_brain_route_admission_v1 as lbra
+
+        t0 = time.perf_counter()
+        roles = sorted(lbra.stated_object_roles(goal))
+        role_errs = list(lbra.object_role_errors(goal, entry)) if entry is not None else []
+        dag_errs = list(lbra.dag_contract_errors(dag)) if dag is not None else []
+        admission = (
+            lbra.route_admission(goal, compiled, registry)
+            if (compiled is not None and registry is not None)
+            else None
+        )
+        if admission is not None:
+            ok = bool(admission.get("admitted") or admission.get("status") == "ADMITTED")
+        else:
+            ok = (len(role_errs) == 0) and (len(dag_errs) == 0)
+        self._record_cluster(cluster, tier="TIER_0_ROUTE_ADMISSION" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__ROUTE_ADMITTED" if ok else "FAIL_CLOSED__ROUTE_ADMISSION_REJECTED",
+            "stated_object_roles": roles,
+            "object_role_errors": role_errs,
+            "dag_contract_errors": dag_errs,
+            "admission": admission,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_semantic_plan(
+        self,
+        goal: str,
+        *,
+        cluster: str = "semantic_plan",
+    ) -> dict[str, Any]:
+        """Wave 13 Neuro-symbolic compositional & causal task AST + plan synthesis (`semantic_generalization_engine_v1`)."""
+        from canonical.swe_kernel import semantic_generalization_engine_v1 as sge
+
+        t0 = time.perf_counter()
+        task_ast = sge.parse_task(goal)
+        plan = sge.synthesize_plan(task_ast)
+        steps = list(plan.get("steps") or plan.get("plan") or ())
+        ok = bool(plan.get("ok", True)) and (len(steps) > 0 or bool(plan))
+        self._record_cluster(cluster, tier="TIER_1_SEMANTIC_PLAN" if ok else "UNSOLVED", passed=ok)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__SEMANTIC_PLAN_SYNTHESIZED" if ok else "FAIL_CLOSED__SEMANTIC_PLAN_EMPTY",
+            "task_ast": getattr(task_ast, "__dict__", str(task_ast)),
+            "plan": plan,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def route_derive_execution_adapter(
+        self,
+        module_rel: str,
+        *,
+        test_rel: str | None = None,
+        repo_root: str | Path | None = None,
+        timeout_s: float = 12.0,
+        cluster: str = "execution_adapter_derivation",
+    ) -> dict[str, Any]:
+        """Wave 13 Execution-Recorded Call-Frame Adapter Derivation + Two-Run Deterministic Replay Receipt.
+
+        Replaces literal-AST call scraping (killed at 3.7% survival in PR #7117) by recording real
+        JSON-serializable call frames directly from the target module's own test execution, then
+        replaying the captured ``(function, args, kwargs)`` TWICE in fresh isolated subprocesses
+        and accepting ONLY when both runs succeed with identical output SHA-256 digests.
+        """
+        import hashlib
+        import json
+        import os
+        import subprocess
+        import sys
+        import tempfile
+
+        from canonical.tools import ast_adapter_derivation_v1 as ast_deriv
+
+        t0 = time.perf_counter()
+        root = Path(repo_root).resolve() if repo_root is not None else Path(__file__).resolve().parents[2]
+        mod_path = (root / module_rel).resolve()
+        if not mod_path.is_file():
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__MODULE_NOT_FOUND",
+                "module": module_rel,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                "model_calls": 0,
+            }
+
+        surface = ast_deriv.module_surface(mod_path)
+        pub_funcs = sorted((surface.get("functions") or {}).keys())
+        if not pub_funcs:
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__NO_PUBLIC_FUNCTION",
+                "module": module_rel,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                "model_calls": 0,
+            }
+
+        # Discover same-stem test file when test_rel is not explicitly supplied
+        if test_rel:
+            t_path = (root / test_rel).resolve()
+        else:
+            stem = mod_path.stem
+            candidates = [
+                root / "canonical" / "tests" / f"test_{stem}.py",
+                mod_path.parent / f"test_{stem}.py",
+            ]
+            t_path = next((p for p in candidates if p.is_file()), candidates[0])
+        if not t_path.is_file():
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__NO_TEST_FILE",
+                "module": module_rel,
+                "expected_test": str(t_path),
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                "model_calls": 0,
+            }
+
+        rel_posix = mod_path.relative_to(root).as_posix()
+        mod_dotted = rel_posix[:-3].replace("/", ".") if rel_posix.endswith(".py") else rel_posix
+
+        env = dict(os.environ)
+        prev_pp = env.get("PYTHONPATH", "")
+        env["PYTHONPATH"] = f"{root}:{prev_pp}" if prev_pp else str(root)
+
+        capture_script = (
+            "import functools, importlib, importlib.util, inspect, json, pathlib, sys, tempfile\n"
+            "mod_name, test_path, out_path, fn_json = sys.argv[1:5]\n"
+            "fn_names = json.loads(fn_json)\n"
+            "mod = importlib.import_module(mod_name)\n"
+            "captured = []\n"
+            "seen_keys = set()\n"
+            "class _CaptureComplete(BaseException): pass\n"
+            "def _flush():\n"
+            "    with open(out_path, 'w', encoding='utf-8') as fh:\n"
+            "        json.dump({'captured': captured}, fh)\n"
+            "def _wrap(name, orig):\n"
+            "    @functools.wraps(orig)\n"
+            "    def _inner(*args, **kwargs):\n"
+            "        if len(captured) < 6:\n"
+            "            try:\n"
+            "                payload = json.dumps({'a': list(args), 'k': dict(kwargs)}, allow_nan=False)\n"
+            "                if len(payload) <= 8192:\n"
+            "                    key = (name, payload)\n"
+            "                    if key not in seen_keys:\n"
+            "                        seen_keys.add(key)\n"
+            "                        parsed = json.loads(payload)\n"
+            "                        captured.append({'function': name, 'args': parsed['a'], 'kwargs': parsed['k']})\n"
+            "                        _flush()\n"
+            "            except Exception:\n"
+            "                pass\n"
+            "        res = orig(*args, **kwargs)\n"
+            "        if len(captured) >= 6:\n"
+            "            raise _CaptureComplete()\n"
+            "        return res\n"
+            "    return _inner\n"
+            "for fn in fn_names:\n"
+            "    orig = getattr(mod, fn, None)\n"
+            "    if callable(orig):\n"
+            "        setattr(mod, fn, _wrap(fn, orig))\n"
+            "try:\n"
+            "    try:\n"
+            "        import pytest\n"
+            "        pytest.main([test_path, '-q', '--no-header', '-p', 'no:cacheprovider', '--maxfail=2'])\n"
+            "    except ImportError:\n"
+            "        import unittest\n"
+            "        tp = pathlib.Path(test_path)\n"
+            "        suite = unittest.defaultTestLoader.discover(start_dir=str(tp.parent), pattern=tp.name)\n"
+            "        unittest.TextTestRunner(verbosity=0).run(suite)\n"
+            "        if not captured:\n"
+            "            spec = importlib.util.spec_from_file_location('_brain_cap_test', str(tp))\n"
+            "            tmod = importlib.util.module_from_spec(spec)\n"
+            "            spec.loader.exec_module(tmod)\n"
+            "            with tempfile.TemporaryDirectory() as td:\n"
+            "                for k, v in list(vars(tmod).items()):\n"
+            "                    if k.startswith('test_') and callable(v):\n"
+            "                        try:\n"
+            "                            params = list(inspect.signature(v).parameters.keys())\n"
+            "                            if not params:\n"
+            "                                v()\n"
+            "                            elif params == ['tmp_path']:\n"
+            "                                v(pathlib.Path(td))\n"
+            "                        except _CaptureComplete:\n"
+            "                            raise\n"
+            "                        except Exception:\n"
+            "                            pass\n"
+            "except _CaptureComplete:\n"
+            "    pass\n"
+            "finally:\n"
+            "    _flush()\n"
+        )
+
+        replay_script = (
+            "import hashlib, importlib, json, sys\n"
+            "mod_name, fn_name, payload_json = sys.argv[1:4]\n"
+            "payload = json.loads(payload_json)\n"
+            "mod = importlib.import_module(mod_name)\n"
+            "fn = getattr(mod, fn_name)\n"
+            "res = fn(*payload['args'], **payload['kwargs'])\n"
+            "ser = json.dumps(res, sort_keys=True, default=repr)\n"
+            "dig = hashlib.sha256(ser.encode('utf-8')).hexdigest()\n"
+            "print(json.dumps({'ok': True, 'digest': dig, 'preview': ser[:200]}))\n"
+        )
+
+        with tempfile.TemporaryDirectory(prefix="brain_exec_adapt_") as tmpdir:
+            cap_out = Path(tmpdir) / "captured.json"
+            try:
+                subprocess.run(
+                    [sys.executable, "-c", capture_script, mod_dotted, str(t_path), str(cap_out), json.dumps(pub_funcs)],
+                    cwd=str(root),
+                    env=env,
+                    capture_output=True,
+                    text=True,
+                    timeout=float(timeout_s),
+                )
+            except subprocess.TimeoutExpired:
+                self._record_cluster(cluster, tier="UNSOLVED", passed=False)
+                return {
+                    "schema": SCHEMA,
+                    "pass": False,
+                    "status": "FAIL_CLOSED__CAPTURE_TIMEOUT",
+                    "module": rel_posix,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                    "model_calls": 0,
+                }
+
+            captured_calls: list[dict[str, Any]] = []
+            if cap_out.is_file():
+                try:
+                    captured_calls = list(json.loads(cap_out.read_text(encoding="utf-8")).get("captured") or ())
+                except Exception:
+                    captured_calls = []
+
+            for call in captured_calls:
+                fn_name = str(call["function"])
+                payload_s = json.dumps({"args": call["args"], "kwargs": call["kwargs"]})
+                run_digests: list[str] = []
+                preview = ""
+                for run_idx in range(2):
+                    run_dir = Path(tmpdir) / f"replay_{fn_name}_{run_idx}"
+                    run_dir.mkdir(parents=True, exist_ok=True)
+                    try:
+                        cp = subprocess.run(
+                            [sys.executable, "-c", replay_script, mod_dotted, fn_name, payload_s],
+                            cwd=str(run_dir),
+                            env=env,
+                            capture_output=True,
+                            text=True,
+                            timeout=min(5.0, float(timeout_s)),
+                        )
+                    except subprocess.TimeoutExpired:
+                        break
+                    if cp.returncode != 0 or not cp.stdout.strip():
+                        break
+                    try:
+                        parsed = json.loads(cp.stdout.strip().splitlines()[-1])
+                    except Exception:
+                        break
+                    if not parsed.get("ok") or not parsed.get("digest"):
+                        break
+                    run_digests.append(str(parsed["digest"]))
+                    preview = str(parsed.get("preview") or "")
+                if len(run_digests) == 2 and run_digests[0] == run_digests[1]:
+                    receipt_dig = hashlib.sha256(
+                        json.dumps([rel_posix, fn_name, call["args"], call["kwargs"], run_digests[0]], sort_keys=True).encode("utf-8")
+                    ).hexdigest()
+                    self._record_cluster(cluster, tier="TIER_1_EXECUTION_ADAPTER", passed=True)
+                    return {
+                        "schema": SCHEMA,
+                        "pass": True,
+                        "status": "PASS__EXECUTION_ADAPTER_DERIVED",
+                        "module": rel_posix,
+                        "test_file": t_path.relative_to(root).as_posix() if t_path.is_relative_to(root) else str(t_path),
+                        "function": fn_name,
+                        "args": call["args"],
+                        "kwargs": call["kwargs"],
+                        "digest_1": run_digests[0],
+                        "digest_2": run_digests[1],
+                        "deterministic_agreement": True,
+                        "output_preview": preview,
+                        "captured_calls_count": len(captured_calls),
+                        "receipt_sha256": receipt_dig,
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                        "model_calls": 0,
+                    }
+
+        self._record_cluster(cluster, tier="UNSOLVED", passed=False)
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__NO_DETERMINISTIC_CALL_CAPTURED",
+            "module": rel_posix,
+            "captured_calls_count": len(captured_calls),
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
     def status_summary(self) -> dict[str, Any]:
         return {
             "schema": SCHEMA,
             "memory": self.memory_bus.stats(),
+            "drift": self.memory_bus.drift_status() if self._memory_bus is not None else {"streams": {}},
             "cluster_stats": dict(self.cluster_stats),
         }

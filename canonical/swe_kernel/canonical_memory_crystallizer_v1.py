@@ -27,6 +27,8 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import math
+import tempfile
 import time
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -154,6 +156,170 @@ class ConflictClause:
         }
 
 
+class DualDriftDetector:
+    """Zero-dependency hybrid ADWIN + BOCPD + Page-Hinkley concept-drift detector (Wave 11).
+
+    Combines three complementary online detectors over bounded ``[0.0, 1.0]`` outcome streams:
+      - **ADWIN** (Hoeffding adaptive window split): catches gradual & persistent mean shifts.
+      - **BOCPD** (Adams & MacKay exact Beta-Bernoulli Bayesian Online Changepoint Detection):
+        catches abrupt piecewise-constant regime switches that blind sliding mean windows.
+      - **Page-Hinkley**: catches sustained downward drift in skill/route success rates.
+    """
+
+    def __init__(
+        self,
+        *,
+        adwin_delta: float = 0.05,
+        bocpd_hazard: float = 1.0 / 25.0,
+        ph_delta: float = 0.02,
+        ph_lambda: float = 3.5,
+        max_window: int = 200,
+        max_run: int = 64,
+    ) -> None:
+        self.adwin_delta = float(adwin_delta)
+        self.bocpd_hazard = float(bocpd_hazard)
+        self.ph_delta = float(ph_delta)
+        self.ph_lambda = float(ph_lambda)
+        self.max_window = max(24, int(max_window))
+        self.max_run = max(16, int(max_run))
+        self._streams: dict[str, dict[str, Any]] = {}
+
+    def _state(self, stream: str) -> dict[str, Any]:
+        st = self._streams.get(stream)
+        if st is None:
+            st = {
+                "n": 0,
+                "window": [],
+                "run_probs": [1.0],
+                "alphas": [1.0],
+                "betas": [1.0],
+                "peak_map_run": 0,
+                "ph_mean": 0.0,
+                "ph_u": 0.0,
+                "ph_min_u": 0.0,
+                "drift_count": 0,
+                "last_drift_reason": None,
+            }
+            self._streams[stream] = st
+        return st
+
+    def observe(self, stream: str, value: float | bool) -> dict[str, Any]:
+        x = 1.0 if value is True else (0.0 if value is False else max(0.0, min(1.0, float(value))))
+        st = self._state(str(stream))
+        st["n"] += 1
+        win: list[float] = st["window"]
+        win.append(x)
+        if len(win) > self.max_window:
+            del win[:-self.max_window]
+
+        # 1. ADWIN Hoeffding split test
+        adwin_drift = False
+        adwin_split_delta = 0.0
+        n_w = len(win)
+        min_sub = 6
+        if n_w >= 2 * min_sub:
+            prefix = [0.0] * (n_w + 1)
+            for idx, v in enumerate(win):
+                prefix[idx + 1] = prefix[idx] + v
+            total = prefix[n_w]
+            log_term = math.log(4.0 / max(1e-9, self.adwin_delta))
+            best_k = -1
+            for k in range(min_sub, n_w - min_sub + 1):
+                m1 = prefix[k] / k
+                m2 = (total - prefix[k]) / (n_w - k)
+                diff = abs(m1 - m2)
+                m_harm = 1.0 / ((1.0 / k) + (1.0 / (n_w - k)))
+                eps = math.sqrt((1.0 / (2.0 * m_harm)) * log_term)
+                if diff > eps:
+                    adwin_drift = True
+                    adwin_split_delta = max(adwin_split_delta, diff)
+                    best_k = k
+            if adwin_drift and best_k > 0:
+                del win[:best_k]
+
+        # 2. BOCPD exact conjugate Beta-Bernoulli update
+        run_probs: list[float] = st["run_probs"]
+        alphas: list[float] = st["alphas"]
+        betas: list[float] = st["betas"]
+        h = self.bocpd_hazard
+        growth: list[float] = []
+        cp_mass = 0.0
+        for p_r, a_r, b_r in zip(run_probs, alphas, betas):
+            pred = a_r / (a_r + b_r)
+            like = max(1e-9, pred * x + (1.0 - pred) * (1.0 - x))
+            joint = p_r * like
+            growth.append(joint * (1.0 - h))
+            cp_mass += joint * h
+        new_probs = [cp_mass] + growth
+        norm = sum(new_probs) or 1.0
+        new_probs = [p / norm for p in new_probs[: self.max_run]]
+        new_alphas = [1.0] + [a + x for a in alphas[: self.max_run - 1]]
+        new_betas = [1.0] + [b + (1.0 - x) for b in betas[: self.max_run - 1]]
+        st["run_probs"] = new_probs
+        st["alphas"] = new_alphas
+        st["betas"] = new_betas
+        map_run = max(range(len(new_probs)), key=lambda i: new_probs[i])
+        short_run_mass = sum(new_probs[: min(5, len(new_probs))])
+        bocpd_drift = False
+        if st["peak_map_run"] >= 8 and map_run <= 4 and short_run_mass >= 0.45:
+            bocpd_drift = True
+            st["peak_map_run"] = map_run
+        else:
+            st["peak_map_run"] = max(st["peak_map_run"], map_run)
+
+        # 3. Page-Hinkley downward shift detector
+        st["ph_mean"] = st["ph_mean"] + (x - st["ph_mean"]) / st["n"]
+        st["ph_u"] = st["ph_u"] + (st["ph_mean"] - x - self.ph_delta)
+        st["ph_min_u"] = min(st["ph_min_u"], st["ph_u"])
+        ph_stat = st["ph_u"] - st["ph_min_u"]
+        ph_drift = ph_stat > self.ph_lambda
+        if ph_drift:
+            st["ph_u"] = 0.0
+            st["ph_min_u"] = 0.0
+
+        drift = adwin_drift or bocpd_drift or ph_drift
+        reasons = []
+        if adwin_drift:
+            reasons.append("ADWIN")
+        if bocpd_drift:
+            reasons.append("BOCPD")
+        if ph_drift:
+            reasons.append("PAGE_HINKLEY")
+        if drift:
+            st["drift_count"] += 1
+            st["last_drift_reason"] = "+".join(reasons)
+
+        recent = win[-min(10, len(win)) :]
+        return {
+            "stream": str(stream),
+            "n_obs": int(st["n"]),
+            "value": round(x, 4),
+            "drift_detected": drift,
+            "adwin_drift": adwin_drift,
+            "bocpd_drift": bocpd_drift,
+            "page_hinkley_drift": ph_drift,
+            "reasons": reasons,
+            "bocpd_map_run_length": int(map_run),
+            "bocpd_short_run_mass": round(short_run_mass, 4),
+            "adwin_split_delta": round(adwin_split_delta, 4),
+            "page_hinkley_stat": round(ph_stat, 4),
+            "recent_mean": round(sum(recent) / max(1, len(recent)), 4),
+            "total_drifts": int(st["drift_count"]),
+        }
+
+    def summary(self) -> dict[str, Any]:
+        return {
+            name: {
+                "n_obs": int(st["n"]),
+                "drift_count": int(st["drift_count"]),
+                "last_drift_reason": st["last_drift_reason"],
+                "window_size": len(st["window"]),
+                "recent_mean": round(sum(st["window"][-10:]) / max(1, len(st["window"][-10:])), 4),
+            }
+            for name, st in sorted(self._streams.items())
+        }
+
+
 class VerificationFirstMemoryBus:
     """5-timescale verification-first memory bus with lossless causality, CDCL nogoods,
     sleep-time E-Stitch/Plotkin-LGG crystallization, and O(1) selective unlearning.
@@ -190,6 +356,10 @@ class VerificationFirstMemoryBus:
         self._applicability_boundaries: dict[str, dict[str, Any]] = {}
         self._verified_event_log: list[dict[str, Any]] = []
         self._verified_event_last_hash: str = "0" * 64
+        # Wave 11: Library-drift immunity (skill_contribution_ledger_v1) + DualDriftDetector
+        self._drift_detector = DualDriftDetector()
+        self._contribution_ledger: Any = None
+        self._contribution_db_path: Path | None = None
         self._clock: float = 0.0
 
         if self.state_path is not None and self.state_path.exists():
@@ -1289,6 +1459,183 @@ class VerificationFirstMemoryBus:
             "model_calls": 0,
         }
 
+    # --------------------------------------- Wave 11: Library-Drift Immunity & Dual Concept-Drift
+    def invalidate(self, skill_id: str, reason: str = "RETIRED_BY_CONTRIBUTION_LEDGER") -> bool:
+        """Native `skill_contribution_ledger_v1.curate()` store contract -> O(1) exact skill retirement."""
+        return self.forget_skill(skill_id, reason=reason)
+
+    def _get_contribution_ledger(self, db_path: str | Path | None = None) -> Any:
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        if db_path is not None:
+            target = Path(db_path)
+            if self._contribution_ledger is None or self._contribution_db_path != target:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                self._contribution_db_path = target
+                self._contribution_ledger = scl.ContributionLedger(target)
+            return self._contribution_ledger
+        if self._contribution_ledger is None:
+            if self.state_path is not None:
+                target = self.state_path.with_suffix(".contrib.sqlite3")
+            else:
+                tmp_dir = Path(tempfile.mkdtemp(prefix="brain_contrib_"))
+                target = tmp_dir / "skill_contrib.sqlite3"
+            target.parent.mkdir(parents=True, exist_ok=True)
+            self._contribution_db_path = target
+            self._contribution_ledger = scl.ContributionLedger(target)
+        return self._contribution_ledger
+
+    def record_skill_contribution(
+        self,
+        skill_id: str,
+        outcome: str,
+        *,
+        note: str = "",
+        db_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Record a measured skill reuse outcome (`REUSED_AND_HELPED` / `REUSED_AND_FAILED` / `OFFERED_NOT_USED`).
+
+        Updates both the SQLite ``ContributionLedger`` and the online ``DualDriftDetector`` stream
+        so sudden skill degradation triggers drift alerts immediately.
+        """
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        ledger = self._get_contribution_ledger(db_path=db_path)
+        status = ledger.record(str(skill_id), str(outcome), note=str(note))
+        drift_val = 1.0 if outcome == scl.REUSED_AND_HELPED else (0.0 if outcome == scl.REUSED_AND_FAILED else 0.5)
+        drift_res = self._drift_detector.observe(f"skill:{skill_id}", drift_val)
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": "PASS__SKILL_CONTRIBUTION_RECORDED",
+            "contribution": status,
+            "drift": drift_res,
+            "model_calls": 0,
+        }
+
+    def curate_skills_by_contribution(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+        db_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Retire negative-paying skills ONLY when the grader's false-pass upper bound is proven < 2%.
+
+        Directly wires `canonical/swe_kernel/skill_contribution_ledger_v1.py` ("An Asset Must Keep
+        Paying For Itself") into the unified memory bus so Library Drift is cured fail-closed.
+        """
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        ledger = self._get_contribution_ledger(db_path=db_path)
+        report = scl.curate(
+            self,
+            ledger,
+            grader_report=grader_report,
+            min_trials=int(min_trials),
+            threshold=float(threshold),
+            active_cap=int(active_cap),
+        )
+        permitted = report.get("action") != "REFUSED"
+        return {
+            "schema": SCHEMA,
+            "pass": permitted,
+            "status": "PASS__SKILLS_CURATED" if permitted else f"REFUSED__{report.get('refusal', 'UNMEASURED_GRADER')}",
+            "curate_report": report,
+            "census": ledger.census(),
+            "model_calls": 0,
+        }
+
+    def observe_drift(self, stream: str, value: float | bool) -> dict[str, Any]:
+        """Observe one outcome in the hybrid ADWIN + BOCPD + Page-Hinkley concept-drift detector."""
+        res = self._drift_detector.observe(stream, value)
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": "DRIFT_DETECTED" if res["drift_detected"] else "PASS__STATIONARY",
+            **res,
+            "model_calls": 0,
+        }
+
+    def drift_status(self) -> dict[str, Any]:
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "streams": self._drift_detector.summary(),
+        }
+
+    def audit_cross_host_transfer(
+        self,
+        landed_a: Mapping[str, Any],
+        landed_b: Mapping[str, Any],
+    ) -> dict[str, Any]:
+        """Measure what transfers across hosts (`what_transfers_to_a_second_host_v1`)."""
+        from canonical.tools import what_transfers_to_a_second_host_v1 as xhost
+
+        shapes_a = xhost.shapes_of(dict(landed_a))
+        shapes_b = xhost.shapes_of(dict(landed_b))
+        prods_a = xhost.producers_of(dict(landed_a))
+        prods_b = xhost.producers_of(dict(landed_b))
+        shared_shapes = sorted(shapes_a & shapes_b)
+        shared_prods = sorted(prods_a & prods_b)
+        transfer_rate = len(shared_shapes) / max(1, len(shapes_a | shapes_b))
+        return {
+            "schema": SCHEMA,
+            "pass": len(shapes_a) > 0 or len(shapes_b) > 0,
+            "status": "PASS__CROSS_HOST_TRANSFER_AUDITED",
+            "host_a_shapes": len(shapes_a),
+            "host_b_shapes": len(shapes_b),
+            "shared_shapes_count": len(shared_shapes),
+            "shared_producers": shared_prods[:32],
+            "shape_jaccard_transfer": round(transfer_rate, 4),
+            "model_calls": 0,
+        }
+
+    def identify_from_one_demonstration(
+        self,
+        *,
+        rows: Sequence[Mapping[str, Any]] | None = None,
+        path: str | None = None,
+        function: str | None = None,
+        variable: str | None = None,
+        repo: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """One-demonstration structural identification (`one_demonstration_identifies_v1`)."""
+        from canonical.swe_kernel import one_demonstration_identifies_v1 as one_demo
+
+        if rows is not None:
+            res = one_demo.one_demonstration(rows)
+            sep = one_demo.separation_report(rows)
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "status": "PASS__ONE_DEMONSTRATION_IDENTIFIED",
+                "identification": res,
+                "separation": sep,
+                "model_calls": 0,
+            }
+        if path and function and variable:
+            repo_p = Path(repo).resolve() if repo is not None else Path(__file__).resolve().parents[2]
+            facts = sorted(one_demo.facts_of(path, function, variable, repo=repo_p))
+            return {
+                "schema": SCHEMA,
+                "pass": len(facts) > 0,
+                "status": "PASS__SITE_FACTS_EXTRACTED" if facts else "FAIL_CLOSED__NO_SITE_FACTS",
+                "path": path,
+                "function": function,
+                "variable": variable,
+                "facts": facts,
+                "model_calls": 0,
+            }
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__INSUFFICIENT_ONE_DEMO_INPUTS",
+            "model_calls": 0,
+        }
+
     def save(self, path: str | Path | None = None) -> Path:
         target = Path(path) if path is not None else self.state_path
         if target is None:
@@ -1517,6 +1864,21 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "ONE_EXPERIENCE_CONSEQUENCES":
         res = bus.extract_one_experience_consequences(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "RECORD_SKILL_CONTRIBUTION":
+        res = bus.record_skill_contribution(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "CURATE_SKILLS":
+        res = bus.curate_skills_by_contribution(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "OBSERVE_DRIFT":
+        res = bus.observe_drift(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "CROSS_HOST_TRANSFER":
+        res = bus.audit_cross_host_transfer(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "ONE_DEMONSTRATION_IDENTIFY":
+        res = bus.identify_from_one_demonstration(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}

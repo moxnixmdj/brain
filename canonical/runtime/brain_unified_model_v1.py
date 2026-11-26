@@ -2512,6 +2512,26 @@ class UnifiedModel:
             res = self.boundary_router.route_one_experience_consequences(**kwargs)
         elif k == "self_evolution_firewall":
             res = self.boundary_router.route_self_evolution_firewall(**kwargs)
+        elif k == "curate_skills":
+            res = self.boundary_router.route_curate_skills(**kwargs)
+        elif k == "observe_drift":
+            res = self.boundary_router.route_observe_drift(**kwargs)
+        elif k == "cross_host_transfer":
+            res = self.boundary_router.route_cross_host_transfer(**kwargs)
+        elif k == "one_demo_identify":
+            res = self.boundary_router.route_one_demonstration_identify(**kwargs)
+        elif k == "trace_expression_repair":
+            res = self.boundary_router.route_trace_expression_repair(**kwargs)
+        elif k == "multi_file_causal_localize":
+            res = self.boundary_router.route_multi_file_causal_localize(**kwargs)
+        elif k == "computer_env":
+            res = self.boundary_router.route_discover_computer_env(**kwargs)
+        elif k == "admit_route":
+            res = self.boundary_router.route_admit_live(**kwargs)
+        elif k == "semantic_plan":
+            res = self.boundary_router.route_semantic_plan(**kwargs)
+        elif k == "derive_execution_adapter":
+            res = self.boundary_router.route_derive_execution_adapter(**kwargs)
         elif k == "status":
             res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
         else:
@@ -2702,6 +2722,202 @@ class UnifiedModel:
             admitted=bool(res.get("admitted")),
             reason=None if passed else str(res.get("status") or "BLOCKED_AT_ENTRY_FIREWALL"),
             firewall=res,
+        )
+
+    # ------------------------------------------ Waves 11-13 Unified Front-Door Methods
+
+    def record_skill_contribution(
+        self,
+        skill_id: str,
+        outcome: str,
+        *,
+        note: str = "",
+        db_path: str | Path | None = None,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Record measured reuse contribution for a skill (`0G` × `skill_contribution_ledger_v1`)."""
+        res = self.memory_bus.record_skill_contribution(skill_id, outcome, note=note, db_path=db_path)
+        return self._envelope(
+            operation="RECORD_SKILL_CONTRIBUTION",
+            goal=goal or f"skill_contribution:{skill_id}",
+            status=str(res.get("status") or "PASS__SKILL_CONTRIBUTION_RECORDED"),
+            **{"pass": bool(res.get("pass"))},
+            contribution=res,
+        )
+
+    def curate_skills(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+        db_path: str | Path | None = None,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Retire deadweight skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
+        res = self.boundary_router.route_curate_skills(
+            grader_report=grader_report,
+            min_trials=min_trials,
+            threshold=threshold,
+            active_cap=active_cap,
+            db_path=db_path,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="CURATE_SKILLS",
+            goal=goal or "curate_skills_by_contribution",
+            status=str(res.get("status") or ("PASS__SKILLS_CURATED" if passed else "REFUSED__UNMEASURED_GRADER")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "CURATION_REFUSED"),
+            curation=res,
+        )
+
+    def observe_drift(
+        self,
+        stream: str,
+        value: float | bool,
+        *,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Observe one outcome in the hybrid ADWIN + BOCPD + Page-Hinkley concept-drift monitor (`0G`)."""
+        res = self.boundary_router.route_observe_drift(stream, value)
+        return self._envelope(
+            operation="OBSERVE_DRIFT",
+            goal=goal or f"drift:{stream}",
+            status=str(res.get("status") or "PASS__STATIONARY"),
+            **{"pass": True},
+            drift=res,
+        )
+
+    def trace_expression_repair(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Dual-slicing execution-trace blaming + literal-defect & site-generability audit (`0D`)."""
+        res = self.boundary_router.route_trace_expression_repair(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="TRACE_EXPRESSION_REPAIR",
+            goal=goal or "trace_expression_repair",
+            status=str(res.get("status") or ("PASS__TRACE_EXPRESSION_BLAMED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "TRACE_REPAIR_FAILED"),
+            trace_repair=res,
+        )
+
+    def multi_file_causal_localize(
+        self,
+        repo_root: str | Path,
+        *,
+        goal: str = "",
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Multi-step differential-trace fault localization & causal SWE repair (`0D`)."""
+        res = self.boundary_router.route_multi_file_causal_localize(repo_root, goal=goal, **kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="MULTI_FILE_CAUSAL_LOCALIZE",
+            goal=goal or f"causal_localize:{Path(repo_root).name}",
+            status=str(res.get("status") or ("PASS__DIFFERENTIAL_TRACE_LOCALIZED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "LOCALIZATION_FAILED"),
+            causal_result=res,
+        )
+
+    def discover_computer_env(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Discover live host OS programs, flags, file actions & minted effect signatures (`0E` × `computer_env_v1`)."""
+        res = self.boundary_router.route_discover_computer_env(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="DISCOVER_COMPUTER_ENV",
+            goal=goal or "discover_computer_env",
+            status=str(res.get("status") or ("PASS__COMPUTER_ENV_DISCOVERED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "COMPUTER_ENV_UNAVAILABLE"),
+            computer_env=res,
+        )
+
+    def admit_route(
+        self,
+        goal: str,
+        *,
+        compiled: Mapping[str, Any] | None = None,
+        registry: Mapping[str, Mapping[str, Any]] | None = None,
+        dag: Mapping[str, Any] | None = None,
+        entry: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Fail-closed live route & DAG contract admission (`live_brain_route_admission_v1`)."""
+        res = self.boundary_router.route_admit_live(
+            goal,
+            compiled=compiled,
+            registry=registry,
+            dag=dag,
+            entry=entry,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="ADMIT_ROUTE",
+            goal=goal,
+            status=str(res.get("status") or ("PASS__ROUTE_ADMITTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "ROUTE_ADMISSION_REJECTED"),
+            route_admission=res,
+        )
+
+    def semantic_plan(self, goal: str) -> dict[str, Any]:
+        """Neuro-symbolic compositional task AST & plan synthesis (`semantic_generalization_engine_v1`)."""
+        res = self.boundary_router.route_semantic_plan(goal)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="SEMANTIC_PLAN",
+            goal=goal,
+            status=str(res.get("status") or ("PASS__SEMANTIC_PLAN_SYNTHESIZED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "SEMANTIC_PLAN_FAILED"),
+            semantic_plan=res,
+        )
+
+    def derive_execution_adapter(
+        self,
+        module_rel: str,
+        *,
+        test_rel: str | None = None,
+        timeout_s: float = 12.0,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Derive a two-run deterministic receipted adapter by capturing live call frames during module tests (`0I`)."""
+        res = self.boundary_router.route_derive_execution_adapter(
+            module_rel,
+            test_rel=test_rel,
+            repo_root=ROOT,
+            timeout_s=timeout_s,
+        )
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="DERIVE_EXECUTION_ADAPTER",
+            goal=goal or f"derive_adapter:{module_rel}",
+            status=str(res.get("status") or ("PASS__EXECUTION_ADAPTER_DERIVED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("status") or "EXECUTION_ADAPTER_FAILED"),
+            adapter=res,
+        )
+
+    def self_improvement_queue(self, *, state_path: str | Path | None = None) -> dict[str, Any]:
+        """Inspect the autonomous verified self-improvement queue (`autonomous_verified_self_improvement_v1`)."""
+        from canonical.runtime import autonomous_verified_self_improvement_v1 as avsi
+
+        sp = Path(state_path) if state_path is not None else None
+        state = avsi.load_state(sp) if sp is not None else avsi.load_state()
+        nxt = avsi.next_improvement_action(state_path=sp) if sp is not None else avsi.next_improvement_action()
+        return self._envelope(
+            operation="SELF_IMPROVEMENT_QUEUE",
+            goal="autonomous_verified_self_improvement_queue",
+            status="PASS__SELF_IMPROVEMENT_QUEUE_READ",
+            **{"pass": True},
+            next_action=nxt,
+            queue_summary={
+                "schema": state.get("schema"),
+                "keys": sorted(state.keys()),
+                "has_next_action": nxt is not None,
+            },
         )
 
     def compose_chain(

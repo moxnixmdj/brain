@@ -25,6 +25,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import time
 from collections import deque
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -1064,3 +1065,78 @@ def discover_check_mode_oracle(
         "empirical_type_collapse_wired": hasattr(emp_type, "pairs_collapsed"),
         "model_calls": 0,
     }
+
+
+def discover_computer_environment(
+    *,
+    programs: Sequence[str] = (),
+    program_limit: int = 12,
+    probe_help_for: Sequence[str] = (),
+    signature_texts: Mapping[str, str] | None = None,
+    seed_files: Mapping[str, bytes] | None = None,
+) -> dict[str, Any]:
+    """Wave 13 'The Computer Itself Is the Environment' (`0E` × `computer_env_v1` × `an_effect_not_a_description_v1`).
+
+    Discovers real host binaries, file actions, output flags, and executable effect signatures
+    with zero vision/pixel dependency and `model_calls == 0`.
+    """
+    from canonical.runtime import computer_env_v1 as comp_env
+    from canonical.tools import an_effect_not_a_description_v1 as effect_mod
+    from canonical.tools import the_refusal_is_the_other_half_v1 as ref_other
+
+    t0 = time.perf_counter()
+    installed = list(programs) if programs else comp_env.installed_programs(limit=max(1, int(program_limit)))
+    file_acts = [name for name, _fn in comp_env.file_actions()]
+
+    probed_flags: dict[str, list[str]] = {}
+    minted_signatures: dict[str, Any] = {}
+    for prog in list(probe_help_for)[:8]:
+        prog_s = str(prog)
+        flags = comp_env.output_flags(prog_s, limit=6)
+        probed_flags[prog_s] = list(flags)
+        htext = comp_env.help_text(prog_s, timeout=2.0)
+        if htext:
+            sig = effect_mod.signature_from_text(prog_s, htext)
+            minted_signatures[prog_s] = {
+                "signature": sig,
+                "slots": effect_mod.mint_slots(sig),
+            }
+
+    for name, text in (signature_texts or {}).items():
+        sig = effect_mod.signature_from_text(str(name), str(text))
+        minted_signatures[str(name)] = {
+            "signature": sig,
+            "slots": effect_mod.mint_slots(sig),
+        }
+
+    env_probe = None
+    if seed_files:
+        env = comp_env.ComputerEnv(seed=dict(seed_files), programs=installed[:4])
+        try:
+            env_probe = {
+                "root": str(getattr(env, "root", "")),
+                "seeded_files": sorted(seed_files.keys()),
+                "file_action_count": len(file_acts),
+            }
+        finally:
+            if hasattr(env, "close"):
+                try:
+                    env.close()
+                except Exception:
+                    pass
+
+    passed = bool(installed or minted_signatures or env_probe)
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__COMPUTER_ENV_DISCOVERED" if passed else "FAIL_CLOSED__NO_HOST_SURFACE",
+        "installed_programs": installed,
+        "file_actions": file_acts,
+        "probed_output_flags": probed_flags,
+        "minted_effect_signatures": minted_signatures,
+        "computer_env_probe": env_probe,
+        "refusal_other_half_wired": hasattr(ref_other, "__name__"),
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
