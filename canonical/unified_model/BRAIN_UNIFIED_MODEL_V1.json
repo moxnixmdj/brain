@@ -31368,12 +31368,12 @@
   "routing_tokens": 2723,
   "skills": 18,
   "source_index_entry_points": 559,
-  "source_index_modules": 2243
+  "source_index_modules": 2244
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a6b2322278c4b462d64b8ec0938d906b4bf483d7ca2d1b59b0cb5342621ad54c"
+  "value": "02a15c7ba4cb1bf4aa692801fc7283077bf59b6565245bc42f264332a09b6d13"
  },
  "engines": [
   {
@@ -409557,6 +409557,61 @@
     "site": 2,
     "textual": 1,
     "tokens": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/swe_kernel/skill_contribution_ledger_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/swe_kernel/skill_contribution_ledger_v1.py",
+   "sha256": "1461bc3ddfef78e3b6ace61c3297ed8634a710f79eb392e9a76c931a93aca860",
+   "summary": "A skill that stops paying for itself must stop being offered.",
+   "symbol_count": 14,
+   "symbols": [
+    "ContributionLedger",
+    "CuratorError",
+    "_beta_ppf",
+    "_betainc",
+    "_binomial_upper_bound",
+    "_connect",
+    "_mark",
+    "_row_to_dict",
+    "_set_store_state",
+    "curate",
+    "grader_from_check_density",
+    "grader_may_retire",
+    "reinstate",
+    "trials_needed"
+   ],
+   "terms": {
+    "being": 1,
+    "beta_ppf": 1,
+    "betainc": 1,
+    "binomial_upper_bound": 1,
+    "connect": 1,
+    "contribution": 1,
+    "contributionledger": 1,
+    "curate": 1,
+    "curatorerror": 1,
+    "grader_from_check_density": 1,
+    "grader_may_retire": 1,
+    "itself": 1,
+    "ledger": 1,
+    "mark": 1,
+    "must": 1,
+    "offered": 1,
+    "paying": 1,
+    "reinstate": 1,
+    "row_to_dict": 1,
+    "set_store_state": 1,
+    "skill": 2,
+    "stop": 1,
+    "stops": 1,
+    "trials_needed": 1,
     "v1": 1
    }
   },
