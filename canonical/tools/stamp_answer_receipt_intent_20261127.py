@@ -116,9 +116,9 @@ def challengers() -> list[dict]:
     return [
         {
             "route": "BUILD_A_LOCAL_TASK_BENCHMARK_AND_TIME_END_TO_END_SOLVES",
-            "evidence": ["no local benchmark exists; end-to-end solving needs a model, which the receipt deliberately avoids"],
-            "qualification_evidence": ["canonical/verification/FRONTIER_RESEARCH_20261127_V4.md"],
-            "qualification_evidence_classes": ["BROAD_WEB_OR_COMMUNITY"],
+            "evidence": ["no local benchmark exists; end-to-end solving needs a model, and the receipt measures the same question offline in 1.4 ms"],
+            "qualification_evidence": ["canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json"],
+            "qualification_evidence_classes": ["DIRECT_PROBE"],
             "resolution": "DISQUALIFIED",
             "comparison": {"CORRECTNESS": "measures task difficulty, not the cost of asking",
                            "CAPABILITY_STRENGTH": "would need a model and a budget",

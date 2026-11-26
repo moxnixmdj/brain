@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4ca5cac221a44933a2d04a0c8f37c3af5d3f85056ef47f3ad1a728ac73e07f82"
+  "value": "0a314a345324843cc78fa93055f6af9718ae90dfb0434c74fb5caade4b904c4a"
  },
  "engines": [
   {
@@ -49492,7 +49492,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/stamp_answer_receipt_intent_20261127.py",
-   "sha256": "f1b849eda037248827076f93cb72f4d8b86aab41a5671813237ea137e974cf3e",
+   "sha256": "cf6b76cfbf693d0b07496f2c4f5e3044d9084ce78259fea43dad28f895d49fdc",
    "summary": "Stamp the recursive-OBS receipt for the cost-of-asking intent.",
    "symbol_count": 4,
    "symbols": [
@@ -88354,7 +88354,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/stamp_answer_receipt_intent_20261127.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "f1b849eda037248827076f93cb72f4d8b86aab41a5671813237ea137e974cf3e",
+   "sha256": "cf6b76cfbf693d0b07496f2c4f5e3044d9084ce78259fea43dad28f895d49fdc",
    "summary": "Stamp the recursive-OBS receipt for the cost-of-asking intent.",
    "triggers": [
     "stamp",
@@ -151310,7 +151310,7 @@
   "included_source_count": 2310,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f3c1592cd585d32ea3c875954e959aaba779f3b9c31cce057cf2c1e3c1707387"
+  "source_tree_digest": "17c26f30322db6c02cec7d89ac5ec0219b3368719f021e46331c1c3282fcdc56"
  },
  "research_index": [
   {
@@ -320642,7 +320642,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_ANSWER_IS_COMPILED_SO_MEASURE_THE_COST_OF_ASKING_20261127_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "a1f8e717c5149c376df4bdfaa67ca71b3c9bb083706de6388060797deee571a3",
+   "sha256": "d68749b2306b4fe9eddf197ca788369205034c005400edf2f0340da585572dca",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "1.04": 1,

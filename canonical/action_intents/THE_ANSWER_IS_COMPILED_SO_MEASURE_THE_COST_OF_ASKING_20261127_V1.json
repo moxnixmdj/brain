@@ -29,7 +29,7 @@
   ],
   "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
   "producer_cognition_model_dependency_count": 0,
-  "progress_class": "INSTRUMENTATION_OF_A_CLAIMED_ADVANTAGE",
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
    "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
    "canonical/tools/runtime_answer_receipt_v1.py",
@@ -113,7 +113,7 @@
   "canonical/tools/contract_first_routing_v1.py"
  ],
  "probe_specific": false,
- "progress_class": "INSTRUMENTATION_OF_A_CLAIMED_ADVANTAGE",
+ "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
  "progress_evidence_paths": [
   "canonical/verification/THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.json",
   "THE_VOCABULARY_IS_THE_ARTIFACT_20261125_V1.md",
@@ -240,13 +240,13 @@
       "WALL_CLOCK": "hours per run"
      },
      "evidence": [
-      "no local benchmark exists; end-to-end solving needs a model, which the receipt deliberately avoids"
+      "no local benchmark exists; end-to-end solving needs a model, and the receipt measures the same question offline in 1.4 ms"
      ],
      "qualification_evidence": [
-      "canonical/verification/FRONTIER_RESEARCH_20261127_V4.md"
+      "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json"
      ],
      "qualification_evidence_classes": [
-      "BROAD_WEB_OR_COMMUNITY"
+      "DIRECT_PROBE"
      ],
      "resolution": "DISQUALIFIED",
      "route": "BUILD_A_LOCAL_TASK_BENCHMARK_AND_TIME_END_TO_END_SOLVES"
