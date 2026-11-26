@@ -139,3 +139,95 @@ honestly at `FAIL_CLOSED__REPO_NATIVE_EXHAUSTED`: it localises and searches but
 does not synthesise the fix (`return None` → `return ""` on a None guard). That
 is the capability gap, stated as a capability gap rather than hidden behind an
 unmeasured status. It is the next target; it is not claimed as solved here.
+
+---
+
+# Part 2: The assertion already states the repair
+
+With the oracle alive (`PR #7154`), the `fgtest` probe failed honestly at
+`FAIL_CLOSED__REPO_NATIVE_EXHAUSTED`. Measured on that run:
+
+```
+oe_synthesized_exprs: []    zygote_screened_candidates: 0
+mined_repo_components: 0    history_templates_mined: 0
+localization: {'ranked_files': ['pkg/names.py', 'pkg/__init__.py'],
+               'ranked_lines_by_file': {'pkg/names.py': [1, 2, 3, 4]}}
+```
+
+Localisation was already right — it ranked the file first and every line in
+it. The search then tried nothing, because `oe_synthesized_exprs` is filled
+from **witnesses**, and a single failing assertion is not a witness.
+
+But the failure already contains the answer. `extract_value_obligations`
+mines the *expected* side of a failed assertion, and on this transcript it
+found exactly one:
+
+```
+AssertionError: assert None == ''
+  -> actual None   expected ''   op ==
+```
+
+Nothing consumed it. The `None`-vs-`''` case is the strongest instance: an
+obligation whose expected value is `None` carries no residual and is skipped
+by design, which is correct in general and is precisely why a `return None`
+guard never gets a duty to satisfy.
+
+## The route
+
+Under §10 — *"solve backward from the output instead of searching forward"* —
+the repair is not a search over a mutation grammar. It is: **make a return site
+produce the value the failing test named.** 51 lines in the spine:
+
+1. Read the literal expectations off the failing run via
+   `causal_nexus_v1.extract_value_obligations`, keep only expectations that
+   `literal_source` accepts. Non-literals (`len([1,2,3])`) yield no duty and
+   are never guessed.
+2. For each ranked file and ranked line that is a `return`, substitute the
+   obliged source.
+3. Hand every candidate to the same CoW oracle. The oracle still decides —
+   nothing is accepted because it type-checks or because it is the only option.
+
+No new module, no new dependency, no new grammar.
+
+## Measured
+
+| probe | before | after |
+|---|---|---|
+| `fgtest` — `if x is None: return None`, test asserts `== ""` | `FAIL_CLOSED__REPO_NATIVE_EXHAUSTED` | **`PASS__REPO_NATIVE_ASSERTION_BACKWARD_OBLIGATION`**, 68 ms, `model_calls: 0` |
+| patch produced | none | `return None` → `return ''` (one line, the guarded site only) |
+| `bintest` — unrelated binop repair | `PASS__…ANGELIC_OE_STRUCTURAL` | unchanged (no regression) |
+
+Correctness check on a two-return-site variant (`return None` guard then
+`return x * 2`, assertion `g(None) == 0`): the patch changes the guarded
+return to `0` and **leaves `return x * 2` alone**. The duty is applied at the
+implicated site, not everywhere a `return` appears.
+
+## Falsification attempted
+
+- **Non-literal expectation** (`assert h(1) == len([1,2,3])`): `FAIL_CLOSED`,
+  `backward_obligation_source: None`. It does not invent a value.
+- **An earlier "negative control" I wrote was invalid**: `assert f(1) ==
+  len([1,2])` with `f(x)=x+1` genuinely passes (2 == 2), so
+  `PASS__BASELINE_ALREADY_GREEN` was the correct answer, not a lie. Replaced
+  with a case that really is red before drawing any conclusion from it.
+- **Determinism**: repeated runs return the same status.
+
+## Ablation
+
+`test_stdlib_test_surface_oracle_v1` is now 11 tests. Against the spine
+**without** this route: `FAILED (failures=2)` — exactly the two capability
+tests. With it: 11/11 OK.
+
+## Honest boundary
+
+This is one mechanism for one readable duty. It is not "instant learning": the
+duty is applied at localised return sites in a single file, it requires the
+failure to publish a literal expectation, and it does not generalise the repair
+into a stored skill. A multi-function bug whose expected value is computed
+rather than literal is still `FAIL_CLOSED`. The remaining levers, in order:
+
+1. **Conditional obligations** — `remove this guard` / `wrap in a default` is a
+   tree difference, not a literal substitution, and is not covered.
+2. **Crystallisation of these wins** — the patch is produced but not stored as a
+   reusable morphism, so the same *class* of repair is re-derived next time.
+3. **The official harnesses** — still blocked on docker; no benchmark number.
