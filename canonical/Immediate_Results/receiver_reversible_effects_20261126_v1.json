@@ -1,0 +1,475 @@
+{
+  "protocol": "Post-grade no-edit/edit/no-edit repeat. No new task, no oracle, no promotion, conditional on preserving these bytes.",
+  "rows": {
+    "aba-32": {
+      "recheck": {
+        "nature": "post-grade repeat, not another task",
+        "results": [
+          {
+            "arm": "raw_traces",
+            "invariant": "l3_neg_4dda2c34e036e890",
+            "reproduced": true,
+            "runs": [
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 315.855
+              },
+              {
+                "edit": true,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                  "stdout_bytes": 475,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.596
+              },
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.449
+              }
+            ]
+          },
+          {
+            "arm": "generalized",
+            "invariant": "l3_neg_026439ca7f5ffcb3",
+            "reproduced": true,
+            "runs": [
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.426
+              },
+              {
+                "edit": true,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                  "stdout_bytes": 475,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 315.669
+              },
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 366.219
+              }
+            ]
+          }
+        ]
+      },
+      "scoped_external_evidence": {
+        "l3_neg_026439ca7f5ffcb3": {
+          "counterexample_witness": {
+            "baseline": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31"
+            },
+            "edited": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f"
+            },
+            "subjects": [
+              "/input/pkg/click/core.py::Argument.get_help_record"
+            ]
+          },
+          "domain": "cli_help_contrast",
+          "failure_cause": "OBSERVED_OUTPUT_CHANGED",
+          "forbidden_signature": "3a4035c06815abdae7bd16f84c9d4c299f4a4cc3ae83c0c728082f76d4a9ca57",
+          "invariant_id": "l3_neg_026439ca7f5ffcb3",
+          "precondition_predicates": {
+            "driver": "d78a763f3833c47aa2c5d6f0763c0bc9d1a651a7565678e263969d6900d76980",
+            "example_sources": "322c2dc06a31aa7be1ea403c0ac6b0c62a1c2d11407a8ea4b7de256225bcab63",
+            "obligation": "preserve exit, stdout and stderr bytes on this request",
+            "probe": {
+              "child": "clone",
+              "entry": "repo:cli",
+              "name": "repo",
+              "path": "repo/pyproject.toml"
+            },
+            "python": "3.11.2",
+            "receiver_product": "98292befcd4ee48d463a02b12fa59221d1b7438c7a1083caec1f928b1cd05146"
+          },
+          "provenance": {
+            "arm": "generalized",
+            "candidate_path": "core.py",
+            "protocol": "receiver-native --help; fresh no-edit/edit/no-edit rooms"
+          },
+          "pruned_count": 0,
+          "revision": 1,
+          "status": "ACTIVE"
+        },
+        "l3_neg_4dda2c34e036e890": {
+          "counterexample_witness": {
+            "baseline": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31"
+            },
+            "edited": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f"
+            },
+            "subjects": [
+              "/input/pkg/click/core.py::Argument.get_help_record"
+            ]
+          },
+          "domain": "cli_help_contrast",
+          "failure_cause": "OBSERVED_OUTPUT_CHANGED",
+          "forbidden_signature": "26215735d66c634fe05823a934b46cabe191775a8d753a392f09c545bc02ce92",
+          "invariant_id": "l3_neg_4dda2c34e036e890",
+          "precondition_predicates": {
+            "driver": "d78a763f3833c47aa2c5d6f0763c0bc9d1a651a7565678e263969d6900d76980",
+            "example_sources": "322c2dc06a31aa7be1ea403c0ac6b0c62a1c2d11407a8ea4b7de256225bcab63",
+            "obligation": "preserve exit, stdout and stderr bytes on this request",
+            "probe": {
+              "child": "clone",
+              "entry": "repo:cli",
+              "name": "repo",
+              "path": "repo/pyproject.toml"
+            },
+            "python": "3.11.2",
+            "receiver_product": "98292befcd4ee48d463a02b12fa59221d1b7438c7a1083caec1f928b1cd05146"
+          },
+          "provenance": {
+            "arm": "raw_traces",
+            "candidate_path": "core.py",
+            "protocol": "receiver-native --help; fresh no-edit/edit/no-edit rooms"
+          },
+          "pruned_count": 0,
+          "revision": 1,
+          "status": "ACTIVE"
+        }
+      }
+    },
+    "aba-4": {
+      "recheck": {
+        "nature": "post-grade repeat, not another task",
+        "results": [
+          {
+            "arm": "raw_traces",
+            "invariant": "l3_neg_c92e10f215bc75d6",
+            "reproduced": true,
+            "runs": [
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 315.796
+              },
+              {
+                "edit": true,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                  "stdout_bytes": 475,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.485
+              },
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.84
+              }
+            ]
+          },
+          {
+            "arm": "generalized",
+            "invariant": "l3_neg_da2facf5f6687065",
+            "reproduced": true,
+            "runs": [
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.446
+              },
+              {
+                "edit": true,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f",
+                  "stdout_bytes": 475,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.512
+              },
+              {
+                "edit": false,
+                "observation": {
+                  "status": "OBSERVED",
+                  "exit": 0,
+                  "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31",
+                  "stdout_bytes": 437,
+                  "advertised": [],
+                  "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                  "stderr_bytes": 0,
+                  "diagnostic": "",
+                  "local_product": true,
+                  "calls": {
+                    "/input/pkg/click/core.py::Argument.get_help_record": 4
+                  }
+                },
+                "wall_ms": 265.429
+              }
+            ]
+          }
+        ]
+      },
+      "scoped_external_evidence": {
+        "l3_neg_c92e10f215bc75d6": {
+          "counterexample_witness": {
+            "baseline": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31"
+            },
+            "edited": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f"
+            },
+            "subjects": [
+              "/input/pkg/click/core.py::Argument.get_help_record"
+            ]
+          },
+          "domain": "cli_help_contrast",
+          "failure_cause": "OBSERVED_OUTPUT_CHANGED",
+          "forbidden_signature": "be8ac6adac54d9ef9b14dd12ee0042ed5b16ec9dfe52b434e03e42711554231d",
+          "invariant_id": "l3_neg_c92e10f215bc75d6",
+          "precondition_predicates": {
+            "driver": "d78a763f3833c47aa2c5d6f0763c0bc9d1a651a7565678e263969d6900d76980",
+            "example_sources": "322c2dc06a31aa7be1ea403c0ac6b0c62a1c2d11407a8ea4b7de256225bcab63",
+            "obligation": "preserve exit, stdout and stderr bytes on this request",
+            "probe": {
+              "child": "clone",
+              "entry": "repo:cli",
+              "name": "repo",
+              "path": "repo/pyproject.toml"
+            },
+            "python": "3.11.2",
+            "receiver_product": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2"
+          },
+          "provenance": {
+            "arm": "raw_traces",
+            "candidate_path": "core.py",
+            "protocol": "receiver-native --help; fresh no-edit/edit/no-edit rooms"
+          },
+          "pruned_count": 0,
+          "revision": 1,
+          "status": "ACTIVE"
+        },
+        "l3_neg_da2facf5f6687065": {
+          "counterexample_witness": {
+            "baseline": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "9054a2ddf6341fb7eecc6b7da745d07d50387af623574a2a44ec8bf301df3c31"
+            },
+            "edited": {
+              "calls": {
+                "/input/pkg/click/core.py::Argument.get_help_record": 4
+              },
+              "exit": 0,
+              "local_product": true,
+              "status": "OBSERVED",
+              "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "stdout_sha256": "70f537a4cd4d5efbb90a23784fc3b912cd1af5c227c2906eafb5ae71c69d823f"
+            },
+            "subjects": [
+              "/input/pkg/click/core.py::Argument.get_help_record"
+            ]
+          },
+          "domain": "cli_help_contrast",
+          "failure_cause": "OBSERVED_OUTPUT_CHANGED",
+          "forbidden_signature": "a7fff2dc0b1bc4b1eac2e7093ca314ae481e805c02fb5b97a0a90691d0c22689",
+          "invariant_id": "l3_neg_da2facf5f6687065",
+          "precondition_predicates": {
+            "driver": "d78a763f3833c47aa2c5d6f0763c0bc9d1a651a7565678e263969d6900d76980",
+            "example_sources": "322c2dc06a31aa7be1ea403c0ac6b0c62a1c2d11407a8ea4b7de256225bcab63",
+            "obligation": "preserve exit, stdout and stderr bytes on this request",
+            "probe": {
+              "child": "clone",
+              "entry": "repo:cli",
+              "name": "repo",
+              "path": "repo/pyproject.toml"
+            },
+            "python": "3.11.2",
+            "receiver_product": "ab782145c4739d56147e2b993ac60c5316f2eef6a4e51fd29977bd0eff96cec2"
+          },
+          "provenance": {
+            "arm": "generalized",
+            "candidate_path": "core.py",
+            "protocol": "receiver-native --help; fresh no-edit/edit/no-edit rooms"
+          },
+          "pruned_count": 0,
+          "revision": 1,
+          "status": "ACTIVE"
+        }
+      }
+    }
+  }
+}

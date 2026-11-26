@@ -10,6 +10,7 @@ import argparse
 import ast
 import base64
 import configparser
+from contextlib import contextmanager
 import hashlib
 import importlib
 import json
@@ -231,6 +232,36 @@ def observe_in_room():
             'stderr_bytes': len(p.stderr), 'diagnostic': p.stderr.decode(errors='replace')[-240:] if p.returncode else '', **metadata}
 
 
+
+@contextmanager
+def staged_room(product, examples, candidate):
+    with tempfile.TemporaryDirectory() as td:
+        room = Path(td)
+        (room / 'tools').mkdir()
+        shutil.copyfile(HERE, room / 'tools/driver.py')
+        py_sources(product, room / 'pkg' / product.name)
+        py_sources(examples, room / 'examples')
+        if candidate:
+            rel, data = candidate
+            dest = room / 'pkg' / product.name / rel
+            if Path(rel).is_absolute() or '..' in Path(rel).parts or not dest.is_file():
+                raise ValueError('not a staged product file')
+            dest.write_bytes(data)
+        yield room
+
+
+def intervention(out, arm, record):
+    c = record['arms'][arm]['first_candidate']
+    if not c:
+        return None
+    rel = Path(c['path'])
+    if rel.is_absolute() or '..' in rel.parts or rel.suffix != '.py':
+        raise ValueError('invalid frozen path')
+    data = (out / 'frozen' / arm / rel).read_bytes()
+    if sha(data) != c['sha256']:
+        raise ValueError('changed frozen intervention')
+    return rel, data
+
 def measure(checkout, rel, store, out, *, directed=False):
     started = time.monotonic()
     out.mkdir(exist_ok=False)
@@ -252,14 +283,7 @@ def measure(checkout, rel, store, out, *, directed=False):
     rows = {}
     for a in ARMS:
         c = record['arms'][a]['first_candidate']
-        with tempfile.TemporaryDirectory() as td:
-            room = Path(td)
-            (room / 'tools').mkdir()
-            shutil.copyfile(HERE, room / 'tools/driver.py')
-            py_sources(product, room / 'pkg' / pkg)
-            py_sources(examples, room / 'examples')
-            if c:
-                shutil.copyfile(out / 'frozen' / a / c['path'], room / 'pkg' / pkg / c['path'])
+        with staged_room(product, examples, intervention(out, a, record)) as room:
             rows[a] = []
             queue = list(programs) if a == 'empty' else [r['program'] for r in rows['empty']]
             while queue and len(rows[a]) < 4:
@@ -290,6 +314,82 @@ def measure(checkout, rel, store, out, *, directed=False):
                                  'rows': rows, 'elapsed_s': round(time.monotonic() - started, 3), 'skill_admitted': False})
 
 
+def record_reversible_effects(checkout, rel, out, destination):
+    """Post-freeze A/B/A recheck; retain only the compact *conditional* witness.
+
+    The predicate is byte preservation for this exact interaction. It cannot
+    blacklist the candidate under a goal that wants the new output instead.
+    This is a host-side diagnostic on trusted release sources, never a grader.
+    """
+    from canonical.swe_kernel.epistemic_admission_and_self_play_v1 import EpistemicStoreV1
+    destination.mkdir(exist_ok=False)
+    store_path = destination / 'evidence.json'
+    memory = EpistemicStoreV1(store_path)
+    ct = json.loads((out / 'contrast.json').read_bytes())
+    record = json.loads((out / 'probe.json').read_bytes())['targets'][0]
+    product, examples = checkout / rel, checkout / 'examples'
+    programs, _ = example_programs(examples)
+    results = []
+    for arm in ARMS[1:]:
+        for i, row in enumerate(ct['rows'][arm]):
+            if row['comparison'] != 'OBSERVABLE_CHANGE':
+                continue
+            program = row['program']
+            parent = {k: v for k, v in program.items() if k != 'child'}
+            if parent not in programs or (program.get('child') is not None and not any(
+                    b['program'] == parent and program['child'] in b['observation'].get('advertised', [])
+                    for b in ct['rows']['empty'])):
+                raise ValueError('stale or unknown receiver affordance')
+            subjects = ct['changed_functions'][arm]
+            path, data = intervention(out, arm, record)
+            if subjects != ['/input/pkg/' + product.name + '/' + str(path) + '::' + name
+                            for name in changed_functions((product / path).read_bytes(), data)]:
+                raise ValueError('changed observation subject; reacquire evidence')
+            expected = [ct['rows']['empty'][i]['observation'], row['observation']]
+            fields = ('status', 'local_product', 'exit', 'stdout_sha256', 'stderr_sha256', 'calls')
+            verified = expected[0]['exit'] == 0
+            runs = []
+            for kind in (0, 1, 0):
+                c = intervention(out, arm if kind else 'empty', record)
+                with staged_room(product, examples, c) as room:
+                    if not kind:
+                        def manifest(root):
+                            h = hashlib.sha256()
+                            for f in sorted(root.rglob('*.py')):
+                                h.update(f.relative_to(root).as_posix().encode() + b'\0' + hashlib.sha256(f.read_bytes()).digest())
+                            return h.hexdigest()
+                        if manifest(room / 'pkg' / product.name) != record['source_manifest_sha256']:
+                            raise ValueError('receiver product changed; reacquire evidence')
+                        examples_hash = manifest(room / 'examples')
+                    dump(room / 'request.json', {'program': program, 'package': product.name, 'subjects': subjects})
+                    launch, obs = job(room, '--observe', 10)
+                obs = obs or {}
+                verified &= (obs.get('status') == 'OBSERVED' and obs.get('local_product') is True
+                             and any(obs['calls'].values()) and all(obs.get(k) == expected[kind].get(k) for k in fields))
+                runs.append({'edit': bool(kind), 'observation': obs, 'wall_ms': launch['wallclock_ms']})
+            verified &= any(expected[0][k] != expected[1][k] for k in ('exit', 'stdout_sha256', 'stderr_sha256'))
+            sid = None
+            if verified:
+                sig = record['arms'][arm]['first_candidate']['sha256']
+                ctx = {'obligation': 'preserve exit, stdout and stderr bytes on this request', 'probe': program,
+                       'receiver_product': record['source_manifest_sha256'], 'example_sources': examples_hash,
+                       'driver': sha(HERE.read_bytes()), 'python': sys.version.split()[0]}
+                sid = memory.record_l3_negative_invariant(domain='cli_help_contrast', forbidden_signature=sig,
+                    precondition_predicates=ctx, failure_cause='OBSERVED_OUTPUT_CHANGED',
+                    counterexample_witness={'baseline': {k: expected[0][k] for k in fields},
+                                            'edited': {k: expected[1][k] for k in fields}, 'subjects': subjects},
+                    provenance={'arm': arm, 'protocol': 'receiver-native --help; fresh no-edit/edit/no-edit rooms',
+                                'candidate_path': record['arms'][arm]['first_candidate']['path']})
+                fresh = EpistemicStoreV1(store_path)
+                if (fresh.is_violating_l3_invariant(domain='cli_help_contrast', candidate_signature=sig, context_state=ctx)
+                        != (True, sid) or fresh.is_violating_l3_invariant(domain='cli_help_contrast', candidate_signature=sig,
+                             context_state={**ctx, 'obligation': 'change the output'})[0]):
+                    raise ValueError('stored predicate lost its scope')
+            results.append({'arm': arm, 'invariant': sid, 'reproduced': bool(verified), 'runs': runs})
+            break  # first distinguishing request only; do not select by grade
+    dump(destination / 'recheck.json', {'nature': 'post-grade repeat, not another task', 'results': results})
+
+
 if __name__ == '__main__':
     if sys.argv[1:] == ['--command']:
         command()
@@ -298,9 +398,15 @@ if __name__ == '__main__':
             f.write(json.dumps(recall_in_room() if sys.argv[1] == '--recall' else observe_in_room()).encode())
     else:
         p = argparse.ArgumentParser(description=__doc__)
-        for arg in ('checkout', 'store', 'out'):
+        for arg in ('checkout', 'out'):
             p.add_argument('--' + arg, type=Path, required=True)
         p.add_argument('--product', choices=['src/click', 'typer'], required=True)
         p.add_argument('--directed', action='store_true')
+        g = p.add_mutually_exclusive_group(required=True)
+        g.add_argument('--store', type=Path, help='teacher store for new proposal/contrast measurement')
+        g.add_argument('--recheck-to', type=Path, help='replay a previously frozen contrast into a new evidence directory')
         a = p.parse_args()
-        measure(a.checkout.resolve(), Path(a.product), a.store, a.out, directed=a.directed)
+        if a.recheck_to:
+            record_reversible_effects(a.checkout.resolve(), Path(a.product), a.out, a.recheck_to)
+        else:
+            measure(a.checkout.resolve(), Path(a.product), a.store, a.out, directed=a.directed)
