@@ -3,7 +3,7 @@
   "claim_limit": "a score is evidence that the module's own text says it does this work; it is not evidence that the work is correct",
   "domains": {
    "coding_agents": {
-    "candidates": 287,
+    "candidates": 290,
     "frontier_function": "resolve a repository issue from a text description",
     "harvested_all": 101,
     "hidden_share_all": 0.014,
@@ -108,7 +108,7 @@
     ]
    },
    "computer_use": {
-    "candidates": 145,
+    "candidates": 146,
     "frontier_function": "drive a GUI it has never seen",
     "harvested_all": 24,
     "hidden_share_all": 0.014,
@@ -213,10 +213,10 @@
     ]
    },
    "continual_learning": {
-    "candidates": 28,
+    "candidates": 29,
     "frontier_function": "keep improving without forgetting or drifting",
     "harvested_all": 8,
-    "hidden_share_all": 0.071,
+    "hidden_share_all": 0.069,
     "indexed_all": 17,
     "top": [
      {
@@ -287,6 +287,14 @@
       "capability": false,
       "executable_surface": false,
       "indexed_as_source": false,
+      "path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+      "score": 5.25,
+      "summary": "Play 2 — Consolidation Without Gradients (`gradient_free_law_consolidation_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
+      "indexed_as_source": false,
       "path": "canonical/runtime/bound_capabilities/software_repair_crossfile_choreograph_v1.py",
       "score": 5.0,
       "summary": "Cross-file repair with separate staged and in-place protocols."
@@ -306,19 +314,11 @@
       "path": "canonical/tools/derived_value_measure_v1.py",
       "score": 4.75,
       "summary": "Is the wall a budget, or is it that the value the page wants cannot be EXPRESSED?"
-     },
-     {
-      "capability": false,
-      "executable_surface": false,
-      "indexed_as_source": true,
-      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-      "score": 4.5,
-      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
      }
     ]
    },
    "instant_learning": {
-    "candidates": 173,
+    "candidates": 174,
     "frontier_function": "adapt from one episode without touching weights",
     "harvested_all": 65,
     "hidden_share_all": 0.006,
@@ -423,9 +423,9 @@
     ]
    },
    "memory": {
-    "candidates": 184,
+    "candidates": 189,
     "frontier_function": "context that stays correct as it fills",
-    "harvested_all": 49,
+    "harvested_all": 50,
     "hidden_share_all": 0.005,
     "indexed_all": 162,
     "top": [
@@ -528,7 +528,7 @@
     ]
    },
    "verification_abstention": {
-    "candidates": 321,
+    "candidates": 323,
     "frontier_function": "know when you do not know, and prove what you did",
     "harvested_all": 53,
     "hidden_share_all": 0.04,
@@ -633,7 +633,7 @@
     ]
    },
    "world_model": {
-    "candidates": 122,
+    "candidates": 123,
     "frontier_function": "predict what an action does before doing it",
     "harvested_all": 37,
     "hidden_share_all": 0.041,
@@ -714,6 +714,14 @@
      {
       "capability": false,
       "executable_surface": false,
+      "indexed_as_source": false,
+      "path": "canonical/runtime/state_contract_world_model_v1.py",
+      "score": 16.5,
+      "summary": "Play 1 — State-as-Contract World Model (`state_contract_world_model_v1`)."
+     },
+     {
+      "capability": false,
+      "executable_surface": false,
       "indexed_as_source": true,
       "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
       "score": 15.5,
@@ -726,14 +734,6 @@
       "path": "canonical/swe_kernel/safe_action_model_v1.py",
       "score": 15.5,
       "summary": "A SAFE action model: one observation is enough, and every plan it admits is a fact."
-     },
-     {
-      "capability": false,
-      "executable_surface": true,
-      "indexed_as_source": false,
-      "path": "canonical/tools/one_experience_every_consequence_v1.py",
-      "score": 15.0,
-      "summary": "One action in, every consequence out: what one experience buys, and where it stops."
      }
     ]
    }
@@ -741,51 +741,51 @@
   "present": true,
   "reachability": {
    "coding_agents": {
-    "chance_route_recall": 0.0356,
-    "chance_source_recall": 0.1276,
+    "chance_route_recall": 0.0411,
+    "chance_source_recall": 0.1292,
     "frontier_source_hit_recall": 1.0,
     "native_route_hit_recall": 1.0
    },
    "computer_use": {
-    "chance_route_recall": 0.0134,
-    "chance_source_recall": 0.0642,
+    "chance_route_recall": 0.0152,
+    "chance_source_recall": 0.0648,
     "frontier_source_hit_recall": 0.667,
-    "native_route_hit_recall": 0.333
+    "native_route_hit_recall": 0.667
    },
    "continual_learning": {
-    "chance_route_recall": 0.0067,
-    "chance_source_recall": 0.0125,
+    "chance_route_recall": 0.0087,
+    "chance_source_recall": 0.013,
     "frontier_source_hit_recall": 0.333,
     "native_route_hit_recall": 0.333
    },
    "instant_learning": {
-    "chance_route_recall": 0.0022,
-    "chance_source_recall": 0.0767,
+    "chance_route_recall": 0.0043,
+    "chance_source_recall": 0.0773,
     "frontier_source_hit_recall": 1.0,
-    "native_route_hit_recall": 0.0
+    "native_route_hit_recall": 1.0
    },
    "memory": {
-    "chance_route_recall": 0.0067,
-    "chance_source_recall": 0.0812,
+    "chance_route_recall": 0.013,
+    "chance_source_recall": 0.0836,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 0.333
    },
    "verification_abstention": {
-    "chance_route_recall": 0.0757,
-    "chance_source_recall": 0.1432,
+    "chance_route_recall": 0.0779,
+    "chance_source_recall": 0.1444,
     "frontier_source_hit_recall": 0.667,
     "native_route_hit_recall": 0.333
    },
    "world_model": {
-    "chance_route_recall": 0.0045,
-    "chance_source_recall": 0.054,
+    "chance_route_recall": 0.0065,
+    "chance_source_recall": 0.0545,
     "frontier_source_hit_recall": 1.0,
-    "native_route_hit_recall": 0.0
+    "native_route_hit_recall": 0.333
    }
   },
   "schema": "BRAIN_MODEL_ANATOMY_V1",
   "source": "canonical/unified_model/DOMAIN_ATLAS_V1.json",
-  "source_sha256": "62dd0f66cf8d7bdf10a2500fc9b679d03126d13db0b307e608937e71431802d6"
+  "source_sha256": "cd7eb2927e87da971eb5a0400a09d732bd7db2d9a0367b7f86742486e306bf19"
  },
  "capabilities": [
   {
@@ -33042,7 +33042,7 @@
   "harvested_capabilities": 636,
   "harvested_contract_surfaces": 33,
   "harvested_program_surfaces": 603,
-  "knowledge_documents": 747,
+  "knowledge_documents": 748,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "b6d538cbcee02d1533d5f699bf2fbb47d99ebe593176dd4a56f55bf2ffa54add"
+  "value": "fbda77d3537457a6330e18e7ea3e2685b1ca6797f6ff0832925c33683a1d7d2a"
  },
  "engines": [
   {
@@ -41045,7 +41045,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/domain_atlas_v1.py",
-   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "sha256": "d3c089b94327a77d815d9f7b75f2176f4d437649b431ac54bbbd0242b64cfaee",
    "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
    "symbol_count": 9,
    "symbols": [
@@ -84644,7 +84644,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/domain_atlas_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "70e3acfe107964a41230f15f5c37b6ec4cbe81c0becab093f3c888a0ce6cda4b",
+   "sha256": "d3c089b94327a77d815d9f7b75f2176f4d437649b431ac54bbbd0242b64cfaee",
    "summary": "Where the machine's five frontier functions actually live, and whether the model can see them.",
    "triggers": [
     "domain",
@@ -120411,6 +120411,90 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 14567,
+   "headings": [
+    "The frontier is not out there. It is unindexed, in here.",
+    "0. Why this plan is not last round's plan",
+    "1. The one law",
+    "2. Five doors, ordered by how much they delete",
+    "Door 3 — Make the library smaller than the frontier's prompt.",
+    "Door 4 — The door out, one level up: index before you add.",
+    "Door 5 — Speculation, where the verification is already free.",
+    "Door 6 — A benchmark we cannot win by luck.",
+    "3. What \"insanely fast\" means when the answer is already computed",
+    "4. Why this is ahead, in one testable sentence",
+    "5. What I measured, and what I refuse to claim",
+    "6. Reproduce",
+    "instant_learning src·nat 1.000 rte·nat 0.000 <- found, not routed",
+    "world_model src·nat 1.000 rte·nat 0.000 <- found, not routed",
+    "coding_agents src·nat 1.000 rte·nat 1.000",
+    "The model carries only the route columns; the atlas carries both. Use the atlas."
+   ],
+   "kind": "DOCUMENT",
+   "path": "THE_FRONTIER_IS_NOT_OUT_THERE_20261125_V1.md",
+   "sha256": "18823203d97b49c430ce5c63c2a028afd22fe29c8f412631b627bd616b75ce2e",
+   "summary": "*2026-11-25 · branch `arena/b864526d-brain` @ `9953cbc4` · $0, zero model calls*",
+   "terms": {
+    "0.000": 12,
+    "0.333": 9,
+    "1.000": 12,
+    "1.4m": 5,
+    "about": 5,
+    "acceptance": 6,
+    "already": 14,
+    "answer": 9,
+    "because": 7,
+    "been": 6,
+    "bound": 5,
+    "candidate": 5,
+    "cannot": 10,
+    "canonical": 5,
+    "capability": 6,
+    "composition": 5,
+    "corpus": 5,
+    "delete": 6,
+    "door": 20,
+    "every": 6,
+    "file": 5,
+    "found": 5,
+    "front": 5,
+    "frontier": 20,
+    "here": 6,
+    "instant_learning": 5,
+    "last": 5,
+    "lines": 8,
+    "machine": 6,
+    "measured": 5,
+    "measurement": 5,
+    "model": 18,
+    "module": 10,
+    "must": 7,
+    "nat": 8,
+    "never": 8,
+    "no": 8,
+    "not": 36,
+    "nothing": 5,
+    "one": 15,
+    "own": 14,
+    "plan": 6,
+    "repo": 6,
+    "round": 8,
+    "route": 12,
+    "they": 6,
+    "verified": 11,
+    "world": 6
+   },
+   "title": "The frontier is not out there. It is unindexed, in here.",
+   "title_terms": [
+    "frontier",
+    "here",
+    "not",
+    "out",
+    "unindexed"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 18499,
    "headings": [
     "The gap closes the loop — 2026-11-24",
@@ -151019,10 +151103,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2306,
+  "included_source_count": 2307,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "abdf7662d537df8490718f86385ed3b304bf1ed9c4f992fcc1f33d679fe4465a"
+  "source_tree_digest": "744782220bd0637f0853c436e9e857e0e7b1d79743915453e8c2e9adbd5738de"
  },
  "research_index": [
   {
