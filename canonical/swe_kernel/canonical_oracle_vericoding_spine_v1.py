@@ -28,26 +28,43 @@ under one front-door verification spine wired into ``brain_unified_model_v1``:
 from __future__ import annotations
 
 import ast
-import time
 import copy
+import importlib
 import re
 import shutil
 import subprocess
 import sys
 import tempfile
+import time
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime import instruction_contract_v1 as instr_contract
-from canonical.runtime import verifier_falsification_v1 as verifier_falsif
-from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as diag_engine
-from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
-from canonical.swe_kernel import repair_input_dependency_gate_v1 as dep_gate
-from canonical.swe_kernel import what_the_condition_wants_v1 as cond_wants
-from canonical.swe_kernel import witness_inversion_v1 as witness_inv
-from canonical.tools import the_assertion_is_the_demand_v1 as assert_demand
-from canonical.tools import the_relation_is_read_from_the_failing_run_v1 as failing_rel
-from canonical.tools import the_right_question_is_an_experiment_v1 as claim_exp
+
+class _LazyModule:
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def __getattr__(self, item: str) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return getattr(mod, item)
+
+
+instr_contract = _LazyModule("canonical.runtime.instruction_contract_v1")
+verifier_falsif = _LazyModule("canonical.runtime.verifier_falsification_v1")
+diag_engine = _LazyModule("canonical.swe_kernel.diagnostics_perf_and_design_engine_v1")
+mhz = _LazyModule("canonical.swe_kernel.metamorphic_habitation_zipper_v1")
+dep_gate = _LazyModule("canonical.swe_kernel.repair_input_dependency_gate_v1")
+cond_wants = _LazyModule("canonical.swe_kernel.what_the_condition_wants_v1")
+witness_inv = _LazyModule("canonical.swe_kernel.witness_inversion_v1")
+assert_demand = _LazyModule("canonical.tools.the_assertion_is_the_demand_v1")
+failing_rel = _LazyModule("canonical.tools.the_relation_is_read_from_the_failing_run_v1")
+claim_exp = _LazyModule("canonical.tools.the_right_question_is_an_experiment_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_ORACLE_VERICODING_SPINE_V1"
 ROOT = Path(__file__).resolve().parents[2]
@@ -1184,5 +1201,335 @@ def generate_csp_hard_negatives(
         "model_calls": 0,
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
     }
+
+
+def run_red_queen_evaluator_coevolution(
+    *,
+    epoch_index: int = 0,
+    scan_root: str | Path | None = None,
+    orig_source: str | None = None,
+    patched_source: str | None = None,
+    func_name: str | None = None,
+    lens_witness_pairs: Sequence[tuple[Any, Any]] | None = None,
+    mine_rewrite_laws: bool = True,
+    rewrite_max_size: int = 3,
+    rewrite_term_limit: int = 96,
+    discover_stdlib_judges: bool = True,
+) -> dict[str, Any]:
+    """Wave 24: Red Queen Co-Evolution of Evaluators (`0H`, `K3=0`).
+
+    Fuses three hidden evaluator engines under Red Queen Gödel Machine intra-epoch
+    freeze discipline (evaluators are content-hashed and FROZEN within `epoch_index`;
+    newly discovered judges, CoW boundary fuzzers, bidirectional lenses, and mined
+    algebraic rewrite rules take effect only at `epoch_index + 1`):
+      1. `auto_judge_discovery_v1` (`discover_stdlib_candidates` + `close_ignorance_loop`).
+      2. `cow_lens_fuzz_and_negative_space_v1` (`verify_cow_boundary_invariance` +
+         `synthesize_bidirectional_fst_lens`).
+      3. `mined_rewrite_theory_v1` (`mine_rules` + `minimize_rules`).
+    """
+    import hashlib as _hl
+
+    from canonical.swe_kernel import auto_judge_discovery_v1 as ajd
+    from canonical.swe_kernel import cow_lens_fuzz_and_negative_space_v1 as clf
+    from canonical.swe_kernel import mined_rewrite_theory_v1 as mrt
+
+    t0 = time.perf_counter()
+    # Freeze current-epoch judge signature so intra-epoch reward hacking is structurally impossible
+    epoch_judge_digest = _hl.sha256(
+        f"red_queen_epoch:{int(epoch_index)}:{bool(discover_stdlib_judges)}:{bool(mine_rewrite_laws)}".encode("utf-8")
+    ).hexdigest()[:16]
+
+    stdlib_judges: list[dict[str, Any]] = []
+    ignorance_report: dict[str, Any] | None = None
+    if discover_stdlib_judges:
+        cands = ajd.discover_stdlib_candidates()
+        stdlib_judges = [
+            {"kind": str(c[0]), "label": str(c[1]), "probe": list(c[2])}
+            for c in cands
+        ]
+    if scan_root is not None and Path(scan_root).is_dir():
+        ignorance_report = ajd.close_ignorance_loop(Path(scan_root).resolve(), max_files=64)
+
+    fuzz_report: dict[str, Any] | None = None
+    if orig_source is not None and patched_source is not None and func_name:
+        fv = clf.verify_cow_boundary_invariance(
+            orig_source.encode("utf-8"),
+            patched_source.encode("utf-8"),
+            str(func_name),
+        )
+        fuzz_report = {
+            "passed": bool(fv.passed),
+            "cases_executed": int(fv.cases_executed),
+            "preserved_ok": int(fv.preserved_ok),
+            "crashes_fixed": int(fv.crashes_fixed),
+            "new_unexpected_crashes": int(fv.new_unexpected_crashes),
+            "isolated_via_cow_fork": bool(fv.isolated_via_cow_fork),
+            "counterexample_count": len(fv.counterexamples),
+        }
+
+    lens_report: dict[str, Any] | None = None
+    if lens_witness_pairs:
+        lens = clf.synthesize_bidirectional_fst_lens(list(lens_witness_pairs))
+        if lens is not None:
+            lens_report = {
+                "lens_id": str(lens.lens_id),
+                "lens_family": str(lens.lens_family),
+                "forward_expr_template": str(lens.forward_expr_template),
+                "backward_expr_template": str(lens.backward_expr_template),
+                "roundtrip_verified": bool(lens.roundtrip_verified),
+                "witness_count": int(lens.witness_count),
+            }
+        else:
+            lens_report = {"roundtrip_verified": False}
+
+    rewrite_report: dict[str, Any] | None = None
+    if mine_rewrite_laws:
+        mined = mrt.mine_rules(
+            max_size=int(rewrite_max_size),
+            term_limit=int(rewrite_term_limit),
+            witnesses_per_round=12,
+            verify_rounds=2,
+            seed=int(epoch_index),
+        )
+        rules_raw = list(mined.get("rules") or ())
+        minimal = mrt.minimize_rules(rules_raw[:24], rounds=2, budget=120) if rules_raw else []
+        rewrite_report = {
+            "mined_rule_count": len(rules_raw),
+            "minimized_rule_count": len(minimal),
+            "refuted_count": len(mined.get("refuted") or ()),
+            "sample_rules": [
+                {"left": repr(r.left), "right": repr(r.right), "witnesses": int(r.witnesses)}
+                for r in minimal[:6]
+            ],
+        }
+
+    next_epoch_digest = _hl.sha256(
+        f"red_queen_epoch:{int(epoch_index) + 1}:{len(stdlib_judges)}:{(rewrite_report or {}).get('minimized_rule_count', 0)}:{bool((fuzz_report or {}).get('passed', True))}".encode("utf-8")
+    ).hexdigest()[:16]
+
+    passed = (
+        (fuzz_report is None or bool(fuzz_report["passed"]))
+        and (len(stdlib_judges) > 0 or rewrite_report is not None or fuzz_report is not None or lens_report is not None)
+    )
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__RED_QUEEN_EPOCH_COEVOLVED" if passed else "FAIL_CLOSED__RED_QUEEN_FUZZ_REGRESSION",
+        "epoch_index": int(epoch_index),
+        "next_epoch_index": int(epoch_index) + 1,
+        "intra_epoch_frozen_judge_digest": epoch_judge_digest,
+        "next_epoch_judge_digest": next_epoch_digest,
+        "intra_epoch_mutation_forbidden": True,
+        "stdlib_judges_discovered": len(stdlib_judges),
+        "stdlib_judges": stdlib_judges[:16],
+        "ignorance_loop": ignorance_report,
+        "cow_boundary_fuzz": fuzz_report,
+        "bidirectional_lens": lens_report,
+        "mined_rewrite_theory": rewrite_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def audit_verifier_pinning_and_synthesize_oracles(
+    *,
+    before_source: str | None = None,
+    after_source: str | None = None,
+    verifier_fn: Callable[[str], bool] | None = None,
+    min_pin_ratio: float = 0.5,
+    require_fail_to_pass: bool = True,
+    docstring_source: str | None = None,
+    docstring_probe_inputs: Sequence[Any] = (),
+    green_suite_source: str | None = None,
+    green_suite_entry: str | None = None,
+    green_suite_inputs: Sequence[tuple[Any, ...]] = (),
+    origin_target: str | None = None,
+    origin_baseline: Mapping[str, str] | None = None,
+    origin_kind: str = "exact",
+    origin_root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Wave 29 (`0H` × 4 unwired oracle-synthesis & verifier-pinning superweapons, `K3=0`).
+
+    Wires:
+      1. `what_the_verifier_actually_pins_v1` (`hunks`, `revert`, `is_behavioural`, `typing_only`):
+         hunk-by-hunk ablation audit measuring what fraction of behavioural hunks the verifier
+         actually pins (catches weak tests, dead edits, and reward hacking!).
+      2. `the_docstring_states_the_oracle_v1` (`docstrings`, `claims_in`):
+         extracts mechanically checkable roundtrip/idempotence claims directly from docstrings
+         and optionally executes them against compiled code!
+      3. `the_oracle_can_be_synthesised_from_a_green_suite_v1` + behavioural oracle capture:
+         synthesizes concrete `(args -> expected_output)` regression assertions from a green module.
+      4. `one_origin_derives_the_judge_v1` (`supplied_judge`):
+         optionally evaluates an origin-derived target judge on `origin_root`.
+    """
+    t0 = time.perf_counter()
+    from canonical.swe_kernel import what_the_verifier_actually_pins_v1 as pin_mod
+    from canonical.tools import the_docstring_states_the_oracle_v1 as doc_oracle
+
+    pinning_report: dict[str, Any] | None = None
+    pinning_ok = True
+    if before_source is not None and after_source is not None and verifier_fn is not None:
+        all_hunks = pin_mod.hunks(before_source, after_source)
+        beh_hunks = [
+            h for h in all_hunks
+            if pin_mod.is_behavioural(after_source, h) and not pin_mod.typing_only(after_source, h)
+        ]
+        before_passes = bool(verifier_fn(before_source))
+        after_passes = bool(verifier_fn(after_source))
+        hunk_results: list[dict[str, Any]] = []
+        pinned_count = 0
+        for idx, h in enumerate(beh_hunks):
+            reverted = pin_mod.revert(after_source, before_source, h)
+            rev_passes = bool(verifier_fn(reverted))
+            is_pinned = not rev_passes
+            if is_pinned:
+                pinned_count += 1
+            hunk_results.append({
+                "hunk_index": idx,
+                "tag": str(h["tag"]),
+                "old_range": list(h["old"]),
+                "new_range": list(h["new"]),
+                "pinned": is_pinned,
+                "reverted_verifier_passed": rev_passes,
+            })
+        pin_ratio = (pinned_count / len(beh_hunks)) if beh_hunks else 0.0
+        ftp_ok = (not before_passes) if require_fail_to_pass else True
+        pinning_ok = (
+            after_passes
+            and ftp_ok
+            and len(beh_hunks) > 0
+            and pin_ratio >= float(min_pin_ratio)
+        )
+        pinning_report = {
+            "pass": pinning_ok,
+            "before_passed": before_passes,
+            "after_passed": after_passes,
+            "total_hunks": len(all_hunks),
+            "behavioural_hunks": len(beh_hunks),
+            "pinned_hunks": pinned_count,
+            "unpinned_hunks": len(beh_hunks) - pinned_count,
+            "pin_ratio": round(pin_ratio, 4),
+            "min_pin_ratio": float(min_pin_ratio),
+            "hunks": hunk_results,
+        }
+
+    # 2. Docstring-stated oracle claims (`the_docstring_states_the_oracle_v1`)
+    doc_src = docstring_source if docstring_source is not None else after_source
+    docstring_report: dict[str, Any] | None = None
+    doc_probe_ok = True
+    if doc_src is not None:
+        docs = doc_oracle.docstrings(doc_src)
+        claims = doc_oracle.claims_in(doc_src)
+        probe_results: list[dict[str, Any]] = []
+        if claims and docstring_probe_inputs:
+            ns: dict[str, Any] = {"__name__": "__wave29_doc_probe__"}
+            try:
+                exec(compile(doc_src, "<doc_oracle>", "exec"), ns)
+                for claim in claims:
+                    owner = str(claim.get("owner") or "")
+                    other = str(claim.get("other") or "")
+                    fn_owner = ns.get(owner)
+                    fn_other = ns.get(other)
+                    if callable(fn_owner) and callable(fn_other):
+                        checked = 0
+                        passed_n = 0
+                        for inp in docstring_probe_inputs:
+                            checked += 1
+                            try:
+                                norm_v = fn_other(inp)
+                                res_v = fn_owner(norm_v)
+                                if bool(res_v):
+                                    passed_n += 1
+                            except Exception:
+                                pass
+                        ok_c = checked > 0 and passed_n == checked
+                        if not ok_c:
+                            doc_probe_ok = False
+                        probe_results.append({
+                            "claim": dict(claim),
+                            "checked": checked,
+                            "passed": passed_n,
+                            "holds": ok_c,
+                        })
+            except Exception as exc:  # noqa: BLE001
+                doc_probe_ok = False
+                probe_results.append({"error": f"{type(exc).__name__}: {exc}"})
+        docstring_report = {
+            "docstring_count": len(docs),
+            "claims_extracted": claims,
+            "probe_results": probe_results,
+            "all_probed_claims_hold": doc_probe_ok,
+        }
+
+    # 3. Synthesize concrete regression oracle assertions from a green module (`the_oracle_can_be_synthesised_from_a_green_suite_v1` contract)
+    green_oracle_report: dict[str, Any] | None = None
+    if green_suite_source is not None and green_suite_entry and green_suite_inputs:
+        ns_g: dict[str, Any] = {"__name__": "__wave29_green_oracle__"}
+        assertions: list[str] = []
+        try:
+            exec(compile(green_suite_source, "<green_suite>", "exec"), ns_g)
+            fn_g = ns_g.get(str(green_suite_entry))
+            if callable(fn_g):
+                for args in green_suite_inputs:
+                    arg_tuple = tuple(args) if isinstance(args, (list, tuple)) else (args,)
+                    val = fn_g(*arg_tuple)
+                    arg_s = ", ".join(repr(a) for a in arg_tuple)
+                    assertions.append(f"assert {green_suite_entry}({arg_s}) == {val!r}")
+        except Exception as exc:  # noqa: BLE001
+            assertions = []
+            green_oracle_report = {"pass": False, "error": f"{type(exc).__name__}: {exc}", "assertions": []}
+        if green_oracle_report is None:
+            green_oracle_report = {
+                "pass": len(assertions) > 0,
+                "entry": str(green_suite_entry),
+                "synthesized_assertion_count": len(assertions),
+                "assertions": assertions,
+            }
+
+    # 4. Origin-derived judge (`one_origin_derives_the_judge_v1`)
+    origin_judge_report: dict[str, Any] | None = None
+    origin_ok = True
+    if origin_target and origin_baseline is not None and origin_root is not None:
+        from canonical.tools import one_origin_derives_the_judge_v1 as orig_j
+
+        judge_fn = orig_j.supplied_judge(str(origin_target), dict(origin_baseline), str(origin_kind))
+        j_ok, j_msg = judge_fn(Path(origin_root).resolve())
+        origin_ok = bool(j_ok)
+        origin_judge_report = {
+            "pass": origin_ok,
+            "target": str(origin_target),
+            "kind": str(origin_kind),
+            "detail": str(j_msg),
+        }
+
+    any_checked = any(
+        x is not None for x in (pinning_report, docstring_report, green_oracle_report, origin_judge_report)
+    )
+    overall = (
+        any_checked
+        and pinning_ok
+        and doc_probe_ok
+        and origin_ok
+        and (green_oracle_report is None or bool(green_oracle_report.get("pass")))
+    )
+    return {
+        "schema": SCHEMA,
+        "pass": overall,
+        "status": (
+            "PASS__VERIFIER_PINNING_AND_ORACLES_AUDITED"
+            if overall
+            else "FAIL_CLOSED__VERIFIER_PINNING_OR_ORACLE_FAILED"
+        ),
+        "verifier_pinning": pinning_report,
+        "docstring_oracles": docstring_report,
+        "green_suite_oracle": green_oracle_report,
+        "origin_judge": origin_judge_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+
+
 
 

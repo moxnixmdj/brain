@@ -24,6 +24,7 @@ Zero model calls (`K3 = 0`), deterministic, honest fail-closed reporting.
 from __future__ import annotations
 
 import hashlib
+import importlib
 import json
 import time
 from collections import deque
@@ -31,16 +32,32 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
-from canonical.runtime import a_refusal_is_a_specification_v1 as refusal_spec
-from canonical.runtime import aimed_action_v1 as aimed_action
-from canonical.runtime import instruction_policy_v1 as instr_policy
-from canonical.runtime import tool_census_v1 as tool_census
-from canonical.swe_kernel import interface_action_grammar_v1 as action_grammar
-from canonical.swe_kernel import the_environment_broker_v1 as env_broker
-from canonical.tools import the_frame_crosses_the_machine_v1 as cross_frame
-from canonical.tools import the_guide_is_a_key_table_v1 as key_table
-from canonical.tools import the_guide_is_a_test_suite_v1 as guide_suite
-from canonical.tools import the_refusal_is_the_curriculum_v1 as refusal_curriculum
+
+class _LazyModule:
+    __slots__ = ("_mod_name", "_loaded")
+
+    def __init__(self, mod_name: str) -> None:
+        object.__setattr__(self, "_mod_name", mod_name)
+        object.__setattr__(self, "_loaded", None)
+
+    def __getattr__(self, item: str) -> Any:
+        mod = object.__getattribute__(self, "_loaded")
+        if mod is None:
+            mod = importlib.import_module(object.__getattribute__(self, "_mod_name"))
+            object.__setattr__(self, "_loaded", mod)
+        return getattr(mod, item)
+
+
+refusal_spec = _LazyModule("canonical.runtime.a_refusal_is_a_specification_v1")
+aimed_action = _LazyModule("canonical.runtime.aimed_action_v1")
+instr_policy = _LazyModule("canonical.runtime.instruction_policy_v1")
+tool_census = _LazyModule("canonical.runtime.tool_census_v1")
+action_grammar = _LazyModule("canonical.swe_kernel.interface_action_grammar_v1")
+env_broker = _LazyModule("canonical.swe_kernel.the_environment_broker_v1")
+cross_frame = _LazyModule("canonical.tools.the_frame_crosses_the_machine_v1")
+key_table = _LazyModule("canonical.tools.the_guide_is_a_key_table_v1")
+guide_suite = _LazyModule("canonical.tools.the_guide_is_a_test_suite_v1")
+refusal_curriculum = _LazyModule("canonical.tools.the_refusal_is_the_curriculum_v1")
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_ENV_DISCOVERY_SPINE_V1"
 NON_CLAIMS = (
@@ -1286,5 +1303,311 @@ def plan_partial_order_operators(
         "model_calls": 0,
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
     }
+
+
+def explore_and_induce_safe_action_model(
+    *,
+    env: Any = None,
+    actions: Sequence[Any] = (),
+    is_goal: Callable[[Any], bool] | None = None,
+    action_budget: int = 32,
+    observations: Sequence[Mapping[str, Any]] | None = None,
+    conditions: Sequence[Any] | None = None,
+    predict_query: tuple[str, Any] | None = None,
+    demo_state: Mapping[str, bytes] | None = None,
+    demo_task_states: Mapping[str, Mapping[str, bytes]] | None = None,
+    demo_observed: Mapping[str, str] | None = None,
+    interventional_probe: tuple[str, Sequence[Any], Any] | None = None,
+) -> dict[str, Any]:
+    """Wave 25 (`0E`): Refusal-Driven Systematic Exploration + Safe Action Model + Demonstration Sufficiency.
+
+    Fuses 4 zero-LLM discovery engines:
+      1. `systematic_exploration_v1` (`explore_to_goal`) — systematic action exploration under budget.
+      2. `safe_action_model_v1` (`Observation`, `specific_table`, `generalize`, `predict`) — safe operator induction.
+      3. `demonstration_sufficiency_v1` (`space`, `experiment_table`, `sufficiency`, `decide`) — decides if demos suffice.
+      4. `interventional_goal_v1` (`intervene`, `relation`) — interventional counterfactual check.
+    """
+    from canonical.runtime import systematic_exploration_v1 as sysexp
+    from canonical.swe_kernel import demonstration_sufficiency_v1 as dsu
+    from canonical.swe_kernel import interventional_goal_v1 as igv
+    from canonical.swe_kernel import safe_action_model_v1 as sam
+
+    t0 = time.perf_counter()
+    exploration_res: dict[str, Any] | None = None
+    if env is not None and actions and is_goal is not None:
+        exploration_res = sysexp.explore_to_goal(
+            env,
+            list(actions),
+            is_goal=is_goal,
+            action_budget=int(action_budget),
+        )
+
+    safe_model_res: dict[str, Any] | None = None
+    if observations:
+        obs_objs = [
+            sam.Observation(
+                atom=str(o.get("atom") or ""),
+                before=tuple(o.get("before") or ()),
+                after=tuple(o.get("after") or ()),
+                added=frozenset(o.get("added") or ()),
+                deleted=frozenset(o.get("deleted") or ()),
+            )
+            for o in observations
+        ]
+        conds = list(conditions or ())
+        table = sam.specific_table(obs_objs, conds)
+        gen_table, gen_meta = sam.generalize(table, obs_objs, conds)
+        pred_out = None
+        if predict_query is not None:
+            pred_out = sam.predict(gen_table, str(predict_query[0]), predict_query[1])
+        safe_model_res = {
+            "specific_operator_count": len(table),
+            "generalized_operator_count": len(gen_table),
+            "generalize_meta": gen_meta,
+            "prediction": pred_out,
+        }
+
+    demo_res: dict[str, Any] | None = None
+    if demo_state is not None:
+        hyps = dsu.space(dict(demo_state))
+        states_map = dict(demo_task_states or {"s0": dict(demo_state)})
+        exp_table = dsu.experiment_table(hyps, states_map)
+        obs_map = dict(demo_observed or {})
+        suff = dsu.sufficiency(hyps, exp_table, obs_map, list(states_map.keys()))
+        decision = dsu.decide(suff)
+        demo_res = {
+            "state_signature": dsu.signature(dict(demo_state)),
+            "hypothesis_count": len(hyps),
+            "experiment_count": len(exp_table),
+            "sufficiency": suff,
+            "decision": decision,
+        }
+
+    interv_res: dict[str, Any] | None = None
+    if interventional_probe is not None:
+        iname, iargs, iexp = interventional_probe
+        mutated = igv.intervene(str(iname), list(iargs), iexp)
+        interv_res = {
+            "intervention": str(iname),
+            "produced": mutated is not None,
+            "mutated_args": mutated[0] if mutated is not None else None,
+            "mutated_expected": mutated[1] if mutated is not None else None,
+        }
+
+    sub_checks: list[bool] = []
+    if exploration_res is not None:
+        sub_checks.append(bool(exploration_res.get("reached") or exploration_res.get("goal_reached") or exploration_res.get("plan")))
+    if safe_model_res is not None:
+        sub_checks.append(safe_model_res["generalized_operator_count"] > 0)
+    if demo_res is not None:
+        sub_checks.append(bool(demo_res.get("decision")))
+    if interv_res is not None:
+        sub_checks.append(bool(interv_res.get("produced")))
+    ok = bool(sub_checks) and all(sub_checks)
+    return {
+        "schema": SCHEMA,
+        "pass": ok,
+        "status": "PASS__SAFE_EXPLORATION_AND_ACTION_MODEL_INDUCED" if ok else "FAIL_CLOSED__EXPLORATION_INCOMPLETE",
+        "exploration": exploration_res,
+        "safe_action_model": safe_model_res,
+        "demonstration_sufficiency": demo_res,
+        "interventional_probe": interv_res,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def compile_decision_quotient_and_refinement(
+    *,
+    actions_by_world: Mapping[Any, Sequence[Any]],
+    discriminators: Sequence[Mapping[str, Any]] = (),
+    commitment_deadline: float = 10.0,
+    verify_theorem: bool = False,
+) -> dict[str, Any]:
+    """Wave 25 (`0E`): K6 Target-Relative Decision Quotient & Deadline-Bounded Refinement Compiler.
+
+    Fuses `k6_target_relative_decision_quotient_v1` + `k6_decision_refinement_compiler_v1` to
+    decide (in microseconds, zero LLM) whether a common safe action already exists across all
+    candidate worlds or what minimum-cost discriminator sequence refines the world equivalence class
+    before `commitment_deadline`.
+    """
+    from canonical.runtime import k6_decision_refinement_compiler_v1 as ref_comp
+    from canonical.runtime import k6_target_relative_decision_quotient_v1 as dq
+
+    t0 = time.perf_counter()
+    worlds = list(actions_by_world.keys())
+    if not worlds:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__EMPTY_WORLD_SET",
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    quotient = dq.canonical_safe_quotient(actions_by_world)
+    part_ok = dq.partition_sufficient(actions_by_world, quotient)
+    needs_refine = dq.refinement_needed(actions_by_world, worlds)
+    common_action = None
+    if not needs_refine:
+        common_action = dq.choose_common_action(actions_by_world, worlds)
+
+    refinement_plan: dict[str, Any] | None = None
+    if needs_refine and discriminators:
+        refinement_plan = ref_comp.compile_refinement(
+            worlds=worlds,
+            acceptable_actions=actions_by_world,
+            discriminators=list(discriminators),
+            commitment_deadline=float(commitment_deadline),
+        )
+
+    theorem_report = dq.verify_finite_theorem() if verify_theorem else None
+    passed = part_ok and (
+        (not needs_refine and common_action is not None)
+        or (
+            refinement_plan is not None
+            and bool(
+                refinement_plan.get("ok")
+                or refinement_plan.get("admitted")
+                or refinement_plan.get("plan")
+                or refinement_plan.get("policy")
+                or refinement_plan.get("status") in {"ADMITTED", "SUFFICIENT", "SUFFICIENT_DECISION_PARTITION_FOUND", "OK", "PASS"}
+            )
+        )
+        or (not discriminators and part_ok)
+    )
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": (
+            "PASS__COMMON_SAFE_ACTION_READY"
+            if not needs_refine
+            else ("PASS__DECISION_REFINEMENT_COMPILED" if passed else "FAIL_CLOSED__REFINEMENT_DEADLINE_OR_DISCRIMINATOR_GAP")
+        ),
+        "world_count": len(worlds),
+        "quotient_cells": quotient,
+        "partition_sufficient": part_ok,
+        "refinement_needed": needs_refine,
+        "common_action": common_action,
+        "refinement_plan": refinement_plan,
+        "finite_theorem": theorem_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def purpose_gated_active_inference_and_cost_arbitrage(
+    *,
+    instruction: str = "",
+    candidates: Sequence[Any] = (),
+    traces: Sequence[Any] = (),
+    goal_judge: Callable[[Any], bool] | None = None,
+    authorized_users: Sequence[str] = (),
+    purpose_answer: Mapping[str, Any] | None = None,
+    boundary_survivors: Sequence[Sequence[str]] | None = None,
+    current_facts: Sequence[str] = (),
+    guess_error_cost: float = 10.0,
+    ask_user_cost: float = 5.0,
+    cow_trial_cost: float = 0.05,
+    compile_sky_plan: bool = False,
+    sky_repo_root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Wave 30 (`0E` × `intake.purpose_gate_v1` × `intake.residual_question_gate_v1`
+    × `intake.authorized_answer_intake_v1` × `what_a_decision_costs_v1`
+    × `one_shot_sky_impact_planner_v1`, `K3=0`).
+
+    Active-inference context acquisition + economic Guess-vs-Ask-vs-CoW-Trial arbitrage:
+      1. Enforces the Purpose Gate: a clarifying question is legal ONLY when real traces
+         separate candidate hypotheses; identical verdicts return `NO_QUESTION`!
+      2. Accepts an authorized answer ONLY when bound to exact `(instruction_sha256,
+         question_fingerprint, candidate_id)`.
+      3. Evaluates `what_a_decision_costs_v1.decisive(boundary, facts)`: if all surviving
+         requirements agree on `current_facts`, acts immediately at 0 extra cost (`ACT_DECIDED`);
+         otherwise chooses the minimum-expected-cost resolution mode (`COW_COPY_TRIAL` vs
+         `ASK_USER` vs `ACT_DECIDED`).
+    """
+    t0 = time.perf_counter()
+    from types import SimpleNamespace
+
+    from canonical.tools import what_a_decision_costs_v1 as dec_cost
+    from intake import purpose_gate_v1 as pgate
+    from intake import residual_question_gate_v1 as rgate
+
+    purpose_report: dict[str, Any] | None = None
+    if candidates:
+        cand_objs: list[Any] = []
+        for c in candidates:
+            if isinstance(c, rgate.Candidate):
+                cand_objs.append(c)
+            elif isinstance(c, Mapping) and callable(c.get("holds")):
+                txt = str(c.get("text") or c.get("candidate_id") or "")
+                cid = str(c.get("candidate_id") or rgate.candidate_id(txt))
+                cand_objs.append(rgate.Candidate(cid, txt, c["holds"]))
+            elif isinstance(c, tuple) and len(c) == 2 and callable(c[1]):
+                txt = str(c[0])
+                cand_objs.append(rgate.Candidate(rgate.candidate_id(txt), txt, c[1]))
+        state_obj: dict[str, Any] = {
+            "instruction": str(instruction),
+            "authorized_users": list(authorized_users),
+        }
+        if purpose_answer is not None:
+            state_obj["purpose_answer"] = dict(purpose_answer)
+        purpose_report = pgate.decide(state_obj, cand_objs, list(traces), goal_judge=goal_judge)
+
+    cost_arbitrage: dict[str, Any] | None = None
+    if boundary_survivors is not None:
+        boundary_ns = SimpleNamespace(survivors=[tuple(str(f) for f in req) for req in boundary_survivors])
+        verdict = dec_cost.decisive(boundary_ns, [str(f) for f in current_facts])
+        if verdict is not None:
+            chosen_mode = "ACT_DECIDED_NO_TRIAL_NEEDED"
+            expected_cost = 0.0
+        else:
+            # Ambiguous state: compare cheap CoW copy trial vs asking user vs blind guess
+            options = [
+                ("COW_COPY_TRIAL", float(cow_trial_cost)),
+                ("ASK_USER_PURPOSE_GATED", float(ask_user_cost)),
+                ("BLIND_GUESS", float(guess_error_cost)),
+            ]
+            chosen_mode, expected_cost = min(options, key=lambda kv: kv[1])
+        cost_arbitrage = {
+            "decisive_verdict": verdict,
+            "is_decided_without_trial": verdict is not None,
+            "recommended_mode": chosen_mode,
+            "expected_cost": round(expected_cost, 4),
+            "costs": {
+                "cow_trial_cost": float(cow_trial_cost),
+                "ask_user_cost": float(ask_user_cost),
+                "guess_error_cost": float(guess_error_cost),
+            },
+            "survivor_count": len(boundary_survivors),
+        }
+
+    sky_plan_summary: dict[str, Any] | None = None
+    if compile_sky_plan:
+        from canonical.runtime import one_shot_sky_impact_planner_v1 as sky_pl
+
+        sp = sky_pl.compile_sky_impact_plan(Path(sky_repo_root).resolve() if sky_repo_root else Path(__file__).resolve().parents[2])
+        sky_plan_summary = {
+            "schema": sp.get("schema"),
+            "keys": sorted(sp.keys())[:16],
+            "ok": bool(sp),
+        }
+
+    any_active = any(x is not None for x in (purpose_report, cost_arbitrage, sky_plan_summary))
+    action_label = str((purpose_report or {}).get("action") or (cost_arbitrage or {}).get("recommended_mode") or "NONE")
+    return {
+        "schema": SCHEMA,
+        "pass": any_active,
+        "status": f"PASS__ACTIVE_INFERENCE_{action_label}" if any_active else "FAIL_CLOSED__NO_ACTIVE_INFERENCE_INPUTS",
+        "purpose_gate": purpose_report,
+        "cost_arbitrage": cost_arbitrage,
+        "sky_impact_plan": sky_plan_summary,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+
+
 
 
