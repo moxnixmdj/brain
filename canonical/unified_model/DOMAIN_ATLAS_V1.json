@@ -1311,7 +1311,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 15.0,
-     "sha256": "310b11f2fbf5da5b",
+     "sha256": "4603d20e858b1bbb",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1710,7 +1710,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 7.5,
-     "sha256": "310b11f2fbf5da5b",
+     "sha256": "4603d20e858b1bbb",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2327,7 +2327,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 24.5,
-     "sha256": "310b11f2fbf5da5b",
+     "sha256": "4603d20e858b1bbb",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2906,7 +2906,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 17.75,
-     "sha256": "310b11f2fbf5da5b",
+     "sha256": "4603d20e858b1bbb",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3314,7 +3314,7 @@
      ],
      "path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
      "score": 12.0,
-     "sha256": "c067c1c4b2cff3c8",
+     "sha256": "0cd0fda3e53b927d",
      "source_index": true,
      "summary": "Wave 39 Frontier-Leapfrog Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL."
     },
@@ -3772,7 +3772,7 @@
      ],
      "path": "canonical/runtime/wave39_leapfrog_unification_v1.py",
      "score": 22.75,
-     "sha256": "c067c1c4b2cff3c8",
+     "sha256": "0cd0fda3e53b927d",
      "source_index": true,
      "summary": "Wave 39 Frontier-Leapfrog Dark-Organ Unification, Red-Queen/Mendel Co-Evolution, CLM+RRF Memory & Partial-Routing/JitRL."
     },
@@ -4721,7 +4721,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 13.25,
-     "sha256": "310b11f2fbf5da5b",
+     "sha256": "4603d20e858b1bbb",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
