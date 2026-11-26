@@ -122,7 +122,7 @@
  ],
  "real_outcome": "Every capability question the runtime answers carries a measured latency percentile and a token cost, and the numbers are small enough that a model call to answer the same question is indefensible.",
  "recursive_obs": {
-  "canonical_base_commit": "f1066dbbe1c021c3134ef3d00a93ca83bb0f006c",
+  "canonical_base_commit": "b28dffd863a00fca76e52fc09f16c1f5edc08b44",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "local task benchmark",
@@ -295,7 +295,7 @@
      "route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT"
     }
    ],
-   "checked_at_utc": "2026-11-26T03:06:43Z",
+   "checked_at_utc": "2026-11-26T03:15:02Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -335,7 +335,7 @@
    "selected_route": "MEASURE_THE_COST_OF_ASKING_AND_GATE_ON_IT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T03:06:43Z",
+    "checked_at_utc": "2026-11-26T03:15:02Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest",
