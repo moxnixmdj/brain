@@ -345,18 +345,37 @@ def test_08_composer_route_typed_chain_and_tier0_crystallization() -> None:
 
 
 def test_09_harvested_surface_execution_through_unified_model_never_claims_admission() -> None:
+    import shutil
+    import tempfile
+
     model = bum.open_model()
     surfaces = model.harvested_surfaces()
     assert len(surfaces) > 100
 
-    # Positive dry-run (receipt=False): runs a real discovered contract surface, NEVER claims admission
-    target_cid = "canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1"
-    r_ok = model.execute_harvested_surface(target_cid, args={}, receipt=False)
-    assert r_ok["pass"] is True
-    assert r_ok["admitted"] is False
-    assert r_ok["admission"] == "NOT_ADMITTED"
-    assert r_ok["harvested_execution"]["admitted"] is False
-    assert r_ok["harvested_execution"]["harvested_result"]["executed"] is True
+    # Positive dry-run (receipt=False): runs a real discovered contract surface (`jq_query`), NEVER claims admission
+    jq_row = next(r for r in surfaces if str(r.get("path") or "").endswith("jq_query.py"))
+    workdir = pathlib.Path(tempfile.mkdtemp(prefix="WAVE2_HARVEST_JQ_", dir=ROOT / "canonical/astra_runtime/tmp"))
+    try:
+        src = workdir / "in.json"
+        out = workdir / "out.json"
+        src.write_text('{"items":[{"name":"alpha","v":1},{"name":"beta","v":9}]}\n', encoding="utf-8")
+        r_ok = model.execute_harvested_surface(
+            jq_row["id"],
+            args={
+                "input_path": src.relative_to(ROOT).as_posix(),
+                "filter": ".items | map(select(.v > 5)) | .[0].name",
+                "output_path": out.relative_to(ROOT).as_posix(),
+            },
+            receipt=False,
+        )
+        assert r_ok["pass"] is True
+        assert r_ok["admitted"] is False
+        assert r_ok["admission"] == "NOT_ADMITTED"
+        assert r_ok["harvested_execution"]["admitted"] is False
+        assert r_ok["harvested_execution"]["harvested_result"]["executed"] is True
+        assert out.read_text(encoding="utf-8").strip() == "beta"
+    finally:
+        shutil.rmtree(workdir, ignore_errors=True)
 
     # Negative control: unknown surface fails closed
     r_bad = model.execute_harvested_surface("canonical.nonexistent.surface.hidden.v1", receipt=False)
@@ -840,7 +859,7 @@ def test_21_elon_law_lazy_section_isolation_and_sub_millisecond_composer_cache(t
 
     # Touching harvested surfaces must NOT deserialize the 5.96MB research_index!
     assert fresh._research_index_cache is None
-    h = fresh.find_harvested("canonical.runtime.bound_capabilities.code_multilanguage_tree_sitter_v1.hidden.v1")
+    h = fresh.find_harvested("canonical.runtime.bound_capabilities.jq_query.hidden.v1")
     assert h is not None
     assert fresh._harvested_cache is not None
     assert fresh._research_index_cache is None

@@ -606,10 +606,18 @@ class UnifiedModel:
                 "bound_capabilities": declared.get("bound_capabilities"),
                 "receipt_backed_capabilities": declared.get("receipt_backed_capabilities"),
                 "engines": len(self.engines),
+                "federated_kernel_engines": sum(
+                    1 for row in self.engines.values() if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
+                ),
                 "skills": len(self.skills),
                 "knowledge_documents": knw_len,
                 "source_index_modules": src_len,
                 "source_index_entry_points": src_ep,
+                "extended_source_index_modules": (
+                    len(self._extended_source_index_cache)
+                    if self._extended_source_index_cache is not None
+                    else int(declared.get("extended_source_index_modules") or 0)
+                ),
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
                 "harvested_capabilities": declared.get("harvested_capabilities"),
@@ -733,6 +741,9 @@ class UnifiedModel:
             if cid.casefold() in folded:
                 hits.add(cid)
         for eid in self.engines:
+            if eid.casefold() in folded:
+                hits.add(eid)
+                continue
             mode = eid.split(":", 1)[-1].replace("_", " ").casefold()
             if mode and mode in folded:
                 hits.add(eid)
@@ -860,11 +871,15 @@ class UnifiedModel:
         # introduced. Sort addressed capabilities ahead of the rest instead of
         # inflating the bonus until it wins by force.
         #
-        # Engines are excluded from that priority: they match by mode phrase
-        # (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
-        # which is ordinary keyword overlap, not an address. Promoting them let
-        # a 195.977 engine outrank the 911.668 capability the goal named.
-        addressed = {cid for cid in mentioned if cid in self.capabilities}
+        # Engines are excluded from that priority when matched merely by mode
+        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Explicit literal
+        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
+        # address priority.
+        folded_goal = str(goal or "").casefold()
+        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
+            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
+        }
         ranked = sorted(
             scores.items(),
             key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
@@ -1591,7 +1606,16 @@ class UnifiedModel:
 
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
+        is_confident_federated = bool(
+            r_preview.get("confident")
+            and isinstance(r_preview.get("best"), Mapping)
+            and r_preview["best"].get("kind") == "FEDERATED_KERNEL_ENGINE"
+        )
+        if not is_forged_cid and (
+            regime_info["regime"] == "SYSTEM_1_REFLEX"
+            or capability_id is not None
+            or is_confident_federated
+        ):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1928,6 +1952,49 @@ class UnifiedModel:
         mode = str(row.get("mode") or "")
         if not mode:
             return self._failure(goal, "ENGINE_MODE_MISSING", routing=routing, engine_id=eid)
+        if row.get("kind") == "FEDERATED_KERNEL_ENGINE":
+            try:
+                from canonical.runtime.unified_hidden_capability_federation_v1 import (
+                    run_federated_engine,
+                )
+
+                out = run_federated_engine(mode, inputs, goal=goal)
+            except Exception as exc:
+                return self._failure(
+                    goal,
+                    "ENGINE_DISPATCH_FAILED:" + type(exc).__name__ + ":" + str(exc),
+                    routing=routing,
+                    engine_id=eid,
+                )
+            if not isinstance(out, Mapping):
+                return self._failure(
+                    goal, "ENGINE_RESULT_NOT_AN_OBJECT", routing=routing, engine_id=eid
+                )
+            passed = out.get("pass") is True
+            raw_status = str(out.get("status") or "")
+            return self._envelope(
+                operation="SOLVE",
+                goal=goal,
+                status=(
+                    raw_status
+                    if passed and raw_status.startswith("PASS__")
+                    else (
+                        raw_status
+                        if raw_status.startswith("FAIL_CLOSED__")
+                        else "FAIL_CLOSED__ENGINE_DID_NOT_REPORT_SUCCESS"
+                    )
+                ),
+                **{"pass": bool(passed)},
+                reason=None if passed else str(out.get("reason") or "ENGINE_DID_NOT_REPORT_SUCCESS"),
+                routing=routing,
+                capability_id=eid,
+                engine_id=eid,
+                engine_mode=mode,
+                domain=row.get("domain"),
+                incremental_spend_usd=0,
+                model_calls=0,
+                result=dict(out),
+            )
         try:
             from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
@@ -2132,6 +2199,38 @@ class UnifiedModel:
             reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
             boundary_route=res,
         )
+
+    def list_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
+        """List all federated zero-model capability kernels registered in the unified model."""
+        wanted = domain.strip().upper() if domain else None
+        rows: list[dict[str, Any]] = []
+        by_domain: dict[str, int] = {}
+        for eid in sorted(self.engines):
+            row = self.engines[eid]
+            if row.get("kind") != "FEDERATED_KERNEL_ENGINE":
+                continue
+            dom = str(row.get("domain") or "UNCLASSIFIED")
+            if wanted and dom != wanted:
+                continue
+            by_domain[dom] = by_domain.get(dom, 0) + 1
+            rows.append(
+                {
+                    "id": eid,
+                    "mode": row.get("mode"),
+                    "domain": dom,
+                    "descriptor": row.get("descriptor"),
+                    "summary": row.get("summary"),
+                    "required_inputs": list(row.get("required_inputs") or []),
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "LIST_FEDERATED_ENGINES",
+            "model_digest": self.digest,
+            "count": len(rows),
+            "domains": dict(sorted(by_domain.items())),
+            "engines": rows,
+        }
 
     def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
         """List all 58 federated hidden kernel engines exposed through this UnifiedModel."""

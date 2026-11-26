@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8d0cbbbdfd0d42f8e2563ae9f6ee1d7496533f6a2a5c860a267c665b76b1036e"
+  "value": "7074ffe09f2568f1cad394573c3cf7ebf7d2f1968d2714d97a06c24ae4bbc8ce"
  },
  "engines": [
   {
@@ -76934,7 +76934,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "c2e879c65ae240b9d007eaf5645dcb5745d9fc04dcc3b71c82372ee8b0f8ed05",
+   "sha256": "633b5038a6516f8d58702b72f06a23b157d30805b2c8685f6b37f470eeeb3844",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -147908,7 +147908,7 @@
   "included_source_count": 2256,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b53dd8d027ad70852207ead6d7ea2203d608b9b372202e147d6b4c3a97c03b08"
+  "source_tree_digest": "2db39771543e2da580997b39f88f368abfecc9c045bee836a536d59fb139b4f3"
  },
  "research_index": [
   {
@@ -334757,7 +334757,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "c2e879c65ae240b9d007eaf5645dcb5745d9fc04dcc3b71c82372ee8b0f8ed05",
+   "sha256": "633b5038a6516f8d58702b72f06a23b157d30805b2c8685f6b37f470eeeb3844",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
