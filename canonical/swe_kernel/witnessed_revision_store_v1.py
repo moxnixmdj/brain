@@ -89,6 +89,11 @@ class RevisionStore:
                              and all(live.get(p, False) for p in json.loads(r['parents'])))
         return roots, live
 
+    def keys(self, prefix: str) -> list[str]:
+        with closing(self._connect()) as db:
+            return [r[0] for r in db.execute('SELECT DISTINCT key FROM event WHERE substr(key,1,?)=? ORDER BY key',
+                                              (len(prefix),prefix))]
+
     def query(self, key: str, *, valid_at: int = 2**63-1, known_at: int = 2**63-1) -> dict:
         with closing(self._connect()) as db:
             db.execute('BEGIN')  # one consistent read even if another writer commits

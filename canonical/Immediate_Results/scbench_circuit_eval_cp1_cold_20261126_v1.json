@@ -1,0 +1,90 @@
+{
+  "kind": "source-only paired route control; no official image, Harbor, verifier or grade",
+  "input_instruction_sha256": "5e83257b93e169e269ebc64f4621e712f1903bb5d7784e158755ec0d43112baf",
+  "rows": [
+    {
+      "producer_revision": "b10e2cd787cc4347fad14440515d3381982df7fb",
+      "cold_manifest": {
+        "canonical/runtime/brain_unified_model_v1.py": "ec20f5d257e1b11f6990031693b0179ec630fe75b0cd91e2fa29fe7bb7c48c72",
+        "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+        "canonical/runtime/harbor_container_solver_worker_v1.py": "2aff4dee0819f19d12fc0695787ca15a2824973c7589a81d90430a6e44e6e1cc",
+        "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+        "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+        "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+        "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+        "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "e4dc49c4b7d38236008629381345187d820797979d03edb3471479d63065f01b",
+        "canonical/swe_kernel/harbor_in_container_runner_v1.py": "ab734f3beeca26280414ff4c7810f6fd89073f1aa41c64969a7428db409a7fe5",
+        "canonical/swe_kernel/causal_swe_repair_v1.py": "b4e90dae74ef73b2e886cdd32c2d3bb42d4e31eb6f37076ad15c562bb3d7be26",
+        "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+        "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+        "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "85ca4f531c3c8f775dcd22e760a41218580aefb559a426ec0d38914add7592d1",
+        "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+        "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+        "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "536bfb35cae5d5808766e737426079e41402ddc8b5f5c140962f667c3dac696a"
+      },
+      "launcher": {
+        "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+        "status": "CHILD_EXITED",
+        "policy_sha256": "8618c59362f99c645a28b8be070e1fc741abe0aa0a1c31fb4c42d4362c4cd319",
+        "returncode": 0,
+        "wallclock_ms": 566.458,
+        "broker_bytes": 924,
+        "broker_sha256": "fedadfdd035bcfdedbf325dccc3ee401476fb9fc95979787a345329c7b1b8dfd",
+        "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+        "material_effects_committed": 0,
+        "execution_authority": false,
+        "promotion_authority": false,
+        "fresh_reality_authority": false
+      },
+      "measurement": {
+        "public_instruction_chars": 5985,
+        "base": "f63176b7989985c3dc60211d6bbd3f07ac66e167",
+        "trace": [
+          {
+            "cycle": 1,
+            "worker_exit": 0,
+            "worker_s": 0.113,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "terminal_exec"
+            ],
+            "phase": "discover",
+            "command_exit": 0,
+            "command_s": 0.101,
+            "observed": {
+              "discover_wall_s": 0.031,
+              "ecosystems": {
+                "go": false,
+                "node": false,
+                "python": false,
+                "rust": false
+              },
+              "instruction_chars": 5985,
+              "model_calls": 0,
+              "python_exe": "/work/repo/.venv/bin/python",
+              "ranked_tests": [],
+              "repo_root": "/work/repo",
+              "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+            }
+          },
+          {
+            "cycle": 2,
+            "worker_exit": 0,
+            "worker_s": 0.102,
+            "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+            "reason": null,
+            "actions": [
+              "finish"
+            ]
+          }
+        ],
+        "capture_exit": 0,
+        "patch_bytes": 0,
+        "official_reward": null,
+        "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "source_replay": "EMPTY_CAPTURE"
+      }
+    }
+  ]
+}
