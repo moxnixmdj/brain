@@ -114,8 +114,8 @@ class UnifiedOrgansAndLeapfrogPlaysTests(unittest.TestCase):
         model = unified.open_model()
         inventory = model.frontier_organs()
         self.assertEqual(inventory["swe_kernel_organs_count"], 13)
-        self.assertEqual(inventory["leapfrog_plays_count"], 4)
-        self.assertEqual(inventory["total_organs"], 17)
+        self.assertEqual(inventory["leapfrog_plays_count"], 8)
+        self.assertEqual(inventory["total_organs"], 21)
 
         ir_res = model.invoke_frontier_organ("guarded_meaning_ir", {})
         self.assertEqual(ir_res["status"], "OK")

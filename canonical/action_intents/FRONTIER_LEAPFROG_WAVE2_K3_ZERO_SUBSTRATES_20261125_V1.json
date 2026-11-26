@@ -1,0 +1,201 @@
+{
+  "action_id": "FRONTIER_LEAPFROG_WAVE2_K3_ZERO_SUBSTRATES_20261125_V1",
+  "action_intent_id": "FRONTIER_LEAPFROG_WAVE2_K3_ZERO_SUBSTRATES_20261125_V1",
+  "action_kind": "EVIDENCE_PRESERVATION",
+  "action_summary": "Execute and integrate the four Wave-2 K3=0 Frontier Leapfrog substrates (witness-conditioned AST discrimination-tree router with Rubin counterfactual utility gating, three-tier zero-screenshot data-layer & pre-probe CDP action cache, semi-naive relational AST guard-addition synthesizer with GuardDrop mutation gating, and POSIX os.fork() CoW Zygote speculative patch verifier with AST call-graph test slicing), resolve engine:<MODE> -> source_path reachability in domain_atlas_v1.py, and federate 15 zero-model engines (90 -> 105 federated, 116 -> 131 total) and 21 frontier organs into BRAIN_UNIFIED_MODEL_V1.json.",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "conversation_memory_is_authority": false,
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS applied first: proved the 0-repeat non-identity syntax-only AST skeleton bound across 189 real OSS commits to delete blind syntax-only triggers, bypassed screenshot GUI loops via Tier-0 sqlite3/OOXML/JSON state mutation, bypassed cold subprocess Python startup via POSIX os.fork() CoW Zygote workers, and fixed engine:<MODE> -> source_path resolution in domain_atlas_v1.py.",
+    "incremental_spend_usd": 0,
+    "independent_verification_completed": false,
+    "independent_verification_note": "All 4 Wave-2 K3=0 Leapfrog Plays (status == OK, kill_triggered == False), 38/38 verify_brain_unified_model_v1.py checks, domain_atlas_v1.py 7-domain reachability, and deterministic unittest suites passed in sandbox; independent external verification remains open.",
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ],
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "producer_cognition_model_dependency_count": 0,
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+      "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+      "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+      "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+      "canonical/tools/domain_atlas_v1.py",
+      "canonical/runtime/unified_hidden_capability_federation_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
+      "canonical/verification/frontier_leapfrog_wave2_k3_zero_20261125_V1.json",
+      "canonical/verification/FRONTIER_LEAPFROG_WAVE2_K3_ZERO_PROOF_20261125_V1.md"
+    ],
+    "route_class": "INTEGRATE"
+  },
+  "benchmark_or_family_rank_authority": "NONE__SANDBOX_SUBSTRATE_AND_UNIFIED_MODEL_INTEGRATION_ONLY",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::K3_ZERO_COUNTERFACTUAL_ROUTING_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER",
+  "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "capability_credit_delta": 0,
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "K3_ZERO_COUNTERFACTUAL_ROUTING_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER",
+  "date": "2026-11-25",
+  "expected_parent_change": "BRAIN_UNIFIED_MODEL_V1.json and brain_unified_model_v1.py expose 21 frontier organs (+4 Wave-2 K3=0 substrates), 105 federated zero-model engines (131 total engines), and 1.000 frontier_route_hit_recall across all 7 DOMAIN_ATLAS_V1 domains.",
+  "expected_parent_frontier_change": "WAVE2_K3_ZERO_COUNTERFACTUAL_DISCR_TREE_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER_AT_UNIFIED_MODEL",
+  "explicit_user_authorization": "Owner explicitly instructed this session to research the late-2025/2026 frontier across continual/instant learning, computer use, coding/vericoding, memory, and fast zero-LLM CS substrates, formulate a K3=0 Frontier Leapfrog Plan with explicit kill criteria, and execute ('go') end-to-end into main.",
+  "falsification_condition": "FALSIFIED if any of the 4 Wave-2 Leapfrog Plays triggers its kill criterion, if GuardDrop mutants survive on admitted relational additions, if CoW os.fork() workers leak state or disagree with cold subprocesses, if BRAIN_UNIFIED_MODEL_V1.json fails deterministic fixed-point recompilation, or if verify_brain_unified_model_v1.py regresses below 38/38.",
+  "governance_change": false,
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "expected_obligation_discharge_lcb": 0.0,
+    "expected_obligation_unlock_lcb": 0.1,
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": 0.9,
+    "wall_clock_cost_ub": 1.0
+  },
+  "measured_effect": "Play A: 5.427us DiscrTree lookup (6,393.5x vs linear), 1.000 post-quarantine precision, 0 safe-code regressions; Play B: 0 screenshots, 3/3 Tier-0 sqlite3/OOXML/JSON workflows in 1.166ms p50, 20/20 volatile hits, 0 stale misfires, 65.3us cached dispatch; Play C: 4/4 non-substitution relational additions vs 0/4 substitution baseline, 14/14 mutants killed (1.000); Play D: 1.579ms p50 CoW os.fork() verification (9.54x vs subprocess), 0/48 verdict disagreements, 0 state leaks; Domain Atlas: 1.000 frontier_route_hit_recall across all 7 domains; 131 unified engines, 21 frontier organs, 38/38 verifier PASS.",
+  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "recursive_obs": {
+    "canonical_base_commit": "9a8a8d0798443aa64487ada5354bd5715835cb52",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "Deleted syntax-only AST rewrite triggers after proving 0 non-identity AST skeleton rewrites repeat across 189 real OSS commits",
+      "Deleted GUI screenshot loops on structured file/DB tasks via Tier-0 sqlite3/OOXML/JSON direct execution and volatile-invariant A11y pre-probes",
+      "Deleted 15ms cold Python subprocess startup per speculative patch via POSIX os.fork() CoW Zygote workers and AST call-graph test slicing",
+      "Deleted engine:<MODE> -> source_path blind spot in domain_atlas_v1.py"
+    ],
+    "expected_parent_level_state_change": "WAVE2_K3_ZERO_COUNTERFACTUAL_DISCR_TREE_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER_AT_UNIFIED_MODEL",
+    "obs_blocker": {
+      "delete_bypass_substitute_options": "Bypassed screenshot CUA steps, cold subprocess startup, linear O(N) rule scans, and single-line substitution ceilings using deterministic stdlib substrates.",
+      "intrinsic_or_path_specific": "Path specific: linear rule scans, unprobed action caches, single-line substitution templates, cold subprocess verifiers, and unresolved engine:<MODE> stems were avoidable engineering bottlenecks.",
+      "surviving_causal_blocker": "K3_ZERO_COUNTERFACTUAL_ROUTING_ZERO_SCREENSHOT_RELATIONAL_ADDITION_AND_COW_VERIFIER"
+    },
+    "obs_capability": {
+      "capability_work_deleted": "Composed existing zero-model substrates (gradient_free_law_consolidation_v1, docx_exact_text_edit, predicate_world_abstraction_v1, causal_trace_to_skill_compiler_v1, metamorphic_oracle_v1, rule_expiry_v1, associative_memory_v1, procedure_memory_v1, cow_impact_repair_engine_v1, canonical_oracle_vericoding_spine_v1).",
+      "existing_inherited_routes_checked": "Audited single_line_fix_candidates_20261123_V1.json (181), heldout_unseen_repos_20261124_V1.json (8), fix_vocabulary_taxonomy_20261124_V1.json (28), real_fix_pairs_20261119_V1.json (87), and DOMAIN_ATLAS_V1.json.",
+      "external_existing_routes_checked": "Zero external LLM APIs or neural weights added.",
+      "surviving_gap": "Four concrete K3=0 substrate gaps (witness-conditioned counterfactual skill routing, verified zero-screenshot pre-probe caching, non-substitution relational guard synthesis, and sub-2ms CoW speculative verification) plus engine-stem resolution in domain_atlas_v1.py."
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "Repeating already-killed domain-level contract routing (Play 1 V1 ablation)",
+        "Admitting unmutated patches or blind syntax-only rewrite rules"
+      ],
+      "real_outcome": "Four K3=0 Leapfrog substrates and 15 newly federated zero-model engines execute deterministically through Brain Unified Model V1 with 38/38 verifier PASS and 1.000 frontier_route_hit_recall across all 7 atlas domains.",
+      "surviving_necessity": "Fast, fail-closed, zero-model substrates wired into the single Unified Model front door."
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "Wave-1 Plays 1/2/3/6, rule_expiry_v1, associative_memory_v1, procedure_memory_v1, causal_computer_use_agent_v1, predicate_world_abstraction_v1, cow_impact_repair_engine_v1, and canonical_oracle_vericoding_spine_v1.",
+      "downstream_work_to_delete_or_supersede": "Supersedes linear skill-bank scanning, blind DOM replay without pre/post state probes, substitution-only repair loops, and cold subprocess test execution.",
+      "fresh_reuse_plan": "All 21 frontier organs and 105 federated engines are directly callable via open_model().invoke_frontier_organ() and open_model().solve()."
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "Transitive AST call-graph test impact slicing skips unrelated tests and CoW os.fork() shares warm parent bytecode pages.",
+      "search_stop_decision": "Stop once all 4 Wave-2 Plays pass their kill criteria, DOMAIN_ATLAS_V1.json and BRAIN_UNIFIED_MODEL_V1.json reach fixed point, and all verifier and integrity guards pass."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Syntax-only triggers have 0 repeating non-identity skeleton rewrites across 189 commits; substitution-only repair has a 0/28 ceiling on statement-adding bugs; cold subprocesses cost ~15ms per candidate.",
+      "routes_ranked": [
+        "DELETE",
+        "BYPASS",
+        "COMPOSE",
+        "INTEGRATE"
+      ]
+    },
+    "obs_solution_ranked_note": "deletion-first order applied before any implementation was written",
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": false
+    },
+    "real_outcome": "Four Wave-2 K3=0 substrates, 105 federated engines (131 total), 21 frontier organs, and 7/7 domain atlas frontier_route_hit_recall = 1.000 verified at $0 spend and 0 model calls.",
+    "required_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+    "route_frontier": {
+      "discovery_required": false,
+      "not_applicable_reason": "EVIDENCE_PRESERVATION: deterministic zero-spend K3=0 substrate engineering and Unified Model federation.",
+      "selected_route": "WAVE2_K3_ZERO_SUBSTRATES_AND_ATLAS_FEDERATION_V1"
+    },
+    "routes_considered": [
+      "DELETE",
+      "BYPASS",
+      "REUSE",
+      "COMPOSE",
+      "INTEGRATE"
+    ],
+    "selected_surviving_route": "WAVE2_K3_ZERO_SUBSTRATES_AND_ATLAS_FEDERATION_V1",
+    "stop_condition": "STOP when all 4 Wave-2 Plays return status == OK with kill_triggered == False, BRAIN_UNIFIED_MODEL_V1.json recompiles deterministically at 38/38 PASS, and enforce_goal_hierarchy.py, enforce_load_bearing_primary_pr.py, and repo_integrity_guard_v1.py pass.",
+    "why_selected_route_is_fastest_sufficient": "Combines sub-10us DiscrTree indexing, sub-100us pre-probed action caching, AST relational guard synthesis, and 1.6ms CoW os.fork() verification with zero model calls."
+  },
+  "resolution": "SELECTED",
+  "route_id": "FRONTIER_LEAPFROG_WAVE2_K3_ZERO_SUBSTRATES_20261125_V1",
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "selected_route": "WAVE2_K3_ZERO_SUBSTRATES_AND_ATLAS_FEDERATION_V1",
+  "stop_condition": "STOP when all 4 Wave-2 Plays return status == OK with kill_triggered == False, BRAIN_UNIFIED_MODEL_V1.json recompiles deterministically at 38/38 PASS, and enforce_goal_hierarchy.py, enforce_load_bearing_primary_pr.py, and repo_integrity_guard_v1.py pass.",
+  "terminal_credit_delta": 0,
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "EXTERNAL_RESULT_OR_ACCESS",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "All four Wave-2 K3=0 organs and 15 newly federated engines map to SHA-256-verified stdlib Python modules on disk, execute with 0 model calls and $0 spend, and claim zero capability or terminal credit delta.",
+    "target_truth_obligations": [
+      "VERIFY_WITNESS_CONDITIONED_COUNTERFACTUAL_SKILL_ROUTING",
+      "VERIFY_ZERO_SCREENSHOT_PREPROBED_ACTION_CACHING",
+      "VERIFY_NON_SUBSTITUTION_RELATIONAL_ADDITION_WITH_GUARDDROP_MUTATION_GATE",
+      "VERIFY_COW_ZYGOTE_SPECULATIVE_PATCH_EVALUATION_AND_ATLAS_REACHABILITY"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [],
+      "decisive_question": "Do the four Wave-2 K3=0 substrates satisfy all explicit kill criteria (sub-50us DiscrTree lookup with 0 safe-code regressions, 0 screenshots with 0 stale misfires, non-substitution relational additions with 0 surviving GuardDrop mutants, and sub-5ms CoW fork verification with 0 verdict disagreements or state leaks) while lifting DOMAIN_ATLAS_V1 frontier_route_hit_recall across all 7 domains and preserving 38/38 Unified Model verification?",
+      "falsifier_id": "WAVE2_K3_ZERO_KILL_CRITERIA_AND_UNIFIED_MODEL_VERIFIER",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "Verified against 189 real single-line commits, 87 full fix pairs, 28 taxonomy tasks, 48 CoW candidates including poison mutators, 3 UI drift traps, 8 UNKNOWN_GOALS, and 38/38 Unified Model checks.",
+      "proposal_id": "WAVE2_K3_ZERO_FOUR_PLAY_SUBSTRATE_SUITE"
+    }
+  }
+}

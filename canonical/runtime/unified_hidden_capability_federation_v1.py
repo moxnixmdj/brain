@@ -993,6 +993,141 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["source", "line", "site_text"],
         "declared_dependencies": [],
     },
+    "COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+        "entrypoint": "run",
+        "summary": "Witness-conditioned AST discrimination-tree skill router (`5.4 us` p50 over `1,086` rules) with Rubin `(WITH, WITHOUT)` counterfactual utility gating and `189`-commit syntax-only bound audit.",
+        "triggers": ["counterfactual_discr_tree_skill_router", "rubin counterfactual skill router", "discr_tree witness skill abstention"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+        "entrypoint": "run",
+        "summary": "Three-tier zero-screenshot data-layer workflow elevator (`sqlite3`, OOXML `.docx`, JSON at `1.17 ms` p50) and volatile-invariant A11y/CDP pre-probe action cache (`0.065 ms` p50, `0` stale misfires).",
+        "triggers": ["verified_zero_screenshot_action_cache", "stagehand understudy cdp preprobe cache", "zero screenshot ooxml sqlite workflow"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "RELATIONAL_GUARD_ADDITION_REPAIR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+        "entrypoint": "run",
+        "summary": "Semi-naive relational AST guard/exception-contract/container-sync addition synthesizer (`4/4` non-substitution repairs vs `0/4` substitution ceiling, `100%` `GuardDrop` mutation kill rate).",
+        "triggers": ["relational_guard_addition_symbolic_repair", "egglog relational guard addition repair", "non_substitution guard synthesis"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "COW_ZYGOTE_SPECULATIVE_VERIFIER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+        "entrypoint": "run",
+        "summary": "POSIX `os.fork()` copy-on-write Zygote speculative patch verifier (`1.58 ms` p50, `9.54x` faster than cold `subprocess.run`, `0` cross-worker state leaks) with transitive AST call-graph test impact slicing.",
+        "triggers": ["cow_zygote_speculative_verifier", "sandlock zeroboot cow patch verifier", "speculative fork impact test slicer"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "STATE_CONTRACT_WORLD_MODEL": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/state_contract_world_model_v1.py",
+        "entrypoint": "run",
+        "summary": "State-as-contract desktop effect-delta world model projecting volatile UI noise out of A11y state transitions before and after actions.",
+        "triggers": ["state_contract_world_model", "project state delta before doing", "forecast outcome follow plan"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GRADIENT_FREE_LAW_CONSOLIDATION": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+        "entrypoint": "run",
+        "summary": "Gradient-free sleep-time episodic AST law consolidation over real OSS commits without catastrophic forgetting or drift.",
+        "triggers": ["gradient_free_law_consolidation", "improving without forgetting earlier", "consolidate without drift store current"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ABSTAIN_GATED_SKILL_INDUCTION": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+        "entrypoint": "run",
+        "summary": "Abstain-gated structural AST skill induction acquiring verifiable rules from single commit demonstrations.",
+        "triggers": ["abstain_gated_skill_induction", "single demonstration without training", "inducing program proving"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ADVERSARIAL_MUTATION_ADMISSION_GATE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+        "entrypoint": "run",
+        "summary": "Adversarial first-order AST mutation admission gate auditing capability receipts for independent non-constant witness kills.",
+        "triggers": ["adversarial_mutation_admission_gate", "witnesses not constant", "receipt not edited after"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "RULE_EXPIRY_WORLD_FINGERPRINT": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/rule_expiry_v1.py",
+        "entrypoint": "world_fingerprint",
+        "summary": "Deterministic environment fingerprint & rule-expiry engine detecting material drift between when a rule was taught and current host truth.",
+        "triggers": ["rule_expiry_v1", "expire rules no longer hold", "drift between taught"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ASSOCIATIVE_EPISODIC_MEMORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/associative_memory_v1.py",
+        "entrypoint": "recall",
+        "summary": "Durable associative episodic memory ranking stored episodes by Dice term relevance times earned credit-minus-blame importance with exponential half-life decay.",
+        "triggers": ["associative_memory_v1", "durable memory prior runs grows", "chunk archive content address"],
+        "required_inputs": ["cue"],
+        "declared_dependencies": [],
+    },
+    "PROCEDURE_TRAJECTORY_MEMORY": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/procedure_memory_v1.py",
+        "entrypoint": "signature",
+        "summary": "Direction-preserving procedure & episode-journal signature memory distinguishing opposite-direction transforms (`encode`/`decode`, `pack`/`unpack`).",
+        "triggers": ["procedure_memory_v1", "compact episode journal"],
+        "required_inputs": ["text"],
+        "declared_dependencies": [],
+    },
+    "CAUSAL_GOAL_COMPUTER_AGENT": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/causal_computer_use_agent_v1.py",
+        "entrypoint": "GoalDirectedAgent",
+        "summary": "Goal-cone backward-chaining computer-use agent reading predicate markings, deciding the minimal causal action, and verifying post-step effects.",
+        "triggers": ["causal_computer_use_agent", "decide action verify effect"],
+        "required_inputs": ["catalog", "initial_marking", "goal_predicates"],
+        "declared_dependencies": [],
+    },
+    "PREDICATE_UI_WORLD_ABSTRACTION": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/predicate_world_abstraction_v1.py",
+        "entrypoint": "project_computer_observation",
+        "summary": "Predicate UI world-abstraction projector canonicalizing volatile timestamps/ports/UUIDs and falsifying control-loop state hypotheses.",
+        "triggers": ["predicate_world_abstraction", "falsify control loop hypothesis", "screen state before taking"],
+        "required_inputs": ["observation"],
+        "declared_dependencies": [],
+    },
+    "COW_IMPACT_TEST_REPAIR_ENGINE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
+        "entrypoint": "select_impacted_tests_fast",
+        "summary": "Zero-copy copy-on-write workspace cloner and fast impacted-test selector for multi-file repository fault localization and repair.",
+        "triggers": ["cow_impact_repair_engine", "bisecting revisions"],
+        "required_inputs": ["changed_rel_paths", "all_test_files"],
+        "declared_dependencies": [],
+    },
+    "CANONICAL_ORACLE_VERICODING_SPINE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
+        "entrypoint": "extract_assertion_demands",
+        "summary": "Canonical oracle & vericoding spine extracting test assertion demands, generating goal-negation mutants, and refusing unestablished claims.",
+        "triggers": ["canonical_oracle_vericoding_spine", "refusal asks instead faking"],
+        "required_inputs": ["test_source"],
+        "declared_dependencies": [],
+    },
 }
 
 
@@ -1002,9 +1137,10 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
 
 CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
     "equality_saturation_egraph_library_learning": {
-        "external_names": ["equality saturation", "e-graph", "egglog", "e-stitch", "babble", "stitch", "ast canonicalization", "library learning"],
-        "engines": ["engine:CONCEPT_LIBRARY_EGRAPH_LGG", "engine:EGRAPH_DEDUCTIVE_SYNTHESIZER", "engine:COMPRESSION_GAIN_MDL"],
+        "external_names": ["equality saturation", "e-graph", "egglog", "e-stitch", "babble", "stitch", "ast canonicalization", "library learning", "relational guard addition"],
+        "engines": ["engine:RELATIONAL_GUARD_ADDITION_REPAIR", "engine:CONCEPT_LIBRARY_EGRAPH_LGG", "engine:EGRAPH_DEDUCTIVE_SYNTHESIZER", "engine:COMPRESSION_GAIN_MDL"],
         "koan_modules": [
+            "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
             "canonical/swe_kernel/concept_library_v1.py",
             "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
             "canonical/swe_kernel/compression_gain_v1.py",
@@ -1041,9 +1177,11 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
         ],
     },
     "zero_screenshot_computer_use_minimal_sense": {
-        "external_names": ["computer use", "cua", "cdp", "at-spi", "accessibility tree", "a11y", "zero screenshot", "minimum observation cost", "osworld"],
-        "engines": ["engine:INTERFACE_ACTION_GRAMMAR", "engine:PREMISE_MINIMAL_SENSE", "engine:UNIVERSAL_COMPUTER_AGENT", "engine:PROSE_EXPERIMENT_CLI_DISCOVERY"],
+        "external_names": ["computer use", "cua", "cdp", "at-spi", "accessibility tree", "a11y", "zero screenshot", "minimum observation cost", "osworld", "stagehand", "understudy"],
+        "engines": ["engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE", "engine:STATE_CONTRACT_WORLD_MODEL", "engine:INTERFACE_ACTION_GRAMMAR", "engine:PREMISE_MINIMAL_SENSE", "engine:UNIVERSAL_COMPUTER_AGENT", "engine:PROSE_EXPERIMENT_CLI_DISCOVERY"],
         "koan_modules": [
+            "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+            "canonical/runtime/state_contract_world_model_v1.py",
             "canonical/swe_kernel/interface_action_grammar_v1.py",
             "canonical/swe_kernel/the_premise_is_the_sense_v1.py",
             "canonical/swe_kernel/universal_computer_agent_v1.py",
@@ -1052,8 +1190,10 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
     },
     "cow_zygote_speculative_sandbox_fork": {
         "external_names": ["copy on write", "cow fork", "zygote", "sandlock", "zeroboot", "firecracker forkd", "speculative execution", "free undo"],
-        "engines": ["engine:ZYGOTE_COW_FORK_POOL", "engine:ANGELIC_LENS_COW_REPAIR", "engine:CROSS_MODAL_PETRI_TOMOGRAPHY"],
+        "engines": ["engine:COW_ZYGOTE_SPECULATIVE_VERIFIER", "engine:COW_IMPACT_TEST_REPAIR_ENGINE", "engine:ZYGOTE_COW_FORK_POOL", "engine:ANGELIC_LENS_COW_REPAIR", "engine:CROSS_MODAL_PETRI_TOMOGRAPHY"],
         "koan_modules": [
+            "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+            "canonical/swe_kernel/cow_impact_repair_engine_v1.py",
             "canonical/swe_kernel/zygote_worker_pool_v1.py",
             "canonical/swe_kernel/cow_angelic_zygote_v1.py",
             "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
@@ -1082,9 +1222,13 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
         ],
     },
     "selective_abstention_continual_memory": {
-        "external_names": ["continual learning", "catastrophic forgetting", "skillapt", "selskill", "conformal abstention", "rubin counterfactual", "agent memory", "sleep consolidation"],
-        "engines": ["engine:LESSON_ADMISSION_GATE", "engine:CONTRASTIVE_ORACLE_BOOTSTRAP", "engine:PAIRED_TRANSFER_EVALUATOR", "engine:VERIFIED_SKILL_CRYSTALLIZER", "engine:EPISTEMIC_SELF_PLAY_ADMISSION"],
+        "external_names": ["continual learning", "catastrophic forgetting", "skillapt", "selskill", "conformal abstention", "rubin counterfactual", "agent memory", "sleep consolidation", "discr_tree"],
+        "engines": ["engine:COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER", "engine:GRADIENT_FREE_LAW_CONSOLIDATION", "engine:ABSTAIN_GATED_SKILL_INDUCTION", "engine:RULE_EXPIRY_WORLD_FINGERPRINT", "engine:ASSOCIATIVE_EPISODIC_MEMORY", "engine:LESSON_ADMISSION_GATE", "engine:CONTRASTIVE_ORACLE_BOOTSTRAP", "engine:PAIRED_TRANSFER_EVALUATOR", "engine:VERIFIED_SKILL_CRYSTALLIZER", "engine:EPISTEMIC_SELF_PLAY_ADMISSION"],
         "koan_modules": [
+            "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+            "canonical/runtime/gradient_free_law_consolidation_v1.py",
+            "canonical/runtime/abstain_gated_skill_induction_v1.py",
+            "canonical/swe_kernel/rule_expiry_v1.py",
             "canonical/swe_kernel/lesson_admission_gate_v1.py",
             "canonical/swe_kernel/contrastive_oracle_bootstrap_v1.py",
             "canonical/swe_kernel/paired_transfer_evaluation_v1.py",
@@ -2410,6 +2554,145 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
 
         prods = m.conditional_productions(str(inputs["source"]), int(inputs["line"]), str(inputs["site_text"]))
         return _ok(mode, "ASSERTION_DEMAND_PRODUCTIONS_SYNTHESIZED", {"productions": prods[:25], "count": len(prods)})
+
+    if mode == "COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER":
+        from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"SKILL_ROUTER_KILLED:{res.get('status')}", result=res)
+        return _ok(mode, "COUNTERFACTUAL_DISCR_TREE_EVALUATED", res)
+
+    if mode == "VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE":
+        from canonical.runtime import verified_zero_screenshot_action_cache_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"ACTION_CACHE_KILLED:{res.get('status')}", result=res)
+        return _ok(mode, "ZERO_SCREENSHOT_ACTION_CACHE_VERIFIED", res)
+
+    if mode == "RELATIONAL_GUARD_ADDITION_REPAIR":
+        from canonical.runtime import relational_guard_addition_symbolic_repair_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"RELATIONAL_REPAIR_KILLED:{res.get('status')}", result=res)
+        return _ok(mode, "RELATIONAL_GUARD_ADDITION_SYNTHESIZED", res)
+
+    if mode == "COW_ZYGOTE_SPECULATIVE_VERIFIER":
+        from canonical.runtime import cow_zygote_speculative_verifier_v1 as m
+
+        if {"original_module_source", "candidate_patch_source", "test_suite_source"}.issubset(inputs):
+            verdict = m.verify_candidate_patch_cow(
+                str(inputs["original_module_source"]),
+                str(inputs["candidate_patch_source"]),
+                str(inputs["test_suite_source"]),
+            )
+            return _ok(mode, "COW_CANDIDATE_PATCH_EVALUATED", verdict)
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"COW_VERIFIER_KILLED:{res.get('status')}", result=res)
+        return _ok(mode, "COW_SPECULATIVE_BENCHMARK_VERIFIED", res)
+
+    if mode == "STATE_CONTRACT_WORLD_MODEL":
+        from canonical.runtime import state_contract_world_model_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"STATE_CONTRACT_WORLD_MODEL_FAILED:{res.get('status')}", result=res)
+        return _ok(mode, "STATE_CONTRACT_WORLD_MODEL_VERIFIED", res)
+
+    if mode == "GRADIENT_FREE_LAW_CONSOLIDATION":
+        from canonical.runtime import gradient_free_law_consolidation_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"LAW_CONSOLIDATION_FAILED:{res.get('status')}", result=res)
+        return _ok(mode, "GRADIENT_FREE_LAWS_CONSOLIDATED", res)
+
+    if mode == "ABSTAIN_GATED_SKILL_INDUCTION":
+        from canonical.runtime import abstain_gated_skill_induction_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"SKILL_INDUCTION_FAILED:{res.get('status')}", result=res)
+        return _ok(mode, "ABSTAIN_GATED_SKILLS_INDUCED", res)
+
+    if mode == "ADVERSARIAL_MUTATION_ADMISSION_GATE":
+        from canonical.runtime import adversarial_mutation_admission_gate_v1 as m
+
+        res = m.run(inputs, ROOT)
+        if res.get("status") != "OK":
+            return _fail(mode, f"MUTATION_ADMISSION_FAILED:{res.get('status')}", result=res)
+        return _ok(mode, "ADVERSARIAL_MUTATION_GATE_EVALUATED", res)
+
+    if mode == "RULE_EXPIRY_WORLD_FINGERPRINT":
+        from canonical.swe_kernel import rule_expiry_v1 as m
+
+        fp = m.world_fingerprint()
+        diffs = m.material_differences(dict(inputs["taught_fingerprint"]), fp) if "taught_fingerprint" in inputs else []
+        return _ok(mode, "WORLD_FINGERPRINT_COMPUTED", {"fingerprint": fp, "material_differences": diffs})
+
+    if mode == "ASSOCIATIVE_EPISODIC_MEMORY":
+        import tempfile
+        from canonical.runtime import associative_memory_v1 as m
+
+        state_path = inputs.get("path")
+        if state_path:
+            hits = m.recall(inputs["cue"], k=int(inputs.get("k", 5)), path=str(state_path))
+            return _ok(mode, "ASSOCIATIVE_MEMORY_RECALLED", {"hits": hits, "count": len(hits)})
+        with tempfile.TemporaryDirectory(prefix="brain_assoc_mem_") as td:
+            p = str(Path(td) / "assoc.json")
+            for ep in inputs.get("episodes") or ():
+                m.remember(ep, path=p)
+            hits = m.recall(inputs["cue"], k=int(inputs.get("k", 5)), path=p)
+            return _ok(mode, "ASSOCIATIVE_MEMORY_RECALLED", {"hits": hits, "count": len(hits)})
+
+    if mode == "PROCEDURE_TRAJECTORY_MEMORY":
+        from canonical.runtime import procedure_memory_v1 as m
+
+        sig = m.signature(str(inputs["text"]))
+        out_payload: dict[str, Any] = {
+            "direction": m.direction(str(inputs["text"])),
+            "content_words": sorted(m.content_words(str(inputs["text"]))),
+            "signature": sig,
+        }
+        if "other_text" in inputs:
+            other_sig = m.signature(str(inputs["other_text"]))
+            out_payload["other_signature"] = other_sig
+            out_payload["similarity"] = m.similarity(sig, other_sig)
+            out_payload["agrees_on_direction"] = m.agrees_on_direction(sig, other_sig)
+        return _ok(mode, "PROCEDURE_SIGNATURE_EXTRACTED", out_payload)
+
+    if mode == "CAUSAL_GOAL_COMPUTER_AGENT":
+        from canonical.runtime import causal_computer_use_agent_v1 as m
+
+        agent = m.GoalDirectedAgent(list(inputs["catalog"]))
+        receipt = agent.solve(set(inputs["initial_marking"]), set(inputs["goal_predicates"]))
+        return _ok(mode, "CAUSAL_COMPUTER_GOAL_EVALUATED", receipt.to_dict())
+
+    if mode == "PREDICATE_UI_WORLD_ABSTRACTION":
+        from canonical.swe_kernel import predicate_world_abstraction_v1 as m
+
+        proj = m.project_computer_observation(dict(inputs["observation"]))
+        return _ok(mode, "UI_OBSERVATION_PROJECTED", proj)
+
+    if mode == "COW_IMPACT_TEST_REPAIR_ENGINE":
+        from canonical.swe_kernel import cow_impact_repair_engine_v1 as m
+
+        repo_root = Path(str(inputs.get("repo_root") or ROOT))
+        selected = m.select_impacted_tests_fast(
+            repo_root,
+            [str(p) for p in inputs["changed_rel_paths"]],
+            [Path(str(p)) for p in inputs["all_test_files"]],
+        )
+        return _ok(mode, "IMPACTED_TESTS_SELECTED", {"selected_tests": [str(p) for p in selected], "count": len(selected)})
+
+    if mode == "CANONICAL_ORACLE_VERICODING_SPINE":
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as m
+
+        demands = m.extract_assertion_demands(str(inputs["test_source"]))
+        return _ok(mode, "ASSERTION_DEMANDS_EXTRACTED", {"demands": demands, "count": len(demands)})
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 

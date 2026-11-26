@@ -280,10 +280,17 @@ def _score_module(stem: set[str], doc: str, symbols: list[str],
 def _model_status(model: Mapping[str, Any] | None) -> dict[str, Any]:
     if not model:
         return {"source_index": set(), "harvested": set(), "adapters": set()}
+    indexed_paths = {row.get("path") for row in model.get("source_index") or []}
+    indexed_paths |= {row.get("path") for row in model.get("extended_source_index") or []}
+    adapter_stems = {str(row.get("adapter_module") or "") for row in model.get("capabilities") or []}
+    for erow in model.get("engines") or []:
+        spath = (erow.get("route") or {}).get("source_path") if isinstance(erow, Mapping) else None
+        if spath:
+            adapter_stems.add(pathlib.PurePosixPath(str(spath)).stem)
     return {
-        "source_index": {row.get("path") for row in model.get("source_index") or []},
+        "source_index": indexed_paths,
         "harvested": {row.get("path") for row in model.get("harvested_capabilities") or []},
-        "adapters": {str(row.get("adapter_module") or "") for row in model.get("capabilities") or []},
+        "adapters": adapter_stems,
     }
 
 
@@ -416,14 +423,17 @@ def reachability(atlas: Mapping[str, Any], root: pathlib.Path,
                     adapter_of[cid] = str(row["adapter_module"])
         except (OSError, ValueError):
             pass
+        for eid, erow in model.engines.items():
+            spath = (erow.get("route") or {}).get("source_path") if isinstance(erow, Mapping) else None
+            if spath:
+                adapter_of[eid] = pathlib.PurePosixPath(str(spath)).stem
         # Chance baselines make the recalls readable: a domain with 287 candidate stems
         # would score 100% against a five-document draw even with no navigation at all.
-        indexed_total = max(1, len(model.source_index))
-        capability_total = max(1, len(model.capabilities))
-        route_stems = set()
-        for cid, row in model.capabilities.items():
-            route_stems.add(str(adapter_of.get(cid, cid)))
-        route_chance = sum(1 for cid in model.capabilities
+        ext_count = len(getattr(model, "extended_source_index", ()) or ())
+        indexed_total = max(1, len(model.source_index) + ext_count)
+        routable_ids = list(model.capabilities) + [eid for eid in model.engines if eid in adapter_of]
+        capability_total = max(1, len(routable_ids))
+        route_chance = sum(1 for cid in routable_ids
                            if any(stem in str(adapter_of.get(cid, cid)) for stem in stems))
         rows: list[dict[str, Any]] = []
         for kind, queries in (("frontier", spec["queries"]), ("native", spec["native_queries"])):
@@ -433,7 +443,10 @@ def reachability(atlas: Mapping[str, Any], root: pathlib.Path,
                 adapter_hit = [c["id"] for c in candidates
                                if any(stem in str(adapter_of.get(c["id"], c["id"])) for stem in stems)]
                 try:
-                    located = model.find_source(query, top_k=top_k)
+                    if hasattr(model, "find_any_source"):
+                        located = model.find_any_source(query, top_k=top_k)
+                    else:
+                        located = model.find_source(query, top_k=top_k)
                 except Exception as exc:
                     rows.append({"kind": kind, "query": query, "error": str(exc)[:120]})
                     continue

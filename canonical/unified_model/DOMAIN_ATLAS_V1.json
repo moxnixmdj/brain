@@ -10,6 +10,7 @@
     "a_goal_that_needs_two_moves_v1",
     "a_refusal_is_a_specification_v1",
     "a_relation_over_two_guards_v1",
+    "adversarial_mutation_admission_gate_v1",
     "angelic_cegis_repair_v1",
     "angelic_cegis_v1",
     "angelic_lens_cow_repair_v1",
@@ -67,10 +68,12 @@
     "contract_grounded_repair_v1",
     "contract_native_proof_suites",
     "contrastive_oracle_bootstrap_v1",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_completes_the_closure_v1",
     "cow_angelic_zygote_v1",
     "cow_impact_repair_engine_v1",
     "cow_lens_fuzz_and_negative_space_v1",
+    "cow_zygote_speculative_verifier_v1",
     "creature_runtime_v1",
     "cross_modal_tomography_petri_v1",
     "curriculum_v1",
@@ -111,6 +114,7 @@
     "global_retrieval_controller_v1",
     "goal_compiler",
     "goal_front_compiler_v1",
+    "gradient_free_law_consolidation_v1",
     "grammar_closed_repair_v1",
     "grid_delta_rule_inducer_v2",
     "guarded_meaning_ir_v1",
@@ -218,6 +222,7 @@
     "real_fix_oracle_baseline_v1",
     "recursive_self_architect_v1",
     "referent_dependence_v1",
+    "relational_guard_addition_symbolic_repair_v1",
     "repo_component_petri_v1",
     "repo_native_component_mining_v1",
     "requirement_graph_kernel",
@@ -271,6 +276,7 @@
     "tree_sitter_cst_skill_skeleton_v1",
     "tree_sitter_swe_kernel_v1",
     "typed_invention_v1",
+    "unified_hidden_capability_federation_v1",
     "universal_computer_agent_v1",
     "universal_problem_contract_authority_v1",
     "universal_semantic_ir_v1",
@@ -291,21 +297,16 @@
     "witness_inversion_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 287,
+   "candidates": 293,
    "frontier_function": "resolve a repository issue from a text description",
-   "harvested_all": 101,
-   "harvested_executable_top": 10,
-   "hidden_share_all": 0.014,
-   "hidden_top": [
-    "canonical/tools/swebench_issue_localizer_v1.py",
-    "canonical/capabilities/true/oracles/saccr_credit_addon_oracles_v1.py",
-    "canonical/tools/isolated_effect_receipt_verifier_v1.py",
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py"
-   ],
-   "in_source_index_top": 21,
-   "indexed_all": 209,
-   "invisible_share": 0.014,
-   "invisible_to_model": 4,
+   "harvested_all": 104,
+   "harvested_executable_top": 11,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 275,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
      "adapter_module_match": false,
@@ -388,6 +389,26 @@
      "summary": "Copy-on-Write Prewarmed Pytest Zygote Server, Angelic Branch Inversion,"
     },
     {
+     "adapter_module_match": true,
+     "anchored": 8.25,
+     "harvested": true,
+     "matched": [
+      "repair@doc",
+      "ast@doc",
+      "mutant@doc",
+      "mutation@doc",
+      "synthes@doc",
+      "metamorphic@doc",
+      "oracle@doc",
+      "ast@symbol"
+     ],
+     "path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+     "score": 34.25,
+     "sha256": "1c135097c7ea1c2a",
+     "source_index": true,
+     "summary": "Play C \u2014 Relational AST Guard/Addition Synthesizer & Symbolic Witness Mutation Gate (`K3 = 0`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 10.5,
      "harvested": false,
@@ -408,7 +429,7 @@
      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": true,
      "matched": [
@@ -428,7 +449,7 @@
      "summary": "Zero-Copy CoW Impact-Sliced STUN Guard & Coupled Multi-File Repair Engine (`K3 = 0`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 17.25,
      "harvested": false,
      "matched": [
@@ -448,7 +469,7 @@
      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 15.75,
      "harvested": false,
      "matched": [
@@ -468,7 +489,7 @@
      "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.0,
      "harvested": true,
      "matched": [
@@ -568,7 +589,7 @@
      "summary": "What experience can and cannot buy, as a measured law rather than an opinion."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -608,7 +629,7 @@
      "summary": "Residual-wall closers: the thirteen laws a trace-literal engine cannot reach."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -644,7 +665,7 @@
      "path": "canonical/tools/quixbugs_end_to_end_repair_measure_v1.py",
      "score": 24.5,
      "sha256": "d0dd411b74618859",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can this project repair a real public bug corpus it did not write, end to end, with no model?"
     },
     {
@@ -668,6 +689,26 @@
      "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 3.75,
+     "harvested": true,
+     "matched": [
+      "repair@doc",
+      "ast@doc",
+      "patch@doc",
+      "patch@symbol",
+      "mutant@doc",
+      "candidate@doc",
+      "test@doc",
+      "bug@doc"
+     ],
+     "path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+     "score": 22.75,
+     "sha256": "e4ff324b2fd58926",
+     "source_index": true,
+     "summary": "Play D \u2014 Sub-5ms POSIX `os.fork()` CoW Zygote Speculative Repair Verifier (`K3 = 0`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 6.0,
      "harvested": true,
@@ -684,11 +725,11 @@
      "path": "canonical/tools/grammar_closed_repair_v1.py",
      "score": 22.0,
      "sha256": "2252ee025daaf6dd",
-     "source_index": false,
+     "source_index": true,
      "summary": "A repair generator with no edit library: the program's own grammar is the hypothesis space."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.75,
      "harvested": false,
      "matched": [
@@ -764,48 +805,8 @@
      "path": "canonical/tools/small_passing_patch_place_measure_v1.py",
      "score": 21.25,
      "sha256": "5f28a4861460715d",
-     "source_index": false,
-     "summary": "How many tries, with the place given? Where a small test-passing repair stands in the lists built here."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.75,
-     "harvested": true,
-     "matched": [
-      "swe@doc",
-      "ast@doc",
-      "diff@doc",
-      "repair@doc",
-      "swe@symbol",
-      "test@doc",
-      "candidate@doc",
-      "oracle@doc"
-     ],
-     "path": "canonical/tools/the_same_guard_twice_is_the_discriminator_v1.py",
-     "score": 21.25,
-     "sha256": "7c622a33ee6f25d9",
-     "source_index": false,
-     "summary": "The same guard, fired twice, is the discriminator."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 12.0,
-     "harvested": false,
-     "matched": [
-      "synthes@doc",
-      "patch@symbol",
-      "repair@symbol",
-      "ast@symbol",
-      "fault@symbol",
-      "oracle@symbol",
-      "patch@doc",
-      "repair@doc"
-     ],
-     "path": "canonical/swe_kernel/cegis_semantic_synthesizer_v1.py",
-     "score": 20.5,
-     "sha256": "96f823a9af041bdd",
      "source_index": true,
-     "summary": "Goal-Directed CEGIS Program/Patch Synthesizer & Unified Semantic Engine (`cegis_semantic_synthesizer_v1`) \u2014 Leap 3 + Full 4-Leap Fusion."
+     "summary": "How many tries, with the place given? Where a small test-passing repair stands in the lists built here."
     }
    ],
    "vendored_donors_excluded": 2
@@ -932,6 +933,7 @@
     "settlement_v1",
     "software_repair_crossfile_choreograph_v1",
     "source_authority_binding_ror",
+    "state_contract_world_model_v1",
     "synthesis_dimension_scorers_and_strict_reducer_v1",
     "terminal_adaptive_minimum_action_policy_v1",
     "terminal_information_dominance_v1",
@@ -953,24 +955,42 @@
     "unknown_domain_direct_hidden_generator_v1",
     "unknown_domain_direct_hidden_scorer_v1",
     "value_algebra_v1",
+    "verified_zero_screenshot_action_cache_v1",
     "what_a_demonstration_leaves_open_v1",
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 145,
+   "candidates": 147,
    "frontier_function": "drive a GUI it has never seen",
-   "harvested_all": 24,
+   "harvested_all": 25,
    "harvested_executable_top": 6,
-   "hidden_share_all": 0.014,
-   "hidden_top": [
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
-    "canonical/research/bytes/tools/fresh_quartic_unify_repair_v17.py"
-   ],
-   "in_source_index_top": 19,
-   "indexed_all": 117,
-   "invisible_share": 0.014,
-   "invisible_to_model": 2,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 139,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": true,
+     "anchored": 10.5,
+     "harvested": true,
+     "matched": [
+      "gui@doc",
+      "cdp@doc",
+      "screen@doc",
+      "screenshot@doc",
+      "browser@doc",
+      "dom@doc",
+      "cdp@symbol",
+      "dom@symbol"
+     ],
+     "path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+     "score": 41.5,
+     "sha256": "6bd5c9a473162d14",
+     "source_index": true,
+     "summary": "Play B \u2014 Zero-Screenshot 3-Tier Causal Ladder & Pre-Verified CDP/A11y Action Cache (`K3 = 0`)."
+    },
     {
      "adapter_module_match": false,
      "anchored": 7.5,
@@ -992,7 +1012,7 @@
      "summary": "The GUI room: a real browser, a real page, observed structurally -- never from pixels alone."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -1008,7 +1028,7 @@
      "path": "canonical/tools/the_refusal_is_the_curriculum_v1.py",
      "score": 26.25,
      "sha256": "f53edb4f349f4fc6",
-     "source_index": false,
+     "source_index": true,
      "summary": "The refusal is the curriculum: the environment publishes its own grammar, and one visit writes the axioms that make the second visit cheaper."
     },
     {
@@ -1048,11 +1068,11 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 24.75,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -1072,7 +1092,7 @@
      "summary": "Unified Interface Action-Grammar Engine (CLI Repertoire + GUI/Browser A11y Tree)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -1112,7 +1132,7 @@
      "summary": ""
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -1152,7 +1172,7 @@
      "summary": "Terminal-authority-hardening successor for the OSWorld capability stack."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 9.75,
      "harvested": false,
      "matched": [
@@ -1172,7 +1192,7 @@
      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -1281,7 +1301,7 @@
      "path": "canonical/tools/what_a_demonstration_leaves_open_v1.py",
      "score": 14.25,
      "sha256": "b18da7e2e70250df",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one demonstration leave open, and does that predict where the skill fails?"
     },
     {
@@ -1319,7 +1339,7 @@
      "path": "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
      "score": 14.0,
      "sha256": "c1cf8f16ef553eb7",
-     "source_index": false,
+     "source_index": true,
      "summary": "A type you wrote is a type you guess: on a room of kinds this tree never named, the"
     },
     {
@@ -1336,7 +1356,7 @@
      "path": "canonical/tools/arc_agi_3_public_exploration_measure_v1.py",
      "score": 14.0,
      "sha256": "f53986dac7ea0b4f",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does first contact with an environment NOBODY HERE WROTE actually cost?"
     },
     {
@@ -1435,23 +1455,6 @@
      "sha256": "01cdd738fde1095e",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": true,
-     "matched": [
-      "gui@doc",
-      "gui@symbol",
-      "osworld@doc",
-      "tab@doc",
-      "app@doc"
-     ],
-     "path": "canonical/tools/the_guide_is_a_test_suite_v1.py",
-     "score": 12.5,
-     "sha256": "705b5650a3e376a4",
-     "source_index": false,
-     "summary": "Documentation holds a verifier that no author wrote: execute the examples, keep what passed."
     }
    ],
    "vendored_donors_excluded": 2
@@ -1470,6 +1473,7 @@
     "derived_value_measure_v1",
     "domain_mapping_truth_certificate_v1",
     "exact_stated_geometry_measure_v1",
+    "gradient_free_law_consolidation_v1",
     "inert_action_prior_measure_v1",
     "instruction_contract_measure_v1",
     "k6_decision_refinement_compiler_v1",
@@ -1487,18 +1491,18 @@
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1"
    ],
-   "candidates": 28,
+   "candidates": 29,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 8,
    "harvested_executable_top": 8,
-   "hidden_share_all": 0.071,
+   "hidden_share_all": 0.069,
    "hidden_top": [
     "canonical/runtime/k6_decision_refinement_compiler_v1.py",
     "canonical/runtime/k6_target_relative_decision_quotient_v1.py"
    ],
-   "in_source_index_top": 14,
-   "indexed_all": 17,
-   "invisible_share": 0.071,
+   "in_source_index_top": 22,
+   "indexed_all": 25,
+   "invisible_share": 0.069,
    "invisible_to_model": 2,
    "top": [
     {
@@ -1515,11 +1519,11 @@
      "path": "canonical/tools/the_counterexample_is_the_next_experiment_v1.py",
      "score": 10.5,
      "sha256": "2a853bbdb3fad9dc",
-     "source_index": false,
+     "source_index": true,
      "summary": "The counterexample is the next experiment: a statistic is true only at the depth that killed it."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -1548,7 +1552,7 @@
      "path": "canonical/tools/exact_stated_geometry_measure_v1.py",
      "score": 8.25,
      "sha256": "57bade64cccd6c23",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does the page's OWN geometry reach the score frames that refused every correct press?"
     },
     {
@@ -1567,7 +1571,7 @@
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1591,11 +1595,11 @@
      "path": "canonical/tools/capability_consolidation_audit_v1.py",
      "score": 6.75,
      "sha256": "daa02dd41b93f754",
-     "source_index": false,
+     "source_index": true,
      "summary": "Deterministic Capability Consolidation & Truth Auditor (`capability_consolidation_audit_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -1630,6 +1634,20 @@
     },
     {
      "adapter_module_match": true,
+     "anchored": 2.25,
+     "harvested": false,
+     "matched": [
+      "consolidat@doc",
+      "consolidat@symbol"
+     ],
+     "path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+     "score": 5.25,
+     "sha256": "07e1ab9391c8fe56",
+     "source_index": false,
+     "summary": "Play 2 \u2014 Consolidation Without Gradients (`gradient_free_law_consolidation_v1`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 3.0,
      "harvested": false,
      "matched": [
@@ -1656,7 +1674,7 @@
      "path": "canonical/tools/aimed_action_measure_v1.py",
      "score": 4.75,
      "sha256": "fc7fd82716668b24",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can the places the instruction implies be DERIVED, and does deriving them reach the 46?"
     },
     {
@@ -1671,7 +1689,7 @@
      "path": "canonical/tools/derived_value_measure_v1.py",
      "score": 4.75,
      "sha256": "850d7750213b8588",
-     "source_index": false,
+     "source_index": true,
      "summary": "Is the wall a budget, or is it that the value the page wants cannot be EXPRESSED?"
     },
     {
@@ -1743,7 +1761,7 @@
      "path": "canonical/tools/inert_action_prior_measure_v1.py",
      "score": 3.75,
      "sha256": "9539583dfa25205f",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does knowing which actions are inert make a never-solved page solvable in fewer actions?"
     },
     {
@@ -1757,11 +1775,11 @@
      "path": "canonical/tools/instruction_contract_measure_v1.py",
      "score": 3.75,
      "sha256": "94400874e10c0ae1",
-     "source_index": false,
+     "source_index": true,
      "summary": "Can an instruction become a verifier? Measure it as a CLASSIFIER, in both directions."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1776,7 +1794,7 @@
      "summary": "Persistent parameterized code-repair hypotheses in the existing SQLite store."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": true,
      "matched": [
@@ -1787,7 +1805,7 @@
      "path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
      "score": 3.25,
      "sha256": "dddee8a20f5bccc4",
-     "source_index": false,
+     "source_index": true,
      "summary": "The right question is an experiment: compile a prose claim to a witness, and"
     },
     {
@@ -1859,26 +1877,13 @@
      "sha256": "90138382f8d1391a",
      "source_index": false,
      "summary": ""
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "refine@symbol",
-      "refinement@symbol"
-     ],
-     "path": "canonical/runtime/k6_target_relative_decision_quotient_v1.py",
-     "score": 3.0,
-     "sha256": "a7547c5dc39e4c57",
-     "source_index": false,
-     "summary": ""
     }
    ],
    "vendored_donors_excluded": 0
   },
   "instant_learning": {
    "candidate_stems": [
+    "abstain_gated_skill_induction_v1",
     "adaptive_constant_concept_bridge_v1",
     "aimed_action_v1",
     "ask_instead_of_stare_v1",
@@ -2052,21 +2057,21 @@
     "witness_inversion_v1",
     "world_binding_v1"
    ],
-   "candidates": 173,
+   "candidates": 174,
    "frontier_function": "adapt from one episode without touching weights",
    "harvested_all": 65,
-   "harvested_executable_top": 12,
+   "harvested_executable_top": 11,
    "hidden_share_all": 0.006,
    "hidden_top": [
     "canonical/runtime/runtime_cognition_credit_guard_v1.py"
    ],
-   "in_source_index_top": 20,
-   "indexed_all": 141,
+   "in_source_index_top": 24,
+   "indexed_all": 172,
    "invisible_share": 0.006,
    "invisible_to_model": 1,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": false,
      "matched": [
@@ -2142,11 +2147,11 @@
      "path": "canonical/tools/what_transfers_v1.py",
      "score": 24.75,
      "sha256": "38ac208c1a619269",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": true,
      "matched": [
@@ -2222,7 +2227,7 @@
      "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
      "score": 20.75,
      "sha256": "f4b3f35cb5db7d07",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
     },
     {
@@ -2242,11 +2247,11 @@
      "path": "canonical/tools/generalization_rung_gradient_v1.py",
      "score": 20.25,
      "sha256": "768310bf4d663a35",
-     "source_index": false,
+     "source_index": true,
      "summary": "Problem 2, measured as a gradient rather than a verdict: where does memory stop generalising,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.0,
      "harvested": true,
      "matched": [
@@ -2306,7 +2311,7 @@
      "summary": "Composition Concept Bridge V1 \u2014 from single expression to multi-concept programs."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -2326,7 +2331,27 @@
      "summary": "The Perfect Algorithm: one mechanism for any arbitrary environment."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
+     "anchored": 6.0,
+     "harvested": false,
+     "matched": [
+      "induc@doc",
+      "transfer@doc",
+      "induc@symbol",
+      "induce@symbol",
+      "skill@doc",
+      "induce@doc",
+      "skill@symbol",
+      "abstract@doc"
+     ],
+     "path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+     "score": 19.0,
+     "sha256": "371a30019dc2a956",
+     "source_index": false,
+     "summary": "Play 3 \u2014 Induction With an Abstain Option (`abstain_gated_skill_induction_v1`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 12.0,
      "harvested": false,
      "matched": [
@@ -2362,7 +2387,7 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 18.5,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
@@ -2402,7 +2427,7 @@
      "path": "canonical/tools/teach_actions_v1.py",
      "score": 18.25,
      "sha256": "5459d0cda81a603e",
-     "source_index": false,
+     "source_index": true,
      "summary": "Teach the front door the actions in ``canonical/swe_kernel/taught_actions``."
     },
     {
@@ -2466,7 +2491,7 @@
      "summary": "What an operator MEANS is a computation, not a membership test."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 12.0,
      "harvested": false,
      "matched": [
@@ -2506,7 +2531,7 @@
      "summary": "Autonomous verified self-improvement loop V1."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -2521,7 +2546,7 @@
      ],
      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
      "score": 17.5,
-     "sha256": "9c28ff14e7315f33",
+     "sha256": "6ed969077cd88e7b",
      "source_index": true,
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
     },
@@ -2544,32 +2569,13 @@
      "sha256": "c3a728270ffde3c1",
      "source_index": true,
      "summary": "Let a rule discover how general it actually is, instead of being told."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 4.5,
-     "harvested": true,
-     "matched": [
-      "skill@doc",
-      "generaliz@symbol",
-      "adapt@doc",
-      "generaliz@doc",
-      "induc@doc",
-      "induce@doc",
-      "skill@symbol",
-      "transfer@doc"
-     ],
-     "path": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
-     "score": 17.5,
-     "sha256": "e21dac36baaaedcf",
-     "source_index": true,
-     "summary": "Bridge between executable SWE code-repair tasks (`VerifiedSkillStore` + `TEST_SUITE`)"
     }
    ],
    "vendored_donors_excluded": 0
   },
   "memory": {
    "candidate_stems": [
+    "abstain_gated_skill_induction_v1",
     "acquired_operator_memory_v1",
     "angelic_cegis_repair_v1",
     "angelic_lens_cow_repair_v1",
@@ -2600,6 +2606,7 @@
     "computer_env_v1",
     "computer_use_agent_v1",
     "consistency_vs_equivalence_v1",
+    "contract_first_routing_v1",
     "contrastive_oracle_bootstrap_v1",
     "cow_angelic_zygote_v1",
     "creature_runtime_v1",
@@ -2635,6 +2642,7 @@
     "github_public_retrieval_provider_v1",
     "goal_compiler",
     "goal_front_compiler_v1",
+    "gradient_free_law_consolidation_v1",
     "grammar_closed_repair_v1",
     "h100_zero_learned_event_memory_v1",
     "harbor_science_agent_v10",
@@ -2753,21 +2761,19 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 184,
+   "candidates": 187,
    "frontier_function": "context that stays correct as it fills",
    "harvested_all": 49,
    "harvested_executable_top": 8,
-   "hidden_share_all": 0.005,
-   "hidden_top": [
-    "canonical/integrations/brain_fabv2_native_v1/canonical/runtime/finance_agent_v2_zero_spend_adapter_v1.py"
-   ],
-   "in_source_index_top": 21,
-   "indexed_all": 162,
-   "invisible_share": 0.005,
-   "invisible_to_model": 1,
+   "hidden_share_all": 0.0,
+   "hidden_top": [],
+   "in_source_index_top": 25,
+   "indexed_all": 182,
+   "invisible_share": 0.0,
+   "invisible_to_model": 0,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -2824,7 +2830,7 @@
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -2859,11 +2865,11 @@
      "path": "canonical/tools/scan_retrieve_fetch_v1.py",
      "score": 15.75,
      "sha256": "08b60fb6c239ff69",
-     "source_index": false,
+     "source_index": true,
      "summary": "Scan a host, retrieve what is already known, fetch only what is not."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -2898,12 +2904,12 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 14.0,
-     "sha256": "f73ddcea0198931c",
+     "sha256": "14f0f8ca2f578a68",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -3015,7 +3021,7 @@
      "path": "canonical/tools/miniwob_one_success_generalisation_measure_v1.py",
      "score": 13.0,
      "sha256": "7f60253471cef256",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does ONE success become a skill? Measured on web tasks nobody in this repository wrote."
     },
     {
@@ -3091,7 +3097,7 @@
      "path": "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
      "score": 12.0,
      "sha256": "f4b3f35cb5db7d07",
-     "source_index": false,
+     "source_index": true,
      "summary": "What does one bug fix teach? Measured on QuixBugs with the tree's own retention organ, unchanged."
     },
     {
@@ -3127,7 +3133,7 @@
      "path": "canonical/tools/what_transfers_v1.py",
      "score": 11.75,
      "sha256": "38ac208c1a619269",
-     "source_index": false,
+     "source_index": true,
      "summary": "Does \"instant learning\" generalise to arbitrary environments, or only to the one it was shown in?"
     },
     {
@@ -3150,7 +3156,7 @@
      "summary": "Experience carries over. An environment is not the first one ever seen."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -3170,7 +3176,7 @@
      "summary": "Recursive Self-Architecting Engine (`K3 = 0`, `$0` spend, `0` host `exec()`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": false,
      "matched": [
@@ -3190,7 +3196,7 @@
      "summary": "The Perfect Algorithm: one mechanism for any arbitrary environment."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -3260,11 +3266,13 @@
     "aa_briefcase_internal_only_certification_gate_v2",
     "aa_briefcase_internal_only_certification_gate_v3",
     "aa_briefcase_minimum_information_v1",
+    "abstain_gated_skill_induction_v1",
     "acceptance_quotient_simulation_v1",
     "acceptance_quotient_simulation_v2",
     "acceptance_quotient_simulation_v3",
     "acceptance_quotient_simulation_v4",
     "acceptance_quotient_simulation_v5",
+    "adversarial_mutation_admission_gate_v1",
     "angelic_cegis_v1",
     "angelic_lens_cow_repair_v1",
     "applicability_v1",
@@ -3314,6 +3322,7 @@
     "confinement_v1",
     "consistency_vs_equivalence_v1",
     "contract_native_proof_suites",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_cc_r1_professional_r12_semantic_verify_v2",
     "coverage_cc_r1_r3_promotion_reality_containment_verify_v1",
     "coverage_cc_r2_professional_r12_semantic_verify_v2",
@@ -3477,6 +3486,7 @@
     "recursive_self_architect_v1",
     "regcap_local_appositive_identity_v1",
     "regression_sweep_v1",
+    "relational_guard_addition_symbolic_repair_v1",
     "rename_local_variable_v1",
     "renewable_action_v1",
     "reserve_bare_nonidentifiability_v1",
@@ -3572,28 +3582,28 @@
     "work_unit_validity_guard_v2",
     "worker_syscall_allowlist_v1"
    ],
-   "candidates": 321,
+   "candidates": 325,
    "frontier_function": "know when you do not know, and prove what you did",
-   "harvested_all": 53,
+   "harvested_all": 55,
    "harvested_executable_top": 7,
-   "hidden_share_all": 0.04,
+   "hidden_share_all": 0.028,
    "hidden_top": [
     "canonical/runtime/escape_progress_shared_gap_audit_v1.py",
     "canonical/runtime/escape_progress_shared_gap_audit_v2.py",
     "canonical/runtime/escape_progress_shared_gap_audit_v3.py",
-    "canonical/tools/isolated_effect_receipt_verifier_v1.py",
-    "canonical/capabilities/true/oracles/scheduler_oracles_v1.py",
-    "canonical/tools/isolated_worktree_fixture_collector_v1.py",
     "canonical/runtime/structured_method_universal_correctness_certificate_v1.py",
-    "canonical/tools/isolated_effect_collector_v1.py"
+    "canonical/runtime/finite_probe_nonidentifiability_certificate_v1.py",
+    "canonical/runtime/tool_discovery_universal_scope_certificate_v1.py",
+    "canonical/runtime/livebench_legacy15_composition_partition_v1.py",
+    "canonical/runtime/coding_static_verified_capability_route_theorem_v1.py"
    ],
-   "in_source_index_top": 23,
-   "indexed_all": 261,
-   "invisible_share": 0.04,
-   "invisible_to_model": 13,
+   "in_source_index_top": 24,
+   "indexed_all": 290,
+   "invisible_share": 0.028,
+   "invisible_to_model": 9,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.75,
      "harvested": true,
      "matched": [
@@ -3613,7 +3623,7 @@
      "summary": "Compose only what is proved \u2014 a composition rule with premise survival, per-step"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -3689,7 +3699,7 @@
      "path": "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
      "score": 18.5,
      "sha256": "d0a415dc354e57c2",
-     "source_index": false,
+     "source_index": true,
      "summary": "A check that nobody runs is a check that cannot be wrong: the guide cites a read-only"
     },
     {
@@ -3852,6 +3862,25 @@
      "summary": "Provenance for the two file-fact rows: ground truth computed without them."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 5.25,
+     "harvested": false,
+     "matched": [
+      "abstain@doc",
+      "abstain@symbol",
+      "admission@doc",
+      "admit@symbol",
+      "gate@doc",
+      "admit@doc",
+      "gate@symbol"
+     ],
+     "path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+     "score": 15.75,
+     "sha256": "371a30019dc2a956",
+     "source_index": false,
+     "summary": "Play 3 \u2014 Induction With an Abstain Option (`abstain_gated_skill_induction_v1`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 4.5,
      "harvested": false,
@@ -3909,7 +3938,7 @@
      "summary": "Consistency is evidence; equivalence is the goal. No model, no network."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -3949,6 +3978,25 @@
      "summary": "Strict proof-carrying information-theoretic externality gate."
     },
     {
+     "adapter_module_match": true,
+     "anchored": 4.5,
+     "harvested": true,
+     "matched": [
+      "witness@doc",
+      "admit@doc",
+      "witness@symbol",
+      "audit@symbol",
+      "audit@doc",
+      "gate@doc",
+      "verify@symbol"
+     ],
+     "path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+     "score": 14.0,
+     "sha256": "1c135097c7ea1c2a",
+     "source_index": true,
+     "summary": "Play C \u2014 Relational AST Guard/Addition Synthesizer & Symbolic Witness Mutation Gate (`K3 = 0`)."
+    },
+    {
      "adapter_module_match": false,
      "anchored": 3.75,
      "harvested": false,
@@ -3981,7 +4029,7 @@
      "path": "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
      "score": 13.75,
      "sha256": "c1cf8f16ef553eb7",
-     "source_index": false,
+     "source_index": true,
      "summary": "A type you wrote is a type you guess: on a room of kinds this tree never named, the"
     },
     {
@@ -4042,42 +4090,6 @@
      "sha256": "3db3242a054dfa3f",
      "source_index": true,
      "summary": "Provenance for bound capability rows -- re-derivable, not asserted."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "prove@doc",
-      "admit@doc",
-      "refus@doc",
-      "refus@symbol",
-      "receipt@doc"
-     ],
-     "path": "canonical/runtime/capability_forge_v1.py",
-     "score": 13.25,
-     "sha256": "ce0894f9d70a21f4",
-     "source_index": true,
-     "summary": "Admit a dormant module as a capability -- only if it can be killed first."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.0,
-     "harvested": false,
-     "matched": [
-      "fail_closed@doc",
-      "refus@doc",
-      "fail_closed@symbol",
-      "receipt@doc",
-      "verify@symbol",
-      "gate@doc",
-      "verify@doc"
-     ],
-     "path": "canonical/swe_kernel/semantic_generalization_engine_v1.py",
-     "score": 13.0,
-     "sha256": "459d877ed10644de",
-     "source_index": true,
-     "summary": "Neuro-symbolic compositional & causal generalization engine (Problem 2)."
     }
    ],
    "vendored_donors_excluded": 0
@@ -4108,6 +4120,7 @@
     "compose_measured_effects_v1",
     "computer_use_agent_v1",
     "consequence_table_v1",
+    "counterfactual_discr_tree_skill_router_v1",
     "coverage_is_the_bottleneck_not_hypotheses_v1",
     "cow_angelic_zygote_v1",
     "creature_stakes_and_initiative_v1",
@@ -4184,6 +4197,7 @@
     "settlement_v1",
     "site_by_intervention_v1",
     "speculative_cow_petri_agent_v1",
+    "state_contract_world_model_v1",
     "swe_typed_plan_v1",
     "swebench_verified_epistemic_adapter_v1",
     "terminal_causal_depth_controller_v1",
@@ -4206,25 +4220,21 @@
     "what_the_vocabulary_cannot_say_v1",
     "what_transfers_to_a_second_host_v1"
    ],
-   "candidates": 122,
+   "candidates": 124,
    "frontier_function": "predict what an action does before doing it",
-   "harvested_all": 37,
+   "harvested_all": 38,
    "harvested_executable_top": 9,
-   "hidden_share_all": 0.041,
+   "hidden_share_all": 0.008,
    "hidden_top": [
-    "canonical/capabilities/true/oracles/docx_span_edit_oracles_v1.py",
-    "canonical/capabilities/true/oracles/same_identity_supervisor_oracles_v1.py",
-    "canonical/capabilities/true/oracles/vendor/baselkit_sa_ccr_52293ef9.py",
-    "canonical/capabilities/true/oracles/docx_exact_text_edit_oracles_v1.py",
     "canonical/runtime/terminal_causal_depth_controller_v1.py"
    ],
-   "in_source_index_top": 20,
-   "indexed_all": 98,
-   "invisible_share": 0.041,
-   "invisible_to_model": 5,
+   "in_source_index_top": 24,
+   "indexed_all": 121,
+   "invisible_share": 0.008,
+   "invisible_to_model": 1,
    "top": [
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 11.25,
      "harvested": false,
      "matched": [
@@ -4303,7 +4313,7 @@
      "summary": "Sentient Cognitive Core V1 (`sentient_cognitive_core_v1`, `K3 = 0`)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": false,
      "matched": [
@@ -4323,7 +4333,7 @@
      "summary": "Reverse-Execution Synthesis, Differential State Tomography, Algebraic Skill Composition,"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 8.25,
      "harvested": false,
      "matched": [
@@ -4359,7 +4369,7 @@
      "path": "canonical/tools/compose_measured_effects_v1.py",
      "score": 18.5,
      "sha256": "5b872e50b6b28bb8",
-     "source_index": false,
+     "source_index": true,
      "summary": "Compose measured effects: solve what a machine can express, PROVE what it cannot."
     },
     {
@@ -4379,7 +4389,7 @@
      "path": "canonical/tools/the_vocabulary_must_be_computed_not_written_v1.py",
      "score": 17.75,
      "sha256": "eca1492bfdd3cb47",
-     "source_index": false,
+     "source_index": true,
      "summary": "The vocabulary must be computed, not written: a hand-named effect merges transitions the world tells apart."
     },
     {
@@ -4403,7 +4413,27 @@
      "summary": "The model is a table of executed transitions. That is the whole part."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
+     "anchored": 3.0,
+     "harvested": false,
+     "matched": [
+      "delta@doc",
+      "effect@doc",
+      "predict@doc",
+      "world_model@doc",
+      "delta@symbol",
+      "effect@symbol",
+      "model@doc",
+      "plan@doc"
+     ],
+     "path": "canonical/runtime/state_contract_world_model_v1.py",
+     "score": 16.5,
+     "sha256": "d7ef6cc5e48f3956",
+     "source_index": false,
+     "summary": "Play 1 \u2014 State-as-Contract World Model (`state_contract_world_model_v1`)."
+    },
+    {
+     "adapter_module_match": true,
      "anchored": 10.5,
      "harvested": false,
      "matched": [
@@ -4418,7 +4448,7 @@
      ],
      "path": "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
      "score": 15.5,
-     "sha256": "9c28ff14e7315f33",
+     "sha256": "6ed969077cd88e7b",
      "source_index": true,
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
     },
@@ -4459,11 +4489,11 @@
      "path": "canonical/tools/one_experience_every_consequence_v1.py",
      "score": 15.0,
      "sha256": "48100871ec4bb76d",
-     "source_index": false,
+     "source_index": true,
      "summary": "One action in, every consequence out: what one experience buys, and where it stops."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.75,
      "harvested": false,
      "matched": [
@@ -4498,7 +4528,7 @@
      "path": "canonical/tools/what_the_vocabulary_cannot_say_v1.py",
      "score": 14.25,
      "sha256": "3c1adfc91fc390c0",
-     "source_index": false,
+     "source_index": true,
      "summary": "What the vocabulary cannot say, computed rather than lamented."
     },
     {
@@ -4576,7 +4606,7 @@
      "summary": "Does the system's model of itself predict anything?"
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
      "matched": [
@@ -4630,11 +4660,11 @@
      "path": "canonical/tools/an_actions_effect_is_a_provenance_map_v1.py",
      "score": 12.25,
      "sha256": "31d9db3c0afb03d2",
-     "source_index": false,
+     "source_index": true,
      "summary": "An action's effect is a provenance map, and one execution identifies it."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 4.5,
      "harvested": false,
      "matched": [
@@ -4653,7 +4683,7 @@
      "summary": "Perfect Algorithm V1 \u2014 the model itself."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -4672,7 +4702,7 @@
      "summary": "Universal Computer-Use Agent: Zero-Model, Zero-Knowledge-House Causal Engine (v1)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -4687,23 +4717,6 @@
      "sha256": "7608f847c5cede41",
      "source_index": true,
      "summary": "One trial, and what one trial is actually worth: a contract, not a trajectory."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 3.75,
-     "harvested": false,
-     "matched": [
-      "causal@doc",
-      "causal@symbol",
-      "residual@doc",
-      "residual@symbol",
-      "model@doc"
-     ],
-     "path": "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
-     "score": 11.25,
-     "sha256": "8da6b19c5845543c",
-     "source_index": true,
-     "summary": "1ms CoW Angelic Causal Fault Localization, Repo-Native Component Mining,"
     }
    ],
    "vendored_donors_excluded": 1
@@ -4712,13 +4725,13 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3283,
+ "modules_scanned": 3301,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.0356,
-   "chance_source_recall": 0.1276,
+   "chance_route_recall": 0.1164,
+   "chance_source_recall": 0.1027,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
@@ -4733,7 +4746,7 @@
      "routed_hit": [
       "python.repository.acceptance.measure.v1",
       "software.repair.choreograph.crossfile.v1",
-      "python.fault.localize.dynamic.dataflow.v1"
+      "python.software.repair.apply.verified.v1"
      ],
      "routed_top": [
       "python.repository.acceptance.measure.v1",
@@ -4742,9 +4755,9 @@
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/swe_kernel/metamorphic_oracle_v1.py",
-      "canonical/runtime/edit_kind_learning_v1.py",
-      "canonical/runtime/fix_shape_v1.py"
+      "canonical/tools/identify_a_real_bugs_fix_v1.py",
+      "canonical/tools/swebench_issue_localizer_v1.py",
+      "canonical/tools/the_failing_run_names_the_expression_v1.py"
      ]
     },
     {
@@ -4787,55 +4800,55 @@
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/candidate_under_the_tasks_tests_measure_v1.py",
       "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py",
-      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py",
-      "canonical/runtime/bound_capabilities/python_tests_generate_scaffold.py"
+      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py"
      ]
     },
     {
-     "coverage": 0.833333,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "repair a repository from a failing test using a metamorphic oracle",
      "route_hit": true,
      "routed_hit": [
-      "software.repair.choreograph.crossfile.v1",
       "python.repository.acceptance.measure.v1",
-      "python.software.repair.apply.verified.v1"
+      "software.repair.choreograph.crossfile.v1",
+      "python.patch.search.test_guided.ast.v1"
      ],
      "routed_top": [
-      "software.repair.choreograph.crossfile.v1",
       "python.repository.acceptance.measure.v1",
+      "software.repair.choreograph.crossfile.v1",
       "evidence.oracle.hypothesis_property.v1"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/swe_kernel/metamorphic_oracle_v1.py",
-      "canonical/swe_kernel/metamorphic_laws_v1.py",
-      "canonical/swe_kernel/oracle_density_v1.py"
+      "canonical/tools/the_failing_run_names_the_expression_v1.py",
+      "canonical/tools/identify_a_real_bugs_fix_v1.py"
      ]
     },
     {
-     "coverage": 0.5,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "localize the fault by bisecting revisions",
      "route_hit": true,
      "routed_hit": [
       "python.fault.localize.dynamic.dataflow.v1",
-      "python.fault.provenance.interprocedural.value.v1",
-      "python.software.repair.loop.coupled.ast.v1"
+      "engine:COW_IMPACT_TEST_REPAIR_ENGINE",
+      "python.fault.provenance.interprocedural.value.v1"
      ],
      "routed_top": [
       "python.fault.localize.dynamic.dataflow.v1",
-      "python.fault.patch.supercomposer.v1",
-      "python.fault.provenance.fusion.v1"
+      "engine:COW_IMPACT_TEST_REPAIR_ENGINE",
+      "python.fault.patch.supercomposer.v1"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/p2_membership_residual_localizer_v1.py",
       "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
-      "canonical/runtime/raw_task_acceptance_residual_localizer_v1.py"
+      "canonical/tools/pass_what_the_callee_wanted_v1.py"
      ]
     },
     {
@@ -4856,84 +4869,97 @@
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/the_replacement_expression_v1.py",
       "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py",
-      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py",
-      "canonical/runtime/harbor_pro_patch_handoff_v1.py"
+      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py"
      ]
     }
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0134,
-   "chance_source_recall": 0.0642,
-   "frontier_route_hit_recall": 0.0,
-   "frontier_source_hit_recall": 0.667,
-   "native_route_hit_recall": 0.333,
+   "chance_route_recall": 0.0547,
+   "chance_source_recall": 0.0513,
+   "frontier_route_hit_recall": 1.0,
+   "frontier_source_hit_recall": 1.0,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
-     "coverage": 0.5,
+     "coverage": 0.666667,
      "hit": true,
      "kind": "frontier",
      "query": "operate a browser page by clicking elements on screen",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION",
+      "engine:OSWORLD_BROWSER_OPS"
+     ],
      "routed_top": [
       "web.browser.rendered.capture.chromedriver",
       "git.repository.operate.v1",
-      "python.swe.transform_and_synthesize.v1"
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/browser_state_information_safe_candidate.py",
       "canonical/runtime/aimed_action_v1.py",
-      "canonical/runtime/gui_room_v1.py"
+      "canonical/tools/inert_action_prior_measure_v1.py"
      ]
     },
     {
-     "coverage": 0.0,
+     "coverage": 0.166667,
      "hit": true,
      "kind": "frontier",
      "query": "drive an unfamiliar desktop application through its GUI",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:INTERFACE_ACTION_GRAMMAR"
+     ],
+     "routed_top": [
+      "engine:INTERFACE_ACTION_GRAMMAR"
+     ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/gui_invariance_census_v1.py",
       "canonical/runtime/environment_learning_v1.py",
-      "canonical/runtime/gui_room_v1.py",
-      "canonical/runtime/osworld_v21_gui_goal_verifier_v1.py"
+      "canonical/tools/harvest_capability_receipts_v1.py"
+     ]
+    },
+    {
+     "coverage": 0.857143,
+     "hit": true,
+     "kind": "frontier",
+     "query": "read the screen, decide the next action, and verify the effect",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION"
+     ],
+     "routed_top": [
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT",
+      "chart.read.binary_phase_solvus.v1",
+      "chart.read.legend_linear_intersection.v1"
+     ],
+     "source_hit": true,
+     "source_top": [
+      "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py",
+      "canonical/tools/quixbugs_edit_kind_transfer_measure_v1.py",
+      "canonical/runtime/cross_document_effect_calculus_verify_v1.py"
      ]
     },
     {
      "coverage": 0.571429,
-     "hit": false,
-     "kind": "frontier",
-     "query": "read the screen, decide the next action, and verify the effect",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "chart.read.binary_phase_solvus.v1",
-      "chart.read.legend_linear_intersection.v1",
-      "archive.verify.tar_gz.gnu"
-     ],
-     "source_hit": false,
-     "source_top": [
-      "canonical/runtime/cross_document_effect_hypothesis_worldset_verify_v1.py",
-      "canonical/swe_kernel/effect_witness_v1.py",
-      "canonical/runtime/terminal_next_action_compiler_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.285714,
      "hit": true,
      "kind": "native",
      "query": "drive the OSWorld guest through CDP browser ops",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:OSWORLD_BROWSER_OPS",
+      "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE"
+     ],
      "routed_top": [
+      "engine:OSWORLD_BROWSER_OPS",
       "web.browser.rendered.capture.chromedriver",
-      "python.issue.natural_language.parse_edit_intent.v1"
+      "engine:VERIFIED_ZERO_SCREENSHOT_ACTION_CACHE"
      ],
      "source_hit": true,
      "source_top": [
@@ -4961,7 +4987,7 @@
      "source_top": [
       "canonical/runtime/compound_visual_feature_resolver.py",
       "canonical/runtime/engineering_feature_notation.py",
-      "canonical/runtime/explicit_compound_requirement_decomposer.py"
+      "canonical/tools/follow_the_pointer_v1.py"
      ]
     },
     {
@@ -4969,122 +4995,141 @@
      "hit": true,
      "kind": "native",
      "query": "bind a sensor request into guest state ops",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:OSWORLD_BROWSER_OPS",
+      "engine:DOM_STATE_ENVIRONMENT",
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION"
+     ],
      "routed_top": [
       "evidence.claim_spec.bind.explicit_comparison.stdlib",
       "python.software.request.semantic_behavior.compile.v1",
-      "python.issue.natural_language.parse_edit_intent.v1"
+      "engine:OSWORLD_BROWSER_OPS"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/osworld_sensor_request_bridge_v1.py",
-      "canonical/runtime/osworld_v21_state_ops_v1.py",
-      "canonical/runtime/osworld_v21_browser_ops_v1.py"
+      "canonical/tools/a_sensor_request_is_computable_v1.py",
+      "canonical/runtime/osworld_v21_state_ops_v1.py"
      ]
     }
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0067,
-   "chance_source_recall": 0.0125,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0212,
+   "chance_source_recall": 0.0102,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
-   "native_route_hit_recall": 0.333,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 0.333,
    "rows": [
     {
-     "coverage": 0.285714,
-     "hit": false,
+     "coverage": 0.714286,
+     "hit": true,
      "kind": "frontier",
      "query": "keep improving on new tasks without forgetting earlier ones",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION"
+     ],
      "routed_top": [
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
       "python.source.add_function.v1",
       "python.vcs.merge_conflict.resolve.v1"
      ],
      "source_hit": false,
      "source_top": [
-      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
-      "canonical/runtime/regression_sweep_v1.py",
-      "canonical/swe_kernel/every_call_site_v1.py"
+      "canonical/tools/function_found_from_task_text_measure_v1.py",
+      "canonical/tools/the_guide_is_a_test_suite_v1.py",
+      "canonical/tools/a_new_literal_in_an_existing_construct_v1.py"
      ]
     },
     {
-     "coverage": 0.25,
-     "hit": false,
+     "coverage": 1.0,
+     "hit": true,
      "kind": "frontier",
      "query": "expire rules that no longer hold and keep the store current",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION"
+     ],
      "routed_top": [
-      "python.vcs.merge_conflict.resolve.v1",
-      "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1"
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
+      "python.vcs.merge_conflict.resolve.v1"
      ],
      "source_hit": false,
      "source_top": [
-      "canonical/runtime/harbor_science_evidence_store_v1.py",
-      "canonical/runtime/instant_condition_store_v1.py",
-      "canonical/runtime/instruction_policy_v1.py"
+      "canonical/tools/the_guide_is_a_test_suite_v1.py",
+      "canonical/tools/admission_corpus_audit_v1.py",
+      "canonical/tools/measure_law_store_flat_lookup_v1.py"
      ]
     },
     {
-     "coverage": 0.5,
+     "coverage": 0.666667,
      "hit": true,
      "kind": "frontier",
      "query": "detect drift between what was taught and what is now true",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION"
+     ],
      "routed_top": [
-      "git.history.bisect_regression.v1",
-      "file.question.taught_words.v1",
-      "python.review.diff_security_gate.v1"
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
+      "git.history.bisect_regression.v1"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/taught_words_true_capability_adapter_v1.py",
-      "canonical/runtime/taught_words_v1.py",
-      "canonical/swe_kernel/test_suite_admission_v1.py"
+      "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+      "canonical/capabilities/true/oracles/file_question_taught_words_oracles_v1.py"
      ]
     },
     {
-     "coverage": 0.142857,
+     "coverage": 0.714286,
      "hit": true,
      "kind": "native",
      "query": "expire a rule whose scope no longer holds",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "canonical/runtime/abc_observable_trace_scope_rebind_verifier_v1.py.auto.v1",
-      "canonical/runtime/coverage_cc_r3_mission_scope_bridge_guard_v1.py.auto.v1",
-      "canonical/runtime/cursorbench_constructive_scope_information_nogo_v1.py.auto.v1"
+     "route_hit": true,
+     "routed_hit": [
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
-     "source_hit": true,
-     "source_top": [
-      "canonical/swe_kernel/rule_scope_learning_v1.py",
-      "canonical/runtime/instruction_policy_v1.py",
-      "canonical/swe_kernel/consistency_vs_equivalence_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.4,
-     "hit": false,
-     "kind": "native",
-     "query": "consolidate without drift and keep the store current",
-     "route_hit": false,
-     "routed_hit": [],
      "routed_top": [
-      "python.vcs.merge_conflict.resolve.v1",
-      "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "canonical/runtime/current_26_zero_reality_frontier_v1.py.auto.v1"
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
+      "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "source_hit": false,
      "source_top": [
-      "canonical/runtime/harbor_science_evidence_store_v1.py",
-      "canonical/runtime/instant_condition_store_v1.py",
-      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py"
+      "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
+      "canonical/swe_kernel/rule_scope_learning_v1.py",
+      "canonical/tools/the_guide_is_a_test_suite_v1.py"
+     ]
+    },
+    {
+     "coverage": 1.0,
+     "hit": true,
+     "kind": "native",
+     "query": "consolidate without drift and keep the store current",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+     ],
+     "routed_top": [
+      "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
+      "python.vcs.merge_conflict.resolve.v1",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+     ],
+     "source_hit": false,
+     "source_top": [
+      "canonical/tools/the_guide_is_a_test_suite_v1.py",
+      "canonical/tools/measure_law_store_flat_lookup_v1.py",
+      "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py"
      ]
     },
     {
@@ -5102,217 +5147,251 @@
       "decision.synthesis.verify.stdlib",
       "canonical/runtime/k6_decision_refinement_compiler_v1.py.auto.v1"
      ],
-     "source_hit": false,
+     "source_hit": true,
      "source_top": [
-      "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py",
-      "canonical/runtime/cognitive_decision_kernel.py",
-      "canonical/runtime/deterministic_decision_primitives.py"
+      "canonical/tools/the_right_question_is_an_experiment_v1.py",
+      "canonical/tools/across_environments_v1.py",
+      "canonical/runtime/bound_capabilities/decision_evidence_locate_verify.py"
      ]
     }
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.0022,
-   "chance_source_recall": 0.0767,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0582,
+   "chance_source_recall": 0.0608,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
-   "native_route_hit_recall": 0.0,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
-     "coverage": 0.5,
+     "coverage": 0.833333,
      "hit": true,
      "kind": "frontier",
      "query": "learn a new capability from a single demonstration without training",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION"
+     ],
      "routed_top": [
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION",
       "python.source.add_function.v1",
-      "python.refactor.inline_helper.v1",
-      "canonical/runtime/five_primitive_role_single_semantic_frontier_v1.py.auto.v1"
+      "engine:LIVEBENCH_IF_CONSTRAINT_SOLVER"
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/runtime/permanence_amplifies_check_v1.py",
-      "canonical/runtime/learn_to_learn_v1.py",
-      "canonical/runtime/demonstration_version_space_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.333333,
-     "hit": true,
-     "kind": "frontier",
-     "query": "infer a program from one example and prove it works",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "python.tests.mutation_score.v1",
-      "python.software.request.semantic_behavior.compile.v1",
-      "software.hardcore.kernel.orchestrate.v1"
-     ],
-     "source_hit": true,
-     "source_top": [
-      "canonical/runtime/cli_capability_acquisition_v1.py",
-      "canonical/runtime/program_synthesis_v1.py",
-      "canonical/runtime/quoted_in_the_task_text_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.4,
-     "hit": true,
-     "kind": "frontier",
-     "query": "generalize one episode into a reusable rule",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "engine:LEARNING_EPISODE",
-      "python.tests.mutation_score.v1",
-      "meta:ONE_SHOT_REALITY_CLOSURE"
-     ],
-     "source_hit": true,
-     "source_top": [
-      "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-      "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py",
-      "canonical/swe_kernel/operator_generalization_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.333333,
-     "hit": true,
-     "kind": "native",
-     "query": "acquire a capability by inducing the program then proving it works",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "python.software.request.semantic_behavior.compile.v1",
-      "software.hardcore.kernel.orchestrate.v1",
-      "software.synthesis.grid_induction.v1"
-     ],
-     "source_hit": true,
-     "source_top": [
-      "canonical/runtime/cli_capability_acquisition_v1.py",
-      "canonical/runtime/auto_python_source_codec_acquisition.py",
-      "canonical/runtime/finite_grid_program_inducer_v1.py"
-     ]
-    },
-    {
-     "coverage": 0.2,
-     "hit": true,
-     "kind": "native",
-     "query": "anti-unify two examples into one rule",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [
-      "python.tests.mutation_score.v1",
-      "meta:ONE_SHOT_REALITY_CLOSURE"
-     ],
-     "source_hit": true,
-     "source_top": [
-      "canonical/swe_kernel/taught_actions/edit_by_example_v1.py",
-      "canonical/runtime/bound_capabilities/python_test_corpus_discovery_v1.py",
-      "canonical/runtime/a_goal_that_needs_two_moves_v1.py"
+      "canonical/tools/instant_learning_in_a_new_environment_v1.py",
+      "canonical/tools/experience_corpus_training_readiness_v1.py",
+      "canonical/tools/across_environments_v1.py"
      ]
     },
     {
      "coverage": 0.5,
      "hit": true,
-     "kind": "native",
-     "query": "teach a lesson from one trace",
-     "route_hit": false,
-     "routed_hit": [],
+     "kind": "frontier",
+     "query": "infer a program from one example and prove it works",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:EDIT_BY_EXAMPLE_PROSE",
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION",
+      "engine:INSTANT_ONE_SHOT_LEARNER"
+     ],
      "routed_top": [
-      "python.tests.mutation_score.v1",
-      "python.fault.provenance.interprocedural.value.v1",
-      "meta:ONE_SHOT_REALITY_CLOSURE"
+      "engine:EDIT_BY_EXAMPLE_PROSE",
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION",
+      "engine:DUAL_PROGRAM_SPLICING"
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/swe_kernel/lesson_localization_v1.py",
-      "canonical/runtime/take_out_v1.py",
-      "canonical/swe_kernel/lesson_admission_gate_v1.py"
+      "canonical/runtime/cli_capability_acquisition_v1.py",
+      "canonical/tools/repeated_change_one_example_measure_v1.py",
+      "canonical/runtime/program_synthesis_v1.py"
+     ]
+    },
+    {
+     "coverage": 0.6,
+     "hit": true,
+     "kind": "frontier",
+     "query": "generalize one episode into a reusable rule",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:VERIFIED_SKILL_CRYSTALLIZER",
+      "engine:INSTANT_ONE_SHOT_LEARNER"
+     ],
+     "routed_top": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+     ],
+     "source_hit": true,
+     "source_top": [
+      "canonical/tools/the_page_is_the_guide_v1.py",
+      "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
+      "canonical/tools/rule_generalization_probe_v1.py"
+     ]
+    },
+    {
+     "coverage": 0.666667,
+     "hit": true,
+     "kind": "native",
+     "query": "acquire a capability by inducing the program then proving it works",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION"
+     ],
+     "routed_top": [
+      "engine:ABSTAIN_GATED_SKILL_INDUCTION",
+      "engine:DUAL_PROGRAM_SPLICING",
+      "engine:KOAN_AIMED_PROGRAM_EDITS"
+     ],
+     "source_hit": true,
+     "source_top": [
+      "canonical/runtime/cli_capability_acquisition_v1.py",
+      "canonical/tools/receipt_program_identity_v1.py",
+      "canonical/tools/acquire_the_second_witness_v1.py"
+     ]
+    },
+    {
+     "coverage": 0.6,
+     "hit": true,
+     "kind": "native",
+     "query": "anti-unify two examples into one rule",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:VERIFIED_SKILL_CRYSTALLIZER",
+      "engine:INSTANT_ONE_SHOT_LEARNER"
+     ],
+     "routed_top": [
+      "engine:CROSS_MODAL_TOMOGRAPHY_PETRI",
+      "engine:CONTRASTIVE_ORACLE_BOOTSTRAP",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+     ],
+     "source_hit": true,
+     "source_top": [
+      "canonical/tools/aimed_edits_from_the_program_and_the_failure_v1.py",
+      "canonical/tools/one_contrast_one_effect_v1.py",
+      "canonical/tools/rule_generalization_probe_v1.py"
+     ]
+    },
+    {
+     "coverage": 0.75,
+     "hit": true,
+     "kind": "native",
+     "query": "teach a lesson from one trace",
+     "route_hit": true,
+     "routed_hit": [
+      "engine:LESSON_ADMISSION_GATE",
+      "engine:INSTANT_ONE_SHOT_LEARNER",
+      "engine:CAUSAL_TRACE_SKILL_COMPILER"
+     ],
+     "routed_top": [
+      "engine:LESSON_ADMISSION_GATE",
+      "engine:INSTANT_ONE_SHOT_LEARNER",
+      "python.tests.mutation_score.v1"
+     ],
+     "source_hit": true,
+     "source_top": [
+      "canonical/tools/cross_language_lesson_transfer_probe_v1.py",
+      "canonical/tools/quixbugs_one_fix_transfer_measure_v1.py",
+      "canonical/tools/the_goal_is_a_quotient_of_the_trace_v1.py"
      ]
     }
    ]
   },
   "memory": {
-   "chance_route_recall": 0.0067,
-   "chance_source_recall": 0.0812,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0617,
+   "chance_source_recall": 0.065,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
-   "native_route_hit_recall": 0.333,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
-     "coverage": 0.375,
+     "coverage": 0.625,
      "hit": true,
      "kind": "frontier",
      "query": "recall the right prior episode as context when the window is nearly full",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "engine:PROSE_CLAIM_EXPERIMENT",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+     ],
      "routed_top": [
-      "engine:LEARNING_EPISODE",
-      "python.repo.diff_apply_full_testgate.v1",
-      "canonical/runtime/livebench_legacy15_punkt_context_quotient_v1.py.auto.v1"
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "engine:PROSE_CLAIM_EXPERIMENT",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/_ambient.py",
       "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-      "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
       "canonical/runtime/property_v1.py"
      ]
     },
     {
-     "coverage": 0.25,
+     "coverage": 0.75,
      "hit": true,
      "kind": "frontier",
      "query": "keep a durable memory of prior runs that stays correct as it grows",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+     ],
      "routed_top": [
-      "python.swe.transform_and_synthesize.v1",
-      "python.vcs.merge_conflict.resolve.v1"
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
+      "python.vcs.merge_conflict.resolve.v1",
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/runtime/associative_memory_v1.py",
-      "canonical/runtime/h100_zero_learned_event_memory_v1.py",
-      "canonical/runtime/memory_policy_v1.py"
+      "canonical/tools/the_frame_crosses_the_machine_v1.py",
+      "canonical/tools/humanevalfix_experience_stream_measure_v1.py",
+      "canonical/tools/the_guide_is_a_test_suite_v1.py"
      ]
     },
     {
-     "coverage": 0.166667,
-     "hit": false,
+     "coverage": 0.333333,
+     "hit": true,
      "kind": "frontier",
      "query": "compress a long trajectory without losing the facts it carried",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
+     ],
      "routed_top": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT",
       "canonical/verification/run_long_horizon_continuity_v1.py.auto.v1"
      ],
      "source_hit": false,
      "source_top": [
+      "canonical/tools/the_refusal_is_the_other_half_v1.py",
       "canonical/runtime/p1_trajectory_t0_t2_multiplex_preflight.py",
-      "canonical/runtime/trajectory_failure_information_safe_candidate.py",
-      "canonical/runtime/trajectory_failure_information_safe_candidate_v2.py"
+      "canonical/runtime/trajectory_failure_information_safe_candidate.py"
      ]
     },
     {
-     "coverage": 0.4,
+     "coverage": 0.8,
      "hit": true,
      "kind": "native",
      "query": "recall from the chunk archive by content address",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
+     ],
      "routed_top": [
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
       "archive.tar_gz.create_from_manifest",
-      "archive.verify.tar_gz.gnu",
-      "docx.document.verify.intent_ooxml"
+      "archive.verify.tar_gz.gnu"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/release_chunk_archive_v1.py",
-      "canonical/runtime/raw_goal_archive_acceptance_v1.py",
-      "canonical/runtime/raw_goal_archive_compound_acceptance_v1.py"
+      "canonical/tools/solve_with_a_calibrated_judge_v1.py",
+      "canonical/runtime/raw_goal_archive_acceptance_v1.py"
      ]
     },
     {
@@ -5331,36 +5410,39 @@
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/runtime/verify_taught_words_provenance_v1.py",
-      "canonical/runtime/fibo_q2_2026_full_release_authority_v1.py",
-      "canonical/runtime/unknown_domain_direct_candidate_v1.py"
+      "canonical/tools/derived_value_full_suite_receipt_v1.py",
+      "canonical/tools/scan_retrieve_fetch_v1.py",
+      "canonical/capabilities/internalized/causal_falsification/agent_replay_v1/agent_replay/_ambient.py"
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 0.6,
      "hit": true,
      "kind": "native",
      "query": "compact an episode journal without losing facts",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY"
+     ],
      "routed_top": [
+      "engine:PROCEDURE_TRAJECTORY_MEMORY",
       "engine:LEARNING_EPISODE"
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/the_refusal_is_the_other_half_v1.py",
       "canonical/runtime/universal_solver_episode_verification_authenticator_v1.py",
-      "canonical/runtime/executable_skill_program_v7.py",
-      "canonical/runtime/universal_verified_adaptive_solver_v4.py"
+      "canonical/tools/frames_that_cross_machines_v1.py"
      ]
     }
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.0757,
-   "chance_source_recall": 0.1432,
-   "frontier_route_hit_recall": 0.667,
+   "chance_route_recall": 0.1287,
+   "chance_source_recall": 0.1143,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
-   "native_route_hit_recall": 0.333,
+   "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 0.667,
    "rows": [
     {
@@ -5370,8 +5452,8 @@
      "query": "refuse when the evidence does not establish the claim",
      "route_hit": true,
      "routed_hit": [
-      "canonical/runtime/p3_required_claim_grounded_realization_cell_v1.py.auto.v1",
-      "canonical/runtime/p3_required_claim_grounded_realization_cell_v2.py.auto.v1"
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE",
+      "engine:PROSE_CLAIM_EXPERIMENT"
      ],
      "routed_top": [
       "evidence.claim_relation.generic_units.stdlib",
@@ -5381,8 +5463,8 @@
      "source_hit": false,
      "source_top": [
       "canonical/runtime/evidence_demand_v1.py",
-      "canonical/swe_kernel/standing_facts_v1.py",
-      "canonical/runtime/r2_exact_evidence_claim_support_direct_adequacy_v1.py"
+      "canonical/runtime/r2_exact_evidence_claim_support_direct_adequacy_v1.py",
+      "canonical/swe_kernel/standing_facts_v1.py"
      ]
     },
     {
@@ -5392,39 +5474,40 @@
      "query": "prove the result with an independent witness",
      "route_hit": true,
      "routed_hit": [
-      "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1",
-      "canonical/runtime/livebench_legacy15_joint_witness_v1.py.auto.v1",
-      "canonical/runtime/livebench_legacy_single_constraint_witness_v1.py.auto.v1"
+      "engine:COUNTERFACTUAL_DISCR_TREE_SKILL_ROUTER",
+      "engine:FRONTIER_FST_LENS_SYNTHESIS"
      ],
      "routed_top": [
       "shell.command.run",
-      "canonical/runtime/brain_witness_contamination_admissibility_v1.py.auto.v1",
-      "canonical/runtime/livebench_if_reference_free_compound_witness_v1.py.auto.v1"
+      "decision.synthesis.verify.stdlib",
+      "docx.document.verify.intent_ooxml"
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/the_harness_must_prove_it_can_see_v1.py",
       "canonical/runtime/brain_witness_normalization_verifier_v1.py",
-      "canonical/swe_kernel/differential_witness_inversion_v1.py",
-      "canonical/swe_kernel/effect_witness_v1.py"
+      "canonical/swe_kernel/differential_witness_inversion_v1.py"
      ]
     },
     {
-     "coverage": 0.666667,
+     "coverage": 1.0,
      "hit": true,
      "kind": "frontier",
      "query": "verify that a receipt was not edited after the fact",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE"
+     ],
      "routed_top": [
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE",
       "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1",
-      "python.source.dead_code.v1",
       "archive.verify.tar_gz.gnu"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/sec_inline_xbrl_fact_anchor_verify_v1.py",
-      "canonical/runtime/h100_verified_capability_registry_v3.py",
-      "canonical/runtime/regcap_contextual_fact_independent_verify_v1.py"
+      "canonical/tools/isolated_effect_receipt_verifier_v1.py",
+      "canonical/runtime/h100_verified_capability_registry_v3.py"
      ]
     },
     {
@@ -5434,12 +5517,13 @@
      "query": "refuse fail-closed when the binding pin is not current",
      "route_hit": true,
      "routed_hit": [
-      "canonical.runtime.binding_pin_is_current_v1.hidden.v1"
+      "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE"
      ],
      "routed_top": [
       "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "python.source.dead_code.v1",
-      "orchestration.verify.bridge_enumeration.v1"
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE",
+      "python.source.dead_code.v1"
      ],
      "source_hit": false,
      "source_top": [
@@ -5449,75 +5533,91 @@
      ]
     },
     {
-     "coverage": 0.6,
+     "coverage": 0.8,
      "hit": true,
      "kind": "native",
      "query": "verify two witnesses that are not constant",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE"
+     ],
      "routed_top": [
-      "python.source.dead_code.v1",
-      "python.swe.transform_and_synthesize.v1",
-      "archive.verify.tar_gz.gnu"
+      "engine:ADVERSARIAL_MUTATION_ADMISSION_GATE",
+      "archive.verify.tar_gz.gnu",
+      "code.patch.tree_sitter.verify.v1"
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/swe_kernel/adaptive_constant_concept_bridge_v1.py",
-      "canonical/runtime/file_artifact_expectation_v1.py",
-      "canonical/runtime/a_goal_that_needs_two_moves_v1.py"
+      "canonical/tools/a_failure_is_worth_two_to_the_keys_kept_v1.py",
+      "canonical/tools/demonstration_pair_selection_20261112_v1.py",
+      "canonical/tools/benchmark_four_leaps_v1.py"
      ]
     },
     {
-     "coverage": 0.0,
+     "coverage": 0.8,
      "hit": true,
      "kind": "native",
      "query": "manufacture what the refusal asks for instead of faking it",
-     "route_hit": false,
-     "routed_hit": [],
-     "routed_top": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:CANONICAL_ORACLE_VERICODING_SPINE"
+     ],
+     "routed_top": [
+      "engine:CANONICAL_ORACLE_VERICODING_SPINE",
+      "engine:KOAN_REFUSAL_CURRICULUM",
+      "engine:REFUSAL_ARTIFACT_MANUFACTURER"
+     ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/manufacture_what_the_refusal_asks_for_v1.py",
-      "canonical/swe_kernel/distinguishing_projection_v1.py",
-      "canonical/runtime/a_refusal_is_a_specification_v1.py"
+      "canonical/tools/ask_instead_of_stare_v1.py",
+      "canonical/swe_kernel/distinguishing_projection_v1.py"
      ]
     }
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0045,
-   "chance_source_recall": 0.054,
-   "frontier_route_hit_recall": 0.0,
+   "chance_route_recall": 0.0441,
+   "chance_source_recall": 0.0432,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
-   "native_route_hit_recall": 0.0,
+   "native_route_hit_recall": 0.667,
    "native_source_hit_recall": 1.0,
    "rows": [
     {
-     "coverage": 0.285714,
+     "coverage": 0.714286,
      "hit": true,
      "kind": "frontier",
      "query": "predict the next screen state before taking the action",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT",
+      "canonical.runtime.state_contract_world_model_v1.hidden.v1"
+     ],
      "routed_top": [
-      "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
-      "canonical/runtime/current_state_obs_reducer.py.auto.v1",
-      "engine:REACHED_ESCAPE_STATE"
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION",
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT"
      ],
      "source_hit": true,
      "source_top": [
-      "canonical/swe_kernel/safe_action_model_v1.py",
-      "canonical/runtime/terminal_next_action_compiler_v1.py",
-      "canonical/swe_kernel/demonstration_sufficiency_v1.py"
+      "canonical/tools/the_precondition_is_not_in_the_trace_v1.py",
+      "canonical/tools/does_density_predict_accuracy_v1.py",
+      "canonical/tools/predict_which_contrast_matters_v1.py"
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 0.4,
      "hit": true,
      "kind": "frontier",
      "query": "simulate the consequence of a patch before applying it",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:C_ASAN_CEGIS_REPAIR",
+      "engine:JS_CAUSAL_CEGIS_REPAIR"
+     ],
      "routed_top": [
       "code.patch.tree_sitter.verify.v1",
       "python.fault.patch.supercomposer.v1",
@@ -5525,45 +5625,52 @@
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/one_experience_every_consequence_v1.py",
       "canonical/runtime/r3_deterministic_mapping_guard_patch_author_v1.py",
-      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py",
-      "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py"
+      "canonical/runtime/r3_deterministic_mode_guard_patch_author_v1.py"
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 0.8,
      "hit": true,
      "kind": "frontier",
      "query": "forecast whether an outcome will follow from this plan",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL"
+     ],
      "routed_top": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
       "python.source.crossfile_edit.choreograph.v1"
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/tools/follow_the_pointer_v1.py",
       "canonical/swe_kernel/safe_action_model_v1.py",
-      "canonical/runtime/bound_goal_plan_adapter_v1.py",
-      "canonical/runtime/explicit_rubric_plan_optimizer.py"
+      "canonical/tools/plan_admission_v1.py"
      ]
     },
     {
-     "coverage": 0.333333,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "project the state delta of an action before doing it",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT",
+      "canonical.runtime.state_contract_world_model_v1.hidden.v1"
+     ],
      "routed_top": [
-      "canonical/runtime/root3_minimum_action_cut_v1.py.auto.v1",
-      "canonical/runtime/current_state_obs_reducer.py.auto.v1",
-      "engine:REACHED_ESCAPE_STATE"
+      "engine:STATE_CONTRACT_WORLD_MODEL",
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION",
+      "engine:FINANCE_QUANTITATIVE_ALGEBRA"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/look_before_v1.py",
-      "canonical/runtime/evidence_state.py",
-      "canonical/runtime/ask_the_subcommand_before_you_call_it_unbound_v1.py"
+      "canonical/tools/the_precondition_is_not_in_the_trace_v1.py",
+      "canonical/tools/miniwob_one_success_generalisation_measure_v1.py"
      ]
     },
     {
@@ -5571,37 +5678,41 @@
      "hit": true,
      "kind": "native",
      "query": "rank residual causes for an observed effect",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT",
+      "engine:ANGELIC_LENS_COW_REPAIR",
+      "engine:REVERSE_TOMOGRAPHY_ALGEBRA"
+     ],
      "routed_top": [
       "source.objective_relevance.rank.bm25",
-      "auto.apt.zint",
-      "canonical/runtime/root3_current_credited_zero_effect_reconciliation_verifier_v1.py.auto.v1"
+      "engine:CAUSAL_GOAL_COMPUTER_AGENT",
+      "auto.apt.zint"
      ],
      "source_hit": true,
      "source_top": [
       "canonical/runtime/cross_document_residual_effect_frontier_verify_v1.py",
-      "canonical/runtime/compounding_probe_rank_v5.py",
+      "canonical/tools/an_actions_effect_is_a_provenance_map_v1.py",
       "canonical/runtime/residual_priority_v8.py"
      ]
     },
     {
-     "coverage": 0.75,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "falsify the control loop hypothesis",
      "route_hit": false,
      "routed_hit": [],
      "routed_top": [
+      "engine:PREDICATE_UI_WORLD_ABSTRACTION",
       "software.repair.loop.cegis_hypothesis.v1",
-      "python.software.repair.loop.strict_progress.ast.v1",
-      "python.software.repair.loop.coupled.ast.v1"
+      "python.software.repair.loop.strict_progress.ast.v1"
      ],
      "source_hit": true,
      "source_top": [
+      "canonical/capabilities/internalized/software_engineering/mini_swe_agent_2_4_6/vendored/src/minisweagent/models/utils/cache_control.py",
       "canonical/runtime/terminal_falsification_control_loop_v1.py",
-      "canonical/runtime/terminal_falsification_control_loop_v2.py",
-      "canonical/runtime/terminal_falsification_control_loop_v3.py"
+      "canonical/runtime/terminal_falsification_control_loop_v2.py"
      ]
     }
    ]
