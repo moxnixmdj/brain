@@ -31,8 +31,15 @@ INTERCEPTABLE = {
     "subprocess.getstatusoutput": "subprocess.run",
 }
 
-# Known process/control APIs that are not reducible to the two subprocess
-# attributes. Presence of any such call keeps the two-chokepoint proof open.
+# `asyncio.create_subprocess_exec` / `_shell` are NOT unmediated. Measured
+# 2026-11-24: patching `subprocess.Popen` with a spy and awaiting
+# `asyncio.create_subprocess_exec("/bin/echo", "hi")` shows Popen receiving
+# `('/bin/echo', 'hi')` -- asyncio builds the child through exactly the attribute
+# the mediator already wraps, so it is interceptable by the same two chokepoints.
+# Listing it here made the universe unprovable, which bricked every root3 module
+# (registry import raises PROCESS_UNIVERSE_NOT_TWO_CHOKEPOINT_SAFE) and left nine
+# governance test modules un-runnable at collection. Re-add either name ONLY if a
+# future measurement shows Popen is bypassed.
 UNMEDIATED_EXACT = {
     "os.system",
     "os.popen",
@@ -40,8 +47,6 @@ UNMEDIATED_EXACT = {
     "os.forkpty",
     "os.posix_spawn",
     "os.posix_spawnp",
-    "asyncio.create_subprocess_exec",
-    "asyncio.create_subprocess_shell",
     "multiprocessing.Process",
     "concurrent.futures.ProcessPoolExecutor",
     "pty.spawn",
