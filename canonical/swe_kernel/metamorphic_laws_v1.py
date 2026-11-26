@@ -543,3 +543,52 @@ def check_content_retyping(
                     f"{_escape_site(exc, package) or 'unknown site'}: {exc}",
                 ))
     return out
+
+
+def self_check() -> dict[str, Any]:
+    """Run each law against a program that must trip it and one that must not.
+
+    A law library is worth what it can tell apart. Every check below has a paired negative: a law
+    that fires on everything measures nothing, and a law that fires on nothing is dead weight the
+    docstring already calls "silent". `safe_equal` is checked for its third value too, because
+    collapsing "not comparable" into "not equal" is the failure mode that makes cross-version
+    comparisons lie.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    tripped = check_idempotence("normalize", lambda s: s + "!", ["x"], "x!")
+    quiet = check_idempotence("strip", lambda s: s.strip(), [" x "], "x")
+    check("idempotence law fires on a non-idempotent function", len(tripped) == 1)
+    check("idempotence law names the law that fired",
+          bool(tripped) and tripped[0].get("law") == "idempotence")
+    check("idempotence law stays silent on an idempotent function", quiet == [])
+    check("the law discriminates", (len(tripped) > 0) != (len(quiet) > 0))
+
+    check("safe_equal accepts equal values", safe_equal([1, 2], [1, 2]) is True)
+    check("safe_equal rejects unequal values", safe_equal([1], [2]) is False)
+    check("safe_equal refuses to guess on lazy values",
+          safe_equal((x for x in [1]), (x for x in [1])) is None)
+
+    asserty = "def f(x):\n    assert x > 0\n    return x\n"
+    guarded = "def g(x):\n    if x <= 0:\n        raise ValueError('x must be positive')\n    return x\n"
+    check("assert-as-validation is reported",
+          any(v.get("law") == "assert_validation" for v in static_assert_validation(asserty, "m")))
+    check("explicit raise is not reported",
+          static_assert_validation(guarded, "m") == [])
+
+    mutants = mutations_for([1, "ab", None])
+    check("every argument position receives a mutant",
+          sorted(i for i, _, _ in mutants) == [0, 1, 2])
+
+    total = 10
+    return {
+        "schema": "BRAIN_METAMORPHIC_LAWS_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
