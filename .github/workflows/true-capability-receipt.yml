@@ -20,9 +20,23 @@ permissions:
 jobs:
   measure:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # Sized by measurement, not by habit.  Eleven specs at their declared minimum of 2,000 fresh
+    # instances take 734 s end to end on a warm Linux host, and one of them --
+    # FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 -- had still not finished after 1,000 s when this
+    # comment was written.  The 15-minute ceiling this file used to carry killed the job inside the
+    # loop, so recent runs reported "exceeded the maximum execution time of 15m0s" instead of a
+    # measurement verdict, and the receipts this job exists to produce never completed.  60 minutes
+    # is what lets the loop reach the last spec; the per-spec elapsed time is printed below so the
+    # next adjustment starts from a log line instead of a guess.  Note what this does NOT do: the
+    # slow spec is not skipped, because a spec that cannot be measured in reasonable time is a
+    # defect to fix in the spec, not a line to delete from the run.
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the harness reads the working tree and nothing else; a full clone of this repo's
+          # ~92 MB object store spent minutes of the budget on history the job never looks at
+          fetch-depth: 1
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -34,8 +48,10 @@ jobs:
           mkdir -p receipts_out
           status=0
           for spec in canonical/capabilities/true/specs/*.json; do
+            started=$SECONDS
             python3 execution_guard/true_capability_harness_v1.py run --spec "$spec" --instances 2000 \
               --receipt-dir receipts_out --ledger receipts_out/TRUE_CAPABILITY_LEDGER_V1.json || status=1
+            echo "spec=$(basename "$spec") elapsed_s=$((SECONDS-started))"
           done
           exit $status
       - uses: actions/upload-artifact@v4
