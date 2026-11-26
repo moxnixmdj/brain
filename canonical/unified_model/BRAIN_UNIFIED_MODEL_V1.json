@@ -33047,7 +33047,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7446,
+  "research_index_records": 7447,
   "routing_tokens": 3798,
   "skills": 18,
   "source_index_entry_points": 567,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1d71fb15c8f66382b1a63a27822ceb44f9742f1867fec9a96e6d64aea781ab6f"
+  "value": "39759d28782208a8ab48f275af3a4e999690ca0aa2088cef8d92f27fa747f907"
  },
  "engines": [
   {
@@ -111155,7 +111155,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 22314,
+   "bytes": 23430,
    "headings": [
     "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
     "0. The answer in one paragraph",
@@ -111179,7 +111179,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "FRONTIER_PLAN_V3_20261126.md",
-   "sha256": "1b896fb53564ddc1a8a085aba1b45f70cbbcdcf10bb1ac58e841ad5b93f44b3f",
+   "sha256": "183f5b70590d7009fc08a2ffce8663ee903b48898b0a3280bdccec3b23d7f807",
    "summary": "**Date:** 2026-11-26 · **Branch base:** `main@ac5c1015` · **Status:** plan, not a claim",
    "terms": {
     "0.59": 7,
@@ -111194,21 +111194,23 @@
     "claim": 19,
     "cost": 14,
     "dependency": 8,
-    "every": 10,
+    "every": 12,
+    "first": 7,
     "frontier": 14,
     "harness": 9,
     "learning": 7,
     "makes": 8,
-    "measured": 8,
+    "measured": 9,
     "meme": 9,
     "memory": 17,
     "model": 19,
-    "module": 7,
-    "modules": 11,
-    "no": 22,
-    "not": 43,
+    "module": 8,
+    "modules": 15,
+    "must": 7,
+    "no": 23,
+    "not": 48,
     "number": 10,
-    "numbers": 9,
+    "numbers": 10,
     "one": 11,
     "only": 10,
     "oracle": 7,
@@ -111219,17 +111221,15 @@
     "problem": 9,
     "rate": 10,
     "real": 11,
-    "repo": 7,
-    "run": 9,
+    "run": 10,
     "same": 8,
     "swe-bench": 8,
     "task": 8,
     "tasks": 12,
     "terminal-bench": 8,
-    "ttt": 7,
     "verified": 8,
     "vs": 8,
-    "wave": 22
+    "wave": 23
    },
    "title": "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
    "title_terms": [
@@ -163312,7 +163312,7 @@
   "included_source_count": 2456,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4b63001ba340da3cfc08979e03d06bd69bbc375aa931aa2f2f88a68a82ba13d5"
+  "source_tree_digest": "4a66bb908829eaf3037eb0c65405d3474a5edb532291bb21aab6f524ff8b05a3"
  },
  "research_index": [
   {
@@ -340361,6 +340361,51 @@
     "questions": 2,
     "smaller": 2,
     "tracking": 2
+   }
+  },
+  {
+   "action_id": "WAVE43_CORRECTION_OF_THE_PLAN_NUMBERS_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/WAVE43_CORRECTION_OF_THE_PLAN_NUMBERS_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE43_CORRECTION_OF_THE_PLAN_NUMBERS_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "39d8c8c8d72c2f02c32423d48b361098210539933213822ad4003368f8cdb414",
+   "status": "SHIPPED",
+   "terms": {
+    "20261126": 1,
+    "996": 1,
+    "bank": 1,
+    "capability": 1,
+    "correction": 1,
+    "different": 1,
+    "document": 1,
+    "documents": 1,
+    "dormant": 1,
+    "estimate": 1,
+    "exist": 1,
+    "frontier": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "modules": 1,
+    "next": 1,
+    "nine-times-too-large": 1,
+    "not": 1,
+    "numbers": 1,
+    "one": 1,
+    "plan": 2,
+    "reader": 1,
+    "record": 1,
+    "removes": 1,
+    "repository": 1,
+    "same": 2,
+    "shipped": 1,
+    "size": 1,
+    "sizes": 1,
+    "stale": 1,
+    "state": 1,
+    "steers": 1,
+    "tree": 1
    }
   },
   {
