@@ -1,5 +1,5 @@
 {
-  "admission_coverage_ratio": 0.005155,
+  "admission_coverage_ratio": 0.005269,
   "authority": "NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS",
   "certified_capabilities": {
     "AUTHENTICATED_PARETO_SCHEDULE_V1": {
@@ -130,6 +130,30 @@
       "receipt_present": true,
       "verdict": "VERIFIED_OWNED_EQUAL_OR_BETTER"
     },
+    "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_through_the_front_door",
+      "entry_module": "canonical/runtime/file_change_true_capability_adapter_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 500,
+      "receipt": "canonical/capabilities/true/receipts/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1__47bef8f1ea2618ef.json",
+      "receipt_present": true,
+      "solver_blob": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+      "spec": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+      "verdict": "PASS"
+    },
+    "FILE_QUESTION_TAUGHT_WORDS_V1": {
+      "class": "TRUE_CAPABILITY",
+      "entry_function": "solve_through_the_front_door",
+      "entry_module": "canonical/runtime/taught_words_true_capability_adapter_v1.py",
+      "fresh_pass_rate": 1.0,
+      "instances": 500,
+      "receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+      "receipt_present": true,
+      "solver_blob": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+      "spec": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+      "verdict": "PASS"
+    },
     "PARETO_FRONTIER_UPDATE_V1": {
       "class": "TRUE_CAPABILITY",
       "entry_function": "solve_frontier",
@@ -160,18 +184,18 @@
       "entry_module": "canonical/runtime/same_identity_supervisor.py",
       "fresh_pass_rate": 1.0,
       "instances": 2000,
-      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
+      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
       "receipt_present": true,
       "solver_blob": "ae66843e0d178801889a77e7700769a45a78b57e",
       "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
       "verdict": "PASS"
     }
   },
-  "certified_count": 16,
+  "certified_count": 18,
   "cost_usd": 0.0,
   "counts": {
     "component_sizes_desc": [
-      "1422",
+      "1572",
       "37",
       "33",
       "32",
@@ -184,18 +208,18 @@
       "11",
       "11"
     ],
-    "components": 3544,
-    "distinct_schema_constants": 1993,
-    "import_edges": 3479,
-    "max_fan_out": 18,
-    "modules": 5915,
-    "modules_declaring_authority": 156,
-    "modules_exposing_def_main": 580,
-    "modules_with_no_internal_importer": 4627,
+    "components": 3911,
+    "distinct_schema_constants": 2238,
+    "import_edges": 3806,
+    "max_fan_out": 19,
+    "modules": 6449,
+    "modules_declaring_authority": 238,
+    "modules_exposing_def_main": 764,
+    "modules_with_no_internal_importer": 5067,
     "most_imported": [
       [
         "canonical.swe_kernel.verified_skill_crystallizer_v1",
-        70
+        72
       ],
       [
         "canonical.runtime.lossless_raw_task_contract_v1",
@@ -204,6 +228,10 @@
       [
         "canonical.runtime.effect_broker_receipt_resolver_v2",
         63
+      ],
+      [
+        "canonical.runtime.brain_unified_model_v1",
+        45
       ],
       [
         "canonical.runtime.live_integrated_brain_v1",
@@ -218,24 +246,28 @@
         31
       ],
       [
-        "canonical.runtime.bound_capabilities._swe_static_soundness_v1",
-        26
-      ],
-      [
-        "canonical.runtime.capability_planner",
-        26
+        "canonical.swe_kernel.concept_library_v1",
+        28
       ]
     ],
-    "runnable_entry_points": 2690,
-    "singletons": 3022,
+    "runnable_entry_points": 2990,
+    "singletons": 3380,
     "widest_importers": [
       [
         "canonical.swe_kernel.closed_loop_autonomous_controller_v1",
-        18
+        19
       ],
       [
         "canonical.runtime.universal_verified_adaptive_solver_v1",
         17
+      ],
+      [
+        "canonical.runtime.brain_unified_model_v1",
+        16
+      ],
+      [
+        "canonical.swe_kernel.perfect_algorithm_unified_v8",
+        16
       ],
       [
         "canonical.runtime.live_brain_route_admission_v1",
@@ -252,26 +284,18 @@
       [
         "canonical.tests.test_optimal_unified_creature_and_prc2_v1",
         12
-      ],
-      [
-        "canonical.runtime.universal_verified_adaptive_solver_v11",
-        10
-      ],
-      [
-        "canonical.runtime.universal_verified_adaptive_solver_v12",
-        10
       ]
     ]
   },
-  "fabric_sha256_16": "7e9412f672577beb",
-  "head": "d262c0ba",
+  "fabric_sha256_16": "5318717a8b80a71d",
+  "head": "88b3e543",
   "model_calls": 0,
   "reachability": {
-    "ENTRY_POINT": 566,
-    "IN_USE": 547,
-    "ISLAND": 1457,
-    "TEST": 2811,
-    "TEST_ONLY": 534
+    "ENTRY_POINT": 748,
+    "IN_USE": 605,
+    "ISLAND": 1512,
+    "TEST": 3033,
+    "TEST_ONLY": 551
   },
   "schema": "BRAIN_CAPABILITY_FABRIC_V1"
 }

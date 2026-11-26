@@ -9,7 +9,7 @@ The gate reads all four registry sources now, and one class was demoted from def
 registry and the snapshot floor are allowed to disagree (the merge is a union with the snapshot as a
 floor), so a divergence is drift to read, not something to block on. The last test pins that
 recomputation is not the reason the numbers went down: point the same code at a root without the spec
-files and the queue, and all nine certified capabilities are unenrolled again.
+files and the queue, and every certified capability is unenrolled again.
 """
 from __future__ import annotations
 
@@ -36,6 +36,21 @@ def _merged_rows() -> dict:
     return {**rows_of(EXTENDED), **rows_of(PROJECTION, "entries"), **rows_of(LIVE), **rows_of(SNAPSHOT)}
 LEDGER = ROOT / "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json"
 ADAPTERS = ROOT / "canonical/runtime/bound_capabilities"
+
+
+def _ledger_certified() -> int:
+    """How many capabilities the true-capability law certified, read straight from the ledger.
+
+    Every count below is derived from this rather than transcribed. The earlier revision pinned `9`,
+    which was true of the tree when the gate was written and became a false alarm the day main's Wave
+    43 measured two more capabilities: a snapshot number in a test measures the test's age, not the
+    code's health. The bite is unchanged -- the gate must agree with an independent read of the same
+    JSON, and a floor keeps a shrunken ledger from passing.
+    """
+    doc = json.loads(LEDGER.read_text(encoding="utf-8"))
+    rows = doc.get("rows") or {}
+    assert len(rows) >= 9, f"the ledger shrank to {len(rows)} rows -- nine certified capabilities is the floor"
+    return len(rows)
 
 
 def _fixture(tmp: pathlib.Path, rows: dict, ledger_rows: dict | None = None) -> dict[str, pathlib.Path]:
@@ -91,10 +106,17 @@ def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     assert r["native_kind_rows"] == len(native) and native
     assert not any("runtime_native_action" in x for x in r["defects"]["DANGLING_ADAPTER"])
 
-    assert r["certified_capabilities"] == 9
+    certified = _ledger_certified()
+    assert r["certified_capabilities"] == certified, (
+        f"the gate counted {r['certified_capabilities']} certified capabilities, the ledger lists {certified}"
+    )
     # Enrollment is graded, because the tree has two legitimate states: a row the root already reads,
     # and a pending binding queued for the receipt only CI may mint. Anything else is a defect.
-    assert r["registry_rows_extended"] == 2319, "the generated rows are registered, and one is not a typo"
+    extended_rows = len((json.loads(EXTENDED.read_text(encoding="utf-8")).get("capabilities") or {}))
+    assert r["registry_rows_extended"] == extended_rows >= 2000, (
+        f"the gate read {r['registry_rows_extended']} extended rows, the file holds {extended_rows}"
+        " -- and one of those numbers is a typo"
+    )
     # Every measured capability now has a row the dispatch surface reads. Before the enrollment tool
     # existed this was `["SACCR_CREDIT_ADDON_V1"]` and eight unenrolled; the count is the point, and the
     # bite test below is what stops it from being satisfied by a loosened rule.
@@ -103,7 +125,14 @@ def test_real_tree_defect_counts_match_an_independent_recomputation() -> None:
     )
     assert r["certified_pending_binding_only"] == []
     assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == 0
-    assert r["pending_bindings"] == len(list(PENDING.glob("*.json"))) == 16
+    # the invariant is agreement between the gate and the directory, not the size of the directory:
+    # the number 16 was a snapshot of the queue the day the test was written, and the enrollment of
+    # main's two newly measured capabilities legitimately grew it. A floor still catches a queue that
+    # is emptied out from under the gate.
+    assert r["pending_bindings"] == len(list(PENDING.glob("*.json"))) >= 16, (
+        f"the gate sees {r['pending_bindings']} queued bindings, the directory holds "
+        f"{len(list(PENDING.glob('*.json')))} -- one queue, one count"
+    )
     assert "REGISTRY_VS_SNAPSHOT_DIVERGENCE" not in r["defect_counts"], (
         "a by-design floor may not be a blocker: making it one is how a gate gets deleted"
     )
@@ -209,15 +238,15 @@ def test_owned_family_routes_are_counted_and_not_confused_with_enrollment() -> N
     assert r2["defects"]["FAMILY_ROUTE_FILE_MISSING"] == ["MADE_UP -> canonical/runtime/nope_v1.py"]
 
 
-def test_a_root_without_specs_or_queue_unenrolls_all_nine(tmp_path: pathlib.Path) -> None:
+def test_a_root_without_specs_or_queue_unenrolls_every_certified_capability(tmp_path: pathlib.Path) -> None:
     """The bite: the good numbers above come from files, not from a rule that stopped looking.
 
     Same registry and ledger JSON, same code, but a root with no spec files and no pending bindings:
-    nothing is traceable, so all nine certified capabilities are unenrolled and the root probe refuses
-    to answer rather than reporting the repository's counts.
+    nothing is traceable, so every certified capability is unenrolled and the root probe refuses to
+    answer rather than reporting the repository's counts.
     """
     r = gate.build(tmp_path, LIVE, SNAPSHOT, LEDGER, ADAPTERS)
-    assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == 9
+    assert r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] == _ledger_certified()
     assert r["certified_registry_bound"] == [] and r["certified_pending_binding_only"] == []
     assert r["registry_rows_admitted_by_root"] is None
     assert "skipped" in (r["admission_probe_error"] or "")
@@ -226,8 +255,9 @@ def test_a_root_without_specs_or_queue_unenrolls_all_nine(tmp_path: pathlib.Path
 def test_candidates_carry_evidence_and_refuse_to_invent_predicates() -> None:
     r = gate.build(pathlib.Path("/nonexistent-but-a-real-shape"), LIVE, SNAPSHOT, LEDGER, ADAPTERS)
     cands = gate.candidates(ROOT, LEDGER, r)
-    assert len(cands) == 9
-    assert len(cands) == r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"]
+    assert len(cands) == r["defect_counts"]["UNENROLLED_CERTIFIED_CAPABILITY"] > 0, (
+        "one candidate per certified capability, derived -- and never zero by way of a rule that stopped looking"
+    )
     for c in cands:
         assert c["provides"] is None and c["requires"] is None, "a predicate invented here is an unmeasured claim"
         assert c["incremental_spend_usd"] == 0

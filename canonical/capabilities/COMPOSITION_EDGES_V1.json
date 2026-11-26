@@ -481,6 +481,145 @@
         "PASS"
       ]
     },
+    "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1": {
+      "adapter": "canonical/runtime/bound_capabilities/truecap_file_change_request_copy_rename_append.py",
+      "canary_results": [],
+      "capability_id": "truecap.file_change_request_copy_rename_append",
+      "composition_verified_by_execution_at": "sandbox",
+      "digests": {
+        "generator": "6577c420005c647c",
+        "solver": "2de29e514d5bef11"
+      },
+      "expectation": {
+        "field": "status",
+        "type": "field_nonempty"
+      },
+      "fixture": "canonical/capabilities/true/instances/file_change_request_copy_rename_append.json",
+      "generator_module": "canonical/capabilities/true/generators/file_change_request_gen_v1.py",
+      "instances_generated": 3,
+      "kernel_entry": "solve_through_the_front_door",
+      "kernel_module": "canonical/runtime/file_change_true_capability_adapter_v1.py",
+      "note": "generator -> solver -> oracles executed on fresh instances in this sandbox; this certifies the EDGE contract, not independence of the verifier",
+      "oracle_verdicts": {
+        "ASKED_AGAIN_RELATION": {
+          "class": "METAMORPHIC",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        },
+        "FOLDER_BY_CONSTRUCTION": {
+          "class": "ANALYTIC_CLOSED_FORM",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        },
+        "UNTOUCHED_AND_BY_THE_ROW": {
+          "class": "PROPERTY",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        }
+      },
+      "result_fields": [
+        "answered",
+        "capability",
+        "not_files",
+        "state",
+        "status"
+      ],
+      "result_fields_always": [
+        "answered",
+        "capability",
+        "not_files",
+        "state",
+        "status"
+      ],
+      "solver_returned_object": true,
+      "solver_statuses_observed": [
+        "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+        "FAIL__RAW_GOAL_COMPILATION_GAP",
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      ],
+      "status_field_present": true,
+      "status_values": [
+        "FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT",
+        "FAIL__RAW_GOAL_COMPILATION_GAP",
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      ]
+    },
+    "FILE_QUESTION_TAUGHT_WORDS_V1": {
+      "adapter": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+      "canary_results": [],
+      "capability_id": "truecap.file_question_taught_words",
+      "composition_verified_by_execution_at": "sandbox",
+      "digests": {
+        "generator": "eac8b2c2d66a1be6",
+        "solver": "7e858ff2ef610d22"
+      },
+      "expectation": {
+        "field": "status",
+        "type": "field_equals",
+        "value": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      },
+      "fixture": "canonical/capabilities/true/instances/file_question_taught_words.json",
+      "generator_module": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py",
+      "instances_generated": 3,
+      "kernel_entry": "solve_through_the_front_door",
+      "kernel_module": "canonical/runtime/taught_words_true_capability_adapter_v1.py",
+      "note": "generator -> solver -> oracles executed on fresh instances in this sandbox; this certifies the EDGE contract, not independence of the verifier",
+      "oracle_verdicts": {
+        "ANSWER_ENVELOPE": {
+          "class": "PROPERTY",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        },
+        "DOUBLED_FILE_RELATION": {
+          "class": "METAMORPHIC",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        },
+        "VALUE_BY_CONSTRUCTION": {
+          "class": "ANALYTIC_CLOSED_FORM",
+          "error": 0,
+          "fail": 0,
+          "first_detail": null,
+          "of": 3,
+          "pass": 3
+        }
+      },
+      "result_fields": [
+        "answer",
+        "answered",
+        "capability",
+        "status"
+      ],
+      "result_fields_always": [
+        "answer",
+        "answered",
+        "capability",
+        "status"
+      ],
+      "solver_returned_object": true,
+      "solver_statuses_observed": [
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      ],
+      "status_field_present": true,
+      "status_values": [
+        "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      ]
+    },
     "PARETO_FRONTIER_UPDATE_V1": {
       "adapter": "canonical/runtime/bound_capabilities/truecap_pareto_frontier_update.py",
       "canary_results": [],

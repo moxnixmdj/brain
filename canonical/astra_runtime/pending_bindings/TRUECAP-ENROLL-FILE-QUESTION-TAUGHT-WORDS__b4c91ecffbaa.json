@@ -1,0 +1,133 @@
+{
+  "capability_id": "truecap.file_question_taught_words",
+  "contract": {
+    "declared_expectation": {
+      "field": "status",
+      "type": "field_equals",
+      "value": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+    },
+    "generator": {
+      "module": "canonical/capabilities/true/generators/file_question_taught_words_gen_v1.py"
+    },
+    "kernel": {
+      "entry": "solve_through_the_front_door",
+      "module": "canonical/runtime/taught_words_true_capability_adapter_v1.py"
+    },
+    "oracle_verdicts": {
+      "ANSWER_ENVELOPE": {
+        "class": "PROPERTY",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "DOUBLED_FILE_RELATION": {
+        "class": "METAMORPHIC",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      },
+      "VALUE_BY_CONSTRUCTION": {
+        "class": "ANALYTIC_CLOSED_FORM",
+        "error": 0,
+        "fail": 0,
+        "first_detail": null,
+        "of": 3,
+        "pass": 3
+      }
+    },
+    "solver_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+    "spec": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json"
+  },
+  "effect": "truecap.file_question_taught_words.outcome.answer",
+  "goal": "Promote the measured true capability FILE_QUESTION_TAUGHT_WORDS_V1 into the bound-capability lane: re-execute the adapter on the committed instance in a fresh process and issue the receipt the registry admission requires.",
+  "origin_mission_path": "canonical/capabilities/true/TRUE_CAPABILITY_LEDGER_V1.json",
+  "registry_entry": {
+    "action_template": {
+      "args": {
+        "capability_id": "truecap.file_question_taught_words",
+        "instance_path": "canonical/capabilities/true/instances/file_question_taught_words.json"
+      },
+      "expect": {
+        "field": "status",
+        "type": "field_equals",
+        "value": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+      },
+      "type": "invoke_capability"
+    },
+    "adapter_module": "truecap_file_question_taught_words",
+    "ambient_preconditions": [
+      "a committed instance fixture at canonical/capabilities/true/instances/file_question_taught_words.json, digest-pinned by the queue entry; if it is regenerated the edge must be re-measured, not re-labelled"
+    ],
+    "cost": 1,
+    "entrypoint": "run",
+    "fixture": "canonical/capabilities/true/instances/file_question_taught_words.json",
+    "fixture_error": null,
+    "incremental_spend_usd": 0,
+    "keywords": [
+      "file",
+      "measured",
+      "true-capability"
+    ],
+    "limitations": [
+      "NO sentence outside the generator's phrase tables: the lexicon holds 28 words and anything else is refused, which is measured only for one inserted word",
+      "NO word order: 'after the first' is never combined with another filter, because the row applies its parts in one fixed order and English does not",
+      "NO whitespace-only lines, tabs, carriage returns, non-UTF-8 bytes, files above 4 MiB, directories, or two files in one sentence",
+      "NO claim that the lessons are sufficient to learn any further word; the learner is not measured here, only the answers the stored lexicon gives",
+      "NO operation that changes a file, and nothing that starts a program",
+      "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+      "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+    ],
+    "platforms": [
+      "linux"
+    ],
+    "provides": [
+      "truecap.file_question_taught_words.outcome.answer",
+      "truecap.file_question_taught_words.outcome.answered",
+      "truecap.file_question_taught_words.outcome.capability",
+      "truecap.file_question_taught_words.outcome.status"
+    ],
+    "requires": [],
+    "result_fields": [
+      "adapter",
+      "capability_id",
+      "certification",
+      "answer",
+      "answered",
+      "capability",
+      "status"
+    ],
+    "result_fields_guaranteed": [
+      "adapter",
+      "answer",
+      "answered",
+      "capability",
+      "capability_id",
+      "certification",
+      "status"
+    ],
+    "source": {
+      "adapter_path": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+      "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
+      "measured_fresh_pass_rate": 1.0,
+      "measured_instances": 500,
+      "measured_utc": "2026-11-25T22:37:55Z",
+      "path": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+      "receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+      "solver_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+      "spec": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+      "type": "repository_python_source"
+    },
+    "status": "BOUND_PENDING_INDEPENDENT_VERIFICATION"
+  },
+  "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
+  "status": "PENDING_INDEPENDENT_VERIFICATION",
+  "verification_fixture": "canonical/capabilities/true/instances/file_question_taught_words.json",
+  "verification_fixture_sha256": "d720d4e02e6e209002ea614f14de00dd46f039e7e69c3151c8385f81e352b8b6",
+  "verification_mission_id": "TRUECAP-ENROLL-FILE-QUESTION-TAUGHT-WORDS__B4C91ECFFBAA",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-FILE-QUESTION-TAUGHT-WORDS__b4c91ecffbaa__VERIFY.json"
+}

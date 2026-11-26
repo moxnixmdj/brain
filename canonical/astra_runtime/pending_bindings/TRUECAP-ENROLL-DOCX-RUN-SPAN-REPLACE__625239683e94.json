@@ -142,7 +142,7 @@
   "schema": "PROJECT_BRAIN_PENDING_TRUE_CAPABILITY_BINDING_V1",
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/docx_run_span_replace.json",
-  "verification_fixture_sha256": "b36bdafe0683ca328ee332c4cd7a5078ace9daf80256a1fae3e279996b5c6ebb",
+  "verification_fixture_sha256": "e8159f47eeebc7b2b7836d2774a9a3f8e1d8cd778b7abaaa2542aa41652188b3",
   "verification_mission_id": "TRUECAP-ENROLL-DOCX-RUN-SPAN-REPLACE__625239683E94",
   "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-DOCX-RUN-SPAN-REPLACE__625239683e94__VERIFY.json"
 }

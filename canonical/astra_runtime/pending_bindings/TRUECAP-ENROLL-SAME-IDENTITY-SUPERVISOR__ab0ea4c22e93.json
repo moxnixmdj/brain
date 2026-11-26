@@ -130,9 +130,9 @@
       "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py",
       "measured_fresh_pass_rate": 1.0,
       "measured_instances": 2000,
-      "measured_utc": "2026-11-25T18:28:31Z",
+      "measured_utc": "2026-11-25T22:26:49Z",
       "path": "canonical/runtime/bound_capabilities/truecap_same_identity_supervisor.py",
-      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
+      "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
       "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
       "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
       "type": "repository_python_source"
@@ -143,6 +143,6 @@
   "status": "PENDING_INDEPENDENT_VERIFICATION",
   "verification_fixture": "canonical/capabilities/true/instances/same_identity_supervisor.json",
   "verification_fixture_sha256": "377330b010cf80c0a178d6c1dd0980e730d0c9cc924f3e5894b9fd445eaff479",
-  "verification_mission_id": "TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__7BB4C2CC3976",
-  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__7bb4c2cc3976__VERIFY.json"
+  "verification_mission_id": "TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__AB0EA4C22E93",
+  "verification_result_path": "canonical/astra_runtime/evidence/TRUECAP-ENROLL-SAME-IDENTITY-SUPERVISOR__ab0ea4c22e93__VERIFY.json"
 }

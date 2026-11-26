@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Every measured capability must reach the one registry the brain dispatches from -- by execution.
 
-The claim under test is narrow and checkable. For each of the nine capabilities that the true-capability
-law measured (fresh instances, independent oracles, mutation-tested):
+The claim under test is narrow and checkable. For each capability that the true-capability law measured
+(fresh instances, independent oracles, mutation-tested) -- whatever number that is today, read from the
+ledger rather than remembered in this file:
 
   * a thin adapter exists at the dispatch surface and *runs*;
   * the composition edge generator -> kernel -> oracles was executed, and every declared oracle verdict
@@ -39,6 +40,24 @@ def _slug(cap: str) -> str:
     return re.sub(r"_v\d+$", "", cap.lower())
 
 
+def _ledger_rows() -> list[str]:
+    """The capability ids the true-capability law measured -- read live, never snapshotted.
+
+    This is the only list the enrollment contract is allowed to be judged against: a test that keeps
+    its own copy of the row names silently stops covering the day a row is added, which is exactly
+    how two of main's newly measured capabilities went unenrolled for a whole merge.
+    """
+    return sorted((json.loads(LEDGER.read_text(encoding="utf-8")).get("rows") or {}))
+
+
+def _derived_count(check_output: str) -> int:
+    """How many capabilities `--check` derived, parsed out of its own report line."""
+    import re
+    m = re.search(r"(\d+) capabilities derived", check_output)
+    assert m, f"--check did not report a derived count: {check_output!r}"
+    return int(m.group(1))
+
+
 def _pending_for(capability_id: str) -> list[pathlib.Path]:
     out = []
     for f in sorted(PENDING.glob("TRUECAP-ENROLL-*.json")):
@@ -62,16 +81,25 @@ def _load_module(path: pathlib.Path, name: str):
 
 
 def test_check_re_derives_the_whole_enrollment_and_passes() -> None:
-    """`--check` executes every adapter with the receipt lane's own argument shape."""
+    """`--check` executes every adapter with the receipt lane's own argument shape.
+
+    The count is asserted against the ledger rather than transcribed. An earlier revision pinned "9
+    capabilities derived", and the day the ledger grew a row that assertion became a false alarm that
+    argued for editing the test; the number a reader wants is "the tool derived every row the law
+    measured", which is what this checks now.
+    """
     r = subprocess.run([sys.executable, str(TOOL), "--check"], cwd=ROOT,
                        capture_output=True, text=True, check=False)
     assert r.returncode == 0, f"drift between the code and the queue:\n{r.stdout}\n{r.stderr}"
-    assert "CHECK PASS" in r.stdout and "9 capabilities derived" in r.stdout, r.stdout
+    assert "CHECK PASS" in r.stdout, r.stdout
+    derived = _derived_count(r.stdout)
+    rows = len(_ledger_rows())
+    assert derived == rows, f"--check derived {derived} capabilities but the ledger holds {rows} rows"
 
 
 def test_every_measured_capability_is_queued_once_with_a_resolving_adapter() -> None:
-    caps = sorted((json.loads(LEDGER.read_text(encoding="utf-8")).get("rows") or {}))
-    assert len(caps) == 9
+    caps = _ledger_rows()
+    assert caps, "the true-capability ledger is empty -- there is nothing to enroll and no lane to feed"
     for cap in caps:
         cid = f"truecap.{_slug(cap)}"
         queued = _pending_for(cid)
@@ -227,7 +255,14 @@ def test_the_certification_still_describes_the_code_in_the_tree() -> None:
     re-measure it -- not to edit the number, which is how a stale claim becomes a permanent one.
     """
     rows = sorted((json.loads(LEDGER.read_text(encoding="utf-8")).get("rows") or {}).items())
-    assert len(rows) == 9
+    # the count is not the point; the coverage is. Asserting `== 9` here froze a snapshot, and the
+    # failure it produced when the ledger grew was an alarm about the test, not about the code. What
+    # must hold is that this loop sees exactly the population the queue claims to hold.
+    assert rows, "the ledger is empty, so this test would pass by checking nothing"
+    queued = sorted(p.name.split("__")[0] for p in PENDING.glob("TRUECAP-ENROLL-*.json"))
+    assert len(queued) == len(rows), (
+        f"{len(rows)} measured capabilities but {len(queued)} enrollment queue entries"
+    )
     for cap, row in rows:
         spec = json.loads((ROOT / row["spec_path"]).read_text(encoding="utf-8"))
         module = spec["solver"]["module"]

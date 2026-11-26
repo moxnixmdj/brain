@@ -1,0 +1,16 @@
+{
+  "dst": null,
+  "file": "k11dc6.log",
+  "files": {
+    "k11dc6.log": "caf\u00e9 42 beta\nbeta na\u00efve\ndelta\n",
+    "k1ac44.md": "x9\nok x9 gamma gamma\nalpha beta\ncaf\u00e9 delta x9 42",
+    "kd27a5.log": "\nalpha 42 beta beta\n",
+    "kd4c08.log": "alpha\n\ndelta caf\u00e9 ok\nx9 42 -3\n"
+  },
+  "folder": "zq2186c8",
+  "kind": "plain",
+  "line": "vde18",
+  "op": "append",
+  "sentence": "add a line containing vde18 to {file}",
+  "src": null
+}

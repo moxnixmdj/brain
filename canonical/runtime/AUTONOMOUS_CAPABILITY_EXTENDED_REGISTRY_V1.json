@@ -26137,11 +26137,151 @@
         "adapter_path": "canonical/runtime/bound_capabilities/truecap_same_identity_supervisor.py",
         "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
         "spec": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
-        "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__3b246db7861650fb.json",
+        "receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
         "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
         "measured_instances": 2000,
         "measured_fresh_pass_rate": 1.0,
-        "measured_utc": "2026-11-25T18:28:31Z",
+        "measured_utc": "2026-11-25T22:26:49Z",
+        "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py"
+      },
+      "status": "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION",
+      "verification": {
+        "verified": false,
+        "note": "No receipt exists for this adapter yet, and none is named here: `live_integrated_brain_v1._receipt_admits` reads `verification.receipt_path`, and a declaration must never be the thing that admits a capability. The lane mints the producer receipt on a real runner; independence is the workflow's OIDC-attested reproduction. This block is registration only."
+      }
+    },
+    "truecap.file_change_request_copy_rename_append": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "truecap.file_change_request_copy_rename_append",
+          "instance_path": "canonical/capabilities/true/instances/file_change_request_copy_rename_append.json"
+        },
+        "expect": {
+          "type": "field_nonempty",
+          "field": "status"
+        }
+      },
+      "adapter_module": "truecap_file_change_request_copy_rename_append",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "file",
+        "measured",
+        "true-capability"
+      ],
+      "limitations": [
+        "NO phrasing outside the fifteen in the generator's tables; other wordings are mostly refused and that is not measured here",
+        "NO overwriting: a request that asks to replace an existing destination is never generated",
+        "NO directories as source or destination, no destination in another or a missing folder, no absolute paths, no path outside the repository",
+        "NO appended line that is an ordinary English word, contains a quotation mark, or spans lines",
+        "NO files above a few hundred bytes, no binary content, no symbolic links, no concurrent writers",
+        "NO claim about any other file operation, and nothing that starts a program",
+        "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+        "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "truecap.file_change_request_copy_rename_append.outcome.answered",
+        "truecap.file_change_request_copy_rename_append.outcome.capability",
+        "truecap.file_change_request_copy_rename_append.outcome.not_files",
+        "truecap.file_change_request_copy_rename_append.outcome.state",
+        "truecap.file_change_request_copy_rename_append.outcome.status"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "capability_id",
+        "certification",
+        "answered",
+        "capability",
+        "not_files",
+        "state",
+        "status"
+      ],
+      "source": {
+        "type": "repository_python_source",
+        "path": "canonical/runtime/bound_capabilities/truecap_file_change_request_copy_rename_append.py",
+        "adapter_path": "canonical/runtime/bound_capabilities/truecap_file_change_request_copy_rename_append.py",
+        "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+        "spec": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+        "receipt": "canonical/capabilities/true/receipts/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1__47bef8f1ea2618ef.json",
+        "solver_git_blob_sha": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+        "measured_instances": 500,
+        "measured_fresh_pass_rate": 1.0,
+        "measured_utc": "2026-11-25T22:36:13Z",
+        "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py"
+      },
+      "status": "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION",
+      "verification": {
+        "verified": false,
+        "note": "No receipt exists for this adapter yet, and none is named here: `live_integrated_brain_v1._receipt_admits` reads `verification.receipt_path`, and a declaration must never be the thing that admits a capability. The lane mints the producer receipt on a real runner; independence is the workflow's OIDC-attested reproduction. This block is registration only."
+      }
+    },
+    "truecap.file_question_taught_words": {
+      "action_template": {
+        "type": "invoke_capability",
+        "args": {
+          "capability_id": "truecap.file_question_taught_words",
+          "instance_path": "canonical/capabilities/true/instances/file_question_taught_words.json"
+        },
+        "expect": {
+          "type": "field_equals",
+          "field": "status",
+          "value": "PASS__RAW_GOAL_COMPILED_FRONT_LOCAL_ADAPTER_EXECUTED_AND_VERIFIED__RAW_ACCEPTANCE_RECEIPTS_STILL_REQUIRED"
+        }
+      },
+      "adapter_module": "truecap_file_question_taught_words",
+      "cost": 1,
+      "entrypoint": "run",
+      "incremental_spend_usd": 0,
+      "keywords": [
+        "file",
+        "measured",
+        "true-capability"
+      ],
+      "limitations": [
+        "NO sentence outside the generator's phrase tables: the lexicon holds 28 words and anything else is refused, which is measured only for one inserted word",
+        "NO word order: 'after the first' is never combined with another filter, because the row applies its parts in one fixed order and English does not",
+        "NO whitespace-only lines, tabs, carriage returns, non-UTF-8 bytes, files above 4 MiB, directories, or two files in one sentence",
+        "NO claim that the lessons are sufficient to learn any further word; the learner is not measured here, only the answers the stored lexicon gives",
+        "NO operation that changes a file, and nothing that starts a program",
+        "`result_fields` is the union of keys observed across the measured outcomes and `result_fields_guaranteed` the intersection; a consumer that needs a field to exist must read the guaranteed set.",
+        "The receipt lane re-runs the committed instance (index #0) and cannot vary it: fresh-instance breadth is the certification's own measurement, recorded in canonical/capabilities/COMPOSITION_EDGES_V1.json and the ledger receipt."
+      ],
+      "platforms": [
+        "linux"
+      ],
+      "provides": [
+        "truecap.file_question_taught_words.outcome.answer",
+        "truecap.file_question_taught_words.outcome.answered",
+        "truecap.file_question_taught_words.outcome.capability",
+        "truecap.file_question_taught_words.outcome.status"
+      ],
+      "requires": [],
+      "result_fields": [
+        "adapter",
+        "capability_id",
+        "certification",
+        "answer",
+        "answered",
+        "capability",
+        "status"
+      ],
+      "source": {
+        "type": "repository_python_source",
+        "path": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+        "adapter_path": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+        "certification_law": "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+        "spec": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+        "receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+        "solver_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+        "measured_instances": 500,
+        "measured_fresh_pass_rate": 1.0,
+        "measured_utc": "2026-11-25T22:37:55Z",
         "enrolled_by": "canonical/tools/capability_enroll_certified_v1.py"
       },
       "status": "AWAITING_RECEIPT_AND_INDEPENDENT_VERIFICATION",
