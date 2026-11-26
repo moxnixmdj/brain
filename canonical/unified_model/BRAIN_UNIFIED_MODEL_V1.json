@@ -33044,7 +33044,7 @@
   "harvested_program_surfaces": 591,
   "knowledge_documents": 741,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7400,
+  "research_index_records": 7401,
   "routing_tokens": 2758,
   "skills": 18,
   "source_index_entry_points": 559,
@@ -33053,7 +33053,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "1fc53dc0935136e6438cd75400f09906b1106b3252cad4ca0537be78dc13476e"
+  "value": "cfb3628e16e0c18e656f85df2ab0bd8d9d440ae6ba366090521b4f0e722a3f31"
  },
  "engines": [
   {
@@ -315615,6 +315615,51 @@
     "site_by_intervention_20261116_v1": 1,
     "the_third_manufacturability_route_is_closed_by_measurement_with_a_proven_instrument__40_real_commits_188_confirmed_laws_0_kills_and_174_of_the_laws_are_bare_totality__the_cause_is_named_real_work_extends_a_specification_instead_of_violating_a_property__so_the_next_organ_must_compile_intent_into_the_discriminating_pair_rather_than_derive_it_from_the_artifact": 1,
     "v1": 1
+   }
+  },
+  {
+   "action_id": "SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b04f39d9ff180e7056939b257c938d5c1ec7394529c2d2c065eadd274a28530a",
+   "status": "SHIPPED",
+   "terms": {
+    "11.48": 1,
+    "13.7": 1,
+    "20261126": 1,
+    "25": 1,
+    "262.6": 1,
+    "27.33": 1,
+    "43.75": 1,
+    "across": 1,
+    "adversarial_mutation_admission_gate_v1": 1,
+    "arrays": 1,
+    "bare": 1,
+    "blind": 1,
+    "candidate": 2,
+    "canonical_swe_spine_v1": 1,
+    "capabilities_map": 1,
+    "cloning": 1,
+    "cold": 4,
+    "compilation": 1,
+    "copytree": 2,
+    "dependence": 2,
+    "due": 2,
+    "false": 2,
+    "full": 2,
+    "held-out": 2,
+    "k3": 2,
+    "model": 2,
+    "ms": 2,
+    "pytest": 2,
+    "refutations": 2,
+    "subprocess": 2,
+    "took": 2,
+    "unifiedmodel": 2
    }
   },
   {

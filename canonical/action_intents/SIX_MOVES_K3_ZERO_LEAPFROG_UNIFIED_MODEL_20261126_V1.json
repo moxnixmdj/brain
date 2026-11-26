@@ -1,0 +1,406 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_id": "SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1",
+  "action_intent_id": "SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1",
+  "action_kind": "REAL_CAPABILITY_ACQUISITION",
+  "date": "2026-11-26",
+  "status": "SHIPPED",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/swe_kernel/canonical_swe_spine_v1.py + canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py + canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+  "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "causal_blocker": "UnifiedModel cold open_model() took 27.33 ms (load_model 262.6 ms) due to 11.48 MB passive JSON arrays and full capabilities_map unmarshaling, full model compilation took 13.7 s without incremental Z-set deltas, SpeculativeSandbox performed O(|workspace|) copytree per candidate, canonical_swe_spine_v1 failed 5/8 suites on bare stdlib Python due to external pytest subprocess dependence, gradient_free_law_consolidation_v1 suffered 0 held-out coverage and 4 held-out false refutations, ConflictAwareMealyLearner lacked surprise-gated inert pruning, and adversarial_mutation_admission_gate_v1 left 25% default (43.75% full-corpus) mutants surviving",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UnifiedModel cold open_model() took 27.33 ms (load_model 262.6 ms) due to 11.48 MB passive JSON arrays and full capabilities_map unmarshaling, full model compilation took 13.7 s without incremental Z-set deltas, SpeculativeSandbox performed O(|workspace|) copytree per candidate, canonical_swe_spine_v1 failed 5/8 suites on bare stdlib Python due to external pytest subprocess dependence, gradient_free_law_consolidation_v1 suffered 0 held-out coverage and 4 held-out false refutations, ConflictAwareMealyLearner lacked surprise-gated inert pruning, and adversarial_mutation_admission_gate_v1 left 25% default (43.75% full-corpus) mutants surviving",
+  "action_summary": "Implement and wire the Six-Move K3=0 architecture on UnifiedModel: (Move 1) BRAIN_UNIFIED_CORE_V1.json + _LazyMarshalDict + mmap O(1) window verification cutting cold open_model() to 2.59 ms (101.4x vs load_model), 1.01 ms SQLite FTS5 BM25 search, and 561.6 ms DBSP Z-set delta compilation (24.4x speedup, byte-identical digest, 462 live capabilities); (Move 2) 4-shard os.fork() CoW ZygotePrewarmedPool candidate evaluation (>=25x speedup) + renameat2(RENAME_EXCHANGE) atomic file commit; (Move 3) zero-dependency stdlib_cow_test_runner_v1.py + CoW demand/witness abduction fast lane lifting test_canonical_swe_spine_v1 from 3/8 to 8/8 and solving 6/6 defect classes at model_calls == 0; (Move 4) Popper LFF negative-witness specialization + SemiPersistentEGraph consolidation v2 (2 unseen pyjwt held-out hits, 0 false refutations); (Move 5) surprise-gated C3AL organism + refusal-curriculum chain synthesis (7.85x step reduction); (Move 6) AST apartness distinguishing-tuple mutation gate v2 (6.25% full-corpus survivor rate across all 16 .hidden.v1 contract modules).",
+  "expected_parent_change": "UnifiedModel cold open_model() drops from 27.33 ms (load_model 262.6 ms) to 2.59 ms (0.08 ms warm), incremental Z-set compile drops from 13.7 s to 561.6 ms with exact SHA-256 parity, parallel CoW speculation achieves >=25x throughput over copytree+subprocess, SWE spine bare-Python pass rate rises from 3/8 to 8/8 (plus 6/6 fast-lane defect classes in <100 ms median), law consolidation v2 achieves 54.81% compression with 2 unseen pyjwt held-out clean refutations and 0 false refutations, surprise-gated environment discovery cuts exploration queries 7.85x (259 -> 33), and mutation gate v2 cuts full-corpus mutant survival from 43.75% (7/16) to 6.25% (1/16).",
+  "expected_parent_frontier_change": "Eliminates cold startup, cold recompilation, cold pytest subprocess dependence, copytree candidate cloning, over-generalized consolidation false refutations, blind Mealy exploration waste, and nominal-only mutation survival across UnifiedModel's K3=0 execution spines.",
+  "required_capability": "Sub-5ms cold front-door loading, incremental Z-set compilation, os.fork() CoW parallel speculation with atomic exchange commit, zero-dependency Python SWE abduction/repair, Popper+e-graph law consolidation with zero held-out false refutations, surprise-gated active environment discovery, and AST apartness mutation admission.",
+  "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+  "highest_leverage_now": true,
+  "incremental_spend_usd": 0,
+  "intentional_route_race": false,
+  "live_challenger_frontier_discovery_required": true,
+  "probe_specific": false,
+  "generic_repair_from_single_probe": true,
+  "governance_change": null,
+  "user_authorized_governance_change": false,
+  "weakens_existing_guard": false,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "progress_evidence_paths": [
+    "canonical/runtime/brain_unified_model_v1.py",
+    "canonical/runtime/compile_brain_unified_model_v1.py",
+    "canonical/runtime/gradient_free_law_consolidation_v2.py",
+    "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
+    "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
+    "canonical/swe_kernel/canonical_swe_spine_v1.py",
+    "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+    "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+    "canonical/tests/test_six_moves_leapfrog_v1.py"
+  ],
+  "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+  "route_id": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+  "selected_route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+  "selected_surviving_route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+  "route_order_walk": {
+    "DELETE": "Deleted 11.48 MB passive JSON arrays from hot startup path, deleted per-candidate shutil.copytree + double workspace rescans in SpeculativeSandbox, deleted external pytest subprocess dependency in SWE spine, and deleted blind zero-surprise action repetition.",
+    "BYPASS": "Bypassed full 13.35 MB JSON parse on open_model() via mmap O(1) schema/digest window checks + per-entry lazy marshal core.",
+    "REUSE": "Reused ZygotePrewarmedPool, Popper, SemiPersistentEGraph, the_failed_attempt_is_free_v1.exchange, the_assertion_is_the_demand_v1, the_relation_is_read_from_the_failing_run_v1, witness_inversion_v1, causal_nexus_v1, the_refusal_is_the_curriculum_v1, ask_instead_of_stare_v1, and Creature.",
+    "ADAPT": "Adapted compile_brain_unified_model_v1.py, brain_unified_model_v1.py, canonical_swe_spine_v1.py, canonical_cu_sandbox_spine_v1.py, and canonical_env_discovery_spine_v1.py to compose these owned organs cleanly.",
+    "COMPOSE": "Composed all 15 OIDC-verified .hidden.v1 modules and existing swe_kernel engines behind UnifiedModel front-door methods without modifying any pinned .hidden.v1 file.",
+    "SYNTHESIZE_NEW_PRIMITIVE": "SELECTED: added stdlib_cow_test_runner_v1.py (zero-dependency os.fork() CoW AST assertion/frame runner with sys.meta_path overlay), gradient_free_law_consolidation_v2.py (Popper negative-witness specialization + e-graph anti-unification), and adversarial_mutation_admission_gate_v2.py (AST apartness boundary/refusal probe synthesis) because existing primitives could not run SWE tests without external pytest or pass the Move 4 and Move 6 kill gates."
+  },
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+    "progress_evidence_paths": [
+      "canonical/runtime/brain_unified_model_v1.py",
+      "canonical/runtime/compile_brain_unified_model_v1.py",
+      "canonical/runtime/gradient_free_law_consolidation_v2.py",
+      "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
+      "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
+      "canonical/swe_kernel/canonical_swe_spine_v1.py",
+      "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+      "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+      "canonical/tests/test_six_moves_leapfrog_v1.py"
+    ],
+    "route_class": "SYNTHESIZE_NEW_PRIMITIVE",
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE/ADAPT/SUBSTITUTE/COMPOSE/CONFIGURE/INTEGRATE were applied first across all existing swe_kernel and .hidden.v1 modules, but bare-stdlib SWE execution without pytest required stdlib_cow_test_runner_v1.py, eliminating v1 law consolidation's 4 held-out false refutations required Popper negative-witness specialization in gradient_free_law_consolidation_v2.py, and driving .hidden.v1 mutant survival from 43.75% down to 6.25% required AST apartness probe synthesis in adversarial_mutation_admission_gate_v2.py.",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "independent_verification_completed": false,
+    "independent_verification_note": "Producer-run sandbox verification (38/38 verify_brain_unified_model_v1, 139/139 unified model + goal compiler tests, 8/8 test_canonical_swe_spine_v1, 12/12 test_unified_frontier_spines_v1, 6/6 test_six_moves_leapfrog_v1) plus GitHub Actions CI referee/repo-integrity-guard.",
+    "scope_complete_discharge": false,
+    "terminal_achieved": false,
+    "route_id": null,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
+    ]
+  },
+  "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
+  "capability_credit_delta": {
+    "move_1_cold_open_model_ms": "27.33 ms (262.6 ms load_model) -> 2.59 ms cold / 0.08 ms warm; delta compile 13,688 ms -> 561.6 ms (24.4x); verifier 38/38 PASS",
+    "move_2_cow_speculation": ">=25x parallel CoW candidate throughput via 4-shard ZygotePrewarmedPool + renameat2(RENAME_EXCHANGE) atomic file commit",
+    "move_3_swe_fast_lane": "test_canonical_swe_spine_v1 3/8 -> 8/8 on bare stdlib Python; 6/6 defect classes solved at K3=0 in <100 ms median",
+    "move_4_law_consolidation_v2": "135 -> 61 laws (54.81% compression), 44/45 clean refutations, 0 false refutations, held_out_clean_coverage 0 -> 2 (pyjwt), held_out_false_refutations 4 -> 0",
+    "move_5_surprise_gated_organism": "259 -> 33 queries (7.85x step reduction) on 14-action drifting refusal facility with 0 unrecovered state loss",
+    "move_6_mutation_gate_v2": "mutant survivor rate 25.0% default (43.75% full 16-capability corpus) -> 0.0% default / 6.25% (1/16, 15/16 killed)"
+  },
+  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 6/6 test_six_moves_leapfrog_v1 PASS; 8/8 test_canonical_swe_spine_v1 PASS; 12/12 test_unified_frontier_spines_v1 PASS; 139/139 unified model + goal compiler tests PASS; repo_integrity_guard 0 violations.",
+  "real_outcome": "UnifiedModel now opens cold in 2.59 ms, delta-compiles byte-identically in 561.6 ms, queries FTS5 in 1.01 ms, speculates candidates via os.fork() CoW + RENAME_EXCHANGE, repairs Python defects on bare stdlib without pytest at K3=0, consolidates laws with 0 held-out false refutations, discovers drifting environments in 7.85x fewer steps, and kills 15/16 AST mutants across all .hidden.v1 contract capabilities.",
+  "falsification_condition": "Falsified if verify_brain_unified_model_v1 drops below 38/38, if delta_compile_model() diverges by 1 byte from compile_model(), if any K3 model call occurs, if any .hidden.v1 SHA-256 pin changes, or if any Move 1-6 kill gate in test_six_moves_leapfrog_v1 fails.",
+  "stop_condition": "Stop this PR once all 6 move kill gates, 38/38 unified model verifier checks, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+  "next_step": "Extend AST statement-insertion abduction and containerized execution harnesses on multi-file unseen repositories while preserving K3=0 and sub-5ms front-door startup.",
+  "honest_limits": [
+    "1 of 16 .hidden.v1 capabilities (the_type_is_written_once_v1, 0 nominal mutants generated under arithmetic/comparison/boolean AST operators) accounts for the remaining 1/16 (6.25%) survivor count in Move 6.",
+    "Move 4 unseen-repo held-out clean refutation reaches 2/19 commits (both pyjwt) with 0/36 false refutations.",
+    "All benchmark measurements in this PR are producer-run sandbox measurements pending independent verification."
+  ],
+  "selectivity_note": "Strictly general zero-model mechanisms wired through UnifiedModel; all 15 OIDC-verified .hidden.v1 files and protected governance paths remain untouched.",
+  "verification": "verify_brain_unified_model_v1.py (38/38 PASS) + test_six_moves_leapfrog_v1 (6/6 OK) + test_canonical_swe_spine_v1 (8/8 OK) + repo_integrity_guard_v1.py (0 violations)",
+  "truth": {
+    "achieved": false,
+    "what_is_real": "2.59 ms cold open_model(), 561.6 ms Z-set delta compiler, 1.01 ms FTS5 search, 4-shard CoW Zygote speculation + RENAME_EXCHANGE, bare-stdlib 8/8 SWE spine + 6/6 fast-lane defect solver, Popper+e-graph law consolidation v2 (2 held-out hits, 0 false refutations), 7.85x surprise-gated Mealy step reduction, and 15/16 apartness mutation gate v2.",
+    "what_is_not": "Terminal truth discharge, independent third-party verification of these new v2 metrics, or full unseen multi-line algorithmic synthesis."
+  },
+  "load_bearing_primary": {
+    "constructive_gap_for_open_obligation_ids": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "expected_obligation_discharge_lcb": "0",
+    "expected_obligation_unlock_lcb": "1/81",
+    "interpretation": "Strengthens UnifiedModel's K3=0 runtime substrate across startup latency, incremental compilation, CoW speculation, bare-stdlib SWE repair, law consolidation, active environment discovery, and mutation admission without claiming discharge of any open terminal obligation.",
+    "open_obligation_ids": [],
+    "scope_complete_discharge": false,
+    "success_probability_lcb": "0.5",
+    "wall_clock_cost_ub": 1
+  },
+  "recursive_obs": {
+    "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "deleted_or_bypassed_paths": [
+      "11.48 MB passive cold arrays on the hot open_model() startup path",
+      "per-candidate shutil.copytree and double O(|workspace|) rglob rescans in SpeculativeSandbox",
+      "hardcoded external python3 -m pytest subprocess dependency in SWE spine",
+      "unconstrained 1-unification without negative-witness guards in v1 law consolidation",
+      "zero-surprise inert action repetition in blind Mealy BFS"
+    ],
+    "expected_parent_level_state_change": "Eliminates cold startup, cold recompilation, cold pytest subprocess dependence, copytree candidate cloning, over-generalized consolidation false refutations, blind Mealy exploration waste, and nominal-only mutation survival across UnifiedModel's K3=0 execution spines.",
+    "real_outcome": "Moves 1-6 wired into UnifiedModel and verified green across 38/38 unified model checks and 6/6 quantitative move gates at K3=0.",
+    "required_capability": "Sub-5ms front-door startup, incremental Z-set compilation, CoW parallel candidate speculation, bare-stdlib SWE abduction, zero-false-refutation law consolidation, surprise-gated environment discovery, and apartness-based mutation gating.",
+    "selected_surviving_route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+    "stop_condition": "Stop this PR once all 6 move kill gates, 38/38 unified model verifier checks, repo_integrity_guard, drift-immunity-guard, and load-bearing-primary-admission pass.",
+    "why_selected_route_is_fastest_sufficient": "Deletes 86.1% of cold bytes from startup and reuses existing OIDC-pinned .hidden.v1 and swe_kernel organs in-memory via os.fork() CoW rather than duplicating engines or invoking external processes.",
+    "obs_blocker": {
+      "blocker_is": "Hot/cold monolith bloat, cold subprocess/copytree overhead, missing negative-witness specialization in v1 consolidation, blind Mealy exploration, and nominal-only mutation probes",
+      "delete_bypass_substitute_options": [
+        "Delete cold arrays from hot core and mmap-verify digest/schema offsets in O(1)",
+        "Bypass cold subprocess pytest with in-memory os.fork() CoW AST assertion runner",
+        "Substitute nominal-only probes with AST-derived boundary and refusal apartness tuples"
+      ],
+      "evidence_the_blocker_is_real": [
+        "open_model() measured 27.33 ms cold (load_model 262.6 ms) before hot/cold split vs 2.59 ms after",
+        "test_canonical_swe_spine_v1 failed 5/8 tests on bare stdlib Python before stdlib_cow_test_runner_v1",
+        "v1 consolidation produced 0 held-out hits and 4 held-out false refutations; v1 mutation gate left 25% (7/16 full-corpus) survivors"
+      ],
+      "intrinsic_or_path_specific": "PATH_SPECIFIC to eager monolithic JSON loading, subprocess test spawning, unconstrained anti-unification, and single-input mutation testing",
+      "surviving_causal_blocker": "UnifiedModel cold open_model() took 27.33 ms (load_model 262.6 ms) due to 11.48 MB passive JSON arrays and full capabilities_map unmarshaling, full model compilation took 13.7 s without incremental Z-set deltas, SpeculativeSandbox performed O(|workspace|) copytree per candidate, canonical_swe_spine_v1 failed 5/8 suites on bare stdlib Python due to external pytest subprocess dependence, gradient_free_law_consolidation_v1 suffered 0 held-out coverage and 4 held-out false refutations, ConflictAwareMealyLearner lacked surprise-gated inert pruning, and adversarial_mutation_admission_gate_v1 left 25% default (43.75% full-corpus) mutants surviving"
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": "brain_unified_model_v1.py, compile_brain_unified_model_v1.py, ZygotePrewarmedPool, Popper, SemiPersistentEGraph, ConflictAwareMealyLearner, Creature, and all 15 OIDC-pinned .hidden.v1 modules",
+      "capability_work_deleted": [
+        "11.48 MB passive JSON parsing during open_model()",
+        "per-candidate shutil.copytree in SpeculativeSandbox",
+        "external pytest CLI requirement for SWE spine verification"
+      ],
+      "what_was_added": "Hot-core marshal/mmap split + SQLite FTS5 + DBSP Z-set delta compiler, 4-shard CoW Zygote batching + RENAME_EXCHANGE commit, stdlib_cow_test_runner_v1.py + SWE abduction fast lane, gradient_free_law_consolidation_v2.py, surprise-gated autonomous_pulse(), adversarial_mutation_admission_gate_v2.py, and test_six_moves_leapfrog_v1.py",
+      "external_existing_routes_checked": "DBSP incremental view maintenance (Budiu et al.), Popper LFF ILP (Cropper & Morel), babble library-learning e-graphs (Willsey et al.), L# apartness active automata learning (Vaandrager et al.), Linux renameat2(RENAME_EXCHANGE) and os.fork() CoW",
+      "surviving_gap": "Multi-line algorithmic synthesis on unseen repositories and official containerized benchmark runs"
+    },
+    "obs_goal": {
+      "proxy_goals_deleted": [
+        "editing pinned v1 files or weakening kill gates",
+        "relying on external pytest or LLM calls"
+      ],
+      "real_outcome": "All 6 quantitative K3=0 architecture moves verified end-to-end through UnifiedModel with 38/38 artifact verifier parity",
+      "surviving_necessity": "Broader statement-insertion synthesis and independent containerized benchmark execution"
+    },
+    "obs_inherited_system": {
+      "adjacent_capabilities_absorbed": "All 15 OIDC-verified .hidden.v1 capabilities (+13 receipts from #7107 = 462 live capabilities) and swe_kernel organs wired directly into UnifiedModel",
+      "downstream_work_to_delete_or_supersede": "Supersedes v1 law consolidation and v1 mutation gate via companion v2 organs without breaking v1 reproducibility",
+      "fresh_reuse_plan": "UnifiedModel exposes open_model(), fts5_search(), speculate_cow_candidates(), solve_swe_repo(), autonomous_pulse(), and invoke_frontier_organ() as single-front-door primitives"
+    },
+    "obs_obs": {
+      "affected_layers_only_on_revalidation": true,
+      "analysis_steps_deleted_or_cached": "DBSP Z-set manifest caches per-file SHA-256 bundle contributions so single-file edits recompile byte-identically in 561.6 ms instead of 13.7 s",
+      "search_stop_decision": "stopped once all 6 move kill gates, 38/38 unified model checks, 8/8 SWE spine tests, and 17/17 referee rules passed"
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "implementation_still_necessary": true,
+      "losing_routes_reason": "Eager monolithic JSON parsing cannot meet <5ms cold open; copytree+subprocess cannot meet >=25x parallel throughput; unconstrained anti-unification fails held-out false-refutation gates; nominal-only inputs leave 43.75% AST mutants alive",
+      "routes_ranked": [
+        {
+          "rank": 1,
+          "route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+          "why": "Meets all 6 quantitative kill gates at K3=0 with $0 spend and 38/38 verifier parity"
+        },
+        {
+          "rank": 2,
+          "route": "EAGER_MONOLITH_AND_SUBPROCESS_PYTEST_STATUS_QUO",
+          "why": "27.33 ms cold open, 13.7 s compile, 3/8 bare-Python SWE spine, and kill-gate failures on Moves 4 and 6"
+        }
+      ]
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "test_six_moves_leapfrog_v1.py verifies fresh-process cold latency, byte-identical Z-set digests, CoW vs copytree speedup, disk-verified SWE repairs, real git OSS held-out commits, drifting Mealy step counts, and 16-capability AST mutation kills"
+    },
+    "routes_considered": [
+      {
+        "route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+        "verdict": "SELECTED",
+        "why": "Passes all 6 quantitative kill gates and 38/38 unified model verification checks at K3=0"
+      },
+      {
+        "route": "EAGER_MONOLITH_AND_SUBPROCESS_PYTEST_STATUS_QUO",
+        "verdict": "REJECTED",
+        "why": "Fails cold-open, bare-stdlib SWE, held-out consolidation, and mutation survivor gates"
+      }
+    ],
+    "route_frontier": {
+      "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
+      "checked_at_utc": "2026-11-26T03:28:00+00:00",
+      "max_age_hours": 24,
+      "discovery_required": true,
+      "incumbent_route": "EAGER_MONOLITH_AND_SUBPROCESS_PYTEST_STATUS_QUO",
+      "selected_route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "challenger_routes": [
+        {
+          "route": "EAGER_MONOLITH_AND_SUBPROCESS_PYTEST_STATUS_QUO",
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CAPABILITY_STRENGTH": "3/8 bare-Python SWE spine, 0 held-out consolidation hits, 43.75% mutant survival",
+            "CORRECTNESS": "4 held-out false refutations in v1 consolidation",
+            "INCREMENTAL_COST": "$0.00",
+            "RELIABILITY": "breaks whenever external pytest CLI is absent",
+            "VERIFIABILITY": "35/38 before recompile",
+            "WALL_CLOCK": "27.33 ms cold open, 13.7 s full compile, copytree per candidate"
+          },
+          "evidence": [
+            "Direct benchmark comparison in canonical/tests/test_six_moves_leapfrog_v1.py"
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_six_moves_leapfrog_v1.py",
+            "canonical/runtime/verify_brain_unified_model_v1.py"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ]
+        }
+      ],
+      "negative_search_summary": "External LLM/VLM routes are forbidden by NO_MODEL_PRODUCER_COGNITION. Among zero-model routes, combining hot/cold marshal+mmap splitting, DBSP Z-sets, os.fork() CoW Zygote sharding, RENAME_EXCHANGE, Popper LFF specialization, e-graph anti-unification, surprise-gated active learning, and AST apartness probes strictly dominates the monolithic/subprocess baseline on every axis.",
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "DBSP incremental view maintenance Z-set delta compilation Budiu"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Popper learning from failures negative witness conflict specialization ILP"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "babble library learning anti-unification e-graph compression Willsey"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "L# apartness active automata learning distinguishing sequences Vaandrager"
+        }
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "canonical/runtime/brain_unified_model_v1.py",
+          "canonical/swe_kernel/zygote_worker_pool_v1.py",
+          "canonical/swe_kernel/popper_ilp_engine_v1.py",
+          "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py"
+        ],
+        "OFFICIAL_PRIMARY": [
+          "Linux renameat2(2) RENAME_EXCHANGE syscall interface and Python 3.11 mmap/sqlite3 FTS5 stdlib",
+          "upstream git commits in pyjwt, attrs, boltons, click, jinja, packaging, pluggy, starlette, werkzeug"
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "Python 3.11 standard library (ast, mmap, marshal, os.fork, sqlite3, ctypes, unittest)"
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Published DBSP, Popper ILP, babble anti-unification, and L# active learning literature"
+        ]
+      },
+      "unresolved_plausible_dominators": [],
+      "selected_route_preflight": {
+        "all_required_dependencies_ready": true,
+        "checked_at_utc": "2026-11-26T03:28:00+00:00",
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "max_age_hours": 2,
+        "selected_route": "SIX_MOVES_K3_ZERO_HOT_CORE_COW_POPPER_APARTNESS_UNIFIED_MODEL",
+        "status": "READY",
+        "execution_dependencies": [
+          {
+            "dependency": "Python 3.11 stdlib runtime with POSIX os.fork, mmap, sqlite3 FTS5, and Linux renameat2",
+            "kind": "LOCAL_RUNTIME",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "Verified 6/6 in test_six_moves_leapfrog_v1.py, 8/8 in test_canonical_swe_spine_v1.py, and 38/38 in verify_brain_unified_model_v1.py"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Canonical governance, referee, drift, and orientation validators",
+            "kind": "DATA_SOURCE",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "required": true,
+            "status": "READY",
+            "volatility": "STATIC",
+            "evidence": [
+              "repo_integrity_guard_v1.py PASS, enforce_goal_hierarchy.py PASS, enforce_load_bearing_primary_pr.py PASS"
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "currentness": {
+      "accepted_families": 5,
+      "meta_envelope_open_count": 8,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "terminal": false,
+      "total_open_truth_obligations": 30,
+      "unresolved_atomic": 22
+    },
+    "fresh_reality_authority": false,
+    "interface": "UNIVERSAL_SCOPE_AND_COMPOSITION",
+    "mode": "ACTIVE_INTERFACE",
+    "proof_state_reachability": "No open truth obligation is claimed discharged by this PR. This PR upgrades UnifiedModel's K3=0 startup, incremental compilation, CoW speculation, bare-stdlib SWE repair, law consolidation, environment discovery, and mutation admission substrates while keeping terminal truth false.",
+    "target_truth_obligations": [
+      "OSWORLD_2_1_PARTIAL_GE_81_8"
+    ],
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "counterexample_receipts": [
+        {
+          "git_blob_sha": "478f3cdef55518cfec98104ca6ce9c9e7e490b1d",
+          "path": "canonical/verification/PERFECT_ALGORITHM_RECEIPT_20261122_V1.json"
+        }
+      ],
+      "decisive_question": "Can UnifiedModel achieve <5ms cold open, byte-identical Z-set delta compilation, >=25x CoW candidate throughput, bare-stdlib Python SWE repair, zero held-out false refutations in law consolidation, >=5x surprise-gated Mealy step reduction, and <15% AST mutant survival at K3=0 without modifying any pinned .hidden.v1 module?",
+      "falsifier_id": "SIX_MOVES_LEAPFROG_QUANTITATIVE_KILL_GATE_SUITE_V1",
+      "known_counterexamples_checked": true,
+      "no_known_counterexample_reason": "",
+      "proposal_id": "SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_V1"
+    }
+  }
+}
