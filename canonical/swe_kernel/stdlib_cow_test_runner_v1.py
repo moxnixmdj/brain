@@ -264,9 +264,21 @@ def _execute_suite_in_current_process(
             sys.path.remove(p)
         sys.path.insert(0, p)
 
-    # Evict any previously cached modules belonging to `repo_root` so overlays & edits take effect!
+    # Evict any previously cached modules belonging to `repo_root` OR sharing a top-level
+    # module/package name inside `repo_root` (so earlier temporary repos never shadow `repo_root`)!
+    local_top_names: set[str] = set()
+    for base_d in ([src_dir, repo_root] if src_dir.is_dir() else [repo_root]):
+        for entry in base_d.iterdir():
+            if entry.is_file() and entry.suffix == ".py":
+                local_top_names.add(entry.stem)
+            elif entry.is_dir() and (entry / "__init__.py").is_file():
+                local_top_names.add(entry.name)
     root_prefix = str(repo_root)
     for mod_name, mod_obj in list(sys.modules.items()):
+        top_pkg = mod_name.split(".", 1)[0]
+        if top_pkg in local_top_names:
+            sys.modules.pop(mod_name, None)
+            continue
         mod_file = getattr(mod_obj, "__file__", None)
         if mod_file and str(pathlib.Path(mod_file).resolve()).startswith(root_prefix):
             sys.modules.pop(mod_name, None)

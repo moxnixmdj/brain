@@ -1312,9 +1312,9 @@ def solve_repository_task(
             law = law_store.add_verified_diff(
                 language="python",
                 failure_output=base_output,
-                old_source=witness_snapshot[win_rel].decode("utf-8", errors="replace"),
-                new_source=fast_res["patched_source"],
-                source_tag=f"MOVE3_FAST_LANE:{fast_res['channel']}",
+                orig_source=witness_snapshot[win_rel].decode("utf-8", errors="replace"),
+                patched_source=fast_res["patched_source"],
+                provenance=f"MOVE3_FAST_LANE:{fast_res['channel']}",
             )
             if law is not None:
                 crystallized_fast_id = law.law_id

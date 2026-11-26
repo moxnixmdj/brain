@@ -2241,6 +2241,7 @@ def delta_compile_model(
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
     anatomy = _anatomy_block(base)
+    promotion = _promotion_block(base)
     grammar = _build_grammar(capabilities, engines)
     if cached_adapter_ast is not None:
         grammar["adapter_ast_index"] = cached_adapter_ast
@@ -2288,6 +2289,7 @@ def delta_compile_model(
         "research_index": research_index,
         "grammar": grammar,
         "anatomy": anatomy,
+        "promotion": promotion,
         "counts": {
             "capabilities": len(capabilities),
             "bound_capabilities": sum(1 for row in capabilities if row["kind"] == "BOUND_CAPABILITY"),
@@ -2315,6 +2317,8 @@ def delta_compile_model(
             "anatomy_modules": sum(
                 len(row.get("top") or []) for row in (anatomy.get("domains") or {}).values()
             ),
+            "promotion_candidates": promotion.get("candidates") or 0,
+            "promotion_callable": promotion.get("callable_now") or 0,
         },
         "provenance": {
             "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",

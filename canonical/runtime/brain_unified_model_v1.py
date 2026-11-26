@@ -794,7 +794,6 @@ class UnifiedModel:
                 "title_postings": title_postings,
             },
         )
->>>>>>> origin/main
 
     def harvested_surfaces(self) -> list[dict[str, Any]]:
         """Every discovered surface the tree carries but no registry declares."""
@@ -938,7 +937,6 @@ class UnifiedModel:
         self._avg_length_cache = float(sec["avg_length"])
         self._knowledge_postings_cache = dict(sec["knowledge_postings"])
         self._knowledge_title_postings_cache = dict(sec["knowledge_title_postings"])
->>>>>>> origin/main
 
     def _hydrate_secondary_indexes(self) -> None:
         if self._source_index_cache is not None and self._research_index_cache is not None and self._knowledge_cache is not None:
