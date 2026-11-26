@@ -15,6 +15,8 @@ import sys
 def run(root):
     path = root/'canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py'
     contents = path.read_bytes()
+    if hashlib.sha256(contents).hexdigest() != '03cdcd832c1fa6d76c32baee4b700715873f34a980c23d967637230f069f4809':
+        raise ValueError('not the archived kernel from the nominated PR head')
     sys.path.insert(0, str(root))
     from canonical.runtime import wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 as w
     if Path(w.__file__).resolve()!=path.resolve():

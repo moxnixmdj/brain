@@ -21,7 +21,7 @@ a,b=[json.load(open(f)) for f in sys.argv[1:]]
 assert a['one_teacher']==b['one_teacher'] and a['env_tree_sha256']==b['env_tree_sha256']
 def evidence(x): return [{k:v for k,v in r.items() if k!='wall_seconds'} for r in x['rows']]
 if evidence(a)!=evidence(b):sys.exit('Observed per-room divergence: retain and inspect both results')
-print(f"Same observations, actions, resets, support and scorecard totals for {len(b['rows'])} rooms")
+print(f"Same recorded transition counts, action counts, resets, support and scorecards for {len(b['rows'])} rooms")
 PY
   ;;
 cues)
