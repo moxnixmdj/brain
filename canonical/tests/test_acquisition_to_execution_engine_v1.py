@@ -265,7 +265,7 @@ class AcquisitionToExecutionEngineTests(unittest.TestCase):
         rows1 = [f"svc-{i}" for i in range(8)] + [f"svc-{i}" for i in range(8)]
         (cli_dir / "data.txt").write_text("\n".join(rows1) + "\n", encoding="utf-8")
 
-        r1 = solve_or_learn("how many unique lines in data.txt", cwd=cli_dir, db_path=self.skill_db)
+        r1 = solve_or_learn("how many unique lines in data.txt", cwd=cli_dir, db_path=self.skill_db, sem_state_path=self.tmp)
         self.assertTrue(r1["pass"], r1)
         self.assertEqual(str(r1["answer"]).strip(), "8")
         self.assertTrue(r1["skill_crystallized"], r1)
@@ -273,7 +273,7 @@ class AcquisitionToExecutionEngineTests(unittest.TestCase):
         rows2 = [f"pod-{i}" for i in range(13)] + [f"pod-{i}" for i in range(13)]
         (cli_dir / "pods.txt").write_text("\n".join(rows2) + "\n", encoding="utf-8")
         t0 = time.perf_counter()
-        r2 = solve_or_learn("how many unique lines in pods.txt", cwd=cli_dir, db_path=self.skill_db)
+        r2 = solve_or_learn("how many unique lines in pods.txt", cwd=cli_dir, db_path=self.skill_db, sem_state_path=self.tmp)
         ms = (time.perf_counter() - t0) * 1000.0
         self.assertTrue(r2["pass"], r2)
         self.assertTrue(r2["from_memory"], r2)

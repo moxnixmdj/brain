@@ -174,9 +174,18 @@ def act(root: str, program: str, timeout: int = 120,
         script = Path(tmp) / "step.py"
         script.write_text(
             program if program.endswith("\n") else program + "\n")
+        # Same-size patch + same-second mtime is INVISIBLE to CPython's
+        # (mtime, size) pyc invalidation: the loop wrote `return 4` over
+        # `return 0` (19 bytes both), ran the test, and was told `0 != 4`
+        # about bytecode that no longer described the file. A verifier that
+        # reads stale cache lies about kernel truth, so no step may write or
+        # trust one. (bound_capabilities already ships this exact env; five
+        # modules use it; this was the path that forgot.)
+        run_env = {**os.environ, "PYTHONDONTWRITEBYTECODE": "1"}
         try:
             r = subprocess.run(["python3", str(script)], cwd=root,
-                               timeout=timeout, capture_output=True, text=True)
+                               timeout=timeout, capture_output=True, text=True,
+                               env=run_env)
             return {"exit": r.returncode, "out": (r.stdout or "")[-2000:],
                     "err": (r.stderr or "")[-2000:], "timed_out": False,
                     "confined": False, "carrier_qualified": False}

@@ -1,0 +1,87 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1",
+ "elapsed_ms": 2.708,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "max_depth": 2,
+  "output_path": "canonical/astra_runtime/tmp/harvest_lift_20261124/grid_out.json",
+  "test_grid": [
+   [
+    9,
+    0
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  "training_pairs": [
+   {
+    "input": [
+     [
+      1,
+      2
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "output": [
+     [
+      2,
+      1
+     ],
+     [
+      4,
+      3
+     ]
+    ]
+   },
+   {
+    "input": [
+     [
+      5,
+      6
+     ],
+     [
+      7,
+      8
+     ]
+    ],
+    "output": [
+     [
+      6,
+      5
+     ],
+     [
+      8,
+      7
+     ]
+    ]
+   }
+  ]
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/software_synthesis_grid_induction_v1.py",
+ "module_sha256": "6b06260459a02a137b44377730bb3bae4e3913ffe41516adeaa3fe6fff673e96",
+ "observed": {
+  "output_verified": true,
+  "status": "EXACT_PROGRAMS"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.software_synthesis_grid_induction_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "6d69de307867c93c4c853e36d8d8fd178abe6a516c3a5c4e50f20b73f7b50a7a",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

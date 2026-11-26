@@ -89,6 +89,10 @@ class Creature:
     max_attempts: int = 2
     _log: list[dict[str, Any]] = field(default_factory=list, repr=False)
     _last_boot_perception: dict[str, Any] = field(default_factory=dict, repr=False)
+    _unified_model: Any = field(default=None, repr=False)
+    _memory_bus: Any = field(default=None, repr=False)
+    _boundary_router: Any = field(default=None, repr=False)
+    _spine_tasks: dict[str, dict[str, Any]] = field(default_factory=dict, repr=False)
 
     # ------------------------------------------------------------------ boot
 
@@ -133,6 +137,7 @@ class Creature:
         self._load_catalog_question()
         self._load_inspector_investigation()
         self._load_durable_board()
+        self._load_memory_bus_if_present()
         # Persist an initial grant even if the process exits before its first step.
         self._save()
         return {"schema": SCHEMA, "identity": self.identity, "epoch": started["epoch"],
@@ -143,9 +148,6 @@ class Creature:
                 "life_remaining": self._life.remaining, "posture": self._standing.posture()}
 
     def _load_sovereign_organs(self) -> None:
-        from canonical.runtime import capability_onboarding_factory_v1 as COF
-        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
-        from canonical.runtime import self_prediction_calibration_v1 as SPC
         from canonical.swe_kernel.sentient_cognitive_core_v1 import SentientCognitiveCore
 
         self.cognitive_core = SentientCognitiveCore(self.root / "cognitive_core")
@@ -166,47 +168,93 @@ class Creature:
                 )
             except Exception:
                 self.continuation_memory = CP.ContinuationMemory.empty()
-        self.calibration_ledger = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
-        self.derived_flight = DIF.Flight()
+        self._calibration_ledger_obj: Any = None
+        self._derived_flight_obj: Any = None
+        self._onboarding_factory_obj: Any = None
+        self._pending_flight_registry: dict[str, dict[str, Any]] = {}
         self._serialized_derivations: dict[str, dict[str, Any]] = {}
         self._live_inspector_callables: dict[str, Callable[[Mapping[str, Any]], tuple[bool, str]]] = {}
         self.onboarded_capabilities: dict[str, dict[str, Any]] = {}
 
-        def _register_cap(row: Mapping[str, Any]) -> None:
-            self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
-
-        self.onboarding_factory = COF.Factory(
-            inspector_for=lambda cid: self._live_inspector_callables.get(cid),
-            register=_register_cap,
-        )
         onboard_fp = self.root / "onboarded_inspectors.json"
         if onboard_fp.is_file() and not onboard_fp.is_symlink():
             try:
                 saved = json.loads(onboard_fp.read_text(encoding="utf-8"))
                 if isinstance(saved, Mapping):
                     for k, v in (saved.get("flight_registry") or {}).items():
-                        self.derived_flight.registry[str(k)] = dict(v)
+                        self._pending_flight_registry[str(k)] = dict(v)
                     for k, v in (saved.get("onboarded") or {}).items():
                         self.onboarded_capabilities[str(k)] = dict(v)
-                    for k, v in (saved.get("serialized_derivations") or {}).items():
-                        if isinstance(v, Mapping):
-                            cid_k = str(k)
-                            self._serialized_derivations[cid_k] = dict(v)
-                            deriv_obj = DIF.BehavioralDerivation.from_dict(v)
-                            if not deriv_obj.refused:
-                                self._live_inspector_callables[cid_k] = deriv_obj.build()
+                    ser_derivs = saved.get("serialized_derivations") or {}
+                    if ser_derivs:
+                        from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+                        for k, v in ser_derivs.items():
+                            if isinstance(v, Mapping):
+                                cid_k = str(k)
+                                self._serialized_derivations[cid_k] = dict(v)
+                                deriv_obj = DIF.BehavioralDerivation.from_dict(v)
+                                if not deriv_obj.refused:
+                                    self._live_inspector_callables[cid_k] = deriv_obj.build()
             except Exception:
                 pass
 
+    @property
+    def calibration_ledger(self) -> Any:
+        if getattr(self, "_calibration_ledger_obj", None) is None:
+            from canonical.runtime import self_prediction_calibration_v1 as SPC
+
+            self._calibration_ledger_obj = SPC.Ledger(self.root / "self_prediction_ledger.jsonl")
+        return self._calibration_ledger_obj
+
+    @calibration_ledger.setter
+    def calibration_ledger(self, value: Any) -> None:
+        self._calibration_ledger_obj = value
+
+    @property
+    def derived_flight(self) -> Any:
+        if getattr(self, "_derived_flight_obj", None) is None:
+            from canonical.runtime import derived_inspector_flywheel_v1 as DIF
+
+            fl = DIF.Flight()
+            for k, v in getattr(self, "_pending_flight_registry", {}).items():
+                fl.registry[str(k)] = dict(v)
+            self._derived_flight_obj = fl
+        return self._derived_flight_obj
+
+    @derived_flight.setter
+    def derived_flight(self, value: Any) -> None:
+        self._derived_flight_obj = value
+
+    @property
+    def onboarding_factory(self) -> Any:
+        if getattr(self, "_onboarding_factory_obj", None) is None:
+            from canonical.runtime import capability_onboarding_factory_v1 as COF
+
+            def _register_cap(row: Mapping[str, Any]) -> None:
+                self.onboarded_capabilities[str(row["capability_id"])] = dict(row)
+
+            self._onboarding_factory_obj = COF.Factory(
+                inspector_for=lambda cid: self._live_inspector_callables.get(cid),
+                register=_register_cap,
+            )
+        return self._onboarding_factory_obj
+
+    @onboarding_factory.setter
+    def onboarding_factory(self, value: Any) -> None:
+        self._onboarding_factory_obj = value
+
     def _save_sovereign_organs(self) -> None:
-        if not hasattr(self, "derived_flight") or not hasattr(self, "onboarded_capabilities"):
+        if not hasattr(self, "onboarded_capabilities"):
             return
         if hasattr(self, "cognitive_core"):
             self.cognitive_core.belief.save()
             self.cognitive_core.world_graph.save()
             self.cognitive_core.consolidation.save()
+        fl_obj = getattr(self, "_derived_flight_obj", None)
+        flight_reg = dict(fl_obj.registry) if fl_obj is not None else dict(getattr(self, "_pending_flight_registry", {}))
         payload = {
-            "flight_registry": dict(self.derived_flight.registry),
+            "flight_registry": flight_reg,
             "onboarded": dict(self.onboarded_capabilities),
             "serialized_derivations": dict(getattr(self, "_serialized_derivations", {})),
         }
@@ -839,6 +887,664 @@ class Creature:
                 encoding="utf-8",
             )
             os.replace(tmp_cm, self.root / "continuation_memory.json")
+        if self._memory_bus is not None:
+            try:
+                self._memory_bus.save(self.root / "memory_bus_v1.json")
+            except Exception:
+                pass
+
+    # ------------------------------------------ unified model & frontier spines bridge
+
+    def attach_unified_model(self, model: Any) -> None:
+        """Bind a `UnifiedModel` directly to this Creature so both share one memory bus & router lazily."""
+        self._unified_model = model
+        if model is not None:
+            if getattr(model, "_memory_bus", None) is not None:
+                self._memory_bus = model._memory_bus
+            elif self._memory_bus is not None:
+                model._memory_bus = self._memory_bus
+            if getattr(model, "_boundary_router", None) is not None:
+                self._boundary_router = model._boundary_router
+            elif self._boundary_router is not None:
+                model._boundary_router = self._boundary_router
+
+    def _load_memory_bus_if_present(self) -> None:
+        bus_fp = self.root / "memory_bus_v1.json"
+        if bus_fp.is_file() and not bus_fp.is_symlink():
+            try:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+                if self._memory_bus is None:
+                    self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                else:
+                    self._memory_bus.load(bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
+            except Exception:
+                pass
+
+    @property
+    def memory_bus(self) -> Any:
+        """Persistent 5-timescale verification-first memory bus (`0G`) backed by `self.root/memory_bus_v1.json`."""
+        if self._memory_bus is None:
+            if self._unified_model is not None and getattr(self._unified_model, "_memory_bus", None) is not None:
+                self._memory_bus = self._unified_model._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+                bus_fp = self.root / "memory_bus_v1.json"
+                self._memory_bus = mem_spine.VerificationFirstMemoryBus(state_path=bus_fp)
+                if self._unified_model is not None:
+                    self._unified_model._memory_bus = self._memory_bus
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`) sharing `self.memory_bus`."""
+        if self._boundary_router is None:
+            if self._unified_model is not None and getattr(self._unified_model, "_boundary_router", None) is not None:
+                self._boundary_router = self._unified_model._boundary_router
+                if self._memory_bus is not None:
+                    self._boundary_router.memory_bus = self._memory_bus
+            else:
+                from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+                self._boundary_router = br_spine.BoundaryRouter(
+                    memory_bus=self._memory_bus,
+                    memory_bus_factory=lambda: self.memory_bus,
+                )
+                if self._unified_model is not None:
+                    self._unified_model._boundary_router = self._boundary_router
+        return self._boundary_router
+
+    @property
+    def unified_model(self) -> Any:
+        """Lazy `UnifiedModel` handle bound to this Creature's shared memory bus and router."""
+        if self._unified_model is None:
+            from canonical.runtime import brain_unified_model_v1 as bum
+
+            m = bum.open_model()
+            if self._memory_bus is not None:
+                m._memory_bus = self._memory_bus
+            if self._boundary_router is not None:
+                m._boundary_router = self._boundary_router
+            self._unified_model = m
+        return self._unified_model
+
+    def register_spine_task(self, work_id: str, kind: str, spec: Mapping[str, Any]) -> None:
+        """Register a structured frontier-spine task spec to execute when `work_id` is worked on the board."""
+        self._spine_tasks[str(work_id)] = {"kind": str(kind).lower().strip(), "spec": dict(spec)}
+
+    def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
+        """Execute a task through the unified frontier spines (`0D`-`0I`) and persist memory updates."""
+        k = str(kind or "swe_repair").lower().strip()
+        br = self.boundary_router
+        if k == "swe_repair":
+            res = br.route_swe_repair(**kwargs)
+        elif k == "env_goal":
+            res = br.route_env_goal(**kwargs)
+        elif k == "cu_task":
+            res = br.route_cu_task(**kwargs)
+        elif k == "typed_chain":
+            res = br.route_typed_chain(**kwargs)
+        elif k == "harvested_surface":
+            res = br.route_harvested_surface(**kwargs)
+        elif k == "version_space":
+            res = br.route_version_space_task(**kwargs)
+        elif k == "register_env_goal":
+            res = br.route_register_env_goal(**kwargs)
+        elif k == "federated_engine":
+            res = br.route_federated_engine(**kwargs)
+        elif k == "one_shot_learning":
+            res = br.route_one_shot_learning(**kwargs)
+        elif k == "applicability":
+            res = br.route_applicability_check(**kwargs)
+        elif k == "refusal_spec":
+            res = br.route_refusal_specification(**kwargs)
+        elif k == "speculative_cow":
+            res = br.route_speculative_cow_race(**kwargs)
+        elif k == "cu_four_tier":
+            res = br.route_four_tier_cu(**kwargs)
+        elif k == "mutation_gate":
+            res = br.route_mutation_admission_gate(**kwargs)
+        elif k == "event_memory":
+            res = br.route_verified_event_memory(**kwargs)
+        elif k == "durable_commit":
+            res = br.route_durable_commit(**kwargs)
+        elif k == "env_broker":
+            res = br.route_env_broker(**kwargs)
+        elif k == "angelic_repair":
+            res = br.route_angelic_counterfactual_repair(**kwargs)
+        elif k == "crossfile_repair":
+            res = br.route_crossfile_choreography(**kwargs)
+        elif k == "compile_goal_contract":
+            res = br.route_compile_goal_contract(**kwargs)
+        elif k == "branch_mental_model":
+            res = br.route_branch_mental_model(**kwargs)
+        elif k == "check_mode_oracle":
+            res = br.route_check_mode_oracle(**kwargs)
+        elif k == "counterexample_experiment":
+            res = br.route_counterexample_experiment(**kwargs)
+        elif k == "run_relation_goal":
+            res = br.route_run_relation_goal(**kwargs)
+        elif k == "one_experience":
+            res = br.route_one_experience_consequences(**kwargs)
+        elif k == "self_evolution_firewall":
+            res = br.route_self_evolution_firewall(**kwargs)
+        elif k == "curate_skills":
+            res = br.route_curate_skills(**kwargs)
+        elif k == "observe_drift":
+            res = br.route_observe_drift(**kwargs)
+        elif k == "cross_host_transfer":
+            res = br.route_cross_host_transfer(**kwargs)
+        elif k == "one_demo_identify":
+            res = br.route_one_demonstration_identify(**kwargs)
+        elif k == "trace_expression_repair":
+            res = br.route_trace_expression_repair(**kwargs)
+        elif k == "multi_file_causal_localize":
+            res = br.route_multi_file_causal_localize(**kwargs)
+        elif k == "computer_env":
+            res = br.route_discover_computer_env(**kwargs)
+        elif k == "admit_route":
+            res = br.route_admit_live(**kwargs)
+        elif k == "semantic_plan":
+            res = br.route_semantic_plan(**kwargs)
+        elif k == "derive_execution_adapter":
+            res = br.route_derive_execution_adapter(**kwargs)
+        elif k == "contrast_memory_laws":
+            res = br.route_contrast_memory_laws(**kwargs)
+        elif k == "filing_key_hindsight_jitrl":
+            res = br.route_filing_key_hindsight_jitrl(**kwargs)
+        elif k == "producer_lineage_holes":
+            res = br.route_producer_lineage_holes(**kwargs)
+        elif k == "verifier_pinning_oracles":
+            res = br.route_verifier_pinning_oracles(**kwargs)
+        elif k == "purpose_gate_arbitrage":
+            res = br.route_purpose_gate_arbitrage(**kwargs)
+        elif k == "two_move_horizon_cu":
+            res = br.route_two_move_horizon_cu(**kwargs)
+        elif k == "oracle_audit":
+            from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+            res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        elif k == "swe_polyglot":
+            from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+            res = swe_spine.solve_repository_task(**kwargs)
+            res = {**res, "pass": bool(res.get("solved") is True)}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_SPINE_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        self._save()
+        return res
+
+    def run_federated_engine(
+        self,
+        mode: str,
+        inputs: Mapping[str, Any] | None = None,
+        *,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Run any of the 58 federated hidden kernel engines directly from Creature (`0I`)."""
+        return self.route_goal_via_spine("federated_engine", mode=mode, inputs=inputs, goal=goal)
+
+    def speculative_cow_race(
+        self,
+        workspace_root: str | pathlib.Path,
+        branches: Sequence[Mapping[str, Any]],
+        oracle_fn: Any,
+        *,
+        commit_winner: bool = True,
+    ) -> dict[str, Any]:
+        """Execute speculative parallel-safe CoW futures (`0F`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "speculative_cow",
+            workspace_root=workspace_root,
+            branches=branches,
+            oracle_fn=oracle_fn,
+            commit_winner=commit_winner,
+        )
+
+    def mutation_admission_gate(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+    ) -> dict[str, Any]:
+        """Gate skill/module promotion with real AST mutation killing (`0H`) directly from Creature."""
+        return self.route_goal_via_spine(
+            "mutation_gate",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+        )
+
+    def admit_self_modification(
+        self,
+        source_text: str,
+        verifier_fn: Any,
+        *,
+        skill_id: str = "creature_self_mod",
+        workspace_root: str | pathlib.Path | None = None,
+        target_rel: str | None = None,
+        positive_examples: Sequence[Any] = (),
+        negative_mutants: Sequence[Any] = (),
+        check_predicate: Any = None,
+        limit: int = 8,
+        seed: int = 7,
+        min_kill_rate: float = 0.5,
+        commit_on_pass: bool = False,
+    ) -> dict[str, Any]:
+        """Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`) directly on `Creature`."""
+        return self.route_goal_via_spine(
+            "self_evolution_firewall",
+            source_text=source_text,
+            verifier_fn=verifier_fn,
+            skill_id=skill_id,
+            workspace_root=workspace_root,
+            target_rel=target_rel,
+            positive_examples=positive_examples,
+            negative_mutants=negative_mutants,
+            check_predicate=check_predicate,
+            limit=limit,
+            seed=seed,
+            min_kill_rate=min_kill_rate,
+            commit_on_pass=commit_on_pass,
+        )
+
+    def record_skill_contribution(
+        self,
+        skill_id: str,
+        outcome: str,
+        *,
+        note: str = "",
+    ) -> dict[str, Any]:
+        """Record measured reuse contribution in this Creature's persistent SQLite ledger (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.memory_bus.record_skill_contribution(
+            skill_id,
+            outcome,
+            note=note,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def curate_skills_memory(
+        self,
+        *,
+        grader_report: Mapping[str, Any] | None = None,
+        min_trials: int = 3,
+        threshold: float = 0.10,
+        active_cap: int = 200,
+    ) -> dict[str, Any]:
+        """Retire negative-paying skills ONLY on a measured tight grader (`0G` × `skill_contribution_ledger_v1`)."""
+        return self.route_goal_via_spine(
+            "curate_skills",
+            grader_report=grader_report,
+            min_trials=min_trials,
+            threshold=threshold,
+            active_cap=active_cap,
+            db_path=self.root / "skill_contrib.sqlite3",
+        )
+
+    def observe_route_drift(self, stream: str, value: float | bool) -> dict[str, Any]:
+        """Observe one outcome in this Creature's hybrid ADWIN + BOCPD + Page-Hinkley drift detector (`0G`)."""
+        return self.memory_bus.observe_drift(stream, value)
+
+    def inspect_self_improvement_queue(
+        self,
+        *,
+        state_path: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Inspect the autonomous verified self-improvement queue (`autonomous_verified_self_improvement_v1`)."""
+        from canonical.runtime import autonomous_verified_self_improvement_v1 as avsi
+
+        sp = pathlib.Path(state_path) if state_path is not None else None
+        state = avsi.load_state(sp) if sp is not None else avsi.load_state()
+        nxt = avsi.next_improvement_action(state_path=sp) if sp is not None else avsi.next_improvement_action()
+        return {
+            "schema": SCHEMA,
+            "pass": True,
+            "status": "PASS__SELF_IMPROVEMENT_QUEUE_READ",
+            "next_action": nxt,
+            "has_next_action": nxt is not None,
+            "state_schema": state.get("schema"),
+        }
+
+    def compose_typed_chain(
+        self,
+        goal: str,
+        *,
+        seed: Sequence[str] | None = None,
+        max_candidates: int = 6,
+        cwd: str | pathlib.Path | None = None,
+    ) -> dict[str, Any]:
+        """Route a sentence into a typed capability chain via `composer_route_v1` + `0I`."""
+        return self.route_goal_via_spine(
+            "typed_chain",
+            goal=goal,
+            seed=seed,
+            max_candidates=max_candidates,
+            cwd=cwd,
+        )
+
+    def run_harvested_surface(
+        self,
+        capability_id: str = "",
+        *,
+        path: str = "",
+        args: Mapping[str, Any] | None = None,
+        adversarial_args: Mapping[str, Any] | None = None,
+        receipt: bool = False,
+    ) -> dict[str, Any]:
+        """Execute a discovered-but-unadmitted harvested surface via `harvested_capability_runtime_v1` (`admitted: False`)."""
+        return self.route_goal_via_spine(
+            "harvested_surface",
+            capability_id=capability_id,
+            path=path,
+            args=args,
+            adversarial_args=adversarial_args,
+            receipt=receipt,
+            root=_REPO_ROOT,
+        )
+
+    def sleep_consolidate_memory(
+        self,
+        *,
+        program_sources: Sequence[str] = (),
+        min_nodes: int = 5,
+        max_new_concepts: int = 6,
+    ) -> dict[str, Any]:
+        """Run `0G` sleep-time E-Graph/E-Stitch consolidation and persist `memory_bus_v1.json` to disk."""
+        res = self.memory_bus.sleep_consolidate(
+            program_sources=program_sources,
+            min_nodes=min_nodes,
+            max_new_concepts=max_new_concepts,
+        )
+        self._save()
+        return res
+
+    def sleep_evolve_organs_gea(
+        self,
+        *,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        alpha: float = 0.05,
+        life_cost: float = 0.25,
+    ) -> dict[str, Any]:
+        """Wave 19: Group-Evolving Meta-Circular Organs (GEA) + Anytime-Valid Certificate (SEA) + Ring-0 Referee.
+
+        Evaluates a group of pure-AST organ lineages over shared failure traces (`GEA`), gates every
+        candidate via `recursive_self_architect_v1.referee_executable_organ` + `meta_circular_organ_graph_v1`
+        (`0` unsafe AST nodes), and admits an upgrade ONLY when it achieves 0 anchor regressions AND
+        passes an anytime-valid sequential Hoeffding/Ville e-process certificate (`SEA`, `e_value >= 1/alpha`
+        or strict paired dominance with zero regressions).
+        """
+        import hashlib
+        import math
+
+        from canonical.swe_kernel import meta_circular_organ_graph_v1 as mcog
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        cost = max(0.05, float(life_cost))
+        if self._life.remaining <= 0 or not self._life.can_finish(cost):
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__CANNOT_AFFORD_GEA_EVOLUTION",
+                "life_remaining": self._life.remaining,
+                "model_calls": 0,
+            }
+        self._life.spend(cost)
+
+        def _eval_organ(src: str, cases: Sequence[tuple[tuple[Any, ...], Any]]) -> tuple[bool, list[bool], list[dict[str, Any]], str]:
+            ref = rsa.referee_executable_organ(src)
+            if not ref.get("ok"):
+                return False, [], [], str(ref.get("reason") or "RING0_REFUSED")
+            try:
+                _tree, ns = mcog.compile_organ_namespace(src)
+            except Exception as exc:
+                return False, [], [], f"COMPILE_REFUSED:{type(exc).__name__}:{exc}"
+            fn = ns.get(organ_name)
+            if not callable(fn):
+                return False, [], [], f"ORGAN_FUNCTION_MISSING:{organ_name}"
+            outcomes: list[bool] = []
+            failures: list[dict[str, Any]] = []
+            for idx, (args, expected) in enumerate(cases):
+                try:
+                    actual = fn(*args)
+                    ok = (actual == expected)
+                except Exception as exc:
+                    actual = f"EXC:{type(exc).__name__}:{exc}"
+                    ok = False
+                outcomes.append(bool(ok))
+                if not ok:
+                    failures.append({"case_idx": idx, "args": list(args), "expected": expected, "actual": actual})
+            return True, outcomes, failures, "ADMITTED"
+
+        inc_ok, inc_outcomes, inc_failures, inc_reason = _eval_organ(incumbent_source, test_cases)
+        if not inc_ok:
+            self._save()
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__INCUMBENT_INVALID",
+                "reason": inc_reason,
+                "model_calls": 0,
+            }
+        inc_anchor_ok, inc_anchor_outcomes, _, _ = _eval_organ(incumbent_source, anchor_cases) if anchor_cases else (True, [], [], "OK")
+        inc_score = sum(1 for x in inc_outcomes if x)
+
+        group_reports: list[dict[str, Any]] = []
+        shared_failure_pool: list[dict[str, Any]] = list(inc_failures)
+        best_admitted: dict[str, Any] | None = None
+        e_threshold = 1.0 / max(1e-6, float(alpha))
+
+        for idx, cand_src in enumerate(candidate_sources):
+            c_ok, c_outcomes, c_failures, c_reason = _eval_organ(cand_src, test_cases)
+            if not c_ok:
+                group_reports.append({
+                    "lineage_idx": idx,
+                    "ring0_admitted": False,
+                    "reason": c_reason,
+                    "sea_certified": False,
+                })
+                continue
+            shared_failure_pool.extend(c_failures)
+            anchor_regressions = 0
+            if anchor_cases:
+                a_ok, a_outcomes, _, _ = _eval_organ(cand_src, anchor_cases)
+                if not a_ok:
+                    anchor_regressions = len(anchor_cases)
+                else:
+                    anchor_regressions = sum(
+                        1 for inc_a, cand_a in zip(inc_anchor_outcomes, a_outcomes) if inc_a and not cand_a
+                    )
+            # Paired diffs d_i in {-1, 0, +1}; build betting e-process E_n = prod(1 + lam * d_i) (anytime-valid!)
+            diffs = [(1 if c else 0) - (1 if b else 0) for b, c in zip(inc_outcomes, c_outcomes)]
+            paired_regressions = sum(1 for d in diffs if d < 0)
+            paired_gains = sum(1 for d in diffs if d > 0)
+            c_score = sum(1 for x in c_outcomes if x)
+            # Conservative betting fraction lam = 0.5 (supermartingale under H0: E[d_i] <= 0)
+            lam = 0.5
+            log_e = 0.0
+            for d in diffs:
+                step = max(1e-6, 1.0 + lam * float(d))
+                log_e += math.log(step)
+            e_value = math.exp(min(50.0, log_e))
+            sea_certified = (
+                anchor_regressions == 0
+                and paired_regressions == 0
+                and paired_gains > 0
+                and (e_value >= e_threshold or (c_score == len(test_cases) and paired_gains >= 2))
+            )
+            rep = {
+                "lineage_idx": idx,
+                "ring0_admitted": True,
+                "score": c_score,
+                "total": len(test_cases),
+                "incumbent_score": inc_score,
+                "paired_gains": paired_gains,
+                "paired_regressions": paired_regressions,
+                "anchor_regressions": anchor_regressions,
+                "sea_e_value": round(e_value, 4),
+                "sea_threshold": round(e_threshold, 4),
+                "sea_certified": sea_certified,
+                "source_sha256": hashlib.sha256(cand_src.encode("utf-8")).hexdigest(),
+                "source": cand_src,
+            }
+            group_reports.append(rep)
+            if sea_certified:
+                if best_admitted is None or (rep["score"], rep["sea_e_value"]) > (
+                    best_admitted["score"], best_admitted["sea_e_value"]
+                ):
+                    best_admitted = rep
+
+        event_receipt = None
+        if best_admitted is not None:
+            event_receipt = self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"gea_organ:{organ_name}",
+                value={
+                    "source_sha256": best_admitted["source_sha256"],
+                    "score": best_admitted["score"],
+                    "incumbent_score": inc_score,
+                    "sea_e_value": best_admitted["sea_e_value"],
+                },
+                source_commit="gea_sea_sleep_evolution_v1",
+                precondition_guard=["ring0_pure_ast", "zero_anchor_regression", "sea_anytime_valid"],
+            )
+        posture = self._standing.record(verified=True, correct=best_admitted is not None)
+        self._save()
+        return {
+            "pass": best_admitted is not None,
+            "admitted": best_admitted is not None,
+            "status": "PASS__GEA_ORGAN_CERTIFIED_BY_SEA" if best_admitted is not None else "FAIL_CLOSED__NO_CANDIDATE_PASSED_SEA_CERTIFICATE",
+            "organ_name": organ_name,
+            "incumbent_score": inc_score,
+            "total_cases": len(test_cases),
+            "winner": best_admitted,
+            "group_size": len(candidate_sources),
+            "group_reports": [{k: v for k, v in r.items() if k != "source"} for r in group_reports],
+            "shared_failure_trace_count": len(shared_failure_pool),
+            "event_receipt": event_receipt,
+            "life_remaining": self._life.remaining,
+            "posture": posture,
+            "model_calls": 0,
+        }
+
+    def sleep_red_queen_coevolve(
+        self,
+        *,
+        epoch_index: int = 0,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        func_name: str,
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        lens_witness_pairs: Sequence[tuple[Any, Any]] | None = None,
+        scan_root: str | pathlib.Path | None = None,
+        mine_rewrite_laws: bool = True,
+        audit_hunk_pinning: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Waves 24 & 29: Red Queen Co-Evolution sleep cycle (`Creature` × `0G` × `0H`, `K3=0`).
+
+        Runs bounded GEA organ evolution under a content-hashed FROZEN intra-epoch judge,
+        audits behavioural hunk pinning (`what_the_verifier_actually_pins_v1`) + docstring
+        oracle claims (`the_docstring_states_the_oracle_v1`), co-evolves the evaluator suite
+        ONLY for `epoch_index + 1`, and records both certified wins and failure lessons into
+        the bitemporal SkillBank (`0G`).
+        """
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        gea_res = self.sleep_evolve_organs_gea(
+            organ_name=organ_name,
+            incumbent_source=incumbent_source,
+            candidate_sources=candidate_sources,
+            test_cases=test_cases,
+            anchor_cases=anchor_cases,
+            alpha=alpha,
+        )
+        winner = gea_res.get("winner") if isinstance(gea_res, dict) else None
+        patched_src = str(winner["source"]) if isinstance(winner, dict) and winner.get("source") else incumbent_source
+
+        hunk_pinning_audit = None
+        if audit_hunk_pinning and winner is not None and patched_src != incumbent_source:
+            def _cases_verifier(src_text: str) -> bool:
+                ns_v: dict[str, Any] = {}
+                try:
+                    exec(compile(src_text, f"<{organ_name}>", "exec"), ns_v)
+                    fn_v = ns_v.get(func_name)
+                    if not callable(fn_v):
+                        return False
+                    for args, exp in list(test_cases) + list(anchor_cases):
+                        if fn_v(*args) != exp:
+                            return False
+                    return True
+                except Exception:
+                    return False
+
+            hunk_pinning_audit = oracle_spine.audit_verifier_pinning_and_synthesize_oracles(
+                before_source=incumbent_source,
+                after_source=patched_src,
+                verifier_fn=_cases_verifier,
+                min_pin_ratio=0.5,
+                require_fail_to_pass=True,
+                docstring_source=patched_src,
+            )
+
+        rq_res = oracle_spine.run_red_queen_evaluator_coevolution(
+            epoch_index=int(epoch_index),
+            scan_root=scan_root,
+            orig_source=incumbent_source,
+            patched_source=patched_src,
+            func_name=func_name,
+            lens_witness_pairs=lens_witness_pairs,
+            mine_rewrite_laws=mine_rewrite_laws,
+        )
+
+        pin_ok = True if hunk_pinning_audit is None else bool(hunk_pinning_audit.get("pass"))
+        # Record organ outcome + failure lessons in bitemporal SkillBank (`0G`)
+        bank_res = self.memory_bus.bitemporal_credit_and_skill_bank(
+            skill_name=f"red_queen:{organ_name}:epoch_{int(epoch_index)}",
+            skill_type="red_queen_organ",
+            pattern=str(func_name),
+            preconditions=[f"epoch_judge:{rq_res.get('intra_epoch_frozen_judge_digest')}"],
+            operations=[f"organ:{organ_name}", f"next_epoch_judge:{rq_res.get('next_epoch_judge_digest')}"],
+            success_criteria="sea_certified_and_cow_boundary_invariant_and_hunks_pinned",
+            succeeded=bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok,
+            failure_lesson=None if (gea_res.get("pass") and rq_res.get("pass") and pin_ok) else str(
+                gea_res.get("status")
+                if not gea_res.get("pass")
+                else (hunk_pinning_audit.get("status") if not pin_ok and hunk_pinning_audit else rq_res.get("status"))
+            ),
+            valid_from=float(epoch_index),
+        )
+        overall_pass = bool(gea_res.get("pass")) and bool(rq_res.get("pass")) and pin_ok
+        return {
+            "pass": overall_pass,
+            "status": (
+                "PASS__RED_QUEEN_SLEEP_COEVOLVED"
+                if overall_pass
+                else "FAIL_CLOSED__RED_QUEEN_EPOCH_HELD_INCUMBENT"
+            ),
+            "epoch_index": int(epoch_index),
+            "next_epoch_index": int(epoch_index) + 1,
+            "intra_epoch_frozen_judge_digest": rq_res.get("intra_epoch_frozen_judge_digest"),
+            "next_epoch_judge_digest": rq_res.get("next_epoch_judge_digest"),
+            "gea_evolution": gea_res,
+            "hunk_pinning_audit": hunk_pinning_audit,
+            "evaluator_coevolution": rq_res,
+            "bitemporal_skill_bank": bank_res,
+            "model_calls": 0,
+        }
 
     def self_architect_step(
         self,
@@ -2576,6 +3282,35 @@ def sovereign_perform(work: M.Work, creature: Creature) -> dict[str, Any]:
             "questions_asked": int((learned or {}).get("oracle_queries_used") or 0),
             "answers": verified_answers,
             "blocked": None if ok else "LEARNED_SKILL_DID_NOT_ANSWER_THE_TARGET",
+        }
+
+    # --- Unified Frontier Spines (`0D`-`0I`), Composer Chains & Harvested Surfaces ---------------
+    spine_spec = (getattr(creature, "_spine_tasks", None) or {}).get(work.id)
+    if isinstance(spine_spec, Mapping):
+        skind = str(spine_spec.get("kind") or "")
+        sargs = dict(spine_spec.get("spec") or {})
+        sres = creature.route_goal_via_spine(skind, **sargs)
+        ok = bool(sres.get("pass") is True)
+        settle_rep = core.belief.settle_and_compute_surprise(
+            ticket,
+            outcome_pass=ok,
+            inspector=f"unified_spine:{skind}",
+            actual_cost=work.cost,
+            actual_gain=work.value if ok else 0.0,
+            calibration_ledger=creature.calibration_ledger,
+        )
+        return {
+            "ok": ok,
+            "verified": True,
+            "correct": ok,
+            "value": work.value if ok else 0.0,
+            "predicted_probability": p_hat,
+            "surprise": settle_rep["surprise"],
+            "spine_kind": skind,
+            "spine_status": sres.get("status"),
+            "spine_result": sres,
+            "admitted": sres.get("admitted"),
+            "blocked": None if ok else str(sres.get("status") or "SPINE_TASK_FAILED"),
         }
 
     core.belief.settle_and_compute_surprise(

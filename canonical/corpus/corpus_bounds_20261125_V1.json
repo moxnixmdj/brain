@@ -1,0 +1,98 @@
+{
+ "schema": "BRAIN_CORPUS_BOUNDS_20261125_V1",
+ "generated": "2026-11-26T01:40:29Z",
+ "question": "Six rounds of operator families have emitted nothing on this corpus. Is that a BUDGET problem (the right edit exists but is not reached) or a VOCABULARY problem (the right edit is not the kind of thing the family can express)?",
+ "answer": "VOCABULARY, and now it is bounded rather than argued. Measured ceilings: 0/28 for a single substitutable edit, 1/28 for any number of substitutable edits, 0/28 an achieved solve.",
+ "the_three_channels_that_were_tried_and_what_each_supplies": {
+  "traceback_frame": {
+   "tasks_exposing_a_source_frame": 4,
+   "tasks_exposing_no_source_frame": 24,
+   "fraction_with_no_source_frame": 0.857,
+   "failure_classes": {
+    "AssertionError": 17,
+    "AttributeError": 5,
+    "Failed": 5,
+    "TypeError": 1
+   },
+   "reading": "A traceback-driven generator can only fire where the traceback names a source line. On the tasks that expose none, every operator family in this project has NO INPUT, so adding another form cannot raise the rate -- and that, not the vocabulary, is what the six families have been measuring all along."
+  },
+  "assertion_expected_value": {
+   "measured_no_frame": 24,
+   "any_value_found_in_source": 1,
+   "any_value_within_n_of_truth": 0,
+   "value_in_test_only": 3
+  },
+  "dynamic_coverage": {
+   "measured": 28,
+   "fix_lines_total": 416,
+   "fix_lines_inside_coverage": 99,
+   "retention": 0.238,
+   "candidate_budget_covered": 2847,
+   "candidate_budget_whole_file": 21288,
+   "reduction": 0.866,
+   "tasks_with_any_truth_line_covered": 25
+  }
+ },
+ "the_generation_attempt": {
+  "budget_per_task": 40,
+  "tasks": 28,
+  "solved": 0,
+  "outcomes": {
+   "UNSOLVED": 28
+  },
+  "candidates_screened_total": 1040,
+  "note": "920 candidates across 28 tasks. The zero is a measured zero, not a silent failure to run."
+ },
+ "why_zero_site_level_taxonomy": {
+  "measured_tasks": 28,
+  "changed_sites": 667,
+  "site_classes": {
+   "SITE_REACHED_SUBSTITUTABLE": 25,
+   "UNDISCOVERED": 498,
+   "NO_VOCABULARY": 144
+  },
+  "operations": {
+   "REPLACE": 118,
+   "ADD": 482,
+   "DELETE": 67
+  },
+  "per_task": {
+   "tasks_all_sites_substitutable": 1,
+   "tasks_reachable_by_a_single_substitution": 0,
+   "tasks_with_at_least_one_substitutable_site": 13,
+   "tasks_with_at_least_one_discovered_site": 25,
+   "tasks_whose_only_change_line_never_executes": 3
+  },
+  "ceiling_for_the_substitution_family": 0.036,
+  "ceiling_for_a_single_edit": 0.0,
+  "addition_shapes": {
+   "added_statements": 600,
+   "whose_shape_already_occurs_in_the_same_file": 194,
+   "share": 0.323,
+   "reading": "A shape that already occurs in the file is a template the repo supplies; a shape that does not is text no recombination of the file can produce. This decides whether an addition generator is worth building at all."
+  }
+ },
+ "the_honest_reading": [
+  "The traceback channel fires on 4 of 28 tasks (14%), because 24 of 28 fail on an assert raised inside the test file and expose no source line at all. Every traceback-keyed family in this project has NO INPUT on 86% of the corpus, which is what six rounds of 'zero emission' have actually been recording.",
+  "The assertion channel is empty: on those 24 tasks the expected value appears in the source once and lands near a fix line zero times. Printing expected-vs-actual to a generator supplies nothing.",
+  "The coverage channel is real and is the only one that works: running the failing test narrows 21,288 lines to 2,847 (86.6% reduction) and touches a fix line on 25 of 28 tasks. This is the first usable pointer this project has had to a line on the no-frame majority.",
+  "But pointing at the right line is not the wall. Of 667 changed sites, 498 never execute under the failing test, 144 are inexpressible as a substitution, and 25 are substitutable. Exactly 0 tasks have a single changed line that is a substitution on a covered line. The ceiling for the whole substitution family on this corpus is 1 of 28, and for a single-edit version of it 0 of 28.",
+  "The generation run achieved 0 of 28 against that 0-of-28 single-edit ceiling and a 1-of-28 multi-edit ceiling. It did not underperform; it was measured against a bound and matched it.",
+  "The fixes are ADDITIONS, not substitutions: 482 of 667 sites add statements, and 194 of 600 added statements have a shape that already occurs in the same file. An addition generator could in principle recombine templates the repo supplies, which is a different claim and is not tested here."
+ ],
+ "defects_found_in_my_own_instruments": [
+  "import_roots put src/packaging on PYTHONPATH instead of src, making packaging a namespace package; the known-positive test then PASSED on the parent commit and 22 of 28 tasks were misreported NOT_FAIL_TO_PASS. Caught only because a task I had already solved appeared in that list.",
+  "the coverage plugin dumped from atexit after os was torn down and wrote an empty file, which is indistinguishable from 'the test executed nothing'. Eight rows carried a plausible 0.0 budget.",
+  "the coverage harness restored the parent commit, discarding the applied test file, and then ran a node that no longer existed.",
+  "the coverage plugin discarded import-time hits, deleting the module-level regex tables where one real fix in this corpus lives. Retention rose 0.159 -> 0.238 and task reach 22 -> 25 once import lines were kept.",
+  "failure_class let raw `assert a == b` expressions through as if they were exception names.",
+  "the first site classifier counted a two-line coordinated fix as a single edit because it iterated per file rather than per task shape; the single-edit ceiling is reported separately as a result."
+ ],
+ "what_this_is_not": "Not a capability gain and not a benchmark row. 0 of 28 solves. The corpus is development data: every number here is measured on the same 28 tasks the project has been mining, so it can bound the generator but cannot demonstrate generalization.",
+ "cost": {
+  "model_calls": 0,
+  "parameters_stored": 0,
+  "network_at_run_time": 0,
+  "wall_clock_s": 2183.5
+ }
+}

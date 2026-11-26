@@ -47,11 +47,127 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import marshal
+import os
 import re
 import sys
 import warnings
 from pathlib import Path
 from typing import Any, Iterable, Mapping
+
+_DBSP_CACHE_VERSION = 2
+
+
+def _fast_scandir_files(
+    root_str: str,
+    rel_root: str,
+    *,
+    suffix: str | None = None,
+    skip_dirs: frozenset[str] = frozenset({".git", "__pycache__"}),
+    skip_rel_prefixes: tuple[str, ...] = (),
+) -> list[tuple[str, str, os.stat_result]]:
+    """Wave 21 Elon-speed `os.scandir` walker returning `(abs_path, rel_posix, stat)` sorted identically to `Path`."""
+    start = os.path.join(root_str, rel_root) if rel_root else root_str
+    if not os.path.isdir(start):
+        return []
+    out: list[tuple[str, str, os.stat_result]] = []
+    stack: list[tuple[str, str]] = [(start, rel_root.strip("/"))]
+    while stack:
+        cur_dir, cur_rel = stack.pop()
+        try:
+            with os.scandir(cur_dir) as it:
+                for entry in it:
+                    name = entry.name
+                    rel = f"{cur_rel}/{name}" if cur_rel else name
+                    try:
+                        is_dir = entry.is_dir(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    if is_dir:
+                        if name in skip_dirs:
+                            continue
+                        if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                            continue
+                        stack.append((entry.path, rel))
+                        continue
+                    if suffix is not None and not name.endswith(suffix):
+                        continue
+                    if skip_rel_prefixes and any(rel == p or rel.startswith(p + "/") for p in skip_rel_prefixes):
+                        continue
+                    try:
+                        if not entry.is_file(follow_symlinks=True):
+                            continue
+                        st = entry.stat(follow_symlinks=True)
+                    except OSError:
+                        continue
+                    out.append((entry.path, rel, st))
+        except OSError:
+            continue
+    out.sort(key=lambda item: item[1].split("/"))
+    return out
+
+
+class _DBSPCompileCache:
+    """Wave 14 DBSP / Merkle per-file incremental compile cache (O(|Δ|) vs O(|DB|)).
+
+    Keyed strictly by ``(rel_posix, mtime_ns, size)`` per source file so any modified
+    file is recomputed immediately while unchanged files avoid redundant AST/JSON
+    parsing. Stored inside ``canonical/runtime/__pycache__/`` (gitignored) and
+    bypassed when ``BRAIN_COMPILE_NO_CACHE=1``.
+    """
+
+    def __init__(self, base: Path) -> None:
+        self.enabled = os.environ.get("BRAIN_COMPILE_NO_CACHE", "").strip() not in ("1", "true", "yes")
+        self.path = base / "canonical" / "runtime" / "__pycache__" / "compile_brain_unified_model_dbsp_v1.marshal"
+        self.tables: dict[str, dict[str, tuple[int, int, Any]]] = {
+            "imports": {},
+            "source": {},
+            "harvest": {},
+            "research": {},
+            "adapter_ast": {},
+            "knowledge": {},
+            "ext_imports": {},
+            "ext_source": {},
+            "adapter_deps": {},
+        }
+        self.dirty = False
+        if self.enabled and self.path.is_file():
+            try:
+                raw = marshal.loads(self.path.read_bytes())
+                if isinstance(raw, dict) and raw.get("v") == _DBSP_CACHE_VERSION:
+                    for k in self.tables:
+                        blk = raw.get(k)
+                        if isinstance(blk, dict):
+                            self.tables[k] = blk
+            except Exception:
+                pass
+
+    def get(self, table: str, rel: str, st: os.stat_result) -> tuple[bool, Any]:
+        if not self.enabled:
+            return False, None
+        entry = self.tables[table].get(rel)
+        if entry is not None and entry[0] == st.st_mtime_ns and entry[1] == st.st_size:
+            return True, entry[2]
+        return False, None
+
+    def put(self, table: str, rel: str, st: os.stat_result, value: Any) -> None:
+        if not self.enabled:
+            return
+        self.tables[table][rel] = (int(st.st_mtime_ns), int(st.st_size), value)
+        self.dirty = True
+
+    def save(self) -> None:
+        if not self.enabled or not self.dirty:
+            return
+        try:
+            self.path.parent.mkdir(parents=True, exist_ok=True)
+            tmp = self.path.with_suffix(f".tmp.{os.getpid()}")
+            payload = {"v": _DBSP_CACHE_VERSION, **self.tables}
+            tmp.write_bytes(marshal.dumps(payload, 4))
+            os.replace(tmp, self.path)
+            self.dirty = False
+        except Exception:
+            pass
 
 SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_V1"
 MODEL_ID = "BRAIN-UNIFIED-MODEL-V1"
@@ -465,8 +581,39 @@ def _adapter_executed_programs(root: Path, rel: str | None) -> list[str]:
     return sorted(programs)
 
 
+def _adapter_static_deps(
+    root: Path,
+    rel: str | None,
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> tuple[list[str], list[str], list[str]]:
+    if not rel:
+        return [], [], []
+    path = root / rel
+    if not path.is_file():
+        return [], [], []
+    st_dep: os.stat_result | None = None
+    if cache is not None and cache.enabled:
+        try:
+            st_dep = path.stat()
+            hit, val = cache.get("adapter_deps", rel, st_dep)
+            if hit:
+                return list(val[0]), list(val[1]), list(val[2])
+        except OSError:
+            return [], [], []
+    imps = _adapter_imports(root, rel)
+    runpy = _adapter_runpy_targets(root, rel)
+    progs = _adapter_executed_programs(root, rel)
+    if cache is not None and cache.enabled and st_dep is not None:
+        cache.put("adapter_deps", rel, st_dep, (tuple(imps), tuple(runpy), tuple(progs)))
+    return imps, runpy, progs
+
+
 def _dependency_declaration(
-    entry: Mapping[str, Any], root: Path
+    entry: Mapping[str, Any],
+    root: Path,
+    *,
+    cache: _DBSPCompileCache | None = None,
 ) -> dict[str, Any]:
     """Record the capability's *declared* dependencies without probing for them.
 
@@ -521,19 +668,19 @@ def _dependency_declaration(
         # here keeps the artifact environment-free -- nothing is probed -- while
         # ``UnifiedModel`` resolves the names against the machine that answers.
         adapter_rel = _adapter_path_of(entry, root)
-        for name in sorted(
-            set(_adapter_imports(root, adapter_rel))
-            | set(_adapter_runpy_targets(root, adapter_rel))
-        ):
+        imps, runpy, progs = _adapter_static_deps(root, adapter_rel, cache=cache)
+        for name in sorted(set(imps) | set(runpy)):
             if name in {"__future__"} or name.startswith("canonical"):
                 continue
             checked.append(name)
-        for name in _adapter_executed_programs(root, adapter_rel):
+        for name in progs:
             checked.append(name)
             executables.append(name)
     else:
         kind = "PYTHON_SOURCE"
-        modules = _adapter_imports(root, str(adapter_path) if adapter_path else None)
+        modules, _, _ = _adapter_static_deps(
+            root, str(adapter_path) if adapter_path else None, cache=cache
+        )
         if module and str(module) not in modules:
             modules = sorted(set(modules) | {str(module)})
         for name in modules:
@@ -558,6 +705,8 @@ def _capability_row(
     capability_id: str,
     entry: Mapping[str, Any],
     root: Path,
+    *,
+    cache: _DBSPCompileCache | None = None,
 ) -> dict[str, Any]:
     template = entry.get("action_template")
     declared = entry.get("declared_action_template")
@@ -646,7 +795,7 @@ def _capability_row(
             "source_module": source.get("module"),
             "source_executable": source.get("executable"),
         },
-        "declared_dependencies": _dependency_declaration(entry, root),
+        "declared_dependencies": _dependency_declaration(entry, root, cache=cache),
         "platforms": sorted(str(x) for x in (entry.get("platforms") or [])),
     }
 
@@ -677,10 +826,17 @@ def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[
         rows.append((cid.casefold(), cid, 12))
     for engine in engines:
         eid = str(engine["id"])
+        is_federated = engine.get("kind") == "FEDERATED_KERNEL_ENGINE"
+        seen_eng: set[str] = set()
         for trigger in engine.get("triggers") or []:
+            trig_weight = 3 if (is_federated and " " in str(trigger)) else 2
             for token in tokenize(str(trigger)):
-                rows.append((token, eid, 2))
+                if token in seen_eng:
+                    continue
+                seen_eng.add(token)
+                rows.append((token, eid, trig_weight))
         rows.append((eid.casefold().replace("engine:", ""), eid, 8))
+        rows.append((eid.casefold(), eid, 12))
 
     postings: dict[str, dict[str, int]] = {}
     doc_freq: dict[str, int] = {}
@@ -722,7 +878,11 @@ def _build_grammar(capabilities: list[Mapping[str, Any]], engines: list[Mapping[
 # --------------------------------------------------------------------------- knowledge
 
 
-def _knowledge_rows(root: Path) -> list[dict[str, Any]]:
+def _knowledge_rows(
+    root: Path,
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> list[dict[str, Any]]:
     paths: list[Path] = []
     for pattern in KNOWLEDGE_GLOBS:
         for path in root.glob(pattern):
@@ -754,6 +914,22 @@ def _knowledge_rows(root: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for path in unique:
         rel = path.relative_to(root).as_posix()
+        st_k: os.stat_result | None = None
+        if cache is not None and cache.enabled:
+            try:
+                st_k = path.stat()
+                hit, cached_k = cache.get("knowledge", rel, st_k)
+                if hit:
+                    rows.append({
+                        **cached_k,
+                        "title_terms": list(cached_k["title_terms"]),
+                        "headings": list(cached_k["headings"]),
+                        "terms": dict(cached_k["terms"]),
+                        "authority": authority.get(rel, "NOT_A_LAW"),
+                    })
+                    continue
+            except OSError:
+                pass
         raw = path.read_bytes()
         if rel.endswith(".json"):
             try:
@@ -777,20 +953,20 @@ def _knowledge_rows(root: Path) -> list[dict[str, Any]]:
             title = headings[0] if headings else path.stem.replace("_", " ")
             summary = _first_paragraph(text)
             kind = "LAW" if rel.startswith("canonical/laws/") else "DOCUMENT"
-        rows.append(
-            {
-                "path": rel,
-                "kind": kind,
-                "title": title[:240],
-                "title_terms": sorted(set(tokenize(title))),
-                "headings": headings,
-                "summary": summary,
-                "bytes": len(raw),
-                "sha256": digest_bytes(raw),
-                "terms": _term_counts(text),
-                "authority": authority.get(rel, "NOT_A_LAW"),
-            }
-        )
+        k_entry = {
+            "path": rel,
+            "kind": kind,
+            "title": title[:240],
+            "title_terms": sorted(set(tokenize(title))),
+            "headings": headings,
+            "summary": summary,
+            "bytes": len(raw),
+            "sha256": digest_bytes(raw),
+            "terms": _term_counts(text),
+        }
+        if cache is not None and cache.enabled and st_k is not None:
+            cache.put("knowledge", rel, st_k, k_entry)
+        rows.append({**k_entry, "authority": authority.get(rel, "NOT_A_LAW")})
     return rows
 
 
@@ -831,6 +1007,11 @@ def _skill_rows(root: Path) -> list[dict[str, Any]]:
 
 
 def _engine_rows(root: Path) -> list[dict[str, Any]]:
+    from canonical.runtime.unified_hidden_capability_federation_v1 import (
+        CARRIER_REL_PATH as FEDERATED_CARRIER_PATH,
+        FEDERATED_KERNEL_DESCRIPTORS,
+    )
+
     engines, meta = _fabric_surfaces(root)
     fabric_sha = digest_file(root / FABRIC_PATH)
     rows: list[dict[str, Any]] = []
@@ -870,6 +1051,50 @@ def _engine_rows(root: Path) -> list[dict[str, Any]]:
                 "host_providers_may_be_required": True,
             }
         )
+    federated_carrier_sha = digest_file(root / FEDERATED_CARRIER_PATH)
+    for mode in sorted(FEDERATED_KERNEL_DESCRIPTORS):
+        spec = FEDERATED_KERNEL_DESCRIPTORS[mode]
+        src_rel = str(spec["source_path"])
+        src_file = root / src_rel
+        src_sha = digest_file(src_file) if src_file.is_file() else None
+        trig_list: list[str] = []
+        seen_t: set[str] = set()
+        for phrase in [mode.replace("_", " ").lower(), *(spec.get("triggers") or [])]:
+            p_str = str(phrase).strip()
+            if p_str and p_str not in seen_t:
+                seen_t.add(p_str)
+                trig_list.append(p_str)
+        deps = sorted({str(d) for d in (spec.get("declared_dependencies") or []) if str(d)})
+        rows.append(
+            {
+                "id": "engine:" + mode,
+                "kind": "FEDERATED_KERNEL_ENGINE",
+                "mode": mode,
+                "domain": str(spec["domain"]),
+                "descriptor": f"{src_rel}:{spec['entrypoint']}",
+                "summary": str(spec["summary"]),
+                "required_inputs": [str(k) for k in (spec.get("required_inputs") or [])],
+                "declared_dependencies": {
+                    "kind": "PYTHON_SOURCE",
+                    "declared_dependencies_checked": deps,
+                    "declared_dependency_executables": [],
+                },
+                "incremental_spend_usd": 0,
+                "model_dependency_count": 0,
+                "triggers": trig_list,
+                "route": {
+                    "carrier": "unified_hidden_capability_federation_v1.run_federated_engine",
+                    "carrier_path": FEDERATED_CARRIER_PATH,
+                    "carrier_sha256": federated_carrier_sha,
+                    "source_path": src_rel,
+                    "source_sha256": src_sha,
+                    "entrypoint": str(spec["entrypoint"]),
+                    "call": "run_federated_engine(mode, inputs, goal=goal)",
+                    "authority": "LOCAL_DETERMINISTIC_KERNEL__ZERO_MODEL",
+                },
+                "host_providers_may_be_required": False,
+            }
+        )
     return rows
 
 
@@ -883,7 +1108,127 @@ _IMPORT_RE = re.compile(r"^\s*(?:from|import)\s+([A-Za-z_][\w.]*)", re.M)
 _SOURCE_ROOTS = ("canonical/runtime", "canonical/swe_kernel", "canonical/tools")
 
 
-def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+def _harvested_rows(
+    root: Path,
+    admitted_paths: set[str] | None = None,
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> list[dict[str, Any]]:
+    """Executable surfaces the registry cannot see, derived from the tree itself.
+
+    Measured on this checkout: 625 modules carry an invocation shape (a
+    ``run(args, root)`` contract or a program entry point), are absent from both
+    registries and from the receipt projection, and are therefore invisible to
+    ``source_index`` too -- ``source_index`` only walks ``canonical/runtime``, and
+    462 of the 625 live outside it (``canonical/tools`` 322,
+    ``canonical/swe_kernel`` 94, ``execution_guard`` 25).
+
+    This is a *description*, not an admission.  Every row says
+    ``admitted: false``; execution goes through the harvested-capability runtime,
+    which issues a receipt and still cannot promote anything, because the loader
+    requires an independent identity with signed OIDC claims to re-run it.
+    """
+    if str(root) not in sys.path:
+        sys.path.insert(0, str(root))
+    from canonical.tools import harvest_hidden_capabilities_v1 as census
+
+    admitted_paths = admitted_paths or set()
+    if cache is None or not cache.enabled:
+        raw_rows = census.harvested_rows(root)
+    else:
+        declared = census.declared_ids(root)
+        declared_paths = census.declared_source_paths(root)
+        shape_hint = re.compile(r"^\s*(?:async\s+)?def\s+(?:run|execute)\s*\(", re.MULTILINE)
+        skip_prefixes = tuple(census.SKIP_PATH_PREFIXES)
+        raw_rows = []
+        for abs_path, rel, st in _fast_scandir_files(
+            str(root),
+            "",
+            suffix=".py",
+            skip_dirs=frozenset(census.SKIP_DIRS),
+        ):
+            base_name = os.path.basename(abs_path)
+            if census.TEST_NAME_RE.search(base_name):
+                continue
+            if any(rel.startswith(p) for p in skip_prefixes):
+                continue
+            hit, cached = cache.get("harvest", rel, st)
+            if not hit:
+                cached = None
+                try:
+                    with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                        source = fh.read()
+                except OSError:
+                    source = ""
+                if "__main__" in source or shape_hint.search(source) or "def main(" in source:
+                    try:
+                        tree = ast.parse(source)
+                        kind, entrypoint = census.shape_of(tree, source)
+                        if kind != "library":
+                            contract = census.declared_contract(tree)
+                            named = contract["capability_id"]
+                            cached = {
+                                "id": census.capability_id(rel),
+                                "path": rel,
+                                "kind": kind,
+                                "entrypoint": entrypoint,
+                                "doc": census.first_doc_line(tree),
+                                "declared_capability_id": named,
+                                "declared_inputs": list(contract["inputs"]),
+                                "declared_result_fields": list(contract["result_fields"]),
+                                "triggers": list(census.triggers_for(rel, named or "")),
+                                "sha256": census.sha256_file(Path(abs_path)),
+                            }
+                    except (SyntaxError, ValueError):
+                        cached = None
+                cache.put("harvest", rel, st, cached)
+            if cached is None:
+                continue
+            cid = cached["id"]
+            if cid in declared or rel in declared_paths:
+                continue
+            named = cached["declared_capability_id"]
+            if named and (named in declared or named.rsplit(".v", 1)[0] in declared):
+                continue
+            raw_rows.append(cached)
+        raw_rows.sort(key=lambda r: r["path"])
+
+    rows: list[dict[str, Any]] = []
+    for row in raw_rows:
+        # A bound capability may record only `adapter_module`, never a path, so the
+        # census cannot know that `bound_capabilities/<stem>.py` is already declared.
+        # The compiler can: it resolves that adapter itself.  Without this filter five
+        # modules appeared both as admitted capabilities and as discovered surfaces --
+        # the same file claiming two different statuses in one artifact.
+        if row["path"] in admitted_paths:
+            continue
+        rows.append({
+            "id": row["id"],
+            "kind": "HARVESTED_EXECUTABLE_SURFACE",
+            "path": row["path"],
+            "sha256": row["sha256"],
+            "invocation": row["kind"],
+            "entrypoint": row["entrypoint"],
+            "declared_capability_id": row.get("declared_capability_id"),
+            "declared_inputs": list(row.get("declared_inputs") or []),
+            "declared_result_fields": list(row.get("declared_result_fields") or []),
+            "summary": row.get("doc") or "",
+            "triggers": list(row["triggers"]),
+            # The load-bearing distinction, on every row.
+            "admitted": False,
+            "capability": False,
+            "admission_state": "DISCOVERED_NOT_ADMITTED",
+            "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+        })
+    return rows
+
+
+def _source_index_rows(
+    root: Path,
+    covered: set[str],
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> list[dict[str, Any]]:
     """Index the source modules the model can *address* but cannot *execute*.
 
     Measured, the capability registry reaches 395 of the 2627 modules under the
@@ -901,20 +1246,36 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     # measured fact rather than a guess.
     _seen: set[str] = set()
     importers: dict[str, set[str]] = {}
-    py_files: list[Path] = []
+    root_str = str(root)
+    py_entries: list[tuple[str, str, os.stat_result]] = []
     for name in ("canonical", "tests"):
-        base = root / name
-        if base.is_dir():
-            py_files.extend(
-                p for p in sorted(base.rglob("*.py")) if ".git" not in p.parts
+        py_entries.extend(
+            _fast_scandir_files(
+                root_str,
+                name,
+                suffix=".py",
+                skip_dirs=frozenset({".git", "__pycache__"}),
+                skip_rel_prefixes=("canonical/astra_runtime/tmp",),
             )
-    for path in py_files:
-        try:
-            text = path.read_text(encoding="utf-8", errors="replace")
-        except OSError:
-            continue
-        for mod in _IMPORT_RE.findall(text):
-            importers.setdefault(mod.split(".")[0], set()).add(path.as_posix())
+        )
+    for abs_path, rel_imp, st_imp in py_entries:
+        posix_imp = abs_path.replace(os.sep, "/")
+        mods: tuple[str, ...] | None = None
+        if cache is not None and cache.enabled:
+            hit, cached_mods = cache.get("imports", rel_imp, st_imp)
+            if hit:
+                mods = cached_mods
+        if mods is None:
+            try:
+                with open(abs_path, "r", encoding="utf-8", errors="replace") as fh:
+                    text = fh.read()
+            except OSError:
+                continue
+            mods = tuple({m.split(".")[0] for m in _IMPORT_RE.findall(text)})
+            if cache is not None and cache.enabled:
+                cache.put("imports", rel_imp, st_imp, mods)
+        for mod_root in mods:
+            importers.setdefault(mod_root, set()).add(posix_imp)
 
     rows: list[dict[str, Any]] = []
     # Every source root, not only ``canonical/runtime``. Measured before this
@@ -930,63 +1291,85 @@ def _source_index_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     # cannot select it, and a module that *is* a capability is still excluded by
     # ``covered`` before it can be indexed as non-executable source.
     for source_root in _SOURCE_ROOTS:
-        base_dir = root / source_root
-        if not base_dir.is_dir():
-            continue
-        for path in sorted(base_dir.rglob("*.py")):
-            if ".git" in path.parts or "__pycache__" in path.parts:
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_src in _fast_scandir_files(
+            root_str,
+            source_root,
+            suffix=".py",
+            skip_dirs=frozenset({".git", "__pycache__"}),
+        ):
             if rel in covered or rel in _seen:
                 continue
             _seen.add(rel)
-            try:
-                raw = path.read_bytes()
-            except OSError:
-                continue
-            text = raw.decode("utf-8", errors="replace")
-            stem = path.stem
-            is_entry = "__main__" in text
+            stem = os.path.splitext(os.path.basename(abs_path))[0]
+            cached_src: dict[str, Any] | None = None
+            if cache is not None and cache.enabled:
+                hit, val = cache.get("source", rel, st_src)
+                if hit:
+                    cached_src = val
+            if cached_src is None:
+                try:
+                    with open(abs_path, "rb") as fh:
+                        raw = fh.read()
+                except OSError:
+                    continue
+                text = raw.decode("utf-8", errors="replace")
+                is_entry = "__main__" in text
+                symbols: list[str] = []
+                summary = ""
+                parse_ok = True
+                try:
+                    with warnings.catch_warnings():
+                        warnings.simplefilter("ignore", DeprecationWarning)
+                        tree = ast.parse(text)
+                    for node in tree.body:
+                        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
+                            symbols.append(node.name)
+                    summary_lines = (ast.get_docstring(tree) or "").strip().splitlines()
+                    summary = summary_lines[0][:240] if summary_lines else ""
+                except (SyntaxError, ValueError, UnicodeDecodeError):
+                    parse_ok = False
+                haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
+                cached_src = {
+                    "sha256": digest_bytes(raw),
+                    "is_entry": is_entry,
+                    "parse_ok": parse_ok,
+                    "symbol_count": len(symbols),
+                    "symbols": sorted(symbols)[:24],
+                    "summary": summary,
+                    "terms": _term_counts(haystack),
+                }
+                if cache is not None and cache.enabled and st_src is not None:
+                    cache.put("source", rel, st_src, cached_src)
+
+            is_entry = bool(cached_src["is_entry"])
             n_importers = len(importers.get(stem, set()) - {rel})
-            classification = (
-                "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
-            )
-
-            symbols: list[str] = []
-            summary = ""
-            try:
-                with warnings.catch_warnings():
-                    warnings.simplefilter("ignore", DeprecationWarning)
-                    tree = ast.parse(text)
-                for node in tree.body:
-                    if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)):
-                        symbols.append(node.name)
-                summary = (ast.get_docstring(tree) or "").strip().splitlines()
-                summary = summary[0][:240] if summary else ""
-            except (SyntaxError, ValueError, UnicodeDecodeError):
+            if not cached_src["parse_ok"]:
                 classification = "UNPARSEABLE"
+            else:
+                classification = (
+                    "ENTRY_POINT" if is_entry else ("INTERNAL_HELPER" if n_importers else "ORPHAN")
+                )
 
-            haystack = " ".join([stem.replace("_", " "), summary, " ".join(symbols[:24])])
             rows.append(
                 {
                     "id": "source:" + rel,
                     "kind": "SOURCE_ADDRESSABLE_MODULE",
                     "path": rel,
-                    "sha256": digest_bytes(raw),
+                    "sha256": cached_src["sha256"],
                     "classification": classification,
                     # The load-bearing part: addressable is not executable.
                     "capability": False,
                     "executable_entry_point": is_entry,
                     "imported_by_count": n_importers,
-                    "symbol_count": len(symbols),
-                    "symbols": sorted(symbols)[:24],
-                    "summary": summary,
+                    "symbol_count": cached_src["symbol_count"],
+                    "symbols": list(cached_src["symbols"]),
+                    "summary": cached_src["summary"],
                     # Term *counts*, matching the convention `knowledge` and
                     # `skills` already use, so the runtime can score this index with
                     # the same IDF weighting as `recall`. A flat set of terms made
                     # every row look equally about "v1" -- measured, "v1" occurs in
                     # 1132 of 1859 rows -- which is why raw overlap ranked noise.
-                    "terms": _term_counts(haystack),
+                    "terms": dict(cached_src["terms"]),
                 }
             )
     return rows
@@ -1025,6 +1408,10 @@ _GENERATED_OUTPUTS = frozenset(
     {
         "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
         "canonical/verification/BRAIN_UNIFIED_MODEL_V1_VERIFICATION_20261020.json",
+        # Measured on the runtime answer receipt: it records the artifact's digest and wall-clock
+        # percentiles, so indexing it made every recompile differ from the last one -- the same
+        # cycle as the two entries above, with a clock inside it.
+        "canonical/verification/RUNTIME_ANSWER_RECEIPT_20261127_V1.json",
     }
 )
 
@@ -1041,7 +1428,12 @@ _NON_SOURCE_DIRS = frozenset({"__pycache__", ".pytest_cache", ".mypy_cache", ".r
                               ".git", "node_modules", ".venv", "venv"})
 
 
-def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
+def _research_rows(
+    root: Path,
+    covered: set[str],
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> list[dict[str, Any]]:
     """Index the research record: governance, verification, and action intents.
 
     These are the decisions and receipts behind the capabilities -- 6266 files,
@@ -1056,18 +1448,25 @@ def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
     restate what the tree already holds.
     """
     rows: list[dict[str, Any]] = []
+    root_str = str(root)
+    skip_dirs = frozenset(_NON_SOURCE_DIRS)
     for rel_root in _RESEARCH_ROOTS:
-        base = root / rel_root
-        if not base.is_dir():
-            continue
-        for path in sorted(base.rglob("*")):
-            if not path.is_file() or any(part in _NON_SOURCE_DIRS for part in path.parts):
-                continue
-            rel = path.relative_to(root).as_posix()
+        for abs_path, rel, st_res in _fast_scandir_files(
+            root_str,
+            rel_root,
+            suffix=None,
+            skip_dirs=skip_dirs,
+        ):
             if rel in covered or rel in _GENERATED_OUTPUTS:
                 continue
+            if cache is not None and cache.enabled:
+                hit, cached_row = cache.get("research", rel, st_res)
+                if hit:
+                    rows.append({**cached_row, "terms": dict(cached_row["terms"])})
+                    continue
             try:
-                raw = path.read_bytes()
+                with open(abs_path, "rb") as fh:
+                    raw = fh.read()
             except OSError:
                 continue
             text = raw.decode("utf-8", errors="replace")
@@ -1077,7 +1476,9 @@ def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
             date = ""
             action_id = ""
             parts: list[str] = []
-            if path.suffix == ".json":
+            base_name = os.path.basename(abs_path)
+            stem, ext = os.path.splitext(base_name)
+            if ext == ".json":
                 try:
                     doc = json.loads(text)
                 except ValueError:
@@ -1092,22 +1493,23 @@ def _research_rows(root: Path, covered: set[str]) -> list[dict[str, Any]]:
                         if isinstance(value, str) and value:
                             parts.append(value)
 
-            haystack = " ".join(parts) + " " + path.stem.replace("_", " ").replace("-", " ")
-            rows.append(
-                {
-                    "id": "research:" + rel,
-                    "kind": "RESEARCH_RECORD",
-                    "path": rel,
-                    "sha256": digest_bytes(raw),
-                    "schema": schema[:160],
-                    "status": status[:80],
-                    "date": date[:32],
-                    "action_id": action_id[:160],
-                    # A record is evidence about a capability, not a capability.
-                    "capability": False,
-                    "terms": _term_counts(haystack, limit=32),
-                }
-            )
+            haystack = " ".join(parts) + " " + stem.replace("_", " ").replace("-", " ")
+            row_obj = {
+                "id": "research:" + rel,
+                "kind": "RESEARCH_RECORD",
+                "path": rel,
+                "sha256": digest_bytes(raw),
+                "schema": schema[:160],
+                "status": status[:80],
+                "date": date[:32],
+                "action_id": action_id[:160],
+                # A record is evidence about a capability, not a capability.
+                "capability": False,
+                "terms": _term_counts(haystack, limit=32),
+            }
+            if cache is not None and cache.enabled:
+                cache.put("research", rel, st_res, row_obj)
+            rows.append(row_obj)
     return rows
 
 
@@ -1137,7 +1539,12 @@ _AST_CONFIG_SLOTS = frozenset((
 ))
 
 
-def _extract_adapter_ast_index(base: Path, capabilities: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
+def _extract_adapter_ast_index(
+    base: Path,
+    capabilities: list[dict[str, Any]],
+    *,
+    cache: _DBSPCompileCache | None = None,
+) -> dict[str, dict[str, Any]]:
     """Pre-compute content-addressed AST metadata (`defaulted_keys` + `dispatch_ops`) per adapter."""
     index: dict[str, dict[str, Any]] = {}
     seen_paths: set[str] = set()
@@ -1149,6 +1556,22 @@ def _extract_adapter_ast_index(base: Path, capabilities: list[dict[str, Any]]) -
         full_p = (base / rel).resolve()
         if not full_p.is_file():
             continue
+        st_ast: os.stat_result | None = None
+        if cache is not None and cache.enabled:
+            try:
+                st_ast = full_p.stat()
+                hit, cached_entry = cache.get("adapter_ast", rel, st_ast)
+                if hit:
+                    if cached_entry is not None:
+                        index[rel] = {
+                            "sha256": cached_entry["sha256"],
+                            "defaulted_keys": dict(cached_entry["defaulted_keys"]),
+                            "dispatch_ops": list(cached_entry["dispatch_ops"]),
+                            "dispatch_phrases": list(cached_entry["dispatch_phrases"]),
+                        }
+                    continue
+            except OSError:
+                continue
         try:
             raw = full_p.read_bytes()
             sha = digest_bytes(raw)
@@ -1156,6 +1579,8 @@ def _extract_adapter_ast_index(base: Path, capabilities: list[dict[str, Any]]) -
                 warnings.simplefilter("ignore", SyntaxWarning)
                 tree = ast.parse(raw.decode("utf-8"))
         except (OSError, UnicodeDecodeError, SyntaxError, ValueError):
+            if cache is not None and cache.enabled and st_ast is not None:
+                cache.put("adapter_ast", rel, st_ast, None)
             continue
 
         guarded_nodes: set[int] = set()
@@ -1196,12 +1621,15 @@ def _extract_adapter_ast_index(base: Path, capabilities: list[dict[str, Any]]) -
                 found_defaults.setdefault(key.value, f"{rel}:{node.lineno}")
 
         phrases = sorted({op.replace("_", " ").replace("-", " ").lower() for op in dispatch_ops if "_" in op or "-" in op})
-        index[rel] = {
+        entry_val = {
             "sha256": sha,
             "defaulted_keys": dict(sorted(found_defaults.items())),
             "dispatch_ops": sorted(dispatch_ops),
             "dispatch_phrases": phrases,
         }
+        index[rel] = entry_val
+        if cache is not None and cache.enabled and st_ast is not None:
+            cache.put("adapter_ast", rel, st_ast, entry_val)
     return dict(sorted(index.items()))
 def _theory_block() -> dict[str, Any]:
     return {
@@ -1215,16 +1643,133 @@ def _theory_block() -> dict[str, Any]:
     }
 
 
+
+ANATOMY_PATH = "canonical/unified_model/DOMAIN_ATLAS_V1.json"
+
+
+def _anatomy_block(root: Path) -> dict[str, Any]:
+    """The five frontier functions, projected into the model as *navigation*.
+
+    Measured before this block existed: the model could point at the machinery for
+    instant learning (``find_source`` recall 1.00, 13x chance) and could not route to it
+    (``route`` recall 0.00) even when asked in the repository's own vocabulary. The
+    modules were in the tree and in ``source_index``; what was missing was a
+    function-first view of them.
+
+    This block is that view. It is a projection of ``DOMAIN_ATLAS_V1.json``, which is
+    itself a projection of the tree -- so it is reproducible, and it is rebuilt when the
+    tree changes. Every row stays ``capability: false``: a module that scores as "this is
+    the memory subsystem" has not been executed, so it has not been admitted, and the
+    model must not pretend otherwise.
+    """
+    path = root / ANATOMY_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_ANATOMY_V1",
+            "source": ANATOMY_PATH,
+            "present": False,
+            "reason": "ATLAS_NOT_COMPILED__RUN_canonical/tools/domain_atlas_v1.py",
+            "domains": {},
+        }
+    atlas = json.loads(path.read_text(encoding="utf-8"))
+    domains: dict[str, Any] = {}
+    for name, row in sorted((atlas.get("domains") or {}).items()):
+        domains[name] = {
+            "frontier_function": row.get("frontier_function"),
+            "candidates": row.get("candidates"),
+            "indexed_all": row.get("indexed_all"),
+            "harvested_all": row.get("harvested_all"),
+            "hidden_share_all": row.get("hidden_share_all"),
+            "top": [
+                {
+                    "path": item.get("path"),
+                    "score": item.get("score"),
+                    "summary": item.get("summary"),
+                    "executable_surface": bool(item.get("harvested")),
+                    "indexed_as_source": bool(item.get("source_index")),
+                    "capability": False,
+                }
+                for item in (row.get("top") or [])[:12]
+            ],
+        }
+    reach = atlas.get("reachability") or {}
+    return {
+        "schema": "BRAIN_MODEL_ANATOMY_V1",
+        "source": ANATOMY_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "domains": domains,
+        "reachability": {
+            name: {
+                key: value
+                for key, value in (row or {}).items()
+                if key in ("frontier_source_hit_recall", "native_route_hit_recall",
+                           "chance_source_recall", "chance_route_recall")
+            }
+            for name, row in sorted(reach.items())
+        },
+        "claim_limit": atlas.get("claim_limit"),
+    }
+
+
+LEDGER_PATH = "canonical/verification/PROMOTION_LEDGER_20261127_V1.json"
+
+
+def _promotion_block(root: Path) -> dict[str, Any]:
+    """What stands between the tree's frontier-function code and a call from ``solve()``.
+
+    The anatomy block answers *where* the five functions live. It does not answer why a
+    module that implements one of them still cannot be called. Measured on 849 classified
+    modules: 31 are callable and receipted, 36 are callable with no receipt, 641 are indexed
+    source with no adapter, and 137 are not indexed at all. Three quarters of the machinery
+    is one thin adapter away from the runtime, which is a different job from writing
+    capability -- and until the number was written down, every round guessed at it.
+
+    The block is a projection of the ledger, so it is rebuilt when the ledger is, and every
+    count in it is a row of that artifact. It admits nothing: a ``ROUTED`` row has a receipt,
+    not a proof of correctness.
+    """
+    path = root / LEDGER_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_PROMOTION_V1",
+            "source": LEDGER_PATH,
+            "present": False,
+            "reason": "LEDGER_NOT_COMPILED__RUN_canonical/tools/promotion_ledger_v1.py",
+        }
+    ledger = json.loads(path.read_text(encoding="utf-8"))
+    totals = ledger.get("totals") or {}
+    return {
+        "schema": "BRAIN_MODEL_PROMOTION_V1",
+        "source": LEDGER_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "candidates": ledger.get("candidates"),
+        "callable_now": ledger.get("callable_now"),
+        "callable_share": ledger.get("callable_share"),
+        "by_missing_attribute": totals,
+        "promotable_without_new_code": int(totals.get("RECEIPTED_UNBOUND") or 0) + int(
+            totals.get("ADAPTER_UNRECEIPTED") or 0
+        ),
+        "needs_a_thin_adapter": int(totals.get("SOURCE_ONLY") or 0),
+        "not_indexed": int(totals.get("INVISIBLE") or 0),
+        "per_domain_callable": ledger.get("domain_executable_now") or {},
+        "next_actions": ledger.get("next_actions") or [],
+        "claim_limit": ledger.get("claim_limit"),
+    }
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
+    cache = _DBSPCompileCache(base)
     registry = _live_registry(base)
     capabilities = [
-        _capability_row(cid, registry[cid], base) for cid in sorted(registry)
+        _capability_row(cid, registry[cid], base, cache=cache) for cid in sorted(registry)
     ]
     engines = _engine_rows(base)
     skills = _skill_rows(base)
-    knowledge = _knowledge_rows(base)
+    knowledge = _knowledge_rows(base, cache=cache)
 
     # Modules the model can address but not execute. Kept out of `capabilities`
     # on purpose: see _source_index_rows.
@@ -1243,20 +1788,44 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         for row in capabilities
         if row["provenance"].get("source_path")
     )
-    source_index = _source_index_rows(base, covered_paths)
+    source_index = _source_index_rows(base, covered_paths, cache=cache)
+    admitted_paths: set[str] = set()
+    for row in capabilities:
+        for key in ("source_path", "adapter_path"):
+            value = row["provenance"].get(key)
+            if isinstance(value, str):
+                admitted_paths.add(value)
+    harvested = _harvested_rows(base, admitted_paths, cache=cache)
+    # `source_index` now scans `canonical/swe_kernel` as well as `canonical/runtime`,
+    # so some harvested rows are already findable there.  Say so on the row instead
+    # of hiding the executable half: findable and callable are different facts.
+    indexed_paths = {row["path"] for row in source_index}
+    for row in harvested:
+        row["also_in_source_index"] = row["path"] in indexed_paths
+
+    from canonical.runtime.unified_hidden_capability_federation_v1 import (
+        CARRIER_REL_PATH as FEDERATED_CARRIER_PATH,
+        compile_extended_source_index_rows,
+    )
+
+    extended_source_index = compile_extended_source_index_rows(
+        base, covered_paths | indexed_paths, cache=cache
+    )
 
     # The research record behind the capabilities: governance decisions,
     # verification receipts, action intents. Records, not capabilities -- see
     # _research_rows.
     covered_docs = {str(row.get("path")) for row in knowledge + skills if row.get("path")}
-    research_index = _research_rows(base, covered_docs)
+    research_index = _research_rows(base, covered_docs, cache=cache)
 
     for row in capabilities:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
+    anatomy = _anatomy_block(base)
+    promotion = _promotion_block(base)
     grammar = _build_grammar(capabilities, engines)
-    grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
+    grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities, cache=cache)
 
     included_sources: list[tuple[str, str]] = []
     for row in capabilities:
@@ -1268,9 +1837,17 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         evidence_sha = row["verification"].get("evidence_sha256")
         if isinstance(evidence_path, str) and isinstance(evidence_sha, str):
             included_sources.append((evidence_path, evidence_sha))
+    for erow in engines:
+        eroute = erow.get("route") if isinstance(erow.get("route"), Mapping) else {}
+        esrc_path = eroute.get("source_path")
+        esrc_sha = eroute.get("source_sha256")
+        if isinstance(esrc_path, str) and isinstance(esrc_sha, str):
+            included_sources.append((esrc_path, esrc_sha))
     for row in knowledge + skills:
         included_sources.append((str(row["path"]), str(row["sha256"])))
-    for rel in (FABRIC_PATH, REGISTRY_PATH):
+    for row in harvested:
+        included_sources.append((row["path"], row["sha256"]))
+    for rel in (FABRIC_PATH, REGISTRY_PATH, FEDERATED_CARRIER_PATH):
         path = base / rel
         if path.is_file():
             included_sources.append((rel, digest_file(path)))
@@ -1286,8 +1863,12 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "skills": skills,
         "knowledge": knowledge,
         "source_index": source_index,
+        "extended_source_index": extended_source_index,
+        "harvested_capabilities": harvested,
         "research_index": research_index,
         "grammar": grammar,
+        "anatomy": anatomy,
+        "promotion": promotion,
         "counts": {
             "capabilities": len(capabilities),
             "bound_capabilities": sum(
@@ -1297,14 +1878,31 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
                 1 for row in capabilities if row["kind"] == "RECEIPT_BACKED_CAPABILITY"
             ),
             "engines": len(engines),
+            "federated_kernel_engines": sum(
+                1 for row in engines if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
+            ),
             "skills": len(skills),
             "knowledge_documents": len(knowledge),
             "source_index_modules": len(source_index),
+            "harvested_capabilities": len(harvested),
+            "harvested_contract_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "contract"
+            ),
+            "harvested_program_surfaces": sum(
+                1 for row in harvested if row["invocation"] == "cli"
+            ),
+            "harvested_admitted": sum(1 for row in harvested if row["admitted"]),
             "source_index_entry_points": sum(
                 1 for row in source_index if row["classification"] == "ENTRY_POINT"
             ),
+            "extended_source_index_modules": len(extended_source_index),
             "research_index_records": len(research_index),
             "routing_tokens": len(grammar["index"]),
+            "anatomy_domains": len(anatomy.get("domains") or {}),
+            "anatomy_modules": sum(len(row.get("top") or []) for row in
+                                   (anatomy.get("domains") or {}).values()),
+            "promotion_candidates": promotion.get("candidates") or 0,
+            "promotion_callable": promotion.get("callable_now") or 0,
         },
         "provenance": {
             "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
@@ -1330,6 +1928,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             "COVERAGE_IS_NOT_CAPABILITY__EXECUTION_STILL_REQUIRES_DECLARED_SUBSTRATE",
             "SOURCE_INDEX_IS_ADDRESSABLE_NOT_EXECUTABLE__NOT_REACHABLE_THROUGH_SOLVE",
             "RESEARCH_INDEX_IS_EVIDENCE_ABOUT_CAPABILITIES__NOT_A_CAPABILITY_ITSELF",
+            "HARVESTED_SURFACE_IS_DISCOVERED_NOT_ADMITTED__EXECUTION_ISSUES_A_RECEIPT_AND_PROMOTES_NOTHING",
         ],
     }
     model["digest"] = {
@@ -1337,6 +1936,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
         "value": artifact_digest(model),
     }
+    cache.save()
     return model
 
 
@@ -1353,6 +1953,10 @@ def write_model(
     target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(model, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
     target.write_text(text, encoding="utf-8")
+    if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
+        from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+
+        prewarm_sidecar_caches(model, target)
     return target
 
 
