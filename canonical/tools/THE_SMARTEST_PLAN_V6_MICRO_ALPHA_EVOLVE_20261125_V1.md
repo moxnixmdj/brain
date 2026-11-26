@@ -129,3 +129,34 @@ Next knobs (each with a falsifier of its own before adoption): steps 6→10 esca
 max_weight 4→5 only when H2+union both miss (v6 §2.2 archive-pressure idea); more example points
 from the test generator. Until then, 4/10 @ 954 ms / 0 tokens is the measured reach of the
 micro-AlphaEvolve loop on its home family.
+
+## §7 The three knobs, executed and adjudicated (`go` round)
+
+Bench lives at `canonical/tools/micro_evolve_bench_v1.py` (fixed seed 65, fresh-process
+independent re-verification, JSON out). Baseline reproduces: 4/10 @ 916 ms.
+
+| knob | hypothesis | result | verdict |
+|---|---|---|---|
+| steps 6→10 | misses are horizon misses | 4/10 @ 890 ms — no change | **FALSIFIED.** The misses are reach, not patience |
+| points 6→8 | example-underdetermination | 5/10 | **rejected as adoption** — more visible tests makes the TASK easier (benchmark difficulty tuning, not a production knob); recorded as a finding |
+| max_weight 4→6 escalation | deeper OBS grammar covers the class | None at w=4,5,6 for all miss-shapes | **FALSIFIED**, and it redirected to the true root cause |
+
+### Root cause found (the interesting part)
+Same-expression hit/miss variance was a red herring: BOTH point sets uniquely determine `x*3+3`
+— yet OE returns **0 candidates for it at any point set**: the promoted OE enumeration composes
+binary ops only at Level 2 (Level 3 is ITE-only), so `((x*3)+3)` was reachable by NEITHER engine.
+Debug trail kept: first escalation attempt (more random tries, seed+1) is luck and still missed
+(~1/30k sampled hit rate); replaced by **deterministic class completion**: `_level2c_exhaustive`
+enumerates `((x|neg x|abs x) ∘ c) ∘ c`, signature-deduped OE-style — 12 ms for the whole class.
+Two wrapper bugs found and fixed en route (escalation keyed on EMPTY UNION instead of NO
+SHIPPABLE CANDIDATE; `lang=lang` NameError swallowed by its own except — proof that
+broad excepts deserve witnesses). Constants pool widened to include env values (4 was sliced out).
+`*` added to the stochastic binary ops (one tuple; OE-evaluable, emit-safe).
+
+### Result
+**4/10 → 7/10 solved, same family, same steps=6, same 6 points, mean 946 ms unchanged
+(miss-path-only work), 0 LLM samples, 0 tokens.** All 9 synthesizer/planner tests pass.
+
+Remaining 3/10 are all the ITE-with-deep-branches class (`(x±b)*a if…else…`): needs 2c-sized
+bodies UNDER both ITE branches — touches the promoted OE module's Level-3 composition. NOT
+done this round (scope discipline); recorded as the next known lever with its own gate.

@@ -36,7 +36,10 @@ _UNARY_OPS = (
 
 # Binary ops (subset of the OE grammar that is BOTH evaluable by _eval_expr
 # and emittable by emit_expr). Arity 2. Op names match OE exactly.
-_BINARY_OPS = ("+", "-", "and", "or", "==")
+# "*" added 2026-11-25: micro_evolve_bench showed OE-side enumeration stops
+# at depth 2, so shapes like (x*3)+3 were reachable by NEITHER engine; one
+# sampled operator makes the stochastic side cover the whole 3-level class.
+_BINARY_OPS = ("+", "-", "*", "and", "or", "==")
 
 
 def _random_expr(rng: random.Random, var_names: list[str], consts: list[Any],
@@ -155,6 +158,81 @@ def ensemble_value_expressions(
     }
 
 
+def _level2c_exhaustive(
+    examples: Sequence[tuple[Mapping[str, Any], Any]],
+    *,
+    extra_consts: Sequence[Any] = (),
+    lang: str = "python",
+    max_results: int = 8,
+) -> list[dict[str, Any]]:
+    """Enumerate the depth-3 class the OE levels miss: ((x|neg x|abs x) ∘ c) ∘ c.
+
+    Same contract as the synthesizers: every returned expression matches ALL
+    examples. Inner (level-2) nodes are de-duplicated by their observational
+    signature over the example environments before composition, which is what
+    keeps the outer product small.
+    """
+    if not examples:
+        return []
+    envs = [dict(e) for e, _ in examples]
+    targets = [t for _, t in examples]
+
+    def _sig(expr: OE.Expr) -> tuple[Any, ...] | None:
+        out = []
+        for env in envs:
+            try:
+                v = OE._eval_expr(expr, env)
+            except Exception:
+                return None
+            if v is OE._SENTINEL_ERR or isinstance(v, (list, dict)):
+                return None
+            out.append((type(v).__name__, v))
+        return tuple(out)
+
+    target_sig = tuple((type(t).__name__, t) for t in targets)
+    var_names = sorted(set().union(*[set(e) for e in envs])) if envs else []
+    consts: list[Any] = [c for c in extra_consts]
+    for t in targets:
+        if isinstance(t, (int, float)) and not isinstance(t, bool) and t not in consts:
+            consts.append(t)
+    for c in (1, 2, 3, 4, -1):
+        if c not in consts:
+            consts.append(c)
+    for e in envs:
+        for v in e.values():
+            if isinstance(v, (int, float)) and not isinstance(v, bool) and v not in consts:
+                consts.append(v)
+    consts = consts[:10]
+
+    def _leaf(vname: str, cval: Any) -> OE.Expr:
+        return OE.Expr("var", (vname,), 1) if vname else OE.Expr("const", (cval,), 1)
+
+    # Level 1..2 with signature dedup
+    inner: dict[tuple, OE.Expr] = {}
+    for v in var_names:
+        base = [_leaf(v, None)] + [OE.Expr(u, (_leaf(v, None),), 2) for u in ("neg", "abs")]
+        for b in base:
+            for op1 in _BINARY_OPS:
+                for c in consts:
+                    for e in (OE.Expr(op1, (b, _leaf(None, c)), b.size + 2),
+                              OE.Expr(op1, (_leaf(None, c), b), b.size + 2)):
+                        s = _sig(e)
+                        if s is None:
+                            continue
+                        if s == target_sig:
+                            return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
+                        inner.setdefault(s, e)
+    # Level 3 over deduplicated signatures
+    for _s, l2 in inner.items():
+        for op2 in _BINARY_OPS:
+            for c in consts:
+                for e in (OE.Expr(op2, (l2, _leaf(None, c)), l2.size + 2),
+                          OE.Expr(op2, (_leaf(None, c), l2), l2.size + 2)):
+                    if _sig(e) == target_sig:
+                        return [{"code": OE.emit_expr(e, lang), "expr": e, "size": e.size}]
+    return []
+
+
 def synthesize_body_from_examples(
     arg_names: Sequence[str],
     examples: Sequence[tuple[tuple[Any, ...], Any]],
@@ -187,21 +265,43 @@ def synthesize_body_from_examples(
             pairs, lang="python", extra_consts=extra_consts,
             max_results=max_results, seed=seed,
         )
+        first = ens["union"]
     except Exception:
         return None
+    # Escalation trigger is NO SHIPPABLE CANDIDATE, not merely an empty union:
+    # a union whose candidates all need names the target module lacks (math.*)
+    # is, for this path, equivalent to no candidates. micro_evolve_bench found
+    # the exact-multi-point 3-level class (e.g. (x*3)+3) escapes OE's depth-2
+    # levels AND the ~1/30k sampled hit rate of the random side; random
+    # escalation over seeds is luck, so escalate instead by EXHAUSTIVELY
+    # enumerating the class ((x|neg x|abs x) op c) op c, deduped by
+    # observational signature. Deterministic; never runs when a pass exists.
     ns: dict[str, Any] = {}  # bare: eval adds __builtins__ (int/str/abs True); NO math —
     # the patched target module will not have imported it, so a candidate that
     # needs math is not shippable from this path. Verify under the target's env.
-    best: str | None = None
-    for cand in ens["union"]:
-        code = str(cand.get("code") or "")
-        if not code:
-            continue
+
+    def _scan(cands: list[dict[str, Any]]) -> str | None:
+        found: str | None = None
+        for cand in cands:
+            code = str(cand.get("code") or "")
+            if not code:
+                continue
+            try:
+                fn = eval(f"lambda {', '.join(names)}: ({code})", dict(ns), {})  # noqa: S307
+                if all(fn(*tuple(a)) == e for a, e in examples):
+                    if found is None or len(code) < len(found):
+                        found = code
+            except Exception:
+                continue
+        return found
+
+    best = _scan(first)
+    if best is None:
         try:
-            fn = eval(f"lambda {', '.join(names)}: ({code})", dict(ns), {})  # noqa: S307
-            if all(fn(*tuple(a)) == e for a, e in examples):
-                if best is None or len(code) < len(best):
-                    best = code
+            best = _scan(_level2c_exhaustive(
+                pairs, extra_consts=extra_consts, lang="python",
+                max_results=max_results,
+            ))
         except Exception:
-            continue
+            best = None
     return None if best is None else f"return {best}"
