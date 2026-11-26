@@ -3,7 +3,7 @@
 # Usage: bash ...sh h51|tb|scb NEW_EXTERNAL_DIRECTORY. See WITNESSED_ROUTES_REPRODUCTION.
 set -euo pipefail
 cd "$(git rev-parse --show-toplevel)"
-suite=${1:?choose h51, tb, or scb}; w=$(realpath -m "${2:?provide a new directory outside the checkout}")
+suite=${1:?choose h51, h51-next, tb, or scb}; w=$(realpath -m "${2:?provide a new directory outside the checkout}")
 case "$w/" in "$PWD/"*) echo 'external directory required' >&2; exit 2;; esac
 mkdir "$w"; I="$PWD/canonical/Immediate_Results"; py=${PYTHON311:-python3.11}; py=$(command -v "$py")
 [[ $($py -c 'import sys;print(sys.version_info[:2])') = '(3, 11)' ]]
@@ -14,17 +14,31 @@ blob() { # repository, commit, relative path in upstream repository, local desti
 tree() { gh api "repos/$1/git/trees/$2?recursive=1" | jq -r 'if .truncated then error("truncated tree") else .tree[] | select(.type=="blob" and (.mode=="100644" or .mode=="100755")) | .path end'; }
 result() { printf '%s/%s_20261126_v1.json\n' "$I" "$1"; }
 case "$suite" in
-h51)
+h51|h51-next)
   prov=$(result source_route_and_acquisition); pin=$(jq -r .protocol.official_suite_pin "$prov"); repo=scaleapi/SWE-bench_Pro-os
   jq -r '.environments.native[]' "$prov" > "$w/requirements.txt"
   "$py" -m venv "$w/venv"; "$w/venv/bin/python" -m pip install --only-binary=:all: --no-deps --index-url https://pypi.org/simple -r "$w/requirements.txt"
   "$w/venv/bin/python" -c "import site,pathlib; (pathlib.Path(site.getsitepackages()[0])/'receiver-src.pth').write_text('/work/repo/lib\n')"
+  rows='.tasks[]'
+  if [[ $suite = h51-next ]]; then
+    prov=$PWD/canonical/verification/SINGLE_EPISODE_INPUTS_20261126.json
+    pin=$(jq -er .h51.suite "$prov"); rows='.h51.tasks[]'
+    # Python 3.9 must work relocated to /venv in the private verifier root.
+    # Provide a clean CPython prefix; the 3.11 grader cannot run this release's 3.9 units.
+    cp -a "${PYTHON39_PREFIX:?need relocatable CPython 3.9.25 prefix}" "$w/py39"
+    [[ $("$w/py39/bin/python3.9" -c 'import platform;print(platform.python_version())') = 3.9.25 ]]
+    ln -sf python3.9 "$w/py39/bin/python"; ln -sf python3.9 "$w/py39/bin/python3"
+    jq -r '.h51.grade8_packages[]' "$prov" > "$w/grade39.txt"
+    "${UV:-uv}" pip install --no-deps --only-binary=:all: --index-url https://pypi.org/simple --python "$w/py39/bin/python3.9" -r "$w/grade39.txt"
+  fi
   while read -r pos base id; do
     app="$w/base-$pos"; task="$w/grade/$id"; git init -q --template= "$app"
     git -C "$app" fetch -q --no-tags --depth=1 https://github.com/ansible/ansible.git "$base"; git -C "$app" checkout -q --detach FETCH_HEAD
     for file in tests/{test.sh,config.json,test_patch.patch,parser.py,run_script.sh} solution/gold_patch.diff; do blob "$repo" "$pin" "v2/tasks/$id/$file" "$task/$file"; done
-    "$py" -m canonical.tools.replay_source_verifier_v1 "$app" "$task" "$w/venv" "$(result hard51_pos${pos}_source_predictions)" > "$w/pos-$pos.json"
-  done < <(jq -r '.tasks[]|[.position,.base,.instance_id]|@tsv' "$prov")
+    venv="$w/venv"; seconds=220
+    case "$pos" in 7) seconds=1200;; 8) venv="$w/py39"; seconds=600;; esac
+    "$py" -m canonical.tools.replay_source_verifier_v1 "$app" "$task" "$venv" "$(result hard51_pos${pos}_source_predictions)" --verifier-timeout "$seconds" > "$w/pos-$pos.json"
+  done < <(jq -r "$rows"'|[.position,.base,.instance_id]|@tsv' "$prov")
   ;;
 tb)
   repo=harbor-framework/terminal-bench; pin=4070d6cef56a7d20cb5dc98d5e10ada88a6b9440; uv=${UV:-uv}
@@ -69,6 +83,6 @@ scb)
     done
   done
   ;;
-*) echo 'choose h51, tb, or scb' >&2; exit 2;;
+*) echo 'choose h51, h51-next, tb, or scb' >&2; exit 2;;
 esac
 printf 'Native source measurements in %s (not an official image grade).\n' "$w"
