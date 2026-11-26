@@ -253,18 +253,72 @@ def _level2c_exhaustive(
                     # pool: the exact TACAS'17 / EUSolver pattern — terms and
                     # conditionals are separate grammars combined by if-then-else.
                     pool.setdefault(s3, e)
-    # Term x term product (v6 section 10): (x+4)*(y-3) needs two composed
-    # terms, one per side. Signature dedup keeps this cheap, MEASURED: 72
-    # deduped atoms -> 5184 pairs -> 19 ms. The cap is insurance for bigger
-    # var/const sets; exceeding it forfeits the product, never correctness.
-    if len(inner) <= 256:
-        _items = list(inner.items())
-        for _s1, e1 in _items:
-            for _s2, e2 in _items:
-                for opm in ("*", "+", "-"):
-                    em = OE.Expr(opm, (e1, e2), e1.size + e2.size + 1)
-                    if _sig(em) == target_sig:
+    # Composite pass (v6 section 10, levers 1+2 unified). (x+4)*(y-3) needs
+    # TERM x TERM; a naive scan at real loop sizes was MEASURED at 429 atoms
+    # / 5.3 s — over budget. But for ops *, +, - the second operand's value
+    # vector is DETERMINED pointwise by target and first operand, so pairing
+    # is O(atoms x points) dict lookups (inverse composition), ~30 ms at the
+    # same size. Composite atoms join the POOL, so the ITE stage below can
+    # compose product/sum BRANCHES (the compound-conditional class) for free.
+    # Zero-divisor slots are skipped (rare sound loss: no candidate is ever
+    # emitted unverified — every hit passes _sig over every example).
+    if all(isinstance(t, (int, float)) and not isinstance(t, bool) for t in targets) \
+            and len(inner) <= 2048:
+        num_t = list(targets)
+        by_vals: dict[tuple, list] = {}
+        atoms_vals: list = []
+        for e in inner.values():
+            vs: list = []
+            good = True
+            for env in envs:
+                try:
+                    v = OE._eval_expr(e, env)
+                except Exception:
+                    good = False
+                    break
+                if v is OE._SENTINEL_ERR or isinstance(v, (bool, str, list, dict)) \
+                        or not isinstance(v, (int, float)):
+                    good = False
+                    break
+                vs.append(v)
+            if good:
+                atoms_vals.append((e, vs))
+                by_vals.setdefault(tuple(vs), []).append(e)
+        npts = len(envs)
+        for ea, va in atoms_vals:
+            plans = [
+                ("+", tuple(num_t[i] - va[i] for i in range(npts))),
+                ("-", tuple(va[i] - num_t[i] for i in range(npts))),
+            ]
+            mulk: list = []
+            okm = True
+            for i in range(npts):
+                a, t = va[i], num_t[i]
+                if a == 0:
+                    okm = False
+                    break
+                if isinstance(t, int) and isinstance(a, int):
+                    if t % a:
+                        okm = False
+                        break
+                    mulk.append(t // a)
+                else:
+                    q = t / a
+                    if q != int(q):
+                        okm = False
+                        break
+                    mulk.append(float(q))
+            if okm:
+                plans.append(("*", tuple(mulk)))
+            for op2, key in plans:
+                for eb in by_vals.get(key, ()):
+                    em = OE.Expr(op2, (ea, eb), ea.size + eb.size + 1)
+                    s = _sig(em)
+                    if s is None:
+                        continue
+                    if s == target_sig:
                         return [{"code": OE.emit_expr(em, lang), "expr": em, "size": em.size}]
+                    pool.setdefault(s, em)
     # --- ITE composition over the 2c pool (same coverage+guard pattern OE
     # uses at its level 3, run on the deeper pool; miss-path only).
     n = len(envs)

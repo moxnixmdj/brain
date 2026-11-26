@@ -283,3 +283,33 @@ External context this round (the axis we are on, corroborated):
 
 Reach on certified HARD-51: still 0 (unchanged all session; different problem
 class, honestly tracked).
+
+## §11 The two §10 levers, adjudicated (this "go")
+
+Both levers were one mechanism. A naive term x term scan at real loop sizes
+measured 429 atoms / 5.3 s — OVER the 2.5 s miss-path gate, so the cap-1024
+plan was rejected in favor of the algebra: for `*`, `+`, `-` the second
+operand's value vector is DETERMINED pointwise by target and first operand, so
+composition is O(atoms x points) dict lookups — ~30 ms at the same 429-atom
+size, no cap compromise. Composite atoms join the pool, so the existing
+coverage+guard ITE stage gets product/sum BRANCHES for free (lever 2 folded
+into lever 1 rather than built twice). Zero-divisor slots skipped: rare, and
+sound — nothing is ever emitted unverified against every example.
+
+Gate (from §10): ">=2 solved-task improvement at <=2.5 s mean miss-path
+cost." Result: 2-var family **26/30 -> 28/30** (10/9/9 on seeds 65/99/2026),
+mean ~1030 ms. **Gate met; adopted.** 1-var family 10/10 (no regression);
+9/9 unit+e2e tests pass.
+
+Honesty notes: (1) seed-65's compound-conditional now passes on a program that
+fits the 6 visible points but is NOT the generating function — correct
+behavior for a spec-verifier (the test is the ground truth of the loop),
+flagged because "solved" here means *spec-consistent*, not *target-identical*.
+(2) The two residual misses are the same compound shape at other point sets;
+next lever is one more inverse-composition pass over (atom, guard-pair)
+branches; recorded, gated like all the others.
+
+Cumulative loop ledger on self-generated families: 1-var 40/40 @ ~920 ms;
+2-var 28/30 @ ~1030 ms; 0 LLM samples, 0 tokens, whole session. Certified
+HARD-51 reach: 0 — unchanged, different problem class, still the binding
+number for anything claiming SWE-frontier parity.
