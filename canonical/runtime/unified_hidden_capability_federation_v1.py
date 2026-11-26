@@ -1240,7 +1240,7 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "source_path": "canonical/runtime/domain_of_verification_v1.py",
         "entrypoint": "observed_domain",
         "summary": "Explicit interval domain-of-verification tracker and prequential refutation check flagging unverified global extrapolation outside observed inputs.",
-        "triggers": ["domain_of_verification_v1", "observed_domain prequential extrapolation", "refuse unverified claim"],
+        "triggers": ["domain_of_verification_v1", "observed_domain prequential extrapolation", "observed_domain_interval_check"],
         "required_inputs": ["points"],
         "declared_dependencies": [],
     },

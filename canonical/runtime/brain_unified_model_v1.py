@@ -619,6 +619,8 @@ class UnifiedModel:
         tb = marshal.loads(raw)
         self._capabilities_dict = _LazyMarshalDict(tb["capabilities_blobs"])
         self._engines_dict = _LazyMarshalDict(tb["engines_blobs"])
+        self._core_meta["capabilities_map"] = self._capabilities_dict
+        self._core_meta["engines_map"] = self._engines_dict
         self._index_dict = tb["filtered_index"]
         self._cap_id_terms_raw = tb["capability_id_terms"]
         self._receipt_backed_set = frozenset(tb["receipt_backed_ids"])

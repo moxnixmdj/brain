@@ -385,6 +385,32 @@ def _pytest_passed(run_res: Mapping[str, Any]) -> bool:
     return bool((ok_flag is True or rc == 0) and rc == 0 and not failed_list and passed_n > 0)
 
 
+def _run_targets_cow_or_pytest(
+    repo_root: pathlib.Path,
+    targets: Sequence[str],
+    *,
+    timeout_s: float = 15.0,
+) -> dict[str, Any]:
+    """Sub-10ms `os.fork()` CoW runner fast path when tests do not import `pytest`, else `mhz.run_pytest_targets`."""
+    uses_pytest_pkg = False
+    for t in targets:
+        rel_t = str(t).split("::")[0].lstrip("./")
+        tp = repo_root / rel_t
+        if tp.is_file():
+            try:
+                txt = tp.read_text(encoding="utf-8", errors="replace")
+                if "pytest" in txt or "monkeypatch" in txt or "capsys" in txt:
+                    uses_pytest_pkg = True
+                    break
+            except OSError:
+                pass
+    if not uses_pytest_pkg:
+        res = cow_runner.run_targets_cow_fork(repo_root, targets, timeout_s=min(10.0, timeout_s), capture_frames=False)
+        if int(res.get("passed", 0)) > 0 or res.get("failed_nodeids"):
+            return res
+    return mhz.run_pytest_targets(repo_root, targets, timeout_s=timeout_s)
+
+
 def _pytest_failed(run_res: Mapping[str, Any]) -> bool:
     """True iff `mhz.run_pytest_targets` observed a non-zero exit or failing nodeids."""
     if not isinstance(run_res, Mapping):
@@ -534,7 +560,7 @@ def _verify_python_candidate_edits(
         for rel in applied_originals:
             (repo_root / rel).write_text(edits[rel], encoding="utf-8")
         all_targets = list(dict.fromkeys([*test_targets, *regression_tests]))
-        run_res = mhz.run_pytest_targets(repo_root, all_targets, timeout_s=timeout_s)
+        run_res = _run_targets_cow_or_pytest(repo_root, all_targets, timeout_s=timeout_s)
         passed = _pytest_passed(run_res)
         if not passed:
             if neg_guard is not None:
@@ -1024,25 +1050,6 @@ def _synthesize_move3_candidates_for_file(
         except Exception:
             pass
 
-    # Channel 4 (Phase 4): Putback Backward AST Witness Propagation (`reverse_tomography_algebra_v1`),
-    # Stateful Mutable-Default Isolation (`SWE-Serve`), & Asymptotic `O(N^2)->O(N)` Set-Hoist (`SWE-Perf`).
-    try:
-        from canonical.swe_kernel import reverse_tomography_algebra_v1 as rta
-
-        residual = rta.extract_output_residual(failure_output)
-        ranked_lines_rta = [
-            {"lineno": int(fr.get("lineno", 1)), "score": 1.0}
-            for fr in frame_records
-            if fr.get("lineno")
-        ] or [{"lineno": ln, "score": 0.8} for ln in list(cov_set)[:8]]
-        if ranked_lines_rta:
-            for p_src, _ln, p_rule in rta.backpropagate_ast_repairs(
-                orig_src, ranked_lines_rta, residual, max_patches=10
-            ):
-                _emit(f"putback_ast:{p_rule}", p_src)
-    except Exception:
-        pass
-
     # Channel 4b (`SWE-Serve`): Mutable default argument isolation (`def f(x, acc=[])` -> `acc=None`)
     for fn_idx, node in enumerate(all_nodes):
         if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.args.defaults:
@@ -1287,7 +1294,45 @@ def _run_cow_demand_abduction_fast_lane(
                 }
             _restore_tree(repo_root, base_snapshot)
 
-    # Move IV Fallback: Value-Space Angelic + Bottom-Up Observational Equivalence (`angelic_oe_synthesizer_v1`)
+    # Move IV Fallback: Putback Backward AST Witness Propagation (`reverse_tomography_algebra_v1`) +
+    # Value-Space Angelic + Bottom-Up Observational Equivalence (`angelic_oe_synthesizer_v1`)
+    if not passing_cids and ranked_files and test_targets:
+        try:
+            from canonical.swe_kernel import reverse_tomography_algebra_v1 as rta
+
+            top_rel = ranked_files[0]
+            orig_top = base_snapshot[top_rel].decode("utf-8", errors="replace")
+            residual = rta.extract_output_residual(rich_output)
+            top_cov = cov_lines.get(top_rel) or [1]
+            rta_cands = rta.backpropagate_ast_repairs(
+                orig_top, [{"lineno": int(ln), "score": 1.0} for ln in top_cov[:6]], residual, max_patches=8
+            )
+            rta_jobs = []
+            for r_i, (p_src, _ln, p_rule) in enumerate(rta_cands):
+                cid_r = f"{top_rel}::rta_{r_i}::putback_ast:{p_rule}"
+                job_payloads[cid_r] = (top_rel, f"putback_ast:{p_rule}", p_src)
+
+                def _make_rta_shard(c_id: str = cid_r, r_rel: str = top_rel, c_src: str = p_src) -> Callable[[], Mapping[str, Any]]:
+                    def _shard() -> Mapping[str, Any]:
+                        devnull = os.open(os.devnull, os.O_WRONLY)
+                        os.dup2(devnull, 1)
+                        os.dup2(devnull, 2)
+                        os.close(devnull)
+                        out = cow_runner._execute_suite_in_current_process(repo_root, all_targets, overlays={r_rel: c_src}, capture_frames=False)
+                        return {"candidate_id": c_id, "passed": bool(out.get("ok"))}
+
+                    return _shard
+
+                rta_jobs.append(_make_rta_shard())
+            if rta_jobs:
+                forked_total += len(rta_jobs)
+                rta_res = pool.run_parallel_sharded(rta_jobs, winner_predicate=None, timeout_s=per_batch_timeout)
+                for item in rta_res.get("results") or ():
+                    if item.get("passed") and item.get("candidate_id") in job_payloads:
+                        passing_cids.append(str(item["candidate_id"]))
+        except Exception:
+            pass
+
     if not passing_cids and ranked_files and test_targets:
         try:
             from canonical.swe_kernel import angelic_oe_synthesizer_v1 as aoe
@@ -1721,7 +1766,7 @@ def solve_repository_task(
 
     # Stage 0: Run baseline oracle
     stages_run.append("BASELINE_ORACLE")
-    base_run = mhz.run_pytest_targets(root, [test_file], timeout_s=min(15.0, timeout_s))
+    base_run = _run_targets_cow_or_pytest(root, [test_file], timeout_s=min(15.0, timeout_s))
     base_output = str(base_run.get("output") or "")
     base_failed = _pytest_failed(base_run)
     if zero_test_oracle_synthesized and not base_failed:
