@@ -173,3 +173,32 @@ Each play states: the frontier failure it aims at, the unusual move, the **exact
 
 Every step above is executable in this repository today, by local code, with zero model calls and
 zero network calls, and each one states what would make it wrong before it is run.
+
+---
+
+## Amended by measurement (same day)
+
+Play 1 step 1 and the exact-target scoreboard were run, and both changed the plan. Full note:
+`PLAY_1_AND_THE_SCOREBOARD_20261127_V1.md`.
+
+**Play 1's literal-call variant is dead.** 406 modules attempted, 15 adapters survived two
+agreeing runs (3.7 % against a 40 % floor). The rule was fixed before the run, so the variant
+is killed rather than tuned. Tests here call through aliases with constructed arguments, so the
+derivation must record arguments from an **execution** (a call frame during the module's own
+test) and replay them, not read them from the source text.
+
+**The scoreboard exists and it is unkind.** 404 exact targets, chance 1/849: `find_source`
+0.032 @1 and 0.064 @5 on the clean quarter, contract router 0.064 / 0.128, **topic-only ablation
+0.096 / 0.181**. The contract gate is beaten by the same scorer with the gate removed — its
+second independent death. And 76.7 % of this tree's test intents repeat the module's own name, on
+which `find_source` scores 0.332 / 0.548: most routing measured here was name matching.
+
+**Three amendments:**
+
+1. Targets become **equivalence classes** (a module's version family plus everything its test
+   file imports), and a channel must beat the ablation on both singleton and family recall.
+2. Query construction must remove the leak **by construction** — intents generated from what the
+   test asserts, not from what it is called — because filtering a 77 % leak leaves 94 rows.
+3. **Play 1's target list grows by 15 receipts and not by 641 adapters.** The deficit is
+   unchanged (31 of 849 callable), and no routing gain touches it: the modules are uncallable,
+   not unfindable. Play 1 remains the first play.
