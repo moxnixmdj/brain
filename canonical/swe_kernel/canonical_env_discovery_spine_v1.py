@@ -1140,3 +1140,151 @@ def discover_computer_environment(
         "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
     }
 
+
+def plan_partial_order_operators(
+    *,
+    initial: Sequence[tuple[str, str]],
+    goal: Sequence[tuple[str, str]],
+    transitions: Sequence[tuple[str, Sequence[tuple[str, str]], Sequence[tuple[str, str]]]] = (),
+    operators: Sequence[Mapping[str, Any]] = (),
+    max_steps: int = 8,
+) -> dict[str, Any]:
+    """Wave 17: Induce STRIPS conditional operators & plan conflict-free partial-order sequences (`partial_order_planner_v1`)."""
+    from canonical.swe_kernel import partial_order_planner_v1 as pop
+
+    t0 = time.perf_counter()
+
+    def _norm_cond(c: Any) -> tuple[str, str, str, str, str]:
+        if isinstance(c, (tuple, list)):
+            if len(c) == 5:
+                return (str(c[0]), str(c[1]), str(c[2]), str(c[3]), str(c[4]))
+            if len(c) == 2:
+                return ("state", "*", str(c[0]), "eq", str(c[1]))
+            if len(c) == 3:
+                return (str(c[0]), "*", str(c[1]), "eq", str(c[2]))
+        return ("state", "*", str(c), "eq", "true")
+
+    init_set = frozenset(_norm_cond(c) for c in initial)
+    goal_set = frozenset(_norm_cond(c) for c in goal)
+    ops: list[Any] = []
+    induced_count = 0
+
+    if transitions:
+        norm_trans = [
+            (
+                str(act),
+                frozenset(_norm_cond(c) for c in pre_s),
+                frozenset(_norm_cond(c) for c in post_s),
+            )
+            for act, pre_s, post_s in transitions
+        ]
+        conds = sorted(
+            {
+                c
+                for _, pre_s, post_s in norm_trans
+                for c in (list(pre_s) + list(post_s))
+            }
+        )
+        induced = pop.induce_conditional_operators(norm_trans, conds)
+        if isinstance(induced, Mapping):
+            for op_list in induced.values():
+                if isinstance(op_list, (list, tuple)):
+                    ops.extend(op_list)
+                elif isinstance(op_list, pop.Operator):
+                    ops.append(op_list)
+        elif isinstance(induced, (list, tuple)):
+            ops.extend(induced)
+        induced_count = len(ops)
+
+    for idx, spec in enumerate(operators):
+        ops.append(
+            pop.Operator(
+                ident=str(spec.get("ident") or f"op_{idx}"),
+                pre=frozenset(_norm_cond(c) for c in (spec.get("pre") or ())),
+                add=frozenset(_norm_cond(c) for c in (spec.get("add") or ())),
+                delete=frozenset(_norm_cond(c) for c in (spec.get("delete") or ())),
+                atom=str(spec.get("atom") or spec.get("ident") or f"op_{idx}"),
+            )
+        )
+
+    if not ops:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__NO_PARTIAL_ORDER_OPERATORS",
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    closed_ops, closure_report = pop.close_preconditions(ops, init_set)
+    try:
+        plan_obj = pop.plan(init_set, goal_set, closed_ops, max_steps=int(max_steps))
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__PARTIAL_ORDER_UNSOLVABLE",
+            "reason": f"{type(exc).__name__}:{exc}",
+            "operator_count": len(closed_ops),
+            "induced_count": induced_count,
+            "closure_report": closure_report,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    if plan_obj is None:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__NO_PLAN_FOUND",
+            "operator_count": len(closed_ops),
+            "induced_count": induced_count,
+            "closure_report": closure_report,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    if isinstance(plan_obj, Mapping):
+        plan_ok = str(plan_obj.get("status") or "").startswith("PASS")
+        steps_attr = plan_obj.get("steps") or ()
+        causal_links = list(plan_obj.get("causal_links") or ())
+        partial_order = list(plan_obj.get("partial_order") or ())
+    else:
+        plan_ok = True
+        steps_attr = getattr(plan_obj, "steps", ()) or ()
+        causal_links = []
+        partial_order = []
+
+    if not plan_ok:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": f"FAIL_CLOSED__{plan_obj.get('status') if isinstance(plan_obj, Mapping) else 'NO_PLAN_FOUND'}",
+            "plan_detail": dict(plan_obj) if isinstance(plan_obj, Mapping) else None,
+            "operator_count": len(closed_ops),
+            "induced_count": induced_count,
+            "closure_report": closure_report,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    step_names = [
+        str(getattr(getattr(st, "operator", st), "ident", st))
+        for st in steps_attr
+    ]
+    return {
+        "schema": SCHEMA,
+        "pass": True,
+        "status": "PASS__PARTIAL_ORDER_PLAN_SYNTHESIZED",
+        "steps": step_names,
+        "step_count": len(step_names),
+        "partial_order": partial_order,
+        "causal_links": causal_links,
+        "operator_count": len(closed_ops),
+        "induced_count": induced_count,
+        "closure_report": closure_report,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+

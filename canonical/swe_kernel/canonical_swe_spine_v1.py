@@ -1515,6 +1515,348 @@ def multi_file_causal_localize_and_repair(
     return out
 
 
+def solve_swe_inverted_microscope(
+    repo_root: str | pathlib.Path,
+    *,
+    goal: str = "",
+    test_files: Sequence[str] | None = None,
+    apply_to_source: bool = False,
+    residual_proposer: Callable[[Mapping[str, Any]], Sequence[Mapping[str, str]]] | None = None,
+    memory_bus: Any = None,
+    law_store: CanonicalLawStore | None = None,
+    timeout_s: float = 25.0,
+) -> dict[str, Any]:
+    """Wave 16: Inverted Neuro-Symbolic SWE Microscope wiring 5 unwired hidden engines.
+
+    1. Microscope (`$0`): `cow_impact_repair_engine_v1` CoW workspace + `metamorphic_habitation_zipper_v1`
+       idiom/type-habitation profiler + `causal_nexus_v1` Angelic Value Obligation extraction +
+       `multistep_repo_closed_loop_solver_v1` differential trace fault localizer.
+    2. Deterministic `K3=0` Fast Lane (`$0`): `propose_stun_and_guard_repairs` + `solve_repository_task`.
+    3. Inverted Residual-Hole Bridge: emits a compact `<2 KB` `angelic_hole_packet` to an optional
+       pluggable `residual_proposer` (default `None` -> strict `K3=0` fail-closed!), screens proposals
+       in isolated CoW workspaces, supports `causal_cegis_inventor_v1.merge_orthogonal_file_patches`,
+       and crystallizes verified diffs into `CanonicalLawStore` / `memory_bus`.
+    """
+    import importlib.util
+    import subprocess
+    import sys
+    import tempfile
+
+    from canonical.swe_kernel import causal_cegis_inventor_v1 as cegis_inv
+    from canonical.swe_kernel import causal_nexus_v1 as cnexus
+    from canonical.swe_kernel import cow_impact_repair_engine_v1 as cow_imp
+    from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
+    from canonical.swe_kernel import multistep_repo_closed_loop_solver_v1 as multistep
+
+    t0 = time.perf_counter()
+    root = pathlib.Path(repo_root).resolve()
+    if not root.is_dir():
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__REPO_ROOT_MISSING",
+            "repo_root": str(root),
+            "model_calls": 0,
+        }
+
+    # Discover test files & run baseline tests inside an isolated CoW workspace (pytest or zero-dep stdlib runner!)
+    all_tests = sorted(
+        p for p in root.rglob("test_*.py")
+        if not any(part in {".git", "__pycache__", ".pytest_cache"} for part in p.parts)
+    )
+    rel_tests = (
+        [str(t) for t in test_files]
+        if test_files
+        else [p.relative_to(root).as_posix() for p in all_tests[:12]]
+    )
+    has_pytest = importlib.util.find_spec("pytest") is not None
+    stdlib_runner = (
+        "import importlib.util, pathlib, sys, traceback, unittest\n"
+        "sys.path.insert(0, '.')\n"
+        "failed = 0\n"
+        "for rel in sys.argv[1:]:\n"
+        "    p = pathlib.Path(rel)\n"
+        "    spec = importlib.util.spec_from_file_location(p.stem, str(p))\n"
+        "    mod = importlib.util.module_from_spec(spec)\n"
+        "    spec.loader.exec_module(mod)\n"
+        "    for name, obj in sorted(vars(mod).items()):\n"
+        "        if name.startswith('test_') and callable(obj):\n"
+        "            try:\n"
+        "                obj()\n"
+        "            except Exception:\n"
+        "                failed += 1\n"
+        "                traceback.print_exc()\n"
+        "        elif isinstance(obj, type) and issubclass(obj, unittest.TestCase) and obj is not unittest.TestCase:\n"
+        "            res = unittest.TextTestRunner(verbosity=0).run(unittest.defaultTestLoader.loadTestsFromTestCase(obj))\n"
+        "            if not res.wasSuccessful():\n"
+        "                failed += len(res.failures) + len(res.errors)\n"
+        "sys.exit(0 if failed == 0 else 1)\n"
+    )
+
+    def _run_pytest_in(work_dir: pathlib.Path, targets: Sequence[str]) -> tuple[bool, str]:
+        if has_pytest:
+            cmd = [sys.executable, "-m", "pytest", "-q", "--tb=short", *list(targets)]
+        else:
+            cmd = [sys.executable, "-c", stdlib_runner, *list(targets)]
+        cp = subprocess.run(
+            cmd,
+            cwd=str(work_dir),
+            capture_output=True,
+            text=True,
+            timeout=min(20.0, float(timeout_s)),
+        )
+        return cp.returncode == 0, (cp.stdout + "\n" + cp.stderr).strip()
+
+    def _cow_write(path: pathlib.Path, content: str) -> None:
+        # Break hardlink before writing so CoW speculative edits NEVER mutate host repo!
+        if path.exists() or path.is_symlink():
+            path.unlink()
+        path.write_text(content, encoding="utf-8")
+
+    with tempfile.TemporaryDirectory(prefix="inv_microscope_") as tmp:
+        cow_base = pathlib.Path(tmp) / "cow_probe"
+        cow_meta = cow_imp.create_zero_copy_cow_workspace(root, cow_base)
+        base_ok, base_out = _run_pytest_in(cow_base, rel_tests)
+        if base_ok:
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "status": "PASS__ALREADY_GREEN",
+                "tier": "K3_0_ALREADY_GREEN",
+                "cow_meta": cow_meta,
+                "model_calls": 0,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        # Stage 1: Angelic Microscope — Value Obligations + Repo Type-Habitation + Differential Trace
+        obligations = cnexus.extract_value_obligations(base_out, limit=12)
+        obligations_dicts = [
+            {
+                "actual": repr(getattr(ob, "actual", None))[:80],
+                "expected": repr(getattr(ob, "expected", None))[:80],
+                "op": str(getattr(ob, "op", "==")),
+                "line": str(getattr(ob, "raw_line", ""))[:140],
+            }
+            for ob in obligations
+        ]
+        idiom_profile = mhz.mine_repo_idiom_profile(root)
+        loc = multistep.localize_faults_by_differential_trace(
+            root,
+            test_files=rel_tests or None,
+            timeout=min(12.0, float(timeout_s)),
+        )
+        ranked_files: list[str] = []
+        for cand in (loc.get("ranked_files") or loc.get("suspicious_files") or ()):
+            fpath = cand.get("file") if isinstance(cand, Mapping) else str(cand)
+            if fpath and fpath not in ranked_files and (root / fpath).is_file():
+                ranked_files.append(fpath)
+        if not ranked_files:
+            for pyf in sorted(root.rglob("*.py")):
+                relp = pyf.relative_to(root).as_posix()
+                if not pyf.name.startswith("test_") and "__pycache__" not in pyf.parts:
+                    ranked_files.append(relp)
+        impacted_raw = cow_imp.select_impacted_tests_fast(root, ranked_files[:4], all_tests)
+        selected_list = (
+            impacted_raw.get("selected_tests")
+            if isinstance(impacted_raw, Mapping)
+            else impacted_raw
+        ) or ()
+        impacted_rels = [
+            p.relative_to(root).as_posix() if isinstance(p, pathlib.Path) and p.is_relative_to(root) else str(p)
+            for p in selected_list
+        ] or rel_tests
+
+        # Stage 2: Deterministic K3=0 Fast Lane (STUN/guard proposals + canonical solve_repository_task)
+        test_sources = [
+            (root / t).read_text(encoding="utf-8", errors="ignore")
+            for t in impacted_rels[:6]
+            if (root / t).is_file()
+        ]
+        for target_rel in ranked_files[:3]:
+            src_path = root / target_rel
+            orig_src = src_path.read_text(encoding="utf-8", errors="ignore")
+            stun_cands = cow_imp.propose_stun_and_guard_repairs(orig_src, test_sources, max_candidates=10)
+            if memory_bus is not None and hasattr(memory_bus, "prune_by_anti_skills") and stun_cands:
+                stun_cands = list(
+                    memory_bus.prune_by_anti_skills(
+                        stun_cands, domain="swe_inverted_microscope", symbol_scope=target_rel
+                    ).get("kept")
+                    or ()
+                )
+            for idx, new_src in enumerate(stun_cands):
+                if new_src == orig_src:
+                    continue
+                cand_dir = pathlib.Path(tmp) / f"cow_stun_{idx}"
+                cow_imp.create_zero_copy_cow_workspace(root, cand_dir)
+                _cow_write(cand_dir / target_rel, new_src)
+                ok_fast, _ = _run_pytest_in(cand_dir, impacted_rels)
+                if ok_fast:
+                    ok_full, full_out = _run_pytest_in(cand_dir, rel_tests)
+                    if ok_full:
+                        if apply_to_source:
+                            src_path.write_text(new_src, encoding="utf-8")
+                        return {
+                            "schema": SCHEMA,
+                            "pass": True,
+                            "status": "PASS__K3_0_STUN_GUARD_VERIFIED",
+                            "tier": "K3_0_ANGELIC_MICROSCOPE",
+                            "patched_files": [target_rel],
+                            "value_obligations": obligations_dicts,
+                            "impacted_tests": impacted_rels,
+                            "verified_by_cow_oracle": True,
+                            "model_calls": 0,
+                            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                        }
+
+        # Fallback K3=0 canonical solver on repo
+        k0_res = solve_repository_task(
+            root,
+            test_file=rel_tests[0] if rel_tests else None,
+            regression_tests=tuple(rel_tests[1:]),
+            issue_text=goal or "inverted_microscope_k0",
+            law_store=law_store,
+            keep_patch_applied=apply_to_source,
+            timeout_s=min(15.0, float(timeout_s)),
+        )
+        if k0_res.get("pass") or k0_res.get("solved"):
+            return {
+                "schema": SCHEMA,
+                "pass": True,
+                "status": "PASS__K3_0_CANONICAL_SOLVER_VERIFIED",
+                "tier": "K3_0_CANONICAL_SOLVER",
+                "value_obligations": obligations_dicts,
+                "impacted_tests": impacted_rels,
+                "canonical_solver": k0_res,
+                "verified_by_cow_oracle": True,
+                "model_calls": 0,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        # Stage 3: Build compact (<2 KB) AngelicHolePacket for inverted residual-hole bridge
+        local_snippets = {
+            relp: (root / relp).read_text(encoding="utf-8", errors="ignore")[:1800]
+            for relp in ranked_files[:3]
+            if (root / relp).is_file()
+        }
+        hole_packet = {
+            "goal": goal,
+            "faulty_files": ranked_files[:4],
+            "value_obligations": obligations_dicts[:6],
+            "impacted_tests": impacted_rels[:6],
+            "failure_tail": base_out[-800:],
+            "repo_idiom_summary": {
+                "type_count": len(getattr(idiom_profile, "type_annotations", {}) or {}),
+                "symbol_count": len(getattr(idiom_profile, "symbol_table", {}) or {}),
+            },
+            "local_snippets": local_snippets,
+        }
+
+        if residual_proposer is None:
+            if memory_bus is not None and hasattr(memory_bus, "record_anti_skill"):
+                memory_bus.record_anti_skill(
+                    domain="swe_inverted_microscope",
+                    symbol_scope=",".join(ranked_files[:2]) or "*",
+                    bad_hypothesis="K3_0_EXHAUSTED_NO_RESIDUAL_PROPOSER",
+                    error_signature=base_out.splitlines()[-1][:160] if base_out else "TEST_FAILED",
+                )
+            return {
+                "schema": SCHEMA,
+                "pass": False,
+                "status": "FAIL_CLOSED__RESIDUAL_HOLE_NEEDS_PROPOSER",
+                "tier": "K3_0_ABSTAIN_WITH_ANGELIC_PACKET",
+                "missing_fact": "RESIDUAL_SEMANTIC_HOLE_NEEDS_PROPOSER",
+                "angelic_hole_packet": hole_packet,
+                "value_obligations": obligations_dicts,
+                "impacted_tests": impacted_rels,
+                "model_calls": 0,
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            }
+
+        # Screen pluggable residual proposer patches in isolated CoW workspaces (+ orthogonal multi-file merge!)
+        raw_proposals = list(residual_proposer(hole_packet) or ())
+        screened_count = 0
+        orthogonal_candidates: list[dict[str, str]] = []
+        for idx, prop in enumerate(raw_proposals):
+            if not isinstance(prop, Mapping) or not prop:
+                continue
+            patch_map = {str(k): str(v) for k, v in prop.items() if (root / str(k)).is_file()}
+            if not patch_map:
+                continue
+            screened_count += 1
+            orthogonal_candidates.append(patch_map)
+            cand_dir = pathlib.Path(tmp) / f"cow_prop_{idx}"
+            cow_imp.create_zero_copy_cow_workspace(root, cand_dir)
+            for relp, content in patch_map.items():
+                _cow_write(cand_dir / relp, content)
+            ok_full, full_out = _run_pytest_in(cand_dir, rel_tests)
+            if ok_full:
+                if apply_to_source:
+                    for relp, content in patch_map.items():
+                        (root / relp).write_text(content, encoding="utf-8")
+                if law_store is not None:
+                    for relp, content in patch_map.items():
+                        try:
+                            law_store.add_verified_diff(
+                                language="python",
+                                failure_output=base_out[:400],
+                                before_source=local_snippets.get(relp, ""),
+                                after_source=content,
+                            )
+                        except Exception:
+                            pass
+                return {
+                    "schema": SCHEMA,
+                    "pass": True,
+                    "status": "PASS__INVERTED_RESIDUAL_HOLE_VERIFIED",
+                    "tier": "INVERTED_RESIDUAL_HOLE_VERIFIED",
+                    "patched_files": sorted(patch_map.keys()),
+                    "proposals_screened": screened_count,
+                    "angelic_hole_packet": hole_packet,
+                    "verified_by_cow_oracle": True,
+                    "model_calls": 1,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                }
+
+        # Try merging pairwise orthogonal multi-file patches via causal_cegis_inventor_v1
+        if len(orthogonal_candidates) >= 2:
+            merged = cegis_inv.merge_orthogonal_file_patches(
+                root, orthogonal_candidates[0], orthogonal_candidates[1]
+            )
+            if merged:
+                cand_dir = pathlib.Path(tmp) / "cow_prop_merged"
+                cow_imp.create_zero_copy_cow_workspace(root, cand_dir)
+                for relp, content in merged.items():
+                    _cow_write(cand_dir / relp, content)
+                ok_full, _ = _run_pytest_in(cand_dir, rel_tests)
+                if ok_full:
+                    if apply_to_source:
+                        for relp, content in merged.items():
+                            (root / relp).write_text(content, encoding="utf-8")
+                    return {
+                        "schema": SCHEMA,
+                        "pass": True,
+                        "status": "PASS__INVERTED_ORTHOGONAL_MERGE_VERIFIED",
+                        "tier": "INVERTED_RESIDUAL_HOLE_ORTHOGONAL_MERGED",
+                        "patched_files": sorted(merged.keys()),
+                        "proposals_screened": screened_count,
+                        "verified_by_cow_oracle": True,
+                        "model_calls": 1,
+                        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                    }
+
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__RESIDUAL_PROPOSALS_REJECTED_BY_COW_ORACLE",
+            "tier": "INVERTED_RESIDUAL_HOLE_REJECTED",
+            "proposals_screened": screened_count,
+            "angelic_hole_packet": hole_packet,
+            "verified_by_cow_oracle": False,
+            "model_calls": 1,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+
 __all__ = [
     "AUTHORITY",
     "COMPOSED_CORE_MODULES",
@@ -1528,6 +1870,7 @@ __all__ = [
     "detect_repository_language",
     "multi_file_causal_localize_and_repair",
     "solve_repository_task",
+    "solve_swe_inverted_microscope",
     "synthesize_counterfactual_and_angelic_repair",
     "trace_expression_and_literal_repair",
 ]

@@ -1672,6 +1672,190 @@ class BoundaryRouter:
             "model_calls": 0,
         }
 
+    # ------------------------------------------------------------ Waves 15-18 Frontier-Leapfrog Routes
+    def route_memguard_and_expiry(
+        self,
+        *,
+        action: str = "audit",
+        skill_id: str = "",
+        reward: float = 1.0,
+        confidence: float = 1.0,
+        fingerprint: Mapping[str, Any] | None = None,
+        current_fingerprint: Mapping[str, Any] | None = None,
+        quarantine_on_drift: bool = True,
+        db_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Wave 15 route: MemGuard persistent verifier lifecycle + `rule_expiry_v1` world-drift revocation."""
+        cluster = "memguard_world_expiry"
+        if str(action).lower() == "register":
+            res = self.memory_bus.register_memguard_lifecycle(
+                skill_id,
+                reward=reward,
+                confidence=confidence,
+                fingerprint=fingerprint,
+                db_path=db_path,
+            )
+        else:
+            res = self.memory_bus.audit_world_expiry(
+                current_fingerprint=current_fingerprint,
+                quarantine_on_drift=quarantine_on_drift,
+                db_path=db_path,
+            )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_MEMGUARD_EXPIRY", passed=ok)
+        return res
+
+    def route_anti_skill(
+        self,
+        *,
+        action: str = "prune",
+        domain: str = "general",
+        symbol_scope: str = "*",
+        bad_hypothesis: str = "",
+        error_signature: str = "REFUTED",
+        candidates: Sequence[str] = (),
+        world_fp: Mapping[str, Any] | None = None,
+        csp_pair: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 15 route: Negative-Knowledge Anti-Skill recording & O(1) dead-branch pruning."""
+        cluster = "anti_skill_refutation"
+        if str(action).lower() == "record":
+            res = self.memory_bus.record_anti_skill(
+                domain=domain,
+                symbol_scope=symbol_scope,
+                bad_hypothesis=bad_hypothesis,
+                error_signature=error_signature,
+                world_fp=world_fp,
+                csp_pair=csp_pair,
+            )
+        else:
+            res = self.memory_bus.prune_by_anti_skills(
+                candidates,
+                domain=domain,
+                symbol_scope=symbol_scope,
+            )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_ANTI_SKILL", passed=ok)
+        return res
+
+    def route_proved_composition(
+        self,
+        *,
+        initial_text: str,
+        operations: Sequence[Mapping[str, Any]],
+    ) -> dict[str, Any]:
+        """Wave 15 route: Premise- and proof-preserving multi-step composition (`proved_composition_v1`)."""
+        cluster = "proved_composition"
+        res = self.memory_bus.prove_and_compose_operations(initial_text=initial_text, operations=operations)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_PROVED_COMPOSITION", passed=ok)
+        return res
+
+    def route_fts5_recall(
+        self,
+        query: str,
+        *,
+        top_k: int = 8,
+        include_quarantined: bool = False,
+        extra_docs: Sequence[Mapping[str, Any]] = (),
+    ) -> dict[str, Any]:
+        """Wave 15 route: Sub-2 ms SQLite FTS5 BM25 memory/runbook recall."""
+        cluster = "fts5_runbook_recall"
+        res = self.memory_bus.fts5_recall(
+            query,
+            top_k=top_k,
+            include_quarantined=include_quarantined,
+            extra_docs=extra_docs,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_FTS5_BM25", passed=ok)
+        return res
+
+    def route_swe_inverted_microscope(
+        self,
+        repo_root: str | Path,
+        *,
+        goal: str = "",
+        test_files: Sequence[str] | None = None,
+        apply_to_source: bool = False,
+        residual_proposer: Any = None,
+        law_store: Any = None,
+        timeout_s: float = 25.0,
+    ) -> dict[str, Any]:
+        """Wave 16 route: Inverted Neuro-Symbolic SWE Microscope + 5 unwired hidden engines."""
+        from canonical.swe_kernel import canonical_swe_spine_v1 as swe_spine
+
+        cluster = "swe_inverted_microscope"
+        res = swe_spine.solve_swe_inverted_microscope(
+            repo_root,
+            goal=goal,
+            test_files=test_files,
+            apply_to_source=apply_to_source,
+            residual_proposer=residual_proposer,
+            memory_bus=self.memory_bus,
+            law_store=law_store,
+            timeout_s=timeout_s,
+        )
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier=str(res.get("tier") or "UNSOLVED"), passed=ok)
+        return res
+
+    def route_fork_reality_speculate(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 17 route: Fork-Reality CoW Speculative World Engine + Kernel Seccomp Confinement."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        cluster = "fork_reality_cow"
+        res = cu_spine.fork_reality_speculate_and_commit(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_COW_SPECULATION", passed=ok)
+        return res
+
+    def route_elevate_gui_trace(
+        self,
+        trace: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+        *,
+        goal: str = "",
+        postcondition: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 17 route: Dynamic GUI-to-CLI/DOM Layer Elevation (`causal_trace_to_skill_compiler_v1`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        cluster = "gui_to_cli_elevation"
+        res = cu_spine.elevate_gui_trace_to_cli_skill(trace, goal=goal, postcondition=postcondition)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_LAYER_ELEVATION", passed=ok)
+        return res
+
+    def route_partial_order_plan(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 17 route: Partial-Order Conditional Operator Induction & Planning (`partial_order_planner_v1`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        cluster = "partial_order_planner"
+        res = env_spine.plan_partial_order_operators(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_1_PARTIAL_ORDER_PLAN", passed=ok)
+        return res
+
+    def route_minimax_interrogate(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 18 route: Exact-Minimax Witness Interrogation (`evidence_demand_v1`)."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        cluster = "minimax_interrogation"
+        res = oracle_spine.interrogate_minimax_witness(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_MINIMAX_WITNESS", passed=ok)
+        return res
+
+    def route_csp_hard_negatives(self, **kwargs: Any) -> dict[str, Any]:
+        """Wave 18 route: NS-PRM Counterfactual Symbolic Perturbation Hard-Negative & Spec-Gap Generator."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as oracle_spine
+
+        cluster = "csp_hard_negatives"
+        res = oracle_spine.generate_csp_hard_negatives(**kwargs)
+        ok = bool(res.get("pass"))
+        self._record_cluster(cluster, tier="TIER_0_CSP_PERTURBATION", passed=ok)
+        return res
+
     def status_summary(self) -> dict[str, Any]:
         return {
             "schema": SCHEMA,

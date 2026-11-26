@@ -33046,7 +33046,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7413,
+  "research_index_records": 7414,
   "routing_tokens": 2946,
   "skills": 18,
   "source_index_entry_points": 557,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8e3ee53814a22f0c36571d7f3a4c51e66bcea45efe1ac83c35511b4de808b121"
+  "value": "93cde82f4be7e6a433bcb1276ddc948fa65aa37512b94d3ed876930956fcdd4b"
  },
  "engines": [
   {
@@ -79399,7 +79399,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "2b981290e7213f422b00ea521c04626e48b44f32d389161b08e9fe4a380e8512",
+   "sha256": "1132a07606a57054b0d33c2ef9f0f3569987d5310b2788d3755b0333fe7b0a5f",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -79636,7 +79636,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/creature_runtime_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "d03ea5f6f55680bfde00d40d97c490b1663d0292c2a61bb1fed3be1acbaa8315",
+   "sha256": "bbdf7cbd5ea7c7beb9d4743ba4477fbe93f0e29b614606cc7955857329bf816b",
    "summary": "Seven organs, finally in one body.",
    "triggers": [
     "creature",
@@ -151563,7 +151563,7 @@
   "included_source_count": 2313,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f1187c3f677f8962e21b50674ee70bf748e45b480d1aa42eb5e4a79eb45469e8"
+  "source_tree_digest": "7aa728b92eac65fb6d26fed9c298f2ca7a3392617426da056460afd3c59f322f"
  },
  "research_index": [
   {
@@ -313222,6 +313222,51 @@
    }
   },
   {
+   "action_id": "FRONTIER_LEAPFROG_WAVES15_20_20261124_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/FRONTIER_LEAPFROG_WAVES15_20_20261124_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/FRONTIER_LEAPFROG_WAVES15_20_20261124_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "e7b7007fe3213fe83c0c9bc2a279cecdd18f950e20d5681cfe95cbafac5bf18d",
+   "status": "SHIPPED",
+   "terms": {
+    "0d-0i": 1,
+    "15": 2,
+    "2-14": 1,
+    "20": 1,
+    "20261124": 1,
+    "7101": 1,
+    "across": 1,
+    "active": 1,
+    "after": 1,
+    "audit": 1,
+    "causal_cegis_inventor_v1": 1,
+    "causal_nexus_v1": 1,
+    "causal_trace_to_skill_compiler_v1": 1,
+    "cli": 1,
+    "computer": 1,
+    "counterfactual": 1,
+    "cow": 2,
+    "cow_impact_repair_engine_v1": 1,
+    "creature": 1,
+    "cross_modal_tomography_petri_v1": 1,
+    "csp": 1,
+    "dark-matter": 1,
+    "detection": 1,
+    "door": 2,
+    "evolution": 2,
+    "front": 2,
+    "interrogation": 2,
+    "memory": 2,
+    "meta-circular": 2,
+    "organ": 2,
+    "planning": 2,
+    "swe": 2
+   }
+  },
+  {
    "action_id": "FRONT_DOOR_RANKS_EVERY_ADMISSIBLE_TOOL_BUT_DECIDES_ONLY_FROM_THE_ROUTABLE_ONES_V1_20261022_V1",
    "capability": false,
    "date": "2026-10-22",
@@ -338756,7 +338801,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "2b981290e7213f422b00ea521c04626e48b44f32d389161b08e9fe4a380e8512",
+   "sha256": "1132a07606a57054b0d33c2ef9f0f3569987d5310b2788d3755b0333fe7b0a5f",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 26,
    "symbols": [
@@ -347302,7 +347347,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/creature_runtime_v1.py",
-   "sha256": "d03ea5f6f55680bfde00d40d97c490b1663d0292c2a61bb1fed3be1acbaa8315",
+   "sha256": "bbdf7cbd5ea7c7beb9d4743ba4477fbe93f0e29b614606cc7955857329bf816b",
    "summary": "Seven organs, finally in one body.",
    "symbol_count": 16,
    "symbols": [
@@ -408031,7 +408076,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
-   "sha256": "e7f9e7a65fd93671005cff68eb88d46aad17941fafa8f2a81cb79d8cb6ec4cd6",
+   "sha256": "bf80de10dd91e326bba0ff4fa2fb2fee1fa6acf97e18874bbb0724f5e75c5c22",
    "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`).",
    "symbol_count": 2,
    "symbols": [
@@ -408059,9 +408104,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
-   "sha256": "c727db3af1b591a637b67d5b1cc48f667985e7dfe8ee1f9c7843071bbaced4e0",
+   "sha256": "731b68d5029d89c5506f238846baaa50abd7ddc83eb733c88bf4b268ebb3d787",
    "summary": "Canonical Speculative CoW Rollback & Code-over-GUI Computer-Use Spine (`0F`).",
-   "symbol_count": 10,
+   "symbol_count": 12,
    "symbols": [
     "SpeculativeProbeResult",
     "SpeculativeSandbox",
@@ -408069,7 +408114,9 @@
     "compile_four_tier_cu_action",
     "diff_file_hashes",
     "durable_transactional_commit",
+    "elevate_gui_trace_to_cli_skill",
     "execute_speculative_computer_task",
+    "fork_reality_speculate_and_commit",
     "inspect_repo_environment_broker",
     "speculative_cow_race",
     "workspace_tree_digest"
@@ -408085,7 +408132,9 @@
     "cu": 1,
     "diff_file_hashes": 1,
     "durable_transactional_commit": 1,
+    "elevate_gui_trace_to_cli_skill": 1,
     "execute_speculative_computer_task": 1,
+    "fork_reality_speculate_and_commit": 1,
     "inspect_repo_environment_broker": 1,
     "rollback": 1,
     "sandbox": 1,
@@ -408106,9 +408155,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-   "sha256": "a11b5a2b49e294e3fb9f3458b6b330e611191646e069dc467115df76e3b81ed8",
+   "sha256": "8e1618a0becffbfca85f11f814cdb58d1153ad2022b443a5772ac55f7669c743",
    "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`).",
-   "symbol_count": 17,
+   "symbol_count": 18,
    "symbols": [
     "ConflictAwareMealyLearner",
     "LearnedAutomaton",
@@ -408124,6 +408173,7 @@
     "discover_environment",
     "harvest_markdown_guide_oracle",
     "induce_cross_machine_frame_hypothesis",
+    "plan_partial_order_operators",
     "solve_via_branch_model_and_mental_model",
     "split_machine_via_key_table",
     "survey_repository_environment"
@@ -408147,6 +408197,7 @@
     "induce_cross_machine_frame_hypothesis": 1,
     "learnedautomaton": 1,
     "observationedge": 1,
+    "plan_partial_order_operators": 1,
     "refusalaxiom": 1,
     "registerguardautomatonlearner": 1,
     "registerguardtransition": 1,
@@ -408227,7 +408278,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-   "sha256": "e522b9ea243516bbbfc9276dffccc46e05dec671ab3c68a315efeac66345e74d",
+   "sha256": "8454e8d4ef5a2f25dbf78ceb3e35dcb01b5754e77374de98f98d09607ae575c4",
    "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`).",
    "symbol_count": 8,
    "symbols": [
@@ -408268,9 +408319,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
-   "sha256": "f6dd48ac889f4f2ec211f649da0ca5b834028a6106e99b67c4f8762a7117d1cd",
+   "sha256": "28252b0e8a5b1cf70fd3346ee9376b541cfcfdf665493f5611d63acbb01720a2",
    "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`).",
-   "symbol_count": 15,
+   "symbol_count": 17,
    "symbols": [
     "_generate_goal_negation_mutants",
     "_run_witness_in_clone",
@@ -408284,6 +408335,8 @@
     "extract_assertion_demands",
     "extract_failing_run_demands",
     "extract_guard_demand_sites",
+    "generate_csp_hard_negatives",
+    "interrogate_minimax_witness",
     "mutation_admission_gate",
     "prove_verifier_can_say_no",
     "verify_coq_certificate_bundle"
@@ -408303,8 +408356,10 @@
     "extract_failing_run_demands": 1,
     "extract_guard_demand_sites": 1,
     "formal": 1,
+    "generate_csp_hard_negatives": 1,
     "generate_goal_negation_mutants": 1,
     "goal-negation": 1,
+    "interrogate_minimax_witness": 1,
     "inversion": 1,
     "mutation_admission_gate": 1,
     "oracle": 2,
@@ -408325,9 +408380,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
-   "sha256": "b0b576cf1fbbb52cd532c1aae3bf79a919d24f1f0763da229b181020b8ee9c8f",
+   "sha256": "652fb66cbbb0f0879bc635e794872352b88a8d3e2cef96acb32e59bd4a7e8ea5",
    "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`).",
-   "symbol_count": 19,
+   "symbol_count": 20,
    "symbols": [
     "CanonicalLawStore",
     "StructuralLaw",
@@ -408346,6 +408401,7 @@
     "detect_repository_language",
     "multi_file_causal_localize_and_repair",
     "solve_repository_task",
+    "solve_swe_inverted_microscope",
     "synthesize_counterfactual_and_angelic_repair",
     "trace_expression_and_literal_repair"
    ],
@@ -408366,6 +408422,7 @@
     "restore_tree": 1,
     "snapshot_tree": 1,
     "solve_repository_task": 1,
+    "solve_swe_inverted_microscope": 1,
     "spine": 2,
     "structurallaw": 1,
     "swe": 2,

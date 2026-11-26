@@ -360,6 +360,11 @@ class VerificationFirstMemoryBus:
         self._drift_detector = DualDriftDetector()
         self._contribution_ledger: Any = None
         self._contribution_db_path: Path | None = None
+        # Wave 15: MemGuard persistent verifier lifecycle + rule_expiry_v1 + Anti-Skill refutations + lazy FTS5 index
+        self._skill_lifecycle: dict[str, dict[str, Any]] = {}
+        self._anti_skills: dict[str, dict[str, Any]] = {}
+        self._fts5_conn: Any = None
+        self._fts5_watermark: tuple[int, int, int, int] = (-1, -1, -1, -1)
         self._clock: float = 0.0
 
         if self.state_path is not None and self.state_path.exists():
@@ -1636,6 +1641,349 @@ class VerificationFirstMemoryBus:
             "model_calls": 0,
         }
 
+    # ------------------------------------------------------------ Wave 15: MemGuard + rule_expiry + Anti-Skill + ProvedComposition + FTS5
+    def register_memguard_lifecycle(
+        self,
+        skill_id: str,
+        *,
+        reward: float = 1.0,
+        confidence: float = 1.0,
+        fingerprint: Mapping[str, Any] | None = None,
+        lifecycle_state: str = "active",
+        db_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Attach MemGuard persistent verifier metadata + `rule_expiry_v1` world fingerprint to a skill."""
+        from canonical.swe_kernel import rule_expiry_v1 as rexp
+
+        fp = dict(fingerprint) if fingerprint is not None else dict(rexp.world_fingerprint())
+        state_norm = str(lifecycle_state or "active").lower()
+        if state_norm not in {"provisional", "active", "quarantined", "expired", "archived"}:
+            state_norm = "provisional"
+        if float(confidence) < 0.30 or float(reward) <= 0.0:
+            state_norm = "quarantined"
+        rec = {
+            "skill_id": str(skill_id),
+            "reward": round(float(reward), 6),
+            "confidence": round(float(confidence), 6),
+            "lifecycle_state": state_norm,
+            "world_fingerprint": fp,
+            "recorded_ts": self._tick(),
+            "revocation_reasons": [],
+        }
+        self._skill_lifecycle[str(skill_id)] = rec
+        if db_path is not None:
+            try:
+                rexp.record_taught(db_path, str(skill_id), fingerprint=fp)
+            except Exception:
+                pass
+        self._fts5_watermark = (-1, -1, -1, -1)
+        return {
+            "pass": True,
+            "status": f"PASS__MEMGUARD_LIFECYCLE_{state_norm.upper()}",
+            "descriptor": dict(rec),
+            "model_calls": 0,
+        }
+
+    def audit_world_expiry(
+        self,
+        *,
+        current_fingerprint: Mapping[str, Any] | None = None,
+        quarantine_on_drift: bool = True,
+        db_path: str | Path | None = None,
+    ) -> dict[str, Any]:
+        """Audit all MemGuard-tracked skills against `rule_expiry_v1.world_fingerprint` & auto-expire drifted rules."""
+        from canonical.swe_kernel import rule_expiry_v1 as rexp
+
+        now_fp = dict(current_fingerprint) if current_fingerprint is not None else dict(rexp.world_fingerprint())
+        expired_ids: list[str] = []
+        active_ids: list[str] = []
+        diffs_by_skill: dict[str, list[str]] = {}
+        for sid, rec in sorted(self._skill_lifecycle.items()):
+            taught_fp = dict(rec.get("world_fingerprint") or {})
+            diffs = list(rexp.material_differences(taught_fp, now_fp))
+            if diffs:
+                diffs_by_skill[sid] = diffs
+                if quarantine_on_drift:
+                    rec["lifecycle_state"] = "expired"
+                    rec["revocation_reasons"] = sorted(set(list(rec.get("revocation_reasons") or []) + diffs))
+                    if sid in self.skills and not self.skills[sid].forgotten:
+                        self.invalidate(sid, reason="EXPIRED_WORLD_FINGERPRINT_DRIFT")
+                expired_ids.append(sid)
+            else:
+                if rec.get("lifecycle_state") in {"active", "provisional"}:
+                    active_ids.append(sid)
+        db_audit = None
+        if db_path is not None and Path(db_path).exists():
+            try:
+                db_audit = rexp.audit(db_path, now=now_fp)
+            except Exception as exc:
+                db_audit = {"error": f"{type(exc).__name__}:{exc}"}
+        self._fts5_watermark = (-1, -1, -1, -1)
+        return {
+            "pass": True,
+            "status": "PASS__WORLD_EXPIRY_AUDITED",
+            "active_count": len(active_ids),
+            "expired_count": len(expired_ids),
+            "active_skills": active_ids,
+            "expired_skills": expired_ids,
+            "material_differences": diffs_by_skill,
+            "db_audit": db_audit,
+            "model_calls": 0,
+        }
+
+    def record_anti_skill(
+        self,
+        *,
+        domain: str,
+        symbol_scope: str,
+        bad_hypothesis: str,
+        error_signature: str,
+        world_fp: Mapping[str, Any] | None = None,
+        csp_pair: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Crystallize a typed Negative-Knowledge / Anti-Skill refutation scoped by symbol & world fingerprint."""
+        dom = str(domain or "general")
+        sym = str(symbol_scope or "*")
+        hyp = str(bad_hypothesis or "").strip()
+        err = str(error_signature or "REFUTED")
+        key_raw = f"{dom}|{sym}|{hyp}"
+        anti_id = "ANTI-" + hashlib.sha256(key_raw.encode("utf-8")).hexdigest()[:16]
+        existing = self._anti_skills.get(anti_id)
+        hits = int(existing.get("hits", 0)) + 1 if existing else 1
+        rec = {
+            "anti_id": anti_id,
+            "domain": dom,
+            "symbol_scope": sym,
+            "bad_hypothesis": hyp,
+            "error_signature": err,
+            "hits": hits,
+            "world_fp_keys": sorted((world_fp or {}).keys()),
+            "csp_pair": dict(csp_pair) if isinstance(csp_pair, Mapping) else None,
+            "ts": self._tick(),
+        }
+        self._anti_skills[anti_id] = rec
+        # Mirror into CDCL negative-space conflict store for unified pruning
+        self.record_conflict(hyp[:400], reason=err, domain=dom, context_sig=sym)
+        self._fts5_watermark = (-1, -1, -1, -1)
+        return {
+            "pass": True,
+            "status": "PASS__ANTI_SKILL_RECORDED",
+            "anti_skill": dict(rec),
+            "total_anti_skills": len(self._anti_skills),
+            "model_calls": 0,
+        }
+
+    def prune_by_anti_skills(
+        self,
+        candidates: Sequence[str],
+        *,
+        domain: str,
+        symbol_scope: str = "*",
+    ) -> dict[str, Any]:
+        """Prune candidate hypotheses in O(1) using crystallized Anti-Skills before spending compute."""
+        t0 = time.perf_counter()
+        dom = str(domain or "general")
+        sym = str(symbol_scope or "*")
+        blocked_exact: dict[str, str] = {}
+        for rec in self._anti_skills.values():
+            if rec.get("domain") == dom and rec.get("symbol_scope") in {sym, "*"}:
+                blocked_exact[str(rec.get("bad_hypothesis") or "").strip()] = str(rec.get("anti_id"))
+        kept: list[str] = []
+        pruned: list[dict[str, Any]] = []
+        for c in candidates:
+            cs = str(c).strip()
+            aid = blocked_exact.get(cs)
+            if aid is not None:
+                pruned.append({"candidate": str(c), "anti_id": aid})
+            else:
+                kept.append(str(c))
+        return {
+            "pass": True,
+            "status": "PASS__ANTI_SKILL_PRUNED",
+            "kept": kept,
+            "pruned": pruned,
+            "pruned_count": len(pruned),
+            "kept_count": len(kept),
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
+    def prove_and_compose_operations(
+        self,
+        *,
+        initial_text: str,
+        operations: Sequence[Mapping[str, Any]],
+        recheck_prior: bool = True,
+    ) -> dict[str, Any]:
+        """Compose multi-step operations ONLY when premise & structural proof survive (`proved_composition_v1`)."""
+        from canonical.swe_kernel import proved_composition_v1 as pc
+
+        ops_objs: list[Any] = []
+        for idx, spec in enumerate(operations):
+            name = str(spec.get("name") or f"op_{idx}")
+            needle = str(spec.get("needle") or "")
+            replacement = str(spec.get("replacement") or "")
+            if not needle:
+                return {
+                    "pass": False,
+                    "status": "FAIL_CLOSED__EMPTY_OPERATION_NEEDLE",
+                    "step": idx,
+                    "model_calls": 0,
+                }
+            ops_objs.append(
+                pc.ProvedOperation(
+                    op_id=name,
+                    premise=pc.substring_premise(needle),
+                    apply=lambda text, _n=needle, _r=replacement: text.replace(_n, _r, 1) if _n in text else None,
+                    prove=pc.structural_proof(needle, replacement),
+                    survive=pc.structural_survival(needle),
+                )
+            )
+        if not ops_objs:
+            return {"pass": False, "status": "FAIL_CLOSED__NO_OPERATIONS", "model_calls": 0}
+        res = dict(pc.compose(initial_text, ops_objs, recheck_prior=bool(recheck_prior)))
+        ok = bool(str(res.get("verdict") or "") in {"PASS", "PROVED"} or res.get("ok") or res.get("proved"))
+        return {
+            "pass": ok,
+            "status": "PASS__PROVED_COMPOSITION_VERIFIED" if ok else f"FAIL_CLOSED__{res.get('verdict') or res.get('status') or 'COMPOSITION_REFUSED'}",
+            "premise_ok": ok,
+            "proof_ok": ok,
+            "output_text": str(res.get("result") or initial_text),
+            "steps": len(ops_objs),
+            "receipt": res,
+            "model_calls": 0,
+        }
+
+    def fts5_recall(
+        self,
+        query: str,
+        *,
+        top_k: int = 8,
+        include_quarantined: bool = False,
+        extra_docs: Sequence[Mapping[str, Any]] = (),
+    ) -> dict[str, Any]:
+        """Sub-2 ms SQLite FTS5 BM25 memory/runbook recall with MemGuard quarantine & expiry filtering."""
+        import re
+        import sqlite3
+
+        t0 = time.perf_counter()
+        q_raw = str(query or "").strip()
+        tokens = [tok for tok in re.findall(r"[A-Za-z0-9_]+", q_raw.lower()) if len(tok) >= 2]
+        if not tokens:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__EMPTY_FTS5_QUERY",
+                "hits": [],
+                "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+                "model_calls": 0,
+            }
+
+        wm = (len(self.skills), len(self.causal_edges), len(self._verified_event_log), len(self._anti_skills))
+        rebuild = self._fts5_conn is None or self._fts5_watermark != wm or bool(extra_docs)
+        if rebuild:
+            conn = sqlite3.connect(":memory:")
+            conn.execute(
+                "CREATE VIRTUAL TABLE mem_fts USING fts5("
+                "doc_id UNINDEXED, kind UNINDEXED, lifecycle UNINDEXED, title, body, tokenize='unicode61')"
+            )
+            batch: list[tuple[str, str, str, str, str]] = []
+            for sid, sk in self.skills.items():
+                lc = (self._skill_lifecycle.get(sid) or {}).get("lifecycle_state")
+                if sk.forgotten:
+                    lc = "expired"
+                lc = str(lc or "active")
+                payload_txt = json.dumps(sk.payload, sort_keys=True, default=str)[:400] if sk.payload is not None else ""
+                batch.append((
+                    sid,
+                    "skill",
+                    lc,
+                    f"{sk.kind} {sk.trigger_key} {payload_txt}",
+                    json.dumps(sk.as_dict(), sort_keys=True),
+                ))
+            for eid, edge in self.causal_edges.items():
+                batch.append((
+                    eid,
+                    "causal_edge",
+                    "quarantined" if edge.refused else "active",
+                    f"{edge.episode_id} {edge.action} {edge.effect} {edge.pre_state} {edge.post_state}",
+                    json.dumps(edge.as_dict(), sort_keys=True),
+                ))
+            for idx, ev in enumerate(self._verified_event_log):
+                batch.append((
+                    f"ev:{idx}:{ev.get('key', '')}",
+                    "verified_event",
+                    "active",
+                    f"{ev.get('op', '')} {ev.get('key', '')}",
+                    json.dumps(ev, sort_keys=True),
+                ))
+            for aid, anti in self._anti_skills.items():
+                batch.append((
+                    aid,
+                    "anti_skill",
+                    "active",
+                    f"{anti.get('domain', '')} {anti.get('symbol_scope', '')} {anti.get('error_signature', '')}",
+                    str(anti.get("bad_hypothesis") or ""),
+                ))
+            for d in extra_docs:
+                batch.append((
+                    str(d.get("doc_id") or d.get("id") or ""),
+                    str(d.get("kind") or "external"),
+                    str(d.get("lifecycle") or "active"),
+                    str(d.get("title") or ""),
+                    str(d.get("body") or ""),
+                ))
+            conn.executemany(
+                "INSERT INTO mem_fts(doc_id, kind, lifecycle, title, body) VALUES (?, ?, ?, ?, ?)",
+                batch,
+            )
+            if not extra_docs:
+                if self._fts5_conn is not None:
+                    try:
+                        self._fts5_conn.close()
+                    except Exception:
+                        pass
+                self._fts5_conn = conn
+                self._fts5_watermark = wm
+            active_conn = conn
+        else:
+            active_conn = self._fts5_conn
+
+        fts_expr = " OR ".join(f'"{t}"' for t in sorted(set(tokens))[:12])
+        cur = active_conn.execute(
+            "SELECT doc_id, kind, lifecycle, title, bm25(mem_fts) AS rank "
+            "FROM mem_fts WHERE mem_fts MATCH ? ORDER BY rank ASC, doc_id ASC LIMIT ?",
+            (fts_expr, max(1, int(top_k)) * 3),
+        )
+        hits: list[dict[str, Any]] = []
+        suppressed = 0
+        for doc_id, kind, lifecycle, title, rank in cur.fetchall():
+            if not include_quarantined and lifecycle in {"quarantined", "expired", "archived"}:
+                suppressed += 1
+                continue
+            hits.append({
+                "doc_id": str(doc_id),
+                "kind": str(kind),
+                "lifecycle": str(lifecycle),
+                "title": str(title)[:240],
+                "bm25": round(float(rank), 6),
+            })
+            if len(hits) >= max(1, int(top_k)):
+                break
+        if extra_docs and active_conn is not self._fts5_conn:
+            try:
+                active_conn.close()
+            except Exception:
+                pass
+        return {
+            "pass": bool(hits),
+            "status": "PASS__FTS5_RECALL" if hits else "PASS__FTS5_RECALL_EMPTY",
+            "query": q_raw,
+            "hits": hits,
+            "suppressed_quarantined_or_expired": suppressed,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+            "model_calls": 0,
+        }
+
     def save(self, path: str | Path | None = None) -> Path:
         target = Path(path) if path is not None else self.state_path
         if target is None:
@@ -1656,6 +2004,8 @@ class VerificationFirstMemoryBus:
             "verified_event_last_hash": self._verified_event_last_hash,
             "external_adapters": dict(self.external_adapters),
             "forgetting_ledger": list(self.forgetting_ledger),
+            "skill_lifecycle": dict(self._skill_lifecycle),
+            "anti_skills": dict(self._anti_skills),
         }
         target.write_text(json.dumps(doc, indent=2, sort_keys=True), encoding="utf-8")
         return target
@@ -1718,6 +2068,17 @@ class VerificationFirstMemoryBus:
         )
         self.external_adapters = dict(raw.get("external_adapters", {}))
         self.forgetting_ledger = list(raw.get("forgetting_ledger", []))
+        self._skill_lifecycle = {
+            str(k): dict(v)
+            for k, v in (raw.get("skill_lifecycle") or {}).items()
+            if isinstance(v, Mapping)
+        }
+        self._anti_skills = {
+            str(k): dict(v)
+            for k, v in (raw.get("anti_skills") or {}).items()
+            if isinstance(v, Mapping)
+        }
+        self._fts5_watermark = (-1, -1, -1, -1)
 
 
 def execute_memory_operation(
@@ -1879,6 +2240,24 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "ONE_DEMONSTRATION_IDENTIFY":
         res = bus.identify_from_one_demonstration(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "MEMGUARD_REGISTER":
+        res = bus.register_memguard_lifecycle(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "AUDIT_WORLD_EXPIRY":
+        res = bus.audit_world_expiry(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "RECORD_ANTI_SKILL":
+        res = bus.record_anti_skill(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "PRUNE_ANTI_SKILLS":
+        res = bus.prune_by_anti_skills(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "PROVE_COMPOSITION":
+        res = bus.prove_and_compose_operations(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "FTS5_RECALL":
+        res = bus.fts5_recall(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}
