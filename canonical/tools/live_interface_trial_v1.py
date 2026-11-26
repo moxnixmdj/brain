@@ -23,7 +23,7 @@ sys.path.insert(0, str(ROOT))
 from canonical.runtime.brain_unified_model_v1 import open_model
 from canonical.runtime.creature_runtime_v1 import Creature
 from canonical.runtime.gui_room_v1 import GuiRoom
-from canonical.runtime.witnessed_browser_v1 import digest, induce
+from canonical.runtime.witnessed_browser_v1 import digest, induce, admit_slot
 from canonical.swe_kernel.witnessed_revision_store_v1 import RevisionStore
 
 CALIBRATION = '''<!doctype html><main><h1>Label editor</h1><output>blank</output></main><script>
@@ -97,8 +97,7 @@ def run(prompts, pages, exe, database, workers=2):
                     hypotheses={'literal':lambda v:'cedar','slot':lambda v:v},
                     candidate_probes=[{'id':'unchanged','input':'cedar'},{'id':'change_value','input':'lilac'}],
                     true_oracle=observe)
-                if contrast.get('surviving_worlds') != ['slot']:
-                    row.pop('slot',None)
+                row = admit_slot(row,contrast)
                 row['contrast'] = contrast.get('executed_probes',[])
                 ev = memory.append('set','interface.lesson',valid_from=1,source='teacher',value=row,witness=digest(teacher))
             else:

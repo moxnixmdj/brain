@@ -91,7 +91,7 @@ def propose(goal, tools, *, lesson=None, arm='empty'):
             args = None
             if arm=='raw' and goal==lesson['goal']:
                 args = lesson['args']
-            if arm=='lifted' and lesson.get('slot'):
+            if arm=='lifted' and lesson.get('slot') and lesson.get('slot_evidence'):
                 a,b = lesson['literal_context']
                 if goal.startswith(a) and goal.endswith(b) and len(goal)>len(a)+len(b):
                     value = goal[len(a):len(goal)-len(b) if b else None]
@@ -121,7 +121,8 @@ def propose(goal, tools, *, lesson=None, arm='empty'):
 
 def induce(goal, trial):
     """Store a teacher-only proposal. Do not count repeat recall as transfer."""
-    if trial['status'] != 'VERIFIED_VISIBLE_TRANSITION' or trial['channel'] != 'webmcp':
+    if (trial['status'] != 'VERIFIED_VISIBLE_TRANSITION' or trial['channel'] != 'webmcp'
+            or goal!=trial.get('goal') or not trial.get('changed') or not trial.get('executed')):
         raise ValueError('no witnessed teacher transition')
     action = trial['action']; args = action['args']
     row = dict(goal=goal, tool=action['name'], schema=trial['schema_digest'], args=args,
@@ -133,15 +134,31 @@ def induce(goal, trial):
     return row
 
 
-def _invoke(room, origin, tool, args):
+def admit_slot(row, contrast):
+    """Only eliminate the literal hypothesis in the teacher's declared space.
+
+    Changing a value at one observed coordinate is NOT a universal rule. The
+    receiver still has to rediscover a matching handle and recheck the effect.
+    """
+    if 'slot' not in row or contrast.get('status')!='IDENTIFIED_IN_DECLARED_SPACE':return row
+    value=row['args'][row['slot']]
+    evidence=[p for p in contrast.get('executed_probes',[]) if p['input']!=value
+              and p['observed_output']==p['input'] and p['surviving_worlds']==['slot']]
+    if evidence and contrast.get('surviving_worlds')==['slot']:
+        return {**row,'slot_evidence':evidence,'status':'SLOT_OVER_LITERAL_IN_TEACHER_SPACE'}
+    return row
+
+
+def _invoke(room, origin, tool, args, *, read_only=False):
     # Re-discover the actual RegisteredTool handle, never execute by an old name
     # across a navigation, schema change, duplicate or detached frame.
-    payload = json.dumps([origin,tool['name'],tool['schema'],args])
-    return room.evaluate('''(async ([origin,name,schema,args]) => {
+    payload = json.dumps([origin,tool['name'],tool['schema'],args,read_only])
+    return room.evaluate('''(async ([origin,name,schema,args,readOnly]) => {
       if (location.origin!==origin) throw Error('ORIGIN_CHANGED');
       const c=document.modelContext;
       const matches=(await c.getTools()).filter(t => t.origin===origin && (t.source===window || (t.source===undefined && window.frames.length===0)) && t.name===name);
       if (matches.length!==1 || JSON.stringify(matches[0].inputSchema)!==JSON.stringify(schema) ||
+          (readOnly && matches[0].annotations?.readOnlyHint!==true) ||
           matches[0].annotations?.consequentialHint || matches[0].annotations?.debugging) throw Error('TOOL_CHANGED');
       const result=await c.executeTool(matches[0],args,{signal:AbortSignal.timeout(1800)});
       return {returned:true, applicationError: !!(result && (result.isError || result.error)),
@@ -170,7 +187,7 @@ def step(room, goal, *, origin, arm='empty', lesson=None, expected_text=None):
         tool = next(t for t in tools if t['name']==act['name'])
         result.update(channel='webmcp',action=act,schema_digest=digest(_schema(tool)))
         try:
-            returned = _invoke(room, origin, tool, act['args'])
+            returned = _invoke(room, origin, tool, act['args'],read_only=read_question(goal))
         except RuntimeError as exc:
             return {**result,'status':'UNCONFIRMED_INVOCATION','error':str(exc)[:300]}
         result['executed'] = returned.get('returned') is True
