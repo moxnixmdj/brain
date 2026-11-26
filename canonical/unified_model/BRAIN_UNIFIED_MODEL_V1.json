@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "a29df43f6bac4cff0d258e0e387ec5e56fdf09e54b60551e04be521262d8dab5"
+  "value": "e2663cb748f71ad2e3e9abf51d1d0974eab879da5bd6f7dee5afd2ddcaaf9b19"
  },
  "engines": [
   {
@@ -333780,7 +333780,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURED_INSTANT_LEARNING_AND_THE_GENERALIZER_CEILING_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "77a810e62c5c787fda14d012c0912241c7e5c39dfa8a441a4cc30679560dd35a",
+   "sha256": "d9ddcef425a0e16db350a233466158930a62f54db9017a66b19336703b186692",
    "status": "SHIPPED",
    "terms": {
     "10": 1,
