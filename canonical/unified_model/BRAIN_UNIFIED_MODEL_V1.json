@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "41fb0ffdf88e70b218b31d50900f745f5d492764b6d80e7bdc42c211e39f7c60"
+  "value": "fc422c1fe562b7516c24df0b772a480e1f0ab00d3fc8bb44644dea4456c8ddd0"
  },
  "engines": [
   {
@@ -315390,7 +315390,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/FRONTIER_LEAPFROG_WAVES21_25_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b3c7d42608ab6c79d87c960a24f613c164ec362986d1dd5935041a47302a8a10",
+   "sha256": "895851c60e8fcc64915400e7c096ed64c324a7316075269b6044e455c492aac1",
    "status": "SHIPPED",
    "terms": {
     "0d-0i": 1,
