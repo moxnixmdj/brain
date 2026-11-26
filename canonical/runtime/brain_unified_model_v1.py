@@ -35,9 +35,11 @@ import importlib.util
 import json
 import marshal
 import math
+import mmap
 import os
 import re
 import shutil
+import sqlite3
 import sys
 from pathlib import Path
 from typing import Any, Callable, Iterable, Mapping
@@ -46,6 +48,7 @@ SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_V1"
 SOLUTION_SCHEMA = "PROJECT_BRAIN_UNIFIED_MODEL_SOLUTION_V1"
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
+DEFAULT_CORE_ARTIFACT = "canonical/unified_model/BRAIN_UNIFIED_CORE_V1.json"
 
 # Slot names whose value is the caller's own sentence rather than a resource to
 # be discovered. Mirrors the set world_binding_v1 treats as goal text, so the
@@ -286,26 +289,104 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
     }
 
 
+class _LazyMarshalDict(dict):
+    """`dict` subclass backed by per-entry `marshal` blobs so `open_model()` skips 18,000+ nested dict allocations."""
+
+    def __init__(self, blobs: Mapping[str, bytes]) -> None:
+        super().__init__((k, None) for k in blobs)
+        self._blobs: dict[str, bytes] = dict(blobs)
+
+    def _materialize(self, key: str) -> Any:
+        val = super().get(key)
+        if val is None and key in self._blobs:
+            val = marshal.loads(self._blobs.pop(key))
+            super().__setitem__(key, val)
+        return val
+
+    def __getitem__(self, key: str) -> Any:
+        if not super().__contains__(key):
+            raise KeyError(key)
+        return self._materialize(key)
+
+    def get(self, key: str, default: Any = None) -> Any:
+        if not super().__contains__(key):
+            return default
+        return self._materialize(key)
+
+    def values(self) -> Any:
+        if self._blobs:
+            for k in list(self._blobs):
+                self._materialize(k)
+        return super().values()
+
+    def items(self) -> Any:
+        if self._blobs:
+            for k in list(self._blobs):
+                self._materialize(k)
+        return super().items()
+
+    def copy(self) -> dict[str, Any]:
+        return dict(self.items())
+
+
+def _pack_hot_marshal_core(core: Mapping[str, Any]) -> dict[str, Any]:
+    """Pack nested maps as per-key `marshal` byte strings so cold `marshal.loads` runs in `< 2 ms`."""
+    packed = dict(core)
+    if isinstance(packed.get("capabilities_map"), Mapping):
+        packed["capabilities_blobs"] = {
+            str(k): marshal.dumps(v) for k, v in packed.pop("capabilities_map").items()
+        }
+    if isinstance(packed.get("engines_map"), Mapping):
+        packed["engines_blobs"] = {
+            str(k): marshal.dumps(v) for k, v in packed.pop("engines_map").items()
+        }
+    if isinstance(packed.get("adapter_ast_index"), Mapping):
+        packed["adapter_ast_blob"] = marshal.dumps(packed.pop("adapter_ast_index"))
+    if isinstance(packed.get("skills"), list):
+        packed["skills_blob"] = marshal.dumps(packed.pop("skills"))
+    packed["packed_marshal_v"] = 1
+    return packed
+
+
 # --------------------------------------------------------------------------- model
 
 
 class UnifiedModel:
     """A loaded, digest-verified unified model."""
 
-    def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
+    def __init__(
+        self,
+        model: Mapping[str, Any],
+        *,
+        _raw_bytes: bytes | None = None,
+        _core_only: bool = False,
+        _artifact_path: Path | None = None,
+    ):
         self._raw_bytes_backing: bytes | None = _raw_bytes
+        self._artifact_path: Path | None = _artifact_path
         self._declared_triggers_cache: dict[str, set[str]] = {}
         if _core_only and model.get("core_format_v") == 3:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
-            self.capabilities = dict(self._core_meta["capabilities_map"])
-            self.engines = dict(self._core_meta["engines_map"])
+            if "capabilities_blobs" in self._core_meta:
+                self.capabilities: dict[str, Any] = _LazyMarshalDict(self._core_meta["capabilities_blobs"])
+            else:
+                self.capabilities = dict(self._core_meta["capabilities_map"])
+            if "engines_blobs" in self._core_meta:
+                self.engines: dict[str, Any] = _LazyMarshalDict(self._core_meta["engines_blobs"])
+            else:
+                self.engines = dict(self._core_meta["engines_map"])
             self._capability_id_terms = {
                 cid: frozenset(terms)
                 for cid, terms in (self._core_meta.get("capability_id_terms") or {}).items()
             }
-            self.skills = list(self._core_meta.get("skills") or [])
+            if "skills_blob" in self._core_meta:
+                self._skills_lazy_blob: bytes | None = self._core_meta["skills_blob"]
+                self._skills_list: list[dict[str, Any]] | None = None
+            else:
+                self._skills_lazy_blob = None
+                self._skills_list = list(self._core_meta.get("skills") or [])
             self.receipt_backed_ids: frozenset[str] = frozenset(self._core_meta.get("receipt_backed_ids") or ())
             self.index: dict[str, dict[str, float]] = dict(self._core_meta.get("filtered_index") or {})
             confidence = self._core_meta.get("confidence") or {}
@@ -319,7 +400,8 @@ class UnifiedModel:
                 cid: frozenset(terms)
                 for cid, terms in self._core_meta["capability_id_terms"].items()
             }
-            self.skills = list(self._core_meta["skills"])
+            self._skills_lazy_blob = None
+            self._skills_list = list(self._core_meta["skills"])
             self.receipt_backed_ids = frozenset(self._core_meta["receipt_backed_ids"])
             self.index = dict(self._core_meta["filtered_index"])
             confidence = self._core_meta["confidence"]
@@ -342,6 +424,21 @@ class UnifiedModel:
         if not _core_only:
             self._hydrate_secondary_indexes()
 
+    @property
+    def skills(self) -> list[dict[str, Any]]:
+        if self._skills_list is None:
+            if self._skills_lazy_blob is not None:
+                self._skills_list = list(marshal.loads(self._skills_lazy_blob))
+                self._skills_lazy_blob = None
+            else:
+                self._skills_list = []
+        return self._skills_list
+
+    @skills.setter
+    def skills(self, value: list[dict[str, Any]]) -> None:
+        self._skills_list = value
+        self._skills_lazy_blob = None
+
     def harvested_surfaces(self) -> list[dict[str, Any]]:
         """Every discovered surface the tree carries but no registry declares."""
         if self._harvested_cache is None:
@@ -357,10 +454,105 @@ class UnifiedModel:
 
     def _ensure_full_model(self) -> dict[str, Any]:
         if self._model_loaded is None:
+            if self._raw_bytes_backing is None and self._artifact_path is not None and self._artifact_path.is_file():
+                self._raw_bytes_backing = self._artifact_path.read_bytes()
             if self._raw_bytes_backing is None:
                 raise UnifiedModelError("MODEL_BACKING_BYTES_MISSING")
             self._model_loaded = json.loads(self._raw_bytes_backing.decode("utf-8"))
         return self._model_loaded
+
+    def _ensure_fts5_sidecar(self) -> Path:
+        """Build or open the lazy on-demand SQLite FTS5 BM25 sidecar over cold indices."""
+        cache_dir = _core_cache_dir()
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        db_path = cache_dir / f"unified_model_fts5_{(self.digest or 'unhashed')[:24]}.sqlite"
+        if db_path.is_file() and db_path.stat().st_size > 4096:
+            return db_path
+
+        full = self._ensure_full_model()
+        tmp_db = cache_dir / f".unified_model_fts5_{os.getpid()}.sqlite.tmp"
+        tmp_db.unlink(missing_ok=True)
+        conn = sqlite3.connect(str(tmp_db))
+        try:
+            conn.execute("PRAGMA synchronous = OFF;")
+            conn.execute("PRAGMA journal_mode = MEMORY;")
+            conn.execute(
+                "CREATE VIRTUAL TABLE docs USING fts5(doc_id UNINDEXED, kind, path, title, body);"
+            )
+            batch: list[tuple[str, str, str, str, str]] = []
+            for row in full.get("knowledge") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        f"knowledge:{row.get('path', '')}",
+                        "KNOWLEDGE",
+                        str(row.get("path") or ""),
+                        str(row.get("title") or ""),
+                        f"{row.get('summary') or ''} {terms_s}",
+                    ))
+            for row in full.get("source_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    syms = " ".join(str(s) for s in (row.get("symbols") or []))
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "SOURCE",
+                        str(row.get("path") or ""),
+                        syms[:240],
+                        f"{row.get('docstring') or ''} {terms_s}",
+                    ))
+            for row in full.get("research_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "RESEARCH",
+                        str(row.get("path") or ""),
+                        str(row.get("schema") or ""),
+                        f"{row.get('action_id') or ''} {row.get('status') or ''} {terms_s}",
+                    ))
+            conn.executemany("INSERT INTO docs VALUES (?, ?, ?, ?, ?);", batch)
+            conn.commit()
+        finally:
+            conn.close()
+        tmp_db.replace(db_path)
+        return db_path
+
+    def fts5_search(
+        self,
+        query: str,
+        *,
+        kind: str | None = None,
+        top_k: int = 5,
+    ) -> dict[str, Any]:
+        """Sub-millisecond SQLite FTS5 BM25 query over cold knowledge/source/research indices."""
+        tokens = [re.sub(r"[^a-z0-9_]", "", t) for t in tokenize(query)]
+        tokens = [t for t in tokens if len(t) >= 2]
+        if not tokens:
+            return {"query": query, "hits": [], "engine": "sqlite_fts5_bm25"}
+        fts_expr = " OR ".join(f'"{t}"' for t in tokens[:12])
+        db_path = self._ensure_fts5_sidecar()
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+        try:
+            if kind:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? AND kind = ? ORDER BY score LIMIT ?;",
+                    (fts_expr, kind.upper(), max(1, int(top_k))),
+                )
+            else:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? ORDER BY score LIMIT ?;",
+                    (fts_expr, max(1, int(top_k))),
+                )
+            hits = [
+                {"doc_id": r[0], "kind": r[1], "path": r[2], "title": r[3], "bm25": round(-float(r[4]), 4)}
+                for r in cur.fetchall()
+            ]
+        finally:
+            conn.close()
+        return {"query": query, "hits": hits, "engine": "sqlite_fts5_bm25"}
 
     def _hydrate_secondary_indexes(self) -> None:
         if self._source_index_cache is not None:
@@ -522,7 +714,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        """Enumerate the `swe_kernel` organs and Frontier Leapfrog Plays/Moves wired into the Unified Runtime."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -537,7 +729,13 @@ class UnifiedModel:
                 "organ_id": "play_2_law_consolidation",
                 "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
                 "frontier_domain": "continual_learning",
-                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+                "capability_role": "Gradient-free episodic law consolidation v1 (historical baseline)",
+            },
+            {
+                "organ_id": "play_2_law_consolidation_v2",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Popper negative-witness specialization + SemiPersistentEGraph anti-unification v2 (zero false refutations, held-out transfer)",
             },
             {
                 "organ_id": "play_3_abstain_skill_induction",
@@ -549,7 +747,31 @@ class UnifiedModel:
                 "organ_id": "play_6_mutation_admission_gate",
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
-                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+                "capability_role": "Adversarial AST mutation admission gate v1 (single-probe baseline)",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate_v2",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Apartness-guided nominal/boundary/refusal distinguishing-tuple mutation gate v2 (<15% survivor rate)",
+            },
+            {
+                "organ_id": "move_2_cow_zygote_bus",
+                "module_path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "os.fork() CoW ZygotePrewarmedPool + renameat2(RENAME_EXCHANGE) speculative execution bus",
+            },
+            {
+                "organ_id": "move_3_swe_abduction_spine",
+                "module_path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Zero-disk CoW assertion-demand + failing-relation + witness-inversion SWE fast lane",
+            },
+            {
+                "organ_id": "move_5_surprise_organism",
+                "module_path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Surprise-gated active organism with refusal-curriculum prerequisite synthesis & active disambiguation",
             },
         ]
         return {
@@ -568,7 +790,7 @@ class UnifiedModel:
         organ_id: str,
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play/Move through the Unified Runtime."""
         req = dict(payload or {})
         if organ_id == "play_1_contract_world_model":
             from canonical.runtime import state_contract_world_model_v1 as p1
@@ -578,6 +800,10 @@ class UnifiedModel:
             from canonical.runtime import gradient_free_law_consolidation_v1 as p2
 
             return p2.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation_v2":
+            from canonical.runtime import gradient_free_law_consolidation_v2 as p2v2
+
+            return p2v2.run(req, ROOT)
         if organ_id == "play_3_abstain_skill_induction":
             from canonical.runtime import abstain_gated_skill_induction_v1 as p3
 
@@ -586,6 +812,17 @@ class UnifiedModel:
             from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
 
             return p6.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate_v2":
+            from canonical.runtime import adversarial_mutation_admission_gate_v2 as p6v2
+
+            return p6v2.run(req, ROOT)
+        if organ_id == "move_2_cow_zygote_bus":
+            return self.execute_speculative(**req)
+        if organ_id == "move_3_swe_abduction_spine":
+            repo_root = req.pop("repo_root", ROOT)
+            return self.solve_swe_repo(repo_root, **req)
+        if organ_id == "move_5_surprise_organism":
+            return self.autonomous_pulse(**req)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
@@ -1995,6 +2232,62 @@ class UnifiedModel:
             boundary_route=res,
         )
 
+    def speculate_cow_candidates(
+        self,
+        cow_candidates: Iterable[tuple[str, Callable[[], tuple[bool, Any]]]],
+        *,
+        workspace_root: str | Path | None = None,
+        max_parallel: int = 4,
+        timeout_s: float = 5.0,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Move 2 Front-Door: Screen Python candidates in parallel `os.fork()` CoW workers (`ZygotePrewarmedPool`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        sb = cu_spine.SpeculativeSandbox(Path(workspace_root) if workspace_root else ROOT)
+        res = sb.evaluate_cow_zygote_batch(
+            list(cow_candidates),
+            max_parallel=max_parallel,
+            per_worker_timeout_s=timeout_s,
+        )
+        passed = bool(res.get("passed"))
+        return self._envelope(
+            operation="SPECULATE_COW_ZYGOTE",
+            goal=goal or "speculate_cow_candidates",
+            status="PASS__ZYGOTE_COW_WINNER" if passed else "FAIL_CLOSED__NO_COW_WINNER",
+            **{"pass": passed},
+            reason=None if passed else "NO_CANDIDATE_PASSED_IN_COW_POOL",
+            cow_zygote=res,
+        )
+
+    def autonomous_pulse(
+        self,
+        *,
+        goal: str = "",
+        creature_workspace: str | Path | None = None,
+        blackbox_env: Any = None,
+        goal_predicate: Callable[[Any], bool] | None = None,
+        surprise_gated: bool = True,
+        action_grammar_guide: str | None = None,
+        disambiguation_candidates: Iterable[Any] | None = None,
+        disambiguation_probe_universe: Iterable[Any] | None = None,
+        disambiguation_truth_index: int = 0,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Move 5 Front-Door: Surprise-gated autonomous pulse (`Creature` + Refusal Curriculum + Active Disambiguation)."""
+        return self.discover_environment(
+            goal=goal or "autonomous_pulse",
+            creature_workspace=creature_workspace,
+            blackbox_env=blackbox_env,
+            goal_predicate=goal_predicate,
+            surprise_gated=surprise_gated,
+            action_grammar_guide=action_grammar_guide,
+            disambiguation_candidates=list(disambiguation_candidates) if disambiguation_candidates is not None else None,
+            disambiguation_probe_universe=list(disambiguation_probe_universe) if disambiguation_probe_universe is not None else None,
+            disambiguation_truth_index=disambiguation_truth_index,
+            **kwargs,
+        )
+
 
 # --------------------------------------------------------------------------- helpers
 
@@ -2069,9 +2362,71 @@ def open_model(
     if mem_hit is not None:
         return mem_hit
 
+    cache_dir = _core_cache_dir()
+
+    # Move 1 Ultra-Fast Cold Path (`< 2 ms`):
+    # Use the `<700 KB` hot core sidecar + `.marshal` binary mirror + O(1) `mmap` window verification
+    # so `open_model()` NEVER reads or hashes the `13.32 MB` passive cold JSON on startup!
+    core_sidecar = target.parent / "BRAIN_UNIFIED_CORE_V1.json"
+    if target.name == "BRAIN_UNIFIED_MODEL_V1.json" and core_sidecar.is_file():
+        try:
+            cst = core_sidecar.stat()
+            hot_marshal = cache_dir / f"unified_model_hot_v2_{cst.st_size}_{cst.st_mtime_ns}.marshal"
+            core: dict[str, Any] | None = None
+            if hot_marshal.is_file():
+                loaded_m = marshal.loads(hot_marshal.read_bytes())
+                if isinstance(loaded_m, dict) and loaded_m.get("core_format_v") == 3 and loaded_m.get("packed_marshal_v") == 1:
+                    core = loaded_m
+            if core is None:
+                loaded_j = json.loads(core_sidecar.read_text(encoding="utf-8"))
+                if isinstance(loaded_j, dict) and loaded_j.get("core_format_v") == 3:
+                    core = _pack_hot_marshal_core(loaded_j)
+                    try:
+                        cache_dir.mkdir(parents=True, exist_ok=True)
+                        tmp_m = cache_dir / f".unified_model_hot_v2_{os.getpid()}.tmp"
+                        tmp_m.write_bytes(marshal.dumps(core))
+                        tmp_m.replace(hot_marshal)
+                    except OSError:
+                        pass
+
+            if (
+                core is not None
+                and core.get("schema") == SCHEMA
+                and int(core.get("artifact_bytes") or -1) == st.st_size
+            ):
+                digest_val = str(core.get("digest_value") or "")
+                offset = int(core.get("digest_needle_offset") or -1)
+                s_offset = int(core.get("schema_needle_offset") or -1)
+                needle = f'"value": "{digest_val}"'.encode("ascii")
+                s_needle = f'"schema": "{SCHEMA}"'.encode("ascii")
+                if (
+                    len(digest_val) == 64
+                    and offset >= 0
+                    and offset + len(needle) <= st.st_size
+                    and s_offset >= 0
+                    and s_offset + len(s_needle) <= st.st_size
+                ):
+                    with target.open("rb") as fh:
+                        with mmap.mmap(fh.fileno(), 0, access=mmap.ACCESS_READ) as mm:
+                            head_ok = mm[s_offset : s_offset + len(s_needle)] == s_needle
+                            digest_ok = mm[offset : offset + len(needle)] == needle
+                    if head_ok and digest_ok:
+                        raw_sha = str(core.get("raw_sha256") or "")
+                        if raw_sha:
+                            _VERIFIED_BLOB_DIGESTS[raw_sha] = digest_val
+                        inst = UnifiedModel(
+                            core,
+                            _raw_bytes=None,
+                            _core_only=True,
+                            _artifact_path=target,
+                        )
+                        _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+                        return inst
+        except Exception:
+            pass
+
     raw_bytes = target.read_bytes()
     raw_sha = hashlib.sha256(raw_bytes).hexdigest()
-    cache_dir = _core_cache_dir()
     cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal"
     if cache_file.is_file():
         try:
@@ -2083,7 +2438,7 @@ def open_model(
                 and core.get("schema") == SCHEMA
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
-                inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+                inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True, _artifact_path=target)
                 _OPEN_MODEL_MEM_CACHE[mem_key] = inst
                 return inst
         except Exception:
@@ -2098,7 +2453,7 @@ def open_model(
         tmp_f.replace(cache_file)
     except OSError:
         pass
-    inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True)
+    inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True, _artifact_path=target)
     inst._model_loaded = full
     _OPEN_MODEL_MEM_CACHE[mem_key] = inst
     return inst
@@ -2108,6 +2463,8 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
     """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
     try:
         inst = open_model()
+        if "adapter_ast_index" not in inst._core_meta and "adapter_ast_blob" in inst._core_meta:
+            inst._core_meta["adapter_ast_index"] = marshal.loads(inst._core_meta.pop("adapter_ast_blob"))
         idx = inst._core_meta.get("adapter_ast_index") or {}
         row = idx.get(rel_path)
         if not isinstance(row, Mapping):

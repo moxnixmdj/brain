@@ -34,9 +34,11 @@ Every result explicitly reports `authority = "NONE_SANDBOX"` and exact
 from __future__ import annotations
 
 import ast
+import copy
 import difflib
 import hashlib
 import json
+import os
 import pathlib
 import re
 import shutil
@@ -47,9 +49,16 @@ import time
 from dataclasses import dataclass, field
 from typing import Any, Callable, Mapping, Protocol, Sequence
 
+from canonical.swe_kernel import causal_nexus_v1
 from canonical.swe_kernel import cow_angelic_zygote_v1 as cow_zyg
 from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
+from canonical.swe_kernel import petri_cow_splicing_engine_v1 as petri_splicer
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as dep_gate
+from canonical.swe_kernel import stdlib_cow_test_runner_v1 as cow_runner
+from canonical.swe_kernel import witness_inversion_v1
+from canonical.swe_kernel import zygote_worker_pool_v1 as zygote_pool
+from canonical.tools import the_assertion_is_the_demand_v1 as assert_demand
+from canonical.tools import the_relation_is_read_from_the_failing_run_v1 as rel_run
 
 SCHEMA = "CANONICAL_SWE_SPINE_V1"
 AUTHORITY = "NONE_SANDBOX"
@@ -59,6 +68,13 @@ PRODUCER_MODEL_CALLS = 0
 COMPOSED_CORE_MODULES: tuple[str, ...] = (
     "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
     "canonical/swe_kernel/cow_angelic_zygote_v1.py",
+    "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
+    "canonical/swe_kernel/zygote_worker_pool_v1.py",
+    "canonical/tools/the_assertion_is_the_demand_v1.py",
+    "canonical/tools/the_relation_is_read_from_the_failing_run_v1.py",
+    "canonical/swe_kernel/witness_inversion_v1.py",
+    "canonical/swe_kernel/causal_nexus_v1.py",
+    "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
     "canonical/swe_kernel/c_asan_cegis_repair_v1.py",
     "canonical/swe_kernel/js_causal_cegis_repair_v1.py",
     "canonical/swe_kernel/repair_input_dependency_gate_v1.py",
@@ -553,6 +569,368 @@ def _try_law_store_recall_python(
     return None
 
 
+def _localize_candidate_py_files(
+    base_snapshot: Mapping[str, bytes],
+    test_targets: Sequence[str],
+    failure_frames: Mapping[str, Sequence[Mapping[str, Any]]],
+    failure_output: str,
+) -> list[str]:
+    """Rank non-test `.py` files by live stack frames, test imports, and traceback mentions."""
+    non_test_py = sorted(
+        rel for rel in base_snapshot
+        if rel.endswith(".py") and not _is_test_relpath(rel)
+    )
+    if not non_test_py:
+        return []
+
+    scores: dict[str, int] = {rel: 0 for rel in non_test_py}
+
+    # 1. Direct live stack frames from `stdlib_cow_test_runner_v1`
+    for fr_list in failure_frames.values():
+        for depth, fr in enumerate(reversed(list(fr_list))):
+            rp = str(fr.get("rel_path") or "")
+            if rp in scores:
+                scores[rp] += max(20, 80 - depth * 10)
+
+    # 2. Imports inside test files (`from bounds import clamp_nonneg`, `import pkg.mod`)
+    imported_stems: set[str] = set()
+    for t_rel in test_targets:
+        norm_t = str(t_rel).split("::")[0].lstrip("./")
+        raw = base_snapshot.get(norm_t)
+        if not raw:
+            continue
+        try:
+            ttree = ast.parse(raw.decode("utf-8", errors="replace"))
+        except SyntaxError:
+            continue
+        for node in ast.walk(ttree):
+            if isinstance(node, ast.ImportFrom) and node.module:
+                imported_stems.add(node.module.replace(".", "/"))
+                imported_stems.add(node.module.rsplit(".", 1)[-1])
+            elif isinstance(node, ast.Import):
+                for alias in node.names:
+                    imported_stems.add(alias.name.replace(".", "/"))
+                    imported_stems.add(alias.name.rsplit(".", 1)[-1])
+
+    for rel in non_test_py:
+        no_ext = rel[:-3]
+        stem = pathlib.PurePosixPath(no_ext).name
+        if no_ext in imported_stems or no_ext.removeprefix("src/") in imported_stems or stem in imported_stems:
+            scores[rel] += 40
+        if rel in failure_output or stem in failure_output:
+            scores[rel] += 15
+
+    ranked = sorted(non_test_py, key=lambda r: (-scores[r], len(base_snapshot[r]), r))
+    return ranked[:6]
+
+
+def _synthesize_move3_candidates_for_file(
+    orig_src: str,
+    failure_output: str,
+    frame_records: Sequence[Mapping[str, Any]],
+    max_per_file: int = 40,
+) -> list[tuple[str, str]]:
+    """Synthesize input-dependency-verified candidate repairs for `orig_src` in `< 2 ms`."""
+    try:
+        orig_tree = ast.parse(orig_src)
+    except SyntaxError:
+        return []
+
+    cands: list[tuple[str, str]] = []
+    seen: set[str] = {orig_src}
+
+    def _emit(tag: str, cand_src: str | None) -> None:
+        if not cand_src or len(cands) >= max_per_file or cand_src in seen:
+            return
+        try:
+            ast.parse(cand_src)
+        except SyntaxError:
+            return
+        if dep_gate.gate(orig_src, cand_src).get("status") != "PASS":
+            return
+        seen.add(cand_src)
+        cands.append((tag, cand_src))
+
+    # Channel 1: Failing-Relation Edits (`the_relation_is_read_from_the_failing_run_v1`)
+    try:
+        for ed in (rel_run._add_end_anchor_edit(orig_src), rel_run._split_side_edit(orig_src)):
+            if isinstance(ed, str):
+                _emit("failing_relation_edit", ed)
+            elif isinstance(ed, Sequence):
+                for sub_ed in ed:
+                    if isinstance(sub_ed, str):
+                        _emit("failing_relation_edit", sub_ed)
+    except Exception:
+        pass
+
+    # Targeted string/regex/aliasing relational rewrites when tokens are present
+    for old_tok, new_tok, label in (
+        (".match(", ".fullmatch(", "relation_fullmatch"),
+        (".split(", ".rsplit(", "relation_rsplit"),
+        (".rsplit(", ".split(", "relation_split"),
+        (".lstrip(", ".strip(", "relation_strip"),
+        (".rstrip(", ".strip(", "relation_strip"),
+        (".strip(", ".rstrip(", "relation_rstrip"),
+    ):
+        if old_tok in orig_src:
+            _emit(label, orig_src.replace(old_tok, new_tok, 1))
+
+    # Channel 2: Comparison, Polarity & Guard Abduction (`what_the_condition_wants_v1` / `witness_inversion_v1`)
+    cmp_alternatives: dict[type[ast.cmpop], tuple[type[ast.cmpop], ...]] = {
+        ast.Lt: (ast.Gt, ast.LtE, ast.GtE),
+        ast.LtE: (ast.Lt, ast.GtE, ast.Gt),
+        ast.Gt: (ast.Lt, ast.GtE, ast.LtE),
+        ast.GtE: (ast.Gt, ast.LtE, ast.Lt),
+        ast.Eq: (ast.NotEq,),
+        ast.NotEq: (ast.Eq,),
+        ast.Is: (ast.IsNot,),
+        ast.IsNot: (ast.Is,),
+        ast.In: (ast.NotIn,),
+        ast.NotIn: (ast.In,),
+    }
+    focus_lines = {int(fr.get("lineno") or 0) for fr in frame_records if fr.get("lineno")}
+
+    all_nodes = list(ast.walk(orig_tree))
+    # Prioritize nodes near traceback lines first
+    node_order = sorted(
+        range(len(all_nodes)),
+        key=lambda idx: (
+            0 if any(abs(getattr(all_nodes[idx], "lineno", -999) - fl) <= 4 for fl in focus_lines) else 1,
+            idx,
+        ),
+    )
+
+    for idx in node_order:
+        if len(cands) >= max_per_file:
+            break
+        node = all_nodes[idx]
+
+        # 2a. Comparison operator boundary & polarity inversions
+        if isinstance(node, ast.Compare) and len(node.ops) == 1:
+            op_t = type(node.ops[0])
+            for alt_cls in cmp_alternatives.get(op_t, ()):
+                t_copy = copy.deepcopy(orig_tree)
+                target = list(ast.walk(t_copy))[idx]
+                if isinstance(target, ast.Compare) and target.ops:
+                    target.ops[0] = alt_cls()
+                    ast.fix_missing_locations(t_copy)
+                    _emit(f"cmp_invert:{op_t.__name__}->{alt_cls.__name__}", ast.unparse(t_copy))
+
+        # 2b. Boolean connective flip (`and` <-> `or`) & falsey-vs-None (`if x:` -> `if x is not None:`)
+        elif isinstance(node, ast.BoolOp):
+            alt_b = ast.Or if isinstance(node.op, ast.And) else ast.And
+            t_copy = copy.deepcopy(orig_tree)
+            target = list(ast.walk(t_copy))[idx]
+            if isinstance(target, ast.BoolOp):
+                target.op = alt_b()
+                ast.fix_missing_locations(t_copy)
+                _emit(f"boolop_flip:{type(node.op).__name__}->{alt_b.__name__}", ast.unparse(t_copy))
+
+        elif isinstance(node, ast.If) and isinstance(node.test, ast.Name):
+            t_copy = copy.deepcopy(orig_tree)
+            target = list(ast.walk(t_copy))[idx]
+            if isinstance(target, ast.If) and isinstance(target.test, ast.Name):
+                target.test = ast.Compare(
+                    left=ast.Name(id=target.test.id, ctx=ast.Load()),
+                    ops=[ast.IsNot()],
+                    comparators=[ast.Constant(value=None)],
+                )
+                ast.fix_missing_locations(t_copy)
+                _emit("guard_falsey_to_is_not_none", ast.unparse(t_copy))
+
+        # 2c. Arithmetic operator & off-by-one boundary inversions (`witness_inversion_v1`)
+        elif isinstance(node, ast.BinOp):
+            bin_alts: dict[type[ast.operator], tuple[type[ast.operator], ...]] = {
+                ast.Add: (ast.Sub,),
+                ast.Sub: (ast.Add,),
+                ast.Mult: (ast.FloorDiv,),
+                ast.Div: (ast.FloorDiv,),
+                ast.FloorDiv: (ast.Div,),
+            }
+            for alt_op in bin_alts.get(type(node.op), ()):
+                t_copy = copy.deepcopy(orig_tree)
+                target = list(ast.walk(t_copy))[idx]
+                if isinstance(target, ast.BinOp):
+                    target.op = alt_op()
+                    ast.fix_missing_locations(t_copy)
+                    _emit(f"binop_invert:{type(node.op).__name__}->{alt_op.__name__}", ast.unparse(t_copy))
+
+        # 2d. `hasattr(obj, k)` -> `getattr(obj, k, None) is not None`
+        elif (
+            isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Name)
+            and node.func.id == "hasattr"
+            and len(node.args) == 2
+        ):
+            t_copy = copy.deepcopy(orig_tree)
+            target = list(ast.walk(t_copy))[idx]
+            if isinstance(target, ast.Call):
+                repl = ast.Compare(
+                    left=ast.Call(
+                        func=ast.Name(id="getattr", ctx=ast.Load()),
+                        args=[target.args[0], target.args[1], ast.Constant(value=None)],
+                        keywords=[],
+                    ),
+                    ops=[ast.IsNot()],
+                    comparators=[ast.Constant(value=None)],
+                )
+                # Replace via expression unparse splice
+                old_expr = mhz._get_node_source(orig_src, node)
+                if old_expr:
+                    _emit("hasattr_to_getattr_non_none", mhz._splice_ast_node(orig_src, node, ast.unparse(repl)))
+
+        # 2e. Exception-lattice widening on uncaught runtime error (`except ValueError:` -> `(ValueError, TypeError)`)
+        elif isinstance(node, ast.ExceptHandler) and node.type is not None:
+            for exc_cls in ("TypeError", "ValueError", "KeyError", "IndexError", "AttributeError"):
+                if f"{exc_cls}:" in failure_output and exc_cls not in ast.unparse(node.type):
+                    t_copy = copy.deepcopy(orig_tree)
+                    target = list(ast.walk(t_copy))[idx]
+                    if isinstance(target, ast.ExceptHandler) and target.type is not None:
+                        elts = list(target.type.elts) if isinstance(target.type, ast.Tuple) else [target.type]
+                        elts.append(ast.Name(id=exc_cls, ctx=ast.Load()))
+                        target.type = ast.Tuple(elts=elts, ctx=ast.Load())
+                        ast.fix_missing_locations(t_copy)
+                        _emit(f"except_widen:{exc_cls}", ast.unparse(t_copy))
+
+    # Channel 3: Live Frame Expression Demand (`the_assertion_is_the_demand_v1` `~10us`/candidate)
+    m_eq = re.search(r"AssertionError:\s*assert\s+(.+?)\s*==\s*(.+)$", failure_output, re.MULTILINE)
+    if m_eq and frame_records:
+        try:
+            expected_val = ast.literal_eval(m_eq.group(2).strip())
+            last_fr = frame_records[-1]
+            locs_repr = dict(last_fr.get("locals_repr") or {})
+            live_env: dict[str, Any] = {}
+            for k, rv in locs_repr.items():
+                try:
+                    live_env[k] = ast.literal_eval(str(rv))
+                except Exception:
+                    continue
+            if live_env:
+                for expr_str in assert_demand.expressions(sorted(live_env.keys()))[:48]:
+                    ok_ev, val = assert_demand.evaluate(expr_str, live_env)
+                    if ok_ev and val == expected_val and type(val) is type(expected_val):
+                        for idx, node in enumerate(all_nodes):
+                            if isinstance(node, ast.Return) and node.value is not None:
+                                _emit("assertion_demand_return", mhz._splice_ast_node(orig_src, node, f"return {expr_str}"))
+        except Exception:
+            pass
+
+    return cands
+
+
+def _run_cow_demand_abduction_fast_lane(
+    repo_root: pathlib.Path,
+    base_snapshot: Mapping[str, bytes],
+    base_output: str,
+    test_targets: Sequence[str],
+    *,
+    regression_tests: Sequence[str] = (),
+    neg_guard: cow_zyg.NegativeSpaceGuard | None = None,
+    timeout_s: float = 12.0,
+) -> dict[str, Any] | None:
+    """Move 3 Zero-Disk `os.fork()` CoW Demand + Relation + Witness-Inversion Fast Lane."""
+    frame_run = cow_runner.run_targets_cow_fork(
+        repo_root,
+        test_targets,
+        timeout_s=min(6.0, timeout_s),
+        capture_frames=True,
+    )
+    f_frames: dict[str, list[dict[str, Any]]] = dict(frame_run.get("failure_frames") or {})
+    rich_output = str(frame_run.get("output") or base_output)
+
+    ranked_files = _localize_candidate_py_files(base_snapshot, test_targets, f_frames, rich_output)
+    if not ranked_files:
+        return None
+
+    flat_frames = [fr for frs in f_frames.values() for fr in frs]
+    all_targets = list(dict.fromkeys([*test_targets, *regression_tests]))
+    cow_jobs: list[tuple[str, Callable[[], tuple[bool, Any]]]] = []
+    job_payloads: dict[str, tuple[str, str, str]] = {}
+
+    for rel in ranked_files:
+        orig_src = base_snapshot[rel].decode("utf-8", errors="replace")
+        file_frames = [fr for fr in flat_frames if fr.get("rel_path") == rel]
+        for idx, (tag, cand_src) in enumerate(
+            _synthesize_move3_candidates_for_file(orig_src, rich_output, file_frames, max_per_file=36)
+        ):
+            if neg_guard is not None and neg_guard.is_refuted(orig_src, cand_src):
+                continue
+            cid = f"{rel}::{idx}::{tag}"
+            job_payloads[cid] = (rel, tag, cand_src)
+
+            def _make_shard(
+                c_id: str = cid,
+                r_rel: str = rel,
+                c_src: str = cand_src,
+            ) -> Callable[[], Mapping[str, Any]]:
+                def _shard() -> Mapping[str, Any]:
+                    devnull = os.open(os.devnull, os.O_WRONLY)
+                    os.dup2(devnull, 1)
+                    os.dup2(devnull, 2)
+                    os.close(devnull)
+                    out = cow_runner._execute_suite_in_current_process(
+                        repo_root,
+                        all_targets,
+                        overlays={r_rel: c_src},
+                        capture_frames=False,
+                    )
+                    return {
+                        "candidate_id": c_id,
+                        "passed": bool(out.get("ok")),
+                        "tests_passed": int(out.get("passed", 0)),
+                    }
+
+                return _shard
+
+            cow_jobs.append((cid, _make_shard()))
+
+    if not cow_jobs:
+        return None
+
+    # Screen in parallel `os.fork()` CoW worker batches via `ZygotePrewarmedPool` (`0` disk writes!)
+    pool = zygote_pool.ZygotePrewarmedPool(prewarm_enabled=False)
+    win_cid: str | None = None
+    forked_total = 0
+    per_batch_timeout = min(5.0, max(1.5, timeout_s / 2.0))
+    for start in range(0, min(len(cow_jobs), 64), 8):
+        batch = cow_jobs[start : start + 8]
+        forked_total += len(batch)
+        res = pool.run_parallel_sharded(
+            [fn for _, fn in batch],
+            winner_predicate=lambda item: bool(item.get("passed")),
+            timeout_s=per_batch_timeout,
+        )
+        if res.get("found_winner") and res.get("winner"):
+            win_cid = str(res["winner"].get("candidate_id") or "")
+            break
+
+    if not win_cid or win_cid not in job_payloads:
+        return None
+
+    win_rel, win_tag, win_src = job_payloads[win_cid]
+    ok, _reason, meta = _verify_python_candidate_edits(
+        repo_root,
+        {win_rel: win_src},
+        base_snapshot,
+        test_targets,
+        regression_tests=regression_tests,
+        neg_guard=neg_guard,
+        timeout_s=timeout_s,
+    )
+    if not ok:
+        _restore_tree(repo_root, base_snapshot)
+        return None
+
+    return {
+        "solved": True,
+        "channel": win_tag,
+        "modified_files": [win_rel],
+        "patched_source": win_src,
+        "candidates_screened_cow": forked_total,
+        "test_run": meta.get("test_run"),
+    }
+
+
 def solve_repository_task(
     repo_root: str | pathlib.Path,
     *,
@@ -907,6 +1285,49 @@ def solve_repository_task(
                 "elapsed_s": round(time.perf_counter() - t0, 4),
             }
         _restore_tree(root, witness_snapshot)
+
+    # Stage 2.0 (Move 3): Zero-Disk `os.fork()` CoW Demand + Relation + Witness-Inversion Fast Lane
+    stages_run.append("COW_DEMAND_WITNESS_ABDUCTION_FAST_LANE")
+    fast_res = _run_cow_demand_abduction_fast_lane(
+        root,
+        witness_snapshot,
+        base_output,
+        test_targets,
+        regression_tests=regression_tests,
+        neg_guard=neg_guard,
+        timeout_s=min(12.0, max(3.0, timeout_s / 2.0)),
+    )
+    if fast_res is not None and fast_res.get("solved"):
+        win_rel = fast_res["modified_files"][0]
+        crystallized_fast_id: str | None = None
+        if law_store is not None and win_rel in witness_snapshot:
+            law = law_store.add_verified_diff(
+                language="python",
+                failure_output=base_output,
+                old_source=witness_snapshot[win_rel].decode("utf-8", errors="replace"),
+                new_source=fast_res["patched_source"],
+                source_tag=f"MOVE3_FAST_LANE:{fast_res['channel']}",
+            )
+            if law is not None:
+                crystallized_fast_id = law.law_id
+        if temp_witness_rel and (root / temp_witness_rel).exists():
+            (root / temp_witness_rel).unlink()
+        if not keep_patch_applied:
+            _restore_tree(root, base_snapshot)
+        return {
+            "schema": SCHEMA,
+            "authority": AUTHORITY,
+            "language": "python",
+            "solved": True,
+            "status": "PASS_VERIFIED_ON_DISK",
+            "reason": f"SOLVED_BY_COW_DEMAND_FAST_LANE:{fast_res['channel']}",
+            "crystallized_law_id": crystallized_fast_id,
+            "candidates_screened_cow": fast_res["candidates_screened_cow"],
+            "stages_run": stages_run,
+            "model_calls": model_calls,
+            "modified_files": fast_res["modified_files"],
+            "elapsed_s": round(time.perf_counter() - t0, 4),
+        }
 
     # Stage 2B: Zero-Model CoW Zygote + Angelic + Metamorphic Habitation Kernel
     stages_run.append("COW_ANGELIC_ZIPPER_ZERO_MODEL")

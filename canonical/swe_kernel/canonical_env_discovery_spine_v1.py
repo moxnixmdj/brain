@@ -25,17 +25,21 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 from collections import deque
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Mapping, Sequence
 
 from canonical.runtime import a_refusal_is_a_specification_v1 as refusal_spec
+from canonical.runtime import creature_runtime_v1
 from canonical.runtime import instruction_policy_v1 as instr_policy
 from canonical.runtime import tool_census_v1 as tool_census
 from canonical.swe_kernel import interface_action_grammar_v1 as action_grammar
 from canonical.swe_kernel import the_environment_broker_v1 as env_broker
+from canonical.tools import ask_instead_of_stare_v1 as ask_oracle
 from canonical.tools import the_guide_is_a_test_suite_v1 as guide_suite
+from canonical.tools import the_guide_is_an_action_grammar_v1 as guide_grammar
 from canonical.tools import the_refusal_is_the_curriculum_v1 as refusal_curriculum
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_ENV_DISCOVERY_SPINE_V1"
@@ -167,6 +171,7 @@ class ConflictAwareMealyLearner:
         max_states: int = 48,
         max_depth: int = 8,
         max_queries: int = 400,
+        surprise_gated: bool = True,
     ) -> None:
         self.env = env
         raw_actions = actions if actions is not None else getattr(env, "actions", ())
@@ -174,13 +179,89 @@ class ConflictAwareMealyLearner:
         self.max_states = max(2, int(max_states))
         self.max_depth = max(1, int(max_depth))
         self.max_queries = max(10, int(max_queries))
+        self.surprise_gated = bool(surprise_gated)
 
         self.epoch = 0
         self.conflicts_resolved = 0
         self.queries_executed = 0
         self.resets_executed = 0
+        self.surprise_gated_skips = 0
         self._obs_tree: dict[tuple[str, ...], ObservationEdge] = {}
         self._refusal_by_action: dict[str, RefusalAxiom] = {}
+
+    @staticmethod
+    def _action_tokens(text: str) -> set[str]:
+        stop = {
+            "error", "missing", "required", "requires", "must", "first", "before",
+            "active", "operand", "the", "and", "for", "with", "not", "cannot",
+        }
+        return {
+            tok for tok in re.findall(r"[a-z0-9]+", text.lower())
+            if len(tok) >= 3 and tok not in stop
+        }
+
+    def _match_prereq_actions(self, refusal_text: str, exclude_action: str = "") -> list[str]:
+        """Map refusal specification tokens (`--breaker`, `key`, `vault`) to matching actions."""
+        rtoks = self._action_tokens(refusal_text)
+        if not rtoks:
+            return []
+        scored: list[tuple[int, int, str]] = []
+        for idx, act in enumerate(self.actions):
+            if act == exclude_action:
+                continue
+            atoks = self._action_tokens(act)
+            overlap = sum(
+                2 if at == rt else 1
+                for at in atoks
+                for rt in rtoks
+                if at == rt or (len(rt) >= 4 and (at.startswith(rt[:4]) or rt.startswith(at[:4])))
+            )
+            if overlap > 0:
+                scored.append((-overlap, idx, act))
+        scored.sort()
+        return [act for _, _, act in scored]
+
+    def _synthesize_refusal_curriculum_chains(
+        self,
+        active_actions: Sequence[str],
+        refusal_gated_actions: Sequence[str],
+    ) -> list[tuple[str, ...]]:
+        """Compile refusal demands into ordered prerequisite chains (`the_refusal_is_the_curriculum_v1`)."""
+        if not refusal_gated_actions:
+            return []
+        prereqs: dict[str, list[str]] = {}
+        for act in refusal_gated_actions:
+            ax = self._refusal_by_action.get(act)
+            if ax is not None:
+                prereqs[act] = self._match_prereq_actions(ax.refusal_text, exclude_action=act)
+
+        chains: list[tuple[str, ...]] = []
+        seen: set[tuple[str, ...]] = set()
+
+        def _expand_chain(target: str, visited: set[str]) -> list[str]:
+            out: list[str] = []
+            for p in prereqs.get(target, ())[:1]:
+                if p not in visited:
+                    out.extend(_expand_chain(p, visited | {p}))
+                    if p not in out:
+                        out.append(p)
+            if target not in out:
+                out.append(target)
+            return out
+
+        for terminal in refusal_gated_actions:
+            seq = tuple(_expand_chain(terminal, {terminal}))
+            if len(seq) >= 2 and seq not in seen:
+                seen.add(seq)
+                chains.append(seq)
+            for root_act in active_actions:
+                if root_act not in seq:
+                    aug = (root_act,) + seq
+                    if len(aug) <= self.max_depth and aug not in seen:
+                        seen.add(aug)
+                        chains.append(aug)
+        chains.sort(key=len)
+        return chains
 
     def _normalize_step(self, raw: Any) -> tuple[Any, bool, str, bool]:
         if isinstance(raw, Mapping):
@@ -281,6 +362,40 @@ class ConflictAwareMealyLearner:
             "inert": inert,
         }, init_sig
 
+    def _record_chain_into_graph(
+        self,
+        root_sig: str,
+        prefix: tuple[str, ...],
+        trace: Sequence[ObservationEdge],
+        states: dict[str, tuple[str, ...]],
+        transitions: dict[tuple[str, str], tuple[str, str, bool]],
+    ) -> None:
+        cur_sig = root_sig
+        for idx, edge in enumerate(trace):
+            sub_pref = prefix[: idx + 1]
+            dst_sig = _stable_digest(edge.output_value)
+            transitions[(cur_sig, edge.action)] = (dst_sig, edge.output_digest, edge.refused)
+            if edge.refused:
+                if edge.action not in self._refusal_by_action:
+                    parsed = compile_refusal_specification(edge.refusal_text)
+                    self._refusal_by_action[edge.action] = RefusalAxiom(
+                        action=edge.action,
+                        refusal_text=edge.refusal_text,
+                        parsed_clause=parsed["clause"],
+                        parsed_demand=parsed["demand"],
+                        blocked_from_state=cur_sig,
+                    )
+            else:
+                if (
+                    edge.action in self._refusal_by_action
+                    and self._refusal_by_action[edge.action].unlocked_by_prefix is None
+                ):
+                    self._refusal_by_action[edge.action].unlocked_by_prefix = prefix[:idx]
+                    self._refusal_by_action[edge.action].unlocked_in_state = cur_sig
+            if dst_sig not in states and len(states) < self.max_states:
+                states[dst_sig] = sub_pref
+            cur_sig = dst_sig
+
     def learn_and_plan(
         self,
         *,
@@ -289,12 +404,25 @@ class ConflictAwareMealyLearner:
     ) -> LearnedAutomaton:
         """Induce the state/transition/refusal automaton and synthesize a verified goal plan."""
         partition, root_sig = self.partition_alphabet()
-        # Explore active actions first, then refusal_gated (to discover unlocking transitions), then inert.
-        ordered_actions = list(partition["active"]) + list(partition["refusal_gated"]) + list(partition["inert"])
+        # Surprise-Gated Action Selection (`creature_runtime_v1` / Titans surprise gate):
+        # Prune zero-surprise `inert` actions unless referenced by a refusal demand or active actions stall!
+        refusal_referenced = {
+            p
+            for ax in self._refusal_by_action.values()
+            for p in self._match_prereq_actions(ax.refusal_text, exclude_action=ax.action)
+        }
+        primary_actions = (
+            list(partition["active"])
+            + list(partition["refusal_gated"])
+            + [a for a in partition["inert"] if (not self.surprise_gated) or (a in refusal_referenced)]
+        )
+        skipped_inert = [a for a in partition["inert"] if self.surprise_gated and a not in refusal_referenced]
+        if not primary_actions:
+            primary_actions = list(self.actions)
+            skipped_inert = []
 
         states: dict[str, tuple[str, ...]] = {root_sig: ()}
         transitions: dict[tuple[str, str], tuple[str, str, bool]] = {}
-        queue: deque[tuple[str, tuple[str, ...]]] = deque([(root_sig, ())])
         goal_prefix: tuple[str, ...] | None = None
 
         init_obs = self.env.reset()
@@ -302,74 +430,128 @@ class ConflictAwareMealyLearner:
         if goal_predicate is not None and goal_predicate(init_obs):
             goal_prefix = ()
 
-        while queue and len(states) < self.max_states and self.queries_executed < self.max_queries:
-            src_sig, src_prefix = queue.popleft()
-            if len(src_prefix) >= self.max_depth:
-                continue
-            for act in ordered_actions:
+        # Fast Pass 0: Execute synthesized Refusal-Curriculum Prerequisite Chains BEFORE blind BFS!
+        if goal_prefix is None and goal_predicate is not None and self.surprise_gated:
+            curriculum_chains = self._synthesize_refusal_curriculum_chains(
+                partition["active"], partition["refusal_gated"]
+            )
+            for chain in curriculum_chains:
                 if self.queries_executed >= self.max_queries:
                     break
-                cand_prefix = src_prefix + (act,)
-                obs, trace, conflict_hit = self._run_prefix(cand_prefix)
-                if not trace or len(trace) < len(cand_prefix):
+                obs, trace, _ = self._run_prefix(chain)
+                if not trace:
                     continue
-                last_edge = trace[-1]
-                dst_sig = _stable_digest(obs)
-                transitions[(src_sig, act)] = (dst_sig, last_edge.output_digest, last_edge.refused)
+                self._record_chain_into_graph(root_sig, chain[: len(trace)], trace, states, transitions)
+                if goal_predicate(obs):
+                    goal_prefix = chain[: len(trace)]
+                    self.surprise_gated_skips += len(skipped_inert) * len(states)
+                    break
 
-                if last_edge.refused:
-                    if act not in self._refusal_by_action:
-                        parsed = compile_refusal_specification(last_edge.refusal_text)
-                        self._refusal_by_action[act] = RefusalAxiom(
-                            action=act,
-                            refusal_text=last_edge.refusal_text,
-                            parsed_clause=parsed["clause"],
-                            parsed_demand=parsed["demand"],
-                            blocked_from_state=src_sig,
-                        )
-                else:
-                    # If this action was previously refused, we just discovered its unlocking precondition!
-                    if act in self._refusal_by_action and self._refusal_by_action[act].unlocked_by_prefix is None:
-                        self._refusal_by_action[act].unlocked_by_prefix = src_prefix
-                        self._refusal_by_action[act].unlocked_in_state = src_sig
+        # Pass 1: Surprise-gated C3AL BFS (with automatic fallback to skipped_inert only if needed)
+        action_tiers = [primary_actions] + ([skipped_inert] if skipped_inert else [])
+        for ordered_actions in action_tiers:
+            if goal_prefix is not None or not ordered_actions:
+                break
+            queue: deque[tuple[str, tuple[str, ...]]] = deque(
+                [(sig, pref) for sig, pref in states.items()]
+            )
+            while queue and len(states) < self.max_states and self.queries_executed < self.max_queries:
+                src_sig, src_prefix = queue.popleft()
+                if len(src_prefix) >= self.max_depth:
+                    continue
+                if skipped_inert and ordered_actions is primary_actions:
+                    self.surprise_gated_skips += len(skipped_inert)
+                for act in ordered_actions:
+                    if self.queries_executed >= self.max_queries:
+                        break
+                    cand_prefix = src_prefix + (act,)
+                    obs, trace, conflict_hit = self._run_prefix(cand_prefix)
+                    if not trace or len(trace) < len(cand_prefix):
+                        continue
+                    last_edge = trace[-1]
+                    dst_sig = _stable_digest(obs)
+                    transitions[(src_sig, act)] = (dst_sig, last_edge.output_digest, last_edge.refused)
 
-                if conflict_hit:
-                    # Re-queue current prefix so revised transitions are fully re-probed.
-                    if dst_sig not in states and len(states) < self.max_states:
+                    if last_edge.refused:
+                        if act not in self._refusal_by_action:
+                            parsed = compile_refusal_specification(last_edge.refusal_text)
+                            self._refusal_by_action[act] = RefusalAxiom(
+                                action=act,
+                                refusal_text=last_edge.refusal_text,
+                                parsed_clause=parsed["clause"],
+                                parsed_demand=parsed["demand"],
+                                blocked_from_state=src_sig,
+                            )
+                    else:
+                        if act in self._refusal_by_action and self._refusal_by_action[act].unlocked_by_prefix is None:
+                            self._refusal_by_action[act].unlocked_by_prefix = src_prefix
+                            self._refusal_by_action[act].unlocked_in_state = src_sig
+
+                    if conflict_hit:
+                        if dst_sig not in states and len(states) < self.max_states:
+                            states[dst_sig] = cand_prefix
+                            queue.append((dst_sig, cand_prefix))
+                    elif dst_sig not in states and len(states) < self.max_states:
                         states[dst_sig] = cand_prefix
                         queue.append((dst_sig, cand_prefix))
-                elif dst_sig not in states and len(states) < self.max_states:
-                    states[dst_sig] = cand_prefix
-                    queue.append((dst_sig, cand_prefix))
 
-                if goal_predicate is not None and goal_predicate(obs):
-                    if goal_prefix is None or len(cand_prefix) < len(goal_prefix):
-                        goal_prefix = cand_prefix
-                        # Stop early if we found a short goal; verification pass follows below.
-                        break
-            if goal_prefix is not None:
-                break
+                    if goal_predicate is not None and goal_predicate(obs):
+                        if goal_prefix is None or len(cand_prefix) < len(goal_prefix):
+                            goal_prefix = cand_prefix
+                            break
+                if goal_prefix is not None:
+                    break
 
         goal_verified = False
         if goal_prefix is not None and goal_predicate is not None:
-            # Verify the synthesized plan by live replay; if a drift/conflict occurred mid-discovery,
-            # perform one conflict-revision replanning round!
             for _attempt in range(2):
-                v_obs, _, conflict_hit = self._run_prefix(goal_prefix)
+                v_obs, v_trace, conflict_hit = self._run_prefix(goal_prefix)
                 if goal_predicate(v_obs) and (not verify_goal_twice or not conflict_hit):
                     goal_verified = True
                     break
                 if not goal_predicate(v_obs):
-                    # Environment physics drifted! Re-run BFS from root under new epoch.
+                    # Environment physics drifted! First inspect any new refusal emitted in `v_trace`
+                    # to splice the newly demanded prerequisite directly (`the_refusal_is_the_curriculum_v1`)!
                     self.epoch += 1
                     self.conflicts_resolved += 1
+                    repaired_goal: tuple[str, ...] | None = None
+                    if self.surprise_gated:
+                        for idx, edge in enumerate(v_trace):
+                            if edge.refused and edge.refusal_text:
+                                parsed = compile_refusal_specification(edge.refusal_text)
+                                self._refusal_by_action[edge.action] = RefusalAxiom(
+                                    action=edge.action,
+                                    refusal_text=edge.refusal_text,
+                                    parsed_clause=parsed["clause"],
+                                    parsed_demand=parsed["demand"],
+                                    blocked_from_state=root_sig,
+                                )
+                                for pre_act in self._match_prereq_actions(edge.refusal_text, exclude_action=edge.action):
+                                    spliced = goal_prefix[:idx] + (pre_act,) + goal_prefix[idx:]
+                                    if len(spliced) <= self.max_depth:
+                                        s_obs, s_trace, _ = self._run_prefix(spliced)
+                                        self._record_chain_into_graph(
+                                            root_sig, spliced[: len(s_trace)], s_trace, states, transitions
+                                        )
+                                        if goal_predicate(s_obs):
+                                            repaired_goal = spliced[: len(s_trace)]
+                                            break
+                                if repaired_goal is not None:
+                                    break
+                    if repaired_goal is not None:
+                        goal_prefix = repaired_goal
+                        continue
+
+                    # Fallback: Re-run surprise-gated C3AL BFS from root under new epoch
                     self._obs_tree.clear()
                     states = {}
                     transitions = {}
                     partition, root_sig = self.partition_alphabet()
-                    ordered_actions = (
-                        list(partition["active"]) + list(partition["refusal_gated"]) + list(partition["inert"])
-                    )
+                    re_primary = (
+                        list(partition["active"])
+                        + list(partition["refusal_gated"])
+                        + ([] if self.surprise_gated else list(partition["inert"]))
+                    ) or list(self.actions)
                     states[root_sig] = ()
                     rq: deque[tuple[str, tuple[str, ...]]] = deque([(root_sig, ())])
                     new_goal: tuple[str, ...] | None = None
@@ -377,7 +559,7 @@ class ConflictAwareMealyLearner:
                         s_sig, s_pref = rq.popleft()
                         if len(s_pref) >= self.max_depth:
                             continue
-                        for a in ordered_actions:
+                        for a in re_primary:
                             if self.queries_executed >= self.max_queries:
                                 break
                             cp = s_pref + (a,)
@@ -455,9 +637,15 @@ def discover_environment(
     programs: Sequence[str] = (),
     refusal_texts: Sequence[str] = (),
     markdown_guide: str | None = None,
+    action_grammar_guide: str | None = None,
+    disambiguation_candidates: Sequence[Any] | None = None,
+    disambiguation_probe_universe: Sequence[Any] | None = None,
+    disambiguation_truth_index: int = 0,
+    creature_workspace: str | Path | None = None,
     blackbox_env: Any = None,
     goal_predicate: Callable[[Any], bool] | None = None,
     actions: Sequence[str] | None = None,
+    surprise_gated: bool = True,
     cli_need: Mapping[str, Any] | None = None,
     a11y_env: action_grammar.A11yEnvironment | None = None,
     gui_instruction: str | None = None,
@@ -522,6 +710,41 @@ def discover_environment(
         report["markdown_guide_oracle"] = gh
         sub_passes.append(gh["fenced_block_count"] > 0)
 
+    if action_grammar_guide is not None:
+        report["modules_invoked"].append("canonical.tools.the_guide_is_an_action_grammar_v1:compile_guide")
+        cg = guide_grammar.compile_guide(action_grammar_guide)
+        report["compiled_action_grammar"] = {
+            "action_count": len(cg.actions) if hasattr(cg, "actions") else len(cg),
+            "grammar": cg.as_dict() if hasattr(cg, "as_dict") else str(cg)[:500],
+        }
+        sub_passes.append(report["compiled_action_grammar"]["action_count"] > 0)
+
+    if disambiguation_candidates is not None and disambiguation_probe_universe is not None:
+        report["modules_invoked"].append("canonical.tools.ask_instead_of_stare_v1:probe_for")
+        transitions = list(disambiguation_candidates)
+        atoms = [str(a) for a in disambiguation_probe_universe]
+        target_state = transitions[int(disambiguation_truth_index)][2]
+        probe_out = ask_oracle.probe_for(target_state, transitions, atoms, max_depth=max_depth)
+        prefix_found = probe_out[0] if isinstance(probe_out, tuple) else None
+        pred = ask_oracle.row_equals(target_state)
+        report["active_disambiguation"] = {
+            "prefix_found": prefix_found,
+            "verified_target_match": bool(pred["test"](target_state)),
+            "prefix_len": len(prefix_found) if prefix_found is not None else 0,
+        }
+        sub_passes.append(prefix_found is not None and len(prefix_found) >= 1)
+
+    if creature_workspace is not None:
+        report["modules_invoked"].append("canonical.runtime.creature_runtime_v1:Creature.boot")
+        creature = creature_runtime_v1.Creature(
+            identity="brain_autonomous_organism",
+            root=Path(creature_workspace).resolve(),
+            life_grant=10.0,
+        )
+        boot_out = creature.boot()
+        report["creature_pulse"] = boot_out
+        sub_passes.append(bool(boot_out.get("behavioral_continuity_verified", True)))
+
     if blackbox_env is not None:
         report["modules_invoked"].append("canonical.swe_kernel.canonical_env_discovery_spine_v1:ConflictAwareMealyLearner")
         learner = ConflictAwareMealyLearner(
@@ -530,9 +753,12 @@ def discover_environment(
             max_states=max_states,
             max_depth=max_depth,
             max_queries=max_queries,
+            surprise_gated=surprise_gated,
         )
         learned = learner.learn_and_plan(goal_predicate=goal_predicate)
-        report["automaton"] = learned.as_dict()
+        adict = learned.as_dict()
+        adict["surprise_gated_skips"] = learner.surprise_gated_skips
+        report["automaton"] = adict
         if goal_predicate is not None:
             sub_passes.append(learned.goal_verified)
         else:
