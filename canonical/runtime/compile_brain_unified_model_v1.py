@@ -1265,6 +1265,75 @@ def _theory_block() -> dict[str, Any]:
     }
 
 
+
+ANATOMY_PATH = "canonical/unified_model/DOMAIN_ATLAS_V1.json"
+
+
+def _anatomy_block(root: Path) -> dict[str, Any]:
+    """The five frontier functions, projected into the model as *navigation*.
+
+    Measured before this block existed: the model could point at the machinery for
+    instant learning (``find_source`` recall 1.00, 13x chance) and could not route to it
+    (``route`` recall 0.00) even when asked in the repository's own vocabulary. The
+    modules were in the tree and in ``source_index``; what was missing was a
+    function-first view of them.
+
+    This block is that view. It is a projection of ``DOMAIN_ATLAS_V1.json``, which is
+    itself a projection of the tree -- so it is reproducible, and it is rebuilt when the
+    tree changes. Every row stays ``capability: false``: a module that scores as "this is
+    the memory subsystem" has not been executed, so it has not been admitted, and the
+    model must not pretend otherwise.
+    """
+    path = root / ANATOMY_PATH
+    if not path.is_file():
+        return {
+            "schema": "BRAIN_MODEL_ANATOMY_V1",
+            "source": ANATOMY_PATH,
+            "present": False,
+            "reason": "ATLAS_NOT_COMPILED__RUN_canonical/tools/domain_atlas_v1.py",
+            "domains": {},
+        }
+    atlas = json.loads(path.read_text(encoding="utf-8"))
+    domains: dict[str, Any] = {}
+    for name, row in sorted((atlas.get("domains") or {}).items()):
+        domains[name] = {
+            "frontier_function": row.get("frontier_function"),
+            "candidates": row.get("candidates"),
+            "indexed_all": row.get("indexed_all"),
+            "harvested_all": row.get("harvested_all"),
+            "hidden_share_all": row.get("hidden_share_all"),
+            "top": [
+                {
+                    "path": item.get("path"),
+                    "score": item.get("score"),
+                    "summary": item.get("summary"),
+                    "executable_surface": bool(item.get("harvested")),
+                    "indexed_as_source": bool(item.get("source_index")),
+                    "capability": False,
+                }
+                for item in (row.get("top") or [])[:12]
+            ],
+        }
+    reach = atlas.get("reachability") or {}
+    return {
+        "schema": "BRAIN_MODEL_ANATOMY_V1",
+        "source": ANATOMY_PATH,
+        "source_sha256": digest_file(path),
+        "present": True,
+        "domains": domains,
+        "reachability": {
+            name: {
+                key: value
+                for key, value in (row or {}).items()
+                if key in ("frontier_source_hit_recall", "native_route_hit_recall",
+                           "chance_source_recall", "chance_route_recall")
+            }
+            for name, row in sorted(reach.items())
+        },
+        "claim_limit": atlas.get("claim_limit"),
+    }
+
+
 def compile_model(root: str | Path | None = None) -> dict[str, Any]:
     """Compile the model in memory. The caller decides whether to persist it."""
     base = Path(root or ROOT).resolve()
@@ -1318,6 +1387,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         if not row["triggers"]:
             raise UnifiedModelCompileError("CAPABILITY_WITHOUT_TRIGGERS:" + row["id"])
 
+    anatomy = _anatomy_block(base)
     grammar = _build_grammar(capabilities, engines)
     grammar["adapter_ast_index"] = _extract_adapter_ast_index(base, capabilities)
 
@@ -1354,6 +1424,7 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
         "harvested_capabilities": harvested,
         "research_index": research_index,
         "grammar": grammar,
+        "anatomy": anatomy,
         "counts": {
             "capabilities": len(capabilities),
             "bound_capabilities": sum(
@@ -1379,6 +1450,9 @@ def compile_model(root: str | Path | None = None) -> dict[str, Any]:
             ),
             "research_index_records": len(research_index),
             "routing_tokens": len(grammar["index"]),
+            "anatomy_domains": len(anatomy.get("domains") or {}),
+            "anatomy_modules": sum(len(row.get("top") or []) for row in
+                                   (anatomy.get("domains") or {}).values()),
         },
         "provenance": {
             "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",

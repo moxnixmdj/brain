@@ -73,6 +73,9 @@ NON_CLAIMS = (
 )
 
 
+ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
+
+
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
@@ -783,6 +786,81 @@ class UnifiedModel:
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
+        }
+
+    # ----------------------------------------------------------------- anatomy
+
+    def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
+        """Where this repository implements each frontier function, by its own words.
+
+        The routing index answers "which capability matches this goal". It does not answer
+        the question a solver actually has first: *does this machine own the function at
+        all, and where is it?* Measured with the atlas: asked for instant learning, the
+        model located the machinery (``find_source`` recall 1.00, 13x chance) and routed
+        to none of it (``route`` recall 0.00). The modules were present and reachable; the
+        function-first view was not.
+
+        Every row repeats ``capability: False``. This is navigation, not admission: a
+        module that scores as "this is the memory subsystem" has not been executed, and
+        ``solve()`` never calls this.
+        """
+        block = (self._model_loaded or {}).get("anatomy") if self._model_loaded else None
+        if not block:
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "reason": "MODEL_HAS_NO_ANATOMY_BLOCK__RECOMPILE_WITH_DOMAIN_ATLAS",
+                "domains": {},
+                "capability": False,
+                "executable": False,
+            }
+        domains = block.get("domains") or {}
+        if domain is not None:
+            row = domains.get(domain)
+            if row is None:
+                return {
+                    "schema": ANATOMY_SCHEMA,
+                    "operation": "ANATOMY",
+                    "query": domain,
+                    "reason": "UNKNOWN_DOMAIN__KNOWN: " + ", ".join(sorted(domains)),
+                    "domains": {},
+                    "capability": False,
+                    "executable": False,
+                }
+            rows = list(row.get("top") or [])[: max(1, int(top_k))]
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "query": domain,
+                "frontier_function": row.get("frontier_function"),
+                "counts": {
+                    "candidates": row.get("candidates"),
+                    "indexed_all": row.get("indexed_all"),
+                    "harvested_all": row.get("harvested_all"),
+                    "hidden_share_all": row.get("hidden_share_all"),
+                },
+                "modules": rows,
+                "reachability": (block.get("reachability") or {}).get(domain),
+                "capability": False,
+                "executable": False,
+                "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+            }
+        return {
+            "schema": ANATOMY_SCHEMA,
+            "operation": "ANATOMY",
+            "domains": {
+                name: {
+                    "frontier_function": row.get("frontier_function"),
+                    "candidates": row.get("candidates"),
+                    "top_module": ((row.get("top") or [{}])[0]).get("path"),
+                }
+                for name, row in sorted(domains.items())
+            },
+            "reachability": block.get("reachability") or {},
+            "claim_limit": block.get("claim_limit"),
+            "capability": False,
+            "executable": False,
+            "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
         }
 
     # ---------------------------------------------------------- research index
