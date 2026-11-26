@@ -262,9 +262,9 @@
    "topic_top": [
     "a_type_you_wrote_is_a_type_you_guess_v1",
     "structural_rewrite_induction_v1",
-    "goal_front_compiler_v1",
-    "the_goal_is_a_relation_over_the_run_v1",
-    "bridge_enumeration_v1"
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
+    "goal_front_compiler_v1"
    ]
   },
   {
@@ -476,8 +476,8 @@
     "verifier_falsification_v1",
     "edit_by_example_v1",
     "creature_runtime_v1",
-    "semantic_generalization_engine_v1",
-    "capability_receipt_lane_v1"
+    "brain_unified_model_v1",
+    "semantic_generalization_engine_v1"
    ]
   },
   {
@@ -638,8 +638,8 @@
     "verifier_falsification_v1",
     "autonomous_verified_self_improvement_v1",
     "verified_capability_bridge_index_v1",
-    "composition_state_capsule_v2",
-    "composition_state_capsule_v1"
+    "creature_runtime_v1",
+    "composition_state_capsule_v2"
    ]
   },
   {
@@ -670,8 +670,8 @@
     "sentient_cognitive_core_v1",
     "the_counterexample_is_the_next_experiment_v1",
     "universal_problem_contract_authority_v1",
-    "reverse_tomography_algebra_v1",
-    "autonomous_verified_self_improvement_v1"
+    "autonomous_verified_self_improvement_v1",
+    "aa_briefcase_top_support_collapse_v1"
    ]
   },
   {
@@ -856,8 +856,8 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "creature_runtime_v1",
-    "a_fact_is_a_conjunction_of_its_readers_v1",
     "edit_by_example_v1",
+    "a_fact_is_a_conjunction_of_its_readers_v1",
     "verifier_falsification_v1",
     "residual_wall_closers_v1"
    ]
@@ -982,10 +982,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "canonical_oracle_vericoding_spine_v1",
+    "canonical_swe_spine_v1",
     "computer_use_agent_v1",
     "type_level_composer_v1",
-    "autonomous_awake_loop_v1",
-    "dual_program_splicing_v1"
+    "autonomous_awake_loop_v1"
    ]
   },
   {
@@ -1314,10 +1314,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "autonomous_awake_loop_v1",
+    "canonical_env_discovery_spine_v1",
     "global_extrapolation_chase_spine_v1",
     "semantic_generalization_engine_v1",
-    "brain_unified_model_v1",
-    "metamorphic_habitation_zipper_v1"
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -1407,8 +1407,8 @@
     "fibo_q2_2026_full_release_authority_v1",
     "fibo_q2_2026_bounded_finance_authority_v1",
     "verified_skill_crystallizer_v1",
-    "inline_variable_v1",
-    "rename_local_variable_v1"
+    "canonical_memory_crystallizer_v1",
+    "inline_variable_v1"
    ]
   },
   {
@@ -1502,11 +1502,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_memory_crystallizer_v1",
     "universal_computer_agent_v1",
     "reverse_tomography_algebra_v1",
     "global_extrapolation_chase_spine_v1",
-    "metamorphic_habitation_zipper_v1",
-    "lesson_localization_v1"
+    "canonical_swe_spine_v1"
    ]
   },
   {
@@ -1726,11 +1726,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_oracle_vericoding_spine_v1",
     "capability_receipt_lane_v1",
     "brain_unified_model_v1",
-    "the_environment_broker_v1",
     "verifier_falsification_v1",
-    "cli_capability_acquisition_v1"
+    "the_environment_broker_v1"
    ]
   },
   {
@@ -1908,10 +1908,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "abstain_gated_skill_induction_v1",
+    "canonical_memory_crystallizer_v1",
     "upstream_routing_ledger_v1",
     "program_synthesis_v1",
-    "professional_semantic_v10_totality_compiler_v1",
-    "professional_quality_semantic_admission_binder_v3"
+    "professional_semantic_v10_totality_compiler_v1"
    ]
   },
   {
@@ -2027,7 +2027,7 @@
     "verifier_falsification_v1",
     "diagnostics_perf_and_design_engine_v1",
     "spec_contract_synthesis_v1",
-    "the_right_question_is_an_experiment_v1"
+    "metamorphic_laws_v1"
    ]
   },
   {
@@ -2410,10 +2410,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "verifier_falsification_v1",
+    "creature_runtime_v1",
+    "sentient_cognitive_core_v1",
     "verify_brain_unified_model_v1",
-    "systematic_exploration_v1",
-    "brain_unified_model_v1",
-    "global_extrapolation_chase_spine_v1"
+    "systematic_exploration_v1"
    ]
   },
   {
@@ -3339,8 +3339,8 @@
    "topic_top": [
     "brain_unified_model_v1",
     "universal_computer_agent_v1",
-    "global_extrapolation_chase_spine_v1",
     "repo_component_petri_v1",
+    "global_extrapolation_chase_spine_v1",
     "epistemic_agent_benchmark_v1"
    ]
   },
@@ -3375,8 +3375,8 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "causal_trace_to_skill_compiler_v1",
-    "gdpval_objective_artifact_criteria_v2",
     "meta_circular_organ_graph_v1",
+    "gdpval_objective_artifact_criteria_v2",
     "verifier_falsification_v1",
     "swe_typed_plan_v1"
    ]
@@ -3409,10 +3409,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "verifier_falsification_v1",
-    "reverse_tomography_algebra_v1",
     "causal_trace_to_skill_compiler_v1",
     "edit_by_example_v1",
-    "petri_cow_splicing_engine_v1"
+    "petri_cow_splicing_engine_v1",
+    "frontier_unified_engine_v1"
    ]
   },
   {
@@ -3505,9 +3505,9 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
-    "reverse_tomography_algebra_v1",
     "witness_inversion_v1",
     "repo_component_petri_v1",
+    "reverse_tomography_algebra_v1",
     "work_unit_validity_guard_v2",
     "goal_to_door_v1"
    ]
@@ -3629,11 +3629,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
     "a_refusal_is_a_specification_v1",
     "cegis_semantic_synthesizer_v1",
-    "first_principles_mental_cegis_v1",
-    "lesson_admission_gate_v1",
-    "residual_wall_closers_v1"
+    "first_principles_mental_cegis_v1"
    ]
   },
   {
@@ -3661,11 +3661,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_memory_crystallizer_v1",
     "abstain_gated_skill_induction_v1",
     "autonomous_awake_loop_v1",
     "incremental_semantic_graph_v1",
-    "diagnostics_perf_and_design_engine_v1",
-    "livebench_pointwise_optimality_certificate_v1"
+    "diagnostics_perf_and_design_engine_v1"
    ]
   },
   {
@@ -3726,9 +3726,9 @@
    "topic_top": [
     "verifier_falsification_v1",
     "brain_unified_model_v1",
+    "sentient_cognitive_core_v1",
     "global_extrapolation_chase_spine_v1",
-    "edit_by_example_v1",
-    "candidate_under_the_tasks_tests_measure_v1"
+    "edit_by_example_v1"
    ]
   },
   {
@@ -3753,9 +3753,9 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_memory_crystallizer_v1",
     "abstain_gated_skill_induction_v1",
     "program_synthesis_v1",
-    "canonical_memory_crystallizer_v1",
     "upstream_routing_ledger_v1",
     "osworld_v21_constraint_guard_v1"
    ]
@@ -3783,10 +3783,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "abstain_gated_skill_induction_v1",
+    "canonical_memory_crystallizer_v1",
     "finance_quantitative_algebra_v1",
     "fibo_q2_2026_full_release_authority_v1",
-    "fibo_q2_2026_bounded_finance_authority_v1",
-    "professional_semantic_identity_carrier_v2"
+    "fibo_q2_2026_bounded_finance_authority_v1"
    ]
   },
   {
@@ -3968,10 +3968,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "abstain_gated_skill_induction_v1",
+    "canonical_memory_crystallizer_v1",
     "goal_front_compiler_v1",
     "h100_oewn_lexical_acquisition_v1",
-    "procedure_memory_v1",
-    "self_prediction_calibration_v1"
+    "procedure_memory_v1"
    ]
   },
   {
@@ -4030,9 +4030,9 @@
    "topic_top": [
     "sentient_cognitive_core_v1",
     "meta_circular_organ_graph_v1",
+    "creature_runtime_v1",
     "causal_trace_to_skill_compiler_v1",
-    "brain_unified_model_v1",
-    "global_extrapolation_chase_spine_v1"
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -4584,9 +4584,9 @@
    "topic_top": [
     "verifier_falsification_v1",
     "universal_computer_agent_v1",
-    "brain_unified_model_v1",
     "automationbench_owned_policy_kernel_v1",
-    "osworld_v21_zero_model_policy_v1"
+    "brain_unified_model_v1",
+    "canonical_swe_spine_v1"
    ]
   },
   {
@@ -4967,10 +4967,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "causal_trace_to_skill_compiler_v1",
+    "meta_circular_organ_graph_v1",
     "computer_execution_boundary_v1",
     "applicability_v1",
-    "gdpval_objective_artifact_criteria_v2",
-    "creature_runtime_v1"
+    "gdpval_objective_artifact_criteria_v2"
    ]
   },
   {
@@ -5028,10 +5028,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "livebench_ratio_overlap_public_prompt_solver_v1",
+    "canonical_memory_crystallizer_v1",
     "sentient_cognitive_core_v1",
     "live_brain_route_admission_v1",
-    "livebench_if_reference_free_compound_witness_v1",
-    "canonical_memory_crystallizer_v1"
+    "livebench_if_reference_free_compound_witness_v1"
    ]
   },
   {
@@ -5125,10 +5125,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "verifier_falsification_v1",
+    "canonical_cu_sandbox_spine_v1",
+    "canonical_boundary_router_v1",
     "edit_by_example_v1",
-    "perfect_algorithm_v1",
-    "capability_receipt_lane_v1",
-    "the_right_question_is_an_experiment_v1"
+    "perfect_algorithm_v1"
    ]
   },
   {
@@ -5191,8 +5191,8 @@
     "causal_dataflow_graph_v1",
     "p1_v6_derived_only_counterexample_v1",
     "p1_composite_proof_counterexample_audit_v1",
-    "k6_conditional_policy_cover_cut_v1",
-    "target_undominated_escape_reduction_v1"
+    "canonical_boundary_router_v1",
+    "canonical_memory_crystallizer_v1"
    ]
   },
   {
@@ -5255,11 +5255,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
     "upstream_routing_ledger_v1",
     "frontier_unified_engine_v1",
-    "swe_self_improvement_bridge_v1",
-    "metamorphic_habitation_zipper_v1",
-    "force_the_value_and_see_v1"
+    "swe_self_improvement_bridge_v1"
    ]
   },
   {
@@ -5291,9 +5291,9 @@
    "topic_top": [
     "swe_self_improvement_bridge_v1",
     "upstream_routing_ledger_v1",
-    "creature_stakes_and_initiative_v1",
-    "perfect_algorithm_v1",
-    "metamorphic_habitation_zipper_v1"
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
+    "creature_stakes_and_initiative_v1"
    ]
   },
   {
@@ -5389,7 +5389,7 @@
     "global_extrapolation_chase_spine_v1",
     "verifier_falsification_v1",
     "incremental_semantic_graph_v1",
-    "capability_consolidation_audit_v1"
+    "sentient_cognitive_core_v1"
    ]
   },
   {
@@ -5605,10 +5605,10 @@
    "topic_hit_at_5": true,
    "topic_top": [
     "a_fact_is_a_conjunction_of_its_readers_v1",
+    "meta_circular_organ_graph_v1",
     "goal_front_compiler_v1",
     "oewn_release_sense_universe_v1",
-    "residual_wall_closers_v1",
-    "bridge_enumeration_v1"
+    "residual_wall_closers_v1"
    ]
   },
   {
@@ -5853,10 +5853,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "miniwob_one_success_generalisation_measure_v1",
+    "brain_unified_model_v1",
     "sentient_cognitive_core_v1",
     "recursive_self_architect_v1",
-    "causal_trace_to_skill_compiler_v1",
-    "verifier_falsification_v1"
+    "causal_trace_to_skill_compiler_v1"
    ]
   },
   {
@@ -5949,7 +5949,7 @@
     "systematic_exploration_v1",
     "brain_unified_model_v1",
     "verify_brain_unified_model_v1",
-    "global_extrapolation_chase_spine_v1"
+    "sentient_cognitive_core_v1"
    ]
   },
   {
@@ -6068,9 +6068,9 @@
    "topic_top": [
     "systematic_exploration_v1",
     "brain_unified_model_v1",
+    "creature_runtime_v1",
     "verify_brain_unified_model_v1",
-    "transactional_parallel_execution_v1",
-    "global_extrapolation_chase_spine_v1"
+    "transactional_parallel_execution_v1"
    ]
   },
   {
@@ -6135,8 +6135,8 @@
    "topic_top": [
     "miniwob_one_success_generalisation_measure_v1",
     "metamorphic_habitation_zipper_v1",
-    "universal_computer_agent_v1",
     "astra_runtime",
+    "universal_computer_agent_v1",
     "verifier_falsification_v1"
    ]
   },
@@ -6291,7 +6291,7 @@
     "autonomous_awake_loop_v1",
     "closed_loop_autonomous_controller_v1",
     "structural_rewrite_induction_v1",
-    "enforce_goal_hierarchy"
+    "canonical_boundary_router_v1"
    ]
   },
   {
@@ -6805,8 +6805,8 @@
     "proof_carrying_live_manifest_v3",
     "upstream_routing_ledger_v1",
     "program_synthesis_v1",
-    "recursive_self_architect_v1",
-    "verify_brain_unified_model_v1"
+    "brain_unified_model_v1",
+    "recursive_self_architect_v1"
    ]
   },
   {
@@ -6986,8 +6986,8 @@
     "capability_forge_v1",
     "semantic_generalization_engine_v1",
     "consequence_table_v1",
-    "metamorphic_habitation_zipper_v1",
-    "history_template_repair_v1"
+    "canonical_swe_spine_v1",
+    "metamorphic_habitation_zipper_v1"
    ]
   },
   {
@@ -7047,11 +7047,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_memory_crystallizer_v1",
     "frontier_unified_engine_v1",
-    "abstain_gated_skill_induction_v1",
     "creature_runtime_v1",
-    "osworld_v21_constraint_guard_v1",
-    "operand_invention_v1"
+    "abstain_gated_skill_induction_v1",
+    "osworld_v21_constraint_guard_v1"
    ]
   },
   {
@@ -7204,10 +7204,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "structural_rewrite_induction_v1",
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
     "inline_variable_v1",
-    "rename_local_variable_v1",
-    "frontier_unified_engine_v1",
-    "semantic_truth_dispatch_v1"
+    "rename_local_variable_v1"
    ]
   },
   {
@@ -7236,9 +7236,9 @@
    "topic_top": [
     "edit_by_example_v1",
     "program_synthesis_v1",
-    "swe_observational_program_synthesizer_v1",
-    "cegis_semantic_synthesizer_v1",
-    "upstream_routing_ledger_v1"
+    "upstream_routing_ledger_v1",
+    "livebench_release_schema_scope_bridge_v1",
+    "terminal_frontier_compiler_v2"
    ]
   },
   {
@@ -7392,8 +7392,8 @@
     "semantic_truth_dispatch_v1",
     "r3_success_adapter_patch_author_wrapper_v1",
     "frontier_unified_engine_v1",
-    "auto_capability_acquisition",
-    "causal_trace_to_skill_compiler_v1"
+    "brain_unified_model_v1",
+    "canonical_boundary_router_v1"
    ]
   },
   {
@@ -7423,11 +7423,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "brain_unified_model_v1",
     "causal_trace_to_skill_compiler_v1",
     "reach_of_the_grammar_v1",
     "capability_receipt_lane_v1",
-    "consequence_table_v1",
-    "frontier_unified_engine_v1"
+    "consequence_table_v1"
    ]
   },
   {
@@ -7455,10 +7455,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "creature_runtime_v1",
+    "brain_unified_model_v1",
     "verifier_falsification_v1",
     "one_shot_reality_closure_v2",
-    "applicability_v1",
-    "computer_execution_boundary_v1"
+    "applicability_v1"
    ]
   },
   {
@@ -7493,8 +7493,8 @@
     "autonomous_verified_self_improvement_v1",
     "verifier_falsification_v1",
     "universal_problem_contract_authority_v1",
-    "verified_capability_bridge_index_v1",
-    "causal_computer_use_agent_v1"
+    "creature_runtime_v1",
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -7590,10 +7590,10 @@
    "topic_hit_at_5": true,
    "topic_top": [
     "r3_success_adapter_patch_author_wrapper_v1",
+    "brain_unified_model_v1",
+    "canonical_boundary_router_v1",
     "reach_of_the_grammar_v1",
-    "benchmark_four_leaps_v1",
-    "capability_forge_v1",
-    "frontier_unified_engine_v1"
+    "benchmark_four_leaps_v1"
    ]
   },
   {
@@ -7754,7 +7754,7 @@
     "the_guide_is_a_test_suite_v1",
     "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
     "metamorphic_laws_v1",
-    "executable_mental_model_v1"
+    "canonical_env_discovery_spine_v1"
    ]
   },
   {
@@ -7788,7 +7788,7 @@
     "universal_problem_contract_authority_v1",
     "inline_variable_v1",
     "autonomous_verified_self_improvement_v1",
-    "gdpval_objective_artifact_criteria_v2"
+    "canonical_boundary_router_v1"
    ]
   },
   {
@@ -7848,11 +7848,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_swe_spine_v1",
     "verifier_falsification_v1",
     "metamorphic_habitation_zipper_v1",
     "recursive_self_architect_v1",
-    "capability_forge_v1",
-    "semantic_generalization_engine_v1"
+    "capability_forge_v1"
    ]
   },
   {
@@ -7918,9 +7918,9 @@
    "topic_top": [
     "brain_unified_model_v1",
     "global_extrapolation_chase_spine_v1",
+    "sentient_cognitive_core_v1",
     "verify_brain_unified_model_v1",
-    "systematic_exploration_v1",
-    "transactional_parallel_execution_v1"
+    "systematic_exploration_v1"
    ]
   },
   {
@@ -8143,7 +8143,7 @@
     "requirement_graph_kernel",
     "abstain_gated_skill_induction_v1",
     "settlement_v1",
-    "systematic_exploration_v1"
+    "canonical_memory_crystallizer_v1"
    ]
   },
   {
@@ -8269,11 +8269,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "canonical_memory_crystallizer_v1",
     "fibo_q2_2026_bounded_finance_authority_v1",
     "fibo_q2_2026_full_release_authority_v1",
     "program_synthesis_v1",
-    "upstream_routing_ledger_v1",
-    "p1_v6_derived_only_counterexample_v1"
+    "upstream_routing_ledger_v1"
    ]
   },
   {
@@ -8462,9 +8462,9 @@
    "topic_top": [
     "global_extrapolation_chase_spine_v1",
     "autonomous_verified_self_improvement_v1",
+    "canonical_memory_crystallizer_v1",
     "perfect_algorithm_v1",
-    "direct_route_terminal_executors_v1",
-    "cross_modal_tomography_petri_v1"
+    "direct_route_terminal_executors_v1"
    ]
   },
   {
@@ -8491,11 +8491,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
-    "cegis_semantic_synthesizer_v1",
-    "reverse_tomography_algebra_v1",
-    "swe_observational_program_synthesizer_v1",
     "residual_wall_closers_v1",
-    "skill_scope_acquisition_v1"
+    "skill_scope_acquisition_v1",
+    "aimed_action_v1",
+    "goal_front_compiler_v1",
+    "ignorance_loop_v1"
    ]
   },
   {
@@ -8993,8 +8993,8 @@
     "upstream_routing_ledger_v1",
     "program_synthesis_v1",
     "universal_computer_agent_v1",
-    "verifier_falsification_v1",
-    "executable_simulator_mental_model_v1"
+    "canonical_memory_crystallizer_v1",
+    "verifier_falsification_v1"
    ]
   },
   {
@@ -9025,8 +9025,8 @@
     "sentient_cognitive_core_v1",
     "hybrid_evaluator_dominance_cut_v1",
     "upstream_routing_ledger_v1",
-    "trajectory_failure_typed_ir_proof_v5",
-    "distributional_target_upper_envelope_v1"
+    "canonical_memory_crystallizer_v1",
+    "trajectory_failure_typed_ir_proof_v5"
    ]
   },
   {
@@ -9084,7 +9084,7 @@
     "one_shot_reality_closure_v2",
     "verifier_falsification_v1",
     "proved_composition_v1",
-    "autonomous_awake_loop_v1"
+    "canonical_memory_crystallizer_v1"
    ]
   },
   {
@@ -9237,11 +9237,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "brain_unified_model_v1",
     "autonomous_verified_self_improvement_v1",
+    "creature_runtime_v1",
     "autonomous_awake_loop_v1",
-    "global_extrapolation_chase_spine_v1",
-    "residual_wall_closers_v1",
-    "brain_unified_model_v1"
+    "residual_wall_closers_v1"
    ]
   },
   {
@@ -9455,11 +9455,11 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": false,
    "topic_top": [
+    "brain_unified_model_v1",
     "producer_lineage_graph_v1",
     "recursive_self_architect_v1",
     "goal_front_compiler_v1",
-    "rename_local_variable_v1",
-    "capability_parallel_frontier_v1"
+    "rename_local_variable_v1"
    ]
   },
   {
@@ -9586,8 +9586,8 @@
     "verifier_falsification_v1",
     "edit_by_example_v1",
     "live_brain_route_admission_v1",
-    "a_fact_is_a_conjunction_of_its_readers_v1",
-    "the_refusal_is_the_other_half_v1"
+    "the_refusal_is_the_other_half_v1",
+    "a_fact_is_a_conjunction_of_its_readers_v1"
    ]
   },
   {
@@ -9616,9 +9616,9 @@
    "topic_top": [
     "verify_brain_unified_model_v1",
     "capability_consolidation_audit_v1",
-    "global_extrapolation_chase_spine_v1",
     "verifier_falsification_v1",
-    "petri_cow_splicing_engine_v1"
+    "global_extrapolation_chase_spine_v1",
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -10144,9 +10144,9 @@
    "topic_top": [
     "cow_impact_repair_engine_v1",
     "causal_cegis_inventor_v1",
+    "canonical_memory_crystallizer_v1",
     "verified_skill_crystallizer_v1",
-    "livebench_union25_sound_lower_bound_hitting_set_v1",
-    "capability_receipt_lane_v1"
+    "livebench_union25_sound_lower_bound_hitting_set_v1"
    ]
   },
   {
@@ -10177,7 +10177,7 @@
     "global_retrieval_controller_v1",
     "hybrid_evaluator_dominance_cut_v1",
     "sentient_cognitive_core_v1",
-    "recursive_self_architect_v1"
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -10239,7 +10239,7 @@
     "settlement_v1",
     "the_right_question_is_an_experiment_v1",
     "history_template_repair_v1",
-    "edit_by_example_v1"
+    "brain_unified_model_v1"
    ]
   },
   {
@@ -10438,9 +10438,9 @@
    "topic_top": [
     "causal_cegis_inventor_v1",
     "universal_computer_agent_v1",
-    "reverse_tomography_algebra_v1",
-    "frontier_unified_engine_v1",
-    "c_asan_cegis_repair_v1"
+    "canonical_memory_crystallizer_v1",
+    "canonical_swe_spine_v1",
+    "reverse_tomography_algebra_v1"
    ]
   },
   {
@@ -10606,10 +10606,10 @@
    "topic_hit_at_5": false,
    "topic_top": [
     "verifier_falsification_v1",
+    "canonical_memory_crystallizer_v1",
     "verified_skill_crystallizer_v1",
     "angelic_cegis_v1",
-    "deep_understanding_engine_v1",
-    "guarded_meaning_ir_v1"
+    "deep_understanding_engine_v1"
    ]
   },
   {
@@ -10710,7 +10710,7 @@
     "petri_cow_splicing_engine_v1",
     "closed_loop_autonomous_controller_v1",
     "reverse_tomography_algebra_v1",
-    "cow_impact_repair_engine_v1"
+    "canonical_memory_crystallizer_v1"
    ]
   },
   {
@@ -10837,7 +10837,7 @@
     "live_frontier_benchmark_runner_v1",
     "universal_computer_agent_v1",
     "reverse_tomography_algebra_v1",
-    "universal_semantic_ir_v1"
+    "canonical_memory_crystallizer_v1"
    ]
   },
   {
@@ -11035,8 +11035,8 @@
     "benchmark_four_leaps_v1",
     "epistemic_agent_benchmark_v1",
     "perfect_algorithm_v1",
-    "reverse_tomography_algebra_v1",
-    "verified_skill_crystallizer_v1"
+    "canonical_env_discovery_spine_v1",
+    "reverse_tomography_algebra_v1"
    ]
   },
   {
@@ -11278,7 +11278,7 @@
     "interface_action_grammar_v1",
     "first_principles_mental_cegis_v1",
     "epistemic_computer_agent_v1",
-    "petri_cow_splicing_engine_v1"
+    "osworld_v21_gui_goal_verifier_v1"
    ]
   },
   {
@@ -11305,13 +11305,13 @@
    "stem": "language_neutral_skill_bridge_v1",
    "test_count": 12,
    "topic_hit_at_1": false,
-   "topic_hit_at_5": true,
+   "topic_hit_at_5": false,
    "topic_top": [
     "verifier_falsification_v1",
+    "canonical_swe_spine_v1",
     "universal_computer_agent_v1",
-    "edit_by_example_v1",
-    "language_neutral_skill_bridge_v1",
-    "history_template_repair_v1"
+    "canonical_memory_crystallizer_v1",
+    "edit_by_example_v1"
    ]
   },
   {
@@ -11699,8 +11699,8 @@
    "topic_top": [
     "edit_by_example_v1",
     "verifier_falsification_v1",
-    "universal_computer_agent_v1",
     "capability_receipt_lane_v1",
+    "universal_computer_agent_v1",
     "petri_cow_splicing_engine_v1"
    ]
   },
@@ -11796,7 +11796,7 @@
     "goal_front_compiler_v1",
     "structural_rewrite_induction_v1",
     "speculative_cow_petri_agent_v1",
-    "perfect_algorithm_v1",
+    "canonical_boundary_router_v1",
     "scheduler_oracles_v1"
    ]
   },
@@ -12059,7 +12059,7 @@
     "across_environments_v1",
     "metamorphic_laws_v1",
     "repo_component_petri_v1",
-    "docx_span_edit_oracles_v1"
+    "binding_pin_is_current_v1"
    ]
   },
   {
@@ -12360,8 +12360,8 @@
    "topic_top": [
     "sentient_cognitive_core_v1",
     "causal_trace_to_skill_compiler_v1",
+    "brain_unified_model_v1",
     "autonomous_awake_loop_v1",
-    "reverse_tomography_algebra_v1",
     "verified_capability_bridge_index_v1"
    ]
   },
@@ -12492,8 +12492,8 @@
     "metamorphic_laws_v1",
     "program_synthesis_v1",
     "verifier_falsification_v1",
-    "reverse_tomography_algebra_v1",
-    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1"
+    "a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1",
+    "universal_computer_agent_v1"
    ]
   },
   {
@@ -12559,8 +12559,8 @@
     "edit_by_example_v1",
     "self_reflective_learning_system_v1",
     "reverse_tomography_algebra_v1",
-    "the_right_question_is_an_experiment_v1",
-    "verifier_falsification_v1"
+    "verifier_falsification_v1",
+    "the_right_question_is_an_experiment_v1"
    ]
   },
   {
@@ -12692,8 +12692,8 @@
    "topic_top": [
     "the_environment_broker_v1",
     "frontier_unified_engine_v1",
-    "capability_receipt_lane_v1",
     "causal_trace_to_skill_compiler_v1",
+    "capability_receipt_lane_v1",
     "brain_unified_model_v1"
    ]
   },
@@ -12723,8 +12723,8 @@
    "topic_hit_at_1": false,
    "topic_hit_at_5": true,
    "topic_top": [
-    "the_right_question_is_an_experiment_v1",
     "live_brain_route_admission_v1",
+    "the_right_question_is_an_experiment_v1",
     "edit_by_example_v1",
     "the_premise_is_the_sense_v1",
     "perfect_algorithm_v1"
@@ -12874,7 +12874,7 @@
    "clean_at_1": 0.0957,
    "clean_at_5": 0.1809,
    "leaked_at_1": 0.1032,
-   "leaked_at_5": 0.2516
+   "leaked_at_5": 0.2484
   }
  },
  "targets": 404
