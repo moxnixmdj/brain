@@ -9,7 +9,7 @@
  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
- "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+ "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
  "causal_blocker": "2,301 of 2,858 indexed modules were unreachable from the unified model front door and six of ten probed frontier goals misrouted or failed closed, because engine triggers carried only technical tokens and harvested surfaces had zero ids in the route index",
  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::2,301 of 2,858 indexed modules were unreachable from the unified model front door and six of ten probed frontier goals misrouted or failed closed, because engine triggers carried only technical tokens and harvested surfaces had zero ids in the route index",
  "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -118,13 +118,13 @@
   }
  },
  "recursive_obs": {
-  "canonical_base_commit": "24cea0dc86447e06d79562a0231bea1684010313",
+  "canonical_base_commit": "d9b5312cd6dd0c5b28c31e17c7673a499e1d8120",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "real_outcome": "Ten frontier goals now reach the engine that implements them; two pre-existing organs are executable; the unreachable mass is measured at 72.3% and named down to 128 modules.",
   "required_capability": "Reachability of already-owned organs, and honest measurement that reports abstention with error.",
   "route_frontier": {
    "discovery_required": true,
-   "checked_at_utc": "2026-11-26T13:07:40+00:00",
+   "checked_at_utc": "2026-11-26T13:38:00Z",
    "max_age_hours": 24,
    "source_classes_checked": [
     "BRAIN_INHERITED",
