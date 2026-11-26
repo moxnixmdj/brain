@@ -1419,13 +1419,14 @@ class Creature:
         self._save()
         return res
 
-    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
-        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+    def probe_os_isolation(self, *, budget_s: float = 30.0, seccomp: bool = True) -> dict[str, Any]:
+        """Wave 37+38: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`,
+        classic BPF `seccomp` allowlist) 20-attempt escape probe."""
         if getattr(self, "_unified_model", None) is not None:
-            return self._unified_model.probe_os_isolation(budget_s=budget_s)
+            return self._unified_model.probe_os_isolation(budget_s=budget_s, seccomp=seccomp)
         from canonical.runtime import os_isolation_v1
 
-        return os_isolation_v1.probe(budget_s=budget_s)
+        return os_isolation_v1.probe(budget_s=budget_s, seccomp=seccomp)
 
     def execute_confined_computer_use(
         self,
@@ -1436,10 +1437,14 @@ class Creature:
         budget_s: float = 15.0,
         allow_network: bool = False,
         verify_effect: bool = True,
+        seccomp: bool = True,
+        auto_compile_refusal: bool = True,
+        webmcp_tools: Mapping[str, Mapping[str, Any]] | None = None,
         initial_marking: Mapping[str, int] | None = None,
         transitions: Mapping[str, Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
-        """Wave 37: Real OS kernel-confined 3-channel HCU executor + Ring-0 byte effect oracle + CoW rollback."""
+        """Wave 37+38: Real OS kernel-confined (`CapEff=0` + `seccomp` BPF) 4-channel HCU executor +
+        Refusal-as-Interface-Compiler + Ring-0 byte effect oracle + CoW rollback."""
         if getattr(self, "_unified_model", None) is not None:
             return self._unified_model.execute_confined_computer_use(
                 work_dir,
@@ -1448,6 +1453,9 @@ class Creature:
                 budget_s=budget_s,
                 allow_network=allow_network,
                 verify_effect=verify_effect,
+                seccomp=seccomp,
+                auto_compile_refusal=auto_compile_refusal,
+                webmcp_tools=webmcp_tools,
                 initial_marking=initial_marking,
                 transitions=transitions,
             )
@@ -1464,6 +1472,7 @@ class Creature:
         return ConfinedHybridComputerUseExecutor(
             supervisor=sup,
             belief_bus=shared_futamura_cascade().belief_bus,
+            webmcp_tools=webmcp_tools,
         ).execute_episode(
             work_dir,
             steps,
@@ -1471,6 +1480,8 @@ class Creature:
             budget_s=budget_s,
             allow_network=allow_network,
             verify_effect=verify_effect,
+            seccomp=seccomp,
+            auto_compile_refusal=auto_compile_refusal,
         )
 
     def solve_multifile_repo_futamura(
@@ -1483,10 +1494,15 @@ class Creature:
         auto_compile: bool = True,
         apply_to_disk: bool = True,
         use_portfolio_fallback: bool = False,
+        use_residual_wall_closers: bool = True,
+        use_repo_component_petri: bool = True,
+        reject_vacuous_verifier: bool = False,
+        untrusted_proposer: Callable[[Mapping[str, Any]], Sequence[Mapping[str, str]]] | None = None,
         alpha: float = 0.05,
         timeout_s: float = 10.0,
     ) -> dict[str, Any]:
-        """Wave 37: Unified multi-file Python repository Futamura solver with Ring-0 verification & compile-back."""
+        """Wave 37+38: Unified multi-file Python repository Futamura solver with 13-law residual
+        wall closers, repo component Petri, anti-vacuous verifier audit & Rung-0 compile-back."""
         if getattr(self, "_unified_model", None) is not None:
             res = self._unified_model.solve_multifile_repo_futamura(
                 repo_dir,
@@ -1496,6 +1512,10 @@ class Creature:
                 auto_compile=auto_compile,
                 apply_to_disk=apply_to_disk,
                 use_portfolio_fallback=use_portfolio_fallback,
+                use_residual_wall_closers=use_residual_wall_closers,
+                use_repo_component_petri=use_repo_component_petri,
+                reject_vacuous_verifier=reject_vacuous_verifier,
+                untrusted_proposer=untrusted_proposer,
                 alpha=alpha,
                 timeout_s=timeout_s,
             )
@@ -1513,11 +1533,62 @@ class Creature:
                 auto_compile=auto_compile,
                 apply_to_disk=apply_to_disk,
                 use_portfolio_fallback=use_portfolio_fallback,
+                use_residual_wall_closers=use_residual_wall_closers,
+                use_repo_component_petri=use_repo_component_petri,
+                reject_vacuous_verifier=reject_vacuous_verifier,
+                untrusted_proposer=untrusted_proposer,
                 alpha=alpha,
                 timeout_s=timeout_s,
             )
         self._save()
         return res
+
+    def non_malleable_memory_op(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Execute a Non-Malleable Memory OS op (TMA-NM, GovMem, A-TMA, SkillApt, <96 cap)."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.non_malleable_memory_op(operation, payload)
+        else:
+            from canonical.swe_kernel.canonical_memory_crystallizer_v1 import (
+                VerificationFirstMemoryBus,
+                execute_memory_operation,
+            )
+
+            if self._memory_bus is None:
+                self._memory_bus = VerificationFirstMemoryBus()
+            res = execute_memory_operation(self._memory_bus, operation, payload)
+        self._save()
+        return res
+
+    def bicameral_sleep_cycle(
+        self,
+        *,
+        max_hot_skills: int = 96,
+        mine_algebraic_rewrites: bool = False,
+        weight_update_check: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Creature two-phase Consolidate-and-Dream sleep cycle with origin integrity & weight gate."""
+        res = self.non_malleable_memory_op(
+            "BICAMERAL_SLEEP_CYCLE",
+            {
+                "max_hot_skills": max_hot_skills,
+                "mine_algebraic_rewrites": mine_algebraic_rewrites,
+                "weight_update_check": weight_update_check,
+            },
+        )
+        return res
+
+    def discover_dark_matter(self, query: str, *, top_k: int = 8, max_hot: int = 96) -> dict[str, Any]:
+        """Wave 38: OpenViking-style L0/L1/L2 progressive discovery over Brain's hidden capabilities."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        self._unified_model = open_model()
+        return self._unified_model.discover_dark_matter(query, top_k=top_k, max_hot=max_hot)
 
     def sleep_evolve_organs_gea(
         self,

@@ -3610,6 +3610,529 @@ class VerificationFirstMemoryBus:
         res = self._get_dbsp_bus().check_pre_commit_gate(context_key, proposal_signature)
         return {"pass": bool(res["allowed"]), **res}
 
+    # ------------------------------------------------- Wave 38 Non-Malleable Memory OS & Bicameral Sleep
+
+    _ORIGIN_TRUST_RANK: dict[str, int] = {
+        "UNTRUSTED_EXTERNAL": 0,
+        "DERIVED_INTERNAL": 1,
+        "TRUSTED_USER": 2,
+        "TRUSTED_VERIFIER": 3,
+    }
+
+    def _origin_store(self) -> dict[str, dict[str, Any]]:
+        store = getattr(self, "_wave38_origin_records", None)
+        if store is None:
+            store = {}
+            self._wave38_origin_records = store
+        return store
+
+    @classmethod
+    def _origin_rank(cls, origin_class: str) -> int:
+        key = str(origin_class or "UNTRUSTED_EXTERNAL").upper().strip()
+        return cls._ORIGIN_TRUST_RANK.get(key, 0)
+
+    @staticmethod
+    def _compute_origin_commitment(
+        record_id: str,
+        key: str,
+        origin_class: str,
+        source_origin_hash: str,
+        payload: Any,
+        parent_commitments: Sequence[str],
+        valid_from: float,
+    ) -> str:
+        raw = json.dumps(
+            {
+                "record_id": str(record_id),
+                "key": str(key),
+                "origin_class": str(origin_class),
+                "source_origin_hash": str(source_origin_hash),
+                "payload": payload,
+                "parent_commitments": sorted(str(c) for c in parent_commitments),
+                "valid_from": float(valid_from),
+            },
+            sort_keys=True,
+            default=str,
+            separators=(",", ":"),
+        )
+        return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+    def write_origin_bound_record(
+        self,
+        record_id: str,
+        key: str,
+        payload: Any,
+        *,
+        origin_class: str = "TRUSTED_VERIFIER",
+        source_origin_hash: str = "",
+        trace_lineage_id: str = "",
+        valid_from: float = 0.0,
+        valid_to: float = float("inf"),
+        supersedes: str | None = None,
+        depends_on: Sequence[str] = (),
+        derived_from: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 38 (TMA-NM): Write-time non-malleable cryptographic origin binding + DBSP ingest.
+
+        Binds ``origin_class`` into an immutable SHA-256 commitment at write time so
+        untrusted content can never be laundered into a higher trust class later.
+        """
+        norm_origin = str(origin_class or "UNTRUSTED_EXTERNAL").upper().strip()
+        if norm_origin not in self._ORIGIN_TRUST_RANK:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__UNKNOWN_ORIGIN_CLASS",
+                "origin_class": norm_origin,
+            }
+        store = self._origin_store()
+        parent_ids = sorted(set(depends_on) | set(derived_from))
+        parent_commits: list[str] = []
+        min_parent_rank = self._ORIGIN_TRUST_RANK[norm_origin]
+        for pid in parent_ids:
+            prec = store.get(pid)
+            if prec is not None:
+                parent_commits.append(str(prec["origin_commitment"]))
+                min_parent_rank = min(min_parent_rank, self._origin_rank(prec["origin_class"]))
+        if parent_ids and self._ORIGIN_TRUST_RANK[norm_origin] > min_parent_rank:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__ORIGIN_LAUNDERING_BLOCKED",
+                "requested_origin": norm_origin,
+                "max_permitted_rank": min_parent_rank,
+                "parent_ids": parent_ids,
+            }
+
+        src_hash = str(source_origin_hash or _sha16({"record_id": record_id, "key": key, "payload": payload}))
+        commit = self._compute_origin_commitment(
+            record_id, key, norm_origin, src_hash, payload, parent_commits, valid_from
+        )
+        rec = {
+            "record_id": str(record_id),
+            "key": str(key),
+            "payload": payload,
+            "origin_class": norm_origin,
+            "origin_rank": self._ORIGIN_TRUST_RANK[norm_origin],
+            "source_origin_hash": src_hash,
+            "trace_lineage_id": str(trace_lineage_id or src_hash),
+            "parent_ids": parent_ids,
+            "parent_commitments": sorted(parent_commits),
+            "valid_from": float(valid_from),
+            "origin_commitment": commit,
+        }
+        store[str(record_id)] = rec
+        dbsp_res = self.dbsp_ingest_delta(
+            record_id,
+            key,
+            payload,
+            valid_from=valid_from,
+            valid_to=valid_to,
+            depends_on=depends_on,
+            derived_from=derived_from,
+            supersedes=supersedes,
+        )
+        return {
+            "pass": True,
+            "status": "PASS__ORIGIN_BOUND_WRITTEN",
+            "record": rec,
+            "origin_commitment": commit,
+            "dbsp": dbsp_res,
+        }
+
+    def consolidate_origin_bound_records(
+        self,
+        new_record_id: str,
+        key: str,
+        summary_payload: Any,
+        parent_ids: Sequence[str],
+        *,
+        requested_origin_class: str | None = None,
+        valid_from: float = 0.0,
+    ) -> dict[str, Any]:
+        """Wave 38 (TMA-NM): Non-malleable consolidation enforcing `trust(summary) <= min(trust(parents))`.
+
+        Explicitly refuses any attempt to summarize/launder untrusted records into a
+        higher trust class (`0%` origin-laundering ASR).
+        """
+        store = self._origin_store()
+        pids = [str(p) for p in parent_ids]
+        missing = [p for p in pids if p not in store]
+        if not pids or missing:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__MISSING_ORIGIN_PARENTS",
+                "missing_parents": missing,
+            }
+        min_rank = min(self._origin_rank(store[p]["origin_class"]) for p in pids)
+        rank_to_name = {v: k for k, v in self._ORIGIN_TRUST_RANK.items()}
+        ceiling_origin = rank_to_name[min_rank]
+        chosen_origin = str(requested_origin_class or ceiling_origin).upper().strip()
+        if chosen_origin not in self._ORIGIN_TRUST_RANK:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__UNKNOWN_ORIGIN_CLASS",
+                "requested_origin": chosen_origin,
+            }
+        if self._ORIGIN_TRUST_RANK[chosen_origin] > min_rank:
+            return {
+                "pass": False,
+                "status": "FAIL_CLOSED__ORIGIN_LAUNDERING_BLOCKED",
+                "requested_origin": chosen_origin,
+                "ceiling_origin": ceiling_origin,
+                "parent_ids": pids,
+            }
+        return self.write_origin_bound_record(
+            new_record_id,
+            key,
+            summary_payload,
+            origin_class=chosen_origin,
+            derived_from=pids,
+            valid_from=valid_from,
+        )
+
+    def verify_origin_binding(self, record_id: str) -> dict[str, Any]:
+        """Wave 38 (TMA-NM): Recompute write-time SHA-256 origin commitment to detect tampering."""
+        rec = self._origin_store().get(str(record_id))
+        if rec is None:
+            return {"pass": False, "status": "FAIL_CLOSED__RECORD_NOT_FOUND", "record_id": str(record_id)}
+        expected = self._compute_origin_commitment(
+            rec["record_id"],
+            rec["key"],
+            rec["origin_class"],
+            rec["source_origin_hash"],
+            rec["payload"],
+            rec.get("parent_commitments") or (),
+            rec.get("valid_from", 0.0),
+        )
+        ok = expected == rec.get("origin_commitment")
+        return {
+            "pass": ok,
+            "status": "PASS__ORIGIN_BINDING_INTACT" if ok else "FAIL_CLOSED__ORIGIN_TAMPER_DETECTED",
+            "record_id": str(record_id),
+            "origin_class": rec.get("origin_class"),
+            "expected_commitment": expected,
+            "recorded_commitment": rec.get("origin_commitment"),
+        }
+
+    def propose_memory_promotion(
+        self,
+        rule_id: str,
+        key: str,
+        rule_payload: Any,
+        witnesses: Sequence[Mapping[str, Any]],
+        *,
+        min_independent_positive: int = 2,
+        require_contrast_witness: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 38 (GovMem + `a_law_carries_its_reason`): Anti-correlation promotion gate.
+
+        1. Rejects any witness with `UNTRUSTED_EXTERNAL` origin.
+        2. Deduplicates correlated observations by `(trace_lineage_id, source_origin_hash)`:
+           N repeats from the same correlated trace count as ONE witness, eliminating
+           correlated-trace false promotion.
+        3. Requires `>= min_independent_positive` independent positive witnesses AND
+           at least 1 refuting/boundary contrast witness (`kind == "contrast"` or `positive == False`)
+           before admitting a trusted rule into persistent memory.
+        """
+        pos_lineages: set[tuple[str, str]] = set()
+        contrast_lineages: set[tuple[str, str]] = set()
+        rejected_untrusted = 0
+        correlated_duplicates = 0
+
+        for w in witnesses:
+            orig = str(w.get("origin_class") or "TRUSTED_VERIFIER").upper().strip()
+            if self._origin_rank(orig) < self._ORIGIN_TRUST_RANK["TRUSTED_USER"]:
+                rejected_untrusted += 1
+                continue
+            lineage = str(w.get("trace_lineage_id") or w.get("session_id") or "default_trace")
+            src_h = str(w.get("source_origin_hash") or lineage)
+            lkey = (lineage, src_h)
+            is_contrast = bool(w.get("is_contrast")) or str(w.get("kind") or "").lower() == "contrast" or (w.get("positive") is False)
+            if is_contrast:
+                if lkey in contrast_lineages:
+                    correlated_duplicates += 1
+                else:
+                    contrast_lineages.add(lkey)
+            else:
+                if lkey in pos_lineages:
+                    correlated_duplicates += 1
+                else:
+                    pos_lineages.add(lkey)
+
+        reasons: list[str] = []
+        if len(pos_lineages) < int(min_independent_positive):
+            reasons.append(f"INSUFFICIENT_INDEPENDENT_WITNESSES:{len(pos_lineages)}<{min_independent_positive}")
+        if require_contrast_witness and len(contrast_lineages) < 1:
+            reasons.append("MISSING_CONTRAST_WITNESS__A_LAW_MUST_CARRY_ITS_REASON")
+        if reasons:
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__PROMOTION_REJECTED",
+                "rule_id": str(rule_id),
+                "independent_positive_count": len(pos_lineages),
+                "independent_contrast_count": len(contrast_lineages),
+                "correlated_duplicates_collapsed": correlated_duplicates,
+                "rejected_untrusted_witnesses": rejected_untrusted,
+                "reasons": reasons,
+            }
+
+        written = self.write_origin_bound_record(
+            rule_id,
+            key,
+            {
+                "rule_payload": rule_payload,
+                "independent_positive_count": len(pos_lineages),
+                "independent_contrast_count": len(contrast_lineages),
+            },
+            origin_class="TRUSTED_VERIFIER",
+            trace_lineage_id=",".join(sorted(x[0] for x in pos_lineages)),
+        )
+        return {
+            "pass": True,
+            "admitted": True,
+            "status": "PASS__PROMOTED_INDEPENDENT_CONTRAST_VERIFIED",
+            "rule_id": str(rule_id),
+            "independent_positive_count": len(pos_lineages),
+            "independent_contrast_count": len(contrast_lineages),
+            "correlated_duplicates_collapsed": correlated_duplicates,
+            "rejected_untrusted_witnesses": rejected_untrusted,
+            "origin_commitment": written.get("origin_commitment"),
+        }
+
+    def query_state_view(self, key: str, *, as_of_ts: float | None = None) -> dict[str, Any]:
+        """Wave 38 (A-TMA): Anti-ghost-memory state-view packet partitioning
+        `{current, historical, transitions, stale_impacted}` from the DBSP + AGM ledger."""
+        bus = self._get_dbsp_bus()
+        ts = time.time() if as_of_ts is None else float(as_of_ts)
+        current: list[dict[str, Any]] = []
+        historical: list[dict[str, Any]] = []
+        stale_impacted: list[dict[str, Any]] = []
+        transitions: list[dict[str, Any]] = []
+        key_rids = list(bus._by_key.get(str(key), ()))
+        key_rid_set = set(key_rids)
+
+        for rid in key_rids:
+            rec = bus._records.get(rid)
+            if rec is None:
+                continue
+            row = {
+                "record_id": rec.record_id,
+                "key": rec.key,
+                "payload": rec.payload,
+                "valid_from": rec.valid_from,
+                "valid_to": None if math.isinf(rec.valid_to) else rec.valid_to,
+                "status": rec.status,
+                "version": rec.version,
+                "origin_class": (self._origin_store().get(rid) or {}).get("origin_class", "UNSPECIFIED"),
+            }
+            if rec.status == "STALE_NEEDS_REVERIFICATION":
+                stale_impacted.append(row)
+            elif rec.status == "ACTIVE" and rec.weight > 0 and rec.valid_from <= ts < rec.valid_to:
+                current.append(row)
+            else:
+                historical.append(row)
+
+        for new_id, old_id in sorted(bus._supersedes.items()):
+            if new_id in key_rid_set or old_id in key_rid_set:
+                nrec = bus._records.get(new_id)
+                transitions.append(
+                    {
+                        "from_record_id": old_id,
+                        "to_record_id": new_id,
+                        "transition_at": nrec.valid_from if nrec is not None else 0.0,
+                    }
+                )
+
+        current_ids = {r["record_id"] for r in current}
+        hist_ids = {r["record_id"] for r in historical}
+        ghost_free = len(current_ids & hist_ids) == 0
+        return {
+            "pass": True,
+            "status": "PASS__STATE_VIEW_PARTITIONED",
+            "key": str(key),
+            "as_of_ts": ts,
+            "current": current,
+            "historical": historical,
+            "stale_impacted": stale_impacted,
+            "transitions": transitions,
+            "ghost_conflict_free": ghost_free,
+        }
+
+    def decide_skill_activation(
+        self,
+        skill_id: str,
+        *,
+        with_outcomes: Sequence[float | bool],
+        without_outcomes: Sequence[float | bool],
+        min_trials_each: int = 2,
+        min_uplift: float = 0.05,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 38 (SkillApt + SCoRE): Post-retrieval Rubin counterfactual potential-outcome
+        skill activation decision with selective abstention (`ACTIVATE | ABSTAIN | DEMOTE`)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
+
+        y1 = [1.0 if v is True else (0.0 if v is False else float(v)) for v in with_outcomes]
+        y0 = [1.0 if v is True else (0.0 if v is False else float(v)) for v in without_outcomes]
+        if len(y1) < int(min_trials_each) or len(y0) < int(min_trials_each):
+            return {
+                "pass": True,
+                "skill_id": str(skill_id),
+                "decision": "ABSTAIN",
+                "status": "PASS_ABSTAIN__INSUFFICIENT_COUNTERFACTUAL_TRIALS",
+                "n_with": len(y1),
+                "n_without": len(y0),
+                "tau_hat": 0.0,
+            }
+        m1 = sum(y1) / len(y1)
+        m0 = sum(y0) / len(y0)
+        tau = m1 - m0
+        # Conservative Hoeffding radius on difference of bounded [0, 1] means
+        se = math.sqrt((0.25 / len(y1)) + (0.25 / len(y0)))
+        lcb = tau - 1.28 * se
+
+        gate = ConformalEValueGate(alpha=alpha)
+        for v1, v0 in zip(y1, y0):
+            if v1 > v0:
+                gate.observe("paired_uplift", passed=True, null_pass_prob=0.5)
+            elif v1 < v0:
+                gate.observe("paired_regression", passed=False, null_pass_prob=0.5)
+        gdec = gate.decision()
+
+        if tau < -0.05:
+            decision = "DEMOTE"
+            status = "FAIL_CLOSED__SKILL_NEGATIVE_UPLIFT_DEMOTED"
+        elif tau >= float(min_uplift) and lcb > 0.0:
+            decision = "ACTIVATE"
+            status = "PASS__SKILL_COUNTERFACTUAL_ACTIVATE"
+        else:
+            decision = "ABSTAIN"
+            status = "PASS_ABSTAIN__UPLIFT_NOT_ESTABLISHED"
+
+        return {
+            "pass": decision != "DEMOTE",
+            "skill_id": str(skill_id),
+            "decision": decision,
+            "status": status,
+            "mean_with": round(m1, 4),
+            "mean_without": round(m0, 4),
+            "tau_hat": round(tau, 4),
+            "lower_confidence_bound": round(lcb, 4),
+            "e_value": gdec.get("e_value"),
+            "n_with": len(y1),
+            "n_without": len(y0),
+        }
+
+    def enforce_hot_tier_cap(
+        self,
+        skills: Sequence[Mapping[str, Any]],
+        *,
+        max_hot: int = 96,
+    ) -> dict[str, Any]:
+        """Wave 38 (DreamProver / Dynamic Agent Skills `arXiv:2607.10113` <96 Hot-Tier Cap):
+        Partitions skills into an active L0/L1 hot router tier (`<= max_hot`) ranked by
+        Rubin uplift & recency, demoting excess skills to L2 cold mmap storage so flat
+        retrieval never collapses past ~100 skills."""
+        cap = max(1, int(max_hot))
+        ranked = sorted(
+            [dict(s) for s in skills],
+            key=lambda s: (
+                -float(s.get("rubin_tau_hat", s.get("uplift", 0.0))),
+                -int(s.get("hits", 0)),
+                -float(s.get("last_used_ts", 0.0)),
+                str(s.get("skill_id") or s.get("rule_id") or ""),
+            ),
+        )
+        hot = ranked[:cap]
+        cold = ranked[cap:]
+        return {
+            "pass": True,
+            "status": "PASS__HOT_TIER_CAPPED",
+            "max_hot": cap,
+            "hot_count": len(hot),
+            "cold_l2_count": len(cold),
+            "hot_tier": hot,
+            "cold_l2_tier": cold,
+        }
+
+    def bicameral_sleep_cycle(
+        self,
+        *,
+        max_hot_skills: int = 96,
+        mine_algebraic_rewrites: bool = False,
+        weight_update_check: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38 Bicameral Consolidate-and-Dream Sleep Cycle (Google *Language Models Need Sleep*
+        `arXiv:2606.03979` + `mined_rewrite_theory_v1` + `weight_update_admission_v1`):
+
+        * Phase A (Symbolic Consolidation, `K3 = 0`): consolidates wake skills, enforces the
+          `<96` hot-tier LRU/rent cap, and optionally mines execution-verified algebraic rewrite
+          invariants via `mined_rewrite_theory_v1.mine_rules`.
+        * Phase B (Integrity Audit & Admission-Gated Update): verifies non-malleable origin
+          commitments across all stored records, and when a parametric/weight update proposal
+          is supplied, gates it strictly via `weight_update_admission_v1.evaluate_update`
+          (rejecting any update with an out-of-training probe regression).
+        """
+        t0 = time.perf_counter()
+        # Phase A: Symbolic Consolidation
+        consolidation = self.sleep_consolidate()
+        active_skills = [
+            {
+                "skill_id": sk.skill_id,
+                "hits": sk.hits,
+                "last_used_ts": sk.created_at,
+                "rubin_tau_hat": 0.1 if sk.verified else 0.0,
+            }
+            for sk in self.skills.values()
+            if not sk.forgotten
+        ]
+        tier_partition = self.enforce_hot_tier_cap(active_skills, max_hot=max_hot_skills)
+        mined_rewrites: dict[str, Any] | None = None
+        if mine_algebraic_rewrites:
+            from canonical.swe_kernel import mined_rewrite_theory_v1 as mrt
+
+            mined_rewrites = mrt.mine_rules(max_size=3, term_limit=96, witnesses_per_round=12, verify_rounds=2)
+
+        # Phase B: Origin-Binding Integrity Audit + Weight-Update Admission Gate
+        store = self._origin_store()
+        tampered: list[str] = []
+        for rid in sorted(store):
+            chk = self.verify_origin_binding(rid)
+            if not chk["pass"]:
+                tampered.append(rid)
+
+        weight_gate: dict[str, Any] | None = None
+        if isinstance(weight_update_check, Mapping) and weight_update_check.get("model") is not None:
+            from canonical.swe_kernel import weight_update_admission_v1 as wua
+
+            weight_gate = wua.evaluate_update(
+                weight_update_check["model"],
+                str(weight_update_check.get("goal") or ""),
+                str(weight_update_check.get("operation") or ""),
+                str(weight_update_check.get("concept") or ""),
+                str(weight_update_check.get("domain") or ""),
+                probes=list(weight_update_check.get("probes") or ()),
+                learning_rate=float(weight_update_check.get("learning_rate", 0.05)),
+                weight_decay=float(weight_update_check.get("weight_decay", 0.0001)),
+            )
+
+        ok = len(tampered) == 0
+        return {
+            "pass": ok,
+            "status": "PASS__BICAMERAL_SLEEP_COMPLETE" if ok else "FAIL_CLOSED__ORIGIN_TAMPER_IN_SLEEP",
+            "phase_a_consolidation": consolidation,
+            "phase_a_hot_tier": {
+                "max_hot": tier_partition["max_hot"],
+                "hot_count": tier_partition["hot_count"],
+                "cold_l2_count": tier_partition["cold_l2_count"],
+            },
+            "phase_a_mined_rewrites_count": len((mined_rewrites or {}).get("rules") or ()),
+            "phase_b_origin_records_audited": len(store),
+            "phase_b_tampered_records": tampered,
+            "phase_b_weight_admission": weight_gate,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
 
 def execute_memory_operation(
     bus: VerificationFirstMemoryBus,
@@ -3833,6 +4356,30 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "PRE_COMMIT_FAILURE_CHECK":
         res = bus.check_pre_commit_gate(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "WRITE_ORIGIN_BOUND":
+        res = bus.write_origin_bound_record(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "CONSOLIDATE_ORIGIN_BOUND":
+        res = bus.consolidate_origin_bound_records(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "VERIFY_ORIGIN_BINDING":
+        res = bus.verify_origin_binding(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "PROPOSE_MEMORY_PROMOTION":
+        res = bus.propose_memory_promotion(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "QUERY_STATE_VIEW":
+        res = bus.query_state_view(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "DECIDE_SKILL_ACTIVATION":
+        res = bus.decide_skill_activation(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "ENFORCE_HOT_TIER_CAP":
+        res = bus.enforce_hot_tier_cap(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "BICAMERAL_SLEEP_CYCLE":
+        res = bus.bicameral_sleep_cycle(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}

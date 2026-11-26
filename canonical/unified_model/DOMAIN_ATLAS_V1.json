@@ -658,7 +658,7 @@
      "summary": "What experience can and cannot buy, as a measured law rather than an opinion."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 3.75,
      "harvested": true,
      "matched": [
@@ -733,7 +733,7 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 23.5,
-     "sha256": "f88405127c94e63d",
+     "sha256": "d337af12dfa206e9",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
@@ -1302,7 +1302,7 @@
      "summary": "The browser: one more sense the loop can consult."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -1539,7 +1539,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 12.0,
-     "sha256": "3b087b2f51589df4",
+     "sha256": "b7cd37c686ebd547",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -1627,7 +1627,7 @@
      ],
      "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
      "score": 9.0,
-     "sha256": "f88405127c94e63d",
+     "sha256": "d337af12dfa206e9",
      "source_index": true,
      "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`)."
     },
@@ -1688,7 +1688,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 6.75,
-     "sha256": "8109f09f8875798b",
+     "sha256": "6f30a2131340caf5",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -1826,7 +1826,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "5a5e033cede7b935",
+     "sha256": "e3423c39a9019259",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -2132,7 +2132,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 28.75,
-     "sha256": "3b087b2f51589df4",
+     "sha256": "b7cd37c686ebd547",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2352,7 +2352,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 20.0,
-     "sha256": "8109f09f8875798b",
+     "sha256": "6f30a2131340caf5",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2842,7 +2842,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 21.25,
-     "sha256": "3b087b2f51589df4",
+     "sha256": "b7cd37c686ebd547",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2862,7 +2862,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 17.75,
-     "sha256": "8109f09f8875798b",
+     "sha256": "6f30a2131340caf5",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3817,7 +3817,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 17.5,
-     "sha256": "3b087b2f51589df4",
+     "sha256": "b7cd37c686ebd547",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -3921,7 +3921,7 @@
      "summary": "Scoped semantic entailment DAG proof kernel V1."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 2.25,
      "harvested": false,
      "matched": [
@@ -3995,7 +3995,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "5a5e033cede7b935",
+     "sha256": "e3423c39a9019259",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4039,7 +4039,7 @@
      "summary": "Independent evidence-recomputation worker for R3 learning promotion."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -4520,7 +4520,7 @@
      "summary": "Meta-Circular Reflective Program Graph (`K3 = 0`, `$0` spend)."
     },
     {
-     "adapter_module_match": false,
+     "adapter_module_match": true,
      "anchored": 6.0,
      "harvested": false,
      "matched": [
@@ -4650,7 +4650,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 13.0,
-     "sha256": "3b087b2f51589df4",
+     "sha256": "b7cd37c686ebd547",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -4799,7 +4799,7 @@
  "per_domain": 25,
  "reachability": {
   "coding_agents": {
-   "chance_route_recall": 0.1531,
+   "chance_route_recall": 0.161,
    "chance_source_recall": 0.1335,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -4860,6 +4860,7 @@
      "route_hit": true,
      "routed_hit": [
       "python.source.change_impact.testselect.v1",
+      "engine:LEAPFROG_W38_RESIDUAL_WALL_CLOSERS",
       "software.repair.choreograph.crossfile.v1"
      ],
      "routed_top": [
@@ -4906,7 +4907,7 @@
      "routed_hit": [
       "python.fault.localize.dynamic.dataflow.v1",
       "python.fault.provenance.interprocedural.value.v1",
-      "python.software.repair.loop.coupled.ast.v1"
+      "engine:LEAPFROG_W38_COW_LENS_NEGATIVE_SPACE"
      ],
      "routed_top": [
       "python.fault.localize.dynamic.dataflow.v1",
@@ -4946,7 +4947,7 @@
    ]
   },
   "computer_use": {
-   "chance_route_recall": 0.0625,
+   "chance_route_recall": 0.066,
    "chance_source_recall": 0.0678,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -4962,7 +4963,7 @@
      "routed_hit": [
       "engine:OSWORLD_BROWSER_OPS",
       "engine:INTERFACE_ACTION_GRAMMAR",
-      "engine:STATE_CONTRACT_WORLD_MODEL"
+      "engine:LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER"
      ],
      "routed_top": [
       "engine:OSWORLD_BROWSER_OPS",
@@ -5000,18 +5001,19 @@
      ]
     },
     {
-     "coverage": 0.714286,
+     "coverage": 0.857143,
      "hit": true,
      "kind": "frontier",
      "query": "read the screen, decide the next action, and verify the effect",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER",
       "engine:STATE_CONTRACT_WORLD_MODEL"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER",
       "engine:STATE_CONTRACT_WORLD_MODEL",
-      "chart.read.binary_phase_solvus.v1",
-      "chart.read.legend_linear_intersection.v1"
+      "chart.read.binary_phase_solvus.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5090,7 +5092,7 @@
    ]
   },
   "continual_learning": {
-   "chance_route_recall": 0.0375,
+   "chance_route_recall": 0.0383,
    "chance_source_recall": 0.016,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.333,
@@ -5098,20 +5100,20 @@
    "native_source_hit_recall": 0.333,
    "rows": [
     {
-     "coverage": 0.714286,
+     "coverage": 1.0,
      "hit": true,
      "kind": "frontier",
      "query": "keep improving on new tasks without forgetting earlier ones",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "engine:ASSOCIATIVE_EPISODIC_MEMORY",
-      "engine:GRADIENT_FREE_LAW_CONSOLIDATION"
+      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "engine:INSTANT_ONE_SHOT_LEARNER",
-      "python.source.add_function.v1"
+      "engine:INSTANT_ONE_SHOT_LEARNER"
      ],
      "source_hit": false,
      "source_top": [
@@ -5129,12 +5131,12 @@
      "routed_hit": [
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
       "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
-      "engine:WAKE_SLEEP_CONSOLIDATION"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
       "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
-      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "source_hit": false,
      "source_top": [
@@ -5144,19 +5146,20 @@
      ]
     },
     {
-     "coverage": 0.833333,
+     "coverage": 1.0,
      "hit": true,
      "kind": "frontier",
      "query": "detect drift between what was taught and what is now true",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
       "engine:GRADIENT_FREE_LAW_CONSOLIDATION"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "git.history.bisect_regression.v1",
-      "file.question.taught_words.v1"
+      "git.history.bisect_regression.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5196,13 +5199,13 @@
      "route_hit": true,
      "routed_hit": [
       "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
-      "engine:RULE_EXPIRY_WORLD_FINGERPRINT",
-      "engine:VERIFICATION_FIRST_MEMORY_BUS"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
      ],
      "routed_top": [
       "engine:GRADIENT_FREE_LAW_CONSOLIDATION",
-      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR",
-      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:SKILL_CONTRIBUTION_UNBLIND_CURATOR"
      ],
      "source_hit": false,
      "source_top": [
@@ -5236,7 +5239,7 @@
    ]
   },
   "instant_learning": {
-   "chance_route_recall": 0.1266,
+   "chance_route_recall": 0.1288,
    "chance_source_recall": 0.0812,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
@@ -5257,7 +5260,7 @@
      "routed_top": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
       "engine:CAUSAL_TRACE_SKILL_COMPILER",
-      "engine:RULE_EXPIRY_WORLD_FINGERPRINT"
+      "engine:VERIFIED_SKILL_CRYSTALLIZER"
      ],
      "source_hit": true,
      "source_top": [
@@ -5298,7 +5301,7 @@
      "routed_hit": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
       "engine:VERIFIED_SKILL_CRYSTALLIZER",
-      "engine:SWE_SELF_IMPROVEMENT_BRIDGE"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
       "engine:INSTANT_ONE_SHOT_LEARNER",
@@ -5383,7 +5386,7 @@
    ]
   },
   "memory": {
-   "chance_route_recall": 0.0938,
+   "chance_route_recall": 0.0982,
    "chance_source_recall": 0.0856,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
@@ -5444,13 +5447,13 @@
      "route_hit": true,
      "routed_hit": [
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT",
-      "engine:VERIFICATION_FIRST_MEMORY_BUS"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
      ],
      "routed_top": [
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:SKILL_SCOPE_ACQUISITION",
-      "engine:UNIVERSAL_COMPUTER_PETRI_AGENT"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:SKILL_SCOPE_ACQUISITION"
      ],
      "source_hit": false,
      "source_top": [
@@ -5460,19 +5463,20 @@
      ]
     },
     {
-     "coverage": 0.6,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "recall from the chunk archive by content address",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE",
       "engine:ASSOCIATIVE_EPISODIC_MEMORY",
       "engine:PROCEDURE_TRAJECTORY_MEMORY"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_CONTENT_ADDRESSED_CHUNK_ARCHIVE",
       "archive.tar_gz.create_from_manifest",
-      "archive.verify.tar_gz.gnu",
-      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
+      "archive.verify.tar_gz.gnu"
      ],
      "source_hit": true,
      "source_top": [
@@ -5489,7 +5493,8 @@
      "route_hit": true,
      "routed_hit": [
       "python.fault.provenance.interprocedural.value.v1",
-      "engine:UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME"
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
       "pypi.provenance.audit_live_artifact",
@@ -5504,20 +5509,20 @@
      ]
     },
     {
-     "coverage": 0.6,
+     "coverage": 0.8,
      "hit": true,
      "kind": "native",
      "query": "compact an episode journal without losing facts",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:AUTONOMOUS_AWAKE_LOOP",
-      "engine:ASSOCIATIVE_EPISODIC_MEMORY"
+      "engine:AUTONOMOUS_AWAKE_LOOP"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "engine:PROCEDURE_TRAJECTORY_MEMORY",
-      "engine:SKILL_SCOPE_ACQUISITION",
-      "engine:AUTONOMOUS_AWAKE_LOOP"
+      "engine:SKILL_SCOPE_ACQUISITION"
      ],
      "source_hit": true,
      "source_top": [
@@ -5529,9 +5534,9 @@
    ]
   },
   "verification_abstention": {
-   "chance_route_recall": 0.1562,
+   "chance_route_recall": 0.1641,
    "chance_source_recall": 0.1486,
-   "frontier_route_hit_recall": 0.667,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 0.667,
@@ -5543,8 +5548,9 @@
      "query": "refuse when the evidence does not establish the claim",
      "route_hit": true,
      "routed_hit": [
-      "engine:WAKE_SLEEP_CONSOLIDATION",
-      "engine:PROSE_CLAIM_EXPERIMENT"
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:WAKE_SLEEP_CONSOLIDATION"
      ],
      "routed_top": [
       "evidence.claim_relation.generic_units.stdlib",
@@ -5582,16 +5588,19 @@
      ]
     },
     {
-     "coverage": 0.833333,
+     "coverage": 1.0,
      "hit": true,
      "kind": "frontier",
      "query": "verify that a receipt was not edited after the fact",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE"
+     ],
      "routed_top": [
-      "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1",
-      "archive.verify.tar_gz.gnu",
-      "code.patch.tree_sitter.verify.v1"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+      "canonical/runtime/sec_issuer_extension_fact_semantics_bind_verify_v1.py.auto.v1"
      ],
      "source_hit": true,
      "source_top": [
@@ -5607,13 +5616,14 @@
      "query": "refuse fail-closed when the binding pin is not current",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "engine:WAKE_SLEEP_CONSOLIDATION"
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS",
       "canonical.runtime.binding_pin_is_current_v1.hidden.v1",
-      "engine:CHECKABILITY_DIFFERENTIAL_PIN",
-      "engine:WAKE_SLEEP_CONSOLIDATION"
+      "engine:CHECKABILITY_DIFFERENTIAL_PIN"
      ],
      "source_hit": false,
      "source_top": [
@@ -5629,12 +5639,14 @@
      "query": "verify two witnesses that are not constant",
      "route_hit": true,
      "routed_hit": [
-      "engine:WAKE_SLEEP_CONSOLIDATION"
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
+      "engine:WAKE_SLEEP_CONSOLIDATION",
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_CONSISTENCY_EQUIVALENCE_AND_JUDGE",
       "engine:WAKE_SLEEP_CONSOLIDATION",
-      "archive.verify.tar_gz.gnu",
-      "code.patch.tree_sitter.verify.v1"
+      "engine:LEAPFROG_W38_NON_MALLEABLE_MEMORY_OS"
      ],
      "source_hit": true,
      "source_top": [
@@ -5644,18 +5656,19 @@
      ]
     },
     {
-     "coverage": 0.4,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "manufacture what the refusal asks for instead of faking it",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_REFUSAL_SPEC_COMPILER",
       "engine:REFUSAL_SPECIFICATION_READER"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_REFUSAL_SPEC_COMPILER",
       "engine:DISTINGUISHING_PROJECTION_ORACLE",
-      "engine:KOAN_REFUSAL_CURRICULUM",
-      "engine:REFUSAL_ARTIFACT_MANUFACTURER"
+      "engine:KOAN_REFUSAL_CURRICULUM"
      ],
      "source_hit": true,
      "source_top": [
@@ -5667,9 +5680,9 @@
    ]
   },
   "world_model": {
-   "chance_route_recall": 0.0781,
+   "chance_route_recall": 0.0798,
    "chance_source_recall": 0.0585,
-   "frontier_route_hit_recall": 0.667,
+   "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 1.0,
    "native_route_hit_recall": 1.0,
    "native_source_hit_recall": 1.0,
@@ -5682,13 +5695,13 @@
      "route_hit": true,
      "routed_hit": [
       "engine:STATE_CONTRACT_WORLD_MODEL",
-      "engine:PREDICTIVE_HOARE_CONTRACT",
-      "engine:GUIDE_ACTION_GRAMMAR_INDUCER"
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
+      "engine:PREDICTIVE_HOARE_CONTRACT"
      ],
      "routed_top": [
       "engine:STATE_CONTRACT_WORLD_MODEL",
-      "engine:PREDICTIVE_HOARE_CONTRACT",
-      "engine:OSWORLD_BROWSER_OPS"
+      "engine:LEAPFROG_W38_OSWORLD_VERIFIED_LEDGER",
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
      ],
      "source_hit": true,
      "source_top": [
@@ -5706,12 +5719,12 @@
      "routed_hit": [
       "engine:PREDICTIVE_HOARE_CONTRACT",
       "engine:STATE_CONTRACT_WORLD_MODEL",
-      "engine:C_ASAN_CEGIS_REPAIR"
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
      ],
      "routed_top": [
       "engine:PREDICTIVE_HOARE_CONTRACT",
       "engine:STATE_CONTRACT_WORLD_MODEL",
-      "code.patch.tree_sitter.verify.v1"
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
      ],
      "source_hit": true,
      "source_top": [
@@ -5721,13 +5734,16 @@
      ]
     },
     {
-     "coverage": 0.2,
+     "coverage": 1.0,
      "hit": true,
      "kind": "frontier",
      "query": "forecast whether an outcome will follow from this plan",
-     "route_hit": false,
-     "routed_hit": [],
+     "route_hit": true,
+     "routed_hit": [
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
+     ],
      "routed_top": [
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
       "python.source.crossfile_edit.choreograph.v1"
      ],
      "source_hit": true,
@@ -5746,12 +5762,12 @@
      "routed_hit": [
       "engine:STATE_CONTRACT_WORLD_MODEL",
       "engine:PREDICTIVE_HOARE_CONTRACT",
-      "engine:GUIDE_ACTION_GRAMMAR_INDUCER"
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
      ],
      "routed_top": [
       "engine:STATE_CONTRACT_WORLD_MODEL",
       "engine:PREDICTIVE_HOARE_CONTRACT",
-      "engine:FINANCE_QUANTITATIVE_ALGEBRA"
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL"
      ],
      "source_hit": true,
      "source_top": [
@@ -5784,19 +5800,20 @@
      ]
     },
     {
-     "coverage": 0.75,
+     "coverage": 1.0,
      "hit": true,
      "kind": "native",
      "query": "falsify the control loop hypothesis",
      "route_hit": true,
      "routed_hit": [
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
       "engine:AUTONOMOUS_AWAKE_LOOP",
       "engine:LEAPFROG_W36_ERROR_AWARE_MEALY_HCU"
      ],
      "routed_top": [
+      "engine:LEAPFROG_W38_SAFE_ACTION_WORLD_MODEL",
       "software.repair.loop.cegis_hypothesis.v1",
-      "python.software.repair.loop.strict_progress.ast.v1",
-      "python.software.repair.loop.coupled.ast.v1"
+      "python.software.repair.loop.strict_progress.ast.v1"
      ],
      "source_hit": true,
      "source_top": [

@@ -6346,11 +6346,12 @@ class UnifiedModel:
             rubin_observations=rubin_observations,
         )
 
-    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
-        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+    def probe_os_isolation(self, *, budget_s: float = 30.0, seccomp: bool = True) -> dict[str, Any]:
+        """Wave 37+38: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`,
+        classic BPF `seccomp` allowlist) 20-attempt adversarial escape probe."""
         from canonical.runtime import os_isolation_v1
 
-        return os_isolation_v1.probe(budget_s=budget_s)
+        return os_isolation_v1.probe(budget_s=budget_s, seccomp=seccomp)
 
     def execute_confined_computer_use(
         self,
@@ -6361,10 +6362,15 @@ class UnifiedModel:
         budget_s: float = 15.0,
         allow_network: bool = False,
         verify_effect: bool = True,
+        seccomp: bool = True,
+        auto_compile_refusal: bool = True,
+        webmcp_tools: Mapping[str, Mapping[str, Any]] | None = None,
         initial_marking: Mapping[str, int] | None = None,
         transitions: Mapping[str, Mapping[str, Any]] | None = None,
     ) -> dict[str, Any]:
-        """Wave 37: Real OS kernel-confined 3-channel HCU executor with Ring-0 byte-effect verification & CoW rollback."""
+        """Wave 37+38: Real OS kernel-confined (`CapEff=0` + `seccomp` BPF) 4-channel HCU executor
+        (`WebMCP > Programmatic > Semantic > Visual`) with Agent-S4 Refusal-as-Interface-Compiler,
+        Ring-0 byte-effect verification & atomic CoW rollback."""
         from canonical.runtime.futamura_leapfrog_kernel_v1 import (
             ConfinedHybridComputerUseExecutor,
             HybridComputerUsePetriSupervisor,
@@ -6374,10 +6380,15 @@ class UnifiedModel:
             initial_marking=initial_marking,
             transitions=transitions,
         )
-        ex = ConfinedHybridComputerUseExecutor(
-            supervisor=sup,
-            belief_bus=self._get_futamura_cascade().belief_bus,
-        )
+        ex = getattr(self, "_wave38_confined_hcu", None)
+        if ex is None or initial_marking is not None or transitions is not None or webmcp_tools is not None:
+            ex = ConfinedHybridComputerUseExecutor(
+                supervisor=sup,
+                belief_bus=self._get_futamura_cascade().belief_bus,
+                webmcp_tools=webmcp_tools,
+            )
+            if initial_marking is None and transitions is None and webmcp_tools is None:
+                self._wave38_confined_hcu = ex
         return ex.execute_episode(
             work_dir,
             steps,
@@ -6385,6 +6396,8 @@ class UnifiedModel:
             budget_s=budget_s,
             allow_network=allow_network,
             verify_effect=verify_effect,
+            seccomp=seccomp,
+            auto_compile_refusal=auto_compile_refusal,
         )
 
     def solve_multifile_repo_futamura(
@@ -6397,11 +6410,17 @@ class UnifiedModel:
         auto_compile: bool = True,
         apply_to_disk: bool = True,
         use_portfolio_fallback: bool = False,
+        use_residual_wall_closers: bool = True,
+        use_repo_component_petri: bool = True,
+        reject_vacuous_verifier: bool = False,
+        untrusted_proposer: Callable[[Mapping[str, Any]], Sequence[Mapping[str, str]]] | None = None,
         alpha: float = 0.05,
         timeout_s: float = 10.0,
     ) -> dict[str, Any]:
-        """Wave 37: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
-        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST synthesis + Ring-0 Gate + compile-back)."""
+        """Wave 37+38: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
+        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST + 13-law statement-shaped
+        residual wall closers + repo component Petri + anti-vacuous verifier audit + optional
+        pluggable Rung-3 proposer + Ring-0 Gate + automatic Rung-0 compile-back)."""
         from canonical.runtime.futamura_leapfrog_kernel_v1 import MultifileFutamuraRepoSolver
 
         solver = MultifileFutamuraRepoSolver(cascade=self._get_futamura_cascade())
@@ -6413,9 +6432,136 @@ class UnifiedModel:
             auto_compile=auto_compile,
             apply_to_disk=apply_to_disk,
             use_portfolio_fallback=use_portfolio_fallback,
+            use_residual_wall_closers=use_residual_wall_closers,
+            use_repo_component_petri=use_repo_component_petri,
+            reject_vacuous_verifier=reject_vacuous_verifier,
+            untrusted_proposer=untrusted_proposer,
             alpha=alpha,
             timeout_s=timeout_s,
         )
+
+    def solve_typed_cegis(
+        self,
+        spec: Mapping[str, Any],
+        *,
+        max_depth: int = 3,
+        max_iter: int = 20,
+        type_env: Mapping[str, str] | None = None,
+        concepts: Sequence[Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Type-pruned CEGIS(T) + composition concept bridge + adaptive constant V9 solver (`K3=0`)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import solve_typed_cegis_and_concepts
+
+        return solve_typed_cegis_and_concepts(
+            spec,
+            max_depth=max_depth,
+            max_iter=max_iter,
+            type_env=type_env,
+            concepts=concepts,
+        )
+
+    def _get_non_malleable_memory_bus(self) -> Any:
+        bus = getattr(self, "_wave38_memory_bus", None)
+        if bus is None:
+            from canonical.swe_kernel.canonical_memory_crystallizer_v1 import VerificationFirstMemoryBus
+
+            bus = VerificationFirstMemoryBus()
+            bus._wave36_dbsp_bus = self._get_futamura_cascade().belief_bus
+            self._wave38_memory_bus = bus
+        return bus
+
+    def non_malleable_memory_op(
+        self,
+        operation: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Execute a Non-Malleable Memory OS operation (TMA-NM origin binding, GovMem
+        anti-correlation promotion, A-TMA anti-ghost-memory state view, SkillApt counterfactual
+        activation, <96 hot-tier cap, or Bicameral Sleep Cycle) on Spine `0G`."""
+        from canonical.swe_kernel.canonical_memory_crystallizer_v1 import execute_memory_operation
+
+        return execute_memory_operation(self._get_non_malleable_memory_bus(), operation, payload)
+
+    def bicameral_sleep_cycle(
+        self,
+        *,
+        max_hot_skills: int = 96,
+        mine_algebraic_rewrites: bool = False,
+        weight_update_check: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 38: Two-phase Consolidate-and-Dream sleep cycle (Phase A symbolic consolidation +
+        <96 hot-tier cap + rewrite mining; Phase B origin integrity audit + out-of-train weight gate)."""
+        return self._get_non_malleable_memory_bus().bicameral_sleep_cycle(
+            max_hot_skills=max_hot_skills,
+            mine_algebraic_rewrites=mine_algebraic_rewrites,
+            weight_update_check=weight_update_check,
+        )
+
+    def discover_dark_matter(
+        self,
+        query: str,
+        *,
+        top_k: int = 8,
+        max_hot: int = 96,
+    ) -> dict[str, Any]:
+        """Wave 38 (OpenViking `viking://` L0/L1/L2 Progressive Dark-Matter Discovery):
+        Maps unfamiliar frontier terms or plain goals across:
+          - L0: Cross-disciplinary concept aliases (`CROSS_DISCIPLINARY_CONCEPT_MAP`)
+          - L1: Active hot-tier routed engines & bound capabilities (capped at `<= max_hot`)
+          - L2: Full `source_index` + `extended_source_index` dark-matter koan/hidden modules
+        Zero model calls, sub-millisecond to few-millisecond deterministic lookup."""
+        from canonical.runtime.unified_hidden_capability_federation_v1 import (
+            resolve_cross_disciplinary_concept,
+        )
+
+        t0 = time.perf_counter()
+        k = max(1, int(top_k))
+        l0_concepts = resolve_cross_disciplinary_concept(query, top_k=min(5, k))
+        l1_routed = self.route(query, top_k=min(k, max_hot))
+        l2_sources = self.find_source(query, top_k=k)
+
+        q_toks = set(tokenize(query))
+        ext_hits: list[tuple[float, dict[str, Any]]] = []
+        for row in (self.model.get("extended_source_index") or ()):
+            if not isinstance(row, Mapping):
+                continue
+            terms = row.get("terms") or {}
+            overlap = sum(float(terms.get(t, 0)) for t in q_toks if t in terms)
+            if overlap > 0.0:
+                ext_hits.append(
+                    (
+                        overlap,
+                        {
+                            "path": row.get("path"),
+                            "tree": row.get("tree"),
+                            "summary": row.get("summary", ""),
+                            "classification": row.get("classification"),
+                            "score": round(overlap, 3),
+                        },
+                    )
+                )
+        ext_hits.sort(key=lambda item: (-item[0], str(item[1].get("path") or "")))
+        l2_extended = [item[1] for item in ext_hits[:k]]
+
+        best_concept = l0_concepts.get("best") or {}
+        recommended_engines = list(best_concept.get("engines") or ())
+        for cand in (l1_routed.get("candidates") or ()):
+            cid = str(cand.get("id") or "")
+            if cid and cid not in recommended_engines:
+                recommended_engines.append(cid)
+
+        return {
+            "schema": "BRAIN_PROGRESSIVE_DARK_MATTER_DISCOVERY_V1",
+            "query": str(query),
+            "l0_cross_disciplinary": l0_concepts,
+            "l1_hot_routes": (l1_routed.get("candidates") or ())[:k],
+            "l2_runtime_sources": (l2_sources.get("candidates") or ())[:k],
+            "l2_extended_dark_matter": l2_extended,
+            "recommended_targets": recommended_engines[:k],
+            "hot_tier_cap": int(max_hot),
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
 
 
 # --------------------------------------------------------------------------- helpers
