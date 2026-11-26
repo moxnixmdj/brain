@@ -1,11 +1,11 @@
 {
  "artifact": {
-  "bytes": 13479176,
+  "bytes": 13481450,
   "capabilities": 462,
   "digest": {
    "algorithm": "sha256",
    "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-   "value": "4ca5cac221a44933a2d04a0c8f37c3af5d3f85056ef47f3ad1a728ac73e07f82"
+   "value": "7f9ec5c2bb4bbaa72356f6607056e239568e88cf991ee905c48c9940a054024c"
   },
   "path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
  },
@@ -15,24 +15,24 @@
   "total_wall_clock_s": 60.0
  },
  "checks": {
-  "load_p95_ms": 309.4683,
-  "query_p95_ms": 1.4093,
-  "total_wall_clock_s": 1.046
+  "load_p95_ms": 275.3905,
+  "query_p95_ms": 1.6881,
+  "total_wall_clock_s": 1.021
  },
  "cost_of_asking": {
   "agent_loop_tokens_per_question_for_comparison": 28142,
-  "load_ms": 309.468,
+  "load_ms": 275.39,
   "model_calls": 0,
   "network_calls": 0,
   "prompt_tokens_per_question": 0,
-  "total_wall_clock_s": 1.046,
-  "wrap_ms": 214.123
+  "total_wall_clock_s": 1.021,
+  "wrap_ms": 176.214
  },
- "measured_at_utc": "2026-11-26T03:00:26Z",
+ "measured_at_utc": "2026-11-26T03:07:03Z",
  "promotion": {
   "callable_now": 31,
   "candidates": 849,
-  "lookup_ms_per_call": 9e-05
+  "lookup_ms_per_call": 8.7e-05
  },
  "queries": [
   "archive tar gz create from manifest",
@@ -51,35 +51,35 @@
  "questions": {
   "composite_can_you_do_this": {
    "answered": 480,
-   "max_ms": 1.5924,
+   "max_ms": 1.6224,
    "n": 480,
-   "p50_ms": 0.0147,
-   "p95_ms": 0.9989,
+   "p50_ms": 0.0151,
+   "p95_ms": 1.038,
    "queries": 12
   },
   "find_any_source": {
    "empty_answers": 0,
-   "max_ms": 2.734,
-   "mean_ms": 0.3779,
+   "max_ms": 2.6886,
+   "mean_ms": 0.4367,
    "n": 480,
-   "p50_ms": 0.0553,
-   "p95_ms": 1.4093
+   "p50_ms": 0.0534,
+   "p95_ms": 1.6881
   },
   "find_source": {
    "empty_answers": 0,
-   "max_ms": 2.5704,
-   "mean_ms": 0.2682,
+   "max_ms": 1.9369,
+   "mean_ms": 0.2808,
    "n": 480,
-   "p50_ms": 0.0197,
-   "p95_ms": 0.9753
+   "p50_ms": 0.0196,
+   "p95_ms": 1.0317
   },
   "route": {
    "empty_answers": 0,
-   "max_ms": 12.2595,
-   "mean_ms": 0.1746,
+   "max_ms": 15.1507,
+   "mean_ms": 0.1866,
    "n": 480,
-   "p50_ms": 0.1637,
-   "p95_ms": 0.202
+   "p50_ms": 0.1636,
+   "p95_ms": 0.2157
   }
  },
  "schema": "PROJECT_BRAIN_RUNTIME_ANSWER_RECEIPT_V1",
