@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1",
+ "elapsed_ms": 250.92,
+ "independent_run_reference": {
+  "github_run_id": 45738094015,
+  "oidc_claims": {
+   "actor": "brain-automation[bot]",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "push",
+   "head_ref": "",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "e0ed6b16-1573-43a7-8958-0674b13b0dea",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "45738094015",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/swe_kernel_organ_bridge_v1.py",
+ "module_sha256": "96086a1aa3b78c645c736ed6fa1c472f8933bab93d6784f79003165d49635ed3",
+ "producer_ran_by": "harvest-local-session",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.swe_kernel_organ_bridge_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "f5f37ec85f29b2cc0f084025184f24c463ecb1cc158aefa5a68c2d958ef4b0d5",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "f5f37ec85f29b2cc0f084025184f24c463ecb1cc158aefa5a68c2d958ef4b0d5"
+}

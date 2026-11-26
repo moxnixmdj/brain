@@ -1,0 +1,36 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1",
+ "elapsed_ms": 4.374,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {
+  "changed_paths": [
+   "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07/office-excel/scripts/read_excel.py"
+  ],
+  "output_path": "canonical/astra_runtime/tmp/harvest_lift_20261124/impact.json",
+  "source_root": "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07/office-excel/scripts",
+  "test_roots": [
+   "canonical/capabilities/internalized/artifact_creation/aws_sample_agent_skills_dd0bdc07/office-excel/scripts"
+  ]
+ },
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/python_change_impact_testselect.py",
+ "module_sha256": "ac8493c4fc864b7e088448c642593d2400fb086c514e4b3c887fd5eb50f519ed",
+ "observed": {
+  "output_verified": true
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.python_change_impact_testselect.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 11,
+ "result_sha256": "67d082ba6fdca1e79e67548499682c3e268f3ed8327248a04a289646080496c6",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

@@ -73,6 +73,9 @@ NON_CLAIMS = (
 )
 
 
+ANATOMY_SCHEMA = "PROJECT_BRAIN_ANATOMY_V1"
+
+
 class UnifiedModelError(ValueError):
     """The artifact or the request violated the model contract."""
 
@@ -261,13 +264,14 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         if kept:
             filtered_index[s_tok] = kept
     return {
-        "core_format_v": 4,
+        "core_format_v": 5,
         "raw_sha256": raw_sha,
         "schema": str(model.get("schema") or ""),
         "model_id": model.get("model_id"),
         "model_version": model.get("model_version"),
         "digest_value": str((model.get("digest") or {}).get("value") or ""),
         "counts": dict(model.get("counts") or {}),
+        "anatomy": dict(model.get("anatomy") or {}),
         "objective_verbatim": (model.get("objective") or {}).get("verbatim"),
         "capabilities_map": caps_map,
         "engines_map": engines_map,
@@ -396,7 +400,7 @@ class UnifiedModel:
     def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        if _core_only and model.get("core_format_v") == 4:
+        if _core_only and model.get("core_format_v") == 5:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
@@ -648,6 +652,8 @@ class UnifiedModel:
                 "extended_source_index_modules": ext_src_len,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
+                "harvested_capabilities": declared.get("harvested_capabilities"),
+                "frontier_leapfrog_organs": 17,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -659,6 +665,143 @@ class UnifiedModel:
                 "ownership_credit_delta": 0,
                 "terminal_credit_delta": 0,
             },
+        }
+
+    # --------------------------------------------------------- frontier organs
+
+    def frontier_organs(self) -> dict[str, Any]:
+        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        swe_organs = bridge.list_organs()
+        plays = [
+            {
+                "organ_id": "play_1_contract_world_model",
+                "module_path": "canonical/runtime/state_contract_world_model_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "State-as-contract desktop effect-delta world model with volatile canonicalization",
+            },
+            {
+                "organ_id": "play_2_law_consolidation",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+            },
+            {
+                "organ_id": "play_3_abstain_skill_induction",
+                "module_path": "canonical/runtime/abstain_gated_skill_induction_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Abstain-gated structural AST skill induction over 40 real-commit episodes",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+        ]
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FRONTIER_ORGANS",
+            "swe_kernel_organs_count": len(swe_organs),
+            "leapfrog_plays_count": len(plays),
+            "total_organs": len(swe_organs) + len(plays),
+            "swe_kernel_organs": swe_organs,
+            "leapfrog_plays": plays,
+            "model_dependency_count": 0,
+        }
+
+    def invoke_frontier_organ(
+        self,
+        organ_id: str,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        req = dict(payload or {})
+        if organ_id == "play_1_contract_world_model":
+            from canonical.runtime import state_contract_world_model_v1 as p1
+
+            return p1.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation":
+            from canonical.runtime import gradient_free_law_consolidation_v1 as p2
+
+            return p2.run(req, ROOT)
+        if organ_id == "play_3_abstain_skill_induction":
+            from canonical.runtime import abstain_gated_skill_induction_v1 as p3
+
+            return p3.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate":
+            from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
+
+            return p6.run(req, ROOT)
+
+        from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
+
+        if organ_id == "probe_all_swe_kernel_organs":
+            return bridge.probe_all_organs(ROOT)
+        return bridge.invoke_organ(organ_id, req, ROOT)
+
+    def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
+        """Where this repository implements each frontier function, by its own words."""
+        block = self._core_meta.get("anatomy")
+        if not block and self._model_loaded:
+            block = self._model_loaded.get("anatomy")
+        if not block:
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "reason": "MODEL_HAS_NO_ANATOMY_BLOCK__RECOMPILE_WITH_DOMAIN_ATLAS",
+                "domains": {},
+                "capability": False,
+                "executable": False,
+            }
+        domains = block.get("domains") or {}
+        if domain is not None:
+            row = domains.get(domain)
+            if row is None:
+                return {
+                    "schema": ANATOMY_SCHEMA,
+                    "operation": "ANATOMY",
+                    "query": domain,
+                    "reason": "UNKNOWN_DOMAIN__KNOWN: " + ", ".join(sorted(domains)),
+                    "domains": {},
+                    "capability": False,
+                    "executable": False,
+                }
+            rows = list(row.get("top") or [])[: max(1, int(top_k))]
+            return {
+                "schema": ANATOMY_SCHEMA,
+                "operation": "ANATOMY",
+                "query": domain,
+                "frontier_function": row.get("frontier_function"),
+                "counts": {
+                    "candidates": row.get("candidates"),
+                    "indexed_all": row.get("indexed_all"),
+                    "harvested_all": row.get("harvested_all"),
+                    "hidden_share_all": row.get("hidden_share_all"),
+                },
+                "modules": rows,
+                "reachability": (block.get("reachability") or {}).get(domain),
+                "capability": False,
+                "executable": False,
+                "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
+            }
+        return {
+            "schema": ANATOMY_SCHEMA,
+            "operation": "ANATOMY",
+            "domains": {
+                name: {
+                    "frontier_function": row.get("frontier_function"),
+                    "candidates": row.get("candidates"),
+                    "top_module": ((row.get("top") or [{}])[0]).get("path"),
+                }
+                for name, row in sorted(domains.items())
+            },
+            "reachability": block.get("reachability") or {},
+            "claim_limit": block.get("claim_limit"),
+            "capability": False,
+            "executable": False,
+            "reason": "ANATOMY_NAVIGATION__NOT_ADMISSION",
         }
 
     # ------------------------------------------------------------------- route
@@ -2231,7 +2374,7 @@ def open_model(
             core = marshal.loads(cache_file.read_bytes())
             if (
                 isinstance(core, dict)
-                and core.get("core_format_v") == 4
+                and core.get("core_format_v") == 5
                 and core.get("raw_sha256") == raw_sha
                 and core.get("schema") == SCHEMA
             ):
@@ -3291,6 +3434,9 @@ def main(argv: list[str] | None = None) -> int:
     recall_p = sub.add_parser("recall", help="just-in-time knowledge retrieval")
     recall_p.add_argument("query")
     recall_p.add_argument("--top-k", type=int, default=5)
+    organs_p = sub.add_parser("organs", help="list or invoke unified swe_kernel organs and leapfrog plays")
+    organs_p.add_argument("--invoke", default="", help="organ_id or play_id to execute")
+    organs_p.add_argument("--inputs", default="{}", help="JSON object of organ arguments")
     solve_p = sub.add_parser("solve", help="route and execute")
     solve_p.add_argument("goal")
     solve_p.add_argument("--inputs", default="{}", help="JSON object of inputs")
@@ -3309,6 +3455,21 @@ def main(argv: list[str] | None = None) -> int:
     if ns.command == "recall":
         _print(model.recall(ns.query, top_k=ns.top_k))
         return 0
+    if ns.command == "organs":
+        if not ns.invoke:
+            _print(model.frontier_organs())
+            return 0
+        try:
+            organ_inputs = json.loads(ns.inputs)
+        except json.JSONDecodeError:
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_JSON"})
+            return 2
+        if not isinstance(organ_inputs, dict):
+            _print({"status": "FAIL_CLOSED", "reason": "INPUTS_NOT_OBJECT"})
+            return 2
+        res = model.invoke_frontier_organ(ns.invoke, organ_inputs)
+        _print(res)
+        return 0 if res.get("status") not in ("UNKNOWN_ORGAN", "FAIL_CLOSED", "ERROR") else 1
     try:
         inputs = json.loads(ns.inputs)
     except json.JSONDecodeError:
