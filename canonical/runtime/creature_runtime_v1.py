@@ -998,98 +998,79 @@ class Creature:
             self._unified_model = m
         return self._unified_model
 
+    _SPINE_ROUTER_METHODS = {
+        "swe_repair": "route_swe_repair",
+        "env_goal": "route_env_goal",
+        "cu_task": "route_cu_task",
+        "typed_chain": "route_typed_chain",
+        "harvested_surface": "route_harvested_surface",
+        "version_space": "route_version_space_task",
+        "register_env_goal": "route_register_env_goal",
+        "federated_engine": "route_federated_engine",
+        "one_shot_learning": "route_one_shot_learning",
+        "applicability": "route_applicability_check",
+        "refusal_spec": "route_refusal_specification",
+        "speculative_cow": "route_speculative_cow_race",
+        "cu_four_tier": "route_four_tier_cu",
+        "mutation_gate": "route_mutation_admission_gate",
+        "event_memory": "route_verified_event_memory",
+        "durable_commit": "route_durable_commit",
+        "env_broker": "route_env_broker",
+        "angelic_repair": "route_angelic_counterfactual_repair",
+        "crossfile_repair": "route_crossfile_choreography",
+        "compile_goal_contract": "route_compile_goal_contract",
+        "branch_mental_model": "route_branch_mental_model",
+        "check_mode_oracle": "route_check_mode_oracle",
+        "counterexample_experiment": "route_counterexample_experiment",
+        "run_relation_goal": "route_run_relation_goal",
+        "one_experience": "route_one_experience_consequences",
+        "self_evolution_firewall": "route_self_evolution_firewall",
+        "curate_skills": "route_curate_skills",
+        "observe_drift": "route_observe_drift",
+        "cross_host_transfer": "route_cross_host_transfer",
+        "one_demo_identify": "route_one_demonstration_identify",
+        "trace_expression_repair": "route_trace_expression_repair",
+        "multi_file_causal_localize": "route_multi_file_causal_localize",
+        "computer_env": "route_discover_computer_env",
+        "admit_route": "route_admit_live",
+        "semantic_plan": "route_semantic_plan",
+        "derive_execution_adapter": "route_derive_execution_adapter",
+        "contrast_memory_laws": "route_contrast_memory_laws",
+        "filing_key_hindsight_jitrl": "route_filing_key_hindsight_jitrl",
+        "producer_lineage_holes": "route_producer_lineage_holes",
+        "verifier_pinning_oracles": "route_verifier_pinning_oracles",
+        "purpose_gate_arbitrage": "route_purpose_gate_arbitrage",
+        "two_move_horizon_cu": "route_two_move_horizon_cu",
+    }
+
     def register_spine_task(self, work_id: str, kind: str, spec: Mapping[str, Any]) -> None:
         """Register a structured frontier-spine task spec to execute when `work_id` is worked on the board."""
         self._spine_tasks[str(work_id)] = {"kind": str(kind).lower().strip(), "spec": dict(spec)}
 
+    def solve(self, goal: str, **kwargs: Any) -> dict[str, Any]:
+        """Single unified runtime front door delegating directly to `UnifiedModel.solve()`."""
+        res = self.unified_model.solve(goal, **kwargs)
+        self._save()
+        return res
+
     def route_goal_via_spine(self, kind: str, **kwargs: Any) -> dict[str, Any]:
-        """Execute a task through the unified frontier spines (`0D`-`0I`) and persist memory updates."""
+        """Execute a task through the unified frontier spines (`0D`-`0I`) + hidden arsenal in O(1) dispatch."""
         k = str(kind or "swe_repair").lower().strip()
-        br = self.boundary_router
-        if k == "swe_repair":
-            res = br.route_swe_repair(**kwargs)
-        elif k == "env_goal":
-            res = br.route_env_goal(**kwargs)
-        elif k == "cu_task":
-            res = br.route_cu_task(**kwargs)
-        elif k == "typed_chain":
-            res = br.route_typed_chain(**kwargs)
-        elif k == "harvested_surface":
-            res = br.route_harvested_surface(**kwargs)
-        elif k == "version_space":
-            res = br.route_version_space_task(**kwargs)
-        elif k == "register_env_goal":
-            res = br.route_register_env_goal(**kwargs)
-        elif k == "federated_engine":
-            res = br.route_federated_engine(**kwargs)
-        elif k == "one_shot_learning":
-            res = br.route_one_shot_learning(**kwargs)
-        elif k == "applicability":
-            res = br.route_applicability_check(**kwargs)
-        elif k == "refusal_spec":
-            res = br.route_refusal_specification(**kwargs)
-        elif k == "speculative_cow":
-            res = br.route_speculative_cow_race(**kwargs)
-        elif k == "cu_four_tier":
-            res = br.route_four_tier_cu(**kwargs)
-        elif k == "mutation_gate":
-            res = br.route_mutation_admission_gate(**kwargs)
-        elif k == "event_memory":
-            res = br.route_verified_event_memory(**kwargs)
-        elif k == "durable_commit":
-            res = br.route_durable_commit(**kwargs)
-        elif k == "env_broker":
-            res = br.route_env_broker(**kwargs)
-        elif k == "angelic_repair":
-            res = br.route_angelic_counterfactual_repair(**kwargs)
-        elif k == "crossfile_repair":
-            res = br.route_crossfile_choreography(**kwargs)
-        elif k == "compile_goal_contract":
-            res = br.route_compile_goal_contract(**kwargs)
-        elif k == "branch_mental_model":
-            res = br.route_branch_mental_model(**kwargs)
-        elif k == "check_mode_oracle":
-            res = br.route_check_mode_oracle(**kwargs)
-        elif k == "counterexample_experiment":
-            res = br.route_counterexample_experiment(**kwargs)
-        elif k == "run_relation_goal":
-            res = br.route_run_relation_goal(**kwargs)
-        elif k == "one_experience":
-            res = br.route_one_experience_consequences(**kwargs)
-        elif k == "self_evolution_firewall":
-            res = br.route_self_evolution_firewall(**kwargs)
-        elif k == "curate_skills":
-            res = br.route_curate_skills(**kwargs)
-        elif k == "observe_drift":
-            res = br.route_observe_drift(**kwargs)
-        elif k == "cross_host_transfer":
-            res = br.route_cross_host_transfer(**kwargs)
-        elif k == "one_demo_identify":
-            res = br.route_one_demonstration_identify(**kwargs)
-        elif k == "trace_expression_repair":
-            res = br.route_trace_expression_repair(**kwargs)
-        elif k == "multi_file_causal_localize":
-            res = br.route_multi_file_causal_localize(**kwargs)
-        elif k == "computer_env":
-            res = br.route_discover_computer_env(**kwargs)
-        elif k == "admit_route":
-            res = br.route_admit_live(**kwargs)
-        elif k == "semantic_plan":
-            res = br.route_semantic_plan(**kwargs)
-        elif k == "derive_execution_adapter":
-            res = br.route_derive_execution_adapter(**kwargs)
-        elif k == "contrast_memory_laws":
-            res = br.route_contrast_memory_laws(**kwargs)
-        elif k == "filing_key_hindsight_jitrl":
-            res = br.route_filing_key_hindsight_jitrl(**kwargs)
-        elif k == "producer_lineage_holes":
-            res = br.route_producer_lineage_holes(**kwargs)
-        elif k == "verifier_pinning_oracles":
-            res = br.route_verifier_pinning_oracles(**kwargs)
-        elif k == "purpose_gate_arbitrage":
-            res = br.route_purpose_gate_arbitrage(**kwargs)
-        elif k == "two_move_horizon_cu":
-            res = br.route_two_move_horizon_cu(**kwargs)
+        router_attr = self._SPINE_ROUTER_METHODS.get(k)
+        if router_attr is not None:
+            res = getattr(self.boundary_router, router_attr)(**kwargs)
+        elif k == "checkability_oracle":
+            ws = kwargs.pop("workspace_root", _REPO_ROOT)
+            res = self.unified_model.checkability_oracle_forge(ws, **kwargs)
+        elif k == "spacetime_sygus":
+            res = self.unified_model.spacetime_oe_sygus_repair(kwargs.pop("workspace_root", None), **kwargs)
+        elif k == "shadow_interface_cu":
+            ws = kwargs.pop("workspace_root", _REPO_ROOT)
+            res = self.unified_model.shadow_interface_computer_use(ws, **kwargs)
+        elif k == "active_mealy_question":
+            res = self.unified_model.active_mealy_question_learner(**kwargs)
+        elif k == "dbsp_bitemporal_forge":
+            res = self.unified_model.dbsp_bitemporal_forge(**kwargs)
         elif k == "oracle_audit":
             from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
 
@@ -1285,8 +1266,10 @@ class Creature:
         max_new_concepts: int = 6,
         memrl_outcomes: Sequence[Mapping[str, Any]] = (),
         recheck_rules: Sequence[Mapping[str, Any]] = (),
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] = (),
+        forge_entry: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Run `0G` sleep-time E-Graph/E-Stitch + Wave 33 Memini/MemRL/APEX-EM + LM-Sleep rejection consolidation."""
+        """Run `0G` sleep-time E-Graph/E-Stitch + Memini/MemRL/APEX-EM + DBSP Z-set + Mutant-Killing Forge."""
         res = self.memory_bus.sleep_consolidate(
             program_sources=program_sources,
             min_nodes=min_nodes,
@@ -1303,6 +1286,34 @@ class Creature:
         res["memini_memrl_apex"] = memini_res
         if rechecked:
             res["lm_sleep_rechecked"] = rechecked
+        if zset_deltas or forge_entry is not None:
+            res["dbsp_forge"] = self.unified_model.dbsp_bitemporal_forge(
+                zset_deltas=zset_deltas,
+                forge_entry=forge_entry,
+                workspace_root=_REPO_ROOT,
+            )
+        self._save()
+        return res
+
+    def sleep_forge_dormant_capabilities(
+        self,
+        *,
+        zset_deltas: Sequence[tuple[str, str, str, int, int | None, int]] = (),
+        query_seed: str | None = None,
+        query_t_valid: int | None = None,
+        forge_entry: Mapping[str, Any] | None = None,
+        seed_cases: list[Any] | None = None,
+        workspace_root: pathlib.Path | str = _REPO_ROOT,
+    ) -> dict[str, Any]:
+        """Promote dormant repo callables via adversarial mutant killing (`capability_forge_v1`) + DBSP Z-set memory."""
+        res = self.unified_model.dbsp_bitemporal_forge(
+            zset_deltas=zset_deltas,
+            query_seed=query_seed,
+            query_t_valid=query_t_valid,
+            forge_entry=forge_entry,
+            seed_cases=seed_cases,
+            workspace_root=workspace_root,
+        )
         self._save()
         return res
 
