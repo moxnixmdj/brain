@@ -196,3 +196,39 @@ broken functions at ~0.9 s and zero LLM calls per verified patch. The family is
 this is NOT SWE-bench, NOT GUI, NOT long-horizon. Reach on certified HARD-51:
 still 0 — unchanged by everything above; the axis improved is candidate reach
 per millisecond, which is what the loop actually gates on.
+
+## §9 The residual miss was a verifier LIE — pyc staleness (next "go" round)
+
+Seed-99's `x if x > 3 else 4` did not resist synthesis: every layer solved it
+(OBS body, `return 4` fallback, both assert orders). The loop kept FAILING a
+correct file because **CPython's pyc invalidation keys on (mtime-seconds, size)
+— `return 4` over `return 0` is the same 19 bytes in the same second**, so the
+test ran the PREVIOUS bytecode and reported `0 != 4` about code no longer on
+disk. `unittest` re-run on the correct file failed the same way; the kernel
+output was a lie about kernel truth. Same-size patches are the MOST COMMON
+mutation class (every operator swap), so this poisoned exactly the fast in-place
+write+verify rhythm the loop is built on.
+
+The repo already knew: FIVE bound_capabilities runners set
+`PYTHONDONTWRITEBYTECODE=1`; the probe even measures the venv-python mount bug
+around the launcher. What nobody had done was apply it to the LOOP:
+- `solve_v1.act()` host-fallback: env added.
+- All three planner renderers (H1 AST patch, H2 synth patch, verify_
+  postconditions): clear stale `__pycache__/*.pyc` once at program start (covers
+  pyc predating any fix, e.g. written by the probe step) and run unittest with
+  writes disabled — inside the RENDERED programs, so it holds under BOTH carriers
+  (the confined launcher takes no env, and confine_v1 is a security module not
+  to be touched for this).
+
+Verdict after fix, four seeds x 10 tasks, bench re-verify hardened identically:
+**40/40 (seeds 65/99/7/2026), mean ~920 ms, 0 LLM samples, 0 tokens.** The
+parts[:6] cap was NOT the culprit and stays as-is (falsifier #2-style honesty:
+the recorded "next lever" was wrong; the trace said so).
+
+Tests: 9/9 synth+e2e, 9/9 loop suites, planner suite = identical 3 pre-existing
+failures (stash-verified baseline), 59 passed + 927 subtests.
+
+Lesson, repo-wide: any harness that runs code it just wrote must treat bytecode
+cache as adversarial state. A verifier's word is only as good as its freshest
+read; "insanely fast" loops that re-read through a stale cache are not fast,
+they are wrong at high speed.

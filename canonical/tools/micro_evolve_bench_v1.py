@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import pathlib
 import random
 import subprocess
@@ -78,6 +79,7 @@ def run_task(task, steps: int) -> tuple[bool, float]:
                 [sys.executable, "-m", "unittest", "discover", "-s", ".",
                  "-p", "test*.py"],
                 cwd=ws, capture_output=True, text=True,
+                env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
             )
             ok = r.returncode == 0
         return ok, ms
