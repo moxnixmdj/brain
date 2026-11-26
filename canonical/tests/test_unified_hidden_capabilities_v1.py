@@ -73,7 +73,12 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
             status["counts"]["federated_kernel_engines"],
             len(FEDERATED_KERNEL_DESCRIPTORS),
         )
-        self.assertGreaterEqual(status["counts"]["extended_source_index_modules"], 750)
+        self.assertGreaterEqual(status["counts"]["extended_source_index_modules"], 500)
+        self.assertGreaterEqual(
+            status["counts"]["source_index_modules"]
+            + status["counts"]["extended_source_index_modules"],
+            2750,
+        )
 
         for mode, spec in FEDERATED_KERNEL_DESCRIPTORS.items():
             eid = "engine:" + mode
@@ -108,7 +113,7 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
             inputs={
                 "docx_b64": docx_b64,
                 "old": "Original Clause Alpha",
-                "new": "Amended Clause Omega",
+                "new": "Amended Clause Beta",
             },
         )
         self.assertIs(docx_out["pass"], True)
@@ -116,7 +121,7 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
         edited_bytes = base64.b64decode(docx_out["result"]["output_docx_b64"])
         with zipfile.ZipFile(io.BytesIO(edited_bytes), "r") as zf:
             xml_body = zf.read("word/document.xml").decode("utf-8")
-        self.assertIn("Amended Clause Omega", xml_body)
+        self.assertIn("Amended Clause Beta", xml_body)
         self.assertNotIn("Original Clause Alpha", xml_body)
 
         saccr_out = self.model.solve(

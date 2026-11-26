@@ -1,0 +1,27 @@
+{
+ "capability_id": "canonical.runtime.capability_selection_retrieval_v1.hidden.v1",
+ "elapsed_ms": 261.881,
+ "entrypoint": "run",
+ "executor": "run_adapter_locally_contract",
+ "incremental_spend_usd": 0,
+ "independent_run_reference": null,
+ "independent_verifier": null,
+ "invoked_args": {},
+ "kind": "contract",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/capability_selection_retrieval_v1.py",
+ "module_sha256": "212ec1108d8489de711310d61cb3e80ce7a0aa2b95c99ebc78bb080edb2c996f",
+ "observed": {
+  "status": "NOT_SELECTED"
+ },
+ "outcome": "EXECUTED",
+ "ran_by": "harvest-local-session",
+ "receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.capability_selection_retrieval_v1.hidden.v1__EXECUTION_RECEIPT.json",
+ "result_key_count": 4,
+ "result_sha256": "34ec5ed12cf38287e9b1bf8f3db9b4d6c0864d9f84469f2573e9270c6b7e8d31",
+ "runtime": {
+  "platform": "linux",
+  "python": "3.11.2"
+ },
+ "schema": "PROJECT_BRAIN_CAPABILITY_EXECUTION_RECEIPT_V1"
+}

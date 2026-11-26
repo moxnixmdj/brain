@@ -199,6 +199,82 @@
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"
     },
+    "FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Asked through the front door in one of fifteen plain phrasings, a request to copy a file to a new name, to rename a file to a new name, or to append one line to a file leaves the folder holding exactly what the request determines and nothing else changed; the same request with a word no row accounts for, with a destination that already exists, or naming a file that is not there is refused and the folder is left byte for byte as it was.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "FOLDER_BY_CONSTRUCTION"
+      ],
+      "instances": 500,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/bound_capabilities/file_edit.py": "0d55efa6d0a04025bee525f686e622abf301f198",
+        "canonical/runtime/bound_capabilities/file_ops.py": "7e0cf6a1c83348a032fbf40a623e8a2126a44f70",
+        "canonical/runtime/bound_capabilities/stated_file_path.py": "1d76b8b8a6cf10d5bd27b04ea95778b2577621e8",
+        "canonical/runtime/file_artifact_expectation_v1.py": "37944a7a2467f5069d415d03e9f937b917a62ff7",
+        "canonical/runtime/goal_compiler.py": "2737338025c6ae964e5af7dabd07ca86b80c4e42",
+        "canonical/runtime/goal_front_compiler_v1.py": "555bb25a0fbcac8592e8481b2aa09c7788e88bd1",
+        "canonical/runtime/live_brain_route_admission_v1.py": "1d1585a96d5f40a5dc28fce53262f643ca7fc3f3"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1__47bef8f1ea2618ef.json",
+      "measured_utc": "2026-11-25T22:36:13Z",
+      "oracle_classes": {
+        "ASKED_AGAIN_RELATION": "METAMORPHIC",
+        "FOLDER_BY_CONSTRUCTION": "ANALYTIC_CLOSED_FORM",
+        "UNTOUCHED_AND_BY_THE_ROW": "PROPERTY"
+      },
+      "scope_limits": [
+        "NO phrasing outside the fifteen in the generator's tables; other wordings are mostly refused and that is not measured here",
+        "NO overwriting: a request that asks to replace an existing destination is never generated",
+        "NO directories as source or destination, no destination in another or a missing folder, no absolute paths, no path outside the repository",
+        "NO appended line that is an ordinary English word, contains a quotation mark, or spans lines",
+        "NO files above a few hundred bytes, no binary content, no symbolic links, no concurrent writers",
+        "NO claim about any other file operation, and nothing that starts a program"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "5e907c5001e3adf6180713a178ab3ae0184054fc",
+      "spec_path": "canonical/capabilities/true/specs/FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
+    "FILE_QUESTION_TAUGHT_WORDS_V1": {
+      "canary_pass": "0/0",
+      "carrier": "SANDBOX",
+      "claim": "Asked through the front door, a sentence that names one UTF-8 text file and is otherwise made only of words whose meaning was taught by example answers gets the whole number those words determine for that file (how many, how many different, how many blank, how many containing a stated text, the sum, the largest, the smallest, the length of the longest or shortest line, each optionally after the first); the same sentence with one untaught word in it gets no answer.",
+      "fresh_pass_rate": 1.0,
+      "independent_oracle_ids": [
+        "VALUE_BY_CONSTRUCTION"
+      ],
+      "instances": 500,
+      "kernel_git_blob_shas": {
+        "canonical/runtime/TAUGHT_WORD_LESSONS_V1.json": "c72d3c01fead8c31d02a6488c719b55a5bd69144",
+        "canonical/runtime/TAUGHT_WORD_LEXICON_V1.json": "86be1cd670ba5919d02726e8797060af1930ead7",
+        "canonical/runtime/bound_capabilities/file_question_taught_words.py": "53b8fcf1f3bf63da8c47806c696de6bd4e8719c0",
+        "canonical/runtime/live_brain_route_admission_v1.py": "1d1585a96d5f40a5dc28fce53262f643ca7fc3f3",
+        "canonical/runtime/taught_words_check_v1.py": "039316ffae32457e2a141ae08460d7e50e58f034",
+        "canonical/runtime/taught_words_v1.py": "bc435677a974c3b636a9ff9506481a5d29004d6d"
+      },
+      "latest_receipt": "canonical/capabilities/true/receipts/FILE_QUESTION_TAUGHT_WORDS_V1__21c33d583f3e2682.json",
+      "measured_utc": "2026-11-25T22:37:55Z",
+      "oracle_classes": {
+        "ANSWER_ENVELOPE": "PROPERTY",
+        "DOUBLED_FILE_RELATION": "METAMORPHIC",
+        "VALUE_BY_CONSTRUCTION": "ANALYTIC_CLOSED_FORM"
+      },
+      "scope_limits": [
+        "NO sentence outside the generator's phrase tables: the lexicon holds 28 words and anything else is refused, which is measured only for one inserted word",
+        "NO word order: 'after the first' is never combined with another filter, because the row applies its parts in one fixed order and English does not",
+        "NO whitespace-only lines, tabs, carriage returns, non-UTF-8 bytes, files above 4 MiB, directories, or two files in one sentence",
+        "NO claim that the lessons are sufficient to learn any further word; the learner is not measured here, only the answers the stored lexicon gives",
+        "NO operation that changes a file, and nothing that starts a program"
+      ],
+      "seed_source": "OS_URANDOM",
+      "solver_git_blob_sha": "b01876a44f4f6b6b19b8bf3970239eee8166a89a",
+      "spec_path": "canonical/capabilities/true/specs/FILE_QUESTION_TAUGHT_WORDS_V1.json",
+      "status": "MEASURED_SANDBOX",
+      "verdict": "PASS"
+    },
     "PARETO_FRONTIER_UPDATE_V1": {
       "canary_pass": "0/0",
       "carrier": "SANDBOX",
@@ -275,8 +351,9 @@
         "PRIORITY_SHIFT_INVARIANCE"
       ],
       "instances": 2000,
-      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__c3b3fba957043735.json",
-      "measured_utc": "2026-10-14T18:21:07Z",
+      "kernel_git_blob_shas": {},
+      "latest_receipt": "canonical/capabilities/true/receipts/SAME_IDENTITY_SUPERVISOR_V1__35251f4e055e0556.json",
+      "measured_utc": "2026-11-25T22:26:49Z",
       "oracle_classes": {
         "EVENT_LOG_INTEGRITY": "PROPERTY",
         "LEASE_EXCLUSIVITY": "PROPERTY",
@@ -292,7 +369,7 @@
         "NO guarantee about state files written by anything other than the supervisor itself"
       ],
       "seed_source": "OS_URANDOM",
-      "solver_git_blob_sha": "ce869c9a7261633021c4b2f0e1501243f6faa042",
+      "solver_git_blob_sha": "ae66843e0d178801889a77e7700769a45a78b57e",
       "spec_path": "canonical/capabilities/true/specs/SAME_IDENTITY_SUPERVISOR_V1.json",
       "status": "MEASURED_SANDBOX",
       "verdict": "PASS"

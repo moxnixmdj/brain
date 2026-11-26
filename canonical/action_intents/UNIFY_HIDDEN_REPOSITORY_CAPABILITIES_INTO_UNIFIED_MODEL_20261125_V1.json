@@ -10,7 +10,7 @@
     "conversation_memory_is_authority": false,
     "incremental_spend_usd": 0,
     "independent_verification_completed": false,
-    "independent_verification_note": "Sandbox verification suite (33/33 cases in verify_brain_unified_model_v1.py, 61/61 in test_brain_unified_model_v1.py, and end-to-end execution tests across all 8 federated domains) passed; independent personnel verification remains open.",
+    "independent_verification_note": "Sandbox verification suite (38/38 cases in verify_brain_unified_model_v1.py, 62/62 in test_brain_unified_model_v1.py, and 9/9 end-to-end execution tests across all 8 federated domains) passed; independent personnel verification remains open.",
     "laws_read_this_session": [
       "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
       "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
@@ -23,11 +23,12 @@
       "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
       "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
       "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
-      "AGENTS.md"
+      "AGENTS.md",
+      "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json"
     ],
     "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
     "producer_cognition_model_dependency_count": 0,
-    "progress_class": "REUSE_AND_UNIFICATION_OF_INHERITED_ZERO_MODEL_CAPABILITIES",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
     "progress_evidence_paths": [
       "canonical/runtime/unified_hidden_capability_federation_v1.py",
       "canonical/runtime/compile_brain_unified_model_v1.py",
@@ -35,18 +36,19 @@
       "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
       "canonical/tests/test_unified_hidden_capabilities_v1.py"
     ],
-    "route_class": "REUSE"
+    "earlier_routes_exhausted_reason": "DELETE/BYPASS/REUSE alone left 58 already-owned zero-model solvers across 8 domains unreachable from UnifiedModel._dispatch_engine while R1 blob pins forbid editing unified_cognitive_fabric_v1.py.",
+    "route_class": "INTEGRATE"
   },
   "benchmark_or_family_rank_authority": "NONE__UNIFIED_RUNTIME_AND_MODEL_ROUTING_INTEGRATION_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::HIDDEN_REPO_SOLVERS_UNREACHABLE_FROM_UNIFIED_MODEL_FRONT_DOOR",
-  "canonical_base_commit": "316caa3ec98b909c22972b39e854acb415cc17da",
+  "canonical_base_commit": "2a7de69c98510a4334508036aa6f350d7ad4e8bf",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "HIDDEN_REPO_SOLVERS_UNREACHABLE_FROM_UNIFIED_MODEL_FRONT_DOOR",
   "date": "2026-11-25",
-  "expected_parent_change": "BRAIN_UNIFIED_MODEL_V1.json and brain_unified_model_v1.py gain 58 deterministic zero-model federated kernel engines across 8 domains plus 790 extended cross-tree addressable modules without mutating R1 blob-pinned fabric files.",
-  "expected_parent_frontier_change": "FIFTY_EIGHT_HIDDEN_ZERO_MODEL_SOLVERS_AND_790_NON_RUNTIME_MODULES_SURFACED_AT_UNIFIED_MODEL_FRONT_DOOR",
+  "expected_parent_change": "BRAIN_UNIFIED_MODEL_V1.json and brain_unified_model_v1.py gain 58 deterministic zero-model federated kernel engines across 8 domains plus extended cross-tree addressable modules without mutating R1 blob-pinned fabric files.",
+  "expected_parent_frontier_change": "FIFTY_EIGHT_HIDDEN_ZERO_MODEL_SOLVERS_AND_EXTENDED_SOURCE_MODULES_SURFACED_AT_UNIFIED_MODEL_FRONT_DOOR",
   "explicit_user_authorization": "Owner explicitly instructed this session: 'We already have solved all of this somewhere under non-obvious names in the whole repo, somewhere here or there. We have tremendous hidden capabilities. They need to be at the unified runtime, at the unified model.'",
   "falsification_condition": "FALSIFIED if recompilation of BRAIN_UNIFIED_MODEL_V1.json is not a deterministic fixed point, if any existing live-registry capability route regresses, if out-of-domain negative controls do not fail closed, or if federated kernels claim pass on missing inputs.",
   "governance_change": false,
@@ -63,17 +65,18 @@
     "success_probability_lcb": 0.9,
     "wall_clock_cost_ub": 1.0
   },
-  "measured_effect": "84 total unified model engines (26 fabric + 58 federated zero-model kernels across 8 domains), 447 bound/receipt capabilities preserved, 2,824 addressable source modules (2,034 runtime + 790 extended), 33/33 verifier cases passing, $0 spend, 0 model calls.",
+  "measured_effect": "84 total unified model engines (26 fabric + 58 federated zero-model kernels across 8 domains), 449 bound/receipt capabilities preserved, 11/11 True Capabilities reachable via open_model().solve(), 38/38 verifier cases passing, $0 spend, 0 model calls.",
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "recursive_obs": {
-    "canonical_base_commit": "316caa3ec98b909c22972b39e854acb415cc17da",
+    "canonical_base_commit": "2a7de69c98510a4334508036aa6f350d7ad4e8bf",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Mutating blob-pinned unified_cognitive_fabric_v1.py, which triggers AUTHORITY_FABRIC_BLOB_DRIFT in r1_live_architecture_closure_gate_v1.py",
       "Re-implementing already-solved SWE, finance, 3D visual-hull, DOCX, SA-CCR, Petri, and symbolic kernels from scratch",
       "Polluting BOUND_CAPABILITY_REGISTRY_V1.json with unverified entries"
     ],
-    "expected_parent_level_state_change": "FIFTY_EIGHT_HIDDEN_ZERO_MODEL_SOLVERS_AND_790_NON_RUNTIME_MODULES_SURFACED_AT_UNIFIED_MODEL_FRONT_DOOR",
+    "expected_parent_level_state_change": "FIFTY_EIGHT_HIDDEN_ZERO_MODEL_SOLVERS_AND_EXTENDED_SOURCE_MODULES_SURFACED_AT_UNIFIED_MODEL_FRONT_DOOR",
     "obs_blocker": {
       "delete_bypass_substitute_options": "Bypassed blob-pinned fabric mutation by extending the UnifiedModel engine carrier table and compiler cleanly.",
       "intrinsic_or_path_specific": "Path specific: existing zero-model kernels lived in canonical/swe_kernel/, canonical/tools/, and standalone canonical/runtime/ modules outside BOUND_CAPABILITY_REGISTRY_V1.json.",

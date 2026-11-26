@@ -46,7 +46,6 @@ _NON_SOURCE_DIRS: frozenset[str] = frozenset(
     }
 )
 _EXTENDED_SOURCE_TREES: tuple[str, ...] = (
-    "canonical/swe_kernel",
     "canonical/tools",
     "canonical/capabilities",
     "canonical/research",
