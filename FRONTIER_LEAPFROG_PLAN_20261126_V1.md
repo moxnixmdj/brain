@@ -514,3 +514,244 @@ is a branch on an existing failure path, not a new stage in the pipeline.
 4. **Thin adapters for the 641 SOURCE_ONLY rows**, two per PR per AGENTS.md,
    each with a receipt — this is slow, unglamorous, and the only thing that
    moves the callable share.
+
+---
+
+# Part II — The deeper audit (second pass)
+
+Part I removed a findability defect for *engines that were already in the
+model*. Part II asks the harder question: **how much of the repository is
+invisible to its own runtime?** Answer: most of it. Everything below is
+measured on this tree. Authority: NONE.
+
+## 9. The number that matters
+
+| Measure | Value |
+|---|---|
+| Modules in `source_index` + `extended_source_index` | 2,857 |
+| Python lines in those modules | 914,677 |
+| Modules with **no route** (no capability, no engine, no harvested surface) | **2,301** |
+| Lines in unrouted modules | **661,120 (72.3%)** |
+| Unrouted modules ≥1,000 lines | **89** (205,481 lines) |
+| "Orphan organs" (≥40 symbols **or** ≥8 importers, zero route) | **21** |
+
+**72.3% of the indexed repository cannot be reached from the front door
+by any goal.** Not because it is bad code — much of it is the most
+advanced code in the repo — but because nothing points at it. The user's
+premise ("we already solved all of this somewhere under non-obvious
+names") is not optimism; it is a measurement, and it is 72%.
+
+## 10. Top of the orphan queue, ranked
+
+Ranked by symbols × importers (influence), with size as tiebreak:
+
+| Lines | Symbols | Importers | Module | Why it matters |
+|---|---|---|---|---|
+| 7,554 | 142 | 7 | `runtime/goal_compiler.py` | goal → plan compilation |
+| 7,292 | 130 | 0 | `runtime/live_brain_route_admission_v1.py` | route admission, zero importers |
+| 7,780 | 118 | 4 | `runtime/astra_runtime.py` | ASTRA runtime (has the only replay/idle code in the tree) |
+| 6,712 | 65 | 0 | `swe_kernel/reverse_tomography_algebra_v1.py` | differential state tomography |
+| 5,175 | 88 | 0 | `swe_kernel/meta_circular_organ_graph_v1.py` | organ-of-organs synthesis |
+| 4,637 | 77 | 0 | `swe_kernel/semantic_causal_engine_v1.py` | causal engine |
+| 4,517 | — | — | `swe_kernel/angelic_lens_cow_repair_v1.py` | CoW repair |
+| **4,401** | — | — | **`swe_kernel/universal_computer_agent_v1.py`** | **zero-model universal computer-use agent** |
+| 4,303 | 68 | 0 | `runtime/composer_route_v1.py` | composition routing |
+| 4,221 | — | — | `swe_kernel/first_principles_mental_cegis_v1.py` | mental CEGIS |
+| 3,834 | 91 | 5 | `runtime/goal_front_compiler_v1.py` | goal-front compilation |
+| 3,761 | — | — | `swe_kernel/metamorphic_habitation_zipper_v1.py` | environment zipper |
+| 3,233 | 77 | 0 | `runtime/raw_goal_trace_acceptance_v1.py` | acceptance |
+| 3,036 | 60 | 0 | `runtime/computer_env_v1.py` | computer-use environment |
+| 2,706 | 45 | 0 | `runtime/autonomous_verified_self_improvement_v1.py` | self-improvement |
+
+The first thing to notice is not the sizes. It is the **importers column**:
+five of the largest organs have **zero importers**. They were written,
+tested in isolation, and then nothing ever referenced them again. That is
+what "solved somewhere under a non-obvious name" looks like mechanically.
+
+## 11. What was wired this pass
+
+### `VERIFICATION_FIRST_MEMORY_BUS` — a memory OS that already existed
+
+`canonical/swe_kernel/canonical_memory_crystallizer_v1.py` (2,269 lines)
+implements `VerificationFirstMemoryBus`, whose own docstring names the
+2026 frontier patterns: *"5-timescale verification-first memory bus with
+lossless causality, CDCL nogoods, sleep-time E-Stitch/Plotkin-LGG
+crystallization, and O(1) selective unlearning."* It has:
+
+- T0 working frames → T1 bi-temporal causal episode graph → T2 CDCL
+  negative-space conflict clauses → T3 crystallized skills → T4 Pareto
+  frontier;
+- `sleep_consolidate()` — literally annotated *"Letta Sleep-Time + E-Stitch pattern"*;
+- `forget_skill()` — **O(1) exact selective deletion with zero collateral
+  damage**, the single hardest continual-learning property;
+- `lookup_tier0_skills()` — O(1) amortized.
+
+It was **absent from the harvested census and had no capability, engine, or
+source-index row**. Nothing could reach it. One descriptor plus one
+dispatch branch (≈40 lines total, no new logic) makes it a first-class
+engine.
+
+Measured behaviour (all through the front door):
+
+| Goal | Result |
+|---|---|
+| `create a durable memory of prior runs` | `PASS__SLEEP_CONSOLIDATED` |
+| `forget one skill without damaging others` | routes → `FAIL_CLOSED__TIER0_MISS` on a miss (correct) |
+| `resolve conflicting memories` | routes at coverage 1.00 |
+| `consolidate memory during idle time` | routes at coverage 1.00 |
+| `memory operating system` | routes at coverage 1.00 |
+| unknown operation | `FAIL_CLOSED__UNKNOWN_MEMORY_OPERATION` |
+| missing `operation` | `FAIL_CLOSED__ENGINE_INPUTS_MISSING:operation` |
+
+Speed: route **0.071 ms**, engine execution **0.802 ms**, end-to-end
+`solve()` **2.936 ms**. Hot path unchanged at **0.071 ms**. Ephemeral bus
+by default (nothing persists between goals); pass `state_path` for
+durability.
+
+### Why `universal_computer_agent_v1.py` was **not** wired
+
+It is the most valuable unrouted organ — a 4,401-line zero-model
+universal computer-use agent with separation+stability projection,
+active falsification of `--help`/docs in a shadow sandbox before touching
+real state, parameter-lifted single-experience causal law transfer, and
+fresh-state exactness verification. That is exactly the OSWorld-2.0-class
+problem the frontier has not solved (best 20.6% binary).
+
+I did not add a route to it. Its entrypoints
+(`compile_and_solve_stateful_app`, `execute_cut_vertex_checkpointed_episode`)
+require **injected callables** — `snapshot_fn`, `step_fn`, `reset_fn`,
+`goal_predicate` — not JSON. A federated engine takes data in and returns
+data out; wrapping this one would mean accepting a `required_inputs` of
+data it cannot consume, i.e. a route that always fails closed for the
+wrong reason. The honest statement is: **it needs a thin adapter that maps
+a declarative environment spec onto those four callables**, and that
+adapter is real work, not a descriptor.
+
+Refusing to fake the route is the deliverable. A green checkmark here
+would have been a lie.
+
+## 12. New web research (second pass) — the names under the names
+
+### Instant learning: the frontier's vocabulary is SEAL / TTT / self-edits
+SEAL (MIT, arXiv 2506.10943) has the model generate its own *self-edits* —
+natural-language instructions specifying data and hyperparameters — applied
+via LoRA in an inner loop, with RL in the outer loop rewarding edits that
+improve downstream performance. Measured: **72.5%** adaptation success on
+an ARC subset vs **20%** for self-edits without RL and **0%** for plain
+ICL; knowledge incorporation 47.0% vs base 32.7%. Cost: each self-edit
+evaluation takes **30–45 s**. That cost is the tell: it is a *correctness*
+technique, not a *speed* technique.
+
+Relevance to Brain: the repo has the equivalent idea with the opposite
+trade — `instant_one_shot_learning_v1` does DO ONCE → LEARN PERMANENTLY →
+REPRODUCE FOREVER with zero gradient steps and zero model calls. Its
+measured ceiling is 4.81% on multi-line edits. So Brain and SEAL sit at
+opposite corners: SEAL is slow and general, Brain is instant and narrow.
+**The unusual idea is not to copy SEAL. It is to use Brain's instant
+learner as SEAL's *inner loop*:** let the zero-model learner propose the
+rule, and let gradient adaptation only handle the residual it provably
+cannot express. That turns SEAL's 30–45 s per edit into a fallback cost
+paid on <5% of cases instead of all of them.
+
+### Memory: three camps, and Brain already built the third
+2026 memory splits into vector fact layers (Mem0, ~63k stars), temporal
+knowledge graphs (Graphiti/Zep, Cognee), and **memory operating systems**
+(Letta/MemGPT, MemOS, MemoryOS, EverMemOS). Two details matter:
+
+- **MemOS** unifies plaintext, activation, *and parametric* memory into
+  `MemCube`s with provenance, versioning, fusion and deprecation, and
+  advocates "Mem-training" — knowledge collected and reorganized at
+  runtime rather than in fine-tuning.
+- **EverMemOS** models an *engram lifecycle*: episodic trace formation
+  (`MemCell`s) → semantic consolidation (`MemScene`s + user profile) →
+  reconstructive recollection. +9.2% on LoCoMo, +6.7% on LongMemEval.
+- Consensus shift: **"a memory system that only appends is now considered
+  broken."** Consolidation, decay and forgetting are table stakes.
+
+`VerificationFirstMemoryBus` is the third camp, and it is *stricter* than
+all of them: conflicts become CDCL nogood clauses, skills are Tier-0 only
+if verified, and forgetting is O(1) exact rather than approximate decay.
+The gap was never the design — it was that no goal could reach it. Now one
+can.
+
+### Computer use: latency is a planning problem, not a grounding problem
+The most useful 2026 measurement: **planning, reflection and judging
+account for 76–96% of total computer-use task latency**. A11y trees add
+3–26 s just to generate and can be 10k+ tokens per call; Set-of-Marks adds
+roughly 5–8 points of grounding accuracy; grounding failures cause ~23% of
+errors and 30+ extra steps.
+
+This inverts the usual optimisation instinct. If you are behind on
+computer use, do not buy a better vision model — **cut the number of
+planning calls and batch the actions**. Brain's
+`INTERFACE_ACTION_GRAMMAR` (zero-screenshot, A11y-first) and the WebArena
+finding that CLI actions are 40–55% of real actions point the same way:
+the winning agent prefers a structured tree and a CLI verb over pixels
+whenever the environment offers one. That is a *deletion* strategy, which
+is why it fits Elon's law and most vendors' incentives do not.
+
+### Continual learning: forget less by construction, not by regularisation
+2026 consensus: modular memory (core + working + long-term + sleep
+consolidation) over monolithic context; RL forgets less than SFT; replay
+scheduled by *model time* rather than step count (FOREVER, Ebbinghaus);
+training-free test-time adaptation via non-parametric memory (JitRL). And
+one negative result worth pinning: adding `AGENTS.md` files *reduced*
+success ~3% while raising cost >20% — documentation is not capability.
+
+`WakeSleepConsolidationEngine` in `sentient_cognitive_core_v1.py` (2,505
+lines, also unrouted) already implements 2-witness permanence + macro
+induction + Pareto frontier. It is the next organ to wire, not the next
+organ to write.
+
+## 13. The smartest plan, restated with the audit in hand
+
+The plan is not "build frontier capabilities". It is a **findability
+pipeline** with four moving parts, ordered by cost:
+
+1. **Census, automated** (hours). Rank every unrouted module by
+   symbols × importers × lines. This is a script over the artifact, not a
+   research project. Target: the 89 modules ≥1,000 lines (205k lines).
+2. **Wire the wireable** (one descriptor + one branch each). Any organ
+   whose entrypoint takes JSON in / JSON out becomes a federated engine.
+   `VERIFICATION_FIRST_MEMORY_BUS` was the first; `WakeSleepConsolidationEngine`
+   is the second.
+3. **Adapt the callable-injection organs** (real work). `universal_computer_agent_v1`
+   and the tomography family need a declarative-env → callables shim.
+   This is the highest-value engineering in the repo, because it is the
+   only path to the OSWorld-2.0-class problem.
+4. **Delete the rest** (the honest majority). Of the ~2,300 unrouted
+   modules, most are historical, duplicated, or superseded. Per the
+   canonical order DELETE → BYPASS → REUSE → ADAPT → HARVEST → COMPOSE →
+   CONFIGURE → INTEGRATE → SYNTHESIZE, the cheapest correct action for a
+   module nobody imports and nothing can reach is usually *deletion*.
+   Best part is no part — and the 661k lines of unrouted code is where
+   that law pays for itself.
+
+The metric to move is not "capabilities added". It is **routed lines /
+total lines**, currently **27.7% → 28.x%** after this pass. That single
+ratio is the honest measure of "hidden capabilities at the unified
+runtime", and it is currently the worst number in the project.
+
+## 14. Verification, this pass
+
+- Verifier: **38/38 PASS** (9 categories). Model digest moved again, as
+  expected; authoritative value is in the artifact and the report.
+- Tests: **62/62 OK**.
+- Integrity guard: **17 rules / 0 violations PASS**.
+- Engines in model: **131 → 132** (federated 105 → 106).
+- Routing tokens: 3,060 → **3,076** (the memory-OS supplements).
+- `truth.achieved` untouched. No capability registered. No scoreboard
+  edited. $0. No model weights, no network calls.
+
+## 15. Reference additions (second pass)
+
+- SEAL, Self-Adapting Language Models — https://arxiv.org/html/2506.10943v1
+- SEAL overview — https://www.alphaxiv.org/overview/2506.10943v2
+- MemOS, A Memory OS for AI System — https://arxiv.org/pdf/2507.03724
+- EverMemOS, engram lifecycle memory OS — https://arxiv.org/html/2601.02163v1
+- MemoryOS (EMNLP 2025) — https://aclanthology.org/2025.emnlp-main.1318.pdf
+- AI Agent Memory 2026, frameworks ranked — https://nomadx.ae/blog/ai-agent-memory-frameworks-ranked-2026/
+- OSWorld-Human, CUA latency study (planning = 76–96% of latency) — https://arxiv.org/html/2506.16042v1
+- Covering Human Action Space for Computer Use (CUActSpot, grounding vs OSWorld) — https://arxiv.org/html/2605.12501v1
+- Platform-aware survey of GUI agent execution and risk — https://jzus.zju.edu.cn/opentxt.php?doi=10.1631%2FENG.ITEE.2026.0103
+- OSWorld 2026 reference — https://benchmarkingagents.com/osworld/

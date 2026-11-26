@@ -1056,6 +1056,31 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": [],
         "declared_dependencies": [],
     },
+    # `VerificationFirstMemoryBus` is the repository's memory operating system:
+    # a five-timescale store (T0 working frames -> T1 bi-temporal causal episode
+    # graph -> T2 CDCL negative-space conflict clauses -> T3 crystallized skills
+    # -> T4 Pareto frontier) with sleep-time E-Stitch/Plotkin-LGG consolidation
+    # and O(1) selective unlearning. It existed, was tested, and had no route:
+    # the whole module was absent from the harvested census and the source index,
+    # so no goal could reach it. This descriptor is the route, not a new part.
+    "VERIFICATION_FIRST_MEMORY_BUS": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        "entrypoint": "execute_memory_operation",
+        "summary": (
+            "Memory operating system front door (0G): verification-first five-timescale "
+            "memory with lossless causal episode chains, CDCL nogood conflicts, Tier-0 "
+            "skill lookup, sleep-time consolidation, and O(1) selective unlearning."
+        ),
+        "triggers": [
+            "verification first memory bus",
+            "memory operating system",
+            "verification first memory",
+            "selective unlearning",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "ADVERSARIAL_MUTATION_ADMISSION_GATE": {
         "domain": "SWE_SYNTHESIS_AND_REPAIR",
         "source_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
@@ -2617,6 +2642,29 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if res.get("status") != "OK":
             return _fail(mode, f"SKILL_INDUCTION_FAILED:{res.get('status')}", result=res)
         return _ok(mode, "ABSTAIN_GATED_SKILLS_INDUCED", res)
+
+    if mode == "VERIFICATION_FIRST_MEMORY_BUS":
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as m
+
+        op = str(inputs["operation"]).strip().upper()
+        # The bus is ephemeral unless the caller names a state file. An ephemeral
+        # bus is correct for single-operation probes (record/lookup/consolidate in
+        # one call) and honest about it: nothing is persisted, so nothing can leak
+        # between goals. A caller that wants durability passes `state_path`.
+        state_path = inputs.get("state_path")
+        bus = m.VerificationFirstMemoryBus(Path(str(state_path)) if state_path else None)
+        res = m.execute_memory_operation(bus, op, dict(inputs.get("payload") or {}))
+        # `execute_memory_operation` already returns fully-formed status strings
+        # ("PASS__CONFLICT_RECORDED" / "FAIL_CLOSED__TIER0_MISS"); strip the prefix
+        # so the envelope's own prefixing does not double it.
+        status = str(res.get("status") or "")
+        for prefix in ("PASS__", "FAIL_CLOSED__"):
+            if status.startswith(prefix):
+                status = status[len(prefix) :]
+                break
+        if not res.get("pass"):
+            return _fail(mode, status or f"MEMORY_OPERATION_REFUSED:{op}", result=res)
+        return _ok(mode, status or "MEMORY_OPERATION_EXECUTED", res)
 
     if mode == "ADVERSARIAL_MUTATION_ADMISSION_GATE":
         from canonical.runtime import adversarial_mutation_admission_gate_v1 as m

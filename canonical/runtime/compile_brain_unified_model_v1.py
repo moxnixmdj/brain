@@ -1019,6 +1019,17 @@ _FRONTIER_TRIGGER_SUPPLEMENTS: dict[str, tuple[str, ...]] = {
         "consolidate learning",
         "keep the store current",
     ),
+    "VERIFICATION_FIRST_MEMORY_BUS": (
+        "memory operating system",
+        "forget one skill without damaging others",
+        "create a durable memory of prior runs",
+        "organize memory into durable long term structure",
+        "consolidate memory during idle time",
+        "selective unlearning",
+        "resolve conflicting memories",
+        "keep a durable memory of prior runs",
+        "drive an unfamiliar desktop application without screenshots",
+    ),
     "PREDICTIVE_HOARE_CONTRACT": (
         "what action does",
         "simulate consequence",
