@@ -78,7 +78,7 @@ SCHEMA = "PROJECT_BRAIN_CREATURE_RUNTIME_V1"
 #: door over. Bound here so the name it already uses means something.
 _REPO_ROOT = pathlib.Path(__file__).resolve().parents[2]
 
-Perform = Callable[[M.Work, "Creature"], Mapping[str, Any]]
+Perform = Callable[["M.Work", "Creature"], Mapping[str, Any]]
 
 
 def does_nothing(work: M.Work, creature: "Creature") -> dict[str, Any]:
@@ -1611,6 +1611,9 @@ class Creature:
     def solve_swe_repo_native(self, repo_root: str | pathlib.Path, **kwargs: Any) -> dict[str, Any]:
         kwargs.setdefault("repair_store", self.root / "repair.sqlite")
         return self._ensure_unified_model().solve_swe_repo_native(repo_root, **kwargs)
+
+    def explore_screen(self, port: Any, **kwargs: Any) -> dict[str, Any]:
+        return self._ensure_unified_model().explore_unknown_environment(port, (), surface='indexed_screen', **kwargs)
 
     def live_browser_episode(self, goal: str, **kwargs: Any) -> dict[str, Any]:
         return self._ensure_unified_model().live_browser_episode(goal, **kwargs)

@@ -2624,7 +2624,13 @@ class UnifiedModel:
         is_goal: Any = None,
         **kwargs: Any,
     ) -> dict[str, Any]:
-        """Zero-instruction interactive POMDP / trace-quotient explorer (`K3 = 0`)."""
+        """Explore either a declared indexed-screen port or the existing abstract environment."""
+        if kwargs.get('surface') == 'indexed_screen':
+            from canonical.runtime.frame_program_v1 import explore_screen
+            kwargs.pop('surface')
+            if actions or is_goal is not None:
+                raise ValueError('a screen supplies its own offered actions and advancement feedback')
+            return explore_screen(env, **kwargs)
         from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep
 
         return _uep.explore_unknown_environment_unified(env, actions, is_goal=is_goal, **kwargs)
