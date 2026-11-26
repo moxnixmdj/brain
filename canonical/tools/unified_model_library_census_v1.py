@@ -90,6 +90,40 @@ def docstring_sentence(cid: str, rec: dict[str, Any], root: pathlib.Path) -> str
     return first if len(first) >= 20 else None
 
 
+def _self_locating_by_population(model: Any, caps: dict[str, Any]) -> dict[str, Any]:
+    """Self-location per kind, because averaging over two populations hides both of them.
+
+    Measured 2026-11-24: the whole-library figure is 67.0%, and it decomposes into 98.8% for the
+    askable population and 41.9% for the auto-registered ones whose own name is a file path. The
+    second number is not a router defect -- those capabilities were never given words a request
+    could contain -- so reporting the average describes neither population.
+    """
+    out: dict[str, Any] = {}
+    for label, want_bound in (("askable", True), ("auto_registered", False)):
+        ids = [cid for cid, rec in caps.items()
+               if isinstance(rec, dict) and rec.get("described_as")
+               and (str(rec.get("kind") or "") == "BOUND_CAPABILITY") == want_bound]
+        if not ids:
+            continue
+        found = sum(
+            1 for cid in ids
+            if (model.route(str(caps[cid]["described_as"]), top_k=1).get("best") or {}).get("id") == cid
+        )
+        routed_to_askable = sum(
+            1 for cid in ids
+            if (model.route(str(caps[cid]["described_as"]), top_k=1, askable_only=True).get("best") or {}).get("kind")
+            == "BOUND_CAPABILITY"
+        )
+        out[label] = {
+            "n": len(ids),
+            "found_by_own_description": found,
+            "share": round(found / len(ids), 4),
+            "answered_by_askable_capability": routed_to_askable,
+            "answered_by_askable_share": round(routed_to_askable / len(ids), 4),
+        }
+    return out
+
+
 def _self_locating(model: Any, caps: dict[str, Any]) -> dict[str, Any]:
     """Can a capability be found by describing what it does, using its own recorded description?
 
@@ -199,6 +233,7 @@ def census(root: str | pathlib.Path = ".", *, sample: int = 200, trials: int = 2
         "askable_share": round(len(askable) / max(1, len(caps)), 4),
         "described_as": sum(1 for rec in caps.values() if isinstance(rec, dict) and rec.get("described_as")),
         "self_locating": _self_locating(model, caps),
+        "self_locating_by_population": _self_locating_by_population(model, caps),
         "with_docstring": len(with_doc),
         "generic_docstrings": generic,
         "distinct_docstrings": len(doc_counts),
@@ -231,6 +266,10 @@ def main(argv: list[str] | None = None) -> int:
     print(f"  carries a description          : {report['described_as']}"
           f"  (found by its own description: {report['self_locating']['found']}"
           f"/{report['self_locating']['n']} = {report['self_locating']['share'] * 100:.1f}%)")
+    for label, row in report["self_locating_by_population"].items():
+        print(f"  self-locate [{label}]: {row['found_by_own_description']}/{row['n']}"
+              f" = {row['share'] * 100:.1f}%  (answered by an askable capability:"
+              f" {row['answered_by_askable_share'] * 100:.1f}%)")
     print(f"  has a docstring                : {report['with_docstring']}"
           f"  (generic: {report['generic_docstrings']}, distinct: {report['distinct_docstrings']})")
     print(f"\n  {'library size':>13s}  {'recall@1':>9s}  {'95% CI':>18s}  n")

@@ -88,6 +88,37 @@ class TestMeasuredLibraryShape(unittest.TestCase):
             f"self-location fell to {report['self_locating']['share']:.2f}",
         )
 
+    def test_self_location_is_reported_per_population_not_averaged(self):
+        """67.0% overall averages 98.8% with 41.9% and describes neither.
+
+        The askable population is the one a user's request competes in. The auto-registered
+        population was never given words a request could contain, so its score measures the
+        registration, not the router.
+        """
+        pops = self.report["self_locating_by_population"]
+        self.assertIn("askable", pops)
+        self.assertIn("auto_registered", pops)
+        self.assertGreaterEqual(
+            pops["askable"]["share"], 0.90,
+            f"askable self-location fell to {pops['askable']['share']:.2f}",
+        )
+        self.assertGreaterEqual(
+            pops["askable"]["answered_by_askable_share"], 0.95,
+            "an askable capability's own description is being answered by an auto-registered one",
+        )
+
+    def test_askable_only_routing_is_opt_in_and_does_not_move_the_default(self):
+        from canonical.runtime.brain_unified_model_v1 import open_model
+
+        model = open_model()
+        goal = "extract text from a pdf document"
+        strict = model.route(goal, askable_only=True)
+        loose = model.route(goal)
+        self.assertEqual((strict.get("best") or {}).get("id"), "pdf.extract.text.pypdf")
+        self.assertEqual((loose.get("best") or {}).get("id"), "pdf.extract.text.pypdf")
+        self.assertTrue(strict.get("askable_only"))
+        self.assertFalse(loose.get("askable_only"))
+
     def test_docstrings_are_mostly_present_but_generic(self):
         report = self.report
         self.assertGreater(report["with_docstring"], 300)

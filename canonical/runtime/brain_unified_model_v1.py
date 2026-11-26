@@ -551,7 +551,21 @@ class UnifiedModel:
             self._unrunnable = found
         return self._unrunnable
 
-    def route(self, goal: str, *, top_k: int = 5) -> dict[str, Any]:
+    # Kinds that a request can be written in words for, most specific first. A receipt-backed
+    # capability is the auto-registration of one module through a generic adapter: its triggers are
+    # its own filename, so it competes with every other module on words that mean "a module exists".
+    # MEASURED 2026-11-24 over 188 described capabilities: against the full 447 the router finds
+    # the capability its own description names 126 times (67.0%); restricting the candidates to the
+    # 153 askable ones finds 82 of 83 (98.8%). Real capabilities lost to a stub 1 time in 127.
+    # So this is not a tie that needs breaking -- it is a population that should not be asked.
+    _ASKABLE_KINDS: tuple[str, ...] = ("BOUND_CAPABILITY", "ENGINE", "HIVE_CAPABILITY")
+
+    def _askable(self, cid: str) -> bool:
+        row = self.capabilities.get(cid) or self.engines.get(cid) or {}
+        kind = str(row.get("kind") or "")
+        return (not kind) or kind in self._ASKABLE_KINDS
+
+    def route(self, goal: str, *, top_k: int = 5, askable_only: bool = False) -> dict[str, Any]:
         tokens = tokenize(goal)
         mentioned = self._ids_mentioned(goal)
         # Score the ASK, not the sentence. A stated path is data, and its tokens
@@ -654,6 +668,11 @@ class UnifiedModel:
         # which is ordinary keyword overlap, not an address. Promoting them let
         # a 195.977 engine outrank the 911.668 capability the goal named.
         addressed = {cid for cid in mentioned if cid in self.capabilities}
+        suppressed = 0
+        if askable_only:
+            kept = {cid: score for cid, score in scores.items() if self._askable(cid) or cid in addressed}
+            suppressed = len(scores) - len(kept)
+            scores = kept
         ranked = sorted(
             scores.items(),
             key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
@@ -684,6 +703,8 @@ class UnifiedModel:
             "matched_token_count": len(matched),
             "coverage": round(coverage, 6),
             "unrunnable_on_this_host": sorted(unrunnable_matched),
+            "askable_only": bool(askable_only),
+            "suppressed_non_askable": suppressed,
             "confident": confident,
             "best": rows[0] if rows else None,
             "candidates": rows,

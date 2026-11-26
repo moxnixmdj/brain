@@ -31861,7 +31861,7 @@
   "bound_capabilities": 153,
   "capabilities": 447,
   "engines": 26,
-  "knowledge_documents": 736,
+  "knowledge_documents": 737,
   "receipt_backed_capabilities": 294,
   "research_index_records": 7392,
   "routing_tokens": 2636,
@@ -31872,7 +31872,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "c69bed930037e653431875ecc50793c4fcf910f748122795b432d9b99113217e"
+  "value": "e6b66cea9f1320e7e89aa892a0e5d2bcab9201a08a1fcdc5205735a81c25ddc1"
  },
  "engines": [
   {
@@ -59158,6 +59158,88 @@
     "own",
     "published",
     "rejects"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 7028,
+   "headings": [
+    "L1 executed. The library went from 11% askable to 47%, and the routing slope vanished.",
+    "1. What L1 actually was",
+    "2. Measured, before \u2192 after",
+    "3. Two safety defects the suite caught \u2014 one of them pre-existing",
+    "4. What I refused to do: L2",
+    "5. Corrected numbers for the record",
+    "6. Test state",
+    "7. Cost",
+    "Honest limits"
+   ],
+   "kind": "DOCUMENT",
+   "path": "L1_EXECUTED_DESCRIPTIONS_AND_THE_FLAT_CURVE_20261124.md",
+   "sha256": "209b6469e037531bb8f8447c6051cc0652206e965b572213c1d749c37cb121a2",
+   "summary": "**2026-11-24 \u00b7 `b3b9ee19` \u00b7 `arena/283e85a5-brain`**",
+   "terms": {
+    "1.000": 3,
+    "11": 3,
+    "176": 6,
+    "188": 5,
+    "447": 4,
+    "47": 3,
+    "473": 3,
+    "756": 5,
+    "98.9": 5,
+    "984": 3,
+    "989": 3,
+    "994": 3,
+    "about": 3,
+    "after": 3,
+    "artifact": 4,
+    "askable": 5,
+    "before": 5,
+    "capabilities": 7,
+    "capability": 6,
+    "change": 4,
+    "curve": 3,
+    "declared": 3,
+    "description": 6,
+    "descriptions": 4,
+    "did": 3,
+    "digest": 4,
+    "function": 3,
+    "generic": 4,
+    "had": 4,
+    "ids": 3,
+    "l1": 8,
+    "l2": 4,
+    "library": 6,
+    "measurement": 3,
+    "module": 3,
+    "modules": 3,
+    "never": 3,
+    "not": 14,
+    "now": 6,
+    "one": 10,
+    "only": 3,
+    "own": 5,
+    "passed": 6,
+    "real": 5,
+    "recall": 4,
+    "route": 5,
+    "so": 6,
+    "words": 4
+   },
+   "title": "L1 executed. The library went from 11% askable to 47%, and the routing slope vanished.",
+   "title_terms": [
+    "11",
+    "47",
+    "askable",
+    "executed",
+    "l1",
+    "library",
+    "routing",
+    "slope",
+    "vanished",
+    "went"
    ]
   },
   {
@@ -104477,10 +104559,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 1538,
+  "included_source_count": 1539,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "f9451d5100fbd3eaa2a0a2f92754541761a3019a98ac1ba10b6b527748af2926"
+  "source_tree_digest": "485165c480f0920f07752cff6e16cbc9838335018fb3bf6d9b7b6ab21ae5bf7f"
  },
  "research_index": [
   {
@@ -291373,7 +291455,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "944d8006f78e9e770dbbd933709c9b5a9bea0d867c6b9d15016cc0ec7538dca2",
+   "sha256": "1a512c1d5b45ca803d3f2f76031fd5e86028d1c1727dfbbb4719119d80f90cd5",
    "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
