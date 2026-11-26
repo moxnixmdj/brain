@@ -1,0 +1,78 @@
+{
+ "action_id": "WAVE46_FALSIFIABLE_ORACLE_AND_STATED_OUTPUT_GUARD_20261126_V1",
+ "action_intent_id": "WAVE46_FALSIFIABLE_ORACLE_AND_STATED_OUTPUT_GUARD_20261126_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Tested the flagship instead of reading it, and found the K3=0 Futamura kernel could not fail a candidate: test cases ran via compile(..., 'exec'), where a bare expression is evaluated and discarded, so the kernel returned SOLVED_AT_RUNG2 with pass=True on source satisfying nothing. Three evaluators shared the defect, so every Rung 1/2/3 receipt descended from it. Repaired: one shared falsifiable runner (eval-mode truthiness, assert-style fallback); admission no longer counts f-string scaffolding as test data (it was refusing correct formatting repairs as TEST_LITERAL_LEAK); Rung 0 replays to a verified fixpoint (bounded BFS over rewrite sequences, verified at sequence end, plus a coarse bucket index and widened __V binding so a law can fire on a compound operand); compiled laws now persist across processes and retire on evidence. Also removed six provably unreachable members to get brain_unified_model_v1.py from 7571 back under its 7534-line cap, and added a test that fails when the committed model artifact is stale. Measured after: one taught experience transfers to 5/5 genuinely held-out failing tasks at Rung 0 with zero synthesis in 0.16-0.50 ms. Then found and guarded the door certifying an unwritten stated output. Four of my own green results were shown unfalsifiable during this wave and two were corrected or retracted in writing.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "conversation_memory_is_authority": false,
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox verification plus GitHub Actions referee. Not independent verification.",
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+  "route_class": "INTEGRATE",
+  "route_id": "WAVE46_FALSIFIABLE_ORACLE_V1",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "Producer-run sandbox suites scored by this repository's own instruments; zero external model calls, zero comparison to any published benchmark, zero claimed capability rank.",
+ "blocker_lease_key": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+ "canonical_base_commit": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+ "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+ "capability_credit_delta": {
+  "adopted_contracts": [
+   "canonical/runtime/futamura_leapfrog_kernel_v1.py (falsifiable runner, Rung-0 fixpoint replay, persisted+retiring laws)",
+   "canonical/swe_kernel/repair_admission_v1.py (format scaffolding is not test data)",
+   "canonical/runtime/live_integrated_brain_v1.py (stated-output postcondition guard)"
+  ],
+  "defect_repaired": "the verification oracle could not return false, so every verified receipt in the Futamura cascade was unfalsifiable",
+  "instrument": "canonical/tests/test_wave46_falsifiable_oracle_and_admission_v1.py"
+ },
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "GENERAL_CAPABILITY_FRONTIER_SELECTION__CHOOSE_HIGHEST_EXPECTED_VERIFIED_GENERAL_CAPABILITY_GAIN_PER_RESOURCE_FROM_CURRENT_CAUSAL_EVIDENCE",
+ "date": "2026-11-26",
+ "expected_parent_change": "The cascade's 'verified' verdict can now be false on purpose, so Rung-0 replay claims mean something; a stated output the sentence names is no longer certified when absent.",
+ "expected_parent_frontier_change": "Replaces 'trust the kernel's pass' with 'the kernel can fail, and a certified pass must survive a postcondition the sentence itself states'.",
+ "explicit_user_authorization": "STANDING_MISSION_AUTHORIZATION",
+ "falsification_condition": "Falsified if the repaired oracle accepts a falsey expression case again, if a held-out task passes at Rung 0 while failing on independent evaluation, if a persisted law produces a pass without oracle verification, if a retired law is re-armed, or if the door returns EXACT_SEMANTIC_ACCEPTANCE_VERIFIED while a stated output path does not exist.",
+ "generic_repair_from_single_probe": false,
+ "governance_change": null,
+ "highest_leverage_now": true,
+ "honest_limits": [
+  "No frontier benchmark ran: SWE-bench Pro V2, Terminal-Bench 4.0 and OSWorld 2.1 need docker, which is absent from this sandbox.",
+  "The 1,026 recorded baseline failures were not repaired; measured, at most 0.7% are operator relations, so the compiled-law grammar is not the lever.",
+  "Transfer is operator-level, not comprehension: replaying x - y -> x + y on renamed functions is a compiled law doing its job.",
+  "The learned laws come from a fixed operator-alternative grammar; outside it the kernel still fails closed.",
+  "Hard-51 is 0/51 and section 6 is unmet.",
+  "Still unfixed: a mutation-score request selects source.objective_relevance.rank.bm25. The postcondition guard is not a semantic ownership check."
+ ],
+ "incremental_spend_usd": 0,
+ "intentional_route_race": false,
+ "live_challenger_frontier_discovery_required": true,
+ "measured_effect": "taught 3 verified-failing experiences -> 3 laws; 5/5 held-out tasks verified at Rung 0, zero synthesis, 0.16-0.50 ms; existing fixed selection benchmark 19/23 selection and 21/23 compile (base 9554215: 0/23, 5/23); door certifying an absent r.json now returns FAIL_CLOSED__STATED_OUTPUT_PATH_NOT_WRITTEN.",
+ "next_step": "Implement a decidable ownership predicate for capability selection: the front compiler's F24 displacement hands selection to a row scoring below the displaced runner-up, which is how a mutation-score request reaches a BM25 ranker.",
+ "parent_capability": "canonical/runtime/futamura_leapfrog_kernel_v1.py + canonical/swe_kernel/repair_admission_v1.py + canonical/runtime/live_integrated_brain_v1.py",
+ "probe_specific": false,
+ "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
+ "progress_evidence_paths": [
+  "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+  "canonical/swe_kernel/repair_admission_v1.py",
+  "canonical/runtime/live_integrated_brain_v1.py",
+  "canonical/tests/test_wave46_falsifiable_oracle_and_admission_v1.py",
+  "WAVE46_FALSIFIABLE_ORACLE_20261126_V1.md"
+ ],
+ "required_capability": "Deciding, mechanically, whether a component's own pass signal is falsifiable -- and refusing to certify an outcome whose stated postcondition the run did not meet.",
+ "route_class": "INSTRUMENT",
+ "route_id": "WAVE46_FALSIFIABLE_ORACLE_V1",
+ "stop_condition": "Stop once test_wave46_falsifiable_oracle_and_admission_v1 (37/37), the leapfrog/six-moves/spine suites, front-door selection parity, and the GitHub Actions referee are green.",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "what_is_not": "A verification oracle that can finally say no, and a postcondition guard, are not capability. No benchmark moved, no frontier obligation was discharged, and the system still misroutes a mutation-score request to a ranker."
+ },
+ "user_authorized_governance_change": false,
+ "verification": "Producer-run sandbox: test_wave46 37/37; six-moves 6/6; waves15-20 16/16; asymmetric 8/8; wave2-k3-zero 5/5; sweep-spine 8/8; wave45 16/16; front-door parity 25/25; titan-adjudication 16/16; dark-matter 16/16; then the GitHub Actions referee. Not independent verification.",
+ "weakens_existing_guard": false
+}
