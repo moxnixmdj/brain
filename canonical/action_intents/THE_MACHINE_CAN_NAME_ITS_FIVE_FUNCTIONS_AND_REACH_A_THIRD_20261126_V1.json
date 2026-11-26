@@ -162,64 +162,85 @@
  ],
  "real_outcome": "Not that environments cannot be learned, but that a fixed vocabulary of effects closes doors before any search begins: it hides the atom (mv, sort) or it cannot state the goal (a row's value). The vocabulary must be derived from the reader and admitted only where a goal uses it.",
  "recursive_obs": {
-  "canonical_base_commit": "d2b698bc3ed79de1947570127bdc81aa701ccc3e",
+  "canonical_base_commit": "01a0accb728307a504a3036bfef8751bb5689c2f",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
-   "a hand-written effect list (PERSIST/REMOVE/REPLACE) as the representation of what an action does",
-   "treating 'the atom was experienced' as 'the atom is known'",
-   "one probe as a fact: every inert verdict is now a second full pass",
-   "counting an unreachable request as a vocabulary failure when the measured reason is elsewhere"
+   "counting modules as capability",
+   "an embedding index at runtime",
+   "a keyword table per domain restating the docstrings",
+   "a standalone hidden-capability list",
+   "route-weight tuning as a substitute for indexing"
   ],
-  "expected_parent_frontier_change": "The composition is measured rather than assumed: 37 shifts of an unchanged demand over 7 rows verify 0, and every one of the 7 human fixes is now described by the production it needed (2 new definitions, 1 changed relation, 1 type at an argument, 1 statement inside a branch, 1 multi-site consistency, 1 documentation). The oracle can no longer score a file it did not run.",
-  "expected_parent_level_state_change": "The vocabulary is measured instead of assumed. A fixed effect list is shown to be blind on real tools (mv, sort), the blindness is shown to hide the only atom that can serve the goal, and a goal-directed vocabulary recovers 3 of 3 such requests with the machine's reader as the only judge.",
+  "expected_parent_frontier_change": "The bottleneck moves from building capability to promoting and routing it: three quarters of the machinery that implements the frontier's five functions is not callable, and the router reaches the function one time in three. A function-first map now ships inside the model.",
+  "expected_parent_level_state_change": "The bottleneck moves from building capability to promoting and routing it: three quarters of the machinery that implements the frontier's five functions is not callable, and the router reaches the function one time in three. A function-first map now ships inside the model.",
   "independent_verification_required": true,
   "iteration_limit": 1,
   "obs_blocker": {
    "delete_bypass_substitute_options": [
-    "delete the admissible fraction as a capability measure -- it is a recognition measure and is now labelled so",
-    "bypass the audit by trusting the demand reader (it accused the truth six times)",
-    "substitute the corpus's suite for a recogniser: the suite is the gate, the audit is the reader"
+    "delete: a second inventory of domains - the atlas is derived from the modules and receipts already present",
+    "(bypass) query the existing source index directly per question - it answers 'where is a symbol', never 'what implements this function at what reach'",
+    "(substitute) trust the docstring - measured wrong for 2 of 7 domains and, in the hidden set, for 28 modules"
    ],
-   "intrinsic_or_path_specific": "intrinsic: whether a demand can be bound to an assertion is a fact about the program and the test, not about the searcher.",
-   "surviving_causal_blocker": "The hypothesis language, not the search. Real fixes have four productions -- replace an expression, insert a statement, move a statement, change several regions -- and this instrument has one. 8 of 30 real commits are compositions: a value produced in one place and consumed in another."
+   "intrinsic_or_path_specific": "PATH_SPECIFIC__NO_FUNCTION_FIRST_INDEX_AND_NO_REACHABILITY_LEDGER_EXISTS",
+   "surviving_causal_blocker": "Reachability, not capability. Classified by what they do, 1,260 modules in this tree implement the frontier's five open functions; 1,005 are already indexed as source; only 337 (26.7%) are executable surfaces the runtime can call. find_source reaches the function at 0.76 mean (4.7-26.6x chance), but route() -- what solve() uses -- reaches it at 0.33 mean, and at 0.00 for instant learning and world model, in the repository's own vocabulary."
   },
   "obs_capability": {
    "capability_work_deleted": [
-    "a stored attribute vocabulary (dir() is fresher and costs nothing)",
-    "a stored grammar table (the language's own grammar is reused)",
-    "requiring one differing node to call an edit a single expression (it manufactured a 10-of-19 exclusion that was a property of the tool)"
+    "a new embedding index (external route, forbidden at runtime and unnecessary at 3,283 modules)",
+    "a hand-written keyword table per domain (would restate the docstrings that mislabel 2 of 7 domains)",
+    "a new organ that owns domain knowledge (the atlas is a query over the existing inventory, nothing is stored twice)"
    ],
    "existing_inherited_routes_checked": [
-    "canonical/tools/the_failing_run_names_the_expression_v1.py (arm A, run on the same 15 commits)",
-    "canonical/tools/force_the_value_and_see_v1.py (interior value forcing: the next composition)",
-    "canonical/runtime/bound_capabilities/python_counterfactual_spec_repair_v1.py (function-scale counterfactual repair on QuixBugs; same primitives, no repo-scale address)",
-    "canonical/tools/what_a_real_fix_needs_from_the_site_v1.py (site verdicts and single-change extraction)"
+    "find_source (source index, 2,242 entries) - reaches 0.76 mean, 4.7x to 26.6x chance",
+    "route() (what solve() uses) - reaches 0.33 mean, 0.00 for instant_learning and world_model",
+    "harvest_hidden_capabilities - already named the 28 modules no route reaches",
+    "adapter_module_match - already gives the executable surface (337 of 1,260)",
+    "canonical/swe_kernel - 201 modules, 124 paired, already classified by function"
    ],
    "external_existing_routes_checked": [
-    "AgenTracer (ICLR 2026): counterfactual replay labels, guessed by a frontier model",
-    "CausalFlow (arXiv 2605.25338): step-level interventions written by a model",
-    "Who Broke the System? (arXiv 2607.07989): reviewed for approximating rather than executing the counterfactual"
+    "MCP Gateway 2607.15593: 98.2% recall@15 over 3,616 tools with hybrid dense+BM25, 83.1% dense-only; an independent review flags label circularity",
+    "HYSET 2607.25718: set-level retrieval, +11.6% COMP@5, transfers zero-shot to unseen tool sets",
+    "Switchcraft 2605.07112: DistilBERT router 82.9% vs 89.4% oracle at 84% lower cost",
+    "Tool-to-Agent 2511.01854: +19.4% recall@5",
+    "local-router study (MICCAI): top-3 recall, not top-1 precision, drives routing accuracy (94.4% exact match)"
    ],
-   "surviving_gap": "Selection: which expression, out of a closure of 10^5, produces the value the failing assertion demanded, at a rank an oracle budget can afford."
+   "surviving_gap": "The tree has no function-first classification and no reachability ledger, so the shipped model cannot name its own capability surface, and the 0.33 route recall is invisible from inside the artifact."
   },
   "obs_goal": {
    "proxy_goals_deleted": [
-    "a bigger action library (OSWorld 2.0: final-state exactness is the 84-95% failure bucket)",
-    "more repetitions of one demonstration (retention, not identification)",
-    "parameters for identification (zero is correct, measurable, and recorded per row)"
+    "counting modules as capability: 1,260 candidates exist and only 337 are callable, so existence was never progress",
+    "adopting a vendor headline as evidence about our own reach",
+    "adding another organ to grade domains instead of asking the shipped model what it can reach",
+    "one route's recall reported without the other route beside it, which hid a 0.43 gap for weeks"
    ],
-   "real_outcome": "Execution beats approximation for the counterfactual itself, and the counterfactual is not the bottleneck. Zero parameters were stored by either arm. One verified repair exists and it is in-sample; on 15 fresh real commits both channels produce nothing, and the seven 'wins' a version without the soundness and exact-fit gates would have claimed are all false.",
-   "surviving_necessity": "a model of the counterfactual is not needed where the artifact can be executed: one flipped firing is the intervention, and the oracle is the project's own tests"
+   "real_outcome": "The frontier's five open functions are owned here, executed by code and weights in this tree, and the shipped model can say which of its own modules implement each one and at what reach.",
+   "surviving_necessity": "Without a function-first map the next round cannot say which of its own modules to promote, and every play would be built on top of a router that reaches the right function one time in three."
   },
   "obs_inherited_system": {
-   "adjacent_capabilities_absorbed": "None by claim: the existing repair primitive and corpus oracle are reused unchanged; the induced basis adds candidates only and holds no authority.",
-   "downstream_work_to_delete_or_supersede": "Any roadmap step that adds another hand-written mutation kind, or that raises a candidate budget to fix a bug whose edit is not expressible.",
-   "fresh_reuse_plan": "Recompute the ladder and re-run both bases from the receipt's commands; the corpus is public and the answer key is never needed."
+   "adjacent_capabilities_absorbed": [
+    "harvest_hidden_capabilities_v1.py supplies the invisible column",
+    "adapter_module_match supplies the executable column",
+    "the source index supplies indexed and source_recall",
+    "the compiled model supplies the anatomy block and UnifiedModel.anatomy()"
+   ],
+   "downstream_work_to_delete_or_supersede": [
+    "the V1 plan's assumption that the bottleneck is discovery (0.76 recall) rather than execution (0.267 callable)",
+    "the hidden-capability list as a standalone artifact: it is now a column of the atlas"
+   ],
+   "fresh_reuse_plan": "The next play (contract-first routing) consumes anatomy() directly: it must beat 0.33 mean recall@5 by 20 points at equal or smaller index size, or it is killed."
   },
   "obs_obs": {
    "affected_layers_only_on_revalidation": true,
-   "analysis_steps_deleted_or_cached": "Reused the verdict parser, span patching and suite runner instead of writing a second harness; the switch is an AST rewrite of the same lines, not a second interpreter.",
-   "search_stop_decision": "Stop after both arms on the fresh corpus; no widening of the logged scope and no value-forcing composition without the falsifier stated in the verification JSON."
+   "analysis_steps_deleted_or_cached": [
+    "the 3,283-module scan is deterministic and is cached as DOMAIN_ATLAS_V1.json inside the artifact",
+    "chance baselines are computed once per domain, not per query"
+   ],
+   "revalidated_layers": [
+    "obs_capability",
+    "obs_blocker",
+    "route_frontier"
+   ],
+   "search_stop_decision": "Web search stopped when two independent reviews of the same tool-router family contradicted each other's ground truth (MCP Gateway label circularity), which is the point at which more search adds citations rather than evidence."
   },
   "obs_solution": {
    "deletion_first_order_applied": [
@@ -232,120 +253,99 @@
     "CONFIGURE",
     "INTEGRATE"
    ],
-   "efficiency_mechanism": "Ordering and exact fit replace breadth: 409 flips decided 15 commits, and no candidate refinement was scored, ranked or thresholded.",
-   "generality_mechanism": "The rewrite is generic Python AST plus a counter; the oracle is the project's own pytest; the address is a site and a firing, so it carries to any executable artifact.",
+   "implementation_necessity_reason": "The map must be produced by the same compile step that produces the model artifact, or it drifts within one commit; a side file outside the artifact would restate the very problem the anatomy block solves.",
    "implementation_still_necessary": true,
-   "losing_routes_reason": "Message channel: 1 of 15 at the line, 0 at the expression. Whole-predicate flips: cannot express a guard that is right once and wrong once. Scoring: unnecessary once fit is exact. Stored state: costlier than re-measuring in ~50 microseconds.",
+   "losing_routes_reason": "route 2 needs an embedding model at runtime, which the mission forbids and which the MCP Gateway label-circularity finding makes untrustworthy anyway; route 3 was refused by measurement, since the two existing routes differ by what they index, not by how they score.",
    "routes_ranked": [
-    "force the value at the flip-identified firing and synthesize from the artifact's vocabulary",
-    "widen the logged scope beyond locals and self.__dict__",
-    "read the failure message as a second channel (measured: 0 of 15 at the expression)",
-    "raise the candidate budget",
-    "store every verified repair and retrieve by similarity"
-   ],
-   "white_box_harvest_note": "No donor model, weight or external artifact was harvested or called: every number comes from running the projects' own test suites in this sandbox."
+    "1. derive the classification from the tree's own inventory and receipts, and ship it as navigation inside the compiled model (selected)",
+    "2. add a vector index over module text (deleted: external dependency, banned at runtime, and 3,283 modules fit a deterministic scan)",
+    "3. extend route() by tuning weights (deleted: measured at 0.33 with chance 0.013-0.143; the 0.43 gap to find_source is structural, not a weight)"
+   ]
   },
   "obs_verification": {
    "direct_real_effect_verification_considered": true,
    "existing_oracle_considered": true,
+   "oracle_detail": "verify_brain_unified_model_v1.py is the existing oracle for the artifact; it reports 38 of 38 checks PASS after the anatomy block is compiled in.",
    "oracle_paths": [
-    "canonical/tests/test_the_same_guard_twice_is_the_discriminator_v1.py",
-    "canonical/tests/test_identify_a_real_bugs_fix_v1.py",
-    "canonical/verification/THE_SAME_GUARD_TWICE_IS_THE_DISCRIMINATOR_20261119_V1.json"
+    "canonical/runtime/verify_brain_unified_model_v1.py",
+    "canonical/tests/test_domain_atlas_v1.py"
    ],
-   "synthetic_verification_necessity": "The oracle for a real commit is that project's own post-fix test file, run on an uninstrumented copy; unit tests pin only the instrument. Independent reproduction remains open."
+   "synthetic_verification_necessity": "No synthetic data is used. The 42 queries are fixed and hand-written, and their chance baselines are computed from the same corpus, so a recall cannot be published without what guessing would have scored.",
+   "verification_considered_detail": "The atlas is verified against the tree itself: 42 fixed queries, each with a measured chance baseline, and every count reproducible from DOMAIN_ATLAS_V1.json."
   },
-  "real_outcome": "That 17 unaddressed rows are unsolvable; that the instrument covers 13 rows in capability (it verifies 1); that formatting is irrelevant in general, only that it is worth 1 row here; that this grammar is the population's last word.",
-  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
+  "real_outcome": "The frontier's five open functions are owned here, executed by code and weights in this tree, and the shipped model can say which of its own modules implement each one and at what reach.",
+  "required_capability": "A function-first index over this tree, scored by what a module does rather than what it is called, with an honest reachability ledger: which modules the source index sees, which carry an executable adapter, which are invisible to every route, and which route the runtime actually uses.",
   "route_frontier": {
    "challenger_routes": [
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "1 verified repair; 13 of 30 rows addressed; 0 accusations",
-      "CORRECTNESS": "the corpus's own suite, whole file",
-      "INCREMENTAL_COST": "0 parameters, 0 model calls, ~10 us per candidate",
-      "RELIABILITY": "recall is the open term",
-      "VERIFIABILITY": "receipt rows, producer-run",
-      "WALL_CLOCK": "83.6 s for 30 commits"
+      "CAPABILITY_STRENGTH": "recall@15 over 3,616 tools is not recall@5 over 3,283 modules",
+      "CORRECTNESS": "label circularity makes the headline unusable as ground truth",
+      "INCREMENTAL_COST": "an embedding model at runtime, which the mission forbids",
+      "RELIABILITY": "depends on a model that can be swapped under us",
+      "VERIFIABILITY": "cannot be reproduced without the vendor's index",
+      "WALL_CLOCK": "index build plus a forward pass per query"
      },
      "evidence": [
-      "30 real commits, 83.6 s, 0 accusations, grammar named for every exclusion, 1 row recovered by the AST finder, 1 verified repair unchanged, 1 harness failure stopped from wearing a fact's name"
+      "MCP Gateway 2607.15593 reports 98.2% recall@15 with hybrid dense+BM25 over 3,616 tools, but an independent review flags its ground truth as the gateway's own recommendation (label circularity)",
+      "HYSET 2607.25718 adds 11.6% COMP@5 at set level without training on the target tool set"
      ],
      "qualification_evidence": [
-      "canonical/verification/THE_HYPOTHESIS_GRAMMAR_IS_THE_BOTTLENECK_20261122_V1.json"
+      "https://arxiv.org/abs/2607.15593",
+      "https://arxiv.org/abs/2607.25718"
      ],
      "qualification_evidence_classes": [
-      "DIRECT_PROBE"
-     ],
-     "resolution": "SELECTED",
-     "route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION"
-    },
-    {
-     "comparison": {
-      "CAPABILITY_STRENGTH": "3 of 40 programs",
-      "CORRECTNESS": "a class is only as good as its donor",
-      "INCREMENTAL_COST": "one class per shape",
-      "RELIABILITY": "unseen shapes stay unseen",
-      "VERIFIABILITY": "measured exactly",
-      "WALL_CLOCK": "unbounded as the corpus grows"
-     },
-     "evidence": [
-      "a taught class reaches 8 of 40 fixes, 5 only on its donor"
-     ],
-     "qualification_evidence": [
-      "canonical/verification/WHAT_IS_LEFT_FOR_A_LESSON_TO_BUY_20261117_V1.json"
-     ],
-     "qualification_evidence_classes": [
-      "DIRECT_PROBE"
+      "OFFICIAL_PRIMARY",
+      "BROAD_WEB_OR_COMMUNITY"
      ],
      "resolution": "DISQUALIFIED",
-     "route": "teach one more edit class per failing task"
+     "route": "ADD_AN_EMBEDDING_INDEX_OVER_MODULE_TEXT"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "2 of 30 unseen programs from 3 pairs, at 1.92% precision on the pair that fires",
-      "CORRECTNESS": "the corpus's own pytest decides, as here",
-      "INCREMENTAL_COST": "40.6 us per lookup, no model, no parameters",
-      "RELIABILITY": "saturates: addressability 34.4% -> 59.7% over 24 experiences",
-      "VERIFIABILITY": "measured exactly",
-      "WALL_CLOCK": "5 minutes for the whole corpus"
+      "CAPABILITY_STRENGTH": "bounded by what route() indexes",
+      "CORRECTNESS": "no oracle separates a weight gain from an index change",
+      "INCREMENTAL_COST": "0",
+      "RELIABILITY": "weights fitted to 42 queries do not transfer",
+      "VERIFIABILITY": "overfits the same 42 queries it is scored on",
+      "WALL_CLOCK": "seconds per sweep, cheap either way"
      },
      "evidence": [
-      "0.597 addressable x 0.0192 precise ~ 1.1% of unseen decisions"
+      "route() scores 0.33 mean and find_source scores 0.76 on the same corpus; both already use the same symbol and stem boosts"
      ],
      "qualification_evidence": [
-      "canonical/verification/WHAT_AN_EXPERIENCE_CAN_OWN_20261118_V1.json"
+      "canonical/unified_model/DOMAIN_ATLAS_V1.json"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "NON_DOMINATING",
-     "route": "store every verified repair and retrieve it by similarity"
+     "route": "TUNE_ROUTE_WEIGHTS_UNTIL_RECALL_MOVES"
     },
     {
      "comparison": {
-      "CAPABILITY_STRENGTH": "1 real commit identified at rank 0, unattended, with no diff and no name table",
-      "CORRECTNESS": "the artifact answers, so a question is either answered or refused -- never wrong",
-      "INCREMENTAL_COST": "7.69 ms per asked question, 1 bit",
-      "RELIABILITY": "no saturating share: every site can be asked",
-      "VERIFIABILITY": "measured exactly",
-      "WALL_CLOCK": "121.2 s for 14 bugs"
+      "CAPABILITY_STRENGTH": "names the function surface of the whole tree, which no existing route does",
+      "CORRECTNESS": "every count reproduces from the atlas; every recall carries its chance baseline",
+      "INCREMENTAL_COST": "0 parameters, 0 model calls, 0 network calls",
+      "RELIABILITY": "deterministic on a second run",
+      "VERIFIABILITY": "5 tests, one per claim, all producer-run",
+      "WALL_CLOCK": "3.6 s for 3,283 modules"
      },
      "evidence": [
-      "click@1b0e19f505: human fix derived at rank 0 from the trace, 2 consistent candidates of 119 tests",
-      "5 evaluated candidates per site against the proximity pool's 32-400"
+      "1,260 candidates, 1,005 indexed, 337 executable (26.7%), 28 invisible (2.2%); source recall 0.76 with chance 0.013-0.143, route recall 0.33 with 0.00 on two domains; 12 tests pass; verifier 38/38"
      ],
      "qualification_evidence": [
-      "canonical/verification/THE_FAILING_RUN_IS_THE_INDEX_20261118_V1.json"
+      "canonical/unified_model/DOMAIN_ATLAS_V1.json",
+      "canonical/verification/FRONTIER_LEAPFROG_PLAN_20261126_V2.md"
      ],
      "qualification_evidence_classes": [
       "DIRECT_PROBE"
      ],
      "resolution": "SELECTED",
-     "route": "INDEX_ACTIONS_BY_THE_FAILING_RUN_NOT_BY_THE_SOURCE_TEXT"
+     "route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH"
     }
    ],
-   "checked_at_utc": "2026-11-18T22:57:31Z",
+   "checked_at_utc": "2026-11-26T00:53:05Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -355,25 +355,25 @@
     "VERIFIABILITY"
    ],
    "discovery_required": true,
-   "incumbent_route": "AUDIT_WHAT_THE_INSTRUMENT_ACCEPTS_BEFORE_ASKING_WHAT_IT_CAN_FIND",
-   "max_age_hours": 2,
-   "negative_search_summary": "Refused by measurement this session: formatting as a cause of exclusion (1 row recovered of 30, three of the four candidates are genuine moves or two-region edits); a bigger candidate space (150,000 offered, 0 admissible); and the previous round's own claim that the specification fallback adds repairs (it adds none).",
+   "incumbent_route": "find_source for recall plus route() for execution, unmeasured as a reachability surface until this round",
+   "max_age_hours": 24,
+   "negative_search_summary": "Searched for a shipped tool-router that indexes a repository by function: MCP Gateway indexes tool descriptions for selection, HYSET indexes tool sets, Switchcraft trains a classifier over tool descriptions. None answers 'which of my own modules implements this function and how far can the runtime reach it', so no external route was adopted.",
    "query_families": [
     {
      "intent": "CAPABILITY_VECTOR",
-     "query": "enumerative program repair expression size budget type-directed synthesis local typing context 2026"
+     "query": "tool retrieval benchmark recall@5 2026 agent tool routing recall top-k"
     },
     {
      "intent": "SUPPLIER_OR_PRODUCT",
-     "query": "QuixBugs bug corpus python programs tests published"
+     "query": "MCP Gateway tool retrieval 3616 tools hybrid dense BM25 recall"
     },
     {
      "intent": "IMPLEMENTATION_FORM",
-     "query": "expression-size-wise enumeration starting at the size of the buggy expression S3 syntactic search space"
+     "query": "set-level retrieval HYSET set encoder unseen tool sets recall COMP@5"
     },
     {
      "intent": "RECENCY_OR_NEW_RELEASE",
-     "query": "2026 bounded typed program synthesis with counterexample-guided refinement depth size fuel bounds"
+     "query": "2026 continual learning frozen weights distilled natural language rules agent memory benchmark"
     }
    ],
    "refresh_triggers": [
@@ -382,15 +382,15 @@
     "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
     "BEFORE_SCARCE_GATE_SPEND"
    ],
-   "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+   "selected_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-18T22:57:31Z",
+    "checked_at_utc": "2026-11-26T00:53:05Z",
     "execution_dependencies": [
      {
-      "dependency": "local Python 3.11 runtime with pytest",
+      "dependency": "local Python 3 runtime with pytest for the atlas tests",
       "evidence": [
-       "Python 3.11 + pytest 9.2; 33/33 unified-model gates and 12 instrument tests pass at 2026-11-18T18:50:14Z"
+       "python3 -m pytest canonical/tests/test_domain_atlas_v1.py canonical/tests/test_leapfrog_play_instruments_v1.py -> 12 passed"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -403,9 +403,9 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "real repositories cloned for the sweep (requests, click, tqdm, httpx) with their suites runnable",
+      "dependency": "the repository tree at 3,283 modules, readable offline",
       "evidence": [
-       "29 fix commits swept twice in this sandbox (blame index and proximity index) at 2026-11-18T16:05:00Z"
+       "3,283 modules scanned; 1,260 domain candidates; atlas reproducible on a second run"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
@@ -418,25 +418,40 @@
       "volatility": "STATIC"
      },
      {
-      "dependency": "local tempdir for fresh per-verdict task copies",
+      "dependency": "compiled unified model artifact and its verifier",
       "evidence": [
-       "one fresh copy per real-judge verdict, answer key absent from the copy the search runs in; 0 corpus verdicts: reachability only, no execution at 2026-11-17T22:05:07Z"
+       "verify_brain_unified_model_v1.py -> 38/38 PASS with the anatomy block compiled in"
       ],
       "evidence_classes": [
        "DIRECT_PROBE"
       ],
       "evidence_scope": "LOCAL",
-      "kind": "STORAGE",
+      "kind": "MODEL_ARTIFACT",
       "required": true,
       "scope": "LOCAL",
       "status": "READY",
       "volatility": "STATIC"
+     },
+     {
+      "dependency": "model API or remote service at runtime",
+      "evidence": [
+       "0 model calls and 0 network calls: the atlas and the artifact are produced by local code only"
+      ],
+      "evidence_classes": [
+       "DIRECT_PROBE"
+      ],
+      "evidence_scope": "GLOBAL",
+      "kind": "MODEL_API",
+      "required": false,
+      "scope": "GLOBAL",
+      "status": "NOT_REQUIRED",
+      "volatility": "VOLATILE"
      }
     ],
     "execution_dependencies_complete": true,
     "failed_dependencies": [],
     "max_age_hours": 2,
-    "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+    "selected_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
     "status": "READY"
    },
    "source_classes_checked": [
@@ -447,43 +462,46 @@
    ],
    "source_evidence": {
     "BRAIN_INHERITED": [
-     "canonical/tools/grammar_closed_repair_v1.py (corpus reader, space enumerator, real judge, executed_lines)",
-     "canonical/tools/solve_with_a_calibrated_judge_v1.py (certified judge, per-case clocks, containment)",
-     "canonical/verification/WHERE_THE_REFUSALS_ACTUALLY_WERE_20261116_V1.json",
-     "canonical/verification/ONE_DEMONSTRATION_LEAVES_TEN_BITS_20261116_V1.json"
+     "canonical/tools/domain_atlas_v1.py",
+     "canonical/unified_model/DOMAIN_ATLAS_V1.json",
+     "canonical/runtime/brain_unified_model_v1.py (UnifiedModel.anatomy)",
+     "canonical/swe_kernel (201 modules, 124 paired)"
     ],
     "BROAD_WEB_OR_COMMUNITY": [
-     "https://arxiv.org/pdf/2611.12885 (World In-Context Learning: one demonstration plus rehearsal beats a 50-demonstration trained policy; without the world the demonstration brings no benefit)",
-     "https://arxiv.org/html/2606.29537v1 (OSWorld 2.0: 20.6% binary completion, failures concentrate on hidden state)",
-     "https://arxiv.org/html/2606.31270v1 (Learning from Failure: inference-time self-improvement from failure trajectories)"
+     "OSWorld 2.0 strict 20.6-31.4%, partial 53.2-68.3%, 0 score past about 163 min human time (leaderboard read this session)",
+     "Mem0 OSS 32.4% LongMemEval against a 93.4% vendor self-report (independent reproduction)"
     ],
     "CODE_OR_PACKAGE_REGISTRY": [
-     "https://github.com/jkoppel/QuixBugs (MIT; 40 buggy programs, 40 pytest files, JSON test data)",
-     "https://pypi.org/project/pytest (9.2.0, the runner every verdict goes through)"
+     "pypi.org: pytest installed into the sandbox for the test suite; the atlas itself imports only the standard library and the tree's own modules, so the runtime keeps 0 third-party dependencies"
     ],
     "OFFICIAL_PRIMARY": [
-     "https://docs.python.org/3/library/ast.html (node types the closure rule enumerates)"
+     "https://arxiv.org/abs/2607.15593",
+     "https://arxiv.org/abs/2607.25718",
+     "https://arxiv.org/abs/2605.07112",
+     "https://arxiv.org/abs/2607.22157",
+     "https://arxiv.org/abs/2607.10059"
     ]
    },
    "unresolved_plausible_dominators": []
   },
   "routes_considered": [
-   "TRAIN_OR_DISTIL_A_MODEL_TO_PROPOSE_EXPRESSIONS__REFUSED_BY_OWNER_LAW_AND_UNNECESSARY_HERE",
-   "WIDEN_THE_VOCABULARY_WITH_MORE_NEIGHBOURHOOD_ATTRIBUTES__ALREADY_MEASURED_AT_9_1_PERCENT",
-   "MEASURE_THE_CEILING_WITH_THE_ADDRESS_GIVEN_FREE_THEN_NAME_WHAT_SELECTS__SELECTED"
+   "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
+   "ADD_AN_EMBEDDING_INDEX_OVER_MODULE_TEXT",
+   "TUNE_ROUTE_WEIGHTS_UNTIL_RECALL_MOVES",
+   "HAND_WRITE_A_KEYWORD_TABLE_PER_DOMAIN"
   ],
-  "selected_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
-  "selected_surviving_route": "READ_THE_FIX_FROM_THE_AST_AND_NAME_THE_GRAMMAR_OF_THE_POPULATION",
+  "selected_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
+  "selected_surviving_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
   "selected_surviving_route_class": "SYNTHESIZE_NEW_PRIMITIVE",
-  "stop_condition": "Goal-directed relation invention: given real accepted/rejected state pairs from the same five machines, search a grammar of relations over the reader's output for the smallest relation that separates every pair, add exactly that relation, and then plan. Acceptance declared before the run: the invented relation separates every given pair, is minimal among the separating relations, and turns at least one previously unstateable request into a solved one, with 0 parameters and the reader as the only judge.",
-  "why_selected_route_is_fastest_sufficient": "Because the question 'is the content a knowledge problem' can only be answered by handing the address over for free and measuring what the artifact's own words can say; every other route answers it by assuming an answer.",
-  "why_this_is_not_another_organ": "It adds no knowledge, no vocabulary and no model: one AST rewrite of the module, one counter, one log of what was already in scope, and the project's own pytest as the verdict."
+  "stop_condition": "Stop when every one of the seven domains has a measured route recall above its chance baseline and at least 60% executable coverage, or when Play 1 (contract-first routing) fails its own falsifier: less than a 20-point gain over 0.33 mean recall@5 at equal or smaller index size.",
+  "why_selected_route_is_fastest_sufficient": "It is the only route that runs with 0 model calls, 0 parameters and 0 network calls at 3.6 s, and it is the only one that answers the question the model itself has to answer: which of my own modules implement this function, and how far can I reach them.",
+  "why_this_is_not_another_organ": "No new state is stored: the atlas is a query over the inventory and receipts that already exist, and it is compiled into the artifact that already exists rather than shipped as a second file."
  },
  "required_capability": "counterfactual intervention over a live execution trace, exact-fit predicate selection from the logged scope, and an oracle that decides without a model",
  "route_id": "GROW_THE_VOCABULARY_FROM_THE_READER_AND_ADMIT_ONLY_WHAT_A_GOAL_USES",
  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
  "scope_complete_discharge": false,
- "selected_route": "MEASURE_WHAT_A_FIXED_EFFECT_VOCABULARY_CANNOT_STATE_ON_FIVE_REAL_MACHINES",
+ "selected_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
  "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_VERIFICATION_OPEN",
  "stop_condition": "Stop when every one of the seven domains has a measured route recall above its chance baseline and at least 60% executable coverage, or when Play 1 (contract-first routing) fails its own falsifier: less than a 20-point gain over 0.33 mean recall@5 at equal or smaller index size.",
  "terminal_credit_delta": 0,

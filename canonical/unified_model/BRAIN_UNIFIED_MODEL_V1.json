@@ -32147,12 +32147,12 @@
   "capabilities": 449,
   "engines": 26,
   "harvested_admitted": 0,
-  "harvested_capabilities": 629,
+  "harvested_capabilities": 630,
   "harvested_contract_surfaces": 40,
-  "harvested_program_surfaces": 589,
+  "harvested_program_surfaces": 590,
   "knowledge_documents": 740,
   "receipt_backed_capabilities": 296,
-  "research_index_records": 7396,
+  "research_index_records": 7397,
   "routing_tokens": 2379,
   "skills": 18,
   "source_index_entry_points": 558,
@@ -32161,7 +32161,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0dbc88d512d519fe6f6830be4efb19c207d40d8c9fe2ea739112323278b7251f"
+  "value": "d174838a41829cf85f77fe4c947893ba76c28ada470a1e7565ad4b327ecb514d"
  },
  "engines": [
   {
@@ -55229,6 +55229,30 @@
     "worktree",
     "fixture",
     "receipt"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.refresh_action_intent_recursive_obs_20261126.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "4c40f715f0e7236963f8a8d715b5c3e19e5727810bada3965079627a5e374de7",
+   "summary": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
+   "triggers": [
+    "refresh",
+    "action",
+    "intent",
+    "recursive",
+    "obs"
    ]
   },
   {
@@ -117849,10 +117873,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2175,
+  "included_source_count": 2176,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "a9b0c7aa473c3b3ce201dac3a7ea05c3c704e428fa758ea38c6289b10ad96365"
+  "source_tree_digest": "e449dcae50a9dc1f4af56d10728532c6ee62c256cf1cb385bd5023eeefc98f98"
  },
  "research_index": [
   {
@@ -289150,6 +289174,51 @@
     "ten-row": 2,
     "unique": 5,
     "wrong": 3
+   }
+  },
+  {
+   "action_id": "THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "47ecb52a5aaed89e2395dff906b12459954cbf89364fe9fadb58938a6247b7a3",
+   "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
+   "terms": {
+    "0.00": 1,
+    "0.33": 1,
+    "0.76": 1,
+    "005": 1,
+    "20261126": 1,
+    "26.7": 1,
+    "260": 1,
+    "337": 1,
+    "4.7-26.6x": 1,
+    "already": 1,
+    "bottleneck": 1,
+    "building": 1,
+    "but": 1,
+    "call": 1,
+    "callable": 1,
+    "capability": 2,
+    "chance": 1,
+    "classified": 1,
+    "executable": 1,
+    "find_source": 1,
+    "five": 3,
+    "frontier": 2,
+    "function": 2,
+    "function-first": 1,
+    "functions": 3,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "implement": 1,
+    "mean": 2,
+    "model": 2,
+    "not": 2,
+    "reaches": 3,
+    "three": 2
    }
   },
   {
