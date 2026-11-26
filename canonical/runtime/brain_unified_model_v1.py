@@ -285,6 +285,108 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
     }
 
 
+def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
+    src_map = {
+        str(row["path"]): dict(row)
+        for row in (full.get("source_index") or [])
+        if isinstance(row, Mapping) and row.get("path")
+    }
+    src_df: dict[str, int] = {}
+    src_postings: dict[str, list[tuple[str, int]]] = {}
+    for path, row in src_map.items():
+        terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+        for term, tf_val in terms.items():
+            s_term = str(term)
+            tf = int(tf_val or 0)
+            src_df[s_term] = src_df.get(s_term, 0) + 1
+            if tf > 0:
+                src_postings.setdefault(s_term, []).append((path, tf))
+
+    ext_map = {
+        str(row["path"]): dict(row)
+        for row in (full.get("extended_source_index") or [])
+        if isinstance(row, Mapping) and row.get("path")
+    }
+    ext_df: dict[str, int] = {}
+    comb_map: dict[str, dict[str, Any]] = dict(src_map)
+    for path, row in ext_map.items():
+        comb_map[path] = row
+        terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+        for term in terms:
+            s_term = str(term)
+            ext_df[s_term] = ext_df.get(s_term, 0) + 1
+
+    comb_postings: dict[str, list[tuple[str, int]]] = {}
+    for path, row in comb_map.items():
+        terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+        for term, tf_val in terms.items():
+            tf = int(tf_val or 0)
+            if tf > 0:
+                comb_postings.setdefault(str(term), []).append((path, tf))
+
+    harv_map = {
+        str(row["id"]): dict(row)
+        for row in (full.get("harvested_capabilities") or [])
+        if isinstance(row, Mapping) and row.get("id")
+    }
+
+    res_map = {
+        str(row["path"]): dict(row)
+        for row in (full.get("research_index") or [])
+        if isinstance(row, Mapping) and row.get("path")
+    }
+    res_df: dict[str, int] = {}
+    res_postings: dict[str, list[tuple[str, int]]] = {}
+    for path, row in res_map.items():
+        terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+        for term, tf_val in terms.items():
+            s_term = str(term)
+            tf = int(tf_val or 0)
+            res_df[s_term] = res_df.get(s_term, 0) + 1
+            if tf > 0:
+                res_postings.setdefault(s_term, []).append((path, tf))
+
+    knw_list = [dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)]
+    knw_df: dict[str, int] = {}
+    knw_len: list[int] = []
+    knw_postings: dict[str, list[tuple[int, int]]] = {}
+    knw_title_postings: dict[str, list[int]] = {}
+    for idx, row in enumerate(knw_list):
+        terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+        knw_len.append(sum(int(v) for v in terms.values()))
+        for term, tf_val in terms.items():
+            s_term = str(term)
+            tf = int(tf_val or 0)
+            knw_df[s_term] = knw_df.get(s_term, 0) + 1
+            if tf > 0:
+                knw_postings.setdefault(s_term, []).append((idx, tf))
+        for t_term in row.get("title_terms") or ():
+            knw_title_postings.setdefault(str(t_term), []).append(idx)
+
+    avg_len = (sum(knw_len) / len(knw_len) if knw_len else 1.0) or 1.0
+    return {
+        "secondary_format_v": 2,
+        "raw_sha256": raw_sha,
+        "source_index": src_map,
+        "source_df": src_df,
+        "source_postings": {k: tuple(v) for k, v in src_postings.items()},
+        "extended_source_index": ext_map,
+        "extended_source_df": ext_df,
+        "combined_source_index": comb_map,
+        "combined_source_postings": {k: tuple(v) for k, v in comb_postings.items()},
+        "harvested": harv_map,
+        "research_index": res_map,
+        "research_df": res_df,
+        "research_postings": {k: tuple(v) for k, v in res_postings.items()},
+        "knowledge": knw_list,
+        "knowledge_df": knw_df,
+        "knowledge_lengths": knw_len,
+        "avg_length": avg_len,
+        "knowledge_postings": {k: tuple(v) for k, v in knw_postings.items()},
+        "knowledge_title_postings": {k: tuple(v) for k, v in knw_title_postings.items()},
+    }
+
+
 # --------------------------------------------------------------------------- model
 
 
@@ -323,18 +425,39 @@ class UnifiedModel:
             self.index = dict(self._core_meta["filtered_index"])
             confidence = self._core_meta["confidence"]
 
+        # Precompute casefolded ID lookup tables once (zero per-route string churn).
+        self._exact_id_lookup: dict[str, str] = {}
+        self._cid_folded_pairs: tuple[tuple[str, str], ...] = tuple(
+            (cid, cid.casefold()) for cid in self.capabilities
+        )
+        for cid, cf in self._cid_folded_pairs:
+            self._exact_id_lookup[cf] = cid
+        eid_pairs: list[tuple[str, str, str]] = []
+        for eid in self.engines:
+            ef = eid.casefold()
+            mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
+            eid_pairs.append((eid, ef, mode_phrase))
+            self._exact_id_lookup[ef] = eid
+        self._eid_folded_triples: tuple[tuple[str, str, str], ...] = tuple(eid_pairs)
+
         self._unrunnable: dict[str, list[str]] | None = None
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._source_postings_cache: dict[str, tuple[tuple[str, int], ...]] | None = None
         self._harvested_cache: dict[str, dict[str, Any]] | None = None
         self._source_df_cache: dict[str, int] | None = None
         self._extended_source_index_cache: dict[str, dict[str, Any]] | None = None
         self._extended_source_df_cache: dict[str, int] | None = None
+        self._combined_source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._combined_source_postings_cache: dict[str, tuple[tuple[str, int], ...]] | None = None
         self._research_index_cache: dict[str, dict[str, Any]] | None = None
         self._research_df_cache: dict[str, int] | None = None
+        self._research_postings_cache: dict[str, tuple[tuple[str, int], ...]] | None = None
         self._knowledge_cache: list[dict[str, Any]] | None = None
         self._knowledge_df_cache: dict[str, int] | None = None
         self._knowledge_lengths_cache: list[int] | None = None
         self._avg_length_cache: float | None = None
+        self._knowledge_postings_cache: dict[str, tuple[tuple[int, int], ...]] | None = None
+        self._knowledge_title_postings_cache: dict[str, tuple[int, ...]] | None = None
         self._memory_bus: Any = None
         self._boundary_router: Any = None
 
@@ -363,68 +486,56 @@ class UnifiedModel:
             self._model_loaded = json.loads(self._raw_bytes_backing.decode("utf-8"))
         return self._model_loaded
 
+    def _apply_secondary_bundle(self, sec: Mapping[str, Any]) -> None:
+        self._source_index_cache = dict(sec["source_index"])
+        self._source_df_cache = dict(sec["source_df"])
+        self._source_postings_cache = dict(sec["source_postings"])
+        self._extended_source_index_cache = dict(sec["extended_source_index"])
+        self._extended_source_df_cache = dict(sec["extended_source_df"])
+        self._combined_source_index_cache = dict(sec["combined_source_index"])
+        self._combined_source_postings_cache = dict(sec["combined_source_postings"])
+        self._harvested_cache = dict(sec["harvested"])
+        self._research_index_cache = dict(sec["research_index"])
+        self._research_df_cache = dict(sec["research_df"])
+        self._research_postings_cache = dict(sec["research_postings"])
+        self._knowledge_cache = list(sec["knowledge"])
+        self._knowledge_df_cache = dict(sec["knowledge_df"])
+        self._knowledge_lengths_cache = list(sec["knowledge_lengths"])
+        self._avg_length_cache = float(sec["avg_length"])
+        self._knowledge_postings_cache = dict(sec["knowledge_postings"])
+        self._knowledge_title_postings_cache = dict(sec["knowledge_title_postings"])
+
     def _hydrate_secondary_indexes(self) -> None:
         if self._source_index_cache is not None:
             return
+        raw_sha = str(self._core_meta.get("raw_sha256") or "")
+        if raw_sha and self._model_loaded is None:
+            sec_file = _core_cache_dir() / f"unified_model_secondary_{raw_sha[:32]}.marshal"
+            if sec_file.is_file():
+                try:
+                    sec_loaded = marshal.loads(sec_file.read_bytes())
+                    if (
+                        isinstance(sec_loaded, dict)
+                        and sec_loaded.get("secondary_format_v") == 2
+                        and sec_loaded.get("raw_sha256") == raw_sha
+                    ):
+                        self._apply_secondary_bundle(sec_loaded)
+                        return
+                except Exception:
+                    pass
         full = self._ensure_full_model()
-        self._source_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        src_df: dict[str, int] = {}
-        for row in self._source_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                src_df[str(term)] = src_df.get(str(term), 0) + 1
-        self._source_df_cache = src_df
-
-        self._extended_source_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("extended_source_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        ext_df: dict[str, int] = {}
-        for row in self._extended_source_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                ext_df[str(term)] = ext_df.get(str(term), 0) + 1
-        self._extended_source_df_cache = ext_df
-
-        # Discovered executable surfaces.  Listed, never routed: `route()` and
-        # `solve()` stay on admitted capability, and calling one is an explicit
-        # request through harvested_capability_runtime_v1, which issues evidence
-        # and promotes nothing.
-        self._harvested_cache = {
-            str(row["id"]): dict(row)
-            for row in full.get("harvested_capabilities") or []
-            if isinstance(row, Mapping) and row.get("id")
-        }
-        self._research_index_cache = {
-            str(row["path"]): dict(row)
-            for row in full.get("research_index") or []
-            if isinstance(row, Mapping) and row.get("path")
-        }
-        res_df: dict[str, int] = {}
-        for row in self._research_index_cache.values():
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            for term in terms:
-                res_df[str(term)] = res_df.get(str(term), 0) + 1
-        self._research_df_cache = res_df
-
-        self._knowledge_cache = [
-            dict(row) for row in (full.get("knowledge") or []) if isinstance(row, Mapping)
-        ]
-        knw_df: dict[str, int] = {}
-        knw_len: list[int] = []
-        for row in self._knowledge_cache:
-            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            knw_len.append(sum(int(v) for v in terms.values()))
-            for term in terms:
-                knw_df[str(term)] = knw_df.get(str(term), 0) + 1
-        self._knowledge_df_cache = knw_df
-        self._knowledge_lengths_cache = knw_len
-        self._avg_length_cache = (sum(knw_len) / len(knw_len) if knw_len else 1.0) or 1.0
+        sec = _extract_secondary_indexes(full, raw_sha)
+        self._apply_secondary_bundle(sec)
+        if raw_sha:
+            try:
+                cdir = _core_cache_dir()
+                cdir.mkdir(parents=True, exist_ok=True)
+                sec_file = cdir / f"unified_model_secondary_{raw_sha[:32]}.marshal"
+                tmp_f = cdir / f".unified_model_secondary_{raw_sha[:32]}.{os.getpid()}.tmp"
+                tmp_f.write_bytes(marshal.dumps(sec))
+                tmp_f.replace(sec_file)
+            except OSError:
+                pass
 
     @property
     def model(self) -> dict[str, Any]:
@@ -570,17 +681,20 @@ class UnifiedModel:
         return res
 
     def _ids_mentioned(self, goal: str) -> set[str]:
-        folded = str(goal or "").casefold()
+        folded = str(goal or "").strip().casefold()
+        if not folded:
+            return set()
         hits: set[str] = set()
-        for cid in self.capabilities:
-            if cid.casefold() in folded:
+        exact = self._exact_id_lookup.get(folded)
+        if exact is not None:
+            hits.add(exact)
+        for cid, cf in self._cid_folded_pairs:
+            if cf in folded:
                 hits.add(cid)
-        for eid in self.engines:
-            if eid.casefold() in folded:
+        for eid, ef, mode_phrase in self._eid_folded_triples:
+            if ef in folded:
                 hits.add(eid)
-                continue
-            mode = eid.split(":", 1)[-1].replace("_", " ").casefold()
-            if mode and mode in folded:
+            elif mode_phrase and mode_phrase in folded:
                 hits.add(eid)
         return hits
 
@@ -769,30 +883,28 @@ class UnifiedModel:
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
-        total_docs = max(1, len(self.source_index))
-        scored: list[tuple[float, str, dict[str, Any]]] = []
-        for path, row in self.source_index.items():
-            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            if not counts:
+        self._hydrate_secondary_indexes()
+        src_map = self._source_index_cache or {}
+        src_df = self._source_df_cache or {}
+        src_postings = self._source_postings_cache or {}
+        total_docs = max(1, len(src_map))
+        acc_scores: dict[str, float] = {}
+        for term in wanted:
+            plist = src_postings.get(term)
+            if not plist:
                 continue
-            score = 0.0
-            hit: set[str] = set()
-            for term in wanted:
-                tf = int(counts.get(term, 0) or 0)
-                if tf <= 0:
-                    continue
-                hit.add(term)
-                df = max(1, self._source_df.get(term, 1))
-                # Same IDF form `recall` uses for knowledge, so a term that
-                # appears in one module outranks one that appears in a thousand.
-                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            df = max(1, src_df.get(term, 1))
+            idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
+            for path, tf in plist:
+                acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
+        q_folded = query.casefold()
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, score in acc_scores.items():
             if score <= 0.0:
                 continue
-            # Naming the file is an address, not a keyword, so it outranks term
-            # overlap -- but only for the row actually named.
-            if path.casefold() in query.casefold():
+            if path.casefold() in q_folded:
                 score += 8.0
-            scored.append((score, path, row))
+            scored.append((score, path, src_map[path]))
         scored.sort(key=lambda item: (-item[0], item[1]))
 
         rows: list[dict[str, Any]] = []
@@ -820,7 +932,7 @@ class UnifiedModel:
             "query_terms": terms,
             "candidates": rows,
             "best": rows[0] if rows else None,
-            "indexed_modules": len(self.source_index),
+            "indexed_modules": len(src_map),
             "reason": (
                 "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
                 if rows
@@ -834,27 +946,29 @@ class UnifiedModel:
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
-        combined: dict[str, dict[str, Any]] = {}
-        combined.update(self.source_index)
-        combined.update(self.extended_source_index)
+        self._hydrate_secondary_indexes()
+        combined = self._combined_source_index_cache or {}
+        comb_postings = self._combined_source_postings_cache or {}
+        src_df = self._source_df_cache or {}
+        ext_df = self._extended_source_df_cache or {}
         total_docs = max(1, len(combined))
-        scored: list[tuple[float, str, dict[str, Any]]] = []
-        for path, row in combined.items():
-            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            if not counts:
+        acc_scores: dict[str, float] = {}
+        for term in wanted:
+            plist = comb_postings.get(term)
+            if not plist:
                 continue
-            score = 0.0
-            for term in wanted:
-                tf = int(counts.get(term, 0) or 0)
-                if tf <= 0:
-                    continue
-                df = max(1, self._source_df.get(term, 0) + self._extended_source_df.get(term, 0))
-                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            df = max(1, src_df.get(term, 0) + ext_df.get(term, 0))
+            idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
+            for path, tf in plist:
+                acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
+        q_folded = query.casefold()
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, score in acc_scores.items():
             if score <= 0.0:
                 continue
-            if path.casefold() in query.casefold():
+            if path.casefold() in q_folded:
                 score += 8.0
-            scored.append((score, path, row))
+            scored.append((score, path, combined[path]))
         scored.sort(key=lambda item: (-item[0], item[1]))
         rows: list[dict[str, Any]] = []
         for score, path, row in scored[: max(1, int(top_k))]:
@@ -887,6 +1001,27 @@ class UnifiedModel:
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
+        }
+
+    def resolve_concept(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Sub-20us discrimination bridge from unfamiliar CS / frontier terms to Brain's koan & federated engines."""
+        from canonical.runtime.unified_hidden_capability_federation_v1 import (
+            resolve_cross_disciplinary_concept,
+        )
+
+        res = resolve_cross_disciplinary_concept(query, top_k=top_k)
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "RESOLVE_CONCEPT",
+            "model_digest": self.digest,
+            "query": query,
+            "matched_families": res["matched_families"],
+            "best": res["best"],
+            "credit": {
+                "capability_credit_delta": 0,
+                "ownership_credit_delta": 0,
+                "terminal_credit_delta": 0,
+            },
         }
 
     def list_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
@@ -935,26 +1070,28 @@ class UnifiedModel:
         if not terms:
             raise UnifiedModelError("FIND_RESEARCH_QUERY_EMPTY")
         wanted = set(terms)
-        total_docs = max(1, len(self.research_index))
-        scored: list[tuple[float, str, dict[str, Any]]] = []
-        for path, row in self.research_index.items():
-            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            if not counts:
+        self._hydrate_secondary_indexes()
+        res_map = self._research_index_cache or {}
+        res_df = self._research_df_cache or {}
+        res_postings = self._research_postings_cache or {}
+        total_docs = max(1, len(res_map))
+        acc_scores: dict[str, float] = {}
+        for term in wanted:
+            plist = res_postings.get(term)
+            if not plist:
                 continue
-            score = 0.0
-            for term in wanted:
-                tf = int(counts.get(term, 0) or 0)
-                if tf <= 0:
-                    continue
-                df = max(1, self._research_df.get(term, 1))
-                # "v1" occurs in 79% of these records, so raw overlap is noise;
-                # the same IDF form `recall` and `find_source` use.
-                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            df = max(1, res_df.get(term, 1))
+            idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
+            for path, tf in plist:
+                acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
+        q_folded = query.casefold()
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, score in acc_scores.items():
             if score <= 0.0:
                 continue
-            # Naming a record by its action id is an address, not a keyword.
+            row = res_map[path]
             action_id = str(row.get("action_id") or "")
-            if action_id and action_id.casefold() in query.casefold():
+            if action_id and action_id.casefold() in q_folded:
                 score += 8.0
             scored.append((score, path, row))
         scored.sort(key=lambda item: (-item[0], item[1]))
@@ -982,7 +1119,7 @@ class UnifiedModel:
             "query_terms": terms,
             "candidates": rows,
             "best": rows[0] if rows else None,
-            "indexed_records": len(self.research_index),
+            "indexed_records": len(res_map),
             "reason": (
                 "RESEARCH_RECORD_LOCATED__EVIDENCE_NOT_CAPABILITY"
                 if rows
@@ -996,28 +1133,40 @@ class UnifiedModel:
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("RECALL_QUERY_EMPTY")
-        total_docs = max(1, len(self.knowledge))
+        self._hydrate_secondary_indexes()
+        knw = self._knowledge_cache or []
+        knw_df = self._knowledge_df_cache or {}
+        knw_len = self._knowledge_lengths_cache or []
+        avg_len = self._avg_length_cache or 1.0
+        knw_postings = self._knowledge_postings_cache or {}
+        knw_title_postings = self._knowledge_title_postings_cache or {}
+        total_docs = max(1, len(knw))
         k1, b = 1.5, 0.75
+        unique_terms = set(terms)
+        cand_indices: set[int] = set()
+        for t in unique_terms:
+            for idx, _tf in knw_postings.get(t, ()):
+                cand_indices.add(idx)
+            for idx in knw_title_postings.get(t, ()):
+                cand_indices.add(idx)
         scored: list[tuple[float, dict[str, Any]]] = []
-        for i, row in enumerate(self.knowledge):
+        for i in sorted(cand_indices):
+            row = knw[i]
             counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
-            length = self._knowledge_lengths[i] or 1
+            length = knw_len[i] or 1
             score = 0.0
             for term in terms:
                 tf = int(counts.get(term, 0))
                 if tf <= 0:
                     continue
-                df = max(1, self._knowledge_df.get(term, 1))
+                df = max(1, knw_df.get(term, 1))
                 idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
                 score += idf * (tf * (k1 + 1)) / (
-                    tf + k1 * (1.0 - b + b * length / self._avg_length)
+                    tf + k1 * (1.0 - b + b * length / avg_len)
                 )
-            # A document's own title is the strongest statement of what it is
-            # about. Body term statistics alone can bury a short current law
-            # under a long historical one that merely repeats its vocabulary.
             title_terms = set(row.get("title_terms") or [])
             if title_terms:
-                overlap = len(set(terms) & title_terms) / max(1, len(set(terms)))
+                overlap = len(unique_terms & title_terms) / max(1, len(unique_terms))
                 if overlap >= 1.0:
                     score += 30.0
                 elif overlap >= 0.5:
@@ -2023,20 +2172,55 @@ def _excerpt(path: Path, terms: Iterable[str], limit: int = 420) -> str:
     return best[:limit]
 
 
+_DEFAULT_TARGET_PATH = (ROOT / DEFAULT_ARTIFACT).resolve()
+_DEFAULT_TARGET_KEY = str(_DEFAULT_TARGET_PATH)
+
+
+def prewarm_sidecar_caches(model: Mapping[str, Any], target: Path) -> None:
+    """Emit SHA-256-verified `.core.marshal` and `.secondary.marshal` sidecars at compile time."""
+    try:
+        raw_bytes = target.read_bytes()
+        raw_sha = hashlib.sha256(raw_bytes).hexdigest()
+        cache_dir = _core_cache_dir()
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        core = _extract_routing_core(model, raw_sha)
+        core_tmp = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
+        core_tmp.write_bytes(marshal.dumps(core))
+        core_tmp.replace(cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal")
+        sec = _extract_secondary_indexes(model, raw_sha)
+        sec_tmp = cache_dir / f".unified_model_secondary_{raw_sha[:32]}.{os.getpid()}.tmp"
+        sec_tmp.write_bytes(marshal.dumps(sec))
+        sec_tmp.replace(cache_dir / f"unified_model_secondary_{raw_sha[:32]}.marshal")
+    except Exception:
+        pass
+
+
 def open_model(
     path: str | Path | None = None, *, root: str | Path | None = None
 ) -> UnifiedModel:
-    base = Path(root or ROOT).resolve()
-    target = Path(path) if path else base / DEFAULT_ARTIFACT
-    if not target.is_absolute():
-        target = base / target
-    if not target.is_file():
-        raise UnifiedModelError("MODEL_ARTIFACT_MISSING:" + str(target))
-    st = target.stat()
-    mem_key = (str(target.resolve()), st.st_size, st.st_mtime_ns)
-    mem_hit = _OPEN_MODEL_MEM_CACHE.get(mem_key)
-    if mem_hit is not None:
-        return mem_hit
+    if path is None and root is None:
+        try:
+            st = os.stat(_DEFAULT_TARGET_KEY)
+        except OSError as exc:
+            raise UnifiedModelError("MODEL_ARTIFACT_MISSING:" + _DEFAULT_TARGET_KEY) from exc
+        mem_key = (_DEFAULT_TARGET_KEY, st.st_size, st.st_mtime_ns)
+        mem_hit = _OPEN_MODEL_MEM_CACHE.get(mem_key)
+        if mem_hit is not None:
+            return mem_hit
+        base = ROOT
+        target = _DEFAULT_TARGET_PATH
+    else:
+        base = Path(root or ROOT).resolve()
+        target = Path(path) if path else base / DEFAULT_ARTIFACT
+        if not target.is_absolute():
+            target = base / target
+        if not target.is_file():
+            raise UnifiedModelError("MODEL_ARTIFACT_MISSING:" + str(target))
+        st = target.stat()
+        mem_key = (str(target.resolve()), st.st_size, st.st_mtime_ns)
+        mem_hit = _OPEN_MODEL_MEM_CACHE.get(mem_key)
+        if mem_hit is not None:
+            return mem_hit
 
     raw_bytes = target.read_bytes()
     raw_sha = hashlib.sha256(raw_bytes).hexdigest()

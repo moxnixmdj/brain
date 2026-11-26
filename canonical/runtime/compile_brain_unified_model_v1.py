@@ -1509,6 +1509,10 @@ def write_model(
     target.parent.mkdir(parents=True, exist_ok=True)
     text = json.dumps(model, indent=1, sort_keys=True, ensure_ascii=False) + "\n"
     target.write_text(text, encoding="utf-8")
+    if target.resolve() == (ROOT / DEFAULT_OUTPUT).resolve():
+        from canonical.runtime.brain_unified_model_v1 import prewarm_sidecar_caches
+
+        prewarm_sidecar_caches(model, target)
     return target
 
 
