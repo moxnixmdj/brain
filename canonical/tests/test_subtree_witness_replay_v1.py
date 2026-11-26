@@ -4,7 +4,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from canonical.swe_kernel.causal_swe_repair_v1 import _passed_baseline_nodes
+from canonical.swe_kernel.causal_swe_repair_v1 import _passed_baseline_nodes, _regression_check
 from canonical.swe_kernel.petri_cow_splicing_engine_v1 import AdmissionFilteredSkillStore
 
 
@@ -70,7 +70,7 @@ class SubtreeReplayTests(unittest.TestCase):
         self.assertEqual(store.retrieve_for_subtree(target.replace('= 0', '= False')), [])
         store.edit_skill(sid, lhs_ir_sexpr='return True', rhs_ir_sexpr='return False')
         self.assertEqual(store.retrieve_for_subtree(target), [])
-        self.assertEqual(store.retrieve_for_subtree('return True'), [('return False', sid)])
+        self.assertEqual(store.retrieve_for_subtree('return True'), [])  # edited, not revalidated
         store.check_and_refresh_staleness({'format': 'v2'})
         self.assertEqual(store.retrieve_for_subtree('return True'), [])
         store.check_and_refresh_staleness({'format': 'v2'}, lambda p: p == {'test_target': 'tests/test_format.py'})
@@ -82,3 +82,14 @@ class SubtreeReplayTests(unittest.TestCase):
                           (True, ['old-pass', 'different']), (True, ['different', 'old-fail'])]:
             self.assertFalse(_passed_baseline_nodes(base, {'ok': ok, 'passing': names}))
         self.assertTrue(_passed_baseline_nodes(base, {'ok': True, 'passing': ['old-pass', 'old-fail']}))
+
+    def test_witness_identity_and_completeness_in_regression_controls(self):
+        before = {'returncode': 1, 'passing': ['a'], 'failing': ['b']}
+        self.assertIsNone(_regression_check(before, before))  # pre-existing failure
+        self.assertIsNone(_regression_check(before, dict(returncode=0, passing=['a', 'b'], failing=[])))
+        self.assertEqual(_regression_check(before, dict(returncode=1, passing=['b'], failing=['a'])),
+                         'REGRESSED_CROSS_MODULE_IMPACTED_TESTS')
+        for after in ({}, dict(returncode=1, passing=['a', 'b'], failing=[]),
+                      dict(returncode=2, passing=['a', 'b'], failing=[]),
+                      dict(returncode=0, passing=['a'], failing=[])):
+            self.assertEqual(_regression_check(before, after), 'INCOMPLETE_REGRESSION_CHECK')

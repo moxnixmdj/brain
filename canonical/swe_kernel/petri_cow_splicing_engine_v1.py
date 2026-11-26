@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`).
 
-Breaks the 75.2% fixed-grammar SWE repair ceiling and unifies cross-modal computer use
-(`model_calls == 0`, `parameters_stored == 0`, `$0` runtime spend) via four first-principles
-non-LLM mechanisms composed over existing repository organs:
+Experimental computed mechanisms for proposing and checking actions. A syntax
+match, bounded execution or stored record is not evidence of a hard-task solve.
+The cross-task fix-piece coverage study is not a fixed-grammar ceiling:
 
 1. Repo-Native Type-Transition Petri Net (`RepoNativePetriMiner`):
    Harvests repository classes, methods, `@property` descriptors, sibling `self.<attr>` fields,
@@ -38,7 +38,7 @@ non-LLM mechanisms composed over existing repository organs:
    modes (`generalized`, `raw_traces`, `disabled`); and runs identity-guarded adversarial
    fault-injection self-play (`same_identity_supervisor` contract).
 
-Authority: NONE. Producer cognition model dependencies: 0. Runtime spend: $0.00.
+Authority: NONE. No external inference service; execution still costs time and compute.
 """
 from __future__ import annotations
 
@@ -1533,8 +1533,8 @@ class AdmittedSkillRecord:
 class AdmissionFilteredSkillStore:
     """§9.2 Inspectable, versioned, editable, removable external skill & environment store.
 
-    Enforces ALL FIVE §9.2 admission gates:
-      1. `verified`: Independent execution + equivalence check (`prove_code_rule` / test oracle).
+    Admission filters (caller owns the execution evidence; no equivalence oracle here):
+      1. `verified`: Witness outcome supplied by the caller. Subtree rules must also replay the teacher AST.
       2. `goal_relevant`: Reduced goal residual on an active task (`goal_relevant=True`).
       3. `prediction_error_bearing`: Cold mental model failed or took >= 1 falsified probe (`probes_before_success >= 1`).
       4. `reusable`: Generalized over `SemanticMeaningIR` with ZERO `FOREIGN_IDENT_UNBOUND` identifiers.
@@ -1595,11 +1595,14 @@ class AdmissionFilteredSkillStore:
         rec = self.records.get(skill_id)
         if rec is None:
             return False
+        editable = {'domain', 'lhs_ir_sexpr', 'rhs_ir_sexpr', 'concrete_before', 'concrete_after',
+                    'witness_inputs', 'revalidation_probe'}
+        if not updates or set(updates) - editable:
+            raise ValueError('expected editable skill fields, not evidence of verification')
         for k, v in updates.items():
-            if hasattr(rec, k):
-                setattr(rec, k, v)
+            setattr(rec, k, v)
         rec.version += 1
-        rec.verified_utc = _utc_now()
+        rec.stale = True  # an edit is not a new verification
         self.save()
         return True
 
@@ -1711,6 +1714,8 @@ class AdmissionFilteredSkillStore:
         for seq in ASTSubtreeAntiUnifier.suites(tree):
             for i, stmt in enumerate(seq):
                 for rec, pattern in self._subtree_buckets.get(_stmt_structural_skeleton(stmt), ()):
+                    if self.records.get(rec.skill_id) is not rec or rec.stale:
+                        continue
                     proposal = ASTSubtreeAntiUnifier.rewrite_window(
                         pattern, rec.concrete_after if raw else rec.rhs_ir_sexpr,
                         seq[i:i+len(pattern)], source, rec.concrete_before if raw else None)
@@ -1731,7 +1736,7 @@ class AdmissionFilteredSkillStore:
         evicted = 0
         for sid, rec in list(self.records.items()):
             live_fp = live_fingerprints.get(rec.domain)
-            if live_fp is not None and live_fp != rec.source_fingerprint:
+            if live_fp is not None and (rec.stale or live_fp != rec.source_fingerprint):
                 drifted += 1
                 rec.stale = True
                 if probe_runner is not None:
@@ -2307,13 +2312,11 @@ _attach_v4_store_extensions()
 # =========================================================================== #
 
 class CoWDifferentialBoundaryFuzzer:
-    """64-Way Copy-on-Write Differential Boundary Fuzzer.
+    """Finite preservation check for trusted, deterministic, pure-data calls.
 
-    Mutates observed function inputs across 64 type/protocol boundary points
-    (`0`, `-0.0`, `""`, `" "`, `None`, `()`, `[]`, `{}`, `b""`, `b"\\x04"`, `b"\\x1a"`,
-    Unicode, negative indices, duplicate collections) inside `os.fork()` CoW memory
-    workers, verifying that `patched_fn` introduces ZERO new unhandled crashes or
-    return-sort violations on every input where `orig_fn` succeeded cleanly.
+    The caller excludes intended changed inputs. A difference elsewhere is a
+    reason not to admit, not proof the new behavior is wrong. Fork isolates
+    Python memory, not external effects; run only in a disposable environment.
     """
 
     BOUNDARY_SCALARS: tuple[Any, ...] = (
@@ -2356,109 +2359,128 @@ class CoWDifferentialBoundaryFuzzer:
             _add(tup)
         return cases[:64]
 
+    @staticmethod
+    def _observable(value: Any) -> Any:
+        # Python equality alone conflates False and 0, even inside containers.
+        # Do not call user-defined equality or consume iterators to get a pass.
+        t = type(value)
+        if t in (type(None), bool, int, str, bytes):
+            return t, value
+        if t is float:
+            return t, struct.pack('!d', value)
+        observe = CoWDifferentialBoundaryFuzzer._observable
+        if t in (list, tuple):
+            return t, tuple(map(observe, value))
+        if t is dict:
+            return t, tuple((observe(k), observe(v)) for k, v in value.items())
+        if t in (set, frozenset):
+            return t, frozenset(map(observe, value))
+        raise ValueError('unobservable value')
+
     @classmethod
     def verify_differential_invariance(
-        cls,
-        orig_fn: Callable[..., Any],
-        patched_fn: Callable[..., Any],
-        seed_arg_tuples: Sequence[tuple[Any, ...]],
-        *,
-        failing_inputs: Sequence[tuple[Any, ...]] = (),
-        workers: int = 8,
+        cls, orig_fn: Callable[..., Any], patched_fn: Callable[..., Any],
+        seed_arg_tuples: Sequence[tuple[Any, ...]], *,
+        failing_inputs: Sequence[tuple[Any, ...]] = (), workers: int = 1,
+        timeout_s: float = 5.0,
     ) -> dict[str, Any]:
-        t0 = time.perf_counter()
+        import multiprocessing as mp
+        from contextlib import ExitStack
+
+        if workers < 1 or not 0 < timeout_s < float('inf'):
+            raise ValueError('positive worker count and finite timeout required')
+        start = time.monotonic()
+        def elapsed() -> float:
+            return round((time.monotonic() - start) * 1000, 3)
+
+        try:
+            for row in seed_arg_tuples:
+                cls._observable(row)  # only finite built-in data in parent
+            excluded = {cls._observable(tuple(row)) for row in failing_inputs}
+        except (ValueError, RecursionError):
+            return {'ok': False, 'status': 'UNSUPPORTED_INPUT', 'cases_tested': 0,
+                    'regressions': [], 'wall_ms': elapsed()}
         arity = len(seed_arg_tuples[0]) if seed_arg_tuples else 1
-        boundary_cases = cls.generate_64_boundary_tuples(seed_arg_tuples, arity=arity)
-        fail_reprs = {repr(tuple(f)) for f in failing_inputs}
+        cases = cls.generate_64_boundary_tuples(seed_arg_tuples, arity=arity)
+        ids = [i for i, args in enumerate(cases) if cls._observable(args) not in excluded]
+        outcomes = {}
+        incomplete = []
 
-        if not hasattr(os, "fork"):
-            # Portable fallback when `os.fork` is unavailable
-            regressions = []
-            for inp in boundary_cases:
-                if repr(inp) in fail_reprs:
-                    continue
+        def check(ids: list[int], stream: Any) -> None:
+            result = {}
+            for i in ids:
+                old_args, new_args = copy.deepcopy(cases[i]), copy.deepcopy(cases[i])
                 try:
-                    o_val = orig_fn(*inp)
+                    old = orig_fn(*old_args)
                 except Exception:
+                    result[i] = 'ORIGINAL_RAISED'
                     continue
                 try:
-                    p_val = patched_fn(*inp)
-                    if (o_val is not None and p_val is None) or (isinstance(o_val, (str, bytes, int, list, tuple, dict)) and type(o_val) is not type(p_val)):
-                        regressions.append({"input": repr(inp), "kind": "RETURN_SORT_DRIFT"})
-                except Exception as exc:
-                    regressions.append({"input": repr(inp), "kind": f"NEW_CRASH:{type(exc).__name__}"})
-            return {
-                "ok": len(regressions) == 0,
-                "cases_tested": len(boundary_cases),
-                "regressions": regressions,
-                "wall_ms": round((time.perf_counter() - t0) * 1000.0, 3),
-            }
+                    old_val, old_state = cls._observable(old), cls._observable(old_args)
+                    try:
+                        new = patched_fn(*new_args)
+                    except Exception as exc:
+                        result[i] = 'NEW_CRASH:' + type(exc).__name__
+                        continue
+                    if type(new) is not type(old):
+                        result[i] = 'SORT_DRIFT'
+                    elif cls._observable(new) != old_val:
+                        result[i] = 'VALUE_DRIFT'
+                    elif cls._observable(new_args) != old_state:
+                        result[i] = 'ARGUMENT_EFFECT_DRIFT'
+                    else:
+                        result[i] = 'AGREE'
+                except (RecursionError, ValueError):
+                    result[i] = 'UNOBSERVABLE'
+            stream.write(json.dumps(result).encode())
+            stream.flush()
 
-        # Parallel `os.fork()` Copy-on-Write shards across the 64 boundary inputs!
-        n_shards = max(1, min(workers, len(boundary_cases)))
-        shard_size = (len(boundary_cases) + n_shards - 1) // n_shards
-        pipes: list[tuple[int, int]] = []
-        for s_idx in range(n_shards):
-            chunk = boundary_cases[s_idx * shard_size : (s_idx + 1) * shard_size]
-            if not chunk:
-                continue
-            r_fd, w_fd = os.pipe()
-            pid = os.fork()
-            if pid == 0:
-                os.close(r_fd)
-                shard_regs: list[dict[str, str]] = []
-                try:
-                    for inp in chunk:
-                        if repr(inp) in fail_reprs:
-                            continue
-                        try:
-                            o_val = orig_fn(*inp)
-                        except BaseException:
-                            continue
-                        try:
-                            p_val = patched_fn(*inp)
-                            if (o_val is not None and p_val is None) or (
-                                type(o_val) in (str, bytes, int, list, tuple, dict, bool)
-                                and type(p_val) is not type(o_val)
-                            ):
-                                shard_regs.append({"input": repr(inp), "kind": f"SORT_DRIFT:{type(o_val).__name__}->{type(p_val).__name__}"})
-                        except BaseException as exc:
-                            shard_regs.append({"input": repr(inp), "kind": f"NEW_CRASH:{type(exc).__name__}"})
-                    os.write(w_fd, json.dumps(shard_regs).encode("utf-8"))
-                except BaseException:
-                    pass
-                finally:
-                    os.close(w_fd)
-                    os._exit(0)
-            else:
-                os.close(w_fd)
-                pipes.append((pid, r_fd))
-
-        all_regs: list[dict[str, str]] = []
-        for pid, r_fd in pipes:
+        chunks = min(workers, len(ids))
+        if 'fork' not in mp.get_all_start_methods():
+            return {'ok': False, 'status': 'NO_BOUNDED_FORK_WORKER', 'cases_tested': 0,
+                    'regressions': [], 'wall_ms': elapsed()}
+        # Each shard reports the disposition of *every* assigned case. A dead
+        # child/timeout/empty payload is not agreement. A scratch file avoids
+        # waiting for a blocked pipe writer before the parent reads its result.
+        with ExitStack() as stack:
+            jobs = []
             try:
-                buf = b""
-                while True:
-                    part = os.read(r_fd, 16384)
-                    if not part:
-                        break
-                    buf += part
-                if buf:
-                    all_regs.extend(json.loads(buf.decode("utf-8")))
+                for k in range(chunks):
+                    shard = ids[k::chunks]
+                    f = stack.enter_context(tempfile.TemporaryFile())
+                    proc = mp.get_context('fork').Process(target=check, args=(shard, f))
+                    proc.start()
+                    jobs.append((proc, f, shard))
+                for proc, f, shard in jobs:
+                    proc.join(max(0, timeout_s - (time.monotonic() - start)))
+                    if proc.exitcode != 0:
+                        incomplete.append('TIMEOUT' if proc.exitcode is None else f'EXIT:{proc.exitcode}')
+                        continue
+                    f.seek(0)
+                    try:
+                        values = json.load(f)
+                        if not isinstance(values, dict) or set(values) != set(map(str, shard)):
+                            raise ValueError('wrong case ids')
+                        outcomes.update((i, values[str(i)]) for i in shard)
+                    except (ValueError, UnicodeError):
+                        incomplete.append('INCOMPLETE_SHARD')
             finally:
-                os.close(r_fd)
-                try:
-                    os.waitpid(pid, 0)
-                except ChildProcessError:
-                    pass
-
-        return {
-            "ok": len(all_regs) == 0,
-            "cases_tested": len(boundary_cases),
-            "cow_shards": len(pipes),
-            "regressions": all_regs,
-            "wall_ms": round((time.perf_counter() - t0) * 1000.0, 3),
-        }
+                for proc, _, _ in jobs:
+                    if proc.is_alive():
+                        proc.kill()
+                    proc.join()
+                    proc.close()
+        regressions = [{'input': repr(cases[i])[:200], 'kind': kind} for i, kind in sorted(outcomes.items())
+                       if kind not in ('AGREE', 'UNOBSERVABLE', 'ORIGINAL_RAISED')]
+        skipped = sum(value == 'ORIGINAL_RAISED' for value in outcomes.values())
+        unknown = sum(value == 'UNOBSERVABLE' for value in outcomes.values())
+        tested = len(outcomes) - skipped - unknown
+        status = ('INCOMPLETE' if incomplete or unknown or not tested else
+                  'DIFFERENCE' if regressions else 'AGREE_ON_TESTED_CASES')
+        return {'ok': status == 'AGREE_ON_TESTED_CASES', 'status': status, 'cases_generated': len(cases),
+                'excluded_intended_change': len(cases) - len(ids), 'original_raised': skipped,
+                'unobservable': unknown, 'missing': len(ids) - len(outcomes), 'cases_tested': tested,
+                'cow_shards': chunks, 'worker_errors': incomplete, 'regressions': regressions, 'wall_ms': elapsed()}
 
 
 class BidirectionalCodecLens:
@@ -2785,7 +2807,7 @@ class SelfPlaySkillDistiller:
 
 
 # =========================================================================== #
-# 8. O(1) 64-BIT STRUCTURAL AST FINGERPRINT INDEX (NO_COMPOUNDING DEFENSE)
+# 8. STRUCTURAL SKELETONS AND 64-BIT FINGERPRINTS (collisions require exact matching)
 # =========================================================================== #
 
 def _stmt_structural_skeleton(node: ast.AST, depth: int = 0) -> str:
