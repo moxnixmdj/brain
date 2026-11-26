@@ -223,6 +223,7 @@ def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
 
 def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
+    ext_src_rows = [row for row in (model.get("extended_source_index") or []) if isinstance(row, Mapping)]
     res_rows = [row for row in (model.get("research_index") or []) if isinstance(row, Mapping)]
     knw_rows = [row for row in (model.get("knowledge") or []) if isinstance(row, Mapping)]
     caps_map = {
@@ -260,7 +261,7 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         if kept:
             filtered_index[s_tok] = kept
     return {
-        "core_format_v": 3,
+        "core_format_v": 4,
         "raw_sha256": raw_sha,
         "schema": str(model.get("schema") or ""),
         "model_id": model.get("model_id"),
@@ -278,6 +279,7 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         "confidence": dict(((model.get("grammar") or {}).get("confidence") or {})),
         "source_index_len": len(src_rows),
         "source_entry_points": sum(1 for r in src_rows if r.get("classification") == "ENTRY_POINT"),
+        "extended_source_index_len": len(ext_src_rows),
         "research_index_len": len(res_rows),
         "knowledge_len": len(knw_rows),
     }
@@ -292,7 +294,7 @@ class UnifiedModel:
     def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        if _core_only and model.get("core_format_v") == 3:
+        if _core_only and model.get("core_format_v") == 4:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
@@ -325,12 +327,16 @@ class UnifiedModel:
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
         self._harvested_cache: dict[str, dict[str, Any]] | None = None
         self._source_df_cache: dict[str, int] | None = None
+        self._extended_source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._extended_source_df_cache: dict[str, int] | None = None
         self._research_index_cache: dict[str, dict[str, Any]] | None = None
         self._research_df_cache: dict[str, int] | None = None
         self._knowledge_cache: list[dict[str, Any]] | None = None
         self._knowledge_df_cache: dict[str, int] | None = None
         self._knowledge_lengths_cache: list[int] | None = None
         self._avg_length_cache: float | None = None
+        self._memory_bus: Any = None
+        self._boundary_router: Any = None
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
@@ -372,6 +378,18 @@ class UnifiedModel:
             for term in terms:
                 src_df[str(term)] = src_df.get(str(term), 0) + 1
         self._source_df_cache = src_df
+
+        self._extended_source_index_cache = {
+            str(row["path"]): dict(row)
+            for row in full.get("extended_source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        ext_df: dict[str, int] = {}
+        for row in self._extended_source_index_cache.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                ext_df[str(term)] = ext_df.get(str(term), 0) + 1
+        self._extended_source_df_cache = ext_df
 
         # Discovered executable surfaces.  Listed, never routed: `route()` and
         # `solve()` stay on admitted capability, and calling one is an explicit
@@ -423,6 +441,16 @@ class UnifiedModel:
         return self._source_df_cache  # type: ignore[return-value]
 
     @property
+    def extended_source_index(self) -> dict[str, dict[str, Any]]:
+        self._hydrate_secondary_indexes()
+        return self._extended_source_index_cache  # type: ignore[return-value]
+
+    @property
+    def _extended_source_df(self) -> dict[str, int]:
+        self._hydrate_secondary_indexes()
+        return self._extended_source_df_cache  # type: ignore[return-value]
+
+    @property
     def research_index(self) -> dict[str, dict[str, Any]]:
         self._hydrate_secondary_indexes()
         return self._research_index_cache  # type: ignore[return-value]
@@ -472,6 +500,11 @@ class UnifiedModel:
             if self._source_index_cache is not None
             else int(self._core_meta.get("source_entry_points") or 0)
         )
+        ext_src_len = (
+            len(self._extended_source_index_cache)
+            if self._extended_source_index_cache is not None
+            else int(self._core_meta.get("extended_source_index_len") or 0)
+        )
         res_len = (
             len(self._research_index_cache)
             if self._research_index_cache is not None
@@ -481,6 +514,9 @@ class UnifiedModel:
             len(self._knowledge_cache)
             if self._knowledge_cache is not None
             else int(self._core_meta.get("knowledge_len") or 0)
+        )
+        fed_eng_len = sum(
+            1 for row in self.engines.values() if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
         )
         return {
             "schema": SOLUTION_SCHEMA,
@@ -493,10 +529,12 @@ class UnifiedModel:
                 "bound_capabilities": declared.get("bound_capabilities"),
                 "receipt_backed_capabilities": declared.get("receipt_backed_capabilities"),
                 "engines": len(self.engines),
+                "federated_kernel_engines": fed_eng_len,
                 "skills": len(self.skills),
                 "knowledge_documents": knw_len,
                 "source_index_modules": src_len,
                 "source_index_entry_points": src_ep,
+                "extended_source_index_modules": ext_src_len,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
             },
@@ -538,6 +576,9 @@ class UnifiedModel:
             if cid.casefold() in folded:
                 hits.add(cid)
         for eid in self.engines:
+            if eid.casefold() in folded:
+                hits.add(eid)
+                continue
             mode = eid.split(":", 1)[-1].replace("_", " ").casefold()
             if mode and mode in folded:
                 hits.add(eid)
@@ -665,11 +706,15 @@ class UnifiedModel:
         # introduced. Sort addressed capabilities ahead of the rest instead of
         # inflating the bonus until it wins by force.
         #
-        # Engines are excluded from that priority: they match by mode phrase
-        # (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
-        # which is ordinary keyword overlap, not an address. Promoting them let
-        # a 195.977 engine outrank the 911.668 capability the goal named.
-        addressed = {cid for cid in mentioned if cid in self.capabilities}
+        # Engines are excluded from that priority when matched merely by mode
+        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Explicit literal
+        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
+        # address priority.
+        folded_goal = str(goal or "").casefold()
+        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
+            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
+        }
         ranked = sorted(
             scores.items(),
             key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
@@ -781,6 +826,99 @@ class UnifiedModel:
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
+        }
+
+    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
+        wanted = set(terms)
+        combined: dict[str, dict[str, Any]] = {}
+        combined.update(self.source_index)
+        combined.update(self.extended_source_index)
+        total_docs = max(1, len(combined))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in combined.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                df = max(1, self._source_df.get(term, 0) + self._extended_source_df.get(term, 0))
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            if path.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "tree": row.get("tree") or "canonical/runtime",
+                    "classification": row.get("classification"),
+                    "sha256": row.get("sha256"),
+                    "summary": row.get("summary") or "",
+                    "symbol_count": int(row.get("symbol_count") or 0),
+                    "matched_terms": sorted(wanted & set(row.get("terms") or ())),
+                    "score": round(float(score), 6),
+                    "capability": False,
+                    "executable": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_ANY_SOURCE",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_modules": len(combined),
+            "reason": (
+                "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
+                if rows
+                else "NO_INDEXED_SOURCE_MATCHED"
+            ),
+        }
+
+    def list_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
+        """List all federated zero-model capability kernels registered in the unified model."""
+        wanted = domain.strip().upper() if domain else None
+        rows: list[dict[str, Any]] = []
+        by_domain: dict[str, int] = {}
+        for eid in sorted(self.engines):
+            row = self.engines[eid]
+            if row.get("kind") != "FEDERATED_KERNEL_ENGINE":
+                continue
+            dom = str(row.get("domain") or "UNCLASSIFIED")
+            if wanted and dom != wanted:
+                continue
+            by_domain[dom] = by_domain.get(dom, 0) + 1
+            rows.append(
+                {
+                    "id": eid,
+                    "mode": row.get("mode"),
+                    "domain": dom,
+                    "descriptor": row.get("descriptor"),
+                    "summary": row.get("summary"),
+                    "required_inputs": list(row.get("required_inputs") or []),
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "LIST_FEDERATED_ENGINES",
+            "model_digest": self.digest,
+            "count": len(rows),
+            "domains": dict(sorted(by_domain.items())),
+            "engines": rows,
         }
 
     # ---------------------------------------------------------- research index
@@ -1220,9 +1358,56 @@ class UnifiedModel:
                 attempt_order_contract=list(REQUIRED_ATTEMPT_ORDER),
             )
 
+        # 0D. Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1.solve_repository_task`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("swe_repo_task"), Mapping):
+            swe_spec = dict(inputs["swe_repo_task"])
+            repo_target = swe_spec.pop("repo_root", cwd or ROOT)
+            return self.solve_swe_repo(
+                repo_target,
+                goal=goal,
+                **swe_spec,
+            )
+
+        # 0E. Canonical Environment Discovery & Conflict-Aware Automata Spine (`canonical_env_discovery_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("env_discovery_task"), Mapping):
+            env_spec = dict(inputs["env_discovery_task"])
+            return self.discover_environment(goal=goal, **env_spec)
+
+        # 0F. Canonical Speculative CoW Rollback & Code-over-GUI Spine (`canonical_cu_sandbox_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("cu_sandbox_task"), Mapping):
+            cu_spec = dict(inputs["cu_sandbox_task"])
+            return self.execute_speculative(goal=goal, **cu_spec)
+
+        # 0G. Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`canonical_memory_crystallizer_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("memory_bus_op"), Mapping):
+            mem_spec = dict(inputs["memory_bus_op"])
+            op_name = str(mem_spec.pop("operation", "STATS"))
+            payload = mem_spec.pop("payload", mem_spec)
+            return self.memory_operation(op_name, payload=payload, goal=goal)
+
+        # 0H. Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding (`canonical_oracle_vericoding_spine_v1`)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("oracle_vericoding_task"), Mapping):
+            ov_spec = dict(inputs["oracle_vericoding_task"])
+            return self.audit_oracle_and_vericoding(goal=goal, **ov_spec)
+
+        # 0I. Canonical BoundaryRouter (Tier-0 Reflex -> Tier-1 Zero-Model Spines -> Tier-2 Gated Proposer)
+        if isinstance(inputs, Mapping) and isinstance(inputs.get("boundary_route_task"), Mapping):
+            br_spec = dict(inputs["boundary_route_task"])
+            kind = str(br_spec.pop("kind", "swe_repair"))
+            return self.route_with_boundary(kind, goal=goal, **br_spec)
+
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
+        is_confident_federated = bool(
+            r_preview.get("confident")
+            and isinstance(r_preview.get("best"), Mapping)
+            and r_preview["best"].get("kind") == "FEDERATED_KERNEL_ENGINE"
+        )
+        if not is_forged_cid and (
+            regime_info["regime"] == "SYSTEM_1_REFLEX"
+            or capability_id is not None
+            or is_confident_federated
+        ):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1559,6 +1744,45 @@ class UnifiedModel:
         mode = str(row.get("mode") or "")
         if not mode:
             return self._failure(goal, "ENGINE_MODE_MISSING", routing=routing, engine_id=eid)
+        if row.get("kind") == "FEDERATED_KERNEL_ENGINE":
+            try:
+                from canonical.runtime.unified_hidden_capability_federation_v1 import (
+                    run_federated_engine,
+                )
+
+                out = run_federated_engine(mode, inputs, goal=goal)
+            except Exception as exc:
+                return self._failure(
+                    goal,
+                    "ENGINE_DISPATCH_FAILED:" + type(exc).__name__ + ":" + str(exc),
+                    routing=routing,
+                    engine_id=eid,
+                )
+            if not isinstance(out, Mapping):
+                return self._failure(
+                    goal, "ENGINE_RESULT_NOT_AN_OBJECT", routing=routing, engine_id=eid
+                )
+            passed = out.get("pass") is True
+            raw_status = str(out.get("status") or "")
+            return self._envelope(
+                operation="SOLVE",
+                goal=goal,
+                status=(
+                    raw_status
+                    if passed and raw_status.startswith("PASS__")
+                    else (raw_status if raw_status.startswith("FAIL_CLOSED__") else "FAIL_CLOSED__ENGINE_DID_NOT_REPORT_SUCCESS")
+                ),
+                **{"pass": bool(passed)},
+                reason=None if passed else str(out.get("reason") or "ENGINE_DID_NOT_REPORT_SUCCESS"),
+                routing=routing,
+                capability_id=eid,
+                engine_id=eid,
+                engine_mode=mode,
+                domain=row.get("domain"),
+                incremental_spend_usd=0,
+                model_calls=0,
+                result=dict(out),
+            )
         try:
             from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
@@ -1591,6 +1815,153 @@ class UnifiedModel:
             engine_id=eid,
             engine_mode=mode,
             result=dict(out),
+        )
+
+    def solve_swe_repo(
+        self,
+        repo_root: str | Path,
+        *,
+        goal: str = "",
+        test_file: str | None = None,
+        c_sources: Sequence[str] | None = None,
+        regression_tests: Sequence[str] = (),
+        issue_text: str = "",
+        language: str | None = None,
+        timeout_s: float = 35.0,
+        proposer: Any = None,
+        law_store: Any = None,
+        keep_patch_applied: bool = True,
+    ) -> dict[str, Any]:
+        """Run the consolidated polyglot SWE repair & verification spine directly from the front door."""
+        from canonical.swe_kernel import canonical_swe_spine_v1 as spine
+
+        res = spine.solve_repository_task(
+            repo_root,
+            test_file=test_file,
+            c_sources=c_sources,
+            regression_tests=regression_tests,
+            issue_text=issue_text or goal,
+            language=language,
+            timeout_s=timeout_s,
+            proposer=proposer,
+            law_store=law_store,
+            keep_patch_applied=keep_patch_applied,
+        )
+        passed = bool(res.get("solved") is True)
+        return self._envelope(
+            operation="SOLVE_SWE_REPO",
+            goal=goal or issue_text or f"repair {repo_root}",
+            status=str(res.get("status") or ("PASS_VERIFIED_ON_DISK" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "SWE_SPINE_UNSOLVED"),
+            canonical_swe_spine=res,
+        )
+
+    @property
+    def memory_bus(self) -> Any:
+        """Lazy 5-timescale verification-first memory bus (`0G`) attached to this UnifiedModel."""
+        if self._memory_bus is None:
+            from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+            self._memory_bus = mem_spine.VerificationFirstMemoryBus()
+        return self._memory_bus
+
+    @property
+    def boundary_router(self) -> Any:
+        """Lazy Tier-0 -> Tier-1 -> Tier-2 compounding BoundaryRouter (`0I`) sharing ``self.memory_bus``."""
+        if self._boundary_router is None:
+            from canonical.swe_kernel import canonical_boundary_router_v1 as br_spine
+
+            self._boundary_router = br_spine.BoundaryRouter(memory_bus=self.memory_bus)
+        return self._boundary_router
+
+    def discover_environment(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated zero-shot environment discovery & C3AL automata spine (`0E`)."""
+        from canonical.swe_kernel import canonical_env_discovery_spine_v1 as env_spine
+
+        res = env_spine.discover_environment(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="DISCOVER_ENVIRONMENT",
+            goal=goal or "discover_environment",
+            status=str(res.get("status") or ("PASS__ENVIRONMENT_DISCOVERED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ENV_DISCOVERY_INCOMPLETE"),
+            env_discovery=res,
+        )
+
+    def execute_speculative(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the consolidated CoW rollback sandbox & Code-over-GUI spine (`0F`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        res = cu_spine.execute_speculative_computer_task(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="EXECUTE_SPECULATIVE_CU",
+            goal=goal or "execute_speculative_cu",
+            status=str(res.get("status") or ("PASS__SPECULATIVE_COW_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "CU_SANDBOX_UNSOLVED"),
+            cu_sandbox=res,
+        )
+
+    def memory_operation(
+        self,
+        operation: str,
+        *,
+        payload: Mapping[str, Any] | None = None,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Execute a verified memory, crystallization, sleep-consolidation, or O(1) forgetting op (`0G`)."""
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as mem_spine
+
+        res = mem_spine.execute_memory_operation(self.memory_bus, operation, payload)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="MEMORY_BUS_OP",
+            goal=goal or f"memory:{operation}",
+            status=str(res.get("status") or ("PASS__MEMORY_OP" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "MEMORY_OP_FAILED"),
+            memory_result=res,
+        )
+
+    def audit_oracle_and_vericoding(self, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run dual-channel goal-negation oracle auditing & Coq formal certificate verification (`0H`)."""
+        from canonical.swe_kernel import canonical_oracle_vericoding_spine_v1 as ov_spine
+
+        res = ov_spine.audit_oracle_and_vericoding(**kwargs)
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="AUDIT_ORACLE_AND_VERICODING",
+            goal=goal or "audit_oracle_and_vericoding",
+            status=str(res.get("status") or ("PASS__ORACLE_AND_VERICODING_VERIFIED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "ORACLE_VERICODING_REJECTED"),
+            oracle_vericoding=res,
+        )
+
+    def route_with_boundary(self, kind: str, *, goal: str = "", **kwargs: Any) -> dict[str, Any]:
+        """Run the compounding Tier-0 -> Tier-1 -> Tier-2 BoundaryRouter (`0I`)."""
+        k = str(kind or "swe_repair").lower().strip()
+        if k == "swe_repair":
+            res = self.boundary_router.route_swe_repair(**kwargs)
+        elif k == "env_goal":
+            res = self.boundary_router.route_env_goal(**kwargs)
+        elif k == "cu_task":
+            res = self.boundary_router.route_cu_task(**kwargs)
+        elif k == "status":
+            res = {"pass": True, "status": "PASS__BOUNDARY_STATUS", **self.boundary_router.status_summary()}
+        else:
+            res = {"pass": False, "status": "FAIL_CLOSED__UNKNOWN_BOUNDARY_KIND", "reason": f"UNKNOWN_KIND:{k}"}
+        passed = bool(res.get("pass") is True)
+        return self._envelope(
+            operation="BOUNDARY_ROUTER",
+            goal=goal or f"boundary:{k}",
+            status=str(res.get("status") or ("PASS__BOUNDARY_ROUTED" if passed else "FAIL_CLOSED")),
+            **{"pass": passed},
+            reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
+            boundary_route=res,
         )
 
 
@@ -1676,7 +2047,7 @@ def open_model(
             core = marshal.loads(cache_file.read_bytes())
             if (
                 isinstance(core, dict)
-                and core.get("core_format_v") == 3
+                and core.get("core_format_v") == 4
                 and core.get("raw_sha256") == raw_sha
                 and core.get("schema") == SCHEMA
             ):
