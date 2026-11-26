@@ -33047,7 +33047,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7450,
+  "research_index_records": 7451,
   "routing_tokens": 3798,
   "skills": 18,
   "source_index_entry_points": 568,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2530b18c4bab9e0444da50426fa1861850322918c4f1cf0b6317e45b1f086f8a"
+  "value": "3da99eae54f30207f248c48306a1975b466ec09f8e790e8c0557e9274e56f68c"
  },
  "engines": [
   {
@@ -341128,6 +341128,51 @@
     "prove": 1,
     "titans": 2,
     "wire": 2
+   }
+  },
+  {
+   "action_id": "WAVE46_FALSIFIABLE_ORACLE_AND_STATED_OUTPUT_GUARD_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/WAVE46_FALSIFIABLE_ORACLE_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE46_FALSIFIABLE_ORACLE_20261126_V1.json",
+   "schema": "",
+   "sha256": "c75875200c89481333254a8eb7d544f6ee08aa017c9dd40ecd5bff57ab7693ac",
+   "status": "",
+   "terms": {
+    "20261126": 1,
+    "all": 1,
+    "before": 1,
+    "cascade": 1,
+    "certified": 1,
+    "door": 2,
+    "exact_semantic_acceptance_verified": 1,
+    "false": 1,
+    "falsifiable": 1,
+    "file": 1,
+    "futamura": 1,
+    "general_capability_frontier_selection__choose_highest_expected_verified_general_capability_gain_per_resource_from_current_causal_evidence": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "itself": 1,
+    "must": 1,
+    "never": 1,
+    "not": 1,
+    "now": 1,
+    "oracle": 1,
+    "pass": 1,
+    "postcondition": 1,
+    "raw-goal": 1,
+    "report": 1,
+    "requested": 1,
+    "returned": 1,
+    "sentence": 1,
+    "states": 1,
+    "survive": 1,
+    "v1": 1,
+    "verdict": 1,
+    "verified": 1,
+    "wave": 1
    }
   },
   {
