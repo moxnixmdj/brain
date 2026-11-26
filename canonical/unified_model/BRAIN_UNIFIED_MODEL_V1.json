@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "21be621cbec81671e509d85e8ca88c1babcaa08e6ac5b26d6e20b76512e71004"
+  "value": "0c45234b531a7cdb838c3df4112909b01b197519960f4528f77e3b7fc2fd9f18"
  },
  "engines": [
   {
@@ -84958,7 +84958,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "81e76f908aa8ceaccf12eb41a8daca9052e7c2346cc2a362d27e6cde7b92bd3a",
+   "sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "triggers": [
     "compile",
@@ -157462,14 +157462,14 @@
  },
  "provenance": {
   "compiler": "canonical/runtime/compile_brain_unified_model_v1.py",
-  "compiler_sha256": "81e76f908aa8ceaccf12eb41a8daca9052e7c2346cc2a362d27e6cde7b92bd3a",
+  "compiler_sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
   "included_source_count": 2363,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "42f4c1ca37c1e0c354a731aa3781530c1572d788d4660ba512f861f4663df43c"
+  "source_tree_digest": "c4c3404af8e685ac2372ee6dd9ef57fa73d93ff4d865b02f57cffacf0a90d33a"
  },
  "research_index": [
   {
@@ -351255,7 +351255,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "81e76f908aa8ceaccf12eb41a8daca9052e7c2346cc2a362d27e6cde7b92bd3a",
+   "sha256": "f253b9addcdfb867d987007f44a06cb9d2795840e6576567645cb2c5b3841e95",
    "summary": "Compile the whole live Brain into one content-addressed model artifact.",
    "symbol_count": 47,
    "symbols": [

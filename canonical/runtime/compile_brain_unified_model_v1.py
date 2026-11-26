@@ -56,6 +56,10 @@ import warnings
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
+_REPO_ROOT_STR = str(Path(__file__).resolve().parents[2])
+if _REPO_ROOT_STR not in sys.path:
+    sys.path.insert(0, _REPO_ROOT_STR)
+
 _DBSP_CACHE_VERSION = 3
 
 
