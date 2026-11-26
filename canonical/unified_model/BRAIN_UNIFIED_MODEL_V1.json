@@ -31357,10 +31357,10 @@
   "capabilities": 449,
   "engines": 26,
   "harvested_admitted": 0,
-  "harvested_capabilities": 625,
+  "harvested_capabilities": 627,
   "harvested_contract_surfaces": 40,
-  "harvested_program_surfaces": 585,
-  "knowledge_documents": 737,
+  "harvested_program_surfaces": 587,
+  "knowledge_documents": 738,
   "receipt_backed_capabilities": 296,
   "research_index_records": 7396,
   "routing_tokens": 2379,
@@ -31371,7 +31371,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "251183852e7d8b0949ff8976155ab04147e7b45a514332e21b5213ca9854de8b"
+  "value": "87648059e01634c134d7c374a41fd9b9917bbfa389da31ed7bb32b10d06ba0f8"
  },
  "engines": [
   {
@@ -53134,6 +53134,30 @@
    "declared_inputs": [],
    "declared_result_fields": [],
    "entrypoint": "main",
+   "id": "canonical.tools.measure_law_store_flat_lookup_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/measure_law_store_flat_lookup_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "975fc3dccd7d82031c97f41025c1903977433f22772385728495c8dfa0dc781a",
+   "summary": "Measure whether a bucketed law store's *lookup* is flat as the store grows.",
+   "triggers": [
+    "measure",
+    "law",
+    "store",
+    "flat",
+    "lookup"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
    "id": "canonical.tools.measure_swe_real_localization_v1.hidden.v1",
    "invocation": "cli",
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
@@ -54372,6 +54396,27 @@
     "worktree",
     "fixture",
     "receipt"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.refusal_ledger_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/refusal_ledger_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "82089aee38319c87ee585e167fe1f0e0ad800f91ebc0fd3330c49e0a2f14807b",
+   "summary": "Ledger of recorded decisions: what was attempted, what was refused, and why.",
+   "triggers": [
+    "refusal",
+    "ledger"
    ]
   },
   {
@@ -112845,6 +112890,79 @@
   },
   {
    "authority": "NOT_A_LAW",
+   "bytes": 7935,
+   "headings": [
+    "Leapfrog plays, measured: 4 and 5 (and why 2 is blocked)",
+    "Play 4 — an index whose cost does not track the number of laws",
+    "Play 5 — a published refusal rate, and the reason it cannot be published yet",
+    "Play 2 — blocked, and why",
+    "Non-claims",
+    "Reproduction"
+   ],
+   "kind": "DOCUMENT",
+   "path": "canonical/verification/LEAPFROG_PLAY_EVIDENCE_20261125_V1.md",
+   "sha256": "131738e364acfbae3ca1e8ffb07af75c1f1849eb7420e4b64c18c5bbffa29e6c",
+   "summary": "**Date:** 2026-11-25 · **Schema:** `BRAIN_LEAPFROG_PLAY_EVIDENCE_V1` · **Authority:** `NONE__PRODUCER_RUN_LOCAL_MEASUREMENT` · **Model calls:** 0 · **Network calls:** 0",
+   "terms": {
+    "000": 9,
+    "10": 7,
+    "12.96": 3,
+    "5.0": 8,
+    "500": 3,
+    "about": 3,
+    "against": 3,
+    "artefact": 6,
+    "benchmark": 3,
+    "blocked": 3,
+    "bucketed": 5,
+    "calls": 3,
+    "canonical": 7,
+    "checkable": 3,
+    "decisions": 7,
+    "each": 3,
+    "every": 7,
+    "here": 3,
+    "keys": 3,
+    "kill": 3,
+    "labelled": 3,
+    "law": 4,
+    "laws": 5,
+    "ms": 4,
+    "no": 8,
+    "not": 22,
+    "number": 4,
+    "only": 4,
+    "pass": 8,
+    "plan": 4,
+    "play": 8,
+    "query": 5,
+    "rate": 8,
+    "rather": 4,
+    "reason": 6,
+    "reasons": 9,
+    "refusal": 8,
+    "refused": 5,
+    "run": 4,
+    "share": 4,
+    "so": 7,
+    "store": 5,
+    "than": 5,
+    "tools": 4,
+    "tree": 7,
+    "typed": 9,
+    "unclassified": 4,
+    "under": 4
+   },
+   "title": "Leapfrog plays, measured: 4 and 5 (and why 2 is blocked)",
+   "title_terms": [
+    "blocked",
+    "leapfrog",
+    "measured",
+    "plays"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
    "bytes": 3020,
    "headings": [
     "Live Brain heartbeat"
@@ -116723,10 +116841,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2168,
+  "included_source_count": 2171,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b7a77e8782b57abf29fff5d1ace9218ae825908477ef85cb8389aabe36f0a723"
+  "source_tree_digest": "2d58ae52eb616c2b85512a81ee8e88862d11a823a85365bba17f5781a0466e90"
  },
  "research_index": [
   {
