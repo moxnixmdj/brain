@@ -1,0 +1,31 @@
+{
+ "capability_id": "canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1",
+ "elapsed_ms": 1.054,
+ "independent_run_reference": {
+  "github_run_id": 45736393996,
+  "oidc_claims": {
+   "actor": "moxnixmdj",
+   "aud": "https://github.com/moxnixmdj/brain",
+   "event_name": "push",
+   "head_ref": "",
+   "iss": "https://token.actions.githubusercontent.com",
+   "job_workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main",
+   "jti": "ce0a08d0-3615-4c77-8857-895825b0e540",
+   "repository": "moxnixmdj/brain",
+   "repository_id": "1364778274",
+   "run_attempt": "1",
+   "run_id": "45736393996",
+   "workflow_ref": "moxnixmdj/brain/.github/workflows/capability-receipt-verification.yml@refs/heads/main"
+  }
+ },
+ "independent_verifier": "github-actions:moxnixmdj/brain",
+ "model_dependency_count": 0,
+ "module_path": "canonical/runtime/bound_capabilities/concrete_execution_oracle.py",
+ "module_sha256": "f37063bbcfcb9e0250e3b037bc687f1c48855ac099be68749d25b340ccf73b73",
+ "producer_ran_by": "harvested-runtime",
+ "producer_receipt_path": "canonical/astra_runtime/evidence/CAPABILITY__canonical.runtime.bound_capabilities.concrete_execution_oracle.hidden.v1__EXECUTION_RECEIPT.json",
+ "producer_result_sha256": "ecaed598ec2176294093fe4f00defa380b92d7db2c518b98a6b85e9445caf8fb",
+ "reproduced": true,
+ "schema": "PROJECT_BRAIN_CAPABILITY_INDEPENDENT_VERIFICATION_V1",
+ "verifier_result_sha256": "ecaed598ec2176294093fe4f00defa380b92d7db2c518b98a6b85e9445caf8fb"
+}
