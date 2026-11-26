@@ -179,8 +179,14 @@ def sleep_campaign(out, src, games, attempt, previous):
     # Evaluator reconstructs the counterfactual stores from the *one* frozen
     # teacher. Neither the receipt, IDs, as-of history, nor a different arm is
     # available to a receiver. Deleted gets latest-only query, not as-of replay.
-    before = json.loads((previous/'result.json').read_bytes())
-    raw = RevisionStore(previous/'memory.sqlite',read_only=True).query('screen.raw',valid_at=1)['value']
+    if previous.is_dir():
+        before = json.loads((previous/'result.json').read_bytes())
+        raw = RevisionStore(previous/'memory.sqlite',read_only=True).query('screen.raw',valid_at=1)['value']
+    else:
+        # The evaluator may instead take the exported original observation. It
+        # is never mounted, not even on the shortened or support-deleted arm.
+        before = json.loads(previous.read_bytes())
+        raw = before['raw']
     witness = digest(packed(raw))
     if witness != before['one_teacher'] or before['env_tree_sha256'] != ENV_SHA:
         raise ValueError('teacher or suite mismatch')
@@ -266,6 +272,6 @@ def trial(environments, out, previous=None):
 if __name__ == '__main__':
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('environments', type=Path); p.add_argument('out', type=Path)
-    p.add_argument('--previous', type=Path, help='Run the sleep trial using that prior output directory; do not reteach')
+    p.add_argument('--previous', type=Path, help='Run the sleep trial using a prior output directory or exported teacher JSON; do not reteach')
     args = p.parse_args()
     trial(args.environments.resolve(strict=True), args.out.resolve(), args.previous)
