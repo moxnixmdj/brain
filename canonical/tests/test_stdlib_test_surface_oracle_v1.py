@@ -267,8 +267,20 @@ class SpineVerifiesWhatItCanRepair(unittest.TestCase):
         self.assertIn("return 0", patched)
         self.assertIn("return x * 2", patched, "the correct site must be left alone")
 
-    def test_nonliteral_expectation_is_not_invented(self) -> None:
-        """`assert h(1) == len([1,2,3])` states no literal, so no duty is readable."""
+    def test_constant_duty_is_refused_when_it_stops_reading_the_input(self) -> None:
+        """`assert h(1) == len([1,2,3])` is readable as `3`, and `return 3` is refused.
+
+        This is the most important negative control in this file, because the
+        refusal is counter-intuitive: the duty IS mined (`literal_source -> '3'`)
+        and `return 3` DOES make the suite green. It is refused anyway by
+        `repair_input_dependency_gate_v1` as `PATCH_STOPPED_READING_ITS_INPUTS`,
+        which is correct -- `def h(x): return 3` is a lookup that discards `x`,
+        the exact failure that gate was written for (a billing function
+        "repaired" to return 110.0 for every input).
+
+        So `FAIL_CLOSED` here is the right answer, not a bug: no patch can both
+        satisfy this test and remain a function of its argument.
+        """
         root = _repo(self.tmp, _NONLITERAL_PKG, _NONLITERAL_TEST, name="pkg/q.py")
         result = solve(
             repo_root=str(root),
@@ -280,6 +292,22 @@ class SpineVerifiesWhatItCanRepair(unittest.TestCase):
         self.assertIn("FAIL_CLOSED", result["status"])
         self.assertIsNone(result.get("backward_obligation_source"))
         self.assertEqual(result["model_calls"], 0)
+
+    def test_input_dependency_gate_refuses_the_constant_that_would_pass(self) -> None:
+        """Pin the gate's verdict directly, so the refusal above cannot silently rot."""
+        from canonical.swe_kernel import repair_input_dependency_gate_v1 as dependency_gate
+
+        original = "def h(x):\n    return x + 1\n"
+        constant = "def h(x):\n    return 3\n"
+        verdict = dependency_gate.gate(original, constant)
+        self.assertEqual(verdict["status"], dependency_gate.REFUSED)
+        self.assertIn("PATCH_STOPPED_READING_ITS_INPUTS", verdict["reason"])
+
+        # A guard that keeps reading its input on the other path must pass.
+        guarded_original = "def g(x):\n    if x is None:\n        return None\n    return x * 2\n"
+        guarded_patch = "def g(x):\n    if x is None:\n        return 0\n    return x * 2\n"
+        self.assertEqual(dependency_gate.gate(guarded_original, guarded_patch)["status"],
+                         dependency_gate.PASS)
 
     def test_already_green_baseline_is_reported_as_such(self) -> None:
         root = _repo(self.tmp, _GREEN_PKG, _GREEN_TEST)
