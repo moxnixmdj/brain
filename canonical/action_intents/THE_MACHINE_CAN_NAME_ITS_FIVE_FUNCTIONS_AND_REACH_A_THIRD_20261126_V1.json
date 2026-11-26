@@ -162,7 +162,7 @@
  ],
  "real_outcome": "Not that environments cannot be learned, but that a fixed vocabulary of effects closes doors before any search begins: it hides the atom (mv, sort) or it cannot state the goal (a row's value). The vocabulary must be derived from the reader and admitted only where a goal uses it.",
  "recursive_obs": {
-  "canonical_base_commit": "01a0accb728307a504a3036bfef8751bb5689c2f",
+  "canonical_base_commit": "3a3b92840835defcfd4693dab5b0f64192fd1259",
   "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
   "deleted_or_bypassed_paths": [
    "counting modules as capability",
@@ -345,7 +345,7 @@
      "route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH"
     }
    ],
-   "checked_at_utc": "2026-11-26T00:53:05Z",
+   "checked_at_utc": "2026-11-26T01:10:00Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -385,7 +385,7 @@
    "selected_route": "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T00:53:05Z",
+    "checked_at_utc": "2026-11-26T01:10:00Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest for the atlas tests",

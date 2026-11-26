@@ -7,10 +7,14 @@ from __future__ import annotations
 import datetime
 import json
 import pathlib
+import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 INTENT = ROOT / "canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json"
-BASE = "01a0accb728307a504a3036bfef8751bb5689c2f"
+#: The guard binds the receipt to the exact pull-request base, so this is read, never remembered.
+BASE = subprocess.run(
+    ["git", "-C", str(ROOT), "rev-parse", "origin/main"], capture_output=True, text=True, check=True
+).stdout.strip()
 DELETION_ORDER = ["DELETE", "BYPASS", "REUSE", "SUBSTITUTE", "WHITE_BOX_HARVEST", "COMPOSE", "CONFIGURE", "INTEGRATE"]
 ROUTE = "INDEX_THE_TREE_BY_FUNCTION_AND_MEASURE_WHAT_THE_MODEL_CAN_REACH"
 

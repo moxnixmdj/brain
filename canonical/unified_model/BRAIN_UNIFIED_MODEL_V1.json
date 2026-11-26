@@ -32163,7 +32163,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "0a62a1013b5fad3f55a3dd571a55616eec01509e811e2fbe04c2b6641f8cd103"
+  "value": "160eca5da20ca8d848982964ce0ba16d9519ce217cc327734c10e13b83a255e2"
  },
  "engines": [
   {
@@ -45898,7 +45898,7 @@
    "imported_by_count": 0,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
-   "sha256": "4c40f715f0e7236963f8a8d715b5c3e19e5727810bada3965079627a5e374de7",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
    "summary": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
    "symbol_count": 3,
    "symbols": [
@@ -84162,7 +84162,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/refresh_action_intent_recursive_obs_20261126.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "4c40f715f0e7236963f8a8d715b5c3e19e5727810bada3965079627a5e374de7",
+   "sha256": "7e0480ea2ee559bf0236740dd8c59b0e4c17677a7eddc24e225857fce48601fc",
    "summary": "Fill the recursive-OBS receipt and live route frontier for this round's action intent.",
    "triggers": [
     "refresh",
@@ -146793,7 +146793,7 @@
   "included_source_count": 2236,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "b65592fa31d4ca88a9d29bbd6e566307c722eb3b2322e63a391d882e4dc8d2d1"
+  "source_tree_digest": "32bc93a15e369fd068ef3bce95843dd03f4d67b9fb4da15ceacb9f76e097588a"
  },
  "research_index": [
   {
@@ -318101,7 +318101,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "fac3cadb29726918ddf0b2d8389bb79e62e2aae0406113e16fd24135dac38f16",
+   "sha256": "7ebca13ac460fceca43c3c5dbac11a10a22f045300c0a9a0d093be7865a3985d",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "0.00": 1,
