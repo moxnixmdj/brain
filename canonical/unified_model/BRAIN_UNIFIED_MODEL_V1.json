@@ -33047,7 +33047,7 @@
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7447,
+  "research_index_records": 7449,
   "routing_tokens": 3798,
   "skills": 18,
   "source_index_entry_points": 567,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "39759d28782208a8ab48f275af3a4e999690ca0aa2088cef8d92f27fa747f907"
+  "value": "21057a91fd580f6a3f18c3dfe779709561802d5bc124b85385f7da65b1df9f7c"
  },
  "engines": [
   {
@@ -35154,7 +35154,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "egraph_optimize_function",
     "source_path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
-    "source_sha256": "7ba8749974c49bb7b4012ebf391ab5ffda6faa924c14a95b58de03ab1ef81c88"
+    "source_sha256": "6834c024cf4a05ba6f62c1070fdecee48247808c5052a760c37c6cda45d36415"
    },
    "summary": "Deductive e-graph algebraic optimizer, automatic memoization transformer, and structural Python refactoring kernel.",
    "triggers": [
@@ -36486,7 +36486,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a"
+    "source_sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872"
    },
    "summary": "Algebraic DBSP bi-temporal Z-set memory + Kumiho AGM Supersedes/Depends_On transitive AnalyzeImpact + projectmem <10 us PreCommitFailureGate + SCoRE anytime-valid conformal e-value martingale risk controller.",
    "triggers": [
@@ -36522,7 +36522,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a"
+    "source_sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872"
    },
    "summary": "Sub-ms Error-Aware L# + Lambda*_M symbolic Mealy instant learner with binary-split numeric guards plus 3-channel Hybrid Computer Use (CLI/File > AX/CDP > Visual) with <5 us Petri guard, OSWorld-Human loop-churn breaker, and PASTE speculative macro commit.",
    "triggers": [
@@ -36559,7 +36559,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a"
+    "source_sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872"
    },
    "summary": "Futamura self-compiling 4-rung cascade (Rung 0 <100 us alpha-normalized AST rules -> Rung 1 byte-effect -> Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value -> optional Rung 3 proposer) compiling verified wins back to Rung 0 plus GrowLibm sleep compression.",
    "triggers": [
@@ -36596,7 +36596,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a"
+    "source_sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872"
    },
    "summary": "Real OS kernel-confined 3-channel computer-use executor uniting os_isolation_v1 (CapEff=0) + HybridComputerUsePetriSupervisor + Ring-0 byte_effect_oracle_v1 verification + atomic CoW workspace rollback + PreCommitFailureGate.",
    "triggers": [
@@ -36631,7 +36631,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "run",
     "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-    "source_sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a"
+    "source_sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872"
    },
    "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST + 13-law residual wall closers + repo component Petri + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
    "triggers": [
@@ -44501,10 +44501,10 @@
    "classification": "ENTRY_POINT",
    "executable_entry_point": true,
    "id": "ext_source:canonical/tools/dark_matter_adjudicator_v1.py",
-   "imported_by_count": 1,
+   "imported_by_count": 2,
    "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/tools/dark_matter_adjudicator_v1.py",
-   "sha256": "efb2eee101ac8969ed3fbc374104af31d5f9a20ef1109a3447baee1d29964b1a",
+   "sha256": "5eaf48a2f01390c6c8bb14d36a3b437c8874b02bf2a775d80a2afac43df7e592",
    "summary": "Dark-matter adjudicator: turn \"we already have it somewhere\" into an executable verdict.",
    "symbol_count": 14,
    "symbols": [
@@ -91117,7 +91117,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a",
+   "sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
    "triggers": [
     "futamura",
@@ -92523,7 +92523,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "7ba8749974c49bb7b4012ebf391ab5ffda6faa924c14a95b58de03ab1ef81c88",
+   "sha256": "6834c024cf4a05ba6f62c1070fdecee48247808c5052a760c37c6cda45d36415",
    "summary": "E-graph equality-saturation optimizer, systems concurrency transformer, deductive code/test synthesizer, and structural refactor/git writer.",
    "triggers": [
     "egraph",
@@ -95711,7 +95711,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/tools/dark_matter_adjudicator_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "efb2eee101ac8969ed3fbc374104af31d5f9a20ef1109a3447baee1d29964b1a",
+   "sha256": "5eaf48a2f01390c6c8bb14d36a3b437c8874b02bf2a775d80a2afac43df7e592",
    "summary": "Dark-matter adjudicator: turn \"we already have it somewhere\" into an executable verdict.",
    "triggers": [
     "dark",
@@ -111155,7 +111155,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 23430,
+   "bytes": 23510,
    "headings": [
     "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
     "0. The answer in one paragraph",
@@ -111179,7 +111179,7 @@
    ],
    "kind": "DOCUMENT",
    "path": "FRONTIER_PLAN_V3_20261126.md",
-   "sha256": "183f5b70590d7009fc08a2ffce8663ee903b48898b0a3280bdccec3b23d7f807",
+   "sha256": "c952f93be7cd40d3375fb77f7dd4be4a0d56db1d423a07ea255c32e1ef5c9205",
    "summary": "**Date:** 2026-11-26 · **Branch base:** `main@ac5c1015` · **Status:** plan, not a claim",
    "terms": {
     "0.59": 7,
@@ -111229,7 +111229,7 @@
     "terminal-bench": 8,
     "verified": 8,
     "vs": 8,
-    "wave": 23
+    "wave": 24
    },
    "title": "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
    "title_terms": [
@@ -163312,7 +163312,7 @@
   "included_source_count": 2456,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "4a66bb908829eaf3037eb0c65405d3474a5edb532291bb21aab6f524ff8b05a3"
+  "source_tree_digest": "fcef4f2443f686321820a77c567c4b6378ccb769740c85afdc43563bb65bb46f"
  },
  "research_index": [
   {
@@ -296000,6 +296000,23 @@
   {
    "action_id": "",
    "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/verification/TITAN_ADJUDICATION_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/TITAN_ADJUDICATION_20261126_V1.json",
+   "schema": "BRAIN_TITAN_ADJUDICATION_V1",
+   "sha256": "ccfa38d743839e313f95fe6288f4cdcd63fd024b88ab890e6e28c25727907e75",
+   "status": "",
+   "terms": {
+    "20261126": 1,
+    "adjudication": 1,
+    "titan": 1,
+    "v1": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
    "date": "2026-10-10",
    "id": "research:canonical/verification/TLAC_MREL_IDENTITY_DISCRIMINATOR_VERIFY_20261010_V1.json",
    "kind": "RESEARCH_RECORD",
@@ -340454,6 +340471,51 @@
    }
   },
   {
+   "action_id": "WAVE44_TITAN_ADJUDICATION_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/WAVE44_TITAN_ADJUDICATION_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE44_TITAN_ADJUDICATION_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b6fd789d18ede9cf8ac95a3d63b054e123531a661351262a410e99d2992d2b4d",
+   "status": "SHIPPED",
+   "terms": {
+    "20261126": 1,
+    "466-line": 1,
+    "712-line": 1,
+    "adjudicate": 1,
+    "adjudication": 1,
+    "adopt": 1,
+    "all": 1,
+    "asked": 1,
+    "awaken": 2,
+    "contract": 1,
+    "depending": 1,
+    "door": 1,
+    "engine": 1,
+    "executed": 1,
+    "forty": 2,
+    "forty-three": 1,
+    "front": 1,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "import": 1,
+    "index": 1,
+    "indistinguishable": 1,
+    "keeps": 2,
+    "large": 1,
+    "modules": 2,
+    "never": 1,
+    "nothing": 1,
+    "only": 2,
+    "ordering": 1,
+    "proposing": 1,
+    "prove": 1,
+    "titans": 2,
+    "wire": 2
+   }
+  },
+  {
    "action_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -370145,9 +370207,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
-   "sha256": "d337af12dfa206e989bc1322487c5a355a36adbb6cf91fc882bd37d2b74a162a",
+   "sha256": "282eb2afe100ee7d1b8c1a4fda22fecd4565a08f7effa2dd23b2d36e968c2872",
    "summary": "Futamura \"Compile Away the Frontier\" Unified Leapfrog Kernel (`K3 = 0`).",
-   "symbol_count": 30,
+   "symbol_count": 31,
    "symbols": [
     "CompiledRung0Rule",
     "CompiledSymbolicMealyMachine",
@@ -424599,9 +424661,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
-   "sha256": "7ba8749974c49bb7b4012ebf391ab5ffda6faa924c14a95b58de03ab1ef81c88",
+   "sha256": "6834c024cf4a05ba6f62c1070fdecee48247808c5052a760c37c6cda45d36415",
    "summary": "E-graph equality-saturation optimizer, systems concurrency transformer, deductive code/test synthesizer, and structural refactor/git writer.",
-   "symbol_count": 38,
+   "symbol_count": 39,
    "symbols": [
     "EClass",
     "EGraph",

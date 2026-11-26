@@ -1,0 +1,174 @@
+{
+ "brief_claim_verification": {
+  "100_dark_modules_awakened": {
+   "evidence": "'awakened' has no definition in the tree; the measurable proxy is PROVEN, which stood at 6 before this wave",
+   "verdict": "UNVERIFIABLE"
+  },
+  "1746_unwired_non_test_modules_ge_180_loc": {
+   "evidence": "177 unimported non-test modules are >= 180 lines",
+   "verdict": "FAILED"
+  },
+  "43_named_titan_modules_exist_at_claimed_loc": {
+   "evidence": "all 43 found; rank order of sizes matches the brief",
+   "verdict": "VERIFIED"
+  },
+  "756_open_pull_requests": {
+   "evidence": "gh pr list --state open --limit 1000 -> 756",
+   "verdict": "VERIFIED"
+  },
+  "876219_lines_in_those_modules": {
+   "evidence": "54,409 lines",
+   "verdict": "FAILED"
+  },
+  "iteration_75_commit_209bbc6c": {
+   "evidence": "git cat-file -t 209bbc6c -> Not a valid object name",
+   "verdict": "FAILED"
+  },
+  "iteration_commits_92b6db85_d6c1661a": {
+   "evidence": "neither object exists in this repository",
+   "verdict": "FAILED"
+  },
+  "pr_7144_clean_and_22_of_22_green": {
+   "evidence": "OPEN, mergeable=CONFLICTING, mergeStateStatus=DIRTY, +16,677/-9,958",
+   "verdict": "FAILED"
+  }
+ },
+ "census_refresh": {
+  "candidates": 2174,
+  "command": "python3 canonical/tools/dark_matter_adjudicator_v1.py --all-modules --min-loc 140",
+  "counts": {
+   "BROKEN": 7,
+   "IMPORTS_ONLY": 2080,
+   "MISSING_SUBSTRATE": 79,
+   "PROVEN": 8
+  },
+  "expect_exit": 0,
+  "modules_under_canonical": 6371,
+  "no_importer": {
+   "ge180_loc": 54409,
+   "ge180_non_test": 177,
+   "total": 565
+  },
+  "proven_loc": 14385,
+  "run_digest_sha256": "01c00aa0facf0272d0a9ffc4f4ef14fbcc65a72ee438cdc62297e6d66b29bb09"
+ },
+ "contract_adoption": {
+  "canonical/runtime/futamura_leapfrog_kernel_v1.py": {
+   "alpha": 0.05,
+   "checks": 10,
+   "measured_null_breach_rate": 0.0175,
+   "what_it_proves": "The anytime-validity claim, as an inequality: null expectation of each factor is exactly 1 at four p0 values; the seeded null breach rate over 400 runs stays inside the Ville bound; a real signal still commits within 12 observations; a hard contradiction revokes a prior COMMIT; identical observations give identical decisions."
+  },
+  "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py": {
+   "checks": 9,
+   "what_it_proves": "Congruence closure end to end: distinct leaves stay distinct, identical nodes deduplicate, a rewrite merges its two sides, the merge propagates to parents, a + 1 stays outside a's class, extraction returns the cheapest representative, rebuild is idempotent."
+  }
+ },
+ "date": "2026-11-26",
+ "honest_limits": [
+  "A self-check is the module's own claim about itself. Two large modules now prove their headline property on small honest fixtures; that is not evidence they work on real repositories.",
+  "PROVEN rose from 6 to 8 of 2,174. The titan census did not find a single broken module: the mass is unproven, not defective.",
+  "The futamura self-check measures a statistical guarantee, so it is seeded and deterministic but still a sample (400 trials at alpha = 0.05); a breach rate of 0.0175 is inside the bound, not a proof of it.",
+  "No external benchmark was run in this wave. Nothing here is a capability claim against any published system."
+ ],
+ "instrument": "canonical/tools/dark_matter_adjudicator_v1.py",
+ "instrument_defects_repaired": [
+  {
+   "defect": "run(modules=[...]) raised ValueError on relative paths because module_name() called relative_to(ROOT) on an unresolved path",
+   "fix": "resolve the path at adjudicate_one entry"
+  },
+  {
+   "defect": "the worker-crash handler re-raised the same ValueError, so one unnameable candidate aborted every other verdict",
+   "fix": "the fail-closed path now degrades to a labelled BROKEN verdict"
+  }
+ ],
+ "schema": "BRAIN_TITAN_ADJUDICATION_V1",
+ "supersedes_snapshot_at": "canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json",
+ "titan_adjudication": {
+  "candidates": 43,
+  "conclusion": "Every titan imports cleanly. Forty of forty-three cannot prove anything, and none is broken or missing substrate: the blocker is the absence of an executable contract, not the absence of a dependency. Wiring them into the front door before this wave would have wired forty unverified claims.",
+  "counts": {
+   "BROKEN": 0,
+   "IMPORTS_ONLY": 40,
+   "MISSING_SUBSTRATE": 0,
+   "PROVEN": 3
+  },
+  "digest": "72bc7b420f04d5ec551adbedab2b7b82bbb492beaa8eadfb45efe2cc5be0c2c6",
+  "elapsed_ms": 1369.32,
+  "largest_unproven": [
+   {
+    "loc": 6714,
+    "module": "canonical.swe_kernel.unified_epistemic_portfolio_v1"
+   },
+   {
+    "loc": 6712,
+    "module": "canonical.swe_kernel.reverse_tomography_algebra_v1"
+   },
+   {
+    "loc": 5175,
+    "module": "canonical.swe_kernel.meta_circular_organ_graph_v1"
+   },
+   {
+    "loc": 4525,
+    "module": "canonical.swe_kernel.angelic_lens_cow_repair_v1"
+   },
+   {
+    "loc": 4401,
+    "module": "canonical.swe_kernel.universal_computer_agent_v1"
+   },
+   {
+    "loc": 4396,
+    "module": "canonical.swe_kernel.canonical_memory_crystallizer_v1"
+   },
+   {
+    "loc": 3785,
+    "module": "canonical.swe_kernel.metamorphic_habitation_zipper_v1"
+   },
+   {
+    "loc": 3299,
+    "module": "canonical.swe_kernel.causal_cegis_inventor_v1"
+   },
+   {
+    "loc": 3210,
+    "module": "canonical.swe_kernel.petri_cow_splicing_engine_v1"
+   },
+   {
+    "loc": 3036,
+    "module": "canonical.runtime.computer_env_v1"
+   },
+   {
+    "loc": 2828,
+    "module": "canonical.tools.the_right_question_is_an_experiment_v1"
+   },
+   {
+    "loc": 2827,
+    "module": "canonical.swe_kernel.recursive_self_architect_v1"
+   }
+  ],
+  "proven": [
+   {
+    "checks": 6,
+    "contract_source": "pre_existing",
+    "loc": 4702,
+    "module": "canonical.swe_kernel.semantic_causal_engine_v1",
+    "path": "canonical/swe_kernel/semantic_causal_engine_v1.py"
+   },
+   {
+    "checks": 9,
+    "contract_source": "this_wave",
+    "loc": 3452,
+    "module": "canonical.swe_kernel.egraph_and_deductive_synthesizer_v1",
+    "path": "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py"
+   },
+   {
+    "checks": 10,
+    "contract_source": "this_wave",
+    "loc": 3446,
+    "module": "canonical.runtime.futamura_leapfrog_kernel_v1",
+    "path": "canonical/runtime/futamura_leapfrog_kernel_v1.py"
+   }
+  ],
+  "proven_loc": 11600,
+  "scope": "the 43 modules this brief names as already-solved-but-unwired"
+ }
+}

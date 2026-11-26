@@ -140,8 +140,8 @@ Measured on `main@ac5c1015`, today:
 above came from a candidate rule that compared a bare filename stem against fully dotted import
 names, so every module reached as `from canonical.<pkg>.<mod> import X` counted as dark. Corrected,
 the tree has 3,549 unimported modules, 227 of them substantial. The adjudicator then ran on all
-2,174 substantial modules: **6 can prove they run** (seven thousand four hundred and seventy-nine
-lines), 2,082 import and prove nothing, 79 need substrate this sandbox does not ship, 7 are broken.
+2,174 substantial modules: **6 can prove they run** on the day it merged, **8** after Wave 44
+(futamura_leapfrog_kernel_v1 and egraph_and_deductive_synthesizer_v1 adopted the contract), 2,080 import and prove nothing, 79 need substrate this sandbox does not ship, 7 are broken.
 The 227-module no-importer census proves **nothing at all**. The numbers that follow in this section
 are still worth reading for their shape, but every count of "hidden organs" must be read as 227,
 not 1,996.
