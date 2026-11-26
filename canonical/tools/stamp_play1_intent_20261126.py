@@ -279,6 +279,7 @@ def main() -> dict:
     obs = dict(intent["recursive_obs"])
     obs.update({
         "canonical_base_commit": BASE,
+        "canonical_generation_or_commit": intent["canonical_generation"],
         "real_outcome": REAL_OUTCOME,
         "required_capability": REQUIRED_CAPABILITY,
         "selected_route": ROUTE,
