@@ -1106,3 +1106,131 @@ is not a test, and `AGENTS.md` rule 6 says so explicitly.
 - Coding agent harness benchmarks (same model, different scaffold) — https://futureagi.com/blog/coding-agent-harness-benchmark/
 - Best AI coding agents, November 2026 (Terminal-Bench 4.1 reward-hack-resistant verifiers) — https://www.morphllm.com/best-ai-coding-agents-2026
 - AI agent evals on real repositories — https://explainx.ai/blog/ai-coding-agent-evals-real-repos-2026
+
+---
+
+# Part V — The instrument that refuses to flatter (fifth pass)
+
+Part IV concluded that verification is the wedge and that the honest coding
+instrument must use post-cutoff tasks. This pass builds the measuring
+device, runs it, and makes it refuse to call its own result a frontier
+score.
+
+## 27. What the evaluator measures
+
+`canonical/tools/selective_risk_eval_v1.py` reports the standard
+selective-prediction triple with denominators, not a pass rate:
+
+```
+coverage        = answered / total
+selective error = wrong answered / answered      <- risk on the accepted set
+abstention rate = unanswered / total
+```
+
+swept over the router's own confidence (routing coverage — an
+evidence-completeness signal, which is why sweeping it is meaningful),
+producing a risk-coverage curve and its area (AURC, lower is better).
+
+This is the 2026 reporting standard, and it is the one thing the
+benchmark crisis produced that is actually an improvement: *"Report both
+coverage and error among answered cases, with their denominators."* A
+system answering 90% at 30% error and a system answering 40% at 2% error
+are not comparable under a single accuracy number, and only the first
+number ever gets published.
+
+## 28. Measured on this tree
+
+Task set: `canonical/verification/FRONTIER_FRESH_TASK_SET_20261126_V1.json`,
+25 tasks — 17 that must reach a specific engine, 8 that must be refused.
+
+| | |
+|---|---|
+| answered | 17 / 25 |
+| **coverage** | **68.00%** |
+| **selective error** | **0.00%** (0 wrong of 17 answered) |
+| abstention rate | 32.00% |
+| **AURC** | **0.0545** |
+
+Risk-coverage curve:
+
+| τ | answered | coverage | selective error | abstention |
+|---|---|---|---|---|
+| 0.00 (answer everything) | 25 | 100% | **32.00%** | 0% |
+| 0.20 | 23 | 92% | 26.09% | 8% |
+| 0.30 | 17 | 68% | **0.00%** | 32% |
+| 0.70 | 14 | 56% | 0.00% | 44% |
+| 0.90 | 8 | 32% | 0.00% | 68% |
+
+Read the top row: **answering everything costs 32% error. The router's
+own threshold costs nothing in coverage that matters and takes error to
+zero.** The confidence signal separates the answered class from the refused
+class cleanly on this set. That is a property worth knowing, and it is
+visible only because the curve is reported instead of a pass rate.
+
+## 29. The number is blocked on purpose
+
+`headline_reportable: false`,
+`reason: TASKS_NOT_POST_CUTOFF_MINED__CONTRACT_CHECK_ONLY_NOT_A_FRONTIER_SCORE`.
+
+The tasks are hand-authored by the same session that wired the routes. 0%
+selective error on them proves the contract holds; it proves nothing about
+generalisation, and it is *exactly* the shape of claim that produced
+three dead coding benchmarks. A 0.00% would be a very pleasant number to
+put in a summary. The tool refuses to emit it as a headline, and the
+refusal is recorded in the artifact rather than in a footnote.
+
+What would unblock it: mine real issues from repositories after the model
+cutoff (2026-06-01 baseline in the task set), with each task carrying its
+commit SHA and mining date, and each pass carrying a receipt. The
+instrument already prices the honesty; only the task source is missing.
+
+## 30. Why this is the unusual strategic move
+
+Every frontier lab is now in the position of publishing numbers produced by
+instruments that are 30%+ broken, that they cannot repair without
+republishing, and that reward memorisation (76% file recovery from ticket
+text alone). Almost all of them respond the same way: build a new
+benchmark, keep the single-number format, repeat.
+
+The unusual response is to change the *shape of the claim*, not the
+benchmark:
+
+1. **Coverage and error together, always, with denominators.** A claim
+   without an abstention rate is unfalsifiable.
+2. **Provenance on every task.** Mined-after date and commit SHA, or the
+   headline is blocked — enforced in code, not in a README.
+3. **Receipts on every pass.** A VERIFY that repeats its RECEIPT's hash is
+   not verification, per this repository's own law.
+4. **The instrument is the asset.** Anyone can copy a benchmark; nobody can
+   retroactively add the discipline to a benchmark they already shipped.
+
+This is the one arena where Brain's governance — non-editable terminal
+truth, receipt lanes, fail-closed records — is not overhead but a
+**structural advantage**. It is the only system in the comparison whose
+laws make the dishonest move mechanically impossible rather than merely
+discouraged.
+
+## 31. Verification, this pass
+
+- Verifier: **38/38 PASS** (9 categories).
+- `test_brain_unified_model_v1`: **62/62 OK**.
+- `test_frontier_routing_contract_v1`: **9/9 OK** — 5 routing contract
+  tests plus 4 new instrument tests that fail if the provenance gate is
+  relaxed, if the confidence signal goes vacuous (a flat 0-error curve),
+  if AURC becomes undefined, or if the accounting stops reconciling.
+- Integrity guard: **17 rules / 0 violations PASS**.
+- New: `canonical/tools/selective_risk_eval_v1.py`,
+  `canonical/verification/FRONTIER_FRESH_TASK_SET_20261126_V1.json`.
+- `truth.achieved` untouched. No capability registered. No scoreboard
+  edited. $0, no weights, no network.
+
+## 32. Reference additions (fifth pass)
+
+- Knowing When Not to Answer: risk-coverage evaluation and AURC —
+  https://arxiv.org/html/2602.14189v1
+- The Semantic Abstention Policy: coverage, selective error, denominators —
+  https://edukatesg.com/2026/11/26/vocabulary-coding-engineering-semantic-abstention-selective-prediction-risk-coverage/
+- Coverage-Abstention-Precision curves and subgroup audits —
+  https://github.com/mariam-elelidy/Coverage-Abstention-Trade-offs-in-Selective-Prediction
+- Conformal abstention with risk-coverage analysis in deployment —
+  https://link.springer.com/article/10.1007/s11416-026-00692-3

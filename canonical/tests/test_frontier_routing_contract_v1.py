@@ -167,5 +167,50 @@ class FrontierRoutingContractTests(unittest.TestCase):
         self.assertEqual(out.get("admission"), "NOT_ADMITTED")
 
 
+class SelectiveRiskInstrumentTests(unittest.TestCase):
+    """The evaluator must refuse to flatter, and must keep measuring.
+
+    These tests protect the instrument, not the score. If someone relaxes
+    the provenance gate so a hand-authored set can be quoted as a frontier
+    result, that is the exact failure mode the 2026 benchmark crisis is made
+    of, and it fails here.
+    """
+
+    @classmethod
+    def setUpClass(cls):
+        from canonical.tools import selective_risk_eval_v1 as ev
+
+        cls.ev = ev
+        cls.report = ev.evaluate()
+
+    def test_hand_authored_set_is_never_a_headline(self):
+        self.assertFalse(self.report["headline_reportable"])
+        self.assertIn("NOT_POST_CUTOFF_MINED", str(self.report["headline_blocked_reason"]))
+
+    def test_router_confidence_separates_answered_from_refused(self):
+        op = self.report["operating_point"]
+        self.assertEqual(op["answered"], 17)
+        self.assertEqual(op["wrong_answered"], 0)
+        self.assertEqual(op["selective_error"], 0.0)
+        self.assertEqual(op["abstention_rate"], 0.32)
+        # The curve must actually trade coverage for risk; a flat curve at
+        # 0% error everywhere would mean the confidence signal is vacuous.
+        first = self.report["risk_coverage_curve"][0]
+        self.assertEqual(first["coverage"], 1.0)
+        self.assertGreater(first["selective_error"], 0.0)
+
+    def test_aurc_is_defined_and_finite(self):
+        aurc = self.report["aurc"]
+        self.assertIsNotNone(aurc)
+        self.assertGreaterEqual(aurc, 0.0)
+        self.assertLessEqual(aurc, 1.0)
+
+    def test_every_task_is_accounted_for(self):
+        rows = self.report["rows"]
+        self.assertEqual(len(rows), self.report["tasks"])
+        answered = [r for r in rows if r["router_confident"]]
+        self.assertEqual(len(answered), self.report["operating_point"]["answered"])
+
+
 if __name__ == "__main__":
     unittest.main()

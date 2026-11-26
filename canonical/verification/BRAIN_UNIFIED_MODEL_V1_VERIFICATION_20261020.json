@@ -1,7 +1,7 @@
 {
- "artifact_bytes": 13570687,
+ "artifact_bytes": 13572820,
  "artifact_path": "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json",
- "artifact_sha256": "350cef6975231acc21554c960e537b0c5b0bf51bf9dae062c1a4861fce343768",
+ "artifact_sha256": "c31c6c077b661d80fff9a4c1fa07bf6c0a468458d532a53eacba7cb387380209",
  "authority": "NONE",
  "capability_credit_delta": 0,
  "categories": [
@@ -15,7 +15,7 @@
    "rows": [
     {
      "detail": {
-      "declared": "ae9ca2dc83ff9101fe9179f9495db3c5fdfd032471f36db0f98ba6b6f3b869af"
+      "declared": "1ef9817dace305a53e605a8e21b87a0296f122653df2a026fd66ef2290a7d0d6"
      },
      "name": "digest_recomputes",
      "oracle": "SHA256_RECOMPUTATION",
@@ -23,7 +23,7 @@
     },
     {
      "detail": {
-      "recompiled_digest": "ae9ca2dc83ff9101fe9179f9495db3c5fdfd032471f36db0f98ba6b6f3b869af"
+      "recompiled_digest": "1ef9817dace305a53e605a8e21b87a0296f122653df2a026fd66ef2290a7d0d6"
      },
      "name": "recompilation_is_byte_identical",
      "oracle": "DETERMINISTIC_RECOMPILE",
@@ -68,7 +68,7 @@
     },
     {
      "detail": {
-      "bytes": 13570687
+      "bytes": 13572820
      },
      "name": "artifact_bytes_are_the_model",
      "oracle": "FILE_STAT",
@@ -305,9 +305,9 @@
      "detail": {
       "extracted": true,
       "listing": [
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_mosphhuu/manifest.json",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_mosphhuu/payload/alpha.txt",
-       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_mosphhuu/payload/beta.txt"
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_71jco1l3/manifest.json",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_71jco1l3/payload/alpha.txt",
+       "canonical/astra_runtime/tmp/BRAIN_UNIFIED_MODEL_VERIFY_71jco1l3/payload/beta.txt"
       ]
      },
      "name": "tar_creation_matches_gnu_tar_oracle",
@@ -521,7 +521,7 @@
    "rows": [
     {
      "detail": {
-      "rows": 646
+      "rows": 647
      },
      "name": "harvested_rows_exist",
      "oracle": "CONTENT",
@@ -566,11 +566,11 @@
    ]
   }
  ],
- "generated_utc": "2026-11-26T12:37:54Z",
+ "generated_utc": "2026-11-26T12:47:42Z",
  "incremental_spend_usd": 0,
  "independent_verifier": null,
  "independent_verifier_run_reference": null,
- "model_digest": "ae9ca2dc83ff9101fe9179f9495db3c5fdfd032471f36db0f98ba6b6f3b869af",
+ "model_digest": "1ef9817dace305a53e605a8e21b87a0296f122653df2a026fd66ef2290a7d0d6",
  "model_id": "BRAIN-UNIFIED-MODEL-V1",
  "next_independent_step": "A different identity must re-run `python3 canonical/runtime/verify_brain_unified_model_v1.py --seed <the seed above>` on a clean checkout and sign the result. Until then this document is a sandbox measurement with no authority.",
  "non_claims": [
