@@ -433,6 +433,26 @@
      "summary": "Multi-Step Closed-Loop Repository Solver, Differential Trace Localizer & Race Prober."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 15.75,
+     "harvested": false,
+     "matched": [
+      "repair@doc",
+      "swe@doc",
+      "localiz@symbol",
+      "patch@symbol",
+      "repair@symbol",
+      "swe@symbol",
+      "diff@doc",
+      "metamorphic@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+     "score": 33.75,
+     "sha256": "af7222abf6086223",
+     "source_index": true,
+     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 14.25,
      "harvested": true,
@@ -534,26 +554,6 @@
     },
     {
      "adapter_module_match": false,
-     "anchored": 13.5,
-     "harvested": false,
-     "matched": [
-      "repair@doc",
-      "swe@doc",
-      "localiz@symbol",
-      "patch@symbol",
-      "repair@symbol",
-      "diff@doc",
-      "metamorphic@doc",
-      "ast@symbol"
-     ],
-     "path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
-     "score": 31.5,
-     "sha256": "df654516f347c7d9",
-     "source_index": true,
-     "summary": "Canonical Unified Polyglot SWE Spine (`canonical_swe_spine_v1`)."
-    },
-    {
-     "adapter_module_match": false,
      "anchored": 3.0,
      "harvested": false,
      "matched": [
@@ -588,7 +588,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
      "score": 27.25,
-     "sha256": "f6dd48ac889f4f2e",
+     "sha256": "28252b0e8a5b1cf7",
      "source_index": true,
      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
@@ -828,11 +828,14 @@
     "attested_state_v1",
     "authenticated_pareto_scheduler_v1",
     "automationbench_owned_policy_kernel_v1",
+    "brain_unified_model_v1",
     "browser_goal_grounding_recovery_candidate",
     "browser_v1",
     "bytes_open_domain_equivalence_cut_v1",
     "cad_partspec",
     "cad_t0_oracle_adapter",
+    "canonical_boundary_router_v1",
+    "canonical_cu_sandbox_spine_v1",
     "canonical_env_discovery_spine_v1",
     "capability_parallel_frontier_v1",
     "capability_parallel_frontier_v2",
@@ -967,14 +970,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "zygote_worker_pool_v1"
    ],
-   "candidates": 150,
+   "candidates": 153,
    "frontier_function": "drive a GUI it has never seen",
-   "harvested_all": 27,
+   "harvested_all": 28,
    "harvested_executable_top": 6,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 142,
+   "indexed_all": 145,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -1472,6 +1475,7 @@
     "associative_memory_v1",
     "autonomous_verified_self_improvement_v1",
     "brain_unified_model_v1",
+    "canonical_boundary_router_v1",
     "canonical_env_discovery_spine_v1",
     "canonical_memory_crystallizer_v1",
     "capability_consolidation_audit_v1",
@@ -1503,17 +1507,34 @@
     "universal_computer_agent_v1",
     "verified_skill_crystallizer_v1"
    ],
-   "candidates": 34,
+   "candidates": 35,
    "frontier_function": "keep improving without forgetting or drifting",
    "harvested_all": 12,
-   "harvested_executable_top": 12,
+   "harvested_executable_top": 11,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 23,
-   "indexed_all": 30,
+   "indexed_all": 31,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
+    {
+     "adapter_module_match": false,
+     "anchored": 10.5,
+     "harvested": false,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "expiry@symbol",
+      "forget@symbol",
+      "replay@symbol"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 10.5,
+     "sha256": "8454e8d4ef5a2f25",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
     {
      "adapter_module_match": false,
      "anchored": 4.5,
@@ -1547,22 +1568,6 @@
      "sha256": "d6c97632e311a0ae",
      "source_index": true,
      "summary": "Retire a learned rule when the world underneath it moved."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 8.25,
-     "harvested": false,
-     "matched": [
-      "consolidat@symbol",
-      "drift@symbol",
-      "forget@symbol",
-      "replay@symbol"
-     ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 8.25,
-     "sha256": "e522b9ea243516bb",
-     "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
     {
      "adapter_module_match": false,
@@ -1608,7 +1613,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
      "score": 7.25,
-     "sha256": "ac389f0224352542",
+     "sha256": "6aa1eb3a2b1790a0",
      "source_index": true,
      "summary": "Canonical Environment Discovery & Conflict-Aware Active Automata Spine (`0E`)."
     },
@@ -1689,6 +1694,21 @@
      "sha256": "01cdd738fde1095e",
      "source_index": true,
      "summary": "Zero-Knowledge-House Petri-Net Component Synthesis, Dual-Program Splicing & 16-Way CoW World Tomography (`petri_cow_splicing_engine_v1`)."
+    },
+    {
+     "adapter_module_match": false,
+     "anchored": 6.0,
+     "harvested": true,
+     "matched": [
+      "consolidat@symbol",
+      "drift@symbol",
+      "expire@symbol"
+     ],
+     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "score": 6.0,
+     "sha256": "6c0d1987af82c21d",
+     "source_index": true,
+     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
     {
      "adapter_module_match": false,
@@ -1774,25 +1794,25 @@
       "consolidat@symbol",
       "drift@symbol"
      ],
-     "path": "canonical/runtime/brain_unified_model_v1.py",
+     "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 4.5,
-     "sha256": "daa0740d541992a1",
+     "sha256": "bbdf7cbd5ea7c7be",
      "source_index": true,
-     "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
+     "summary": "Seven organs, finally in one body."
     },
     {
      "adapter_module_match": false,
      "anchored": 4.5,
-     "harvested": true,
+     "harvested": false,
      "matched": [
-      "consolidat@symbol",
-      "drift@symbol"
+      "drift@symbol",
+      "expiry@symbol"
      ],
-     "path": "canonical/runtime/creature_runtime_v1.py",
+     "path": "canonical/swe_kernel/canonical_boundary_router_v1.py",
      "score": 4.5,
-     "sha256": "d03ea5f6f55680bf",
+     "sha256": "bf80de10dd91e326",
      "source_index": true,
-     "summary": "Seven organs, finally in one body."
+     "summary": "Canonical BoundaryRouter & Compounding Closed-Loop Orchestrator (`0I`)."
     },
     {
      "adapter_module_match": false,
@@ -1880,21 +1900,6 @@
      "sha256": "df520b604d2bee02",
      "source_index": true,
      "summary": "Persistent parameterized code-repair hypotheses in the existing SQLite store."
-    },
-    {
-     "adapter_module_match": true,
-     "anchored": 2.25,
-     "harvested": true,
-     "matched": [
-      "refine@symbol",
-      "replay@doc",
-      "stable@symbol"
-     ],
-     "path": "canonical/tools/the_right_question_is_an_experiment_v1.py",
-     "score": 3.25,
-     "sha256": "dddee8a20f5bccc4",
-     "source_index": true,
-     "summary": "The right question is an experiment: compile a prose claim to a witness, and"
     }
    ],
    "vendored_donors_excluded": 0
@@ -2109,7 +2114,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
      "score": 28.75,
-     "sha256": "e522b9ea243516bb",
+     "sha256": "8454e8d4ef5a2f25",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2802,21 +2807,21 @@
    "top": [
     {
      "adapter_module_match": false,
-     "anchored": 9.75,
+     "anchored": 12.0,
      "harvested": false,
      "matched": [
       "episod@symbol",
+      "recall@symbol",
       "memory@doc",
       "provenance@doc",
       "compress@symbol",
       "episod@doc",
       "ledger@symbol",
-      "memory@symbol",
-      "retriev@doc"
+      "memory@symbol"
      ],
      "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 18.25,
-     "sha256": "e522b9ea243516bb",
+     "score": 20.5,
+     "sha256": "8454e8d4ef5a2f25",
      "source_index": true,
      "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
@@ -2854,7 +2859,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 16.25,
-     "sha256": "daa0740d541992a1",
+     "sha256": "6c0d1987af82c21d",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -3646,7 +3651,7 @@
      ],
      "path": "canonical/swe_kernel/canonical_oracle_vericoding_spine_v1.py",
      "score": 28.25,
-     "sha256": "f6dd48ac889f4f2e",
+     "sha256": "28252b0e8a5b1cf7",
      "source_index": true,
      "summary": "Canonical Dual-Channel Witness Inversion, Goal-Negation Oracle & Formal Vericoding Spine (`0H`)."
     },
@@ -3890,6 +3895,26 @@
      "summary": "Provenance for the two file-fact rows: ground truth computed without them."
     },
     {
+     "adapter_module_match": false,
+     "anchored": 9.0,
+     "harvested": false,
+     "matched": [
+      "abstain@symbol",
+      "prove@doc",
+      "counterexample@symbol",
+      "prove@symbol",
+      "audit@symbol",
+      "refus@doc",
+      "witness@doc",
+      "invariant@doc"
+     ],
+     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+     "score": 16.0,
+     "sha256": "8454e8d4ef5a2f25",
+     "source_index": true,
+     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
+    },
+    {
      "adapter_module_match": true,
      "anchored": 5.25,
      "harvested": false,
@@ -3924,7 +3949,7 @@
      ],
      "path": "canonical/runtime/creature_runtime_v1.py",
      "score": 15.25,
-     "sha256": "d03ea5f6f55680bf",
+     "sha256": "bbdf7cbd5ea7c7be",
      "source_index": true,
      "summary": "Seven organs, finally in one body."
     },
@@ -4062,25 +4087,6 @@
      "sha256": "1e9a2d51bb7efea5",
      "source_index": true,
      "summary": "Learn WHEN a remembered plan applies, from outcomes in context."
-    },
-    {
-     "adapter_module_match": false,
-     "anchored": 6.75,
-     "harvested": false,
-     "matched": [
-      "abstain@symbol",
-      "prove@doc",
-      "counterexample@symbol",
-      "audit@symbol",
-      "refus@doc",
-      "witness@doc",
-      "invariant@doc"
-     ],
-     "path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
-     "score": 13.75,
-     "sha256": "e522b9ea243516bb",
-     "source_index": true,
-     "summary": "Canonical 5-Timescale Verification-First Memory Bus & Sleep-Time Crystallizer (`0G`)."
     },
     {
      "adapter_module_match": false,
@@ -4910,7 +4916,7 @@
   },
   "computer_use": {
    "chance_route_recall": 0.0532,
-   "chance_source_recall": 0.0663,
+   "chance_source_recall": 0.0676,
    "frontier_route_hit_recall": 0.667,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 1.0,
@@ -5048,7 +5054,7 @@
   },
   "continual_learning": {
    "chance_route_recall": 0.02,
-   "chance_source_recall": 0.0151,
+   "chance_source_recall": 0.0156,
    "frontier_route_hit_recall": 0.333,
    "frontier_source_hit_recall": 0.333,
    "native_route_hit_recall": 0.667,

@@ -1251,6 +1251,178 @@ class Creature:
         self._save()
         return res
 
+    def sleep_evolve_organs_gea(
+        self,
+        *,
+        organ_name: str,
+        incumbent_source: str,
+        candidate_sources: Sequence[str],
+        test_cases: Sequence[tuple[tuple[Any, ...], Any]],
+        anchor_cases: Sequence[tuple[tuple[Any, ...], Any]] = (),
+        alpha: float = 0.05,
+        life_cost: float = 0.25,
+    ) -> dict[str, Any]:
+        """Wave 19: Group-Evolving Meta-Circular Organs (GEA) + Anytime-Valid Certificate (SEA) + Ring-0 Referee.
+
+        Evaluates a group of pure-AST organ lineages over shared failure traces (`GEA`), gates every
+        candidate via `recursive_self_architect_v1.referee_executable_organ` + `meta_circular_organ_graph_v1`
+        (`0` unsafe AST nodes), and admits an upgrade ONLY when it achieves 0 anchor regressions AND
+        passes an anytime-valid sequential Hoeffding/Ville e-process certificate (`SEA`, `e_value >= 1/alpha`
+        or strict paired dominance with zero regressions).
+        """
+        import hashlib
+        import math
+
+        from canonical.swe_kernel import meta_circular_organ_graph_v1 as mcog
+        from canonical.swe_kernel import recursive_self_architect_v1 as rsa
+
+        cost = max(0.05, float(life_cost))
+        if self._life.remaining <= 0 or not self._life.can_finish(cost):
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__CANNOT_AFFORD_GEA_EVOLUTION",
+                "life_remaining": self._life.remaining,
+                "model_calls": 0,
+            }
+        self._life.spend(cost)
+
+        def _eval_organ(src: str, cases: Sequence[tuple[tuple[Any, ...], Any]]) -> tuple[bool, list[bool], list[dict[str, Any]], str]:
+            ref = rsa.referee_executable_organ(src)
+            if not ref.get("ok"):
+                return False, [], [], str(ref.get("reason") or "RING0_REFUSED")
+            try:
+                _tree, ns = mcog.compile_organ_namespace(src)
+            except Exception as exc:
+                return False, [], [], f"COMPILE_REFUSED:{type(exc).__name__}:{exc}"
+            fn = ns.get(organ_name)
+            if not callable(fn):
+                return False, [], [], f"ORGAN_FUNCTION_MISSING:{organ_name}"
+            outcomes: list[bool] = []
+            failures: list[dict[str, Any]] = []
+            for idx, (args, expected) in enumerate(cases):
+                try:
+                    actual = fn(*args)
+                    ok = (actual == expected)
+                except Exception as exc:
+                    actual = f"EXC:{type(exc).__name__}:{exc}"
+                    ok = False
+                outcomes.append(bool(ok))
+                if not ok:
+                    failures.append({"case_idx": idx, "args": list(args), "expected": expected, "actual": actual})
+            return True, outcomes, failures, "ADMITTED"
+
+        inc_ok, inc_outcomes, inc_failures, inc_reason = _eval_organ(incumbent_source, test_cases)
+        if not inc_ok:
+            self._save()
+            return {
+                "pass": False,
+                "admitted": False,
+                "status": "FAIL_CLOSED__INCUMBENT_INVALID",
+                "reason": inc_reason,
+                "model_calls": 0,
+            }
+        inc_anchor_ok, inc_anchor_outcomes, _, _ = _eval_organ(incumbent_source, anchor_cases) if anchor_cases else (True, [], [], "OK")
+        inc_score = sum(1 for x in inc_outcomes if x)
+
+        group_reports: list[dict[str, Any]] = []
+        shared_failure_pool: list[dict[str, Any]] = list(inc_failures)
+        best_admitted: dict[str, Any] | None = None
+        e_threshold = 1.0 / max(1e-6, float(alpha))
+
+        for idx, cand_src in enumerate(candidate_sources):
+            c_ok, c_outcomes, c_failures, c_reason = _eval_organ(cand_src, test_cases)
+            if not c_ok:
+                group_reports.append({
+                    "lineage_idx": idx,
+                    "ring0_admitted": False,
+                    "reason": c_reason,
+                    "sea_certified": False,
+                })
+                continue
+            shared_failure_pool.extend(c_failures)
+            anchor_regressions = 0
+            if anchor_cases:
+                a_ok, a_outcomes, _, _ = _eval_organ(cand_src, anchor_cases)
+                if not a_ok:
+                    anchor_regressions = len(anchor_cases)
+                else:
+                    anchor_regressions = sum(
+                        1 for inc_a, cand_a in zip(inc_anchor_outcomes, a_outcomes) if inc_a and not cand_a
+                    )
+            # Paired diffs d_i in {-1, 0, +1}; build betting e-process E_n = prod(1 + lam * d_i) (anytime-valid!)
+            diffs = [(1 if c else 0) - (1 if b else 0) for b, c in zip(inc_outcomes, c_outcomes)]
+            paired_regressions = sum(1 for d in diffs if d < 0)
+            paired_gains = sum(1 for d in diffs if d > 0)
+            c_score = sum(1 for x in c_outcomes if x)
+            # Conservative betting fraction lam = 0.5 (supermartingale under H0: E[d_i] <= 0)
+            lam = 0.5
+            log_e = 0.0
+            for d in diffs:
+                step = max(1e-6, 1.0 + lam * float(d))
+                log_e += math.log(step)
+            e_value = math.exp(min(50.0, log_e))
+            sea_certified = (
+                anchor_regressions == 0
+                and paired_regressions == 0
+                and paired_gains > 0
+                and (e_value >= e_threshold or (c_score == len(test_cases) and paired_gains >= 2))
+            )
+            rep = {
+                "lineage_idx": idx,
+                "ring0_admitted": True,
+                "score": c_score,
+                "total": len(test_cases),
+                "incumbent_score": inc_score,
+                "paired_gains": paired_gains,
+                "paired_regressions": paired_regressions,
+                "anchor_regressions": anchor_regressions,
+                "sea_e_value": round(e_value, 4),
+                "sea_threshold": round(e_threshold, 4),
+                "sea_certified": sea_certified,
+                "source_sha256": hashlib.sha256(cand_src.encode("utf-8")).hexdigest(),
+                "source": cand_src,
+            }
+            group_reports.append(rep)
+            if sea_certified:
+                if best_admitted is None or (rep["score"], rep["sea_e_value"]) > (
+                    best_admitted["score"], best_admitted["sea_e_value"]
+                ):
+                    best_admitted = rep
+
+        event_receipt = None
+        if best_admitted is not None:
+            event_receipt = self.memory_bus.append_verified_event(
+                op="SET",
+                key=f"gea_organ:{organ_name}",
+                value={
+                    "source_sha256": best_admitted["source_sha256"],
+                    "score": best_admitted["score"],
+                    "incumbent_score": inc_score,
+                    "sea_e_value": best_admitted["sea_e_value"],
+                },
+                source_commit="gea_sea_sleep_evolution_v1",
+                precondition_guard=["ring0_pure_ast", "zero_anchor_regression", "sea_anytime_valid"],
+            )
+        posture = self._standing.record(verified=True, correct=best_admitted is not None)
+        self._save()
+        return {
+            "pass": best_admitted is not None,
+            "admitted": best_admitted is not None,
+            "status": "PASS__GEA_ORGAN_CERTIFIED_BY_SEA" if best_admitted is not None else "FAIL_CLOSED__NO_CANDIDATE_PASSED_SEA_CERTIFICATE",
+            "organ_name": organ_name,
+            "incumbent_score": inc_score,
+            "total_cases": len(test_cases),
+            "winner": best_admitted,
+            "group_size": len(candidate_sources),
+            "group_reports": [{k: v for k, v in r.items() if k != "source"} for r in group_reports],
+            "shared_failure_trace_count": len(shared_failure_pool),
+            "event_receipt": event_receipt,
+            "life_remaining": self._life.remaining,
+            "posture": posture,
+            "model_calls": 0,
+        }
+
     def self_architect_step(
         self,
         code_root: pathlib.Path,

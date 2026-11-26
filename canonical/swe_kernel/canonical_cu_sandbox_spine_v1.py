@@ -944,3 +944,175 @@ def compile_four_tier_cu_action(
         "model_calls": 0,
     }
 
+
+def fork_reality_speculate_and_commit(
+    *,
+    workspace_root: str | Path | None = None,
+    action_fn: Callable[[Path], Mapping[str, Any]] | None = None,
+    verify_fn: Callable[[Path, Mapping[str, Any]], bool] | None = None,
+    env_state: Any = None,
+    candidate_actions: Sequence[tuple[str, Callable[[Any], Any]]] = (),
+    snapshot_fn: Callable[[Any], Mapping[str, Any]] | None = None,
+    goal_facts: Sequence[str] = (),
+    goal_fn: Callable[[Mapping[str, Any]], bool] | None = None,
+    confined_argv: Sequence[str] | None = None,
+    timeout_s: float = 15.0,
+) -> dict[str, Any]:
+    """Wave 17: Fork-Reality CoW Speculative World Engine + Kernel Seccomp Confinement Audit.
+
+    Wires three previously unwired/isolated engines directly into Spine 0F:
+    - `canonical.swe_kernel.transactional_parallel_execution_v1` (transactional CoW rollback + confined exec)
+    - `canonical.runtime.worker_syscall_allowlist_v1` (real kernel seccomp BPF allowlist posture)
+    - `canonical.swe_kernel.cross_modal_tomography_petri_v1` (multi-layer state tomography + `os.fork()` CoW rollouts)
+    """
+    from canonical.runtime import worker_syscall_allowlist_v1 as seccomp_wl
+    from canonical.swe_kernel import cross_modal_tomography_petri_v1 as xmodal
+    from canonical.swe_kernel import transactional_parallel_execution_v1 as tx_exec
+
+    t0 = time.perf_counter()
+    # 1. Kernel seccomp confinement posture audit
+    try:
+        arch = seccomp_wl.machine()
+        allowed = list(seccomp_wl.allowed_names())
+        refused = list(seccomp_wl.refused_names())
+        bpf_len = len(seccomp_wl.program(arch))
+        seccomp_posture = {
+            "available": True,
+            "arch": arch,
+            "allowed_count": len(allowed),
+            "refused_count": len(refused),
+            "bpf_instructions": bpf_len,
+        }
+    except Exception as exc:
+        seccomp_posture = {"available": False, "reason": f"{type(exc).__name__}:{exc}"}
+
+    # Mode A: Multi-way os.fork() CoW speculative state rollout (zero neural hallucination!)
+    if env_state is not None and candidate_actions:
+        snap_fn = snapshot_fn or (
+            lambda st: xmodal.capture_multilayer_state(
+                html_dom=str(st.get("html_dom", "")) if isinstance(st, Mapping) else "",
+                a11y_tree=list(st.get("a11y_tree", ())) if isinstance(st, Mapping) else [],
+                kv_state=dict(st) if isinstance(st, Mapping) else {"value": repr(st)},
+            )
+        )
+        wrapped_actions: list[tuple[str, Callable[[Any], Any]]] = []
+        for act_name, act_fn in candidate_actions:
+            def _wrapped(st: Any, _f: Callable[[Any], Any] = act_fn) -> Any:
+                out = _f(st)
+                if isinstance(out, Mapping) and out is not st and isinstance(st, dict):
+                    st.clear()
+                    st.update(out)
+                return out
+            wrapped_actions.append((str(act_name), _wrapped))
+        rollouts = xmodal.speculative_cow_rollout(
+            env_state=env_state,
+            candidate_actions=wrapped_actions,
+            snapshot_fn=snap_fn,
+            goal_facts=tuple(goal_facts),
+        )
+        winner = rollouts.get("winner") if isinstance(rollouts, Mapping) else None
+        outcomes = list(rollouts.get("all_outcomes") or ()) if isinstance(rollouts, Mapping) else []
+        if winner is None and goal_fn is not None:
+            for row in outcomes:
+                if isinstance(row, Mapping) and bool(goal_fn(row)):
+                    winner = dict(row)
+                    break
+        passed = winner is not None if (goal_facts or goal_fn is not None) else bool(outcomes)
+        return {
+            "schema": SCHEMA,
+            "pass": passed,
+            "status": (
+                "PASS__COW_SPECULATIVE_WINNER_FOUND"
+                if winner is not None
+                else ("PASS__COW_SPECULATIVE_DELTAS_CAPTURED" if not (goal_facts or goal_fn) and outcomes else "FAIL_CLOSED__NO_SPECULATIVE_GOAL_WINNER")
+            ),
+            "mode": "COW_SPECULATIVE_ROLLOUT",
+            "winner": winner,
+            "rollout_count": len(outcomes),
+            "deltas": outcomes,
+            "raw_rollout": rollouts,
+            "seccomp_posture": seccomp_posture,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    # Mode B: Transactional CoW workspace action with automatic rollback on failed verify_fn
+    if workspace_root is not None and action_fn is not None:
+        ws = Path(workspace_root).resolve()
+        before_manifest = tx_exec.snapshot_workspace_manifest(ws)
+        res = tx_exec.execute_transactional_cow_action(
+            ws,
+            action_fn,
+            verify_fn=verify_fn,
+        )
+        after_manifest = tx_exec.snapshot_workspace_manifest(ws)
+        committed = bool(res.get("committed") or res.get("pass") or res.get("ok"))
+        host_preserved_on_rollback = (before_manifest == after_manifest) if not committed else True
+        return {
+            "schema": SCHEMA,
+            "pass": committed,
+            "status": "PASS__TRANSACTIONAL_COW_COMMITTED" if committed else "FAIL_CLOSED__TRANSACTIONAL_COW_ROLLED_BACK",
+            "mode": "TRANSACTIONAL_COW_ACTION",
+            "committed": committed,
+            "host_preserved_on_rollback": host_preserved_on_rollback,
+            "tx_result": dict(res),
+            "seccomp_posture": seccomp_posture,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    # Mode C: Confined command execution
+    if confined_argv is not None and workspace_root is not None:
+        cmd_res = tx_exec.run_confined_command(list(confined_argv), cwd=Path(workspace_root).resolve(), timeout=float(timeout_s))
+        ok = bool(cmd_res.get("ok") or cmd_res.get("returncode") == 0)
+        return {
+            "schema": SCHEMA,
+            "pass": ok,
+            "status": "PASS__CONFINED_COMMAND_EXECUTED" if ok else "FAIL_CLOSED__CONFINED_COMMAND_FAILED",
+            "mode": "CONFINED_COMMAND",
+            "command_result": dict(cmd_res),
+            "seccomp_posture": seccomp_posture,
+            "model_calls": 0,
+            "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        }
+
+    return {
+        "schema": SCHEMA,
+        "pass": False,
+        "status": "FAIL_CLOSED__NO_SPECULATIVE_OR_CONFINED_WORKLOAD",
+        "seccomp_posture": seccomp_posture,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
+def elevate_gui_trace_to_cli_skill(
+    trace: Mapping[str, Any] | Sequence[Mapping[str, Any]],
+    *,
+    goal: str = "",
+    postcondition: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Wave 17: Automatically lift GUI/DOM traces down to deterministic HTTP/CDP/CLI layers (`CLI-Anything` style)."""
+    from canonical.swe_kernel import causal_trace_to_skill_compiler_v1 as trace_comp
+
+    t0 = time.perf_counter()
+    elevated = dict(trace_comp.elevate_trace_to_fastest_layer(trace))
+    steps = list(elevated.get("steps") or elevated.get("elevated_steps") or ())
+    skill = None
+    if goal and steps:
+        try:
+            skill = trace_comp.anti_unify_workflow(goal, steps, dict(postcondition or {}))
+        except Exception as exc:
+            skill = {"anti_unify_note": f"{type(exc).__name__}:{exc}"}
+    ok = bool(steps or elevated.get("fastest_layer") or elevated.get("layer"))
+    return {
+        "schema": SCHEMA,
+        "pass": ok,
+        "status": "PASS__TRACE_ELEVATED_TO_FASTEST_LAYER" if ok else "FAIL_CLOSED__TRACE_NOT_ELEVATABLE",
+        "elevated": elevated,
+        "compiled_skill": skill,
+        "model_calls": 0,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+    }
+
+
