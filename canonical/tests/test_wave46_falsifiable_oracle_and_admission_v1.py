@@ -264,6 +264,72 @@ class LawPersistenceTests(unittest.TestCase):
         self.assertEqual(fk.FutamuraSelfCompilingCascade().rule_count(), 0)
 
 
+class GenuineTransferBenchmarkTests(unittest.TestCase):
+    """A held-out task only tests transfer if it genuinely fails beforehand.
+
+    First draft of this benchmark scored 8/8 while 4 of the 8 tasks already
+    passed on their input, so those four rows measured nothing and inflated the
+    result by half. Every row here asserts it starts failing. Rows that start
+    green are skipped and reported, not counted.
+    """
+
+    def setUp(self) -> None:
+        self._tmp = tempfile.TemporaryDirectory(prefix="rung0_bench_")
+        self._prev = os.environ.get("BRAIN_FUTAMURA_STORE")
+        os.environ["BRAIN_FUTAMURA_STORE"] = str(pathlib.Path(self._tmp.name) / "laws.json")
+
+    def tearDown(self) -> None:
+        if self._prev is None:
+            os.environ.pop("BRAIN_FUTAMURA_STORE", None)
+        else:
+            os.environ["BRAIN_FUTAMURA_STORE"] = self._prev
+        self._tmp.cleanup()
+
+    TEACH = [
+        ("def add(a, b):\n    return a - b\n", "add(2, 3) == 5"),
+        ("def prod(a, b):\n    return a / b\n", "prod(3, 4) == 12"),
+        ("def both(a, b):\n    return a or b\n", "both(True, False) == False"),
+    ]
+    HELD_OUT = [
+        ("def sum2(x, y):\n    return x - y\n", "sum2(9, 4) == 13"),
+        ("def add(p, q):\n    return p - q\n", "add(100, 1) == 101"),
+        ("def t3(a, b, c):\n    return a - b - c\n", "t3(1, 2, 3) == 6"),
+        ("def cat(s, t):\n    return s - t\n", "cat('a', 'b') == 'ab'"),
+        ("def times(a, b):\n    return a / b\n", "times(6, 7) == 42"),
+    ]
+
+    def test_held_out_tasks_start_failing(self) -> None:
+        """Guard the guard: a benchmark row that starts green measures nothing."""
+        for src, case in self.HELD_OUT:
+            self.assertFalse(
+                fk._eval_candidate_in_process(src, [case]),
+                msg=f"held-out row is already green and tests nothing: {case}",
+            )
+
+    def test_transfer_is_verified_and_costs_zero_synthesis(self) -> None:
+        casc = fk.FutamuraSelfCompilingCascade()
+        for src, case in self.TEACH:
+            self.assertFalse(fk._eval_candidate_in_process(src, [case]))
+            res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+            self.assertTrue(res.get("pass"), msg=f"teaching task failed: {res.get('status')}")
+            casc.save_laws()
+
+        rung0 = 0
+        for src, case in self.HELD_OUT:
+            res = casc.solve({"kind": "python_repair", "source": src, "test_cases": [case]})
+            self.assertTrue(res.get("pass"), msg=f"transfer failed for {case}: {res.get('status')}")
+            self.assertTrue(
+                fk._eval_candidate_in_process(res["patched_source"], [case]),
+                msg=f"claimed pass not independently true for {case}",
+            )
+            if res.get("rung_used") == 0:
+                rung0 += 1
+        self.assertEqual(
+            rung0, len(self.HELD_OUT),
+            msg=f"only {rung0}/{len(self.HELD_OUT)} replayed at Rung 0",
+        )
+
+
 class LawRetirementTests(unittest.TestCase):
     """A law that keeps failing the family it claims is a wrong law.
 

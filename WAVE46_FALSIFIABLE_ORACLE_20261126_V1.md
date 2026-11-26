@@ -203,3 +203,108 @@ leapfrog thesis is built on. Persisting the rule store with provenance and
 re-validation, then measuring replay on a *fresh interpreter*, is the next
 honest step, and it is a prerequisite for any transfer measurement that means
 anything.
+
+---
+
+# Wave 46b/46c — Compile Once, Replay Forever (and stop replaying bad laws)
+
+## 8. The bottleneck I named was real
+
+`§7` predicted that the law store was per-process, making "compile once, replay
+forever" false outside one interpreter. Measured:
+
+```
+P1: taught `x - y -> x + y`  -> 1 rule, process exits
+P2: fresh interpreter        -> 0 rules, re-spends Rung 2 synthesis
+```
+
+So the flagship's central claim held only within a session. Fixed by persisting
+the law store to `canonical/astra_runtime/state/futamura_rung0_laws_v1.json`
+(`BRAIN_FUTAMURA_STORE` overrides the path), written atomically on compile.
+
+After: a fresh interpreter hydrates the law and solves a renamed task at **Rung
+0** with zero synthesis.
+
+Guards that make this honest rather than merely persistent:
+
+| condition | behaviour |
+|---|---|
+| store absent | zero laws, no crash |
+| store corrupt JSON | zero laws, no crash |
+| template unparseable | that law dropped, others kept |
+| plausible but **wrong** law | oracle still decides; it cannot produce a pass |
+| human deletes a law | next process simply does not have it |
+
+The last two rows matter: persistence supplies *hypotheses*, the oracle supplies
+*truth*, and a human can remove knowledge from the store with no retraining —
+which is the §2 removability test made executable.
+
+## 9. Laws that keep failing now retire
+
+`failures` was incremented on every replay miss and **nothing ever read it**. A
+wrong law was re-armed in every future process, and every later task paid for its
+failed screening. Retirement existed only inside `wake_sleep_consolidate`, which
+a compile-once/replay-forever path never calls.
+
+`_record_rule_outcome` now retires a law at ≥3 observations with a success rate
+below 25%, removes it from both lookup indexes, and persists it **flagged** — not
+dropped, because a law that silently vanishes is re-learned from the same
+evidence next time. Hydration skips retired laws, so retirement survives the
+process. A single failure is explicitly tested not to retire anything.
+
+Measured: a seeded `x - y -> x * y` law failed 3 times, was quarantined, and a
+fresh process carried the retirement over while the correct law learned
+alongside it stayed active. The bad law never produced a pass.
+
+## 10. The benchmark I wrote was inflated by half
+
+First run of the transfer benchmark reported **8/8**. Checking each row's input
+state showed **4 of the 8 already passed on their input** — including three
+"held-out" tasks and one "teaching" task. Those rows could not fail, so they
+measured nothing; the real figure was 4/4, not 8/8.
+
+Rebuilt with a falsifying precondition. Every row asserts it starts red, and the
+suite asserts that two known-green variants *are* green and excludes them:
+
+```
+taught 3 verified-failing experiences -> 3 laws
+
+held-out task    base   rung  verified   time
+renamed fn       False  0     yes        0.20 ms
+new consts       False  0     yes        0.16 ms
+compound 2-op    False  0     yes        0.50 ms
+str operand      False  0     yes        0.16 ms
+mul variant      False  0     yes        0.16 ms
+nested sub       True   --    excluded (already green)
+bool 3op         True   ---   excluded (already green)
+
+GENUINE transfer: 5/5 at Rung 0, zero synthesis, 1.2 ms total
+```
+
+Two honest observations that keep this in proportion:
+
+- `str operand` (`s - t` -> `s + t` for strings) is one line, not a hard
+  problem. It shows the law is operand-agnostic, nothing more.
+- The `adult(a)` / `threshold` pair taught nothing because the input already
+  passed, yet Rung 2 appended `COMPILED_TO_RUNG0` without a rule appearing
+  (`laws 2->2`). That receipt is inconsistent with the rule count and is **not
+  explained** here; it is recorded as an open defect rather than assumed benign.
+
+## 11. Status after this wave
+
+`test_wave46_falsifiable_oracle_and_admission_v1` — **33/33**. Seven-suite sweep
+green, run twice non-consecutively to rule out order dependence. All changes
+pushed: `b33c71cb`, `b8ab774f`, `f85718f4`.
+
+**Still not claimed:** no SWE-bench Pro V2 / Terminal-Bench 4.0 / OSWorld 2.1
+number (`docker` absent). The 1,026 baseline failures were not repaired. Hard-51:
+0/51. §6 unmet.
+
+**Next bottleneck, stated before testing it:** the written store is
+operator-level only — `_BINOP_REPAIR_ALTS`, `_CMP_REPAIR_ALTS`,
+`_BOOLOP_REPAIR_ALTS` define a fixed grammar of alternative operators. Transfer
+is therefore bounded by that grammar, and "5/5" says the *compilation* machinery
+works, not that the system can repair an arbitrary real bug. The next honest step
+is measuring the fraction of the repo's 1,026 recorded failures whose fix is even
+expressible in that grammar — if that fraction is small, no amount of persistence
+or retirement matters, and the grammar is the real limiting factor.
