@@ -289,7 +289,7 @@
      "route": "DELETE_THE_COMPONENT_NO_PATH_REACHED_AND_PROVE_IT_BY_TRANSCRIPT"
     }
    ],
-   "checked_at_utc": "2026-11-26T03:43:39Z",
+   "checked_at_utc": "2026-11-26T03:43:59Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -329,7 +329,7 @@
    "selected_route": "DELETE_THE_COMPONENT_NO_PATH_REACHED_AND_PROVE_IT_BY_TRANSCRIPT",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T03:43:39Z",
+    "checked_at_utc": "2026-11-26T03:43:59Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest",
