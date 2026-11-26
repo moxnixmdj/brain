@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "4df37bc4bee2f80bf0c7cc8f9f48a4ee83889d2022a96712fcd0813a900d0f4c"
+  "value": "0dd67e5f0706d28d4f300e0cbe8cb30c6c6faf7ed7dc2416bd06b922c9060530"
  },
  "engines": [
   {
@@ -235262,7 +235262,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/verification/EXACT_TARGET_SCOREBOARD_20261127_V2.json",
    "schema": "PROJECT_BRAIN_EXACT_TARGET_SCOREBOARD_V2",
-   "sha256": "db5d4d7a7a3ff6f9041f7d7bbb16ae69d995f4deac7eb6234470bb8b3d7292a0",
+   "sha256": "60a4d71b784a28c80d8d1424068b4643fce17c3c7b8886e301929a53c91b891d",
    "status": "",
    "terms": {
     "20261127": 1,
@@ -311983,7 +311983,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/DELETE_THE_GATE_THAT_NO_PATH_REACHED_AND_FIX_WHAT_THE_FINGERPRINT_FOUND_20261127_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "d0006e43f711cd490acfe34774bff1cb0944f95f39e5031e2fe19c861e8582ef",
+   "sha256": "7a22853a2e4aac19a4b0a9213740117c055322a807c62b362f181b151f44f48c",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "20261127": 1,
