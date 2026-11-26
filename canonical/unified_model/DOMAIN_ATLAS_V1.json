@@ -1737,7 +1737,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 4.5,
-     "sha256": "f260bb3f5dd1f9be",
+     "sha256": "8cb9c29400bda2fc",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -2618,7 +2618,6 @@
     "computer_env_v1",
     "computer_use_agent_v1",
     "consistency_vs_equivalence_v1",
-    "contract_first_routing_v1",
     "contrastive_oracle_bootstrap_v1",
     "cow_angelic_zygote_v1",
     "creature_runtime_v1",
@@ -2776,14 +2775,14 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 191,
+   "candidates": 190,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 51,
+   "harvested_all": 50,
    "harvested_executable_top": 9,
    "hidden_share_all": 0.0,
    "hidden_top": [],
    "in_source_index_top": 25,
-   "indexed_all": 186,
+   "indexed_all": 185,
    "invisible_share": 0.0,
    "invisible_to_model": 0,
    "top": [
@@ -2841,7 +2840,7 @@
      ],
      "path": "canonical/runtime/brain_unified_model_v1.py",
      "score": 16.25,
-     "sha256": "f260bb3f5dd1f9be",
+     "sha256": "8cb9c29400bda2fc",
      "source_index": true,
      "summary": "Brain Unified Model V1 \u2014 one front door over the compiled Brain."
     },
@@ -4750,7 +4749,7 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3310,
+ "modules_scanned": 3311,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
@@ -5317,7 +5316,7 @@
   },
   "memory": {
    "chance_route_recall": 0.059,
-   "chance_source_recall": 0.0843,
+   "chance_source_recall": 0.0839,
    "frontier_route_hit_recall": 1.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,

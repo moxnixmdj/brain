@@ -1,9 +1,9 @@
 """The scoreboard two rounds asked for: one module per query, chance 1/849.
 
-Every routing number this repository has published so far was measured against a *domain*
-label, and the last round showed why that could not work: the label is built from the same
-vocabulary as the pool, so a random five drawn from the topic-sharing pool already scores
-0.846. This tool removes the label from the loop.
+Every routing number this repository published before this instrument was measured against a
+*domain* label, and the round that built it showed why that could not work: the label is drawn
+from the same vocabulary as the pool, so a random five from the topic-sharing pool already
+scored 0.846. This tool removes the label from the loop.
 
 The targets come from the tree itself, not from a model and not from a person:
 
@@ -13,42 +13,63 @@ The targets come from the tree itself, not from a model and not from a person:
 * the target is exactly one module path, so chance at rank 1 is 1/849 and at rank 5 is 5/849.
 
 A query that repeats the module's own name is a leak, not a query: those rows are counted
-separately and excluded from the headline. Three channels are scored on the same rows --
-``find_source`` (the index), the contract router (verbs and objects from module ASTs), and a
-topic-only ablation with the contract gate removed -- so a number can be told from a
-vocabulary. Nothing is executed and no model is called.
+separately and excluded from the headline.
+
+**What survived the gate's deletion (2026-11-27).** Two rounds measured a contract-first router
+against a gate-free ablation of itself and the ablation won both times (0.181 vs 0.128 at rank
+5 on the clean quarter; 0.252 vs 0.268 leaked). ``runtime_answer_fingerprint_v1.py`` then
+showed the router had never been called by the runtime at all: 404 of 404 answers were identical
+with it in the tree and with it deleted. A component that no runtime path reaches and that loses
+to its own removal is not a part; it was deleted, with its test, and this file keeps only the
+ablation -- the objects-and-topic ranker that beat it -- as the one channel besides
+``find_source``. The archived numbers stay readable in
+``EXACT_TARGET_SCOREBOARD_20261127_V1.json``.
 """
 from __future__ import annotations
 
 import argparse
+import ast
 import json
+import math
 import pathlib
 import re
 import sys
+from collections import defaultdict
 from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
 
-from canonical.tools import contract_first_routing_v1 as C  # noqa: E402
+from canonical.tools import domain_atlas_v1 as A  # noqa: E402
 
-SCHEMA = "PROJECT_BRAIN_EXACT_TARGET_SCOREBOARD_V1"
+SCHEMA = "PROJECT_BRAIN_EXACT_TARGET_SCOREBOARD_V2"
 LEDGER = "canonical/verification/PROMOTION_LEDGER_20261127_V1.json"
+ARCHIVE = "canonical/verification/EXACT_TARGET_SCOREBOARD_20261127_V1.json"
 TEST_DIR = "canonical/tests"
 _VERSION = re.compile(r"_?v\d+$|_\d{8}$")
+_SUFFIXES = ("ations", "ation", "ings", "ing", "ers", "er", "ies", "ied", "es", "ed", "s")
+WEIGHT_OBJECT = 1.0
+WEIGHT_TOPIC = 0.25
 
 
 def _words(text: str) -> list[str]:
     return [w for w in re.findall(r"[A-Za-z][A-Za-z_]+", text) if len(w) > 2]
 
 
+def _norm(token: str) -> str:
+    """A deliberately dumb root: two words agree only if they share it after suffix stripping."""
+    word = re.sub(r"[^a-z0-9_]+", "", token.casefold())
+    for suffix in _SUFFIXES:
+        if len(word) > len(suffix) + 3 and word.endswith(suffix):
+            return word[: -len(suffix)]
+    return word
+
+
 def _norm_set(text: str) -> set[str]:
-    return {C._norm(w) for w in _words(text)}
+    return {_norm(w) for w in _words(text)}
 
 
 def query_for(test_path: pathlib.Path) -> dict[str, Any]:
-    import ast
-
     text = test_path.read_text(encoding="utf-8", errors="replace")
     tree = ast.parse(text)
     doc = (ast.get_docstring(tree) or "").strip()
@@ -88,49 +109,123 @@ def targets(root: pathlib.Path) -> list[dict[str, Any]]:
     return out
 
 
-def score(root: pathlib.Path, *, top_k: int = 5, use_contract_router: bool = True) -> dict[str, Any]:
+# --------------------------------------------------------------- the one surviving channel
+# This is the ablation that beat the deleted contract gate, kept verbatim in behaviour: objects
+# from public callables (idf-weighted) plus docstring topic words at a quarter weight, with a
+# half-weighted topic score when neither agrees. No gate, no verbs -- that is the elimination.
+
+
+def _public_functions(tree: ast.AST) -> list[ast.AST]:
+    return [n for n in ast.walk(tree)
+            if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and not n.name.startswith("_")]
+
+
+def _entry_for(path: pathlib.Path) -> dict[str, Any] | None:
+    try:
+        tree = ast.parse(path.read_text(encoding="utf-8", errors="replace"))
+    except (OSError, SyntaxError, ValueError):
+        return None
+    verbs: dict[str, int] = defaultdict(int)
+    objects: dict[str, int] = defaultdict(int)
+    for func in _public_functions(tree):
+        parts = [_norm(p) for p in func.name.split("_") if p]
+        if parts:
+            verbs[parts[0]] += 1
+        for token in parts[1:]:
+            objects[token] += 1
+    doc = ast.get_docstring(tree) or ""
+    topic = {_norm(tok) for tok in re.findall(r"[A-Za-z][A-Za-z_]+", doc) if len(tok) > 2}
+    return {"verbs": dict(verbs), "objects": dict(objects), "topic": sorted(topic),
+            "stem": path.stem, "path": str(path)}
+
+
+def build_index(root: pathlib.Path, *, per_domain: int = 400) -> dict[str, Any]:
+    atlas = A.build_atlas(root, per_domain=per_domain)
+    entries: dict[str, dict[str, Any]] = {}
+    domain_of: dict[str, set[str]] = defaultdict(set)
+    for domain, payload in atlas["domains"].items():
+        for row in payload["top"]:
+            rel = row["path"]
+            domain_of[rel].add(domain)
+            if rel not in entries:
+                entry = _entry_for(root / rel)
+                if entry is None:
+                    continue
+                entry["path"] = rel
+                entry["executable"] = bool(row.get("adapter_module_match"))
+                entries[rel] = entry
+    df_object: dict[str, int] = defaultdict(int)
+    for entry in entries.values():
+        for obj in entry["objects"]:
+            df_object[obj] += 1
+    total = max(1, len(entries))
+    idf_object = {k: math.log(1.0 + total / v) for k, v in df_object.items()}
+    # The vocabulary is the set of *verbs*, kept so the ablation excludes verb-like words from
+    # object agreement exactly as the deleted module did; changing it silently improved the
+    # ablation from 0.181 to 0.309 at rank 5, which is how the difference was found.
+    verb_vocabulary: set[str] = set()
+    for entry in entries.values():
+        verb_vocabulary.update(entry["verbs"])
+    return {"entries": entries, "domain_of": {k: sorted(v) for k, v in domain_of.items()},
+            "idf_object": idf_object, "vocabulary": verb_vocabulary}
+
+
+def route_topic_only(index: dict[str, Any], query: str, *, top_k: int = 5) -> dict[str, Any]:
+    terms = [t for t in (_norm(tok) for tok in re.findall(r"[A-Za-z][A-Za-z_]+", query)) if len(t) > 2]
+    query_objects = [t for t in terms if t not in index["vocabulary"]]
+    query_topic = set(terms)
+    scored: list[tuple[float, str]] = []
+    for rel, entry in index["entries"].items():
+        shared_objects = [o for o in query_objects if o in entry["objects"]]
+        topic_hits = sorted(query_topic & set(entry["topic"]))
+        score = WEIGHT_OBJECT * sum(index["idf_object"].get(o, 0.0) for o in shared_objects)
+        score += WEIGHT_TOPIC * len(topic_hits)
+        if not shared_objects:
+            score = WEIGHT_TOPIC * len(topic_hits) * 0.5
+        if score <= 0.0:
+            continue
+        scored.append((score, rel))
+    scored.sort(key=lambda item: (-item[0], item[1]))
+    return {
+        "operation": "TOPIC_ONLY_ROUTE",
+        "query": query,
+        "candidates": [{"path": rel, "stem": index["entries"][rel]["stem"], "score": round(score, 3)}
+                       for score, rel in scored[:top_k]],
+        "pool": len(index["entries"]),
+    }
+
+
+def score(root: pathlib.Path, *, top_k: int = 5) -> dict[str, Any]:
     from canonical.runtime import brain_unified_model_v1 as U
 
     model = U.UnifiedModel(U.load_model(root=root))
     rows = targets(root)
     pool = len(json.loads((root / LEDGER).read_text())["rows"])
-    index = C.build_index(root) if use_contract_router else None
+    index = build_index(root)
 
     scored: list[dict[str, Any]] = []
     for row in rows:
         located = model.find_source(row["query"], top_k=top_k)
         found = [str(c.get("path") or "") for c in located.get("candidates") or []]
         found_stems = [pathlib.PurePosixPath(p).stem for p in found]
-        entry: dict[str, Any] = {
+        ablation = route_topic_only(index, row["query"], top_k=top_k)
+        ablation_stems = [c["stem"] for c in ablation["candidates"]]
+        scored.append({
             **row,
             "find_top": found_stems,
             "find_hit_at_1": bool(found_stems) and found_stems[0] == row["stem"],
             "find_hit_at_5": row["stem"] in found_stems,
-        }
-        if index is not None:
-            routed = C.route_by_contract(index, row["query"], top_k=top_k)
-            routed_stems = [c["stem"] for c in routed["candidates"]]
-            ablation = C.route_by_contract(index, row["query"], top_k=top_k,
-                                           require_contract=False, use_verbs=False)
-            ablation_stems = [c["stem"] for c in ablation["candidates"]]
-            entry.update({
-                "contract_top": routed_stems,
-                "contract_hit_at_1": bool(routed_stems) and routed_stems[0] == row["stem"],
-                "contract_hit_at_5": row["stem"] in routed_stems,
-                "ablation_top": ablation_stems,
-                "ablation_hit_at_1": bool(ablation_stems) and ablation_stems[0] == row["stem"],
-                "ablation_hit_at_5": row["stem"] in ablation_stems,
-            })
-        scored.append(entry)
+            "topic_top": ablation_stems,
+            "topic_hit_at_1": bool(ablation_stems) and ablation_stems[0] == row["stem"],
+            "topic_hit_at_5": row["stem"] in ablation_stems,
+        })
 
     def recall(key: str, subset: list[dict[str, Any]]) -> float:
         return round(sum(1 for r in subset if r.get(key)) / max(1, len(subset)), 4)
 
     clean = [r for r in scored if not r["leaked"]]
     leaked = [r for r in scored if r["leaked"]]
-    channels = [("find", "find_source")]
-    if index is not None:
-        channels += [("contract", "contract_router"), ("ablation", "topic_only_ablation")]
+    channels = [("find", "find_source"), ("topic", "topic_only_ranker")]
     summary = {
         name: {
             "clean_at_1": recall(f"{key}_hit_at_1", clean),
@@ -140,6 +235,13 @@ def score(root: pathlib.Path, *, top_k: int = 5, use_contract_router: bool = Tru
         }
         for key, name in channels
     }
+    archive = {}
+    archive_path = root / ARCHIVE
+    if archive_path.is_file():
+        prior = json.loads(archive_path.read_text())
+        archive = {"path": ARCHIVE, "schema": prior.get("schema"),
+                   "summary": prior.get("summary"), "note": "the deleted contract channel's numbers, kept as history"}
+
     return {
         "schema": SCHEMA,
         "method": {
@@ -147,6 +249,7 @@ def score(root: pathlib.Path, *, top_k: int = 5, use_contract_router: bool = Tru
             "pool": "the ledger's classified modules",
             "leak_rule": "a query that repeats the module's name is excluded from the clean figures and reported separately",
             "channels": [name for _, name in channels],
+            "deleted": "the contract router (and its gate) was deleted 2026-11-27; runtime answers unchanged, 404/404",
         },
         "pool": pool,
         "targets": len(scored),
@@ -156,6 +259,7 @@ def score(root: pathlib.Path, *, top_k: int = 5, use_contract_router: bool = Tru
         "chance_at_1": round(1 / max(1, pool), 5),
         "chance_at_5": round(min(1.0, top_k / max(1, pool)), 5),
         "summary": summary,
+        "archive": archive,
         "claim_limit": (
             "The target is the module the test author wrote tests for; the query is their words. A hit means the "
             "channel returned that module, not that it was the only reasonable answer. Nothing was executed and no "
@@ -170,11 +274,10 @@ def score(root: pathlib.Path, *, top_k: int = 5, use_contract_router: bool = Tru
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("--root", default=str(ROOT))
-    ap.add_argument("--out", default="canonical/verification/EXACT_TARGET_SCOREBOARD_20261127_V1.json")
+    ap.add_argument("--out", default="canonical/verification/EXACT_TARGET_SCOREBOARD_20261127_V2.json")
     ap.add_argument("--top-k", type=int, default=5)
-    ap.add_argument("--no-contract", action="store_true")
     args = ap.parse_args(argv)
-    report = score(pathlib.Path(args.root), top_k=args.top_k, use_contract_router=not args.no_contract)
+    report = score(pathlib.Path(args.root), top_k=args.top_k)
     out = pathlib.Path(args.root) / args.out
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=1, sort_keys=True) + "\n", encoding="utf-8")

@@ -106,3 +106,37 @@ Three numbers, all local, all reproducible, none requiring a model API:
 A frontier lab cannot copy this by training a bigger model: the artifact is a projection of *this*
 tree's executions, and the receipts are the moat — they are the difference between "the model says
 it can" and "the model ran it twice and the digests matched."
+
+---
+
+## Amended: Play A is done, and its premise was wrong
+
+Play A said: delete the contract gate from the runtime decision path, kill it if clean exact-target
+recall@5 falls by more than 5 pp. The deletion was executed. **The gate was not in any runtime
+decision path**, so the kill criterion could not be met or missed: `runtime_answer_fingerprint_v1.py`
+asked the unified model all 404 exact-target questions with the module present and with it deleted,
+and the transcripts are byte-identical — same digest, 0 of 404 answers moved. Two rounds of
+measurement were spent comparing a component that could not have been load-bearing.
+
+The gate and its test are gone (508 lines, 0 added). Its ablation survived the deletion as the
+scoreboard's only non-`find_source` channel and reproduces the archive to four decimal places
+(clean 0.0957 / 0.1809 vs archived 0.096 / 0.181).
+
+Three things the deletion taught, which now constrain later plays:
+
+1. **A kill criterion must name the path it constrains.** "Delete the gate from the runtime" was
+   written as if the gate were wired in; nobody had checked. Every remaining play states the file,
+   the function, and the caller that would change.
+2. **The fingerprint found a real defect that the 38/38 verifier could not.** `find_source` summed
+   idf contributions while iterating a set, and floats do not add associatively, so 1 of 404
+   questions returned a different rank-3 module under a different `PYTHONHASHSEED`. Three loops now
+   iterate `sorted(terms)`; three seeds return one digest; a test enforces it. The verifier proves
+   the artifact equals a recompilation of itself and never asks the same question twice in two
+   processes, so internal consistency passed while answers moved.
+3. **A control is as fragile as a treatment.** The first faithful-looking port of the ablation scored
+   0.309 at rank 5 instead of 0.181 because it split query terms by the *object* vocabulary rather
+   than the *verb* vocabulary. Restoring the deleted module's choice reproduced the archive exactly.
+   A 12.8 pp swing on a choice that reads like a detail — so the port now has its own test.
+
+Play B is unchanged and still the only play that moves the number that matters (31 → ≥190 callable).
+Play C already runs.

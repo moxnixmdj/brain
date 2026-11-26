@@ -79,7 +79,7 @@
   "independent_verified": false,
   "model_dependency_count": 0,
   "module_sha256": {
-    "canonical/runtime/brain_unified_model_v1.py": "f260bb3f5dd1f9be4deb0494dd3c61113c61b5459f4b7ecd67033245659b0c26",
+    "canonical/runtime/brain_unified_model_v1.py": "8cb9c29400bda2fc050308c743789831bbe36ffbf30543f8272450af9ddd5f3d",
     "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py": "652e3b974a026ca74646f5810687392ec3b141da908bf61d035c03cfe109dc42",
     "canonical/runtime/cow_zygote_speculative_verifier_v1.py": "e4ff324b2fd589269b5d33cc31679a3f548d6bc977ba6567e86c70ce6eda6d1e",
     "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py": "1c135097c7ea1c2a7ec007a23fe61c1676a9761b28c4c9148e2e05e6dc434e70",
