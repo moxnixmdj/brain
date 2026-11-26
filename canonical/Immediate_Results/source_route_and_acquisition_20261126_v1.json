@@ -1,0 +1,2070 @@
+{
+  "schema": "SOURCE_ONLY_ROUTE_AND_ACQUISITION_CONTROL_V1",
+  "date_utc": "2026-11-26",
+  "authority": "none; local measurements, not Docker, Harbor or official grades",
+  "protocol": {
+    "official_suite_pin": "66f92766bba642462d4bbe5479e83f91f9211862",
+    "positions_1_based": [
+      5,
+      6
+    ],
+    "target_python": "3.11.2",
+    "exposure": "The developer saw public instructions/task metadata; one Git API error exposed part of a commit title. No receiver gold edit or verifier in the staged producer. The route/acquisition controls are not solver transfer trials.",
+    "paired": "Clean base only and fresh private room per revision; same host-side 15-source cold allowlist, new digest-identified empty artifact per revision. Reviewed worker argv relocated to /input/producer. Base-only venv vs expanded unit-deps venv are separate comparisons, not a single treatment. CPU 120s/wall 240s/2GiB address space; timings are measurements, not guarantees.",
+    "acquisition": "Same public full instruction, BM25, <=4 test files and 15s per file per arm; selective reads up to 6 bodies vs all eligible <=200KB. A Python call-stage profile counts tests reaching any goal-named function in project code; names are noisy proxies. Ranking time excludes enumeration. Tests are native, not task verifiers.",
+    "refusal": "Native reach and unrelated broken tests are not behavioral task evidence. A zero-byte source capture is not a replay reward."
+  },
+  "drivers": {
+    "canonical/tools/harbor_source_route_control_v1.py": "ab3f253d2910befc96db0c1b423cba105881e3e4216a6a4a8e751b3304be1bbe",
+    "canonical/tools/measure_native_probe_acquisition_v1.py": "c0872a668c8d7f95effd6ec5fd5db963a7483728a10cb33261722db5a6099ee7",
+    "canonical/tools/stage_harbor_runtime_v1.py": "453400590b10b42c3fec160c2876cfb9453f55a06663cd5855059856ea8725f5",
+    "initial_pair_driver_before_source_replay_sha256": "c2704f14b9854e607966744af7864515715be49d6383045e4b8e40c3b4215b9d",
+    "notes": "Early profiler runs preceded expanded diagnostics; reproduce final algorithm/outcomes, not timestamps or historical error formatting."
+  },
+  "environments": {
+    "base": [
+      "cffi==2.1.1",
+      "cryptography==50.0.2",
+      "iniconfig==2.3.1",
+      "Jinja2==3.1.6",
+      "MarkupSafe==3.0.4",
+      "packaging==26.4",
+      "pluggy==1.7.0",
+      "pycparser==3.12",
+      "Pygments==2.21.0",
+      "pytest==9.2.0",
+      "PyYAML==6.0.4",
+      "resolvelib==1.0.1"
+    ],
+    "native": [
+      "bcrypt==5.0.0",
+      "certifi==2026.11.20",
+      "cffi==2.1.1",
+      "charset-normalizer==3.5.3",
+      "cryptography==50.0.2",
+      "execnet==2.1.2",
+      "idna==3.20",
+      "iniconfig==2.3.1",
+      "Jinja2==3.1.6",
+      "MarkupSafe==3.0.4",
+      "mock==5.2.0",
+      "packaging==26.4",
+      "passlib==1.9.5",
+      "pexpect==4.9.0",
+      "pluggy==1.7.0",
+      "ptyprocess==0.7.0",
+      "pycparser==3.12",
+      "Pygments==2.21.0",
+      "pyspnego==0.12.4",
+      "pytest==9.2.0",
+      "pytest-mock==3.17.0",
+      "pytest-xdist==3.8.0",
+      "pywinrm==0.5.0",
+      "PyYAML==6.0.4",
+      "requests==2.34.2",
+      "requests_ntlm==1.3.0",
+      "resolvelib==1.0.1",
+      "urllib3==2.8.0",
+      "xmltodict==1.0.4"
+    ]
+  },
+  "cold_manifests": {
+    "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa": {
+      "canonical/runtime/brain_unified_model_v1.py": "301e3aa5cae0bbb3dbdd6405a2d23573e81eb7103b16b4eb0b057b2bcd5348fb",
+      "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+      "canonical/runtime/harbor_container_solver_worker_v1.py": "c8a8e4d765e007ee6e81e9115f9ba8063121d2c5161f9b8c50b523b6b398ab86",
+      "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+      "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+      "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+      "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+      "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "ab57b4cd36e4f5562b63ab19980bae618db8bbb500db32314c326ee079493f74",
+      "canonical/swe_kernel/harbor_in_container_runner_v1.py": "0e1ad09a6cd404ca070de3ae67f2ef14f7b3df5d79d86a4506bc5c53bc7ac65a",
+      "canonical/swe_kernel/causal_swe_repair_v1.py": "d3a6843df35324b4e88d5a3593be32caa7d575b593bfe1f68aa2b4782f5cfdb8",
+      "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+      "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+      "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "01cdd738fde1095e905ea380bcf0ffabaf1c2f8d29a4f86cd79c6877ab42d875",
+      "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+      "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "73ef2893991fb1bed1526d77c697bc225b58b9e26426c6ad09ab4d585710ede0"
+    },
+    "2aa1c30c5c6b8c2c2e2de8e341b3d7ac7a63b629": {
+      "canonical/runtime/brain_unified_model_v1.py": "f4efb0e5ccbce8f37eb91f00d39aa8c8230dbe157711b4a6e0238e20f07b2f07",
+      "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+      "canonical/runtime/harbor_container_solver_worker_v1.py": "2aff4dee0819f19d12fc0695787ca15a2824973c7589a81d90430a6e44e6e1cc",
+      "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+      "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+      "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+      "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+      "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "4e69f58d8aed2eacb35532076fb1069bc8432f769b63059ab8a4c081439e2a45",
+      "canonical/swe_kernel/harbor_in_container_runner_v1.py": "0e1ad09a6cd404ca070de3ae67f2ef14f7b3df5d79d86a4506bc5c53bc7ac65a",
+      "canonical/swe_kernel/causal_swe_repair_v1.py": "d3a6843df35324b4e88d5a3593be32caa7d575b593bfe1f68aa2b4782f5cfdb8",
+      "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+      "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+      "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "01cdd738fde1095e905ea380bcf0ffabaf1c2f8d29a4f86cd79c6877ab42d875",
+      "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+      "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "7ecdfdf92c51dba18afb65688a820bbc6883f8bc1e7882a742311bfa7b73f73b"
+    },
+    "bbb51d912578cfde26452f33f2e1c95bcd9aa6a9": {
+      "canonical/runtime/brain_unified_model_v1.py": "f4efb0e5ccbce8f37eb91f00d39aa8c8230dbe157711b4a6e0238e20f07b2f07",
+      "canonical/runtime/harbor_command_policy.py": "0b202f653abf69a5e81b45cd76b492142253c994f1dcbcc9fe26297ad84ec8ef",
+      "canonical/runtime/harbor_container_solver_worker_v1.py": "2aff4dee0819f19d12fc0695787ca15a2824973c7589a81d90430a6e44e6e1cc",
+      "canonical/runtime/harbor_process_cleanup_worker_v1.py": "29cb95c1a05246c48cfdbcf9860b8106c034b1ce74b3a046b004de584e1cdca6",
+      "canonical/runtime/harbor_pro_git_capture_v1.py": "f641c8f7ddc88482408a5eb0d03a2f96490a8c42a60578c4b9fb653dd428f0a2",
+      "canonical/runtime/tree_sitter_swe_kernel_v1.py": "109c973a7cbab8afc7dc62974616f82c71fb154ece166c86783bb9abc3c4de97",
+      "canonical/swe_kernel/__init__.py": "044580b3e7bc95b9ae5b34f97a3702ae18898520000c21784bfca1b99c308351",
+      "canonical/swe_kernel/harbor_epistemic_controller_v1.py": "e4dc49c4b7d38236008629381345187d820797979d03edb3471479d63065f01b",
+      "canonical/swe_kernel/harbor_in_container_runner_v1.py": "ab734f3beeca26280414ff4c7810f6fd89073f1aa41c64969a7428db409a7fe5",
+      "canonical/swe_kernel/causal_swe_repair_v1.py": "b4e90dae74ef73b2e886cdd32c2d3bb42d4e31eb6f37076ad15c562bb3d7be26",
+      "canonical/swe_kernel/first_principles_mental_cegis_v1.py": "8013e57d228a3318185727bcb9bf8c1bb065738fccf4a1b64f505a3a5357bb51",
+      "canonical/swe_kernel/incremental_semantic_graph_v1.py": "e3ffc5cf0454e404ab0794839052c64fbf862c69cb273b0068ea888ee219a306",
+      "canonical/swe_kernel/petri_cow_splicing_engine_v1.py": "85ca4f531c3c8f775dcd22e760a41218580aefb559a426ec0d38914add7592d1",
+      "canonical/swe_kernel/consistency_vs_equivalence_v1.py": "c5482beab198b42a057ac101e27085c9f3d7aede3a2cdb365c112bacd7bb40f9",
+      "canonical/swe_kernel/effect_contract_composition_v1.py": "4d10dc77641b71ad0d51cabb8b0af3d7e491d71560ea4d2a003d40ca52bc0a4a",
+      "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json": "f96c3e3abee8bab6c6be851f345a4060f5e33be70fe4f1b67e881ed92e000bb2"
+    }
+  },
+  "tasks": [
+    {
+      "position": 5,
+      "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+      "instance_id": "instance_ansible__ansible-d33bedc48fdd933b5abd65a77c081876298e2f07-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "paired_routes": {
+        "initial": {
+          "environment": "base",
+          "rows": [
+            {
+              "producer_revision": "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "24e08c15d3359e61051689804bcef92b1f4b66c61948d8922319a80514408ed9",
+                "returncode": 0,
+                "wallclock_ms": 872.396,
+                "broker_bytes": 715,
+                "broker_sha256": "68e519f0ca122a4c01e52e8139ad1167813976037b33cf27a41e03fa9512a7be",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 4598,
+                "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 1,
+                    "worker_s": 0.101,
+                    "error": " main\n    result = open_model(root=root).solve(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/input/producer/canonical/runtime/brain_unified_model_v1.py\", line 2815, in solve\n    from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep\nImportError: cannot import name 'unified_epistemic_portfolio_v1' from 'canonical.swe_kernel' (/input/producer/canonical/swe_kernel/__init__.py)\n"
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "producer_revision": "2aa1c30c5c6b8c2c2e2de8e341b3d7ac7a63b629",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "ee64de89ce2a445bd464e2f54288b334d08f8a01949f606c3d694d0835aed0b0",
+                "returncode": 0,
+                "wallclock_ms": 4881.585,
+                "broker_bytes": 1767,
+                "broker_sha256": "531711324814756232570e8947f4dcfcf44970b7c5ff49549dda2bb9da815284",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 4598,
+                "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.097,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.258,
+                    "observed": {
+                      "discover_wall_s": 0.198,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 2400,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/units/module_utils/datatag/test_datatag.py",
+                        "test/units/plugins/action/test_action.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.099,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 3.505,
+                    "observed": {
+                      "model_calls": 0,
+                      "pass": false,
+                      "probed_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/units/module_utils/datatag/test_datatag.py"
+                      ],
+                      "status": "OPEN__NO_PRE_EXISTING_FAILING_TEST_IN_WORKTREE",
+                      "wall_s": 3.437,
+                      "witness_compiler": {
+                        "compiled": false,
+                        "reason": "no_matching_repo_functions"
+                      }
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.111,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            }
+          ]
+        },
+        "full_instruction_comparison": {
+          "environment": "native",
+          "rows": [
+            {
+              "producer_revision": "2aa1c30c5c6b8c2c2e2de8e341b3d7ac7a63b629",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "a5eabe0666644eeff5b4f54dd2bf94f1376c2a9e3d5ff65a23a93d4b660ce440",
+                "returncode": 0,
+                "wallclock_ms": 27764.529,
+                "broker_bytes": 1685,
+                "broker_sha256": "47849aa9f5c600cdb42cc2e23c06eaec384710151dfab14d01c05708a65214ca",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 4598,
+                "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.131,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.422,
+                    "observed": {
+                      "discover_wall_s": 0.35,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 2400,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/units/module_utils/datatag/test_datatag.py",
+                        "test/units/plugins/action/test_action.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.12,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 26.151,
+                    "observed": {
+                      "failing_target": "test/units/cli/test_galaxy.py",
+                      "learned_skill_id": null,
+                      "model_calls": 0,
+                      "pass": false,
+                      "reaped_children": 0,
+                      "repaired_file": null,
+                      "repaired_line": null,
+                      "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+                      "wall_s": 26.065,
+                      "winning_mechanism": null
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.11,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "source_replay": "EMPTY_CAPTURE"
+              }
+            },
+            {
+              "producer_revision": "bbb51d912578cfde26452f33f2e1c95bcd9aa6a9",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "7c85a2bdb0c04c128b0e6c62283867fc14e3681341bebaed0ae5749d7e759223",
+                "returncode": 0,
+                "wallclock_ms": 27995.736,
+                "broker_bytes": 1863,
+                "broker_sha256": "9efcea813d144e56ed883e0aaa35a6521d65ea81012ebdd1c635d9672971f413",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 4598,
+                "base": "dcc5dac1846be3bf6e948a2950b93477b9193076",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.127,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.296,
+                    "observed": {
+                      "discover_wall_s": 0.227,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 4598,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/units/module_utils/datatag/test_datatag.py",
+                        "test/units/plugins/action/test_action.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.107,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 26.569,
+                    "observed": {
+                      "failing_target": "test/units/cli/test_galaxy.py",
+                      "learned_skill_id": null,
+                      "model_calls": 0,
+                      "pass": false,
+                      "probe_outcomes": [
+                        {
+                          "exit": 1,
+                          "failing": 5,
+                          "passing": 98,
+                          "target": "test/units/cli/test_galaxy.py",
+                          "timeout": false
+                        }
+                      ],
+                      "reaped_children": 0,
+                      "repaired_file": null,
+                      "repaired_line": null,
+                      "reused_skill_id": null,
+                      "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+                      "subtree_admission": null,
+                      "wall_s": 26.494,
+                      "winning_mechanism": null
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.102,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "source_replay": "EMPTY_CAPTURE"
+              }
+            }
+          ]
+        }
+      },
+      "acquisition": {
+        "acq1-diagnostic": {
+          "environment": "base",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "fafaefdc1acaedc6a6eb99a87d4044c628bdc32889252937f917e8daaa7638c0",
+                "returncode": 0,
+                "wallclock_ms": 1268.731,
+                "broker_bytes": 2235,
+                "broker_sha256": "59a5de349eccca16ae44adc4376b463e4afcf7e62202be5e7e2d62eaf9b3621d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 6,
+                "bytes_read": 25455,
+                "selected": [
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                  "test/units/config/manager/test_find_ini_config_file.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/parsing/test_convert_bool.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.0082,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.188
+                  },
+                  {
+                    "path": "test/units/config/manager/test_find_ini_config_file.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.174
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.176
+                  },
+                  {
+                    "path": "test/units/module_utils/parsing/test_convert_bool.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.17
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "837d3c2b0d40f0ba9ac577570bc99738adbd24ef583bb4ce10891231c7f3ffe7",
+                "returncode": 0,
+                "wallclock_ms": 1420.816,
+                "broker_bytes": 2202,
+                "broker_sha256": "7e565d401e73b071a35d9cb1a046e76a0cb094513bcdbae23808449680d02ea9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 346,
+                "bytes_read": 1955519,
+                "selected": [
+                  "test/units/module_utils/datatag/test_datatag.py",
+                  "test/units/_internal/templating/test_lazy_containers.py",
+                  "test/units/utils/test_serialization_profiles.py",
+                  "test/units/_internal/templating/test_templar.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.1406,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/datatag/test_datatag.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.192
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_lazy_containers.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.187
+                  },
+                  {
+                    "path": "test/units/utils/test_serialization_profiles.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.173
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_templar.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "error": "INCOMPLETE_TEST_RUN",
+                    "diagnostic": "ImportError while loading conftest '/work/repo/test/units/conftest.py'.\ntest/units/conftest.py:9: in <module>\n    import pytest_mock\nE   ModuleNotFoundError: No module named 'pytest_mock'\n",
+                    "seconds": 0.169
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "acq1-native-log": {
+          "environment": "native",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "a21dd6f3afc5493cb09a4ec4716ba0e13e24109fb77535d93410c5284bddcff1",
+                "returncode": 0,
+                "wallclock_ms": 4126.111,
+                "broker_bytes": 2025,
+                "broker_sha256": "14b6190099c90ed814af6ac9215f0727615d5db8bea4c5d99ada1e4ed805ba8d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 6,
+                "bytes_read": 25455,
+                "selected": [
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                  "test/units/config/manager/test_find_ini_config_file.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/parsing/test_convert_bool.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.0086,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 13
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.653
+                  },
+                  {
+                    "path": "test/units/config/manager/test_find_ini_config_file.py",
+                    "error": "NO_OBSERVATION",
+                    "process_exit": 1,
+                    "diagnostic": "ule_globals)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/linecache.py\", line 46, in getlines\n    return updatecache(filename, module_globals)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/usr/lib/python3.11/linecache.py\", line 93, in updatecache\n    stat = os.stat(fullname)\n           ^^^^^^^^^^^^^^^^^\n  File \"/work/repo/test/units/config/manager/test_find_ini_config_file.py\", line 156, in _os_stat\n    assert path == working_dir\nAssertionError: assert '/input/venv/lib/python3.11/site-packages/_pytest/main.py' == '/work/repo/test/units/config/manager'\n",
+                    "seconds": 0.79
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 7
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.634
+                  },
+                  {
+                    "path": "test/units/module_utils/parsing/test_convert_bool.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 27,
+                      "passed_reached_named_subject": 27
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 0.635
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "96dc5a601153125b5ec5beb768f5d80c76b29a96bd43f7499f4d7f49be0bacc9",
+                "returncode": 0,
+                "wallclock_ms": 8038.381,
+                "broker_bytes": 2075,
+                "broker_sha256": "324fcfa8a75585351dc7d0c1f20617f228d21295df7ca3e0cc5c919b4b749ce7",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 346,
+                "bytes_read": 1955519,
+                "selected": [
+                  "test/units/module_utils/datatag/test_datatag.py",
+                  "test/units/_internal/templating/test_lazy_containers.py",
+                  "test/units/utils/test_serialization_profiles.py",
+                  "test/units/_internal/templating/test_templar.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.1465,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/datatag/test_datatag.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 229,
+                      "passed_reached_named_subject": 5
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 0.891
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_lazy_containers.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 160,
+                      "passed_reached_named_subject": 146
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ]
+                    ],
+                    "seconds": 1.32
+                  },
+                  {
+                    "path": "test/units/utils/test_serialization_profiles.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 500,
+                      "passed_reached_named_subject": 97
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 1.157
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_templar.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 232,
+                      "passed_reached_named_subject": 185
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 3.856
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "acq1-native": {
+          "environment": "native",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "a3bb5b68b7cc9d305e63676a4fb024438e711c559cd84e650f47f566f939e098",
+                "returncode": 0,
+                "wallclock_ms": 3234.797,
+                "broker_bytes": 1391,
+                "broker_sha256": "ff117b21809f1665aba2d0c58b5c5ffe1114e386d63100fa2dc16332801acbf0",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 6,
+                "bytes_read": 25455,
+                "selected": [
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                  "test/units/config/manager/test_find_ini_config_file.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/parsing/test_convert_bool.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.0082,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 13
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.685
+                  },
+                  {
+                    "path": "test/units/config/manager/test_find_ini_config_file.py",
+                    "error": "NO_OBSERVATION",
+                    "process_exit": 1,
+                    "seconds": 0.657
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 7
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.677
+                  },
+                  {
+                    "path": "test/units/module_utils/parsing/test_convert_bool.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 27,
+                      "passed_reached_named_subject": 27
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 0.624
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "2d5ba2002d2f419f4ee5b70faaf8983070b5f6181168fe6ca1f130b4bd4786d0",
+                "returncode": 0,
+                "wallclock_ms": 7638.46,
+                "broker_bytes": 2075,
+                "broker_sha256": "20e80d770fb8b5755e8b2a587e48761ac63b2c15e32f24aa6ba7db4f224a9c1b",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 346,
+                "bytes_read": 1955519,
+                "selected": [
+                  "test/units/module_utils/datatag/test_datatag.py",
+                  "test/units/_internal/templating/test_lazy_containers.py",
+                  "test/units/utils/test_serialization_profiles.py",
+                  "test/units/_internal/templating/test_templar.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.1415,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/datatag/test_datatag.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 229,
+                      "passed_reached_named_subject": 5
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 0.895
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_lazy_containers.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 160,
+                      "passed_reached_named_subject": 146
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ]
+                    ],
+                    "seconds": 1.294
+                  },
+                  {
+                    "path": "test/units/utils/test_serialization_profiles.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 500,
+                      "passed_reached_named_subject": 97
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 1.19
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_templar.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 232,
+                      "passed_reached_named_subject": 185
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/config/manager.py",
+                        "ensure_type"
+                      ],
+                      [
+                        "lib/ansible/module_utils/_internal/_datatag/__init__.py",
+                        "is_tagged_on"
+                      ],
+                      [
+                        "lib/ansible/module_utils/parsing/convert_bool.py",
+                        "boolean"
+                      ]
+                    ],
+                    "seconds": 3.538
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "acq1": {
+          "environment": "base",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "4f7df271e58252970b5bee747b0ec5567a3f89a4b933e8db383f43cd446166ba",
+                "returncode": 0,
+                "wallclock_ms": 1268.764,
+                "broker_bytes": 1267,
+                "broker_sha256": "ee469b865cd8dcec47d334041644bee2797bbdc7041855bbd806a1e2a039069d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 6,
+                "bytes_read": 25455,
+                "selected": [
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                  "test/units/config/manager/test_find_ini_config_file.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/parsing/test_convert_bool.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.009,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.174
+                  },
+                  {
+                    "path": "test/units/config/manager/test_find_ini_config_file.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.174
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.177
+                  },
+                  {
+                    "path": "test/units/module_utils/parsing/test_convert_bool.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.174
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "da5e0d82008f917a6a591e48bb1b17d4e77dc6a20719ba6def6032afe0fac65e",
+                "returncode": 0,
+                "wallclock_ms": 1417.853,
+                "broker_bytes": 1232,
+                "broker_sha256": "2de16a12aea771b940f40911d28b4ed879d0e8aed71dfc1f4770711aaa40f3ce",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 346,
+                "bodies_read": 346,
+                "bytes_read": 1955519,
+                "selected": [
+                  "test/units/module_utils/datatag/test_datatag.py",
+                  "test/units/_internal/templating/test_lazy_containers.py",
+                  "test/units/utils/test_serialization_profiles.py",
+                  "test/units/_internal/templating/test_templar.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.1623,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "False",
+                  "None",
+                  "Origin",
+                  "Request",
+                  "True",
+                  "ValueError",
+                  "bool",
+                  "boolean",
+                  "caller",
+                  "dict",
+                  "dictionary",
+                  "ensure_type",
+                  "float",
+                  "inputs",
+                  "int",
+                  "integer",
+                  "is_tagged_on",
+                  "list",
+                  "none",
+                  "pathlist",
+                  "pathspec",
+                  "repr",
+                  "str",
+                  "string",
+                  "temppath",
+                  "tmp",
+                  "tmppath",
+                  "value_type"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/datatag/test_datatag.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.186
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_lazy_containers.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.18
+                  },
+                  {
+                    "path": "test/units/utils/test_serialization_profiles.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.174
+                  },
+                  {
+                    "path": "test/units/_internal/templating/test_templar.py",
+                    "exit": 4,
+                    "call_outcomes": {},
+                    "observed_subjects": [],
+                    "seconds": 0.17
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "instruction_sha256": "5379b1581e024fcf9ba14d29f6b6a7821031a17e1ed0d20b4141aa50c3c282d2"
+    },
+    {
+      "position": 6,
+      "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+      "instance_id": "instance_ansible__ansible-d62496fe416623e88b90139dc7917080cb04ce70-v0f01c69f1e2528b935359cfe578530722bca2c59",
+      "paired_routes": {
+        "initial": {
+          "environment": "base",
+          "rows": [
+            {
+              "producer_revision": "c5d59dd0cb20cf1d2b4c02136ccd7dd76423e7aa",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "741ae4be76752aa3ec9b1dc904f538740fbcf2611330dbc1c70c15d1b2bb43b0",
+                "returncode": 0,
+                "wallclock_ms": 824.277,
+                "broker_bytes": 715,
+                "broker_sha256": "be1a5bfb2fad00f25d824f47cb3384ee04baf82bc753f9a48fceaed681d477b8",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 2704,
+                "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 1,
+                    "worker_s": 0.107,
+                    "error": " main\n    result = open_model(root=root).solve(\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/input/producer/canonical/runtime/brain_unified_model_v1.py\", line 2815, in solve\n    from canonical.swe_kernel import unified_epistemic_portfolio_v1 as _uep\nImportError: cannot import name 'unified_epistemic_portfolio_v1' from 'canonical.swe_kernel' (/input/producer/canonical/swe_kernel/__init__.py)\n"
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            },
+            {
+              "producer_revision": "2aa1c30c5c6b8c2c2e2de8e341b3d7ac7a63b629",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "0d9707330a57a2703acadb1c623b13947f8fa20ba465ba3285b790aab13217b8",
+                "returncode": 0,
+                "wallclock_ms": 26867.428,
+                "broker_bytes": 1634,
+                "broker_sha256": "05c8b4ef1d679299213337c83db490696d08d538548e85c048ea94849f6ba625",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 2704,
+                "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.094,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.264,
+                    "observed": {
+                      "discover_wall_s": 0.198,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 2400,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py",
+                        "test/units/galaxy/test_api.py",
+                        "test/units/plugins/action/test_action.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.1,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 25.576,
+                    "observed": {
+                      "failing_target": "test/units/cli/test_galaxy.py",
+                      "learned_skill_id": null,
+                      "model_calls": 0,
+                      "pass": false,
+                      "reaped_children": 0,
+                      "repaired_file": null,
+                      "repaired_line": null,
+                      "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+                      "wall_s": 25.508,
+                      "winning_mechanism": null
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.107,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              }
+            }
+          ]
+        },
+        "full_instruction_comparison": {
+          "environment": "native",
+          "rows": [
+            {
+              "producer_revision": "2aa1c30c5c6b8c2c2e2de8e341b3d7ac7a63b629",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "78abd7a34a1872274ff9ce0d551f68070adbbc480f77d1c2a13d640ae008d6eb",
+                "returncode": 0,
+                "wallclock_ms": 26502.966,
+                "broker_bytes": 1670,
+                "broker_sha256": "794071f679da00e14973064a57935e11e050244a1d491e05529012b10aee55f3",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 2704,
+                "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.104,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.269,
+                    "observed": {
+                      "discover_wall_s": 0.205,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 2400,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py",
+                        "test/units/galaxy/test_api.py",
+                        "test/units/plugins/action/test_action.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.099,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 25.094,
+                    "observed": {
+                      "failing_target": "test/units/cli/test_galaxy.py",
+                      "learned_skill_id": null,
+                      "model_calls": 0,
+                      "pass": false,
+                      "reaped_children": 0,
+                      "repaired_file": null,
+                      "repaired_line": null,
+                      "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+                      "wall_s": 25.011,
+                      "winning_mechanism": null
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.156,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "source_replay": "EMPTY_CAPTURE"
+              }
+            },
+            {
+              "producer_revision": "bbb51d912578cfde26452f33f2e1c95bcd9aa6a9",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "5bed690842c45b1f3382222c0b891d7ee8ad26a1881a986a49052539a6e9e63f",
+                "returncode": 0,
+                "wallclock_ms": 26639.824,
+                "broker_bytes": 1842,
+                "broker_sha256": "64a9c3bf607dcd038480c8d07198970e6e232d0b70734d7ad95fc4df545aa64d",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "measurement": {
+                "public_instruction_chars": 2704,
+                "base": "df29852f3a48160e1a60635692c202531dd8b14a",
+                "trace": [
+                  {
+                    "cycle": 1,
+                    "worker_exit": 0,
+                    "worker_s": 0.1,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "discover",
+                    "command_exit": 0,
+                    "command_s": 0.337,
+                    "observed": {
+                      "discover_wall_s": 0.272,
+                      "ecosystems": {
+                        "go": false,
+                        "node": false,
+                        "python": true,
+                        "rust": false
+                      },
+                      "instruction_chars": 2704,
+                      "model_calls": 0,
+                      "python_exe": "/work/repo/.venv/bin/python",
+                      "ranked_tests": [
+                        "test/units/cli/test_galaxy.py",
+                        "test/units/galaxy/test_collection.py",
+                        "test/units/galaxy/test_collection_install.py",
+                        "test/integration/targets/module_utils/library/test_cwd_missing.py",
+                        "test/units/galaxy/test_api.py",
+                        "test/units/plugins/action/test_action.py"
+                      ],
+                      "repo_root": "/work/repo",
+                      "schema": "PROJECT_BRAIN_HARBOR_IN_CONTAINER_RUNNER_V1"
+                    }
+                  },
+                  {
+                    "cycle": 2,
+                    "worker_exit": 0,
+                    "worker_s": 0.12,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "terminal_exec"
+                    ],
+                    "phase": "repair",
+                    "command_exit": 0,
+                    "command_s": 25.223,
+                    "observed": {
+                      "failing_target": "test/units/cli/test_galaxy.py",
+                      "learned_skill_id": null,
+                      "model_calls": 0,
+                      "pass": false,
+                      "probe_outcomes": [
+                        {
+                          "exit": 1,
+                          "failing": 5,
+                          "passing": 98,
+                          "target": "test/units/cli/test_galaxy.py",
+                          "timeout": false
+                        }
+                      ],
+                      "reaped_children": 0,
+                      "repaired_file": null,
+                      "repaired_line": null,
+                      "reused_skill_id": null,
+                      "status": "OPEN__NO_CANDIDATE_SYNTHESIZED",
+                      "subtree_admission": null,
+                      "wall_s": 25.137,
+                      "winning_mechanism": null
+                    }
+                  },
+                  {
+                    "cycle": 3,
+                    "worker_exit": 0,
+                    "worker_s": 0.123,
+                    "status": "PASS__HARBOR_EPISTEMIC_PROPOSAL",
+                    "reason": null,
+                    "actions": [
+                      "finish"
+                    ]
+                  }
+                ],
+                "capture_exit": 0,
+                "patch_bytes": 0,
+                "official_reward": null,
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "source_replay": "EMPTY_CAPTURE"
+              }
+            }
+          ]
+        }
+      },
+      "acquisition": {
+        "acq2-native": {
+          "environment": "native",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "85e957cd07096e3f417fe43de6f789b848983d09b5c10611e60c071b69d39be9",
+                "returncode": 0,
+                "wallclock_ms": 2171.894,
+                "broker_bytes": 1250,
+                "broker_sha256": "95a9bc0bac395eccda1a08a6071fbe1930811d09fd931798571b37df9e0d32f9",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 313,
+                "bodies_read": 6,
+                "bytes_read": 26002,
+                "selected": [
+                  "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.0062,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "Request",
+                  "ValueError",
+                  "byte",
+                  "human_to_bytes"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 93,
+                      "passed_reached_named_subject": 93
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/common/text/formatters.py",
+                        "human_to_bytes"
+                      ]
+                    ],
+                    "seconds": 0.399
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 7
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.518
+                  },
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 62
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.355
+                  },
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 13
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.322
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "e18502e6d44c231a131185fbdaa2e94b8ba4bbb42b5f5c58f62116838d93f5a2",
+                "returncode": 0,
+                "wallclock_ms": 4933.337,
+                "broker_bytes": 1239,
+                "broker_sha256": "77d76ca9777adfe804f8c99d9ff578338633b7197571b42968859cfa00aa6841",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 313,
+                "bodies_read": 313,
+                "bytes_read": 1725020,
+                "selected": [
+                  "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "test/units/utils/collection_loader/test_collection_loader.py",
+                  "test/units/galaxy/test_collection.py",
+                  "test/units/module_utils/common/text/formatters/test_bytes_to_human.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.125,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "Request",
+                  "ValueError",
+                  "byte",
+                  "human_to_bytes"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 93,
+                      "passed_reached_named_subject": 93
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/common/text/formatters.py",
+                        "human_to_bytes"
+                      ]
+                    ],
+                    "seconds": 0.4
+                  },
+                  {
+                    "path": "test/units/utils/collection_loader/test_collection_loader.py",
+                    "exit": 1,
+                    "call_outcomes": {
+                      "passed": 69,
+                      "failed": 1
+                    },
+                    "observed_subjects": [],
+                    "seconds": 1.626
+                  },
+                  {
+                    "path": "test/units/galaxy/test_collection.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 74
+                    },
+                    "observed_subjects": [],
+                    "seconds": 1.828
+                  },
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 62
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.381
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "acq2": {
+          "environment": "base",
+          "rows": [
+            {
+              "mode": "selective",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "32dac8dc8085095697707b89342b069f2370a430b5c683926b9818aec806aee7",
+                "returncode": 0,
+                "wallclock_ms": 1919.856,
+                "broker_bytes": 1250,
+                "broker_sha256": "d89af3894aaa0f39906119af4277329107e6793bb9b1d509b5c2eb04edf48eeb",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 313,
+                "bodies_read": 6,
+                "bytes_read": 26002,
+                "selected": [
+                  "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "test/units/executor/test_task_result.py",
+                  "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                  "test/units/module_utils/common/parameters/test_list_no_log_values.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.0064,
+                "mode": "selective",
+                "goal_named_symbols": [
+                  "Request",
+                  "ValueError",
+                  "byte",
+                  "human_to_bytes"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 93,
+                      "passed_reached_named_subject": 93
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/common/text/formatters.py",
+                        "human_to_bytes"
+                      ]
+                    ],
+                    "seconds": 0.328
+                  },
+                  {
+                    "path": "test/units/executor/test_task_result.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 7
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.462
+                  },
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 62
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.302
+                  },
+                  {
+                    "path": "test/units/module_utils/common/parameters/test_list_no_log_values.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 13
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.259
+                  }
+                ]
+              }
+            },
+            {
+              "mode": "broad",
+              "launcher": {
+                "schema": "PROJECT_BRAIN_ZERO_AMBIENT_NAMESPACE_LAUNCHER_V1",
+                "status": "CHILD_EXITED",
+                "policy_sha256": "2992205948d13dbff46b51068a1e111d7c91982cc78e1c4e16bcd09baa9c445a",
+                "returncode": 0,
+                "wallclock_ms": 4477.988,
+                "broker_bytes": 1242,
+                "broker_sha256": "2f3a92c1d1d9098cdd4e1cabdf4dbc0533c5e076a56ddbb4eaf433177980142f",
+                "syscall_filter_sha256": "26cd1e65305ccf034a213df6a5f33a2ba5cda2e718a6fc418dff5b082f2617b6",
+                "material_effects_committed": 0,
+                "execution_authority": false,
+                "promotion_authority": false,
+                "fresh_reality_authority": false
+              },
+              "result": {
+                "eligible_files": 313,
+                "bodies_read": 313,
+                "bytes_read": 1725020,
+                "selected": [
+                  "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                  "test/units/utils/collection_loader/test_collection_loader.py",
+                  "test/units/galaxy/test_collection.py",
+                  "test/units/module_utils/common/text/formatters/test_bytes_to_human.py"
+                ],
+                "ranking_seconds_excluding_enumeration": 0.1213,
+                "mode": "broad",
+                "goal_named_symbols": [
+                  "Request",
+                  "ValueError",
+                  "byte",
+                  "human_to_bytes"
+                ],
+                "probes": [
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_human_to_bytes.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 93,
+                      "passed_reached_named_subject": 93
+                    },
+                    "observed_subjects": [
+                      [
+                        "lib/ansible/module_utils/common/text/formatters.py",
+                        "human_to_bytes"
+                      ]
+                    ],
+                    "seconds": 0.323
+                  },
+                  {
+                    "path": "test/units/utils/collection_loader/test_collection_loader.py",
+                    "exit": 1,
+                    "call_outcomes": {
+                      "passed": 69,
+                      "failed": 1
+                    },
+                    "observed_subjects": [],
+                    "seconds": 1.572
+                  },
+                  {
+                    "path": "test/units/galaxy/test_collection.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 74
+                    },
+                    "observed_subjects": [],
+                    "seconds": 1.634
+                  },
+                  {
+                    "path": "test/units/module_utils/common/text/formatters/test_bytes_to_human.py",
+                    "exit": 0,
+                    "call_outcomes": {
+                      "passed": 62
+                    },
+                    "observed_subjects": [],
+                    "seconds": 0.284
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "instruction_sha256": "e8538e435727e8f24bed64ba8ae84878fe6c876509d5176568c057777a8950b6"
+    }
+  ]
+}

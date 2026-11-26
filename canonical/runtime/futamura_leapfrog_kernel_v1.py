@@ -64,11 +64,12 @@ SCHEMA = "PROJECT_BRAIN_FUTAMURA_LEAPFROG_KERNEL_V1"
 
 
 class ConformalEValueGate:
-    """Distribution-free anytime-valid sequential e-process risk controller.
+    """Compute a product of supplied Bernoulli likelihood ratios, in log space.
 
-    Maintains `log E_t = sum_i log(e_i)` where each factor satisfies `E_H0[e_i] <= 1`.
-    By Ville's inequality, stopping at ANY step `t` when `E_t >= 1 / alpha` guarantees
-    false-commit probability `<= alpha` under `H0`.
+    Ville's bound requires E_null[e_i | *all preceding evidence*] <= 1.
+    This class does not establish those conditional probabilities. Repeating a
+    check, or assigning p=0.10 to a selected passing test, is not calibration.
+    COMMIT here names the numerical decision only, not a measured error bound.
     """
 
     def __init__(self, *, alpha: float = 0.05) -> None:
@@ -103,7 +104,7 @@ class ConformalEValueGate:
           - Pass factor: `e = (1 - eps) / p0` (with `eps = 0.05` betting conservatism)
           - Fail factor: `e = eps / (1 - p0)`
         Check: `E_H0[e] = p0 * ((1-eps)/p0) + (1-p0) * (eps/(1-p0)) = (1-eps) + eps = 1.0`!
-        So `E_H0[e_i] == 1.0` EXACTLY for every `p0 in (0, 1)`!
+        This expectation uses the supplied p0; it does not validate it.
         """
         p0 = min(max(float(null_pass_prob), 1e-6), 1.0 - 1e-6)
         eps = 0.05
@@ -140,6 +141,8 @@ class ConformalEValueGate:
             reason = "INSUFFICIENT_EVIDENCE_EMIT_MINIMAL_PROBE"
         return {
             "schema": SCHEMA + "/conformal_evalue",
+            "false_commit_bound_established": False,
+            "null_model": "CALLER_SUPPLIED_CONDITIONAL_PROBABILITIES_NOT_VERIFIED",
             "verdict": verdict,
             "reason": reason,
             "alpha": self.alpha,
@@ -909,6 +912,27 @@ def splice_ast_byte_span(source: str, node: ast.AST, replacement_code: str) -> s
     return spliced.decode("utf-8")
 
 
+def _exec_test_case(ns: dict[str, Any], test_expr: str) -> None:
+    """Run one test case FALSIFIABLY against namespace `ns`; raise on failure.
+
+    A bare expression (`f(2) == 5`) compiled with `exec` is *evaluated and then
+    discarded*, so `exec(...)` alone accepts every candidate no matter how wrong
+    the source is -- an unfalsifiable oracle (the exact defect that makes a
+    "verifier" green on code it never checked). We therefore evaluate the case in
+    `eval` mode and require truthiness when it yields a value. `None` means the
+    case is statement-shaped (`check(x)` / `assert ...`) and passes iff it does
+    not raise, which is the standard assertion convention.
+    """
+    try:
+        expr_code = compile(test_expr, "<futamura_test>", "eval")
+    except SyntaxError:
+        exec(compile(test_expr, "<futamura_test>", "exec"), ns, ns)
+        return
+    value = eval(expr_code, ns, ns)
+    if value is not None and not value:
+        raise AssertionError(f"test case returned falsey value {value!r}: {test_expr}")
+
+
 def _run_case_with_line_trace(source: str, test_expr: str) -> tuple[bool, set[int], str]:
     """Execute one test against compiled `source` collecting exact executed line numbers."""
     ns: dict[str, Any] = {}
@@ -925,12 +949,10 @@ def _run_case_with_line_trace(source: str, test_expr: str) -> tuple[bool, set[in
 
     def _run_test() -> tuple[bool, str]:
         try:
-            test_code = compile(test_expr, "<futamura_test>", "exec")
-            exec(test_code, ns, ns)
+            _exec_test_case(ns, test_expr)
             return True, "OK"
         except Exception as exc:
             return False, f"{type(exc).__name__}:{exc}"
-
     if use_pep669:
         mon = sys.monitoring
         try:
@@ -1054,15 +1076,17 @@ def _eval_candidate_in_cow_fork(candidate_source: str, test_cases: Sequence[str]
 
 
 def _eval_candidate_in_process(candidate_source: str, test_cases: Sequence[str]) -> bool:
-    ns: dict[str, Any] = {}
     try:
-        exec(compile(candidate_source, "<futamura_cand>", "exec"), ns, ns)
+        code = compile(candidate_source, "<futamura_cand>", "exec")
         for tc in test_cases:
-            exec(compile(tc, "<futamura_test>", "exec"), ns, ns)
+            # Match localization: each supplied case starts with a fresh subject
+            # namespace, not globals established by the previous case.
+            ns: dict[str, Any] = {}
+            exec(code, ns, ns)
+            _exec_test_case(ns, tc)
         return True
     except Exception:
         return False
-
 
 _CMP_REPAIR_ALTS: dict[type[ast.cmpop], tuple[type[ast.cmpop], ...]] = {
     ast.Lt: (ast.LtE, ast.Gt, ast.GtE),
@@ -1190,7 +1214,10 @@ class ZeroOverheadCoWZygoteRepairEngine:
     ) -> dict[str, Any]:
         """Run end-to-end Ochiai + byte-span splice + CoW fork + ddmin + mutation + e-value repair."""
         t0 = time.perf_counter()
-        loc = localize_fault_ochiai(source, test_cases)
+        return self._repair_localized(source, test_cases, localize_fault_ochiai(source, test_cases),
+                                      use_cow_fork, run_mutation_audit, alpha, t0)
+
+    def _repair_localized(self, source, test_cases, loc, use_cow_fork, run_mutation_audit, alpha, t0):
         if loc["total_fail"] == 0:
             return {
                 "schema": SCHEMA + "/cow_zygote_repair",
@@ -1270,6 +1297,9 @@ class ZeroOverheadCoWZygoteRepairEngine:
 # ===========================================================================
 
 
+_TEMPLATE_BUILTINS = frozenset({"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"})
+
+
 class _AlphaTemplateNormalizer:
     """Alpha-normalize an AST subtree into canonical slot variables (`__V0__`, `__C0__`) for generalization."""
 
@@ -1286,7 +1316,7 @@ class _AlphaTemplateNormalizer:
     def _walk(self, node: ast.AST) -> ast.AST:
         if isinstance(node, ast.Name):
             # Keep Python builtins un-abstracted (`len`, `min`, `max`, `range`, `None`).
-            if node.id in {"len", "min", "max", "range", "sum", "abs", "int", "float", "str", "list", "dict", "set"}:
+            if node.id in _TEMPLATE_BUILTINS:
                 return node
             slot = self.name_to_slot.get(node.id)
             if slot is None:
@@ -1334,11 +1364,50 @@ def _preorder_signature(node: ast.AST, max_depth: int = 4) -> tuple[str, ...]:
     return tuple(out)
 
 
+def _rule_bucket(node: ast.AST) -> tuple[str, ...]:
+    """Coarse index key: node kind plus its operator, ignoring operand shape.
+
+    `_preorder_signature` is exact, so it cannot find a rule that should match a
+    *sub-expression* of a larger expression: the left operand of `a - b - c` is an
+    `ast.BinOp`, and the learned rule's keyed signature is `Name - Name`. Measured
+    2026-11-26, that made compiled laws unable to chain. The bucket is deliberately
+    coarse -- `_match_template` still decides, and the suite oracle still verifies
+    the final state -- so a coarse key can only add reachable candidates.
+    """
+    kind = type(node).__name__
+    op = getattr(node, "op", None)
+    if op is None:
+        ops = getattr(node, "ops", None)
+        if ops:
+            op = ops[0]
+    if op is None:
+        bops = getattr(node, "op", None)
+        op = bops
+    return (kind, type(op).__name__) if op is not None else (kind,)
+
+
+def _template_bucket(pattern: ast.AST) -> tuple[str, ...]:
+    # __C slots are represented by ast.Name in storage, but can match only a
+    # concrete Constant. Use the same bucket on compilation and rehydration.
+    if isinstance(pattern, ast.Name) and pattern.id.startswith("__C") and pattern.id.endswith("__"):
+        return ("Constant",)
+    return _rule_bucket(pattern)
+
+
 def _match_template(pattern: ast.AST, concrete: ast.AST, bindings: dict[str, ast.AST]) -> bool:
     """Match an alpha-normalized AST `pattern` against `concrete`, populating `bindings`."""
     if isinstance(pattern, ast.Name) and pattern.id.startswith(("__V", "__C")) and pattern.id.endswith("__"):
         slot = pattern.id
-        if slot.startswith("__V") and not isinstance(concrete, ast.Name):
+        # `__V` slots bind any *expression*, not just a bare name. Restricting
+        # them to `ast.Name` made the learned law `x - y -> x + y` unable to fire
+        # on a compound operand: measured 2026-11-26, replay of `a - b - c`
+        # rewrote the inner pair to `a + b - c` and then dead-ended, because the
+        # remaining `(a + b) - c` has an `ast.BinOp` on the left and the template
+        # refused to bind it. The law is re-verified by the suite oracle on every
+        # final state, so widening the binding domain can only add reachable
+        # candidates, never accept an unverified one; the cost of a wider search
+        # is bounded by RUNG0_MAX_STATES.
+        if slot.startswith("__V") and isinstance(concrete, ast.Constant):
             return False
         if slot.startswith("__C") and not isinstance(concrete, ast.Constant):
             return False
@@ -1395,6 +1464,50 @@ def _instantiate_template(template: ast.AST, bindings: Mapping[str, ast.AST]) ->
     return res
 
 
+RUNG0_STORE_VERSION = 1
+RUNG0_STORE_RELPATH = Path("canonical/astra_runtime/state/futamura_rung0_laws_v1.json")
+
+
+def rung0_store_path() -> Path:
+    """Where compiled laws persist between processes.
+
+    Default is the repo state dir; `BRAIN_FUTAMURA_STORE` overrides it so a test
+    can point at a scratch file rather than mutating the checked-in store.
+    """
+    override = os.environ.get("BRAIN_FUTAMURA_STORE")
+    if override:
+        return Path(override)
+    return Path(__file__).resolve().parents[2] / RUNG0_STORE_RELPATH
+
+
+def load_rung0_rules(path: Path | None = None) -> list[dict[str, Any]]:
+    """Read persisted laws. Corrupt or absent store yields no laws, never a crash."""
+    target = path or rung0_store_path()
+    try:
+        raw = target.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    try:
+        payload = json.loads(raw)
+    except (ValueError, TypeError):
+        return []
+    if not isinstance(payload, dict) or payload.get("store_version") != RUNG0_STORE_VERSION:
+        return []
+    rules = payload.get("rules")
+    return [r for r in rules if isinstance(r, dict)] if isinstance(rules, list) else []
+
+
+def save_rung0_rules(rules: list[dict[str, Any]], path: Path | None = None) -> Path:
+    """Write persisted laws atomically."""
+    target = path or rung0_store_path()
+    target.parent.mkdir(parents=True, exist_ok=True)
+    payload = {"store_version": RUNG0_STORE_VERSION, "rules": rules}
+    tmp = target.with_suffix(target.suffix + ".tmp")
+    tmp.write_text(json.dumps(payload, indent=1, sort_keys=True), encoding="utf-8")
+    tmp.replace(target)
+    return target
+
+
 @dataclass
 class CompiledRung0Rule:
     rule_id: str
@@ -1414,12 +1527,122 @@ class CompiledRung0Rule:
 class FutamuraSelfCompilingCascade:
     """4-Rung Self-Compiling Cascade that compiles verified Rung 1/2/3 wins back into `< 50 us` Rung 0."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, persist_on_init: bool = True) -> None:
         self._rung0_by_key: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
+        # Coarse (kind, operator) index so a rule can fire on a nested operand
+        # whose exact signature differs from the learned one.
+        self._rung0_by_bucket: dict[tuple[str, ...], list[CompiledRung0Rule]] = {}
         self._rules_by_id: dict[str, CompiledRung0Rule] = {}
         self.belief_bus = DBSPBeliefRevisionBus()
         self.repair_engine = ZeroOverheadCoWZygoteRepairEngine()
         self.compile_history: list[dict[str, Any]] = []
+        # Laws survive the process, not just the session. Measured 2026-11-26:
+        # a fresh interpreter saw 0 rules and re-spent Rung 2 on a law it had
+        # already learned, which makes "compile once, replay forever" false
+        # outside a single process.
+        self._persisted: dict[str, dict[str, Any]] = {}
+        # Rule ids retired for cause; remembered so they are not re-armed.
+        self._retired: set[str] = set()
+        if persist_on_init:
+            self._hydrate_persisted_laws()
+
+    def _hydrate_persisted_laws(self) -> None:
+        """Rebuild compiled laws from disk, re-validating each one.
+
+        A persisted law is a *claim* that held in an earlier interpreter. It is
+        re-armed only if its templates re-parse and rebuild a usable rule;
+        anything unparseable is dropped rather than trusted. The store is
+        ordinary editable data, so a human can delete a bad law by hand and the
+        next process simply will not have it.
+        """
+        for row in load_rung0_rules():
+            try:
+                before_ast = ast.parse(str(row["before_template"]), mode="eval").body
+                after_ast = ast.parse(str(row["after_template"]), mode="eval").body
+            except (KeyError, SyntaxError, TypeError, ValueError):
+                continue
+            before_names = {n.id for n in ast.walk(before_ast) if isinstance(n, ast.Name)}
+            after_names = {n.id for n in ast.walk(after_ast) if isinstance(n, ast.Name)}
+            if after_names - before_names - _TEMPLATE_BUILTINS:
+                continue  # Persistence cannot supply a missing receiver binding.
+            rule = CompiledRung0Rule(
+                rule_id=str(row.get("rule_id") or f"persisted_{len(self._persisted)}"),
+                preorder_key=_preorder_signature(before_ast),
+                before_template_src=str(row["before_template"]),
+                after_template_src=str(row["after_template"]),
+                before_ast=before_ast,
+                after_ast=after_ast,
+                source_rung=int(row.get("source_rung") or 2),
+                successes=int(row.get("successes") or 0),
+                failures=int(row.get("failures") or 0),
+                rubin_tau_hat=float(row.get("rubin_tau_hat") or 1.0),
+            )
+            if bool(row.get("quarantined")):
+                # A retired law stays retired across restarts; that memory is the
+                # point of persisting it.
+                self._retired.add(rule.rule_id)
+                continue
+            if rule.rule_id in self._rules_by_id:
+                continue
+            self._rules_by_id[rule.rule_id] = rule
+            self._rung0_by_key.setdefault(rule.preorder_key, []).append(rule)
+            self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
+            self._persisted[rule.rule_id] = dict(row)
+
+    def persisted_law_ids(self) -> list[str]:
+        """Rule ids that came from disk, as opposed to compiled this process."""
+        return sorted(self._persisted)
+
+    def save_laws(self, path: Path | None = None) -> Path:
+        """Persist all non-quarantined laws with their observed counters."""
+        rows: list[dict[str, Any]] = [
+            {
+                "rule_id": rule_id,
+                "before_template": rule.before_template_src,
+                "after_template": rule.after_template_src,
+                "source_rung": int(rule.source_rung),
+                "hits": int(rule.hits),
+                "successes": int(rule.successes),
+                "failures": int(rule.failures),
+                "rubin_tau_hat": float(rule.rubin_tau_hat),
+            }
+            for rule_id, rule in sorted(self._rules_by_id.items())
+            if not rule.quarantined
+        ]
+        # Retired laws are written explicitly, flagged, not silently dropped: a
+        # law that vanishes is re-learned from the same evidence next time.
+        for rule_id in sorted(self._retired):
+            rule = self._rules_by_id.get(rule_id)
+            rows.append({
+                "rule_id": rule_id,
+                "before_template": rule.before_template_src if rule else "",
+                "after_template": rule.after_template_src if rule else "",
+                "source_rung": int(rule.source_rung) if rule else 0,
+                "hits": int(rule.hits) if rule else 0,
+                "successes": int(rule.successes) if rule else 0,
+                "failures": int(rule.failures) if rule else 0,
+                "rubin_tau_hat": float(rule.rubin_tau_hat) if rule else 0.0,
+                "quarantined": True,
+            })
+        return save_rung0_rules(rows, path)
+
+    def _record_rule_outcome(self, rule: CompiledRung0Rule, passed: bool) -> None:
+        """Record one replay outcome and retire the law if the evidence is against it."""
+        if passed:
+            rule.successes += 1
+            return
+        rule.failures += 1
+        observed = rule.successes + rule.failures
+        if observed < self.RULE_RETIRE_MIN_FAILURES:
+            return
+        rate = rule.successes / observed
+        if rate < self.RULE_RETIRE_SUCCESS_RATE:
+            rule.quarantined = True
+            self._retired.add(rule.rule_id)
+            try:
+                self.save_laws()
+            except OSError:
+                pass
 
     def rule_count(self) -> int:
         return sum(1 for r in self._rules_by_id.values() if not r.quarantined)
@@ -1484,6 +1707,20 @@ class FutamuraSelfCompilingCascade:
         norm = _AlphaTemplateNormalizer()
         before_tpl = norm.normalize(orig_node)
         after_tpl = norm.normalize(new_node)
+        # A template must reconstruct the actual teacher edit before it can be
+        # filed. A new literal can be frozen; a new name needs a receiver-owned
+        # supplier, not an uninstantiated __V slot in live source.
+        bindings: dict[str, ast.AST] = {}
+        if not _match_template(before_tpl, orig_node, bindings):
+            return {"compiled": False, "reason": "TEACHER_PATTERN_MISMATCH"}
+        fixed = {slot: ast.Constant(value=value) for (_, value), slot in norm.const_to_slot.items()
+                 if slot not in bindings}
+        after_tpl = _instantiate_template(after_tpl, fixed)
+        restored = _instantiate_template(after_tpl, bindings)
+        if ast.dump(restored) != ast.dump(new_node) or any(
+            slot not in bindings for slot in norm.name_to_slot.values()
+        ):
+            return {"compiled": False, "reason": "UNBOUND_REPLACEMENT_OR_FAILED_TEACHER_ROUNDTRIP"}
         pkey = _preorder_signature(orig_node)
         before_str = ast.unparse(before_tpl)
         after_str = ast.unparse(after_tpl)
@@ -1514,6 +1751,12 @@ class FutamuraSelfCompilingCascade:
         )
         self._rules_by_id[rule_id] = rule
         self._rung0_by_key.setdefault(pkey, []).append(rule)
+        self._rung0_by_bucket.setdefault(_template_bucket(rule.before_ast), []).append(rule)
+        # A law that dies with the interpreter is a cache, not a compilation.
+        try:
+            self.save_laws()
+        except OSError:
+            pass
         self.belief_bus.ingest_delta(
             record_id=rule_id,
             key="rung0_compiled_rule",
@@ -1532,56 +1775,109 @@ class FutamuraSelfCompilingCascade:
         self.compile_history.append(rec)
         return rec
 
-    def _try_rung0(self, source: str, test_cases: Sequence[str]) -> dict[str, Any] | None:
-        """Attempt `< 100 us` lookup + generalized instantiation of compiled Rung-0 rules."""
-        if not self._rung0_by_key:
-            return None
-        t0 = time.perf_counter()
+    # Bounds on the Rung-0 replay search. A learned law can need more than one
+    # application: `a - b - c` must fire `a - b -> a + b` twice. The search is
+    # over *sequences* of rewrites and is verified only at the END of each
+    # sequence, because a partially-applied law is expected to still fail --
+    # requiring every intermediate state to pass would make chaining impossible
+    # (measured 2026-11-26: it did, and `a - b - c` fell through to Rung 2).
+    # Retirement thresholds, in observed replays. A compiled law is a hypothesis
+    # about a rewrite family; when it keeps failing the family it claims it is
+    # wrong, and keeping it is worse than deleting it, because every later task
+    # pays for the failed screening. Measured 2026-11-26: `failures` was
+    # incremented on every miss but nothing ever acted on the count, so a bad law
+    # was re-armed in every future process. At least this many observations are
+    # required before a law may be retired, so one unlucky task cannot delete a
+    # good law.
+    RULE_RETIRE_MIN_FAILURES = 3
+    RULE_RETIRE_SUCCESS_RATE = 0.25
+    RUNG0_MAX_REWRITES = 6
+    RUNG0_MAX_STATES = 48
+
+    def _rung0_rewrites(self, source: str, failing_lines: set[int]) -> list[tuple[str, str, set[int]]]:
+        """One rewrite and the original failing-line witness mapped into the new source."""
         try:
             tree = ast.parse(source)
         except SyntaxError:
-            return None
-
-        # Gather all AST subtrees matching any compiled rule preorder key.
-        matched_attempts = 0
-        eval_overhead_s = 0.0
+            return []
+        out: list[tuple[str, str, set[int]]] = []
         for node in ast.walk(tree):
             if not hasattr(node, "lineno") or not hasattr(node, "end_lineno"):
                 continue
-            pkey = _preorder_signature(node)
-            rules = self._rung0_by_key.get(pkey)
-            if not rules:
+            if not any(node.lineno <= line <= node.end_lineno for line in failing_lines):
                 continue
-            for rule in rules:
+            for rule in self._rung0_by_bucket.get(_rule_bucket(node), ()):
                 if rule.quarantined or rule.rubin_tau_hat <= 0.0:
                     continue
                 bindings: dict[str, ast.AST] = {}
                 if not _match_template(rule.before_ast, node, bindings):
                     continue
-                matched_attempts += 1
                 instantiated = _instantiate_template(rule.after_ast, bindings)
-                cand_src = splice_ast_byte_span(source, node, ast.unparse(instantiated))
-                ctx_key = hashlib.sha256(source.encode("utf-8")).hexdigest()[:16]
-                prop_sig = hashlib.sha256(cand_src.encode("utf-8")).hexdigest()[:16]
-                if not self.belief_bus.check_pre_commit_gate(ctx_key, prop_sig)["allowed"]:
+                replacement = ast.unparse(instantiated)
+                cand_src = splice_ast_byte_span(source, node, replacement)
+                if cand_src != source:
+                    # Carry the original witnessed sites across the splice. Do
+                    # not execute an intermediate candidate in the parent just
+                    # to rediscover its line numbers when using a CoW oracle.
+                    end = node.lineno + replacement.count("\n")
+                    shift = end - node.end_lineno
+                    lines = {n for n in failing_lines if n < node.lineno}
+                    lines.update(range(node.lineno, end + 1))
+                    lines.update(n + shift for n in failing_lines if n > node.end_lineno)
+                    out.append((rule.rule_id, cand_src, lines))
+        return out
+
+    def _try_rung0(self, source: str, test_cases: Sequence[str], failing_lines: set[int],
+                   evaluate: Callable[[str, Sequence[str]], bool]) -> dict[str, Any] | None:
+        """Breadth-first replay of compiled Rung-0 laws to a *verified* fixpoint.
+
+        Rung 0 is the Futamura payoff: a law learned once from a verified repair
+        replays with zero synthesis. Measured 2026-11-26 with a single
+        application, the learned `a - b -> a + b` law transferred to renamed
+        functions, new constants and a `str` operand in 0.2-0.4 ms, but failed
+        `a - b - c`, where the law must fire twice. Without chaining, the
+        expensive rung is spent on a task the cheap one already knows.
+        """
+        if not self._rung0_by_key:
+            return None
+        t0 = time.perf_counter()
+        eval_overhead_s = 0.0
+        frontier = deque([(source, (), failing_lines)])
+        seen: set[str] = {source}
+        states = 0
+        while frontier and states < self.RUNG0_MAX_STATES:
+            state, fired, lines = frontier.popleft()
+            if len(fired) >= self.RUNG0_MAX_REWRITES:
+                continue
+            for rule_id, cand_src, next_lines in self._rung0_rewrites(state, lines):
+                if cand_src in seen:
                     continue
-                lookup_us = max(0.0, (time.perf_counter() - t0 - eval_overhead_s) * 1e6)
-                rule.hits += 1
-                t_ev = time.perf_counter()
-                passed_ev = _eval_candidate_in_process(cand_src, test_cases)
-                eval_overhead_s += time.perf_counter() - t_ev
-                if passed_ev:
-                    rule.successes += 1
+                seen.add(cand_src)
+                states += 1
+                rule = self._rules_by_id.get(rule_id)
+                if rule is not None:
+                    rule.hits += 1
+                start_eval = time.perf_counter()
+                passed = evaluate(cand_src, test_cases)
+                eval_overhead_s += time.perf_counter() - start_eval
+                if passed:
+                    if rule is not None:
+                        self._record_rule_outcome(rule, passed=True)
                     return {
-                        "rule_id": rule.rule_id,
-                        "before_template": rule.before_template_src,
-                        "after_template": rule.after_template_src,
+                        "rule_id": rule_id,
+                        "rule_ids": [*fired, rule_id],
+                        "rewrites": len(fired) + 1,
+                        "before_template": rule.before_template_src if rule else "",
+                        "after_template": rule.after_template_src if rule else "",
                         "patched_source": cand_src,
-                        "lookup_and_splice_us": round(lookup_us, 3),
-                        "matched_attempts": matched_attempts,
+                        "lookup_and_splice_us": round(max(0, time.perf_counter() - t0 - eval_overhead_s) * 1e6, 3),
+                        "matched_attempts": states,
                     }
-                rule.failures += 1
-                self.belief_bus.record_failure_witness(ctx_key, prop_sig, witness="RUNG0_TEST_FAIL")
+                if rule is not None:
+                    self._record_rule_outcome(rule, passed=False)
+                if states >= self.RUNG0_MAX_STATES:
+                    break
+                frontier.append((cand_src, (*fired, rule_id), next_lines))
         return None
 
     def solve(
@@ -1630,7 +1926,14 @@ class FutamuraSelfCompilingCascade:
             }
 
         # --- RUNG 0: Compiled Generalized AST Rule Replay (< 100 us lookup) ---
-        r0 = self._try_rung0(source, test_cases)
+        loc = localize_fault_ochiai(source, test_cases)
+        if not loc["total_fail"]:
+            return {"schema": SCHEMA + "/futamura_solve", "pass": True, "rung_used": -1,
+                    "status": "ALREADY_PASSING__NO_REPAIR", "patched_source": source,
+                    "compiled_to_rung0": False, "proposer_calls": 0,
+                    "elapsed_ms": round((time.perf_counter() - t0) * 1000, 4)}
+        r0 = self._try_rung0(source, test_cases, {r["line"] for r in loc["ranked_lines"]},
+                             _eval_candidate_in_cow_fork if use_cow_fork else _eval_candidate_in_process)
         if r0 is not None:
             return {
                 "schema": SCHEMA + "/futamura_solve",
@@ -1645,13 +1948,8 @@ class FutamuraSelfCompilingCascade:
             }
 
         # --- RUNG 2: Zero-Overhead Ochiai + Byte-Span AST Splice + CoW Zygote + Ring-0 Gate ---
-        r2 = self.repair_engine.repair(
-            source,
-            test_cases,
-            use_cow_fork=use_cow_fork,
-            run_mutation_audit=True,
-            alpha=alpha,
-        )
+        r2 = self.repair_engine._repair_localized(source, test_cases, loc, use_cow_fork,
+                                                  True, alpha, t0)
         if r2.get("pass"):
             comp = (
                 self.compile_verified_win_to_rung0(source, r2["patched_source"], source_rung=2)

@@ -163,6 +163,9 @@ def main() -> int:
     if (
         result.get("pass") is not True
         and isinstance(inputs.get("harbor_task"), str)
+        # Legacy task-only requests use the one-shot worker. A cycle request
+        # is proposal-only, even when the controller refuses it.
+        and "cycle" not in inputs and "observations" not in inputs
         and not inputs.get("observation_history")
     ):
         fb = _fallback_zero_llm_container_solve(

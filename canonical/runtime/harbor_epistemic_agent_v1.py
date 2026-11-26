@@ -7,9 +7,9 @@ experimental disposable-VM dispatch only after conservative Docker Compose
 checks; this is not an independently verified boundary. The command policy is
 not an isolation boundary.
 
-`EPISTEMIC` is forwarded verbatim. Brain's solve() special-cases only RECALL and
-SOLVE_OR_LEARN; every other mode string uses ordinary routing. This module does
-not invent a new engine mode.
+`EPISTEMIC` is forwarded verbatim. Brain's solve() routes a Harbor cycle
+request to its deterministic proposal controller. It is still the transport,
+not the solver's `pass` bit, that decides whether an action can be dispatched.
 
 The Harbor entry point refuses by default. Opted-in runs produce unverified
 candidate effects and a trace; only the relevant benchmark verifier decides
@@ -64,7 +64,7 @@ class AgentRejected(Exception):
 
 def mode_note(mode: str) -> str:
     requested = str(mode or DEFAULT_MODE).strip().upper()
-    if requested in {"RECALL", "SOLVE_OR_LEARN"}:
+    if requested in {"RECALL", "SOLVE_OR_LEARN", "EPISTEMIC"}:
         return "MODE_SPECIAL_CASED_BY_ENGINE:" + requested
     return "MODE_NOT_SPECIAL_CASED_BY_ENGINE:" + requested
 

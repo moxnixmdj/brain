@@ -3297,3 +3297,71 @@ class CausalCEGISInventor:
             elapsed_ms=round((time.perf_counter() - t0) * 1000.0, 2),
             diagnostics={"description": description},
         )
+
+
+def self_check() -> dict[str, Any]:
+    """Falsifiable behavioral contract for orthogonal multi-file patch merging & workspace digests.
+
+    Proves:
+    1. Orthogonal patches touching disjoint files merge cleanly preserving both edits.
+    2. Negative control: conflicting patches modifying the same file line return None (fail-closed).
+    3. Workspace digest is deterministic on unchanged trees and strictly changes on any byte edit.
+    """
+    import tempfile as _tempfile
+
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    with _tempfile.TemporaryDirectory() as td:
+        root = pathlib.Path(td)
+        (root / "a.py").write_text("x = 1\ny = 2\nz = 3\n", encoding="utf-8")
+        (root / "b.py").write_text("p = 10\n", encoding="utf-8")
+
+        d1 = compute_workspace_digest(root)
+        d2 = compute_workspace_digest(root)
+        check("workspace digest is deterministic sha256", len(d1) == 64 and d1 == d2)
+
+        merged = merge_orthogonal_file_patches(
+            root,
+            {"a.py": "x = 9\ny = 2\nz = 3\n"},
+            {"b.py": "p = 20\n"},
+        )
+        check(
+            "merges disjoint multi-file patches",
+            isinstance(merged, dict) and merged.get("a.py", "").startswith("x = 9") and merged.get("b.py", "").startswith("p = 20"),
+        )
+
+        conflict = merge_orthogonal_file_patches(
+            root,
+            {"a.py": "x = 9\ny = 2\nz = 3\n"},
+            {"a.py": "x = 8\ny = 2\nz = 3\n"},
+        )
+        check("negative control: conflicting edits on same line fail-closed to None", conflict is None)
+
+        (root / "b.py").write_text("p = 11\n", encoding="utf-8")
+        d3 = compute_workspace_digest(root)
+        check("workspace digest changes after byte mutation", d3 != d1)
+
+        # Same-file disjoint hunk merge check
+        (root / "c.py").write_text("a = 1\nb = 2\nc = 3\nd = 4\ne = 5\n", encoding="utf-8")
+        disjoint_same = merge_orthogonal_file_patches(
+            root,
+            {"c.py": "a = 10\nb = 2\nc = 3\nd = 4\ne = 5\n"},
+            {"c.py": "a = 1\nb = 2\nc = 3\nd = 4\ne = 50\n"},
+        )
+        check(
+            "merges non-overlapping hunks within the same file",
+            isinstance(disjoint_same, dict) and "a = 10" in disjoint_same.get("c.py", "") and "e = 50" in disjoint_same.get("c.py", ""),
+        )
+
+    total = 5
+    return {
+        "schema": "BRAIN_CAUSAL_CEGIS_INVENTOR_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

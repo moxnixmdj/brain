@@ -1,0 +1,139 @@
+{
+  "kind": "strict normalized string and paired pre/post control; NOT official semantic judge",
+  "dataset_sha256": "686cfdba97db685403f0c4a4c4b49c006cd6103979ff53914eafe2da11e5e26a",
+  "prediction_sha256": "5d1b8f368a9dc90ba8a2c4f271e189391b0be0413907b817732915e3c354aeb7",
+  "rows": [
+    {
+      "episode": "pl_001",
+      "phase": "before",
+      "i": 0,
+      "task": "Cas",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 82,
+      "statements_grounded": 8
+    },
+    {
+      "episode": "pl_001",
+      "phase": "before",
+      "i": 1,
+      "task": "Cas",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 82,
+      "statements_grounded": 8
+    },
+    {
+      "episode": "pl_001",
+      "phase": "before",
+      "i": 2,
+      "task": "Abs",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 82,
+      "statements_grounded": 8
+    },
+    {
+      "episode": "pl_001",
+      "phase": "before",
+      "i": 3,
+      "task": "Del",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 82,
+      "statements_grounded": 8
+    },
+    {
+      "episode": "pl_001",
+      "phase": "before",
+      "i": 4,
+      "task": "ER",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 82,
+      "statements_grounded": 8
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 0,
+      "task": "Tr",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 1,
+      "task": "Cas",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 2,
+      "task": "Cas",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 3,
+      "task": "Abs",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 4,
+      "task": "Del",
+      "status": "SUPPORTED",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 5,
+      "task": "Agg",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    },
+    {
+      "episode": "pl_001",
+      "phase": "after",
+      "i": 6,
+      "task": "ER",
+      "status": "NO_UNIQUE_SLOT",
+      "strict_match": false,
+      "gated_match": false,
+      "turns_seen": 97,
+      "statements_grounded": 10
+    }
+  ]
+}

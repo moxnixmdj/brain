@@ -54,6 +54,8 @@ from __future__ import annotations
 import argparse
 import ast
 import json
+import io
+import tokenize
 import os
 import pathlib
 import re
@@ -299,13 +301,20 @@ def instantiate(template: dict[str, Any], site_holes: list[str]) -> str | None:
         if old in mapping and mapping[old] != new:
             return None          # inconsistent correspondence; refuse rather than guess
         mapping[old] = new
-    out: list[str] = []
-    for line in template["added"]:
-        working = line
-        for old, new in mapping.items():
-            working = re.sub(rf"(?<![A-Za-z0-9_]){re.escape(old)}(?![A-Za-z0-9_])", new, working)
-        out.append(working)
-    return "\n".join(out) + "\n"
+    # Substitute once, simultaneously, on NAME tokens only: swapping x/y
+    # cannot rewrite its own output, or change a quoted string or a comment.
+    text = "\n".join(template["added"]) + "\n"
+    lines = text.splitlines(keepends=True)
+    try:
+        tokens = list(tokenize.generate_tokens(io.StringIO(text).readline))
+    except (tokenize.TokenError, IndentationError):
+        return None
+    for tok in reversed(tokens):
+        if tok.type == tokenize.NAME and tok.string in mapping:
+            i, j = tok.start
+            line = lines[i-1]
+            lines[i-1] = line[:j] + mapping[tok.string] + line[tok.end[1]:]
+    return "".join(lines)
 
 
 BUILTINS = set(dir(__builtins__)) if not isinstance(__builtins__, dict) else set(__builtins__)

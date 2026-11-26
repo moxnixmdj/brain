@@ -1,0 +1,506 @@
+{
+  "kind": "all native source grading attempts; no official image scores",
+  "preflight": {
+    "position": 7,
+    "error": "The original helper required a nonempty pass_to_pass list. Stopped before running controls. Released list is empty; five fail_to_pass cases are required. No edits to release assets."
+  },
+  "interventions": [
+    "Wait budget 220 to 1200 seconds at position 7. No skipped reset paths.",
+    "Reinstall same native dependencies, relocate genuine pytest console-entry shebang to /venv/bin/python at position 7 and execute three disjoint rooms concurrently; only runtime and not test content changed.",
+    "At position 8 install CPython 3.9.25 and the recorded native dependencies in the private grader. Reopen the original patch for a second grading run on a new base."
+  ],
+  "tasks": {
+    "7": {
+      "required_counts": {
+        "fail_to_pass": 5,
+        "pass_to_pass": 0
+      },
+      "verifier_attempts": [
+        {
+          "label": "220s_py311",
+          "capture_file_sha256": "1ef07eb140c57a02ea57f361e245021a1f4bb38e0296034bceb560ba06a842c8",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "ea164fdde79a3e624c28f90c74f57f06360d2333",
+            "prediction_sha256": "49a876b16a48f6ad80f157f52fd90986c5fdccbb17bac739304e2ac5bbbc4fbd",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "2a4e82e750cb9822d5779fd317c1ac2d592f4d5899d5f5911feab5dab576a1f3",
+              "test_patch.patch": "eccae77eedb07ddeb163672c2d687275588d9847b4031f67b23661b65dd434b3",
+              "parser.py": "0ad85c886278e14022e44b64f2913a02e477ce5f817a9531a50e779d0d59cd62",
+              "run_script.sh": "9cb6b5eaa80e44f78790edb0366869a436c0e95dbcbdec9730e38fdab261aad5"
+            },
+            "calibrated_reference_nop": false,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": null,
+                "reward_file": null,
+                "official_image_reward": null,
+                "error": "TIMEOUT",
+                "seconds": 220.001,
+                "verifier_log_sha256": "bb4427aa456ab76296d2f433e3177ccfa4170ee140b92ac891ddccaf140c8145",
+                "detail": "Resetting test-space to base state (full test-code surface)...\n"
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": null,
+                "reward_file": null,
+                "official_image_reward": null,
+                "error": "TIMEOUT",
+                "seconds": 220.001,
+                "verifier_log_sha256": "bb4427aa456ab76296d2f433e3177ccfa4170ee140b92ac891ddccaf140c8145",
+                "detail": "Resetting test-space to base state (full test-code surface)...\n"
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "5f4dbba6306dc6ce56ec5c1ab1b4d9ccf1379aa760436ce6d56ff04e7a842bf5",
+                "bytes": 22559,
+                "exit": null,
+                "reward_file": null,
+                "official_image_reward": null,
+                "error": "TIMEOUT",
+                "seconds": 220.001,
+                "verifier_log_sha256": "bb4427aa456ab76296d2f433e3177ccfa4170ee140b92ac891ddccaf140c8145",
+                "detail": "Resetting test-space to base state (full test-code surface)...\n"
+              }
+            ]
+          }
+        },
+        {
+          "label": "1200s_py311_host_cli",
+          "capture_file_sha256": "cf9a231a0381f651af8382aed4401e79622b2512c2379282271979b062e2d2cc",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "ea164fdde79a3e624c28f90c74f57f06360d2333",
+            "prediction_sha256": "49a876b16a48f6ad80f157f52fd90986c5fdccbb17bac739304e2ac5bbbc4fbd",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "2a4e82e750cb9822d5779fd317c1ac2d592f4d5899d5f5911feab5dab576a1f3",
+              "test_patch.patch": "eccae77eedb07ddeb163672c2d687275588d9847b4031f67b23661b65dd434b3",
+              "parser.py": "0ad85c886278e14022e44b64f2913a02e477ce5f817a9531a50e779d0d59cd62",
+              "run_script.sh": "9cb6b5eaa80e44f78790edb0366869a436c0e95dbcbdec9730e38fdab261aad5"
+            },
+            "verifier_timeout_s": 1200,
+            "calibrated_reference_nop": false,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 309.801,
+                "verifier_log_sha256": "7733c0bb6dea0d939eed0b0a0952944d422631eab0984f8e0c172c7fa4686e9e",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 5
+                  },
+                  "pass_to_pass": {}
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "/tests/run_script.sh: line 36: /venv/bin/pytest: cannot execute: required file not found\n"
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 300.245,
+                "verifier_log_sha256": "e0e9518109ce925f527ff4bc1f68b950935ee45ff7b9d457351f76eb5c801d52",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 5
+                  },
+                  "pass_to_pass": {}
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "/tests/run_script.sh: line 36: /venv/bin/pytest: cannot execute: required file not found\n"
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "5f4dbba6306dc6ce56ec5c1ab1b4d9ccf1379aa760436ce6d56ff04e7a842bf5",
+                "bytes": 22559,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 293.326,
+                "verifier_log_sha256": "eb3dfe8707138c79a405a8e4835782731be60c492dea43ee0b0899adce0a82e4",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 5
+                  },
+                  "pass_to_pass": {}
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "/tests/run_script.sh: line 36: /venv/bin/pytest: cannot execute: required file not found\n"
+              }
+            ]
+          }
+        },
+        {
+          "label": "1200s_py311_relocated_cli",
+          "capture_file_sha256": "f19e9f45fd5f52077d4dc3f610bff6b023970ba330bde75d3c1f1e25aa92c4c1",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-d72025be751c894673ba85caa063d835a0ad3a8c-v390e508d27db7a51eece36bb6d9698b63a5b638a",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "ea164fdde79a3e624c28f90c74f57f06360d2333",
+            "prediction_sha256": "49a876b16a48f6ad80f157f52fd90986c5fdccbb17bac739304e2ac5bbbc4fbd",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "2a4e82e750cb9822d5779fd317c1ac2d592f4d5899d5f5911feab5dab576a1f3",
+              "test_patch.patch": "eccae77eedb07ddeb163672c2d687275588d9847b4031f67b23661b65dd434b3",
+              "parser.py": "0ad85c886278e14022e44b64f2913a02e477ce5f817a9531a50e779d0d59cd62",
+              "run_script.sh": "9cb6b5eaa80e44f78790edb0366869a436c0e95dbcbdec9730e38fdab261aad5"
+            },
+            "verifier_timeout_s": 1200,
+            "max_concurrent_rooms": 3,
+            "calibrated_reference_nop": true,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 433.845,
+                "verifier_log_sha256": "1ddba9ed01ff8c71a3a8338a7cbface14723c068a5d48597d00ed9bde859e814",
+                "parsed": {
+                  "FAILED": 5
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 5
+                  },
+                  "pass_to_pass": {}
+                }
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 434.476,
+                "verifier_log_sha256": "4fa8ad42fa0f34bdfff35c9dcd57f4f491ab10aff315da95c48acfaae242675c",
+                "parsed": {
+                  "FAILED": 5
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 5
+                  },
+                  "pass_to_pass": {}
+                }
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "5f4dbba6306dc6ce56ec5c1ab1b4d9ccf1379aa760436ce6d56ff04e7a842bf5",
+                "bytes": 22559,
+                "exit": 0,
+                "reward_file": 1,
+                "official_image_reward": null,
+                "seconds": 432.803,
+                "verifier_log_sha256": "397b6815e9a017e0aef47bd3f25daaad870019138afd7cb5ddb216e9322d92db",
+                "parsed": {
+                  "PASSED": 5
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "PASSED": 5
+                  },
+                  "pass_to_pass": {}
+                }
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "8": {
+      "required_counts": {
+        "fail_to_pass": 17,
+        "pass_to_pass": 41
+      },
+      "verifier_attempts": [
+        {
+          "label": "220s_py311",
+          "capture_file_sha256": "eba738baf93a0e34b48172b8dd4723d17dfef8c87716658d7241083a03844c26",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "a1730af91f94552e8aaff4bedfb8dcae00bd284d",
+            "prediction_sha256": "e4cef57c5a41a0f77996ca9c4eca1d1fbbd3489c748f67d47958aa9da8e79ce8",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "359ee0d41b364c4997ecd0021a1a050c195933e82f1a05b8f014b2cba820f6c3",
+              "test_patch.patch": "917eb4a1e1682ef089c6402244dc5cc6bfd7434470c18bb4041947c084160d80",
+              "parser.py": "3bb7f471aa61ea90f7c8992cb901f61c14efc2a703dee9a14cd682840006c2dd",
+              "run_script.sh": "e8c61cf1ba381c6f91c5457d248152cf1b0339d52252d0af0d1ea60c2ba483b7"
+            },
+            "verifier_timeout_s": 220,
+            "calibrated_reference_nop": false,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 29.856,
+                "verifier_log_sha256": "9b05aedb7a3efa9997c9ea11a15237a5832cf6c288e80c3f76dc4b1a7afaaf37",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 17
+                  },
+                  "pass_to_pass": {
+                    "MISSING": 41
+                  }
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "ERROR: Target pattern not matched: test/integration/targets/ansible-galaxy-collection/library/setup_collections.py\nERROR: Required program \"python3.9\" not found.\n"
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 28.328,
+                "verifier_log_sha256": "0b5105a3d958ca6601d8b43886d180b8f6a04b1e3b773a9d1d6faeb4d7bb71f1",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 17
+                  },
+                  "pass_to_pass": {
+                    "MISSING": 41
+                  }
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "ERROR: Target pattern not matched: test/integration/targets/ansible-galaxy-collection/library/setup_collections.py\nERROR: Required program \"python3.9\" not found.\n"
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "f984e4a44cf8ce42671e5a4740656f99da379f829d312c6885f9d13ffb875c22",
+                "bytes": 20172,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 33.801,
+                "verifier_log_sha256": "6831b20512b21b2828557ebfc7b4f3d6cc94d40a418ec79228e5154103c29820",
+                "parsed": {},
+                "required": {
+                  "fail_to_pass": {
+                    "MISSING": 17
+                  },
+                  "pass_to_pass": {
+                    "MISSING": 41
+                  }
+                },
+                "error": "NO_COMPLETED_CASES",
+                "detail": "ERROR: Target pattern not matched: test/integration/targets/ansible-galaxy-collection/library/setup_collections.py\nERROR: Required program \"python3.9\" not found.\n"
+              }
+            ]
+          }
+        },
+        {
+          "label": "600s_py39",
+          "capture_file_sha256": "8a0422548b23c9861a9dae4cbf42829b97efa1d269ab15451807bb55a9982069",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "a1730af91f94552e8aaff4bedfb8dcae00bd284d",
+            "prediction_sha256": "e4cef57c5a41a0f77996ca9c4eca1d1fbbd3489c748f67d47958aa9da8e79ce8",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "359ee0d41b364c4997ecd0021a1a050c195933e82f1a05b8f014b2cba820f6c3",
+              "test_patch.patch": "917eb4a1e1682ef089c6402244dc5cc6bfd7434470c18bb4041947c084160d80",
+              "parser.py": "3bb7f471aa61ea90f7c8992cb901f61c14efc2a703dee9a14cd682840006c2dd",
+              "run_script.sh": "e8c61cf1ba381c6f91c5457d248152cf1b0339d52252d0af0d1ea60c2ba483b7"
+            },
+            "verifier_timeout_s": 600,
+            "calibrated_reference_nop": true,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 34.901,
+                "verifier_log_sha256": "f86754e0ebc58bcea1eaf1b7b5e0668a912ebc809dd9e54ac5ec08acd8c910b5",
+                "parsed": {
+                  "PASSED": 41,
+                  "FAILED": 17
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 32.176,
+                "verifier_log_sha256": "5bf760f974340d19b81f34f8af1618a77d35a62cb49fe7475dbe72773c3baa23",
+                "parsed": {
+                  "PASSED": 41,
+                  "FAILED": 17
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "f984e4a44cf8ce42671e5a4740656f99da379f829d312c6885f9d13ffb875c22",
+                "bytes": 20172,
+                "exit": 0,
+                "reward_file": 1,
+                "official_image_reward": null,
+                "seconds": 32.249,
+                "verifier_log_sha256": "46c925d9ef4d4570e431239b8c05c95f9939af2a82a71385f367a113ad98b378",
+                "parsed": {
+                  "PASSED": 58
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "PASSED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "label": "600s_py39_repeat",
+          "capture_file_sha256": "d2f168ceea461724c895fe172a4ad288a517ef4feb1a6efde6eb77413a26a32c",
+          "result": {
+            "kind": "source-native replay; upstream verifier; NOT locked image or full HARD-51",
+            "task": "instance_ansible__ansible-de5858f48dc9e1ce9117034e0d7e76806f420ca8-v1055803c3a812189a1133297f7f5468579283f86",
+            "suite_commit": "66f92766bba642462d4bbe5479e83f91f9211862",
+            "base": "a1730af91f94552e8aaff4bedfb8dcae00bd284d",
+            "prediction_sha256": "e4cef57c5a41a0f77996ca9c4eca1d1fbbd3489c748f67d47958aa9da8e79ce8",
+            "verifier_files_sha256": {
+              "test.sh": "b6f26eecd87c1696a3702ee115d31f9d42f4704cf2116419cd879f66b60976d0",
+              "config.json": "359ee0d41b364c4997ecd0021a1a050c195933e82f1a05b8f014b2cba820f6c3",
+              "test_patch.patch": "917eb4a1e1682ef089c6402244dc5cc6bfd7434470c18bb4041947c084160d80",
+              "parser.py": "3bb7f471aa61ea90f7c8992cb901f61c14efc2a703dee9a14cd682840006c2dd",
+              "run_script.sh": "e8c61cf1ba381c6f91c5457d248152cf1b0339d52252d0af0d1ea60c2ba483b7"
+            },
+            "verifier_timeout_s": 600,
+            "max_concurrent_rooms": 1,
+            "calibrated_reference_nop": true,
+            "rows": [
+              {
+                "arm": "6e02f4b92e0394822a4d2b95289a48ee27ff6965",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 78.218,
+                "verifier_log_sha256": "9ce1343b92097869d8854dfb1d8ed338645903f8f8505cbf4aabb286dfa59fa9",
+                "parsed": {
+                  "PASSED": 41,
+                  "FAILED": 17
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              },
+              {
+                "arm": "nop",
+                "patch_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                "bytes": 0,
+                "exit": 1,
+                "reward_file": 0,
+                "official_image_reward": null,
+                "seconds": 79.978,
+                "verifier_log_sha256": "f1daddce2deae91857c352700860474d02f84e533fee39a130cf6526fe8aefaf",
+                "parsed": {
+                  "PASSED": 41,
+                  "FAILED": 17
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "FAILED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              },
+              {
+                "arm": "reference",
+                "patch_sha256": "f984e4a44cf8ce42671e5a4740656f99da379f829d312c6885f9d13ffb875c22",
+                "bytes": 20172,
+                "exit": 0,
+                "reward_file": 1,
+                "official_image_reward": null,
+                "seconds": 79.664,
+                "verifier_log_sha256": "46c925d9ef4d4570e431239b8c05c95f9939af2a82a71385f367a113ad98b378",
+                "parsed": {
+                  "PASSED": 58
+                },
+                "required": {
+                  "fail_to_pass": {
+                    "PASSED": 17
+                  },
+                  "pass_to_pass": {
+                    "PASSED": 41
+                  }
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

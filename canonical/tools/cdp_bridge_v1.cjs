@@ -24,6 +24,7 @@ const rl = require('node:readline').createInterface({ input: process.stdin });
 
 let ws = null;
 let seq = 0;
+let ownedTarget = null;
 let consoleLog = [];
 const pending = new Map();
 
@@ -39,7 +40,9 @@ function cdp(method, params) {
   return new Promise((resolve, reject) => {
     if (!ws) return reject(new Error('NO_SOCKET'));
     const id = ++seq;
-    pending.set(id, { resolve, reject });
+    const timer = setTimeout(() => { pending.delete(id); reject(new Error('CDP_TIMEOUT:' + method)); }, 8000);
+    pending.set(id, { resolve: v => { clearTimeout(timer); resolve(v); },
+                      reject: e => { clearTimeout(timer); reject(e); } });
     ws.send(JSON.stringify({ id, method, params: params || {} }));
   });
 }
@@ -64,13 +67,12 @@ async function ensurePage(url) {
     wsBrowser.addEventListener('message', onMessage);
     wsBrowser.send(JSON.stringify({ id, method, params: params || {} }));
   });
-  let list = await fetch(DEBUG_URL + '/json/list').then(r => r.json());
-  let page = list.find(t => t.type === 'page');
-  if (!page) {
-    await browserCdp('Target.createTarget', { url: 'about:blank' });
-    list = await fetch(DEBUG_URL + '/json/list').then(r => r.json());
-    page = list.find(t => t.type === 'page');
-  }
+  // Never attach to (or close) an unrelated tab. Re-navigation by this
+  // bridge stays in the tab it created; each fresh bridge owns a fresh tab.
+  if (!ownedTarget) ownedTarget = (await browserCdp('Target.createTarget', {url:'about:blank'})).targetId;
+  const list = await fetch(DEBUG_URL + '/json/list').then(r => r.json());
+  const page = list.find(t => t.id === ownedTarget);
+  if (ws) ws.close();
   wsBrowser.close();
   if (!page) throw new Error('NO_PAGE_TARGET');
   ws = new WebSocket(page.webSocketDebuggerUrl);
