@@ -28,6 +28,7 @@ under one front-door verification spine wired into ``brain_unified_model_v1``:
 from __future__ import annotations
 
 import ast
+import time
 import copy
 import re
 import shutil
@@ -35,13 +36,17 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
-from typing import Any, Mapping, Sequence
+from typing import Any, Callable, Mapping, Sequence
 
+from canonical.runtime import instruction_contract_v1 as instr_contract
+from canonical.runtime import verifier_falsification_v1 as verifier_falsif
 from canonical.swe_kernel import diagnostics_perf_and_design_engine_v1 as diag_engine
 from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as mhz
 from canonical.swe_kernel import repair_input_dependency_gate_v1 as dep_gate
+from canonical.swe_kernel import what_the_condition_wants_v1 as cond_wants
 from canonical.swe_kernel import witness_inversion_v1 as witness_inv
 from canonical.tools import the_assertion_is_the_demand_v1 as assert_demand
+from canonical.tools import the_relation_is_read_from_the_failing_run_v1 as failing_rel
 from canonical.tools import the_right_question_is_an_experiment_v1 as claim_exp
 
 SCHEMA = "PROJECT_BRAIN_CANONICAL_ORACLE_VERICODING_SPINE_V1"
@@ -350,6 +355,173 @@ def verify_coq_certificate_bundle(
     }
 
 
+def compile_and_check_instruction_contract(
+    utterance: str,
+    observation: Mapping[str, Any],
+    *,
+    trace: Sequence[tuple[Mapping[str, Any], str]] | None = None,
+) -> dict[str, Any]:
+    """Compile a natural-language instruction into a checkable contract (`instruction_contract_v1`)
+    and optionally judge a trace against it (or return an explicit named refusal).
+    """
+    refusal = instr_contract.refusal_for(utterance)
+    contract = instr_contract.compile_contract(utterance, observation)
+    effective_refusal = refusal or contract.get("refusal")
+    check_res = None
+    if trace is not None and effective_refusal is None:
+        check_res = instr_contract.check_contract(contract, list(trace))
+    if effective_refusal is not None:
+        passed = False
+        status = "FAIL_CLOSED__CONTRACT_REFUSED"
+    elif check_res is not None:
+        passed = str(check_res.get("verdict") or "").upper() == "PASS"
+        status = "PASS__INSTRUCTION_CONTRACT_VERIFIED" if passed else "FAIL_CLOSED__INSTRUCTION_CONTRACT_VIOLATED"
+    else:
+        clauses = contract.get("clauses") or []
+        passed = len(clauses) > 0
+        status = "PASS__INSTRUCTION_CONTRACT_COMPILED" if passed else "FAIL_CLOSED__EMPTY_INSTRUCTION_CONTRACT"
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": status,
+        "refusal": effective_refusal,
+        "contract": contract,
+        "check": check_res,
+    }
+
+
+def extract_failing_run_demands(
+    source_text: str,
+    *,
+    failing_facts: Mapping[str, Any] | None = None,
+) -> dict[str, Any]:
+    """Extract AST decision/production sites and demanded relations from a failing run
+    (`the_relation_is_read_from_the_failing_run_v1` + `what_the_condition_wants_v1`).
+    """
+    sites = failing_rel.sites_in(source_text)
+    demanded = failing_rel.demanded_values(failing_facts) if failing_facts is not None else {}
+    forbidden = failing_rel.forbidden_token(failing_facts) if failing_facts is not None else None
+    return {
+        "schema": SCHEMA,
+        "pass": len(sites) > 0,
+        "site_count": len(sites),
+        "sites": [s.as_dict() for s in sites[:64]],
+        "demanded_values": demanded,
+        "forbidden_token": forbidden,
+        "condition_harvester_available": hasattr(cond_wants, "harvest"),
+    }
+
+
+def prove_verifier_can_say_no(
+    predicate: Callable[[Any], bool],
+    *,
+    positive_examples: Sequence[Any],
+    negative_mutants: Sequence[Any],
+    verifier_name: str = "custom_verifier",
+) -> dict[str, Any]:
+    """Falsification proof (`verifier_falsification_v1` invariant): prove a verifier says YES
+    on every valid example AND says NO on every adversarial/semantic mutant.
+
+    Directly eliminates vacuous/tautological oracles (the STING / Terminal-Bench 4.0 defect).
+    """
+    pos_passed = 0
+    pos_failures: list[int] = []
+    for idx, ex in enumerate(positive_examples):
+        try:
+            ok = bool(predicate(ex))
+        except Exception:
+            ok = False
+        if ok:
+            pos_passed += 1
+        else:
+            pos_failures.append(idx)
+
+    neg_killed = 0
+    surviving_mutants: list[int] = []
+    for idx, mut in enumerate(negative_mutants):
+        try:
+            accepted = bool(predicate(mut))
+        except Exception:
+            accepted = False
+        if not accepted:
+            neg_killed += 1
+        else:
+            surviving_mutants.append(idx)
+
+    pos_total = len(positive_examples)
+    neg_total = len(negative_mutants)
+    falsifiable = neg_total > 0 and neg_killed == neg_total
+    sound_on_positives = pos_total > 0 and pos_passed == pos_total
+    passed = sound_on_positives and falsifiable
+    kill_rate = round(neg_killed / neg_total, 4) if neg_total > 0 else 0.0
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__VERIFIER_PROVEN_FALSIFIABLE" if passed else "FAIL_CLOSED__VERIFIER_NOT_FALSIFIABLE",
+        "verifier_name": verifier_name,
+        "positive_passed": pos_passed,
+        "positive_total": pos_total,
+        "positive_failures": pos_failures,
+        "mutants_killed": neg_killed,
+        "mutants_total": neg_total,
+        "surviving_mutants": surviving_mutants,
+        "mutation_kill_rate": kill_rate,
+        "falsifiable": falsifiable,
+        "repo_falsification_suite_wired": hasattr(verifier_falsif, "run"),
+    }
+
+
+def audit_harvested_surface_with_falsification(
+    capability_id: str = "",
+    *,
+    path: str = "",
+    probe_args: Mapping[str, Any] | None = None,
+    adversarial_args: Mapping[str, Any] | None = None,
+    root: str | Path | None = None,
+) -> dict[str, Any]:
+    """Dry-run audit a discovered harvested surface via ``harvested_capability_runtime_v1``
+    without writing producer receipts or claiming admission (always ``admitted: False``).
+    """
+    from canonical.runtime import harvested_capability_runtime_v1 as harvested_rt
+
+    base = Path(root).resolve() if root is not None else ROOT
+    pos = harvested_rt.run(
+        {
+            "capability_id": capability_id,
+            "path": path,
+            "args": dict(probe_args or {}),
+            "receipt": False,
+        },
+        root=base,
+    )
+    adv = None
+    if adversarial_args is not None:
+        adv = harvested_rt.run(
+            {
+                "capability_id": capability_id,
+                "path": path,
+                "args": dict(adversarial_args),
+                "receipt": False,
+            },
+            root=base,
+        )
+    executed = bool(pos.get("executed") is True)
+    adv_distinguished = True if adv is None else (
+        (not bool(adv.get("executed"))) or (adv.get("result_sha256") != pos.get("result_sha256"))
+    )
+    passed = executed and adv_distinguished
+    return {
+        "schema": SCHEMA,
+        "pass": passed,
+        "status": "PASS__HARVESTED_SURFACE_AUDITED_UNADMITTED" if passed else "FAIL_CLOSED__HARVESTED_SURFACE_AUDIT_FAILED",
+        "admitted": False,
+        "admission": "NOT_ADMITTED",
+        "positive_probe": pos,
+        "adversarial_probe": adv,
+        "adversarial_distinguished": adv_distinguished,
+    }
+
+
 def audit_oracle_and_vericoding(
     *,
     repo_root: str | Path | None = None,
@@ -361,6 +533,12 @@ def audit_oracle_and_vericoding(
     diagnostics_target: str | Path | None = None,
     coq_bundle_dir: str | Path | None = None,
     verify_default_coq: bool = False,
+    instruction_utterance: str | None = None,
+    instruction_observation: Mapping[str, Any] | None = None,
+    instruction_trace: Sequence[tuple[Mapping[str, Any], str]] | None = None,
+    failing_source: str | None = None,
+    failing_facts: Mapping[str, Any] | None = None,
+    falsification_spec: Mapping[str, Any] | None = None,
     timeout_s: float = 20.0,
 ) -> dict[str, Any]:
     """Unified front-door entrypoint (`0H`) for dual-channel oracle & vericoding verification."""
@@ -419,8 +597,298 @@ def audit_oracle_and_vericoding(
         report["coq_certificate_audit"] = coq_res
         sub_passes.append(bool(coq_res["pass"]))
 
+    if instruction_utterance is not None and instruction_observation is not None:
+        report["modules_invoked"].append("canonical.runtime.instruction_contract_v1")
+        ic_res = compile_and_check_instruction_contract(
+            instruction_utterance,
+            instruction_observation,
+            trace=instruction_trace,
+        )
+        report["instruction_contract"] = ic_res
+        sub_passes.append(bool(ic_res["pass"]))
+
+    if failing_source is not None:
+        report["modules_invoked"].append("canonical.tools.the_relation_is_read_from_the_failing_run_v1")
+        rel_res = extract_failing_run_demands(failing_source, failing_facts=failing_facts)
+        report["failing_run_demands"] = rel_res
+        sub_passes.append(bool(rel_res["pass"]))
+
+    if falsification_spec is not None:
+        report["modules_invoked"].append("canonical.runtime.verifier_falsification_v1")
+        f_res = prove_verifier_can_say_no(
+            falsification_spec["predicate"],
+            positive_examples=falsification_spec.get("positive_examples") or (),
+            negative_mutants=falsification_spec.get("negative_mutants") or (),
+            verifier_name=str(falsification_spec.get("verifier_name") or "custom_verifier"),
+        )
+        report["verifier_falsification"] = f_res
+        sub_passes.append(bool(f_res["pass"]))
+
     passed = bool(sub_passes) and all(sub_passes)
     report["pass"] = passed
     report["status"] = "PASS__ORACLE_AND_VERICODING_VERIFIED" if passed else "FAIL_CLOSED__ORACLE_VERICODING_REJECTED"
     report["reason"] = None if passed else "SUBCHECK_FAILED_OR_EMPTY_REQUEST"
     return report
+
+
+def mutation_admission_gate(
+    source_text: str,
+    verifier_fn: Callable[[Mapping[str, Any]], bool],
+    *,
+    limit: int = 8,
+    seed: int = 7,
+    min_kill_rate: float = 0.5,
+) -> dict[str, Any]:
+    """Mutation-as-Admission Gate (`mutation_admission_probe_v1`, Play 6 × STING defense).
+
+    Executes ``verifier_fn(ns)`` first on the original compiled module namespace, then against
+    real AST mutants synthesized by ``mutation_admission_probe_v1.mutants(...)``. Rejects any
+    candidate/skill whose verifier fails on the original OR allows too many mutants to survive
+    (kill_rate < min_kill_rate).
+    """
+    from canonical.tools import mutation_admission_probe_v1 as mut_probe
+
+    t0 = time.perf_counter()
+    orig_ns: dict[str, Any] = {}
+    try:
+        exec(compile(source_text, "<original_skill>", "exec"), orig_ns)
+        orig_pass = bool(verifier_fn(orig_ns))
+    except Exception as exc:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__ORIGINAL_FAILED_VERIFIER",
+            "error": f"{type(exc).__name__}: {exc}",
+            "mutants_tested": 0,
+            "mutants_killed": 0,
+            "kill_rate": 0.0,
+        }
+    if not orig_pass:
+        return {
+            "schema": SCHEMA,
+            "pass": False,
+            "status": "FAIL_CLOSED__ORIGINAL_REJECTED_BY_VERIFIER",
+            "mutants_tested": 0,
+            "mutants_killed": 0,
+            "kill_rate": 0.0,
+        }
+
+    generated = mut_probe.mutants(source_text, limit=int(limit), seed=int(seed))
+    killed = 0
+    survivors: list[dict[str, Any]] = []
+    for m in generated:
+        m_ns: dict[str, Any] = {}
+        try:
+            exec(compile(str(m["text"]), "<mutant_skill>", "exec"), m_ns)
+            m_passed = bool(verifier_fn(m_ns))
+        except Exception:
+            m_passed = False
+        if not m_passed:
+            killed += 1
+        else:
+            survivors.append(
+                {
+                    "mutator": m.get("mutator"),
+                    "line": m.get("line"),
+                    "before": m.get("before"),
+                    "after": m.get("after"),
+                }
+            )
+    total = len(generated)
+    kill_rate = round(killed / total, 4) if total > 0 else 0.0
+    admitted = total > 0 and kill_rate >= float(min_kill_rate)
+    return {
+        "schema": SCHEMA,
+        "pass": admitted,
+        "status": "PASS__MUTATION_ADMISSION_GATE" if admitted else "FAIL_CLOSED__VERIFIER_WEAK_MUTANTS_SURVIVED",
+        "mutants_tested": total,
+        "mutants_killed": killed,
+        "kill_rate": kill_rate,
+        "min_kill_rate": float(min_kill_rate),
+        "surviving_mutants": survivors,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        "model_calls": 0,
+    }
+
+
+def extract_guard_demand_sites(source_text: str) -> dict[str, Any]:
+    """Extract and instrument guard sites from Python source via ``the_demand_is_learned_from_the_run_v1``."""
+    from canonical.tools import the_demand_is_learned_from_the_run_v1 as demand_mod
+
+    sites = demand_mod.guard_sites(source_text)
+    instrumented = demand_mod.instrument_guards(source_text, sites) if sites else None
+    return {
+        "schema": SCHEMA,
+        "pass": len(sites) > 0,
+        "site_count": len(sites),
+        "sites": sites,
+        "instrumented_ready": isinstance(instrumented, str) and len(instrumented) > 0,
+        "model_calls": 0,
+    }
+
+
+def audit_check_vacuity(
+    predicate: Callable[[Any], bool],
+    *,
+    positive_examples: Sequence[Any],
+    negative_mutants: Sequence[Any],
+    check_name: str = "candidate_check",
+) -> dict[str, Any]:
+    """'A Check That Nobody Runs Is a Check That Cannot Be Wrong' (`0H`).
+
+    Proves a check actually executes, passes every real positive witness, and kills every
+    semantic mutant (rejecting vacuous/tautological or unexecuted checks).
+    """
+    from canonical.tools import (
+        a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1 as vac_mod,
+    )
+
+    proof = prove_verifier_can_say_no(
+        predicate,
+        positive_examples=positive_examples,
+        negative_mutants=negative_mutants,
+        verifier_name=check_name,
+    )
+    vacuous = not bool(proof.get("falsifiable"))
+    return {
+        "schema": SCHEMA,
+        "pass": bool(proof.get("pass")) and not vacuous,
+        "status": "PASS__CHECK_NON_VACUOUS" if (proof.get("pass") and not vacuous) else "FAIL_CLOSED__CHECK_VACUOUS_OR_UNSOUND",
+        "vacuous": vacuous,
+        "falsification": proof,
+        "citation_vacuity_wired": hasattr(vac_mod, "citation_vacuity") and hasattr(vac_mod, "certification_audit"),
+        "model_calls": 0,
+    }
+
+
+def evaluate_generalization_delta(
+    pulls: Sequence[Mapping[str, Any]],
+    *,
+    markers: Mapping[str, str] | None = None,
+) -> dict[str, Any]:
+    """Measure which fix actually moves held-out generalization (`which_fix_moves_generalization_v1`)."""
+    from canonical.tools import which_fix_moves_generalization_v1 as gen_mod
+
+    res = gen_mod.run(list(pulls), markers=markers)
+    return {
+        "schema": SCHEMA,
+        "pass": isinstance(res, Mapping),
+        "status": "PASS__GENERALIZATION_DELTA_MEASURED",
+        "measurement": res,
+        "model_calls": 0,
+    }
+
+
+def audit_self_evolution_entry(
+    source_text: str,
+    verifier_fn: Callable[[Mapping[str, Any]], bool],
+    *,
+    skill_id: str = "self_mod_candidate",
+    workspace_root: str | Path | None = None,
+    target_rel: str | None = None,
+    positive_examples: Sequence[Any] = (),
+    negative_mutants: Sequence[Any] = (),
+    check_predicate: Callable[[Any], bool] | None = None,
+    limit: int = 8,
+    seed: int = 7,
+    min_kill_rate: float = 0.5,
+    commit_on_pass: bool = False,
+    memory_bus: Any = None,
+) -> dict[str, Any]:
+    """Wave 10 Entry-Only Self-Evolution Firewall (`0H` × `0F` × `0G`, defeating SEABench 43.9% drift).
+
+    SEABench (2026) proves poisoned self-evolution CANNOT be repaired post-hoc: bad state MUST
+    be blocked at entry. Every self-modification or skill write must pass ALL active gates:
+      1. AST Mutation Killing (`mutation_admission_gate` via `mutation_admission_probe_v1`)
+      2. Non-Vacuous Check Falsification (`audit_check_vacuity`, when predicate/examples given)
+      3. Verified SHA-256 Event Lineage (`0G` `append_verified_event`, or T2 nogood on rejection)
+      4. Crash-Safe Multi-Path Journal Commit (`0F` `durable_transactional_commit` via
+         `the_record_is_the_commit_v1`), writing ZERO bytes on any gate failure.
+    """
+    t0 = time.perf_counter()
+    reasons: list[str] = []
+
+    # Gate 1: Real AST Mutation Killing
+    mut_gate = mutation_admission_gate(
+        source_text,
+        verifier_fn,
+        limit=limit,
+        seed=seed,
+        min_kill_rate=min_kill_rate,
+    )
+    if not mut_gate.get("pass"):
+        reasons.append(str(mut_gate.get("status") or "MUTATION_GATE_FAILED"))
+
+    # Gate 2: Non-Vacuous Check Falsification (when supplied)
+    vac_gate = None
+    if check_predicate is not None or positive_examples or negative_mutants:
+        if check_predicate is None:
+            reasons.append("VACUITY_PREDICATE_MISSING")
+        else:
+            vac_gate = audit_check_vacuity(
+                check_predicate,
+                positive_examples=positive_examples,
+                negative_mutants=negative_mutants,
+                check_name=skill_id,
+            )
+            if not vac_gate.get("pass"):
+                reasons.append(str(vac_gate.get("status") or "CHECK_VACUOUS"))
+
+    admitted = len(reasons) == 0
+    event_receipt = None
+    commit_receipt = None
+    nogood_recorded = False
+
+    if admitted:
+        # Gate 3: Append verified event to 0G hash-chained memory log
+        if memory_bus is not None and hasattr(memory_bus, "append_verified_event"):
+            import hashlib
+
+            event_receipt = memory_bus.append_verified_event(
+                op="SET",
+                key=f"self_evolution:{skill_id}",
+                value={
+                    "source_sha256": hashlib.sha256(source_text.encode("utf-8")).hexdigest(),
+                    "kill_rate": mut_gate.get("kill_rate"),
+                },
+                source_commit="entry_firewall_v1",
+                precondition_guard=["mutation_killed", "non_vacuous_check"],
+            )
+        # Gate 4: Crash-safe journaled commit (ONLY after all gates pass!)
+        if commit_on_pass and workspace_root is not None and target_rel is not None:
+            from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+            commit_receipt = cu_spine.durable_transactional_commit(
+                workspace_root,
+                {str(target_rel): source_text.encode("utf-8")},
+            )
+            if not commit_receipt.get("pass"):
+                admitted = False
+                reasons.append("DURABLE_COMMIT_FAILED")
+    else:
+        # Block at entry + compile failure into T2 CDCL negative-space nogood!
+        if memory_bus is not None and hasattr(memory_bus, "record_conflict"):
+            memory_bus.record_conflict(
+                source_text[:400],
+                reason=";".join(reasons),
+                domain="self_evolution_firewall",
+                context_sig=skill_id,
+            )
+            nogood_recorded = True
+
+    return {
+        "schema": SCHEMA,
+        "pass": admitted,
+        "admitted": admitted,
+        "status": "PASS__SELF_EVOLUTION_ADMITTED" if admitted else "FAIL_CLOSED__BLOCKED_AT_ENTRY_FIREWALL",
+        "skill_id": skill_id,
+        "reasons": reasons,
+        "mutation_gate": mut_gate,
+        "vacuity_gate": vac_gate,
+        "event_receipt": event_receipt,
+        "commit_receipt": commit_receipt,
+        "nogood_recorded": nogood_recorded,
+        "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
+        "model_calls": 0,
+    }
+

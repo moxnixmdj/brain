@@ -3140,6 +3140,9 @@ def _synthesize_immediate_from_traces(
     return None
 
 
+_DEFAULT_POLICY_ORGAN_TEMPLATE: ExecutableOrgan | None = None
+
+
 def compile_policy_organ(
     *,
     name: str = "instrumental_policy",
@@ -3154,6 +3157,17 @@ def compile_policy_organ(
     Unlock-walk horizon is `max(horizon, len(board))` (the board, not a frozen
     3). `gamma` / cost-penalty live in the combiner body when supplied.
     """
+    global _DEFAULT_POLICY_ORGAN_TEMPLATE
+    is_default = (
+        name == "instrumental_policy"
+        and gamma == 0.92
+        and horizon == 3
+        and not empirical_burns
+        and not learned_immediate
+        and not combiner_src
+    )
+    if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is not None:
+        return copy.deepcopy(_DEFAULT_POLICY_ORGAN_TEMPLATE)
     observed = {str(k): float(v) for k, v in dict(empirical_burns or {}).items()}
     imm_src = (learned_immediate or "").strip()
     comb_src = (combiner_src or "").strip()
@@ -3243,6 +3257,8 @@ def compile_policy_organ(
     )
     if observed or imm_src or comb_src:
         organ.verified_passes = max(1, len(observed) + (8 if imm_src else 0) + (4 if comb_src else 0))
+    if is_default and _DEFAULT_POLICY_ORGAN_TEMPLATE is None:
+        _DEFAULT_POLICY_ORGAN_TEMPLATE = copy.deepcopy(organ)
     return organ
 
 
@@ -4095,18 +4111,32 @@ class MetaCircularOrganGraph:
         self.policy_evolution_budget_ms: float = 250.0
         self._evolution_deferred: int = 0
         self.convention_memory = ConventionMemory()
-        self.policy_archive: Any | None = None
-        if self.state_path is not None:
-            try:
-                from canonical.swe_kernel.recursive_self_architect_v1 import QualityDiversitySelfArchive
-
-                self.policy_archive = QualityDiversitySelfArchive(
-                    self.state_path.with_name("policy_qd_archive_v1.json")
-                )
-            except Exception:
-                self.policy_archive = None
+        self._policy_archive: Any | None = None
+        self._policy_archive_init: bool = False
         if self.state_path is not None and self.state_path.is_file():
             self._load()
+
+    @property
+    def policy_archive(self) -> Any | None:
+        if not self._policy_archive_init:
+            self._policy_archive_init = True
+            if self.state_path is not None:
+                try:
+                    from canonical.swe_kernel.recursive_self_architect_v1 import (
+                        QualityDiversitySelfArchive,
+                    )
+
+                    self._policy_archive = QualityDiversitySelfArchive(
+                        self.state_path.with_name("policy_qd_archive_v1.json")
+                    )
+                except Exception:
+                    self._policy_archive = None
+        return self._policy_archive
+
+    @policy_archive.setter
+    def policy_archive(self, value: Any | None) -> None:
+        self._policy_archive = value
+        self._policy_archive_init = True
 
     def _tap_policy_invoke(self, organ: ExecutableOrgan) -> None:
         """Remember the board a POLICY organ ranked. Perception that is thrown away cannot teach."""
