@@ -114,6 +114,28 @@ observation. This one does.
 retired and its evidence retained and addressable; the no-skill floor is never breached; and the whole
 loop still answers in **< 40 ms** at p99.
 
+**The exit half is built** — `canonical/swe_kernel/skill_contribution_ledger_v1.py`, 23 tests, PR #7105.
+What shipping it actually measured, none of which was in the plan:
+
+1. **The gate refuses the repository's own grader today, correctly.** `computer_use_check_density_v1`
+   reports the `full` observation model as **0 of 34** mutants indistinguishable. Read as a rate that is
+   a perfect grader; as a 95% upper bound it is **8.4%**, nowhere near the 2% bar. `coarse` bounds at
+   13.2%, `listing` at 38.5%. All three refused, each naming its price: **149 clean trials** for `full`,
+   236 for `coarse`, 719 for `listing`.
+
+2. **So the rule needs the bound, not the point estimate — and so does any honest claim in this repo.**
+   Zero failures out of 34 is not evidence of a 2% rate; it is evidence of a rate below 8.4%. That
+   distinction is invisible in every aggregate metric the frontier publishes, and it is the same error
+   `declaration-floor` exists to catch one level up: a number that looks like a measurement.
+
+3. **No dependency.** The incomplete beta function is a continued fraction in stdlib. Every bound in the
+   suite costs **42 ms**; the first implementation bisected the binomial tail and took **four minutes**
+   before overflowing a float at 500 trials. A mechanism that decides whether to act cannot spend that.
+
+Controls both directions, as with Door 1: neutering the grader gate fails **7** tests, neutering
+retirement fails **5**, and replacing the bound with the point estimate fails **3** — one of which runs
+the real density measurement rather than a fixture.
+
 ### Door 3 — nothing runs after the answer exists. This is Elon's law as a test.
 
 Measured: the answer path is **1–2 ms**; learning is **8–19 ms**; a second instance is **17.1 ms**.
