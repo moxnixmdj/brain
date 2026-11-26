@@ -1334,6 +1334,91 @@ class Creature:
         self._save()
         return res
 
+    def futamura_solve(
+        self,
+        task_spec: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Execute Futamura self-compiling 4-rung cascade directly on Creature's UnifiedModel."""
+        if getattr(self, "_unified_model", None) is not None:
+            return self._unified_model.futamura_solve(
+                task_spec,
+                untrusted_proposer=untrusted_proposer,
+                auto_compile=auto_compile,
+                use_cow_fork=use_cow_fork,
+                alpha=alpha,
+            )
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import shared_futamura_cascade
+
+        return shared_futamura_cascade().solve(
+            dict(task_spec),
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        **kwargs: Any,
+    ) -> Any:
+        """Wave 36: Sub-ms Error-Aware `L#` + `Lambda*_M` symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            **kwargs,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel Hybrid Computer Use (`CLI/File > AX/CDP > Visual`) + Petri guard + loop breaker."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        return HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        ).execute_episode(steps, executor=executor, initial_state=initial_state)
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: GrowLibm e-class compression + Rubin `(WITH - WITHOUT)` skill-rent GC on sleep."""
+        if getattr(self, "_unified_model", None) is not None:
+            res = self._unified_model.wake_sleep_consolidate(
+                max_active_rules=max_active_rules,
+                rubin_observations=rubin_observations,
+            )
+        else:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import shared_futamura_cascade
+
+            res = shared_futamura_cascade().wake_sleep_consolidate(
+                max_active_rules=max_active_rules,
+                rubin_observations=rubin_observations,
+            )
+        self._save()
+        return res
+
     def sleep_evolve_organs_gea(
         self,
         *,

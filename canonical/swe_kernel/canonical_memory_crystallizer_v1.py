@@ -3545,6 +3545,71 @@ class VerificationFirstMemoryBus:
             "elapsed_ms": round((time.perf_counter() - t0) * 1000.0, 3),
         }
 
+    # ------------------------------------------------- Wave 36 DBSP + Kumiho AGM + PreCommitFailureGate
+
+    def _get_dbsp_bus(self) -> Any:
+        bus = getattr(self, "_wave36_dbsp_bus", None)
+        if bus is None:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import DBSPBeliefRevisionBus
+
+            bus = DBSPBeliefRevisionBus()
+            self._wave36_dbsp_bus = bus
+        return bus
+
+    def dbsp_ingest_delta(
+        self,
+        record_id: str,
+        key: str,
+        payload: Any,
+        *,
+        valid_from: float = 0.0,
+        valid_to: float = float("inf"),
+        weight: int = 1,
+        depends_on: Sequence[str] = (),
+        derived_from: Sequence[str] = (),
+        supersedes: str | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: O(1) DBSP bi-temporal Z-set delta with Kumiho AGM `Supersedes`/`Depends_On` impact ripple."""
+        res = self._get_dbsp_bus().ingest_delta(
+            record_id,
+            key,
+            payload,
+            valid_from=valid_from,
+            valid_to=valid_to,
+            weight=weight,
+            depends_on=depends_on,
+            derived_from=derived_from,
+            supersedes=supersedes,
+        )
+        return {"pass": True, "status": "PASS__DBSP_DELTA_INGESTED", **res}
+
+    def dbsp_analyze_impact(self, root_id: str, *, mark_stale: bool = True) -> dict[str, Any]:
+        """Wave 36: Transitive AGM provenance ripple propagation marking downstream beliefs stale."""
+        res = self._get_dbsp_bus().analyze_impact(root_id, mark_stale=mark_stale)
+        return {"pass": True, "status": "PASS__AGM_IMPACT_ANALYZED", **res}
+
+    def record_pre_commit_failure(
+        self,
+        context_key: str,
+        proposal_signature: str,
+        *,
+        witness: str,
+        dependency_ids: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 36: `projectmem`-style deterministic failure witness registration."""
+        res = self._get_dbsp_bus().record_failure_witness(
+            context_key,
+            proposal_signature,
+            witness=witness,
+            dependency_ids=dependency_ids,
+        )
+        return {"pass": True, "status": "PASS__PRE_COMMIT_FAILURE_RECORDED", **res}
+
+    def check_pre_commit_gate(self, context_key: str, proposal_signature: str) -> dict[str, Any]:
+        """Wave 36: `< 10 us` deterministic pre-commit failure witness check."""
+        res = self._get_dbsp_bus().check_pre_commit_gate(context_key, proposal_signature)
+        return {"pass": bool(res["allowed"]), **res}
+
 
 def execute_memory_operation(
     bus: VerificationFirstMemoryBus,
@@ -3756,6 +3821,18 @@ def execute_memory_operation(
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "MEMINI_MEMRL_APEX":
         res = bus.memini_memrl_apex_consolidate(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "DBSP_INGEST_DELTA":
+        res = bus.dbsp_ingest_delta(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "DBSP_ANALYZE_IMPACT":
+        res = bus.dbsp_analyze_impact(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "PRE_COMMIT_FAILURE_RECORD":
+        res = bus.record_pre_commit_failure(**data)
+        return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
+    if op == "PRE_COMMIT_FAILURE_CHECK":
+        res = bus.check_pre_commit_gate(**data)
         return {"schema": SCHEMA, "pass": bool(res.get("pass")), "status": str(res.get("status")), **res}
     if op == "STATS":
         return {"schema": SCHEMA, "pass": True, "status": "PASS__MEMORY_STATS", "stats": bus.stats()}

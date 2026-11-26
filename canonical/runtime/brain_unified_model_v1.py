@@ -333,6 +333,108 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
     }
 
 
+def _extract_boot_header(core: Mapping[str, Any]) -> dict[str, Any]:
+    """Wave 36 Elon sub-ms boot slab (~950 bytes): scalar/digest/count metadata only."""
+    return {
+        "core_format_v": 6,
+        "boot_only": True,
+        "raw_sha256": str(core.get("raw_sha256") or ""),
+        "schema": str(core.get("schema") or ""),
+        "model_id": core.get("model_id"),
+        "model_version": core.get("model_version"),
+        "digest_value": str(core.get("digest_value") or ""),
+        "counts": dict(core.get("counts") or {}),
+        "objective_verbatim": core.get("objective_verbatim"),
+        "confidence": dict(core.get("confidence") or {}),
+        "source_index_len": int(core.get("source_index_len") or 0),
+        "source_entry_points": int(core.get("source_entry_points") or 0),
+        "extended_source_index_len": int(core.get("extended_source_index_len") or 0),
+        "research_index_len": int(core.get("research_index_len") or 0),
+        "knowledge_len": int(core.get("knowledge_len") or 0),
+    }
+
+
+def _extract_route_slab(core: Mapping[str, Any]) -> dict[str, Any]:
+    """Wave 36 precomputed routing slab: eliminates per-boot dict/index loops and avoids loading capabilities_map on route()."""
+    caps_map = core.get("capabilities_map") or {}
+    engines_map = core.get("engines_map") or {}
+    cap_id_terms = {
+        cid: frozenset(terms) for cid, terms in (core.get("capability_id_terms") or {}).items()
+    }
+    filtered_index = core.get("filtered_index") or {}
+
+    exact_id_lookup: dict[str, str] = {}
+    cid_folded_pairs = tuple((cid, cid.casefold()) for cid in caps_map)
+    cid_dot_pairs = tuple((cid, cf) for cid, cf in cid_folded_pairs if "." in cf)
+    cid_nodot_pairs = tuple((cid, cf) for cid, cf in cid_folded_pairs if "." not in cf)
+    for cid, cf in cid_folded_pairs:
+        exact_id_lookup[cf] = cid
+
+    eid_pairs: list[tuple[str, str, str]] = []
+    mode_by_word: dict[str, list[tuple[str, str]]] = {}
+    for eid in engines_map:
+        ef = eid.casefold()
+        mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
+        eid_pairs.append((eid, ef, mode_phrase))
+        exact_id_lookup[ef] = eid
+        if mode_phrase:
+            first_w = mode_phrase.split(" ", 1)[0]
+            mode_by_word.setdefault(first_w, []).append((eid, mode_phrase))
+
+    scaled_index: dict[str, tuple[tuple[str, float], ...]] = {}
+    for tok, postings in filtered_index.items():
+        scaled_index[tok] = tuple(
+            (
+                cid,
+                (2.0 if tok in cap_id_terms.get(cid, ()) else 1.0) * math.log1p(weight),
+            )
+            for cid, weight in postings.items()
+        )
+
+    cap_route_meta = {
+        cid: {
+            "kind": row.get("kind") or "UNKNOWN",
+            "declared_dependencies": row.get("declared_dependencies") or {},
+        }
+        for cid, row in caps_map.items()
+    }
+    eng_route_meta = {
+        eid: {"kind": row.get("kind") or "UNKNOWN"}
+        for eid, row in engines_map.items()
+    }
+    return {
+        "route_format_v": 6,
+        "raw_sha256": str(core.get("raw_sha256") or ""),
+        "exact_id_lookup": exact_id_lookup,
+        "cid_folded_pairs": cid_folded_pairs,
+        "cid_dot_pairs": cid_dot_pairs,
+        "cid_nodot_pairs": cid_nodot_pairs,
+        "eid_folded_triples": tuple(eid_pairs),
+        "mode_phrase_by_word": {k: tuple(v) for k, v in mode_by_word.items()},
+        "scaled_index": scaled_index,
+        "cap_route_meta": cap_route_meta,
+        "eng_route_meta": eng_route_meta,
+    }
+
+
+def _write_boot_and_route_slabs(cache_dir: Path, raw_sha: str, core: Mapping[str, Any]) -> None:
+    """Atomically write `< 2 KB` boot_v6 header and precomputed route_v6 slab."""
+    try:
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        pid = os.getpid()
+        boot_hdr = _extract_boot_header(core)
+        tmp_b = cache_dir / f".unified_model_boot_v6_{raw_sha[:32]}.{pid}.tmp"
+        tmp_b.write_bytes(marshal.dumps(boot_hdr))
+        tmp_b.replace(cache_dir / f"unified_model_boot_v6_{raw_sha[:32]}.marshal")
+
+        route_slab = _extract_route_slab(core)
+        tmp_r = cache_dir / f".unified_model_route_v6_{raw_sha[:32]}.{pid}.tmp"
+        tmp_r.write_bytes(marshal.dumps(route_slab))
+        tmp_r.replace(cache_dir / f"unified_model_route_v6_{raw_sha[:32]}.marshal")
+    except OSError:
+        pass
+
+
 def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_map = {
         str(row["path"]): dict(row)
@@ -447,24 +549,42 @@ class UnifiedModel:
         *,
         _raw_bytes: bytes | None = None,
         _core_only: bool = False,
+        _boot_only: bool = False,
         _target_path: Path | None = None,
     ):
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._target_path: Path | None = _target_path
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        if _core_only and model.get("core_format_v") == 5:
+        self._routing_core_hydrated: bool = False
+        self._route_slab_hydrated: bool = False
+        self._capabilities_cache: dict[str, dict[str, Any]] | None = None
+        self._engines_cache: dict[str, dict[str, Any]] | None = None
+        self._capability_id_terms_cache: dict[str, frozenset[str]] | None = None
+        self._skills_cache: list[dict[str, Any]] | None = None
+        self._receipt_backed_ids_cache: frozenset[str] | None = None
+        self._index_cache: dict[str, dict[str, float]] | None = None
+        self._exact_id_lookup_cache: dict[str, str] | None = None
+        self._cid_folded_pairs_cache: tuple[tuple[str, str], ...] | None = None
+        self._cid_dot_pairs_cache: tuple[tuple[str, str], ...] | None = None
+        self._cid_nodot_pairs_cache: tuple[tuple[str, str], ...] | None = None
+        self._eid_folded_triples_cache: tuple[tuple[str, str, str], ...] | None = None
+        self._mode_phrase_by_word_cache: dict[str, tuple[tuple[str, str], ...]] | None = None
+        self._scaled_index_cache: dict[str, tuple[tuple[str, float], ...]] | None = None
+        self._cap_route_meta_cache: dict[str, dict[str, Any]] | None = None
+        self._eng_route_meta_cache: dict[str, dict[str, Any]] | None = None
+        self._futamura_cascade: Any = None
+
+        if _boot_only and model.get("core_format_v") == 6:
+            # Wave 36 Elon sub-ms lazy boot: ~950-byte header only; ZERO 1 MB unpack, ZERO index loops!
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
-            self.capabilities = dict(self._core_meta["capabilities_map"])
-            self.engines = dict(self._core_meta["engines_map"])
-            self._capability_id_terms = {
-                cid: frozenset(terms)
-                for cid, terms in (self._core_meta.get("capability_id_terms") or {}).items()
-            }
-            self.skills = list(self._core_meta.get("skills") or [])
-            self.receipt_backed_ids: frozenset[str] = frozenset(self._core_meta.get("receipt_backed_ids") or ())
-            self.index: dict[str, dict[str, float]] = dict(self._core_meta.get("filtered_index") or {})
+            confidence = self._core_meta.get("confidence") or {}
+        elif _core_only and model.get("core_format_v") == 5:
+            self._model_loaded = None
+            self._core_meta = dict(model)
+            self.digest = str(model.get("digest_value") or "")
+            self._apply_routing_core(self._core_meta)
             confidence = self._core_meta.get("confidence") or {}
         else:
             self._model_loaded = dict(model)
@@ -489,55 +609,8 @@ class UnifiedModel:
                         reused_core = None
             self._core_meta = reused_core if reused_core is not None else _extract_routing_core(self._model_loaded, inferred_sha)
             self.digest = declared_dig
-            self.capabilities = dict(self._core_meta["capabilities_map"])
-            self.engines = dict(self._core_meta["engines_map"])
-            self._capability_id_terms = {
-                cid: frozenset(terms)
-                for cid, terms in self._core_meta["capability_id_terms"].items()
-            }
-            self.skills = list(self._core_meta["skills"])
-            self.receipt_backed_ids = frozenset(self._core_meta["receipt_backed_ids"])
-            self.index = dict(self._core_meta["filtered_index"])
+            self._apply_routing_core(self._core_meta)
             confidence = self._core_meta["confidence"]
-
-        # Precompute casefolded ID lookup tables once (zero per-route string churn).
-        self._exact_id_lookup: dict[str, str] = {}
-        self._cid_folded_pairs: tuple[tuple[str, str], ...] = tuple(
-            (cid, cid.casefold()) for cid in self.capabilities
-        )
-        self._cid_dot_pairs: tuple[tuple[str, str], ...] = tuple(
-            (cid, cf) for cid, cf in self._cid_folded_pairs if "." in cf
-        )
-        self._cid_nodot_pairs: tuple[tuple[str, str], ...] = tuple(
-            (cid, cf) for cid, cf in self._cid_folded_pairs if "." not in cf
-        )
-        for cid, cf in self._cid_folded_pairs:
-            self._exact_id_lookup[cf] = cid
-        eid_pairs: list[tuple[str, str, str]] = []
-        mode_by_word: dict[str, list[tuple[str, str]]] = {}
-        for eid in self.engines:
-            ef = eid.casefold()
-            mode_phrase = eid.split(":", 1)[-1].replace("_", " ").casefold()
-            eid_pairs.append((eid, ef, mode_phrase))
-            self._exact_id_lookup[ef] = eid
-            if mode_phrase:
-                first_w = mode_phrase.split(" ", 1)[0]
-                mode_by_word.setdefault(first_w, []).append((eid, mode_phrase))
-        self._eid_folded_triples: tuple[tuple[str, str, str], ...] = tuple(eid_pairs)
-        self._mode_phrase_by_word: dict[str, tuple[tuple[str, str], ...]] = {
-            k: tuple(v) for k, v in mode_by_word.items()
-        }
-        scaled_idx: dict[str, tuple[tuple[str, float], ...]] = {}
-        for tok, postings in self.index.items():
-            scaled_idx[tok] = tuple(
-                (
-                    cid,
-                    (2.0 if tok in self._capability_id_terms.get(cid, ()) else 1.0)
-                    * math.log1p(weight),
-                )
-                for cid, weight in postings.items()
-            )
-        self._scaled_index: dict[str, tuple[tuple[str, float], ...]] = scaled_idx
 
         self._unrunnable: dict[str, list[str]] | None = None
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
@@ -573,9 +646,166 @@ class UnifiedModel:
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
         self.min_coverage = float(confidence.get("minimum_coverage", 0.34))
-        # Secondary indexes (research_index 5.96MB, source_index, extended_source_index,
-        # knowledge, harvested) remain strictly lazy until their property or query method
-        # is called (Elon's Law: never deserialize 14,336 records upfront).
+        # Secondary indexes AND full routing core remain strictly lazy until their property or
+        # query method is called (Elon's Law: never deserialize 14,336 records or 1 MB core on boot).
+
+    def _apply_routing_core(self, core: Mapping[str, Any]) -> None:
+        self._capabilities_cache = dict(core["capabilities_map"])
+        self._engines_cache = dict(core["engines_map"])
+        self._capability_id_terms_cache = {
+            cid: frozenset(terms)
+            for cid, terms in (core.get("capability_id_terms") or {}).items()
+        }
+        self._skills_cache = list(core.get("skills") or [])
+        self._receipt_backed_ids_cache = frozenset(core.get("receipt_backed_ids") or ())
+        self._index_cache = dict(core.get("filtered_index") or {})
+        self._routing_core_hydrated = True
+
+    def _apply_route_slab(self, slab: Mapping[str, Any]) -> None:
+        self._exact_id_lookup_cache = dict(slab["exact_id_lookup"])
+        self._cid_folded_pairs_cache = tuple(slab["cid_folded_pairs"])
+        self._cid_dot_pairs_cache = tuple(slab["cid_dot_pairs"])
+        self._cid_nodot_pairs_cache = tuple(slab["cid_nodot_pairs"])
+        self._eid_folded_triples_cache = tuple(slab["eid_folded_triples"])
+        self._mode_phrase_by_word_cache = dict(slab["mode_phrase_by_word"])
+        self._scaled_index_cache = dict(slab["scaled_index"])
+        self._cap_route_meta_cache = dict(slab["cap_route_meta"])
+        self._eng_route_meta_cache = dict(slab["eng_route_meta"])
+        self._route_slab_hydrated = True
+
+    def _ensure_routing_core(self) -> None:
+        if self._routing_core_hydrated:
+            return
+        raw_sha = self._raw_sha256
+        if raw_sha:
+            core_f = _core_cache_dir() / f"unified_model_core_{raw_sha[:32]}.marshal"
+            if core_f.is_file():
+                try:
+                    c_blob = marshal.loads(core_f.read_bytes())
+                    if (
+                        isinstance(c_blob, dict)
+                        and c_blob.get("core_format_v") == 5
+                        and c_blob.get("raw_sha256") == raw_sha
+                        and c_blob.get("schema") == SCHEMA
+                    ):
+                        self._core_meta = c_blob
+                        self._apply_routing_core(c_blob)
+                        return
+                except Exception:
+                    pass
+        full = self._ensure_full_model()
+        core = _extract_routing_core(full, raw_sha)
+        self._core_meta = core
+        self._apply_routing_core(core)
+
+    def _ensure_route_slab(self) -> None:
+        if self._route_slab_hydrated:
+            return
+        raw_sha = self._raw_sha256
+        if raw_sha:
+            route_f = _core_cache_dir() / f"unified_model_route_v6_{raw_sha[:32]}.marshal"
+            if route_f.is_file():
+                try:
+                    r_blob = marshal.loads(route_f.read_bytes())
+                    if (
+                        isinstance(r_blob, dict)
+                        and r_blob.get("route_format_v") == 6
+                        and r_blob.get("raw_sha256") == raw_sha
+                    ):
+                        self._apply_route_slab(r_blob)
+                        return
+                except Exception:
+                    pass
+        self._ensure_routing_core()
+        slab = _extract_route_slab(self._core_meta)
+        self._apply_route_slab(slab)
+
+    @property
+    def capabilities(self) -> dict[str, dict[str, Any]]:
+        self._ensure_routing_core()
+        return self._capabilities_cache  # type: ignore[return-value]
+
+    @capabilities.setter
+    def capabilities(self, value: dict[str, dict[str, Any]]) -> None:
+        self._capabilities_cache = value
+        self._routing_core_hydrated = True
+
+    @property
+    def engines(self) -> dict[str, dict[str, Any]]:
+        self._ensure_routing_core()
+        return self._engines_cache  # type: ignore[return-value]
+
+    @engines.setter
+    def engines(self, value: dict[str, dict[str, Any]]) -> None:
+        self._engines_cache = value
+        self._routing_core_hydrated = True
+
+    @property
+    def skills(self) -> list[dict[str, Any]]:
+        self._ensure_routing_core()
+        return self._skills_cache  # type: ignore[return-value]
+
+    @skills.setter
+    def skills(self, value: list[dict[str, Any]]) -> None:
+        self._skills_cache = value
+
+    @property
+    def receipt_backed_ids(self) -> frozenset[str]:
+        self._ensure_routing_core()
+        return self._receipt_backed_ids_cache  # type: ignore[return-value]
+
+    @receipt_backed_ids.setter
+    def receipt_backed_ids(self, value: frozenset[str]) -> None:
+        self._receipt_backed_ids_cache = value
+
+    @property
+    def index(self) -> dict[str, dict[str, float]]:
+        self._ensure_routing_core()
+        return self._index_cache  # type: ignore[return-value]
+
+    @index.setter
+    def index(self, value: dict[str, dict[str, float]]) -> None:
+        self._index_cache = value
+
+    @property
+    def _capability_id_terms(self) -> dict[str, frozenset[str]]:
+        self._ensure_routing_core()
+        return self._capability_id_terms_cache  # type: ignore[return-value]
+
+    @property
+    def _exact_id_lookup(self) -> dict[str, str]:
+        self._ensure_route_slab()
+        return self._exact_id_lookup_cache  # type: ignore[return-value]
+
+    @property
+    def _cid_folded_pairs(self) -> tuple[tuple[str, str], ...]:
+        self._ensure_route_slab()
+        return self._cid_folded_pairs_cache  # type: ignore[return-value]
+
+    @property
+    def _cid_dot_pairs(self) -> tuple[tuple[str, str], ...]:
+        self._ensure_route_slab()
+        return self._cid_dot_pairs_cache  # type: ignore[return-value]
+
+    @property
+    def _cid_nodot_pairs(self) -> tuple[tuple[str, str], ...]:
+        self._ensure_route_slab()
+        return self._cid_nodot_pairs_cache  # type: ignore[return-value]
+
+    @property
+    def _eid_folded_triples(self) -> tuple[tuple[str, str, str], ...]:
+        self._ensure_route_slab()
+        return self._eid_folded_triples_cache  # type: ignore[return-value]
+
+    @property
+    def _mode_phrase_by_word(self) -> dict[str, tuple[tuple[str, str], ...]]:
+        self._ensure_route_slab()
+        return self._mode_phrase_by_word_cache  # type: ignore[return-value]
+
+    @property
+    def _scaled_index(self) -> dict[str, tuple[tuple[str, float], ...]]:
+        self._ensure_route_slab()
+        return self._scaled_index_cache  # type: ignore[return-value]
 
     def _section_cache_path(self, section: str) -> Path | None:
         if not self._raw_sha256:
@@ -1224,6 +1454,8 @@ class UnifiedModel:
 
     def anatomy(self, domain: str | None = None, *, top_k: int = 8) -> dict[str, Any]:
         """Where this repository implements each frontier function, by its own words."""
+        if "anatomy" not in self._core_meta:
+            self._ensure_routing_core()
         block = self._core_meta.get("anatomy")
         if not block and self._model_loaded:
             block = self._model_loaded.get("anatomy")
@@ -1421,52 +1653,28 @@ class UnifiedModel:
                 if unrunnable_known is not None and cid in unrunnable_known:
                     unrunnable_matched.add(cid)
                 scores[cid] = scores.get(cid, 0.0) + contrib
-        # Wave 31 Elon speed pass: when `unrunnable_capabilities()` has not been materialized yet,
-        # resolve declared dependencies lazily ONLY for matched capability candidates (memoized
-        # per unique dep name inside this call's local `probe_cache`), guaranteeing the exact same
-        # `unrunnable_on_this_host` without probing all 462 capabilities and with zero global cache state.
+        # Wave 31 + Wave 36 Elon speed pass: resolve declared dependencies lazily ONLY for
+        # matched capability candidates using the lightweight precomputed `route_v6` slab
+        # (`_cap_route_meta_cache` / `_eng_route_meta_cache`), avoiding 780 KB core unpack on route()!
+        self._ensure_route_slab()
+        cap_meta = self._cap_route_meta_cache if self._cap_route_meta_cache is not None else self.capabilities
+        eng_meta = self._eng_route_meta_cache if self._eng_route_meta_cache is not None else self.engines
         if unrunnable_known is None:
             route_probe_cache: dict[tuple[str, bool], bool] = {}
             for cid in scores:
-                row = self.capabilities.get(cid)
+                row = cap_meta.get(cid)
                 if row is not None and _missing_declared_dependencies(row, probe_cache=route_probe_cache):
                     unrunnable_matched.add(cid)
         for cid in mentioned:
             scores[cid] = scores.get(cid, 0.0) + math.log1p(24.0)
             matched.add(cid.casefold())
-        # A stated path is data the caller supplied and the binder will bind, not
-        # a word of the ask. Charge only the ask to the coverage budget, so that
-        # naming a real artifact can never be the reason a request is refused.
-        #
-        # A capability's own id is the ask, not a path. 294 of the model's ids
-        # ARE repository paths -- "canonical/runtime/x_v1.py.auto.v1" -- and the
-        # path grammar matches them whole, so blanking them left no ask at all:
-        # coverage collapsed to 0.0 and every addressed capability stopped being
-        # addressable. Measured, that regressed
-        # test_every_capability_is_addressable_by_its_own_id on 294 subtests.
-        #
-        # And every token of an id the model contains is by definition a token
-        # the model recognises, so those tokens are matched as well as asked.
-        # Without that second half an addressed id measured 0.333 against the
-        # 0.34 floor and still failed, on a filename token no index carries.
         ask = set(ask_list)
         addressed_set = set(addressed_tokens)
         matched_ask = (matched & ask) | addressed_set
         coverage = (len(matched_ask) / len(ask)) if ask else 0.0
-        # Naming a capability by its own id is an address, not a keyword. Its
-        # path segments also index capabilities that legitimately claim those
-        # words, so a flat +24 can be outscored by the noise the address itself
-        # introduced. Sort addressed capabilities ahead of the rest instead of
-        # inflating the bonus until it wins by force.
-        #
-        # Engines are excluded from that priority when matched merely by mode
-        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
-        # which is ordinary keyword overlap, not an address. Explicit literal
-        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
-        # address priority.
         folded_goal = str(goal or "").casefold()
-        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
-            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
+        addressed = {cid for cid in mentioned if cid in cap_meta} | {
+            eid for eid in mentioned if eid in eng_meta and eid.casefold() in folded_goal
         }
         ranked = sorted(
             scores.items(),
@@ -1474,7 +1682,7 @@ class UnifiedModel:
         )
         rows: list[dict[str, Any]] = []
         for cid, score in ranked[: max(1, int(top_k))]:
-            row = self.capabilities.get(cid) or self.engines.get(cid) or {}
+            row = cap_meta.get(cid) or eng_meta.get(cid) or {}
             rows.append(
                 {
                     "id": cid,
@@ -4886,6 +5094,193 @@ class UnifiedModel:
             latency_penalty_per_ms=latency_penalty_per_ms,
         )
 
+    # ------------------------------------------------- Wave 36 Futamura Leapfrog Unified Surfaces
+
+    def _get_futamura_cascade(self) -> Any:
+        if self._futamura_cascade is None:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import FutamuraSelfCompilingCascade
+
+            self._futamura_cascade = FutamuraSelfCompilingCascade()
+        return self._futamura_cascade
+
+    def futamura_solve(
+        self,
+        task_spec: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Futamura self-compiling 4-rung cascade (`Rung 0 <100 us` -> `Rung 1 byte-effect` ->
+        `Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value` ->
+        optional `Rung 3` proposer) that auto-compiles every verified win into generalized Rung-0 rules."""
+        return self._get_futamura_cascade().solve(
+            dict(task_spec),
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def verify_byte_effect(
+        self,
+        target: str | Path,
+        *,
+        expected_format: str | None = None,
+        expected_source_bytes: bytes | None = None,
+        expected_source_path: str | Path | None = None,
+        baseline_archive_hashes: Mapping[str, str] | None = None,
+        allowed_archive_mutations: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 36: Ring-0 byte-level effect oracle catching lying extensions, broken containers,
+        failed decompression roundtrips, and collateral archive mutations."""
+        from canonical.runtime.byte_effect_oracle_v1 import verify_byte_effect as _verify_be
+
+        return _verify_be(
+            target,
+            expected_format=expected_format,
+            expected_source_bytes=expected_source_bytes,
+            expected_source_path=expected_source_path,
+            baseline_archive_hashes=baseline_archive_hashes,
+            allowed_archive_mutations=allowed_archive_mutations,
+        )
+
+    def minimize_patch_ddmin(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+    ) -> dict[str, Any]:
+        """Wave 36: DRA-style Zeller `ddmin` O(k log n) hunk minimizer stripping bloated edits."""
+        from canonical.runtime.byte_effect_oracle_v1 import ddmin_minimize_hunks
+
+        return ddmin_minimize_hunks(original_source, patched_source, oracle_fn)
+
+    def audit_patch_mutations(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+        *,
+        max_mutants: int = 16,
+    ) -> dict[str, Any]:
+        """Wave 36: Targeted AST mutation kill audit restricted to touched patch lines."""
+        from canonical.runtime.byte_effect_oracle_v1 import audit_patch_mutation_kill
+
+        return audit_patch_mutation_kill(
+            original_source,
+            patched_source,
+            oracle_fn,
+            max_mutants=max_mutants,
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        error_outputs: Sequence[str] = ("ERR", "ERROR", "FAIL", "DENIED"),
+        commutative_pairs: Sequence[tuple[str, str]] = (),
+        idempotent_actions: Sequence[str] = (),
+        max_states: int = 32,
+        enable_error_pruning: bool = True,
+    ) -> Any:
+        """Wave 36: Error-Aware `L#` + `Lambda*_M` sub-ms symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            error_outputs=error_outputs,
+            commutative_pairs=commutative_pairs,
+            idempotent_actions=idempotent_actions,
+            max_states=max_states,
+            enable_error_pruning=enable_error_pruning,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+        max_loop_repeats: int = 2,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel Hybrid Computer Use (`CLI/File > AX/CDP > Visual`) + `< 5 us` Petri guard
+        + OSWorld-Human loop-churn killer + PASTE speculative macro commit."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        return sup.execute_episode(
+            steps,
+            executor=executor,
+            initial_state=initial_state,
+            max_loop_repeats=max_loop_repeats,
+        )
+
+    def dbsp_belief_bus(self) -> Any:
+        """Wave 36: Access the unified DBSP bi-temporal `Z`-set + Kumiho AGM `AnalyzeImpact` +
+        `projectmem` `PreCommitFailureGate` bus."""
+        return self._get_futamura_cascade().belief_bus
+
+    def conformal_evalue_gate(
+        self,
+        observations: Sequence[Mapping[str, Any]],
+        *,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: SCoRE anytime-valid conformal e-value martingale gate (Ville's inequality)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
+
+        gate = ConformalEValueGate(alpha=alpha)
+        for ev in observations:
+            gate.observe(
+                str(ev["evidence"]),
+                passed=bool(ev["passed"]),
+                null_pass_prob=float(ev.get("null_pass_prob", 0.25)),
+                hard_contradiction=bool(ev.get("hard_contradiction", False)),
+            )
+        return gate.decision()
+
+    def cow_zygote_repair(
+        self,
+        source: str,
+        test_cases: Sequence[str],
+        *,
+        use_cow_fork: bool = True,
+        run_mutation_audit: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: PEP-669/settrace Ochiai localization + `< 50 us` UTF-8 byte-span AST splicing +
+        POSIX `os.fork()` CoW screening + `ddmin` + mutation-kill + conformal e-value gate."""
+        return self._get_futamura_cascade().repair_engine.repair(
+            source,
+            test_cases,
+            use_cow_fork=use_cow_fork,
+            run_mutation_audit=run_mutation_audit,
+            alpha=alpha,
+        )
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: GrowLibm-style e-class rule compression + Rubin `(WITH - WITHOUT)` skill-rent GC."""
+        return self._get_futamura_cascade().wake_sleep_consolidate(
+            max_active_rules=max_active_rules,
+            rubin_observations=rubin_observations,
+        )
+
     def open_creature(
         self,
         root: str | Path,
@@ -5107,6 +5502,7 @@ def prewarm_sidecar_caches(model: Mapping[str, Any] | None = None, target: Path 
         core_tmp = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
         core_tmp.write_bytes(marshal.dumps(core))
         core_tmp.replace(cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal")
+        _write_boot_and_route_slabs(cache_dir, raw_sha, core)
 
         sec = _extract_secondary_indexes(model, raw_sha)
         ext_postings_tmp: dict[str, list[tuple[str, int]]] = {}
@@ -5296,6 +5692,29 @@ def open_model(
         if is_default:
             _write_stat_sha(target_key, st, raw_sha)
 
+    # Wave 36 Elon sub-ms cold boot: read the ~950-byte `boot_v6` header first (< 0.20 ms)!
+    boot_file = cache_dir / f"unified_model_boot_v6_{raw_sha[:32]}.marshal"
+    if boot_file.is_file():
+        try:
+            boot_hdr = marshal.loads(boot_file.read_bytes())
+            if (
+                isinstance(boot_hdr, dict)
+                and boot_hdr.get("core_format_v") == 6
+                and boot_hdr.get("raw_sha256") == raw_sha
+                and boot_hdr.get("schema") == SCHEMA
+            ):
+                _VERIFIED_BLOB_DIGESTS[raw_sha] = str(boot_hdr.get("digest_value") or "")
+                inst = UnifiedModel(
+                    boot_hdr,
+                    _raw_bytes=raw_bytes,
+                    _boot_only=True,
+                    _target_path=target,
+                )
+                _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+                return inst
+        except Exception:
+            pass
+
     cache_file = cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal"
     if cache_file.is_file():
         try:
@@ -5307,6 +5726,7 @@ def open_model(
                 and core.get("schema") == SCHEMA
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
+                _write_boot_and_route_slabs(cache_dir, raw_sha, core)
                 inst = UnifiedModel(
                     core,
                     _raw_bytes=raw_bytes,
@@ -5327,7 +5747,8 @@ def open_model(
         cache_dir.mkdir(parents=True, exist_ok=True)
         tmp_f = cache_dir / f".unified_model_core_{raw_sha[:32]}.{os.getpid()}.tmp"
         tmp_f.write_bytes(marshal.dumps(core))
-        tmp_f.replace(cache_file)
+        tmp_f.replace(cache_dir / f"unified_model_core_{raw_sha[:32]}.marshal")
+        _write_boot_and_route_slabs(cache_dir, raw_sha, core)
     except OSError:
         pass
     inst = UnifiedModel(core, _raw_bytes=raw_bytes, _core_only=True, _target_path=target)
@@ -5340,6 +5761,8 @@ def adapter_ast_entry(rel_path: str, expected_sha256: str | None = None) -> dict
     """Fast RAM lookup of compile-time verified adapter AST metadata (`defaulted_keys` + `dispatch_ops`)."""
     try:
         inst = open_model()
+        if "adapter_ast_index" not in inst._core_meta:
+            inst._ensure_routing_core()
         idx = inst._core_meta.get("adapter_ast_index") or {}
         row = idx.get(rel_path)
         if not isinstance(row, Mapping):

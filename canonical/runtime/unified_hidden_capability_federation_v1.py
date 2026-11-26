@@ -1216,6 +1216,123 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["query"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W36_BYTE_EFFECT_ORACLE": {
+        "domain": "RING0_BYTE_EFFECT_AND_DRA_MINIMIZATION",
+        "source_path": "canonical/runtime/byte_effect_oracle_v1.py",
+        "entrypoint": "verify_byte_effect",
+        "summary": "Ring-0 byte-level effect oracle verifying real magic headers, decompression roundtrips, untouched archive member SHA-256 invariance, DRA Zeller ddmin hunk minimization, and touched-line AST mutation-kill auditing.",
+        "triggers": ["byte_effect_oracle", "lying extension detector", "ddmin hunk minimizer", "dra mutation audit"],
+        "required_inputs": ["target"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_FUTAMURA_CASCADE": {
+        "domain": "SELF_COMPILING_FUTAMURA_CASCADE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Futamura self-compiling 4-rung cascade (Rung 0 <100 us alpha-normalized AST rules -> Rung 1 byte-effect -> Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value -> optional Rung 3 proposer) compiling verified wins back to Rung 0 plus GrowLibm sleep compression.",
+        "triggers": ["futamura_leapfrog_kernel", "compile away the frontier", "skillcompiler", "growlibm sleep consolidation"],
+        "required_inputs": ["source", "test_cases"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_ERROR_AWARE_MEALY_HCU": {
+        "domain": "INSTANT_MEALY_AND_HYBRID_COMPUTER_USE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Sub-ms Error-Aware L# + Lambda*_M symbolic Mealy instant learner with binary-split numeric guards plus 3-channel Hybrid Computer Use (CLI/File > AX/CDP > Visual) with <5 us Petri guard, OSWorld-Human loop-churn breaker, and PASTE speculative macro commit.",
+        "triggers": ["error aware mealy l#", "hybrid computer use hcu", "osworld human loop breaker", "paste speculative macro"],
+        "required_inputs": ["steps"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_DBSP_AGM_CONFORMAL": {
+        "domain": "DBSP_AGM_MEMORY_AND_CONFORMAL_EVALUE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Algebraic DBSP bi-temporal Z-set memory + Kumiho AGM Supersedes/Depends_On transitive AnalyzeImpact + projectmem <10 us PreCommitFailureGate + SCoRE anytime-valid conformal e-value martingale risk controller.",
+        "triggers": ["dbsp z-set memory", "kumiho agm analyze impact", "projectmem pre commit failure gate", "score conformal e-value"],
+        "required_inputs": ["observations"],
+        "declared_dependencies": [],
+    },
+    "METAMORPHIC_HABITATION_ZIPPER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+        "entrypoint": "parse_pytest_failures",
+        "summary": "Metamorphic habitation & zipper obligation propagator with multi-signal fault localization and pytest failure extraction.",
+        "triggers": ["metamorphic_habitation_zipper", "type habitation repair", "zipper obligation propagator"],
+        "required_inputs": ["output"],
+        "declared_dependencies": [],
+    },
+    "PETRI_COW_SPLICING_ENGINE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+        "entrypoint": "compute_structural_fp64",
+        "summary": "Petri-net CoW dual splicing engine with structural 64-bit code/schema fingerprinting and backward assertion witnesses.",
+        "triggers": ["petri_cow_splicing_engine", "structural fp64 code fingerprint", "backward witness dual splicer"],
+        "required_inputs": ["code_or_schema"],
+        "declared_dependencies": [],
+    },
+    "AUTONOMOUS_AWAKE_LOOP": {
+        "domain": "CONTINUOUS_AGENCY_AND_SELF_IMPROVEMENT",
+        "source_path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+        "entrypoint": "FileAtomicJournalStore",
+        "summary": "Autonomous awake agency daemon with atomic journal store and confined language test oracle.",
+        "triggers": ["autonomous_awake_loop", "awake agency daemon", "atomic journal store"],
+        "required_inputs": ["journal_dir"],
+        "declared_dependencies": [],
+    },
+    "SWE_SELF_IMPROVEMENT_BRIDGE": {
+        "domain": "CONTINUOUS_AGENCY_AND_SELF_IMPROVEMENT",
+        "source_path": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
+        "entrypoint": "build_formal_swe_problem",
+        "summary": "Formal SWE self-improvement bridge connecting coding episodes to verified generalization suites.",
+        "triggers": ["swe_self_improvement_bridge", "formal swe coding episode"],
+        "required_inputs": ["task_id"],
+        "declared_dependencies": [],
+    },
+    "INDUCED_EDIT_BASIS": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/induced_edit_basis_v1.py",
+        "entrypoint": "induce_templates",
+        "summary": "Induces minimal reusable AST edit-template basis directly from `(before, after)` repair pairs.",
+        "triggers": ["induced_edit_basis", "induce ast edit templates"],
+        "required_inputs": ["pairs"],
+        "declared_dependencies": [],
+    },
+    "CONTRACT_GROUNDED_REPAIR": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/contract_grounded_repair_v1.py",
+        "entrypoint": "load_task",
+        "summary": "Contract-grounded SWE repair screening synthesized AST variants against executable observation contracts.",
+        "triggers": ["contract_grounded_repair", "contract grounded ast synthesis"],
+        "required_inputs": ["task_dir", "name"],
+        "declared_dependencies": [],
+    },
+    "CHECKABILITY_DIFFERENTIAL_PIN": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/swe_kernel/checkability_by_differential_pin_v1.py",
+        "entrypoint": "public_callables",
+        "summary": "Measures module checkability via public callable extraction, doctest pinning, and differential commit probes.",
+        "triggers": ["checkability_by_differential_pin", "public callables differential pin"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "OPERAND_INVENTION": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/operand_invention_v1.py",
+        "entrypoint": "scope_names",
+        "summary": "Scope-grounded operand invention extracting live lexical/imported/builtin operands for AST patch synthesis.",
+        "triggers": ["operand_invention", "scope grounded operand synthesis"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "SKILL_SCOPE_ACQUISITION": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "entrypoint": "observable_facts",
+        "summary": "Learns exact syntactic/observable applicability scope facts governing when a compiled skill safely fires.",
+        "triggers": ["skill_scope_acquisition", "observable skill applicability facts"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
 }
 
 
@@ -1385,6 +1502,70 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/computer_use_check_density_v1.py",
             "canonical/runtime/domain_of_verification_v1.py",
             "canonical/runtime/contrast_selection_v1.py",
+        ],
+    },
+    "futamura_compile_away_ring0_byte_oracle_and_dra": {
+        "external_names": [
+            "futamura",
+            "futamura projection",
+            "skillcompiler",
+            "skcc",
+            "skir",
+            "growlibm",
+            "dra",
+            "ddmin",
+            "delta debugging",
+            "byte effect oracle",
+            "lying extension",
+            "compile away the llm",
+            "score e-value",
+            "ville inequality",
+            "conformal e-value",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W36_BYTE_EFFECT_ORACLE",
+            "engine:LEAPFROG_W36_FUTAMURA_CASCADE",
+            "engine:LEAPFROG_W36_DBSP_AGM_CONFORMAL",
+            "engine:INDUCED_EDIT_BASIS",
+            "engine:SKILL_SCOPE_ACQUISITION",
+        ],
+        "koan_modules": [
+            "canonical/runtime/byte_effect_oracle_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/induced_edit_basis_v1.py",
+            "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+            "canonical/swe_kernel/operand_invention_v1.py",
+        ],
+    },
+    "dbsp_agm_belief_revision_and_hybrid_cu_mealy": {
+        "external_names": [
+            "dbsp",
+            "z-set",
+            "kumiho",
+            "agm belief revision",
+            "analyzeimpact",
+            "projectmem",
+            "pre-commit failure gate",
+            "error-aware l#",
+            "lambda*_m",
+            "hybrid computer use",
+            "hcu",
+            "osworld-human",
+            "loop churn",
+            "paste speculative",
+            "timetravelcontainer",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W36_ERROR_AWARE_MEALY_HCU",
+            "engine:LEAPFROG_W36_DBSP_AGM_CONFORMAL",
+            "engine:PETRI_COW_SPLICING_ENGINE",
+            "engine:METAMORPHIC_HABITATION_ZIPPER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+            "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
         ],
     },
 }
@@ -2912,6 +3093,107 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
             top_k=int(inputs.get("top_k", 10)),
         )
         return _ok(mode, "FORWARD_PUSH_BITEMPORAL_RECALLED", res)
+
+    if mode == "LEAPFROG_W36_BYTE_EFFECT_ORACLE":
+        from canonical.runtime import byte_effect_oracle_v1 as m
+
+        res = m.verify_byte_effect(
+            inputs["target"],
+            expected_format=inputs.get("expected_format"),
+            expected_source_bytes=inputs.get("expected_source_bytes"),
+            expected_source_path=inputs.get("expected_source_path"),
+            baseline_archive_hashes=inputs.get("baseline_archive_hashes"),
+            allowed_archive_mutations=inputs.get("allowed_archive_mutations") or (),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "BYTE_EFFECT_FAILED"), detail=res)
+        return _ok(mode, "BYTE_EFFECT_VERIFIED", res)
+
+    if mode == "LEAPFROG_W36_FUTAMURA_CASCADE":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "futamura_solve", **dict(inputs)}, ROOT)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "FUTAMURA_CASCADE_ABSTAINED"), detail=res)
+        return _ok(mode, "FUTAMURA_CASCADE_RESOLVED", res)
+
+    if mode == "LEAPFROG_W36_ERROR_AWARE_MEALY_HCU":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "hybrid_cu", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("status") or "HCU_PETRI_COMPLETED"), res)
+
+    if mode == "LEAPFROG_W36_DBSP_AGM_CONFORMAL":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "conformal_evalue", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("verdict") or "CONFORMAL_EVALUE_EVALUATED"), res)
+
+    if mode == "METAMORPHIC_HABITATION_ZIPPER":
+        from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m
+
+        fails = m.parse_pytest_failures(str(inputs["output"]))
+        return _ok(mode, "PYTEST_FAILURES_PARSED", {"failures": fails, "count": len(fails)})
+
+    if mode == "PETRI_COW_SPLICING_ENGINE":
+        from canonical.swe_kernel import petri_cow_splicing_engine_v1 as m
+
+        fp = m.compute_structural_fp64(str(inputs["code_or_schema"]))
+        return _ok(mode, "STRUCTURAL_FP64_COMPUTED", {"fp64": fp})
+
+    if mode == "AUTONOMOUS_AWAKE_LOOP":
+        from canonical.swe_kernel import autonomous_awake_loop_v1 as m
+
+        store = m.FileAtomicJournalStore(inputs["journal_dir"])
+        return _ok(mode, "ATOMIC_JOURNAL_STORE_READY", {"journal_dir": str(inputs["journal_dir"]), "store_type": type(store).__name__})
+
+    if mode == "SWE_SELF_IMPROVEMENT_BRIDGE":
+        from canonical.swe_kernel import swe_self_improvement_bridge_v1 as m
+
+        prob, meta = m.build_formal_swe_problem(
+            Path(str(inputs.get("root") or ROOT)),
+            task_id=str(inputs["task_id"]),
+            episode_id=str(inputs.get("episode_id") or "ep_0"),
+            patched_sha256=str(inputs.get("patched_sha256") or "0" * 64),
+            test_count=int(inputs.get("test_count", 1)),
+        )
+        return _ok(mode, "FORMAL_SWE_PROBLEM_BUILT", {"problem": prob, "meta": meta})
+
+    if mode == "INDUCED_EDIT_BASIS":
+        from canonical.swe_kernel import induced_edit_basis_v1 as m
+
+        tpls = m.induce_templates(list(inputs["pairs"]))
+        return _ok(mode, "EDIT_TEMPLATES_INDUCED", {"template_count": len(tpls)})
+
+    if mode == "CONTRACT_GROUNDED_REPAIR":
+        from canonical.swe_kernel import contract_grounded_repair_v1 as m
+
+        task = m.load_task(Path(str(inputs["task_dir"])), str(inputs["name"]))
+        return _ok(mode, "CONTRACT_REPAIR_TASK_LOADED", {"name": str(inputs["name"]), "task_type": type(task).__name__})
+
+    if mode == "CHECKABILITY_DIFFERENTIAL_PIN":
+        from canonical.swe_kernel import checkability_by_differential_pin_v1 as m
+
+        callables = m.public_callables(str(inputs["source"]), list(inputs.get("module_name_parts") or ["mod"]))
+        return _ok(mode, "PUBLIC_CALLABLES_EXTRACTED", {"callables": callables, "count": len(callables)})
+
+    if mode == "OPERAND_INVENTION":
+        from canonical.swe_kernel import operand_invention_v1 as m
+
+        names = m.scope_names(str(inputs["source"]))
+        return _ok(mode, "SCOPE_OPERANDS_INVENTED", {"scope_names": names, "count": len(names)})
+
+    if mode == "SKILL_SCOPE_ACQUISITION":
+        from canonical.swe_kernel import skill_scope_acquisition_v1 as m
+
+        facts = sorted(
+            m.observable_facts(
+                str(inputs["source"]),
+                baseline_ok=inputs.get("baseline_ok", True),
+                language=str(inputs.get("language") or "python"),
+            )
+        )
+        return _ok(mode, "SKILL_SCOPE_FACTS_ACQUIRED", {"facts": facts, "count": len(facts)})
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 
