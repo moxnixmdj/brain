@@ -911,3 +911,198 @@ the first honest definition of "unified" this project has had.
   capability, no registry entry, authority NONE).
 - `truth.achieved` untouched. No capability registered. No scoreboard
   edited. $0, no weights, no network.
+
+---
+
+# Part IV — The measurement crisis is the opportunity (fourth pass)
+
+Part III ended by reclassifying deletion as the only move with the right
+scale. This pass audits its own numbers, turns the unroutable mass into a
+finite target, protects the work with a test, and finds the one place
+where the 2026 frontier is *weaker than this repository*.
+
+## 21. I tried to falsify my own headline. It survived.
+
+A 72.3% figure is exactly the kind of number that turns out to be inflated
+by vendored third-party trees. So I split the census:
+
+| Class | Lines | Unrouted | Share of unrouted |
+|---|---|---|---|
+| Vendored / `internalized/` | 21,441 | 21,441 (100%) | **3.2%** |
+| First-party | 893,459 | 639,679 (71.6%) | 96.8% |
+| **Total** | **914,964** | **661,120 (72.3%)** | — |
+
+First-party routed ratio: **28.40%**. The vendored trees are fully
+unrouted, as they should be — they are dependencies, not capabilities —
+but they are only 3.2% of the mass. **The headline holds: this repository
+is ~72% invisible to its own front door, in code it wrote itself.**
+
+Worth stating plainly because it is the opposite of the convenient
+result: the number would have been *easier* to explain away if vendoring
+had been the cause. It isn't.
+
+## 22. 2,301 is a mood. 128 is a plan.
+
+"Fix 72% of the repository" is not actionable. A module is
+**load-bearing-and-unreachable** if something imports it (so it is not
+dead) or it is large enough that nobody believes it is dead by accident.
+Measured:
+
+| Metric | Value |
+|---|---|
+| Unrouted modules | 2,301 |
+| **Target set: unrouted AND (importers ≥ 3 OR lines ≥ 1,000)** | **128 modules** |
+| Lines in target set | **214,167** |
+| Share of unrouted lines | **32.4%** |
+| Modules with ≥3 importers and unrouted | 45 |
+
+So a third of the invisible mass sits in 128 named modules. That is a
+list you can actually work through, and the census now prints it sorted by
+importers (`--top`), not by size.
+
+The census also answers a question I got wrong in Part III. I had called
+out a 1,075-line vendored utility with 36 importers as the surprising
+finding. With the vendored split, the honest reading is different: **the
+high-importer tail is mostly vendored library internals** (`stirrup`,
+`mini_swe_agent`). The genuinely interesting first-party entries are:
+
+| Importers | Lines | Syms | Module |
+|---|---|---|---|
+| 8 | 933 | 23 | `runtime/capability_discovery.py` |
+| 7 | 7,554 | 142 | `runtime/goal_compiler.py` |
+| 5 | 3,834 | 91 | `runtime/goal_front_compiler_v1.py` |
+| 4 | 7,780 | 118 | `runtime/astra_runtime.py` |
+
+Eight importers on `capability_discovery.py` is the sharpest single result
+in the census: the module that *finds* capabilities is itself unreachable
+from the front door. The finder is lost.
+
+## 23. The 2026 coding-agent metrology crisis, and why it favours Brain
+
+The coding domain had a worse year than the benchmark scores suggest.
+Three generations of instruments, three deaths:
+
+| Instrument | Born | Declared broken | Cause |
+|---|---|---|---|
+| SWE-bench | late 2023 | 2024 (OpenAI) | unsolvable / under-specified tasks |
+| SWE-bench Verified | Aug 2024 | **Feb 2026** (OpenAI) | test defects, contamination, saturation — 59.4% of the hardest problems had flawed tests |
+| SWE-bench Pro | Sep 2025 | **8 Jul 2026** (OpenAI) | ~30% broken tasks; 27.4% flagged by OpenAI's audit pipeline |
+
+And the numbers underneath are worse than the retractions:
+
+- **Verifier error on SWE-bench Pro: ~32%** — 8.5% false positives (wrong
+  patches accepted) and **24% false negatives** (correct patches rejected).
+  A benchmark that rejects correct answers a quarter of the time cannot
+  measure a 5-point improvement between models.
+- **Git-history reward hacking** on >12% of reviewed tasks (Datacurve);
+  Scale tracks it as an open issue.
+- **The SWE-Bench Illusion** (NeurIPS): the best models recovered *the file
+  to fix* from the ticket text alone in **76%** of cases, versus 53% on
+  non-benchmark repositories. That gap is memorisation, not problem solving.
+- **Harness effect worth a generation**: the same model on SWE-bench Pro
+  scores 45.89% under SWE-agent and 51.80% under Auggie. Scaffold, not
+  model, moves the number by more than most releases do.
+- Even METR's time-horizon suite (~12 h at 50%) is flagged unreliable above
+  16 h — the instrument tops out before the capability does.
+
+The surviving honest instruments are the ones with **fresh, post-cutoff,
+auto-mined tasks and an independently audited verifier** — `SWE-rebench`
+(fresh issues mined after model cutoffs), Terminal-Bench 4.1 (whose
+November 2026 update explicitly retuned *verifiers for reward-hack
+resistance*), and OSWorld 2.0 (still unsolved at 20.6% binary, which is
+the opposite problem: the instrument is fine and nobody can pass it).
+
+**This is the unusual strategic conclusion.** If the frontier's own
+measuring instruments are ~32% mis-graded, then *verification is now a
+scarce capability*, not a hygiene task. And look at where Brain's callable
+capabilities actually are, by domain, from the promotion ledger:
+
+| Domain | Callable capabilities |
+|---|---|
+| **verification_abstention** | **24** |
+| coding_agents | 5 |
+| memory | 3 |
+| computer_use | 2 |
+| world_model | 2 |
+| continual_learning | 1 |
+| instant_learning | 1 |
+
+Brain is strongest — by a factor of five over the next domain — in exactly
+the capability the entire 2026 benchmark crisis is short of, and weakest in
+instant learning and computer use, where the frontier is strongest. That is
+not a coincidence to be embarrassed about; it is a **wedge**.
+
+The strategic play is therefore not "beat Claude on SWE-bench Pro." It is:
+
+> **Be the system whose numbers are trusted, because it refuses to answer
+> without a receipt.** Every frontier lab is now paying for the absence of
+> that property.
+
+That is also the one play the repo's laws already forbid anyone from
+faking: `truth.achieved` is not editable, receipts are required, and a
+VERIFY that repeats its RECEIPT's hash is explicitly not verification. The
+governance that felt like friction is the competitive asset.
+
+Three concrete consequences:
+
+1. **Evaluate on fresh, post-cutoff tasks only.** A benchmark whose
+   answers predate the model is a memory test. `SWE-rebench`-style mining
+   is the only honest coding instrument.
+2. **Report the abstention rate beside the pass rate.** A system with 40%
+   coverage at 2% error is more useful than one with 90% coverage at 30%
+   error, but only the second number ever gets published. Publishing both
+   is the differentiator.
+3. **Treat the harness as part of the claim.** Since scaffold is worth a
+   generation, any Brain number must name the exact routing/execution path
+   that produced it — which the model digest and receipt lane already do.
+
+## 24. The work is now protected by a test that can fail
+
+Three commits of routing work had **no test**. The verifier only checks
+that *some* route is confident; it never checked that *this goal* reaches
+*that engine*. A later trigger edit could have sent "keep improving
+without forgetting" back to `python.source.add_function.v1` and every
+existing check would still be green.
+
+`canonical/tests/test_frontier_routing_contract_v1.py` closes that: 17
+frontier goals pinned to their implementing engine, 8 negative controls
+pinned to fail closed, the memory OS and the two-witness gate pinned as
+*executable* (not merely routable), and the harvested fallback pinned to
+stay `admitted: False`.
+
+It deliberately does **not** pin scores, coverage numbers, or candidate
+order — those move legitimately when triggers are tuned, and pinning them
+would make honest work fail for no reason. The contract is "this goal
+reaches this engine", nothing more.
+
+**Proof it is not a tautology.** I removed one trigger
+(`"resolve conflicting memories"`) from the compiler, recompiled, and ran
+the test:
+
+```
+AssertionError: False is not true : regressed to fail-closed: resolve conflicting memories
+```
+
+Trigger restored, recompiled, 5/5 and 62/62 green. A test that cannot fail
+is not a test, and `AGENTS.md` rule 6 says so explicitly.
+
+## 25. Verification, this pass
+
+- Verifier: **38/38 PASS** (9 categories).
+- `test_brain_unified_model_v1`: **62/62 OK**.
+- `test_frontier_routing_contract_v1`: **5/5 OK** (new, mutation-tested).
+- Integrity guard: **17 rules / 0 violations PASS**.
+- `orphan_organ_census_v1.py` now reports the vendored split and the
+  128-module target set natively.
+- `truth.achieved` untouched. No capability registered. No scoreboard
+  edited. $0, no weights, no network.
+
+## 26. Reference additions (fourth pass)
+
+- The SWE-bench Reckoning of 2026 (contamination, 32% verifier error, git-history loophole) — https://niteagent.com/blog/swe-bench-reckoning-2026/
+- Nobody knows how to measure coding agents anymore (three instruments, three deaths) — https://lecompute.fr/en/runtimes/crise-mesure-agents-codage/
+- SWE-bench Pro leaderboard and DeepSWE audit — https://www.morphllm.com/swe-bench-pro
+- AI Agent Benchmarks 2026, top scores across 10 leaderboards — https://decodethefuture.org/en/ai-agent-benchmarks-2026/
+- Coding agent harness benchmarks (same model, different scaffold) — https://futureagi.com/blog/coding-agent-harness-benchmark/
+- Best AI coding agents, November 2026 (Terminal-Bench 4.1 reward-hack-resistant verifiers) — https://www.morphllm.com/best-ai-coding-agents-2026
+- AI agent evals on real repositories — https://explainx.ai/blog/ai-coding-agent-evals-real-repos-2026

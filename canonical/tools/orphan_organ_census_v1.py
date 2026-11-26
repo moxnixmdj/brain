@@ -35,6 +35,29 @@ from typing import Any
 ROOT = Path(__file__).resolve().parents[2]
 ARTIFACT = ROOT / "canonical/unified_model/BRAIN_UNIFIED_MODEL_V1.json"
 
+# Vendored third-party trees are dependencies, not hidden capabilities. They
+# are counted separately so the headline is not inflated by code nobody in
+# this repository wrote. Measured 2026-11-26: vendored is 21,441 lines, 3.2%
+# of the unrouted total -- small enough that the headline survives the check,
+# which is worth knowing rather than assuming.
+VENDOR_PREFIXES = (
+    "canonical/capabilities/internalized/",
+    "vendor/",
+    "third_party/",
+    "node_modules/",
+)
+
+# The finishable target. 2,301 unrouted modules is not a plan, it is a mood.
+# A module is load-bearing-and-unreachable if something imports it, or if it
+# is large enough that nobody believes it is dead by accident. That set is
+# small enough to name every member, and it is where "unified" has to start.
+TARGET_MIN_IMPORTERS = 3
+TARGET_MIN_LINES = 1000
+
+
+def is_vendored(path: str) -> bool:
+    return any(path.startswith(prefix) for prefix in VENDOR_PREFIXES)
+
 
 def _line_count(root: Path, rel: str) -> int:
     path = root / rel
@@ -78,29 +101,42 @@ def census(
 
     total_lines = 0
     unrouted_lines = 0
+    vendored_lines = vendored_unrouted = 0
+    target_lines = 0
     orphans: list[dict[str, Any]] = []
+    target_set: list[dict[str, Any]] = []
     for rel, row in index.items():
         lines = _line_count(root, rel)
+        vendored = is_vendored(rel)
         total_lines += lines
+        if vendored:
+            vendored_lines += lines
         if rel in routed_paths:
             continue
         unrouted_lines += lines
+        if vendored:
+            vendored_unrouted += lines
         symbols = int(row.get("symbol_count") or 0)
         importers = int(row.get("imported_by_count") or 0)
+        record = {
+            "path": rel,
+            "lines": lines,
+            "symbols": symbols,
+            "importers": importers,
+            "vendored": vendored,
+            "classification": str(row.get("classification") or ""),
+        }
+        if importers >= TARGET_MIN_IMPORTERS or lines >= TARGET_MIN_LINES:
+            target_lines += lines
+            target_set.append(record)
+        if vendored:
+            continue
         if lines < min_lines or symbols < min_symbols:
             continue
         score = symbols * (1 + importers) * math.log2(1 + lines)
-        orphans.append(
-            {
-                "path": rel,
-                "lines": lines,
-                "symbols": symbols,
-                "importers": importers,
-                "classification": str(row.get("classification") or ""),
-                "score": round(score, 2),
-            }
-        )
+        orphans.append({**record, "score": round(score, 2)})
     orphans.sort(key=lambda r: (-r["score"], -r["importers"], -r["lines"], r["path"]))
+    target_set.sort(key=lambda r: (-r["importers"], -r["lines"], r["path"]))
 
     return {
         "schema": "BRAIN_ORPHAN_ORGAN_CENSUS_V1",
@@ -111,7 +147,18 @@ def census(
         "indexed_lines": total_lines,
         "unrouted_lines": unrouted_lines,
         "routed_line_ratio": round(1 - (unrouted_lines / total_lines), 4) if total_lines else 0.0,
-        "callable_zero_importer_count": sum(1 for r in orphans if r["importers"] == 0),
+        "vendored_lines": vendored_lines,
+        "vendored_unrouted_lines": vendored_unrouted,
+        "vendored_share_of_unrouted": (
+            round(vendored_unrouted / unrouted_lines, 4) if unrouted_lines else 0.0
+        ),
+        "first_party_unrouted_lines": unrouted_lines - vendored_unrouted,
+        "target_set_modules": len(target_set),
+        "target_set_lines": target_lines,
+        "target_set_share_of_unrouted": (
+            round(target_lines / unrouted_lines, 4) if unrouted_lines else 0.0
+        ),
+        "target_set": target_set[: max(1, top)],
         "ranked": orphans[: max(1, top)],
         "ranked_total": len(orphans),
         "authority": "NONE",
@@ -129,7 +176,24 @@ def render(report: dict[str, Any]) -> str:
         f"  ({100 * (1 - report['routed_line_ratio']):.1f}%)"
     )
     out.append(f"  routed line ratio {report['routed_line_ratio']:.4f}")
+    out.append(
+        f"  vendored {report['vendored_unrouted_lines']:,} lines"
+        f"  ({100 * report['vendored_share_of_unrouted']:.1f}% of unrouted -- excluded below)"
+    )
+    out.append(
+        f"  TARGET SET (importers>={TARGET_MIN_IMPORTERS} or lines>={TARGET_MIN_LINES}):"
+        f" {report['target_set_modules']} modules / {report['target_set_lines']:,} lines"
+        f"  ({100 * report['target_set_share_of_unrouted']:.1f}% of unrouted lines)"
+    )
     out.append("")
+    out.append("  -- target set, by importers --")
+    out.append(f"  {'imp':>4} {'lines':>6} {'sym':>4}  module")
+    for row in report["target_set"]:
+        out.append(
+            f"  {row['importers']:>4} {row['lines']:>6} {row['symbols']:>4}  {row['path']}"
+        )
+    out.append("")
+    out.append("  -- first-party ranking, by influence score --")
     out.append(f"  {'score':>10} {'lines':>6} {'sym':>4} {'imp':>4}  module")
     for row in report["ranked"]:
         out.append(
