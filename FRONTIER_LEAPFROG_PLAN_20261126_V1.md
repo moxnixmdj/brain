@@ -755,3 +755,159 @@ runtime", and it is currently the worst number in the project.
 - Covering Human Action Space for Computer Use (CUActSpot, grounding vs OSWorld) — https://arxiv.org/html/2605.12501v1
 - Platform-aware survey of GUI agent execution and risk — https://jzus.zju.edu.cn/opentxt.php?doi=10.1631%2FENG.ITEE.2026.0103
 - OSWorld 2026 reference — https://benchmarkingagents.com/osworld/
+
+---
+
+# Part III — Executing the pipeline (third pass)
+
+Part II ended with a four-step plan. This pass executes steps 1 and 2 and
+kills one attractive dead end with measurements. Authority: NONE.
+
+## 16. Step 2 continued: `WAKE_SLEEP_CONSOLIDATION` wired
+
+`canonical/swe_kernel/sentient_cognitive_core_v1.py` (2,505 lines, **zero
+importers**, no route) holds `WakeSleepConsolidationEngine`, which is the
+wake/sleep counterpart to the memory bus:
+
+- `record_wake_episode(...)` — accumulate `TEST_SUITE`-verified repair
+  episodes in a wake buffer;
+- `verify_two_witness_nonconstant(...)` — `permanence_amplifies_check_v1`:
+  a rule may become permanent only if **two distinct inputs AND two
+  distinct outputs** witness it. This is the structural answer to the
+  continual-learning failure mode the frontier keeps hitting — a rule
+  learned from one example that silently encodes a constant;
+- `sleep_consolidate()` — group by `(family, error_class)`, enforce the
+  two-witness gate, crystallize `[G_-, B_+]` version-space bounded rules
+  into `VerifiedSkillStore`, induce multi-step programs, promote
+  non-dominated skills onto the Pareto frontier;
+- `run_homeostatic_memory_hygiene()` — expire drifted rules via
+  `rule_expiry_v1` and forget low-value episodes via `associative_memory_v1`.
+
+Wired with four JSON operations. Measured through the engine:
+
+| Operation | Result |
+|---|---|
+| `RECORD_WAKE_EPISODE` | `PASS__WAKE_EPISODE_RECORDED` |
+| `TWO_WITNESS_CHECK` (one witness) | `FAIL_CLOSED__INSUFFICIENT_NONCONSTANT_WITNESSES` |
+| `TWO_WITNESS_CHECK` (two witnesses) | `PASS__NON_CONSTANT_2_WITNESS_VERIFIED` |
+| `SLEEP_CONSOLIDATE` | `PASS__SLEEP_CYCLE_CONSOLIDATED` |
+| `HOMEOSTATIC_HYGIENE` | `PASS__HOMEOSTATIC_HYGIENE_RUN` |
+| unknown operation | `FAIL_CLOSED__UNKNOWN_WAKE_SLEEP_OPERATION` |
+| missing `operation` | `FAIL_CLOSED__ENGINE_INPUTS_MISSING:operation` |
+
+Goal routing, all at coverage **1.00**, and disjoint from the memory bus:
+
+| Goal | Engine |
+|---|---|
+| promote repair episode to permanent rule | `WAKE_SLEEP_CONSOLIDATION` |
+| check a learned rule is not a constant | `WAKE_SLEEP_CONSOLIDATION` |
+| expire stale rules and forget low value episodes | `WAKE_SLEEP_CONSOLIDATION` |
+| two independent witnesses | `WAKE_SLEEP_CONSOLIDATION` |
+| memory hygiene | `WAKE_SLEEP_CONSOLIDATION` |
+| create a durable memory of prior runs | `VERIFICATION_FIRST_MEMORY_BUS` |
+| consolidate memory during idle time | `VERIFICATION_FIRST_MEMORY_BUS` |
+
+The negative controls are unchanged — all eight hand-authored
+out-of-domain goals still fail closed.
+
+## 17. Step 1 done: the census is now a tool, not a one-off
+
+`canonical/tools/orphan_organ_census_v1.py` ranks every unrouted module by
+
+    score = symbols * (1 + importers) * log2(1 + lines)
+
+Influence first, size second — a 7,000-line module nobody imports is
+usually history, while a 1,500-line module with eight importers that no
+goal can reach is *load-bearing and unreachable*, which is strictly worse.
+It reads the compiled artifact, runs nothing it reports on, and grants no
+authority.
+
+Measured on this tree:
+
+```
+indexed 2,858 modules / 914,900 lines
+unrouted 2,301 modules / 661,120 lines  (72.3%)
+routed line ratio 0.2774
+```
+
+Top of the ranking after this pass:
+
+| Score | Lines | Syms | Importers | Module |
+|---|---|---|---|---|
+| 14635.3 | 7,554 | 142 | 7 | `runtime/goal_compiler.py` |
+| 7626.2 | 7,780 | 118 | 4 | `runtime/astra_runtime.py` |
+| 6500.1 | 3,834 | 91 | 5 | `runtime/goal_front_compiler_v1.py` |
+| 2608.5 | 1,075 | 7 | **36** | `capabilities/internalized/.../stirrup/utils/logging.py` |
+| 1668.2 | 7,292 | 130 | 0 | `runtime/live_brain_route_admission_v1.py` |
+
+The fourth row is the interesting one and it is not the one I expected: a
+**1,075-line vendored utility with 36 importers**. It is the most
+depended-on module in the entire ranking, and no goal can reach it. Size
+would never have surfaced it. That is the argument for ranking by
+influence: the census found something a `sort -k lines` never would.
+
+## 18. The dead end, killed with numbers
+
+The top-ranked organ is `goal_compiler.py`: 7,554 lines, 142 symbols,
+7 importers, and a public `compile_goal(goal, registry, root)`. On paper
+this is the missing *goal-understanding* layer — the thing that would
+replace brittle lexical routing with real decomposition. I tried to wire
+it. It does not work, for two independent reasons, both measured:
+
+1. **The content-bound adapter refuses.** `bound_goal_plan_adapter_v1`
+   already wraps it string-in/dict-out, and it pins the audited Git blob
+   IDs of `goal_compiler.py` and `BOUND_CAPABILITY_REGISTRY_V1.json`.
+   Both pins have **drifted** (measured: compiler blob
+   `2737338…` vs pinned `c895df9…`; registry `1eb831e…` vs pinned
+   `7badee4…`), so every call returns `FAIL_CLOSED`
+   with `BOUND_BLOB_DRIFT`. This drift is pre-existing — I did not touch
+   either file. Re-pinning would mean asserting the current version is
+   audited, which I cannot do; that is precisely the "declare it verified
+   by editing the number" move `AGENTS.md` forbids. The pins need an
+   owner re-audit.
+2. **The planner does not generalise.** Bypassing the adapter and calling
+   `compile_goal` against the real 145-capability bound registry succeeds
+   without raising but returns **`compiled_parts = 0`** for every goal
+   tried (`extract text from a pdf document`, `count the lines in README.md`,
+   `create a sqlite table from json records`, `convert a docx to pdf`). It
+   compiles a plan object that plans nothing. `goal_compiler` is a
+   specialised compiler for a narrow goal family (file/docx/pdf/numeric
+   expression operations on the 145 bound capabilities), not a general
+   planner.
+
+So `goal_compiler` is **not** the missing front door. That hypothesis is
+now dead, with numbers, and nobody has to spend a day rediscovering it.
+This is the value of the census: it ranks by influence, and the
+highest-influence unrouted module turned out to be a narrow specialist.
+
+## 19. Where the ratio went
+
+| Metric | Part I start | Now |
+|---|---|---|
+| Engines in model | 131 | **133** (federated 105 → 107) |
+| Routing tokens | 3,018 | **3,088** |
+| Modules reachable only by explicit id | 645 harvested | 645 (unchanged, 0 admitted) |
+| Routed line ratio | 27.74% | **27.74%** |
+
+The routed line ratio did not move, and that is the honest headline. Two
+engines out of 2,301 unrouted modules is a rounding error on 661k lines.
+**The census is now cheap; the wiring is not.** Which means the plan's
+step 4 — deletion — is not the tidy epilogue I framed it as in Part II. It
+is the only move with the right scale. 2,301 unrouted modules cannot be
+wired one descriptor at a time; most of them should not exist.
+
+The ratio to aim at is not 100%. It is: **every module that is imported by
+something, or over ~1,000 lines, is either routed or deleted.** That set is
+the 89 modules ≥1,000 lines plus the high-importer tail — a few hundred
+modules, not two thousand. That is a finite, finishable target, and it is
+the first honest definition of "unified" this project has had.
+
+## 20. Verification, this pass
+
+- Verifier: **38/38 PASS** (9 categories).
+- Tests: **62/62 OK**.
+- Integrity guard: **17 rules / 0 violations PASS**.
+- New file: `canonical/tools/orphan_organ_census_v1.py` (report only, no
+  capability, no registry entry, authority NONE).
+- `truth.achieved` untouched. No capability registered. No scoreboard
+  edited. $0, no weights, no network.

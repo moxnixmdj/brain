@@ -1063,6 +1063,31 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
     # and O(1) selective unlearning. It existed, was tested, and had no route:
     # the whole module was absent from the harvested census and the source index,
     # so no goal could reach it. This descriptor is the route, not a new part.
+    # `WakeSleepConsolidationEngine` is the wake/sleep half of the same story:
+    # verified repair episodes accumulate in a wake buffer, and an offline sleep
+    # cycle promotes them to permanent rules ONLY if two distinct witnesses show
+    # the rule is non-constant (`permanence_amplifies_check_v1`). Its
+    # `run_homeostatic_memory_hygiene()` expires drifted rules and forgets
+    # low-value episodes. 2,505 lines, zero importers, no route of any kind.
+    "WAKE_SLEEP_CONSOLIDATION": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "entrypoint": "run_wake_sleep_operation",
+        "summary": (
+            "Wake-sleep consolidation over verified repair episodes: two-witness "
+            "non-constant permanence gate, [G_-, B_+] version-space rule induction, "
+            "sleep-cycle crystallization, and homeostatic hygiene (expire stale "
+            "rules, forget low-value episodes)."
+        ),
+        "triggers": [
+            "wake sleep consolidation",
+            "two witness permanence",
+            "homeostatic memory hygiene",
+            "wake buffer episode",
+        ],
+        "required_inputs": ["operation"],
+        "declared_dependencies": [],
+    },
     "VERIFICATION_FIRST_MEMORY_BUS": {
         "domain": "CONTINUAL_LEARNING_AND_ORGANS",
         "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
@@ -2642,6 +2667,35 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if res.get("status") != "OK":
             return _fail(mode, f"SKILL_INDUCTION_FAILED:{res.get('status')}", result=res)
         return _ok(mode, "ABSTAIN_GATED_SKILLS_INDUCED", res)
+
+    if mode == "WAKE_SLEEP_CONSOLIDATION":
+        from canonical.swe_kernel import sentient_cognitive_core_v1 as m
+
+        op = str(inputs["operation"]).strip().upper()
+        payload = dict(inputs.get("payload") or {})
+        state_path = inputs.get("state_path")
+        eng = m.WakeSleepConsolidationEngine(Path(str(state_path)) if state_path else None)
+        if op == "RECORD_WAKE_EPISODE":
+            ep = eng.record_wake_episode(**payload)
+            return _ok(mode, "WAKE_EPISODE_RECORDED", {"episode": ep})
+        if op == "TWO_WITNESS_CHECK":
+            res = m.WakeSleepConsolidationEngine.verify_two_witness_nonconstant(
+                list(payload.get("episodes") or [])
+            )
+            if not res.get("passed"):
+                return _fail(mode, str(res.get("reason") or "INSUFFICIENT_NONCONSTANT_WITNESSES"), result=res)
+            return _ok(mode, str(res.get("reason") or "NON_CONSTANT_2_WITNESS_VERIFIED"), res)
+        if op == "SLEEP_CONSOLIDATE":
+            res = eng.sleep_consolidate(skill_store=None)
+            return _ok(mode, "SLEEP_CYCLE_CONSOLIDATED", {"consolidation": res})
+        if op == "HOMEOSTATIC_HYGIENE":
+            res = eng.run_homeostatic_memory_hygiene(
+                skill_store=None,
+                assoc_memory_path=payload.get("assoc_memory_path"),
+                assoc_capacity=int(payload.get("assoc_capacity") or 512),
+            )
+            return _ok(mode, "HOMEOSTATIC_HYGIENE_RUN", res)
+        return _fail(mode, f"UNKNOWN_WAKE_SLEEP_OPERATION:{op}")
 
     if mode == "VERIFICATION_FIRST_MEMORY_BUS":
         from canonical.swe_kernel import canonical_memory_crystallizer_v1 as m

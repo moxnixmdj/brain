@@ -1019,6 +1019,14 @@ _FRONTIER_TRIGGER_SUPPLEMENTS: dict[str, tuple[str, ...]] = {
         "consolidate learning",
         "keep the store current",
     ),
+    "WAKE_SLEEP_CONSOLIDATION": (
+        "promote repair episode to permanent rule",
+        "check a learned rule is not a constant",
+        "expire stale rules and forget low value episodes",
+        "consolidate repair episodes",
+        "two independent witnesses",
+        "memory hygiene",
+    ),
     "VERIFICATION_FIRST_MEMORY_BUS": (
         "memory operating system",
         "forget one skill without damaging others",
