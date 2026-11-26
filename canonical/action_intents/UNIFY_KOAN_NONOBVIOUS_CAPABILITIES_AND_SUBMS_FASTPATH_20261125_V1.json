@@ -41,7 +41,7 @@
   },
   "benchmark_or_family_rank_authority": "NONE__UNIFIED_RUNTIME_AND_MODEL_ROUTING_INTEGRATION_ONLY",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::NONOBVIOUS_KOAN_KERNELS_AND_SECONDARY_SCAN_OVERHEAD_AT_UNIFIED_MODEL",
-  "canonical_base_commit": "9c43a3645e1da75a650710fa3301b28fe3d12eca",
+  "canonical_base_commit": "dcd4386b87162dca2fdd05a4783cd3542192f0b3",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": 0,
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
@@ -69,7 +69,7 @@
   "parent_capability": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
   "recursive_obs": {
-    "canonical_base_commit": "9c43a3645e1da75a650710fa3301b28fe3d12eca",
+    "canonical_base_commit": "dcd4386b87162dca2fdd05a4783cd3542192f0b3",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "Deleted linear O(N) full-table scans in find_source, find_any_source, find_research, and recall in favor of exact inverted postings",

@@ -1,0 +1,636 @@
+{
+ "schema": "BRAIN_EXPECTED_VALUE_CHANNEL_CENSUS_V1",
+ "generated": "2026-11-26T00:01:06Z",
+ "cost": {
+  "model_calls": 0,
+  "stored_parameters": 0,
+  "network_at_run_time": 0,
+  "duration_s": 10.1
+ },
+ "question": "On the tasks whose traceback names no source line, does the assertion's expected value point at the edit site?",
+ "rule": "A pointer that lands nowhere, or only in the test file, is not a channel.",
+ "tasks": 28,
+ "measured_no_frame": 24,
+ "any_value_found_in_source": 1,
+ "any_value_within_n_of_truth": 0,
+ "value_in_test_only": 3,
+ "rows": [
+  {
+   "sha": "f91ea793",
+   "status": "HAS_SOURCE_FRAME",
+   "skipped": true
+  },
+  {
+   "sha": "f1c57155",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 1,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/_structures.py": [
+     5,
+     6,
+     8,
+     9,
+     16,
+     16
+    ],
+    "src/packaging/direct_url.py": [
+     10,
+     10,
+     157,
+     175,
+     216,
+     229
+    ],
+    "src/packaging/pylock.py": [
+     35,
+     339,
+     364,
+     381,
+     406,
+     442
+    ]
+   },
+   "detail": [
+    {
+     "value": "file:///p...",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "0efe21aa",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AttributeError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     76,
+     77,
+     78,
+     79,
+     80,
+     81
+    ],
+    "src/packaging/requirements.py": [
+     52,
+     52,
+     53,
+     53,
+     53,
+     53
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "46167dcd",
+   "status": "HAS_SOURCE_FRAME",
+   "skipped": true
+  },
+  {
+   "sha": "8efde605",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     196,
+     197,
+     198
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "7d0611d4",
+   "status": "HAS_SOURCE_FRAME",
+   "skipped": true
+  },
+  {
+   "sha": "491af5d5",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 2,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     238,
+     238,
+     238,
+     238,
+     238,
+     238
+    ]
+   },
+   "detail": [
+    {
+     "value": "<Marker('python_version >= \"3.6\" and os_name",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "posix\" and platform_system == \"Linux\"')> == <Marker('(python_version >= \"3.6\" an",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "a03bde12",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/requirements.py": [
+     96,
+     96,
+     96,
+     96,
+     190,
+     191
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "cd91074b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/ranges.py": [
+     397,
+     399,
+     405,
+     1104,
+     1105,
+     1106
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "8c37b047",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "Failed",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/licenses/__init__.py": [
+     118,
+     118,
+     118
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "b1c439b0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/metadata.py": [
+     856,
+     1029
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "31b2d013",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 1,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     1,
+     1,
+     1,
+     270,
+     271,
+     272
+    ]
+   },
+   "detail": [
+    {
+     "value": "where 1 = len((InvalidRequirement('Expected semicolon (after name with no versio",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "bddb6903",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "Failed",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     272,
+     273,
+     274,
+     275,
+     529,
+     530
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "2d57ce2b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     126,
+     127,
+     155,
+     156,
+     157,
+     158
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "5706b87c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 3,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 1,
+   "truth_lines": {
+    "src/packaging/markers.py": [
+     399,
+     409,
+     439,
+     442,
+     443,
+     444
+    ],
+    "src/packaging/requirements.py": [
+     122
+    ]
+   },
+   "detail": [
+    {
+     "value": "python_version >= \"3.10\" and sys_platform",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "linux\"' is 'python_version >= \"3.10\" and sys_platform == \"linux",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "where 'python_version >= \"3.10\" and sys_platform == \"linux\"' = str(<Marker('pyth",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "4b243af9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AttributeError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/requirements.py": [
+     6,
+     7,
+     8,
+     9,
+     17,
+     17
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "2aada00b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "Failed",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/specifiers.py": [
+     250
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "2c87a33f",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 2,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 1,
+   "truth_lines": {
+    "src/packaging/licenses/__init__.py": [
+     110,
+     111,
+     112,
+     113,
+     114,
+     115
+    ]
+   },
+   "detail": [
+    {
+     "value": "LicenseRef-mit OR LicenseRef-mit",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "LicenseRef-MIT OR LicenseRef-MIT",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "959bb79c",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/dependency_groups.py": [
+     158,
+     161,
+     162,
+     163,
+     164,
+     165
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "d17cfaf0",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 3,
+   "any_value_found_in_source": 1,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/_parser.py": [
+     397,
+     397,
+     397,
+     397
+    ]
+   },
+   "detail": [
+    {
+     "value": "<MagicMock n...40605652496'>",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "plain",
+     "in_source": {
+      "src/packaging/_parser.py": [
+       54
+      ]
+     },
+     "within_10_of_truth": []
+    },
+    {
+     "value": "<MagicMock name='literal_eval()' id='139840605652496'>",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "2602dd07",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "Failed",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/_tokenizer.py": [
+     85
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "23669b1b",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "Failed",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/pylock.py": [
+     28,
+     650,
+     650,
+     650,
+     650,
+     651
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "55cbf1b9",
+   "repo": "pypa/packaging",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 1,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/packaging/_ranges.py": [
+     181,
+     182,
+     189,
+     189,
+     189,
+     189
+    ]
+   },
+   "detail": [
+    {
+     "value": "where True = <LowerBound [None>.inclusive",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "e1fdb94b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     36,
+     36,
+     36,
+     36,
+     36,
+     36
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "d1d6a857",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     11,
+     53,
+     53,
+     53,
+     53,
+     53
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "4e245a4b",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 2,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 1,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     74,
+     75,
+     76,
+     77,
+     78,
+     79
+    ]
+   },
+   "detail": [
+    {
+     "value": "a bytes-like object is required, not 'str",
+     "in_source": {},
+     "within_10_of_truth": []
+    },
+    {
+     "value": "Expected str object, not 'bytes",
+     "in_source": {},
+     "within_10_of_truth": []
+    }
+   ]
+  },
+  {
+   "sha": "794c8e50",
+   "repo": "hukkin/tomli",
+   "status": "MEASURED_NO_FRAME",
+   "failure_class": "AssertionError",
+   "expected_candidates": 0,
+   "any_value_found_in_source": 0,
+   "any_value_within_10_of_truth": 0,
+   "value_in_test_only": 0,
+   "truth_lines": {
+    "src/tomli/_parser.py": [
+     78,
+     670,
+     670,
+     670,
+     670,
+     670
+    ]
+   },
+   "detail": []
+  },
+  {
+   "sha": "8b962e13",
+   "status": "HAS_SOURCE_FRAME",
+   "skipped": true
+  }
+ ],
+ "authority": "NONE -- offline corpus measurement; no solve claimed, no benchmark row"
+}
