@@ -3390,3 +3390,63 @@ def propose_egraph_algebraic_rewrites(source_text: str, rule: dict[str, Any] | A
                 return proposals
     return proposals
 
+
+
+def self_check() -> dict[str, Any]:
+    """Congruence closure on a five-node graph, with the two controls that matter.
+
+    An e-graph that merges everything passes every "these two are equal" test and is worthless, so
+    the constants below are deliberately distinct and one of them must stay outside the merged
+    class. The second control is the module's own representation: constants are leaves with no
+    children, so two `ENode("const", ())` are the *same* node -- the check pins that structural
+    identity rather than discovering it later as a surprise.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    costs = {"add": 1, "var:a": 1, "const:0": 1, "const:1": 1}
+    graph = EGraph()
+    a = graph.add(ENode("var:a", ()))
+    zero = graph.add(ENode("const:0", ()))
+    one = graph.add(ENode("const:1", ()))
+    check("distinct leaves get distinct classes",
+          len({graph.find(a), graph.find(zero), graph.find(one)}) == 3)
+
+    same_leaf = graph.add(ENode("const:1", ()))
+    check("an identical node is deduplicated into the existing class", graph.find(same_leaf) == graph.find(one))
+
+    a_plus_zero = graph.add(ENode("add", (a, zero)))
+    a_plus_one = graph.add(ENode("add", (a, one)))
+    check("different children give different classes before any rewrite",
+          graph.find(a_plus_zero) != graph.find(a_plus_one))
+
+    graph.union(a_plus_zero, a)          # the law under test: a + 0 == a
+    graph.rebuild()
+    check("the rewrite merges the law's two sides", graph.find(a_plus_zero) == graph.find(a))
+
+    outer_left = graph.add(ENode("add", (a_plus_zero, one)))
+    outer_right = graph.add(ENode("add", (a, one)))
+    check("congruence closure propagates the merge to parents",
+          graph.find(outer_left) == graph.find(outer_right))
+
+    check("negative control: a + 1 is still not a",
+          graph.find(a_plus_one) != graph.find(a))
+
+    cost, node = graph.extract_best(outer_right, costs)
+    check("extraction returns the cheapest representative", node.op == "add" and cost == 3)
+
+    stable = sorted(graph.classes)
+    graph.rebuild()
+    check("rebuild is idempotent", sorted(graph.classes) == stable)
+
+    total = 9
+    return {
+        "schema": "BRAIN_EGRAPH_AND_DEDUCTIVE_SYNTHESIZER_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }

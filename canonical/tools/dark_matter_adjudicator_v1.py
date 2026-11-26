@@ -280,6 +280,8 @@ def _to_verdict(name: str, path: str, loc: int, probe: _Probe) -> Verdict:
 
 
 def adjudicate_one(path: pathlib.Path, *, timeout: float, probe: bool = True) -> Verdict:
+    # Callers pass relative paths; the module name and the recorded path both come from ROOT.
+    path = pathlib.Path(path).resolve()
     name = module_name(path)
     rel = str(path.relative_to(ROOT))
     loc = len(path.read_text(encoding="utf-8", errors="replace").splitlines())
@@ -308,7 +310,7 @@ def run(
     everything: bool = False,
 ) -> Dict[str, Any]:
     if modules is not None:
-        candidates = list(modules)
+        candidates = [pathlib.Path(m) for m in modules]
     elif everything:
         candidates = all_modules()
     else:
@@ -337,8 +339,14 @@ def run(
                 verdicts.append(fut.result())
             except Exception as exc:  # noqa: BLE001 - a worker crash is a BROKEN candidate
                 p = futures[fut]
-                verdicts.append(Verdict(module_name(p), str(p.relative_to(ROOT)), 0, BROKEN,
-                                        "worker", 0.0, {"error": f"{type(exc).__name__}: {exc}"}))
+                # The fail-closed path must not itself raise: a candidate that cannot even be named
+                # is still a verdict, not a traceback that aborts the other 1,991 measurements.
+                try:
+                    label, rel = module_name(p), str(p.relative_to(ROOT))
+                except Exception:  # noqa: BLE001
+                    label = rel = str(p)
+                verdicts.append(Verdict(label, rel, 0, BROKEN, "worker", 0.0,
+                                        {"error": f"{type(exc).__name__}: {exc}"}))
 
     counts = {v: 0 for v in VERDICTS}
     for verdict in verdicts:
