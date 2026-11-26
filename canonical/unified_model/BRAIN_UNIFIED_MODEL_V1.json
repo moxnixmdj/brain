@@ -31232,12 +31232,12 @@
   "routing_tokens": 2373,
   "skills": 18,
   "source_index_entry_points": 557,
-  "source_index_modules": 2237
+  "source_index_modules": 2239
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "8ee9c7f8a6fbe02b74a0841a1e36b23d47cd652efbd1441f1ce8dcf9944a4d57"
+  "value": "5a647a51eff3449e72c1d560e85bd020d0b6d9cbf43bf5b9818bec58e1693689"
  },
  "engines": [
   {
@@ -288931,7 +288931,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "9d8820abcb81c71e68915f3f566de86f973acacd5f69b93a3aa35497406bf5dd",
+   "sha256": "32ca657ffbe4602737f66ad429325d0a9ace1f6a4332ce833745480b59998aea",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 21,
    "symbols": [
@@ -316366,7 +316366,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/live_brain_runtime_v1.py",
-   "sha256": "a4506a3c7a03a35a405973802deb0384070a16bd38064a881bedd9fd17770a8d",
+   "sha256": "c18c041b93b8ab8418a47362fc4cc0cc95a0d15c6ace9108cfbfaf96005db1ce",
    "summary": "Unified live execution subruntime V1.",
    "symbol_count": 34,
    "symbols": [
@@ -321756,6 +321756,52 @@
     "surface": 1,
     "survive": 1,
     "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/oe_sygus_synthesizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/oe_sygus_synthesizer_v1.py",
+   "sha256": "31727e1dfefc207cd405c3970aa9084468d5f2876d9c1ae2be68618989254df0",
+   "summary": "Unified Multi-Language Observational-Equivalence SyGuS + EUSolver Synthesizer v1.",
+   "symbol_count": 11,
+   "symbols": [
+    "Expr",
+    "_abstract_expr_template",
+    "_eval_expr",
+    "_is_num",
+    "_normalize_envs",
+    "_sig_atom",
+    "_sig_vec",
+    "abstract_synthesized_repair",
+    "emit_expr",
+    "synthesize_separating_predicates",
+    "synthesize_value_expressions"
+   ],
+   "terms": {
+    "abstract_expr_template": 1,
+    "abstract_synthesized_repair": 1,
+    "emit_expr": 1,
+    "eusolver": 1,
+    "eval_expr": 1,
+    "expr": 1,
+    "is_num": 1,
+    "multi-language": 1,
+    "normalize_envs": 1,
+    "observational-equivalence": 1,
+    "oe": 1,
+    "sig_atom": 1,
+    "sig_vec": 1,
+    "sygus": 2,
+    "synthesize_separating_predicates": 1,
+    "synthesize_value_expressions": 1,
+    "synthesizer": 2,
+    "unified": 1,
+    "v1": 2
    }
   },
   {
@@ -345651,7 +345697,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/solve_v1.py",
-   "sha256": "0bba15acac3238b0778a5ac57a86fb838d1705107410f6c0d59fbb8432fe88bd",
+   "sha256": "0212ae65a2fd32a89109d9df4a73b980c10f8bd1405c08b6f17a43d87160a092",
    "summary": "The whole system, reduced to what cannot be removed.",
    "symbol_count": 9,
    "symbols": [
@@ -346978,6 +347024,40 @@
     "stochastic": 1,
     "transform": 1,
     "universality": 1,
+    "v1": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/stochastic_synthesizer_v1.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/stochastic_synthesizer_v1.py",
+   "sha256": "c4b84ea7fd018079c1acf0409c1f1b42fcb37675b82a954c4c3b3a6dc71ff902",
+   "summary": "Stochastic (random-search) SyGuS synthesizer over the OE grammar.",
+   "symbol_count": 5,
+   "symbols": [
+    "_level2c_exhaustive",
+    "_random_expr",
+    "ensemble_value_expressions",
+    "synthesize_body_from_examples",
+    "synthesize_value_expressions_stochastic"
+   ],
+   "terms": {
+    "ensemble_value_expressions": 1,
+    "grammar": 1,
+    "level2c_exhaustive": 1,
+    "oe": 1,
+    "over": 1,
+    "random-search": 1,
+    "random_expr": 1,
+    "stochastic": 2,
+    "sygus": 1,
+    "synthesize_body_from_examples": 1,
+    "synthesize_value_expressions_stochastic": 1,
+    "synthesizer": 2,
     "v1": 1
    }
   },

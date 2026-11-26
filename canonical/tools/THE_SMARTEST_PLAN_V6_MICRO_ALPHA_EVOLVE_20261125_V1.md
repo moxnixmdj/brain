@@ -313,3 +313,35 @@ Cumulative loop ledger on self-generated families: 1-var 40/40 @ ~920 ms;
 2-var 28/30 @ ~1030 ms; 0 LLM samples, 0 tokens, whole session. Certified
 HARD-51 reach: 0 — unchanged, different problem class, still the binding
 number for anything claiming SWE-frontier parity.
+
+## §12 "At the unified model", made literal (this round)
+
+The registry already HAD the door: `engine:REPAIR_SYNTHESIS` routes, via the
+cognitive fabric's front `run()`, to `live_brain_runtime_v1.
+synthesize_failure_repair`. What it did not have was our loop behind it — the
+function only spoke R3-fingerprint. Move: an additive examples-fallback —
+when a request carries `arg_names` + `(args, expected)` examples and no
+fingerprint, answer from the verified ensemble (`synthesize_body_from_examples`).
+Fingerprint-shaped requests keep the old path byte-for-byte.
+
+Measured through the front door, not the function:
+`fabric.run({"mode":"REPAIR_SYNTHESIS","payload":{...6 points...}})` ->
+`inner_pass: true`, body `return ((x * 3) if (x >= 0) else ((x + 1) * 3))`,
+**334 ms, 0 LLM samples**, with the honesty fields in the payload itself
+(`authority: NONE`, `non_claim: "spec-consistent, not target-identical"`).
+
+Carrier files are content-addressed, so the registry was RECOMPILED through
+the repo's own compiler (`compile_brain_unified_model_v1.py`) rather than
+hand-edited. Side result: the three long-standing "stale artifact" failures
+(partition exactness, compile determinism, fixed point) — failing since the
+sandbox checkout was made — **now pass: 62/62 + 927 subtests**, because the
+committed artifact finally matches the compiled one. Source index grew
+2237 -> 2239 modules (this session's new files), routing tokens 1729 -> 2373.
+
+Frontier context this round (fresh): Cognition's **SWE-2.1 released 2026-11-24**
+roughly DOUBLED its benchmarks (Terminal-Bench 4.1 24.2->50.0) via pure RL on
+Kimi K3 — the frontier is spending gradient compute on exactly the reliability
+axis our zero-token loop addresses at the spec-verified seam; Opus 5.5 holds
+SWE-bench Pro 89.9 / TB 2.1 87.6. We do not chase those numbers; the ledger
+stays: engines reachable FROM the unified model's own front door, priced in ms
+and tokens, HARD-51 reach still 0 and stated as the gap.
