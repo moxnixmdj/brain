@@ -2311,6 +2311,90 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["op"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR": {
+        "domain": "SYNTHESIS_AND_INDUCTION",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "FutamuraSkillCompilerGrammarKernel",
+        "summary": "Wave 47 Futamura partial-evaluation kernel compiling slow UI/CLI traces to fastest causal layers (<5ms parameterized skills), running symbolic Mealy + DBSP + conformal e-value cycles, and solving typed CLI/A11y action-grammar goals at K3=0.",
+        "triggers": [
+            "futamura projection partial evaluation compile away frontier",
+            "causal trace to skill compiler anti unify workflow",
+            "guide action grammar interface action grammar a11y",
+            "symbolic mealy dbsp conformal evalue",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "ReverseTomographyAngelicLensSWEKernel",
+        "summary": "Wave 47 reverse-execution tomography kernel backpropagating failing output residuals to AST patches, certifying ddmin minimal witnesses, synthesizing invertible bidirectional FST/lenses with L3 negative-space refutation pruning, and reading demands from failing assertions for counterfactual interior synthesis at K3=0.",
+        "triggers": [
+            "reverse tomography algebra backward residual ast repair",
+            "angelic lens cow repair bidirectional fst lens",
+            "assertion is the demand counterfactual spec repair",
+            "ddmin shrink certified negative space invariant store",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT": {
+        "domain": "VERIFICATION_AND_EPISTEMIC_GATES",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "MeaningEGraphVericodingProofCutKernel",
+        "summary": "Wave 47 e-graph equality saturation & vericoding kernel unifying EGraph optimal extraction, Universal Meaning UIR canonicalization, mutation-tested verifier falsification (can_say_no), sound Python request semantic acceptance cells, orthogonal patch merging, and exact lexicographic global proof-cut compilation at K3=0.",
+        "triggers": [
+            "egraph equality saturation egglog universal meaning uir",
+            "vericoding prove verifier can say no semantic acceptance",
+            "global proof cut compiler dominance deletion frozen universe",
+            "orthogonal patch merge deductive synthesizer",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU": {
+        "domain": "COMPUTER_USE_AND_TERMINAL",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "EvolvingInterfaceByteEffectHCUKernel",
+        "summary": "Wave 48 Agent-S4 evolving-interface HCU kernel anti-unifying trajectories into typed CLI/tool interfaces, computing Petri-net dominator cut-vertices for checkpointing, executing crash-recoverable transactional commits, and enforcing Ring-0 byte-format & directory-diff effect oracles at K3=0.",
+        "triggers": [
+            "agent s4 evolving agent interfaces anti unify templates",
+            "petri dominator cut vertices universal computer agent",
+            "durable transactional commit crash recovery cow sandbox",
+            "ring 0 byte effect oracle unauthorized write diff",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "FiveTimescaleSleepCrystallizerCSRMemoryEngine",
+        "summary": "Wave 48 five-timescale verification-first memory & sleep-time crystallizer uniting bi-temporal supersession, ADWIN+BOCPD+Page-Hinkley drift detection, zero-copy binary mmap CSR slot/postings indices, cross-language Python/JS/C Semantic IR anti-unification, and 5-gate epistemic admission at K3=0.",
+        "triggers": [
+            "five timescale sleep time compute memory crystallizer",
+            "mmap csr binary slot index zero copy postings",
+            "cross language semantic ir anti unification 5 gate admission",
+            "verification first memory bus bitemporal drift detector",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+        "entrypoint": "MetaCircularConceptRefusalAdjudicatorKernel",
+        "summary": "Wave 48 meta-circular self-improvement & adjudication kernel verifying pure-AST organs behind SelfPatchFirewall + Ring0SelfReferee, inventing higher-order Plotkin LGG abstractions (LILO/Stitch fold_scan) and periodic operators, turning refusals into active-inference EFE curricula, and running subprocess dark-matter adjudication + static K3=0 endpoint audits.",
+        "triggers": [
+            "meta circular organ graph self patch firewall ring 0 referee",
+            "higher order plotkin lgg lilo stitch concept library",
+            "refusal is the curriculum active inference efe experiment",
+            "dark matter adjudicator proven verdict k3 model surface audit",
+        ],
+        "required_inputs": ["op"],
+        "declared_dependencies": [],
+    },
     "METAMORPHIC_HABITATION_ZIPPER": {
         "domain": "SWE_LOCALIZATION_AND_REPAIR",
         "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
@@ -3545,6 +3629,105 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/swe_kernel/skill_scope_bundle_v1.py",
             "canonical/swe_kernel/learned_skill_verdict_v1.py",
             "canonical/swe_kernel/hierarchical_skill_library_v1.py",
+        ],
+    },
+    "futamura_reverse_tomography_egraph_vericoding": {
+        "external_names": [
+            "futamura projection",
+            "partial evaluation",
+            "compile away the frontier",
+            "reverse execution tomography",
+            "bidirectional fst lens",
+            "egglog",
+            "relational equality saturation",
+            "equality saturation",
+            "vericoding",
+            "goedel prover",
+            "pypantograph",
+            "global proof cut",
+            "assertion is the demand",
+            "counterfactual spec repair",
+            "ddmin shrink certified",
+            "locagent",
+            "repomem",
+            "joern cpg",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR",
+            "engine:LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE",
+            "engine:LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/reverse_tomography_algebra_v1.py",
+            "canonical/swe_kernel/angelic_lens_cow_repair_v1.py",
+            "canonical/swe_kernel/egraph_and_deductive_synthesizer_v1.py",
+            "canonical/swe_kernel/semantic_causal_engine_v1.py",
+            "canonical/runtime/global_proof_cut_compiler.py",
+        ],
+    },
+    "agent_s4_evolving_interfaces_sleep_crystallizer_mmap": {
+        "external_names": [
+            "agent s4",
+            "evolving agent interfaces",
+            "coact 1",
+            "surfer h holo1",
+            "petri dominator cut vertices",
+            "ring 0 byte effect oracle",
+            "sleep time compute",
+            "feldera dbsp",
+            "incremental view maintenance",
+            "agent zero memory",
+            "five timescale memory crystallizer",
+            "mmap csr index",
+            "cross language semantic ir",
+            "lact lacet ttr compressor",
+            "bispace lifelong editing",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU",
+            "engine:LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/swe_kernel/universal_computer_agent_v1.py",
+            "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+            "canonical/runtime/byte_effect_oracle_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/runtime/mmap_csr_slot_index_v1.py",
+        ],
+    },
+    "meta_circular_plotkin_lgg_active_inference_adjudicator": {
+        "external_names": [
+            "meta circular organ graph",
+            "self patch firewall",
+            "higher order plotkin lgg",
+            "lilo stitch",
+            "dreamcoder library learning",
+            "gepa genetic pareto",
+            "sica self improving coding agent",
+            "absolute zero reasoner",
+            "active inference efe",
+            "expected free energy context acquisition",
+            "optimal question asking",
+            "refusal is the curriculum",
+            "dark matter adjudicator",
+            "proven self check verdict",
+            "model call surface audit",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR",
+        ],
+        "koan_modules": [
+            "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+            "canonical/swe_kernel/meta_circular_organ_graph_v1.py",
+            "canonical/swe_kernel/recursive_self_architect_v1.py",
+            "canonical/swe_kernel/concept_library_v1.py",
+            "canonical/tools/the_refusal_is_the_curriculum_v1.py",
+            "canonical/tools/the_right_question_is_an_experiment_v1.py",
+            "canonical/tools/dark_matter_adjudicator_v1.py",
+            "canonical/tools/model_call_surface_audit_v1.py",
         ],
     },
 }
@@ -6385,6 +6568,48 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         eng = inputs.get("engine") or ThreeTierZeroForgettingContinualKernel()
         res = eng.run(inputs)
         return _ok(mode, "W46_THREE_TIER_CONTINUAL", res) if res.get("pass") else _fail(mode, "W46_THREE_TIER_CONTINUAL_FAILED", res)
+
+    if mode == "LEAPFROG_W47_FUTAMURA_SKILL_COMPILER_GRAMMAR":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import FutamuraSkillCompilerGrammarKernel
+
+        eng = inputs.get("engine") or FutamuraSkillCompilerGrammarKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_FUTAMURA_SKILL_COMPILER", res) if res.get("pass") else _fail(mode, "W47_FUTAMURA_SKILL_COMPILER_FAILED", res)
+
+    if mode == "LEAPFROG_W47_REVERSE_TOMOGRAPHY_ANGELIC_LENS_SWE":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import ReverseTomographyAngelicLensSWEKernel
+
+        eng = inputs.get("engine") or ReverseTomographyAngelicLensSWEKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_REVERSE_TOMOGRAPHY_LENS_SWE", res) if res.get("pass") else _fail(mode, "W47_REVERSE_TOMOGRAPHY_LENS_SWE_FAILED", res)
+
+    if mode == "LEAPFROG_W47_MEANING_EGRAPH_VERICODING_PROOF_CUT":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import MeaningEGraphVericodingProofCutKernel
+
+        eng = inputs.get("engine") or MeaningEGraphVericodingProofCutKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W47_MEANING_EGRAPH_VERICODING", res) if res.get("pass") else _fail(mode, "W47_MEANING_EGRAPH_VERICODING_FAILED", res)
+
+    if mode == "LEAPFROG_W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import EvolvingInterfaceByteEffectHCUKernel
+
+        eng = inputs.get("engine") or EvolvingInterfaceByteEffectHCUKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU", res) if res.get("pass") else _fail(mode, "W48_EVOLVING_INTERFACE_BYTE_EFFECT_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import FiveTimescaleSleepCrystallizerCSRMemoryEngine
+
+        eng = inputs.get("engine") or FiveTimescaleSleepCrystallizerCSRMemoryEngine()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY", res) if res.get("pass") else _fail(mode, "W48_FIVE_TIMESCALE_SLEEP_CSR_MEMORY_FAILED", res)
+
+    if mode == "LEAPFROG_W48_META_CIRCULAR_REFUSAL_ADJUDICATOR":
+        from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import MetaCircularConceptRefusalAdjudicatorKernel
+
+        eng = inputs.get("engine") or MetaCircularConceptRefusalAdjudicatorKernel()
+        res = eng.run(inputs)
+        return _ok(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR", res) if res.get("pass") else _fail(mode, "W48_META_CIRCULAR_REFUSAL_ADJUDICATOR_FAILED", res)
 
     if mode == "METAMORPHIC_HABITATION_ZIPPER":
         from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m

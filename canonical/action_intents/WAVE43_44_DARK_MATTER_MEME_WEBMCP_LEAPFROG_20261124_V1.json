@@ -37,7 +37,9 @@
       "canonical/runtime/creature_runtime_v1.py",
       "canonical/tests/test_frontier_leapfrog_wave43_44_v1.py",
       "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
-      "canonical/tests/test_frontier_leapfrog_wave45_46_v1.py"
+      "canonical/tests/test_frontier_leapfrog_wave45_46_v1.py",
+      "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+      "canonical/tests/test_frontier_leapfrog_wave47_48_v1.py"
     ],
     "route_class": "INTEGRATE",
     "route_id": "WAVE43_44_DARK_MATTER_23_ORGANS_MEME_WEBMCP_K3_ZERO",
@@ -46,7 +48,7 @@
   },
   "benchmark_or_family_rank_authority": "Producer sandbox measurements and repository verifier suites; zero external model calls and zero claims of terminal benchmark discharge.",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::23 high-leverage DARK modules (git-history AST template mining, online alpha-canonical repair, cross-file causal dual-slicing, constant-hole CEGIS literal refinement, truthiness guard rewriting, anti-slop input-dependency gating, minimax hypothesis-lattice interrogation, filing-key collision diagnostics, and real structural GuiRoom/OSWorld 2.1 AT-SPI surfaces) remained unwired from UnifiedModel and Creature, and the unified runtime lacked MEME multi-hop DBSP/AGM Cascade & Absence memory, Chrome 150+ document.modelContext WebMCP lifting, and Nested-CMS/SkillRL/GEA/RQGM evolution.",
-  "canonical_base_commit": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+  "canonical_base_commit": "29179436e184a1475c22fb9688d11401a477aaa6",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "capability_credit_delta": {
     "w43_cow_contrastive_minimax_factory": "Awakened the_counterexample_is_the_next_experiment_v1, the_branch_is_the_model_v1, the_refusal_is_the_other_half_v1, the_index_is_the_bottleneck_v1, verified_capability_bridge_index_v1, and counterexample_guided_causal_architecture_synthesizer_v1 with real POSIX os.fork CoW contrastive minimax pinning.",
@@ -60,7 +62,13 @@
     "w45_quotient_angelic_probe_inducer": "Awakened differential_witness_inversion_v1, the_goal_is_a_quotient_of_the_trace_v1, force_the_value_and_see_v1, the_vocabulary_must_be_computed_not_written_v1, a_contrast_is_a_probe_v1, an_actions_effect_is_a_provenance_map_v1, the_width_of_a_guard_v1, and systematic_exploration_v1.",
     "w46_anti_manufactured_confidence_memory": "Awakened PR #7145 meme_protocol_memory_v1 (6-op DependencyMemory), a_fact_is_a_conjunction_of_its_readers_v1, the_check_names_its_object_v1, residual_witness_retrieval_compiler_v1, and composition_state_capsule_v2 with Kwon 2026 Manufactured-Confidence single-source hearsay quarantine and LAPSE progressive/bounded temporal-shape fidelity.",
     "w46_anytime_valid_evalue_evolution_gate": "Awakened verifier_falsification_v1, learned_skill_verdict_v1, skill_scope_bundle_v1, and capability_selection_retrieval_v1 with SCoRE conformal e-values, Ville's inequality supermartingale gate, cross-verifier conditional correlation phi < 0.5, and Thompson-poisoning AST defense.",
-    "w46_three_tier_zero_forgetting_continual": "Awakened hierarchical_skill_library_v1 inside a 3-tier continual kernel uniting Tier-0 O(1) symbolic unlearning, Tier-1 Doc-to-LoRA (<50 MB) adapter manifests, and Tier-2 LRCP Gram-Schmidt orthogonal-subspace projection (<1e-12 historical interference) + sparse memory slot gating."
+    "w46_three_tier_zero_forgetting_continual": "Awakened hierarchical_skill_library_v1 inside a 3-tier continual kernel uniting Tier-0 O(1) symbolic unlearning, Tier-1 Doc-to-LoRA (<50 MB) adapter manifests, and Tier-2 LRCP Gram-Schmidt orthogonal-subspace projection (<1e-12 historical interference) + sparse memory slot gating.",
+    "w47_futamura_skill_compiler_grammar": "Awakened futamura_leapfrog_kernel_v1, causal_trace_to_skill_compiler_v1, the_guide_is_an_action_grammar_v1, and interface_action_grammar_v1 into a live Futamura trace-to-skill compiler (<5ms parameterized skills) + Mealy/DBSP/conformal e-value + typed A11y/CLI grammar.",
+    "w47_meaning_egraph_vericoding_proof_cut": "Awakened egraph_and_deductive_synthesizer_v1, semantic_causal_engine_v1, causal_cegis_inventor_v1, canonical_oracle_vericoding_spine_v1, python_software_request_semantic_acceptance_v1, and global_proof_cut_compiler with E-graph equality saturation, vericoding tautology rejection, sound Python semantic acceptance cells, orthogonal patch merging, and exact lexicographic proof cuts.",
+    "w47_reverse_tomography_angelic_lens_swe": "Awakened reverse_tomography_algebra_v1, angelic_lens_cow_repair_v1, cow_angelic_zygote_v1, cow_lens_fuzz_and_negative_space_v1, the_assertion_is_the_demand_v1, and python_counterfactual_spec_repair_v1 with certified ddmin shrinking, invertible bidirectional FST/lenses, L3 negative-space pruning, and assertion-demand counterfactual term generation.",
+    "w48_evolving_interface_byte_effect_hcu": "Awakened universal_computer_agent_v1, canonical_cu_sandbox_spine_v1, computer_env_v1, and byte_effect_oracle_v1 for Agent-S4 evolving CLI interfaces, Petri dominator cut-vertices, crash-recoverable transactional WAL commits, and Ring-0 fail-closed byte-effect & directory-diff oracles.",
+    "w48_five_timescale_sleep_csr_memory": "Awakened canonical_memory_crystallizer_v1, mmap_csr_slot_index_v1, epistemic_admission_and_self_play_v1, and verified_skill_crystallizer_v1 unifying 5-timescale bi-temporal verification-first memory, zero-copy mmap CSR postings, cross-language Python/JS/C IR anti-unification, and 5-gate epistemic admission with zero LLM write amplification.",
+    "w48_meta_circular_refusal_adjudicator": "Awakened meta_circular_organ_graph_v1, recursive_self_architect_v1, concept_library_v1, unified_epistemic_portfolio_v1, the_refusal_is_the_curriculum_v1, the_right_question_is_an_experiment_v1, a_refusal_is_a_specification_v1, does_the_refusal_name_the_missing_word_v1, dark_matter_adjudicator_v1, and model_call_surface_audit_v1 with pure-AST firewall/referee, higher-order Plotkin LGG (fold_scan), active-inference EFE refusal curricula, subprocess PROVEN adjudication, and static K3=0 endpoint audit."
   },
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "causal_blocker": "23 high-leverage DARK modules (git-history AST template mining, online alpha-canonical repair, cross-file causal dual-slicing, constant-hole CEGIS literal refinement, truthiness guard rewriting, anti-slop input-dependency gating, minimax hypothesis-lattice interrogation, filing-key collision diagnostics, and real structural GuiRoom/OSWorld 2.1 AT-SPI surfaces) remained unwired from UnifiedModel and Creature, and the unified runtime lacked MEME multi-hop DBSP/AGM Cascade & Absence memory, Chrome 150+ document.modelContext WebMCP lifting, and Nested-CMS/SkillRL/GEA/RQGM evolution.",
@@ -92,9 +100,9 @@
     "success_probability_lcb": "0.5",
     "wall_clock_cost_ub": 1
   },
-  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 8/8 test_frontier_leapfrog_wave45_46_v1 PASS; 8/8 test_frontier_leapfrog_wave43_44_v1 PASS; 187/187 total regression tests PASS (Waves 40-46, PR #7145 Wave 42 MEME, UnifiedModel, Goal Compiler, Continuous OBS, Executor Broker); 246 engines (220 federated), 100 awakened DARK modules across Waves 40-46, 1.000 DOMAIN_ATLAS_V1 route recall across all 7 domains (0 hidden leaders), 7,533 LOC Elon Law PASS (< 7,534).",
+  "measured_effect": "38/38 verify_brain_unified_model_v1 PASS; 8/8 test_frontier_leapfrog_wave47_48_v1 PASS (self_check 7/7 + subprocess dark_matter_adjudicator_v1 PROVEN + 0 K3 endpoint hits); 8/8 test_frontier_leapfrog_wave45_46_v1 PASS; 8/8 test_frontier_leapfrog_wave43_44_v1 PASS; 145/145 unified regression tests PASS; 252 engines (226 federated), 133 awakened DARK modules across Waves 40-48, 7,533 LOC Elon Law PASS (< 7,534).",
   "next_step": "Run external Dockerized SWE-bench Pro and OSWorld-Verified independent evaluations using the Wave 40-42 4-rung architecture with optional local open-weight Rung-3 proposer weights (Qwen3.8-27B / CWM-32B) behind CHASE/HDA/Staged-NFV.",
-  "parent_capability": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py + canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
+  "parent_capability": "canonical/runtime/wave43_44_dark_matter_meme_webmcp_leapfrog_v1.py + canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py + canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py + canonical/runtime/unified_hidden_capability_federation_v1.py + canonical/runtime/brain_unified_model_v1.py + canonical/runtime/creature_runtime_v1.py",
   "probe_specific": false,
   "progress_class": "VERIFIED_RELIABILITY_GENERALIZATION_OR_EFFICIENCY_GAIN",
   "progress_evidence_paths": [
@@ -104,11 +112,13 @@
     "canonical/runtime/creature_runtime_v1.py",
     "canonical/tests/test_frontier_leapfrog_wave43_44_v1.py",
     "canonical/runtime/wave45_46_anytime_valid_quotient_metamorphic_hcu_v1.py",
-    "canonical/tests/test_frontier_leapfrog_wave45_46_v1.py"
+    "canonical/tests/test_frontier_leapfrog_wave45_46_v1.py",
+    "canonical/runtime/wave47_48_futamura_tomography_egraph_crystallizer_v1.py",
+    "canonical/tests/test_frontier_leapfrog_wave47_48_v1.py"
   ],
   "real_outcome": "Wave 43 & Wave 44 Frontier Leapfrog: UnifiedModel and Creature now unify 23 MORE previously DARK high-leverage modules (67 total awakened DARK modules across Waves 40-44) and 6 newly federated engines (238 total engines / 212 federated, K3=0 default, $0 spend, Elon Law 7,527 < 7,534 LOC): Wave 43 (GitHistorySeededRepairKernel mining pre-base git history into AST templates + online alpha-canonical folding + operator-swap generalization + FixedBench already-passing abstention; TraceLiteralCausalSliceGateKernel awakening ARISE/CausalRepair cross-file dual-slicing + constant-hole CEGIS regex/literal repair + truthiness rewriting + anti-slop repair_input_dependency_gate_v1; CoWContrastiveMinimaxFactoryKernel turning 1 demo into POSIX os.fork CoW contrastive single-feature interventions + exact minimax partition-lattice interrogation + filing-key collision diagnostics) plus Wave 44 (MEMEDBSPCascadeAbsenceMemoryEngine conquering all 6 MEME benchmark tasks at 1.000 including multi-hop DBSP/AGM Dependency Cascade and Formal Absence Witnesses + OpenViking L0/L1/L2 tiers + DeltaMem residual skill trees + MemRL Q-values; WebMCPGuiRoomOSWorldHCUKernel awakening gui_room_v1 + OSWorld 2.1 AT-SPI parse_a11y/typed PyAutoGUI + Chrome 150+ document.modelContext WebMCP compiler; and NestedSkillRLRQGMGEAContinualKernel unifying Google Nested Learning CMS clock bands + SkillRL counterfactual failure SkillBank + GEA group experience sharing + RQGM anchor-gated evaluator co-evolution with selective utility erasure), with 1.000 DOMAIN_ATLAS_V1 route recall across all 7 domains.",
   "recursive_obs": {
-    "canonical_base_commit": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+    "canonical_base_commit": "29179436e184a1475c22fb9688d11401a477aaa6",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "reimplementing 24 existing DARK modules from scratch",
@@ -337,7 +347,7 @@
     "real_outcome": "UnifiedModel and Creature now unify 44 previously DARK high-leverage modules and 12 newly federated Wave 40-42 frontier engines (231 total engines / 205 federated, K3=0 default, $0 spend, Elon Law 7,511 < 7,534 LOC): Wave 40 (Epistemic SWE E-Graph/Region-SSA/Angelic-CEGIS/Causal-Nexus/Grammar-Closed repair in POSIX CoW forks; One-Shot Version-Space/Evidence-Demand/Settlement/Hypothesis-Classes/Law-Checked Operator Acquisition/Transfer; Simular Agent-S4 Shadow-Interface Compiler + Microsoft HCU 3-channel router; MIT Out-of-Core RLM workspace; Hindsight 4-Network bi-temporal git-diffable memory + DeepSeek Engram + Sleep Knowledge Seeding + TMA-NM; Staged Goal-Blind NFV + CHASE + Harness-Delta Attribution + Hill Sampling; Meta Self-Play SWE-RL + CMU Steer-Don't-Solve + atomic WAL commit) plus Wave 41-42 (Strict 4-rung Pluggable Rung-3 Open-Weight Proposer with K3=0 abstention & live KL-RL JitRL modulation; Whitebox Trace Abduction/Ochiai + Angelic OE + E-graph CEGIS + Whitebox Introspector; TTPO + OPSD label-free behavioral consensus & confident-outlier negative distillation; Futamura Rung-0 Compile-Away Continual Flywheel proving 0-search O(1) speedup on unseen homologous functions with 0 anchor regressions; and One-Demo Trust / Trace-Quotient Collision Refusal + Verified UI Page-Guide Sketcher), with 1.000 DOMAIN_ATLAS_V1 route recall across all 7 domains.",
     "required_capability": "Unified 24-module DARK-organ execution, Agent-S4/HCU shadow-interface routing, MIT RLM out-of-core slicing, Hindsight 4-network git-diffable Engram/Sleep memory, Staged NFV + CHASE + HDA + Hill Sampling verification, and zero-data Self-Play + Steer-Don't-Solve + atomic WAL commits inside UnifiedModel and Creature at K3=0.",
     "route_frontier": {
-      "canonical_base_commit": "ac5c1015e62612ec85a2efbfab0ac6f7e6b28468",
+      "canonical_base_commit": "29179436e184a1475c22fb9688d11401a477aaa6",
       "challenger_routes": [
         {
           "comparison": {

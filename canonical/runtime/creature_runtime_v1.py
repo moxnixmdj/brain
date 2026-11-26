@@ -1910,6 +1910,32 @@ class Creature:
         self._save()
         return res
 
+    def futamura_skill_compiler_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature Futamura trace-to-skill compiler + symbolic Mealy/DBSP/e-value + typed CLI/A11y action grammar."""
+        return self._ensure_unified_model().futamura_skill_compiler_op(payload)
+
+    def reverse_tomography_lens_swe_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature reverse-execution tomography + certified ddmin + bidirectional FST/lens + assertion-demand counterfactual repair."""
+        return self._ensure_unified_model().reverse_tomography_lens_swe_op(payload)
+
+    def meaning_egraph_vericoding_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 47: Creature E-graph equality saturation + Universal Meaning UIR + vericoding mutation-oracle + exact global proof-cut."""
+        return self._ensure_unified_model().meaning_egraph_vericoding_op(payload)
+
+    def evolving_interface_byte_effect_hcu_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature Agent-S4 interface evolution + Petri dominator cuts + crash-safe transactional commit + Ring-0 byte-effect oracle."""
+        return self._ensure_unified_model().evolving_interface_byte_effect_hcu_op(payload)
+
+    def five_timescale_sleep_csr_memory_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature 5-timescale verification-first sleep crystallizer + zero-copy mmap CSR + cross-language IR 5-gate admission."""
+        res = self._ensure_unified_model().five_timescale_sleep_csr_memory_op(payload)
+        self._save()
+        return res
+
+    def meta_circular_refusal_adjudicator_op(self, payload: Mapping[str, Any] | None = None) -> dict[str, Any]:
+        """Wave 48: Creature meta-circular AST organs + Plotkin LGG + active-inference refusal curriculum + subprocess dark-matter adjudication."""
+        return self._ensure_unified_model().meta_circular_refusal_adjudicator_op(payload)
+
     def sleep_evolve_organs_gea(
         self,
         *,

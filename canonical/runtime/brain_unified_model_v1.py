@@ -597,12 +597,12 @@ def _extract_secondary_indexes(full: Mapping[str, Any], raw_sha: str) -> dict[st
 # --------------------------------------------------------------------------- model
 
 
-from canonical.runtime.wave45_46_anytime_valid_quotient_metamorphic_hcu_v1 import (
-    Wave45To46UnifiedModelMixin as _Wave45To46UnifiedModelMixin,
+from canonical.runtime.wave47_48_futamura_tomography_egraph_crystallizer_v1 import (
+    Wave47To48UnifiedModelMixin as _Wave47To48UnifiedModelMixin,
 )
 
 
-class UnifiedModel(_Wave45To46UnifiedModelMixin):
+class UnifiedModel(_Wave47To48UnifiedModelMixin):
     """A loaded, digest-verified unified model."""
 
     def __init__(
