@@ -87,6 +87,33 @@ def does_nothing(work: M.Work, creature: "Creature") -> dict[str, Any]:
             "blocked": "NO_EXECUTOR_WIRED"}
 
 
+def unified_perform(work: M.Work, creature: "Creature") -> dict[str, Any]:
+    """Wave 39 Unified Frontier Executor (`K3 = 0`):
+    Routes board obligations through `UnifiedModel.unified_frontier_turn()` and reports honest
+    `verified` / `correct` standing from real kernel verification receipts (never rubber-stamped)."""
+    from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+    model = load_unified_model()
+    payload = dict(getattr(creature, "_unified_work_payloads", {}).get(work.id) or {})
+    goal_text = str(payload.pop("goal", None) or getattr(work, "note", "") or getattr(work, "id", "") or "inventory")
+    pillar = payload.pop("pillar", None)
+    turn = model.unified_frontier_turn(goal_text, pillar=pillar, payload=payload)
+    passed = bool(turn.get("pass"))
+    out: dict[str, Any] = {
+        "ok": passed,
+        "verified": True,
+        "correct": passed,
+        "pillar": turn.get("pillar"),
+        "stage_trace": turn.get("stage_trace"),
+        "unified_turn": turn,
+    }
+    if not passed:
+        out["blocked"] = "UNIFIED_KERNEL_VERIFICATION_REFUSED"
+    if "world_after" in payload:
+        out["world_after"] = payload["world_after"]
+    return out
+
+
 @dataclass
 class Creature:
     """One body. State lives on disk; nothing is remembered in the process alone."""
@@ -904,6 +931,37 @@ class Creature:
                 break
         return {**self.report(), "steps": rows}
 
+    def attach_unified_work_payload(self, work_id: str, payload: Mapping[str, Any]) -> None:
+        """Attach structured 5-pillar execution inputs for a board obligation (`work_id`)."""
+        store = getattr(self, "_unified_work_payloads", None)
+        if store is None:
+            store = {}
+            self._unified_work_payloads = store
+        store[str(work_id)] = dict(payload)
+
+    def step_unified(self, *, offer: "CP.Offer | None" = None) -> dict[str, Any]:
+        """Execute one `Creature` step using typed catalog checking for catalog questions and
+        `unified_perform` (`UnifiedModel.unified_frontier_turn`, `K3 = 0`) for general obligations."""
+        if self._life is not None:
+            pool = self.remaining_work()
+            if pool:
+                nxt = M.choose_next(self._life, pool)
+                if nxt is not None and nxt.id in self._catalog_questions:
+                    return self.step(does_nothing, offer=offer)
+        return self.step(unified_perform, offer=offer)
+
+    def unified_frontier_turn(
+        self,
+        goal: str,
+        *,
+        pillar: str | None = None,
+        payload: Mapping[str, Any] | None = None,
+    ) -> dict[str, Any]:
+        """Direct `K3 = 0` 5-pillar frontier turn from `Creature` through `UnifiedModel`."""
+        from canonical.runtime.brain_unified_model_v1 import load_unified_model
+
+        return load_unified_model().unified_frontier_turn(goal, pillar=pillar, payload=payload)
+
     def _save(self) -> None:
         M.LifeStore(self.root / "life.json").save(self._life)
         S.StandingStore(self.root / "standing.json").save(self._standing)
@@ -1441,7 +1499,7 @@ class Creature:
 
     def execute_confined_computer_use(
         self,
-        work_dir: str | Path,
+        work_dir: str | pathlib.Path,
         steps: Sequence[Mapping[str, Any]],
         *,
         goal_id: str = "confined_hcu_episode",
@@ -1497,7 +1555,7 @@ class Creature:
 
     def solve_multifile_repo_futamura(
         self,
-        repo_dir: str | Path,
+        repo_dir: str | pathlib.Path,
         test_targets: Sequence[str] = (),
         *,
         goal_text: str = "",

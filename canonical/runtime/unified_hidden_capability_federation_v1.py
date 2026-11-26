@@ -1699,6 +1699,91 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["pairs"],
         "declared_dependencies": [],
     },
+    "LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE": {
+        "domain": "CAPABILITY_COMPOSITION_AND_ROUTING",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "ZeroAdapterInventoryTypeBridge",
+        "summary": "Zero-wrapper bridge composing module_bridge_v1 (5,221 inventoried functions) with type_level_composer_v1 type graphs and tier-honest provenance.",
+        "triggers": [
+            "zero adapter inventory bridge",
+            "module bridge 5221 functions",
+            "type level composer chains",
+            "zero thin adapter dispatch",
+        ],
+        "required_inputs": ["goal"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER": {
+        "domain": "INSTANT_LEARNING_AND_WORLD_MODELS",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "GaloisWitnessMooreInstantLearner",
+        "summary": "Instant learning unifying action-invariant Moore bisimulation transfer, OPINE-World ontology-error predicate synthesis, FCA Galois lattices, and FlashMeta D4 witness inversion.",
+        "triggers": [
+            "moore bisimulation isomorphism transfer",
+            "opine world ontology error residual",
+            "flashmeta d4 inverse witness synthesis",
+            "fca galois concept lattice",
+            "unified_five_pillar_frontier_kernel",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_LENS_STANDING_FACT_CU": {
+        "domain": "COMPUTER_USE_AND_GROUNDING",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "LensStandingFactComputerUseEngine",
+        "summary": "Zero-screenshot computer use combining OOXML/JSON bijective lenses, relational record frames, CAS stale-frame click guards, standing-fact clobber recovery, and anti-false-DONE checks.",
+        "triggers": [
+            "bijective ooxml lens computer use",
+            "relational anchored frame cas seal",
+            "standing facts batch clobber recovery",
+            "anti false done implied ending gate",
+        ],
+        "required_inputs": ["instruction"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_DELTASTATE_SIBLING_SWE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "DeltaStateSiblingClosedSWEKernel",
+        "summary": "Multi-file SWE repair combining non-vacuous oracle calibration, Plastic Surgery donor mining, Coccinelle/SyDIT sibling closure, and DeltaBox warm-zygote os.fork() CoW rollouts.",
+        "triggers": [
+            "deltastate cow fork swe repair",
+            "coccinelle sydit multi file sibling closure",
+            "plastic surgery donor alphabet mining",
+            "calibrated judge non vacuous swe",
+        ],
+        "required_inputs": ["repo_root"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY": {
+        "domain": "MEMORY_AND_BELIEF_REVISION",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "ProspectiveEntrenchedMemTXEngine",
+        "summary": "Write-time Kumiho prospective cue indexing, MemTX/CPB root-disjoint Sybil echo blocking, AGM K*7/K*8 ordinal entrenchment, and RD-Forget selective replay unlearning.",
+        "triggers": [
+            "kumiho prospective cue indexing",
+            "memtx cpb sybil lineage gate",
+            "agm k7 k8 epistemic entrenchment",
+            "rd forget selective replay unlearning",
+        ],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+        "entrypoint": "MeaningIRSkillRatchetEngine",
+        "summary": "Babble/Stitch Meaning-IR anti-unification, zero-shot cross-language verified skill recall across Python/JS/TS/Go/Rust, 4-gate Hoare sequence verification, and MDL bit-rent eviction.",
+        "triggers": [
+            "meaning ir cross language skill transfer",
+            "babble stitch anti unification ratchet",
+            "hoare contract sequence undo gate",
+            "mdl bit rent active store eviction",
+        ],
+        "required_inputs": ["before_snippet", "after_snippet"],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W39_AUTO_JUDGE_DISCOVERY": {
         "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
         "source_path": "canonical/swe_kernel/auto_judge_discovery_v1.py",
@@ -2507,6 +2592,55 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_check_mode_is_the_oracle_v1.py",
             "canonical/tools/an_actions_vocabulary_is_its_refusal_surface_v1.py",
             "canonical/tools/a_type_you_wrote_is_a_type_you_guess_v1.py",
+        ],
+    },
+    "five_pillar_frontier_unification_w39": {
+        "external_names": [
+            "flashmeta",
+            "prose d4",
+            "inverse witness function",
+            "galois concept lattice",
+            "tycho moore machine",
+            "opine-world",
+            "ontology error residual",
+            "optician boomerang lens",
+            "anchored relational frame",
+            "standing facts frame axiom",
+            "deltabox",
+            "warm zygote cow fork",
+            "coccinelle",
+            "sydit sibling edit",
+            "plastic surgery hypothesis",
+            "kumiho",
+            "prospective cue indexing",
+            "memtx",
+            "cpb sybil echo",
+            "epistemic entrenchment",
+            "rd-forget",
+            "forgetting without restarting",
+            "selective replay unlearning",
+            "babble stitch",
+            "cross language meaning ir",
+            "mdl bit rent",
+            "zero adapter module bridge",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE",
+            "engine:LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER",
+            "engine:LEAPFROG_W39_LENS_STANDING_FACT_CU",
+            "engine:LEAPFROG_W39_DELTASTATE_SIBLING_SWE",
+            "engine:LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY",
+            "engine:LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/unified_five_pillar_frontier_kernel_v1.py",
+            "canonical/runtime/module_bridge_v1.py",
+            "canonical/runtime/type_level_composer_v1.py",
+            "canonical/runtime/transition_system_identity_v1.py",
+            "canonical/runtime/anchored_frame_v1.py",
+            "canonical/swe_kernel/standing_facts_v1.py",
+            "canonical/swe_kernel/systematic_edit_supply_v1.py",
+            "canonical/swe_kernel/language_neutral_skill_bridge_v1.py",
         ],
     },
 }
@@ -4602,6 +4736,56 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if lens is None:
             return _fail(mode, "NO_BIDIRECTIONAL_LENS")
         return _ok(mode, "BIDIRECTIONAL_LENS_SYNTHESIZED", {"lens_kind": type(lens).__name__, "description": repr(lens)[:240]})
+
+    if mode == "LEAPFROG_W39_ZERO_ADAPTER_INVENTORY_BRIDGE":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        req_in = dict(inputs)
+        goal_str = str(req_in.pop("goal"))
+        res = shared_five_pillar_kernel().inventory_bridge.query_and_compose(goal_str, **req_in)
+        return _ok(mode, "ZERO_ADAPTER_INVENTORY_QUERIED", res)
+
+    if mode == "LEAPFROG_W39_MOORE_ONTOLOGY_WITNESS_LEARNER":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().instant_learner.learn_and_transfer(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "MOORE_WITNESS_UNRESOLVED", detail=res)
+        return _ok(mode, "MOORE_WITNESS_LEARNED", res)
+
+    if mode == "LEAPFROG_W39_LENS_STANDING_FACT_CU":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().computer_use.execute_workflow(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "LENS_CU_REFUSED", detail=res)
+        return _ok(mode, "LENS_CU_VERIFIED", res)
+
+    if mode == "LEAPFROG_W39_DELTASTATE_SIBLING_SWE":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        req_in = dict(inputs)
+        rr = req_in.pop("repo_root")
+        res = shared_five_pillar_kernel().swe_kernel.repair_repository(rr, **req_in)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "DELTASTATE_SWE_UNSOLVED"), detail=res)
+        return _ok(mode, str(res.get("status") or "DELTASTATE_SWE_REPAIRED"), res)
+
+    if mode == "LEAPFROG_W39_PROSPECTIVE_MEMTX_REPLAY":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().run_turn("memtx_op", pillar="MEMORY", payload=dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, "PROSPECTIVE_MEMTX_BLOCKED", detail=res)
+        return _ok(mode, "PROSPECTIVE_MEMTX_COMMITTED", res)
+
+    if mode == "LEAPFROG_W39_MEANING_IR_CROSS_LANG_RATCHET":
+        from canonical.swe_kernel.unified_five_pillar_frontier_kernel_v1 import shared_five_pillar_kernel
+
+        res = shared_five_pillar_kernel().skill_ratchet.consolidate_and_transfer(**dict(inputs))
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "MEANING_IR_RATCHET_REFUSED"), detail=res)
+        return _ok(mode, "MEANING_IR_RATCHET_CONSOLIDATED", res)
 
     if mode == "LEAPFROG_W39_AUTO_JUDGE_DISCOVERY":
         from canonical.runtime.wave39_leapfrog_unification_v1 import EarnedJudgeAndRefusalLifter
