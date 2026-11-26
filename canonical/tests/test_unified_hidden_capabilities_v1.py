@@ -52,7 +52,7 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
     def test_all_58_federated_kernels_are_compiled_and_self_addressable(self) -> None:
         cat = catalog_federated_engines()
         self.assertEqual(cat["count"], len(FEDERATED_KERNEL_DESCRIPTORS))
-        self.assertGreaterEqual(cat["count"], 58)
+        self.assertGreaterEqual(cat["count"], 90)
         expected_domains = {
             "TRUE_CAPABILITIES",
             "SWE_SYNTHESIS_AND_REPAIR",
@@ -62,6 +62,7 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
             "FINANCE_VALUATION_AND_REGCAP",
             "VISUAL_3D_CAD_AND_DOCUMENTS",
             "LANGUAGE_SCIENCE_SYMBOLIC_AND_MODULE_SOLVER",
+            "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
         }
         self.assertEqual(set(cat["domains"].keys()), expected_domains)
 
@@ -459,6 +460,108 @@ class UnifiedHiddenCapabilitiesV1Tests(unittest.TestCase):
         )
         if not cad_out["pass"]:
             self.assertIn("HOST_DEPENDENCY_MISSING:cadquery", cad_out["status"])
+
+    def test_non_obvious_koan_kernels_and_cross_disciplinary_concept_bridge(self) -> None:
+        # 1. E-Graph AST canonicalization & Plotkin LGG
+        eg_out = self.model.solve(
+            "engine:CONCEPT_LIBRARY_EGRAPH_LGG",
+            inputs={
+                "source": "def f(x):\n    return x + 0\n",
+                "second_source": "def g(y):\n    return y + 0\n",
+            },
+        )
+        self.assertIs(eg_out["pass"], True)
+        self.assertIn("return x", eg_out["result"]["canonical_source"])
+        self.assertNotIn("+ 0", eg_out["result"]["canonical_source"])
+
+        # 2. Edit-by-example (PROSE/FlashEdit style anti-unification)
+        ebe_out = self.model.solve(
+            "engine:EDIT_BY_EXAMPLE_PROSE",
+            inputs={
+                "target_text": "def g(x):\n    return x + 1\n",
+                "before_text": "def f(y):\n    return y + 1\ndef h(z):\n    return z + 1\n",
+                "after_text": "def f(y):\n    return y + 2\ndef h(z):\n    return z + 2\n",
+            },
+        )
+        self.assertIs(ebe_out["pass"], True)
+        self.assertEqual(ebe_out["result"]["edited_text"], "def g(x):\n    return x + 2\n")
+
+        # 3. Predictive Hoare world-model contract
+        hoare_out = self.model.solve(
+            "engine:PREDICTIVE_HOARE_CONTRACT",
+            inputs={"src": "alpha\n", "dst": "ALPHA\n"},
+        )
+        self.assertIs(hoare_out["pass"], True)
+        self.assertIs(hoare_out["result"]["all_hold_on_trial"], True)
+
+        # 4. Proved compositional survival
+        comp_out = self.model.solve(
+            "engine:PROVED_COMPOSITION_SURVIVAL",
+            inputs={
+                "source": "def calc(n):\n    return n - 1\n",
+                "pattern_core": "n - 1",
+                "replacement_core": "n + 1",
+            },
+        )
+        self.assertIs(comp_out["pass"], True)
+        self.assertEqual(comp_out["result"]["verdict"], "PASS")
+
+        # 5. Minimum sufficient observation partition ('the premise is the sense')
+        sense_out = self.model.solve(
+            "engine:PREMISE_MINIMAL_SENSE",
+            inputs={
+                "probes": {
+                    "w_clean": {"git_dirty": False, "pixel_dump": "blob_a"},
+                    "w_dirty": {"git_dirty": True, "pixel_dump": "blob_b"},
+                },
+                "actions_by_state": {"w_clean": ["ship"], "w_dirty": ["stash"]},
+                "fact_costs": {"git_dirty": 0.01, "pixel_dump": 25.0},
+            },
+        )
+        self.assertIs(sense_out["pass"], True)
+        self.assertEqual(sense_out["result"]["selected_facts"], ["git_dirty"])
+        self.assertAlmostEqual(sense_out["result"]["total_cost"], 0.01)
+
+        # 6. Bidirectional witness-inversion lens + Fast RAM simulator + Pitman-Yor extrapolator
+        lens_out = self.model.solve(
+            "engine:WITNESS_INVERSION_LENS",
+            inputs={"pairs": [("k=1", "1=k"), ("m=2", "2=m")]},
+        )
+        self.assertIs(lens_out["pass"], True)
+        self.assertIs(lens_out["result"]["round_trip_verified"], True)
+
+        sim_out = self.model.solve(
+            "engine:FAST_ABSTRACT_SIMULATOR",
+            inputs={"source": "def cube(v):\n    return v * v * v\n", "entry_func": "cube", "args": [4]},
+        )
+        self.assertIs(sim_out["pass"], True)
+        self.assertEqual(sim_out["result"]["value"], 64)
+
+        py_out = self.model.solve(
+            "engine:PITMAN_YOR_OPEN_WORLD",
+            inputs={
+                "channels": [
+                    {"channel_id": "ch_a", "samples": 4, "mean_payoff": 2.0},
+                    {"channel_id": "ch_b", "samples": 1, "mean_payoff": 5.0},
+                ]
+            },
+        )
+        self.assertIs(py_out["pass"], True)
+        self.assertGreater(py_out["result"]["universe_size_estimate"], 2)
+
+        # 7. Unfamiliar cross-disciplinary CS concept bridge (<25 us)
+        for query, expected_family in (
+            ("egglog e-stitch equality saturation library learning", "equality_saturation_egraph_library_learning"),
+            ("flashmeta prose version space algebra", "version_space_algebra_programming_by_example"),
+            ("learnlib ttt active automata learning", "active_automata_learning_unknown_machine"),
+            ("sandlock zeroboot cow fork zygote", "cow_zygote_speculative_sandbox_fork"),
+            ("crosshair concolic witness inversion", "concolic_angelic_witness_inversion_swe"),
+            ("skillapt conformal abstention continual learning", "selective_abstention_continual_memory"),
+            ("pitman-yor good-turing unseen species", "pitman_yor_minimax_open_world_discovery"),
+        ):
+            resolved = self.model.resolve_concept(query)
+            self.assertIsNotNone(resolved["best"])
+            self.assertEqual(resolved["best"]["concept_family"], expected_family)
 
 
 if __name__ == "__main__":

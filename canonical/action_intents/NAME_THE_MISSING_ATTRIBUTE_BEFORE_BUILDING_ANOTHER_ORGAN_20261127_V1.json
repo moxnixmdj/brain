@@ -304,7 +304,7 @@
      "route": "NAME_THE_MISSING_ATTRIBUTE_FOR_EVERY_MODULE_BEFORE_BUILDING_ANOTHER_ONE"
     }
    ],
-   "checked_at_utc": "2026-11-26T02:18:47Z",
+   "checked_at_utc": "2026-11-26T02:19:39Z",
    "comparison_dimensions": [
     "CORRECTNESS",
     "CAPABILITY_STRENGTH",
@@ -344,7 +344,7 @@
    "selected_route": "NAME_THE_MISSING_ATTRIBUTE_FOR_EVERY_MODULE_BEFORE_BUILDING_ANOTHER_ONE",
    "selected_route_preflight": {
     "all_required_dependencies_ready": true,
-    "checked_at_utc": "2026-11-26T02:18:47Z",
+    "checked_at_utc": "2026-11-26T02:19:39Z",
     "execution_dependencies": [
      {
       "dependency": "local Python 3 runtime with pytest",
