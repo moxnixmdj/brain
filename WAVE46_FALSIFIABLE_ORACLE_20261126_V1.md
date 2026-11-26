@@ -308,3 +308,116 @@ works, not that the system can repair an arbitrary real bug. The next honest ste
 is measuring the fraction of the repo's 1,026 recorded failures whose fix is even
 expressible in that grammar — if that fraction is small, no amount of persistence
 or retirement matters, and the grammar is the real limiting factor.
+
+---
+
+# Wave 46e — The grammar limit, measured (and a refutation of "ranking is the bottleneck")
+
+## 12. Does the compiled-law grammar reach real failures?
+
+`§11` asked what fraction of the repo's 1,026 recorded failures has a fix that is
+even *expressible* in the fixed operator grammar
+(`_BINOP_REPAIR_ALTS`/`_CMP_REPAIR_ALTS`/`_BOOLOP_REPAIR_ALTS`).
+
+A static scan over the 276 files holding ASSERTION failures found in-grammar
+operators in **92.8%** of them — and that number is useless, for the reason the
+scan itself states: every file with a branch or an arithmetic step contains one.
+"Contains an operator" is not the predicate. The predicate is *whether the
+correct fix is a single operator swap*, which static analysis cannot decide.
+
+Classifying the 1,026 messages by what the assertion actually compares gives
+**7 / 1,026 = 0.7%** whose comparison is directly an operator relation. But this
+classification is **not trustworthy**, and the report says so: my own first
+classifier bucketed `assert 149 == 68` as a *string message* (47.6%), which is
+wrong — that is a numeric mismatch. Reclassifying with different regexes moved
+53% into "unclassified" and brought "wrong logic" up to 14.4%. The labels move
+with the regexes, so the shares are not a result.
+
+Two things the exercise *does* establish, because neither depends on the labels:
+
+1. **Exactly one clean category exists** — messages shaped like
+   `'a.b.c' != 'x.y.z'` (capability-id/selection mismatches). Verified by direct
+   inspection of samples, not by the classifier.
+2. **The grammar cannot be the main lever.** Of 1,026 failures, at most a few
+   percent can be an operator swap; the rest are `False is not true : <a dict>`,
+   `assert 149 == 68`, `a stated command stopped running`, and
+   `FAIL_CLOSED__COMPUTER_EXECUTION_REQUIRES_ADMITTED_CONFINEMENT`. No amount of
+   persistence, retirement or chaining in the Futamura kernel changes those.
+
+## 13. One real failure, pursued to its actual cause — and the fix refuted
+
+I took the clean category and worked one case end to end, in a copy of the repo
+so the tree could be mutated freely.
+
+**Target:** `test_a_binder_that_consumed_nothing_does_not_outrank_one_that_did_v1`
+— 13 tests, 2 real failures. Reproduced (0.3 s). The failure:
+
+```
+AssertionError: 'python.tests.audit.unittest' != 'python.fault.localize.dynamic.dataflow.v1'
+```
+
+The sentence's owning capability exists and is bindable (`present=True`). Nothing
+is missing; the *front door picks the wrong row*.
+
+**Hypothesis 1 — the vacuous binder outranks a higher scorer.** This is exactly
+what the test file's own docstring specifies, so I implemented the demotion law
+inside `goal_compiler._rank_bindable_candidates` (where the order is decided, not
+at the call site — my first attempt patched the caller and changed nothing,
+because `ranked[0]` is what gets selected and the order is set earlier).
+
+**Measured effect on the failures: none. 2 failures before, 2 after.**
+
+Diagnosis of why, in stages:
+
+| layer | result |
+|---|---|
+| `goal_compiler._rank_bindable_candidates` | LOCALIZER **first** at 28 ✔ |
+| `goal_compiler.compile_goal(admissible)` | selects LOCALIZER ✔ |
+| `goal_front_compiler_v1.compile_goal` | selects `python.tests.audit.unittest` ✘ |
+| `live.compile_against_live_registry` (the door the test calls) | same ✘ |
+
+The real selector is `goal_front_compiler_v1`, which applies its own rule set
+(`F4_ZERO_INPUT_TOOLS_NOT_ROUTABLE`, `F3_ARTIFACT_WRITERS_PREFERRED`,
+`F24_UNSTATED_CANDIDATE_SKIPPED`) over a different registry view. And the cause
+is not a tie-break at all — it is a missing guard:
+
+- `python.swe.transform_and_synthesize.v1` scores **34 and ranks first**;
+- it does not *own* this sentence and is correctly displaced;
+- the rule that displaces it (`F24_UNSTATED_CANDIDATE_SKIPPED`) then hands
+  selection to whatever follows, which is `python.tests.audit.unittest` at 26 —
+  **not** LOCALIZER at 28, which was ranked above it all along.
+
+So the defects are the ones the test docstring names — `ranked[0]` mistaken for
+the best bindable, and selection landing on a row that does not own the sentence —
+but they live in the front compiler's displacement path, not in the pinned
+compiler's ordering. That is a materially different fix from the one the test's
+prose points at.
+
+**Decision: the fix was reverted.** I did not resolve the failures, the change
+would not have been verified, and leaving it in the selection path of the front
+door risks silently altering which capability answers *every* live request. A
+plausible-looking change to central routing that does not fix its target is worse
+than no change. Recorded with the full diagnosis so the next attempt starts from
+the front compiler's displacement rule instead of re-deriving the ranking.
+
+## 14. What the front door being wrong in this shape actually means
+
+This is the single most useful result of the wave, and it is a refutation of a
+claim I made one section earlier. I predicted the bottleneck was the operator
+grammar. It is not — the grammar is nearly irrelevant (0.7%), but fixing that
+gets nothing, because the dominant real failure is *the front door answering with
+a capability that does not own the sentence, and that capability reporting
+success anyway*.
+
+That is not a repair problem. A system that returns a confident, self-consistent
+success for a request it did not perform cannot be fixed by making its repair
+kernel faster, more persistent, or better at retiring laws. The oracle work in
+`§1` matters precisely because this is the failure mode it exists to catch, and
+`§13` shows the same class survives in the selection path one layer up.
+
+**Next bottleneck, restated:** capability *selection* — specifically the front
+compiler's displacement path, where a correctly-ranked candidate loses to a
+lower-ranked one and the result is reported as success. The concrete next step is
+a test that asserts the front compiler's chosen row is the highest-scoring
+*grounded* row whenever it differs from the ranked order, applied to the 148
+messages in the "wrong logic" family, before any further kernel work.
