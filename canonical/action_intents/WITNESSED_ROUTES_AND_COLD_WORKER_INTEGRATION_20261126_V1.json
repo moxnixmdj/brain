@@ -1,0 +1,350 @@
+{
+  "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+  "action_intent_id": "WITNESSED_ROUTES_AND_COLD_WORKER_INTEGRATION_20261126_V1",
+  "action_kind": "REAL_TASK_EXECUTION",
+  "date": "2026-11-26",
+  "action_summary": "Integrate the completed witnessed repair, revision, browser and one-episode work into current main; retain negative results and upstream full-model routes. The landing itself earns no capability credit.",
+  "canonical_base_commit": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+  "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
+  "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+  "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+  "causal_blocker": "The published witnessed-route branch diverged before the full-model wave provider was added. A textual merge alone makes the deliberately narrow producer fail to import.",
+  "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::The published witnessed-route branch diverged before the full-model wave provider was added. A textual merge alone makes the deliberately narrow producer fail to import.",
+  "selected_route": "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
+  "required_capability": "Carry both histories, preserve the small producer, and exercise both installation contracts in separate interpreters.",
+  "expected_parent_frontier_change": "Make the completed witnessed routes and their limits available alongside the current full model, without increasing the blind worker mount or claiming a newly solved task.",
+  "highest_leverage_now": true,
+  "stop_condition": "Stop if either runtime contract regresses, the released evidence is altered, a required check is not green, or main changes underneath the candidate. Confirm the landed tree on main before calling the merge done.",
+  "intentional_route_race": false,
+  "governance_change": false,
+  "weakens_existing_guard": false,
+  "explicit_user_authorization": "Merge all perfectly.",
+  "terminal_credit_delta": 0,
+  "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+  "route_order_walk": [
+    "Delete the blind mount or provider: loses a supported installation.",
+    "Bypass isolation, broaden the mount or omit the signed check: unacceptable.",
+    "Reuse the stage manifest, validators, native compiler and the upstream provider.",
+    "Adapt only the import boundary; require the provider for ordinary models.",
+    "Substitute the full checkout for the producer: exposes the research tree.",
+    "Compose both histories, then run targeted integration and upstream checks.",
+    "There is no dependency toggle that distinguishes a missing transitive import.",
+    "Integrate via the protected pull request; no new primitive or supplier."
+  ],
+  "verification": "Existing upstream verifiers and fresh empty-mount/full-model processes are oracles for their respective contracts. Local integration tests are producer-run; the separate referee judges repository integrity only.",
+  "agent_orientation": {
+    "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+    "contract_sha256": "4cbc7f9bac76a9bd334a511d10bd7c092c6135e1a48b4981466b9662a9f4728b",
+    "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+    "progress_class": "VERIFIED_INTEGRATION_OF_OWNED_CAPABILITY",
+    "progress_evidence_paths": [
+      "canonical/tests/test_harbor_cold_smoke_v1.py",
+      "canonical/tests/test_frame_program_v1.py",
+      "canonical/runtime/brain_unified_model_v1.py",
+      "WHAT_ONE_EPISODE_BOUGHT_20261126.md"
+    ],
+    "route_class": "INTEGRATE",
+    "producer_cognition_model_dependency_count": 0,
+    "incremental_spend_usd": 0,
+    "conversation_memory_is_authority": false,
+    "laws_read_this_session": [
+      "canonical/governance/REAL_MISSION_OBJECTIVE_20261008_V1.json",
+      "canonical/laws/GENERAL_CAPABILITY_FIRST_DEVELOPMENT_LAW_V1.md",
+      "canonical/laws/GENERAL_COGNITION_SUBSTRATE_AND_CAPABILITY_OWNERSHIP_LAW_V4.md",
+      "canonical/laws/FRONTIER_KNOWLEDGE_CAPABILITY_INTERNALIZATION_MISSION_LOCK_V10.md",
+      "canonical/laws/EXTERNAL_KNOWLEDGE_CAPABILITY_TRANSFER_RUNTIME_COGNITION_BOUNDARY_LAW_V1.md",
+      "canonical/laws/CAPABILITY_ACQUISITION_ENGINE_LAW_V8.md",
+      "canonical/laws/CAPABILITY_INTERNALIZATION_ARBITRAGE_STRATEGY_V8.md",
+      "canonical/laws/WHITE_BOX_CAPABILITY_HARVESTING_LAW_V3.md",
+      "canonical/laws/RESOURCE_BOUNDED_CAPABILITY_BYTES_LAW_V1.md",
+      "canonical/laws/RECURSIVE_OBSOLESCENCE_CONTROL_LAW_V4.md",
+      "canonical/laws/TRUE_CAPABILITY_TEST_LAW_V1.md",
+      "AGENTS.md"
+    ],
+    "independent_verification_completed": false
+  },
+  "load_bearing_primary": {
+    "open_obligation_ids": [],
+    "constructive_gap_for_open_obligation_ids": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "scope_complete_discharge": false,
+    "expected_obligation_discharge_lcb": 0,
+    "expected_obligation_unlock_lcb": "1/100",
+    "success_probability_lcb": "1/2",
+    "wall_clock_cost_ub": 2,
+    "interpretation": "Planning estimates (wall clock in hours), not calibrated task probabilities or a score. Restoring a working blind task producer unlocks measurement, not an obligation discharge."
+  },
+  "v22_prewrite_admission": {
+    "active_pointer_path": "canonical/governance/CURRENT_ZERO_REALITY_MINIMUM_CUT_ACTIVE_POINTER_V1.json",
+    "active_pointer_git_blob_sha": "02f426cfab375a676a4de451d66711062b47e8d6",
+    "currentness": {
+      "accepted_families": 5,
+      "open_families": 14,
+      "proved_atomic": 14,
+      "unresolved_atomic": 22,
+      "root1_positive_gap_count": 0,
+      "root2_touching_count": 17,
+      "root3_touching_count": 8,
+      "meta_envelope_open_count": 8,
+      "total_open_truth_obligations": 30,
+      "terminal": false
+    },
+    "mode": "ACTIVE_INTERFACE",
+    "interface": "BEHAVIORAL_QUOTIENT_AND_TRANSFER",
+    "target_truth_obligations": [
+      "CODING_TB4_GE_66_4"
+    ],
+    "proof_state_reachability": "Source controls and negative transfer remain observable. Neither historical results nor this merge discharge the open coding target.",
+    "fresh_reality_authority": false,
+    "terminal_credit_delta": 0,
+    "tournament": {
+      "proposal_id": "WITNESSED_ROUTES_AND_COLD_WORKER_INTEGRATION_20261126_V1",
+      "falsifier_id": "COLD_IMPORT_AND_RELEASED_SOURCE_CONTROLS",
+      "decisive_question": "Does the combined installation preserve previously measured refusal and transfer boundaries without importing the research tree?",
+      "known_counterexamples_checked": true,
+      "counterexample_receipts": [
+        {
+          "path": "canonical/Immediate_Results/single_episode_repeats_20261126_v1.json",
+          "git_blob_sha": "2daab2ea7c1fdceb739ebad7199a3e529aede33e"
+        },
+        {
+          "path": "canonical/Immediate_Results/hard51_positions7_8_source_controls_20261126_v1.json",
+          "git_blob_sha": "23e3cc03e9ba4a83f3497c9356731e21f7e73231"
+        }
+      ]
+    }
+  },
+  "recursive_obs": {
+    "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
+    "canonical_base_commit": "9a224e3ae6f9b9f05fcf9aaa1f38d00175746fef",
+    "real_outcome": "The plain merge failed the staged worker import. The corrected cold worker now runs with no wave module; a non-cold artifact with the same missing provider is refused. Historical source controls remain agent/nop/reference 0/0/1 on each of positions 7 and 8.",
+    "required_capability": "Carry both histories, preserve the small producer, and exercise both installation contracts in separate interpreters.",
+    "selected_surviving_route": "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
+    "why_selected_route_is_fastest_sufficient": "Preserve the existing provider and blind staging code; one dependency boundary and its isolated regression cover the reproduced collision.",
+    "expected_parent_level_state_change": "Make the completed witnessed routes and their limits available alongside the current full model, without increasing the blind worker mount or claiming a newly solved task.",
+    "stop_condition": "Stop if either runtime contract regresses, the released evidence is altered, a required check is not green, or main changes underneath the candidate. Confirm the landed tree on main before calling the merge done.",
+    "routes_considered": [
+      "Delete the blind mount or provider: loses a supported installation.",
+      "Bypass isolation, broaden the mount or omit the signed check: unacceptable.",
+      "Reuse the stage manifest, validators, native compiler and the upstream provider.",
+      "Adapt only the import boundary; require the provider for ordinary models.",
+      "Substitute the full checkout for the producer: exposes the research tree.",
+      "Compose both histories, then run targeted integration and upstream checks.",
+      "There is no dependency toggle that distinguishes a missing transitive import.",
+      "Integrate via the protected pull request; no new primitive or supplier."
+    ],
+    "deleted_or_bypassed_paths": [
+      "No added wave-provider modules in the producer; no new registry rows or delivery service."
+    ],
+    "obs_goal": {
+      "real_outcome": "Make the completed witnessed routes and their limits available alongside the current full model, without increasing the blind worker mount or claiming a newly solved task.",
+      "proxy_goals_deleted": [
+        "Conflict-free text",
+        "Higher benchmark score"
+      ],
+      "surviving_necessity": "Carry both histories, preserve the small producer, and exercise both installation contracts in separate interpreters."
+    },
+    "obs_capability": {
+      "existing_inherited_routes_checked": [
+        "UnifiedModel, Creature, stage_harbor_runtime_v1, repository rules and existing tests."
+      ],
+      "external_existing_routes_checked": [
+        "Git merge and GitHub pull requests with the required referee."
+      ],
+      "capability_work_deleted": [
+        "No new solver or new generalization claim."
+      ],
+      "surviving_gap": "The published witnessed-route branch diverged before the full-model wave provider was added. A textual merge alone makes the deliberately narrow producer fail to import."
+    },
+    "obs_blocker": {
+      "intrinsic_or_path_specific": "Installation-specific: full tree versus staged worker.",
+      "delete_bypass_substitute_options": [
+        "Delete the blind mount or provider: loses a supported installation.",
+        "Bypass isolation, broaden the mount or omit the signed check: unacceptable.",
+        "Reuse the stage manifest, validators, native compiler and the upstream provider."
+      ],
+      "surviving_causal_blocker": "The published witnessed-route branch diverged before the full-model wave provider was added. A textual merge alone makes the deliberately narrow producer fail to import."
+    },
+    "obs_solution": {
+      "deletion_first_order_applied": [
+        "DELETE",
+        "BYPASS",
+        "REUSE",
+        "SUBSTITUTE",
+        "WHITE_BOX_HARVEST",
+        "COMPOSE",
+        "CONFIGURE",
+        "INTEGRATE"
+      ],
+      "routes_ranked": [
+        "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
+        "TEXT_MERGE_ONLY",
+        "WIDEN_WORKER_MOUNT"
+      ],
+      "losing_routes_reason": "Text-only fails on import; widening exposes unnecessary source and changes the producer.",
+      "implementation_still_necessary": true
+    },
+    "obs_verification": {
+      "direct_real_effect_verification_considered": true,
+      "existing_oracle_considered": true,
+      "synthetic_verification_necessity": "A tiny custom non-cold artifact tests the negative installation boundary without exposing the full research artifact to the blind worker; historical task grades are not reattributed."
+    },
+    "obs_inherited_system": {
+      "downstream_work_to_delete_or_supersede": [
+        "No separate worker registry, copied provider, or rerun of external benchmarks."
+      ],
+      "adjacent_capabilities_absorbed": [
+        "New main wave APIs remain available in the full installation."
+      ],
+      "fresh_reuse_plan": "Check the exact merged tree in a disposable checkout, with the frozen routes and new upstream test files."
+    },
+    "obs_obs": {
+      "analysis_steps_deleted_or_cached": [
+        "Do not rerun the historical agent to manufacture new benchmark scores."
+      ],
+      "search_stop_decision": "Use the existing reviewed provider and staging contracts; stop on a real failure rather than expanding scope.",
+      "affected_layers_only_on_revalidation": true
+    },
+    "route_frontier": {
+      "discovery_required": true,
+      "checked_at_utc": "2026-11-26T22:43:44+00:00",
+      "max_age_hours": 24,
+      "source_classes_checked": [
+        "BRAIN_INHERITED",
+        "OFFICIAL_PRIMARY",
+        "CODE_OR_PACKAGE_REGISTRY",
+        "BROAD_WEB_OR_COMMUNITY"
+      ],
+      "source_evidence": {
+        "BRAIN_INHERITED": [
+          "stage_harbor_runtime_v1.py supplies the reviewed manifest and identifies the cold artifact."
+        ],
+        "OFFICIAL_PRIMARY": [
+          "GitHub rules API for moxnixmdj/brain main: strict required referee/repo-integrity-guard. Git upstream Documentation/git-merge.adoc."
+        ],
+        "CODE_OR_PACKAGE_REGISTRY": [
+          "git/git: Documentation/git-merge.adoc; cli/cli: pkg/cmd/pr/merge/merge.go. No alternative package is needed."
+        ],
+        "BROAD_WEB_OR_COMMUNITY": [
+          "Public predecessor PRs #7146, #7147 and #7148 carry full-model changes. They are not candidate replacements for a frozen blind producer."
+        ]
+      },
+      "query_families": [
+        {
+          "intent": "CAPABILITY_VECTOR",
+          "query": "Which imports does the staged worker actually resolve?"
+        },
+        {
+          "intent": "SUPPLIER_OR_PRODUCT",
+          "query": "Which app and check does this repository require on main?"
+        },
+        {
+          "intent": "IMPLEMENTATION_FORM",
+          "query": "Can the existing stage and full provider coexist without a wider allowlist?"
+        },
+        {
+          "intent": "RECENCY_OR_NEW_RELEASE",
+          "query": "Which recent merged PRs and base revision must this landing preserve?"
+        }
+      ],
+      "comparison_dimensions": [
+        "CORRECTNESS",
+        "CAPABILITY_STRENGTH",
+        "WALL_CLOCK",
+        "INCREMENTAL_COST",
+        "RELIABILITY",
+        "VERIFIABILITY"
+      ],
+      "refresh_triggers": [
+        "BEFORE_EXPENSIVE_EXECUTION",
+        "AFTER_MATERIAL_ROUTE_FAILURE",
+        "BEFORE_INFRASTRUCTURE_OR_REPAIR_CONTINUATION",
+        "BEFORE_SCARCE_GATE_SPEND"
+      ],
+      "unresolved_plausible_dominators": [],
+      "selected_route": "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
+      "incumbent_route": "TEXT_MERGE_ONLY",
+      "challenger_routes": [
+        {
+          "route": "TEXT_MERGE_ONLY",
+          "evidence": [
+            "Text merge cce21c3f parents had no line conflicts; BEFORE the compatibility change the isolated import failed."
+          ],
+          "qualification_evidence": [
+            "canonical/tests/test_harbor_cold_smoke_v1.py :: ColdMountTests"
+          ],
+          "qualification_evidence_classes": [
+            "DIRECT_PROBE"
+          ],
+          "resolution": "DISQUALIFIED",
+          "comparison": {
+            "CORRECTNESS": "Missing Wave 41 at cold startup.",
+            "CAPABILITY_STRENGTH": "No cold execution.",
+            "WALL_CLOCK": "Cheaper to omit the executable check, but the result does not work.",
+            "INCREMENTAL_COST": "Both use existing local tools with zero incremental spend.",
+            "RELIABILITY": "The staged interpreter intentionally cannot import the provider.",
+            "VERIFIABILITY": "A separate isolated interpreter exposes the failure."
+          }
+        }
+      ],
+      "selected_route_preflight": {
+        "checked_at_utc": "2026-11-26T22:43:44+00:00",
+        "max_age_hours": 2,
+        "selected_route": "INTEGRATE_WITNESSED_ROUTES_WITH_COLD_WORKER_BOUNDARY",
+        "status": "READY",
+        "all_required_dependencies_ready": true,
+        "execution_dependencies_complete": true,
+        "failed_dependencies": [],
+        "execution_dependencies": [
+          {
+            "dependency": "Python, pytest and isolated staged Python interpreter",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "ColdMountTests exercised via pytest and python -I -S -B."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Chromium and its shared libraries",
+            "kind": "LOCAL_RUNTIME",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Chromium executable reported 158.0.8127.0; user/network namespace with local loopback available."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          },
+          {
+            "dependency": "Committed source trees, cold manifest, full provider and released evidence",
+            "kind": "CODE_ARTIFACT",
+            "required": true,
+            "volatility": "STATIC",
+            "scope": "LOCAL",
+            "evidence_scope": "LOCAL",
+            "status": "READY",
+            "evidence": [
+              "Local merge parents and stage_harbor_runtime_v1.stage; no model service or credential in the producer."
+            ],
+            "evidence_classes": [
+              "DIRECT_PROBE"
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
