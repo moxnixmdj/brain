@@ -871,7 +871,7 @@ class UnifiedModel:
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
                 "harvested_capabilities": declared.get("harvested_capabilities"),
-                "frontier_leapfrog_organs": 17,
+                "frontier_leapfrog_organs": 21,
             },
             "source_index_is_addressable_not_executable": True,
             "declared_dependencies_present": present,
@@ -894,7 +894,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the 13 `swe_kernel` organs and 4 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        """Enumerate the 13 `swe_kernel` organs and 8 Frontier Leapfrog Plays wired into the Unified Runtime."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -922,6 +922,30 @@ class UnifiedModel:
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
                 "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+            },
+            {
+                "organ_id": "play_a_counterfactual_discr_tree_router",
+                "module_path": "canonical/runtime/counterfactual_discr_tree_skill_router_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Witness-conditioned AST discrimination-tree router (5.4 us p50) with Rubin counterfactual utility gating",
+            },
+            {
+                "organ_id": "play_b_verified_zero_screenshot_cache",
+                "module_path": "canonical/runtime/verified_zero_screenshot_action_cache_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Three-tier zero-screenshot data-layer workflow elevator and volatile-invariant CDP pre-probe cache",
+            },
+            {
+                "organ_id": "play_c_relational_guard_addition_repair",
+                "module_path": "canonical/runtime/relational_guard_addition_symbolic_repair_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Semi-naive relational AST guard/exception-contract/container-sync addition synthesizer with GuardDrop mutation gate",
+            },
+            {
+                "organ_id": "play_d_cow_zygote_speculative_verifier",
+                "module_path": "canonical/runtime/cow_zygote_speculative_verifier_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "POSIX os.fork() copy-on-write Zygote speculative patch verifier (1.58 ms p50) with AST test impact slicing",
             },
         ]
         return {
@@ -958,6 +982,22 @@ class UnifiedModel:
             from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
 
             return p6.run(req, ROOT)
+        if organ_id == "play_a_counterfactual_discr_tree_router":
+            from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
+
+            return pa.run(req, ROOT)
+        if organ_id == "play_b_verified_zero_screenshot_cache":
+            from canonical.runtime import verified_zero_screenshot_action_cache_v1 as pb
+
+            return pb.run(req, ROOT)
+        if organ_id == "play_c_relational_guard_addition_repair":
+            from canonical.runtime import relational_guard_addition_symbolic_repair_v1 as pc
+
+            return pc.run(req, ROOT)
+        if organ_id == "play_d_cow_zygote_speculative_verifier":
+            from canonical.runtime import cow_zygote_speculative_verifier_v1 as pd
+
+            return pd.run(req, ROOT)
 
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
