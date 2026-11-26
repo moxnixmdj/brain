@@ -33051,12 +33051,12 @@
   "routing_tokens": 3798,
   "skills": 18,
   "source_index_entry_points": 570,
-  "source_index_modules": 2299
+  "source_index_modules": 2301
  },
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "2f94a73bd4f956cca7e969f1de8432f7f7e0c9a9ddcffb06e1d993f5c9405b2e"
+  "value": "338817596bfbcd3a511490bbbc13d76bf52a2294f64b73008ddb8bbf00361a5c"
  },
  "engines": [
   {
@@ -147601,7 +147601,7 @@
   },
   {
    "authority": "NOT_A_LAW",
-   "bytes": 4357,
+   "bytes": 4643,
    "headings": [
     "Capability fabric: what is connected to what, derived",
     "Reachability classes (every module, one label each)",
@@ -147610,31 +147610,30 @@
    ],
    "kind": "DOCUMENT",
    "path": "canonical/capabilities/CAPABILITY_FABRIC_V1.md",
-   "sha256": "41e1b8598806a6bdcaf13471cbee1b4449d9adb7ff9db056e8c8f7483ef8f2cc",
-   "summary": "digest `7e9412f672577beb` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00",
+   "sha256": "7dd4351f8fafad727f88365a945daa3357daa73a98e1fe6e566792e727688709",
+   "summary": "digest `5318717a8b80a71d` · authority `NONE__DERIVED_FROM_IMPORT_GRAPH_AND_COMMITTED_RECEIPTS` · 0 model calls, $0.00",
    "terms": {
     "0.00": 1,
-    "0.515": 1,
-    "10": 2,
+    "0.527": 1,
     "12": 1,
     "13": 1,
     "14": 1,
-    "1422": 1,
-    "1457": 1,
     "15": 1,
-    "156": 1,
-    "16": 1,
+    "1512": 1,
+    "1572": 1,
+    "16": 2,
     "17": 1,
-    "18": 2,
-    "1993": 1,
-    "26": 2,
-    "2690": 1,
-    "2811": 1,
-    "3022": 1,
-    "31": 1,
+    "18": 1,
+    "19": 2,
+    "2238": 1,
+    "238": 1,
+    "28": 1,
+    "2990": 1,
+    "3033": 1,
     "all": 2,
     "authority": 2,
-    "canonical": 12,
+    "canonical": 14,
+    "canonical.runtime.brain_unified_model_v1": 2,
     "canonical.runtime.live_brain_route_admission_v1": 2,
     "capability": 2,
     "certified": 2,
@@ -147655,11 +147654,12 @@
     "one": 3,
     "receipt": 2,
     "root": 3,
-    "runtime": 10,
+    "runtime": 12,
     "scheduler_true_capability_adapters_v1.py": 3,
     "solve_instance": 3,
-    "true": 14,
-    "true_capability": 9,
+    "solve_through_the_front_door": 2,
+    "true": 16,
+    "true_capability": 11,
     "widest": 2
    },
    "title": "Capability fabric: what is connected to what, derived",
@@ -164897,7 +164897,7 @@
   "included_source_count": 2479,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "91bcb9ced37c4559134b0650e970363ac028918a065fd6d8b5cbc10e6f17eb98"
+  "source_tree_digest": "27537fce68c28d7fa1f2190db5277cf9482f871ab5289fda8b88dbd110f0e4e9"
  },
  "research_index": [
   {
@@ -329158,7 +329158,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/MEASURED_INSTANT_LEARNING_AND_THE_GENERALIZER_CEILING_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "0e9e58dedbf9cec6073f4aa197de02af03ecf3572e7ba9295280f7201142d95d",
+   "sha256": "2d5f79a72a74f690e0af258c0c52d9a4af89d3224332ec15793aa4ded6b91bab",
    "status": "SHIPPED",
    "terms": {
     "10": 1,
@@ -352503,6 +352503,70 @@
    "capability": false,
    "classification": "ORPHAN",
    "executable_entry_point": false,
+   "id": "source:canonical/runtime/bound_capabilities/truecap_file_change_request_copy_rename_append.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/truecap_file_change_request_copy_rename_append.py",
+   "sha256": "e66d89e635ffc7eb9d0f403fe65116ac438017eb034036fb2f2d6d6072dbaefc",
+   "summary": "Bound-capability adapter for FILE_CHANGE_REQUEST_COPY_RENAME_APPEND_V1 — GENERATED, thin by design.",
+   "symbol_count": 2,
+   "symbols": [
+    "_instance",
+    "run"
+   ],
+   "terms": {
+    "adapter": 1,
+    "append": 1,
+    "bound-capability": 1,
+    "change": 1,
+    "copy": 1,
+    "design": 1,
+    "file": 1,
+    "file_change_request_copy_rename_append_v1": 1,
+    "generated": 1,
+    "instance": 1,
+    "rename": 1,
+    "request": 1,
+    "run": 1,
+    "thin": 1,
+    "truecap": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
+   "id": "source:canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+   "imported_by_count": 0,
+   "kind": "SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/runtime/bound_capabilities/truecap_file_question_taught_words.py",
+   "sha256": "b3934f2167c8823008c764379a79466c1d2b4a2fe4f85cdd188f0231ec1e28c9",
+   "summary": "Bound-capability adapter for FILE_QUESTION_TAUGHT_WORDS_V1 — GENERATED, thin by design.",
+   "symbol_count": 2,
+   "symbols": [
+    "_instance",
+    "run"
+   ],
+   "terms": {
+    "adapter": 1,
+    "bound-capability": 1,
+    "design": 1,
+    "file": 1,
+    "file_question_taught_words_v1": 1,
+    "generated": 1,
+    "instance": 1,
+    "question": 1,
+    "run": 1,
+    "taught": 1,
+    "thin": 1,
+    "truecap": 1,
+    "words": 1
+   }
+  },
+  {
+   "capability": false,
+   "classification": "ORPHAN",
+   "executable_entry_point": false,
    "id": "source:canonical/runtime/bound_capabilities/truecap_pareto_frontier_update.py",
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
@@ -352567,7 +352631,7 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/bound_capabilities/truecap_same_identity_supervisor.py",
-   "sha256": "2da321c10d360920249e2873d3d2d58fe34bdb5c237c5e6c2a3ddacc6781ae6e",
+   "sha256": "2eb999eb731a4101d6b53e13da1e9982af2c6668fc0b25a638343ceb42921b7d",
    "summary": "Bound-capability adapter for SAME_IDENTITY_SUPERVISOR_V1 — GENERATED, thin by design.",
    "symbol_count": 2,
    "symbols": [
