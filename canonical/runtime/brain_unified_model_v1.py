@@ -223,6 +223,7 @@ def _declared_triggers_for_row(cid: str, row: Mapping[str, Any]) -> set[str]:
 
 def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, Any]:
     src_rows = [row for row in (model.get("source_index") or []) if isinstance(row, Mapping)]
+    ext_src_rows = [row for row in (model.get("extended_source_index") or []) if isinstance(row, Mapping)]
     res_rows = [row for row in (model.get("research_index") or []) if isinstance(row, Mapping)]
     knw_rows = [row for row in (model.get("knowledge") or []) if isinstance(row, Mapping)]
     caps_map = {
@@ -260,7 +261,7 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         if kept:
             filtered_index[s_tok] = kept
     return {
-        "core_format_v": 3,
+        "core_format_v": 4,
         "raw_sha256": raw_sha,
         "schema": str(model.get("schema") or ""),
         "model_id": model.get("model_id"),
@@ -278,6 +279,7 @@ def _extract_routing_core(model: Mapping[str, Any], raw_sha: str) -> dict[str, A
         "confidence": dict(((model.get("grammar") or {}).get("confidence") or {})),
         "source_index_len": len(src_rows),
         "source_entry_points": sum(1 for r in src_rows if r.get("classification") == "ENTRY_POINT"),
+        "extended_source_index_len": len(ext_src_rows),
         "research_index_len": len(res_rows),
         "knowledge_len": len(knw_rows),
     }
@@ -292,7 +294,7 @@ class UnifiedModel:
     def __init__(self, model: Mapping[str, Any], *, _raw_bytes: bytes | None = None, _core_only: bool = False):
         self._raw_bytes_backing: bytes | None = _raw_bytes
         self._declared_triggers_cache: dict[str, set[str]] = {}
-        if _core_only and model.get("core_format_v") == 3:
+        if _core_only and model.get("core_format_v") == 4:
             self._model_loaded: dict[str, Any] | None = None
             self._core_meta: dict[str, Any] = dict(model)
             self.digest = str(model.get("digest_value") or "")
@@ -325,6 +327,8 @@ class UnifiedModel:
         self._source_index_cache: dict[str, dict[str, Any]] | None = None
         self._harvested_cache: dict[str, dict[str, Any]] | None = None
         self._source_df_cache: dict[str, int] | None = None
+        self._extended_source_index_cache: dict[str, dict[str, Any]] | None = None
+        self._extended_source_df_cache: dict[str, int] | None = None
         self._research_index_cache: dict[str, dict[str, Any]] | None = None
         self._research_df_cache: dict[str, int] | None = None
         self._knowledge_cache: list[dict[str, Any]] | None = None
@@ -374,6 +378,18 @@ class UnifiedModel:
             for term in terms:
                 src_df[str(term)] = src_df.get(str(term), 0) + 1
         self._source_df_cache = src_df
+
+        self._extended_source_index_cache = {
+            str(row["path"]): dict(row)
+            for row in full.get("extended_source_index") or []
+            if isinstance(row, Mapping) and row.get("path")
+        }
+        ext_df: dict[str, int] = {}
+        for row in self._extended_source_index_cache.values():
+            terms = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            for term in terms:
+                ext_df[str(term)] = ext_df.get(str(term), 0) + 1
+        self._extended_source_df_cache = ext_df
 
         # Discovered executable surfaces.  Listed, never routed: `route()` and
         # `solve()` stay on admitted capability, and calling one is an explicit
@@ -425,6 +441,16 @@ class UnifiedModel:
         return self._source_df_cache  # type: ignore[return-value]
 
     @property
+    def extended_source_index(self) -> dict[str, dict[str, Any]]:
+        self._hydrate_secondary_indexes()
+        return self._extended_source_index_cache  # type: ignore[return-value]
+
+    @property
+    def _extended_source_df(self) -> dict[str, int]:
+        self._hydrate_secondary_indexes()
+        return self._extended_source_df_cache  # type: ignore[return-value]
+
+    @property
     def research_index(self) -> dict[str, dict[str, Any]]:
         self._hydrate_secondary_indexes()
         return self._research_index_cache  # type: ignore[return-value]
@@ -474,6 +500,11 @@ class UnifiedModel:
             if self._source_index_cache is not None
             else int(self._core_meta.get("source_entry_points") or 0)
         )
+        ext_src_len = (
+            len(self._extended_source_index_cache)
+            if self._extended_source_index_cache is not None
+            else int(self._core_meta.get("extended_source_index_len") or 0)
+        )
         res_len = (
             len(self._research_index_cache)
             if self._research_index_cache is not None
@@ -483,6 +514,9 @@ class UnifiedModel:
             len(self._knowledge_cache)
             if self._knowledge_cache is not None
             else int(self._core_meta.get("knowledge_len") or 0)
+        )
+        fed_eng_len = sum(
+            1 for row in self.engines.values() if row.get("kind") == "FEDERATED_KERNEL_ENGINE"
         )
         return {
             "schema": SOLUTION_SCHEMA,
@@ -495,10 +529,12 @@ class UnifiedModel:
                 "bound_capabilities": declared.get("bound_capabilities"),
                 "receipt_backed_capabilities": declared.get("receipt_backed_capabilities"),
                 "engines": len(self.engines),
+                "federated_kernel_engines": fed_eng_len,
                 "skills": len(self.skills),
                 "knowledge_documents": knw_len,
                 "source_index_modules": src_len,
                 "source_index_entry_points": src_ep,
+                "extended_source_index_modules": ext_src_len,
                 "research_index_records": res_len,
                 "routing_tokens": len(self.index),
                 "harvested_capabilities": declared.get("harvested_capabilities"),
@@ -616,6 +652,9 @@ class UnifiedModel:
             if cid.casefold() in folded:
                 hits.add(cid)
         for eid in self.engines:
+            if eid.casefold() in folded:
+                hits.add(eid)
+                continue
             mode = eid.split(":", 1)[-1].replace("_", " ").casefold()
             if mode and mode in folded:
                 hits.add(eid)
@@ -743,11 +782,15 @@ class UnifiedModel:
         # introduced. Sort addressed capabilities ahead of the rest instead of
         # inflating the bonus until it wins by force.
         #
-        # Engines are excluded from that priority: they match by mode phrase
-        # (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
-        # which is ordinary keyword overlap, not an address. Promoting them let
-        # a 195.977 engine outrank the 911.668 capability the goal named.
-        addressed = {cid for cid in mentioned if cid in self.capabilities}
+        # Engines are excluded from that priority when matched merely by mode
+        # phrase (`engine:BOUND_CAPABILITY` matches the phrase "bound capability"),
+        # which is ordinary keyword overlap, not an address. Explicit literal
+        # `engine:<MODE>` or `meta:<MODE>` addresses ARE addresses and do get
+        # address priority.
+        folded_goal = str(goal or "").casefold()
+        addressed = {cid for cid in mentioned if cid in self.capabilities} | {
+            eid for eid in mentioned if eid in self.engines and eid.casefold() in folded_goal
+        }
         ranked = sorted(
             scores.items(),
             key=lambda kv: (kv[0] not in addressed, -kv[1], kv[0]),
@@ -859,6 +902,99 @@ class UnifiedModel:
                 if rows
                 else "NO_INDEXED_SOURCE_MATCHED"
             ),
+        }
+
+    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+        """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
+        terms = tokenize(query)
+        if not terms:
+            raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
+        wanted = set(terms)
+        combined: dict[str, dict[str, Any]] = {}
+        combined.update(self.source_index)
+        combined.update(self.extended_source_index)
+        total_docs = max(1, len(combined))
+        scored: list[tuple[float, str, dict[str, Any]]] = []
+        for path, row in combined.items():
+            counts = row.get("terms") if isinstance(row.get("terms"), Mapping) else {}
+            if not counts:
+                continue
+            score = 0.0
+            for term in wanted:
+                tf = int(counts.get(term, 0) or 0)
+                if tf <= 0:
+                    continue
+                df = max(1, self._source_df.get(term, 0) + self._extended_source_df.get(term, 0))
+                score += math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5)) * (1.0 + math.log(tf))
+            if score <= 0.0:
+                continue
+            if path.casefold() in query.casefold():
+                score += 8.0
+            scored.append((score, path, row))
+        scored.sort(key=lambda item: (-item[0], item[1]))
+        rows: list[dict[str, Any]] = []
+        for score, path, row in scored[: max(1, int(top_k))]:
+            rows.append(
+                {
+                    "path": path,
+                    "id": row.get("id"),
+                    "tree": row.get("tree") or "canonical/runtime",
+                    "classification": row.get("classification"),
+                    "sha256": row.get("sha256"),
+                    "summary": row.get("summary") or "",
+                    "symbol_count": int(row.get("symbol_count") or 0),
+                    "matched_terms": sorted(wanted & set(row.get("terms") or ())),
+                    "score": round(float(score), 6),
+                    "capability": False,
+                    "executable": False,
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "FIND_ANY_SOURCE",
+            "model_digest": self.digest,
+            "query": query,
+            "query_terms": terms,
+            "candidates": rows,
+            "best": rows[0] if rows else None,
+            "indexed_modules": len(combined),
+            "reason": (
+                "SOURCE_LOCATED__NOT_EXECUTABLE__NO_RECEIPT_OR_BOUND_ADAPTER"
+                if rows
+                else "NO_INDEXED_SOURCE_MATCHED"
+            ),
+        }
+
+    def list_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
+        """List all federated zero-model capability kernels registered in the unified model."""
+        wanted = domain.strip().upper() if domain else None
+        rows: list[dict[str, Any]] = []
+        by_domain: dict[str, int] = {}
+        for eid in sorted(self.engines):
+            row = self.engines[eid]
+            if row.get("kind") != "FEDERATED_KERNEL_ENGINE":
+                continue
+            dom = str(row.get("domain") or "UNCLASSIFIED")
+            if wanted and dom != wanted:
+                continue
+            by_domain[dom] = by_domain.get(dom, 0) + 1
+            rows.append(
+                {
+                    "id": eid,
+                    "mode": row.get("mode"),
+                    "domain": dom,
+                    "descriptor": row.get("descriptor"),
+                    "summary": row.get("summary"),
+                    "required_inputs": list(row.get("required_inputs") or []),
+                }
+            )
+        return {
+            "schema": SOLUTION_SCHEMA,
+            "operation": "LIST_FEDERATED_ENGINES",
+            "model_digest": self.digest,
+            "count": len(rows),
+            "domains": dict(sorted(by_domain.items())),
+            "engines": rows,
         }
 
     # ---------------------------------------------------------- research index
@@ -1338,7 +1474,16 @@ class UnifiedModel:
 
         # 1. SYSTEM-1 REFLEX: REUSE_EXISTING_CAPABILITY via compiled UnifiedModel when confident & epistemically trusted
         is_forged_cid = bool(capability_id and str(capability_id).startswith("forged."))
-        if not is_forged_cid and (regime_info["regime"] == "SYSTEM_1_REFLEX" or capability_id is not None):
+        is_confident_federated = bool(
+            r_preview.get("confident")
+            and isinstance(r_preview.get("best"), Mapping)
+            and r_preview["best"].get("kind") == "FEDERATED_KERNEL_ENGINE"
+        )
+        if not is_forged_cid and (
+            regime_info["regime"] == "SYSTEM_1_REFLEX"
+            or capability_id is not None
+            or is_confident_federated
+        ):
             primary = self.solve(
                 goal,
                 inputs=inputs,
@@ -1675,6 +1820,45 @@ class UnifiedModel:
         mode = str(row.get("mode") or "")
         if not mode:
             return self._failure(goal, "ENGINE_MODE_MISSING", routing=routing, engine_id=eid)
+        if row.get("kind") == "FEDERATED_KERNEL_ENGINE":
+            try:
+                from canonical.runtime.unified_hidden_capability_federation_v1 import (
+                    run_federated_engine,
+                )
+
+                out = run_federated_engine(mode, inputs, goal=goal)
+            except Exception as exc:
+                return self._failure(
+                    goal,
+                    "ENGINE_DISPATCH_FAILED:" + type(exc).__name__ + ":" + str(exc),
+                    routing=routing,
+                    engine_id=eid,
+                )
+            if not isinstance(out, Mapping):
+                return self._failure(
+                    goal, "ENGINE_RESULT_NOT_AN_OBJECT", routing=routing, engine_id=eid
+                )
+            passed = out.get("pass") is True
+            raw_status = str(out.get("status") or "")
+            return self._envelope(
+                operation="SOLVE",
+                goal=goal,
+                status=(
+                    raw_status
+                    if passed and raw_status.startswith("PASS__")
+                    else (raw_status if raw_status.startswith("FAIL_CLOSED__") else "FAIL_CLOSED__ENGINE_DID_NOT_REPORT_SUCCESS")
+                ),
+                **{"pass": bool(passed)},
+                reason=None if passed else str(out.get("reason") or "ENGINE_DID_NOT_REPORT_SUCCESS"),
+                routing=routing,
+                capability_id=eid,
+                engine_id=eid,
+                engine_mode=mode,
+                domain=row.get("domain"),
+                incremental_spend_usd=0,
+                model_calls=0,
+                result=dict(out),
+            )
         try:
             from canonical.runtime import unified_cognitive_fabric_v1 as fabric
 
@@ -1939,7 +2123,7 @@ def open_model(
             core = marshal.loads(cache_file.read_bytes())
             if (
                 isinstance(core, dict)
-                and core.get("core_format_v") == 3
+                and core.get("core_format_v") == 4
                 and core.get("raw_sha256") == raw_sha
                 and core.get("schema") == SCHEMA
             ):

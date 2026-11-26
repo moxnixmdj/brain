@@ -21,7 +21,7 @@
    "contract": 0
   },
   "canonical/runtime": {
-   "cli": 75,
+   "cli": 76,
    "contract": 37
   },
   "canonical/swe_kernel": {
@@ -58,19 +58,19 @@
   }
  },
  "counts": {
-  "cli": 1194,
+  "cli": 1195,
   "contract": 313,
   "declared": 863,
   "declared_by_capability_id": 19,
-  "files": 3482,
-  "hidden_executable": 625,
+  "files": 3483,
+  "hidden_executable": 626,
   "library": 1924,
   "self_described": 6,
   "tests": 45,
   "unparseable": 6
  },
  "declared_ids_seen": 2479,
- "digest": "7a137f6e82fe6ba4818ee120584bd453e65b55cc2431a5e4be69ac8d9634c622",
+ "digest": "1031816750d90e99468a0f001d73c2e10360149afe49312cf418b13a3180630b",
  "hidden": [
   {
    "bytes": 31118,
@@ -422,7 +422,7 @@
    ]
   },
   {
-   "bytes": 141902,
+   "bytes": 149897,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -448,7 +448,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "4cacb8ea801c2401a73480cdff77bf11a3d410cba9f70738243a3b5a68f41866",
+   "sha256": "aaad592d59f877ce16302562daa31f05813841b553bc1e80c348c1fbfb193cd7",
    "signals": [
     "evidence",
     "json_stdout",
@@ -2358,7 +2358,7 @@
    ]
   },
   {
-   "bytes": 61334,
+   "bytes": 65102,
    "declared_capability_id": null,
    "declared_inputs": [],
    "declared_result_fields": [],
@@ -2379,7 +2379,7 @@
    ],
    "kind": "cli",
    "path": "canonical/runtime/compile_brain_unified_model_v1.py",
-   "sha256": "90ac34bd7395489c8bf58f8235d57b7a9dc405e22a2efc62130495c00068746a",
+   "sha256": "54326cc4a8a5f2d8905454ca27ab12337f45872edb3b426d59a4889416b16a58",
    "signals": [
     "evidence",
     "json_stdout",
@@ -2579,6 +2579,48 @@
     "done",
     "work",
     "reuse"
+   ]
+  },
+  {
+   "bytes": 84014,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "doc": "Unified Hidden-Capability Federation Runtime \u2014 v1.",
+   "entrypoint": "main",
+   "id": "canonical.runtime.unified_hidden_capability_federation_v1.hidden.v1",
+   "imports": [
+    "__future__",
+    "ast",
+    "canonical",
+    "dataclasses",
+    "hashlib",
+    "importlib",
+    "json",
+    "math",
+    "pathlib",
+    "re",
+    "typing",
+    "warnings"
+   ],
+   "kind": "cli",
+   "path": "canonical/runtime/unified_hidden_capability_federation_v1.py",
+   "sha256": "706658ca4dd0853bca78d6678b4fab7c82a4f6995d0482390f13f1a499a40083",
+   "signals": [
+    "evidence",
+    "measured",
+    "receipt",
+    "refusal",
+    "schema",
+    "sha256",
+    "verification"
+   ],
+   "triggers": [
+    "unified",
+    "hidden",
+    "capability",
+    "federation",
+    "runtime"
    ]
   },
   {

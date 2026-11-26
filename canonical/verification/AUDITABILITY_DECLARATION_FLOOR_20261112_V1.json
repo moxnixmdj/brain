@@ -14,7 +14,7 @@
     "python3 canonical/tools/auditability_report_v1.py --floor",
     "python3 canonical/tools/auditability_report_v1.py --floor --baseline canonical/verification/AUDITABILITY_DECLARATION_FLOOR_20261112_V1.json"
   ],
-  "measured_at_git_head": "cce6c67a5feed2a9ee01a837c0e437ed9352af08",
+  "measured_at_git_head": "dcc1aca7ab7ca78db6059c9362810a3eaf787fa1",
   "measured_on": "2026-11-26",
   "not_deduplicated": "18 (source, argv) pairs repeat across the tree. They are counted as declared, not merged: deduplicating would shrink the denominator by a guess about what a repeated declaration means, and a smaller denominator flatters the fraction. Two records are two declarations until someone shows they are one claim.",
   "producer": "canonical/tools/auditability_report_v1.py --floor",
