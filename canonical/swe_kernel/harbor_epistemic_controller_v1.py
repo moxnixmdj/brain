@@ -29,8 +29,10 @@ def is_harbor_epistemic_envelope(inputs: Mapping[str, Any] | None) -> bool:
     return (
         isinstance(inputs.get("harbor_task"), str)
         and bool(str(inputs.get("harbor_task")).strip())
-        and "cycle" in inputs
+        and type(inputs.get("cycle")) is int
         and isinstance(inputs.get("observations"), list)
+        and inputs["cycle"] == 1 + len(inputs["observations"])
+        and all(isinstance(obs, Mapping) for obs in inputs["observations"])
     )
 
 

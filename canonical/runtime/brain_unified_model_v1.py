@@ -2766,6 +2766,16 @@ class UnifiedModel:
         if requested == "DBSP_MEMORY" or (requested == "AUTO" and ("zset_deltas" in inputs or "forge_entry" in inputs)):
             return self._epistemic_envelope(requested, goal, self.dbsp_bitemporal_forge(**inputs))
 
+        if requested == "EPISTEMIC" and "harbor_task" in inputs:
+            # The Harbor transport asks for a proposal, not workspace effects.
+            # Never route a malformed cycle to the ordinary workspace solver.
+            from canonical.swe_kernel.harbor_epistemic_controller_v1 import (
+                is_harbor_epistemic_envelope, solve_harbor_cycle,
+            )
+            if is_harbor_epistemic_envelope(inputs):
+                return solve_harbor_cycle(goal, inputs=inputs, model_digest=self.digest)
+            return self._failure(goal, "INVALID_HARBOR_CYCLE_ENVELOPE")
+
         if requested in ("EPISTEMIC", "PORTFOLIO"):
             if callable(inputs.get("mealy_oracle")):
                 return self._epistemic_envelope(requested, goal, self.learn_mealy_interface(
