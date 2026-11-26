@@ -33039,14 +33039,14 @@
   "extended_source_index_modules": 613,
   "federated_kernel_engines": 90,
   "harvested_admitted": 0,
-  "harvested_capabilities": 640,
-  "harvested_contract_surfaces": 33,
+  "harvested_capabilities": 642,
+  "harvested_contract_surfaces": 35,
   "harvested_program_surfaces": 607,
   "knowledge_documents": 752,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7418,
+  "research_index_records": 7419,
   "routing_tokens": 2946,
   "skills": 18,
   "source_index_entry_points": 559,
@@ -33055,7 +33055,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3ce3d3019e119aece4c2130fcbee03bc378a834ad3ec621b540bd84e6d7487e7"
+  "value": "ce2c75faab5d4687471a607782bd7edc39fde655ea39ece1e338a4d13f22fa3e"
  },
  "engines": [
   {
@@ -79466,7 +79466,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "61d8c50a323d71e22eab2954c71ebaca7e156d4b9761515a305e5a9a3c270478",
+   "sha256": "eb6639a3bbcc66c4ad100b16afe881d0145e29c69bde7b06857d22c54ff3c17b",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "triggers": [
     "brain",
@@ -151751,10 +151751,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2315,
+  "included_source_count": 2317,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "336a35452c25d024cfc868e275d092bc5cb2835ba1abcd992f61e0fbc569c37d"
+  "source_tree_digest": "3d4a699e707c1269b1aa391ed6f6aa1f84ae7794458c8c21e4fd7f16f41d820d"
  },
  "research_index": [
   {
@@ -319818,7 +319818,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/SIX_MOVES_K3_ZERO_LEAPFROG_UNIFIED_MODEL_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "b04f39d9ff180e7056939b257c938d5c1ec7394529c2d2c065eadd274a28530a",
+   "sha256": "7ee1ec015636f21acf177f11be4acb595c195b0c016cf329209ab686bd0d7c2f",
    "status": "SHIPPED",
    "terms": {
     "11.48": 1,
@@ -339153,7 +339153,7 @@
    "imported_by_count": 1,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/runtime/brain_unified_model_v1.py",
-   "sha256": "61d8c50a323d71e22eab2954c71ebaca7e156d4b9761515a305e5a9a3c270478",
+   "sha256": "eb6639a3bbcc66c4ad100b16afe881d0145e29c69bde7b06857d22c54ff3c17b",
    "summary": "Brain Unified Model V1 — one front door over the compiled Brain.",
    "symbol_count": 28,
    "symbols": [

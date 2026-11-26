@@ -9,7 +9,7 @@
   "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
   "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
   "parent_capability": "canonical/runtime/brain_unified_model_v1.py + canonical/swe_kernel/canonical_swe_spine_v1.py + canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py + canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
-  "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
+  "canonical_base_commit": "8d6ca4b9cbaf4690fd2e108dbe7a7d4a2b206d26",
   "canonical_generation": "2026-10-09-resource-bounded-bytes-v1",
   "causal_blocker": "UnifiedModel cold open_model() took 27.33 ms (load_model 262.6 ms) due to 11.48 MB passive JSON arrays and full capabilities_map unmarshaling, full model compilation took 13.7 s without incremental Z-set deltas, SpeculativeSandbox performed O(|workspace|) copytree per candidate, canonical_swe_spine_v1 failed 5/8 suites on bare stdlib Python due to external pytest subprocess dependence, gradient_free_law_consolidation_v1 suffered 0 held-out coverage and 4 held-out false refutations, ConflictAwareMealyLearner lacked surprise-gated inert pruning, and adversarial_mutation_admission_gate_v1 left 25% default (43.75% full-corpus) mutants surviving",
   "blocker_lease_key": "2026-10-09-resource-bounded-bytes-v1::GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER::UnifiedModel cold open_model() took 27.33 ms (load_model 262.6 ms) due to 11.48 MB passive JSON arrays and full capabilities_map unmarshaling, full model compilation took 13.7 s without incremental Z-set deltas, SpeculativeSandbox performed O(|workspace|) copytree per candidate, canonical_swe_spine_v1 failed 5/8 suites on bare stdlib Python due to external pytest subprocess dependence, gradient_free_law_consolidation_v1 suffered 0 held-out coverage and 4 held-out false refutations, ConflictAwareMealyLearner lacked surprise-gated inert pruning, and adversarial_mutation_admission_gate_v1 left 25% default (43.75% full-corpus) mutants surviving",
@@ -132,7 +132,7 @@
     "wall_clock_cost_ub": 1
   },
   "recursive_obs": {
-    "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
+    "canonical_base_commit": "8d6ca4b9cbaf4690fd2e108dbe7a7d4a2b206d26",
     "canonical_generation_or_commit": "2026-10-09-resource-bounded-bytes-v1",
     "deleted_or_bypassed_paths": [
       "11.48 MB passive cold arrays on the hot open_model() startup path",
@@ -235,8 +235,8 @@
       }
     ],
     "route_frontier": {
-      "canonical_base_commit": "4229c9bc596c4ab620496992c947b02eb5ff171c",
-      "checked_at_utc": "2026-11-26T03:28:00+00:00",
+      "canonical_base_commit": "8d6ca4b9cbaf4690fd2e108dbe7a7d4a2b206d26",
+      "checked_at_utc": "2026-11-26T03:51:00+00:00",
       "max_age_hours": 24,
       "discovery_required": true,
       "incumbent_route": "EAGER_MONOLITH_AND_SUBPROCESS_PYTEST_STATUS_QUO",
@@ -325,7 +325,7 @@
       "unresolved_plausible_dominators": [],
       "selected_route_preflight": {
         "all_required_dependencies_ready": true,
-        "checked_at_utc": "2026-11-26T03:28:00+00:00",
+        "checked_at_utc": "2026-11-26T03:51:00+00:00",
         "execution_dependencies_complete": true,
         "failed_dependencies": [],
         "max_age_hours": 2,
