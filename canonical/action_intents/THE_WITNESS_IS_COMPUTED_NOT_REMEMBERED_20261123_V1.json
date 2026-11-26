@@ -1,0 +1,90 @@
+{
+ "action_id": "THE_WITNESS_IS_COMPUTED_NOT_REMEMBERED_20261123_V1",
+ "action_intent_id": "THE_WITNESS_IS_COMPUTED_NOT_REMEMBERED_20261123_V1",
+ "action_kind": "REAL_CAPABILITY_ACQUISITION",
+ "action_summary": "Close the middle of the owner's loop -- 'know what you know and what you don't, then ask only for the part that matters' -- by making the disambiguating question computable instead of memorable. The previous round ended on 'the disambiguating input is itself knowledge and nothing manufactures it'. This round manufactures it: a surface's own help line is read into a closed algebra of line/JSON transforms (13 primitives, pipelines of two), the exact minimax number of runs that pins the readings is computed by search over the finite partition lattice, the chosen witness is run against the real program, and the certificate is falsified on adversarial inputs outside the design space before anything is stored. The invariant that makes it finite: a distinction the goal cannot observe is a distinction the agent need not resolve. Measured on 158 declared surfaces of 20 real GNU text filters: 10 certified and held-out-survived, 1 certified and falsified (reported), 6 honestly not-identifiable, 141 refused by name, 25 witnesses spent against 132 if every askable shape were run. A second implementation (BusyBox) certifies the same surfaces with the same classes and the same held-out survival, with no per-tool change.",
+ "active_program": "GENERAL_CAPABILITY_MAXIMIZATION_AND_VERIFIED_SELF_IMPROVEMENT_V1",
+ "agent_orientation": {
+  "contract": "canonical/governance/AGENT_ORIENTATION_CONTRACT_V1.json",
+  "conversation_memory_is_authority": false,
+  "earlier_routes_exhausted_reason": "Rejected before building: predicting a form's output from the default output (certifies sort -u as the wrong function in zero probes); a larger hand-written primitive set (11 comparator bugs were found in 8, so the error is in the mechanism, not the count); greedy information gain as the choice rule (it agrees with the exact optimum here, so it is unprovable rather than wrong); keeping sort -V behind a caveat (falsified three times on real inputs; its comparator is documented as intransitive); writing to memory before out-of-space falsification (every false certificate this round passed the in-space gate).",
+  "incremental_spend_usd": 0,
+  "independent_verification_completed": false,
+  "independent_verification_note": "Producer-run sandbox only. No independent identity re-ran the sweep. The second-implementation measurements (BusyBox vs GNU) are a producer-run cross-check, not independent verification.",
+  "laws_read_this_session": [
+   "AGENTS.md",
+   "canonical/governance/REPO_INTEGRITY_POLICY_V1.json",
+   "intake/THE_BOTTLENECK_IS_NOT_LEARNING_20261121_V1.md",
+   "intake/WHAT_TO_SAVE_20261121_V1.md",
+   "intake/SCAN_RETRIEVE_FETCH_20261121_V1.md",
+   "intake/THE_GUIDE_IS_THE_ENVIRONMENTS_OWN_DECLARATION_20261123_V1.md",
+   "intake/THE_WORLD_IS_A_GUIDE_BUT_THE_GUIDE_IS_NOT_THE_WORLD_20261122_V1.md"
+  ],
+  "objective_verbatim": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+  "producer_cognition_model_dependency_count": 0,
+  "progress_class": "VERIFIED_REUSABLE_CAPABILITY_GAIN",
+  "progress_evidence_paths": [
+   "canonical/runtime/interrogation_v1.py",
+   "canonical/tests/test_interrogation_v1.py",
+   "intake/RECEIPT_INTERROGATION_20261123_V1.json",
+   "intake/THE_WITNESS_IS_COMPUTED_NOT_REMEMBERED_20261123_V1.md"
+  ],
+  "route_class": "COMPOSE",
+  "scope_complete_discharge": false,
+  "terminal_achieved": false
+ },
+ "benchmark_or_family_rank_authority": "NONE__CAUSAL_FALSIFIER_ONLY",
+ "canonical_base_commit": "68bf040064452b740701dd81ad081d6f41f89b57",
+ "capability_credit_delta": 0,
+ "capability_target": "GENERAL_REUSABLE_PROBLEM_SOLVING_CAPABILITY_FRONTIER",
+ "causal_blocker": "The previous round named it exactly: a disambiguating input 'is itself knowledge, and nothing manufactures it', so 0 of 6 unguarded real commits could be turned into a check and every learned lesson re-derived from nothing. Nothing in the tree computed the question that separates the competing readings of an interface from the readings themselves.",
+ "date": "2026-11-23",
+ "expected_parent_change": "For any surface whose own declaration names a transform in the contained algebra, the minimum worst-case number of runs that pins its behaviour for a named goal is computable before any run is spent, is achieved by the loop, and the resulting class is either falsified on adversarial inputs outside the design space (and then not stored) or survives them. On GNU coreutils and BusyBox alike, `sort -n` and `uniq -c` are certified in 2 witnesses with identical equivalence classes and identical held-out survival.",
+ "explicit_user_authorization": [
+  "What if we make a perfect algorithm and that is basically our model?",
+  "all he should do is basically ask the right question",
+  "scan everything in the environment and then retrieve from his memory what he knows and what he doesn't know",
+  "saving his exact experience must be in a very sufficient way, maybe generalization",
+  "should he be goal-directed or should he learn everything",
+  "best part is no part"
+ ],
+ "falsification_condition": "Falsified if (a) a certified class disagrees with the real program on an input it was not fitted to -- one case is reported (fold -b), (b) the worst-case witness count claimed by the exact search is exceeded by a run -- not observed, the loop spent 25 witnesses for 11 certificates against a bound of 4 per surface, (c) a memory record is accepted whose recorded evidence no longer reproduces -- the tamper test refuses it as STALE, or (d) a second implementation of the same declared surface yields a different class -- it did not (GNU vs BusyBox, sort -n and uniq -c).",
+ "governance_change": false,
+ "honest_limits": [
+  "The algebra is textual: line orders, line dedupes, counts, and JSON key order. 88 of 158 real surfaces name none of it and are refused by name.",
+  "A certificate is relative to the named goal's shape domain, not a claim about the truth of the reading.",
+  "fold -b was certified inside the design space and falsified on held-out input. It is reported as a failure and is the reason memory is gated on held-out survival.",
+  "sort -V was removed from the universe: its comparator is documented as intransitive and no key-based sort can reproduce it. It is refused by name, not approximated.",
+  "Shapes are chosen by hand and are therefore part of the hypothesis, not independent evidence. This is named as the next bottleneck.",
+  "The measurement is GNU coreutils 9.1 / BusyBox 1.36.1 text filters on one host. GUI, browser, image and network surfaces are not measured and not claimed.",
+  "No frontier benchmark (OSWorld 2.1, Terminal-Bench 4.0, SWE-bench-class) was attempted: this is the mechanism an agent needs before it can act, not an agent."
+ ],
+ "incremental_spend_usd": 0,
+ "load_bearing_note": "Producer-run measurement. No open truth obligation is discharged and none is claimed.",
+ "measured_effect": "158 declared surfaces across 20 GNU text filters: 10 certified AND held-out-survived, 1 certified and falsified, 6 not identifiable, 141 refused by name. 25 witnesses spent to certify 11 surfaces against 132 if every askable shape were run; exact worst-case bound 4 per surface, independently checked by brute force on a reduced space; greedy baseline agrees. Cold certification of four surfaces 5.52 s total, warm recall of all four records 0.12 s with the recorded evidence re-run, tampered record refused as STALE. BusyBox sort -n and uniq -c certify to the same classes as GNU with the same held-out survival.",
+ "model_calls": 0,
+ "network_calls_at_measurement": 0,
+ "parameters_stored": 0,
+ "required_capability": "model-free scan + right-question + shortest-plan + verify + admit + persist, with the disambiguating question computed from the competing readings rather than recalled",
+ "route_class": "COMPOSE",
+ "route_id": "THE_WITNESS_IS_COMPUTED_FROM_THE_READINGS_AND_FALSIFIED_OUT_OF_SPACE",
+ "routes_considered": [
+  "PREDICT_THE_FORM_FROM_THE_DEFAULT_OUTPUT",
+  "ENLARGE_THE_HAND_WRITTEN_PRIMITIVE_SET",
+  "GREEDY_INFORMATION_GAIN_AS_THE_CHOICE_RULE",
+  "RUN_EVERY_ASKABLE_SHAPE",
+  "KEEP_SORT_V_BEHIND_A_CAVEAT",
+  "TRUST_THE_DECLARATIONS_NAMED_READING",
+  "WRITE_TO_MEMORY_BEFORE_OUT_OF_SPACE_FALSIFICATION"
+ ],
+ "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+ "selected_route": "THE_WITNESS_IS_COMPUTED_FROM_THE_READINGS_AND_FALSIFIED_OUT_OF_SPACE",
+ "selected_surviving_route": "THE_WITNESS_IS_COMPUTED_FROM_THE_READINGS_AND_FALSIFIED_OUT_OF_SPACE",
+ "status": "PROPOSED__PRODUCER_MEASURED__INTERROGATION__INDEPENDENT_VERIFICATION_OPEN",
+ "terminal_objective": "BUILD_THE_MOST_CAPABLE_GENERAL_RELIABLE_AND_RESOURCE_EFFICIENT_PROBLEM_SOLVING_SYSTEM_POSSIBLE",
+ "truth": {
+  "achieved": false,
+  "the_law_this_round_adds": "A distinction the goal cannot observe is a distinction the agent need not resolve; therefore a surface is known when every surviving reading agrees on the goal's observation domain, and the run that produces that agreement is computed from the readings, not remembered."
+ },
+ "weakens_existing_guard": false
+}

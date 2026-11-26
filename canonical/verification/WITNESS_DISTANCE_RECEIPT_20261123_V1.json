@@ -1,0 +1,134 @@
+{
+ "schema": "PROJECT_BRAIN_WITNESS_DISTANCE_RECEIPT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "date": "2026-11-23",
+ "branch": "arena/eac85348-brain",
+ "model_calls": 0,
+ "network_calls_at_decision_time": 0,
+ "weights": "unchanged",
+ "corpus": {
+  "source": "canonical/corpus/real_fix_pairs_20261119_V1.json (87) + real_fix_commits_20261116_V1.json",
+  "materialised_trees": 82,
+  "repositories": {
+   "pypa/packaging": 71,
+   "hukkin/tomli": 15,
+   "pallets/itsdangerous": 1
+  },
+  "oracle": "the commit's own test file, unmodified; the fixed source is an upper-bound witness and is never shown to a search"
+ },
+ "instrument": {
+  "schema": "PROJECT_BRAIN_WITNESS_DISTANCE_V1",
+  "ordering": "(gates_satisfied, -total_distance), lexicographic",
+  "typed_because": "real failures are not all numeric: DID NOT RAISE has no operands, an escaped error has no value yet",
+  "kinds": {
+   "mismatch": "relative deviation of the observed value",
+   "did_not_raise": 1.0,
+   "wrong_or_unparsed": 1.5,
+   "error": 4.0,
+   "unreachable": 4.0,
+   "no_output": 8.0
+  }
+ },
+ "instrument_defects_found_before_the_numbers_were_believed": [
+  {
+   "defect": "src layout imported the INSTALLED package from site-packages",
+   "effect": "every candidate edit invisible; looks exactly like 'no gradient'",
+   "fix": "source_paths() derives the directory holding the top-level package"
+  },
+  {
+   "defect": "multi-word section title (ERROR collecting tests/test_data.py) dropped",
+   "effect": "a failure that printed its cause read as NO_OUTPUT"
+  },
+  {
+   "defect": "section header counted as a second gate",
+   "effect": "every failure counted twice; real movement hidden"
+  },
+  {
+   "defect": "SUBFAILED (pytest-subtests) absent from the summary vocabulary",
+   "effect": "a whole file of real failures read as zero gates"
+  },
+  {
+   "defect": "gate set taken from the candidate's own output",
+   "effect": "a program that cannot import scored a perfect 0 of 0; fixed by fixing the gate set to the baseline's and matching by containment"
+  }
+ ],
+ "measurement": {
+  "at_whole_fix_granularity": {
+   "measured": 80,
+   "old_can_step_to_the_real_fix": 79,
+   "new_can_step_to_the_real_fix": 79,
+   "blind_spot": 0,
+   "conclusion": "HYPOTHESIS FALSE here: the integer already steps; a better objective buys nothing"
+  },
+  "at_partial_fix_granularity": {
+   "measured": 50,
+   "old_ranks_half_fix_as_progress": 10,
+   "new_ranks_half_fix_as_progress": 12,
+   "flat_patterns": {
+    "[1,1,0]": 9,
+    "[2,2,0]": 5,
+    "[4,4,0]": 4,
+    "[5,5,0]": 3,
+    "[3,3,0]": 3
+   }
+  },
+  "why_flat": {
+   "cases_with_a_wholly_flat_test_report": 17,
+   "of_those_where_locals_changed": 0,
+   "of_those_where_reached_lines_changed": 0,
+   "of_those_where_anything_in_the_output_changed": 0
+  },
+  "the_one_signal_that_moves": {
+   "test_output_distinguishes_partial_fixes": "~8/50",
+   "executed_line_set_distinguishes": 42,
+   "executions_measured": 50,
+   "not_a_gradient_because": "a different path is not a nearer path"
+  },
+  "does_it_repair": {
+   "searches": 8,
+   "old_accepted": 1,
+   "old_solved": 1,
+   "new_accepted": 1,
+   "new_solved": 1,
+   "per_candidate_over_49": {
+    "both_not_progress": 48,
+    "new_only": 1,
+    "old_only": 0
+   },
+   "conclusion": "the objective is NOT the binding constraint"
+  }
+ },
+ "the_named_next_bottleneck": {
+  "name": "the candidate basis",
+  "evidence": "25 candidates exhausted with no acceptance on real bugs, while a real multi-hunk fix exists for the same tasks; the mutation basis flips comparisons and swaps arithmetic, and these fixes add guards, change parse rules and adjust boundaries",
+  "why_a_scoring_round_must_not_follow": "measured 0 blind spots at fix granularity, so more objective work cannot pay here"
+ },
+ "tests": {
+  "file": "canonical/tests/test_the_witness_carries_the_distance_v1.py",
+  "count": 23,
+  "with_existing_suites": "98 passed in 6.37 s"
+ },
+ "guard": {
+  "rules": 11,
+  "violations": 0,
+  "result": "PASS"
+ },
+ "model_call_audit": {
+  "entry": "canonical/runtime/the_witness_carries_the_distance_v1.py",
+  "inference_endpoint_files": 0,
+  "verdict": "NONE"
+ },
+ "honest_limits": [
+  "three Python repositories, 82 mined fixes, one host, one interpreter; not SWE-bench, not SWE-bench Pro, not Terminal-Bench; \u00a76 remains open",
+  "the partial-fix construction is 'apply the first hunk'; the flat/locals/lines result is robust, the 10/50 and 12/50 counts are not",
+  "coverage is measured to move where the test cannot; that it can be USED to find a repair is not shown -- both search arms scored 1/8",
+  "the distance constants (1.0/1.5/4.0/8.0) are a justified ordering, not a fitted scale, and no sensitivity analysis was run",
+  "the 7 unmeasured fixes are NO_TREE from an 82-of-87 sample, not measurement failures"
+ ],
+ "what_is_not_claimed": [
+  "the SWE gap is closed or narrowed",
+  "that a better objective is the answer",
+  "that coverage is a gradient",
+  "\u00a76 done"
+ ]
+}

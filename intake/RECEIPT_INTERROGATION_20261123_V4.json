@@ -1,0 +1,355 @@
+{
+ "schema": "PROJECT_BRAIN_INTERROGATION_RECEIPT_V4",
+ "date": "2026-11-23",
+ "branch": "arena/eac85348-brain",
+ "what_changed_from_v3": [
+  "A negative vocabulary: a surface whose own words name an excluded or non-transforming operation is refused BY NAME with a reason, instead of being read as its nearest neighbour.",
+  "A searched witness replaces every declared table: witness_for_parameter searches 2,800 inputs over 9 parameter pairs; all 9 are witnessed in under 0.01 s each.",
+  "shapes_separate() and REFUSED__A_WITNESS_EXISTS_BUT_NO_SHAPE_IS_ONE: a witness the design space cannot express is a refusal, not a certificate.",
+  "Two new shapes (lines_leading_blank, lines_control_byte) came FROM found witnesses, taking the space to 20 shapes and 96 behaviours.",
+  "Two over-pruning bugs removed from optimal_move; a truncation flag added to smallest_certificate_tree so a capped search cannot report its fallback as exact."
+ ],
+ "design_space": {
+  "shapes": 20,
+  "behaviours": 96,
+  "primitives": 26,
+  "readings": 353,
+  "witness_inputs_searched": 2800,
+  "parameter_pairs_witnessed": "9 of 9"
+ },
+ "optimum": {
+  "value": 6,
+  "proved_by": [
+   "uncapped brute force, 1629 s",
+   "pruned search, 1.7 s"
+  ],
+  "tree_upper_bound": 7,
+  "tree_truncated": true
+ },
+ "sweep": {
+  "surfaces": 68,
+  "elapsed_s": 5.12,
+  "counts": {
+   "REFUSED": 47,
+   "CERTIFIED": 17,
+   "NOT_IDENTIFIABLE": 4
+  },
+  "certified": 17,
+  "survived_held_out": 17,
+  "falsified": 0,
+  "w_exceeds_bound": 0,
+  "certified_detail": [
+   {
+    "surface": [
+     "sort",
+     "-b"
+    ],
+    "witnesses": 4,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_dict+sort_leading_blanks",
+     "sort_general+sort_leading_blanks",
+     "sort_leading_blanks",
+     "sort_lex+sort_leading_blanks",
+     "sort_month+sort_leading_blanks",
+     "sort_num+sort_leading_blanks"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-d"
+    ],
+    "witnesses": 6,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_lex+sort_dict"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-g"
+    ],
+    "witnesses": 5,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_general",
+     "sort_lex+sort_general",
+     "sort_num+sort_general"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-i"
+    ],
+    "witnesses": 4,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_dict+sort_printable",
+     "sort_general+sort_printable",
+     "sort_leading_blanks+sort_printable",
+     "sort_lex+sort_printable",
+     "sort_month+sort_printable",
+     "sort_num+sort_printable",
+     "sort_printable"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-M"
+    ],
+    "witnesses": 5,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_lex+sort_month"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-n"
+    ],
+    "witnesses": 5,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_lex+sort_num",
+     "sort_num"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-r"
+    ],
+    "witnesses": 6,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_dict+sort_lex_desc",
+     "sort_general+sort_lex_desc",
+     "sort_leading_blanks+sort_lex_desc",
+     "sort_lex+reverse_lines",
+     "sort_lex+sort_lex_desc",
+     "sort_lex_desc",
+     "sort_month+sort_lex_desc",
+     "sort_num+sort_lex_desc",
+     "sort_printable+sort_lex_desc"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-s"
+    ],
+    "witnesses": 6,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_lex"
+    ]
+   },
+   {
+    "surface": [
+     "sort",
+     "-u"
+    ],
+    "witnesses": 6,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "sort_lex+uniq_glob"
+    ]
+   },
+   {
+    "surface": [
+     "uniq",
+     "-c"
+    ],
+    "witnesses": 4,
+    "bound": 6,
+    "naive": 20,
+    "reading": []
+   },
+   {
+    "surface": [
+     "uniq",
+     "-d"
+    ],
+    "witnesses": 3,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "dedupe_repeated",
+     "dedupe_repeated+fold_bytes",
+     "dedupe_repeated+fold_columns"
+    ]
+   },
+   {
+    "surface": [
+     "uniq",
+     "-D"
+    ],
+    "witnesses": 3,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "dedupe_all_repeated",
+     "dedupe_all_repeated+fold_bytes",
+     "dedupe_all_repeated+fold_columns"
+    ]
+   },
+   {
+    "surface": [
+     "fold",
+     "-b"
+    ],
+    "witnesses": 5,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "fold_bytes"
+    ]
+   },
+   {
+    "surface": [
+     "wc",
+     "-c"
+    ],
+    "witnesses": 2,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "count_bytes",
+     "count_bytes+fold_bytes",
+     "count_bytes+fold_columns",
+     "count_bytes+reverse_lines",
+     "sort_dict+count_bytes",
+     "sort_general+count_bytes",
+     "sort_leading_blanks+count_bytes",
+     "sort_lex+count_bytes",
+     "sort_lex_desc+count_bytes",
+     "sort_month+count_bytes",
+     "sort_num+count_bytes",
+     "sort_num_desc+count_bytes",
+     "sort_printable+count_bytes"
+    ]
+   },
+   {
+    "surface": [
+     "wc",
+     "-m"
+    ],
+    "witnesses": 2,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "count_bytes",
+     "count_bytes+fold_bytes",
+     "count_bytes+fold_columns",
+     "count_bytes+reverse_lines",
+     "sort_dict+count_bytes",
+     "sort_general+count_bytes",
+     "sort_leading_blanks+count_bytes",
+     "sort_lex+count_bytes",
+     "sort_lex_desc+count_bytes",
+     "sort_month+count_bytes",
+     "sort_num+count_bytes",
+     "sort_num_desc+count_bytes",
+     "sort_printable+count_bytes"
+    ]
+   },
+   {
+    "surface": [
+     "wc",
+     "-l"
+    ],
+    "witnesses": 3,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "count",
+     "count+fold_bytes",
+     "count+fold_columns",
+     "count+reverse_lines",
+     "sort_dict+count",
+     "sort_general+count",
+     "sort_leading_blanks+count",
+     "sort_lex+count",
+     "sort_lex_desc+count",
+     "sort_month+count",
+     "sort_num+count",
+     "sort_num_desc+count",
+     "sort_printable+count"
+    ]
+   },
+   {
+    "surface": [
+     "wc",
+     "-w"
+    ],
+    "witnesses": 3,
+    "bound": 6,
+    "naive": 20,
+    "reading": [
+     "count_words",
+     "count_words+fold_bytes",
+     "count_words+fold_columns",
+     "count_words+reverse_lines",
+     "sort_dict+count_words",
+     "sort_general+count_words",
+     "sort_leading_blanks+count_words",
+     "sort_lex+count_words",
+     "sort_lex_desc+count_words",
+     "sort_month+count_words",
+     "sort_num+count_words",
+     "sort_num_desc+count_words",
+     "sort_printable+count_words"
+    ]
+   }
+  ]
+ },
+ "refusals_by_name": [
+  "fold -s: no key reproduces it, removed",
+  "sort -V: intransitive comparator, removed",
+  "sort -c: a checker, not a transform",
+  "sort -f: not a key function, removed"
+ ],
+ "the_two_false_certificates_this_round_found": [
+  {
+   "surface": "sort -V",
+   "was": "sort_leading_blanks (V3 sweep, FALSIFIED on held-out)",
+   "why": "'natural sort of (version) numbers' read as sort_lex + count",
+   "now": "REFUSED: intransitive comparator, removed"
+  },
+  {
+   "surface": "sort -c",
+   "was": "sort_lex (V4 sweep, first run, FALSIFIED on held-out b'b\\nb\\n')",
+   "why": "'check for sorted input; do not sort' read as sort_lex",
+   "now": "REFUSED: a checker, not a transform"
+  }
+ ],
+ "honest_limits": [
+  "Every number here comes from running the mechanism in this session; none is recalled from prose.",
+  "The node-capped tree search reports an UPPER BOUND of 7 because it exhausts 50,000 nodes. The root optimum is 6, proved by an uncapped brute force that took 1,629 seconds and by the pruned search that now runs in ~1.7 s. The two searches agree; the truncation is recorded in the result.",
+  "sort -b and sort -i are NOT invisible. V3 said they were; that was a failed search reported as a property of the program. Both are certified in 4 witnesses and survive held-out.",
+  "sort -b/sort -i are exact on the claimed alphabet (abcXYZ019 ._-[]()\\t\\x01\\x7f), 0/2000 each. They are NOT exact when a line holds a control byte other than \\x01 or \\x7f (10-22 of 400-800). That is in the docstrings and it bounds the certificate.",
+  "Four shapes are refused because the witness exists but no shape in the design space is such an input (REFUSED__A_WITNESS_EXISTS_BUT_NO_SHAPE_IS_ONE, with the witness attached). That is a different failure from 'no witness exists' and the two are never merged.",
+  "uniq -c certifies on count_runs, which its declaration never names ('count' does not select it). The record reports named_in_class=[] rather than pretending the declaration pointed here.",
+  "17 certified is not 17 known programs solved. Each is one flag of one program, against 20 shapes and 26 primitives. 47 surfaces refuse, 4 are equivalent on the declared space, and the algebra still cannot express version sort, case-folding sort, or fold -s at all."
+ ],
+ "tests": {
+  "file": "canonical/tests/test_interrogation_v1.py",
+  "count": 43,
+  "seconds": 9.0,
+  "note": "43 passed in 9.00 s; the suite got FASTER as the search got exact, from 52.8 s"
+ }
+}

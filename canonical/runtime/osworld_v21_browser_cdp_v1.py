@@ -7,6 +7,7 @@ The API is intentionally declarative and contains no arbitrary JavaScript escape
 from __future__ import annotations
 
 from typing import Any, Mapping
+import re
 from urllib.parse import urlparse
 
 SCHEMA = "PROJECT_BRAIN_OSWORLD_V21_BROWSER_CDP_V1"
@@ -31,6 +32,12 @@ def _index(value: Any, name: str, lo: int = 0, hi: int = 100) -> int:
     if isinstance(value, bool) or not isinstance(value, int) or not lo <= value <= hi:
         raise BrowserCDPError(name + "_INVALID")
     return value
+
+
+# Roles the accessibility tree uses for things a person can type into, as opposed
+# to things a person presses. The distinction is computed once from the tree
+# rather than guessed per element.
+TEXT_ROLES = ("textbox", "searchbox", "combobox", "spinbutton")
 
 
 def _url(value: Any) -> str:
@@ -76,6 +83,32 @@ class BrowserCDP:
             pages = self._pages(browser)
             out_pages = []
             for page_index, page in enumerate(pages[:20]):
+                # Row membership is stamped on the element BEFORE the element list is
+                # read. The two passes used to run in the wrong order -- the reader ran
+                # first and the stamper second -- so every control came back untagged
+                # even though the stamping code was correct. Ordering is a correctness
+                # property here, not a style choice.
+                try:
+                    page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              const t=(r.innerText||r.textContent||'').trim()
+                                        .replace(/\s+/g,' ');
+                              if (!t) continue;
+                              for (const c of r.querySelectorAll(
+                                  'input,button,a,[role=button],[role=link],[role=checkbox]'))
+                                if (!c.hasAttribute('data-brain-row'))
+                                  c.setAttribute('data-brain-row', t.slice(0,200));
+                            }
+                        }""")
+                except Exception:
+                    pass
                 try:
                     elements = page.locator(
                         "a,button,input,textarea,select,[role=button],[role=link],"
@@ -93,19 +126,131 @@ class BrowserCDP:
                             text:(e.innerText||e.textContent||'').trim().slice(0,240),
                             aria:e.getAttribute('aria-label')||'',
                             placeholder:e.getAttribute('placeholder')||'',
+                            aria_name:((e.getAttribute('aria-label')||'').trim()
+                              || (e.labels&&e.labels.length?[...e.labels].map(l=>(l.innerText||'').trim()).join(' '):'')
+                              || ((e.getAttribute('role')==='textbox'||e.tagName==='TEXTAREA')
+                                    ? (e.getAttribute('aria-labelledby')
+                                        ? (document.getElementById(e.getAttribute('aria-labelledby'))?.innerText||'').trim() : '')
+                                    : (e.innerText||e.textContent||'').trim())
+                              || (e.getAttribute('title')||'').trim()).slice(0,240),
                             name:e.getAttribute('name')||'',
                             value:('value' in e ? String(e.value) : '').slice(0,240),
                             href:e.getAttribute('href')||'',
+                            brain_row:e.getAttribute('data-brain-row')||'',
                             checked:('checked' in e ? Boolean(e.checked) : null),
                             disabled:Boolean(e.disabled)
                         }))"""
                     )
                 except Exception:
                     elements = []
+                # What the page STATES, not only what it lets you press. A todo's
+                # label is inert text, not a control, so a snapshot built only from
+                # interactive elements cannot see the work it was asked to do: the
+                # checkbox count and the filters appeared and the words "buy milk"
+                # were absent from the report. Measured: 1 of 11 apps "passed" a
+                # goal check while 11 of 11 had actually done the work.
+                try:
+                    body_text = page.inner_text("body", timeout=5000)
+                except Exception:
+                    body_text = ""
+                # SHADOW DOM IS A DECLARATION TOO. Measured: the lit implementation
+                # put its entire todo list inside four shadow roots, so body.inner_text
+                # reported "0 items" while the app had done the work -- the words were
+                # present and invisible to the reader. `body_text` above is the light
+                # DOM; this is the composed tree, which is what a person actually sees.
+                # ROWS: a container that declares a text AND holds a control. This is
+                # how a person identifies a silent checkbox -- by the text beside it --
+                # and the relation is in the DOM, so it costs one traversal instead of
+                # being remembered per app.
+                try:
+                    rows = page.evaluate(
+                        """() => {
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          const out=[]; const seen=new Set();
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              if (seen.has(r)) continue;
+                              const t=(r.innerText||r.textContent||'').trim()
+                                        .replace(/\s+/g,' ');
+                              if (!t) continue;
+                              const ctl=r.querySelector(
+                                'input[type=checkbox],[role=checkbox],input[type=radio]');
+                              if (!ctl) continue;
+                              seen.add(r);
+                              out.push({index: out.length, role: r.tagName.toLowerCase(),
+                                        text: t.slice(0,200),
+                                        control_role: (ctl.getAttribute('role')||'checkbox')
+                                          .toLowerCase(),
+                                        control_checked: Boolean(ctl.checked),
+                                        control_name: (ctl.getAttribute('aria-label')||'').trim()});
+                            }
+                          return out.slice(0,60);
+                        }""")
+                except Exception:
+                    rows = []
+                try:
+                    row_of = page.evaluate(
+                        """() => {
+                          const SEL = 'a,button,input,textarea,select,[role=button],[role=link],'
+                            +'[role=checkbox],[contenteditable=true],[tabindex]';
+                          const roots=[document];
+                          const push=(r)=>{for(const e of r.querySelectorAll('*'))
+                            {if(e.shadowRoot){roots.push(e.shadowRoot);push(e.shadowRoot);}}};
+                          push(document);
+                          const map=new Map();
+
+                          const all=[];
+                          // Filtered EXACTLY as `elements` is filtered. Pairing a filtered
+                          // list with an unfiltered one by index is how every control came
+                          // back holding the wrong row's text.
+                          for (const root of roots)
+                            for (const e of root.querySelectorAll(SEL)) {
+                              const r=e.getBoundingClientRect();
+                              const st=getComputedStyle(e);
+                              if (r.width>0 && r.height>0 && st.visibility!=='hidden'
+                                  && st.display!=='none') all.push(e);
+                            }
+                          const sel='li,tr,[role=listitem],[role=row],.todo-list>li';
+                          for (const root of roots)
+                            for (const r of root.querySelectorAll(sel)) {
+                              const t=(r.innerText||r.textContent||'').trim().replace(/\s+/g,' ');
+                              if (!t) continue;
+                              for (const c of r.querySelectorAll(
+                                  'input,button,a,[role=button],[role=link],[role=checkbox]'))
+                                if (!map.has(c)) {
+                                  map.set(c, t.slice(0,200));
+                                  try { c.setAttribute('data-brain-row', t.slice(0,200)); } catch {}
+                                }
+                            }
+                          return all.map(e => {
+                            try { return e.getAttribute('data-brain-row'); } catch { return null; }
+                          });
+                        }""")
+                except Exception:
+                    row_of = []
+                # The marker is authoritative. Pairing two lists by index was the bug:
+                # the row map and the element list are built by different traversals and
+                # a filtered list cannot be aligned with an unfiltered one.
+                for el in elements:
+                    el["row_text"] = el.get("brain_row") or None
+                try:
+                    shadow_text = page.evaluate(
+                        "() => { const out=[]; const walk=(r)=>{for(const e of r.querySelectorAll('*'))"
+                        "{if(e.shadowRoot){out.push(e.shadowRoot.textContent||'');walk(e.shadowRoot);}}};"
+                        "walk(document); return out.join(' '); }")
+                except Exception:
+                    shadow_text = ""
                 out_pages.append({
                     "page_index": page_index,
                     "url": page.url,
                     "title": page.title(),
+                    "rows": rows,
+                    "body_text": re.sub(r"\s+", " ",
+                                        (body_text or "") + " " + (shadow_text or "")).strip()[:20000],
                     "elements": elements[:MAX_ELEMENTS],
                 })
             return {
@@ -137,6 +282,93 @@ class BrowserCDP:
 
             if kind == "NAVIGATE":
                 page.goto(_url(op.get("url")), wait_until="domcontentloaded", timeout=30000)
+
+            elif kind == "CHECK_IN_ROW":
+                # A control that declares no name is still addressable: the row it
+                # sits in declares one, and that is where a person looks too.
+                row_text = _text(op.get("row_text"), "ROW_TEXT", 400)
+                desired = op.get("checked", True)
+                if not isinstance(desired, bool):
+                    raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                # The container that holds a row is not always a listitem: implementations
+                # use li, tr, a custom element, or a div with a role. Try the roles the
+                # accessibility tree actually uses, then the plain tags, then whatever
+                # element owns this text -- and only then give up.
+                loc = None
+                for probe in (
+                    page.get_by_role("listitem").filter(has_text=row_text),
+                    page.get_by_role("row").filter(has_text=row_text),
+                    page.locator("li,tr,[role=listitem],[role=row]").filter(has_text=row_text),
+                ):
+                    try:
+                        if probe.count() == 0:
+                            continue
+                        cand = probe.first.get_by_role("checkbox")
+                        if cand.count() == 0:
+                            cand = probe.first.locator(
+                                "input[type=checkbox],[role=checkbox]")
+                        if cand.count() == 0:
+                            continue
+                        loc = cand.first
+                        break
+                    except Exception:
+                        continue
+                if loc is None:
+                    raise BrowserCDPError("ROW_CONTROL_NOT_FOUND")
+                loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
+
+            elif kind == "PRESS_POSITION":
+                # The last resort, and it is positional only because the NAME stopped
+                # working: on one implementation the textbox lives inside a custom
+                # element that renders correctly and responds to a press performed
+                # immediately, but not to one performed after a second snapshot -- the
+                # value is gone by then. Measured: press-immediately works, press-later
+                # leaves "0 items left!". The control is still addressed by its kind and
+                # its position in the declaration, never by a coordinate.
+                which = _text(op.get("control"), "CONTROL", 20)
+                typed = _index(op.get("nth", 0), "NTH", 0, 49)
+                key = _text(op.get("key", "Enter"), "KEY", 100)
+                if which != "textbox":
+                    raise BrowserCDPError("CONTROL_NOT_SUPPORTED:" + which)
+                page.get_by_role("textbox").nth(typed).press(key, timeout=10000)
+
+            elif kind in ("FILL_NAME", "PRESS_NAME", "CLICK_NAME", "TOGGLE_NAME"):
+                # NAME-ADDRESSED ACTIONS. Every other op on this surface takes a CSS
+                # selector, which is a guess at the environment's internal structure.
+                # The accessibility tree publishes the *name* a control answers to, and
+                # that name is stable across 45 different implementations of the same
+                # interface, so it is the cheapest address that generalises.
+                name = _text(op.get("name"), "NAME", 400)
+                exact = op.get("exact", False)
+                if not isinstance(exact, bool):
+                    raise BrowserCDPError("EXACT_MUST_BE_BOOL")
+                role = op.get("role")
+                if role is not None:
+                    role = _text(role, "ROLE", 40).lower()
+                named = page.get_by_role(role, name=name, exact=exact) if role \
+                    else page.get_by_label(name, exact=exact)
+                target = named.first
+                if kind == "FILL_NAME":
+                    value = op.get("text")
+                    if not isinstance(value, str) or len(value) > 20000:
+                        raise BrowserCDPError("FILL_TEXT_INVALID")
+                    if role is None:
+                        target = page.get_by_role(
+                            "textbox", name=name, exact=exact).first
+                    target.fill(value, timeout=10000)
+                elif kind == "PRESS_NAME":
+                    key = _text(op.get("key"), "KEY", 100)
+                    if role is None:
+                        target = page.get_by_role("textbox", name=name, exact=exact).first
+                    target.press(key, timeout=10000)
+                elif kind == "TOGGLE_NAME":
+                    desired = op.get("checked", True)
+                    if not isinstance(desired, bool):
+                        raise BrowserCDPError("CHECKED_MUST_BE_BOOL")
+                    loc = page.get_by_role("checkbox", name=name, exact=exact).first
+                    loc.check(timeout=10000) if desired else loc.uncheck(timeout=10000)
+                else:
+                    target.click(timeout=10000)
 
             elif kind == "CLICK_SELECTOR":
                 selector = _text(op.get("selector"), "SELECTOR", 1000)

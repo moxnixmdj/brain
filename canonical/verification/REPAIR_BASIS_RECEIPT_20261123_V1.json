@@ -1,0 +1,125 @@
+{
+ "schema": "PROJECT_BRAIN_REPAIR_BASIS_RECEIPT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "date": "2026-11-23",
+ "branch": "arena/eac85348-brain",
+ "model_calls": 0,
+ "network_calls_at_decision_time": 0,
+ "weights": "unchanged",
+ "corpus": {
+  "materialised_trees": 82,
+  "repositories": [
+   "pypa/packaging",
+   "hukkin/tomli",
+   "pallets/itsdangerous"
+  ],
+  "oracle": "the commit's own test file, unmodified; the fixed source is never shown to the search"
+ },
+ "the_baseline_nobody_had_printed": {
+  "what": "the repair loop on real bugs, before any change this round",
+  "attempted": 17,
+  "solved": 0,
+  "accepted": 0,
+  "open_no_strictly_improving_candidate": 13,
+  "hard_exceptions": 4
+ },
+ "the_binding_constraint_measured": {
+  "candidates_generated_per_bug_median": 7129,
+  "first_candidate_within_3_lines_of_a_failing_frame_median_position": 3025,
+  "default_budget_per_file": "30..250",
+  "bugs_reaching_the_focus_within_30": "0/39",
+  "cause": "specs sorted near-first then walked in AST generation order; on packaging 46167dcd the first twelve candidates were all line 4, deleting the docstring",
+  "fixes": [
+   "render before ordering",
+   "round-robin by family"
+  ]
+ },
+ "what_a_real_fix_is": {
+  "fixes": 87,
+  "hunks": 381,
+  "TOKEN_COUNT_CHANGE": 129,
+  "REPLACE_MULTILINE": 108,
+  "INSERT": 92,
+  "MULTI_TOKEN_SWAP": 26,
+  "DELETE": 14,
+  "NAME_SWAP": 11,
+  "the_miss": "20 fixes rewrite an attribute to a bare in-scope name and 22 add a bare name alone; a swap can only write a.x -> a.y, never x"
+ },
+ "the_family_added": {
+  "name": "NAME_SCOPE",
+  "pool": "the module's own declared fields",
+  "never": "the test's literals -- that would be the answer, and copying it is leakage",
+  "isolated_conversion": "9/14 eligible bugs strictly improved, each reaching zero failures",
+  "end_to_end_conversion": "1/10"
+ },
+ "the_verifier_lied_four_times": [
+  {
+   "defect": "a green exit with no tests scored 0",
+   "evidence": "a candidate destroyed collection and reported '0 failed, 0 passed'",
+   "fix": "refuse any run whose counts sum to zero or that says 'no tests ran'"
+  },
+  {
+   "defect": "a collection error counted as one failure",
+   "evidence": "ERROR collecting scored better than the 4 assertion failures it replaced; 4 -> 1 was logged as progress",
+   "fix": "refuse a run that could not collect the module"
+  },
+  {
+   "defect": "a wrapped pytest exit reached the generic counter",
+   "evidence": "RuntimeError: PYTEST_EXECUTION_FAILED:4 still prints a summary, so rc=4 scored 1 and a broken program looked like a repair",
+   "fix": "refuse any run carrying a wrapped non-zero status"
+  },
+  {
+   "defect": "a stale bytecode cache replayed the old program",
+   "evidence": "an accepted 4 -> 1 candidate re-runs at rc=4 from a clean tree",
+   "fix": "purge the whole __pycache__ directory, not only each touched file's .pyc"
+  }
+ ],
+ "the_one_verified_repair": {
+  "repo": "pypa/packaging",
+  "sha": "8efde605",
+  "family": "name_scope",
+  "edit": "f\"{__spec__.parent}.errors\" -> f\"{parent}.errors\" inside __lazy_modules__",
+  "buggy": "4 failed, 344 passed",
+  "repaired": "0 failed, 348 passed",
+  "test_file_written": false,
+  "status": "PASS__BOUNDED_MULTI_ROUND_REPAIR_FOUND"
+ },
+ "false_certificates": {
+  "before_the_fixes": 3,
+  "after_the_fixes": 0
+ },
+ "tests": {
+  "file": "canonical/tests/test_the_basis_could_not_reach_the_line_20261123_v1.py",
+  "count": 8,
+  "with_neighbouring_suites": "66 passed"
+ },
+ "pre_existing_failures_not_caused_by_this_round": {
+  "measured": 17,
+  "method": "every change stashed and the failures reproduced at the branch tip",
+  "files": [
+   "canonical/tests/test_measured_repair_portfolio_v1.py (7)"
+  ]
+ },
+ "guard": {
+  "rules": 11,
+  "violations": 0,
+  "result": "PASS"
+ },
+ "honest_limits": [
+  "three Python repositories, 82 fixes, one host; not SWE-bench, not SWE-bench Pro, not Terminal-Bench; \u00a76 remains open",
+  "1 of 10 end-to-end is one bug, not a rate; the isolated 9/14 is a family signal",
+  "prepare_corpus sampled 82 of 87; 4 fixes flip zero tests even at the fixed source and are unfixable by construction",
+  "dropped_operand still generates nonsense (wrapping names in multiplication); it no longer issues false certificates but it wastes budget",
+  "the loop's in-process pytest harness exits the process on a sub-package source"
+ ],
+ "what_is_not_claimed": [
+  "advanced SWE is solved or narrowed",
+  "the basis is adequate (129 of 381 hunks are TOKEN_COUNT_CHANGE)",
+  "1/10 is a repair rate"
+ ],
+ "next_bottleneck": {
+  "name": "budget scheduling, not the grammar",
+  "evidence": "NAME_SCOPE converts 9/14 in isolation and 1/10 inside the full grammar; the loop treats every family as interchangeable",
+  "warning": "anything that adds candidates without adding information repeats round 21: more seeds, one part lost, zero gained"
+ }
+}

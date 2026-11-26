@@ -1,0 +1,101 @@
+{
+ "schema": "PROJECT_BRAIN_HOLD_A_CONSTRAINT_RECEIPT_V1",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX_MEASUREMENT",
+ "date": "2026-11-23",
+ "branch": "arena/eac85348-brain",
+ "model_calls": 0,
+ "weights": "unchanged",
+ "network_during_run": 0,
+ "the_bottleneck": {
+  "named_by_the_benchmark": "OSWorld 2.1, 108 long-horizon workflows, >250 agent steps, names constraint tracking and mid-task change detection as the failure modes",
+  "named_by_this_project": "Five thousand documents change nothing, because the search cannot say 'closer' -- 'the search has no measure of distance to the part it is trying to reach'",
+  "measured_here": "asked to mark one item complete and leave two alone, the two-action organ scored every candidate 2.0 and ranked 'Toggle All Input' first -- a control that would complete all three and violate the constraint while satisfying the named one. A goal that is a list of strings cannot express 'and not the others'."
+ },
+ "the_idea": {
+  "one_line": "a postcondition is not a string; it is a clause matrix with polarity and scope, and a candidate action is scored by how many clauses it changes",
+  "clauses": [
+   "POSITIVE: beta shows as complete",
+   "NEGATIVE: alpha does not",
+   "INVARIANT: gamma keeps the state it has now"
+  ],
+  "why_it_generalises": "nothing here knows what a todo is. A row is a container that declares a text and holds a control; a control with no name is addressed by the text of the row it sits in, which is where a person looks too. The app supplies every word."
+ },
+ "benchmark": {
+  "family": "TodoMVC, 11 self-contained implementations in 11 frameworks, none written here",
+  "T1_one_of_three": {
+   "task": "mark beta complete but leave alpha and gamma uncompleted",
+   "result": "11/11 SATISFIED",
+   "steps_total": 11,
+   "seconds": 120.6
+  },
+  "T2_two_of_four": {
+   "task": "mark alpha and beta complete but leave gamma and delta uncompleted",
+   "result": "11/11 SATISFIED",
+   "steps_total": 22,
+   "seconds": 164.8
+  },
+  "T3_mid_task_change": {
+   "task": "mark alpha and beta complete, then the user completes alpha as well; the run must detect the drift and report it",
+   "result": "11/11 RECOVERED_AFTER_CHANGE",
+   "steps_total": 33,
+   "seconds": 166.7
+  }
+ },
+ "the_control_that_gives_the_result_meaning": {
+  "procedure": "a loop with no constraint does the cheapest thing available: the global toggle (Mark all as complete / Toggle All Input / Mark all todos as complete).",
+  "result": "0/11 satisfy the task",
+  "what_it_measured": "on 6 apps the global toggle completed the two protected rows; on 5 it completed nothing at all. Either way the task is not done, and the constraint organ is 11/11 on the same 11 apps.",
+  "honest_note": "the control is deliberately the strongest cheap action a constraint-blind loop would take, not a strawman: a global toggle is one click and is exactly what the two-action organ ranked first."
+ },
+ "bugs_found_by_running": [
+  {
+   "bug": "polarity by adjacency instead of scope",
+   "symptom": "'leave alpha and gamma uncompleted' classified alpha as a weak INVARIANT, so the loop checked alpha 12 times and never reached the positive clause",
+   "fix": "a leave/keep scope runs to the end of its list, and a negative is strictly stronger than an invariant, so the strong reading wins"
+  },
+  {
+   "bug": "the leave scope ran past a contrastive conjunction",
+   "symptom": "'leave alpha alone but mark beta complete' made beta NEGATIVE too, inverting the task's own instruction",
+   "fix": "the scope ends at but/however/then/instead"
+  },
+  {
+   "bug": "a satisfied clause was scored like an open one",
+   "symptom": "every named row scored 6.0, so acting on the protected row looked as good as acting on the open one",
+   "fix": "a clause that already holds scores negative -- acting on it can only break it"
+  },
+  {
+   "bug": "row membership paired two traversals by index",
+   "symptom": "row_text was None on every control, so no row-addressed action was possible on the two shadow-DOM apps",
+   "fix": "stamp the row text on the element BEFORE the element list is read, and carry the row text itself rather than a sequence number"
+  },
+  {
+   "bug": "clause items matched by equality against the whole row text",
+   "symptom": "'Toggle Todo beta' never equalled 'beta', so every row scored 0.0 and the planner fell through to a global checkbox",
+   "fix": "match the item as a WORD inside what the row publishes, on both the state reader and the scorer"
+  },
+  {
+   "bug": "the row container was assumed to be a listitem",
+   "symptom": "a 10 s timeout clicking a row on one implementation",
+   "fix": "try listitem, then row, then the plain tags, then refuse by name"
+  }
+ ],
+ "honest_limits": [
+  "Still 11 apps of ONE specification, three tasks, one host, one browser build, no repeat trials. This is depth within a family, not generalisation across families.",
+  "Three to six actions, not 250. The tasks chain create -> mutate -> verify, but nothing here approaches OSWorld's horizon and no OSWorld task was run.",
+  "The clause reader is a closed word class (complete/incomplete/leave/keep/but). A task phrased outside it yields no clause or the wrong polarity. It is a parser of a small grammar, not an understanding of the instruction.",
+  "The postcondition is read from the app's own declaration, so an app that declares the wrong state would be believed. The effect is only as trustworthy as the declaration.",
+  "The control is one procedure, not a search over adversarial policies. A blind loop that happened to click the right row would have passed, and nothing here rules that out.",
+  "The SWE-bench generation gap (1.4% ceiling against 78.80%) is untouched."
+ ],
+ "tests": {
+  "file": "canonical/tests/test_hold_a_constraint_v1.py",
+  "count": 13,
+  "with_all_suites": "92 passed in 7.03 s",
+  "no_browser_needed": "the clause reader and the scorer are pure functions of what the interface declared"
+ },
+ "no_regression": {
+  "add_a_todo": "11/11",
+  "natural_language_only": "11/11",
+  "previous_rounds": "unchanged"
+ }
+}

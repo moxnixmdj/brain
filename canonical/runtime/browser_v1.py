@@ -214,13 +214,27 @@ def bind(port: str = PORT):
     return b
 
 
+def _is_local(url: str) -> bool:
+    """A page served by this machine: plain HTTP to loopback, or a local file.
+
+    A key pin is a statement about which certificate we will accept from a TLS
+    peer. A loopback HTTP page has no peer, no certificate and no handshake, so
+    there is nothing to pin and demanding a pin is a category error -- it made
+    the whole browser capability unreachable for any app not on the public web,
+    which is most of what a computer-use task touches. `ensure([])` already
+    means "start with no pins", so the fix is a host list, not a new mechanism.
+    """
+    host = host_of(url)
+    return host in ("127.0.0.1", "localhost", "::1", "0.0.0.0") or host.endswith(".local")
+
+
 def state(url: str, timeout: int = 180) -> dict:
     """Load a page and report it: title, text, and every interactive element
     with the name a person would call it.
 
     Choosing between those elements is the loop's job, not ours.
     """
-    ok, why = ensure([host_of(url)])
+    ok, why = ensure([] if _is_local(url) else [host_of(url)])
     if not ok:
         return {"schema": SCHEMA, "ok": False, "reason": why, "url": url}
     b = bind()

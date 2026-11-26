@@ -1,0 +1,1370 @@
+{
+ "schema": "PROJECT_BRAIN_INTERROGATION_RECEIPT_V3",
+ "date": "2026-11-23",
+ "supersedes": "RECEIPT_INTERROGATION_20261123_V2.json",
+ "authority": "NONE__PRODUCER_RUN_SANDBOX",
+ "model_calls": 0,
+ "network_calls": 0,
+ "stored_parameters": 0,
+ "instrument": "canonical/runtime/interrogation_v1.py",
+ "tests": "canonical/tests/test_interrogation_v1.py",
+ "what_this_round_added": [
+  "four primitives the refused declarations had been asking for by name: uniq -i, uniq -d, uniq -D entered; sort -f was attempted and removed",
+  "sort -f / --ignore-case: eight candidate keys each falsified against the host, so it is refused by name (_SORT_FOLD_CASE_RECORD). Two lines equal under a case fold are ordered by something a folded key does not capture -- the same structural finding that removed sort -V.",
+  "the 2^30 sentinel in optimal_move's ranking leaked into the reported worst-case bound and printed 1073741825 for eleven surfaces; unsplittable shapes are now kept out of the ranking instead of scored.",
+  "two shapes added because refused declarations named the missing witness: lines_mixed_case and lines_case_runs"
+ ],
+ "exactness": {
+  "uniq_fold_case": "0 mismatches / 700",
+  "dedupe_repeated": "0 mismatches / 700",
+  "dedupe_all_repeated": "0 mismatches / 700",
+  "fold_columns": "0 / 2100 (unchanged)",
+  "fold_bytes": "0 / 2100 (unchanged)",
+  "sort_general": "0 / 700 numeric domain (unchanged)",
+  "note": "uniq -i keeps the first member of a run; uniq -d prints one line per repeated run; uniq -D prints every member"
+ },
+ "design_space": {
+  "shapes": 18,
+  "behaviours": 86,
+  "primitives": 24,
+  "optimum_worst_case": 5,
+  "greedy_worst_case": 6
+ },
+ "sweep": {
+  "surfaces_examined": 158,
+  "counts": {
+   "REFUSED__NO_READING_IN_DECLARATION": 85,
+   "REFUSED__FORM_TAKES_AN_ARGUMENT": 51,
+   "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION": 14,
+   "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE": 5,
+   "REFUSED__SURFACE_FORM_COULD_NOT_BE_RUN": 2,
+   "OPEN__PROBE_BUDGET_SPENT": 1
+  },
+  "certified": 14,
+  "held_out_survived": 14,
+  "held_out_falsified": 0,
+  "witnesses_spent": 60,
+  "naive_all_shapes": 252,
+  "total_seconds": 10.7,
+  "final_total_seconds": 11.1,
+  "note": "re-measured after the second sentinel fix; identical counts"
+ },
+ "why_a_v3": "v2's 11 certificates did not include the four surfaces whose declarations named primitives missing from the algebra. Adding the three that could be specified exactly, and refusing the one that could not, is the same law applied twice.",
+ "rows": [
+  {
+   "tool": "sort",
+   "form": "-b",
+   "declared": "-b, --ignore-leading-blanks  ignore leading blanks",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sort",
+   "form": "-d",
+   "declared": "-d, --dictionary-order      consider only blanks and alphanumeric characters",
+   "named": [
+    "sort_lex"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 6,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "sort_dict",
+    "sort_lex+sort_dict",
+    "sort_num+sort_dict",
+    "sort_general+sort_dict"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "sort",
+   "form": "-f",
+   "declared": "-f, --ignore-case           fold lower case to upper case characters",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sort",
+   "form": "-g",
+   "declared": "-g, --general-numeric-sort  compare according to general numerical value",
+   "named": [
+    "sort_lex",
+    "sort_num",
+    "sort_general"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 5,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "sort_general",
+    "sort_lex+sort_general",
+    "sort_num+sort_general"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "sort",
+   "form": "-i",
+   "declared": "-i, --ignore-nonprinting    consider only printable characters",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sort",
+   "form": "-M",
+   "declared": "-M, --month-sort            compare (unknown) < 'JAN' < ... < 'DEC'",
+   "named": [
+    "sort_lex"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 5,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "sort_month",
+    "sort_lex+sort_month",
+    "sort_num+sort_month",
+    "sort_general+sort_month",
+    "sort_dict+sort_month"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "sort",
+   "form": "-n",
+   "declared": "-n, --numeric-sort          compare according to string numerical value",
+   "named": [
+    "sort_lex",
+    "sort_num"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 5,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "sort_num",
+    "sort_lex+sort_num",
+    "sort_num_desc+reverse_lines"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "sort",
+   "form": "-R",
+   "declared": "-R, --random-sort           shuffle, but group identical keys.  See shuf(1)",
+   "named": [
+    "sort_lex",
+    "json_keys"
+   ],
+   "status": "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
+  },
+  {
+   "tool": "sort",
+   "form": "--random-source",
+   "declared": "--random-source=FILE    get random bytes from FILE",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "sort",
+   "form": "-r",
+   "declared": "-r, --reverse               reverse the result of comparisons",
+   "named": [
+    "sort_lex_desc",
+    "reverse_lines"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 6,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "sort_lex_desc",
+    "sort_lex+sort_lex_desc",
+    "sort_lex+reverse_lines",
+    "sort_num+sort_lex_desc",
+    "sort_general+sort_lex_desc",
+    "sort_dict+sort_lex_desc",
+    "sort_month+sort_lex_desc"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "sort",
+   "form": "--sort",
+   "declared": "--sort=WORD             sort according to WORD:",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "sort",
+   "form": "-V",
+   "declared": "-V, --version-sort          natural sort of (version) numbers within text",
+   "named": [
+    "sort_lex",
+    "count"
+   ],
+   "status": "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
+  },
+  {
+   "tool": "sort",
+   "form": "--batch-size",
+   "declared": "--batch-size=NMERGE   merge at most NMERGE inputs at once;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "sort",
+   "form": "-c",
+   "declared": "-c, --check, --check=diagnose-first  check for sorted input; do not sort",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "sort",
+   "form": "-C",
+   "declared": "-C, --check=quiet, --check=silent  like -c, but do not report first bad line",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "-c",
+   "declared": "-c, --count           prefix lines by the number of occurrences",
+   "named": [
+    "count"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 4,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "count_runs"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "uniq",
+   "form": "-d",
+   "declared": "-d, --repeated        only print duplicate lines, one for each group",
+   "named": [
+    "dedupe_repeated"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 4,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "dedupe_repeated",
+    "dedupe_repeated+fold_columns",
+    "dedupe_repeated+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "uniq",
+   "form": "-D",
+   "declared": "-D                    print all duplicate lines",
+   "named": [
+    "dedupe_all_repeated"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 4,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "dedupe_all_repeated",
+    "dedupe_all_repeated+fold_columns",
+    "dedupe_all_repeated+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "uniq",
+   "form": "--all-repeated",
+   "declared": "--all-repeated[=METHOD]  like -D, but allow separating groups",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "-f",
+   "declared": "-f, --skip-fields=N   avoid comparing the first N fields",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "--group",
+   "declared": "--group[=METHOD]  show all items, separating groups with an empty line;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "-i",
+   "declared": "-i, --ignore-case     ignore differences in case when comparing",
+   "named": [
+    "uniq_fold_case"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 6,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "uniq_fold_case",
+    "uniq_adj+uniq_fold_case"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "uniq",
+   "form": "-s",
+   "declared": "-s, --skip-chars=N    avoid comparing the first N characters",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "-u",
+   "declared": "-u, --unique          only print unique lines",
+   "named": [
+    "uniq_glob"
+   ],
+   "status": "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
+  },
+  {
+   "tool": "uniq",
+   "form": "-z",
+   "declared": "-z, --zero-terminated     line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "uniq",
+   "form": "-w",
+   "declared": "-w, --check-chars=N   compare no more than N characters in lines",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "uniq",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-c",
+   "declared": "-c               compact instead of pretty-printed output;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-n",
+   "declared": "-n               use `null` as the single input value;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-e",
+   "declared": "-e               set the exit status code based on the output;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-s",
+   "declared": "-s               read (slurp) all inputs into an array; apply filter to it;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-r",
+   "declared": "-r               output raw strings, not JSON texts;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-R",
+   "declared": "-R               read raw strings, not JSON texts;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-C",
+   "declared": "-C               colorize JSON;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-M",
+   "declared": "-M               monochrome (don't colorize JSON);",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "-S",
+   "declared": "-S               sort keys of objects on output;",
+   "named": [
+    "sort_lex",
+    "json_keys"
+   ],
+   "status": "OPEN__PROBE_BUDGET_SPENT"
+  },
+  {
+   "tool": "jq",
+   "form": "--tab",
+   "declared": "--tab            use tabs for indentation;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "--arg",
+   "declared": "--arg a v        set variable $a to value <v>;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "--argjson",
+   "declared": "--argjson a v    set variable $a to JSON value <v>;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "--slurpfile",
+   "declared": "--slurpfile a f  set variable $a to an array of JSON texts read from <f>;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "--rawfile",
+   "declared": "--rawfile a f    set variable $a to a string consisting of the contents of <f>;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "jq",
+   "form": "--args",
+   "declared": "--args           remaining arguments are string arguments, not files;",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "wc",
+   "form": "-c",
+   "declared": "-c, --bytes            print the byte counts",
+   "named": [
+    "count",
+    "count_bytes"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 2,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "count_bytes",
+    "count_chars",
+    "sort_lex+count_bytes",
+    "sort_lex+count_chars",
+    "sort_num+count_bytes",
+    "sort_num+count_chars",
+    "sort_general+count_bytes",
+    "sort_general+count_chars",
+    "sort_dict+count_bytes",
+    "sort_dict+count_chars",
+    "sort_month+count_bytes",
+    "sort_month+count_chars",
+    "sort_lex_desc+count_bytes",
+    "sort_lex_desc+count_chars",
+    "sort_num_desc+count_bytes",
+    "sort_num_desc+count_chars",
+    "count_bytes+reverse_lines",
+    "count_bytes+fold_columns",
+    "count_bytes+fold_bytes",
+    "count_chars+reverse_lines",
+    "count_chars+fold_columns",
+    "count_chars+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "wc",
+   "form": "-m",
+   "declared": "-m, --chars            print the character counts",
+   "named": [
+    "count",
+    "count_bytes"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 2,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "count_bytes",
+    "count_chars",
+    "sort_lex+count_bytes",
+    "sort_lex+count_chars",
+    "sort_num+count_bytes",
+    "sort_num+count_chars",
+    "sort_general+count_bytes",
+    "sort_general+count_chars",
+    "sort_dict+count_bytes",
+    "sort_dict+count_chars",
+    "sort_month+count_bytes",
+    "sort_month+count_chars",
+    "sort_lex_desc+count_bytes",
+    "sort_lex_desc+count_chars",
+    "sort_num_desc+count_bytes",
+    "sort_num_desc+count_chars",
+    "count_bytes+reverse_lines",
+    "count_bytes+fold_columns",
+    "count_bytes+fold_bytes",
+    "count_chars+reverse_lines",
+    "count_chars+fold_columns",
+    "count_chars+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "wc",
+   "form": "-l",
+   "declared": "-l, --lines            print the newline counts",
+   "named": [
+    "count"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 3,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "count",
+    "sort_lex+count",
+    "sort_num+count",
+    "sort_general+count",
+    "sort_dict+count",
+    "sort_month+count",
+    "sort_lex_desc+count",
+    "sort_num_desc+count",
+    "count+reverse_lines",
+    "count+fold_columns",
+    "count+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "wc",
+   "form": "--files0-from",
+   "declared": "--files0-from=F    read input from the files specified by",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "wc",
+   "form": "-L",
+   "declared": "-L, --max-line-length  print the maximum display width",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "wc",
+   "form": "-w",
+   "declared": "-w, --words            print the word counts",
+   "named": [
+    "count",
+    "count_words"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 3,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "count_words",
+    "sort_lex+count_words",
+    "sort_num+count_words",
+    "sort_general+count_words",
+    "sort_dict+count_words",
+    "sort_month+count_words",
+    "sort_lex_desc+count_words",
+    "sort_num_desc+count_words",
+    "count_words+reverse_lines",
+    "count_words+fold_columns",
+    "count_words+fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "wc",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fold",
+   "form": "-b",
+   "declared": "-b, --bytes         count bytes rather than columns",
+   "named": [
+    "count",
+    "fold_columns",
+    "fold_bytes"
+   ],
+   "status": "CERTIFIED__ALL_SURVIVORS_AGREE_ON_EVERY_GOAL_OBSERVATION",
+   "w": 5,
+   "bound": 6,
+   "greedy": 6,
+   "naive": 18,
+   "cls": [
+    "fold_bytes"
+   ],
+   "held": "SURVIVED__HELD_OUT_AGREES"
+  },
+  {
+   "tool": "fold",
+   "form": "-s",
+   "declared": "-s, --spaces        break at spaces",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fold",
+   "form": "-w",
+   "declared": "-w, --width=WIDTH   use WIDTH columns instead of 80",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "fold",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "nl",
+   "form": "-b",
+   "declared": "-b, --body-numbering=STYLE      use STYLE for numbering body lines",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-d",
+   "declared": "-d, --section-delimiter=CC      use CC for logical page delimiters",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-f",
+   "declared": "-f, --footer-numbering=STYLE    use STYLE for numbering footer lines",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-i",
+   "declared": "-i, --line-increment=NUMBER     line number increment at each line",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-l",
+   "declared": "-l, --join-blank-lines=NUMBER   group of NUMBER empty lines counted as one",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-n",
+   "declared": "-n, --number-format=FORMAT      insert line numbers according to FORMAT",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-p",
+   "declared": "-p, --no-renumber               do not reset line numbers for each section",
+   "named": [
+    "count"
+   ],
+   "status": "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
+  },
+  {
+   "tool": "nl",
+   "form": "-s",
+   "declared": "-s, --number-separator=STRING   add STRING after (possible) line number",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-v",
+   "declared": "-v, --starting-line-number=NUMBER  first line number for each section",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "-w",
+   "declared": "-w, --number-width=NUMBER       use NUMBER columns for line numbers",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "nl",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "base64",
+   "form": "-d",
+   "declared": "-d, --decode          decode data",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "base64",
+   "form": "-i",
+   "declared": "-i, --ignore-garbage  when decoding, ignore non-alphabet characters",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "base64",
+   "form": "-w",
+   "declared": "-w, --wrap=COLS       wrap encoded lines after COLS character (default 76).",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "base64",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "-b",
+   "declared": "-b, --bytes=LIST        select only these bytes",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "cut",
+   "form": "-c",
+   "declared": "-c, --characters=LIST   select only these characters",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "cut",
+   "form": "-d",
+   "declared": "-d, --delimiter=DELIM   use DELIM instead of TAB for field delimiter",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "cut",
+   "form": "-f",
+   "declared": "-f, --fields=LIST       select only these fields;  also print any line",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "cut",
+   "form": "-n",
+   "declared": "-n                      (ignored)",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "--complement",
+   "declared": "--complement        complement the set of selected bytes, characters",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "-s",
+   "declared": "-s, --only-delimited    do not print lines not containing delimiters",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "--output-delimiter",
+   "declared": "--output-delimiter=STRING  use STRING as the output delimiter",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "cut",
+   "form": "-z",
+   "declared": "-z, --zero-terminated    line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "cut",
+   "form": "-M",
+   "declared": "-M    from first to M'th (included) byte, character or field",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tr",
+   "form": "-c",
+   "declared": "-c, -C, --complement    use the complement of ARRAY1",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tr",
+   "form": "-d",
+   "declared": "-d, --delete            delete characters in ARRAY1, do not translate",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tr",
+   "form": "-s",
+   "declared": "-s, --squeeze-repeats   replace each sequence of a repeated character",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tr",
+   "form": "-t",
+   "declared": "-t, --truncate-set1     first truncate ARRAY1 to length of ARRAY2",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tr",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tac",
+   "form": "-b",
+   "declared": "-b, --before             attach the separator before instead of after",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tac",
+   "form": "-r",
+   "declared": "-r, --regex              interpret the separator as a regular expression",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tac",
+   "form": "-s",
+   "declared": "-s, --separator=STRING   use STRING as the separator instead of newline",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tac",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "rev",
+   "form": "-V",
+   "declared": "-V, --version  display version",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-A",
+   "declared": "-A, --address-radix=RADIX   output format for file offsets; RADIX is one",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "--endian",
+   "declared": "--endian={big|little}   swap input bytes according the specified order",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "-j",
+   "declared": "-j, --skip-bytes=BYTES      skip BYTES input bytes first",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "-N",
+   "declared": "-N, --read-bytes=BYTES      limit dump to BYTES input bytes",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "-S",
+   "declared": "-S BYTES, --strings[=BYTES]  output strings of at least BYTES graphic chars;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "-t",
+   "declared": "-t, --format=TYPE           select output format or formats",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "-v",
+   "declared": "-v, --output-duplicates     do not use * to mark line suppression",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-w",
+   "declared": "-w[BYTES], --width[=BYTES]  output BYTES bytes per output line;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "od",
+   "form": "--traditional",
+   "declared": "--traditional           accept arguments in third form above",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-a",
+   "declared": "-a   same as -t a,  select named characters, ignoring high-order bit",
+   "named": [
+    "sort_lex"
+   ],
+   "status": "NOT_IDENTIFIABLE__EQUIVALENT_ON_THE_DECLARED_DESIGN_SPACE"
+  },
+  {
+   "tool": "od",
+   "form": "-b",
+   "declared": "-b   same as -t o1, select octal bytes",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-c",
+   "declared": "-c   same as -t c,  select printable characters or backslash escapes",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-d",
+   "declared": "-d   same as -t u2, select unsigned decimal 2-byte units",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "od",
+   "form": "-f",
+   "declared": "-f   same as -t fF, select floats",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "-b",
+   "declared": "-b, --binary          read in binary mode",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "-c",
+   "declared": "-c, --check           read checksums from the FILEs and check them",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--tag",
+   "declared": "--tag             create a BSD-style checksum",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "-t",
+   "declared": "-t, --text            read in text mode (default)",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "-z",
+   "declared": "-z, --zero            end each output line with NUL, not newline,",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--ignore-missing",
+   "declared": "--ignore-missing  don't fail or report status for missing files",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--quiet",
+   "declared": "--quiet           don't print OK for each successfully verified file",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--status",
+   "declared": "--status          don't output anything, status code shows success",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--strict",
+   "declared": "--strict          exit non-zero for improperly formatted checksum lines",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "-w",
+   "declared": "-w, --warn            warn about improperly formatted checksum lines",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "sha256sum",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "head",
+   "form": "-c",
+   "declared": "-c, --bytes=[-]NUM       print the first NUM bytes of each file;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "head",
+   "form": "-n",
+   "declared": "-n, --lines=[-]NUM       print the first NUM lines instead of the first 10;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "head",
+   "form": "-q",
+   "declared": "-q, --quiet, --silent    never print headers giving file names",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "head",
+   "form": "-v",
+   "declared": "-v, --verbose            always print headers giving file names",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "head",
+   "form": "-z",
+   "declared": "-z, --zero-terminated    line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "head",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "-c",
+   "declared": "-c, --bytes=[+]NUM       output the last NUM bytes; or use -c +NUM to",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "-f",
+   "declared": "-f, --follow[={name|descriptor}]",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "-F",
+   "declared": "-F                       same as --follow=name --retry",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "-n",
+   "declared": "-n, --lines=[+]NUM       output the last NUM lines, instead of the last 10;",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "--max-unchanged-stats",
+   "declared": "--max-unchanged-stats=N",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "--pid",
+   "declared": "--pid=PID            with -f, terminate after process ID, PID dies",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "-q",
+   "declared": "-q, --quiet, --silent    never output headers giving file names",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "--retry",
+   "declared": "--retry              keep trying to open a file if it is inaccessible",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "-s",
+   "declared": "-s, --sleep-interval=N   with -f, sleep for approximately N seconds",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "tail",
+   "form": "-v",
+   "declared": "-v, --verbose            always output headers giving file names",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "-z",
+   "declared": "-z, --zero-terminated    line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "tail",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "paste",
+   "form": "-d",
+   "declared": "-d, --delimiters=LIST   reuse characters from LIST instead of TABs",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "paste",
+   "form": "-s",
+   "declared": "-s, --serial            paste one file at a time instead of in parallel",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "paste",
+   "form": "-z",
+   "declared": "-z, --zero-terminated    line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "paste",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "comm",
+   "form": "--check-order",
+   "declared": "--check-order       check that the input is correctly sorted, even",
+   "named": [
+    "sort_lex"
+   ],
+   "status": "REFUSED__SURFACE_FORM_COULD_NOT_BE_RUN"
+  },
+  {
+   "tool": "comm",
+   "form": "--nocheck-order",
+   "declared": "--nocheck-order     do not check that the input is correctly sorted",
+   "named": [
+    "sort_lex"
+   ],
+   "status": "REFUSED__SURFACE_FORM_COULD_NOT_BE_RUN"
+  },
+  {
+   "tool": "comm",
+   "form": "--output-delimiter",
+   "declared": "--output-delimiter=STR  separate columns with STR",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "comm",
+   "form": "--total",
+   "declared": "--total             output a summary",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "comm",
+   "form": "-z",
+   "declared": "-z, --zero-terminated   line delimiter is NUL, not newline",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "comm",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "expand",
+   "form": "-i",
+   "declared": "-i, --initial    do not convert tabs after non blanks",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "expand",
+   "form": "-t",
+   "declared": "-t, --tabs=N     have tabs N characters apart, not 8",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "expand",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fmt",
+   "form": "-c",
+   "declared": "-c, --crown-margin        preserve indentation of first two lines",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fmt",
+   "form": "-p",
+   "declared": "-p, --prefix=STRING       reformat only lines beginning with STRING,",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "fmt",
+   "form": "-s",
+   "declared": "-s, --split-only          split long lines, but do not refill",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fmt",
+   "form": "-t",
+   "declared": "-t, --tagged-paragraph    indentation of first line different from second",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fmt",
+   "form": "-u",
+   "declared": "-u, --uniform-spacing     one space between words, two after sentences",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "fmt",
+   "form": "-w",
+   "declared": "-w, --width=WIDTH         maximum line width (default of 75 columns)",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "fmt",
+   "form": "-g",
+   "declared": "-g, --goal=WIDTH          goal width (default of 93% of width)",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "fmt",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "seq",
+   "form": "-f",
+   "declared": "-f, --format=FORMAT      use printf style floating-point FORMAT",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "seq",
+   "form": "-s",
+   "declared": "-s, --separator=STRING   use STRING to separate numbers (default: \\n)",
+   "status": "REFUSED__FORM_TAKES_AN_ARGUMENT"
+  },
+  {
+   "tool": "seq",
+   "form": "-w",
+   "declared": "-w, --equal-width        equalize width by padding with leading zeroes",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  },
+  {
+   "tool": "seq",
+   "form": "--version",
+   "declared": "--version     output version information and exit",
+   "named": [],
+   "status": "REFUSED__NO_READING_IN_DECLARATION"
+  }
+ ],
+ "honest_limits": [
+  "sort -f is refused although its *ranking* over printable ASCII was measured exactly. The ranking is not the behaviour: two lines that fold equal are ordered in a way eight candidate keys did not reproduce.",
+  "sort_general remains exact only on the numeric domain; hex literals and signed nan are outside its claim.",
+  "fold -s and sort -V remain removed.",
+  "CORRECTED IN V4. This entry originally read: 'Some of those (sort -b, sort -i) are invisible on every input I could construct at the default width.' That was false, and it was false in the specific way this file exists to catch: it reported a FAILURE OF MY SEARCH as a property of the program. A searched witness found that sort -b is sort_leading_blanks (witness b' ab\\nAB\\n') and sort -i is sort_printable (witness b'\\tab\\nAB\\n'), each certified with 4 witnesses and surviving held-out. 85 of 158 declarations still name nothing in the algebra; that count stands, but the reason for any individual one is only 'no witness was found', never 'it is invisible'.",
+  "Shapes are still hand-chosen: two were added this round because a refused declaration named the missing witness, which is evidence of progress but not proof the set is adequate.",
+  "Text filters on one host. No GUI, browser, image or frontier benchmark is measured or claimed."
+ ]
+}

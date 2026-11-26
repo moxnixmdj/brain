@@ -328,6 +328,23 @@ def _candidate_specs(tree: ast.AST, numeric_literals: list[Any], string_literals
                         right=ast.Attribute(value=ast.Name(id=_base,ctx=ast.Load()),
                                             attr=_other,ctx=ast.Load()))
                 )
+        # NAME_SCOPE -- the shape the swap grammar cannot express, and the largest
+        # miss measured on the real corpus. A swap rewrites `a.x` to `a.y`; it cannot
+        # write `x`. Of 381 real hunks, 20 replace an attribute by a bare name that is
+        # already in scope (`item.include_group` -> `include_group`, packaging 8efde605)
+        # and a further 22 add a bare name alone. The pool is the module's OWN declared
+        # fields and module-level bindings -- never a hardcoded list, never the test's
+        # literals -- so this stays a computation over the file, not a guess.
+        if isinstance(node,ast.Attribute) and isinstance(node.ctx,ast.Load):
+            _bare=node.attr
+            if _bare in _fields and _bare.isidentifier():
+                sig=(key,"scope",_bare)
+                if sig not in seen:
+                    seen.add(sig)
+                    yield key,_descriptor(
+                        node,"NAME_SCOPE",ast.unparse(node)+" -> "+_bare,"name_scope"),(
+                        lambda n,_bare=_bare: ast.Name(id=_bare,ctx=ast.Load())
+                    )
         if isinstance(node,ast.Constant):
             value=node.value
             replacements=[]
