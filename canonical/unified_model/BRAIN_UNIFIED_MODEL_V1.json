@@ -32161,7 +32161,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "d174838a41829cf85f77fe4c947893ba76c28ada470a1e7565ad4b327ecb514d"
+  "value": "63a70f1d8a1f62f24972b2f3884f25d5e1f4b3db3a5874572bcca3e1018a2cbb"
  },
  "engines": [
   {
@@ -289184,7 +289184,7 @@
    "kind": "RESEARCH_RECORD",
    "path": "canonical/action_intents/THE_MACHINE_CAN_NAME_ITS_FIVE_FUNCTIONS_AND_REACH_A_THIRD_20261126_V1.json",
    "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
-   "sha256": "47ecb52a5aaed89e2395dff906b12459954cbf89364fe9fadb58938a6247b7a3",
+   "sha256": "fac3cadb29726918ddf0b2d8389bb79e62e2aae0406113e16fd24135dac38f16",
    "status": "PROPOSED__PRODUCER_MEASURED__MECHANISM_WORKS_ON_FIVE_REAL_MACHINES__INDEPENDENT_",
    "terms": {
     "0.00": 1,
