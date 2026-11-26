@@ -33037,17 +33037,17 @@
   "bound_capabilities": 153,
   "capabilities": 462,
   "engines": 234,
-  "extended_source_index_modules": 675,
+  "extended_source_index_modules": 676,
   "federated_kernel_engines": 208,
   "harvested_admitted": 0,
-  "harvested_capabilities": 659,
+  "harvested_capabilities": 660,
   "harvested_contract_surfaces": 44,
-  "harvested_program_surfaces": 615,
-  "knowledge_documents": 754,
+  "harvested_program_surfaces": 616,
+  "knowledge_documents": 755,
   "promotion_callable": 31,
   "promotion_candidates": 849,
   "receipt_backed_capabilities": 309,
-  "research_index_records": 7444,
+  "research_index_records": 7446,
   "routing_tokens": 3798,
   "skills": 18,
   "source_index_entry_points": 567,
@@ -33056,7 +33056,7 @@
  "digest": {
   "algorithm": "sha256",
   "scope": "CANONICAL_JSON_OF_THIS_OBJECT_WITHOUT_THE_DIGEST_BLOCK",
-  "value": "3b07552726d7c05719f7c905570656d98293ea93bd9b8a52f865ac4505a3e864"
+  "value": "1d71fb15c8f66382b1a63a27822ceb44f9742f1867fec9a96e6d64aea781ab6f"
  },
  "engines": [
   {
@@ -38363,7 +38363,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "static_assert_validation",
     "source_path": "canonical/swe_kernel/metamorphic_laws_v1.py",
-    "source_sha256": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e"
+    "source_sha256": "05e8e7b1283c37a7665f50cf71ba7c2b34c2c2a741e563c418277f8394f116fd"
    },
    "summary": "Self-manufacturing API oracle: checks round-trip, idempotence, canonicality, iterable retyping, and static assertion laws without existing tests.",
    "triggers": [
@@ -39729,7 +39729,7 @@
     "carrier_sha256": "e62612e14ad96c71838aeb37dae993a62b93e992bd103b2734771e08d10ada27",
     "entrypoint": "semantically_equivalent",
     "source_path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
-    "source_sha256": "7e579c1dcbcf0fcec79929c700ed96328c5e5154044463cf5597e19bd1f39778"
+    "source_sha256": "bc9dfd665ff9203e7021f3f0c797fcd136154abc96c62aaed9973cd4ffffe08d"
    },
    "summary": "Lowers Python/C/JS expressions to Universal Intermediate Representation (UIR) and proves equivalence by equality saturation.",
    "triggers": [
@@ -44493,6 +44493,65 @@
     "transfer": 1,
     "v1": 1,
     "verified": 1
+   },
+   "tree": "canonical/tools"
+  },
+  {
+   "capability": false,
+   "classification": "ENTRY_POINT",
+   "executable_entry_point": true,
+   "id": "ext_source:canonical/tools/dark_matter_adjudicator_v1.py",
+   "imported_by_count": 1,
+   "kind": "EXTENDED_SOURCE_ADDRESSABLE_MODULE",
+   "path": "canonical/tools/dark_matter_adjudicator_v1.py",
+   "sha256": "efb2eee101ac8969ed3fbc374104af31d5f9a20ef1109a3447baee1d29964b1a",
+   "summary": "Dark-matter adjudicator: turn \"we already have it somewhere\" into an executable verdict.",
+   "symbol_count": 14,
+   "symbols": [
+    "Verdict",
+    "_Probe",
+    "_classify_failure",
+    "_is_third_party",
+    "_probe",
+    "_to_verdict",
+    "adjudicate_importable",
+    "adjudicate_one",
+    "all_modules",
+    "main",
+    "module_name",
+    "run",
+    "self_check",
+    "unimported_modules"
+   ],
+   "terms": {
+    "adjudicate": 2,
+    "adjudicator": 2,
+    "all": 1,
+    "already": 1,
+    "canonical": 1,
+    "check": 1,
+    "classify": 1,
+    "dark": 2,
+    "executable": 1,
+    "failure": 1,
+    "importable": 1,
+    "main": 1,
+    "matter": 2,
+    "module": 1,
+    "modules": 2,
+    "name": 1,
+    "one": 1,
+    "party": 1,
+    "probe": 2,
+    "run": 1,
+    "self": 1,
+    "somewhere": 1,
+    "third": 1,
+    "tools": 1,
+    "turn": 1,
+    "unimported": 1,
+    "v1": 1,
+    "verdict": 3
    },
    "tree": "canonical/tools"
   },
@@ -89258,7 +89317,7 @@
    "kind": "HARVESTED_EXECUTABLE_SURFACE",
    "path": "canonical/evaluation/meme_protocol_bench_v1.py",
    "route": "canonical/runtime/harvested_capability_runtime_v1.py",
-   "sha256": "67b901c22373bf0de5ed188eb54aa6f8603ebe9b0697d38fb6d8abfd0ed02f96",
+   "sha256": "2e3023b8192111c18b2b90f2551df91f0edd07a443d142da45380499faf1f8af",
    "summary": "MEME protocol bench: score a memory on the six operations, against an oracle that recomputes.",
    "triggers": [
     "meme",
@@ -95636,6 +95695,28 @@
     "lesson",
     "transfer",
     "probe"
+   ]
+  },
+  {
+   "admission_state": "DISCOVERED_NOT_ADMITTED",
+   "admitted": false,
+   "also_in_source_index": false,
+   "capability": false,
+   "declared_capability_id": null,
+   "declared_inputs": [],
+   "declared_result_fields": [],
+   "entrypoint": "main",
+   "id": "canonical.tools.dark_matter_adjudicator_v1.hidden.v1",
+   "invocation": "cli",
+   "kind": "HARVESTED_EXECUTABLE_SURFACE",
+   "path": "canonical/tools/dark_matter_adjudicator_v1.py",
+   "route": "canonical/runtime/harvested_capability_runtime_v1.py",
+   "sha256": "efb2eee101ac8969ed3fbc374104af31d5f9a20ef1109a3447baee1d29964b1a",
+   "summary": "Dark-matter adjudicator: turn \"we already have it somewhere\" into an executable verdict.",
+   "triggers": [
+    "dark",
+    "matter",
+    "adjudicator"
    ]
   },
   {
@@ -111070,6 +111151,96 @@
     "limiting",
     "measured",
     "terminal"
+   ]
+  },
+  {
+   "authority": "NOT_A_LAW",
+   "bytes": 22314,
+   "headings": [
+    "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
+    "0. The answer in one paragraph",
+    "1. What actually changed by November 2026 (verified, with caveats)",
+    "1.1 Verified — and load-bearing",
+    "1.2 Contradicted — do not put these in a PR",
+    "2. Where the frontier is structurally weak (and why money doesn't fix it)",
+    "3. The three asymmetries worth betting on",
+    "4. Where Brain must not compete",
+    "5. Repo audit: the dark matter is a liability until adjudicated",
+    "6. The plan — four waves, each with an oracle and an ablation",
+    "Wave 43 — Dark-Matter Adjudicator (the meta-capability)",
+    "Wave 44 — MEME-faithful episode harness (the frontier-facing claim)",
+    "Wave 45 — the demotion, measured (proposer behind the armour)",
+    "Wave 46 — the cost curve, published as the headline",
+    "7. The scoreboard: one number",
+    "8. Anti-self-deception rules (non-negotiable, from this repo's own history)",
+    "9. What I would cut from the brief, and why",
+    "10. If you want one thing next",
+    "Sources"
+   ],
+   "kind": "DOCUMENT",
+   "path": "FRONTIER_PLAN_V3_20261126.md",
+   "sha256": "1b896fb53564ddc1a8a085aba1b45f70cbbcdcf10bb1ac58e841ad5b93f44b3f",
+   "summary": "**Date:** 2026-11-26 · **Branch base:** `main@ac5c1015` · **Status:** plan, not a claim",
+   "terms": {
+    "0.59": 7,
+    "2026": 7,
+    "90": 7,
+    "ablation": 8,
+    "already": 10,
+    "arm": 9,
+    "best": 7,
+    "brain": 13,
+    "capability": 11,
+    "claim": 19,
+    "cost": 14,
+    "dependency": 8,
+    "every": 10,
+    "frontier": 14,
+    "harness": 9,
+    "learning": 7,
+    "makes": 8,
+    "measured": 8,
+    "meme": 9,
+    "memory": 17,
+    "model": 19,
+    "module": 7,
+    "modules": 11,
+    "no": 22,
+    "not": 43,
+    "number": 10,
+    "numbers": 9,
+    "one": 11,
+    "only": 10,
+    "oracle": 7,
+    "own": 9,
+    "paper": 8,
+    "per": 11,
+    "plan": 9,
+    "problem": 9,
+    "rate": 10,
+    "real": 11,
+    "repo": 7,
+    "run": 9,
+    "same": 8,
+    "swe-bench": 8,
+    "task": 8,
+    "tasks": 12,
+    "terminal-bench": 8,
+    "ttt": 7,
+    "verified": 8,
+    "vs": 8,
+    "wave": 22
+   },
+   "title": "Frontier Plan V3 — where a $0 deterministic system can actually get ahead",
+   "title_terms": [
+    "actually",
+    "ahead",
+    "deterministic",
+    "frontier",
+    "get",
+    "plan",
+    "system",
+    "v3"
    ]
   },
   {
@@ -163138,10 +163309,10 @@
   "deterministic": true,
   "external_model_calls": 0,
   "generated_from": "REPOSITORY_TREE_AT_COMPILE_TIME",
-  "included_source_count": 2454,
+  "included_source_count": 2456,
   "incremental_spend_usd": 0,
   "network_calls": 0,
-  "source_tree_digest": "674684df1398b37d42fe9068d6507a2bcc3d942f36de8b998624c059067d0d6c"
+  "source_tree_digest": "4b63001ba340da3cfc08979e03d06bd69bbc375aa931aa2f2f88a68a82ba13d5"
  },
  "research_index": [
   {
@@ -244423,6 +244594,24 @@
     "v1": 1,
     "verification": 1,
     "wolfram": 1
+   }
+  },
+  {
+   "action_id": "",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/verification/DARK_MATTER_ADJUDICATION_20261126_V1.json",
+   "schema": "BRAIN_DARK_MATTER_ADJUDICATION_V1",
+   "sha256": "74065ab92013f267de9dcc71a40cab74921207a4cc95cc9610549e14feb23f22",
+   "status": "",
+   "terms": {
+    "20261126": 1,
+    "adjudication": 1,
+    "dark": 1,
+    "matter": 1,
+    "v1": 1
    }
   },
   {
@@ -340175,6 +340364,51 @@
    }
   },
   {
+   "action_id": "WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_20261126_V1",
+   "capability": false,
+   "date": "2026-11-26",
+   "id": "research:canonical/action_intents/WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_20261126_V1.json",
+   "kind": "RESEARCH_RECORD",
+   "path": "canonical/action_intents/WAVE43_SELF_VERIFICATION_COVERAGE_CENSUS_20261126_V1.json",
+   "schema": "PROJECT_BRAIN_ACTION_INTENT_WITH_RECURSIVE_OBS_V11",
+   "sha256": "b31f38ee06ac17edf82ee53d4b0c249241cf0bdf672f10da38f437b60e2889a9",
+   "status": "SHIPPED",
+   "terms": {
+    "200-line": 1,
+    "20261126": 1,
+    "227": 1,
+    "700-line": 1,
+    "advertised": 1,
+    "already": 1,
+    "anything": 1,
+    "asked": 1,
+    "bank": 1,
+    "because": 1,
+    "cannot": 3,
+    "carry": 1,
+    "census": 1,
+    "coverage": 1,
+    "dormant-organ": 1,
+    "engine": 1,
+    "equivalence": 1,
+    "fails": 1,
+    "frontier": 2,
+    "general_reusable_problem_solving_capability_frontier": 1,
+    "grow": 1,
+    "growth": 1,
+    "helper": 1,
+    "import": 1,
+    "indistinguishable": 1,
+    "leaders": 1,
+    "made": 1,
+    "measured": 1,
+    "module": 1,
+    "modules": 2,
+    "only": 2,
+    "organs": 2
+   }
+  },
+  {
    "action_id": "WAVE_SEVEN_RECEIPT_PROSE_FAMILY_GETS_A_SUITE_V1_20261024_V1",
    "capability": false,
    "date": "2026-10-23",
@@ -426374,9 +426608,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/metamorphic_laws_v1.py",
-   "sha256": "b4d29c8557f5aebe28f2dd618729e446c31bc7c2d85ac253908b6f7f37c5093e",
+   "sha256": "05e8e7b1283c37a7665f50cf71ba7c2b34c2c2a741e563c418277f8394f116fd",
    "summary": "The law library: observables a repository's own API must satisfy, independent of any test.",
-   "symbol_count": 22,
+   "symbol_count": 23,
    "symbols": [
     "NoneReversed",
     "StrippedList",
@@ -426399,6 +426633,7 @@
     "mutations_for",
     "package_error_classes",
     "safe_equal",
+    "self_check",
     "static_assert_validation"
    ],
    "terms": {
@@ -426433,6 +426668,7 @@
     "repository": 1,
     "safe_equal": 1,
     "satisfy": 1,
+    "self_check": 1,
     "static_assert_validation": 1,
     "strippedlist": 1,
     "test": 1,
@@ -427922,9 +428158,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/producer_lineage_graph_v1.py",
-   "sha256": "3573ee1f8abe46d600858344db5335db38d43166fb0ebae9ef559eb9ad488e93",
+   "sha256": "cb1545e4eb68c1b5c6cf99b5ba56e17aa8769a5a634656d35b16f755c3a6e435",
    "summary": "Interprocedural guarded causal data-flow & producer-lineage graph.",
-   "symbol_count": 12,
+   "symbol_count": 13,
    "symbols": [
     "LineageEdge",
     "ProducerEvent",
@@ -427937,6 +428173,7 @@
     "build_lineage_graph",
     "build_lineage_graph_from_sources",
     "explain_assertion",
+    "self_check",
     "trace_and_explain"
    ],
    "terms": {
@@ -427958,6 +428195,7 @@
     "producerlineagegraph": 1,
     "producernode": 1,
     "returnlineagetracer": 1,
+    "self_check": 1,
     "short_repr": 1,
     "trace_and_explain": 1,
     "v1": 1
@@ -429107,9 +429345,9 @@
    "imported_by_count": 0,
    "kind": "SOURCE_ADDRESSABLE_MODULE",
    "path": "canonical/swe_kernel/semantic_causal_engine_v1.py",
-   "sha256": "7e579c1dcbcf0fcec79929c700ed96328c5e5154044463cf5597e19bd1f39778",
+   "sha256": "bc9dfd665ff9203e7021f3f0c797fcd136154abc96c62aaed9973cd4ffffe08d",
    "summary": "Semantic-Causal Program Understanding, Universal Meaning E-Graph & Angelic CEGIS Engine.",
-   "symbol_count": 77,
+   "symbol_count": 78,
    "symbols": [
     "CausalLaw",
     "CausalLawStore",

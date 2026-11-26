@@ -1179,7 +1179,13 @@ def _lower_c_like_body(text: str, ctx: LoweringContext) -> UIRTerm:
         nm, rhs_s = m_asg.groups()
         slot = ctx.bind(nm)
         return UIRTerm("ASSIGN", (u_var(slot), _lower_c_like_expr(rhs_s, ctx)))
-    return _lower_c_like_expr(single, ctx)
+    term = _lower_c_like_expr(single, ctx)
+    if term.op == "RAW_EXPR":
+        # Statement position: the Python lowerer emits the same opaque payload as RAW_STMT, and
+        # two opcodes for one meaning split an e-class that should collapse -- so `a[i] = 0;` in C
+        # and `a[i] = 0` in Python were "not equivalent" despite lowering to identical text.
+        return UIRTerm("RAW_STMT", term.args)
+    return term
 
 
 def _split_c_statements(s: str) -> list[str]:
@@ -4635,3 +4641,62 @@ def repair_project_causally(
     finally:
         if zygote is not None:
             zygote.close()
+
+
+# =========================================================================== #
+# 5. Self-check: the module's own headline claim, executed                   #
+# =========================================================================== #
+
+def self_check() -> dict[str, Any]:
+    """Prove the cross-language claim instead of asserting it in a docstring.
+
+    Four of these are the module's advertised behaviour; two are controls. The negative control is
+    the one that matters: a lowering that made *everything* equivalent would pass every positive
+    check here and be worthless. `range(n - 1)` must stay outside `range(n)`'s e-class, and the
+    emitted program must actually execute -- which it did not, before this check existed, because
+    statement-position C code lowered to `RAW_EXPR` while the Python side lowered to `RAW_STMT`,
+    so identical text landed in two opcodes and cross-language equivalence was silently False.
+    """
+    failures: list[str] = []
+
+    def check(label: str, ok: bool) -> None:
+        if not ok:
+            failures.append(label)
+
+    py_loop = "for i in range(n):\n    a[i] = 0\n"
+    c_loop = "for (int i = 0; i < n; i++) { a[i] = 0; }"
+    c_params = (("int", "n"),)
+    py_term, _ = lower_to_uir(py_loop, "python")
+    c_term, c_ctx = lower_to_uir(c_loop, "c", c_params=c_params)
+    check("python loop lowers to ITER_RANGE", py_term.op == "ITER_RANGE")
+    check("C and Python loops collapse into one e-class",
+          semantically_equivalent(py_term, c_term))
+
+    incl_term, _ = lower_to_uir("for i in range(n + 1):\n    a[i] = 0\n", "python")
+    c_incl, _ = lower_to_uir("for (int i = 0; i <= n; i++) { a[i] = 0; }", "c",
+                             c_params=c_params)
+    check("inclusive C bound matches range(n + 1)", semantically_equivalent(incl_term, c_incl))
+
+    short_term, _ = lower_to_uir("for i in range(n - 1):\n    a[i] = 0\n", "python")
+    check("negative control: range(n - 1) is not range(n)",
+          not semantically_equivalent(py_term, short_term))
+
+    canonical = canonicalize_uir(c_term)
+    check("canonicalize_uir is idempotent", canonicalize_uir(canonical) == canonical)
+
+    emitted = emit_uir(c_term, "python", c_ctx)
+    buffer_ = [7, 7, 7, 7]
+    scope: dict[str, Any] = {}
+    body = "\n".join(f"    {line}" for line in emitted.splitlines())
+    exec(compile(f"def _emitted(n, a):\n{body}\n    return a\n", "<self_check>", "exec"), scope)
+    check("emitted C-derived loop zeroes exactly n of n + 1 cells",
+          scope["_emitted"](2, buffer_) == [0, 0, 7, 7])
+
+    total = 6
+    return {
+        "schema": "BRAIN_SEMANTIC_CAUSAL_ENGINE_V1_SELF_CHECK",
+        "checks": total,
+        "passed": total - len(failures),
+        "failures": failures,
+        "verdict": "SELF_CHECK_PASS" if not failures else "SELF_CHECK_FAIL",
+    }
