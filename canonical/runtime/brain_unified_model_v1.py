@@ -34,8 +34,11 @@ import importlib.util
 import json
 import marshal
 import math
+import mmap
 import os
 import re
+import shutil
+import sqlite3
 import sys
 import time
 from pathlib import Path
@@ -451,6 +454,9 @@ def _pack_hot_marshal_tiers(core: Mapping[str, Any]) -> tuple[dict[str, Any], by
         "model_id": core.get("model_id"),
         "model_version": core.get("model_version"),
         "digest_value": str(core.get("digest_value") or ""),
+        "artifact_bytes": int(core.get("artifact_bytes") or 0),
+        "digest_needle_offset": int(core.get("digest_needle_offset") if core.get("digest_needle_offset") is not None else -1),
+        "schema_needle_offset": int(core.get("schema_needle_offset") if core.get("schema_needle_offset") is not None else -1),
         "objective_verbatim": str(core.get("objective_verbatim") or ""),
         "counts": dict(core.get("counts") or {}),
         "confidence": dict(core.get("confidence") or {}),
@@ -600,9 +606,11 @@ class UnifiedModel:
         _raw_bytes: bytes | None = None,
         _core_only: bool = False,
         _target_path: Path | None = None,
+        _artifact_path: Path | None = None,
     ):
         self._raw_bytes_backing: bytes | None = _raw_bytes
-        self._target_path: Path | None = _target_path
+        self._target_path: Path | None = _target_path or _artifact_path
+        self._artifact_path: Path | None = self._target_path
         self._declared_triggers_cache: dict[str, set[str]] = {}
         self._route_path: Path | None = None
         self._route_blob: bytes | None = None
@@ -696,11 +704,13 @@ class UnifiedModel:
         self._traced_catalog_cache: dict[str, Any] | None = None
         self._traced_adapter_cache: dict[str, dict[str, Any]] = {}
         self._fts5_model_conn: Any = None
+        self._ppr_router: Any = None
         self._symbol_graph_conns: dict[str, Any] = {}
         self._dark_matter_verified: dict[str, dict[str, Any]] = {}
         self._source_csr: Any = None
         self._combined_source_csr: Any = None
         self._route_memo: dict[tuple[str, int], dict[str, Any]] = {}
+        self._futamura_cascade: Any = None
         self._raw_sha256: str = str(self._core_meta.get("raw_sha256") or "")
 
         self.min_score = float(confidence.get("minimum_best_score", 1.0))
@@ -822,10 +832,18 @@ class UnifiedModel:
         self._ensure_full_tables()
         return self._capabilities_dict  # type: ignore[return-value]
 
+    @capabilities.setter
+    def capabilities(self, value: dict[str, Any]) -> None:
+        self._capabilities_dict = value
+
     @property
     def engines(self) -> dict[str, Any]:
         self._ensure_full_tables()
         return self._engines_dict  # type: ignore[return-value]
+
+    @engines.setter
+    def engines(self, value: dict[str, Any]) -> None:
+        self._engines_dict = value
 
     @property
     def skills(self) -> list[dict[str, Any]]:
@@ -835,15 +853,28 @@ class UnifiedModel:
             self._skills_blob = None
         return self._skills_list
 
+    @skills.setter
+    def skills(self, value: list[dict[str, Any]]) -> None:
+        self._skills_list = value
+        self._skills_blob = None
+
     @property
     def receipt_backed_ids(self) -> frozenset[str]:
         self._ensure_full_tables()
-        return self._receipt_backed_set  # type: ignore[return-value]
+        return self._receipt_backed_set or frozenset()
+
+    @receipt_backed_ids.setter
+    def receipt_backed_ids(self, value: frozenset[str]) -> None:
+        self._receipt_backed_set = value
 
     @property
     def index(self) -> dict[str, dict[str, float]]:
         self._ensure_full_tables()
         return self._index_dict  # type: ignore[return-value]
+
+    @index.setter
+    def index(self, value: dict[str, dict[str, float]]) -> None:
+        self._index_dict = value
 
     @property
     def _capability_id_terms(self) -> dict[str, frozenset[str]]:
@@ -1285,6 +1316,8 @@ class UnifiedModel:
 
     def _ensure_full_model(self) -> dict[str, Any]:
         if self._model_loaded is None:
+            if self._raw_bytes_backing is None and self._artifact_path is not None and self._artifact_path.is_file():
+                self._raw_bytes_backing = self._artifact_path.read_bytes()
             if self._raw_bytes_backing is None:
                 if self._target_path is not None and self._target_path.is_file():
                     self._raw_bytes_backing = self._target_path.read_bytes()
@@ -1292,6 +1325,99 @@ class UnifiedModel:
                     raise UnifiedModelError("MODEL_BACKING_BYTES_MISSING")
             self._model_loaded = json.loads(self._raw_bytes_backing.decode("utf-8"))
         return self._model_loaded
+
+    def _ensure_fts5_sidecar(self) -> Path:
+        """Build or open the lazy on-demand SQLite FTS5 BM25 sidecar over cold indices."""
+        cache_dir = _core_cache_dir()
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        db_path = cache_dir / f"unified_model_fts5_{(self.digest or 'unhashed')[:24]}.sqlite"
+        if db_path.is_file() and db_path.stat().st_size > 4096:
+            return db_path
+
+        full = self._ensure_full_model()
+        tmp_db = cache_dir / f".unified_model_fts5_{os.getpid()}.sqlite.tmp"
+        tmp_db.unlink(missing_ok=True)
+        conn = sqlite3.connect(str(tmp_db))
+        try:
+            conn.execute("PRAGMA synchronous = OFF;")
+            conn.execute("PRAGMA journal_mode = MEMORY;")
+            conn.execute(
+                "CREATE VIRTUAL TABLE docs USING fts5(doc_id UNINDEXED, kind, path, title, body);"
+            )
+            batch: list[tuple[str, str, str, str, str]] = []
+            for row in full.get("knowledge") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        f"knowledge:{row.get('path', '')}",
+                        "KNOWLEDGE",
+                        str(row.get("path") or ""),
+                        str(row.get("title") or ""),
+                        f"{row.get('summary') or ''} {terms_s}",
+                    ))
+            for row in full.get("source_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    syms = " ".join(str(s) for s in (row.get("symbols") or []))
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "SOURCE",
+                        str(row.get("path") or ""),
+                        syms[:240],
+                        f"{row.get('docstring') or ''} {terms_s}",
+                    ))
+            for row in full.get("research_index") or []:
+                if isinstance(row, Mapping):
+                    terms_s = " ".join(str(k) for k in (row.get("terms") or {}).keys())
+                    batch.append((
+                        str(row.get("id") or ""),
+                        "RESEARCH",
+                        str(row.get("path") or ""),
+                        str(row.get("schema") or ""),
+                        f"{row.get('action_id') or ''} {row.get('status') or ''} {terms_s}",
+                    ))
+            conn.executemany("INSERT INTO docs VALUES (?, ?, ?, ?, ?);", batch)
+            conn.commit()
+        finally:
+            conn.close()
+        tmp_db.replace(db_path)
+        return db_path
+
+    def fts5_search(
+        self,
+        query: str,
+        *,
+        kind: str | None = None,
+        top_k: int = 5,
+    ) -> dict[str, Any]:
+        """Sub-millisecond SQLite FTS5 BM25 query over cold knowledge/source/research indices."""
+        tokens = [re.sub(r"[^a-z0-9_]", "", t) for t in tokenize(query)]
+        tokens = [t for t in tokens if len(t) >= 2]
+        if not tokens:
+            return {"query": query, "hits": [], "engine": "sqlite_fts5_bm25"}
+        fts_expr = " OR ".join(f'"{t}"' for t in tokens[:12])
+        db_path = self._ensure_fts5_sidecar()
+        conn = sqlite3.connect(f"file:{db_path}?mode=ro", uri=True)
+        try:
+            if kind:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? AND kind = ? ORDER BY score LIMIT ?;",
+                    (fts_expr, kind.upper(), max(1, int(top_k))),
+                )
+            else:
+                cur = conn.execute(
+                    "SELECT doc_id, kind, path, title, bm25(docs) AS score FROM docs "
+                    "WHERE docs MATCH ? ORDER BY score LIMIT ?;",
+                    (fts_expr, max(1, int(top_k))),
+                )
+            hits = [
+                {"doc_id": r[0], "kind": r[1], "path": r[2], "title": r[3], "bm25": round(-float(r[4]), 4)}
+                for r in cur.fetchall()
+            ]
+        finally:
+            conn.close()
+        return {"query": query, "hits": hits, "engine": "sqlite_fts5_bm25"}
 
     def _apply_secondary_bundle(self, sec: Mapping[str, Any]) -> None:
         self._source_index_cache = dict(sec["source_index"])
@@ -1462,7 +1588,7 @@ class UnifiedModel:
     # --------------------------------------------------------- frontier organs
 
     def frontier_organs(self) -> dict[str, Any]:
-        """Enumerate the 13 `swe_kernel` organs and 8 Frontier Leapfrog Plays wired into the Unified Runtime."""
+        """Enumerate the 13 `swe_kernel` organs, 8 Frontier Leapfrog Plays, and Unified Leapfrog Moves."""
         from canonical.runtime import swe_kernel_organ_bridge_v1 as bridge
 
         swe_organs = bridge.list_organs()
@@ -1477,7 +1603,7 @@ class UnifiedModel:
                 "organ_id": "play_2_law_consolidation",
                 "module_path": "canonical/runtime/gradient_free_law_consolidation_v1.py",
                 "frontier_domain": "continual_learning",
-                "capability_role": "Gradient-free episodic law consolidation over the 45-commit real OSS corpus",
+                "capability_role": "Gradient-free episodic law consolidation v1 (historical baseline)",
             },
             {
                 "organ_id": "play_3_abstain_skill_induction",
@@ -1489,7 +1615,7 @@ class UnifiedModel:
                 "organ_id": "play_6_mutation_admission_gate",
                 "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v1.py",
                 "frontier_domain": "coding_agents",
-                "capability_role": "Adversarial AST mutation admission gate over harvested capability receipts",
+                "capability_role": "Adversarial AST mutation admission gate v1 (single-probe baseline)",
             },
             {
                 "organ_id": "play_a_counterfactual_discr_tree_router",
@@ -1516,14 +1642,121 @@ class UnifiedModel:
                 "capability_role": "POSIX os.fork() copy-on-write Zygote speculative patch verifier (1.58 ms p50) with AST test impact slicing",
             },
         ]
+        moves = [
+            {
+                "organ_id": "play_2_law_consolidation_v2",
+                "module_path": "canonical/runtime/gradient_free_law_consolidation_v2.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Popper negative-witness specialization + SemiPersistentEGraph anti-unification v2 (zero false refutations, held-out transfer)",
+            },
+            {
+                "organ_id": "play_6_mutation_admission_gate_v2",
+                "module_path": "canonical/runtime/adversarial_mutation_admission_gate_v2.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Apartness-guided nominal/boundary/refusal distinguishing-tuple mutation gate v2 (<15% survivor rate)",
+            },
+            {
+                "organ_id": "move_2_cow_zygote_bus",
+                "module_path": "canonical/swe_kernel/canonical_cu_sandbox_spine_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "os.fork() CoW ZygotePrewarmedPool + renameat2(RENAME_EXCHANGE) speculative execution bus",
+            },
+            {
+                "organ_id": "move_3_swe_abduction_spine",
+                "module_path": "canonical/swe_kernel/canonical_swe_spine_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "Zero-disk CoW assertion-demand + failing-relation + witness-inversion SWE fast lane",
+            },
+            {
+                "organ_id": "move_5_surprise_organism",
+                "module_path": "canonical/swe_kernel/canonical_env_discovery_spine_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Surprise-gated active organism with refusal-curriculum prerequisite synthesis & active disambiguation",
+            },
+            {
+                "organ_id": "move_1_trigram_impact_pareto",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "64-bit Python int-bitset positional 3-gram search (<0.5 ms), depth-3 blast radius (<0.05 ms), and bloat Pareto auditor",
+            },
+            {
+                "organ_id": "move_2_proof_mined_surface",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Proof-mined AST call-vector & CoW 2-run deterministic surface compiler (lifting 406 dark modules 3.7% -> 55.9%)",
+            },
+            {
+                "organ_id": "move_3_speculative_multiverse",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "world_model",
+                "capability_role": "Two-speed 10-50us RAM SemanticIR mental model + CDCL Equivalence-Modulo-Conflict nogood pruner -> CoW Zygote",
+            },
+            {
+                "organ_id": "move_5_doors_first_hidden_smc",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "Zero-pixel 4-tier Doors-First computer use + executor-hidden Speculative Macro Commit guarded by state projections",
+            },
+            {
+                "organ_id": "move_6_unblind_continual_memory",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "DBSP Z-set O(1) ForgetEval deletion + rule_expiry witness check + synthesized-oracle Clopper-Pearson curator + E-Stitch",
+            },
+            {
+                "organ_id": "move_7_global_extrapolation_gate",
+                "module_path": "canonical/runtime/frontier_seven_moves_runtime_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "Domain-of-verification extrapolation blocker + Purpose Gate contrast check + minimum-action global discriminator",
+            },
+            {
+                "organ_id": "unfamiliar_m0_apartness_lsharp",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "instant_learning",
+                "capability_role": "Observation-table-free Brouwer-Heyting constructive apartness (L# / L#_e) active Mealy learner with error-sink pruning (<0.25 ms)",
+            },
+            {
+                "organ_id": "unfamiliar_m1_angelic_sygus_swe",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "coding_agents",
+                "capability_role": "CoW Angelic Forest impossibility sieve + EUSolver OE-SyGuS + NAME_SCOPE + 4-gate non-vacuous test verifier",
+            },
+            {
+                "organ_id": "unfamiliar_m2_protocol_lift_oracle",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "computer_use",
+                "capability_role": "WebMCP + CDP/HAR network-to-HTTP protocol lifter + kernel namespace confinement + magic-header round-trip effect oracle",
+            },
+            {
+                "organ_id": "unfamiliar_m3_semiring_jtms_meme",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "memory",
+                "capability_role": "Why-Provenance Semiring (2^(2^V), union, join) over Z-set DBSP achieving 100% MEME Cascade & Absence in <15 us",
+            },
+            {
+                "organ_id": "unfamiliar_m4_minimax_interrogator",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "verification_abstention",
+                "capability_role": "Exact DP minimax decision-region version-space interrogator (finite_minimax_decision_region_v1) with irreversibility gating",
+            },
+            {
+                "organ_id": "unfamiliar_m5_zero_llm_alphaevolve",
+                "module_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+                "frontier_domain": "continual_learning",
+                "capability_role": "Zero-LLM AlphaEvolve MAP-Elites + Pareto synthesizer guarded by adversarial anti-reward-hacking evaluator audit",
+            },
+        ]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FRONTIER_ORGANS",
             "swe_kernel_organs_count": len(swe_organs),
             "leapfrog_plays_count": len(plays),
             "total_organs": len(swe_organs) + len(plays),
+            "leapfrog_moves_count": len(moves),
+            "total_organs_including_moves": len(swe_organs) + len(plays) + len(moves),
             "swe_kernel_organs": swe_organs,
             "leapfrog_plays": plays,
+            "leapfrog_moves": moves,
             "model_dependency_count": 0,
         }
 
@@ -1532,7 +1765,7 @@ class UnifiedModel:
         organ_id: str,
         payload: Mapping[str, Any] | None = None,
     ) -> dict[str, Any]:
-        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play through the Unified Runtime."""
+        """Execute a wired `swe_kernel` organ or Frontier Leapfrog Play/Move through the Unified Runtime."""
         req = dict(payload or {})
         if organ_id == "play_1_contract_world_model":
             from canonical.runtime import state_contract_world_model_v1 as p1
@@ -1542,6 +1775,10 @@ class UnifiedModel:
             from canonical.runtime import gradient_free_law_consolidation_v1 as p2
 
             return p2.run(req, ROOT)
+        if organ_id == "play_2_law_consolidation_v2":
+            from canonical.runtime import gradient_free_law_consolidation_v2 as p2v2
+
+            return p2v2.run(req, ROOT)
         if organ_id == "play_3_abstain_skill_induction":
             from canonical.runtime import abstain_gated_skill_induction_v1 as p3
 
@@ -1550,6 +1787,51 @@ class UnifiedModel:
             from canonical.runtime import adversarial_mutation_admission_gate_v1 as p6
 
             return p6.run(req, ROOT)
+        if organ_id == "play_6_mutation_admission_gate_v2":
+            from canonical.runtime import adversarial_mutation_admission_gate_v2 as p6v2
+
+            return p6v2.run(req, ROOT)
+        if organ_id == "move_2_cow_zygote_bus":
+            return self.execute_speculative(**req)
+        if organ_id == "move_3_swe_abduction_spine":
+            repo_root = req.pop("repo_root", ROOT)
+            return self.solve_swe_repo(repo_root, **req)
+        if organ_id == "move_5_surprise_organism":
+            return self.autonomous_pulse(**req)
+        if organ_id == "move_1_trigram_impact_pareto":
+            if "pattern" in req:
+                return self.trigram_search(str(req.pop("pattern")), **req)
+            if "target" in req:
+                return self.impact_blast_radius(str(req.pop("target")), **req)
+            return self.audit_bloat_pareto()
+        if organ_id == "move_2_proof_mined_surface":
+            if "invoke_module" in req:
+                return self.invoke_mined_surface(str(req.pop("invoke_module")), **req)
+            return self.derive_and_verify_surface(**req)
+        if organ_id == "move_3_speculative_multiverse":
+            return self.speculate_multiverse(**req)
+        if organ_id == "move_5_doors_first_hidden_smc":
+            ws = req.pop("workspace_dir")
+            steps = req.pop("workflow_steps")
+            return self.execute_doors_first(ws, steps, **req)
+        if organ_id == "move_6_unblind_continual_memory":
+            return self.continual_memory_cycle(**req)
+        if organ_id == "move_7_global_extrapolation_gate":
+            return self.evaluate_global_extrapolation(**req)
+        if organ_id == "unfamiliar_m0_apartness_lsharp":
+            return self.learn_apartness_lsharp(**req)
+        if organ_id == "unfamiliar_m1_angelic_sygus_swe":
+            return self.solve_angelic_sygus_swe(str(req.pop("source_text")), str(req.pop("test_source")), **req)
+        if organ_id == "unfamiliar_m2_protocol_lift_oracle":
+            return self.lift_protocol_and_verify_effect(**req)
+        if organ_id == "unfamiliar_m3_semiring_jtms_meme":
+            return self.semiring_jtms_memory_cycle(**req)
+        if organ_id == "unfamiliar_m4_minimax_interrogator":
+            return self.minimax_interrogate_version_space(**req)
+        if organ_id == "unfamiliar_m5_zero_llm_alphaevolve":
+            return self.evolve_pareto_organ(str(req.pop("baseline_source")), **req)
+        if organ_id == "unfamiliar_six_moves_suite":
+            return self.run_unfamiliar_six_moves_suite()
         if organ_id == "play_a_counterfactual_discr_tree_router":
             from canonical.runtime import counterfactual_discr_tree_skill_router_v1 as pa
 
@@ -1660,7 +1942,8 @@ class UnifiedModel:
 
     def _ids_mentioned(self, goal: str) -> set[str]:
         folded = str(goal or "").strip().casefold()
-        if not folded:
+        f_len = len(folded)
+        if not f_len:
             return set()
         hits: set[str] = set()
         exact = self._exact_id_lookup.get(folded)
@@ -1668,14 +1951,14 @@ class UnifiedModel:
             hits.add(exact)
         if "." in folded:
             for cid, cf in self._cid_dot_pairs:
-                if cf in folded:
+                if len(cf) <= f_len and cf in folded:
                     hits.add(cid)
         for cid, cf in self._cid_nodot_pairs:
-            if cf in folded:
+            if len(cf) <= f_len and cf in folded:
                 hits.add(cid)
         if ":" in folded:
             for eid, ef, _mp in self._eid_folded_triples:
-                if ef in folded:
+                if len(ef) <= f_len and ef in folded:
                     hits.add(eid)
         by_word = self._mode_phrase_by_word
         if by_word:
@@ -1858,7 +2141,13 @@ class UnifiedModel:
 
     # -------------------------------------------------------------- source index
 
-    def find_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+    def find_source(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        collapse_superseded: bool = True,
+    ) -> dict[str, Any]:
         """Locate runtime source the model can *address* but cannot *execute*.
 
         This is deliberately not ``route`` and ``solve`` never calls it. The
@@ -1870,10 +2159,19 @@ class UnifiedModel:
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
+        for _t in terms:
+            if "_" in _t:
+                for _part in _t.split("_"):
+                    if len(_part) >= 2 and _part not in STOPWORDS:
+                        wanted.add(_part)
+        q_folded = query.casefold()
+        explicit_ver = bool(re.search(r"(?:\bv\d+\b|_v\d+|\.py\b)", q_folded))
+        do_collapse = bool(collapse_superseded) and not explicit_ver
+        fetch_k = max(int(top_k) * 4, 24) if (do_collapse or "_" in q_folded) else max(1, int(top_k))
         self._ensure_source_index()
         src_map = self._source_index_cache or {}
         if self._source_csr is not None:
-            scored_top = self._source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+            scored_top = self._source_csr.search_ranked(wanted, q_folded, top_k=fetch_k)
         else:
             src_df = self._source_df_cache or {}
             src_postings = self._source_postings_cache or {}
@@ -1891,7 +2189,6 @@ class UnifiedModel:
                 idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
                 for path, tf in plist:
                     acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-            q_folded = query.casefold()
             scored: list[tuple[float, str, dict[str, Any]]] = []
             for path, score in acc_scores.items():
                 if score <= 0.0:
@@ -1900,10 +2197,14 @@ class UnifiedModel:
                     score += 8.0
                 scored.append((score, path, src_map[path]))
             scored.sort(key=lambda item: (-item[0], item[1]))
-            scored_top = scored[: max(1, int(top_k))]
+            scored_top = scored[:fetch_k]
 
         rows: list[dict[str, Any]] = []
+        has_underscore_q = "_" in q_folded
         for score, path, row in scored_top:
+            adj_score = float(score)
+            if has_underscore_q and Path(path).stem.casefold() in q_folded:
+                adj_score += 8.0
             rows.append(
                 {
                     "path": path,
@@ -1913,12 +2214,23 @@ class UnifiedModel:
                     "summary": row.get("summary") or "",
                     "symbol_count": int(row.get("symbol_count") or 0),
                     "matched_terms": sorted(wanted & set(row.get("terms") or ())),
-                    "score": round(float(score), 6),
+                    "score": round(adj_score, 6),
                     # The load-bearing part of this whole method.
                     "capability": False,
                     "executable": False,
                 }
             )
+        if has_underscore_q and len(rows) > 1:
+            rows.sort(key=lambda r: (-r["score"], r["path"]))
+        if do_collapse and len(rows) > 1:
+            deduped = dedupe_version_families(rows, path_key="path")[: max(1, int(top_k))]
+            for d in deduped:
+                d.pop("version_family", None)
+                d.pop("version_number", None)
+                d.pop("superseded_versions_collapsed", None)
+            rows = deduped
+        else:
+            rows = rows[: max(1, int(top_k))]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FIND_SOURCE",
@@ -1935,16 +2247,31 @@ class UnifiedModel:
             ),
         }
 
-    def find_any_source(self, query: str, *, top_k: int = 5) -> dict[str, Any]:
+    def find_any_source(
+        self,
+        query: str,
+        *,
+        top_k: int = 5,
+        collapse_superseded: bool = True,
+    ) -> dict[str, Any]:
         """Locate source modules across ALL repository trees (`runtime`, `swe_kernel`, `tools`, `capabilities`, `research`, `integrations`)."""
         terms = tokenize(query)
         if not terms:
             raise UnifiedModelError("FIND_SOURCE_QUERY_EMPTY")
         wanted = set(terms)
+        for _t in terms:
+            if "_" in _t:
+                for _part in _t.split("_"):
+                    if len(_part) >= 2 and _part not in STOPWORDS:
+                        wanted.add(_part)
+        q_folded = query.casefold()
+        explicit_ver = bool(re.search(r"(?:\bv\d+\b|_v\d+|\.py\b)", q_folded))
+        do_collapse = bool(collapse_superseded) and not explicit_ver
+        fetch_k = max(int(top_k) * 4, 24) if (do_collapse or "_" in q_folded) else max(1, int(top_k))
         self._ensure_combined_source_index()
         combined = self._combined_source_index_cache or {}
         if self._combined_source_csr is not None:
-            scored_top = self._combined_source_csr.search_ranked(wanted, query.casefold(), top_k=top_k)
+            scored_top = self._combined_source_csr.search_ranked(wanted, q_folded, top_k=fetch_k)
         else:
             comb_postings = self._combined_source_postings_cache or {}
             src_df = self._source_df_cache or {}
@@ -1959,7 +2286,6 @@ class UnifiedModel:
                 idf = math.log(1.0 + (total_docs - df + 0.5) / (df + 0.5))
                 for path, tf in plist:
                     acc_scores[path] = acc_scores.get(path, 0.0) + idf * (1.0 + math.log(tf))
-            q_folded = query.casefold()
             scored: list[tuple[float, str, dict[str, Any]]] = []
             for path, score in acc_scores.items():
                 if score <= 0.0:
@@ -1968,7 +2294,7 @@ class UnifiedModel:
                     score += 8.0
                 scored.append((score, path, combined[path]))
             scored.sort(key=lambda item: (-item[0], item[1]))
-            scored_top = scored[: max(1, int(top_k))]
+            scored_top = scored[:fetch_k]
         rows: list[dict[str, Any]] = []
         for score, path, row in scored_top:
             rows.append(
@@ -1986,6 +2312,15 @@ class UnifiedModel:
                     "executable": False,
                 }
             )
+        if do_collapse and len(rows) > 1:
+            deduped = dedupe_version_families(rows, path_key="path")[: max(1, int(top_k))]
+            for d in deduped:
+                d.pop("version_family", None)
+                d.pop("version_number", None)
+                d.pop("superseded_versions_collapsed", None)
+            rows = deduped
+        else:
+            rows = rows[: max(1, int(top_k))]
         return {
             "schema": SOLUTION_SCHEMA,
             "operation": "FIND_ANY_SOURCE",
@@ -3439,6 +3774,216 @@ class UnifiedModel:
             **{"pass": passed},
             reason=None if passed else str(res.get("reason") or "BOUNDARY_ROUTE_FAILED"),
             boundary_route=res,
+        )
+
+    def speculate_cow_candidates(
+        self,
+        cow_candidates: Iterable[tuple[str, Callable[[], tuple[bool, Any]]]],
+        *,
+        workspace_root: str | Path | None = None,
+        max_parallel: int = 4,
+        timeout_s: float = 5.0,
+        goal: str = "",
+    ) -> dict[str, Any]:
+        """Move 2 Front-Door: Screen Python candidates in parallel `os.fork()` CoW workers (`ZygotePrewarmedPool`)."""
+        from canonical.swe_kernel import canonical_cu_sandbox_spine_v1 as cu_spine
+
+        sb = cu_spine.SpeculativeSandbox(Path(workspace_root) if workspace_root else ROOT)
+        res = sb.evaluate_cow_zygote_batch(
+            list(cow_candidates),
+            max_parallel=max_parallel,
+            per_worker_timeout_s=timeout_s,
+        )
+        passed = bool(res.get("passed"))
+        return self._envelope(
+            operation="SPECULATE_COW_ZYGOTE",
+            goal=goal or "speculate_cow_candidates",
+            status="PASS__ZYGOTE_COW_WINNER" if passed else "FAIL_CLOSED__NO_COW_WINNER",
+            **{"pass": passed},
+            reason=None if passed else "NO_CANDIDATE_PASSED_IN_COW_POOL",
+            cow_zygote=res,
+        )
+
+    def autonomous_pulse(
+        self,
+        *,
+        goal: str = "",
+        creature_workspace: str | Path | None = None,
+        blackbox_env: Any = None,
+        goal_predicate: Callable[[Any], bool] | None = None,
+        surprise_gated: bool = True,
+        action_grammar_guide: str | None = None,
+        disambiguation_candidates: Iterable[Any] | None = None,
+        disambiguation_probe_universe: Iterable[Any] | None = None,
+        disambiguation_truth_index: int = 0,
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Move 5 Front-Door: Surprise-gated autonomous pulse (`Creature` + Refusal Curriculum + Active Disambiguation)."""
+        return self.discover_environment(
+            goal=goal or "autonomous_pulse",
+            creature_workspace=creature_workspace,
+            blackbox_env=blackbox_env,
+            goal_predicate=goal_predicate,
+            surprise_gated=surprise_gated,
+            action_grammar_guide=action_grammar_guide,
+            disambiguation_candidates=list(disambiguation_candidates) if disambiguation_candidates is not None else None,
+            disambiguation_probe_universe=list(disambiguation_probe_universe) if disambiguation_probe_universe is not None else None,
+            disambiguation_truth_index=disambiguation_truth_index,
+            **kwargs,
+        )
+
+    # ------------------------------------ 7-Move Frontier Leapfrog Front Doors
+
+    def trigram_search(
+        self,
+        pattern: str,
+        *,
+        regex: bool = False,
+        case_sensitive: bool = True,
+        exclude_tests: bool = False,
+        top_k: int = 20,
+    ) -> dict[str, Any]:
+        """Move I Front-Door: Sub-millisecond 64-bit int-bitset positional 3-gram exact/regex search."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).search(
+            pattern,
+            regex=regex,
+            case_sensitive=case_sensitive,
+            exclude_tests=exclude_tests,
+            top_k=top_k,
+        )
+
+    def impact_blast_radius(self, module_or_stem: str, *, max_depth: int = 3) -> dict[str, Any]:
+        """Move I Front-Door: `< 0.05 ms` depth-`k` reverse-importer & impacted-test bitset blast radius."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.get_trigram_index(ROOT).impact_blast_radius(module_or_stem, max_depth=max_depth)
+
+    def audit_bloat_pareto(self) -> dict[str, Any]:
+        """Move I Front-Door: Elon's First Law orphan & superseded-clone byte-cost Pareto census."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.audit_bloat_pareto(self, ROOT)
+
+    def derive_and_verify_surface(
+        self,
+        *,
+        module_paths: Sequence[str] | None = None,
+        max_modules: int | None = None,
+        per_call_timeout_s: float = 0.25,
+        workers: int = 8,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Proof-mine call vectors and verify 2-run `os.fork()` CoW determinism (`3.7% -> 55.9%`)."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=module_paths,
+            max_modules=max_modules,
+            per_call_timeout_s=per_call_timeout_s,
+            workers=workers,
+        )
+
+    def invoke_mined_surface(
+        self,
+        module_or_stem: str,
+        *,
+        args: Sequence[Any] | None = None,
+        kwargs: Mapping[str, Any] | None = None,
+        entrypoint: str | None = None,
+    ) -> dict[str, Any]:
+        """Move II Front-Door: Execute any proof-mined verified dark module in an isolated CoW child."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.invoke_mined_surface(
+            module_or_stem,
+            args=args,
+            kwargs=kwargs,
+            entrypoint=entrypoint,
+            root=ROOT,
+        )
+
+    def speculate_multiverse(
+        self,
+        *,
+        base_source: str,
+        func_name: str,
+        candidate_sources: Sequence[tuple[str, str]],
+        probe_inputs: Sequence[tuple[Any, ...]],
+        postcondition: Callable[[tuple[Any, ...], Any], bool] | None = None,
+        workspace_dir: str | Path | None = None,
+        target_rel_file: str = "module.py",
+    ) -> dict[str, Any]:
+        """Move III Front-Door: Two-speed `10-50 us` RAM SemanticIR mental model + CDCL EMC nogoods -> CoW Zygote."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.speculate_multiverse(
+            base_source=base_source,
+            func_name=func_name,
+            candidate_sources=candidate_sources,
+            probe_inputs=probe_inputs,
+            postcondition=postcondition,
+            workspace_dir=workspace_dir,
+            target_rel_file=target_rel_file,
+        )
+
+    def execute_doors_first(
+        self,
+        workspace_dir: str | Path,
+        workflow_steps: Sequence[Mapping[str, Any]],
+        *,
+        smc_engine: Any = None,
+        learn_macro: bool = True,
+        require_guard_file: str | None = None,
+    ) -> dict[str, Any]:
+        """Move V Front-Door: 4-tier zero-pixel Doors-First execution + executor-hidden Speculative Macro Commit."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.execute_doors_first(
+            workspace_dir,
+            workflow_steps,
+            smc_engine=smc_engine,
+            learn_macro=learn_macro,
+            require_guard_file=require_guard_file,
+        )
+
+    def continual_memory_cycle(
+        self,
+        *,
+        active_cap: int = 32,
+        num_adversarial_mutants: int = 160,
+    ) -> dict[str, Any]:
+        """Move VI Front-Door: DBSP Z-set O(1) ForgetEval deletion + rule_expiry + unblind curator + E-Stitch."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.continual_memory_cycle(
+            active_cap=active_cap,
+            num_adversarial_mutants=num_adversarial_mutants,
+        )
+
+    def evaluate_global_extrapolation(
+        self,
+        *,
+        observed_points: Sequence[tuple[Any, Any]],
+        candidate_hypotheses: Mapping[str, Callable[[Any], Any]],
+        target_query_x: Any,
+        probe_domain: Sequence[Any],
+        world_oracle: Callable[[Any], Any] | None = None,
+        route_costs: Mapping[str, float] | None = None,
+        max_probes: int = 3,
+    ) -> dict[str, Any]:
+        """Move VII Front-Door: Domain-of-verification extrapolation blocker + Purpose Gate + global discriminator."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.evaluate_global_extrapolation(
+            observed_points=observed_points,
+            candidate_hypotheses=candidate_hypotheses,
+            target_query_x=target_query_x,
+            probe_domain=probe_domain,
+            world_oracle=world_oracle,
+            route_costs=route_costs,
+            max_probes=max_probes,
         )
 
     def catalog_federated_engines(self, *, domain: str | None = None) -> dict[str, Any]:
@@ -5417,6 +5962,383 @@ class UnifiedModel:
             sleep_consolidation=consol,
         )
 
+    def route_ppr(
+        self,
+        goal: str,
+        *,
+        top_k: int = 5,
+        executable_only: bool = True,
+    ) -> dict[str, Any]:
+        """Phase 1: `< 0.30 ms` Bipartite Specificity Personalized PageRank (`HippoRAG 2` + `DOMAIN_ATLAS_V1`)."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        if self._ppr_router is None:
+            self._ppr_router = fsm.SpecificityBipartitePPRRouter(self, root=ROOT)
+        return self._ppr_router.route(goal, top_k=top_k, executable_only=executable_only)
+
+    def learn_instant(
+        self,
+        *,
+        alphabet: Sequence[str],
+        execute_trace: Any,
+        held_out_traces: Sequence[Sequence[str]] = (),
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Phase 2: `< 50 us` Kalman surprise gate + `< 5.0 ms` Symbolic Mealy (`L^s` + `Lambda*_M`) instant learner."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.learn_instant_environment(
+            alphabet=alphabet,
+            execute_trace=execute_trace,
+            held_out_traces=held_out_traces,
+            **kwargs,
+        )
+
+    def execute_tomographic_petri(
+        self,
+        workspace: str | Path,
+        workflow: Sequence[Mapping[str, Any]],
+        **kwargs: Any,
+    ) -> dict[str, Any]:
+        """Phase 3: `< 20 us` Certified Petri-Net Supervisory Control (`AEPN`) + `< 3.0 ms` 5-Layer State Tomography."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.execute_tomographic_petri(Path(workspace), workflow, **kwargs)
+
+    def dbsp_memory_and_wake_sleep_cycle(
+        self,
+        *,
+        scale_events: int = 25000,
+    ) -> dict[str, Any]:
+        """Phase 5: `< 100 us` `O(|Delta|)` DBSP Bi-Temporal `Z`-Set + `< 1.0 ms` Local PPR + `[G_-, B_+]` Wake-Sleep."""
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        return fsm.dbsp_memory_and_wake_sleep_cycle(scale_events=scale_events)
+
+    # ----------------------------------------------------- Unfamiliar-Name 6-Move Frontier Leapfrog Front Door
+
+    def learn_apartness_lsharp(
+        self,
+        *,
+        alphabet: Sequence[str],
+        execute_trace: Any,
+        held_out_traces: Sequence[Sequence[str]] = (),
+        target_output: str | None = None,
+        prune_error_sinks: bool = True,
+    ) -> dict[str, Any]:
+        """Move 0: `< 0.25 ms` observation-table-free Brouwer-Heyting constructive apartness (`L#_e`) learner."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.ApartnessTreeInstantLearner(prune_error_sinks=prune_error_sinks).learn(
+            alphabet=alphabet,
+            execute_trace=execute_trace,
+            held_out_traces=held_out_traces,
+            target_output=target_output,
+        )
+
+    def solve_angelic_sygus_swe(
+        self,
+        source_text: str,
+        test_source: str,
+        *,
+        filename: str = "target_mod.py",
+        instruction_hint: str = "",
+        seed_cold_store: bool = False,
+    ) -> dict[str, Any]:
+        """Move 1: CoW Angelic Forest impossibility sieve + `OE-SyGuS` (`EUSolver`) + `NAME_SCOPE` + 4-gate verifier."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.AngelicForestSyGuSRepairEngine().solve(
+            source_text,
+            test_source,
+            filename=filename,
+            instruction_hint=instruction_hint,
+            seed_cold_store=seed_cold_store,
+        )
+
+    def lift_protocol_and_verify_effect(self, **kwargs: Any) -> dict[str, Any]:
+        """Move 2: `WebMCP` + CDP/HAR network-to-HTTP protocol lifter + `osworld_intake` + magic-header `effect_oracle`."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.lift_protocol_and_verify_effect(**kwargs)
+
+    def semiring_jtms_memory_cycle(
+        self,
+        *,
+        chain_count: int = 24,
+        chain_depth: int = 4,
+    ) -> dict[str, Any]:
+        """Move 3: Why-Provenance Semiring `(2^(2^V), union, join)` over `Z`-set DBSP (`100%` `MEME` Cascade & Absence)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.run_meme_semiring_benchmark(chain_count=chain_count, chain_depth=chain_depth)
+
+    def minimax_interrogate_version_space(self, **kwargs: Any) -> dict[str, Any]:
+        """Move 4: Exact DP minimax decision-region version-space interrogator (`finite_minimax_decision_region_v1`)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.minimax_interrogate_version_space(**kwargs)
+
+    def evolve_pareto_organ(self, baseline_source: str, **kwargs: Any) -> dict[str, Any]:
+        """Move 5: Zero-LLM `AlphaEvolve` MAP-Elites + Pareto code synthesizer with anti-reward-hacking oracle gate."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.evolve_pareto_organ(baseline_source, **kwargs)
+
+    def run_unfamiliar_six_moves_suite(self) -> dict[str, Any]:
+        """Execute all 6 Unfamiliar-Name Frontier Leapfrog Moves end-to-end through `UnifiedModel` (`K3 = 0`)."""
+        from canonical.swe_kernel import unified_unfamiliar_leapfrog_v1 as uul
+
+        return uul.run_unfamiliar_six_moves_suite()
+
+    # ------------------------------------------------------------------ Wave 36 + 37 Unified Futamura & OS-Confined Front Doors
+
+    def _get_futamura_cascade(self) -> Any:
+        if self._futamura_cascade is None:
+            from canonical.runtime.futamura_leapfrog_kernel_v1 import FutamuraSelfCompilingCascade
+
+            self._futamura_cascade = FutamuraSelfCompilingCascade()
+        return self._futamura_cascade
+
+    def futamura_solve(
+        self,
+        task: Mapping[str, Any],
+        *,
+        untrusted_proposer: Any = None,
+        auto_compile: bool = True,
+        use_cow_fork: bool = True,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Futamura self-compiling Rung 0 -> 1 -> 2 -> 3 cascade with Ring-0 verification."""
+        return self._get_futamura_cascade().solve(
+            task,
+            untrusted_proposer=untrusted_proposer,
+            auto_compile=auto_compile,
+            use_cow_fork=use_cow_fork,
+            alpha=alpha,
+        )
+
+    def verify_byte_effect(
+        self,
+        target: str | Path,
+        *,
+        expected_format: str | None = None,
+        expected_source_bytes: bytes | None = None,
+        expected_source_path: str | Path | None = None,
+        baseline_archive_hashes: Mapping[str, str] | None = None,
+        allowed_archive_mutations: Sequence[str] = (),
+    ) -> dict[str, Any]:
+        """Wave 36: Ring-0 byte-level effect verification (magic headers, roundtrip, lying extensions, archive invariance)."""
+        from canonical.runtime.byte_effect_oracle_v1 import verify_byte_effect
+
+        return verify_byte_effect(
+            target,
+            expected_format=expected_format,
+            expected_source_bytes=expected_source_bytes,
+            expected_source_path=expected_source_path,
+            baseline_archive_hashes=baseline_archive_hashes,
+            allowed_archive_mutations=allowed_archive_mutations,
+        )
+
+    def minimize_patch_ddmin(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+    ) -> dict[str, Any]:
+        """Wave 36: Atomic-line Delta-Debugging (`ddmin`) hunk minimizer (`NP_code`)."""
+        from canonical.runtime.byte_effect_oracle_v1 import ddmin_minimize_hunks
+
+        return ddmin_minimize_hunks(original_source, patched_source, oracle_fn)
+
+    def audit_patch_mutations(
+        self,
+        original_source: str,
+        patched_source: str,
+        oracle_fn: Any,
+        *,
+        max_mutants: int = 16,
+    ) -> dict[str, Any]:
+        """Wave 36: Touched-line adversarial mutation-kill audit."""
+        from canonical.runtime.byte_effect_oracle_v1 import audit_patch_mutation_kill
+
+        return audit_patch_mutation_kill(
+            original_source, patched_source, oracle_fn, max_mutants=max_mutants
+        )
+
+    def learn_mealy_instant(
+        self,
+        reset_and_run: Any,
+        alphabet: Sequence[str],
+        *,
+        numeric_actions: Mapping[str, tuple[int, int]] | None = None,
+        error_outputs: Sequence[str] = ("ERR", "ERROR", "FAIL", "DENIED"),
+        commutative_pairs: Sequence[tuple[str, str]] = (),
+        idempotent_actions: Sequence[str] = (),
+        max_states: int = 32,
+        enable_error_pruning: bool = True,
+    ) -> Any:
+        """Wave 36: Error-Aware `L#` + `Lambda*_M` sub-ms symbolic Mealy instant learner."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ErrorAwareSymbolicMealyLearner
+
+        return ErrorAwareSymbolicMealyLearner().learn(
+            reset_and_run,
+            alphabet,
+            numeric_actions=numeric_actions,
+            error_outputs=error_outputs,
+            commutative_pairs=commutative_pairs,
+            idempotent_actions=idempotent_actions,
+            max_states=max_states,
+            enable_error_pruning=enable_error_pruning,
+        )
+
+    def execute_hybrid_cu(
+        self,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+        executor: Any = None,
+        initial_state: Mapping[str, Any] | None = None,
+        max_loop_repeats: int = 2,
+        macros: Mapping[str, Sequence[Mapping[str, Any]]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: 3-channel HCU (`Programmatic > Semantic > Visual`) + Petri guard + loop-churn killer + PASTE macros."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import HybridComputerUsePetriSupervisor
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        for m_name, m_steps in (macros or {}).items():
+            sup.register_paste_macro(str(m_name), m_steps)
+        return sup.execute_episode(
+            steps,
+            executor=executor,
+            initial_state=initial_state,
+            max_loop_repeats=max_loop_repeats,
+        )
+
+    def dbsp_belief_bus(self) -> Any:
+        """Wave 36: Live DBSP bi-temporal `Z`-set + Kumiho AGM belief-revision + `PreCommitFailureGate` bus."""
+        return self._get_futamura_cascade().belief_bus
+
+    def conformal_evalue_gate(
+        self,
+        observations: Sequence[Mapping[str, Any]],
+        *,
+        alpha: float = 0.05,
+    ) -> dict[str, Any]:
+        """Wave 36: Anytime-valid SCoRE conformal e-process gate (`Ville bound <= alpha`)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ConformalEValueGate
+
+        gate = ConformalEValueGate(alpha=alpha)
+        for ev in observations:
+            gate.observe(
+                str(ev["evidence"]),
+                passed=bool(ev["passed"]),
+                null_pass_prob=float(ev.get("null_pass_prob", 0.25)),
+                hard_contradiction=bool(ev.get("hard_contradiction", False)),
+            )
+        return gate.decision()
+
+    def cow_zygote_repair(
+        self,
+        source: str,
+        test_cases: Sequence[str],
+        *,
+        use_cow_fork: bool = True,
+    ) -> dict[str, Any]:
+        """Wave 36: Zero-overhead `os.fork()` CoW zygote AST repair + ddmin + mutation-kill gate."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import ZeroOverheadCoWZygoteRepairEngine
+
+        return ZeroOverheadCoWZygoteRepairEngine().repair(
+            source, test_cases, use_cow_fork=use_cow_fork
+        )
+
+    def wake_sleep_consolidate(
+        self,
+        *,
+        max_active_rules: int = 64,
+        rubin_observations: Mapping[str, tuple[float, float]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 36: Wake-sleep anti-unification MDL consolidation + Rubin skill-rent GC."""
+        return self._get_futamura_cascade().wake_sleep_consolidate(
+            max_active_rules=max_active_rules,
+            rubin_observations=rubin_observations,
+        )
+
+    def probe_os_isolation(self, *, budget_s: float = 30.0) -> dict[str, Any]:
+        """Wave 37: Real Linux kernel namespace (`user+mount+pid+ipc+uts+net`, `CapEff=0`) 18-attempt escape probe."""
+        from canonical.runtime import os_isolation_v1
+
+        return os_isolation_v1.probe(budget_s=budget_s)
+
+    def execute_confined_computer_use(
+        self,
+        work_dir: str | Path,
+        steps: Sequence[Mapping[str, Any]],
+        *,
+        goal_id: str = "confined_hcu_episode",
+        budget_s: float = 15.0,
+        allow_network: bool = False,
+        verify_effect: bool = True,
+        initial_marking: Mapping[str, int] | None = None,
+        transitions: Mapping[str, Mapping[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Wave 37: Real OS kernel-confined 3-channel HCU executor with Ring-0 byte-effect verification & CoW rollback."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import (
+            ConfinedHybridComputerUseExecutor,
+            HybridComputerUsePetriSupervisor,
+        )
+
+        sup = HybridComputerUsePetriSupervisor(
+            initial_marking=initial_marking,
+            transitions=transitions,
+        )
+        ex = ConfinedHybridComputerUseExecutor(
+            supervisor=sup,
+            belief_bus=self._get_futamura_cascade().belief_bus,
+        )
+        return ex.execute_episode(
+            work_dir,
+            steps,
+            goal_id=goal_id,
+            budget_s=budget_s,
+            allow_network=allow_network,
+            verify_effect=verify_effect,
+        )
+
+    def solve_multifile_repo_futamura(
+        self,
+        repo_dir: str | Path,
+        test_targets: Sequence[str] = (),
+        *,
+        goal_text: str = "",
+        suspect_files: Sequence[str] | None = None,
+        auto_compile: bool = True,
+        apply_to_disk: bool = True,
+        use_portfolio_fallback: bool = False,
+        alpha: float = 0.05,
+        timeout_s: float = 10.0,
+    ) -> dict[str, Any]:
+        """Wave 37: Unified multi-file Python repository Futamura solver (Rung-0 compiled skills +
+        `stdlib_cow_test_runner_v1` CoW fork screening + extended AST synthesis + Ring-0 Gate + compile-back)."""
+        from canonical.runtime.futamura_leapfrog_kernel_v1 import MultifileFutamuraRepoSolver
+
+        solver = MultifileFutamuraRepoSolver(cascade=self._get_futamura_cascade())
+        return solver.solve(
+            repo_dir,
+            test_targets,
+            goal_text=goal_text,
+            suspect_files=suspect_files,
+            auto_compile=auto_compile,
+            apply_to_disk=apply_to_disk,
+            use_portfolio_fallback=use_portfolio_fallback,
+            alpha=alpha,
+            timeout_s=timeout_s,
+        )
+
 
 # --------------------------------------------------------------------------- helpers
 
@@ -5775,12 +6697,76 @@ def open_model(
             return mem_hit
 
     cache_dir = _core_cache_dir()
+    is_canonical_default = target == _DEFAULT_TARGET_PATH
+
     raw_bytes: bytes | None = None
-    raw_sha = _read_stat_sha(target_key, st) if is_default else None
+    raw_sha = _read_stat_sha(target_key, st) if is_canonical_default else None
+
+    # Ultra-fast sidecar header verification (`< 0.2 ms`) when stat_sha is cold or within the 1.5s post-compile window:
+    if raw_sha is None and is_canonical_default:
+        core_sidecar_file = target.parent / "BRAIN_UNIFIED_CORE_V1.json"
+        if core_sidecar_file.is_file():
+            try:
+                cst = core_sidecar_file.stat()
+                ptr_file = cache_dir / f"unified_model_hot_v8_hdr_{cst.st_size}_{cst.st_mtime_ns}.marshal"
+                hdr_cand: dict[str, Any] | None = None
+                if ptr_file.is_file():
+                    loaded_h = marshal.loads(ptr_file.read_bytes())
+                    if (
+                        isinstance(loaded_h, dict)
+                        and loaded_h.get("core_format_v") == 5
+                        and loaded_h.get("packed_marshal_v") == 6
+                        and Path(str(loaded_h.get("_route_path") or "")).is_file()
+                        and Path(str(loaded_h.get("_tables_path") or "")).is_file()
+                    ):
+                        hdr_cand = loaded_h
+                if hdr_cand is None:
+                    loaded_j = json.loads(core_sidecar_file.read_text(encoding="utf-8"))
+                    if isinstance(loaded_j, dict) and loaded_j.get("core_format_v") == 5 and loaded_j.get("raw_sha256"):
+                        hdr_cand = _write_hot_tier_files(cache_dir, str(loaded_j["raw_sha256"]), loaded_j)
+                        try:
+                            tmp_p = ptr_file.with_name(f".{ptr_file.name}.{os.getpid()}.tmp")
+                            tmp_p.write_bytes(marshal.dumps(hdr_cand))
+                            tmp_p.replace(ptr_file)
+                        except OSError:
+                            pass
+                if (
+                    hdr_cand is not None
+                    and hdr_cand.get("schema") == SCHEMA
+                    and int(hdr_cand.get("artifact_bytes") or -1) == st.st_size
+                ):
+                    digest_val = str(hdr_cand.get("digest_value") or "")
+                    offset = int(hdr_cand.get("digest_needle_offset") or -1)
+                    s_offset = int(hdr_cand.get("schema_needle_offset") or -1)
+                    needle = f'"value": "{digest_val}"'.encode("ascii")
+                    s_needle = f'"schema": "{SCHEMA}"'.encode("ascii")
+                    if (
+                        len(digest_val) == 64
+                        and offset >= 0
+                        and offset + len(needle) <= st.st_size
+                        and s_offset >= 0
+                        and s_offset + len(s_needle) <= st.st_size
+                    ):
+                        fd = os.open(target_key, os.O_RDONLY)
+                        try:
+                            head_ok = os.pread(fd, len(s_needle), s_offset) == s_needle
+                            digest_ok = head_ok and (os.pread(fd, len(needle), offset) == needle)
+                        finally:
+                            os.close(fd)
+                        if head_ok and digest_ok:
+                            c_sha = str(hdr_cand.get("raw_sha256") or "")
+                            if c_sha:
+                                _VERIFIED_BLOB_DIGESTS[c_sha] = digest_val
+                                inst = UnifiedModel(hdr_cand, _raw_bytes=None, _core_only=True, _target_path=target)
+                                _OPEN_MODEL_MEM_CACHE[mem_key] = inst
+                                return inst
+            except Exception:
+                pass
+
     if raw_sha is None:
         raw_bytes = target.read_bytes()
         raw_sha = hashlib.sha256(raw_bytes).hexdigest()
-        if is_default:
+        if is_canonical_default:
             _write_stat_sha(target_key, st, raw_sha)
 
     short_sha = raw_sha[:32]
@@ -5798,7 +6784,7 @@ def open_model(
                 and Path(str(hdr.get("_tables_path") or "")).is_file()
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(hdr.get("digest_value") or "")
-                inst = UnifiedModel(hdr, _raw_bytes=raw_bytes, _core_only=True, _target_path=target)
+                inst = UnifiedModel(hdr, _raw_bytes=None, _core_only=True, _target_path=target)
                 _OPEN_MODEL_MEM_CACHE[mem_key] = inst
                 return inst
         except Exception:
@@ -5816,13 +6802,13 @@ def open_model(
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core.get("digest_value") or "")
                 hdr_out = _write_hot_tier_files(cache_dir, raw_sha, core)
-                inst = UnifiedModel(hdr_out, _raw_bytes=raw_bytes, _core_only=True, _target_path=target)
+                inst = UnifiedModel(hdr_out, _raw_bytes=None, _core_only=True, _target_path=target)
                 _OPEN_MODEL_MEM_CACHE[mem_key] = inst
                 return inst
         except Exception:
             pass
 
-    # Cold-clone SHA-256-verified sidecar fast path (`BRAIN_UNIFIED_CORE_V1.json`, `<700 KB` vs `13.6 MB`)
+    # Cold-clone SHA-256-verified sidecar fast path (`BRAIN_UNIFIED_CORE_V1.json`)
     core_json_path = (base / DEFAULT_CORE_ARTIFACT) if target == (base / DEFAULT_ARTIFACT).resolve() else None
     if core_json_path is not None and core_json_path.is_file():
         try:
@@ -5835,7 +6821,7 @@ def open_model(
             ):
                 _VERIFIED_BLOB_DIGESTS[raw_sha] = str(core_sidecar.get("digest_value") or "")
                 hdr_out = _write_hot_tier_files(cache_dir, raw_sha, core_sidecar)
-                inst = UnifiedModel(hdr_out, _raw_bytes=raw_bytes, _core_only=True, _target_path=target)
+                inst = UnifiedModel(hdr_out, _raw_bytes=None, _core_only=True, _target_path=target)
                 _OPEN_MODEL_MEM_CACHE[mem_key] = inst
                 return inst
         except Exception:

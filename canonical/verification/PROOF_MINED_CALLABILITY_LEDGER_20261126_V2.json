@@ -1,0 +1,245 @@
+{
+  "attempted": 406,
+  "baseline_v1_survival_rate": 0.0369,
+  "baseline_v1_survivors_on_406": 15,
+  "elapsed_ms": 40962.93,
+  "kill_floor": 0.4,
+  "model_calls": 0,
+  "operation": "DERIVE_AND_VERIFY_SURFACE",
+  "outcomes": {
+    "CALL_ERROR": 23,
+    "NON_DETERMINISTIC": 2,
+    "NO_ENCODABLE_CALL_VECTOR": 149,
+    "NO_PUBLIC_FUNCTION": 4,
+    "SURVIVES": 227,
+    "TIMEOUT": 1
+  },
+  "registered_callable_surfaces": 227,
+  "sample_survivors": [
+    {
+      "args": [
+        {
+          "id": "copy",
+          "tool": "cp"
+        }
+      ],
+      "deterministic": true,
+      "digest": "2e5480e909e6bbe1",
+      "entrypoint": "move_of",
+      "kwargs": {
+        "signature": {
+          "CARD": "INCREASED",
+          "IDENT": "CHANGED",
+          "LOT": "RETAINED",
+          "MULTISET": "CHANGED",
+          "ORDER": "CHANGED",
+          "PAIRING": "CHANGED"
+        }
+      },
+      "module": "canonical/runtime/a_goal_that_needs_two_moves_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "Move",
+      "preview": "\"Move('copy', {'CARD': 'INCREASED', 'IDENT': 'CHANGED', 'LOT': 'RETAINED', 'MULTISET': 'CHANGED', 'ORDER': 'CHANGED', 'PAIRING': 'CHANGED'})\"",
+      "receipt": "3134af7ed1df46d3ac39ad5c3519938e",
+      "source_scope": "<module>",
+      "stem": "a_goal_that_needs_two_moves_v1"
+    },
+    {
+      "args": [
+        "asn1parse: Use -help for summary."
+      ],
+      "deterministic": true,
+      "digest": "74234e98afe7498f",
+      "entrypoint": "read_refusal",
+      "kwargs": {},
+      "module": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "NoneType",
+      "preview": "null",
+      "receipt": "1a8bebeae5565e19204d6a3028cb1c93",
+      "source_scope": "<module>",
+      "stem": "a_refusal_is_a_specification_v1"
+    },
+    {
+      "args": [],
+      "deterministic": true,
+      "digest": "c2c50bf316c10b5e",
+      "entrypoint": "current_authority_probe",
+      "kwargs": {},
+      "module": "canonical/runtime/aa_briefcase_minimum_information_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "dict",
+      "preview": "{\"capability_relation_proved\": false, \"literal_aa_briefcase_elo_ge_1822_proved\": false, \"missing_components\": [\"ANALYTICAL_QUALITY\", \"PRESENTATION_QUALITY\", \"RE",
+      "receipt": "541b1ebb6036b95051a0773cb88790f2",
+      "source_scope": "<module>",
+      "stem": "aa_briefcase_minimum_information_v1"
+    },
+    {
+      "args": [
+        {
+          "benchmark": "AA-Briefcase",
+          "brain_global_top_support_proved": false,
+          "frozen_score_monotonicity_proved": false,
+          "hidden_predicate_class_soundly_restricted": false,
+          "judge_monotonicity_proved": false,
+          "material_order_complete": false,
+          "scope_complete_public_superdomain": true,
+          "version": "1.1"
+        }
+      ],
+      "deterministic": true,
+      "digest": "2314231db29cee05",
+      "entrypoint": "evaluate_aa_top_support_route",
+      "kwargs": {},
+      "module": "canonical/runtime/aa_briefcase_top_support_collapse_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "dict",
+      "preview": "{\"acceptance_credit_delta\": 0, \"pass\": false, \"reason\": \"The current AA public-interface superdomain represents hidden rubric predicates opaquely and allows arb",
+      "receipt": "a8e2464a2cfc83dbcdd26fd19a5b0b35",
+      "source_scope": "<module>",
+      "stem": "aa_briefcase_top_support_collapse_v1"
+    },
+    {
+      "args": [
+        {
+          "elements": [],
+          "utterance": ""
+        }
+      ],
+      "deterministic": true,
+      "digest": "4f53cda18c2baa0c",
+      "entrypoint": "aimed_actions",
+      "kwargs": {},
+      "module": "canonical/runtime/aimed_action_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "list",
+      "preview": "[]",
+      "receipt": "3b0704187510d0c8981a353244486e3c",
+      "source_scope": "<module>",
+      "stem": "aimed_action_v1"
+    },
+    {
+      "args": [],
+      "deterministic": true,
+      "digest": "4f53cda18c2baa0c",
+      "entrypoint": "forget",
+      "kwargs": {},
+      "module": "canonical/runtime/associative_memory_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "list",
+      "preview": "[]",
+      "receipt": "b2cbd5f1233b7ae01f4e7f3a3b17450b",
+      "source_scope": "zero_required_signature",
+      "stem": "associative_memory_v1"
+    },
+    {
+      "args": [
+        "not-json"
+      ],
+      "deterministic": true,
+      "digest": "4f53cda18c2baa0c",
+      "entrypoint": "parse_search_payload",
+      "kwargs": {},
+      "module": "canonical/runtime/automationbench_owned_policy_kernel_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "list",
+      "preview": "[]",
+      "receipt": "f60a517077a5f8631ff4c4988bf0b53e",
+      "source_scope": "<module>",
+      "stem": "automationbench_owned_policy_kernel_v1"
+    },
+    {
+      "args": [],
+      "deterministic": true,
+      "digest": "ce3fe66ed7c20613",
+      "entrypoint": "supported_proof_classes",
+      "kwargs": {},
+      "module": "canonical/runtime/brain_owned_semantic_relation_edge_registry_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "list",
+      "preview": "[\"EXPLICIT_BOUNDED_EXTENSION\", \"EXPLICIT_SOURCE_IDENTITY\"]",
+      "receipt": "4217edfa03be0d476ec9c157ca9e92b8",
+      "source_scope": "<module>",
+      "stem": "brain_owned_semantic_relation_edge_registry_v1"
+    },
+    {
+      "args": [],
+      "deterministic": true,
+      "digest": "41525c006d1f1c68",
+      "entrypoint": "open_model",
+      "kwargs": {},
+      "module": "canonical/runtime/brain_unified_model_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "UnifiedModel",
+      "preview": "\"<_mined_brain_unified_model_v1.UnifiedModel object at 0x7f0d49bafe90>\"",
+      "receipt": "f3dcf99bbf25fd425518dc69b570b61e",
+      "source_scope": "<module>",
+      "stem": "brain_unified_model_v1"
+    },
+    {
+      "args": [
+        4401,
+        0
+      ],
+      "deterministic": true,
+      "digest": "89627ad0cb8fbc2f",
+      "entrypoint": "generate_case",
+      "kwargs": {},
+      "module": "canonical/runtime/browser_goal_grounding_recovery_proof.py",
+      "outcome": "SURVIVES",
+      "output_kind": "dict",
+      "preview": "{\"_oracle\": {\"action\": \"click\", \"target_ids\": [\"T1-21186\", \"T2-21186\"], \"target_name\": \"Privacy settings\", \"target_role\": \"button\", \"value\": null}, \"case_class\"",
+      "receipt": "e0cfed48c6a747f6c06087897a77cfba",
+      "source_scope": "<module>",
+      "stem": "browser_goal_grounding_recovery_proof"
+    },
+    {
+      "args": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          1
+        ],
+        2,
+        2,
+        99
+      ],
+      "deterministic": true,
+      "digest": "c78ceaeaee6f39b7",
+      "entrypoint": "finite_countermodel",
+      "kwargs": {},
+      "module": "canonical/runtime/bytes_open_domain_equivalence_cut_v1.py",
+      "outcome": "SURVIVES",
+      "output_kind": "dict",
+      "preview": "{\"finite_observations_insufficient_for_global_equivalence\": true, \"observed_equal\": true, \"schema\": \"PROJECT_BRAIN_BYTES_OPEN_DOMAIN_EQUIVALENCE_CUT_V1\", \"unsee",
+      "receipt": "4edc097c8f90806f9c7c876b2b616245",
+      "source_scope": "<module>",
+      "stem": "bytes_open_domain_equivalence_cut_v1"
+    },
+    {
+      "args": [],
+      "deterministic": true,
+      "digest": "2f4bb661d3551d74",
+      "entrypoint": "plan_current_post_composition_frontier",
+      "kwargs": {},
+      "module": "canonical/runtime/capability_parallel_frontier_post_composition_v2.py",
+      "outcome": "SURVIVES",
+      "output_kind": "dict",
+      "preview": "{\"acceptance_credit_delta\": 0, \"adapter_schema\": \"PROJECT_BRAIN_POST_COMPOSITION_PARALLEL_FRONTIER_V2\", \"capability_credit_delta\": 0, \"dominated_by\": {}, \"dynam",
+      "receipt": "8259d95bed78cfe556edb30bcd83e834",
+      "source_scope": "<module>",
+      "stem": "capability_parallel_frontier_post_composition_v2"
+    }
+  ],
+  "schema": "BRAIN_FRONTIER_SEVEN_MOVES_RUNTIME_V1",
+  "survival_rate": 0.5591,
+  "survivors": 227,
+  "verdict": "SURVIVES"
+}

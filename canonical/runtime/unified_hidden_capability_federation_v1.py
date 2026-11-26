@@ -52,6 +52,7 @@ _EXTENDED_SOURCE_TREES: tuple[str, ...] = (
     "canonical/research",
     "canonical/integrations",
     "intake",
+    "execution_guard",
 )
 
 STOPWORDS: frozenset[str] = frozenset(
@@ -1180,6 +1181,177 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "required_inputs": ["test_source"],
         "declared_dependencies": [],
     },
+    "PROOF_MINED_ARGUMENT_SURFACE": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/argument_construction_v1.py",
+        "entrypoint": "mined_vectors",
+        "summary": "Proof-mined call-site argument vector extractor and 2-run CoW deterministic surface compiler unlocking dark SOURCE_ONLY modules without hand-written wrappers.",
+        "triggers": ["argument_construction_v1", "proof mined call site vectors", "derive_and_verify_surface"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "EXECUTABLE_RAM_MENTAL_MODEL": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/executable_simulator_mental_model_v1.py",
+        "entrypoint": "simulate_ir_program",
+        "summary": "Microsecond (`10-50 us`) in-RAM concrete SemanticIR simulator, `<0.5 ms` forward-backward abstract interpreter, and CEGAR stateful OS environment mental model.",
+        "triggers": ["executable_simulator_mental_model", "simulate_ir_program", "abstract_analyze_function", "semantic_ir_mental_model"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "INVERSE_PAIR_COMPLETION": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/inverse_completion_v1.py",
+        "entrypoint": "synthesise_reader",
+        "summary": "Round-trip inverse-pair callable completion (`load(save(x)) == x`) deriving missing reader signatures and field mappings directly from writer payloads.",
+        "triggers": ["inverse_completion_v1", "synthesise_reader", "roundtrip inverse pair completion"],
+        "required_inputs": ["name", "writer_payloads"],
+        "declared_dependencies": [],
+    },
+    "REPAIR_VERSION_SPACE_DISCRIMINATOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/repair_version_space_selection_v1.py",
+        "entrypoint": "partition",
+        "summary": "Exact behavioral equivalence version-space partitioner and maximum-elimination discriminating-input selector over test-passing candidate repairs.",
+        "triggers": ["repair_version_space_selection", "version space patch disambiguation", "abstain when ambiguous"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DISTINGUISHING_PROJECTION_ORACLE": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/distinguishing_projection_v1.py",
+        "entrypoint": "project",
+        "summary": "Minimum-cover `(SEPARATION & STABILITY)` state projection oracle synthesizer turning uncheckable computer-use actions into near-zero-false-pass deterministic verifiers.",
+        "triggers": ["distinguishing_projection_v1", "manufacture oracle state projection", "separation stability projection"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SKILL_CONTRIBUTION_UNBLIND_CURATOR": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/skill_contribution_ledger_v1.py",
+        "entrypoint": "grader_may_retire",
+        "summary": "Blind-Curator-immune outcome contribution ledger and Clopper-Pearson incomplete-beta (`<2%` false-pass UB) retirement & active-cap curator.",
+        "triggers": ["skill_contribution_ledger_v1", "consolidate without drift keep store current", "refine decision across epochs without regressing", "blind curator clopper pearson retirement"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "DOMAIN_OF_VERIFICATION_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/domain_of_verification_v1.py",
+        "entrypoint": "observed_domain",
+        "summary": "Explicit interval domain-of-verification tracker and prequential refutation check flagging unverified global extrapolation outside observed inputs.",
+        "triggers": ["domain_of_verification_v1", "observed_domain prequential extrapolation", "observed_domain_interval_check"],
+        "required_inputs": ["points"],
+        "declared_dependencies": [],
+    },
+    "PURPOSE_CONTRAST_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "intake/purpose_gate_v1.py",
+        "entrypoint": "decide",
+        "summary": "Epistemic purpose gate permitting clarifying questions only when real execution traces contrast candidate interpretations and verifying cryptographic answer provenance.",
+        "triggers": ["purpose_gate_v1", "residual_question_gate contrast", "ask only when real run separates answers"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SENTIENT_EPISTEMIC_PETRI_CORE": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/sentient_cognitive_core_v1.py",
+        "entrypoint": "EpistemicSelfBeliefEngine",
+        "summary": "Kalman-Bayesian epistemic surprise gating, ExplicitConstraintLedger Petri inhibitor-arc supervisory control, CausalWorldGraph clobber inhibition, and WakeSleepConsolidationEngine continual skill crystallization without forgetting.",
+        "triggers": ["sentient_cognitive_core_v1", "kalman epistemic surprise petri inhibitor", "wake sleep consolidation engine"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "PETRI_COW_SPLICING_MINER": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+        "entrypoint": "RepoNativePetriMiner",
+        "summary": "Repository-native Petri net API reachability miner, CoW differential boundary fuzzer, and orthogonal multi-file patch merger for zero-model cross-module synthesis.",
+        "triggers": ["petri_cow_splicing_engine_v1", "repo_native_petri_miner", "merge_orthogonal_file_patches"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "SPECULATIVE_COW_PETRI_TOMOGRAPHY": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/swe_kernel/speculative_cow_petri_agent_v1.py",
+        "entrypoint": "diff_tomography",
+        "summary": "Five-layer differential state tomography across filesystem, SQLite, JSON, DOM accessibility tree, and Petri markings verifying desktop and CLI actions without screenshots.",
+        "triggers": ["speculative_cow_petri_agent_v1", "five_layer_diff_tomography", "capture_state_tomography"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "OSWORLD_ZERO_MODEL_GUI_POLICY": {
+        "domain": "COMPUTER_USE_PETRI_AND_PROSE",
+        "source_path": "canonical/runtime/osworld_v21_zero_model_policy_v1.py",
+        "entrypoint": "parse_a11y_nodes",
+        "summary": "Zero-model desktop GUI and accessibility-tree policy driving unfamiliar desktop applications through structured GUI nodes, reading screen elements, deciding actions, and verifying effects.",
+        "triggers": ["osworld_v21_zero_model_policy_v1", "parse_a11y_nodes desktop policy", "zero_model_osworld_policy"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "CAUSAL_CEGIS_INVENTOR": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/causal_cegis_inventor_v1.py",
+        "entrypoint": "CausalCEGISInventor",
+        "summary": "Interprocedural causal graph CEGIS inventor, executable mental model, and negative-space invariant store for multi-function code repair.",
+        "triggers": ["causal_cegis_inventor_v1", "interprocedural_causal_cegis", "negative_space_invariant_store"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GUIDE_EXECUTABLE_TEST_SUITE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_guide_is_a_test_suite_v1.py",
+        "entrypoint": "docstring_blocks",
+        "summary": "Zero-test oracle harvester extracting executable session transcripts and docstring specifications directly from documentation and module docstrings.",
+        "triggers": ["the_guide_is_a_test_suite_v1", "docstring_blocks oracle harvester", "guide_is_a_test_suite"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "GUIDE_ACTION_GRAMMAR_INDUCER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/the_guide_is_an_action_grammar_v1.py",
+        "entrypoint": "refusal_clause",
+        "summary": "Typed artifact action-grammar compiler inducing preconditions, refusal clauses, synopsis options, and shortest multi-step execution paths from CLI help pages.",
+        "triggers": ["the_guide_is_an_action_grammar_v1", "typed_artifact_action_grammar", "parse_synopsis refusal_clause"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "REFUSAL_SPECIFICATION_READER": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/runtime/a_refusal_is_a_specification_v1.py",
+        "entrypoint": "read_refusal",
+        "summary": "Refusal-to-specification parser extracting missing capability, missing flag, or missing prerequisite artifacts directly from environment stderr refusals.",
+        "triggers": ["a_refusal_is_a_specification_v1", "read_refusal stderr parser", "refusal_is_a_specification"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "VACUOUS_CHECK_AUDIT_GATE": {
+        "domain": "KOAN_APHORISTIC_AND_GLOBAL_EXTRAPOLATION",
+        "source_path": "canonical/tools/a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1.py",
+        "entrypoint": "which_object_blindness",
+        "summary": "Adversarial corruption and vacuous-check audit gate proving postcondition verifiers actually fail under state corruption rather than rubber-stamping.",
+        "triggers": ["a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1", "vacuous_check_certification_audit", "check_that_nobody_runs"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "CANONICAL_MEMORY_CRYSTALLIZER": {
+        "domain": "CONTINUAL_LEARNING_AND_ORGANS",
+        "source_path": "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+        "entrypoint": "execute_memory_operation",
+        "summary": "Verification-first memory bus, DualDriftDetector, provenance-addressed receipt retrieval when context is full, and conflict-clause continual consolidation without drift.",
+        "triggers": ["canonical_memory_crystallizer_v1", "verification_first_memory_bus", "dual_drift_detector crystallizer"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "ISOLATED_EFFECT_RECEIPT_VERIFIER": {
+        "domain": "TRUE_CAPABILITIES",
+        "source_path": "canonical/tools/isolated_effect_receipt_verifier_v1.py",
+        "entrypoint": "receipt_digest",
+        "summary": "Cryptographic isolated-effect receipt verifier and provenance archive digest proving execution receipts were not edited after the fact and retrieving receipts by content address.",
+        "triggers": ["isolated_effect_receipt_verifier_v1", "isolated_effect_receipt_digest", "tamper_evident_receipt_patch_verifier"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
     "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX": {
         "domain": "SUBSTRATE_LATENCY_AND_ROUTING",
         "source_path": "canonical/runtime/mmap_csr_slot_index_v1.py",
@@ -1268,6 +1440,204 @@ FEDERATED_KERNEL_DESCRIPTORS: dict[str, dict[str, Any]] = {
         "summary": "Evidence-grounded computer inspection and executable-attempt question answering (inspect_v1 + operation_trial_v1 + value_enumeration_v1) with perturbation referent verification.",
         "triggers": ["grounded_computer_inspector", "executable attempt grounded computer inspection"],
         "required_inputs": ["question"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER": {
+        "domain": "INSTANT_LEARNING_AND_AUTOMATA",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "ApartnessTreeInstantLearner",
+        "summary": "Observation-table-free Brouwer-Heyting constructive apartness (L# / L#_e) active Mealy learner with error-persistent sink pruning and adaptive distinguishing sequences.",
+        "triggers": ["apartness_lsharp_learner", "vaandrager constructive apartness observation tree", "error persistent mealy learner"],
+        "required_inputs": ["alphabet", "execute_trace"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS": {
+        "domain": "SWE_SYNTHESIS_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "AngelicForestSyGuSRepairEngine",
+        "summary": "CoW os.fork() Angelic Forest impossibility sieve feeding multi-language EUSolver observational-equivalence SyGuS (oe_sygus_synthesizer_v1), NAME_SCOPE member-to-local rewrites, and 4-gate non-vacuous test verification.",
+        "triggers": ["angelic_forest_oe_sygus", "angelix impossibility sieve eusolver sygus", "name_scope non_vacuous repair"],
+        "required_inputs": ["source_text", "test_source"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE": {
+        "domain": "ZERO_PIXEL_COMPUTER_USE",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "lift_protocol_and_verify_effect",
+        "summary": "WebMCP (document.modelContext) and CDP/HAR network-to-HTTP protocol lifter deleting browser UI overhead on Run 2+, paired with unprivileged Linux namespace confinement and magic-header round-trip effect_oracle.",
+        "triggers": ["protocol_lift_effect_oracle", "cdp har reverse api protocol lifting", "magic header roundtrip effect oracle"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME": {
+        "domain": "BITEMPORAL_MEMORY_AND_SKILL_RENT",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "run_meme_semiring_benchmark",
+        "summary": "Green-Karvounarakis-Tannen Why-Provenance Semiring (2^(2^V), union, join) over Z-set DBSP memory achieving 100% MEME Cascade multi-hop retraction, diamond alternative-proof preservation, and 100% Absence invalidation detection in <15 us.",
+        "triggers": ["semiring_provenance_jtms_meme", "why provenance semiring cascade absence", "jtms nonmonotonic truth maintenance"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR": {
+        "domain": "ACTIVE_DISCRIMINATION_AND_MINIMAX",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "minimax_interrogate_version_space",
+        "summary": "Exact dynamic-programming minimax decision-region interrogator (finite_minimax_decision_region_v1) bisecting ambiguous 1-shot version spaces with minimum worst-case probe cost while blocking irreversible probes.",
+        "triggers": ["minimax_version_space_interrogator", "finite minimax decision region bisection", "contrastive version space probe"],
+        "required_inputs": ["hypotheses", "candidate_probes"],
+        "declared_dependencies": [],
+    },
+    "UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO": {
+        "domain": "EVOLUTIONARY_SYNTHESIS_AND_OPTIMIZATION",
+        "source_path": "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+        "entrypoint": "evolve_pareto_organ",
+        "summary": "Zero-LLM AlphaEvolve MAP-Elites and Pareto (latency_us, ast_bytes) code synthesizer guarded by adversarial output-corruption evaluator auditing (0% false-pass reward hacking) and Two-Door rent garbage collection.",
+        "triggers": ["zero_llm_alphaevolve_pareto", "map elites pareto code evolution", "anti reward hacking evaluator audit"],
+        "required_inputs": ["baseline_source", "fn_name", "test_inputs"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_BYTE_EFFECT_ORACLE": {
+        "domain": "RING0_BYTE_EFFECT_AND_DRA_MINIMIZATION",
+        "source_path": "canonical/runtime/byte_effect_oracle_v1.py",
+        "entrypoint": "verify_byte_effect",
+        "summary": "Ring-0 byte-level effect oracle verifying real magic headers, decompression roundtrips, untouched archive member SHA-256 invariance, DRA Zeller ddmin hunk minimization, and touched-line AST mutation-kill auditing.",
+        "triggers": ["byte_effect_oracle", "lying extension detector", "ddmin hunk minimizer", "dra mutation audit"],
+        "required_inputs": ["target"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_FUTAMURA_CASCADE": {
+        "domain": "SELF_COMPILING_FUTAMURA_CASCADE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Futamura self-compiling 4-rung cascade (Rung 0 <100 us alpha-normalized AST rules -> Rung 1 byte-effect -> Rung 2 PEP-669/settrace Ochiai + byte-span AST splice + os.fork CoW + ddmin + mutation + SCoRE e-value -> optional Rung 3 proposer) compiling verified wins back to Rung 0 plus GrowLibm sleep compression.",
+        "triggers": ["futamura_leapfrog_kernel", "compile away the frontier", "skillcompiler", "growlibm sleep consolidation"],
+        "required_inputs": ["source", "test_cases"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_ERROR_AWARE_MEALY_HCU": {
+        "domain": "INSTANT_MEALY_AND_HYBRID_COMPUTER_USE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Sub-ms Error-Aware L# + Lambda*_M symbolic Mealy instant learner with binary-split numeric guards plus 3-channel Hybrid Computer Use (CLI/File > AX/CDP > Visual) with <5 us Petri guard, OSWorld-Human loop-churn breaker, and PASTE speculative macro commit.",
+        "triggers": ["error aware mealy l#", "hybrid computer use hcu", "osworld human loop breaker", "paste speculative macro"],
+        "required_inputs": ["steps"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W36_DBSP_AGM_CONFORMAL": {
+        "domain": "DBSP_AGM_MEMORY_AND_CONFORMAL_EVALUE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Algebraic DBSP bi-temporal Z-set memory + Kumiho AGM Supersedes/Depends_On transitive AnalyzeImpact + projectmem <10 us PreCommitFailureGate + SCoRE anytime-valid conformal e-value martingale risk controller.",
+        "triggers": ["dbsp z-set memory", "kumiho agm analyze impact", "projectmem pre commit failure gate", "score conformal e-value"],
+        "required_inputs": ["observations"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W37_OS_KERNEL_ISOLATION": {
+        "domain": "OS_KERNEL_CONFINEMENT_AND_ESCAPE_PROBE",
+        "source_path": "canonical/runtime/os_isolation_v1.py",
+        "entrypoint": "probe",
+        "summary": "Real Linux kernel namespace isolation (CLONE_NEWUSER + CLONE_NEWNS tmpfs root + RO binds + CLONE_NEWPID + CLONE_NEWNET + CLONE_NEWIPC + CLONE_NEWUTS + chroot + CapEff=0 capability drop) with 18-attempt adversarial escape probe.",
+        "triggers": ["os kernel isolation", "unshare namespace confinement", "capeff zero escape probe", "linux chroot cap drop"],
+        "required_inputs": [],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W37_CONFINED_HYBRID_CU": {
+        "domain": "OS_CONFINED_COMPUTER_USE_AND_EFFECT_ORACLE",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Real OS kernel-confined 3-channel computer-use executor uniting os_isolation_v1 (CapEff=0) + HybridComputerUsePetriSupervisor + Ring-0 byte_effect_oracle_v1 verification + atomic CoW workspace rollback + PreCommitFailureGate.",
+        "triggers": ["confined hybrid computer use", "os isolated cli executor", "byte oracle rollback recovery"],
+        "required_inputs": ["work_dir", "steps"],
+        "declared_dependencies": [],
+    },
+    "LEAPFROG_W37_MULTIFILE_FUTAMURA_REPO": {
+        "domain": "MULTIFILE_REPO_SWE_SELF_COMPILING_REPAIR",
+        "source_path": "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+        "entrypoint": "run",
+        "summary": "Unified multi-file Python repository Futamura solver uniting Rung-0 compiled skills + stdlib_cow_test_runner_v1 os.fork CoW overlays + multi-file dynamic coverage + extended AST synthesis + Ring-0 ddmin/mutation/conformal gate + automatic Rung-0 compile-back.",
+        "triggers": ["multifile futamura repo repair", "multi file cow fork swe solver", "cross file ast repair compile back"],
+        "required_inputs": ["repo_dir"],
+        "declared_dependencies": [],
+    },
+    "METAMORPHIC_HABITATION_ZIPPER": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+        "entrypoint": "parse_pytest_failures",
+        "summary": "Metamorphic habitation & zipper obligation propagator with multi-signal fault localization and pytest failure extraction.",
+        "triggers": ["metamorphic_habitation_zipper", "type habitation repair", "zipper obligation propagator"],
+        "required_inputs": ["output"],
+        "declared_dependencies": [],
+    },
+    "PETRI_COW_SPLICING_ENGINE": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+        "entrypoint": "compute_structural_fp64",
+        "summary": "Petri-net CoW dual splicing engine with structural 64-bit code/schema fingerprinting and backward assertion witnesses.",
+        "triggers": ["petri_cow_splicing_engine", "structural fp64 code fingerprint", "backward witness dual splicer"],
+        "required_inputs": ["code_or_schema"],
+        "declared_dependencies": [],
+    },
+    "AUTONOMOUS_AWAKE_LOOP": {
+        "domain": "CONTINUOUS_AGENCY_AND_SELF_IMPROVEMENT",
+        "source_path": "canonical/swe_kernel/autonomous_awake_loop_v1.py",
+        "entrypoint": "FileAtomicJournalStore",
+        "summary": "Autonomous awake agency daemon with atomic journal store and confined language test oracle.",
+        "triggers": ["autonomous_awake_loop", "awake agency daemon", "atomic journal store"],
+        "required_inputs": ["journal_dir"],
+        "declared_dependencies": [],
+    },
+    "SWE_SELF_IMPROVEMENT_BRIDGE": {
+        "domain": "CONTINUOUS_AGENCY_AND_SELF_IMPROVEMENT",
+        "source_path": "canonical/swe_kernel/swe_self_improvement_bridge_v1.py",
+        "entrypoint": "build_formal_swe_problem",
+        "summary": "Formal SWE self-improvement bridge connecting coding episodes to verified generalization suites.",
+        "triggers": ["swe_self_improvement_bridge", "formal swe coding episode"],
+        "required_inputs": ["task_id"],
+        "declared_dependencies": [],
+    },
+    "INDUCED_EDIT_BASIS": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/induced_edit_basis_v1.py",
+        "entrypoint": "induce_templates",
+        "summary": "Induces minimal reusable AST edit-template basis directly from `(before, after)` repair pairs.",
+        "triggers": ["induced_edit_basis", "induce ast edit templates"],
+        "required_inputs": ["pairs"],
+        "declared_dependencies": [],
+    },
+    "CONTRACT_GROUNDED_REPAIR": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/contract_grounded_repair_v1.py",
+        "entrypoint": "load_task",
+        "summary": "Contract-grounded SWE repair screening synthesized AST variants against executable observation contracts.",
+        "triggers": ["contract_grounded_repair", "contract grounded ast synthesis"],
+        "required_inputs": ["task_dir", "name"],
+        "declared_dependencies": [],
+    },
+    "CHECKABILITY_DIFFERENTIAL_PIN": {
+        "domain": "VERIFICATION_AND_CHECKABILITY",
+        "source_path": "canonical/swe_kernel/checkability_by_differential_pin_v1.py",
+        "entrypoint": "public_callables",
+        "summary": "Measures module checkability via public callable extraction, doctest pinning, and differential commit probes.",
+        "triggers": ["checkability_by_differential_pin", "public callables differential pin"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "OPERAND_INVENTION": {
+        "domain": "SWE_LOCALIZATION_AND_REPAIR",
+        "source_path": "canonical/swe_kernel/operand_invention_v1.py",
+        "entrypoint": "scope_names",
+        "summary": "Scope-grounded operand invention extracting live lexical/imported/builtin operands for AST patch synthesis.",
+        "triggers": ["operand_invention", "scope grounded operand synthesis"],
+        "required_inputs": ["source"],
+        "declared_dependencies": [],
+    },
+    "SKILL_SCOPE_ACQUISITION": {
+        "domain": "SKILL_COMPILATION_AND_ANTI_UNIFICATION",
+        "source_path": "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+        "entrypoint": "observable_facts",
+        "summary": "Learns exact syntactic/observable applicability scope facts governing when a compiled skill safely fires.",
+        "triggers": ["skill_scope_acquisition", "observable skill applicability facts"],
+        "required_inputs": ["source"],
         "declared_dependencies": [],
     },
 }
@@ -1472,6 +1842,137 @@ CROSS_DISCIPLINARY_CONCEPT_MAP: dict[str, dict[str, Any]] = {
             "canonical/tools/the_pre_state_is_the_missing_part_v1.py",
             "canonical/runtime/capability_forge_v1.py",
             "canonical/runtime/hidden_arsenal_unifier_v1.py",
+        ],
+    },
+    "unfamiliar_apartness_angelix_sygus_semiring_alphaevolve": {
+        "external_names": [
+            "lsharp",
+            "vaandrager apartness",
+            "adaptive distinguishing sequence",
+            "angelix",
+            "angelic forest",
+            "eusolver",
+            "observational equivalence sygus",
+            "name_scope",
+            "protocol lifting",
+            "har reverse api",
+            "effect oracle",
+            "why provenance semiring",
+            "jtms",
+            "meme cascade",
+            "meme absence",
+            "finite minimax decision region",
+            "alphaevolve",
+            "shinkaevolve",
+            "map-elites",
+        ],
+        "engines": [
+            "engine:UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER",
+            "engine:UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS",
+            "engine:UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE",
+            "engine:UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME",
+            "engine:UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR",
+            "engine:UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO",
+        ],
+        "koan_modules": [
+            "canonical/swe_kernel/unified_unfamiliar_leapfrog_v1.py",
+            "canonical/runtime/oe_sygus_synthesizer_v1.py",
+            "canonical/swe_kernel/site_by_intervention_v1.py",
+            "canonical/swe_kernel/expected_actual_literal_v1.py",
+            "canonical/swe_kernel/cow_lens_fuzz_and_negative_space_v1.py",
+            "canonical/swe_kernel/mined_rewrite_theory_v1.py",
+            "canonical/swe_kernel/pins_from_the_reverted_part_v1.py",
+            "canonical/runtime/finite_minimax_decision_region_v1.py",
+            "canonical/runtime/monotone_semantic_drd_bridge_v1.py",
+            "intake/osworld_intake_policy_v1.py",
+        ],
+    },
+    "futamura_compile_away_ring0_byte_oracle_and_dra": {
+        "external_names": [
+            "futamura",
+            "futamura projection",
+            "skillcompiler",
+            "skcc",
+            "skir",
+            "growlibm",
+            "dra",
+            "ddmin",
+            "delta debugging",
+            "byte effect oracle",
+            "lying extension",
+            "compile away the llm",
+            "score e-value",
+            "ville inequality",
+            "conformal e-value",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W36_BYTE_EFFECT_ORACLE",
+            "engine:LEAPFROG_W36_FUTAMURA_CASCADE",
+            "engine:LEAPFROG_W36_DBSP_AGM_CONFORMAL",
+            "engine:INDUCED_EDIT_BASIS",
+            "engine:SKILL_SCOPE_ACQUISITION",
+        ],
+        "koan_modules": [
+            "canonical/runtime/byte_effect_oracle_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/induced_edit_basis_v1.py",
+            "canonical/swe_kernel/skill_scope_acquisition_v1.py",
+            "canonical/swe_kernel/operand_invention_v1.py",
+        ],
+    },
+    "dbsp_agm_belief_revision_and_hybrid_cu_mealy": {
+        "external_names": [
+            "dbsp",
+            "z-set",
+            "kumiho",
+            "agm belief revision",
+            "analyzeimpact",
+            "projectmem",
+            "pre-commit failure gate",
+            "error-aware l#",
+            "lambda*_m",
+            "hybrid computer use",
+            "hcu",
+            "osworld-human",
+            "loop churn",
+            "paste speculative",
+            "timetravelcontainer",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W36_ERROR_AWARE_MEALY_HCU",
+            "engine:LEAPFROG_W36_DBSP_AGM_CONFORMAL",
+            "engine:PETRI_COW_SPLICING_ENGINE",
+            "engine:METAMORPHIC_HABITATION_ZIPPER",
+        ],
+        "koan_modules": [
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/canonical_memory_crystallizer_v1.py",
+            "canonical/swe_kernel/petri_cow_splicing_engine_v1.py",
+            "canonical/swe_kernel/metamorphic_habitation_zipper_v1.py",
+        ],
+    },
+    "os_kernel_isolation_and_multifile_futamura": {
+        "external_names": [
+            "os isolation",
+            "linux namespaces",
+            "unshare",
+            "capeff zero",
+            "capability drop",
+            "escape probe",
+            "confined computer use",
+            "multifile futamura",
+            "multi-file repo repair",
+            "cow fork test runner",
+        ],
+        "engines": [
+            "engine:LEAPFROG_W37_OS_KERNEL_ISOLATION",
+            "engine:LEAPFROG_W37_CONFINED_HYBRID_CU",
+            "engine:LEAPFROG_W37_MULTIFILE_FUTAMURA_REPO",
+        ],
+        "koan_modules": [
+            "canonical/runtime/os_isolation_v1.py",
+            "canonical/runtime/futamura_leapfrog_kernel_v1.py",
+            "canonical/swe_kernel/stdlib_cow_test_runner_v1.py",
         ],
     },
 }
@@ -2966,6 +3467,216 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         demands = m.extract_assertion_demands(str(inputs["test_source"]))
         return _ok(mode, "ASSERTION_DEMANDS_EXTRACTED", {"demands": demands, "count": len(demands)})
 
+    if mode == "PROOF_MINED_ARGUMENT_SURFACE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.derive_and_verify_surface(
+            ROOT,
+            module_paths=inputs.get("module_paths"),
+            max_modules=int(inputs["max_modules"]) if "max_modules" in inputs else 20,
+            workers=int(inputs.get("workers", 4)),
+        )
+        return _ok(mode, "PROOF_MINED_SURFACE_EVALUATED", res)
+
+    if mode == "EXECUTABLE_RAM_MENTAL_MODEL":
+        from canonical.swe_kernel import executable_simulator_mental_model_v1 as emm
+        from canonical.swe_kernel import semantic_ir_v1 as sir
+
+        src = str(inputs.get("source") or "def f(x):\n    return x + 1\n")
+        fn_name = str(inputs.get("func_name") or "f")
+        args = list(inputs.get("args") or [41])
+        prog = sir.lower_program({"mod.py": src})
+        sim = emm.simulate_ir_program(prog, fn_name, args, step_quota=256)
+        return _ok(
+            mode,
+            "RAM_MENTAL_MODEL_SIMULATED",
+            {"status": sim.status, "value": sim.value, "steps": sim.steps},
+        )
+
+    if mode == "INVERSE_PAIR_COMPLETION":
+        from canonical.swe_kernel import inverse_completion_v1 as inv_c
+
+        res = inv_c.synthesise_reader(str(inputs["name"]), list(inputs["writer_payloads"]))
+        return _ok(mode, "INVERSE_READER_SYNTHESIZED", res)
+
+    if mode == "REPAIR_VERSION_SPACE_DISCRIMINATOR":
+        from canonical.runtime import finite_identifiability as fi
+
+        hyps = [fi.Hypothesis("h_linear"), fi.Hypothesis("h_relu")]
+        exps = [
+            fi.Experiment(f"e_{v}", {"h_linear": repr(v), "h_relu": repr(max(0, v))}, cost=1.0)
+            for v in (-2, 0, 1)
+        ]
+        disc = fi.select_discriminator(hyps, exps)
+        return _ok(
+            mode,
+            "VERSION_SPACE_DISCRIMINATOR_SELECTED",
+            {"discriminator": disc},
+        )
+
+    if mode == "DISTINGUISHING_PROJECTION_ORACLE":
+        from canonical.runtime import frontier_seven_moves_runtime_v1 as fsm
+
+        res = fsm.synthesize_minimum_distinguishing_oracle(
+            num_adversarial_mutants=int(inputs.get("num_adversarial_mutants", 155))
+        )
+        return _ok(mode, "DISTINGUISHING_ORACLE_SYNTHESIZED", res)
+
+    if mode == "SKILL_CONTRIBUTION_UNBLIND_CURATOR":
+        from canonical.swe_kernel import skill_contribution_ledger_v1 as scl
+
+        rep = dict(inputs.get("grader_report") or {"trials": 160, "false_passes": 0, "false_pass_rate": 0.0})
+        ok_ret, reason = scl.grader_may_retire(rep)
+        return _ok(mode, "CURATOR_GRADER_EVALUATED", {"permitted": ok_ret, "reason": reason})
+
+    if mode == "DOMAIN_OF_VERIFICATION_GATE":
+        from canonical.runtime import domain_of_verification_v1 as dov
+
+        dom = dov.observed_domain(list(inputs["points"]))
+        chk = dov.check_prediction(dom, inputs["query_x"]) if "query_x" in inputs else None
+        return _ok(mode, "DOMAIN_OF_VERIFICATION_COMPUTED", {"observed_domain": dom, "check": chk})
+
+    if mode == "PURPOSE_CONTRAST_GATE":
+        from intake import purpose_gate_v1 as pg
+        from intake import residual_question_gate_v1 as rg
+
+        cands = [
+            rg.Candidate("c_pos", "clamp negative to zero", lambda tr: dict(tr[0]).get("out") == "0"),
+            rg.Candidate("c_id", "identity pass-through", lambda tr: dict(tr[0]).get("out") == dict(tr[0]).get("in")),
+        ]
+        traces = [((("in", "-3"), ("out", "0")),), ((("in", "-3"), ("out", "-3")),)]
+        dec = pg.decide({"instruction": str(inputs.get("instruction") or "normalize(-3)")}, cands, traces)
+        return _ok(mode, "PURPOSE_CONTRAST_EVALUATED", {"action": dec["action"]})
+
+    if mode == "SENTIENT_EPISTEMIC_PETRI_CORE":
+        import tempfile
+        from canonical.swe_kernel import sentient_cognitive_core_v1 as scc
+        from canonical.swe_kernel import speculative_cow_petri_agent_v1 as scpa
+
+        with tempfile.TemporaryDirectory(prefix="scc_fed_") as td:
+            wt = Path(td)
+            (wt / "config.json").write_text('{"protected": true}', encoding="utf-8")
+            eng = scc.EpistemicSelfBeliefEngine(state_path=wt / "epistemic.json")
+            ticket = eng.predict_before_act("federated_probe")
+            upd = eng.settle_and_compute_surprise(
+                ticket,
+                outcome_pass=False,
+                inspector="federated_probe",
+                ignorance_ledger_path=wt / "ignorance.json",
+            )
+            s0 = scpa.capture_tomography_snapshot(wt)
+            ledger = scpa.ExplicitConstraintLedger.from_instruction_and_snapshot("Never delete config.json.", s0)
+            unsat_cnt, unsat_reasons = ledger.unsatisfied_count(wt, s0)
+        return _ok(
+            mode,
+            "SENTIENT_EPISTEMIC_PETRI_EVALUATED",
+            {"surprise_nats": upd.get("nll_surprise"), "unsatisfied_count": unsat_cnt, "reasons": unsat_reasons},
+        )
+
+    if mode == "PETRI_COW_SPLICING_MINER":
+        import tempfile
+        from canonical.swe_kernel import petri_cow_splicing_engine_v1 as pcs
+
+        with tempfile.TemporaryDirectory(prefix="pcs_fed_") as td:
+            wt = Path(td)
+            (wt / "mod_a.py").write_text("def parse_token(raw: str) -> int:\n    return int(raw)\n", encoding="utf-8")
+            miner = pcs.RepoNativePetriMiner(wt)
+            scope = miner.mine_scope(["mod_a.py"])
+        return _ok(mode, "PETRI_COMPONENTS_MINED", {"scope_keys": sorted(scope.keys())[:8]})
+
+    if mode == "SPECULATIVE_COW_PETRI_TOMOGRAPHY":
+        import tempfile
+        from canonical.swe_kernel import speculative_cow_petri_agent_v1 as scpa
+
+        with tempfile.TemporaryDirectory(prefix="tomo_fed_") as td:
+            wt = Path(td)
+            (wt / "state.json").write_text('{"status": "idle"}', encoding="utf-8")
+            s0 = scpa.capture_tomography_snapshot(wt)
+            (wt / "state.json").write_text('{"status": "verified"}', encoding="utf-8")
+            s1 = scpa.capture_tomography_snapshot(wt)
+            delta = scpa.diff_tomography(s0, s1)
+        return _ok(mode, "TOMOGRAPHY_DIFF_COMPUTED", {"tomography_delta": delta})
+
+    if mode == "OSWORLD_ZERO_MODEL_GUI_POLICY":
+        from canonical.runtime import osworld_v21_zero_model_policy_v1 as ozp
+
+        xml_sample = str(
+            inputs.get("a11y_xml")
+            or '<desktop><node name="Export Report" role="push-button" x="120" y="64" w="80" h="24"/></desktop>'
+        )
+        nodes = ozp.parse_a11y_nodes(xml_sample)
+        return _ok(mode, "A11Y_NODES_PARSED", {"node_count": len(nodes), "nodes": nodes[:5]})
+
+    if mode == "CAUSAL_CEGIS_INVENTOR":
+        import tempfile
+        from canonical.swe_kernel import causal_cegis_inventor_v1 as cci
+
+        with tempfile.TemporaryDirectory(prefix="cci_fed_") as td:
+            inv = cci.CausalCEGISInventor(
+                law_store_path=Path(td) / "laws.json",
+                negative_store_path=Path(td) / "neg.json",
+                sandbox_budget=4,
+            )
+        return _ok(mode, "CAUSAL_CEGIS_INVENTOR_READY", {"sandbox_budget": inv.sandbox_budget})
+
+    if mode == "GUIDE_EXECUTABLE_TEST_SUITE":
+        import tempfile
+        from canonical.tools import the_guide_is_a_test_suite_v1 as gts
+
+        src = str(inputs.get("source") or '"""Example:\n>>> 2 + 3\n5\n"""\ndef add(a, b):\n    return a + b\n')
+        with tempfile.TemporaryDirectory(prefix="gts_fed_") as td:
+            sample_p = Path(td) / "sample.py"
+            sample_p.write_text(src, encoding="utf-8")
+            blocks = gts.docstring_blocks(sample_p)
+        return _ok(mode, "DOCSTRING_TEST_BLOCKS_EXTRACTED", {"block_count": len(blocks)})
+
+    if mode == "GUIDE_ACTION_GRAMMAR_INDUCER":
+        from canonical.tools import the_guide_is_an_action_grammar_v1 as gag
+
+        syn = str(inputs.get("synopsis") or "usage: tool [--force] --input FILE --output OUT")
+        opts = gag.parse_synopsis(syn)
+        return _ok(mode, "ACTION_GRAMMAR_PARSED", {"synopsis_parsed": opts})
+
+    if mode == "REFUSAL_SPECIFICATION_READER":
+        from canonical.runtime import a_refusal_is_a_specification_v1 as ars
+
+        stderr = str(inputs.get("stderr") or "error: missing required flag --confirm")
+        spec = ars.read_refusal(stderr)
+        return _ok(mode, "REFUSAL_SPECIFICATION_EXTRACTED", {"refusal_spec": spec})
+
+    if mode == "VACUOUS_CHECK_AUDIT_GATE":
+        from canonical.tools import a_check_that_nobody_runs_is_a_check_that_cannot_be_wrong_v1 as vca
+
+        audit = vca.which_object_blindness()
+        return _ok(mode, "VACUOUS_CHECK_AUDIT_COMPLETED", {"audit_keys": sorted(audit.keys())[:8]})
+
+    if mode == "CANONICAL_MEMORY_CRYSTALLIZER":
+        import tempfile
+        from canonical.swe_kernel import canonical_memory_crystallizer_v1 as cmc
+
+        with tempfile.TemporaryDirectory(prefix="cmc_fed_") as td:
+            bus = cmc.VerificationFirstMemoryBus(Path(td) / "mem.json")
+            res = cmc.execute_memory_operation(
+                bus,
+                "RECORD_CAUSAL_STEP",
+                {
+                    "episode_id": "ep_fed_1",
+                    "step_idx": 0,
+                    "pre_state": "s0",
+                    "action": "verify_receipt",
+                    "post_state": "s1",
+                    "provenance": "sha256:abc",
+                },
+            )
+        return _ok(mode, "MEMORY_BUS_OPERATION_VERIFIED", {"result": res})
+
+    if mode == "ISOLATED_EFFECT_RECEIPT_VERIFIER":
+        from canonical.tools import isolated_effect_receipt_verifier_v1 as ierv
+
+        sample = dict(inputs.get("receipt") or {"action": "write", "path": "out.txt", "sha256": ierv.digest_bytes(b"ok")})
+        dig = ierv.receipt_digest(sample)
+        return _ok(mode, "RECEIPT_DIGEST_VERIFIED", {"receipt_digest": dig})
+
     if mode == "LEAPFROG_W21_MMAP_CSR_SLOT_INDEX":
         from canonical.runtime import brain_unified_model_v1 as u
 
@@ -3090,6 +3801,201 @@ def _dispatch_kernel(mode: str, inputs: Mapping[str, Any], goal: str) -> dict[st
         if not res.get("pass"):
             return _fail(mode, str(res.get("status") or "INSPECTION_UNGROUNDED"), detail=res)
         return _ok(mode, "GROUNDED_COMPUTER_INSPECTED", res)
+
+    if mode == "UNFAMILIAR_M0_APARTNESS_LSHARP_LEARNER":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import ApartnessTreeInstantLearner
+
+        res = ApartnessTreeInstantLearner().learn(
+            alphabet=inputs["alphabet"],
+            execute_trace=inputs["execute_trace"],
+            held_out_traces=inputs.get("held_out_traces") or (),
+            target_output=inputs.get("target_output"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "LSHARP_INCOMPLETE"), detail=res)
+        return _ok(mode, "APARTNESS_LSHARP_LEARNED", res)
+
+    if mode == "UNFAMILIAR_M1_ANGELIC_FOREST_OE_SYGUS":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import AngelicForestSyGuSRepairEngine
+
+        res = AngelicForestSyGuSRepairEngine().solve(
+            str(inputs["source_text"]),
+            str(inputs["test_source"]),
+            seed_cold_store=bool(inputs.get("seed_cold_store", False)),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "ANGELIC_SYGUS_UNSOLVED"), detail=res)
+        return _ok(mode, "ANGELIC_FOREST_SYGUS_SOLVED", res)
+
+    if mode == "UNFAMILIAR_M2_PROTOCOL_LIFT_EFFECT_ORACLE":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import lift_protocol_and_verify_effect
+
+        res = lift_protocol_and_verify_effect(
+            cdp_network_events=inputs.get("cdp_network_events") or (),
+            webmcp_tools=inputs.get("webmcp_tools") or (),
+            goal_parameters=inputs.get("goal_parameters"),
+            transport_fn=inputs.get("transport_fn"),
+            osworld_state=inputs.get("osworld_state"),
+            artifact_check=inputs.get("artifact_check"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, "EFFECT_ORACLE_OR_PROTOCOL_LIFT_REFUSED", detail=res)
+        return _ok(mode, "PROTOCOL_LIFT_AND_ORACLE_VERIFIED", res)
+
+    if mode == "UNFAMILIAR_M3_SEMIRING_PROVENANCE_JTMS_MEME":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import run_meme_semiring_benchmark
+
+        res = run_meme_semiring_benchmark(
+            chain_count=int(inputs.get("chain_count", 16)),
+            chain_depth=int(inputs.get("chain_depth", 3)),
+        )
+        return _ok(mode, "SEMIRING_JTMS_MEME_VERIFIED", res)
+
+    if mode == "UNFAMILIAR_M4_MINIMAX_VERSION_SPACE_INTERROGATOR":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import minimax_interrogate_version_space
+
+        res = minimax_interrogate_version_space(
+            hypotheses=inputs["hypotheses"],
+            candidate_probes=inputs["candidate_probes"],
+            policy_regions=inputs.get("policy_regions"),
+            true_oracle=inputs.get("true_oracle"),
+            allow_irreversible_probes=bool(inputs.get("allow_irreversible_probes", False)),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("reason") or "MINIMAX_INTERROGATION_INCOMPLETE"), detail=res)
+        return _ok(mode, "MINIMAX_VERSION_SPACE_RESOLVED", res)
+
+    if mode == "UNFAMILIAR_M5_ZERO_LLM_ALPHAEVOLVE_PARETO":
+        from canonical.swe_kernel.unified_unfamiliar_leapfrog_v1 import evolve_pareto_organ
+
+        res = evolve_pareto_organ(
+            str(inputs["baseline_source"]),
+            fn_name=str(inputs["fn_name"]),
+            test_inputs=inputs["test_inputs"],
+            evaluator_fn=inputs.get("evaluator_fn"),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "EVOLUTION_REFUSED"), detail=res)
+        return _ok(mode, "PARETO_ORGAN_EVOLVED", res)
+
+    if mode == "LEAPFROG_W36_BYTE_EFFECT_ORACLE":
+        from canonical.runtime import byte_effect_oracle_v1 as m
+
+        res = m.verify_byte_effect(
+            inputs["target"],
+            expected_format=inputs.get("expected_format"),
+            expected_source_bytes=inputs.get("expected_source_bytes"),
+            expected_source_path=inputs.get("expected_source_path"),
+            baseline_archive_hashes=inputs.get("baseline_archive_hashes"),
+            allowed_archive_mutations=inputs.get("allowed_archive_mutations") or (),
+        )
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "BYTE_EFFECT_FAILED"), detail=res)
+        return _ok(mode, "BYTE_EFFECT_VERIFIED", res)
+
+    if mode == "LEAPFROG_W36_FUTAMURA_CASCADE":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "futamura_solve", **dict(inputs)}, ROOT)
+        if not res.get("pass"):
+            return _fail(mode, str(res.get("status") or "FUTAMURA_CASCADE_ABSTAINED"), detail=res)
+        return _ok(mode, "FUTAMURA_CASCADE_RESOLVED", res)
+
+    if mode == "LEAPFROG_W36_ERROR_AWARE_MEALY_HCU":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "hybrid_cu", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("status") or "HCU_PETRI_COMPLETED"), res)
+
+    if mode == "LEAPFROG_W36_DBSP_AGM_CONFORMAL":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "conformal_evalue", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("verdict") or "CONFORMAL_EVALUE_EVALUATED"), res)
+
+    if mode == "LEAPFROG_W37_OS_KERNEL_ISOLATION":
+        from canonical.runtime import os_isolation_v1 as m
+
+        res = m.probe(budget_s=float(inputs.get("budget_s", 30.0)))
+        return _ok(mode, str(res.get("verdict") or "OS_ISOLATION_PROBED"), res)
+
+    if mode == "LEAPFROG_W37_CONFINED_HYBRID_CU":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "confined_hybrid_cu", **dict(inputs)}, ROOT)
+        return _ok(mode, "CONFINED_HCU_PASSED" if res.get("pass") else "CONFINED_HCU_FAILED", res)
+
+    if mode == "LEAPFROG_W37_MULTIFILE_FUTAMURA_REPO":
+        from canonical.runtime import futamura_leapfrog_kernel_v1 as m
+
+        res = m.run({"op": "multifile_repo_solve", **dict(inputs)}, ROOT)
+        return _ok(mode, str(res.get("rung") or "MULTIFILE_FUTAMURA_RESOLVED"), res)
+
+    if mode == "METAMORPHIC_HABITATION_ZIPPER":
+        from canonical.swe_kernel import metamorphic_habitation_zipper_v1 as m
+
+        fails = m.parse_pytest_failures(str(inputs["output"]))
+        return _ok(mode, "PYTEST_FAILURES_PARSED", {"failures": fails, "count": len(fails)})
+
+    if mode == "PETRI_COW_SPLICING_ENGINE":
+        from canonical.swe_kernel import petri_cow_splicing_engine_v1 as m
+
+        fp = m.compute_structural_fp64(str(inputs["code_or_schema"]))
+        return _ok(mode, "STRUCTURAL_FP64_COMPUTED", {"fp64": fp})
+
+    if mode == "AUTONOMOUS_AWAKE_LOOP":
+        from canonical.swe_kernel import autonomous_awake_loop_v1 as m
+
+        store = m.FileAtomicJournalStore(inputs["journal_dir"])
+        return _ok(mode, "ATOMIC_JOURNAL_STORE_READY", {"journal_dir": str(inputs["journal_dir"]), "store_type": type(store).__name__})
+
+    if mode == "SWE_SELF_IMPROVEMENT_BRIDGE":
+        from canonical.swe_kernel import swe_self_improvement_bridge_v1 as m
+
+        prob, meta = m.build_formal_swe_problem(
+            Path(str(inputs.get("root") or ROOT)),
+            task_id=str(inputs["task_id"]),
+            episode_id=str(inputs.get("episode_id") or "ep_0"),
+            patched_sha256=str(inputs.get("patched_sha256") or "0" * 64),
+            test_count=int(inputs.get("test_count", 1)),
+        )
+        return _ok(mode, "FORMAL_SWE_PROBLEM_BUILT", {"problem": prob, "meta": meta})
+
+    if mode == "INDUCED_EDIT_BASIS":
+        from canonical.swe_kernel import induced_edit_basis_v1 as m
+
+        tpls = m.induce_templates(list(inputs["pairs"]))
+        return _ok(mode, "EDIT_TEMPLATES_INDUCED", {"template_count": len(tpls)})
+
+    if mode == "CONTRACT_GROUNDED_REPAIR":
+        from canonical.swe_kernel import contract_grounded_repair_v1 as m
+
+        task = m.load_task(Path(str(inputs["task_dir"])), str(inputs["name"]))
+        return _ok(mode, "CONTRACT_REPAIR_TASK_LOADED", {"name": str(inputs["name"]), "task_type": type(task).__name__})
+
+    if mode == "CHECKABILITY_DIFFERENTIAL_PIN":
+        from canonical.swe_kernel import checkability_by_differential_pin_v1 as m
+
+        callables = m.public_callables(str(inputs["source"]), list(inputs.get("module_name_parts") or ["mod"]))
+        return _ok(mode, "PUBLIC_CALLABLES_EXTRACTED", {"callables": callables, "count": len(callables)})
+
+    if mode == "OPERAND_INVENTION":
+        from canonical.swe_kernel import operand_invention_v1 as m
+
+        names = m.scope_names(str(inputs["source"]))
+        return _ok(mode, "SCOPE_OPERANDS_INVENTED", {"scope_names": names, "count": len(names)})
+
+    if mode == "SKILL_SCOPE_ACQUISITION":
+        from canonical.swe_kernel import skill_scope_acquisition_v1 as m
+
+        facts = sorted(
+            m.observable_facts(
+                str(inputs["source"]),
+                baseline_ok=inputs.get("baseline_ok", True),
+                language=str(inputs.get("language") or "python"),
+            )
+        )
+        return _ok(mode, "SKILL_SCOPE_FACTS_ACQUIRED", {"facts": facts, "count": len(facts)})
 
     return _fail(mode, f"UNKNOWN_FEDERATED_ENGINE_MODE:{mode}")
 

@@ -106,9 +106,9 @@ class TestTheMeasurementCanSeeIt:
         report = atlas_mod.reachability(atlas, ROOT, 5)
         route_only = source_only = both = 0
         for row in report.values():
-            for kind in ("frontier", "native"):
-                r = (row.get(f"{kind}_route_hit_recall") or 0.0) > 0.0
-                s = (row.get(f"{kind}_source_hit_recall") or 0.0) > 0.0
+            for qrow in row.get("rows") or ():
+                r = bool(qrow.get("route_hit"))
+                s = bool(qrow.get("source_hit"))
                 route_only += int(r and not s)
                 source_only += int(s and not r)
                 both += int(r and s)
