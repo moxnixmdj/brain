@@ -150,6 +150,44 @@ def changed_functions(old, new):
     return sorted(k for k in a.keys() & b.keys() if a[k] != b[k])
 
 
+
+def related_examples(examples, programs, subjects):
+    # Names come from the actual AST delta, not a task, known test or package vocabulary.
+    wanted = {part.casefold() for subject in subjects for part in subject.split('::')[-1].split('.')}
+    related = {}
+    for program in programs:
+        path = program['path']
+        matches = set()
+        for f in sorted((examples / path).parent.rglob('*.py')):
+            if f.resolve() != f or f.name.startswith('test_') or f.name.endswith('_test.py') or f.name == 'conftest.py' or any(
+                    n.startswith('.') or n in ('test', 'tests') for n in f.relative_to(examples).parts):
+                continue
+            try:
+                tree = ast.parse(f.read_bytes())
+            except (OSError, SyntaxError, ValueError):
+                continue
+            for fn in ast.walk(tree):
+                if isinstance(fn, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    names = {n.attr.casefold() if isinstance(n, ast.Attribute) else n.id.casefold()
+                             for d in fn.decorator_list for n in ast.walk(d) if isinstance(n, (ast.Attribute, ast.Name))}
+                    if names & wanted:
+                        matches.add(fn.name.replace('_', '-'))
+        related[path] = sorted(matches)
+    return sorted(programs, key=lambda p: (-len(related[p['path']]), p['path'], p['name'])), related
+
+
+def advertised(output):
+    lines = output.decode(errors='replace').splitlines()
+    start = next((i for i, s in enumerate(lines) if s == 'Commands:'), len(lines))
+    names = []
+    for line in lines[start + 1:]:
+        if not line.startswith(' '):
+            break
+        m = re.fullmatch(r'  ([A-Za-z][A-Za-z0-9_-]*)(?:  .*| *)', line)
+        if m:
+            names.append(m[1])
+    return names
+
 def command():
     s = json.loads(Path('/input/request.json').read_bytes())
     p = s['program']
@@ -163,7 +201,7 @@ def command():
             if key in hits:
                 hits[key] += 1
     local = False
-    sys.argv[:] = [p['name'], '--help']
+    sys.argv[:] = [p['name'], *([p['child']] if 'child' in p else []), '--help']
     try:
         pkg = importlib.import_module(s['package'])
         local = Path(pkg.__file__).is_relative_to('/input/pkg')
@@ -189,11 +227,11 @@ def observe_in_room():
     path = Path('/tmp/observation.json')
     metadata = json.loads(path.read_bytes()) if path.exists() else {}
     return {'status': 'OBSERVED' if metadata.get('local_product') else 'INCOMPLETE', 'exit': p.returncode,
-            'stdout_sha256': sha(p.stdout), 'stdout_bytes': len(p.stdout), 'stderr_sha256': sha(p.stderr),
+            'stdout_sha256': sha(p.stdout), 'stdout_bytes': len(p.stdout), 'advertised': advertised(p.stdout), 'stderr_sha256': sha(p.stderr),
             'stderr_bytes': len(p.stderr), 'diagnostic': p.stderr.decode(errors='replace')[-240:] if p.returncode else '', **metadata}
 
 
-def measure(checkout, rel, store, out):
+def measure(checkout, rel, store, out, *, directed=False):
     started = time.monotonic()
     out.mkdir(exist_ok=False)
     pkg = rel.name
@@ -208,6 +246,9 @@ def measure(checkout, rel, store, out):
     observe = sorted(set().union(*subjects.values()))
     examples = checkout / 'examples'
     programs, errors = example_programs(examples)
+    related = {}
+    if directed:
+        programs, related = related_examples(examples, programs, observe)
     rows = {}
     for a in ARMS:
         c = record['arms'][a]['first_candidate']
@@ -220,10 +261,17 @@ def measure(checkout, rel, store, out):
             if c:
                 shutil.copyfile(out / 'frozen' / a / c['path'], room / 'pkg' / pkg / c['path'])
             rows[a] = []
-            for i, program in enumerate(programs[:4]):
+            queue = list(programs) if a == 'empty' else [r['program'] for r in rows['empty']]
+            while queue and len(rows[a]) < 4:
+                i = len(rows[a])
+                program = queue.pop(0)
                 dump(room / 'request.json', {'package': pkg, 'program': program, 'subjects': observe})
                 launch, obs = job(room, '--observe', 10)
                 obs = obs or {'status': 'INCOMPLETE'}
+                if directed and a == 'empty' and 'child' not in program and obs.get('exit') == 0:
+                    children = sorted(set(related[program['path']]).intersection(obs.get('advertised', [])))
+                    if children:
+                        queue.insert(0, {**program, 'child': children[0]})
                 result = 'BASELINE'
                 if a != 'empty':
                     base = rows['empty'][i]['observation']
@@ -237,7 +285,8 @@ def measure(checkout, rel, store, out):
                         fields = ('exit', 'stdout_sha256', 'stderr_sha256')
                         result = 'OBSERVABLE_CHANGE' if any(base[k] != obs[k] for k in fields) else 'PRESERVED_ON_REQUEST'
                 rows[a].append({'program': program, 'observation': obs, 'comparison': result, 'launcher': launch})
-    dump(out / 'contrast.json', {'eligible_programs': len(programs), 'discovery_errors': errors, 'changed_functions': subjects,
+    dump(out / 'contrast.json', {'policy': 'directed' if directed else 'lexical', 'related_functions': related,
+                                 'eligible_programs': len(programs), 'discovery_errors': errors, 'changed_functions': subjects,
                                  'rows': rows, 'elapsed_s': round(time.monotonic() - started, 3), 'skill_admitted': False})
 
 
@@ -252,5 +301,6 @@ if __name__ == '__main__':
         for arg in ('checkout', 'store', 'out'):
             p.add_argument('--' + arg, type=Path, required=True)
         p.add_argument('--product', choices=['src/click', 'typer'], required=True)
+        p.add_argument('--directed', action='store_true')
         a = p.parse_args()
-        measure(a.checkout.resolve(), Path(a.product), a.store, a.out)
+        measure(a.checkout.resolve(), Path(a.product), a.store, a.out, directed=a.directed)
