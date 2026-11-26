@@ -1,0 +1,37 @@
+{
+ "artifacts": {
+  "after_deletion": "canonical/verification/RUNTIME_ANSWER_FINGERPRINT_AFTER_20261127_V1.json",
+  "with_gate": "canonical/verification/RUNTIME_ANSWER_FINGERPRINT_WITH_GATE_20261127_V1.json"
+ },
+ "deleted": [
+  "canonical/tools/contract_first_routing_v1.py",
+  "canonical/tests/test_contract_first_routing_v1.py"
+ ],
+ "deletion_moved_answers": 0,
+ "deletion_moved_stems": [],
+ "determinism_finding": {
+  "after_fix": "3 seeds (1, 2, 7) return one digest",
+  "answers_moved_by_fix": 1,
+  "before_fix": "1 of 404 questions returned a different rank-3 module in a second process",
+  "cause": "find_source summed idf contributions by iterating a set, and floats do not add associatively, so near-ties depended on PYTHONHASHSEED",
+  "fix": "iterate sorted(terms) in find_source, find_any_source and the research index; three loops",
+  "found_by": "runtime_answer_fingerprint_v1.py --check, which reported CHANGED twice on unchanged code",
+  "moved_stems": [
+   "source_aligned_semantic_proof_v8"
+  ],
+  "note": "Measured before the format change that added the module key; the evidence is in the test (two subprocesses, two seeds, one digest) and in the count below, not in a retained artifact.",
+  "why_no_check_saw_it": "the verifier proves the artifact equals a recompilation of itself; it never asks the same question twice in two processes, so internal consistency passed while the answers moved"
+ },
+ "fingerprint_with_gate": "b660a9409e5a7c68bbbd611d0582d1fd1deeff13f05c007db230a2d9e55d91ca",
+ "fingerprint_without_gate": "b660a9409e5a7c68bbbd611d0582d1fd1deeff13f05c007db230a2d9e55d91ca",
+ "kill_criterion": "clean exact-target recall@5 must not fall by more than 5 pp",
+ "kill_criterion_reading": "unchanged: find_source 0.0638 at rank 5 and the surviving topic ranker 0.1809, identical to the archive to four decimal places",
+ "lines_added": 0,
+ "lines_deleted": 508,
+ "n_questions": 404,
+ "port_finding": "The first port of the ablation scored 0.309 at rank 5 because the query/object split used the object vocabulary instead of the verb vocabulary; restoring the deleted module's choice reproduced 0.1809 exactly. The ablation's number is sensitive to a decision that looks like a detail.",
+ "premise_corrected": "Plan V4's Play A assumed the contract gate sat in the runtime decision path, so removing it could move recall. It sat in no runtime path: with the module present and with it deleted, all 404 runtime answers are byte-identical. Two rounds of measurement were spent comparing a component that could not have been load-bearing.",
+ "schema": "PROJECT_BRAIN_DELETION_RECEIPT_V1",
+ "verdict": "DELETION_CHANGES_NOTHING",
+ "why_still_worth_deleting": "A component no path reaches, that loses to its own removal twice, can only mislead the next reader; its ablation -- objects and topic, idf-weighted -- survives inside the scoreboard and reproduces 0.0957/0.1809 against the archive's 0.096/0.181."
+}
