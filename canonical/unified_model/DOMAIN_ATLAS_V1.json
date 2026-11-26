@@ -2629,6 +2629,7 @@
     "environment_learning_v1",
     "epistemic_admission_and_self_play_v1",
     "evidence_state",
+    "exact_target_scoreboard_v1",
     "executable_mental_model_v1",
     "executable_skill_program_v7",
     "experience_v1",
@@ -2763,9 +2764,9 @@
     "whitebox_introspector_and_trace_synthesizer_v1",
     "workflow_goal_generalization_v1"
    ],
-   "candidates": 188,
+   "candidates": 189,
    "frontier_function": "context that stays correct as it fills",
-   "harvested_all": 49,
+   "harvested_all": 50,
    "harvested_executable_top": 8,
    "hidden_share_all": 0.005,
    "hidden_top": [
@@ -4730,7 +4731,7 @@
  "method": "weighted lexical evidence over module stem, docstring and symbol names; frontier vocabulary and this repository's own vocabulary in one table",
  "min_score": 3.0,
  "model_calls": 0,
- "modules_scanned": 3300,
+ "modules_scanned": 3303,
  "network_calls": 0,
  "per_domain": 25,
  "reachability": {
@@ -5274,7 +5275,7 @@
   },
   "memory": {
    "chance_route_recall": 0.013,
-   "chance_source_recall": 0.0831,
+   "chance_source_recall": 0.0836,
    "frontier_route_hit_recall": 0.0,
    "frontier_source_hit_recall": 0.667,
    "native_route_hit_recall": 0.333,
